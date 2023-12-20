@@ -22,6 +22,7 @@ export default {
   branching: '/branching',
   contactSales: '/contact-sales',
   pricing: '/pricing',
+  calculator: '/calculator',
   support: '/docs/introduction/support',
   developerDays1: '/developer-days-1',
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
@@ -37,5 +38,6 @@ export default {
   awsIsrael: '/partners/aws-israel',
   thankYou: '/thank-you',
   trust: '/trust',
+  billing: '/docs/introduction/billing',
   postgres: '/docs/postgres',
 };

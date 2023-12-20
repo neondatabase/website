@@ -27,7 +27,7 @@ const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }
           <div className="flex flex-col items-end">
             <span className="text-sm font-normal text-gray-new-40 dark:text-gray-7">Previous</span>
             <span
-              className="text-right font-semibold transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1 [&_code]:rounded-sm [&_code]:leading-none [&_code]:py-px [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:font-mono [&_code]:font-normal dark:[&_code]:bg-gray-new-15"
+              className="text-right font-semibold transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1 [&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15"
               dangerouslySetInnerHTML={{ __html: previousLink.title }}
             />
           </div>
@@ -41,7 +41,7 @@ const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }
           <div className="flex flex-col items-start">
             <span className="text-sm font-normal text-gray-new-40 dark:text-gray-7">Next</span>
             <span
-              className="text-left font-semibold transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1 [&_code]:rounded-sm [&_code]:leading-none [&_code]:py-px [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:font-mono [&_code]:font-normal dark:[&_code]:bg-gray-new-15"
+              className="text-left font-semibold transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1 [&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15"
               dangerouslySetInnerHTML={{ __html: nextLink.title }}
             />
           </div>

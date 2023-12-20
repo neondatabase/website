@@ -1,7 +1,7 @@
 ---
 title: Billing metrics
 enableTableOfContents: true
-updatedOn: '2023-12-20T09:54:51.345Z'
+updatedOn: '2023-12-20T16:07:46.079Z'
 ---
 
 Neon [paid plans](/docs/introduction/plans#neon-plans) bill for usage based on the following metrics:
@@ -188,7 +188,7 @@ Neon provides pricing tools you can use to estimate monthly costs based on the b
 
 ### Pricing calculator
 
-The [Pricing](https://neon.tech/pricing) page on the Neon website provides a [calculator](https://neon.tech/pricing#calc) that allows you to estimate monthly costs based on usage amounts that you provide.
+Neon website provides a [calculator](/calculator) that allows you to estimate monthly costs based on usage amounts that you provide.
 
 ![Pricing page calculator](/docs/introduction/pricing_page_calculator.png)
 
