@@ -103,7 +103,7 @@ const Metrics = ({
 
       <m.div
         className={clsx(
-          'flex h-[90vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100',
+          'flex h-[90vh] min-h-[760px] flex-col justify-center md:mt-16 md:h-auto md:min-h-fit md:opacity-100',
           !allItemsSelected && 'pointer-events-none md:pointer-events-auto'
         )}
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
@@ -112,33 +112,33 @@ const Metrics = ({
         }}
         id="pricing"
       >
-        <div className="py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden lg:px-6 lg:py-6">
-          <p className="font-medium -tracking-extra-tight leading-none">Estimated bill</p>
+        <div className="overflow-hidden rounded-[10px] border border-green-45 px-8 py-7 lg:px-6 lg:py-6">
+          <p className="font-medium leading-none -tracking-extra-tight">Estimated bill</p>
           <span
             className={clsx(
-              'block mt-6 text-gray-new-70 text-[15px] font-light leading-tight',
+              'mt-6 block text-[15px] font-light leading-tight text-gray-new-70',
               allItemsSelected && 'opacity-0'
             )}
           >
             From
           </span>
           <span className="block">
-            <span className="text-6xl text-green-45 leading-none font-light tracking-[-0.06em] md:text-5xl">
+            <span className="text-6xl font-light leading-none tracking-[-0.06em] text-green-45 md:text-5xl">
               ${totalCost === 'NaN' ? '3.22' : totalCost}
             </span>
-            <span className="tracking-[-0.06em] text-2xl leading-none inline-block ml-1">/ mo</span>
+            <span className="ml-1 inline-block text-2xl leading-none tracking-[-0.06em]">/ mo</span>
           </span>
-          <p className="mt-2 text-[15px] font-light text-gray-new-70 leading-tight">
+          <p className="mt-2 text-[15px] font-light leading-tight text-gray-new-70">
             The price calculated for the Ohio region
           </p>
 
-          <ul className="mt-6 pt-7 border-t border-gray-new-15 flex flex-col gap-y-[18px] sm:gap-y-4">
+          <ul className="mt-6 flex flex-col gap-y-[18px] border-t border-gray-new-15 pt-7 sm:gap-y-4">
             {Object.entries(finalActiveTitles).map(([key, value]) => {
               const icon = icons[key];
               return (
                 <li className="flex items-center" key={value?.title}>
                   <img
-                    className="mr-3.5 w-8 h-8 sm:w-7 sm:h-7"
+                    className="mr-3.5 h-8 w-8 sm:h-7 sm:w-7"
                     src={icon}
                     alt=""
                     loading="lazy"
@@ -154,7 +154,7 @@ const Metrics = ({
           </ul>
           <div className="relative mt-8">
             <AnimatedButton
-              className="w-full relative z-20 !font-semibold tracking-extra-tight"
+              className="relative z-20 w-full !font-semibold tracking-extra-tight"
               theme="primary"
               size="lg"
               to={LINKS.signup}
@@ -164,7 +164,7 @@ const Metrics = ({
             </AnimatedButton>
           </div>
 
-          <p className="mt-11 relative z-10 text-base leading-snug font-light text-gray-new-80">
+          <p className="relative z-10 mt-11 text-base font-light leading-snug text-gray-new-80">
             <strong className="font-medium text-white">Want to learn more?</strong> For advanced
             usage we recommend exploring our{' '}
             <Link
