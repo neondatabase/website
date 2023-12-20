@@ -15,10 +15,10 @@ const logos = {
 const CommunityBanner = ({ buttonText, buttonUrl, children = null, logo }) => (
   <section className="relative my-10">
     <span className="absolute -inset-px block rounded-[10px] bg-[linear-gradient(90deg,rgba(48,50,54,1)50%,rgba(0,229,153,0.4)100%)]" />
-    <span className="absolute h-px w-[28%] right-1.5 -top-px bg-[radial-gradient(circle,rgba(0,229,153,0.7)0%,rgba(0,229,153,0.05)100%)] sm:hidden" />
-    <div className="relative overflow-hidden flex items-center rounded-[10px] bg-[#18191B] p-8 sm:p-6">
+    <span className="absolute -top-px right-1.5 h-px w-[28%] bg-[radial-gradient(circle,rgba(0,229,153,0.7)0%,rgba(0,229,153,0.05)100%)] sm:hidden" />
+    <div className="relative flex items-center overflow-hidden rounded-[10px] bg-[#18191B] p-8 sm:p-6">
       <div>
-        <h2 className="!my-0 text-[26px] font-medium leading-dense text-white max-w-[334px] xs:text-2xl">
+        <h2 className="!my-0 max-w-[334px] text-[26px] font-medium leading-dense text-white xs:text-2xl">
           {children}
         </h2>
         <Button
@@ -33,7 +33,7 @@ const CommunityBanner = ({ buttonText, buttonUrl, children = null, logo }) => (
         </Button>
       </div>
       <img
-        className="absolute right-0 top-0 h-full !my-0 md:hidden"
+        className="absolute right-0 top-0 !my-0 h-full md:hidden"
         src={ellipse}
         alt=""
         width={324}
@@ -41,7 +41,7 @@ const CommunityBanner = ({ buttonText, buttonUrl, children = null, logo }) => (
         loading="lazy"
       />
       <Image
-        className="absolute right-0 top-0 h-full w-auto !my-0 [@media(max-width:500px)]:hidden"
+        className="absolute right-0 top-0 !my-0 h-full w-auto [@media(max-width:500px)]:hidden"
         src={logos[logo]}
         alt=""
         width={280}

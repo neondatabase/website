@@ -99,14 +99,14 @@ const BlogPage = async ({ params, searchParams }) => {
             posts={relatedPosts}
           />
           <SocialShare
-            className="hidden col-span-full lg:mt-14 lg:flex md:mt-12"
+            className="col-span-full hidden lg:mt-14 lg:flex md:mt-12"
             title={title}
             slug={shareUrl}
           />
 
           <SubscribeForm
             size="sm"
-            className="mt-16 col-span-6 col-start-4 xl:col-span-8 lg:col-span-full"
+            className="col-span-6 col-start-4 mt-16 xl:col-span-8 lg:col-span-full"
           />
           <MoreArticles
             className="col-span-10 col-start-2 mt-16 xl:col-span-full xl:mt-14 lg:mt-12 md:mt-11"
