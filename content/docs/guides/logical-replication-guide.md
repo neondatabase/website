@@ -15,9 +15,7 @@ Replication starts by copying a snapshot of the data from the publisher to the s
 
 To get started, jump into one of our step-by-step [logical replication guides](#logical-replication-guides).
 
-To learn more about Postgres logical replication, see [Logical replication concepts](/docs/guides/logical-replication-concepts). For information about managing logical replication in Neon, see [Manage logical replication](/docs/guides/logical-replication-neon). 
-
-
+To learn more about Postgres logical replication, see [Logical replication concepts](/docs/guides/logical-replication-concepts). For information about managing logical replication in Neon, see [Manage logical replication](/docs/guides/logical-replication-neon).
 
 ## Logical replication guides
 
