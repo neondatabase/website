@@ -17,15 +17,7 @@ To get started, jump into one of our step-by-step [logical replication guides](#
 
 To learn more about Postgres logical replication, see [Logical replication concepts](/docs/guides/logical-replication-concepts). For information about managing logical replication in Neon, see [Manage logical replication](/docs/guides/logical-replication-neon). 
 
-## Learn about logical replication
 
-<DetailIconCards>
-
-<a href="/docs/guides/logical-replication-concepts" description="Learn about Postgres logical replication concepts" icon="scale-up">Logical replication concepts</a>
-
-<a href="/docs/guides/logical-replication-neon" description="Learn about managing logical replication in Neon" icon="screen">Manage logical replication</a>
-
-</DetailIconCards>
 
 ## Logical replication guides
 
@@ -40,3 +32,13 @@ To learn more about Postgres logical replication, see [Logical replication conce
 <img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
 
 </TechnologyNavigation>
+
+## Learn about logical replication
+
+<DetailIconCards>
+
+<a href="/docs/guides/logical-replication-concepts" description="Learn about Postgres logical replication concepts" icon="scale-up">Logical replication concepts</a>
+
+<a href="/docs/guides/logical-replication-neon" description="Learn about managing logical replication in Neon" icon="screen">Manage logical replication</a>
+
+</DetailIconCards>

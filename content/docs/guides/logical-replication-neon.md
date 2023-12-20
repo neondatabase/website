@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-This topic outlines how to manage your logical replication setup in Neon. It includes commands for managing publications, subscriptions, and replication slots. It also provides information about logical replication specific to Neon, including [known limitations](#known-limitations).
+This topic outlines how to manage logical replication in Neon. It provides commands for managing publications, subscriptions, and replication slots. It also includes logical replication details specific to Neon, including [known limitations](#known-limitations).
 
 <Admonition type="note">
 Logical replication in Neon is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the **Feedback** link inthe Neon Console or by reaching out to us on [Discord](https://t.co/kORvEuCUpJ).
@@ -13,11 +13,11 @@ Logical replication in Neon is currently in Beta. We welcome your feedback to he
 
 ## Manage publications
 
-This section outlines how to manage publications in your replication setup.
+This section outlines how to manage **publications** in your replication setup.
 
 ### Create a publication
 
-This command creates a publication named `my_publication` that will track changes made to the `users` table.
+This command creates a publication named `my_publication` that will track changes made to the `users` table:
 
 ```sql
 CREATE PUBLICATION my_publication FOR TABLE users;
@@ -32,7 +32,7 @@ CREATE PUBLICATION my_publication FOR TABLE users, departments;
 Neon currently does not support creating publications using `CREATE PUBLICATION publication_name FOR ALL TABLES` syntax. The `ALL TABLES` clause requires the PostgreSQL superuser privilege, which is not available in a managed service like Neon.
 </Admonition>
 
-This command creates a publication that only publishes `INSERT` and `UPDATE` operations. In this case, all data will be published to a subscriber without any data being deleted. To replicate delete operations, add `delete` to the list of operations.
+This command creates a publication that only publishes `INSERT` and `UPDATE` operations. Delete operations will not be published.
 
 ```sql
 CREATE PUBLICATION my_publication FOR TABLE users
@@ -41,13 +41,15 @@ CREATE PUBLICATION my_publication FOR TABLE users
 
 ### Add a table to a publication
 
-This command adds a publication to an existing table:
+This command adds a table to a publication:
 
 ```sql
 ALTER my_publication ADD TABLE sales;
 ```
 
 ### Remove a table from a publication
+
+This command removes a table from a publication:
 
 ```sql
 ALTER PUBLICATION my_publication DROP TABLE sales;
@@ -67,7 +69,7 @@ This command recreates a publication within a single transaction:
 
 ```sql
 BEGIN;
-  -- remove the publication
+  -- drop the publication
   DROP PUBLICATION IF EXISTS my_publication;
 
   -- re-create the publication
@@ -77,9 +79,7 @@ COMMIT;
 
 ## Manage subscriptions
 
-This section outlines how to manage subscriptions in your replication setup.
-
-Sometimes, you may need to modify or remove a subscription.
+This section outlines how to manage **subscriptions** in your replication setup.
 
 <Admonition type="note">
 Currently, you cannot create subscriptions on a Neon database. Neon can only act as a subscriber in a publisher in a replication setup. The following commands would only be run on an external Postgres database that you are using as a subscriber.
@@ -87,7 +87,7 @@ Currently, you cannot create subscriptions on a Neon database. Neon can only act
 
 ### Create a subscription
 
-You can create a subscription using [CREATE SUBSCRIPTION](https://www.postgresql.org/docs/current/sql-createsubscription.html) syntax. Building on the `my_publication` example above, here’s how you can create a subscription:
+Building on the `my_publication` example above, here’s how you can create a subscription:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription 
@@ -97,9 +97,11 @@ PUBLICATION my_publication;
 
 A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication that it is subscribing to.
 
-In the example above, `my_subscription` is the subscription that connects to a publication named `my_publication`. When using a Neon database as the publisher, you can replace the connection details with your Neon database connection string.
+In the example above, `my_subscription` is the subscription that connects to a publication named `my_publication`. When using a Neon database as the publisher, replace the connection details with your Neon database connection string.
 
 ### Create a subscription with two publications
+
+This command creates a subscription that receives data from two tables:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription 
@@ -111,6 +113,8 @@ A single subscriber can maintain multiple subscriptions, including multiple subs
 
 ### Create a subscription to be enabled later
 
+This command sets `enabled = false` to create a subscription without enabling it:
+
 ```sql
 CREATE SUBSCRIPTION my_subscription 
 CONNECTION 'postgres://username:password@host:port/dbname' 
@@ -120,11 +124,15 @@ WITH (enabled = false);
 
 ### Change the publication subscribed to
 
+This command modifies an existing subscription to set it to a different publication:
+
 ```sql
-ALTER SUBSCRIPTION my_subscription SET PUBLICATION new_new_subscription;
+ALTER SUBSCRIPTION my_subscription SET PUBLICATION new_new_publication;
 ```
 
 ### Change the subscription connection
+
+This command updates the connection details for a subscription:
 
 ```sql
 ALTER SUBSCRIPTION subscription_name CONNECTION 'new_connection_string';
@@ -132,11 +140,15 @@ ALTER SUBSCRIPTION subscription_name CONNECTION 'new_connection_string';
 
 ### Disable a subscription
 
+This command disables an existing subscription:
+
 ```sql
 ALTER SUBSCRIPTION my_subscription DISABLE;
 ```
 
 ### Drop a subscription
+
+This command drops an existing subscription:
 
 ```sql
 DROP SUBSCRIPTION my_subscription;
@@ -164,7 +176,7 @@ The `max_replication_slots` configuration parameter on Neon is set to `10` by de
 max_replication_slots = 10
 ```
 
-### remove a replication slot
+### Remove a replication slot
 
 To drop a logical replication slot, you can use the `pg_drop_replication_slot()` function. If you've already created a replication slot named `my_replication_slot` using `pg_create_logical_replication_slot()`, you can drop it by executing the following SQL command:
 
@@ -305,7 +317,10 @@ SELECT pg_create_logical_replication_slot('my_replication_slot', 'wal2json');
 
 ### Publisher settings
 
-The `max_wal_senders` and `max_replication_slots` configuration parameter settings on Neon are set to `10`, and max_slot_wal_keep_size  is set to 1 GB.
+The `max_wal_senders` and `max_replication_slots` configuration parameter settings on Neon are set to `10`, and `max_slot_wal_keep_size` is set to 1 GB instead of the usual `-1` no-limit default.
+
+```text
+max_wal_senders = 10
 max_replication_slots = 10
 max_slot_wal_keep_size = 1Gb
 ```
@@ -314,15 +329,16 @@ max_slot_wal_keep_size = 1Gb
 - The `max_replication_slots` defines the maximum number of replication slots which are used to manage database replication connections. Each replication slot tracks changes in the publisher database to ensure that the connected subscriber stays up to date. You'll want a replication slot for each replication connection. For example, if you expect to have 10 separate subscribers replicating from your database, you would set `max_replication_slots` to 10 to accommodate each connection.
 - The `max_slot_wal_keep_size` defines the maximum size of WAL files that replication slots are allowed to retain in the `pg_wal` directory at checkpoint time. If `restart_lsn` of a replication slot falls behind the current LSN by more than the given size, the subscriber using the slot may no longer be able to continue replication due to removal of required WAL files. You can monitor the WAL availability of replication slots (`wal_status`) in [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html).
 
-If you require different values for these paramters, please contact Neon support.
+If you require different values for these parameters, please contact Neon support.
 
 ### Known limitations
 
 Neon is working toward removing the following limitations in future releases:
 
-- A Neon database can only act as a publisher in a replication setup. Creating a subscription on a Neon database is not permitted. You can only create publications on a Neon database. This means that you cannot replicate data from one Neon database to another or from one Neon project to another.
+- A Neon database can only act as a _publisher_ in a replication setup. Creating a subscription on a Neon database is not permitted. This means that you cannot replicate data from one Neon database to another or from one Neon project to another.
 - Only your default Neon Postgres role and roles created via the Neon Console, CLI, or API have the `REPLICATION` privilege. This privilege cannot be granted to other roles. You can expect this limitation to be lifted in a future release. Roles created via SQL do not have the `REPLICATION` privilege, and this privilege cannot be granted.
 - You cannot use `CREATE PUBLICATION my_publication FOR ALL TABLES;` syntax in Neon. Specifying `ALL TABLES` requires the Postgres `superuser` privilege, which is not available on Neon. Instead, you can specify multiple tables using `CREATE PUBLICATION my_pub FOR TABLE <table1>, <table2>;` syntax.
+- The `max_slot_wal_keep_size` parameter is set to 1Gb instead of `-1` (no limit). See [Publisher settings](#publisher-settings).
 
 ## References
 
