@@ -64,11 +64,11 @@ To edit a compute endpoint:
 ### What happens to the endpoint when making changes
 Some key points to understand about how your endpoint responds when you make changes to your compute settings:
 
-* Changing the size of your fixed compute restarts the endpoint and _temporarily disconnect all existing connections_. 
+* Changing the size of your fixed compute restarts the endpoint and _temporarily disconnects all existing connections_. 
   <Admonition type="note">
   When your compute resizes automatically as part of the autoscaling feature, there are no restarts or disconnects; it just scales. 
   </Admonition>
-* Editing minimum or maxiumum autoscaling sizes also requires a restart; existing connections are temporariliy disconnected.
+* Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
 * Changes to autosuspend settings do not require an endpoint restart; existing connections are unaffected.
 
 ### Compute size and Autoscaling configuration
