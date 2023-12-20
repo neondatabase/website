@@ -18,10 +18,11 @@ const styles = {
     tertiary: 'bg-transparent text-white border border-white hover:border-primary-2',
     quaternary: 'bg-white text-black border border-black hover:border-primary-2',
     'white-outline': 'bg-transparent text-white border border-white hover:border-primary-2',
-    'gray-outline': 'bg-transparent text-white border border-gray-new-30 hover:border-white',
-    'gray-dark-outline': 'bg-gray-new-10 text-white border border-[#37393D] hover:border-green-45',
+    'gray-outline':
+      'text-black border-gray-new-90 bg-gray-new-98 dark:bg-transparent dark:text-white border dark:border-gray-new-30 dark:hover:border-white hover:border-gray-new-70',
+    'gray-dark-outline': 'bg-gray-new-10 text-white border border-[#37393D] hover:border-white',
     'gray-dark-outline-black':
-      'text-black border border-gray-new-90 bg-gray-new-98 hover:border-gray-new-70 dark:text-white dark:bg-gray-new-10 dark:border-[#37393D] dark:hover:border-green-45',
+      'text-black border border-gray-new-90 bg-gray-new-98 hover:border-gray-new-70 dark:text-white dark:bg-gray-new-10 dark:border-[#37393D] dark:hover:border-white',
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
   },
 };
