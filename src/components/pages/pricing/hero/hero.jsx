@@ -43,6 +43,7 @@ const items = [
       { title: 'Autoscaling' },
       { title: 'Configurable compute size' },
       { title: 'Read replicas' },
+      { title: 'IP allow' },
     ],
     button: {
       url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
