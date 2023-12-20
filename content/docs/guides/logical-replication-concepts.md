@@ -17,7 +17,7 @@ Logical Replication is a method of replicating data between databases or between
 
 The Postgres logical replication architecture is very simple. It uses a _publisher and subscriber_ model for data replication. The primary data source is the _publisher_, and the database or platform receiving the data is the _subscriber_. On the initial connection from a subscriber, all the data is copied from the publisher to the subscriber. After the initial copy operation, any changes made on the publisher are sent to the subscriber. You can read more about this model in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html).
 
-![Logical replication publisher subscriber archtitecture](/docs/guides/logical_replication_model.png)
+![Logical replication publisher subscriber archtitecture](/docs/guides/logical_replication_model.jpg)
 
 ## Enabling logical replication
 
