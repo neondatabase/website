@@ -41,6 +41,7 @@ const items = [
       { title: 'Configurable compute, unlimited storage' },
       { title: 'Pro support' },
       { title: 'Autoscaling, read replicas, project sharing' },
+      { title: 'IP allow' },
     ],
     button: {
       url: '#estimates',
@@ -116,8 +117,8 @@ const Hero = () => {
           Neon brings serverless architecture to Postgres, which allows us to offer you flexible
           usage and volume-based plans.
         </p>
-        <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-12 md:mt-9">
-          <ul className="relative z-10 grid grid-cols-3 gap-x-11 xl:gap-x-6 lg:grid-cols-2 lg:gap-x-4 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
+        <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-12 lg:w-full lg:max-w-[704px] md:mt-9">
+          <ul className="relative z-10 grid grid-cols-3 gap-x-11 xl:gap-x-6 lg:grid-cols-1 lg:gap-x-4 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
             {items.map(({ type, price, description, features, button }, index) => (
               <li
                 className={clsx(
@@ -139,7 +140,7 @@ const Hero = () => {
               >
                 <Link
                   className={clsx(
-                    'relative z-10 flex min-h-full flex-col rounded-[10px] px-7 py-5 transition-colors duration-500 xl:p-5 xl:pb-3 lg:p-5',
+                    'relative z-10 flex min-h-full flex-col rounded-[10px] px-7 py-5 transition-colors duration-500 xl:px-6 xl:py-5 sm:p-5',
                     activeItemIndex !== index ? 'bg-gray-new-8' : 'bg-transparent'
                   )}
                   to={button.url}
@@ -154,19 +155,16 @@ const Hero = () => {
                     }
                   }}
                 >
-                  <div className="mb-6 flex min-h-[280px] flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-7 lg:min-h-max">
-                    <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
+                  <div className="mb-6 flex min-h-[280px] flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-5 xl:min-h-[265px] xl:pb-0 lg:min-h-max lg:pb-5">
+                    <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)] xl:text-lg">
                       {type}
                     </span>
-                    <h2 className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px] md:mt-4">
+                    <h2 className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4">
                       {price}
                     </h2>
                     <AnimatedButton
                       className={clsx(
-                        'mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 md:mt-7 sm:max-w-none',
-                        type === 'Pro'
-                          ? 'lg:absolute lg:right-8 lg:top-0 lg:max-w-[210px] md:relative md:right-0 md:max-w-[304px]'
-                          : 'lg:max-w-[304px]'
+                        'mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-7 sm:max-w-none'
                       )}
                       isAnimated={activeItemIndex === index}
                       animationColor="var(--accentColor)"
@@ -177,26 +175,17 @@ const Hero = () => {
                     </AnimatedButton>
                     <p
                       className={clsx(
-                        'mt-9 font-light leading-snug tracking-tight text-gray-new-70 md:mt-8',
-                        type === 'Pro' ? 'lg:mt-5' : 'lg:min-h-[66px] md:min-h-fit'
+                        'mt-9 font-light leading-snug tracking-tight text-gray-new-70 xl:mt-8'
                       )}
                     >
                       {description}
                     </p>
                   </div>
                   <div className="mt-auto flex grow flex-col">
-                    <ul
-                      className={clsx(
-                        'mb-4 flex flex-col flex-wrap space-y-4 xl:mb-5 lg:mb-2.5 md:mb-7',
-                        type === 'Pro' ? 'lg:max-h-28 lg:gap-4 lg:space-y-0 md:max-h-max' : ''
-                      )}
-                    >
+                    <ul className={clsx('mb-4 flex flex-col flex-wrap space-y-4 xl:mb-0')}>
                       {features.map(({ title, label }, index) => (
                         <li
-                          className={clsx(
-                            'relative pl-6 leading-tight tracking-tight',
-                            type === 'Pro' && 'lg:w-1/3 md:w-full'
-                          )}
+                          className={clsx('relative pl-6 leading-tight tracking-tight')}
                           key={index}
                         >
                           <CheckIcon
