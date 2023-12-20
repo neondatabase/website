@@ -13,9 +13,9 @@ Logical replication in Neon works in the same way as logical replication on a st
 
 Replication starts by copying a snapshot of the data from the publisher to the subscriber. Once this is done, subsequent changes are sent to the subscriber as they occur in real-time.
 
-To learn more about Postgres logical replication, see [Logical replication basics](/docs/guides/logical-replication-concepts). For information about managing logical replication in Neon, see [Manage logical replication](/docs/guides/logical-replication-neon). 
+To get started, jump into one of our step-by-step [logical replication guides](#logical-replication-guides).
 
-If you just want to get started, jump into one of our step-by-step [logical replication guides](#logical-replication-guides).
+To learn more about Postgres logical replication, see [Logical replication concepts](/docs/guides/logical-replication-concepts). For information about managing logical replication in Neon, see [Manage logical replication](/docs/guides/logical-replication-neon). 
 
 ## Learn about logical replication
 
