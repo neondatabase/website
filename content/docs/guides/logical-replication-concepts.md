@@ -77,7 +77,7 @@ A subscription requires a unique name, a database connection string, the name an
 
 ## How does it work under the covers?
 
-While the publisher and subscriber model forms the surface of PostgreSQL logical replication, the underlying meachanism is driven by a few key components, described beelow.
+While the publisher and subscriber model forms the surface of PostgreSQL logical replication, the underlying meachanism is driven by a few key components, described below.
 
 ### Write-Ahead Log (WAL)
 
@@ -87,7 +87,7 @@ The WAL is central to Postgres's data durability and crash recovery mechanisms. 
 
 Replication slots on the publisher database track replication progress, ensuring that no data in the WAL is purged before the subscriber has successfully replicated it. This mechanism serves to maintain data consistency and prevent data loss in cases of network interruption or subscriber downtime.
 
-Replication slots are typically created automatically with new subscriptions, but they can be created manually using the `pg_create_logical_replication_slot` function. Some "subscriber" data service and platforms require that you create a dedicated replication slot. This can be accomplished using the following syntax:
+Replication slots are typically created automatically with new subscriptions, but they can be created manually using the `pg_create_logical_replication_slot` function. Some "subscriber" data services and platforms require that you create a dedicated replication slot. This is accomplished using the following syntax:
 
 ```sql
 SELECT pg_create_logical_replication_slot('my_replication_slot', 'pgoutput');
