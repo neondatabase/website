@@ -19,6 +19,7 @@ const Select = (props) => {
     textColor,
     activeColor,
     defaultColor,
+    hexColor,
     activeItems,
     setActiveItems,
     activeAnimations,
@@ -52,7 +53,7 @@ const Select = (props) => {
 
   const getScrollOffset = () => {
     if (index === items.length - 1) {
-      return -(windowHeight - windowHeight * 0.9) / 2;
+      return -0.05 * windowHeight;
     }
 
     if (windowHeight < 1400) {
@@ -67,7 +68,7 @@ const Select = (props) => {
     <Element name={type}>
       <m.div
         className={clsx(
-          'flex max-h-[975px] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0 md:mt-16 md:opacity-100',
+          'flex max-h-[975px] min-h-[760px] flex-col justify-center md:mt-16 md:h-auto md:min-h-0 md:opacity-100',
           !isItemSelected(index - 1) && 'pointer-events-none md:pointer-events-auto',
           className
         )}
@@ -81,17 +82,17 @@ const Select = (props) => {
           {label}
         </span>
 
-        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
+        <h3 className="mt-3.5 text-4xl font-light leading-dense tracking-tighter lg:mt-2.5 lg:text-3xl md:text-2xl">
           {title}
         </h3>
         <ul className="mt-7 grid gap-y-5 lg:mt-5">
           {items.map((item) => {
             const { title, description } = item;
             return (
-              <li className="group" key={title}>
+              <li className="group overflow-hidden rounded-[10px]" key={title}>
                 <button
                   className={clsx(
-                    'relative pt-5 w-full flex flex-col px-6 pb-6 border rounded-[10px] duration-200 transition-colors text-left before:absolute before:w-full before:h-5 before:bottom-full before:left-0 group-first:before:hidden',
+                    'relative flex w-full flex-col rounded-[10px] border text-left transition-colors duration-200 before:absolute before:bottom-full before:left-0 before:h-5 before:w-full group-first:before:hidden',
                     activeItems[type]?.title === title ? activeColor : defaultColor
                   )}
                   type="button"
@@ -115,10 +116,16 @@ const Select = (props) => {
                     }
                   }}
                 >
-                  <h4 className="text-xl font-medium leading-tight">{title}</h4>
-                  <p className="text-left mt-2 text-gray-new-70 font-light leading-tight text-[15px]">
-                    {description}
-                  </p>
+                  <span
+                    className="absolute -left-[72px] top-1/2 flex h-[180px] w-[180px] -translate-y-1/2 rounded-full opacity-10 blur-[32.5px]"
+                    style={{ backgroundColor: hexColor }}
+                  />
+                  <div className="relative z-10 w-full rounded-[10px] bg-black-new px-6 pb-6 pt-5">
+                    <h4 className="text-xl font-medium leading-tight">{title}</h4>
+                    <p className="mt-2 text-left text-[15px] font-light leading-tight text-gray-new-70">
+                      {description}
+                    </p>
+                  </div>
                 </button>
               </li>
             );

@@ -20,14 +20,14 @@ const buttons = [
 ];
 
 const Forecasting = () => (
-  <section className="forecasting safe-paddings pt-[200px] 2xl:pt-36 md:pt-24 ">
+  <section className="forecasting safe-paddings pt-[244px] 2xl:pt-36 md:pt-24 ">
     <Container size="medium">
       <div className="mx-auto flex max-w-[1220px] items-center justify-between md:flex-col md:gap-y-12">
         <div>
           <h2 className="text-[56px] font-medium leading-none tracking-tighter lg:text-5xl md:text-4xl [&_span]:text-green-45">
             Forecasting is <span>easy</span>
           </h2>
-          <p className="mt-4 max-w-[464px] text-lg font-light leading-snug md:mt-3.5 md:max-w-none md:text-base">
+          <p className="mt-4 max-w-[486px] text-lg font-light leading-snug md:mt-3.5 md:max-w-none md:text-base">
             Refer to our billing docs to explore detailed pricing metrics or swiftly estimate your
             costs through our intuitive survey.
           </p>
@@ -51,7 +51,7 @@ const Forecasting = () => (
             ))}
           </div>
         </div>
-        <p className="text-bg-clipped max-w-[252px] bg-[linear-gradient(119deg,#C9CBCF_0%,rgba(201,203,207,0.40)100%)] text-right text-xl font-light leading-snug lg:max-w-[200px] lg:text-lg md:max-w-none md:text-center sm:mx-auto sm:max-w-[298px]">
+        <p className="text-bg-clipped -mt-2.5 max-w-[252px] bg-[linear-gradient(119deg,#C9CBCF_0%,rgba(201,203,207,0.40)100%)] text-right text-xl font-light leading-snug lg:max-w-[200px] lg:text-lg md:max-w-none md:text-center sm:mx-auto sm:max-w-[298px]">
           Solutions for every user, from starter to advanced PostgreSQL needs
         </p>
       </div>

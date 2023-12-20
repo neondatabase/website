@@ -113,7 +113,7 @@ const Hero = () => {
           <span className="text-pricing-primary-1">Start free.</span>{' '}
           <span>Only pay for what you use.</span>
         </Heading>
-        <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
+        <p className="mx-auto mt-5 max-w-[620px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
           Neon brings serverless architecture to Postgres, which allows us to offer you flexible
           usage and volume-based plans.
         </p>
@@ -155,7 +155,7 @@ const Hero = () => {
                     }
                   }}
                 >
-                  <div className="mb-6 flex min-h-[280px] flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-5 xl:min-h-[265px] xl:pb-0 lg:min-h-max lg:pb-5">
+                  <div className="mb-6 flex min-h-[274px] flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-5 xl:min-h-[265px] xl:pb-0 lg:min-h-max lg:pb-5">
                     <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)] xl:text-lg">
                       {type}
                     </span>
@@ -163,9 +163,7 @@ const Hero = () => {
                       {price}
                     </h2>
                     <AnimatedButton
-                      className={clsx(
-                        'mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-7 sm:max-w-none'
-                      )}
+                      className="mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-7 sm:max-w-none"
                       isAnimated={activeItemIndex === index}
                       animationColor="var(--accentColor)"
                       theme="primary"
@@ -173,21 +171,14 @@ const Hero = () => {
                     >
                       {button.text}
                     </AnimatedButton>
-                    <p
-                      className={clsx(
-                        'mt-9 font-light leading-snug tracking-tight text-gray-new-70 xl:mt-8'
-                      )}
-                    >
+                    <p className="mt-9 font-light leading-snug tracking-tight text-gray-new-70 xl:mt-8">
                       {description}
                     </p>
                   </div>
                   <div className="mt-auto flex grow flex-col">
-                    <ul className={clsx('mb-4 flex flex-col flex-wrap space-y-4 xl:mb-0')}>
+                    <ul className="mb-4 flex flex-col flex-wrap space-y-4 xl:mb-0">
                       {features.map(({ title, label }, index) => (
-                        <li
-                          className={clsx('relative pl-6 leading-tight tracking-tight')}
-                          key={index}
-                        >
+                        <li className="relative pl-6 leading-tight tracking-tight" key={index}>
                           <CheckIcon
                             className="absolute left-0 top-[2px] h-4 w-4 text-[var(--accentColor)]"
                             aria-hidden

@@ -67,6 +67,7 @@ export const items = [
     textColor: 'text-green-45',
     activeColor: 'border-green-45 hover:border-green-45',
     defaultColor: 'border-gray-new-15 hover:border-green-45/30',
+    hexColor: '#00E599',
   },
   {
     label: 'Performance',
@@ -76,6 +77,7 @@ export const items = [
     textColor: 'text-yellow-70',
     activeColor: 'border-yellow-70 hover:border-yellow-70',
     defaultColor: 'border-gray-new-15 hover:border-yellow-70/30',
+    hexColor: '#F0F075',
   },
   {
     label: 'Storage',
@@ -85,5 +87,6 @@ export const items = [
     textColor: 'text-blue-80',
     activeColor: 'border-blue-80 hover:border-blue-80',
     defaultColor: 'border-gray-new-15 hover:border-blue-80/30',
+    hexColor: '#ADE0EB',
   },
 ];

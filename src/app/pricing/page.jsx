@@ -35,7 +35,7 @@ const PricingPage = () => (
     footerWithTopBorder
   >
     <Hero />
-    <Logos className="mt-[152px] xl:mt-40 lg:mt-28 md:mt-20" logos={logos} />
+    <Logos className="mt-36 xl:mt-40 lg:mt-28 md:mt-20" logos={logos} />
     <Forecasting />
     <Estimates />
     <Faq />
