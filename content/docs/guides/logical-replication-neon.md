@@ -305,15 +305,14 @@ SELECT pg_create_logical_replication_slot('my_replication_slot', 'wal2json');
 
 ### Publisher settings
 
-The `max_wal_senders` and `max_replication_slots` configuration parameter settings on Neon are set to `10`.
-
-```ini
-max_wal_senders = 10
+The `max_wal_senders` and `max_replication_slots` configuration parameter settings on Neon are set to `10`, and max_slot_wal_keep_size  is set to 1 GB.
 max_replication_slots = 10
+max_slot_wal_keep_size = 1Gb
 ```
 
 - The `max_wal_senders` parameter defines the maximum number of concurrent WAL sender processes which are responsible for streaming WAL data to subscribers. In most cases, you should have one WAL sender process for each subscriber or replication slot to ensure efficient and consistent data replication. 
 - The `max_replication_slots` defines the maximum number of replication slots which are used to manage database replication connections. Each replication slot tracks changes in the publisher database to ensure that the connected subscriber stays up to date. You'll want a replication slot for each replication connection. For example, if you expect to have 10 separate subscribers replicating from your database, you would set `max_replication_slots` to 10 to accommodate each connection.
+- The `max_slot_wal_keep_size` defines the maximum size of WAL files that replication slots are allowed to retain in the `pg_wal` directory at checkpoint time. If `restart_lsn` of a replication slot falls behind the current LSN by more than the given size, the subscriber using the slot may no longer be able to continue replication due to removal of required WAL files. You can monitor the WAL availability of replication slots (`wal_status`) in [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html).
 
 If you require different values for these paramters, please contact Neon support.
 

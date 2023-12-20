@@ -23,6 +23,10 @@
           slug: introduction/point-in-time-restore
         - title: Read replicas
           slug: introduction/read-replicas
+        - title: Logical replication
+          slug: introduction/logical-replication
+        - title: IP Allow
+          slug: introduction/ip-allow
     - title: Regions
       slug: introduction/regions
     - title: Plans
