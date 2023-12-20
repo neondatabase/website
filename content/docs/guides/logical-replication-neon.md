@@ -213,7 +213,7 @@ This section outlines information about logical replication specific to Neon, in
 Once you enable logical replication in Neon, the setting cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, which means that active connections will be dropped and have to reconnect.
 </Admonition>
 
-In standalone PostgreSQL, logical replication is enabled by setting `wal_level=logical` in the  `postgresql.conf` configuration file and restarting Postgres. In Neon, logical replication is enabled from the console, by following these steps:
+In Neon, logical replication is enabled from the console, by following these steps:
 
 1. Select your project in the Neon console.
 2. On the Neon **Dashboard**, select **Settings**.

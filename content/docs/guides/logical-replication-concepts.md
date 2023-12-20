@@ -21,13 +21,7 @@ The Postgres logical replication architecture is very simple. It uses a _publish
 
 ## Enabling logical replication
 
-To enable logical replication in Postgres, you need to change the Postgres `wal_level` configuration parameter setting to `logical` on the publisher. 
-
-```ini
-wal_level = logical
-```
-
-In a standalone Postgres installation, you enable logical replication by modifying your `postgresql.conf` configuration file and restarting Postgres. In Neon, you do this from the Neon Console, from your project's settings:
+In Neon, you enable logical replication from the Neon Console:
 
 1. Select your project in the Neon console.
 2. On the Neon **Dashboard**, select **Settings**.
