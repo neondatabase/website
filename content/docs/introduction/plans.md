@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/billing#neon-plans
-updatedOn: '2023-11-30T18:21:20.865Z'
+updatedOn: '2023-12-19T17:55:21.496Z'
 ---
 
 Neon offers the following plans: **Free Tier**, **Pro**, and **Custom**. The Neon Pro Plan is _usage-based_, ensuring you never over-provision and only pay for what you use. **Custom** plans are volume-based, offering potential discounts. The table below provides an overview of plans offered by Neon. For more information about a particular plan, refer to the individual plan pages:
@@ -33,6 +33,7 @@ For information about how Neon bills for paid plans, please refer to our [Billin
 | **Configurable auto-suspend compute** | -                                                                                                                                                                       | &check;                                                    | &check;                                                         |
 | **Autoscaling**                       | -                                                                                                                                                                       | &check;                                                    | &check;                                                         |
 | **Read replicas**                       | -                                                                                                                                                                       | &check;                                                    | &check;                                                         |
+| **IP Allow**                       | -                                                                                                                                                                       | &check;                                                    | &check;                                                         |
 | **Payment**                           | Free                                                                                                                                                                    | Credit Card, Pay As You Go with monthly invoicing          | Prepaid, Custom Contract, Volume Discounts                      |
 | **Support**                           | Community, support tickets                                                                                                                                              | Community, support tickets, video chat                     | Community, support tickets, video chat, resale customer support |
 
