@@ -11,7 +11,7 @@ Neon's logical replication feature allows you to replicate data from your Neon d
 
 Logical replication in Neon works in the same way as logical replication on a standard Postgres installation, using a publish and subscribe model to replicate data from the source database to the destination.
 
-Replication starts by copying a snapshot of the data from the publisher to the subscriber. Once this is done, subsequent changes are sent to the subscriber as they occur in real-time. Replicated changes are then applied in the order they were committed on the publisher to maintain transactional consistency on the subscriber.
+Replication starts by copying a snapshot of the data from the publisher to the subscriber. Once this is done, subsequent changes are sent to the subscriber as they occur in real-time.
 
 To learn more about Postgres logical replication, see [Logical replication basics](/docs/guides/logical-replication-concepts). For information about managing logical replication in Neon, see [Manage logical replication](/docs/guides/logical-replication-neon). 
 
