@@ -140,9 +140,9 @@ const Header = ({
           </nav>
 
           <div className="flex lg:hidden">
-            <GithubStarCounter className="mr-5" isThemeBlack={isThemeBlack} />
+            <GithubStarCounter className="mr-5 xl:mr-3" isThemeBlack={isThemeBlack} />
             <Button
-              className="mr-3.5 px-[22px] h-9 font-semibold text-base duration-200 transition-colors leading-none"
+              className="mr-3.5 h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:mr-2 xl:px-4"
               to={LINKS.login}
               theme={isThemeBlack ? 'gray-dark-outline' : 'gray-dark-outline-black'}
             >
@@ -150,7 +150,7 @@ const Header = ({
             </Button>
 
             <Button
-              className="px-[22px] h-9 font-semibold text-base duration-200 transition-colors leading-none"
+              className="h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:px-4"
               to={LINKS.signup}
               theme="primary"
             >
@@ -158,7 +158,7 @@ const Header = ({
             </Button>
           </div>
           {isMobile && (
-            <div className="items-center flex gap-x-3 md:gap-x-5">
+            <div className="flex items-center gap-x-3 md:gap-x-5">
               {(isDocPage || isBlogPage) && (
                 <Search className="mobile-search" indexName={findIndexName()} isBlog={isBlogPage} />
               )}

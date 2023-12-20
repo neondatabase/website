@@ -43,7 +43,7 @@ const Item = ({ title, level, id, items, currentAnchor, isUserScrolling, setIsUs
     <LazyMotion features={domAnimation}>
       <a
         className={clsx(linkClassName, {
-          'text-black-new dark:text-white font-medium': currentAnchor === id,
+          'font-medium text-black-new dark:text-white': currentAnchor === id,
         })}
         style={{
           marginLeft: level === 1 ? '' : `${(level - 1) * 0.5}rem`,

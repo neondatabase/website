@@ -10,6 +10,7 @@ import MoreArticles from 'components/pages/blog-post/more-articles';
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
+import Admonition from 'components/shared/admonition';
 import CodeBlock from 'components/shared/code-block';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
@@ -53,6 +54,7 @@ const BlogDraft = async ({ searchParams }) => {
       blogpostcode: CodeBlock,
       blogpostcodetabs: CodeTabs,
       blogpostcta: CTA,
+      blogpostadmonition: (props) => <Admonition {...props} asHTML />,
     },
     true
   );
@@ -105,14 +107,14 @@ const BlogDraft = async ({ searchParams }) => {
             posts={relatedPosts}
           />
           <SocialShare
-            className="hidden col-span-full lg:mt-14 lg:flex md:mt-12"
+            className="col-span-full hidden lg:mt-14 lg:flex md:mt-12"
             title={title}
             slug={shareUrl}
           />
 
           <SubscribeForm
             size="sm"
-            className="mt-16 col-span-6 col-start-4 xl:col-span-8 lg:col-span-full"
+            className="col-span-6 col-start-4 mt-16 xl:col-span-8 lg:col-span-full"
           />
           <MoreArticles
             className="col-span-10 col-start-2 mt-16 xl:col-span-full xl:mt-14 lg:mt-12 md:mt-11"

@@ -15,15 +15,14 @@ import sendSegmentEvent from 'utils/send-segment-event';
 
 const items = [
   {
-    type: 'Free',
-    price: 'Try Neon now',
+    type: 'Free Tier',
+    price: 'Start free',
     description:
-      'Essential features to help you get started with Neon. Perfect for prototyping and personal projects.',
+      'A generous free tier with essential features perfect for prototypes and personal projects.',
     features: [
-      { title: '1 project' },
-      { title: '10 branches' },
-      { title: '3 GiB of data per branch' },
-      { title: 'A shared compute with 1 GB of RAM' },
+      { title: '1 project, 10 branches, unlimited DBs' },
+      { title: 'Shared compute, 3GiB storage' },
+      { title: 'Community support' },
     ],
     button: {
       url: LINKS.signup,
@@ -34,32 +33,31 @@ const items = [
   },
   {
     type: 'Pro',
-    price: 'Starting at <span class="font-normal text-pricing-primary-1">$0.00</span>',
+    price: 'Pay as you go',
     description:
-      'A usage-based plan for small to medium teams. Unlimited resources with advanced configuration options.',
+      'A pro plan with features for production. Scales from $0 based on compute & storage usage.',
     features: [
-      { title: 'Unlimited projects & databases' },
-      { title: 'Unlimited branches' },
-      { title: 'Autoscaling' },
-      { title: 'Configurable compute size' },
-      { title: 'Read replicas' },
+      { title: 'Unlimited projects, branches, databases' },
+      { title: 'Configurable compute, unlimited storage' },
+      { title: 'Pro support' },
+      { title: 'Autoscaling, read replicas, project sharing' },
+      { title: 'IP allow' },
     ],
     button: {
-      url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
-      text: 'Upgrade',
+      url: '#estimates',
+      text: 'Estimate Your Cost',
       theme: 'primary',
       event: 'pricing_hero_pro_btn_click',
     },
   },
   {
-    type: 'Custom',
-    price: 'Contact us',
+    type: 'Enterprise',
+    price: 'Custom plans',
     description:
       'Custom volume-based plans for medium to large teams, database fleets, and resale.',
     features: [
-      { title: 'Custom contracts' },
-      { title: 'Prepaid plans' },
-      { title: 'Volume discounts' },
+      { title: 'Custom pricing with volume discounts' },
+      { title: 'Prepaid plans and capacity contracts' },
       { title: 'Enterprise support' },
     ],
     button: {
@@ -112,15 +110,15 @@ const Hero = () => {
           tag="h1"
           size="lg"
         >
-          <span className="text-pricing-primary-1">Start Free.</span>{' '}
+          <span className="text-pricing-primary-1">Start free.</span>{' '}
           <span>Only pay for what you use.</span>
         </Heading>
-        <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
+        <p className="mx-auto mt-5 max-w-[620px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
           Neon brings serverless architecture to Postgres, which allows us to offer you flexible
           usage and volume-based plans.
         </p>
-        <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-12 md:mt-9">
-          <ul className="relative z-10 grid grid-cols-3 gap-x-11 xl:gap-x-6 lg:grid-cols-2 lg:gap-x-4 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
+        <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-12 lg:w-full lg:max-w-[704px] md:mt-9">
+          <ul className="relative z-10 grid grid-cols-3 gap-x-11 xl:gap-x-6 lg:grid-cols-1 lg:gap-x-4 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
             {items.map(({ type, price, description, features, button }, index) => (
               <li
                 className={clsx(
@@ -129,9 +127,9 @@ const Hero = () => {
                 )}
                 style={{
                   '--accentColor':
-                    type === 'Free' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
+                    type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
                   '--hoverColor':
-                    type === 'Free' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
+                    type === 'Free Tier' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
                 }}
                 key={index}
                 onPointerEnter={() => {
@@ -142,30 +140,30 @@ const Hero = () => {
               >
                 <Link
                   className={clsx(
-                    'relative z-10 flex min-h-full flex-col rounded-[10px] px-7 py-5 transition-colors duration-500 xl:p-5 xl:pb-3 lg:p-5',
+                    'relative z-10 flex min-h-full flex-col rounded-[10px] px-7 py-5 transition-colors duration-500 xl:px-6 xl:py-5 sm:p-5',
                     activeItemIndex !== index ? 'bg-gray-new-8' : 'bg-transparent'
                   )}
                   to={button.url}
-                  onClick={() => {
+                  onClick={(e) => {
                     sendGtagEvent(button.event);
                     sendSegmentEvent(button.event);
+
+                    if (button.url === '#estimates') {
+                      e.preventDefault();
+                      const estimates = document.getElementById('estimates');
+                      estimates.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
                   }}
                 >
-                  <div className="mb-6 min-h-[280px] flex flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-7 lg:min-h-max">
-                    <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
+                  <div className="mb-6 flex min-h-[274px] flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-5 xl:min-h-[265px] xl:pb-0 lg:min-h-max lg:pb-5">
+                    <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)] xl:text-lg">
                       {type}
                     </span>
-                    <h3
-                      className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px] md:mt-4"
-                      dangerouslySetInnerHTML={{ __html: price }}
-                    />
+                    <h2 className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4">
+                      {price}
+                    </h2>
                     <AnimatedButton
-                      className={clsx(
-                        'mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 md:mt-7 sm:max-w-none',
-                        type === 'Pro'
-                          ? 'lg:absolute lg:right-8 lg:top-0 lg:max-w-[210px] md:relative md:right-0 md:max-w-[304px]'
-                          : 'lg:max-w-[304px]'
-                      )}
+                      className="mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-7 sm:max-w-none"
                       isAnimated={activeItemIndex === index}
                       animationColor="var(--accentColor)"
                       theme="primary"
@@ -173,30 +171,14 @@ const Hero = () => {
                     >
                       {button.text}
                     </AnimatedButton>
-                    <p
-                      className={clsx(
-                        'mt-9 font-light leading-snug tracking-tight text-gray-new-70 md:mt-8',
-                        type === 'Pro' ? 'lg:mt-5' : 'lg:min-h-[66px]'
-                      )}
-                    >
+                    <p className="mt-9 font-light leading-snug tracking-tight text-gray-new-70 xl:mt-8">
                       {description}
                     </p>
                   </div>
                   <div className="mt-auto flex grow flex-col">
-                    <ul
-                      className={clsx(
-                        'mb-4 flex flex-col flex-wrap space-y-4 xl:mb-5 lg:mb-2.5 md:mb-7',
-                        type === 'Pro' ? 'lg:max-h-28 lg:gap-4 lg:space-y-0 md:max-h-max' : ''
-                      )}
-                    >
+                    <ul className="mb-4 flex flex-col flex-wrap space-y-4 xl:mb-0">
                       {features.map(({ title, label }, index) => (
-                        <li
-                          className={clsx(
-                            'relative pl-6 leading-tight tracking-tight',
-                            type === 'Pro' && 'lg:w-1/3 md:w-full'
-                          )}
-                          key={index}
-                        >
+                        <li className="relative pl-6 leading-tight tracking-tight" key={index}>
                           <CheckIcon
                             className="absolute left-0 top-[2px] h-4 w-4 text-[var(--accentColor)]"
                             aria-hidden
