@@ -52,7 +52,7 @@ const items = [
   },
   {
     type: 'Enterprise',
-    price: 'Custom plans',
+    price: 'Custom',
     description:
       'Custom volume-based plans for medium to large teams, database fleets, and resale.',
     features: [
