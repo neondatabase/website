@@ -35,7 +35,7 @@ const items = [
     type: 'Pro',
     price: '$3+/month',
     description:
-      'A pro plan with features for production. Scales from $0 based on compute & storage usage.',
+      'A pro plan with all the features for production. Only pay for the compute & storage used.',
     features: [
       { title: 'Unlimited projects, branches, databases' },
       { title: 'Configurable compute, unlimited storage' },
