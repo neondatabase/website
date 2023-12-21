@@ -16,7 +16,8 @@ import sendSegmentEvent from 'utils/send-segment-event';
 const items = [
   {
     type: 'Free',
-    price: '$0/month',
+    price: '$0',
+    rate: '/ month',
     description:
       'A generous free tier with essential features perfect for prototypes and personal projects.',
     features: [
@@ -33,14 +34,15 @@ const items = [
   },
   {
     type: 'Pro',
-    price: '$3+/month',
+    price: '$3+',
+    rate: '/ month',
     description:
       'A pro plan with all the features for production. Only pay for the compute & storage used.',
     features: [
       { title: 'Unlimited projects, branches, databases' },
       { title: 'Configurable compute, unlimited storage' },
       { title: 'Pro support' },
-      { title: 'Autoscaling, read replicas, project sharing, IP Allow rules' }
+      { title: 'Autoscaling, read replicas, project sharing, IP Allow rules' },
     ],
     button: {
       url: '#estimates',
@@ -118,7 +120,7 @@ const Hero = () => {
         </p>
         <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-12 lg:w-full lg:max-w-[704px] md:mt-9">
           <ul className="relative z-10 grid grid-cols-3 gap-x-11 xl:gap-x-6 lg:grid-cols-1 lg:gap-x-4 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
-            {items.map(({ type, price, description, features, button }, index) => (
+            {items.map(({ type, price, rate, description, features, button }, index) => (
               <li
                 className={clsx(
                   'group relative rounded-[10px]',
@@ -160,6 +162,7 @@ const Hero = () => {
                     </span>
                     <h2 className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4">
                       {price}
+                      {rate && <span className="ml-1 text-xl text-gray-new-70">{rate}</span>}
                     </h2>
                     <AnimatedButton
                       className="mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-7 sm:max-w-none"
