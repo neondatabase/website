@@ -2,7 +2,7 @@
 title: Postgres logical replication concepts
 subtitle: Learn about PostgreSQL logical replication concepts
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 updatedOn: '2023-12-21T14:51:31.029Z'
 ---
 
