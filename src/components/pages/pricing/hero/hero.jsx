@@ -42,7 +42,8 @@ const items = [
       { title: 'Unlimited projects, branches, databases' },
       { title: 'Configurable compute, unlimited storage' },
       { title: 'Pro support' },
-      { title: 'Autoscaling, read replicas, project sharing, IP allow rules' },
+      { title: 'Autoscaling, read replicas' },
+      { title: 'Project sharing, IP allow rules, and more' },
     ],
     button: {
       url: '#estimates',
@@ -128,9 +129,9 @@ const Hero = () => {
                 )}
                 style={{
                   '--accentColor':
-                    type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
+                    type === 'Free' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
                   '--hoverColor':
-                    type === 'Free Tier' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
+                    type === 'Free' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
                 }}
                 key={index}
                 onPointerEnter={() => {
