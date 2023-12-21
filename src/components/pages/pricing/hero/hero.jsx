@@ -33,7 +33,7 @@ const items = [
   },
   {
     type: 'Pro',
-    price: '$5+/month',
+    price: '$3+/month',
     description:
       'A pro plan with features for production. Scales from $0 based on compute & storage usage.',
     features: [
