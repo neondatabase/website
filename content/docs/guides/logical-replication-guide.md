@@ -3,6 +3,7 @@ title: Get started with logical replication
 subtitle: Learn how to replicate data from Neon to external data platforms and services
 enableTableOfContents: true
 isDraft: true
+updatedOn: '2023-12-21T14:51:31.029Z'
 ---
 
 <Admonition type="note">
