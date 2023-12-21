@@ -218,6 +218,7 @@ Returns:
 |----------|-------------------------
 | Kitchen  | {"total_price" : 12.99}
 | Clothing | {"total_price" : 25.99}
+```
 
 
 ## Additional considerations
