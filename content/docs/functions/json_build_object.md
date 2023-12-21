@@ -23,14 +23,14 @@ Let's consider a scenario where we have a table storing information about users:
 
 **users**
 
-
+```text
 | id |   name   | age |   city  
 |----|----------|-----|----------
 | 1  | John Doe |  30 | New York |
 | 2  | Jane Doe |  25 | London   |
 
 
-<!--
+{/*
 ```sql
 CREATE TABLE users (
  id SERIAL PRIMARY KEY,
@@ -44,7 +44,7 @@ INSERT INTO users (name, age, city)
 VALUES ('John Doe', 30, 'New York'),
       ('Jane Doe', 25, 'London');
 ```
--->
+*/}
 
 
 Use `json_build_object` to create a JSON structure with user information:
@@ -65,11 +65,12 @@ FROM users;
 
 Returns:
 
-
+```text
 | id |                       user_data                       
 |----|--------------------------------------------------------
 | 1  | {"name" : "John Doe", "age" : 30, "city" : "New York"}
 | 2  | {"name" : "Jane Doe", "age" : 25, "city" : "London"}
+```
 
 
 ## Advanced examples
@@ -90,7 +91,7 @@ Let’s say we have a table of products with an `attributes` column containing J
 | 3  | Sneakers   | 49.99 | Sporty sneakers for everyday use  | Footwear | {"size": "10", "color": "Black", "rating": 4.2}
 
 
-<!--
+{/*
 ```sql
 CREATE TABLE products (
    id SERIAL PRIMARY KEY,
@@ -120,7 +121,7 @@ VALUES
        'rating', 4.2
    ));
 ```
--->
+*/}
 
 
 
@@ -146,14 +147,12 @@ FROM products;
 
 Returns:
 
-
+```text
 | id |    name     | price |                                                               details                                                              
 |----|-------------|-------|-------------------------------------------------------------------------------------------------------------------------------------
 | 1  | T-Shirt     | 25.99 | {"category" : "Clothing", "description" : "A comfortable cotton T-Shirt", "attributes" : {"color" : "Blue", "size" : "Medium"}}
 | 2  | Coffee Mug  | 12.99 | {"category" : "Kitchen", "description" : "A ceramic mug with a funny design", "attributes" : {"color" : "White", "size" : "Large"}}
-
-
-
+```
 
 ### Use with `ORDER BY`
 
@@ -187,13 +186,13 @@ ORDER BY (attributes->>'rating')::NUMERIC DESC;
 
 Returns:
 
-
+```text
 | id |    name    | price |                                                                        details                                                                       
 |----|------------|-------|-------------------------------------------------------------------------------------------------------------------------------------------------------
 | 1  | T-Shirt    | 25.99 | {"category" : "Clothing", "description" : "A comfortable cotton T-Shirt", "attributes" : {"color" : "Blue", "size" : "Medium", "rating" : "4.5"}}
 | 3  | Sneakers   | 49.99 | {"category" : "Footwear", "description" : "Sporty sneakers for everyday use", "attributes" : {"color" : "Black", "size" : "10", "rating" : "4.2"}}
 | 2  | Coffee Mug | 12.99 | {"category" : "Kitchen", "description" : "A ceramic mug with a funny design", "attributes" : {"color" : "White", "size" : "Small", "rating" : "3.8"}}
-
+```
 
 ### Use with `GROUP BY`
 
@@ -214,7 +213,7 @@ GROUP BY category;
 
 Returns:
 
-
+```text
 | category |  category_total_price  
 |----------|-------------------------
 | Kitchen  | {"total_price" : 12.99}
