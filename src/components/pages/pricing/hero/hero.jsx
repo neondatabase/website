@@ -40,8 +40,7 @@ const items = [
       { title: 'Unlimited projects, branches, databases' },
       { title: 'Configurable compute, unlimited storage' },
       { title: 'Pro support' },
-      { title: 'Autoscaling, read replicas, project sharing' },
-      { title: 'IP allow' },
+      { title: 'Autoscaling, read replicas, project sharing, IP Allow rules' }
     ],
     button: {
       url: '#estimates',
