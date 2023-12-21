@@ -16,7 +16,7 @@ import sendSegmentEvent from 'utils/send-segment-event';
 const items = [
   {
     type: 'Free Tier',
-    price: 'Start free',
+    price: '$0 Forever',
     description:
       'A generous free tier with essential features perfect for prototypes and personal projects.',
     features: [
@@ -32,8 +32,8 @@ const items = [
     },
   },
   {
-    type: 'Pro',
-    price: 'Pay as you go',
+    type: 'Pro Tier',
+    price: 'Usage-Based from $0',
     description:
       'A pro plan with features for production. Scales from $0 based on compute & storage usage.',
     features: [
@@ -51,7 +51,7 @@ const items = [
     },
   },
   {
-    type: 'Enterprise',
+    type: 'Enterprise Tier',
     price: 'Custom plans',
     description:
       'Custom volume-based plans for medium to large teams, database fleets, and resale.',
