@@ -12,7 +12,7 @@ You will learn how to enable logical replication in Neon, create a publication, 
 ## Enable logical replication
 
 <Admonition type="important">
-Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, which means that active connections will be dropped and have to reconnect.
+Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
 </Admonition>
 
 To enable logical replication in Neon:
@@ -59,7 +59,7 @@ With your publication created, you're now ready to configure a subscriber that w
 
 ## Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role create with your Neon project and roles created using the Neon Console, CLI, or API are granted the membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted the membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 
@@ -73,7 +73,7 @@ To create a role in the Neon Console:
 4. Select the branch where you want to create the role.
 4. Click **New Role**.
 5. In the role creation dialog, specify a role name.
-6. Click **Create**. The role is created and you are provided with the password for the role.
+6. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>
 
@@ -109,7 +109,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 ## Grant schema access to your Postgres role
 
-If the schemas and tables you are replicating from are not owned by your replication role, make sure to grant access. Run these commands for each schema:
+If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. Run these commands for each schema:
 
 ```sql
 GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;

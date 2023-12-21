@@ -7,15 +7,15 @@ isDraft: true
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
-Confluent Cloud is a fully managed, cloud-native service for real-time data streaming, built on Apache Kafka. It allows you to stream data from many different sources, including Postgres, and build apps that consume messages from an Apache Kafka cluster.
+Confluent Cloud is a fully managed, cloud-native real-time data streaming service, built on Apache Kafka. It allows you to stream data from various sources, including Postgres, and build apps that consume messages from an Apache Kafka cluster.
 
-In this guide, you will learn how to how to stream data from a Neon Postgres database to a Kafka cluster in Confluent Cloud. You will use the [PostgreSQL CDC Source Connector (Debezium) for Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-postgresql-cdc-source-debezium.html) to read Change Data Capture (CDC) events from the Write-Ahead Log (WAL) of your Neon database in real time. The connector will write events to a Kafka stream and auto-generate a Kafka topic. The connector performs an initial snapshot of the table and then streams any futue change events.
+In this guide, you will learn how to stream data from a Neon Postgres database to a Kafka cluster in Confluent Cloud. You will use the [PostgreSQL CDC Source Connector (Debezium) for Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-postgresql-cdc-source-debezium.html) to read Change Data Capture (CDC) events from the Write-Ahead Log (WAL) of your Neon database in real-time. The connector will write events to a Kafka stream and auto-generate a Kafka topic. The connector performs an initial snapshot of the table and then streams any future change events.
 
 <Admonition type="note">
 Confluent Cloud Connectors can be set up using the [Confluent Cloud UI](https://confluent.cloud/home) or the [Confluent command-line interface (CLI)](https://docs.confluent.io/confluent-cli/current/overview.html). This guide uses the Confluent Cloud UI.
 </Admonition>
 
-## Prerequistes
+## Prerequisites
 
 - A [Confluent Cloud](https://www.confluent.io/confluent-cloud) account
 - A [Neon account](https://console.neon.tech/)
@@ -66,7 +66,7 @@ This command creates a publication, named `users_publication`, which will includ
 
 ## Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role create with your Neon project and roles created using the Neon Console, CLI, or API are granted the membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted the membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 
@@ -80,7 +80,7 @@ To create a role in the Neon Console:
 4. Select the branch where you want to create the role.
 4. Click **New Role**.
 5. In the role creation dialog, specify a role name.
-6. Click **Create**. The role is created and you are provided with the password for the role.
+6. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>
 
@@ -116,7 +116,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 ## Grant schema access to your Postgres role
 
-If the schemas and tables you are replicating from are not owned by your replication role, make sure to grant access. Run these commands for each schema:
+If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. Run these commands for each schema:
 
 ```sql
 GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
@@ -155,13 +155,13 @@ SELECT pg_create_logical_replication_slot('debezium', 'pgoutput');
 To set up a Postgres CDC source connector for Confluent Cloud:
 
 1. On the **Cluster Overview** page, under **Set up connector**, select **Get started**.
-2. On the **Connector Plaugins** page, enter `Postgres` into the search field.
+2. On the **Connector Plugins** page, enter `Postgres` into the search field.
 3. Select the **Postgres CDC Source** connector. This is the [PostgreSQL CDC Source Connector (Debezium) for Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-postgresql-cdc-source-debezium.html). This connector will take a snapshot of the existing data and then monitor and record all subsequent row-level changes to that data.
 
 4. On the **Add Postgres CDC Source connector** page:
 
-    - Select the type of access you want to grant the connector. For the purpose of this guide, we'll select **Global acess**, but if you are configuring a production pipeline, Confluent recommends **Granular access**.
-    - Click the **Generate API key & download** button to generate an API key and secret that you connector can use to communicate with your Kafka cluster. Your applications will need this API key and secret to make requests to your Kafka cluster. Store the API key and secret somewhere safe. This is the only time you’ll see the secret.
+    - Select the type of access you want to grant the connector. For the purpose of this guide, we'll select **Global access**, but if you are configuring a production pipeline, Confluent recommends **Granular access**.
+    - Click the **Generate API key & download** button to generate an API key and secret that your connector can use to communicate with your Kafka cluster. Your applications will need this API key and secret to make requests to your Kafka cluster. Store the API key and secret somewhere safe. This is the only time you’ll see the secret.
 
     Click **Continue**.
 
@@ -183,23 +183,19 @@ To set up a Postgres CDC source connector for Confluent Cloud:
         - **Database username**: `alex`
         - **Database Password** `AbC123dEf`
 
-    - If you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, you will need to add the Confluent cluster static IP addresses to your allowlist. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow). If you do not use Neon's **IP Allow** feature, you can skip this step.
+    - If you use Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, you will need to add the Confluent cluster static IP addresses to your allowlist. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow). If you do not use Neon's **IP Allow** feature, you can skip this step.
 
     Click **Continue**.
 
-6. Under **Output Kafka record value format**, select an output format for Kafka record values. The default is `JSON`, so we'll use that format in this guide. Other supported values include `AVRO`, `JSON_SR`, and `PROTOBUF`, which are scehma-based message formats. If you use any of these, you will also need to configure a [Confluent Cloud Schema Registry](https://docs.confluent.io/cloud/current/sr/index.html).
+6. Under **Output Kafka record value format**, select an output format for Kafka record values. The default is `JSON`, so we'll use that format in this guide. Other supported values include `AVRO`, `JSON_SR`, and `PROTOBUF`, which are schema-based message formats. If you use any of these, you must also configure a [Confluent Cloud Schema Registry](https://docs.confluent.io/cloud/current/sr/index.html).
 
     Expand the **Show advanced configurations** drop-down and set the following values:
     
-    - Under **Advanced confguration**
-      - Ensure **Slot name** is set to to `debezium`. This is the name of the replication slot you created earlier.
+    - Under **Advanced configuration**
+      - Ensure **Slot name** is set to `debezium`. This is the name of the replication slot you created earlier.
       - Set the **Publication name** to `users_publication`, which is the name of the publication you created earlier.
       - Set **Publication auto-create** mode to `disabled`. You've already created your publication.
     - Under **Database details**, set **Tables included** to `public.users`, which is the name of the Neon database table you are replicating from.
-
-        <Admonition type="tip">
-        While you're here, review the other advanced options and use the tool tips to understand what they are. It will help to understand what they are if you configure a more advanced setup later.
-        </Admonition>
 
     Click **Continue**.
 
@@ -255,7 +251,7 @@ To set up a Postgres CDC source connector for Confluent Cloud:
 
 ## Verify your Kafka stream
 
-To verify that events now being published to a Kafka stream in Confluent:
+To verify that events are now being published to a Kafka stream in Confluent:
 
 1. Insert a row into your `users` table from the Neon SQL Editor or a `psql` client connect to your Neon database. For example:
 
@@ -268,7 +264,7 @@ To verify that events now being published to a Kafka stream in Confluent:
 
 ## Next steps
 
-With events now being published to a Kafka stream, you can now set up a connection between Confluent and a supported consumer. This is quite simple using a Confluent Connector. For example, you can stream data to [Databricks](https://docs.confluent.io/cloud/current/connectors/cc-databricks-delta-lake-sink/databricks-aws-setup.html#), [Snowflake](https://docs.confluent.io/cloud/current/connectors/cc-snowflake-sink.html), or one of the many other supported consumers. Refer to the Confluent documentation for connector-specific instructions.
+With events now being published to a Kafka stream, you can now set up a connection between Confluent and a supported consumer. This is quite simple using a Confluent Connector. For example, you can stream data to [Databricks](https://docs.confluent.io/cloud/current/connectors/cc-databricks-delta-lake-sink/databricks-aws-setup.html#), [Snowflake](https://docs.confluent.io/cloud/current/connectors/cc-snowflake-sink.html), or one of the other supported consumers. Refer to the Confluent documentation for connector-specific instructions.
 
 ## References
 

@@ -7,7 +7,7 @@ isDraft: true
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. 
 
-[Airbyte](https://airbyte.com/) is an open-source data integration platform that moves data from a source system to a destination system. Airbyte offers a large library of connectors for various data sources and destinations.
+[Airbyte](https://airbyte.com/) is an open-source data integration platform that moves data from a source to a destination system. Airbyte offers a large library of connectors for various data sources and destinations.
 
 In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to one or more of Airbyte's supported destinations.
 
@@ -19,7 +19,7 @@ In this guide, you will learn how to define your Neon Postgres database as a dat
 ## Enable logical replication in Neon
 
 <Admonition type="important">
-Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, which means that active connections will be dropped and have to reconnect.
+Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be dropped and have to reconnect.
 </Admonition>
 
 To enable logical replication in Neon:
@@ -29,7 +29,7 @@ To enable logical replication in Neon:
 3. Select **Beta**.
 4. Click **Enable** to enable logical replication.
 
-You can verify that logical replication is enabled by running the following query from the the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
 
 ```sql
 SHOW wal_level;
@@ -40,7 +40,7 @@ SHOW wal_level;
 
 ## Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role create with your Neon project and roles created using the Neon Console, CLI, or API are granted the membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted the membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 
@@ -90,7 +90,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 ## Grant schema access to your Postgres role
 
-If the schemas and tables you are replicating from are not owned by your replication role, make sure to grant access. Run these commands for each schema:
+If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. Run these commands for each schema:
 
 ```sql
 GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
@@ -165,12 +165,12 @@ The Airbyte UI currently allows selecting any tables for Change Data Capture (CD
 
     ![Airbyte Create a source](/docs/guides/airbyte_create_source.png)
 
-3. Under **Optional fields**, list the schemas you want to sync. Schema names are case-sensitive, and multiple schemas may be entered specified. By default, `public` is the only selected schema.
+3. Under **Optional fields**, list the schemas you want to sync. Schema names are case-sensitive, and multiple schemas may be specified. By default, `public` is the only selected schema.
 4. Select an SSL mode. You will most frequently choose `require` or `verify-ca`. Both of these options always require encryption. The `verify-ca` mode requires a certificate. Refer to [Connect securely](/docs/connect/connect-securely) for information about the location of certificate files you can use with Neon.
 5. Under **Advanced**:
     
     - Select **Logical Replication (CDC)** from available replication methods.
-    - In the **Replication Slot** field, enter the name of the replication slot you created previosly: `airbyte_slot`.
+    - In the **Replication Slot** field, enter the name of the replication slot you created previously: `airbyte_slot`.
     - In the **Publication** field, enter the name of the publication you created previously: `airbyte_publication`.
     ![Airbyte advanced fields](/docs/guides/airbyte_cdc_advanced_fields.png)
 

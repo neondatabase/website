@@ -37,7 +37,7 @@ SHOW wal_level;
  logical
 ```
 
-Enabling logical replication turms on the detailed logging required to ensure that each change can be accurately replicated to the subscriber. Detailed row-level changes and additional metadata are required to support the replication process. This increases the amount of data written to the Write-Ahead Log (WAL). Typically, you can expect a 10% to 30% increase in the amount of data written to the WAL, depending on the extent of write activity.
+Enabling logical replication turns on the detailed logging required to ensure that each change can be accurately replicated to the subscriber. Detailed row-level changes and additional metadata are required to support the replication process. This increases the amount of data written to the Write-Ahead Log (WAL). Typically, you can expect a 10% to 30% increase in the amount of data written to the WAL, depending on the extent of write activity.
 
 ## Publications
 
@@ -67,19 +67,19 @@ CONNECTION 'postgres://username:password@host:port/dbname'
 PUBLICATION users_publication;
 ```
 
-A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication that it is subscribing to.
+A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication it subscribes to.
 
 ## How does it work under the covers?
 
-While the publisher and subscriber model forms the surface of PostgreSQL logical replication, the underlying meachanism is driven by a few key components, described below.
+While the publisher and subscriber model forms the surface of PostgreSQL logical replication, the underlying mechanism is driven by a few key components, described below.
 
 ### Write-Ahead Log (WAL)
 
-The WAL is central to Postgres's data durability and crash recovery mechanisms. In the context of logical replication, the WAL records all changes to your data. For logical replication, the WAL serves as the primary source of data that needs to be replicated. It's the transaction data captured in the WAL that is processed and then relayed from a publisher to a subscriber.
+The WAL is central to Postgres's data durability and crash recovery mechanisms. In the context of logical replication, the WAL records all changes to your data. For logical replication, the WAL serves as the primary source of data that needs to be replicated. It's the transaction data captured in the WAL that's processed and then relayed from a publisher to a subscriber.
 
 ### Replication slots
 
-Replication slots on the publisher database track replication progress, ensuring that no data in the WAL is purged before the subscriber has successfully replicated it. This mechanism serves to maintain data consistency and prevent data loss in cases of network interruption or subscriber downtime.
+Replication slots on the publisher database track replication progress, ensuring that no data in the WAL is purged before the subscriber has successfully replicated it. This mechanism helps maintain data consistency and prevent data loss in cases of network interruption or subscriber downtime.
 
 Replication slots are typically created automatically with new subscriptions, but they can be created manually using the `pg_create_logical_replication_slot` function. Some "subscriber" data services and platforms require that you create a dedicated replication slot. This is accomplished using the following syntax:
 
@@ -99,7 +99,7 @@ max_replication_slots = 10
 
 ### Decoder plugins
 
-The Postgres replication architecture uses decoder plugins to decode WAL entries into a logical replication stream, making the data understandable for the subscriber. The default decoder plugin for PostgreSQL logical replication is `pgoutput`, and it's included in Postgres. You don;t need to worry about installing it.
+The Postgres replication architecture uses decoder plugins to decode WAL entries into a logical replication stream, making the data understandable for the subscriber. The default decoder plugin for PostgreSQL logical replication is `pgoutput`, and it's included in Postgres. You don't need to worry about installing it.
 
 Neon, supports an alternative decoder plugin called `wal2json`. This decoder plugin differs from `pgoutput` in that it converts WAL data into `JSON` format, which is useful for integrating Postgres with systems and applications that work with `JSON` data. For usage examples, see [wal2json](https://github.com/eulerto/wal2json).
 
@@ -113,9 +113,9 @@ SELECT pg_create_logical_replication_slot('my_replication_slot', 'wal2json');
 
 WAL senders are processes on the publisher database that read the WAL and send the relevant data to the subscriber. 
 
-The `max_wal_senders` parameter defines the maximum number of concurrent WAL sender processes which are responsible for streaming WAL data to subscribers. In most cases, you should have one WAL sender process for each subscriber or replication slot to ensure efficient and consistent data replication.
+The `max_wal_senders` parameter defines the maximum number of concurrent WAL sender processes that are responsible for streaming WAL data to subscribers. In most cases, you should have one WAL sender process for each subscriber or replication slot to ensure efficient and consistent data replication.
 
-The `max_wal_senders` configuration parameter on Neon is set to `10` by default, which matches the max number of replication slots defined by the `max_replication_slots` setting.
+The `max_wal_senders` configuration parameter on Neon is set to `10` by default, which matches the maximum number of replication slots defined by the `max_replication_slots` setting.
 
 ```ini
 max_wal_senders = 10

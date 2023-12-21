@@ -95,7 +95,7 @@ CONNECTION 'postgres://username:password@host:port/dbname'
 PUBLICATION my_publication;
 ```
 
-A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication that it is subscribing to.
+A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication that it subscribes to.
 
 In the example above, `my_subscription` is the subscription that connects to a publication named `my_publication`. When using a Neon database as the publisher, replace the connection details with your Neon database connection string.
 
@@ -210,7 +210,7 @@ This section outlines information about logical replication specific to Neon, in
 ### Enabling logical replication in Neon
 
 <Admonition type="important">
-Once you enable logical replication in Neon, the setting cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, which means that active connections will be dropped and have to reconnect.
+Once you enable logical replication in Neon, the setting cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
 </Admonition>
 
 In Neon, logical replication is enabled from the console, by following these steps:
@@ -231,7 +231,7 @@ logical
 
 ### Replication roles
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role create with your Neon project and roles created using the Neon Console, CLI, or API are granted the membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege. Roles created via SQL do not have this privilege, and the `REPLICATION` privilege cannot be granted.
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted the membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege. Roles created via SQL do not have this privilege, and the `REPLICATION` privilege cannot be granted.
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 
@@ -245,7 +245,7 @@ To create a replication role in the Neon Console:
 4. Select the branch where you want to create the role.
 4. Click **New Role**.
 5. In the role creation dialog, specify a role name.
-6. Click **Create**. The role is created and you are provided with the password for the role.
+6. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>
 
@@ -305,7 +305,7 @@ Neon supports both `pgoutput` and `wal2json` replication output decoder plugins.
 
 ### Dedicated replication slots
 
-Some data services and platforms require dedicated replication slots. You can create a dedicated replication slot using the standrad PostgreSQL syntax. As mentioned above, Neon supports both `pgoutput` and `wal2json` replication output decoder plugins.
+Some data services and platforms require dedicated replication slots. You can create a dedicated replication slot using the standard PostgreSQL syntax. As mentioned above, Neon supports both `pgoutput` and `wal2json` replication output decoder plugins.
 
 ```sql
 SELECT pg_create_logical_replication_slot('my_replication_slot', 'pgoutput');
@@ -325,7 +325,7 @@ max_replication_slots = 10
 max_slot_wal_keep_size = 1Gb
 ```
 
-- The `max_wal_senders` parameter defines the maximum number of concurrent WAL sender processes which are responsible for streaming WAL data to subscribers. In most cases, you should have one WAL sender process for each subscriber or replication slot to ensure efficient and consistent data replication. 
+- The `max_wal_senders` parameter defines the maximum number of concurrent WAL sender processes that are responsible for streaming WAL data to subscribers. In most cases, you should have one WAL sender process for each subscriber or replication slot to ensure efficient and consistent data replication. 
 - The `max_replication_slots` defines the maximum number of replication slots which are used to manage database replication connections. Each replication slot tracks changes in the publisher database to ensure that the connected subscriber stays up to date. You'll want a replication slot for each replication connection. For example, if you expect to have 10 separate subscribers replicating from your database, you would set `max_replication_slots` to 10 to accommodate each connection.
 - The `max_slot_wal_keep_size` defines the maximum size of WAL files that replication slots are allowed to retain in the `pg_wal` directory at checkpoint time. If `restart_lsn` of a replication slot falls behind the current LSN by more than the given size, the subscriber using the slot may no longer be able to continue replication due to removal of required WAL files. You can monitor the WAL availability of replication slots (`wal_status`) in [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html).
 

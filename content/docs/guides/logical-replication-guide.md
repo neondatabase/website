@@ -5,11 +5,11 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon database to external destinations. These destinations might include data warehouses, analytical database services, real-time stream processing systems, messaging and event-streaming platforms, change data capture (CDC) ecosystems, or external Postgres databases, among others.
+Neon's logical replication feature allows you to replicate data from your Neon database to external destinations. These destinations may include data warehouses, analytical database services, messaging and event-streaming platforms, change data capture (CDC) ecosystems, or external Postgres databases, among others.
 
 ![Neon logical replication subscribers image](/docs/guides/logical_replication_subscribers.png)
 
-Logical replication in Neon works in the same way as logical replication on a standard Postgres installation, using a publish and subscribe model to replicate data from the source database to the destination.
+Logical replication in Neon works like it does on a standard Postgres installation. It uses a publish and subscribe model to replicate data from the source database to the destination.
 
 Replication starts by copying a snapshot of the data from the publisher to the subscriber. Once this is done, subsequent changes are sent to the subscriber as they occur in real-time.
 
