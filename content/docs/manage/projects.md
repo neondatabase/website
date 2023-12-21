@@ -125,6 +125,7 @@ From the **Settings** page, you can also set defaults or apply bulk changes acro
 
 - [Reset default compute size](#reset-the-default-compute-size) (Neon Pro Plan only)
 - [Configure history retention range](#configure-history-retention)
+- [Enable logical replication](#enable-logical-replication)
 - [Configiure IP Allow](#configure-ip-allow)
 
 ### Reset the default compute size
@@ -158,6 +159,32 @@ To configure the history retention period for a project:
     ![History retention configuration](/docs/relnotes/history_retention.png)
 4. Use the slider to select the history retention period.
 5. Click **Save**.
+
+## Enable logical replication
+
+Logical replication enables replicating data from your Neon databases to a variety of external destinations, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.
+
+<Admonition type="important">
+Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
+</Admonition>
+
+To enable logical replication for your project:
+
+1. Select your project in the Neon console.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Beta**.
+4. Click **Enable**.
+
+You can verify that logical replication is enabled by running the following query:
+
+```sql
+SHOW wal_level;
+wal_level 
+-----------
+logical
+```
+
+After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. To get started, refer to our [logical replication guides](/docs/guides/logical-replication-guide). 
 
 ### Configure IP Allow
 

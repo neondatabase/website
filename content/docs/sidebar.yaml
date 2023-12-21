@@ -23,6 +23,10 @@
           slug: introduction/point-in-time-restore
         - title: Read replicas
           slug: introduction/read-replicas
+        - title: Logical replication
+          slug: introduction/logical-replication
+        - title: IP Allow
+          slug: introduction/ip-allow
     - title: Regions
       slug: introduction/regions
     - title: Plans
@@ -102,6 +106,12 @@
            slug: manage/database-access
     - title: Backups
       slug: manage/backups
+    - title: Logical replication
+      items:
+         - title: Concepts
+           slug: guides/logical-replication-concepts
+         - title: Manage
+           slug: guides/logical-replication-neon
 - title: Guides
   slug: guides/guides-intro
   items:
@@ -128,6 +138,17 @@
               slug: guides/branch-refresh
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
+        - title: Logical replication
+          slug: guides/logical-replication-guide
+          items:
+            - title: Airbyte
+              slug: guides/logical-replication-airbyte
+            - title: Kafka (Confluent)
+              slug: guides/logical-replication-kafka-confluent
+            - title: Materialize
+              slug: guides/logical-replication-materialize
+            - title: Postgres
+              slug: guides/logical-replication-postgres
         - title: Project sharing
           slug: guides/project-sharing-guide
         - title: Read replicas

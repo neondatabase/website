@@ -104,6 +104,20 @@ Neon's _Auto-suspend_ feature automatically transitions a compute endpoint into 
 
 The maximum **Suspend compute after a period of inactivity** setting is 7 days. To configure a compute as "always-active", deselect **Suspend compute after a period of inactivity**. For more information, refer to [Configuring Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide).
 
+## Restart a compute endpoint
+
+It is sometimes necessary to restart a compute endpoint. For example, if you upgrade to a Neon Pro Plan account, you may want to restart your compute endpoint to immediately apply your upgraded limits.
+
+<Admonition type="important">
+Please be aware that restarting a compute endpoint interrupts any connections currently using the compute endpoint.
+</Admonition>
+
+You can restart a compute endpoint using one of the following methods:
+
+- Stop activity on your compute endpoint (stop running queries) and wait for your compute endpoint to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`. 
+- Issue [Suspend endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. You can do this directly from the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api), using the **Try It!** feature. You'll need an [API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
+- Neon Pro Plan users can temporarily set a compute's **Suspend compute after a period of inactivity** setting to 1 second to initiate a restart (the default setting is 5 minutes). See [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console to see if your compute endpoint restarted. Look for `suspend_compute` and `start_compute` actions.
+
 ## Delete a compute endpoint
 
 Deleting a compute endpoint is a permanent action.
