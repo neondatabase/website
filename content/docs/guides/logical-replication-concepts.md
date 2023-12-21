@@ -5,13 +5,9 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Logical replication is one of those most useful features in Postgres. Do you need to move your data to a specialized business analytics platform? Want to set up an ETL pipeline from your Postgres database to a data warehouse? Want to stream data to a change data capture (CDC) ecosystem or an external Postgres database? You can do all of these things and more.
+Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or a data platform. 
 
 With logical replication, you can copy some or all of your data to a different location and continue sending updates from your source database in real-time, allowing you to maintain up-to-date copies of your data in different locations.
-
-## What is logical replication?
-
-Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or a data platform. 
 
 ## Publisher subscriber model
 
@@ -21,7 +17,7 @@ The Postgres logical replication architecture is very simple. It uses a _publish
 
 ## Enabling logical replication
 
-In Neon, you enable logical replication from the Neon Console:
+In Neon, you can enable logical replication from the Neon Console:
 
 1. Select your project in the Neon console.
 2. On the Neon **Dashboard**, select **Settings**.
@@ -37,17 +33,17 @@ SHOW wal_level;
  logical
 ```
 
-Enabling logical replication turns on the detailed logging required to ensure that each change can be accurately replicated to the subscriber. Detailed row-level changes and additional metadata are required to support the replication process. This increases the amount of data written to the Write-Ahead Log (WAL). Typically, you can expect a 10% to 30% increase in the amount of data written to the WAL, depending on the extent of write activity.
+Enabling logical replication turns on detailed logging, which is required to support the replication process. This increases the amount of data written to the Write-Ahead Log (WAL). Typically, you can expect a 10% to 30% increase in the amount of data written to the WAL, depending on the extent of write activity.
 
 ## Publications
 
 The Postgres documentation describes a [publication](https://www.postgresql.org/docs/current/logical-replication-publication.html) as a group of tables whose data changes are intended to be replicated through logical replication. It also describes a publication as a set of changes generated from a table or a group of tables. It's indeed both of these things.
 
-A particular table can be included in multiple publications if necessary. Currently, publications can only include tables within a particular schema.
+A particular table can be included in multiple publications if necessary. Currently, publications can only include tables within a single schema.
 
 Publications can specify the types of changes they replicate, which can include `INSERT`, `UPDATE`, `DELETE`, and `TRUNCATE` operations. By default, publications replicate all of these operation types. 
 
-You can create a publication for a specific table on the "publisher" database using [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html) syntax. For example, this command creates a publication named `users_publication` that will track changes made to a `users` table.
+You can create a publication for one or more on the "publisher" database using [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html) syntax. For example, this command creates a publication named `users_publication` that tracks changes made to a `users` table.
 
 ```sql
 CREATE PUBLICATION users_publication FOR TABLE users;
@@ -55,7 +51,7 @@ CREATE PUBLICATION users_publication FOR TABLE users;
 
 ## Subscriptions
 
-In PostgreSQL's logical replication framework, a subscription represents the downstream side of logical replication. It establishes a connection to the publisher and identifies the publication it intends to subscribe to. 
+A subscription represents the downstream side of logical replication. It establishes a connection to the publisher and identifies the publication it intends to subscribe to. 
 
 A single subscriber can maintain multiple subscriptions, including multiple subscriptions to the same publisher. 
 
@@ -69,7 +65,7 @@ PUBLICATION users_publication;
 
 A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication it subscribes to.
 
-## How does it work under the covers?
+## How does it work under the hood?
 
 While the publisher and subscriber model forms the surface of PostgreSQL logical replication, the underlying mechanism is driven by a few key components, described below.
 
@@ -99,15 +95,17 @@ max_replication_slots = 10
 
 ### Decoder plugins
 
-The Postgres replication architecture uses decoder plugins to decode WAL entries into a logical replication stream, making the data understandable for the subscriber. The default decoder plugin for PostgreSQL logical replication is `pgoutput`, and it's included in Postgres. You don't need to worry about installing it.
+The Postgres replication architecture uses decoder plugins to decode WAL entries into a logical replication stream, making the data understandable for the subscriber. The default decoder plugin for PostgreSQL logical replication is `pgoutput`, and it's included in Postgres by default. You don't need to worry about installing it.
 
-Neon, supports an alternative decoder plugin called `wal2json`. This decoder plugin differs from `pgoutput` in that it converts WAL data into `JSON` format, which is useful for integrating Postgres with systems and applications that work with `JSON` data. For usage examples, see [wal2json](https://github.com/eulerto/wal2json).
+Neon, supports an alternative decoder plugin called `wal2json`. This decoder plugin differs from `pgoutput` in that it converts WAL data into `JSON` format, which is useful for integrating Postgres with systems and applications that work with `JSON` data.
 
-To use this decoder plugin, you'll need to create a dedicated replication slot for it, as shown:
+To use this decoder plugin, you'll need to create a dedicated replication slot for it, as shown here:
 
 ```sql
 SELECT pg_create_logical_replication_slot('my_replication_slot', 'wal2json');
 ```
+
+For for more information about this alternative decoder plugin and how top use it, see [wal2json](https://github.com/eulerto/wal2json).
 
 ### WAL senders
 
@@ -123,6 +121,14 @@ max_wal_senders = 10
 
 ### WAL receivers
 
-On the subscriber side, WAL receivers receive the replication stream (the decoded WAL data), and apply these changes to the subscriber database. The number of WAL receivers is determined by the number of connections made by subscribers. 
+On the subscriber side, WAL receivers receive the replication stream (the decoded WAL data), and apply these changes to the subscriber. The number of WAL receivers is determined by the number of connections made by subscribers.
+
+## References
+
+- [Logical replication - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html)
+- [Publications - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-publication.html)
+- [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html)
+- [CREATE SUBSCRIPTION](https://www.postgresql.org/docs/current/sql-createsubscription.html)
+- [wal2json](https://github.com/eulerto/wal2json)
 
 <NeedHelp/>

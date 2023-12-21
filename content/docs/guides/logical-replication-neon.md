@@ -5,13 +5,13 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-This topic outlines how to manage logical replication in Neon. It provides commands for managing publications, subscriptions, and replication slots. It also includes logical replication details specific to Neon, including [known limitations](#known-limitations).
+This topic provides commands for managing publications, subscriptions, and replication slots. It also includes information about logical replication specific to Neon, including [known limitations](#known-limitations).
 
 <Admonition type="note">
 Logical replication in Neon is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the **Feedback** link inthe Neon Console or by reaching out to us on [Discord](https://t.co/kORvEuCUpJ).
 </Admonition>
 
-## Manage publications
+## Publications
 
 This section outlines how to manage **publications** in your replication setup.
 
@@ -77,17 +77,17 @@ BEGIN;
 COMMIT;
 ```
 
-## Manage subscriptions
+## Subscriptions
 
 This section outlines how to manage **subscriptions** in your replication setup.
 
 <Admonition type="note">
-Currently, you cannot create subscriptions on a Neon database. Neon can only act as a subscriber in a publisher in a replication setup. The following commands would only be run on an external Postgres database that you are using as a subscriber.
+Currently, you cannot create subscriptions on a Neon database. Neon can only act as a publisher in a replication setup. The commands in this section would only be run on an external Postgres database that you are using as a subscriber.
 </Admonition>
 
 ### Create a subscription
 
-Building on the `my_publication` example above, here’s how you can create a subscription:
+Building on the `my_publication` example in the preceding section, here’s how you can create a subscription:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription 
@@ -97,11 +97,11 @@ PUBLICATION my_publication;
 
 A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication that it subscribes to.
 
-In the example above, `my_subscription` is the subscription that connects to a publication named `my_publication`. When using a Neon database as the publisher, replace the connection details with your Neon database connection string.
+In the example above, `my_subscription` is the name of the subscription that connects to a publication named `my_publication`. In the example above, you would replace the connection details with your Neon database connection string, which you'll find in the **Connection Details** widget on the **Neon Dashboard**.
 
 ### Create a subscription with two publications
 
-This command creates a subscription that receives data from two tables:
+This command creates a subscription that receives data from two publications:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription 
@@ -113,7 +113,7 @@ A single subscriber can maintain multiple subscriptions, including multiple subs
 
 ### Create a subscription to be enabled later
 
-This command sets `enabled = false` to create a subscription without enabling it:
+This command creates a subscription with `enabled = false` so that you can enable the scription at a later time:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription 
@@ -154,9 +154,9 @@ This command drops an existing subscription:
 DROP SUBSCRIPTION my_subscription;
 ```
 
-## Manage replication slots
+## Replication slots
 
-Replication slots are created on the publisher database track replication progress, ensuring that no data in the WAL is purged before the subscriber has successfully replicated it. This mechanism serves to maintain data consistency and prevent data loss in cases of network interruption or subscriber downtime.
+Replication slots are created on the publisher database to track replication progress, ensuring that no data in the WAL is purged before the subscriber has successfully replicated it. This mechanism serves to maintain data consistency and prevent data loss in cases of network interruption or subscriber downtime.
 
 ### Create a replication slot
 
@@ -178,7 +178,7 @@ max_replication_slots = 10
 
 ### Remove a replication slot
 
-To drop a logical replication slot, you can use the `pg_drop_replication_slot()` function. If you've already created a replication slot named `my_replication_slot` using `pg_create_logical_replication_slot()`, you can drop it by executing the following SQL command:
+To drop a logical replication slot that you created, you can use the `pg_drop_replication_slot()` function. For example, if you've already created a replication slot named `my_replication_slot` using `pg_create_logical_replication_slot()`, you can drop it by executing the following SQL command:
 
 ```sql
 SELECT pg_drop_replication_slot('my_replication_slot');
@@ -188,12 +188,12 @@ This command removes the specified replication slot (`my_replication_slot` in th
 
 ## Monitoring replication
 
-To ensure that your logical replication setup is running as expected, you should monitor replication processes regularly. Postgres provides several ways to monitor replication status. One of the most useful is the [pg_stat_replication](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-VIEW) view, which displays information about each active replication connection to the publisher.
+To ensure that your logical replication setup is running as expected, you should monitor replication processes regularly. The [pg_stat_replication](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-VIEW) view displays information about each active replication connection to the publisher.
 
 ```sql
 SELECT * FROM pg_stat_replication;
 ```
-This view provides details like the state of the replication, the last received WAL location, sent location, write location, and the delay between the publisher and subscriber.
+It provides details like the state of the replication, the last received WAL location, sent location, write location, and the delay between the publisher and subscriber.
 
 Additionally, the [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html) view shows information about the current replication slots on the publisher, including their size.
 
@@ -231,11 +231,11 @@ logical
 
 ### Replication roles
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted the membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege. Roles created via SQL do not have this privilege, and the `REPLICATION` privilege cannot be granted.
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege. Roles created via SQL do not have this privilege, and the `REPLICATION` privilege cannot be granted.
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 
-<TabItem>
+<TabItem>S
 
 To create a replication role in the Neon Console:
 
@@ -289,7 +289,7 @@ WHERE rolname = '<role_name>';
 
 ### Subscriber access
 
-Generally speaking, your subscriber will need to get past any firewall or IP restrictions in order to access the publisher database. In Neon, no action is required unless you use Neon's **IP Allow** feature to limit IP addresses that can connect to Neon.
+A subscriber must be able to access the Neon database that is acting as a publisher. In Neon, no action is required unless you use Neon's **IP Allow** feature to limit IP addresses that can connect to Neon.
 
 If you use Neon's **IP Allow** feature:
 

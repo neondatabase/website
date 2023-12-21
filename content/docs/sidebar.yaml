@@ -106,6 +106,12 @@
            slug: manage/database-access
     - title: Backups
       slug: manage/backups
+    - title: Logical replication
+      items:
+         - title: Logical replication concepts
+           slug: guides/logical-replication-concepts
+         - title: Manage logical replication
+           slug: manage/logical-replication-neon
 - title: Guides
   slug: guides/guides-intro
   items:
