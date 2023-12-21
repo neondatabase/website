@@ -105,7 +105,11 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
 
     const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
 
-    return <p className={clsx(className, { 'postgres-paragraph': id })} id={id} {...props} />;
+    if (isPostgres) {
+      return <p className={clsx(className, { 'postgres-paragraph': id })} id={id} {...props} />;
+    }
+
+    return <p {...props} />;
   },
   YoutubeIframe,
   DefinitionList,

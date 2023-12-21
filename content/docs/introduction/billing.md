@@ -85,7 +85,7 @@ To estimate your own monthly _Compute time_ cost:
 
 1. Determine the compute size you require, in Compute Units (CUs).
 1. Estimate the amount of _Active time_ per month for your compute(s).
-1. Find the _Compute-time_ price for your region. The [billing rates](/docs/introduction/billing#billing-rates) table shows _Compute-time_ prices by region.
+1. Find the _Compute-time_ price for your region. The [billing rates](#billing-rates) table shows _Compute-time_ prices by region.
 1. Input the values into the _Compute time_ cost formula:
 
    ```text
