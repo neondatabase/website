@@ -9,7 +9,7 @@ isDraft: true
 Logical replication in Neon is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the **Feedback** link inthe Neon Console or by reaching out to us on [Discord](https://t.co/kORvEuCUpJ).
 </Admonition>
 
-Logical replication enables data replication from your Neon databases to a variety of external destinations, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.ß
+Logical replication enables data replication and Change Data Capture (CDC) from your Neon databases to a variety of external destinations, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.
 
 ![Neon logical replication subscribers image](/docs/guides/logical_replication_subscribers.png)
 
