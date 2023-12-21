@@ -162,20 +162,29 @@ To configure the history retention period for a project:
 
 ## Enable logical replication
 
-Neon's logical replication feature, which is currently in **Beta**, allows for replication of data to external subscribers. These subscribers might include platforms for operational data warehousing, analytical database services, real-time stream processing systems, messaging and event-streaming technologies, change data capture (CDC) ecosystems, data pipeline orchestrators, among others.
+Logical replication enables replicating data from your Neon databases to a variety of external destinations, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.
 
-<Admonition type="warning">
-Enabling logical replication results in a permanent modification of the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. This change increases the amount of data written to the WAL (Write-Ahead Logging), thereby leading to an increase in storage utilization. It's important to note that once the `wal_level` setting is changed to `logical`, it cannot be reverted.
+<Admonition type="important">
+Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
 </Admonition>
 
-To enable the logical replication for your project:
+To enable logical replication for your project:
 
 1. Select your project in the Neon console.
 2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Replication**.
+3. Select **Beta**.
 4. Click **Enable**.
 
-After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. These processes are the same as those you would perform for a standalone Postgresql environment. To get started, please refer to our [logical replication guide](/docs/guides/logical-replication-guide), which outlines the required setup procedures. 
+You can verify that logical replication is enabled by running the following query:
+
+```sql
+SHOW wal_level;
+wal_level 
+-----------
+logical
+```
+
+After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. To get started, refer to our [logical replication guides](/docs/guides/logical-replication-guide). 
 
 ### Configure IP Allow
 
