@@ -41,7 +41,7 @@ SHOW wal_level;
 
 ## Create a publication
 
-After logical replication is enabled in Neon, the next step is to create a publication for the tables that you want to replicate to Materialize. You’ll also need a user for Materialize with sufficient privileges to manage replication.
+After logical replication is enabled in Neon, the next step is to create a publication for the tables that you want to replicate to Materialize.
 
 1. From a `psql` client connected to your Neon database or from the **Neon SQL Editor**, set the [replica identity](https://www.postgresql.org/docs/current/sql-altertable.html#SQL-ALTERTABLE-REPLICA-IDENTITY) to `FULL` for each table that you want to replicate to Materialize:
 
