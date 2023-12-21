@@ -241,7 +241,7 @@ It is recommended that you create a dedicated Postgres role for replicating data
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 
-<TabItem>S
+<TabItem>
 
 To create a replication role in the Neon Console:
 
