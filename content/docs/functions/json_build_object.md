@@ -5,8 +5,7 @@ enableTableOfContents: true
 ---
 
 
-Use `json_build_object` to construct a JSON object from a set of key-value pairs, creating a JSON representation of a row or set of rows.
-
+`json_build_object` is used to construct a JSON object from a set of key-value pairs, creating a JSON representation of a row or set of rows. This has potential performance benefits compared to converting query results to JSON on the application side.
 
 Function signature:
 
@@ -29,8 +28,6 @@ Let's consider a scenario where we have a table storing information about users:
 |----|----------|-----|----------
 | 1  | John Doe |  30 | New York |
 | 2  | Jane Doe |  25 | London   |
-| 3  | John Doe |  30 | New York |
-| 4  | Jane Doe |  25 | London   |
 
 
 <!--
@@ -80,43 +77,51 @@ Returns:
 
 ### Building nested JSON objects
 
-
 Let’s say we have a table of products with an `attributes` column containing JSON data:
 
 
 **products**
 
 
-| id |    name     | price |             description              | category |                           attributes                           
-|----|-------------|-------|-------------------------------------|----------|---------------------------------------------------------------
-| 1  | T-Shirt     | 25.99 | A comfortable cotton T-Shirt        | Clothing | {"size": "Medium", "color": "Blue"}
-| 2  | Coffee Mug  | 12.99 | A ceramic mug with a funny design   | Kitchen  | {"size": "Large", "color": "White", "material": "Ceramic"}
+| id |    name    | price |            description            | category |                     attributes                    
+|----|------------|-------|-----------------------------------|----------|----------------------------------------------------
+| 1  | T-Shirt    | 25.99 | A comfortable cotton T-Shirt      | Clothing | {"size": "Medium", "color": "Blue", "rating": 4.5}
+| 2  | Coffee Mug | 12.99 | A ceramic mug with a funny design | Kitchen  | {"size": "Small", "color": "White", "rating": 3.8}
+| 3  | Sneakers   | 49.99 | Sporty sneakers for everyday use  | Footwear | {"size": "10", "color": "Black", "rating": 4.2}
 
 
 <!--
 ```sql
 CREATE TABLE products (
- id SERIAL PRIMARY KEY,
- name TEXT NOT NULL,
- price DECIMAL(5, 2) NOT NULL,
- description TEXT,
- category TEXT,
- attributes JSONB
+   id SERIAL PRIMARY KEY,
+   name TEXT NOT NULL,
+   price DECIMAL(5, 2) NOT NULL,
+   description TEXT,
+   category TEXT,
+   attributes JSON
 );
 
 
 INSERT INTO products (name, price, description, category, attributes)
-VALUES ('T-Shirt', 25.99, 'A comfortable cotton T-Shirt', 'Clothing', json_build_object(
- 'color', 'Blue',
- 'size', 'Medium'
-)),
-      ('Coffee Mug', 12.99, 'A ceramic mug with a funny design', 'Kitchen', json_build_object(
- 'material', 'Ceramic',
- 'color', 'White',
- 'size', 'Large'
-));
+VALUES
+   ('T-Shirt', 25.99, 'A comfortable cotton T-Shirt', 'Clothing', json_build_object(
+       'color', 'Blue',
+       'size', 'Medium',
+       'rating', 4.5
+   )),
+   ('Coffee Mug', 12.99, 'A ceramic mug with a funny design', 'Kitchen', json_build_object(
+       'color', 'White',
+       'size', 'Small',
+       'rating', 3.8
+   )),
+   ('Sneakers', 49.99, 'Sporty sneakers for everyday use', 'Footwear', json_build_object(
+       'color', 'Black',
+       'size', '10',
+       'rating', 4.2
+   ));
 ```
 -->
+
 
 
 Use `json_build_object` to build a nested JSON object that represents the details of individual products:
@@ -156,54 +161,7 @@ Returns:
 Combine `json_build_object` with `ORDER BY` to sort the results based on a specific attribute within the JSON structure.
 
 
-Let's consider an example with a modified version of the `products` table where each product has a `rating` attribute:
-
-
-**products**
-
-
-| id |    name    | price |            description            | category |                     attributes                    
-|----|------------|-------|-----------------------------------|----------|----------------------------------------------------
-| 1  | T-Shirt    | 25.99 | A comfortable cotton T-Shirt      | Clothing | {"size": "Medium", "color": "Blue", "rating": 4.5}
-| 2  | Coffee Mug | 12.99 | A ceramic mug with a funny design | Kitchen  | {"size": "Small", "color": "White", "rating": 3.8}
-| 3  | Sneakers   | 49.99 | Sporty sneakers for everyday use  | Footwear | {"size": "10", "color": "Black", "rating": 4.2}
-
-
-<!--
-```sql
-CREATE TABLE products_with_rating (
-   id SERIAL PRIMARY KEY,
-   name TEXT NOT NULL,
-   price DECIMAL(5, 2) NOT NULL,
-   description TEXT,
-   category TEXT,
-   attributes JSONB
-);
-
-
-INSERT INTO products_with_rating (name, price, description, category, attributes)
-VALUES
-   ('T-Shirt', 25.99, 'A comfortable cotton T-Shirt', 'Clothing', json_build_object(
-       'color', 'Blue',
-       'size', 'Medium',
-       'rating', 4.5
-   )),
-   ('Coffee Mug', 12.99, 'A ceramic mug with a funny design', 'Kitchen', json_build_object(
-       'color', 'White',
-       'size', 'Small',
-       'rating', 3.8
-   )),
-   ('Sneakers', 49.99, 'Sporty sneakers for everyday use', 'Footwear', json_build_object(
-       'color', 'Black',
-       'size', '10',
-       'rating', 4.2
-   ));
-```
--->
-
-
-Retrieve the products, building a JSON structure with `json_build_object` and ordering the results based on the `rating`:
-
+For example, you can build a JSON structure with `json_build_object` from the contents of the above `products` table, and then order the results based on `rating`.
 
 ```sql
 SELECT
@@ -262,3 +220,33 @@ Returns:
 | Kitchen  | {"total_price" : 12.99}
 | Clothing | {"total_price" : 25.99}
 
+
+## Additional considerations
+
+
+### Alternative functions
+
+
+Depending on your requirements, you might want to consider similar functions:
+
+
+- `json_object` - Builds a JSON object out of a text array.
+- `json_agg` - Aggregates values, as a JSON array.
+- `row_to_json` - Returns a row as a JSON object.
+- `json_object_agg` - Aggregates key-value pairs into a JSON object.
+
+
+### Performance
+
+
+The performance of the `json_build_object` depends on various factors including number of key-value pairs, nested levels (deeply nested objects can be more expensive to build). Consider using `JSONB` data type with `jsonb_build_object` for better performance.
+
+
+If your JSON objects have nested structures, indexing on specific paths within the nested data can be beneficial for targeted queries.
+
+
+## Resources
+
+- [PostgreSQL Documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
+
+- [PostgreSQL Documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
