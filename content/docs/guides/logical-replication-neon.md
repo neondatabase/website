@@ -186,6 +186,12 @@ SELECT pg_drop_replication_slot('my_replication_slot');
 
 This command removes the specified replication slot (`my_replication_slot` in this case) from your database. It's important to ensure that the replication slot is no longer in use or required before dropping it, as this action is irreversible and could affect replication processes relying on this slot.
 
+## Data Definition Language (DDL) operations
+
+Logical replication in Postgres primarily handles Data Manipulation Language (DML) operations like `INSERT`, `UPDATE`, and `DELETE`. However, it does not automatically replicate Data Definition Language (DDL) operations such as `CREATE TABLE`, `ALTER TABLE`, or `DROP TABLE`. This means that schema changes in the publisher database are not directly replicated to the subscriber database.
+
+Manual intervention is required to replicate DDL changes. This can be done by applying the DDL changes separately in both the publisher and subscriber databases or by using third-party tools that can handle DDL replication.
+
 ## Monitoring replication
 
 To ensure that your logical replication setup is running as expected, you should monitor replication processes regularly. The [pg_stat_replication](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-VIEW) view displays information about each active replication connection to the publisher.
@@ -337,7 +343,7 @@ Neon is working toward removing the following limitations in future releases:
 
 - A Neon database can only act as a _publisher_ in a replication setup. Creating a subscription on a Neon database is not permitted. This means that you cannot replicate data from one Neon database to another or from one Neon project to another.
 - Only your default Neon Postgres role and roles created via the Neon Console, CLI, or API have the `REPLICATION` privilege. This privilege cannot be granted to other roles. You can expect this limitation to be lifted in a future release. Roles created via SQL do not have the `REPLICATION` privilege, and this privilege cannot be granted.
-- You cannot use `CREATE PUBLICATION my_publication FOR ALL TABLES;` syntax in Neon. Specifying `ALL TABLES` requires the Postgres `superuser` privilege, which is not available on Neon. Instead, you can specify multiple tables using `CREATE PUBLICATION my_pub FOR TABLE <table1>, <table2>;` syntax.
+- You cannot use `CREATE PUBLICATION my_publication FOR ALL TABLES` syntax in Neon. Specifying `ALL TABLES` requires the Postgres `superuser` privilege, which is not available on Neon. Instead, you can specify multiple tables using `CREATE PUBLICATION my_pub FOR TABLE <table1>, <table2>` syntax.
 - The `max_slot_wal_keep_size` parameter is set to 1Gb instead of `-1` (no limit). See [Publisher settings](#publisher-settings).
 
 ## References
