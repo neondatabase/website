@@ -2,7 +2,7 @@
 title: IP Allow
 subtitle: Limit database access to only trusted IP addresses
 enableTableOfContents: true
-updatedOn: '2023-12-21T14:51:31.032Z'
+updatedOn: '2023-12-22T16:01:34.806Z'
 ---
 
 Neon's IP Allow feature, available with the [Neon Pro Plan](/docs/introduction/pro-plan), ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). 
