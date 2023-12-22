@@ -1,6 +1,7 @@
 'use client';
 
 import * as Slider from '@radix-ui/react-slider';
+import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
@@ -87,7 +88,7 @@ const thumbVariants = {
   },
 };
 
-const Calculator = () => {
+const Calculator = ({ className }) => {
   const [isAdvanced, setIsAdvanced] = useState(false);
   const [computeUnits, setComputeUnits] = useState(1);
   const [activeTime, setActiveTime] = useState(COMPUTE_TIME_VALUES.default);
@@ -146,10 +147,7 @@ const Calculator = () => {
   };
 
   return (
-    <section
-      id="calc"
-      className="safe-paddings mb-40 mt-[17.25rem] xl:mb-36 xl:mt-40 lg:mb-16 lg:mt-32 md:my-20"
-    >
+    <section className={clsx('safe-paddings', className)} id="calc">
       <Container size="medium">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <Heading
@@ -551,3 +549,7 @@ Tooltip.propTypes = {
 };
 
 export default Calculator;
+
+Calculator.propTypes = {
+  className: PropTypes.string,
+};

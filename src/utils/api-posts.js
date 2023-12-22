@@ -235,6 +235,36 @@ const getWpBlogPage = async () => {
                   }
                 }
               }
+              aiFeaturedPosts {
+                post {
+                  ... on Post {
+                    title(format: RENDERED)
+                    slug
+                    date
+                    pageBlogPost {
+                      largeCover {
+                        altText
+                        mediaItemUrl
+                      }
+                      authors {
+                        author {
+                          ... on PostAuthor {
+                            title
+                            postAuthor {
+                              role
+                              url
+                              image {
+                                altText
+                                mediaItemUrl
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
               videos {
                 post {
                   ... on Video {

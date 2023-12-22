@@ -24,7 +24,7 @@ const TopBar = () => {
         sendSegmentEvent('click_announcement_banner');
       }}
     >
-      <span className="mr-4 py-1 truncate pr-4 text-sm font-medium border-r border-black border-opacity-20 sm:border-none sm:mr-0 sm:pr-0">
+      <span className="mr-4 truncate border-r border-black border-opacity-20 py-1 pr-4 text-sm font-medium sm:mr-0 sm:border-none sm:pr-0">
         Neon is now on Discord 🚀
       </span>
       <span className="inline-flex items-center text-sm font-bold sm:hidden">

@@ -184,6 +184,10 @@ export default {
           text: 'Cookie Policy',
           to: LINKS.cookiePolicy,
         },
+        {
+          text: 'Business Information',
+          to: LINKS.businessInformation,
+        },
       ],
     },
   ],

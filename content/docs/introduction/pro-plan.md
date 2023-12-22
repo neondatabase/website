@@ -3,7 +3,7 @@ title: Neon Pro Plan
 subtitle: Learn about the advantages of upgrading to the Neon Pro Plan
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-12-07T14:02:47.486Z'
+updatedOn: '2023-12-20T16:07:46.080Z'
 ---
 
 The Neon Pro Plan plan is intended for users who have completed their evaluation of Neon on the Neon Free Tier and are ready to transition to a production-level plan with higher limits and advanced features.
@@ -34,6 +34,7 @@ The Neon Pro Plan comes with the following advanced features, and we plan to add
 - **Configurable Auto-suspend:** The Neon Free Tier automatically suspends computes after 5 minutes of inactivity. With the Neon Neon Pro Plan, you can increase or decrease this time period, or you can disable the Auto-suspend feature entirely. A shorter delay, such as 60 seconds, can potentially reduce compute costs. A longer delay keeps your compute active for longer intervals, reducing the number of cold starts. To prevent cold starts entirely, in cases where even a few seconds delay is too much, you can disable the Auto-suspend feature entirely so that your compute is always active. The Auto-suspend feature is configured in the Neon Console. For instructions, see [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
 - **Project sharing:** The _Project sharing_ feature lets you share your Neon projects with other Neon users. Project sharing is managed on the **Settings** page in the Neon Console. Simply add the email account of the user you want to share your project with. Projects can be shared with any Neon user, including Neon Free Tier users. Usage is applied to the project owner's Neon account. For instructions, see [Share a project](/docs/manage/projects#share-a-project).
 - **Read replicas:** Neon's read replica feature enhances scalability and performance by allowing you to create read-only compute instances that operate on the same data as your read-write computes. With this feature, you can offload analytics or reporting queries, efficiently distribute read requests to achieve higher throughput, or provide read-only data access to certain users or applications. For more information, see [Read replicas](/docs/introduction/read-replicas).
+- **IP Allow:** Control access to the branch where your database resides. Any IP address not on the allowlist is automatically blocked, ensuring that only authorized IP addresses can access your data. The allowlist can be applied to all branches (the default) or to your [primary branch](#primary-branch) only. For more information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
 ### Added support
 
@@ -41,7 +42,7 @@ In addition to the [community forum](https://community.neon.tech/) and the abili
 
 ## How does billing work?
 
-The Neon Pro Plan bills for usage monthly. Please refer to our [Billing metrics](/docs/introduction/billing) page for information about metrics and rates. To estimate monthly costs, try the [pricing calculator](https://neon.tech/pricing#calc) on our [Pricing](https://neon.tech/pricing) page or the [Pro Plan Cost Estimator](/docs/introduction/billing#pro-plan-cost-estimator) in the Neon Console. If you still have questions or need help estimating costs, please reach out to our [Sales](https://neon.tech/contact-sales) team. We're ready to help.
+The Neon Pro Plan bills for usage monthly. Please refer to our [Billing metrics](/docs/introduction/billing) page for information about metrics and rates. To estimate monthly costs, try the [pricing calculator](/calculator) or the [Pro Plan Cost Estimator](/docs/introduction/billing#pro-plan-cost-estimator) in the Neon Console. If you still have questions or need help estimating costs, please reach out to our [Sales](/contact-sales) team. We're ready to help.
 
 ## How do I upgrade to Pro?
 

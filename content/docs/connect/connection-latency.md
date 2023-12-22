@@ -3,7 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-24T18:56:54.976Z'
+updatedOn: '2023-12-20T16:07:46.077Z'
 ---
 
 Neon's _Auto-suspend_ feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute instance transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state takes anywhere from 500 ms to a few seconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -48,7 +48,7 @@ Consider combining this strategy with Neon's _Autoscaling_ feature (available wi
 
 ![Connection warmup Auto-suspend and Autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
-To determine what an "always-on" compute would cost per month, please refer to our [Billing](/docs/introduction/billing) documentation or the [pricing calculator](https://neon.tech/pricing#calc) on our [Pricing](https://neon.tech/pricing) page.
+To determine what an "always-on" compute would cost per month, please refer to our [Billing](/docs/introduction/billing) documentation or the [pricing calculator](/calculator).
 
 For Autoscaling configuration instructions, see [Compute size and Autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 

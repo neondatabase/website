@@ -74,18 +74,20 @@ const Post = ({
             )}
             <Content className="mt-5" content={content} />
             {lastUpdatedOn && (
-              <p className="text-gray-new-40 text-sm dark:text-gray-new-80 mt-10">
+              <p className="mt-10 text-sm text-gray-new-40 dark:text-gray-new-80">
                 Last updated on <time dateTime={updatedOn}>{lastUpdatedOn}</time>
               </p>
             )}
           </article>
         )}
 
-        <PreviousAndNextLinks
-          previousLink={previousLink}
-          nextLink={nextLink}
-          basePath={DOCS_BASE_PATH}
-        />
+        {!isReleaseNotes && (
+          <PreviousAndNextLinks
+            previousLink={previousLink}
+            nextLink={nextLink}
+            basePath={DOCS_BASE_PATH}
+          />
+        )}
         <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
       </div>
 

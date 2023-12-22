@@ -154,7 +154,7 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
                   <Component className={clsx('my-0', imgClassName)} {...otherImgProps} />
                   {caption && (
                     <figcaption
-                      className={clsx('flex text-center justify-center', captionClassName)}
+                      className={clsx('flex justify-center text-center', captionClassName)}
                       {...otherCaptionProps}
                     >
                       {domToReact(caption)}
