@@ -37,7 +37,6 @@ The following table lists Neon Postgres parameter settings that may differ from 
 | fsync           | off     | Neon syncs data to the Neon Storage Engine to store your data safely and reliably |
 | max_connections |         | The value depends on compute size. Set to 100 for Neon.          |
 | shared_buffers  |         | The value depends on compute size                                                 |
-| wal_level       | replica | Logical replication is currently not supported                                    |
 
 <Admonition type="note">
 You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
