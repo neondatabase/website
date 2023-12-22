@@ -9,6 +9,10 @@ const extractText = (children) => {
     return children;
   }
 
+  if (typeof children === 'object' && children.props) {
+    return extractText(children.props.children);
+  }
+
   if (Array.isArray(children)) {
     const text = children.reduce((acc, child) => {
       if (typeof child === 'string') {
