@@ -50,7 +50,7 @@ To add the integration:
 1. Navigate to the [Neon Vercel Integration page](https://vercel.com/integrations/neon), and click **Add integration**.
    ![Add integration](/docs/guides/vercel_add_integration.png)
 1. Select a Vercel Account to add the integration to.
-1. Select the Vercel project to which the integration will be added.
+1. Select the Vercel projects to which the integration will be added. You can select **All Projects** to make the integration available for use with multiple Vercel projects, or you can select **Specific Projects** to make it available for a selected project, but be aware that you can only connect one Vercel project to one Neon project and vice versa. 
 1. Review the permissions required by the integration, and click **Add Integration**.
 1. In the **Integrate Neon** dialog:
     1. Select a Vercel project.
