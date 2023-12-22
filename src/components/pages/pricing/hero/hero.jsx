@@ -16,7 +16,7 @@ import sendSegmentEvent from 'utils/send-segment-event';
 const items = [
   {
     type: 'Free Tier',
-    price: 'Start free',
+    price: '$0 <span>/month</span>',
     description:
       'A generous free tier with essential features perfect for prototypes and personal projects.',
     features: [
@@ -33,7 +33,7 @@ const items = [
   },
   {
     type: 'Pro',
-    price: 'Pay as you go',
+    price: 'From $3 <span>/month</span>',
     description:
       'A pro plan with features for production. Scales from $0 based on compute & storage usage.',
     features: [
@@ -52,7 +52,7 @@ const items = [
   },
   {
     type: 'Enterprise',
-    price: 'Custom plans',
+    price: 'Custom',
     description:
       'Custom volume-based plans for medium to large teams, database fleets, and resale.',
     features: [
@@ -159,9 +159,10 @@ const Hero = () => {
                     <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)] xl:text-lg">
                       {type}
                     </span>
-                    <h2 className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4">
-                      {price}
-                    </h2>
+                    <h2
+                      className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4 [&_span]:text-[28px] [&_span]:font-light [&_span]:-tracking-[0.06em] [&_span]:text-gray-new-50"
+                      dangerouslySetInnerHTML={{ __html: price }}
+                    />
                     <AnimatedButton
                       className="mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-7 sm:max-w-none"
                       isAnimated={activeItemIndex === index}
