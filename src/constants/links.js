@@ -32,6 +32,7 @@ export default {
   subprocessors: '/subprocessors',
   privacyGuide: '/privacy-guide',
   cookiePolicy: '/cookie-policy',
+  businessInformation: '/business-info',
   partners: '/partners',
   cliReference: '/docs/reference/neon-cli',
   ai: '/ai',
