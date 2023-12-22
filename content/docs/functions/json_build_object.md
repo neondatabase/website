@@ -50,8 +50,6 @@ VALUES ('John Doe', 30, 'New York'),
 Use `json_build_object` to create a JSON structure with user information:
 
 
-
-
 ```sql
 SELECT id,
  json_build_object(
@@ -83,13 +81,13 @@ Let’s say we have a table of products with an `attributes` column containing J
 
 **products**
 
-
+```text
 | id |    name    | price |            description            | category |                     attributes                    
 |----|------------|-------|-----------------------------------|----------|----------------------------------------------------
 | 1  | T-Shirt    | 25.99 | A comfortable cotton T-Shirt      | Clothing | {"size": "Medium", "color": "Blue", "rating": 4.5}
 | 2  | Coffee Mug | 12.99 | A ceramic mug with a funny design | Kitchen  | {"size": "Small", "color": "White", "rating": 3.8}
 | 3  | Sneakers   | 49.99 | Sporty sneakers for everyday use  | Footwear | {"size": "10", "color": "Black", "rating": 4.2}
-
+```
 
 {/*
 ```sql
@@ -248,5 +246,4 @@ If your JSON objects have nested structures, indexing on specific paths within t
 ## Resources
 
 - [PostgreSQL Documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
-
 - [PostgreSQL Documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
