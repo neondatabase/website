@@ -11,7 +11,7 @@ With key features like [autoscaling](/docs/guides/autoscaling-guide), [auto-susp
 
 ![Compute metrics graph](/docs/introduction/compute-metrics2.png)
 
-You can see how your billed compute time scales between your minimum and maximum CPU settings: compute flatlines at your max level, and never drops below your minimum setting. With autosuspend, you are not charged at all during inactive periods. For projects with inconsitent demand, this can save significant compute costs.
+You can see how your the compute time that you get billed for scales between your minimum and maximum CPU settings: compute time never rises above your max level ,and it never drops below your minimum setting. With autosuspend, you are not charged at all during inactive periods. For projects with inconsitent demand, this can save significant compute costs.
 
 For a more detailed breakdown of compute cost metrics, see [compute time](docs/introduction/billing#compute-time).
 
@@ -21,7 +21,7 @@ Neon storage uses copy-on-write branching to keep storage size as small as possi
 
 Storage costs are based on the size of your project and how long it is stored.
 
-![Storage calculation](/docs/introduction/storage_calc.png)
+![Storage calculation](/docs/introduction/storage_calc.jpg)
 
 For a detailed explanation about storage costs, see [Project storage](/docs/introduction/billing#project-storage).
 
@@ -29,6 +29,6 @@ For a detailed explanation about storage costs, see [Project storage](/docs/intr
 
 The amount of data that you write to storage or transfer out of Neon (for example, to setup an offline database backup) also contributes to your costs. In typical projects, these costs add up to less than 5% per month.
 
-![Data write and transfer](/docs/introduction/data_write_transfer.png)
+![Data write and transfer](/docs/introduction/neon_boundary.jpg)
 
-For more detail on these metrcis, see [Written data](docs/introduction/billing#written-data) and [Data transfer](/docs/introduction/billing#data-transfer).
+For more detail on these metrics, see [Written data](docs/introduction/billing#written-data) and [Data transfer](/docs/introduction/billing#data-transfer).
