@@ -15,7 +15,7 @@ import sendSegmentEvent from 'utils/send-segment-event';
 
 const items = [
   {
-    type: 'Free Tier',
+    type: 'Free',
     price: '$0 <span>/month</span>',
     description:
       'A generous free tier with essential features perfect for prototypes and personal projects.',
@@ -35,7 +35,7 @@ const items = [
     type: 'Pro',
     price: 'From $3 <span>/month</span>',
     description:
-      'A pro plan with features for production. Scales from $0 based on compute & storage usage.',
+      'A pro plan with all the features for production. Only pay for the compute & storage used.',
     features: [
       { title: 'Unlimited projects, branches, databases' },
       { title: 'Configurable compute, unlimited storage' },
@@ -127,9 +127,9 @@ const Hero = () => {
                 )}
                 style={{
                   '--accentColor':
-                    type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
+                    type === 'Free' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
                   '--hoverColor':
-                    type === 'Free Tier' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
+                    type === 'Free' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
                 }}
                 key={index}
                 onPointerEnter={() => {
