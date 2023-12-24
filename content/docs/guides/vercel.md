@@ -134,12 +134,13 @@ Please be aware that the Neon Vercel Integration connects one Vercel project to 
 1. Ensure that the Neon Vercel Integration that you added previously has access to the Vercel project.
    1. On the Vercel Dashboard, select **Integrations**.
    1. Find the Neon Postgres integration, and select **Manage**.
-   1. On the Neon Postgres integration page, select **Manage Access** and make sure that the Neon integration has access to the Vercel project. You can do so by granting access to **All Projects** or by selecting **Specific Projects** and choosing a Vercel project. If you previously granted access to all projects, no change is necessary.
+   1. On the Neon Postgres integration page, select **Manage Access**
+   1. On the **Manage Access for Neon Postgres** modal, make sure that the Neon integration has access to the Vercel project. You can do so by selecting **Specific Projects** and choosing a Vercel project or by granting access to **All Projects**. If you previously granted access to all projects, no change is necessary.
    1. Click **Save**.
 1. Navigate to this URL: [https://vercel.com/integrations/neon/new](https://vercel.com/integrations/neon/new).
 1. Follow the prompts. When you reach the **Integrate Neon** dialog, select the Vercel project that you want to add the integration to. Vercel projects that are already integrated with Neon are identified as `CONNECTED`.
    ![Confirm integration settings](/docs/guides/vercel_add_new_project.png)
-1. Complete the steps outlined in [Add the Neon integration](#add-the-neon-vercel-integration).
+1. Complete the steps outlined in [Add the Neon integration](#add-the-neon-vercel-integration). When you select a Neon projectto connect to, be sure to select one that is not already connected to a Vercel project, as you cannot connect one Vercel project to multiple Neon projects or vice versa. 
 
 ## Troubleshoot connection issues
 
