@@ -62,7 +62,7 @@ const Select = (props) => {
     }
 
     if (windowWidth < MOBILE_WIDTH) {
-      return 20;
+      return 64;
     }
 
     return -(windowHeight - 975) / 2; // 975px - max height of the section
