@@ -60,13 +60,13 @@ To add the integration:
 
           The root branch of your Neon project is preselected as your **Production branch**.
 
-          The **Create a branch for your development environment** creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a copy-on-write clone of your production branch that you can modify without affecting your production branch.
+          The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a copy-on-write clone of your production branch that you can modify without affecting your production branch.
 
           When you finish making selections, click **Continue**.
     1. Confirm the integration settings. This allows the integration to:
-        - Set environment variables for your Vercel project's production, development, and preview environments.
-        - Create database branches for preview deployments.
-        - Create a development branch for your Vercel development environment.
+      - Set environment variables for your Vercel project's production, development, and preview environments.
+      - Create database branches for preview deployments.
+      - Create a development branch for your Vercel development environment.
       ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
     1. Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
 
@@ -94,7 +94,7 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
 
    ```bash
    cd myapp
-   git checkout -b myapp-update-1
+   git checkout -b myapp-update
    ```
 
 2. Make changes to your application on the local branch.
@@ -134,8 +134,8 @@ Please be aware that the Neon Vercel Integration connects one Vercel project to 
 1. Ensure that the Neon Vercel Integration that you added previously has access to the Vercel project.
    1. On the Vercel Dashboard, select **Integrations**.
    1. Find the Neon Postgres integration, and select **Manage**.
-   1. On the Neon Postgres integration page, select **Manage Access**
-   1. On the **Manage Access for Neon Postgres** modal, make sure that the Neon integration has access to the Vercel project. You can do so by selecting **Specific Projects** and choosing a Vercel project or by granting access to **All Projects**. If you previously granted access to all projects, no change is necessary.
+   1. On the Neon Postgres integration page, select **Manage Access**.
+   1. On the **Manage Access for Neon Postgres** modal, make sure that the Neon integration has access to the Vercel project. You can do so by selecting **Specific Projects** and choosing a Vercel project, or by granting access to **All Projects**. If you previously granted access to all projects, no change is necessary.
    1. Click **Save**.
 1. Navigate to this URL: [https://vercel.com/integrations/neon/new](https://vercel.com/integrations/neon/new).
 1. Follow the prompts. When you reach the **Integrate Neon** dialog, select the Vercel project that you want to add the integration to. Vercel projects that are already integrated with Neon are identified as `CONNECTED`.
@@ -146,20 +146,24 @@ Please be aware that the Neon Vercel Integration connects one Vercel project to 
 
 If the environment variables configured by the Neon integration already exist, you may encounter the following error due to an existing integration that sets one or more of the same environment variables.
 
+<CodeBlock shouldWrap>
+
 ```text
 Failed to set environment variables in Vercel. Please make sure that the following environment variables are not set: PGHOST, PGUSER, PGDATABASE, PGPASSWORD, DATABASE_URL
 ```
 
+</CodeBlock>
+
 In this case, you can remove or rename the existing environment variables in your Vercel project settings and retry the Neon integration.
 
 1. From the Vercel project page, select **Settings**.
-1. Locate the environment variables required by the Neon integration and remove or rename them.
+2. Locate the environment variables required by the Neon integration and remove or rename them.
 
-<Admonition type="note">
-Alternatively, you can remove the conflicting integration, assuming it no longer required. This may be a previous Neon integration or another integration. Removing the integration removes the variables set by the integration.
-</Admonition>
+   <Admonition type="note">
+   Alternatively, you can remove the conflicting integration, assuming it no longer required. This may be a previous Neon integration or another integration. Removing the integration removes the variables set by the integration.
+   </Admonition>
 
-1. Try adding the Neon integration again. See [Add the Neon Vercel Integration](#add-the-neon-vercel-integration).
+3. Try adding the Neon integration again. See [Add the Neon Vercel Integration](#add-the-neon-vercel-integration).
 
 ## Manage the Neon Vercel Integration
 
@@ -168,8 +172,8 @@ To view integration permissions, manage integration access, or remove the Neon i
 1. On the Vercel dashboard, select **Settings** > **Integrations**.
 1. Find the **Neon** integration and select **Manage**.
 
-<Admonition type="note">
-Removing the Neon Vercel Integration removes the Vercel environment variables set by the integration. It does not remove Neon branches created by the integration. To remove Neon branches, see [Delete a branch](/docs/manage/branches#delete-a-branch).
-</Admonition>
+   <Admonition type="note">
+   Removing the Neon Vercel Integration removes the Vercel environment variables set by the integration. It does not remove Neon branches created by the integration. To remove Neon branches, see [Delete a branch](/docs/manage/branches#delete-a-branch).
+   </Admonition>
 
 <NeedHelp/>
