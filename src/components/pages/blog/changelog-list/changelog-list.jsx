@@ -6,7 +6,7 @@ import getChangelogCategoryFromSlug from 'utils/get-changelog-category-from-slug
 import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
 
 const ChangelogList = ({ items }) => (
-  <section className="release-notes-list -mx-10 rounded-xl bg-black-new px-10 pb-10 pt-7 2xl:mx-0 xl:px-8 xl:py-6 md:px-6">
+  <section className="changelog-list -mx-10 rounded-xl bg-black-new px-10 pb-10 pt-7 2xl:mx-0 xl:px-8 xl:py-6 md:px-6">
     <div className="flex items-center justify-between">
       <h2 className="text-2xl leading-none tracking-tighter md:text-xl">Changelog</h2>
       <Link

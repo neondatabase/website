@@ -1,14 +1,14 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
+import ReleaseNoteList from 'components/pages/changelog/changelog-list';
+import Hero from 'components/pages/changelog/hero';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import DocFooter from 'components/pages/doc/doc-footer';
 import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
 import TableOfContents from 'components/pages/doc/table-of-contents';
-import Hero from 'components/pages/release-notes/hero';
-// import Pagination from 'components/pages/release-notes/pagination';
-import ReleaseNoteList from 'components/pages/release-notes/release-note-list';
-// import ReleaseNotesFilter from 'components/pages/release-notes/release-notes-filter';
+// import Pagination from 'components/pages/changelog/pagination';
+// import ChangelogFilter from 'components/pages/changelog/changelog-filter';
 import Content from 'components/shared/content';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
@@ -19,7 +19,7 @@ const Changelog = ({
 }) => (
   <>
     <Hero />
-    {/* <ReleaseNotesFilter currentSlug={currentSlug} /> */}
+    {/* <ChangelogFilter currentSlug={currentSlug} /> */}
     <ReleaseNoteList className="mt-4" items={items} />
     {/* {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />} */}
   </>

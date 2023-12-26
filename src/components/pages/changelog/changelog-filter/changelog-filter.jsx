@@ -10,7 +10,7 @@ import DriversIcon from 'icons/gear-icon.inline.svg';
 import StorageIcon from 'icons/storage-icon.inline.svg';
 import getChangelogCategoryFromSlug from 'utils/get-changelog-category-from-slug';
 
-export const RELEASE_NOTES_CATEGORIES = [
+export const CHANGELOG_CATEGORIES = [
   {
     icon: StorageIcon,
     slug: 'storage-and-compute',
@@ -33,7 +33,7 @@ export const RELEASE_NOTES_CATEGORIES = [
   },
 ];
 
-const ReleaseNotesFilter = ({ currentSlug }) => (
+const ChangelogFilter = ({ currentSlug }) => (
   <section className="mb-10 mt-4 flex items-center sm:flex-col sm:items-start">
     <h3 className="shrink-0 self-start text-base font-semibold text-black dark:text-white ">
       Filter by category:
@@ -53,7 +53,7 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
           </span>
         </Link>
       </li>
-      {RELEASE_NOTES_CATEGORIES.map(({ slug, icon: Icon }, index) => {
+      {CHANGELOG_CATEGORIES.map(({ slug, icon: Icon }, index) => {
         const isCategoryActive = currentSlug === slug;
         const { capitalisedCategory } = getChangelogCategoryFromSlug(slug);
 
@@ -86,8 +86,8 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
   </section>
 );
 
-ReleaseNotesFilter.propTypes = {
+ChangelogFilter.propTypes = {
   currentSlug: PropTypes.string,
 };
 
-export default ReleaseNotesFilter;
+export default ChangelogFilter;

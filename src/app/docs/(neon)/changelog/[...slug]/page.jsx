@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
+import { CHANGELOG_CATEGORIES } from 'components/pages/changelog/changelog-filter';
+import Hero from 'components/pages/changelog/hero';
 import Post from 'components/pages/doc/post';
-import Hero from 'components/pages/release-notes/hero';
-import { RELEASE_NOTES_CATEGORIES } from 'components/pages/release-notes/release-notes-filter';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
@@ -21,7 +21,7 @@ import getMetadata from 'utils/get-metadata';
 export async function generateStaticParams() {
   const changelogPosts = await getAllChangelogPosts();
 
-  return [...RELEASE_NOTES_CATEGORIES, ...changelogPosts].map(({ slug }) => {
+  return [...CHANGELOG_CATEGORIES, ...changelogPosts].map(({ slug }) => {
     const slugsArray = slug.split('/');
 
     return {
