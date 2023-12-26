@@ -3,7 +3,7 @@ import Rss from 'rss';
 
 import { CHANGELOG_BASE_PATH } from 'constants/docs';
 import { CHANGELOG_DIR_PATH, getAllChangelogPosts, getPostBySlug } from 'utils/api-docs';
-import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
+import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
 
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
@@ -33,7 +33,7 @@ export async function GET() {
     const category = slug.slice(slug.lastIndexOf('-') + 1);
     const capitalisedCategory = category.charAt(0).toUpperCase() + category.slice(1);
 
-    const { datetime } = getReleaseNotesDateFromSlug(slug);
+    const { datetime } = getChangelogDateFromSlug(slug);
 
     feed.item({
       id: url,

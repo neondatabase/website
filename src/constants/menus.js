@@ -84,7 +84,7 @@ export default {
         },
 
         // {
-        //   text: 'Release notes',
+        //   text: 'Changelog',
         //   to: LINKS.changelog,
         // },
       ],

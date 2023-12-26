@@ -1,4 +1,4 @@
-module.exports = function getReleaseNotesCategoryFromSlug(slug) {
+module.exports = function getChangelogCategoryFromSlug(slug) {
   let category = slug.slice(slug.lastIndexOf('-') + 1);
   let capitalisedCategory = category.charAt(0).toUpperCase() + category.slice(1);
 

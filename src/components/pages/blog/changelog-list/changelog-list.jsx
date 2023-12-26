@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
-import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
-import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
+import getChangelogCategoryFromSlug from 'utils/get-changelog-category-from-slug';
+import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
 
 const ChangelogList = ({ items }) => (
   <section className="release-notes-list -mx-10 rounded-xl bg-black-new px-10 pb-10 pt-7 2xl:mx-0 xl:px-8 xl:py-6 md:px-6">
@@ -20,8 +20,8 @@ const ChangelogList = ({ items }) => (
     </div>
     <ul className="mt-6 grid grid-cols-4 gap-x-[50px] border-t border-gray-new-20/60 pt-8 xl:grid-cols-3 lg:mt-6 lg:grid-cols-2 md:mt-5 md:grid-cols-1 md:gap-y-7 md:pt-6">
       {items.map(({ slug, title }, index) => {
-        const { capitalisedCategory: category } = getReleaseNotesCategoryFromSlug(slug);
-        const { datetime, label } = getReleaseNotesDateFromSlug(slug);
+        const { capitalisedCategory: category } = getChangelogCategoryFromSlug(slug);
+        const { datetime, label } = getChangelogDateFromSlug(slug);
 
         return (
           <li

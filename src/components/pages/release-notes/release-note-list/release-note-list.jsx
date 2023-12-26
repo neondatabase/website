@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
 import LoadMorePosts from 'components/shared/load-more-posts';
-import generateReleaseNotePath from 'utils/generate-release-note-path';
-import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
+import generateChangelogPath from 'utils/generate-changelog-path';
+import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
 
-const ReleaseNoteList = ({ className, items }) => (
+const ChangelogList = ({ className, items }) => (
   <div className={clsx('sm:space-y-7', className)}>
     <LoadMorePosts className="mt-14" defaultCountPosts={10} countToAdd={10} isChangelog>
       {items.map(({ slug, content }, index) => {
-        const { datetime, label } = getReleaseNotesDateFromSlug(slug);
-        const changelogPath = generateReleaseNotePath(slug);
+        const { datetime, label } = getChangelogDateFromSlug(slug);
+        const changelogPath = generateChangelogPath(slug);
 
         return (
           <article className="group flex first:mt-0 lg:flex-col lg:space-y-3" key={index}>
@@ -44,7 +44,7 @@ const ReleaseNoteList = ({ className, items }) => (
   </div>
 );
 
-ReleaseNoteList.propTypes = {
+ChangelogList.propTypes = {
   className: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
@@ -54,4 +54,4 @@ ReleaseNoteList.propTypes = {
   ).isRequired,
 };
 
-export default ReleaseNoteList;
+export default ChangelogList;

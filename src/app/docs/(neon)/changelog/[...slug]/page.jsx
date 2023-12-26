@@ -13,10 +13,10 @@ import {
 } from 'constants/docs';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import { getAllChangelogPosts, getPostBySlug, CHANGELOG_DIR_PATH } from 'utils/api-docs';
+import getChangelogCategoryFromSlug from 'utils/get-changelog-category-from-slug';
+import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
 import getExcerpt from 'utils/get-excerpt';
 import getMetadata from 'utils/get-metadata';
-import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
-import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 
 export async function generateStaticParams() {
   const changelogPosts = await getAllChangelogPosts();
@@ -38,12 +38,12 @@ export async function generateMetadata({ params }) {
   let socialPreviewTitle = '';
   const currentSlug = slug.join('/');
   const isChangelogPage = CHANGELOG_SLUG_REGEX.test(currentSlug);
-  const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
+  const { capitalisedCategory } = getChangelogCategoryFromSlug(currentSlug);
   label = 'Changelog';
   description = `The latest product updates from Neon`;
 
   if (isChangelogPage) {
-    const { label: date } = getReleaseNotesDateFromSlug(currentSlug);
+    const { label: date } = getChangelogDateFromSlug(currentSlug);
     const { content } = getPostBySlug(currentSlug, CHANGELOG_DIR_PATH);
     label = `${capitalisedCategory} changelog ${date}`;
     socialPreviewTitle = `Changelog - ${date}`;
@@ -65,8 +65,8 @@ export async function generateMetadata({ params }) {
 }
 
 const ChangelogPost = async ({ currentSlug }) => {
-  const { datetime, label } = getReleaseNotesDateFromSlug(currentSlug);
-  const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
+  const { datetime, label } = getChangelogDateFromSlug(currentSlug);
+  const { capitalisedCategory } = getChangelogCategoryFromSlug(currentSlug);
 
   const { content } = getPostBySlug(currentSlug, CHANGELOG_DIR_PATH);
 
@@ -125,7 +125,7 @@ const ChangelogPost = async ({ currentSlug }) => {
   );
 };
 
-const ReleaseNoteCategoryPage = ({ currentSlug, currentChangelogPosts }) => {
+const ChangelogCategoryPage = ({ currentSlug, currentChangelogPosts }) => {
   const fileOriginPath = process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH;
 
   return (
@@ -143,20 +143,20 @@ const ReleaseNoteCategoryPage = ({ currentSlug, currentChangelogPosts }) => {
   );
 };
 
-export default async function ReleaseNotesPost({ params }) {
+export default async function ChangelogPostPage({ params }) {
   const currentSlug = params?.slug.join('/');
   const isChangelogPage = CHANGELOG_SLUG_REGEX.test(currentSlug);
   const allChangelogPosts = await getAllChangelogPosts();
   const currentChangelogPosts = allChangelogPosts.filter((item) => {
     const { slug } = item;
-    const { category } = getReleaseNotesCategoryFromSlug(slug);
+    const { category } = getChangelogCategoryFromSlug(slug);
 
     return category === currentSlug;
   });
   return isChangelogPage ? (
     <ChangelogPost currentSlug={currentSlug} />
   ) : (
-    <ReleaseNoteCategoryPage
+    <ChangelogCategoryPage
       currentSlug={currentSlug}
       currentChangelogPosts={currentChangelogPosts}
     />

@@ -8,7 +8,7 @@ import ConsoleIcon from 'icons/console-icon.inline.svg';
 import DocsIcon from 'icons/docs-icon.inline.svg';
 import DriversIcon from 'icons/gear-icon.inline.svg';
 import StorageIcon from 'icons/storage-icon.inline.svg';
-import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
+import getChangelogCategoryFromSlug from 'utils/get-changelog-category-from-slug';
 
 export const RELEASE_NOTES_CATEGORIES = [
   {
@@ -55,7 +55,7 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
       </li>
       {RELEASE_NOTES_CATEGORIES.map(({ slug, icon: Icon }, index) => {
         const isCategoryActive = currentSlug === slug;
-        const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(slug);
+        const { capitalisedCategory } = getChangelogCategoryFromSlug(slug);
 
         return (
           <li key={index}>
