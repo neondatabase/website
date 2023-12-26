@@ -85,7 +85,7 @@ export default {
 
         // {
         //   text: 'Release notes',
-        //   to: LINKS.releaseNotes,
+        //   to: LINKS.changelog,
         // },
       ],
     },
@@ -105,8 +105,8 @@ export default {
           to: LINKS.docs,
         },
         {
-          text: 'Release notes',
-          to: LINKS.releaseNotes,
+          text: 'Changelog',
+          to: LINKS.changelog,
         },
         {
           text: 'Support',
@@ -248,8 +248,8 @@ export default {
     },
     {
       icon: CalendarIcon,
-      title: 'Release notes',
-      slug: LINKS.releaseNotes,
+      title: 'Changelog',
+      slug: LINKS.changelog,
     },
     {
       icon: PostgresDocsIcon,

@@ -93,7 +93,7 @@ You can install extensions from the Neon SQL Editor or from a client such as `ps
 
 ## Update an extension version
 
-Neon updates supported extensions as new versions become available. Version updates are communicated in the [Release notes](/docs/release-notes). To check the current version of extensions you have installed, query the `pg_extension` table:
+Neon updates supported extensions as new versions become available. Version updates are communicated in the [Changelog](/docs/changelog). To check the current version of extensions you have installed, query the `pg_extension` table:
 
 ```bash
 SELECT * FROM pg_extension;

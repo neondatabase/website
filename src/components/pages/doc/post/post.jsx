@@ -12,8 +12,8 @@ import ReleaseNoteList from 'components/pages/release-notes/release-note-list';
 import Content from 'components/shared/content';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
-// TODO: Add pagination for release notes
-const ReleaseNotes = ({
+// TODO: Add pagination for changelog
+const Changelog = ({
   // currentSlug,
   items,
 }) => (
@@ -25,7 +25,7 @@ const ReleaseNotes = ({
   </>
 );
 
-ReleaseNotes.propTypes = {
+Changelog.propTypes = {
   // currentSlug: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
@@ -40,8 +40,8 @@ const Post = ({
   content,
   breadcrumbs,
   navigationLinks: { previousLink, nextLink },
-  isReleaseNotes = false,
-  releaseNotes = [],
+  isChangelog = false,
+  changelogPosts = [],
   currentSlug,
   fileOriginPath,
   tableOfContents,
@@ -62,8 +62,8 @@ const Post = ({
         )}
       >
         {breadcrumbs.length > 0 && <Breadcrumbs breadcrumbs={breadcrumbs} />}
-        {isReleaseNotes ? (
-          <ReleaseNotes currentSlug={currentSlug} items={releaseNotes} />
+        {isChangelog ? (
+          <Changelog currentSlug={currentSlug} items={changelogPosts} />
         ) : (
           <article>
             <h1 className="text-[36px] font-semibold leading-tight xl:text-3xl">{title}</h1>
@@ -81,7 +81,7 @@ const Post = ({
           </article>
         )}
 
-        {!isReleaseNotes && (
+        {!isChangelog && (
           <PreviousAndNextLinks
             previousLink={previousLink}
             nextLink={nextLink}
@@ -113,8 +113,8 @@ Post.propTypes = {
     previousLink: PropTypes.shape({}),
     nextLink: PropTypes.shape({}),
   }).isRequired,
-  isReleaseNotes: PropTypes.bool,
-  releaseNotes: PropTypes.arrayOf(
+  isChangelog: PropTypes.bool,
+  changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,
       content: PropTypes.string,

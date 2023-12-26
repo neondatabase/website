@@ -2,11 +2,11 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
-import { RELEASE_NOTES_BASE_PATH } from 'constants/docs';
+import { CHANGELOG_BASE_PATH } from 'constants/docs';
 
 import RSSLogo from './images/rss.inline.svg';
 
-const TITLE = 'Release notes';
+const TITLE = 'Changelog';
 const DESCRIPTION = 'The latest product updates from Neon';
 
 const Hero = ({ className = null, withContainer = false }) => {
@@ -25,8 +25,8 @@ const Hero = ({ className = null, withContainer = false }) => {
           <p>{DESCRIPTION}</p>
           {!withContainer && (
             <a
-              className="ml-3 flex items-center text-secondary-8 transition-colors duration-200 hover:text-secondary-7 dark:text-primary-1 dark:hover:text-primary-2 sm:ml-0"
-              href={`${RELEASE_NOTES_BASE_PATH}rss.xml`}
+              className="ml-3 flex items-center text-secondary-8 transition-colors duration-200 hover:text-secondary-7 sm:ml-0 dark:text-primary-1 dark:hover:text-primary-2"
+              href={`${CHANGELOG_BASE_PATH}rss.xml`}
             >
               <RSSLogo className="mr-1.5" />
               <span className="leading-none">RSS feed</span>

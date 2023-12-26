@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 import Button from 'components/shared/button';
 
-const ReleaseNotesWrapper = ({ children, countPosts }) => {
+const ChangelogWrapper = ({ children, countPosts }) => {
   const [allPostsShown, setAllPostsShown] = useState(false);
   useEffect(() => {
     if (countPosts >= children.length) {
@@ -19,7 +19,7 @@ const ReleaseNotesWrapper = ({ children, countPosts }) => {
   );
 };
 
-ReleaseNotesWrapper.propTypes = {
+ChangelogWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   countPosts: PropTypes.number.isRequired,
 };
@@ -29,14 +29,14 @@ const LoadMorePosts = ({
   children,
   defaultCountPosts,
   countToAdd,
-  isReleaseNotes = false,
+  isChangelog = false,
 }) => {
   const [countPosts, setCountPosts] = useState(defaultCountPosts);
 
   return (
     <>
-      {isReleaseNotes ? (
-        <ReleaseNotesWrapper countPosts={countPosts}>{children}</ReleaseNotesWrapper>
+      {isChangelog ? (
+        <ChangelogWrapper countPosts={countPosts}>{children}</ChangelogWrapper>
       ) : (
         children.slice(0, countPosts)
       )}
@@ -60,7 +60,7 @@ LoadMorePosts.propTypes = {
   children: PropTypes.node.isRequired,
   defaultCountPosts: PropTypes.number.isRequired,
   countToAdd: PropTypes.number.isRequired,
-  isReleaseNotes: PropTypes.bool,
+  isChangelog: PropTypes.bool,
 };
 
 export default LoadMorePosts;

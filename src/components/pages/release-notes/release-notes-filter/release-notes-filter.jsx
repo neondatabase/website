@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import { RELEASE_NOTES_BASE_PATH } from 'constants/docs';
+import { CHANGELOG_BASE_PATH } from 'constants/docs';
 import PlansIcon from 'icons/calendar-icon.inline.svg';
 import ConsoleIcon from 'icons/console-icon.inline.svg';
 import DocsIcon from 'icons/docs-icon.inline.svg';
@@ -40,11 +40,11 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
     </h3>
     <ul className="ml-5 flex flex-wrap items-center gap-2 sm:ml-0 sm:mt-4">
       <li>
-        <Link className="group transition-none" theme="black" to={RELEASE_NOTES_BASE_PATH}>
+        <Link className="group transition-none" theme="black" to={CHANGELOG_BASE_PATH}>
           <span
             className={clsx(
-              'flex items-center rounded-full border px-3 py-1 text-xs font-medium leading-snug transition-colors duration-200 group-hover:border-secondary-8 group-hover:text-secondary-8 dark:group-hover:border-primary-1 dark:group-hover:text-primary-1 sm:mt-0',
-              currentSlug === 'release-notes'
+              'flex items-center rounded-full border px-3 py-1 text-xs font-medium leading-snug transition-colors duration-200 group-hover:border-secondary-8 group-hover:text-secondary-8 sm:mt-0 dark:group-hover:border-primary-1 dark:group-hover:text-primary-1',
+              currentSlug === 'changelog'
                 ? 'border-secondary-8 text-secondary-8 dark:border-primary-1 dark:text-primary-1'
                 : 'border-gray-6 dark:border-gray-4'
             )}
@@ -59,14 +59,10 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
 
         return (
           <li key={index}>
-            <Link
-              className="group transition-none"
-              theme="black"
-              to={RELEASE_NOTES_BASE_PATH + slug}
-            >
+            <Link className="group transition-none" theme="black" to={CHANGELOG_BASE_PATH + slug}>
               <span
                 className={clsx(
-                  'flex items-center rounded-full border px-3 py-1 text-xs font-medium leading-snug transition-colors duration-200 group-hover:border-secondary-8 group-hover:text-secondary-8 dark:group-hover:border-primary-1 dark:group-hover:text-primary-1 sm:mt-0',
+                  'flex items-center rounded-full border px-3 py-1 text-xs font-medium leading-snug transition-colors duration-200 group-hover:border-secondary-8 group-hover:text-secondary-8 sm:mt-0 dark:group-hover:border-primary-1 dark:group-hover:text-primary-1',
                   isCategoryActive
                     ? 'border-secondary-8 text-secondary-8 dark:border-primary-1 dark:text-primary-1'
                     : 'border-gray-6 dark:border-gray-4'

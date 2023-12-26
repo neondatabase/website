@@ -5,17 +5,17 @@ import LINKS from 'constants/links';
 import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 
-const ReleaseNotesList = ({ items }) => (
+const ChangelogList = ({ items }) => (
   <section className="release-notes-list -mx-10 rounded-xl bg-black-new px-10 pb-10 pt-7 2xl:mx-0 xl:px-8 xl:py-6 md:px-6">
     <div className="flex items-center justify-between">
-      <h2 className="text-2xl leading-none tracking-tighter md:text-xl">Release notes</h2>
+      <h2 className="text-2xl leading-none tracking-tighter md:text-xl">Changelog</h2>
       <Link
         className="flex items-center text-sm leading-none md:hidden"
         theme="blue"
-        to={LINKS.releaseNotes}
+        to={LINKS.changelog}
         withArrow
       >
-        All release notes
+        All changelog posts
       </Link>
     </div>
     <ul className="mt-6 grid grid-cols-4 gap-x-[50px] border-t border-gray-new-20/60 pt-8 xl:grid-cols-3 lg:mt-6 lg:grid-cols-2 md:mt-5 md:grid-cols-1 md:gap-y-7 md:pt-6">
@@ -37,7 +37,7 @@ const ReleaseNotesList = ({ items }) => (
               alt=""
               aria-hidden
             />
-            <Link className="group/link flex flex-col" to={`${LINKS.releaseNotes}/${slug}`}>
+            <Link className="group/link flex flex-col" to={`${LINKS.changelog}/${slug}`}>
               <span className="line-clamp-1 text-xs font-medium uppercase leading-none tracking-wider text-blue-80">
                 {category}
               </span>
@@ -69,15 +69,15 @@ const ReleaseNotesList = ({ items }) => (
     <Link
       className="hidden items-center text-sm leading-none md:mt-7 md:flex"
       theme="blue"
-      to={LINKS.releaseNotes}
+      to={LINKS.changelog}
       withArrow
     >
-      All release notes
+      All changelog posts
     </Link>
   </section>
 );
 
-ReleaseNotesList.propTypes = {
+ChangelogList.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,
@@ -86,4 +86,4 @@ ReleaseNotesList.propTypes = {
   ),
 };
 
-export default ReleaseNotesList;
+export default ChangelogList;
