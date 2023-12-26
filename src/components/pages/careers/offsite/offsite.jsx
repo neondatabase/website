@@ -12,7 +12,7 @@ const Offsite = () => (
         />
       </div>
       <div className="col-span-4 -ml-10 3xl:col-span-5 3xl:col-start-8 lg:col-span-full lg:ml-0">
-        <h2 className="text-5xl font-bold leading-dense 2xl:text-[36px] xl:text-3xl lg:text-[36px] md:text-[32px]">
+        <h2 className="text-5xl font-bold leading-dense 2xl:text-[36px] xl:text-3xl lg:text-[32px] md:text-[28px]">
           Explore our team’s offsite journey in Barcelona
         </h2>
         <div className="mt-8 space-y-5 text-xl 2xl:mt-7 2xl:text-lg xl:mt-6 xl:space-y-4 xl:text-base lg:max-w-2xl lg:text-lg sm:space-y-3 sm:text-base">
