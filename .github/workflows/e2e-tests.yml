@@ -28,7 +28,6 @@ jobs:
           wait-on: "http://localhost:3000"
         env:
           NEXT_PUBLIC_DEFAULT_SITE_URL: http://localhost:3000
-          NODE_ENV: development
           WP_HTACCESS_USERNAME: ${{ secrets.WP_HTACCESS_USERNAME }}
           WP_HTACCESS_PASSWORD: ${{ secrets.WP_HTACCESS_PASSWORD }}
           WP_GRAPHQL_URL: ${{ secrets.WP_GRAPHQL_URL }}
