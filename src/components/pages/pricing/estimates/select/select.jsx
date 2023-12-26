@@ -52,6 +52,10 @@ const Select = (props) => {
   };
 
   const getScrollOffset = () => {
+    if (windowWidth < MOBILE_WIDTH && windowHeight < 975) {
+      return 10;
+    }
+
     if (index === items.length - 1) {
       return -0.05 * windowHeight;
     }
@@ -61,10 +65,6 @@ const Select = (props) => {
       return -(windowHeight - 760) / 2; // 760px - min height of the section
     }
 
-    if (windowWidth < MOBILE_WIDTH && windowHeight < 975) {
-      return 64;
-    }
-
     return -(windowHeight - 975) / 2; // 975px - max height of the section
   };
 
@@ -72,7 +72,7 @@ const Select = (props) => {
     <Element name={type}>
       <m.div
         className={clsx(
-          'flex max-h-[975px] min-h-[760px] flex-col justify-center md:mt-16 md:h-auto md:min-h-0 md:opacity-100',
+          'flex max-h-[975px] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0 md:pt-16 md:opacity-100',
           !isItemSelected(index - 1) && 'pointer-events-none md:pointer-events-auto',
           className
         )}
