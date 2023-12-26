@@ -103,7 +103,7 @@ const Metrics = ({
 
       <m.div
         className={clsx(
-          'flex h-[90vh] min-h-[760px] flex-col justify-center md:mt-16 md:h-auto md:min-h-fit md:opacity-100',
+          'flex h-[90vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:pt-16 md:opacity-100',
           !allItemsSelected && 'pointer-events-none md:pointer-events-auto'
         )}
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
