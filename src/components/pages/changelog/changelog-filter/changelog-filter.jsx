@@ -2,15 +2,15 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import { RELEASE_NOTES_BASE_PATH } from 'constants/docs';
+import { CHANGELOG_BASE_PATH } from 'constants/docs';
 import PlansIcon from 'icons/calendar-icon.inline.svg';
 import ConsoleIcon from 'icons/console-icon.inline.svg';
 import DocsIcon from 'icons/docs-icon.inline.svg';
 import DriversIcon from 'icons/gear-icon.inline.svg';
 import StorageIcon from 'icons/storage-icon.inline.svg';
-import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
+import getChangelogCategoryFromSlug from 'utils/get-changelog-category-from-slug';
 
-export const RELEASE_NOTES_CATEGORIES = [
+export const CHANGELOG_CATEGORIES = [
   {
     icon: StorageIcon,
     slug: 'storage-and-compute',
@@ -33,18 +33,18 @@ export const RELEASE_NOTES_CATEGORIES = [
   },
 ];
 
-const ReleaseNotesFilter = ({ currentSlug }) => (
+const ChangelogFilter = ({ currentSlug }) => (
   <section className="mb-10 mt-4 flex items-center sm:flex-col sm:items-start">
     <h3 className="shrink-0 self-start text-base font-semibold text-black dark:text-white ">
       Filter by category:
     </h3>
     <ul className="ml-5 flex flex-wrap items-center gap-2 sm:ml-0 sm:mt-4">
       <li>
-        <Link className="group transition-none" theme="black" to={RELEASE_NOTES_BASE_PATH}>
+        <Link className="group transition-none" theme="black" to={CHANGELOG_BASE_PATH}>
           <span
             className={clsx(
-              'flex items-center rounded-full border px-3 py-1 text-xs font-medium leading-snug transition-colors duration-200 group-hover:border-secondary-8 group-hover:text-secondary-8 dark:group-hover:border-primary-1 dark:group-hover:text-primary-1 sm:mt-0',
-              currentSlug === 'release-notes'
+              'flex items-center rounded-full border px-3 py-1 text-xs font-medium leading-snug transition-colors duration-200 group-hover:border-secondary-8 group-hover:text-secondary-8 sm:mt-0 dark:group-hover:border-primary-1 dark:group-hover:text-primary-1',
+              currentSlug === 'changelog'
                 ? 'border-secondary-8 text-secondary-8 dark:border-primary-1 dark:text-primary-1'
                 : 'border-gray-6 dark:border-gray-4'
             )}
@@ -53,20 +53,16 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
           </span>
         </Link>
       </li>
-      {RELEASE_NOTES_CATEGORIES.map(({ slug, icon: Icon }, index) => {
+      {CHANGELOG_CATEGORIES.map(({ slug, icon: Icon }, index) => {
         const isCategoryActive = currentSlug === slug;
-        const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(slug);
+        const { capitalisedCategory } = getChangelogCategoryFromSlug(slug);
 
         return (
           <li key={index}>
-            <Link
-              className="group transition-none"
-              theme="black"
-              to={RELEASE_NOTES_BASE_PATH + slug}
-            >
+            <Link className="group transition-none" theme="black" to={CHANGELOG_BASE_PATH + slug}>
               <span
                 className={clsx(
-                  'flex items-center rounded-full border px-3 py-1 text-xs font-medium leading-snug transition-colors duration-200 group-hover:border-secondary-8 group-hover:text-secondary-8 dark:group-hover:border-primary-1 dark:group-hover:text-primary-1 sm:mt-0',
+                  'flex items-center rounded-full border px-3 py-1 text-xs font-medium leading-snug transition-colors duration-200 group-hover:border-secondary-8 group-hover:text-secondary-8 sm:mt-0 dark:group-hover:border-primary-1 dark:group-hover:text-primary-1',
                   isCategoryActive
                     ? 'border-secondary-8 text-secondary-8 dark:border-primary-1 dark:text-primary-1'
                     : 'border-gray-6 dark:border-gray-4'
@@ -90,8 +86,8 @@ const ReleaseNotesFilter = ({ currentSlug }) => (
   </section>
 );
 
-ReleaseNotesFilter.propTypes = {
+ChangelogFilter.propTypes = {
   currentSlug: PropTypes.string,
 };
 
-export default ReleaseNotesFilter;
+export default ChangelogFilter;

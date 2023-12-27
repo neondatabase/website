@@ -1,6 +1,6 @@
 ---
 redirectFrom:
-  - /docs/release-notes/2023-10-06-storage-and-compute
+  - /docs/changelog/2023-10-06-storage-and-compute
 ---
 
 ### Postgres extension updates
