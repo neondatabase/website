@@ -45,7 +45,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
             )}
           >
             <p>Made in SF and the World</p>
-            <p>Neon 2023 Ⓒ All rights reserved</p>
+            <p>Neon 2024 Ⓒ All rights reserved</p>
           </div>
         </div>
         <div className="flex space-x-[123px] xl:space-x-8 md:hidden [@media(max-width:800px)]:space-x-6">
