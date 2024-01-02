@@ -53,4 +53,39 @@ The **Connection Details** widget on the Neon **Dashboard** provides **Pooled co
 
 Neon uses PgBouncer in _transaction mode_, which does not support Postgres features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
+## Neon PgBouncer configuration settings
+
+This section describes Neon's PgBouncer configuration. The settings are not user-configurable.
+
+```ini
+[pgbouncer]
+listen_port=6432
+listen_addr=0.0.0.0
+auth_type=scram-sha-256
+auth_user=cloud_admin
+auth_dbname=postgres
+client_tls_sslmode=disable
+server_tls_sslmode=disable
+pool_mode=transaction
+max_client_conn=10000
+default_pool_size=64
+max_prepared_statements=0
+admin_users=cloud_admin
+```
+
+The following list describes explcitly set variables. You can assume that variables not configured explcitly, such as `query_wait_timeout`, use the default setting. For a full explanation of each parameter and possible values, please refer to the official [PgBouncer documentation](https://www.pgbouncer.org/config.html).
+
+- `listen_port=6432`: The port that PgBouncer will listen on for incoming connections.
+- `listen_addr=0.0.0.0`: The address to listen on for incoming connections. 0.0.0.0 means listening on all available interfaces.
+- `auth_type=scram-sha-256`: The method used for client authentication.
+- `auth_user=cloud_admin`: Default user for PgBouncer to connect to the databases. The `cloud_admin` user is a Neon-managed admin role.
+- `auth_dbname=postgres`: The database name used for authenticating users when `auth_user` is set.
+- `client_tls_sslmode=disable`: Disables TLS for client connections.
+- `server_tls_sslmode=disable`: Disables TLS for server connections.
+- `pool_mode=transaction`: The pooling mode PgBouncer uses, set to `transaction` pooling.
+- `max_client_conn=10000`: Maximum number of client connections allowed.
+- `default_pool_size=64`: Default number of server connections to allow per user/database pair.
+- `max_prepared_statements=0`: Maximum number of prepared statements a connection is allowed to have at the same time. `0` means prepared statements are disabled.
+- `admin_users=cloud_admin`: Users listed as admins can use the PgBouncer admin console. Only the Neon cloud_admin role can access the PgBouncer admin console. 
+
 <NeedHelp/>
