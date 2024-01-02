@@ -131,7 +131,7 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 1. On the **Select your datasource** page, search for the **PostgreSQL** source and click **Set up**.
 1. In your connector setup form, enter a value for **Destination Schema Prefix**. This prefix applies to each replicated schema and cannot be changed once your connector is created. In this example, we'll use `neon` as the prefix.
 1. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project. 
-    For example, given a connection string like this:
+    For example, let's say this is your connection string:
 
     <CodeBlock shouldWrap>
 
