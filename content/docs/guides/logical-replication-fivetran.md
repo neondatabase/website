@@ -143,7 +143,7 @@ SELECT pg_create_logical_replication_slot('fivetran_pgoutput_slot', 'pgoutput');
     Enter the details in the Fivetran **Create a source** dialog as shown below. Your values will differ, with the exception of the port number.
 
     - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
-    - **Port**: 5432 (Neon uses the default Postgres port, `5432`)
+    - **Port**: 5432
     - **Username**: alex
     - **Password**: AbC123dEf
     - **Database Name**: dbname
