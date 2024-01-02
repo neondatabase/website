@@ -150,11 +150,11 @@ SELECT pg_create_logical_replication_slot('fivetran_pgoutput_slot', 'pgoutput');
 
 1. For **Connection Method**, select **Logical replication of the WAL using the pgoutput plugin**, enter the name of your database's replication slot. Enter both the name of your database's replication slot and publication name accordingly.
 
-    ![Fivetran connector setup](fivetran_connector_setup.png)
+    ![Fivetran connector setup](/docs/guides/fivetran_connector_setup.png)
 
 1. If you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, add Fivetran's IPs to your allowlist in Neon. 
 
-    ![Fivetran IP addresses](fivetran_ips.png)
+    ![Fivetran IP addresses](/docs/guides/fivetran_ips.png)
 
 For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow). You'll need to do this before you can validate your connection in the next step. If you are not using Neon's **IP Allow** feature, you can skip this step.
 
@@ -162,26 +162,26 @@ For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-al
 
 During the test, Fivetran will fetch the TLS certificate and ask you to confirm the certificate chain. Neon uses certificates published by Let's Encrypt. You can verify the certificate chain by selecting the Neon domain, which will look similar to this: `CN =*.us-east-2.aws.neon.tech`. The will differ depending on the region where you set up your Neon project.
 
-    ![Fivetran confirm certificate chain](fivetran_cert_chain.png)
+    ![Fivetran confirm certificate chain](/docs/guides/fivetran_cert_chain.png)
 
 When the connect test is completed, you should see an **All connection tests passed!** message in Fivetran, as shown below:
 
-    ![Fivetran all connections passed message](fivetran_connection_test.png)
+    ![Fivetran all connections passed message](/docs/guides/fivetran_connection_test.png)
 
 1. Click **Continue**.
 1. On the **Select Data to Sync** page, review the connector schema and select columns to block or hash.
 
-    ![Fivetran select data to sync page](fivetran_select_data.png)
+    ![Fivetran select data to sync page](/docs/guides/fivetran_select_data.png)
 
 1. Click **Save & Continue**.
 
 1. On the **How would you like to handle changes?** page, specify how you would like to handle future schema changes. For this example, we'll select **We will allow all new schemas, tables and columns**. Choose the option that best fits your organization's requirements.
 
-    ![Fivetran how to handle changes](fivetran_changes.png)
+    ![Fivetran how to handle changes](/docs/guides/fivetran_changes.png)
 
 1. Click **Continue**. Your data is now ready to sync. 
 
-    ![Fivetran data is ready to sync page](fivetran_ready_to_sync.png)
+    ![Fivetran data is ready to sync page](/docs/guides/fivetran_ready_to_sync.png)
 
 1. Click **Start Initial Sync** to enable syncing.
 
