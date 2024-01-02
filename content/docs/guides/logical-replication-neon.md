@@ -3,7 +3,7 @@ title: Manage logical replication in Neon
 subtitle: Learn how to manage logical replication in Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-12-21T15:11:12.217Z'
+updatedOn: '2024-01-02T11:35:19.801Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots. It also includes information about logical replication specific to Neon, including [known limitations](#known-limitations).
