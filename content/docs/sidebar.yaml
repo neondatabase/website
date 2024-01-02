@@ -143,6 +143,8 @@
           items:
             - title: Airbyte
               slug: guides/logical-replication-airbyte
+            - title: Fivetran
+              slug: guides/logical-replication-fivetran
             - title: Kafka (Confluent)
               slug: guides/logical-replication-kafka-confluent
             - title: Materialize
