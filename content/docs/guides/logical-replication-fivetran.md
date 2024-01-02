@@ -55,7 +55,9 @@ To create a role in the Neon Console:
 4. Select the branch where you want to create the role.
 4. Click **New Role**.
 5. In the role creation dialog, specify a role name.
-6. Click **Create**. The role is created and you are provided with the password for the role.
+6. Click **Create**. 
+
+The role is now created and you are provided with the password for the role, which you can show, copy, or download.
 
 </TabItem>
 
