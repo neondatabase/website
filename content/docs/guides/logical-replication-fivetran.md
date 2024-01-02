@@ -2,7 +2,7 @@
 title: Replicate data with Fivetran
 subtitle: Learn how to replicate data from Neon with Fivetran
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 updatedOn: '2023-12-21T15:11:12.212Z'
 ---
 
@@ -10,7 +10,7 @@ Neon's logical replication feature allows you to replicate data from your Neon P
 
 [Fivetran](https://fivetran.com/) is an automated data movement platform that helps you centralize data from disparate sources, which you can manage directly from your browser. Fivetran extracts your data and loads it into your data destination.
 
-In this guide, you will learn how to define a Neon Postgres database as a data source in Fivetran so that you can move your data to one or more of Fivetran's supported destinations.
+In this guide, you will learn how to define a Neon Postgres database as a data source in Fivetran so that you can replicate data to one or more of Fivetran's supported destinations.
 
 ## Prerequisites
 
@@ -111,7 +111,6 @@ CREATE PUBLICATION fivetran_pub FOR TABLE <tbl1, tbl2, tbl3>;
 
 The publication name is customizable. Refer to the [Postgres docs](https://www.postgresql.org/docs/current/logical-replication-publication.html) if you need to add or remove tables from your publication.
 
-
 ## Create a replication slot
 
 Fivetran requires a dedicated replication slot. Only one source should be configured to use this replication slot.
@@ -122,13 +121,13 @@ Fivetran uses the `pgoutput` plugin in Postgres for decoding WAL changes into a 
 SELECT pg_create_logical_replication_slot('fivetran_pgoutput_slot', 'pgoutput');
 ```
 
-`fivetran_pgoutput_slot` is the name assigned to the replication slot. You will need to provide this name when you set up your Fivetran source.
+The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will need to provide this name when you set up your Fivetran source.
 
 ## Create a Postgres source in Fivetran
 
 1. Log in to your [Fivetran](https://fivetran.com/) account.
 1. On the **Select your datasource** page, search for the **PostgreSQL** source and click **Set up**.
-1. In your connector setup form, enter value for **Destination Schema Prefix**. This prefix applies to each replicated schema and cannot be changed once your connector is created. In this example, we'll use `neon` as the prefix.
+1. In your connector setup form, enter a value for **Destination Schema Prefix**. This prefix applies to each replicated schema and cannot be changed once your connector is created. In this example, we'll use `neon` as the prefix.
 1. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project. 
     For example, given a connection string like this:
 
@@ -148,7 +147,7 @@ SELECT pg_create_logical_replication_slot('fivetran_pgoutput_slot', 'pgoutput');
     - **Password**: AbC123dEf
     - **Database Name**: dbname
 
-1. For **Connection Method**, select **Logical replication of the WAL using the pgoutput plugin**, enter the name of your database's replication slot. Enter both the name of your database's replication slot and publication name accordingly.
+1. For **Connection Method**, select **Logical replication of the WAL using the pgoutput plugin** and enter values for the **Replication Slot** and **Publication Name**. You deifned these values earlier (`fivetran_pgoutput_slot` and `fivetran_pub`, respectively).
 
     ![Fivetran connector setup](/docs/guides/fivetran_connector_setup.png)
 
@@ -158,18 +157,18 @@ SELECT pg_create_logical_replication_slot('fivetran_pgoutput_slot', 'pgoutput');
 
     For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow). You'll need to do this before you can validate your connection in the next step. If you are not using Neon's **IP Allow** feature, you can skip this step.
 
-1. Click **Save & Test**. Fivetran tests and validates our connection to your database. Upon successful completion of the setup tests, you can sync your data using Fivetran.
+1. Click **Save & Test**. Fivetran tests and validates the connection to your database. Upon successful completion of the setup tests, you can sync your data using Fivetran.
 
-    During the test, Fivetran will fetch the TLS certificate and ask you to confirm the certificate chain. Neon uses certificates published by Let's Encrypt. You can verify the certificate chain by selecting the Neon domain, which will look similar to this: `CN =*.us-east-2.aws.neon.tech`. The will differ depending on the region where you set up your Neon project.
+    During the test, Fivetran fetches the TLS certificate and asks you to confirm the certificate chain. Neon uses certificates published by Let's Encrypt. You can verify the certificate chain by selecting the Neon domain, which looks similar to this: `CN =*.us-east-2.aws.neon.tech`. The domain region will differ depending on the region where you set up your Neon project.
 
     ![Fivetran confirm certificate chain](/docs/guides/fivetran_cert_chain.png)
 
-    When the connect test is completed, you should see an **All connection tests passed!** message in Fivetran, as shown below:
+    When the connection test is completed, you should see an **All connection tests passed!** message in Fivetran, as shown below:
 
     ![Fivetran all connections passed message](/docs/guides/fivetran_connection_test.png)
 
 1. Click **Continue**.
-1. On the **Select Data to Sync** page, review the connector schema and select columns to block or hash.
+1. On the **Select Data to Sync** page, review the connector schema and select any columns you want to block or hash.
 
     ![Fivetran select data to sync page](/docs/guides/fivetran_select_data.png)
 
