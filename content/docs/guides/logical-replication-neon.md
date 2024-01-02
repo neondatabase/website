@@ -238,6 +238,12 @@ wal_level
 logical
 ```
 
+### Logical replication and Auto-suspend
+
+By default, a Neon compute instance scales to zero after 300 seconds (5 minutes) of inactivity. For [Neon Free Tier](/docs/introduction/free-tier) users, this setting is fixed. [Neon Pro Plan](/docs/introduction/pro-plan) users can increase, decrease, or disable the _Auto-suspend_ setting, controlling when or if a compute scales to zero.
+
+In a logical replication setup, a subscriber may keep the connection to your Neon publisher database active in order to poll for changes or perform sync operations, preventing your Neon compute instance from scaling to zero. Some subscribers allow you to configure connection or sync frequency, which may be necessary to continue taking advantage of Neon's _Auto-suspend_ feature. Please refer to your subscribers's documentation or contact your susbscriber's support team for information about managing connection frequency.
+
 ### Replication roles
 
 It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege. Roles created via SQL do not have this privilege, and the `REPLICATION` privilege cannot be granted.
