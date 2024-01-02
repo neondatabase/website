@@ -73,7 +73,7 @@ max_prepared_statements=0
 admin_users=cloud_admin
 ```
 
-The following list describes explcitly set variables. You can assume that variables not configured explcitly, such as `query_wait_timeout`, use the default setting. For a full explanation of each parameter and possible values, please refer to the official [PgBouncer documentation](https://www.pgbouncer.org/config.html).
+The following list describes the explcitly set variable settings above. You can assume that variables not configured explcitly, such as `query_wait_timeout`, use the default setting. For a full explanation of each parameter, please refer to the official [PgBouncer documentation](https://www.pgbouncer.org/config.html).
 
 - `listen_port=6432`: The port that PgBouncer will listen on for incoming connections.
 - `listen_addr=0.0.0.0`: The address to listen on for incoming connections. 0.0.0.0 means listening on all available interfaces.
