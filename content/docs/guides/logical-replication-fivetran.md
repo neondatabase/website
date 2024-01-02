@@ -156,15 +156,15 @@ SELECT pg_create_logical_replication_slot('fivetran_pgoutput_slot', 'pgoutput');
 
     ![Fivetran IP addresses](/docs/guides/fivetran_ips.png)
 
-For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow). You'll need to do this before you can validate your connection in the next step. If you are not using Neon's **IP Allow** feature, you can skip this step.
+    For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow). You'll need to do this before you can validate your connection in the next step. If you are not using Neon's **IP Allow** feature, you can skip this step.
 
 1. Click **Save & Test**. Fivetran tests and validates our connection to your database. Upon successful completion of the setup tests, you can sync your data using Fivetran.
 
-During the test, Fivetran will fetch the TLS certificate and ask you to confirm the certificate chain. Neon uses certificates published by Let's Encrypt. You can verify the certificate chain by selecting the Neon domain, which will look similar to this: `CN =*.us-east-2.aws.neon.tech`. The will differ depending on the region where you set up your Neon project.
+    During the test, Fivetran will fetch the TLS certificate and ask you to confirm the certificate chain. Neon uses certificates published by Let's Encrypt. You can verify the certificate chain by selecting the Neon domain, which will look similar to this: `CN =*.us-east-2.aws.neon.tech`. The will differ depending on the region where you set up your Neon project.
 
     ![Fivetran confirm certificate chain](/docs/guides/fivetran_cert_chain.png)
 
-When the connect test is completed, you should see an **All connection tests passed!** message in Fivetran, as shown below:
+    When the connect test is completed, you should see an **All connection tests passed!** message in Fivetran, as shown below:
 
     ![Fivetran all connections passed message](/docs/guides/fivetran_connection_test.png)
 
