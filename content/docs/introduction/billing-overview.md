@@ -27,7 +27,7 @@ For a detailed explanation about storage costs, see [Project storage](/docs/intr
 
 ## Data write and transfer costs
 
-The amount of data that you write to storage or transfer out of Neon (for example, to setup an offline database backup) also contributes to your costs. In typical projects, these costs add up to less than 5% per month.
+The amount of data that you write to storage or transfer out of Neon (for example, to serve data requests from an external application, stream data to another service, or set up an offline database backup) also contributes to your costs. In typical projects, these costs add up to less than 5% per month.
 
 ![Data write and transfer](/docs/introduction/neon_boundary.jpg)
 
