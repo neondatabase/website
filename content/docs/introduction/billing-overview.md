@@ -17,7 +17,7 @@ For a more detailed breakdown of compute cost metrics, see [compute time](docs/i
 
 ## Storage costs
 
-Neon storage uses copy-on-write branching to keep storage size as small as possible. This can make it hard to visualize "how big is my database", since branches with a shared history don't immediately add to storage costs. Storage size is a combination of your total data plus the shared change history that is used to enable features like [point-in-time restore](/docs/introduction/point-in-time-restore), [query testing](/docs/guides/branching-test-queries), and [reset from parent](docs/manage/branches#reset-a-branch-from-parent).
+Neon storage uses copy-on-write branching to keep storage size as small as possible. This can make it hard to visualize "how big is my database", since branches with a shared history don't immediately add to storage costs. Storage size is a combination of your total data plus the shared change history that is used to enable branching-related features like [point-in-time restore](/docs/introduction/point-in-time-restore), [query testing](/docs/guides/branching-test-queries), and [reset from parent](docs/manage/branches#reset-a-branch-from-parent).
 
 Storage costs are based on the size of your project and how long it is stored.
 
