@@ -41,14 +41,14 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
           <div
             className={clsx(
               { 'tracking-tight text-gray-new-80': theme === 'black-new' || theme === 'gray-8' },
-              'space-y-[18px] text-sm leading-none dark:text-gray-new-80 lg:leading-tight'
+              'space-y-[18px] text-sm leading-none lg:leading-tight dark:text-gray-new-80'
             )}
           >
             <p>Made in SF and the World</p>
-            <p>Neon 2023 Ⓒ All rights reserved</p>
+            <p>Neon 2024 Ⓒ All rights reserved</p>
           </div>
         </div>
-        <div className="flex space-x-[123px] xl:space-x-8 md:hidden">
+        <div className="flex space-x-[123px] xl:space-x-8 md:hidden [@media(max-width:800px)]:space-x-6">
           {MENUS.footer.map(({ heading, links }, index) => (
             <div className={clsx('flex flex-col xl:w-full')} key={index}>
               <span

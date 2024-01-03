@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2023-12-21T14:51:31.034Z'
+updatedOn: '2023-12-27T09:34:39.981Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a default Postgres role that takes its name from your Neon account (the email, GitHub, Google, or partner account that you registered with). This role owns the ready-to-use database (`neondb`) that is created in your Neon project's primary branch.
@@ -32,7 +32,7 @@ Roles created in the Neon console, CLI, or API, including the default role creat
 
 - `CREATEDB`: Provides the ability to create databases.
 - `CREATEROLE`: Provides the ability to create new roles (which also means it can alter and drop roles).
-- `BYPASSRLS`: Provides the ability to bypass row-level security (RLS) policies. This attribute is only included in `neon_superuser` roles in projects created after the [August 15, 2023 release](/docs/release-notes/2023-08-15-storage-and-compute).
+- `BYPASSRLS`: Provides the ability to bypass row-level security (RLS) policies. This attribute is only included in `neon_superuser` roles in projects created after the [August 15, 2023 release](/docs/changelog/2023-08-15-storage-and-compute).
 - `REPLICATION`: Provides the ability to connect to a Postgres server in replication mode and create or drop replication slots.
 - `NOLOGIN`: The role cannot be used to log in to the Postgres server. Neon is a managed Postgres service, so you cannot access the host operating system directly.
 - `pg_read_all_data`: A predefined role in Postgres that provides the ability to read all data (tables, views, sequences), as if having `SELECT` rights on those objects, and `USAGE` rights on all schemas.

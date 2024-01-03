@@ -1,6 +1,6 @@
 const { format, parseISO } = require('date-fns');
 
-function getReleaseNotesDateFromSlug(slug) {
+function getChangelogDateFromSlug(slug) {
   const slugDatePiece = slug.slice(0, 10);
 
   return {
@@ -9,4 +9,4 @@ function getReleaseNotesDateFromSlug(slug) {
   };
 }
 // use module.exports to make this function available to scripts/rss.js
-module.exports = getReleaseNotesDateFromSlug;
+module.exports = getChangelogDateFromSlug;

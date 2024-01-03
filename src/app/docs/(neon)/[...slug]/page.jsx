@@ -8,7 +8,7 @@ import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import {
   DOCS_DIR_PATH,
   getAllPosts,
-  getAllReleaseNotes,
+  getAllChangelogPosts,
   getBreadcrumbs,
   getDocPreviousAndNextLinks,
   getFlatSidebar,
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }) {
 
   const post = getPostBySlug(currentSlug, DOCS_DIR_PATH);
 
-  const isReleaseNotes = currentSlug === 'release-notes';
+  const isChangelog = currentSlug === 'changelog';
 
   if (!post) return notFound();
 
@@ -60,13 +60,13 @@ export async function generateMetadata({ params }) {
 
   return getMetadata({
     title: `${title} - Neon Docs`,
-    description: isReleaseNotes ? 'The latest product updates from Neon' : excerpt,
+    description: isChangelog ? 'The latest product updates from Neon' : excerpt,
     imagePath:
       title.length < MAX_TITLE_LENGTH
         ? `${VERCEL_URL}/docs/og?title=${encodedTitle}`
         : DEFAULT_IMAGE_PATH,
     pathname: `${LINKS.docs}/${currentSlug}`,
-    rssPathname: isReleaseNotes ? `${LINKS.releaseNotes}/rss.xml` : null,
+    rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
     type: 'article',
   });
 }
@@ -79,12 +79,12 @@ export default async function DocPost({ params }) {
 
   const flatSidebar = await getFlatSidebar(getSidebar());
 
-  const isReleaseNotesIndex = !!currentSlug.match('release-notes')?.length;
-  const releaseNotes = await getAllReleaseNotes();
+  const isChangelogIndex = !!currentSlug.match('changelog')?.length;
+  const allChangelogPosts = await getAllChangelogPosts();
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
   const navigationLinks = getDocPreviousAndNextLinks(currentSlug, flatSidebar);
-  const fileOriginPath = isReleaseNotesIndex
+  const fileOriginPath = isChangelogIndex
     ? process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH
     : `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;
 
@@ -114,11 +114,11 @@ export default async function DocPost({ params }) {
         data={data}
         breadcrumbs={breadcrumbs}
         navigationLinks={navigationLinks}
-        isReleaseNotes={isReleaseNotesIndex}
-        releaseNotesActiveLabel="all"
+        isChangelog={isChangelogIndex}
+        changelogActiveLabel="all"
         currentSlug={currentSlug}
         fileOriginPath={fileOriginPath}
-        releaseNotes={releaseNotes}
+        changelogPosts={allChangelogPosts}
         tableOfContents={tableOfContents}
       />
     </>

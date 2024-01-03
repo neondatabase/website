@@ -3,7 +3,7 @@ title: Manage logical replication in Neon
 subtitle: Learn how to manage logical replication in Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-12-21T15:11:12.217Z'
+updatedOn: '2024-01-02T11:35:19.801Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots. It also includes information about logical replication specific to Neon, including [known limitations](#known-limitations).
@@ -237,6 +237,12 @@ wal_level
 -----------
 logical
 ```
+
+### Logical replication and Auto-suspend
+
+By default, a Neon compute instance scales to zero after 300 seconds (5 minutes) of inactivity. For [Neon Free Tier](/docs/introduction/free-tier) users, this setting is fixed. [Neon Pro Plan](/docs/introduction/pro-plan) users can increase, decrease, or disable the _Auto-suspend_ setting, controlling when or if a compute scales to zero.
+
+In a logical replication setup, a subscriber may keep the connection to your Neon publisher database active in order to poll for changes or perform sync operations, preventing your Neon compute instance from scaling to zero. Some subscribers allow you to configure connection or sync frequency, which may be necessary to continue taking advantage of Neon's _Auto-suspend_ feature. Please refer to your subscriber's documentation or contact their support team for details.
 
 ### Replication roles
 

@@ -6,7 +6,7 @@ export default {
   signup: 'https://console.neon.tech/register',
   login: 'https://console.neon.tech/login',
   security: '/docs/security/security-overview',
-  releaseNotes: '/docs/release-notes',
+  changelog: '/docs/changelog',
   discord: 'https://discord.gg/92vNTzKDGp',
   discussions: 'https://github.com/neondatabase/neon/discussions',
   discourse: 'https://community.neon.tech',

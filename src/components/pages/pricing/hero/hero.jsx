@@ -15,8 +15,8 @@ import sendSegmentEvent from 'utils/send-segment-event';
 
 const items = [
   {
-    type: 'Free Tier',
-    price: 'Start free',
+    type: 'Free',
+    price: '$0 <span>/month</span>',
     description:
       'A generous free tier with essential features perfect for prototypes and personal projects.',
     features: [
@@ -33,9 +33,9 @@ const items = [
   },
   {
     type: 'Pro',
-    price: 'Pay as you go',
+    price: 'From $3 <span>/month</span>',
     description:
-      'A pro plan with features for production. Scales from $0 based on compute & storage usage.',
+      'A pro plan with all the features for production. Only pay for the compute & storage used.',
     features: [
       { title: 'Unlimited projects, branches, databases' },
       { title: 'Configurable compute, unlimited storage' },
@@ -52,7 +52,7 @@ const items = [
   },
   {
     type: 'Enterprise',
-    price: 'Custom plans',
+    price: 'Custom',
     description:
       'Custom volume-based plans for medium to large teams, database fleets, and resale.',
     features: [
@@ -127,9 +127,9 @@ const Hero = () => {
                 )}
                 style={{
                   '--accentColor':
-                    type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
+                    type === 'Free' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
                   '--hoverColor':
-                    type === 'Free Tier' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
+                    type === 'Free' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
                 }}
                 key={index}
                 onPointerEnter={() => {
@@ -159,9 +159,10 @@ const Hero = () => {
                     <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)] xl:text-lg">
                       {type}
                     </span>
-                    <h2 className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4">
-                      {price}
-                    </h2>
+                    <h2
+                      className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4 [&_span]:text-[28px] [&_span]:font-light [&_span]:-tracking-[0.06em] [&_span]:text-gray-new-50"
+                      dangerouslySetInnerHTML={{ __html: price }}
+                    />
                     <AnimatedButton
                       className="mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-7 sm:max-w-none"
                       isAnimated={activeItemIndex === index}
