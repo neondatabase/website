@@ -1,58 +1,62 @@
 ---
 title: Branch Restore
-subtitle: Learn how to revert changes or recover lost data with Neon's Branch Restore feature, including Time Travel assist to query historical data as part of your restore workflow.
+subtitle: Learn how to revert changes or recover lost data using Neon Branch Restore, with Time Travel Assist to query historical data as part of your restore workflow.
 enableTableOfContents: true
 ---
 
-With Neon's copy-on-write branch creation capability, you can create branches instantly using data from any point in time within your history retention window. Just as easily, you can restore a branch to an earlier point in time from its own or another branch's history. You can also use Time Travel assist to run read-only queries against any point in this shared history, as a way preview data before you restore.
+With Neon's copy-on-write branch creation capability, you can create branches instantly using data from any point in time within your history retention window. Just as easily, you can restore a branch to an earlier point in time from its own or another branch's shared history. You can also use Time Travel Assist to run read-only queries against any point in this shared history, as a way to preview data before you restore.
 
 [Do we want to include any common or typical use cases?]
 
-## Restore methods
+## Restore methods &#8212; default vs advanced
 
-Neon supports the following one-click branch restore methods:
-* **Restore from branch's history** &#8212; restores your selected branch to an earlier point in time within your history retention window.
-* **Restore from source branch** &#8212; restores a destination branch from another (source) branch's current data, or from an earlier time in its history
+Neon supports several one-click branch restore methods:
+* **From branch's own history** &#8212; restore a selected branch to any point in your history retention window.
+* **From source branch** &#8212; restore a destination branch from another (source) branch's data, from either its current state or from an earlier point in its history.
 
 <Admonition>
-**Restore from backup** is in our roadmap as part of overall support for creating and managing database backups. See [Roadmap]().
+Restoring from backup is not yet supported as a full feature. Adding support for creating and managing database backups is on our roadmap. See [Roadmap]().
 </Admonition>
+
+### Default vs advanced
+
+By default, the **Restore** page provides a simple view for rewinding a selected branch to an earlier timestamp in its history.
+
+For other restore options, select **Show advanced**. You can then rewind your branch using an LSN as the restore point, or select another branch as the source for the restore operation. 
 
 When selecting an earlier point in time, you can use either [timestamp](glossary link) or [LSN](glossary link) to identify the restore point.
 
-## How restore operations work
+## How the restore operation works
 
-When you restore a branch, either to its own or another branch's history, you are performing a complete overwrite, not a merge or refresh. All data and schema on the destination branch is replaced with the data from the selected source.
+It is important to understand that whenever you restore a branch, either to its own or another branch's history, you are performing a _complete_ overwrite, not a merge or refresh. Everything on your destination branch, data and schema, is replaced with the contents from the selected source.
 
-The source and destination branches are defined as:
+To avoid confusion, let's define our key terms:
 
-* **Destination** &#8212; this is the branch you want to apply the restore operation to
-* **Source** &#8212; this is the branch you want to pull changes from
+* **Destination branch** &#8212; The target for the restore operation.
+* **Source branch** &#8212; The origin of the updates that will be applied.
 
-The restore operation preserves your branch's current data in a restore_backup file, in case you need to rollback the change. The file takes the following format:
+### Restore backups for data safety
+
+Neon preserves your destination branch's latest data in an automatically created backup file, using the following format:
 
 ```
 {branch_name}_old_{head_timestamp}
 ```
-Existing connections are temporarily interupted during the restore. However, your connection details do not change. All connections are re-established as soon as the restore operation is done.
 
-[important to note that this will apply to all databases on your branch; if you are trying to fix corrupted data on a database, you might not immediatley realize that rolling back the branch will affect any other dbs on that branch. We can add this as an admonition, or maybe it deserves a section, to reinforce the object hierarchy]
+We encourage you to use Time Travel Assist _before_ running a restore job, but if you end up needing to revert your changes, you can use this restore_backup file. 
 
-### Default and advanced
-By default, the Restore page is set up to let rollback a selected branch to an earlier timestamp in its history.
+[test this - and if you do want to rollback, do you just do another restore, but select this as your source?
+]
 
-Advanced options let you rollback using an LSN as the restore point, or you can select another branch as the source, pulling either the latest data to your destination branch, or pull historical data using timestamp or LSN as the restore point.
+### Changes are made to ALL databases
 
+A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. It is important to realize this when you restoring branches. For example, let's say you want to fix some corrupted content in a given database. If you restore your branch to an earlier point in time, the operation applies to all databases on the branch, not just the one you are troubleshooting.
 
+[any opinionated recommendation on a workflow to keep your branches in good order, letting you restore without risk of inadvertent issues?]
 
+### Connections temporarily interrupted
 
-
-## Time travel assist
-
-Because you may not be certain that a given point in time in either your selected or your target branch's history, you can use the SQL editor in the Time travel assist tool to run read-only queries against your selected timestamp as way to verify that you've got the right data identifed before you click-to-restore.
-
-For more detail, see [Using time travel assist](#using-time-travel-assist)
-
+Existing connections are temporarily interrupted during the restore. However, your connection details do not change. All connections are re-established as soon as the restore operation is done.
 
 ## Restore from branch's own history
 
@@ -67,6 +71,17 @@ If you want to choose an LSN as your restore point, you need to select **Show Ad
 [pic]
 
 ## Restore from target branch
+
+[TBD]
+
+## Time travel assist
+
+Because you may not be certain that a given point in time in either your selected or your target branch's history, you can use the SQL editor in the Time travel assist tool to run read-only queries against your selected timestamp as way to verify that you've got the right data identifed before you click-to-restore.
+
+For more detail, see [Using time travel assist](#using-time-travel-assist)
+
+
+
 
 
 ## Using time travel assist
