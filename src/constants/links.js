@@ -3,7 +3,7 @@ export default {
   aboutUs: '/about-us',
   careers: '/careers',
   blog: '/blog',
-  signup: 'https://console.neon.tech/register',
+  signup: 'https://console.neon.tech/signup',
   login: 'https://console.neon.tech/login',
   security: '/docs/security/security-overview',
   changelog: '/docs/changelog',
