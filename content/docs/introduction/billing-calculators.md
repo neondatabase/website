@@ -4,7 +4,7 @@ enableTableOfContents: true
 subtitle: Get familiar with Neon billing using our pricing calculators
 ---
 
-If you already have a sense of your sizing and usage needs, we recommend that you try out the [Pricing Calculator](#pricing-calculator) on our website or our [Pro Plan Cost Estimator](#pro-plan-cost-estimator) in the Neon Console. The tools let you estimate monthly costs based on the billing metrics above.
+If you already have a sense of your sizing and usage needs, we recommend that you try out the [Pricing Calculator](#pricing-calculator) on our website or our [Pro Plan Cost Estimator](#pro-plan-cost-estimator) in the Neon Console. These tools let you estimate monthly costs based on the billing metrics above.
 
 ## Things to consider before using
 
