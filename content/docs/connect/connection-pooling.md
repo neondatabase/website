@@ -86,6 +86,6 @@ The following list describes the explcitly set variable settings above. You can 
 - `max_client_conn=10000`: Maximum number of client connections allowed.
 - `default_pool_size=64`: Default number of server connections to allow per user/database pair.
 - `max_prepared_statements=0`: Maximum number of prepared statements a connection is allowed to have at the same time. `0` means prepared statements are disabled.
-- `admin_users=cloud_admin`: Users listed as admins can use the PgBouncer admin console. Only the Neon cloud_admin role can access the PgBouncer admin console. 
+- `admin_users=cloud_admin`: Users listed as admins can use the PgBouncer admin console. Only the Neon `cloud_admin` role can access the PgBouncer admin console. 
 
 <NeedHelp/>
