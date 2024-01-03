@@ -23,6 +23,8 @@ The **Project storage**, **Written data**, and **Data transfer** metrics are cal
 
 _Compute time_ is the amount of compute resources used per hour. It is calculated by multiplying compute size by _Active time_ hours. Neon measures compute size at regular intervals and averages those values to calculate _Compute time_.
 
+_Active time_ is the total amount of time that your computes have been active within a given billing period, measured in hours. This includes all computes in your Neon project but excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale-to-zero). _Active time_ is not a billed metric. It is a factor of the _Compute time_ metric.
+
 Compute size is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
 
 | Compute Units | vCPU | RAM    |
@@ -55,10 +57,6 @@ The _Compute time_ cost calculation is as follows:
 ```text
 Compute time cost = Compute size * Active time * price per hour
 ```
-
-### Active time
-
-_Active time_ is the total amount of time that your computes have been active within a given billing period, measured in hours. This includes all computes in your Neon project but excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale-to-zero). _Active time_ is not a billed metric. It is a factor of the _Compute time_ metric.
 
 ### Compute time cost estimates
 
