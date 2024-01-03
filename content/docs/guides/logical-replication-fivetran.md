@@ -41,7 +41,7 @@ SHOW wal_level;
 
 ## Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+We recommend using a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 
@@ -161,9 +161,7 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 
 1. Click **Save & Test**. Fivetran tests and validates the connection to your database. Upon successful completion of the setup tests, you can sync your data using Fivetran.
 
-    During the test, Fivetran fetches the TLS certificate and asks you to confirm the certificate chain. Neon uses certificates published by Let's Encrypt. You can verify the certificate chain by selecting the Neon domain, which looks similar to this: `CN =*.us-east-2.aws.neon.tech`. The domain region will differ depending on the region where you set up your Neon project.
-
-    ![Fivetran confirm certificate chain](/docs/guides/fivetran_cert_chain.png)
+    During the test, Fivetran asks you to confirm the certificate chain by selecting the certificate to use as the trust anchor. Select the `CN=ISRG Root X1, 0=Internet Security Research Group, C=US` option. This certificate is valid unitl until 2035-06-04.
 
     When the connection test is completed, you should see an **All connection tests passed!** message in Fivetran, as shown below:
 
