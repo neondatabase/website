@@ -22,7 +22,7 @@ Roughly six months since launch, this high-traffic application attracts about 80
 
 ### Userbase:
 * **Daily Active Users.** 80,000 users/day, implying a consistent volume of read queries. With a global, consumer-oriented user base, traffic is evenly distributed with no distinct peaks or dormant periods.
-* **Account creation.** Average of 3-5 sign-ups per hour, totally 120 new accounts per day. This gives you an idea of the number of write operations to the database for user authentication.
+* **Account creation.** Average of 3-5 sign-ups per hour, totaling 120 new accounts per day. This gives you an idea of the number of write operations to the database for user authentication.
 * **User activity.** Each user's usage is capped at 5 generations per month. This includes logging IDs of generated photos and the incremental number of generations, which are written to the relevant tables.
 
 <Admonition type="note">
