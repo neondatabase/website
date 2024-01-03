@@ -84,8 +84,8 @@ export default {
         },
 
         // {
-        //   text: 'Release notes',
-        //   to: LINKS.releaseNotes,
+        //   text: 'Changelog',
+        //   to: LINKS.changelog,
         // },
       ],
     },
@@ -105,8 +105,8 @@ export default {
           to: LINKS.docs,
         },
         {
-          text: 'Release notes',
-          to: LINKS.releaseNotes,
+          text: 'Changelog',
+          to: LINKS.changelog,
         },
         {
           text: 'Support',
@@ -184,6 +184,10 @@ export default {
           text: 'Cookie Policy',
           to: LINKS.cookiePolicy,
         },
+        {
+          text: 'Business Information',
+          to: LINKS.businessInformation,
+        },
       ],
     },
   ],
@@ -244,8 +248,8 @@ export default {
     },
     {
       icon: CalendarIcon,
-      title: 'Release notes',
-      slug: LINKS.releaseNotes,
+      title: 'Changelog',
+      slug: LINKS.changelog,
     },
     {
       icon: PostgresDocsIcon,

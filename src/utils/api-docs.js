@@ -7,7 +7,7 @@ const jsYaml = require('js-yaml');
 const slugify = require('slugify');
 
 const sharedMdxComponents = require('../../content/docs/shared-content');
-const { RELEASE_NOTES_DIR_PATH } = require('../constants/docs');
+const { CHANGELOG_DIR_PATH } = require('../constants/docs');
 
 const getExcerpt = require('./get-excerpt');
 const parseMDXHeading = require('./parse-mdx-heading');
@@ -96,13 +96,13 @@ const getDocPreviousAndNextLinks = (slug, flatSidebar) => {
   };
 };
 
-const getAllReleaseNotes = async () => {
-  const slugs = await getPostSlugs(RELEASE_NOTES_DIR_PATH);
+const getAllChangelogPosts = async () => {
+  const slugs = await getPostSlugs(CHANGELOG_DIR_PATH);
 
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, RELEASE_NOTES_DIR_PATH)) return;
-      const post = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
+      if (!getPostBySlug(slug, CHANGELOG_DIR_PATH)) return;
+      const post = getPostBySlug(slug, CHANGELOG_DIR_PATH);
       const { data, content } = post;
 
       return { slug: slug.replace('/', ''), isDraft: data?.isDraft, content };
@@ -178,9 +178,9 @@ module.exports = {
   getBreadcrumbs,
   getFlatSidebar,
   getDocPreviousAndNextLinks,
-  getAllReleaseNotes,
+  getAllChangelogPosts,
   getAllPosts,
   getTableOfContents,
   DOCS_DIR_PATH,
-  RELEASE_NOTES_DIR_PATH,
+  CHANGELOG_DIR_PATH,
 };

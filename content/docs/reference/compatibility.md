@@ -3,7 +3,7 @@ title: Postgres compatibility
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2023-11-24T11:25:06.767Z'
+updatedOn: '2023-12-22T16:01:34.807Z'
 ---
 
 Neon is protocol and application-compatible with Postgres. However, when using the Neon cloud service, there are some limitations that you should be aware of.
@@ -37,7 +37,6 @@ The following table lists Neon Postgres parameter settings that may differ from 
 | fsync           | off     | Neon syncs data to the Neon Storage Engine to store your data safely and reliably |
 | max_connections |         | The value depends on compute size. Set to 100 for Neon.          |
 | shared_buffers  |         | The value depends on compute size                                                 |
-| wal_level       | replica | Logical replication is currently not supported                                    |
 
 <Admonition type="note">
 You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
