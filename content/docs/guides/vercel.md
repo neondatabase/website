@@ -163,7 +163,7 @@ In this case, you can remove or rename the existing environment variables in you
 2. Locate the environment variables required by the Neon integration and remove or rename them.
 
    <Admonition type="note">
-   Alternatively, you can remove the conflicting integration, assuming it no longer required. This may be a previous Neon integration or another integration. Removing the integration removes the variables set by the integration.
+   Alternatively, you can remove the conflicting integration, assuming it is no longer required. This may be a previous Neon integration or another integration. Removing the integration removes the variables set by the integration.
    </Admonition>
 
 3. Try adding the Neon integration again. See [Add the Neon Vercel Integration](#add-the-neon-vercel-integration).
