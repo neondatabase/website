@@ -38,7 +38,7 @@ Given the high number of connections used by this application, [connection pooli
 
 ## Consumption breakdown for the month
 
-These graphs shows the usage and costs incurred for the month.
+These graphs show the usage and costs incurred for the month.
 
 ### Compute
 
