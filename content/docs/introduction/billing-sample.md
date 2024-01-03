@@ -2,6 +2,7 @@
 title: Sample project billing
 enableTableOfContents: true
 subtitle: Practical example of how Neon pricing is calculated
+updatedOn: '2024-01-03T21:00:38.276Z'
 ---
 
 ## Generative AI example

@@ -2,6 +2,7 @@
 title: Billing rates
 enableTableOfContents: true
 subtitle: Billing rates by region
+updatedOn: '2024-01-03T21:00:38.275Z'
 ---
 
 Current billing rates for all relevant metrics by region.
