@@ -11,7 +11,7 @@ With key features like [autoscaling](/docs/guides/autoscaling-guide), [auto-susp
 
 ![Compute metrics graph](/docs/introduction/compute-metrics2.png)
 
-You can see how your the compute time that you get billed for scales between your minimum and maximum CPU settings: compute time never rises above your max level ,and it never drops below your minimum setting. With autosuspend, you are not charged at all during inactive periods. For projects with inconsitent demand, this can save significant compute costs.
+You can see how the compute time that you get billed for scales between your minimum and maximum CPU settings: compute time never rises above your max level, and it never drops below your minimum setting. With autosuspend, you are not charged at all during inactive periods. For projects with inconsistent demand, this can save significant compute costs.
 
 For a more detailed breakdown of compute cost metrics, see [compute time](docs/introduction/billing#compute-time).
 
