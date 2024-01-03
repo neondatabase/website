@@ -31,7 +31,7 @@ Given the high number of connections used by this application, [connection pooli
 
 ### Compute, storage, data write and transfer:
 
-* **Compute time.** This metric refers to the size of CPU required to handle your interactions plus the length of time your compute is active. The average daily compute usage is 23.94 GB, totally 718.35 GB for the sample month. This indicates steady but low intensity database usage.
+* **Compute time.** This metric refers to the size of CPU required to handle your interactions plus the length of time your compute is active. The average daily compute usage is 23.94 GB, totaling 718.35 GB for the sample month. This indicates steady but low-intensity database usage.
 * **Storage size.** The amount of database storage currently used by your project. It includes the total volume of data across all branches plus the shared history. The database is now over 25 GiB and growing steadily with new written data as the user base grows.
 * **Written data.** This metric shows the volume of data actively written to database storage. The daily average of 0.15 GB results in a total of 4.4 GB for the month.
 * **Data transfer.** This refers to the amount of data transferred out of Neon. Daily average is 0.09 GB with a monthly total of 2.7 GB.
