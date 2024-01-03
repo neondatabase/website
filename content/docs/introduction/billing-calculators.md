@@ -17,7 +17,7 @@ These questions translate into the metrics [active time](/docs/introduction/bill
 
 ## Pricing calculator
 
-The [Pricing](https://neon.tech/pricing) page on the Neon website provides a [calculator](https://neon.tech/pricing#calc) that allows you to estimate monthly costs based on usage amounts that you provide.
+The [Pricing](https://neon.tech/pricing) page on the Neon website provides a [calculator](https://neon.tech/calculator) that allows you to estimate monthly costs based on usage amounts that you provide.
 
 ![Pricing page calculator](/docs/introduction/pricing_page_calculator.png)
 
