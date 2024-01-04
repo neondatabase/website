@@ -18,17 +18,17 @@ For the latest features and fixes, check our [Changelog](docs/changelog), update
 
 Here's a snapshot of what we're working on now:
 
-* **Branch restore with Time Travel Assist.**
+* **Branch restore with Time Travel Assist**
 
-  Instantly restore a branch to an earlier state in its history. Use Time Travel Assist to run queries against historical data, making sure you are restoring to the right point in time.
+    Instantly restore a branch to an earlier state in its history. Use Time Travel Assist to run queries against historical data, making sure you are restoring to the right point in time.
 
-* **Autoscaling visualizations.**
+* **Autoscaling visualizations**
 
-  Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts your CPU and RAM usage over time. The first of many features to improve observability.
+    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts your CPU and RAM usage over time. The first of many features to improve observability.
 
 * **Better onboarding**
 
-  Ongoing improvements to the onboarding experience are in the works. You can expect incremental updates in the upcoming weeks.
+    Ongoing improvements to the onboarding experience are in the works. You can expect incremental updates in the upcoming weeks.
 
 
 
@@ -38,10 +38,11 @@ And here's a glimpse at the features we'll be taking on next:
 
 * **More regions**
 
-  Support for more regions will be released in the coming months.
+    Support for more regions will be released in the coming months.
+    
 * **Improvements to Vercel integration**
 
-  Adding support for GitHub and Bitbucket as part of the Vercel integration.
+    Adding support for GitHub and Bitbucket as part of the Vercel integration.
 
 ## A brief history of time
 
