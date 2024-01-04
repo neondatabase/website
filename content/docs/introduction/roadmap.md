@@ -6,19 +6,30 @@ redirectFrom:
   - /docs/reference/roadmap
 updatedOn: '2023-10-07T10:43:33.416Z'
 ---
-Our team is hard at work bringing you the best new features and functionality to make Neon the default choice for serverless Postgres in the cloud. This roadmap gives you a breakdown of what our development teams are finalizing now &#8212; you can expect to see these new features soon &#8212; and the committed tasks we will be taking up next. 
+Our developers work hard to make Neon the default choice for serverless PostgreSQL in the cloud. While we have a lot of great stuff in the pipeline, this roadmap is focused on features and improvements that are fully in flight: things our development teams are finalizing right now, which you can expect to see very soon, as well as the comitted tasks our teams will take up next. 
 
-As always, we welcome all feedback. If you see something you disagree with, or something missing that you feel should be there, let us know.
+As always, we welcome all feedback. If you see something in Neon's implementation of Postgres that you disagree with, that can be improved, or anything missing that you feel should be there, [let us know](link to best place for that).
+
+## Latest features
+
+For the latest features and fixes, see our [Changelog](docs/changelog), updated every Friday. You can subscribe to Changelog updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
 ## Coming soon
 
 Here's a snapshot of what we're working on now:
 
+* **Branch restore with Time Travel Assist.**
+  Restore a branch to an earlier state in its history, with Time Travel Assist to let you run queries against historical data to make sure you are restoring to the right point in time.
+* **Autoscaling visualizations.**
+  Adding real-time data visualizations to the compute configuration page, letting you see how your CPU and RAM usage changes over time. A first step towards robust observability features.
+
 ## What's up next
 
-And here's a glimpse at what features we'll be taking on next:
-* Support for more regions and additional features will be released in the coming months.
+And here's a glimpse at the features we'll be taking on next:
 
+* **More regions**
+  Support for more regions will be released in the coming months.
+* Adding support for GitHub and Bitbucket as part of the Vercel integration.
 
 
 
