@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/reference/roadmap
 updatedOn: '2023-10-07T10:43:33.416Z'
 ---
-Our developers work hard to make Neon the default choice for serverless PostgreSQL in the cloud. While we have a lot of great stuff in the pipeline, this roadmap is focused on features and improvements that are fully in flight: things our development teams are finalizing right now, which you can expect to see very soon, as well as the comitted tasks our teams will take up next. 
+Our developers work hard to make Neon the default choice for serverless PostgreSQL in the cloud. This roadmap is focused on features and improvements that are fully in flight: things our development teams are finalizing right now, as well as the committed tasks our teams will take up next. 
 
 As always, we welcome all feedback. If you see something in Neon's implementation of Postgres that you disagree with, that can be improved, or anything missing that you feel should be there, [let us know](link to best place for that).
 
@@ -39,7 +39,7 @@ And here's a glimpse at the features we'll be taking on next:
 * **More regions**
 
     Support for more regions will be released in the coming months.
-    
+
 * **Improvements to Vercel integration**
 
     Adding support for GitHub and Bitbucket as part of the Vercel integration.
