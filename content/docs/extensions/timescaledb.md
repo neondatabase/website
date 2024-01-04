@@ -4,9 +4,21 @@ subtitle: timescaledb is an extension for handling time-series data.
 enableTableOfContents: true
 ---
 
-TimescaleDB enables efficient storage and retrieval of time-series data. It is designed to handle large volumes of time-stamped data and provides SQL capabilities on top of a time-oriented data model such as IoT data, sensor readings, financial market data, and other time-series datasets.
+`timescaledb` enables efficient storage and retrieval of time-series data. It is designed to handle large volumes of time-stamped data and provides SQL capabilities on top of a time-oriented data model such as IoT data, sensor readings, financial market data, and other time-series datasets.
 
-This topic describes how to enable and use the `timescaledb` extension in Neon.
+<Admonition type="note">
+`timescaledb` is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below.
+</Admonition>
+
+**Version Availability:**
+
+The version of `timescaledb` available on Neon varies based on which version of Postgres you select for your project.
+
+- Postgres 14 - `timescaledb` 2.10.1
+- Postgres 15 - `timescaledb` 2.10.1
+- Postgres 16 - `timescaledb` 2.13.0
+
+_Only Apache-2 licensed features are supported. Compression is not supported._
 
 ## Enable the `timescaledb` extension
 
@@ -66,8 +78,8 @@ Returns:
 ```text
 |             show_chunks              |
 |--------------------------------------|
-| _timescaledb_internal._hyper_1_1_chunk|
-| _timescaledb_internal._hyper_1_2_chunk|
+| _db_internal._hyper_1_1_chunk|
+| _db_internal._hyper_1_2_chunk|
 ```
 
 Show detailed chunks information:
@@ -83,8 +95,8 @@ Returns:
 ```text
 |     chunk_schema     |    chunk_name    | table_bytes | index_bytes | toast_bytes | total_bytes | node_name |
 |----------------------|------------------|-------------|-------------|-------------|-------------|-----------|
-| _timescaledb_internal | _hyper_1_1_chunk |       40960 |       16384 |        8192 |       65536 |           |
-| _timescaledb_internal | _hyper_1_2_chunk |        8192 |       16384 |        8192 |       32768 |           |
+| _db_internal | _hyper_1_1_chunk |       40960 |       16384 |        8192 |       65536 |           |
+| _db_internal | _hyper_1_2_chunk |        8192 |       16384 |        8192 |       32768 |           |
 ```
 
 Add `location` as a dimension:
@@ -219,5 +231,5 @@ Returns:
 
 ## Reference
 
-https://docs.timescale.com/about/latest/timescaledb-editions/
+- [TimescaleDB Extension Documentation](https://docs.timescale.com/timescaledb/latest/)
 
