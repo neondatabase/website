@@ -2,8 +2,8 @@ name: Reindex Algolia Crawler on new doc file added
 
 on:
   push:
-    # branches: 
-    #   - main  # Ensures the workflow runs only on pushes to the main branch.
+    branches: 
+      - main  # Ensures the workflow runs only on pushes to the main branch.
     paths:
       - 'content/docs/**/*.md'
       - 'content/changelog/**/*.md'
