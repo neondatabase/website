@@ -1,0 +1,41 @@
+name: Reindex Algolia Crawler on new doc file added
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'content/docs/**/*.md'
+      - 'content/changelog/**/*.md'
+      - '!content/docs/README.md' # Exclude the README.md file
+      - '!content/docs/shared-content/**/*.md' # Exclude the shared-content folder
+
+jobs:
+  check-new-file:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Check for new file
+      id: file-check
+      run: |
+        git diff --name-status ${{ github.event.before }} ${{ github.sha }} > changes.txt
+        echo "Added files:"
+        added_files=$(cat changes.txt | grep '^A' | awk '{print $2}')
+        echo $added_files
+        if [ -z "$added_files" ]; then
+          echo "::set-output name=new_file::false"
+        else
+          echo "::set-output name=new_file::true"
+        fi
+    
+    - name: Reindex Algolia Crawler if new file added
+      if: steps.file-check.outputs.new_file == 'true'
+      env:
+        CRAWLER_USER_ID: ${{ secrets.CRAWLER_USER_ID }}
+        CRAWLER_API_KEY: ${{ secrets.CRAWLER_API_KEY }}
+        CRAWLER_ID: ${{ secrets.CRAWLER_ID }}
+      run: |
+        curl -H "Content-Type: application/json" -X POST \
+        --user $CRAWLER_USER_ID:$CRAWLER_API_KEY \
+        "https://crawler.algolia.com/api/1/crawlers/$CRAWLER_ID/reindex"
