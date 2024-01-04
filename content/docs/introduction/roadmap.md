@@ -12,26 +12,36 @@ As always, we welcome all feedback. If you see something in Neon's implementatio
 
 ## Latest features
 
-For the latest features and fixes, see our [Changelog](docs/changelog), updated every Friday. You can subscribe to Changelog updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
+For the latest features and fixes, check our [Changelog](docs/changelog), updated every Friday. You can subscribe to Changelog updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
 ## Coming soon
 
 Here's a snapshot of what we're working on now:
 
 * **Branch restore with Time Travel Assist.**
-  Restore a branch to an earlier state in its history, with Time Travel Assist to let you run queries against historical data to make sure you are restoring to the right point in time.
+
+  Instantly restore a branch to an earlier state in its history. Use Time Travel Assist to run queries against historical data, making sure you are restoring to the right point in time.
+
 * **Autoscaling visualizations.**
-  Adding real-time data visualizations to the compute configuration page, letting you see how your CPU and RAM usage changes over time. A first step towards robust observability features.
+
+  Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts your CPU and RAM usage over time. The first of many features to improve observability.
+
+* **Better onboarding**
+
+  Ongoing improvements to the onboarding experience are in the works. You can expect incremental updates in the upcoming weeks.
+
+
 
 ## What's up next
 
 And here's a glimpse at the features we'll be taking on next:
 
 * **More regions**
+
   Support for more regions will be released in the coming months.
-* Adding support for GitHub and Bitbucket as part of the Vercel integration.
+* **Improvements to Vercel integration**
 
-
+  Adding support for GitHub and Bitbucket as part of the Vercel integration.
 
 ## A brief history of time
 
