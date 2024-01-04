@@ -47,7 +47,7 @@ CREATE PUBLICATION my_publication FOR TABLE users
 This command adds a table to a publication:
 
 ```sql
-ALTER my_publication ADD TABLE sales;
+ALTER PUBLICATION my_publication ADD TABLE sales;
 ```
 
 ### Remove a table from a publication
