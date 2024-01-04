@@ -135,6 +135,8 @@ Branch data the same way you branch your code.
 
 ### Logical replication
 
+Replicate data from Neon to external data platforms and services.
+
 <DetailIconCards>
 
 <a href="/docs/guides/logical-replication-guide" description="Get started with logical replication in Neon" icon="screen">Logical replication guide</a>
