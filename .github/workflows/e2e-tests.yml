@@ -12,6 +12,7 @@ on:
       - 'src/utils/forms.js'
       - 'src/constants/forms.js'
       - 'cypress/**'
+      - 'src/utils/send-segment-event.js'
 jobs:
   install:
     runs-on: ubuntu-latest
