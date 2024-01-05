@@ -10,11 +10,11 @@ Our developers work hard to make Neon the default choice for serverless PostgreS
 
 As always, we welcome all feedback. If you see something in Neon's implementation of Postgres that you disagree with, that can be improved, or anything missing that you feel should be there, [let us know](link to best place for that).
 
-## Latest features
+## What's new
 
 For the latest features and fixes, check our [Changelog](docs/changelog), updated every Friday. You can subscribe to Changelog updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
-## Coming soon
+## What's coming
 
 Here's a snapshot of what we're working on now:
 
@@ -24,25 +24,60 @@ Here's a snapshot of what we're working on now:
 
 * **Autoscaling visualizations**
 
-    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts your CPU and RAM usage over time. The first of many features to improve observability.
+    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time. The first of many features to improve observability.
 
 * **Better onboarding**
 
     Ongoing improvements to the onboarding experience are in the works. You can expect incremental updates in the upcoming weeks.
 
+* **More integrations**
+
+    We are adding new integrations all the time. We are also making ongoing improvments to the **Integrations** management page, to make it easier to add, manage, and request new integrations.
+
+    See [Manage Integrations](/docs/manage/integrations) for more detail.
+
+* **Smoother email notifications**
+
+   We are improving the notification flow for our recent addition of email-based authentication, which we added in [Novemember, 2023](docs/changelog/2023-11-02-console#email-authentication-support). 
+
+* **Improved navigation in the Neon Console**
+
+   New breadcrumbs, page headings, and other design changes are coming to the Neon Console, to help you better navigate your project and its branches.
+
+* **Easier access to support from the Neon Console**
+
+    For Pro Tier users, we are making it easier to get access to the support form in the Neon Console, from anywhere: our website, our docs, blog posts, or anywhere you find a link to support.
 
 
-## What's up next
+## What we're working on next
 
 And here's a glimpse at the features we'll be taking on next:
 
 * **More regions**
 
-    Support for more regions will be released in the coming months.
+    Support for more regions will be released in the coming months. [is this actually coming?]
+
+* **Branching improvements**
+
+    We're adding more features to support making branching an integral part of your development workflow. This will include features in the Neon Console, but also case studies and documentation to help you make the most out of Neon's instant branching capability. Other planned improvements include:
+
+    * Showing last active branch on the **Branches** page. This helps make it easier for you to clean up unused branches.
 
 * **Improvements to Vercel integration**
 
     Adding support for GitHub and Bitbucket as part of the Vercel integration.
+
+* **Improved project sharing**
+
+    We're making it easier to view who owns which projects when sharing projects with others. We're also improving how usage limits are handled between shared projects. This is part of laying the groundwork for adding support for organization features in Neon.
+
+* **Various improvements to the Neon Console**
+
+    We are always improving the usability of our Neon Console. Some upcoming improvements include:
+    
+    * Create branches directly from the connection window.
+    * Allow self-service deletion of your user profile from Neon.
+    * Support for switching a project to maintenance mode.
 
 ## A brief history of time
 
