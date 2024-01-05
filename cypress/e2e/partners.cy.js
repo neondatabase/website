@@ -1,6 +1,6 @@
 describe('Apply Form', () => {
   beforeEach(() => {
-    cy.visit(`/partners`);
+    cy.visit('/partners');
   });
 
   it('allows users to apply to become a partner', () => {
