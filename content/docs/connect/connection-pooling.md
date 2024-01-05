@@ -55,7 +55,7 @@ Neon uses PgBouncer in _transaction mode_, which does not support Postgres featu
 
 ## Neon PgBouncer configuration settings
 
-This section describes Neon's PgBouncer configuration. The settings are not user-configurable.
+Neon's PgBouncer configuration is shown below. The settings are not user-configurable.
 
 ```ini
 [pgbouncer]
@@ -66,11 +66,12 @@ max_prepared_statements=0
 query_wait_timeout=120
 ```
 
-The following list describes the settings shown above. For a full explanation of each parameter, please refer to the official [PgBouncer documentation](https://www.pgbouncer.org/config.html).
+The following list describes each setting. For a full explanation of each parameter, please refer to the official [PgBouncer documentation](https://www.pgbouncer.org/config.html).
 
 - `pool_mode=transaction`: The pooling mode PgBouncer uses, set to `transaction` pooling.
 - `max_client_conn=10000`: Maximum number of client connections allowed.
 - `default_pool_size=64`: Default number of server connections to allow per user/database pair.
 - `max_prepared_statements=0`: Maximum number of prepared statements a connection is allowed to have at the same time. `0` means prepared statements are disabled.
+- `query_wait_timeout=120`: Maximum time queries are allowed to spend waiting for execution. Neon uses the default setting of `120` seconds.
 
 <NeedHelp/>
