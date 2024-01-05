@@ -49,10 +49,6 @@ The **Connection Details** widget on the Neon **Dashboard** provides **Pooled co
 
 ![Connection Details pooled connection string](/docs/connect/connection_details_pooled.png)
 
-## Connection pooling notes and limitations
-
-Neon uses PgBouncer in _transaction mode_, which does not support Postgres features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
-
 ## Neon PgBouncer configuration settings
 
 Neon's PgBouncer configuration is shown below. The settings are not user-configurable.
@@ -73,5 +69,9 @@ The following list describes each setting. For a full explanation of each parame
 - `default_pool_size=64`: Default number of server connections to allow per user/database pair.
 - `max_prepared_statements=0`: Maximum number of prepared statements a connection is allowed to have at the same time. `0` means prepared statements are disabled.
 - `query_wait_timeout=120`: Maximum time queries are allowed to spend waiting for execution. Neon uses the default setting of `120` seconds.
+
+## Connection pooling notes and limitations
+
+Neon uses PgBouncer in _transaction mode_, which does not support Postgres features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
 <NeedHelp/>
