@@ -79,7 +79,7 @@ Control groups, a Linux kernel feature that allows the organization, prioritizat
 
 ## Compute
 
-A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon compute instance (also referred to as a [compute endpoint](#compute-endpoint)) runs Postgres. The amount of compute resources available to a Neon project is defined by tier. Neon supports free  and paid tiers.
+A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon compute instance (also referred to as a [compute endpoint](#compute-endpoint)) runs Postgres. The amount of compute resources available to a Neon project is defined by tier. Neon supports free and paid tiers.
 
 ## Compute endpoint
 
@@ -157,6 +157,10 @@ See [Branching](#branching).
 
 A collection of database instances, typically managed as a single entity.
 
+## Decoder plugin
+
+Utilized in PostgreSQL replication architecture to decode WAL entries into a format understandable by the subscriber. The `pgoutput` decoder plugin is the default decoder, with alternatives like `wal2json` for specific use cases. Neon supports `pgoutput` and `wal2json`. See [Postgres logical replication concepts](/docs/guides/logical-replication-concepts).
+
 ## Dedicated resources
 
 Resources including compute and storage dedicated to a single Neon account.
@@ -179,7 +183,7 @@ See [Neon Free Tier](#neon-free-tier).
 
 ## IP allowlist
 
-An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a [Neon Pro Plan](/docs/introduction/pro-plan) feature that can be used used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or to your [primary branch](#primary-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
+An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a [Neon Pro Plan](/docs/introduction/pro-plan) feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [primary branch](#primary-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
 
 ## Kubernetes
 
@@ -208,6 +212,10 @@ A feature provided by some hypervisors, such as QEMU, that allows the transfer o
 ## Local File Cache
 
 A layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute instance. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly.
+
+## Logical replication
+
+A method of replicating data between databases or platforms, focusing on replicating transactional changes (like `INSERT`, `UPDATE`, `DELETE`) rather than the entire database, enabling selective replication of specific tables or rows. Neon supports logical replication of data to external destinations. See [Logical replication](/docs/guides/logical-replication-guide). 
 
 ## LSN
 
@@ -283,7 +291,7 @@ An open-source relational database management system (RDBMS) emphasizing extensi
 
 A Postgres role named for the registered Neon account is created with each Neon project. This role and any additional role created in the Neon Console, API, or CLI is assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, sequences. Roles created with SQL are created with the same basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-access).
 
-Older projects may have a `web-access` system role, used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth). The `web-access` role is system managed. It cannot be modified, removed, or used in other authentication scenarios.
+Older projects may have a `web-access` system role, used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth). The `web-access` role is system-managed. It cannot be modified, removed, or used in other authentication scenarios.
 
 ## Primary branch
 
@@ -309,9 +317,9 @@ The total volume of data stored in your Neon project. Also, a billing metric tha
 
 A Neon component that functions as a multitenant service that accepts and handles connections from clients that use the Postgres protocol.
 
-## Passwordless auth
+## Publisher
 
-A Neon feature that allows you to connect to a Neon project with a single `psql` command. See [Passwordless auth](/docs/connect/passwordless-connect).
+In the context of logical replication, the publisher is the primary data source where changes occur. It's responsible for sending those changes to one or more subscribers. A Neon database can act as a publisher in a logical replication setup. See [Logical replication](/docs/guides/logical-replication-guide). 
 
 ## QEMU
 
@@ -323,7 +331,11 @@ Random Access Memory, a type of computer memory used to store data that is being
 
 ## Region
 
-The geographic location where Neon project resource are located. Neon supports creating projects in several Amazon Web Services (AWS) regions. For information about regions supported by Neon, see [Regions](/docs/introduction/regions).
+The geographic location where Neon project resources are located. Neon supports creating projects in several Amazon Web Services (AWS) regions. For information about regions supported by Neon, see [Regions](/docs/introduction/regions).
+
+## Replication slot
+
+On the publisher database in a logical replication setup, replication slots track the progress of replication to ensure no data in the WAL is purged before the subscriber has successfully replicated it, thus preventing data loss or inconsistency. See [Postgres logical replication concepts](/docs/guides/logical-replication-concepts).
 
 ## Resale
 
@@ -357,6 +369,14 @@ A Neon Control Plane operation that starts a compute endpoint when there is an e
 
 Where data is recorded and stored. Neon storage consists of Pageservers, which store hot data, and a cloud object store, such as Amazon S3, that stores cold data for cost optimization and durability.
 
+## Subscriber
+
+The database or platform receiving changes from the publisher in a logical replication setup. It applies changes received from the publisher to its own data set. Currently, a Neon database can only act as a publisher in a logical replication setup. See [Logical replication](/docs/guides/logical-replication-guide). 
+
+## Subscription
+
+Represents the downstream side of logical replication, establishing a connection to the publisher and subscribing to one or more publications to receive updates. See [Postgres logical replication concepts](/docs/guides/logical-replication-concepts).
+
 ## suspend_compute
 
 A Neon Control Plane operation that suspends a compute endpoint after a period of inactivity. See [Operations](/docs/manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](/docs/introduction/compute-lifecycle).
@@ -389,6 +409,14 @@ Virtual CPU, a unit of processing power allocated to a virtual machine or comput
 
 See [Write-Ahead Logging](#write-ahead-logging-wal).
 
+## WAL receiver
+
+In logical replication, on the subscriber side, the WAL receiver is a process that receives the replication stream (decoded WAL data) and applies these changes to the subscriber's database. See [Postgres logical replication concepts](/docs/guides/logical-replication-concepts).
+
+## WAL sender
+
+In logical replication, the WAL sender is a process on the publisher database that reads the WAL and sends relevant data to the subscriber. See [Postgres logical replication concepts](/docs/guides/logical-replication-concepts).
+
 ## WAL slice
 
 Write-ahead logs in a specific LSN range.
@@ -400,6 +428,8 @@ The stream of data written to the Write-Ahead Log (WAL) during transactional pro
 ## Write-Ahead Logging (WAL)
 
 A standard mechanism that ensures the durability of your data. Neon relies on WAL to separate storage and compute, and to support features such as branching and point-in-time restore.
+
+In logical replication, the WAL records all changes to the data, serving as the source for data that needs to be replicated.
 
 ## Written data
 
