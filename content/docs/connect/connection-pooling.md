@@ -59,33 +59,18 @@ This section describes Neon's PgBouncer configuration. The settings are not user
 
 ```ini
 [pgbouncer]
-listen_port=6432
-listen_addr=0.0.0.0
-auth_type=scram-sha-256
-auth_user=cloud_admin
-auth_dbname=postgres
-client_tls_sslmode=disable
-server_tls_sslmode=disable
 pool_mode=transaction
 max_client_conn=10000
 default_pool_size=64
 max_prepared_statements=0
-admin_users=cloud_admin
+query_wait_timeout=120
 ```
 
-The following list describes the explcitly set variable settings above. You can assume that variables not configured explcitly, such as `query_wait_timeout`, use the default setting. For a full explanation of each parameter, please refer to the official [PgBouncer documentation](https://www.pgbouncer.org/config.html).
+The following list describes the settings shown above. For a full explanation of each parameter, please refer to the official [PgBouncer documentation](https://www.pgbouncer.org/config.html).
 
-- `listen_port=6432`: The port that PgBouncer will listen on for incoming connections.
-- `listen_addr=0.0.0.0`: The address to listen on for incoming connections. 0.0.0.0 means listening on all available interfaces.
-- `auth_type=scram-sha-256`: The method used for client authentication.
-- `auth_user=cloud_admin`: Default user for PgBouncer to connect to the databases. The `cloud_admin` user is a Neon-managed admin role.
-- `auth_dbname=postgres`: The database name used for authenticating users when `auth_user` is set.
-- `client_tls_sslmode=disable`: Disables TLS for client connections.
-- `server_tls_sslmode=disable`: Disables TLS for server connections.
 - `pool_mode=transaction`: The pooling mode PgBouncer uses, set to `transaction` pooling.
 - `max_client_conn=10000`: Maximum number of client connections allowed.
 - `default_pool_size=64`: Default number of server connections to allow per user/database pair.
 - `max_prepared_statements=0`: Maximum number of prepared statements a connection is allowed to have at the same time. `0` means prepared statements are disabled.
-- `admin_users=cloud_admin`: Users listed as admins can use the PgBouncer admin console. Only the Neon `cloud_admin` role can access the PgBouncer admin console. 
 
 <NeedHelp/>
