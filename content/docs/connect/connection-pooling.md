@@ -4,7 +4,7 @@ subtitle: Learn how to enable connection pooling in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2023-11-24T11:25:06.744Z'
+updatedOn: '2024-01-05T18:59:15.317Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to offer support for connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -48,6 +48,27 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech
 The **Connection Details** widget on the Neon **Dashboard** provides **Pooled connection** checkbox that adds the `-pooler` option to a connection string that you can copy and paste.
 
 ![Connection Details pooled connection string](/docs/connect/connection_details_pooled.png)
+
+## Neon PgBouncer configuration settings
+
+Neon's PgBouncer configuration is shown below. The settings are not user-configurable.
+
+```ini
+[pgbouncer]
+pool_mode=transaction
+max_client_conn=10000
+default_pool_size=64
+max_prepared_statements=0
+query_wait_timeout=120
+```
+
+The following list describes each setting. For a full explanation of each parameter, please refer to the official [PgBouncer documentation](https://www.pgbouncer.org/config.html).
+
+- `pool_mode=transaction`: The pooling mode PgBouncer uses, set to `transaction` pooling.
+- `max_client_conn=10000`: Maximum number of client connections allowed.
+- `default_pool_size=64`: Default number of server connections to allow per user/database pair.
+- `max_prepared_statements=0`: Maximum number of prepared statements a connection is allowed to have at the same time. `0` means prepared statements are disabled.
+- `query_wait_timeout=120`: Maximum time queries are allowed to spend waiting for execution. Neon uses the default setting of `120` seconds.
 
 ## Connection pooling notes and limitations
 

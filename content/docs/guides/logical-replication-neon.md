@@ -3,7 +3,7 @@ title: Manage logical replication in Neon
 subtitle: Learn how to manage logical replication in Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-01-02T11:35:19.801Z'
+updatedOn: '2024-01-05T19:45:09.628Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots. It also includes information about logical replication specific to Neon, including [known limitations](#known-limitations).
@@ -47,7 +47,7 @@ CREATE PUBLICATION my_publication FOR TABLE users
 This command adds a table to a publication:
 
 ```sql
-ALTER my_publication ADD TABLE sales;
+ALTER PUBLICATION my_publication ADD TABLE sales;
 ```
 
 ### Remove a table from a publication
