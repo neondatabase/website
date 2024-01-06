@@ -103,7 +103,7 @@ The maximum request size and response size for queries over HTTP is 10 MB. Addit
 
 The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions` option keys for customizing the query function.
 
-- **arrayMode: boolean**
+- `arrayMode: boolean`
 
   When `arrayMode` is true, rows are returned as an array of arrays instead of an array of objects:
 
@@ -123,7 +123,7 @@ The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions`
   // -> [[12, "My post", ...]]
   ```
 
-- **fullResults: boolean**
+- `fullResults: boolean`
 
   When `fullResults` is `true`, additional metadata is returned alongside the result rows, which are then found in the `rows` property of the return value. The metadata matches what would be returned by `node-postgres`:
 
@@ -155,7 +155,7 @@ The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions`
  
   ```
 
-- **fetchOptions: Record<string, any>**
+- `fetchOptions: Record<string, any>`
 
   The `fetchOptions` option can also be passed to either `neon(...)` or the `query` function. This option takes an object that is merged with the options to the `fetch` call.
 
