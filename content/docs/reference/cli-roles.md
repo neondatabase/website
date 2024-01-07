@@ -44,8 +44,9 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
-| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
-| --branch   | Branch ID   | string | |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
+| `--branch`   | Branch ID or name   | string | |
 
 If a branch ID or name is not provided, the command lists roles for the primary branch of the project.
 
@@ -90,9 +91,10 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
-| --project-id         | Project ID                           | string | Only if your Neon account has more than one project |
-| --branch          | Branch ID                            | string | |
-| --name      | The role name. Cannot exceed 63 bytes in length.  | string | &check; |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`         | Project ID                           | string | Only if your Neon account has more than one project |
+| `--branch`          | Branch ID or name                           | string | |
+| `--name`      | The role name. Cannot exceed 63 bytes in length.  | string | &check; |
 
 If a branch ID or name is not provided, the command creates a role in the primary branch of the project.
 
@@ -127,8 +129,9 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
-| --project-id         | Project ID                           | string | Only if your Neon account has more than one project |
-| --branch          | Branch ID                            | string | |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`         | Project ID                           | string | Only if your Neon account has more than one project |
+| `--branch`          | Branch ID or name                          | string | |
 
 If a branch ID or name is not provided, the command assumes the role resides in the primary branch of the project.
 

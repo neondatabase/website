@@ -36,8 +36,12 @@ The authentication flow for the Neon CLI follows this order:
 - If the credentials file is not found, the Neon CLI initiates the `neonctl auth` web authentication process.
 </Admonition>
 
-### Options
+#### Options
 
-Only [global options](/docs/reference/neon-cli#global-options) apply.
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `auth` subcommand supports this option:
+
+| Option       | Description   | Type   | Required  |
+| ------------ | ------------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 
 <NeedHelp/>

@@ -22,7 +22,11 @@ neonctl me
 
 ### Options
 
-Only [global options](/docs/reference/neon-cli#global-options) apply.
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `me` subcommand supports this option:
+
+| Option       | Description   | Type   | Required  |
+| ------------ | ------------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 
 ### Examples
 
