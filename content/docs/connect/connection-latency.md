@@ -44,13 +44,13 @@ Given the potential impact on application responsiveness, it's important to have
 
 With the [Neon Pro Plan](/docs/introduction/pro-plan), you can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The **Suspend compute after a period of inactivity** setting is set to 5 minutes by default. You can disable autosuspend entirely or set a custom period up to a maximum of 7 days. Limiting or disabling autosuspend can eliminate or reduce startup times, but it also increases compute usage. For configuration instructions, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
-Consider combining this strategy with Neon's _Autoscaling_ feature (available with the [Neon Pro Plan](/docs/introduction/pro-plan)), which allows you to run a compute with minimal resources and scale up on demand. For example, with _Autoscaling_, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the **Suspend compute after a period of inactivity** is set to 1 hour so that your compute only suspends after an hour of inactivity, and _Autoscaling_ is configured with the 1/4 minimum compute size to keep costs low during periods of inactivity or light usage.
+Consider combining this strategy with Neon's _Autoscaling_ feature (available with the [Neon Pro Plan](/docs/introduction/pro-plan)), which allows you to run a compute with minimal resources and scale up on demand. For example, with autoscaling, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the **Suspend compute after a period of inactivity** is set to 1 hour so that your compute only suspends after an hour of inactivity, and autoscaling is configured with the 1/4 minimum compute size to keep costs low during periods of inactivity or light usage.
 
-![Connection warmup Autosuspend and Autoscaling configuration](/docs/connect/cold_start_compute_config.png)
+![Connection warmup autosuspend and autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
 To determine what an "always-on" compute would cost per month, please refer to our [Billing](/docs/introduction/billing) documentation or the [pricing calculator](/calculator).
 
-For Autoscaling configuration instructions, see [Compute size and Autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+For autoscaling configuration instructions, see [Compute size and autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
 ### Place your application and database in the same region
 

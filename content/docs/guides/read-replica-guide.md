@@ -34,7 +34,7 @@ To create a read replica from the Neon Console:
 2. Select the branch where your database resides.
 3. Click **Add compute**.
 4. On the **Create Compute Endpoint** dialog, select **Read-only** as the **Compute type**.
-5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable **Autoscaling** and configure a minimum and maximum compute size. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your read-only compute is automatically suspended. The default setting is 5 minutes. You can set this value up 7 days.
+5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your read-only compute is automatically suspended. The default setting is 5 minutes. You can set this value up 7 days.
     <Admonition type="note">
     The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
     </Admonition>

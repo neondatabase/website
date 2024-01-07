@@ -22,7 +22,7 @@ Project
 
 Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints.
 
-Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The  [Neon Free Tier](/docs/introduction/free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint. The [Neon Pro Plan](/docs/introduction/pro-plan) supports larger compute sizes and _Autoscaling_.
+Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The  [Neon Free Tier](/docs/introduction/free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint. The [Neon Pro Plan](/docs/introduction/pro-plan) supports larger compute sizes and autoscaling.
 
 ## View a compute endpoint
 
@@ -33,7 +33,7 @@ Compute endpoint details shown on the branch page include:
 - **Id**: The compute endpoint ID.
 -- **Type**: The type of compute endpoint. `R/W` (Read-write) or `R/O` (Read-only).
 - **Status**: The compute endpoint status (`Active`, `Idle`, or `Stopped`).
-- **Compute size**: The size of the compute endpoint. [Neon Pro Plan](/docs/introduction/pro-plan) users can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint. Shows _Autoscaling_ minimum and maximum vCPU values if _Autoscaling_ is enabled.
+- **Compute size**: The size of the compute endpoint. [Neon Pro Plan](/docs/introduction/pro-plan) users can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint. Shows autoscaling minimum and maximum vCPU values if autoscaling is enabled.
 - **Auto-suspend delay**: The number of seconds of inactivity after which a compute endpoint is automatically suspended. The default is 300 seconds (5 minutes). For more information, see [Autosuspend configuration](#auto-suspend-configuration).
 - **Last active**: The date and time the compute was last active.
 
@@ -71,7 +71,7 @@ Some key points to understand about how your endpoint responds when you make cha
 * Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
 * Changes to autosuspend settings do not require an endpoint restart; existing connections are unaffected.
 
-### Compute size and Autoscaling configuration
+### Compute size and autoscaling configuration
 
 [Neon Pro Plan](/docs/introduction/pro-plan) users can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
 

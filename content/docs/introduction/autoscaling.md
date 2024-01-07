@@ -12,20 +12,20 @@ Neon's _Autoscaling_ feature, available for [Neon Pro Plan](/docs/introduction/p
 Neon's Autoscaling feature offers the following benefits:
 
 - **On-demand scaling:** Autoscaling helps with workloads that experience variations over time, such as applications with regional or time-based changes in demand.
-- **Cost effectiveness**: Autoscaling optimizes resource utilization, ensuring that organizations only pay for required resources, rather than over-provisioning to handle peak loads.
+- **Cost-effectiveness**: Autoscaling optimizes resource utilization, ensuring that organizations only pay for required resources, rather than over-provisioning to handle peak loads.
 - **Resource and cost control**: Autoscaling operates within a user-defined range, ensuring that your compute resources and associated costs do not scale indefinitely.
-- **No manual intervention**: After you enable Autoscaling and set scaling limits, no manual intervention is required, allowing you to focus on your applications.
+- **No manual intervention**: After you enable autoscaling and set scaling limits, no manual intervention is required, allowing you to focus on your applications.
 
-## How to enable Autoscaling
+## How to enable autoscaling
 
-You can enable Autoscaling when creating a Neon project or afterward using a simple compute configuration dialog. For instructions, see:
+You can enable autoscaling when creating a Neon project or afterward using a simple compute configuration dialog. For instructions, see:
 
 - [Create a project](/docs/manage/projects#create-a-project)
 - [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint)
 
-## How Autoscaling works
+## How autoscaling works
 
-A Neon project can have one or more computes, each representing an individual Postgres instance. Storage is decoupled from these computes, meaning that the Postgres servers executing queries are physically separate from the data storage location. This separation offers numerous advantages, including enablement of Neon's Autoscaling feature.
+A Neon project can have one or more computes, each representing an individual Postgres instance. Storage is decoupled from these computes, meaning that the Postgres servers executing queries are physically separate from the data storage location. This separation offers numerous advantages, including enablement of Neon's autoscaling feature.
 
 ![High-level architecture diagram](/docs/introduction/autoscale-high-level-architecture.webp)
 
@@ -55,12 +55,12 @@ The live migration process allows for the proactive reduction of node load by mi
 
 ### Memory scaling
 
-Postgres memory consumption can escalate rapidly in specific scenarios. Fortunately, Neon's Autoscaling system is able to detect memory usage increases without constantly requesting metrics from the VM. This is accomplished by running Postgres within a [cgroups](/docs/reference/glossary#cgroups), which provides notifications when memory usage crosses a specified threshold. Using cgroups in this way requires running our [vm-informant](/docs/reference/glossary#vm-informant) in the VM alongside Postgres to request more resources from the autoscaler-agent when Postgres consumes too much memory. The vm-informant also verifies that downscaling requests from an autoscaler-agent will leave sufficient memory leftover.
+Postgres memory consumption can escalate rapidly in specific scenarios. Fortunately, Neon's autoscaling system is able to detect memory usage increases without constantly requesting metrics from the VM. This is accomplished by running Postgres within a [cgroups](/docs/reference/glossary#cgroups), which provides notifications when memory usage crosses a specified threshold. Using cgroups in this way requires running our [vm-informant](/docs/reference/glossary#vm-informant) in the VM alongside Postgres to request more resources from the autoscaler-agent when Postgres consumes too much memory. The vm-informant also verifies that downscaling requests from an autoscaler-agent will leave sufficient memory leftover.
 
 ### Local file cache
 
-To expedite queries, the Autoscaling system incorporates a Postgres extension that places a cache in front of the storage layer. Many queries benefit from this additional memory, particularly those requiring multiple database scans (such as creating an index). The [local file cache](/docs/reference/glossary#local-file-cache) capitalizes on the additional memory allocated to the VM by dedicating a portion to the cache to itself. The cache is backed by disk and kept at a size intended to fit in the kernel page cache. Due to the storage model, writebacks are not required, resulting in near-instant evictions. The vm-informant adjusts the local file cache size when scaling occurs through the autoscaler-agent, ensuring seamless operation.
+To expedite queries, the autoscaling system incorporates a Postgres extension that places a cache in front of the storage layer. Many queries benefit from this additional memory, particularly those requiring multiple database scans (such as creating an index). The [local file cache](/docs/reference/glossary#local-file-cache) capitalizes on the additional memory allocated to the VM by dedicating a portion to the cache to itself. The cache is backed by disk and kept at a size intended to fit in the kernel page cache. Due to the storage model, writebacks are not required, resulting in near-instant evictions. The vm-informant adjusts the local file cache size when scaling occurs through the autoscaler-agent, ensuring seamless operation.
 
 ## Autoscaling source code
 
-To further explore Neon's autoscaling implementation, visit Neon's [Autoscaling](https://github.com/neondatabase/autoscaling) GitHub repository. While not primarily designed for external use, Neon welcomes exploration and contributions.
+To further explore Neon's autoscaling implementation, visit Neon's [autoscaling](https://github.com/neondatabase/autoscaling) GitHub repository. While not primarily designed for external use, Neon welcomes exploration and contributions.

@@ -91,9 +91,9 @@ Automatically scale compute resources up and down based on demand.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/autoscaling" description="Find out how autoscaling can reduce your costs." icon="autoscaling">Learn about Autoscaling</a>
+<a href="/docs/introduction/autoscaling" description="Find out how autoscaling can reduce your costs." icon="autoscaling">Learn about autoscaling</a>
 
-<a href="/docs/guides/autoscaling-guide" description="Enable Autoscaling to automatically scale compute resources on demand" icon="enable">Enable Autoscaling</a>
+<a href="/docs/guides/autoscaling-guide" description="Enable autoscaling to automatically scale compute resources on demand" icon="enable">Enable autoscaling</a>
 
 </DetailIconCards>
 
