@@ -24,7 +24,7 @@ To enable Autoscaling when you first create your project:
     ![Autoscaling](/docs/guides/autoscaling_project_creation.png)
 
     <Admonition type="note">
-    You can configure the Auto-suspend setting for your compute endpoint at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".
+    You can configure the autosuspend setting for your compute endpoint at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".
     </Admonition>
 
 6. Click **Create Project**. Your initial compute endpoint is created with the specified settings. All future compute endpoints that you create will use this setting.
@@ -43,7 +43,7 @@ To configure Autoscaling default settings for an existing project:
     ![Autoscaling](/docs/guides/autoscaling_existing_project.png)
 
     <Admonition type="note">
-    You can configure the Auto-suspend setting for your compute endpoint at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".
+    You can configure the autosuspend setting for your compute endpoint at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".
     </Admonition>
 
 6. Click **Save**.
@@ -65,7 +65,7 @@ To edit a compute endpoint:
     Neon scales the compute size up and down within the specified range to meet workload demand. _Autoscaling_ currently supports a range of 1/4 (.25) to 7 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs.
 
     <Admonition type="note">
-    You can configure the Auto-suspend setting for your compute endpoint at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".
+    You can configure the autosuspend setting for your compute endpoint at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".
     </Admonition>
 1. Click **Save**.
 

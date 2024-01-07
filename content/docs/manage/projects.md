@@ -36,7 +36,7 @@ Once you open a project, you can use the **Settings** page to manage that partic
 You can tab between these sections:
 
 - **General** &#8212; Change the name of your project or copy the project ID.
-- **Compute** &#8212; Set the auto-suspend and sizing defaults for any new compute instances you create when branching.
+- **Compute** &#8212; Set the autosuspend and sizing defaults for any new compute instances you create when branching.
 - **Storage** &#8212; Choose how long Neon maintains a history of changes for all branches.
 - **Sharing** &#8212; Let other users access your project's databases.
 - **Delete** &#8212; Use with care! This action deletes your entire project and all its objects, and is irreversible.
@@ -62,7 +62,7 @@ To create a Neon project:
 3. Specify values for **Name**, **Postgres version**, and **Region**. Project names are limited to 64 characters. If you are a [Neon Pro Plan](/docs/introduction/pro-plan) user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
     - Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
-    - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
+    - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
   
 4. Click **Create Project**.
 

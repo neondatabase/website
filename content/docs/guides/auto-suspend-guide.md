@@ -1,20 +1,20 @@
 ---
-title: Configuring Auto-suspend for Neon computes
-subtitle: Learn how to configure Neon's Auto-suspend feature to control when your
+title: Configuring Autosuspend for Neon computes
+subtitle: Learn how to configure Neon's Autosuspend feature to control when your
   compute scales to zero
 enableTableOfContents: true
 updatedOn: '2023-10-24T18:56:54.982Z'
 ---
 
-Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature controls when a Neon compute instance transitions to an `Idle` state (scales to zero) due to inactivity. This guide demonstrates how to configure the _Auto-suspend_ setting in your Neon project.
+Neon's [Autosuspend](/docs/introduction/auto-suspend) feature controls when a Neon compute instance transitions to an `Idle` state (scales to zero) due to inactivity. This guide demonstrates how to configure the autosuspend setting in your Neon project.
 
-[Neon Pro Plan](/docs/introduction/pro-plan) users can configure the _Auto-suspend_ setting for a new project, for an existing project, or for an individual compute endpoint. Configuring the _Auto-suspend_ setting for a new or existing project sets the project's default Auto-suspend setting, which is used from that point forward when creating new compute endpoints.
+[Neon Pro Plan](/docs/introduction/pro-plan) users can configure the autosuspend setting for a new project, for an existing project, or for an individual compute endpoint. Configuring the Autosuspend setting for a new or existing project sets the project's default autosuspend setting, which is used from that point forward when creating new compute endpoints.
 
-### Configure the Auto-suspend setting for a new project
+### Configure the autosuspend setting for a new project
 
-Configuring the _Auto-suspend_ setting for a new project sets the project's default, which is applied to all compute endpoints created from that point forward. You can adjust this _Auto-suspend_ default at any time, or configure the setting for individual compute endpoints later, as necessary.
+Configuring the autosuspend setting for a new project sets the project's default, which is applied to all compute endpoints created from that point forward. You can adjust this autosuspend default at any time, or configure the setting for individual compute endpoints later, as necessary.
 
-To configure the _Auto-suspend_ default setting when you first create your project:
+To configure the autosuspend default setting when you first create your project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
@@ -28,11 +28,11 @@ To configure the _Auto-suspend_ default setting when you first create your proje
 1. Click **Save**.
 1. Click **Create Project**. Your initial compute endpoint is created with the specified setting.
 
-### Configure the Auto-suspend setting for an existing project
+### Configure the autosuspend setting for an existing project
 
-Configuring the _Auto-suspend_ setting for an existing project sets the project's default, which is applied to all compute endpoints created from that point forward. Existing compute endpoints are unaffected. You can adjust the _Auto-suspend_ default or configure the setting for individual compute endpoints later, as necessary.
+Configuring the autosuspend setting for an existing project sets the project's default, which is applied to all compute endpoints created from that point forward. Existing compute endpoints are unaffected. You can adjust the autosuspend default or configure the setting for individual compute endpoints later, as necessary.
 
-To configure the Auto-suspend default for an existing project:
+To configure the autosuspend default for an existing project:
 
 1. Select a project in the Neon console.
 1. On the Neon **Dashboard**, select **Settings**.
@@ -45,9 +45,9 @@ To configure the Auto-suspend default for an existing project:
 
 1. Click **Save**.
 
-## Configure Auto-suspend for a compute endpoint
+## Configure autosuspend for a compute endpoint
 
-To configure the _Auto-suspend_ setting for an individual compute endpoint:
+To configure the autosuspend setting for an individual compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.

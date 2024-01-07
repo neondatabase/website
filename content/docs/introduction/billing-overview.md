@@ -8,7 +8,7 @@ updatedOn: '2024-01-03T21:00:38.275Z'
 The largest part of your bill typically comes from compute costs &#8212; the size of your compute plus your level of activity. Storage costs make up the next largest part of your bill. The amount of data that you write, either to storage within Neon or data egress outside of Neon, also adds to your cost, though typically a small percentage per month.
 
 ## Compute costs
-With key features like [autoscaling](/docs/guides/autoscaling-guide), [auto-suspend](/docs/guides/auto-suspend-guide), minimum and max [compute sizes](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) enabled, you can get a sense of how your compute costs might accrue in the following graph.
+With key features like [autoscaling](/docs/guides/autoscaling-guide), [autosuspend](/docs/guides/auto-suspend-guide), minimum and max [compute sizes](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) enabled, you can get a sense of how your compute costs might accrue in the following graph.
 
 ![Compute metrics graph](/docs/introduction/compute-metrics2.png)
 

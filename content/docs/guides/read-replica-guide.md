@@ -14,7 +14,7 @@ The general methodology of using read replicas to segregate read-only work from 
 - Providing read-only data access to specific users or applications who do not need to modify data
 - Configuring different CPU and memory resources for each read replica for different users and applications
 
-Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Auto-suspend_ features are also supported, providing you with control over compute usage.
+Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Autosuspend_ features are also supported, providing you with control over compute usage.
 
 ## Prerequisites
 
@@ -128,7 +128,7 @@ In the response body for this method, read replica compute endpoints are identif
 
 ## Edit a read replica
 
-You can edit a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to change the [Compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) or [Auto-suspend](/docs/manage/endpoints#auto-suspend-configuration) configuration.
+You can edit a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to change the [Compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) or [Autosuspend](/docs/manage/endpoints#auto-suspend-configuration) configuration.
 
 <Tabs labels={["Console", "API"]}>
 

@@ -6,7 +6,7 @@ isDraft: false
 updatedOn: '2023-12-20T16:07:46.077Z'
 ---
 
-Neon's _Auto-suspend_ feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute instance transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state takes anywhere from 500 ms to a few seconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
+Neon's _Autosuspend_ feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute instance transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state takes anywhere from 500 ms to a few seconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
 
 Cold-start times are fastest in the `US East (Ohio) — aws-us-east-2` region, which hosts the Neon Control Plane. The Neon Control plane will be deployed regionally in future Neon releases, bringing the same millesecond cold-start times to all supported regions.
 
@@ -34,19 +34,19 @@ You can try any of these methods and watch the status of your compute as it chan
 
 Given the potential impact on application responsiveness, it's important to have strategies in place for managing connection latencies and timeouts. Here are some methods you can implement:
 
-- [Adjust your Auto-suspend (scale to zero) configuration](#adjust-your-auto-suspend-scale-to-zero-configuration)
+- [Adjust your Autosuspend (scale to zero) configuration](#adjust-your-auto-suspend-scale-to-zero-configuration)
 - [Place your application and database in the same region](#place-your-application-and-database-in-the-same-region)
 - [Increase your connection timeout](#increase-your-connection-timeout)
 - [Build connection timeout handling into your application](#build-connection-timeout-handling-into-your-application)
 - [Use application-level caching](#use-application-level-caching)
 
-### Adjust your Auto-suspend (scale to zero) configuration
+### Adjust your Autosuspend (scale to zero) configuration
 
-With the [Neon Pro Plan](/docs/introduction/pro-plan), you can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The **Suspend compute after a period of inactivity** setting is set to 5 minutes by default. You can disable Auto-suspend entirely or set a custom period up to a maximum of 7 days. Limiting or disabling autosuspend can eliminate or reduce startup times, but it also increases compute usage. For configuration instructions, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+With the [Neon Pro Plan](/docs/introduction/pro-plan), you can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The **Suspend compute after a period of inactivity** setting is set to 5 minutes by default. You can disable autosuspend entirely or set a custom period up to a maximum of 7 days. Limiting or disabling autosuspend can eliminate or reduce startup times, but it also increases compute usage. For configuration instructions, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
 Consider combining this strategy with Neon's _Autoscaling_ feature (available with the [Neon Pro Plan](/docs/introduction/pro-plan)), which allows you to run a compute with minimal resources and scale up on demand. For example, with _Autoscaling_, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the **Suspend compute after a period of inactivity** is set to 1 hour so that your compute only suspends after an hour of inactivity, and _Autoscaling_ is configured with the 1/4 minimum compute size to keep costs low during periods of inactivity or light usage.
 
-![Connection warmup Auto-suspend and Autoscaling configuration](/docs/connect/cold_start_compute_config.png)
+![Connection warmup Autosuspend and Autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
 To determine what an "always-on" compute would cost per month, please refer to our [Billing](/docs/introduction/billing) documentation or the [pricing calculator](/calculator).
 
