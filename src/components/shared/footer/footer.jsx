@@ -46,8 +46,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
           >
             <p>Made in SF and the World</p>
             <p>
-              <span className="[@media(max-width:820px)]:hidden">Copyright </span>Ⓒ 2022 – 2024
-              Neon, Inc.
+              <span className="lg:hidden">Copyright </span>Ⓒ 2022 – 2024 Neon, Inc.
             </p>
           </div>
         </div>
