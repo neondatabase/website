@@ -355,7 +355,7 @@ Here is an example `GET` request asking for the next 100 projects, starting with
 curl --request GET \
      --url https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100\
      --header 'Accept: application/json' \
-     --header "Authorization: Bearer $NEON_API_KEY" | jq'
+     --header "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 </CodeBlock>
 
