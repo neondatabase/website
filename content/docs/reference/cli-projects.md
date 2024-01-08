@@ -180,8 +180,8 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--name` | The project name. The value cannot be empty.               | string  |             &check;                          |
-| `--ip-allow` | A list of IP addresses that are allowed to connect to the endpoint               | string  |             &check;                          |
-| `--ip-primary-only` | If true, the list will be applied only to the primary branch. The deafault value is `false`.  | boolean  |             &check;                          |
+| `--ip-allow` | A list of IP addresses that are allowed to connect to the endpoint               | string  |                                       |
+| `--ip-primary-only` | If true, the list will be applied only to the primary branch. The deafault value is `false`.  | boolean  |                                       |
 
 #### Examples
 
