@@ -114,7 +114,7 @@ neonctl branches delete my_test_branch
 curl --request DELETE \
      --url https://console.neon.tech/api/v2/projects/<project-id>/branches/<branch-id> \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' |jq
+     --header 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
 </CodeTabs>

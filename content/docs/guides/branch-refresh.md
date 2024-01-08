@@ -125,7 +125,7 @@ curl --request PATCH \
     "branch_id": "br-falling-flower-15986510"
   }
 }
-' |jq
+' | jq
 ```
 
 </CodeBlock>
@@ -172,7 +172,7 @@ The [Delete branch](https://api-docs.neon.tech/reference/deleteprojectbranch) AP
 curl --request DELETE \
      --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches/br-wandering-forest-45768684 \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' |jq
+     --header 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
 </CodeBlock>
