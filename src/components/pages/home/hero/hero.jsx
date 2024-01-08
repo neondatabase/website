@@ -4,13 +4,12 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import LINKS from 'constants/links';
-
-import airplane from './logos/airplane.svg';
-import clouflare from './logos/cloudflare.svg';
-import hasura from './logos/hasura.svg';
-import replit from './logos/replit.svg';
-import vercel from './logos/vercel.svg';
-import wundergraph from './logos/wundergraph.svg';
+import airplane from 'images/partners-logos/airplane.svg';
+import clouflare from 'images/partners-logos/cloudflare.svg';
+import hasura from 'images/partners-logos/hasura.svg';
+import replit from 'images/partners-logos/replit.svg';
+import vercel from 'images/partners-logos/vercel.svg';
+import wundergraph from 'images/partners-logos/wundergraph.svg';
 
 const logos = [
   {

@@ -41,8 +41,8 @@ const NeonCli = () => {
   const [activeItem, setActiveItem] = useState(items[0]);
   return (
     <section className="neon-cli safe-paddings bg-black pt-40 text-white 3xl:pt-36 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16">
-      <Container className="grid grid-cols-12 gap-x-10 lg:gap-y-10" size="md">
-        <div className="col-start-8 col-end-13 -ml-10 lg:col-start-1 lg:ml-0">
+      <Container className="grid grid-cols-12 gap-x-10 lg:grid-cols-1 lg:gap-y-10" size="md">
+        <div className="col-start-8 col-end-13 -ml-10 lg:col-start-1 lg:col-end-2 lg:ml-0">
           <Heading id="saas-title" tag="h2" size="xl" theme="white">
             Postgres at your fingertips with the Neon CLI
           </Heading>
@@ -57,14 +57,14 @@ const NeonCli = () => {
             Learn more
           </Link>
         </div>
-        <div className="col-span-6 col-start-1 row-start-1 max-w-[716px] pt-[71px] 2xl:pt-12 xl:-mr-6 xl:pt-9 lg:col-span-full lg:row-auto lg:mr-0 lg:max-w-[760px] lg:pt-0">
-          <div className="flex gap-x-2.5">
+        <div className="col-span-6 col-start-1 row-start-1 max-w-[716px] pt-[71px] 2xl:pt-12 xl:-mr-6 xl:pt-9 lg:col-span-full lg:row-auto lg:mr-0 lg:max-w-[760px] lg:pt-0 sm:max-w-full">
+          <div className="flex gap-x-2.5 xs:gap-x-1.5">
             {items.map(({ name }, index) => (
               <button
                 className={clsx(
-                  'relative rounded-t-[3px] border-[5px] border-b-0 border-[#333] px-[15px] py-3 font-mono text-sm font-bold uppercase leading-none transition-colors duration-200 after:transition-colors after:duration-200 md:px-3 md:text-xs',
+                  'relative rounded-t-[3px] border-[5px] border-b-0 border-[#333] px-[15px] py-3 font-mono text-sm font-bold uppercase leading-none transition-colors duration-200 after:transition-colors after:duration-200 md:px-3 md:text-xs sm:border-[3px] sm:pb-[9px] xs:px-2',
                   activeItem.name === name
-                    ? 'text-green-45 after:absolute after:inset-x-0 after:bottom-[-5px] after:z-10 after:h-[5px] after:bg-black'
+                    ? 'text-green-45 after:absolute after:inset-x-0 after:bottom-[-6px] after:z-10 after:h-[6px] after:bg-black'
                     : 'bg-[#333] text-white hover:text-green-45'
                 )}
                 type="button"
@@ -76,7 +76,7 @@ const NeonCli = () => {
             ))}
           </div>
           <CodeBlock
-            className="prose-blog dark prose rounded-b-[3px] rounded-tr-[3px] border-[5px] border-[#333] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:pb-5 [&_pre]:pt-7"
+            className="prose-blog dark prose rounded-b-[3px] rounded-tr-[3px] border-[5px] border-[#333] sm:border-[3px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:pb-5 [&_pre]:pt-7"
             isTrimmed={false}
           >
             {activeItem.code}

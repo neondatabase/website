@@ -134,7 +134,7 @@ const CTA = () => {
           {/* remove the invisible and opacity-0 classes to display this block again when it comes in handy */}
           <p
             id="cta-bottom-text"
-            className="t-xl invisible mx-auto mt-[56px] max-w-[500px] text-white opacity-0 2xl:mt-[46px] 2xl:max-w-[450px] xl:mt-10 xl:max-w-[400px]"
+            className="t-xl invisible mx-auto mt-[56px] hidden max-w-[500px] text-white opacity-0 2xl:mt-[46px] 2xl:max-w-[450px] xl:mt-10 xl:max-w-[400px]"
           >
             Same Postgres command as you used to will get you{' '}
             <Link to="/" theme="underline-primary-1">
