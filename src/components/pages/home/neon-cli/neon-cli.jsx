@@ -62,7 +62,7 @@ const NeonCli = () => {
             {items.map(({ name }, index) => (
               <button
                 className={clsx(
-                  'relative rounded-t-[3px] border-[5px] border-b-0 border-[#333] px-[15px] py-3 font-mono text-sm font-bold uppercase leading-none transition-colors duration-200 after:transition-colors after:duration-200 md:px-3 md:text-xs sm:border-[3px] sm:pb-[9px] xs:px-2',
+                  'relative rounded-t-md border-[5px] border-b-0 border-[#333] px-[15px] py-3 font-mono text-sm font-bold uppercase leading-none transition-colors duration-200 after:transition-colors after:duration-200 md:px-3 md:text-xs sm:border-[3px] sm:pb-[9px] xs:px-2',
                   activeItem.name === name
                     ? 'text-green-45 after:absolute after:inset-x-0 after:bottom-[-6px] after:z-10 after:h-[6px] after:bg-black'
                     : 'bg-[#333] text-white hover:text-green-45'
@@ -76,7 +76,7 @@ const NeonCli = () => {
             ))}
           </div>
           <CodeBlock
-            className="prose-blog dark prose rounded-b-[3px] rounded-tr-[3px] border-[5px] border-[#333] sm:border-[3px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:pb-5 [&_pre]:pt-7"
+            className="prose-blog dark prose rounded-b-md rounded-tr-md border-[5px] border-[#333] sm:border-[3px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:pb-5 [&_pre]:pt-7"
             isTrimmed={false}
           >
             {activeItem.code}
