@@ -42,7 +42,7 @@ The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) re
 
 The `project_id` value used in the example below is `young-silence-08999984`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key. The branch is given the  name `recovery_branch`. You will change the name in a later step.
 
-```curl
+```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches \
      --header 'Accept: application/json' \
@@ -130,7 +130,7 @@ The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint
 
 <CodeBlock shouldWrap>
 
-```curl
+```bash
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/endpoints/ep-curly-term-54009904 \
      --header 'Accept: application/json' \
@@ -189,7 +189,7 @@ The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) AP
 
 <CodeBlock shouldWrap>
 
-```curl
+```bash
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-twilight-field-06246553 \
      --header 'Accept: application/json' \
@@ -241,7 +241,7 @@ Rename the new branch to the name of the old branch, which was `main`. The [Upda
 
 <CodeBlock shouldWrap>
 
-```curl
+```bash
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851 \
      --header 'Accept: application/json' \
@@ -296,7 +296,7 @@ The [Set primary branch](https://api-docs.neon.tech/reference/setprimaryprojectb
 
 <CodeBlock shouldWrap>
 
-```curl
+```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851/set_as_primary \
      --header 'Accept: application/json' \
