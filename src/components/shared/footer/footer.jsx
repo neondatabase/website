@@ -45,9 +45,9 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
             )}
           >
             <p>Made in SF and the World</p>
-            <p className="flat-breaks [@media(max-width:820px)]:flat-none md:!flat-breaks">
-              Copyright Ⓒ 2022 – 2024
-              <br /> Neon, Inc.
+            <p>
+              <span className="[@media(max-width:820px)]:hidden">Copyright </span>Ⓒ 2022 – 2024
+              Neon, Inc.
             </p>
           </div>
         </div>
