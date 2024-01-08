@@ -40,7 +40,7 @@ If you do not have one already, create a Neon project. Save your connection deta
       ```shell
       npm install postgres
       ```
-      
+
       ```shell
       npm install @neondatabase/serverless
       ```
@@ -147,7 +147,7 @@ import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-ssl: true
+  ssl: true
 });
 
 export async function getServerSideProps() {
@@ -206,7 +206,7 @@ import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-ssl: true
+  ssl: true
 });
 
 export async function getStaticProps() {
@@ -254,7 +254,6 @@ export default function Page({ data }) {}
 
 </CodeTabs>
 
-
 ### Serverless Functions
 
 From your Serverless Functions, add the following code snippet to connect to your Neon database:
@@ -266,7 +265,7 @@ import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-ssl: true
+  ssl: true
 });
 
 export default async function handler(req, res) {
@@ -340,7 +339,6 @@ export const config = {
   runtime: 'edge',
 };
 ```
-
 
 ## Run the app
 

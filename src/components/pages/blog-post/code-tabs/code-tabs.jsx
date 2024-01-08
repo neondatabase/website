@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-import CodeBlock from 'components/shared/code-block';
+import CodeBlock from '../code-block';
 
 const CodeTabs = ({ items }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -31,7 +31,6 @@ const CodeTabs = ({ items }) => {
         .filter((_, index) => index === currentIndex)
         .map(({ language, code, highlight }, index) => (
           <CodeBlock
-            className="[&_pre]:my-0"
             language={language}
             key={index}
             highlight={highlight.toString()}

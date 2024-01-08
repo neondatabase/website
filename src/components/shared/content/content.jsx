@@ -1,9 +1,9 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import clsx from 'clsx';
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
+import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 
 import CodeTabs from 'components/pages/doc/code-tabs';
@@ -57,12 +57,12 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
-  code: (props) => {
-    if (props?.className?.startsWith('language-') && props?.children) {
-      return <CodeBlock as="figure" {...props} />;
-    }
-    return <code {...props} />;
-  },
+  // code: (props) => {
+  //   if (props?.className?.startsWith('language-') && props?.children) {
+  //     return <CodeBlock as="figure" {...props} />;
+  //   }
+  //   return <code {...props} />;
+  // },
   pre: (props) => <CodeBlock {...props} />,
   a: (props) => {
     const { href, children, ...otherProps } = props;
@@ -114,7 +114,11 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   YoutubeIframe,
   DefinitionList,
   Admonition,
-  CodeBlock,
+  CodeBlock: (props) => {
+    // eslint-disable-next-line react/prop-types
+    const { className, shouldWrap, ...otherProps } = props;
+    return <div className={clsx(className, { 'code-wrap': shouldWrap })} {...otherProps} />;
+  },
   CodeTabs,
   DetailIconCards,
   TechnologyNavigation,
@@ -145,6 +149,18 @@ const Content = ({
             remarkPlugins: [
               // Adds support for GitHub Flavored Markdown
               remarkGfm,
+            ],
+            rehypePlugins: [
+              [
+                rehypePrettyCode,
+                {
+                  grid: true,
+                  theme: {
+                    dark: 'github-dark-dimmed',
+                    light: 'github-light',
+                  },
+                },
+              ],
             ],
           },
         }}

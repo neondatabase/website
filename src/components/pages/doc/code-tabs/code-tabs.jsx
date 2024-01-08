@@ -2,19 +2,10 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
-import CodeBlock from 'components/shared/code-block';
-
-const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
+const CodeTabs = ({ children = null, labels = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [highlighted, setHighlighted] = useState('');
-
-  useEffect(() => {
-    const { highlight } = children[currentIndex].props ?? {};
-
-    setHighlighted(highlight || '');
-  }, [children, currentIndex]);
 
   return (
     <figure className="my-5 max-w-full overflow-hidden rounded-md bg-gray-new-98 dark:bg-gray-new-10">
@@ -37,24 +28,12 @@ const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
           </div>
         ))}
       </div>
-
-      {React.Children.map(children, (child, index) => {
+      {children.map((child, index) => {
         if (index !== currentIndex) {
           return null;
         }
 
-        const { children, className } =
-          child.props?.children.props?.children.props || child.props?.children.props || {};
-
-        return (
-          <CodeBlock
-            className={clsx(className, { 'code-wrap': shouldWrap }, 'code-tab')}
-            highlight={highlighted || ''}
-            showLineNumbers
-          >
-            {children}
-          </CodeBlock>
-        );
+        return <Fragment key={index}>{child}</Fragment>;
       })}
     </figure>
   );

@@ -1,6 +1,7 @@
 @layer components {
   .highlighted-code {
-    .token.keyword,
+    @apply relative;
+    /* .token.keyword,
     .token.class-name,
     .token.url,
     .token.tag {
@@ -58,6 +59,6 @@
 
     .react-syntax-highlighter-line-number.linenumber {
       @apply !min-w-[2.25em] !text-left text-gray-5;
-    }
+    } */
   }
 }
