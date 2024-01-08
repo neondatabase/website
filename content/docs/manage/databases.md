@@ -107,7 +107,7 @@ The API method appears as follows when specified in a cURL command. The `project
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "database": {
@@ -172,7 +172,7 @@ The API method appears as follows when specified in a cURL command. The `project
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 <details>
@@ -216,7 +216,7 @@ The API method appears as follows when specified in a cURL command. The `project
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases/mydb' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "database": {
@@ -281,7 +281,7 @@ The API method appears as follows when specified in a cURL command. The `project
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases/database1' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 <details>

@@ -54,7 +54,7 @@ cURL command:
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
@@ -115,7 +115,7 @@ cURL command:
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?limit=1' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
@@ -149,7 +149,7 @@ To list the next page of operations, add the `cursor` value returned in the resp
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?cursor=2022-12-09T08%3A47%3A52.20417Z&limit=1' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
@@ -191,7 +191,7 @@ cURL command:
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/97c7a650-e4ff-43d7-8c58-4c67f5050167' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
@@ -252,7 +252,7 @@ You can use the [Get operation details](https://api-docs.neon.tech/reference/lis
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/055b17e6-ffe3-47ab-b545-cfd7db6fd8b8' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>

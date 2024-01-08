@@ -157,7 +157,7 @@ The API method appears as follows when specified in a cURL command. The branch y
 curl -X 'POST' \
   'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "endpoint": {
@@ -226,7 +226,7 @@ The API method appears as follows when specified in a cURL command:
 curl -X 'GET' \
   'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
@@ -299,7 +299,7 @@ The API method appears as follows when specified in a cURL command. The example 
 curl -X 'PATCH' \
   'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints/ep-young-art-646685' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "endpoint": {
@@ -379,7 +379,7 @@ The API method appears as follows when specified in a cURL command.
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints/ep-young-art-646685' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>

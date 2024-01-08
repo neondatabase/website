@@ -35,7 +35,7 @@ The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) re
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {
@@ -117,7 +117,7 @@ The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/%20dark-cell-12604300/endpoints/ep-divine-violet-55990977 \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {
@@ -172,7 +172,7 @@ The [Delete branch](https://api-docs.neon.tech/reference/deleteprojectbranch) AP
 curl --request DELETE \
      --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches/br-wandering-forest-45768684 \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' | jq
+     --header "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 </CodeBlock>
@@ -226,7 +226,7 @@ Optionally, you can rename the new branch to the name of the old branch. The [Up
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches/br-falling-flower-15986510 \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {

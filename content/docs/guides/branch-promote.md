@@ -46,7 +46,7 @@ The `project_id` value used in the example below is `young-silence-08999984`. Yo
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API' \
+     --header "Authorization: Bearer $NEON_API" \
      --header 'Content-Type: application/json' \
      --data '
 {
@@ -134,7 +134,7 @@ The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/endpoints/ep-curly-term-54009904 \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {
@@ -193,7 +193,7 @@ The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) AP
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-twilight-field-06246553 \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {
@@ -245,7 +245,7 @@ Rename the new branch to the name of the old branch, which was `main`. The [Upda
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851 \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {
@@ -300,7 +300,7 @@ The [Set primary branch](https://api-docs.neon.tech/reference/setprimaryprojectb
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851/set_as_primary \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY'
+     --header "Authorization: Bearer $NEON_API_KEY"
 ```
 
 </CodeBlock>

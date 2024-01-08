@@ -42,7 +42,7 @@ The following `cURL` example uses the `/projects` endpoint to retrieve projects 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 where:

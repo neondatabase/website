@@ -113,7 +113,7 @@ Here is a sample `POST` in `curl` that creates a new project called `UserNew` an
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {
@@ -143,7 +143,7 @@ Here is a sample `PATCH` that updates both the `active_time_seconds` and `comput
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/[project_ID]\
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {
@@ -181,7 +181,7 @@ Here is an example a `GET` request for an individual project.
 curl --request GET \
      --url https://console.neon.tech/api/v2/projects/[project_ID] \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' | jq
+     --header "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 And here is what the response might look like. The key fields are highlighted.
@@ -280,7 +280,7 @@ Here is an example query that returns metrics from September 1st and December 1s
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/consumption/projects?limit=10&from=2023-09-01T00%3A00%3A00Z&to=2023-12-01T00%3A00%3A00Z' \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' | jq
+     --header "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 </CodeBlock>
 
@@ -355,7 +355,7 @@ Here is an example `GET` request asking for the next 100 projects, starting with
 curl --request GET \
      --url https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100\
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' | jq'
+     --header "Authorization: Bearer $NEON_API_KEY" | jq'
 ```
 </CodeBlock>
 
@@ -396,7 +396,7 @@ These default values are set in the
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {
@@ -421,7 +421,7 @@ In this POST request, we are creating a new endpoint at the same time that we cr
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/noisy-pond-28482075/branches \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {
@@ -450,7 +450,7 @@ In this example, we are creating a new endpoint for an already existing branch w
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/noisy-pond-28482075/endpoints \
      --header 'Accept: application/json' \
-     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {

@@ -265,7 +265,7 @@ The API method appears as follows when specified in a cURL command. The `myproje
 ```bash
 curl 'https://console.neon.tech/api/v2/projects' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "project": {
@@ -401,7 +401,7 @@ The API method appears as follows when specified in a cURL command:
 ```bash
 curl 'https://console.neon.tech/api/v2/projects' \
  -H 'Accept: application/json' \
- -H 'Authorization: Bearer $NEON_API_KEY' | jq
+ -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 <details>
@@ -443,7 +443,7 @@ The API method appears as follows when specified in a cURL command. The `project
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "project": {
@@ -491,7 +491,7 @@ The API method appears as follows when specified in a cURL command. The `project
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
