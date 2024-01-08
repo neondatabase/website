@@ -40,11 +40,20 @@
         - title: Custom
           slug: introduction/custom-plan
     - title: Billing
+      slug: introduction/about-billing
       items:
+        - title: Billing overview
+          slug: introduction/billing-overview
+        - title: Pricing calculators
+          slug: introduction/billing-calculators
         - title: Billing metrics
           slug: introduction/billing
+        - title: Billing rates
+          slug: introduction/billing-rates
         - title: Manage billing
           slug: introduction/manage-billing
+        - title: Sample billing
+          slug: introduction/billing-sample
     - title: Support
       slug: introduction/support
     - title: Status

@@ -3,7 +3,7 @@ title: Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2023-12-27T09:34:39.980Z'
+updatedOn: '2024-01-06T10:04:05.686Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
@@ -44,7 +44,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [pg_prewarm](https://www.postgresql.org/docs/15/pgprewarm.html)              | 1.2        | 1.2         |   1.2         |                                                                                                                  |
 | [pg_roaringbitmap](https://github.com/ChenHuajun/pg_roaringbitmap)          | 0.5          | 0.5         |  0.5         |                                                                                                                  | Install with `CREATE EXTENSION roaringbitmap;`
 | [pg_stat_statements](https://www.postgresql.org/docs/15/pgstatstatements.html)       | 1.10 | 1.10 | 1.10 |
-| [pg_tiktoken](https://github.com/kelvich/pg_tiktoken)              | 0.0.1                 | 0.0.1                  |  0.0.1                  |                                                                                                                  |
+| [pg_tiktoken](https://github.com/kelvich/pg_tiktoken)              | 0.0.1                 | 0.0.1                  |  0.0.1                  |                                                                                                                  | The [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role has `EXECUTE` privilege on the `pg_stat_statements_reset()` function.
 | [pg_trgm](https://www.postgresql.org/docs/15/pgtrgm.html)                 | 1.6           | 1.6            |     1.6            |                                                                                                                 |
 | [pg_uuidv7](https://github.com/fboulnois/pg_uuidv7)                | 1.0                   | 1.0                  |    1.0                  |                                                                                                                  |
 | [pgcrypto](https://www.postgresql.org/docs/15/pgcrypto.html)                 | 1.3         | 1.3          |    1.3          |                                                                                                                   |
