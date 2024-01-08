@@ -50,19 +50,19 @@ const NeonCli = () => {
             Use the CLI to manage Neon directly from the terminal.
           </p>
           <Link
-            className="mt-[18px] inline-flex text-2xl lg:text-xl md:text-lg"
+            className="mt-[18px] inline-flex text-2xl font-medium lg:text-xl md:text-lg"
             to={LINKS.cliReference}
             theme="underline-primary-1"
           >
             Learn more
           </Link>
         </div>
-        <div className="col-span-6 col-start-1 row-start-1 max-w-[716px] pt-[71px] 2xl:pt-12 xl:-mr-6 xl:pt-9 lg:col-span-full lg:row-auto lg:mr-0 lg:max-w-[760px] lg:pt-0 sm:max-w-full">
+        <div className="col-span-6 col-start-1 row-start-1 max-w-[716px] pt-[71px] 2xl:pt-12 xl:-mr-6 xl:pt-9 lg:hidden">
           <div className="flex gap-x-2.5 xs:gap-x-1.5">
             {items.map(({ name }, index) => (
               <button
                 className={clsx(
-                  'relative rounded-t-md border-[5px] border-b-0 border-[#333] px-[15px] py-3 font-mono text-sm font-bold uppercase leading-none transition-colors duration-200 after:transition-colors after:duration-200 md:px-3 md:text-xs sm:border-[3px] sm:pb-[9px] xs:px-2',
+                  'relative rounded-t-md border-[5px] border-b-0 border-[#333] px-[15px] py-3 font-mono text-sm font-bold uppercase leading-none transition-colors duration-200 after:transition-colors after:duration-200',
                   activeItem.name === name
                     ? 'text-green-45 after:absolute after:inset-x-0 after:bottom-[-6px] after:z-10 after:h-[6px] after:bg-black'
                     : 'bg-[#333] text-white hover:text-green-45'
@@ -76,12 +76,27 @@ const NeonCli = () => {
             ))}
           </div>
           <CodeBlock
-            className="prose-blog dark prose rounded-b-md rounded-tr-md border-[5px] border-[#333] sm:border-[3px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:pb-5 [&_pre]:pt-7"
+            className="prose-blog dark prose rounded-b-md rounded-tr-md border-[5px] border-[#333] 2xl:rounded-tr-none sm:border-[3px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:pb-5 [&_pre]:pt-7"
             isTrimmed={false}
           >
             {activeItem.code}
           </CodeBlock>
         </div>
+        <ul className="hidden gap-y-6 lg:flex lg:flex-col">
+          {items.map(({ name, code }, index) => (
+            <li key={index}>
+              <div className="relative rounded-t-md border-[5px] border-b-0 border-[#333] px-4 py-3 font-mono text-sm font-bold uppercase leading-none md:text-xs sm:border-[3px] sm:border-b-0">
+                {name}
+              </div>
+              <CodeBlock
+                className="prose-blog dark prose rounded-b-md rounded-tr-md border-[5px] border-[#333] 2xl:rounded-tr-none sm:border-[3px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:pb-5 [&_pre]:pt-7"
+                isTrimmed={false}
+              >
+                {code}
+              </CodeBlock>
+            </li>
+          ))}
+        </ul>
       </Container>
     </section>
   );
