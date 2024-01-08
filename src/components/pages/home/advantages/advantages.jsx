@@ -1,3 +1,5 @@
+'use client';
+
 // import { motion } from 'framer-motion';
 // import { StaticImage } from 'gatsby-plugin-image';
 // import React, { useRef } from 'react';

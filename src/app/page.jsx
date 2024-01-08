@@ -1,6 +1,8 @@
+import Advantages from 'components/pages/home/advantages';
 import Community from 'components/pages/home/community';
+import CTA from 'components/pages/home/cta';
 import DataBranching from 'components/pages/home/data-branching';
-import FirstSection from 'components/pages/home/first-section';
+import Hero from 'components/pages/home/hero';
 import Scalability from 'components/pages/home/scalability';
 import SecondSection from 'components/pages/home/second-section';
 import Storage from 'components/pages/home/storage';
@@ -13,7 +15,9 @@ export const metadata = getMetadata(SEO_DATA.index);
 
 const Home = () => (
   <Layout headerTheme="black" footerWithTopBorder withOverflowHidden>
-    <FirstSection />
+    <Hero />
+    <CTA />
+    <Advantages />
     <Community />
     <Scalability />
     <Storage />

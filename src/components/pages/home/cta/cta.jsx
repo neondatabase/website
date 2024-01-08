@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import copyToClipboard from 'copy-to-clipboard';
 import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
@@ -81,7 +83,7 @@ const CTA = () => {
   return (
     <LazyMotion features={domAnimation}>
       <m.section
-        className="safe-paddings bg-black pt-[504px] text-center 3xl:pt-[397px] 2xl:pt-[344px] xl:pt-[310px] lg:pt-[238px] md:pt-[160px]"
+        className="safe-paddings bg-black pt-48 text-center md:pt-40"
         initial="from"
         animate={controls}
       >
