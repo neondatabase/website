@@ -76,10 +76,16 @@ const Hero = () => (
           Sign Up
         </Button>
       </div>
-      <ul className="mt-20 flex justify-between gap-x-16 lg:flex-wrap lg:justify-center lg:gap-x-14 lg:gap-y-10 md:gap-y-8">
+      <ul className="mt-20 flex justify-between gap-x-16 xl:gap-x-14 lg:mt-16 lg:flex-wrap lg:justify-center lg:gap-y-10 md:mt-14 md:gap-y-8 sm:mt-10 xs:gap-y-6">
         {logos.map(({ logo, alt, width }) => (
           <li key={alt}>
-            <Image className="lg:h-10 lg:w-auto" src={logo} alt={alt} width={width} height={42} />
+            <Image
+              className="lg:h-10 lg:w-auto md:h-7"
+              src={logo}
+              alt={alt}
+              width={width}
+              height={42}
+            />
           </li>
         ))}
       </ul>
