@@ -94,7 +94,7 @@ The following Neon API method creates a database. To view the API documentation 
 
 The role specified by `owner_name` is the owner of that database.
 
-```text
+```http
 POST /projects/{project_id}/branches/{branch_id}/databases
 ```
 
@@ -163,7 +163,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 The following Neon API method lists databases for the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranchdatabases).
 
-```text
+```http
 GET /projects/{project_id}/branches/{branch_id}/databases
 ```
 
@@ -207,7 +207,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 The following Neon API method updates the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateprojectbranchdatabase).
 
-```text
+```http
 PATCH /projects/{project_id}/branches/{branch_id}/databases/{database_name}
 ```
 
@@ -271,7 +271,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 The following Neon API method deletes the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranchdatabase).
 
-```text
+```http
 DELETE /projects/{project_id}/branches/{branch_id}/databases/{database_name}
 ```
 

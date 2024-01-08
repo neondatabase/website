@@ -125,7 +125,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
 
-```text
+```http
 POST /projects/{project_id}/branches/{branch_id}/roles
 ```
 
@@ -193,7 +193,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 The following Neon API method lists roles for the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranchroles).
 
-```text
+```http
 GET /projects/{project_id}/branches/{branch_id}/roles
 ```
 
@@ -235,7 +235,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 The following Neon API method resets the password for the specified role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/resetprojectbranchrolepassword).
 
-```text
+```http
 POST /projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password
 ```
 
@@ -294,7 +294,7 @@ curl -X 'POST' \
 
 The following Neon API method deletes the specified role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranchrole).
 
-```text
+```http
 DELETE /projects/{project_id}/branches/{branch_id}/roles/{role_name}
 ```
 

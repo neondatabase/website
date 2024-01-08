@@ -256,7 +256,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a project. The [Neon Free Tier](/docs/introduction/free-tier) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
 
-```text
+```http
 POST /projects
 ```
 
@@ -392,7 +392,7 @@ The response includes information about the roles, the ready-to-use database (`n
 
 The following Neon API method lists projects for your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojects).
 
-```text
+```http
 GET /projects
 ```
 
@@ -434,7 +434,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 
 The following Neon API method updates the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateproject).
 
-```text
+```http
 PATCH /projects/{project_id}
 ```
 
@@ -481,7 +481,7 @@ curl 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
 
 The following Neon API method deletes the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteproject).
 
-```text
+```http
 DELETE /projects/{project_id}
 ```
 

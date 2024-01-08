@@ -147,7 +147,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a compute endpoint.
 
-```text
+```http
 POST /projects/{project_id}/endpoints
 ```
 
@@ -216,7 +216,7 @@ curl -X 'POST' \
 
 The following Neon API method lists compute endpoints for the specified project. A compute endpoint belongs to a Neon project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectendpoints).
 
-```text
+```http
 GET /projects/{project_id}/endpoints
 ```
 
@@ -289,7 +289,7 @@ curl -X 'GET' \
 
 The following Neon API method updates the specified compute endpoint. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateprojectendpoint).
 
-```text
+```http
 PATCH /projects/{project_id}/endpoints/{endpoint_id}
 ```
 
@@ -369,7 +369,7 @@ curl -X 'PATCH' \
 
 The following Neon API method deletes the specified compute endpoint. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectendpoint).
 
-```text
+```http
 DELETE /projects/{project_id}/endpoints/{endpoint_id}
 ```
 

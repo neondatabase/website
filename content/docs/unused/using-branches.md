@@ -29,7 +29,7 @@ Using the Neon API requires an API key. For information about how to obtain an A
 
 To create a branch, use the following API method:
 
-```bash
+```http
 POST /projects/{project_id}/branches
 ```
 

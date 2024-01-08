@@ -94,7 +94,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 The following Neon API method creates an API key. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createapikey).
 
-```text
+```http
 POST /api_keys 
 ```
 
@@ -125,7 +125,7 @@ The response body includes an `id` for the key and a generated 64-bit `key` valu
 
 The following Neon API method lists API keys for your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listapikeys).
 
-```text
+```http
 GET /api_keys
 ```
 
@@ -172,7 +172,7 @@ curl "https://console.neon.tech/api/v2/api_keys" \
 
 The following Neon API method revokes the specified API key. The `key_id` is a required parameter. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/revokeapikey).
 
-```text
+```http
 DELETE /api_keys/{key_id}
 ```
 

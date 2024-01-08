@@ -20,7 +20,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranch).
 
-```text
+```http
 POST /projects/{project_id}/branches
 ```
 
@@ -122,7 +122,7 @@ The response includes information about the branch, the branch's compute endpoin
 
 The following Neon API method lists branches for the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranches).
 
-```text
+```http
 GET /projects/{project_id}/branches
 ```
 
@@ -172,7 +172,7 @@ Response:
 
 The following Neon API method deletes the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranch).
 
-```text
+```http
 DELETE /projects/{project_id}/branches/{branch_id}
 ```
 
