@@ -55,9 +55,9 @@ Alternatively, you can create read replicas using the [Neon API](https://api-doc
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/late-bar-27572981/endpoints \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "endpoint": {

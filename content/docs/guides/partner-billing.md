@@ -112,9 +112,9 @@ Here is a sample `POST` in `curl` that creates a new project called `UserNew` an
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "project": {
@@ -142,9 +142,9 @@ Here is a sample `PATCH` that updates both the `active_time_seconds` and `comput
 ```bash
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/[project_ID]\
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "project": {
@@ -180,8 +180,8 @@ Here is an example a `GET` request for an individual project.
 ```bash
 curl --request GET \
      --url https://console.neon.tech/api/v2/projects/[project_ID] \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' | jq
+     --header 'Accept: application/json' \
+     --header 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 
 And here is what the response might look like. The key fields are highlighted.
@@ -279,8 +279,8 @@ Here is an example query that returns metrics from September 1st and December 1s
 ```bash
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/consumption/projects?limit=10&from=2023-09-01T00%3A00%3A00Z&to=2023-12-01T00%3A00%3A00Z' \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' | jq
+     --header 'Accept: application/json' \
+     --header 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
 </CodeBlock>
 
@@ -354,8 +354,8 @@ Here is an example `GET` request asking for the next 100 projects, starting with
 ```bash
 curl --request GET \
      --url https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100\
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' | jq'
+     --header 'Accept: application/json' \
+     --header 'Authorization: Bearer $NEON_API_KEY' | jq'
 ```
 </CodeBlock>
 
@@ -395,9 +395,9 @@ These default values are set in the
 ``` bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "project": {
@@ -420,9 +420,9 @@ In this POST request, we are creating a new endpoint at the same time that we cr
 ``` bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/noisy-pond-28482075/branches \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "branch": {
@@ -449,9 +449,9 @@ In this example, we are creating a new endpoint for an already existing branch w
 ``` bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/noisy-pond-28482075/endpoints \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header 'Authorization: Bearer $NEON_API_KEY' \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "endpoint": {
