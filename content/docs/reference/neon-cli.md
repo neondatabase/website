@@ -51,7 +51,7 @@ Global options:
 | [roles](/docs/reference/cli-roles)                                   | `list`, `create`,  `delete`            | Manage roles              |
 | [operations](/docs/reference/cli-operations)                         | `list`                                 | Manage operations         |
 | [connection-string](/docs/reference/cli-connection-string)           |                                        | Get connection string     |
-| [set-context](/docs/reference/cli-set-context)                       | `project-id`, `branch`                 | Set context for session   |
+| [set-context](/docs/reference/cli-set-context)                       |                                        | Set context for session   |
 | [completion](/docs/reference/cli-completion)                         |                                        | Generate a completion script     |
 
 ## Global options
