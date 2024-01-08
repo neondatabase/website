@@ -3,7 +3,7 @@ title: Replicate data with Airbyte
 subtitle: Learn how to replicate data from Neon with Airbyte
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-12-21T15:11:12.212Z'
+updatedOn: '2024-01-08T20:02:33.921Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. 
