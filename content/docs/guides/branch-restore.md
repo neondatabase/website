@@ -30,7 +30,7 @@ Restoring to another branch is coming soon. See our [roadmap](link to roadmap). 
 
 A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. It is important to realize this when you restoring branches. For example, let's say you want to fix some corrupted content in a given database. If you restore your branch to an earlier point in time, the operation applies to all databases on the branch, not just the one you are troubleshooting.
 
-<span style="font-color:green;style:italic"> Can we give any opinionated recommendations on how to architect your branches and their databases to keep things in good order, letting you restore without risk of inadvertent issues? For example, you probalby would not want to create a database per customer on a single branch. Instead, a branch per customer with dedicated db.</span>
+<span style="font-color:green;"> Can we give any opinionated recommendations on how to architect your branches and their databases to keep things in good order, letting you restore without risk of inadvertent issues? For example, you probalby would not want to create a database per customer on a single branch. Instead, a branch per customer with dedicated db.</span>
 
 ### Connections temporarily interrupted
 
