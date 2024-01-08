@@ -20,7 +20,7 @@ Neon preserves your destination branch's latest data in an automatically created
 {branch_name}_old_{head_timestamp}
 ```
 
-We encourage you to use Time Travel Assist _before_ running a restore job, but if you end up needing to revert your changes, you can manually make this backup branch your primary branch using the steps described in [Branching - Point in time restore](docs/guides/branching-pitr#change-your-primary-branch). 
+We encourage you to use Time Travel Assist _before_ running a restore job, but if you end up needing to revert your changes, you can manually make this backup branch your primary branch using the steps described in [Branching - Point in time restore](/docs/guides/branching-pitr#change-your-primary-branch). 
 
 <Admonition type="note">
 Restoring to another branch is coming soon. See our [roadmap](link to roadmap). Once its available you can use this same one-click Restore operation to restore your brnach to this backup. For now, you can use the procedures described in [Branching - Point in time restore](docs/guides/branching-pitr#change-your-primary-branch).
@@ -30,7 +30,7 @@ Restoring to another branch is coming soon. See our [roadmap](link to roadmap). 
 
 A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. It is important to realize this when you restoring branches. For example, let's say you want to fix some corrupted content in a given database. If you restore your branch to an earlier point in time, the operation applies to all databases on the branch, not just the one you are troubleshooting.
 
-:construction_worker: <code>Can we give any opinionated recommendations on how to architect your branches and their databases to keep things in good order, letting you restore without risk of inadvertent issues? For example, you probalby would not want to create a database per customer on a single branch. Instead, a branch per customer with dedicated db.</code>:construction_worker:	
+:construction_worker: <code>Can we give any opinionated recommendations on how to architect your branches and their databases to keep things in good order, letting you restore without risk of inadvertent issues? For example, you probably would not want to create a database per customer on a single branch. Instead, a branch per customer with dedicated db.</code>:construction_worker:	
 
 ### Connections temporarily interrupted
 
@@ -40,7 +40,7 @@ Existing connections are temporarily interrupted during the restore operation. H
 
 The **Restore** page lets you restore a branch to an earlier timestamp in its own history. Choose your branch, pick your timestamp, and then click the **Restore branch** button.
 
-![branch restore to timestamp](/docs/guide/branch_restore_timestamp.png))
+![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
 
 If you want to choose an LSN as your restore point, you need to select **Show Advanced options**.
 1. Change your point in time selction from default **Timestamp** to **LSN**. 
