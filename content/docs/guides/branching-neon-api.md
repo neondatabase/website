@@ -20,7 +20,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranch).
 
-```text
+```http
 POST /projects/{project_id}/branches
 ```
 
@@ -30,10 +30,10 @@ The API method appears as follows when specified in a cURL command:
 This method does not require a request body. Without a request body, the method creates a branch from the project's primary branch, and a compute endpoint is not created.
 </Admonition>
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "endpoints": [
@@ -122,16 +122,16 @@ The response includes information about the branch, the branch's compute endpoin
 
 The following Neon API method lists branches for the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranches).
 
-```text
+```http
 GET /projects/{project_id}/branches
 ```
 
 The API method appears as follows when specified in a cURL command:
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
@@ -172,7 +172,7 @@ Response:
 
 The following Neon API method deletes the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranch).
 
-```text
+```http
 DELETE /projects/{project_id}/branches/{branch_id}
 ```
 
@@ -182,7 +182,7 @@ The API method appears as follows when specified in a cURL command:
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches/br-dawn-scene-747675' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 - The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.

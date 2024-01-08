@@ -61,9 +61,9 @@ neonctl branches create --project-id <project-id> --name my_test_branch
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/<project-id>/branches \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "branch": {
@@ -113,8 +113,8 @@ neonctl branches delete my_test_branch
 ```bash
 curl --request DELETE \
      --url https://console.neon.tech/api/v2/projects/<project-id>/branches/<branch-id> \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' |jq
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 </CodeTabs>

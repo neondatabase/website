@@ -66,9 +66,9 @@ neonctl branches create --name development
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/{project_id}/branches \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "branch": {
