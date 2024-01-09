@@ -7,10 +7,6 @@ updatedOn: '2024-01-03T21:00:38.272Z'
 
 Find all the documentation you need to understand, manage, and optimize the features and metrics that contribute to your monthly Neon bill.
 
-<SignUp/>
-
-<NeedHelp/>
-
 ## Pricing calculators and billing overview
 
 Start with our pricing calculators to get a sense of how different compute and storage sizes can affect your bill. Then get more detail about the underlying metrics.
