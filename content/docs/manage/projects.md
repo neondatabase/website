@@ -309,12 +309,18 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 
 <TabItem>
 
-Clear the **Allowed IP addresses and ranges** field and the **Apply to primary branch only (main)** filed and click **Apply changes**.
+1. Select a project in the Neon console.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **IP Allow**.
+4. Clear the **Allowed IP addresses and ranges** field.
+5. If applicable, clear the **Apply to primary branch only** checkbox.
+5. Click **Apply changes**.
 
 </TabItem>
 
 <TabItem>
-Specify the `--ip-allow` option without specifying any IP address values. If applicable, specify `--ip-primary-only false`. 
+
+Specify the `--ip-allow` option without specifying any IP address values. If applicable, also include `--ip-primary-only false`. 
 
 ```bash
 neonctl projects update falling-salad-31638542 --ip-allow --ip-primary-only false
@@ -323,7 +329,7 @@ neonctl projects update falling-salad-31638542 --ip-allow --ip-primary-only fals
 
 <TabItem>
 
-Specify the `ips` option with an empty string. If applicable, specify `"primary_branch_only": false`. 
+Specify the `ips` option with an empty string. If applicable, also include `"primary_branch_only": false`. 
 
 ```bash
 curl -X PATCH \                                                            
