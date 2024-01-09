@@ -4,19 +4,19 @@ subtitle: Learn how to revert changes or recover lost data using Neon Branch Res
 enableTableOfContents: true
 ---
 
-With Neon's copy-on-write branch creation capability, not only can you instantly create branches from any point in your history retention window, but you can just as easily restore a branch to an earlier state in its recent history. You can also use Time Travel Assist to help troubleshoot issues &#8212; for example, failed updates or corrupted data. With Time Travel Assist, you can run read-only queries against any point in your history retention window as a way to determine the precise point in time you need to restore to before you complete the restore operation.
+With Neon's copy-on-write branch creation capability, not only can you instantly create branches from any point in your history retention window, you can just as easily restore a branch to an earlier state in its recent history. You can also use Time Travel Assist to help troubleshoot issues &#8212; run read-only queries against any point in your history retention window as a way to determine the precise point in time you need to restore to before you complete the restore operation.
 
 ## How the restore operation works
 
-By default, your history retention is set to 7 days. You can revert a branch to any time within that configured [retention window], precise to the millisecond.
+By default, your history retention is set to 7 days. You can revert a branch to any time within that configured [retention window], down to the millisecond.
 
-```it is to the millisecond in the console datepicker - is this the same level of unit outside in cli/api?```
+//it is to the millisecond in the console datepicker - is this the same level of unit outside in cli/api?//
 
 It is important to understand that whenever you restore a branch, you are performing a _complete_ overwrite, not a merge or refresh. Everything on your current branch, data and schema, is replaced with the contents from the historical source. All interim data from the selected restore point onwards is removed from the branch.
 
 ### Restore backups for data safety
 
-Although interim data is removed from the branch, Neon preserves the branch's final state before the restore operation in an automatically created backup branch, which takes the following format:
+In case you need to rollback the update, Neon preserves the branch's final state before the restore operation in an automatically created backup branch, which takes the following format:
 
 ```
 {branch_name}_old_{head_timestamp}
@@ -25,7 +25,7 @@ You can use this backup to rollback the restore operation if necessary.
 
 ### Changes are made to ALL databases
 
-A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. Keep this in mind when restoring branches. For example, let's say you want to fix some corrupted content in a given database. If you restore your branch to an earlier point in time, the operation applies to _all_ databases on the branch, not just the one you are troubleshooting.
+A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. Keep this in mind when restoring branches. For example, let's say you want to fix some corrupted content in a given database. If you restore your branch to an earlier point in time before the corruption occured, the operation applies to _all_ databases on the branch, not just the one you are troubleshooting.
 
 <code>//Can we give any opinionated recommendations on how to architect your branches and their databases to keep things in good order, letting you restore without risk of inadvertent issues? For example, you probably would not want to create a database per customer on a single branch. Instead, a branch per customer with a dedicated db.//</code>
 
@@ -51,13 +51,13 @@ Restoring to another branch is coming soon. Once available, you will be able to 
 
 ## Time travel assist
 
-To help with troubleshooting, use the SQL editor in the Time Travel assist tool to run read-only queries against any selected timestamp within your history retention window. It's a good idea to run this kind of query before you restore a branch.
+To help troubleshoot your data's history, use the SQL editor in the Time Travel assist tool to run read-only queries against any selected timestamp within your history retention window. It's a good idea to run this kind of query before you restore a branch.
 
-Here is how to do use the editor:
+Here is how to use the editor:
 1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
 1. Don't click **Branch Restore** yet. Instead, look to the Time Travel Assist window where you'll find the SQL editor you can use to write your query.
     ![Time travel query](/docs/guides/time_travel_assist.png)
-    Note that Time Travel Assist window shows the selected branch and timestamp against which this query will be run.
+    You can see the selected branch and timestamp against which this query will be run.
 1. Make sure you select the right database to run your query against; the database selection dropdown appears under the SQL editor.
 1. Write your read-only query in the editor, then click **Query at timestamp** to run the query.
 
