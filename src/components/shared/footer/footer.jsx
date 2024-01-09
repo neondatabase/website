@@ -41,11 +41,13 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
           <div
             className={clsx(
               { 'tracking-tight text-gray-new-80': theme === 'black-new' || theme === 'gray-8' },
-              'space-y-[18px] text-sm leading-none lg:leading-tight dark:text-gray-new-80'
+              'space-y-[18px] text-sm leading-none dark:text-gray-new-80 lg:leading-tight'
             )}
           >
             <p>Made in SF and the World</p>
-            <p>Neon 2024 Ⓒ All rights reserved</p>
+            <p>
+              <span className="lg:hidden">Copyright </span>Ⓒ 2022 – 2024 Neon, Inc.
+            </p>
           </div>
         </div>
         <div className="flex space-x-[123px] xl:space-x-8 md:hidden [@media(max-width:800px)]:space-x-6">

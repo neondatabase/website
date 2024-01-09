@@ -2,7 +2,7 @@
 title: Read replicas — Data analysis and reporting
 subtitle: Leverage read replicas for running data-intensive queries
 enableTableOfContents: true
-updatedOn: '2023-11-27T16:33:52.718Z'
+updatedOn: '2024-01-08T20:02:33.924Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read-only compute instance for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
@@ -55,9 +55,9 @@ Alternatively, you can create read replicas using the [Neon API](https://api-doc
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/late-bar-27572981/endpoints \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "endpoint": {

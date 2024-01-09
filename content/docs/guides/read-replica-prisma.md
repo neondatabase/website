@@ -2,7 +2,7 @@
 title: Use Neon read replicas with Prisma
 subtitle: Learn how to scale Prisma applications with Neon read replicas
 enableTableOfContents: true
-updatedOn: '2023-10-24T18:56:54.985Z'
+updatedOn: '2024-01-08T20:02:33.925Z'
 ---
 
 A Neon read replica is an independent read-only compute instance that performs read operations on the same data as your read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -41,9 +41,9 @@ Alternatively, you can create read replicas using the [Neon API](https://api-doc
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/late-bar-27572981/endpoints \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "endpoint": {

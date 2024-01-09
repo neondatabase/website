@@ -2,7 +2,7 @@
 title: Working with Neon read replicas
 subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
-updatedOn: '2023-12-01T20:41:23.486Z'
+updatedOn: '2024-01-08T20:02:33.924Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with the [Neon Pro Plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating and managing read replicas.
@@ -61,9 +61,9 @@ In Neon, a read replica is implemented as a read-only compute endpoint. To creat
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "endpoint": {
@@ -115,7 +115,7 @@ In Neon, a read replica is implemented as a read-only compute endpoint.  To view
 curl -X 'GET' \
   'https://console.neon.tech/api/v2/projects/<project_id>/endpoints' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 For information about obtaining the required `project_id` parameter for this command, refer to [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
@@ -147,9 +147,9 @@ In Neon, a read replica is implemented as a read-only compute endpoint. To edit 
 ```bash
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id> \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY` \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "endpoint": {
@@ -191,8 +191,8 @@ In Neon, a read replica is implemented as a read-only compute endpoint. To delet
 ```bash
 curl --request DELETE \
      --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id> \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY’
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY"
 ```
 
 Compute endpoints are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).

@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2023-12-21T14:51:31.033Z'
+updatedOn: '2024-01-08T20:02:33.927Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases, and with the Neon Pro Plan, as many branches of those databases, as your application or workflow needs. However, [tier limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Tier limits you to one project per Neon account.
@@ -256,7 +256,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a project. The [Neon Free Tier](/docs/introduction/free-tier) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
 
-```text
+```http
 POST /projects
 ```
 
@@ -265,7 +265,7 @@ The API method appears as follows when specified in a cURL command. The `myproje
 ```bash
 curl 'https://console.neon.tech/api/v2/projects' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "project": {
@@ -392,7 +392,7 @@ The response includes information about the roles, the ready-to-use database (`n
 
 The following Neon API method lists projects for your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojects).
 
-```text
+```http
 GET /projects
 ```
 
@@ -401,7 +401,7 @@ The API method appears as follows when specified in a cURL command:
 ```bash
 curl 'https://console.neon.tech/api/v2/projects' \
  -H 'Accept: application/json' \
- -H 'Authorization: Bearer $NEON_API_KEY' | jq
+ -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 <details>
@@ -434,7 +434,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 
 The following Neon API method updates the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateproject).
 
-```text
+```http
 PATCH /projects/{project_id}
 ```
 
@@ -443,7 +443,7 @@ The API method appears as follows when specified in a cURL command. The `project
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "project": {
@@ -481,7 +481,7 @@ curl 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
 
 The following Neon API method deletes the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteproject).
 
-```text
+```http
 DELETE /projects/{project_id}
 ```
 
@@ -491,7 +491,7 @@ The API method appears as follows when specified in a cURL command. The `project
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>

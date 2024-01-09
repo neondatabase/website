@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-12-21T14:51:31.033Z'
+updatedOn: '2024-01-08T20:02:33.926Z'
 ---
 
 A single read-write compute endpoint is created for your project's [primary branch](/docs/reference/glossary#primary-branch), by default.
@@ -147,7 +147,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a compute endpoint.
 
-```text
+```http
 POST /projects/{project_id}/endpoints
 ```
 
@@ -157,7 +157,7 @@ The API method appears as follows when specified in a cURL command. The branch y
 curl -X 'POST' \
   'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "endpoint": {
@@ -216,7 +216,7 @@ curl -X 'POST' \
 
 The following Neon API method lists compute endpoints for the specified project. A compute endpoint belongs to a Neon project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectendpoints).
 
-```text
+```http
 GET /projects/{project_id}/endpoints
 ```
 
@@ -226,7 +226,7 @@ The API method appears as follows when specified in a cURL command:
 curl -X 'GET' \
   'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
@@ -289,7 +289,7 @@ curl -X 'GET' \
 
 The following Neon API method updates the specified compute endpoint. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateprojectendpoint).
 
-```text
+```http
 PATCH /projects/{project_id}/endpoints/{endpoint_id}
 ```
 
@@ -299,7 +299,7 @@ The API method appears as follows when specified in a cURL command. The example 
 curl -X 'PATCH' \
   'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints/ep-young-art-646685' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "endpoint": {
@@ -369,7 +369,7 @@ curl -X 'PATCH' \
 
 The following Neon API method deletes the specified compute endpoint. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectendpoint).
 
-```text
+```http
 DELETE /projects/{project_id}/endpoints/{endpoint_id}
 ```
 
@@ -379,7 +379,7 @@ The API method appears as follows when specified in a cURL command.
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints/ep-young-art-646685' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
