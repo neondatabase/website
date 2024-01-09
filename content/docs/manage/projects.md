@@ -204,7 +204,7 @@ Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Prot
 2. On the Neon **Dashboard**, select **Settings**.
 3. Select **IP Allow**.
     ![IP Allow configuration](/docs/manage/ip_allow.png)
-4. Specify the IP addresses you want to permit.
+4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
 5. Optionally, select **Apply to primary branch only** to apply the allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only.
 5. Click **Apply changes**.
 
@@ -212,7 +212,7 @@ Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Prot
 
 <TabItem>
 
-The [Neon CLI projects update command](/docs/reference/cli-projects#update) supports IP Allow configuration. For example, this command configures IP for an existing Neon project:
+The [Neon CLI projects update command](/docs/reference/cli-projects#update) supports IP Allow configuration. For example, the following command configures IP for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
 
 ```bash
 neonctl projects update falling-salad-31638542 --ip-allow 192.168.1.1 192.168.1.2
@@ -238,7 +238,7 @@ eonctl projects update falling-salad-31638542 --ip-primary-only
 
 <TabItem>
 
-The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, this API configures **IP Allow** for an existing Neon project:
+The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted.
 
 ```bash
 curl -X PATCH \
