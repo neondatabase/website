@@ -4,11 +4,15 @@ subtitle: Learn how to revert changes or recover lost data using Neon Branch Res
 enableTableOfContents: true
 ---
 
-With Neon's copy-on-write branch creation capability, not only can you instantly create branches from any point in your history retention window, you can just as easily restore a branch to an earlier state in its recent history. You can also use Time Travel Assist to help troubleshoot issues &#8212; run read-only queries against any point in your history retention window as a way to determine the precise point in time you need to restore to before you complete the restore operation.
+With Neon's copy-on-write branch creation capability, just as you can instantly create branches from any point in your history retention window, you can just as easily restore a branch to an earlier state in that history. You can also use Time Travel Assist to help troubleshoot issues &#8212; run read-only queries against any point in your history retention window as a way to determine the precise point in time you need to restore to before actually restoring.
 
 ## How the restore operation works
 
-By default, your history retention is set to 7 days. You can revert a branch to any time within that configured [retention window], down to the millisecond.
+The restore operation lets you revert the state of a selected branch to an earlier point in time. For example, to just before some corruption or loss of data.
+
+![branch restore to timestamp](/docs/guides/branch_restore_time.png)
+
+By default, your history retention is set to 7 days. You can revert a branch to any time within that configured [retention window](/docs/manage/projects#configure-history-retention), down to the millisecond.
 
 //it is to the millisecond in the console datepicker - is this the same level of unit outside in cli/api?//
 
