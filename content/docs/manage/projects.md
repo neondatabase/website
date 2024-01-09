@@ -126,7 +126,7 @@ From the **Settings** page, you can also set defaults or apply bulk changes acro
 - [Reset default compute size](#reset-the-default-compute-size) (Neon Pro Plan only)
 - [Configure history retention range](#configure-history-retention)
 - [Enable logical replication](#enable-logical-replication)
-- [Configiure IP Allow](#configure-ip-allow)
+- [Configure IP Allow](#configure-ip-allow)
 
 ### Reset the default compute size
 
@@ -188,9 +188,11 @@ After enabling logical replication, the next steps involve creating publications
 
 ### Configure IP Allow
 
-Available to [Neon Pro Plan](/docs/introduction/pro-plan) users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default. Optionally, you can apply the IP allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches.
+Available to [Neon Pro Plan](/docs/introduction/pro-plan) users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default. 
 
-By default, Neon allows IP addresses from 0.0.0.0, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
+Optionally, you can apply the IP allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches.
+
+By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
 
 <Admonition type="note">
 Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4).
@@ -199,6 +201,8 @@ Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Prot
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 
 <TabItem>
+
+To configure an allowlist:
 
 1. Select a project in the Neon console.
 2. On the Neon **Dashboard**, select **Settings**.
@@ -303,7 +307,7 @@ You can update your IP Allow configuration via the Neon Console, API, or CLI, as
 
 #### Remove an IP Allow configuration
 
-To remove an IP configuration entirely to go back to the default "no IP restrictions" configuration (i.e., `0.0.0.0`):
+To remove an IP configuration entirely to go back to the default "no IP restrictions" (`0.0.0.0`) configuration:
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 
