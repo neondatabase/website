@@ -4,7 +4,7 @@ subtitle: Learn how to revert changes or recover lost data using Neon Branch Res
 enableTableOfContents: true
 ---
 
-With Neon's copy-on-write branch creation capability, not only can you instantly create branches from any point in your history retention window, but you can just as easily restore a branch to an earlier state in its recent history. You can also use Time Travel Assist to troubleshoot failed updates or corrupted data, running read-only queries against any point in your history retention window, as a way to determine the precise point in time before you complete the restore operation.
+With Neon's copy-on-write branch creation capability, not only can you instantly create branches from any point in your history retention window, but you can just as easily restore a branch to an earlier state in its recent history. You can also use Time Travel Assist to help troubleshoot issues &#8212; for example, failed updates or corrupted data. With Time Travel Assist, you can run read-only queries against any point in your history retention window as a way to determine the precise point in time you need to restore to before you complete the restore operation.
 
 ## How the restore operation works
 
@@ -16,7 +16,7 @@ It is important to understand that whenever you restore a branch, you are perfor
 
 ### Restore backups for data safety
 
-Although interim data is removed from the branch, Neon preserves the branch's final state before the restore operation in an automatically created backup file, which takes the following format:
+Although interim data is removed from the branch, Neon preserves the branch's final state before the restore operation in an automatically created backup branch, which takes the following format:
 
 ```
 {branch_name}_old_{head_timestamp}
@@ -35,27 +35,27 @@ Existing connections are temporarily interrupted during the restore operation. H
 
 ## Restore a branch to an earlier state
 
-Use the **Restore** page to restore a branch to an earlier timestamp in its history. Choose your branch, pick your timestamp, and then click the **Restore branch** button. Your current branch is instantly updated to the data and schema from the selected point in time.
+Use the **Restore** page to restore a branch to an earlier timestamp in its history. Choose your branch, pick your timestamp, and then click the **Restore branch** button.
 
 ![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
 
-From the **Branches** page, you can now see the backup branch created from this restore point.
+Your selected branch is instantly updated to the data and schema from the chosen point in time. From the **Branches** page, you can now see the backup branch created from this restore point.
 
-![branch restore backup file](/docs/guides/branch_restore_backup_file.png)
+![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
 
-To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but if you end up needing to revert your changes, you can manually make the backup branch your primary branch using the steps described in [Branching - Point in time restore](/docs/guides/branching-pitr#change-your-primary-branch). 
+To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job. However, if you need to revert your changes, you can manually make the backup branch your primary branch using the steps described in [Branching - Point in time restore](/docs/guides/branching-pitr#change-your-primary-branch). 
 
 <Admonition type="note">
-Restoring to another branch is coming soon. See our [roadmap](link to roadmap). Once available, you can use a similar one-click Restore operation to rollback your branch to this restore backup. For now, however, use the procedures described in [Branching - Point in time restore](docs/guides/branching-pitr#change-your-primary-branch).
+Restoring to another branch is coming soon. Once available, you will be able to restore to any other branch, including this restore backup, using a similar one-click operation. For now, however, you have to use the manual process to revert to the backup branch.
 </Admonition>
 
 ## Time travel assist
 
 To help with troubleshooting, use the SQL editor in the Time Travel assist tool to run read-only queries against any selected timestamp within your history retention window. It's a good idea to run this kind of query before you restore a branch.
 
-Here is the recommended process:
+Here is how to do use the editor:
 1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
-1. Instead of clicking **Branch Restore**, look to the Time Travel Assist window where you will find the SQL editor you can use to write your query.
+1. Don't click **Branch Restore** yet. Instead, look to the Time Travel Assist window where you'll find the SQL editor you can use to write your query.
     ![Time travel query](/docs/guides/time_travel_assist.png)
     Note that Time Travel Assist window shows the selected branch and timestamp against which this query will be run.
 1. Make sure you select the right database to run your query against; the database selection dropdown appears under the SQL editor.
@@ -63,7 +63,7 @@ Here is the recommended process:
 
 If your query is successful, you will see a table of results under the editor.
 
-Depending on your query and the selected timestamp, instead of a table of results, you might see different error messages, like:
+Depending on your query and the selected timestamp, instead of a table of results, you might see different error messages like:
 | Error                | Explanation             |
 |----------------------|-------------------------|
 | If you query a timestamp in the future         | Console request failed with 400 Bad Request: timestamp 2024-01-10 21:59:48.639 +0000 UTC is in the future, try an older timestamp |
