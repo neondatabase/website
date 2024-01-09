@@ -30,7 +30,7 @@ Let's consider a scenario where we have a table storing information about users:
 | 2  | Jane Doe |  25 | London   |
 
 
-{/*
+
 ```sql
 CREATE TABLE users (
  id SERIAL PRIMARY KEY,
@@ -44,12 +44,8 @@ INSERT INTO users (name, age, city)
 VALUES ('John Doe', 30, 'New York'),
       ('Jane Doe', 25, 'London');
 ```
-*/}
-
 
 Use `json_build_object` to create a JSON structure with user information:
-
-
 
 
 ```sql
@@ -91,7 +87,8 @@ Let’s say we have a table of products with an `attributes` column containing J
 | 3  | Sneakers   | 49.99 | Sporty sneakers for everyday use  | Footwear | {"size": "10", "color": "Black", "rating": 4.2}
 
 
-{/*
+To create the `products` table:
+
 ```sql
 CREATE TABLE products (
    id SERIAL PRIMARY KEY,
@@ -101,8 +98,11 @@ CREATE TABLE products (
    category TEXT,
    attributes JSON
 );
+```
 
+To insert some data into the `products` table:
 
+```sql
 INSERT INTO products (name, price, description, category, attributes)
 VALUES
    ('T-Shirt', 25.99, 'A comfortable cotton T-Shirt', 'Clothing', json_build_object(
@@ -121,8 +121,6 @@ VALUES
        'rating', 4.2
    ));
 ```
-*/}
-
 
 
 Use `json_build_object` to build a nested JSON object that represents the details of individual products:
