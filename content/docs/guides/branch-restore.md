@@ -4,29 +4,30 @@ subtitle: Learn how to revert changes or recover lost data using Neon Branch Res
 enableTableOfContents: true
 ---
 
-With Neon's copy-on-write branch creation capability, you can create branches instantly using data from any point in time within your history retention window. Just as easily, you can restore a branch to an earlier point in time from its history. You can also use Time Travel Assist to run read-only queries against any point in your history retention window, as a way to preview data before you restore.
-
-[Do we want to include any common or typical use cases?]
+With Neon's copy-on-write branch creation capability, not only can you instantly create branches from any point in your history retention window, but you can just as easily restore a branch to an earlier state in its recent history. You can also use Time Travel Assist to troubleshoot failed updates or corrupted data, running read-only queries against any point in your history retention window, as a way to determine the precise point in time before you complete the restore operation.
 
 ## How the restore operation works
 
-It is important to understand that whenever you restore a branch, you are performing a _complete_ overwrite, not a merge or refresh. Everything on your current branch, data and schema, is replaced with the contents from the historical source.
+By default, your history retention is set to 7 days. You can revert a branch to any time within that configured [retention window], precise to the millisecond.
+
+```it is to the millisecond in the console datepicker - is this the same level of unit outside in cli/api?```
+
+It is important to understand that whenever you restore a branch, you are performing a _complete_ overwrite, not a merge or refresh. Everything on your current branch, data and schema, is replaced with the contents from the historical source. All interim data from the selected restore point onwards is removed from the branch.
 
 ### Restore backups for data safety
 
-Neon preserves your destination branch's latest data in an automatically created backup file, using the following format:
+Although interim data is removed from the branch, Neon preserves the branch's final state before the restore operation in an automatically created backup file, which takes the following format:
 
 ```
 {branch_name}_old_{head_timestamp}
 ```
+You can use this backup to rollback the restore operation if necessary.
 
 ### Changes are made to ALL databases
 
 A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. Keep this in mind when restoring branches. For example, let's say you want to fix some corrupted content in a given database. If you restore your branch to an earlier point in time, the operation applies to _all_ databases on the branch, not just the one you are troubleshooting.
 
-:construction_worker: 
-<code>Can we give any opinionated recommendations on how to architect your branches and their databases to keep things in good order, letting you restore without risk of inadvertent issues? For example, you probably would not want to create a database per customer on a single branch. Instead, a branch per customer with a dedicated db.</code>
-:construction_worker:	
+<code>//Can we give any opinionated recommendations on how to architect your branches and their databases to keep things in good order, letting you restore without risk of inadvertent issues? For example, you probably would not want to create a database per customer on a single branch. Instead, a branch per customer with a dedicated db.//</code>
 
 ### Connections temporarily interrupted
 
@@ -38,9 +39,9 @@ Use the **Restore** page to restore a branch to an earlier timestamp in its hist
 
 ![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
 
-From the **Branches** page, you can then see the backup branch created from this restore point.
+From the **Branches** page, you can now see the backup branch created from this restore point.
 
-!pic!
+![branch restore backup file](/docs/guides/branch_restore_backup_file.png)
 
 To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but if you end up needing to revert your changes, you can manually make the backup branch your primary branch using the steps described in [Branching - Point in time restore](/docs/guides/branching-pitr#change-your-primary-branch). 
 
