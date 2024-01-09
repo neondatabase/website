@@ -40,7 +40,7 @@ The examples that follow assume that your database connection string is assigned
 
 The Neon serverless driver uses the [neon](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neon-function) function for queries over HTTP.
 
-You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
+You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety. Please note that [Drizzle Kit](https://orm.drizzle.team/kit-docs/overview) does not support the Neon serverless driver — you'll have to use a standard Postgres driver with Drizzle Kit, like `node-postgres` or `postgres.js`.
 
 <CodeTabs labels={["Node.js", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
@@ -104,11 +104,33 @@ The maximum request size and response size for queries over HTTP is 10 MB. Addit
 
 ### neon function configuration options
 
-The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions` option keys for customizing the query function.
+The `neon(...)` function returns a query function that can be used both as a tagged-template function and as an ordinary function:
 
-- `arrayMode: boolean`
+```javascript
+import { neon } from '@neondatabase/serverless';
+const sql = neon(process.env.DATABASE_URL);
 
-  When `arrayMode` is true, rows are returned as an array of arrays instead of an array of objects:
+// as a tagged-template function
+const rowsA = await sql`SELECT * FROM posts WHERE id = ${postId}`;
+
+// as an ordinary function (exactly equivalent)
+const rowsB = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+```
+
+By default, the query function returned by `neon(...)` returns only the rows resulting from the provided SQL query, and it returns them as an array of objects where the keys are column names. For example:
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+const sql = neon(process.env.DATABASE_URL);
+const rows = await sql`SELECT * FROM posts WHERE id = ${postId}`;
+// -> [{ id: 12, title: "My post", ... }]
+```
+
+However, you can customize the return format of the query function using the configuration options `fullResults` and `arrayMode`. These options are available both on the `neon(...)` function and on the query function it returns (but only when the query function is called as an ordinary function, not as a tagged-template function).
+
+- `arrayMode: boolean`, `false` by default
+
+  The default `arrayMode` value is `false`. When it is true, rows are returned as an array of arrays instead of an array of objects:
 
   ```javascript
   import { neon } from '@neondatabase/serverless';
@@ -126,9 +148,9 @@ The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions`
   // -> [[12, "My post", ...]]
   ```
 
-- `fullResults: boolean`
+- `fullResults: boolean` 
 
-  When `fullResults` is `true`, additional metadata is returned alongside the result rows, which are then found in the `rows` property of the return value. The metadata matches what would be returned by `node-postgres`:
+  The default `fullResults` value is `false`. When it is `true`, additional metadata is returned alongside the result rows, which are then found in the `rows` property of the return value. The metadata matches what would be returned by `node-postgres`:
 
   ```javascript
   import { neon } from '@neondatabase/serverless';
@@ -162,7 +184,7 @@ The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions`
 
   The `fetchOptions` option can also be passed to either `neon(...)` or the `query` function. This option takes an object that is merged with the options to the `fetch` call.
 
-  For example, to increase the priority of every database fetch request:
+  For example, to increase the priority of every database `fetch` request:
 
   ```javascript
   import { neon } from '@neondatabase/serverless';
@@ -170,7 +192,7 @@ The `neon(...)` function supports `arrayMode`, `fullResults`, and `fetchOptions`
   const rows = await sql`SELECT * FROM posts WHERE id = ${postId}`;
   ```
 
-  Or to implement a fetch timeout:
+  Or to implement a `fetch` timeout:
 
   ```javascript
   import { neon } from '@neondatabase/serverless';
@@ -188,7 +210,11 @@ For additional details, see [Options and configuration](https://github.com/neond
 
 ### Issue multiple queries with the transaction() function
 
-The `neon(...)` function also supports issuing multiple queries at once in a single, non-interactive transaction using the `transaction()` function, which is exposed as a property of the query function. For example:
+The `transaction(queriesOrFn, options)` function is exposed as a property on the query function. It allows multiple queries to be executed within a single, non-interactive transaction.
+
+The first argument to `transaction(), queriesOrFn`, is either an array of queries or a non-async function that receives a query function as its argument and returns an array of queries.
+
+The array-of-queries case looks like this:
 
 ```javascript
 import { neon } from '@neondatabase/serverless';
@@ -198,22 +224,37 @@ const showLatestN = 10;
 const [posts, tags] = await sql.transaction([
   sql`SELECT * FROM posts ORDER BY posted_at DESC LIMIT ${showLatestN}`,
   sql`SELECT * FROM tags`,
-]);
+], { 
+  isolationLevel: 'RepeatableRead',
+  readOnly: true, 
+});
 ```
 
-The `transaction()` function supports the same option keys as the ordinary query function — `arrayMode`, `fullResults`, and `fetchOptions` — plus three additional keys concerning transaction configuration:
+Or as an example of the function case:
+
+```javascript
+const [authors, tags] = await neon(process.env.DATABASE_URL)
+  .transaction(txn => [
+    txn`SELECT * FROM authors`,
+    txn`SELECT * FROM tags`,
+  ]);
+```
+
+The optional second argument to `transaction()`, `options`, has the same keys as the options to the ordinary query function -- `arrayMode`, `fullResults` and `fetchOptions` — plus three additional keys that concern the transaction configuration. These transaction-related keys are: `isolationMode`, `readOnly` and `deferrable`.
+
+Note that options **cannot** be supplied for individual queries within a transaction. Query and transaction options must instead be passed as the second argument of the `transaction()` function. For example, this `arrayMode` setting is ineffective (and TypeScript won't compile it): `await sql.transaction([sql('SELECT now()', [], { arrayMode: true })])`. Instead, use `await sql.transaction([sql('SELECT now()')], { arrayMode: true })`.
 
 - `isolationMode`
 
-  Must be one of `ReadUncommitted`, `ReadCommitted`, `RepeatableRead`, or `Serializable`.
+  This option selects a Postgres [transaction isolation mode](https://www.postgresql.org/docs/current/transaction-iso.html). If present, it must be one of `ReadUncommitted`, `ReadCommitted`, `RepeatableRead`, or `Serializable`.
 
 - `readOnly`
   
-  Ensures that a `READ ONLY` transaction is used to execute queries. This is a boolean option. The default value is `false`.
+  If `true`, this option ensures that a `READ ONLY` transaction is used to execute the queries passed. This is a boolean option. The default value is `false`.
 
 - `deferrable`
 
-  Ensures that a `DEFERRABLE` transaction is used to execute queries. This is a boolean option. The default value is `false`.
+  If `true` (and if `readOnly` is also `true`, and `isolationMode` is `Serializable`), this option ensures that a `DEFERRABLE` transaction is used to execute the queries passed. This is a boolean option. The default value is `false`.
 
 For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
 
@@ -232,6 +273,10 @@ neonConfig.fetchConnectionCache = true
 This experimental option is currently only recommended for use with a non-pooled Neon connection string. For information about pooled and non-pooled Neon connections, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
+### Advanced configuration options
+
+For advanced configuration options, see [neonConfig configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration), in the Neon serverless driver GitHub readme.
+
 ## Use the driver over WebSockets
 
 The Neon serverless driver supports the [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client) constructors for querying over WebSockets.
@@ -244,7 +289,7 @@ Consider using the driver with `Pool` or `Client` in the following scenarios:
 - You are writing a new code base and want to use a package that expects a `node-postgres-compatible` driver.
 - Your backend service uses sessions / interactive transactions with multiple queries per connection.
 
-You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
+You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead. Please note that [Drizzle Kit](https://orm.drizzle.team/kit-docs/overview) does not support the Neon serverless driver — you'll have to use a standard Postgres driver with Drizzle Kit, like `node-postgres` or `postgres.js`.
 
 <CodeTabs labels={["Node.js", "Prisma", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
@@ -349,9 +394,9 @@ export default async function handler(
 
 For examples that demonstrate these points, see [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client).
 
-### Pool and Client configuration options
+### Advanced configuration options
 
-For configuration options that apply to `Pool` and `Client`, see [neonConfig configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration) in the driver's GitHub repository.
+For advanced configuration options, see [neonConfig configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration), in the Neon serverless driver GitHub readme.
 
 ## Example applications
 
