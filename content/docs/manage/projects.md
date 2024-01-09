@@ -196,15 +196,75 @@ By default, Neon allows IP addresses from 0.0.0.0, which means that Neon accepts
 Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4).
 </Admonition>
 
-You configure **IP Allow** for a project using the Neon Console:
+<Tabs labels={["Neon Console", "CLI", "API"]}>
+
+<TabItem>
 
 1. Select a project in the Neon console.
 2. On the Neon **Dashboard**, select **Settings**.
 3. Select **IP Allow**.
     ![IP Allow configuration](/docs/manage/ip_allow.png)
 4. Specify the IP addresses you want to permit.
-5. Optionally, select **Apply to primary branch only** to apply the allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only
+5. Optionally, select **Apply to primary branch only** to apply the allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only.
 5. Click **Apply changes**.
+
+</TabItem>
+
+<TabItem>
+
+The [Neon CLI projects update command](/docs/reference/cli-projects#update) supports IP Allow configuration. For example, this command configures IP for an existing Neon project:
+
+```bash
+neonctl projects update falling-salad-31638542 --ip-allow 192.168.1.1 192.168.1.2
+┌────────────────────────┬────────────────────────┬───────────────┬──────────────────────┐
+│ Id                     │ Name                   │ Region Id     │ Created At           │
+├────────────────────────┼────────────────────────┼───────────────┼──────────────────────┤
+│ falling-salad-31638542 │ falling-salad-31638542 │ aws-us-east-2 │ 2024-01-09T10:37:28Z │
+└────────────────────────┴────────────────────────┴───────────────┴──────────────────────┘
+```
+
+To apply a defined IP allowlist to the primary branch only:
+
+```bash
+eonctl projects update falling-salad-31638542 --ip-primary-only     
+┌────────────────────────┬────────────────────────┬───────────────┬──────────────────────┐
+│ Id                     │ Name                   │ Region Id     │ Created At           │
+├────────────────────────┼────────────────────────┼───────────────┼──────────────────────┤
+│ falling-salad-31638542 │ falling-salad-31638542 │ aws-us-east-2 │ 2024-01-09T10:37:28Z │
+└────────────────────────┴────────────────────────┴───────────────┴──────────────────────┘
+```
+
+</TabItem>
+
+<TabItem>
+
+The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, this API configures **IP Allow** for an existing Neon project:
+
+```bash
+curl -X PATCH \
+     https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
+     -H 'accept: application/json' \
+     -H 'authorization: Bearer $NEON_API_KEY' \
+     -H 'content-type: application/json' \
+     -d '
+{
+  "project": {
+    "settings": {
+      "allowed_ips": {
+        "primary_branch_only": true,
+        "ips": [
+          "192.168.1.1", "192.168.1.2"
+        ]
+      }
+    }
+  }
+}
+' | jq
+```
+</TabItem>
+
+</Tabs>
+
 
 #### How to specify IP addresses
 
