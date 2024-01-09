@@ -28,8 +28,9 @@ Let's consider a scenario where we have a table storing information about users:
 |----|----------|-----|----------
 | 1  | John Doe |  30 | New York |
 | 2  | Jane Doe |  25 | London   |
+```
 
-
+Create the `users` table and insert some data into it:
 
 ```sql
 CREATE TABLE users (
@@ -87,7 +88,7 @@ Let’s say we have a table of products with an `attributes` column containing J
 | 3  | Sneakers   | 49.99 | Sporty sneakers for everyday use  | Footwear | {"size": "10", "color": "Black", "rating": 4.2}
 ```
 
-To create the `products` table:
+Create the `products` table and insert some data into it:
 
 ```sql
 CREATE TABLE products (
@@ -98,11 +99,7 @@ CREATE TABLE products (
    category TEXT,
    attributes JSON
 );
-```
 
-To insert some data into the `products` table:
-
-```sql
 INSERT INTO products (name, price, description, category, attributes)
 VALUES
    ('T-Shirt', 25.99, 'A comfortable cotton T-Shirt', 'Clothing', json_build_object(
