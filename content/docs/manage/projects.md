@@ -299,11 +299,11 @@ This list combines individual IP addresses, a range of IP addresses, and a CIDR 
 
 #### Update an IP Allow configuration
 
-You can update your IP Allow configuration via the Neon Console, API, or CLI, as described in [Configur IP Allow](#configure-ip-allow). When updating, replace the current configuration entirely with the new configuration. For example, if your IP Allow configuration currently allows access to `192.168.1.1`, and you want to extend access to IP address `192.168.1.2`, specify both addressed in your new configuration: `192.168.1.15, 192.168.1.15`. You cannot "append" to an existing configuration. You can only replace an existing configuration with a new one.
+You can update your IP Allow configuration via the Neon Console, API, or CLI, as described in [Configure IP Allow](#configure-ip-allow). When updating, replace the current configuration with the new configuration. For example, if your IP Allow configuration currently allows access from IP address `192.168.1.1`, and you want to extend access to IP address `192.168.1.2`, specify both addresses in your new configuration: `192.168.1.15, 192.168.1.15`. You cannot append values to an existing configuration. You can only replace an existing configuration with a new one.
 
 #### Remove an IP Allow configuration
 
-To remove an IP configuration entirely to go back to the default "no IP restrictions" configuration for your Neon project:
+To remove an IP configuration entirely to go back to the default "no IP restrictions" configuration (i.e., `0.0.0.0`):
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 
