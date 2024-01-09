@@ -40,7 +40,7 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 const NeonCli = () => {
   const [activeItem, setActiveItem] = useState(items[0]);
   return (
-    <section className="neon-cli safe-paddings bg-black pt-40 text-white 3xl:pt-36 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16">
+    <section className="neon-cli safe-paddings bg-black pt-48 text-white 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16">
       <Container className="grid grid-cols-12 gap-x-10 lg:grid-cols-1 lg:gap-y-10" size="md">
         <div className="col-start-8 col-end-13 -ml-10 lg:col-start-1 lg:col-end-2 lg:ml-0">
           <Heading id="saas-title" tag="h2" size="xl" theme="white">

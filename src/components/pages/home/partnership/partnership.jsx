@@ -45,7 +45,7 @@ const logos = [
 ];
 
 const Partnership = () => (
-  <section className="partnership safe-paddings bg-black pb-[198px] text-white 3xl:pb-44 2xl:pb-40 xl:pb-32 lg:pb-24 md:pb-20">
+  <section className="partnership safe-paddings bg-black pb-52 text-white 2xl:pb-40 xl:pb-32 lg:pb-24 md:pb-20">
     <Container className="flex flex-col items-center justify-center text-center" size="md">
       <Heading className="leading-dense" tag="h2" size="md" theme="white">
         Discover Neon Partnership Program
