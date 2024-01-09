@@ -83,7 +83,7 @@ const CTA = () => {
   return (
     <LazyMotion features={domAnimation}>
       <m.section
-        className="safe-paddings bg-black pt-48 text-center md:pt-40"
+        className="safe-paddings bg-black pt-48 text-center md:pt-40 sm:pt-32"
         initial="from"
         animate={controls}
       >
