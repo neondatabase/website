@@ -190,7 +190,7 @@ After enabling logical replication, the next steps involve creating publications
 
 Available to [Neon Pro Plan](/docs/introduction/pro-plan) users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default. Optionally, you can apply the IP allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches.
 
-By default, Neon allows IP addresses from 0.0.0.0, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access to Neon.
+By default, Neon allows IP addresses from 0.0.0.0, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
 
 <Admonition type="note">
 Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4).
@@ -265,7 +265,6 @@ curl -X PATCH \
 
 </Tabs>
 
-
 #### How to specify IP addresses
 
 You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). A combination of these options is also permitted. Multiple entries, whether they are the same or of different types, must be separated by a comma. Whitespace is ignored.
@@ -297,6 +296,57 @@ A combined example using all three options above, specified as a comma-separated
   ```
 
 This list combines individual IP addresses, a range of IP addresses, and a CIDR block. It illustrates how different types of IP specifications can be used together in a single allowlist configuration, offering a flexible approach to access control.
+
+#### Update an IP Allow configuration
+
+You can update your IP Allow configuration via the Neon Console, API, or CLI, as described in [Configur IP Allow](#configure-ip-allow). When updating, replace the current configuration entirely with the new configuration. For example, if your IP Allow configuration currently allows access to `192.168.1.1`, and you want to extend access to IP address `192.168.1.2`, specify both addressed in your new configuration: `192.168.1.15, 192.168.1.15`. You cannot "append" to an existing configuration. You can only replace an existing configuration with a new one.
+
+#### Remove an IP Allow configuration
+
+To remove an IP configuration entirely to go back to the default "no IP restrictions" configuration for your Neon project:
+
+<Tabs labels={["Neon Console", "CLI", "API"]}>
+
+<TabItem>
+
+Clear the **Allowed IP addresses and ranges** field and the **Apply to primary branch only (main)** filed and click **Apply changes**.
+
+</TabItem>
+
+<TabItem>
+Specify the `--ip-allow` option without specifying any IP address values. If applicable, specify `--ip-primary-only false`. 
+
+```bash
+neonctl projects update falling-salad-31638542 --ip-allow --ip-primary-only false
+```
+</TabItem>
+
+<TabItem>
+
+Specify the `ips` option with an empty string. If applicable, specify `"primary_branch_only": false`. 
+
+```bash
+curl -X PATCH \                                                            
+     https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
+     -H 'accept: application/json' \
+     -H 'authorization: Bearer $NEON_API_KEY' \
+     -H 'content-type: application/json' \
+     -d '
+{
+  "project": {
+    "settings": {
+      "allowed_ips": {
+        "primary_branch_only": false,
+        "ips": []         
+      }
+    }
+  }
+}
+'
+```
+</TabItem>
+
+</Tabs>
 
 ## Manage projects with the Neon API
 
