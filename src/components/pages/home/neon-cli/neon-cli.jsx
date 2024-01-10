@@ -55,6 +55,7 @@ const NeonCli = () => {
             theme="underline-primary-1"
           >
             Learn more
+            <span className="sr-only">about Neon CLI</span>
           </Link>
         </div>
         <div className="col-span-6 col-start-1 row-start-1 max-w-[716px] pt-[71px] 2xl:-mr-8 2xl:pt-12 xl:hidden">

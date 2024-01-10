@@ -54,7 +54,6 @@ const Partnership = () => (
         Integrate Neon into any application seamlessly.
       </p>
       <Button
-        id="saas-button"
         className="mt-10 2xl:mt-8 xl:mt-7 md:mt-6"
         to={LINKS.partners}
         size="md"
