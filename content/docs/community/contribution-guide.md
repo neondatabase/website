@@ -50,7 +50,7 @@ To use this feature, open the command palette (⌘ + ⇧ + V on Mac or Ctrl + Sh
 
 After you submit a contribution, the Neon documentation team reviews your changes, provides feedback, and merges the pull request when it's ready.
 
-Please reach out on the [Neon Community forum](https://community.neon.tech/) if you have any questions or need further assistance.
+Please reach out to us on our [Discord Server](https://discord.com/invite/92vNTzKDGp) if you have any questions or need further assistance.
 
 ## Documentation file structure
 

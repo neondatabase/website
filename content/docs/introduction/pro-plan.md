@@ -38,7 +38,7 @@ The Neon Pro Plan comes with the following advanced features, and we plan to add
 
 ### Added support
 
-In addition to the [community forum](https://community.neon.tech/) and the ability to open support tickets, Neon Pro Plan users have access to Neon Support via video chat. Please [open a support ticket](/docs/introduction/support) to request a video chat.
+In addition to our [Discord Server](https://discord.com/invite/92vNTzKDGp) and the ability to open support tickets, Neon Pro Plan users have access to Neon Support via video chat. Please [open a support ticket](/docs/introduction/support) to request a video chat.
 
 ## How does billing work?
 
