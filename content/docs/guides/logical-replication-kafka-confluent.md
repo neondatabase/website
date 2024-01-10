@@ -149,7 +149,7 @@ SELECT pg_create_logical_replication_slot('debezium', 'pgoutput');
 5. Select **Continue**.
 6. Specify your payment details. You can select **Skip payment** for now if you're just trying out the setup.
 7. Specify a cluster name, review the configuration and cost information, and select **Launch cluster**. In this example, we use `cluster_neon` as the cluster name.
-    It may take a few minutes to provision your cluster. After the cluster has provisioned, the **Cluster Overview** page displays.
+    It may take a few minutes to provision your cluster. After the cluster has been provisioned, the **Cluster Overview** page displays.
 
 ## Set up a source connector
 

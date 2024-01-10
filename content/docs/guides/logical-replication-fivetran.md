@@ -63,7 +63,7 @@ The role is now created and you are provided with the password for the role, whi
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
+The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole).
 
 ```bash
 neonctl roles create --name <role>
@@ -101,7 +101,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <role_name>;
 ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <role_name>;
 ```
 
-Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication in the future.
+Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
 
 ## Create a publication
 
