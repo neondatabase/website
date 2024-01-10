@@ -38,7 +38,7 @@ Here's a snapshot of what we're working on now:
 
 * **Smoother email notifications**
 
-   We are improving the notification flow for our recent addition of email-based authentication, which we added in [November 2023](docs/changelog/2023-11-02-console#email-authentication-support)](docs/changelog/2023-11-02-console#email-authentication-support). 
+   We are improving the notification flow for our recent addition of email-based authentication, which we added in [November 2023](docs/changelog/2023-11-02-console#email-authentication-support). 
 
 * **Improved navigation in the Neon Console**
 
