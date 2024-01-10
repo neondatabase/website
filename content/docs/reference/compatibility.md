@@ -14,7 +14,7 @@ Neon cloud service is currently compatible with Postgres 14, 15, and 16. You can
 
 ## Postgres extensions
 
-Neon supports numerous Postgres extensions, and we regularly add support for more. For a list of supported extensions, see [Postgres Extensions](/docs/extensions/pg-extensions). To request support for additional extensions, please post your request to the [Neon community forum](https://community.neon.tech/). [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+Neon supports numerous Postgres extensions, and we regularly add support for more. For a list of supported extensions, see [Postgres Extensions](/docs/extensions/pg-extensions). To request support for additional extensions, please reach out to us on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
 
 ## Roles and permissions
 

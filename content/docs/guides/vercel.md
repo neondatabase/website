@@ -9,7 +9,7 @@ updatedOn: '2024-01-05T19:42:48.860Z'
 This guide describes how to connect using the [Neon Vercel Integration](https://vercel.com/integrations/neon) from the Vercel marketplace. The integration connects your Vercel project to a Neon database and enables creating a database branch for each preview deployment.
 
 <Admonition type="note">
-This is a Beta version of the Neon Vercel Integration. For assistance or to suggest improvements, please reach out to us on our [Discord Server](https://discord.com/invite/92vNTzKDGp) or in our [Discourse Community Forum](https://community.neon.tech/).
+This is a Beta version of the Neon Vercel Integration. For assistance or to suggest improvements, please reach out to us on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
 </Admonition>
 
 ## About the Neon Vercel Integration

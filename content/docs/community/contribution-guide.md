@@ -417,6 +417,4 @@ Commands, parameters, values, filenames, error messages, connection strings, and
 
 - "A connection string has this format: `postgres://[user]:[password]@[neon_hostname]/[dbname]`"
 
-## Questions?
-
-If you have questions or run into any issues, please reach out to us on the [Neon Community forum](https://community.neon.tech/).
+<NeedHelp/>
