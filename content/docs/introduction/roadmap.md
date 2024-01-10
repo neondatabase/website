@@ -46,7 +46,7 @@ Here's a snapshot of what we're working on now:
 
 * **Easier access to support**
 
-    For Pro Tier users, we are making it easier to get access to the support form in the Neon Console, from anywhere: our website, our docs, blog posts, or anywhere you find a link to support.
+    For Neon Pro Tier users, we are making it easier to get access to the support form in the Neon Console, from anywhere: our website, our docs, blog posts, or anywhere you find a link to support.
 
 
 ## What we're working on next
