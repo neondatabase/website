@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2024-01-10T18:34:05.856Z'
 ---
 
-Find detailed instructions for integration across various frameworks, languages, and platforms, or exploring Neon's features, our guides are tailored to assist you.
+Find detailed instructions for integration across various frameworks, languages, and platforms, or if exploring Neon's features, our guides are tailored to assist you.
 
 ## Framework, language, and platform guides
 
