@@ -65,7 +65,7 @@ And here's a glimpse at the features we'll be taking on next:
 
 * **Improvements to Vercel integration**
 
-    Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, we're changing the connection between Neon and Vercel to use a pooled connection by default.
+    Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
 
 * **Improved project sharing**
 
