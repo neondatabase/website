@@ -16,6 +16,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [Can't reach database server](#cant-reach-database-server)
 - [Error undefined: Database error](#error-undefined-database-error)
 - [Terminating connection due to administrator command](#terminating-connection-due-to-administrator-command)
+- [Unsupported startup parameter](#unsupported-startup-parameter)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
