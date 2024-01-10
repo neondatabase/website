@@ -21,18 +21,16 @@ export const metadata = getMetadata({
 
 const AllThingsOpen = () => (
   <Layout headerTheme="black" footerWithTopBorder withOverflowHidden>
-    <Layout headerTheme="black" footerWithTopBorder withOverflowHidden>
-      <Hero />
-      <CTA />
-      <Advantages />
-      <Scalability />
-      <Storage />
-      <DataBranching />
-      <NeonCli />
-      <SaaS />
-      <Partnership />
-      <Subscribe />
-    </Layout>
+    <Hero />
+    <CTA />
+    <Advantages />
+    <Scalability />
+    <Storage />
+    <DataBranching />
+    <NeonCli />
+    <SaaS />
+    <Partnership />
+    <Subscribe />
   </Layout>
 );
 
