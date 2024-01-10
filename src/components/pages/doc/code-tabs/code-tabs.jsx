@@ -41,7 +41,6 @@ const CodeTabs = ({ children = null, labels = [] }) => {
 
 CodeTabs.propTypes = {
   children: PropTypes.node,
-  shouldWrap: PropTypes.bool,
   labels: PropTypes.arrayOf(PropTypes.string),
 };
 

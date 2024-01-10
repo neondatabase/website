@@ -2,7 +2,7 @@ import { getHighlighter, renderToHtml } from 'shiki';
 
 let highlighter;
 
-export default async function highlight(code, theme, lang) {
+export default async function highlight(code, lang = 'bash', theme = 'github-dark') {
   if (!highlighter) {
     highlighter = await getHighlighter({
       langs: [lang],

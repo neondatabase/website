@@ -24,6 +24,18 @@ function extractTextFromNode(node) {
     return extractTextFromNode(node.props.children);
   }
 
+  if (node.props && node.props.dangerouslySetInnerHTML) {
+    const html = node.props.dangerouslySetInnerHTML.__html;
+
+    const convertedHtml = html
+      .replace(/<[^>]*>?/gm, '')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&amp;/g, '&');
+    return convertedHtml;
+  }
+
   // If the node doesn't have children or isn't a string, return an empty string.
   return '';
 }

@@ -1,5 +1,3 @@
-'use client';
-
 import copyToClipboard from 'copy-to-clipboard';
 import { useEffect, useState, useCallback } from 'react';
 
@@ -7,7 +5,6 @@ export default function useCopyToClipboard(resetInterval = null) {
   const [isCopied, setCopied] = useState(false);
 
   const handleCopy = useCallback((text) => {
-    console.log('text', text);
     if (typeof text === 'string' || typeof text === 'number') {
       copyToClipboard(text.toString());
       setCopied(true);

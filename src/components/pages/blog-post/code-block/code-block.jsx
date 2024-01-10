@@ -4,7 +4,8 @@ import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import highlight from 'lib/shiki';
 
 const CodeBlock = async (props) => {
-  const highlightCode = await highlight(props.children, 'github-dark', props.language || 'bash');
+  const highlightCode = await highlight(props.children, props.language, 'github-dark');
+
   return (
     <CodeBlockWrapper>
       <div className="[&_pre]:my-0" dangerouslySetInnerHTML={{ __html: highlightCode }} />
@@ -14,7 +15,11 @@ const CodeBlock = async (props) => {
 
 CodeBlock.propTypes = {
   children: PropTypes.string.isRequired,
-  language: PropTypes.string.isRequired,
+  language: PropTypes.string,
+};
+
+CodeBlock.defaultProps = {
+  language: 'bash',
 };
 
 export default CodeBlock;
