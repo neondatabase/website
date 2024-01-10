@@ -125,7 +125,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <role_name>;
 ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <role_name>;
 ```
 
-Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication in the future.
+Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
 
 ## Create a replication slot
 
