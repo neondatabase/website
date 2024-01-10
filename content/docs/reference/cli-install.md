@@ -97,11 +97,41 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 
 ### Upgrade
 
-When a new version is released, you can update your Neon CLI using the installation methods described above. To check for the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed Neon CLI version, run the folliowing command:
+When a new version is released, you can update your Neon CLI using the methods described below. To check for the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed version of the Neon CLI, run the following command:
 
 ```bash
 neonctl --version
 ```
+
+<Tabs labels={["npm", "Homebrew", "Binary"]}>
+
+<TabItem>
+
+To upgrade the Neon CLI via [npm](https://www.npmjs.com/package/neonctl):
+
+```shell
+npm update -g neonctl
+```
+
+</TabItem>
+
+<TabItem>
+
+To upgrade the Neon CLI with [Homebrew](https://formulae.brew.sh/formula/neonctl):
+
+```bash
+brew upgrade neonctl
+```
+
+</TabItem>
+
+<TabItem>
+
+To upgrade a [binary](https://github.com/neondatabase/neonctl/releases) version, download the latest binary as described in the install instructions above, and replace your old binary with the new one.
+
+</TabItem>
+
+</Tabs>
 
 ## Connect
 

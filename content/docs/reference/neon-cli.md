@@ -13,7 +13,7 @@ For installation instructions, see [Neon CLI — Install and connect](/docs/refe
 
 ```bash
 neonctl --help
-usage: neonctl <command> [options]
+usage: neonctl <command> [options]                               [aliases: neon]
 
 Commands:
   neonctl auth                        Authenticate              [aliases: login]
@@ -43,16 +43,16 @@ Global options:
 
 | Command                                                 | Subcommands                            | Description               |
 |---------------------------------------------------------|----------------------------------------|---------------------------|
-| [auth](../reference/cli-auth)                                     |                                        | Authenticate              |
-| [me](../reference/cli-me)                                         |                                        | Show current user         |
-| [projects](../reference/cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | Manage projects           |
-| [branches](../reference/cli-branches)                             | `list`, `create`, `reset`, `rename`, `add-compute`, `set-primary`, `delete`, `get` | Manage branches           |
-| [databases](../reference/cli-databases)                           | `list`, `create`, `delete`             | Manage databases          |
-| [roles](../reference/cli-roles)                                   | `list`, `create`,  `delete`            | Manage roles              |
-| [operations](../reference/cli-operations)                         | `list`                                 | Manage operations         |
-| [connection-string](../reference/cli-connection-string)           |                                        | Get connection string     |
-| [set-context](../reference/cli-set-context)                       | `project-id`, `branch`                 | Set context for session   |
-| [completion](../reference/cli-completion)                         |                                        | Generate a completion script     |
+| [auth](/docs/reference/cli-auth)                                     |                                        | Authenticate              |
+| [me](/docs/reference/cli-me)                                         |                                        | Show current user         |
+| [projects](/docs/reference/cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | Manage projects           |
+| [branches](/docs/reference/cli-branches)                             | `list`, `create`, `reset`, `rename`, `add-compute`, `set-primary`, `delete`, `get` | Manage branches           |
+| [databases](/docs/reference/cli-databases)                           | `list`, `create`, `delete`             | Manage databases          |
+| [roles](/docs/reference/cli-roles)                                   | `list`, `create`,  `delete`            | Manage roles              |
+| [operations](/docs/reference/cli-operations)                         | `list`                                 | Manage operations         |
+| [connection-string](/docs/reference/cli-connection-string)           |                                        | Get connection string     |
+| [set-context](/docs/reference/cli-set-context)                       |                                        | Set context for session   |
+| [completion](/docs/reference/cli-completion)                         |                                        | Generate a completion script     |
 
 ## Global options
 

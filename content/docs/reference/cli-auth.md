@@ -36,7 +36,7 @@ The authentication flow for the Neon CLI follows this order:
 - If the credentials file is not found, the Neon CLI initiates the `neonctl auth` web authentication process.
 </Admonition>
 
-### Options
+#### Options
 
 Only [global options](/docs/reference/neon-cli#global-options) apply.
 
