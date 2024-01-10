@@ -10,7 +10,7 @@ const CodeTabs = async ({ items }) => {
   try {
     highlightedItems = await Promise.all(
       items.map(async (item) => {
-        const highlightedCode = await highlight(item.code, item.language, 'github-dark');
+        const highlightedCode = await highlight(item.code, item.language);
 
         return highlightedCode;
       })

@@ -4,7 +4,7 @@ import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import highlight from 'lib/shiki';
 
 const CodeBlock = async (props) => {
-  const highlightCode = await highlight(props.children, props.language, 'github-dark');
+  const highlightCode = await highlight(props.children, props.language);
 
   return (
     <CodeBlockWrapper>
