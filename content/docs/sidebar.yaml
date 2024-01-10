@@ -286,18 +286,23 @@
       slug: ai/ai-concepts
     - title: Scale with Neon
       slug: ai/ai-scale-with-neon
-    - title: pgvector
-      slug: extensions/pgvector
-    - title: pg_tiktoken
-      slug: extensions/pg_tiktoken
-    - title: pg_embedding
-      slug: extensions/pg_embedding
     - title: AI tools
       items:
         - title: Google Colab
           slug: ai/ai-google-colab
-- title: Postgres extensions
-  slug: extensions/pg-extensions
+- title: Postgres guides
+  items:
+    - title: Extensions
+      slug: extensions/pg-extensions
+      items:
+        - title: pgvector
+          slug: extensions/pgvector
+        - title: pg_tiktoken
+          slug: extensions/pg_tiktoken
+    - title: Functions
+      items:
+        - title: json_build_object
+          slug: functions/json_build_object
 - title: Import data
   slug: import/import-intro
   items:
