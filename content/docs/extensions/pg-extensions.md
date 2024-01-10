@@ -3,7 +3,7 @@ title: Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2023-12-27T09:34:39.980Z'
+updatedOn: '2024-01-10T18:34:05.854Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
@@ -44,7 +44,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [pg_prewarm](https://www.postgresql.org/docs/15/pgprewarm.html)              | 1.2        | 1.2         |   1.2         |                                                                                                                  |
 | [pg_roaringbitmap](https://github.com/ChenHuajun/pg_roaringbitmap)          | 0.5          | 0.5         |  0.5         |                                                                                                                  | Install with `CREATE EXTENSION roaringbitmap;`
 | [pg_stat_statements](https://www.postgresql.org/docs/15/pgstatstatements.html)       | 1.10 | 1.10 | 1.10 |
-| [pg_tiktoken](https://github.com/kelvich/pg_tiktoken)              | 0.0.1                 | 0.0.1                  |  0.0.1                  |                                                                                                                  |
+| [pg_tiktoken](https://github.com/kelvich/pg_tiktoken)              | 0.0.1                 | 0.0.1                  |  0.0.1                  |                                                                                                                  | The [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role has `EXECUTE` privilege on the `pg_stat_statements_reset()` function.
 | [pg_trgm](https://www.postgresql.org/docs/15/pgtrgm.html)                 | 1.6           | 1.6            |     1.6            |                                                                                                                 |
 | [pg_uuidv7](https://github.com/fboulnois/pg_uuidv7)                | 1.0                   | 1.0                  |    1.0                  |                                                                                                                  |
 | [pgcrypto](https://www.postgresql.org/docs/15/pgcrypto.html)                 | 1.3         | 1.3          |    1.3          |                                                                                                                   |
@@ -106,7 +106,7 @@ You can update an extension to the latest version using `ALTER EXTENSION <extens
   ```
 
 <Admonition type="important">
-When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [Auto-suspend](/docs/introduction/auto-suspend) behavior. However, if your compute never restarts because you disabled Auto-suspend or because your compute is constantly active, you may need force a restart. To force a restart, Neon Pro Plan users can temporarily set a compute's **Suspend compute after a period of inactivity** setting to 1 second (the default is 5 minutes). See [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console to see if your compute endpoint restarted. Look for `suspend_compute` and `start_compute` actions. Alternatively, all Neon users can issue [Suspend endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. Please be aware that restarting a compute endpoint temporarily interrupts any connections currently using the compute.
+When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [Autosuspend](/docs/introduction/auto-suspend) behavior. However, if your compute never restarts because you disabled Autosuspend or because your compute is constantly active, you may need force a restart. To force a restart, Neon Pro Plan users can temporarily set a compute's **Suspend compute after a period of inactivity** setting to 1 second (the default is 5 minutes). See [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console to see if your compute endpoint restarted. Look for `suspend_compute` and `start_compute` actions. Alternatively, all Neon users can issue [Suspend endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. Please be aware that restarting a compute endpoint temporarily interrupts any connections currently using the compute.
 </Admonition>
 
 ## Extension support notes
@@ -128,7 +128,7 @@ Neon supports custom-built Postgres extensions for exclusive use with your Neon 
 - A description of what the extension does, instructions for compiling it, and any prerequisites
 - Whether an NDA or licensing agreement is necessary for Neon to provide support for your extension
 
-Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access. Neon features such as Autoscaling and Auto-suspend may limit the types of extensions we can support.
+Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access. Neon features such as _Autoscaling_ and _Autosuspend_ may limit the types of extensions we can support.
 
 Depending on the nature of your extension, Neon may also request a liability waiver.
 
