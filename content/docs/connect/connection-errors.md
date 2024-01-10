@@ -193,4 +193,18 @@ The `terminating connection due to administrator command` error is typically enc
 
 If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a [Neon Pro Plan](/docs/introduction/pro-plan) user, you can disable autosuspend or configure a different suspension period. For instructions, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).  [Neon Free Tier](/docs/introduction/free-tier) users cannot modify the default 5 minute autosuspend setting. 
 
+## Unsupported startup parameter
+
+This error might be in two variations:
+
+```text
+unsupported startup parameter: <...>
+```
+or 
+```text
+unsupported startup parameter in options: <...>
+```
+
+The error occurs when using a pooled Neon connection string with startup options that are not supported by PgBouncer. PgBouncer allows only startup parameters it can keep track of in startup packets: `client_encoding`, `datestyle`, `timezone`, and `standard_conforming_strings`. See [ignore_startup_parameters](ignore_startup_parameters). To resolve this issue, you can either remove the unsupported parameter from your connection string or use an unpooled Neon connection string. For more information about pooled and unpooled connections in Neon, see [Connection pooling](/docs/connect/connection-pooling).
+
 <NeedHelp/>
