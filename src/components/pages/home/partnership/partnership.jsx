@@ -45,7 +45,7 @@ const logos = [
 ];
 
 const Partnership = () => (
-  <section className="partnership safe-paddings bg-black pb-52 text-white 2xl:pb-40 xl:pb-32 lg:pb-24 md:pb-20">
+  <section className="partnership safe-paddings bg-black pb-48 text-white 3xl:pb-44 2xl:pb-40 xl:pb-32 lg:pb-24 md:pb-20">
     <Container className="flex flex-col items-center justify-center text-center" size="md">
       <Heading className="leading-dense" tag="h2" size="md" theme="white">
         Discover Neon Partnership Program
@@ -62,15 +62,15 @@ const Partnership = () => (
       >
         Become a partner
       </Button>
-      <ul className="mt-20 grid w-full grid-cols-12 gap-x-10 xl:flex xl:flex-wrap xl:justify-center xl:gap-x-8 xl:gap-y-8 lg:mt-12 sm:gap-y-6">
+      <ul className="mt-20 grid w-full grid-cols-12 gap-x-10 xl:justify-center xl:gap-x-8 xl:gap-y-8 lg:mt-12 md:gap-x-6 sm:gap-y-6 xs:gap-4">
         {logos.map(({ logo, alt, width }, index) => (
           <li
-            className="relative col-span-2 mr-1.5 after:absolute after:-bottom-1.5 after:-right-1.5 after:h-full after:w-full after:rounded-md after:bg-gray-1"
+            className="relative col-span-2 mr-1.5 after:absolute after:-bottom-1.5 after:-right-1.5 after:h-full after:w-full after:rounded-md after:bg-gray-1 xl:col-span-4 sm:col-span-6"
             key={index}
           >
-            <div className="relative z-10 flex items-center justify-center rounded-md border-4 border-gray-1 bg-[#191919] px-[18px] py-[18px] md:py-4">
+            <div className="relative z-10 flex items-center justify-center rounded-md border-4 border-gray-1 bg-[#191919] py-[18px] md:py-4">
               <Image
-                className="h-8 w-auto lg:h-7 md:h-6 sm:h-5"
+                className="h-8 w-auto 3xl:h-7 2xl:h-6 md:h-7 sm:h-6 xs:h-5"
                 src={logo}
                 alt={alt}
                 width={width}

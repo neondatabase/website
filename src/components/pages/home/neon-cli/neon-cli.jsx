@@ -41,9 +41,9 @@ const NeonCli = () => {
   const [activeItem, setActiveItem] = useState(items[0]);
   return (
     <section className="neon-cli safe-paddings bg-black pt-48 text-white 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16">
-      <Container className="grid grid-cols-12 gap-x-10 lg:grid-cols-1 lg:gap-y-10" size="md">
-        <div className="col-start-8 col-end-13 -ml-10 lg:col-start-1 lg:col-end-2 lg:ml-0">
-          <Heading id="saas-title" tag="h2" size="xl" theme="white">
+      <Container className="grid grid-cols-12 gap-x-10 xl:grid-cols-1 xl:gap-y-10" size="md">
+        <div className="col-start-8 col-end-13 -ml-10 xl:col-start-1 xl:col-end-2 xl:ml-0">
+          <Heading className="xl:max-w-[790px]" id="saas-title" tag="h2" size="xl" theme="white">
             Postgres at your fingertips with the Neon CLI
           </Heading>
           <p className="t-2xl mt-8 max-w-[600px] text-white 2xl:max-w-[488px] xl:max-w-[400px] lg:mt-4 lg:max-w-none">
@@ -57,7 +57,7 @@ const NeonCli = () => {
             Learn more
           </Link>
         </div>
-        <div className="col-span-6 col-start-1 row-start-1 max-w-[716px] pt-[71px] 2xl:pt-12 xl:-mr-6 xl:pt-9 lg:hidden">
+        <div className="col-span-6 col-start-1 row-start-1 max-w-[716px] pt-[71px] 2xl:-mr-8 2xl:pt-12 xl:hidden">
           <div className="flex gap-x-2.5 xs:gap-x-1.5">
             {items.map(({ name }, index) => (
               <button
@@ -82,7 +82,7 @@ const NeonCli = () => {
             {activeItem.code}
           </CodeBlock>
         </div>
-        <ul className="hidden gap-y-6 lg:flex lg:flex-col">
+        <ul className="hidden gap-y-6 xl:flex xl:flex-col">
           {items.map(({ name, code }, index) => (
             <li key={index}>
               <div className="relative rounded-t-md border-[5px] border-b-0 border-[#333] px-4 py-3 font-mono text-sm font-bold uppercase leading-none md:text-xs sm:border-[3px] sm:border-b-0">

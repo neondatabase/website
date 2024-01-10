@@ -22,7 +22,7 @@ const SaaS = () => {
   return (
     <section
       id="saas"
-      className="safe-paddings bg-black py-[212px] 3xl:py-44 2xl:py-40 xl:py-32 lg:py-24 md:py-20"
+      className="safe-paddings bg-black py-48 3xl:py-44 2xl:py-40 xl:py-32 lg:py-24 md:py-20"
       ref={wrapperRef}
     >
       <Container className="z-20 flex items-center justify-between lg:block" size="md">
