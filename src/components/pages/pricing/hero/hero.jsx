@@ -37,7 +37,7 @@ const items = [
     description:
       'A pro plan with all the features for production. Only pay for the compute & storage used.',
     features: [
-      { title: 'Unlimited projects, branches, databases' },
+      { title: 'Unlimited projects and databases, and up to 500 branches' },
       { title: 'Configurable compute, unlimited storage' },
       { title: 'Pro support' },
       { title: 'Autoscaling, read replicas, project sharing' },
