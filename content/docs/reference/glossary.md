@@ -13,7 +13,7 @@ See [Token](#token).
 
 ## Active time
 
-The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). The [Neon Free Tier](/docs/introduction/free-tier) has an [Active time](/docs/reference/glossary#active-time) limit of 100 hours per month, but that limit only affects non-primary branch compute usage. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. The primary branch compute always remains available regardless of the limit, ensuring that access to data on the primary branch is never interrupted. Neon Free Tier users can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**. The _Active time_ limit resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _Active time_ limit will reset on February 1st.
+The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [autosuspend](#autosuspend-compute). The [Neon Free Tier](/docs/introduction/free-tier) has an [Active time](/docs/reference/glossary#active-time) limit of 100 hours per month, but that limit only affects non-primary branch compute usage. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. The primary branch compute always remains available regardless of the limit, ensuring that access to data on the primary branch is never interrupted. Neon Free Tier users can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**. The _Active time_ limit resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _Active time_ limit will reset on February 1st.
 
 ## Activity Monitor
 
@@ -31,9 +31,9 @@ A unique identifier used to authenticate a user or a calling program to an API. 
 
 A Neon Control Plane operation that applies a new configuration to a Neon object or resource. For example, creating, deleting, or updating Postgres users and databases initiates this operation. See [Operations](/docs/manage/operations) for more information.
 
-## Auto-suspend compute
+## Autosuspend compute
 
-A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Neon Pro Plan users can configure the _Auto-suspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable Auto-suspend completely to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Neon Pro Plan users can configure the _Autosuspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable autosuspend completely to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
 ## autoscaler-agent
 
@@ -347,7 +347,7 @@ A Neon architecture component responsible for the durability of database changes
 
 ## Scale-to-zero
 
-Scale-to-zero refers to Neon's _Auto-suspend compute_ feature, which places a compute endpoint into an `Idle` state when it is not being used. Neon suspends a compute after five minutes of inactivity, by default. See [Auto-suspend compute](#auto-suspend-compute).
+Scale-to-zero refers to Neon's Autosuspend feature, which places a compute endpoint into an `Idle` state when it is not being used. Neon suspends a compute after five minutes of inactivity, by default. See [Autosuspend compute](#autosuspend-compute).
 
 ## Serverless
 

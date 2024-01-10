@@ -15,7 +15,7 @@
       items:
         - title: Autoscaling
           slug: introduction/autoscaling
-        - title: Auto-suspend
+        - title: Autosuspend
           slug: introduction/auto-suspend
         - title: Branching
           slug: introduction/branching
@@ -128,7 +128,7 @@
       items: 
         - title: Autoscaling
           slug: guides/autoscaling-guide
-        - title: Auto-suspend
+        - title: Autosuspend
           slug: guides/auto-suspend-guide
         - title: Branching
           slug: guides/branching-intro

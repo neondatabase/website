@@ -23,9 +23,9 @@ For information about using the Neon **SQL Editor**, see [Query with Neon's SQL 
 
 In Neon, computing capacity is measured in _Compute Units (CU)_. One CU is 1 vCPU and 4 GB of RAM, 2 CU is 2 vCPU and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPU. A Neon compute can have anywhere from .25 to 7 CU.
 
-Defining a minimum and maximum compute size for your compute endpoint, as shown below, enables _Autoscaling_.
+Defining a minimum and maximum compute size for your compute endpoint, as shown below, enables autoscaling.
 
-![Edit compute endpoint dialog showing an Autoscaling configuration](/docs/extensions/edit_compute_endpoint.png)
+![Edit compute endpoint dialog showing an autoscaling configuration](/docs/extensions/edit_compute_endpoint.png)
 
 As your workload changes, computing capacity scales dynamically between the minimum and maximum settings defined in your compute endpoint configuration. To retrieve the number of allocated vCPU at any point in time, you can run the following query:
 
@@ -33,7 +33,7 @@ As your workload changes, computing capacity scales dynamically between the mini
 SELECT num_cpus();
 ```
 
-For _Autoscaling_ configuration instructions, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+For autoscaling configuration instructions, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
 ## Limitations
 
@@ -42,13 +42,13 @@ The following limitations apply:
 - The `num_cpus()` function does not return fractional vCPU sizes. The _Autoscaling_ feature can scale by fractional vCPU, but the `num_cpus()` function reports the next whole number. For example, if the current number of allocated vCPU is `.25` or `.5`, the `num_cpus()` function returns `1`.
 - The `num_cpus()` function only works on compute endpoints that have the _Autoscaling_ feature enabled. Running the function on a fixed size compute endpoint does not return a correct value.
 
-## Observe Autoscaling with `neon_utils` and `pgbench`
+## Observe autoscaling with `neon_utils` and `pgbench`
 
-The following instructions demonstrate how you can use the `num_cpus()` function with `pgbench` to observe how Neon's Autoscaling feature responds to workload.
+The following instructions demonstrate how you can use the `num_cpus()` function with `pgbench` to observe how Neon's _Autoscaling_ feature responds to workload.
 
 ### Prerequisites
 
-- Ensure that _Autoscaling_ is enabled for your compute endpoint. For instructions, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). The following example uses a minimum setting of 0.25 Compute Units (CU) and a maximum of 4.
+- Ensure that autoscaling is enabled for your compute endpoint. For instructions, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). The following example uses a minimum setting of 0.25 Compute Units (CU) and a maximum of 4.
 - The [pgbench](https://www.postgresql.org/docs/current/pgbench.html) utility.
 
 ### Run the test

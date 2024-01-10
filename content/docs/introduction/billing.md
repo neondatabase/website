@@ -45,7 +45,7 @@ Factors that affect _Compute time_ include:
 
 - The number of active computes
 - The size of each compute
-- The _Auto-suspend_ feature, which suspends a compute after 5 minutes of inactivity. [Neon Pro Plan](/docs/introduction/pro-plan) users can configure the `Auto-suspend` timeout timeout or disable _Auto-suspend_ entirely.
+- The _Autosuspend_ feature, which suspends a compute after 5 minutes of inactivity. [Neon Pro Plan](/docs/introduction/pro-plan) users can configure the autosuspend timeout or disable autosuspend entirely.
 - The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Compute size automatically scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
