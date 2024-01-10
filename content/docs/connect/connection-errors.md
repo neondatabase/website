@@ -205,6 +205,6 @@ or
 unsupported startup parameter in options: <...>
 ```
 
-The error occurs when using a pooled Neon connection string, which only supports a limited number of startup parameters. To resolve this issue, you can either remove the startup parameter or use an unpooled pooled connection. For more information about pooled and unpooled connections in Neon, see [Connection pooling](/docs/connect/connection-pooling).
+The error occurs when using a pooled Neon connection string. This connection type only supports a limited number of startup parameters. To resolve this issue, you can either remove the startup parameter or use an unpooled connection. For more information about pooled and unpooled connections in Neon, see [Connection pooling](/docs/connect/connection-pooling).
 
 <NeedHelp/>
