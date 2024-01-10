@@ -3,7 +3,7 @@ module.exports = {
   exclude: [
     '/blog/wp-draft-post-preview-page',
     '/blog/rss.xml',
-    '/docs/release-notes/rss.xml',
+    '/docs/changelog/rss.xml',
     '/last-week-in-aws',
     '/ping-thing',
     '/all-things-open-2023',

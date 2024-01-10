@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2023-12-18T14:58:46.708Z'
+updatedOn: '2024-01-05T19:45:09.629Z'
 ---
 
 Neon is Serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
@@ -44,6 +44,8 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
 
+<img src="/images/technology-logos/airbyte-logo.svg" width="36" height="36" alt="Airbyte" href="/docs/guides/logical-replication-airbyte" title="Replicate data from Neon with Airbyte" />
+
 <img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Astro" href="/docs/guides/astro" title="Connect an Astro site or app to Neon" />
 
 <img src="/images/technology-logos/aws-lambda-logo.svg" width="36" height="36" alt="AWS Lambda" href="/docs/guides/aws-lambda" title="Connect from AWS Lambda to Neon" />
@@ -66,15 +68,21 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/java-logo.svg" width="27" height="36" alt="Java" href="/docs/guides/java" title="Connect a Java application to Neon" />
 
+<img src="/images/technology-logos/kafka-logo.svg" width="36" height="36" alt="Kafka" href="/docs/guides/logical-replication-kafka-confluent" title="Replicate data from Neon with Kafka (Confluent)" />
+
 <img src="/images/technology-logos/koyeb-logo.svg" width="36" height="36" alt="Koyeb" href="/docs/guides/koyeb" title="Use Neon with Koyeb" />
 
 <img src="/images/technology-logos/laravel-logo.svg" width="35" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect from Laravel to Neon" />
 
 <img src="/images/technology-logos/liquibase-logo.svg" width="35" height="36" alt="Liquibase" href="/docs/guides/liquibase" title="Use Liquibase with Neon" />
 
+<img src="/images/technology-logos/materialize-logo.svg" width="36" height="36" alt="Materialize" href="/docs/guides/logical-replication-materialize" title="Replicate data from Neon to Materialize" />
+
 <img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
 
 <img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale-integration" title="Add the Neon PolyScale integration" />
+
+<img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
 
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-jdbc" title="Connect Quarkus (JDBC) to Neon" />
 

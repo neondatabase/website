@@ -98,6 +98,11 @@ const defaultConfig = {
         destination: '/careers',
         permanent: true,
       },
+      {
+        source: '/docs/release-notes/:path*',
+        destination: '/docs/changelog/:path*',
+        permanent: true,
+      },
       // Proxy has an error message, that suggests to read `https://neon.tech/sni` for more details.
       {
         source: '/sni',

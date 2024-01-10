@@ -15,7 +15,7 @@
       items:
         - title: Autoscaling
           slug: introduction/autoscaling
-        - title: Auto-suspend
+        - title: Autosuspend
           slug: introduction/auto-suspend
         - title: Branching
           slug: introduction/branching
@@ -40,11 +40,20 @@
         - title: Custom
           slug: introduction/custom-plan
     - title: Billing
+      slug: introduction/about-billing
       items:
+        - title: Billing overview
+          slug: introduction/billing-overview
+        - title: Pricing calculators
+          slug: introduction/billing-calculators
         - title: Billing metrics
           slug: introduction/billing
+        - title: Billing rates
+          slug: introduction/billing-rates
         - title: Manage billing
           slug: introduction/manage-billing
+        - title: Sample billing
+          slug: introduction/billing-sample
     - title: Support
       slug: introduction/support
     - title: Status
@@ -119,7 +128,7 @@
       items: 
         - title: Autoscaling
           slug: guides/autoscaling-guide
-        - title: Auto-suspend
+        - title: Autosuspend
           slug: guides/auto-suspend-guide
         - title: Branching
           slug: guides/branching-intro
@@ -279,18 +288,23 @@
       slug: ai/ai-concepts
     - title: Scale with Neon
       slug: ai/ai-scale-with-neon
-    - title: pgvector
-      slug: extensions/pgvector
-    - title: pg_tiktoken
-      slug: extensions/pg_tiktoken
-    - title: pg_embedding
-      slug: extensions/pg_embedding
     - title: AI tools
       items:
         - title: Google Colab
           slug: ai/ai-google-colab
-- title: Postgres extensions
-  slug: extensions/pg-extensions
+- title: Postgres guides
+  items:
+    - title: Extensions
+      slug: extensions/pg-extensions
+      items:
+        - title: pgvector
+          slug: extensions/pgvector
+        - title: pg_tiktoken
+          slug: extensions/pg_tiktoken
+    - title: Functions
+      items:
+        - title: json_build_object
+          slug: functions/json_build_object
 - title: Import data
   slug: import/import-intro
   items:

@@ -3,7 +3,7 @@ title: Manage logical replication in Neon
 subtitle: Learn how to manage logical replication in Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-12-21T15:11:12.217Z'
+updatedOn: '2024-01-10T18:34:05.856Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots. It also includes information about logical replication specific to Neon, including [known limitations](#known-limitations).
@@ -47,7 +47,7 @@ CREATE PUBLICATION my_publication FOR TABLE users
 This command adds a table to a publication:
 
 ```sql
-ALTER my_publication ADD TABLE sales;
+ALTER PUBLICATION my_publication ADD TABLE sales;
 ```
 
 ### Remove a table from a publication
@@ -238,6 +238,12 @@ wal_level
 logical
 ```
 
+### Logical replication and autosuspend
+
+By default, a Neon compute instance scales to zero after 300 seconds (5 minutes) of inactivity. For [Neon Free Tier](/docs/introduction/free-tier) users, this setting is fixed. [Neon Pro Plan](/docs/introduction/pro-plan) users can increase, decrease, or disable the _autosuspend_ setting, controlling when or if a compute scales to zero.
+
+In a logical replication setup, a subscriber may keep the connection to your Neon publisher database active in order to poll for changes or perform sync operations, preventing your Neon compute instance from scaling to zero. Some subscribers allow you to configure connection or sync frequency, which may be necessary to continue taking advantage of Neon's _Autosuspend_ feature. Please refer to your subscriber's documentation or contact their support team for details.
+
 ### Replication roles
 
 It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege. Roles created via SQL do not have this privilege, and the `REPLICATION` privilege cannot be granted.
@@ -275,7 +281,7 @@ The following Neon API method creates a role. To view the API documentation for 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "role": {
