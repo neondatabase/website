@@ -4,9 +4,9 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container/container';
 import Heading from 'components/shared/heading';
 import LINKS from 'constants/links';
-import airplane from 'images/partners-logos/airplane.svg';
 import clouflare from 'images/partners-logos/cloudflare.svg';
 import hasura from 'images/partners-logos/hasura.svg';
+import koyeb from 'images/partners-logos/koyeb.svg';
 import replit from 'images/partners-logos/replit.svg';
 import vercel from 'images/partners-logos/vercel.svg';
 import wundergraph from 'images/partners-logos/wundergraph.svg';
@@ -33,9 +33,9 @@ const logos = [
     width: 112,
   },
   {
-    logo: airplane,
-    alt: 'Airplane',
-    width: 140,
+    logo: koyeb,
+    alt: 'Koyeb',
+    width: 126,
   },
   {
     logo: wundergraph,
