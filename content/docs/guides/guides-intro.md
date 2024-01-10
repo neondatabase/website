@@ -103,9 +103,9 @@ Control when Neon compute resources scale to zero.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/auto-suspend" description="Discover how Neon can reduce your compute to zero when not in use" icon="hourglass">Learn about Autosuspend</a>
+<a href="/docs/introduction/auto-suspend" description="Discover how Neon can reduce your compute to zero when not in use" icon="hourglass">Learn about autosuspend</a>
 
-<a href="/docs/guides/autoscaling-guide" description="Configure autosuspend to control when your compute scales to zero" icon="setup">Configure Autosuspend</a>
+<a href="/docs/guides/autoscaling-guide" description="Configure autosuspend to control when your compute scales to zero" icon="setup">Configure autosuspend</a>
 
 </DetailIconCards>
 
