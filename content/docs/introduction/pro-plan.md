@@ -18,11 +18,11 @@ Upgrading to the Neon Pro Plan gives you higher limits, advanced features, and a
 
 - **More projects:** The Neon Pro Plan offers unlimited projects, while the Neon Free Tier offers only one. But what is a Neon project, and why would you need more than one? A project is a top-level container in Neon for your computes, branches, databases, and roles. Projects are a way to organize your resources and usage. If you are a company that develops data-driven applications, it might make sense to create a project for each client or each application. For information about objects that a project contains, see [The Neon object hierarchy](/docs/manage/overview).
 - **Unlimited storage:** The Neon Pro Plan supports any data size. There's a default limit of 200 GiB to protect your account from unintended use, but if you [open a support ticket](/docs/introduction/support), we can raise the limit to whatever you require.
-- **Up to 500 branches:** With the Neon Pro Plan, you can have up to 500 branches to support your CI/CD pipeline. You can instantly and cost-effectively create a database branch for every preview deployment, client, or developer. There is a soft limit of 100 branches to protect against unintended usage and charges, but you can easily request a soft limit increase by contacting our Support team.
+- **Up to 500 branches:** With the Neon Pro Plan, you can have up to 500 branches to support your CI/CD pipeline. You can instantly and cost-effectively create a database branch for every preview deployment, client, or developer.
 - **Unlimited databases:** There is no limit on Postgres databases in any Neon plan. You can create as many databases as you need.
 
 <Admonition type="note">
-The Neon Pro Plan has default limit of 20 simultaneously active computes to protect against unintended usage. To request an increase this limit, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available. If you encounter `Console request failed` errors, this may indicate that you have reached the active compute limit.
+The Neon Pro Plan has soft limits of 20 projects, 100 branches, 200 GiB of storage, and 20 simultaneously active computes to protect against unintended usage and charges. To request an increase to these limits, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available. If you encounter `Console request failed` errors, this may indicate that you have reached the active compute limit.
 </Admonition>
 
 ### Advanced features
