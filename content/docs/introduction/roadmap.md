@@ -19,14 +19,22 @@ For the latest features and fixes, check our [Changelog](docs/changelog), update
 Here's a snapshot of what we're working on now:
 
 <details>
-<summary>Observability</summary>
+<summary>**Observability**</summary>
 
-We know you want better insight into what's happening with your Neon projects. Coming soon:
+    We know you want better insight into what's happening with your Neon projects. Coming soon:
 
-* **Autoscaling visualizations**
+    * **Autoscaling visualizations**
 
-    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time.
+        Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time.
+</details>
+<details>
+<summary>Developer workflows</summary>
+
+    We want to make managing your database infrastructure as seamless an experience as managing your source code. New features coming soon include:
     
+    *  **Branch restore with Time Travel Assist**
+   
+        Instantly restore a branch to an earlier state in its history. Use Time Travel Assist to run queries against historical data, making sure you are restoring to the right point in time.
 </details>
 
 ### Observability
