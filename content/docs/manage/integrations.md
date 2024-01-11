@@ -31,7 +31,7 @@ To express interest:
 2. Click the **Request** link.
 3. Type your message and click **Yes, I'm interested**.
 
-## Suggest new integrations
+## Suggest an integration
 
 If you can't find the integration you're looking for:
 
