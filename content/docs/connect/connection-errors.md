@@ -196,16 +196,16 @@ If you encounter this error, you can try adjusting the timing of your query or r
 
 ## Unsupported startup parameter
 
-This error might be in two variations:
+This error is reported in two variations:
 
 ```text
 unsupported startup parameter: <...>
 ```
-or 
+
 ```text
 unsupported startup parameter in options: <...>
 ```
 
-The error occurs when using a pooled Neon connection string with startup options that are not supported by PgBouncer. PgBouncer allows only startup parameters it can keep track of in startup packets: `client_encoding`, `datestyle`, `timezone`, and `standard_conforming_strings`. See [ignore_startup_parameters](ignore_startup_parameters). To resolve this issue, you can either remove the unsupported parameter from your connection string or use an unpooled Neon connection string. For more information about pooled and unpooled connections in Neon, see [Connection pooling](/docs/connect/connection-pooling).
+The error occurs when using a pooled Neon connection string with startup options that are not supported by PgBouncer. PgBouncer allows only startup parameters it can keep track of in startup packets: `client_encoding`, `datestyle`, `timezone`, and `standard_conforming_strings`. See **ignore_startup_parameters**](https://www.pgbouncer.org/config.html)**, in the [PgBouncer documentation](https://www.pgbouncer.org/config.html). To resolve this issue, you can either remove the unsupported parameter from your connection string or use an unpooled Neon connection string. For more information about pooled and unpooled connections in Neon, see [Connection pooling](/docs/connect/connection-pooling).
 
 <NeedHelp/>
