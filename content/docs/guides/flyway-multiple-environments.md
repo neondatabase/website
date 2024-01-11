@@ -49,21 +49,15 @@ Perform these steps twice, once for your _development_ branch and once for your 
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 neonctl branches create --name development
 ```
-
-</CodeBlock>
 
 </TabItem>
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/{project_id}/branches \
      --header 'accept: application/json' \
@@ -82,8 +76,6 @@ curl --request POST \
 }
 ' | jq
 ```
-
-</CodeBlock>
 
 </TabItem>
 
@@ -183,37 +175,25 @@ Run the migration on each environment in order by specifying the environment's c
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 flyway migrate -configFiles="conf/env_dev.conf"
 ```
 
-</CodeBlock>
-
 </TabItem>
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 flyway migrate -configFiles="conf/env_staging.conf"
 ```
 
-</CodeBlock>
-
 </TabItem>
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 flyway migrate -configFiles="conf/env_prod.conf"
 ```
-
-</CodeBlock>
 
 </TabItem>
 

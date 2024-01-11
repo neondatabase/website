@@ -30,7 +30,7 @@ The API method appears as follows when specified in a cURL command:
 This method does not require a request body. Without a request body, the method creates a branch from the project's primary branch, and a compute endpoint is not created.
 </Admonition>
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches' \
   -H 'Accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' \
@@ -128,7 +128,7 @@ GET /projects/{project_id}/branches
 
 The API method appears as follows when specified in a cURL command:
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq

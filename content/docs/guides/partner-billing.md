@@ -293,8 +293,8 @@ And here is a sample response (with key lines highlighted):
 
 <details>
 <summary>Response body</summary>
-<CodeBlock highlight="5,10,11,13,15,18-20,24,29,30,32,33,35-37,40,42">
-```json
+
+```json {5,10,11,13,15,18-20,24,29,30,32,33,35-37,40,42}
 {
   "projects": [
     {
@@ -340,7 +340,7 @@ And here is a sample response (with key lines highlighted):
   }
 }
 ```
-</CodeBlock>
+
 </details>
 
 Key details:

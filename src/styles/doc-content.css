@@ -95,6 +95,30 @@
       @apply bg-[rgba(0,85,255,0.08)] dark:bg-[rgba(0,229,153,0.08)];
     }
 
+    pre [data-line-numbers] {
+      counter-reset: line;
+    }
+
+    pre [data-line-numbers] > [data-line]::before {
+      counter-increment: line;
+      content: counter(line);
+
+      /* Other styling */
+      display: inline-block;
+      width: 1rem;
+      margin-right: 1.25rem;
+      text-align: right;
+      color: gray;
+    }
+
+    code[data-line-numbers-max-digits='2'] > [data-line]::before {
+      width: 1.5rem;
+    }
+
+    code[data-line-numbers-max-digits='3'] > [data-line]::before {
+      width: 2.5rem;
+    }
+
     h2 {
       @apply mb-3 mt-10;
     }

@@ -42,7 +42,7 @@ The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) re
 
 The `project_id` value used in the example below is `young-silence-08999984`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key. The branch is given the  name `recovery_branch`. You will change the name in a later step.
 
-```curl
+```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches \
      --header 'accept: application/json' \
@@ -128,9 +128,7 @@ Creating a point-in-time branch can also be performed using the Neon Console or 
 
 The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) API request shown below moves the compute endpoint from your current primary branch to the new branch. The required parameters are the `project_id` and `endpoint_id` of your current primary branch, and the `branch_id` of the new branch. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
-<CodeBlock shouldWrap>
-
-```curl
+```bash shouldWrap
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/endpoints/ep-curly-term-54009904 \
      --header 'accept: application/json' \
@@ -144,8 +142,6 @@ curl --request PATCH \
 }
 '
 ```
-
-</CodeBlock>
 
 <details>
 <summary>Response body</summary>
@@ -189,7 +185,7 @@ The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) AP
 
 <CodeBlock shouldWrap>
 
-```curl
+```bash
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-twilight-field-06246553 \
      --header 'accept: application/json' \
@@ -241,7 +237,7 @@ Rename the new branch to the name of the old branch, which was `main`. The [Upda
 
 <CodeBlock shouldWrap>
 
-```curl
+```bash
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851 \
      --header 'accept: application/json' \
@@ -296,7 +292,7 @@ The [Set primary branch](https://api-docs.neon.tech/reference/setprimaryprojectb
 
 <CodeBlock shouldWrap>
 
-```curl
+```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851/set_as_primary \
      --header 'accept: application/json' \
