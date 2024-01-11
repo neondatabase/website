@@ -1,8 +1,9 @@
 ---
-title: Connect or Use [Name] with Neon
-subtitle: Set up a Neon project in seconds and connect from a [NAME]
+title: 'Connect or Use [Name] with Neon'
+subtitle: 'Set up a Neon project in seconds and connect from a [NAME]'
 enableTableOfContents: true
 isDraft: true
+updatedOn: '2024-01-11T14:49:37.564Z'
 ---
 
 [Introduction paragraph describing the service, platform, framework, etc. Refer to other guides for examples.]
