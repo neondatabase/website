@@ -76,16 +76,6 @@ We are adding features to support using Neon in your organization. Later, we'll 
 
 Here's a snapshot of what we're working on now:
 
-<details>
-<summary>Developer workflows</summary>
-
-    We want to make managing your database infrastructure as seamless an experience as managing your source code. New features coming soon include:
-    
-    *  **Branch restore with Time Travel Assist**
-   
-        Instantly restore a branch to an earlier state in its history. Use Time Travel Assist to run queries against historical data, making sure you are restoring to the right point in time.
-</details>
-
 ### Observability
 
 We know you want better insight into what's happening with your Neon projects. Coming soon:
