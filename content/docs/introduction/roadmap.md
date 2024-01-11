@@ -6,15 +6,11 @@ redirectFrom:
   - /docs/reference/roadmap
 updatedOn: '2023-10-07T10:43:33.416Z'
 ---
-Our developers are focused on making Neon the default choice for serverless PostgreSQL. This roadmap describes committed features that are coming soon.
+Our developers are focused on making Neon the default choice for serverless PostgreSQL. This roadmap describes committed features that are coming soon. We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion. 
 
-We 
+As always, we are listening. If you see something like, something you disagree with, or something you'd love for us to add, let us know. 
 
-improvements that our development teams are finalizing right now, as well as the committed tasks our teams will take up next.
-
-We are listening close and building product to meet what you are telling us. As always, if you see something you like, something you disagree with, or something you'd love for us to add, let us know. 
-
-![placedholder form]()
+![placedholder form](/docs/introduction/roadmap_placeholder_form.png)
 
 ## What's new
 
@@ -46,7 +42,7 @@ Here's a snapshot of what we're working on now:
 
     * **Improvements to Vercel integration**
 
-         Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
+         Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out of connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
 
 * **Account management**
 
@@ -59,7 +55,6 @@ Here's a snapshot of what we're working on now:
         We're making it easier to view who owns which projects when sharing projects with others. We're also improving how usage limits are handled between shared projects.
     
 
-```
 //cut this content altogether? too small fry//
 
 * **Better onboarding**
@@ -107,7 +102,6 @@ And here's a glimpse at the features we'll be taking on next:
     * Allow self-service deletion of your user profile from Neon.
     * Support for switching a project to maintenance mode.
 //end the section to cut out//
-```
 
 ## A brief history of time
 
