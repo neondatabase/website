@@ -106,6 +106,6 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 ## Join the community
 
-If you have questions about Neon or Postgres, reach out to Neon community members and developers in the [Neon Discord Server](/discord) or [Neon Discourse Community](https://community.neon.tech/).
+If you have questions about Neon or Postgres, reach out to Neon community members and developers in the [Neon Discord Server](/discord).
 
 <CommunityBanner buttonText="Join server" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Welcome to the Neon Discord Server!</CommunityBanner>
