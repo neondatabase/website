@@ -43,7 +43,9 @@ And here's a glimpse at the features we'll be taking on next:
 
 ### More regions
 
-Adding regional support for Australia.
+* **Australia**
+
+    Adding regional support for Australia.
 
 ### Account management
 
