@@ -22,7 +22,7 @@ Here's a snapshot of what we're working on now:
 
 * **Observability**
 
-    We know you want better insight into what's happening with your database. New features to support better observability coming soon include:
+    We know you want better insight into what's happening with your Neon projects. New features to support better observability coming soon include:
 
     * **Autoscaling visualizations**
 
