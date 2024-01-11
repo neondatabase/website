@@ -94,7 +94,7 @@ const Header = ({
                       {text}
                     </Tag>
                     {items?.length > 0 && (
-                      <div className="group-hover:opacity-1 invisible absolute bottom-0 translate-y-full pt-4 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
+                      <div className="group-hover:opacity-1 invisible absolute bottom-0 w-max translate-y-full pt-4 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
                         <ul
                           className="min-w-[240px] rounded-2xl bg-white p-3.5"
                           style={{ boxShadow: '0px 4px 10px rgba(26, 26, 26, 0.2)' }}
@@ -120,10 +120,10 @@ const Header = ({
                                   aria-hidden
                                 />
                                 <span className="ml-3">
-                                  <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
+                                  <span className="t-xl mr-2 block font-semibold !leading-none transition-colors duration-200">
                                     {text}
                                   </span>
-                                  <span className="mt-1.5 block leading-none text-black">
+                                  <span className="mt-1.5 block text-sm leading-none text-black">
                                     {description}
                                   </span>
                                 </span>

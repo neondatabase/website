@@ -1,8 +1,13 @@
 import CalendarIcon from 'icons/calendar.inline.svg';
 import ConsoleIcon from 'icons/console.inline.svg';
-import aboutUsIcon from 'icons/header-about-us.svg';
-import careersIcon from 'icons/header-careers.svg';
-import partnersIcon from 'icons/header-partners.svg';
+import aboutUsIcon from 'icons/header/about-us.svg';
+import aiIcon from 'icons/header/ai.svg';
+import autoscalingIcon from 'icons/header/autoscaling.svg';
+import branchingIcon from 'icons/header/branching.svg';
+import careersIcon from 'icons/header/careers.svg';
+import cliIcon from 'icons/header/cli.svg';
+import partnersIcon from 'icons/header/partners.svg';
+import onDemandStorageIcon from 'icons/header/storage.svg';
 import PostgresDocsIcon from 'icons/postgres.inline.svg';
 import TransactionsIcon from 'icons/transactions.inline.svg';
 
@@ -11,12 +16,51 @@ import LINKS from './links';
 export default {
   header: [
     {
+      text: 'Features',
+      items: [
+        {
+          icon: autoscalingIcon,
+          text: 'Autoscaling',
+          description: 'Learn more',
+          to: LINKS.autoscaling,
+        },
+        {
+          icon: onDemandStorageIcon,
+          text: 'On-demand storage',
+          description: 'Learn more',
+          to: LINKS.onDemandStorage,
+        },
+        {
+          icon: branchingIcon,
+          text: 'Branching',
+          description: 'Learn more',
+          to: LINKS.branching,
+        },
+        {
+          icon: cliIcon,
+          text: 'CLI',
+          description: 'Learn more',
+          to: LINKS.cliReference,
+        },
+        {
+          icon: aiIcon,
+          text: 'AI',
+          description: 'Learn more',
+          to: LINKS.ai,
+        },
+      ],
+    },
+    {
       text: 'Docs',
       to: LINKS.docs,
     },
     {
-      text: 'Branching',
-      to: LINKS.branching,
+      text: 'Pricing',
+      to: LINKS.pricing,
+    },
+    {
+      text: 'Blog',
+      to: LINKS.blog,
     },
     {
       text: 'Company',
@@ -40,18 +84,6 @@ export default {
           to: LINKS.partners,
         },
       ],
-    },
-    {
-      text: 'Blog',
-      to: LINKS.blog,
-    },
-    {
-      text: 'AI',
-      to: LINKS.ai,
-    },
-    {
-      text: 'Pricing',
-      to: LINKS.pricing,
     },
   ],
   footer: [
