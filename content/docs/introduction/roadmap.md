@@ -26,6 +26,7 @@ We know you want better insight into what's happening with your Neon projects. C
 * **Autoscaling visualizations**
 
     Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time.
+    
 </details>
 
 ### Observability
