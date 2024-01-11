@@ -72,7 +72,9 @@ We are adding features to support using Neon in your organization. Later, we'll 
 </details>
 
 
-//end
+## In progress
+
+Here's a snapshot of what we're working on now:
 
 <details>
 <summary>Developer workflows</summary>
@@ -110,21 +112,25 @@ We know you want better insight into what's happening with your Neon projects. C
 
 And here's a glimpse at the features we'll be taking on next:
 
-## More regions
+### More regions
 
-    Adding regional support for Australia.
+Adding regional support for Australia.
 
-* **Organization support**
+### Account management
 
-    We are adding features to support using Neon in your organization. Later, we'll add support for managing individual teams within the organization as well.
+**Organization support**
 
-* **Additional branch restore features**
+We are adding features to support using Neon in your organization. Later, we'll add support for managing individual teams within the organization as well.
 
-    We'll also be adding more capabilities to branch restore, like restoring to another branch's history via timestamp or LSN, binary search to locate your LSN, and a schema comparison tool.
+### Developer workflow
+
+**Additional branch restore features**
+
+We'll also be adding more capabilities to branch restore, like restoring to another branch's history via timestamp or LSN, binary search to locate your LSN, and a schema comparison tool.
     
-* **Improvements to Vercel integration**
+**Improvements to Vercel integration**
 
-    Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out of connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
+Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out of connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
 
 ## A brief history of time
 
