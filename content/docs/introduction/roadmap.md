@@ -6,9 +6,15 @@ redirectFrom:
   - /docs/reference/roadmap
 updatedOn: '2023-10-07T10:43:33.416Z'
 ---
-Our developers work hard to make Neon the default choice for serverless PostgreSQL in the cloud. This roadmap is focused on features and improvements that are fully in flight: things our development teams are finalizing right now, as well as the committed tasks our teams will take up next. 
+Our developers are focused on making Neon the default choice for serverless PostgreSQL. This roadmap describes committed features that are coming soon.
 
-As always, we welcome all feedback. If you see something in Neon's implementation of Postgres that you disagree with, that can be improved, or anything missing that you feel should be there, [let us know](link to best place for that).
+We 
+
+improvements that our development teams are finalizing right now, as well as the committed tasks our teams will take up next.
+
+We are listening close and building product to meet what you are telling us. As always, if you see something you like, something you disagree with, or something you'd love for us to add, let us know. 
+
+![placedholder form]()
 
 ## What's new
 
@@ -18,13 +24,43 @@ For the latest features and fixes, check our [Changelog](docs/changelog), update
 
 Here's a snapshot of what we're working on now:
 
-* **Branch restore with Time Travel Assist**
+* **Observability**
+
+    We know you want better insight into what's happening with your database. New features to support better observability coming soon include:
+
+    * **Autoscaling visualizations**
+
+    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time.
+
+* **Developer workflows**
+
+   Our goal is to make managing your database infrastructure as seamless a part of your workflow as managing your source code. Upcoming features to support the developer experience include:
+
+   *  **Branch restore with Time Travel Assist**
 
     Instantly restore a branch to an earlier state in its history. Use Time Travel Assist to run queries against historical data, making sure you are restoring to the right point in time.
 
-* **Autoscaling visualizations**
+    * **Additional branch restore features**
 
-    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time. The first of many features to improve observability.
+    We'll also be adding more capabilities to branch restore, like restoring to another branch's history via timestamp or LSN, binary search to locate your LSN, and a schema comparison tool.
+
+    * **Improvements to Vercel integration**
+
+     Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
+
+* **Account management**
+
+    * **Organization support**
+
+    We are adding features to support using Neon in your organization. Later, we'll add support for managing individual teams within the organization as well.
+
+    * **Improved project sharing**
+
+    We're making it easier to view who owns which projects when sharing projects with others. We're also improving how usage limits are handled between shared projects.
+    
+
+```
+//cut this content altogether? too small fry//
 
 * **Better onboarding**
 
@@ -63,14 +99,6 @@ And here's a glimpse at the features we'll be taking on next:
 
     * Showing the last active branch on the **Branches** page. This helps make it easier for you to clean up unused branches.
 
-* **Improvements to Vercel integration**
-
-    Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
-
-* **Improved project sharing**
-
-    We're making it easier to view who owns which projects when sharing projects with others. We're also improving how usage limits are handled between shared projects. This is part of laying the groundwork for adding support for organization features in Neon.
-
 * **Various improvements to the Neon Console**
 
     We are always improving the usability of our Neon Console. Some upcoming improvements include:
@@ -78,6 +106,8 @@ And here's a glimpse at the features we'll be taking on next:
     * Create branches directly from the connection window.
     * Allow self-service deletion of your user profile from Neon.
     * Support for switching a project to maintenance mode.
+//end the section to cut out//
+``
 
 ## A brief history of time
 
