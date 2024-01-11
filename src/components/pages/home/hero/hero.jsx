@@ -84,6 +84,7 @@ const Hero = () => (
               alt={alt}
               width={width}
               height={42}
+              priority
             />
           </li>
         ))}
