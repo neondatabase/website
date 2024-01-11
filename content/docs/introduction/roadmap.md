@@ -18,6 +18,16 @@ For the latest features and fixes, check our [Changelog](docs/changelog), update
 
 Here's a snapshot of what we're working on now:
 
+<details>
+<summary>Observability</summary>
+
+We know you want better insight into what's happening with your Neon projects. Coming soon:
+
+* **Autoscaling visualizations**
+
+    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time.
+</details>
+
 ### Observability
 
 We know you want better insight into what's happening with your Neon projects. Coming soon:
@@ -44,7 +54,7 @@ We know you want better insight into what's happening with your Neon projects. C
 
 And here's a glimpse at the features we'll be taking on next:
 
-* **More regions**
+## More regions
 
     Adding regional support for Australia.
 
@@ -52,57 +62,13 @@ And here's a glimpse at the features we'll be taking on next:
 
     We are adding features to support using Neon in your organization. Later, we'll add support for managing individual teams within the organization as well.
 
-* **Improvements to Vercel integration**
-
-    Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out of connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
-
 * **Additional branch restore features**
 
     We'll also be adding more capabilities to branch restore, like restoring to another branch's history via timestamp or LSN, binary search to locate your LSN, and a schema comparison tool.
-
-* **Better onboarding**
-
-    Ongoing improvements to the onboarding experience are in the works. You can expect incremental updates in the upcoming weeks.
-
-* **More integrations**
-
-    We are adding new integrations all the time. We are also making ongoing improvements to the **Integrations** management page, to make it easier to add, manage, and request new integrations.
-
-    See [Manage Integrations](/docs/manage/integrations) for more details.
-
-* **Smoother email notifications**
-
-   We are improving the notification flow for our recent addition of email-based authentication, which we added in [November 2023](docs/changelog/2023-11-02-console#email-authentication-support). 
-
-* **Improved navigation in the Neon Console**
-
-   New breadcrumbs, page headings, and other design changes are coming to the Neon Console, to help you better navigate your project and its branches.
-
-* **Easier access to support**
-
-    For Neon Pro Tier users, we are making it easier to get access to the support form in the Neon Console, from anywhere: our website, our docs, blog posts, or anywhere you find a link to support.
-
-
-## What we're working on next
-
-And here's a glimpse at the features we'll be taking on next:
-
-[Is this actually coming?]
-
-* **Branching improvements**
-
-    We're adding more features to support making branching an integral part of your development workflow. This will include features in the Neon Console, but also case studies and documentation to help you make the most out of Neon's instant branching capability. Other planned improvements include:
-
-    * Showing the last active branch on the **Branches** page. This helps make it easier for you to clean up unused branches.
-
-* **Various improvements to the Neon Console**
-
-    We are always improving the usability of our Neon Console. Some upcoming improvements include:
     
-    * Create branches directly from the connection window.
-    * Allow self-service deletion of your user profile from Neon.
-    * Support for switching a project to maintenance mode.
-//end the section to cut out//
+* **Improvements to Vercel integration**
+
+    Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out of connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
 
 ## A brief history of time
 
