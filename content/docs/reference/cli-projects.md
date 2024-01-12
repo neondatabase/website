@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-12-01T19:05:09.476Z'
+updatedOn: '2024-01-10T17:27:58.304Z'
 ---
 
 ## Before you begin
@@ -42,7 +42,11 @@ neonctl projects list [options]
 
 #### Options
 
-Only [global options](/docs/reference/neon-cli#global-options) apply.
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `projects` subcommand supports this option:
+
+| Option       | Description   | Type   | Required  |
+| ------------ | ------------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 
 #### Example
 
@@ -77,8 +81,11 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option                                | Description                                                                                               | Type    | Required                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--name` | The project name. The project ID is used if a name is not specified.               | string  |                                       |
 | `--region-id` | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`. Defaults to `aws-us-east-2` if not specified. | string number  |                                       |
+| `--psql` | Connect to a database via `psql` using connection string. The default is `false`. |boolean||
+| `--set-context` | Set the current context to the new project. The default is `false`. |boolean||
 
 #### Examples
 
@@ -171,9 +178,14 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option                                | Description                                                                                               | Type    | Required                               |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--name` | The project name. The value cannot be empty.               | string  |             &check;                          |
+| `--ip-allow` | A list of IP addresses that are allowed to connect to the endpoint               | string  |                                       |
+| `--ip-primary-only` | If true, the list will be applied only to the primary branch. The deafault value is `false`.  | boolean  |                                       |
 
-#### Example
+#### Examples
+
+Update the project name:
 
 ```bash
 neonctl projects update muddy-wood-859533 --name dev_project_1
@@ -182,6 +194,28 @@ neonctl projects update muddy-wood-859533 --name dev_project_1
 ├───────────────────┼───────────────┼───────────────┼──────────────────────┤
 │ muddy-wood-859533 │ dev_project_1 │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
 └───────────────────┴───────────────┴───────────────┴──────────────────────┘
+```
+
+Update the IP allowlist. Multiple values are specified as a list without a delimiter.
+
+```bash
+neonctl projects update withered-dream-91802149 --ip-allow 192.168.1.1 192.168.1.2 
+┌─────────────────────────┬───────────┬───────────────┬──────────────────────┐
+│ Id                      │ Name      │ Region Id     │ Created At           │
+├─────────────────────────┼───────────┼───────────────┼──────────────────────┤
+│ withered-dream-91802149 │ myproject │ aws-us-east-2 │ 2024-01-07T11:41:52Z │
+└─────────────────────────┴───────────┴───────────────┴──────────────────────┘
+```
+
+Apply the IP allowlist to the primary branch only:
+
+```bash
+neonctl projects update withered-dream-91802149 --ip-only-primary                 
+┌─────────────────────────┬───────────┬───────────────┬──────────────────────┐
+│ Id                      │ Name      │ Region Id     │ Created At           │
+├─────────────────────────┼───────────┼───────────────┼──────────────────────┤
+│ withered-dream-91802149 │ myproject │ aws-us-east-2 │ 2024-01-07T11:41:52Z │
+└─────────────────────────┴───────────┴───────────────┴──────────────────────┘
 ```
 
 ### delete
@@ -225,7 +259,11 @@ The `id` is the project ID, which you can obtain by listing your projects or fro
 
 #### Options
 
-Only [global options](/docs/reference/neon-cli#global-options) apply.
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `delete` subcommand supports this option:
+
+| Option       | Description   | Type   | Required  |
+| ------------ | ------------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 
 #### Example
 

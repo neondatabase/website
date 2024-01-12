@@ -3,7 +3,7 @@ title: Manage billing with consumption limits
 subtitle: Learn how to set usage quotas per project with the Neon API
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-01-08T20:02:33.923Z'
+updatedOn: '2024-01-10T18:34:05.857Z'
 ---
 
 When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free tier users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes). 
@@ -38,7 +38,7 @@ You can set quotas for these consumption metrics per project using the `quote` o
 
 The `quota` object includes an array of parameters used to set threshold limits. Their names generally match their corresponding metric:
 
-* `active_time_seconds` &#8212; Sets the maximum amount of time your project's total compute endpoints are allowed to be active during the current billing period. It excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute).
+* `active_time_seconds` &#8212; Sets the maximum amount of time your project's total compute endpoints are allowed to be active during the current billing period. It excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#autosuspend-compute).
 * `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's compute endpoints. This includes any endpoints deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes `compute_time_seconds`. For example, 1 second at .25 vCPU costs .25 compute seconds, while 1 second at 4 vCPU costs 4 compute seconds.
    | vCPUs  | active_time_seconds | compute_time_seconds |
    |--------|-----------------------|------------------------|
