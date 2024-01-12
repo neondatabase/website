@@ -16,8 +16,8 @@ const items = [
     imageHeight: 512,
     title:
       'Ping Thing: Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes',
-    demoLink: '/',
-    sourceLink: '/',
+    demoLink: '/demos/ping-thing',
+    sourceLink: 'https://github.com/neondatabase/ping-thing',
   },
   {
     image: semanticSearchIllustration,
@@ -25,16 +25,16 @@ const items = [
     imageHeight: 216,
     title:
       'Semantic search: Submit your idea and get a list of similar ideas that YCombinator has invested in before',
-    demoLink: '/',
-    sourceLink: '/',
+    demoLink: 'https://yc-idea-matcher.vercel.app/',
+    sourceLink: 'https://github.com/neondatabase/yc-idea-matcher',
   },
   {
     image: chatbotIllustration,
     imageWidth: 464,
     imageHeight: 216,
     title: 'Chatbot: Search your own knowledge base by semantic similarity',
-    demoLink: '/',
-    sourceLink: '/',
+    demoLink: '#',
+    sourceLink: 'https://github.com/neondatabase/ask-neon',
   },
 ];
 
@@ -80,14 +80,23 @@ const Hero = () => (
                     {title}
                   </h3>
                   <div className="mt-4 flex items-center justify-start gap-x-4 text-[15px] leading-none">
+                    {demoLink !== '#' && (
+                      <Link
+                        className="flex items-center rounded-full bg-gray-new-15 px-4 py-2"
+                        to={demoLink}
+                        target={demoLink.startsWith('http') ? '_blank' : '_self'}
+                        rel={demoLink.startsWith('http') ? 'noopener noreferrer' : ''}
+                      >
+                        <ChevronIcon className="mr-2" />
+                        Live Demo
+                      </Link>
+                    )}
                     <Link
-                      className="flex items-center rounded-full bg-gray-new-15 px-4 py-2"
-                      to={demoLink}
+                      className="text-gray-new-70"
+                      to={sourceLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <ChevronIcon className="mr-2" />
-                      Live Demo
-                    </Link>
-                    <Link className="text-gray-new-70" to={sourceLink}>
                       Source
                     </Link>
                   </div>

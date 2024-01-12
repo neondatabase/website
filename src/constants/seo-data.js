@@ -86,6 +86,11 @@ export default {
   pingThing: {
     robotsNoindex: 'noindex',
   },
+  demo: {
+    title: 'Demo — Neon',
+    description: 'Demo', // @TODO: Add description
+    pathname: LINKS.demo,
+  },
 };
 
 export const getBlogCategoryDescription = (category) => {

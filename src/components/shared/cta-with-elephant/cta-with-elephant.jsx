@@ -58,16 +58,18 @@ const CTAWithElephant = ({
           >
             {buttonText}
           </AnimatedButton>
-          <Link
-            className="tracking-extra-tight underline-offset-[5px]"
-            theme="green-underlined"
-            to={linkUrl}
-            target={linkTarget}
-            rel={linkTarget ? 'noopener noreferrer' : undefined}
-            size="sm"
-          >
-            {linkText}
-          </Link>
+          {linkUrl && linkText && (
+            <Link
+              className="tracking-extra-tight underline-offset-[5px]"
+              theme="green-underlined"
+              to={linkUrl}
+              target={linkTarget}
+              rel={linkTarget ? 'noopener noreferrer' : undefined}
+              size="sm"
+            >
+              {linkText}
+            </Link>
+          )}
         </div>
       </div>
       <div className="relative col-span-7 col-start-6 2xl:col-span-6 2xl:col-start-7 md:z-20 md:col-span-full md:flex md:justify-center">
