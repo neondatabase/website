@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2023-12-04T12:15:51.550Z'
+updatedOn: '2023-12-22T16:01:34.807Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -17,6 +17,10 @@ Neon supports the `verify-full` SSL mode for client connections, which is the st
 
 In addition, Neon requires a 60-bit entropy password for all PostgreSQL roles. This degree of entropy ensures that passwords have a high level of randomness. Assuming a perfect distribution of choices for every bit of entropy, a password with 60 bits of entropy has 2^60 (or about 1.15 quintillion) possible combinations, which makes it computationally infeasible for attackers to guess the password through brute-force methods. For Neon users created via the Neon Console, API, and CLI, passwords are generated with 60-bit entropy. For SQL users created via SQL, user-defined passwords are validated at user-creation time to ensure 60-bit entropy.
 
+## IP allowlist support
+
+Neon's IP Allow feature, available with the [Neon Pro Plan](/docs/introduction/pro-plan), ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+
 ## Data-at-rest encryption
 
 Data-at-rest encryption is a method of storing inactive data that converts plaintext data into a coded form or cipher text, making it unreadable without an encryption key. Neon stores inactive data in [NVMe SSD volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes). The data on NVMe instance storage is encrypted using an `XTS-AES-256` block cipher implemented in a hardware module on the instance.
@@ -27,7 +31,7 @@ Neon’s infrastructure is hosted and managed within Amazon’s secure data cent
 
 ## SOC 2 compliance
 
-Neon has successfully completed a SOC 2 Type 1 audit. For more information, see [SOC 2 compliance](soc2-compliance).
+Neon has successfully completed SOC 2 Type 1 and Type 2 audits. For more information, see [SOC 2 compliance](soc2-compliance).
 
 ## Security reporting
 

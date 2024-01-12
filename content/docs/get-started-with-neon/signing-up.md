@@ -6,12 +6,12 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2023-12-01T18:35:17.561Z'
+updatedOn: '2024-01-04T13:08:07.135Z'
 ---
 
 You can sign up for free and upgrade to a paid plan when you are ready to scale. For information about what's included with the Neon Free Tier, see [Neon Free Tier](/docs/introduction/free-tier). For information about Neon's paid plan options, see [Neon plans](/docs/introduction/plans).
 
-Signing up for Neon is easy. Simply navigate to [https://console.neon.tech/register](https://console.neon.tech/register) and sign up with your email, Github, Google, or partner account.
+Signing up for Neon is easy. Simply navigate to [https://console.neon.tech/signup](https://console.neon.tech/signup) and sign up with your email, Github, Google, or partner account.
 ![Neon console sign up](/docs/get-started-with-neon/neon_signup.png)
 
 After signing up, you are directed to the Neon Console to create your first project. Enter a name for your project, select a Postgres version, provide a database name, and select a region. Generally, you'll want to select the region closest to your application. When you're finished, click **Create project**.

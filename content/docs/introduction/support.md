@@ -1,14 +1,15 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2023-12-07T17:00:43.493Z'
+updatedOn: '2024-01-11T14:49:37.566Z'
 ---
 
 Support channels for the Neon Free Tier, Pro, and Custom plans are outlined below.
 
 | Support channels                                     | Free Tier |   Pro   | Custom  |
 | :--------------------------------------------------- | :-------: | :-----: | :-----: |
-| Neon community forum                                 |  &check;  | &check; | &check; |
+| Neon Discord Server                                  |  &check;  | &check; | &check; |
+| Neon Discourse Community                             |  &check;  | &check; | &check; |
 | Ability to open support tickets                      |     -     | &check; | &check; |
 | Video chat                                           |     -     | &check; | &check; |
 | Resale customer support                              |     -     |    -    | &check; |
@@ -29,7 +30,7 @@ Video chat requests and retail customer support inquiries can be submitted throu
 
 ## Support email
 
-If you're unable to access Neon's primary support channels (e.g., the support ticket form in the Neon Console or the Neon Community Forum), you can use the following email as a fallback:
+If you're unable to access Neon's primary support channels (e.g., the support ticket form in the Neon Console or our [Discord Server](https://discord.com/invite/92vNTzKDGp)), you can use the following email as a fallback:
 
 **Email**: `support@neon.tech`
 

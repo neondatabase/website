@@ -10,6 +10,7 @@ const items = [
       'Neon charges for unique storage. Data that a branch shares in common with a parent branch is not considered unique, but data changes to a branch are counted toward storage.',
     linkUrl: '/docs/introduction/billing#project-storage',
     linkText: 'Read more',
+    linkLabel: 'about project storage',
   },
   {
     question: 'Can I upgrade or downgrade my plan later?',

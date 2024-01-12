@@ -154,7 +154,7 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
                   <Component className={clsx('my-0', imgClassName)} {...otherImgProps} />
                   {caption && (
                     <figcaption
-                      className={clsx('flex text-center justify-center', captionClassName)}
+                      className={clsx('flex justify-center text-center', captionClassName)}
                       {...otherCaptionProps}
                     >
                       {domToReact(caption)}
@@ -183,7 +183,7 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
         if (domNode.attribs?.class?.includes('wp-block-heading')) {
           return AnchorHeading(domNode.name)({
             children: domToReact(domNode.children),
-            className: `${domNode.attribs.class} scroll-mt-20`,
+            className: `${domNode.attribs.class} !scroll-mt-20`,
           });
         }
 
