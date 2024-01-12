@@ -15,7 +15,7 @@ The benefits of using FerretDB include:
 
 - **MongoDB compatibility**
 
-    FerretDB gives you access to the syntax, tools, querying language, and commands available in MongoDB for many common use cases. MongoDB is known for its simple and intuitive NoSQL query language which is widely used by many developers. By using FerretDB, you can enable Postgres databases like Neon to run MongoDB workloads. For related information, see [MongoDB Compatibility - What's Really Important?](https://blog.ferretdb.io/mongodb-compatibility-whats-really-important/).
+    FerretDB gives you access to the syntax, tools, querying language, and commands available in MongoDB for many common use cases. MongoDB is known for its simple and intuitive NoSQL query language which is widely used by many developers. By using FerretDB, you can enable Postgres databases like Neon to run MongoDB workloads. For related information, see [MongoDB Compatibility - What's Really Important?](https://blog.ferretdb.io/mongodb-compatibility-whats-really-important/)
 
 - **Open source** 
 
@@ -47,18 +47,21 @@ Your connection string should look something like this:
 
 ```bash
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/ferretdb
-postgresql://daniel:4rqEGel0PdTh@ep-proud-dew-a581t9ed.us-east-2.aws.neon.tech/ferretdb?sslmode=require
 ```
 
 </CodeBlock>
 
 ## Run FerretDB with Neon via Docker
 
-Run the following command to run FerretDB in a Docker container and connect it to your Neon Postgres database (NEON_DB_CONNECTION_STRING):
+Run the following command to run FerretDB in a Docker container and connect it to your Neon Postgres database (`NEON_DB_CONNECTION_STRING`):
+
+<CodeBlock shouldWrap>
 
 ```bash
 docker run -e FERRETDB_POSTGRESQL_URL=<NEON_DB_CONNECTION_STRING> ghcr.io/ferretdb/ferretdb
 ```
+
+</CodeBlock>
 
 ## Test via mongosh
 
@@ -66,9 +69,13 @@ From another terminal, test to see if the FerretDB instance is connected to your
 
 So in this case, the MongoDB connection string will be:
 
+<CodeBlock shouldWrap>
+
 ```bash
 mongosh 'mongodb://<postgres-username>:<postgres-password>@127.0.0.1:27017/ferretdb?authMechanism=PLAIN'
 ```
+
+</CodeBlock>
 
 This should connect you directly to the FerretDB instance, and you can go ahead to try out different MongoDB commands.
 
