@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 
 import Button from 'components/shared/button';
@@ -44,6 +45,20 @@ const logos = [
   },
 ];
 
+const buttons = [
+  {
+    text: 'Sign Up',
+    to: LINKS.signup,
+    theme: 'primary',
+  },
+  {
+    text: 'Talk to sales',
+    to: LINKS.contactSales,
+    theme: 'gray-dark-outline',
+    className: '!border-4 sm:!border-[3px]',
+  },
+];
+
 const Hero = () => (
   <section className="safe-paddings bg-black pt-[184px] lg:pt-12 md:pt-6">
     <Container
@@ -65,15 +80,19 @@ const Hero = () => (
           The fully managed serverless Postgres with a generous free tier. We separate storage and
           compute to offer autoscaling, branching, and bottomless storage.
         </p>
-        <Button
-          id="hero-button"
-          className="mt-11 2xl:mt-8 xl:mt-7 md:mt-6"
-          to={LINKS.signup}
-          size="md"
-          theme="primary"
-        >
-          Sign Up
-        </Button>
+        <div className="mx-auto mt-11 grid max-w-[452px] auto-rows-fr grid-cols-2 items-center gap-x-6 2xl:mt-8 xl:mt-7 md:mt-6 xs:grid-cols-1 xs:gap-y-4">
+          {buttons.map(({ text, to, theme, className }) => (
+            <Button
+              key={text}
+              className={clsx(className, 'h-20 2xl:h-[72px] xl:h-[60px] md:h-14')}
+              to={to}
+              theme={theme}
+              size="md"
+            >
+              {text}
+            </Button>
+          ))}
+        </div>
       </div>
       <ul className="mx-auto mt-20 flex w-full max-w-[1472px] justify-between gap-x-16 xl:gap-x-14 lg:mt-16 lg:flex-wrap lg:justify-center lg:gap-y-10 md:mt-14 md:gap-y-8 sm:mt-10 xs:gap-y-6">
         {logos.map(({ logo, alt, width }) => (
