@@ -58,7 +58,7 @@ Run the following command to run FerretDB in a Docker container and connect it t
 <CodeBlock shouldWrap>
 
 ```bash
-docker run -e FERRETDB_POSTGRESQL_URL=<NEON_DB_CONNECTION_STRING> ghcr.io/ferretdb/ferretdb
+docker run docker run -p 27017:27017 -e FERRETDB_POSTGRESQL_URL=<NEON_DB_CONNECTION_STRING> ghcr.io/ferretdb/ferretdb
 ```
 
 </CodeBlock>
@@ -72,7 +72,7 @@ So in this case, the MongoDB connection string will be:
 <CodeBlock shouldWrap>
 
 ```bash
-mongosh 'mongodb://<postgres-username>:<postgres-password>@127.0.0.1:27017/ferretdb?authMechanism=PLAIN'
+mongosh 'mongodb://<postgres-username>:<postgres-password>@127.0.0.1/ferretdb?authMechanism=PLAIN'
 ```
 
 </CodeBlock>
@@ -80,9 +80,9 @@ mongosh 'mongodb://<postgres-username>:<postgres-password>@127.0.0.1:27017/ferre
 This should connect you directly to the FerretDB instance, and you can go ahead to try out different MongoDB commands.
 
 ```bash
-~$ mongosh 'mongodb://<username>:<password>@127.0.0.1:27017/ferretdb?authMechanism=PLAIN'
+~$ mongosh 'mongodb://<username>:<password>@127.0.0.1/ferretdb?authMechanism=PLAIN'
 Current Mongosh Log ID: 657c28296fda6bb93a0c0058
-Connecting to:      mongodb://<credentials>@127.0.0.1:27017/?authMechanism=PLAIN&directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2
+Connecting to:      mongodb://<credentials>@127.0.0.1/?authMechanism=PLAIN&directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2
 Using MongoDB:      6.0.42
 Using Mongosh:      2.0.2
 mongosh 2.1.1 is available for download: https://www.mongodb.com/try/download/shell
@@ -160,21 +160,22 @@ Query the collection to see if the changes have been made:
 ```bash
 ferretdb> db.players.find({player_name: "Jordan"})
 [
-    {
-        nba_id: 23,
-        player_name: "Jordan",
-        player_extended_name: "Michael Jordan",
-        quality: "Gold - Legendary",
-        overall: 99,
-        nationality: "USA",
-        position: "SF",  // Updated field
-        shooting: 98,
-        passing: 85,
-        dribbling: 95,
-        defense: 93,
-        physicality: 92,
-        rebounding: 87
-    }
+  {
+    _id: ObjectId('65a1b5d53d6122d2b5122e40'),
+    nba_id: 23,
+    player_name: 'Jordan',
+    player_extended_name: 'Michael Jordan',
+    quality: 'Gold - Legendary',
+    overall: 99,
+    nationality: 'USA',
+    position: 'SF',
+    shooting: 98,
+    passing: 85,
+    dribbling: 95,
+    defense: 93,
+    physicality: 92,
+    rebounding: 87
+  }
 ]
 ```
 
@@ -182,9 +183,11 @@ You can run many MongoDB operations on FerretDB. See the list of [supported comm
 
 ## View your database on Neon
 
-Besides having a document database view of the collection in FerretDB, you can also view the data through the Neon Dashboard.
+Besides having a document database view of the collection in FerretDB, you can also view the data through the Neon **Dashboard**.
 
 To view your current documents, go to the Neon Dashboard and select **Tables** from the sidebar. Then, from the **Schema** menu, select `ferretdb`. FerretDB stores the documents in Postgres as `JSONB`.
+
+![FerretDB table showing player data](/docs/guides/ferretdb_table.png)
 
 ## Get started with FerretDB
 
