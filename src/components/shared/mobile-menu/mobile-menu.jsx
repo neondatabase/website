@@ -108,10 +108,10 @@ const mobileMenuItems = [
   },
 ];
 
-const MobileMenu = ({ isOpen = false, onOutsideClick }) => {
+const MobileMenu = ({ isOpen = false, headerRef, onOutsideClick }) => {
   const ref = useRef(null);
 
-  useClickOutside([ref], onOutsideClick);
+  useClickOutside([ref, headerRef], onOutsideClick);
   // create state to open menu item on click, one at a time, if one`s open, close it and open another one
 
   const [menuItemOpen, setMenuItemOpen] = useState();
