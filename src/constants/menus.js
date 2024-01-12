@@ -223,57 +223,6 @@ export default {
       ],
     },
   ],
-  mobile: [
-    {
-      text: 'Autoscaling',
-      to: LINKS.autoscaling,
-    },
-    {
-      text: 'On-demand storage',
-      to: LINKS.onDemandStorage,
-    },
-    {
-      text: 'Branching',
-      to: LINKS.branching,
-    },
-    {
-      text: 'CLI',
-      to: LINKS.cliReference,
-    },
-    {
-      text: 'AI',
-      to: LINKS.ai,
-    },
-    {
-      text: 'Docs',
-      to: LINKS.docs,
-    },
-    {
-      text: 'Pricing',
-      to: LINKS.pricing,
-    },
-
-    {
-      text: 'Blog',
-      to: LINKS.blog,
-    },
-    {
-      text: 'About us',
-      to: LINKS.aboutUs,
-    },
-    {
-      text: 'Careers',
-      to: LINKS.careers,
-    },
-    {
-      text: 'Partners',
-      to: LINKS.partners,
-    },
-    {
-      text: 'GitHub',
-      to: LINKS.github,
-    },
-  ],
   docSidebar: [
     {
       icon: TransactionsIcon,
