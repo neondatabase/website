@@ -128,34 +128,6 @@ This section describes how to configure a subscription on a standalone Postgres 
 
 It is assumed that you have a separate Postgres instance ready to act as the subscriber. This must be a Postgres instance other than Neon, such as a local PostgreSQL installation. Currently, a Neon database cannot be defined as a subscriber. The PostgreSQL version of the subscriber should be compatible with the publisher. The primary (publishing) server must be of the same or a higher version than the replica (subscribing) server. For example, you can replicate from PostgreSQL 14 to 16, but not from 16 to 14. Neon supports Postgres 14, 15, and 16. The Postgres version is defined when you create a Neon project.
 
-### Allow inbound traffic
-
-Configure `pg_hba.conf`, which is located in the same directory as `postgresql.conf`, to allow replication connections from your Neon database host:
-
-    You can set the IP address to `0.0.0.0` to allow connections from any IP. However, this is not recommended for production environments due to security concerns.
-
-    ```ini
-    host replication <replication_username> 0.0.0.0/0 md5
-    ```
-
-    It's safer to specify the IP address of your publishing Neon database. You can use a tool like `nslookup` to find the IP address of your Neon host, which you can obtain from your Neon connection string. For example:
-
-    ```bash
-    nslookup ep-cool-darkness-123456.us-east-2.aws.neon.tech
-    ```
-
-    Then, update `pg_hba.conf` with that IP address:
-
-    ```ini
-    host replication <replication_username> 192.0.2.1/32 md5
-    ```
-
-    Apply the changes by reloading the PostgreSQL configuration:
-
-    ```sql
-    SELECT pg_reload_conf();
-    ```
-
 ### Create a subscription
 
 1. Use `psql` or another SQL client to connect to your subscriber Postgres database.
