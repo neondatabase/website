@@ -82,7 +82,7 @@ const Header = ({
                       className={clsx(
                         'whitespace-pre',
                         items?.length > 0 &&
-                          'relative pr-3.5 leading-none transition-colors duration-200 before:absolute before:right-0 before:top-[7px] before:h-0 before:w-0 before:border-4 before:border-transparent before:transition-[border-color] before:duration-200 hover:text-primary-2 group-hover:before:border-t-primary-2 dark:before:border-transparent',
+                          'relative pr-3.5 leading-none transition-colors duration-200 before:absolute before:right-0 before:top-[7px] before:h-0 before:w-0 before:border-4 before:border-transparent before:transition-[border-color] before:duration-200 hover:text-primary-2 group-hover:text-green-45 group-hover:before:border-t-primary-2 dark:before:border-transparent',
                         items?.length > 0 && isThemeBlack
                           ? 'before:border-t-white'
                           : 'before:border-t-black dark:before:border-t-white',

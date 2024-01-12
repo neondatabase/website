@@ -225,12 +225,37 @@ export default {
   ],
   mobile: [
     {
-      text: 'Docs',
-      to: LINKS.docs,
+      text: 'Autoscaling',
+      to: LINKS.autoscaling,
+    },
+    {
+      text: 'On-demand storage',
+      to: LINKS.onDemandStorage,
     },
     {
       text: 'Branching',
       to: LINKS.branching,
+    },
+    {
+      text: 'CLI',
+      to: LINKS.cliReference,
+    },
+    {
+      text: 'AI',
+      to: LINKS.ai,
+    },
+    {
+      text: 'Docs',
+      to: LINKS.docs,
+    },
+    {
+      text: 'Pricing',
+      to: LINKS.pricing,
+    },
+
+    {
+      text: 'Blog',
+      to: LINKS.blog,
     },
     {
       text: 'About us',
@@ -241,27 +266,9 @@ export default {
       to: LINKS.careers,
     },
     {
-      text: 'Blog',
-      to: LINKS.blog,
-    },
-    {
-      text: 'Pricing',
-      to: LINKS.pricing,
-    },
-    {
       text: 'Partners',
       to: LINKS.partners,
     },
-    {
-      text: 'AI',
-      to: LINKS.ai,
-    },
-    // {
-    //   iconName: 'discord',
-    //   text: 'Discord',
-    //   description: 'Join our community',
-    //   to: LINKS.discord,
-    // },
     {
       text: 'GitHub',
       to: LINKS.github,
