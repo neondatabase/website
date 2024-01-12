@@ -53,13 +53,15 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb
 
 Run the following command to run FerretDB in a Docker container and connect it to your Neon Postgres database (NEON_DB_CONNECTION_STRING):
 
+```bash
 docker run -e FERRETDB_POSTGRESQL_URL=<NEON_DB_CONNECTION_STRING> ghcr.io/ferretdb/ferretdb
+```
 
 ## Test via mongosh
 
 From another terminal, let's test and see that FerretDB instance is connected to Neon database using `mongosh`. To connect via `mongosh`, you will need a connection string. Use your Neon Postgres credentials to connect to the database.
 
-So in this case, the MongoDB URI will be:
+So in this case, the MongoDB connection string will be:
 
 ```bash
 mongosh 'mongodb://<postgres-username>:<postgres-password>@127.0.0.1:27017/ferretdb?authMechanism=PLAIN'
