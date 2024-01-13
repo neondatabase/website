@@ -240,7 +240,7 @@ WHERE _jsonb ->> 'player_name' = 'Jordan';
 
 ## Get started with FerretDB
 
-FerretDB lets you run MongoDB workloads on relational databases. This flexibility means you can easily add MongoDB compatibility to your Neon Postgres database, while avoiding vendor lock-in and retaining control of your data architecture.
+FerretDB lets you run MongoDB workloads on relational databases. This flexibility means you can easily add MongoDB compatibility to your Neon Postgres database while avoiding vendor lock-in and retaining control of your data architecture.
 
 To get started with FerretDB, check out the [FerretDB Get Started](https://docs.ferretdb.io/quickstart-guide/) docs.
 
