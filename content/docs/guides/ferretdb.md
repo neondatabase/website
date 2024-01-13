@@ -185,9 +185,9 @@ ferretdb> db.players.find()
 
 ```
 
-## Update document record in FerretDB
+## Update a record in FerretDB
 
-Next, you need to update "Jordan" record to reflect his current position as a `SF`. To do this, we can just run an `updateOne` command to target just that particular player:
+Next, you need to update the "Jordan" record to reflect his current position as a `SF`. To do this, we can just run an `updateOne` command to target just that particular player:
 
 ```json
 db.players.updateOne(
@@ -230,7 +230,7 @@ To view your current documents, go to the Neon Dashboard and select **Tables** f
 
 ![FerretDB table showing player data](/docs/guides/ferretdb_table.png)
 
-To query the data for a specific player via SQL, you can do so via the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor):
+To query the data for a specific player via SQL, you can do so via the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor):
 
 ```sql
 SELECT _jsonb
@@ -240,9 +240,9 @@ WHERE _jsonb ->> 'player_name' = 'Jordan';
 
 ## Get started with FerretDB
 
-FerretDB lets you run MongoDB workloads on relational databases. This flexibility means you can easily add MongoDB compatibility to Neon Postgres database, while avoiding vendor lock-in and retaining control of your data architecture.
+FerretDB lets you run MongoDB workloads on relational databases. This flexibility means you can easily add MongoDB compatibility to your Neon Postgres database, while avoiding vendor lock-in and retaining control of your data architecture.
 
-To get started with FerretDB, check out the [FerretDB Get Started](https://docs.ferretdb.io/quickstart-guide/).
+To get started with FerretDB, check out the [FerretDB Get Started](https://docs.ferretdb.io/quickstart-guide/) docs.
 
 ## References
 
@@ -254,6 +254,8 @@ To get started with FerretDB, check out the [FerretDB Get Started](https://docs.
 - [FerretDB on GitHub](https://github.com/FerretDB/FerretDB)
 - [FerretDB supported commands](https://docs.ferretdb.io/reference/supported-commands/)
 - [Postgres JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
+- [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor)
+- [Connect with psql](/docs/connect/query-with-psql-editor)
 - [Understanding FerretDB](https://docs.ferretdb.io/understanding-ferretdb/)
 - [FerretDB Get Started](https://docs.ferretdb.io/quickstart-guide/)
 
