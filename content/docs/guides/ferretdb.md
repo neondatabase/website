@@ -105,7 +105,7 @@ You are now directly connected to your `ferretdb` database.
 
 ## Insert documents into FerretDB
 
-With `mongosh`, you can now insert some documents into your FerretDB instance directly from the `ferretdb>` prompt hown above. You are going to insert two basketball player documents into a `players` collection.
+With `mongosh`, you can now insert some documents into your FerretDB instance directly from the `ferretdb>` prompt shown above. You are going to insert two basketball player documents into a `players` collection.
 
 ```json
 db.players.insertMany([
