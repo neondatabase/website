@@ -185,7 +185,7 @@ const DemoList = () => (
                   key={index}
                 >
                   <div className="max-w-[591px] xl:max-w-[500px] lg:max-w-full">
-                    <h3 className="text-2xl font-medium leading-tight tracking-extra-tight lg:text-xl">
+                    <h3 className="max-w-[510px] text-2xl font-medium leading-tight tracking-extra-tight lg:text-xl">
                       {title}
                     </h3>
                     <p className="mt-3 leading-tight tracking-extra-tight text-gray-new-70">

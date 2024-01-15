@@ -54,7 +54,7 @@ const Hero = () => (
             <span>Featured</span>
             <span className="ml-2 h-px grow bg-gray-new-20" />
           </h2>
-          <ul className="mt-6 grid grid-cols-10 grid-rows-[auto,auto] gap-x-10 gap-y-9 lg:grid-cols-2 md:grid-cols-1">
+          <ul className="mt-6 grid grid-cols-10 grid-rows-2 gap-x-10 gap-y-9 lg:grid-cols-2 md:grid-cols-1">
             {items.map(({ image, imageWidth, imageHeight, title, demoLink, sourceLink }, index) => (
               <li
                 className={clsx(
@@ -93,7 +93,7 @@ const Hero = () => (
                       rel={demoLink.startsWith('http') ? 'noopener noreferrer' : ''}
                     >
                       <ChevronIcon className="mr-2" />
-                      Live Demo
+                      Live demo
                     </Link>
                   )}
                   <Link
