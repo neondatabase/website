@@ -41,8 +41,10 @@ const CTAWithElephant = ({
           className="max-w-[500px] xl:max-w-[400px] lg:max-w-[350px] md:mx-auto"
           tag="h2"
           size="2sm"
-          dangerouslySetInnerHTML={{ __html: title }}
-        />
+          asHTML
+        >
+          {title}
+        </Heading>
         <p className="mt-3 max-w-[464px] text-lg font-light leading-snug xl:max-w-[400px] xl:text-base lg:max-w-sm md:mx-auto md:max-w-md">
           {description}
         </p>
