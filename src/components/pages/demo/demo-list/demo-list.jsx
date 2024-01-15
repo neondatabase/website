@@ -201,7 +201,7 @@ const DemoList = () => (
                         rel={demoLink.startsWith('http') ? 'noopener noreferrer' : ''}
                       >
                         <ChevronIcon className="mr-2" />
-                        Live Demo
+                        Live demo
                       </Link>
                     )}
                     {sourceLink !== '#' && (
