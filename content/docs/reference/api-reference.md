@@ -54,7 +54,7 @@ For additional Neon API examples, refer to the following topics:
 - [Manage compute endpoints with the Neon API](/docs/manage/endpoints#manage-compute-endpoints-with-the-neon-api)
 - [Manage roles with the Neon API](/docs/manage/users#manage-roles-with-the-neon-api)
 - [Manage databases with the Neon API](/docs/manage/databases#manage-databases-with-the-neon-api)
-- [View operations with the Neon API](/docs/manage/operations#view-operations-with-the-neon-api)
+- [View operations with the Neon API](/docs/manage/operations#operations-and-the-neon-api)
 
 <Admonition type="important">
 When using the Neon API programmatically, you can poll the operation `status` to ensure that an operation is finished before proceeding with the next API request. For more information, see [Poll operation status](/docs/manage/operations#poll-operation-status).
