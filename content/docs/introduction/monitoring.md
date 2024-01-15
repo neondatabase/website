@@ -7,13 +7,44 @@ enableTableOfContents: true
 ## Overview
 [Blurb about monitoring in general for saas serverless db.]
 
-With Neon as your serverless database, we understand the importance of robust monitoring features, not only to provide insight into the status of your database, but you also need to understand how your computes are performing
+With Neon as your serverless database, we understand the importance of robust monitoring features, not only to provide insight into the status of your database, but you also need to understand how the engine is running: compute usage, etc... computes are performing
 
 ## Current state of monitoring features
+
+While robust monitoring and observability features are not here yet, we do offer a few ways to monitor what's happening in your Neon projects and their databases:
+- Dashboard snapshots 
+- Branch-specific metrics
+- API metrics
+- Billing page in the console
+- neon_utils for monitoring autoscaling
+- As well as native Postgres tools for monitoring your database
+
+## Dashboard metrics
+
+The project dashboard 's dashboard, you get a series of widgets that show details and snapshots your projects stats, the compute and storage metrics for your main branch, as well as a snapshot of your latest Neon operations.
+
+a snapshot of the compute and storage metrics for your main branch, as well as and a 
+
+<div>
+<div width="50%">
+asfd
+</div>
+<div width="50%">
+asfd
+</div>
+</div>
 
 [Politely explain we don't have monitoring but plan to soon]
 
 As of now, Neon is light on built-in monitoring features. We know their importance and monitoring features are in our roadmap. Whether through integration with third-party tools like Datadog, autoscaling visualizations in the Neon Console, monitoring tools are coming.
+
+
+We do have a few things to offer for monitoring:
+Dashboard metrics
+Branch-specific metrics on the branches page
+API metrics (all the above via the API)
+Billing page in the console for billing metrics
+neon_utils for monitoring Autoscaling: https://neon.tech/docs/extensions/neon-utils
 
 ## Roadmap and future developments
 
