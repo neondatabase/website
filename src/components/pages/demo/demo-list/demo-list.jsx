@@ -165,7 +165,7 @@ const DemoList = () => (
     <Container className="grid-gap-x grid grid-cols-12 lg:grid-cols-1" size="medium">
       <ul className="col-span-10 col-start-2 flex flex-col gap-y-20 lg:col-span-full lg:col-start-1 lg:gap-y-16 md:gap-y-10">
         {items.map(({ category, categoryTextColor, items }, index) => (
-          <div
+          <li
             className="mx-auto w-full max-w-[1048px] rounded-[10px] bg-gray-new-8 p-10 lg:p-8 md:px-6"
             key={index}
           >
@@ -218,7 +218,7 @@ const DemoList = () => (
                 </li>
               ))}
             </ul>
-          </div>
+          </li>
         ))}
       </ul>
     </Container>
