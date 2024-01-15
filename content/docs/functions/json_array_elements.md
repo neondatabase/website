@@ -65,7 +65,7 @@ FROM developers,
 ```
 
 
-Returns:
+This returns:
 
 
 | id |  name   |    skill    
@@ -136,7 +136,7 @@ WHERE name = 'T-Shirt';
 ```
 
 
-Returns:
+This returns:
 
 
 | id |  name   | size | color  |
@@ -170,7 +170,7 @@ WHERE 'Blue' IN (
 ```
 
 
-Returns:
+This returns:
 
 
 | id |   name   |                               details                                |
@@ -216,7 +216,7 @@ WHERE name = 'Socks';
 ```
 
 
-Returns:
+This returns:
 
 
 | id | name  | size |
@@ -279,7 +279,7 @@ FROM
 ```
 
 
-Returns:
+This returns:
 
 
 
@@ -312,20 +312,8 @@ Returns:
 ### Alternative options
 
 
-**jsonb_array_elements**
-
-
-Consider this variant for performance benefits with `jsonb` data. `jsonb_array_elements` only accepts `jsonb` data, while `json_array_elements` works with both `json` and `jsonb`. It is typically faster, especially for larger arrays, due to its optimization for the binary `jsonb` format.
-
-
-**json_array_elements_text**
-
-
-While `json_array_elements` returns each extracted element as a JSON value, `json_array_elements_text` returns each extracted element as a plain text *string*.
-
-
-Prefer `json_array_elements` when you need to maintain the JSON structure of the elements for further JSON-related operations or analysis and `json_array_elements_text` if you need to work with the extracted elements as plain text for string operations, text analysis, or integration with text-based functions.
-
+- `jsonb_array_elements` - Consider this variant for performance benefits with `jsonb` data. `jsonb_array_elements` only accepts `jsonb` data, while `json_array_elements` works with both `json` and `jsonb`. It is typically faster, especially for larger arrays, due to its optimization for the binary `jsonb` format.
+- `json_array_elements_text` - While `json_array_elements` returns each extracted element as a JSON value, `json_array_elements_text` returns each extracted element as a plain text *string*.
 
 ### JSON array order
 
@@ -345,7 +333,7 @@ FROM
 ```
 
 
-Returns:
+This returns:
 
 
 | id |  name   |    skill     | ordinality |
