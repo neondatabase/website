@@ -34,3 +34,21 @@ export default async function highlight(code, lang = 'bash', theme = 'github-dar
 
   return html;
 }
+
+export const getHighlightedCodeArray = async (items) => {
+  let highlightedItems = [];
+
+  try {
+    highlightedItems = await Promise.all(
+      items.map(async (item) => {
+        const highlightedCode = await highlight(item.code, item.language);
+
+        return highlightedCode;
+      })
+    );
+  } catch (error) {
+    console.error('Error highlighting code:', error);
+  }
+
+  return highlightedItems;
+};

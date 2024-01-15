@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import CodeBlockWrapper from '../code-block-wrapper';
 
-const CodeBlock = async ({
+const CodeBlock = ({
   className = null,
   copyButtonClassName = null,
   children,

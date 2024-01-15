@@ -1,23 +1,11 @@
 import PropTypes from 'prop-types';
 
-import highlight from 'lib/shiki';
+import { getHighlightedCodeArray } from 'lib/shiki';
 
 import CodeTabsNavigation from './code-tabs-navigation';
 
 const CodeTabs = async ({ items }) => {
-  let highlightedItems = [];
-
-  try {
-    highlightedItems = await Promise.all(
-      items.map(async (item) => {
-        const highlightedCode = await highlight(item.code, item.language);
-
-        return highlightedCode;
-      })
-    );
-  } catch (error) {
-    console.error('Error highlighting code:', error);
-  }
+  const highlightedItems = await getHighlightedCodeArray(items);
 
   return (
     <figure className="my-5 max-w-full overflow-hidden rounded-md bg-black-new">
