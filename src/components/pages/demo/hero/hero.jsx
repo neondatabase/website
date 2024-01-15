@@ -71,6 +71,11 @@ const Hero = () => (
                   width={imageWidth}
                   height={imageHeight}
                   alt=""
+                  sizes={
+                    index === 0
+                      ? '(max-width: 1023px) 100vw, 716px'
+                      : '(max-width: 1023px) 50vw, (max-width: 767px) 100vw, 464px'
+                  }
                   priority
                 />
                 <h3
