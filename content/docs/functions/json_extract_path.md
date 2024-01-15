@@ -43,7 +43,7 @@ Each book has a JSON column containing details such as `title`, `author`, and pu
 | 3 | {"title": "1984", "author": "George Orwell", "year": 1949} |
 
 
-<!--
+
 ```sql
 CREATE TABLE books (
  id INT,
@@ -56,7 +56,6 @@ INSERT INTO books (id, info) VALUES
  (2, '{"title": "To Kill a Mockingbird", "author": "Harper Lee", "year": 1960}'),
  (3, '{"title": "1984", "author": "George Orwell", "year": 1949}');
 ```
--->
 
 
 Now, let's use the `json_extract_path` function to extract the `title` and `author` of each book:
@@ -98,7 +97,6 @@ Consider a table that stores information about products in an e-commerce system:
 
 
 
-<!--
 ```sql
 CREATE TABLE products (
  id INT,
@@ -112,7 +110,6 @@ INSERT INTO products (id, attributes) VALUES
  "pixel"]}'),
  (3, '{"name": "Smartphone", "specs": {"brand": "Apple", "RAM": "8GB", "storage": {"type": "UFS", "capacity": "128GB"}}, "tags": ["ios", "iphone"]}');
 ```
--->
 
 
 ### Extract value from nested JSON object
@@ -199,7 +196,7 @@ Let's say you have two tables, employees and `departments`, and the `employees` 
 
 
 
-<!--
+
 ```sql
 CREATE TABLE departments (
    department_id SERIAL PRIMARY KEY,
@@ -227,7 +224,6 @@ INSERT INTO employees (employee_name, details) VALUES
    ('Jane Smith', '{"department": "HR"}'),
    ('Bob Johnson', '{"department": "Marketing"}');
 ```
--->
 
 
 You can use `JOIN` with `json_extract_path` to retrieve information:
