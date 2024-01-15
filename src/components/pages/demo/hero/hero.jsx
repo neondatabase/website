@@ -87,7 +87,7 @@ const Hero = () => (
                 <div className="mt-4 flex items-center justify-start gap-x-4 text-[15px] leading-none">
                   {demoLink !== '#' && (
                     <Link
-                      className="flex items-center rounded-full bg-gray-new-15 px-4 py-2"
+                      className="flex items-center rounded-full bg-gray-new-15 px-5 py-3 text-[15px] font-medium leading-none transition-colors duration-200 hover:bg-gray-new-30"
                       to={demoLink}
                       target={demoLink.startsWith('http') ? '_blank' : '_self'}
                       rel={demoLink.startsWith('http') ? 'noopener noreferrer' : ''}
@@ -97,9 +97,10 @@ const Hero = () => (
                     </Link>
                   )}
                   <Link
-                    className="text-gray-new-70"
+                    className="text-[15px] leading-none"
                     to={sourceLink}
                     target="_blank"
+                    theme="gray-90"
                     rel="noopener noreferrer"
                   >
                     Source

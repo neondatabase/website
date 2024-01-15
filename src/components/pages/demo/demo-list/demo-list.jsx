@@ -188,14 +188,14 @@ const DemoList = () => (
                     <h3 className="max-w-[510px] text-2xl font-medium leading-tight tracking-extra-tight lg:text-xl">
                       {title}
                     </h3>
-                    <p className="mt-3 leading-tight tracking-extra-tight text-gray-new-70">
+                    <p className="tracking-snug mt-3 font-light leading-tight text-gray-new-70">
                       {description}
                     </p>
                   </div>
                   <div className="flex items-center justify-start gap-x-4 text-[15px] leading-none">
                     {demoLink !== '#' && (
                       <Link
-                        className="flex items-center rounded-full bg-gray-new-15 px-4 py-2"
+                        className="flex items-center rounded-full bg-gray-new-15 px-5 py-3 text-[15px] font-medium leading-none transition-colors duration-200 hover:bg-gray-new-30"
                         to={demoLink}
                         target={demoLink.startsWith('http') ? '_blank' : '_self'}
                         rel={demoLink.startsWith('http') ? 'noopener noreferrer' : ''}
@@ -206,9 +206,10 @@ const DemoList = () => (
                     )}
                     {sourceLink !== '#' && (
                       <Link
-                        className="text-gray-new-70"
+                        className="text-[15px] leading-none"
                         to={sourceLink}
                         target="_blank"
+                        theme="gray-90"
                         rel="noopener noreferrer"
                       >
                         Source
