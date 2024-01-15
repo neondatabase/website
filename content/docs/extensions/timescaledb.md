@@ -4,7 +4,12 @@ subtitle: timescaledb is an extension for handling time-series data.
 enableTableOfContents: true
 ---
 
-`timescaledb` enables efficient storage and retrieval of time-series data. It is designed to handle large volumes of time-stamped data and provides SQL capabilities on top of a time-oriented data model such as IoT data, sensor readings, financial market data, and other time-series datasets.
+
+`timescaledb` enables the efficient storage and retrieval of time-series data. Time-series data is a sequential collection of observations or measurements recorded over time. For example, IoT devices continuously generate data points with timestamps, representing measurements or events. `timescaledb` is designed to handle large volumes of time-stamped data and provides SQL capabilities on top of a time-oriented data model such as IoT data, sensor readings, financial market data, and other time-series datasets.
+
+
+This guide provides an introduction to the `timescaledb` extension. You’ll learn how to enable the extension in Neon, create hypertables, run simple queries, and analyze data using `timescaledb` functions. Finally, you’ll see how to delete data to free up space.
+
 
 <Admonition type="note">
 `timescaledb` is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below.
@@ -20,216 +25,379 @@ The version of `timescaledb` available on Neon varies based on which version of 
 
 _Only Apache-2 licensed features are supported. Compression is not supported._
 
+
 ## Enable the `timescaledb` extension
 
+
 You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
+
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS timescaledb;
 ```
 
+
 For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
-## Basic functions for working with Hypertables and chunks
 
-Create a `hypertable` for temperature data:
+## Create a Hypertable
+
+
+`timescaledb` hypertables are a high-level abstraction, extending traditional PostgreSQL tables to manage temporal data more effectively. A hypertable simplifies the organization and retrieval of time-series information by providing built-in partitioning based on time intervals.
+
+To begin with, create a SQL table for temperature data:
+
 
 ```sql
-CREATE TABLE temperature_data (
- time       TIMESTAMPTZ NOT NULL,
- location   TEXT        NOT NULL,
- temperature DOUBLE PRECISION
+CREATE TABLE weather_conditions (
+ time        TIMESTAMP WITH TIME ZONE NOT NULL,
+ device_id   TEXT,
+ temperature  NUMERIC,
+ humidity     NUMERIC
 );
 ```
 
-Create a `hypertable` for temperature data using `create_hypertable`:
+Convert it into a hypertable using the `create_hypertable` function:
 
 
 ```sql
-SELECT create_hypertable('temperature_data', 'time');
+SELECT create_hypertable('weather_conditions', 'time');
 ```
 
-Insert data in `temperature_data` table:
 
-```sql
-INSERT INTO temperature_data(time, location, temperature)
-SELECT
- generate_series('2023-01-01'::TIMESTAMPTZ, '2023-01-05'::TIMESTAMPTZ, '1 hour'::INTERVAL),
- 'Room A',
- random() * 10 + 20;
+You should receive the following output:
 
 
-INSERT INTO temperature_data(time, location, temperature)
-SELECT
- generate_series('2023-01-01'::TIMESTAMPTZ, '2023-01-05'::TIMESTAMPTZ, '1 hour'::INTERVAL),
- 'Room B',
- random() * 10 + 22;
-```
+|       create_hypertable       |
+|-------------------------------|
+| (3,public,weather_conditions,t) |
 
-Show chunks information:
+
+
+It is possible to use both standard SQL commands, and timescaledb functions (which will be covered later).
+
+
+Use a SQL query to insert data in the `weather_conditions` table:
 
 
 ```sql
-SELECT show_chunks('temperature_data');
+INSERT INTO weather_conditions
+VALUES
+   (NOW(), 'weather-pro-000002', 72.0, 52.0),
+   (NOW(), 'weather-pro-000003', 71.5, 51.5),
+   (NOW(), 'weather-pro-000004', 73.0, 53.2);
 ```
 
-Returns:
 
-```text
-|             show_chunks              |
-|--------------------------------------|
-| _db_internal._hyper_1_1_chunk|
-| _db_internal._hyper_1_2_chunk|
-```
-
-Show detailed chunks information:
+Retrieve the data by time in descending order:
 
 
 ```sql
-SELECT * FROM chunks_detailed_size('temperature_data')
- ORDER BY chunk_name;
+SELECT * FROM weather_conditions ORDER BY time DESC;
 ```
 
-Returns:
+You should receive the following output:
 
-```text
-|     chunk_schema     |    chunk_name    | table_bytes | index_bytes | toast_bytes | total_bytes | node_name |
-|----------------------|------------------|-------------|-------------|-------------|-------------|-----------|
-| _db_internal | _hyper_1_1_chunk |       40960 |       16384 |        8192 |       65536 |           |
-| _db_internal | _hyper_1_2_chunk |        8192 |       16384 |        8192 |       32768 |           |
+
+|             time              |     device_id      | temperature | humidity |
+|-------------------------------|--------------------|-------------|----------|
+| 2024-01-15 13:30:27.464107+00 | weather-pro-000002 |      72.0   |   52.0   |
+| 2024-01-15 13:30:27.464107+00 | weather-pro-000003 |      71.5   |   51.5   |
+| 2024-01-15 13:30:27.464107+00 | weather-pro-000004 |      73.0   |   53.2   |
+
+
+
+
+## Load weather data
+
+Use the [sample weather dataset from TimescaleDB](https://assets.timescale.com/docs/downloads/weather_small.tar.gz) and load it into your Neon database [using psql](/docs/connect/query-with-psql-editor).
+
+
+If you are logged in, quit the `psql` shell:
+
+
+```shell
+\q
 ```
 
-Add `location` as a dimension:
+
+Download the weather data:
 
 
-```sql
-SELECT add_dimension('temperature_data', 'location', number_partitions => 2);
+```shell
+curl https://assets.timescale.com/docs/downloads/weather_small.tar.gz -o weather_small.tar.gz
+
+
+tar -xvzf weather_small.tar.gz
 ```
 
-Returns:
 
-```text
-|             add_dimension            |
-----------------------------------------
-|(4,public,temperature_data,location,t)|
+Load the data into Neon database - enter the username, password, host and database name:
+
+
+```shell
+psql 'postgresql://<username>:<password>@<host>/<database_name>?sslmode=require' -c "\COPY weather_conditions FROM weather_small_conditions.csv CSV"
 ```
+
+
+You should receive the following output:
+
+
+```
+COPY 1000000
+```
+
 
 ## Use Hyperfunctions to analyze data
 
 
-Get an approximate row count for `temperature_data`:
+You can now start using `timescaledb` functions to analyze the data.
 
 
-```sql
-SELECT approximate_row_count('temperature_data');
-```
+**first**
 
-Returns:
-
-```text
-| approximate_row_count |
-|-----------------------|
-|                   192 |
-```
 
 Get the first temperature reading for each location:
 
 
 ```sql
 SELECT
- location,
- first(temperature, time) AS first_temperature
-FROM temperature_data
-GROUP BY location;
+device_id,
+first(temperature, time) AS first_temperature
+FROM weather_conditions
+GROUP BY device_id
+LIMIT 10;
 ```
 
-Returns:
 
-```text
-| location | first_temperature |
-|----------|-------------------|
-| Room A   | 20.23611140077991 |
-| Room B   | 23.49417976496308 |
-```
+The aggregate function `first` was used to get the earliest `temperature` value based on `time` within an aggregate group.
 
-Get the last temperature reading for each location:
+
+You should receive the following output:
+
+
+|     device_id      | first_temperature  |
+|--------------------|--------------------|
+| weather-pro-000000 |               39.9 |
+| weather-pro-000001 |               32.4 |
+| weather-pro-000002 |               39.8 |
+| weather-pro-000003 |               36.8 |
+| weather-pro-000004 |               71.8 |
+| weather-pro-000005 |               71.8 |
+| weather-pro-000006 |                 37 |
+| weather-pro-000007 |                 72 |
+| weather-pro-000008 |               31.3 |
+| weather-pro-000009 |               84.4 |
+
+
+**last**
+
+
+Get the latest temperature reading for each location:
 
 
 ```sql
 SELECT
- location,
- last(temperature, time) AS last_temperature
-FROM temperature_data
-GROUP BY location;
+device_id,
+last(temperature, time) AS first_temperature
+FROM weather_conditions
+GROUP BY device_id
+LIMIT 10;
 ```
 
 
-Returns:
+The aggregate function `last` was used to get the latest `temperature` value based on `time` within an aggregate group.
 
-```text
-| location |  last_temperature  |
-|----------|--------------------|
-| Room A   | 28.304521011192875 |
-| Room B   | 24.145341023078732 |
-```
 
-Calculate the average temperature per hour for Room B:
+You should receive the following output:
+
+
+|     device_id      | first_temperature |
+|--------------------|-------------------|
+| weather-pro-000000 |                42 |
+| weather-pro-000001 |                42 |
+| weather-pro-000002 |              72.0 |
+| weather-pro-000003 |              71.5 |
+| weather-pro-000004 |              73.0 |
+| weather-pro-000005 | 70.3              |
+| weather-pro-000006 |                42 |
+| weather-pro-000007 | 69.9              |
+| weather-pro-000008 |                42 |
+| weather-pro-000009 |                91 |
+
+
+**time_bucket**
+
+
+Calculate the average temperature per hour for a specific device:
+
 
 ```sql
 SELECT
- time_bucket('1 hour', time) AS bucket_time,
- AVG(temperature) AS avg_temperature
-FROM temperature_data
-WHERE location = 'Room B'
+time_bucket('1 hour', time) AS bucket_time,
+AVG(temperature) AS avg_temperature
+FROM weather_conditions
+WHERE device_id = 'weather-pro-000001'
 GROUP BY bucket_time
 ORDER BY bucket_time
 LIMIT 10;
 ```
 
-Returns:
 
-```text
-|       bucket_time       |  avg_temperature   |
-|-------------------------|--------------------|
-| 2023-01-01 00:00:00+00 |  23.49417976496308 |
-| 2023-01-01 01:00:00+00 | 30.590117581301325 |
-| 2023-01-01 02:00:00+00 | 25.841411034815213 |
-| 2023-01-01 03:00:00+00 |  23.16685407159912 |
-| 2023-01-01 04:00:00+00 | 24.709969799457806 |
-| 2023-01-01 05:00:00+00 | 26.656702867232305 |
-| 2023-01-01 06:00:00+00 |  22.11759327511014 |
-| 2023-01-01 07:00:00+00 | 24.406385958319298 |
-| 2023-01-01 08:00:00+00 | 29.903931142405966 |
-| 2023-01-01 09:00:00+00 | 24.488422766863607 |
-```
+The query uses the `time_bucket` hyperfunction to group timestamps into one-hour intervals, calculating the average temperature for each interval from the table for a specific device, and then displays the results for the top 10 intervals.
 
-> remove LIMIT 10 to see entire output
 
-Create a temperature histogram for Room A:
+You should receive the following output:
+
+
+|      bucket_time       |   avg_temperature   |
+|------------------------|---------------------|
+| 2016-11-15 12:00:00+00 | 32.76               |
+| 2016-11-15 13:00:00+00 | 33.60               |
+| 2016-11-15 14:00:00+00 | 34.83               |
+| 2016-11-15 15:00:00+00 | 36.26               |
+| 2016-11-15 16:00:00+00 | 37.19               |
+| 2016-11-15 17:00:00+00 | 38.12               |
+| 2016-11-15 18:00:00+00 | 39.02               |
+| 2016-11-15 19:00:00+00 | 40.03               |
+| 2016-11-15 20:00:00+00 | 40.87               |
+| 2016-11-15 21:00:00+00 | 41.93               |
+
+
+**histogram**
+
+
+Bucket device humidity data:
+
 
 ```sql
-SELECT
- width_bucket(temperature, 20, 30, 5) AS temperature_range,
- COUNT(*) AS frequency
-FROM temperature_data
-WHERE location = 'Room A'
-GROUP BY temperature_range
-ORDER BY temperature_range;
+SELECT device_id, histogram(humidity, 40, 60, 5)
+FROM weather_conditions
+GROUP BY device_id
+LIMIT 10;
 ```
 
-Returns:
 
-```text
-| temperature_range | frequency |
-|-------------------|-----------|
-|                 1 |        21 |
-|                 2 |        16 |
-|                 3 |        21 |
-|                 4 |        20 |
-|                 5 |        19 |
+Here, we use the `histogram` function to create a distribution of humidity values within specified buckets (`40` to `60` with a size of `5`) for each `device_id`.
+
+
+You should receive the following output:
+
+
+|     device_id      |      histogram      |
+|--------------------|---------------------|
+| weather-pro-000000 | {0,0,0,710,290,0,0} |
+| weather-pro-000001 | {0,0,0,805,186,9,0} |
+| weather-pro-000002 | {0,0,0,217,784,0,0} |
+| weather-pro-000003 | {0,0,0,510,491,0,0} |
+| weather-pro-000004 | {0,0,0,1000,1,0,0} |
+| weather-pro-000005 | {0,0,0,1000,0,0,0} |
+| weather-pro-000006 | {0,0,0,999,1,0,0}  |
+| weather-pro-000007 | {0,0,0,1000,0,0,0} |
+| weather-pro-000008 | {0,0,0,834,166,0,0} |
+| weather-pro-000009 | {0,0,0,0,0,0,1000} |
+
+
+**approximate_row_count**
+
+
+Use the `approximate_row_count` to get the approximate number of rows in `weather_conditions` hypertable:
+
+
+```sql
+SELECT approximate_row_count('weather_conditions');
 ```
+
+
+You should receive the following output:
+
+
+| approximate_row_count |
+|-----------------------|
+|             1000000   |
+
+
+
+
+## Working with Chunks
+
+
+Chunks are fundamental storage units within hypertables. Instead of storing the entire time-series dataset as a single monolithic table, `timescaledb` breaks it down into smaller, manageable chunks. Each chunk represents a distinct time interval, making data retrieval and maintenance more efficient.
+
+
+**show_chunks**
+
+
+The `show_chunks` function can be used to understand the underlying structure and organization of your time-series data and provides insights into how your hypertable is partitioned.
+
+
+```sql
+SELECT show_chunks('weather_conditions');
+```
+
+
+You should receive the following output:
+
+
+|               show_chunks               |
+|-----------------------------------------|
+| _timescaledb_internal._hyper_7_24_chunk |
+| _timescaledb_internal._hyper_7_25_chunk |
+
+
+
+
+`show_chunks` output indicates the presence of two internal chunks within your hypertable. To show detailed chunks information:
+
+
+
+
+```sql
+SELECT * FROM chunks_detailed_size('weather_conditions') ORDER BY chunk_name;
+```
+
+
+You should receive the following output:
+
+
+|     chunk_schema      |    chunk_name     | table_bytes | index_bytes | toast_bytes | total_bytes | node_name |
+|-----------------------|-------------------|-------------|-------------|-------------|-------------|-----------|
+| _timescaledb_internal | _hyper_7_24_chunk |        8192 |       16384 |        8192 |       32768 |           |
+| _timescaledb_internal | _hyper_7_25_chunk |    82190336 |     8249344 |        8192 |    90447872 |           |
+
+
+
+
+**drop_chunks**
+
+
+You can use the `drop_chunks` function to remove data chunks whose time range falls completely before (or after) a specified time.
+
+
+```sql
+SELECT drop_chunks('temperature_data', INTERVAL '1 days');
+```
+
+
+It returns a list of the chunks that were dropped.
+
+
+You should receive the following output:
+
+
+|               drop_chunks               |
+|-----------------------------------------|
+| _timescaledb_internal._hyper_4_19_chunk |
+| _timescaledb_internal._hyper_4_20_chunk |
+
+
+## Conclusion
+
+
+You were able to configure the timescaledb extension in Neon and create a hypertable to store `weather` data. Then you executed simple queries, and analyzed data using a combination of standard SQL and timescaledb functions before finally using `drop_chunks` to delete data.
+
 
 ## Reference
 
-- [TimescaleDB Extension Documentation](https://docs.timescale.com/timescaledb/latest/)
 
+https://docs.timescale.com/about/latest/timescaledb-editions/
