@@ -86,6 +86,12 @@ export default {
   pingThing: {
     robotsNoindex: 'noindex',
   },
+  caseStudies: {
+    title: 'Case Studies — Neon',
+    description:
+      'Discover the diverse and captivating stories of our valued partners, each a testament to unique experiences and successes.',
+    pathname: LINKS.caseStudies,
+  },
 };
 
 export const getBlogCategoryDescription = (category) => {

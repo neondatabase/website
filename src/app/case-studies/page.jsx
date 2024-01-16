@@ -2,7 +2,11 @@ import Hero from 'components/pages/case-studies/hero';
 import CTAWithElephant from 'components/shared/cta-with-elephant';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
+import SEO_DATA from 'constants/seo-data';
 import { getAllWpCaseStudiesPosts } from 'utils/api-posts';
+import getMetadata from 'utils/get-metadata';
+
+export const metadata = getMetadata(SEO_DATA.caseStudies);
 
 const CaseStudiesPage = async () => {
   const allCaseStudies = await getAllWpCaseStudiesPosts();
