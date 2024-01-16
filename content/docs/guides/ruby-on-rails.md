@@ -52,7 +52,7 @@ You can find the connection string for your database in the **Connection Details
 </Admonition>
 
 <Admonition type="important">
-The user you specified in the `DATABASE_URL` must have **CREATEDB** privileges.
+The role you specified in the `DATABASE_URL` must have **CREATEDB** privileges. Roles created in the Neon console, CLI, or API, including the default role created with a Neon project, are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the `CREATEDB` privilege. Alternatively, you can create roles with SQL to grant specific privileges. See [Manage database access](/docs/manage/database-access). 
 </Admonition>
 
 Create the development database by issuing the following commands from the root of your project directory:
