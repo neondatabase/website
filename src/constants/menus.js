@@ -1,8 +1,13 @@
 import CalendarIcon from 'icons/calendar.inline.svg';
 import ConsoleIcon from 'icons/console.inline.svg';
-import aboutUsIcon from 'icons/header-about-us.svg';
-import careersIcon from 'icons/header-careers.svg';
-import partnersIcon from 'icons/header-partners.svg';
+import aboutUsIcon from 'icons/header/about-us.svg';
+import aiIcon from 'icons/header/ai.svg';
+import autoscalingIcon from 'icons/header/autoscaling.svg';
+import branchingIcon from 'icons/header/branching.svg';
+import careersIcon from 'icons/header/careers.svg';
+import cliIcon from 'icons/header/cli.svg';
+import partnersIcon from 'icons/header/partners.svg';
+import onDemandStorageIcon from 'icons/header/storage.svg';
 import PostgresDocsIcon from 'icons/postgres.inline.svg';
 import TransactionsIcon from 'icons/transactions.inline.svg';
 
@@ -11,12 +16,51 @@ import LINKS from './links';
 export default {
   header: [
     {
+      text: 'Features',
+      items: [
+        {
+          icon: autoscalingIcon,
+          text: 'Autoscaling',
+          description: 'Work with data like code',
+          to: LINKS.autoscaling,
+        },
+        {
+          icon: onDemandStorageIcon,
+          text: 'On-demand storage',
+          description: 'Scale compute on demand',
+          to: LINKS.onDemandStorage,
+        },
+        {
+          icon: branchingIcon,
+          text: 'Branching',
+          description: 'Neon in your terminal',
+          to: LINKS.branching,
+        },
+        {
+          icon: cliIcon,
+          text: 'CLI',
+          description: 'Custom-built for the cloud',
+          to: LINKS.cliReference,
+        },
+        {
+          icon: aiIcon,
+          text: 'AI',
+          description: 'Neon as your vector store',
+          to: LINKS.ai,
+        },
+      ],
+    },
+    {
       text: 'Docs',
       to: LINKS.docs,
     },
     {
-      text: 'Branching',
-      to: LINKS.branching,
+      text: 'Pricing',
+      to: LINKS.pricing,
+    },
+    {
+      text: 'Blog',
+      to: LINKS.blog,
     },
     {
       text: 'Company',
@@ -40,18 +84,6 @@ export default {
           to: LINKS.partners,
         },
       ],
-    },
-    {
-      text: 'Blog',
-      to: LINKS.blog,
-    },
-    {
-      text: 'AI',
-      to: LINKS.ai,
-    },
-    {
-      text: 'Pricing',
-      to: LINKS.pricing,
     },
   ],
   footer: [
@@ -189,50 +221,6 @@ export default {
           to: LINKS.businessInformation,
         },
       ],
-    },
-  ],
-  mobile: [
-    {
-      text: 'Docs',
-      to: LINKS.docs,
-    },
-    {
-      text: 'Branching',
-      to: LINKS.branching,
-    },
-    {
-      text: 'About us',
-      to: LINKS.aboutUs,
-    },
-    {
-      text: 'Careers',
-      to: LINKS.careers,
-    },
-    {
-      text: 'Blog',
-      to: LINKS.blog,
-    },
-    {
-      text: 'Pricing',
-      to: LINKS.pricing,
-    },
-    {
-      text: 'Partners',
-      to: LINKS.partners,
-    },
-    {
-      text: 'AI',
-      to: LINKS.ai,
-    },
-    // {
-    //   iconName: 'discord',
-    //   text: 'Discord',
-    //   description: 'Join our community',
-    //   to: LINKS.discord,
-    // },
-    {
-      text: 'GitHub',
-      to: LINKS.github,
     },
   ],
   docSidebar: [
