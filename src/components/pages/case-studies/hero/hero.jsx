@@ -25,35 +25,37 @@ const Hero = ({ items }) => {
           Discover the diverse and captivating stories of our valued partners, each a testament to
           unique experiences and successes.
         </p>
-        <ul className="mt-20 grid grid-cols-3 gap-8 xl:mt-16 lg:mt-12 lg:grid-cols-2 md:mt-10 md:gap-6 sm:grid-cols-1">
-          {posts.map(({ title, caseStudyPost: { description, logo, post } }, index) => (
-            <li className="overflow-hidden rounded-xl" key={index}>
-              <Link
-                className="group relative flex h-full flex-col rounded-xl border-2 border-white border-opacity-[0.02]"
-                to={`${LINKS.blog}/${post.slug}`}
-              >
-                <span className="absolute left-[-103px] top-[-103px] h-[206px] w-[206px] rounded-full bg-white blur-[130px]" />
-                <span className="absolute bottom-[-75px] right-[-79px] h-[158px] w-[158px] rounded-full bg-white blur-[200px]" />
-                <div className="relative z-10 flex h-full flex-col justify-start rounded-xl bg-[radial-gradient(162.08%_141.42%_at_0%_0%,rgba(48,50,54,0.50)0%,rgba(48,50,54,0.00)48.97%),linear-gradient(165deg,#1A1C1E_6.13%,#111213_75.96%)] px-8 pb-10 pt-9 md:p-7 md:pb-8">
-                  <Image
-                    className="xl:h-12 xl:w-fit"
-                    src={logo.mediaItemUrl}
-                    alt={title}
-                    width={logo.mediaDetails.width}
-                    height={logo.mediaDetails.height}
-                  />
-                  <p className="mb-4 mt-12 text-xl font-light leading-snug text-gray-new-60 xl:mt-10 xl:text-lg lg:mt-8 md:mt-6 md:text-base">
-                    <span className="text-white">{title}</span>. {description}
-                  </p>
-                  <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
-                    Read case study
-                    <ArrowIcon className="ml-1" />
+        <div className="grid-gap-x grid grid-cols-12">
+          <ul className="col-span-10 col-start-2 mt-20 grid grid-cols-3 gap-x-8 gap-y-7 xl:col-span-full xl:col-start-1 xl:mt-16 lg:mt-12 lg:grid-cols-2 md:mt-10 md:gap-6 sm:grid-cols-1">
+            {posts.map(({ title, caseStudyPost: { description, logo, post } }, index) => (
+              <li className="overflow-hidden rounded-xl" key={index}>
+                <Link
+                  className="group relative flex h-full flex-col rounded-xl border-2 border-white border-opacity-[0.02]"
+                  to={`${LINKS.blog}/${post.slug}`}
+                >
+                  <span className="absolute left-[-103px] top-[-103px] h-[206px] w-[206px] rounded-full bg-white blur-[130px]" />
+                  <span className="absolute bottom-[-75px] right-[-79px] h-[158px] w-[158px] rounded-full bg-white blur-[200px]" />
+                  <div className="relative z-10 flex h-full flex-col justify-start rounded-xl bg-[radial-gradient(162.08%_141.42%_at_0%_0%,rgba(48,50,54,0.50)0%,rgba(48,50,54,0.00)48.97%),linear-gradient(165deg,#1A1C1E_6.13%,#111213_75.96%)] px-8 pb-10 pt-9 md:p-7 md:pb-8">
+                    <Image
+                      className="xl:h-12 xl:w-fit"
+                      src={logo.mediaItemUrl}
+                      alt={title}
+                      width={logo.mediaDetails.width}
+                      height={logo.mediaDetails.height}
+                    />
+                    <p className="mb-4 mt-12 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-8 md:mt-6">
+                      <span className="text-white">{title}</span>. {description}
+                    </p>
+                    <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
+                      Read case study
+                      <ArrowIcon className="ml-1" />
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
         {posts?.length < items.length && (
           <Button
             className="mt-10 h-[38px] rounded-full px-5 text-[15px] font-medium transition-colors duration-200"

@@ -15,8 +15,9 @@ const CaseStudiesPage = async () => {
     >
       <Hero items={allCaseStudies} />
       <CTAWithElephant
-        className="mt-[200px] 2xl:mt-40 xl:mt-[125px] lg:mt-16"
-        buttonClassName="px-14 xl:px-10 lg:px-9 sm:px-14"
+        className="mt-[200px] 2xl:mt-40 xl:mt-[125px] lg:mt-16 sm:mt-0"
+        titleClassName="-mr-10 sm:max-w-[300px]"
+        buttonClassName="px-[77px] xl:px-10 lg:px-9 sm:px-14"
         title="Ready to get started with Neon?"
         description="Interested in increasing your free tier limits or learning about pricing? Complete the form below to get in touch"
         buttonText="Sign up"

@@ -13,6 +13,7 @@ import illustration from './images/cta-elephant.jpg';
 
 const CTAWithElephant = ({
   className = '',
+  titleClassName = '',
   buttonClassName = '',
   label = null,
   labelTheme = 'green',
@@ -38,7 +39,10 @@ const CTAWithElephant = ({
           </GradientLabel>
         )}
         <Heading
-          className="max-w-[500px] xl:max-w-[400px] lg:max-w-[350px] md:mx-auto"
+          className={clsx(
+            'max-w-[500px] xl:max-w-[400px] lg:max-w-[350px] md:mx-auto',
+            titleClassName
+          )}
           tag="h2"
           size="2sm"
           asHTML
@@ -87,6 +91,7 @@ const CTAWithElephant = ({
 
 CTAWithElephant.propTypes = {
   className: PropTypes.string,
+  titleClassName: PropTypes.string,
   buttonClassName: PropTypes.string,
   label: PropTypes.string,
   labelTheme: PropTypes.oneOf(['green', 'gray']),
