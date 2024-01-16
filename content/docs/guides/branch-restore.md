@@ -18,7 +18,7 @@ By default, your history retention is set to 7 days. You can revert a branch to 
 
 It is important to understand that whenever you restore a branch, you are performing a _complete_ overwrite, not a merge or refresh. Everything on your current branch, data and schema, is replaced with the contents from the historical source. All interim data from the selected restore point onwards is removed from the branch.
 
-### Restore backups for data safety
+### Automatic restore backups for data safety
 
 In case you need to rollback the update, Neon preserves the branch's final state before the restore operation in an automatically created backup branch, which takes the following format:
 
@@ -27,7 +27,7 @@ In case you need to rollback the update, Neon preserves the branch's final state
 ```
 You can use this backup to rollback the restore operation if necessary.
 
-### Changes are made to ALL databases
+### Changes apply to ALL databases
 
 A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. Keep this in mind when restoring branches. For example, let's say you want to fix some corrupted content in a given database. If you restore your branch to an earlier point in time before the corruption occured, the operation applies to _all_ databases on the branch, not just the one you are troubleshooting.
 
@@ -43,14 +43,14 @@ Use the **Restore** page to restore a branch to an earlier timestamp in its hist
 
 ![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
 
-Your selected branch is instantly updated to the data and schema from the chosen point in time. From the **Branches** page, you can now see the backup branch created from this restore point.
+Your selected branch is instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see the backup branch created from this restore point.
 
 ![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
 
-To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job. However, if you need to revert your changes, you can manually make the backup branch your primary branch using the steps described in [Branching - Point in time restore](/docs/guides/branching-pitr#change-your-primary-branch). 
+To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job &#8212; but if you need to revert your changes, you can manually make the backup branch your primary branch using the steps described in [Branching - Point in time restore](/docs/guides/branching-pitr#change-your-primary-branch). 
 
 <Admonition type="note">
-Restoring to another branch is coming soon. Once available, you will be able to restore to any other branch, including this restore backup, using a similar one-click operation. For now, however, you have to use the manual process to revert to the backup branch.
+Restoring to another branch is coming soon. See our [roadmap](/docs/introduction/roadmap). Once available, you will be able to restore to any other branch, including this restore backup, using a similar one-click operation.
 </Admonition>
 
 ## Time travel assist
@@ -75,3 +75,15 @@ Depending on your query and the selected timestamp, instead of a table of result
 | If you query from earlier than your history retention window | Console request failed with 400 Bad Request: timestamp 2023-12-31 21:59:48.639 +0000 UTC precedes your project's history retention window of 168h0m0s, try a more recent timestamp |
 
 Adjust your selected timestamp accordingly.
+
+### Billing for ephemeral endpoints
+
+Time travel queries leverage Neon's instant branching capability, effectively building a temporary branch at the selected point in time, which is automatically removed a few moments later. These are ephemeral branches &#8212; meaning you cannot interact with them directly, and they do not show up in your list of branches.
+
+However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page: 
+- start_compute
+- create_branch
+- delete_timeline
+- suspend_compute
+
+Because these time travel queries do use compute resources to run the query, they will add to your compute consumption total for your billing period.
