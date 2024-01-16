@@ -226,29 +226,47 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 - Create a branch with a user-defined name:
 
-```bash
-neonctl branches create --name mybranch
-```
+    ```bash
+    neonctl branches create --name mybranch
+    ```
 
 - Create a branch with a read-only compute endpoint (a [read replica](/docs/introduction/read-replicas))
 
-```bash
-neonctl branches create --name my_read_replica_branch --type read_only
-```
+    ```bash
+    neonctl branches create --name my_read_replica_branch --type read_only
+    ```
 
 - Create a branch from a parent branch other than your `main` branch
 
-```bash
-neonctl branches create --name my_child_branch --parent mybranch
-```
+    ```bash
+    neonctl branches create --name my_child_branch --parent mybranch
+    ```
 
 - Create a point-in-time restore branch by specifying the `--parent` option with a timestamp:
 
-```bash
-neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
-```
+    ```bash
+    neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
+    ```
 
-The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+    The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+
+- Create a branch and connect to it with `psql`. The `psql` client must already be installed.
+
+    ```bash
+    neonctl branch create --psql
+    ```
+
+- Create a branch, connect to it with `psql`, and load data from an `.sql` file. The `psql` client must already be installed.
+
+    ```bash
+    neonctl branch create --psql -- -f dump.sql
+    ```
+
+- Create a branch, connect to it with `psql`, and run a query.
+
+    ```bash
+    neonctl branch create --psql -- -c "SELECT version()"
+    ```
 
 ### reset
 
