@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2024-01-05T19:45:09.629Z'
+updatedOn: '2024-01-16T13:22:54.265Z'
 ---
 
 Neon is Serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
@@ -56,6 +56,8 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Use Exograph with Neon" />
 
+<img src="/images/technology-logos/ferret-logo.svg" width="36" height="36" alt="FerretDB" href="/docs/guides/ferretdb" title="Use FerretDB with Neon" />
+
 <img src="/images/technology-logos/fivetran-logo.svg" width="36" height="36" alt="Fivetran" href="/docs/guides/logical-replication-fivetran" title="Replicate data from Neon with Fivetran" />
 
 <img src="/images/technology-logos/flyway-logo.svg" width="36" height="36" alt="Flyway" href="/docs/guides/flyway" title="Use Flyway with Neon" />
@@ -106,8 +108,6 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 ## Join the community
 
-If you have questions about Neon or Postgres, reach out to Neon community members and developers in the [Neon Discord Server](/discord) or [Neon Discourse Community](https://community.neon.tech/).
-
-<CommunityBanner buttonText="Join community" buttonUrl="https://community.neon.tech" logo="discourse">Welcome to the Neon Discourse Community!</CommunityBanner>
+If you have questions about Neon or Postgres, reach out to Neon community members and developers on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
 
 <CommunityBanner buttonText="Join server" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Welcome to the Neon Discord Server!</CommunityBanner>

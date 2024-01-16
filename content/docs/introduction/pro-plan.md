@@ -3,7 +3,7 @@ title: Neon Pro Plan
 subtitle: Learn about the advantages of upgrading to the Neon Pro Plan
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-01-10T18:34:05.861Z'
+updatedOn: '2024-01-11T14:49:37.565Z'
 ---
 
 The Neon Pro Plan plan is intended for users who have completed their evaluation of Neon on the Neon Free Tier and are ready to transition to a production-level plan with higher limits and advanced features.
@@ -38,7 +38,7 @@ The Neon Pro Plan comes with the following advanced features, and we plan to add
 
 ### Added support
 
-In addition to the [community forum](https://community.neon.tech/) and the ability to open support tickets, Neon Pro Plan users have access to Neon Support via video chat. Please [open a support ticket](/docs/introduction/support) to request a video chat.
+In addition to our [Discord Server](https://discord.com/invite/92vNTzKDGp) and the ability to open support tickets, Neon Pro Plan users have access to Neon Support via video chat. Please [open a support ticket](/docs/introduction/support) to request a video chat.
 
 ## How does billing work?
 

@@ -227,6 +227,8 @@
       items:
         - title: Exograph
           slug: guides/exograph
+        - title: FerretDB
+          slug: guides/ferretdb
         - title: Grafbase
           slug: guides/grafbase
         - title: Hasura

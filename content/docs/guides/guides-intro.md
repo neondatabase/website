@@ -4,7 +4,7 @@ subtitle: 'Explore Neon framework, language, platform, and feature guides'
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2024-01-10T18:34:05.856Z'
+updatedOn: '2024-01-16T13:22:54.265Z'
 ---
 
 Find detailed instructions for integration across various frameworks, languages, and platforms, or if exploring Neon's features, our guides are tailored to assist you.
@@ -34,6 +34,8 @@ Integrate your applications with Neon.
 <img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir-ecto" title="Connect from Elixir with Ecto to Neon" />
 
 <img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Use Exograph with Neon" />
+
+<img src="/images/technology-logos/ferret-logo.svg" width="36" height="36" alt="FerretDB" href="/docs/guides/ferretdb" title="Use FerretDB with Neon" />
 
 <img src="/images/technology-logos/fivetran-logo.svg" width="36" height="36" alt="Fivetran" href="/docs/guides/logical-replication-fivetran" title="Replicate data from Neon with Fivetran" />
 
