@@ -35,12 +35,13 @@ Each book has a JSON column containing details such as `title`, `author`, and pu
 
 **books**
 
-
-| **id** | **info** |
+```text
+| id | info |
 |---|-------------------------------------------|
 | 1 | {"title": "The Catcher in the Rye", "author": "J.D. Salinger", "year": 1951} |
 | 2 | {"title": "To Kill a Mockingbird", "author": "Harper Lee", "year": 1960} |
 | 3 | {"title": "1984", "author": "George Orwell", "year": 1949} |
+```
 
 
 
@@ -71,13 +72,13 @@ FROM books;
 
 Returns:
 
-
+```text
 | id | title                    | author          |
 |----|--------------------------|------------------|
 | 1  | "The Catcher in the Rye" | "J.D. Salinger" |
 | 2  | "To Kill a Mockingbird"  | "Harper Lee"     |
 | 3  | "1984"                   | "George Orwell" |
-
+```
 
 
 
@@ -88,12 +89,14 @@ Consider a table that stores information about products in an e-commerce system:
 
 
 **products**
-| **id** | **attributes** |
+
+```text
+| id | attributes |
 |--------|-----------------|
 | 1      | {"name": "Laptop", "specs": {"brand": "Dell", "RAM": "16GB", "storage": {"type": "SSD", "capacity": "512GB"}}, "tags": ["pc"]} |
 | 2      | {"name": "Smartphone", "specs": {"brand": "Google", "RAM": "8GB", "storage": {"type": "UFS", "capacity": "256GB"}}, "tags": ["android", "pixel"]} |
 | 3      | {"name": "Smartphone", "specs": {"brand": "Apple", "RAM": "8GB", "storage": {"type": "UFS", "capacity": "128GB"}}, "tags": ["ios", "iphone"]} |
-
+```
 
 
 
@@ -129,14 +132,13 @@ FROM products;
 
 This would return:
 
-
+```text
 | id | storage_type | storage_capacity |
 |----|--------------|------------------|
 | 1  | "SSD"        | "512GB"          |
 | 2  | "UFS"        | "256GB"          |
 | 3  | "UFS"        | "128GB"          |
-
-
+```
 
 
 ### Extract values from JSON array
@@ -158,13 +160,13 @@ FROM products;
 
 This would return:
 
-
+```text
 | id | storage_type | storage_capacity | first_tag | second_tag |
 |----|--------------|------------------|-----------|------------|
 | 1  | "SSD"        | "512GB"          | "pc"      |  null      |
 | 2  | "UFS"        | "256GB"          | "android" | "pixel"    |
 | 3  | "UFS"        | "128GB"          | "ios"     | "iphone"   |
-
+```
 
 
 
@@ -176,23 +178,23 @@ Let's say you have two tables, employees and `departments`, and the `employees` 
 
 **departments**
 
-
+```text
 | department_id | department_name |
 |---------------|------------------|
 |             1 | IT               |
 |             2 | HR               |
 |             3 | Marketing        |
-
+```
 
 **employees**
 
-
+```text
 | employee_id | employee_name |           details           |
 |-------------|---------------|-----------------------------|
 |           1 | John Doe      | {"department": "IT"}        |
 |           2 | Jane Smith    | {"department": "HR"}        |
 |           3 | Bob Johnson   | {"department": "Marketing"} |
-
+```
 
 
 
