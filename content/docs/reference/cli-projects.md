@@ -114,6 +114,11 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     ```bash
     neonctl projects create --output json
+    ```
+
+    <details>
+    <summary>Output</summary>
+    ```json
     {
     "project": {
         "data_storage_bytes_hour": 0,
@@ -159,6 +164,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ]
     }
     ```
+    </details>
 
 - Create a project and connect to it with `psql`.
 

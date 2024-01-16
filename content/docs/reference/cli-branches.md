@@ -164,7 +164,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 - Create a branch with the `--output` format of the command set to `json`. This output format returns all of the branch response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
 
     ```bash
-    neonctl branches create --output json 
+    neonctl branches create --output json
+    ```
+
+    <details>
+    <summary>Output</summary>
+    ```json 
     {
     "branch": {
         "id": "br-frosty-art-30264288",
@@ -223,6 +228,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ]
     }
     ```
+    </details>
 
 - Create a branch with a user-defined name:
 
