@@ -21,25 +21,25 @@ export default {
         {
           icon: branchingIcon,
           text: 'Branching',
-          description: 'Neon in your terminal',
+          description: 'Work with data like code',
           to: LINKS.branching,
         },
         {
           icon: autoscalingIcon,
           text: 'Autoscaling',
-          description: 'Work with data like code',
+          description: 'Scale compute on demand',
           to: LINKS.autoscaling,
         },
         {
           icon: cliIcon,
           text: 'CLI',
-          description: 'Custom-built for the cloud',
+          description: 'Neon in your terminal',
           to: LINKS.cliReference,
         },
         {
           icon: onDemandStorageIcon,
           text: 'On-demand storage',
-          description: 'Scale compute on demand',
+          description: 'Custom-built for the cloud',
           to: LINKS.onDemandStorage,
         },
         {
