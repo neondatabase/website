@@ -2,7 +2,7 @@
 title: Use FerretDB with Neon
 subtitle: Add MongoDB compatibility to your Neon database with FerretDB
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
 
 FerretDB is an open source document database that adds MongoDB compatibility to other databases, including Postgres. By using FerretDB, developers can access familiar MongoDB features and tools using the same syntax and commands for many of their use cases.
