@@ -44,7 +44,7 @@ const Hero = ({ items }) => {
                       height={logo.mediaDetails.height}
                     />
                     <p className="mb-4 mt-12 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-8 md:mt-6">
-                      <span className="text-white">{title}</span>. {description}
+                      <span className="font-normal text-white">{title}</span>. {description}
                     </p>
                     <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
                       Read case study
