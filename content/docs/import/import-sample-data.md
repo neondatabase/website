@@ -597,6 +597,8 @@ To load sample data:
     ```bash
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/periodic_table.sql
     ```
+  
+    </CodeBlock>
 
     Alternatively, supply your own data file. 
 
@@ -619,7 +621,5 @@ To load sample data:
         ```bash
         neonctl connection-string --psql -- -f periodic_table.sql
         ```
-
-    </CodeBlock>
 
 <NeedHelp/>
