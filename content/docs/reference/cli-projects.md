@@ -160,6 +160,30 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     }
     ```
 
+- Create a project and connect to it with `psql`. The `psql` client must already be installed.
+
+    ```bash
+    neonctl project create --psql
+    ```
+
+- Create a project, connect to it with `psql`, and load data from an `.sql` file. The `psql` client must already be installed.
+
+    ```bash
+    neonctl project create --psql -- -f dump.sql
+    ```
+
+- Create a project, connect to it with `psql`, and run a query.
+
+    ```bash
+    neonctl project create --psql -- -c "SELECT version()"
+    ```
+
+- Create a project and set the Neon CLI project and branch context
+
+    ```
+    neonctl project create --psql --set-context
+    ```
+
 ### update
 
 This subcommand allows you to update a Neon project.

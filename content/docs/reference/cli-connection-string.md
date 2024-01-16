@@ -42,7 +42,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 ### Examples
 
-- Generate a basic connection string for the current project, branch, and database:
+- Create a basic connection string for the current project, branch, and database:
 
     <CodeBlock shouldWrap>
 
@@ -53,7 +53,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     </CodeBlock>
 
-- Generate a pooled connection string for the current project, branch, and database with the `--pooled` option. This option adds a `-pooler` flag to the host name which enables connection pooling for clients that use this connection string.
+- Create a pooled connection string for the current project, branch, and database with the `--pooled` option. This option adds a `-pooler` flag to the host name which enables connection pooling for clients that use this connection string.
 
     <CodeBlock shouldWrap>
 
@@ -64,7 +64,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     </CodeBlock>
 
-- Generate a connection string for use with Prisma for the current project, branch, and database. The `--prisma` options adds `connect_timeout=30` option to the connection string to ensure that connections from Prisma Client do not timeout.
+- Create a connection string for use with Prisma for the current project, branch, and database. The `--prisma` options adds `connect_timeout=30` option to the connection string to ensure that connections from Prisma Client do not timeout.
 
     <CodeBlock shouldWrap>
 
@@ -74,5 +74,23 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ```
 
     </CodeBlock>
+
+- Create a connection string and connect with `psql`. The `psql` client must already be installed.
+
+    ```bash
+    neonctl connection-string --psql
+    ```
+
+- Create a connection string, connect with `psql`, and load data from an `.sql` file. The `psql` client must already be installed.
+
+    ```bash
+    neonctl connection-string --psql -- -f dump.sql
+    ```
+
+- Create a connection string, connect with `psql`, and run a query.
+
+    ```bash
+    neonctl connection-string --psql -- -c "SELECT version()"
+    ```
 
 <NeedHelp/>
