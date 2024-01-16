@@ -583,7 +583,7 @@ Neon CLI command supports a `--psql` option that allows you to load data from a 
 
 The Neon CLI and `psql` must be installed. For installation instructions, see:
 
-- [PostgreSQL Downloads](https://www.postgresql.org/download/) for `psql`.
+- [PostgreSQL Downloads](https://www.postgresql.org/download/) for `psql`
 - [Neon CLI — Install and connect](/docs/reference/cli-install)
 
 If you have multiple Neon projects or branches, we recommend setting your Neon CLI project and branch context so that you don't have to specify the project or branch when running a Neon CLI command. See [Neon CLI commands — set-context](/docs/reference/cli-set-context).
