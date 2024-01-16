@@ -30,15 +30,16 @@ Suppose you have a table with developers info:
 
 **developers**
 
-
+```text
 | id |  name   |          skills          
 |----|---------|---------------------------
 | 1  | Alice   | ["Java", "Python", "SQL"]
 | 2  | Bob     | ["C++", "JavaScript"]
 | 3  | Charlie | ["HTML", "CSS", "React"]
+```text
 
+Create this table:
 
-<!--
 ```sql
 CREATE TABLE developers (
  id INT PRIMARY KEY,
@@ -52,7 +53,6 @@ INSERT INTO developers (id, name, skills) VALUES
  (2, 'Bob', '["C++", "JavaScript"]'),
  (3, 'Charlie', '["HTML", "CSS", "React"]');
 ```
--->
 
 
 Now, let's say you want to extract each individual skill from the skills JSON array. You can use `json_array_elements` for that:
@@ -67,7 +67,7 @@ FROM developers,
 
 This returns:
 
-
+```text
 | id |  name   |    skill    
 |----|---------|--------------
 | 1  | Alice   | "Java"
@@ -78,6 +78,7 @@ This returns:
 | 3  | Charlie | "HTML"
 | 3  | Charlie | "CSS"
 | 3  | Charlie | "React"
+```text
 
 
 ## Advanced examples
@@ -91,7 +92,7 @@ Let's consider a scenario where we have a table storing information about produc
 
 **products**
 
-
+```text
 | id |  name   |                                details                                
 |----|---------|------------------------------------------------------------------------
 | 1  | T-Shirt | {"sizes": ["S", "M", "L", "XL"], "colors": ["Red", "Blue", "Green"]}
@@ -99,9 +100,9 @@ Let's consider a scenario where we have a table storing information about produc
 | 3  | Dress   | {"sizes": ["S", "M", "L"], "colors": ["Pink", "Purple", "Black"]}
 | 4  | Jeans   | {"sizes": ["28", "30", "32", "34"], "colors": ["Blue", "Black"]}
 | 5  | Jacket  | {"sizes": ["S", "M", "L", "XL"], "colors": ["Black", "Brown", "Navy"]}
+```
 
 
-<!--
 ```sql
 CREATE TABLE products (
  id INTEGER PRIMARY KEY,
@@ -117,7 +118,6 @@ INSERT INTO products (id, name, details) VALUES
  (4, 'Jeans', '{"sizes": ["28", "30", "32", "34"], "colors": ["Blue", "Black"]}'),
  (5, 'Jacket', '{"sizes": ["S", "M", "L", "XL"], "colors": ["Black", "Brown", "Navy"]}');
 ```
--->
 
 
 `json_array_elements` is used to get all the combinations of size and color for a specific product:
@@ -138,7 +138,7 @@ WHERE name = 'T-Shirt';
 
 This returns:
 
-
+```text
 | id |  name   | size | color  |
 |----|---------|------|--------|
 | 1  | T-Shirt | "S"  | "Red"  |
@@ -153,6 +153,7 @@ This returns:
 | 1  | T-Shirt | "XL" | "Red"  |
 | 1  | T-Shirt | "XL" | "Blue" |
 | 1  | T-Shirt | "XL" | "Green"|
+```text
 
 
 ## Filtering
@@ -172,12 +173,12 @@ WHERE 'Blue' IN (
 
 This returns:
 
-
+```text
 | id |   name   |                               details                                |
 |----|----------|------------------------------------------------------------------------|
 |  1 | T-Shirt  | {"sizes": ["S", "M", "L", "XL"], "colors": ["Red", "Blue", "Green"]} |
 |  4 | Jeans    | {"sizes": ["28", "30", "32", "34"], "colors": ["Blue", "Black"]}     |
-
+```text
 
 
 
@@ -189,17 +190,16 @@ Update the table to insert another product (Socks) with one of the values in the
 
 **products**
 
-
+```text
 | id |  name   |                                 details                                 |
 |----|---------|-------------------------------------------------------------------------|
 |  6 | Socks   | {"sizes": ["S", null, "L", "XL"], "colors": ["White", "Black", "Gray"]}|
+```text
 
 
-<!--
 ```sql
 INSERT INTO products (id, name, details) VALUES (6, 'Socks', '{"sizes": ["S", null, "L", "XL"], "colors": ["White", "Black", "Gray"]}');
 ```
--->
 
 
 Querying for Socks shows how null values in an array is handled:
@@ -218,14 +218,14 @@ WHERE name = 'Socks';
 
 This returns:
 
-
+```text
 | id | name  | size |
 |----|-------|------|
 |  6 | Socks | "S"  |
 |  6 | Socks | null |
 |  6 | Socks | "L"  |
 |  6 | Socks | "XL" |
-
+```
 
 ### Nested arrays
 
@@ -238,14 +238,14 @@ Consider a scenario where each product has multiple variants, and each variant h
 
 **electronics_products**
 
-
+```text
 | id |    name    |                                                                                   details                                                                                   
 |----|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 |  1 | Laptop     | {"variants": [{"model": "A", "sizes": ["13 inch", "15 inch"], "colors": ["Silver", "Black"]}, {"model": "B", "sizes": ["15 inch", "17 inch"], "colors": ["Gray", "White"]}]}
 |  2 | Smartphone | {"variants": [{"model": "X", "sizes": ["5.5 inch", "6 inch"], "colors": ["Black", "Gold"]}, {"model": "Y", "sizes": ["6.2 inch", "6.7 inch"], "colors": ["Blue", "Red"]}]}
+```
 
 
-<!--
 ```sql
 CREATE TABLE electronics_products (
  id INTEGER PRIMARY KEY,
@@ -258,7 +258,6 @@ INSERT INTO electronics_products (id, name, details) VALUES
  (1, 'Laptop', '{"variants": [{"model": "A", "sizes": ["13 inch", "15 inch"], "colors": ["Silver", "Black"]}, {"model": "B", "sizes": ["15 inch", "17 inch"], "colors": ["Gray", "White"]}]}'),
  (2, 'Smartphone', '{"variants": [{"model": "X", "sizes": ["5.5 inch", "6 inch"], "colors": ["Black", "Gold"]}, {"model": "Y", "sizes": ["6.2 inch", "6.7 inch"], "colors": ["Blue", "Red"]}]}');
 ```
--->
 
 
 To handle the nested arrays and extract information about each variant:
@@ -283,7 +282,7 @@ This returns:
 
 
 
-
+```text
 | id |    name    | model |   size   | color  |
 |----|------------|-------|----------|--------|
 |  1 | Laptop     | A     | 13 inch  | Silver |
@@ -302,7 +301,7 @@ This returns:
 |  2 | Smartphone | Y     | 6.2 inch | Red    |
 |  2 | Smartphone | Y     | 6.7 inch | Blue   |
 |  2 | Smartphone | Y     | 6.7 inch | Red    |
-
+```text
 
 
 
@@ -335,7 +334,7 @@ FROM
 
 This returns:
 
-
+```text
 | id |  name   |    skill     | ordinality |
 |----|---------|--------------|------------|
 |  1 | Alice   | "Java"       |          1 |
@@ -346,7 +345,7 @@ This returns:
 |  3 | Charlie | "HTML"       |          1 |
 |  3 | Charlie | "CSS"        |          2 |
 |  3 | Charlie | "React"      |          3 |
-
+```
 
 `WITH ORDINALITY` option in the query adds `ordinarily` column representing the original order of the skills in the array.
 
