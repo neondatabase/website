@@ -1,22 +1,16 @@
+import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
 import useClickOutside from 'hooks/use-click-outside';
-
-import DiscussionsIcon from './images/mobile-menu-discussions.inline.svg';
-import GithubIcon from './images/mobile-menu-github.inline.svg';
+import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 const ANIMATION_DURATION = 0.2;
-
-const icons = {
-  github: GithubIcon,
-  discussions: DiscussionsIcon,
-};
 
 const variants = {
   from: {
@@ -39,10 +33,88 @@ const variants = {
   },
 };
 
+const MobileMenuItem = ({ text, to, items, setMenuOpen, menuOpen }) => {
+  const Tag = items ? 'button' : Link;
+  return (
+    <li className="border-b border-b-gray-7 py-4">
+      <Tag
+        className="relative flex w-full items-center text-lg font-medium leading-none after:absolute after:-bottom-4 after:-top-4 after:left-0 after:w-full"
+        to={to}
+        onClick={() => {
+          if (items) {
+            if (menuOpen === text) {
+              setMenuOpen(null);
+            } else {
+              setMenuOpen(text);
+            }
+          }
+        }}
+      >
+        <span>{text}</span>
+        {items && (
+          <ChevronIcon
+            className={clsx('ml-auto inline-block transition-transform duration-200', {
+              '-rotate-90': menuOpen !== text,
+            })}
+          />
+        )}
+      </Tag>
+      {items?.length > 0 && (
+        <AnimatePresence>
+          {menuOpen === text && (
+            <m.ul
+              className="pl-4"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: ANIMATION_DURATION }}
+            >
+              {items.map(({ text, to }, index) => (
+                <li className="group flex first:pt-[9px]" key={index}>
+                  <Link
+                    className="w-full py-[7px] leading-tight text-gray-new-30 group-last:pb-0"
+                    to={to}
+                  >
+                    {text}
+                  </Link>
+                </li>
+              ))}
+            </m.ul>
+          )}
+        </AnimatePresence>
+      )}
+    </li>
+  );
+};
+
+MobileMenuItem.propTypes = {
+  text: PropTypes.string.isRequired,
+  to: PropTypes.string,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string,
+      to: PropTypes.string,
+    })
+  ),
+  setMenuOpen: PropTypes.func.isRequired,
+  menuOpen: PropTypes.string,
+};
+
+const mobileMenuItems = [
+  ...MENUS.header,
+  {
+    text: 'GitHub',
+    to: LINKS.github,
+  },
+];
+
 const MobileMenu = ({ isOpen = false, headerRef, onOutsideClick }) => {
   const ref = useRef(null);
 
   useClickOutside([ref, headerRef], onOutsideClick);
+  // create state to open menu item on click, one at a time, if one`s open, close it and open another one
+
+  const [menuItemOpen, setMenuItemOpen] = useState();
 
   return (
     <LazyMotion features={domAnimation}>
@@ -58,30 +130,14 @@ const MobileMenu = ({ isOpen = false, headerRef, onOutsideClick }) => {
             ref={ref}
           >
             <ul className="flex flex-col">
-              {MENUS.mobile.map(({ iconName, text, to, description }, index) => {
-                const Icon = icons[iconName];
-                return (
-                  <li className="border-b border-b-gray-6" key={index}>
-                    {Icon && description ? (
-                      <Link className="flex items-center whitespace-nowrap py-4" to={to}>
-                        <Icon className="flex-shrink-0" aria-hidden />
-                        <span className="ml-3">
-                          <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
-                            {text}
-                          </span>
-                          <span className="mt-1.5 block leading-none text-black">
-                            {description}
-                          </span>
-                        </span>
-                      </Link>
-                    ) : (
-                      <Link className="!block py-4 text-lg" to={to}>
-                        {text}
-                      </Link>
-                    )}
-                  </li>
-                );
-              })}
+              {mobileMenuItems.map((item, index) => (
+                <MobileMenuItem
+                  key={index}
+                  {...item}
+                  setMenuOpen={setMenuItemOpen}
+                  menuOpen={menuItemOpen}
+                />
+              ))}
             </ul>
             <div className="mt-5 space-y-4">
               <Button
