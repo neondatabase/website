@@ -1,5 +1,5 @@
 ---
-title: Connect a Ruby on Rails application to Neon
+title: Connect a Ruby on Rails application to Neon Postgres
 subtitle: Set up a Neon project in seconds and connect from a Ruby on Rails application
 enableTableOfContents: true
 ---
