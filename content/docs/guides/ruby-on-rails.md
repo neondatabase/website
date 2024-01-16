@@ -4,7 +4,7 @@ subtitle: Set up a Neon project in seconds and connect from a Ruby on Rails appl
 enableTableOfContents: true
 ---
 
-[Ruby on Rails](https://rubyonrails.org/), also known simply as Rails, is an open-source web application framework written in Ruby. It uses a model-view-controller architecture, making it a good choice for developing database-backed web applications. This guide shows how to connect to a Ruby on Rails application to Neon.
+[Ruby on Rails](https://rubyonrails.org/), also known simply as Rails, is an open-source web application framework written in Ruby. It uses a model-view-controller architecture, making it a good choice for developing database-backed web applications. This guide shows how to connect to a Ruby on Rails application to a Neon Postgres database.
 
 To connect to Neon from a Ruby on Rails application:
 
