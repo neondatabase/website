@@ -130,7 +130,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--compute`| Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute` | boolean |    |
 | `--type` | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas).                                     | string |             |
 | `--suspend-timeout` | Duration of inactivity in seconds after which the compute endpoint is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number |             |
-| `--psql` | Connect to a new branch via `psql` | boolean |             |
+| `--psql` | Connect to a new branch via `psql`. `psql` must be installed to use this option. | boolean |             |
 
 #### Examples
 
@@ -250,13 +250,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
 
-- Create a branch and connect to it with `psql`. The `psql` client must already be installed.
+- Create a branch and connect to it with `psql`.
 
     ```bash
     neonctl branch create --psql
     ```
 
-- Create a branch, connect to it with `psql`, and load data from an `.sql` file. The `psql` client must already be installed.
+- Create a branch, connect to it with `psql`, and load data from an `.sql` file. 
 
     ```bash
     neonctl branch create --psql -- -f dump.sql

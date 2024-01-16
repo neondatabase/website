@@ -84,7 +84,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--name` | The project name. The project ID is used if a name is not specified.               | string  |                                       |
 | `--region-id` | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`. Defaults to `aws-us-east-2` if not specified. | string number  |                                       |
-| `--psql` | Connect to a database via `psql` using connection string. The default is `false`. |boolean||
+| `--psql` | Connect to a database via `psql` using connection string. `psql` must be installed to use this option. |boolean||
 | `--set-context` | Set the current context to the new project. The default is `false`. |boolean||
 
 #### Examples
@@ -160,13 +160,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     }
     ```
 
-- Create a project and connect to it with `psql`. The `psql` client must already be installed.
+- Create a project and connect to it with `psql`.
 
     ```bash
     neonctl project create --psql
     ```
 
-- Create a project, connect to it with `psql`, and load data from an `.sql` file. The `psql` client must already be installed.
+- Create a project, connect to it with `psql`, and load data from an `.sql` file.
 
     ```bash
     neonctl project create --psql -- -f dump.sql

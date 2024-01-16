@@ -38,7 +38,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--prisma` | Construct a connection string for use with Prisma. The default is `false`. |boolean||
 | `--endpoint-type` | The compute endpoint type. The default is `read-write`. The choise are `read_only` and `read_write`` |string||
 | `--extended` | Show extended information. The default is `false`. |boolean||
-| `--psql` | Connect to a database via psql using connection string. The default is `false`. |boolean||
+| `--psql` | Connect to a database via psql using connection string. `psql` must be installed to use this option. |boolean||
 
 ### Examples
 
@@ -75,13 +75,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     </CodeBlock>
 
-- Create a connection string and connect with `psql`. The `psql` client must already be installed.
+- Create a connection string and connect with `psql`.
 
     ```bash
     neonctl connection-string --psql
     ```
 
-- Create a connection string, connect with `psql`, and load data from an `.sql` file. The `psql` client must already be installed.
+- Create a connection string, connect with `psql`, and load data from an `.sql` file.
 
     ```bash
     neonctl connection-string --psql -- -f dump.sql
