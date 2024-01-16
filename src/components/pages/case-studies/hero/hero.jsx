@@ -40,7 +40,7 @@ const Hero = ({ items }) => {
                     alt={title}
                     width={logo.mediaDetails.width}
                     height={logo.mediaDetails.height}
-                    priority={index <= 6}
+                    priority={index < 6}
                   />
                   <p className="mb-4 mt-12 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-8 md:mt-6">
                     <span className="font-normal text-white">{title}</span>. {description}
