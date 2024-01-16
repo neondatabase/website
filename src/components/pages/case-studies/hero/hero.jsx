@@ -16,16 +16,16 @@ const POSTS_PER_VIEW = 6;
 const Hero = ({ items }) => {
   const [posts, setPosts] = useState(items.slice(0, POSTS_PER_VIEW));
   return (
-    <section className="hero safe-paddings pt-36">
+    <section className="hero safe-paddings pt-36 xl:pt-[120px] lg:pt-11 md:pt-8">
       <Container className="flex flex-col items-center" size="medium">
         <h1 className="text-center text-[72px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px]">
           Explore <span className="text-green-45">success stories</span>
         </h1>
-        <p className="mx-auto mt-5 max-w-[664px] text-center text-xl font-light leading-snug">
+        <p className="mx-auto mt-5 max-w-[664px] text-center text-xl font-light leading-snug lg:text-lg md:text-base">
           Discover the diverse and captivating stories of our valued partners, each a testament to
           unique experiences and successes.
         </p>
-        <ul className="mt-20 grid grid-cols-3 gap-8">
+        <ul className="mt-20 grid grid-cols-3 gap-8 xl:mt-16 lg:mt-12 lg:grid-cols-2 md:mt-10 md:gap-6 sm:grid-cols-1">
           {posts.map(({ title, caseStudyPost: { description, logo, post } }, index) => (
             <li className="overflow-hidden rounded-xl" key={index}>
               <Link
@@ -34,14 +34,15 @@ const Hero = ({ items }) => {
               >
                 <span className="absolute left-[-103px] top-[-103px] h-[206px] w-[206px] rounded-full bg-white blur-[130px]" />
                 <span className="absolute bottom-[-75px] right-[-79px] h-[158px] w-[158px] rounded-full bg-white blur-[200px]" />
-                <div className="relative z-10 flex h-full flex-col rounded-xl bg-[radial-gradient(162.08%_141.42%_at_0%_0%,rgba(48,50,54,0.50)0%,rgba(48,50,54,0.00)48.97%),linear-gradient(165deg,#1A1C1E_6.13%,#111213_75.96%)] px-8 pb-10 pt-9">
+                <div className="relative z-10 flex h-full flex-col justify-start rounded-xl bg-[radial-gradient(162.08%_141.42%_at_0%_0%,rgba(48,50,54,0.50)0%,rgba(48,50,54,0.00)48.97%),linear-gradient(165deg,#1A1C1E_6.13%,#111213_75.96%)] px-8 pb-10 pt-9 md:p-7 md:pb-8">
                   <Image
+                    className="xl:h-12 xl:w-fit"
                     src={logo.mediaItemUrl}
                     alt={title}
                     width={logo.mediaDetails.width}
                     height={logo.mediaDetails.height}
                   />
-                  <p className="mb-4 mt-12 text-xl font-light leading-snug text-gray-new-60">
+                  <p className="mb-4 mt-12 text-xl font-light leading-snug text-gray-new-60 xl:mt-10 xl:text-lg lg:mt-8 md:mt-6 md:text-base">
                     <span className="text-white">{title}</span>. {description}
                   </p>
                   <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
