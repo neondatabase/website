@@ -19,28 +19,28 @@ export default {
       text: 'Features',
       items: [
         {
-          icon: autoscalingIcon,
-          text: 'Autoscaling',
-          description: 'Work with data like code',
-          to: LINKS.autoscaling,
-        },
-        {
-          icon: onDemandStorageIcon,
-          text: 'On-demand storage',
-          description: 'Scale compute on demand',
-          to: LINKS.onDemandStorage,
-        },
-        {
           icon: branchingIcon,
           text: 'Branching',
           description: 'Neon in your terminal',
           to: LINKS.branching,
         },
         {
+          icon: autoscalingIcon,
+          text: 'Autoscaling',
+          description: 'Work with data like code',
+          to: LINKS.autoscaling,
+        },
+        {
           icon: cliIcon,
           text: 'CLI',
           description: 'Custom-built for the cloud',
           to: LINKS.cliReference,
+        },
+        {
+          icon: onDemandStorageIcon,
+          text: 'On-demand storage',
+          description: 'Scale compute on demand',
+          to: LINKS.onDemandStorage,
         },
         {
           icon: aiIcon,
