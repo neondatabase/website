@@ -67,11 +67,11 @@ SELECT create_hypertable('weather_conditions', 'time');
 
 You should receive the following output:
 
-
+```text
 |       create_hypertable       |
 |-------------------------------|
 | (3,public,weather_conditions,t) |
-
+```
 
 
 It is possible to use both standard SQL commands, and timescaledb functions (which will be covered later).
@@ -98,13 +98,13 @@ SELECT * FROM weather_conditions ORDER BY time DESC;
 
 You should receive the following output:
 
-
+```text
 |             time              |     device_id      | temperature | humidity |
 |-------------------------------|--------------------|-------------|----------|
 | 2024-01-15 13:30:27.464107+00 | weather-pro-000002 |      72.0   |   52.0   |
 | 2024-01-15 13:30:27.464107+00 | weather-pro-000003 |      71.5   |   51.5   |
 | 2024-01-15 13:30:27.464107+00 | weather-pro-000004 |      73.0   |   53.2   |
-
+```
 
 
 
@@ -134,16 +134,19 @@ tar -xvzf weather_small.tar.gz
 
 Load the data into Neon database - enter the username, password, host and database name:
 
+<CodeBlock shouldWrap>
 
 ```shell
 psql 'postgresql://<username>:<password>@<host>/<database_name>?sslmode=require' -c "\COPY weather_conditions FROM weather_small_conditions.csv CSV"
 ```
 
+</CodeBlock>
+
 
 You should receive the following output:
 
 
-```
+```text
 COPY 1000000
 ```
 
@@ -175,7 +178,7 @@ The aggregate function [`first`](https://docs.timescale.com/api/latest/hyperfunc
 
 You should receive the following output:
 
-
+```text
 |     device_id      | first_temperature  |
 |--------------------|--------------------|
 | weather-pro-000000 |               39.9 |
@@ -188,7 +191,7 @@ You should receive the following output:
 | weather-pro-000007 |                 72 |
 | weather-pro-000008 |               31.3 |
 | weather-pro-000009 |               84.4 |
-
+```
 
 [**last**](https://docs.timescale.com/api/latest/hyperfunctions/last/)
 
@@ -211,7 +214,7 @@ The aggregate function [`last`](https://docs.timescale.com/api/latest/hyperfunct
 
 You should receive the following output:
 
-
+```text
 |     device_id      | first_temperature |
 |--------------------|-------------------|
 | weather-pro-000000 |                42 |
@@ -224,7 +227,7 @@ You should receive the following output:
 | weather-pro-000007 | 69.9              |
 | weather-pro-000008 |                42 |
 | weather-pro-000009 |                91 |
-
+```
 
 [**time_bucket**](https://docs.timescale.com/api/latest/hyperfunctions/time_bucket/)
 
@@ -249,7 +252,7 @@ The query uses the [`time_bucket`](https://docs.timescale.com/api/latest/hyperfu
 
 You should receive the following output:
 
-
+```text
 |      bucket_time       |   avg_temperature   |
 |------------------------|---------------------|
 | 2016-11-15 12:00:00+00 | 32.76               |
@@ -262,7 +265,7 @@ You should receive the following output:
 | 2016-11-15 19:00:00+00 | 40.03               |
 | 2016-11-15 20:00:00+00 | 40.87               |
 | 2016-11-15 21:00:00+00 | 41.93               |
-
+```
 
 [**histogram**](https://docs.timescale.com/api/latest/hyperfunctions/histogram/)
 
@@ -283,7 +286,7 @@ Here, we use the [`histogram`](https://docs.timescale.com/api/latest/hyperfuncti
 
 You should receive the following output:
 
-
+```text
 |     device_id      |      histogram      |
 |--------------------|---------------------|
 | weather-pro-000000 | {0,0,0,710,290,0,0} |
@@ -296,7 +299,7 @@ You should receive the following output:
 | weather-pro-000007 | {0,0,0,1000,0,0,0} |
 | weather-pro-000008 | {0,0,0,834,166,0,0} |
 | weather-pro-000009 | {0,0,0,0,0,0,1000} |
-
+```
 
 [**approximate_row_count**](https://docs.timescale.com/api/latest/hyperfunctions/approximate_row_count/)
 
@@ -311,11 +314,11 @@ SELECT approximate_row_count('weather_conditions');
 
 You should receive the following output:
 
-
+```text
 | approximate_row_count |
 |-----------------------|
 |             1000000   |
-
+```
 
 
 
@@ -338,12 +341,12 @@ SELECT show_chunks('weather_conditions');
 
 You should receive the following output:
 
-
+```text
 |               show_chunks               |
 |-----------------------------------------|
 | _timescaledb_internal._hyper_7_24_chunk |
 | _timescaledb_internal._hyper_7_25_chunk |
-
+```
 
 
 
@@ -359,12 +362,12 @@ SELECT * FROM chunks_detailed_size('weather_conditions') ORDER BY chunk_name;
 
 You should receive the following output:
 
-
+```text
 |     chunk_schema      |    chunk_name     | table_bytes | index_bytes | toast_bytes | total_bytes | node_name |
 |-----------------------|-------------------|-------------|-------------|-------------|-------------|-----------|
 | _timescaledb_internal | _hyper_7_24_chunk |        8192 |       16384 |        8192 |       32768 |           |
 | _timescaledb_internal | _hyper_7_25_chunk |    82190336 |     8249344 |        8192 |    90447872 |           |
-
+```
 
 
 
@@ -384,12 +387,12 @@ It returns a list of the chunks that were dropped.
 
 You should receive the following output:
 
-
+```text
 |               drop_chunks               |
 |-----------------------------------------|
 | _timescaledb_internal._hyper_4_19_chunk |
 | _timescaledb_internal._hyper_4_20_chunk |
-
+```
 
 ## Data deletion
 
