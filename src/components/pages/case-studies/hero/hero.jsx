@@ -1,80 +1,19 @@
 'use client';
 
 import Image from 'next/image';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link/link';
+import LINKS from 'constants/links';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
-import bunnyshell from './images/bunnyshell.svg';
-import hasura from './images/hasura.svg';
-import proposales from './images/proposales.svg';
-import replit from './images/replit.svg';
-import vercel from './images/vercel.svg';
-import wundergraph from './images/wundergraph.svg';
-
-const items = [
-  {
-    logo: vercel,
-    width: 240,
-    height: 52,
-    title: 'Vercel',
-    description:
-      'Vercel and Neon unlock the first Serverless Postgres database for the Frontend Cloud.',
-    url: '/',
-  },
-  {
-    logo: hasura,
-    width: 178,
-    title: 'Hasura',
-    description: 'Learn how to connect a Hasura Cloud project to a new or existing Neon database.',
-    url: '/',
-  },
-  {
-    logo: wundergraph,
-    width: 234,
-    title: 'WunderGraph',
-    description:
-      'Learn how to connect your Neon project to WunderGraph using our newly released integration.',
-    url: '/',
-  },
-  {
-    logo: bunnyshell,
-    width: 240,
-    title: 'Bunnyshell',
-    description:
-      'Learn how Bunnyshell, an Environments-as-a-Service platform, added support for Neon Postgres',
-    url: '/',
-  },
-  {
-    logo: replit,
-    width: 228,
-    title: 'Replit',
-    description: "Learn how Replit added support for Postgres databases by leveraging Neon's API.",
-    url: '/',
-  },
-  {
-    logo: proposales,
-    width: 234,
-    title: 'Proposales',
-    description: 'How Proposales integrated Neon in their Postgres development workflow.',
-    url: '/',
-  },
-  {
-    logo: proposales,
-    width: 234,
-    title: 'Proposales',
-    description: 'How Proposales integrated Neon in their Postgres development workflow.',
-    url: '/',
-  },
-];
-
 const POSTS_PER_VIEW = 6;
 
-const Hero = () => {
+const Hero = ({ items }) => {
   const [posts, setPosts] = useState(items.slice(0, POSTS_PER_VIEW));
   return (
     <section className="hero safe-paddings pt-36">
@@ -87,18 +26,23 @@ const Hero = () => {
           unique experiences and successes.
         </p>
         <ul className="mt-20 grid grid-cols-3 gap-8">
-          {posts.map((item, index) => (
+          {posts.map(({ title, caseStudyPost: { description, logo, post } }, index) => (
             <li className="overflow-hidden rounded-xl" key={index}>
               <Link
                 className="group relative flex h-full flex-col rounded-xl border-2 border-white border-opacity-[0.02]"
-                to={item.url}
+                to={`${LINKS.blog}/${post.slug}`}
               >
                 <span className="absolute left-[-103px] top-[-103px] h-[206px] w-[206px] rounded-full bg-white blur-[130px]" />
                 <span className="absolute bottom-[-75px] right-[-79px] h-[158px] w-[158px] rounded-full bg-white blur-[200px]" />
                 <div className="relative z-10 flex h-full flex-col rounded-xl bg-[radial-gradient(162.08%_141.42%_at_0%_0%,rgba(48,50,54,0.50)0%,rgba(48,50,54,0.00)48.97%),linear-gradient(165deg,#1A1C1E_6.13%,#111213_75.96%)] px-8 pb-10 pt-9">
-                  <Image src={item.logo} alt={item.title} width={item.width} height={52} />
+                  <Image
+                    src={logo.mediaItemUrl}
+                    alt={title}
+                    width={logo.mediaDetails.width}
+                    height={logo.mediaDetails.height}
+                  />
                   <p className="mb-4 mt-12 text-xl font-light leading-snug text-gray-new-60">
-                    <span className="text-white">{item.title}</span>. {item.description}
+                    <span className="text-white">{title}</span>. {description}
                   </p>
                   <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
                     Read case study
@@ -122,6 +66,27 @@ const Hero = () => {
       </Container>
     </section>
   );
+};
+
+Hero.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      caseStudyPost: PropTypes.shape({
+        description: PropTypes.string.isRequired,
+        logo: PropTypes.shape({
+          mediaItemUrl: PropTypes.string.isRequired,
+          mediaDetails: PropTypes.shape({
+            width: PropTypes.number.isRequired,
+            height: PropTypes.number.isRequired,
+          }).isRequired,
+        }).isRequired,
+        post: PropTypes.shape({
+          slug: PropTypes.string.isRequired,
+        }).isRequired,
+      }).isRequired,
+    })
+  ).isRequired,
 };
 
 export default Hero;
