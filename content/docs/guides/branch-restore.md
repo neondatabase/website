@@ -130,13 +130,9 @@ Adjust your selected timestamp accordingly.
 
 ### Billing implications when restoring from history
 
-While the restore to history operation does add branches, they do not consume any compute resources (they are created without a compute endpoint) and do not add to any consumption costs.
+Restoring a branch to its own history does add to your number of branches &#8212; due to the restore_backup branch left behind &#8212; but they do not have any compute endpoint attached, and to not add to any consumption costs.
 
-//
-The retore_backup branches do add to write costs, but that is going away next month so maybe let's not mention that here. However, two questions I'm not clear about:
-- do restore-backup branches add to synthetic storage size and so incur some small cost there?
-- what happens when the restore_backup branch ages out of your retention window? are these deleted automatically before that point?
-//
+// The retore_backup branches do add to write costs, but that is going away next month so maybe let's not mention that here. However, two questions I'm not clear about: 1) Do restore-backup branches add to synthetic storage size and so incur some small cost there? 2) What happens when the restore_backup branch ages out of your retention window? are these deleted automatically before that point?//
 
 ### Billing implications for time travel queries
 
