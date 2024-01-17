@@ -41,7 +41,7 @@ const CardItem = ({ title, description, logo, post, index }) => {
   };
 
   const borderGradientStyle = {
-    backgroundImage: `linear-gradient(${borderGradientAngle}deg,rgba(92,97,101,0.7)0%,rgba(255,255,255,0.02)50%,rgba(30,31,33,1)100%)`,
+    backgroundImage: `linear-gradient(${borderGradientAngle}deg,rgba(92,97,101,1)0%,rgba(255,255,255,0.02)50%,rgba(30,31,33,1)100%)`,
     transition: 'background-image 0.3s ease',
   };
   const gradientStyle = {
