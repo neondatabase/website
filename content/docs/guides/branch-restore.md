@@ -53,7 +53,7 @@ At Neon we aim for transparency, so if you are interested in understanding the t
 <details>
 <summary>View technical details</summary>
 
-Similar to the manual restore operation using the Neon API described [here](/docs/guides/branching-pitr), the Restore operation performs a similar set of actions, but automatically:
+Similar to the manual restore operation using the Neon Console and API described [here](/docs/guides/branching-pitr), the Restore operation performs a similar set of actions, but automatically:
 
 1. On initiating a restore action, Neon builds a new point-in-time branch by matching your selected timestamp to the corresponding LSN of the relevant entries in the shared WAL record.
 1. The compute endpoint for your initial branch is moved to this new branch, so that your connection string remains stable.
@@ -70,6 +70,8 @@ The restore operation and time travel assist are meant to work together. When yo
 
 ![Time travel assist](/docs/guides/branch_time_travel.png)
 
+#### About ephemeral endpoints
+
 Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done your time travel querying. The endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
 
 However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
@@ -85,7 +87,7 @@ The ephemeral endpoints are created as per the configured [default](/docs/manage
 
 ## How to use
 
-### Restore from history
+### How to restore from history
 
 Use the **Restore** page to restore a branch to an earlier timestamp in its history. Choose your branch, pick your timestamp, and then click the **Restore branch** button.
 
@@ -101,7 +103,7 @@ To make sure you choose the right restore point, we encourage you to use Time Tr
 Restoring to another branch is coming soon. See our [roadmap](/docs/introduction/roadmap). Once available, you will be able to restore to any other branch, including this restore backup, using a similar one-click operation.
 </Admonition>
 
-### Time travel assist
+### How to run time travel queries
 
 Here is how to use the Time Travel Assist SQL editor:
 
@@ -126,7 +128,7 @@ Adjust your selected timestamp accordingly.
 
 ## Billing
 
-### Restore from history
+### Billing implications when restoring from history
 
 While the restore to history operation does add branches, they do not consume any compute resources (they are created without a compute endpoint) and do not add to any consumption costs.
 
@@ -136,7 +138,7 @@ The retore_backup branches do add to write costs, but that is going away next mo
 - what happens when the restore_backup branch ages out of your retention window? are these deleted automatically before that point?
 //
 
-### Time Travel Assist
+### Billing implications for time travel queries
 
 The ephemeral endpoints used to run your Time Travel Assist queries do contribute to your consumption usage totals for the billing period, like any other active endpoint that consumes resource.
 
