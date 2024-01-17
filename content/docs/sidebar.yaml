@@ -186,6 +186,8 @@
           slug: guides/astro
         - title: Remix
           slug: guides/remix
+        - title: Ruby on Rails
+          slug: guides/ruby-on-rails
     - title: Languages
       items:
         - title: Elixir
