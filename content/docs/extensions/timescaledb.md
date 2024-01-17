@@ -2,6 +2,7 @@
 title: The timescaledb extension
 subtitle: Work with time-series data in Postgres with the timescaledb extension
 enableTableOfContents: true
+updatedOn: '2024-01-17T16:43:07.406Z'
 ---
 
 `timescaledb` enables the efficient storage and retrieval of time-series data. Time-series data is a sequential collection of observations or measurements recorded over time. For example, IoT devices continuously generate data points with timestamps, representing measurements or events. `timescaledb` is designed to handle large volumes of time-stamped data and provides SQL capabilities on top of a time-oriented data model such as IoT data, sensor readings, financial market data, and other time-series datasets.
