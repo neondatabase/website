@@ -15,7 +15,7 @@ const items = [
     imageWidth: 716,
     imageHeight: 512,
     title:
-      'SQL Playground: a SQL playground for Postgres where you can use AI to generate queries using natural language',
+      'Postgres AI Playground: a SQL playground for Postgres where you can use AI to generate queries using natural language',
     demoLink: '/demos/playground',
     sourceLink: 'https://github.com/neondatabase/postgres-ai-playground',
   },
@@ -73,9 +73,10 @@ const Hero = () => (
                   alt=""
                   sizes={
                     index === 0
-                      ? '(max-width: 1023px) 100vw, 716px'
-                      : '(max-width: 1023px) 50vw, (max-width: 767px) 100vw, 464px'
+                      ? '(min-width: 1023px) 100vw, 716px'
+                      : '(min-width: 1023px) 50vw, (min-width: 767px) 100vw, 464px'
                   }
+                  quality={90}
                   priority
                 />
                 <h3

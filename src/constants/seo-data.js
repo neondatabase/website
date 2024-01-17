@@ -87,9 +87,9 @@ export default {
     robotsNoindex: 'noindex',
   },
   demo: {
-    title: 'Demo — Neon',
-    description: 'Demo', // @TODO: Add description
-    pathname: LINKS.demo,
+    title: 'Serverless showcase: unleashing the power of Neon',
+    description: 'Explore interactive demos unveiling cutting-edge apps in the serverless era.',
+    pathname: LINKS.demos,
   },
 };
 

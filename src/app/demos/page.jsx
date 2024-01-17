@@ -1,5 +1,5 @@
-import DemoList from 'components/pages/demo/demo-list';
-import Hero from 'components/pages/demo/hero';
+import DemoList from 'components/pages/demos/demo-list';
+import Hero from 'components/pages/demos/hero';
 import CTAWithElephant from 'components/shared/cta-with-elephant';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
