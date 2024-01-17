@@ -1,8 +1,9 @@
 ---
 title: Connect an Astro site or application to Neon Postgres
-subtitle: Set up a Neon project in seconds and connect to your Postgres database from an Astro site or application
+subtitle: Set up a Neon project in seconds and connect to your Postgres database from an
+  Astro site or application
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.749Z'
+updatedOn: '2024-01-17T15:47:51.929Z'
 ---
 
 Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a Neon Postgres database and access it from an Astro site or application.
