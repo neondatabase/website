@@ -8,7 +8,7 @@ With Neon's copy-on-write branch creation capability, just as you can instantly 
 
 ## How it works
 
-### Restore
+### Restore from history
 
 The restore operation lets you revert the state of a selected branch to an earlier point in time. For example, revert to just before some corruption or loss of data.
 
@@ -64,9 +64,28 @@ Similar to the manual restore operation using the Neon API described [here](/doc
 
 ### Time Travel Assist
 
+To help troubleshoot your data's history, you can Time Travel Assist to run read-only queries against any selected timestamp within your history retention window. It's a good idea to run this kind of query to make sure you've targeted the correct restore point before you restore a branch.
 
+The restore operation and time travel assist are meant to work together. When you select a branch and timestamp, you are setting up Time Travel Assist to automatically query against that particular point in time.
+
+![Time travel assist](/docs/guides/branch_time_travel.png)
+
+Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done your time travel querying. The endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+
+However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
+
+- start_compute
+- create_branch
+- delete_timeline
+- suspend_compute
+
+#### How long do ephemeral endpoints remain active
+
+The ephemeral endpoints are created as per the configured [default](/docs/manage/projects#reset-the-default-compute-size) size. An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
 ## How to use
+
+### Restore from history
 
 Use the **Restore** page to restore a branch to an earlier timestamp in its history. Choose your branch, pick your timestamp, and then click the **Restore branch** button.
 
@@ -82,11 +101,9 @@ To make sure you choose the right restore point, we encourage you to use Time Tr
 Restoring to another branch is coming soon. See our [roadmap](/docs/introduction/roadmap). Once available, you will be able to restore to any other branch, including this restore backup, using a similar one-click operation.
 </Admonition>
 
-## Time travel assist
+### Time travel assist
 
-To help troubleshoot your data's history, use the SQL editor in the Time Travel assist tool to run read-only queries against any selected timestamp within your history retention window. It's a good idea to run this kind of query before you restore a branch.
-
-Here is how to use the editor:
+Here is how to use the Time Travel Assist SQL editor:
 
 1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
 
@@ -94,7 +111,7 @@ Here is how to use the editor:
     ![Time travel query](/docs/guides/time_travel_assist.png)
   
 1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
-1. Write your read-only query in the editor, then click **Query at timestamp** to run the query.
+1. Write your read-only query in the editor, then click **Query at timestamp** to run the query. You don't have to include time paramaters in the query; the query is automatically targetted to your selected timestamp.
 
 If your query is successful, you will see a table of results under the editor.
 
@@ -107,19 +124,23 @@ Depending on your query and the selected timestamp, instead of a table of result
 
 Adjust your selected timestamp accordingly.
 
-### Billing
+## Billing
 
-Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done your time travel querying. The endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+### Restore from history
 
-However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
+While the restore to history operation does add branches, they do not consume any compute resources (they are created without a compute endpoint) and do not add to any consumption costs.
 
-- start_compute
-- create_branch
-- delete_timeline
-- suspend_compute
+//
+The retore_backup branches do add to write costs, but that is going away next month so maybe let's not mention that here. However, two questions I'm not clear about:
+- do restore-backup branches add to synthetic storage size and so incur some small cost there?
+- what happens when the restore_backup branch ages out of your retention window? are these deleted automatically before that point?
+//
 
-#### How long do ephemeral endpoints remain active
+### Time Travel Assist
 
-The ephemeral endpoints are created as per the configured [default](/docs/manage/projects#reset-the-default-compute-size) size. An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
+The ephemeral endpoints used to run your Time Travel Assist queries do contribute to your consumption usage totals for the billing period, like any other active endpoint that consumes resource.
 
-These ephemeral endpoints do contribute to your consumption usage totals for the billing period, like any other active endpoint consuming resources.
+A couple details to note:
+
+- The endpoints are shortlived. They are suspended 10 seconds after you stop querying.
+- Since these endpoints are created according to your default compute size (which applies to all new branch computes you create),  you may want to reduce this default if you're performing a lot of time travel queries for troubleshooting.
