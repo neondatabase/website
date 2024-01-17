@@ -184,6 +184,8 @@
           slug: guides/astro
         - title: Remix
           slug: guides/remix
+        - title: Ruby on Rails
+          slug: guides/ruby-on-rails
     - title: Languages
       items:
         - title: Elixir
@@ -225,6 +227,8 @@
       items:
         - title: Exograph
           slug: guides/exograph
+        - title: FerretDB
+          slug: guides/ferretdb
         - title: Grafbase
           slug: guides/grafbase
         - title: Hasura
@@ -301,6 +305,8 @@
           slug: extensions/pgvector
         - title: pg_tiktoken
           slug: extensions/pg_tiktoken
+        - title: timescaledb
+          slug: extensions/timescaledb
     - title: Functions
       items:
         - title: json_build_object
