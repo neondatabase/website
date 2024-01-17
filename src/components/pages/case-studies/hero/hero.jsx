@@ -13,78 +13,36 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 const POSTS_PER_VIEW = 6;
 
-const INITIAL_GRADIENT_POSITION = '0% 0%';
-const INITIAL_BORDER_GRADIENT_ANGLE = 150;
-
-const CardItem = ({ title, description, logo, post, index }) => {
-  const [gradientPosition, setGradientPosition] = useState(INITIAL_GRADIENT_POSITION);
-  const [borderGradientAngle, setBorderGradientAngle] = useState(INITIAL_BORDER_GRADIENT_ANGLE);
-
-  const handleMouseMove = (e) => {
-    const { left, top, width, height } = e.target.getBoundingClientRect();
-    const x = ((e.pageX - left) / width) * 100;
-    const y = ((e.pageY - top) / height) * 100;
-
-    const angleX = (e.pageX - left) / width - 0.5;
-    const angleY = (e.pageY - top) / height - 0.5;
-
-    setGradientPosition(`${x}% ${y}%`);
-
-    const angle = Math.atan2(angleY, angleX) * (180 / Math.PI) + 245;
-
-    setBorderGradientAngle(angle);
-  };
-
-  const handleMouseLeave = () => {
-    setGradientPosition(INITIAL_GRADIENT_POSITION);
-    setBorderGradientAngle(INITIAL_BORDER_GRADIENT_ANGLE);
-  };
-
-  const borderGradientStyle = {
-    backgroundImage: `linear-gradient(${borderGradientAngle}deg,rgba(92,97,101,1)0%,rgba(255,255,255,0.02)50%,rgba(30,31,33,1)100%)`,
-    transition: 'background-image 0.3s ease',
-  };
-  const gradientStyle = {
-    backgroundImage: `
-      radial-gradient(162.08% 141.42% at ${gradientPosition}, rgba(48, 50, 54, 0.20) 0%, rgba(48, 50, 54, 0.00) 48.97%),
-      linear-gradient(165deg, #1A1C1E 6.13%, #111213 75.96%)
-    `,
-    transition: 'background-image 0.3s ease',
-  };
-
-  return (
-    <li className="group relative rounded-xl">
-      <span className="absolute -inset-0.5 rounded-xl" style={borderGradientStyle} />
-
-      <Link
-        className="group relative z-10 flex h-full flex-col justify-start rounded-xl px-8 pb-10 pt-9 md:p-7 md:pb-8 "
-        to={`${LINKS.blog}/${post.slug}`}
-        style={gradientStyle}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-      >
-        <span className="absolute inset-0 bg-[url('/images/noise.png')] bg-cover opacity-40" />
-        <div className="relative z-10 flex h-full flex-col justify-start">
-          <Image
-            className="xl:h-12 xl:w-fit"
-            src={logo.mediaItemUrl}
-            alt={title}
-            width={logo.mediaDetails.width}
-            height={logo.mediaDetails.height}
-            priority={index < 6}
-          />
-          <p className="mb-4 mt-12 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-8 md:mt-6">
-            <span className="font-normal text-white">{title}</span>. {description}
-          </p>
-          <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
-            Read case study
-            <ArrowIcon className="ml-1" />
-          </div>
+const CardItem = ({ title, description, logo, post, index }) => (
+  <li className="relative rounded-xl">
+    <span className="absolute -inset-0.5 rounded-xl bg-[linear-gradient(150deg,rgba(92,97,101,1)0%,rgba(255,255,255,0.02)50%,rgba(30,31,33,1)100%)]" />
+    <Link
+      className="group relative z-10 flex h-full flex-col justify-start overflow-hidden rounded-xl px-8 pb-10 pt-9 md:p-7 md:pb-8"
+      to={`${LINKS.blog}/${post.slug}`}
+    >
+      <span className="absolute inset-0 bg-[radial-gradient(162.08%_141.42%_at_0%_0%,rgba(48,50,54,0.20)0%,rgba(48,50,54,0.00)48.97%),linear-gradient(165deg,#1A1C1E_6.13%,#111213_75.96%)] opacity-100 transition-opacity duration-300 group-hover:opacity-0" />
+      <span className="absolute inset-0 bg-[radial-gradient(162.08%_141.42%_at_0%_0%,rgba(58,60,64,0.50)0%,rgba(58,60,64,0.00)48.97%),linear-gradient(165deg,#2C2E32_6.13%,#18191B_75.96%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <span className="absolute inset-0 bg-[url('/images/noise.png')] bg-cover opacity-40" />
+      <div className="relative z-10 flex h-full flex-col justify-start">
+        <Image
+          className="xl:h-12 xl:w-fit"
+          src={logo.mediaItemUrl}
+          alt={title}
+          width={logo.mediaDetails.width}
+          height={logo.mediaDetails.height}
+          priority={index < 6}
+        />
+        <p className="mb-4 mt-12 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-8 md:mt-6">
+          <span className="font-normal text-white">{title}</span>. {description}
+        </p>
+        <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
+          Read case study
+          <ArrowIcon className="ml-1" />
         </div>
-      </Link>
-    </li>
-  );
-};
+      </div>
+    </Link>
+  </li>
+);
 
 CardItem.propTypes = {
   title: PropTypes.string.isRequired,
