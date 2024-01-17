@@ -184,6 +184,8 @@
           slug: guides/astro
         - title: Remix
           slug: guides/remix
+        - title: Ruby on Rails
+          slug: guides/ruby-on-rails
     - title: Languages
       items:
         - title: Elixir
@@ -225,6 +227,8 @@
       items:
         - title: Exograph
           slug: guides/exograph
+        - title: FerretDB
+          slug: guides/ferretdb
         - title: Grafbase
           slug: guides/grafbase
         - title: Hasura
