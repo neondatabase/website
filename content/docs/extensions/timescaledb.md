@@ -1,6 +1,6 @@
 ---
 title: The timescaledb extension
-subtitle: timescaledb is an extension for handling time-series data
+subtitle: Work with time-series data in Postgres with the timescaledb extension
 enableTableOfContents: true
 ---
 
