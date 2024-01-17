@@ -6,7 +6,9 @@ enableTableOfContents: true
 
 With Neon's copy-on-write branch creation capability, just as you can instantly create branches from any point in your history retention window, you can just as easily restore a branch to an earlier state in that history. You can also use Time Travel Assist to help troubleshoot issues: run read-only queries against any point in your history retention window as a way to pinpoint the exact moment you need to restore to, before you proceed.
 
-## How the restore operation works
+## How it works
+
+### Restore
 
 The restore operation lets you revert the state of a selected branch to an earlier point in time. For example, revert to just before some corruption or loss of data.
 
@@ -20,11 +22,11 @@ A few key points to keep in mind about the restore operation:
 - [All databases on a branch are updated](#changes-apply-to-all-databases)
 - [Connections are temporarily interrupted](#connections-temporarily-interrupted)
 
-### Overwrite, not a merge
+#### Overwrite, not a merge
 
 It is important to understand that whenever you restore a branch, you are performing a _complete_ overwrite, not a merge or refresh. Everything on your current branch, data and schema, is replaced with the contents from the historical source. All interim data from the selected restore point onwards is removed from the branch.
 
-### Automatic backups
+#### Automatic backups
 
 In case you need to rollback the update, Neon preserves the branch's final state before the restore operation in an automatically created backup branch, which takes the following format:
 
@@ -34,17 +36,17 @@ In case you need to rollback the update, Neon preserves the branch's final state
 
 You can use this backup to rollback the restore operation if necessary.
 
-### Changes apply to all databases
+#### Changes apply to all databases
 
 A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. Keep this in mind when restoring branches. For example, let's say you want to fix some corrupted content in a given database. If you restore your branch to an earlier point in time before the corruption occurred, the operation applies to _all_ databases on the branch, not just the one you are troubleshooting.
 
 In general, Neon recommends that you avoid overstuffing a project with too many databases. If you have multiple, distinct applications, each one deserves its own Neon project. A good rule of thumb: one Neon project per source code repository.
 
-### Connections temporarily interrupted
+#### Connections temporarily interrupted
 
 Existing connections are temporarily interrupted during the restore operation. However, your connection details do not change. All connections are re-established as soon as the restore operation is finished.
 
-### Technical details
+#### Technical details
 
 At Neon we aim for transparency, so if you are interested in understanding the technical implementation behind the scenes, see the details below.
 
@@ -56,11 +58,15 @@ Similar to the manual restore operation using the Neon API described [here](/doc
 1. On initiating a restore action, Neon builds a new point-in-time branch by matching your selected timestamp to the corresponding LSN of the relevant entries in the shared WAL record.
 1. The compute endpoint for your initial branch is moved to this new branch, so that your connection string remains stable.
 1. We rename your new branch to the exact name as your initial branch, so the effect is seamless; it looks and acts like the same branch.
-1. Your initial branch, which now has no compute attached to it, is renamed to _branch_name_old_head_timestamp_ to keep the pre-restore branch available should you need to rollback. Note that initial branch was the parent for your new branch, and this is reflected when you look at your branch details.
+1. Your initial branch, which now has no compute attached to it, is renamed to {branch_name}_old_head_timestamp_ to keep the pre-restore branch available should you need to rollback. Note that initial branch was the parent for your new branch, and this is reflected when you look at your branch details.
 
 </details>
 
-## Restore a branch to an earlier state
+### Time Travel Assist
+
+
+
+## How to use
 
 Use the **Restore** page to restore a branch to an earlier timestamp in its history. Choose your branch, pick your timestamp, and then click the **Restore branch** button.
 
@@ -101,9 +107,11 @@ Depending on your query and the selected timestamp, instead of a table of result
 
 Adjust your selected timestamp accordingly.
 
-### Billing for ephemeral endpoints
+### Billing
 
-Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed a few moments later after your query is completed. These ephemeral endpoints are not listed on the **Branches** page or in a CLI or API list branches request &#8212; however, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
+Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done your time travel querying. The endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+
+However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
 
 - start_compute
 - create_branch

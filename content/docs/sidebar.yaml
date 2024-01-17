@@ -133,7 +133,7 @@
         - title: Branching
           slug: guides/branching-intro
           items: 
-            - title: Branching - Restore
+            - title: Branch Restore
               slug: guides/branch-restore
             - title: Branching — Point-in-time restore
               slug: guides/branching-pitr
