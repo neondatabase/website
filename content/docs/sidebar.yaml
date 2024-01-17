@@ -305,6 +305,8 @@
           slug: extensions/pgvector
         - title: pg_tiktoken
           slug: extensions/pg_tiktoken
+        - title: timescaledb
+          slug: extensions/timescaledb
     - title: Functions
       items:
         - title: json_build_object
