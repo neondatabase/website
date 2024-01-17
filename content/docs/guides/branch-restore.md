@@ -83,11 +83,11 @@ However, you can see the history of operations related to the creation and delet
 
 #### How long do ephemeral endpoints remain active
 
-The ephemeral endpoints are created as per the configured [default](/docs/manage/projects#reset-the-default-compute-size) size. An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
+The ephemeral endpoints are created according to your configured [default](/docs/manage/projects#reset-the-default-compute-size) size. An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
 ## How to use
 
-### How to restore from history
+### Restoring from history
 
 Use the **Restore** page to restore a branch to an earlier timestamp in its history. Choose your branch, pick your timestamp, and then click the **Restore branch** button.
 
@@ -97,13 +97,14 @@ All databases on your selected branch are instantly updated with the data and sc
 
 ![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
 
-To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it. If you do need to revert your changes, you can manually make the backup branch your primary branch using the steps described in [Branching - Point in time restore](/docs/guides/branching-pitr#change-your-primary-branch). 
+To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it.
+If you do need to revert your changes, you can manually make the backup branch your primary branch using the steps described in [Branching - Point in time restore](/docs/guides/branching-pitr#change-your-primary-branch). 
 
 <Admonition type="note">
 Restoring to another branch is coming soon. See our [roadmap](/docs/introduction/roadmap). Once available, you will be able to restore to any other branch, including this restore backup, using a similar one-click operation.
 </Admonition>
 
-### How to run time travel queries
+### Performing time travel queries
 
 Here is how to use the Time Travel Assist SQL editor:
 
@@ -128,13 +129,15 @@ Adjust your selected timestamp accordingly.
 
 ## Billing
 
-### Billing implications when restoring from history
+There are minimal impacts to billing from these two related features.
 
-Restoring a branch to its own history does add to your number of branches &#8212; due to the restore_backup branch left behind &#8212; but they do not have any compute endpoint attached, and to not add to any consumption costs.
+**Restore from history**
 
-// The retore_backup branches do add to write costs, but that is going away next month so maybe let's not mention that here. However, two questions I'm not clear about: 1) Do restore-backup branches add to synthetic storage size and so incur some small cost there? 2) What happens when the restore_backup branch ages out of your retention window? are these deleted automatically before that point?//
+Restoring a branch to its own history adds to your number of branches &#8212; due to the restore_backup branch &#8212; but since they do not have any compute endpoint attached, they do not add to any consumption costs.
 
-### Billing implications for time travel queries
+```//The retore_backup branches add to write costs. But since that is removed in v2Billing, let's not mention here. However, two questions I'm not clear about: 1) Do restore-backup branches add to synthetic storage size and so incur some small cost there? 2) What happens when the restore_backup branch ages out of your retention window? are these deleted automatically before that point?//```
+
+**Time travel queries**
 
 The ephemeral endpoints used to run your Time Travel Assist queries do contribute to your consumption usage totals for the billing period, like any other active endpoint that consumes resource.
 
