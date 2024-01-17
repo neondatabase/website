@@ -10,23 +10,22 @@ const items = [
     categoryTextColor: 'text-pink-90',
     items: [
       {
-        title: 'Neon Twitter Application',
+        title: 'Neon Twitter',
         description:
-          "Microblogging application designed to demonstrate the database branching capability of Neon Serverless Postgres with Neon's GitHub Actions.",
+          "A microblogging application designed to demonstrate the database branching capability of Neon Serverless Postgres with Neon's GitHub Actions.",
         demoLink: 'https://neon-twitter.vercel.app/',
         sourceLink: 'https://github.com/neondatabase/neon_twitter',
       },
       {
         title: 'Preview Branches',
         description:
-          'This is an example project that shows how you can create a branch for every preview deployment on Vercel. If you want to use this project as a playground, you can you can set it up locally.',
+          'An example project showing how you can create a branch for every preview deployment on Vercel. If you want to use this project as a playground, you can you can set it up locally.',
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/preview-branches-with-vercel',
       },
       {
         title: 'Neon Discord bot',
-        description:
-          "This is the companion repository for the Neon's Branching Tutorial, which you should definitely read before diving in here.",
+        description: `Learn how to build a Discord bot while leveraging Neon branching. Be sure to read the <a href="https://github.com/tinkertim/neon_branching_demo" target="_blank" rel="noopener noreferrer">companion branching tutorial</a> before jumping in.`,
         demoLink: '#',
         sourceLink: 'https://github.com/tinkertim/neon_branching_demo',
       },
@@ -44,16 +43,16 @@ const items = [
     categoryTextColor: 'text-blue-80',
     items: [
       {
-        title: 'Time Travel bisect script demo',
+        title: 'Time travel bisect script demo',
         description:
-          'Method of creating branches in the past and using lsn binary search to efficiently determine when to remove specific data from the table. ',
+          'This demo shows how to create branches in the past and use a binary search to find the exact point in time before data was lost.',
         demoLink: '#',
         sourceLink: 'https://github.com/kelvich/branching_demo_bisect',
       },
     ],
   },
   {
-    category: 'Read replicas',
+    category: 'Read replicas example',
     categoryTextColor: 'text-brown-70',
     items: [
       {
@@ -71,14 +70,13 @@ const items = [
     items: [
       {
         title: 'Neon Ecto Getting Started',
-        description:
-          'This repository contains the application setup described in Connect from Elixir with Ecto to Neon.',
+        description: 'This repository shows how to connect to Neon from Elixir.',
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/neon-ecto-getting-started-app',
       },
       {
         title: 'Neon Edge Analytics Astro Sample',
-        description: 'A sample repo for using Edge Analytics with Astro.',
+        description: 'A sample repository showing how to use Edge Analytics with Astro.',
         demoLink: '#',
         sourceLink: 'https://github.com/PaulieScanlon/neon-edge-analytics-astro-sample',
       },
@@ -98,7 +96,7 @@ const items = [
       {
         title: 'Neon serverless driver UNESCO World Heritage Sites App',
         description:
-          "This repo demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions",
+          "This application demonstrates how to use raw SQL with Neon's serverless driver on Vercel Edge Functions.",
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/neon-vercel-rawsql',
       },
@@ -111,7 +109,7 @@ const items = [
       {
         title: 'Neon branch visualizer',
         description:
-          'This project enables you to visualize your Neon branches and how they are connected to each other.',
+          'This project enables you to visualize Neon branches and how they are connected to each other, showcasing how to build an OAuth integration with Neon.',
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/neon-branches-visualizer',
       },
@@ -129,23 +127,17 @@ const items = [
         demoLink: 'https://postgres-pgvector.vercel.app/',
       },
       {
-        title: 'Jupyter Notebook for Vector search with Neon',
-        description:
-          'Neon supports vector search using the pgvector open-source PostgreSQL extensions, which enables Postgres as a vector database for storing and querying embeddings. ',
-        demoLink: '#',
-        sourceLink: 'https://github.com/neondatabase/neon-vector-search-openai-notebooks',
-      },
-      {
         title: 'Vector similarity search using Neon Postgres',
         description:
-          'This notebook guides you through using Neon Serverless Postgres as a vector database for OpenAI embeddings.',
+          'This OpenAI Cookbook guides you through using Neon Serverless Postgres as a vector database for OpenAI embeddings.',
         demoLink: '#',
         sourceLink:
           'https://cookbook.openai.com/examples/vector_databases/neon/neon-postgres-vector-search-pgvector',
       },
       {
         title: 'Google Colab: Chat with your database with Langchain',
-        description: 'Use Google Colab with Neon for vector similarity search.',
+        description:
+          'This notebook shows how to use LangChain and OpenAI to chat with your database.',
         demoLink: '#',
         sourceLink:
           'https://colab.research.google.com/github/neondatabase/neon-google-colab-notebooks/blob/main/chat_with_your_database_using_langchain.ipynb',
@@ -189,9 +181,10 @@ const DemoList = () => (
                     <h3 className="max-w-[510px] text-2xl font-medium leading-tight tracking-extra-tight lg:text-xl">
                       {title}
                     </h3>
-                    <p className="tracking-snug mt-3 font-light leading-tight text-gray-new-70">
-                      {description}
-                    </p>
+                    <p
+                      className="tracking-snug with-link-primary mt-3 font-light leading-tight text-gray-new-70"
+                      dangerouslySetInnerHTML={{ __html: description }}
+                    />
                   </div>
                   <div className="flex items-center justify-start gap-x-4 text-[15px] leading-none">
                     {demoLink !== '#' && (
