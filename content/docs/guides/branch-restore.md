@@ -58,7 +58,7 @@ Similar to the manual restore operation using the Neon API described [here](/doc
 1. Your initial branch, which now has no compute attached to it, is renamed to:
 
     '''
-    {branch_name}_old_{head_timestamp}
+    [branch_name]_old_[head_timestamp]
     '''
     to keep the pre-restore branch available should you need to rollback. Note that initial branch was the parent for your new branch, and this is reflected when you look at your branch details.
 
