@@ -298,7 +298,7 @@
       items:
         - title: Google Colab
           slug: ai/ai-google-colab
-- title: Postgres guides
+- title: Postgres
   items:
     - title: Extensions
       slug: extensions/pg-extensions
@@ -307,8 +307,12 @@
           slug: extensions/pgvector
         - title: pg_tiktoken
           slug: extensions/pg_tiktoken
+        - title: timescaledb
+          slug: extensions/timescaledb
     - title: Functions
       items:
+        - title: json_array_elements
+          slug: functions/json_array_elements
         - title: json_build_object
           slug: functions/json_build_object
 - title: Import data
