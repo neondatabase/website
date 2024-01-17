@@ -4,7 +4,7 @@ subtitle: Learn how to revert changes or recover lost data using Neon Branch Res
 enableTableOfContents: true
 ---
 
-With Neon's copy-on-write branch creation capability, just as you can instantly create branches from any point in your history retention window, you can just as easily restore a branch to an earlier state in that history. You can also use Time Travel Assist to help troubleshoot issues: run read-only queries against any point in your history retention window as a way to pinpoint the exact moment you need to restore to before you proceed.
+With Neon's copy-on-write branch creation capability, just as you can instantly create branches from any point in your history retention window, you can just as easily restore a branch to an earlier state in that history. You can also use Time Travel Assist to help troubleshoot issues: run read-only queries against any point in your history retention window as a way to pinpoint the exact moment you need to restore to, before you proceed.
 
 ## How the restore operation works
 
@@ -28,9 +28,10 @@ It is important to understand that whenever you restore a branch, you are perfor
 
 In case you need to rollback the update, Neon preserves the branch's final state before the restore operation in an automatically created backup branch, which takes the following format:
 
-```
+```md
 {branch_name}_old_{head_timestamp}
 ```
+
 You can use this backup to rollback the restore operation if necessary.
 
 ### Changes apply to all databases
@@ -45,18 +46,18 @@ Existing connections are temporarily interrupted during the restore operation. H
 
 ### Technical details
 
-The restore operation is seamless &#8212; choose a point in time and and click restore. At Neon we aim for transparency, so if you are interested in understanding the technical implementation behind the scenes, see the details below.
+At Neon we aim for transparency, so if you are interested in understanding the technical implementation behind the scenes, see the details below.
 
 View technical details
 
 Similar to the manual restore operation using the Neon API described [here](/docs/guides/branching-pitr), the Restore operation performs a similar set of actions, but automatically:
-1. On initiating a restore action, Neon builds a new point-in-time branch by matching your selected timestamp to the corresponding LSN of the relevant entries in the shared WAL record. 
+
+1. On initiating a restore action, Neon builds a new point-in-time branch by matching your selected timestamp to the corresponding LSN of the relevant entries in the shared WAL record.
 1. The compute endpoint for your initial branch is moved to this new branch, so that your connection string remains stable.
 1. We rename your new branch to the exact name as your initial branch, so the effect is seamless; it looks and acts like the same branch.
 1. Your initial branch, which now has no compute attached to it, is renamed to {branch_name}_old_{head_timestamp} to keep the pre-restore branch available should you need to rollback. Note that initial branch was the parent for your new branch, and this is reflected when you look at your branch details.
 
 Note there are other ways to implement this feature and these details may change in the future.
-
 
 ## Restore a branch to an earlier state
 
@@ -79,11 +80,12 @@ Restoring to another branch is coming soon. See our [roadmap](/docs/introduction
 To help troubleshoot your data's history, use the SQL editor in the Time Travel assist tool to run read-only queries against any selected timestamp within your history retention window. It's a good idea to run this kind of query before you restore a branch.
 
 Here is how to use the editor:
+
 1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
 
     This makes the selection for the Time Travel query. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
     ![Time travel query](/docs/guides/time_travel_assist.png)
-    
+  
 1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
 1. Write your read-only query in the editor, then click **Query at timestamp** to run the query.
 
@@ -100,7 +102,8 @@ Adjust your selected timestamp accordingly.
 
 ### Billing for ephemeral endpoints
 
-Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed a few moments later after your query is completed. These ephemeral endpoints are not listed on the **Branches** page or in a CLI or API list branches request &#8212; however, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page: 
+Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed a few moments later after your query is completed. These ephemeral endpoints are not listed on the **Branches** page or in a CLI or API list branches request &#8212; however, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
+
 - start_compute
 - create_branch
 - delete_timeline
@@ -108,6 +111,6 @@ Time travel queries leverage Neon's instant branching capability to create a tem
 
 #### How long do ephemeral endpoints remain active
 
-The ephemeral endpoints are created as per the configured [default](/docs/manage/projects#reset-the-default-compute-size) size. An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed. 
+The ephemeral endpoints are created as per the configured [default](/docs/manage/projects#reset-the-default-compute-size) size. An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
 These ephemeral endpoints do contribute to your consumption usage totals for the billing period, like any other active endpoint consuming resources.
