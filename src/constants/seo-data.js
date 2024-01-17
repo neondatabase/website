@@ -53,6 +53,12 @@ export default {
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },
+  calculator: {
+    title: 'Pricing Calculator — Neon',
+    description: 'Calculate your Neon usage and get an estimate of your monthly bill.',
+    imagePath: '/images/social-previews/pricing.jpg',
+    pathname: LINKS.calculator,
+  },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
     description: 'Bring familiar, reliable and scalable Postgres experience to your customers.',

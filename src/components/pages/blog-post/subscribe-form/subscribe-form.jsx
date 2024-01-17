@@ -108,8 +108,8 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
             size === 'lg',
           'mt:pt-7 -mx-10 rounded-xl bg-black-new p-[70px] pr-28 2xl:mx-0 2xl:px-10 xl:py-14 lt:px-11 lg:pb-16 md:px-5 md:pb-12 md:pt-7':
             size === 'md',
-          'rounded-md px-7 py-6 relative overflow-hidden': size === 'sm',
-          'before:bg-subscribe-sm before:inset-0 before:absolute before:z-[0] before:rounded-md before:bg-secondary-9 before:bg-opacity-10 after:bg-black-new after:absolute after:inset-px after:z-[0] after:rounded-md':
+          'relative overflow-hidden rounded-md px-7 py-6': size === 'sm',
+          'before:absolute before:inset-0 before:z-[0] before:rounded-md before:bg-secondary-9 before:bg-opacity-10 before:bg-subscribe-sm after:absolute after:inset-px after:z-[0] after:rounded-md after:bg-black-new':
             size === 'sm',
         },
         className
@@ -117,7 +117,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
     >
       {size === 'sm' && (
         <Image
-          className="absolute right-1 bottom-px w-[458px] h-[98px] z-[1]"
+          className="absolute bottom-px right-1 z-[1] h-[98px] w-[458px]"
           src={subscribeSmPattern}
           width={458}
           height={98}
@@ -135,7 +135,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
       >
         <div className="relative z-20 lg:text-center">
           {size === 'sm' ? (
-            <h2 className="text-2xl leading-dense tracking-tighter w-[220px] shrink">
+            <h2 className="w-[220px] shrink text-2xl leading-dense tracking-tighter">
               Subscribe to receive our latest updates
             </h2>
           ) : (
@@ -166,7 +166,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
               className={clsx(
                 'remove-autocomplete-styles w-full appearance-none rounded-[50px] border bg-black-new pl-7 text-white placeholder:text-white/60 focus:outline-none md:pr-32 xs:pr-7',
                 size === 'sm'
-                  ? 'h-12 pr-32 2xl:pl-5 2xl:pr-[120px] xl:pr-32 xl:pl-7'
+                  ? 'h-12 pr-32 2xl:pl-5 2xl:pr-[120px] xl:pl-7 xl:pr-32'
                   : 'h-14 pr-36',
                 formState === STATES.ERROR ? 'border-secondary-1' : 'border-green-45',
                 formState === STATES.SUCCESS ? 'text-green-45' : 'text-white'
@@ -185,8 +185,8 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
                     className={clsx(
                       'absolute inset-y-2 right-2 rounded-[80px] font-bold leading-none text-black transition-colors duration-200 sm:px-5 xs:flex xs:h-10 xs:w-10 xs:items-center xs:justify-center xs:px-0',
                       size === 'sm'
-                        ? 'h-8 py-2 px-5 2xl:px-4 xl:px-5 xs:inset-y-1 xs:right-1'
-                        : 'h-10 py-3 px-7',
+                        ? 'h-8 px-5 py-2 2xl:px-4 xl:px-5 xs:inset-y-1 xs:right-1'
+                        : 'h-10 px-7 py-3',
                       formState === STATES.ERROR
                         ? 'bg-secondary-1/50'
                         : 'bg-green-45 hover:bg-[#00FFAA]'

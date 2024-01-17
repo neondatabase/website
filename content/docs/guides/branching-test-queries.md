@@ -4,7 +4,7 @@ subtitle: Create a Neon branch to test queries before running them in production
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/test-queries
-updatedOn: '2023-11-27T13:05:30.917Z'
+updatedOn: '2024-01-08T20:02:33.920Z'
 ---
 
 Complex queries that modify data or alter schemas have the potential to be destructive. It is advisable to test these types of queries before running them in production. On other database systems, testing potentially destructive queries can be time and resource intensive. For example, testing may involve setting up a separate database instance and replicating data. With Neon, you can instantly create a database branch with a full copy-on-write clone of your production data in just a few clicks. When you finish testing, you can remove the branch just as easily.
@@ -61,9 +61,9 @@ neonctl branches create --project-id <project-id> --name my_test_branch
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/<project-id>/branches \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "branch": {
@@ -113,8 +113,8 @@ neonctl branches delete my_test_branch
 ```bash
 curl --request DELETE \
      --url https://console.neon.tech/api/v2/projects/<project-id>/branches/<branch-id> \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' |jq
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 </CodeTabs>

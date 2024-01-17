@@ -82,7 +82,7 @@ const Header = ({
                       className={clsx(
                         'whitespace-pre',
                         items?.length > 0 &&
-                          'relative pr-3.5 leading-none transition-colors duration-200 before:absolute before:right-0 before:top-[7px] before:h-0 before:w-0 before:border-4 before:border-transparent before:transition-[border-color] before:duration-200 hover:text-primary-2 group-hover:before:border-t-primary-2 dark:before:border-transparent',
+                          'relative pr-3.5 leading-none transition-colors duration-200 before:absolute before:right-0 before:top-[7px] before:h-0 before:w-0 before:border-4 before:border-transparent before:transition-[border-color] before:duration-200 hover:text-primary-2 group-hover:text-green-45 group-hover:before:border-t-primary-2 dark:before:border-transparent',
                         items?.length > 0 && isThemeBlack
                           ? 'before:border-t-white'
                           : 'before:border-t-black dark:before:border-t-white',
@@ -94,7 +94,7 @@ const Header = ({
                       {text}
                     </Tag>
                     {items?.length > 0 && (
-                      <div className="group-hover:opacity-1 invisible absolute bottom-0 translate-y-full pt-4 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
+                      <div className="group-hover:opacity-1 invisible absolute bottom-0 w-max translate-y-full pt-4 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
                         <ul
                           className="min-w-[240px] rounded-2xl bg-white p-3.5"
                           style={{ boxShadow: '0px 4px 10px rgba(26, 26, 26, 0.2)' }}
@@ -120,10 +120,10 @@ const Header = ({
                                   aria-hidden
                                 />
                                 <span className="ml-3">
-                                  <span className="t-xl block font-semibold !leading-none transition-colors duration-200">
+                                  <span className="t-xl mr-2 block font-semibold !leading-none transition-colors duration-200">
                                     {text}
                                   </span>
-                                  <span className="mt-1.5 block leading-none text-black">
+                                  <span className="mt-1.5 block text-sm leading-none text-black">
                                     {description}
                                   </span>
                                 </span>
@@ -142,7 +142,7 @@ const Header = ({
           <div className="flex lg:hidden">
             <GithubStarCounter className="mr-5 xl:mr-3" isThemeBlack={isThemeBlack} />
             <Button
-              className="mr-3.5 xl:mr-2 px-[22px] h-9 font-semibold text-base duration-200 transition-colors leading-none xl:px-4"
+              className="mr-3.5 h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:mr-2 xl:px-4"
               to={LINKS.login}
               theme={isThemeBlack ? 'gray-dark-outline' : 'gray-dark-outline-black'}
             >
@@ -150,7 +150,7 @@ const Header = ({
             </Button>
 
             <Button
-              className="px-[22px] h-9 font-semibold text-base duration-200 transition-colors leading-none xl:px-4"
+              className="h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:px-4"
               to={LINKS.signup}
               theme="primary"
             >
@@ -158,7 +158,7 @@ const Header = ({
             </Button>
           </div>
           {isMobile && (
-            <div className="items-center flex gap-x-3 md:gap-x-5">
+            <div className="flex items-center gap-x-3 md:gap-x-5">
               {(isDocPage || isBlogPage) && (
                 <Search className="mobile-search" indexName={findIndexName()} isBlog={isBlogPage} />
               )}

@@ -2,7 +2,7 @@
 title: Neon CLI commands — auth
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-12-01T19:05:09.472Z'
+updatedOn: '2024-01-10T17:27:58.298Z'
 ---
 
 ## Before you begin
@@ -36,7 +36,7 @@ The authentication flow for the Neon CLI follows this order:
 - If the credentials file is not found, the Neon CLI initiates the `neonctl auth` web authentication process.
 </Admonition>
 
-### Options
+#### Options
 
 Only [global options](/docs/reference/neon-cli#global-options) apply.
 

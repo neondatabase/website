@@ -1,9 +1,9 @@
 const DOCS_BASE_PATH = '/docs/';
-const RELEASE_NOTES_PER_PAGE = 40;
-const RELEASE_NOTES_SLUG = 'release-notes';
-const RELEASE_NOTES_BASE_PATH = `${DOCS_BASE_PATH}${RELEASE_NOTES_SLUG}/`;
-const RELEASE_NOTES_DIR_PATH = `content/${RELEASE_NOTES_SLUG}`;
-const RELEASE_NOTES_SLUG_REGEX = /\d{4}-\d{2}-\d{2}-[a-z]*/;
+const CHANGELOG_PER_PAGE = 40;
+const CHANGELOG_SLUG = 'changelog';
+const CHANGELOG_BASE_PATH = `${DOCS_BASE_PATH}${CHANGELOG_SLUG}/`;
+const CHANGELOG_DIR_PATH = `content/${CHANGELOG_SLUG}`;
+const CHANGELOG_SLUG_REGEX = /\d{4}-\d{2}-\d{2}-[a-z]*/;
 
 const POSTGRES_DOCS_BASE_PATH = '/docs/postgres/';
 
@@ -18,11 +18,11 @@ const MAX_TITLE_LENGTH = 52;
 // We are using ES modules here in order to be able to import variables from this file in gatsby-node.js
 module.exports = {
   DOCS_BASE_PATH,
-  RELEASE_NOTES_SLUG,
-  RELEASE_NOTES_PER_PAGE,
-  RELEASE_NOTES_BASE_PATH,
-  RELEASE_NOTES_DIR_PATH,
-  RELEASE_NOTES_SLUG_REGEX,
+  CHANGELOG_SLUG,
+  CHANGELOG_PER_PAGE,
+  CHANGELOG_BASE_PATH,
+  CHANGELOG_DIR_PATH,
+  CHANGELOG_SLUG_REGEX,
   POSTGRES_DOCS_BASE_PATH,
   VERCEL_URL,
   MAX_TITLE_LENGTH,

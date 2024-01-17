@@ -2,7 +2,7 @@
 title: Neon CLI commands — connection-string
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-12-01T19:05:09.474Z'
+updatedOn: '2024-01-10T17:27:58.302Z'
 ---
 
 ## Before you begin
@@ -12,7 +12,7 @@ updatedOn: '2023-12-01T19:05:09.474Z'
 
 For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-## The `connection string` command
+## The `connection-string` command
 
 This command constructs a Postgres connection string for connecting to a database in your Neon project. You can construct a connection string for any database in any branch. The connection string includes the password for the specified role.
 
@@ -26,15 +26,19 @@ neonctl connection-string [branch] [options]
 
 ### Options
 
-In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `connect-string` command supports these options:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `connection-string` command supports these options:
 
 | Option        | Description  | Type   | Required  |
 | ------------- | ------------ | ------ | :------: |
-| --project-id  | Project ID   | string |  Only if your Neon account has more than one project |
-| --role-name   | Role name    | string | Only if your branch has more than one role |
-| --database-name| Database name| string | Only if your branch has more than one database |
-| --pooled | Construct a pooled connection. The default is `false`. |boolean||
-| --prisma | Construct a connection string for use with Prisma. The default is `false`. |boolean||
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID   | string |  Only if your Neon account has more than one project |
+| `--role-name`   | Role name    | string | Only if your branch has more than one role |
+| `--database-name` | Database name| string | Only if your branch has more than one database |
+| `--pooled` | Construct a pooled connection. The default is `false`. |boolean||
+| `--prisma` | Construct a connection string for use with Prisma. The default is `false`. |boolean||
+| `--endpoint-type` | The compute endpoint type. The default is `read-write`. The choise are `read_only` and `read_write`` |string||
+| `--extended` | Show extended information. The default is `false`. |boolean||
+| `--psql` | Connect to a database via psql using connection string. The default is `false`. |boolean||
 
 ### Examples
 
