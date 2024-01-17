@@ -299,8 +299,9 @@
 - title: Postgres
   items:
     - title: Extensions
-      slug: extensions/pg-extensions
       items:
+        - title: Supported extensions
+          slug: extensions/pg-extensions
         - title: pgvector
           slug: extensions/pgvector
         - title: pg_tiktoken
@@ -315,6 +316,8 @@
           slug: functions/json_build_object
         - title: json_extract_path
           slug: functions/json_extract_path
+    - title: Compatibility
+      slug: reference/compatibility
 - title: Import data
   slug: import/import-intro
   items:
@@ -369,8 +372,6 @@
       slug: reference/sdk
     - title: Glossary
       slug: reference/glossary
-    - title: Postgres compatibility
-      slug: reference/compatibility
 - title: Community
   slug: community/community-intro
   items:
