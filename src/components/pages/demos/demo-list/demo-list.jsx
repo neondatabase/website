@@ -182,7 +182,7 @@ const DemoList = () => (
                       {title}
                     </h3>
                     <p
-                      className="tracking-snug with-link-primary mt-3 font-light leading-tight text-gray-new-70"
+                      className="tracking-snug with-link-primary mt-3 font-light leading-snug text-gray-new-70"
                       dangerouslySetInnerHTML={{ __html: description }}
                     />
                   </div>
