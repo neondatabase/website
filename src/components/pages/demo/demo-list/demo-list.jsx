@@ -89,6 +89,13 @@ const items = [
     categoryTextColor: 'text-blue-80',
     items: [
       {
+        title: 'Ping Thing',
+        description:
+          'Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes.',
+        demoLink: '/demos/ping-thing',
+        sourceLink: 'https://github.com/neondatabase/ping-thing',
+      },
+      {
         title: 'Neon serverless driver UNESCO World Heritage Sites App',
         description:
           "This repo demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions",
@@ -122,12 +129,6 @@ const items = [
         demoLink: 'https://postgres-pgvector.vercel.app/',
       },
       {
-        title: 'Web-based AI SQL Playground',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        demoLink: '#',
-        sourceLink: 'https://github.com/neondatabase/postgres-ai-playground',
-      },
-      {
         title: 'Jupyter Notebook for Vector search with Neon',
         description:
           'Neon supports vector search using the pgvector open-source PostgreSQL extensions, which enables Postgres as a vector database for storing and querying embeddings. ',
@@ -144,14 +145,14 @@ const items = [
       },
       {
         title: 'Google Colab: Chat with your database with Langchain',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        description: 'Use Google Colab with Neon for vector similarity search.',
         demoLink: '#',
         sourceLink:
           'https://colab.research.google.com/github/neondatabase/neon-google-colab-notebooks/blob/main/chat_with_your_database_using_langchain.ipynb',
       },
       {
         title: 'Google Colab with pgvecfor and Neon',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        description: 'Use Google Colab , LangChain, and Neon for vector similarity search.',
         demoLink: '#',
         sourceLink:
           'https://colab.research.google.com/github/neondatabase/neon-google-colab-notebooks/blob/main/neon_pgvector_quickstart.ipynb',

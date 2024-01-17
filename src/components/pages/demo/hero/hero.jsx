@@ -6,18 +6,18 @@ import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron.inline.svg';
 
 import chatbotIllustration from './images/chatbot.jpg';
-import pingthingIllustration from './images/pingthing.jpg';
+import playgroundIllustration from './images/playground.jpg';
 import semanticSearchIllustration from './images/semantic-search.jpg';
 
 const items = [
   {
-    image: pingthingIllustration,
+    image: playgroundIllustration,
     imageWidth: 716,
     imageHeight: 512,
     title:
-      'Ping Thing: Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes',
-    demoLink: '/demos/ping-thing',
-    sourceLink: 'https://github.com/neondatabase/ping-thing',
+      'SQL Playground: a SQL playground for Postgres where you can use AI to generate queries using natural language',
+    demoLink: '/demos/playground',
+    sourceLink: 'https://github.com/neondatabase/postgres-ai-playground',
   },
   {
     image: semanticSearchIllustration,
