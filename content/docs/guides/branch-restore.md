@@ -4,21 +4,27 @@ subtitle: Learn how to revert changes or recover lost data using Neon Branch Res
 enableTableOfContents: true
 ---
 
-With Neon's copy-on-write branch creation capability, just as you can instantly create branches from any point in your history retention window, you can just as easily restore a branch to an earlier state in that history. You can also use Time Travel Assist to help troubleshoot issues &#8212; run read-only queries against any point in your history retention window as a way to determine the precise point in time you need to restore to before actually restoring.
+With Neon's copy-on-write branch creation capability, just as you can instantly create branches from any point in your history retention window, you can just as easily restore a branch to an earlier state in that history. You can also use Time Travel Assist to help troubleshoot issues: run read-only queries against any point in your history retention window as a way to pinpoint the exact moment you need to restore to before you proceed.
 
 ## How the restore operation works
 
-The restore operation lets you revert the state of a selected branch to an earlier point in time. For example, to just before some corruption or loss of data.
+The restore operation lets you revert the state of a selected branch to an earlier point in time. For example, revert to just before some corruption or loss of data.
 
 ![branch restore to timestamp](/docs/guides/branch_restore_time.png)
 
 By default, your history retention is set to 7 days. You can revert a branch to any time within that configured [retention window](/docs/manage/projects#configure-history-retention), down to the millisecond.
 
-//it is to the millisecond in the console datepicker - is this the same level of unit outside in cli/api?//
+A few key points to keep in mind about the restore operation:
+- [Current data is overwritten](#overwrite-not-a-merge)
+- [Restore backups are created automatically](#automatic-backups)
+- [All databases on a branch are updated](#changes-apply-to-all-databases)
+- [Connections are temporarily interrupted](#connections-temporarily-interrupted)
+
+### Overwrite, not a merge
 
 It is important to understand that whenever you restore a branch, you are performing a _complete_ overwrite, not a merge or refresh. Everything on your current branch, data and schema, is replaced with the contents from the historical source. All interim data from the selected restore point onwards is removed from the branch.
 
-### Automatic restore backups for data safety
+### Automatic backups
 
 In case you need to rollback the update, Neon preserves the branch's final state before the restore operation in an automatically created backup branch, which takes the following format:
 
@@ -27,15 +33,30 @@ In case you need to rollback the update, Neon preserves the branch's final state
 ```
 You can use this backup to rollback the restore operation if necessary.
 
-### Changes apply to ALL databases
+### Changes apply to all databases
 
-A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. Keep this in mind when restoring branches. For example, let's say you want to fix some corrupted content in a given database. If you restore your branch to an earlier point in time before the corruption occured, the operation applies to _all_ databases on the branch, not just the one you are troubleshooting.
+A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. Keep this in mind when restoring branches. For example, let's say you want to fix some corrupted content in a given database. If you restore your branch to an earlier point in time before the corruption occurred, the operation applies to _all_ databases on the branch, not just the one you are troubleshooting.
 
-<code>//Can we give any opinionated recommendations on how to architect your branches and their databases to keep things in good order, letting you restore without risk of inadvertent issues? For example, you probably would not want to create a database per customer on a single branch. Instead, a branch per customer with a dedicated db.//</code>
+In general, Neon recommends that you avoid overstuffing a project with too many databases. If you have multiple, distinct applications, each one deserves its own Neon project. A good rule of thumb: one Neon project per source code repository.
 
 ### Connections temporarily interrupted
 
 Existing connections are temporarily interrupted during the restore operation. However, your connection details do not change. All connections are re-established as soon as the restore operation is finished.
+
+### Technical details
+
+The restore operation is seamless &#8212; choose a point in time and and click restore. At Neon we aim for transparency, so if you are interested in understanding the technical implementation behind the scenes, see the details below.
+<details>
+<summary>View technical details</summary>
+
+Similar to the manual restore operation using the Neon API described ]here](/docs/guides/branching-pitr), the Restore operation performs a similar set of actions, but automatically:
+1. On initiating a restore action, Neon builds a new point-in-time branch by matching your selected timestamp to the corresponding LSN of the relevant entries in the shared WAL record. 
+1. The compute endpoint for your initial branch is moved to this new branch, so that your connection string remains stable.
+1. We rename your new branch to the exact name as your initial branch, so the effect is seamless; it looks and acts like the same branch.
+1. Your initial branch, which now has no compute attached to it, is renamed to <code>{branch_name}_old_{head_timestamp}</code> to keep the pre-restore branch available should you need to rollback. Note that initial branch was the parent for your new branch, and this is reflected when you look at your branch details.
+
+Note there are other ways to implement this feature and these details may change in the future.
+</details> 
 
 ## Restore a branch to an earlier state
 
@@ -43,11 +64,11 @@ Use the **Restore** page to restore a branch to an earlier timestamp in its hist
 
 ![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
 
-Your selected branch is instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see the backup branch created from this restore point.
+All databases on your selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see the backup branch created from this restore point.
 
 ![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
 
-To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job &#8212; but if you need to revert your changes, you can manually make the backup branch your primary branch using the steps described in [Branching - Point in time restore](/docs/guides/branching-pitr#change-your-primary-branch). 
+To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it. If you do need to revert your changes, you can manually make the backup branch your primary branch using the steps described in [Branching - Point in time restore](/docs/guides/branching-pitr#change-your-primary-branch). 
 
 <Admonition type="note">
 Restoring to another branch is coming soon. See our [roadmap](/docs/introduction/roadmap). Once available, you will be able to restore to any other branch, including this restore backup, using a similar one-click operation.
@@ -59,10 +80,11 @@ To help troubleshoot your data's history, use the SQL editor in the Time Travel 
 
 Here is how to use the editor:
 1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
-1. Don't click **Branch Restore** yet. Instead, look to the Time Travel Assist window where you'll find the SQL editor you can use to write your query.
+
+    This makes the selection for the Time Travel query. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
     ![Time travel query](/docs/guides/time_travel_assist.png)
-    You can see the selected branch and timestamp against which this query will be run.
-1. Make sure you select the right database to run your query against; the database selection dropdown appears under the SQL editor.
+    
+1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
 1. Write your read-only query in the editor, then click **Query at timestamp** to run the query.
 
 If your query is successful, you will see a table of results under the editor.
@@ -78,12 +100,14 @@ Adjust your selected timestamp accordingly.
 
 ### Billing for ephemeral endpoints
 
-Time travel queries leverage Neon's instant branching capability, effectively building a temporary branch at the selected point in time, which is automatically removed a few moments later. These are ephemeral branches &#8212; meaning you cannot interact with them directly, and they do not show up in your list of branches.
-
-However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page: 
+Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed a few moments later after your query is completed. These ephemeral endpoints are not listed on the **Branches** page or in a CLI or API list branches request &#8212; however, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page: 
 - start_compute
 - create_branch
 - delete_timeline
 - suspend_compute
 
-Because these time travel queries do use compute resources to run the query, they will add to your compute consumption total for your billing period.
+#### How long do ephemeral endpoints remain active
+
+The ephemeral endpoints are created as per the configured [default](/docs/manage/projects#reset-the-default-compute-size) size. An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed. 
+
+These ephemeral endpoints do contribute to your consumption usage totals for the billing period, like any other active endpoint consuming resources.
