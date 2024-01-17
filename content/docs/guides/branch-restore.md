@@ -46,17 +46,17 @@ Existing connections are temporarily interrupted during the restore operation. H
 ### Technical details
 
 The restore operation is seamless &#8212; choose a point in time and and click restore. At Neon we aim for transparency, so if you are interested in understanding the technical implementation behind the scenes, see the details below.
-<details>
-<summary>View technical details</summary>
+
+View technical details
 
 Similar to the manual restore operation using the Neon API described [here](/docs/guides/branching-pitr), the Restore operation performs a similar set of actions, but automatically:
 1. On initiating a restore action, Neon builds a new point-in-time branch by matching your selected timestamp to the corresponding LSN of the relevant entries in the shared WAL record. 
 1. The compute endpoint for your initial branch is moved to this new branch, so that your connection string remains stable.
 1. We rename your new branch to the exact name as your initial branch, so the effect is seamless; it looks and acts like the same branch.
-1. Your initial branch, which now has no compute attached to it, is renamed to <code>{branch_name}_old_{head_timestamp}</code> to keep the pre-restore branch available should you need to rollback. Note that initial branch was the parent for your new branch, and this is reflected when you look at your branch details.
+1. Your initial branch, which now has no compute attached to it, is renamed to {branch_name}_old_{head_timestamp} to keep the pre-restore branch available should you need to rollback. Note that initial branch was the parent for your new branch, and this is reflected when you look at your branch details.
 
 Note there are other ways to implement this feature and these details may change in the future.
-</details> 
+
 
 ## Restore a branch to an earlier state
 
