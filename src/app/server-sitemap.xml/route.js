@@ -3,7 +3,7 @@ import { getServerSideSitemap } from 'next-sitemap';
 import { getAllWpPosts } from 'utils/api-posts';
 
 // eslint-disable-next-line import/prefer-default-export
-export async function GET(request) {
+export async function GET() {
   const wpPosts = await getAllWpPosts();
 
   const entries = wpPosts.map((post) => ({
@@ -13,7 +13,5 @@ export async function GET(request) {
     priority: 0.7,
   }));
 
-  console.log(entries);
-
-  return getServerSideSitemap(request, entries);
+  return getServerSideSitemap(entries);
 }
