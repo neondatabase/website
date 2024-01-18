@@ -10,7 +10,7 @@ updatedOn: '2023-11-24T11:25:06.758Z'
 This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore` command line utilities.
 
 <Admonition type="warning">
-Avoid using `pg_dump` over a [pooled Neon connection](https://neon.tech/docs/connect/connection-pooling) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976)) for details. Use an unpooled connection instead.
+Avoid using `pg_dump` over a [pooled Neon connection](https://neon.tech/docs/connect/connection-pooling) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an unpooled connection instead.
 </Admonition>
 
 Repeat the `pg_dump` and `pg_restore` process for each database you want to migrate.
