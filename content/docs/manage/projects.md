@@ -216,26 +216,27 @@ To configure an allowlist:
 
 <TabItem>
 
-The [Neon CLI projects update command](/docs/reference/cli-projects#update) supports IP Allow configuration. For example, the following command configures IP for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
+The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
 
 ```bash
-neonctl projects update falling-salad-31638542 --ip-allow 192.168.1.1 192.168.1.2
-┌────────────────────────┬────────────────────────┬───────────────┬──────────────────────┐
-│ Id                     │ Name                   │ Region Id     │ Created At           │
-├────────────────────────┼────────────────────────┼───────────────┼──────────────────────┤
-│ falling-salad-31638542 │ falling-salad-31638542 │ aws-us-east-2 │ 2024-01-09T10:37:28Z │
-└────────────────────────┴────────────────────────┴───────────────┴──────────────────────┘
+neonctl ip-allow add 192.168.1.1 192.168.1.2
+┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
+│ Id                  │ Name                │ IP Addresses │ Primary Branch Only │
+├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
+│ wispy-haze-26469780 │ wispy-haze-26469780 │ 192.168.1.1  │ false               │
+│                     │                     │ 192.168.1.2  │                     │
+└─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
 ```
 
-To apply a defined IP allowlist to the primary branch only:
+To apply a defined IP allowlist to the primary branch only, use the [Neon CLI projects command](/docs/reference/cli-projects) with the `--ip-primary-only` option:
 
 ```bash
-eonctl projects update falling-salad-31638542 --ip-primary-only     
-┌────────────────────────┬────────────────────────┬───────────────┬──────────────────────┐
-│ Id                     │ Name                   │ Region Id     │ Created At           │
-├────────────────────────┼────────────────────────┼───────────────┼──────────────────────┤
-│ falling-salad-31638542 │ falling-salad-31638542 │ aws-us-east-2 │ 2024-01-09T10:37:28Z │
-└────────────────────────┴────────────────────────┴───────────────┴──────────────────────┘
+neonctl projects update wispy-haze-26469780 --ip-primary-only
+┌─────────────────────┬─────────────────────┬───────────────┬──────────────────────┐
+│ Id                  │ Name                │ Region Id     │ Created At           │
+├─────────────────────┼─────────────────────┼───────────────┼──────────────────────┤
+│ wispy-haze-26469780 │ wispy-haze-26469780 │ aws-us-east-2 │ 2024-01-17T20:36:27Z │
+└─────────────────────┴─────────────────────┴───────────────┴──────────────────────┘
 ```
 
 </TabItem>
