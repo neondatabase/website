@@ -124,7 +124,7 @@
 - title: Guides
   slug: guides/guides-intro
   items:
-    - title: Neon features
+    - title: Neon
       items: 
         - title: Autoscaling
           slug: guides/autoscaling-guide
@@ -169,13 +169,7 @@
             - title: Data analysis and reporting
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
-              slug: guides/read-replica-prisma
-        - title: Extensions
-          items:
-            - title: neon
-              slug: extensions/neon
-            - title: neon_utils
-              slug: extensions/neon-utils            
+              slug: guides/read-replica-prisma    
     - title: Frameworks
       items:
         - title: Next.js
@@ -302,6 +296,10 @@
       items:
         - title: Supported extensions
           slug: extensions/pg-extensions
+        - title: neon
+          slug: extensions/neon
+        - title: neon_utils
+          slug: extensions/neon-utils       
         - title: pgvector
           slug: extensions/pgvector
         - title: pg_tiktoken
