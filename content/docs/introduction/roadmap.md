@@ -12,12 +12,6 @@ As always, we are listening. If you see something you like, something you disagr
 
 <CommunityBanner buttonText="Send feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Send ideas to our feedback channel</CommunityBanner>
 
-<DetailIconCards>
-
-<a href="https://discord.com/channels/1176467419317940276/1176788564890112042" description="Send ideas to our feedback channel" icon="discord">Discord feedback</a>
-
-</DetailIconCards>
-
 For the latest features and fixes, check our [Changelog](docs/changelog), updated every Friday. You can subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
 ## In progress
