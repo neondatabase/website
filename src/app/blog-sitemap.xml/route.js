@@ -4,7 +4,8 @@ import { getAllWpBlogCategories, getAllWpPosts } from 'utils/api-posts';
 
 // eslint-disable-next-line import/prefer-default-export
 export async function GET() {
-  const wpPosts = await getAllWpPosts();
+  // eslint-disable-next-line no-undef
+  const wpPosts = await getAllWpPosts(request);
   const wpCategories = await getAllWpBlogCategories();
 
   const wpPostEntries = wpPosts.map((post) => ({
@@ -24,3 +25,5 @@ export async function GET() {
   const entries = [...wpPostEntries, ...wpCategoryEntries];
   return getServerSideSitemap(entries);
 }
+
+export const revalidate = 0;
