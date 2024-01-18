@@ -35,3 +35,5 @@ const CaseStudiesPage = async () => {
 };
 
 export default CaseStudiesPage;
+
+export const revalidate = 60;
