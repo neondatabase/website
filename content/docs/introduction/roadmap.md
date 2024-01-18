@@ -10,7 +10,7 @@ Our developers are focused on making Neon the default choice for serverless Post
 
 As always, we are listening. If you see something you like, something you disagree with, or something you'd love for us to add, let us know.
 
-<CommunityBanner buttonText="Share feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Share your ideas in our Discord 🙏 feedback channel</CommunityBanner>
+<CommunityBanner buttonText="🙏 | feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Share your ideas</CommunityBanner>
 
 For the latest features and fixes, check our [Changelog](docs/changelog), updated every Friday. You can subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
