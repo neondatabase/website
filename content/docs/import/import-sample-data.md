@@ -579,7 +579,7 @@ An airport database containing information about airports, aircraft, bookings, p
 
 ## Load sample data with the Neon CLI
 
-You can upload data with the Neon CLI by passing the `--psql` option, which calls the `psql` command line utility.
+You can load data with the Neon CLI by passing the `--psql` option, which calls the `psql` command line utility.
 
 The Neon CLI and `psql` must be installed on your system. For installation instructions, see:
 

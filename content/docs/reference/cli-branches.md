@@ -168,7 +168,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ```
 
     <details>
-    <summary>Output</summary>
+    <summary>Example output</summary>
     ```json 
     {
     "branch": {

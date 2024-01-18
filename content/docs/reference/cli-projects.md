@@ -117,7 +117,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ```
 
     <details>
-    <summary>Output</summary>
+    <summary>Example output</summary>
     ```json
     {
     "project": {
@@ -184,7 +184,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     neonctl project create --psql -- -c "SELECT version()"
     ```
 
-- Create a project and set the Neon CLI project and branch context
+- Create a project and set the Neon CLI project and branch context.
 
     ```
     neonctl project create --psql --set-context
