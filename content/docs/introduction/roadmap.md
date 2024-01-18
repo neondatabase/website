@@ -10,6 +10,8 @@ Our developers are focused on making Neon the default choice for serverless Post
 
 As always, we are listening. If you see something you like, something you disagree with, or something you'd love for us to add, let us know.
 
+<CommunityBanner buttonText="Send feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Send ideas to our feedback channel</CommunityBanner>
+
 <DetailIconCards>
 
 <a href="https://discord.com/channels/1176467419317940276/1176788564890112042" description="Send ideas to our feedback channel" icon="discord">Discord feedback</a>
