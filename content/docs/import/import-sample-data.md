@@ -579,9 +579,9 @@ An airport database containing information about airports, aircraft, bookings, p
 
 ## Load sample data with the Neon CLI
 
-Neon CLI command supports a `--psql` option that allows you to load data from a local data file when creating a Neon project, creating a branch, or creating a connection string. 
+You can upload data with the Neon CLI by passing the `--psql` option, which calls the `psql` command line utility.
 
-The Neon CLI and `psql` must be installed. For installation instructions, see:
+The Neon CLI and `psql` must be installed on your system. For installation instructions, see:
 
 - [Neon CLI — Install and connect](/docs/reference/cli-install)
 - [PostgreSQL Downloads](https://www.postgresql.org/download/) for `psql`
@@ -604,19 +604,19 @@ To load sample data:
 
 2. Load the data using one of the following Neon CLI commands ([projects](/docs/reference/cli-projects), [branches](/docs/reference/cli-branches), or [connection-string](/docs/reference/cli-connection-string)):
 
-    - Create a new Neon project, connect to it with `psql`, and load data from an `.sql` file.
+    - Create a new Neon project, connect to it with `psql`, and run the `.sql` file.
 
         ```bash
         neonctl projects create --psql -- -f periodic_table.sql
         ```
 
-    - Create a branch, connect to it with `psql`, and load data from an `.sql` file.
+    - Create a branch, connect to it with `psql`, and run the an `.sql` file.
 
         ```bash
         neonctl branches create --psql -- -f periodic_table.sql
         ```
 
-    - Create a connection string, connect with `psql`, and load data from an `.sql` file.
+    - Get a connection string, connect with `psql`, and run the `.sql` file.
 
         ```bash
         neonctl connection-string --psql -- -f periodic_table.sql

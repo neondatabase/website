@@ -14,7 +14,7 @@ For information about connecting to Neon, see [Connect from any application](/do
 
 ## The `connection-string` command
 
-This command constructs a Postgres connection string for connecting to a database in your Neon project. You can construct a connection string for any database in any branch. The connection string includes the password for the specified role.
+This command gets a Postgres connection string for connecting to a database in your Neon project. You can construct a connection string for any database in any branch. The connection string includes the password for the specified role.
 
 ### Usage
 
@@ -42,7 +42,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 ### Examples
 
-- Create a basic connection string for the current project, branch, and database:
+- Get a basic connection string for the current project, branch, and database:
 
     <CodeBlock shouldWrap>
 
@@ -53,7 +53,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     </CodeBlock>
 
-- Create a pooled connection string for the current project, branch, and database with the `--pooled` option. This option adds a `-pooler` flag to the host name which enables connection pooling for clients that use this connection string.
+- Get a pooled connection string for the current project, branch, and database with the `--pooled` option. This option adds a `-pooler` flag to the host name which enables connection pooling for clients that use this connection string.
 
     <CodeBlock shouldWrap>
 
@@ -64,7 +64,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     </CodeBlock>
 
-- Create a connection string for use with Prisma for the current project, branch, and database. The `--prisma` options adds `connect_timeout=30` option to the connection string to ensure that connections from Prisma Client do not timeout.
+- Get a connection string for use with Prisma for the current project, branch, and database. The `--prisma` options adds `connect_timeout=30` option to the connection string to ensure that connections from Prisma Client do not timeout.
 
     <CodeBlock shouldWrap>
 
@@ -75,19 +75,19 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     </CodeBlock>
 
-- Create a connection string and connect with `psql`.
+- Get a connection string and connect with `psql`.
 
     ```bash
     neonctl connection-string --psql
     ```
 
-- Create a connection string, connect with `psql`, and load data from an `.sql` file.
+- Get a connection string, connect with `psql`, and run an `.sql` file.
 
     ```bash
     neonctl connection-string --psql -- -f dump.sql
     ```
 
-- Create a connection string, connect with `psql`, and run a query.
+- Get a connection string, connect with `psql`, and run a query.
 
     ```bash
     neonctl connection-string --psql -- -c "SELECT version()"

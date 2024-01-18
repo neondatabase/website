@@ -262,7 +262,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     neonctl branch create --psql
     ```
 
-- Create a branch, connect to it with `psql`, and load data from an `.sql` file. 
+- Create a branch, connect to it with `psql`, and run an `.sql` file. 
 
     ```bash
     neonctl branch create --psql -- -f dump.sql

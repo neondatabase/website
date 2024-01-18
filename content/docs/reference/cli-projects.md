@@ -172,7 +172,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     neonctl project create --psql
     ```
 
-- Create a project, connect to it with `psql`, and load data from an `.sql` file.
+- Create a project, connect to it with `psql`, and run an `.sql` file.
 
     ```bash
     neonctl project create --psql -- -f dump.sql
