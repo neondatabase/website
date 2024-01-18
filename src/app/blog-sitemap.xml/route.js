@@ -25,5 +25,3 @@ export async function GET() {
   const entries = [...wpPostEntries, ...wpCategoryEntries];
   return getServerSideSitemap(entries);
 }
-
-export const revalidate = 0;
