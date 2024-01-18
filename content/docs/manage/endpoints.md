@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-01-08T20:02:33.926Z'
+updatedOn: '2024-01-10T18:34:05.861Z'
 ---
 
 A single read-write compute endpoint is created for your project's [primary branch](/docs/reference/glossary#primary-branch), by default.
@@ -22,7 +22,7 @@ Project
 
 Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints.
 
-Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The  [Neon Free Tier](/docs/introduction/free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint. The [Neon Pro Plan](/docs/introduction/pro-plan) supports larger compute sizes and _Autoscaling_.
+Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The  [Neon Free Tier](/docs/introduction/free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint. The [Neon Pro Plan](/docs/introduction/pro-plan) supports larger compute sizes and autoscaling.
 
 ## View a compute endpoint
 
@@ -33,8 +33,8 @@ Compute endpoint details shown on the branch page include:
 - **Id**: The compute endpoint ID.
 -- **Type**: The type of compute endpoint. `R/W` (Read-write) or `R/O` (Read-only).
 - **Status**: The compute endpoint status (`Active`, `Idle`, or `Stopped`).
-- **Compute size**: The size of the compute endpoint. [Neon Pro Plan](/docs/introduction/pro-plan) users can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint. Shows _Autoscaling_ minimum and maximum vCPU values if _Autoscaling_ is enabled.
-- **Auto-suspend delay**: The number of seconds of inactivity after which a compute endpoint is automatically suspended. The default is 300 seconds (5 minutes). For more information, see [Auto-suspend configuration](#auto-suspend-configuration).
+- **Compute size**: The size of the compute endpoint. [Neon Pro Plan](/docs/introduction/pro-plan) users can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint. Shows autoscaling minimum and maximum vCPU values if autoscaling is enabled.
+- **Auto-suspend delay**: The number of seconds of inactivity after which a compute endpoint is automatically suspended. The default is 300 seconds (5 minutes). For more information, see [Autosuspend configuration](#auto-suspend-configuration).
 - **Last active**: The date and time the compute was last active.
 
 ## Create a compute endpoint
@@ -50,7 +50,7 @@ To create an endpoint:
 
 ## Edit a compute endpoint
 
-Neon paid plan users can edit a compute endpoint to change the [compute size](#compute-size-and-autoscaling-configuration) or [Auto-suspend](#auto-suspend-configuration) configuration.
+Neon paid plan users can edit a compute endpoint to change the [compute size](#compute-size-and-autoscaling-configuration) or [Autosuspend](#auto-suspend-configuration) configuration.
 
 To edit a compute endpoint:
 
@@ -71,7 +71,7 @@ Some key points to understand about how your endpoint responds when you make cha
 * Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
 * Changes to autosuspend settings do not require an endpoint restart; existing connections are unaffected.
 
-### Compute size and Autoscaling configuration
+### Compute size and autoscaling configuration
 
 [Neon Pro Plan](/docs/introduction/pro-plan) users can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
 
@@ -98,11 +98,11 @@ Neon supports two compute size configuration options:
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
 </Admonition>
 
-### Auto-suspend configuration
+### Autosuspend configuration
 
-Neon's _Auto-suspend_ feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable _Auto-suspend_ completely to maintain an "always-active" compute endpoint. An "always-active" configuration eliminates the few seconds of latency required to reactivate a compute endpoint but is likely to increase your compute time usage.
+Neon's _Autosuspend_ feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable autosuspend completely to maintain an "always-active" compute endpoint. An "always-active" configuration eliminates the few seconds of latency required to reactivate a compute endpoint but is likely to increase your compute time usage.
 
-The maximum **Suspend compute after a period of inactivity** setting is 7 days. To configure a compute as "always-active", deselect **Suspend compute after a period of inactivity**. For more information, refer to [Configuring Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide).
+The maximum **Suspend compute after a period of inactivity** setting is 7 days. To configure a compute as "always-active", deselect **Suspend compute after a period of inactivity**. For more information, refer to [Configuring autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
 
 ## Restart a compute endpoint
 
@@ -116,7 +116,7 @@ You can restart a compute endpoint using one of the following methods:
 
 - Stop activity on your compute endpoint (stop running queries) and wait for your compute endpoint to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`. 
 - Issue [Suspend endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. You can do this directly from the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api), using the **Try It!** feature. You'll need an [API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
-- Neon Pro Plan users can temporarily set a compute's **Suspend compute after a period of inactivity** setting to 1 second to initiate a restart (the default setting is 5 minutes). See [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console to see if your compute endpoint restarted. Look for `suspend_compute` and `start_compute` actions.
+- Neon Pro Plan users can temporarily set a compute's **Suspend compute after a period of inactivity** setting to 1 second to initiate a restart (the default setting is 5 minutes). See [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console to see if your compute endpoint restarted. Look for `suspend_compute` and `start_compute` actions.
 
 ## Delete a compute endpoint
 

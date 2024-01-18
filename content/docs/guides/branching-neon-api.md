@@ -2,7 +2,7 @@
 title: Branching with the Neon API
 subtitle: Learn how to create and delete branches with the Neon API
 enableTableOfContents: true
-updatedOn: '2024-01-08T20:02:33.919Z'
+updatedOn: '2024-01-09T23:16:47.220Z'
 ---
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
@@ -12,11 +12,11 @@ The API examples that follow may only show some of the user-configurable request
 
 The `jq` program specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
 
-### Prerequisites
+## Prerequisites
 
 A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../manage/api-keys#create-an-api-key). In the examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
-### Create a branch with the API
+## Create a branch with the API
 
 The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranch).
 
@@ -118,7 +118,7 @@ The response includes information about the branch, the branch's compute endpoin
 }
 ```
 
-### List branches with the API
+## List branches with the API
 
 The following Neon API method lists branches for the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranches).
 
@@ -168,7 +168,7 @@ Response:
 }
 ```
 
-### Delete a branch with the API
+## Delete a branch with the API
 
 The following Neon API method deletes the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranch).
 

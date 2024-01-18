@@ -3,7 +3,7 @@ title: Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2024-01-06T10:04:05.686Z'
+updatedOn: '2024-01-11T14:49:37.563Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
@@ -106,7 +106,7 @@ You can update an extension to the latest version using `ALTER EXTENSION <extens
   ```
 
 <Admonition type="important">
-When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [Auto-suspend](/docs/introduction/auto-suspend) behavior. However, if your compute never restarts because you disabled Auto-suspend or because your compute is constantly active, you may need force a restart. To force a restart, Neon Pro Plan users can temporarily set a compute's **Suspend compute after a period of inactivity** setting to 1 second (the default is 5 minutes). See [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console to see if your compute endpoint restarted. Look for `suspend_compute` and `start_compute` actions. Alternatively, all Neon users can issue [Suspend endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. Please be aware that restarting a compute endpoint temporarily interrupts any connections currently using the compute.
+When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [Autosuspend](/docs/introduction/auto-suspend) behavior. However, if your compute never restarts because you disabled Autosuspend or because your compute is constantly active, you may need force a restart. To force a restart, Neon Pro Plan users can temporarily set a compute's **Suspend compute after a period of inactivity** setting to 1 second (the default is 5 minutes). See [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console to see if your compute endpoint restarted. Look for `suspend_compute` and `start_compute` actions. Alternatively, all Neon users can issue [Suspend endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. Please be aware that restarting a compute endpoint temporarily interrupts any connections currently using the compute.
 </Admonition>
 
 ## Extension support notes
@@ -118,17 +118,17 @@ When Neon releases a new extension or new extension version, a compute restart i
 
 ## Request extension support
 
-To request support for a Postgres extension, please post your request to the [Neon community forum](https://community.neon.tech/). [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+To request support for a Postgres extension, please open a feature request on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
 
 ### Custom-built extensions
 
-Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please post your request to the [Neon community forum](https://community.neon.tech/). [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support). Please include the following information in your request:
+Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to our Support team. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support). Please include the following information in your request:
 
 - A repository link or archive file containing the source code for your extension
 - A description of what the extension does, instructions for compiling it, and any prerequisites
 - Whether an NDA or licensing agreement is necessary for Neon to provide support for your extension
 
-Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access. Neon features such as Autoscaling and Auto-suspend may limit the types of extensions we can support.
+Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access. Neon features such as _Autoscaling_ and _Autosuspend_ may limit the types of extensions we can support.
 
 Depending on the nature of your extension, Neon may also request a liability waiver.
 

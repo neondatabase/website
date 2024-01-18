@@ -41,4 +41,6 @@ export default {
   trust: '/trust',
   billing: '/docs/introduction/billing',
   postgres: '/docs/postgres',
+  autoscaling: '/docs/introduction/autoscaling',
+  onDemandStorage: '/docs/introduction/about#bottomless-storage',
 };

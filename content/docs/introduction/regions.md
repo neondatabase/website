@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2023-11-24T11:25:06.758Z'
+updatedOn: '2024-01-11T14:49:37.565Z'
 ---
 Neon supports project deployment in several regions. We recommended that you select the region closest to your application server to reduce latency between your Neon project and your application.
 
@@ -44,6 +44,6 @@ Neon Free Tier users are limited to a single project. In this case, you can expo
 
 Moving data to a new Neon project may require downtime if you are moving a production database, as the import procedure may take some time depending on the size of your data. To prevent the loss of data during the import operation, consider disabling writes from your applications before initiating the import operation. You can re-enable writes when the import is completed. Neon does not currently support disabling database writes. Writes must be disabled at the application level.
 
-To request support for additional regions, please visit the [Hosting in other AWS regions](https://community.neon.tech/t/hosting-in-other-aws-regions/81/5) topic in the Neon Community Forum.
+To request support for additional regions, please sumbit a feature request on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
 
 <NeedHelp/>
