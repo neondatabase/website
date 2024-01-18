@@ -78,7 +78,7 @@ const items = [
         title: 'Neon Edge Analytics Astro Sample',
         description: 'A sample repository showing how to use Edge Analytics with Astro.',
         demoLink: '#',
-        sourceLink: 'https://github.com/PaulieScanlon/neon-edge-analytics-astro-sample',
+        sourceLink: 'https://github.com/neondatabase/neon-edge-analytics-astro-sample',
       },
     ],
   },
