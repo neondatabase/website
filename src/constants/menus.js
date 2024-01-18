@@ -141,6 +141,10 @@ export default {
           to: LINKS.changelog,
         },
         {
+          text: 'Demos',
+          to: LINKS.demos,
+        },
+        {
           text: 'Support',
           to: LINKS.support,
         },
