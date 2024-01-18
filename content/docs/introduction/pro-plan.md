@@ -17,7 +17,7 @@ Upgrading to the Neon Pro Plan gives you higher limits, advanced features, and a
 ### Higher limits
 
 - **More projects:** The Neon Pro Plan offers unlimited projects, while the Neon Free Tier offers only one. But what is a Neon project, and why would you need more than one? A project is a top-level container in Neon for your computes, branches, databases, and roles. Projects are a way to organize your resources and usage. If you are a company that develops data-driven applications, it might make sense to create a project for each client or each application. For information about objects that a project contains, see [The Neon object hierarchy](/docs/manage/overview).
-- **Unlimited storage:** The Neon Pro Plan supports any data size. There's a default limit of 200 GiB to protect your account from unintended use, but if you [open a support ticket](/docs/introduction/support), we can raise the limit to whatever you require.
+- **Unlimited storage:** The Neon Pro Plan supports any data size. There's a default logical data size limit of 200 GiB to protect your account from unintended use, but if you [open a support ticket](/docs/introduction/support), we can raise the limit to whatever you require.
 - **Unlimited branches:** With the Neon Pro Plan, there is no limit on branches. You can create as many branches as required to support your CI/CD pipeline. You can instantly and cost-effectively create a database branch for every preview deployment, client, or developer.
 - **Unlimited databases:** There is no limit on Postgres databases in any Neon plan. You can create as many databases as you need.
 

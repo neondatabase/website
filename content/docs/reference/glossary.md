@@ -213,9 +213,13 @@ A feature provided by some hypervisors, such as QEMU, that allows the transfer o
 
 A layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute instance. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly.
 
+### Logical data size
+
+For a Postgres database, it is the size of the database, including all tables, indexes, views, and stored procedures. In Neon, a branch can have multiple databases. The logical data size for a branch is therefore equal to the total logical size of all databases on the branch.
+
 ## Logical replication
 
-A method of replicating data between databases or platforms, focusing on replicating transactional changes (like `INSERT`, `UPDATE`, `DELETE`) rather than the entire database, enabling selective replication of specific tables or rows. Neon supports logical replication of data to external destinations. See [Logical replication](/docs/guides/logical-replication-guide). 
+A method of replicating data between databases or platforms, focusing on replicating transactional changes (like `INSERT`, `UPDATE`, `DELETE`) rather than the entire database, enabling selective replication of specific tables or rows. Neon supports logical replication of data to external destinations. See [Logical replication](/docs/guides/logical-replication-guide).
 
 ## LSN
 
