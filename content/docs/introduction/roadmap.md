@@ -12,11 +12,9 @@ As always, we are listening. If you see something you like, something you disagr
 
 <DetailIconCards>
 
-<a href="https://console.neon.tech/app/projects?modal=support" description="Send ideas or feedback" icon="github">Submit ideas</a>
+<a href="https://discord.com/channels/1176467419317940276/1176788564890112042" description="Send ideas to our feedback channel" icon="discord">Discord feedback</a>
 
 </DetailIconCards>
-
-![placedholder form](/docs/introduction/roadmap_placeholder_form.png)
 
 For the latest features and fixes, check our [Changelog](docs/changelog), updated every Friday. You can subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
