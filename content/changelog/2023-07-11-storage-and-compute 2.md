@@ -1,0 +1,13 @@
+### Same-region replicas
+
+Neon now supports same-region read replicas. Neon's read replicas are independent read-only compute instances designed to perform read operations on the same data as your read-write computes. You can instantly create one or more read replicas for any branch in your Neon project and configure the amount of vCP-U and memory allocated to each.
+![Read-only compute instances](/docs/introduction/read_replicas.png)
+
+Potential uses for read replicas include:
+
+- **Increasing throughput**: Distribute read requests among multiple read replicas to achieve higher throughput for both read-write and read-only workloads.
+- **Offloading read-only workloads**: Assign reporting or analytical workloads to a read replica to prevent impacting the performance of read-write application workloads.
+- **Managing data access**: Provide read-only data access to certain users or applications that do not need write access.
+- **Customizing resource usage**: Configure different CPU and memory resources for each read replica to cater to the specific needs of different users and applications.
+
+To learn more, refer to our [read replica blog post](https://neon.tech/blog/introducing-same-region-read-replicas-to-serverless-postgres) or read the documentation: [Read replicas](https://neon.tech/docs/introduction/read-replicas).
