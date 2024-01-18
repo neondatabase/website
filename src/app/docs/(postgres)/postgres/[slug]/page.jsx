@@ -70,7 +70,7 @@ const PostgresPage = async ({ params }) => {
           >
             official PostgreSQL documentation
           </Link>{' '}
-          is brought to you by Neon with ❤️.
+          is brought to you by Neon with ❤️
           <br className="flat-none sm:flat-break" /> Not all features and functions are supported.
           See <Link to="/docs/reference/compatibility">Postgres compatibility</Link> for details.
         </Admonition>

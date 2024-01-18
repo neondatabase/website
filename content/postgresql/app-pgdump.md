@@ -4,7 +4,7 @@
 
 pg\_dump — extract a PostgreSQL database into a script file or other archive file
 
-<Admonition type="warning" title="Neon note">
+<Admonition type="tip" title="Neon Postgres Note">
 Avoid using `pg_dump` over a [pooled Neon connection](https://neon.tech/docs/connect/connection-pooling) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an unpooled connection instead.
 </Admonition>
 
