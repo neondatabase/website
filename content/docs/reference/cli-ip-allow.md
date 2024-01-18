@@ -1,0 +1,150 @@
+---
+title: Neon CLI commands — ip-allow
+subtitle: Use the Neon CLI to manage Neon directly from the terminal
+enableTableOfContents: true
+updatedOn: '2023-12-01T19:05:09.476Z'
+---
+
+## Before you begin
+
+- Before running the `ip-allow` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
+- If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
+
+For information about Neon's **IP Allow** feature, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+
+## The `ip-allow` command
+
+The `ip-allow` command allows you to perform `list`, `add`, `remove`, and `reset` actions on the IP allowlist for your Neon project.
+
+### Usage
+
+```bash
+neonctl ip-allow <subcommand> [options]
+```
+
+| Subcommand  | Description      |
+|---------|------------------|
+| [list](#list)    | List the IP allowlist    |
+| [add](#add)  | Add IP addresses to the IP allowlist |
+| [remove](#remove)  | Remove IP addresses from the IP allowlist |
+| [reset](#reset)  | Reset the IP allowlist |
+
+### list
+
+This subcommand allows you to list addresses in the IP allowlist.
+
+#### Usage
+
+```bash
+neonctl ip-allow list [options]
+```
+
+#### Options
+
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `list` subcommand supports these options:
+
+| Option        | Description | Type   | Required  |
+| ------------- | ----------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
+
+#### Examples
+
+```bash
+neonctl ip-allow list
+```
+
+List the IP allowlist with the `--output` format set to `json`:
+
+```bash
+neonctl ip-allow list --output json
+```
+
+### add
+
+This subcommand allows you to add IP addresses or ranges to the IP allowlist for your Neon project.
+
+#### Usage
+
+```bash
+neonctl ip-allow add [ips ...] [options]
+```
+
+#### Options
+
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `add` subcommand supports these options:
+
+| Option        | Description | Type   | Required  |
+| ------------- | ----------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
+
+#### Example
+
+<CodeBlock shouldWrap>
+
+```bash
+neonctl ip-allow add 192.168.1.3
+```
+
+</CodeBlock>
+
+### remove
+
+This subcommand allows you to remove IP addresses from the IP allowlist for your project.
+
+#### Usage
+
+```bash
+neonctl ip-allow remove [ips ...] [options]
+```
+
+#### Options
+
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `remove` subcommand supports these options:
+
+| Option        | Description | Type   | Required  |
+| ------------- | ----------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
+
+#### Example
+
+<CodeBlock shouldWrap>
+
+```bash
+neonctl ip-allow remove 192.168.1.3
+```
+
+</CodeBlock>
+
+### reset
+
+This subcommand allows you to reset the IP allowlist back to the default, which removes all IP addresses from the IP allowlist. Running the reset command is equivalent to setting the allowlist to `0.0.0.0`, allowing any IP address to attempt a connection.
+
+#### Usage
+
+```bash
+neonctl ip-allow reset [options]
+```
+
+#### Options
+
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `reset` subcommand supports these options:
+
+| Option        | Description | Type   | Required  |
+| ------------- | ----------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
+
+#### Example
+
+<CodeBlock shouldWrap>
+
+```bash
+neonctl ip-allow reset
+```
+
+</CodeBlock>
+
+<NeedHelp/>
