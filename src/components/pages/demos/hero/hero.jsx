@@ -15,7 +15,7 @@ const items = [
     imageWidth: 716,
     imageHeight: 512,
     title:
-      'Postgres AI Playground: a SQL playground for Postgres where you can use AI to generate queries using natural language',
+      'Postgres AI Playground: an SQL playground for Postgres where you can use AI to generate queries using natural language',
     demoLink: '/demos/playground',
     sourceLink: 'https://github.com/neondatabase/postgres-ai-playground',
   },

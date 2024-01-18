@@ -19,7 +19,7 @@ const items = [
       {
         title: 'Preview Branches',
         description:
-          'An example project showing how you can create a branch for every preview deployment on Vercel. If you want to use this project as a playground, you can you can set it up locally.',
+          'An example project showing how you can create a branch for every preview deployment on Vercel. If you want to use this project as a playground, you can set it up locally.',
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/preview-branches-with-vercel',
       },
@@ -56,9 +56,9 @@ const items = [
     categoryTextColor: 'text-brown-70',
     items: [
       {
-        title: 'Replicas example',
+        title: 'Read replicas example',
         description:
-          'This example shows how to use database replication using the @prisma/extension-read-replicas extension in Prisma Client in a simple TypeScript script to read and write data in a PostgreSQL database.',
+          'This example shows how to use Neon read replicas with the @prisma/extension-read-replicas extension in Prisma Client to read and write data in a PostgreSQL database.',
         demoLink: '#',
         sourceLink: 'https://github.com/prisma/read-replicas-demo',
       },
@@ -141,13 +141,6 @@ const items = [
         demoLink: '#',
         sourceLink:
           'https://colab.research.google.com/github/neondatabase/neon-google-colab-notebooks/blob/main/chat_with_your_database_using_langchain.ipynb',
-      },
-      {
-        title: 'Google Colab with pgvecfor and Neon',
-        description: 'Use Google Colab , LangChain, and Neon for vector similarity search.',
-        demoLink: '#',
-        sourceLink:
-          'https://colab.research.google.com/github/neondatabase/neon-google-colab-notebooks/blob/main/neon_pgvector_quickstart.ipynb',
       },
     ],
   },
