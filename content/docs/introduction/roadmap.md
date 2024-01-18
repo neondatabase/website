@@ -6,14 +6,19 @@ redirectFrom:
   - /docs/reference/roadmap
 updatedOn: '2023-10-07T10:43:33.416Z'
 ---
-Our developers are focused on making Neon the default choice for serverless PostgreSQL. This roadmap describes committed features that are coming soon. We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion. 
+Our developers are focused on making Neon the default choice for serverless PostgreSQL. This roadmap describes committed features that are coming soon. We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion.
 
-As always, we are listening. If you see something you like, something you disagree with, or something you'd love for us to add, let us know. 
+As always, we are listening. If you see something you like, something you disagree with, or something you'd love for us to add, let us know.
+
+<DetailIconCards>
+
+<a href="https://console.neon.tech/app/projects?modal=support" description="Send ideas or feedback" icon="github">Submit ideas</a>
+
+</DetailIconCards>
 
 ![placedholder form](/docs/introduction/roadmap_placeholder_form.png)
 
 For the latest features and fixes, check our [Changelog](docs/changelog), updated every Friday. You can subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
-
 
 ## In progress
 
@@ -27,8 +32,8 @@ Here's a snapshot of what we're working on now:
 
 ### Developer workflows
 
-*  **Branch restore with Time Travel Assist**
-   
+* **Branch restore with Time Travel Assist**
+
     Instantly restore a branch to an earlier state in its history. Use Time Travel Assist to run queries against historical data, making sure you are restoring to the right point in time.
 
 ### Account management
@@ -36,7 +41,7 @@ Here's a snapshot of what we're working on now:
 * **Improved project sharing**
 
     We're making it easier to view who owns which projects when sharing projects with others. We're also improving how usage limits are handled between shared projects.
-    
+  
 ## Planned
 
 And here's a glimpse at the features we'll be taking on next:
@@ -55,10 +60,10 @@ And here's a glimpse at the features we'll be taking on next:
 
 ### Developer workflows
 
-*  **Additional branch restore features**
+* **Additional branch restore features**
 
     We'll also be adding more capabilities to branch restore, like restoring to another branch's history via timestamp or LSN, binary search to locate your LSN, and a schema comparison tool.
-    
+
 * **Improvements to Vercel integration**
 
     Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out of connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
@@ -76,7 +81,6 @@ In the spring of 2023, Neon launched [paid plans](https://neon.tech/pricing) wit
 In the summer of 2023, we released the [Neon CLI](/docs/reference/neon-cli). New features included a configurable [history retention](/docs/introduction/point-in-time-restore) window as well as support for Postgres 16 and the Isreal (Tel Aviv) region. We also announced [SOC 2 Type 1](https://neon.tech/blog/soc2-type-1#our-journey-to-soc2) compliance.
 
 In the fall of 2023, we added [IP allowlisting](/docs/introduction/ip-allow), email signup, and [logical replication](docs/introduction/logical-replication). We also announced [SOC 2 Type 2](https://neon.tech/blog/soc2-type2) compliance.
-
 
 ## Technical Preview
 
