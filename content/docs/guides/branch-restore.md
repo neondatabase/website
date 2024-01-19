@@ -28,7 +28,7 @@ It is important to understand that whenever you restore a branch, you are perfor
 
 #### Automatic backups
 
-In case you need to rollback the update, Neon preserves the branch's final state before the restore operation in an automatically created backup branch, which takes the following format:
+In case you need to rollback a restore, Neon preserves the branch's final state before the restore operation in an automatically created backup branch, which takes the following format:
 
 ```md
 {branch_name}_old_{head_timestamp}
