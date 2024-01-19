@@ -18,20 +18,29 @@ For the latest features and fixes, check our [Changelog](docs/changelog), update
 
 Here's a snapshot of what we're working on now:
 
-<div class="clearfix" style="border-bottom: 1px solid #959699; padding-bottom: 20px;">
-<h3>Observabiltiy</h3>
-<div style="float:left;margin-right: -15px;
-    margin-left: -15px;">
-<div style="width:40%">
-<p>Features and functions to help you understand what's happening with your usage and your database.
-</p>
-</div>
-<div style="float:left;width:60%">
-<p>Autoscaling visualizations</b><br/>Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time.</p>
-</div>
-</div>
-</div>
+<Tabs labels={["Observability", "Developer workflows","Account management","Regions"]}>
 
+<TabItem>
+### Autoscaling visualizations
+
+Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time
+<TabItem>
+<TabItem>
+### Autoscaling visualizations
+
+Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time
+<TabItem>
+<TabItem>
+### Autoscaling visualizations
+
+Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time
+<TabItem>
+<TabItem>
+### Autoscaling visualizations
+
+Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time
+<TabItem>
+</Tabs>
 ### Observability
 
 * **Autoscaling visualizations**
@@ -39,19 +48,6 @@ Here's a snapshot of what we're working on now:
     Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time.
 
 ### Developer workflows
-
-<div class="clearfix" style="border-bottom: 1px solid #959699; padding-bottom: 20px;">
-<h3>Observabiltiy</h3>
-<div class="row">
-<div class="col-md-7" style="padding-right: 30px;">
-<p>Features and functions to help you understand what's happening with your usage and your database.
-</p>
-</div>
-<div class="col-md-5">
-<p>Autoscaling visualizations</b><br/>Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time.</p>
-</div>
-</div>
-</div>
 
 * **Branch restore with Time Travel Assist**
 
