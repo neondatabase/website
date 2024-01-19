@@ -86,6 +86,11 @@ export default {
   pingThing: {
     robotsNoindex: 'noindex',
   },
+  demo: {
+    title: 'Serverless showcase: unleashing the power of Neon',
+    description: 'Explore interactive demos unveiling cutting-edge apps in the serverless era.',
+    pathname: LINKS.demos,
+  },
 };
 
 export const getBlogCategoryDescription = (category) => {

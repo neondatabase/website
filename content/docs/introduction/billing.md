@@ -1,7 +1,7 @@
 ---
 title: Billing metrics
 enableTableOfContents: true
-updatedOn: '2024-01-10T18:34:05.860Z'
+updatedOn: '2024-01-19T14:14:18.726Z'
 ---
 
 Neon [paid plans](/docs/introduction/plans#neon-plans) bill for usage based on the following metrics:
@@ -96,7 +96,7 @@ To estimate your own monthly _Compute time_ cost:
    ```
 
 <Admonition type="tip">
-Neon also provides calculators to help with cost estimates. See [Pricing calculators](#pricing-calculators).
+Neon also provides calculators to help with cost estimates. See [Pricing calculators](/docs/introduction/billing-calculators).
 </Admonition>
 
 ## Project storage

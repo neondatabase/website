@@ -10,6 +10,8 @@ module.exports = {
     '/stackoverflow',
     '/thank-you',
     '/docs/postgres*',
+    '/blog-sitemap.xml',
+    '/blog/*',
   ],
   generateRobotsTxt: true,
   robotsTxtOptions: {
@@ -27,5 +29,6 @@ module.exports = {
         ],
       },
     ],
+    additionalSitemaps: [`${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog-sitemap.xml`],
   },
 };
