@@ -14,7 +14,7 @@ The restore operation lets you revert the state of a selected branch to an earli
 
 ![branch restore to timestamp](/docs/guides/branch_restore_time.png)
 
-By default, your history retention is set to 7 days. You can revert a branch to any time within that configured [retention window](/docs/manage/projects#configure-history-retention), down to the millisecond.
+By default, the history retention for a Neon project is 7 days. You can revert a branch to any time within that configured [retention window](/docs/manage/projects#configure-history-retention), down to the millisecond.
 
 A few key points to keep in mind about the restore operation:
 - [Current data is overwritten](#overwrite-not-a-merge)
