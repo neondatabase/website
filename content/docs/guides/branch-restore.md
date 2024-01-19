@@ -66,7 +66,7 @@ Similar to the manual restore operation using the Neon Console and API described
 
 To help troubleshoot your data's history, you can use Time Travel Assist to run read-only queries against any selected timestamp within your history retention window. It's a good idea to run this kind of query to make sure you've targeted the correct restore point before you restore a branch.
 
-The restore operation and time travel assist are meant to work together. When you select a branch and timestamp, you are setting up Time Travel Assist to automatically query against that particular point in time.
+The restore operation and Time Travel Assist are meant to work together. When you select a branch and timestamp, you are setting up Time Travel Assist to automatically query against that particular point in time.
 
 ![Time travel assist](/docs/guides/branch_time_travel.png)
 
