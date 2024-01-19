@@ -1,6 +1,6 @@
 ---
 title: Branch Restore
-subtitle: Learn how to revert changes or recover lost data using Neon Branch Restore, with Time Travel Assist to query historical data as part of your restore workflow.
+subtitle: Learn how to revert changes or recover lost data using Neon Branch Restore with Time Travel Assist
 enableTableOfContents: true
 ---
 
