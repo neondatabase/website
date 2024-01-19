@@ -3,7 +3,7 @@ title: Neon Pro Plan
 subtitle: Learn about the advantages of upgrading to the Neon Pro Plan
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-01-10T18:34:05.861Z'
+updatedOn: '2024-01-19T14:14:18.727Z'
 ---
 
 The Neon Pro Plan plan is intended for users who have completed their evaluation of Neon on the Neon Free Tier and are ready to transition to a production-level plan with higher limits and advanced features.
@@ -17,7 +17,7 @@ Upgrading to the Neon Pro Plan gives you higher limits, advanced features, and a
 ### Higher limits
 
 - **More projects:** The Neon Pro Plan offers unlimited projects, while the Neon Free Tier offers only one. But what is a Neon project, and why would you need more than one? A project is a top-level container in Neon for your computes, branches, databases, and roles. Projects are a way to organize your resources and usage. If you are a company that develops data-driven applications, it might make sense to create a project for each client or each application. For information about objects that a project contains, see [The Neon object hierarchy](/docs/manage/overview).
-- **Unlimited storage:** The Neon Pro Plan supports any data size. There's a default limit of 200 GiB to protect your account from unintended use, but if you [open a support ticket](/docs/introduction/support), we can raise the limit to whatever you require.
+- **Unlimited storage:** The Neon Pro Plan supports any data size. There's a default logical data size limit of 200 GiB to protect your account from unintended use, but if you [open a support ticket](/docs/introduction/support), we can raise the limit to whatever you require.
 - **Unlimited branches:** With the Neon Pro Plan, there is no limit on branches. You can create as many branches as required to support your CI/CD pipeline. You can instantly and cost-effectively create a database branch for every preview deployment, client, or developer.
 - **Unlimited databases:** There is no limit on Postgres databases in any Neon plan. You can create as many databases as you need.
 
@@ -38,11 +38,11 @@ The Neon Pro Plan comes with the following advanced features, and we plan to add
 
 ### Added support
 
-In addition to the [community forum](https://community.neon.tech/) and the ability to open support tickets, Neon Pro Plan users have access to Neon Support via video chat. Please [open a support ticket](/docs/introduction/support) to request a video chat.
+In addition to our [Discord Server](https://discord.com/invite/92vNTzKDGp) and the ability to open support tickets, Neon Pro Plan users have access to Neon Support via video chat. Please [open a support ticket](/docs/introduction/support) to request a video chat.
 
 ## How does billing work?
 
-The Neon Pro Plan bills for usage monthly. Please refer to our [Billing metrics](/docs/introduction/billing) page for information about metrics and rates. To estimate monthly costs, try the [pricing calculator](/calculator) or the [Pro Plan Cost Estimator](/docs/introduction/billing#pro-plan-cost-estimator) in the Neon Console. If you still have questions or need help estimating costs, please reach out to our [Sales](/contact-sales) team. We're ready to help.
+The Neon Pro Plan bills for usage monthly. Please refer to our [Billing metrics](/docs/introduction/billing) page for information about metrics and rates. To estimate monthly costs, try the [pricing calculator](https://neon.tech/calculator) or the [Pro Plan Cost Estimator](/docs/introduction/billing#pro-plan-cost-estimator) in the Neon Console. If you still have questions or need help estimating costs, please reach out to our [Sales](/contact-sales) team. We're ready to help.
 
 ## How do I upgrade to Pro?
 

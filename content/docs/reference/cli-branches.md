@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-01-10T17:27:58.302Z'
+updatedOn: '2024-01-19T14:15:57.929Z'
 ---
 
 ## Before you begin
@@ -130,7 +130,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--compute`| Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute` | boolean |    |
 | `--type` | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas).                                     | string |             |
 | `--suspend-timeout` | Duration of inactivity in seconds after which the compute endpoint is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number |             |
-| `--psql` | Connect to a new branch via `psql` | boolean |             |
+| `--psql` | Connect to a new branch via `psql`. `psql` must be installed to use this option. | boolean |             |
 
 #### Examples
 
@@ -164,7 +164,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 - Create a branch with the `--output` format of the command set to `json`. This output format returns all of the branch response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
 
     ```bash
-    neonctl branches create --output json 
+    neonctl branches create --output json
+    ```
+
+    <details>
+    <summary>Example output</summary>
+    ```json 
     {
     "branch": {
         "id": "br-frosty-art-30264288",
@@ -223,32 +228,51 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ]
     }
     ```
+    </details>
 
 - Create a branch with a user-defined name:
 
-```bash
-neonctl branches create --name mybranch
-```
+    ```bash
+    neonctl branches create --name mybranch
+    ```
 
 - Create a branch with a read-only compute endpoint (a [read replica](/docs/introduction/read-replicas))
 
-```bash
-neonctl branches create --name my_read_replica_branch --type read_only
-```
+    ```bash
+    neonctl branches create --name my_read_replica_branch --type read_only
+    ```
 
 - Create a branch from a parent branch other than your `main` branch
 
-```bash
-neonctl branches create --name my_child_branch --parent mybranch
-```
+    ```bash
+    neonctl branches create --name my_child_branch --parent mybranch
+    ```
 
 - Create a point-in-time restore branch by specifying the `--parent` option with a timestamp:
 
-```bash
-neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
-```
+    ```bash
+    neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
+    ```
 
-The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+    The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+
+- Create a branch and connect to it with `psql`.
+
+    ```bash
+    neonctl branch create --psql
+    ```
+
+- Create a branch, connect to it with `psql`, and run an `.sql` file. 
+
+    ```bash
+    neonctl branch create --psql -- -f dump.sql
+    ```
+
+- Create a branch, connect to it with `psql`, and run a query.
+
+    ```bash
+    neonctl branch create --psql -- -c "SELECT version()"
+    ```
 
 ### reset
 

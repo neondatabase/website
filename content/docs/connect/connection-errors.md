@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2024-01-10T21:54:09.238Z'
+updatedOn: '2024-01-11T16:20:34.884Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -16,6 +16,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [Can't reach database server](#cant-reach-database-server)
 - [Error undefined: Database error](#error-undefined-database-error)
 - [Terminating connection due to administrator command](#terminating-connection-due-to-administrator-command)
+- [Unsupported startup parameter](#unsupported-startup-parameter)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -195,16 +196,16 @@ If you encounter this error, you can try adjusting the timing of your query or r
 
 ## Unsupported startup parameter
 
-This error might be in two variations:
+This error is reported in two variations:
 
 ```text
 unsupported startup parameter: <...>
 ```
-or 
+
 ```text
 unsupported startup parameter in options: <...>
 ```
 
-The error occurs when using a pooled Neon connection string with startup options that are not supported by PgBouncer. PgBouncer allows only startup parameters it can keep track of in startup packets: `client_encoding`, `datestyle`, `timezone`, and `standard_conforming_strings`. See [ignore_startup_parameters](ignore_startup_parameters). To resolve this issue, you can either remove the unsupported parameter from your connection string or use an unpooled Neon connection string. For more information about pooled and unpooled connections in Neon, see [Connection pooling](/docs/connect/connection-pooling).
+The error occurs when using a pooled Neon connection string with startup options that are not supported by PgBouncer. PgBouncer allows only startup parameters it can keep track of in startup packets. These include: `client_encoding`, `datestyle`, `timezone`, `standard_conforming_strings`, and `application_name`. See **track_extra_parameters**, in the [PgBouncer documentation](https://www.pgbouncer.org/config.html#track_extra_parameters). To resolve this error, you can either remove the unsupported parameter from your connection string or use an unpooled Neon connection string. For information about pooled and unpooled connections in Neon, see [Connection pooling](/docs/connect/connection-pooling).
 
 <NeedHelp/>

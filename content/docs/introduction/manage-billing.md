@@ -1,7 +1,7 @@
 ---
 title: Manage billing
 enableTableOfContents: true
-updatedOn: '2023-10-24T18:56:54.989Z'
+updatedOn: '2024-01-12T16:49:12.349Z'
 ---
 
 A Neon account subscribed to a paid plan can manage billing from the **Billing** page in the Neon Console. On the **Billing** page, you can:
@@ -72,3 +72,11 @@ Downgrading from the Neon Pro Plan transitions your account to the Neon Free Tie
 You will be required to remove any projects, branches, or data that exceed [Neon Free Tier](/docs/introduction/free-tier) limits. The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade).
 
 To downgrade from Enterprise or Platform Partnership plans, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans is handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
+
+## Purchase Neon on AWS Marketplace
+
+As an alternative Neon billing, you can purchase Neon on the [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-o32z34khv4272?sr=0-1&applicationId=AWSMPContessa&utm_campaign=Developer%20Days&utm_source=hs_email&utm_medium=email&_hsenc=p2ANqtz-8U-1v7Sm5HHexFnV3Mkkwwsq5hnq9ThQnbQOqhuB11RT9cNwtAoalhaq98WMgL70rwfFhq) or through the [AWS Private Offers](https://docs.aws.amazon.com/marketplace/latest/userguide/private-offers-overview.html) program.
+
+Purchasing Neon from the AWS Marketplace gives you consolidated billing, seamless provisioning, and the ability to use AWS credits on Neon.
+
+If you have any questions about this billing option, please reach out to our [Sales](https://neon.tech/contact-sales) team. 

@@ -359,6 +359,7 @@ const getAllWpPosts = async () => {
               slug
             }
           }
+          modifiedGmt
           excerpt
           slug
           title(format: RENDERED)

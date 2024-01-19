@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/billing#neon-plans
-updatedOn: '2024-01-10T18:34:05.861Z'
+updatedOn: '2024-01-19T14:12:56.665Z'
 ---
 
 Neon offers the following plans: **Free Tier**, **Pro**, and **Custom**. The Neon Pro Plan is _usage-based_, ensuring you never over-provision and only pay for what you use. **Custom** plans are volume-based, offering potential discounts. The table below provides an overview of plans offered by Neon. For more information about a particular plan, refer to the individual plan pages:
@@ -40,7 +40,7 @@ For information about how Neon bills for paid plans, please refer to our [Billin
 
 **Notes:**
 
-- The Neon Pro Plan has default limits of 20 projects, 200 GiB of storage, and 20 simultaneously active computes to protect against unintended usage. To increase these limits, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available.
+- The Neon Pro Plan has default limits of 20 projects, 20 simultaneously active computes, and 200 GiB of logical data storage to protect against unintended usage. To increase these limits, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available.
 - The Neon Free Tier has an [Active time](/docs/reference/glossary#active-time) limit of 100 hours per month, but that limit only affects non-primary branch compute usage. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. **Your primary branch compute always remains available regardless of the limit, ensuring that access to data on your primary branch is never interrupted.** You can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**. The _Active time_ limit resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _Active time_ limit will reset on February 1st.
 
 ## Support
