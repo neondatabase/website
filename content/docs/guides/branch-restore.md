@@ -10,7 +10,7 @@ With Neon's branch restore capability, you can easily restore a branch to an ear
 
 ### Restore from history
 
-The restore operation lets you revert the state of a selected branch to an earlier point in time. For example, revert to just before some corruption or loss of data.
+The restore operation lets you revert the state of a selected branch to an earlier point in time. For example, you can revert to a state just before a data loss occurred.
 
 ![branch restore to timestamp](/docs/guides/branch_restore_time.png)
 
