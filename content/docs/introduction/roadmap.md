@@ -18,51 +18,10 @@ For the latest features and fixes, check our [Changelog](docs/changelog), update
 
 Here's a snapshot of what we're working on now:
 
-<Tabs labels={["Observability", "Developer workflows","Account management","Regions"]}>
-
-<TabItem>
-We know you want to see what's happening with your Neon usage and your Postgres databases. Coming soon:
-
-* **Autoscaling visualizations**
-
-    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time
-</TabItem>
-
-<TabItem>
-
-We aim to make managing your database infrastructure as seamless a part of your developer team's workflow as managing your source code. Coming soon:
-
-* **Branch restore with Time Travel Assist**
-
-    Instantly restore a branch to an earlier state in its history. Use Time Travel Assist to run queries against historical data, making sure you are restoring to the right point in time.
-
-    We'll be adding the ability to restore to another branch as well soon after.
-
-    If there are any new branching features that you think could help your development team's workflow, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042).
-
-* **Improvements to Vercel integration**
-
-    Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out of connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
-
-</TabItem>
-<TabItem>
-
-* **Organization support**
-
-We are adding features to support using Neon in your organization. Later, we'll add support for managing individual teams within the organization as well.
-
-* **Improved project sharing**
-
-We're making it easier to view who owns which projects when sharing projects with others. We're also improving how usage limits are handled between shared projects.
-</TabItem>
-
-<TabItem>
-
-* **Australia**
-
-Adding regional support for Australia.
-</TabItem>
-</Tabs>
+* [Observability](#observability)
+* [Developer workflows](#developer-workflows)
+* [Account management](#account-management)
+* [More regions](#more-regions)
 
 ### Observability
 
