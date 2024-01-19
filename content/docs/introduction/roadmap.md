@@ -18,6 +18,20 @@ For the latest features and fixes, check our [Changelog](docs/changelog), update
 
 Here's a snapshot of what we're working on now:
 
+<div class="clearfix" style="border-bottom: 1px solid #959699; padding-bottom: 20px;">
+<h3>Observabiltiy</h3>
+<div style="float:left;margin-right: -15px;
+    margin-left: -15px;">
+<div style="width:40%">
+<p>Features and functions to help you understand what's happening with your usage and your database.
+</p>
+</div>
+<div style="float:left;width:60%">
+<p>Autoscaling visualizations</b><br/>Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time.</p>
+</div>
+</div>
+</div>
+
 ### Observability
 
 * **Autoscaling visualizations**
@@ -26,13 +40,26 @@ Here's a snapshot of what we're working on now:
 
 ### Developer workflows
 
+<div class="clearfix" style="border-bottom: 1px solid #959699; padding-bottom: 20px;">
+<h3>Observabiltiy</h3>
+<div class="row">
+<div class="col-md-7" style="padding-right: 30px;">
+<p>Features and functions to help you understand what's happening with your usage and your database.
+</p>
+</div>
+<div class="col-md-5">
+<p>Autoscaling visualizations</b><br/>Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time.</p>
+</div>
+</div>
+</div>
+
 * **Branch restore with Time Travel Assist**
 
     Instantly restore a branch to an earlier state in its history. Use Time Travel Assist to run queries against historical data, making sure you are restoring to the right point in time.
 
     We'll be adding the ability to restore to another branch as well soon after.
 
-    If you have any new branching features you think will help your development team's workflow, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042).
+    If there are any new branching features that you think could help your development team's workflow, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042).
 
 * **Improvements to Vercel integration**
 
