@@ -29,7 +29,7 @@ Adding dynamic charts, populated with real-time data, to help you visualize how 
 ### Autoscaling visualizations
 
 Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time
-<T/abItem>
+</TabItem>
 <TabItem>
 ### Autoscaling visualizations
 
