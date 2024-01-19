@@ -5,6 +5,7 @@ import aiIcon from 'icons/header/ai.svg';
 import autoscalingIcon from 'icons/header/autoscaling.svg';
 import branchingIcon from 'icons/header/branching.svg';
 import careersIcon from 'icons/header/careers.svg';
+import caseStudiesIcon from 'icons/header/case-studies.svg';
 import cliIcon from 'icons/header/cli.svg';
 import partnersIcon from 'icons/header/partners.svg';
 import onDemandStorageIcon from 'icons/header/storage.svg';
@@ -82,6 +83,12 @@ export default {
           text: 'Partners',
           description: 'Become a partner',
           to: LINKS.partners,
+        },
+        {
+          icon: caseStudiesIcon,
+          text: 'Case studies',
+          description: 'Explore customer stories',
+          to: LINKS.caseStudies,
         },
       ],
     },
