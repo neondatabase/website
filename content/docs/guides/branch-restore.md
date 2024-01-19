@@ -4,7 +4,7 @@ subtitle: Learn how to revert changes or recover lost data using Neon Branch Res
 enableTableOfContents: true
 ---
 
-With Neon's copy-on-write branch creation capability, just as you can instantly create branches from any point in your history retention window, you can just as easily restore a branch to an earlier state in that history. You can also use Time Travel Assist to help troubleshoot issues: run read-only queries against any point in your history retention window as a way to pinpoint the exact moment you need to restore to, before you proceed.
+With Neon's branch restore capability, you can easily restore a branch to an earlier state in its history. You can also use Time Travel Assist to run read-only queries against any point in your history retention window to pinpoint the exact moment you need to restore to.
 
 ## How it works
 
