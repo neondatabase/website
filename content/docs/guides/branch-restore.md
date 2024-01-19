@@ -48,7 +48,7 @@ Existing connections are temporarily interrupted during the restore operation. H
 
 #### Technical details
 
-At Neon we aim for transparency, so if you are interested in understanding the technical implementation behind the scenes, see the details below.
+At Neon we aim for transparency, so if you are interested in understanding the technical implementation of a branch restore operation, see the details below.
 
 <details>
 <summary>View technical details</summary>
