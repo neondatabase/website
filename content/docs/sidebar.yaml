@@ -296,7 +296,7 @@
       items:
         - title: Google Colab
           slug: ai/ai-google-colab
-- title: Postgres
+- title: Postgres guides
   items:
     - title: Extensions
       slug: extensions/pg-extensions
@@ -315,6 +315,8 @@
           slug: functions/json_build_object
         - title: json_extract_path
           slug: functions/json_extract_path
+        - title: array_to_json
+          slug: functions/array_to_json
 - title: Import data
   slug: import/import-intro
   items:
