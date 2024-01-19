@@ -51,13 +51,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Examples
 
 ```bash
-neonctl ip-allow list
+neonctl ip-allow list --project-id cold-grass-40154007
 ```
 
 List the IP allowlist with the `--output` format set to `json`:
 
 ```bash
-neonctl ip-allow list --output json
+neonctl ip-allow list --project-id cold-grass-40154007 --output json
 ```
 
 ### add
@@ -78,13 +78,14 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | ------------- | ----------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
+| `--project-id`  | If true, the list will be applied only to the primary branch. Use `--primary-branch false` to remove this setting. | string | |
 
 #### Example
 
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl ip-allow add 192.168.1.3
+neonctl ip-allow add 192.168.1.3 --project-id cold-grass-40154007
 ```
 
 </CodeBlock>
@@ -113,7 +114,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl ip-allow remove 192.168.1.3
+neonctl ip-allow remove 192.168.1.3 --project-id cold-grass-40154007
 ```
 
 </CodeBlock>
@@ -142,7 +143,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 <CodeBlock shouldWrap>
 
 ```bash
-neonctl ip-allow reset 192.168.1.1
+neonctl ip-allow reset 192.168.1.1 --project-id cold-grass-40154007
 ```
 
 </CodeBlock>

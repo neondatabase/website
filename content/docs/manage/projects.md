@@ -228,15 +228,16 @@ neonctl ip-allow add 192.168.1.1 192.168.1.2
 └─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
 ```
 
-To apply an IP allowlist to the primary branch only, use the [Neon CLI projects command](/docs/reference/cli-projects) with the `--ip-primary-only` option:
+To apply an IP allowlist to the primary branch only, use the you can `--primary-only` option:
 
 ```bash
-neonctl projects update wispy-haze-26469780 --ip-primary-only
-┌─────────────────────┬─────────────────────┬───────────────┬──────────────────────┐
-│ Id                  │ Name                │ Region Id     │ Created At           │
-├─────────────────────┼─────────────────────┼───────────────┼──────────────────────┤
-│ wispy-haze-26469780 │ wispy-haze-26469780 │ aws-us-east-2 │ 2024-01-17T20:36:27Z │
-└─────────────────────┴─────────────────────┴───────────────┴──────────────────────┘
+neonctl ip-allow add 192.168.1.1 --primary-only
+```
+
+To reverse that setting, use `--primary-only false`.
+
+```bash
+neonctl ip-allow add 192.168.1.1 --primary-only false
 ```
 
 </TabItem>
@@ -304,7 +305,7 @@ This list combines individual IP addresses, a range of IP addresses, and a CIDR 
 
 #### Update an IP Allow configuration
 
-You can update your IP Allow configuration via the Neon Console or API as described in [Configure IP Allow](#configure-ip-allow). WReplace the current configuration with the new configuration. For example, if your IP Allow configuration currently allows access from IP address `192.168.1.1`, and you want to extend access to IP address `192.168.1.2`, specify both addresses in your new configuration: `192.168.1.15, 192.168.1.15`. You cannot append values to an existing configuration. You can only replace an existing configuration with a new one.
+You can update your IP Allow configuration via the Neon Console or API as described in [Configure IP Allow](#configure-ip-allow). Replace the current configuration with the new configuration. For example, if your IP Allow configuration currently allows access from IP address `192.168.1.1`, and you want to extend access to IP address `192.168.1.2`, specify both addresses in your new configuration: `192.168.1.1, 192.168.1.2`. You cannot append values to an existing configuration. You can only replace an existing configuration with a new one.
 
 The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](/docs/reference/cli-ip-allow).
 
