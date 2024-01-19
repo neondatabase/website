@@ -96,7 +96,7 @@ To estimate your own monthly _Compute time_ cost:
    ```
 
 <Admonition type="tip">
-Neon also provides calculators to help with cost estimates. See [Pricing calculators](#pricing-calculators).
+Neon also provides calculators to help with cost estimates. See [Pricing calculators](/docs/introduction/billing-calculators).
 </Admonition>
 
 ## Project storage
