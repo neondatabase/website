@@ -40,7 +40,7 @@ You can use this backup to rollback the restore operation if necessary.
 
 A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. Keep this in mind when restoring branches. For example, let's say you want to restore lost data in a given database. If you restore your branch to an earlier point in time before the data loss occurred, the operation applies to _all_ databases on the branch, not just the one you are troubleshooting.
 
-In general, Neon recommends that you avoid overstuffing a project with too many databases. If you have multiple, distinct applications, each one deserves its own Neon project. A good rule of thumb: one Neon project per source code repository.
+In general, Neon recommends that you avoid creating too many databases in a single Neon project. If you have multiple, distinct applications, each one deserves its own Neon project. A good rule of thumb: use one Neon project per source code repository.
 
 #### Connections temporarily interrupted
 
