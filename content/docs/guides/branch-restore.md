@@ -129,7 +129,7 @@ Adjust your selected timestamp accordingly.
 
 ## Billing considerations
 
-There are minimal impacts to billing from these two related features.
+There are minimal impacts to billing from the branch restore and Time Travel Assist features.
 
 ### Restore from history (billing)
 
