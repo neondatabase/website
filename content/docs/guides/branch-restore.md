@@ -100,7 +100,7 @@ All databases on your selected branch are instantly updated with the data and sc
 To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it.
 If you do need to revert your changes, you can manually make the backup branch your primary branch using the steps described in [Branching - Point in time restore](/docs/guides/branching-pitr#change-your-primary-branch). 
 
-<Admonition type="note">
+<Admonition type="coming soon">
 Restoring to another branch is coming soon. See our [roadmap](/docs/introduction/roadmap). Once available, you will be able to restore to any other branch, including this restore backup, using a similar one-click operation.
 </Admonition>
 
@@ -131,13 +131,13 @@ Adjust your selected timestamp accordingly.
 
 There are minimal impacts to billing from these two related features.
 
-**Restore from history**
+### Restore from history (billing)
 
 Restoring a branch to its own history adds to your number of branches &#8212; due to the restore_backup branch &#8212; but since they do not have any compute endpoint attached, they do not add to any consumption costs.
 
 ```//The retore_backup branches add to write costs. But since that is removed in v2Billing, let's not mention here. However, two questions I'm not clear about: 1) Do restore-backup branches add to synthetic storage size and so incur some small cost there? 2) What happens when the restore_backup branch ages out of your retention window? are these deleted automatically before that point?//```
 
-**Time travel queries**
+### Time travel queries (billing)
 
 The ephemeral endpoints used to run your Time Travel Assist queries do contribute to your consumption usage totals for the billing period, like any other active endpoint that consumes resource.
 
