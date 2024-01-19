@@ -34,7 +34,7 @@ In case you need to rollback a restore, Neon preserves the branch's final state 
 {branch_name}_old_{head_timestamp}
 ```
 
-You can use this backup to rollback the restore operation if necessary.
+You can use this backup to rollback the restore operation if necessary. The backup branches are listed on the **Branches** page in the Neon Console among your other branches.
 
 #### Changes apply to all databases
 
