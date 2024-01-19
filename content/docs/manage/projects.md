@@ -306,7 +306,7 @@ This list combines individual IP addresses, a range of IP addresses, and a CIDR 
 
 You can update your IP Allow configuration via the Neon Console or API as described in [Configure IP Allow](#configure-ip-allow). WReplace the current configuration with the new configuration. For example, if your IP Allow configuration currently allows access from IP address `192.168.1.1`, and you want to extend access to IP address `192.168.1.2`, specify both addresses in your new configuration: `192.168.1.15, 192.168.1.15`. You cannot append values to an existing configuration. You can only replace an existing configuration with a new one.
 
-The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](https://neon.tech/docs/reference/cli-ip-allow).
+The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](/docs/reference/cli-ip-allow).
 
 #### Remove an IP Allow configuration
 
