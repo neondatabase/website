@@ -352,7 +352,7 @@ curl --request POST \
 
 To improve the documentation readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
 
-There are 5 types of Admonition: `note`, `important`, `tip`, `warning`, `info`, `comingSoon`; the default is `note`.
+There are 6 types of Admonition: `note`, `important`, `tip`, `warning`, `info`, `comingSoon`; the default is `note`.
 
 You may also specify an optional title with prop `title`.
 

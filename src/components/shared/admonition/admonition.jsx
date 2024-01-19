@@ -7,7 +7,7 @@ const titleClassNames = {
   tip: 'text-primary-2',
   warning: 'text-secondary-1',
   info: 'text-gray-5',
-  comingSoon: 'text-[#9580FF] dark:text-secondary-5',
+  comingSoon: 'text-secondary-5',
 };
 
 const borderClassNames = {
@@ -16,7 +16,7 @@ const borderClassNames = {
   tip: 'border-primary-2',
   warning: 'border-secondary-1',
   info: 'border-gray-new-70',
-  comingSoon: 'border-[#9580FF] dark:border-secondary-5',
+  comingSoon: 'border-secondary-5',
 };
 
 const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => {
