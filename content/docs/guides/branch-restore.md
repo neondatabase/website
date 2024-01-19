@@ -18,7 +18,7 @@ By default, the history retention for a Neon project is 7 days. You can revert a
 
 A few key points to keep in mind about the restore operation:
 - [Current data is overwritten](#overwrite-not-a-merge)
-- [Restore backups are created automatically](#automatic-backups)
+- [Restore backups are created automatically in case you make a mistake](#automatic-backups)
 - [All databases on a branch are updated](#changes-apply-to-all-databases)
 - [Connections are temporarily interrupted](#connections-temporarily-interrupted)
 
