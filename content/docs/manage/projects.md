@@ -327,7 +327,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 
 <TabItem>
 
-Specify the `--ip-allow reset` option without specifying any IP address values.
+The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports removing an IP Allow configuration. Specify `--ip-allow reset` without specifying any IP address values to remove an IP Allow configuration.
 
 ```bash
 neonctl ip-allow reset
