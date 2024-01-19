@@ -127,7 +127,7 @@ Depending on your query and the selected timestamp, instead of a table of result
 
 Adjust your selected timestamp accordingly.
 
-## Billing
+## Billing considerations
 
 There are minimal impacts to billing from these two related features.
 
