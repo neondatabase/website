@@ -110,6 +110,10 @@ export default {
           to: LINKS.partners,
         },
         {
+          text: 'Case studies',
+          to: LINKS.caseStudies,
+        },
+        {
           text: 'Trust',
           to: LINKS.trust,
         },
@@ -121,7 +125,6 @@ export default {
           text: 'Contact Sales',
           to: LINKS.contactSales,
         },
-
         // {
         //   text: 'Changelog',
         //   to: LINKS.changelog,
