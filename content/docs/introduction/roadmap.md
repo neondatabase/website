@@ -24,23 +24,24 @@ Here's a snapshot of what we're working on now:
 ### Autoscaling visualizations
 
 Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time
-<TabItem>
-<TabItem>
-### Autoscaling visualizations
-
-Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time
-<TabItem>
+</TabItem>
 <TabItem>
 ### Autoscaling visualizations
 
 Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time
-<TabItem>
+<T/abItem>
 <TabItem>
 ### Autoscaling visualizations
 
 Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time
+</TabItem>
 <TabItem>
+### Autoscaling visualizations
+
+Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time
+</TabItem>
 </Tabs>
+
 ### Observability
 
 * **Autoscaling visualizations**
