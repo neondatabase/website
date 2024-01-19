@@ -78,7 +78,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | ------------- | ----------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
-| `--project-id`  | If true, the list will be applied only to the primary branch. Use `--primary-branch false` to remove this setting. | string | |
+| `--primary-branch`  | If true, the list will be applied only to the primary branch. Use `--primary-branch false` to remove this setting. | string | |
 
 #### Example
 
