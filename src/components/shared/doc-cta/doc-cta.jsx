@@ -14,7 +14,7 @@ const DEFAULT_DATA = {
 
 const DocCta = ({
   title = DEFAULT_DATA.title,
-  children = DEFAULT_DATA.description,
+  description = DEFAULT_DATA.description,
   buttonText = DEFAULT_DATA.buttonText,
   buttonUrl = DEFAULT_DATA.buttonUrl,
 }) => (
@@ -23,7 +23,9 @@ const DocCta = ({
       <h2 className="!my-0 text-[28px] font-medium leading-dense md:text-[26px] xs:text-2xl">
         {title}
       </h2>
-      <p className="mt-2 text-sm font-light text-gray-new-20 dark:text-gray-new-80">{children}</p>
+      <p className="mt-2 text-sm font-light text-gray-new-20 dark:text-gray-new-80">
+        {description}
+      </p>
     </div>
     <Button className="px-6 py-3 font-semibold leading-none md:mt-4" to={buttonUrl} theme="primary">
       {buttonText}
@@ -33,7 +35,7 @@ const DocCta = ({
 
 DocCta.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.node,
+  description: PropTypes.node,
   buttonText: PropTypes.string,
   buttonUrl: PropTypes.string,
 };

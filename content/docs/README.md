@@ -375,6 +375,34 @@ Example:
 
 </details>
 
+## CTA
+
+This is a simple block with title, description text and one CTA button that accomplish certain actions.
+
+```md
+
+<CTA />
+
+```
+
+Check the example for default data of CTA block
+
+<details>
+<summary>Example</summary>
+
+![CTA example](cta-example.jpg)
+
+</details>
+
+
+To change text in CTA block, you can pass to the component props `title`, `description`, `buttonText`, `buttonUrl`:
+
+```md
+
+<CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL editor. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+
+```
+
 ## Images
 
 The images should be sourced in `public/docs` directory and be used in `.md` with the relative path, that begins with a `/` slash
