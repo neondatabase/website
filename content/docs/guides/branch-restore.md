@@ -36,6 +36,10 @@ In case you need to rollback a restore, Neon preserves the branch's final state 
 
 You can use this backup to rollback the restore operation if necessary. The backup branches are listed on the **Branches** page in the Neon Console among your other branches.
 
+The backup becomes the parent of your original branch, which makes rolling back simple: just a [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) if you want to revert the restore operation.
+
+![Backup branch as parent to original](/docs/guides/branch_restore_backup.png)
+
 #### Changes apply to all databases
 
 A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. Keep this in mind when restoring branches. For example, let's say you want to restore lost data in a given database. If you restore your branch to an earlier point in time before the data loss occurred, the operation applies to _all_ databases on the branch, not just the one you are troubleshooting.
@@ -98,11 +102,7 @@ All databases on your selected branch are instantly updated with the data and sc
 ![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
 
 To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it.
-If you do need to revert your changes, you can manually make the backup branch your primary branch using the steps described in [Branching - Point in time restore](/docs/guides/branching-pitr#change-your-primary-branch). 
-
-<Admonition type="coming soon">
-Restoring to another branch is coming soon. See our [roadmap](/docs/introduction/roadmap). Once available, you will be able to restore to any other branch, including this restore backup, using a similar one-click operation.
-</Admonition>
+If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branches relationship to this restore point backup.
 
 ### Performing time travel queries
 
