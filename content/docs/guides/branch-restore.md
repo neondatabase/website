@@ -72,7 +72,7 @@ The restore operation and Time Travel Assist are meant to work together. When yo
 
 #### About ephemeral endpoints
 
-Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done your time travel querying. The endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done your time travel querying. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
 
 However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
 
