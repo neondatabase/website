@@ -113,3 +113,9 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 If you have questions about Neon or Postgres, reach out to Neon community members and developers on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
 
 <CommunityBanner buttonText="Join server" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Welcome to the Neon Discord Server!</CommunityBanner>
+
+<Admonition type="comingSoon">
+
+Restoring to another branch is coming soon. See our Roadmap. Once available, you will be able to restore to any other branch, including this restore backup, using a similar one-click operation.
+
+</Admonition>
