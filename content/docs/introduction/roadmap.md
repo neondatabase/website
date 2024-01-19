@@ -8,13 +8,13 @@ updatedOn: '2023-10-07T10:43:33.416Z'
 ---
 Our developers are focused on making Neon the default choice for serverless PostgreSQL. This roadmap describes committed features that are coming soon. We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion.
 
-As always, we are listening. If you see something you like, something you disagree with, or something you'd love for us to add, let us know.
+As always, we are listening. If you see something you like, something you disagree with, or something you'd love for us to add, let us know in our Discord feedback channel.
 
 <CommunityBanner buttonText="🙏 | feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Share your ideas</CommunityBanner>
 
 For the latest features and fixes, check our [Changelog](docs/changelog), updated every Friday. You can subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
-## In progress
+## Coming soon
 
 Here's a snapshot of what we're working on now:
 
@@ -30,21 +30,13 @@ Here's a snapshot of what we're working on now:
 
     Instantly restore a branch to an earlier state in its history. Use Time Travel Assist to run queries against historical data, making sure you are restoring to the right point in time.
 
-### Account management
+    We'll be adding the ability to restore to another branch as well soon after.
 
-* **Improved project sharing**
+    If you have any new branching features you think will help your development team's workflow, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042).
 
-    We're making it easier to view who owns which projects when sharing projects with others. We're also improving how usage limits are handled between shared projects.
-  
-## Planned
+* **Improvements to Vercel integration**
 
-And here's a glimpse at the features we'll be taking on next:
-
-### More regions
-
-* **Australia**
-
-    Adding regional support for Australia.
+    Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out of connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
 
 ### Account management
 
@@ -52,15 +44,15 @@ And here's a glimpse at the features we'll be taking on next:
 
     We are adding features to support using Neon in your organization. Later, we'll add support for managing individual teams within the organization as well.
 
-### Developer workflows
+* **Improved project sharing**
 
-* **Additional branch restore features**
+    We're making it easier to view who owns which projects when sharing projects with others. We're also improving how usage limits are handled between shared projects.
 
-    We'll also be adding more capabilities to branch restore, like restoring to another branch's history via timestamp or LSN, binary search to locate your LSN, and a schema comparison tool.
+### More regions
 
-* **Improvements to Vercel integration**
+* **Australia**
 
-    Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out of connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
+    Adding regional support for Australia.
 
 ## A brief history of Neon
 
