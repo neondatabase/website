@@ -84,7 +84,7 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [Retool](https://retool.com/) | |
 | [TablePlus](https://tableplus.com/) | SNI support on macOS since build 436, and on Windows since build 202. No SNI support on Linux currently. For older versions, use [SNI workaround B](/docs/connect/connection-errors#b-use-libpq-keyvalue-syntax-in-the-database-field). |
 | [Segment](https://segment.com/) | Requires [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) |
-| [Skyvia](https://skyvia.com/) | Requires settign the **SSL Mode** option to `Require`, and **SSL TLS Protocol** to 1.2 |
+| [Skyvia](https://skyvia.com/) | Requires setting the **SSL Mode** option to `Require`, and **SSL TLS Protocol** to 1.2 |
 
 ## Connection issues
 
