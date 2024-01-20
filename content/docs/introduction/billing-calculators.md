@@ -2,7 +2,7 @@
 title: Pricing calculators
 enableTableOfContents: true
 subtitle: Get familiar with Neon billing using our pricing calculators
-updatedOn: '2024-01-03T21:00:38.274Z'
+updatedOn: '2024-01-19T14:14:18.726Z'
 ---
 
 If you already have a sense of your sizing and usage needs, we recommend that you try out the [Pricing Calculator](#pricing-calculator) on our website or our [Pro Plan Cost Estimator](#pro-plan-cost-estimator) in the Neon Console. These tools let you estimate monthly costs based on the billing metrics above.
@@ -18,7 +18,7 @@ These questions translate into the metrics [active time](/docs/introduction/bill
 
 ## Pricing calculator
 
-The [Pricing](https://neon.tech/pricing) page on the Neon website provides a [calculator](https://neon.tech/calculator) that allows you to estimate monthly costs based on usage amounts that you provide.
+The Neon website provides a [pricing calculator](https://neon.tech/calculator) that allows you to estimate monthly costs based on usage amounts that you provide.
 
 ![Pricing page calculator](/docs/introduction/pricing_page_calculator.png)
 

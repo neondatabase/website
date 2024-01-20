@@ -2,7 +2,7 @@
 title: Neon CLI commands — connection-string
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-01-10T17:27:58.302Z'
+updatedOn: '2024-01-19T14:15:57.930Z'
 ---
 
 ## Before you begin
@@ -14,7 +14,7 @@ For information about connecting to Neon, see [Connect from any application](/do
 
 ## The `connection-string` command
 
-This command constructs a Postgres connection string for connecting to a database in your Neon project. You can construct a connection string for any database in any branch. The connection string includes the password for the specified role.
+This command gets a Postgres connection string for connecting to a database in your Neon project. You can construct a connection string for any database in any branch. The connection string includes the password for the specified role.
 
 ### Usage
 
@@ -38,11 +38,11 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--prisma` | Construct a connection string for use with Prisma. The default is `false`. |boolean||
 | `--endpoint-type` | The compute endpoint type. The default is `read-write`. The choise are `read_only` and `read_write`` |string||
 | `--extended` | Show extended information. The default is `false`. |boolean||
-| `--psql` | Connect to a database via psql using connection string. The default is `false`. |boolean||
+| `--psql` | Connect to a database via psql using connection string. `psql` must be installed to use this option. |boolean||
 
 ### Examples
 
-- Generate a basic connection string for the current project, branch, and database:
+- Get a basic connection string for the current project, branch, and database:
 
     <CodeBlock shouldWrap>
 
@@ -53,7 +53,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     </CodeBlock>
 
-- Generate a pooled connection string for the current project, branch, and database with the `--pooled` option. This option adds a `-pooler` flag to the host name which enables connection pooling for clients that use this connection string.
+- Get a pooled connection string for the current project, branch, and database with the `--pooled` option. This option adds a `-pooler` flag to the host name which enables connection pooling for clients that use this connection string.
 
     <CodeBlock shouldWrap>
 
@@ -64,7 +64,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     </CodeBlock>
 
-- Generate a connection string for use with Prisma for the current project, branch, and database. The `--prisma` options adds `connect_timeout=30` option to the connection string to ensure that connections from Prisma Client do not timeout.
+- Get a connection string for use with Prisma for the current project, branch, and database. The `--prisma` options adds `connect_timeout=30` option to the connection string to ensure that connections from Prisma Client do not timeout.
 
     <CodeBlock shouldWrap>
 
@@ -74,5 +74,23 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ```
 
     </CodeBlock>
+
+- Get a connection string and connect with `psql`.
+
+    ```bash
+    neonctl connection-string --psql
+    ```
+
+- Get a connection string, connect with `psql`, and run an `.sql` file.
+
+    ```bash
+    neonctl connection-string --psql -- -f dump.sql
+    ```
+
+- Get a connection string, connect with `psql`, and run a query.
+
+    ```bash
+    neonctl connection-string --psql -- -c "SELECT version()"
+    ```
 
 <NeedHelp/>
