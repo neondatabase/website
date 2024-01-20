@@ -1,5 +1,5 @@
 ---
-title: Postgres json_array_elements function
+title: Postgres json_array_elements() function
 subtitle: Expand a JSON array into a set of rows
 enableTableOfContents: true
 updatedOn: '2024-01-17T19:25:02.781Z'

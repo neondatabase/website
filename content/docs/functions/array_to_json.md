@@ -1,6 +1,6 @@
 ---
-title: Postgres array_to_json function
-subtitle: "Converts an SQL array to a JSON array."
+title: Postgres array_to_json() function
+subtitle: Converts an SQL array to a JSON array
 enableTableOfContents: true
 ---
 

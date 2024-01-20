@@ -1,6 +1,6 @@
 ---
-title: Postgres json_build_object function
-subtitle: Builds a JSON object out of a variadic argument list.
+title: Postgres json_build_object() function
+subtitle: Builds a JSON object out of a variadic argument list
 enableTableOfContents: true
 updatedOn: '2024-01-10T17:58:09.720Z'
 ---

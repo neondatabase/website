@@ -1,5 +1,5 @@
 ---
-title: Postgres json_extract_path function
+title: Postgres json_extract_path() function
 subtitle: Extracts a JSON sub-object at the specified path
 enableTableOfContents: true
 updatedOn: '2024-01-17T19:44:54.849Z'
