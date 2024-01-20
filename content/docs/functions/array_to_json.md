@@ -35,7 +35,7 @@ VALUES ('Jane Doe', '{books, music, travel}');
 ```
 
 ```text
- id |   name   |      preferences       
+ id  |   name   |      preferences       
 ----+----------+------------------------
   1 | John Doe | {clothing,electronics}
   2 | Jane Doe | {books,music,travel}
@@ -51,7 +51,7 @@ FROM customers;
 This query returns the following result:
 
 ```text
- id |   name   |      json_preferences      
+ id  |   name   |      json_preferences      
 ----+----------+----------------------------
   1 | John Doe | ["clothing","electronics"]
   2 | Jane Doe | ["books","music","travel"]
@@ -84,7 +84,7 @@ VALUES (2, 123, 2), (2, 456, 3), (2, 789, 4);
 ```
 
 ```text
- id | user_id | product_id | quantity 
+ id  | user_id | product_id | quantity 
 ----+---------+------------+----------
   1 |       1 |        123 |        1
   2 |       1 |        456 |        2
@@ -98,7 +98,7 @@ You can utilize `array_to_json` to create a clean and efficient `JSON` represent
 
 In the example below, the `row_to_json` function converts each row of the result set into a `JSON` object.
 
-The `array_agg` function is an aggregate function that aggregates multiple values into an array. It is used here to aggregate the `JSON` objects created by row_to_json into a `JSON` array.
+The `array_agg` function is an aggregate function that aggregates multiple values into an array. It is used here to aggregate the `JSON` objects created by `row_to_json` into a `JSON` array.
 
 ```sql
 SELECT array_to_json(
@@ -117,7 +117,7 @@ This query returns the following result:
 [{"product_id":123,"quantity":1},{"product_id":456,"quantity":2},{"product_id":789,"quantity":3}]
 ```
 
-Resulting `JSON` structure:
+And this is the resulting `JSON` structure:
 
 
 ```json
@@ -139,7 +139,7 @@ Resulting `JSON` structure:
 
 ### Handling `NULL` values
 
-The `array_to_json` function handles `NULL` values gracefully, representing them as `JSON` null within the resulting array.
+The `array_to_json` function handles `NULL` values gracefully, representing them as `JSON` `null` within the resulting array.
 
 Let's consider a `survey_responses` table representing a survey where each participant can provide multiple responses to different questions. Some participants may not answer all questions, leading to `NULL` values in the data.
 
@@ -159,7 +159,7 @@ INSERT INTO survey_responses (participant_name, responses) VALUES
 ```
 
 ```text
- participant_id | participant_name |   responses    
+ participant_id  | participant_name |   responses    
 ----------------+------------------+----------------
               1 | Participant A    | {Yes,No,Maybe}
               2 | Participant B    | {Yes,NULL,No}
@@ -217,7 +217,9 @@ This query returns the following result:
 ```text
                items               
 -----------------------------------
- [{"product_id":123,"quantity":1},+ {"product_id":456,"quantity":2},+ {"product_id":789,"quantity":3}]
+ [{"product_id":123,"quantity":1},+
+  {"product_id":456,"quantity":2},+
+  {"product_id":789,"quantity":3}]
 ```
 
 > The output displayed in `psql` might be truncated or wrap long lines for visual clarity.
