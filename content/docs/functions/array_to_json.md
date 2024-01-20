@@ -181,12 +181,12 @@ FROM
 This query returns the following result:
 
 ```
-  participant_id | participant_name |    responses_json    
-----------------+------------------+----------------------
-              1 | Participant A    | ["Yes","No","Maybe"]
-              2 | Participant B    | ["Yes",null,"No"]
-              3 | Participant C    | [null,"No","Yes"]
-              4 | Participant D    | ["Yes","No",null]
+participant_id | participant_name | responses_json    
+--------------+-----------------=+---------------------
+            1 | Participant A    | ["Yes","No","Maybe"]
+            2 | Participant B    | ["Yes",null,"No"]
+            3 | Participant C    | [null,"No","Yes"]
+            4 | Participant D    | ["Yes","No",null]
 ```
 
 ## Additional considerations
