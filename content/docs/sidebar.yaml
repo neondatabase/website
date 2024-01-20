@@ -290,7 +290,7 @@
       items:
         - title: Google Colab
           slug: ai/ai-google-colab
-- title: Postgres guides
+- title: Postgres
   items:
     - title: Extensions
       items:
