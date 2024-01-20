@@ -34,7 +34,7 @@ INSERT INTO customers (name, preferences)
 VALUES ('Jane Doe', '{books, music, travel}');
 ```
 
-```text
+```
  id  |   name   |      preferences       
 ----+----------+------------------------
   1 | John Doe | {clothing,electronics}
@@ -50,7 +50,7 @@ FROM customers;
 
 This query returns the following result:
 
-```text
+```
  id  |   name   |      json_preferences      
 ----+----------+----------------------------
   1 | John Doe | ["clothing","electronics"]
@@ -83,7 +83,7 @@ INSERT INTO cart_items (user_id, product_id, quantity)
 VALUES (2, 123, 2), (2, 456, 3), (2, 789, 4);
 ```
 
-```text
+```
  id  | user_id | product_id | quantity 
 ----+---------+------------+----------
   1 |       1 |        123 |        1
@@ -105,16 +105,16 @@ SELECT array_to_json(
  array_agg(row_to_json(t))
 ) AS items
 FROM (
-     select product_id, quantity from cart_items WHERE user_id = 1
+     SELECT product_id, quantity FROM cart_items WHERE user_id = 1
    ) t;
 ```
 
 This query returns the following result:
 
-```text
-|items|                                           
-|-----|
-[{"product_id":123,"quantity":1},{"product_id":456,"quantity":2},{"product_id":789,"quantity":3}]
+```shell
+                                               items                                               
+---------------------------------------------------------------------------------------------------
+ [{"product_id":123,"quantity":1},{"product_id":456,"quantity":2},{"product_id":789,"quantity":3}]
 ```
 
 And this is the resulting `JSON` structure:
@@ -158,7 +158,7 @@ INSERT INTO survey_responses (participant_name, responses) VALUES
    ('Participant D', ARRAY['Yes', 'No', NULL]);
 ```
 
-```text
+```
  participant_id  | participant_name |   responses    
 ----------------+------------------+----------------
               1 | Participant A    | {Yes,No,Maybe}
@@ -180,8 +180,8 @@ FROM
 
 This query returns the following result:
 
-```text
- participant_id | participant_name |    responses_json    
+```
+  participant_id | participant_name |    responses_json    
 ----------------+------------------+----------------------
               1 | Participant A    | ["Yes","No","Maybe"]
               2 | Participant B    | ["Yes",null,"No"]
@@ -214,7 +214,7 @@ FROM (
 
 This query returns the following result:
 
-```text
+```
                items               
 -----------------------------------
  [{"product_id":123,"quantity":1},+
@@ -222,7 +222,9 @@ This query returns the following result:
   {"product_id":789,"quantity":3}]
 ```
 
-> The output displayed in `psql` might be truncated or wrap long lines for visual clarity.
+<Admonition type="note">
+The output displayed in `psql` might be truncated or wrap long lines for visual clarity.
+</Admonition> 
 
 ## Resources
 
