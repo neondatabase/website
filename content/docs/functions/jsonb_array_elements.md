@@ -4,34 +4,19 @@ subtitle: "Expands a JSONB array into a set of rows."
 enableTableOfContents: true
 ---
 
-
-Use `jsonb_array_elements` to expand a JSONB array into a set of rows, each containing one element of the array. It is a simpler option compared to complex looping logic. It is also more efficient than executing the same operation on the application side by reducing data transfer and processing overhead.
-
+You can use the `jsonb_array_elements` function to expand a `JSONB` array into a set of rows, each containing one element of the array. It is a simpler option compared to complex looping logic. It is also more efficient than executing the same operation on the application side by reducing data transfer and processing overhead.
 
 Function signature:
-
 
 ```sql
 jsonb_array_elements(json)
 ```
 
-
 ## `jsonb_array_elements` example
-
 
 Suppose you have a table with developer info:
 
-
 **developers**
-
-```text
-| id |  name   |          skills          
-|----|---------|---------------------------
-| 1  | Alice   | ["Java", "Python", "SQL"]
-| 2  | Bob     | ["C++", "JavaScript"]
-| 3  | Charlie | ["HTML", "CSS", "React"]
-```
-
 
 ```sql
 CREATE TABLE developers (
@@ -40,24 +25,27 @@ CREATE TABLE developers (
  skills JSONB
 );
 
-
 INSERT INTO developers (id, name, skills) VALUES
  (1, 'Alice', '["Java", "Python", "SQL"]'),
  (2, 'Bob', '["C++", "JavaScript"]'),
  (3, 'Charlie', '["HTML", "CSS", "React"]');
 ```
 
-
+```
+| id |  name   |          skills          
+|----|---------|---------------------------
+| 1  | Alice   | ["Java", "Python", "SQL"]
+| 2  | Bob     | ["C++", "JavaScript"]
+| 3  | Charlie | ["HTML", "CSS", "React"]
+```
 
 Now, let's say you want to extract each individual skill from the skills JSON array. You can use `jsonb_array_elements` for that:
-
 
 ```sql
 SELECT id, name, skill
 FROM developers,
     jsonb_array_elements(skills) AS skill;
 ```
-
 
 This query returns the following values:
 
@@ -74,15 +62,13 @@ This query returns the following values:
 | 3  | Charlie | "React"
 ```
 
-
 ## Advanced examples
 
+This section shows advanced `jsonb_array_elements` examples.
 
 ## Filtering
 
-
 You can use the `jsonb_array_elements` function to extract the sizes from the JSON data and then filter the products based on a specific color (or size):
-
 
 ```sql
 SELECT *
@@ -92,41 +78,32 @@ WHERE 'Blue' IN (
 );
 ```
 
-
 This query returns the following values:
 
 ```text
-| id |   name   |                               details                                |
+| id |   name   |                               details                                  |
 |----|----------|------------------------------------------------------------------------|
-|  1 | T-Shirt  | {"sizes": ["S", "M", "L", "XL"], "colors": ["Red", "Blue", "Green"]} |
-|  4 | Jeans    | {"sizes": ["28", "30", "32", "34"], "colors": ["Blue", "Black"]}     |
+|  1 | T-Shirt  | {"sizes": ["S", "M", "L", "XL"], "colors": ["Red", "Blue", "Green"]}   |
+|  4 | Jeans    | {"sizes": ["28", "30", "32", "34"], "colors": ["Blue", "Black"]}       |
 ```
-
-
 
 ## Handling null
 
-
 Update the table to insert another product (Socks) with one of the values in the `sizes` as null:
-
 
 **products**
 
 ```text
 | id |  name   |                                 details                                 |
 |----|---------|-------------------------------------------------------------------------|
-|  6 | Socks   | {"sizes": ["S", null, "L", "XL"], "colors": ["White", "Black", "Gray"]}|
+|  6 | Socks   | {"sizes": ["S", null, "L", "XL"], "colors": ["White", "Black", "Gray"]} |
 ```
-
 
 ```sql
 INSERT INTO products (id, name, details) VALUES (6, 'Socks', '{"sizes": ["S", null, "L", "XL"], "colors": ["White", "Black", "Gray"]}');
 ```
 
-
-
 Querying for Socks shows how null values in an array is handled:
-
 
 ```sql
 SELECT
@@ -138,10 +115,9 @@ FROM products AS p,
 WHERE name = 'Socks';
 ```
 
-
 This query returns the following values:
 
-```text
+```
 | id | name  | size |
 |----|-------|------|
 |  6 | Socks | "S"  |
@@ -152,20 +128,17 @@ This query returns the following values:
 
 ## ORDINALITY
 
-
 Let's consider a scenario where you have a table named workflow with a JSONB column steps representing sequential steps in a workflow:
-
 
 **workflow**
 
-```text
+```
 | id |    workflow_name    |                                          steps                                            |
 |----|---------------------|------------------------------------------------------------------------------------------|
 |  1 | Employee Onboarding | {"tasks": ["Submit Resume", "Interview", "Background Check", "Offer", "Orientation"]} |
 |  2 | Project Development | {"tasks": ["Requirement Analysis", "Design", "Implementation", "Testing", "Deployment"]}|
 |  3 | Order Processing    | {"tasks": ["Order Received", "Payment Verification", "Packing", "Shipment", "Delivery"]}|
 ```
-
 
 ```sql
 CREATE TABLE workflow (
@@ -174,18 +147,13 @@ CREATE TABLE workflow (
    steps JSONB
 );
 
-
 INSERT INTO workflow (workflow_name, steps) VALUES
    ('Employee Onboarding', '{"tasks": ["Submit Resume", "Interview", "Background Check", "Offer", "Orientation"]}'),
    ('Project Development', '{"tasks": ["Requirement Analysis", "Design", "Implementation", "Testing", "Deployment"]}'),
    ('Order Processing', '{"tasks": ["Order Received", "Payment Verification", "Packing", "Shipment", "Delivery"]}');
 ```
 
-
 Each workflow consists of a series of tasks, and you want to extract and display the tasks along with their order in the workflow.
-
-
-
 
 ```sql
 SELECT
@@ -197,10 +165,9 @@ FROM
    jsonb_array_elements(steps->'tasks') WITH ORDINALITY AS task;
 ```
 
-
 This query returns the following values:
 
-```text
+```
 |    workflow_name    |       task_name        | task_order |
 |---------------------|------------------------|------------|
 | Employee Onboarding | "Submit Resume"        |          1 |
@@ -222,12 +189,9 @@ This query returns the following values:
 
 ### Nested arrays
 
-
 You can also handle nested arrays with `jsonb_array_elements`.
 
-
 Consider a scenario where each product has multiple variants, and each variant has an array of sizes and an array of colors.
-
 
 **electronics_products**
 
@@ -251,9 +215,7 @@ INSERT INTO electronics_products (id, name, details) VALUES
  (2, 'Smartphone', '{"variants": [{"model": "X", "sizes": ["5.5 inch", "6 inch"], "colors": ["Black", "Gold"]}, {"model": "Y", "sizes": ["6.2 inch", "6.7 inch"], "colors": ["Blue", "Red"]}]}');
 ```
 
-
 To handle the nested arrays and extract information about each variant:
-
 
 ```sql
 SELECT
@@ -269,10 +231,7 @@ FROM
   jsonb_array_elements_text(variant->'colors') AS t2(color);
 ```
 
-
 This query returns the following values:
-
-
 
 ```text
 | id |    name    | model |   size   | color  |
@@ -295,35 +254,30 @@ This query returns the following values:
 |  2 | Smartphone | Y     | 6.7 inch | Red    |
 ```
 
-
-
 ### Using joins
-
 
 Let's assume you want to retrieve a list of users along with their roles in each organization.
 
-
 **organizations**
 
-```text
+```
 | id |                           members                            |
 |----|--------------------------------------------------------------|
 |  1 | [{"id": 23, "role": "admin"}, {"id": 24, "role": "default"}] |
-|  2 | [{"id": 23, "role": "user"}]                                  |
+|  2 | [{"id": 23, "role": "user"}]                                 |
 |  3 | [{"id": 24, "role": "admin"}, {"id": 25, "role": "default"}] |
-|  4 | [{"id": 25, "role": "user"}]                                  |
+|  4 | [{"id": 25, "role": "user"}]                                 |
 ```
 
 **users**
 
-```text
-| id  | name  |      email      |
+```
+| id  | name  |      email       |
 |-----|-------|------------------|
 | 23  | Max   | max@gmail.com    |
 | 24  | Joe   | joe@gmail.com    |
 | 25  | Alice | alice@gmail.com  |
 ```
-
 
 ```sql
 CREATE TABLE organizations (
@@ -331,13 +285,11 @@ CREATE TABLE organizations (
    members JSONB
 );
 
-
 CREATE TABLE users (
    id INTEGER PRIMARY KEY,
    name TEXT,
    email TEXT
 );
-
 
 INSERT INTO organizations (members) VALUES
    ('[{ "id": 23, "role": "admin" }, { "id": 24, "role": "default" }]'),
@@ -345,16 +297,13 @@ INSERT INTO organizations (members) VALUES
    ('[{ "id": 24, "role": "admin" }, { "id": 25, "role": "default" }]'),
    ('[{ "id": 25, "role": "user" }]');
 
-
 INSERT INTO users (id, name, email) VALUES
    (23, 'Max', 'max@gmail.com'),
    (24, 'Joe', 'joe@gmail.com'),
    (25, 'Alice', 'alice@gmail.com');
 ```
 
-
-You can use the `jsonb_array_elements` function to extract the members from the JSONB array in the `organizations` table and then join with the `users` table.
-
+You can use the `jsonb_array_elements` function to extract the members from the `JSONB` array in the `organizations` table and then join with the `users` table.
 
 ```sql
 SELECT
@@ -369,10 +318,9 @@ JOIN jsonb_array_elements(o.members) AS m ON true
 JOIN users u ON m->>'id' = u.id::TEXT;
 ```
 
-
 This query returns the following values:
 
-```text
+```
 | organization_id | user_id | user_name |   user_email    | member_role |
 |-----------------|---------|-----------|-----------------|-------------|
 |               2 |      23 | Max       | max@gmail.com   | user        |
@@ -383,17 +331,15 @@ This query returns the following values:
 |               3 |      25 | Alice     | alice@gmail.com | default     |
 ```
 
-
 ## Additional considerations
 
+This section outlines additional considerations including alternative functions.
 
 ### Alternative option - jsonb_array_elements_text
-
 
 Prefer `jsonb_array_elements` when you need to maintain the JSON structure of the elements for further JSON-related operations or analysis and `jsonb_array_elements_text` if you need to work with the extracted elements as plain text for string operations, text analysis, or integration with text-based functions.
 
 If you want to create a comma-separated list of all skills for each developer in the **developers** tables, `jsonb_array_elements_text` can be used along with `string_agg`.
-
 
 ```sql
 SELECT name, string_agg(skill, ',') AS skill_list
@@ -401,18 +347,17 @@ FROM developers, jsonb_array_elements_text(skills) AS skill
 GROUP BY name;
 ```
 
-
 This query returns the following values:
 
-```text
+```
 |  name   |   skill_list    |
 |---------|-----------------|
-|  Alice  | Java,Python,SQL  |
+|  Alice  | Java,Python,SQL |
 |   Bob   | C++,JavaScript  |
 | Charlie | HTML,CSS,React  |
 ```
 
-Using `jsonb_array_elements` would result in an error because it returns JSONB values, which cannot be directly concatenated with the string operator.
+Using `jsonb_array_elements` would result in an error because it returns `JSONB` values, which cannot be directly concatenated with the string operator.
 
 
 ```sql
@@ -421,28 +366,22 @@ FROM developers, jsonb_array_elements(skills) AS skill
 GROUP BY name;
 ```
 
-
 **jsonb_path_query**
 
+`jsonb_path_query` uses JSON Path expressions for flexible navigation and filtering within `JSONB` structures and returns a JSONB array containing matching elements. It supports filtering within the path expression itself, enabling complex conditions and excels at navigating and extracting elements from nested arrays and objects.
 
-`jsonb_path_query` uses JSON Path expressions for flexible navigation and filtering within JSONB structures and returns a JSONB array containing matching elements. It supports filtering within the path expression itself, enabling complex conditions and excels at navigating and extracting elements from nested arrays and objects.
-
-
-If your query involves navigating through multiple levels of nesting, complex filtering conditions, or updates to JSONB data, `jsonb_path_query` is often the preferred choice.
-
+If your query involves navigating through multiple levels of nesting, complex filtering conditions, or updates to `JSONB` data, `jsonb_path_query` is often the preferred choice.
 
 Consider a simple example - to extract the first skill of each developer in the **developers** table:
-
 
 ```sql
 SELECT jsonb_path_query(skills, '$[0]') AS first_skill
 FROM developers;
 ```
 
-
 This query returns the following values:
 
-```text
+```
 | first_skill |
 |-------------|
 |   "Java"    |

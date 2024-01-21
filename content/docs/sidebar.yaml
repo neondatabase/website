@@ -313,7 +313,6 @@
           slug: functions/json_array_elements
         - title: jsonb_array_elements
           slug: functions/jsonb_array_elements
-          slug: functions/json_extract_path
         - title: json_build_object
           slug: functions/json_build_object
         - title: json_extract_path
