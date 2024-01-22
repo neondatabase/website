@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Element, scroller } from 'react-scroll';
 
 import useWindowSize from 'hooks/use-window-size';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 export const MOBILE_WIDTH = 768;
 
@@ -92,6 +93,7 @@ const Select = (props) => {
         <ul className="mt-7 grid gap-y-5 lg:mt-5">
           {items.map((item) => {
             const { title, description } = item;
+
             return (
               <li className="group overflow-hidden rounded-[10px]" key={title}>
                 <button
@@ -106,6 +108,11 @@ const Select = (props) => {
                     onHover(type, item);
                     setIsSelected(true);
                     setActiveItems({ ...activeItems, [type]: item });
+                    sendSegmentEvent('pricing_wizard_clicked', {
+                      step: index + 1,
+                      button: title,
+                    });
+
                     if (!allItemsSelected) {
                       scroller.scrollTo(nextId, {
                         duration: 400,
