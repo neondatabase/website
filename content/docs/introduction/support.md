@@ -20,7 +20,7 @@ All Neon users can join the [Neon Discord Server](/discord) or [Neon Discourse C
 
 ## Open a support ticket
 
-[Neon Pro Plan](/docs/introduction/pro-plan) and [Custom Plan](/docs/introduction/custom-plan) users can open a support ticket from the Neon console. Look for the **Support** link in the sidebar. It opens the **Create Support Ticket** modal, where you can describe your issue.
+[Neon Pro Plan](/docs/introduction/pro-plan) and [Custom Plan](/docs/introduction/custom-plan) users can open a support ticket in the Neon Console. Look for the **Support** link in the sidebar. It opens the **Create Support Ticket** modal, where you can describe your issue. You can also access the modal directly, by [clicking here](https://console.neon.tech/app/projects?modal=support).
 
 ![Support ticket modal](/docs/introduction/neon-support-modal.png)
 
