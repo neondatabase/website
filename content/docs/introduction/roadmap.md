@@ -41,17 +41,13 @@ Here's a snapshot of what we're working on now:
 
 * **Improvements to Vercel integration**
 
-    Adding support for GitHub and Bitbucket as part of the Vercel integration. Additionally, to ensure that users of the integration that access Neon from Vercel's serverless environment do not run out of connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
+    To ensure that users of the integration that access Neon from Vercel's serverless environment do not run out of connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
 
 ### Account management
 
 * **Organization support**
 
     We are adding features to support using Neon in your organization. Later, we'll add support for managing individual teams within the organization as well.
-
-* **Improved project sharing**
-
-    We're making it easier to view who owns which projects when sharing projects with others. We're also improving how usage limits are handled between shared projects.
 
 ### More regions
 
