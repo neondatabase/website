@@ -1,27 +1,47 @@
-import { getServerSideSitemap } from 'next-sitemap';
-
 import { getAllWpBlogCategories, getAllWpPosts } from 'utils/api-posts';
 
-// eslint-disable-next-line import/prefer-default-export
 export async function GET() {
-  // eslint-disable-next-line no-undef
+  const headers = new Headers();
+  headers.set('Content-Type', 'application/xml');
+
   const wpPosts = await getAllWpPosts();
   const wpCategories = await getAllWpBlogCategories();
 
-  const wpPostEntries = wpPosts.map((post) => ({
-    loc: `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog/${post.slug}`,
-    lastmod: new Date(post.modifiedGmt).toISOString(),
-    changefreq: 'daily',
-    priority: 0.7,
-  }));
-
-  const wpCategoryEntries = wpCategories.map((category) => ({
-    loc: `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog/category/${category.slug}`,
-    lastmod: new Date().toISOString(),
-    changefreq: 'daily',
-    priority: 0.7,
-  }));
-
-  const entries = [...wpPostEntries, ...wpCategoryEntries];
-  return getServerSideSitemap(entries);
+  return new Response(
+    `<?xml version="1.0" encoding="UTF-8" ?>
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+            ${wpPosts
+              .map(
+                (post) => `
+                <url>
+                    <loc>${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog/${post.slug}</loc>
+                    <lastmod>${new Date(post.modifiedGmt).toISOString()}</lastmod>
+                    <changefreq>daily</changefreq>
+                    <priority>0.7</priority>
+                </url>
+            `
+              )
+              .join('')}
+            ${wpCategories
+              .map(
+                (category) => `
+                <url>
+                    <loc>${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog/category/${
+                      category.slug
+                    }</loc>
+                    <lastmod>${new Date().toISOString()}</lastmod>
+                    <changefreq>daily</changefreq>
+                    <priority>0.7</priority>
+                </url>
+                `
+              )
+              .join('')}
+        </urlset>
+    `,
+    {
+      headers,
+    }
+  );
 }
+
+export const revalidate = 0;
