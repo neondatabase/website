@@ -36,7 +36,7 @@ In case you need to rollback a restore, Neon preserves the branch's final state 
 
 You can use this backup to rollback the restore operation if necessary. The backup branches are listed on the **Branches** page in the Neon Console among your other branches.
 
-The backup becomes the parent of your original branch, which makes rolling back simple: just a [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) if you want to revert the restore operation.
+This backup becomes the parent of your original branch, which makes rolling back the restore operation simple: [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
 
 ![Backup branch as parent to original](/docs/guides/branch_restore_backup.png)
 
