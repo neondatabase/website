@@ -1,6 +1,6 @@
 ---
-title: Postgres jsonb_array_elements function
-subtitle: "Expands a JSONB array into a set of rows."
+title: Postgres jsonb_array_elements() function
+subtitle: Expands a JSONB array into a set of rows
 enableTableOfContents: true
 ---
 
@@ -14,7 +14,7 @@ jsonb_array_elements(json)
 
 ## `jsonb_array_elements` example
 
-Suppose you have a table with developer info:
+Suppose you have a table with information about developers:
 
 **developers**
 
@@ -39,7 +39,7 @@ INSERT INTO developers (id, name, skills) VALUES
 | 3  | Charlie | ["HTML", "CSS", "React"]
 ```
 
-Now, let's say you want to extract each individual skill from the skills JSON array. You can use `jsonb_array_elements` for that:
+Now, let's say you want to extract each individual skill from the skills `JSON` array. You can use `jsonb_array_elements` for that:
 
 ```sql
 SELECT id, name, skill
@@ -68,7 +68,7 @@ This section shows advanced `jsonb_array_elements` examples.
 
 ## Filtering
 
-You can use the `jsonb_array_elements` function to extract the sizes from the JSON data and then filter the products based on a specific color (or size):
+You can use the `jsonb_array_elements` function to extract the sizes from the `JSON` data and then filter the products based on a specific color (or size):
 
 ```sql
 SELECT *
@@ -89,7 +89,7 @@ This query returns the following values:
 
 ## Handling null
 
-Update the table to insert another product (Socks) with one of the values in the `sizes` as null:
+This example updates the table to insert another product (`Socks`) with one of the values in the `sizes` as `null`:
 
 **products**
 
@@ -103,7 +103,7 @@ Update the table to insert another product (Socks) with one of the values in the
 INSERT INTO products (id, name, details) VALUES (6, 'Socks', '{"sizes": ["S", null, "L", "XL"], "colors": ["White", "Black", "Gray"]}');
 ```
 
-Querying for Socks shows how null values in an array is handled:
+Querying for `Socks` shows how null values in an array are handled:
 
 ```sql
 SELECT
@@ -128,17 +128,9 @@ This query returns the following values:
 
 ## ORDINALITY
 
-Let's consider a scenario where you have a table named workflow with a JSONB column steps representing sequential steps in a workflow:
+Let's consider a scenario where you have a table named `workflow` with a `JSONB` column `steps` representing sequential steps in a workflow:
 
 **workflow**
-
-```
-| id |    workflow_name    |                                          steps                                            |
-|----|---------------------|------------------------------------------------------------------------------------------|
-|  1 | Employee Onboarding | {"tasks": ["Submit Resume", "Interview", "Background Check", "Offer", "Orientation"]} |
-|  2 | Project Development | {"tasks": ["Requirement Analysis", "Design", "Implementation", "Testing", "Deployment"]}|
-|  3 | Order Processing    | {"tasks": ["Order Received", "Payment Verification", "Packing", "Shipment", "Delivery"]}|
-```
 
 ```sql
 CREATE TABLE workflow (
@@ -151,6 +143,14 @@ INSERT INTO workflow (workflow_name, steps) VALUES
    ('Employee Onboarding', '{"tasks": ["Submit Resume", "Interview", "Background Check", "Offer", "Orientation"]}'),
    ('Project Development', '{"tasks": ["Requirement Analysis", "Design", "Implementation", "Testing", "Deployment"]}'),
    ('Order Processing', '{"tasks": ["Order Received", "Payment Verification", "Packing", "Shipment", "Delivery"]}');
+```
+
+```
+| id |    workflow_name    |                                          steps                                          |
+|----|---------------------|-----------------------------------------------------------------------------------------|
+|  1 | Employee Onboarding | {"tasks": ["Submit Resume", "Interview", "Background Check", "Offer", "Orientation"]}   |
+|  2 | Project Development | {"tasks": ["Requirement Analysis", "Design", "Implementation", "Testing", "Deployment"]}|
+|  3 | Order Processing    | {"tasks": ["Order Received", "Payment Verification", "Packing", "Shipment", "Delivery"]}|
 ```
 
 Each workflow consists of a series of tasks, and you want to extract and display the tasks along with their order in the workflow.
@@ -191,16 +191,9 @@ This query returns the following values:
 
 You can also handle nested arrays with `jsonb_array_elements`.
 
-Consider a scenario where each product has multiple variants, and each variant has an array of sizes and an array of colors.
+Consider a scenario where each product in an `electronics_products` table has multiple variants, and each variant has an array of sizes and an array of colors.
 
 **electronics_products**
-
-```text
-| id |    name    |                                                                                   details                                                                                   
-|----|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-|  1 | Laptop     | {"variants": [{"model": "A", "sizes": ["13 inch", "15 inch"], "colors": ["Silver", "Black"]}, {"model": "B", "sizes": ["15 inch", "17 inch"], "colors": ["Gray", "White"]}]}
-|  2 | Smartphone | {"variants": [{"model": "X", "sizes": ["5.5 inch", "6 inch"], "colors": ["Black", "Gold"]}, {"model": "Y", "sizes": ["6.2 inch", "6.7 inch"], "colors": ["Blue", "Red"]}]}
-```
 
 ```sql
 CREATE TABLE electronics_products (
@@ -215,7 +208,14 @@ INSERT INTO electronics_products (id, name, details) VALUES
  (2, 'Smartphone', '{"variants": [{"model": "X", "sizes": ["5.5 inch", "6 inch"], "colors": ["Black", "Gold"]}, {"model": "Y", "sizes": ["6.2 inch", "6.7 inch"], "colors": ["Blue", "Red"]}]}');
 ```
 
-To handle the nested arrays and extract information about each variant:
+```text
+| id |    name    |                                                                                   details                                                                                   
+|----|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  1 | Laptop     | {"variants": [{"model": "A", "sizes": ["13 inch", "15 inch"], "colors": ["Silver", "Black"]}, {"model": "B", "sizes": ["15 inch", "17 inch"], "colors": ["Gray", "White"]}]}
+|  2 | Smartphone | {"variants": [{"model": "X", "sizes": ["5.5 inch", "6 inch"], "colors": ["Black", "Gold"]}, {"model": "Y", "sizes": ["6.2 inch", "6.7 inch"], "colors": ["Blue", "Red"]}]}
+```
+
+To handle the nested arrays and extract information about each variant, you can run this query using the `jsonb_array_elements` function:
 
 ```sql
 SELECT
@@ -256,7 +256,7 @@ This query returns the following values:
 
 ### Using joins
 
-Let's assume you want to retrieve a list of users along with their roles in each organization.
+Let's assume you want to retrieve a list of users along with their roles in each organization. The data is stored in an `organizations` table and a `users` table.
 
 **organizations**
 
@@ -303,7 +303,7 @@ INSERT INTO users (id, name, email) VALUES
    (25, 'Alice', 'alice@gmail.com');
 ```
 
-You can use the `jsonb_array_elements` function to extract the members from the `JSONB` array in the `organizations` table and then join with the `users` table.
+You can use the `jsonb_array_elements` function to extract the `members` from the `JSONB` array in the `organizations` table and then join with the `users` table.
 
 ```sql
 SELECT
@@ -337,9 +337,9 @@ This section outlines additional considerations including alternative functions.
 
 ### Alternative option - jsonb_array_elements_text
 
-Prefer `jsonb_array_elements` when you need to maintain the JSON structure of the elements for further JSON-related operations or analysis and `jsonb_array_elements_text` if you need to work with the extracted elements as plain text for string operations, text analysis, or integration with text-based functions.
+Use `jsonb_array_elements` when you need to maintain the `JSON` structure of the elements for further `JSON`-related operations or analysis and `jsonb_array_elements_text` if you need to work with the extracted elements as plain text for string operations, text analysis, or integration with text-based functions.
 
-If you want to create a comma-separated list of all skills for each developer in the **developers** tables, `jsonb_array_elements_text` can be used along with `string_agg`.
+If you want to create a comma-separated list of all skills for each developer in the `developers` table, `jsonb_array_elements_text` can be used along with `string_agg`.
 
 ```sql
 SELECT name, string_agg(skill, ',') AS skill_list
@@ -368,11 +368,11 @@ GROUP BY name;
 
 **jsonb_path_query**
 
-`jsonb_path_query` uses JSON Path expressions for flexible navigation and filtering within `JSONB` structures and returns a JSONB array containing matching elements. It supports filtering within the path expression itself, enabling complex conditions and excels at navigating and extracting elements from nested arrays and objects.
+`jsonb_path_query` uses `JSON` Path expressions for flexible navigation and filtering within `JSONB` structures and returns a `JSONB` array containing matching elements. It supports filtering within the path expression itself, enabling complex conditions and excels at navigating and extracting elements from nested arrays and objects.
 
 If your query involves navigating through multiple levels of nesting, complex filtering conditions, or updates to `JSONB` data, `jsonb_path_query` is often the preferred choice.
 
-Consider a simple example - to extract the first skill of each developer in the **developers** table:
+Consider a simple example — to extract the first skill of each developer in the `developers` table:
 
 ```sql
 SELECT jsonb_path_query(skills, '$[0]') AS first_skill
