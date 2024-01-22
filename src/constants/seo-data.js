@@ -86,10 +86,11 @@ export default {
   pingThing: {
     robotsNoindex: 'noindex',
   },
-  demo: {
+  demos: {
     title: 'Serverless showcase: unleashing the power of Neon',
     description: 'Explore interactive demos unveiling cutting-edge apps in the serverless era.',
     pathname: LINKS.demos,
+    imagePath: '/images/social-previews/demos.jpg',
   },
 };
 
