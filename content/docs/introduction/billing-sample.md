@@ -5,6 +5,8 @@ subtitle: Practical example of how Neon pricing is calculated
 updatedOn: '2024-01-03T21:00:38.276Z'
 ---
 
+<NewPricing/>
+
 ## Generative AI example
 
 To give you a clearer sense of how billing works for Neon Pro users, let's explore a real-world example. Consider a simple image generation app that leverages Neon as the serverless database for storing user authentication details as well as records of image generation per user. Analyzing this usage over a monthly billing period can help you understand the nuances of Neon billing based on actual scenarios.

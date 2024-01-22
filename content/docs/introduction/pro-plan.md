@@ -6,6 +6,8 @@ isDraft: false
 updatedOn: '2024-01-19T14:14:18.727Z'
 ---
 
+<NewPricing/>
+
 The Neon Pro Plan plan is intended for users who have completed their evaluation of Neon on the Neon Free Tier and are ready to transition to a production-level plan with higher limits and advanced features.
 
 Because the Neon Pro Plan is usage-based, you never have to worry about over-provisioning. You only pay for what you use. Transitioning to the Neon Pro Plan has been designed to be as smooth and hassle-free as possible. However, we understand that the Neon Pro Plan might not be for everyone &mdash; so if it turns out to be more than you need, reverting to the Neon Free Tier is a simple process. There are no fixed contracts or obligations.
