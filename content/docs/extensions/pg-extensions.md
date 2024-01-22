@@ -132,6 +132,4 @@ Please keep in mind that certain restrictions may apply with respect to Postgres
 
 Depending on the nature of your extension, Neon may also request a liability waiver.
 
-Someone from Neon will contact you after our engineering team evaluates your request.
-
 <NeedHelp/>
