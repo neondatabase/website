@@ -109,5 +109,3 @@ If you have questions about Neon or Postgres, reach out to Neon community member
 <CommunityBanner buttonText="Join community" buttonUrl="https://community.neon.tech" logo="discourse">Welcome to the Neon Discourse Community!</CommunityBanner>
 
 <CommunityBanner buttonText="Join server" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Welcome to the Neon Discord Server!</CommunityBanner>
-
-<CTA/>
