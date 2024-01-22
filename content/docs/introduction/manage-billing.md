@@ -4,6 +4,8 @@ enableTableOfContents: true
 updatedOn: '2024-01-12T16:49:12.349Z'
 ---
 
+<NewPricing/>
+
 A Neon account subscribed to a paid plan can manage billing from the **Billing** page in the Neon Console. On the **Billing** page, you can:
 
 - View charges for the current month
