@@ -27,7 +27,7 @@ Neon’s branching feature addresses these challenges. A branch is a copy-on-wri
 
 ![Branch database](/docs/guides/vercel_branch_database.webp)
 
-When you push changes to the GitHub repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a branch in Neon and connects it to your preview deployment by setting Vercel preview environment variables.
+When you push changes to the repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a branch in Neon and connects it to your preview deployment by setting Vercel preview environment variables.
 
 ## Add the Neon Vercel Integration
 
@@ -35,7 +35,7 @@ This section describes how to add the Neon Vercel Integration to your Vercel pro
 
 <Admonition type="note" title="Notes">
 - Please be aware that the Neon Vercel Integration connects one Vercel project to one Neon project. It does not support connecting multiple Vercel projects to one Neon project, nor does it support connecting multiple Neon projects to one Vercel project.
-- The Neon Vercel Integration is currently only supported with the GitHub source code repository.
+- The Neon Vercel Integration is supported with GitHub, GitLab, and Bitbucket source code repositories.
 </Admonition>
 
 Prerequisites:
@@ -87,9 +87,9 @@ To add the integration:
 
 ## Use the Neon Vercel Integration
 
-After you add the Neon Vercel Integration to a Vercel project, Neon creates a database branch for each preview deployment. The branch is created when you push commits made on your local branch to your application's GitHub repository. To see the integration in action, follow these steps:
+After you add the Neon Vercel Integration to a Vercel project, Neon creates a database branch for each preview deployment. The branch is created when you push commits made on your local branch to your application's source code repository. To see the integration in action, follow these steps:
 
-1. Create a branch in your local GitHub repository.
+1. Create a branch in your local source code repository.
 
    ```bash
    cd myapp
