@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import BlogNavLink from 'components/pages/blog/blog-nav-link';
 import LINKS from 'constants/links';
+import DiscordIcon from 'icons/discord-sm.inline.svg';
 import GitHubIcon from 'icons/github-sm.inline.svg';
 import LinkedInIcon from 'icons/linkedin-sm.inline.svg';
 import XIcon from 'icons/x.inline.svg';
@@ -30,6 +31,11 @@ const socialLinks = [
     name: 'YouTube',
     url: LINKS.youtube,
     icon: YouTubeIcon,
+  },
+  {
+    name: 'Discord',
+    url: LINKS.discord,
+    icon: DiscordIcon,
   },
 ];
 
@@ -74,7 +80,7 @@ const Sidebar = ({ categories }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Icon className="h-4 w-4 text-gray-new-70 transition-colors duration-200 group-hover:text-green-45" />
+                  <Icon className="h-4 w-auto text-gray-new-70 transition-colors duration-200 group-hover:text-green-45" />
                 </a>
               </li>
             ))}

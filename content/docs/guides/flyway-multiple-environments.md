@@ -2,7 +2,7 @@
 title: Manage multiple database environments
 subtitle: Learn how to manage schemas for multiple database environments with Flyway
 enableTableOfContents: true
-updatedOn: '2023-12-04T12:15:51.547Z'
+updatedOn: '2024-01-08T20:02:33.920Z'
 ---
 
 With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
@@ -66,9 +66,9 @@ neonctl branches create --name development
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/{project_id}/branches \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "branch": {

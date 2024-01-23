@@ -1,5 +1,5 @@
 ---
-updatedOn: '2023-11-24T11:25:06.736Z'
+updatedOn: '2024-01-08T20:02:33.915Z'
 ---
 # Docs
 
@@ -330,9 +330,9 @@ Alternatively, you can create read replicas using the Neon API or Neon CLI.
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/late-bar-27572981/endpoints \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "endpoint": {
@@ -352,7 +352,7 @@ curl --request POST \
 
 To improve the documentation readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
 
-There are 5 types of Admonition: `note`, `important`, `tip`, `warning`, `info`; the default is `note`.
+There are 6 types of Admonition: `note`, `important`, `tip`, `warning`, `info`, `comingSoon`; the default is `note`.
 
 You may also specify an optional title with prop `title`.
 
