@@ -320,6 +320,8 @@
           slug: functions/json_extract_path
         - title: dense_rank
           slug: functions/dense_rank
+        - title: json_to_record
+          slug: functions/json_to_record
     - title: Compatibility
       slug: reference/compatibility
 - title: Import data
