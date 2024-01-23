@@ -303,6 +303,8 @@
       items:
         - title: pgvector
           slug: extensions/pgvector
+        - title: pg_stat_statements
+          slug: extensions/pg_stat_statements
         - title: pg_tiktoken
           slug: extensions/pg_tiktoken
         - title: timescaledb
