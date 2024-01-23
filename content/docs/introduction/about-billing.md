@@ -2,7 +2,7 @@
 title: Billing
 enableTableOfContents: true
 subtitle: Learn how Neon billing works to save you money
-updatedOn: '2024-01-03T21:00:38.272Z'
+updatedOn: '2024-01-23T16:35:18.275Z'
 ---
 
 <NewPricing/>
