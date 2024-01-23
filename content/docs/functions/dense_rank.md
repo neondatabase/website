@@ -37,7 +37,7 @@ INSERT INTO student_scores (student_name, score) VALUES
 
 **student_scores**
 
-```text
+```
 | student_id | student_name | score |
 |------------|--------------|-------|
 | 1          | Alice        | 85    |
@@ -62,7 +62,7 @@ FROM
 
 This query returns the following values:
 
-```text
+```
 | student_id | student_name | score | rank |
 |------------|--------------|-------|------|
 | 2          | Bob          | 92    | 1    |
@@ -100,7 +100,7 @@ INSERT INTO student_scores_by_class (student_name, score, class_id) VALUES
    ('Frank', 78, 2);
 ```
 
-```text
+```
 | student_id | student_name | score | class_id |
 |------------|--------------|-------|----------|
 | 1          | Alice        | 85    | 1        |
@@ -126,7 +126,7 @@ FROM
 
 This query returns the following values:
 
-```text
+```
 | student_id | student_name | score | class_id | rank_within_class |
 |------------|--------------|-------|----------|-------------------|
 | 2          | Bob          | 92    | 1        | 1                 |
@@ -170,7 +170,7 @@ WHERE
 
 This query returns the following values:
 
-```text
+```
 | student_id | student_name | score | class_id | dense_rank |
 |------------|--------------|-------|----------|------------|
 | 2          | Bob          | 92    | 1        | 1          |
@@ -183,9 +183,9 @@ This query returns the following values:
 
 This section covers additional considerations for the `dense_rank` function. 
 
-### How `dense_rank` different from the `RANK` function?
+### How is `dense_rank` different from the `rank` function?
 
-The `RANK` function assigns a unique rank to each distinct row in the result set and leaves gaps in the ranking sequence when there are ties.
+The `rank` function assigns a unique rank to each distinct row in the result set and leaves gaps in the ranking sequence when there are ties.
 If two or more rows have the same values and are assigned the same rank, the next rank will be skipped.
 
 
@@ -194,14 +194,14 @@ SELECT
    student_id,
    student_name,
    score,
-   RANK() OVER (ORDER BY score DESC) AS rank
+   rank() OVER (ORDER BY score DESC) AS rank
 FROM
    student_scores;
 ```
 
 This query returns the following values:
 
-```text
+```
 | student_id | student_name | score | rank |
 |------------|--------------|-------|------|
 | 2          | Bob          | 92    | 1    |
@@ -247,8 +247,8 @@ This query ranks the classes based on their total scores, assigning the highest 
 
 This query returns the following values:
 
-```text
-| class_id | total_score_rank   | total_score   |
+```
+| class_id | total_score_rank   | total_score |
 |-----------|-------------------|-------------|
 |     2     |         1         |     255     |
 |     1     |         1         |     255     |
@@ -266,8 +266,8 @@ This query ranks the classes based on their average scores, assigning the highes
 
 This query returns the following values:
 
-```text
-| class_id | average_score_rank |    average_score      |
+```
+| class_id  | average_score_rank  |    average_score    |
 |-----------|---------------------|---------------------|
 |     2     |          1          | 85.0000000000000000 |
 |     1     |          1          | 85.0000000000000000 |
