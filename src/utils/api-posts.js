@@ -713,6 +713,36 @@ const getWpPreviewPost = async (id) => {
   return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
 };
 
+const getAllWpCaseStudiesPosts = async () => {
+  const caseStudiesQuery = gql`
+    query CaseStudies {
+      caseStudies(where: { orderby: { field: DATE, order: ASC } }) {
+        nodes {
+          caseStudyPost {
+            description
+            post {
+              ... on Post {
+                slug
+              }
+            }
+            logo {
+              mediaItemUrl
+              mediaDetails {
+                width
+                height
+              }
+            }
+          }
+          title(format: RENDERED)
+        }
+      }
+    }
+  `;
+  const data = await graphQLClient.request(caseStudiesQuery);
+
+  return data?.caseStudies?.nodes;
+};
+
 export {
   getAllWpPosts,
   getWpPostBySlug,
@@ -721,4 +751,5 @@ export {
   getWpBlogPage,
   getAllWpBlogCategories,
   getWpPostsByCategorySlug,
+  getAllWpCaseStudiesPosts,
 };

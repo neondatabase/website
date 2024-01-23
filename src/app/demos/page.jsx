@@ -6,7 +6,7 @@ import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
-export const metadata = getMetadata(SEO_DATA.demo);
+export const metadata = getMetadata(SEO_DATA.demos);
 
 const DemoPage = () => (
   <Layout

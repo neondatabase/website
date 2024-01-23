@@ -3,7 +3,7 @@ title: Manage billing with consumption limits
 subtitle: Learn how to set usage quotas per project with the Neon API
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-01-10T18:34:05.857Z'
+updatedOn: '2024-01-19T14:12:56.662Z'
 ---
 
 When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free tier users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes). 
@@ -77,7 +77,7 @@ In addition to the configurable limits that you can set, Neon also sets certain 
 
 These limits are not directly configurable. They act as "failsafe" limits to prevent runaway branch size growth due to possible issues with your application. If you need larger limits here, contact Neon Support.
 
-For Neon Free Tier users, the limit is approximately 3 GiB per branch:
+For Neon Free Tier users, the logical data size limit is approximately 3 GiB per branch:
 * `branch_logical_size_limit`: 3072
 * `branch_logical_size_limit_bytes:` 3221225472
 
