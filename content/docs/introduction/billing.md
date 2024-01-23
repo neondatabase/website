@@ -1,7 +1,7 @@
 ---
 title: Billing metrics
 enableTableOfContents: true
-updatedOn: '2024-01-19T14:14:18.726Z'
+updatedOn: '2024-01-23T17:45:24.327Z'
 ---
 
 <NewPricing/>

@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/billing#neon-plans
-updatedOn: '2024-01-19T14:12:56.665Z'
+updatedOn: '2024-01-23T17:45:24.329Z'
 ---
 
 <NewPricing/>

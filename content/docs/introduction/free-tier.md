@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/introduction/technical-preview-free-tier
-updatedOn: '2023-11-30T18:21:20.863Z'
+updatedOn: '2024-01-23T17:45:24.328Z'
 ---
 
 <NewPricing/>
