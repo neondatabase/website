@@ -1,24 +1,22 @@
 ---
 title: The pg_stat_statements extension
-subtitle: pg_stat_statements enables tracking, planning and execution statistics for SQL statements.
+subtitle: Track planning and execution statistics for all SQL statements with the pg_stat_statements extension
 enableTableOfContents: true
 ---
 
-The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a PostgreSQL database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance. It also helps analyze usage patterns to right-size your database and tune configuration parameters.
+The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a PostgreSQL database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance.
 
 This guide covers:
 
-- Enabling `pg_stat_statements`
-- Querying the extension's view
-- Identifying slow queries 
-- Finding queries that return many rows
-- Resetting statistics
+- [Enabling pg_stat_statements](#enable-the-pg_stat_statements-extension)
+- [Usage examples](#usage-examples)
+- [Resetting statistics](#reset-statistics)
 
 <Admonition type="note">
-`pg_stat_statements` is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below.
+`pg_stat_statements` is an open-source extension for Postgres that can be installed on any Neon project using the instructions below.
 </Admonition>
 
-##  Version availability
+###  Version availability
 
 The version of `pg_stat_statements` available on Neon depends on the version of Postgres you select for your Neon project.
 
@@ -38,16 +36,17 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 ## Usage examples
 
+This section provides `pg_stat_statements` usage exmaples.
 
 ### Query the pg_stat_statements view
 
-The main interface is a view - `pg_stat_statements` - that contains one row per distinct database query, showing various statistics.
+The main interface is the `pg_stat_statements` view, which contains one row per distinct database query, showing various statistics.
 
 ```sql
 SELECT * FROM pg_stat_statements LIMIT 10;
 ```
 
-Output contains details like:
+The view contains details like those shown below:
 
 ```
 | userid | dbid  | queryid               | query                 | calls |
@@ -57,11 +56,11 @@ Output contains details like:
 
 Let's explore some example usage patterns.
 
-### Find the most executed queries
+### Find the most frequently executed queries
 
 The most frequently run queries are often critical paths and optimization candidates. 
 
-In the query below, you select the `query` and `calls` columns, representing the SQL statement and the number of times each statement has been executed, respectively - only the top 10 rows are returned (`LIMIT 10`).
+In the query below, you select the `query` and `calls` columns, representing the SQL statement and the number of times each statement has been executed, respectively. Only the top 10 rows are returned (`LIMIT 10`):
 
 ```sql
 SELECT query, calls 
@@ -194,7 +193,7 @@ This query returns results similar to the following:
 
 ## Reset statistics
 
-When executed, the `pg_stat_statements_reset()` function resets the accumulated statistical data, such as execution times and counts for SQL statements, to zero. It's particularly useful in scenarios where you want to start fresh with collecting performance statistics without restarting the entire PostgreSQL server. 
+When executed, the `pg_stat_statements_reset()` function resets the accumulated statistical data, such as execution times and counts for SQL statements, to zero. It's particularly useful in scenarios where you want to start fresh with collecting performance statistics.
 
 <Admonition type="note">
 In Neon, only [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) roles have the privilege required to execute this function. The default role created with a Neon project and roles created in the Neon Console, CLI, and API are granted membership in the `neon_superuser` role.
@@ -206,4 +205,4 @@ SELECT pg_stat_statements_reset();
 
 ## Resources
 
-- [PostgreSQL documentation for `pgstatstatements`](https://www.postgresql.org/docs/current/pgstatstatements.html)
+- [PostgreSQL documentation for `pg_stat_statements`](https://www.postgresql.org/docs/current/pgstatstatements.html)
