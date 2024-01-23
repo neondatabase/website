@@ -7,6 +7,8 @@ updatedOn: '2024-01-23T02:02:35.387Z'
 
 You can use the `dense_rank` function to assign a rank to each distinct row within a result set. It provides a non-gapped ranking of values which is particularly useful when dealing with datasets where ties need to be acknowledged without leaving gaps in the ranking sequence.
 
+<CTA />
+
 Function signature:
 
 ```sql

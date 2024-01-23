@@ -6,6 +6,8 @@ enableTableOfContents: true
 
 The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a PostgreSQL database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance.
 
+<CTA />
+
 This guide covers:
 
 - [Enabling pg_stat_statements](#enable-the-pg_stat_statements-extension)
@@ -23,8 +25,6 @@ The version of `pg_stat_statements` available on Neon depends on the version of 
 - Postgres 14 - `pg_stat_statements` 1.9
 - Postgres 15 - `pg_stat_statements` 1.10
 - Postgres 16 - `pg_stat_statements` 1.10
-
-<CTA />
 
 ## Enable the `pg_stat_statements` extension
 
