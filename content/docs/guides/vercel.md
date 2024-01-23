@@ -42,7 +42,7 @@ Prerequisites:
 
 - A [Vercel account](https://vercel.com).
 - A Vercel project. If you do not have one, see [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project), in the _Vercel documentation_.
-- The integration sets the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` environment variables for your Vercel production, development, and preview environments. Make sure these variables do not already exist in your Vercel project settings. For more information, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
+- The integration initially sets the `DATABASE_URL` environment variable for your Vercel **Production** and **Development** environments. When you create a preview deployment, the integration will also set this variable for your **Preview** environment. Make sure this variable does not already exist in your Vercel project settings. To use different Postgres variables with the Neon integration, see [Manage Vercel environment variables](#manage-vercel-environment-variables). 
 
 To add the integration:
 
@@ -74,7 +74,7 @@ To add the integration:
     1. Click **Done** to complete the installation.
 1. To view the results of the integration in Neon:
     1. Navigate to the [Neon Console](https://console.neon.tech/).
-    1. Select the project you connected to.
+    1. Select the project you are connected to.
     1. Select **Branches**.
        You will see the root branch of your project. If you created a development branch, you will also see a `vercel-dev` branch.
        ![Neon branches](/docs/guides/vercel_neon_branches.png)
@@ -82,7 +82,7 @@ To add the integration:
     1. Navigate to [Vercel](https://vercel.com/).
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**.
-       You should see the `PGHOST`, `PGUSER`, `PGDATABASE`, `PGPASSWORD`, and `DATABASE_URL` variable settings added by the integration.
+       You should see the `DATABASE_URL` variable settings added by the integration.
        ![Vercel environment variables](/docs/guides/vercel_env_variables.png)
 
 ## Use the Neon Vercel Integration
@@ -121,6 +121,24 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
 <Admonition type="note">
 The Neon Free Tier lets you create up to 10 branches. To avoid running out of branches for new preview deployments, remove old branches regularly. See [Delete a branch](/docs/manage/branches#delete-a-branch) for instructions.
 </Admonition>
+
+## Manage Vercel environment variables
+
+The Neon Vercel Integration initially sets the `DATABASE_URL` environment variable for your Vercel **Production** and **Development** environments. When you create a preview deployment, the integration also sets this variable for your **Preview** environment. If you want to use different Postgres environment variables, the Neon Vercel Integration also supports these variables for defining your database connection:
+
+- `PGHOST`
+- `PGUSER`
+- `PGDATABASE`
+- `PGPASSWORD`
+
+You can enable these variables from the Neon Console:
+
+1. In the Neon Console, select your project.
+2. Select the **Integrations** page.
+3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
+4. In the **Vercel integration** drawer, select the environment variables you need in your Vercel deployments. Changes will apply to future preview deployments.
+
+![Select Vercel variables](vercel_select_variables.png)
 
 ## Make the integration available to other Vercel projects
 
