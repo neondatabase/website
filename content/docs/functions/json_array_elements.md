@@ -13,6 +13,8 @@ Function signature:
 json_array_elements(json)
 ```
 
+<CTA />
+
 ## `json_array_elements` example
 
 Suppose you have a `developers` table with information about developers:

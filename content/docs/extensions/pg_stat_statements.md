@@ -24,6 +24,8 @@ The version of `pg_stat_statements` available on Neon depends on the version of 
 - Postgres 15 - `pg_stat_statements` 1.10
 - Postgres 16 - `pg_stat_statements` 1.10
 
+<CTA />
+
 ## Enable the `pg_stat_statements` extension
 
 You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
@@ -205,4 +207,4 @@ SELECT pg_stat_statements_reset();
 
 ## Resources
 
-- [PostgreSQL documentation for `pg_stat_statements`](https://www.postgresql.org/docs/current/pgstatstatements.html)
+- [PostgreSQL documentation for pg_stat_statements](https://www.postgresql.org/docs/current/pgstatstatements.html)

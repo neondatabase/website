@@ -13,6 +13,8 @@ The `json_extract_path` function signature:
 json_extract_path(from_json json, VARIADIC path_elems text[])
 ```
 
+<CTA />
+
 ## `json_extract_path` example
 
 To illustrate the `json_extract_path` function in Postgres, let's consider a scenario where we have a table storing information about books. Each book has a `JSON` column containing details such as `title`, `author`, and publication `year`. You can create the `book` table using the SQL statements shown below.

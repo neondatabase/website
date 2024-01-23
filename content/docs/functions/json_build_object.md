@@ -15,6 +15,7 @@ Function signature:
 json_build_object ( VARIADIC "any" ) → json
 ```
 
+<CTA />
 
 ## `json_build_object` example
 
