@@ -10,8 +10,7 @@ updatedOn: '2024-01-21T09:34:18.540Z'
 
 <CTA />
 
-Function signature:
-
+## Function signature
 
 ```sql
 json_build_object ( VARIADIC "any" ) → json

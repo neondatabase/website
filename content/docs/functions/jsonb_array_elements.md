@@ -9,7 +9,7 @@ You can use the `jsonb_array_elements` function to expand a `JSONB` array into a
 
 <CTA />
 
-Function signature:
+## Function signature
 
 ```sql
 jsonb_array_elements(json)

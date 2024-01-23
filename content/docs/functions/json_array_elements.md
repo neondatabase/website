@@ -9,7 +9,7 @@ You can use `json_array_elements` function to expand a `JSON` array into a set o
 
 <CTA />
 
-Function signature:
+## Function signature
 
 ```sql
 json_array_elements(json)

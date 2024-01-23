@@ -9,7 +9,7 @@ You can use the `dense_rank` function to assign a rank to each distinct row with
 
 <CTA />
 
-Function signature:
+## Function signature
 
 ```sql
 dense_rank() OVER (

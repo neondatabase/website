@@ -9,7 +9,7 @@ You can the `json_extract_path` function to extract the value of a specific key 
 
 <CTA />
 
-Function signature:
+## Function signature
 
 ```sql
 json_extract_path(from_json json, VARIADIC path_elems text[])

@@ -9,7 +9,7 @@ You can use the `array_to_json` function to convert a PostgreSQL array into its 
 
 <CTA />
 
-Function signature:
+## Function signature
 
 ```sql
 array_to_json(anyarray [, pretty_bool])
