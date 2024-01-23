@@ -49,7 +49,7 @@ SELECT * FROM pg_stat_statements LIMIT 10;
 
 Output contains details like:
 
-```text
+```
 | userid | dbid  | queryid               | query                 | calls |
 |--------|-------|-----------------------|-----------------------|-------|
 | 16391  | 16384 | -9047282044438606287  | SELECT * FROM users;  | 10    |
@@ -70,7 +70,7 @@ ORDER BY calls DESC
 LIMIT 10;
 ```
 
-```text
+```
 | Query                                                                                      | Calls |
 |--------------------------------------------------------------------------------------------|-------|
 | SELECT * FROM products WHERE inventory > 10;                                               |  8723 |
@@ -95,10 +95,80 @@ ORDER BY mean_exec_time DESC;
 
 This query returns the following results:
 
-```text
+```
 | Query                                         | Mean Time | Calls |
 |-----------------------------------------------|-----------|-------|
 | SELECT p.*, c.name AS category FROM products  | 250.60ms  |  723  |
+```
+
+This query retrieves the top 10 queries with the highest average execution time, focusing on queries run more than 500 times, for the current user.
+
+```sql
+WITH statements AS (
+    SELECT * 
+    FROM pg_stat_statements pss
+    JOIN pg_roles pr ON (pss.userid = pr.oid)
+    WHERE pr.rolname = current_user
+)
+SELECT 
+    calls, 
+    mean_exec_time, 
+    query
+FROM statements
+WHERE 
+    calls > 500
+    AND shared_blks_hit > 0
+ORDER BY 
+    mean_exec_time DESC
+LIMIT 10;
+```
+
+This query returns the 10 longest-running queries for the current user, focusing on those executed over 500 times and with some cache usage. It orders queries by frequency and cache efficiency to highlight potential areas for optimization.
+
+```sql
+WITH statements AS (
+    SELECT * 
+    FROM pg_stat_statements pss
+    JOIN pg_roles pr ON (pss.userid = pr.oid)
+    WHERE pr.rolname = current_user
+)
+SELECT 
+    calls, 
+    shared_blks_hit,
+    shared_blks_read,
+    shared_blks_hit / (shared_blks_hit + shared_blks_read)::NUMERIC * 100 AS hit_cache_ratio,
+    query
+FROM statements
+WHERE 
+    calls > 500
+    AND shared_blks_hit > 0
+ORDER BY 
+    calls DESC, 
+    hit_cache_ratio ASC
+LIMIT 10;
+```
+
+This query retrieves the top 10 longest-running queries (in terms of mean execution time), focusing on queries executed more than 500 times, for the current user.
+
+```sql
+WITH statements AS (
+    SELECT * 
+    FROM pg_stat_statements pss
+    JOIN pg_roles pr ON (userid = oid)
+    WHERE rolname = current_user
+)
+SELECT 
+    calls, 
+    min_exec_time,
+    max_exec_time, 
+    mean_exec_time,
+    stddev_exec_time,
+    (stddev_exec_time / mean_exec_time) AS coeff_of_variance,
+    query
+FROM statements
+WHERE calls > 500
+AND shared_blks_hit > 0
+ORDER BY mean_exec_time DESC
 ```
 
 ### Identify queries that return many rows
