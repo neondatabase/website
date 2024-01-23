@@ -91,6 +91,7 @@ export default {
     description:
       'Discover the diverse and captivating stories of our valued partners, each a testament to unique experiences and successes.',
     pathname: LINKS.caseStudies,
+    imagePath: '/images/social-previews/case-studies.jpg',
   },
 };
 
