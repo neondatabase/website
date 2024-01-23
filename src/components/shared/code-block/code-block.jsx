@@ -13,7 +13,7 @@ const CodeBlock = ({
   <CodeBlockWrapper copyButtonClassName={copyButtonClassName}>
     <pre
       className={clsx(
-        '!my-0 !bg-gray-new-98 dark:!bg-gray-new-10',
+        '!my-0 !bg-gray-new-98 px-0 dark:!bg-gray-new-10 [&_[data-line]]:px-4',
         { 'code-wrap': shouldWrap },
         className
       )}

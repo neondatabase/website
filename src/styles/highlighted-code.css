@@ -1,4 +1,32 @@
 @layer components {
+  :root {
+    --shiki-color-text: #171717;
+    --shiki-color-background: transparent;
+    --shiki-token-constant: #0068d6;
+    --shiki-token-string: #297a3a;
+    --shiki-token-comment: #666666;
+    --shiki-token-keyword: #bd2864;
+    --shiki-token-parameter: #a35200;
+    --shiki-token-function: #7820bc;
+    --shiki-token-string-expression: #297a3a;
+    --shiki-token-punctuation: #171717;
+    --shiki-token-link: #297a3a;
+  }
+
+  .dark {
+    --shiki-color-text: #ededed;
+    --shiki-color-background: transparent;
+    --shiki-token-constant: #52a8ff;
+    --shiki-token-string: #62c073;
+    --shiki-token-comment: #a1a1a1;
+    --shiki-token-keyword: #f75f8f;
+    --shiki-token-parameter: #ff990a;
+    --shiki-token-function: #bf7af0;
+    --shiki-token-string-expression: #62c073;
+    --shiki-token-punctuation: #ededed;
+    --shiki-token-link: #ededed;
+  }
+
   .highlighted-code {
     pre {
       @apply overflow-x-auto px-5 py-6;

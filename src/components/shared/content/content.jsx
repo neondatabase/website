@@ -20,6 +20,7 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import customTheme from 'utils/custom-theme.json';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 
@@ -57,12 +58,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
-  // code: (props) => {
-  //   if (props?.className?.startsWith('language-') && props?.children) {
-  //     return <CodeBlock as="figure" {...props} />;
-  //   }
-  //   return <code {...props} />;
-  // },
   pre: (props) => <CodeBlock {...props} />,
   a: (props) => {
     const { href, children, ...otherProps } = props;
@@ -155,10 +150,7 @@ const Content = ({
                 rehypePrettyCode,
                 {
                   grid: true,
-                  theme: {
-                    dark: 'github-dark-dimmed',
-                    light: 'github-light',
-                  },
+                  theme: customTheme,
                 },
               ],
             ],
