@@ -195,11 +195,13 @@ This query returns results similar to the following:
 | SELECT p.*, c.name AS category FROM products      | 23,984  |
 ```
 
-## Identify recently executed queries
+## Look up queries by execution time
 
-The following queries can be used to look up queries by execution time and number of calls.
+The following query returns details including user ID, query text, number of calls, total time, rows returned, and the time elapsed since each query was last executed, for all queries executed within the last hour, sorted in descending order by the time elapsed since the query's last execution.
 
-This query retruns details including user ID, query text, number of calls, total time, rows returned, and the time elapsed since each query was last executed, for all queries executed within the last hour, sorted in descending order by the time elapsed since their last execution.
+<Admonition type="note">
+In Neon, this query can help identify SQL queries that are waking up an idle compute endpoint.
+</Admonition>
 
 ```sql
 SELECT
