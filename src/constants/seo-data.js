@@ -86,6 +86,13 @@ export default {
   pingThing: {
     robotsNoindex: 'noindex',
   },
+  caseStudies: {
+    title: 'Case Studies — Neon',
+    description:
+      'Discover the diverse and captivating stories of our valued partners, each a testament to unique experiences and successes.',
+    pathname: LINKS.caseStudies,
+    imagePath: '/images/social-previews/case-studies.jpg',
+  },
   demos: {
     title: 'Serverless showcase: unleashing the power of Neon',
     description: 'Explore interactive demos unveiling cutting-edge apps in the serverless era.',
