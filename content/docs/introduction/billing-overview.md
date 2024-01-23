@@ -2,8 +2,10 @@
 title: Billing overview
 enableTableOfContents: true
 subtitle: The basics about how billing works in Neon
-updatedOn: '2024-01-10T18:34:05.859Z'
+updatedOn: '2024-01-23T17:45:24.326Z'
 ---
+
+<NewPricing/>
 
 The largest part of your bill typically comes from compute costs &#8212; the size of your compute plus your level of activity. Storage costs make up the next largest part of your bill. The amount of data that you write, either to storage within Neon or data egress outside of Neon, also adds to your cost, though typically a small percentage per month.
 

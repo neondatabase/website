@@ -2,8 +2,10 @@
 title: Billing
 enableTableOfContents: true
 subtitle: Learn how Neon billing works to save you money
-updatedOn: '2024-01-23T16:35:18.275Z'
+updatedOn: '2024-01-23T17:45:24.324Z'
 ---
+
+<NewPricing/>
 
 Find all the documentation you need to understand, manage, and optimize the features and metrics that contribute to your monthly Neon bill.
 
