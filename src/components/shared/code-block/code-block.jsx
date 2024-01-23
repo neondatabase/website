@@ -1,41 +1,31 @@
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
+import parse from 'html-react-parser';
+
+import highlight from 'lib/shiki';
 
 import CodeBlockWrapper from '../code-block-wrapper';
 
-const CodeBlock = ({
-  className = null,
-  copyButtonClassName = null,
-  children,
-  shouldWrap = false,
-  ...otherProps
-}) => (
-  <CodeBlockWrapper copyButtonClassName={copyButtonClassName}>
-    <pre
+const CodeBlock = async (props) => {
+  const { className = null, copyButtonClassName = null, children, ...otherProps } = props;
+
+  const language = children?.props?.className?.replace('language-', '');
+  const meta = children?.props?.meta;
+  const code = children?.props?.children?.trim();
+  const html = await highlight(code, language, meta);
+
+  return (
+    <CodeBlockWrapper
       className={clsx(
-        '!my-0 !bg-gray-new-98 px-0 dark:!bg-gray-new-10 [&_[data-line]]:px-4',
-        { 'code-wrap': shouldWrap },
-        className
+        '[&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:dark:!bg-gray-new-10',
+        className,
+        { 'code-wrap': meta?.includes('shouldWrap') }
       )}
+      copyButtonClassName={copyButtonClassName}
       {...otherProps}
     >
-      {children}
-    </pre>
-  </CodeBlockWrapper>
-);
-
-CodeBlock.propTypes = {
-  className: PropTypes.string,
-  copyButtonClassName: PropTypes.string,
-  theme: PropTypes.oneOf(['light', 'dark']),
-  language: PropTypes.string,
-  children: PropTypes.node,
-  showLineNumbers: PropTypes.bool,
-  shouldWrap: PropTypes.bool,
-  isTrimmed: PropTypes.bool,
-  highlight: PropTypes.string,
-  as: PropTypes.oneOf(['figure', 'pre']),
-  isBlogPost: PropTypes.bool,
+      {parse(html)}
+    </CodeBlockWrapper>
+  );
 };
 
 export default CodeBlock;

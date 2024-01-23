@@ -14,39 +14,44 @@ function extractTextFromNode(node) {
     return node;
   }
 
-  // If the node has a 'props' and 'children' property, delve deeper.
-  if (node.props && node.props.children) {
+  // Check if the node is an object and has the required properties.
+  if (typeof node === 'object' && node.props && node.props.children) {
+    let text = '';
+
+    // If the children are in an array, loop through them.
     if (Array.isArray(node.props.children)) {
-      // If the children are in an array, loop through them and recursively extract their text.
-      return node.props.children.map(extractTextFromNode).join('');
+      node.props.children.forEach((child) => {
+        text += extractTextFromNode(child);
+
+        // Add a new line if 'data-line' property exists.
+        if (child.props && 'data-line' in child.props) {
+          text += '\n';
+        }
+      });
+    } else {
+      // If there's only one child, process that child directly.
+      text = extractTextFromNode(node.props.children);
     }
-    // If there's only one child, process that child directly.
-    return extractTextFromNode(node.props.children);
+
+    return text;
   }
 
-  if (node.props && node.props.dangerouslySetInnerHTML) {
-    const html = node.props.dangerouslySetInnerHTML.__html;
-
-    const convertedHtml = html
-      .replace(/<[^>]*>?/gm, '')
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&quot;/g, '"')
-      .replace(/&amp;/g, '&');
-    return convertedHtml;
-  }
-
-  // If the node doesn't have children or isn't a string, return an empty string.
+  // If the node doesn't match the expected structure, return an empty string.
   return '';
 }
 
-const CodeBlockWrapper = ({ className = '', copyButtonClassName = '', children }) => {
+const CodeBlockWrapper = ({
+  className = '',
+  copyButtonClassName = '',
+  children,
+  ...otherProps
+}) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const code = extractTextFromNode(children);
 
   return (
-    <div className={clsx('group relative overflow-x-auto', className)}>
+    <div className={clsx('group relative overflow-x-auto', className)} {...otherProps}>
       {children}
       <button
         className={clsx(

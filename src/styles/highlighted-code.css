@@ -67,6 +67,14 @@
     color: gray;
   }
 
+  code [data-line] {
+    @apply px-4;
+  }
+
+  code [data-line]::after {
+    @apply invisible overflow-hidden text-sm content-["'"];
+  }
+
   code[data-line-numbers-max-digits='2'] > [data-line]::before {
     width: 1.5rem;
   }
@@ -77,24 +85,33 @@
 
   .highlighted-code {
     pre {
-      @apply overflow-x-auto px-5 py-6;
+      @apply overflow-x-auto px-1 py-6;
     }
   }
 
   .show-linenumbers {
-    code {
-      counter-reset: step;
-      counter-increment: step 0;
+    pre code {
+      counter-reset: line;
     }
 
-    code .line::before {
-      content: counter(step);
-      counter-increment: step;
+    pre code > [data-line]::before {
+      counter-increment: line;
+      content: counter(line);
+
+      /* Other styling */
+      display: inline-block;
       width: 1rem;
       margin-right: 1.25rem;
-      display: inline-block;
       text-align: right;
       color: gray;
+    }
+
+    code[data-line-numbers-max-digits='2'] > [data-line]::before {
+      width: 1.5rem;
+    }
+
+    code[data-line-numbers-max-digits='3'] > [data-line]::before {
+      width: 2.5rem;
     }
   }
 }

@@ -40,17 +40,13 @@ You now have a Quarkus project in a folder named `neon-with-quarkus-jdbc` with t
 
 Create a `.env` file in the root of your Quarkus project directory. Configure a JDBC data source using the components of your Neon database connection string and specifying the database kind as shown:
 
-<CodeBlock shouldWrap>
-
-```shell
+```shell shouldWrap
 QUARKUS_DATASOURCE_DB_KIND=postgresql
 QUARKUS_DATASOURCE_USERNAME=[user]
 QUARKUS_DATASOURCE_PASSWORD=[password]
 # Note that "jdbc" is prepended, and that "?sslmode=require" is appended to the connection string
 QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require
 ```
-
-</CodeBlock>
 
 <Admonition type="note">
 You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).

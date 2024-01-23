@@ -183,9 +183,7 @@ This procedure can only be performed using the Neon API. You can expect Neon Col
 
 The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) API request shown below renames the old primary branch to `old_main`. You may want to delete this branch later to reduce storage usage, but just rename it for now. The required parameters are the `project_id` and `branch_id`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-twilight-field-06246553 \
      --header 'accept: application/json' \
@@ -199,8 +197,6 @@ curl --request PATCH \
 }
 '
 ```
-
-</CodeBlock>
 
 <details>
 <summary>Response body</summary>
@@ -235,9 +231,7 @@ Renaming a branch can also be performed using the Neon Console or CLI. See [Rena
 
 Rename the new branch to the name of the old branch, which was `main`. The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) API request shown below renames the new branch from `recovery_branch` to `main`.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851 \
      --header 'accept: application/json' \
@@ -251,8 +245,6 @@ curl --request PATCH \
 }
 '
 ```
-
-</CodeBlock>
 
 <details>
 <summary>Response body</summary>
@@ -280,6 +272,7 @@ curl --request PATCH \
   "operations": []
 }
 ```
+
 </details>
 
 <Admonition type="note">
@@ -290,16 +283,12 @@ Renaming a branch can also be performed using the Neon Console or CLI. See [Rena
 
 The [Set primary branch](https://api-docs.neon.tech/reference/setprimaryprojectbranch) API request sets the new branch as the primary branch for the project.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851/set_as_primary \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
-
-</CodeBlock>
 
 <details>
 <summary>Response body</summary>
@@ -327,6 +316,7 @@ curl --request POST \
   "operations": []
 }
 ```
+
 </details>
 
 <Admonition type="note">

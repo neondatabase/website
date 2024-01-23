@@ -25,13 +25,9 @@ Connection problems are sometimes related to a system issue. To check for system
 
 With older clients and some native Postgres clients, you may receive the following error when attempting to connect to Neon:
 
-<CodeBlock shouldWrap>
-
-```txt
+```txt shouldWrap
 ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
 ```
-
-</CodeBlock>
 
 This error occurs if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
 
@@ -45,13 +41,9 @@ If a library or application upgrade does not help, there are several workarounds
 
 Neon supports a connection option named `endpoint`, which you can use to identify the compute endpoint you are connecting to. Specifically, you can add `options=endpoint%3D[endpoint_id]` as a parameter to your connection string, as shown in the example below. The `%3D` is a URL-encoded `=` sign. Replace `[endpoint_id]` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
-<CodeBlock shouldWrap>
-
-```txt
+```txt shouldWrap
 postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
-```
 
-</CodeBlock>
 
 <Admonition type="note">
 The `endpoint` connection option was previously named `project`. The `project` option is deprecated but remains supported for backward compatibility.
@@ -117,23 +109,15 @@ Neon has tested the following drivers for SNI support:
 
 The following error is often the result of an incorrectly defined connection information, or the driver you are using does not support Server Name Indication (SNI).
 
-<CodeBlock shouldWrap>
-
-```text
+```text shouldWrap
 ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require`)
 ```
 
-</CodeBlock>
-
 Check your connection to see if it is defined correctly. Your Neon connection string can be obtained from the **Connection Details** widget on the Neon **Dashboard**. It appears similar to this:
 
-<CodeBlock shouldWrap>
-
-```text
+```text shouldWrap
 postgres://[user]:[password]@[neon_hostname]/[dbname]
-```
 
-</CodeBlock>
 
 For clients or applications that require specifying connection parameters such as user, password, and hostname separately, the values in a Neon connection string correspond to the following:
 
@@ -162,14 +146,10 @@ If the connection issue persists, please reach out to [Support](https://neon.tec
 
 This error is sometimes encountered when using Prisma Client with Neon.
 
-<CodeBlock shouldWrap>
-
-```text
+```text shouldWrap
 Error: P1001: Can't reach database server at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`
 Please make sure your database server is running at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`.
 ```
-
-</CodeBlock>
 
 A compute node in Neon has two main states: **Active** and **Idle**. Active means that Postgres is currently running. If there are no active queries for 5 minutes, the activity monitor gracefully places the compute node into an idle state to save energy and resources.
 
@@ -191,6 +171,6 @@ Prisma Migrate requires a direct connection to the database. It does not support
 
 The `terminating connection due to administrator command` error is typically encountered when running a query from a connection that has sat idle long enough for the compute endpoint to suspend due to inactivity. Neon automatically suspends a compute endpoint after 5 minutes of inactivity, by default. You can reproduce this error by connecting to your database from an application or client such as `psql`, letting the connection remain idle until the compute suspends, and then running a query from the same connection.
 
-If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a [Neon Pro Plan](/docs/introduction/pro-plan) user, you can disable auto-suspend or configure a different suspension period. For instructions, see [Configuring Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide).  [Neon Free Tier](/docs/introduction/free-tier) users cannot modify the default 5 minute auto-suspend setting. 
+If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a [Neon Pro Plan](/docs/introduction/pro-plan) user, you can disable auto-suspend or configure a different suspension period. For instructions, see [Configuring Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide).  [Neon Free Tier](/docs/introduction/free-tier) users cannot modify the default 5 minute auto-suspend setting.
 
 <NeedHelp/>

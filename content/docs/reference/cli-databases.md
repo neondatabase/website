@@ -47,9 +47,7 @@ If a branch ID or name is not provided, the command lists databases for the prim
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl databases list --branch br-autumn-dust-190886
 ┌────────┬────────────┬──────────────────────┐
 │ Name   │ Owner Name │ Created At           │
@@ -57,8 +55,6 @@ neonctl databases list --branch br-autumn-dust-190886
 │ neondb │ daniel     │ 2023-06-19T18:27:19Z │
 └────────┴────────────┴──────────────────────┘
 ```
-
-</CodeBlock>
 
 ### create
 
@@ -84,12 +80,9 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 - If a branch ID or name is not provided, the command creates the database in the primary branch of the project.
 - If the `--owner-name` option is not specified, the current user becomes the database owner.
 
-
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl databases create --name mynewdb --owner-name john
 ┌─────────┬────────────┬──────────────────────┐
 │ Name    │ Owner Name │ Created At           │
@@ -97,8 +90,6 @@ neonctl databases create --name mynewdb --owner-name john
 │ mynewdb │ john       │ 2023-06-19T23:45:45Z │
 └─────────┴────────────┴──────────────────────┘
 ```
-
-</CodeBlock>
 
 ### delete
 
@@ -125,9 +116,7 @@ If a branch ID or name is not provided, it is assumed the database resides in th
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl databases delete mydb
 ┌─────────┬────────────┬──────────────────────┐
 │ Name    │ Owner Name │ Created At           │
@@ -135,7 +124,5 @@ neonctl databases delete mydb
 │ mydb    │ daniel     │ 2023-06-19T23:45:45Z │
 └─────────┴────────────┴──────────────────────┘
 ```
-
-</CodeBlock>
 
 <NeedHelp/>

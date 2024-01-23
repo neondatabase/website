@@ -12,13 +12,9 @@ The following example uses the ready-to-use `neondb` database that is created wi
 
 1. Connect to the `neondb` database using `psql`. For example:
 
-   <CodeBlock shouldWrap>
-
-   ```bash
+   ```bash shouldWrap
    psql postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
-
-   </CodeBlock>
 
    <Admonition type="note">
    For more information about connecting to Neon with `psql`, see [Connect with psql](/docs/connect/query-with-psql-editor).

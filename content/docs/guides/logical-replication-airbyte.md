@@ -6,7 +6,7 @@ isDraft: false
 updatedOn: '2023-12-21T15:11:12.212Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. 
+Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 [Airbyte](https://airbyte.com/) is an open-source data integration platform that moves data from a source to a destination system. Airbyte offers a large library of connectors for various data sources and destinations.
 
@@ -123,7 +123,7 @@ Perform the following steps for each table you want to replicate data from:
     ALTER TABLE tbl1 REPLICA IDENTITY DEFAULT;
     ```
 
-    In rare cases, if your tables use data types that support [TOAST](https://www.postgresql.org/docs/current/storage-toast.html) or have very large field values, consider using `REPLICA IDENTITY FULL` instead: 
+    In rare cases, if your tables use data types that support [TOAST](https://www.postgresql.org/docs/current/storage-toast.html) or have very large field values, consider using `REPLICA IDENTITY FULL` instead:
 
     ```sql
     ALTER TABLE tbl1 REPLICA IDENTITY FULL;
@@ -137,7 +137,6 @@ Perform the following steps for each table you want to replicate data from:
 
     The publication name is customizable. Refer to the [Postgres docs](https://www.postgresql.org/docs/current/logical-replication-publication.html) if you need to add or remove tables from your publication.
 
-
 <Admonition type="note">
 The Airbyte UI currently allows selecting any tables for Change Data Capture (CDC). If a table is selected that is not part of the publication, it will not be replicated even though it is selected. If a table is part of the publication but does not have a replication identity, the replication identity will be created automatically on the first run if the Postgres role you use with Airbyte has the necessary permissions.
 </Admonition>
@@ -145,16 +144,12 @@ The Airbyte UI currently allows selecting any tables for Change Data Capture (CD
 ## Create a Postgres source in Airbyte
 
 1. From your Airbyte Cloud account, select **Sources** from the left navigation bar, search for **Postgres**, and then create a new Postgres source.
-2. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project. 
+2. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project.
     For example, given a connection string like this:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
     ```
-
-    </CodeBlock>
 
     Enter the details in the Airbyte **Create a source** dialog as shown below. Your values will differ.
 
@@ -169,7 +164,7 @@ The Airbyte UI currently allows selecting any tables for Change Data Capture (CD
 3. Under **Optional fields**, list the schemas you want to sync. Schema names are case-sensitive, and multiple schemas may be specified. By default, `public` is the only selected schema.
 4. Select an SSL mode. You will most frequently choose `require` or `verify-ca`. Both of these options always require encryption. The `verify-ca` mode requires a certificate. Refer to [Connect securely](/docs/connect/connect-securely) for information about the location of certificate files you can use with Neon.
 5. Under **Advanced**:
-    
+
     - Select **Logical Replication (CDC)** from available replication methods.
     - In the **Replication Slot** field, enter the name of the replication slot you created previously: `airbyte_slot`.
     - In the **Publication** field, enter the name of the publication you created previously: `airbyte_publication`.

@@ -6,7 +6,7 @@ isDraft: false
 updatedOn: '2023-12-21T15:11:12.217Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. 
+Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 [Materialize](https://materialize.com/) is a data warehouse for operational workloads, purpose-built for low-latency applications. You can use it to process data at speeds and scales not possible in traditional databases, but without the cost, complexity, or development time of most streaming engines.
 
@@ -16,7 +16,7 @@ In this guide, you will learn how to stream data from your Neon Postgres databas
 
 - A [Materialize account](https://materialize.com/register/)
 - A [Neon account](https://console.neon.tech/)
-- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup. 
+- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup.
 
 ## Enable logical replication
 
@@ -154,7 +154,7 @@ Materialize recommends starting with a medium [size](https://materialize.com/doc
 
 ## Start ingesting data
 
-Now that you’ve configured your database network and created an ingestion cluster, you can connect Materialize to your Neon Postgres database and start ingesting data. 
+Now that you’ve configured your database network and created an ingestion cluster, you can connect Materialize to your Neon Postgres database and start ingesting data.
 
 1. From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [CREATE SECRET](https://materialize.com/docs/sql/create-secret/) command to securely store the password for the Postgres role you created earlier:
 
@@ -179,13 +179,9 @@ Now that you’ve configured your database network and created an ingestion clus
 
     You can find the connection details for your replication role in the **Connection Details** widget on the Neon **Dashboard**. A Neon connection string looks like this:
 
-    <CodeBlock shouldWrap>
-
-    ```text
+    ```text shouldWrap
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
     ```
-
-    </CodeBlock>
 
     - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
     - Replace `<role_name>` with the name of your Postgres role (e.g., `alex`)
@@ -204,7 +200,6 @@ Now that you’ve configured your database network and created an ingestion clus
     - To ingest data from specific schemas or tables in your publication, you can use `FOR SCHEMAS (<schema1>,<schema2>)` or `FOR TABLES (<table1>, <table2>)` instead of `FOR ALL TABLES`.
     - After creating a source, you can incorporate upstream schema changes for specific replicated tables using the `ALTER SOURCE...{ADD | DROP} SUBSOURCE` syntax.
     </Admonition>
-
 
 ## Check the ingestion status
 
@@ -234,7 +229,6 @@ In this step, you’ll verify that the source is running and then check the stat
             ```
 
         For each subsource, make sure the status is running. If you see stalled or failed, there’s likely a configuration issue for you to fix. Check the error field for details and fix the issue before moving on. If the status of any subsource is starting for more than a few minutes, contact [Materialize support](https://materialize.com/docs/support/).
-
 
 2. Once the source is running, use the [mz_source_statistics](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_source_statistics) table to check the status of the initial snapshot:
 
@@ -302,7 +296,7 @@ After the snapshotting phase, Materialize starts ingesting change events from th
             JOIN mz_schemas AS n ON n.id = s.schema_id
             JOIN mz_databases AS d ON d.id = n.database_id;
         ```
-    
+
     b. From a `psql` client connected to your Neon database or from the **Neon SQL Editor**, check the replication slot lag, using the replication slot name from the previous step:
 
         ```sql

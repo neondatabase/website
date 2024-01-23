@@ -1,3 +1,5 @@
+import parse from 'html-react-parser';
+
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import Container from 'components/shared/container/container';
 import GradientLabel from 'components/shared/gradient-label';
@@ -22,7 +24,7 @@ const Cli = async () => {
         </p>
 
         <CodeBlockWrapper className="highlighted-code mt-11 w-full max-w-[716px] rounded-md border border-gray-new-15 text-[15px] lg:mt-8">
-          <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+          {parse(highlightedCode)}
         </CodeBlockWrapper>
       </Container>
     </section>

@@ -89,12 +89,8 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 
 Applications that use older client libraries or drivers that do not support Server Name Indication (SNI) may not permit connecting to Neon. If you encounter the following error, refer to [Connection errors](/docs/connect/connection-errors) for possible workarounds.
 
-<CodeBlock shouldWrap>
-
-```txt
+```txt shouldWrap
 ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
 ```
-
-</CodeBlock>
 
 <NeedHelp/>

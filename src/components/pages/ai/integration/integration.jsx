@@ -1,3 +1,5 @@
+import parse from 'html-react-parser';
+
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import Container from 'components/shared/container/container';
 import GradientLabel from 'components/shared/gradient-label';
@@ -29,7 +31,7 @@ const Integration = async () => {
           Store vector embeddings and perform similarity search
         </p>
         <CodeBlockWrapper className="show-linenumbers highlighted-code dark mt-11 w-full max-w-[716px] rounded-md border border-gray-new-15 text-[15px] xl:mt-10 sm:mt-8">
-          <div dangerouslySetInnerHTML={{ __html: codeSnippet }} />
+          {parse(codeSnippet)}
         </CodeBlockWrapper>
         <p className="mt-2 text-sm font-light leading-dense tracking-extra-tight text-gray-new-60">
           <span className="mr-1.5" dangerouslySetInnerHTML={{ __html: snippet.text }} />

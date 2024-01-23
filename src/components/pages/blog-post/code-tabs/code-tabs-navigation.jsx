@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -34,11 +35,7 @@ const CodeTabsNavigation = ({ items, highlightedItems }) => {
             return null;
           }
 
-          return (
-            <CodeBlockWrapper key={index}>
-              <div className="[&_pre]:my-0" dangerouslySetInnerHTML={{ __html: item }} />
-            </CodeBlockWrapper>
-          );
+          return <CodeBlockWrapper key={index}>{parse(item)}</CodeBlockWrapper>;
         })}
       </div>
     </>

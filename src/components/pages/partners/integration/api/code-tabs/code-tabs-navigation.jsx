@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
+import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -57,11 +58,8 @@ const CodeTabsNavigation = ({ codeSnippets, highlightedCodeSnippets }) => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <CodeBlockWrapper>
-                      <div
-                        className="show-linenumbers highlighted-code text-[15px]"
-                        dangerouslySetInnerHTML={{ __html: code }}
-                      />
+                    <CodeBlockWrapper className="show-linenumbers highlighted-code min-h-[383px] text-[15px]">
+                      {parse(code)}
                     </CodeBlockWrapper>
                   </m.div>
                 )

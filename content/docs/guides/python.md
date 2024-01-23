@@ -55,19 +55,15 @@ The project is created with a ready-to-use `neondb` database, which you will con
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project's root directory and add your Neon connection string to it. 
+Add a `.env` file to your project's root directory and add your Neon connection string to it.
 
 You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 Your connection string will look something like this:
 
-<CodeBlock shouldWrap>
-
-```shell
+```shell shouldWrap
 DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
 ```
-
-</CodeBlock>
 
 ## Configure your python script
 
@@ -116,13 +112,9 @@ python3 neon-connect.py
 
 If the connection is successful, the script returns information similar to the following:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 Current time: 2023-05-24 08:53:10.403140+00:00
 PostgreSQL version: PostgreSQL 15.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
-
-</CodeBlock>
 
 <NeedHelp/>

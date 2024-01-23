@@ -42,7 +42,7 @@ To create a branch:
 ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch.
 5. Select a parent branch. You can branch from your Neon project's [primary branch](#primary-branch) or a [non-primary branch](#non-primary-branch).
-6. Select an **Include data up to** option to specify the data to be included in your branch.   
+6. Select an **Include data up to** option to specify the data to be included in your branch.
     - **Current point in time**: Creates a branch with the latest available data from the parent (the default).
     - **Specific date and time**: Creates a branch with data up to a specific date and time, allowing for point-in-time restore.
     - **Specific Log Sequence Number**: Creates a branch with data up to a specific [Log Sequence Number (LSN)](/docs/reference/glossary#lsn) in the database log, allowing for precise point-in-time restore.
@@ -117,13 +117,9 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 3. Copy the connection string. A connection string includes your role name, the compute endpoint hostname, and database name.
 4. Connect with `psql` as shown below.
 
-  <CodeBlock shouldWrap>
-
-  ```bash
+  ```bash shouldWrap
   psql postgres://[user]:[password]@[neon_hostname]/[dbname]
   ```
-
-  </CodeBlock>
 
 <Admonition type="tip">
 A compute endpoint hostname starts with an `ep-` prefix. You can also find a compute endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
@@ -136,9 +132,9 @@ If you want to connect from an application, the **Connection Details** widget on
 When working with database branches, you might find yourself in a situation where you need to update your working branch to the latest data from your main branch. For example, let's say you have two child branches `staging` and `development` forked from your `main` branch. You have been working on the `development` branch and find it is now too far out of date with `main`. You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the **Reset from parent** feature, you can perform a clean reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
 
 <u>Key points</u>:
-* You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are not currently supported.
-* This reset is a complete override, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
-* Existing connections will be temporarily interupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
+- You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are not currently supported.
+- This reset is a complete override, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
+- Existing connections will be temporarily interupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
@@ -163,6 +159,7 @@ Using the CLI, you can reset a branch from parent using the following command:
 ``` bash
 neonctl branches reset <id|name> --parent
 ```
+
 In the `id|name` field, specify the branch ID or name of the child branch whose data you want to reset. The `--parent` parameter specifies the kind of reset action that Neon will perform. In the future, there may be other kinds of resets available. For example, rewinding a branch to an earlier period in time.
 
 If you have multiple projects in your account, you'll also have to include the `project-id` in the command along with the branch.
@@ -172,14 +169,17 @@ neonctl branches reset <id|name> --parent --project-id <project id>
 ```
 
 Example:
+
 ``` bash
 neonctl branches reset development --parent --project-id noisy-pond-12345678
 ```
+
 Alternatively, you can set the `project-id` as a background context for your CLI session, letting you perform other actions against that project without having to include the `project-id` in every command. The setting is saved in a `context-file` and remains in place until you set a new context, or you remove the `context-file`.
 
 ```bash
 neonctl set-context --project-id <project id>
 ```
+
 Read more about performing branching actions from the CLI in [CLI - branches](/docs/reference/cli-branches), and more about setting contexts in [CLI - set-context](/docs/reference/cli-set-context).
 
 </TabItem>
@@ -189,7 +189,6 @@ Resetting from parent is not yet directly supported from the API. However, you c
 </TabItem>
 
 </Tabs>
-
 
 ## Delete a branch
 

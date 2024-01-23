@@ -25,13 +25,9 @@ You can obtain a connection string from the **Connection Details** widget on the
 
 From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 psql postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
-
-</CodeBlock>
 
 <Admonition type="note">
 Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
@@ -45,13 +41,9 @@ You can obtain a Neon connection string with your password from the Neon **Dashb
 
 Neon uses the default Postgres port, `5432`. If you need to specify the port in your connection string, you can do so as follows:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 psql postgres://[user]:[password]@[neon_hostname][:port]/[dbname]
 ```
-
-</CodeBlock>
   
 ## Running queries
 

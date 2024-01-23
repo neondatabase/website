@@ -63,13 +63,9 @@ To connect to your branch:
 3. Copy the connection string. A connection string includes your role name, password, compute endpoint hostname, and database name.
 4. Connect with `psql`.
 
-   <CodeBlock shouldWrap>
-
-   ```bash
+   ```bash shouldWrap
    psql postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
-
-   </CodeBlock>
 
 ## Verify the data
 

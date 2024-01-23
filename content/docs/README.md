@@ -148,7 +148,7 @@ To add a single page <https://example.com/changelog> to the docs sidebar, add th
 
 ## Code blocks
 
-All available languages for code blocks can be found [here](https://github.com/shikijs/shiki/blob/main/docs/languages.md).
+All available languages for code blocks can be found [here](https://shikiji.netlify.app/languages).
 
 You can use fenced code blocks with three backticks (```) on the lines before and after the code block. And display code with options
 
@@ -217,22 +217,16 @@ You can use fenced code blocks with three backticks (```) on the lines before an
 
   ````
 
-To display code with options, wrap your code with `<CodeBlock></CodeBlock>` component.
-
-Right now, `<CodeBlock>` accepts only:
-
 - `shouldWrap` - flag to enable code wrapping in the code block.
 
   Example:
 
     ````md
-    <CodeBlock shouldWrap>
 
-    ```powershell
+    ```powershell shouldWrap
     powershell -Command "Start-Process -FilePath powershell -Verb RunAs -ArgumentList '-NoProfile','-InputFormat None','-ExecutionPolicy Bypass','-Command ""iex (iwr -UseBasicParsing https://cli.configu.com/install.ps1)""'"
     ```
 
-    </CodeBlock>
     ````
 
 ## Code Tabs

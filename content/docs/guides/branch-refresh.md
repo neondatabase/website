@@ -111,9 +111,7 @@ The response body includes the `id` of your new branch. You will need this value
 
 The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) API request shown below moves the compute endpoint from your current branch to the new branch. The required parameters are the `project_id` and `endpoint_id` of your current branch, and the `branch_id` of your new branch. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/%20dark-cell-12604300/endpoints/ep-divine-violet-55990977 \
      --header 'accept: application/json' \
@@ -127,8 +125,6 @@ curl --request PATCH \
 }
 ' |jq
 ```
-
-</CodeBlock>
 
 <details>
 <summary>Response body</summary>
@@ -166,16 +162,12 @@ curl --request PATCH \
 
 The [Delete branch](https://api-docs.neon.tech/reference/deleteprojectbranch) API request shown below deletes the old branch. The old branch will take up storage space, so it's recommended that you remove it. The required parameters are the `project_id` and `branch_id`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 curl --request DELETE \
      --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches/br-wandering-forest-45768684 \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' |jq
 ```
-
-</CodeBlock>
 
 <details>
 <summary>Response body</summary>
@@ -220,9 +212,7 @@ curl --request DELETE \
 
 Optionally, you can rename the new branch to the name of the old branch. The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) API request shown below renames the new branch from `dev_branch_2` to `dev_branch_1`.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches/br-falling-flower-15986510 \
      --header 'accept: application/json' \
@@ -236,8 +226,6 @@ curl --request PATCH \
 }
 '
 ```
-
-</CodeBlock>
 
 <details>
 <summary>Response body</summary>
@@ -263,4 +251,5 @@ curl --request PATCH \
   "operations": []
 }
 ```
+
 </details>

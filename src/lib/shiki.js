@@ -5,7 +5,7 @@ import customTheme from 'utils/custom-theme.json';
 let highlighter;
 
 function tokensToHTML(tokens, lang, highlightedLines) {
-  let html = `<pre data-language="${lang}"><code data-language="${lang}" class="grid auto-rows-fr">`;
+  let html = `<pre data-language="${lang}"><code data-language="${lang}" class="grid">`;
 
   tokens.forEach((line, index) => {
     const isHighlighted = highlightedLines.includes(index + 1);
@@ -14,10 +14,12 @@ function tokensToHTML(tokens, lang, highlightedLines) {
 
     line.forEach((token) => {
       const style = `color: ${token.color}`;
-      html += `<span style="${style}">${token.content}</span>`;
+      // Escape special characters
+      const content = token.content.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      html += `<span style="${style}">${content}</span>`;
     });
 
-    html += '</span>'; // End of line span and new line
+    html += '</span>'; // End of line span
   });
 
   html += '</code></pre>';

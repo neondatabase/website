@@ -98,9 +98,7 @@ If a branch ID or name is not provided, the command creates a role in the primar
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl roles create --name sally
 ┌───────┬──────────────────────┐
 │ Name  │ Created At           │
@@ -108,8 +106,6 @@ neonctl roles create --name sally
 │ sally │ 2023-06-20T00:43:17Z │
 └───────┴──────────────────────┘
 ```
-
-</CodeBlock>
 
 ### delete
 
@@ -134,9 +130,7 @@ If a branch ID or name is not provided, the command assumes the role resides in 
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl roles delete sally
 ┌───────┬──────────────────────┐
 │ Name  │ Created At           │
@@ -144,7 +138,5 @@ neonctl roles delete sally
 │ sally │ 2023-06-20T00:43:17Z │
 └───────┴──────────────────────┘
 ```
-
-</CodeBlock>
 
 <NeedHelp/>

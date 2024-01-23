@@ -40,7 +40,10 @@ const CodeTabs = ({ children = null, labels = [] }) => {
 };
 
 CodeTabs.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.arrayOf(PropTypes.object),
+  ]),
   labels: PropTypes.arrayOf(PropTypes.string),
 };
 

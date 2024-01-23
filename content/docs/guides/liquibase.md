@@ -13,7 +13,7 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 - A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS`. 
+- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS`.
 
 ## Download and extract Liquibase
 
@@ -106,13 +106,9 @@ From the Neon **Dashboard**, retrieve your password and a Java connection string
 
 Your Java connection string should look something like the one shown below.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf
 ```
-
-</CodeBlock>
 
 ## Connect from Liquibase to your Neon database
 
@@ -131,14 +127,10 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex
 
 3. Open the the `liquibase.properties` file in an editor and add entries for a [liquibase changelog file](https://docs.liquibase.com/concepts/changelogs/home.html) and your database `url`. We'll call the changelog file `dbchangelog.xml`. You will use this file to define schema changes. For the `url`, specify the Neon connection string you retrieved previously.
 
-    <CodeBlock shouldWrap>
-
-    ```env
+    ```env shouldWrap
     changeLogFile:dbchangelog.xml  
     url: jdbc:postgresql://ep-floral-poetry-66238369.us-east-2.aws.neon.tech/blog?user=alex&password=4GfNAqycba8P&sslmode=require
     ```
-
-    </CodeBlock>
 
 ## Take a snapshot of your database
 

@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
-import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 
 import CodeTabs from 'components/pages/doc/code-tabs';
@@ -20,7 +19,7 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import customTheme from 'utils/custom-theme.json';
+import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 
@@ -109,11 +108,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   YoutubeIframe,
   DefinitionList,
   Admonition,
-  CodeBlock: (props) => {
-    // eslint-disable-next-line react/prop-types
-    const { className, shouldWrap, ...otherProps } = props;
-    return <div className={clsx(className, { 'code-wrap': shouldWrap })} {...otherProps} />;
-  },
   CodeTabs,
   DetailIconCards,
   TechnologyNavigation,
@@ -145,15 +139,7 @@ const Content = ({
               // Adds support for GitHub Flavored Markdown
               remarkGfm,
             ],
-            rehypePlugins: [
-              [
-                rehypePrettyCode,
-                {
-                  grid: true,
-                  theme: customTheme,
-                },
-              ],
-            ],
+            rehypePlugins: [getCodeProps],
           },
         }}
       />

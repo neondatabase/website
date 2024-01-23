@@ -15,7 +15,7 @@ The instructions in this guide are based on the workflow described in the [Liqui
 
 - A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS`. 
+- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS`.
 - An installation of Liquibase. For instructions, refer to [Get started with Liquibase and Neon](/docs/guides/liquibase).
 
 ## Initialize a new Liquibase project
@@ -108,9 +108,7 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
 
 3. Change the target database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `dev1` branch. You can obtain the required details from the connection string you copied previously. You will need to swap out the hostname (`ep-silent-hill-85675036.us-east-2.aws.neon.tech`), username, and password for your own.
 
-    <CodeBlock shouldWrap>
-
-    ```env
+    ```env shouldWrap
     liquibase.command.url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
 
     liquibase.command.username: alex
@@ -118,21 +116,15 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
     liquibase.command.password: AbC123dEf
     ```
 
-    </CodeBlock>
-
 4. Change the source database settings to the correct values for the `blog` database on your `main` branch. The username and password will be the same as your `dev1` branch, but make sure to use the right hostname. Copy the snippet below and replace the hostname (`ep-cool-darkness-123456.us-east-2.aws.neon.tech`), username, and password for your own.
 
-    <CodeBlock shouldWrap>
-
-    ```env
+    ```env shouldWrap
     liquibase.command.referenceUrl: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
 
     liquibase.command.referenceUsername: alex
 
     liquibase.command.referencePassword: AbC123dEf
     ```
-
-    </CodeBlock>
 
 ## Take a snapshot of your target database
 
@@ -276,13 +268,9 @@ It is a best practice to review schema changes before saving and applying them t
 
 You can run the [status](https://docs.liquibase.com/commands/change-tracking/status.html) command to see if there are any changesets that haven't been applied to the source database. Notice that the command specifies the hostname of the source database:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog status --verbose
 ```
-
-</CodeBlock>
 
 <details>
 <summary>Command output</summary>
@@ -304,13 +292,9 @@ Liquibase command 'status' was executed successfully.
 
 Before applying the update, you can run the [updateSQL](https://docs.liquibase.com/commands/update/update-sql.html) command to inspect the SQL Liquibase will apply when running the update command:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog updateSQL
 ```
-
-</CodeBlock>
 
 <details>
 <summary>Command output</summary>
@@ -362,13 +346,9 @@ Liquibase command 'updateSql' was executed successfully.
 
 You can also run a `diff` command to compare your source and target databases.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 liquibase --referenceUrl=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog --referenceUsername alex --referencePassword IwMdnTs1R6kH diff
 ```
-
-</CodeBlock>
 
 <details>
 <summary>Command output</summary>
@@ -440,13 +420,9 @@ When you are satisfied with the changes that will be applied, save your changelo
 
 Apply the new changesets to the source database on your primary branch:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 liquibase --url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog update
 ```
-
-</CodeBlock>
 
 <details>
 <summary>Command output</summary>

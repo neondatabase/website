@@ -19,7 +19,6 @@ npm i -g neonctl
 
 Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
 
-
 </TabItem>
 
 <TabItem>
@@ -40,13 +39,9 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 
     Download the macOS binary:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
     ```
-
-    </CodeBlock>
 
     No installation is required. Run the Neon CLI as follows:
 
@@ -58,13 +53,9 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 
     Download the Linux binary:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux -o neonctl
     ```
-
-    </CodeBlock>
 
     No installation is required. Run the Neon CLI as follows:
 
@@ -76,13 +67,9 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 
     Download the Windows binary:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
     ```
-
-    </CodeBlock>
 
     No installation is required. Run the Neon CLI as follows:
 
@@ -93,7 +80,6 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 </TabItem>
 
 </Tabs>
-
 
 ### Upgrade
 

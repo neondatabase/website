@@ -58,13 +58,9 @@ If you do not have one already, create a Neon project.
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-<CodeBlock shouldWrap>
-
-```shell
+```shell shouldWrap
 DATABASE_URL=ppostgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint_id]
 ```
-
-</CodeBlock>
 
 <Admonition type="note">
 A special `endpoint` connection option is appended to the connection string above: `options=endpoint%3D[endpoint_id]`. This option is used with Postgres clients such as `node-postgres` and `Postgres.js` that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. For more information, see [connection errors](/docs/connect/connection-errors).

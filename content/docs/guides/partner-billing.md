@@ -280,14 +280,12 @@ If you do not include these parameters, the query defaults to the current consum
 
 Here is an example query that returns metrics from September 1st and December 1st, 2023. Time values must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
 
-<CodeBlock shouldWrap>
-```bash
+```bash shouldWrap
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/consumption/projects?limit=10&from=2023-09-01T00%3A00%3A00Z&to=2023-12-01T00%3A00%3A00Z' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq
 ```
-</CodeBlock>
 
 And here is a sample response (with key lines highlighted):
 
@@ -358,14 +356,12 @@ To control pagination (number of results per response), you can include these qu
 
 Here is an example `GET` request asking for the next 100 projects, starting with project id `divine-tree-77657175`:
 
-<CodeBlock shouldWrap>
-```bash
+```bash shouldWrap
 curl --request GET \
      --url https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100\
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq'
 ```
-</CodeBlock>
 
 <Admonition type="note">
 To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
