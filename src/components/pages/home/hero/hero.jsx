@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import clouflare from 'images/partners-logos/cloudflare.svg';
 import hasura from 'images/partners-logos/hasura.svg';
@@ -94,20 +95,22 @@ const Hero = () => (
           ))}
         </div>
       </div>
-      <ul className="mx-auto mt-20 flex w-full max-w-[1472px] justify-between gap-x-16 xl:gap-x-14 lg:mt-16 lg:flex-wrap lg:justify-center lg:gap-y-10 md:mt-14 md:gap-y-8 sm:mt-10 xs:gap-y-6">
-        {logos.map(({ logo, alt, width }) => (
-          <li key={alt}>
-            <Image
-              className="lg:h-10 lg:w-auto md:h-7"
-              src={logo}
-              alt={alt}
-              width={width}
-              height={42}
-              priority
-            />
-          </li>
-        ))}
-      </ul>
+      <Link to={LINKS.caseStudies}>
+        <ul className="mx-auto mt-20 flex w-full max-w-[1472px] justify-between gap-x-16 xl:gap-x-14 lg:mt-16 lg:flex-wrap lg:justify-center lg:gap-y-10 md:mt-14 md:gap-y-8 sm:mt-10 xs:gap-y-6">
+          {logos.map(({ logo, alt, width }) => (
+            <li key={alt}>
+              <Image
+                className="lg:h-10 lg:w-auto md:h-7"
+                src={logo}
+                alt={alt}
+                width={width}
+                height={42}
+                priority
+              />
+            </li>
+          ))}
+        </ul>
+      </Link>
     </Container>
   </section>
 );
