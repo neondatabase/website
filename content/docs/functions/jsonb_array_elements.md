@@ -7,7 +7,9 @@ updatedOn: '2024-01-22T23:44:34.163Z'
 
 You can use the `jsonb_array_elements` function to expand a `JSONB` array into a set of rows, each containing one element of the array. It is a simpler option compared to complex looping logic. It is also more efficient than executing the same operation on the application side by reducing data transfer and processing overhead.
 
-Function signature:
+<CTA />
+
+## Function signature
 
 ```sql
 jsonb_array_elements(json)

@@ -10,6 +10,8 @@ The `pg_tiktoken` extension enables fast and efficient tokenization of data in y
 
 This topic provides guidance on installing the extension, utilizing its features for tokenization and token management, and integrating the extension with ChatGPT models.
 
+<CTA />
+
 ## What is a token?
 
 Language models process text in units called tokens. A token can be as short as a single character or as long as a complete word, such as "a" or "apple." In some languages, tokens may comprise less than a single character or even extend beyond a single word.

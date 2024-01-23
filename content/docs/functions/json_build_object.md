@@ -8,13 +8,13 @@ updatedOn: '2024-01-21T09:34:18.540Z'
 
 `json_build_object` is used to construct a JSON object from a set of key-value pairs, creating a JSON representation of a row or set of rows. This has potential performance benefits compared to converting query results to JSON on the application side.
 
-Function signature:
+<CTA />
 
+## Function signature
 
 ```sql
 json_build_object ( VARIADIC "any" ) → json
 ```
-
 
 ## `json_build_object` example
 
