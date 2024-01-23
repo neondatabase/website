@@ -4,7 +4,6 @@ subtitle: pg_stat_statements enables tracking, planning and execution statistics
 enableTableOfContents: true
 ---
 
-
 The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a PostgreSQL database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance. It also helps analyze usage patterns to right-size your database and tune configuration parameters.
 
 This guide covers:
@@ -19,42 +18,28 @@ This guide covers:
 `pg_stat_statements` is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below.
 </Admonition>
 
-
-**Version availability:**
-
+##  Version availability
 
 The version of `pg_stat_statements` available on Neon depends on the version of Postgres you select for your Neon project.
-
 
 - Postgres 14 - `pg_stat_statements` 1.9
 - Postgres 15 - `pg_stat_statements` 1.10
 - Postgres 16 - `pg_stat_statements` 1.10
 
-
-_Only [Apache-2](https://docs.timescale.com/about/latest/timescaledb-editions/) licensed features are supported. Compression is not supported._
-
-
-
-
 ## Enable the `pg_stat_statements` extension
 
-
 You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
-
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-
 For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
-
 
 ## Usage examples
 
 
-**Query the pg_stat_statements view**
-
+### Query the pg_stat_statements view
 
 The main interface is a view - `pg_stat_statements` - that contains one row per distinct database query, showing various statistics.
 
@@ -70,15 +55,13 @@ Output contains details like:
 | 16391  | 16384 | -9047282044438606287  | SELECT * FROM users;  | 10    |
 ```
 
-
 Let's explore some example usage patterns.
 
-**Find most executed queries**
+### Find the most executed queries
 
-Most frequently run queries often are critical paths and optimization candidates. 
+The most frequently run queries are often critical paths and optimization candidates. 
 
-In the below query, you select the `query` and `calls` columns, representing the SQL statement and the number of times each statement has been executed, respectively - only the top 10 rows are returned (`LIMIT 10`).
-
+In the query below, you select the `query` and `calls` columns, representing the SQL statement and the number of times each statement has been executed, respectively - only the top 10 rows are returned (`LIMIT 10`).
 
 ```sql
 SELECT query, calls 
@@ -97,17 +80,11 @@ LIMIT 10;
 | INSERT INTO audit_log (user_id, action, changed_on) VALUES ($1, $2, CURRENT_TIMESTAMP);    |  1849 |
 ```
 
+### Monitor slow queries
 
+A high average runtime can indicate an inefficient query.
 
-
-**Monitor slow queries**
-
-
-High average runtime can indicate an inefficient query.
-
-
-In the query below, you use the `query`, `mean_exec_time` (average execution time per call), and `calls` columns. The condition `WHERE mean_exec_time > 1` filters out queries with an average execution time greater than 1 unit (you may adjust this threshold as needed).
-
+The query below uses the `query`, `mean_exec_time` (average execution time per call), and `calls` columns. The condition `WHERE mean_exec_time > 1` filters out queries with an average execution time greater than 1 unit (you may adjust this threshold as needed).
 
 ```sql
 SELECT query, mean_exec_time, calls
@@ -116,6 +93,7 @@ WHERE mean_exec_time > 1
 ORDER BY mean_exec_time DESC;
 ```
 
+This query returns the following results:
 
 ```text
 | Query                                         | Mean Time | Calls |
@@ -123,12 +101,9 @@ ORDER BY mean_exec_time DESC;
 | SELECT p.*, c.name AS category FROM products  | 250.60ms  |  723  |
 ```
 
+### Identify queries that return many rows
 
-**Identify queries that return many rows**
-
-
-You can select the `query` and `rows` columns, representing the SQL statement and the number of rows returned by each statement, respectively.
-
+To identify queries that return a lot of rows, you can select the `query` and `rows` columns, representing the SQL statement and the number of rows returned by each statement, respectively.
 
 ```sql
 SELECT query, rows
@@ -137,6 +112,7 @@ ORDER BY rows DESC
 LIMIT 10;
 ```
 
+This query returns results similar to the following:
 
 ```
 | Query                                             | Rows    |
@@ -146,17 +122,17 @@ LIMIT 10;
 | SELECT p.*, c.name AS category FROM products      | 23,984  |
 ```
 
+## Reset statistics
 
-**Reset**
+When executed, the `pg_stat_statements_reset()` function resets the accumulated statistical data, such as execution times and counts for SQL statements, to zero. It's particularly useful in scenarios where you want to start fresh with collecting performance statistics without restarting the entire PostgreSQL server. 
 
-
-When executed, `pg_stat_statements_reset()` command resets the accumulated statistical data, such as execution times and counts for SQL statements, to zero. It's particularly useful in scenarios where you want to start fresh with collecting performance statistics without restarting the entire PostgreSQL server.
-
+<Admonition type="note">
+In Neon, only [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) roles have the privilege required to execute this function. The default role created with a Neon project and roles created in the Neon Console, CLI, and API are granted membership in the `neon_superuser` role.
+</Admonition>
 
 ```sql
 SELECT pg_stat_statements_reset();
 ```
-
 
 ## Resources
 
