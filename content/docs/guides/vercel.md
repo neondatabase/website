@@ -138,7 +138,7 @@ You can enable these variables from the Neon Console:
 3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
 4. In the **Vercel integration** drawer, select the environment variables you need in your Vercel deployments. Changes will apply to future preview deployments.
 
-![Select Vercel variables](vercel_select_variables.png)
+![Select Vercel variables](/docs/guides/vercel_select_variables.png)
 
 ## Make the integration available to other Vercel projects
 
