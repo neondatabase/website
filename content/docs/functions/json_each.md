@@ -101,7 +101,7 @@ Here, we're joining each row in the `user_data` table with the output of `json_e
 ### Alternative functions
 - [json_each_text](./json_each_text) - Similar functionality to `json_each` but returns the value as a text type instead of JSON. 
 - [json_object_keys](./json_object_keys) - It returns only the set of keys in the JSON object, without the values.
-- [jsonb_each](./jsonb_each) - Works like `json_each` but for `jsonb` data type, which is more efficient for certain operations.
+- [jsonb_each](./jsonb_each) - It provides the same functionality as `json_each`, but accepts JSONB input instead of JSON. 
 
 ## Resources
 - [Postgres documentation: JSON functions](https://www.postgresql.org/docs/current/functions-json.html)
