@@ -118,17 +118,17 @@ When Neon releases a new extension or new extension version, a compute restart i
 
 ## Request extension support
 
-To request support for a Postgres extension, please open a feature request on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
+To request support for a Postgres extension, paid plan users can [open a support ticket](https://console.neon.tech/app/projects?modal=support). Free plan users can submit a request via the **feedback** channel on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
 
 ### Custom-built extensions
 
-Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to our Support team. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support). Please include the following information in your request:
+Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to us as described above. Please include the following information in your request:
 
 - A repository link or archive file containing the source code for your extension
 - A description of what the extension does, instructions for compiling it, and any prerequisites
 - Whether an NDA or licensing agreement is necessary for Neon to provide support for your extension
 
-Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access. Neon features such as _Autoscaling_ and _Autosuspend_ may limit the types of extensions we can support.
+Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access. Additionally, Neon features such as _Autoscaling_ and _Autosuspend_ may limit the types of extensions we can support.
 
 Depending on the nature of your extension, Neon may also request a liability waiver.
 
