@@ -308,6 +308,8 @@
           slug: extensions/timescaledb
     - title: Functions
       items:
+        - title: array_to_json
+          slug: functions/array_to_json
         - title: json_array_elements
           slug: functions/json_array_elements
         - title: json_build_object
@@ -316,8 +318,6 @@
           slug: functions/json_extract_path
         - title: dense_rank
           slug: functions/dense_rank
-        - title: array_to_json
-          slug: functions/array_to_json
     - title: Compatibility
       slug: reference/compatibility
 - title: Import data
