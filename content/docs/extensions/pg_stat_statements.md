@@ -195,6 +195,42 @@ This query returns results similar to the following:
 | SELECT p.*, c.name AS category FROM products      | 23,984  |
 ```
 
+## Identify recently executed queries
+
+The following queries can be used to look up queries by execution time and number of calls.
+
+This query retruns details including user ID, query text, number of calls, total time, rows returned, and the time elapsed since each query was last executed, for all queries executed within the last hour, sorted in descending order by the time elapsed since their last execution.
+
+```sql
+SELECT
+  userid,
+  query,
+  calls,
+  total_time,
+  rows,
+  now() - pg_stat_statements.last_exec_time AS interval
+FROM
+  pg_stat_statements
+WHERE
+  pg_stat_statements.last_exec_time >= now() - INTERVAL '1 hour'
+ORDER BY
+  interval DESC;
+```
+
+This query selects the total execution time in minutes, average execution time in milliseconds, user ID, number of calls, and query text, ordering the results by the average execution time in descending order.
+
+```sql
+SELECT
+  (total_exec_time / 1000 / 60) as total_min,
+  mean_exec_time as avg_ms,
+  userid,
+  calls,
+  query
+FROM pg_stat_statements
+ORDER BY 2 DESC
+LIMIT 10;
+```
+
 ## Reset statistics
 
 When executed, the `pg_stat_statements_reset()` function resets the accumulated statistical data, such as execution times and counts for SQL statements, to zero. It's particularly useful in scenarios where you want to start fresh with collecting performance statistics.
