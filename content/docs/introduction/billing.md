@@ -4,6 +4,8 @@ enableTableOfContents: true
 updatedOn: '2024-01-19T14:14:18.726Z'
 ---
 
+<NewPricing/>
+
 Neon [paid plans](/docs/introduction/plans#neon-plans) bill for usage based on the following metrics:
 
 - **Compute time**: The amount of compute resources used per hour.
