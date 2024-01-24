@@ -61,7 +61,8 @@ To edit a compute endpoint:
    The **Edit** window opens, letting you take a range of actions, depending on your tier.
 1. Once you've made your changes, click **Save**. All changes take immediate effect.
 
-### What happens to the endpoint when making changes
+### What happens to the compute endpoint when making changes
+
 Some key points to understand about how your endpoint responds when you make changes to your compute settings:
 
 * Changing the size of your fixed compute restarts the endpoint and _temporarily disconnects all existing connections_. 
@@ -97,6 +98,86 @@ Neon supports two compute size configuration options:
 <Admonition type="info">
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
 </Admonition>
+
+### How to size your compute endpoint
+
+Postgres parameters such as `shared_buffers` and `max_connections` are defined by the size of your compute endpoint.
+
+- `shared_buffers (RAM)`: Defines the amount of memory allocated to PostgreSQL for caching data and indexes in shared memory. Note that for Neon compute endpoints, `shared_buffers (RAM)` is always 4 x vCPU.
+- `max_connections`: Determines the maximum number of concurrent connections to the database server, limiting the number of clients that can connect simultaneously.
+
+<Admonition type="note">
+To increase the number of concurrent connections that Neon can support, you can also use `connection pooling`. If connection pooling addresses concurrent connection requirements, the size of your working set should be the primary factor in right-sizing your compute endpoint.
+</Admonition>
+
+The following table shows the settings for each compute size in Neon:
+
+| Compute Size (CU) | vCPU | shared_buffers (RAM) | max_connections (approximate) |
+|-------------------|------|----------------------|-------------------------------|
+| 0.25              | 0.25 | 1 GB                 | 112                           |
+| 0.50              | 0.50 | 2 GB                 | 225                           |
+| 1                 | 1    | 4 GB                 | 450                           |
+| 2                 | 2    | 8 GB                 | 901                           |
+| 3                 | 3    | 12 GB                | 1351                          |
+| 4                 | 4    | 16 GB                | 1802                          |
+| 5                 | 5    | 20 GB                | 2253                          |
+| 6                 | 6    | 24 GB                | 2703                          |
+| 7                 | 7    | 28 GB                | 3154                          |
+
+To right-size your compute endpoin, you should have an estimate in mind for the following data points:
+
+- The size of your working data set
+- The expected maximum number of concurrent connections.
+
+To estimate the size of your working data set, you can start by running a query like this to assess your cache hit ratio (i.e., how often your queries are served from memory rather than disk).
+
+```sql
+WITH 
+    all_tables AS
+    (
+        SELECT  *
+        FROM    
+        (
+            SELECT  'all'::text AS table_name, 
+                    SUM( (COALESCE(heap_blks_read,0) + COALESCE(idx_blks_read,0) + COALESCE(toast_blks_read,0) + COALESCE(tidx_blks_read,0)) ) AS from_disk, 
+                    SUM( (COALESCE(heap_blks_hit,0)  + COALESCE(idx_blks_hit,0)  + COALESCE(toast_blks_hit,0)  + COALESCE(tidx_blks_hit,0))  ) AS from_cache    
+            FROM    pg_statio_all_tables  -- change to pg_statio_USER_tables if you want to check only user tables (excluding postgres's own tables)
+        ) a
+        WHERE   (from_disk + from_cache) > 0 -- discard tables without hits
+    ),
+    tables AS 
+    (
+        SELECT  *
+        FROM    
+        (
+            SELECT  relname AS table_name, 
+                    ( (COALESCE(heap_blks_read,0) + COALESCE(idx_blks_read,0) + COALESCE(toast_blks_read,0) + COALESCE(tidx_blks_read,0)) ) AS from_disk, 
+                    ( (COALESCE(heap_blks_hit,0)  + COALESCE(idx_blks_hit,0)  + COALESCE(toast_blks_hit,0)  + COALESCE(tidx_blks_hit,0))  ) AS from_cache    
+            FROM    pg_statio_all_tables -- change to pg_statio_USER_tables if you want to check only user tables (excluding postgres's own tables)
+        ) a
+        WHERE   (from_disk + from_cache) > 0 -- discard tables without hits
+    )
+SELECT  table_name AS "table name",
+        from_disk AS "disk hits",
+        ROUND((from_disk::numeric / (from_disk + from_cache)::numeric) * 100.0, 2) AS "% disk hits",
+        ROUND((from_cache::numeric / (from_disk + from_cache)::numeric) * 100.0, 2) AS "% cache hits",
+        (from_disk + from_cache) AS "total hits"
+FROM    (SELECT * FROM all_tables UNION ALL SELECT * FROM tables) a
+ORDER   BY (CASE WHEN table_name = 'all' THEN 0 ELSE 1 END), from_disk DESC;
+```
+
+If you do not see a result in the 99% percentile, your working set is not fully or adequately in memory. In this case, try to estimate how much more `shared_buffers (RAM)` might be necessary and increase the size of your compute endpoint accordingly.
+
+#### Autoscaling considerations
+
+Autoscaling is most effective when your working set is fully cached in the shared_buffers (RAM) of your minimum compute size. Additionally, ensure that the `max_connections` limit of the minimum compute size can manage the required number of concurrent connections. This setup enables autoscaling to efficiently manage both expected and unexpected increases in workload.
+
+Consider this scenario: if your working set is approximately 6 GB and you usually have around 500 concurrent connections, starting with a compute size of .25 CU will lead to suboptimal autoscaling performance. While your compute will scale up from .25 CU, you may see performance issues due to inadequate caching of your working set and throttled connections. Therefore, it is advisable to start with a larger minimum compute size to ensure sufficient resources for both your working set and the necessary concurrent connections from the moment your compute endpoint is activated.
+
+Also, when executing complex queries, an appropriately sized minimum compute configuration allows autoscaling to  support the additional `work_mem` required for queries or `maintenance_work_mem` for indexing tasks.
+
+- `work_mem`: This parameter specifies the amount of memory allocated for internal sorting operations and hash tables before resorting to temporary disk files.
+- `maintenance_work_mem`: This setting determines the maximum memory allocation for maintenance tasks.
 
 ### Autosuspend configuration
 
