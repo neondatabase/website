@@ -88,7 +88,7 @@ However, you can see the history of operations related to the creation and delet
 
 #### How long do ephemeral endpoints remain active
 
-The ephemeral endpoints are created according to your configured [default](/docs/manage/projects#reset-the-default-compute-size) size. An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the endpoint is removed.
+The ephemeral endpoints are created according to your configured [default compute size](/docs/manage/projects#reset-the-default-compute-size). An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
 ## How to use branch restore
 
@@ -98,12 +98,12 @@ Use the **Restore** page to restore a branch to an earlier timestamp in its hist
 
 ![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
 
-All databases on your selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see the backup branch created from this restore point.
+All databases on the selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see a backup branch was created with the state of the branch at the restore point in time.
 
 ![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
 
 To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it.
-If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branches relationship to this restore point backup.
+If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branches relationship to the restore point backup.
 
 ### Performing time travel queries
 
