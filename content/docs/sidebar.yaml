@@ -318,6 +318,8 @@
           slug: functions/json_build_object
         - title: json_extract_path
           slug: functions/json_extract_path
+        - title: json_object
+          slug: functions/json_object
         - title: dense_rank
           slug: functions/dense_rank
     - title: Compatibility
