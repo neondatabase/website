@@ -22,6 +22,7 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
+import DocCta from '../doc-cta';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });
@@ -121,6 +122,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   CommunityBanner,
   Tabs,
   TabItem,
+  CTA: DocCta,
   ...sharedComponents,
 });
 

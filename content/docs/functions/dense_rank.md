@@ -2,12 +2,14 @@
 title: Postgres dense_rank() function
 subtitle: 'Returns the rank of the current row, without gaps'
 enableTableOfContents: true
-updatedOn: '2024-01-23T02:02:35.387Z'
+updatedOn: '2024-01-23T19:40:04.087Z'
 ---
 
 You can use the `dense_rank` function to assign a rank to each distinct row within a result set. It provides a non-gapped ranking of values which is particularly useful when dealing with datasets where ties need to be acknowledged without leaving gaps in the ranking sequence.
 
-Function signature:
+<CTA />
+
+## Function signature
 
 ```sql
 dense_rank() OVER (
