@@ -174,7 +174,7 @@ Autoscaling is most effective when your working set is fully cached in the share
 
 Consider this scenario: if your working set is approximately 6 GB and you usually have around 500 concurrent connections, starting with a compute size of .25 CU will lead to suboptimal autoscaling performance. While your compute will scale up from .25 CU, you may see performance issues due to inadequate caching of your working set and throttled connections. Therefore, it is advisable to start with a larger minimum compute size to ensure sufficient resources for both your working set and the necessary concurrent connections from the moment your compute endpoint is activated.
 
-Also, when executing complex queries, an appropriately sized minimum compute configuration allows autoscaling to  support the additional `work_mem` required for queries or `maintenance_work_mem` for indexing tasks.
+Also, when executing complex queries, an appropriately sized minimum compute configuration allows autoscaling to support the additional `work_mem` required for queries or `maintenance_work_mem` for indexing tasks.
 
 - `work_mem`: This parameter specifies the amount of memory allocated for internal sorting operations and hash tables before resorting to temporary disk files.
 - `maintenance_work_mem`: This setting determines the maximum memory allocation for maintenance tasks.
