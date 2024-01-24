@@ -3,7 +3,7 @@ title: Supported Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2024-01-19T14:14:18.725Z'
+updatedOn: '2024-01-23T19:40:04.082Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
@@ -43,7 +43,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [pg_jsonschema](https://github.com/supabase/pg_jsonschema)            | 0.2.0              | 0.2.0               | 0.2.0               |                                                                                                                  |
 | [pg_prewarm](https://www.postgresql.org/docs/15/pgprewarm.html)              | 1.2        | 1.2         |   1.2         |                                                                                                                  |
 | [pg_roaringbitmap](https://github.com/ChenHuajun/pg_roaringbitmap)          | 0.5          | 0.5         |  0.5         |                                                                                                                  | Install with `CREATE EXTENSION roaringbitmap;`
-| [pg_stat_statements](https://www.postgresql.org/docs/15/pgstatstatements.html)       | 1.10 | 1.10 | 1.10 |
+| [pg_stat_statements](https://www.postgresql.org/docs/15/pgstatstatements.html)       | 1.9 | 1.10 | 1.10 |
 | [pg_tiktoken](https://github.com/kelvich/pg_tiktoken)              | 0.0.1                 | 0.0.1                  |  0.0.1                  |                                                                                                                  | The [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role has `EXECUTE` privilege on the `pg_stat_statements_reset()` function.
 | [pg_trgm](https://www.postgresql.org/docs/15/pgtrgm.html)                 | 1.6           | 1.6            |     1.6            |                                                                                                                 |
 | [pg_uuidv7](https://github.com/fboulnois/pg_uuidv7)                | 1.0                   | 1.0                  |    1.0                  |                                                                                                                  |
@@ -118,17 +118,17 @@ When Neon releases a new extension or new extension version, a compute restart i
 
 ## Request extension support
 
-To request support for a Postgres extension, please open a feature request on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
+To request support for a Postgres extension, paid plan users can [open a support ticket](https://console.neon.tech/app/projects?modal=support). Free plan users can submit a request via the **feedback** channel on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
 
 ### Custom-built extensions
 
-Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to our Support team. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support). Please include the following information in your request:
+Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to us as described above. Please include the following information in your request:
 
 - A repository link or archive file containing the source code for your extension
 - A description of what the extension does, instructions for compiling it, and any prerequisites
 - Whether an NDA or licensing agreement is necessary for Neon to provide support for your extension
 
-Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access. Neon features such as _Autoscaling_ and _Autosuspend_ may limit the types of extensions we can support.
+Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access. Additionally, Neon features such as _Autoscaling_ and _Autosuspend_ may limit the types of extensions we can support.
 
 Depending on the nature of your extension, Neon may also request a liability waiver.
 
