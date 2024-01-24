@@ -24,7 +24,7 @@ A few key points to keep in mind about the restore operation:
 - [Restore backups are created automatically in case you make a mistake](#automatic-backups)
 - [Current data is overwritten](#overwrite-not-a-merge)
 - [All databases on a branch are restored](#changes-apply-to-all-databases)
-- [Connections to selected branch are temporarily interrupted](#connections-temporarily-interrupted)
+- [Connections to the selected branch are temporarily interrupted](#connections-temporarily-interrupted)
 
 #### Automatic backups
 
@@ -80,7 +80,7 @@ The restore operation and Time Travel Assist are meant to work together. When yo
 
 #### Ephemeral endpoints
 
-Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done your time travel querying. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done with your time travel querying. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
 
 However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
 
@@ -106,7 +106,7 @@ All databases on the selected branch are instantly updated with the data and sch
 ![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
 
 To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it.
-If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branches relationship to the restore point backup.
+If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branch's relationship to the restore point backup.
 
 ### Performing time travel queries
 
@@ -125,9 +125,9 @@ If your query is successful, you will see a table of results under the editor.
 Depending on your query and the selected timestamp, instead of a table of results, you might see different error messages like:
 | Error                | Explanation             |
 |----------------------|-------------------------|
-| If you query a timestamp in the future         | Console request failed with 400 Bad Request: timestamp <timestamp> is in the future, try an older timestamp |
-| If you query a timestamp from before your project was created | Console request failed with 400 Bad Request: parent timestamp <timestamp> is earlier than the project creation timestamp <timestamp>, try a more recent timestamp |
-| If you query from earlier than your history retention window | Console request failed with 400 Bad Request: timestamp <timestamp> precedes your project's history retention window of 168h0m0s, try a more recent timestamp |
+| If you query a timestamp in the future         | Console request failed with 400 Bad Request: timestamp [timestamp] is in the future, try an older timestamp |
+| If you query a timestamp from before your project was created | Console request failed with 400 Bad Request: parent timestamp [timestamp] is earlier than the project creation timestamp [timestamp], try a more recent timestamp |
+| If you query from earlier than your history retention window | Console request failed with 400 Bad Request: timestamp [timestamp] recedes your project's history retention window of 168h0m0s, try a more recent timestamp |
 
 Adjust your selected timestamp accordingly.
 
@@ -139,13 +139,16 @@ There are minimal impacts to billing from the branch restore and Time Travel Ass
 
 Restoring a branch to its own history adds to your number of branches &#8212; due to the restore_backup branch &#8212; but since they do not have any compute endpoint attached, they do not add to any consumption costs.
 
-```//The retore_backup branches add to write costs. But since that is removed in v2Billing, let's not mention here. However, two questions I'm not clear about: 1) Do restore-backup branches add to synthetic storage size and so incur some small cost there? 2) What happens when the restore_backup branch ages out of your retention window? are these deleted automatically before that point?//```
-
 ### Time travel queries (billing)
 
-The ephemeral endpoints used to run your Time Travel Assist queries do contribute to your consumption usage totals for the billing period, like any other active endpoint that consumes resource.
+The ephemeral endpoints used to run your Time Travel Assist queries do contribute to your consumption usage totals for the billing period, like any other active endpoint that consumes resources.
 
-A couple details to note:
+A couple of details to note:
 
 - The endpoints are shortlived. They are suspended 10 seconds after you stop querying.
-- Since these endpoints are created according to your default compute size (which applies to all new branch computes you create),  you may want to reduce this default if you're performing a lot of time travel queries for troubleshooting.
+- Since these endpoints are created according to your default compute size (which applies to all new branch computes you create),  you may want to reduce this default if you're performing a lot of time-travel queries for troubleshooting.
+
+## Limitations
+
+- You cannot delete a restore_backup branch without first removing the child branch.
+- Once you restore a branch, [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) restores from this backup branch, not the original parent.
