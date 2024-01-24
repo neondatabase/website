@@ -296,6 +296,8 @@
       items:
         - title: Supported extensions
           slug: extensions/pg-extensions
+        - title: citext
+          slug: extensions/citext          
         - title: neon
           slug: extensions/neon
         - title: neon_utils
