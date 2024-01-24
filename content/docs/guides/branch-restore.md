@@ -17,14 +17,11 @@ The restore operation lets you revert the state of a selected branch to an earli
 By default, the history retention for a Neon project is 7 days. You can revert a branch to any time within that configured [retention window](/docs/manage/projects#configure-history-retention), down to the millisecond.
 
 A few key points to keep in mind about the restore operation:
-- [Current data is overwritten](#overwrite-not-a-merge)
+
 - [Restore backups are created automatically in case you make a mistake](#automatic-backups)
+- [Current data is overwritten](#overwrite-not-a-merge)
 - [All databases on a branch are restored](#changes-apply-to-all-databases)
-- [Connections are temporarily interrupted](#connections-temporarily-interrupted)
-
-#### Overwrite, not a merge
-
-It is important to understand that whenever you restore a branch, you are performing a _complete_ overwrite, not a merge or refresh. Everything on your current branch, data and schema, is replaced with the contents from the historical source. All data changes from the selected restore point onwards are excluded from the branch.
+- [Connections to selected branch are temporarily interrupted](#connections-temporarily-interrupted)
 
 #### Automatic backups
 
@@ -40,6 +37,10 @@ This backup becomes the parent of your original branch, which makes rolling back
 
 ![Backup branch as parent to original](/docs/guides/branch_restore_backup.png)
 
+#### Overwrite, not a merge
+
+It is important to understand that whenever you restore a branch, you are performing a _complete_ overwrite, not a merge or refresh. Everything on your current branch, data and schema, is replaced with the contents from the historical source. All data changes from the selected restore point onwards are excluded from the branch.
+
 #### Changes apply to all databases
 
 A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. Keep this in mind when restoring branches. For example, let's say you want to restore lost data in a given database. If you restore your branch to an earlier point in time before the data loss occurred, the operation applies to _all_ databases on the branch, not just the one you are troubleshooting.
@@ -48,7 +49,7 @@ In general, Neon recommends that you avoid creating too many databases in a sing
 
 #### Connections temporarily interrupted
 
-Existing connections are temporarily interrupted during the restore operation. However, your connection details do not change. All connections are re-established as soon as the restore operation is finished.
+Existing connections to the selected branch are temporarily interrupted during the restore operation. However, your connection details do not change. Applications can automatically re-establish their database connections as soon as the restore operation is finished.
 
 #### Technical details
 
@@ -60,9 +61,9 @@ At Neon we aim for transparency, so if you are interested in understanding the t
 Similar to the manual restore operation using the Neon Console and API described [here](/docs/guides/branching-pitr), the Restore operation performs a similar set of actions, but automatically:
 
 1. On initiating a restore action, Neon builds a new point-in-time branch by matching your selected timestamp to the corresponding LSN of the relevant entries in the shared WAL record.
-1. The compute endpoint for your initial branch is moved to this new branch, so that your connection string remains stable.
+1. The compute endpoint for your initial branch is moved to this new branch so that your connection string remains stable.
 1. We rename your new branch to the exact name as your initial branch, so the effect is seamless; it looks and acts like the same branch.
-1. Your initial branch, which now has no compute attached to it, is renamed to _branch_name_old_head_timestamp_ to keep the pre-restore branch available should you need to rollback. Note that initial branch was the parent for your new branch, and this is reflected when you look at your branch details.
+1. Your initial branch, which now has no compute attached to it, is renamed to _branch_name_old_head_timestamp_ to keep the pre-restore branch available should you need to roll back. Note that the initial branch was the parent for your new branch, and this is reflected when you look at your branch details.
 
 </details>
 
@@ -74,7 +75,7 @@ The restore operation and Time Travel Assist are meant to work together. When yo
 
 ![Time travel assist](/docs/guides/branch_time_travel.png)
 
-#### About ephemeral endpoints
+#### Ephemeral endpoints
 
 Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done your time travel querying. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
 
@@ -87,9 +88,9 @@ However, you can see the history of operations related to the creation and delet
 
 #### How long do ephemeral endpoints remain active
 
-The ephemeral endpoints are created according to your configured [default](/docs/manage/projects#reset-the-default-compute-size) size. An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
+The ephemeral endpoints are created according to your configured [default](/docs/manage/projects#reset-the-default-compute-size) size. An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the endpoint is removed.
 
-## How to use
+## How to use branch restore
 
 ### Restoring from history
 
@@ -114,16 +115,16 @@ Here is how to use the Time Travel Assist SQL editor:
     ![Time travel query](/docs/guides/time_travel_assist.png)
   
 1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
-1. Write your read-only query in the editor, then click **Query at timestamp** to run the query. You don't have to include time paramaters in the query; the query is automatically targetted to your selected timestamp.
+1. Write your read-only query in the editor, then click **Query at timestamp** to run the query. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
 
 If your query is successful, you will see a table of results under the editor.
 
 Depending on your query and the selected timestamp, instead of a table of results, you might see different error messages like:
 | Error                | Explanation             |
 |----------------------|-------------------------|
-| If you query a timestamp in the future         | Console request failed with 400 Bad Request: timestamp 2024-01-10 21:59:48.639 +0000 UTC is in the future, try an older timestamp |
-| If you query a timestamp from before your project was created | Console request failed with 400 Bad Request: parent timestamp 2023-10-01 20:59:48.639 +0000 UTC is earlier than the project creation timestamp 2023-11-07 18:47:53.023515 +0000 UTC, try a more recent timestamp |
-| If you query from earlier than your history retention window | Console request failed with 400 Bad Request: timestamp 2023-12-31 21:59:48.639 +0000 UTC precedes your project's history retention window of 168h0m0s, try a more recent timestamp |
+| If you query a timestamp in the future         | Console request failed with 400 Bad Request: timestamp <timestamp> is in the future, try an older timestamp |
+| If you query a timestamp from before your project was created | Console request failed with 400 Bad Request: parent timestamp <timestamp> is earlier than the project creation timestamp <timestamp>, try a more recent timestamp |
+| If you query from earlier than your history retention window | Console request failed with 400 Bad Request: timestamp <timestamp> precedes your project's history retention window of 168h0m0s, try a more recent timestamp |
 
 Adjust your selected timestamp accordingly.
 
