@@ -102,7 +102,7 @@ All databases on your selected branch are instantly updated with the data and sc
 ![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
 
 To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it.
-If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branches relationship to this restore point backup.
+If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branches relationship to the restore point backup.
 
 ### Performing time travel queries
 
