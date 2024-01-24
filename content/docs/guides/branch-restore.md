@@ -97,7 +97,7 @@ Use the **Restore** page to restore a branch to an earlier timestamp in its hist
 
 ![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
 
-All databases on your selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see the backup branch created from this restore point.
+All databases on the selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see a backup branch was created with the state of the branch at the restore point in time.
 
 ![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
 
