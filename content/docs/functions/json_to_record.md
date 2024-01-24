@@ -1,5 +1,5 @@
 ---
-title: Postgres json_to_record function
+title: Postgres json_to_record() function
 subtitle: Converts a JSON object to a record
 enableTableOfContents: true
 ---
