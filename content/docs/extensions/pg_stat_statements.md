@@ -12,7 +12,7 @@ The `pg_stat_statements` extension provides a detailed statistical view of SQL s
 
 This guide covers:
 
-- [Enabling pg_stat_statements](#enable-the-pg_stat_statements-extension)
+- [Enabling pg_stat_statements](#enable-the-pgstatstatements-extension)
 - [Usage examples](#usage-examples)
 - [Resetting statistics](#reset-statistics)
 

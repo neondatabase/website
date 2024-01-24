@@ -10,7 +10,7 @@ As of **Sept 29, 2023**, Neon is no longer committing to `pg_embedding`.
 
 Support will remain in place for existing users of the extension, but we strongly encourage migrating to [pgvector](https://github.com/pgvector/pgvector).
 
-For migration instructions, see [Migrate from pg_embedding to pgvector](#migrate-from-pg_embedding-to-pgvector).
+For migration instructions, see [Migrate from pg_embedding to pgvector](#migrate-from-pgembedding-to-pgvector).
 </Admonition>
 
 ## Migrate from pg_embedding to pgvector
