@@ -95,21 +95,27 @@ const Hero = () => (
           ))}
         </div>
       </div>
-      <Link to={LINKS.caseStudies}>
-        <ul className="mx-auto mt-20 flex w-full max-w-[1472px] justify-between gap-x-16 xl:gap-x-14 lg:mt-16 lg:flex-wrap lg:justify-center lg:gap-y-10 md:mt-14 md:gap-y-8 sm:mt-10 xs:gap-y-6">
-          {logos.map(({ logo, alt, width }) => (
-            <li key={alt}>
-              <Image
-                className="lg:h-10 lg:w-auto md:h-7"
-                src={logo}
-                alt={alt}
-                width={width}
-                height={42}
-                priority
-              />
-            </li>
-          ))}
-        </ul>
+
+      <ul className="mx-auto mt-20 flex w-full max-w-[1472px] justify-between gap-x-16 xl:gap-x-14 lg:mt-16 lg:flex-wrap lg:justify-center lg:gap-y-10 md:mt-14 md:gap-y-8 sm:mt-10 xs:gap-y-6">
+        {logos.map(({ logo, alt, width }) => (
+          <li key={alt}>
+            <Image
+              className="lg:h-10 lg:w-auto md:h-7"
+              src={logo}
+              alt={alt}
+              width={width}
+              height={42}
+              priority
+            />
+          </li>
+        ))}
+      </ul>
+      <Link
+        to={LINKS.caseStudies}
+        theme="underline-primary-1"
+        className="mt-11 text-xl lg:mt-9 lg:text-lg"
+      >
+        Read case studies
       </Link>
     </Container>
   </section>
