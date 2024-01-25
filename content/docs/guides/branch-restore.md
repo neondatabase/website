@@ -46,7 +46,7 @@ It is important to understand that whenever you restore a branch, you are perfor
 
 #### Changes apply to all databases
 
-A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. Keep this in mind when restoring branches. For example, let's say you want to restore lost data in a given database. If you restore your branch to an earlier point in time before the data loss occurred, the operation applies to _all_ databases on the branch, not just the one you are troubleshooting.
+A reminder that in Neon's [object hierarchy](/docs/manage/overview), a branch can include any number of databases. Keep this in mind when restoring branches. For example, let's say you want to restore lost data in a given database. If you restore your branch to an earlier point in time before the data loss occurred, the operation applies to _all_ databases on the branch, not just the one you are troubleshooting. You can expect the restore operation to last a few seconds.
 
 In general, Neon recommends that you avoid creating too many databases in a single Neon project. If you have multiple, distinct applications, each one deserves its own Neon project. A good rule of thumb: use one Neon project per source code repository.
 
@@ -56,7 +56,7 @@ Existing connections to the selected branch are temporarily interrupted during t
 
 #### Technical details
 
-At Neon we aim for transparency, so if you are interested in understanding the technical implementation of a branch restore operation, see the details below.
+Neon is open source and built in public, so if you are interested in understanding the technical implementation of a branch restore operation, see the details below.
 
 <details>
 <summary>View technical details</summary>
