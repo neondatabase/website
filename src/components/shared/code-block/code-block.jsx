@@ -20,6 +20,7 @@ const CodeBlock = async (props) => {
         className,
         { 'code-wrap': meta?.includes('shouldWrap') }
       )}
+      data-line-numbers={meta?.includes('showLineNumbers')}
       copyButtonClassName={copyButtonClassName}
       {...otherProps}
     >

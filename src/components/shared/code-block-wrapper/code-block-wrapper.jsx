@@ -44,6 +44,7 @@ const CodeBlockWrapper = ({
   className = '',
   copyButtonClassName = '',
   children,
+
   ...otherProps
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
@@ -51,7 +52,10 @@ const CodeBlockWrapper = ({
   const code = extractTextFromNode(children);
 
   return (
-    <figure className={clsx('group relative overflow-x-auto', className)} {...otherProps}>
+    <figure
+      className={clsx('code-block group relative overflow-x-auto', className)}
+      {...otherProps}
+    >
       {children}
       <button
         className={clsx(
@@ -79,4 +83,5 @@ CodeBlockWrapper.propTypes = {
   className: PropTypes.string,
   copyButtonClassName: PropTypes.string,
   children: PropTypes.node,
+  as: PropTypes.string,
 };

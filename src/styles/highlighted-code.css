@@ -51,11 +51,11 @@
     @apply bg-[rgba(0,85,255,0.08)] dark:bg-[rgba(0,229,153,0.08)];
   }
 
-  pre [data-line-numbers] {
+  [data-line-numbers='true'] pre {
     counter-reset: line;
   }
 
-  pre [data-line-numbers] > [data-line]::before {
+  [data-line-numbers='true'] pre [data-line]::before {
     counter-increment: line;
     content: counter(line);
 
