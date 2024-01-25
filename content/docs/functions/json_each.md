@@ -1,21 +1,26 @@
 ---
-title: Postgres json_each function
+title: Postgres json_each() function
 subtitle: Expands JSON into a record per key-value pair
 enableTableOfContents: true
 ---
 
-The `json_each` function in PostgreSQL is used to expand a JSON object into a set of key-value pairs. It is useful when you need to iterate over a JSON object's keys and values, such as when you're working with dynamic JSON structures where the schema is not fixed. Another important use-case is performing data transformations and analytics. 
+The `json_each` function in PostgreSQL is used to expand a `JSON` object into a set of key-value pairs. 
 
-**Function signature**
+It is useful when you need to iterate over a `JSON` object's keys and values, such as when you're working with dynamic `JSON` structures where the schema is not fixed. Another important use-case is performing data transformations and analytics. 
+
+<CTA />
+
+## Function signature
+
 ```sql
 json_each(json JSON) -> SETOF record(key text, value json)
 ```
 
-The function returns a set of rows, each containing a key and the corresponding value for each field in the input JSON object. The key is of type `text`, while the value is of type `json`.
+The function returns a set of rows, each containing a key and the corresponding value for each field in the input `JSON` object. The key is of type `text`, while the value is of type `json`.
 
 ## Example usage
 
-Consider a JSON object representing a user's profile. The JSON data will have multiple attributes and might look like this:
+Consider a `JSON` object representing a user's profile information. The `JSON` data will have multiple attributes and might look like this:
 ```json
 {
   "username": "johndoe",
@@ -24,7 +29,7 @@ Consider a JSON object representing a user's profile. The JSON data will have mu
 }
 ```
 
-We can go over all the fields in the profile JSON objects using `json_each`. 
+We can go over all the fields in the profile `JSON` object using `json_each`, and produce a row for each key-value pair.
 
 Query:
 ```sql
@@ -44,6 +49,7 @@ This query returns the following:
 ## Advanced examples
 
 ### Custom column names
+
 You can use `AS` to specify custom column names for the key and value columns. 
 
 Query:
@@ -64,7 +70,7 @@ This query returns the following:
 
 ### Usage as a table/row source
 
-Since `json_each` returns a set of rows, you can use it as a table source in a `FROM` clause. This lets us join the expanded JSON data in the output, with other tables. 
+Since `json_each` returns a set of rows, you can use it as a table source in a `FROM` clause. This lets us join the expanded `JSON` data in the output, with other tables. 
 
 Query:
 ```sql
@@ -96,12 +102,15 @@ Here, we're joining each row in the `user_data` table with the output of `json_e
 ## Additional considerations
 
 ### Performance implications
-- When working with large JSON objects, `json_each` may lead to performance overhead, as it expands each key-value pair into a separate row.
+
+- When working with large `JSON` objects, `json_each` may lead to performance overhead, as it expands each key-value pair into a separate row.
 
 ### Alternative functions
-- [json_each_text](./json_each_text) - Similar functionality to `json_each` but returns the value as a text type instead of JSON. 
-- [json_object_keys](./json_object_keys) - It returns only the set of keys in the JSON object, without the values.
-- [jsonb_each](./jsonb_each) - It provides the same functionality as `json_each`, but accepts JSONB input instead of JSON. 
+
+- [json_each_text](./json_each_text) - Similar functionality to `json_each` but returns the value as a text type instead of `JSON`. 
+- [json_object_keys](./json_object_keys) - It returns only the set of keys in the `JSON` object, without the values.
+- [jsonb_each](./jsonb_each) - It provides the same functionality as `json_each`, but accepts `JSONB` input instead of `JSON`. 
 
 ## Resources
+
 - [Postgres documentation: JSON functions](https://www.postgresql.org/docs/current/functions-json.html)
