@@ -2462,7 +2462,3 @@ Keep in mind that the pattern argument of `like_regex` is a JSON path string lit
 $.* ? (@ like_regex "^\\d+$")
 
 ```
-
-```
-
-```

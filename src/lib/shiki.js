@@ -1,4 +1,4 @@
-import { getHighlighter, codeToThemedTokens } from 'shikiji';
+import { getHighlighter, codeToThemedTokens, bundledLanguages } from 'shikiji';
 
 import customTheme from 'utils/custom-theme.json';
 
@@ -27,9 +27,16 @@ function tokensToHTML(tokens, lang, highlightedLines) {
 }
 
 export default async function highlight(code, lang = 'bash', meta = '', theme = customTheme) {
+  let language = lang.toLocaleLowerCase();
+
+  // check if language is supported
+  if (!Object.keys(bundledLanguages).includes(lang)) {
+    language = 'bash';
+  }
+
   if (!highlighter) {
     highlighter = await getHighlighter({
-      langs: [lang],
+      langs: [language],
       themes: [theme],
     });
   }
@@ -48,13 +55,13 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
   }
 
   const tokens = await codeToThemedTokens(code, {
-    lang,
+    lang: language,
     theme,
   });
 
-  await highlighter.loadLanguage(lang);
+  await highlighter.loadLanguage(language);
 
-  const html = tokensToHTML(tokens, lang, highlightedLines);
+  const html = tokensToHTML(tokens, language, highlightedLines);
 
   return html;
 }

@@ -100,7 +100,7 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
 
 2. Change the `changeLogFile` setting as shown:
 
-    ```env
+    ```bash
     changeLogFile=dbchangelog.xml
     ``````
 
@@ -108,7 +108,7 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
 
 3. Change the target database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `dev1` branch. You can obtain the required details from the connection string you copied previously. You will need to swap out the hostname (`ep-silent-hill-85675036.us-east-2.aws.neon.tech`), username, and password for your own.
 
-    ```env shouldWrap
+    ```bash shouldWrap
     liquibase.command.url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
 
     liquibase.command.username: alex
@@ -118,7 +118,7 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
 
 4. Change the source database settings to the correct values for the `blog` database on your `main` branch. The username and password will be the same as your `dev1` branch, but make sure to use the right hostname. Copy the snippet below and replace the hostname (`ep-cool-darkness-123456.us-east-2.aws.neon.tech`), username, and password for your own.
 
-    ```env shouldWrap
+    ```bash shouldWrap
     liquibase.command.referenceUrl: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
 
     liquibase.command.referenceUsername: alex
