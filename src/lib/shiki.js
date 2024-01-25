@@ -1,28 +1,34 @@
-import { BUNDLED_LANGUAGES, getHighlighter, renderToHtml } from 'shiki';
+import { getHighlighter, codeToThemedTokens } from 'shikiji';
+
+import customTheme from 'utils/custom-theme.json';
 
 let highlighter;
 
-const getOptions = (highlightedLines) => {
-  if (highlightedLines.length > 0) {
-    return {
-      bg: 'transparent',
-      lineOptions: highlightedLines.map((line) => ({
-        line,
-        classes: ['highlighted-line'],
-      })),
-    };
-  }
+function tokensToHTML(tokens, lang, highlightedLines) {
+  let html = `<pre data-language="${lang}"><code data-language="${lang}" class="grid auto-rows-fr">`;
 
-  return {
-    bg: 'transparent',
-  };
-};
+  tokens.forEach((line, index) => {
+    const isHighlighted = highlightedLines.includes(index + 1);
+    const lineAttr = isHighlighted ? ' data-highlighted-line' : '';
+    html += `<span data-line ${lineAttr}>`; // Start of line span
 
-export default async function highlight(code, lang = 'bash', meta = '', theme = 'css-variables') {
+    line.forEach((token) => {
+      const style = `color: ${token.color}`;
+      html += `<span style="${style}">${token.content}</span>`;
+    });
+
+    html += '</span>'; // End of line span and new line
+  });
+
+  html += '</code></pre>';
+  return html;
+}
+
+export default async function highlight(code, lang = 'bash', meta = '', theme = customTheme) {
   if (!highlighter) {
     highlighter = await getHighlighter({
       langs: [lang],
-      theme,
+      themes: [theme],
     });
   }
 
@@ -39,27 +45,14 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
     }, []);
   }
 
-  // Check for the loaded languages, and load the language if it's not loaded yet.
-  if (!highlighter.getLoadedLanguages().includes(lang)) {
-    // Check if the language is supported by Shiki
-    const bundles = BUNDLED_LANGUAGES.filter(
-      (bundle) =>
-        // Languages are specified by their id, they can also have aliases (i. e. "js" and "javascript")
-        bundle.id === lang || bundle.aliases?.includes(lang)
-    );
-    if (bundles.length > 0) {
-      await highlighter.loadLanguage(lang);
-    } else {
-      // If the language is not supported, fallback to bash
-      lang = 'bash';
-    }
-  }
-
-  const tokens = highlighter.codeToThemedTokens(code, lang, theme, {
-    includeExplanation: false,
+  const tokens = await codeToThemedTokens(code, {
+    lang,
+    theme,
   });
 
-  const html = renderToHtml(tokens, getOptions(highlightedLines));
+  await highlighter.loadLanguage(lang);
+
+  const html = tokensToHTML(tokens, lang, highlightedLines);
 
   return html;
 }

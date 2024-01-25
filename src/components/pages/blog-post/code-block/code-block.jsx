@@ -1,3 +1,4 @@
+import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
@@ -9,11 +10,7 @@ const CodeBlock = async (props) => {
   }
   const highlightCode = await highlight(props?.children, props.language, props.highlight);
 
-  return (
-    <CodeBlockWrapper>
-      <div className="[&_pre]:my-0" dangerouslySetInnerHTML={{ __html: highlightCode }} />
-    </CodeBlockWrapper>
-  );
+  return <CodeBlockWrapper>{parse(highlightCode)}</CodeBlockWrapper>;
 };
 
 CodeBlock.propTypes = {
