@@ -75,14 +75,6 @@
     @apply invisible overflow-hidden text-sm content-["'"];
   }
 
-  code[data-line-numbers-max-digits='2'] > [data-line]::before {
-    width: 1.5rem;
-  }
-
-  code[data-line-numbers-max-digits='3'] > [data-line]::before {
-    width: 2.5rem;
-  }
-
   .highlighted-code {
     pre {
       @apply overflow-x-auto px-1 py-6;
