@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import BlogNavLink from 'components/pages/blog/blog-nav-link';
 import LINKS from 'constants/links';
+import DiscordIcon from 'icons/discord-sm.inline.svg';
 import GitHubIcon from 'icons/github-sm.inline.svg';
 import LinkedInIcon from 'icons/linkedin-sm.inline.svg';
 import XIcon from 'icons/x.inline.svg';
@@ -31,6 +32,11 @@ const socialLinks = [
     url: LINKS.youtube,
     icon: YouTubeIcon,
   },
+  {
+    name: 'Discord',
+    url: LINKS.discord,
+    icon: DiscordIcon,
+  },
 ];
 
 const Sidebar = ({ categories }) => {
@@ -45,7 +51,7 @@ const Sidebar = ({ categories }) => {
     <aside className="col-span-2 pb-10 lt:col-span-full lt:pb-0">
       <div className="relative flex h-full flex-col gap-y-10 lt:h-auto lt:min-h-fit">
         <div className="relative flex-1">
-          <nav className="no-scrollbars sticky top-10 lt:flex lt:items-end lt:justify-between lt:pt-8 md:-mx-4 md:max-w-5xl md:overflow-auto md:px-4">
+          <nav className="no-scrollbars sticky top-32 lt:flex lt:items-end lt:justify-between lt:pt-8 md:-mx-4 md:max-w-5xl md:overflow-auto md:px-4">
             <Search
               className="dark z-30 max-w-[206px] 3xl:max-w-[170px] 2xl:max-w-[200px] lt:order-1 lt:w-full lg:hidden"
               indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
@@ -74,7 +80,7 @@ const Sidebar = ({ categories }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Icon className="h-4 w-4 text-gray-new-70 transition-colors duration-200 group-hover:text-green-45" />
+                  <Icon className="h-4 w-auto text-gray-new-70 transition-colors duration-200 group-hover:text-green-45" />
                 </a>
               </li>
             ))}

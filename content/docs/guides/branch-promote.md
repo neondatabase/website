@@ -3,7 +3,7 @@ title: Promote a branch
 subtitle: Learn how to promote a branch to the primary branch of your Neon project using
   the Neon API
 enableTableOfContents: true
-updatedOn: '2023-10-24T18:56:54.983Z'
+updatedOn: '2024-01-08T20:02:33.917Z'
 ---
 
 This guide describes how to create a new branch and promote it to the primary branch of your Neon project in the context of a data recovery scenario. It also describes how to move the compute endpoint from your existing primary branch to the new branch to avoid having to reconfigure your application's database connection details.
@@ -45,9 +45,9 @@ The `project_id` value used in the example below is `young-silence-08999984`. Yo
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "branch": {
@@ -131,9 +131,9 @@ The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint
 ```bash shouldWrap
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/endpoints/ep-curly-term-54009904 \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "endpoint": {
@@ -186,9 +186,9 @@ The [Update branch](https://api-docs.neon.tech/reference/updateprojectbranch) AP
 ```bash shouldWrap
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-twilight-field-06246553 \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "branch": {
@@ -234,9 +234,9 @@ Rename the new branch to the name of the old branch, which was `main`. The [Upda
 ```bash shouldWrap
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851 \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "branch": {
@@ -286,8 +286,8 @@ The [Set primary branch](https://api-docs.neon.tech/reference/setprimaryprojectb
 ```bash shouldWrap
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851/set_as_primary \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>

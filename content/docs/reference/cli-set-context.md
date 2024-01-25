@@ -2,7 +2,7 @@
 title: Neon CLI commands — set-context
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-12-07T19:06:47.675Z'
+updatedOn: '2024-01-10T17:27:58.305Z'
 ---
 
 ## Before you begin
@@ -40,6 +40,7 @@ neonctl projects create --name <project_name> --set-context <your_context_file>
 ### Options
 
 The `set-context` command requires you set at least one of these options:
+
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |
 | `--project-id` | Project ID    | string | Sets the identified project as the context until you reset or remove context-file |
@@ -55,15 +56,18 @@ Here are some examples of setting contexts to specific projects, then using them
 ### Using the default file
 
 Set the context to the default `.neon` file:
+
 ```bash
 neonctl set-context --project-id patient-frost-50125040
 ```
+
 List all branches for this project using `branches list`. You do not need to include `--project-id` even though multiple projects exist for this account:
 
 ```bash
 neonctl branches list
 ```
 The results show details for all branches in the `patient-frost-50125040` project:
+
 ```bash
 ┌──────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                       │ Name        │ Primary │ Created At           │ Updated At           │
@@ -77,14 +81,19 @@ The results show details for all branches in the `patient-frost-50125040` projec
 ### Using a named `context-file`
 
 Set the context to the `context-file` of your choice:
+
 ```bash
 neonctl set-context --project-id plain-waterfall-84865553 --context-file Documents/MyContext
 ```
+
 List all branches using the `branches list` command. No need to specify the project since the context-file provides it.
+
 ```bash
 neonctl branches list --context-file Documents/MyContext
 ```
+
 The results show details for all branches in the `plain-waterfall-84865553` project:
+
 ```bash
 ┌─────────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                          │ Name        │ Primary │ Created At           │ Updated At           │

@@ -1,8 +1,10 @@
 ---
 title: Billing metrics
 enableTableOfContents: true
-updatedOn: '2024-01-03T21:00:38.276Z'
+updatedOn: '2024-01-23T17:45:24.327Z'
 ---
+
+<NewPricing/>
 
 Neon [paid plans](/docs/introduction/plans#neon-plans) bill for usage based on the following metrics:
 
@@ -45,7 +47,7 @@ Factors that affect _Compute time_ include:
 
 - The number of active computes
 - The size of each compute
-- The _Auto-suspend_ feature, which suspends a compute after 5 minutes of inactivity. [Neon Pro Plan](/docs/introduction/pro-plan) users can configure the `Auto-suspend` timeout timeout or disable _Auto-suspend_ entirely.
+- The _Autosuspend_ feature, which suspends a compute after 5 minutes of inactivity. [Neon Pro Plan](/docs/introduction/pro-plan) users can configure the autosuspend timeout or disable autosuspend entirely.
 - The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Compute size automatically scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
@@ -96,7 +98,7 @@ To estimate your own monthly _Compute time_ cost:
    ```
 
 <Admonition type="tip">
-Neon also provides calculators to help with cost estimates. See [Pricing calculators](#pricing-calculators).
+Neon also provides calculators to help with cost estimates. See [Pricing calculators](/docs/introduction/billing-calculators).
 </Admonition>
 
 ## Project storage

@@ -4,10 +4,10 @@ subtitle: 'Explore Neon framework, language, platform, and feature guides'
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2023-12-04T18:49:23.385Z'
+updatedOn: '2024-01-16T20:50:14.111Z'
 ---
 
-Find detailed instructions for integration across various frameworks, languages, and platforms, or exploring Neon's features, our guides are tailored to assist you.
+Find detailed instructions for integration across various frameworks, languages, and platforms, or if exploring Neon's features, our guides are tailored to assist you.
 
 ## Framework, language, and platform guides
 
@@ -23,6 +23,8 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
 
+<img src="/images/technology-logos/airbyte-logo.svg" width="36" height="36" alt="Airbyte" href="/docs/guides/logical-replication-airbyte" title="Replicate data from Neon with Airbyte" />
+
 <img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Astro" href="/docs/guides/astro" title="Connect an Astro site or app to Neon" />
 
 <img src="/images/technology-logos/aws-lambda-logo.svg" width="36" height="36" alt="AWS Lambda" href="/docs/guides/aws-lambda" title="Connect from AWS Lambda to Neon" />
@@ -32,6 +34,10 @@ Integrate your applications with Neon.
 <img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir-ecto" title="Connect from Elixir with Ecto to Neon" />
 
 <img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Use Exograph with Neon" />
+
+<img src="/images/technology-logos/ferret-logo.svg" width="36" height="36" alt="FerretDB" href="/docs/guides/ferretdb" title="Use FerretDB with Neon" />
+
+<img src="/images/technology-logos/fivetran-logo.svg" width="36" height="36" alt="Fivetran" href="/docs/guides/logical-replication-fivetran" title="Replicate data from Neon with Fivetran" />
 
 <img src="/images/technology-logos/flyway-logo.svg" width="36" height="36" alt="Flyway" href="/docs/guides/flyway" title="Use Flyway with Neon" />
 
@@ -43,11 +49,17 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/java-logo.svg" width="27" height="36" alt="Java" href="/docs/guides/java" title="Connect a Java application to Neon" />
 
+<img src="/images/technology-logos/kafka-logo.svg" width="36" height="36" alt="Kafka" href="/docs/guides/logical-replication-kafka-confluent" title="Replicate data from Neon with Kafka (Confluent)" />
+
 <img src="/images/technology-logos/koyeb-logo.svg" width="36" height="36" alt="Koyeb" href="/docs/guides/koyeb" title="Use Neon with Koyeb" />
 
 <img src="/images/technology-logos/laravel-logo.svg" width="35" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect from Laravel to Neon" />
 
 <img src="/images/technology-logos/liquibase-logo.svg" width="35" height="36" alt="Liquibase" href="/docs/guides/liquibase" title="Use Liquibase with Neon" />
+
+<img src="/images/technology-logos/materialize-logo.svg" width="36" height="36" alt="Materialize" href="/docs/guides/logical-replication-materialize" title="Replicate data from Neon to Materialize" />
+
+<img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
 
 <img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
 
@@ -56,6 +68,8 @@ Integrate your applications with Neon.
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-jdbc" title="Connect Quarkus (JDBC) to Neon" />
 
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-reactive" title="Connect Quarkus (Reactive) to Neon" />
+
+<img src="/images/technology-logos/rails-logo.svg" width="36" height="36" alt="Rails" href="/docs/guides/ruby-on-rails" title="Connect a Rails application to Neon" />
 
 <img src="/images/technology-logos/remix-logo.svg" width="36" height="36" alt="Remix" href="/docs/guides/remix" title="Connect a Remix application to Neon" />
 
@@ -67,7 +81,7 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/symfony-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Symfony with Doctrine to Neon" />
 
-<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel" title="Integrate Neon with Vercel" />
+<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel" title="Connect with the Neon Vercel Integration" />
 
 <img src="/images/technology-logos/wundergraph-logo.svg" width="36" height="36" alt="Wundergraph" href="/docs/guides/wundergraph" title="Use Wundergraph with Neon" />
 
@@ -83,21 +97,21 @@ Automatically scale compute resources up and down based on demand.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/autoscaling" description="Find out how autoscaling can reduce your costs." icon="autoscaling">Learn about Autoscaling</a>
+<a href="/docs/introduction/autoscaling" description="Find out how autoscaling can reduce your costs." icon="autoscaling">Learn about autoscaling</a>
 
-<a href="/docs/guides/autoscaling-guide" description="Enable Autoscaling to automatically scale compute resources on demand" icon="enable">Enable Autoscaling</a>
+<a href="/docs/guides/autoscaling-guide" description="Enable autoscaling to automatically scale compute resources on demand" icon="enable">Enable autoscaling</a>
 
 </DetailIconCards>
 
-### Auto-suspend
+### Autosuspend
 
 Control when Neon compute resources scale to zero.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/auto-suspend" description="Discover how Neon can reduce your compute to zero when not in use" icon="hourglass">Learn about Auto-suspend</a>
+<a href="/docs/introduction/auto-suspend" description="Discover how Neon can reduce your compute to zero when not in use" icon="hourglass">Learn about autosuspend</a>
 
-<a href="/docs/guides/autoscaling-guide" description="Configure Auto-suspend to control when your compute scales to zero" icon="setup">Configure Auto-suspend</a>
+<a href="/docs/guides/autoscaling-guide" description="Configure autosuspend to control when your compute scales to zero" icon="setup">Configure autosuspend</a>
 
 </DetailIconCards>
 
@@ -122,6 +136,20 @@ Branch data the same way you branch your code.
 <a href="/docs/guides/branch-refresh" description="Refresh a development branch with the Neon API" icon="split-branch">Refresh a branch</a>
 
 <a href="/docs/guides/branch-promote" description="Promote a branch to primary with the the Neon API" icon="split-branch">Promote a branch to primary</a>
+
+</DetailIconCards>
+
+### Logical replication
+
+Replicate data from Neon to external data platforms and services.
+
+<DetailIconCards>
+
+<a href="/docs/guides/logical-replication-guide" description="Get started with logical replication in Neon" icon="screen">Logical replication guide</a>
+
+<a href="/docs/guides/logical-replication-concepts" description="Learn about Postgres logical replication concepts" icon="scale-up">Logical replication concepts</a>
+
+<a href="/docs/guides/logical-replication-neon" description="Learn how to manage logical replication in Neon" icon="screen">Manage logical replication</a>
 
 </DetailIconCards>
 

@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-12-07T19:06:47.674Z'
+updatedOn: '2024-01-19T14:15:57.929Z'
 ---
 
 ## Before you begin
@@ -43,11 +43,13 @@ neonctl branches list [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `list` subcommand supports this option:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `list` subcommand supports these options:
 
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--project-id` | Project ID    | string | Only if your Neon account has more than one project |
+
 
 #### Examples
 
@@ -121,11 +123,14 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option    | Description                                                    | Type    |   Required  |
 | :-------- | :------------------------------------------------------------- | :------ | :---------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--project-id` | Project ID    | string | Only if your Neon account has more than one project |
 | `--name`    | The branch name                                                | string  |             |
 | `--parent`  | Parent branch name, id, timestamp, or LSN. Defaults to the primary branch | string  |             |
 | `--compute`| Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute` | boolean |    |
-| `--type`| Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas).                                     | string |             |
+| `--type` | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas).                                     | string |             |
+| `--suspend-timeout` | Duration of inactivity in seconds after which the compute endpoint is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number |             |
+| `--psql` | Connect to a new branch via `psql`. `psql` must be installed to use this option. | boolean |             |
 
 #### Examples
 
@@ -159,7 +164,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 - Create a branch with the `--output` format of the command set to `json`. This output format returns all of the branch response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
 
     ```bash
-    neonctl branches create --output json 
+    neonctl branches create --output json
+    ```
+
+    <details>
+    <summary>Example output</summary>
+    ```json 
     {
     "branch": {
         "id": "br-frosty-art-30264288",
@@ -218,32 +228,51 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ]
     }
     ```
+    </details>
 
 - Create a branch with a user-defined name:
 
-```bash
-neonctl branches create --name mybranch
-```
+    ```bash
+    neonctl branches create --name mybranch
+    ```
 
 - Create a branch with a read-only compute endpoint (a [read replica](/docs/introduction/read-replicas))
 
-```bash
-neonctl branches create --name my_read_replica_branch --type read_only
-```
+    ```bash
+    neonctl branches create --name my_read_replica_branch --type read_only
+    ```
 
 - Create a branch from a parent branch other than your `main` branch
 
-```bash
-neonctl branches create --name my_child_branch --parent mybranch
-```
+    ```bash
+    neonctl branches create --name my_child_branch --parent mybranch
+    ```
 
 - Create a point-in-time restore branch by specifying the `--parent` option with a timestamp:
 
-```bash
-neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
-```
+    ```bash
+    neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
+    ```
 
-The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+    The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+
+- Create a branch and connect to it with `psql`.
+
+    ```bash
+    neonctl branch create --psql
+    ```
+
+- Create a branch, connect to it with `psql`, and run an `.sql` file. 
+
+    ```bash
+    neonctl branch create --psql -- -f dump.sql
+    ```
+
+- Create a branch, connect to it with `psql`, and run a query.
+
+    ```bash
+    neonctl branch create --psql -- -c "SELECT version()"
+    ```
 
 ### reset
 
@@ -260,11 +289,14 @@ neonctl branches reset <id|name> --parent
 
 #### Options
 
-In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `reset` subcommand supports this option:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `reset` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
-| --project-id  | Project ID  | string | Only if your Neon account has more than one project or context is not set|
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project or context is not set|
+| `--parent`  | Reset to a parent branch  | boolean |  |
+| `--preserve-under-name`  | The name under which to preserve the old branch | string |  |
 
 #### Example
 
@@ -291,11 +323,12 @@ neonctl branches rename <id|name> <new-name> [options]
 
 #### Options
 
-In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `rename` subcommand supports this option:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `rename` subcommand supports these options:
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
-| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Example
 
@@ -326,7 +359,8 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
-| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Example
 
@@ -357,6 +391,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 | `--type`| Type of compute to add. Choices are `read_only` (the default) or `read_write`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas). A branch can have a single read-write and multiple read-only compute endpoints.                                     | string |             |
 
@@ -389,7 +424,8 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
-| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Example
 
@@ -420,7 +456,8 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option        | Description | Type   | Required |
 | ------------- | ----------- | ------ | :------: |
-| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Examples
 
