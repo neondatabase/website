@@ -51,7 +51,7 @@ const CodeBlockWrapper = ({
   const code = extractTextFromNode(children);
 
   return (
-    <div className={clsx('group relative overflow-x-auto', className)} {...otherProps}>
+    <figure className={clsx('group relative overflow-x-auto', className)} {...otherProps}>
       {children}
       <button
         className={clsx(
@@ -69,7 +69,7 @@ const CodeBlockWrapper = ({
           <CopyIcon className="text-current" />
         )}
       </button>
-    </div>
+    </figure>
   );
 };
 

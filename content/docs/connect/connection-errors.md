@@ -44,7 +44,7 @@ Neon supports a connection option named `endpoint`, which you can use to identif
 
 ```txt shouldWrap
 postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
-
+```
 
 <Admonition type="note">
 The `endpoint` connection option was previously named `project`. The `project` option is deprecated but remains supported for backward compatibility.
@@ -118,7 +118,7 @@ Check your connection to see if it is defined correctly. Your Neon connection st
 
 ```text shouldWrap
 postgres://[user]:[password]@[neon_hostname]/[dbname]
-
+```
 
 For clients or applications that require specifying connection parameters such as user, password, and hostname separately, the values in a Neon connection string correspond to the following:
 
