@@ -57,9 +57,11 @@ To add the integration:
     1. Select the Neon project that you want to connect to your Vercel project by selecting the Neon project, database, and role that Vercel will use to connect.
       ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
-          The root branch of your Neon project is preselected as your **Production branch**.
+          The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your primary branch that you can modify without affecting your primary branch.
 
-          The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your production branch that you can modify without affecting your production branch.
+          <Admonition type="note">
+          In earlier versions of the integration, 
+          </Admonition>
 
           When you finish making selections, click **Continue**.
     1. Confirm the integration settings. This allows the integration to:
@@ -136,7 +138,11 @@ You can enable these variables from the Neon Console:
 1. In the Neon Console, select your project.
 2. Select the **Integrations** page.
 3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
-4. In the **Vercel integration** drawer, select the environment variables you need in your Vercel deployments. Changes will apply to future preview deployments.
+4. In the **Vercel integration** drawer, select the environment variables you need in your Vercel deployments. Changes will apply to future preview deployments. The selected variables will appear in your Vercel project with your next `git push`. 
+
+<Admonition type="note">
+Clicking **Redeploy** in Vercel does apply variable changes made in Neon to your Vercel project.
+</Admonition> 
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
 
@@ -188,18 +194,16 @@ In this case, you can remove or rename the existing environment variables in you
 
 ### DATABASE_URL not set on first preview deployment
 
-In Vercel, the preview environment `DATABASE_URL` is not set by the Neon Vercel Integration on the first preview deployment for a pull request.
+In earlier versions of the integration, the preview environment `DATABASE_URL` is not set by the Neon Vercel Integration on the first preview deployment for a pull request.
 
-This is a known [issue](https://github.com/neondatabase/cloud/issues/5378) with a dependency on Vercel that we are working to resolve.
+To avoid this issue, you can reinstall the integration to update to the latest version. Alternatively, a workaround is to redeploy your preview deployment in Vercel. The preview environment `DATABASE_URL` is set on the next deployment. For redeploy instructions, see [Managing Deployments](https://vercel.com/docs/deployments/managing-deployments), in the _Vercel documentation_.
 
-The current workaround is to redeploy your preview deployment in Vercel. The preview environment `DATABASE_URL` is set on the next deployment. For redeploy instructions, see [Managing Deployments](https://vercel.com/docs/deployments/managing-deployments), in the _Vercel documentation_.
+## Manage the Neon Postgres integration in Vercel
 
-## Manage the Neon Vercel Integration
-
-To view integration permissions, manage integration access, or remove the Neon integration:
+To view permissions, manage which Vercel projects your integration has access to, or uninstall the Neon integration:
 
 1. On the Vercel dashboard, select **Settings** > **Integrations**.
-1. Find the **Neon** integration and select **Manage**.
+1. Find the **Neon** integration and select **Configure**.
 
    <Admonition type="note">
    Removing the Neon Vercel Integration removes the Vercel environment variables set by the integration. It does not remove Neon branches created by the integration. To remove Neon branches, see [Delete a branch](/docs/manage/branches#delete-a-branch).
