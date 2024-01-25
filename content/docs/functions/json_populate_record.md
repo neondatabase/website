@@ -1,35 +1,35 @@
 ---
-title: Postgres json_populate_record function
+title: Postgres json_populate_record() function
 subtitle: Casts a JSON object to a record
 enableTableOfContents: true
 ---
 
-The `json_populate_record` function is used to populate a record type with values from a JSON object. It is particularly useful for merging JSON data into an existing record.
+The `json_populate_record` function is used to populate a record type with values from a JSON object. It is useful for parsing `JSON` data received from external sources, particularly when merging it into an existing record.
 
-**Function signature**
+## Function signature
+
 ```sql
 json_populate_record(base_record ANYELEMENT, json JSON)
 ```
 
-This function takes two arguments: a base record of a row type (which can even be a NULL record) and a JSON object. It returns the record updated with the JSON values. 
+This function takes two arguments: a base record of a row type (which can even be a NULL record) and a `JSON` object. It returns the record updated with the `JSON` values. 
 
 ## Example usage
 
-Consider having a database table that tracks employee information. When you receive employee information as JSON records, you can use `json_populate_record` to ingest the data into the table. 
+Consider having a database table that tracks employee information. When you receive employee information as `JSON` records, you can use `json_populate_record` to ingest the data into the table. 
 
-<details>
-    <summary>*Creating the test table*</summary>
-    ```sql
-    CREATE TABLE employees (
-        id INT,
-        name TEXT,
-        department TEXT,
-        salary NUMERIC
-    );
-    ```
-</details>
+Here we create the `employees` table with some sample data.
 
-We start with a NULL record and cast the input JSON payload to the `employees` record type.
+```sql
+CREATE TABLE employees (
+    id INT,
+    name TEXT,
+    department TEXT,
+    salary NUMERIC
+);
+```
+
+To illustrate, we start with a NULL record and cast the input `JSON` payload to the `employees` record type.
 
 Query:
 ```sql
@@ -52,9 +52,10 @@ This query returns the following:
 ## Advanced examples
 
 ### Handling partial data
-For datapoints where the JSON objects have missing keys, `json_populate_record` can still cast them into legible records. 
 
-Say, we receive records for a bunch of employees who are known to be in Sales, but the `department` field missing from the JSON payload. We can use `json_populate_record` with the default value specified for a field while the other fields are populated from the JSON payload.
+For datapoints where the `JSON` objects have missing keys, `json_populate_record` can still cast them into legible records. 
+
+Say, we receive records for a bunch of employees who are known to be in Sales, but the `department` field missing from the `JSON` payload. We can use `json_populate_record` with the default value specified for a field while the other fields are populated from the `JSON` payload.
 
 Query:
 ```sql
@@ -75,7 +76,8 @@ This query returns the following:
 ```
 
 ### Working with custom types
-The base record doesn't need to have the type of a table row, and can be a [custom Postgres type](https://www.postgresql.org/docs/current/sql-createtype.html) too. For example, here we first define a custom type `address` and use `json_populate_record` to cast a JSON object to it.
+
+The base record doesn't need to have the type of a table row, and can be a [custom Postgres type](https://www.postgresql.org/docs/current/sql-createtype.html) too. For example, here we first define a custom type `address` and use `json_populate_record` to cast a `JSON` object to it.
 
 Query:
 ```sql
@@ -102,9 +104,11 @@ This query returns the following:
 ## Additional considerations
 
 ### Alternative options
+
 - [json_to_record](./json_to_record.md) - It can be used similarly, with a couple differences. `json_populate_record` can be used with a base record of a pre-defined type, whereas `json_to_record` needs the record type defined inline in the `AS` clause. Further, `json_populate_record` can specify default values for missing fields through the base record, whereas `json_to_record` must assign them NULL values.
-- [json_populate_recordset](./json_populate_recordset.md) - It can be used similarly to parse JSON, the difference being that it returns a set of records instead of a single record. For example, if you have an array of JSON objects, you can use `json_populate_recordset` to convert each object into a new row. 
-- [jsonb_populate_record](./jsonb_populate_record.md) - It has the same functionality to `json_populate_record`, but accepts JSONB input instead of JSON. 
+- [json_populate_recordset](./json_populate_recordset.md) - It can be used similarly to parse `JSON`, the difference being that it returns a set of records instead of a single record. For example, if you have an array of `JSON` objects, you can use `json_populate_recordset` to convert each object into a new row. 
+- [jsonb_populate_record](./jsonb_populate_record.md) - It has the same functionality to `json_populate_record`, but accepts `JSONB` input instead of `JSON`. 
 
 ## Resources
+
 - [Postgres documentation: JSON functions](https://www.postgresql.org/docs/current/functions-json.html)
