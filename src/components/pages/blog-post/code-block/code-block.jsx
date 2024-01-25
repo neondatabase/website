@@ -4,6 +4,9 @@ import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import highlight from 'lib/shiki';
 
 const CodeBlock = async (props) => {
+  if (typeof props.children === 'object') {
+    props.children = JSON.stringify(props.children);
+  }
   const highlightCode = await highlight(props.children, props.language, props.highlight);
 
   return (
