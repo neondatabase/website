@@ -320,6 +320,8 @@
           slug: functions/json_build_object
         - title: json_extract_path
           slug: functions/json_extract_path
+        - title: json_extract_path_text
+          slug: functions/json_extract_path_text
         - title: dense_rank
           slug: functions/dense_rank
     - title: Compatibility
