@@ -143,7 +143,7 @@ You can enable these variables from the Neon Console:
 1. In the Neon Console, select your project.
 2. Select the **Integrations** page.
 3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
-4. In the **Vercel integration** drawer, select the environment variables you need in your Vercel deployments. Changes will apply to future preview deployments. The selected variables will appear in your Vercel project with your next `git push`. 
+4. In the **Vercel integration** drawer, select the environment variables you require. The selected variables will be set in your Vercel project with your next push. 
 
 <Admonition type="note">
 Clicking **Redeploy** in Vercel does apply variable changes made in Neon to your Vercel project.
@@ -199,7 +199,7 @@ In this case, you can remove or rename the existing environment variables in you
 
 ### DATABASE_URL not set on first preview deployment
 
-In earlier versions of the integration, the preview environment `DATABASE_URL` is not set by the Neon Vercel Integration on the first preview deployment for a pull request.
+In earlier versions of the integration, the preview environment `DATABASE_URL` is not set by the Neon Vercel Integration on the first preview deployment after adding the integration to a Vercel project.
 
 To avoid this issue, you can reinstall the integration to update to the latest version. Alternatively, a workaround is to redeploy your preview deployment in Vercel. The preview environment `DATABASE_URL` is set on the next deployment. For redeploy instructions, see [Managing Deployments](https://vercel.com/docs/deployments/managing-deployments), in the _Vercel documentation_.
 
