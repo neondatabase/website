@@ -210,7 +210,7 @@ To configure an allowlist:
     ![IP Allow configuration](/docs/manage/ip_allow.png)
 4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
 5. Optionally, select **Allow unrestricted access to non-primary branches** to allow full access to your [no primary branches](/docs/manage/branches#non-primary-branch).
-5. Click **Apply changes**.
+5. Click **Save changes**.
 
 </TabItem>
 
