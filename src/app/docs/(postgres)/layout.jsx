@@ -15,6 +15,7 @@ const PostgresDocsLayout = async ({ children }) => {
       footerWithTopBorder
       burgerWithoutBorder
       isDocPage
+      isHeaderSticky
     >
       <div className="safe-paddings flex flex-1 flex-col dark:bg-gray-new-8 dark:text-white lg:block">
         <MobileNav
@@ -25,7 +26,7 @@ const PostgresDocsLayout = async ({ children }) => {
         />
 
         <Container
-          className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-[110px] xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
+          className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
           size="medium"
         >
           <Sidebar
