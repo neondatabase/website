@@ -32,7 +32,7 @@
   }
 
   pre [data-highlighted-line] {
-    @apply bg-[rgba(0,85,255,0.08)] dark:bg-[rgba(0,229,153,0.08)];
+    @apply bg-[rgba(0,85,255,0.08)] shadow-[inset_3px_0px_0px_0px_#0055ff] dark:bg-[rgba(0,229,153,0.08)] dark:shadow-[inset_3px_0px_0px_0px_#00E599];
   }
 
   [data-line-numbers='true'] pre {
@@ -80,14 +80,6 @@
       margin-right: 1.25rem;
       text-align: right;
       color: gray;
-    }
-
-    code[data-line-numbers-max-digits='2'] > [data-line]::before {
-      width: 1.5rem;
-    }
-
-    code[data-line-numbers-max-digits='3'] > [data-line]::before {
-      width: 2.5rem;
     }
   }
 }
