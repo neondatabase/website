@@ -61,13 +61,13 @@ Test potentially destructive or performance-impacting queries before your run th
 
 ## Data recovery
 
-Create a branch from the past to recover lost data or track down issues.
+Recover lost data or track down issues by restoring a branch to its history, or just create a point-in-time branch for historical analysis or any other reason.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/point-in-time-restore" description="Learn about Neon's point-in-time restore feature" icon="invert">Point-in-time restore</a>
+<a href="/docs/introduction/branch-restore" description="Learn how to revert changes or recover lost data using Neon Branch Restore with Time Travel Assist" icon="invert">Branch restore with Time Travel assist</a>
 
-<a href="/docs/guides/branching-pitr" description="Learn how to restore your data to previous state using Neon's branching feature" icon="screen">Create a branch from the past</a>
+<a href="/docs/guides/branching-pitr" description="Learn how to create point-in-time branches" icon="screen">Create a branch from the past</a>
 
 <a href="https://neon.tech/blog/time-travel-with-postgres" description="Blog: Time travel with database branching to recover lost data" icon="screen">Time Travel with Postgres</a>
 

@@ -78,8 +78,8 @@ Refer to the following guides for instructions.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/point-in-time-restore" description="Restore data to a previous state with Neon's point-in-time restore feature" icon="invert">Learn about point-in-time restore</a>
+<a href="/docs/introduction/point-in-time-restore" description="Restore data to a previous state with Neon's branch restore feature" icon="invert">Learn about branch restore</a>
 
-<a href="/docs/guides/branching-pitr" description="Learn how to restore your data to previous state with branching" icon="screen">Create a branch from the past</a>
+<a href="/docs/guides/branching-pitr" description="Learn how to create a branch from historical data" icon="screen">Create a branch from the past</a>
 
 </DetailIconCards>
