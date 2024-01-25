@@ -27,7 +27,7 @@ Neon’s branching feature addresses these challenges. A branch is a copy-on-wri
 
 ![Branch database](/docs/guides/vercel_branch_database.webp)
 
-When you push changes to the repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a branch in Neon and connects it to your preview deployment by setting Vercel preview environment variables.
+When you push changes to the repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a branch in Neon and connects it to your preview deployment by setting Vercel preview environment variables. 
 
 ## Add the Neon Vercel Integration
 
@@ -115,9 +115,14 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
 
    - The commit triggers a preview deployment in Vercel, as would occur without the Neon integration.
      ![Neon preview deployment branch](/docs/guides/vercel_deployments.png)
-   - The integration creates a database branch in Neon. This branch is an isolated copy-on-write clone of your production branch, with its own dedicated compute endpoint. The branch is created with the same name as your `git` branch.
+   - The integration creates a branch in Neon. This branch is an isolated copy-on-write clone of your primary branch, with its own dedicated compute endpoint. The branch is created with the same name as your `git` branch.
      ![Neon preview deployment branch](/docs/guides/vercel_neon_app_update.png)
-   - The integration sets Vercel preview environment variables to connect the preview deployment to the new database branch.
+
+      <Admonition type="note">
+      Branches created for preview deployments are created from the primary branch of your Neon project. Earlier versions of the integration created branches from the initial root branch of your Neon project, which is designated as the primary branch by default. Neon allows you to [change the primary branch](/docs/manage/branches#set-a-branch-as-primary). If you have an older version of the integration that creates branches from your project's root branch, and you want branches created from your primary branch instead, you can upgrade your integration by reinstalling it from the Vercel Marketplace.
+      </Admonition>
+
+   - The integration sets Vercel preview environment variables to connect the preview deployment to the new branch.
      ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)
 
 <Admonition type="note">
