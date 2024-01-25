@@ -31,22 +31,6 @@
     --shiki-token-embed: #ededed;
   }
 
-  code[data-theme*=' '],
-  code[data-theme*=' '] span {
-    color: var(--shiki-light);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    code[data-theme*=' '],
-    code[data-theme*=' '] span {
-      color: var(--shiki-dark);
-    }
-  }
-
-  figure [data-rehype-pretty-code-figure] {
-    @apply my-0;
-  }
-
   pre [data-highlighted-line] {
     @apply bg-[rgba(0,85,255,0.08)] dark:bg-[rgba(0,229,153,0.08)];
   }

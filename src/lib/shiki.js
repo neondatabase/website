@@ -1,8 +1,43 @@
-import { getHighlighter, codeToThemedTokens, bundledLanguages } from 'shikiji';
+import {
+  getHighlighter,
+  codeToThemedTokens,
+  createCssVariablesTheme,
+  bundledLanguages,
+} from 'shikiji';
 
-import customTheme from 'utils/custom-theme.json';
+const customTheme = createCssVariablesTheme({
+  name: 'css-variables',
+  variablePrefix: '--shiki-',
+  variableDefaults: {},
+  fontStyle: true,
+});
 
 let highlighter;
+
+const parseHighlightLines = (meta) => {
+  const metaArray = meta.split(' ');
+  let highlightLines = [];
+
+  if (metaArray[0].includes('{')) {
+    const highlightString = metaArray[0];
+    const highlightStringArray = highlightString.split('{')[1].split('}')[0].split(',');
+    highlightLines = highlightStringArray.reduce((result, item) => {
+      if (item.includes('-')) {
+        const range = item.split('-');
+        const start = parseInt(range[0], 10);
+        const end = parseInt(range[1], 10);
+        for (let i = start; i <= end; i++) {
+          result.push(i);
+        }
+      } else {
+        result.push(parseInt(item, 10));
+      }
+      return result;
+    }, []);
+  }
+
+  return highlightLines;
+};
 
 function tokensToHTML(tokens, lang, highlightedLines) {
   let html = `<pre data-language="${lang}"><code data-language="${lang}" class="grid">`;
@@ -41,18 +76,7 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
     });
   }
 
-  let highlightedLines = [];
-
-  if (meta !== '') {
-    highlightedLines = meta.split(',').reduce((acc, line) => {
-      if (line.includes('-')) {
-        const [start, end] = line.split('-');
-        const range = Array.from({ length: end - start + 1 }, (_, i) => Number(start) + i);
-        return [...acc, ...range];
-      }
-      return [...acc, Number(line)];
-    }, []);
-  }
+  const highlightedLines = parseHighlightLines(meta);
 
   const tokens = await codeToThemedTokens(code, {
     lang: language,
