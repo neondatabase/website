@@ -18,7 +18,7 @@ const CodeBlock = async (props) => {
 };
 
 CodeBlock.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   language: PropTypes.string,
 };
 
