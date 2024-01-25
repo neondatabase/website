@@ -16,7 +16,7 @@ This guide covers the `citext` extension - its setup, usage, and practical examp
 
 ## Enable the `citext` Extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
+You can enable `citext` by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS citext;
@@ -28,7 +28,7 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 **Creating a Table with citext**
 
-Consider a user registration system where the user's email should be unique, regardless of case:
+Consider a user registration system where the user's email should be unique, regardless of case. 
 
 ```sql
 CREATE TABLE users (
