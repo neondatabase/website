@@ -151,4 +151,4 @@ A couple of details to note:
 ## Limitations
 
 - You cannot delete a backup branch without first removing the child branch.
-- Once you restore a branch, [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) restores from this backup branch, not the original parent.
+- Once you restore a branch, [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) restores from the restore backup branch, not the original parent.

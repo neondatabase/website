@@ -65,7 +65,7 @@ Recover lost data or track down issues by restoring a branch to its history, or 
 
 <DetailIconCards>
 
-<a href="/docs/introduction/branch-restore" description="Learn how to revert changes or recover lost data using Neon Branch Restore with Time Travel Assist" icon="invert">Branch restore with Time Travel assist</a>
+<a href="/docs/guides/branch-restore" description="Learn how to revert changes or recover lost data using Neon Branch Restore with Time Travel Assist" icon="invert">Branch Restore with Time Travel Assist</a>
 
 <a href="/docs/guides/branching-pitr" description="Learn how to create point-in-time branches" icon="screen">Create a branch from the past</a>
 
