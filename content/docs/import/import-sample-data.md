@@ -524,15 +524,11 @@ To load sample data:
 
 1. Download one of the data files listed above. For example:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/periodic_table.sql
     ```
-  
-    </CodeBlock>
 
-    Alternatively, supply your own data file. 
+    Alternatively, supply your own data file.
 
 2. Load the data using one of the following Neon CLI commands ([projects](/docs/reference/cli-projects), [branches](/docs/reference/cli-branches), or [connection-string](/docs/reference/cli-connection-string)):
 

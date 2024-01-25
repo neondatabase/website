@@ -16,17 +16,17 @@ The benefits of using FerretDB include:
 
 - **MongoDB compatibility**
 
-    FerretDB gives you access to the syntax, tools, querying language, and commands available in MongoDB for many common use cases. MongoDB is known for its simple and intuitive NoSQL query language which is widely used by many developers. By using FerretDB, you can enable Postgres databases like Neon to run MongoDB workloads. 
-    
+    FerretDB gives you access to the syntax, tools, querying language, and commands available in MongoDB for many common use cases. MongoDB is known for its simple and intuitive NoSQL query language which is widely used by many developers. By using FerretDB, you can enable Postgres databases like Neon to run MongoDB workloads.
+
     For related information, see [MongoDB Compatibility - What's Really Important?](https://blog.ferretdb.io/mongodb-compatibility-whats-really-important/)
 
-- **Open source** 
+- **Open source**
 
     As an open source document database, you won't be at risk of vendor lock-in. Since MongoDB's license change to Server Side Public License (SSPL), there's been a lot of confusion regarding what this means for users and what it would mean for their applications. According to the Open Source Initiative – the steward of open source and the set of rules that define open source software – SSPL is not considered open source.
 
     FerretDB is licensed under Apache 2.0, makes it a good option for users looking for a MongoDB alternative.
 
-- **Multiple backend options** 
+- **Multiple backend options**
 
     FerretDB currently supports Postgres and SQLite backends, with many ongoing efforts to support other backends. Many databases built on Postgres can serve as a backend for FerretDB, including Neon. That means you can take advantage of all the features available in the backend of your choice to scale and manage your database infrastructure without fear of vendor lock-in.
 
@@ -47,25 +47,17 @@ From the Neon **Dashboard**, retrieve the connection string for your `ferretdb` 
 
 Your database connection string will look something like this:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/ferretdb
 ```
-
-</CodeBlock>
 
 ## Run FerretDB with Neon via Docker
 
 Execute the following command to run FerretDB in a Docker container and connect it to your Neon Postgres database (`NEON_DB_CONNECTION_STRING`):
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 docker run docker run -p 27017:27017 -e FERRETDB_POSTGRESQL_URL=<NEON_DB_CONNECTION_STRING> ghcr.io/ferretdb/ferretdb
 ```
-
-</CodeBlock>
 
 ## Test via mongosh
 
@@ -73,13 +65,9 @@ From another terminal, test to see if the FerretDB instance is connected to your
 
 So in this case, the MongoDB connection string will be:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 mongosh 'mongodb://<postgres-username>:<postgres-password>@127.0.0.1/ferretdb?authMechanism=PLAIN'
 ```
-
-</CodeBlock>
 
 This will connect you directly to the FerretDB instance where you can run MongoDB commands.
 
