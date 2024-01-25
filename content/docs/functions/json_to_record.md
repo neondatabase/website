@@ -20,7 +20,7 @@ The function's definition includes a column definition list, where you specify t
 
 ## Example usage
 
-Consider having `JSON` data representing employee information, and you want to ingest it for easier processing later. The `JSON` data looks like this:
+Consider a scenario in which you have `JSON` data representing employee information, and you want to ingest it for easier processing later. The `JSON` data looks like this:
 
 ```json
 {
@@ -31,7 +31,7 @@ Consider having `JSON` data representing employee information, and you want to i
 }
 ```
 
-The table you want to insert data into is defined as shown:
+The table you want to insert data into is defined as follows:
 
 ```sql
 CREATE TABLE employees (
@@ -65,7 +65,7 @@ This query returns the following result:
 
 ## Advanced examples
 
-This section provides advanced `json_to_record` examples:
+This section provides advanced `json_to_record` examples.
 
 ### Handling partial data
 
