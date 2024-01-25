@@ -30,7 +30,7 @@ const Integration = async () => {
         <p className="mt-3 text-center text-lg font-light leading-snug xl:text-base md:max-w-xs">
           Store vector embeddings and perform similarity search
         </p>
-        <CodeBlockWrapper className="show-linenumbers highlighted-code dark mt-11 w-full max-w-[716px] rounded-md border border-gray-new-15 text-[15px] xl:mt-10 sm:mt-8">
+        <CodeBlockWrapper className="show-linenumbers highlighted-code dark mt-11 w-full max-w-[716px] rounded-md border border-gray-new-15 xl:mt-10 sm:mt-8 [&_[data-line]]:text-[15px]">
           {parse(codeSnippet)}
         </CodeBlockWrapper>
         <p className="mt-2 text-sm font-light leading-dense tracking-extra-tight text-gray-new-60">

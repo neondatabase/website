@@ -58,7 +58,7 @@ const CodeTabsNavigation = ({ codeSnippets, highlightedCodeSnippets }) => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <CodeBlockWrapper className="show-linenumbers highlighted-code min-h-[383px] text-[15px]">
+                    <CodeBlockWrapper className="show-linenumbers highlighted-code min-h-[383px] [&_[data-line]]:text-[15px]">
                       {parse(code)}
                     </CodeBlockWrapper>
                   </m.div>
