@@ -1,10 +1,10 @@
 ---
-title: The pg_trgm Extension
-subtitle: Improving PostgreSQL text searches with pg_trgm
+title: The pg_trgm extension
+subtitle: Improve PostgreSQL text searches with the pg_trgm extension
 enableTableOfContents: true
 ---
 
-The `pg_trgm` extension enhances PostgreSQL's capability to perform text searches by using trigram matching. Trigrams are groups of three consecutive characters taken from a string. By breaking down text into trigrams, PostgreSQL can perform more efficient and flexible searches, such as similarity and proximity searches. 
+The `pg_trgm` extension enhances PostgreSQL's ability to perform text searches by using trigram matching. Trigrams are groups of three consecutive characters taken from a string. By breaking down text into trigrams, PostgreSQL can perform more efficient and flexible searches, such as similarity and proximity searches. 
 
 This extension is particularly useful for applications requiring fuzzy string matching or searching within large bodies of text.
 
@@ -32,7 +32,7 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
 For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor). 
 
-## Example Usage
+## Example usage
 
 Let's say you're developing a database of books and you want to find books with similar titles. We first create a test table and insert some sample data, using the query below.
 
@@ -53,11 +53,11 @@ VALUES
     ('1984');
 ```
 
-**Basic String Matching**
+**Basic string matching**
 
 The `pg_trgm` extension can help you do fuzzy matches on strings. 
 
-For ex, the query below looks for titles that are similar to the misspelled phrase "Grate Expectation". The `%` operator, provided by `pg_trgm`, measures similarity between two strings based on trigrams, and returns `True` if the similarity is above a certain threshold.
+For example, the query below looks for titles that are similar to the misspelled phrase "Grate Expectation". The `%` operator, provided by `pg_trgm`, measures similarity between two strings based on trigrams, and returns results if the similarity is above a certain threshold.
 
 ```sql
 SELECT *
@@ -72,19 +72,20 @@ This query returns the following:
 | 1  | Great Expectations  |
 ```
 
-The similarity threshold can be adjusted by setting the `pg_trgm.similarity_threshold` parameter (default value is 0.3). 
+The similarity threshold can be adjusted by setting the `pg_trgm.similarity_threshold` parameter (default value is `0.3`). 
 
 ## Trigrams
 
 ### Counting trigrams
 
-The `pg_trgm` module makes these assumptions about how to count trigrams in a text string. 
+The `pg_trgm` module makes these assumptions about how to count trigrams in a text string:
+
 - Only alphanumeric characters are considered. 
 - The string is lowercased before counting trigrams.
 - Each word is assumed to be prefixed with two spaces and suffixed with one space. 
 - The set of trigrams output is deduplicated.
 
-We can use the `show_trgm` function to see how `pg_trgm` counts trigrams in a string. Here is an example. 
+We can use the `show_trgm` function to see how `pg_trgm` counts trigrams in a string. Here is an example: 
 
 ```sql
 SELECT show_trgm('War and Peace'); -- {" a"," p"," w"," an"," pe"," wa",ace,and,"ar ","ce ",eac,"nd ",pea,war}
@@ -106,7 +107,7 @@ This query returns the following:
 | {" w"," wa","ar ",war} | {" b"," ba","ar ",bar} | 0.14285715 |
 ```
 
-There are 7 distinct trigrams across the two input strings and 1 trigram in common. So the similarity score comes out to be 1/7. 
+There are 7 distinct trigrams across the two input strings and 1 trigram in common. So the similarity score comes out to be 1/7 (0.14285715). 
 
 ## Advanced text searching
 
@@ -131,7 +132,7 @@ This query returns the following:
 
 **Substring matching**
 
-`Pg_trgm` also provides functionality to match the input text value against substrings within the target string. The query below illustrates this. 
+`pg_trgm` also provides functionality to match the input text value against substrings within the target string. The query below illustrates this:
 
 ```sql
 SELECT 
@@ -148,11 +149,11 @@ This query returns the following:
 
 The `word_similarity` function returns the maximum similarity score between the input string and any substring of the target string. The similarity score is still computed using trigrams. In this example, the first string `apple` matches with the substring `apple` in the target. 
 
-In contrast, the `strict_word_similarity` function only considers a subset of substrings from the target, namely only sequences of full words in the target string. That is, the first string `apple` matches with the substring `apples` in the target, hence the lower score. 
+In contrast, the `strict_word_similarity` function only considers a subset of substrings from the target, namely only sequences of full words in the target string. That is, the first string `apple` matches the substring `apples` in the target, hence the lower score. 
 
 **Distance scores**
 
-There are operators to calculate the `distance` between two strings, i.e. one minus the similarity score. 
+There are operators to calculate the `distance` between two strings, i.e., one minus the similarity score. 
 
 ```sql
 SELECT similarity('Hello', 'Halo') AS similarity, 'Hello' <-> 'Halo' AS distance;
@@ -167,11 +168,11 @@ This query returns the following:
 
 Similarly, there are operators to compute the distance based on the `word_similarity`  and `strict_word_similarity` functions. 
 
-## Performance Considerations
+## Performance considerations
 
-While `pg_trgm` enhances text search capabilities, computing similarity can get expensive when matching against a large set of strings. Here are a few tips to improve performance. 
+While `pg_trgm` enhances text search capabilities, computing similarity can get expensive when matching against a large set of strings. Here are a couple of tips to improve performance:
 
-- **Indexing**: Using `pg_trgm`, you can create a GIST or GIN index to speed up similarity search queries. This also helps regular expression based searches, such as `LIKE` and `ILIKE` operators. 
+- **Indexing**: Using `pg_trgm`, you can create a `GiST` or `GIN` index to speed up similarity search queries. This also helps regular expression-based searches, such as with `LIKE` and `ILIKE` operators. 
     ```sql
     CREATE INDEX trgm_idx_gist ON books USING GIST (title gist_trgm_ops);
     -- or
@@ -182,7 +183,7 @@ While `pg_trgm` enhances text search capabilities, computing similarity can get 
 
 ## Conclusion
 
-`pg_trgm` offers a versatile set of tools for text processing and searching in PostgreSQL. We went over the basics of the extension, including how to enable it, and how to use it for fuzzy string matching and proximity searches. 
+`pg_trgm` offers a versatile set of tools for text processing and searching in PostgreSQL. We went over the basics of the extension, including how to enable it and how to use it for fuzzy string matching and proximity searches. 
 
 ## Resources
 
