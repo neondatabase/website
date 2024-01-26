@@ -296,6 +296,10 @@
       items:
         - title: Supported extensions
           slug: extensions/pg-extensions
+        - title: citext
+          slug: extensions/citext          
+        - title: hstore
+          slug: extensions/hstore          
         - title: neon
           slug: extensions/neon
         - title: neon_utils
@@ -306,6 +310,10 @@
           slug: extensions/pg_stat_statements
         - title: pg_tiktoken
           slug: extensions/pg_tiktoken
+        - title: pg_trgm
+          slug: extensions/pg_trgm
+        - title: postgis
+          slug: extensions/postgis
         - title: timescaledb
           slug: extensions/timescaledb
     - title: Functions
