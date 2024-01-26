@@ -70,7 +70,7 @@ Refer to the following guide for instructions.
 
 ### Data recovery
 
-If you lose data due to an unintended deletion or some other event, you can create a branch from the past to recover the lost data.
+If you lose data due to an unintended deletion or some other event, you can restore a branch to any point in its history retention period to recover lost data. You can also create a new point-in-time branch for historical analysis or any other reason.
 
 ![data recovery branch](/docs/introduction/branching_data_loss.png)
 
@@ -78,8 +78,8 @@ Refer to the following guides for instructions.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/point-in-time-restore" description="Restore data to a previous state with Neon's point-in-time restore feature" icon="invert">Learn about point-in-time restore</a>
+<a href="/docs/guides/branch-restore" description="Restore a branch to its history with Branch Restore" icon="invert">Branch Restore with Time Travel</a>
 
-<a href="/docs/guides/branching-pitr" description="Learn how to restore your data to previous state with branching" icon="screen">Create a branch from the past</a>
+<a href="/docs/guides/branching-pitr" description="Learn how to create a branch from historical data" icon="screen">Create a branch from the past</a>
 
 </DetailIconCards>

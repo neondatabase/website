@@ -137,7 +137,7 @@ When working with database branches, you might find yourself in a situation wher
 
 <u>Key points</u>:
 * You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are not currently supported.
-* This reset is a complete override, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
+* This reset is a complete overwrite, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
 * Existing connections will be temporarily interupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
 
 <Tabs labels={["Console", "CLI", "API"]}>

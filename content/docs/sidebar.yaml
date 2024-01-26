@@ -19,7 +19,7 @@
           slug: introduction/auto-suspend
         - title: Branching
           slug: introduction/branching
-        - title: Point-in-time restore
+        - title: Branch reset and restore
           slug: introduction/point-in-time-restore
         - title: Read replicas
           slug: introduction/read-replicas
@@ -133,6 +133,8 @@
         - title: Branching
           slug: guides/branching-intro
           items: 
+            - title: Branch Restore
+              slug: guides/branch-restore
             - title: Branching — Point-in-time restore
               slug: guides/branching-pitr
             - title: Branching — Testing queries
