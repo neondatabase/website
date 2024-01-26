@@ -53,7 +53,7 @@ Here's a snapshot of what we're working on now:
 
 * **Australia**
 
-    Adding regional support for Australia.
+    Adding regional support for Australia — Asia Pacific (Sydney).
 
 ## A brief history of Neon
 
