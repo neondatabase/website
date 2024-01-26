@@ -292,6 +292,10 @@
           slug: ai/ai-google-colab
 - title: Postgres
   items:
+    - title: Data types
+      items:
+        - title: boolean
+          slug: data-types/boolean
     - title: Extensions
       items:
         - title: Supported extensions
