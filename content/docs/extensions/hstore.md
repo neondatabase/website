@@ -8,10 +8,10 @@ The `hstore` extension is a flexible way to store and manipulate sets of key-val
 
 <CTA />
 
-This guide covers the basics of the `hstore` extension - how to enable it, how to store and query key-value pairs, and perform operations on hstore data with examples. `Hstore` is valuable in scenarios where schema-less data needs to be stored efficiently, such as in configurations, application settings, or any situation where the data structure may evolve over time. 
+This guide covers the basics of the `hstore` extension - how to enable it, how to store and query key-value pairs, and perform operations on hstore data with examples. `hstore` is valuable in scenarios where schema-less data needs to be stored efficiently, such as in configurations, application settings, or any situation where the data structure may evolve over time. 
 
 <Admonition type="note">
-    `Hstore` is an open-source extension for PostgreSQL that can be installed on any compatible PostgreSQL instance. Detailed installation instructions and compatibility information can be found at [PostgreSQL Extensions](https://www.postgresql.org/docs/current/contrib.html).
+    `hstore` is an open-source extension for PostgreSQL that can be installed on any compatible PostgreSQL instance. Detailed installation instructions and compatibility information can be found at [PostgreSQL Extensions](https://www.postgresql.org/docs/current/contrib.html).
 </Admonition>
 
 **Version availability**
@@ -60,11 +60,11 @@ VALUES
     ('Headphones', 'brand => Sony, price => 150, wireless => true, color => "Black"');
 ```
 
-`Hstore` stores both keys and values for each record as strings (values can be nulls). For numeric attributes like price and megapixels, they are cast to strings when inserted into the table.
+`hstore` stores both keys and values for each record as strings (values can be nulls). For numeric attributes like price and megapixels, they are cast to strings when inserted into the table.
 
 **Querying `hstore` data**
 
-`Hstore` columns can be referenced as regular columns in a query. To access the attributes in a `hstore` column, we use the `->` operator. 
+`hstore` columns can be referenced as regular columns in a query. To access the attributes in an `hstore` column, we use the `->` operator. 
 
 For example, to retrieve the name and brand for all products with price less than 1000, we can run the following query:
 
@@ -88,11 +88,11 @@ Since the `price` attribute is stored as a string, we need to cast it to an inte
 
 ## Operators for `hstore` data
 
-`Hstore` offers a variety of operators for manipulating and querying key-value pairs. We go over some examples below.
+`hstore` offers a variety of operators for manipulating and querying key-value pairs. We go over some examples below.
 
 **Check if a key exists**
 
-The `?` operator is used to check if a `hstore` contains a specific key.
+The `?` operator is used to check if an `hstore` contains a specific key.
 
 ```sql
 SELECT id, name 
@@ -109,7 +109,7 @@ This query returns the following:
 | 6  | Smartphone |
 ```
 
-**Check if a hstore contains another hstore**
+**Check if an hstore contains another hstore**
 
 The `@>` operator is used to check if the `hstore` on the left contains the right operand. For example, the query below looks for products that have a `brand` attribute of `Apple`. 
 
@@ -154,7 +154,7 @@ This query returns the following:
 
 **Check if a hstore contains any of the specified keys**
 
-The `?|` operator is used to check if a `hstore` contains any of the keys specified in the right operand. For example, the query below returns all products that have either a `screen_size` or `megapixels` attribute.
+The `?|` operator is used to check if an `hstore` contains any of the keys specified in the right operand. For example, the query below returns all products that have either a `screen_size` or `megapixels` attribute.
 
 ```sql
 SELECT id, name
@@ -178,7 +178,7 @@ The `hstore` extension also adds functions to manipulate the `hstore` data. We g
 
 **Retrieve all keys**
 
-The `akeys` function returns an array of all the keys in a `hstore` value. For ex, the query below returns all the keys for Dell laptop products. 
+The `akeys` function returns an array of all the keys in an `hstore` value. For example, the query below returns all the keys for Dell laptop products. 
 
 ```sql
 SELECT id, name, akeys(attributes) AS keys
@@ -196,7 +196,7 @@ This query returns the following:
 
 **Convert hstore to JSON**
 
-The `hstore_to_json` function converts a `hstore` value to JSON. For example, the query below converts the `attributes` column to JSON for all products with a `brand` attribute of `Apple`.
+The `hstore_to_json` function converts an `hstore` value to `JSON`. For example, the query below converts the `attributes` column to `JSON` for all products with a `brand` attribute of `Apple`.
 
 ```sql
 SELECT hstore_to_json(attributes) AS attributes
@@ -206,7 +206,7 @@ WHERE attributes -> 'brand' = 'Apple';
 
 **Extract all keys and values**
 
-The `each` function returns the set of key-value pairs for a `hstore` value. For example, the query below returns each attribute of the Nikon Camera as a separate row.
+The `each` function returns the set of key-value pairs for an `hstore` value. For example, the query below returns each attribute of the Nikon Camera as a separate row.
 
 ```sql
 SELECT id, (each(attributes)).*
@@ -227,7 +227,7 @@ This query returns the following:
 
 ## Comparing `hstore` with `JSON`
 
-The `hstore` and `JSON` data types can be both used to store semi-structured data. `Hstore` has a flat data model - both keys and values must be strings. This makes it more efficient for simple key-value data.
+The `hstore` and `JSON` data types can be both used to store semi-structured data. `Hstore` has a flat data model — both keys and values must be strings. This makes it more efficient for simple key-value data.
 
 In constrast, `JSON` supports a variety of data types, and can also store nested data structures. This makes it more flexible, but trades off some performance.
 
@@ -241,7 +241,7 @@ Indexing can improve the performance of queries involving `hstore` data, particu
 CREATE INDEX btree_idx_attributes ON product USING hash (attributes);
 ```
 
-For queries that involve key-level filtering, like the `@>` or the `?` operators, the `GIN` and `GIST` indexes are more useful. They can be created like below.
+For queries that involve key-level filtering, like the `@>` or the `?` operators, the `GIN` and `GIST` indexes are more useful. The indexes can be created as shown in this example:
 
 ```sql
 CREATE INDEX gin_idx_attributes ON product USING gin (attributes);
@@ -253,6 +253,6 @@ The `hstore` extension offers a powerful and flexible way to handle semi-structu
 
 ## Resources
 
-- [PostgreSQL documentation on hstore](https://www.postgresql.org/docs/current/hstore.html)
+- [PostgreSQL hstore documentation](https://www.postgresql.org/docs/current/hstore.html)
 
 <NeedHelp/>
