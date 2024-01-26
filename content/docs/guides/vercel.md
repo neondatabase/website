@@ -34,7 +34,7 @@ When you push changes to the repository associated with your Vercel project, tri
 This section describes how to add the Neon Vercel Integration to your Vercel project.
 
 <Admonition type="note" title="Notes">
-- Please be aware that the Neon Vercel Integration connects one Vercel project to one Neon project. It does not support connecting multiple Vercel projects to one Neon project, nor does it support connecting multiple Neon projects to one Vercel project.
+- Please be aware that the Neon Vercel Integration connects one Vercel project to one Neon project. It does not support connecting multiple Vercel projects to one Neon project or connecting multiple Neon projects to one Vercel project.
 - The Neon Vercel Integration is supported with GitHub, GitLab, and Bitbucket source code repositories.
 </Admonition>
 
@@ -57,7 +57,7 @@ To add the integration:
     1. Select the Neon project that you want to connect to your Vercel project by selecting the Neon project, database, and role that Vercel will use to connect.
       ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
-          The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's root branch that you can modify without affecting your root branch.
+          The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's root branch (`main`) that you can modify without affecting data on your root branch.
 
           When you finish making selections, click **Continue**.
     1. Confirm the integration settings. This allows the integration to:
@@ -74,7 +74,7 @@ To add the integration:
     1. Navigate to the [Neon Console](https://console.neon.tech/).
     1. Select the project you are connected to.
     1. Select **Branches**.
-       You will see the root branch of your project. If you created a development branch, you will also see a `vercel-dev` branch.
+       You will see the root branch of your project (`main`). If you created a development branch, you will also see a `vercel-dev` branch.
        ![Neon branches](/docs/guides/vercel_neon_branches.png)
 1. To view the results of the integration in Vercel:
     1. Navigate to [Vercel](https://vercel.com/).
