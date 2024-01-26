@@ -126,7 +126,7 @@
 - title: Guides
   slug: guides/guides-intro
   items:
-    - title: Neon features
+    - title: Neon
       items: 
         - title: Autoscaling
           slug: guides/autoscaling-guide
@@ -171,13 +171,7 @@
             - title: Data analysis and reporting
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
-              slug: guides/read-replica-prisma
-        - title: Extensions
-          items:
-            - title: neon
-              slug: extensions/neon
-            - title: neon_utils
-              slug: extensions/neon-utils            
+              slug: guides/read-replica-prisma    
     - title: Frameworks
       items:
         - title: Next.js
@@ -186,6 +180,8 @@
           slug: guides/astro
         - title: Remix
           slug: guides/remix
+        - title: Ruby on Rails
+          slug: guides/ruby-on-rails
     - title: Languages
       items:
         - title: Elixir
@@ -227,6 +223,8 @@
       items:
         - title: Exograph
           slug: guides/exograph
+        - title: FerretDB
+          slug: guides/ferretdb
         - title: Grafbase
           slug: guides/grafbase
         - title: Hasura
@@ -294,19 +292,48 @@
       items:
         - title: Google Colab
           slug: ai/ai-google-colab
-- title: Postgres guides
+- title: Postgres
   items:
     - title: Extensions
-      slug: extensions/pg-extensions
       items:
+        - title: Supported extensions
+          slug: extensions/pg-extensions
+        - title: citext
+          slug: extensions/citext          
+        - title: hstore
+          slug: extensions/hstore          
+        - title: neon
+          slug: extensions/neon
+        - title: neon_utils
+          slug: extensions/neon-utils       
         - title: pgvector
           slug: extensions/pgvector
+        - title: pg_stat_statements
+          slug: extensions/pg_stat_statements
         - title: pg_tiktoken
           slug: extensions/pg_tiktoken
+        - title: pg_trgm
+          slug: extensions/pg_trgm
+        - title: postgis
+          slug: extensions/postgis
+        - title: timescaledb
+          slug: extensions/timescaledb
     - title: Functions
       items:
+        - title: array_to_json
+          slug: functions/array_to_json
+        - title: json_array_elements
+          slug: functions/json_array_elements
+        - title: jsonb_array_elements
+          slug: functions/jsonb_array_elements
         - title: json_build_object
           slug: functions/json_build_object
+        - title: json_extract_path
+          slug: functions/json_extract_path
+        - title: dense_rank
+          slug: functions/dense_rank
+    - title: Compatibility
+      slug: reference/compatibility
 - title: Import data
   slug: import/import-intro
   items:
@@ -343,6 +370,8 @@
           slug: reference/cli-me
         - title: projects
           slug: reference/cli-projects
+        - title: ip-allow
+          slug: reference/cli-ip-allow
         - title: branches
           slug: reference/cli-branches
         - title: databases
@@ -361,8 +390,6 @@
       slug: reference/sdk
     - title: Glossary
       slug: reference/glossary
-    - title: Postgres compatibility
-      slug: reference/compatibility
 - title: Community
   slug: community/community-intro
   items:

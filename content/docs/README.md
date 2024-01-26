@@ -1,5 +1,5 @@
 ---
-updatedOn: '2024-01-08T20:02:33.915Z'
+updatedOn: '2024-01-23T16:35:18.273Z'
 ---
 # Docs
 
@@ -352,7 +352,7 @@ curl --request POST \
 
 To improve the documentation readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
 
-There are 5 types of Admonition: `note`, `important`, `tip`, `warning`, `info`; the default is `note`.
+There are 6 types of Admonition: `note`, `important`, `tip`, `warning`, `info`, `comingSoon`; the default is `note`.
 
 You may also specify an optional title with prop `title`.
 
@@ -374,6 +374,34 @@ Example:
 ![Admonition example](admonition-example.jpg)
 
 </details>
+
+## CTA
+
+This is a simple block with title, description text and one CTA button that accomplish certain actions.
+
+```md
+
+<CTA />
+
+```
+
+Check the example for default data of CTA block
+
+<details>
+<summary>Example</summary>
+
+![CTA example](cta-example.jpg)
+
+</details>
+
+
+To change text in CTA block, you can pass to the component props `title`, `description`, `buttonText`, `buttonUrl`:
+
+```md
+
+<CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL editor. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+
+```
 
 ## Images
 

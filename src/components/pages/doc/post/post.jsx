@@ -92,7 +92,7 @@ const Post = ({
       </div>
 
       <div className={clsx('col-start-11 col-end-13 -ml-11 h-full 2xl:ml-0 xl:hidden')}>
-        <nav className="no-scrollbars sticky bottom-10 top-10 max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
+        <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
           {enableTableOfContents && <TableOfContents items={tableOfContents} />}
         </nav>
       </div>

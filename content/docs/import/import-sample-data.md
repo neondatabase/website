@@ -2,7 +2,7 @@
 title: Postgres sample data
 subtitle: 'Download sample data for learning, testing, and exploring Neon'
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.758Z'
+updatedOn: '2024-01-19T14:15:57.927Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.
@@ -15,6 +15,10 @@ This guide describes how to download and install sample data for use with Neon.
 - A Neon database connection string. After creating a database, you can obtain the connection string from the **Connection Details** widget on the Neon **Dashboard**. In the instructions that follow, replace `postgres://[user]:[password]@[neon_hostname]/[dbname]` with your connection string.
 - A Neon [Pro](/docs/introduction/pro-plan) account if you intend to install a dataset larger than 3 GB.
 - Instructions for each dataset require that you create a database. You can do so from a client such as `psql` or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+
+<Admonition type="note">
+You can also load sample data using the Neon CLI. See [Load sample data with the Neon CLI](#load-sample-data-with-the-neon-cli).
+</Admonition>
 
 ## Sample data
 
@@ -572,5 +576,50 @@ An airport database containing information about airports, aircraft, bookings, p
 - Source: [https://github.com/hettie-d/postgres_air](https://github.com/hettie-d/postgres_air)
 - License: [BSD 3-Clause License](https://github.com/hettie-d/postgres_air/blob/main/LICENSE)
 - `Copyright (c) 2020, hettie-d All rights reserved.`
+
+## Load sample data with the Neon CLI
+
+You can load data with the Neon CLI by passing the `--psql` option, which calls the `psql` command line utility.
+
+The Neon CLI and `psql` must be installed on your system. For installation instructions, see:
+
+- [Neon CLI — Install and connect](/docs/reference/cli-install)
+- [PostgreSQL Downloads](https://www.postgresql.org/download/) for `psql`
+
+If you have multiple Neon projects or branches, we recommend setting your Neon CLI project and branch context so that you don't have to specify them explicitly when running a Neon CLI command. See [Neon CLI commands — set-context](/docs/reference/cli-set-context).
+
+To load sample data:
+
+1. Download one of the data files listed above. For example:
+
+    <CodeBlock shouldWrap>
+
+    ```bash
+    wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/periodic_table.sql
+    ```
+  
+    </CodeBlock>
+
+    Alternatively, supply your own data file. 
+
+2. Load the data using one of the following Neon CLI commands ([projects](/docs/reference/cli-projects), [branches](/docs/reference/cli-branches), or [connection-string](/docs/reference/cli-connection-string)):
+
+    - Create a new Neon project, connect to it with `psql`, and run the `.sql` file.
+
+        ```bash
+        neonctl projects create --psql -- -f periodic_table.sql
+        ```
+
+    - Create a branch, connect to it with `psql`, and run the an `.sql` file.
+
+        ```bash
+        neonctl branches create --psql -- -f periodic_table.sql
+        ```
+
+    - Get a connection string, connect with `psql`, and run the `.sql` file.
+
+        ```bash
+        neonctl connection-string --psql -- -f periodic_table.sql
+        ```
 
 <NeedHelp/>
