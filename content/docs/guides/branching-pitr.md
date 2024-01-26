@@ -1,11 +1,12 @@
 ---
 title: Branching — Point-in-time restore
-subtitle: Create a new point-in-time branch or restore your data to a previous state using Neon's branching feature
+subtitle: Create a new point-in-time branch or restore your data to a previous state
+  using Neon's branching feature
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2023-11-27T16:33:52.716Z'
+updatedOn: '2024-01-26T18:19:19.804Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
