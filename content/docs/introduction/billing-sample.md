@@ -2,7 +2,7 @@
 title: Sample project billing
 enableTableOfContents: true
 subtitle: Practical example of how Neon pricing is calculated
-updatedOn: '2024-01-23T17:45:24.327Z'
+updatedOn: '2024-01-26T20:27:59.554Z'
 ---
 
 <NewPricing/>
