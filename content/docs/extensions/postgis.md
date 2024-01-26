@@ -47,6 +47,7 @@ CREATE TABLE bus_stops (
 Here, the location column is of type `GEOGRAPHY(Point)`, which is a spatial data type provided by the `postgis` extension and used to store points on the Earth's surface. 
 
 **Inserting data**
+
 Data can be inserted into the table using regular `INSERT` statements. 
 
 ```sql
@@ -75,14 +76,14 @@ This query returns the following:
 | Main St & 3rd Ave  |
 ```
 
-`ST_DWithin` is a function that returns true if the distance between two points is less than or equal to the specified distance (when used with geography type, the unit is meters). 
+The `ST_DWithin` function returns true if the distance between two points is less than or equal to the specified distance (when used with the `GEOGRAPHY` type, the unit is meters). 
 
 ## Spatial data types
 
 PostGIS extends PostgreSQL's data types to handle spatial data. The primary spatial types are:
 
-- **GEOMETRY**: A flexible type for spatial data, supporting various shapes. It models shapes in the cartesian coordinate plane. Each `geometry` value is also associated with a spatial reference system (SRS), which defines the coordinate system and units of measurement. 
-- **GEOGRAPHY**: Specifically designed for large-scale spatial operations on the Earth's surface, factoring in the Earth's curvature. The coordinates for a `geography` shape are specified in degrees of latitude and longitude. 
+- **GEOMETRY**: A flexible type for spatial data, supporting various shapes. It models shapes in the cartesian coordinate plane. Each `GEOMETRY` value is also associated with a spatial reference system (SRS), which defines the coordinate system and units of measurement. 
+- **GEOGRAPHY**: Specifically designed for large-scale spatial operations on the Earth's surface, factoring in the Earth's curvature. The coordinates for a `GEOGRAPHY` shape are specified in degrees of latitude and longitude. 
 
 The actual shapes are stored as a set of coordinates. For example, a point is stored as a pair of coordinates, a line as a set of points, and a polygon as a set of lines. 
 
@@ -137,7 +138,7 @@ This query returns the following:
 
 **Intersection of Roads**
 
-We can use the `ST_Intersects` function to find if two roads intersect. To ensure we don't get duplicate pairs of roads, we filter out pairs where the first road has a higher id than the second road.
+We can use the `ST_Intersects` function to find if two roads intersect. To ensure we don't get duplicate pairs of roads, we filter out pairs where the first road has a higher `id` than the second road.
 
 ```sql
 SELECT a.name, b.name
@@ -210,7 +211,7 @@ CREATE INDEX spatial_index_name ON landmarks USING GIST(location);
 
 ### Query optimization
 
-- **Unnecessary Casting**: GEOMETRY and GEOGRAPHY are the two primary data types in `postgis`, and a lot of functions are overloaded to work with both. However, casting between the two types can be expensive, so it's best to store data in the more frequently used type. 
+- **Unnecessary Casting**: `GEOMETRY` and `GEOGRAPHY` are the two primary data types in `postgis`, and a lot of functions are overloaded to work with both. However, casting between the two types can be expensive, so it's best to store data in the more frequently used type. 
 - **Use Appropriate Precision**: Reducing the precision of coordinates can often improve performance without significantly impacting the results. 
 
 ## Conclusion
