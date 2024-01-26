@@ -146,12 +146,16 @@ You can enable these variables from the Neon Console:
 4. In the **Vercel integration** drawer, select the environment variables you require. The selected variables will be set in your Vercel project with your next push. 
 
 <Admonition type="note">
-Clicking **Redeploy** in Vercel does apply variable changes made in Neon to your Vercel project.
+Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next push.
 </Admonition> 
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
 
 ## Make the integration available to other Vercel projects
+
+<Admonition type="warning">
+The procedure described below is currently broken. At this time, it is not possible to use integration with more than one Vercel project under the same Vercel account. This issue is being investigated.
+</Admonition>
 
 If you added the Neon Vercel Integration to a single Vercel project but would like to make it available for use with your other Vercel projects, complete the steps outlined below.
 
