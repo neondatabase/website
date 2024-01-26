@@ -18,7 +18,7 @@ const TopBar = () => {
   return isTopBarHidden ? null : (
     <Link
       className="safe-paddings relative z-40 flex h-11 w-full items-center justify-center bg-primary-1 px-4 py-3 leading-none transition-colors duration-200 hover:bg-[#1AFFB2] xs:h-auto"
-      to="https://neon.tech/docs/changelog"
+      to="/docs/changelog"
       onClick={() => {
         sendGtagEvent('click_announcement_banner');
         sendSegmentEvent('click_announcement_banner');
