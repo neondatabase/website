@@ -310,6 +310,8 @@
           slug: extensions/pg_stat_statements
         - title: pg_tiktoken
           slug: extensions/pg_tiktoken
+        - title: pg_trgm
+          slug: extensions/pg_trgm
         - title: postgis
           slug: extensions/postgis
         - title: timescaledb
