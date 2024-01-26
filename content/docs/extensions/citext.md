@@ -1,6 +1,6 @@
 ---
 title: The citext Extension
-subtitle: Use citext to handle case-insensitive data in PostgreSQL
+subtitle: Use the citext extension to handle case-insensitive data in PostgreSQL
 enableTableOfContents: true
 ---
 
@@ -8,13 +8,13 @@ The `citext` extension in PostgreSQL provides a case-insensitive data type for t
 
 <CTA />
 
-This guide covers the `citext` extension - its setup, usage, and practical examples in PostgreSQL. For dataset where consistent text formatting isn't guaranteed, case-insensitive queries can streamline operations.
+This guide covers the `citext` extension — its setup, usage, and practical examples in PostgreSQL. For datasets where consistent text formatting isn't guaranteed, case-insensitive queries can streamline operations.
 
 <Admonition type="note">
-    The `citext` extension is an open-source module for PostgreSQL. It can be easily installed and used in any PostgreSQL database. This guide provides steps for installation and usage, with further details available in the [PostgreSQL Documentation](https://postgresql.org/docs/current/citext.html).
+The `citext` extension is an open-source module for PostgreSQL. It can be easily installed and used in any PostgreSQL database. This guide provides steps for installation and usage, with further details available in the [PostgreSQL Documentation](https://postgresql.org/docs/current/citext.html).
 </Admonition>
 
-## Enable the `citext` Extension
+## Enable the `citext` extension
 
 You can enable `citext` by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
 
@@ -26,7 +26,7 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 ## Example Usage
 
-**Creating a Table with citext**
+**Creating a table with citext**
 
 Consider a user registration system where the user's email should be unique, regardless of case. 
 
@@ -40,7 +40,7 @@ CREATE TABLE users (
 
 In this table, the `email` field is of type `citext`, ensuring that email addresses are treated case-insensitively.
 
-**Inserting Data**
+**Inserting data**
 
 Insert data as you would normally. The `citext` type automatically handles case-insensitivity. 
 
@@ -53,9 +53,9 @@ VALUES
   ('EveAnderson', 'eve@example.com');
 ```
 
-**Case-Insensitive Querying**
+**Case-Insensitive querying**
 
-Queries against `citext` columns are inherently case-insensitive. Effectively, it calls the `lower` function on both strings when comparing two values. 
+Queries against `citext` columns are inherently case-insensitive. Effectively, it calls the `lower()` function on both strings when comparing two values. 
 
 ```sql
 SELECT * FROM users WHERE email = 'johnsmith@email.com';
@@ -74,9 +74,10 @@ The email address matched even though the case was different.
 
 **Using citext with regex functions**
 
-The `citext` extension can be used with regular expressions and other string matching functions. They just match case-insensitively. 
+The `citext` extension can be used with regular expressions and other string-matching functions, which perform string matching in a case-insensitive manner. 
 
-For ex, in the query below, we find users whose email addresses start with 'AL'.
+For example, the query below finds users whose email addresses start with 'AL'.
+
 ```sql
 SELECT * FROM users WHERE regexp_match(email, '^AL', 'i') IS NOT NULL;
 ```
@@ -90,23 +91,24 @@ This query returns the following:
 
 **Using citext data as TEXT**
 
-If you do want case-sensitive behavior, you can cast `citext` data to `text` and use it as such. 
+If you do want case-sensitive behavior, you can cast `citext` data to `text` and use it as shown here: 
 
 Query:
 ```sql
 SELECT * FROM users WHERE email::text LIKE '%EVE%';
 ```
 
-This query returns no results since we don't there is no user with an email address containing 'EVE'.
+This query will only return results if it finds a user with an email address containing 'EVE'.
 
 ## Benefits of Using citext
 
-- **Simplicity in Queries**: No need for functions like `LOWER()` or `UPPER()` to perform case-insensitive comparisons.
-- **Data Integrity**: Helps maintain data consistency, especially in user input scenarios.
+- **Query simplicity**: No need for functions like `lower()` or `upper()` to perform case-insensitive comparisons.
+- **Data integrity**: Helps maintain data consistency, especially in user input scenarios.
 
 ## Performance considerations
 
 ### Indexing with citext
+
 Indexing `citext` fields is similar to indexing regular text fields. However, it's important to note that the index will be case-insensitive. 
 
 ```sql
@@ -116,13 +118,15 @@ CREATE INDEX idx_email ON users USING btree(email);
 This index will improve the performance of queries involving the `email` field. Depending on whether the more frequent use case is case-sensitive or case-insensitive, you can choose to index the `citext` field or cast it to `text` and index that. 
 
 ### Comparison with `lower()` function
-`Citext` internally does an operation similar to `lower()` on both sides of the comparison, so there is not a big performance jump. However, using citext ensures consistent case-insensitive behavior across queries without the need for repeatedly applying the lower function, which makes errors less likely. 
+
+`Citext` internally does an operation similar to `lower()` on both sides of the comparison, so there is not a big performance jump. However, using `citext` ensures consistent case-insensitive behavior across queries without the need for repeatedly applying the `lower()` function, which makes errors less likely. 
 
 ## Conclusion
 
 The `citext` extension helps manage case-insensitivity in text data within PostgreSQL. It simplifies queries and ensures consistency in data handling. This guide provides an overview of using `citext`, including creating and querying case-insensitive fields.
 
 ## Resources
+
 - [PostgreSQL citext documentation](https://www.postgresql.org/docs/current/citext.html)
 
 <NeedHelp/>
