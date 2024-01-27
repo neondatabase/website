@@ -6,6 +6,8 @@ enableTableOfContents: true
 
 The `json_object` function in PostgreSQL is used to create a `JSON` object from a set of key-value pairs. It is particularly useful when you need to generate `JSON` data dynamically from existing table data or input parameters.
 
+<CTA />
+
 ## Function signature
 
 ```sql
@@ -40,9 +42,8 @@ INSERT INTO book_inventory VALUES
 (102, 'Invisible Man', 'Ralph Ellison', 15.99, 'Novel');
 ```
 
-When querying this dataset, the frontend client might want to present the data in a different way. Say, we want the catalog information just as the list of book names, while combining the rest of the fields into a single `metadata` attribute.  
+When querying this dataset, the frontend client might want to present the data in a different way. Say you want the catalog information just as the list of book names while combining the rest of the fields into a single `metadata` attribute. You can do so as shown here:
 
-Query:
 ```sql
 SELECT book_id, title, json_object(
   ARRAY['author', 'genre'], 
@@ -52,6 +53,7 @@ FROM book_inventory;
 ```
 
 This query returns the following result:
+
 ```text
 | book_id | title            | metadata                                   |
 |---------|------------------|--------------------------------------------|
@@ -65,9 +67,8 @@ This query returns the following result:
 
 ### Creating nested JSON objects
 
-You could use `json_object` to create nested `JSON` objects for representing more complex data. However, since `json_object` only expects text values for each key, we will need to combine it with other `JSON` functions like `json_build_object`. 
+You could use `json_object` to create nested `JSON` objects for representing more complex data. However, since `json_object` only expects text values for each key, we will need to combine it with other `JSON` functions like `json_build_object`. For example:
 
-Query:
 ```sql
 SELECT json_build_object(
   'title', title,
@@ -77,6 +78,7 @@ FROM book_inventory;
 ```
 
 This query returns the following result:
+
 ```text
 | book_info                                                                                        |
 |--------------------------------------------------------------------------------------------------|
@@ -93,10 +95,10 @@ This query returns the following result:
 
 ### Alternative options
 
-- [jsonb_object](./jsonb_object) - Same functionality as `json_object`, but returns a `JSONB` object instead of `JSON`. 
-- [row_to_json](./row_to_json) - It can be used to create a `JSON` object from a table row (or a row of a  composite type) without needing to specify keys and values explicitly. Although, it is less flexible than `json_object` since all fields in the row are included in the `JSON` object. 
-- [json_build_object](./json_build_object) - Similar to `json_object`, but allows for more flexibility in constructing the `JSON` object, as it can take a variable number of arguments in the form of key-value pairs. 
-- [json_object_agg](./json_object_agg) - It is used to aggregate the key-value pairs from multiple rows into a single `JSON` object. In contrast, `json_object` outputs a `JSON` object for each row. 
+- [jsonb_object](/docs/functions/jsonb_object) - Same functionality as `json_object`, but returns a `JSONB` object instead of `JSON`. 
+- [row_to_json](/docs/functions/row_to_json) - It can be used to create a `JSON` object from a table row (or a row of a  composite type) without needing to specify keys and values explicitly. Although, it is less flexible than `json_object` since all fields in the row are included in the `JSON` object. 
+- [json_build_object](/docs/functions/json_build_object) - Similar to `json_object`, but allows for more flexibility in constructing the `JSON` object, as it can take a variable number of arguments in the form of key-value pairs. 
+- [json_object_agg](/docs/functions/json_object_agg) - It is used to aggregate the key-value pairs from multiple rows into a single `JSON` object. In contrast, `json_object` outputs a `JSON` object for each row. 
 
 ## Resources
 
