@@ -59,7 +59,7 @@ const PostgresPage = async ({ params }) => {
 
   return (
     <div className="col-span-6 -mx-10 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
-      <article>
+      <article className="-mt-5 lg:mt-0">
         {!hasH1 && <h1 className="sr-only">{title}</h1>}
         <Admonition type="note">
           This mirror of{' '}
@@ -71,8 +71,11 @@ const PostgresPage = async ({ params }) => {
             official PostgreSQL documentation
           </Link>{' '}
           is brought to you by Neon with ❤️
-          <br className="flat-none sm:flat-break" /> Not all information is applicable to Neon.
-          See <Link to="/docs/reference/compatibility#postgresql-documentation">Postgres compatibility</Link> for details.
+          <br className="flat-none sm:flat-break" /> Not all information is applicable to Neon. See{' '}
+          <Link to="/docs/reference/compatibility#postgresql-documentation">
+            Postgres compatibility
+          </Link>{' '}
+          for details.
         </Admonition>
         <Content className="mt-10" content={content} isPostgres />
       </article>

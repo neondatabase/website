@@ -44,4 +44,5 @@ export default {
   demos: '/demos',
   autoscaling: '/docs/introduction/autoscaling',
   onDemandStorage: '/docs/introduction/about#bottomless-storage',
+  caseStudies: '/case-studies',
 };
