@@ -18,7 +18,7 @@ The function accepts a `JSON` object and a variadic list of elements that specif
 
 ## Example usage
 
-Let's consider a `users` table with a JSON column named `profile` containing various user details.
+Let's consider a `users` table with a `JSON` column named `profile` containing various user details.
 
 Here's how we can create the table and insert some sample data:
 
@@ -34,7 +34,7 @@ VALUES
     (2, '{"name": "Bob", "contact": {"email": "bob@example.com", "phone": "0987654321"}, "hobbies": ["gaming", "cooking"]}');
 ```
 
-To extract and view the email addresses for all users, we can run the query below. 
+To extract and view the email addresses of all users, we can run the following query: 
 
 ```sql
 SELECT id, json_extract_path_text(profile, 'contact', 'email') as email
@@ -54,7 +54,7 @@ This query returns the following:
 
 ### Extracting values from JSON arrays
 
-`json_extract_path_text` can also be used to extract values from JSON arrays. For instance, to extract the first and second hobbies for everyone, we can run the following query:
+`json_extract_path_text` can also be used to extract values from `JSON` arrays. For instance, to extract the first and second hobbies for everyone, we can run the following query:
 
 ```sql
 SELECT
@@ -77,7 +77,7 @@ This query returns the following:
 
 Let's say we have another table, `hobbies`, that includes additional useful information such as difficulty level and average cost to practice each hobby. 
 
-We can create one with some sample data using the query below. 
+We can create the `hobbies` table with some sample data with the following statements: 
 
 ```sql
 CREATE TABLE hobbies (
@@ -95,7 +95,7 @@ VALUES
     ('Cooking', 'Variable', 'Low');
 ```
 
-The `users` table has a JSON column named preferences that contains information about each user's preferred hobbies. A fun exercise could be to find if a user has any hobbies that are easy to get started with. Then we can recommend they engage with it more often. 
+The `users` table has a `JSON` column named preferences that contains information about each user's preferred hobbies. A fun exercise could be to find if a user has any hobbies that are easy to get started with. Then we can recommend they engage with it more often. 
 
 To fetch this list, we can run the query below. 
 
@@ -127,8 +127,8 @@ Performance considerations for `json_extract_path_text` are similar to those for
 
 ### Alternative functions
 
-- [json_extract_path](./json_extract_path.md) - `json_extract_path` is a similar function that can extract data from a `JSON` object at the specified path. The difference being that it return a JSON object, while `json_extract_path_text` always returns text. The right function to use depends on what we want to use the output data for. 
-- [jsonb_extract_path_text](./jsonb_extract_path_text.md) - It is a similar function that can extract data from a `JSON` object at the specified path. It is more efficient, but works only with data of the type `JSONB`.
+- [json_extract_path](/docs/functions/json_extract_path) - This is a similar function that can extract data from a `JSON` object at the specified path. The difference is that it returns a `JSON` object, while `json_extract_path_text` always returns text. The right function to use depends on what you want to use the output data for. 
+- `jsonb_extract_path_text` - This is a similar function that can extract data from a `JSON` object at the specified path. It is more efficient but works only with data of the type `JSONB`.
 
 ## Resources
 
