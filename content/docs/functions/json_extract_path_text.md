@@ -4,7 +4,7 @@ subtitle: Extracts a JSON sub-object at the specified path as text
 enableTableOfContents: true
 ---
 
-The `json_extract_path_text` function is designed to simplify extracting text from `JSON` data in Postgres. This function is similar to `json_extract_path` - it also produces the value at the specified path from a `JSON` object but casts it to plain text before returning. This makes it more straightforward for text manipulation and comparison operations. 
+The `json_extract_path_text` function is designed to simplify extracting text from `JSON` data in Postgres. This function is similar to `json_extract_path` — it also produces the value at the specified path from a `JSON` object but casts it to plain text before returning. This makes it more straightforward for text manipulation and comparison operations. 
 
 <CTA />
 
@@ -52,30 +52,9 @@ This query returns the following:
 
 ## Advanced Examples
 
-### Extracting values from JSON arrays
-
-`json_extract_path_text` can also be used to extract values from `JSON` arrays. For instance, to extract the first and second hobbies for everyone, we can run the following query:
-
-```sql
-SELECT
-    json_extract_path_text(profile, 'name') as name,
-    json_extract_path_text(profile, 'hobbies', '0') as first_hobby,
-    json_extract_path_text(profile, 'hobbies', '1') as second_hobby
-FROM users;
-```
-
-This query returns the following:
-
-```text
-| name  | first_hobby | second_hobby |
-|-------|-------------|--------------|
-| Alice | reading     | cycling      |
-| Bob   | gaming      | cooking      |
-```
-
 ### Using extracted value to join tables
 
-Let's say we have another table, `hobbies`, that includes additional useful information such as difficulty level and average cost to practice each hobby. 
+Let's say we have another table, `hobbies`, that includes additional information such as difficulty level and the average cost to practice each hobby. 
 
 We can create the `hobbies` table with some sample data with the following statements: 
 
@@ -95,7 +74,7 @@ VALUES
     ('Cooking', 'Variable', 'Low');
 ```
 
-The `users` table has a `JSON` column named preferences that contains information about each user's preferred hobbies. A fun exercise could be to find if a user has any hobbies that are easy to get started with. Then we can recommend they engage with it more often. 
+The `users` table we created previously has a `JSON` column named `profile` that contains information about each user's preferred hobbies. A fun exercise could be to find if a user has any hobbies that are easy to get started with. Then we can recommend they engage with it more often. 
 
 To fetch this list, we can run the query below. 
 
@@ -117,6 +96,29 @@ This query returns the following:
 | user_name | hobby_name |
 |-----------|------------|
 | Alice     | Reading    |
+```
+
+### Extracting values from JSON arrays
+
+`json_extract_path_text` can also be used to extract values from `JSON` arrays. 
+
+For instance, to extract the first and second hobbies for everyone, we can run the following query:
+
+```sql
+SELECT
+    json_extract_path_text(profile, 'name') as name,
+    json_extract_path_text(profile, 'hobbies', '0') as first_hobby,
+    json_extract_path_text(profile, 'hobbies', '1') as second_hobby
+FROM users;
+```
+
+This query returns the following:
+
+```text
+| name  | first_hobby | second_hobby |
+|-------|-------------|--------------|
+| Alice | reading     | cycling      |
+| Bob   | gaming      | cooking      |
 ```
 
 ## Additional Considerations
