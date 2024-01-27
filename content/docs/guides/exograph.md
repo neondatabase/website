@@ -3,7 +3,7 @@ title: Use Exograph with Neon
 subtitle: Build GraphQL backends in minutes with Exograph and Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-11-30T17:39:12.801Z'
+updatedOn: '2024-01-27T09:01:18.978Z'
 ---
 
 _This guide was contributed by the Exograph team_
@@ -91,5 +91,5 @@ In this guide, we have created a basic todo backend using Exograph and Neon. You
 
 To deploy Exograph in the cloud and connect it to Neon, follow the guide below (select the "External Database" tab for Neon-specific instructions in each case):
 
-1. Deploying on [Fly.io](https://exograph.dev/docs/deployment/cloud-deployment) (these instructions can be adapted to other cloud providers)
-2. Deploying on [AWS Lambda](https://exograph.dev/docs/deployment/aws-lambda-deployment)
+1. Deploying on [Fly.io](https://exograph.dev/docs/deployment/flyio) (these instructions can be adapted to other cloud providers)
+2. Deploying on [AWS Lambda](https://exograph.dev/docs/deployment/aws-lambda)
