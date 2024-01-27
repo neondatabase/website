@@ -330,6 +330,8 @@
           slug: functions/jsonb_array_elements
         - title: json_build_object
           slug: functions/json_build_object
+        - title: json_each
+          slug: functions/json_each
         - title: json_extract_path
           slug: functions/json_extract_path
         - title: json_populate_record
