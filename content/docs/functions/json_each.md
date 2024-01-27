@@ -69,11 +69,11 @@ This query returns the following results:
 | email     | "johndoe@example.com" |
 ```
 
-### Usage as a table/row source
+### Usage as a table or row source
 
 Since `json_each` returns a set of rows, you can use it as a table source in a `FROM` clause. This lets us join the expanded `JSON` data in the output with other tables.
 
-Here, we're joining each row in the `user_data` table with the output of `json_each` for it:
+Here, we're joining each row in the `user_data` table with the output of `json_each`:
 
 ```sql
 CREATE TABLE user_data (
@@ -110,9 +110,9 @@ When working with large `JSON` objects, `json_each` may lead to performance over
 
 ### Alternative functions
 
-- [json_each_text](./json_each_text) - Similar functionality to `json_each` but returns the value as a text type instead of `JSON`. 
-- [json_object_keys](./json_object_keys) - It returns only the set of keys in the `JSON` object, without the values.
-- [jsonb_each](./jsonb_each) - It provides the same functionality as `json_each`, but accepts `JSONB` input instead of `JSON`. 
+- `json_each_text` - Similar functionality to `json_each` but returns the value as a text type instead of `JSON`. 
+- `json_object_keys` - It returns only the set of keys in the `JSON` object, without the values.
+- `jsonb_each` - It provides the same functionality as `json_each`, but accepts `JSONB` input instead of `JSON`. 
 
 ## Resources
 
