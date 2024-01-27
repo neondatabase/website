@@ -1,6 +1,6 @@
 ---
 title: Postgres dense_rank() function
-subtitle: 'Returns the rank of the current row, without gaps'
+subtitle: Returns the rank of the current row without gaps
 enableTableOfContents: true
 updatedOn: '2024-01-23T19:40:04.087Z'
 ---
