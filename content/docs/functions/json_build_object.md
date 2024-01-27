@@ -2,7 +2,7 @@
 title: Postgres json_build_object() function
 subtitle: Builds a JSON object out of a variadic argument list
 enableTableOfContents: true
-updatedOn: '2024-01-27T10:06:56.790Z'
+updatedOn: '2024-01-27T12:02:35.338Z'
 ---
 
 
@@ -212,7 +212,7 @@ Depending on your requirements, you might want to consider similar functions:
 
 ### Performance
 
-The performance of the `json_build_object` depends on various factors including number of key-value pairs, nested levels (deeply nested objects can be more expensive to build). Consider using `JSONB` data type with `jsonb_build_object` for better performance.
+The performance of the `json_build_object` depends on various factors including the number of key-value pairs, nested levels (deeply nested objects can be more expensive to build). Consider using `JSONB` data type with `jsonb_build_object` for better performance.
 
 If your `JSON` objects have nested structures, indexing on specific paths within the nested data can be beneficial for targeted queries.
 
