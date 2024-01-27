@@ -95,10 +95,10 @@ This query returns the following result:
 
 ### Alternative options
 
-- [jsonb_object](/docs/functions/jsonb_object) - Same functionality as `json_object`, but returns a `JSONB` object instead of `JSON`. 
-- [row_to_json](/docs/functions/row_to_json) - It can be used to create a `JSON` object from a table row (or a row of a  composite type) without needing to specify keys and values explicitly. Although, it is less flexible than `json_object` since all fields in the row are included in the `JSON` object. 
+- [jsonb_object](https://www.postgresql.org/docs/current/functions-json.html) - Same functionality as `json_object`, but returns a `JSONB` object instead of `JSON`. 
+- [row_to_json](https://www.postgresql.org/docs/current/functions-json.html) - It can be used to create a `JSON` object from a table row (or a row of a  composite type) without needing to specify keys and values explicitly. Although, it is less flexible than `json_object` since all fields in the row are included in the `JSON` object. 
 - [json_build_object](/docs/functions/json_build_object) - Similar to `json_object`, but allows for more flexibility in constructing the `JSON` object, as it can take a variable number of arguments in the form of key-value pairs. 
-- [json_object_agg](/docs/functions/json_object_agg) - It is used to aggregate the key-value pairs from multiple rows into a single `JSON` object. In contrast, `json_object` outputs a `JSON` object for each row. 
+- [json_object_agg](https://www.postgresql.org/docs/current/functions-json.html) - It is used to aggregate the key-value pairs from multiple rows into a single `JSON` object. In contrast, `json_object` outputs a `JSON` object for each row. 
 
 ## Resources
 

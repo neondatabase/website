@@ -212,7 +212,7 @@ Depending on your requirements, you might want to consider similar functions:
 
 ### Performance
 
-The performance of the `json_build_object` depends on various factors including number of key-value pairs, nested levels (deeply nested objects can be more expensive to build). Consider using `JSONB` data type with `jsonb_build_object` for better performance.
+The performance of the `json_build_object` depends on various factors including the number of key-value pairs, nested levels (deeply nested objects can be more expensive to build). Consider using `JSONB` data type with `jsonb_build_object` for better performance.
 
 If your `JSON` objects have nested structures, indexing on specific paths within the nested data can be beneficial for targeted queries.
 
