@@ -21,7 +21,6 @@ json_build_object ( VARIADIC "any" ) → json
 
 Let's consider a scenario where we have a table storing information about users:
 
-
 **users**
 
 ```text
@@ -41,14 +40,12 @@ CREATE TABLE users (
  city TEXT
 );
 
-
 INSERT INTO users (name, age, city)
 VALUES ('John Doe', 30, 'New York'),
       ('Jane Doe', 25, 'London');
 ```
 
 Use `json_build_object` to create a JSON structure with user information:
-
 
 ```sql
 SELECT id,
@@ -60,8 +57,7 @@ SELECT id,
 FROM users;
 ```
 
-
-Returns:
+This query returns the following results:
 
 ```text
 | id |                       user_data                       
@@ -70,14 +66,11 @@ Returns:
 | 2  | {"name" : "Jane Doe", "age" : 25, "city" : "London"}
 ```
 
-
 ## Advanced examples
-
 
 ### Building nested JSON objects
 
 Let’s say we have a table of products with an `attributes` column containing JSON data:
-
 
 **products**
 
@@ -120,9 +113,7 @@ VALUES
    ));
 ```
 
-
 Use `json_build_object` to build a nested JSON object that represents the details of individual products:
-
 
 ```sql
 SELECT
@@ -140,8 +131,7 @@ SELECT
 FROM products;
 ```
 
-
-Returns:
+This query returns the following results:
 
 ```text
 | id |    name     | price |                                                               details                                                              
@@ -152,11 +142,9 @@ Returns:
 
 ### Use with `ORDER BY`
 
-
 Combine `json_build_object` with `ORDER BY` to sort the results based on a specific attribute within the JSON structure.
 
-
-For example, you can build a JSON structure with `json_build_object` from the contents of the above `products` table, and then order the results based on `rating`.
+For example, you can build a `JSON` structure with `json_build_object` from the contents of the above `products` table, and then order the results based on `rating`.
 
 ```sql
 SELECT
@@ -176,11 +164,9 @@ FROM products_with_rating
 ORDER BY (attributes->>'rating')::NUMERIC DESC;
 ```
 
-
 `ORDER BY` was to order the results based on the descending order of rating.
 
-
-Returns:
+This query returns the following results:
 
 ```text
 | id |    name    | price |                                                                        details                                                                       
@@ -192,9 +178,7 @@ Returns:
 
 ### Use with `GROUP BY`
 
-
-To create a JSON object that groups the total price for each category of products in the products table:
-
+To create a `JSON` object that groups the total price for each category of products in the products table:
 
 ```sql
 SELECT
@@ -206,8 +190,7 @@ FROM products
 GROUP BY category;
 ```
 
-
-Returns:
+This query returns the following results:
 
 ```text
 | category |  category_total_price  
@@ -216,30 +199,22 @@ Returns:
 | Clothing | {"total_price" : 25.99}
 ```
 
-
 ## Additional considerations
-
 
 ### Alternative functions
 
-
 Depending on your requirements, you might want to consider similar functions:
-
 
 - `json_object` - Builds a JSON object out of a text array.
 - `json_agg` - Aggregates values, as a JSON array.
 - `row_to_json` - Returns a row as a JSON object.
 - `json_object_agg` - Aggregates key-value pairs into a JSON object.
 
-
 ### Performance
-
 
 The performance of the `json_build_object` depends on various factors including number of key-value pairs, nested levels (deeply nested objects can be more expensive to build). Consider using `JSONB` data type with `jsonb_build_object` for better performance.
 
-
-If your JSON objects have nested structures, indexing on specific paths within the nested data can be beneficial for targeted queries.
-
+If your `JSON` objects have nested structures, indexing on specific paths within the nested data can be beneficial for targeted queries.
 
 ## Resources
 

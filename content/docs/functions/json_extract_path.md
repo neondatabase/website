@@ -135,7 +135,6 @@ This query returns the following values:
 
 ### Join data
 
-
 Let's say you have two tables, `employees` and `departments`, and the `employees` table has a `JSON` column named `details` that contains information about each employee's department. You want to join these tables based on the department information stored in the `JSON` column. The table schemas and data used in this example are shown below. 
 
 **departments**
