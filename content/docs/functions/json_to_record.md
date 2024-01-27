@@ -125,8 +125,8 @@ This query returns the following result:
 ### Alternative functions
 
 - [json_populate_record](/docs/functions/json_populate_record): This function can also be used to create records using values from a `JSON` object. The difference is that `json_populate_record` requires the record type to be defined beforehand, while `json_to_record` needs the type definition inline. 
-- [json_to_recordset](/docs/functions/json_to_recordset): This function can be used similarly to parse `JSON`, the difference being that it returns a set of records instead of a single record. For example, if you have an array of `JSON` objects, you can use `json_to_recordset` to convert each object into a new row. 
-- [jsonb_to_record](/docs/functions/jsonb_to_record): This function provides the same functionality as `json_to_record`, but accepts `JSONB` input instead of `JSON`. In cases where the input payload type isn't exactly specified, either of the two functions can be used. For example, take this `json_to_record` query: 
+- [json_to_recordset](https://www.postgresql.org/docs/current/functions-json.html): This function can be used similarly to parse `JSON`, the difference being that it returns a set of records instead of a single record. For example, if you have an array of `JSON` objects, you can use `json_to_recordset` to convert each object into a new row. 
+- [jsonb_to_record](https://www.postgresql.org/docs/current/functions-json.html): This function provides the same functionality as `json_to_record`, but accepts `JSONB` input instead of `JSON`. In cases where the input payload type isn't exactly specified, either of the two functions can be used. For example, take this `json_to_record` query: 
 
     ```sql
     SELECT *

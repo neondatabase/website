@@ -334,6 +334,8 @@
           slug: functions/json_each
         - title: json_extract_path
           slug: functions/json_extract_path
+        - title: json_object
+          slug: functions/json_object
         - title: json_populate_record
           slug: functions/json_populate_record
         - title: json_to_record
