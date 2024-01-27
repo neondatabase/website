@@ -322,6 +322,8 @@
       items:
         - title: array_to_json
           slug: functions/array_to_json
+        - title: dense_rank
+          slug: functions/dense_rank
         - title: json_array_elements
           slug: functions/json_array_elements
         - title: jsonb_array_elements
@@ -332,8 +334,8 @@
           slug: functions/json_extract_path
         - title: json_populate_record
           slug: functions/json_populate_record
-        - title: dense_rank
-          slug: functions/dense_rank
+        - title: json_to_record
+          slug: functions/json_to_record
     - title: Compatibility
       slug: reference/compatibility
 - title: Import data
