@@ -7,7 +7,9 @@ updatedOn: '2024-01-21T09:34:18.540Z'
 
 You can the `json_extract_path` function to extract the value of a specific key at a specified path within a `JSON` document. This approach is performant compared to querying the entire `JSON` payload and processing it on the application side. It is particularly useful when dealing with nested `JSON` structures.
 
-Function signature:
+<CTA />
+
+## Function signature:
 
 ```sql
 json_extract_path(from_json json, VARIADIC path_elems text[])
@@ -132,7 +134,6 @@ This query returns the following values:
 ```
 
 ### Join data
-
 
 Let's say you have two tables, `employees` and `departments`, and the `employees` table has a `JSON` column named `details` that contains information about each employee's department. You want to join these tables based on the department information stored in the `JSON` column. The table schemas and data used in this example are shown below. 
 
