@@ -18,7 +18,7 @@ This function takes two arguments: a base record of a row type (which can even b
 
 ## Example usage
 
-Consider having a database table that tracks employee information. When you receive employee information as `JSON` records, you can use `json_populate_record` to ingest the data into the table. 
+Consider a database table that tracks employee information. When you receive employee information as `JSON` records, you can use `json_populate_record` to ingest the data into the table. 
 
 Here we create the `employees` table with some sample data.
 
@@ -33,7 +33,6 @@ CREATE TABLE employees (
 
 To illustrate, we start with a `NULL` record and cast the input `JSON` payload to the `employees` record type.
 
-Query:
 ```sql
 INSERT INTO employees
 SELECT *
@@ -44,7 +43,7 @@ FROM json_populate_record(
 RETURNING *;
 ```
 
-This query returns the following:
+This query returns the following result:
 
 ```text
 | id | name     | department  | salary |
@@ -58,9 +57,7 @@ This query returns the following:
 
 For datapoints where the `JSON` objects have missing keys, `json_populate_record` can still cast them into legible records. 
 
-Say we receive records for a bunch of employees who are known to be in Sales, but the `department` field is missing from the `JSON` payload. We can use `json_populate_record` with the default value specified for a field while the other fields are populated from the `JSON` payload.
-
-Query:
+Say we receive records for a bunch of employees who are known to be in Sales, but the `department` field is missing from the `JSON` payload. We can use `json_populate_record` with the default value specified for a field while the other fields are populated from the `JSON` payload, as in this example:
 
 ```sql
 INSERT INTO employees
@@ -82,9 +79,7 @@ This query returns the following:
 
 ### Working with custom types
 
-The base record doesn't need to have the type of a table row and can be a [custom Postgres type](https://www.postgresql.org/docs/current/sql-createtype.html) too. For example, here we first define a custom type `address` and use `json_populate_record` to cast a `JSON` object to it.
-
-Query:
+The base record doesn't need to have the type of a table row and can be a [custom Postgres type](https://www.postgresql.org/docs/current/sql-createtype.html) too. For example, here we first define a custom type `address` and use `json_populate_record` to cast a `JSON` object to it:
 
 ```sql
 CREATE TYPE address AS (
@@ -100,7 +95,7 @@ FROM json_populate_record(
 );
 ```
 
-This query returns the following:
+This query returns the following result:
 
 ```text
 | street     | city          | zip   |
