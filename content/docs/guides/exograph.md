@@ -91,5 +91,5 @@ In this guide, we have created a basic todo backend using Exograph and Neon. You
 
 To deploy Exograph in the cloud and connect it to Neon, follow the guide below (select the "External Database" tab for Neon-specific instructions in each case):
 
-1. Deploying on [Fly.io](https://exograph.dev/docs/deployment/cloud-deployment) (these instructions can be adapted to other cloud providers)
-2. Deploying on [AWS Lambda](https://exograph.dev/docs/deployment/aws-lambda-deployment)
+1. Deploying on [Fly.io](https://exograph.dev/docs/deployment/flyio) (these instructions can be adapted to other cloud providers)
+2. Deploying on [AWS Lambda](https://exograph.dev/docs/deployment/aws-lambda)
