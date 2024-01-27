@@ -2,7 +2,7 @@
 title: Operations
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-01-08T20:02:33.927Z'
+updatedOn: '2024-01-23T23:09:11.247Z'
 ---
 
 An operation is an action performed by the Neon Control Plane on a Neon object or resource. Operations are typically initiated by user actions, such as creating a branch or deleting a database. Other operations may be initiated by the Neon Control Plane, such as suspending a [compute endpoint](/docs/reference/glossary#compute-endpoint) after a period of inactivity or checking its availability. You can monitor operations to keep an eye on the overall health of your Neon project or to check the status of specific operations. When working with the Neon API, you can poll the status of operations to ensure that an API request is completed before issuing the next API request. For more information, see [Poll operation status](#poll-operation-status).
@@ -20,7 +20,13 @@ An operation is an action performed by the Neon Control Plane on a Neon object o
 
 ## View operations
 
-You can view operations in the **Operations** widget on the Neon **Dashboard** or on the **Operations** page.
+You can view operations via the Neon Console, [Neon CLI](https://neon.tech/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+
+<Tabs labels={["Neon Console", "CLI", "API"]}>
+
+<TabItem>
+
+You can view operations in the **Operations** widget on the Neon **Dashboard** or by selecting the **Operations** page in the sidebar.
 
 ![Operations](/docs/manage/operations.png)
 
@@ -32,9 +38,39 @@ Operation details include:
 - **Duration**: The duration of the operation.
 - **Date**: The date and time the operation occurred.
 
-## View operations with the Neon API
+</TabItem>
 
-The following topics are covered in this section:
+<TabItem>
+
+To view operation using the Neon CLI:
+
+```bash
+neonctl operations list --project-id <project_id>
+```
+
+See [Neon CLI commands — operations](/docs/reference/cli-operations).
+
+</TabItem>
+
+<TabItem>
+
+To list operations with the Neon API:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+See [Get a list of operations](https://api-docs.neon.tech/reference/listprojectoperations).
+</TabItem>
+
+</Tabs>
+
+
+## Operations and the Neon API
+
+This section describes how to work with operations using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). The following topics are covered:
 
 - [List operations](#list-operations): Describes how to list all operations for a Neon project.
 - [List operations with pagination](#list-operations-with-pagination): Describes how to list all operations for a Neon project and paginate the response.

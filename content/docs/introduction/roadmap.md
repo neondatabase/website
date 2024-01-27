@@ -4,15 +4,15 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-01-22T20:46:12.203Z'
+updatedOn: '2024-01-26T20:06:32.169Z'
 ---
 Our developers are focused on making Neon the default choice for serverless PostgreSQL. This roadmap describes committed features that are coming soon. We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion.
 
 As always, we are listening. If you see something you like, something you disagree with, or something you'd love for us to add, let us know in our Discord feedback channel.
 
-<CommunityBanner buttonText="🙏 | feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Share your ideas</CommunityBanner>
+<CommunityBanner buttonText="Leave feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Share your ideas in&nbsp;Discord</CommunityBanner>
 
-For the latest features and fixes, check our [Changelog](docs/changelog), updated every Friday. You can subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
+For the latest features and fixes, check our [Changelog](/docs/changelog), updated every Friday. You can subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
 ## Coming soon
 
@@ -53,7 +53,7 @@ Here's a snapshot of what we're working on now:
 
 * **Australia**
 
-    Adding regional support for Australia.
+    Adding regional support for Australia — Asia Pacific (Sydney).
 
 ## A brief history of Neon
 
@@ -67,7 +67,7 @@ In the spring of 2023, Neon launched [paid plans](https://neon.tech/pricing) wit
 
 In the summer of 2023, we released the [Neon CLI](/docs/reference/neon-cli). New features included a configurable [history retention](/docs/introduction/point-in-time-restore) window as well as support for Postgres 16 and the Isreal (Tel Aviv) region. We also announced [SOC 2 Type 1](https://neon.tech/blog/soc2-type-1#our-journey-to-soc2) compliance.
 
-In the fall of 2023, we added [IP allowlisting](/docs/introduction/ip-allow), email signup, and [logical replication](docs/introduction/logical-replication). We also announced [SOC 2 Type 2](https://neon.tech/blog/soc2-type2) compliance.
+In the fall of 2023, we added [IP allowlisting](/docs/introduction/ip-allow), email signup, and [logical replication](/docs/introduction/logical-replication). We also announced [SOC 2 Type 2](https://neon.tech/blog/soc2-type2) compliance.
 
 ## Technical Preview
 
