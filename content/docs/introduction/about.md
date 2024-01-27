@@ -3,7 +3,7 @@ title: What is Neon?
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
-updatedOn: '2024-01-10T18:34:05.858Z'
+updatedOn: '2024-01-26T16:30:34.542Z'
 ---
 
 Neon is a fully managed serverless Postgres with a generous free tier.
@@ -39,4 +39,4 @@ You can find [neondatabase](https://github.com/neondatabase/neon) on GitHub. We 
 
 ## Compatibility
 
-Neon compute is the latest version of Postgres. It is 100% compatible with any application that uses the official release of Postgres. Currently, we support [Postgres 14](https://www.postgresql.org/docs/14/release-14.html), [Postgres 15](https://www.postgresql.org/docs/15/release-15.html) (the default), and [Postgres 16](https://www.postgresql.org/docs/16/release-16.html). For details refer to the [Postgres compatibility](/docs/reference/compatibility) page.
+Neon compute is the latest version of Postgres. It is 100% compatible with any application that uses the official release of Postgres. Currently, we support [Postgres 14](https://www.postgresql.org/docs/14/release-14.html), [Postgres 15](https://www.postgresql.org/docs/15/release-15.html), and [Postgres 16](https://www.postgresql.org/docs/16/release-16.html) (the default). For details refer to the [Postgres compatibility](/docs/reference/compatibility) page.

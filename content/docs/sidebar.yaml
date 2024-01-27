@@ -19,7 +19,7 @@
           slug: introduction/auto-suspend
         - title: Branching
           slug: introduction/branching
-        - title: Point-in-time restore
+        - title: Branch reset and restore
           slug: introduction/point-in-time-restore
         - title: Read replicas
           slug: introduction/read-replicas
@@ -133,6 +133,8 @@
         - title: Branching
           slug: guides/branching-intro
           items: 
+            - title: Branch Restore
+              slug: guides/branch-restore
             - title: Branching — Point-in-time restore
               slug: guides/branching-pitr
             - title: Branching — Testing queries
@@ -296,20 +298,32 @@
       items:
         - title: Supported extensions
           slug: extensions/pg-extensions
+        - title: citext
+          slug: extensions/citext          
+        - title: hstore
+          slug: extensions/hstore          
         - title: neon
           slug: extensions/neon
         - title: neon_utils
           slug: extensions/neon-utils       
         - title: pgvector
           slug: extensions/pgvector
+        - title: pg_stat_statements
+          slug: extensions/pg_stat_statements
         - title: pg_tiktoken
           slug: extensions/pg_tiktoken
+        - title: pg_trgm
+          slug: extensions/pg_trgm
+        - title: postgis
+          slug: extensions/postgis
         - title: timescaledb
           slug: extensions/timescaledb
     - title: Functions
       items:
         - title: array_to_json
           slug: functions/array_to_json
+        - title: dense_rank
+          slug: functions/dense_rank
         - title: json_array_elements
           slug: functions/json_array_elements
         - title: jsonb_array_elements
@@ -320,8 +334,8 @@
           slug: functions/json_extract_path
         - title: json_object
           slug: functions/json_object
-        - title: dense_rank
-          slug: functions/dense_rank
+        - title: json_to_record
+          slug: functions/json_to_record
     - title: Compatibility
       slug: reference/compatibility
 - title: Import data

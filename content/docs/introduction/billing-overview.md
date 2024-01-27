@@ -16,11 +16,11 @@ With key features like [autoscaling](/docs/guides/autoscaling-guide), [autosuspe
 
 You can see how the compute time that you get billed for scales between your minimum and maximum CPU settings: compute time never rises above your max level, and it never drops below your minimum setting. With autosuspend, you are not charged at all during inactive periods. For projects with inconsistent demand, this can save significant compute costs.
 
-For a more detailed breakdown of compute cost metrics, see [compute time](docs/introduction/billing#compute-time).
+For a more detailed breakdown of compute cost metrics, see [compute time](/docs/introduction/billing#compute-time).
 
 ## Storage costs
 
-Neon storage uses copy-on-write branching to keep storage size as small as possible. This can make it hard to visualize "how big is my database", since branches with a shared history don't immediately add to storage costs. Storage size is a combination of your total data plus the shared change history that is used to enable branching-related features like [point-in-time restore](/docs/introduction/point-in-time-restore), [query testing](/docs/guides/branching-test-queries), and [reset from parent](docs/manage/branches#reset-a-branch-from-parent).
+Neon storage uses copy-on-write branching to keep storage size as small as possible. This can make it hard to visualize "how big is my database", since branches with a shared history don't immediately add to storage costs. Storage size is a combination of your total data plus the shared change history that is used to enable branching-related features like [point-in-time restore](/docs/introduction/point-in-time-restore), [query testing](/docs/guides/branching-test-queries), and [reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
 
 Storage costs are based on the size of your project and how long it is stored.
 
@@ -34,4 +34,4 @@ The amount of data that you write to storage or transfer out of Neon (for exampl
 
 ![Data write and transfer](/docs/introduction/neon_boundary.jpg)
 
-For more detail on these metrics, see [Written data](docs/introduction/billing#written-data) and [Data transfer](/docs/introduction/billing#data-transfer).
+For more detail on these metrics, see [Written data](/docs/introduction/billing#written-data) and [Data transfer](/docs/introduction/billing#data-transfer).
