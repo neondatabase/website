@@ -71,7 +71,9 @@ This query returns the following results:
 
 ### Usage as a table/row source
 
-Since `json_each` returns a set of rows, you can use it as a table source in a `FROM` clause. This lets us join the expanded `JSON` data in the output with other tables, as shown here:
+Since `json_each` returns a set of rows, you can use it as a table source in a `FROM` clause. This lets us join the expanded `JSON` data in the output with other tables.
+
+Here, we're joining each row in the `user_data` table with the output of `json_each` for it:
 
 ```sql
 CREATE TABLE user_data (
@@ -87,9 +89,7 @@ SELECT id, key, value
 FROM user_data, json_each(user_data.profile);
 ```
 
-Here, we're joining each row in the `user_data` table with the output of `json_each` for it. 
-
-The query returns the following results:
+This query returns the following results:
 
 ```text
 | id  | key      | value                   |
