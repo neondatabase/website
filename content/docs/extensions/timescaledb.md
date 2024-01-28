@@ -37,7 +37,7 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 ## Create a hypertable
 
-`timescaledb` hypertables are a high-level abstraction, extending traditional PostgreSQL tables to manage temporal data more effectively. A hypertable simplifies the organization and retrieval of time-series information by providing built-in partitioning based on time intervals.
+`timescaledb` hypertables are a high-level abstraction, extending traditional Postgres tables to manage temporal data more effectively. A hypertable simplifies the organization and retrieval of time-series information by providing built-in partitioning based on time intervals.
 
 To begin with, create a SQL table for temperature data:
 

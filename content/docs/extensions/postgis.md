@@ -19,9 +19,9 @@ This guide introduces you to the `postgis` extension - how to enable it, store a
 
 Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date information. 
 
-Currently, Neon uses version `3.3.3` of the `postgis` extension for all PostgreSQL versions.
+Currently, Neon uses version `3.3.3` of the `postgis` extension for all Postgres versions.
 
-## Enable the `postgis` Extension
+## Enable the `postgis` extension
 
 You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
 
@@ -81,7 +81,7 @@ The `ST_DWithin` function returns true if the distance between two points is les
 
 ## Spatial data types
 
-PostGIS extends PostgreSQL's data types to handle spatial data. The primary spatial types are:
+PostGIS extends Postgres data types to handle spatial data. The primary spatial types are:
 
 - **GEOMETRY**: A flexible type for spatial data, supporting various shapes. It models shapes in the cartesian coordinate plane. Each `GEOMETRY` value is also associated with a spatial reference system (SRS), which defines the coordinate system and units of measurement. 
 - **GEOGRAPHY**: Specifically designed for large-scale spatial operations on the Earth's surface, factoring in the Earth's curvature. The coordinates for a `GEOGRAPHY` shape are specified in degrees of latitude and longitude. 
@@ -121,7 +121,7 @@ VALUES
 
 **Nearest landmark to a given point**
 
-Finding nearest places to a given point is a common spatial query. We can use the `ST_Distance` function to find the distance between two points and order the results by distance. 
+Finding the nearest places to a given point is a common spatial query. We can use the `ST_Distance` function to find the distance between two points and order the results by distance. 
 
 ```sql
 SELECT name, ST_Distance(location, ST_GeomFromText('POINT(150 250)')) AS distance

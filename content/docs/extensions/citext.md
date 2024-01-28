@@ -25,7 +25,7 @@ CREATE EXTENSION IF NOT EXISTS citext;
 
 For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
-## Example Usage
+## Example usage
 
 **Creating a table with citext**
 
@@ -54,7 +54,7 @@ VALUES
   ('EveAnderson', 'eve@example.com');
 ```
 
-**Case-Insensitive querying**
+**Case-insensitive querying**
 
 Queries against `citext` columns are inherently case-insensitive. Effectively, it calls the `lower()` function on both strings when comparing two values. 
 

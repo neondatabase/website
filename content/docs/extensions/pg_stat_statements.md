@@ -1,12 +1,11 @@
 ---
 title: The pg_stat_statements extension
-subtitle: Track planning and execution statistics for all SQL statements with the
-  pg_stat_statements extension
+subtitle: Track planning and execution statistics for all SQL statements
 enableTableOfContents: true
 updatedOn: '2024-01-27T09:01:18.978Z'
 ---
 
-The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a PostgreSQL database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance.
+The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a Postgres database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance.
 
 <CTA />
 

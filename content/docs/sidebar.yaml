@@ -296,6 +296,8 @@
   items:
     - title: Data types
       items:
+        - title: Boolean
+          slug: data-types/boolean
         - title: UUID
           slug: data-types/uuid
     - title: Extensions

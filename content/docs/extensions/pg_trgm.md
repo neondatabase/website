@@ -1,11 +1,11 @@
 ---
 title: The pg_trgm extension
-subtitle: Improve PostgreSQL text searches with the pg_trgm extension
+subtitle: Improve Postgres text searches with the pg_trgm extension
 enableTableOfContents: true
 updatedOn: '2024-01-26T11:54:22.917Z'
 ---
 
-The `pg_trgm` extension enhances PostgreSQL's ability to perform text searches by using trigram matching. Trigrams are groups of three consecutive characters taken from a string. By breaking down text into trigrams, PostgreSQL can perform more efficient and flexible searches, such as similarity and proximity searches. 
+The `pg_trgm` extension enhances Postgres' ability to perform text searches by using trigram matching. Trigrams are groups of three consecutive characters taken from a string. By breaking down text into trigrams, Postgres can perform more efficient and flexible searches, such as similarity and proximity searches. 
 
 This extension is particularly useful for applications requiring fuzzy string matching or searching within large bodies of text.
 
@@ -14,18 +14,18 @@ This extension is particularly useful for applications requiring fuzzy string ma
 In this guide, we'll explore the `pg_trgm` extension, covering how to enable it, use it for text searches, and optimize queries. This extension has applications in data retrieval, text analysis, and anywhere robust text search capabilities are needed.
 
 <Admonition type="note">
-    The `pg_trgm` extension is open-source and can be installed on any PostgreSQL setup. Detailed information about the extension is available in the [PostgreSQL Documentation](https://www.postgresql.org/docs/current/pgtrgm.html).
+    The `pg_trgm` extension is open-source and can be installed on any Postgres setup. Detailed information about the extension is available in the [PostgreSQL Documentation](https://www.postgresql.org/docs/current/pgtrgm.html).
 </Admonition>
 
 **Version availability**
 
 Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date information. 
 
-Currently, Neon uses version `1.6` of the `pg_trgm` extension for all PostgreSQL versions.
+Currently, Neon uses version `1.6` of the `pg_trgm` extension for all Postgres versions.
 
-## Enable the `pg_trgm` Extension
+## Enable the `pg_trgm` extension
 
-Activate `pg_trgm` by running the `CREATE EXTENSION` statement in your PostgreSQL client:
+Activate `pg_trgm` by running the `CREATE EXTENSION` statement in your Postgres client:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
@@ -184,11 +184,11 @@ While `pg_trgm` enhances text search capabilities, computing similarity can get 
 
 ## Conclusion
 
-`pg_trgm` offers a versatile set of tools for text processing and searching in PostgreSQL. We went over the basics of the extension, including how to enable it and how to use it for fuzzy string matching and proximity searches. 
+`pg_trgm` offers a versatile set of tools for text processing and searching in Postgres. We went over the basics of the extension, including how to enable it and how to use it for fuzzy string matching and proximity searches. 
 
 ## Resources
 
-- [PostgreSQL pg_trgm Documentation](https://www.postgresql.org/docs/current/pgtrgm.html)
+- [PostgreSQL pg_trgm documentation](https://www.postgresql.org/docs/current/pgtrgm.html)
 - [PostgreSQL Text Search](https://www.postgresql.org/docs/current/textsearch.html)
 
 <NeedHelp/>

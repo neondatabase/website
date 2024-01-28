@@ -1,6 +1,6 @@
 ---
 title: Postgres UUID data type
-subtitle: Working with UUIDs in PostgreSQL
+subtitle: Working with UUIDs in Postgres
 enableTableOfContents: true
 updatedOn: '2024-01-28T12:33:12.245Z'
 ---
@@ -11,7 +11,7 @@ In Postgres, the UUID data type is ideal for assigning unique identifiers to ent
 
 <CTA />
 
-## Storage and Syntax
+## Storage and syntax
 
 UUIDs are stored as 128-bit values, represented as a sequence of hexadecimal digits. They are typically formatted in five groups, of sizes 8, 4, 4, 4 and 12, separated by hyphens. For example:
 
