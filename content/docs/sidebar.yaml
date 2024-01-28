@@ -294,6 +294,10 @@
           slug: ai/ai-google-colab
 - title: Postgres
   items:
+    - title: Data types
+      items:
+        - title: UUID
+          slug: data-types/uuid
     - title: Extensions
       items:
         - title: Supported extensions
