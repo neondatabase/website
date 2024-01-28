@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 `UUID` stands for `Universally Unique Identifier`. A `UUID` is a 128-bit value used to ensure global uniqueness across tables and databases. 
 
-In PostgreSQL, the UUID datatype is ideal for assigning unique identifiers to entities such as users, orders, or products. They are particularly useful in distributed scenarios, where the system is spread across different databases or services, and unique keys need to be generated independently.
+In Postgres, the UUID datatype is ideal for assigning unique identifiers to entities such as users, orders, or products. They are particularly useful in distributed scenarios, where the system is spread across different databases or services, and unique keys need to be generated independently.
 
 <CTA />
 
@@ -17,7 +17,7 @@ UUIDs are stored as 128-bit values, represented as a sequence of hexadecimal dig
 - `123e4567-e89b-12d3-a456-426655440000`, or
 - `a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11`
 
-Postgres accepts UUID values in the above format, while also allowing uppercase letters and missing hyphen separators. You can also generate them using functions like `gen_random_uuid()` which is avalable natively in Postgres, or the `uuid_generate_v4()` function which requires the `uuid-ossp` extension. 
+Postgres accepts UUID values in the above format, while also allowing uppercase letters and missing hyphen separators. You can also generate them using functions like `gen_random_uuid()` which is available natively in Postgres, or the `uuid_generate_v4()` function which requires the `uuid-ossp` extension. 
 
 ## Example usage
 
@@ -43,6 +43,7 @@ RETURNING *;
 ```
 
 This query returns the following:
+
 ```text
 | session_id                             | user_id | activity |
 |----------------------------------------|---------|----------|
@@ -122,6 +123,7 @@ RETURNING *;
 ```
 
 This query returns the following:
+
 ```text
 | serial_id | uuid_id                              | username |
 |-----------|--------------------------------------|----------|
@@ -130,12 +132,12 @@ This query returns the following:
 | 3         | 108eb93a-071e-4407-8b78-a73aabd9e803 | user3    |
 ```
 
-Notice that the `serial_id` column hints at the num of rows already present in the table. 
+Notice that the `serial_id` column hints at the number of rows already present in the table. 
 
 ## Additional considerations
 
-- **Randomness and Uniqueness**: UUIDs are designed to be globally unique, but there's a very small probability of generating duplicate UUIDs. If you're using the postgres function to automatically generate UUIDs at insertion, and a duplicate UUID is generated, the insertion fails and you'll need to retry. 
-- **Performance and Indexing**: UUIDs are significantly larger than traditional integer IDs and can lead to performance overhead in terms of storage and indexing. Especially in large databases, creating an index on a UUID column can significantly improve query performance.
+- **Randomness and uniqueness**: UUIDs are designed to be globally unique, but there's an extremely small probability of generating a duplicate UUID. If you're automatically generating UUIDs at insertion, and a duplicate UUID is generated, the insertion will fail. In the rare event that a collision occurs, applications that generate UUIDs should implement a retry mechanism.
+- **Performance and indexing**: UUIDs are larger than traditional integer IDs, requiring more storage space. Index structures on UUID columns therefore consume more storage as well. However, in terms of performance for read-heavy workloads, leveraging indexed UUID columns for filtering or sorting can significantly improve query performance. In this context, you have to evaluate the tradeoff between storage efficiency and query performance.
 - **Readability**: UUIDs are not human-readable, which can make debugging or manual inspection of data more challenging. 
 
 ## Resources
