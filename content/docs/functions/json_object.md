@@ -103,4 +103,4 @@ This query returns the following result:
 
 ## Resources
 
-- [Postgres documentation: JSON functions](https://www.postgresql.org/docs/current/functions-json.html)
+- [PostgreSQL documentation: JSON functions](https://www.postgresql.org/docs/current/functions-json.html)

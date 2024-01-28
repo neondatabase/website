@@ -117,4 +117,4 @@ When working with large `JSON` objects, `json_each` may lead to performance over
 
 ## Resources
 
-- [Postgres documentation: JSON functions](https://www.postgresql.org/docs/current/functions-json.html)
+- [PostgreSQL documentation: JSON functions](https://www.postgresql.org/docs/current/functions-json.html)
