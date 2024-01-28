@@ -2,7 +2,7 @@
 title: Postgres json_object() function
 subtitle: Creates a JSON object from key-value pairs
 enableTableOfContents: true
-updatedOn: '2024-01-27T12:02:35.341Z'
+updatedOn: '2024-01-28T13:46:59.391Z'
 ---
 
 The `json_object` function in Postgres is used to create a `JSON` object from a set of key-value pairs. It is particularly useful when you need to generate `JSON` data dynamically from existing table data or input parameters.

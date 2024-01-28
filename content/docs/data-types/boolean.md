@@ -2,6 +2,7 @@
 title: Postgres Boolean data type
 subtitle: Representing truth values in Postgres
 enableTableOfContents: true
+updatedOn: '2024-01-28T13:46:59.383Z'
 ---
 
 In Postgres, the Boolean datatype is designed to store truth values. A Boolean column can hold one of three states: `true`, `false`, or `NULL` representing unknown or missing values. 

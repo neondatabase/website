@@ -2,7 +2,7 @@
 title: Postgres json_to_record() function
 subtitle: Converts a JSON object to a record
 enableTableOfContents: true
-updatedOn: '2024-01-27T12:02:35.341Z'
+updatedOn: '2024-01-28T13:46:59.392Z'
 ---
 
 You can use the `json_to_record` function to convert a top-level `JSON` object into a row, with the type specified by the `AS` clause. 
