@@ -4,7 +4,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-01-25T16:36:19.859Z'
+updatedOn: '2024-01-26T20:06:32.169Z'
 ---
 Our developers are focused on making Neon the default choice for serverless PostgreSQL. This roadmap describes committed features that are coming soon. We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion.
 
@@ -53,7 +53,7 @@ Here's a snapshot of what we're working on now:
 
 * **Australia**
 
-    Adding regional support for Australia.
+    Adding regional support for Australia — Asia Pacific (Sydney).
 
 ## A brief history of Neon
 
