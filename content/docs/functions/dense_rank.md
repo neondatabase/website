@@ -282,5 +282,5 @@ Creating indexes on the columns specified in the `ORDER BY` (sorting) and `PARTI
 
 ## Resources
 
-- [PostgreSQL Documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
-- [PostgreSQL Documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
+- [PostgreSQL documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
+- [PostgreSQL documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)

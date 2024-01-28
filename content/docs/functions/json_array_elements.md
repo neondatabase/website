@@ -302,5 +302,5 @@ The `WITH ORDINALITY` option in the query adds an `ordinality` column representi
 
 ## Resources
 
-- [PostgreSQL Documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
-- [PostgreSQL Documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
+- [PostgreSQL documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
+- [PostgreSQL documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)

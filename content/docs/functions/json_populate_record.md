@@ -56,7 +56,7 @@ This query returns the following result:
 
 ### Handling partial data
 
-For datapoints where the `JSON` objects have missing keys, `json_populate_record` can still cast them into legible records. 
+For data points where the `JSON` objects have missing keys, `json_populate_record` can still cast them into legible records. 
 
 Say we receive records for a bunch of employees who are known to be in Sales, but the `department` field is missing from the `JSON` payload. We can use `json_populate_record` with the default value specified for a field while the other fields are populated from the `JSON` payload, as in this example:
 

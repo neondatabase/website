@@ -218,5 +218,5 @@ If your `JSON` objects have nested structures, indexing on specific paths within
 
 ## Resources
 
-- [PostgreSQL Documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
-- [PostgreSQL Documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
+- [PostgreSQL documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
+- [PostgreSQL documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)

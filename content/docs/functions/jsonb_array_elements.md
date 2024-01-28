@@ -129,7 +129,7 @@ This query returns the following values:
 |  6 | Socks | "XL" |
 ```
 
-## ORDINALITY
+## Ordinality
 
 Let's consider a scenario where you have a table named `workflow` with a `JSONB` column `steps` representing sequential steps in a workflow:
 
@@ -338,7 +338,7 @@ This query returns the following values:
 
 This section outlines additional considerations including alternative functions.
 
-### Alternative option - jsonb_array_elements_text
+### Alternative option
 
 Use `jsonb_array_elements` when you need to maintain the `JSON` structure of the elements for further `JSON`-related operations or analysis and `jsonb_array_elements_text` if you need to work with the extracted elements as plain text for string operations, text analysis, or integration with text-based functions.
 
@@ -394,5 +394,5 @@ This query returns the following values:
 
 ## Resources
 
-- [PostgreSQL Documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
-- [PostgreSQL Documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
+- [PostgreSQL documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
+- [PostgreSQL documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)

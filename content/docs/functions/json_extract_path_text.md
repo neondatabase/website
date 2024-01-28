@@ -9,7 +9,7 @@ The `json_extract_path_text` function is designed to simplify extracting text fr
 
 <CTA />
 
-## Function Signature
+## Function signature
 
 ```sql
 json_extract_path_text(from_json json, VARIADIC path_elems text[]) -> TEXT
@@ -51,7 +51,7 @@ This query returns the following:
 | 2  | bob@example.com    |
 ```
 
-## Advanced Examples
+## Advanced examples
 
 ### Using extracted value to join tables
 
@@ -122,9 +122,9 @@ This query returns the following:
 | Bob   | gaming      | cooking      |
 ```
 
-## Additional Considerations
+## Additional considerations
 
-### Performance and Indexing
+### Performance and indexing
 
 Performance considerations for `json_extract_path_text` are similar to those for `json_extract_path`. It is efficient for extracting data but can be impacted by large `JSON` objects or complex queries. Indexing `JSON` fields can improve performance in some cases. 
 
