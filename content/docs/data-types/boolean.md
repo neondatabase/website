@@ -10,7 +10,7 @@ For instance, Boolean values can be used in a dataset to represent the status of
 
 <CTA />
 
-## Storage and Syntax
+## Storage and syntax
 
 In SQL statements, Boolean values are represented by the keywords `TRUE`, `FALSE`, and `NULL`. Postgres is flexible and allows for various textual representations of these values:
 
@@ -61,7 +61,7 @@ This query returns the following:
 
 ## Other examples
 
-### Conditional Logic
+### Conditional logic
 
 Boolean data types are commonly used in conditional statements like `WHERE`, `IF`, and `CASE`. For example, the `CASE` statement is a control flow structure that allows you to perform `IF-THEN-ELSE` logic in SQL. 
 
@@ -91,7 +91,7 @@ This query returns the following:
 | eve      | Inactive Free |
 ```
 
-### Boolean Expressions
+### Boolean expressions
 
 Boolean expressions combine multiple boolean values using operators like `AND`, `OR`, and `NOT`. These expressions return boolean values and are crucial in complex SQL queries. 
 
@@ -111,7 +111,7 @@ This query returns the following:
 | 2  | bob      |
 ```
 
-### Boolean Aggregations
+### Boolean aggregations
 
 Postgres also supports aggregating over a set of Boolean values, using functions like `bool_and()` and `bool_or()`. 
 
@@ -133,7 +133,7 @@ This query returns the following:
 
 This indicates there is at least one inactive user with an ongoing subscription. We should probably email them a reminder to log in. 
 
-### Boolean in Join conditions
+### Boolean in join conditions
 
 Booleans can be effectively used in the `JOIN` clause to match rows across tables. 
 
