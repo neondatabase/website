@@ -294,7 +294,7 @@
   items:
     - title: Data types
       items:
-        - title: boolean
+        - title: Boolean
           slug: data-types/boolean
     - title: Extensions
       items:
