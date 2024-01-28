@@ -294,7 +294,7 @@
   items:
     - title: Data types
       items:
-        - title: uuid
+        - title: UUID
           slug: data-types/uuid
     - title: Extensions
       items:

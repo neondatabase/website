@@ -1,12 +1,12 @@
 ---
-title: Postgres UUID Data Type
+title: Postgres UUID data type
 subtitle: Working with UUIDs in PostgreSQL
 enableTableOfContents: true
 ---
 
 `UUID` stands for `Universally Unique Identifier`. A `UUID` is a 128-bit value used to ensure global uniqueness across tables and databases. 
 
-In Postgres, the UUID datatype is ideal for assigning unique identifiers to entities such as users, orders, or products. They are particularly useful in distributed scenarios, where the system is spread across different databases or services, and unique keys need to be generated independently.
+In Postgres, the UUID data type is ideal for assigning unique identifiers to entities such as users, orders, or products. They are particularly useful in distributed scenarios, where the system is spread across different databases or services, and unique keys need to be generated independently.
 
 <CTA />
 
@@ -142,6 +142,6 @@ Notice that the `serial_id` column hints at the number of rows already present i
 
 ## Resources
 
-- [PostgreSQL Official Documentation - UUID Type](https://www.postgresql.org/docs/current/datatype-uuid.html)
+- [PostgreSQL UUID Type documentation](https://www.postgresql.org/docs/current/datatype-uuid.html)
 
 <NeedHelp />
