@@ -1,6 +1,6 @@
 ---
 title: Postgres jsonb_to_record() function
-subtitle: Convert a JSON object to a record
+subtitle: Convert a JSONB object to a record
 enableTableOfContents: true
 updatedOn: '2024-01-28T13:46:59.392Z'
 ---
