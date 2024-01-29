@@ -298,6 +298,8 @@
       items:
         - title: Boolean
           slug: data-types/boolean
+        - title: Date and time
+          slug: data-types/date-and-time
         - title: UUID
           slug: data-types/uuid
     - title: Extensions
