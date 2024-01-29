@@ -98,7 +98,7 @@ const Hero = () => (
       <p className="mt-[88px] text-center text-xl font-medium leading-snug text-gray-new-60 lg:mt-16 lg:text-lg md:mt-14 sm:mt-10">
         Powering 500,000+ databases for developers and partners
       </p>
-      <ul className="mx-auto mt-7 flex w-full max-w-[1472px] justify-between gap-x-16 xl:gap-x-14 lg:mt-6 lg:flex-wrap lg:justify-center lg:gap-y-10 md:mt-5 md:gap-y-8  xs:gap-y-6">
+      <ul className="mx-auto mt-7 flex w-full max-w-[1472px] justify-between gap-x-16 xl:gap-x-14 lg:flex-wrap lg:justify-center lg:gap-y-10 md:gap-y-8 xs:gap-y-6">
         {logos.map(({ logo, alt, width }) => (
           <li key={alt}>
             <Image
