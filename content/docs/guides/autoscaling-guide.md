@@ -6,7 +6,7 @@ enableTableOfContents: true
 updatedOn: '2024-01-10T18:34:05.855Z'
 ---
 
-Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current workload, eliminating the need for manual intervention. This guide demonstrates how to enable autoscaling in your Neon project.
+Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current workload, eliminating the need for manual intervention. This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
 
 _Autoscaling_ is a [Neon Pro Plan](/docs/introduction/pro-plan) feature. Neon Pro Plan users can enable autoscaling for a new project, for an existing project, or for an individual compute endpoint. Autoscaling is supported with both read-write and read-only compute endpoints. Read-only compute endpoints enable Neon's [Read replica](/docs/introduction/read-replicas) feature.
 
@@ -67,5 +67,36 @@ To edit a compute endpoint:
 1. Click **Save**.
 
 ## Monitor autoscaling
+
+From the Neon Console, you can view how your CPU and compute hour usage scales over time (last hour, day, and week). From the **Branches** page, open the branch you want to inspect, then open the **Edit** modal for its compute endpoint.
+
+![autoscaling graph example](/docs/guides/autoscaling_graph.png)
+
+### Rule of thumb: start with a good minimum
+
+In the ideal scenario, you want to size your minimum CPU setting large enough to keep your [working set](/link to glossary) off disk. If you set your minimum too low, it can lead to (what? throttling?).
+
+Your maximum size is more forgiving, in the sense that performance is not at issue.
+
+When it comes to choosing your autoscale size, 
+
+Autoscaling is really a product of memory usage and there's a lot to cover.
+Starting with a good base setting is important to keep your working set off disk.
+Start up and are immediately scaling? You likely have your base set to low.
+We want autoscaling to cover increased query pressure (more sessions/work_mem is required) and not cache pressure (low cache hit ratio / working set does not fit).
+Definitely a link to "Autoscaling best practices" :slightly_smiling_face:
+
+But I'm sure you guys can figure out some awesome wordsmithing :stuck_out_tongue:
+don't start too low
+increase max until you no longer hit it
+
+There's no problem with setting your max to 6 if you only ever hit 5.
+
+But if you hit 5 and your max is 5, it's harder to determine if you need more.
+
+For a detailed explanation on a query you can use to determine your ideal minimum, based on historical ussage, see [link to manage compute page]
+
+
+### The neon_utils extension
 
 The `neon_utils` extension provides a `num_cpus()` function for monitoring how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
