@@ -17,7 +17,7 @@ const DataBranching = () => {
 
   return (
     <section
-      className="safe-paddings mb-48 mt-[270px] 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20"
+      className="safe-paddings my-48 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20"
       ref={wrapperRef}
     >
       <Container className="z-10" size="md">
