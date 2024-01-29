@@ -144,10 +144,6 @@ Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to 
 
 ## Make the integration available to other Vercel projects
 
-<Admonition type="warning">
-The procedure described below is currently broken. At this time, it is not possible to use integration with more than one Vercel project under the same Vercel account. This issue is being investigated.
-</Admonition>
-
 If you added the Neon Vercel Integration to a single Vercel project but would like to make it available for use with your other Vercel projects, complete the steps outlined below.
 
 <Admonition type="important">
