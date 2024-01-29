@@ -2,10 +2,12 @@
 title: The timescaledb extension
 subtitle: Work with time-series data in Postgres with the timescaledb extension
 enableTableOfContents: true
-updatedOn: '2024-01-17T16:43:07.406Z'
+updatedOn: '2024-01-28T13:46:59.388Z'
 ---
 
 `timescaledb` enables the efficient storage and retrieval of time-series data. Time-series data is a sequential collection of observations or measurements recorded over time. For example, IoT devices continuously generate data points with timestamps, representing measurements or events. `timescaledb` is designed to handle large volumes of time-stamped data and provides SQL capabilities on top of a time-oriented data model such as IoT data, sensor readings, financial market data, and other time-series datasets.
+
+<CTA />
 
 This guide provides an introduction to the `timescaledb` extension. You’ll learn how to enable the extension in Neon, create hypertables, run simple queries, and analyze data using `timescaledb` functions. Finally, you’ll see how to delete data to free up space.
 
@@ -35,7 +37,7 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 ## Create a hypertable
 
-`timescaledb` hypertables are a high-level abstraction, extending traditional PostgreSQL tables to manage temporal data more effectively. A hypertable simplifies the organization and retrieval of time-series information by providing built-in partitioning based on time intervals.
+`timescaledb` hypertables are a high-level abstraction, extending traditional Postgres tables to manage temporal data more effectively. A hypertable simplifies the organization and retrieval of time-series information by providing built-in partitioning based on time intervals.
 
 To begin with, create a SQL table for temperature data:
 

@@ -1,12 +1,17 @@
 ---
 title: Branching — Point-in-time restore
-subtitle: Restore your data to previous state using Neon's branching feature
+subtitle: Create a new point-in-time branch or restore your data to a previous state
+  using Neon's branching feature
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2023-11-27T16:33:52.716Z'
+updatedOn: '2024-01-26T18:19:19.804Z'
 ---
+
+<Admonition type="comingSoon" title="New feature: Branch restore">
+A simpler one-click branch restore operation is available now for select users, coming soon to all users. Read more about it [here](/docs/guides/branch-restore). The restore procedure described on this page is still valid and might fit your specific use case.
+</Admonition>
 
 Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined history retention period. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
 
@@ -29,7 +34,7 @@ To create a point-in-time branch:
 6. Under **Include data up to**, select the **Specific date and time** option, which creates a branch with data up to the specified date and time. For example, if the data loss occurred on Nov 26, 2023 at 5:01pm, select Nov 11, 2023, at 5:00pm, just before the faulty query was run.
 
     <Admonition type="note">
-    The **Specific date and time** option does not include data changes that occured after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your history retention window, which is 7 days by default. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+    The **Specific date and time** option does not include data changes that occurred after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your history retention window, which is 7 days by default. See [Configure history retention](/docs/manage/projects#configure-history-retention).
     </Admonition>
 
 8. Click **Create new branch** to create your branch.
@@ -100,11 +105,11 @@ If your previous primary branch was your project's root branch (the initial bran
 
 To use your new primary branch with your applications, update your application connection details. To do so, replace your current connection details with the connection details for your new primary branch, which you retrieved earlier when connecting to your branch.
 
-Alternatively, if you do not want change connection details, you can move the compute endpoint from your old primary branch to the new  branch. See [Reassign the compute endpoint](#reassign-the-compute-endpoint) for instructions.
+Alternatively, if you do not want change connection details, you can move the compute endpoint from your old primary branch to the new branch. See [Reassign the compute endpoint](#reassign-the-compute-endpoint) for instructions.
 
 ## Reassign the compute endpoint
 
-To avoid changing connection details in your application, you can reassign the compute endpoint from your old primary branch to your new  branch. If you followed the steps above, you created a branch with a compute endpoint. In this case, you have to:
+To avoid changing connection details in your application, you can reassign the compute endpoint from your old primary branch to your new branch. If you followed the steps above, you created a branch with a compute endpoint. In this case, you have to:
 
 1. **Remove the compute endpoint from the new branch**
 

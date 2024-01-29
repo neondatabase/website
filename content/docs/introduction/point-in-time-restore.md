@@ -1,11 +1,11 @@
 ---
-title: Point-in-time restore
-subtitle: Restore your data to a previous state
+title: Branch reset and restore
+subtitle: Learn about the different branch reset and restore features in Neon
 enableTableOfContents: true
-updatedOn: '2023-10-24T18:56:54.989Z'
+updatedOn: '2024-01-26T18:19:19.806Z'
 ---
 
-Neon retains a history of changes for all branches, enabling point-in-time restore. This feature allows you to restore data to any point within the retention period. You can use the point-in-time restore feature as a database [backup](/docs/manage/backups) strategy, to view the past state of your database, or to recover lost data.
+Neon retains a history of changes for all branches. This shared history provides the basis for a variety of branch restore and reset operations: resetting a branch to its parent, restoring a branch to its history, creating a new branch from a selected point-in-time, and Time Travel queries against the shared history. You can use these features to reset a development branch to main, to recover lost data, as a database backup strategy, or to view the past state of your database.
 
 ## History retention
 
@@ -18,6 +18,16 @@ Increasing the history retention period affects all branches in your Neon projec
 
 History is retained in the form of Write-Ahead-Log (WAL) records. As WAL records age out of the retention period, they are evicted from storage and no longer count toward project storage.
 
-## Point-in-time restore
+## Branch reset and restore features
 
-A point-in-time restore operation is performed by creating a branch using the **Time** or **LSN** option. Your **History retention** period dictates how far back you can restore your data. To learn how to perform a point-in-time restore operation, refer to [Branching — Point-in-time restore](https://neon.tech/docs/guides/branching-pitr).
+Find out more about the different branch reset and restore features that Neon provides.
+
+<DetailIconCards>
+
+<a href="/docs/guides/branch-restore" description="Learn how to restore a branch to its history with Time Travel assist" icon="split-branch">Branch Restore with Time Travel</a>
+
+<a href="/docs/manage/branches#reset-a-branch-from-parent" description="Learn how to restore a branch to its history with Time Travel assist" icon="split-branch">Reset a branch from its parent</a>
+
+<a href="/docs/guides/branching-pitr" description="Create a new point-in-time branch from timestamp or LSN" icon="split-branch">Create a point-in-time branch</a>
+
+</DetailIconCards>

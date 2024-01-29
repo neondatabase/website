@@ -2,12 +2,14 @@
 title: Postgres jsonb_array_elements() function
 subtitle: Expands a JSONB array into a set of rows
 enableTableOfContents: true
-updatedOn: '2024-01-22T23:44:34.163Z'
+updatedOn: '2024-01-28T13:46:59.392Z'
 ---
 
 You can use the `jsonb_array_elements` function to expand a `JSONB` array into a set of rows, each containing one element of the array. It is a simpler option compared to complex looping logic. It is also more efficient than executing the same operation on the application side by reducing data transfer and processing overhead.
 
-Function signature:
+<CTA />
+
+## Function signature
 
 ```sql
 jsonb_array_elements(json)
@@ -127,7 +129,7 @@ This query returns the following values:
 |  6 | Socks | "XL" |
 ```
 
-## ORDINALITY
+## Ordinality
 
 Let's consider a scenario where you have a table named `workflow` with a `JSONB` column `steps` representing sequential steps in a workflow:
 
@@ -336,7 +338,7 @@ This query returns the following values:
 
 This section outlines additional considerations including alternative functions.
 
-### Alternative option - jsonb_array_elements_text
+### Alternative option
 
 Use `jsonb_array_elements` when you need to maintain the `JSON` structure of the elements for further `JSON`-related operations or analysis and `jsonb_array_elements_text` if you need to work with the extracted elements as plain text for string operations, text analysis, or integration with text-based functions.
 
@@ -392,5 +394,5 @@ This query returns the following values:
 
 ## Resources
 
-- [PostgreSQL Documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
-- [PostgreSQL Documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
+- [PostgreSQL documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
+- [PostgreSQL documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
