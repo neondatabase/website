@@ -298,6 +298,12 @@
       items:
         - title: Boolean
           slug: data-types/boolean
+        - title: Decimal
+          slug: data-types/decimal
+        - title: Floating point
+          slug: data-types/floating-point
+        - title: Integer
+          slug: data-types/integer
         - title: UUID
           slug: data-types/uuid
     - title: Extensions
