@@ -6,7 +6,7 @@ enableTableOfContents: true
 updatedOn: '2024-01-23T19:40:04.084Z'
 ---
 
-The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a PostgreSQL database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance.
+The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a Postgres database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance.
 
 <CTA />
 
@@ -40,7 +40,7 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 ## Usage examples
 
-This section provides `pg_stat_statements` usage exmaples.
+This section provides `pg_stat_statements` usage examples.
 
 ### Query the pg_stat_statements view
 
@@ -57,6 +57,8 @@ The view contains details like those shown below:
 |--------|-------|-----------------------|-----------------------|-------|
 | 16391  | 16384 | -9047282044438606287  | SELECT * FROM users;  | 10    |
 ```
+
+For a complete list of columns and descriptions for the `pg_stat_statements` view, see [The pg_stat_statements View](https://www.postgresql.org/docs/current/pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS).
 
 Let's explore some example usage patterns.
 
@@ -195,9 +197,9 @@ This query returns results similar to the following:
 | SELECT p.*, c.name AS category FROM products      | 23,984  |
 ```
 
-### Look up most recently executed queries
+### Look up the most time-consuming queries
 
-The following query returns details about queries executed in the last hour, in order of the most recently executed.
+The following query returns details about the most time-consuming queries, ordered by execution time.
 
 <Admonition type="note">
 In Neon, this query can help identify SQL queries that are waking up an idle compute endpoint.
@@ -208,20 +210,18 @@ SELECT
   userid,
   query,
   calls,
-  total_time,
-  rows,
-  now() - pg_stat_statements.last_exec_time AS interval
+  total_exec_time,
+  rows
 FROM
   pg_stat_statements
-WHERE
-  pg_stat_statements.last_exec_time >= now() - INTERVAL '1 hour'
 ORDER BY
-  interval DESC;
+  total_exec_time DESC
+LIMIT 10;
 ```
 
-### Look up most frequently executed queries
+### Look up the most frequently executed queries
 
-This query retrieves information about the top 10 SQL queries based on the number of times they have been executed, in order of the most frequently executed.
+This query retrieves details about the most frequently executed queries, ordered by the number of calls.
 
 ```sql
 SELECT
