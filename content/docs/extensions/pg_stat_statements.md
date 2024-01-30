@@ -39,7 +39,7 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 ## Usage examples
 
-This section provides `pg_stat_statements` usage exmaples.
+This section provides `pg_stat_statements` usage examples.
 
 ### Query the pg_stat_statements view
 
@@ -57,29 +57,26 @@ The view contains details like those shown below:
 | 16391  | 16384 | -9047282044438606287  | SELECT * FROM users;  | 10    |
 ```
 
+For a complete list of `pg_stat_statements` columns and descriptions, see [The pg_stat_statements View](https://www.postgresql.org/docs/current/pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS).
+
 Let's explore some example usage patterns.
 
 ### Find the most frequently executed queries
 
 The most frequently run queries are often critical paths and optimization candidates. 
 
-In the query below, you select the `query` and `calls` columns, representing the SQL statement and the number of times each statement has been executed, respectively. Only the top 10 rows are returned (`LIMIT 10`):
+This query retrieves details about the most frequently executed queries, ordered by the number of calls. Only the top 10 rows are returned (`LIMIT 10`):
 
 ```sql
-SELECT query, calls 
-FROM pg_stat_statements  
-ORDER BY calls DESC
+SELECT
+  userid,
+  query,
+  calls,
+  (total_exec_time / 1000 / 60) as total_min,
+  mean_exec_time as avg_ms
+FROM pg_stat_statements
+ORDER BY 3 DESC
 LIMIT 10;
-```
-
-```
-| Query                                                                                      | Calls |
-|--------------------------------------------------------------------------------------------|-------|
-| SELECT * FROM products WHERE inventory > 10;                                               |  8723 |
-| SELECT * FROM users WHERE last_login >= '2023-01-01';                                      |  5892 |
-| UPDATE products SET price = price * 1.10;                                                  |  4231 |
-| SELECT * FROM orders WHERE delivery_date BETWEEN '2023-01-01' AND '2023-01-31';            |  2938 |
-| INSERT INTO audit_log (user_id, action, changed_on) VALUES ($1, $2, CURRENT_TIMESTAMP);    |  1849 |
 ```
 
 ### Monitor slow queries
@@ -89,10 +86,16 @@ A high average runtime can indicate an inefficient query.
 The query below uses the `query`, `mean_exec_time` (average execution time per call), and `calls` columns. The condition `WHERE mean_exec_time > 1` filters out queries with an average execution time greater than 1 unit (you may adjust this threshold as needed).
 
 ```sql
-SELECT query, mean_exec_time, calls
-FROM pg_stat_statements
-WHERE mean_exec_time > 1
-ORDER BY mean_exec_time DESC;
+SELECT 
+    query, 
+    mean_exec_time, 
+    calls
+FROM 
+    pg_stat_statements
+WHERE 
+    mean_exec_time > 1
+ORDER BY 
+    mean_exec_time DESC;
 ```
 
 This query returns the following results:
@@ -173,15 +176,20 @@ AND shared_blks_hit > 0
 ORDER BY mean_exec_time DESC
 ```
 
-### Identify queries that return many rows
+### Find queries that return many rows
 
 To identify queries that return a lot of rows, you can select the `query` and `rows` columns, representing the SQL statement and the number of rows returned by each statement, respectively.
 
 ```sql
-SELECT query, rows
-FROM pg_stat_statements
-ORDER BY rows DESC
-LIMIT 10;
+SELECT 
+    query, 
+    rows
+FROM 
+    pg_stat_statements
+ORDER BY 
+    rows DESC
+LIMIT 
+    10;
 ```
 
 This query returns results similar to the following:
@@ -192,6 +200,25 @@ This query returns results similar to the following:
 | SELECT * FROM products;                           | 112,394 |
 | SELECT * FROM users;                              | 98,723  |
 | SELECT p.*, c.name AS category FROM products      | 23,984  |
+```
+
+### Find the most time-consuming queries
+
+The following query returns details about the most time-consuming queries, ordered by execution time.
+
+
+```sql
+SELECT
+  userid,
+  query,
+  calls,
+  total_exec_time,
+  rows
+FROM
+  pg_stat_statements
+ORDER BY
+  total_exec_time DESC
+LIMIT 10;
 ```
 
 ## Reset statistics
