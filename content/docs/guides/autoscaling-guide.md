@@ -72,31 +72,16 @@ From the Neon Console, you can view how your CPU and compute hour usage scales o
 
 ![autoscaling graph example](/docs/guides/autoscaling_graph.png)
 
-### Rule of thumb: start with a good minimum
+### Start with a good minimum
 
-In the ideal scenario, you want to size your minimum CPU setting large enough to keep your [working set](/link to glossary) off disk. If you set your minimum too low, it can lead to (what? throttling?).
+Ideally, you want to keep your entire [working set](/docs/reference/glossary#working-set) cached in memory (RAM) at all times. This means you do not want your compute endpoint to resize below the RAM needed to handle this working set: in other words, set your minimum compute endpoint large enough to accommodate your working set. For instructions on how to determine your working set, see [how to size your compute endpoint](/docs/manage/endpoints#how-to-size-your-compute-endpoint).
 
-Your maximum size is more forgiving, in the sense that performance is not at issue.
+### Setting your maximum
 
-When it comes to choosing your autoscale size, 
+If your autoscaling graphs show regular spikes that hit your maximum setting, consider increasing your maximum. However, because these spikes plateau at the maximum setting, it can be difficult to determine your actual demand.
 
-Autoscaling is really a product of memory usage and there's a lot to cover.
-Starting with a good base setting is important to keep your working set off disk.
-Start up and are immediately scaling? You likely have your base set to low.
-We want autoscaling to cover increased query pressure (more sessions/work_mem is required) and not cache pressure (low cache hit ratio / working set does not fit).
-Definitely a link to "Autoscaling best practices" :slightly_smiling_face:
-
-But I'm sure you guys can figure out some awesome wordsmithing :stuck_out_tongue:
-don't start too low
-increase max until you no longer hit it
-
-There's no problem with setting your max to 6 if you only ever hit 5.
-
-But if you hit 5 and your max is 5, it's harder to determine if you need more.
-
-For a detailed explanation on a query you can use to determine your ideal minimum, based on historical ussage, see [link to manage compute page]
-
+Another approach is to set a higher threshold than you need and monitor usage spikes to get a sense of where your typical maximum demand reaches; you can then throttle the maximum setting down closer to anticipated/historical demand. Either way, with autoscaling you only pay for what you use; a higher setting does not translate to higher costs unless the demand is there to increase usage.
 
 ### The neon_utils extension
 
-The `neon_utils` extension provides a `num_cpus()` function for monitoring how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
+Another tool for understanding usage, the `neon_utils` extension provides a `num_cpus()` function that helps you monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
