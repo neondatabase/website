@@ -3,7 +3,7 @@ import {
   codeToThemedTokens,
   createCssVariablesTheme,
   bundledLanguages,
-} from 'shikiji';
+} from 'shiki';
 
 const customTheme = createCssVariablesTheme({
   name: 'css-variables',

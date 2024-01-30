@@ -148,7 +148,7 @@ To add a single page <https://example.com/changelog> to the docs sidebar, add th
 
 ## Code blocks
 
-All available languages for code blocks can be found [here](https://shikiji.netlify.app/languages).
+All available languages for code blocks can be found [here](https://shiki.matsu.io/languages).
 
 You can use fenced code blocks with three backticks (```) on the lines before and after the code block. And display code with options
 
@@ -393,7 +393,6 @@ Check the example for default data of CTA block
 ![CTA example](cta-example.jpg)
 
 </details>
-
 
 To change text in CTA block, you can pass to the component props `title`, `description`, `buttonText`, `buttonUrl`:
 

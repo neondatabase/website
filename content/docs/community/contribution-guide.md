@@ -199,7 +199,7 @@ SELECT * FROM posts ORDER BY id;
 ```
 ````
 
-You can add language-specific highlighting to code blocks, as in the example above. See [Supported language highlighting for code blocks](https://shikiji.netlify.app/languages).
+You can add language-specific highlighting to code blocks, as in the example above. See [Supported language highlighting for code blocks](https://shiki.matsu.io/languages).
 
 Code block accepts the following options:
 
