@@ -1,3 +1,5 @@
+'use client';
+
 import { useInView } from 'react-intersection-observer';
 
 import BlinkingText from 'components/shared/blinking-text';
@@ -20,7 +22,7 @@ const SaaS = () => {
   return (
     <section
       id="saas"
-      className="safe-paddings bg-black py-[212px] 3xl:py-44 2xl:py-40 xl:py-32 lg:py-24 md:py-20"
+      className="safe-paddings bg-black py-48 3xl:py-44 2xl:py-40 xl:py-32 lg:py-24 md:py-20"
       ref={wrapperRef}
     >
       <Container className="z-20 flex items-center justify-between lg:block" size="md">
@@ -34,7 +36,7 @@ const SaaS = () => {
           </Heading>
           <p
             id="saas-description"
-            className="t-2xl mt-5 max-w-[600px] text-white 2xl:mt-4 2xl:max-w-[488px] xl:max-w-[400px] lg:max-w-none"
+            className="t-2xl mt-8 max-w-[600px] text-white 2xl:mt-6 2xl:max-w-[488px] xl:max-w-[400px] lg:max-w-none"
           >
             SaaS companies use Neon to maximize engineering velocity and minimize costs. Our
             serverless architecture reduces compute and storage expenses. Specifically, Neon's

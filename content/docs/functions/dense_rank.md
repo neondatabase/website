@@ -1,8 +1,8 @@
 ---
 title: Postgres dense_rank() function
-subtitle: 'Returns the rank of the current row, without gaps'
+subtitle: Returns the rank of the current row without gaps
 enableTableOfContents: true
-updatedOn: '2024-01-23T19:40:04.087Z'
+updatedOn: '2024-01-28T13:46:59.389Z'
 ---
 
 You can use the `dense_rank` function to assign a rank to each distinct row within a result set. It provides a non-gapped ranking of values which is particularly useful when dealing with datasets where ties need to be acknowledged without leaving gaps in the ranking sequence.
@@ -282,5 +282,5 @@ Creating indexes on the columns specified in the `ORDER BY` (sorting) and `PARTI
 
 ## Resources
 
-- [PostgreSQL Documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
-- [PostgreSQL Documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
+- [PostgreSQL documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
+- [PostgreSQL documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)

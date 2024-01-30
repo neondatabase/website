@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-01-08T20:02:33.926Z'
+updatedOn: '2024-01-26T18:19:19.807Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [primary branch](#primary-branch) called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -132,9 +132,10 @@ If you want to connect from an application, the **Connection Details** widget on
 When working with database branches, you might find yourself in a situation where you need to update your working branch to the latest data from your main branch. For example, let's say you have two child branches `staging` and `development` forked from your `main` branch. You have been working on the `development` branch and find it is now too far out of date with `main`. You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the **Reset from parent** feature, you can perform a clean reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
 
 <u>Key points</u>:
+
 - You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are not currently supported.
-- This reset is a complete override, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
-- Existing connections will be temporarily interupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
+- This reset is a complete overwrite, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
+- Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
