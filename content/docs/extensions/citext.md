@@ -2,7 +2,7 @@
 title: The citext Extension
 subtitle: Use the citext extension to handle case-insensitive data in PostgreSQL
 enableTableOfContents: true
-updatedOn: '2024-01-26T11:33:01.050Z'
+updatedOn: '2024-01-28T13:46:59.386Z'
 ---
 
 The `citext` extension in PostgreSQL provides a case-insensitive data type for text. This is particularly useful in scenarios where the case of text data should not affect queries, such as usernames or email addresses, or any form of textual data where case-insensitivity is desired. 
@@ -25,7 +25,7 @@ CREATE EXTENSION IF NOT EXISTS citext;
 
 For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
-## Example Usage
+## Example usage
 
 **Creating a table with citext**
 
@@ -54,7 +54,7 @@ VALUES
   ('EveAnderson', 'eve@example.com');
 ```
 
-**Case-Insensitive querying**
+**Case-insensitive querying**
 
 Queries against `citext` columns are inherently case-insensitive. Effectively, it calls the `lower()` function on both strings when comparing two values. 
 

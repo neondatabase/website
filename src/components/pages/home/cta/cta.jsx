@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import copyToClipboard from 'copy-to-clipboard';
 import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
@@ -81,7 +83,7 @@ const CTA = () => {
   return (
     <LazyMotion features={domAnimation}>
       <m.section
-        className="safe-paddings bg-black pt-[504px] text-center 3xl:pt-[397px] 2xl:pt-[344px] xl:pt-[310px] lg:pt-[238px] md:pt-[160px]"
+        className="safe-paddings bg-black pt-48 text-center md:pt-40 sm:pt-32"
         initial="from"
         animate={controls}
       >
@@ -132,7 +134,7 @@ const CTA = () => {
           {/* remove the invisible and opacity-0 classes to display this block again when it comes in handy */}
           <p
             id="cta-bottom-text"
-            className="t-xl invisible mx-auto mt-[56px] max-w-[500px] text-white opacity-0 2xl:mt-[46px] 2xl:max-w-[450px] xl:mt-10 xl:max-w-[400px]"
+            className="t-xl invisible mx-auto mt-[56px] hidden max-w-[500px] text-white opacity-0 2xl:mt-[46px] 2xl:max-w-[450px] xl:mt-10 xl:max-w-[400px]"
           >
             Same Postgres command as you used to will get you{' '}
             <Link to="/" theme="underline-primary-1">
