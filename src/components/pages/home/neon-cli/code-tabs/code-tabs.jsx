@@ -29,7 +29,7 @@ const CodeTabs = ({ items, highlightedCodeSnippets }) => {
           </button>
         ))}
       </div>
-      <CodeBlockWrapper className="dark prose max-w-none rounded-b-md rounded-tr-md border-[5px] border-[#333] 2xl:rounded-tr-none sm:border-[3px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:px-0 [&_pre]:pb-5 [&_pre]:pt-7">
+      <CodeBlockWrapper className="dark prose max-w-none rounded-b-md rounded-tr-md border-[5px] border-[#333] 2xl:rounded-tr-none sm:border-[3px] [&_code]:!text-[15px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:px-0 [&_pre]:pb-5 [&_pre]:pt-7">
         {parse(highlightedCodeSnippets[activeItem])}
       </CodeBlockWrapper>
     </div>

@@ -66,7 +66,7 @@ const NeonCli = async () => {
               <div className="relative rounded-t-md border-[5px] border-b-0 border-[#333] px-4 py-3 font-mono text-sm font-bold uppercase leading-none md:text-xs sm:border-[3px] sm:border-b-0">
                 {name}
               </div>
-              <CodeBlockWrapper className="dark prose max-w-none rounded-b-md rounded-tr-md border-[5px] border-[#333] 2xl:rounded-tr-none sm:border-[3px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:px-0 [&_pre]:pb-5 [&_pre]:pt-7">
+              <CodeBlockWrapper className="dark prose max-w-none rounded-b-md rounded-tr-md border-[5px] border-[#333] 2xl:rounded-tr-none sm:border-[3px] [&_code]:!text-[15px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:px-0 [&_pre]:pb-5 [&_pre]:pt-7">
                 {parse(highlightedCodeSnippets[index])}
               </CodeBlockWrapper>
             </li>
