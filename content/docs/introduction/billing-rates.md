@@ -34,6 +34,11 @@ Current billing rates for all relevant metrics by region.
 | AWS            | Asia Pacific (Singapore) | Written data    | $0.09600  | GiB            |
 | AWS            | Asia Pacific (Singapore) | Data transfer   | $0.09000  | GiB            |
 |                |                          |                 |           |                |
+| AWS            | Asia Pacific (Sydney)    | Compute time    | $0.121    | Compute-hour\* |
+| AWS            | Asia Pacific (Sydney)    | Project storage | $0.00022  | GiB-hour       |
+| AWS            | Asia Pacific (Sydney)    | Written data    | $0.09600  | GiB            |
+| AWS            | Asia Pacific (Sydney)    | Data transfer   | $0.09000  | GiB            |
+|                |                          |                 |           |                |
 | AWS            | Israel (Tel Aviv)        | Compute time    | $0.121    | Compute-hour\* |
 | AWS            | Israel (Tel Aviv)        | Project storage | $0.00022  | GiB-hour       |
 | AWS            | Israel (Tel Aviv)        | Written data    | $0.09600  | GiB            |
