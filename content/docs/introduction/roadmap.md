@@ -51,7 +51,7 @@ Here's a snapshot of what we're working on now:
 
 ### More regions
 
-    We are currently evaluating new regions. Please reach out on Discord to let us know which region you would like to see next. 
+*  We are currently evaluating new regions. Please reach out on Discord to let us know which region you would like to see next. 
 
 ## A brief history of Neon
 
