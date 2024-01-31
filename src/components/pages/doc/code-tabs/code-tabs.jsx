@@ -13,7 +13,7 @@ const CodeTabs = ({ children = null, labels = [] }) => {
         {labels.map((label, index) => (
           <div
             className={clsx(
-              'relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pb-3.5 pt-3 font-semibold leading-none transition-colors duration-200 hover:text-secondary-8 dark:hover:text-green-45',
+              'relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pb-3.5 pt-3 font-medium leading-none transition-colors duration-200 hover:text-secondary-8 dark:hover:text-green-45',
               index === currentIndex
                 ? 'border-secondary-8 text-secondary-8 after:opacity-100 dark:border-primary-1 dark:text-primary-1'
                 : 'border-transparent text-gray-new-40 dark:text-gray-7'

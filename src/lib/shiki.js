@@ -14,6 +14,7 @@ const customTheme = createCssVariablesTheme({
 
 let highlighter;
 
+// parse meta string to get highlighted lines
 const parseHighlightLines = (meta) => {
   const metaArray = meta.split(' ');
   let highlightLines = [];
@@ -39,6 +40,7 @@ const parseHighlightLines = (meta) => {
   return highlightLines;
 };
 
+// convert shiki tokens to html
 function tokensToHTML(tokens, lang, highlightedLines) {
   let html = `<pre data-language="${lang}"><code data-language="${lang}" class="grid">`;
 
@@ -85,11 +87,10 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
 
   await highlighter.loadLanguage(language);
 
-  const html = tokensToHTML(tokens, language, highlightedLines);
-
-  return html;
+  return tokensToHTML(tokens, language, highlightedLines);
 }
 
+// used to highlight code block in code tabs
 export const getHighlightedCodeArray = async (items) => {
   let highlightedItems = [];
 

@@ -52,10 +52,7 @@ const CodeBlockWrapper = ({
   const code = extractTextFromNode(children);
 
   return (
-    <figure
-      className={clsx('code-block group relative overflow-x-auto', className)}
-      {...otherProps}
-    >
+    <figure className={clsx('code-block group relative', className)} {...otherProps}>
       {children}
       <button
         className={clsx(
