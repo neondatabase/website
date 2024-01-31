@@ -47,12 +47,12 @@ const Advantages = () => {
 
   return (
     <section
+      className="safe-paddings bg-black pb-48 pt-[132px] 2xl:pt-28 xl:py-40 lg:py-36 md:py-24"
       id="advantages"
       // className="safe-paddings bg-black py-80 3xl:py-72 2xl:py-64 xl:py-52 lg:py-40 md:py-24"
-      className="safe-paddings bg-black pb-48 pt-36 3xl:pb-44 2xl:pt-28 xl:py-40 lg:py-36 md:py-24"
       ref={sectionRef}
     >
-      <Container className="z-20" size="md">
+      <Container className="z-20" size="medium">
         {/* <div className="flex items-center space-x-[100px] 3xl:space-x-[76px] 2xl:space-x-[64px] xl:space-x-[50px] lg:flex-col lg:items-start lg:space-x-0">
           <div
             id="advantages-video-wrapper"
@@ -104,10 +104,10 @@ const Advantages = () => {
           </div>
         </div> */}
         {/* <ul className="grid-gap-x mt-40 grid grid-cols-12 3xl:mt-36 2xl:mt-32 xl:mt-24 lg:mt-20 lg:gap-y-16 md:grid-cols-1"> */}
-        <ul className="grid-gap-x grid grid-cols-12 lg:gap-y-16 md:grid-cols-1">
+        <ul className="mx-auto grid w-full max-w-[1300px] grid-cols-3 gap-x-20 lg:gap-y-16 md:grid-cols-1">
           {items.map(({ animationData, title, description }, index) => (
             <li
-              className="col-span-4 max-w-[410px] 3xl:max-w-[340px] 2xl:max-w-[312px] xl:max-w-[260px] lg:max-w-[192px] md:max-w-none"
+              className="max-w-[378px] 2xl:max-w-[312px] xl:max-w-[260px] lg:max-w-[192px] md:max-w-none"
               key={index}
             >
               <div
