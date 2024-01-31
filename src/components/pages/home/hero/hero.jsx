@@ -74,14 +74,14 @@ const Hero = () => (
           The fully managed serverless Postgres with a generous free tier. We separate storage and
           compute to offer autoscaling, branching, and bottomless storage.
         </p>
-        <div className="mx-auto mt-12 grid max-w-[432px] auto-rows-fr grid-cols-2 items-center gap-x-6 2xl:mt-8 xl:mt-7 md:mt-6 xs:grid-cols-1 xs:gap-y-4">
+        <div className="mx-auto mt-12 grid max-w-[400px] auto-rows-fr grid-cols-2 items-center gap-x-6 2xl:mt-8 xl:mt-7 md:mt-6 xs:grid-cols-1 xs:gap-y-4">
           {buttons.map(({ text, to, theme, className }) => (
             <Button
-              className={clsx(className, 'h-[68px] xl:h-[60px] md:h-14')}
+              className={clsx(className, 'h-16 md:h-14')}
               key={text}
               to={to}
               theme={theme}
-              size="md"
+              size="sm"
             >
               {text}
             </Button>
