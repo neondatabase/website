@@ -47,7 +47,7 @@ const NeonCli = () => {
       >
         <div className="col-start-8 col-end-13 -ml-10 xl:col-start-1 xl:col-end-2 xl:ml-0">
           <Heading
-            className="text-[56px] font-bold leading-dense xl:max-w-[790px] xl:text-[44px] lg:text-[40px] sm:text-[30px]"
+            className="text-[56px] font-bold leading-dense 2xl:text-[48px] xl:max-w-[790px] lg:text-4xl sm:text-[36px]"
             id="saas-title"
             tag="h2"
             theme="white"

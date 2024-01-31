@@ -46,7 +46,7 @@ const Partnership = () => (
   <section className="partnership safe-paddings bg-black pb-[180px] text-white 2xl:pb-40 xl:pb-32 lg:pb-24 md:pb-20">
     <Container className="flex flex-col items-center justify-center text-center" size="medium">
       <Heading
-        className="text-[56px] font-bold leading-dense xl:text-[44px] lg:text-[40px] sm:text-[30px]"
+        className="text-[56px] font-bold leading-dense 2xl:text-[48px] lg:text-4xl sm:text-[36px]"
         tag="h2"
         theme="white"
       >
