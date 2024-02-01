@@ -1,34 +1,34 @@
 @layer components {
   :root {
-    --shiki-color-text: #171717;
+    --shiki-color-text: #18191b;
     --shiki-color-background: transparent;
-    --shiki-token-constant: #0068d6;
-    --shiki-token-string: #297a3a;
-    --shiki-token-comment: #666666;
-    --shiki-token-keyword: #bd2864;
+    --shiki-token-constant: #da0b51;
+    --shiki-token-string: #078345;
+    --shiki-token-comment: #b3b3b3;
+    --shiki-token-keyword: #206cdf;
     --shiki-token-parameter: #a35200;
-    --shiki-token-function: #7820bc;
-    --shiki-token-string-expression: #297a3a;
-    --shiki-token-punctuation: #171717;
-    --shiki-token-link: #297a3a;
-    --shiki-token-operator: #7820bc;
-    --shiki-token-embed: #171717;
+    --shiki-token-function: #078345;
+    --shiki-token-string-expression: #078345;
+    --shiki-token-punctuation: #18191b;
+    --shiki-token-link: #078345;
+    --shiki-token-operator: #a86624;
+    --shiki-token-embed: #18191b;
   }
 
   .dark {
-    --shiki-color-text: #ededed;
+    --shiki-color-text: #ffffff;
     --shiki-color-background: transparent;
-    --shiki-token-constant: #52a8ff;
-    --shiki-token-string: #62c073;
-    --shiki-token-comment: #a1a1a1;
-    --shiki-token-keyword: #f75f8f;
+    --shiki-token-constant: #f6558c;
+    --shiki-token-string: #47d18c;
+    --shiki-token-comment: #b3b3b3;
+    --shiki-token-keyword: #66a3ff;
     --shiki-token-parameter: #ff990a;
-    --shiki-token-function: #bf7af0;
-    --shiki-token-string-expression: #62c073;
-    --shiki-token-punctuation: #ededed;
-    --shiki-token-link: #ededed;
-    --shiki-token-operator: #bf7af0;
-    --shiki-token-embed: #ededed;
+    --shiki-token-function: #47d18c;
+    --shiki-token-string-expression: #47d18c;
+    --shiki-token-punctuation: #ffffff;
+    --shiki-token-link: #47d18c;
+    --shiki-token-operator: #ba8c5e;
+    --shiki-token-embed: #ffffff;
   }
 
   pre [data-highlighted-line] {
