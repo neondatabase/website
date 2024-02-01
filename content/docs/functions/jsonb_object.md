@@ -96,7 +96,7 @@ This query returns the following result:
 
 ### Alternative options
 
-- [json_object](https://www.postgresql.org/docs/current/functions-json.html) - Same functionality as `jsonb_object`, but returns a `JSONB` object instead of `JSONB`. 
+- [json_object](https://www.postgresql.org/docs/current/functions-json.html) - Same functionality as `jsonb_object`, but returns a `JSON` object instead of `JSONB`. 
 - [to_jsonb](https://www.postgresql.org/docs/current/functions-json.html) - It can be used to create a `JSONB` object from a table row (or a row of a  composite type) without needing to specify keys and values explicitly. Although, it is less flexible than `jsonb_object` since all fields in the row are included in the `JSONB` object. 
 - [jsonb_build_object](/docs/functions/jsonb_build_object) - Similar to `jsonb_object`, but allows for more flexibility in constructing the `JSONB` object, as it can take a variable number of arguments in the form of key-value pairs. 
 - [jsonb_object_agg](https://www.postgresql.org/docs/current/functions-json.html) - It is used to aggregate the key-value pairs from multiple rows into a single `JSONB` object. In contrast, `jsonb_object` outputs a `JSONB` object for each row. 
