@@ -12,12 +12,12 @@ You can obtain the database connection details you require from the **Connection
 
 Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
 
-A Neon connection string includes the role, the hostname, and the database name.
+A Neon connection string includes the role, password, hostname, and database name.
 
 ```text
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
-           ^              ^                                               ^
-           |- role        |- hostname                                     |- database
+           ^    ^         ^                                               ^
+     role -|    |- pass   |- hostname                                     |- database
 ```
 
 <Admonition type="note">
