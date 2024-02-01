@@ -37,7 +37,12 @@ const AnchorHeading =
     }).replace(/_/g, '');
 
     return (
-      <Tag id={id} className={clsx('group relative w-fit scroll-mt-8 lg:scroll-mt-5', className)}>
+      <Tag className={clsx('group relative w-fit scroll-mt-8 lg:scroll-mt-5', className)}>
+        <span
+          className="pointer-events-none absolute -left-px -top-20 h-0 w-0 lg:-top-3"
+          id={id}
+          aria-hidden
+        />
         <a
           className="anchor absolute -right-16 top-1/2 flex h-full -translate-x-full -translate-y-[calc(50%-0.15rem)] items-center justify-center px-2.5 no-underline opacity-0 transition-opacity duration-200 hover:border-none hover:opacity-100 group-hover:opacity-100 sm:hidden"
           href={`#${id}`}
