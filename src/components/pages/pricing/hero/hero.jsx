@@ -235,16 +235,6 @@ const Hero = () => {
               );
             })}
           </ul>
-          <p className="mt-8 text-center text-[15px] font-light leading-snug tracking-extra-tight text-gray-new-50">
-            On February 19th, 2024, Neon will launch new, simplified pricing plans. You can see the{' '}
-            <Link
-              className="underline-offset-[3px]"
-              theme="green-underlined"
-              to="/2024-plan-updates"
-            >
-              details of all the plans here.
-            </Link>
-          </p>
         </div>
         <p className="mt-16 text-center text-lg font-light leading-snug">
           Not sure which plan is right for you?
@@ -252,7 +242,7 @@ const Hero = () => {
           Explore the{' '}
           <Link
             className="inline-block decoration-1 underline-offset-4 hover:!decoration-green-45/0"
-            to={LINKS.contactSales}
+            to="/2024-plan-updates"
             theme="green-underlined"
           >
             detailed plan comparison
