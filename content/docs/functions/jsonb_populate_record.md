@@ -1,5 +1,5 @@
 ---
-title: Postgres json_populate_record() function
+title: Postgres jsonb_populate_record() function
 subtitle: Casts a JSONB object to a record
 enableTableOfContents: true
 updatedOn: '2024-01-28T13:46:59.391Z'
