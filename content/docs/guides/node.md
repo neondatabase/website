@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2023-11-24T11:25:06.753Z'
+updatedOn: '2024-02-01T09:46:06.753Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
@@ -56,18 +56,22 @@ If you do not have one already, create a Neon project.
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection details to it. You can find the connection details for your database in the **Connection Details** widget on the Neon **Dashboard**. Please select Node.js from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 <CodeBlock shouldWrap>
 
 ```shell
-DATABASE_URL=ppostgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint_id]
+PGHOST='[neon_hostname]'
+PGDATABASE='[dbname]'
+PGUSER='[user]'
+PGPASSWORD='[password]'
+ENDPOINT_ID='[endpoint_id]'
 ```
 
 </CodeBlock>
 
 <Admonition type="note">
-A special `endpoint` connection option is appended to the connection string above: `options=endpoint%3D[endpoint_id]`. This option is used with Postgres clients such as `node-postgres` and `Postgres.js` that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. For more information, see [connection errors](/docs/connect/connection-errors).
+A special `ENDPOINT_ID` variable is included in the `.env` file above. This variable can be used with Postgres clients that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. For more information, see [connection errors](/docs/connect/connection-errors).
 </Admonition>
 
 <Admonition type="important">
@@ -84,38 +88,53 @@ Add an `app.js` file to your project directory and add the following code snippe
   const { Pool } = require('pg');
   require('dotenv').config();
 
+  let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+
   const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    host: PGHOST,
+    database: PGDATABASE,
+    username: PGUSER,
+    password: PGPASSWORD,
+    port: 5432,
     ssl: {
       require: true,
     },
   });
 
-  async function getPostgresVersion() {
+  async function getPgVersion() {
     const client = await pool.connect();
     try {
-      const response = await client.query('SELECT version()');
-      console.log(response.rows[0]);
+      const result = await client.query('SELECT version()');
+      console.log(result.rows[0]);
     } finally {
       client.release();
     }
   }
 
-  getPostgresVersion();
+  getPgVersion();
   ```
 
   ```javascript
   const postgres = require('postgres');
   require('dotenv').config();
 
-  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+  let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
-  async function getPostgresVersion() {
-    const response = await sql`select version()`;
-    console.log(response);
+  const sql = postgres({
+    host: PGHOST,
+    database: PGDATABASE,
+    username: PGUSER,
+    password: PGPASSWORD,
+    port: 5432,
+    ssl: 'require',
+  });
+
+  async function getPgVersion() {
+    const result = await sql`select version()`;
+    console.log(result[0]);
   }
 
-  getPostgresVersion();
+  getPgVersion();
   ```
 
 </CodeTabs>
@@ -125,11 +144,9 @@ Add an `app.js` file to your project directory and add the following code snippe
 Run `node app.js` to view the result.
 
 ```shell
-Result(1) [
-  {
-    version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
-  }
-]
+{
+  version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
+}
 ```
 
 <NeedHelp/>
