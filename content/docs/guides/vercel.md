@@ -139,8 +139,9 @@ You can enable these variables from the Neon Console:
 3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
 4. In the **Vercel integration** drawer, select the environment variables you require. The selected variables will be set in your Vercel project with your next push. 
 
-<Admonition type="note">
-Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next push.
+<Admonition type="note" title="Notes">
+- Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next push.
+- The integration appends the `sslmode=require` option to the Neon connection string when setting the `DATABASE_URL` environment variable in Vercel.
 </Admonition> 
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
