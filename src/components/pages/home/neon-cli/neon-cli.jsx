@@ -40,10 +40,18 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 const NeonCli = () => {
   const [activeItem, setActiveItem] = useState(items[0]);
   return (
-    <section className="neon-cli safe-paddings bg-black pt-48 text-white 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16">
-      <Container className="grid grid-cols-12 gap-x-10 xl:grid-cols-1 xl:gap-y-10" size="md">
+    <section className="neon-cli safe-paddings bg-black pt-44 text-white 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16">
+      <Container
+        className="grid grid-cols-12 items-center gap-x-10 xl:grid-cols-1 xl:gap-y-10"
+        size="medium"
+      >
         <div className="col-start-8 col-end-13 -ml-10 xl:col-start-1 xl:col-end-2 xl:ml-0">
-          <Heading className="xl:max-w-[790px]" id="saas-title" tag="h2" size="xl" theme="white">
+          <Heading
+            className="text-[56px] font-bold leading-dense 2xl:text-[48px] xl:max-w-[790px] lg:text-4xl sm:text-[36px]"
+            id="saas-title"
+            tag="h2"
+            theme="white"
+          >
             Postgres at your fingertips with the Neon CLI
           </Heading>
           <p className="t-2xl mt-8 max-w-[600px] text-white 2xl:max-w-[488px] xl:max-w-[400px] lg:mt-4 lg:max-w-none">
@@ -58,7 +66,7 @@ const NeonCli = () => {
             <span className="sr-only">about Neon CLI</span>
           </Link>
         </div>
-        <div className="col-span-6 col-start-1 row-start-1 max-w-[716px] pt-[71px] 2xl:-mr-8 2xl:pt-12 xl:hidden">
+        <div className="col-span-6 col-start-1 row-start-1 max-w-[716px] 2xl:-mr-8 xl:hidden">
           <div className="flex gap-x-2.5 xs:gap-x-1.5">
             {items.map(({ name }, index) => (
               <button
