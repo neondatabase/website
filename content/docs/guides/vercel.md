@@ -141,7 +141,7 @@ You can enable these variables from the Neon Console:
 
 <Admonition type="note" title="Notes">
 - Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next push.
-- The integration appends the `sslmode=require` option to the Neon connection string when setting the `DATABASE_URL` environment variable in Vercel.
+- The integration appends the `sslmode=require` option to the Neon connection string that it sets for the `DATABASE_URL` environment variable in Vercel.
 </Admonition> 
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
