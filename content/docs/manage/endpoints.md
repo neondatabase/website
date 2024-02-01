@@ -101,9 +101,11 @@ The `neon_utils` extension provides a `num_cpus()` function you can use to monit
 
 ### How to size your compute endpoint
 
-Noen Pro Plan users can configure the size of their computes. The compute size for Free Tier users is always .25 CU. 
-
 Ideally, a right-sized compute should hold your working set in memory and handle the maximum number of concurrent connections.
+
+<Admonition type="note">
+Neon Pro Plan users can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM). 
+</Admonition> 
 
 #### Your working set
 
@@ -160,7 +162,6 @@ With an idea of how much memory is required for your working set and your concur
 
 The following table outlines the vCPU, RAM, shared_buffer limit, max_connections limit, and additional parameters for each Neon compute size. 
 
-```
 | Compute Size | vCPU | RAM   | shared_buffers | max_connections | work_mem   | maintenance_work_mem   |
 |--------------|------|-------|----------------|-----------------|------------|------------------------|
 | 0.25         | 0.25 | 1 GB  | 0.5 GB         | 112             | 4 MB       | 64 MB                  |
@@ -172,7 +173,6 @@ The following table outlines the vCPU, RAM, shared_buffer limit, max_connections
 | 5            | 5    | 20 GB | 10 GB          | 2253            | 4 MB       | 335 MB                 |
 | 6            | 6    | 24 GB | 12 GB          | 2703            | 4 MB       | 402 MB                 |
 | 7            | 7    | 28 GB | 14 GB          | 3154            | 4 MB       | 470 MB                 |
-```
 
 #### Notes
 
