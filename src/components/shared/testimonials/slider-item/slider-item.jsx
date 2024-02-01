@@ -1,8 +1,9 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
-const SliderItem = ({ text, authorName, authorTitle }) => (
-  <figure className="flex min-h-[222px] flex-col items-center justify-center lg:min-h-[184px] md:min-h-[164px] sm:min-h-[252px]">
-    <blockquote className="mt-6 lg:mt-4">
+const SliderItem = ({ className, text, authorName, authorTitle }) => (
+  <figure className={clsx('mt-6 flex flex-col items-center justify-center lg:mt-4', className)}>
+    <blockquote>
       <p
         className="with-link-primary max-w-[796px] text-[28px] font-light leading-snug tracking-tighter lg:max-w-[584px] lg:text-2xl md:text-[23px] md:leading-tight"
         dangerouslySetInnerHTML={{ __html: text }}
@@ -15,6 +16,7 @@ const SliderItem = ({ text, authorName, authorTitle }) => (
 );
 
 SliderItem.propTypes = {
+  className: PropTypes.string,
   text: PropTypes.string.isRequired,
   authorName: PropTypes.string.isRequired,
   authorTitle: PropTypes.string.isRequired,
