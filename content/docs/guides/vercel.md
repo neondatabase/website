@@ -3,7 +3,7 @@ title: Connect with the Neon Vercel Integration
 subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel
   Integration
 enableTableOfContents: true
-updatedOn: '2024-01-26T16:05:12.113Z'
+updatedOn: '2024-01-29T15:29:18.995Z'
 ---
 
 This guide describes how to connect using the [Neon Vercel Integration](https://vercel.com/integrations/neon) from the Vercel marketplace. The integration connects your Vercel project to a Neon database and enables creating a database branch for each preview deployment.
@@ -143,10 +143,6 @@ Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
 
 ## Make the integration available to other Vercel projects
-
-<Admonition type="warning">
-The procedure described below is currently broken. At this time, it is not possible to use integration with more than one Vercel project under the same Vercel account. This issue is being investigated.
-</Admonition>
 
 If you added the Neon Vercel Integration to a single Vercel project but would like to make it available for use with your other Vercel projects, complete the steps outlined below.
 

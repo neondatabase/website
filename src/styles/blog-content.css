@@ -6,6 +6,10 @@
     @apply prose-a:font-normal prose-a:text-green-45 prose-a:no-underline prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out hover:prose-a:text-[#47FFC2] sm:prose-a:break-words;
     @apply prose-figure:my-10 prose-img:my-10 md:prose-figure:my-8 md:prose-img:my-8;
 
+    *[id] {
+      @apply scroll-mt-20 lg:scroll-mt-5;
+    }
+
     > * {
       &:first-child {
         @apply mt-0;

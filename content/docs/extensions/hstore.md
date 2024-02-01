@@ -1,29 +1,29 @@
 ---
 title: The hstore extension
-subtitle: Manage key-value pairs in PostgreSQL using hstore
+subtitle: Manage key-value pairs in Postgres using hstore
 enableTableOfContents: true
-updatedOn: '2024-01-26T10:32:50.477Z'
+updatedOn: '2024-01-28T13:46:59.387Z'
 ---
 
-The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single PostgreSQL value. It is particularly useful for semi-structured data or data that does not have a rigid schema. 
+The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It is particularly useful for semi-structured data or data that does not have a rigid schema. 
 
 <CTA />
 
 This guide covers the basics of the `hstore` extension - how to enable it, how to store and query key-value pairs, and perform operations on hstore data with examples. `hstore` is valuable in scenarios where schema-less data needs to be stored efficiently, such as in configurations, application settings, or any situation where the data structure may evolve over time. 
 
 <Admonition type="note">
-    `hstore` is an open-source extension for PostgreSQL that can be installed on any compatible PostgreSQL instance. Detailed installation instructions and compatibility information can be found at [PostgreSQL Extensions](https://www.postgresql.org/docs/current/contrib.html).
+    `hstore` is an open-source extension for Postgres that can be installed on any compatible Postgres instance. Detailed installation instructions and compatibility information can be found at [PostgreSQL Extensions](https://www.postgresql.org/docs/current/contrib.html).
 </Admonition>
 
 **Version availability**
 
 Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date information. 
 
-Currently, Neon uses version `1.8` of the `hstore` extension for all PostgreSQL versions.
+Currently, Neon uses version `1.8` of the `hstore` extension for all Postgres versions.
 
-## Enable the `hstore` Extension
+## Enable the `hstore` extension
 
-Enable the extension by running the following SQL statement in your PostgreSQL client:
+Enable the extension by running the following SQL statement in your Postgres client:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS hstore;
@@ -232,7 +232,7 @@ The `hstore` and `JSON` data types can be both used to store semi-structured dat
 
 In constrast, `JSON` supports a variety of data types, and can also store nested data structures. This makes it more flexible, but trades off some performance.
 
-## Indexing and Performance
+## Indexing and performance
 
 Indexing can improve the performance of queries involving `hstore` data, particularly for large datasets. 
 
@@ -250,7 +250,7 @@ CREATE INDEX gin_idx_attributes ON product USING gin (attributes);
 
 ## Conclusion
 
-The `hstore` extension offers a powerful and flexible way to handle semi-structured data in PostgreSQL. This guide provides an overview of using `hstore`, including creating records and querying on its attributes. It also covers some of the common operators and functions available for `hstore` data.
+The `hstore` extension offers a powerful and flexible way to handle semi-structured data in Postgres. This guide provides an overview of using `hstore`, including creating records and querying on its attributes. It also covers some of the common operators and functions available for `hstore` data.
 
 ## Resources
 
