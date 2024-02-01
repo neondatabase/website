@@ -3,7 +3,7 @@ title: Use Neon with Koyeb
 subtitle: Learn how to connect a Neon Postgres database to an application deployed with
   Koyeb
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.385Z'
+updatedOn: '2024-02-01T14:26:32.333Z'
 ---
 
 [Koyeb](https://www.koyeb.com/) is a developer-friendly, serverless platform designed to easily deploy reliable and scalable applications globally. Koyeb offers native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across their edge network with zero configuration.
@@ -38,9 +38,9 @@ You can deploy on Koyeb using the control panel or the Koyeb CLI.
 
 To deploy the application from the Koyeb [control panel](https://app.koyeb.com/), follow these steps:
 
-1. Select **Create App**.
+1. Navigate to the `Apps` tab and select **Create App**.
 1. Select GitHub as the deployment method.
-1. Enter `https://github.com/koyeb/example-express-prisma` in the **Public GitHub repository** field.
+1. When asked to select the repository to deploy, enter `https://github.com/koyeb/example-express-prisma` in the **Public GitHub repository** field.
 1. Keep `example-express-prisma` as the name and `main` as the branch.
 1. In **Build and deployment settings**, enable the **Override** setting and add the following **Build command**: `npm run postgres:init`
 1. Select the region closest to your Neon database.
@@ -71,24 +71,25 @@ The example application exposes a `/planets` endpoint that you can use to list p
 
 ### From the Koyeb CLI
 
-The [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli) requires an API access token, which you can generate in the Koyeb [control panel](https://app.koyeb.com/), under **Account** > **API**.
+You can also deploy your application using the Koyeb CLI. To install it, follow the instructions in the [Koyeb CLI documentation](https://www.koyeb.com/docs/quickstart/koyeb-cli). 
 
-To deploy the example application using the Koyeb CLI, run the following command in your terminal.
+Using the CLI requires an API access token, which you can generate in the Koyeb [control panel](https://app.koyeb.com/), under **Organization Settings** > **API**. Once generated, run the command `koyeb login` and enter the token when prompted.
+
+To deploy the example application, run the following command in your terminal. Make sure to replace the `DATABASE_URL` with your Neon connection string.
 
 ```bash
-koyeb app init express-neon \
+koyeb apps init express-neon \
+--instance-type free \
 --git github.com/koyeb/example-express-prisma \
 --git-branch main \
 --git-build-command "npm run postgres:init" \
 --ports 8080:http \
 --routes /:8080 \
 --env PORT=8080 \
---env DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]"
-```
+--env DATABASE_URL="{}"
+``` 
 
-Make sure to replace `[user]`, `[password]`, and `[host]` with your Neon connection string values.
-
-### Access Koyeb deployment logs
+#### Access Koyeb deployment logs
 
 To track the app deployment and visualize build logs, execute the following command:
 
@@ -96,7 +97,7 @@ To track the app deployment and visualize build logs, execute the following comm
 koyeb service logs express-neon/express-neon -t build
 ```
 
-### Access your app
+#### Access your app
 
 After the build and deployment have finished, you can retrieve the public domain to access your application by running the following command:
 

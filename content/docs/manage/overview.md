@@ -2,37 +2,12 @@
 title: Overview of the Neon object hierarchy
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-11-23T13:58:00.342Z'
+updatedOn: '2024-01-31T12:01:56.610Z'
 ---
-Managing your Neon project requires an understanding of the Neon object hierarchy. The following diagram shows how objects in Neon are related. See below for a description of of each object.
 
-```text
-Neon account
-    |
-    |- API keys
-    | 
-    |- project 
-    |      |
-    |      |---- primary branch (main) ---- compute endpoint a
-    |                |    |
-    |                |    |---- roles
-    |                |    |---- databases           
-    |                |                         
-    |                |---- child branch 1 ---- compute endpoint b 
-    |                |          |    |
-    |                |          |    |---- roles
-    |                |          |    |---- databases   
-    |                |          |
-    |                |          |---- child branch 1.a ---- compute endpoint c 
-    |                |                          |
-    |                |                          |---- roles
-    |                |                          |---- databases
-    |                |
-    |                |---- child branch 2 
-    |                                |
-    |                                |---- roles
-    |                                |---- databases
-```
+Managing your Neon project requires an understanding of the Neon object hierarchy. The following diagram shows how objects in Neon are related. See below for a description of each object.
+
+![Neon object hierarchy](/docs/manage/neon_object_hierarchy.jpg)
 
 ## Neon account
 
@@ -44,20 +19,20 @@ API keys are global and belong to the Neon account. API keys are used with the [
 
 ## Projects
 
-A project is the top-level object in the Neon object hierarchy. It is a container for all other objects, with the exception of API keys, which are global. Branches and compute endpoints belong to a project. A Neon project defines the region where project resources reside. A Neon account can have multiple projects, but tier limits define the number of projects per Neon account. For more information, see [Manage projects](/docs/manage/projects).
+A project is the top-level object in the Neon object hierarchy. It is a container for all objects except for API keys, which are global and work with any project owned by your Neon account. Branches, compute endpoints, roles, and databases belong to a project. A Neon project also defines the region where project resources reside. A Neon account can have multiple projects, but tier limits define the number of projects per Neon account. For more information, see [Manage projects](/docs/manage/projects).
 
-## Branches
+## Primary branch
 
-Data resides in a branch. Each Neon project is created with a primary branch called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data per branch. For more information, see [Manage branches](/docs/manage/branches).
+Data resides in a branch. Each Neon project is created with a primary branch called `main`. This initial branch is also your project's root branch, which cannot be deleted. After creating more branches, you can designate a different branch as your primary branch, but your root branch cannot be deleted. You can create child branches from any branch in your project. Each branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data per branch. To learn more, see [Manage branches](/docs/manage/branches).
 
 ## Compute endpoint
 
-A compute endpoint is a compute resource associated with a branch. A read-write compute endpoint is created for a project's primary branch, by default. Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints. You can choose whether or not to create a compute endpoint when creating a branch. To connect to a database that resides in a branch, you must connect via a compute endpoint that is associated with the branch. Tier limits define the resources (vCPUs and RAM) available to a compute endpoint. For more information, see [Manage computes](/docs/manage/endpoints).
+A compute endpoint is a compute resource associated with a branch. A read-write compute endpoint is created for a project's primary branch by default. Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints. To connect to a database that resides in a branch, you must connect via a compute endpoint that is associated with the branch. Tier limits define the resources (vCPUs and RAM) available to a compute endpoint. For more information, see [Manage computes](/docs/manage/endpoints). Compute size, autoscaling, and autosuspend (scale-to-zero) are all settings that are configured for a compute endpoint. 
 
 ## Roles
 
-In Neon, roles are Postgres roles. A role is required to create and access a database. A role belongs to a branch. There is no limit on the number of roles you can create. The primary branch of a Neon project is created with a role named for the Neon account that you registered with. For example, if you registered with a Google account for "Casey Smith", Neon creates a role named "Casey" in the primary branch. This role is the owner of the ready-to-use `neondb` database in your project's primary branch. For more information, see [Manage roles](/docs/manage/roles).
+In Neon, roles are Postgres roles. A role is required to create and access a database. A role belongs to a branch. There is no limit on the number of roles you can create. The primary branch of a Neon project is created with a role named for the account that you registered with. For example, if you registered with a Google account for "Casey Smith", Neon creates a role named "Casey" in the primary branch. If you registered with an email account like `alex@domain.com`, Neon creates a role named "alex". This role is the owner of the ready-to-use `neondb` database in your project's primary branch. Any role created via the Neon Console, CLI, or API is created with [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) privileges. For more information, see [Manage roles](/docs/manage/roles).
 
 ## Databases
 
-As with any standalone instance of Postgres, a database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In Neon, a database belongs to a branch. The primary branch of a Neon project is created with a ready-to-use database named `neondb`. There is no limit on the number of databases you can create. For more information, see [Manage databases](/docs/manage/databases).
+As with any standalone instance of Postgres, a database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In Neon, a database belongs to a branch. The primary branch of a Neon project is created with a ready-to-use database named `neondb`. There is no defined limit on the number of databases you can create in a Neon project. For more information, see [Manage databases](/docs/manage/databases).
