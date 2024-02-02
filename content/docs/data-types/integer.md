@@ -6,6 +6,8 @@ enableTableOfContents: true
 
 In Postgres, integer data types are used for storing numerical values without a fractional component. They are useful as identifiers, counters, and many other common data modeling tasks. Postgres offers multiple integer types, catering to different ranges of values and storage sizes.
 
+<CTA />
+
 ## Storage and syntax
 
 Postgres supports three primary integer types. Choosing the appropriate integer type depends on the range of data expected.

@@ -6,6 +6,8 @@ enableTableOfContents: true
 
 In Postgres, floating point data types are used to represent numbers that might have a fractional part. These types are essential for situations where precision is key, such as scientific calculations, financial computations, and more.
 
+<CTA />
+
 ## Storage and syntax
 
 Postgres supports two primary floating-point types:
