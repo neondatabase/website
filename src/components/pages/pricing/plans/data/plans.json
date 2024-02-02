@@ -1,0 +1,322 @@
+{
+  "headings": {
+    "feature": "",
+    "free": {
+      "label": "Free Tier",
+      "price": "Free forever",
+      "buttonUrl": "/",
+      "buttonText": "Start for free"
+    },
+    "launch": {
+      "label": "Launch",
+      "price": "$29<span>/mo</span>",
+      "buttonUrl": "/",
+      "buttonText": "Get started"
+    },
+    "scale": {
+      "label": "Scale",
+      "price": "$69<span>/mo</span>",
+      "buttonUrl": "/",
+      "buttonText": "Get started"
+    },
+    "custom": {
+      "label": "Custom",
+      "price": "Сustom price",
+      "buttonUrl": "/",
+      "buttonText": "Request trial"
+    }
+  },
+  "cols": [
+    {
+      "rows": "1",
+      "feature": "Fee Structure"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Project overage",
+        "subtitle": "per additional project pack "
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Compute-hour Overage",
+        "subtitle": "per CU/hr"
+      },
+      "free": false,
+      "launch": true,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "GB overage",
+        "subtitle": "per additional storage pack"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Data transfer"
+      },
+      "free": "free for fair use",
+      "launch": "free for fair use",
+      "scale": "free for fair use",
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Written data"
+      },
+      "free": "free for fair use",
+      "launch": "free for fair use",
+      "scale": "free for fair use",
+      "custom": true
+    },
+    {
+      "feature": "Usage Tiers"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Projects"
+      },
+      "free": "1 included",
+      "launch": "10",
+      "scale": "50 (included) <span>+ $50/10 projects</span>",
+      "custom": "Custom"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Storage"
+      },
+      "free": "500MB",
+      "launch": "10GB",
+      "scale": "50GB (included) <span>+ $15/10GB</span>",
+      "custom": "500GB + overage"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Branching"
+      },
+      "free": "Up to 10 branches",
+      "launch": true,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "3",
+      "feature": {
+        "title": "Compute-hours",
+        "subtitle": "Use 750 hours as total hours in 1 month"
+      },
+      "free": "183 hours on main branch <span>+ 20 active hours for branching</span>",
+      "launch": "10GB",
+      "scale": "300 Compute-hours (included) <span>+ $0.16/Compute-hour</span>",
+      "custom": "750 Compute-hours (included) <span>+ $0.16/Compute-hour</span>"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Compute Units"
+      },
+      "free": "Max 1/4 CU, 0 configuration",
+      "launch": "Up to 4 CU",
+      "scale": "Up to 7 CU",
+      "custom": "7 CU+"
+    },
+    {
+      "feature": "Feature Tiers"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Project Sharing"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Autoscaling"
+      },
+      "free": false,
+      "launch": true,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "soon": true,
+      "feature": {
+        "title": "Back Up & Restore"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Point in time recovery"
+      },
+      "free": "Up to 24 hours",
+      "launch": "Up to 7 days",
+      "scale": "Up to 30 days",
+      "custom": "Unlimited"
+    },
+    {
+      "rows": "1",
+      "soon": true,
+      "feature": {
+        "title": "High Availability"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "IP Allowlist"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Regions"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Configurable auto-suspend"
+      },
+      "free": false,
+      "launch": true,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Read Replicas"
+      },
+      "free": false,
+      "launch": true,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Logical Replication"
+      },
+      "free": false,
+      "launch": true,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Support"
+      },
+      "free": "Community Support",
+      "launch": "Neon Customer Support",
+      "scale": "Prioritized Neon Customer Support",
+      "custom": "Enterprise Support with SLAs"
+    },
+    {
+      "rows": "1",
+      "soon": true,
+      "feature": {
+        "title": "Observability"
+      },
+      "free": false,
+      "launch": true,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "SOC 2 Report"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "soon": true,
+      "feature": {
+        "title": "Org accounts"
+      },
+      "free": false,
+      "launch": true,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "soon": true,
+      "feature": {
+        "title": "Team features",
+        "subtitle": "e.g. RBAC"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Bring Your Own Extension"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "custom": true
+    },
+    {
+      "rows": "1",
+      "soon": true,
+      "feature": {
+        "title": "Bring Your Own S3"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "custom": true
+    }
+  ]
+}

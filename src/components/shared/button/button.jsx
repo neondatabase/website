@@ -26,6 +26,7 @@ const styles = {
     'green-outline': 'bg-transparent text-white border border-green-45 hover:border-white',
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
     'gray-10': 'bg-gray-new-10 text-white hover:bg-gray-new-20',
+    'gray-15': 'bg-gray-new-15 text-white hover:bg-gray-new-20',
   },
 };
 
