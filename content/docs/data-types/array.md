@@ -264,7 +264,7 @@ This query returns the following result:
 
 - **Indexing**: Postgres allows creating indexes on array elements for faster searches. Specifically, an inverted index like `GIN` creates an entry for each element in the array. This allows for fast lookups, but can be expensive to maintain for large arrays.
 
-- **Loose typing**: Postgres supports defining the size of an array, or the number of dimensions in the schema. However, it is just for documenting behavior and Postgres doesn't really enforce it. For example, the query below works successfully:
+- **No type enforcement**: Postgres supports defining the size of an array, or the number of dimensions in the schema. However, it is just for documenting behavior and Postgres doesn't really enforce it. For example, the query below works successfully:
     ```sql
     CREATE TABLE test_size (
       id SERIAL PRIMARY KEY,
@@ -274,7 +274,7 @@ This query returns the following result:
     VALUES (ARRAY[1,2,3]), (ARRAY[1,2]);
     ```
 
-    This behavior can surprising and hence, it is up to the application to ensure data integrity.
+    This behavior can be surprising and hence, it is up to the application to ensure data integrity.
 
 ## Resources
 
