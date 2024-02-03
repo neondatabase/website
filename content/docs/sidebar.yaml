@@ -352,6 +352,8 @@
           slug: functions/jsonb_object
         - title: json_populate_record
           slug: functions/json_populate_record
+        - title: jsonb_populate_record
+          slug: functions/jsonb_populate_record
         - title: json_to_record
           slug: functions/json_to_record
     - title: Compatibility
