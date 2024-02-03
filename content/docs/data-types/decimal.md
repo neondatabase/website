@@ -89,7 +89,7 @@ It's important to differentiate `DECIMAL`/`NUMERIC` from floating-point types (`
 
 
 ## Additional considerations
-ß
+
 - **Range and Precision**: Always define `DECIMAL`/`NUMERIC` with an appropriate range and precision based on the application's requirements. Overestimating precision can lead to unnecessary storage and performance overhead.
 
 ## Resources
