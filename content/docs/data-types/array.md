@@ -27,9 +27,9 @@ The `ARRAY` constructor syntax can also be used to create arrays. For example,
 
 ## Example usage
 
-Consider the case of maintaining a product catalog for an online store. The same product may belong to multiple categories, like an iPad could be tagged as 'Electronics', 'Computer', or 'Mobile'. In this case, we can use an array to store the categories for each product.
+Consider the case of maintaining a product catalog for an online store. The same product may belong to multiple categories. For example,  an iPad could be tagged as 'Electronics', 'Computer', or 'Mobile'. In this case, we can use an array to store the categories for each product.
 
-First, let's create the table with some sample data:
+First, let's create a `products` table with some sample data:
 
 ```sql
 CREATE TABLE products (
@@ -130,7 +130,7 @@ This query returns the following:
 
 ### Modifying arrays
 
-Array values can be modified using functions or directly indexing into the array. You can change specific elements of an array, add or remove elements, or even replace the entire array.
+Array values can be modified using functions or by directly indexing into the array. You can change specific elements of an array, add or remove elements, or even replace the entire array.
 
 For example, the query below replaces the `Audio` category across all products with `Sound`.
 
@@ -156,7 +156,8 @@ Postgres provides a variety of functions and operators for working with arrays. 
 We'll look at some commonly used functions below.
 
 **Length of an array**
-We can query the num of categories each product has been tagged with:
+
+We can query the number of categories each product has been tagged with:
 
 ```sql
 SELECT name, array_length(categories, 1) as category_count
@@ -178,7 +179,7 @@ The `array_length` function returns the length of the array in the specified dim
 
 **Expanding an array into rows**
 
-We can use the `unnest` function to expand an array into rows. For example, to get the number of Laptops sold in each quarter, we can use the query:
+We can use the `unnest` function to expand an array into rows. For example, to get the number of laptops sold in each quarter, we can use the query:
 
 ```sql
 SELECT name, unnest(units_sold) AS units_sold
@@ -201,7 +202,7 @@ This query returns the following result:
 | Laptop | 3900       |
 ```
 
-We could use the output of `unnest` to calculate the total number of units sold for each product.
+We could use the output of `unnest` to calculate the total number of units sold for each product; for example:
 
 ```sql
 WITH table_units AS (
@@ -262,9 +263,10 @@ This query returns the following result:
 
 - **Performance and UX**: While arrays provide flexibility, they can be less performant than normalized data structures for large datasets. Compared to a set of rows, arrays can also be more tedious to work with for complex queries. 
 
-- **Indexing**: Postgres allows creating indexes on array elements for faster searches. Specifically, an inverted index like `GIN` creates an entry for each element in the array. This allows for fast lookups, but can be expensive to maintain for large arrays.
+- **Indexing**: Postgres lets you create indexes on array elements for faster searches. Specifically, an inverted index like `GIN` creates an entry for each element in the array. This allows for fast lookups but can be expensive to maintain for large arrays.
 
-- **No type enforcement**: Postgres supports defining the size of an array, or the number of dimensions in the schema. However, it is just for documenting behavior and Postgres doesn't really enforce it. For example, the query below works successfully:
+- **No type enforcement**: Postgres supports defining the size of an array or the number of dimensions in the schema. However, Postgres does not enforce these definitions. For example, the query below works successfully:
+
     ```sql
     CREATE TABLE test_size (
       id SERIAL PRIMARY KEY,
@@ -274,7 +276,7 @@ This query returns the following result:
     VALUES (ARRAY[1,2,3]), (ARRAY[1,2]);
     ```
 
-    This behavior can be surprising and hence, it is up to the application to ensure data integrity.
+    It is therefore up to the application to ensure data integrity.
 
 ## Resources
 
