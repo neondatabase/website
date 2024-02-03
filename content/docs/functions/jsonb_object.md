@@ -2,7 +2,7 @@
 title: Postgres jsonb_object() function
 subtitle: Creates a JSONB object from key-value pairs
 enableTableOfContents: true
-updatedOn: '2024-01-28T13:46:59.391Z'
+updatedOn: '2024-02-03T12:16:39.085Z'
 ---
 
 The `jsonb_object` function in Postgres is used to create a `JSONB` object from a set of key-value pairs. It is particularly useful when you need to generate `JSONB` data dynamically from existing table data or input parameters.
