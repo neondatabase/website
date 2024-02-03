@@ -19,6 +19,7 @@ The syntax for defining a decimal column is `DECIMAL(precision, scale)` or `NUME
 Declaring a column as `NUMERIC` without specifying precision and scale, stores numbers of any precision exactly (up to the implementation limit).
 
 We illustrate the behavior of `NUMERIC` with the following example:
+
 ```sql
 SELECT 1234.56::NUMERIC(10, 4) AS num_A,
        1234.56::NUMERIC(10, 1) AS num_B,
@@ -26,6 +27,7 @@ SELECT 1234.56::NUMERIC(10, 4) AS num_A,
 ```
 
 This query yields the following output:
+
 ```text
 num_a     | num_b  |   num_c
 ----------+--------+------------
@@ -87,6 +89,7 @@ It's important to differentiate `DECIMAL`/`NUMERIC` from floating-point types (`
 
 
 ## Additional considerations
+ß
 - **Range and Precision**: Always define `DECIMAL`/`NUMERIC` with an appropriate range and precision based on the application's requirements. Overestimating precision can lead to unnecessary storage and performance overhead.
 
 ## Resources
