@@ -1,5 +1,5 @@
 ---
-title: Postgres Floating-point Data Types
+title: Postgres Floating-point data types
 subtitle: Working with float values in PostgreSQL
 enableTableOfContents: true
 ---

@@ -1,5 +1,5 @@
 ---
-title: Postgres Integer Data Types
+title: Postgres Integer data types
 subtitle: Work with integers in Postgres
 enableTableOfContents: true
 ---

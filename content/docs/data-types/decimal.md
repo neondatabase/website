@@ -1,5 +1,5 @@
 ---
-title: Postgres Decimal Data Types
+title: Postgres Decimal data types
 subtitle: Work with exact numerical values in Postgres
 enableTableOfContents: true
 ---
@@ -80,7 +80,7 @@ total_value
 
 This query calculates the total value of each stock holding with precise decimal representation.
 
-## Differences from Floating-point
+## Differences from floating-point
 
 It's important to differentiate `DECIMAL`/`NUMERIC` from floating-point types (`REAL`, `DOUBLE PRECISION`):
 
