@@ -2,7 +2,7 @@
 title: Postgres jsonb_each() function
 subtitle: Expands JSONB into a record per key-value pair
 enableTableOfContents: true
-updatedOn: '2024-01-27T11:43:32.965Z'
+updatedOn: '2024-02-03T12:14:20.498Z'
 ---
 
 The `jsonb_each` function in Postgres is used to expand a `JSONB` object into a set of key-value pairs. 
