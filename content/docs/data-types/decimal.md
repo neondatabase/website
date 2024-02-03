@@ -2,6 +2,7 @@
 title: Postgres Decimal data types
 subtitle: Work with exact numerical values in Postgres
 enableTableOfContents: true
+updatedOn: '2024-02-03T16:07:31.864Z'
 ---
 
 In Postgres, decimal data types are used to represent numbers with arbitrarily high precision. They are crucial in financial applications and scientific computation, where exact precision is required for numerical calculations.
