@@ -344,6 +344,8 @@
           slug: functions/json_extract_path
         - title: json_extract_path_text
           slug: functions/json_extract_path_text
+        - title: jsonb_extract_path_text
+          slug: functions/jsonb_extract_path_text
         - title: json_object
           slug: functions/json_object
         - title: jsonb_object
