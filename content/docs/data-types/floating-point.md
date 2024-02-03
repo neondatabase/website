@@ -66,9 +66,9 @@ This query yields `3.3333333333333333`, which does not represent the quantity `1
 
 ### Special Floating-point values
 
-Postgres floating-point types can represent special values like `Infinity`, `-Infinity`, and `NaN`(not a number). These values can be useful in certain mathematical or scientific computations.
+Postgres floating-point types can represent special values like `'infinity'`, `'-infinity'`, and `'NaN'` (not a number). These values can be useful in certain mathematical or scientific computations.
 
-Consider a table named `calculations`, which might store the results of various scientific computations, including temperature changes, pressure levels, and calculation errors that could potentially result in 'infinity', '-infinity', or 'NaN' values:
+Consider a table named `calculations`, which might store the results of various scientific computations, including temperature changes, pressure levels, and calculation errors that could potentially result in `'infinity'`, `'-infinity'`, or `'NaN'` values:
 
 ```sql
 CREATE TABLE calculations (
@@ -85,6 +85,8 @@ VALUES
     ('-infinity', 0.0, 0.0001),   -- An example with a negative infinite value
     ('NaN', 101.325, 'NaN');      -- Examples of undefined results or unmeasurable quantities
 ```
+
+Notice that you must use single quotes to wrap these values as shown above.
 
 ## Additional considerations
 
