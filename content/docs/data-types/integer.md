@@ -20,7 +20,7 @@ Note that Postgres doesn't support unsigned integers. All integer types can stor
 
 ## Example usage
 
-Consider a database for a small online bookstore. Here, `SMALLINT` could be used for storing the number of copies of a book in stock. While, `INTEGER` would be appropriate for a unique identifier for each book.
+Consider a database for a small online bookstore. Here, `SMALLINT` could be used for storing the number of copies of a book in stock, while `INTEGER` would be appropriate for a unique identifier for each book.
 
 The query below creates a `books` table with these columns:
 

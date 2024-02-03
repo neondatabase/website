@@ -68,6 +68,24 @@ This query yields `3.3333333333333333`, which does not represent the quantity `1
 
 Postgres floating-point types can represent special values like `Infinity`, `-Infinity`, and `NaN`(not a number). These values can be useful in certain mathematical or scientific computations.
 
+Consider a table named `calculations`, which might store the results of various scientific computations, including temperature changes, pressure levels, and calculation errors that could potentially result in 'infinity', '-infinity', or 'NaN' values:
+
+```sql
+CREATE TABLE calculations (
+    calculation_id SERIAL PRIMARY KEY,
+    temperature_change DOUBLE PRECISION,
+    pressure_level DOUBLE PRECISION,
+    error_margin DOUBLE PRECISION
+);
+
+-- Inserting special floating-point values
+INSERT INTO calculations (temperature_change, pressure_level, error_margin)
+VALUES
+    ('infinity', 101.325, 0.001), -- An example where temperature change is beyond measurable scale
+    ('-infinity', 0.0, 0.0001),   -- An example with a negative infinite value
+    ('NaN', 101.325, 'NaN');      -- Examples of undefined results or unmeasurable quantities
+```
+
 ## Additional considerations
 
 - **Accuracy and rounding**: Be aware of rounding errors. For applications requiring exact decimal representation (like financial calculations), consider using `NUMERIC` or `DECIMAL` types instead.
