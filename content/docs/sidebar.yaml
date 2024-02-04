@@ -302,6 +302,8 @@
           slug: data-types/boolean
         - title: Date and time
           slug: data-types/date-and-time
+        - title: JSON
+          slug: data-types/json
         - title: Decimal
           slug: data-types/decimal
         - title: Floating point
