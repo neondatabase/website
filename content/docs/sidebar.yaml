@@ -302,6 +302,8 @@
           slug: data-types/boolean
         - title: Character
           slug: data-types/character
+        - title: JSON
+          slug: data-types/json
         - title: Decimal
           slug: data-types/decimal
         - title: Floating point
