@@ -300,6 +300,8 @@
           slug: data-types/array
         - title: Boolean
           slug: data-types/boolean
+        - title: JSON
+          slug: data-types/json
         - title: Decimal
           slug: data-types/decimal
         - title: Floating point
