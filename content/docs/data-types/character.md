@@ -4,7 +4,7 @@ subtitle: Work with text data in Postgres
 enableTableOfContents: true
 ---
 
-In Postgres, character data types are used to store strings. There are three primary character types: `CHAR(n)`, `VARCHAR(n)`, and `TEXT`. `CHAR(n)` and `VARCHAR(n)` are suitable for strings with known or limited length, for example, usernames and email addresses. Whereas, `TEXT` is ideal for storing large variable-length strings, such as blog posts or product descriptions. 
+In Postgres, character data types are used to store strings. There are three primary character types: `CHAR(n)`, `VARCHAR(n)`, and `TEXT`. `CHAR(n)` and `VARCHAR(n)` types are suitable for strings with known or limited length; for example, usernames and email addresses. Whereas `TEXT` is ideal for storing large variable-length strings, such as blog posts or product descriptions. 
 
 <CTA />
 
@@ -38,7 +38,7 @@ VALUES
     ('SQL for Professionals', 'An in-depth look at advanced SQL techniques.');
 ```
 
-To find books with descriptions, we can use the following query:
+To find books with descriptions, you can use the following query:
 
 ```sql
 SELECT title
@@ -78,6 +78,8 @@ This query returns the following:
  SQL for Professionals - An in-depth look at advanced SQL techniques.
 ```
 
+For more string functions and operators, see [PostgreSQL String Functions and Operators](https://www.postgresql.org/docs/current/functions-string.html).
+
 ### Pattern matching
 
 With `VARCHAR` and `TEXT`, you can use pattern matching to find specific text. The `LIKE` operator is commonly used for this purpose.
@@ -98,7 +100,7 @@ This returns books whose titles start with "Data".
 
 ## Additional considerations
 
-- **Performance**: There is no significant performance differences between any of the types. Using fixed/limited length types, `CHAR` and `VARCHAR` can be useful for data validation. 
+- **Performance**: There are no significant performance differences between any of the types. Using fixed/limited length types, `CHAR` and `VARCHAR` can be useful for data validation. 
 - **Function Support**: All character types support a wide range of functions and operators for string manipulation and pattern matching. 
 
 ## Resources
