@@ -16,24 +16,23 @@ const DataBranching = () => {
   });
 
   return (
-    <section
-      className="safe-paddings my-48 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20"
-      ref={wrapperRef}
-    >
-      <Container className="z-10" size="md">
-        <div className="max-w-[600px] xl:max-w-[400px] lg:max-w-none">
-          <Heading tag="h2" size="xl" theme="black">
+    <section className="safe-paddings my-48 2xl:my-40 xl:my-32 lg:my-24 md:my-20" ref={wrapperRef}>
+      <Container className="z-10" size="medium">
+        <div>
+          <Heading tag="h2" size="md" theme="black">
             Database branching
           </Heading>
-          <p className="t-xl mt-8 3xl:max-w-[504px] 2xl:mt-7 2xl:max-w-[416px] xl:mt-6 lg:max-w-none">
-            Neon allows you to instantly branch your Postgres database to support modern development
-            workflows. You can create branches for test environments and for every deployment in
-            your CI/CD pipeline.
-          </p>
+          <div className="max-w-[600px] xl:max-w-[400px] lg:max-w-none">
+            <p className="t-xl mt-8 2xl:mt-7 xl:mt-6 lg:max-w-none">
+              Neon allows you to instantly branch your Postgres database to support modern
+              development workflows. You can create branches for test environments and for every
+              deployment in your CI/CD pipeline.
+            </p>
 
-          <p className="t-xl mt-8 3xl:max-w-[504px] 2xl:mt-7 2xl:max-w-[416px] xl:mt-6 lg:max-w-none">
-            Branches are created using the "copy on write" technique, making them virtually free.
-          </p>
+            <p className="t-xl mt-8 2xl:mt-7 xl:mt-6 lg:max-w-none">
+              Branches are created using the "copy on write" technique, making them virtually free.
+            </p>
+          </div>
           <Link
             className="mt-6 inline-block text-2xl font-semibold before:-bottom-1 before:h-1 2xl:text-xl xl:text-lg"
             to="/branching/"
@@ -44,7 +43,7 @@ const DataBranching = () => {
         </div>
       </Container>
       <div
-        className="relative z-[-2] mx-auto mt-[-365px] max-w-[1920px] 3xl:mt-[-18.2vw] 2xl:mt-[-18.94vw] xl:mt-[-18.55vw] lg:-mt-8 sm:mt-0"
+        className="relative z-[-2] mx-auto mt-[-365px] max-w-[1920px] 2xl:mt-[-18.94vw] xl:mt-[-18.55vw] lg:-mt-8 sm:mt-0"
         ref={illustrationWrapperRef}
         aria-hidden
       >
