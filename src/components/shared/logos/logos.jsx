@@ -68,11 +68,11 @@ LogosWall.propTypes = {
 
 const Logos = ({ className = '', withGreenFade = false, logos }) => (
   <Container size="medium" className={clsx('w-full', className)}>
-    <div className="-mb-12 select-none 2xl:-mb-10 md:-mb-8">
+    <div className="-mb-10 select-none md:-mb-8">
       <LogosWall className="logos-sides-fade" logos={logos} />
       {withGreenFade && (
         <LogosWall
-          className="logos-central-mask -translate-y-12 2xl:-translate-y-10 md:-translate-y-8"
+          className="logos-central-mask -translate-y-10 md:-translate-y-8"
           fill="fill-green-45"
           logos={logos}
         />
