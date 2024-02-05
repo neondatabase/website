@@ -19,8 +19,8 @@
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
-    "custom": {
-      "label": "Custom",
+    "enterprise": {
+      "label": "Enterprise",
       "price": "Сustom price",
       "buttonUrl": "/contact-sales",
       "buttonText": "Request trial"
@@ -40,7 +40,7 @@
       "free": false,
       "launch": false,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "2",
@@ -51,7 +51,7 @@
       "free": false,
       "launch": true,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "2",
@@ -62,7 +62,7 @@
       "free": false,
       "launch": false,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -72,7 +72,7 @@
       "free": "free for fair use",
       "launch": "free for fair use",
       "scale": "free for fair use",
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -82,7 +82,7 @@
       "free": "free for fair use",
       "launch": "free for fair use",
       "scale": "free for fair use",
-      "custom": true
+      "enterprise": true
     },
     {
       "feature": "Usage Tiers"
@@ -95,7 +95,7 @@
       "free": "1 included",
       "launch": "10",
       "scale": "50 (included) <span>+ $50/10 projects</span>",
-      "custom": "Custom"
+      "enterprise": "enterprise"
     },
     {
       "rows": "2",
@@ -105,7 +105,7 @@
       "free": "500MB",
       "launch": "10GB",
       "scale": "50GB (included) <span>+ $15/10GB</span>",
-      "custom": "500GB + overage"
+      "enterprise": "500GB + overage"
     },
     {
       "rows": "1",
@@ -115,7 +115,7 @@
       "free": "Up to 10 branches",
       "launch": true,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "3",
@@ -126,7 +126,7 @@
       "free": "183 hours on main branch <span>+ 20 active hours for branching</span>",
       "launch": "10GB",
       "scale": "300 Compute-hours (included) <span>+ $0.16/Compute-hour</span>",
-      "custom": "750 Compute-hours (included) <span>+ $0.16/Compute-hour</span>"
+      "enterprise": "750 Compute-hours (included) <span>+ $0.16/Compute-hour</span>"
     },
     {
       "rows": "2",
@@ -136,7 +136,7 @@
       "free": "Max 1/4 CU, 0 configuration",
       "launch": "Up to 4 CU",
       "scale": "Up to 7 CU",
-      "custom": "7 CU+"
+      "enterprise": "7 CU+"
     },
     {
       "feature": "Feature Tiers"
@@ -149,7 +149,7 @@
       "free": true,
       "launch": true,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -159,7 +159,7 @@
       "free": false,
       "launch": true,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -170,7 +170,7 @@
       "free": true,
       "launch": true,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -180,7 +180,7 @@
       "free": "Up to 24 hours",
       "launch": "Up to 7 days",
       "scale": "Up to 30 days",
-      "custom": "Unlimited"
+      "enterprise": "Unlimited"
     },
     {
       "rows": "1",
@@ -191,7 +191,7 @@
       "free": false,
       "launch": false,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -201,7 +201,7 @@
       "free": false,
       "launch": false,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -211,7 +211,7 @@
       "free": true,
       "launch": true,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -221,7 +221,7 @@
       "free": false,
       "launch": true,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -231,7 +231,7 @@
       "free": false,
       "launch": true,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -241,7 +241,7 @@
       "free": false,
       "launch": true,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "2",
@@ -251,7 +251,7 @@
       "free": "Community Support",
       "launch": "Neon Customer Support",
       "scale": "Prioritized Neon Customer Support",
-      "custom": "Enterprise Support with SLAs"
+      "enterprise": "Enterprise Support with SLAs"
     },
     {
       "rows": "1",
@@ -262,7 +262,7 @@
       "free": false,
       "launch": true,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -272,7 +272,7 @@
       "free": false,
       "launch": false,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -283,7 +283,7 @@
       "free": false,
       "launch": true,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "2",
@@ -295,7 +295,7 @@
       "free": false,
       "launch": false,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -305,7 +305,7 @@
       "free": true,
       "launch": true,
       "scale": true,
-      "custom": true
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -316,7 +316,7 @@
       "free": false,
       "launch": false,
       "scale": false,
-      "custom": true
+      "enterprise": true
     }
   ]
 }

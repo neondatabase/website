@@ -1,10 +1,10 @@
-import Logos from 'components/pages/partners/logos';
 import CaseStudies from 'components/pages/pricing/case-studies';
 import CTA from 'components/pages/pricing/cta';
 import Faq from 'components/pages/pricing/faq';
 import Hero from 'components/pages/pricing/hero';
 import Plans from 'components/pages/pricing/plans';
 import Layout from 'components/shared/layout';
+import Logos from 'components/shared/logos';
 import Testimonials from 'components/shared/testimonials';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
@@ -54,8 +54,8 @@ const PricingPage = () => (
     footerWithTopBorder
   >
     <Hero />
-    <Logos className="mt-36 pt-2 lg:mt-28 lg:pt-0 md:mt-20" logos={logos} />
-    <CaseStudies className="mt-64 xl:mt-48 lg:mt-[124px] md:mt-[88px]" />
+    <Logos className="mt-36 pt-2.5 lg:mt-28 lg:pt-0 md:mt-20" logos={logos} />
+    <CaseStudies className="mt-60 xl:mt-48 lg:mt-[124px] md:mt-[88px]" />
     <Testimonials className="mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" items={sliderItems} />
     <Plans className="my-[200px] px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
     <Faq />

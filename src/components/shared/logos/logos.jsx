@@ -42,7 +42,7 @@ const LogosWall = ({ className, fill, logos }) => (
         const Logo = allLogos[logo];
         return (
           <li key={idx}>
-            <Logo className={clsx('h-12 w-auto 2xl:h-10 md:h-8', fill)} />
+            <Logo className={clsx('h-10 w-auto md:h-8', fill)} />
           </li>
         );
       })}
@@ -52,7 +52,7 @@ const LogosWall = ({ className, fill, logos }) => (
         const Logo = allLogos[logo];
         return (
           <li key={idx}>
-            <Logo className={clsx('h-12 w-auto 2xl:h-10 md:h-8', fill)} />
+            <Logo className={clsx('h-10 w-auto md:h-8', fill)} />
           </li>
         );
       })}
