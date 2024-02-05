@@ -7,31 +7,45 @@ updatedOn: '2023-10-07T10:43:33.385Z'
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
 
-This guide demonstrates how to connect a Neon Postgres database with an application deployed on Deno Deploy. To follow the instructions in this guide, you will need:
+This guide demonstrates how to connect to a Neon Postgres database from a simple Deno application that uses the `postgres` module to interact with the database.
 
-- A Deno Deploy account to deploy your application. Visit [Deno Deploy](https://deno.com/deploy) to sign up or log in.
-- A Neon account to deploy your Postgres database. If you do not have one, sign up at [Neon](https://neon.tech). 
+The guide covers two deployment options:
 
-The example application in this guide is a simple Deno application that uses the `postgres` module to interact with the database. 
+- [Deploying your application locally with Deno Runtime](#deploy-your-application-locally-with-deno-runtime)
+- [Deploying your application with the Deno Deploy serverless platform ](#deploy-your-application-with-deno-deploy)
 
-## Create a Neon project
+## Prerequisites
 
-1. Navigate to the [Neon Console](https://console.neon.tech/).
-1. Select **Create a project**.
-1. Enter a name for the project (`neon-deno`, for example), and select a Postgres version and region.
-1. Click **Create project**.
+To follow the instructions in this guide, you will need:
 
-After the project is created, the project dashboard will contain a section specifying your Neon connection string, which appears similar to the following:
+- A Neon project. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
+- To use the Deno Deploy serverless platform, you will require a Deno Deploy account. Visit [Deno Deploy](https://deno.com/deploy) to sign up or log in.
+
+## Retrieve your Neon database connection string
+
+Retrieve your database connection string from the **Connection Details** widget in the Neon Console.
+
+Your connection string should look something like this:
+
+<CodeBlock shouldWrap>
 
 ```bash
-postgres://[user]:[password]@[neon_hostname]/[dbname]
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
 ```
 
-Store this value in a safe place. It is required later. The connection string specifies `neondb` as the database. This is the ready-to-use database created with each Neon project. You will use this database with the example application.  
+You'll need the connection string a little later in the setup.
 
-## Install Deno and test the application locally
+</CodeBlock>
 
-Follow the instructions on the [Deno website](https://docs.deno.com/deploy/manual/#install-deno-and-deployctl) to install the Deno runtime (to run Deno scripts locally) and `deployctl`(CLI to deploy projects to Deno Deploy) on your local machine. 
+## Deploy your application locally with Deno Runtime
+
+Deno Runtime is an open-source runtime for TypeScript and JavaScript. The following instructions describe how to deploy an example application locally using Deno Runtime.
+
+### Install the Deno Runtime and deployctl
+
+Follow the [Install Deno and deployctl](https://docs.deno.com/deploy/manual/#install-deno-and-deployctl) instructions in the Deno documentation to install the Deno runtime (to run Deno scripts locally) and `deployctl` command-line utility on your local machine.
+
+### Create the example application
 
 Next, we write a simple script `server.ts` that connects to the Neon database and returns the data from the `neondb` database. 
 
@@ -107,6 +121,8 @@ serve(async (req) => {
 
 The script creates a table named `books` in the `neondb` database and inserts some data into it. It then starts a server that listens for requests on the `/books` endpoint. When a request is received, the script returns the data from the `books` table.
 
+### Run the script locally
+
 To run the script locally, set the `DATABASE_URL` environment variable to the Neon connection string you copied earlier. 
     
 ```bash
@@ -119,23 +135,48 @@ Then, run the command below to start the app server. The `--allow-env` flag allo
 deno run --allow-env --allow-net server.ts
 ```
 
-You can curl the `/books` endpoint to see the data returned by the script:
+### Query the endpoint
+
+You can request the `/books` endpoint with a `cURL` command to view the data returned by the script:
 
 ```bash
 curl http://localhost:8000/books
 ```
 
+The `cURL` command should return the following results:
+
+```json
+[
+  {
+    "id": 1,
+    "title": "The Hobbit",
+    "author": "J. R. R. Tolkien"
+  },
+  {
+    "id": 2,
+    "title": "Harry Potter and the Philosopher's Stone",
+    "author": "J. K. Rowling"
+  },
+  {
+    "id": 3,
+    "title": "The Little Prince",
+    "author": "Antoine de Saint-Exupéry"
+  }
+]%                                     
+```
+
 ## Deploy your application with Deno Deploy
 
-### Set up the project
-1. Register/log in to your Deno Deploy dashboard, and navigate to the [New Project](https://dash.deno.com/new) page. 
-1. Our application is a simple Deno script, so we select the `Create an empty project` option. 
-1. Click on the `Settings` button and add the following environment variable:
+Deno Deploy is a globally distributed platform for serverless JavaScript applications. Your JavaScript, TypeScript, and WebAssembly code runs on managed servers geographically close to your users, enabling low latency and faster response times. Deploy applications run on light-weight V8 isolates powered by the Deno runtime.
 
-    ```bash
-    DATABASE_URL=YOUR_NEON_CONNECTION_STRING
-    ```
-1. To authenticate `deployctl` from the terminal, we will need an access token to our Deno Deploy account. Navigate back to the [dashboard](https://dash.deno.com/account#access-tokens) and create a new access token. Copy the token value and set the following environment variable in the terminal:
+### Set up the project
+
+1. If you have not done so already, install the `deployctl` command-line utility, as described [above](#install-the-deno-runtime-and-deployctl).
+1. If you have not done so already, create the example `server.ts` application on your local machine, as described [above](#create-the-example-application).
+1. Register or log in to [Deno](https://deno.com/), and navigate to the [Create a project](https://dash.deno.com/new) page, where you can select a project template for your preferred framework, link an existing code repo, or create an empty project.
+1. The example application in this guide is a simple Deno script, so you can select the **Create an empty project** option. Note the name of your Deno Deploy project. You will need it in a later step. Projects are given a generated Heroku-style name, which will look something like this: `cloudy-otter-57`.
+1. Click the `Settings` button and add a `DATABASE_URL` environment variable. Set the value to your Neon connection string and click **Save**.
+1. To authenticate `deployctl` from the terminal, you will need an access token for your Deno Deploy account. Navigate back to the [dashboard](https://dash.deno.com/account#access-tokens) and create a new access token. Copy the token value and set the following environment variable on your local machine by running this command from your terminal:
 
     ```bash
     export DENO_DEPLOY_TOKEN=YOUR_ACCESS_TOKEN
@@ -143,15 +184,15 @@ curl http://localhost:8000/books
 
 ### Deploy using deployctl
 
-To deploy this application, navigate to the directory with `server.ts` and run the following command:
+To deploy the application, navigate to the directory with your `server.ts` application, and run the following command:
 
 ```bash
 deployctl deploy --project=YOUR_DENO_DEPLOY_PROJECT_NAME --prod server.ts
 ```
 
-Make sure the `DENO_DEPLOY_TOKEN` environment variable is correctly set. The `--prod` flag specifies that the application should be deployed to the production environment. 
+The `--prod` flag specifies that the application should be deployed to the production environment. 
 
-The `deployctl` command will deploy the application to the Deno Deploy platform. Once the deployment is complete, you will see a message similar to the following:
+The `deployctl` command deploys the application to the Deno Deploy serverless platform. Once the deployment is complete, you'll' see a message similar to the following:
 
 ```bash
 $ deployctl deploy --project=cloudy-otter-57 --prod server.ts
@@ -169,9 +210,9 @@ View at:
  - https://cloudy-otter-57.deno.dev
 ```
 
-### Verifying the Deployment
+### Verifying the deployment
 
-The application can now be accessed at the URL specified in the output. You can verify its connection to the Neon database by visiting the `/books` endpoint in the browser, or using a tool like `curl` to see if the data is returned as expected. 
+The application can now be accessed at the URL specified in the output. You can verify its connection to your Neon database by visiting the `/books` endpoint in your browser or using a tool like `cURL` to see if the data is returned as expected. 
 
 ```bash
 $ curl https://cloudy-otter-57.deno.dev/books
@@ -194,17 +235,20 @@ $ curl https://cloudy-otter-57.deno.dev/books
 ]
 ```
 
-To check the health of the deployment and modify any settings, navigate to the [dashboard page](https://dash.deno.com/account/projects) for the project. 
+To check the health of the deployment or modify settings, navigate to the [Project Overview](https://dash.deno.com/account/projects) page and select your project from the **Projects** list. 
 
 ### Deploying using Github
 
-When deploying a more complex Deno application, with custom build steps, you should use the Github integeration to deploy your application. For more information, see [Deploying with GitHub](https://docs.deno.com/deploy/manual/ci_github).
+When deploying a more complex Deno application, with custom build steps, you can use Deno's Github integration. The integration lets you link a Deno Deploy project to a GitHub repository. For more information, see [Deploying with GitHub](https://docs.deno.com/deploy/manual/how-to-deploy).
 
 ## Removing the example application and Neon project
 
-To delete the example application on Deno Deploy to avoid incurring any charges, follow these steps:
+To delete the example application on Deno Deploy, follow these steps:
 
-1. From the Deno Deploy [dashboard](https://dash.deno.com/account/projects), navigate to the **Project** to delete.
-1. On the **Settings** tab, select **Danger Zone** and click **Delete**.
+1. From the Deno Deploy [dashboard](https://dash.deno.com/account/projects), select your **Project**.
+1. Select the **Settings** tab.
+1. In the **Danger Zone** section, click **Delete** and follow the instructions.
 
 To delete your Neon project, refer to [Delete a project](/docs/manage/projects#delete-a-project).
+
+<NeedHelp/>
