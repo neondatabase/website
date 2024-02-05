@@ -5,14 +5,14 @@ enableTableOfContents: true
 updatedOn: '2024-01-28T13:46:59.390Z'
 ---
 
-You can the `json_extract_path` function to extract the value of a specific key at a specified path within a `JSON` document. This approach is performant compared to querying the entire `JSON` payload and processing it on the application side. It is particularly useful when dealing with nested `JSON` structures.
+You can use the `json_extract_path` function to extract the value of a specific key at a specified path within a `JSON` document. This approach is performant compared to querying the entire `JSON` payload and processing it on the application side. It is particularly useful when dealing with nested `JSON` structures.
 
 <CTA />
 
 ## Function signature
 
 ```sql
-json_extract_path(from_json json, VARIADIC path_elems text[])
+json_extract_path(from_json JSON, VARIADIC path_elems text[]) -> JSON
 ```
 
 ## `json_extract_path` example
