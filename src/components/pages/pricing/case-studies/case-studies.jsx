@@ -69,7 +69,7 @@ const CaseStudies = ({ className = null }) => (
             Many firms choose tailored plans for enhanced capabilities.{' '}
             <Link
               className="inline-block decoration-1 underline-offset-4 hover:!decoration-green-45/0"
-              to="/"
+              to="/case-studies"
               theme="green-underlined"
             >
               Explore case studies

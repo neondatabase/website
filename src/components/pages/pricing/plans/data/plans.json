@@ -4,25 +4,25 @@
     "free": {
       "label": "Free Tier",
       "price": "Free forever",
-      "buttonUrl": "/",
+      "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Start for free"
     },
     "launch": {
       "label": "Launch",
       "price": "$29<span>/mo</span>",
-      "buttonUrl": "/",
+      "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
     "scale": {
       "label": "Scale",
       "price": "$69<span>/mo</span>",
-      "buttonUrl": "/",
+      "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
     "custom": {
       "label": "Custom",
       "price": "Сustom price",
-      "buttonUrl": "/",
+      "buttonUrl": "/contact-sales",
       "buttonText": "Request trial"
     }
   },

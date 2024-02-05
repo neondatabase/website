@@ -45,7 +45,7 @@ const items = [
       { title: 'Neon customer support' },
     ],
     button: {
-      url: '#estimates',
+      url: LINKS.signup,
       text: 'Get started',
       theme: 'primary',
       event: 'pricing_hero_pro_btn_click',
@@ -63,10 +63,10 @@ const items = [
       { title: 'IP allow' },
     ],
     button: {
-      url: LINKS.contactSales,
+      url: LINKS.signup,
       text: 'Get started',
       theme: 'white-outline',
-      event: 'pricing_hero_custom_btn_click',
+      event: 'pricing_hero_pro_btn_click',
     },
   },
   {
@@ -153,15 +153,9 @@ const Hero = () => {
                       'relative z-10 flex min-h-full flex-col rounded-[10px]  px-7 pb-9 pt-5 transition-colors duration-500 xl:px-6 xl:py-5 sm:p-5'
                     )}
                     to={button.url}
-                    onClick={(e) => {
+                    onClick={() => {
                       sendGtagEvent(button.event);
                       sendSegmentEvent(button.event);
-
-                      if (button.url === '#estimates') {
-                        e.preventDefault();
-                        const estimates = document.getElementById('estimates');
-                        estimates.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }
                     }}
                   >
                     <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">
@@ -221,7 +215,7 @@ const Hero = () => {
                       <m.span
                         className={clsx(
                           'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border border-green-45 transition-colors duration-300 md:!opacity-100',
-                          isLoad !== true && '!opacity-100'
+                          isLoad && '!opacity-100'
                         )}
                         initial="from"
                         exit="exit"

@@ -22,7 +22,16 @@ const rowClass = {
 
 const DEFAULT_ROWS_TO_SHOW = 8;
 
-const TableHeading = ({ label, price, buttonUrl, buttonText, isLabelsColumn, isFeaturedPlan }) => {
+const TableHeading = ({
+  className,
+  label,
+  price,
+  buttonUrl,
+  buttonText,
+  isLabelsColumn,
+  isFeaturedPlan,
+}) => {
+  // placeholder for the labels column
   if (isLabelsColumn) {
     return (
       <div className="invisible" aria-hidden>
@@ -40,7 +49,7 @@ const TableHeading = ({ label, price, buttonUrl, buttonText, isLabelsColumn, isF
   }
 
   return (
-    <div className={clsx(isFeaturedPlan && 'px-[52px] xl:px-[38px]', 'relative z-10')}>
+    <div className={clsx('relative z-10', isFeaturedPlan && 'px-[52px] xl:px-[38px]', className)}>
       <h3
         className={clsx(
           isFeaturedPlan && 'text-green-45',
@@ -66,6 +75,7 @@ const TableHeading = ({ label, price, buttonUrl, buttonText, isLabelsColumn, isF
 };
 
 TableHeading.propTypes = {
+  className: PropTypes.string,
   label: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
@@ -142,7 +152,7 @@ const Table = () => {
                 isScaleColumn &&
                   'basis-[308px] before:absolute before:inset-x-7 before:inset-y-0 before:z-0 before:rounded-md before:border before:border-gray-new-15 before:bg-pricing-table-featured-column xl:basis-[236px] xl:before:inset-x-5',
                 isLabelsColumn &&
-                  'z-30 flex-1 bg-black-new lg:sticky lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(23,25,28,.06)]',
+                  'z-30 flex-1 bg-black-new lg:sticky  lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)]',
                 i === 1 && 'min-w-[180px] basis-[252px] xl:basis-[196px] lg:basis-[180px]',
                 !isScaleColumn &&
                   i !== 1 &&
@@ -152,6 +162,7 @@ const Table = () => {
               key={key}
             >
               <TableHeading
+                className={clsx(i === 1 && 'lg:pl-5')}
                 isLabelsColumn={isLabelsColumn}
                 isFeaturedPlan={isScaleColumn}
                 {...labelList[isLabelsColumn ? arr[1] : key]}
@@ -169,15 +180,14 @@ const Table = () => {
                             'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-20/25',
                           isGroupTitle
                             ? 'pb-3 pt-11 lg:pt-10'
-                            : clsx('py-3 lg:py-2.5', rowClass[item.rows]),
+                            : ['py-3 lg:py-2.5', rowClass[item.rows]],
                           !isGroupTitle &&
                             !rowsWithGroupTitles.includes(index - 1) &&
                             'border-t border-dashed border-gray-new-20/25',
                           currentRow === index.toString() && !isGroupTitle
                             ? 'bg-gray-new-8 before:opacity-100 lg:bg-transparent'
                             : 'before:opacity-0',
-                          'before:absolute before:-inset-y-px before:-left-5 before:z-0 before:w-5 before:rounded-bl-lg before:rounded-tl-lg before:bg-gray-new-8 before:transition-opacity lg:before:hidden',
-                          'sm:before:hidden'
+                          'before:absolute before:-inset-y-px before:-left-5 before:z-0 before:w-5 before:rounded-bl-lg before:rounded-tl-lg before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
                         )}
                         data-row-id={index}
                         key={index}
@@ -217,11 +227,11 @@ const Table = () => {
                         i === 1 && 'pr-12 xl:pr-9 lg:pl-5',
                         rowsWithGroupTitles.includes(index)
                           ? 'h-[70px] lg:h-[66px]'
-                          : clsx('py-3 lg:py-2.5', rowClass[item.rows]),
+                          : ['py-3 lg:py-2.5', rowClass[item.rows]],
                         item[key] !== undefined &&
                           !rowsWithGroupTitles.includes(index - 1) &&
                           'border-t border-dashed border-gray-new-20/25',
-                        key === 'scale' && 'px-[52px] xl:px-[38px]',
+                        isScaleColumn && 'px-[52px] xl:px-[38px]',
                         currentRow === index.toString() &&
                           !rowsWithGroupTitles.includes(index) &&
                           'bg-gray-new-8 before:opacity-100 lg:bg-transparent',
@@ -253,6 +263,7 @@ const Table = () => {
                 <Button
                   className={clsx(
                     isScaleColumn && 'ml-[52px] xl:ml-[38px]',
+                    i === 1 && 'lg:ml-5',
                     'relative z-20 mt-8 h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-6 xl:h-9 xl:max-w-[160px] lg:w-[140px] sm:max-w-none'
                   )}
                   size="xs"
