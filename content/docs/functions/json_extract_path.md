@@ -15,7 +15,7 @@ You can use the `json_extract_path` function to extract the value at a specified
 json_extract_path(from_json JSON, VARIADIC path_elems TEXT[]) -> JSON
 ```
 
-## `json_extract_path` example
+## Example usage
 
 To illustrate the `json_extract_path` function in Postgres, let's consider a scenario where we have a table storing information about books. Each book has a `JSON` column containing details such as `title`, `author`, and publication `year`. You can create the `book` table using the SQL statements shown below.
 

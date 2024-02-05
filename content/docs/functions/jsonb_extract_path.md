@@ -15,7 +15,7 @@ You can use the `jsonb_extract_path` function to extract the value at a specifie
 jsonb_extract_path(from_json JSONB, VARIADIC path_elems TEXT[]) -> JSONB
 ```
 
-## `jsonb_extract_path` example
+## Example usage
 
 To illustrate the `jsonb_extract_path` function in Postgres, let's consider a scenario where we have a table storing information about books. Each book has a `JSONB` column containing details such as `title`, `author`, and publication `year`. You can create the `book` table using the SQL statements shown below.
 
