@@ -358,6 +358,8 @@
           slug: functions/jsonb_each
         - title: json_extract_path
           slug: functions/json_extract_path
+        - title: jsonb_extract_path
+          slug: functions/jsonb_extract_path          
         - title: json_extract_path_text
           slug: functions/json_extract_path_text
         - title: jsonb_extract_path_text
