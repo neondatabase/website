@@ -47,7 +47,7 @@ Follow the [Install Deno and deployctl](https://docs.deno.com/deploy/manual/#ins
 
 ### Create the example application
 
-Next, create the `server.ts` script on your local machine. The script connects to the Neon database and returns data from a `books` table in your database `neondb` database.
+Next, create the `server.ts` script on your local machine.
 
 ```ts
 // server.ts
