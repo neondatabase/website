@@ -12,7 +12,7 @@ You can use the `jsonb_extract_path` function to extract the value at a specifie
 ## Function signature
 
 ```sql
-jsonb_extract_path(from_json JSONB, VARIADIC path_elems text[]) -> JSONB
+jsonb_extract_path(from_json JSONB, VARIADIC path_elems TEXT[]) -> JSONB
 ```
 
 ## `jsonb_extract_path` example
