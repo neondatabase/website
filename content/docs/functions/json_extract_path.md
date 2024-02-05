@@ -259,3 +259,5 @@ The query above, which specifies an invalid path (`'speks'` instead of `'specs'`
 
 - [PostgreSQL documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
 - [PostgreSQL documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
+
+<NeedHelp />
