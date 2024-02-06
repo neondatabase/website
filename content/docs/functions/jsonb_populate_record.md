@@ -54,7 +54,7 @@ This query returns the following result:
 
 ## Advanced examples
 
-### Handling partial data
+### Handling partial data with `jsonb_populate_record`
 
 For data points where the `JSONB` objects have missing keys, `jsonb_populate_record` can still cast them into legible records. 
 
@@ -78,7 +78,7 @@ This query returns the following:
 | 124| Jane Smith | Sales      | 68000  |
 ```
 
-### Working with custom types
+### Using `jsonb_populate_record` with custom types 
 
 The base record doesn't need to have the type of a table row and can be a [custom Postgres type](https://www.postgresql.org/docs/current/sql-createtype.html) too. For example, here we first define a custom type `address` and use `jsonb_populate_record` to cast a `JSONB` object to it:
 

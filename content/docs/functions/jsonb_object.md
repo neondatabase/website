@@ -66,7 +66,7 @@ This query returns the following result:
 
 ## Advanced examples
 
-### Creating nested JSON objects
+### Creating nested JSON objects with `jsonb_object`
 
 You could use `jsonb_object` to create nested `JSONB` objects for representing more complex data. However, since `jsonb_object` only expects text values for each key, we will need to combine it with other `JSONB` functions like `jsonb_build_object`. For example:
 
