@@ -68,7 +68,7 @@ This query returns the following results:
 
 ## Advanced examples
 
-### Building nested JSON objects
+### Nested objects with `json_build_object`
 
 Let’s say we have a table of products with an `attributes` column containing JSON data:
 
@@ -140,7 +140,7 @@ This query returns the following results:
 | 2  | Coffee Mug  | 12.99 | {"category" : "Kitchen", "description" : "A ceramic mug with a funny design", "attributes" : {"color" : "White", "size" : "Large"}}
 ```
 
-### Use with `ORDER BY`
+### Order `json_build_object` output
 
 Combine `json_build_object` with `ORDER BY` to sort the results based on a specific attribute within the JSON structure.
 
@@ -176,7 +176,7 @@ This query returns the following results:
 | 2  | Coffee Mug | 12.99 | {"category" : "Kitchen", "description" : "A ceramic mug with a funny design", "attributes" : {"color" : "White", "size" : "Small", "rating" : "3.8"}}
 ```
 
-### Use with `GROUP BY`
+### Grouped `json_build_object` output
 
 To create a `JSON` object that groups the total price for each category of products in the products table:
 

@@ -87,7 +87,7 @@ INSERT INTO products (id, attributes) VALUES
 | 3      | {"name": "Smartphone", "specs": {"brand": "Apple", "RAM": "8GB", "storage": {"type": "UFS", "capacity": "128GB"}}, "tags": ["ios", "iphone"]}     |
 ```
 
-### Extract a value from a nested JSON object
+### Extract from nested JSON objects with `json_extract_path`
 
 Let's use `json_extract_path` to retrieve information about the storage type and capacity for each product, demonstrating how to extract values from a nested `JSON` object.
 
@@ -109,7 +109,7 @@ This query returns the following values:
 | 3  | "UFS"        | "128GB"          |
 ```
 
-### Extract values from JSON array
+### Extract from array with `json_extract_path`
 
 Now, let's use `json_extract_path` to extract information about the associated tags as well, demonstrating how to extract values from a `JSON` array.
 
@@ -133,7 +133,7 @@ This query returns the following values:
 | 3  | "UFS"        | "128GB"          | "ios"     | "iphone"   |
 ```
 
-### Join data
+### Use `json_extract_path` in Joins
 
 Let's say you have two tables, `employees` and `departments`, and the `employees` table has a `JSON` column named `details` that contains information about each employee's department. You want to join these tables based on the department information stored in the `JSON` column. The table schemas and data used in this example are shown below. 
 
