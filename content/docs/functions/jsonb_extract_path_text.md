@@ -131,7 +131,7 @@ Performance considerations for `jsonb_extract_path_text` are similar to those fo
 ### Alternative functions
 
 - [jsonb_extract_path](/docs/functions/jsonb_extract_path) - This is a similar function that can extract data from a `JSONB` object at the specified path. The difference is that it returns a `JSONB` object, while `jsonb_extract_path_text` always returns text. The right function to use depends on what you want to use the output data for. 
-- `json_extract_path_text` - This is a similar function that can extract data from a `JSON` object, (instead of `JSONB`) at the specified path. 
+- [json_extract_path_text](/docs/functions/json_extract_path_text) - This is a similar function that can extract data from a `JSON` object, (instead of `JSONB`) at the specified path. 
 
 ## Resources
 

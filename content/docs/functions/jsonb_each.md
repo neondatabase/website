@@ -113,7 +113,7 @@ When working with large `JSONB` objects, `jsonb_each` may lead to performance ov
 
 - `jsonb_each_text` - Similar functionality to `jsonb_each` but returns the value as a text type instead of `JSONB`. 
 - `jsonb_object_keys` - It returns only the set of keys in the `JSONB` object, without the values.
-- `json_each` - It provides the same functionality as `jsonb_each`, but accepts `JSON` input instead of `JSONB`. 
+- [json_each](/docs/functions/json_each) - It provides the same functionality as `jsonb_each`, but accepts `JSON` input instead of `JSONB`. 
 
 ## Resources
 
