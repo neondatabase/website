@@ -101,7 +101,7 @@ The `neon_utils` extension provides a `num_cpus()` function you can use to monit
 
 ### How to size your compute endpoint
 
-Ideally, a right-sized compute should hold your working set in memory and handle the maximum number of concurrent connections.
+Ideally, for smaller datasets, you want to keep as much of your dataset in memory (RAM) as possible. This improves performance by minimizing I/O operations. We recommend a compute size that can hold your full dataset in memory. For larger datasets, a right-sized compute should hold your working set in memory.
 
 <Admonition type="note">
 Neon Pro Plan users can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM). 
