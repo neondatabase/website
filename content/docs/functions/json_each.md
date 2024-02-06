@@ -50,7 +50,7 @@ This query returns the following results:
 
 ## Advanced examples
 
-### Custom column names
+### `json_each` custom column names
 
 You can use `AS` to specify custom column names for the key and value columns. 
 
@@ -70,7 +70,7 @@ This query returns the following results:
 | email     | "johndoe@example.com" |
 ```
 
-### Usage as a table or row source
+### Use `json_each` as a table or row source
 
 Since `json_each` returns a set of rows, you can use it as a table source in a `FROM` clause. This lets us join the expanded `JSON` data in the output with other tables.
 

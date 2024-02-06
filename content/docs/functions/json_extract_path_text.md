@@ -53,7 +53,7 @@ This query returns the following:
 
 ## Advanced examples
 
-### Using extracted value to join tables
+### Use `json_extract_path_text` in Joins
 
 Let's say we have another table, `hobbies`, that includes additional information such as difficulty level and the average cost to practice each hobby. 
 
@@ -99,7 +99,7 @@ This query returns the following:
 | Alice     | Reading    |
 ```
 
-### Extracting values from JSON arrays
+### Extracting values from JSON arrays with `json_extract_path_text`
 
 `json_extract_path_text` can also be used to extract values from `JSON` arrays. 
 

@@ -64,7 +64,7 @@ This query returns the following result:
 
 Let's now take a look at a few advanced examples.
 
-### Use with `array_agg`
+### Use `array_to_json` with `array_agg`
 
 Imagine you have an e-commerce website with user's shopping cart items, as shown in the following `cart_items` table:
 
@@ -140,7 +140,7 @@ And this is the resulting `JSON` structure:
 ]
 ```
 
-### Handling `NULL` values
+### Handling `NULL` in `array_to_json`
 
 The `array_to_json` function handles `NULL` values gracefully, representing them as `JSON` `null` within the resulting array.
 
@@ -200,7 +200,7 @@ This section outlines additional considerations when using the `array_to_json` f
 
 In scenarios where more control over the `JSON` structure is required, consider using the `json_build_array` and `json_build_object` functions. These functions allow for a more fine-grained construction of `JSON` objects and arrays.
 
-### Use `pretty_bool`
+### Formatting `array_to_json` output with `pretty_bool`
 
 The `pretty_bool` parameter, when set to `true`, instructs `array_to_json` to format the output with indentation and line breaks for improved readability.
 

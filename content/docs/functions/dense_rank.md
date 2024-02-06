@@ -80,7 +80,7 @@ This query returns the following values:
 
 This section shows advanced usage examples for the `dense_rank` function. 
 
-### Use with `PARTITION BY` and `ORDER BY` clause
+### `dense_rank` with `PARTITION BY` and `ORDER BY` clause
 
 Let's modify the previous example to include a `class_id` column to represent different classes:
 
@@ -142,9 +142,9 @@ This query returns the following values:
 
 This partitions the result set into two groups based on the `class_id` column, and the ranking is performed independently within each class. As a result, students are ranked within their respective classes, and the ranking starts fresh for each class.
 
-## Implementing `KEEP`-like functionality
+### Filter `dense_rank` results in `WHERE` clause
 
-The `dense_rank` function does not have a `KEEP` clause as in Oracle. However, you can achieve similar using another approach.
+To filter on `dense_rank` results in a `WHERE` clause, move the function into a common table expression (CTE).
 
 Let's say you want to find the dense rank for the top two scores within each class:
 

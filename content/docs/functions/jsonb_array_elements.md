@@ -69,7 +69,7 @@ This query returns the following values:
 
 This section shows advanced `jsonb_array_elements` examples.
 
-## Filtering
+## Filtering `jsonb_array_elements`
 
 You can use the `jsonb_array_elements` function to extract the sizes from the `JSON` data and then filter the products based on a specific color (or size):
 
@@ -90,7 +90,7 @@ This query returns the following values:
 |  4 | Jeans    | {"sizes": ["28", "30", "32", "34"], "colors": ["Blue", "Black"]}       |
 ```
 
-## Handling null
+## Handling `NULL` in `jsonb_array_elements`
 
 This example updates the table to insert another product (`Socks`) with one of the values in the `sizes` as `null`:
 
@@ -129,7 +129,7 @@ This query returns the following values:
 |  6 | Socks | "XL" |
 ```
 
-## Ordinality
+### Ordering `json_array_elements` output using `WITH ORDINALITY`
 
 Let's consider a scenario where you have a table named `workflow` with a `JSONB` column `steps` representing sequential steps in a workflow:
 
@@ -190,7 +190,7 @@ This query returns the following values:
 | Order Processing    | "Delivery"             |          5 |
 ```
 
-### Nested arrays
+### Nested arrays in `jsonb_array_elements`
 
 You can also handle nested arrays with `jsonb_array_elements`.
 
@@ -257,7 +257,7 @@ This query returns the following values:
 |  2 | Smartphone | Y     | 6.7 inch | Red    |
 ```
 
-### Using joins
+### `jsonb_array_elements` with joins
 
 Let's assume you want to retrieve a list of users along with their roles in each organization. The data is stored in an `organizations` table and a `users` table.
 
@@ -338,7 +338,7 @@ This query returns the following values:
 
 This section outlines additional considerations including alternative functions.
 
-### Alternative option
+### Alternatives to `jsonb_array_elements`
 
 Use `jsonb_array_elements` when you need to maintain the `JSON` structure of the elements for further `JSON`-related operations or analysis and `jsonb_array_elements_text` if you need to work with the extracted elements as plain text for string operations, text analysis, or integration with text-based functions.
 

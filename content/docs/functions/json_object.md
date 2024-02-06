@@ -66,7 +66,7 @@ This query returns the following result:
 
 ## Advanced examples
 
-### Creating nested JSON objects
+### Creating nested JSON objects with `json_object`
 
 You could use `json_object` to create nested `JSON` objects for representing more complex data. However, since `json_object` only expects text values for each key, we will need to combine it with other `JSON` functions like `json_build_object`. For example:
 
