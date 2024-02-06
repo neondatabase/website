@@ -257,6 +257,5 @@ To delete your Neon project, refer to [Delete a project](/docs/manage/projects#d
 - [Deno Runtime Quickstart](https://docs.deno.com/runtime/manual)
 - [Deno Deploy Quickstart](https://docs.deno.com/deploy/manual/)
 - [demo-postgres driver](https://deno.land/x/postgres@ls)
-- [deno-postgres driver documentation](https://deno-postgres.com/#/)
 
 <NeedHelp/>

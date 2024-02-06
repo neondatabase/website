@@ -244,11 +244,11 @@ Indexing `JSONB` documents can also significantly improve `jsonb_extract_path` q
 
 ### Alternative functions
 
-* [jsonb_extract_path_text](/docs/functions/jsonb_extract_path_text.md) - The regular `jsonb_extract_path` function returns the extracted value as a `JSONB` object or array, preserving its `JSON` structure, whereas the alternative `jsonb_extract_path_text` function returns the extracted value as a plain text string, casting any `JSONB` objects or arrays to their string representations.
+* [jsonb_extract_path_text](/docs/functions/jsonb_extract_path_text) - The regular `jsonb_extract_path` function returns the extracted value as a `JSONB` object or array, preserving its `JSON` structure, whereas the alternative `jsonb_extract_path_text` function returns the extracted value as a plain text string, casting any `JSONB` objects or arrays to their string representations.
 
     Use the regular `jsonb_extract_path` function when you need to apply `JSONB`-specific functions or operators to the extracted value, requiring `JSONB` data types. The alternative `jsonb_extract_path_text` function is preferable if you need to work directly with the extracted value as a string, for text processing, concatenation, or comparison.
 
-* [json_extract_path](/docs/functions/json_extract_path.md) - The `jsonb_extract_path` function works with the `JSONB` data type, which offers a binary representation of `JSON` data, whereas `json_extract_path` takes a `JSON` value as an input and returns `JSON` too. The `JSONB` variant is typically more performant at query time, which is even more pronounced with larger `JSON` data payloads and frequent path extractions.
+* [json_extract_path](/docs/functions/json_extract_path) - The `jsonb_extract_path` function works with the `JSONB` data type, which offers a binary representation of `JSON` data, whereas `json_extract_path` takes a `JSON` value as an input and returns `JSON` too. The `JSONB` variant is typically more performant at query time, which is even more pronounced with larger `JSON` data payloads and frequent path extractions.
 
 ## Resources
 
