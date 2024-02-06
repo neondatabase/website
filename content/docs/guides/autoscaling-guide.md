@@ -86,7 +86,7 @@ See below for some rules of thumb on actions you might want to take based on tre
 
 ### Start with a good minimum
 
-Ideally, you want to keep your entire [working set](/docs/reference/glossary#working-set) cached in memory (RAM) at all times. We recommend you set a large enough limit to accommodate your working set. For instructions on how to determine your working set, see [how to size your compute endpoint](/docs/manage/endpoints#how-to-size-your-compute-endpoint).
+Ideally, for smaller datasets, you want to keep as much of your dataset in memory (RAM) as possible. This improves performance by minimizing I/O operations. We recommend setting a large enough minimum limit to fit your full dataset in memory. For larger datasets and more sizing advice, see [how to size your compute endpoint](/docs/manage/endpoints#how-to-size-your-compute-endpoint).
 
 ### Setting your maximum
 
