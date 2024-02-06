@@ -50,7 +50,7 @@ This query returns the following results:
 
 ## Advanced examples
 
-### Custom column names
+### Assign custom names to columns output by `jsonb_each`
 
 You can use `AS` to specify custom column names for the key and value columns. 
 
@@ -70,7 +70,7 @@ This query returns the following results:
 | email     | "johndoe@example.com" |
 ```
 
-### Usage as a table or row source
+### Use `jsonb_each` output as a table or row source
 
 Since `jsonb_each` returns a set of rows, you can use it as a table source in a `FROM` clause. This lets us join the expanded `JSONB` data in the output with other tables.
 
