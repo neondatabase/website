@@ -2,7 +2,7 @@
 title: Postgres json_build_object() function
 subtitle: Builds a JSON object out of a variadic argument list
 enableTableOfContents: true
-updatedOn: '2024-02-06T09:55:01.559Z'
+updatedOn: '2024-02-06T14:40:40.246Z'
 ---
 
 

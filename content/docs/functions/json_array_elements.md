@@ -2,7 +2,7 @@
 title: Postgres json_array_elements() function
 subtitle: Expand a JSON array into a set of rows
 enableTableOfContents: true
-updatedOn: '2024-01-28T13:46:59.390Z'
+updatedOn: '2024-02-06T14:40:40.246Z'
 ---
 
 You can use `json_array_elements` function to expand a `JSON` array into a set of rows, each containing one element of the array. It is a simpler option compared to complex looping logic. It is also more efficient than executing the same operation on the application side by reducing data transfer and processing overhead.
