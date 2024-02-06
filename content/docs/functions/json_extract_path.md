@@ -5,17 +5,17 @@ enableTableOfContents: true
 updatedOn: '2024-02-06T09:55:01.562Z'
 ---
 
-You can the `json_extract_path` function to extract the value of a specific key at a specified path within a `JSON` document. This approach is performant compared to querying the entire `JSON` payload and processing it on the application side. It is particularly useful when dealing with nested `JSON` structures.
+You can use the `json_extract_path` function to extract the value at a specified path within a `JSON` document. This approach is performant compared to querying the entire `JSON` payload and processing it on the application side. It is particularly useful when dealing with nested `JSON` structures.
 
 <CTA />
 
 ## Function signature
 
 ```sql
-json_extract_path(from_json json, VARIADIC path_elems text[])
+json_extract_path(from_json JSON, VARIADIC path_elems TEXT[]) -> JSON
 ```
 
-## `json_extract_path` example
+## Example usage
 
 To illustrate the `json_extract_path` function in Postgres, let's consider a scenario where we have a table storing information about books. Each book has a `JSON` column containing details such as `title`, `author`, and publication `year`. You can create the `book` table using the SQL statements shown below.
 
@@ -252,3 +252,5 @@ The query above, which specifies an invalid path (`'speks'` instead of `'specs'`
 
 - [PostgreSQL documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
 - [PostgreSQL documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
+
+<NeedHelp />
