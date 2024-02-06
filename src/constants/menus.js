@@ -59,6 +59,11 @@ export default {
       text: 'Pricing',
       to: LINKS.pricing,
     },
+
+    {
+      text: 'Enterprise',
+      to: LINKS.enterprise,
+    },
     {
       text: 'Blog',
       to: LINKS.blog,
