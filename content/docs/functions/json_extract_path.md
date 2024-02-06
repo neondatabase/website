@@ -2,7 +2,7 @@
 title: Postgres json_extract_path() function
 subtitle: Extracts a JSON sub-object at the specified path
 enableTableOfContents: true
-updatedOn: '2024-01-28T13:46:59.390Z'
+updatedOn: '2024-02-06T09:55:01.562Z'
 ---
 
 You can use the `json_extract_path` function to extract the value at a specified path within a `JSON` document. This approach is performant compared to querying the entire `JSON` payload and processing it on the application side. It is particularly useful when dealing with nested `JSON` structures.
@@ -208,28 +208,21 @@ The `json_extract_path` function extracts the value of the `department` key from
 
 ## Additional considerations
 
-This section outlines additional considerations including alternative functions and performance considerations.
-
-### Alternative functions
-
-**json_extract_path_text**
-
-The regular `json_extract_path` function returns the extracted value as a `JSON` object or array, preserving its `JSON` structure, whereas the alternative
-`json_extract_path_text` function returns the extracted value as a plain text string, casting any `JSON` objects or arrays to their string representations.
-
-Use the regular `json_extract_path` function when you need to apply `JSON`-specific functions or operators to the extracted value, requiring `JSON` data types. The alternative `json_extract_path_text` function is preferable if you need to work directly with the extracted value as a string, for text processing, concatenation, or comparison.
-
-**jsonb_extract_path**
-
-The `jsonb_extract_path` function works with the `jsonb` data type, which offers a binary representation of `JSON` data. This alternative function is generally faster than `json_extract_path` for most operations, as it's optimized for the binary `jsonb` format. This difference in performance is often more pronounced with larger `JSON` structures and frequent path extractions.
-
-### Performance
+### Performance and Indexing
 
 The `json_extract_path` function performs well when extracting data from `JSON` documents, especially compared to extracting data in application code. It allows performing the extraction directly in the database, avoiding transferring entire `JSON` documents to the application.
 
 However, performance can degrade with highly nested `JSON` structures and very long text strings. In those cases, using the binary `JSONB` data type and the `jsonb_extract_path` function will likely offer better performance.
 
 Indexing `JSON` documents can also significantly improve `json_extract_path` query performance when filtering data based on values extracted from `JSON`.
+
+### Alternative functions
+
+- [json_extract_path_text](/docs/functions/json_extract_path_text) - The regular `json_extract_path` function returns the extracted value as a `JSON` object or array, preserving its `JSON` structure, whereas the alternative `json_extract_path_text` function returns the extracted value as a plain text string, casting any `JSON` objects or arrays to their string representations.
+
+    Use the regular `json_extract_path` function when you need to apply `JSON`-specific functions or operators to the extracted value, requiring `JSON` data types. The alternative `json_extract_path_text` function is preferable if you need to work directly with the extracted value as a string, for text processing, concatenation, or comparison.
+
+- `jsonb_extract_path` - The `jsonb_extract_path` function works with the `jsonb` data type, which offers a binary representation of `JSON` data. This alternative function is generally faster than `json_extract_path` for most operations, as it's optimized for the binary `jsonb` format. This difference in performance is often more pronounced with larger `JSON` structures and frequent path extractions.
 
 {/*
 This example does not work. It returns empty values.

@@ -2,7 +2,7 @@
 title: Use Neon with Deno Deploy
 subtitle: Connect a Neon Postgres database to your Deno Deploy application
 enableTableOfContents: true
-updatedOn: '2024-02-05T14:56:44.267Z'
+updatedOn: '2024-02-05T16:35:06.127Z'
 ---
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
@@ -33,9 +33,9 @@ Your connection string should look something like this:
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
 ```
 
-You'll need the connection string a little later in the setup.
-
 </CodeBlock>
+
+You'll need the connection string a little later in the setup.
 
 ## Deploy your application locally with Deno Runtime
 
@@ -47,7 +47,7 @@ Follow the [Install Deno and deployctl](https://docs.deno.com/deploy/manual/#ins
 
 ### Create the example application
 
-Next, crearte `server.ts` script on your local machine. The script connects to the Neon database and returns data from a `books` table in your database `neondb` database.
+Next, create the `server.ts` script on your local machine.
 
 ```ts
 // server.ts
