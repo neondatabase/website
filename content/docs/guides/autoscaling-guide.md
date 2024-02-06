@@ -82,11 +82,11 @@ Place your cursor anywhere in the graph to get more usage detail about that part
 
 ![autoscaling graph detail](/docs/guides/autoscaling_graph_detail.png)
 
-See below for some rules of thumb on actions you might want to take, based on trends you see in this view.
+See below for some rules of thumb on actions you might want to take based on trends you see in this view.
 
 ### Start with a good minimum
 
-Ideally, you want to keep your entire [working set](/docs/reference/glossary#working-set) cached in memory (RAM) at all times. This means you do not want your compute endpoint to resize below the RAM needed to handle this working set: in other words, set your minimum compute endpoint large enough to accommodate your working set. For instructions on how to determine your working set, see [how to size your compute endpoint](/docs/manage/endpoints#how-to-size-your-compute-endpoint).
+Ideally, you want to keep your entire [working set](/docs/reference/glossary#working-set) cached in memory (RAM) at all times. We recommend you set a large enough limit to accommodate your working set. For instructions on how to determine your working set, see [how to size your compute endpoint](/docs/manage/endpoints#how-to-size-your-compute-endpoint).
 
 ### Setting your maximum
 
