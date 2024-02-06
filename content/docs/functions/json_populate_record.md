@@ -109,8 +109,8 @@ This query returns the following result:
 ### Alternative options
 
 - [json_to_record](/docs/functions/json_to_record) - It can be used similarly, with a couple differences. `json_populate_record` can be used with a base record of a pre-defined type, whereas `json_to_record` needs the record type defined inline in the `AS` clause. Further, `json_populate_record` can specify default values for missing fields through the base record, whereas `json_to_record` must assign them NULL values.
-- [json_populate_recordset](/docs/functions/json_populate_recordset) - It can be used similarly to parse `JSON`, the difference being that it returns a set of records instead of a single record. For example, if you have an array of `JSON` objects, you can use `json_populate_recordset` to convert each object into a new row. 
-- [jsonb_populate_record](/docs/functions/jsonb_populate_record.md) - It has the same functionality to `json_populate_record`, but accepts `JSONB` input instead of `JSON`. 
+- `json_populate_recordset` - It can be used similarly to parse `JSON`, the difference being that it returns a set of records instead of a single record. For example, if you have an array of `JSON` objects, you can use `json_populate_recordset` to convert each object into a new row. 
+- [jsonb_populate_record](/docs/functions/jsonb_populate_record) - It has the same functionality to `json_populate_record`, but accepts `JSONB` input instead of `JSON`. 
 
 ## Resources
 
