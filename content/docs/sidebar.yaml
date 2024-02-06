@@ -261,6 +261,8 @@
           slug: guides/polyscale
     - title: Deployment platforms
       items:
+        - title: Deno
+          slug: guides/deno
         - title: Koyeb
           slug: guides/koyeb
         - title: Vercel
@@ -296,8 +298,22 @@
   items:
     - title: Data types
       items:
+        - title: Array
+          slug: data-types/array
         - title: Boolean
           slug: data-types/boolean
+        - title: Date and time
+          slug: data-types/date-and-time
+        - title: Character
+          slug: data-types/character
+        - title: JSON
+          slug: data-types/json
+        - title: Decimal
+          slug: data-types/decimal
+        - title: Floating point
+          slug: data-types/floating-point
+        - title: Integer
+          slug: data-types/integer
         - title: UUID
           slug: data-types/uuid
     - title: Extensions
@@ -338,16 +354,28 @@
           slug: functions/json_build_object
         - title: json_each
           slug: functions/json_each
+        - title: jsonb_each
+          slug: functions/jsonb_each
         - title: json_extract_path
           slug: functions/json_extract_path
+        - title: jsonb_extract_path
+          slug: functions/jsonb_extract_path          
         - title: json_extract_path_text
           slug: functions/json_extract_path_text
+        - title: jsonb_extract_path_text
+          slug: functions/jsonb_extract_path_text
         - title: json_object
           slug: functions/json_object
+        - title: jsonb_object
+          slug: functions/jsonb_object
         - title: json_populate_record
           slug: functions/json_populate_record
+        - title: jsonb_populate_record
+          slug: functions/jsonb_populate_record
         - title: json_to_record
           slug: functions/json_to_record
+        - title: jsonb_to_record
+          slug: functions/jsonb_to_record
     - title: Compatibility
       slug: reference/compatibility
 - title: Import data

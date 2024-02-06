@@ -3,7 +3,7 @@ title: Supported Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2024-01-26T16:30:34.539Z'
+updatedOn: '2024-02-02T17:58:23.760Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
@@ -60,7 +60,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [plls](https://github.com/plv8/plv8/)                     | 3.1.5                          | 3.1.5 | 3.1.8                          |                                                                                                                    |  
 | [plpgsql](https://www.postgresql.org/docs/16/plpgsql.html)                  | 1.0          | 1.0   | 1.0        | Pre-installed with Postgres.                                                                                     |
 | [plpgsql_check](https://pgxn.org/dist/plpgsql_check/)            | 2.5.3                   | 2.5.3  | 2.5.3                      |                                                                                      |
-| [plv8](https://plv8.github.io/)                  | 3.1.5                                | 3.1.5  | 3.1.8                                |                                                                                                                    |
+| [plv8](https://plv8.github.io/)                  | 3.1.10                                | 3.1.10  | 3.1.10                                |                                                                                                                    |
 | [postgis](/docs/extensions/postgis)                  | 3.3.3                                   | 3.3.3     | 3.3.3                                |                                                                                                                    |
 | [postgis_raster](https://postgis.net/docs/RT_reference.html)           | 3.3.3             | 3.3.3  | 3.3.3              |                                                                                                                    |
 | [postgis_sfcgal](https://oslandia.gitlab.io/SFCGAL/)           | 3.3.3                    | 3.3.3  | 3.3.3                    |                                                                                                                    |

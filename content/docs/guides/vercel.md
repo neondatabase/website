@@ -3,7 +3,7 @@ title: Connect with the Neon Vercel Integration
 subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel
   Integration
 enableTableOfContents: true
-updatedOn: '2024-01-29T15:29:18.995Z'
+updatedOn: '2024-02-02T17:58:23.764Z'
 ---
 
 This guide describes how to connect using the [Neon Vercel Integration](https://vercel.com/integrations/neon) from the Vercel marketplace. The integration connects your Vercel project to a Neon database and enables creating a database branch for each preview deployment.
@@ -57,7 +57,10 @@ To add the integration:
     1. Select the Neon project that you want to connect to your Vercel project by selecting the Neon project, database, and role that Vercel will use to connect.
       ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
-          The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's root branch (`main`) that you can modify without affecting data on your root branch.
+          The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's primary branch (`main`) that you can modify without affecting data on your primary branch.
+         <Admonition type="note">
+         Branches created for preview deployments are created from the [primary branch](/docs/reference/glossary#primary-branch) of your Neon project. Earlier versions of the integration created branches from the initial [root branch](/docs/reference/glossary#root-branch) of your Neon project, which is designated as the primary branch by default. Neon lets you [change the primary branch](/docs/manage/branches#set-a-branch-as-primary). If you have an older version of the integration that creates branches from your project's root branch, and you want branches created from your primary branch instead, you can upgrade your integration by reinstalling it from the Vercel Marketplace.
+         </Admonition>
 
           When you finish making selections, click **Continue**.
     1. Confirm the integration settings. This allows the integration to:
@@ -74,7 +77,7 @@ To add the integration:
     1. Navigate to the [Neon Console](https://console.neon.tech/).
     1. Select the project you are connected to.
     1. Select **Branches**.
-       You will see the root branch of your project (`main`). If you created a development branch, you will also see a `vercel-dev` branch.
+       You will see the primary branch of your project (`main`). If you created a development branch, you will also see a `vercel-dev` branch.
        ![Neon branches](/docs/guides/vercel_neon_branches.png)
 1. To view the results of the integration in Vercel:
     1. Navigate to [Vercel](https://vercel.com/).
@@ -136,8 +139,9 @@ You can enable these variables from the Neon Console:
 3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
 4. In the **Vercel integration** drawer, select the environment variables you require. The selected variables will be set in your Vercel project with your next push. 
 
-<Admonition type="note">
-Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next push.
+<Admonition type="note" title="Notes">
+- Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next push.
+- The integration appends the `sslmode=require` option to the Neon connection string that it sets for the `DATABASE_URL` environment variable in Vercel.
 </Admonition> 
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
