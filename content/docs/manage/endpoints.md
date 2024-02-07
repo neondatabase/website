@@ -61,6 +61,8 @@ To edit a compute endpoint:
    The **Edit** window opens, letting you take a range of actions, depending on your tier.
 1. Once you've made your changes, click **Save**. All changes take immediate effect.
 
+For information about selecting an appropriate compute size, see [How to size your compute](#how-to-size-your-compute).
+
 ### What happens to the compute endpoint when making changes
 
 Some key points to understand about how your endpoint responds when you make changes to your compute settings:
@@ -78,7 +80,7 @@ Some key points to understand about how your endpoint responds when you make cha
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the vCPUs, as shown in the table below. Currently, a Neon compute can have anywhere from 1/4 (.25) to 7 CUs.
 
-| Compute size  | vCPU | RAM    |
+| Compute size (in CUs)  | vCPU | RAM    |
 |:--------------|:-----|:-------|
 | .25           | .25  | 1 GB   |
 | .5            | .5   | 2 GB   |
@@ -99,15 +101,15 @@ Neon supports fixed-size and autoscaling compute configurations.
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
 </Admonition>
 
-### How to size your compute endpoint
+### How to size your compute
 
-Ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. When possible, we recommend a compute size that can hold your entire dataset in memory. For larger datasets that cannot be fully held in memory, we recommend a compute size that will hold your [working set](#sizing-your-computed-based-on-the-working-set).
+Ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that will hold your [working set](#sizing-your-computed-based-on-the-working-set).
 
 In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a local file cache to extend the memory allocated to shared buffers. Generally, we recommend a `shared_buffers` limit that is 50% of RAM.
 
-The following table outlines the vCPU, RAM, and recommended `shared_buffer` limit for each Neon compute size. Using this table, you can find an appropriate compute size for your dataset. For example, if your logical data size is ~4 GB, an optimal compute size would be 2 (2vCPU, 8 GB RAM, 4 GB shared buffers).  
+The following table outlines the vCPU, RAM, and recommended `shared_buffer` limit for each Neon compute size. Using this table, you can find an appropriate compute size for your dataset. For example, if your logical data size is ~4 GB, an optimal compute size would be 2 CU (2vCPU, 8 GB RAM, 4 GB shared buffers).  
 
-| Compute size | vCPU | RAM   | shared_buffers | 
+| Compute size (in CUs) | vCPU | RAM   | shared_buffers | 
 |--------------|------|-------|----------------|
 | 0.25         | 0.25 | 1 GB  | 0.5 GB         | 
 | 0.50         | 0.50 | 2 GB  | 1 GB           | 
@@ -121,7 +123,7 @@ The following table outlines the vCPU, RAM, and recommended `shared_buffer` limi
 
 
 <Admonition type="note">
-Neon Pro Plan users can configure the compute size. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
+Neon Pro Plan users can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
 </Admonition> 
 
 #### Sizing your computed based on the working set
@@ -163,13 +165,13 @@ FROM    (SELECT * FROM all_tables UNION ALL SELECT * FROM tables) a
 ORDER   BY (CASE WHEN table_name = 'all' THEN 0 ELSE 1 END), from_disk DESC;
 ```
 
-If this query does not return results in the 99% percentile for your tables, your working set is not fully or adequately in memory. In this case, you should consider using a larger compute size to increase the amount of memory available that is available to you.
+If this query does not return results in the 99% percentile for your tables, your working set is not fully or adequately in memory. In this case, you should consider using a larger compute size to increase the amount of memory available to you.
 
 #### Autoscaling considerations
 
 Autoscaling is most effective when your dataset or working set is fully cached in the memory of your minimum compute size.
 
-Consider this scenario: if your working set is approximately 6 GB, starting with a compute size of .25 can lead to suboptimal performance because your data cannot be fully held in memory at the low end of your autoscaling range. While your compute _will_ scale up from .25, you may see performance issues due to inadequate caching of your data as your compute scales up to meet demand. Therefore, it is recommended to start with a larger minimum compute size to ensure there is sufficient memory to hold your data from the moment your compute endpoint is started. 
+Consider this scenario: if your working set is approximately 6 GB, starting with a compute size of .25 CU can lead to suboptimal performance because your data cannot be fully held in memory at the low end of your autoscaling range. While your compute _will_ scale up from .25 CU to your maximum compute size setting, you may experience performance issues due to inadequate caching of your data as your compute scales up in size to meet demand. Therefore, it is recommended to start with a larger minimum compute size to ensure there is sufficient memory to hold your data from the moment your compute endpoint is started. 
 
 ### Autosuspend configuration
 
