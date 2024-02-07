@@ -2,7 +2,7 @@
 title: Use Neon with Deno Deploy
 subtitle: Connect a Neon Postgres database to your Deno Deploy application
 enableTableOfContents: true
-updatedOn: '2024-02-05T16:35:06.127Z'
+updatedOn: '2024-02-06T12:36:51.920Z'
 ---
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
@@ -253,10 +253,9 @@ To delete your Neon project, refer to [Delete a project](/docs/manage/projects#d
 
 ## Resources
 
-[Deno Deploy](https://deno.com/deploy)
-[Deno Runtime Quickstart](https://docs.deno.com/runtime/manual)
-[Deno Deploy Quickstart](https://docs.deno.com/deploy/manual/)
-[demo-postgres driver](https://deno.land/x/postgres@ls)
-[deno-postgres driver documentation](https://deno-postgres.com/#/)
+- [Deno Deploy](https://deno.com/deploy)
+- [Deno Runtime Quickstart](https://docs.deno.com/runtime/manual)
+- [Deno Deploy Quickstart](https://docs.deno.com/deploy/manual/)
+- [demo-postgres driver](https://deno.land/x/postgres@ls)
 
 <NeedHelp/>

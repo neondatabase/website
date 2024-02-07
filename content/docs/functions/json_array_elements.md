@@ -2,7 +2,7 @@
 title: Postgres json_array_elements() function
 subtitle: Expand a JSON array into a set of rows
 enableTableOfContents: true
-updatedOn: '2024-01-28T13:46:59.390Z'
+updatedOn: '2024-02-06T14:40:40.246Z'
 ---
 
 You can use `json_array_elements` function to expand a `JSON` array into a set of rows, each containing one element of the array. It is a simpler option compared to complex looping logic. It is also more efficient than executing the same operation on the application side by reducing data transfer and processing overhead.
@@ -69,7 +69,7 @@ This query returns the following result:
 
 This section shows advanced `json_array_elements` examples.
 
-### Handling nested data
+### `json_array_elements` with nested data
 
 Let's consider a scenario where we have a `products` table storing information about products. The table schema and data are provided below.
 
@@ -133,7 +133,7 @@ This query returns the following values:
 | 1  | T-Shirt | "XL" | "Green"|
 ```
 
-## Filtering
+## Filtering `json_array_elements`
 
 You can use the `json_array_elements` function to extract the sizes from the `JSON` data and then filter the products based on a specific color (or size), as in this example:
 
@@ -154,7 +154,7 @@ This query returns the following values:
 |  4 | Jeans    | {"sizes": ["28", "30", "32", "34"], "colors": ["Blue", "Black"]}     |
 ```
 
-## Handling null
+## Handling `NULL` in `json_array_elements`
 
 This example updates the table to insert another product (`Socks`) with one of the values in the `sizes` as `null`:
 
@@ -193,7 +193,7 @@ This query returns the following values:
 |  6 | Socks | "XL" |
 ```
 
-### Nested arrays
+### Nested arrays in `json_array_elements`
 
 You can also handle nested arrays with `json_array_elements`.
 
@@ -263,12 +263,12 @@ This query returns the following values:
 
 This section outlines additional considerations including alternative functions and `JSON` array order.
 
-### Alternative options
+### Alternates to `json_array_elements`
 
 - `jsonb_array_elements` - Consider this variant for performance benefits with `jsonb` data. `jsonb_array_elements` only accepts `jsonb` data, while `json_array_elements` works with both `json` and `jsonb`. It is typically faster, especially for larger arrays, due to its optimization for the binary `jsonb` format.
 - `json_array_elements_text` - While `json_array_elements` returns each extracted element as a `JSON` value, `json_array_elements_text` returns each extracted element as a plain text _string_.
 
-### JSON array order
+### Ordering `json_array_elements` output using `WITH ORDINALITY`
 
 If the order of the elements is important, consider using the `WITH ORDINALITY` option:
 
