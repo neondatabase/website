@@ -2,7 +2,7 @@
 title: Postgres json_build_object() function
 subtitle: Builds a JSON object out of a variadic argument list
 enableTableOfContents: true
-updatedOn: '2024-01-28T13:46:59.390Z'
+updatedOn: '2024-02-06T14:40:40.246Z'
 ---
 
 
@@ -68,7 +68,7 @@ This query returns the following results:
 
 ## Advanced examples
 
-### Building nested JSON objects
+### Nested objects with `json_build_object`
 
 Let’s say we have a table of products with an `attributes` column containing JSON data:
 
@@ -140,7 +140,7 @@ This query returns the following results:
 | 2  | Coffee Mug  | 12.99 | {"category" : "Kitchen", "description" : "A ceramic mug with a funny design", "attributes" : {"color" : "White", "size" : "Large"}}
 ```
 
-### Use with `ORDER BY`
+### Order `json_build_object` output
 
 Combine `json_build_object` with `ORDER BY` to sort the results based on a specific attribute within the JSON structure.
 
@@ -176,7 +176,7 @@ This query returns the following results:
 | 2  | Coffee Mug | 12.99 | {"category" : "Kitchen", "description" : "A ceramic mug with a funny design", "attributes" : {"color" : "White", "size" : "Small", "rating" : "3.8"}}
 ```
 
-### Use with `GROUP BY`
+### Grouped `json_build_object` output
 
 To create a `JSON` object that groups the total price for each category of products in the products table:
 
@@ -201,20 +201,21 @@ This query returns the following results:
 
 ## Additional considerations
 
-### Alternative functions
-
-Depending on your requirements, you might want to consider similar functions:
-
-- `json_object` - Builds a JSON object out of a text array.
-- `json_agg` - Aggregates values, as a JSON array.
-- `row_to_json` - Returns a row as a JSON object.
-- `json_object_agg` - Aggregates key-value pairs into a JSON object.
-
-### Performance
+### Performance and indexing
 
 The performance of the `json_build_object` depends on various factors including the number of key-value pairs, nested levels (deeply nested objects can be more expensive to build). Consider using `JSONB` data type with `jsonb_build_object` for better performance.
 
 If your `JSON` objects have nested structures, indexing on specific paths within the nested data can be beneficial for targeted queries.
+
+### Alternative functions
+
+Depending on your requirements, you might want to consider similar functions:
+
+- [json_object](/docs/functions/json_object) - Builds a JSON object out of a text array.
+- `json_agg` - Aggregates values, as a JSON array.
+- `row_to_json` - Returns a row as a JSON object.
+- `json_object_agg` - Aggregates key-value pairs into a JSON object.
+
 
 ## Resources
 

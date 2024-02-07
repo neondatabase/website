@@ -1,17 +1,10 @@
-'use client';
-
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 
-import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
-import ChevronIcon from 'icons/chevron-down.inline.svg';
-
-const POSTS_PER_VIEW = 6;
 
 const CardItem = ({ title, description, logo, post, index }) => (
   <li className="relative rounded-xl">
@@ -60,39 +53,26 @@ CardItem.propTypes = {
   index: PropTypes.number.isRequired,
 };
 
-const Hero = ({ items }) => {
-  const [posts, setPosts] = useState(items.slice(0, POSTS_PER_VIEW));
-  return (
-    <section className="hero safe-paddings pt-36 xl:pt-[120px] lg:pt-11 md:pt-8">
-      <Container className="flex flex-col items-center" size="medium">
-        <h1 className="text-center text-[72px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px]">
-          Explore <span className="text-green-45">success stories</span>
-        </h1>
-        <p className="mx-auto mt-5 max-w-[664px] text-center text-xl font-light leading-snug lg:text-lg md:text-base">
-          Discover the diverse and captivating stories of our valued partners, each a testament to
-          unique experiences and successes.
-        </p>
-        <div className="grid-gap-x grid grid-cols-12">
-          <ul className="col-span-10 col-start-2 mt-20 grid grid-cols-3 gap-x-8 gap-y-7 xl:col-span-full xl:col-start-1 xl:mt-16 lg:mt-12 lg:grid-cols-2 md:mt-10 md:gap-6 sm:grid-cols-1">
-            {posts.map(({ title, caseStudyPost }, index) => (
-              <CardItem {...caseStudyPost} title={title} key={index} index={index} />
-            ))}
-          </ul>
-        </div>
-        {posts?.length < items.length && (
-          <Button
-            className="mt-10 h-[38px] rounded-full px-5 text-[15px] font-medium transition-colors duration-200"
-            theme="gray-10"
-            onClick={() => setPosts(items.slice(0, posts.length + POSTS_PER_VIEW))}
-          >
-            Show more
-            <ChevronIcon className="ml-2.5 inline-block h-auto w-3" />
-          </Button>
-        )}
-      </Container>
-    </section>
-  );
-};
+const Hero = ({ items }) => (
+  <section className="hero safe-paddings pt-36 xl:pt-[120px] lg:pt-11 md:pt-8">
+    <Container className="flex flex-col items-center" size="medium">
+      <h1 className="text-center text-[72px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px]">
+        Explore <span className="text-green-45">success stories</span>
+      </h1>
+      <p className="mx-auto mt-5 max-w-[664px] text-center text-xl font-light leading-snug lg:text-lg md:text-base">
+        Discover the diverse and captivating stories of our valued partners, each a testament to
+        unique experiences and successes.
+      </p>
+      <div className="grid-gap-x grid grid-cols-12">
+        <ul className="col-span-10 col-start-2 mt-20 grid grid-cols-3 gap-x-8 gap-y-7 xl:col-span-full xl:col-start-1 xl:mt-16 lg:mt-12 lg:grid-cols-2 md:mt-10 md:gap-6 sm:grid-cols-1">
+          {items.map(({ title, caseStudyPost }, index) => (
+            <CardItem {...caseStudyPost} title={title} key={index} index={index} />
+          ))}
+        </ul>
+      </div>
+    </Container>
+  </section>
+);
 
 Hero.propTypes = {
   items: PropTypes.arrayOf(

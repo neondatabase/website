@@ -18,17 +18,17 @@ const TopBar = () => {
   return isTopBarHidden ? null : (
     <Link
       className="safe-paddings relative z-40 flex h-11 w-full items-center justify-center bg-primary-1 px-4 py-3 leading-none transition-colors duration-200 hover:bg-[#1AFFB2] xs:h-auto"
-      to="/blog/bring-your-own-extensions-to-serverless-postgresql"
+      to="https://console.neon.tech/signup"
       onClick={() => {
         sendGtagEvent('click_announcement_banner');
         sendSegmentEvent('click_announcement_banner');
       }}
     >
       <span className="mr-4 truncate border-r border-black border-opacity-20 py-1 pr-4 text-sm font-medium sm:mr-0 sm:border-none sm:pr-0">
-        🆕 BYO Postgres Extensions to Neon with dynamic extension loading.
+        🇦🇺 Hello Australia! Sydney region is officially live on Neon.
       </span>
       <span className="inline-flex items-center text-sm font-bold sm:hidden">
-        <span>Read More</span>
+        <span>Sign Up</span>
         <ArrowRightIcon className="ml-1" />
       </span>
       <ArrowRightIcon className="ml-2 hidden sm:flex" />
