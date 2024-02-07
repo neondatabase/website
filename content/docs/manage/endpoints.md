@@ -103,13 +103,13 @@ The `neon_utils` extension provides a `num_cpus()` function you can use to monit
 
 ### How to size your compute
 
-If your compute size is too small, this can lead to suboptimal query performance and connection limit issues, as the size of your compute determines the amount of memory available for caching data and the maximum number of concurrent connections.
+A compute size that is too small can lead to suboptimal query performance and connection limit issues, as the size of your compute determines the amount of memory available for caching data and the maximum number of simultaneous connections your compute can support.
 
-In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a local file cache to extend the memory allocated to shared buffers. Generally, we recommend a `shared_buffers` limit that is 50% of RAM.
+In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a local file cache to extend the amount of memory allocated to shared buffers to 50% of your compute's RAM. The 50% RAM limit is a guideline rather than an enforced limit, but it's advisable not to exceed this maximum; otherwise, you might encounter out-of-memory errors.
 
-The maximum_connections setting 
+The `max_connections` setting defines your maximum simultaneous connection limit and is set based on your compute size.
 
-The following table outlines the vCPU, RAM, shared_buffer limit, the `max_connections` limit.
+The following table outlines the vCPU, RAM, `shared_buffer` limit (50 % of RAM), and the `max_connections` limit for each compute size that Neon supports.
 
 | Compute Size (CU) | vCPU | RAM   | shared_buffers | max_connections | 
 |--------------|------|-------|----------------|-----------------|
@@ -123,24 +123,9 @@ The following table outlines the vCPU, RAM, shared_buffer limit, the `max_connec
 | 6            | 6    | 24 GB | 12 GB          | 2703            |
 | 7            | 7    | 28 GB | 14 GB          | 3154            |
 
-Ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that will hold your [working set](#sizing-your-computed-based-on-the-working-set).
+When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory,  select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Estimating the required compute size based on a working set involves extra steps, which are outlined below. See [Sizing your computed based on the working set](#sizing-your-computed-based-on-the-working-set).
 
-In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a local file cache to extend the memory allocated to shared buffers. Generally, we recommend a `shared_buffers` limit that is 50% of RAM.
-
-The following table outlines the vCPU, RAM, and recommended `shared_buffer` limit for each Neon compute size. Using this table, you can find an appropriate compute size for your dataset. For example, if your logical data size is ~4 GB, an optimal compute size would be 2 CU (2vCPU, 8 GB RAM, 4 GB shared buffers).  
-
-| Compute size (in CUs) | vCPU | RAM   | shared_buffers | 
-|--------------|------|-------|----------------|
-| 0.25         | 0.25 | 1 GB  | 0.5 GB         | 
-| 0.50         | 0.50 | 2 GB  | 1 GB           | 
-| 1            | 1    | 4 GB  | 2 GB           | 
-| 2            | 2    | 8 GB  | 4 GB           | 
-| 3            | 3    | 12 GB | 6 GB           | 
-| 4            | 4    | 16 GB | 8 GB           | 
-| 5            | 5    | 20 GB | 10 GB          | 
-| 6            | 6    | 24 GB | 12 GB          | 
-| 7            | 7    | 28 GB | 14 GB          | 
-
+Regarding connection limits, you'll want a compute size that can support your anticipated maximum number of concurrent connections. If you are using _Autoscaling_, it is important to remember that your `max_connections` setting is based on the _minimum compute size_ in your autoscaling configuration. The `max_connections` setting does not scale along with your compute. To avoid the `max_connections` constraint altogether, you can use a pooled connection, which supports up to 10,000 concurrent connections. See [Connection pooling](/docs/connect/connection-pooling).
 
 <Admonition type="note">
 Neon Pro Plan users can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
@@ -148,7 +133,7 @@ Neon Pro Plan users can configure the size of their computes. The compute size f
 
 #### Sizing your computed based on the working set
 
-If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is fully in memory. A working set is a subset of frequently accessed or recently used data and indexes. It will be some percentage of your logical data size. To determine whether your working set is fully in memory, you can query the cache hit ratio for your workload using a query similar to this:
+If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is fully in memory. A working set is a subset of frequently accessed or recently used data and indexes and will be some percentage of your logical data size. To determine whether your working set is fully in memory, you can query the cache hit ratio for your workload using a query similar like this one:
 
 ```sql
 WITH 
@@ -191,7 +176,9 @@ If this query does not return results in the 99% percentile for your tables, you
 
 Autoscaling is most effective when your data (either your full dataset or your working set) set is fully cached in the memory of your minimum compute size.
 
-Consider this scenario: if your data size is approximately 6 GB, starting with a compute size of .25 CU can lead to suboptimal performance because your data cannot be adequately cached at the low end of your autoscaling range. While your compute _will_ scale up from .25 CU on demand, you may experience poor query performance while your compute scales up and starts caching your working set again. You can avoid this issue if your minimum compute size is able to hold your working set in memory.
+Consider this scenario: If your data size is approximately 6 GB, starting with a compute size of .25 CU can lead to suboptimal performance because your data cannot be adequately cached at the low end of your autoscaling range. While your compute _will_ scale up from .25 CU on demand, you may experience poor query performance until your compute scales up and is able to fully cache your working set again. You can avoid this issue if your minimum compute size can hold your working set in memory.
+
+As mentioned above, your `max_connections` setting is based on the minimum compute size in your autoscaling configuration. The `max_connections` setting does not scale along with your compute. To avoid the `max_connections` constraint, you can use a pooled connection, which supports up to 10,000 concurrent connections. See [Connection pooling](/docs/connect/connection-pooling).
 
 ### Autosuspend configuration
 
