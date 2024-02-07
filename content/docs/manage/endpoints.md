@@ -169,9 +169,9 @@ If this query does not return results in the 99% percentile for your tables, you
 
 #### Autoscaling considerations
 
-Autoscaling is most effective when your dataset or working set is fully cached in the memory of your minimum compute size.
+Autoscaling is most effective when your data (either your full dataset or your working set) set is fully cached in the memory of your minimum compute size.
 
-Consider this scenario: if your working set is approximately 6 GB, starting with a compute size of .25 CU can lead to suboptimal performance because your data cannot be fully held in memory at the low end of your autoscaling range. While your compute _will_ scale up from .25 CU to your maximum compute size setting, you may experience performance issues due to inadequate caching of your data as your compute scales up in size to meet demand. Therefore, it is recommended to start with a larger minimum compute size to ensure there is sufficient memory to hold your data from the moment your compute endpoint is started. 
+Consider this scenario: if your data size is approximately 6 GB, starting with a compute size of .25 CU can lead to suboptimal performance because your data cannot be adequately cached at the low end of your autoscaling range. While your compute _will_ scale up from .25 CU to your maximum compute size setting, you may experience performance issues as your compute scales up and becomes able to cache more of your data. Therefore, it is recommended to start with a larger minimum compute size to ensure there is sufficient memory to hold your working set from the moment your compute endpoint is started.
 
 ### Autosuspend configuration
 
