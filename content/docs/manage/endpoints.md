@@ -171,7 +171,7 @@ If this query does not return results in the 99% percentile for your tables, you
 
 Autoscaling is most effective when your data (either your full dataset or your working set) set is fully cached in the memory of your minimum compute size.
 
-Consider this scenario: if your data size is approximately 6 GB, starting with a compute size of .25 CU can lead to suboptimal performance because your data cannot be adequately cached at the low end of your autoscaling range. While your compute _will_ scale up from .25 CU to your maximum compute size setting, you may experience performance issues as your compute scales up and becomes able to cache more of your data. Therefore, it is recommended to start with a larger minimum compute size to ensure there is sufficient memory to hold your working set from the moment your compute endpoint is started.
+Consider this scenario: if your data size is approximately 6 GB, starting with a compute size of .25 CU can lead to suboptimal performance because your data cannot be adequately cached at the low end of your autoscaling range. While your compute _will_ scale up from .25 CU on demand, you may experience poor query performance while your compute scales up and starts caching your working set again. You can avoid this issue if your minimum compute size is able to hold your working set in memory.
 
 ### Autosuspend configuration
 
