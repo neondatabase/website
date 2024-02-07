@@ -60,11 +60,11 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   undefined: (props) => <Fragment {...props} />,
   code: (props) => {
     if (props?.className?.startsWith('language-') && props?.children) {
-      return <CodeBlock as="figure" {...props} />;
+      return <CodeBlock as="figure" {...props}/>;
     }
     return <code {...props} />;
   },
-  pre: (props) => <CodeBlock {...props} />,
+  pre: (props) => <>{props.children}</>,
   a: (props) => {
     const { href, children, ...otherProps } = props;
     if (children === '#id') {
