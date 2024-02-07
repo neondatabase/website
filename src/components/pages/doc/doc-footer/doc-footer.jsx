@@ -8,6 +8,7 @@ import useSessionStorage from 'react-use/lib/useSessionStorage';
 import Link from 'components/shared/link';
 import GitHubIcon from 'icons/github.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 import ThumbsDownIcon from './images/thumbs-down.inline.svg';
 import ThumbsUpIcon from './images/thumbs-up.inline.svg';
@@ -21,6 +22,9 @@ const DocFooter = ({ fileOriginPath, slug }) => {
     if (!feedbackSentData?.includes(slug)) {
       setFeedbackSentData([...feedbackSentData, slug]);
       sendGtagEvent('page_feedback', {
+        rate: isPositive ? 'like' : 'dislike',
+      });
+      sendSegmentEvent('page_feedback', {
         rate: isPositive ? 'like' : 'dislike',
       });
     }

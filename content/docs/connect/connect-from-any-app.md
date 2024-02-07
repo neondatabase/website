@@ -2,7 +2,7 @@
 title: Connect from any application
 subtitle: Learn how to connect to Neon from any application
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.362Z'
+updatedOn: '2024-02-01T15:33:56.379Z'
 ---
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch.
 
@@ -12,12 +12,14 @@ You can obtain the database connection details you require from the **Connection
 
 Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
 
-A Neon connection string includes the role, the hostname, and the database name.
+A Neon connection string includes the role, password, hostname, and database name.
 
 ```text
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
-           ^              ^                                               ^
-           |- role        |- hostname                                     |- database
+           ^    ^         ^                                               ^
+     role -|    |         |- hostname                                     |- database
+                |
+                |- password
 ```
 
 <Admonition type="note">
@@ -62,7 +64,7 @@ Neon requires that all connections use SSL/TLS encryption, but you can increase 
 
 ## Where do I obtain a password?
 
-You can obtain a Neon connection string with your password from the Neon **Dashboard**, under **Connection Details**.
+It's included in your Neon connection string, which you can find on the Neon **Dashboard**, in the **Connection Details** widget.
 
 ## What port does Neon use?
 
@@ -74,7 +76,7 @@ The **Connection Details** widget on the **Neon Dashboard** also provides connec
 
 ![Language and framework connection examples](/docs/connect/code_connection_examples.png)
 
-Our *Guides* documentation also provides connection examples.
+See our [Framework, language, and platform guides](https://neon.tech/docs/guides/guides-intro) for more connection examples.
 
 ## Network protocol support
 
@@ -85,8 +87,6 @@ Additionally, Neon provides a serverless driver that supports both WebSocket and
 ## Connection notes
 
 - Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](/docs/connect/connection-errors).
-- Some Java-based tools that use the pgJDBC driver for connecting to Postgres, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For an example, see [Connect a GUI or IDE](/docs/connect/connect-postgres-gui#connect-to-the-database).
+- Some Java-based tools that use the pgJDBC driver for connecting to Postgres, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For examples, see [Connect a GUI or IDE](/docs/connect/connect-postgres-gui#connect-to-the-database).
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

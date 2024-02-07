@@ -2,7 +2,7 @@
 title: The pg_embedding extension (Support Discontinued)
 subtitle: null
 enableTableOfContents: true
-updatedOn: '2023-10-19T23:10:12.820Z'
+updatedOn: '2024-01-27T09:01:18.975Z'
 ---
 
 <Admonition type="warning">
@@ -10,7 +10,7 @@ As of **Sept 29, 2023**, Neon is no longer committing to `pg_embedding`.
 
 Support will remain in place for existing users of the extension, but we strongly encourage migrating to [pgvector](https://github.com/pgvector/pgvector).
 
-For migration instructions, see [Migrate from pg_embedding to pgvector](#migrate-from-pg_embedding-to-pgvector).
+For migration instructions, see [Migrate from pg_embedding to pgvector](#migrate-from-pgembedding-to-pgvector).
 </Admonition>
 
 ## Migrate from pg_embedding to pgvector
@@ -283,6 +283,4 @@ To further your understanding of HNSW, the following resources are recommended:
 - [Similarity Search, Part 4: Hierarchical Navigable Small World (HNSW)](https://towardsdatascience.com/similarity-search-part-4-hierarchical-navigable-small-world-hnsw-2aad4fe87d37)
 - [IVFPQ + HNSW for Billion-scale Similarity Search](https://towardsdatascience.com/ivfpq-hnsw-for-billion-scale-similarity-search-89ff2f89d90e)
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

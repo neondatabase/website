@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2023-10-19T23:10:12.827Z'
+updatedOn: '2024-01-04T14:34:43.419Z'
 ---
 
 To connect to Neon from a Django application:
@@ -60,7 +60,7 @@ Running Django tests is currently not supported. The Django test runner must be 
 
 ## Connection issues
 
-Django uses the `psycopg2` driver as the default adapter for Postgrs. If you have an older version of that driver, you may encounter a `Endpoint ID is not specified` error when connecting to Neon. This error occurs if the client library used by your driver does not support the Server Name Indication (SNI) mechanism in TLS, which Neon uses to route incoming connections. The `psycopg2` driver uses the `libpq` client library, which supports SNI as of v14. You can check your `psycopg2` and `libpq` versions by starting a Django shell in your Django project and running the following commands:
+Django uses the `psycopg2` driver as the default adapter for Postgres. If you have an older version of that driver, you may encounter a `Endpoint ID is not specified` error when connecting to Neon. This error occurs if the client library used by your driver does not support the Server Name Indication (SNI) mechanism in TLS, which Neon uses to route incoming connections. The `psycopg2` driver uses the `libpq` client library, which supports SNI as of v14. You can check your `psycopg2` and `libpq` versions by starting a Django shell in your Django project and running the following commands:
 
 ```bash
 # Start a Django shell
@@ -80,6 +80,4 @@ Watch Justin Mitchel's video course, _Micro eCommerce with Python, Django, Neon 
 
 <YoutubeIframe embedId="qx9nshX9CQQ?start=1569" />
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

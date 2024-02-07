@@ -2,7 +2,7 @@
 title: Neon CLI
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.425Z'
+updatedOn: '2024-01-19T17:35:59.969Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the Neon CLI.
@@ -13,7 +13,7 @@ For installation instructions, see [Neon CLI — Install and connect](/docs/refe
 
 ```bash
 neonctl --help
-usage: neonctl <command> [options]
+usage: neonctl <command> [options]                               [aliases: neon]
 
 Commands:
   neonctl auth                        Authenticate              [aliases: login]
@@ -24,6 +24,7 @@ Commands:
   neonctl roles                       Manage roles               [aliases: role]
   neonctl operations                  Manage operations     [aliases: operation]
   neonctl connection-string [branch]  Get connection string        [aliases: cs]
+  neonctl set-context                 Set the current context
   neonctl completion                  generate completion script
 
 Global options:
@@ -42,15 +43,17 @@ Global options:
 
 | Command                                                 | Subcommands                            | Description               |
 |---------------------------------------------------------|----------------------------------------|---------------------------|
-| [auth](../reference/cli-auth)                                     |                                        | Authenticate              |
-| [me](../reference/cli-me)                                         |                                        | Show current user         |
-| [projects](../reference/cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | Manage projects           |
-| [branches](../reference/cli-branches)                             | `list`, `create`, `rename`, `add-compute`, `set-primary`, `delete`, `get` | Manage branches           |
-| [databases](../reference/cli-databases)                           | `list`, `create`, `delete`             | Manage databases          |
-| [roles](../reference/cli-roles)                                   | `list`, `create`,  `delete`            | Manage roles              |
-| [operations](../reference/cli-operations)                         | `list`                                 | Manage operations         |
-| [connection-string](../reference/cli-connection-string)           |                                        | Get connection string     |
-| [completion](../reference/cli-completion)           |                                        | Generate a completion script     |
+| [auth](/docs/reference/cli-auth)                                     |                                        | Authenticate              |
+| [me](/docs/reference/cli-me)                                         |                                        | Show current user         |
+| [projects](/docs/reference/cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | Manage projects           |
+| [ip-allow](/docs/reference/cli-ip-allow)                             | `list`, `add`, `remove`, `reset`       | Manage IP Allow           |
+| [branches](/docs/reference/cli-branches)                             | `list`, `create`, `reset`, `rename`, `add-compute`, `set-primary`, `delete`, `get` | Manage branches           |
+| [databases](/docs/reference/cli-databases)                           | `list`, `create`, `delete`             | Manage databases          |
+| [roles](/docs/reference/cli-roles)                                   | `list`, `create`,  `delete`            | Manage roles              |
+| [operations](/docs/reference/cli-operations)                         | `list`                                 | Manage operations         |
+| [connection-string](/docs/reference/cli-connection-string)           |                                        | Get connection string     |
+| [set-context](/docs/reference/cli-set-context)                       |                                        | Set context for session   |
+| [completion](/docs/reference/cli-completion)                         |                                        | Generate a completion script     |
 
 ## Global options
 

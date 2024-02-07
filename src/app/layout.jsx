@@ -35,6 +35,7 @@ const RootLayout = ({ children }) => (
           key={index}
         />
       ))}
+      <link rel="preconnect" href="https://console.neon.tech" />
     </head>
     <body>
       {process.env.NODE_ENV === 'production' && (

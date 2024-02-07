@@ -1,3 +1,5 @@
+'use client';
+
 import { useInView } from 'react-intersection-observer';
 
 import BlinkingText from 'components/shared/blinking-text';
@@ -19,13 +21,13 @@ const SaaS = () => {
 
   return (
     <section
+      className="safe-paddings bg-black py-40 2xl:py-40 xl:py-32 lg:py-24 md:py-20"
       id="saas"
-      className="safe-paddings bg-black py-[212px] 3xl:py-44 2xl:py-40 xl:py-32 lg:py-24 md:py-20"
       ref={wrapperRef}
     >
-      <Container className="z-20 flex items-center justify-between lg:block" size="md">
+      <Container className="z-20 flex items-center justify-between lg:block" size="medium">
         <div>
-          <Heading id="saas-title" tag="h2" size="xl" theme="white" ref={titleRef}>
+          <Heading id="saas-title" tag="h2" size="md" theme="white" ref={titleRef}>
             <BlinkingText
               text="Perfect for SaaS"
               parentElement={titleEntry?.target}
@@ -33,8 +35,8 @@ const SaaS = () => {
             />
           </Heading>
           <p
+            className="t-2xl mt-8 max-w-[600px] text-white 2xl:mt-6 2xl:max-w-[488px] xl:max-w-[400px] lg:max-w-none"
             id="saas-description"
-            className="t-2xl mt-5 max-w-[600px] text-white 2xl:mt-4 2xl:max-w-[488px] xl:max-w-[400px] lg:max-w-none"
           >
             SaaS companies use Neon to maximize engineering velocity and minimize costs. Our
             serverless architecture reduces compute and storage expenses. Specifically, Neon's
@@ -42,8 +44,8 @@ const SaaS = () => {
             instances.
           </p>
           <Button
+            className="mt-10 !px-[34px] !py-5 2xl:mt-8 xl:mt-7 md:mt-6"
             id="saas-button"
-            className="mt-10 2xl:mt-8 xl:mt-7 md:mt-6"
             to={LINKS.signup}
             size="md"
             theme="primary"
@@ -54,7 +56,7 @@ const SaaS = () => {
 
         <div
           id="saas-illustration"
-          className="relative 3xl:max-w-[813px] 2xl:max-w-[672px] xl:max-w-[500px] lg:hidden"
+          className="relative -mr-8 max-w-[790px] 2xl:max-w-[672px] xl:max-w-[550px] lg:hidden"
           ref={illustrationWrapperRef}
           aria-hidden
         >

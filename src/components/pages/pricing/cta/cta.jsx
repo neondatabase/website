@@ -9,6 +9,8 @@ import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import links from 'constants/links';
+import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 const CTA = () => {
   const [contentRef, isContentInView] = useInView({ rootMargin: '50px 0px', triggerOnce: true });
@@ -40,11 +42,11 @@ const CTA = () => {
       <Container className="grid grid-cols-12 items-center gap-4" size="md">
         <div className="z-10 col-span-4 col-start-2 mb-24 xl:col-span-5 xl:col-start-1 lg:mb-12 md:col-span-full">
           <Heading className="whitespace-nowrap md:text-center" tag="h2" size="2sm">
-            Still have a <span className="text-pricing-primary-1">question?</span>
+            Still have <span className="text-pricing-primary-1">questions?</span>
           </Heading>
           <p className="mt-4 text-lg font-light leading-snug xl:text-base md:mx-auto md:mt-2 md:max-w-[550px] md:text-center">
             Interested in increasing your free tier limits or learning about pricing? Complete the
-            form below to get in touch with our Sales team
+            form below to get in touch with our Sales team.
           </p>
           <AnimatedButton
             className="mt-8 inline-flex !px-14 !py-5 !text-lg tracking-tight hover:bg-[#00FFAA] xl:!px-11 xl:!py-[17px] lg:mt-6 md:mx-auto md:flex md:w-48"
@@ -55,8 +57,12 @@ const CTA = () => {
             linesOffsetSide={24}
             linesOffsetBottom={50}
             isAnimated
+            onClick={() => {
+              sendGtagEvent('pricing_cta_click');
+              sendSegmentEvent('pricing_cta_click');
+            }}
           >
-            Talk to sales
+            Talk to Sales
           </AnimatedButton>
         </div>
         <div

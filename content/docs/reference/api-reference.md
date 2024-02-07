@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about
   - /docs/api/about
-updatedOn: '2023-10-19T23:10:12.849Z'
+updatedOn: '2024-01-23T23:09:11.250Z'
 ---
 
 The Neon API allows you to manage your Neon projects programmatically.
@@ -19,10 +19,10 @@ The Neon API uses API keys to authenticate requests. You can view and manage API
 
 The client must send an API key in the Authorization header when making requests, using the bearer authentication scheme. For example:
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
 ```
 
@@ -54,12 +54,10 @@ For additional Neon API examples, refer to the following topics:
 - [Manage compute endpoints with the Neon API](/docs/manage/endpoints#manage-compute-endpoints-with-the-neon-api)
 - [Manage roles with the Neon API](/docs/manage/users#manage-roles-with-the-neon-api)
 - [Manage databases with the Neon API](/docs/manage/databases#manage-databases-with-the-neon-api)
-- [View operations with the Neon API](/docs/manage/operations#view-operations-with-the-neon-api)
+- [View operations with the Neon API](/docs/manage/operations#operations-and-the-neon-api)
 
 <Admonition type="important">
 When using the Neon API programmatically, you can poll the operation `status` to ensure that an operation is finished before proceeding with the next API request. For more information, see [Poll operation status](/docs/manage/operations#poll-operation-status).
 </Admonition>
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

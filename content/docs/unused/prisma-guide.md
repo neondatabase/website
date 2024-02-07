@@ -5,11 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/prisma-tutorial
-<<<<<<< HEAD
-updatedOn: '2023-10-07T10:43:33.432Z'
-=======
-updatedOn: '2023-10-19T23:10:12.859Z'
->>>>>>> main
+updatedOn: '2023-11-24T11:25:06.768Z'
 ---
 
 Prisma is an open source next-generation ORM that consists of the following parts:
@@ -549,6 +545,4 @@ You can read more about this workflow in the Prisma documentation. See [Introspe
 
 You have completed the _Use Prisma with Neon_ guide. To recap, you have learned how to connect from Prisma to Neon, use Prisma Migrate to evolve a schema, add data using the Neon SQL Editor and Prisma Studio, send queries using Prisma Client, and finally, introspect an existing database.
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

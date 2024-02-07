@@ -1,6 +1,7 @@
 ---
 title: How to use branches
 isDraft: true
+updatedOn: '2024-01-08T20:02:33.928Z'
 ---
 
 This guide describes how to use Neon's branching feature, which is currently in preview. If you would like to try branching, send an email to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) to request early access.
@@ -17,7 +18,7 @@ Let's look at how to create branches using the Neon Console and the Neon API.
 
 ## Create a branch using the Neon Console
 
-1. Log in to Neon and create a project in the [Neon Console](https://console.neon.tech). For information about creating a Neon project, see [Setting up a project](/docs/../get-started-with-neon/setting-up-a-project).
+1. Log in to the [Neon Console](https://console.neon.tech) and select a project. If you do not have a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 2. Add data to your project using the Neon SQL Editor, `psql`, or some other Postgres client.
 3. Click **Create branch** on the **Dashboard** tab in the Neon Console to create a branch.
 
@@ -29,7 +30,7 @@ Using the Neon API requires an API key. For information about how to obtain an A
 
 To create a branch, use the following API method:
 
-```bash
+```http
 POST /projects/{project_id}/branches
 ```
 

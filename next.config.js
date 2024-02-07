@@ -7,9 +7,6 @@ const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
 const defaultConfig = {
   poweredByHeader: false,
-  experimental: {
-    appDir: true,
-  },
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
@@ -50,6 +47,15 @@ const defaultConfig = {
         ],
       },
       {
+        source: '/docs/:all*(svg|jpg|png)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate',
+          },
+        ],
+      },
+      {
         source: '/blog/parsing-json-from-postgres-in-js',
         headers: [
           {
@@ -83,6 +89,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/blog/category/case-study',
+        destination: '/case-studies',
+        permanent: true,
+      },
+      {
         source: '/team',
         destination: '/about-us',
         permanent: true,
@@ -90,6 +101,11 @@ const defaultConfig = {
       {
         source: '/jobs',
         destination: '/careers',
+        permanent: true,
+      },
+      {
+        source: '/docs/release-notes/:path*',
+        destination: '/docs/changelog/:path*',
         permanent: true,
       },
       // Proxy has an error message, that suggests to read `https://neon.tech/sni` for more details.
@@ -101,6 +117,11 @@ const defaultConfig = {
       {
         source: '/docs',
         destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/postgres',
+        destination: '/docs/postgres/index',
         permanent: true,
       },
       {
@@ -148,6 +169,12 @@ const defaultConfig = {
         destination: '/demos/ping-thing',
         permanent: true,
       },
+      // redirect all path that contains /docs/postgres/**/*.html to /docs/postgres/**
+      {
+        source: '/docs/postgres/:path*.html',
+        destination: '/docs/postgres/:path*',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },
@@ -172,6 +199,10 @@ const defaultConfig = {
       {
         source: '/demos/playground/:path*',
         destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
+      },
+      {
+        source: '/discord',
+        destination: 'https://discord.gg/92vNTzKDGp',
       },
     ];
   },

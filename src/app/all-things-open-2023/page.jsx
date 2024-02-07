@@ -1,24 +1,35 @@
-import Community from 'components/pages/home/community';
+import Advantages from 'components/pages/home/advantages';
+import CTA from 'components/pages/home/cta';
 import DataBranching from 'components/pages/home/data-branching';
-import FirstSection from 'components/pages/home/first-section';
+import Hero from 'components/pages/home/hero';
+import NeonCli from 'components/pages/home/neon-cli';
+import Partnership from 'components/pages/home/partnership';
+import SaaS from 'components/pages/home/saas';
 import Scalability from 'components/pages/home/scalability';
-import SecondSection from 'components/pages/home/second-section';
 import Storage from 'components/pages/home/storage';
 import Layout from 'components/shared/layout';
 import Subscribe from 'components/shared/subscribe';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
-export const metadata = getMetadata({ ...SEO_DATA.index, robotsNoindex: 'noindex' });
+export const metadata = getMetadata({
+  title: SEO_DATA.index.title,
+  description: SEO_DATA.index.description,
+  pathname: '/all-things-open-2023',
+  robotsNoindex: 'noindex',
+});
 
 const AllThingsOpen = () => (
-  <Layout headerTheme="black" isSignIn footerWithTopBorder withOverflowHidden>
-    <FirstSection />
-    <Community />
+  <Layout headerTheme="black" footerWithTopBorder withOverflowHidden>
+    <Hero />
+    <CTA />
+    <Advantages />
     <Scalability />
     <Storage />
     <DataBranching />
-    <SecondSection />
+    <NeonCli />
+    <SaaS />
+    <Partnership />
     <Subscribe />
   </Layout>
 );

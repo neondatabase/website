@@ -1,8 +1,10 @@
 ---
 title: Manage billing
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.405Z'
+updatedOn: '2024-01-23T17:45:24.328Z'
 ---
+
+<NewPricing/>
 
 A Neon account subscribed to a paid plan can manage billing from the **Billing** page in the Neon Console. On the **Billing** page, you can:
 
@@ -12,7 +14,7 @@ A Neon account subscribed to a paid plan can manage billing from the **Billing**
 - View and download invoices
 - Downgrade your plan
 
-For Free Tier accounts, the **Billing** page allows users to view [Free Tier](/docs/introduction/free-tier) usage limits, learn about [Neon Pro plan](/docs/introduction/pro-plan) features, and estimate monthly Pro plan cost based on your current usage.
+For Neon Free Tier accounts, the **Billing** page allows users to view [Neon Free Tier](/docs/introduction/free-tier) usage limits, learn about [Neon Pro Plan](/docs/introduction/pro-plan) features, and estimate monthly Neon Pro Plan cost based on your current usage.
 
 ## View the billing page
 
@@ -61,14 +63,22 @@ To download an invoice:
 
 ## Downgrade your plan
 
-To downgrade from the Pro plan to the Free Tier:
+To downgrade from the Neon Pro Plan to the Neon Free Tier:
 
 1. Navigate to the **Billing** page in the Neon Console.
 1. Click **Downgrade plan** at the bottom of the page.
 1. Follow the instructions on the **Downgrade** modal, and click **Downgrade**.
 
-Downgrading from the Pro plan transitions your account to the Neon Free Tier, which has lower usage limits that may affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
+Downgrading from the Neon Pro Plan transitions your account to the Neon Free Tier, which has lower usage limits that may affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
 
-You will be required to remove any projects, branches, or data that exceed [Free Tier limits](/docs/introduction/free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade).
+You will be required to remove any projects, branches, or data that exceed [Neon Free Tier](/docs/introduction/free-tier) limits. The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade).
 
 To downgrade from Enterprise or Platform Partnership plans, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans is handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.
+
+## Purchase Neon on AWS Marketplace
+
+As an alternative Neon billing, you can purchase Neon on the [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-o32z34khv4272?sr=0-1&applicationId=AWSMPContessa&utm_campaign=Developer%20Days&utm_source=hs_email&utm_medium=email&_hsenc=p2ANqtz-8U-1v7Sm5HHexFnV3Mkkwwsq5hnq9ThQnbQOqhuB11RT9cNwtAoalhaq98WMgL70rwfFhq) or through the [AWS Private Offers](https://docs.aws.amazon.com/marketplace/latest/userguide/private-offers-overview.html) program.
+
+Purchasing Neon from the AWS Marketplace gives you consolidated billing, seamless provisioning, and the ability to use AWS credits on Neon.
+
+If you have any questions about this billing option, please reach out to our [Sales](https://neon.tech/contact-sales) team. 

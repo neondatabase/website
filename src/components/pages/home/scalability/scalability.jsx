@@ -16,17 +16,14 @@ const Scalability = () => {
   });
 
   return (
-    <section
-      className="safe-paddings mt-48 3xl:mt-44 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20"
-      ref={wrapperRef}
-    >
-      <Container className="flex items-center justify-between lg:block" size="md">
-        <div className="ml-[150px] max-w-[600px] 3xl:ml-[126px] 3xl:max-w-[504px] 2xl:ml-[104px] 2xl:max-w-[416px] xl:ml-0 xl:max-w-[400px] lg:max-w-none">
-          <Heading tag="h2" size="xl" theme="black">
+    <section className="safe-paddings mt-44 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20" ref={wrapperRef}>
+      <Container className="flex items-center justify-between gap-x-20 lg:block" size="medium">
+        <div className="max-w-[504px] 2xl:max-w-[460px] lg:max-w-none">
+          <Heading tag="h2" size="md" theme="black">
             On-demand scalability
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            We separated storage and compute to make on-demand scalability possible. Compute
+            We separate storage and compute to make on-demand scalability possible. Compute
             activates on an incoming connection and scales to zero when not in use.
           </p>
           <p className="t-xl mt-5 2xl:mt-4 xl:mt-3">
@@ -40,7 +37,7 @@ const Scalability = () => {
           </Link> */}
         </div>
         <div
-          className="relative w-full max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:-ml-3 lg:mt-[46px] lg:max-w-[475px] md:-ml-2"
+          className="relative w-full max-w-[820px] xl:max-w-[600px] lg:-ml-3 lg:mt-[46px] lg:max-w-[475px] md:-ml-2"
           ref={illustrationWrapperRef}
           aria-hidden
         >

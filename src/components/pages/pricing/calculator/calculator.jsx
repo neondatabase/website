@@ -1,6 +1,7 @@
 'use client';
 
 import * as Slider from '@radix-ui/react-slider';
+import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
@@ -13,6 +14,8 @@ import ArrowRight from 'icons/arrow-sm.inline.svg';
 import CheckIcon from 'icons/check.inline.svg';
 import infoHoveredIcon from 'icons/tooltip-hovered.svg';
 import infoIcon from 'icons/tooltip.svg';
+import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const PROJECT_STORAGE_PRICE = 0.000164;
@@ -85,7 +88,7 @@ const thumbVariants = {
   },
 };
 
-const Calculator = () => {
+const Calculator = ({ className }) => {
   const [isAdvanced, setIsAdvanced] = useState(false);
   const [computeUnits, setComputeUnits] = useState(1);
   const [activeTime, setActiveTime] = useState(COMPUTE_TIME_VALUES.default);
@@ -129,11 +132,22 @@ const Calculator = () => {
     [dataTransferCost, isAdvanced, totalCost, writtenDataCost]
   );
 
+  const handleButtonClick = () => {
+    const eventName = 'pricing_estimated_price';
+    const properties = {
+      price: estimatedPrice,
+      computeUnits,
+      activeTime,
+      storageValue,
+      dataTransferValue,
+      writtenDataValue,
+    };
+    sendGtagEvent(eventName, properties);
+    sendSegmentEvent(eventName, properties);
+  };
+
   return (
-    <section
-      id="calc"
-      className="safe-paddings mb-40 mt-[17.25rem] xl:mb-36 xl:mt-40 lg:mb-16 lg:mt-32 md:my-20"
-    >
+    <section className={clsx('safe-paddings', className)} id="calc">
       <Container size="medium">
         <div className="mx-auto flex max-w-[972px] flex-col items-center">
           <Heading
@@ -297,7 +311,7 @@ const Calculator = () => {
                   <span className="font-normal text-gray-new-70">per month</span>
                 </p>
                 <p className="text-right text-sm leading-none text-gray-new-70">
-                  <span className="text-gray-new-94">${COMPUTE_TIME_PRICE}</span> per hour
+                  <span className="text-gray-new-94">${PROJECT_STORAGE_PRICE}</span> per hour
                 </p>
               </div>
             </div>
@@ -446,7 +460,7 @@ const Calculator = () => {
             </p>
             <AnimatedButton
               className="my-6 w-full max-w-[260px] !bg-[var(--accentColor)] !py-[17px] !text-lg font-medium hover:!bg-[var(--hoverColor)] lg:my-5 md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1 sm:my-8"
-              to={estimatedPrice >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
+              to={estimatedPrice >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.signup}
               theme="primary"
               size="sm"
               animationColor="var(--accentColor)"
@@ -454,6 +468,7 @@ const Calculator = () => {
               linesOffsetSide={26}
               linesOffsetBottom={55}
               isAnimated
+              onClick={handleButtonClick}
             >
               {estimatedPrice >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </AnimatedButton>
@@ -534,3 +549,7 @@ Tooltip.propTypes = {
 };
 
 export default Calculator;
+
+Calculator.propTypes = {
+  className: PropTypes.string,
+};

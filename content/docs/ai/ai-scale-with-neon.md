@@ -2,14 +2,14 @@
 title: Scale your AI applications with Neon
 subtitle: Learn about how you can scale your AI and LLM applications with Neon
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.361Z'
+updatedOn: '2024-01-10T18:34:05.849Z'
 ---
 
 Neon offers the following features enabling you to build scalable AI and LLM applications that meet workload demand while managing costs.
 
 ## Autoscaling
 
-With Neon, you do not have to pick a size for your database upfront. Neon is able to automatically allocate compute resources to meet demand. This is made possible by Neon’s architecture, which separates storage and compute, allowing compute resources to be managed independently.
+With Neon, you do not have to pick a size for your database upfront. Neon can automatically allocate compute resources to meet demand. This is made possible by Neon’s architecture, which separates storage and compute, allowing compute resources to be managed independently.
 
 Neon's _Autoscaling_ feature automatically scales up compute on demand in response to application workload and down to zero on inactivity, and you are only charged for the compute resources you use.
 

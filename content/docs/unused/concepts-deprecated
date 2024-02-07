@@ -9,7 +9,7 @@ redirectFrom:
 
 A Neon user is identified by their email address.
 
-A user registers and authenticates in Neon Web UI with their GitHub or Google account. More authentication methods are coming soon.
+A user registers and authenticates in Neon Web UI with their email, GitHub, Google, or partner account.
 
 After authenticating, a user can create and access [Projects](#project) and [query Project data](/docs/get-started-with-neon/tutorials#query-via-ui). You can also manage [Postgres Users](#postgres-users) and [Databases](#postgres-databases) in each Project.
 

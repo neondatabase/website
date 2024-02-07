@@ -4,7 +4,7 @@ subtitle: Learn how to enable connection pooling in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2023-10-24T19:23:49.895Z'
+updatedOn: '2024-01-05T18:59:15.317Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to offer support for connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -15,13 +15,13 @@ This topic describes Neon's default connection limits, how connection pooling wo
 
 Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the `max_connections` parameter.
 
-In Neon, the size of your compute determines the `max_connections` setting. The formula used to calculate `max_connections` is `RAM in bytes / 9531392 bytes`. For a Free Tier compute, which has 1 GB of RAM, this works out to approximately 100 connections. Larger computes offered with the [Neon Pro plan](/docs/introduction/pro-plan) have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
+In Neon, the size of your compute determines the `max_connections` setting. The formula used to calculate `max_connections` is `RAM in bytes / 9531392 bytes`. For a Neon Free Tier compute, which has 1 GB of RAM, this works out to approximately 100 connections. Larger computes offered with the [Neon Pro Plan](/docs/introduction/pro-plan) have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
 
 ```sql
 SHOW max_connections;
 ```
 
-Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the [Free Tier](/docs/introduction/free-tier), support connection pooling.
+Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the [Neon Free Tier](/docs/introduction/free-tier), support connection pooling.
 
 ## Connection pooling
 
@@ -98,10 +98,29 @@ cur = conn.cursor()
 
 </CodeTabs>
 
+## Neon PgBouncer configuration settings
+
+Neon's PgBouncer configuration is shown below. The settings are not user-configurable.
+
+```ini
+[pgbouncer]
+pool_mode=transaction
+max_client_conn=10000
+default_pool_size=64
+max_prepared_statements=0
+query_wait_timeout=120
+```
+
+The following list describes each setting. For a full explanation of each parameter, please refer to the official [PgBouncer documentation](https://www.pgbouncer.org/config.html).
+
+- `pool_mode=transaction`: The pooling mode PgBouncer uses, set to `transaction` pooling.
+- `max_client_conn=10000`: Maximum number of client connections allowed.
+- `default_pool_size=64`: Default number of server connections to allow per user/database pair.
+- `max_prepared_statements=0`: Maximum number of prepared statements a connection is allowed to have at the same time. `0` means prepared statements are disabled.
+- `query_wait_timeout=120`: Maximum time queries are allowed to spend waiting for execution. Neon uses the default setting of `120` seconds.
+
 ## Connection pooling notes and limitations
 
 Neon uses PgBouncer in _transaction mode_, which limits some functionality in Postgres. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

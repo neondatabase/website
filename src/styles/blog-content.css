@@ -6,6 +6,10 @@
     @apply prose-a:font-normal prose-a:text-green-45 prose-a:no-underline prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out hover:prose-a:text-[#47FFC2] sm:prose-a:break-words;
     @apply prose-figure:my-10 prose-img:my-10 md:prose-figure:my-8 md:prose-img:my-8;
 
+    *[id] {
+      @apply scroll-mt-20 lg:scroll-mt-5;
+    }
+
     > * {
       &:first-child {
         @apply mt-0;
@@ -22,15 +26,14 @@
       }
     }
 
-    ul,
-    ol {
-      @apply list-none;
+    ul {
+      @apply list-none pl-3.5;
 
       > li {
         @apply relative pl-0;
 
         &::before {
-          @apply absolute -translate-y-1/2;
+          @apply absolute -left-3.5 top-3 h-1 w-1 -translate-y-1/2 rounded-[1px] bg-current content-[''];
         }
 
         ol {
@@ -39,26 +42,20 @@
       }
     }
 
-    ul {
-      @apply pl-3.5;
-
-      > li {
-        &::before {
-          @apply -left-3.5 top-3 h-1 w-1 rounded-[1px] bg-current content-[''];
-        }
-      }
-    }
-
     ol {
-      counter-reset: custom-counter;
       @apply pl-10 md:pl-5;
 
       > li {
-        counter-increment: custom-counter;
+        @apply pl-0;
 
-        &::before {
-          @apply -left-2 top-[12px] -translate-x-full text-current md:-left-1 md:top-3.5;
-          content: counter(custom-counter) '. ' !important;
+        ol {
+          @apply md:pl-4;
+        }
+      }
+
+      li {
+        &::marker {
+          @apply text-white;
         }
       }
     }

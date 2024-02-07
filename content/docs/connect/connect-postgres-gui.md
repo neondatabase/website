@@ -2,7 +2,7 @@
 title: Connect a GUI application
 subtitle: Learn how to connect a GUI application to Neon
 enableTableOfContents: true
-updatedOn: '2023-10-19T23:10:12.813Z'
+updatedOn: '2024-01-22T11:50:38.688Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.
@@ -78,12 +78,13 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [Luna Modeler](https://www.datensen.com/data-modeling/luna-modeler-for-relational-databases.html) | Requires enabling the SSL/TLS option |
 | [Metabase](https://www.metabase.com/) | |
 | [PopSQL](https://popsql.com/) | No SNI support. Use [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). |
-| [Postico](https://eggerapps.at/postico2/) | SNI support since v1.5.21. For older versions, use [SNI workaround B](/docs/connect/connection-errors#b-use-libpq-keyvalue-syntax-in-the-database-field). |
+| [Postico](https://eggerapps.at/postico2/) | SNI support since v1.5.21. For older versions, use [SNI workaround B](/docs/connect/connection-errors#b-use-libpq-keyvalue-syntax-in-the-database-field). Postico's [keep-connection-alive mechanism](https://eggerapps.at/postico/docs/v1.2/changelist.html), enabled by default, may prevent your compute from scaling to zero. |
 | [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres) | |
 | [pgAdmin 4](https://www.pgadmin.org/) | |
 | [Retool](https://retool.com/) | |
 | [TablePlus](https://tableplus.com/) | SNI support on macOS since build 436, and on Windows since build 202. No SNI support on Linux currently. For older versions, use [SNI workaround B](/docs/connect/connection-errors#b-use-libpq-keyvalue-syntax-in-the-database-field). |
 | [Segment](https://segment.com/) | Requires [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) |
+| [Skyvia](https://skyvia.com/) | Requires setting the **SSL Mode** option to `Require`, and **SSL TLS Protocol** to 1.2. The other SSL fields are not required for **SSL Mode**: `Require`. |
 
 ## Connection issues
 
@@ -97,6 +98,4 @@ ERROR: The endpoint ID is not specified. Either upgrade the Postgres client libr
 
 </CodeBlock>
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

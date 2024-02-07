@@ -5,12 +5,13 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2023-10-19T23:10:12.847Z'
+updatedOn: '2024-01-26T16:30:34.543Z'
 ---
 
-With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases, and with the Pro plan, as many branches of those databases, as your application or workflow needs. However, [tier limits](/docs/introduction/plans) define how many projects you can create. Neon's Free Tier limits you to one project per Neon account.
+With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases, and with the Neon Pro Plan, as many branches of those databases, as your application or workflow needs. However, [tier limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Tier limits you to one project per Neon account.
 
 Learn more about projects and how to manage them in these sections:
+
 - [Default resources](#default-resources)
 - [Project Settings](#about-the-settings-page)
 - [Basic actions](#basic-actions)
@@ -24,7 +25,7 @@ When you add a new project, Neon creates the following resources by default:
 - A primary branch called `main`. You can create child branches from the primary branch or from any previously created branch. For more information, see [Manage branches](/docs/manage/branches).
 - A single read-write compute endpoint. This is the compute instance associated with the branch. For more information, see [Manage computes](/docs/manage/endpoints).
 - A ready-to-use database, called `neondb`, which lives in the project's primary branch.
-- A default Postgres role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
+- A default Postgres role that takes its name from your Neon account (the email, Google, GitHub, or partner account that you registered with).
 
 ## About the Settings page
 
@@ -35,7 +36,7 @@ Once you open a project, you can use the **Settings** page to manage that partic
 You can tab between these sections:
 
 - **General** &#8212; Change the name of your project or copy the project ID.
-- **Compute** &#8212; Set the auto-suspend and sizing defaults for any new compute instances you create when branching.
+- **Compute** &#8212; Set the autosuspend and sizing defaults for any new compute instances you create when branching.
 - **Storage** &#8212; Choose how long Neon maintains a history of changes for all branches.
 - **Sharing** &#8212; Let other users access your project's databases.
 - **Delete** &#8212; Use with care! This action deletes your entire project and all its objects, and is irreversible.
@@ -52,18 +53,16 @@ Here are some basic actions you can take to add or manage projects:
 
 ### Create a project
 
-Neon Free Tier users can create a single project. Support for multiple projects is available to Neon [Pro plan](/docs/introduction/pro-plan) users.
+The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Sign up](/docs/get-started-with-neon/signing-up). Neon Free Tier users are limited to a single Neon project. Support for multiple projects is only available to [Neon Pro Plan](/docs/introduction/pro-plan) users.
 
 To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
+2. Click **New Project**.
+3. Specify values for **Name**, **Postgres version**, and **Region**. Project names are limited to 64 characters. If you are a [Neon Pro Plan](/docs/introduction/pro-plan) user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
-2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
-
-3. Specify valeus for **Name**, **Postgres version**, and **Region**. Project names are limited to 64 characters. If you are a Neon [Pro plan](/docs/introduction/pro-plan) user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
-
-    - Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
-    - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
+    - Neon supports fixed size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+    - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
   
 4. Click **Create Project**.
 
@@ -104,7 +103,7 @@ To delete a project:
 
 ### Share a project
 
-Project sharing is a Neon Pro plan feature that allows you to share your project with other Neon accounts.
+Project sharing is a Neon Pro Plan feature that allows you to share your project with other Neon accounts.
 
 To share a project:
 
@@ -124,23 +123,25 @@ For additional information, refer to our [Project sharing guide](/docs/guides/pr
 
 From the **Settings** page, you can also set defaults or apply bulk changes across your Neon objects:
 
-- [Reset default compute size](#reset-the-default-compute-size) (Pro plan only)
+- [Reset default compute size](#reset-the-default-compute-size) (Neon Pro Plan only)
 - [Configure history retention range](#configure-history-retention)
+- [Enable logical replication](#enable-logical-replication)
+- [Configure IP Allow](#configure-ip-allow)
 
 ### Reset the default compute size
 
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
 
-For [Free Tier](/docs/introduction/free-tier) users, Neon sets your compute size to a static shared 1 vCPU, with 1 GB of RAM for each branch (max 10 branches).
+For [Neon Free Tier](/docs/introduction/free-tier) users, Neon sets your compute size to a static shared 1 vCPU, with 1 GB of RAM for each branch (max 10 branches).
 
-[Pro plan](/docs/introduction/pro-plan) users have the flexibility to choose a compute size for each branch's compute endpoint individually. By default, new branches inherit the compute endpoint size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create a series of read-only replicas, where each replica typically requires less compute per branch.
+[Neon Pro Plan](/docs/introduction/pro-plan) users have the flexibility to choose a compute size for each branch's compute endpoint individually. By default, new branches inherit the compute endpoint size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create a series of read-only replicas, where each replica typically requires less compute per branch.
 
 To reset the default compute size, go to **Settings** > **Compute**.
 
 You can choose from two options:
 
 - **Fixed Size:** Select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, _Autoscaling_ supports a range of 1/4 (.25) CU to 7 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 7 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 _Example: default minimum and maximum autoscale settings_
 
@@ -148,7 +149,7 @@ _Example: default minimum and maximum autoscale settings_
 
 ### Configure history retention
 
-By default, Neon retains a 7-day history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/billing#project-storage).
+By default, Neon retains a 7-day history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported range is 0 to 7 days for [Neon Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Neon Pro Plan](/docs/introduction/pro-plan) users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/billing#project-storage).
 
 To configure the history retention period for a project:
 
@@ -158,6 +159,209 @@ To configure the history retention period for a project:
     ![History retention configuration](/docs/relnotes/history_retention.png)
 4. Use the slider to select the history retention period.
 5. Click **Save**.
+
+## Enable logical replication
+
+Logical replication enables replicating data from your Neon databases to a variety of external destinations, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.
+
+<Admonition type="important">
+Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
+</Admonition>
+
+To enable logical replication for your project:
+
+1. Select your project in the Neon console.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Beta**.
+4. Click **Enable**.
+
+You can verify that logical replication is enabled by running the following query:
+
+```sql
+SHOW wal_level;
+wal_level 
+-----------
+logical
+```
+
+After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. To get started, refer to our [logical replication guides](/docs/guides/logical-replication-guide). 
+
+### Configure IP Allow
+
+Available to [Neon Pro Plan](/docs/introduction/pro-plan) users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default. 
+
+Optionally, you can allow unrestricted access to your project's [non-primary branches](/docs/manage/branches#non-primary-branch). For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing unrestricted access to your development branches.
+
+By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
+
+<Admonition type="note">
+Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4).
+</Admonition>
+
+<Tabs labels={["Neon Console", "CLI", "API"]}>
+
+<TabItem>
+
+To configure an allowlist:
+
+1. Select a project in the Neon console.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **IP Allow**.
+    ![IP Allow configuration](/docs/manage/ip_allow.png)
+4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
+5. Optionally, select **Allow unrestricted access to non-primary branches** to allow full access to your [no primary branches](/docs/manage/branches#non-primary-branch).
+5. Click **Save changes**.
+
+</TabItem>
+
+<TabItem>
+
+The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
+
+```bash
+neonctl ip-allow add 192.168.1.1 192.168.1.2
+┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
+│ Id                  │ Name                │ IP Addresses │ Primary Branch Only │
+├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
+│ wispy-haze-26469780 │ wispy-haze-26469780 │ 192.168.1.1  │ false               │
+│                     │                     │ 192.168.1.2  │                     │
+└─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
+```
+
+To apply an IP allowlist to the primary branch only, use the you can `--primary-only` option:
+
+```bash
+neonctl ip-allow add 192.168.1.1 --primary-only
+```
+
+To reverse that setting, use `--primary-only false`.
+
+```bash
+neonctl ip-allow add 192.168.1.1 --primary-only false
+```
+
+</TabItem>
+
+<TabItem>
+
+The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"primary_branch_only` option to `true` to apply the allowlist to your primary branch only, or `false` to apply it to all branches in your Neon project.
+
+```bash
+curl -X PATCH \
+     https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
+     -H 'accept: application/json' \
+     -H 'authorization: Bearer $NEON_API_KEY' \
+     -H 'content-type: application/json' \
+     -d '
+{
+  "project": {
+    "settings": {
+      "allowed_ips": {
+        "primary_branch_only": true,
+        "ips": [
+          "192.168.1.1", "192.168.1.2"
+        ]
+      }
+    }
+  }
+}
+' | jq
+```
+</TabItem>
+
+</Tabs>
+
+#### How to specify IP addresses
+
+You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). A combination of these options is also permitted. Multiple entries, whether they are the same or of different types, must be separated by a comma. Whitespace is ignored.
+
+- **Add individual IP addresses**: You can add individual IP addresses that you want to allow. This is useful for granting access to specific users or devices. This example represents a single IP address:
+
+  ```text
+  192.168.1.15
+  ```
+
+- **Define IP ranges**: For broader access control, you can define IP ranges. This is useful for allowing access from a company network or a range of known IPs. This example range includes all IP addresses from `192.168.1.20` to `192.168.1.30`: 
+
+  ```text
+  192.168.1.20-192.168.1.30
+  ```
+
+- **Use CIDR notation**: For more advanced control, you can use [CIDR (Classless Inter-Domain Routing) notation](/docs/reference/glossary#cidr-notation). This is a compact way of defining a range of IPs and is useful for larger networks or subnets. Using CIDR notation can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network.
+
+  This CIDR notation example represents all 256 IP addresses from  `192.168.1.0` to `192.168.1.255`. 
+
+  ```text
+  192.168.1.0/24
+  ```
+
+A combined example using all three options above, specified as a comma-separated list, would appear similar to the following:
+
+  ```text
+  192.168.1.15, 192.168.1.16, 192.168.1.20-192.168.1.30, 192.168.1.0/24S
+  ```
+
+This list combines individual IP addresses, a range of IP addresses, and a CIDR block. It illustrates how different types of IP specifications can be used together in a single allowlist configuration, offering a flexible approach to access control.
+
+#### Update an IP Allow configuration
+
+You can update your IP Allow configuration via the Neon Console or API as described in [Configure IP Allow](#configure-ip-allow). Replace the current configuration with the new configuration. For example, if your IP Allow configuration currently allows access from IP address `192.168.1.1`, and you want to extend access to IP address `192.168.1.2`, specify both addresses in your new configuration: `192.168.1.1, 192.168.1.2`. You cannot append values to an existing configuration. You can only replace an existing configuration with a new one.
+
+The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](/docs/reference/cli-ip-allow).
+
+#### Remove an IP Allow configuration
+
+To remove an IP configuration entirely to go back to the default "no IP restrictions" (`0.0.0.0`) configuration:
+
+<Tabs labels={["Neon Console", "CLI", "API"]}>
+
+<TabItem>
+
+1. Select a project in the Neon console.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **IP Allow**.
+4. Clear the **Allowed IP addresses and ranges** field.
+5. If applicable, clear the **Apply to primary branch only** checkbox.
+5. Click **Apply changes**.
+
+</TabItem>
+
+<TabItem>
+
+The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports removing an IP Allow configuration. To do so, specify `--ip-allow reset` without specifying any IP address values:
+
+```bash
+neonctl ip-allow reset
+```
+
+</TabItem>
+
+<TabItem>
+
+Specify the `ips` option with an empty string. If applicable, also include `"primary_branch_only": false`. 
+
+```bash
+curl -X PATCH \                                                            
+     https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
+     -H 'accept: application/json' \
+     -H 'authorization: Bearer $NEON_API_KEY' \
+     -H 'content-type: application/json' \
+     -d '
+{
+  "project": {
+    "settings": {
+      "allowed_ips": {
+        "primary_branch_only": false,
+        "ips": []         
+      }
+    }
+  }
+}
+'
+```
+</TabItem>
+
+</Tabs>
 
 ## Manage projects with the Neon API
 
@@ -177,7 +381,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a project. The [Neon Free Tier](/docs/introduction/free-tier) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
 
-```text
+```http
 POST /projects
 ```
 
@@ -186,7 +390,7 @@ The API method appears as follows when specified in a cURL command. The `myproje
 ```bash
 curl 'https://console.neon.tech/api/v2/projects' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "project": {
@@ -313,7 +517,7 @@ The response includes information about the roles, the ready-to-use database (`n
 
 The following Neon API method lists projects for your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojects).
 
-```text
+```http
 GET /projects
 ```
 
@@ -322,7 +526,7 @@ The API method appears as follows when specified in a cURL command:
 ```bash
 curl 'https://console.neon.tech/api/v2/projects' \
  -H 'Accept: application/json' \
- -H 'Authorization: Bearer $NEON_API_KEY' | jq
+ -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 <details>
@@ -355,7 +559,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 
 The following Neon API method updates the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateproject).
 
-```text
+```http
 PATCH /projects/{project_id}
 ```
 
@@ -364,7 +568,7 @@ The API method appears as follows when specified in a cURL command. The `project
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "project": {
@@ -402,7 +606,7 @@ curl 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
 
 The following Neon API method deletes the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteproject).
 
-```text
+```http
 DELETE /projects/{project_id}
 ```
 
@@ -412,7 +616,7 @@ The API method appears as follows when specified in a cURL command. The `project
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
@@ -439,6 +643,4 @@ curl -X 'DELETE' \
 
 </details>
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

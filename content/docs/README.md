@@ -1,3 +1,6 @@
+---
+updatedOn: '2024-01-23T16:35:18.273Z'
+---
 # Docs
 
 Welcome to Neon docs! This folder contains the source code of the [Neon docs](https://neon.tech/docs/).
@@ -183,6 +186,9 @@ int main() {
 }
 ```
 
+</CodeBlock>
+````
+
 Multiple lines
 
 ````md
@@ -275,11 +281,78 @@ class GFG {
 
 </details>
 
+## Tabs
+
+To display the tabs with content as image, video, code block, .etc, wrap the `TabItem` with `Tabs`
+
+````md
+<Tabs labels={["Content", "CLI"]}>
+
+<TabItem>
+In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
+
+<CodeBlock showLineNumbers>
+
+```bash
+- name: <db_name>
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url:
+        from_env: <DB_URL_ENV_VAR>
+    pool_settings:
+      idle_timeout: 180
+      max_connections: 50
+      retries: 1
+  tables: []
+  functions: []
+```
+
+</CodeBlock>
+
+Apply the Metadata by running:
+
+```bash
+hasura metadata apply
+```
+
+If you've spun up the Hasura Engine with Docker, you can access the Hasura Console by accessing it in a browser at the URL of your Hasura Engine instance, usually http://localhost:8080.
+
+<Admonition type="note">
+To access the Hasura Console via the URL the HASURA_GRAPHQL_ENABLE_CONSOLE environment variable or the `--enable-console` flag must be set to true.
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+Alternatively, you can create read replicas using the Neon API or Neon CLI.
+
+```bash
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/late-bar-27572981/endpoints \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
+     --data '
+{
+  "endpoint": {
+    "type": "read_only",
+    "branch_id": "br-young-fire-15282225"
+  }
+}
+' | jq
+```
+
+</TabItem>
+
+</Tabs>
+````
+
 ## Admonition
 
 To improve the documentation readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
 
-There are 5 types of Admonition: `note`, `important`, `tip`, `warning`, `info`; the default is `note`.
+There are 6 types of Admonition: `note`, `important`, `tip`, `warning`, `info`, `comingSoon`; the default is `note`.
 
 You may also specify an optional title with prop `title`.
 
@@ -302,6 +375,34 @@ Example:
 
 </details>
 
+## CTA
+
+This is a simple block with title, description text and one CTA button that accomplish certain actions.
+
+```md
+
+<CTA />
+
+```
+
+Check the example for default data of CTA block
+
+<details>
+<summary>Example</summary>
+
+![CTA example](cta-example.jpg)
+
+</details>
+
+
+To change text in CTA block, you can pass to the component props `title`, `description`, `buttonText`, `buttonUrl`:
+
+```md
+
+<CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL editor. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+
+```
+
 ## Images
 
 The images should be sourced in `public/docs` directory and be used in `.md` with the relative path, that begins with a `/` slash
@@ -312,11 +413,11 @@ Example file structure:
 ├── public
 │ ├── docs
 │   ├── conceptual-guides
-│     ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
+│   ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
 ├── content
 │ ├── docs
 │   ├── conceptual-guides
-│     ├── architecture-overview.md
+│   ├── architecture-overview.md
 ```
 
 Example content in `architecture-overview.md`:
@@ -360,22 +461,6 @@ Another term for smoke test
 {/* other content here */}
 ```
 
-### Detail Icon Cards
-
-`DetailIconCards` is a custom MDX component that displays data in a card format. Each card contains icon, title, href and description. This layout is especially useful for presenting grouped information in a visually pleasing and easy-to-understand way.
-
-```md
-
-<DetailIconCards>
-
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
-
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
-
-</DetailIconCards>
-
-```
-
 ### Acceptable markup for term
 
 - `*italic*`
@@ -402,6 +487,45 @@ Another term for smoke test
 ![Definition list example](definition-list-example.jpg)
 
 </details>
+
+## Detail Icon Cards
+
+`DetailIconCards` is a custom MDX component that displays data in a card format. Each card contains icon, title, href and description. This layout is especially useful for presenting grouped information in a visually pleasing and easy-to-understand way.
+
+```md
+<DetailIconCards>
+
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
+
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
+
+</DetailIconCards>
+```
+
+## Shared MDX components
+
+Create a [markdown file](https://github.com/neondatabase/website/blob/main/content/docs/shared-content/need-help.md) in folder `content/docs/shared-content/`, add to `sharedMdxComponents` the name of component and the path to component.
+
+```js
+const sharedMdxComponents = {
+  // name of component: path to component (not including content/docs/)
+  NeedHelp: 'shared-content/need-help',
+};
+
+export default sharedMdxComponents;
+```
+
+Insert a shared markdown and render inline.
+
+```md
+## Resources
+
+- [Open AI tiktoken source code on GitHub](https://github.com/openai/tiktoken)
+- [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
+
+<NeedHelp/>
+
+```
 
 ## Contributing
 

@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2023-10-20T13:35:56.482Z'
+updatedOn: '2024-01-16T20:50:14.114Z'
 ---
 
 Neon is Serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
@@ -10,8 +10,9 @@ Neon is Serverless Postgres built for the cloud. Neon separates compute and stor
 Refer to our _Get started_ documentation to get up and running in just a few minutes. You will learn how to:
 
 - [Sign up](/docs/get-started-with-neon/signing-up)
-- [Create your first project](/docs/get-started-with-neon/setting-up-a-project)
 - [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
+- [Connect with psql](/docs/connect/query-with-psql-editor)
+- [Install the Neon CLI](/docs/reference/cli-install)
 
 ## Explore the docs
 
@@ -43,6 +44,8 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
 
+<img src="/images/technology-logos/airbyte-logo.svg" width="36" height="36" alt="Airbyte" href="/docs/guides/logical-replication-airbyte" title="Replicate data from Neon with Airbyte" />
+
 <img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Astro" href="/docs/guides/astro" title="Connect an Astro site or app to Neon" />
 
 <img src="/images/technology-logos/aws-lambda-logo.svg" width="36" height="36" alt="AWS Lambda" href="/docs/guides/aws-lambda" title="Connect from AWS Lambda to Neon" />
@@ -53,6 +56,12 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Use Exograph with Neon" />
 
+<img src="/images/technology-logos/ferret-logo.svg" width="36" height="36" alt="FerretDB" href="/docs/guides/ferretdb" title="Use FerretDB with Neon" />
+
+<img src="/images/technology-logos/fivetran-logo.svg" width="36" height="36" alt="Fivetran" href="/docs/guides/logical-replication-fivetran" title="Replicate data from Neon with Fivetran" />
+
+<img src="/images/technology-logos/flyway-logo.svg" width="36" height="36" alt="Flyway" href="/docs/guides/flyway" title="Use Flyway with Neon" />
+
 <img src="/images/technology-logos/go-logo.svg" width="80" height="36" alt="Go" href="/docs/guides/go" title="Connect a Go application to Neon" />
 
 <img src="/images/technology-logos/grafbase-logo.svg" width="36" height="36" alt="Grafbase" href="/docs/guides/grafbase" title="Use Grafbase Edge Resolvers with Neon" />
@@ -61,13 +70,29 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/java-logo.svg" width="27" height="36" alt="Java" href="/docs/guides/java" title="Connect a Java application to Neon" />
 
+<img src="/images/technology-logos/kafka-logo.svg" width="36" height="36" alt="Kafka" href="/docs/guides/logical-replication-kafka-confluent" title="Replicate data from Neon with Kafka (Confluent)" />
+
 <img src="/images/technology-logos/koyeb-logo.svg" width="36" height="36" alt="Koyeb" href="/docs/guides/koyeb" title="Use Neon with Koyeb" />
 
 <img src="/images/technology-logos/laravel-logo.svg" width="35" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect from Laravel to Neon" />
 
+<img src="/images/technology-logos/liquibase-logo.svg" width="35" height="36" alt="Liquibase" href="/docs/guides/liquibase" title="Use Liquibase with Neon" />
+
+<img src="/images/technology-logos/materialize-logo.svg" width="36" height="36" alt="Materialize" href="/docs/guides/logical-replication-materialize" title="Replicate data from Neon to Materialize" />
+
 <img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
 
-<img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale" title="Connect Neon to PolyScale" />
+<img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale-integration" title="Add the Neon PolyScale integration" />
+
+<img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
+
+<img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-jdbc" title="Connect Quarkus (JDBC) to Neon" />
+
+<img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-reactive" title="Connect Quarkus (Reactive) to Neon" />
+
+<img src="/images/technology-logos/rails-logo.svg" width="36" height="36" alt="Rails" href="/docs/guides/ruby-on-rails" title="Connect a Rails application to Neon" />
+
+<img src="/images/technology-logos/remix-logo.svg" width="36" height="36" alt="Remix" href="/docs/guides/remix" title="Connect a Remix application to Neon" />
 
 <img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
 
@@ -85,6 +110,6 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 ## Join the community
 
-If you have questions about Neon or Postgres, reach out to Neon community members and developers in the [Neon Discourse Community](https://community.neon.tech/).
+If you have questions about Neon or Postgres, reach out to Neon community members and developers on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
 
-<CommunityBanner>Neon Discourse Community</CommunityBanner>
+<CommunityBanner buttonText="Join server" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Welcome to the Neon Discord Server!</CommunityBanner>

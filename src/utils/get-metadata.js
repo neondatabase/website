@@ -17,6 +17,8 @@ export default function getMetadata({
   publishedTime = null,
   authors = [],
   imagePath = DEFAULT_IMAGE_PATH,
+  isPostgres = false,
+  currentSlug = null,
 }) {
   const SITE_URL =
     process.env.VERCEL_ENV === 'preview'
@@ -42,7 +44,9 @@ export default function getMetadata({
       viewportFit: 'cover',
     },
     alternates: {
-      canonical: canonicalUrl,
+      canonical: isPostgres
+        ? `https://www.postgresql.org/docs/16/${currentSlug}.html`
+        : canonicalUrl,
       types: {
         'application/rss+xml': rssPathname ? `${SITE_URL}${rssPathname}` : null,
       },

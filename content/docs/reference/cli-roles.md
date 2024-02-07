@@ -2,12 +2,12 @@
 title: Neon CLI commands — roles
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-10-19T23:10:12.858Z'
+updatedOn: '2024-01-10T17:27:58.304Z'
 ---
 
 ## Before you begin
 
-- Before running the `roles` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+- Before running the `roles` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
 - If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 For information about roles in Neon, see [Manage roles](/docs/manage/roles).
@@ -44,8 +44,9 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
-| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
-| --branch   | Branch ID   | string | |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
+| `--branch`   | Branch ID or name   | string | |
 
 If a branch ID or name is not provided, the command lists roles for the primary branch of the project.
 
@@ -90,9 +91,10 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
-| --project-id         | Project ID                           | string | Only if your Neon account has more than one project |
-| --branch          | Branch ID                            | string | |
-| --name      | The role name. Cannot exceed 63 bytes in length.  | string | &check; |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`         | Project ID                           | string | Only if your Neon account has more than one project |
+| `--branch`          | Branch ID or name                           | string | |
+| `--name`      | The role name. Cannot exceed 63 bytes in length.  | string | &check; |
 
 If a branch ID or name is not provided, the command creates a role in the primary branch of the project.
 
@@ -127,8 +129,9 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
-| --project-id         | Project ID                           | string | Only if your Neon account has more than one project |
-| --branch          | Branch ID                            | string | |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`         | Project ID                           | string | Only if your Neon account has more than one project |
+| `--branch`          | Branch ID or name                          | string | |
 
 If a branch ID or name is not provided, the command assumes the role resides in the primary branch of the project.
 
@@ -147,6 +150,4 @@ neonctl roles delete sally
 
 </CodeBlock>
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

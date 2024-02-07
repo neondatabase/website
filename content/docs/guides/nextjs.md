@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2023-10-19T23:10:12.831Z'
+updatedOn: '2024-01-05T13:33:51.462Z'
 ---
 
 Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js application.
@@ -147,7 +147,7 @@ import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-ssl: true
+  ssl: true
 });
 
 export async function getServerSideProps() {
@@ -206,7 +206,7 @@ import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-ssl: true
+  ssl: true
 });
 
 export async function getStaticProps() {
@@ -266,7 +266,7 @@ import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-ssl: true
+  ssl: true
 });
 
 export default async function handler(req, res) {
@@ -366,6 +366,4 @@ Result(1) [
 
 </CodeBlock>
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

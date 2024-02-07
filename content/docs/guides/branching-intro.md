@@ -2,6 +2,7 @@
 title: Get started with branching
 subtitle: Everything you need to get started with Neon's branching feature
 enableTableOfContents: true
+updatedOn: '2024-01-26T18:19:19.803Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -14,7 +15,7 @@ Learn about branching and how you can apply it in your development workflows.
 
 <a href="/docs/introduction/branching" description="Learn about Neon's branching feature and how to use it in your development workflows" icon="branching">Learn about branching</a>
 
-<a href="https://neon.tech/blog/database-branching-for-postgres-with-neon" description="Blog: Read about how Neon's branching feature works and what it means for your workflows" icon="split-branch">Data branching for Postgres</a>
+<a href="https://neon.tech/blog/database-branching-for-postgres-with-neon" description="Blog: Read about how Neon's branching feature works and what it means for your workflows" icon="split-branch">Database branching for Postgres</a>
 
 </DetailIconCards>
 
@@ -36,7 +37,7 @@ Integrate branching into your CI/CD pipelines and workflows with the Neon API, C
 
 ## Preview deployments
 
-Create a branch for each preview deployment with the Neon-Vercel Integration.
+Create a branch for each preview deployment with the Neon Vercel Integration.
 
 <DetailIconCards>
 
@@ -60,13 +61,13 @@ Test potentially destructive or performance-impacting queries before your run th
 
 ## Data recovery
 
-Create a branch from the past to recover lost data or track down issues.
+Recover lost data or track down issues by restoring a branch to its history, or just create a point-in-time branch for historical analysis or any other reason.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/point-in-time-restore" description="Learn about Neon's point-in-time restore feature" icon="invert">Point-in-time restore</a>
+<a href="/docs/guides/branch-restore" description="Learn how to revert changes or recover lost data using Neon Branch Restore with Time Travel Assist" icon="invert">Branch Restore with Time Travel Assist</a>
 
-<a href="/docs/guides/branching-pitr" description="Learn how to restore your data to previous state using Neon's branching feature" icon="screen">Create a branch from the past</a>
+<a href="/docs/guides/branching-pitr" description="Learn how to create point-in-time branches" icon="screen">Create a branch from the past</a>
 
 <a href="https://neon.tech/blog/time-travel-with-postgres" description="Blog: Time travel with database branching to recover lost data" icon="screen">Time Travel with Postgres</a>
 

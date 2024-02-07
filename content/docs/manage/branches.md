@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2023-10-19T23:10:12.845Z'
+updatedOn: '2024-01-26T18:19:19.807Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [primary branch](#primary-branch) called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -22,15 +22,15 @@ When working with branches, it is important to remove old and unused branches. B
 
 Each Neon project has a primary branch. In the Neon Console, your primary branch is identified by a `PRIMARY` tag. You can designate any branch as the primary branch for your project. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch, which is typically the branch used in production.
 
-- For [Free Tier](/docs/introduction/free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
-- For [Pro plan](/docs/introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
+- For [Neon Free Tier](/docs/introduction/free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
+- For [Neon Pro Plan](/docs/introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
 
 ## Non-primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
-- For [Free Tier](/docs/introduction/free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Free Tier  _compute active time_ limit of 100 hours per month.
-- For [Pro plan](/docs/introduction/pro-plan) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
+- For [Neon Free Tier](/docs/introduction/free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier  _compute active time_ limit of 100 hours per month.
+- For [Neon Pro Plan](/docs/introduction/pro-plan) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Create a branch
 
@@ -42,12 +42,16 @@ To create a branch:
 ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch.
 5. Select a parent branch. You can branch from your Neon project's [primary branch](#primary-branch) or a [non-primary branch](#non-primary-branch).
-6. Select one of the following branching options:
-    - **Head**: Creates a branch with data up to the current point in time (the default).
-    - **Time**: Creates a branch with data up to the specified date and time.
-    - **LSN**: Creates a branch with data up to the specified [Log Sequence Number (LSN)](/docs/reference/glossary#lsn).
-7. Select whether or not to create a compute endpoint, which is required to connect to the branch. If you are unsure, you can add a compute endpoint later. Pro plan users can users click **Change** or **Settings** to override or modify the default compute settings, including the compute size, autoscaling, and auto-suspend settings.
-8. Click **Create Branch** to create your branch.
+6. Select an **Include data up to** option to specify the data to be included in your branch.   
+    - **Current point in time**: Creates a branch with the latest available data from the parent (the default).
+    - **Specific date and time**: Creates a branch with data up to a specific date and time, allowing for point-in-time restore.
+    - **Specific Log Sequence Number**: Creates a branch with data up to a specific [Log Sequence Number (LSN)](/docs/reference/glossary#lsn) in the database log, allowing for precise point-in-time restore.
+
+    <Admonition type="note">
+    The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occured after the specified date and time or LSN, which means the branch contains data as it existed previously, allowing for point-in-time restore. You can only specify a date and time or LSN value that falls within your history retention window, which is 7 days by default. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+    </Admonition>
+
+8. Click **Create new branch** to create your branch.
 
 You are directed to the **Branches** page where you are shown the details for your new branch.
 
@@ -127,6 +131,66 @@ A compute endpoint hostname starts with an `ep-` prefix. You can also find a com
 
 If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the [Guides](/docs/guides/guides-intro) section in the documentation provide connection examples for various languages and frameworks. For more information about connecting, see [Connect from any application](/docs/connect/connect-from-any-app).
 
+## Reset a branch from parent
+
+When working with database branches, you might find yourself in a situation where you need to update your working branch to the latest data from your main branch. For example, let's say you have two child branches `staging` and `development` forked from your `main` branch. You have been working on the `development` branch and find it is now too far out of date with `main`. You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the **Reset from parent** feature, you can perform a clean reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
+
+<u>Key points</u>:
+* You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are not currently supported.
+* This reset is a complete overwrite, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
+* Existing connections will be temporarily interupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+On the **Branches** page in the Neon Console, select the branch that you want to reset.
+
+The console opens to the details page for your branch, giving you key information about the branch and its child status: its parent, the last time it was reset, and other relevent detail.
+
+To reset the branch, select **Reset from parent** from either the **More** dropdown or the **Last Data Reset** panel.
+
+![Reset from parent](/docs/manage/reset_from_parent.png)
+
+<Admonition type="note">
+If this branch has children of its own, resetting is blocked. The resulting error dialog lets you delete these child branches, after which you can continue with the reset.
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+Using the CLI, you can reset a branch from parent using the following command:
+
+``` bash
+neonctl branches reset <id|name> --parent
+```
+In the `id|name` field, specify the branch ID or name of the child branch whose data you want to reset. The `--parent` parameter specifies the kind of reset action that Neon will perform. In the future, there may be other kinds of resets available. For example, rewinding a branch to an earlier period in time.
+
+If you have multiple projects in your account, you'll also have to include the `project-id` in the command along with the branch.
+
+``` bash
+neonctl branches reset <id|name> --parent --project-id <project id>
+```
+
+Example:
+``` bash
+neonctl branches reset development --parent --project-id noisy-pond-12345678
+```
+Alternatively, you can set the `project-id` as a background context for your CLI session, letting you perform other actions against that project without having to include the `project-id` in every command. The setting is saved in a `context-file` and remains in place until you set a new context, or you remove the `context-file`.
+
+```bash
+neonctl set-context --project-id <project id>
+```
+Read more about performing branching actions from the CLI in [CLI - branches](/docs/reference/cli-branches), and more about setting contexts in [CLI - set-context](/docs/reference/cli-set-context).
+
+</TabItem>
+
+<TabItem>
+Resetting from parent is not yet directly supported from the API. However, you can use the instructions on [Refreshing a branch](/docs/guides/branch-refresh) to perform a similar operation. It involves using the API to create a new branch, transfer the compute endpoint, deleting the old branch, and (optionally) renaming the new branch.
+</TabItem>
+
+</Tabs>
+
+
 ## Delete a branch
 
 Deleting a branch is a permanent action. Deleting a branch also deletes the databases and roles that belong to the branch as well as the compute endpoint associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
@@ -141,7 +205,7 @@ To delete a branch:
 
 ## Check the data size
 
-Tier limits define the amount of data you can store in a branch. Neon's [Free Tier](/docs/introduction/free-tier) permits 3 GiB per branch. When creating a new branch, the child branch includes the data from the parent branch. For example, if you have a branch with 1 GiB of data, the child branch is created with the same 1 GiB of data.
+Tier limits define the amount of data you can store in a branch. The [Neon Free Tier](/docs/introduction/free-tier) permits 3 GiB per branch. When creating a new branch, the child branch includes the data from the parent branch. For example, if you have a branch with 1 GiB of data, the child branch is created with the same 1 GiB of data.
 
 You can check the data size for a branch by viewing the `Database size` value on the branch details page (see [View branches](#view-branches)). Alternatively, you can run the following query from the Neon SQL Editor:
 
@@ -176,7 +240,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranch).
 
-```text
+```http
 POST /projects/{project_id}/branches 
 ```
 
@@ -186,10 +250,10 @@ The API method appears as follows when specified in a cURL command. The `endpoin
 This method does not require a request body. Without a request body, the method creates a branch from the project's primary branch, and a compute endpoint is not created.
 </Admonition>
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "endpoints": [
@@ -281,16 +345,16 @@ The response body includes information about the branch, the branch's compute en
 
 The following Neon API method lists branches for the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranches).
 
-```text
+```http
 GET /projects/{project_id}/branches
 ```
 
 The API method appears as follows when specified in a cURL command:
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
@@ -334,7 +398,7 @@ The response body lists the project's primary branch and any child branches. The
 
 The following Neon API method deletes the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranch).
 
-```text
+```http
 DELETE /projects/{project_id}/branches/{branch_id}
 ```
 
@@ -344,7 +408,7 @@ The API method appears as follows when specified in a cURL command:
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches/br-dawn-scene-747675' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 - The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
@@ -397,6 +461,4 @@ The response body shows information about the branch being deleted and the `susp
 
 You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches-with-the-api). The deleted branch should no longer be listed.
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

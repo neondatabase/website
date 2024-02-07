@@ -13,6 +13,7 @@ import illustration from './images/cta-elephant.jpg';
 
 const CTAWithElephant = ({
   className = '',
+  titleClassName = '',
   buttonClassName = '',
   label = null,
   labelTheme = 'green',
@@ -38,11 +39,16 @@ const CTAWithElephant = ({
           </GradientLabel>
         )}
         <Heading
-          className="max-w-[500px] xl:max-w-[400px] lg:max-w-[350px] md:mx-auto"
+          className={clsx(
+            'max-w-[500px] xl:max-w-[400px] lg:max-w-[350px] md:mx-auto',
+            titleClassName
+          )}
           tag="h2"
           size="2sm"
-          dangerouslySetInnerHTML={{ __html: title }}
-        />
+          asHTML
+        >
+          {title}
+        </Heading>
         <p className="mt-3 max-w-[464px] text-lg font-light leading-snug xl:max-w-[400px] xl:text-base lg:max-w-sm md:mx-auto md:max-w-md">
           {description}
         </p>
@@ -58,16 +64,18 @@ const CTAWithElephant = ({
           >
             {buttonText}
           </AnimatedButton>
-          <Link
-            className="tracking-extra-tight underline-offset-[5px]"
-            theme="green-underlined"
-            to={linkUrl}
-            target={linkTarget}
-            rel={linkTarget ? 'noopener noreferrer' : undefined}
-            size="sm"
-          >
-            {linkText}
-          </Link>
+          {linkUrl && linkText && (
+            <Link
+              className="tracking-extra-tight underline-offset-[5px]"
+              theme="green-underlined"
+              to={linkUrl}
+              target={linkTarget}
+              rel={linkTarget ? 'noopener noreferrer' : undefined}
+              size="sm"
+            >
+              {linkText}
+            </Link>
+          )}
         </div>
       </div>
       <div className="relative col-span-7 col-start-6 2xl:col-span-6 2xl:col-start-7 md:z-20 md:col-span-full md:flex md:justify-center">
@@ -85,6 +93,7 @@ const CTAWithElephant = ({
 
 CTAWithElephant.propTypes = {
   className: PropTypes.string,
+  titleClassName: PropTypes.string,
   buttonClassName: PropTypes.string,
   label: PropTypes.string,
   labelTheme: PropTypes.oneOf(['green', 'gray']),
@@ -92,8 +101,8 @@ CTAWithElephant.propTypes = {
   description: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
   buttonText: PropTypes.string.isRequired,
-  linkUrl: PropTypes.string.isRequired,
-  linkText: PropTypes.string.isRequired,
+  linkUrl: PropTypes.string,
+  linkText: PropTypes.string,
   linkTarget: PropTypes.string,
 };
 

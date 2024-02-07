@@ -2,7 +2,7 @@
 title: Refresh a branch
 subtitle: Learn how to refresh a Neon branch using the Neon API
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.373Z'
+updatedOn: '2024-01-08T20:02:33.919Z'
 ---
 
 When you create a branch in Neon, you create a copy-on-write clone that reflects the current state of the parent branch, but what do you do if your branch becomes stale? For example, changes are made to the data or schema on the parent branch that you would like reflected in your development branch, or your branch has aged out of the point-in-time restore window (the history shared with the parent branch) and is now taking up storage space. Ideally, you want to refresh your branch but keep the same compute endpoint, whose connection details may already be configured in your application or toolchain.
@@ -31,12 +31,12 @@ The following information is required to perform the procedure:
 
 The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) request shown below creates a branch without a compute endpoint. The only required parameter is your Neon `project_id`. The `project_id` value used in the example below is `dark-cell-12604300`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
-```curl
+```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "branch": {
@@ -113,19 +113,19 @@ The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint
 
 <CodeBlock shouldWrap>
 
-```curl
+```bash
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/%20dark-cell-12604300/endpoints/ep-divine-violet-55990977 \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "endpoint": {
     "branch_id": "br-falling-flower-15986510"
   }
 }
-' |jq
+' | jq
 ```
 
 </CodeBlock>
@@ -168,11 +168,11 @@ The [Delete branch](https://api-docs.neon.tech/reference/deleteprojectbranch) AP
 
 <CodeBlock shouldWrap>
 
-```curl
+```bash
 curl --request DELETE \
      --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches/br-wandering-forest-45768684 \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' |jq
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 </CodeBlock>
@@ -222,12 +222,12 @@ Optionally, you can rename the new branch to the name of the old branch. The [Up
 
 <CodeBlock shouldWrap>
 
-```curl
+```bash
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/dark-cell-12604300/branches/br-falling-flower-15986510 \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "branch": {

@@ -17,7 +17,7 @@ Why use Neon and StepZen together? Neon is serverless Postgres. Neon separates s
 Before generating a GraphQL API, you must set up a Neon database, which you can do it in a few steps:
 
 1. Sign in to Neon, or [sign up](/docs/get-started-with-neon/signing-up) if you do not yet have an account.
-2. [Create a project](/docs/get-started-with-neon/setting-up-a-project).
+2. Select a Neon project. If you do not have one, see [Create a project](/docs/manage/projects#create-a-project).
 3. [Create a database](/docs/manage/databases#create-a-database) or use the ready-to-use `dbname` database.
 
 You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**.
