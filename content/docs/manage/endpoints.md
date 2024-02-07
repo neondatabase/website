@@ -103,6 +103,26 @@ The `neon_utils` extension provides a `num_cpus()` function you can use to monit
 
 ### How to size your compute
 
+If your compute size is too small, this can lead to suboptimal query performance and connection limit issues, as the size of your compute determines the amount of memory available for caching data and the maximum number of concurrent connections.
+
+In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a local file cache to extend the memory allocated to shared buffers. Generally, we recommend a `shared_buffers` limit that is 50% of RAM.
+
+The maximum_connections setting 
+
+The following table outlines the vCPU, RAM, shared_buffer limit, the `max_connections` limit.
+
+| Compute Size (CU) | vCPU | RAM   | shared_buffers | max_connections | 
+|--------------|------|-------|----------------|-----------------|
+| 0.25         | 0.25 | 1 GB  | 0.5 GB         | 112             |
+| 0.50         | 0.50 | 2 GB  | 1 GB           | 225             |
+| 1            | 1    | 4 GB  | 2 GB           | 450             |
+| 2            | 2    | 8 GB  | 4 GB           | 901             |
+| 3            | 3    | 12 GB | 6 GB           | 1351            |
+| 4            | 4    | 16 GB | 8 GB           | 1802            |
+| 5            | 5    | 20 GB | 10 GB          | 2253            |
+| 6            | 6    | 24 GB | 12 GB          | 2703            |
+| 7            | 7    | 28 GB | 14 GB          | 3154            |
+
 Ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that will hold your [working set](#sizing-your-computed-based-on-the-working-set).
 
 In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a local file cache to extend the memory allocated to shared buffers. Generally, we recommend a `shared_buffers` limit that is 50% of RAM.
