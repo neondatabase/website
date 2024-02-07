@@ -7,12 +7,12 @@ enableTableOfContents: true
 ## Overview
 
 To find out what's going on with your Neon projects and databases, Neon offers several ways to visualize your usage and track your metrics:
-- [Project dashboard](#dashboard) &#8212; widgets that display the most recent usage metrics for your main branch
-- [Autoscaling graphs](#autoscaling-graphs) &#8212; a visualization of recent vCPU and RAM usage to help understand your sizing needs
-- [Branch-specific metrics](#branch-specific-metrics) &#8212; the **Branches** page lets you view key metrics for all branches in your project
-- [API metrics](#api-metrics) &#8212; use the [Neon API](link) to gather a variety of usage metrics for your projects
-- [neon_utils](#the-neon_utils-extension) &#8212; a custom Postgres extension that helps you monitor how autoscaling allocates vCPU in response to workload
-- [Other Postgres options](#other-postgres-options) &#8212; other extensions and tools like `pg_stat_statements` and the `pg_hero` dashbaord can provide details about the SQL execution counts, totals, average execution time, and other insights into how your database is being used.
+- [Project dashboard](#dashboard) &#8212; Find widgets that display the most recent usage metrics across your project
+- [Autoscaling graphs](#autoscaling-graphs) &#8212; a visualization of recent vCPU and RAM usage to help understand your sizing needs.
+- [Branch-specific metrics](#branch-specific-metrics) &#8212; View key metrics for all branches in your project on the **Branches** page.
+- [API metrics](#api-metrics) &#8212; Use the [Neon API](link) to gather a variety of usage metrics for your project.
+- [neon_utils](#the-neon_utils-extension) &#8212; A custom Postgres extension that helps you monitor how autoscaling allocates vCPU in response to workload.
+- [Other Postgres options](#other-postgres-options) &#8212; Other extensions and tools like `pg_stat_statements` and the `pg_hero` dashboard can provide details about SQL execution counts, totals, average execution time, and other insights into how your database is being used.
 
 ## Dashboard
 
@@ -35,16 +35,28 @@ See [Monitoring Autoscaling](/docs/guides/autoscaling#monitoring-autoscaling) fo
 
 The **Branches** page provides key usage metrics for all your branches in a consolidated view.
 
-[screenshot calling out key metrics]
+[screenshot calling out key metrics?]
 
 ## API metrics
 
-Using the Neon API, you can collect a variety of usage-based consumption metrics. 
+Using the Neon API, you can collect a variety of usage-based consumption metrics like  `data_storage_bytes_hour` and `compute_time_seconds`.
+
+Use this GET request to get details from an individual project.
+
+```curl
+curl --request GET \
+     --url https://console.neon.tech/api/v2/projects/[project_ID] \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" | jq
+```
+
+For more details, see [Retrieving details about a project](/docs/guides/partner-billing#retrieving-details-about-a-project).
 
 ## The neon_utils extension
 
-
 The neon_utils extension provides a num_cpus() function you can use to monitor how Neon's Autoscaling feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
+
+For full details, see [neon_utils](/docs/extensions/neon-utils).
 
 ## Other Postgres options
 
@@ -69,8 +81,6 @@ Neon recommends a few tools from the Postgres community that can help you unders
 
 ## Feedback and future improvements
 
-At Neon, we understand that better observability and monitoring are critical for running successful applications. 
+At Neon, we understand that observability and monitoring are critical for running successful applications.
 
-Check out our [roadmap](/docs/introduction/roadmap) to see what's coming next. 
-
-If you've got feature requests or feedback about what you'd like to see in Neon observability features, let us know in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042).
+Check out our [roadmap](/docs/introduction/roadmap) to see what's coming next. And if you've got feature requests or feedback about what you'd like to see in Neon observability features, let us know in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042).
