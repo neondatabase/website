@@ -18,12 +18,12 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 When you open a project in the Neon console, the Dashboard gives you a snapshot view of the most recent usage metrics for that project:
 
-- **Branches**  &#8212; Shows how much storage your main branch has currently used. It also lists a subset of other branches.
-- **Usage since...**  &#8212; Shows a snapshot of your current consumption metrics since your last billing date (the last day of the previous month).
-- **Project settings** &#8212; Shows current project settings like your sizing defaults and history retention window.
-- **Operations** &#8212; Lists a subset of your most recent Neon operations like create_branch and check_availability. If there are any critical issues or events, you should see these show up in here.
+- **Branches** widget &#8212; Shows how much storage your main branch has currently used. It also lists a subset of other branches.
+- **Usage since...** widget  &#8212; Shows a snapshot of your current consumption metrics since your last billing date (the last day of the previous month).
+- **Project settings** widget &#8212; Shows current project settings like your sizing defaults and history retention window.
+- **Operations** widget &#8212; Lists a subset of your most recent Neon operations like create_branch and check_availability. If there are any critical issues or events, you should see these show up here.
 
-In any of these widget, you can click the link in the top right corner to get more detail, a wider view, and take actions.
+In any of these widgets, you can click the link in the top right corner to get more detail, a wider view, and take various actions.
 
 ## Autoscaling graphs
 
@@ -33,7 +33,7 @@ See [Monitoring Autoscaling](/docs/guides/autoscaling#monitoring-autoscaling) fo
 
 ## Branch-specific metrics
 
-The **Branches** page provides key usage metrics for all your branches in a consolidated view.
+The **Branches** page provides key usage metrics for all your branches, like active time and used space, in a consolidated view.
 
 [screenshot calling out key metrics?]
 
@@ -62,22 +62,41 @@ For full details, see [neon_utils](/docs/extensions/neon-utils).
 
 Neon recommends a few tools from the Postgres community that can help you understand what is happening within your database:
 
-- `pg_stat_activity` &#8212; a system view in Postgres that provides real-time information on current database connections and queries being executed. A helpful for determining who is accessing your database.
+- `pg_stat_activity`
+- `pg_stat_statements`
+- `pg_hero`
 
-    Try this query out in the Neon Console:
+### pg_stat_activity
 
-    ```sql
-    SELECT * FROM pg_stat_activity;
-    ```
+This system view built into Postgres provides real-time information on current database connections and queries being executed. A helpful for determining who is accessing your database.
 
-    You should see a range of information about what's currently happening in the selected database. For detail, see [pg_stat_activity](https://neon.tech/docs/postgres/monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW).
-- [pg_stat_statements](/docs/extensions/pg_stat_statements) &#8212; A Postgres extension that tracks information such as execution counts, total and average execution times, latency, and so on, that can help you analyze and optimize SQL query performance.
+Try this query out in the Neon Console:
 
-    <Admonition type="note">
-    Currently, not all information within `pg_stats_statements` persists when a compute instance is autosuspended (scales-to-zero) due to inactivity.For example, the text of your queries may not survive the restart. Our teams are looking into making all `pg_stat_statements` data persistent across compute restarts.
-    </Admonition>
+```sql
+SELECT * FROM pg_stat_activity;
+```
 
-- [pg_hero](https://github.com/pghero/pghero)  an open-source performance tool for Postgres that can help you find and fix data issues, using a dashboard interface.
+You should see a range of information about what's currently happening in the selected database. For details, see [pg_stat_activity](https://neon.tech/docs/postgres/monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW).
+
+### pg_stat_statements
+
+A Postgres extension that tracks information such as execution counts, total and average execution times, latency, and so on, which can help you analyze and optimize SQL query performance.
+
+Here are some typical queries that you might find helpful:
+
+- [Monitor slow queries](/docs/extensions/pg_stat_statements#monitor-slow-queries)
+- [Find the most frequently executed queries](/docs/extensions/pg_stat_statements#monitor-slow-queries)
+- [Find the most time-consuming queries](/docs/extensions/pg_stat_statements#monitor-slow-queries)
+
+For more information, see our [pg_stat_statements](/docs/extensions/pg_stat_statements) documentation page.
+
+<Admonition type="note">
+Currently, not all information within `pg_stats_statements` persists when a compute instance is autosuspended (scales-to-zero) due to inactivity. For example, the text of your queries may not survive the restart. Our teams are looking into making all `pg_stat_statements` data persistent across compute restarts.
+</Admonition>
+
+### pg_hero
+
+[pg_hero](https://github.com/pghero/pghero) is an open-source performance tool for Postgres that can help you find and fix data issues, using a dashboard interface.
 
 ## Feedback and future improvements
 
