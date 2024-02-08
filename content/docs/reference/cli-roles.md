@@ -2,7 +2,7 @@
 title: Neon CLI commands — roles
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-01-10T17:27:58.304Z'
+updatedOn: '2024-02-08T15:20:54.297Z'
 ---
 
 ## Before you begin
