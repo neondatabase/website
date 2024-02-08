@@ -1,10 +1,6 @@
 import { AnalyticsBrowser } from '@segment/analytics-next';
 
-let analytics;
-
-if (process.env.NODE_ENV === 'production') {
-  analytics = AnalyticsBrowser.load({ writeKey: process.env.NEXT_PUBLIC_SEGMENT_WRITE_KEY });
-}
+const analytics = AnalyticsBrowser.load({ writeKey: process.env.NEXT_PUBLIC_SEGMENT_WRITE_KEY });
 
 export default async function sendSegmentEvent(eventName, properties) {
   try {
