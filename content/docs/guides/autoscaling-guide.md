@@ -72,7 +72,7 @@ To edit a compute endpoint:
 The Autoscaling Graphs are available for select users and will be expanded to all paying users soon.
 </Admonition>
 
-From the Neon Console, you can view how your CPU and compute hour usage scales over time (last hour, day, and week). From the **Branches** page, open the branch you want to inspect, then open the **Edit** modal for its compute endpoint.
+From the Neon Console, you can view how your vCPU and RAM usage scales over time (last hour, day, and week). From the **Branches** page, open the branch you want to inspect, then open the **Edit** modal for its compute endpoint.
 
 ![autoscaling graph example](/docs/guides/autoscaling_graphs_sample.png)
 
