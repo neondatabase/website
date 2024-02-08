@@ -27,7 +27,7 @@ Here's a snapshot of what we're working on now:
 
 * **Autoscaling visualizations**
 
-    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time.
+    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time. See [Monitoring autoscaling](docs/guides/autoscaling-guide#monitor-autoscaling) for a sneak peek.
 
 ### Developer workflows
 
