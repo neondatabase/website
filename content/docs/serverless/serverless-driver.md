@@ -427,10 +427,13 @@ The Ping Thing application pings a Neon Serverless Postgres database using a Ver
 <a href="https://github.com/neondatabase/ping-thing" description="Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes" icon="github">Ping Thing</a>
 </DetailIconCards>
 
+## Neon serverless driver GitHub repository and changelog
+
+The GitHub repository and [changelog](https://github.com/neondatabase/serverless/blob/main/CHANGELOG.md) for the Neon serverless driver are found [here](https://github.com/neondatabase/serverless).
+
 ## References
 
 - [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-- [Neon serverless driver GitHub repository](https://github.com/neondatabase/serverless)
 - [node-postgres](https://node-postgres.com/)
 - [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon)
 - [kysely](https://github.com/kysely-org/kysely)
