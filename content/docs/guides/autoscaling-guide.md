@@ -6,7 +6,7 @@ enableTableOfContents: true
 updatedOn: '2024-01-10T18:34:05.855Z'
 ---
 
-Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current workload, eliminating the need for manual intervention. This guide demonstrates how to enable autoscaling in your Neon project.
+Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current workload, eliminating the need for manual intervention. This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
 
 _Autoscaling_ is a [Neon Pro Plan](/docs/introduction/pro-plan) feature. Neon Pro Plan users can enable autoscaling for a new project, for an existing project, or for an individual compute endpoint. Autoscaling is supported with both read-write and read-only compute endpoints. Read-only compute endpoints enable Neon's [Read replica](/docs/introduction/read-replicas) feature.
 
@@ -68,4 +68,36 @@ To edit a compute endpoint:
 
 ## Monitor autoscaling
 
-The `neon_utils` extension provides a `num_cpus()` function for monitoring how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
+<Admonition type="comingSoon">
+The Autoscaling Graphs are available for select users and will be expanded to all paying users soon.
+</Admonition>
+
+From the Neon Console, you can view how your vCPU and RAM usage scales over time (last hour, day, and week). From the **Branches** page, open the branch you want to inspect, then open the **Edit** modal for its compute endpoint.
+
+![autoscaling graph example](/docs/guides/autoscaling_graphs_sample.png)
+
+Some key points about this Autoscaling view:
+
+- Allocation refers to the vCPU and memory size provisioned to handle current demand; autoscaling automatically adjusts this allocation, increasing or decreasing the allocated vCPU and memory size in a step-wise fashion as demand fluctuates, within your minimum and maximum limits.
+- Your minimum and maximum limits are shown as solid horizontal lines. This represents the allocation boundary: the size of your allocated vCPU/memory stays within this range so long as your compute endpoint remains active. It scales to zero after the defined period of inactivity.
+- A re-activated compute endpoint scales up immediately to your minimum allocation, ensuring adequate performance for your anticipated demand.
+
+Place your cursor anywhere in the graph to get more usage detail about that particular point in time.
+
+![autoscaling graph detail](/docs/guides/autoscaling_graph_detail.png)
+
+See below for some rules of thumb on actions you might want to take based on trends you see in this view.
+
+### Start with a good minimum
+
+Ideally, for smaller datasets, you want to keep as much of your dataset in memory (RAM) as possible. This improves performance by minimizing I/O operations. We recommend setting a large enough minimum limit to fit your full dataset in memory. For larger datasets and more sizing advice, see [how to size your compute endpoint](/docs/manage/endpoints#how-to-size-your-compute-endpoint).
+
+### Setting your maximum
+
+If your autoscaling graphs show regular spikes that hit your maximum setting, consider increasing your maximum. However, because these spikes plateau at the maximum setting, it can be difficult to determine your actual demand.
+
+Another approach is to set a higher threshold than you need and monitor usage spikes to get a sense of where your typical maximum demand reaches; you can then throttle the maximum setting down closer to anticipated/historical demand. Either way, with autoscaling you only pay for what you use; a higher setting does not translate to higher costs unless the demand is there to increase usage.
+
+### The neon_utils extension
+
+Another tool for understanding usage, the `neon_utils` extension provides a `num_cpus()` function that helps you monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).

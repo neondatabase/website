@@ -429,6 +429,10 @@ Write-ahead logs in a specific LSN range.
 
 The stream of data written to the Write-Ahead Log (WAL) during transactional processing.
 
+## Working set
+
+A subset of frequently accessed or recently used data and indexes that ideally reside in memory (RAM) for quick access, allowing for better performance. See [how to size your compute](/docs/manage/endpoints#how-to-size-your-compute) to learn how to set your minimum compute to an adequate size to handle your working set.
+
 ## Write-Ahead Logging (WAL)
 
 A standard mechanism that ensures the durability of your data. Neon relies on WAL to separate storage and compute, and to support features such as branching and point-in-time restore.
