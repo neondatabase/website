@@ -123,6 +123,7 @@ The following table outlines the vCPU, RAM, `shared_buffer` limit (50 % of RAM),
 | 6            | 6    | 24 GB | 12 GB          | 2703            |
 | 7            | 7    | 28 GB | 14 GB          | 3154            |
 
+
 <Admonition type="note">
 Neon Pro Plan users can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
 </Admonition> 
@@ -133,44 +134,26 @@ Regarding connection limits, you'll want a compute size that can support your an
 
 #### Sizing your computed based on the working set
 
-If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is fully in memory. A working set is a subset of frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your workload using a query like this one:
+If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is a subset of frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your workload. The cache hit ratio measures how many queries are serviced from memory compared to how many queries are received. Queries not serviced from memory must bypass the cache to retrieve data from disk. 
+
+For example, if you have 100 queries successfully served from memory and two queries go to disk, your cache hit ratio is 100/102, which is 98%.
+
+You can use the following query to find your cache hit ratio:
 
 ```sql
-WITH 
-    all_tables AS
-    (
-        SELECT  *
-        FROM    
-        (
-            SELECT  'all'::text AS table_name, 
-                    SUM( (COALESCE(heap_blks_read,0) + COALESCE(idx_blks_read,0) + COALESCE(toast_blks_read,0) + COALESCE(tidx_blks_read,0)) ) AS from_disk, 
-                    SUM( (COALESCE(heap_blks_hit,0)  + COALESCE(idx_blks_hit,0)  + COALESCE(toast_blks_hit,0)  + COALESCE(tidx_blks_hit,0))  ) AS from_cache    
-            FROM    pg_statio_all_tables  -- change to pg_statio_USER_tables if you want to check only user tables (excluding postgres's own tables)
-        ) a
-        WHERE   (from_disk + from_cache) > 0 -- discard tables without hits
-    ),
-    tables AS 
-    (
-        SELECT  *
-        FROM    
-        (
-            SELECT  relname AS table_name, 
-                    ( (COALESCE(heap_blks_read,0) + COALESCE(idx_blks_read,0) + COALESCE(toast_blks_read,0) + COALESCE(tidx_blks_read,0)) ) AS from_disk, 
-                    ( (COALESCE(heap_blks_hit,0)  + COALESCE(idx_blks_hit,0)  + COALESCE(toast_blks_hit,0)  + COALESCE(tidx_blks_hit,0))  ) AS from_cache    
-            FROM    pg_statio_all_tables -- change to pg_statio_USER_tables if you want to check only user tables (excluding postgres's own tables)
-        ) a
-        WHERE   (from_disk + from_cache) > 0 -- discard tables without hits
-    )
-SELECT  table_name AS "table name",
-        from_disk AS "disk hits",
-        ROUND((from_disk::numeric / (from_disk + from_cache)::numeric) * 100.0, 2) AS "% disk hits",
-        ROUND((from_cache::numeric / (from_disk + from_cache)::numeric) * 100.0, 2) AS "% cache hits",
-        (from_disk + from_cache) AS "total hits"
-FROM    (SELECT * FROM all_tables UNION ALL SELECT * FROM tables) a
-ORDER   BY (CASE WHEN table_name = 'all' THEN 0 ELSE 1 END), from_disk DESC;
+SELECT 
+  sum(heap_blks_read) as heap_read,
+  sum(heap_blks_hit)  as heap_hit,
+  sum(heap_blks_hit) / (sum(heap_blks_hit) + sum(heap_blks_read)) as ratio
+FROM 
+  pg_statio_user_tables;
 ```
 
-If this query does not return results in the 99% percentile for your tables, your working set is not fully or adequately in memory. In this case, you should consider using a larger compute size to increase the amount of memory available to you.
+If this query does not return a cache hit ratio of 99%, your working set is not fully or adequately in memory. In this case, you should consider using a larger compute with more memory.
+
+<Admonition type="note">
+The cache hit ratio query is based on statistics that represent the lifetime of your compute instance, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has had time to run. For example, changing your compute size requires a compute restart. In this case, you run a representative workload before you run the cache hit ratio query again to see if your cache hit ration has improved.
+</Admonition>
 
 #### Autoscaling considerations
 
