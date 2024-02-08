@@ -58,13 +58,9 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
-  code: (props) => {
-    if (props?.className?.startsWith('language-') && props?.children) {
-      return <CodeBlock as="figure" {...props} />;
-    }
-    return <code {...props} />;
-  },
-  pre: (props) => <CodeBlock {...props} />,
+  pre: (props) => {
+    const language = props.children?.props?.className?.replace('language-', '') || '';
+  return <CodeBlock {...props} as="figure" language={language} />},
   a: (props) => {
     const { href, children, ...otherProps } = props;
     if (children === '#id') {
