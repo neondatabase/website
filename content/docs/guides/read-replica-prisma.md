@@ -2,7 +2,7 @@
 title: Use Neon read replicas with Prisma
 subtitle: Learn how to scale Prisma applications with Neon read replicas
 enableTableOfContents: true
-updatedOn: '2024-01-10T18:34:05.858Z'
+updatedOn: '2024-02-08T15:20:54.290Z'
 ---
 
 A Neon read replica is an independent read-only compute instance that performs read operations on the same data as your read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -68,13 +68,9 @@ Connecting to a read replica is the same as connecting to any branch in a Neon p
 1. Under **Compute**, select your **Read-only** compute endpoint.
 1. Select the connection string and copy it. This is the information you need to connect to the read replica from your Prisma Client. The connection string appears similar to the following:
 
-   <CodeBlock shouldWrap>
-
-   ```bash
+   ```bash shouldWrap
    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
    ```
-
-   </CodeBlock>
 
    If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string, but remember to append `?pgbouncer=true` to the connection string when using a pooled connection. Prisma requires this flag when using Prisma Client with PgBouncer. See [Use connection pooling with Prisma](/docs/guides/prisma#use-connection-pooling-with-prisma) for more information.
 

@@ -905,6 +905,3 @@ Oleg Bartunov `<oleg@sai.msu.su>`, Moscow, Moscow University, Russia
 Teodor Sigaev `<teodor@sigaev.ru>`, Moscow, Delta-Soft Ltd., Russia
 
 Additional enhancements by Andrew Gierth `<andrew@tao11.riddles.org.uk>`, United Kingdom
-
-```
-````

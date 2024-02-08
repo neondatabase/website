@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-02-02T17:58:23.766Z'
+updatedOn: '2024-02-08T15:20:54.297Z'
 ---
 
 ## Access token
@@ -93,13 +93,9 @@ A method of creating a pool of connections and caching those connections for reu
 
 A string containing details for connecting to a Neon database. The details include a user name (role), compute endpoint hostname, and database name; for example:
 
-<CodeBlock shouldWrap>
-
-```terminal
+```bash shouldWrap
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
-
-</CodeBlock>
 
 The compute endpoint hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
 
