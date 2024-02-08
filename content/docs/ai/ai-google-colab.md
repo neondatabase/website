@@ -36,9 +36,7 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 1. In your Colab notebook, create a code block to define your database connection and create a cursor object. Replace `postgres://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved in the previous step.
 
-    <CodeBlock shouldWrap>
-
-    ```python
+    ```python shouldWrap
     import os
     import psycopg2
 
@@ -51,8 +49,6 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
     # Create a new cursor object
     cursor = connection.cursor()
     ```
-
-    </CodeBlock>
 
 2. Execute the code block (**Ctrl** + **Enter**).
 
@@ -87,9 +83,7 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 1. Add a code block to create a table and insert data:
 
-    <CodeBlock shouldWrap>
-
-    ```python
+    ```python shouldWrap
     create_table_sql = '''
     CREATE TABLE items (
     id BIGSERIAL PRIMARY KEY,
@@ -110,23 +104,17 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
     connection.commit()
     ```
 
-    </CodeBlock>
-
 2. Execute the code block (**Ctrl** + **Enter**).
 
 ## Query your data
 
 1. Add a codeblock to perform a vector similarity search.
 
-    <CodeBlock shouldWrap>
-
-    ```python
+    ```python shouldWrap
     cursor.execute("SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 3;")
     all_data = cursor.fetchall()
     print(all_data)
     ```
-
-    </CodeBlock>
 
 2. Execute the code block (**Ctrl** + **Enter**).
 

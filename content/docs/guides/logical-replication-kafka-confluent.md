@@ -137,12 +137,12 @@ To create a replication slot called `debezium`, run the following command on you
 SELECT pg_create_logical_replication_slot('debezium', 'pgoutput');
 ```
 
-- `debezium` is the name assigned to the replication slot. You will need to provide the slot name when you set up your source connector in Confluent. 
-- `pgoutput` is the logical decoder plugin used in this example. Neon supports both `pgoutput` and `wal2json` decoder plugins. 
+- `debezium` is the name assigned to the replication slot. You will need to provide the slot name when you set up your source connector in Confluent.
+- `pgoutput` is the logical decoder plugin used in this example. Neon supports both `pgoutput` and `wal2json` decoder plugins.
 
 ## Set up a Kafka cluster in Confluent Cloud
 
-1. Sign in to Confluent Cloud at https://confluent.cloud.
+1. Sign in to Confluent Cloud at [https://confluent.cloud](https://confluent.cloud).
 2. Click **Add cluster**.
 3. On the **Create cluster** page, for the **Basic cluster**, select **Begin configuration**.
 4. On the **Region/zones** page, choose a cloud provider, a region, and select a single availability zone.
@@ -191,7 +191,7 @@ To set up a Postgres CDC source connector for Confluent Cloud:
 6. Under **Output Kafka record value format**, select an output format for Kafka record values. The default is `JSON`, so we'll use that format in this guide. Other supported values include `AVRO`, `JSON_SR`, and `PROTOBUF`, which are schema-based message formats. If you use any of these, you must also configure a [Confluent Cloud Schema Registry](https://docs.confluent.io/cloud/current/sr/index.html).
 
     Expand the **Show advanced configurations** drop-down and set the following values:
-    
+
     - Under **Advanced configuration**
       - Ensure **Slot name** is set to `debezium`. This is the name of the replication slot you created earlier.
       - Set the **Publication name** to `users_publication`, which is the name of the publication you created earlier.
@@ -200,13 +200,13 @@ To set up a Postgres CDC source connector for Confluent Cloud:
 
     Click **Continue**.
 
-7. For **Connector sizing**, accept the default for the maximum number of [Tasks](https://docs.confluent.io/platform/current/connect/index.html#tasks). Tasks can be scaled up at a later time for additional throughput capacity. 
+7. For **Connector sizing**, accept the default for the maximum number of [Tasks](https://docs.confluent.io/platform/current/connect/index.html#tasks). Tasks can be scaled up at a later time for additional throughput capacity.
 
     Click **Continue**.
 
 8. Adjust your **Connector name** if desired, and review your **Connector configuration**, which is provided in `JSON` format, as shown below. We'll use the default connector name in this guide.
 
-    ```JSON
+    ```json
     {
       "connector.class": "PostgresCdcSource",
       "name": "PostgresCdcSourceConnector_0",
@@ -248,7 +248,6 @@ To set up a Postgres CDC source connector for Confluent Cloud:
     ```
 
     Click **Continue** to provision the connector, which may take a few monents to complete.
-
 
 ## Verify your Kafka stream
 

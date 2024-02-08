@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import clsx from 'clsx';
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
@@ -20,6 +19,7 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 import DocCta from '../doc-cta';
@@ -58,9 +58,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
-  pre: (props) => {
-    const language = props.children?.props?.className?.replace('language-', '') || '';
-  return <CodeBlock {...props} as="figure" language={language} />},
+  pre: (props) => <CodeBlock {...props} />,
   a: (props) => {
     const { href, children, ...otherProps } = props;
     if (children === '#id') {
@@ -111,7 +109,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   YoutubeIframe,
   DefinitionList,
   Admonition,
-  CodeBlock,
   CodeTabs,
   DetailIconCards,
   TechnologyNavigation,
@@ -144,6 +141,7 @@ const Content = ({
               // Adds support for GitHub Flavored Markdown
               remarkGfm,
             ],
+            rehypePlugins: [getCodeProps],
           },
         }}
       />

@@ -6,7 +6,7 @@ updatedOn: '2023-11-24T11:25:06.755Z'
 ---
 
 
-Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request. 
+Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request.
 
 To create a Neon project and access it from a Remix application:
 
@@ -49,22 +49,17 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-<CodeBlock shouldWrap>
-
-```shell
+```shell shouldWrap
 DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
-</CodeBlock>
-
 ## Configure the Postgres client
 
-There are two parts to connecting a Remix application to Neon. The first is `db.server`. Remix will ensure any code added to this file won't be included in the client bundle. The second is the route where the connection to the database will be used. 
+There are two parts to connecting a Remix application to Neon. The first is `db.server`. Remix will ensure any code added to this file won't be included in the client bundle. The second is the route where the connection to the database will be used.
 
 ### db.server
 
 Create a `db.server.ts` file at the root of your `/app` directory and add the following code snippet to connect to your Neon database:
-
 
 <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
@@ -94,6 +89,7 @@ const sql = neon(process.env.DATABASE_URL);
 
 export { sql };
 ```
+
 </CodeTabs>
 
 ### route
@@ -155,16 +151,14 @@ export default function Page() {
   const data = useLoaderData();
 }
 ```
-</CodeTabs>
 
+</CodeTabs>
 
 ## Run the app
 
 When you run `npm run dev` you can expect to see one of the following in your terminal output:
 
-<CodeBlock shouldWrap>
-
-```shell
+```shell shouldWrap
 # node-postgres & Neon serverless driver 
 
 {
@@ -179,7 +173,5 @@ Result(1) [
   }
 ]
 ```
-
-</CodeBlock>
 
 <NeedHelp/>

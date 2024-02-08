@@ -44,36 +44,24 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 - Get a basic connection string for the current project, branch, and database:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     neonctl connection-string mybranch
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
 
-    </CodeBlock>
-
 - Get a pooled connection string for the current project, branch, and database with the `--pooled` option. This option adds a `-pooler` flag to the host name which enables connection pooling for clients that use this connection string.
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     neonctl connection-string --pooled
     postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
     ```
 
-    </CodeBlock>
-
 - Get a connection string for use with Prisma for the current project, branch, and database. The `--prisma` options adds `connect_timeout=30` option to the connection string to ensure that connections from Prisma Client do not timeout.
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     neonctl connection-string --prisma
    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?connect_timeout=30
     ```
-
-    </CodeBlock>
 
 - Get a connection string and connect with `psql`.
 

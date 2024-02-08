@@ -49,21 +49,15 @@ Perform these steps twice, once for your _development_ branch and once for your 
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 neonctl branches create --name development
 ```
-
-</CodeBlock>
 
 </TabItem>
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/{project_id}/branches \
      --header 'Accept: application/json' \
@@ -83,8 +77,6 @@ curl --request POST \
 ' | jq
 ```
 
-</CodeBlock>
-
 </TabItem>
 
 </Tabs>
@@ -99,33 +91,21 @@ Your connection strings should look something like the ones shown below. Note th
 
 - **main**
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
     ```
 
-    </CodeBlock>
-
 - **development**
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     jdbc:postgresql://ep-mute-night-47642501.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
     ```
 
-    </CodeBlock>
-
 - **staging**
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     jdbc:postgresql://ep-shrill-shape-27763949.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
     ```
-
-    </CodeBlock>
 
 ## Configure flyway to connect each environment
 
@@ -146,9 +126,7 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
 
 2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf`, the `url` will point to `main`). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
 
     flyway.user=alex
@@ -159,8 +137,6 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
 
     flyway.baselineOnMigrate=true
     ```
-
-    </CodeBlock>
 
     - The `flyway.locations` setting tells Flyway where to look for your migration files. We'll create them in the `/sql` directory in a later step.
     - The `flyway.baselineOnMigrate=true` setting tells Flyway to perform a baseline action when you run the `migrate` command on a non-empty schema with no Flyway schema history table. The schema will then be initialized with the `baselineVersion` before executing migrations. Only migrations above the `baselineVersion` will then be applied. This is useful for initial Flyway deployments on projects with an existing database. You can disable this setting by commenting it out again or setting it to false after applying your first migration on the database.
@@ -183,37 +159,25 @@ Run the migration on each environment in order by specifying the environment's c
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 flyway migrate -configFiles="conf/env_dev.conf"
 ```
 
-</CodeBlock>
-
 </TabItem>
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 flyway migrate -configFiles="conf/env_staging.conf"
 ```
 
-</CodeBlock>
-
 </TabItem>
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 flyway migrate -configFiles="conf/env_prod.conf"
 ```
-
-</CodeBlock>
 
 </TabItem>
 

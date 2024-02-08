@@ -40,7 +40,7 @@ If you do not have one already, create a Neon project. Save your connection deta
       ```shell
       npm install postgres
       ```
-      
+
       ```shell
       npm install @neondatabase/serverless
       ```
@@ -51,13 +51,9 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-<CodeBlock shouldWrap>
-
-```shell
+```shell shouldWrap
 DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
-
-</CodeBlock>
 
 ## Configure the Postgres client
 
@@ -254,7 +250,6 @@ export default function Page({ data }) {}
 
 </CodeTabs>
 
-
 ### Serverless Functions
 
 From your Serverless Functions, add the following code snippet to connect to your Neon database:
@@ -341,14 +336,11 @@ export const config = {
 };
 ```
 
-
 ## Run the app
 
 When you run `npm run dev` you can expect to see one of the following in your terminal output:
 
-<CodeBlock shouldWrap>
-
-```shell
+```shell shouldWrap
 # node-postgres & Neon serverless driver
 
 {
@@ -363,7 +355,5 @@ Result(1) [
   }
 ]
 ```
-
-</CodeBlock>
 
 <NeedHelp/>

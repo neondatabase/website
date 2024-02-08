@@ -85,13 +85,9 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
     The connection string appears similar to the following:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
-
-    </CodeBlock>
 
     If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string.
 
@@ -106,13 +102,9 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
 1. Connect to your application from a client such as `psql` or add the connection details to your application. For example, to connect using `psql`, issue the following command:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
-
-    </CodeBlock>
 
 ## Run the analytics query on the read replica
 

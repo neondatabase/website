@@ -14,7 +14,7 @@ For information about Neon's **IP Allow** feature, see [Configure IP Allow](/doc
 
 ## The `ip-allow` command
 
-The `ip-allow` command allows you to perform `list`, `add`, `remove`, and `reset` actions on the IP allowlist for your Neon project. You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). 
+The `ip-allow` command allows you to perform `list`, `add`, `remove`, and `reset` actions on the IP allowlist for your Neon project. You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation).
 
 ### Usage
 
@@ -82,13 +82,9 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl ip-allow add 192.168.1.3 --project-id cold-grass-40154007
 ```
-
-</CodeBlock>
 
 ### remove
 
@@ -111,13 +107,9 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl ip-allow remove 192.168.1.3 --project-id cold-grass-40154007
 ```
-
-</CodeBlock>
 
 ### reset
 
@@ -140,12 +132,8 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl ip-allow reset 192.168.1.1 --project-id cold-grass-40154007
 ```
-
-</CodeBlock>
 
 <NeedHelp/>

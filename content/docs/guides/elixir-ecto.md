@@ -34,13 +34,9 @@ To create the database:
 
 You can obtain the connection string for the database from the **Connection Details** widget on the Neon **Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you. Your connection string should look something like this:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/friends
 ```
-
-</CodeBlock>
 
 You will need the connection string details later in the setup.
 
@@ -189,15 +185,11 @@ mix ecto.migrate
 
 The output of this command should appear similar to the following:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 14:30:04.924 [info]  == Running 20230524172817 Friends.Repo.Migrations.CreatePeople.change/0 forward
 14:30:04.925 [info]  create table people
 14:30:05.014 [info]  == Migrated 20230524172817 in 0.0s
 ```
-
-</CodeBlock>
 
 You can use the **Tables** feature in the Neon Console to view the table that was created:
 

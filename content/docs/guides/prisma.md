@@ -40,13 +40,9 @@ To establish a basic connection from Prisma to Neon, perform the following steps
 
    Your setting will appear similar to the following:
 
-   <CodeBlock shouldWrap>
-
-   ```text
+   ```text shouldWrap
    DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
    ```
-
-   </CodeBlock>
 
 <Admonition type="important">
 If you plan to use Prisma Client from a serverless function, see [Use connection pooling with Prisma](#use-connection-pooling-with-prisma) for additional configuration instructions. To adjust your connection string to avoid connection timeout issues, see [Connection timeouts](#connection-timeouts).
@@ -56,14 +52,10 @@ If you plan to use Prisma Client from a serverless function, see [Use connection
 
 Serverless functions can end up requiring a large number of database connections as demand increases. If you use serverless functions in your application, it is recommended that you use a pooled Neon connection string with the `pgbouncer=true` option, as shown:
 
-<CodeBlock shouldWrap>
-
-```ini
+```ini shouldWrap
 # Pooled Neon connection string
 DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&pgbouncer=true"
 ```
-
-</CodeBlock>
 
 - A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connection Details** widget on the Neon **Dashboard**. Use the **Pooled connection** checkbox to add the `-pooler` suffix.
 - Neon uses PgBouncer to provide [connection pooling](/docs/connect/connection-pooling). Prisma requires the `pgbouncer=true` flag when using Prisma Client with PgBouncer, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
@@ -102,17 +94,13 @@ After adding the `directUrl` property to your `schema.prisma` file, update the `
 
 When you finish updating your `.env` file, your variable settings should appear similar to the following:
 
-<CodeBlock shouldWrap>
-
-```ini
+```ini shouldWrap
 # Pooled Neon connection string
 DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&pgbouncer=true"
 
 # Unpooled Neon connection string
 DIRECT_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
-
-</CodeBlock>
 
 ## Use the Neon serverless driver with Prisma
 
@@ -173,14 +161,10 @@ You can now use Prisma Client as you normally would with full type-safety. Prism
 
 A connection timeout that occurs when connecting from Prisma to Neon causes an error similar to the following:
 
-<CodeBlock shouldWrap>
-
-```text
+```text shouldWrap
 Error: P1001: Can't reach database server at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`
 Please make sure your database server is running at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`.
 ```
-
-</CodeBlock>
 
 This error most likely means that the Prisma query engine timed out before the Neon compute was activated.
 
@@ -188,13 +172,9 @@ A Neon compute has two main states: _Active_ and _Idle_. Active means that the c
 
 When you connect to an idle compute from Prisma, Neon automatically activates it. Activation typically happens within a few seconds but added latency can result in a connection timeout. To address this issue, you can adjust your Neon connection string by adding a `connect_timeout` parameter. This parameter defines the maximum number of seconds to wait for a new connection to be opened. The default value is 5 seconds. A higher setting may provide the time required to avoid connection timeouts. For example:
 
-<CodeBlock shouldWrap>
-
-```text
+```text shouldWrap
 DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=10"
 ```
-
-</CodeBlock>
 
 <Admonition type="note">
 A `connect_timeout` setting of 0 means no timeout.
@@ -206,25 +186,17 @@ Another possible cause of timeouts is [Prisma's connection pool](https://www.pri
 
 The default size of the Prisma connection pool is determined by the following formula: `num_physical_cpus * 2 + 1`,  where `num_physical_cpus` represents the number of physical CPUs on the machine where your application runs. For example, if your machine has four physical CPUs, your connection pool will contain nine connections (4 * 2 + 1 = 9). As mentioned in the [Prisma documentation](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/connection-pool#default-connection-pool-size), this formula is a good starting point, but the recommended connection limit also depends on your deployment paradigm — particularly if you are using serverless. You can specify the number of connections explicitly by setting the `connection_limit` parameter in your database connection URL. For example:
 
-<CodeBlock shouldWrap>
-
-```text
+```text shouldWrap
 DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=15&connection_limit=20"
 ```
-
-</CodeBlock>
 
 For configuration guidance, refer to Prisma's [Recommended connection pool size guide](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#recommended-connection-pool-size).
 
 In addition to pool size, you can configure a `pool_timeout` setting. This setting defines the amount of time the Prisma Client query engine has to process a query before it throws an exception and moves on to the next query in the queue. The default `pool_timeout` setting is 10 seconds. If you still experience timeouts after increasing `connection_limit` setting, you can try setting the `pool_timeout` parameter to a value larger than the default (10 seconds). For configuration guidance, refer to [Increasing the pool timeout](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#increasing-the-pool-timeout), in the _Prisma documentation_.
 
-<CodeBlock shouldWrap>
-
-```text
+```text shouldWrap
 DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=15&connection_limit=20&pool_timeout=15"
 ```
-
-</CodeBlock>
 
 You can disable pool timeouts by setting `pool_timeout=0`.
 

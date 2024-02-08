@@ -30,13 +30,9 @@ Running the `init.sql` file creates the `address`, `customer`, `product`, and `o
 
 You can seed the database directly from the terminal by running the following `psql` command:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 psql postgres://[user]:[password]@[neon_hostname]/[dbname] < init.sql
 ```
-
-</CodeBlock>
 
 The command takes a Neon connection string as the first argument and a file as the second argument.
 

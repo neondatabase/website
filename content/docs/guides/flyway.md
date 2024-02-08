@@ -59,21 +59,15 @@ From the Neon **Dashboard**, retrieve your password and a Java connection string
 
 Your Java connection string should look something like this:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
 ```
-
-</CodeBlock>
 
 ## Configure flyway
 
 To configure Flyway to connect to your Neon database, create a `flyway.conf` file in the /conf directory. Include the following items, modified to use the connection details you retrieved in the previous step.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
 
 flyway.user=alex
@@ -82,8 +76,6 @@ flyway.password=AbC123dEf
 
 flyway.locations=filesystem:/home/alex/flyway-x.y.z/sql
 ```
-
-</CodeBlock>
 
 ## Create the first migration
 

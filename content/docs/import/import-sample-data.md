@@ -53,23 +53,15 @@ A table containing data about the periodic table of elements.
 
 2. Download the source file:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/periodic_table.sql
     ```
 
-    </CodeBlock>
-
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     psql -d "postgres://[user]:[password]@[neon_hostname]/periodic_table" -f periodic_table.sql
     ```
-
-    </CodeBlock>
 
 4. Connect to the `periodic_table` database:
 
@@ -99,13 +91,9 @@ A dataset with multiple indicators for evaluating the happiness of countries of 
 
 2. Download the source file:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/happiness_index.sql
     ```
-
-    </CodeBlock>
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
@@ -151,23 +139,15 @@ A dataset containing information on the passengers aboard the RMS Titanic, which
 
 2. Download the source file:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/titanic.sql
     ```
 
-    </CodeBlock>
-
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     psql -d "postgres://[user]:[password]@[neon_hostname]/titanic" -f titanic.sql
     ```
-
-    </CodeBlock>
 
 4. Connect to the `titanic` database:
 
@@ -199,23 +179,15 @@ A dataset containing information about movies and tv shows on Netflix.
 
 2. Download the source file:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/netflix.sql
     ```
 
-    </CodeBlock>
-
 3. Navigate to the directory where you downloaded the source file, and run the following command:
-
-    <CodeBlock>
 
     ```bash
     psql -d "postgres://[user]:[password]@[neon_hostname]/netflix" -f netflix_shows.sql
     ```
-
-    </CodeBlock>
 
 4. Connect to the `netflix` database:
 
@@ -255,13 +227,9 @@ Sample data for a fictional DVD rental store. Pagila includes tables for films, 
 
 2. Download the source file:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/pagila.sql
     ```
-
-    </CodeBlock>
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
@@ -304,23 +272,15 @@ A sample database for a digital media store, including tables for artists, album
 
 2. Download the source file:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
     ```
 
-    </CodeBlock>
-
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     psql -d "postgres://[user]:[password]@[neon_hostname]/chinook" -f chinook.sql
     ```
-
-    </CodeBlock>
 
 4. Connect to the `chinook` database:
 
@@ -361,13 +321,9 @@ A dataset containing information about various LEGO sets, their themes, parts, c
 
 2. Download the source file:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/lego.sql
     ```
-
-    </CodeBlock>
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
@@ -409,23 +365,15 @@ A dataset containing details about employees, their departments, salaries, and m
 
 2. Download the source file:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/employees.sql.gz
     ```
 
-    </CodeBlock>
-
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     pg_restore -d postgres://[user]:[password]@[neon_hostname]/employees -Fc employees.sql.gz -c -v --no-owner --no-privileges
     ```
-
-    </CodeBlock>
 
     Database objects are created in the `employees` schema rather than the `public` schema.
 
@@ -457,13 +405,9 @@ An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wi
 
 1. Download the zip file (~700MB):
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     wget https://cdn.openai.com/API/examples/data/vector_database_wikipedia_articles_embedded.zip
     ```
-
-    </CodeBlock>
 
 2. Navigate to the directory where you downloaded the zip file, and run the following command to extract the source file:
 
@@ -505,25 +449,17 @@ An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wi
 
 5. Create vector search indexes:
 
-    <CodeBlock shouldWrap>
-
-    ```sql
+    ```sql shouldWrap
     CREATE INDEX ON public.articles USING ivfflat (content_vector) WITH (lists = 1000);
 
     CREATE INDEX ON public.articles USING ivfflat (title_vector) WITH (lists = 1000);
     ```
 
-    </CodeBlock>
-
 6. Navigate to the directory where you extracted the source file, and run the following command:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     psql -d "postgres://[user]:[password]@[neon_hostname]/wikipedia" -c "\COPY public.articles (id, url, title, content, title_vector, content_vector, vector_id) FROM 'vector_database_wikipedia_articles_embedded.csv' WITH (FORMAT CSV, HEADER true, DELIMITER ',');"
     ```
-
-    </CodeBlock>
 
 <Admonition type="note">
 If you encounter a memory error related to the `maintenance_work_mem` setting, refer to [Indexing vectors](/docs/extensions/pgvector#indexing-vectors) for how to increase this setting.
@@ -546,13 +482,9 @@ An airport database containing information about airports, aircraft, bookings, p
 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     pg_restore -d postgres://[user]:[password]@[neon_hostname]/postgres_air -Fc postgres_air_2023.backup -c -v --no-owner --no-privileges
     ```
-
-    </CodeBlock>
 
     Database objects are created in a `postgres_air` schema rather than the `public` schema.
 
@@ -592,15 +524,11 @@ To load sample data:
 
 1. Download one of the data files listed above. For example:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     wget https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/periodic_table.sql
     ```
-  
-    </CodeBlock>
 
-    Alternatively, supply your own data file. 
+    Alternatively, supply your own data file.
 
 2. Load the data using one of the following Neon CLI commands ([projects](/docs/reference/cli-projects), [branches](/docs/reference/cli-branches), or [connection-string](/docs/reference/cli-connection-string)):
 

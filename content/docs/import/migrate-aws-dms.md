@@ -113,13 +113,9 @@ This section contains notes from our experience using AWS DMS to migrate data to
 - We populated the RDS PostgreSQL source database using the [AWS DMS sample Postgres database](https://github.com/aws-samples/aws-database-migration-samples/blob/master/PostgreSQL/sampledb/v1/README.md). To do this, we created an EC2 instance to connect to the database following the steps in this topic: [Create an Amazon EC2 Client](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.client).
 - The source database was populated using this `psql` command:
 
-  <CodeBlock shouldWrap>
-
-  ```bash
+  ```bash shouldWrap
   psql -h dms-postgresql.abc123def456hgi.us-east-2.rds.amazonaws.com -p 5432 -U postgres -d dms_sample -a -f ~/aws-database-migration-samples/PostgreSQL/sampledb/v1/postgresql.sql
   ```
-
-  </CodeBlock>
 
 - To verify that data was loaded in the source database, we connected using the following `psql` command and ran a `SELECT` query:
 
@@ -137,22 +133,14 @@ This section contains notes from our experience using AWS DMS to migrate data to
 
 - When creating the source database endpoint for the RDS Postgres 15 database, we set **Secure Socket Layer (SSL) mode** to `require`. Without this setting, we encountered the following error:
 
-    <CodeBlock shouldWrap>
-
-    ```text
+    ```text shouldWrap
     Test Endpoint failed: Application-Status: 1020912, Application-Message: Failed to connect Network error has occurred, Application-Detailed-Message: RetCode: SQL_ERROR SqlState: 08001 NativeError: 101 Message: FATAL: no pg_hba.conf entry for host "10.0.1.135", user "postgres", database "dms_sample", no encryption
     ```
 
-    </CodeBlock>
-
 - When creating the target database endpoint for the Neon database, we encountered the following error when testing the connection:
 
-    <CodeBlock shouldWrap>
-
-    ```text
+    ```text shouldWrap
     Endpoint failed: Application-Status: 1020912, Application-Message: Cannot connect to ODBC provider Network error has occurred, Application-Detailed-Message: RetCode: SQL_ERROR SqlState: 08001 NativeError: 101 Message: timeout expired
     ```
-
-    </CodeBlock>
 
     The replication instance, which was created in the private subnet where the source database resided, could not access the Neon database, which resides outside of the VPC. To allow the replication instance to access the Neon database, we added a NAT Gateway to the public subnet, allocated an Elastic IP address, and modified the **Route Table** associated with the private subnet to add a route via the NAT Gateway.

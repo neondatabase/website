@@ -27,23 +27,15 @@ To import your data from another Neon project:
 
    You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Connections strings have this format:
 
-   <CodeBlock shouldWrap>
-
-   ```bash
+   ```bash shouldWrap
    postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
-   </CodeBlock>
-
 4. Prepare your import command to pipe data to from one Neon project to the other. The command will look similar to this:
 
-   <CodeBlock shouldWrap>
-
-   ```bash
+   ```bash shouldWrap
    pg_dump -Fc -v -d postgres://[user]:[password]@[neon_hostname]/[dbname] | pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
-
-   </CodeBlock>
 
    The command includes these arguments:
 

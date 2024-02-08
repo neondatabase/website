@@ -28,13 +28,9 @@ The easiest way to connect to Neon using the `pgcli` client is with a connection
 
 From your terminal or command prompt, run the `pgcli` client with the connection string. Your command will look something like this:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 pgcli postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
-
-</CodeBlock>
 
 ## Run queries
 

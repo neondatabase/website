@@ -27,13 +27,9 @@ To migrate your data from Heroku to Neon:
 
     The example connection string used the instructions that follow is:
 
-    <CodeBlock shouldWrap>
-
-    ```text
+    ```text shouldWrap
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
-
-    </CodeBlock>
 
 ## Retrieve your Heroku app name and database name
 
@@ -74,9 +70,7 @@ where:
 
 For example:
 
-<CodeBlock shouldWrap>
-
-```shell
+```shell shouldWrap
 $ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 
 heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
@@ -149,8 +143,6 @@ pg_restore: creating CONSTRAINT "public.order order_pkey"
 pg_restore: creating FK CONSTRAINT "public.order order_customer_id_fkey"
 heroku-cli: Pulling complete.
 ```
-
-</CodeBlock>
 
 ## Verify that your data was imported
 

@@ -64,7 +64,6 @@ You should receive the following output:
 | (3,public,weather_conditions,t) |
 ```
 
-
 It is possible to use both standard SQL commands and `timescaledb` functions (which will be covered later).
 
 To use an SQL query to insert data in the `weather_conditions` table:
@@ -99,7 +98,6 @@ You can use the [sample weather dataset from TimescaleDB](https://assets.timesca
 
 Download the weather data:
 
-
 ```shell
 curl https://assets.timescale.com/docs/downloads/weather_small.tar.gz -o weather_small.tar.gz
 
@@ -108,13 +106,9 @@ tar -xvzf weather_small.tar.gz
 
 Load the data into Neon database - enter the username, password, host and database name. You can find these details in the **Connection Details** widget on the Neon **Dashboard**.
 
-<CodeBlock shouldWrap>
-
-```shell
+```shell shouldWrap
 psql 'postgresql://<username>:<password>@<host>/<database_name>?sslmode=require' -c "\COPY weather_conditions FROM weather_small_conditions.csv CSV"
 ```
-
-</CodeBlock>
 
 You should receive the following output:
 
@@ -274,7 +268,6 @@ You should receive the following output:
 
 Chunks are fundamental storage units within hypertables. Instead of storing the entire time-series dataset as a single monolithic table, `timescaledb` breaks it down into smaller, manageable chunks. Each chunk represents a distinct time interval, making data retrieval and maintenance more efficient.
 
-
 [**show_chunks()**](https://docs.timescale.com/api/latest/hypertable/show_chunks/)
 
 The [`show_chunks`](https://docs.timescale.com/api/latest/hypertable/show_chunks/) function can be used to understand the underlying structure and organization of your time-series data and provides insights into how your hypertable is partitioned.
@@ -345,7 +338,7 @@ To automatically run this deletion periodically, you can setup a cron task. For 
 ```
 
 <Admonition type="note">
-Please be aware that Noen's [Autosuspend](/docs/guides/auto-suspend-guide) feature may affect the running of scheduled jobs. It may be necessary to start the compute before running a job. 
+Please be aware that Noen's [Autosuspend](/docs/guides/auto-suspend-guide) feature may affect the running of scheduled jobs. It may be necessary to start the compute before running a job.
 </Admonition>
 
 This will help ensure the hypertable size is managed by deleting old unneeded data. Tune the interval passed to drop_chunks and the cron schedule based on your data retention needs.
