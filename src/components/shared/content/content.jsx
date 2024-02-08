@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import clsx from 'clsx';
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
@@ -86,7 +87,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   img: (props) => (
     <Image
       {...props}
-      loading="lazy"
       width={isReleaseNote ? 762 : 796}
       height={isReleaseNote ? 428 : 447}
       style={{ width: '100%', height: '100%' }}
@@ -105,6 +105,24 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
     }
 
     return <p {...props} />;
+  },
+  Image: (props) => {
+    const { className, withNoBorder, width, height, ...rest } = props;
+    const imageWidth = isReleaseNote ? 762 : 796;
+    const imgHeight = isReleaseNote ? 428 : 447;
+    return (
+      <Image
+        className={clsx(
+          'rounded',
+          { 'border border-gray-new-94 dark:border-gray-new-20': !withNoBorder },
+          className
+        )}
+        width={width || imageWidth}
+        height={height || imgHeight}
+        style={{ width: '100%', height: '100%' }}
+        {...rest}
+      />
+    );
   },
   YoutubeIframe,
   DefinitionList,
