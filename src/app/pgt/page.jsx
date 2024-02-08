@@ -15,7 +15,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata({
   title: SEO_DATA.index.title,
   description: SEO_DATA.index.description,
-  pathname: '/stackoverflow',
+  pathname: '/pgt',
   robotsNoindex: 'noindex',
 });
 
