@@ -69,7 +69,7 @@ To edit a compute endpoint:
 ## Monitor autoscaling
 
 <Admonition type="comingSoon">
-The Autoscaling Graphs are available for select users and will be expanded to all Pro users soon.
+The Autoscaling Graphs are available for select users and will be expanded to all paying users soon.
 </Admonition>
 
 From the Neon Console, you can view how your CPU and compute hour usage scales over time (last hour, day, and week). From the **Branches** page, open the branch you want to inspect, then open the **Edit** modal for its compute endpoint.
@@ -79,7 +79,7 @@ From the Neon Console, you can view how your CPU and compute hour usage scales o
 Some key points about this Autoscaling view:
 
 - Allocation refers to the vCPU and memory size provisioned to handle current demand; autoscaling automatically adjusts this allocation, increasing or decreasing the allocated vCPU and memory size in a step-wise fashion as demand fluctuates, within your minimum and maximum limits.
-- Your minimum and maximum limits are shown as solid white lines. This represents the allocation boundary: the size of your allocated vCPU/memory stays within this range so long as your compute endpoint remains active. It scales to zero after the defined period of inactivity.
+- Your minimum and maximum limits are shown as solid horizontal lines. This represents the allocation boundary: the size of your allocated vCPU/memory stays within this range so long as your compute endpoint remains active. It scales to zero after the defined period of inactivity.
 - A re-activated compute endpoint scales up immediately to your minimum allocation, ensuring adequate performance for your anticipated demand.
 
 Place your cursor anywhere in the graph to get more usage detail about that particular point in time.
