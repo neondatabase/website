@@ -11,7 +11,7 @@ const CodeTabs = ({ items, highlightedCodeSnippets }) => {
   const [activeItem, setActiveItem] = useState(0);
 
   return (
-    <div className="col-span-6 col-start-1 row-start-1 max-w-[716px] pt-[71px] 2xl:-mr-8 2xl:pt-12 xl:hidden">
+    <div className="col-span-6 col-start-1 row-start-1 max-w-[716px] 2xl:-mr-8 xl:hidden">
       <div className="flex gap-x-2.5 xs:gap-x-1.5">
         {items.map(({ name }, index) => (
           <button

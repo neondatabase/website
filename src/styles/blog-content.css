@@ -7,6 +7,10 @@
     @apply prose-figure:my-10 prose-img:my-10 md:prose-figure:my-8 md:prose-img:my-8;
     @apply prose-pre:my-0 prose-pre:px-2;
 
+    *[id] {
+      @apply scroll-mt-20 lg:scroll-mt-5;
+    }
+
     > * {
       &:first-child {
         @apply mt-0;

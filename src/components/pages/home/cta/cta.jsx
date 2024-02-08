@@ -83,25 +83,25 @@ const CTA = () => {
   return (
     <LazyMotion features={domAnimation}>
       <m.section
-        className="safe-paddings bg-black pt-48 text-center md:pt-40 sm:pt-32"
+        className="safe-paddings bg-black pt-[152px] text-center md:pt-40 sm:pt-32"
         initial="from"
         animate={controls}
       >
-        <Container className="z-20" size="md" ref={animationVisibilityRef}>
-          <Heading id="cta-title" tag="h2" size="xl" theme="white" ref={titleRef}>
+        <Container className="z-20" size="medium" ref={animationVisibilityRef}>
+          <Heading id="cta-title" tag="h2" size="md" theme="white" ref={titleRef}>
             <BlinkingText
               text="Made for developers"
               parentElement={titleRef.current}
               shouldAnimationStart={isInView}
             />
           </Heading>
-          <m.p className="t-3xl mt-5 text-white 2xl:mt-4" variants={pVariants}>
+          <m.p className="t-xl mt-[18px] text-white 2xl:mt-4" variants={pVariants}>
             Launch serverless Postgres with a single command
           </m.p>
           <m.div
+            className="relative mx-auto mt-12 max-w-[860px] 3xl:max-w-[738px] 2xl:mt-10 2xl:max-w-[610px] xl:mt-8 xl:max-w-[498px] lg:max-w-[584px]"
             id="cta-input"
             variants={inputWrapperVariants}
-            className="relative mx-auto mt-8 max-w-[834px] 3xl:max-w-[738px] 2xl:mt-7 2xl:max-w-[610px] xl:mt-6 xl:max-w-[498px] lg:max-w-[584px]"
           >
             <m.div
               id="cta-input-background"
@@ -110,11 +110,11 @@ const CTA = () => {
               aria-hidden
             />
             <div className="relative flex items-center justify-between rounded-full border-4 border-black bg-white p-2 pl-9 2xl:p-1.5 2xl:pl-7 xl:p-1 xl:pl-6 md:justify-center md:px-0 md:py-[22px]">
-              <span className="t-3xl whitespace-nowrap font-mono font-bold !leading-none">
+              <span className="whitespace-nowrap font-mono text-[28px] font-bold !leading-none xl:text-2xl lg:text-xl md:text-lg">
                 $ psql -h pg.neon.tech
               </span>
               <Button
-                className="relative md:hidden"
+                className="relative px-10 py-[22px] md:hidden"
                 size="sm"
                 theme="secondary"
                 onClick={handleButtonClick}
