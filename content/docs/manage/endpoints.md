@@ -176,9 +176,9 @@ If this query does not return results in the 99% percentile for your tables, you
 
 Autoscaling is most effective when your data (either your full dataset or your working set) can be fully cached in memory on the minimum compute size in your autoscaling configuration.
 
-Consider this scenario: If your data size is approximately 6 GB, starting with a compute size of .25 CU can lead to suboptimal performance because your data cannot be adequately cached at the low end of your autoscaling range. While your compute _will_ scale up from .25 CU on demand, you may experience poor query performance until your compute scales up and fully caches your working. You can avoid this issue if your minimum compute size can hold your working set in memory.
+Consider this scenario: If your data size is approximately 6 GB, starting with a compute size of .25 CU can lead to suboptimal performance because your data cannot be adequately cached. While your compute _will_ scale up from .25 CU on demand, you may experience poor query performance until your compute scales up and fully caches your working set. You can avoid this issue if your minimum compute size can hold your working set in memory.
 
-As mentioned above, your `max_connections` setting is based on the minimum compute size in your autoscaling configuration. The `max_connections` setting does not scale along with your compute. To avoid this `max_connections` constraint, you can use a pooled connection, which supports up to 10,000 concurrent connections. See [Connection pooling](/docs/connect/connection-pooling).
+As mentioned above, your `max_connections` setting is based on the minimum compute size in your autoscaling configuration. The `max_connections` setting does not scale along with your compute. To avoid this `max_connections` constraint, you can use a pooled connection for your application, which supports up to 10,000 concurrent user connections. See [Connection pooling](/docs/connect/connection-pooling).
 
 ### Autosuspend configuration
 
