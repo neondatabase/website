@@ -5,7 +5,9 @@ const analytics = AnalyticsBrowser.load({ writeKey: process.env.NEXT_PUBLIC_SEGM
 export default async function sendSegmentEvent(eventName, properties) {
   try {
     if (analytics && typeof analytics.track === 'function') {
-      await analytics.track(eventName, properties);
+      await analytics.ready(() => {
+        analytics.track(eventName, properties);
+      });
     } else {
       console.error('Analytics is not initialized or track is not a function');
     }
