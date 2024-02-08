@@ -3,7 +3,7 @@ title: Branch Restore
 subtitle: Learn how to revert changes or recover lost data using Neon Branch Restore
   with Time Travel Assist
 enableTableOfContents: true
-updatedOn: '2024-01-26T18:19:19.800Z'
+updatedOn: '2024-02-08T20:07:48.873Z'
 ---
 <Admonition type="comingSoon">
 This feature is available for select users and will be expanded to all users soon.
