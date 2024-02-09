@@ -2,7 +2,7 @@
 title: The pg_embedding extension (Support Discontinued)
 subtitle: null
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.747Z'
+updatedOn: '2024-02-08T15:20:54.278Z'
 ---
 
 <Admonition type="warning">
@@ -10,7 +10,7 @@ As of **Sept 29, 2023**, Neon is no longer committing to `pg_embedding`.
 
 Support will remain in place for existing users of the extension, but we strongly encourage migrating to [pgvector](https://github.com/pgvector/pgvector).
 
-For migration instructions, see [Migrate from pg_embedding to pgvector](#migrate-from-pg_embedding-to-pgvector).
+For migration instructions, see [Migrate from pg_embedding to pgvector](#migrate-from-pgembedding-to-pgvector).
 </Admonition>
 
 ## Migrate from pg_embedding to pgvector
@@ -166,13 +166,9 @@ This statement generates a table named `documents` with a `real[]` type column f
 
 To insert vector data, use an `INSERT` statement similar to the following:
 
-<CodeBlock shouldWrap>
-
-```sql
+```sql shouldWrap
 INSERT INTO documents(id, embedding) VALUES (1, '{0,1,2}'), (2, '{1,2,3}'),  (3, '{1,1,1}');
 ```
-
-</CodeBlock>
 
 ## Similarity search
 

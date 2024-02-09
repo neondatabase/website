@@ -1,5 +1,3 @@
-'use client';
-
 import copyToClipboard from 'copy-to-clipboard';
 import { useEffect, useState, useCallback } from 'react';
 

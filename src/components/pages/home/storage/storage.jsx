@@ -16,13 +16,13 @@ const Storage = () => {
   });
 
   return (
-    <section
-      className="safe-paddings mt-48 3xl:mt-44 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20"
-      ref={wrapperRef}
-    >
-      <Container className="flex items-center justify-between lg:flex-col lg:items-start" size="md">
-        <div className="mr-[110px] max-w-[600px] 3xl:mr-[86px] 3xl:max-w-[504px] 2xl:mr-[72px] 2xl:max-w-[416px] xl:mr-0 xl:max-w-[400px] lg:max-w-none">
-          <Heading className="max-w-[370px] lg:max-w-none" tag="h2" size="xl" theme="black">
+    <section className="safe-paddings mt-44 2xl:mt-40 xl:mt-32 lg:mt-24 md:mt-20" ref={wrapperRef}>
+      <Container
+        className="flex items-center justify-between gap-x-20 lg:flex-col lg:items-start"
+        size="medium"
+      >
+        <div className="max-w-[504px] lg:max-w-none">
+          <Heading className="max-w-[370px] lg:max-w-none" tag="h2" size="md" theme="black">
             Bottomless storage
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
@@ -31,12 +31,12 @@ const Storage = () => {
             for cost optimization. Our storage architecture ensures high availability, scale out,
             and unlimited capacity that we call &quot;bottomless storage&quot;.
           </p>
-          <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
+          <p className="t-xl mt-5 2xl:mt-7 xl:mt-6">
             Neon storage uses the "copy-on-write" technique to deliver database branching, online
             checkpointing, and point-in-time restore. This eliminates expensive full-data backup and
             restore operations required with traditional database-as-a-service systems.
           </p>
-          <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
+          <p className="t-xl mt-5 2xl:mt-7 xl:mt-6">
             Our storage technology is open source and written in Rust.
           </p>
           {/* <Link className="mt-6 2xl:mt-5 xl:mt-4" to="/" size="md" theme="black-secondary-5">
@@ -45,7 +45,7 @@ const Storage = () => {
         </div>
 
         <div
-          className="relative order-first w-full max-w-[880px] 3xl:max-w-[735px] 2xl:max-w-[605px] xl:max-w-[465px] lg:order-last lg:mt-[46px] lg:max-w-[475px]"
+          className="relative order-first w-full max-w-[820px] xl:max-w-[600px] lg:order-last lg:mt-[46px] lg:max-w-[475px]"
           ref={illustrationWrapperRef}
           aria-hidden
         >

@@ -2,7 +2,7 @@
 title: Neon CLI commands — operations
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-12-01T19:05:09.475Z'
+updatedOn: '2024-01-10T17:27:58.303Z'
 ---
 
 ## Before you begin
@@ -42,7 +42,8 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option       | Description | Type   | Required  |
 | ------------ | ----------- | ------ | :------: |
-| --project-id | Project ID  | string |  Only if your Neon account has more than one project |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id` | Project ID  | string |  Only if your Neon account has more than one project |
 
 #### Example
 

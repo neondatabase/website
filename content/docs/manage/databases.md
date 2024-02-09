@@ -2,7 +2,7 @@
 title: Manage databases
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-11-24T19:55:37.127Z'
+updatedOn: '2024-01-08T20:02:33.926Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is no limit on the number of databases you can create.
@@ -94,7 +94,7 @@ The following Neon API method creates a database. To view the API documentation 
 
 The role specified by `owner_name` is the owner of that database.
 
-```text
+```http
 POST /projects/{project_id}/branches/{branch_id}/databases
 ```
 
@@ -107,7 +107,7 @@ The API method appears as follows when specified in a cURL command. The `project
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "database": {
@@ -163,7 +163,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 The following Neon API method lists databases for the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranchdatabases).
 
-```text
+```http
 GET /projects/{project_id}/branches/{branch_id}/databases
 ```
 
@@ -172,7 +172,7 @@ The API method appears as follows when specified in a cURL command. The `project
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 <details>
@@ -207,7 +207,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 The following Neon API method updates the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateprojectbranchdatabase).
 
-```text
+```http
 PATCH /projects/{project_id}/branches/{branch_id}/databases/{database_name}
 ```
 
@@ -216,7 +216,7 @@ The API method appears as follows when specified in a cURL command. The `project
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases/mydb' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "database": {
@@ -271,7 +271,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 The following Neon API method deletes the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranchdatabase).
 
-```text
+```http
 DELETE /projects/{project_id}/branches/{branch_id}/databases/{database_name}
 ```
 
@@ -281,7 +281,7 @@ The API method appears as follows when specified in a cURL command. The `project
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases/database1' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 <details>

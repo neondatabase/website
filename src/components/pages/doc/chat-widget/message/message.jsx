@@ -85,7 +85,7 @@ const Message = ({ role, content }) => {
         {role === 'user' ? <UserIcon /> : <ExampleIcon />}
       </span>
       {mdxSource ? (
-        <div className="prose-doc prose dark:prose-invert prose-chat max-w-[656px] grow pt-0.5 lg:w-[calc(100%-40px)] xs:prose-code:break-words">
+        <div className="prose-doc prose-chat prose max-w-[656px] grow pt-0.5 dark:prose-invert lg:w-[calc(100%-40px)] xs:prose-code:break-words">
           <MDXRemote {...mdxSource} components={components} />
         </div>
       ) : (

@@ -89,6 +89,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/blog/category/case-study',
+        destination: '/case-studies',
+        permanent: true,
+      },
+      {
         source: '/team',
         destination: '/about-us',
         permanent: true,
@@ -96,6 +101,11 @@ const defaultConfig = {
       {
         source: '/jobs',
         destination: '/careers',
+        permanent: true,
+      },
+      {
+        source: '/docs/release-notes/:path*',
+        destination: '/docs/changelog/:path*',
         permanent: true,
       },
       // Proxy has an error message, that suggests to read `https://neon.tech/sni` for more details.
@@ -189,6 +199,10 @@ const defaultConfig = {
       {
         source: '/demos/playground/:path*',
         destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
+      },
+      {
+        source: '/discord',
+        destination: 'https://discord.gg/92vNTzKDGp',
       },
     ];
   },

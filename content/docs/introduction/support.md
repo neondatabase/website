@@ -1,27 +1,26 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2023-10-26T18:24:21.520Z'
+updatedOn: '2024-01-11T14:49:37.566Z'
 ---
 
 Support channels for the Neon Free Tier, Pro, and Custom plans are outlined below.
 
 | Support channels                                     | Free Tier |   Pro   | Custom  |
 | :--------------------------------------------------- | :-------: | :-----: | :-----: |
-| Neon community forum                                 |  &check;  | &check; | &check; |
+| Neon Discord Server                                  |  &check;  | &check; | &check; |
+| Neon Discourse Community                             |  &check;  | &check; | &check; |
 | Ability to open support tickets                      |     -     | &check; | &check; |
 | Video chat                                           |     -     | &check; | &check; |
 | Resale customer support                              |     -     |    -    | &check; |
 
 ## Join the community
 
-All Neon users can join the Neon community forum to ask questions or see what others are doing with Neon.
-
-<CommunityBanner>Neon Discourse Community</CommunityBanner>
+All Neon users can join the [Neon Discord Server](/discord) or [Neon Discourse Community](https://community.neon.tech/) to ask questions or see what others are doing with Neon.
 
 ## Open a support ticket
 
-[Neon Pro Plan](/docs/introduction/pro-plan) and [Custom Plan](/docs/introduction/custom-plan) users can open a support ticket from the Neon console. Look for the **Support** link in the sidebar. It opens the **Create Support Ticket** modal, where you can describe your issue.
+[Neon Pro Plan](/docs/introduction/pro-plan) and [Custom Plan](/docs/introduction/custom-plan) users can open a support ticket in the Neon Console. Look for the **Support** link in the sidebar. It opens the **Create Support Ticket** modal, where you can describe your issue. To access the modal directly, [click here](https://console.neon.tech/app/projects?modal=support).
 
 ![Support ticket modal](/docs/introduction/neon-support-modal.png)
 
@@ -31,7 +30,7 @@ Video chat requests and retail customer support inquiries can be submitted throu
 
 ## Support email
 
-If you're unable to access Neon's primary support channels (e.g., the support ticket form in the Neon Console or the Neon Community Forum), you can use the following email as a fallback:
+If you're unable to access Neon's primary support channels (e.g., the support ticket form in the Neon Console or our [Discord Server](https://discord.com/invite/92vNTzKDGp)), you can use the following email as a fallback:
 
 **Email**: `support@neon.tech`
 

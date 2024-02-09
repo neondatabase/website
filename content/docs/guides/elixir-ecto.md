@@ -2,7 +2,7 @@
 title: Connect from Elixir with Ecto to Neon
 subtitle: Set up a Neon project in seconds and connect from Elixir with Ecto
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.751Z'
+updatedOn: '2024-02-08T15:20:54.282Z'
 ---
 
 This guide describes how to connect from an Elixir application with Ecto, which is a database wrapper and query generator for Elixir. Ecto provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
@@ -34,13 +34,9 @@ To create the database:
 
 You can obtain the connection string for the database from the **Connection Details** widget on the Neon **Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you. Your connection string should look something like this:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/friends
 ```
-
-</CodeBlock>
 
 You will need the connection string details later in the setup.
 
@@ -189,15 +185,11 @@ mix ecto.migrate
 
 The output of this command should appear similar to the following:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 14:30:04.924 [info]  == Running 20230524172817 Friends.Repo.Migrations.CreatePeople.change/0 forward
 14:30:04.925 [info]  create table people
 14:30:05.014 [info]  == Migrated 20230524172817 in 0.0s
 ```
-
-</CodeBlock>
 
 You can use the **Tables** feature in the Neon Console to view the table that was created:
 
@@ -221,6 +213,6 @@ The [Ecto Getting Started Guide](https://hexdocs.pm/ecto/getting-started.html#co
 ## Usage notes
 
 - Suppose you have `PGHOST` environment variable on your system set to something other than your Neon hostname. In that case, this hostname will be used instead of the Neon `hostname` defined in your Ecto Repo configuration when running `mix ecto` commands. To avoid this issue, you can either set the `PGHOST` environment variable to your Neon hostname or specify `PGHOST=""` when running `mix ecto` commands; for example: `PGHOST="" mix ecto.migrate`.
-- By default, Neon's _Auto-suspend_ feature scales computes to zero after 300 seconds (5 minutes) of inactivity, which can result in a `connection not available` error when running `mix ecto` commands. Typically, a Neon compute takes a few seconds to transition from `Idle` to `Active`. Wait a few seconds and try running the command again. Alternatively, consider the strategies outlined in [Connection latency and timeouts](/docs/connect/connection-latency) to manage connection issues resulting from compute suspension.
+- By default, Neon's _Autosuspend_ feature scales computes to zero after 300 seconds (5 minutes) of inactivity, which can result in a `connection not available` error when running `mix ecto` commands. Typically, a Neon compute takes a few seconds to transition from `Idle` to `Active`. Wait a few seconds and try running the command again. Alternatively, consider the strategies outlined in [Connection latency and timeouts](/docs/connect/connection-latency) to manage connection issues resulting from compute suspension.
 
 <NeedHelp/>

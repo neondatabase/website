@@ -15,14 +15,18 @@
       items:
         - title: Autoscaling
           slug: introduction/autoscaling
-        - title: Auto-suspend
+        - title: Autosuspend
           slug: introduction/auto-suspend
         - title: Branching
           slug: introduction/branching
-        - title: Point-in-time restore
+        - title: Branch reset and restore
           slug: introduction/point-in-time-restore
         - title: Read replicas
           slug: introduction/read-replicas
+        - title: Logical replication
+          slug: introduction/logical-replication
+        - title: IP Allow
+          slug: introduction/ip-allow
     - title: Regions
       slug: introduction/regions
     - title: Plans
@@ -36,11 +40,20 @@
         - title: Custom
           slug: introduction/custom-plan
     - title: Billing
+      slug: introduction/about-billing
       items:
+        - title: Billing overview
+          slug: introduction/billing-overview
+        - title: Pricing calculators
+          slug: introduction/billing-calculators
         - title: Billing metrics
           slug: introduction/billing
+        - title: Billing rates
+          slug: introduction/billing-rates
         - title: Manage billing
           slug: introduction/manage-billing
+        - title: Sample billing
+          slug: introduction/billing-sample
     - title: Support
       slug: introduction/support
     - title: Status
@@ -102,18 +115,26 @@
            slug: manage/database-access
     - title: Backups
       slug: manage/backups
+    - title: Logical replication
+      items:
+         - title: Concepts
+           slug: guides/logical-replication-concepts
+         - title: Manage
+           slug: guides/logical-replication-neon
 - title: Guides
   slug: guides/guides-intro
   items:
-    - title: Neon features
+    - title: Neon
       items: 
         - title: Autoscaling
           slug: guides/autoscaling-guide
-        - title: Auto-suspend
+        - title: Autosuspend
           slug: guides/auto-suspend-guide
         - title: Branching
           slug: guides/branching-intro
           items: 
+            - title: Branch Restore
+              slug: guides/branch-restore
             - title: Branching — Point-in-time restore
               slug: guides/branching-pitr
             - title: Branching — Testing queries
@@ -128,6 +149,19 @@
               slug: guides/branch-refresh
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
+        - title: Logical replication
+          slug: guides/logical-replication-guide
+          items:
+            - title: Airbyte
+              slug: guides/logical-replication-airbyte
+            - title: Fivetran
+              slug: guides/logical-replication-fivetran
+            - title: Kafka (Confluent)
+              slug: guides/logical-replication-kafka-confluent
+            - title: Materialize
+              slug: guides/logical-replication-materialize
+            - title: Postgres
+              slug: guides/logical-replication-postgres
         - title: Project sharing
           slug: guides/project-sharing-guide
         - title: Read replicas
@@ -137,13 +171,7 @@
             - title: Data analysis and reporting
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
-              slug: guides/read-replica-prisma
-        - title: Extensions
-          items:
-            - title: neon
-              slug: extensions/neon
-            - title: neon_utils
-              slug: extensions/neon-utils            
+              slug: guides/read-replica-prisma    
     - title: Frameworks
       items:
         - title: Next.js
@@ -152,6 +180,8 @@
           slug: guides/astro
         - title: Remix
           slug: guides/remix
+        - title: Ruby on Rails
+          slug: guides/ruby-on-rails
     - title: Languages
       items:
         - title: Elixir
@@ -172,11 +202,7 @@
             - title: Node.js
               slug: guides/node
             - title: Prisma
-              items:
-                - title: Connect from Prisma
-                  slug: guides/prisma
-                - title: Use Prisma Migrate With Neon
-                  slug: guides/prisma-migrate
+              slug: guides/prisma
         - title: PHP
           items:
             - title: Laravel
@@ -197,6 +223,8 @@
       items:
         - title: Exograph
           slug: guides/exograph
+        - title: FerretDB
+          slug: guides/ferretdb
         - title: Grafbase
           slug: guides/grafbase
         - title: Hasura
@@ -233,6 +261,8 @@
           slug: guides/polyscale
     - title: Deployment platforms
       items:
+        - title: Deno
+          slug: guides/deno
         - title: Koyeb
           slug: guides/koyeb
         - title: Vercel
@@ -260,18 +290,94 @@
       slug: ai/ai-concepts
     - title: Scale with Neon
       slug: ai/ai-scale-with-neon
-    - title: pgvector
-      slug: extensions/pgvector
-    - title: pg_tiktoken
-      slug: extensions/pg_tiktoken
-    - title: pg_embedding
-      slug: extensions/pg_embedding
     - title: AI tools
       items:
         - title: Google Colab
           slug: ai/ai-google-colab
-- title: Postgres extensions
-  slug: extensions/pg-extensions
+- title: Postgres
+  items:
+    - title: Data types
+      items:
+        - title: Array
+          slug: data-types/array
+        - title: Boolean
+          slug: data-types/boolean
+        - title: Date and time
+          slug: data-types/date-and-time
+        - title: Character
+          slug: data-types/character
+        - title: JSON
+          slug: data-types/json
+        - title: Decimal
+          slug: data-types/decimal
+        - title: Floating point
+          slug: data-types/floating-point
+        - title: Integer
+          slug: data-types/integer
+        - title: UUID
+          slug: data-types/uuid
+    - title: Extensions
+      items:
+        - title: Supported extensions
+          slug: extensions/pg-extensions
+        - title: citext
+          slug: extensions/citext          
+        - title: hstore
+          slug: extensions/hstore          
+        - title: neon
+          slug: extensions/neon
+        - title: neon_utils
+          slug: extensions/neon-utils       
+        - title: pgvector
+          slug: extensions/pgvector
+        - title: pg_stat_statements
+          slug: extensions/pg_stat_statements
+        - title: pg_tiktoken
+          slug: extensions/pg_tiktoken
+        - title: pg_trgm
+          slug: extensions/pg_trgm
+        - title: postgis
+          slug: extensions/postgis
+        - title: timescaledb
+          slug: extensions/timescaledb
+    - title: Functions
+      items:
+        - title: array_to_json
+          slug: functions/array_to_json
+        - title: dense_rank
+          slug: functions/dense_rank
+        - title: json_array_elements
+          slug: functions/json_array_elements
+        - title: jsonb_array_elements
+          slug: functions/jsonb_array_elements
+        - title: json_build_object
+          slug: functions/json_build_object
+        - title: json_each
+          slug: functions/json_each
+        - title: jsonb_each
+          slug: functions/jsonb_each
+        - title: json_extract_path
+          slug: functions/json_extract_path
+        - title: jsonb_extract_path
+          slug: functions/jsonb_extract_path          
+        - title: json_extract_path_text
+          slug: functions/json_extract_path_text
+        - title: jsonb_extract_path_text
+          slug: functions/jsonb_extract_path_text
+        - title: json_object
+          slug: functions/json_object
+        - title: jsonb_object
+          slug: functions/jsonb_object
+        - title: json_populate_record
+          slug: functions/json_populate_record
+        - title: jsonb_populate_record
+          slug: functions/jsonb_populate_record
+        - title: json_to_record
+          slug: functions/json_to_record
+        - title: jsonb_to_record
+          slug: functions/jsonb_to_record
+    - title: Compatibility
+      slug: reference/compatibility
 - title: Import data
   slug: import/import-intro
   items:
@@ -295,6 +401,8 @@
       slug: security/security-reporting
     - title: SOC 2 compliance
       slug: security/soc2-compliance
+    - title: Acceptable Use Policy
+      slug: security/acceptable-use-policy
 - title: Reference
   items:
     - title: Neon CLI
@@ -308,6 +416,8 @@
           slug: reference/cli-me
         - title: projects
           slug: reference/cli-projects
+        - title: ip-allow
+          slug: reference/cli-ip-allow
         - title: branches
           slug: reference/cli-branches
         - title: databases
@@ -318,14 +428,14 @@
           slug: reference/cli-operations
         - title: connection-string
           slug: reference/cli-connection-string
+        - title: set-context
+          slug: reference/cli-set-context
         - title: completion
           slug: reference/cli-completion
     - title: SDKs
       slug: reference/sdk
     - title: Glossary
       slug: reference/glossary
-    - title: Postgres compatibility
-      slug: reference/compatibility
 - title: Community
   slug: community/community-intro
   items:

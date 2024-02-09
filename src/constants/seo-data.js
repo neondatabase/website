@@ -53,6 +53,12 @@ export default {
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },
+  calculator: {
+    title: 'Pricing Calculator — Neon',
+    description: 'Calculate your Neon usage and get an estimate of your monthly bill.',
+    imagePath: '/images/social-previews/pricing.jpg',
+    pathname: LINKS.calculator,
+  },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
     description: 'Bring familiar, reliable and scalable Postgres experience to your customers.',
@@ -79,6 +85,19 @@ export default {
   },
   pingThing: {
     robotsNoindex: 'noindex',
+  },
+  caseStudies: {
+    title: 'Case Studies — Neon',
+    description:
+      'Discover the diverse and captivating stories of our valued partners, each a testament to unique experiences and successes.',
+    pathname: LINKS.caseStudies,
+    imagePath: '/images/social-previews/case-studies.jpg',
+  },
+  demos: {
+    title: 'Serverless showcase: unleashing the power of Neon',
+    description: 'Explore interactive demos unveiling cutting-edge apps in the serverless era.',
+    pathname: LINKS.demos,
+    imagePath: '/images/social-previews/demos.jpg',
   },
 };
 

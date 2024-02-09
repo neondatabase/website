@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable react/prop-types */
 import clsx from 'clsx';
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
@@ -20,8 +20,10 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
+import DocCta from '../doc-cta';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });
@@ -32,7 +34,7 @@ const Heading =
   (Tag) =>
   // eslint-disable-next-line react/prop-types
   ({ children, className = null }) => (
-    <Tag className={clsx(className, 'postgres-heading not-prose')}>{children}</Tag>
+    <Tag className={clsx(className, 'postgres-heading')}>{children}</Tag>
   );
 
 const getHeadingComponent = (heading, withoutAnchorHeading, isPostgres) => {
@@ -57,12 +59,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
-  code: (props) => {
-    if (props?.className?.startsWith('language-') && props?.children) {
-      return <CodeBlock as="figure" {...props} />;
-    }
-    return <code {...props} />;
-  },
   pre: (props) => <CodeBlock {...props} />,
   a: (props) => {
     const { href, children, ...otherProps } = props;
@@ -88,15 +84,19 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
       </Link>
     );
   },
-  img: (props) => (
-    <Image
-      {...props}
-      loading="lazy"
-      width={isReleaseNote ? 762 : 796}
-      height={isReleaseNote ? 428 : 447}
-      style={{ width: '100%', height: '100%' }}
-    />
-  ),
+  img: (props) => {
+    const { className, title, ...rest } = props;
+    return (
+      <Image
+        className={clsx(className, { 'no-border': title === 'no-border' })}
+        width={isReleaseNote ? 762 : 796}
+        height={isReleaseNote ? 428 : 447}
+        style={{ width: '100%', height: '100%' }}
+        title={title !== 'no-border' ? title : undefined}
+        {...rest}
+      />
+    );
+  },
   p: (props) => {
     const { children, className } = props;
     const href =
@@ -105,18 +105,22 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
 
     const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
 
-    return <p className={clsx(className, { 'postgres-paragraph': id })} id={id} {...props} />;
+    if (isPostgres) {
+      return <p className={clsx(className, { 'postgres-paragraph': id })} id={id} {...props} />;
+    }
+
+    return <p {...props} />;
   },
   YoutubeIframe,
   DefinitionList,
   Admonition,
-  CodeBlock,
   CodeTabs,
   DetailIconCards,
   TechnologyNavigation,
   CommunityBanner,
   Tabs,
   TabItem,
+  CTA: DocCta,
   ...sharedComponents,
 });
 
@@ -142,6 +146,7 @@ const Content = ({
               // Adds support for GitHub Flavored Markdown
               remarkGfm,
             ],
+            rehypePlugins: [getCodeProps],
           },
         }}
       />

@@ -1,12 +1,12 @@
 ---
-title: Connect an Astro site or application to Neon
-subtitle: Set up a Neon project in seconds and connect from an Astro site or application
+title: Connect an Astro site or application to Neon Postgres
+subtitle: Set up a Neon project in seconds and connect to your Postgres database from an
+  Astro site or application
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.749Z'
+updatedOn: '2024-02-08T15:20:54.279Z'
 ---
 
-Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This topic describes how to create a Neon project and access it from an Astro site or application.
-
+Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a Neon Postgres database and access it from an Astro site or application.
 
 To create a Neon project and access it from an Astro site or application:
 
@@ -49,13 +49,9 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-<CodeBlock shouldWrap>
-
-```shell
+```shell shouldWrap
 DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
-
-</CodeBlock>
 
 ## Configure the Postgres client
 
@@ -107,15 +103,14 @@ const response = await sql`SELECT version()`;
 console.log(response);
 ---
 ```
+
 </CodeTabs>
 
 ## Run the app
 
 When you run `npm run dev` you can expect to see one of the following in your terminal output:
 
-<CodeBlock shouldWrap>
-
-```shell
+```shell shouldWrap
 # node-postgres & Neon serverless driver 
 
 {
@@ -131,6 +126,5 @@ Result(1) [
 ]
 ```
 
-</CodeBlock>
 
 <NeedHelp/>

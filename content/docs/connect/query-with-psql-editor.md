@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/quickstart/postgres
   - /docs/integrations/postgres
   - /docs/get-started-with-neon/query-with-psql-editor
-updatedOn: '2023-11-24T11:25:06.745Z'
+updatedOn: '2024-02-08T15:20:54.276Z'
 ---
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for Postgres. It provides an interactive session for sending commands to Postgres and running ad-hoc queries. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
@@ -25,13 +25,9 @@ You can obtain a connection string from the **Connection Details** widget on the
 
 From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 psql postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
-
-</CodeBlock>
 
 <Admonition type="note">
 Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
@@ -45,13 +41,9 @@ You can obtain a Neon connection string with your password from the Neon **Dashb
 
 Neon uses the default Postgres port, `5432`. If you need to specify the port in your connection string, you can do so as follows:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 psql postgres://[user]:[password]@[neon_hostname][:port]/[dbname]
 ```
-
-</CodeBlock>
   
 ## Running queries
 

@@ -5,6 +5,11 @@
     @apply prose-h2:mb-5 prose-h2:mt-10 prose-h2:text-[36px] prose-h3:mb-4 prose-h3:mt-7 prose-h3:text-[28px] prose-h4:mb-4 prose-h4:mt-6 prose-h4:text-2xl prose-h5:mb-4 prose-h5:mt-5 prose-h5:text-xl md:prose-h2:text-[32px] sm:prose-h2:text-[26px];
     @apply prose-a:font-normal prose-a:text-green-45 prose-a:no-underline prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out hover:prose-a:text-[#47FFC2] sm:prose-a:break-words;
     @apply prose-figure:my-10 prose-img:my-10 md:prose-figure:my-8 md:prose-img:my-8;
+    @apply prose-pre:my-0 prose-pre:px-2;
+
+    *[id] {
+      @apply scroll-mt-20 lg:scroll-mt-5;
+    }
 
     > * {
       &:first-child {
@@ -22,15 +27,14 @@
       }
     }
 
-    ul,
-    ol {
-      @apply list-none;
+    ul {
+      @apply list-none pl-3.5;
 
       > li {
         @apply relative pl-0;
 
         &::before {
-          @apply absolute -translate-y-1/2;
+          @apply absolute -left-3.5 top-3 h-1 w-1 -translate-y-1/2 rounded-[1px] bg-current content-[''];
         }
 
         ol {
@@ -39,26 +43,20 @@
       }
     }
 
-    ul {
-      @apply pl-3.5;
-
-      > li {
-        &::before {
-          @apply -left-3.5 top-3 h-1 w-1 rounded-[1px] bg-current content-[''];
-        }
-      }
-    }
-
     ol {
-      counter-reset: custom-counter;
       @apply pl-10 md:pl-5;
 
       > li {
-        counter-increment: custom-counter;
+        @apply pl-0;
 
-        &::before {
-          @apply -left-2 top-[12px] -translate-x-full text-current md:-left-1 md:top-3.5;
-          content: counter(custom-counter) '. ' !important;
+        ol {
+          @apply md:pl-4;
+        }
+      }
+
+      li {
+        &::marker {
+          @apply text-white;
         }
       }
     }
@@ -93,7 +91,7 @@
       > code {
         text-shadow: unset !important;
 
-        @apply highlighted-code overflow-x-auto !font-mono !text-sm !text-white md:min-w-[686px];
+        @apply !font-mono !text-sm !text-white;
       }
     }
 

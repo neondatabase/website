@@ -4,10 +4,14 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
-updatedOn: '2023-11-24T11:25:06.758Z'
+updatedOn: '2024-02-08T15:20:54.293Z'
 ---
 
 This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore` command line utilities.
+
+<Admonition type="important">
+Avoid using `pg_dump` over a [pooled Neon connection](https://neon.tech/docs/connect/connection-pooling) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an unpooled connection instead.
+</Admonition>
 
 Repeat the `pg_dump` and `pg_restore` process for each database you want to migrate.
 
@@ -20,28 +24,20 @@ Repeat the `pg_dump` and `pg_restore` process for each database you want to migr
 - Create the target database in Neon. For example, if you are migrating a database named `pagila`, create a database named `pagila` in Neon. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 - Retrieve the connection string for your Neon database. You can find it in the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
 
-   <CodeBlock shouldWrap>
-
-   ```bash
+   ```bash shouldWrap
    postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
-   </CodeBlock>
-
 - Consider running a test migration first to ensure your actual migration goes smoothly. See [Run a test migration](#run-a-test-migration).
-- If your database is small, you can pipe `pg_dump` output directly to `pg_restore` to save time. See [Pipe pg_dump to pg_restore](#pipe-pg_dump-to-pg_restore).
+- If your database is small, you can pipe `pg_dump` output directly to `pg_restore` to save time. See [Pipe pg_dump to pg_restore](#pipe-pgdump-to-pgrestore).
 
 ## Export data with pg_dump
 
 Export your data from the source database with `pg_dump`:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 pg_dump -Fc -v -d <source_database_connection_string> -f <dump_file_name> 
 ```
-
-</CodeBlock>
 
 The `pg_dump` command above includes these arguments:
 
@@ -50,7 +46,7 @@ The `pg_dump` command above includes these arguments:
 - `-d`: Specifies the source database name or [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
 - `-f`: The dump file name. It can be any name you choose (`mydumpfile.bak`, for example).
 
-For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pg_dump-and-pg_restore-options).
+For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pgdump-and-pgrestore-options).
 
 ## Restore data to Neon with pg_restore
 
@@ -60,13 +56,9 @@ Restore your data to the target database in Neon with `pg_restore`.
 If you assigned database object ownership to different roles in your source database, consider adding the `-O, --no-owner` option to your `pg_restore` command to avoid errors. See [Database object ownership considerations](#database-object-ownership-considerations).
 </Admonition>
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 pg_restore -v -d <neon_database_connection_string> <dump_file_name>
 ```
-
-</CodeBlock>
 
 The example above includes these arguments:
 
@@ -74,15 +66,13 @@ The example above includes these arguments:
 - `-d`: Specifies the Neon database to connect to. The value is a Neon database connection string. See [Before you begin](#before-you-begin).
 - `<dump_file_name>` is the name of the dump file you created with `pg_dump`.
 
-For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pg_dump-and-pg_restore-options).
+For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pgdump-and-pgrestore-options).
 
 ## pg_dump and pg_restore example
 
 The following example shows how data from a `pagila` source database is dumped and restored to a `pagila` database in Neon using the commands described in the previous sections. (A database named `pagila` was created in Neon prior to running the restore operation.)
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 ~$ cd mydump
 ~/mydump$ pg_dump -Fc -v -d postgres://[user]:[password]@[neon_hostname]/pagila -f mydumpfile.bak 
 
@@ -91,8 +81,6 @@ mydumpfile.bak
 
 ~/mydump$ pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak
 ```
-
-</CodeBlock>
 
 ## Pipe pg_dump to pg_restore
 
@@ -104,13 +92,9 @@ pg_dump [args] | pg_restore [args]
 
 For example:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 pg_dump -Fc -v -d <source_database_connection_string> | pg_restore -v -d <neon-database-connection-string>
 ```
-
-</CodeBlock>
 
 Piping is not recommended for large databases, as it is susceptible to failures during lengthy migration operations.
 
@@ -122,7 +106,7 @@ After migrating your data, update your applications to connect to your new datab
 
 ## Database object ownership considerations
 
-Roles created in the Neon console, including the default role created with your Neon project, are automatically granted membership in the [neon_superuser](/docs/manage/roles#neon_superuser) role. This role can create roles and databases, select from all tables and views, and insert, update, or delete data in all tables. However, the `neon_superuser` is not a PostgreSQL `superuser`. It cannot run `ALTER OWNER` statements to grant ownership of database objects. As a result, if you granted ownership of database objects in your source database to different roles, your dump file will contain `ALTER OWNER` statements, and those statements will cause non-fatal errors when you restore data to your Neon database.
+Roles created in the Neon console, including the default role created with your Neon project, are automatically granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role. This role can create roles and databases, select from all tables and views, and insert, update, or delete data in all tables. However, the `neon_superuser` is not a PostgreSQL `superuser`. It cannot run `ALTER OWNER` statements to grant ownership of database objects. As a result, if you granted ownership of database objects in your source database to different roles, your dump file will contain `ALTER OWNER` statements, and those statements will cause non-fatal errors when you restore data to your Neon database.
 
 <Admonition type="note">
 Regardless of `ALTER OWNER` statement errors, a restore operation still succeeds because assigning ownership is not necessary for the data itself to be restored. The restore operation will still create tables, import data, and create other objects.
@@ -130,13 +114,9 @@ Regardless of `ALTER OWNER` statement errors, a restore operation still succeeds
 
 To avoid the non-fatal errors, you can ignore database object ownership statements when restoring data by specifying the `-O, --no-owner` option in your `pg_restore` command:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 pg_restore -v -O -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak 
 ```
-
-</CodeBlock>
 
 The Neon role performing the restore operation becomes the owner of all database objects.
 

@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2023-11-24T11:25:06.750Z'
+updatedOn: '2024-01-04T14:34:43.419Z'
 ---
 
 To connect to Neon from a Django application:
@@ -60,7 +60,7 @@ Running Django tests is currently not supported. The Django test runner must be 
 
 ## Connection issues
 
-Django uses the `psycopg2` driver as the default adapter for Postgrs. If you have an older version of that driver, you may encounter a `Endpoint ID is not specified` error when connecting to Neon. This error occurs if the client library used by your driver does not support the Server Name Indication (SNI) mechanism in TLS, which Neon uses to route incoming connections. The `psycopg2` driver uses the `libpq` client library, which supports SNI as of v14. You can check your `psycopg2` and `libpq` versions by starting a Django shell in your Django project and running the following commands:
+Django uses the `psycopg2` driver as the default adapter for Postgres. If you have an older version of that driver, you may encounter a `Endpoint ID is not specified` error when connecting to Neon. This error occurs if the client library used by your driver does not support the Server Name Indication (SNI) mechanism in TLS, which Neon uses to route incoming connections. The `psycopg2` driver uses the `libpq` client library, which supports SNI as of v14. You can check your `psycopg2` and `libpq` versions by starting a Django shell in your Django project and running the following commands:
 
 ```bash
 # Start a Django shell

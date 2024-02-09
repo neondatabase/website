@@ -2,7 +2,7 @@
 title: Use Neon read replicas with Prisma
 subtitle: Learn how to scale Prisma applications with Neon read replicas
 enableTableOfContents: true
-updatedOn: '2023-10-24T18:56:54.985Z'
+updatedOn: '2024-02-08T15:20:54.290Z'
 ---
 
 A Neon read replica is an independent read-only compute instance that performs read operations on the same data as your read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -26,7 +26,7 @@ You can create one or more read replicas for any branch in your Neon project. Cr
 2. Select the branch where your database resides.
 3. Click **Add compute**.
 4. On the **Create Compute Endpoint** dialog, select **Read-only** as the **Compute type**.
-5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable **Autoscaling** and configure a minimum and maximum compute size. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your read-only compute is automatically suspended. The default setting is 5 minutes. You can set this value up to 7 days.
+5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your read-only compute is automatically suspended. The default setting is 5 minutes. You can set this value up to 7 days.
    <Admonition type="note">
    The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
    </Admonition>
@@ -41,9 +41,9 @@ Alternatively, you can create read replicas using the [Neon API](https://api-doc
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/late-bar-27572981/endpoints \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "endpoint": {
@@ -68,15 +68,11 @@ Connecting to a read replica is the same as connecting to any branch in a Neon p
 1. Under **Compute**, select your **Read-only** compute endpoint.
 1. Select the connection string and copy it. This is the information you need to connect to the read replica from your Prisma Client. The connection string appears similar to the following:
 
-   <CodeBlock shouldWrap>
-
-   ```bash
+   ```bash shouldWrap
    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
    ```
 
-   </CodeBlock>
-
-   If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string, but remember to append `?pgbouncer=true` to the connection string when using a pooled connection. Prisma requires this flag when using Prisma Client with PgBouncer. See [Connect from serverless functions](/docs/guides/prisma#connect-from-serverless-functions) for more information.
+   If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string, but remember to append `?pgbouncer=true` to the connection string when using a pooled connection. Prisma requires this flag when using Prisma Client with PgBouncer. See [Use connection pooling with Prisma](/docs/guides/prisma#use-connection-pooling-with-prisma) for more information.
 
 ## Update your env file
 

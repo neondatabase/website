@@ -24,7 +24,7 @@ const variantsAnimation = {
   },
 };
 
-const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
+const Item = ({ question, answer, linkText = null, linkUrl = null, linkLabel = null, index }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
@@ -41,16 +41,17 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
   return (
     <li className="border-b border-gray-new-20 py-3.5">
       <button
-        className="flex w-full items-start gap-4 text-left"
+        className="relative flex w-full items-start gap-4 text-left after:absolute after:-inset-y-3.5 after:left-0 after:w-full"
         type="button"
         aria-expanded={isOpen}
         aria-controls={index}
         onClick={handleOpen}
       >
         <ArrowIcon
-          className={clsx('shrink-0 text-pricing-primary-1 transition duration-200', {
-            'rotate-90 fill-pricing-primary-1 !text-black-new': isOpen,
-          })}
+          className={clsx(
+            'shrink-0 transition-[fill,transform] duration-200',
+            isOpen ? 'rotate-90 fill-green-45 text-black-new' : 'text-green-45'
+          )}
           aria-hidden
         />
         <h3 className="text-[22px] font-medium leading-tight tracking-tight xl:text-xl md:text-lg">
@@ -76,12 +77,13 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
           />
           {linkText && linkUrl && (
             <Link
-              className="my-2.5 ml-[42px] border-b border-pricing-primary-3 pb-1.5 !text-base font-normal leading-none !text-pricing-primary-1 hover:!border-pricing-primary-1 lg:mt-4 lg:!text-base"
+              className="my-2.5 ml-[42px] pb-1.5 !text-base font-normal leading-none lg:mt-4 lg:!text-base"
               size="sm"
-              theme="white"
+              theme="green"
               to={linkUrl}
             >
               {linkText}
+              {linkLabel && <span className="sr-only">{linkLabel}</span>}
             </Link>
           )}
         </m.div>
@@ -95,6 +97,7 @@ Item.propTypes = {
   answer: PropTypes.string.isRequired,
   linkText: PropTypes.string,
   linkUrl: PropTypes.string,
+  linkLabel: PropTypes.string,
   index: PropTypes.number.isRequired,
 };
 

@@ -2,7 +2,7 @@
 title: Neon CLI commands — databases
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-12-01T19:05:09.474Z'
+updatedOn: '2024-02-08T15:20:54.296Z'
 ---
 
 ## Before you begin
@@ -40,16 +40,15 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
-| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
-| --branch   | Branch ID or name   | string |  |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
+| `--branch`   | Branch ID or name   | string |  |
 
 If a branch ID or name is not provided, the command lists databases for the primary branch of the project.
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl databases list --branch br-autumn-dust-190886
 ┌────────┬────────────┬──────────────────────┐
 │ Name   │ Owner Name │ Created At           │
@@ -57,8 +56,6 @@ neonctl databases list --branch br-autumn-dust-190886
 │ neondb │ daniel     │ 2023-06-19T18:27:19Z │
 └────────┴────────────┴──────────────────────┘
 ```
-
-</CodeBlock>
 
 ### create
 
@@ -76,20 +73,18 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option               | Description                          | Type   | Required  |
 | -------------------- | ------------------------------------ | ------ | :------: |
-| --project-id         | Project ID                           | string | Only if your Neon account has more than one project |
-| --branch             | Branch ID or name                    | string | |
-| --name               | The name of the database             | string | &check; |
-| --owner-name| The name of the role that owns the database | string |  |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`         | Project ID                           | string | Only if your Neon account has more than one project |
+| `--branch`             | Branch ID or name                    | string | |
+| `--name`               | The name of the database             | string | &check; |
+| `--owner-name` | The name of the role that owns the database | string |  |
 
 - If a branch ID or name is not provided, the command creates the database in the primary branch of the project.
 - If the `--owner-name` option is not specified, the current user becomes the database owner.
 
-
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl databases create --name mynewdb --owner-name john
 ┌─────────┬────────────┬──────────────────────┐
 │ Name    │ Owner Name │ Created At           │
@@ -97,8 +92,6 @@ neonctl databases create --name mynewdb --owner-name john
 │ mynewdb │ john       │ 2023-06-19T23:45:45Z │
 └─────────┴────────────┴──────────────────────┘
 ```
-
-</CodeBlock>
 
 ### delete
 
@@ -118,16 +111,15 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option           | Description  | Type   | Required  |
 | ---------------- | ------------ | ------ | :------: |
-| --project-id     | Project ID   | string | Only if your Neon account has more than one project |
-| --branch         | Branch ID or name    | string | |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| `--project-id`     | Project ID   | string | Only if your Neon account has more than one project |
+| `--branch`         | Branch ID or name    | string | |
 
 If a branch ID or name is not provided, it is assumed the database resides in the primary branch of the project.
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl databases delete mydb
 ┌─────────┬────────────┬──────────────────────┐
 │ Name    │ Owner Name │ Created At           │
@@ -135,7 +127,5 @@ neonctl databases delete mydb
 │ mydb    │ daniel     │ 2023-06-19T23:45:45Z │
 └─────────┴────────────┴──────────────────────┘
 ```
-
-</CodeBlock>
 
 <NeedHelp/>

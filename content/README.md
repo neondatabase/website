@@ -39,6 +39,6 @@ This section contains reference information such as the glossary, API reference,
 
 This section describes how Neon handles security.
 
-## Release Notes
+## Changelog
 
-This section describes the latest features and fixes from Neon. Release notes are categorized as either "Console" or "Storage". Within each category, release notes are organized under "What's new" and "Bug fixes" subcategories. Subcategories are further classified with tags. For example, each Console release note is tagged as "API", "Control Plane", "Integrations", or "UI". Storage release notes are tagged as "Compute", "Pageserver", "Proxy", or "Safekeeper". Write release notes from the user's perspective. Give context. Describe why each feature was introduced and the issue that a bug fix resolves. Provide links to the documentation or website for more details where applicable. Release notes should tell the story of Neon's development journey.
+This section describes the latest features and fixes from Neon. Changelog is categorized as either "Console" or "Storage". Within each category, changelog is organized under "What's new" and "Bug fixes" subcategories. Subcategories are further classified with tags. For example, each Console release note is tagged as "API", "Control Plane", "Integrations", or "UI". Storage changelog is tagged as "Compute", "Pageserver", "Proxy", or "Safekeeper". Write changelog from the user's perspective. Give context. Describe why each feature was introduced and the issue that a bug fix resolves. Provide links to the documentation or website for more details where applicable. Changelog should tell the story of Neon's development journey.

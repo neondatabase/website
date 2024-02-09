@@ -2,7 +2,7 @@
 title: Documentation Contribution Guide
 subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
-updatedOn: '2023-11-09T19:24:28.538Z'
+updatedOn: '2024-02-08T15:20:54.273Z'
 ---
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
@@ -50,7 +50,7 @@ To use this feature, open the command palette (⌘ + ⇧ + V on Mac or Ctrl + Sh
 
 After you submit a contribution, the Neon documentation team reviews your changes, provides feedback, and merges the pull request when it's ready.
 
-Please reach out on the [Neon Community forum](https://community.neon.tech/) if you have any questions or need further assistance.
+Please reach out to us on our [Discord Server](https://discord.com/invite/92vNTzKDGp) if you have any questions or need further assistance.
 
 ## Documentation file structure
 
@@ -199,11 +199,9 @@ SELECT * FROM posts ORDER BY id;
 ```
 ````
 
-You can add language-specific highlighting to code blocks, as in the example above. See [Supported language highlighting for code blocks](https://prismjs.com/index.html#supported-languages).
+You can add language-specific highlighting to code blocks, as in the example above. See [Supported language highlighting for code blocks](https://shiki.matsu.io/languages).
 
-You can also wrap code blocks in `<CodeBlock></CodeBlock>` tags to show line numbers or wrap long strings.
-
-`<CodeBlock>` accepts the following options:
+Code block accepts the following options:
 
 - `showLineNumbers`: Shows the line numbers in the code block
 - `shouldWrap`: Enables code wrapping in the code block. This is useful for long commands or connection strings that would otherwise require the reader to scroll.
@@ -211,13 +209,11 @@ You can also wrap code blocks in `<CodeBlock></CodeBlock>` tags to show line num
 Example:
 
 ````md
-<CodeBlock shouldWrap>
 
-```bash
+```bash shouldWrap
 A really long line that scrolls off the page
 ```
 
-</CodeBlock>
 ````
 
 ## Code tabs
@@ -417,6 +413,4 @@ Commands, parameters, values, filenames, error messages, connection strings, and
 
 - "A connection string has this format: `postgres://[user]:[password]@[neon_hostname]/[dbname]`"
 
-## Questions?
-
-If you have questions or run into any issues, please reach out to us on the [Neon Community forum](https://community.neon.tech/).
+<NeedHelp/>

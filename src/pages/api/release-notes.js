@@ -3,7 +3,7 @@ import path from 'path';
 
 import matter from 'gray-matter';
 
-import { RELEASE_NOTES_DIR_PATH } from 'constants/docs';
+import { CHANGELOG_DIR_PATH } from 'constants/docs';
 import { getPostSlugs } from 'utils/api-docs';
 import getExcerpt from 'utils/get-excerpt';
 
@@ -32,11 +32,11 @@ const getPostBySlug = async (slug, pathname) => {
 
 export default async function handler(req, res) {
   try {
-    const slugs = (await getPostSlugs(RELEASE_NOTES_DIR_PATH)).map((slug) => slug.replace('/', ''));
+    const slugs = (await getPostSlugs(CHANGELOG_DIR_PATH)).map((slug) => slug.replace('/', ''));
 
     const releaseNotesPromises = slugs.map(async (slug) => {
       try {
-        const post = await getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
+        const post = await getPostBySlug(slug, CHANGELOG_DIR_PATH);
         const { data, title } = post;
         if (process.env.NODE_ENV === 'production') {
           if (data?.isDraft) {

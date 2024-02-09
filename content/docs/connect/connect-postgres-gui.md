@@ -2,7 +2,7 @@
 title: Connect a GUI application
 subtitle: Learn how to connect a GUI application to Neon
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.743Z'
+updatedOn: '2024-02-08T15:20:54.275Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.
@@ -84,17 +84,14 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [Retool](https://retool.com/) | |
 | [TablePlus](https://tableplus.com/) | SNI support on macOS since build 436, and on Windows since build 202. No SNI support on Linux currently. For older versions, use [SNI workaround B](/docs/connect/connection-errors#b-use-libpq-keyvalue-syntax-in-the-database-field). |
 | [Segment](https://segment.com/) | Requires [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) |
+| [Skyvia](https://skyvia.com/) | Requires setting the **SSL Mode** option to `Require`, and **SSL TLS Protocol** to 1.2. The other SSL fields are not required for **SSL Mode**: `Require`. |
 
 ## Connection issues
 
 Applications that use older client libraries or drivers that do not support Server Name Indication (SNI) may not permit connecting to Neon. If you encounter the following error, refer to [Connection errors](/docs/connect/connection-errors) for possible workarounds.
 
-<CodeBlock shouldWrap>
-
-```txt
+```txt shouldWrap
 ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
 ```
-
-</CodeBlock>
 
 <NeedHelp/>

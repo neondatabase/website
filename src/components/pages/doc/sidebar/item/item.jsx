@@ -46,7 +46,7 @@ const Item = ({
   const Tag = slug ? Link : 'button';
 
   return (
-    <li className="flex flex-col group/item">
+    <li className="group/item flex flex-col">
       <Tag
         className={clsx(
           'group flex w-full items-start justify-between py-2 text-left text-sm transition-colors duration-200',
@@ -62,7 +62,7 @@ const Item = ({
       >
         {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
         <span
-          className="leading-snug [&_code]:rounded-sm [&_code]:leading-none [&_code]:py-px [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:font-mono [&_code]:font-normal dark:[&_code]:bg-gray-new-15"
+          className="leading-snug [&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15"
           aria-hidden={!!ariaLabel}
           dangerouslySetInnerHTML={{ __html: title }}
         />

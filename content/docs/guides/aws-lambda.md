@@ -2,7 +2,7 @@
 title: Connect from AWS Lambda
 subtitle: Learn how to set up a Neon database and connect from an AWS Lambda function
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.372Z'
+updatedOn: '2024-02-08T15:20:54.279Z'
 ---
 
 AWS Lambda is a serverless, event-driven compute service that allows you to run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.
@@ -174,10 +174,8 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
     </Admonition>
 
     You can copy the connection string from **Connection Details** widget the Neon Console. Add the `DATABASE_URL` under `environment`, and add `sslmode=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells Postgres to use SSL encryption and verify the server's certificate.
-
-    <CodeBlock shouldWrap>
   
-    ```yaml
+    ```yaml shouldWrap
     provider:
      name: aws
      runtime: nodejs14.x
@@ -192,8 +190,6 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
              path: /users
              method: get
     ```
-
-    </CodeBlock>
 
 7. Deploy the serverless function using the following command:
 
@@ -268,13 +264,9 @@ If you make API calls to the Lambda function from your app, you will likely need
 
 You can run the following command to enable CORS to your local development environment:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 aws apigatewayv2 update-api --api-id <api-id> --cors-configuration AllowOrigins="http://localhost:3000"
 ```
-
-</CodeBlock>
 
 You can find your `api-id` on the API Gateway dashboard:
 

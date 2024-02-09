@@ -6,12 +6,12 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2023-12-01T18:35:17.561Z'
+updatedOn: '2024-02-09T14:18:56.793Z'
 ---
 
 You can sign up for free and upgrade to a paid plan when you are ready to scale. For information about what's included with the Neon Free Tier, see [Neon Free Tier](/docs/introduction/free-tier). For information about Neon's paid plan options, see [Neon plans](/docs/introduction/plans).
 
-Signing up for Neon is easy. Simply navigate to [https://console.neon.tech/register](https://console.neon.tech/register) and sign up with your email, Github, Google, or partner account.
+Signing up for Neon is easy. Simply navigate to [https://console.neon.tech/signup](https://console.neon.tech/signup) and sign up with your email, Github, Google, or partner account.
 ![Neon console sign up](/docs/get-started-with-neon/neon_signup.png)
 
 After signing up, you are directed to the Neon Console to create your first project. Enter a name for your project, select a Postgres version, provide a database name, and select a region. Generally, you'll want to select the region closest to your application. When you're finished, click **Create project**.
@@ -19,6 +19,18 @@ After signing up, you are directed to the Neon Console to create your first proj
 
 You are presented with the connection details for your new project, which you can use to connect to your database from a client or application. You can save the connection details or retrieve them later from the **Connection details** widget on the Neon **Dashboard**.
 ![Connection details dialog](/docs/get-started-with-neon/connection_details_modal.png)
+
+## Signing in to a social account with your email
+
+If you already have a Neon account using one of our social or partner login options but you now want to sign in with your email account, all you have to do is add a password to your profile.
+
+Go to **Profile** and click **Update Password**.
+
+<Admonition type="note">
+If you don't see an **Update Password** button, please sign out and sign back in. You should then see the option. This is a legacy issue; it will be resolved soon.
+</Admonition>
+
+You will be guided through a few steps, asking you to reauthenticate using your original social account, and then create your new password. After that, you are free to sign into your Neon account using either your social account or the email option.
 
 ## Next steps
 

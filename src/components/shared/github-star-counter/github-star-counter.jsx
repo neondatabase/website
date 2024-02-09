@@ -40,11 +40,11 @@ const GithubStarCounter = ({ className = '', isThemeBlack = false }) => {
   return (
     <Link
       className={clsx(
-        'flex items-center gap-x-2.5 text-16 leading-none tracking-extra-tight transition-colors duration-200',
+        'text-16 flex items-center gap-x-2.5 leading-none tracking-extra-tight transition-colors duration-200',
         className,
         isThemeBlack
           ? 'text-white hover:text-green-45'
-          : 'text-gray-new-8 dark:text-white hover:text-green-45 dark:hover:text-green-45'
+          : 'text-gray-new-8 hover:text-green-45 dark:text-white dark:hover:text-green-45'
       )}
       to={LINKS.github}
       target="_blank"
@@ -55,7 +55,7 @@ const GithubStarCounter = ({ className = '', isThemeBlack = false }) => {
       }}
     >
       <GitHubIcon width={20} height={20} />
-      <span className="w-10 whitespace-nowrap">
+      <span className="w-10 whitespace-nowrap xl:hidden">
         {starsCount ? `${(starsCount / 1000).toFixed(1)}k` : '...'}
       </span>
     </Link>
