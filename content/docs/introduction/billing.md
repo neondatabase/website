@@ -4,8 +4,6 @@ enableTableOfContents: true
 updatedOn: '2024-01-23T17:45:24.327Z'
 ---
 
-<NewPricing/>
-
 Neon [paid plans](/docs/introduction/plans#neon-plans) bill for usage based on the following metrics:
 
 - **Compute time**: The amount of compute resources used per hour.
@@ -84,7 +82,7 @@ To estimate your own monthly _Compute time_ cost:
 
 1. Determine the compute size you require, in Compute Units (CUs).
 1. Estimate the amount of _Active time_ per month for your compute(s).
-1. Find the _Compute-time_ price for your region. The [billing rates](#billing-rates) table shows _Compute-time_ prices by region.
+1. Find the _Compute-time_ price for your region.
 1. Input the values into the _Compute time_ cost formula:
 
    ```text
@@ -96,10 +94,6 @@ To estimate your own monthly _Compute time_ cost:
    ```text
    .25 * 730 * 0.102 = $18.62
    ```
-
-<Admonition type="tip">
-Neon also provides calculators to help with cost estimates. See [Pricing calculators](/docs/introduction/billing-calculators).
-</Admonition>
 
 ## Project storage
 
