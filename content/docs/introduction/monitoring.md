@@ -12,7 +12,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 - [Branch-specific metrics](#branch-specific-metrics) &#8212; View key metrics for all branches in your project on the **Branches** page.
 - [API metrics](#api-metrics) &#8212; Use the [Neon API](link) to gather a variety of usage metrics for your project.
 - [neon_utils](#the-neon_utils-extension) &#8212; A custom Postgres extension that helps you monitor how autoscaling allocates vCPU in response to workload.
-- [Other Postgres options](#other-postgres-options) &#8212; Other extensions and tools like `pg_stat_statements` and the `pg_hero` dashboard can provide details about SQL execution counts, totals, average execution time, and other insights into how your database is being used.
+- [Other Postgres options](#other-postgres-options) &#8212; Other extensions and tools like [pg_stat_statements](https://neon.tech/docs/extensions/pg_stat_statements) and [PgHero](https://github.com/ankane/pghero) can provide details about SQL execution counts, totals, average execution time, and other insights into how your database is being used.
 
 ## Dashboard
 
