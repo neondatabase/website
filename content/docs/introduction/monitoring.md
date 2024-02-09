@@ -41,7 +41,7 @@ The **Branches** page provides key usage metrics for all your branches, like act
 
 Using the Neon API, you can collect a variety of usage-based consumption metrics like  `data_storage_bytes_hour` and `compute_time_seconds`.
 
-Use this GET request to get details from an individual project.
+Use this `GET` request to get details from an individual project.
 
 ```curl
 curl --request GET \
