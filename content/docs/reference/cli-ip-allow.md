@@ -2,7 +2,7 @@
 title: Neon CLI commands — ip-allow
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.297Z'
+updatedOn: '2024-02-09T17:53:20.589Z'
 ---
 
 ## Before you begin
@@ -46,7 +46,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id`  | Project ID  | string | Yes, unless you have [set project context](/docs/reference/cli-set-context) |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Examples
 
@@ -77,7 +77,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id`  | Project ID  | string | Yes, unless you have [set project context](/docs/reference/cli-set-context) |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 | `--primary-branch`  | If true, the list will be applied only to the primary branch. Use `--primary-branch false` to remove this setting. | string | |
 
 #### Example
@@ -103,7 +103,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id`  | Project ID  | string | Yes, unless you have [set project context](/docs/reference/cli-set-context) |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Example
 
@@ -128,7 +128,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id`  | Project ID  | string | Yes, unless you have [set project context](/docs/reference/cli-set-context) |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Example
 

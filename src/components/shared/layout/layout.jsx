@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Footer from 'components/shared/footer';
 import Header from 'components/shared/header';
 
-const Layout = ({
+const Layout = async ({
   className = null,
   headerClassName = null,
   headerTheme,

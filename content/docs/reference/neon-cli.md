@@ -2,7 +2,7 @@
 title: Neon CLI
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-01-19T17:35:59.969Z'
+updatedOn: '2024-02-09T17:53:20.590Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the Neon CLI.
@@ -132,6 +132,6 @@ Global options are supported with any Neon CLI command.
   neonctl branches create --help
   ```
 
-## GitHub
+## GitHub repository
 
 The GitHub repository for the Neon CLI is found [here](https://github.com/neondatabase/neonctl).
