@@ -9,13 +9,11 @@ updatedOn: '2024-01-23T17:45:24.324Z'
 
 Find all the documentation you need to understand, manage, and optimize the features and metrics that contribute to your monthly Neon bill.
 
-## Pricing calculators and billing overview
+## Pricing and billing overview
 
-Start with our pricing calculators to get a sense of how different compute and storage sizes can affect your bill. Then get more detail about the underlying metrics.
+Start with our billing overview and then get more detail about our plans.
 
 <DetailIconCards>
-
-<a href="/docs/introduction/billing-calculators" description="Our pricing calculator and cost estimator tools help you estimate your next Neon bill" icon="transactions">Pricing calculators</a>
 
 <a href="/docs/introduction/billing-overview" description="Quick introduction to how billing works in Neon" icon="chart-bar">Billing overview</a>
 
@@ -28,8 +26,6 @@ Find detailed definitions of the metrics that make up your bill and a cost break
 <DetailIconCards>
 
 <a href="/docs/introduction/billing" description="Find detailed descriptions of the metrics that make up your bill" icon="trend-up">Billing metrics</a>
-
-<a href="/docs/introduction/billing-rates" description="Reference table of billing rates per region" icon="hourglass">Billing rates</a>
 
 </DetailIconCards>
 
