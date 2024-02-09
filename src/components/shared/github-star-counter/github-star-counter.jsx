@@ -10,44 +10,18 @@ import GitHubIcon from 'icons/github.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 import sendSegmentEvent from 'utils/send-segment-event';
 
-const API_URL = 'https://api.github.com/repos/neondatabase/neon';
-const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-
 const GithubStarCounter = ({ className = '', isThemeBlack = false }) => {
   const [starsCount, setStarsCount] = useState(null);
 
-  const fetchStarCount = async () => {
-    try {
-      const response = await fetch(API_URL);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const json = await response.json();
-      const updatedStarsCount = json.stargazers_count;
-
-      if (updatedStarsCount !== undefined) {
-        window.localStorage.setItem('neon_github_stargazers_count', updatedStarsCount);
-        const now = new Date().getTime();
-        window.localStorage.setItem('neon_github_last_updated', now);
-        setStarsCount(updatedStarsCount);
-      } else {
-        console.log('Unable to find stargazers_count in response:', json);
-      }
-    } catch (error) {
-      console.error('Error fetching GitHub star count:', error);
-    }
-  };
-
   useEffect(() => {
-    const lastUpdated = window.localStorage.getItem('neon_github_last_updated');
-    const now = new Date().getTime();
-
-    if (!lastUpdated || now - lastUpdated > ONE_DAY_IN_MS) {
-      fetchStarCount();
-    } else {
-      const prevStarsCount = window.localStorage.getItem('neon_github_stargazers_count');
-      setStarsCount(prevStarsCount);
-    }
+    fetch('/api/github-star-count')
+      .then((res) => res.json())
+      .then((data) => {
+        setStarsCount(data.starCount);
+      })
+      .catch((error) => {
+        console.error('Error fetching star count:', error);
+      });
   }, []);
 
   return (
