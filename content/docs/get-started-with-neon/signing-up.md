@@ -20,6 +20,18 @@ After signing up, you are directed to the Neon Console to create your first proj
 You are presented with the connection details for your new project, which you can use to connect to your database from a client or application. You can save the connection details or retrieve them later from the **Connection details** widget on the Neon **Dashboard**.
 ![Connection details dialog](/docs/get-started-with-neon/connection_details_modal.png)
 
+## Signing in to a social account with your email
+
+If you already have a Neon account using one of our social or partner login options but you now want to sign in with your email account, all you have to do is add a password to your profile.
+
+Go to **Profile** and click **Update Password**.
+
+<Admonition type="note">
+If you don't see an **Update Password** button, please sign out and sign back in. You should then see the option. This is a legacy issue; it will be resolved soon.
+</Admonition>
+
+You will be guided through a few steps, asking you to reauthenticate using your original social account, and then create your new password. After that, you are free to sign into your Neon account using either your social account or the email option.
+
 ## Next steps
 
 - [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
