@@ -54,7 +54,7 @@ For more details, see [Retrieving details about a project](/docs/guides/partner-
 
 ## The neon_utils extension
 
-The neon_utils extension provides a num_cpus() function you can use to monitor how Neon's Autoscaling feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
+The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's Autoscaling feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
 
 For full details, see [neon_utils](/docs/extensions/neon-utils).
 
