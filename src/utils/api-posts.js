@@ -364,6 +364,7 @@ const getAllWpPosts = async () => {
           slug
           title(format: RENDERED)
           date
+          content(format: RENDERED)
           pageBlogPost {
             largeCover {
               altText

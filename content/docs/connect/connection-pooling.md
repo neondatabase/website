@@ -4,7 +4,7 @@ subtitle: Learn how to enable connection pooling in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2024-01-05T18:59:15.317Z'
+updatedOn: '2024-02-08T15:20:54.276Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to offer support for connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -37,13 +37,9 @@ Enabling connection pooling in Neon requires adding a `-pooler` suffix to the co
 
 You can add the `-pooler` suffix to the endpoint ID in your connection string as shown:
 
-<CodeBlock shouldWrap>
-
-```text
+```text shouldWrap
 postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
 ```
-
-</CodeBlock>
 
 The **Connection Details** widget on the Neon **Dashboard** provides **Pooled connection** checkbox that adds the `-pooler` option to a connection string that you can copy and paste.
 

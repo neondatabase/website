@@ -88,13 +88,9 @@ datasource db {
 
 Then, go to the Project dashboard in Neon and generate a connection string in the `Connection Details` widget. You can add this connection string in `.env`:
 
-<CodeBlock shouldWrap>
-
-```shell
+```shell shouldWrap
 DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
-
-</CodeBlock>
 
 #### Using Neon for development with Prisma
 

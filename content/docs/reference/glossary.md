@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-02-02T17:58:23.766Z'
+updatedOn: '2024-02-08T20:07:48.875Z'
 ---
 
 ## Access token
@@ -93,13 +93,9 @@ A method of creating a pool of connections and caching those connections for reu
 
 A string containing details for connecting to a Neon database. The details include a user name (role), compute endpoint hostname, and database name; for example:
 
-<CodeBlock shouldWrap>
-
-```terminal
+```bash shouldWrap
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
-
-</CodeBlock>
 
 The compute endpoint hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
 
@@ -432,6 +428,10 @@ Write-ahead logs in a specific LSN range.
 ## WAL stream
 
 The stream of data written to the Write-Ahead Log (WAL) during transactional processing.
+
+## Working set
+
+A subset of frequently accessed or recently used data and indexes that ideally reside in memory (RAM) for quick access, allowing for better performance. See [how to size your compute](/docs/manage/endpoints#how-to-size-your-compute) to learn how to set your minimum compute to an adequate size to handle your working set.
 
 ## Write-Ahead Logging (WAL)
 

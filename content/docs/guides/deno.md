@@ -2,7 +2,7 @@
 title: Use Neon with Deno Deploy
 subtitle: Connect a Neon Postgres database to your Deno Deploy application
 enableTableOfContents: true
-updatedOn: '2024-02-06T12:36:51.920Z'
+updatedOn: '2024-02-08T15:20:54.282Z'
 ---
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
@@ -12,7 +12,7 @@ This guide demonstrates how to connect to a Neon Postgres database from a simple
 The guide covers two deployment options:
 
 - [Deploying your application locally with Deno Runtime](#deploy-your-application-locally-with-deno-runtime)
-- [Deploying your application with the Deno Deploy serverless platform ](#deploy-your-application-with-deno-deploy)
+- [Deploying your application with the Deno Deploy serverless platform](#deploy-your-application-with-deno-deploy)
 
 ## Prerequisites
 
@@ -27,13 +27,9 @@ Retrieve your database connection string from the **Connection Details** widget 
 
 Your connection string should look something like this:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
 ```
-
-</CodeBlock>
 
 You'll need the connection string a little later in the setup.
 
@@ -123,13 +119,13 @@ The script creates a table named `books` in the `neondb` database if it does not
 
 ### Run the script locally
 
-To run the script locally, set the `DATABASE_URL` environment variable to the Neon connection string you copied earlier. 
-    
+To run the script locally, set the `DATABASE_URL` environment variable to the Neon connection string you copied earlier.
+
 ```bash
 export DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 ```
 
-Then, run the command below to start the app server. The `--allow-env` flag allows the script to access the environment variables, and the `--allow-net` flag allows the script to make network requests. If the Deno runtime prompts you to allow these permissions, enter `y` to continue. 
+Then, run the command below to start the app server. The `--allow-env` flag allows the script to access the environment variables, and the `--allow-net` flag allows the script to make network requests. If the Deno runtime prompts you to allow these permissions, enter `y` to continue.
 
 ```bash
 deno run --allow-env --allow-net server.ts
@@ -190,7 +186,7 @@ To deploy the application, navigate to the directory of your `server.ts` applica
 deployctl deploy --project=YOUR_DENO_DEPLOY_PROJECT_NAME --prod server.ts
 ```
 
-The `--prod` flag specifies that the application should be deployed to the production environment. 
+The `--prod` flag specifies that the application should be deployed to the production environment.
 
 The `deployctl` command deploys the application to the Deno Deploy serverless platform. Once the deployment is complete, you'll see a message similar to the following:
 
@@ -212,7 +208,7 @@ View at:
 
 ### Verifying the deployment
 
-You can now access the application at the URL specified in the output. You can verify its connection to your Neon database by visiting the `/books` endpoint in your browser or using `cURL` to see if the data is returned as expected. 
+You can now access the application at the URL specified in the output. You can verify its connection to your Neon database by visiting the `/books` endpoint in your browser or using `cURL` to see if the data is returned as expected.
 
 ```bash
 $ curl https://cloudy-otter-57.deno.dev/books
@@ -235,7 +231,7 @@ $ curl https://cloudy-otter-57.deno.dev/books
 ]
 ```
 
-To check the health of the deployment or modify settings, navigate to the [Project Overview](https://dash.deno.com/account/projects) page and select your project from the **Projects** list. 
+To check the health of the deployment or modify settings, navigate to the [Project Overview](https://dash.deno.com/account/projects) page and select your project from the **Projects** list.
 
 ### Deploying using Github
 

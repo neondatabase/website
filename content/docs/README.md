@@ -1,5 +1,5 @@
 ---
-updatedOn: '2024-01-23T16:35:18.273Z'
+updatedOn: '2024-02-08T15:20:54.269Z'
 ---
 # Docs
 
@@ -148,80 +148,86 @@ To add a single page <https://example.com/changelog> to the docs sidebar, add th
 
 ## Code blocks
 
-All available languages for code blocks can be found [here](https://prismjs.com/index.html#supported-languages).
+All available languages for code blocks can be found [here](https://shiki.matsu.io/languages).
 
-You can use fenced code blocks with three backticks (```) on the lines before and after the code block.
+You can use fenced code blocks with three backticks (```) on the lines before and after the code block. And display code with options
 
-To display code with options, wrap your code with `<CodeBlock></CodeBlock>` component.
+- enable highlighting single lines, multiple lines, and ranges of code lines
 
-Right now `<CodeBlock>` accepts the following fields:
+  Examples:
+  - Single line highlight
+
+    ````md
+
+    ```c++ {1}
+    #include <iostream>
+
+    int main() {
+        std::cout << "Hello World";
+        return 0;
+    }
+    ```
+
+    ````
+
+  - Multiple lines
+
+    ````md
+
+    ```c++ {1,2,5}
+    #include <iostream>
+
+    int main() {
+        std::cout << "Hello World";
+        return 0;
+    }
+    ```
+
+    ````
+
+  - Range of code lines
+
+    ````md
+
+    ```c++ {1-3,5}
+    #include <iostream>
+
+    int main() {
+        std::cout << "Hello World";
+        return 0;
+    }
+    ```
+
+    ````
 
 - `showLineNumbers` - flag to show on the line numbers in the code block.
+  
+  Example:
+
+  ````md
+
+  ```c++ showLineNumbers
+  #include <iostream>
+
+  int main() {
+      std::cout << "Hello World";
+      return 0;
+  }
+  ```
+
+  ````
+
 - `shouldWrap` - flag to enable code wrapping in the code block.
-- `highlight` - string to enable highlighting single lines, multiple lines, and ranges of code lines. Note that it also activates the `showLineNumbers` feature.
 
-Example:
+  Example:
 
-````md
-<CodeBlock shouldWrap>
+    ````md
 
-```powershell
-powershell -Command "Start-Process -FilePath powershell -Verb RunAs -ArgumentList '-NoProfile','-InputFormat None','-ExecutionPolicy Bypass','-Command ""iex (iwr -UseBasicParsing https://cli.configu.com/install.ps1)""'"
-```
+    ```powershell shouldWrap
+    powershell -Command "Start-Process -FilePath powershell -Verb RunAs -ArgumentList '-NoProfile','-InputFormat None','-ExecutionPolicy Bypass','-Command ""iex (iwr -UseBasicParsing https://cli.configu.com/install.ps1)""'"
+    ```
 
-</CodeBlock>
-````
-
-Single line
-
-````md
-<CodeBlock highlight="1">
-
-```c++
-#include <iostream>
-
-int main() {
-    std::cout << "Hello World";
-    return 0;
-}
-```
-
-</CodeBlock>
-````
-
-Multiple lines
-
-````md
-<CodeBlock highlight="1,2,5">
-
-```c++
-#include <iostream>
-
-int main() {
-    std::cout << "Hello World";
-    return 0;
-}
-```
-
-</CodeBlock>
-````
-
-Range of code lines
-
-````md
-<CodeBlock highlight="1-3,5">
-
-```c++
-#include <iostream>
-
-int main() {
-    std::cout << "Hello World";
-    return 0;
-}
-```
-
-</CodeBlock>
-````
+    ````
 
 ## Code Tabs
 
@@ -230,15 +236,11 @@ To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and w
 ````md
 <CodeTabs labels={["Shell", "C++", "C#", "Java"]}>
 
-<CodeBlock highlight="2-4">
-
-```bash
+```bash {2-4}
 #!/bin/bash
 STR="Hello World!"
 echo $STR
 ```
-
-</CodeBlock>
 
 ```c++
 #include <iostream>
@@ -291,9 +293,8 @@ To display the tabs with content as image, video, code block, .etc, wrap the `Ta
 <TabItem>
 In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
 
-<CodeBlock showLineNumbers>
 
-```bash
+```bash showLineNumbers
 - name: <db_name>
   kind: postgres
   configuration:
@@ -308,7 +309,6 @@ In your config v3 project, head to the `/metadata/databases/databases.yaml` file
   functions: []
 ```
 
-</CodeBlock>
 
 Apply the Metadata by running:
 
@@ -394,7 +394,6 @@ Check the example for default data of CTA block
 
 </details>
 
-
 To change text in CTA block, you can pass to the component props `title`, `description`, `buttonText`, `buttonUrl`:
 
 ```md
@@ -420,10 +419,16 @@ Example file structure:
 │   ├── architecture-overview.md
 ```
 
-Example content in `architecture-overview.md`:
+To display images using Markdown syntax, use the following syntax: `![alt text](image url)`. Example content in `architecture-overview.md`:
 
 ```md
 ![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png)
+```
+
+If you need an image without border to show an annotated piece of UI, use the `"no-border"` attribute as in the example below:
+
+```md
+![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png "no-border")
 ```
 
 With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.

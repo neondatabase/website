@@ -1,63 +1,85 @@
 @layer components {
+  :root {
+    --shiki-color-text: #18191b;
+    --shiki-color-background: transparent;
+    --shiki-token-constant: #da0b51;
+    --shiki-token-string: #078345;
+    --shiki-token-comment: #b3b3b3;
+    --shiki-token-keyword: #206cdf;
+    --shiki-token-parameter: #a35200;
+    --shiki-token-function: #078345;
+    --shiki-token-string-expression: #078345;
+    --shiki-token-punctuation: #18191b;
+    --shiki-token-link: #078345;
+    --shiki-token-operator: #a86624;
+    --shiki-token-embed: #18191b;
+  }
+
+  .dark {
+    --shiki-color-text: #ffffff;
+    --shiki-color-background: transparent;
+    --shiki-token-constant: #f6558c;
+    --shiki-token-string: #47d18c;
+    --shiki-token-comment: #b3b3b3;
+    --shiki-token-keyword: #66a3ff;
+    --shiki-token-parameter: #ff990a;
+    --shiki-token-function: #47d18c;
+    --shiki-token-string-expression: #47d18c;
+    --shiki-token-punctuation: #ffffff;
+    --shiki-token-link: #47d18c;
+    --shiki-token-operator: #ba8c5e;
+    --shiki-token-embed: #ffffff;
+  }
+
+  pre [data-highlighted-line] {
+    @apply bg-[rgba(0,85,255,0.08)] shadow-[inset_3px_0px_0px_0px_#0055ff] dark:bg-[rgba(0,229,153,0.08)] dark:shadow-[inset_3px_0px_0px_0px_#00E599];
+  }
+
+  [data-line-numbers='true'] pre {
+    counter-reset: line;
+  }
+
+  [data-line-numbers='true'] pre [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+
+    /* Other styling */
+    display: inline-block;
+    width: 1rem;
+    margin-right: 1.25rem;
+    text-align: right;
+    color: gray;
+  }
+
+  code [data-line] {
+    @apply px-4;
+  }
+
+  code [data-line]::after {
+    @apply invisible overflow-hidden text-sm content-["'"];
+  }
+
   .highlighted-code {
-    .token.keyword,
-    .token.class-name,
-    .token.url,
-    .token.tag {
-      @apply text-code-blue-1 dark:text-code-blue-2;
+    pre {
+      @apply overflow-x-auto px-1 py-6;
+    }
+  }
+
+  .show-linenumbers {
+    pre code {
+      counter-reset: line;
     }
 
-    .token.console,
-    .token.class-name.namespace,
-    .token.tag.attr-name {
-      @apply text-black dark:text-white;
-    }
+    pre code > [data-line]::before {
+      counter-increment: line;
+      content: counter(line);
 
-    .token.boolean,
-    .token.number,
-    .token.symbol,
-    .token.variable,
-    .token.constant,
-    .token.property,
-    .token.property-access,
-    .token.deleted {
-      @apply text-code-red-1 dark:text-code-red-2;
-    }
-
-    .token.builtin,
-    .token.function,
-    .token.string,
-    .token.char,
-    .token.selector,
-    .token.tag.attr-value,
-    .token.atrule,
-    .token.inserted {
-      @apply text-code-green-1 dark:text-code-green-2;
-    }
-
-    .token.punctuation {
-      @apply !text-code-gray-2;
-    }
-
-    .token.regex,
-    .token.important {
-      @apply text-code-orange-1 dark:text-code-orange-2;
-    }
-
-    .token.operator,
-    .token.entity {
-      @apply text-code-brown-1 dark:text-code-brown-2;
-    }
-
-    .token.comment,
-    .token.prolog,
-    .token.doctype,
-    .token.cdata {
-      @apply text-code-gray-1;
-    }
-
-    .react-syntax-highlighter-line-number.linenumber {
-      @apply !min-w-[2.25em] !text-left text-gray-5;
+      /* Other styling */
+      display: inline-block;
+      width: 1rem;
+      margin-right: 1.25rem;
+      text-align: right;
+      color: gray;
     }
   }
 }

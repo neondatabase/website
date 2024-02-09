@@ -2,7 +2,7 @@
 title: Get started with Flyway and Neon
 subtitle: Learn how to manage schema changes in Neon with Flyway
 enableTableOfContents: true
-updatedOn: '2023-11-27T16:33:52.717Z'
+updatedOn: '2024-02-08T15:20:54.283Z'
 ---
 
 Flyway is a database migration tool that facilitates version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
@@ -59,21 +59,15 @@ From the Neon **Dashboard**, retrieve your password and a Java connection string
 
 Your Java connection string should look something like this:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
 ```
-
-</CodeBlock>
 
 ## Configure flyway
 
 To configure Flyway to connect to your Neon database, create a `flyway.conf` file in the /conf directory. Include the following items, modified to use the connection details you retrieved in the previous step.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
 
 flyway.user=alex
@@ -82,8 +76,6 @@ flyway.password=AbC123dEf
 
 flyway.locations=filesystem:/home/alex/flyway-x.y.z/sql
 ```
-
-</CodeBlock>
 
 ## Create the first migration
 
