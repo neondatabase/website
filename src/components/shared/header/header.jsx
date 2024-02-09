@@ -141,11 +141,13 @@ const Header = ({
           </nav>
 
           <div className="flex lg:hidden">
-            <GithubStarCounter
-              className="mr-5 xl:mr-3"
-              isThemeBlack={isThemeBlack}
-              githubStarCount={githubStarCount}
-            />
+            {githubStarCount && (
+              <GithubStarCounter
+                className="mr-5 xl:mr-3"
+                isThemeBlack={isThemeBlack}
+                githubStarCount={githubStarCount}
+              />
+            )}
             <Button
               className="mr-3.5 h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:mr-2 xl:px-4"
               to={LINKS.login}
