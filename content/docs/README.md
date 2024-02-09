@@ -425,11 +425,10 @@ To display images using Markdown syntax, use the following syntax: `![alt text](
 ![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png)
 ```
 
-The `<Image>` component can be used to enhance images within your documentation. The component accepts
-all of the standard `HTMLImageElement` attributes and the boolean `withNoBorder`:
+To display image without border, use `"no-border"` as below:
 
-```jsx
-<Image src="/docs/introduction/neon_architecture_3.png" alt="Neon architecture diagram" width="796" height="448" withNoBorder />
+```md
+![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png "no-border")
 ```
 
 With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.

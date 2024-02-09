@@ -12,8 +12,6 @@ A Neon compute runs Postgres, and storage is a multi-tenant key-value store for 
 
 ![Neon architecture diagram](/docs/introduction/neon_architecture_3.png "no-border")
 
-<Image src="/docs/introduction/neon_architecture_3.png" alt="Neon architecture diagram" width="796" height="448" withNoBorder />
-
 Neon storage consists of three main components: Safekeepers, Pageservers, and cloud object storage.
 
 Safekeepers are responsible for durability of recent updates.

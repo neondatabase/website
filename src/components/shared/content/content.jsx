@@ -84,14 +84,19 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
       </Link>
     );
   },
-  img: (props) => (
-    <Image
-      {...props}
-      width={isReleaseNote ? 762 : 796}
-      height={isReleaseNote ? 428 : 447}
-      style={{ width: '100%', height: '100%' }}
-    />
-  ),
+  img: (props) => {
+    const { className, title, ...rest } = props;
+    return (
+      <Image
+        className={clsx(className, { 'no-border': title === 'no-border' })}
+        width={isReleaseNote ? 762 : 796}
+        height={isReleaseNote ? 428 : 447}
+        style={{ width: '100%', height: '100%' }}
+        title={title !== 'no-border' ? title : undefined}
+        {...rest}
+      />
+    );
+  },
   p: (props) => {
     const { children, className } = props;
     const href =
@@ -105,24 +110,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
     }
 
     return <p {...props} />;
-  },
-  Image: (props) => {
-    const { className, withNoBorder, width, height, ...rest } = props;
-    const imageWidth = isReleaseNote ? 762 : 796;
-    const imgHeight = isReleaseNote ? 428 : 447;
-    return (
-      <Image
-        className={clsx(
-          'rounded',
-          { 'border border-gray-new-94 dark:border-gray-new-20': !withNoBorder },
-          className
-        )}
-        width={width || imageWidth}
-        height={height || imgHeight}
-        style={{ width: '100%', height: '100%' }}
-        {...rest}
-      />
-    );
   },
   YoutubeIframe,
   DefinitionList,
