@@ -15,37 +15,38 @@ Neon offers the following plans:
 - **Free Tier** &mdash; Best for hobby projects, prototypes, and learning Neon.
 - **Launch** &mdash; All the resources, features and support you need to launch.
 - **Scale** &mdash; Full platform and support access, designed for businesses scaling production workloads.
-- **Enterprise** &mdash; A custom plan for large teams, database fleets, and resale.
+- **Enterprise** &mdash; Custom pricing, high usage workloads, database fleets, large databases
 
 For information about how Neon bills for paid plans, please refer to our [Billing metrics](/docs/introduction/billing) page.
 
 ## Neon plans
 
-|                         | Free                                         | Launch                                       | Scale                                        |
-|-------------------------|----------------------------------------------|----------------------------------------------|----------------------------------------------|
-| **Pricing**             | $0 per month                                 | $19 per month                                | $69 per month                                |
-| **Description**         | Best for hobby projects, prototypes, and learning Neon | All the resources, features and support you need to launch. | Full platform and support access, designed for businesses scaling production workloads. |
-| **Included Usage**      |                                              |                                              |                                              |
-| Storage                 | 0.5 GiB                                      | 10 GiB                                       | 50 GiB                                       |
-| Active Compute Time     | Primary: 750 hours/month<br>Branches: 20 hours/month</br> | 1,200 hours/month                    | 3,000 hours/month                            |
-| Projects                | 1                                            | 10                                           | 50                                           |
-| **Extra Usage**         |                                              |                                              |                                              |
-| Storage                 | –                                            | –                                            | $15 per 10 GiB                               |
-| Active Compute Time     | –                                            | $0.04 per hour                               | $0.04 per hour                               |
-| Projects                | –                                            | –                                            | $50 per 10 projects                          |
-| **Support**             | Community                                    | Standard                                     | Priority                                     |
-| **Features**            |                                              |                                              |                                              |
-| Compute Size            | 0.25 vCPU, 1GB RAM                           | Up to 4 vCPUs, 16GB RAM                      | Up to 7 vCPUs, 28GB RAM                      |
-| Autoscaling             | –                                            | &check;                                      | &check;                                      |
-| Branching               | up to 10 branches                            | &check;                                      | &check;                                      |
-| Point-in-time Recovery  | Up to 24 hours                               | Up to 7 days                                 | Up to 30 days                                |
-| IP Allow                | –                                            | –                                            | &check;                                      |
-| SOC 2 Report            | –                                            | –                                            | &check;                                      |
-| Autosuspend             | Fixed<br>After 5 minutes                     | Configurable<br>5 minutes to never           | Configurable<br>1 minute to never            |
-| Available Regions       | All                                          | All                                          | All                                          |
-| Project Sharing         | &check;                                      | &check;                                      | &check;                                      |
-| Read Replicas           | –                                            | &check;                                      | &check;                                      |
-| Logical Replication     | &check;                                      | &check;                                      | &check;                                      |
+|                         | Free                                         | Launch                                       | Scale                                        | Enterprise                                   |
+|-------------------------|----------------------------------------------|----------------------------------------------|----------------------------------------------|----------------------------------------------|
+| **Pricing**             | $0 per month                                 | $19 per month                                | $69 per month                                | $Custom                                |
+| **Description**         | Best for hobby projects, prototypes, and learning Neon | All the resources, features and support you need to launch. | Full platform and support access, designed for businesses scaling production workloads. |  Custom pricing, high usage workloads, database fleets, large databases. |
+| **Included Usage**      |                                              |                                              |                                              |                                              |
+| Storage                 | 0.5 GiB                                      | 10 GiB                                       | 50 GiB                                       | 500+ GiB                                       |
+| Active Compute Time     | Primary: 750 hours/month; Branches: 20 hours/month | 1,200 hours/month                    | 3,000 hours/month                            | Custom                            |
+| Projects                | 1                                            | 10                                           | 50                                           | 50                                           |
+| **Extra Usage**         |                                              |                                              |                                              |                                              |
+| Storage                 | –                                            | –                                            | $15 per 10 GiB                               | &check;                               |
+| Active Compute Time     | –                                            | $0.04 per hour                               | $0.04 per hour                               | &check;                               |
+| Projects                | –                                            | –                                            | $50 per 10 projects                          | &check;                          |
+| **Support**             | Community                                    | Standard                                     | Priority                                     | Enterprise                                     |
+| **Features**            |                                              |                                              |                                              |                                              |
+| Compute Size            | 0.25 vCPU, 1GB RAM                           | Up to 4 vCPUs, 16GB RAM                      | Up to 7 vCPUs, 28GB RAM                      | 7 vCPUs, 28GB RAM +                      |
+| Autoscaling             | –                                            | &check;                                      | &check;                                      | &check;                                      |
+| Branching               | up to 10 branches                            | &check;                                      | &check;                                      | &check;                                      |
+| Point-in-time Recovery  | Up to 24 hours                               | Up to 7 days                                 | Up to 30 days                                | &check;                                |
+| IP Allow                | –                                            | –                                            | &check;                                      | &check;                                      |
+| SOC 2 Report            | –                                            | –                                            | &check;                                      | &check;                                      |
+| Autosuspend             | Fixed<br>After 5 minutes                     | Configurable<br>5 minutes to never           | Configurable<br>1 minute to never            | Configurable<br>1 minute to never            |
+| Available Regions       | All                                          | All                                          | All                                          | All                                          |
+| Project Sharing         | &check;                                      | &check;                                      | &check;                                      | &check;                                      |
+| Read Replicas           | –                                            | &check;                                      | &check;                                      | &check;                                      |
+| Logical Replication     | &check;                                      | &check;                                      | &check;                                      | &check;                                      |
+
 
 
 For more information about a particular plan, refer to the individual plan pages:
