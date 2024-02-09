@@ -62,7 +62,7 @@ For full details, see [neon_utils](/docs/extensions/neon-utils).
 
 Neon recommends a few tools from the Postgres community that can help you understand what is happening within your database:
 
-- `pg_stat_activity`
+- [pg_stat_activity](#pg_stat_activity)
 - `pg_stat_statements`
 - `pg_hero`
 
