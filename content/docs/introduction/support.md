@@ -8,18 +8,16 @@ Support channels for the Neon Free Tier, Launch, Scale, and Enterprise plans are
 
 | Support type                             | Free Tier | Launch | Scale | Enterprise |
 | :--------------------------------------- | :-------: | :----: | :---: | :--------: |
-| Community Support                        |  &check;  |&check; |&check;|  &check;   |
-| Neon Customer Support                    |     -     |&check; |&check;|  &check;   |
-| Prioritized Neon Customer Support        |     -     |   -    |&check;|  &check;   |
-| Enterprise Support with SLAs             |     -     |   -    |   -   |  &check;   |
+| [Community Support](#community-support)                        |  &check;  |&check; |&check;|  &check;   |
+| [Neon Customer Support](#neon-customer-support)                    |     -     |&check; |&check;|  &check;   |
+| [Prioritized Neon Customer Support](#prioritized-neon-customer-support)        |     -     |   -    |&check;|  &check;   |
+| [Enterprise Support with SLAs](#enterprise-support-with-slas)             |     -     |   -    |   -   |  &check;   |
 
-## Support types
-
-### Community Support
+## Community Support
 
 Community support includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged in both communities. 
 
-### Neon Customer Support
+## Neon Customer Support
 
 Neon Customer Support provides access to the Neon Support team. 
 
@@ -29,18 +27,14 @@ You can open support tickets in the Neon Console. Look for the **Support** link 
 
 You can expect an initial response time of 2 business days, from 6am to 6pm Pacific Standard Time (UTC -8), Monday through Friday, excluding public holidays in the United States. For custom support solutions, please contact [Sales](https://neon.tech/contact-sales).
 
-#### Support email
-
-If you're unable to access Neon's primary support channels (e.g., the support ticket form in the Neon Console or our [Discord Server](https://discord.com/invite/92vNTzKDGp)), you can use the following email as a fallback:
-
-**Email**: `support@neon.tech`
-
-Response times might be longer than our primary channels, so we appreciate your patience.
-
-### Prioritized Neon Customer Support
+## Prioritized Neon Customer Support
 
 With Prioritized Neon Customer Support, your support tickets are given priority by the Neon Support team. 
 
-### Enterprise Support with SLAs
+## Enterprise Support with SLAs
 
-With Enterprise Support, your support tickets are given priority by the Neon Support team and handled according to SLAs outlined in your Master Service Agreement.
+With Enterprise Support, your support tickets are given priority by the Neon Support team and handled according to your Service Level Agreement.
+
+<Admonition type="note">
+If you are a Launch, Scale, or Enterprise user and are unable to access the support ticket form in the Neon Console, you can use the following email address as a fallback:  `support@neon.tech`
+</Admonition>
