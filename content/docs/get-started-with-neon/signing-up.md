@@ -26,6 +26,10 @@ If you already have a Neon account using one of our social or partner login opti
 
 Go to **Profile** and click **Update Password**.
 
+<Admonition type="note">
+If you don't see an **Update Password** button, please sign out and sign back in. You should then see the option. This is a legacy issue; it will be resolved soon.
+</Admonition>
+
 You will be guided through a few steps, asking you to reauthenticate using your original social account, and then create your new password. After that, you are free to sign into your Neon account using either your social account or the email option.
 
 ## Next steps
