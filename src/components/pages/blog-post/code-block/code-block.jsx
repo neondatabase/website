@@ -5,12 +5,15 @@ import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import highlight from 'lib/shiki';
 
 const CodeBlock = async (props) => {
-  if (typeof props?.children === 'object') {
-    props.children = JSON.stringify(props.children);
+  let codeContent = props.children;
+
+  if (typeof codeContent === 'object') {
+    // Stringify the object with indentation and preserving new lines
+    codeContent = JSON.stringify(codeContent, null, 2);
   }
 
   const highlightedLines = `${props.highlight}`;
-  const highlightCode = await highlight(props?.children, props.language, highlightedLines);
+  const highlightCode = await highlight(codeContent, props.language, highlightedLines);
 
   return <CodeBlockWrapper>{parse(highlightCode)}</CodeBlockWrapper>;
 };
