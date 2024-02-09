@@ -1,0 +1,143 @@
+---
+title: The pg_prewarm extension
+subtitle: load data into Postgres shared buffers with the pg_prewarm extension
+enableTableOfContents: true
+updatedOn: '2024-01-28T13:46:59.387Z'
+---
+
+The `pg_prewarm` extension enables the preloading of data into the shared buffers of your Postgres instance. By doing so, it significantly reduces the time needed to warm up the cache after your Postgres instance has been restarted. 
+
+This extension helps reduce downtime and improves query response times by ensuring that critical data is readily available in memory after a system reboot or restart.
+
+<CTA />
+
+In this guide, we'll explore the `pg_prewarm` extension, covering how to enable it and use it to prewarm your Postgres shared buffers. 
+
+<Admonition type="note">
+The `pg_prewarm` extension is open-source and can be installed on any Postgres setup. Detailed information about the extension is available in the [PostgreSQL Documentation](https://www.postgresql.org/docs/current/pgprewarm.html).
+</Admonition>
+
+**Version availability**
+
+Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date version information. 
+
+## Enable the `pg_prewarm` extension
+
+Activate `pg_prewarm` by running the `CREATE EXTENSION` statement in your Postgres client:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS pg_prewarm;
+```
+
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor). 
+
+## Example usage
+
+This section provides `pg_prewarm` usage exmaples, demonstrating its utility from basic to advanced scenarios.
+
+## Basic Usage
+
+To prewarm a specific table, simply use the `pg_prewarm` function with the name of the table you wish to cache. This is particularly useful for tables that are frequently accessed and can significantly reduce access times.
+
+```
+SELECT pg_prewarm('your_table_name');
+```
+
+Replace 'your_table_name' with the actual name of your table.
+
+## Practical Example
+
+1. Create a Sample Table
+
+```sql
+CREATE TABLE t_test AS
+SELECT * FROM generate_series(1, 1000000) AS id;
+```
+
+2. Prewarm the Entire Table
+
+```sql
+SELECT pg_prewarm('public.t_test');
+```
+
+This command will load the table data into Postgres cache, speeding up subsequent access.
+
+2. Check Table Size
+
+```sql
+SELECT pg_size_pretty(pg_relation_size('t_test'));
+```
+
+This can help you understand the amount of data being cached.
+
+## Demonstrating the effect of pg_prewarm
+
+1. Create Another Sample Table for Comparison
+
+```sql
+CREATE TABLE tbl_ItemTransactions_1
+(
+    TranID SERIAL,
+    TransactionDate TIMESTAMPTZ,
+    TransactionName TEXT
+);
+
+INSERT INTO tbl_ItemTransactions_1
+(TransactionDate, TransactionName)
+SELECT x, 'dbrnd' 
+FROM generate_series('2010-01-01 00:00:00'::timestamptz, '2018-02-01 00:00:00'::timestamptz, '1 minutes'::interval) a(x);
+```
+
+2. Prewarm the Sample Table
+
+```sql
+SELECT pg_prewarm('tbl_ItemTransactions_1');
+```
+
+3. Check Execution Plans
+
+Compare the execution plan of the prewarmed table vs. a non-prewarmed table to see the performance improvement.
+
+```sql
+EXPLAIN ANALYZE SELECT * FROM tbl_ItemTransactions_1;
+```
+
+The execution time for the prewarmed table should be significantly lower than for tables that have not been prewarmed.
+
+## Advanced Usage
+
+`pg_prewarm` offers additional parameters for more control over what is prewarmed. For example, you can specify which parts of the table to cache, such as the main data file, the visibility map (VM), or the free space map (FSM).
+
+```sql
+SELECT pg_prewarm('your_table_name', 'buffer', 'main', first_block, last_block);
+```
+
+Beyond simply preloading an entire table, pg_prewarm offers additional parameters to give users more control over precisely what parts of a table are loaded into the cache. Here's a breakdown of these parameters and what they control:
+
+regclass (Table Name): This is the first and mandatory parameter, where you specify the name of the table you want to prewarm. It's provided as a regclass, which is a way PostgreSQL references table names internally.
+
+mode: This optional parameter determines how the prewarming should be done. It can take several values:
+
+'buffer': This mode loads the specified table blocks directly into PostgreSQL's shared buffers.
+'pread': This mode uses the pread system call to load the data into the operating system's cache but not into PostgreSQL's shared buffers. It can be useful for warming up the OS cache while avoiding the consumption of PostgreSQL buffer memory.
+'buffer' is the default mode if none is specified.
+fork: PostgreSQL tables can have multiple "forks" or physical components, and this parameter allows you to specify which part of the table you want to prewarm. The options include:
+
+'main': This is the main data file of the table where the actual data rows are stored. Preloading the main fork is most common and usually what you want for performance improvements.
+'fsm': Stands for Free Space Map. It tracks the available space in the table for future inserts or updates. Preloading the FSM can be useful for operations that heavily involve data modification, as it can speed up the process of finding free space.
+'vm': Stands for Visibility Map. It keeps track of which rows are visible to which transactions, aiding in the efficiency of index-only scans and vacuum operations. Preloading the VM can be beneficial for read-heavy workloads with frequent index-only scans.
+first_block: An optional parameter specifying the first block of the table's fork to preload. If not set, prewarming starts from the first block.
+
+last_block: Similar to first_block, this optional parameter defines the last block of the table's fork to preload. If not set, prewarming continues until the end of the table.
+
+By using these parameters, database administrators and developers can fine-tune the prewarming process to match their application's specific access patterns and performance needs. This capability allows for more efficient use of memory resources and can significantly improve query response times for critical database operations.
+
+## Conclusion
+
+By following these examples, you can effectively use the `pg_prewarm` extension to improve the performance of your Postgres database by reducing the time it takes to access frequently used tables.
+
+## Resources
+
+- [PostgreSQL pg_prewarm documentation](https://www.postgresql.org/docs/current/pgprewarm.html)
+
+<NeedHelp/>
