@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import clsx from 'clsx';
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
@@ -83,15 +84,19 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
       </Link>
     );
   },
-  img: (props) => (
-    <Image
-      {...props}
-      loading="lazy"
-      width={isReleaseNote ? 762 : 796}
-      height={isReleaseNote ? 428 : 447}
-      style={{ width: '100%', height: '100%' }}
-    />
-  ),
+  img: (props) => {
+    const { className, title, ...rest } = props;
+    return (
+      <Image
+        className={clsx(className, { 'no-border': title === 'no-border' })}
+        width={isReleaseNote ? 762 : 796}
+        height={isReleaseNote ? 428 : 447}
+        style={{ width: '100%', height: '100%' }}
+        title={title !== 'no-border' ? title : undefined}
+        {...rest}
+      />
+    );
+  },
   p: (props) => {
     const { children, className } = props;
     const href =

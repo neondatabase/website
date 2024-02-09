@@ -419,10 +419,16 @@ Example file structure:
 │   ├── architecture-overview.md
 ```
 
-Example content in `architecture-overview.md`:
+To display images using Markdown syntax, use the following syntax: `![alt text](image url)`. Example content in `architecture-overview.md`:
 
 ```md
 ![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png)
+```
+
+If you need an image without border to show an annotated piece of UI, use the `"no-border"` attribute as in the example below:
+
+```md
+![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png "no-border")
 ```
 
 With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.
