@@ -132,6 +132,6 @@ Global options are supported with any Neon CLI command.
   neonctl branches create --help
   ```
 
-## GitHub
+## GitHub repository
 
 The GitHub repository for the Neon CLI is found [here](https://github.com/neondatabase/neonctl).

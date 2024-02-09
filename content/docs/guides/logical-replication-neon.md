@@ -31,9 +31,6 @@ This command creates a publication that publishes all changes in two tables:
 ```sql
 CREATE PUBLICATION my_publication FOR TABLE users, departments;
 ```
-<Admonition type="note">
-Neon currently does not support creating publications using `CREATE PUBLICATION publication_name FOR ALL TABLES` syntax. The `ALL TABLES` clause requires the PostgreSQL superuser privilege, which is not available in a managed service like Neon.
-</Admonition>
 
 This command creates a publication that only publishes `INSERT` and `UPDATE` operations. Delete operations will not be published.
 
@@ -83,10 +80,6 @@ COMMIT;
 ## Subscriptions
 
 This section outlines how to manage **subscriptions** in your replication setup.
-
-<Admonition type="note">
-Currently, you cannot create subscriptions on a Neon database. Neon can only act as a publisher in a replication setup. The commands in this section would only be run on an external Postgres database that you are using as a subscriber.
-</Admonition>
 
 ### Create a subscription
 
@@ -346,9 +339,7 @@ If you require different values for these parameters, please contact Neon suppor
 
 Neon is working toward removing the following limitations in future releases:
 
-- A Neon database can only act as a _publisher_ in a replication setup. Creating a subscription on a Neon database is not permitted. This means that you cannot replicate data from one Neon database to another or from one Neon project to another.
 - Only your default Neon Postgres role and roles created via the Neon Console, CLI, or API have the `REPLICATION` privilege. This privilege cannot be granted to other roles. You can expect this limitation to be lifted in a future release. Roles created via SQL do not have the `REPLICATION` privilege, and this privilege cannot be granted.
-- You cannot use `CREATE PUBLICATION my_publication FOR ALL TABLES` syntax in Neon. Specifying `ALL TABLES` requires the Postgres `superuser` privilege, which is not available on Neon. Instead, you can specify multiple tables using `CREATE PUBLICATION my_pub FOR TABLE <table1>, <table2>` syntax.
 - `max_slot_wal_keep_size` is set to 1 GB, limiting the maximum size of WAL files that replication slots are allowed to retain in the `pg_wal` directory. This is a temporary limit that will be removed in a future release. The limit avoids an accumulation of WAL data at the publisher due to a lagging subscriber, which could cause a slow compute start.
 
 ## References
