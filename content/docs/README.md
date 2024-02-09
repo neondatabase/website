@@ -425,7 +425,7 @@ To display images using Markdown syntax, use the following syntax: `![alt text](
 ![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png)
 ```
 
-To display image without border, use `"no-border"` as below:
+If you need an image without border to show an annotated piece of UI, use the `"no-border"` attribute as in the example below:
 
 ```md
 ![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png "no-border")
