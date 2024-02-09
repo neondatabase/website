@@ -65,8 +65,8 @@ From your server functions using the App Router, add the following code snippet 
 
 <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-```javascript
-import { Pool } from 'pg';
+```javascript /Pool/
+import { Pool } from 'pg'; // [!code word:pool]
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,

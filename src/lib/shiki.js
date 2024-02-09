@@ -1,9 +1,10 @@
 import {
-  getHighlighter,
-  codeToThemedTokens,
-  createCssVariablesTheme,
-  bundledLanguages,
-} from 'shiki';
+  transformerMetaHighlight,
+  transformerNotationHighlight,
+  transformerMetaWordHighlight,
+  transformerNotationWordHighlight,
+} from '@shikijs/transformers';
+import { getHighlighter, createCssVariablesTheme, bundledLanguages, codeToHtml } from 'shiki';
 
 const customTheme = createCssVariablesTheme({
   name: 'css-variables',
@@ -14,56 +15,7 @@ const customTheme = createCssVariablesTheme({
 
 let highlighter;
 
-// parse meta string to get highlighted lines
-const parseHighlightLines = (meta) => {
-  const metaArray = meta.split(' ');
-  let highlightLines = [];
-
-  if (metaArray[0].includes('{')) {
-    const highlightString = metaArray[0];
-    const highlightStringArray = highlightString.split('{')[1].split('}')[0].split(',');
-    highlightLines = highlightStringArray.reduce((result, item) => {
-      if (item.includes('-')) {
-        const range = item.split('-');
-        const start = parseInt(range[0], 10);
-        const end = parseInt(range[1], 10);
-        for (let i = start; i <= end; i++) {
-          result.push(i);
-        }
-      } else {
-        result.push(parseInt(item, 10));
-      }
-      return result;
-    }, []);
-  }
-
-  return highlightLines;
-};
-
-// convert shiki tokens to html
-function tokensToHTML(tokens, lang, highlightedLines) {
-  let html = `<pre data-language="${lang}"><code data-language="${lang}" class="grid">`;
-
-  tokens.forEach((line, index) => {
-    const isHighlighted = highlightedLines.includes(index + 1);
-    const lineAttr = isHighlighted ? ' data-highlighted-line' : '';
-    html += `<span data-line ${lineAttr}>`; // Start of line span
-
-    line.forEach((token) => {
-      const style = `color: ${token.color}`;
-      // Escape special characters
-      const content = token.content.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      html += `<span style="${style}">${content}</span>`;
-    });
-
-    html += '</span>'; // End of line span
-  });
-
-  html += '</code></pre>';
-  return html;
-}
-
-export default async function highlight(code, lang = 'bash', meta = '', theme = customTheme) {
+export default async function highlight(code, lang = 'bash', highlight = '', theme = customTheme) {
   let language = lang.toLocaleLowerCase();
 
   // check if language is supported
@@ -78,16 +30,43 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
     });
   }
 
-  const highlightedLines = parseHighlightLines(meta);
-
-  const tokens = await codeToThemedTokens(code, {
+  const html = codeToHtml(code, {
     lang: language,
     theme,
+    transformers: [
+      {
+        pre(node) {
+          node.properties['data-language'] = language;
+        },
+        code(node) {
+          node.properties.class = 'grid';
+        },
+        line(node, line) {
+          node.properties['data-line'] = line;
+
+          // used for code tabs in blog post
+          if (highlight) {
+            const lines = highlight.split(',').map((x) => x.split('-').map((y) => parseInt(y, 10)));
+
+            if (lines.some((x) => x.length === 1 && x[0] === line)) {
+              node.properties['data-highlighted-line'] = true;
+            } else if (lines.some((x) => x.length === 2 && line >= x[0] && line <= x[1])) {
+              node.properties['data-highlighted-line'] = true;
+            }
+          }
+        },
+      },
+      transformerMetaHighlight(),
+      transformerNotationHighlight(),
+      transformerMetaWordHighlight(),
+      transformerNotationWordHighlight(),
+    ],
   });
 
   await highlighter.loadLanguage(language);
 
-  return tokensToHTML(tokens, language, highlightedLines);
+  // return tokensToHTML(tokens, language, highlightedLines);
+  return html;
 }
 
 // used to highlight code block in code tabs
@@ -97,7 +76,13 @@ export const getHighlightedCodeArray = async (items) => {
   try {
     highlightedItems = await Promise.all(
       items.map(async (item) => {
-        const highlightedCode = await highlight(item.code, item.language);
+        let codeContent = item?.code;
+
+        if (typeof codeContent === 'object') {
+          codeContent = JSON.stringify(codeContent, null, 2);
+        }
+        // item.highlight in blog post component CodeTabs
+        const highlightedCode = await highlight(codeContent, item.language, item.highlight);
 
         return highlightedCode;
       })

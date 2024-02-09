@@ -11,7 +11,7 @@ const CodeBlock = async (props) => {
   const language = children?.props?.className?.replace('language-', '');
   const meta = children?.props?.meta;
   const code = children?.props?.children?.trim();
-  const html = await highlight(code, language, meta);
+  const html = await highlight(code, language);
 
   return (
     <CodeBlockWrapper
