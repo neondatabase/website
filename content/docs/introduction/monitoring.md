@@ -21,7 +21,7 @@ When you open a project in the Neon console, the Dashboard gives you a snapshot 
 - **Branches** widget &#8212; Shows how much storage your main branch has currently used. It also lists a subset of other branches.
 - **Usage since...** widget  &#8212; Shows a snapshot of your current consumption metrics since your last billing date (the last day of the previous month).
 - **Project settings** widget &#8212; Shows current project settings like your compute size default and history retention window.
-- **Operations** widget &#8212; Lists a subset of your most recent Neon operations like create_branch and check_availability. If there are any critical issues or events, you should see these show up here.
+- **Operations** widget &#8212; Lists a subset of the most recent [Neon operations](/docs/manage/operations) like `create_branch`, `start_compute`, and `suspend_compute`. If there are any critical issues or events, you should see these show up here.
 
 In any of these widgets, you can click the link in the top right corner to get more detail, a wider view, and take various actions.
 
