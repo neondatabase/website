@@ -27,7 +27,7 @@ For information about how Neon bills for paid plans, please refer to our [Billin
 | **Description**         | Best for hobby projects, prototypes, and learning Neon | All the resources, features and support you need to launch. | Full platform and support access, designed for businesses scaling production workloads. |
 | **Included Usage**      |                                              |                                              |                                              |
 | Storage                 | 0.5 GiB                                      | 10 GiB                                       | 50 GiB                                       |
-| Active Compute Time     | Primary: 750 hours/month<br>Branches: 20 hours/month | 1,200 hours/month                    | 3,000 hours/month                            |
+| Active Compute Time     | Primary: 750 hours/month<br>Branches: 20 hours/month</br> | 1,200 hours/month                    | 3,000 hours/month                            |
 | Projects                | 1                                            | 10                                           | 50                                           |
 | **Extra Usage**         |                                              |                                              |                                              |
 | Storage                 | –                                            | –                                            | $15 per 10 GiB                               |
