@@ -27,7 +27,6 @@ const Header = ({
   withBottomBorder = false,
   isDocPage = false,
   isBlogPage = false,
-  githubStarCount,
 }) => {
   const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
   const headerRef = useRef(null);
@@ -141,13 +140,7 @@ const Header = ({
           </nav>
 
           <div className="flex lg:hidden">
-            {githubStarCount && (
-              <GithubStarCounter
-                className="mr-5 xl:mr-3"
-                isThemeBlack={isThemeBlack}
-                githubStarCount={githubStarCount}
-              />
-            )}
+            <GithubStarCounter className="mr-5 xl:mr-3" isThemeBlack={isThemeBlack} />
             <Button
               className="mr-3.5 h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:mr-2 xl:px-4"
               to={LINKS.login}
@@ -195,7 +188,6 @@ Header.propTypes = {
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
   isBlogPage: PropTypes.bool,
-  githubStarCount: PropTypes.number,
 };
 
 export default Header;
