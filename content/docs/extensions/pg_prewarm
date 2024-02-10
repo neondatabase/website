@@ -116,47 +116,61 @@ In this exmaple, we'll create a table, check its data size, and then preload the
 
 ### Notes
 
-Approximation: This method provides an approximation rather than an exact measure of cache coverage. The pg_relation_size function returns the total disk space used by the table, including data, free space, overhead, and possible bloat, which may not directly correlate with the actual useful data loaded into cache.
-
-Environment and Usage Impact: The effectiveness of `pg_prewarm` and the subsequent cache hit rate can be influenced by the database's operating environment, including available memory, other database activity, and the PostgreSQL configuration.
-
-Volatile Results: The cache contents can change over time based on database activity and system memory pressure. As such, the benefits of prewarming may diminish as the cache is used for other data.
-
-By following these steps and considering the caveats, you can effectively document the process of using pg_prewarm in PostgreSQL, including how to estimate the proportion of a table loaded into cache. This can help database administrators and developers understand the potential performance benefits and limitations of prewarming data in PostgreSQL.
+- Approximation: This method provides an approximation rather than an exact measure of cache coverage. The `pg_relation_size` function returns the total disk space used by the table, including data, free space, overhead, and possible bloat, which may not directly correlate with the actual useful data loaded into cache.
+- The effectiveness of `pg_prewarm` and the subsequent cache hit rate can be influenced by the database's operating environment, including available memory, other database activity, and the PostgreSQL configuration.
+- The cache contents can change over time based on database activity and system memory pressure. As such, the benefits of prewarming may diminish as the cache is used for other data.
 
 ## Demonstrating the effect of pg_prewarm
 
-1. Create Another Sample Table for Comparison
+1. Create two identical sample tables for comparison:
 
-```sql
-CREATE TABLE tbl_ItemTransactions_1
-(
-    TranID SERIAL,
-    TransactionDate TIMESTAMPTZ,
-    TransactionName TEXT
-);
+    ```sql
+    CREATE TABLE tbl_Transactions_1
+    (
+        TranID SERIAL,
+        TransactionDate TIMESTAMPTZ,
+        TransactionName TEXT
+    );
 
-INSERT INTO tbl_ItemTransactions_1
-(TransactionDate, TransactionName)
-SELECT x, 'dbrnd' 
-FROM generate_series('2010-01-01 00:00:00'::timestamptz, '2018-02-01 00:00:00'::timestamptz, '1 minutes'::interval) a(x);
-```
+    INSERT INTO tbl_Transactions_1
+    (TransactionDate, TransactionName)
+    SELECT x, 'dbrnd' 
+    FROM generate_series('2010-01-01 00:00:00'::timestamptz, '2018-02-01 00:00:00'::timestamptz, '1 minutes'::interval) a(x);
+    ```
 
-2. Prewarm the Sample Table
+    ```sql
+    CREATE TABLE tbl_Transactions_2
+    (
+        TranID SERIAL,
+        TransactionDate TIMESTAMPTZ,
+        TransactionName TEXT
+    );
 
-```sql
-SELECT pg_prewarm('tbl_ItemTransactions_1');
-```
+    INSERT INTO tbl_Transactions_2
+    (TransactionDate, TransactionName)
+    SELECT x, 'dbrnd' 
+    FROM generate_series('2010-01-01 00:00:00'::timestamptz, '2018-02-01 00:00:00'::timestamptz, '1 minutes'::interval) a(x);
+    ```
 
-3. Check Execution Plans
+2. Prewarm the first sample table:
 
-Compare the execution plan of the prewarmed table vs. a non-prewarmed table to see the performance improvement.
+    ```sql
+    SELECT pg_prewarm('tbl_Transactions_1');
+    ```
 
-```sql
-EXPLAIN ANALYZE SELECT * FROM tbl_ItemTransactions_1;
-```
+3. Check the executions plans for both tables.
 
-The execution time for the prewarmed table should be significantly lower than for tables that have not been prewarmed.
+    Compare the execution plan of the prewarmed table vs. a non-prewarmed table to see the performance improvement.
+
+    ```sql
+    EXPLAIN ANALYZE SELECT * FROM tbl_Transactions_1;
+    ```
+
+    ```sql
+    EXPLAIN ANALYZE SELECT * FROM tbl_Transactions_2;
+    ```
+
+    The execution time for the prewarmed table should be significantly lower than for the table that has not been prewarmed.
 
 ## Advanced Usage
 
