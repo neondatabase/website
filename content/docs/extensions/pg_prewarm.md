@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-01-28T13:46:59.387Z'
 ---
 
-You can use the `pg_prewarm` extension to preload data into the Postgres buffer cache after your Postgres instance has been restarted. Doing so helps improve query response times by ensuring that your data is readily available in memory. Otherwise, you may experience slower query response times after a restart, as the system will need to reload data into the buffer cache from disk on-demand.
+You can use the `pg_prewarm` extension to preload data into the Postgres buffer cache after a restart. Doing so improves query response times by ensuring that your data is readily available in memory. Otherwise, you may experience slower query execution times after a restart, as data is loaded into the buffer cache from disk on-demand.
 
 <CTA />
 
@@ -21,17 +21,13 @@ Please refer to the [list of extensions](https://neon.tech/docs/extensions/pg-ex
 
 ## Enable the `pg_prewarm` extension
 
-Enable the `pg_prewarm` by running the `CREATE EXTENSION` statement in your Postgres client:
+Enable the `pg_prewarm` extension by running the `CREATE EXTENSION` statement in your Postgres client:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_prewarm;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor). 
-
-## Example usage
-
-This section provides `pg_prewarm` usage examples, demonstrating basic and advanced usage scenarios.
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Basic usage
 
@@ -41,15 +37,15 @@ To prewarm a specific table, simply use the `pg_prewarm` function with the name 
 SELECT pg_prewarm('table_name');
 ```
 
-Replace 'table_name' with the actual name of your table.
+Replace `table_name` with the actual name of your table.
 
-The output of `SELECT pg_prewarm()` is a count of blocks from the specified table that was loaded into the Postgres buffer cache. The default block size in Postgres is 8192 bytes (8KB).
+The output of `SELECT pg_prewarm()` is the number of blocks from the specified table that was loaded into the Postgres buffer cache. The default block size in Postgres is 8192 bytes (8KB).
 
 The `pg_prewarm` function does not support specifying multiple table names in a single command. It's designed to work with a single table at a time. If you want to prewarm multiple tables, you would need to call `pg_prewarm` separately for each.
 
 ## Running pg_prewarm on indexes
 
-Just like tables, running `pg_prewarm` on frequently-used indexes can help improve query performance after a Postgres restart. You might also run `pg_prewarm` on indexes that are not frequently used but will be involved in upcoming heavy read operations.
+Running `pg_prewarm` on frequently-used indexes can help improve query performance after a Postgres restart. You might also run `pg_prewarm` on indexes that are not frequently used but will be involved in upcoming heavy read operations.
 
 Running `pg_prewarm` on an index is similar to running it on a table, but you specify the index's OID (Object Identifier) or its fully qualified name (schema name plus index name) instead. 
 
@@ -80,7 +76,7 @@ SELECT pg_prewarm(your_index_oid);
 
 ## Check the proportion of a table loaded into cache
 
-In this example, we'll create a table, check its data size, run `pg_prewarm`, and then check to see how much of the table's data was loaded into the buffer cache.
+In this example, you create a table, check its data size, run `pg_prewarm`, and then check to see how much of the table's data was loaded into memory.
 
 1. First, create a table and populate it with some data:
 
@@ -110,7 +106,7 @@ In this example, we'll create a table, check its data size, run `pg_prewarm`, an
     SELECT pg_prewarm('public.t_test') AS blocks_loaded;
     ```
 
-    This will output the number of blocks that were loaded into the cache:
+    This will output the number of blocks that were loaded:
 
     ```sql
     blocks_loaded 
@@ -132,7 +128,7 @@ In this example, we'll create a table, check its data size, run `pg_prewarm`, an
     8192
     ```
 
-5. Calculate the total size of the data loaded into cache using the block size and the number of blocks loaded:
+5. Calculate the total size of the data loaded into the cache using the block size and the number of blocks loaded:
 
     ```sql
     -- Assuming 4480 blocks were loaded (replace with your actual number from pg_prewarm output)
@@ -147,12 +143,12 @@ In this example, we'll create a table, check its data size, run `pg_prewarm`, an
             36700160
     ```
 
-    The values for the size of the table and the size of the data loaded into the buffer cache as shown in the example above match exactly, which is an ideal scenario. However, there are cases where these values might not match, indicating that not all the data was loaded into the buffer cache. These are some situations where the values might differ:
-    - Partial prewarming: If `pg_prewarm` only partially loads the table into the buffer cache due to constraints like memory availability. This can happen if the system doesn't have enough free memory in the buffer cache to hold the entire table.
-    - `TOAST`ed Data: Postgres uses a mechanism called `TOAST` (The Oversized-Attribute Storage Technique) to store large attributes of a table out of line. If your table contains large data types (like `text` or `bytea`) that are compressed and stored out of the main table area, the size calculation might not directly match because `pg_prewarm` might not effectively prewarm these out-of-line, compressed data portions.
+    The values for the size of the table and the size of the data loaded into the buffer cache as shown in the example above match exactly, which is an ideal scenario. However, there are cases where these values might not match, indicating that not all the data was loaded into the buffer cache; for example:
+    - Partial prewarming: If `pg_prewarm` only partially loads the table into the buffer cache due to constraints like memory availability. This can happen if the system doesn't have enough available memory in the buffer cache to hold the entire table.
+    - `TOAST`ed data: Postgres uses a mechanism called `TOAST` (The Oversized-Attribute Storage Technique) to store large attributes of a table out of line. If your table contains large data types (like `text` or `bytea`) that are compressed and stored out of the main table area, the size calculation might not directly match because `pg_prewarm` might not effectively prewarm these out-of-line, compressed data portions.
     - Concurrent modifications: If the table is being modified by inserts, updates, and deletes while the prewarming process is happening or between the size check and the prewarming operation, this could lead to differences. The actual data size in the table might change between the time it's measured and the time `pg_prewarm` runs or completes.
     - Index data: The example shown above does not include indexes that might be associated with the table. `pg_prewarm` can also prewarm indexes, but if you're only looking at the table's data size, any loaded index data won't be counted.
-    - Overhead and metadata: There are internal overheads and metadata associated with Postgres data storage that might not be directly proportional to the block size times the number of blocks. This can slightly affect calculations.
+    - Overhead and metadata: There is internal overhead and metadata associated with Postgres data storage that might affect calculations.
 
 ## Demonstrating the effect of pg_prewarm
 
@@ -177,9 +173,9 @@ This example shows how preloading data can improve query performance. We'll crea
     ```sql
     CREATE TABLE tbl_transactions_2
     (
-        Tran_id_ SERIAL,
-        Transaction_date TIMESTAMPTZ,
-        Transaction_name TEXT
+        tran_id_ SERIAL,
+        transaction_date TIMESTAMPTZ,
+        transaction_name TEXT
     );
 
     INSERT INTO tbl_transactions_2
