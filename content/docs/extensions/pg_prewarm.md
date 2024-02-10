@@ -7,10 +7,6 @@ updatedOn: '2024-01-28T13:46:59.387Z'
 
 You can use the `pg_prewarm` extension to preload data into the Postgres buffer cache after your Postgres instance has been restarted. Doing so helps improve query response times by ensuring that your data is readily available in memory. Otherwise, you may experience slower query response times after a restart, as the system will need to reload data into the buffer cache from disk on-demand.
 
-<Admonition type="note">
-In Neon, a compute restart, which occurs on sacle-to-zero, is equivalent to a database restart. 
-</Admonition>
-
 <CTA />
 
 In this guide, we'll explore the `pg_prewarm` extension, how to enable it, and how to use it to prewarm your Postgres buffer cache. 
@@ -53,7 +49,9 @@ The `pg_prewarm` function does not support specifying multiple table names in a 
 
 ## Running pg_prewarm on indexes
 
-Running `pg_prewarm` on an index is similar to running it on a table, but you specify the index's OID (Object Identifier) or its fully qualified name (schema name plus index name) instead.
+Just like tables, running `pg_prewarm` on frequently-used indexes can help improve query performance after a Postgres restart. You might also run `pg_prewarm` on indexes that are not frequently used but will be involved in upcoming heavy read operations.
+
+Running `pg_prewarm` on an index is similar to running it on a table, but you specify the index's OID (Object Identifier) or its fully qualified name (schema name plus index name) instead. 
 
 Here's an example that demonstrates how to use `pg_prewarm` to preload an index into memory:
 
@@ -66,7 +64,7 @@ Replace `schema_name.index_name` with the actual schema and index name you want 
 ```sql
 SELECT indexname FROM pg_indexes WHERE tablename = 'your_table_name';
 ```
-Replace 'your_table_name' with the name of the table whose indexes you're interested in. Once you have the index name, you can then use `pg_prewarm` as shown above.
+Replace `your_table_name` with the name of the table whose indexes you're interested in. Once you have the index name, you can then use `pg_prewarm` as shown above.
 
 Additionally, if you prefer to use the index's OID, you can find it using the `pg_class` system catalog. Here's how to find an index's OID:
 
@@ -74,7 +72,7 @@ Additionally, if you prefer to use the index's OID, you can find it using the `p
 SELECT oid FROM pg_class WHERE relname = 'index_name';
 ```
 
-Then, you can use the OID with pg_prewarm like so:
+Then, you can use the OID with `pg_prewarm` like so:
 
 ```sql
 SELECT pg_prewarm(your_index_oid);
