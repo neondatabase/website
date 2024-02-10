@@ -65,7 +65,13 @@ In this exmaple, we'll create a table, check its data size, and then preload the
         pg_relation_size('t_test') AS table_size_bytes;
     ```
 
-This command returns the size of the table in both a human-readable format and in bytes.
+    This command returns the size of the table in both a human-readable format and in bytes.
+
+    ```sql
+     table_size_pretty | table_size_bytes 
+    -------------------+------------------
+    35 MB              |         36700160
+    ```
 
 3. Load the table data into the Postgres buffer cache using `pg_prewarm`:
 
@@ -73,7 +79,13 @@ This command returns the size of the table in both a human-readable format and i
     SELECT pg_prewarm('public.t_test') AS blocks_loaded;
     ```
 
-This will output the number of blocks that were loaded into the cache.
+    This will output the number of blocks that were loaded into the cache:
+
+    ```sql
+    blocks_loaded 
+    ---------------
+            4480
+    ```
 
 4. To understand the calculation that follows, check the block size of your Postgres instance:
 
@@ -81,13 +93,25 @@ This will output the number of blocks that were loaded into the cache.
     SHOW block_size;
     ```
 
-The default block size in Postgres is 8192 bytes (8KB).
+    The default block size in Postgres is 8192 bytes (8KB).
+
+    ```sql
+    block_size 
+    ------------
+    8192
+    ```
 
 5. Compare the total size of the data loaded into cache with the actual table size, use the block size and the number of blocks loaded:
 
     ```sql
-    -- Assuming 10000 blocks were loaded (replace with actual number from pg_prewarm output)
-    SELECT 10000 * 8192 AS loaded_data_bytes;
+    -- Assuming 4480 blocks were loaded (replace with your actual number from pg_prewarm output)
+    SELECT 4480 * 8192 AS loaded_data_bytes;
+    ```
+
+    ```sql
+     loaded_data_bytes 
+    -------------------
+            36700160
     ```
 
 ### Notes
