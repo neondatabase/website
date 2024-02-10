@@ -5,13 +5,11 @@ enableTableOfContents: true
 updatedOn: '2024-01-28T13:46:59.387Z'
 ---
 
-The `pg_prewarm` extension enables the preloading of data into the shared buffers of your Postgres instance. By doing so, it significantly reduces the time needed to warm up the cache after your Postgres instance has been restarted. 
-
-This extension helps reduce downtime and improves query response times by ensuring that critical data is readily available in memory after a system reboot or restart.
+The `pg_prewarm` extension can be used to preload data into the Postgres buffer cache after your Postgres instance has been restarted. Doing so can help improve query response times after restarting your POstgres instance by ensuring that your data is available in memory.
 
 <CTA />
 
-In this guide, we'll explore the `pg_prewarm` extension, covering how to enable it and use it to prewarm your Postgres shared buffers. 
+In this guide, we'll explore the `pg_prewarm` extension, how to enable it, and how to use it to prewarm your Postgres buffer cache. 
 
 <Admonition type="note">
 The `pg_prewarm` extension is open-source and can be installed on any Postgres setup. Detailed information about the extension is available in the [PostgreSQL Documentation](https://www.postgresql.org/docs/current/pgprewarm.html).
@@ -23,7 +21,7 @@ Please refer to the [list of all extensions](https://neon.tech/docs/extensions/p
 
 ## Enable the `pg_prewarm` extension
 
-Activate `pg_prewarm` by running the `CREATE EXTENSION` statement in your Postgres client:
+Enable the `pg_prewarm` by running the `CREATE EXTENSION` statement in your Postgres client:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_prewarm;
@@ -33,42 +31,74 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 ## Example usage
 
-This section provides `pg_prewarm` usage exmaples, demonstrating its utility from basic to advanced scenarios.
+This section provides `pg_prewarm` usage exmaples, demonstrating basic and advanced usage scenarios.
 
-## Basic Usage
+## Basic usage
 
-To prewarm a specific table, simply use the `pg_prewarm` function with the name of the table you wish to cache. This is particularly useful for tables that are frequently accessed and can significantly reduce access times.
+To prewarm a specific table, simply use the `pg_prewarm` function with the name of the table you want to cache.
 
-```
+```sql
 SELECT pg_prewarm('your_table_name');
 ```
 
 Replace 'your_table_name' with the actual name of your table.
 
-## Practical Example
+The output of a `SELECT pg_prewarm('table_name')` query is a count of blocks from the specified table that were loaded into the Postgres buffer cache.
 
-1. Create a Sample Table
+The `pg_prewarm` function does not support specifying multiple table names in a single command. It's designed to work with a single table at a time. If you want to prewarm multiple tables, you would need to call `pg_prewarm` separately for each table. Alternativeky, you could automate this process using a PL/pgSQL block or a script to iterate over a list of table names and call `pg_prewarm` for each one. For an example, see [Automate preloading of multiple tables](tbd).
 
-```sql
-CREATE TABLE t_test AS
-SELECT * FROM generate_series(1, 1000000) AS id;
-```
+## Check the proportion of a table loaded into cache
 
-2. Prewarm the Entire Table
+In this exmaple, we'll create a table, check its data size, and then preload the table and check to see what proprtion of the table was laoded into the cache.
 
-```sql
-SELECT pg_prewarm('public.t_test');
-```
+1. First, create a table and populate it with some data:
 
-This command will load the table data into Postgres cache, speeding up subsequent access.
+    ```sql
+    CREATE TABLE t_test AS
+    SELECT * FROM generate_series(1, 1000000) AS id;
+    ```
 
-2. Check Table Size
+2. Check the size of the table:
 
-```sql
-SELECT pg_size_pretty(pg_relation_size('t_test'));
-```
+    ```sql
+    SELECT pg_size_pretty(pg_relation_size('t_test')) AS table_size_pretty,
+        pg_relation_size('t_test') AS table_size_bytes;
+    ```
 
-This can help you understand the amount of data being cached.
+This command returns the size of the table in both a human-readable format and in bytes.
+
+3. Load the table data into the Postgres buffer cache using `pg_prewarm`:
+
+    ```sql
+    SELECT pg_prewarm('public.t_test') AS blocks_loaded;
+    ```
+
+This will output the number of blocks that were loaded into the cache.
+
+4. To understand the calculation that follows, check the block size of your Postgres instance:
+
+    ```sql
+    SHOW block_size;
+    ```
+
+The default block size in Postgres is 8192 bytes (8KB).
+
+5. Compare the total size of the data loaded into cache with the actual table size, use the block size and the number of blocks loaded:
+
+    ```sql
+    -- Assuming 10000 blocks were loaded (replace with actual number from pg_prewarm output)
+    SELECT 10000 * 8192 AS loaded_data_bytes;
+    ```
+
+### Notes
+
+Approximation: This method provides an approximation rather than an exact measure of cache coverage. The pg_relation_size function returns the total disk space used by the table, including data, free space, overhead, and possible bloat, which may not directly correlate with the actual useful data loaded into cache.
+
+Environment and Usage Impact: The effectiveness of `pg_prewarm` and the subsequent cache hit rate can be influenced by the database's operating environment, including available memory, other database activity, and the PostgreSQL configuration.
+
+Volatile Results: The cache contents can change over time based on database activity and system memory pressure. As such, the benefits of prewarming may diminish as the cache is used for other data.
+
+By following these steps and considering the caveats, you can effectively document the process of using pg_prewarm in PostgreSQL, including how to estimate the proportion of a table loaded into cache. This can help database administrators and developers understand the potential performance benefits and limitations of prewarming data in PostgreSQL.
 
 ## Demonstrating the effect of pg_prewarm
 
@@ -114,23 +144,37 @@ SELECT pg_prewarm('your_table_name', 'buffer', 'main', first_block, last_block);
 
 Beyond simply preloading an entire table, pg_prewarm offers additional parameters to give users more control over precisely what parts of a table are loaded into the cache. Here's a breakdown of these parameters and what they control:
 
-regclass (Table Name): This is the first and mandatory parameter, where you specify the name of the table you want to prewarm. It's provided as a regclass, which is a way PostgreSQL references table names internally.
-
-mode: This optional parameter determines how the prewarming should be done. It can take several values:
-
-'buffer': This mode loads the specified table blocks directly into PostgreSQL's shared buffers.
-'pread': This mode uses the pread system call to load the data into the operating system's cache but not into PostgreSQL's shared buffers. It can be useful for warming up the OS cache while avoiding the consumption of PostgreSQL buffer memory.
-'buffer' is the default mode if none is specified.
-fork: PostgreSQL tables can have multiple "forks" or physical components, and this parameter allows you to specify which part of the table you want to prewarm. The options include:
-
-'main': This is the main data file of the table where the actual data rows are stored. Preloading the main fork is most common and usually what you want for performance improvements.
-'fsm': Stands for Free Space Map. It tracks the available space in the table for future inserts or updates. Preloading the FSM can be useful for operations that heavily involve data modification, as it can speed up the process of finding free space.
-'vm': Stands for Visibility Map. It keeps track of which rows are visible to which transactions, aiding in the efficiency of index-only scans and vacuum operations. Preloading the VM can be beneficial for read-heavy workloads with frequent index-only scans.
-first_block: An optional parameter specifying the first block of the table's fork to preload. If not set, prewarming starts from the first block.
-
-last_block: Similar to first_block, this optional parameter defines the last block of the table's fork to preload. If not set, prewarming continues until the end of the table.
+- regclass (Table Name): This is the first and mandatory parameter, where you specify the name of the table you want to prewarm. It's provided as a regclass, which is a way PostgreSQL references table names internally.
+- mode: This optional parameter determines how the prewarming should be done. It can take several values:
+    - 'buffer': This mode loads the specified table blocks directly into PostgreSQL's shared buffers.
+    - 'pread': This mode uses the pread system call to load the data into the operating system's cache but not into Postgres shared buffers. It can be useful for warming up the OS cache while avoiding the consumption of PostgreSQL buffer memory.
+    - 'buffer' is the default mode if none is specified.
+    - fork: PostgreSQL tables can have multiple "forks" or physical components, and this parameter allows you to specify which part of the table you want to prewarm. The options include:
+        - 'main': This is the main data file of the table where the actual data rows are stored. Preloading the main fork is most common and usually what you want for performance improvements.
+        - 'fsm': Stands for Free Space Map. It tracks the available space in the table for future inserts or updates. Preloading the FSM can be useful for operations that heavily involve data modification, as it can speed up the process of finding free space.
+        - 'vm': Stands for Visibility Map. It keeps track of which rows are visible to which transactions, aiding in the efficiency of index-only scans and vacuum operations. Preloading the VM can be beneficial for read-heavy workloads with frequent index-only scans.
+        - first_block: An optional parameter specifying the first block of the table's fork to preload. If not set, prewarming starts from the first block.
+        - last_block: Similar to first_block, this optional parameter defines the last block of the table's fork to preload. If not set, prewarming continues until the end of the table.
 
 By using these parameters, database administrators and developers can fine-tune the prewarming process to match their application's specific access patterns and performance needs. This capability allows for more efficient use of memory resources and can significantly improve query response times for critical database operations.
+
+### Automate preloading of multiple tables
+
+The `pg_prewarm` function does not directly support specifying multiple table names in a single command to load them into the cache. However, you can automate this process using a PL/pgSQL block or a script to iterate over a list of table names and call pg_prewarm for each one. Here’s a basic example using a PL/pgSQL block that demonstrates how you could prewarm multiple tables:
+
+```sql
+DO $$
+DECLARE
+    table_name text;
+BEGIN
+    FOR table_name IN SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'
+    LOOP
+        EXECUTE format('SELECT pg_prewarm(%L)', 'public.' || table_name);
+        RAISE NOTICE 'Prewarmed table: %', table_name;
+    END LOOP;
+END$$;
+
+```
 
 ## Conclusion
 
