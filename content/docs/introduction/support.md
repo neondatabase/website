@@ -6,12 +6,15 @@ updatedOn: '2024-01-11T14:49:37.566Z'
 
 Support channels for the Neon Free Tier, Launch, Scale, and Enterprise plans are outlined below.
 
-| Support type                             | Free Tier | Launch | Scale | Enterprise |
-| :--------------------------------------- | :-------: | :----: | :---: | :--------: |
-| [Community Support](#community-support)                        |  &check;  |&check; |&check;|  &check;   |
-| [Neon Customer Support](#neon-customer-support)                    |     -     |&check; |&check;|  &check;   |
-| [Prioritized Neon Customer Support](#prioritized-neon-customer-support)        |     -     |   -    |&check;|  &check;   |
-| [Enterprise Support with SLAs](#enterprise-support-with-slas)             |     -     |   -    |   -   |  &check;   |
+| Support channels                         | Community | Standard | Priority | Enterprise |
+| :--------------------------------------- | :-------: | :------: | :------: | :--------: |
+| Neon Discord Server                      |  &check;  | &check;  | &check;  | &check;    |
+| Neon Discourse Community                 |  &check;  | &check;  | &check;  | &check;    |
+| Ability to open support tickets          |     -     | &check;  | &check;  | &check;    |
+| Video chat                               |     -     | &check;  | &check;  | &check;    |
+| Resale customer support                  |     -     |    -     | &check;  | &check;    |
+| Dedicated Customer Success Team          |     -     |    -     | &check;  | &check;    |
+| Support SLA                              |     -     |    -     | &check;  | &check;    |
 
 ## Community Support
 
