@@ -8,7 +8,7 @@ import Heading from 'components/shared/heading';
 import Table from './table';
 
 const Plans = ({ className }) => (
-  <section className={clsx('plans px-safe', className)}>
+  <section id="plans" className={clsx('plans px-safe', className)}>
     <Container className="grid-gap-x grid grid-cols-12" size="medium">
       <div className="col-span-10 col-start-2">
         <GradientLabel className="mx-auto block w-fit">Plans</GradientLabel>

@@ -18,7 +18,7 @@ const items = [
   {
     type: 'Free Tier',
     price: '$0 <span>/month</span>',
-    description: 'Generous free tier for personal projects and evaluating Neon.',
+    description: 'Generous free tier for hobby projects, prototypes, and learning Neon	',
     features: [
       { title: '1 project, 10 branches' },
       { title: 'Project sharing' },
@@ -35,8 +35,8 @@ const items = [
   },
   {
     type: 'Launch',
-    price: '$29 <span>/month</span>',
-    description: 'Perfect for static website, low code apps or building your zero-to-one MVP.',
+    price: '$19 <span>/month</span>',
+    description: 'All the resources, features and support you need to launch.',
     features: [
       { title: '10 projects' },
       { title: 'Branching' },
@@ -54,7 +54,7 @@ const items = [
   {
     type: 'Scale',
     price: '$69 <span>/month</span>',
-    description: 'Scale to production workloads and forget about babysitting infrastructure.',
+    description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
       { title: 'All features from Launch' },
       { title: '50 projects' },
@@ -72,7 +72,7 @@ const items = [
   {
     type: 'Enterprise',
     price: 'Custom',
-    description: 'Best for large teams, database fleets, and resale.',
+    description: 'Custom plans for large teams and database fleets.',
     features: [
       { title: 'Custom pricing with discounts' },
       { title: 'Prepaid plans and capacity contracts' },
@@ -236,7 +236,7 @@ const Hero = () => {
           Explore the{' '}
           <Link
             className="inline-block decoration-1 underline-offset-4 hover:!decoration-green-45/0"
-            to="/2024-plan-updates"
+            to="#plans"
             theme="green-underlined"
           >
             detailed plan comparison

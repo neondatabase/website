@@ -9,7 +9,7 @@
     },
     "launch": {
       "label": "Launch",
-      "price": "$29<span>/mo</span>",
+      "price": "$19<span>/mo</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
@@ -21,7 +21,7 @@
     },
     "enterprise": {
       "label": "Enterprise",
-      "price": "Сustom price",
+      "price": "Сustom rates",
       "buttonUrl": "/contact-sales",
       "buttonText": "Request trial"
     }
