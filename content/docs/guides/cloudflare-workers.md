@@ -78,7 +78,9 @@ This initiates an interactive CLI prompt to generate a new project. To follow al
 │ no typescript
 ```
 
-When asked if you want to deploy your application, select `no`. We'll develop and test the application locally before deploying it to Cloudflare Workers platform. The `create-cloudflare` CLI also installs the `Wrangler` tool to manage this workflow.
+When asked if you want to deploy your application, select `no`. We'll develop and first test the application locally, before deploying it to Cloudflare Workers platform.
+
+The `create-cloudflare` CLI installs the `Wrangler` tool to manage the full workflow of testing and managing your Worker applications.
 
 ### Implement the Worker script
 
@@ -149,7 +151,7 @@ Run the following command to link the Wrangler tool to your Cloudflare account:
 npx wrangler login
 ```
 
-This command will open a browser window and prompt you to log in to your Cloudflare account. After logging in and following te prompts, you can close the browser window and return to your terminal.
+This command will open a browser window and prompt you to log into your Cloudflare account. After logging in and approving the access request for `Wrangler`, you can close the browser window and return to your terminal.
 
 ### Add your Neon connection string as a secret
 
@@ -169,7 +171,7 @@ Now, you can deploy your application to Cloudflare Workers by running the follow
 npx wrangler deploy
 ```
 
-The Wrangler CLI will output the URL of your Worker. Visit this URL in your browser or use `curl` to verify the deployment works as expected.
+The Wrangler CLI will output the URL of your Worker hosted on the Cloudflare platform. Visit this URL in your browser or use `curl` to verify the deployment works as expected.
 
 ```text
 ❯ npx wrangler deploy
@@ -191,7 +193,7 @@ To delete your Neon project, follow the steps outlined in the Neon documentation
 ## Resources
 
 - [Cloudflare Workers](https://workers.cloudflare.com/)
-- [Wrangler CLI](https://github.com/cloudflare/wrangler)
+- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)
 - [Neon](https://neon.tech)
 
 <NeedHelp/>
