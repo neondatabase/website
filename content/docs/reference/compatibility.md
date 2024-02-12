@@ -3,14 +3,14 @@ title: Postgres compatibility
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2024-01-11T14:49:37.566Z'
+updatedOn: '2024-02-12T21:05:29.546Z'
 ---
 
 Neon is protocol and application-compatible with Postgres. However, when using the Neon cloud service, there are some limitations that you should be aware of.
 
 ## Postgres versions
 
-Neon cloud service is currently compatible with Postgres 14, 15, and 16. You can select the Postgres version you want to use when creating a Neon project. Postgres 15 is selected, by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects).
+Neon cloud service is currently compatible with Postgres 14, 15, and 16. You can select the Postgres version you want to use when creating a Neon project. Postgres 16 is selected by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects).
 
 ## Postgres extensions
 
@@ -24,7 +24,7 @@ Roles created in the Neon console, CLI, or API, including the default role creat
 
 Roles created in Neon with SQL syntax, from a command-line tool like `psql` or the [Neon SQL Editor](/docs/connect/query-with-psql-editor), have the same privileges as newly created roles in a standalone Postgres installation. These roles are not granted membership in the `neon_superuser` role. You must grant these roles the privileges you want them to have. For more information, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
-Neon roles cannot access replication methods or install Postgres extensions other than those supported by Neon.
+Neon roles cannot install Postgres extensions other than those supported by Neon.
 
 <a id="default-parameters/"></a>
 
@@ -35,7 +35,7 @@ The following table lists Neon Postgres parameter settings that may differ from 
 | Parameter       | Value   | Note                                                                              |
 | --------------- | ------- | --------------------------------------------------------------------------------- |
 | fsync           | off     | Neon syncs data to the Neon Storage Engine to store your data safely and reliably |
-| max_connections |         | The value depends on compute size. Set to 100 for Neon.          |
+| max_connections |         | The value depends on compute size.          |
 | shared_buffers  |         | The value depends on compute size                                                 |
 
 <Admonition type="note">
@@ -64,7 +64,7 @@ Statistics collected by the Postgres [cumulative statistics system](https://www.
 
 ## Database encoding
 
-Neon does not currently support changing the database encoding. This feature will become available when we add support for creating databases using SQL, which is on our roadmap. Currently, creating a database is supported only in the Neon Console. See [Manage databases](/docs/manage/databases).
+Neon does not currently support changing the database encoding. 
 
 ## PostgreSQL documentation
 
