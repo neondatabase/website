@@ -114,12 +114,7 @@ If you are interested in exploring an _Enterprise_ plan with Neon, please reach 
 
 ### Compute size
 
-Neon supports computes from .25 vCPU with 1 GB RAM up to 7 vCPU with 28 GB RAM. 
-
-- The [Free Tier](#free-tier) supports computes with .25 vCPU and 1 GB of RAM
-- The [Launch](#scale) plan supports compute sizes up with up to 4 vCPU with 16 GB RAM
-- The [Scale](#scale) plan supports compute sizes up with up to 7 vCPU with 28 GB RAM
-- The [Enterprise](#enterprise) plan supports all compute sizes
+Neon supports compute sizes from .25 vCPU with 1 GB RAM up to 7 vCPU with 28 GB RAM.
 
 ### Autoscaling
 
