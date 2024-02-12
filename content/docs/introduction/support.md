@@ -4,25 +4,26 @@ enableTableOfContents: true
 updatedOn: '2024-01-11T14:49:37.566Z'
 ---
 
-Support channels for the Neon Free Tier, Launch, Scale, and Enterprise plans are outlined below.
+Neon's Community, Standard, Priority, and Enterprise support plans are outlined below.
 
 | Support channels                         | Community | Standard | Priority | Enterprise |
 | :--------------------------------------- | :-------: | :------: | :------: | :--------: |
 | Neon Discord Server                      |  &check;  | &check;  | &check;  | &check;    |
 | Neon Discourse Community                 |  &check;  | &check;  | &check;  | &check;    |
-| Ability to open support tickets          |     -     | &check;  | &check;  | &check;    |
-| Video chat                               |     -     | &check;  | &check;  | &check;    |
-| Resale customer support                  |     -     |    -     | &check;  | &check;    |
-| Dedicated Customer Success Team          |     -     |    -     | &check;  | &check;    |
-| Support SLA                              |     -     |    -     | &check;  | &check;    |
+| Support tickets                          |     -     | &check;  | &check;  | &check;    |
+| Prioritized supprted tickets             |     -     |    -     | &check;  | &check;    |
+| Video chat                               |     -     |    -     | &check;  | &check;    |
+| Resale customer support                  |     -     |    -     |          | &check;    |
+| Dedicated Customer Success Team          |     -     |    -     |          | &check;    |
+| Support SLAs                             |     -     |    -     |          | &check;    |
 
-## Community Support
+## Community support
 
 Community support includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged in both communities. 
 
-## Neon Customer Support
+## Standard support
 
-Neon Customer Support provides access to the Neon Support team. 
+Standard support adds access to the Neon Support team via Support tickets. 
 
 You can open support tickets in the Neon Console. Look for the **Support** link in the sidebar. It opens the **Create Support Ticket** modal, where you can describe your issue. To access the modal directly, [click here](https://console.neon.tech/app/projects?modal=support).
 
@@ -30,13 +31,13 @@ You can open support tickets in the Neon Console. Look for the **Support** link 
 
 You can expect an initial response time of 2 business days, from 6am to 6pm Pacific Standard Time (UTC -8), Monday through Friday, excluding public holidays in the United States. For custom support solutions, please contact [Sales](https://neon.tech/contact-sales).
 
-## Prioritized Neon Customer Support
+## Priority support
 
-With Prioritized Neon Customer Support, your support tickets are given priority by the Neon Support team. 
+With priority support, your support tickets are given priority by the Neon Support team and you can request a video chat. Requests for video chat should be submitted via a support ticket.
 
-## Enterprise Support with SLAs
+## Enterprise support
 
-With Enterprise Support, your support tickets are given priority by the Neon Support team and handled according to your Service Level Agreement.
+With Enterprise Support, you have everything offered with the Priority plan plus retail customer support, dedicated Customer Success Team attention to your issue, and support SLAs.
 
 <Admonition type="note">
 If you are a Launch, Scale, or Enterprise user and are unable to access the support ticket form in the Neon Console, you can use the following email address as a fallback:  `support@neon.tech`
