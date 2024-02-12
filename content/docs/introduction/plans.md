@@ -10,56 +10,172 @@ redirectFrom:
 updatedOn: '2024-01-23T17:45:24.329Z'
 ---
 
-Neon offers the following plans: 
+Neon pricing plans are designed to meet different user requirements, ranging from small personal projects to enterprise production workloads. Refer to our [pricing](https://neon.tech/pricing) page for an overview of our plans. This page provides additional information to help you understand the pricing structure and features of each plan so that you can find the plan that best meets your needs.
 
-- **Free Tier** &mdash; Best for hobby projects, prototypes, and learning Neon.
-- **Launch** &mdash; All the resources, features and support you need to launch.
-- **Scale** &mdash; Full platform and support access, designed for businesses scaling production workloads.
-- **Enterprise** &mdash; Custom pricing, high usage workloads, database fleets, large databases
+## Pricing plans
 
-For information about how Neon bills for paid plans, please refer to our [Billing metrics](/docs/introduction/billing) page.
+Neon offers four pricing plans: [Free Tier](#free-tier), [Launch](#launch), [Scale](#scale), and [Enterprise](#enterprise).
 
-## Neon plans
+### Free Tier
 
-|                         | Free                                         | Launch                                       | Scale                                        | Enterprise                                   |
-|-------------------------|----------------------------------------------|----------------------------------------------|----------------------------------------------|----------------------------------------------|
-| **Pricing**             | $0 per month                                 | $19 per month                                | $69 per month                                | $Custom                                |
-| **Description**         | Best for hobby projects, prototypes, and learning Neon | All the resources, features and support you need to launch. | Full platform and support access, designed for businesses scaling production workloads. |  Custom pricing, high usage workloads, database fleets, large databases. |
-| **Included Usage**      |                                              |                                              |                                              |                                              |
-| Storage                 | 0.5 GiB                                      | 10 GiB                                       | 50 GiB                                       | 500+ GiB                                       |
-| Active Compute Time     | Primary: 750 hours/month; Branches: 20 hours/month | 1,200 hours/month                    | 3,000 hours/month                            | Custom                            |
-| Projects                | 1                                            | 10                                           | 50                                           | 50                                           |
-| **Extra Usage**         |                                              |                                              |                                              |                                              |
-| Storage                 | –                                            | –                                            | $15 per 10 GiB                               | &check;                               |
-| Active Compute Time     | –                                            | $0.04 per hour                               | $0.04 per hour                               | &check;                               |
-| Projects                | –                                            | –                                            | $50 per 10 projects                          | &check;                          |
-| **Support**             | Community                                    | Standard                                     | Priority                                     | Enterprise                                     |
-| **Features**            |                                              |                                              |                                              |                                              |
-| Compute Size            | 0.25 vCPU, 1GB RAM                           | Up to 4 vCPUs, 16GB RAM                      | Up to 7 vCPUs, 28GB RAM                      | 7 vCPUs, 28GB RAM +                      |
-| Autoscaling             | –                                            | &check;                                      | &check;                                      | &check;                                      |
-| Branching               | up to 10 branches                            | &check;                                      | &check;                                      | &check;                                      |
-| Point-in-time Recovery  | Up to 24 hours                               | Up to 7 days                                 | Up to 30 days                                | &check;                                |
-| IP Allow                | –                                            | –                                            | &check;                                      | &check;                                      |
-| SOC 2 Report            | –                                            | –                                            | &check;                                      | &check;                                      |
-| Autosuspend             | Fixed — After 5 minutes                     | Configurable — 5 minutes to never           | Configurable — 1 minute to never            | Configurable — 1 minute to never            |
-| Available Regions       | All                                          | All                                          | All                                          | All                                          |
-| Project Sharing         | &check;                                      | &check;                                      | &check;                                      | &check;                                      |
-| Read Replicas           | –                                            | &check;                                      | &check;                                      | &check;                                      |
-| Logical Replication     | &check;                                      | &check;                                      | &check;                                      | &check;                                      |
+The Free Tier plan is best for hobby projects, prototypes, and learning Neon and Postgres.
 
+**Included usage:**
 
+- **Storage**: You can store up to 500 MiB of data (0.5 GiB) on the Free Tier
+- **Active Compute Time**: You get 750 hours/month on your primary branch compute, and 20 hours/month for your branch computes.
+- **Projects**:	1 Neon project
 
-For more information about a particular plan, refer to the individual plan pages:
+**Support**: Free Tier users have access to **Community** support, which includes includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/). For more information, Neon plans are outlined on our [Support](/docs/introduction/support) page.
 
-- [Free Tier](/docs/introduction/free-tier)
-- [Launch](/docs/introduction/pro-plan)
-- [Scale](/docs/introduction/scale-plan)
-- [Enterprise](/docs/introduction/enterprise-plan)
+**Features:**
+
+- [Compute size](#compute-size): A Free Tier compute has 0.25 vCPU with 1GB RAM
+- [Branching](#branching): You can create up to 10 branches
+- [Point-in-time Recovery](#point-in-time-recovery): You can recover your data to a point in time up to **24 hours** in the past
+- [Autosuspend](#autosuspend): Your compute is automatically suspended after 5 minutes of inactivity
+- [Regions](#regions): The Free Tier plan is available in all supported regions
+- [Project sharing](#project-sharing): You can share your project with any Neon user account
+- [Logical replication](#logical-replication): You can replicate your data from Neon to other data services and platforms
+
+### Launch
+
+The Launch plan provides the resources, features, and support you need to launch your application.
+
+**Included usage:**
+
+- **Storage**: You can store up to 10 GiB of data on the Launch plan.
+- **Active Compute Time**: You get 1200 hours/month for all computes in all projects
+- **Projects**:	Up to 10 Neon project
+
+**Support**: Launch plan users have access to **Standard** Neon support, which includes access to the Neon Support team via support tickets. For more information, Neon plans are outlined on our [Support](/docs/introduction/support) page.
+
+**Extra usage**: 
+
+- **Active Compute Time**: You can purchase extra compute hours. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour cost.
+
+**Features:**
+
+- [Compute size](#compute-size): The Launch plan supports compute size up to 4 vCPUs with 16GB RAM.
+- [Autoscaling](#autoscaling): Scale your compute size on demand
+- [Branching](#branching): You get the maximum number of branches supported by Neon (100 soft limit, 500 hard limit). If you need more than 100 branches, contact [Neon Support](/docs/introduction/support).
+- [Point-in-time Recovery](#point-in-time-recovery): Recover your data to a point in time up to **7 days** in the past
+- [IP Allow](#ip-allow): Restrict access to your database to specific IP addresses or ranges
+- [SOC 2 Report](#soc-2-report): Access to Neon's SOC 2 Report
+- [Autosuspend](#autosuspend): Autosuspend is configurable.
+- [Regions](#regions): The Launch plan is available in all supported regions
+- [Project sharing](#project-sharing): Share your project with any Neon user account
+- [Read replicas](#read-replicas): Scale your application with read replicas
+- [Logical replication](#logical-replication): Replicate your data from Neon with Postgres logical replication support
+
+### Scale
+
+The Scale plan provides full platform and support access and is designed for businesses scaling production workloads.
+
+**Included usage:**
+
+- **Storage**: You can store up to 50 GiB of data on the Launch plan.
+- **Active Compute Time**: You get 3000 hours/month for all computes in all projects
+- **Projects**:	Up to 50 Neon project
+
+**Support**: Launch plan users have access to **Priority** Neon support, which includes priority access to the Neon Support team via support tickets. For more information, Neon plans are outlined on our [Support](/docs/introduction/support) page.
+
+**Extra usage**: 
+
+- **Active Compute Time**: You can purchase extra compute hours. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour cost.
+- **Storage**: You can purchase extra storage at $15 per 10 GiB
+
+**Features:**
+
+- [Compute size](#compute-size): The Scale plan supports compute size up to 7 vCPUs with 16GB RAM.
+- [Autoscaling](#autoscaling): Scale your compute size on demand
+- [Branching](#branching): You get the maximum number of branches supported by Neon (100 soft limit, 500 hard limit). If you need more than 100 branches, contact [Neon Support](/docs/introduction/support).
+- [Point-in-time Recovery](#point-in-time-recovery): Recover your data to a point in time up to **7 days** in the past
+- [IP Allow](#ip-allow): Restrict access to your database to specific IP addresses or ranges
+- [SOC 2 Report](#soc-2-report): Access to Neon's SOC 2 Report
+- [Autosuspend](#autosuspend): Autosuspend is configurable
+- [Regions](#regions): The Scale plan is available in all supported regions
+- [Project sharing](#project-sharing): Share your project with any Neon user account
+- [Read replicas](#read-replicas): Scale your application with read replicas
+- [Logical replication](#logical-replication): Replicate your data from Neon with Postgres logical replication support
+
+### Enterprise
+
+The Enterprise plan is a custom volume-based plan intended for medium to large teams, enterprises requiring database fleets, or SaaS vendors interested in reselling Neon or integrating serverless Postgres into their own service.
+
+The _Enterprise_ plan can be tailored to your specific requirements with:
+
+- A custom contract
+- Volume-based discounts
+- Prepaid or integrated billing
+- Access to all Neon features available with the [Scale](#scale) plan.
+- Tailored features and solutions
+- Custom support options. Neon support plans are outlined on our [Support](/docs/introduction/support) page.
+
+If you are interested in exploring an _Enterprise_ plan with Neon, please reach out to our [Sales team](https://neon.tech/contact-sales).
+
+## Features
+
+## Compute size
+
+Neon's standard compute sizes are outlined in the table below. The Freet Tier provides a compute with .25 vCPU and 1 GB of RAM. Neon Launch, Scale, and Enterprise plans support larger compute sizes.
+
+| Compute size (in CUs)  | vCPU | RAM    |
+|:--------------|:-----|:-------|
+| .25           | .25  | 1 GB   |
+| .5            | .5   | 2 GB   |
+| 1             | 1    | 4 GB   |
+| 2             | 2    | 8 GB   |
+| 3             | 3    | 12 GB  |
+| 4             | 4    | 16 GB  |
+| 5             | 5    | 20 GB  |
+| 6             | 6    | 24 GB  |
+| 7             | 7    | 28 GB  |
+
+## Autoscaling
+
+Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current workload, eliminating the need for manual intervention. For more information, refer to our [Autoscaling](/docs/introduction/autoscaling-guide) guide.
+
+## Branching
+
+Neon's branching feature lets you branch your data the same way you branch your code. You can instantly create full database copies for development, testing, or any other purpose that requires a database copy. You can easily automate database branching using the Neon API, CLI, or GitHub Actions, enabling you to add database branching to your CI/CD pipeline. Branching is often used with deployment platforms such as Vercel to create a database branch for each preview deployment. To learn more, see [Get started with branching](/docs/guides/branching-intro).
+
+## Point-in-time Recovery
+
+Neon's _Point-in-time Restore_ capability lets you instantly restore your database to a point in time in the past. To learn more, see [Branch reset and restore](/docs/introduction/point-in-time-restore).
+
+## IP Allow
+
+Neon's _IP Allow_ feature, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+
+## SOC 2 Report
+
+Paid plan users can request access to Neon's SOC 2 report on our [Neon Trust Center](https://trust.neon.tech/).
+
+## Autosuspend
+
+Neon's _Autosuspend_ feature controls when a Neon compute instance transitions to an Idle state (scales to zero) due to inactivity. By default, a Neon compute instance scales to zero after 5 minutes of inactivity. For [Neon Free Tier](#free-tier) users, this setting is fixed. Neon paid plan users can increase, decrease, or disable the autosuspend setting, controlling when or if a compute scales to zero.
+
+## Regions
+
+Neon supports project deployment in several regions. All Neon users have access to all regions that Neon supports. To learn more, see [Regions](/docs/introduction/regions).
+
+## Project sharing
+
+All Neon plans support sharing your Neon project with other Neon users, giving them access to your Neon project from all supported interfaces, including the Neon Console, Neon API, and Neon CLI. To learn more, refer to our [Project sharing](/docs/guides/project-sharing-guide) guide.
+
+## Read replicas
+
+_Read replicas_ allow you to instantly scale your application by offloading read-only workloads to independent read-only compute instances. To learn more, see [Read replicas](/docs/introduction/read-replicas).
+
+## Logical replication
+
+Logical replication enables replicating data from your Neon database to external destinations, allowing for Change Data Capture (CDC) and real-time analytics. Stream your data to data warehouses, analytical database services, messaging platforms, event-streaming platforms, external Postgres databases, and more. To learm more, see [Get started with logical replication](/docs/guides/logical-replication-guide).
 
 **Notes:**
 
-- Paid plans have a default limit of 20 simultaneously active computes to protect against unintended usage. To increase this limits, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available.
-- Active Compute Time: On the Free Tier, your primary branch compute is allotted 750 hours a month, which means your primary branch is always available. Branch computes have a 1,200 hours/month Active Compute Time limit. If your branch computes exceed this limit, they will be suspended until the limit resets. You can monitor _Active Compute Time_ on the **Usage** widget on the Neon **Dashboard**. The _Active Compute Time_ limit resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _Active Compute Time_ limit will reset on February 1st.
+- Paid plans have a default limit of 20 simultaneously active computes to protect against unintended usage. To increase this limit, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available.
+- Active Compute Time: On the Free Tier, your primary branch compute is allotted 750 hours a month, which means your primary branch is always available. Branch computes have a 20 hours/month Active Compute Time limit. If your branch computes exceed this limit, they will be suspended until the limit resets. You can monitor _Active Compute Time_ on the **Usage** widget on the Neon **Dashboard**. The _Active Compute Time_ limit resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _Active Compute Time_ limit will reset on February 1st.
 
 ## Support
 
