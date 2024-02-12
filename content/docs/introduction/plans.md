@@ -7,6 +7,9 @@ redirectFrom:
   - /docs/introduction/billing#neon-plans
   - /docs/introduction/billing-calculators
   - /docs/introduction/billing-rates
+  - /docs/introduction/free-tier
+  - /docs/introduction/pro-plan
+  - /docs/introduction/custom-plan
 updatedOn: '2024-01-23T17:45:24.329Z'
 ---
 
