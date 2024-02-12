@@ -172,11 +172,44 @@ _Read replicas_ allow you to instantly scale your application by offloading read
 
 Logical replication enables replicating data from your Neon database to external destinations, allowing for Change Data Capture (CDC) and real-time analytics. Stream your data to data warehouses, analytical database services, messaging platforms, event-streaming platforms, external Postgres databases, and more. To learm more, see [Get started with logical replication](/docs/guides/logical-replication-guide).
 
-**Notes:**
+## Plan notes
 
 - Paid plans have a default limit of 20 simultaneously active computes to protect against unintended usage. To increase this limit, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available.
 - Active Compute Time: On the Free Tier, your primary branch compute is allotted 750 hours a month, which means your primary branch is always available. Branch computes have a 20 hours/month Active Compute Time limit. If your branch computes exceed this limit, they will be suspended until the limit resets. You can monitor _Active Compute Time_ on the **Usage** widget on the Neon **Dashboard**. The _Active Compute Time_ limit resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _Active Compute Time_ limit will reset on February 1st.
 
-## Support
+## FAQ
 
-Support channels for the Neon plans are outlined on our [Support](/docs/introduction/support) page.
+Does Neon charge for storage in database branches?
+Neon charges for unique storage. Data that a branch shares in common with a parent branch is not considered unique, but data changes to a branch are counted toward storage.
+
+Read moreabout project storage
+
+Can I upgrade or downgrade my plan later?
+Yes. You can upgrade from Free Tier to our Pro plan by selecting Upgrade to Pro. To upgrade to a custom Enterprise or Platform Partnership plan, contact Sales. For downgrade instructions, see Downgrade your plan.
+
+
+What payment methods do you accept?
+Neon accepts payment by credit card for the Pro plan. For the Enterprise & Platform Partnership plans, Neon accepts payment by ACH and Wire.
+
+
+When will I be billed?
+Neon bills for the past month's usage at the beginning of each month. For more information, see Manage billing.
+
+
+Is there a discount for annual plan subscriptions?
+Discounts are applied for longer duration contracts as well as bulk consumption purchases.
+
+
+Are there any limits or restrictions on usage?
+Neon implements limits to protect against unintended usage. For example, a usage-based plan may offer unlimited projects, compute, and storage, but Neon places default limits on those resources to protect your account. For more information, see Plans.
+
+
+Is there a minimum commitment period?
+The Neon Pro plan is usage-based and has no commitment period. You can downgrade to the at Free Tier at any time. For more information, see Downgrade your plan.
+
+
+How secure is the payment process?
+Neon payment processing is powered by Stripe, which is a certified PCI Service Provider Level 1. For more information, refer to Security at Stripe.
+
+
+Where should I direct pricing-related questions?
