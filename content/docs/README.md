@@ -208,14 +208,6 @@ You can use fenced code blocks with three backticks (```) on the lines before an
   }
   ```
 
-- enable highlighting words.
-
-  ```js /Hello/
-  const msg = 'Hello World'
-  console.log(msg)
-  console.log(msg) // prints Hello World
-  ```
-
 - use `[!code word:xxx]` to highlight a word.
 
   ```ts
