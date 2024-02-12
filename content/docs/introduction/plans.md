@@ -22,11 +22,11 @@ The Free Tier plan is best for hobby projects, prototypes, and learning Neon and
 
 **Included usage:**
 
-- **Storage**: You can store up to 500 MiB of data (0.5 GiB) on the Free Tier
+- **Storage**: You can store up to 500 MiB of data (0.5 GiB) on the Free Tier.
 - **Active Compute Time**: You get 750 hours/month on your primary branch compute, and 20 hours/month for your branch computes.
 - **Projects**:	1 Neon project
 
-**Support**: Free Tier users have access to **Community** support, which includes includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/). For more information, Neon plans are outlined on our [Support](/docs/introduction/support) page.
+**Support**: Free Tier users have access to **Community** support, which includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/). For more information, Neon plans are outlined on our [Support](/docs/introduction/support) page.
 
 **Features:**
 
@@ -154,7 +154,7 @@ Paid plan users can request access to Neon's SOC 2 report on our [Neon Trust Cen
 
 ## Autosuspend
 
-Neon's _Autosuspend_ feature controls when a Neon compute instance transitions to an Idle state (scales to zero) due to inactivity. By default, a Neon compute instance scales to zero after 5 minutes of inactivity. For [Neon Free Tier](#free-tier) users, this setting is fixed. Neon paid plan users can increase, decrease, or disable the autosuspend setting, controlling when or if a compute scales to zero.
+Neon's _Autosuspend_ feature controls when a Neon compute instance transitions to an Idle state (scales to zero) due to inactivity. By default, a Neon compute instance scales to zero after 5 minutes of inactivity. For [Neon Free Tier](#free-tier) users, this setting is fixed. Paying users can increase, decrease, or disable the autosuspend setting, controlling when or if a compute scales to zero.
 
 ## Regions
 
@@ -170,7 +170,7 @@ _Read replicas_ allow you to instantly scale your application by offloading read
 
 ## Logical replication
 
-Logical replication enables replicating data from your Neon database to external destinations, allowing for Change Data Capture (CDC) and real-time analytics. Stream your data to data warehouses, analytical database services, messaging platforms, event-streaming platforms, external Postgres databases, and more. To learm more, see [Get started with logical replication](/docs/guides/logical-replication-guide).
+Logical replication enables replicating data from your Neon database to external destinations, allowing for Change Data Capture (CDC) and real-time analytics. Stream your data to data warehouses, analytical database services, messaging platforms, event-streaming platforms, external Postgres databases, and more. To learn more, see [Get started with logical replication](/docs/guides/logical-replication-guide).
 
 ## Plan notes
 
@@ -179,37 +179,38 @@ Logical replication enables replicating data from your Neon database to external
 
 ## FAQ
 
-Does Neon charge for storage in database branches?
-Neon charges for unique storage. Data that a branch shares in common with a parent branch is not considered unique, but data changes to a branch are counted toward storage.
-
-Read moreabout project storage
+<DefinitionList>
 
 Can I upgrade or downgrade my plan later?
-Yes. You can upgrade from Free Tier to our Pro plan by selecting Upgrade to Pro. To upgrade to a custom Enterprise or Platform Partnership plan, contact Sales. For downgrade instructions, see Downgrade your plan.
+: Yes. You can upgrade from Free Tier to our Pro plan by selecting Upgrade to Pro. To upgrade to an Enterprise plan, contact Sales. For downgrade instructions, see Downgrade your plan.
 
+Does Neon charge for storage in database branches?
+: Neon charges for unique storage. Data that a branch shares in common with a parent branch is not considered unique, but data changes to a branch are counted toward storage. Read more about project storage.
+
+Can I upgrade or downgrade my plan later?
+: Yes. You can upgrade from Free Tier to our Pro plan by selecting Upgrade to Pro. To upgrade to a custom Enterprise or Platform Partnership plan, contact Sales. For downgrade instructions, see Downgrade your plan.
 
 What payment methods do you accept?
-Neon accepts payment by credit card for the Pro plan. For the Enterprise & Platform Partnership plans, Neon accepts payment by ACH and Wire.
-
+: Neon accepts payment by credit card for the Pro plan. For the Enterprise & Platform Partnership plans, Neon accepts payment by ACH and Wire.
 
 When will I be billed?
-Neon bills for the past month's usage at the beginning of each month. For more information, see Manage billing.
-
+: Neon bills for the past month's usage at the beginning of each month. For more information, see Manage billing.
 
 Is there a discount for annual plan subscriptions?
-Discounts are applied for longer duration contracts as well as bulk consumption purchases.
-
+: Discounts are applied for longer duration contracts as well as bulk consumption purchases.
 
 Are there any limits or restrictions on usage?
-Neon implements limits to protect against unintended usage. For example, a usage-based plan may offer unlimited projects, compute, and storage, but Neon places default limits on those resources to protect your account. For more information, see Plans.
-
+: Neon implements limits to protect against unintended usage. For example, a usage-based plan may offer unlimited projects, compute, and storage, but Neon places default limits on those resources to protect your account. For more information, see Plans.
 
 Is there a minimum commitment period?
-The Neon Pro plan is usage-based and has no commitment period. You can downgrade to the at Free Tier at any time. For more information, see Downgrade your plan.
-
+: The Neon Pro plan is usage-based and has no commitment period. You can downgrade to the at Free Tier at any time. For more information, see Downgrade your plan.
 
 How secure is the payment process?
-Neon payment processing is powered by Stripe, which is a certified PCI Service Provider Level 1. For more information, refer to Security at Stripe.
-
+: Neon payment processing is powered by Stripe, which is a certified PCI Service Provider Level 1. For more information, refer to Security at Stripe.
 
 Where should I direct pricing-related questions?
+: Please contact Sales with any questions about plans or pricing.
+
+</DefinitionList>
+
+
