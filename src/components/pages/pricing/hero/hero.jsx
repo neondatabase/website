@@ -22,7 +22,6 @@ const items = [
     features: [
       { title: '1 project, 10 branches' },
       { title: 'Shared Compute and 0.5GB storage' },
-      { title: 'Fixed 0.25 compute units (CUs)' },
       { title: 'Project Sharing, Logical Replication' },
       { title: 'Community support' },
     ],
@@ -40,8 +39,8 @@ const items = [
     features: [
       { title: '10 projects w/500 branches each' },
       { title: '300 CU-hours, 10GB storage included' },
-      { title: 'Autoscaling to 4 compute units (CUs)' },
-      { title: 'Free + Read Replicas' },
+      { title: 'Autoscaling to 4 CUs' },
+      { title: 'Unlocks Read Replicas' },
       { title: 'Expert support' },
     ],
     button: {
@@ -58,8 +57,8 @@ const items = [
     features: [
       { title: '50 projects w/500 branches each' },
       { title: '750 CU-hours, 50GB storage included' },
-      { title: 'Autoscaling to 7 compute units (CUs)' },
-      { title: 'Launch + Key Security Features' },
+      { title: 'Autoscaling to 7 CUs' },
+      { title: 'Unlocks key security features' },
       { title: 'Expert support' },
     ],
     button: {
@@ -76,8 +75,7 @@ const items = [
     features: [
       { title: 'Higher resource limits' },
       { title: 'Custom pricing with discounts' },
-      { title: 'Prepaid plans and capacity contracts' },
-      { title: 'Scale + Customer-Owned S3' },
+      { title: 'Customer-Owned S3' },
       { title: 'Enterprise support' },
     ],
     button: {
@@ -191,14 +189,17 @@ const Hero = () => {
                           {button.text}
                         </Button>
                       )}
-                      <p className="mt-9 font-light leading-snug tracking-tight text-gray-new-70 2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
+                      <p className="mt-9 font-light leading-snug tracking-tight  2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
                         {description}
                       </p>
                     </div>
                     <div className="mt-auto flex grow flex-col">
                       <ul className="flex flex-col flex-wrap gap-y-4">
                         {features.map(({ title }, index) => (
-                          <li className="relative pl-6 leading-tight tracking-tight" key={index}>
+                          <li
+                            className="relative pl-6 leading-tight tracking-tight text-gray-new-70"
+                            key={index}
+                          >
                             <CheckIcon
                               className={clsx(
                                 isScalePlan ? 'text-green-45' : 'text-gray-new-70',
