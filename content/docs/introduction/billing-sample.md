@@ -66,7 +66,7 @@ This storage level is too high for the Launch plan but well under the 50 GiB lim
 ![Sample storage graph](/docs/introduction/billing_storage_graph.png)
 
 ### Data throughput
-Written data to Neon storage and data transfer out of Neon do not incur any costs. This view shows the amount of data written to storage or transferred out of the application; a reasonable amount with no charge.
+Written data to Neon storage and data transfer out of Neon do not incur any costs. This view shows the amount of data written to storage or transferred out of the application: a reasonable amount with no charge.
 
 ![Sample storage graph](/docs/introduction/billing_data_graph.png)
 
