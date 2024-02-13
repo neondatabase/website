@@ -34,11 +34,11 @@ const items = [
   },
   {
     type: 'Launch',
-    price: '$19 <span>/month</span>',
+    price: '<span>From</span> $19 <span>/month</span>',
     description: 'All the resources, features and support you need to launch.',
     features: [
       { title: '10 projects w/500 branches each' },
-      { title: '300 CU-hours, 10GB storage included' },
+      { title: 'Preloaded w/$63 of usage' },
       { title: 'Autoscaling to 4 CUs' },
       { title: 'Unlocks Read Replicas' },
       { title: 'Expert support' },
@@ -52,11 +52,11 @@ const items = [
   },
   {
     type: 'Scale',
-    price: '$69 <span>/month</span>',
+    price: '<span>From</span> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
       { title: '50 projects w/500 branches each' },
-      { title: '750 CU-hours, 50GB storage included' },
+      { title: 'Preloaded with $195 of usage' },
       { title: 'Autoscaling to 7 CUs' },
       { title: 'Unlocks key security features' },
       { title: 'Priority support' },
@@ -73,8 +73,8 @@ const items = [
     price: 'Custom',
     description: 'Custom plans for large teams and database fleets.',
     features: [
-      { title: 'Higher resource limits' },
       { title: 'Custom pricing with discounts' },
+      { title: 'Higher resource limits' },
       { title: 'Customer-Owned S3' },
       { title: 'Enterprise support' },
     ],
