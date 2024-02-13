@@ -22,131 +22,119 @@
     "enterprise": {
       "label": "Enterprise",
       "price": "Сustom rates",
-      "buttonUrl": "/contact-sales",
+      "buttonUrl": "/enterprise#form",
       "buttonText": "Request trial"
     }
   },
   "cols": [
     {
       "rows": "1",
-      "feature": "Fee Structure"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Project overage",
-        "subtitle": "per additional project pack "
-      },
-      "free": false,
-      "launch": false,
-      "scale": true,
-      "enterprise": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Compute-hour Overage",
-        "subtitle": "per CU/hr"
-      },
-      "free": false,
-      "launch": true,
-      "scale": true,
-      "enterprise": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "GB overage",
-        "subtitle": "per additional storage pack"
-      },
-      "free": false,
-      "launch": false,
-      "scale": true,
-      "enterprise": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Data transfer"
-      },
-      "free": "free for fair use",
-      "launch": "free for fair use",
-      "scale": "free for fair use",
-      "enterprise": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Written data"
-      },
-      "free": "free for fair use",
-      "launch": "free for fair use",
-      "scale": "free for fair use",
-      "enterprise": true
-    },
-    {
-      "feature": "Usage Tiers"
+      "feature": "Included"
     },
     {
       "rows": "2",
       "feature": {
         "title": "Projects"
       },
-      "free": "1 included",
+      "free": "1",
       "launch": "10",
-      "scale": "50 (included) <span>+ $50/10 projects</span>",
-      "enterprise": "enterprise"
+      "scale": "50",
+      "enterprise": "Custom"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Branches"
+      },
+      "free": "10",
+      "launch": "500 <span>per project</span>",
+      "scale": "500 <span>per project</span>",
+      "enterprise": "Custom"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Databases"
+      },
+      "free": "Unlimited",
+      "launch": "Unlimited",
+      "scale": "Unlimited",
+      "enterprise": "Unlimited"
     },
     {
       "rows": "2",
       "feature": {
         "title": "Storage"
       },
-      "free": "500MB",
-      "launch": "10GB",
-      "scale": "50GB (included) <span>+ $15/10GB</span>",
-      "enterprise": "500GB + overage"
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Branching"
-      },
-      "free": "Up to 10 branches",
-      "launch": true,
-      "scale": true,
-      "enterprise": true
+      "free": "0.5 GB",
+      "launch": "10 GB",
+      "scale": "50 GB",
+      "enterprise": "Custom"
     },
     {
       "rows": "3",
       "feature": {
-        "title": "Compute-hours",
-        "subtitle": "Use 750 hours as total hours in 1 month"
+        "title": "Compute",
+        "subtitle": "One compute unit (CU) is 1 vCPU, 4GB RAM"
       },
-      "free": "183 hours on main branch <span>+ 20 active hours for branching</span>",
-      "launch": "10GB",
-      "scale": "300 Compute-hours (included) <span>+ $0.16/Compute-hour</span>",
-      "enterprise": "750 Compute-hours (included) <span>+ $0.16/Compute-hour</span>"
+      "free": "183 CU-hours/mon <span>+ 20 CU-hours for branches</span>",
+      "launch": "300 CU-hours <span>per month</span>",
+      "scale": "700 CU-hours <span>per month</span>",
+      "enterprise": "Custom"
+    },
+    {
+      "rows": "2",
+      "feature": "Overage Rates"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Compute Units"
+        "title": "Projects"
       },
-      "free": "Max 1/4 CU, 0 configuration",
-      "launch": "Up to 4 CU",
-      "scale": "Up to 7 CU",
-      "enterprise": "7 CU+"
+      "free": false,
+      "launch": false,
+      "scale": "$50 <span>per 10 projects</span>",
+      "enterprise": "Custom"
     },
     {
-      "feature": "Feature Tiers"
+      "rows": "2",
+      "feature": {
+        "title": "Storage"
+      },
+      "free": false,
+      "launch": false,
+      "scale": "$15 <span>per 10 GB</span>",
+      "enterprise": "Custom"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Compute"
+      },
+      "free": false,
+      "launch": "$0.16 <span>per CU-hour</span>",
+      "scale": "$0.16 <span>per CU-hour</span>",
+      "enterprise": "Custom"
+    },
+    {
+      "feature": "Compute Features"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Max Compute Size"
+      },
+      "free": "0.25 CU <span>0.25 vCPU, 1 GB RAM</span>",
+      "launch": "4 CU <span>4 vCPU, 16 GB RAM</span>",
+      "scale": "7 CU <span>7 vCPU, 28 GB RAM</span>",
+      "enterprise": "7+ CU <span>7+ vCPU, 28+ GB RAM</span>"
     },
     {
       "rows": "1",
       "feature": {
-        "title": "Project Sharing"
+        "title": "Read Replicas"
       },
-      "free": true,
+      "free": false,
       "launch": true,
       "scale": true,
       "enterprise": true
@@ -162,105 +150,69 @@
       "enterprise": true
     },
     {
-      "rows": "1",
-      "soon": true,
+      "rows": "3",
       "feature": {
-        "title": "Back Up & Restore"
+        "title": "Autosuspend",
+        "subtitle": "Scale to zero on idle"
       },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "enterprise": true
+      "free": "Fixed <span>5 minutes</span>",
+      "launch": "Configurable <span>5 min+ or disabled</span>",
+      "scale": "Configurable <span>1 min+ or disabled</span>",
+      "enterprise": "Fully Configurable"
     },
     {
       "rows": "1",
       "feature": {
-        "title": "Point in time recovery"
+        "title": "Region Availability"
       },
-      "free": "Up to 24 hours",
-      "launch": "Up to 7 days",
-      "scale": "Up to 30 days",
-      "enterprise": "Unlimited"
+      "free": "All",
+      "launch": "All",
+      "scale": "All",
+      "enterprise": "All"
     },
     {
-      "rows": "1",
-      "soon": true,
-      "feature": {
-        "title": "High Availability"
-      },
-      "free": false,
-      "launch": false,
-      "scale": true,
-      "enterprise": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "IP Allowlist"
-      },
-      "free": false,
-      "launch": false,
-      "scale": true,
-      "enterprise": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Regions"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "enterprise": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Configurable auto-suspend"
-      },
-      "free": false,
-      "launch": true,
-      "scale": true,
-      "enterprise": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Read Replicas"
-      },
-      "free": false,
-      "launch": true,
-      "scale": true,
-      "enterprise": true
+      "feature": "Advanced Postgres Features"
     },
     {
       "rows": "1",
       "feature": {
         "title": "Logical Replication"
       },
-      "free": false,
+      "free": true,
       "launch": true,
       "scale": true,
       "enterprise": true
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
-        "title": "Support"
+        "title": "Postgres Extensions"
       },
-      "free": "Community Support",
-      "launch": "Neon Customer Support",
-      "scale": "Prioritized Neon Customer Support",
-      "enterprise": "Enterprise Support with SLAs"
+      "free": "<a href='/docs/extensions/pg-extensions'>All supported</a>",
+      "launch": "<a href='/docs/extensions/pg-extensions'>All supported</a>",
+      "scale": "<a href='/docs/extensions/pg-extensions'>All supported</a>",
+      "enterprise": "<a href='/docs/extensions/pg-extensions'>All supported</a>"
     },
     {
       "rows": "1",
-      "soon": true,
       "feature": {
-        "title": "Observability"
+        "title": "Custom Postgres Extensions"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "feature": "Security Features"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "IP Allow Rules"
       },
       "free": false,
-      "launch": true,
+      "launch": false,
       "scale": true,
       "enterprise": true
     },
@@ -276,31 +228,31 @@
     },
     {
       "rows": "1",
-      "soon": true,
       "feature": {
-        "title": "Org accounts"
-      },
-      "free": false,
-      "launch": true,
-      "scale": true,
-      "enterprise": true
-    },
-    {
-      "rows": "2",
-      "soon": true,
-      "feature": {
-        "title": "Team features",
-        "subtitle": "e.g. RBAC"
+        "title": "Customer-Owned S3"
       },
       "free": false,
       "launch": false,
-      "scale": true,
+      "scale": false,
       "enterprise": true
+    },
+    {
+      "feature": "Additional Features"
     },
     {
       "rows": "1",
       "feature": {
-        "title": "Bring Your Own Extension"
+        "title": "Point-in-time recovery"
+      },
+      "free": "Up to 24 hours",
+      "launch": "Up to 7 days",
+      "scale": "Up to 30 days",
+      "enterprise": "Unlimited"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Project Sharing"
       },
       "free": true,
       "launch": true,
@@ -309,14 +261,23 @@
     },
     {
       "rows": "1",
-      "soon": true,
       "feature": {
-        "title": "Bring Your Own S3"
+        "title": "Time-Travel Queries"
       },
-      "free": false,
-      "launch": false,
-      "scale": false,
+      "free": true,
+      "launch": true,
+      "scale": true,
       "enterprise": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Support"
+      },
+      "free": "Community Support",
+      "launch": "Expert Support",
+      "scale": "Prioritized Expert Support",
+      "enterprise": "Enterprise Support with SLAs"
     }
   ]
 }

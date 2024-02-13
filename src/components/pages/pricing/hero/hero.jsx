@@ -21,10 +21,10 @@ const items = [
     description: 'Generous free tier for hobby projects, prototypes, and learning Neon	',
     features: [
       { title: '1 project, 10 branches' },
-      { title: 'Project sharing' },
-      { title: 'Point-in-time restore (24hrs)' },
+      { title: 'Shared Compute and 0.5GB storage' },
+      { title: 'Fixed 0.25 compute units (CUs)' },
+      { title: 'Project Sharing, Logical Replication' },
       { title: 'Community support' },
-      { title: 'SOC 2 and compliance reports' },
     ],
     button: {
       url: LINKS.signup,
@@ -38,11 +38,11 @@ const items = [
     price: '$19 <span>/month</span>',
     description: 'All the resources, features and support you need to launch.',
     features: [
-      { title: '10 projects' },
-      { title: 'Branching' },
-      { title: 'Autoscale to 7 compute units' },
-      { title: '7 day point-in-time restore' },
-      { title: 'Neon customer support' },
+      { title: '10 projects w/500 branches each' },
+      { title: '300 CU-hours, 10GB storage included' },
+      { title: 'Autoscaling to 4 compute units (CUs)' },
+      { title: 'Free + Read Replicas' },
+      { title: 'Expert support' },
     ],
     button: {
       url: LINKS.signup,
@@ -56,11 +56,11 @@ const items = [
     price: '$69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
-      { title: 'All features from Launch' },
-      { title: '50 projects' },
-      { title: 'Autoscale to 7 compute units' },
-      { title: '30 days point-in-time restore' },
-      { title: 'IP allow' },
+      { title: '50 projects w/500 branches each' },
+      { title: '750 CU-hours, 50GB storage included' },
+      { title: 'Autoscaling to 7 compute units (CUs)' },
+      { title: 'Launch + Key Security Features' },
+      { title: 'Expert support' },
     ],
     button: {
       url: LINKS.signup,
@@ -74,8 +74,10 @@ const items = [
     price: 'Custom',
     description: 'Custom plans for large teams and database fleets.',
     features: [
+      { title: 'Higher resource limits' },
       { title: 'Custom pricing with discounts' },
       { title: 'Prepaid plans and capacity contracts' },
+      { title: 'Scale + Customer-Owned S3' },
       { title: 'Enterprise support' },
     ],
     button: {
