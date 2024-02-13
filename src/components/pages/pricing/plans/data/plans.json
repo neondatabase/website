@@ -165,13 +165,35 @@
       "feature": {
         "title": "Region Availability"
       },
-      "free": "All",
-      "launch": "All",
-      "scale": "All",
-      "enterprise": "All"
+      "free": "<a href='/docs/introduction/regions'>All</a>",
+      "launch": "<a href='/docs/introduction/regions'>All</a>",
+      "scale": "<a href='/docs/introduction/regions'>All</a>",
+      "enterprise": "Custom"
+    },
+
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Max Concurrent Connections"
+      },
+      "free": "10,000",
+      "launch": "10,000",
+      "scale": "10,000",
+      "enterprise": "Custom"
     },
     {
       "feature": "Advanced Postgres Features"
+    },
+
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Connection Pooling"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
     },
     {
       "rows": "1",
@@ -196,7 +218,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Custom Postgres Extensions"
+        "title": "Custom Extensions"
       },
       "free": true,
       "launch": true,
@@ -252,7 +274,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Project Sharing"
+        "title": "Time-Travel Queries"
       },
       "free": true,
       "launch": true,
@@ -262,7 +284,37 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Time-Travel Queries"
+        "title": "Web Console"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Neon CLI"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Management API"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Project Sharing"
       },
       "free": true,
       "launch": true,
