@@ -275,7 +275,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Point-in-time recovery"
+        "title": "Point-in-time Restore"
       },
       "free": "Up to 24 hours",
       "launch": "Up to 7 days",
@@ -285,7 +285,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Time-Travel Queries"
+        "title": "Time Travel Connections"
       },
       "free": true,
       "launch": true,
