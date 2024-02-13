@@ -18,7 +18,7 @@ An API key (or token) is a randomly-generated 64-bit key that you must provide w
 To generate an API key:
 
 1. Log in to the [Neon Console](https://console.neon.tech).
-2. Click your account in the bottom left corner of the Neon Console, and select **Account**.
+2. Click your account in the bottom left corner of the Neon Console, and select **Profile**.
 3. Select **Developer Settings** and click **Generate new API Key**.
 4. Enter a name for the API key.
 5. Click **Create** and copy the generated key.
@@ -31,7 +31,7 @@ An API key that is no longer needed can be revoked. This action cannot be revers
 
 To revoke an API key:
 
-1. Click your account in the bottom left corner of the Neon Console and select **Account**.
+1. Click your account in the bottom left corner of the Neon Console and select **Profile**.
 2. Select **Developer Settings** to see a list of API keys.
 3. To revoke a key, click **Revoke**. The key is immediately revoked. Any request that uses the key now fails.
 
