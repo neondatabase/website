@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import GradientLabel from 'components/shared/gradient-label';
-import Link from 'components/shared/link';
 
 import branchIcon from './images/branch.svg';
 import ketteqIcon from './images/ketteq.svg';
@@ -12,9 +11,9 @@ import vercelIcon from './images/vercel.svg';
 
 const items = [
   {
-    title: 'Free tier',
+    title: 'Scale',
     description:
-      'Get paid for providing your clients with the best solutions based on their needs.',
+      'Uses branching to test hundreds of scenarios on production databases cleanly with zero risk',
     icon: {
       src: ketteqIcon,
       alt: 'Ketteq',
@@ -23,9 +22,9 @@ const items = [
     },
   },
   {
-    title: 'Launch',
+    title: 'Scale',
     description:
-      'Get paid for providing your clients with the best solutions based on their needs.',
+      'Built Insurtech on Neon to focus on shipping product, not babysitting infrastructure',
     icon: {
       src: branchIcon,
       alt: 'Branch',
@@ -34,7 +33,7 @@ const items = [
     },
   },
   {
-    title: 'Scale',
+    title: 'enterprise',
     description:
       'Vercel and Neon unlock the first Serverless Postgres database for the Frontend Cloud.',
     icon: {
@@ -46,7 +45,8 @@ const items = [
   },
   {
     title: 'enterprise',
-    description: 'How Proposales integrated Neon in their Postgres development workflow.',
+    description:
+      'Saved millions by moving a fleet of databases powering multi-tenant SaaS to Neon.',
     icon: {
       src: proposalesIcon,
       alt: 'Proposales',
@@ -63,18 +63,11 @@ const CaseStudies = ({ className = null }) => (
         <div className="col-span-4 col-start-1 flex flex-col items-start xl:max-w-[300px] xl:self-start xl:justify-self-start lg:col-span-full lg:max-w-none">
           <GradientLabel>Case studies</GradientLabel>
           <h2 className="mt-3 max-w-[322px] text-[40px] font-medium leading-none tracking-[-0.02em] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]">
-            Collection of successful cases
+            Better DB velocity from MVP to IPO
           </h2>
           <p className="mt-4 max-w-[362px] text-lg font-light leading-snug xl:max-w-[280px] xl:text-base lg:max-w-[648px] md:mt-2.5 sm:max-w-none sm:pr-1.5">
-            Many firms choose tailored plans for enhanced capabilities.{' '}
-            <Link
-              className="inline-block decoration-1 underline-offset-4 hover:!decoration-green-45/0"
-              to="/case-studies"
-              theme="green-underlined"
-            >
-              Explore case studies
-            </Link>{' '}
-            to match your needs.
+            Businesses of all sizes leverage features like branching and autoscaling to increase dev
+            velocity and gain a competitive advantage.
           </p>
         </div>
         <ul className="col-start-5 col-end-11 grid max-w-[664px] grid-cols-2 gap-x-[104px] gap-y-9 pl-10 2xl:gap-x-10 xl:col-start-6 xl:col-end-13 xl:max-w-none xl:gap-x-4 xl:pl-0 lg:col-span-full lg:mt-10 lg:gap-10 md:mt-8 md:grid-cols-1 md:gap-y-7">
