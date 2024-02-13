@@ -4,24 +4,62 @@ enableTableOfContents: true
 updatedOn: '2024-01-23T17:45:24.327Z'
 ---
 
-Neon [paid plans](/docs/introduction/plans#neon-plans) bill for usage based on the following metrics:
+Neon [Free Tier](/docs/introduction/plans#free-tier), [Launch](/docs/introduction/plans##launch), and [Scale](/docs/introduction/plans##scale) plans each come with allowances of **Compute**, **Storage**, **Projects**, and **Branches**, as outlined in the following table:
 
-- **Compute time**: The amount of compute resources used per hour.
-- **Project storage**: The volume of data and history stored in your Neon project.
-- **Written data**: The volume of data written from compute to storage.
-- **Data transfer**: The volume of data transferred out of Neon.
+|            | Free Tier                                                    | Launch          | Scale             |
+|------------|--------------------------------------------------------------|-----------------|-------------------|
+| Compute    | 750 _Active Compute Time_ hours/month for the primary branch compute, 20 _Active Compute Time_ hours/month for branch computes. | 1200 compute hours/month | 3000 compute hours/month  |
+| Storage    | 512 MiB                                                      | 50 MiB          | 500 MiB           |
+| Projects   | 1                                                            | 10              | 50                |
+| Branches   | 10                                                           | 100 soft/500 max       | 100 soft/500 max |
 
-The following sections describe each metric and the billing rates for each region. Billing in Neon is account-based.
+Launch and Scale plans have a soft limit 100 branches that can be raised to 500 for no extra fee. If you require more than 100 branches, please contact [Neon Support](/docs/introduction/support).
 
-<Admonition type="note">
-_Compute time_ is typically The largest contributor to cost. _Written data_ and _Data transfer_ together usually account for only about 5% of your monthly bill.
+## Extra usage
 
-The **Project storage**, **Written data**, and **Data transfer** metrics are calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
-</Admonition>
+The [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans permit extra usage, as outlined below:
 
-## Compute time
+|                | Launch   | Scale    |
+|----------------|----------|----------|
+| Extra Compute  | &check;  | &check;  |
+| Extra Storage  |          | &check;  |
+| Extra Projects |          | &check;  |
 
-_Compute time_ is the amount of compute resources used per hour. It is calculated by multiplying compute size by _Active time_ hours. Neon measures compute size at regular intervals and averages those values to calculate _Compute time_.
+- Extra compute usage is charged per compute hour and is billed automatically. 
+- Extra storage is allocated and billed for automatically in increments of 10 GiB.
+- Extra projects are allocated and billed for automatically in increments of 10.
+
+Prices for extra usage Compute, Storage, and Project usage are found on our [pricing](https://neon.tech/pricing) page.
+
+## Storage
+
+_Storage_ is the total volume of data and history stored in your Neon project, measured in gibibytes (GiB). It includes the following:
+
+- **Current data size**
+
+  The size of all databases in your Neon projects. You can think of this as a _snapshot_ of your data at a point in time.
+
+- **History**
+
+  Neon retains a history of changes for all branches to support _point-in-time restore_.
+
+  - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon retains a history of changes in the form of WAL records. You can configure the history retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). WAL records that age out of the history retention period are evicted from storage and no longer count toward project storage.
+  - A _database branch_ is a virtual snapshot of your data at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
+    When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's virtual snapshot still exists in the parent branch's _history_, which means that it shares this data in common with the parent branch. A branch begins adding to storage when data changes are introduced or when the branch's virtual snapshot falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data or allow the branch to age out of the parent branch's _history_.
+
+    Database branches can also share a _history_. For example, two branches created from the same parent at or around the same time share a _history_, which avoids additional storage. The same is true for a branch created from another branch. Wherever possible, Neon minimizes storage through shared history. Additionally, to keep storage to a minimum, Neon takes a new branch snapshot if the amount of data changes grows to the point that a new snapshot consumes less storage than retained WAL records.
+
+The cost calculation for _Project storage_ is as follows:
+
+```text
+Project storage (GiB) * (seconds stored / 3600) * price per hour
+```
+
+The **Storage** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
+
+## Compute
+
+_Compute_ is the amount of compute resources used per hour. It is calculated by multiplying compute size by _Active time_ hours. Neon measures compute size at regular intervals and averages those values to calculate _Compute time_.
 
 _Active time_ is the total amount of time that your computes have been active within a given billing period, measured in hours. This includes all computes in your Neon project but excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale-to-zero). _Active time_ is not a billed metric. It is a factor of the _Compute time_ metric.
 
@@ -95,29 +133,12 @@ To estimate your own monthly _Compute time_ cost:
    .25 * 730 * 0.102 = $18.62
    ```
 
-## Project storage
+## Additional metrics
 
-_Project storage_ is the total volume of data and history stored in your Neon project, measured in gibibyte hours (GiB-hours). It includes the following:
+Neon also tracks the following the following usage metrics, which are not billed for: 
 
-- **Current data size**
-
-  The size of all databases in your Neon projects. You can think of this as a _snapshot_ of your data at a point in time.
-
-- **History**
-
-  Neon retains a history of changes for all branches to support _point-in-time restore_.
-
-  - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon retains a history of changes in the form of WAL records. You can configure the history retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). WAL records that age out of the history retention period are evicted from storage and no longer count toward project storage.
-  - A _database branch_ is a virtual snapshot of your data at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
-    When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's virtual snapshot still exists in the parent branch's _history_, which means that it shares this data in common with the parent branch. A branch begins adding to storage when data changes are introduced or when the branch's virtual snapshot falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data or allow the branch to age out of the parent branch's _history_.
-
-    Database branches can also share a _history_. For example, two branches created from the same parent at or around the same time share a _history_, which avoids additional storage. The same is true for a branch created from another branch. Wherever possible, Neon minimizes storage through shared history. Additionally, to keep storage to a minimum, Neon takes a new branch snapshot if the amount of data changes grows to the point that a new snapshot consumes less storage than retained WAL records.
-
-The cost calculation for _Project storage_ is as follows:
-
-```text
-Project storage (GiB) * (seconds stored / 3600) * price per hour
-```
+- **Written data**: The volume of data written from compute to storage.
+- **Data transfer**: The volume of data transferred out of Neon.
 
 ## Written data
 
@@ -129,6 +150,8 @@ The cost calculation for _Written data_ is as follows:
 Written data (GiB) * price per GiB
 ```
 
+**Written data** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
+
 ## Data transfer
 
 _Data transfer_ measures the total volume of data transferred out of Neon (known as "egress") during a given billing period, measured in gigibytes (GiB). It includes data sent from your Neon project to external destinations. If your data transfer is high, contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
@@ -138,4 +161,6 @@ The cost calculation for _Data transfer_ is as follows:
 ```text
 Data transfer (GiB) * price per GiB
 ```
+
+**Data transfer** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 

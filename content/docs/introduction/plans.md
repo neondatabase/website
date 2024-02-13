@@ -27,7 +27,7 @@ The Free Tier plan includes the following usage:
 
 - 1 Neon project
 - Up to 500 MiB of data storage
-- 750 _Active Compute Time_ hours per month for your primary branch compute, and 20 hours per month for your non-primary branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM.
+- 750 _Active Compute Time_ hours/month for the primary branch compute, 20 _Active Compute Time_ hours/month for non-primary branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM.
 - 10 branches
 
 In addition, Free Tier users have access to the following Neon features:
@@ -56,7 +56,7 @@ In addition, Launch plan users have access to the following Neon features:
 
 - [Compute sizes](#compute-size): Computes with up to 4 vCPUs and 16 GB RAM.
 - [Autoscaling](#autoscaling): Automatically scale your compute size on demand
-- [Branching](#branching): The maximum number of branches supported by Neon (100 soft limit, 500 hard limit). If you need more than 100 branches, contact [Neon Support](/docs/introduction/support).
+- [Branching](#branching): There is a soft limit 100 branches that can be raised to 500 for no extra fee. If you require more than 100 branches, please contact [Neon Support](/docs/introduction/support).
 - [Point-in-time restore](#point-in-time-recovery): Recover data to a point in time up to **7 days** in the past
 - [IP Allow](#ip-allow): Restrict access to specific IP addresses or ranges
 - [SOC 2 Report](#soc-2-report): Access to Neon's SOC 2 Report
