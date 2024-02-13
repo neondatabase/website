@@ -36,8 +36,12 @@ Given the high number of connections used by this application, [connection pooli
 
 * **Compute time.** This metric refers to the size of CPU required to handle your interactions plus the length of time your compute is active. The average daily compute usage is 23.94 hours, totaling 718.35 hours for the sample month. This indicates steady but low-intensity database usage.
 * **Storage size.** The amount of database storage currently used by your project. It includes the total volume of data across all branches plus the shared history. The database is now over 25 GiB and growing steadily with new written data as the user base grows.
-* **Written data.** This metric shows the volume of data actively written to database storage. The daily average of 0.15 GB results in a total of 4.4 GB for the month.
-* **Data transfer.** This refers to the amount of data transferred out of Neon. Daily average is 0.09 GB with a monthly total of 2.7 GB.
+
+### Which Pricing Plan fits best?
+
+With Neon pricing, two key metrics help you decide which [pricing plan](https://neon.tech/pricing) is right for you: compute time and storage.
+
+At roughly 718 compute hours for the month, this applicattion is well under the 1,200 hours/month limit for the Launch plan. However, with a storage size of 25 GiB, the storage needs for this application are well over the Launch plan limit of 10 GiB. That makes the Scale plan the right choice: 3,000 hours/month compute and 50 GiB storage.
 
 ## Consumption breakdown for the month
 
@@ -51,34 +55,28 @@ Compute usage is steady at almost 24 compute hours per day across the month.
 
 Daily average of 23.94 compute hours leads to a total of 713.35 compute hours for the month.
 
-Compute cost calculation: 718.35 compute-hours * $0.102 per compute-hour = **$73.27** for this billing period
+This is well below the Scale plan limit of 3,000 hours/month, so there will be no charge for extra usage. The application is on track to be charged the set monthly rate for the Scale plan.
 
 ### Storage
 
 Project storage grew 4.4 GiB over the month, from 23.6 GiB to 28 GiB.
 
-Storage cost calculation: 28 GiB * $0.000164 per GiB-hour * 730 (1 month) = **$3.35** for this billing period
+This storage level is too high for the Launch plan but well under the 50 GiB limit for the Scale plan. No charge for extra storage.
 
 ![Sample storage graph](/docs/introduction/billing_storage_graph.png)
 
 ### Data throughput
-Written data to Neon storage and data transfer out of Neon are both minimal for the month. 
-
-**Written data calcuation**: 4.4 GiB * $0.09600 per Gib = **$0.42** for this billing period
-
-**Data transfer calculation**: 2.7 GiB * $0.09000 per GiB = **$0.24** for the billing period
+Written data to Neon storage and data transfer out of Neon do not incur any costs. This view shows the amount of data written to storage or transferred out of the application; a reasonable amount with no charge.
 
 ![Sample storage graph](/docs/introduction/billing_data_graph.png)
 
 ### Table view
 
-Here are the daily averages and monthly totals for the 3 key usage metrics that Neon uses to calculate your bill, plus the total current storage costs.
+Here are the daily averages and monthly totals for the 2 key usage metrics that Neon uses to calculate how much you are consuming within your selected plan.
 
 | Metric          | Daily Average | Monthly Total |
 |-----------------|---------------|---------------|
 | Compute Time    | 23.94 compute-hours      | 718.35 compute-hours    |
-| Written Data    | 0.15 GiB      | 4.4 GiB        |
-| Data Transfer   | 0.09 GiB       | 2.7 GiB        |
 
  Metric           | Start of billing period| End of billing period |
 |-----------------|---------------|---------------|
@@ -86,12 +84,4 @@ Here are the daily averages and monthly totals for the 3 key usage metrics that 
 
 ## Bill for the month
 
-This table shows what the billing costs might look like with billing rates set to the region US-East (Ohio).
-
-| Metric              | Month      | Rate                  | Amount    |
-|---------------------|------------|-----------------------|-----------|
-| Compute Time Cost   | 718.35 GiB | $0.102 per compute-hour        | $73.27    |
-| Data Storage Cost   | 28 GiB   | $0.000164 per GiB-hour| $3.35
-| Written Data Cost   | 4.4 GiB    | $0.09600 per Gib      | $0.42     |
-| Data Transfer Cost  | 2.7 GiB    | $0.09000 per GiB      | $0.24     |
-| **Total Bill**      |            |                       | **$77.28**|
+Since compute-hours and storage size are well below the limits for the selected Scale plan, the bill for the month will come in at the set rate of **$69**.
