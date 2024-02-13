@@ -59,7 +59,7 @@ const items = [
       { title: '750 CU-hours, 50GB storage included' },
       { title: 'Autoscaling to 7 CUs' },
       { title: 'Unlocks key security features' },
-      { title: 'Expert support' },
+      { title: 'Priority support' },
     ],
     button: {
       url: LINKS.signup,
