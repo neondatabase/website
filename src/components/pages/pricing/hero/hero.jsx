@@ -22,7 +22,7 @@ const items = [
     price: '$0 <span>/month</span>',
     description: 'Generous free tier for hobby projects, prototypes, and learning Neon	',
     features: [
-      { title: '1 project, 10 branches' },
+      { title: '1 project w/10 branches' },
       { title: 'Shared Compute and 0.5GB storage' },
       { title: 'Project Sharing, Logical Replication' },
       { title: 'Community support' },
