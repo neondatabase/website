@@ -9,13 +9,13 @@
     },
     "launch": {
       "label": "Launch",
-      "price": "$19<span>/mo</span>",
+      "price": "<span>From</span> $19<span>/mo</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
     "scale": {
       "label": "Scale",
-      "price": "$69<span>/mo</span>",
+      "price": "<span>From</span> $69<span>/mo</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
@@ -39,7 +39,7 @@
       "free": "1",
       "launch": "10",
       "scale": "50",
-      "enterprise": "Custom"
+      "enterprise": "Unlimited"
     },
     {
       "rows": "2",
@@ -69,7 +69,7 @@
       "free": "0.5 GB",
       "launch": "10 GB",
       "scale": "50 GB",
-      "enterprise": "Custom"
+      "enterprise": "Larger sizes"
     },
     {
       "rows": "3",
@@ -128,7 +128,7 @@
       "free": "0.25 CU <span>0.25 vCPU, 1 GB RAM</span>",
       "launch": "4 CU <span>4 vCPU, 16 GB RAM</span>",
       "scale": "7 CU <span>7 vCPU, 28 GB RAM</span>",
-      "enterprise": "7+ CU <span>7+ vCPU, 28+ GB RAM</span>"
+      "enterprise": "Larger sizes <span>7+ vCPU, 28+ GB RAM</span>"
     },
     {
       "rows": "1",
@@ -151,7 +151,7 @@
       "enterprise": true
     },
     {
-      "rows": "3",
+      "rows": "2",
       "feature": {
         "title": "Autosuspend",
         "subtitle": "Scale to zero on idle"
@@ -181,6 +181,16 @@
       "launch": "10,000",
       "scale": "10,000",
       "enterprise": "Custom"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Tenant Isolation"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "enterprise": true
     },
     {
       "feature": "Advanced Postgres Features"
