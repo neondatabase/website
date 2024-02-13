@@ -13,7 +13,7 @@ redirectFrom:
 updatedOn: '2024-01-23T17:45:24.329Z'
 ---
 
-Neon's plans are designed to meet different user requirements, ranging from personal projects to enterprise-level production workloads. Refer to our [pricing](https://neon.tech/pricing) page for an overview of our plans and pricing. This page provides additional information to help you understand our plans and find the one that best meets your needs.
+Neon's plans are designed to meet different user requirements, ranging from personal projects to enterprise-level production workloads. We also offer a custom plan option for enterprises that require database fleets or SaaS vendors interested in bundling Neon. You can refer to our [pricing](https://neon.tech/pricing) page for an overview of our plans and pricing. This page provides additional information to help you understand our plans and find the one that best meets your needs.
 
 ## Pricing plans
 
@@ -27,37 +27,37 @@ The Free Tier plan includes the following usage:
 
 - 1 Neon project
 - Up to 500 MiB of data storage
-- 750 Active Compute Time hours per month for your primary branch compute, and 20 hours per month for your non-primary branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM.
+- 750 _Active Compute Time_ hours per month for your primary branch compute, and 20 hours per month for your non-primary branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM.
 - 10 branches
 
-In addition, Free Tier users have access to the following Neon features at no cost:
+In addition, Free Tier users have access to the following Neon features:
 
-- [Point-in-time Recovery](#point-in-time-recovery): Recover data to a point in time up to **24 hours** in the past
+- [Point-in-time restore](#point-in-time-recovery): Restore data to a point in time up to **24 hours** in the past
 - [Autosuspend](#autosuspend): Compute scales to zero after 5 minutes of inactivity to save on usage
 - [Regions](#regions): The Free Tier is available in all supported regions
 - [Project sharing](#project-sharing): Share your project with any Neon user account
 - [Logical replication](#logical-replication): Replicate your data from Neon to other data services and platforms
 
-Free Tier users have access to **Community** support, which includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/). For more information, Neon plans are outlined on our [Support](/docs/introduction/support) page.
+Free Tier users have access to **Community** support, which includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/). For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
 
 ### Launch
 
-The Launch plan provides the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses and applications.
+The Launch plan provides all of the the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses and applications.
 
 The Launch plan includes the following usage:
 
 - 10 Neon projects
 - Up to 10 GiB of data storage
-- Up to 1200 total compute hours/month for all computes in all projects
+- Up to 1200 compute hours/month for all computes in all projects
 
 Launch plan users can access extra compute hours beyond the 1200 compute hours/month included in the Launch plan. Extra compute hours are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour cost.
 
 In addition, Launch plan users have access to the following Neon features:
 
 - [Compute sizes](#compute-size): Computes with up to 4 vCPUs and 16 GB RAM.
-- [Autoscaling](#autoscaling): Scale compute size on demand
+- [Autoscaling](#autoscaling): Automatically scale your compute size on demand
 - [Branching](#branching): The maximum number of branches supported by Neon (100 soft limit, 500 hard limit). If you need more than 100 branches, contact [Neon Support](/docs/introduction/support).
-- [Point-in-time Recovery](#point-in-time-recovery): Recover data to a point in time up to **7 days** in the past
+- [Point-in-time restore](#point-in-time-recovery): Recover data to a point in time up to **7 days** in the past
 - [IP Allow](#ip-allow): Restrict access to specific IP addresses or ranges
 - [SOC 2 Report](#soc-2-report): Access to Neon's SOC 2 Report
 - [Autosuspend](#autosuspend): Configure how often a compute scales to zero
@@ -66,7 +66,7 @@ In addition, Launch plan users have access to the following Neon features:
 - [Read replicas](#read-replicas): Scale applications with read replicas
 - [Logical replication](#logical-replication): Replicate data from Neon with Postgres logical replication support
 
-Launch plan users have access to **Standard** Neon support, which includes access to the Neon Support team via support tickets. For more information, Neon plans are outlined on our [Support](/docs/introduction/support) page.
+Launch plan users have access to **Standard** Neon support, which includes access to the Neon Support team via support tickets. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
 
 ### Scale
 
@@ -74,14 +74,14 @@ The Scale plan includes everything in the Launch plan plus the following:
 
 - Up to 50 Neon projects
 - Up to 50 GiB of data storage
-- Up to 3000 total compute hours/month for all computes in all projects
+- Up to 3000 compute hours/month for all computes in all projects
 - Higher limits for the following Neon features:
-  - [Compute sizes](#compute-size): Computes with up to 7 vCPUs and 28 GB RAM.
-  - [Point-in-time Recovery](#point-in-time-recovery): Recover data to a point in time up to **30 days** in the past
+  - [Compute sizes](#compute-size): Computes with up to 7 vCPUs and 28 GB RAM
+  - [Point-in-time restore](#point-in-time-recovery): Recover data to a point in time up to **30 days** in the past
 
 Scale plan users can access extra compute hours beyond the 3000 compute hours/month and additional storage. Extra compute hours and storage are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute cost and the cost for additional storage.
 
-Scale plan users have access to **Priority** Neon support, which includes priority access to the Neon Support team via support tickets. For more information, Neon plans are outlined on our [Support](/docs/introduction/support) page.
+Scale plan users have access to **Priority** Neon support, which includes priority access to the Neon Support team via support tickets. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
 
 ### Enterprise
 
@@ -92,14 +92,16 @@ The _Enterprise_ plan can be tailored to your specific requirements with:
 - A custom contract
 - Volume-based discounts
 - Prepaid or integrated billing
-- Access to all Neon features available with the [Scale](#scale) plan.
+- Full access to all Neon features
 - Tailored features and solutions
 
-Enterprise plan users have access to **Enterprise** Neon support, which includes everything offered with the **Priority** plan plus retail customer support, dedicated Customer Success Team support, and SLAs. For more information, Neon plans are outlined on our [Support](/docs/introduction/support) page.
+Enterprise plan users have access to **Enterprise** Neon support, which includes everything offered with the **Priority** plan plus retail customer support, Customer Success Team support, and SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
 
 If you are interested in exploring an _Enterprise_ plan with Neon, please reach out to our [Sales team](https://neon.tech/contact-sales).
 
 ## Features
+
+This section describes the features available with one or more of the Neon plans outlined above. 
 
 ### Compute size
 
@@ -149,38 +151,5 @@ Logical replication enables replicating data from your Neon database to external
 
 - Paid plans have a default limit of 20 simultaneously active computes to protect against unintended usage. To increase this limit, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available.
 - Active Compute Time: On the Free Tier, your primary branch compute is allotted 750 hours a month, which means your primary branch is always available. Branch computes have a 20 hours/month Active Compute Time limit. If your branch computes exceed this limit, they will be suspended until the limit resets. You can monitor _Active Compute Time_ on the **Usage** widget on the Neon **Dashboard**. The _Active Compute Time_ limit resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _Active Compute Time_ limit will reset on February 1st.
-
-## FAQ
-
-<DefinitionList>
-
-Can I upgrade or downgrade my plan later?
-: Yes. You can upgrade or downgrade your plan at any time. Select your **Account** in the Neon Console and select **Billing**. Look for **Change plan** on the **Billing** page. To upgrade to or downgrade from an Enterprise plan, contact [Sales](https://neon.tech/contact-sales).
-
-Does Neon charge for storage in database branches?
-: Neon charges for unique storage. Data that a branch shares in common with a parent branch is not considered unique, but data changes to a branch are counted toward storage. Read more about [project storage](/docs/introduction/billing#project-storage).
-
-What payment methods do you accept?
-: Neon accepts payment by credit card for the Pro plan. For the Enterprise & Platform Partnership plans, Neon accepts payment by ACH and Wire.
-
-When will I be billed?
-: Neon bills for the past month's usage at the beginning of each month. For more information, see Manage billing.
-
-Is there a discount for annual plan subscriptions?
-: Discounts are applied for longer duration contracts as well as bulk consumption purchases.
-
-Are there any limits or restrictions on usage?
-: Neon implements limits to protect against unintended usage. For example, a usage-based plan may offer unlimited projects, compute, and storage, but Neon places default limits on those resources to protect your account. For more information, see Plans.
-
-Is there a minimum commitment period?
-: The Neon Pro plan is usage-based and has no commitment period. You can downgrade to the at Free Tier at any time. For more information, see Downgrade your plan.
-
-How secure is the payment process?
-: Neon payment processing is powered by Stripe, which is a certified PCI Service Provider Level 1. For more information, refer to Security at Stripe.
-
-Where should I direct pricing-related questions?
-: Please contact Sales with any questions about plans or pricing.
-
-</DefinitionList>
 
 
