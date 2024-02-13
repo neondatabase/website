@@ -4,11 +4,13 @@ import clsx from 'clsx';
 import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
+import infoSvg from 'components/pages/partners/apply/images/info.svg';
 import AnimatedButton from 'components/shared/animated-button';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
@@ -38,8 +40,11 @@ const items = [
     description: 'All the resources, features and support you need to launch.',
     features: [
       { title: '10 projects w/500 branches each' },
-      { title: 'Preloaded w/$63 of usage' },
-      { title: 'Autoscaling to 4 CUs' },
+      {
+        title: 'Preloaded w/$63 of usage',
+        tooltip: '300 CU-hours compute <br/> and 10GB storage.',
+      },
+      { title: 'Autoscaling up to 4 CUs' },
       { title: 'Unlocks Read Replicas' },
       { title: 'Expert support' },
     ],
@@ -56,8 +61,11 @@ const items = [
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
       { title: '50 projects w/500 branches each' },
-      { title: 'Preloaded with $195 of usage' },
-      { title: 'Autoscaling to 7 CUs' },
+      {
+        title: 'Preloaded with $195 of usage',
+        tooltip: '750 CU-hours compute <br/> and 50GB storage.',
+      },
+      { title: 'Autoscaling up to 7 CUs' },
       { title: 'Unlocks key security features' },
       { title: 'Priority support' },
     ],
@@ -195,7 +203,7 @@ const Hero = () => {
                     </div>
                     <div className="mt-auto flex grow flex-col">
                       <ul className="flex flex-col flex-wrap gap-y-4">
-                        {features.map(({ title }, index) => (
+                        {features.map(({ title, tooltip }, index) => (
                           <li
                             className="relative pl-6 leading-tight tracking-tight text-gray-new-70"
                             key={index}
@@ -207,7 +215,30 @@ const Hero = () => {
                               )}
                               aria-hidden
                             />
-                            <span>{title}</span>
+                            <span
+                              className="flex gap-1.5"
+                              data-tooltip-id={tooltip && `${type}_tooltip_${index}`}
+                              data-tooltip-html={tooltip && tooltip}
+                            >
+                              {title}
+                              {tooltip && (
+                                <img
+                                  src={infoSvg}
+                                  width={14}
+                                  height={14}
+                                  alt=""
+                                  loading="lazy"
+                                  aria-hidden
+                                />
+                              )}
+                            </span>
+                            {tooltip && (
+                              <Tooltip
+                                className="w-sm z-20"
+                                id={`${type}_tooltip_${index}`}
+                                place="top-center"
+                              />
+                            )}
                           </li>
                         ))}
                       </ul>
