@@ -15,7 +15,7 @@ To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
 - A Cloudflare account. If you do not have one, sign up for [Cloudflare Workers](https://workers.cloudflare.com/) to get started.
-- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your locat machine. We'll use Node.js to build and deploy our Workers application.
+- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and deploy the Workers application.
 
 ## Setting up your Neon database
 
@@ -23,9 +23,9 @@ To follow along with this guide, you will need:
 
 Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 
-- Click the `New Project` button to create a new project.
+1. Click the `New Project` button to create a new project.
 
-- From your project dashboard, navigate to the `SQL Editor` from the sidebar, and run the following SQL command to create a new table in your database:
+2. From the Neon **Dashboard**, navigate to the `SQL Editor` from the sidebar, and run the following SQL command to create a new table in your database:
 
     ```sql
     CREATE TABLE books_to_read (
@@ -35,7 +35,7 @@ Log in to the Neon console and navigate to the [Projects](https://console.neon.t
     );
     ```
 
-    Next, we insert some sample data into the `books_to_read` table, so we can query it later:
+    Next, insert some sample data into the `books_to_read` table so that you can query it later:
 
     ```sql
     INSERT INTO books_to_read (title, author)
@@ -51,10 +51,10 @@ Log in to the Neon console and navigate to the [Projects](https://console.neon.t
 Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
-postgres://username:password@your-database-url.neon.tech/neondb?sslmode=require
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-Keep this connection string handy for later use.
+Keep your connection string handy for later use.
 
 ## Setting up your Cloudflare Workers project
 
@@ -78,19 +78,19 @@ This initiates an interactive CLI prompt to generate a new project. To follow al
 │ no typescript
 ```
 
-When asked if you want to deploy your application, select `no`. We'll develop and first test the application locally, before deploying it to Cloudflare Workers platform.
+When asked if you want to deploy your application, select `no`. We'll develop and test the application locally before deploying it to Cloudflare Workers platform.
 
 The `create-cloudflare` CLI installs the `Wrangler` tool to manage the full workflow of testing and managing your Worker applications.
 
 ### Implement the Worker script
 
-We'll use the `neon-serverless` driver to connect to the Neon database, so we need to install it as a dependency:
+We'll use the `neon-serverless` driver to connect to the Neon database, so you need to install it as a dependency:
 
 ```bash
 npm install @neondatabase/serverless
 ```
 
-Now, we can update the `src/index.js` file in the project directory with the following code:
+Now, you can update the `src/index.js` file in the project directory with the following code:
 
 ```js
 import { Client } from '@neondatabase/serverless';
@@ -109,13 +109,13 @@ The `fetch` handler defined above gets called when the worker receives an HTTP r
 
 ### Test the worker application locally
 
-We first need to configure the `DATABASE_URL` environment variable to point to our Neon database. We can do this by creating a `.dev.vars` file at the root of the project directory with the following content:
+You first need to configure the `DATABASE_URL` environment variable to point to our Neon database. You can do this by creating a `.dev.vars` file at the root of the project directory with the following content:
 
 ```text
 DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 ```
 
-Now, to test the worker application locally, we can use the `wrangler` CLI which comes with the Cloudflare project setup.
+Now, to test the worker application locally, you can use the `wrangler` CLI which comes with the Cloudflare project setup.
 
 ```bash
 npx wrangler dev
