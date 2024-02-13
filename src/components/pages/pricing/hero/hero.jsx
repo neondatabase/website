@@ -216,13 +216,13 @@ const Hero = () => {
                               aria-hidden
                             />
                             <span
-                              className="flex gap-1.5"
                               data-tooltip-id={tooltip && `${type}_tooltip_${index}`}
                               data-tooltip-html={tooltip && tooltip}
                             >
                               {title}
                               {tooltip && (
                                 <img
+                                  className="relative -top-px ml-1.5 inline"
                                   src={infoSvg}
                                   width={14}
                                   height={14}
