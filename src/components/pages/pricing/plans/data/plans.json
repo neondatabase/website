@@ -77,7 +77,8 @@
         "title": "Compute",
         "subtitle": "One compute unit (CU) is 1 vCPU, 4GB RAM"
       },
-      "free": "183 CU-hours/mon <span>+ 20 CU-hours for branches</span>",
+      "free": "183 CU-hours per month <span>+ 20 for branches</span>",
+      "free_tooltip": "183 CU-hours gives you <br/>the ability to run a 0.25 CU <br/>instance 24/7 each month.",
       "launch": "300 CU-hours <span>per month</span>",
       "scale": "700 CU-hours <span>per month</span>",
       "enterprise": "Custom"

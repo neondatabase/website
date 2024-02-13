@@ -4,10 +4,8 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
-// import checkIcon from '@/svgs/solutions/bindplane/table/check.svg';
-// import minusIcon from '@/svgs/solutions/bindplane/table/minus.svg';
-
 import Button from 'components/shared/button';
+import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import checkIcon from 'icons/pricing/check.svg';
 
@@ -252,7 +250,16 @@ const Table = () => {
                       ) : (
                         <span
                           className="flex flex-col font-light leading-snug tracking-tight [&_span]:text-gray-new-70"
+                          data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
+                          data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
                           dangerouslySetInnerHTML={{ __html: item[key] }}
+                        />
+                      )}
+                      {item[`${key}_tooltip`] && (
+                        <Tooltip
+                          className="w-sm z-20"
+                          id={`${key}_tooltip_${index}`}
+                          place="top-center"
                         />
                       )}
                     </li>
