@@ -13,7 +13,7 @@ redirectFrom:
 updatedOn: '2024-01-23T17:45:24.329Z'
 ---
 
-Neon pricing plans are designed to meet different user requirements, ranging from small personal projects to enterprise production workloads. Refer to our [pricing](https://neon.tech/pricing) page for an overview of our plans. This page provides additional information to help you understand the pricing structure and features of each plan so that you can find the plan that best meets your needs.
+Neon's plans are designed to meet different user requirements, ranging from personal projects to enterprise-level production workloads. Refer to our [pricing](https://neon.tech/pricing) page for an overview of our plans and pricing. This page provides additional information to help you understand our plans and find the one that best meets your needs.
 
 ## Pricing plans
 
@@ -27,13 +27,13 @@ The Free Tier plan includes the following usage:
 
 - 1 Neon project
 - Up to 500 MiB of data storage
-- 750 Active Compute Time hours per month on your primary branch compute, and 20 hours per month for your branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM.
+- 750 Active Compute Time hours per month for your primary branch compute, and 20 hours per month for your non-primary branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM.
 - 10 branches
 
-In addition, Free Tier users have access to the following Neon features:
+In addition, Free Tier users have access to the following Neon features at no cost:
 
 - [Point-in-time Recovery](#point-in-time-recovery): Recover data to a point in time up to **24 hours** in the past
-- [Autosuspend](#autosuspend): Compute is automatically suspended after 5 minutes of inactivity to save on usage
+- [Autosuspend](#autosuspend): Compute scales to zero after 5 minutes of inactivity to save on usage
 - [Regions](#regions): The Free Tier is available in all supported regions
 - [Project sharing](#project-sharing): Share your project with any Neon user account
 - [Logical replication](#logical-replication): Replicate your data from Neon to other data services and platforms
@@ -42,7 +42,7 @@ Free Tier users have access to **Community** support, which includes the [Neon D
 
 ### Launch
 
-The Launch plan provides the resources, features, and support you need to launch your application. It's ideal for startups and growign businesses or application.
+The Launch plan provides the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses and applications.
 
 The Launch plan includes the following usage:
 
@@ -50,7 +50,7 @@ The Launch plan includes the following usage:
 - Up to 10 GiB of data storage
 - Up to 1200 total compute hours/month for all computes in all projects
 
-Launch plan users can pay for compute hours beyond the 1200 compute hours/month that are included in the Launch plan. Extra compute hours are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour cost.
+Launch plan users can access extra compute hours beyond the 1200 compute hours/month included in the Launch plan. Extra compute hours are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour cost.
 
 In addition, Launch plan users have access to the following Neon features:
 
@@ -61,7 +61,7 @@ In addition, Launch plan users have access to the following Neon features:
 - [IP Allow](#ip-allow): Restrict access to specific IP addresses or ranges
 - [SOC 2 Report](#soc-2-report): Access to Neon's SOC 2 Report
 - [Autosuspend](#autosuspend): Configure how often a compute scales to zero
-- [Regions](#regions): Neon's Launch plan is available in all supported regions
+- [Regions](#regions): This plan is available in all Neon regions.
 - [Project sharing](#project-sharing): Share projects with any Neon user account
 - [Read replicas](#read-replicas): Scale applications with read replicas
 - [Logical replication](#logical-replication): Replicate data from Neon with Postgres logical replication support
@@ -70,27 +70,16 @@ Launch plan users have access to **Standard** Neon support, which includes acces
 
 ### Scale
 
-The Scale plan includes the following usage:
+The Scale plan includes everything in the Launch plan plus the following:
 
 - Up to 50 Neon projects
 - Up to 50 GiB of data storage
 - Up to 3000 total compute hours/month for all computes in all projects
+- Higher limits for the following Neon features:
+  - [Compute sizes](#compute-size): Computes with up to 7 vCPUs and 28 GB RAM.
+  - [Point-in-time Recovery](#point-in-time-recovery): Recover data to a point in time up to **30 days** in the past
 
-Scale plan users can pay for compute hours beyond the 3000 compute hours/month and additional storage. Extra compute hours and storage are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute cost and the cost for additional storage.
-
-In addition, Scale plan users have access to the following Neon features:
-
-- [Compute sizes](#compute-size): Computes with up to 7 vCPUs and 28 GB RAM.
-- [Autoscaling](#autoscaling): Scale compute size on demand
-- [Branching](#branching): The maximum number of branches supported by Neon (100 soft limit, 500 hard limit). If you need more than 100 branches, contact [Neon Support](/docs/introduction/support).
-- [Point-in-time Recovery](#point-in-time-recovery): Recover data to a point in time up to **30 days** in the past
-- [IP Allow](#ip-allow): Restrict access to specific IP addresses or ranges
-- [SOC 2 Report](#soc-2-report): Access to Neon's SOC 2 Report
-- [Autosuspend](#autosuspend): Configure how often a compute scales to zero
-- [Regions](#regions): Neon's Sclae plan is available in all supported regions
-- [Project sharing](#project-sharing): Share projects with any Neon user account
-- [Read replicas](#read-replicas): Scale applications with read replicas
-- [Logical replication](#logical-replication): Replicate data from Neon with Postgres logical replication support
+Scale plan users can access extra compute hours beyond the 3000 compute hours/month and additional storage. Extra compute hours and storage are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute cost and the cost for additional storage.
 
 Scale plan users have access to **Priority** Neon support, which includes priority access to the Neon Support team via support tickets. For more information, Neon plans are outlined on our [Support](/docs/introduction/support) page.
 
