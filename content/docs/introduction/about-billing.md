@@ -5,25 +5,25 @@ subtitle: Learn how Neon billing works to save you money
 updatedOn: '2024-01-23T17:45:24.324Z'
 ---
 
-<NewPricing/>
+Find all the documentation you need to learn about Neon's pricing plans and understand, manage, and optimize your monthly Neon bill.
 
-Find all the documentation you need to understand, manage, and optimize the features and metrics that contribute to your monthly Neon bill.
+## Neon plans
 
-## Pricing and billing overview
+Start with an overview of our pricing plans and what they offer.
 
-Start with our billing overview and then get more detail about our plans.
+<DetailIconCards>
+
+<a href="/docs/introduction/plans" description="Learn about the different plans offered by Neon" icon="chart-bar">Plans</a>
+
+</DetailIconCards>
+
+## Understanding usage
+
+Find detailed information about plan allowances and how Neon measures usage and bills for extras.
 
 <DetailIconCards>
 
 <a href="/docs/introduction/billing-overview" description="Quick introduction to how billing works in Neon" icon="chart-bar">Billing overview</a>
-
-</DetailIconCards>
-
-## Reference
-
-Find detailed definitions of the metrics that make up your bill and a cost breakdown for compute, storage, and data transfer rates for your region.
-
-<DetailIconCards>
 
 <a href="/docs/introduction/billing" description="Find detailed descriptions of the metrics that make up your bill" icon="trend-up">Billing metrics</a>
 

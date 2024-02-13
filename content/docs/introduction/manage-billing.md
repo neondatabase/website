@@ -20,7 +20,7 @@ A Neon account can view and manage billing from the **Billing** page in the Neon
 To access your **Billing** page:
 
 1. Navigate to the Neon Console.
-1. Select your account avatar.
+1. Select your Profile.
 1. Select **Billing** from the menu.
 
 ## Update your payment method
@@ -28,7 +28,7 @@ To access your **Billing** page:
 To update your payment method:
 
 1. Navigate to the Neon Console.
-1. Select your account avatar.
+1. Select your Profile.
 1. Select **Billing** from the menu.
 1. Select **Billing info**
 1. Locate **Payment method** on the page and click **Edit**.
@@ -44,7 +44,7 @@ If an auto-debit payment transaction fails, Neon sends a request to update your 
 To update your billing email:
 
 1. Navigate to the Neon Console.
-1. Select your account avatar.
+1. Select your Profile.
 1. Select **Billing** from the menu.
 1. Select **Billing info**
 1. Locate **Billing email** on the page and click **Edit**.
@@ -60,7 +60,7 @@ A Neon invoice includes an **Amount due** for the billing period and a cost brea
 To download an invoice:
 
 1. Navigate to the Neon Console.
-1. Select your account avatar.
+1. Select your Profile.
 1. Select **Billing** from the menu.
 1. Select **Invoices**.
 1. Click the download icon for the invoice you want to download.
@@ -70,7 +70,7 @@ To download an invoice:
 To change your plan:
 
 1. Navigate to the Neon Console.
-1. Select your account avatar.
+1. Select your Profile.
 1. Select **Billing** from the menu.
 1. Select **Change plan**.
 
