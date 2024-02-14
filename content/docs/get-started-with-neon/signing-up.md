@@ -41,7 +41,9 @@ If you've signed up with a social or partner login and now want to change your e
 
 You will get a notificaiton email to confirm this change. Once you confirm, you will be logged out of Neon. Log back in with your new email, and use this email going forward.
 
+<Admonition type="note">
 It is important to note that changing your email will _unlink your existing social account_. After you make this change, you will only be able to use your new email to sign in.
+</Admonition>
 
 ## Next steps
 
