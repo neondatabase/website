@@ -28,7 +28,7 @@ const items = [
 ];
 
 const PricePerf = () => (
-  <div className="price-perf mt-[104px] grid w-full grid-cols-10 items-center gap-x-10 xl:mt-[104px] xl:items-end xl:gap-x-6 lg:mt-20 lg:gap-y-7 md:mt-10 md:gap-y-6">
+  <div className="price-perf grid w-full grid-cols-10 items-center gap-x-10 xl:items-end xl:gap-x-6 lg:gap-y-7 md:gap-y-6">
     <div className="col-span-5 lg:col-span-full">
       <h3 className="text-4xl font-medium leading-tight tracking-tighter xl:text-[32px] lg:text-center lg:text-[28px] md:text-[22px]">
         Increase performance not costs

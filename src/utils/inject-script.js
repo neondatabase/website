@@ -1,6 +1,7 @@
 export const injectScript = (src) =>
   new Promise((resolve, reject) => {
     const existScript = document.head.querySelector(`script[src="${src}"]`);
+
     if (existScript) {
       resolve();
     } else {
