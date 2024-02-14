@@ -39,7 +39,7 @@ You will be guided through a few steps, asking you to reauthenticate using your 
 
 If you've signed up with a social or partner login and now want to change your email &#8212; for example, you previously signed up using a work-based social account and now want to use your personal email &#8212; you can make this change under **Account Settings** &#8594; **Profile**.
 
-You will get a notificaiton email to confirm this change. Once you confirm, you will be logged out of Neon. Log back in with your new email, and use this email going forward.
+You will get a notification email to confirm this change. Once confirmed, you will be logged out of Neon. Log back in with your new email, and use this email going forward.
 
 <Admonition type="note">
 It is important to note that changing your email will _unlink your existing social account_. After you make this change, you will only be able to use your new email to sign in.
