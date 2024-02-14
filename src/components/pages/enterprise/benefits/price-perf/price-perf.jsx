@@ -1,31 +1,9 @@
 import Image from 'next/image';
 
-import CardItemsList from '../../../../shared/card-items-list';
-import image from '../images/3.png';
-import appStoreIcon from '../images/app-store.svg';
-import bookIcon from '../images/book.svg';
-import fileIcon from '../images/file.svg';
+import ArrowIcon from 'components/pages/pricing/forecasting/images/arrow.inline.svg';
+import Link from 'components/shared/link/link';
 
-const items = [
-  {
-    icon: fileIcon,
-    title: 'Autoscaling',
-    description: 'Compute resources scale based on demand.',
-    url: '/docs/introduction/autoscaling',
-  },
-  {
-    icon: appStoreIcon,
-    title: 'Autosuspend',
-    description: 'Scale computes to zero when not in use.',
-    url: '/docs/introduction/auto-suspend',
-  },
-  {
-    icon: bookIcon,
-    title: 'Read Replicas',
-    description: 'Scale out on demand with read replicas.',
-    url: '/docs/introduction/read-replicas',
-  },
-];
+import image from '../images/replicas.svg';
 
 const PricePerf = () => (
   <div className="price-perf grid w-full grid-cols-10 items-center gap-x-10 xl:items-end xl:gap-x-6 lg:gap-y-7 md:gap-y-6">
@@ -34,16 +12,39 @@ const PricePerf = () => (
         Increase performance not costs
       </h3>
       <p className="mt-2.5 max-w-[590px] text-lg font-light leading-snug xl:text-base lg:mx-auto lg:max-w-[584px] lg:text-center md:mt-2">
-        The serverless model in Neon means customers never pay for compute that&apos;s not being
-        actively used.
+        The serverless model in Neon means customers never pay for compute that's not being actively
+        used.{' '}
+        <Link
+          className="border-b border-transparent text-green-45 no-underline transition-[border-color] duration-200 ease-in-out hover:border-green-45 sm:break-words"
+          to="/docs/introduction/auto-suspend"
+        >
+          Scale to zero
+        </Link>{' '}
+        or scale out with{' '}
+        <Link
+          className="border-b border-transparent text-green-45 no-underline transition-[border-color] duration-200 ease-in-out hover:border-green-45 sm:break-words"
+          to="/docs/introduction/read-replicas"
+        >
+          read replicas
+        </Link>{' '}
+        on demand.
       </p>
-      <CardItemsList
-        className="mt-8 max-w-[550px] gap-x-6 lg:col-span-full lg:max-w-none"
-        items={items}
-      />
+      <Link
+        className="group mt-6 inline-flex items-center rounded-[50px] bg-gray-new-10 py-2.5 pl-4 pr-2.5 leading-tight tracking-extra-tight transition-colors duration-200 hover:bg-gray-new-20 sm:flex-1 xs:w-full"
+        to="/docs/introduction/autoscaling"
+      >
+        <span>Read about autoscaling</span>
+        <ArrowIcon className="ml-6 text-gray-new-70 transition-colors duration-200 group-hover:text-white sm:ml-auto" />
+      </Link>
     </div>
     <div className="col-span-5 lg:col-span-full">
-      <Image className="rounded-2xl" src={image} quality={90} alt="Authorize Hasura Cloud" />
+      <Image
+        className="rounded-2xl"
+        src={image}
+        width={590}
+        height={387}
+        alt="Authorize Hasura Cloud"
+      />
     </div>
   </div>
 );

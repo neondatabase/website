@@ -6,29 +6,32 @@ import Layout from 'components/shared/layout';
 import SplitViewGrid from 'components/shared/split-view-grid';
 import Testimonial from 'components/shared/testimonial';
 import SEO_DATA from 'constants/seo-data';
-import checkIcon from 'icons/enterprise/check.svg';
+import auditIcon from 'icons/enterprise/audit.svg';
+import ipIcon from 'icons/enterprise/ip.svg';
+import s3Icon from 'icons/enterprise/s3.svg';
+import socIcon from 'icons/enterprise/soc-2.svg';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.enterprise);
 
 const items = [
   {
-    icon: checkIcon,
+    icon: socIcon,
     title: 'SOC 2 Compliant',
     description: 'Neon has achieved SOC 2 Compliance.',
   },
   {
-    icon: checkIcon,
+    icon: auditIcon,
     title: 'Audit Logging',
     description: 'All actions are logged and auditable for compliance and security purposes.',
   },
   {
-    icon: checkIcon,
+    icon: ipIcon,
     title: 'IP Allow Rules',
     description: 'Lock down access to databases by IP address.',
   },
   {
-    icon: checkIcon,
+    icon: s3Icon,
     title: 'Bring your Own S3',
     description:
       'Enterprise customers can control data sovereignty by bringing their own object storage.',

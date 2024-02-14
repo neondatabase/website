@@ -1,31 +1,9 @@
 import Image from 'next/image';
 
-import CardItemsList from '../../../../shared/card-items-list';
-import appStoreIcon from '../images/app-store.svg';
-import bookIcon from '../images/book.svg';
-import image from '../images/branching.png';
-import fileIcon from '../images/file.svg';
+import ArrowIcon from 'components/pages/pricing/forecasting/images/arrow.inline.svg';
+import Link from 'components/shared/link/link';
 
-const items = [
-  {
-    icon: fileIcon,
-    title: 'Development',
-    description: 'Keep everyone in sync with dev branches.',
-    url: '/docs/introduction/branching#development',
-  },
-  {
-    icon: appStoreIcon,
-    title: 'Testing',
-    description: 'Test changes on a clone of production.',
-    url: '/docs/introduction/branching#testing',
-  },
-  {
-    icon: bookIcon,
-    title: 'Recovery',
-    description: 'Instantly recover when things go wrong.',
-    url: '/docs/introduction/branching#data-recovery',
-  },
-];
+import image from '../images/branching.svg';
 
 const Workflow = () => (
   <div className="workflow grid w-full grid-cols-10 items-center gap-x-10 xl:gap-x-6 lg:gap-y-7 md:gap-y-6">
@@ -34,16 +12,38 @@ const Workflow = () => (
         Loved by your developers
       </h3>
       <p className="mt-2.5 max-w-[590px] text-lg font-light leading-snug xl:text-base lg:mx-auto lg:max-w-[584px] lg:text-center md:mt-2">
-        Developers use Neon&apos;s git-like Branching to bring the database into their workflow,
-        making development, testing, deployment less stressful, more automated.
+        Developers use Neon's git-like Branching to bring the database into their workflow, making{' '}
+        <Link
+          className="border-b border-transparent text-green-45 no-underline transition-[border-color] duration-200 ease-in-out hover:border-green-45 sm:break-words"
+          to="/docs/introduction/branching#development"
+        >
+          development
+        </Link>
+        ,{' '}
+        <Link
+          className="border-b border-transparent text-green-45 no-underline transition-[border-color] duration-200 ease-in-out hover:border-green-45 sm:break-words"
+          to="/docs/introduction/branching#testing"
+        >
+          testing
+        </Link>
+        , deployment less stressful, more automated.
       </p>
-      <CardItemsList
-        className="mt-8 max-w-[550px] gap-x-6 lg:col-span-full lg:max-w-none"
-        items={items}
-      />
+      <Link
+        className="group mt-6 inline-flex items-center rounded-[50px] bg-gray-new-10 py-2.5 pl-4 pr-2.5 leading-tight tracking-extra-tight transition-colors duration-200 hover:bg-gray-new-20 sm:flex-1 xs:w-full"
+        to="/docs/introduction/branching#data-recovery"
+      >
+        <span>Explore instant recovery</span>
+        <ArrowIcon className="ml-6 text-gray-new-70 transition-colors duration-200 group-hover:text-white sm:ml-auto" />
+      </Link>
     </div>
     <div className="col-span-5 lg:col-span-full">
-      <Image className="rounded-2xl" src={image} quality={90} alt="Authorize Hasura Cloud" />
+      <Image
+        className="rounded-2xl"
+        src={image}
+        width={590}
+        height={384}
+        alt="Authorize Hasura Cloud"
+      />
     </div>
   </div>
 );

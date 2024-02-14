@@ -1,31 +1,10 @@
 import Image from 'next/image';
 
-import CardItemsList from '../../../../shared/card-items-list';
-import appStoreIcon from '../images/app-store.svg';
-import bookIcon from '../images/book.svg';
-import fileIcon from '../images/file.svg';
-import image from '../images/fleets.gif';
+import ArrowIcon from 'components/pages/pricing/forecasting/images/arrow.inline.svg';
+import Link from 'components/shared/link/link';
+import LINKS from 'constants/links';
 
-const items = [
-  {
-    icon: fileIcon,
-    title: '50x faster',
-    description: 'Create, clone, restore actions 50x faster than RDS',
-    url: '#',
-  },
-  {
-    icon: bookIcon,
-    title: 'API/CLI',
-    description: 'Automate with the Neon API and CLI',
-    url: '/docs/reference/neon-cli',
-  },
-  {
-    icon: appStoreIcon,
-    title: 'Automated',
-    description: 'No manual config, backups, failovers, resizes, patches.',
-    url: 'https://neon-experimental.vercel.app/',
-  },
-];
+import image from '../images/fleets.svg';
 
 const Fleets = () => (
   <div className="fleets grid w-full grid-cols-10 items-center gap-x-10 xl:items-end xl:gap-x-6 lg:gap-y-7 md:gap-y-6">
@@ -34,16 +13,33 @@ const Fleets = () => (
         More databases, less work
       </h3>
       <p className="mt-2.5 max-w-[590px] text-lg font-light leading-snug xl:text-base lg:mx-auto lg:max-w-[584px] lg:text-center md:mt-2">
-        Use Neon as a single pane of glass for fleets of Postgres databases: Instant provisioning,
-        autoscaling, and scale to zero.
+        Use Neon as a single pane for managing fleets of Postgres databases, 50x faster than RDS.{' '}
+        <Link
+          className="border-b border-transparent text-green-45 no-underline transition-[border-color] duration-200 ease-in-out hover:border-green-45 sm:break-words"
+          to="https://neon-experimental.vercel.app/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Automate
+        </Link>{' '}
+        tasks eliminating manual configuration and backups.
       </p>
-      <CardItemsList
-        className="mt-8 max-w-[550px] gap-x-6 lg:col-span-full lg:max-w-none"
-        items={items}
-      />
+      <Link
+        className="group mt-6 inline-flex items-center rounded-[50px] bg-gray-new-10 py-2.5 pl-4 pr-2.5 leading-tight tracking-extra-tight transition-colors duration-200 hover:bg-gray-new-20 sm:flex-1 xs:w-full"
+        to={LINKS.cliReference}
+      >
+        <span>Learn more about the Neon API/CLI</span>
+        <ArrowIcon className="ml-6 text-gray-new-70 transition-colors duration-200 group-hover:text-white sm:ml-auto" />
+      </Link>
     </div>
     <div className="col-span-5 lg:col-span-full">
-      <Image className="rounded-2xl" src={image} quality={90} alt="Authorize Hasura Cloud" />
+      <Image
+        className="rounded-2xl"
+        width={590}
+        height={387}
+        src={image}
+        alt="Authorize Hasura Cloud"
+      />
     </div>
   </div>
 );
