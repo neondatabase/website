@@ -2,11 +2,16 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { PopupModal } from 'react-calendly';
 
 import Container from 'components/shared/container';
 import useHubspotForm from 'hooks/use-hubspot-form';
 
 import 'styles/hubspot-form.css';
+
+const calendlyURL = 'https://calendly.com/alexia-sm';
+const hubspotFormID = '1bf5e212-bb19-4358-9666-891021ce386c';
 
 const Testimonial = ({ className = null, ariaHidden = false }) => (
   <figure className={clsx('mt-16 max-w-[464px]', className)} aria-hidden={ariaHidden}>
@@ -31,11 +36,17 @@ Testimonial.propTypes = {
 };
 
 const Apply = () => {
-  useHubspotForm('hubspot-form');
+  const [isCalendlyModalOpen, setIsCalendlyModalOpen] = useState(false);
+
+  useHubspotForm('hubspot-form', {
+    onFormSubmitted: () => {
+      setIsCalendlyModalOpen(true);
+    },
+  });
 
   return (
     <section
-      id="partners-apply"
+      id="request-trial"
       className="apply-form safe-paddings pb-40 pt-[240px] xl:pb-[120px] xl:pt-40 lg:pb-24 lg:pt-32 md:pb-20 md:pt-[90px]"
     >
       <Container className="grid-gap-x grid grid-cols-12" size="medium">
@@ -54,14 +65,17 @@ const Apply = () => {
             <Testimonial className="lg:hidden" />
           </div>
           <div className="hubspot-form-wrapper col-span-5 xl:col-span-7 lg:col-span-full lg:mt-10 md:mt-6">
-            <div
-              className="hubspot-form not-prose"
-              data-form-id="1bf5e212-bb19-4358-9666-891021ce386c"
-            />
+            <div className="hubspot-form not-prose" data-form-id={hubspotFormID} />
           </div>
           <Testimonial className="col-span-full hidden lg:mt-10 lg:block md:mt-8" ariaHidden />
         </div>
       </Container>
+      <PopupModal
+        url={calendlyURL}
+        open={isCalendlyModalOpen}
+        rootElement={document.getElementById('request-trial')}
+        onModalClose={() => console.log('Calendly modal closed')}
+      />
     </section>
   );
 };
