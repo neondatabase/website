@@ -33,6 +33,16 @@ Prices for extra usage Compute, Storage, and Project usage are found on our [pri
 
 ## Storage
 
+Neon storage uses copy-on-write branching to keep storage size as small as possible. This can make it hard to visualize "how big is my database", since branches with a shared history don't immediately add to storage costs. Storage size is a combination of your total data plus the shared change history that is used to enable branching-related features like [point-in-time restore](/docs/introduction/point-in-time-restore), [query testing](/docs/guides/branching-test-queries), and [reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
+
+Storage costs are based on the size of your project and how long it is stored.
+
+![Storage calculation](/docs/introduction/storage_calc.jpg)
+
+For a detailed explanation about storage costs, see [Project storage](/docs/introduction/billing#project-storage).
+
+### Storage in detail
+
 _Storage_ is the total volume of data and history stored in your Neon project, measured in gibibytes (GiB). It includes the following:
 
 - **Current data size**
@@ -58,6 +68,14 @@ Project storage (GiB) * (seconds stored / 3600) * price per hour
 The **Storage** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 
 ## Compute
+
+With key features like [autoscaling](/docs/guides/autoscaling-guide), [autosuspend](/docs/guides/auto-suspend-guide), minimum and max [compute sizes](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) enabled, you can get a sense of how your compute usage might accrue in the following graph.
+
+![Compute metrics graph](/docs/introduction/compute-metrics2.png)
+
+You can see how compute size scales between your minimum and maximum CPU settings, increasing and decreasing compute usage: compute size never rises above your max level, and it never drops below your minimum setting. With autosuspend, no compute time at all accrues during inactive periods. For projects with inconsistent demand, this can save significant compute usage.
+
+### Compute usage in detail
 
 _Compute_ is the amount of compute resources used per hour. It is calculated by multiplying compute size by _Active time_ hours. Neon measures compute size at regular intervals and averages those values to calculate _Compute time_.
 
@@ -133,14 +151,20 @@ To estimate your own monthly _Compute time_ cost:
    .25 * 730 * 0.102 = $18.62
    ```
 
-## Additional metrics
+## Written data and Data transfer
+
+The amount of data that you write to storage or transfer out of Neon (for example, to serve data requests from an external application, stream data to another service, or set up an offline database backup) is not billed. 
+
+![Data write and transfer](/docs/introduction/neon_boundary.jpg)
+
+For more detail on these metrics, see [Written data](/docs/introduction/billing#written-data) and [Data transfer](/docs/introduction/billing#data-transfer).
 
 Neon also tracks the following the following usage metrics, which are not billed for: 
 
 - **Written data**: The volume of data written from compute to storage.
 - **Data transfer**: The volume of data transferred out of Neon.
 
-## Written data
+### Written data
 
 _Written data_ measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiB). Writing data from compute to storage ensures the durability and integrity of your data, as it reflects the data changes made by your computes.
 
@@ -152,7 +176,7 @@ Written data (GiB) * price per GiB
 
 **Written data** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 
-## Data transfer
+### Data transfer
 
 _Data transfer_ measures the total volume of data transferred out of Neon (known as "egress") during a given billing period, measured in gigibytes (GiB). It includes data sent from your Neon project to external destinations. If your data transfer is high, contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
 
