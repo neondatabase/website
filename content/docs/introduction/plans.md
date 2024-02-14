@@ -27,10 +27,10 @@ Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon 
 
 The Free Tier plan includes the following usage:
 
-- 1 Neon project
-- Up to 500 MiB of data storage
-- 750 _Active Compute Time_ hours/month for the primary branch compute, 20 _Active Compute Time_ hours/month for non-primary branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM.
-- 10 branches
+- **Projects**: 1 Neon project
+- **Branches**: 10 branches
+- **Storage**: Up to 500 MiB of data storage
+- **Compute**: 750 _Active Compute Time_ hours/month for the primary branch compute, 20 _Active Compute Time_ hours/month for non-primary branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM.
 
 In addition, Free Tier users have access to the following Neon features:
 
@@ -48,9 +48,11 @@ The Launch plan provides all of the resources, features, and support you need to
 
 The Launch plan includes the following usage:
 
-- 10 Neon projects
-- Up to 10 GiB of data storage
-- Up to 1200 compute hours/month for all computes in all projects
+- **Projects**: 10 Neon projects
+- **Branches**: 
+- **Databases**:
+- **Storage**: Up to 10 GiB of data storage
+- **Compute**: Up to 1200 compute hours/month for all computes in all projects
 
 Launch plan users can access extra compute hours beyond the 1200 compute hours/month included in the Launch plan. Extra compute hours are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour cost.
 
@@ -74,10 +76,14 @@ Launch plan users have access to **Standard** Neon support, which includes acces
 
 The Scale plan includes everything in the Launch plan plus the following:
 
-- Up to 50 Neon projects
-- Up to 50 GiB of data storage
-- Up to 3000 compute hours/month for all computes in all projects
-- Higher limits for the following Neon features:
+- **Projects**: Up to 50 Neon projects
+- **Branches**: 
+- **Databases**:
+- **Storage**: Up to 50 GiB of data storage
+- **Compute**: Up to 3000 compute hours/month for all computes in all projects
+
+Additionally, the Scale plan includes higher limits for the following Neon features:
+
   - [Compute sizes](#compute-size): Computes with up to 7 vCPUs and 28 GB RAM
   - [Point-in-time restore](#point-in-time-recovery): Recover data to a point in time up to **30 days** in the past
 

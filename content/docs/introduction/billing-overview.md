@@ -5,39 +5,62 @@ subtitle: The basics about how billing works in Neon
 updatedOn: '2024-01-23T17:45:24.326Z'
 ---
 
-Each of Neon's plans comes with allowances of **Compute**, **Storage**, **Projects**, and **Branches**, as outlined in the following table:
+## Usage allowances
+
+Each of Neon's plans includes **Project**, **Storage**, and **Compute** usage allowances as outlined in the following table:
 
 |            | Free Tier                                                    | Launch          | Scale             |
 |------------|--------------------------------------------------------------|-----------------|-------------------|
-| Compute    | 750 _Active Compute Time_ hours/month for the primary branch compute, 20 _Active Compute Time_ hours/month for branch computes. | 1200 compute hours/month | 3000 compute hours/month  |
-| Storage    | 512 MiB                                                      | 50 MiB          | 500 MiB           |
 | Projects   | 1                                                            | 10              | 50                |
-| Branches   | 10                                                           | 100 soft/500 max       | 100 soft/500 max |
+| Storage    | 512 MiB                                                      | 50 MiB          | 500 MiB           |
+| Compute    | 750 _Active Compute Time_ hours/month for the primary branch compute, 20 _Active Compute Time_ hours/month for branch computes. | 1200 compute hours/month | 3000 compute hours/month  |
 
-## Compute
+## Extra usage
 
-With key features like [autoscaling](/docs/guides/autoscaling-guide), [autosuspend](/docs/guides/auto-suspend-guide), minimum and max [compute sizes](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) enabled, you can get a sense of how your compute usage might accrue in the following graph.
+The [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans permit extra usage above and beyond the included allowances. The extra usage types that are available differ by plan, as outlined in the following table:  
 
-![Compute metrics graph](/docs/introduction/compute-metrics2.png)
+|                | Launch   | Scale    |
+|----------------|----------|----------|
+| Extra Projects |          | &check;  |
+| Extra Storage  |          | &check;  |
+| Extra Compute  | &check;  | &check;  |
 
-You can see how compute size scales between your minimum and maximum CPU settings, increasing and decreasing compute usage: compute size never rises above your max level, and it never drops below your minimum setting. With autosuspend, no compute time at all accrues during inactive periods. For projects with inconsistent demand, this can save significant compute usage.
+The [Launch](/docs/introduction/plans##launch) plan only supports extra compute usage. If you are on the Launch plan and require extra projects or storage, you must upgrade to the Scale plan, which provides higher project and storage allowances. Once on the [Scale](/docs/introduction/plans##scale) plan, you have access to all extra usage types (project, storage, and compute) should you require it.
 
-For a more detailed breakdown of compute cost metrics, see [compute time](/docs/introduction/billing#compute-time).
+## How does extra usage work?
 
-## Storage
+Taking advantage of extra usage requires no user action. Extra usage, if supported with your plan, is available by default. If you use more projects, storage, or compute than your allowance provides, the extra usage is automatically added to your monthly bill. The following sections explain extra usage in more detail.
 
-Neon storage uses copy-on-write branching to keep storage size as small as possible. This can make it hard to visualize "how big is my database", since branches with a shared history don't immediately add to storage costs. Storage size is a combination of your total data plus the shared change history that is used to enable branching-related features like [point-in-time restore](/docs/introduction/point-in-time-restore), [query testing](/docs/guides/branching-test-queries), and [reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
+### Projects
 
-Storage costs are based on the size of your project and how long it is stored.
+Extra project usage is available with the [Scale](/docs/introduction/plans##scale) plan. Extra projects are billed for in units of 10. For example, the Scale plan has an allowance of 50 projects, which is included in the plan's monthly fee. If you use more than 50 projects, you are automatically billed for extra projects in packages 10 projects for the price defined on our [pricing](https://neon.tech/pricing) page. For example, if you use 51 projects, you are billed for a package of 10 projects. if you use 61 projects, you are billed for two packages of 10 projects, and so on. 
 
-![Storage calculation](/docs/introduction/storage_calc.jpg)
+### Storage
 
-For a detailed explanation about storage costs, see [Project storage](/docs/introduction/billing#project-storage).
+Extra storage is available with the [Scale](/docs/introduction/plans##scale) plan. Extra storage is billed for in units of 10 GiB. For example, the Scale plan has an allowance of 50 GiB included in the plan's monthly fee. If you go over 50 GiB of storage, you are automatically billed for extra storage in increments of 10 GiB for price defined on our [pricing](https://neon.tech/pricing) page. For example, as soon as you go over your allowance, say by 1 GiB, you are billed for one 10 GiB unit of storage. If you go over by more than 10 GiB, you will be billed for two 10 GiB units of storage, and so on.
 
-## Data write and transfer
+### Compute
 
-The amount of data that you write to storage or transfer out of Neon (for example, to serve data requests from an external application, stream data to another service, or set up an offline database backup) is not billed. 
+Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for by compute hour. For example, the Launch plan has an allowance of 1200 compute hours included in the plan's base fee. If you use additional compute hours, you are billed for those compute hours according to the price defined on our [pricing](https://neon.tech/pricing) page.
 
-![Data write and transfer](/docs/introduction/neon_boundary.jpg)
+<Admonition type="info" title="What is a compute hour?">
+A compute hour in Neon is 1 hour of active compute time for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would take 4 hours of active compute time to use 1 compute hour. On the other hand, If you have a compute with 4 vCPU, it would only take 15 minutes of active compute time to use 1 compute hour.   
+</Admonition>
 
-For more detail on these metrics, see [Written data](/docs/introduction/billing#written-data) and [Data transfer](/docs/introduction/billing#data-transfer).
+## Monitoring billing and usage
+
+You can monitor billing usage for all projects in your Neon account from the **Billing** page in the Neon Console.
+
+1. Navigate to the Neon Console.
+1. Select your Profile.
+1. Select **Billing** from the menu.
+
+![Monitor billing and usage](/docs/introduction/monitor_billing_usage.png)
+
+### Monitor usage for a project
+
+You can monitor usage for a single project from the **Usage** widget on your project's **Dashboard** in the Neon Console.
+
+![Monitor usage widget](/docs/introduction/monitor_usage_widget.png)
+
+
