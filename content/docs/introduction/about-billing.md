@@ -19,19 +19,19 @@ Start with an overview of Neon's pricing plans to learn about usage allowances a
 
 ## Understand how billing works
 
-Learn more about usage allowances and how Neon bills for extra usage.
+Learn how billing works in Neon and the metrics that affect your usage allowances.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/billing-overview" description="Learn how billing works in Neon" icon="chart-bar">How billing works</a>
+<a href="/docs/introduction/billing-overview" description="Learn about billing, plan allowances, and extra usage" icon="chart-bar">How billing works</a>
 
-<a href="/docs/introduction/billing" description="Learn about the usage metrics that affect your plan allowances and extra usage costs" icon="trend-up">Usage metrics</a>
+<a href="/docs/introduction/billing" description="Take a deep dive into usage metrics affecting plan allowances and extra usage costs" icon="trend-up">Usage metrics</a>
 
 </DetailIconCards>
 
 ## Manage billing
 
-Find information about invoices, payment methods, and other actions around viewing and managing your bill. Plus a sample project showing how to select the right pricing plan and how works in a model scenario.
+Find information about invoices, payment methods, and other actions around viewing and managing your bill. Plus a sample project showing how to select the right pricing plan and how billing works in a model scenario.
 
 <DetailIconCards>
 
