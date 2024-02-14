@@ -99,6 +99,10 @@ The ephemeral endpoints are created according to your configured [default comput
 
 ### Restoring from history
 
+<Tabs labels={["Console", "CLI"]}>
+
+<TabItem>
+
 Use the **Restore** page to restore a branch to an earlier timestamp in its history. Choose your branch, pick your timestamp, and then click the **Restore branch** button.
 
 ![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
@@ -106,6 +110,49 @@ Use the **Restore** page to restore a branch to an earlier timestamp in its hist
 All databases on the selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see a backup branch was created with the state of the branch at the restore point in time.
 
 ![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
+
+</TabItem>
+
+<TabItem>
+Using the CLI, you can restore a branch to an earlier point in its history or another branch's history using the following command:
+
+``` bash
+neonctl branches restore <target id|name> <source id|name @ timestamp|lsn>
+```
+
+In the `target id|name` field, specify the ID or name of the branch you want to restore. In the `source id|name timestamp|lsn` field, specify the source branch you want to restore from (mandatory), along with the point-in-time identifier (optional), which can be either an ISO 8601-formatted timestamp or the LSN. If you omit the point-in-time identifier, the operation defaults to the latest data (HEAD) for the source branch. Concatenate the source identifier and time identifier with `@`: for example, `dev/jordan@2023-12-12T12:00:00Z`.
+
+#### Restore a branch to its own history
+
+If you want restore a branch to an earlier point in time, use the syntax `^self` in the `<source id|name>` field. For example:
+
+```bash
+neonctl branches restore dev/alex ^self@2024-01-01T00:00:00Z
+```
+
+This command will restore the target branch `dev/alex` to the start of the 2024 new year.
+
+#### Restore from parent
+
+If you want to restore a target branch from its parent, you can use the special syntax `^parent` in the `<source id|name>` field. For example:
+
+``` bash
+neonctl branches restore dev/alex ^parent
+```
+
+This command will restore the target branch `dev/alex` to the latest data (HEAD) of its parent branch.
+
+#### Restore to another branch's history
+
+Here is an example of a command that restores a target branch to an earlier point in time of another branch's history:
+
+```bash
+neonctl branches restore dev/alex dev/jordan@0/12345
+```
+
+This command will restore the target branch `dev/alex` from an earlier point in time for the source branch `dev/jordan`, using the LSN `0/12345` to specify the point in time. If you left out the point in time indentifer, the command would default to the latest data (HEAD) for the source branch `dev/jordan`.
+</TabItem>
+</Tabs>
 
 To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it.
 If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branch's relationship to the restore point backup.
