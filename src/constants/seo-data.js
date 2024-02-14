@@ -64,6 +64,7 @@ export default {
     description:
       'Enterprises use Neon to deliver a Postgres layer that is automated, instantly scalable and cost efficient.',
     pathname: LINKS.enterprise,
+    imagePath: '/images/social-previews/enterprise.jpg',
   },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
