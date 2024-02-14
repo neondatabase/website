@@ -1,5 +1,5 @@
 ---
-title: Sign up
+title: Sign up for a Neon account
 subtitle: Sign up for Neon in just a few seconds and start for free
 enableTableOfContents: true
 redirectFrom:
@@ -11,6 +11,8 @@ updatedOn: '2024-02-09T14:18:56.793Z'
 ---
 
 You can sign up for free and upgrade to a paid plan when you are ready to scale. For information about what's included with the Neon Free Tier, see [Neon Free Tier](/docs/introduction/free-tier). For information about Neon's paid plan options, see [Neon plans](/docs/introduction/plans).
+
+## Sign up
 
 Signing up for Neon is easy. Simply navigate to [https://console.neon.tech/signup](https://console.neon.tech/signup) and sign up with your email, Github, Google, or partner account.
 ![Neon console sign up](/docs/get-started-with-neon/neon_signup.png)
