@@ -73,7 +73,9 @@ const Apply = () => {
       <PopupModal
         url={calendlyURL}
         open={isCalendlyModalOpen}
-        rootElement={document.getElementById('request-trial')}
+        rootElement={
+          typeof window !== 'undefined' ? document.getElementById('request-trial') : null
+        }
         onModalClose={() => console.log('Calendly modal closed')}
       />
     </section>
