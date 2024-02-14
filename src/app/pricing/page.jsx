@@ -35,14 +35,14 @@ const sliderItems = [
     authorTitle: 'Principle Engineer of Proposales',
   },
   {
-    text: 'Branching is as useful as we hoped it would be. Our testers can now play with features earlier, since we can now stage features, requiring different database migrations, in parallel.',
-    authorName: 'Lynn Smeria',
-    authorTitle: 'Principle Engineer of Proposales',
+    text: 'Using Neon has meant our developers can continue to spend their time on things that meaningfully drive the business forward, instead of babysitting infrastructure.',
+    authorName: 'Adithya Reddy',
+    authorTitle: 'Developer at Branch',
   },
   {
-    text: 'Branching is as useful as we hoped it would be. Our testers can now play with features earlier, since we can now stage features, requiring different database migrations, in parallel.',
-    authorName: 'Lynn Smeria',
-    authorTitle: 'Principle Engineer of Proposales',
+    text: 'The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer.',
+    authorName: 'Lincoln Bergeson',
+    authorTitle: 'Infrastructure Engineer at Replit',
   },
 ];
 
