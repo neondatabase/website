@@ -124,7 +124,7 @@ In the `target id|name` field, specify the ID or name of the branch you want to 
 
 #### Restore a branch to its own history
 
-If you want restore a branch to an earlier point in time, use the syntax `^self` in the `<source id|name>` field. For example:
+If you want to restore a branch to an earlier point in time, use the syntax `^self` in the `<source id|name>` field. For example:
 
 ```bash
 neonctl branches restore dev/alex ^self@2024-01-01T00:00:00Z
@@ -150,7 +150,7 @@ Here is an example of a command that restores a target branch to an earlier poin
 neonctl branches restore dev/alex dev/jordan@0/12345
 ```
 
-This command will restore the target branch `dev/alex` from an earlier point in time for the source branch `dev/jordan`, using the LSN `0/12345` to specify the point in time. If you left out the point in time indentifer, the command would default to the latest data (HEAD) for the source branch `dev/jordan`.
+This command will restore the target branch `dev/alex` from an earlier point in time for the source branch `dev/jordan`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `dev/jordan`.
 </TabItem>
 </Tabs>
 
