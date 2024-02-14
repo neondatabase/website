@@ -37,7 +37,7 @@ You will be guided through a few steps, asking you to reauthenticate using your 
 
 ## Changing your email
 
-If you've signed up with a social or partner login and now want to change your email &#8212; for example, you previously signed up using a work-based social account and now want to use your personal email &#8212; you can make this change under **Account Settings** &#8594; **Profile**.
+If you've signed up with a social or partner login and now want to change your email &#8212; for example, you previously signed up using a work-based social account and now want to use your personal email &#8212; you can make this change under **Account Settings** &#8594; **Profile**. Or follow this direct link: [change email](https://console.neon.tech/app/settings/profile?modal=change_email)
 
 You will get a notification email to confirm this change. Once confirmed, you will be logged out of Neon. Log back in with your new email, and use this email going forward.
 
