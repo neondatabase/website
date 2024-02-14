@@ -7,11 +7,11 @@ import image from '../images/replicas.svg';
 
 const PricePerf = () => (
   <div className="price-perf grid w-full grid-cols-10 items-center gap-x-10 xl:items-end xl:gap-x-6 lg:gap-y-7 md:gap-y-6">
-    <div className="col-span-5 lg:col-span-full">
+    <div className="col-span-5 lg:col-span-full lg:text-center">
       <h3 className="text-4xl font-medium leading-tight tracking-tighter xl:text-[32px] lg:text-center lg:text-[28px] md:text-[22px]">
         Increase performance not costs
       </h3>
-      <p className="mt-2.5 max-w-[590px] text-lg font-light leading-snug xl:text-base lg:mx-auto lg:max-w-[584px] lg:text-center md:mt-2">
+      <p className="mt-2.5 max-w-[590px] text-lg font-light leading-snug xl:text-base lg:mx-auto lg:max-w-[584px] md:mt-2">
         The serverless model in Neon means customers never pay for compute that's not being actively
         used.{' '}
         <Link
@@ -37,7 +37,7 @@ const PricePerf = () => (
         <ArrowIcon className="ml-6 text-gray-new-70 transition-colors duration-200 group-hover:text-white sm:ml-auto" />
       </Link>
     </div>
-    <div className="col-span-5 lg:col-span-full">
+    <div className="col-span-5 lg:col-span-full lg:flex lg:justify-center">
       <Image
         className="rounded-2xl"
         src={image}
