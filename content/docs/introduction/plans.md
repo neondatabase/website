@@ -13,7 +13,9 @@ redirectFrom:
 updatedOn: '2024-01-23T17:45:24.329Z'
 ---
 
-Neon's plans are designed to meet different user requirements, ranging from personal projects to enterprise-level production workloads. We also offer a custom plan option for enterprises that require database fleets or SaaS vendors interested in bundling Neon. You can refer to our [pricing](https://neon.tech/pricing) page for an overview of our plans and pricing. This page provides additional information to help you understand our plans and find the one that best meets your needs.
+Neon's plans are designed to meet different user requirements, ranging from personal projects to enterprise-level production workloads. We also offer a custom plan option for enterprises that require database fleets or SaaS vendors interested in bundling Neon. You can refer to our [pricing](https://neon.tech/pricing) page for an overview of our plans and pricing. 
+
+This page provides additional information to help you understand our plans and find the one that best meets your needs.
 
 ## Pricing plans
 
@@ -42,7 +44,7 @@ Free Tier users have access to **Community** support, which includes the [Neon D
 
 ### Launch
 
-The Launch plan provides all of the the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses and applications.
+The Launch plan provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses and applications.
 
 The Launch plan includes the following usage:
 
