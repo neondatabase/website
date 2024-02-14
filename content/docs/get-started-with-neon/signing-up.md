@@ -1,6 +1,7 @@
 ---
 title: Sign up
 subtitle: Sign up for Neon in just a few seconds and start for free
+enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/console/
   - /docs/cloud/getting-started/
@@ -31,6 +32,12 @@ If you don't see an **Update Password** button, please sign out and sign back in
 </Admonition>
 
 You will be guided through a few steps, asking you to reauthenticate using your original social account, and then create your new password. After that, you are free to sign into your Neon account using either your social account or the email option.
+
+## Changing your email
+
+If you've signed up with a social or partner login and now want to change your email &#8212; for example, you previously signed up using a work-based social account and now want to use your personal email &#8212; you can make this change under **Account Settings** &#8594; **Profile**.
+
+However, it is important to note that _this will unlink your existing social account_. After you make this change, you will only be able to use your new email to sign in.
 
 ## Next steps
 
