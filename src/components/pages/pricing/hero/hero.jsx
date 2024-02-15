@@ -135,8 +135,8 @@ const Hero = () => {
           <span className="text-pricing-primary-1">Hello, Serverless Postgres.</span>
         </Heading>
         <p className="mx-auto mt-5 max-w-[620px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
-          Start free, launch effortlessly with predictable costs, and scale seamlessly when you hit
-          the big time.
+          Prototype for free, launch with predictable costs, and scale seamlessly when you hit the
+          big time.
         </p>
         <div className="relative mx-auto mt-16 xl:mt-12 lg:w-full lg:max-w-[704px] md:mt-9">
           <h2 className="sr-only">Neon pricing plans</h2>
