@@ -6,7 +6,7 @@ updatedOn: '2024-01-23T17:45:24.327Z'
 
 As described in [How billing works](/docs/introduction/billing-overview), each of Neon's plans includes Project, Storage, and Compute usage allowances. The [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans also permit extra usage above and beyond these allowances.
 
-This topic describes Project, Storage, and Compute usage metrics in detail so that you have the knowledge required to effectively manage your allowances and extra usage. 
+This topic describes Project, Storage, and Compute usage metrics in more detail. 
 
 ## Projects
 
@@ -161,44 +161,4 @@ To estimate what your compute hour usage might be per month:
 
    A calculation like this might be useful when trying to select the right plan or estimating the extra compute usage you might need.
 
-## Additional usage metrics
-
-These are additional usage 
-
-### Written data
-
-The amount of data that you write to storage or transfer out of Neon (for example, to serve data requests from an external application, stream data to another service, or set up an offline database backup) is not billed. 
-
-![Data write and transfer](/docs/introduction/neon_boundary.jpg)
-
-For more detail on these metrics, see [Written data](/docs/introduction/billing#written-data) and [Data transfer](/docs/introduction/billing#data-transfer).
-
-Neon also tracks the following the following usage metrics, which are not billed for: 
-
-- **Written data**: The volume of data written from compute to storage.
-- **Data transfer**: The volume of data transferred out of Neon.
-
-### Written data
-
-_Written data_ measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiB). Writing data from compute to storage ensures the durability and integrity of your data, as it reflects the data changes made by your computes.
-
-The cost calculation for _Written data_ is as follows:
-
-```text
-Written data (GiB) * price per GiB
-```
-
-**Written data** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
-
-### Data transfer
-
-_Data transfer_ measures the total volume of data transferred out of Neon (known as "egress") during a given billing period, measured in gigibytes (GiB). It includes data sent from your Neon project to external destinations. If your data transfer is high, contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
-
-The cost calculation for _Data transfer_ is as follows:
-
-```text
-Data transfer (GiB) * price per GiB
-```
-
-**Data transfer** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
-
+<NeedHelp/>   
