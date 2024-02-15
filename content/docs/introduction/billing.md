@@ -108,7 +108,7 @@ Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and
 
 A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an `Idle` state.
 
-Factors that affect _ active compute time_ include:
+Factors that affect _active compute time_ include:
 
 - The number of active computes
 - The size of each compute
