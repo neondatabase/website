@@ -54,7 +54,7 @@ If you run into this error, please see the following documentation for an explan
 
     Replace `[endpoint_id]` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
-- If using connection parameters to connection, as shown above try [A. Pass the endpoint ID as an option](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). For example:
+- If using database connection parameters, as shown above, try [Workaround D. Specify the endpoint ID in the password field](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). For example:
 
     ```text
     DB_PASSWORD=endpoint=<endpoint_id>$<password>
