@@ -1,5 +1,6 @@
 ---
 title: Manage billing
+subtitle: Invoices, payment methods, changing your plan, and other actions around managing your bill
 enableTableOfContents: true
 updatedOn: '2024-01-23T17:45:24.328Z'
 ---
@@ -35,7 +36,7 @@ If you are unable to update your payment method, please [open a support ticket](
 
 ### Missed payments
 
-If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in Neon’s [Terms of Service](https://neon.tech/terms-of-service).
+If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in [Neon’s Terms of Service](https://neon.tech/terms-of-service).
 
 ## Update your billing email
 
@@ -72,15 +73,15 @@ To change your plan:
 1. Select **Billing** from the menu.
 1. Select **Change plan**.
 
-Changing your plan to one with lower usage limits may affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
+Changing your plan to one with lower usage limits may affect the performance of your applications. To compare plan allowances, see [Neon plans](/docs/introduction/plans#neon-plans).
 
-If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan limits. 
+If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances. 
 
-To downgrade from an Enterprise plan, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
+To downgrade from an Enterprise plan, please contact [Sales](https://neon.tech/contact-sales). Cancellation of an Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
 
 ## Purchase Neon on AWS Marketplace
 
-As an alternative Neon billing, you can purchase Neon on the [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-o32z34khv4272?sr=0-1&applicationId=AWSMPContessa&utm_campaign=Developer%20Days&utm_source=hs_email&utm_medium=email&_hsenc=p2ANqtz-8U-1v7Sm5HHexFnV3Mkkwwsq5hnq9ThQnbQOqhuB11RT9cNwtAoalhaq98WMgL70rwfFhq) or through the [AWS Private Offers](https://docs.aws.amazon.com/marketplace/latest/userguide/private-offers-overview.html) program.
+As an alternative to Neon billing, you can purchase Neon on the [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-o32z34khv4272?sr=0-1&applicationId=AWSMPContessa&utm_campaign=Developer%20Days&utm_source=hs_email&utm_medium=email&_hsenc=p2ANqtz-8U-1v7Sm5HHexFnV3Mkkwwsq5hnq9ThQnbQOqhuB11RT9cNwtAoalhaq98WMgL70rwfFhq) or through the [AWS Private Offers](https://docs.aws.amazon.com/marketplace/latest/userguide/private-offers-overview.html) program.
 
 Purchasing Neon from the AWS Marketplace gives you consolidated billing, seamless provisioning, and the ability to use AWS credits on Neon.
 

@@ -4,25 +4,9 @@ enableTableOfContents: true
 updatedOn: '2024-01-23T17:45:24.327Z'
 ---
 
-As described in [How billing works](/docs/introduction/billing-overview), each of Neon's plans includes Project, Storage, and Compute usage allowances. The [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans also permit extra usage above and beyond these allowances.
+As described in [How billing works](/docs/introduction/billing-overview), each of Neon's plans includes **Storage**, **Compute**, and **Project** usage allowances. The [Launch](/docs/introduction/plans##launch) permits extra compute usage. The [Scale](/docs/introduction/plans##scale) plans permits extra compute, storage, and project usage.
 
-This topic describes Project, Storage, and Compute usage metrics in more detail. 
-
-## Projects
-
-In Neon, everything starts with a project. A project is a container for branches, databases, roles, and other project resources and settings. A project contains a compute with a Postgres server and storage for the project data. We typically recommend creating a project for each application or each client. In addition to organizing objects, projects also allow you to track storage and compute resources for each separately, for example.
-
-The following table outlines project allowances for each Neon plan.
-
-|            | Projects |
-|------------|----------|
-| Free Tier  | 1        |
-| Launch     | 10       |
-| Scale      | 50       |
-| Enterprise | Unlimited |
-
-- When you reach your limit on the Free Tier or Launch plan, you will not be permitted to create additional projects. You must upgrade your plan to increase your project allowance.
-- Extra projects are available with the Scale plan in increments of 10. If you use more than 50 projects, you are automatically billed for an extra package of 10 projects for the price stated on our [pricing](https://neon.tech/pricing) page. For example, if you use 51 projects, you are billed for a package of 10 projects. If you use 61 projects, you are billed for two packages of 10 projects, and so on. 
+This topic describes Storage, Compute, and Project usage metrics in more detail so that you can better manage your plan allowances and extra usage. 
 
 ## Storage
 
@@ -160,5 +144,22 @@ To estimate what your compute hour usage might be per month:
    ```
 
    A calculation like this might be useful when trying to select the right plan or estimating the extra compute usage you might need.
+
+## Projects
+
+In Neon, everything starts with a project. A project is a container for your branches, databases, roles, and other resources and settings. A project also defines the region your data and resources reside in. We typically recommend creating a project for each application or each client. In addition to organizing objects, projects are a way to track storage and compute resource usage by application or client.
+
+The following table outlines project allowances for each Neon plan.
+
+|            | Projects |
+|------------|----------|
+| Free Tier  | 1        |
+| Launch     | 10       |
+| Scale      | 50       |
+| Enterprise | Unlimited |
+
+- When you reach your limit on the Free Tier or Launch plan, you cannot create additional projects. Instead, you can upgrade to the Launch or Scale plan, which offer allowances of 10 and 50 projects, respectively.
+- Extra projects are available with the Scale plan in increments of 10. If you use more than 50 projects, you are automatically billed for an extra package of 10 projects for the price stated on our [pricing](https://neon.tech/pricing) page. For example, if you use 51 projects, you are billed for a package of 10 projects. If you use 61 projects, you are billed for two packages of 10 projects, and so on. 
+
 
 <NeedHelp/>   
