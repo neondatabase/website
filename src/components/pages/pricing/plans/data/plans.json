@@ -72,20 +72,19 @@
       "enterprise": "Larger sizes"
     },
     {
-      "rows": "3",
+      "rows": "2",
       "feature": {
-        "title": "Compute",
-        "subtitle": "One compute unit (CU) is 1 vCPU, 4GB RAM"
+        "title": "Compute"
       },
-      "free": "183 CU-hours per month <span>+ 20 for branches</span>",
-      "free_tooltip": "183 CU-hours gives you <br/>the ability to run a 0.25 CU <br/>instance 24/7 each month.",
-      "launch": "300 CU-hours <span>per month</span>",
-      "scale": "750 CU-hours <span>per month</span>",
+      "free": "187 Compute hours <span>per month + 5 for branches</span>",
+      "free_tooltip": "187 Compute hours gives you <br/>the ability to run a 0.25 CU <br/>instance 24/7 each month.",
+      "launch": "300 Compute hours <span>per month</span>",
+      "scale": "750 Compute hours <span>per month</span>",
       "enterprise": "Custom"
     },
     {
       "rows": "2",
-      "feature": "Overage Rates"
+      "feature": "Extra Usage"
     },
     {
       "rows": "2",
@@ -113,8 +112,8 @@
         "title": "Compute"
       },
       "free": false,
-      "launch": "$0.16 <span>per CU-hour</span>",
-      "scale": "$0.16 <span>per CU-hour</span>",
+      "launch": "$0.16 <span>per Compute hour</span>",
+      "scale": "$0.16 <span>per Compute hour</span>",
       "enterprise": "Custom"
     },
     {
@@ -133,7 +132,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Read Replicas"
+        "title": "Instant Read Replicas"
       },
       "free": false,
       "launch": true,
@@ -153,8 +152,7 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Autosuspend",
-        "subtitle": "Scale to zero on idle"
+        "title": "Autosuspend"
       },
       "free": "Fixed <span>5 minutes</span>",
       "launch": "Configurable <span>5 min+ or disabled</span>",
@@ -231,7 +229,7 @@
       "feature": {
         "title": "Custom Extensions"
       },
-      "free": true,
+      "free": false,
       "launch": true,
       "scale": true,
       "enterprise": true
