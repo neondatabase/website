@@ -137,10 +137,10 @@ To estimate what your compute hour usage might be per month:
    compute hours = compute size * active time
    ```
 
-   For example, this is a calculation for a 4 vCPU compute that is active for all hours in a month, estimated to be approximately 730 hours:
+   For example, this is a calculation for a 2 vCPU compute that is active for all hours in a month (approx. 730 hours):
 
    ```text
-   4 * 730 = 2920 compute hours
+   2 * 730 = 1460 compute hours
    ```
 
    A calculation like this might be useful when trying to select the right plan or estimating the extra compute usage you might need.
