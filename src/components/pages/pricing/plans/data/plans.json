@@ -34,6 +34,27 @@
     {
       "rows": "2",
       "feature": {
+        "title": "Storage"
+      },
+      "free": "0.5 GB",
+      "launch": "10 GB",
+      "scale": "50 GB",
+      "enterprise": "Larger sizes"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Compute"
+      },
+      "free": "187 Compute hours <span>per month + 5 for branches</span>",
+      "free_tooltip": "187 Compute hours gives you <br/>the ability to run a 0.25 CU <br/>instance 24/7 each month.",
+      "launch": "300 Compute hours <span>per month</span>",
+      "scale": "750 Compute hours <span>per month</span>",
+      "enterprise": "Custom"
+    },
+    {
+      "rows": "2",
+      "feature": {
         "title": "Projects"
       },
       "free": "1",
@@ -63,38 +84,7 @@
     },
     {
       "rows": "2",
-      "feature": {
-        "title": "Storage"
-      },
-      "free": "0.5 GB",
-      "launch": "10 GB",
-      "scale": "50 GB",
-      "enterprise": "Larger sizes"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Compute"
-      },
-      "free": "187 Compute hours <span>per month + 5 for branches</span>",
-      "free_tooltip": "187 Compute hours gives you <br/>the ability to run a 0.25 CU <br/>instance 24/7 each month.",
-      "launch": "300 Compute hours <span>per month</span>",
-      "scale": "750 Compute hours <span>per month</span>",
-      "enterprise": "Custom"
-    },
-    {
-      "rows": "2",
       "feature": "Extra Usage"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Projects"
-      },
-      "free": false,
-      "launch": false,
-      "scale": "$50 <span>per 10 projects</span>",
-      "enterprise": "Custom"
     },
     {
       "rows": "2",
@@ -114,6 +104,16 @@
       "free": false,
       "launch": "$0.16 <span>per Compute hour</span>",
       "scale": "$0.16 <span>per Compute hour</span>",
+      "enterprise": "Custom"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Projects"
+      },
+      "free": false,
+      "launch": false,
+      "scale": "$50 <span>per 10 projects</span>",
       "enterprise": "Custom"
     },
     {
@@ -155,8 +155,8 @@
         "title": "Autosuspend"
       },
       "free": "Fixed <span>5 minutes</span>",
-      "launch": "Configurable <span>5 min+ or disabled</span>",
-      "scale": "Configurable <span>1 min+ or disabled</span>",
+      "launch": "Configurable <span>5 min+ or never</span>",
+      "scale": "Configurable <span>1 min+ or never</span>",
       "enterprise": "Fully Configurable"
     },
     {
