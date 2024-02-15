@@ -23,9 +23,7 @@ Neon offers four pricing plans: [Free Tier](#free-tier), [Launch](#launch), [Sca
 
 ### Free Tier
 
-Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon and Postgres.
-
-The Free Tier plan includes the following usage:
+Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon. It includes the following usage:
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
@@ -33,24 +31,20 @@ The Free Tier plan includes the following usage:
 | **Branches**                            | 10 branches                                                   |
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | 0.5 GiB                                                       |
-| **Compute**                             | 750 _Active Compute Time_ hours/month for the primary branch compute, 20 _Active Compute Time_ hours/month for non-primary branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM |
-|-----------------------------------------|---------------------------------------------------------------|
+| **Compute**                             | 750 _active compute time_ hours/month for the primary branch compute, 20 _active compute time_ hours/month for non-primary branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM |
 
 In addition, Free Tier users have access to the following Neon features:
 
-- [Autosuspend](#autosuspend): Compute scales to zero after 5 minutes of inactivity
-- [Region availabilty](#regions): The Free Tier is available in all supported regions
-- [Project sharing](#project-sharing): Share your project with any Neon user account
-- [Logical replication](#logical-replication): Replicate your data from Neon to other data services and platforms
-- [Point-in-time restore](#point-in-time-recovery): Restore data to a point in time up to **24 hours** in the past
-
-Free Tier users have access to **Community** support, which includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/). For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
+- [Autosuspend](#autosuspend): Compute scales to zero after 5 minutes of inactivity.
+- [Region availabilty](#region-availability): The Free Tier is available in all supported regions.
+- [Project sharing](#project-sharing): Share your project with any Neon user account.
+- [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, Postgres extensions, and custom extensions.
+- [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **24 hours** in the past.
+- [Community support](/docs/introduction/support): Free Tier plan users have access to **Community** support, which includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/).
 
 ### Launch
 
-The Launch plan provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses and applications.
-
-The Launch plan includes the following usage:
+The Launch plan provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses and applications. It includes the following usage:
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
@@ -59,30 +53,20 @@ The Launch plan includes the following usage:
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | Up to 10 GiB of data storage                                  |
 | **Compute**                             | Up to 1200 compute hours/month for all computes in all projects |
-|-----------------------------------------|---------------------------------------------------------------|
-
 
 Launch plan users can access extra compute hours beyond the 1200 compute hours/month included in the Launch plan. Extra compute hours are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour cost.
 
 In addition, Launch plan users have access to the following Neon features:
 
-- [Compute sizes](#compute-size): Computes with up to 4 vCPUs and 16 GB RAM.
-- [Autoscaling](#autoscaling): Automatically scale your compute size on demand
-- [Branching](#branching): There is a soft limit 100 branches that can be raised to 500 for no extra fee. If you require more than 100 branches, please contact [Neon Support](/docs/introduction/support).
-- [Point-in-time restore](#point-in-time-recovery): Recover data to a point in time up to **7 days** in the past
-- [IP Allow](#ip-allow): Restrict access to specific IP addresses or ranges
-- [SOC 2 Report](#soc-2-report): Access to Neon's SOC 2 Report
-- [Autosuspend](#autosuspend): Configure how often a compute scales to zero
-- [Regions](#regions): This plan is available in all Neon regions.
-- [Project sharing](#project-sharing): Share projects with any Neon user account
-- [Read replicas](#read-replicas): Scale applications with read replicas
-- [Logical replication](#logical-replication): Replicate data from Neon with Postgres logical replication support
-
-Launch plan users have access to **Standard** Neon support, which includes access to the Neon Support team via support tickets. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
+- [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM
+- [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, Postgres extensions, and custom extensions
+- [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **7 days** in the past
+- [Extra usage](/docs/introduction/billing-overview#extra-usage): Scale plan users can access extra compute usage. Extra compute usage is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute cost.
+- [Expert support](/docs/introduction/support): Launch plan users have access to **Expert** Neon support, which includes access to the Neon Support team via support tickets.
 
 ### Scale
 
-The Scale plan includes the following usage:
+The Scale plan provides full platform and support access, and is designed for scaling production workloads. It includes the following usage:
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
@@ -91,17 +75,14 @@ The Scale plan includes the following usage:
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | Up to 50 GiB of data storage                                  |
 | **Compute**                             | Up to 3000 compute hours/month for all computes in all projects |
-|-----------------------------------------|---------------------------------------------------------------|
 
+In addition, Sacle plan users have access to the following Neon features:
 
-Additionally, the Scale plan includes higher limits for the following Neon features:
-
-  - [Compute sizes](#compute-size): Computes with up to 7 vCPUs and 28 GB RAM
-  - [Point-in-time restore](#point-in-time-recovery): Recover data to a point in time up to **30 days** in the past
-
-Scale plan users can access extra compute hours beyond the 3000 compute hours/month and additional storage. Extra compute hours and storage are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute cost and the cost for additional storage.
-
-Scale plan users have access to **Priority** Neon support, which includes priority access to the Neon Support team via support tickets. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
+- [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM.
+- [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, Postgres extensions, and custom extensions.
+- [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **30 days** in the past.
+- [Extra usage](/docs/introduction/billing-overview#extra-usage): Scale plan users can access extra compute and storage usage, which billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute and extra storage costs.
+- [Expert support](/docs/introduction/support): Scale plan users have access to **Priority** Neon support, which includes _priority_ access to the Neon Support team via support tickets.
 
 ### Enterprise
 
@@ -116,15 +97,14 @@ Enterprise plan usage is entirely customizable and can support large data sizes.
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | Large data sizes                                  |
 | **Compute**                             | Custom |
-|-----------------------------------------|---------------------------------------------------------------|
 
 Additionally, the _Enterprise_ plan can be tailored to your specific requirements with:
 
 - Custom pricing with discounts
-- Higher resource limits for projects, branches, storage, and compute
+- Higher resource allowances for projects, branches, storage, and compute
 - Customer-owned S3
 
-Enterprise plan users have access to **Enterprise** Neon support, which includes everything offered with the **Priority** plan plus retail customer support, Customer Success Team support, and SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
+Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus retail customer support, Customer Success Team support, and SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
 
 If you are interested in exploring an _Enterprise_ plan with Neon, please reach out to our [Sales team](https://neon.tech/contact-sales).
 
