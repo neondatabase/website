@@ -258,21 +258,6 @@ Note that options **cannot** be supplied for individual queries within a transac
 
 For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
 
-### Experimental connection caching
-
-Connection caching provides server-side connection pooling so that a new connection does not have to be set up for each query over HTTP. You can enable it by setting `fetchConnectionCache` to `true` using the [neonConfig](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration) object.
-
-```javascript
-import { neonConfig } from '@neondatabase/serverless';
-
-// Enable connection cache (pool) on the server for HTTP fetch queries
-neonConfig.fetchConnectionCache = true
-```
-
-<Admonition type="note">
-This experimental option is currently only recommended for use with a non-pooled Neon connection string. For information about pooled and non-pooled Neon connections, see [Connection pooling](/docs/connect/connection-pooling).
-</Admonition>
-
 ### Advanced configuration options
 
 For advanced configuration options, see [neonConfig configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration), in the Neon serverless driver GitHub readme.
