@@ -16,7 +16,7 @@ In this guide, we'll show you how you can leverage Neon read replicas to efficie
 ## Prerequisites
 
 - An application that uses Prisma with a Neon database.
-- A [Neon Pro Plan](/docs/introduction/pro-plan) account. Read replicas are a Neon Pro Plan feature.
+- A paid plan account. Read replicas are a paid plan feature.
 
 ## Create a read replica
 

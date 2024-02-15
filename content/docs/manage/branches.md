@@ -22,15 +22,15 @@ When working with branches, it is important to remove old and unused branches. B
 
 Each Neon project has a primary branch. In the Neon Console, your primary branch is identified by a `PRIMARY` tag. You can designate any branch as the primary branch for your project. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch, which is typically the branch used in production.
 
-- For [Neon Free Tier](/docs/introduction/free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
-- For [Neon Pro Plan](/docs/introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
+- For Neon Free Tier users, the compute endpoint associated with the primary branch is always available.
+- For paying users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
 
 ## Non-primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
-- For [Neon Free Tier](/docs/introduction/free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier  _compute active time_ limit of 100 hours per month.
-- For [Neon Pro Plan](/docs/introduction/pro-plan) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
+- For Neon Free Tier users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier  _compute active time_ limit of 100 hours per month.
+- For paying users users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Create a branch
 

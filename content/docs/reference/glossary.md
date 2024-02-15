@@ -33,7 +33,7 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 ## Autosuspend compute
 
-A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Neon Pro Plan users can configure the _Autosuspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable autosuspend completely to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Paying users can configure the _Autosuspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable autosuspend completely to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
 ## autoscaler-agent
 
@@ -179,7 +179,7 @@ See [Neon Free Tier](#neon-free-tier).
 
 ## IP allowlist
 
-An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a [Neon Pro Plan](/docs/introduction/pro-plan) feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [primary branch](#primary-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
+An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a Scale plan feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [primary branch](#primary-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
 
 ## Kubernetes
 
@@ -241,10 +241,6 @@ A browser-based graphical interface for managing Neon projects and resources.
 
 A Neon service tier for which there are no usage charges. For information about the Neon Free Tier and associated limits, see [Neon Free Tier](/docs/introduction/free-tier).
 
-## Neon Pro Plan
-
-A usage-based paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
-
 ## Neon user
 
 The user account that registers and authenticates with Neon using an email, GitHub, Google, or partner account. After authenticating, a Neon user account can create and manage projects, branches, users, databases, and other project resources.
@@ -281,7 +277,7 @@ A custom volume-based paid plan offered by Neon that includes support for resale
 
 ## Point-in-time restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. By default, Neon retains a 7-day history of changes for all branches in a project. The supported range is 0 to 7 days for [Neon Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Neon Pro Plan](/docs/introduction/pro-plan) users. For more information about this feature, see [Branching — Point-in-time restore](https://neon.tech/docs/guides/branching-pitr).
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. By default, Neon retains a history of changes for all branches in a project. The supported limits are 24 hours days for [Neon Free Tier](/docs/introduction/free-tier) users, 7 days for Launch plan users, and 30 days for Scale plan users. For more information about this feature, see [Branching — Point-in-time restore](https://neon.tech/docs/guides/branching-pitr).
 
 ## PostgreSQL
 
@@ -296,10 +292,6 @@ Older projects may have a `web-access` system role, used by the [SQL Editor](#sq
 ## Primary branch
 
 Each Neon project is created with a root branch called `main`, which is designated as your project's primary branch by default. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
-
-### Pro Plan
-
-See [Neon Pro Plan](#neon-pro-plan).
 
 ## Project
 

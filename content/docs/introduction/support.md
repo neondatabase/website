@@ -4,26 +4,25 @@ enableTableOfContents: true
 updatedOn: '2024-01-11T14:49:37.566Z'
 ---
 
-Neon's Community, Standard, Priority, and Enterprise support plans are outlined below.
+Neon's Community, Expert, Priority, and Enterprise support plans are outlined below.
 
-| Support channels                         | Community | Standard | Priority | Enterprise |
+| Support channels                         | Community | Expert   | Priority | Enterprise |
 | :--------------------------------------- | :-------: | :------: | :------: | :--------: |
 | Neon Discord Server                      |  &check;  | &check;  | &check;  | &check;    |
 | Neon Discourse Community                 |  &check;  | &check;  | &check;  | &check;    |
 | Support tickets                          |     -     | &check;  | &check;  | &check;    |
 | Prioritized supported tickets            |     -     |    -     | &check;  | &check;    |
 | Video chat                               |     -     |    -     | &check;  | &check;    |
-| Resale customer support                  |     -     |    -     |          | &check;    |
-| Dedicated Customer Success Team support  |     -     |    -     |          | &check;    |
-| Support SLAs                             |     -     |    -     |          | &check;    |
+| Dedicated Customer Success Team          |     -     |    -     |          | &check;    |
+| SLAs                                     |     -     |    -     |          | &check;    |
 
 ## Community support
 
 Community support includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged in both communities. 
 
-## Standard support
+## Expert support
 
-Standard support includes access to the Neon Support team via support tickets. 
+Expert support includes access to the Neon Support team via support tickets. 
 
 You can open support tickets in the Neon Console. Look for the **Support** link in the sidebar. It opens the **Create Support Ticket** modal, where you can describe your issue. To access the modal directly, [click here](https://console.neon.tech/app/projects?modal=support).
 
