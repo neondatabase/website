@@ -37,7 +37,7 @@ The following table outlines storage allowances for each Neon plan:
 
 Extra storage is available with the [Scale](/docs/introduction/plans##scale) plan. Extra storage is billed for in units of 10 GiB. For example, the Scale plan has an allowance of 50 GiB included in the plan's monthly fee. If you go over 50 GiB of storage, you are automatically billed for extra storage in increments of 10 GiB for the price stated on our [pricing](https://neon.tech/pricing) page. For example, as soon as you go over your allowance, say by 1 GiB, you are billed for one 10 GiB unit of storage. If you go over by more than 10 GiB, you will be billed for two 10 GiB units of storage, and so on.
 
-### What is meant by "storage" in Neon? 
+### What is "storage" in Neon? 
 
 Neon storage uses copy-on-write branching to keep storage size as small as possible. This can make it hard to visualize "how big is my database", since branches with a shared history don't immediately add to storage. Storage size is a combination of your total data plus the shared change history that is used to enable branching-related features like [point-in-time restore](/docs/introduction/point-in-time-restore), [query testing](/docs/guides/branching-test-queries), and [reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
 
@@ -45,7 +45,7 @@ Neon storage uses copy-on-write branching to keep storage size as small as possi
 
 Storage usage is based on the amount of data stored in your project (or projects) and how long it is stored.
 
-![Storage calculation](/docs/introduction/storage_calc.jpg)
+![Storage calculation](/docs/introduction/storage_calc.png)
 
 ### Storage details
 
