@@ -50,11 +50,6 @@
     @apply mask-styles footer-icon-size;
   }
 
-  .discourse-icon {
-    -webkit-mask-image: url('/images/footer/discourse.svg');
-    @apply mask-styles footer-icon-size;
-  }
-
   .linkedin-icon {
     -webkit-mask-image: url('/images/footer/linkedin.svg');
     @apply mask-styles footer-icon-size;
