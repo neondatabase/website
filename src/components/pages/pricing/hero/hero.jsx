@@ -22,8 +22,9 @@ const items = [
     price: '$0 <span>/month</span>',
     description: 'Generous free tier for hobby projects, prototypes, and learning Neon	',
     features: [
+      { title: '0.5 GiB storage' },
+      { title: 'Shared compute' },
       { title: '1 project w/10 branches' },
-      { title: 'Shared Compute and 0.5GB storage' },
       { title: 'Project Sharing, Logical Replication' },
       { title: 'Community support' },
     ],
@@ -39,12 +40,9 @@ const items = [
     price: '<header>From</header> $19 <span>/month</span>',
     description: 'All the resources, features and support you need to launch.',
     features: [
-      { title: '10 projects w/500 branches each' },
-      {
-        title: 'Preloaded w/$63 of usage',
-        tooltip: '300 Compute hours <br/> and 10GB storage',
-      },
+      { title: '10 GiB storage included' },
       { title: 'Autoscaling up to 4 vCPU, 16 GB' },
+      { title: '10 projects w/500 branches each' },
       { title: 'Unlocks Read Replicas' },
       { title: 'Standard support' },
     ],
@@ -60,12 +58,9 @@ const items = [
     price: '<header>From</header> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
-      { title: '50 projects w/500 branches each' },
-      {
-        title: 'Preloaded with $195 of usage',
-        tooltip: '750 Compute hours <br/> and 50GB storage',
-      },
+      { title: '50 GiB storage included' },
       { title: 'Autoscaling up to 7 vCPU, 28 GB' },
+      { title: '50 projects w/500 branches each' },
       { title: 'Unlocks key security features' },
       { title: 'Priority support' },
     ],

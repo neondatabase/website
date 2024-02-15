@@ -36,22 +36,23 @@
       "feature": {
         "title": "Storage"
       },
-      "free": "0.5 GB",
-      "launch": "10 GB",
-      "scale": "50 GB",
+      "free": "0.5 GiB",
+      "launch": "10 GiB",
+      "scale": "50 GiB",
       "enterprise": "Larger sizes"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Compute"
+        "title": "Compute",
+        "subtitle": "Based on 0.25 vCPU, 1GB RAM"
       },
-      "free": "187 Compute hours <span>per month + 5 for branches</span>",
-      "free_tooltip": "187 Compute hours gives you <br/>the ability to run a 0.25 CU <br/>instance 24/7 each month.",
-      "launch": "300 Compute hours <span>per month</span>",
-      "scale": "750 Compute hours <span>per month</span>",
+      "free": "20 hours <span>+ always-available primary</span>",
+      "launch": "1,200 hours <span>per month</span>",
+      "scale": "3,000 hours <span>per month</span>",
       "enterprise": "Custom"
     },
+    
     {
       "rows": "2",
       "feature": {
@@ -93,17 +94,18 @@
       },
       "free": false,
       "launch": false,
-      "scale": "$15 <span>per 10 GB</span>",
+      "scale": "$15 <span>per 10 GiB</span>",
       "enterprise": "Custom"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Compute"
+        "title": "Compute",
+        "subtitle": "Based on 0.25 vCPU, 1GB RAM"
       },
       "free": false,
-      "launch": "$0.16 <span>per Compute hour</span>",
-      "scale": "$0.16 <span>per Compute hour</span>",
+      "launch": "$0.04 <span>per hour</span>",
+      "scale": "$0.04 <span>per hour</span>",
       "enterprise": "Custom"
     },
     {
