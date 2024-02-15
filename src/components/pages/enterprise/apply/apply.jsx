@@ -4,15 +4,17 @@ import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { InlineWidget } from 'react-calendly';
 
 import Container from 'components/shared/container';
 import useHubspotForm from 'hooks/use-hubspot-form';
-import { injectScript } from 'utils/inject-script';
 
 import 'styles/hubspot-form.css';
+import 'styles/calendly-widget.css';
 import CloseIcon from './images/close.inline.svg';
 
-const calendlyURL = 'https://calendly.com/alexia-sm';
+const calendlyURL =
+  'https://calendly.com/alexia-sm?hide_gdpr_banner=1&background_color=131415&text_color=ffffff&primary_color=00e599';
 const hubspotFormID = '1bf5e212-bb19-4358-9666-891021ce386c';
 
 const Testimonial = ({ className = null, ariaHidden = false }) => (
@@ -42,9 +44,7 @@ const Apply = () => {
 
   useHubspotForm('hubspot-form', {
     onFormSubmitted: () => {
-      injectScript('https://assets.calendly.com/assets/external/widget.js').then(() =>
-        setIsModalOpen(true)
-      );
+      setIsModalOpen(true);
     },
   });
 
@@ -83,12 +83,13 @@ const Apply = () => {
           <Dialog.Overlay className="fixed inset-0 z-[150] bg-[rgba(12,13,13,0.2)] data-[state=closed]:animate-fade-out-overlay data-[state=open]:animate-fade-in-overlay dark:bg-black/80" />
           <Dialog.Content className="fixed left-1/2 top-1/2 z-[150] mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2 lg:h-full lg:max-h-full lg:max-w-full">
             <div className="relative flex h-full max-h-[85vh] flex-col rounded-[10px] border border-gray-new-20 bg-gray-new-8 pt-4 text-white shadow-[4px_4px_10px_rgba(0,0,0,0.5)] data-[state=closed]:animate-dialog-hide data-[state=open]:animate-dialog-show lg:h-full lg:max-h-screen lg:rounded-none">
-              <div className="flex h-full max-h-[calc(100vh_-_62px)] flex-col overflow-y-auto pb-12 md:mt-12">
-                <div
-                  className="calendly-inline-widget [&>.calendly-spinner]:z-10 [&>iframe]:relative [&>iframe]:z-20"
-                  data-url={calendlyURL}
-                  style={{ width: '100%', height: '660px' }}
-                />
+              <div className="mt-6 flex h-full max-h-[calc(100vh_-_62px)] flex-col overflow-y-auto pb-12 md:mt-12">
+                <div className="calendly-spinner">
+                  <div className="calendly-bounce1" />
+                  <div className="calendly-bounce2" />
+                  <div className="calendly-bounce3" />
+                </div>
+                <InlineWidget url={calendlyURL} />
               </div>
               <Dialog.Close asChild>
                 <button
