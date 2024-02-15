@@ -9,9 +9,13 @@ updatedOn: '2024-02-13T20:44:18.898Z'
 This feature is available for select users and will be expanded to all users soon.
 </Admonition>
 
-With Neon's branch restore capability, you can easily restore a branch to an earlier state in its history. You can also use Time Travel Assist to run read-only queries against any point in your history retention window to pinpoint the exact moment you need to restore to.
+With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can also use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to.
 
 ## How branch restore works
+
+Neon supports several one-click branch restore methods:
+* **From branch's own history** &#8212; restore a selected branch to any point in your history retention window using a timestamp or LSN.
+* **From another branch** &#8212; restore a destination branch from another (source) branch's data, from either its current state or from an earlier point in its history using a timestamp or LSN.
 
 ### Restore from history
 
