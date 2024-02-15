@@ -31,7 +31,7 @@ Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon.
 | **Branches**                            | 10 branches                                                   |
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | 0.5 GiB                                                       |
-| **Compute**                             | 750 _active compute time_ hours/month for the primary branch compute, 20 _active compute time_ hours/month for non-primary branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM |
+| **Compute**                             | 24/7 usage on the primary branch compute (~750 compute hours/month), 20 _active hours_/month on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM |
 
 In addition, Free Tier users have access to the following Neon features:
 
@@ -52,7 +52,7 @@ The Launch plan provides all of the resources, features, and support you need to
 | **Branches**                            | 500                                                  |
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | Up to 10 GiB of data storage                                  |
-| **Compute**                             | Up to 1200 compute hours/month for all computes in all projects |
+| **Compute**                             | Up to 1,200 _active hours_/month (300 compute hours/month) for all computes in all projects |
 
 Launch plan users can access extra compute hours beyond the 1200 compute hours/month included in the Launch plan. Extra compute hours are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour cost.
 
@@ -74,7 +74,7 @@ The Scale plan provides full platform and support access, and is designed for sc
 | **Branches**                            | 500                                                           |
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | Up to 50 GiB of data storage                                  |
-| **Compute**                             | Up to 3000 compute hours/month for all computes in all projects |
+| **Compute**                             | Up to 3,000 _active hours_/month (750 compute hours/month) for all computes in all projects |
 
 In addition, Sacle plan users have access to the following Neon features:
 
@@ -207,6 +207,6 @@ Neon's branching feature lets you branch your data the same way you branch your 
 ## Notes
 
 - Paid plans have a default limit of 20 simultaneously active computes to protect against unintended usage. To increase this limit, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available.
-- Active Compute Time: On the Free Tier, your primary branch compute is allotted 750 hours a month, which means your primary branch is always available. Branch computes have a 20 hours/month Active Compute Time limit. If your branch computes exceed this limit, they will be suspended until the limit resets. You can monitor _Active Compute Time_ on the **Usage** widget on the Neon **Dashboard**. The _Active Compute Time_ limit resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _Active Compute Time_ limit will reset on February 1st.
+- Active time: On the Free Tier, your primary branch is available 24/7 (~750 compute hours/month). Branch computes have a 20 hours/month active time allowance. If your branch computes exceed this allowance, they will be suspended until the allowance resets at the beginning of the month. You can monitor _active time_ on the **Usage** widget on the Neon **Dashboard**. The _active time_ allowance resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _active time_ limit will reset on February 1st.
 
 
