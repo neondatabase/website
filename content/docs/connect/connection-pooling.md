@@ -4,7 +4,7 @@ subtitle: Learn how to enable connection pooling in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2024-01-05T18:59:15.317Z'
+updatedOn: '2024-02-09T16:27:39.008Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to offer support for connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -37,17 +37,62 @@ Enabling connection pooling in Neon requires adding a `-pooler` suffix to the co
 
 You can add the `-pooler` suffix to the endpoint ID in your connection string as shown:
 
-<CodeBlock shouldWrap>
-
-```text
+```text shouldWrap
 postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
 ```
-
-</CodeBlock>
 
 The **Connection Details** widget on the Neon **Dashboard** provides **Pooled connection** checkbox that adds the `-pooler` option to a connection string that you can copy and paste.
 
 ![Connection Details pooled connection string](/docs/connect/connection_details_pooled.png)
+
+## Optimize queries with PgBouncer and prepared statements
+
+Protocol-level prepared statements are supported with Neon and PgBouncer as of the [PgBouncer 1.22.0 release](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_21_0). Using prepared statements can help boost query performance while providing an added layer of protection against potential SQL injection attacks.
+
+### Understanding prepared statements
+
+A prepared statement in Postgres allows for the optimization of an SQL query by defining its structure once and executing it multiple times with varied parameters. Here's an SQL-level example to illustrate. Note that direct SQL-level `PREPARE` and `EXECUTE` are not supported with PgBouncer (see [below](#use-prepared-statements-with-pgbouncer)), so you can't use this query from the SQL editor. It is meant to give you a clear idea of how a prepared statement works. Refer to the protocol-level samples below to see how this SQL-level example translates to different protocol-level examples.
+
+```sql
+PREPARE fetch_plan (TEXT) AS
+SELECT * FROM users WHERE username = $1;
+
+EXECUTE fetch_plan('alice');
+```
+
+`fetch_plan` here is the prepared statement's name, and `$1` acts as a parameter placeholder.
+
+The benefits of using prepared statements include:
+
+- **Performance**: Parsing the SQL and creating the execution plan happens just once, speeding up subsequent executions. This performance benefit would be most noticeable on databases with heavy and repeated traffic.
+- **Security**: By sending data values separately from the query, prepared statements reduce the risk of SQL injection attacks.
+
+You can learn more about prepared statements in the PostgreSQL documentation. See [PREPARE](https://www.postgresql.org/docs/current/sql-prepare.html).
+
+### Use prepared statements with PgBouncer
+
+Since pgBouncer supports protocol-level prepared statements only, you must rely on PostgreSQL client libraries instead (direct SQL-level `PREPARE` and `EXECUTE` are not supported). Fortunately, most PostgreSQL client libraries support prepared statements. Here are a couple of examples showing how to use prepared statements with Javascript and Python client libraries:
+
+<CodeTabs labels={["pg", "psycopg2"]}>
+
+```javascript
+const query = {
+   // give the query a unique name
+   name: 'fetch-plan',
+      text: 'SELECT * FROM users WHERE username = $1',
+      values: ['alice'],
+  };
+  client.query(query);
+```
+
+```python
+cur = conn.cursor()
+  query = "SELECT * FROM users WHERE username = %s;"
+  cur.execute(query, ('alice',), prepare=True)
+  results = cur.fetchall()
+```
+
+</CodeTabs>
 
 ## Neon PgBouncer configuration settings
 
@@ -72,6 +117,6 @@ The following list describes each setting. For a full explanation of each parame
 
 ## Connection pooling notes and limitations
 
-Neon uses PgBouncer in _transaction mode_, which does not support Postgres features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
+Neon uses PgBouncer in _transaction mode_, which limits some functionality in Postgres. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
 <NeedHelp/>

@@ -4,11 +4,9 @@ import PropTypes from 'prop-types';
 import Button from 'components/shared/button';
 
 import discordLogo from './images/discord.png';
-import discourseLogo from './images/discourse.png';
 import ellipse from './images/ellipse.svg';
 
 const logos = {
-  discourse: discourseLogo,
   discord: discordLogo,
 };
 

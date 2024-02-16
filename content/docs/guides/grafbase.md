@@ -4,7 +4,7 @@ subtitle: Learn how to build and deploy serverless GraphQL backends with Grafbas
   Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-07T10:43:33.377Z'
+updatedOn: '2024-02-08T15:20:54.283Z'
 ---
 
 _This guide was contributed by Josep Vidal from Grafbase_
@@ -91,23 +91,15 @@ A database connection string is required to forward queries to your Neon databas
 1. Navigate to the Neon **Dashboard**.
 2. Copy the connection string for your database from the **Connection Details** widget. The connection string should appear similar to the following:
 
-    <CodeBlock shouldWrap>
-
-    ```text
+    ```text shouldWrap
     postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
-    </CodeBlock>
-
 3. Add a `DATABASE_URL` environment variable to your `grafbase/.env` file and set the value to your connection string. For example:
 
-    <CodeBlock shouldWrap>
-
-    ```text
+    ```text shouldWrap
     DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
-
-    </CodeBlock>
 
 ## Add code to the resolvers
 
@@ -161,7 +153,7 @@ To test the resolvers with Neon, perform the following steps:
     npx grafbase dev
     ```
 
-2. Go to http://localhost:4000 and execute the following GraphQL mutation, which creates a new product:
+2. Go to [http://localhost:4000](http://localhost:4000) and execute the following GraphQL mutation, which creates a new product:
 
     ```graphql
     mutation {

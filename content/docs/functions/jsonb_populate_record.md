@@ -2,7 +2,7 @@
 title: Postgres jsonb_populate_record() function
 subtitle: Casts a JSONB object to a record
 enableTableOfContents: true
-updatedOn: '2024-01-28T13:46:59.391Z'
+updatedOn: '2024-02-06T23:28:28.691Z'
 ---
 
 The `jsonb_populate_record` function is used to populate a record type with values from a `JSONB` object. It is useful for parsing `JSONB` data received from external sources, particularly when merging it into an existing record.
@@ -54,7 +54,7 @@ This query returns the following result:
 
 ## Advanced examples
 
-### Handling partial data
+### Handling partial data with `jsonb_populate_record`
 
 For data points where the `JSONB` objects have missing keys, `jsonb_populate_record` can still cast them into legible records. 
 
@@ -78,7 +78,7 @@ This query returns the following:
 | 124| Jane Smith | Sales      | 68000  |
 ```
 
-### Working with custom types
+### Using `jsonb_populate_record` with custom types 
 
 The base record doesn't need to have the type of a table row and can be a [custom Postgres type](https://www.postgresql.org/docs/current/sql-createtype.html) too. For example, here we first define a custom type `address` and use `jsonb_populate_record` to cast a `JSONB` object to it:
 
@@ -109,8 +109,8 @@ This query returns the following result:
 ### Alternative options
 
 - [jsonb_to_record](/docs/functions/jsonb_to_record) - It can be used similarly, with a couple differences. `jsonb_populate_record` can be used with a base record of a pre-defined type, whereas `jsonb_to_record` needs the record type defined inline in the `AS` clause. Further, `jsonb_populate_record` can specify default values for missing fields through the base record, whereas `jsonb_to_record` must assign them NULL values.
-- [jsonb_populate_recordset](/docs/functions/jsonb_populate_recordset) - It can be used similarly to parse `JSONB`, the difference being that it returns a set of records instead of a single record. For example, if you have an array of `JSONB` objects, you can use `jsonb_populate_recordset` to convert each object into a new row. 
-- [json_populate_record](/docs/functions/jsonb_populate_record.md) - It has the same functionality to `jsonb_populate_record`, but accepts `JSON` input instead of `JSONB`. 
+- `jsonb_populate_recordset` - It can be used similarly to parse `JSONB`, the difference being that it returns a set of records instead of a single record. For example, if you have an array of `JSONB` objects, you can use `jsonb_populate_recordset` to convert each object into a new row. 
+- [json_populate_record](/docs/functions/json_populate_record) - It has the same functionality to `jsonb_populate_record`, but accepts `JSON` input instead of `JSONB`. 
 
 ## Resources
 

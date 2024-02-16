@@ -2,7 +2,7 @@
 title: Neon CLI commands — roles
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-01-10T17:27:58.304Z'
+updatedOn: '2024-02-08T15:20:54.297Z'
 ---
 
 ## Before you begin
@@ -100,9 +100,7 @@ If a branch ID or name is not provided, the command creates a role in the primar
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl roles create --name sally
 ┌───────┬──────────────────────┐
 │ Name  │ Created At           │
@@ -110,8 +108,6 @@ neonctl roles create --name sally
 │ sally │ 2023-06-20T00:43:17Z │
 └───────┴──────────────────────┘
 ```
-
-</CodeBlock>
 
 ### delete
 
@@ -137,9 +133,7 @@ If a branch ID or name is not provided, the command assumes the role resides in 
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl roles delete sally
 ┌───────┬──────────────────────┐
 │ Name  │ Created At           │
@@ -147,7 +141,5 @@ neonctl roles delete sally
 │ sally │ 2023-06-20T00:43:17Z │
 └───────┴──────────────────────┘
 ```
-
-</CodeBlock>
 
 <NeedHelp/>

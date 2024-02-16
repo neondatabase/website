@@ -2749,7 +2749,3 @@ The functions shown in [Table 9.84](functions-info#FUNCTIONS-CONTROLDATA) print
 | `backup_start_lsn`              | `pg_lsn`  |
 | `backup_end_lsn`                | `pg_lsn`  |
 | `end_of_backup_record_required` | `boolean` |
-
-```
-
-```

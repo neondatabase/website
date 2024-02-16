@@ -2,7 +2,7 @@
 title: Neon CLI — Install and connect
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-01-10T17:27:58.303Z'
+updatedOn: '2024-02-08T15:20:54.297Z'
 ---
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
@@ -18,7 +18,6 @@ npm i -g neonctl
 ```
 
 Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
-
 
 </TabItem>
 
@@ -40,13 +39,9 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 
     Download the macOS binary:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
     ```
-
-    </CodeBlock>
 
     No installation is required. Run the Neon CLI as follows:
 
@@ -58,13 +53,9 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 
     Download the Linux binary:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux -o neonctl
     ```
-
-    </CodeBlock>
 
     No installation is required. Run the Neon CLI as follows:
 
@@ -76,13 +67,9 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 
     Download the Windows binary:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
     ```
-
-    </CodeBlock>
 
     No installation is required. Run the Neon CLI as follows:
 
@@ -93,7 +80,6 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 </TabItem>
 
 </Tabs>
-
 
 ### Upgrade
 

@@ -2,20 +2,20 @@
 title: Postgres json_extract_path() function
 subtitle: Extracts a JSON sub-object at the specified path
 enableTableOfContents: true
-updatedOn: '2024-01-28T13:46:59.390Z'
+updatedOn: '2024-02-06T14:40:40.247Z'
 ---
 
-You can the `json_extract_path` function to extract the value of a specific key at a specified path within a `JSON` document. This approach is performant compared to querying the entire `JSON` payload and processing it on the application side. It is particularly useful when dealing with nested `JSON` structures.
+You can use the `json_extract_path` function to extract the value at a specified path within a `JSON` document. This approach is performant compared to querying the entire `JSON` payload and processing it on the application side. It is particularly useful when dealing with nested `JSON` structures.
 
 <CTA />
 
 ## Function signature
 
 ```sql
-json_extract_path(from_json json, VARIADIC path_elems text[])
+json_extract_path(from_json JSON, VARIADIC path_elems TEXT[]) -> JSON
 ```
 
-## `json_extract_path` example
+## Example usage
 
 To illustrate the `json_extract_path` function in Postgres, let's consider a scenario where we have a table storing information about books. Each book has a `JSON` column containing details such as `title`, `author`, and publication `year`. You can create the `book` table using the SQL statements shown below.
 
@@ -87,7 +87,7 @@ INSERT INTO products (id, attributes) VALUES
 | 3      | {"name": "Smartphone", "specs": {"brand": "Apple", "RAM": "8GB", "storage": {"type": "UFS", "capacity": "128GB"}}, "tags": ["ios", "iphone"]}     |
 ```
 
-### Extract a value from a nested JSON object
+### Extract from nested JSON objects with `json_extract_path`
 
 Let's use `json_extract_path` to retrieve information about the storage type and capacity for each product, demonstrating how to extract values from a nested `JSON` object.
 
@@ -109,7 +109,7 @@ This query returns the following values:
 | 3  | "UFS"        | "128GB"          |
 ```
 
-### Extract values from JSON array
+### Extract from array with `json_extract_path`
 
 Now, let's use `json_extract_path` to extract information about the associated tags as well, demonstrating how to extract values from a `JSON` array.
 
@@ -133,7 +133,7 @@ This query returns the following values:
 | 3  | "UFS"        | "128GB"          | "ios"     | "iphone"   |
 ```
 
-### Join data
+### Use `json_extract_path` in Joins
 
 Let's say you have two tables, `employees` and `departments`, and the `employees` table has a `JSON` column named `details` that contains information about each employee's department. You want to join these tables based on the department information stored in the `JSON` column. The table schemas and data used in this example are shown below. 
 
@@ -208,28 +208,21 @@ The `json_extract_path` function extracts the value of the `department` key from
 
 ## Additional considerations
 
-This section outlines additional considerations including alternative functions and performance considerations.
-
-### Alternative functions
-
-**json_extract_path_text**
-
-The regular `json_extract_path` function returns the extracted value as a `JSON` object or array, preserving its `JSON` structure, whereas the alternative
-`json_extract_path_text` function returns the extracted value as a plain text string, casting any `JSON` objects or arrays to their string representations.
-
-Use the regular `json_extract_path` function when you need to apply `JSON`-specific functions or operators to the extracted value, requiring `JSON` data types. The alternative `json_extract_path_text` function is preferable if you need to work directly with the extracted value as a string, for text processing, concatenation, or comparison.
-
-**jsonb_extract_path**
-
-The `jsonb_extract_path` function works with the `jsonb` data type, which offers a binary representation of `JSON` data. This alternative function is generally faster than `json_extract_path` for most operations, as it's optimized for the binary `jsonb` format. This difference in performance is often more pronounced with larger `JSON` structures and frequent path extractions.
-
-### Performance
+### Performance and Indexing
 
 The `json_extract_path` function performs well when extracting data from `JSON` documents, especially compared to extracting data in application code. It allows performing the extraction directly in the database, avoiding transferring entire `JSON` documents to the application.
 
 However, performance can degrade with highly nested `JSON` structures and very long text strings. In those cases, using the binary `JSONB` data type and the `jsonb_extract_path` function will likely offer better performance.
 
 Indexing `JSON` documents can also significantly improve `json_extract_path` query performance when filtering data based on values extracted from `JSON`.
+
+### Alternative functions
+
+- [json_extract_path_text](/docs/functions/json_extract_path_text) - The regular `json_extract_path` function returns the extracted value as a `JSON` object or array, preserving its `JSON` structure, whereas the alternative `json_extract_path_text` function returns the extracted value as a plain text string, casting any `JSON` objects or arrays to their string representations.
+
+    Use the regular `json_extract_path` function when you need to apply `JSON`-specific functions or operators to the extracted value, requiring `JSON` data types. The alternative `json_extract_path_text` function is preferable if you need to work directly with the extracted value as a string, for text processing, concatenation, or comparison.
+
+- `jsonb_extract_path` - The `jsonb_extract_path` function works with the `jsonb` data type, which offers a binary representation of `JSON` data. This alternative function is generally faster than `json_extract_path` for most operations, as it's optimized for the binary `jsonb` format. This difference in performance is often more pronounced with larger `JSON` structures and frequent path extractions.
 
 {/*
 This example does not work. It returns empty values.
@@ -259,3 +252,5 @@ The query above, which specifies an invalid path (`'speks'` instead of `'specs'`
 
 - [PostgreSQL documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
 - [PostgreSQL documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
+
+<NeedHelp />

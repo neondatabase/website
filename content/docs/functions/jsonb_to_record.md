@@ -2,7 +2,7 @@
 title: Postgres jsonb_to_record() function
 subtitle: Convert a JSONB object to a record
 enableTableOfContents: true
-updatedOn: '2024-02-03T12:19:31.684Z'
+updatedOn: '2024-02-06T23:28:28.691Z'
 ---
 
 You can use the `jsonb_to_record` function to convert a top-level `JSONB` object into a row, with the type specified by the `AS` clause. 
@@ -70,7 +70,7 @@ This query returns the following result:
 
 This section provides advanced `jsonb_to_record` examples.
 
-### Handling partial data
+### Handling partial data with `jsonb_to_record`
 
 For datapoints where the `JSONB` objects have missing keys, `jsonb_to_record` can still cast them into records, producing `NULL` values for the unmatched columns. For example:
 
@@ -92,7 +92,7 @@ This query returns the following result:
 | 124| Jane Smith |              |        |
 ```
 
-### Handling nested data
+### Handling nested data with `jsonb_to_record`
 
 `jsonb_to_record` can also be used to handle nested `JSONB` input data (i.e., keys with values that are `JSONB` objects themselves). You need to first define a [custom Postgres type](https://www.postgresql.org/docs/current/sql-createtype.html). The newly created type can then be used in the column definition list along with the other columns. 
 

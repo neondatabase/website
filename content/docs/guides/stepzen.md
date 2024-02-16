@@ -3,7 +3,7 @@ title: Use StepZen with Neon
 subtitle: Learn how to use StepZen to build a GraphQL API for your Neon database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-07T10:43:33.394Z'
+updatedOn: '2024-02-08T15:20:54.291Z'
 ---
 
 _This guide was contributed by Roy Derks from StepZen_
@@ -30,13 +30,9 @@ Running the `init.sql` file creates the `address`, `customer`, `product`, and `o
 
 You can seed the database directly from the terminal by running the following `psql` command:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 psql postgres://[user]:[password]@[neon_hostname]/[dbname] < init.sql
 ```
-
-</CodeBlock>
 
 The command takes a Neon connection string as the first argument and a file as the second argument.
 

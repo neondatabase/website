@@ -2,7 +2,7 @@
 title: Postgres json_to_record() function
 subtitle: Converts a JSON object to a record
 enableTableOfContents: true
-updatedOn: '2024-01-28T13:46:59.392Z'
+updatedOn: '2024-02-06T14:40:40.248Z'
 ---
 
 You can use the `json_to_record` function to convert a top-level `JSON` object into a row, with the type specified by the `AS` clause. 
@@ -68,7 +68,7 @@ This query returns the following result:
 
 This section provides advanced `json_to_record` examples.
 
-### Handling partial data
+### Handling partial data with `json_to_record`
 
 For datapoints where the `JSON` objects have missing keys, `json_to_record` can still cast them into records, producing `NULL` values for the unmatched columns. For example:
 
@@ -90,7 +90,7 @@ This query returns the following result:
 | 124| Jane Smith |              |        |
 ```
 
-### Handling nested data
+### Handling nested data with `json_to_record`
 
 `json_to_record` can also be used to handle nested `JSON` input data (i.e., keys with values that are `JSON` objects themselves). You need to first define a [custom Postgres type](https://www.postgresql.org/docs/current/sql-createtype.html). The newly created type can then be used in the column definition list along with the other columns. 
 

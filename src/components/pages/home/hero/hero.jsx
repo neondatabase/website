@@ -41,13 +41,13 @@ const logos = [
 
 const buttons = [
   {
-    text: 'Sign Up',
+    text: 'Start Free',
     to: LINKS.signup,
     theme: 'primary',
   },
   {
-    text: 'Talk to sales',
-    to: LINKS.contactSales,
+    text: 'View Pricing',
+    to: LINKS.pricing,
     theme: 'gray-dark-outline',
     className: '!border-4 sm:!border-[3px]',
   },

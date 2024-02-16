@@ -2,7 +2,7 @@
 title: The pg_embedding extension (Support Discontinued)
 subtitle: null
 enableTableOfContents: true
-updatedOn: '2024-01-27T09:01:18.975Z'
+updatedOn: '2024-02-08T15:20:54.278Z'
 ---
 
 <Admonition type="warning">
@@ -166,13 +166,9 @@ This statement generates a table named `documents` with a `real[]` type column f
 
 To insert vector data, use an `INSERT` statement similar to the following:
 
-<CodeBlock shouldWrap>
-
-```sql
+```sql shouldWrap
 INSERT INTO documents(id, embedding) VALUES (1, '{0,1,2}'), (2, '{1,2,3}'),  (3, '{1,1,1}');
 ```
-
-</CodeBlock>
 
 ## Similarity search
 

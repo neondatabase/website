@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/security/secure-connections
-updatedOn: '2024-01-11T14:49:37.562Z'
+updatedOn: '2024-02-08T15:20:54.275Z'
 ---
 
 Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Neon rejects connections that do not use SSL/TLS, behaving in the same way as standalone Postgres with only `hostssl` records in a `pg_hba.conf` configuration file.
@@ -16,13 +16,9 @@ However, there are different levels of protection when using SSL/TLS encryption,
 
 When connecting to Neon or any Postgres database, the `sslmode` parameter setting determines the security of the connection. You can append the `sslmode` parameter to your Neon connection string as shown:
 
-<CodeBlock shouldWrap>
-
-```text
+```text shouldWrap
 postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full
 ```
-
-</CodeBlock>
 
 Neon supports the following `sslmode` settings, in order of least to most secure.
 
