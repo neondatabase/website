@@ -97,7 +97,7 @@ The ephemeral endpoints are created according to your configured [default comput
 
 ## How to use branch restore
 
-You can use the Neon Console or the CLI to restore branches
+You can use the Neon Console or the CLI to restore branches.
 
 <Tabs labels={["Console", "CLI"]}>
 
@@ -109,7 +109,9 @@ Use the **Restore** page to restore a branch to an earlier timestamp in its hist
 
 First, select the **Branch to restore**. This is the target branch for the restore operation.
 
-To restore a branch from its own history:
+![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
+
+#### To restore a branch from its own history:
 
 1. Make sure the **From history** tab is selected. 
 1. Choose your timestamp or switch to LSN.
@@ -119,7 +121,7 @@ To restore a branch from its own history:
 
 1. Click **Restore** to complete the operation.
 
-To restore from another branch:
+#### To restore from another branch:
 
  1. Switch to the **From another branch** tab.
  1. Select the source branch that that you want to restore data from.
@@ -129,8 +131,6 @@ To restore from another branch:
 
  1. Choose your timestamp or switch to the LSN input.
  1. Click **Next**, confirm the details of the operation, then click **Restore** to complete.
-
-![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
 
 All databases on the selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see a backup branch was created with the state of the branch at the restore point in time.
 
@@ -175,7 +175,7 @@ Here is an example of a command that restores a target branch to an earlier poin
 neonctl branches restore dev/alex dev/jordan@0/12345
 ```
 
-This command will restore the target branch `dev/alex` from an earlier point in time for the source branch `dev/jordan`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `dev/jordan`.
+This command will restore the target branch `dev/alex` to an earlier point in time from the source branch `dev/jordan`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `dev/jordan`.
 </TabItem>
 </Tabs>
 
