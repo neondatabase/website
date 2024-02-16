@@ -39,7 +39,7 @@ Given the high number of connections used by this application, [connection pooli
 
 With Neon pricing, two key metrics help you decide which [pricing plan](https://neon.tech/pricing) is right for you: compute time and storage.
 
-At roughly 718 compute hours for the month, this applicattion is well under the 1,200 hours/month limit for the Launch plan. However, with a storage size of 25 GiB, the storage needs for this application are well over the Launch plan limit of 10 GiB. That makes the Scale plan the right choice: 3,000 hours/month compute and 50 GiB storage.
+At roughly 718 compute hours for the month, this application is well under the 1,200 hours/month limit for the Launch plan. However, with a storage size of 25 GiB, the storage needs for this application are well over the Launch plan limit of 10 GiB. That makes the Scale plan the right choice: 3,000 hours/month compute and 50 GiB storage.
 
 ## Consumption breakdown for the month
 
