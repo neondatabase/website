@@ -6,7 +6,7 @@
     - title: Neon roadmap
       slug: introduction/roadmap
     - title: Neon architecture
-      items: 
+      items:
         - title: Overview
           slug: introduction/architecture-overview
         - title: Compute lifecycle
@@ -96,31 +96,31 @@
     - title: Operations
       slug: manage/operations
     - title: Access
-      items: 
-         - title: Project access
-           slug: manage/project-access
-         - title: Database access
-           slug: manage/database-access
+      items:
+        - title: Project access
+          slug: manage/project-access
+        - title: Database access
+          slug: manage/database-access
     - title: Backups
       slug: manage/backups
     - title: Logical replication
       items:
-         - title: Concepts
-           slug: guides/logical-replication-concepts
-         - title: Manage
-           slug: guides/logical-replication-neon
+        - title: Concepts
+          slug: guides/logical-replication-concepts
+        - title: Manage
+          slug: guides/logical-replication-neon
 - title: Guides
   slug: guides/guides-intro
   items:
     - title: Neon
-      items: 
+      items:
         - title: Autoscaling
           slug: guides/autoscaling-guide
         - title: Autosuspend
           slug: guides/auto-suspend-guide
         - title: Branching
           slug: guides/branching-intro
-          items: 
+          items:
             - title: Branch Restore
               slug: guides/branch-restore
             - title: Branching — Point-in-time restore
@@ -159,7 +159,7 @@
             - title: Data analysis and reporting
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
-              slug: guides/read-replica-prisma    
+              slug: guides/read-replica-prisma
     - title: Frameworks
       items:
         - title: Next.js
@@ -201,7 +201,7 @@
           items:
             - title: Django
               slug: guides/django
-            - title: Psycopg 
+            - title: Psycopg
               slug: guides/python
             - title: SQL Alchemy
               slug: guides/sqlalchemy
@@ -226,15 +226,15 @@
         - title: Flyway
           items:
             - title: Get started
-              slug: guides/flyway  
+              slug: guides/flyway
             - title: Manage multiple environments
-              slug: guides/flyway-multiple-environments 
+              slug: guides/flyway-multiple-environments
         - title: Liquibase
           items:
-             - title: Get started
-               slug: guides/liquibase
-             - title: Developer workflow
-               slug: guides/liquibase-workflow
+            - title: Get started
+              slug: guides/liquibase
+            - title: Developer workflow
+              slug: guides/liquibase-workflow
     - title: Serverless
       items:
         - title: Neon serverless driver
@@ -249,6 +249,8 @@
           slug: guides/polyscale
     - title: Deployment platforms
       items:
+        - title: Cloudflare Workers
+          slug: guides/cloudflare-workers
         - title: Deno
           slug: guides/deno
         - title: Koyeb
@@ -265,7 +267,7 @@
               slug: guides/vercel-manual
     - title: For Partners
       slug: guides/partner-intro
-      items: 
+      items:
         - title: OAuth
           slug: guides/oauth-integration
         - title: Manage billing with quotas
@@ -309,13 +311,13 @@
         - title: Supported extensions
           slug: extensions/pg-extensions
         - title: citext
-          slug: extensions/citext          
+          slug: extensions/citext
         - title: hstore
-          slug: extensions/hstore          
+          slug: extensions/hstore
         - title: neon
           slug: extensions/neon
         - title: neon_utils
-          slug: extensions/neon-utils       
+          slug: extensions/neon-utils
         - title: pgvector
           slug: extensions/pgvector
         - title: pg_stat_statements
@@ -347,7 +349,7 @@
         - title: json_extract_path
           slug: functions/json_extract_path
         - title: jsonb_extract_path
-          slug: functions/jsonb_extract_path          
+          slug: functions/jsonb_extract_path
         - title: json_extract_path_text
           slug: functions/json_extract_path_text
         - title: jsonb_extract_path_text

@@ -82,9 +82,7 @@ const Item = ({
           <AnimatePresence initial={false}>
             {isOpen ? (
               <m.ul
-                className={clsx(
-                  'relative pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-new-90 dark:before:bg-gray-new-20'
-                )}
+                className="relative overflow-hidden pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-new-90 dark:before:bg-gray-new-20"
                 initial="from"
                 animate="to"
                 exit="from"

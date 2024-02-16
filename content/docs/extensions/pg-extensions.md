@@ -3,7 +3,7 @@ title: Supported Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2024-02-09T17:53:20.585Z'
+updatedOn: '2024-02-12T21:05:29.544Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
@@ -54,7 +54,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [pgrowlocks](https://www.postgresql.org/docs/16/pgrowlocks.html)               | 1.2       | 1.2        |   1.2        |                                                                                                                 |
 | [pgstattuple](https://www.postgresql.org/docs/16/pgstattuple.html)              | 1.5      | 1.5       |  1.5       |                                                                                                                  |
 | [pgtap](https://pgtap.org/documentation.html)                    | 1.2.0                   | 1.2.0       |   1.2.0       |                                                                                                                    |
-| [pgvector](/docs/extensions/pgvector)                 | 0.6.0                   | 0.6.0  | 0.6.0                  | Install with `CREATE EXTENSION vector;`                                                                                                                    |
+| [pgvector](/docs/extensions/pgvector)                 | 0.5.1                   | 0.5.1  | 0.5.1                  | Install with `CREATE EXTENSION vector;`                                                                                                                    |
 | [pgx_ulid](https://github.com/pksunkara/pgx_ulid)                 | 0.1.3                   | 0.1.3  | 0.1.3                                 | Install with `CREATE EXTENSION ulid;`                                                                                                                    |
 | [plcoffee](https://github.com/plv8/plv8/)                 | 3.1.5                          | 3.1.5  | 3.1.8                         |                                                                                                                    |
 | [plls](https://github.com/plv8/plv8/)                     | 3.1.5                          | 3.1.5 | 3.1.8                          |                                                                                                                    |  

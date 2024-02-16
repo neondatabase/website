@@ -3,7 +3,7 @@ title: Branch Restore
 subtitle: Learn how to revert changes or recover lost data using Neon Branch Restore
   with Time Travel Assist
 enableTableOfContents: true
-updatedOn: '2024-02-08T20:07:48.873Z'
+updatedOn: '2024-02-13T20:44:18.898Z'
 ---
 <Admonition type="comingSoon">
 This feature is available for select users and will be expanded to all users soon.
@@ -74,15 +74,15 @@ Similar to the manual restore operation using the Neon Console and API described
 
 ### Time Travel Assist
 
-To help troubleshoot your data's history, you can use Time Travel Assist to run read-only queries against any selected timestamp within your history retention window. It's a good idea to run this kind of query to make sure you've targeted the correct restore point before you restore a branch.
+To help troubleshoot your data's history, you can use Time Travel Assist to connect to any selected point in time within your history retention window and then run queries against that connection. It's a good idea to run this kind of query to make sure you've targeted the correct restore point before you restore a branch.
 
-The restore operation and Time Travel Assist are meant to work together. When you select a branch and timestamp, you are setting up Time Travel Assist to automatically query against that particular point in time.
+The restore operation and Time Travel Assist are meant to work together. When you select a branch and timestamp, you can either use that selection as your restore point or as the point in time connection to query against.
 
 ![Time travel assist](/docs/guides/branch_time_travel.png)
 
 #### Ephemeral endpoints
 
-Time travel queries leverage Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done with your time travel querying. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+Time travel assist leverages Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done querying against this point-in-time connection. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
 
 However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
 
@@ -110,14 +110,14 @@ All databases on the selected branch are instantly updated with the data and sch
 To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it.
 If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branch's relationship to the restore point backup.
 
-### Performing time travel queries
+### Using Time Travel Assist
 
 Here is how to use the Time Travel Assist SQL editor:
 
 1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
 
-    This makes the selection for the Time Travel query. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
-    ![Time travel query](/docs/guides/time_travel_assist.png)
+    This makes the selection for Time Travel Assist. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
+    ![Time travel assist](/docs/guides/time_travel_assist.png)
   
 1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
 1. Write your read-only query in the editor, then click **Query at timestamp** to run the query. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
@@ -141,7 +141,7 @@ There are minimal impacts to billing from the branch restore and Time Travel Ass
 
 Restoring a branch to its own history adds to your number of branches &#8212; due to the restore_backup branch &#8212; but since they do not have any compute endpoint attached, they do not add to any consumption costs.
 
-### Time travel queries (billing)
+### Time travel Assist (billing)
 
 The ephemeral endpoints used to run your Time Travel Assist queries do contribute to your consumption usage totals for the billing period, like any other active endpoint that consumes resources.
 

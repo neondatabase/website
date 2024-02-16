@@ -192,11 +192,6 @@ export default {
           icon: 'discord-icon',
         },
         {
-          text: 'Discourse',
-          to: LINKS.discourse,
-          icon: 'discourse-icon',
-        },
-        {
           text: 'YouTube',
           to: LINKS.youtube,
           icon: 'youtube-icon',
