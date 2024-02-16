@@ -13,7 +13,8 @@ const Fleets = () => (
         More databases, less work
       </h3>
       <p className="mt-2.5 max-w-[590px] text-lg font-light leading-snug xl:text-base lg:mx-auto lg:max-w-[584px] md:mt-2">
-        Use Neon as a single pane for managing fleets of Postgres databases, 50x faster than RDS.{' '}
+        Use Neon as a single pane for managing fleets of Postgres databases, 50x faster create times
+        than RDS.{' '}
         <Link
           className="border-b border-transparent text-green-45 no-underline transition-[border-color] duration-200 ease-in-out hover:border-green-45 sm:break-words"
           to="https://neon-experimental.vercel.app/"
