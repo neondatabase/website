@@ -10,7 +10,7 @@ redirectFrom:
 updatedOn: '2024-02-14T20:45:47.197Z'
 ---
 
-You can sign up for free and upgrade to a paid plan when you are ready to scale. For information about what's included with the Neon Free Tier, see [Neon Free Tier](/docs/introduction/free-tier). For information about Neon's paid plan options, see [Neon plans](/docs/introduction/plans).
+You can sign up for free and upgrade to a paid plan when you are ready to scale. For information about what's included with the Neon Free Tier, see [Neon Free Tier](/docs/introduction/plans#free-tier). For information about Neon's paid plan options, see [Neon plans](/docs/introduction/plans).
 
 ## Sign up
 
