@@ -1,9 +1,9 @@
-import ArrowIcon from 'components/pages/pricing/forecasting/images/arrow.inline.svg';
 import Image from 'next/image';
 
 import Link from 'components/shared/link/link';
+import ArrowIcon from 'icons/arrow-right-rounded.inline.svg';
 
-import image from '../images/branching.svg';
+import image from '../images/branching.jpg';
 
 const Workflow = () => (
   <div className="workflow grid w-full grid-cols-10 items-center gap-x-10 xl:gap-x-6 lg:gap-y-7 md:gap-y-6">

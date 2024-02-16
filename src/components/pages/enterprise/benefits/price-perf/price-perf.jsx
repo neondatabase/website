@@ -1,7 +1,7 @@
-import ArrowIcon from 'components/pages/pricing/forecasting/images/arrow.inline.svg';
 import Image from 'next/image';
 
 import Link from 'components/shared/link/link';
+import ArrowIcon from 'icons/arrow-right-rounded.inline.svg';
 
 import image from '../images/replicas.svg';
 

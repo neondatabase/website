@@ -1,9 +1,8 @@
-import Logos from 'components/pages/partners/logos';
-
 import Apply from 'components/pages/enterprise/apply';
 import Benefits from 'components/pages/enterprise/benefits';
 import Hero from 'components/pages/enterprise/hero';
 import Layout from 'components/shared/layout';
+import Logos from 'components/shared/logos';
 import SplitViewGrid from 'components/shared/split-view-grid';
 import Testimonial from 'components/shared/testimonial';
 import SEO_DATA from 'constants/seo-data';
