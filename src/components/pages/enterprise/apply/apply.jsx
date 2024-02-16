@@ -13,8 +13,7 @@ import 'styles/hubspot-form.css';
 import 'styles/calendly-widget.css';
 import CloseIcon from './images/close.inline.svg';
 
-const calendlyURL =
-  'https://calendly.com/alexia-sm?hide_gdpr_banner=1&background_color=131415&text_color=ffffff&primary_color=00e599';
+const calendlyURL = 'https://calendly.com/alexia-sm';
 const hubspotFormID = '1bf5e212-bb19-4358-9666-891021ce386c';
 
 const Testimonial = ({ className = null, ariaHidden = false }) => (
@@ -40,11 +39,22 @@ Testimonial.propTypes = {
 };
 
 const Apply = () => {
+  const [userData, setUserData] = useState({
+    email: '',
+    name: '',
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useHubspotForm('hubspot-form', {
-    onFormSubmitted: () => {
+    onFormSubmitted: (form, data) => {
+      const { submissionValues } = data;
+      const name = `${submissionValues.firstname || ''} ${submissionValues.lastname || ''}`.trim();
+
       setIsModalOpen(true);
+      setUserData({
+        email: submissionValues.email || '',
+        name,
+      });
     },
   });
 
@@ -89,7 +99,16 @@ const Apply = () => {
                   <div className="calendly-bounce2" />
                   <div className="calendly-bounce3" />
                 </div>
-                <InlineWidget url={calendlyURL} />
+                <InlineWidget
+                  url={calendlyURL}
+                  pageSettings={{
+                    backgroundColor: '131415',
+                    primaryColor: '00e599',
+                    textColor: 'ffffff',
+                    hideGdprBanner: true,
+                  }}
+                  prefill={userData}
+                />
               </div>
               <Dialog.Close asChild>
                 <button
