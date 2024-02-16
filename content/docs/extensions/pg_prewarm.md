@@ -1,6 +1,6 @@
 ---
 title: The pg_prewarm extension
-subtitle: load data into Postgres shared buffers with the pg_prewarm extension
+subtitle: Load data into Postgres shared buffers with the pg_prewarm extension
 enableTableOfContents: true
 updatedOn: '2024-01-28T13:46:59.387Z'
 ---
