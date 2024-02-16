@@ -7,6 +7,7 @@ import branchingIcon from 'icons/header/branching.svg';
 import careersIcon from 'icons/header/careers.svg';
 import caseStudiesIcon from 'icons/header/case-studies.svg';
 import cliIcon from 'icons/header/cli.svg';
+import EnterpriseIcon from 'icons/header/enterprise.svg';
 import partnersIcon from 'icons/header/partners.svg';
 import onDemandStorageIcon from 'icons/header/storage.svg';
 import PostgresDocsIcon from 'icons/postgres.inline.svg';
@@ -59,11 +60,6 @@ export default {
       text: 'Pricing',
       to: LINKS.pricing,
     },
-
-    {
-      text: 'Enterprise',
-      to: LINKS.enterprise,
-    },
     {
       text: 'Blog',
       to: LINKS.blog,
@@ -94,6 +90,12 @@ export default {
           text: 'Case studies',
           description: 'Explore customer stories',
           to: LINKS.caseStudies,
+        },
+        {
+          icon: EnterpriseIcon,
+          text: 'Enterprise',
+          description: 'Scale & grow',
+          to: LINKS.enterprise,
         },
       ],
     },
