@@ -152,10 +152,10 @@ In the `target id|name` field, specify the ID or name of the branch you want to 
 If you want to restore a branch to an earlier point in time, use the syntax `^self` in the `<source id|name>` field. For example:
 
 ```bash
-neonctl branches restore dev/alex ^self@2024-01-01T00:00:00Z
+neonctl branches restore dev/alex ^self@2024-01-01T00:00:00Z --preserve-under-name alex_old
 ```
 
-This command will restore the target branch `dev/alex` to the start of the 2024 new year.
+This command resets the target branch `dev/alex` to its state at the start of 2024, saving the latest data in a backup called `alex_old` using the  mandatory `preserve-under-name parameter`.
 
 #### Restore from parent
 
