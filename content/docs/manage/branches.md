@@ -30,7 +30,7 @@ Each Neon project has a primary branch. In the Neon Console, your primary branch
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
 - For Neon Free Tier users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier  _compute active time_ limit of 100 hours per month.
-- For paying users users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
+- For paying users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Create a branch
 
