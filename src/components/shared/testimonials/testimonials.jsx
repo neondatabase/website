@@ -12,7 +12,7 @@ import SliderItem from 'components/shared/testimonials/slider-item';
 import quoteIcon from './images/quote.svg';
 import twitterIcon from './images/twitter.svg';
 
-const SLIDER_DURATION_IN_MS = 5000;
+const SLIDER_DURATION_IN_MS = 9000;
 
 const sliderItemsAnimationProps = {
   initial: (direction) => ({
