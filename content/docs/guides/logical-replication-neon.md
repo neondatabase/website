@@ -335,6 +335,10 @@ max_replication_slots = 10
 
 If you require different values for these parameters, please contact Neon support.
 
+### Unused replication slots
+
+Neon removes _unused_ replication slots after a period of time to avoid unnecessary retention of write-ahead logs, which prevents removing data snapshots that are no longer required.
+
 ### Known limitations
 
 Neon is working toward removing the following limitations in future releases:
