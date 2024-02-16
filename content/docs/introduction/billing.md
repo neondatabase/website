@@ -33,7 +33,7 @@ Storage usage is based on the amount of data stored in your project (or projects
 
 ### Storage details
 
-_Storage_ is the total volume of data and history stored in in Neon, measured in gibibytes (GiB). It includes the following:
+_Storage_ is the total volume of data and history stored in Neon, measured in gibibytes (GiB). It includes the following:
 
 - **Current data size**
 
