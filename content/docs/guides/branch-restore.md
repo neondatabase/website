@@ -141,7 +141,7 @@ All databases on the selected branch are instantly updated with the data and sch
 <TabItem>
 Using the CLI, you can restore a branch to an earlier point in its history or another branch's history using the following command:
 
-``` bash
+``` bash shouldWrap
 neonctl branches restore <target id|name> <source id|name @ timestamp|lsn>
 ```
 
@@ -151,7 +151,7 @@ In the `target id|name` field, specify the ID or name of the branch you want to 
 
 If you want to restore a branch to an earlier point in time, use the syntax `^self` in the `<source id|name>` field. For example:
 
-```bash
+```bash shouldWrap
 neonctl branches restore dev/alex ^self@2024-01-01T00:00:00Z --preserve-under-name alex_old
 ```
 
@@ -171,7 +171,7 @@ This command will restore the target branch `dev/alex` to the latest data (HEAD)
 
 Here is an example of a command that restores a target branch to an earlier point in time of another branch's history:
 
-```bash
+```bash shouldWrap
 neonctl branches restore dev/alex dev/jordan@0/12345
 ```
 
