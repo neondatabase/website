@@ -39,7 +39,7 @@ Given the high number of connections used by this application, [connection pooli
 
 With Neon pricing, two key metrics help you decide which [pricing plan](https://neon.tech/pricing) is right for you: compute time and storage.
 
-At roughly 718 compute hours for the month, this application is well under the 1,200 hours/month limit for the Launch plan. However, with a storage size of 25 GiB, the storage needs for this application are well over the Launch plan limit of 10 GiB. That makes the Scale plan the right choice: 3,000 hours/month compute and 50 GiB storage.
+At roughly 718 compute hours for the month, this application is well under the 1,200 hours/month limit for the Launch plan. However, with a storage size of 25 GiB, the storage needs for this application are well over the Launch plan limit of 10 GiB. That makes the [Scale](/docs/introduction/plans#scale) plan the right choice: 3,000 hours/month compute and 50 GiB storage.
 
 ## Consumption breakdown for the month
 
@@ -53,13 +53,13 @@ Compute usage is steady at almost 24 compute hours per day across the month.
 
 Daily average of 23.94 compute hours leads to a total of 713.35 compute hours for the month.
 
-This is well below the Scale plan limit of 3,000 hours/month, so there will be no charge for extra usage. The application is on track to be charged the set monthly rate for the Scale plan.
+This is well below the [Scale](/docs/introduction/plans#scale) plan limit of 3,000 hours/month, so there will be no charge for extra usage. The application is on track to be charged the set monthly rate for the Scale plan.
 
 ### Storage
 
 Project storage grew 4.4 GiB over the month, from 23.6 GiB to 28 GiB.
 
-This storage level is too high for the Launch plan but well under the 50 GiB limit for the Scale plan. No charge for extra storage.
+This storage level is too high for the Launch plan but well under the 50 GiB limit for the [Scale](/docs/introduction/plans#scale) plan. No charge for extra storage.
 
 ![Sample storage graph](/docs/introduction/billing_storage_graph.png)
 
@@ -82,4 +82,4 @@ Here are the daily averages and monthly totals for the 2 key usage metrics that 
 
 ## Bill for the month
 
-Since compute-hours and storage size are well below the limits for the selected Scale plan, the bill for the month will come in at the set rate of **$69**.
+Since compute-hours and storage size are well below the limits for the selected [Scale](/docs/introduction/plans#scale) plan, the bill for the month will come in at the set rate of **$69**.

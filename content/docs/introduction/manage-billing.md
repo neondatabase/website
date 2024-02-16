@@ -78,10 +78,10 @@ Changing your plan to one with lower usage limits may affect the performance of 
 If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances. 
 
 <Admonition type="note">
-Downgrading directly from Scale to Launch is currently not supported. You must downgrade to the Free Tier first, and then upgrade to Launch. This limitation will be removed in a future release.
+Downgrading directly from [Scale](/docs/introduction/plans#scale) to [Launch](/docs/introduction/plans#launch) is currently not supported. You must downgrade to the Free Tier first, and then upgrade to Launch. This limitation will be removed in a future release.
 </Admonition>
 
-To downgrade from an Enterprise plan, please contact [Sales](https://neon.tech/contact-sales). Cancellation of an Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
+To downgrade from an [Enterprise](/docs/introduction/plans#enterprise) plan, please contact [Sales](https://neon.tech/contact-sales). Cancellation of an Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
 
 ## Purchase Neon on AWS Marketplace
 

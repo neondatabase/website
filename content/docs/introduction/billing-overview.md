@@ -16,7 +16,7 @@ Each of Neon's plans includes **Storage**, **Compute**, and **Project** usage al
 | Projects   | 1                                                            | 10              | 50                |  Unlimited                |
 
 
-These allowances are included in your plan's monthly fee, except for the Free Tier, which is always free. You can find the monthly fees for the Launch and Scale plans on our [pricing](https://neon.tech/pricing) page. The Enterprise plan is completely customizable with respect to allowances.
+These allowances are included in your plan's monthly fee, except for the Free Tier, which is always free. You can find the monthly fees for the [Launch](/docs/introduction/plans#launch) and [Scale](/docs/introduction/plans#scale) plans on our [pricing](https://neon.tech/pricing) page. The [Enterprise](/docs/introduction/plans#enterprise) plan is completely customizable with respect to allowances.
 
 <Admonition type="tip" title="What is a compute hour?">
 First of all, _active hours_ is the amount of time a compute is active as opposed to being idle due to being suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
@@ -34,7 +34,7 @@ The [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/pl
 | Extra Projects |          | &check;  |
 | Extra Storage  |          | &check;  |
 
-The [Launch](/docs/introduction/plans##launch) plan only supports extra compute usage. If you are on the Launch plan and require extra projects or storage, you must upgrade to the Scale plan, which provides higher storage and project allowances. Once on the [Scale](/docs/introduction/plans##scale) plan, you have access to all extra usage types (storage, compute, and project) should you require it.
+The Launch plan only supports extra compute usage. If you are on the Launch plan and require extra projects or storage, you must upgrade to the Scale plan, which provides higher storage and project allowances. Once on the Scale plan, you have access to all extra usage types (storage, compute, and project) should you require it.
 
 ## How does extra usage work?
 
