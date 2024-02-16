@@ -42,6 +42,10 @@ The following table lists Neon Postgres parameter settings that may differ from 
 You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
+## Postgres server logs
+
+Currently, Postgres server logs can only be accessed Neon Support team. Should you require information from the Postgres server logs for troubleshooting purposes, please contact [Neon Support](/docs/introduction/support).
+
 ## Unlogged tables
 
 Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restarts (including when a Neon compute instance is placed into an `Idle` state after a period of inactivity). This is unlike a standalone Postgres installation, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local storage size.
@@ -64,7 +68,7 @@ Statistics collected by the Postgres [cumulative statistics system](https://www.
 
 ## Database encoding
 
-Neon does not currently support changing the database encoding. 
+Neon does not currently support changing the database encoding.
 
 ## PostgreSQL documentation
 
