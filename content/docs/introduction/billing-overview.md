@@ -46,7 +46,7 @@ Extra storage is only available with the [Scale](/docs/introduction/plans##scale
 
 ### Compute
 
-Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for by _compute hour_. For example, the Launch plan has an allowance of 1200 compute hours included in the plan's monthly fee. If you use additional compute hours, you are billed for those at the compute-hour price stated on our [pricing](https://neon.tech/pricing) page.
+Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed by _compute hour_. For example, the Launch plan has an allowance of 1200 compute hours included in the plan's monthly fee. If you use additional compute hours, you are billed for those at the compute-hour price stated on our [pricing](https://neon.tech/pricing) page.
 
 ### Projects
 
