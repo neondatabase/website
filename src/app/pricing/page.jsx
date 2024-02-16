@@ -56,8 +56,11 @@ const PricingPage = () => (
     <Hero />
     <Logos className="mt-36 pt-2.5 lg:mt-28 lg:pt-0 md:mt-20" logos={logos} />
     <CaseStudies className="mt-60 xl:mt-48 lg:mt-[124px] md:mt-[88px]" />
-    <Testimonials className="mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" items={sliderItems} />
-    <Plans className="my-[200px] px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
+    <Plans className="my-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
+    <Testimonials
+      className="mb-[200px] min-h-[312px] 2xl:mb-[156px] xl:mb-32 xl:min-h-[290px] lg:mb-28 lg:min-h-[257px] md:mb-20 md:min-h-[225px] sm:min-h-[310px]"
+      items={sliderItems}
+    />
     <Faq />
     <CTA />
   </Layout>

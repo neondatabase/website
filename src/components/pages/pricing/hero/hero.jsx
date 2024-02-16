@@ -268,13 +268,18 @@ const Hero = () => {
           Not sure which plan is right for you?
           <br />
           Explore the{' '}
-          <Link
-            className="inline-block decoration-1 underline-offset-4 hover:!decoration-green-45/0"
-            to="#plans"
+          <Button
+            className="inline-block !font-light decoration-1 underline-offset-4 hover:!decoration-green-45/0"
             theme="green-underlined"
+            onClick={() => {
+              document?.getElementById('plans')?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+              });
+            }}
           >
             detailed plan comparison
-          </Link>
+          </Button>
           .
         </p>
       </Container>
