@@ -9,6 +9,8 @@ export default {
   changelog: '/docs/changelog',
   discord: 'https://discord.gg/92vNTzKDGp',
   discussions: 'https://github.com/neondatabase/neon/discussions',
+  discourse: 'https://community.neon.tech',
+  enterprise: '/enterprise',
   github: 'https://github.com/neondatabase/neon',
   twitter: 'https://twitter.com/neondatabase/',
   linkedin: 'https://www.linkedin.com/company/neon-inc/',
