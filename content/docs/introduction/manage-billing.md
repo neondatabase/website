@@ -45,7 +45,7 @@ To update your billing email:
 1. Navigate to the Neon Console.
 1. Select your Profile.
 1. Select **Billing** from the menu.
-1. Select **Billing info**
+1. Select **Billing info**.
 1. Locate **Billing email** on the page and click **Edit**.
 
 If you are unable to update your billing email, please [open a support ticket](/docs/introduction/support).
