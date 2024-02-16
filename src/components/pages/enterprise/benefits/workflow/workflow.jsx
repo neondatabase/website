@@ -3,7 +3,7 @@ import Image from 'next/image';
 import ArrowIcon from 'components/pages/pricing/forecasting/images/arrow.inline.svg';
 import Link from 'components/shared/link/link';
 
-import image from '../images/branching.svg';
+import image from '../images/branching.jpg';
 
 const Workflow = () => (
   <div className="workflow grid w-full grid-cols-10 items-center gap-x-10 xl:gap-x-6 lg:gap-y-7 md:gap-y-6">
@@ -42,7 +42,8 @@ const Workflow = () => (
         src={image}
         width={590}
         height={384}
-        alt="Authorize Hasura Cloud"
+        quality={90}
+        alt="Neon branching interface"
       />
     </div>
   </div>

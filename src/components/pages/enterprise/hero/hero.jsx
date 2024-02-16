@@ -19,7 +19,7 @@ const Hero = () => (
       <div className="absolute left-1/2 top-0 -z-10 h-[270px] w-3/4 -translate-x-1/2 rounded-[1000px] bg-black-new blur-[30px] lg:w-full" />
       <h1 className="mx-auto max-w-[820px] text-6xl font-medium leading-none tracking-[-0.02em] xl:max-w-[720px] xl:text-[56px] lg:max-w-[650px] lg:text-5xl md:text-4xl sm:text-[36px]">
         <span className="text-pricing-primary-1">Deploy fleets of Postgres</span>{' '}
-        <span>without managing servers.</span>
+        <span>without managing servers</span>
       </h1>
       <p className="mt-5 text-xl font-light leading-snug xl:text-lg lg:mt-4 md:mt-2.5 md:text-base">
         Whether you need ten databases or ten thousand, Neon is the cloud platform for serverless
