@@ -43,7 +43,7 @@ const PricePerf = () => (
         src={image}
         width={590}
         height={387}
-        alt="Authorize Hasura Cloud"
+        alt="Autoscaling with Neon"
       />
     </div>
   </div>

@@ -39,7 +39,7 @@ const Fleets = () => (
         width={590}
         height={387}
         src={image}
-        alt="Authorize Hasura Cloud"
+        alt="Neon database creation interface"
       />
     </div>
   </div>

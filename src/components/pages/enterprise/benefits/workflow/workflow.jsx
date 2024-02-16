@@ -43,7 +43,7 @@ const Workflow = () => (
         width={590}
         height={384}
         quality={90}
-        alt="Authorize Hasura Cloud"
+        alt="Neon branching interface"
       />
     </div>
   </div>
