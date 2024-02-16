@@ -112,7 +112,7 @@ Factors that affect _active time_ include:
 
 - The number of active computes
 - The size of each compute
-- The _Autosuspend_ feature, which suspends a compute after 5 minutes of inactivity by default. Paying users can configure the autosuspend timeout or disable it entirely.
+- The _Autosuspend_ feature, which suspends a compute after 5 minutes of inactivity by default. Users on paid plans can configure the autosuspend timeout or disable it entirely.
 - The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Compute size automatically scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
