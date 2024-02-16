@@ -12,7 +12,7 @@ Each of Neon's plans includes **Storage**, **Compute**, and **Project** usage al
 |            | Free Tier                                                    | Launch          | Scale             | Enterprise       |
 |------------|--------------------------------------------------------------|-----------------|-------------------|------------------|
 | Storage    | 512 MiB                                                      | 10 GiB          | 50 GiB            |  Larger sizes                |
-| Compute    | 24/7 usage on the primary branch compute (~750 compute hours/month), 20 _active hours_/month on branch computes. | Up to 1,200 _active hours_/month (300 compute hours) | Up to 3,000 _active hours_/month (750 compute hours)  |  Custom                |
+| Compute    | Always-available primary branch compute, 20 _active hours_/month on branch computes. | Up to 1,200 _active hours_/month (300 compute hours) | Up to 3,000 _active hours_/month (750 compute hours)  |  Custom                |
 | Projects   | 1                                                            | 10              | 50                |  Unlimited                |
 
 
