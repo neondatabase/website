@@ -37,7 +37,8 @@ const items = [
   },
   {
     type: 'Launch',
-    price: '<header>From</header> $19 <span>/month</span>',
+    price:
+      '<header class="absolute -top-6 text-base font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</header> $19 <span>/month</span>',
     description: 'All the resources, features and support you need to launch.',
     features: [
       { title: '10 GiB storage included' },
@@ -55,7 +56,8 @@ const items = [
   },
   {
     type: 'Scale',
-    price: '<header>From</header> $69 <span>/month</span>',
+    price:
+      '<header class="absolute -top-6 text-base font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</header> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
       { title: '50 GiB storage included' },
@@ -133,7 +135,7 @@ const Hero = () => {
           Prototype for free, launch with predictable costs, and scale seamlessly when you hit the
           big time.
         </p>
-        <div className="relative mx-auto mt-16 xl:mt-12 lg:w-full lg:max-w-[704px] md:mt-9">
+        <div className="relative mx-auto mt-20 xl:mt-12 lg:w-full lg:max-w-[704px] md:mt-9">
           <h2 className="sr-only">Neon pricing plans</h2>
           <ul className="grid-gap relative z-10 grid grid-cols-4 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
             {items.map(({ type, price, description, features, button }, index) => {
@@ -165,13 +167,13 @@ const Hero = () => {
                       <h3
                         className={clsx(
                           isScalePlan && 'text-green-45',
-                          'text-xl font-medium leading-none tracking-tight xl:text-lg'
+                          'text-xl font-medium leading-none tracking-tight text-gray-new-80 xl:text-lg'
                         )}
                       >
                         {type}
                       </h3>
                       <p
-                        className="mt-8 text-[36px] font-light leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4 [&_header]:absolute [&_header]:top-12 [&_header]:text-[16px] [&_header]:font-light [&_header]:text-gray-new-50 [&_span]:text-[28px] [&_span]:font-light [&_span]:-tracking-[0.06em] [&_span]:text-gray-new-50"
+                        className="relative mt-14 text-[36px] leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4 [&_span]:text-[28px] [&_span]:font-light [&_span]:-tracking-[0.06em] [&_span]:text-gray-new-50"
                         dangerouslySetInnerHTML={{ __html: price }}
                       />
                       {isScalePlan ? (
@@ -192,17 +194,14 @@ const Hero = () => {
                           {button.text}
                         </Button>
                       )}
-                      <p className="mt-9 font-light leading-snug tracking-tight  2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
+                      <p className="mt-9 font-light leading-snug tracking-tight text-gray-new-70  2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
                         {description}
                       </p>
                     </div>
                     <div className="mt-auto flex grow flex-col">
                       <ul className="flex flex-col flex-wrap gap-y-4">
                         {features.map(({ title, tooltip }, index) => (
-                          <li
-                            className="relative pl-6 leading-tight tracking-tight text-gray-new-70"
-                            key={index}
-                          >
+                          <li className="relative pl-6 leading-tight tracking-tight" key={index}>
                             <CheckIcon
                               className={clsx(
                                 isScalePlan ? 'text-green-45' : 'text-gray-new-70',
