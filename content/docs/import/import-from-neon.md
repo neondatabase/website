@@ -1,7 +1,7 @@
 ---
 title: Import data from another Neon project
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.758Z'
+updatedOn: '2024-02-08T15:20:54.292Z'
 ---
 
 This guide describes how to migrate a database from one Neon project to another by piping data from `pg_dump` to `pg_restore`. Use these instructions to:
@@ -27,23 +27,15 @@ To import your data from another Neon project:
 
    You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Connections strings have this format:
 
-   <CodeBlock shouldWrap>
-
-   ```bash
+   ```bash shouldWrap
    postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
-   </CodeBlock>
-
 4. Prepare your import command to pipe data to from one Neon project to the other. The command will look similar to this:
 
-   <CodeBlock shouldWrap>
-
-   ```bash
+   ```bash shouldWrap
    pg_dump -Fc -v -d postgres://[user]:[password]@[neon_hostname]/[dbname] | pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
-
-   </CodeBlock>
 
    The command includes these arguments:
 

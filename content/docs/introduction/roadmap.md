@@ -4,7 +4,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-01-26T20:06:32.169Z'
+updatedOn: '2024-02-08T20:07:48.873Z'
 ---
 Our developers are focused on making Neon the default choice for serverless PostgreSQL. This roadmap describes committed features that are coming soon. We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion.
 
@@ -27,7 +27,7 @@ Here's a snapshot of what we're working on now:
 
 * **Autoscaling visualizations**
 
-    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time.
+    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time. See [Monitoring autoscaling](/docs/guides/autoscaling-guide#monitor-autoscaling) for a sneak peek.
 
 ### Developer workflows
 
@@ -51,9 +51,7 @@ Here's a snapshot of what we're working on now:
 
 ### More regions
 
-* **Australia**
-
-    Adding regional support for Australia — Asia Pacific (Sydney).
+*  We are currently evaluating new regions. Please reach out on Discord to let us know which region you would like to see next. 
 
 ## A brief history of Neon
 
@@ -68,6 +66,8 @@ In the spring of 2023, Neon launched [paid plans](https://neon.tech/pricing) wit
 In the summer of 2023, we released the [Neon CLI](/docs/reference/neon-cli). New features included a configurable [history retention](/docs/introduction/point-in-time-restore) window as well as support for Postgres 16 and the Isreal (Tel Aviv) region. We also announced [SOC 2 Type 1](https://neon.tech/blog/soc2-type-1#our-journey-to-soc2) compliance.
 
 In the fall of 2023, we added [IP allowlisting](/docs/introduction/ip-allow), email signup, and [logical replication](/docs/introduction/logical-replication). We also announced [SOC 2 Type 2](https://neon.tech/blog/soc2-type2) compliance.
+
+In January of 2024, we added support for the Asia Pacific (Sydney) region.
 
 ## Technical Preview
 

@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2024-01-26T18:19:19.804Z'
+updatedOn: '2024-02-08T15:20:54.280Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
@@ -68,13 +68,9 @@ To connect to your branch:
 3. Copy the connection string. A connection string includes your role name, password, compute endpoint hostname, and database name.
 4. Connect with `psql`.
 
-   <CodeBlock shouldWrap>
-
-   ```bash
+   ```bash shouldWrap
    psql postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
-
-   </CodeBlock>
 
 ## Verify the data
 

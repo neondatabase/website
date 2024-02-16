@@ -2,7 +2,7 @@
 title: Read replicas — Data analysis and reporting
 subtitle: Leverage read replicas for running data-intensive queries
 enableTableOfContents: true
-updatedOn: '2024-01-10T18:34:05.857Z'
+updatedOn: '2024-02-08T15:20:54.289Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read-only compute instance for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
@@ -85,13 +85,9 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
     The connection string appears similar to the following:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
-
-    </CodeBlock>
 
     If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string.
 
@@ -106,13 +102,9 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
 1. Connect to your application from a client such as `psql` or add the connection details to your application. For example, to connect using `psql`, issue the following command:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
-
-    </CodeBlock>
 
 ## Run the analytics query on the read replica
 

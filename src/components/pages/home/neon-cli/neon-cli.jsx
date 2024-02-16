@@ -1,13 +1,13 @@
-'use client';
+import parse from 'html-react-parser';
 
-import clsx from 'clsx';
-import { useState } from 'react';
-
-import CodeBlock from 'components/shared/code-block';
+import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import Container from 'components/shared/container/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import { getHighlightedCodeArray } from 'lib/shiki';
+
+import CodeTabs from './code-tabs';
 
 const items = [
   {
@@ -37,8 +37,8 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
   },
 ];
 
-const NeonCli = () => {
-  const [activeItem, setActiveItem] = useState(items[0]);
+const NeonCli = async () => {
+  const highlightedCodeSnippets = await getHighlightedCodeArray(items);
   return (
     <section className="neon-cli safe-paddings bg-black pt-44 text-white 2xl:pt-32 xl:pt-28 lg:pt-20 md:pt-16">
       <Container
@@ -66,43 +66,17 @@ const NeonCli = () => {
             <span className="sr-only">about Neon CLI</span>
           </Link>
         </div>
-        <div className="col-span-6 col-start-1 row-start-1 max-w-[716px] 2xl:-mr-8 xl:hidden">
-          <div className="flex gap-x-2.5 xs:gap-x-1.5">
-            {items.map(({ name }, index) => (
-              <button
-                className={clsx(
-                  'relative rounded-t-md border-[5px] border-b-0 border-[#333] px-[15px] py-3 font-mono text-sm font-bold uppercase leading-none transition-colors duration-200 after:transition-colors after:duration-200',
-                  activeItem.name === name
-                    ? 'text-green-45 after:absolute after:inset-x-0 after:bottom-[-6px] after:z-10 after:h-[6px] after:bg-black'
-                    : 'bg-[#333] text-white hover:text-green-45'
-                )}
-                type="button"
-                key={index}
-                onClick={() => setActiveItem(items[index])}
-              >
-                {name}
-              </button>
-            ))}
-          </div>
-          <CodeBlock
-            className="prose-blog dark prose rounded-b-md rounded-tr-md border-[5px] border-[#333] 2xl:rounded-tr-none sm:border-[3px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:pb-5 [&_pre]:pt-7"
-            isTrimmed={false}
-          >
-            {activeItem.code}
-          </CodeBlock>
-        </div>
+        <CodeTabs items={items} highlightedCodeSnippets={highlightedCodeSnippets} />
+
         <ul className="hidden gap-y-6 xl:flex xl:flex-col">
-          {items.map(({ name, code }, index) => (
+          {items.map(({ name }, index) => (
             <li key={index}>
               <div className="relative rounded-t-md border-[5px] border-b-0 border-[#333] px-4 py-3 font-mono text-sm font-bold uppercase leading-none md:text-xs sm:border-[3px] sm:border-b-0">
                 {name}
               </div>
-              <CodeBlock
-                className="prose-blog dark prose rounded-b-md rounded-tr-md border-[5px] border-[#333] 2xl:rounded-tr-none sm:border-[3px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:pb-5 [&_pre]:pt-7"
-                isTrimmed={false}
-              >
-                {code}
-              </CodeBlock>
+              <CodeBlockWrapper className="dark prose max-w-none rounded-b-md rounded-tr-md border-[5px] border-[#333] 2xl:rounded-tr-none sm:border-[3px] [&_code]:!text-[15px] [&_pre]:my-0 [&_pre]:!bg-black [&_pre]:px-0 [&_pre]:pb-5 [&_pre]:pt-7">
+                {parse(highlightedCodeSnippets[index])}
+              </CodeBlockWrapper>
             </li>
           ))}
         </ul>

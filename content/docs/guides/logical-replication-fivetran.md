@@ -3,10 +3,10 @@ title: Replicate data with Fivetran
 subtitle: Learn how to replicate data from Neon with Fivetran
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-12-21T15:11:12.212Z'
+updatedOn: '2024-02-08T15:20:54.284Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. 
+Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 [Fivetran](https://fivetran.com/) is an automated data movement platform that helps you centralize data from disparate sources, which you can then manage directly from your browser. Fivetran extracts your data and loads it into your data destination.
 
@@ -55,7 +55,7 @@ To create a role in the Neon Console:
 4. Select the branch where you want to create the role.
 4. Click **New Role**.
 5. In the role creation dialog, specify a role name.
-6. Click **Create**. 
+6. Click **Create**.
 
 The role is now created and you are provided with the password for the role, which you can show, copy, or download.
 
@@ -130,16 +130,12 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 1. Log in to your [Fivetran](https://fivetran.com/) account.
 1. On the **Select your datasource** page, search for the **PostgreSQL** source and click **Set up**.
 1. In your connector setup form, enter a value for **Destination Schema Prefix**. This prefix applies to each replicated schema and cannot be changed once your connector is created. In this example, we'll use `neon` as the prefix.
-1. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project. 
+1. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project.
     For example, let's say this is your connection string:
 
-    <CodeBlock shouldWrap>
-
-    ```bash
+    ```bash shouldWrap
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
     ```
-
-    </CodeBlock>
 
     From this string, the values in the Fivetran **Create a source** dialog would show as below. Your actual values will differ, with the exception of the port number.
 
@@ -153,7 +149,7 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 
     ![Fivetran connector setup](/docs/guides/fivetran_connector_setup.png)
 
-1. If you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, add Fivetran's IPs to your allowlist in Neon. 
+1. If you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, add Fivetran's IPs to your allowlist in Neon.
 
     ![Fivetran IP addresses](/docs/guides/fivetran_ips.png)
 
@@ -178,7 +174,7 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 
     ![Fivetran how to handle changes](/docs/guides/fivetran_changes.png)
 
-1. Click **Continue**. Your data is now ready to sync. 
+1. Click **Continue**. Your data is now ready to sync.
 
     ![Fivetran data is ready to sync page](/docs/guides/fivetran_ready_to_sync.png)
 
@@ -187,6 +183,5 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 ## References
 
 - [Fivetran Generic PostgreSQL Setup Guide](https://fivetran.com/docs/databases/postgresql/setup-guide)
-
 
 <NeedHelp/>

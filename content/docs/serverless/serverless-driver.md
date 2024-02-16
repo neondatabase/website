@@ -2,7 +2,7 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2024-01-09T20:06:43.407Z'
+updatedOn: '2024-02-09T17:53:20.590Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
@@ -427,10 +427,13 @@ The Ping Thing application pings a Neon Serverless Postgres database using a Ver
 <a href="https://github.com/neondatabase/ping-thing" description="Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes" icon="github">Ping Thing</a>
 </DetailIconCards>
 
+## Neon serverless driver GitHub repository and changelog
+
+The GitHub repository and [changelog](https://github.com/neondatabase/serverless/blob/main/CHANGELOG.md) for the Neon serverless driver are found [here](https://github.com/neondatabase/serverless).
+
 ## References
 
 - [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-- [Neon serverless driver GitHub repository](https://github.com/neondatabase/serverless)
 - [node-postgres](https://node-postgres.com/)
 - [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon)
 - [kysely](https://github.com/kysely-org/kysely)

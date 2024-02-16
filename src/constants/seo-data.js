@@ -53,6 +53,13 @@ export default {
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },
+  enterprise: {
+    title: 'Neon for Enterprises: Postgres Fleets - Neon',
+    description:
+      'Enterprises use Neon to deliver a Postgres layer that is automated, instantly scalable and cost efficient.',
+    pathname: LINKS.enterprise,
+    imagePath: '/images/social-previews/enterprise.jpg',
+  },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
     description: 'Bring familiar, reliable and scalable Postgres experience to your customers.',

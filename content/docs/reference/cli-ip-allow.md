@@ -2,7 +2,7 @@
 title: Neon CLI commands — ip-allow
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-01-19T17:35:59.968Z'
+updatedOn: '2024-02-09T17:53:20.589Z'
 ---
 
 ## Before you begin
@@ -14,7 +14,7 @@ For information about Neon's **IP Allow** feature, see [Configure IP Allow](/doc
 
 ## The `ip-allow` command
 
-The `ip-allow` command allows you to perform `list`, `add`, `remove`, and `reset` actions on the IP allowlist for your Neon project. You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). 
+The `ip-allow` command allows you to perform `list`, `add`, `remove`, and `reset` actions on the IP allowlist for your Neon project. You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation).
 
 ### Usage
 
@@ -46,7 +46,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id`  | Project ID  | string | Yes, unless you have [set project context](/docs/reference/cli-set-context) |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Examples
 
@@ -77,18 +77,14 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id`  | Project ID  | string | Yes, unless you have [set project context](/docs/reference/cli-set-context) |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 | `--primary-branch`  | If true, the list will be applied only to the primary branch. Use `--primary-branch false` to remove this setting. | string | |
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl ip-allow add 192.168.1.3 --project-id cold-grass-40154007
 ```
-
-</CodeBlock>
 
 ### remove
 
@@ -107,17 +103,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id`  | Project ID  | string | Yes, unless you have [set project context](/docs/reference/cli-set-context) |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl ip-allow remove 192.168.1.3 --project-id cold-grass-40154007
 ```
-
-</CodeBlock>
 
 ### reset
 
@@ -136,16 +128,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id`  | Project ID  | string | Yes, unless you have [set project context](/docs/reference/cli-set-context) |
+| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
 #### Example
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 neonctl ip-allow reset 192.168.1.1 --project-id cold-grass-40154007
 ```
-
-</CodeBlock>
 
 <NeedHelp/>

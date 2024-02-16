@@ -2,7 +2,7 @@
 title: Documentation Contribution Guide
 subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
-updatedOn: '2024-01-11T14:49:37.561Z'
+updatedOn: '2024-02-08T15:20:54.273Z'
 ---
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
@@ -199,11 +199,9 @@ SELECT * FROM posts ORDER BY id;
 ```
 ````
 
-You can add language-specific highlighting to code blocks, as in the example above. See [Supported language highlighting for code blocks](https://prismjs.com/index.html#supported-languages).
+You can add language-specific highlighting to code blocks, as in the example above. See [Supported language highlighting for code blocks](https://shiki.matsu.io/languages).
 
-You can also wrap code blocks in `<CodeBlock></CodeBlock>` tags to show line numbers or wrap long strings.
-
-`<CodeBlock>` accepts the following options:
+Code block accepts the following options:
 
 - `showLineNumbers`: Shows the line numbers in the code block
 - `shouldWrap`: Enables code wrapping in the code block. This is useful for long commands or connection strings that would otherwise require the reader to scroll.
@@ -211,13 +209,11 @@ You can also wrap code blocks in `<CodeBlock></CodeBlock>` tags to show line num
 Example:
 
 ````md
-<CodeBlock shouldWrap>
 
-```bash
+```bash shouldWrap
 A really long line that scrolls off the page
 ```
 
-</CodeBlock>
 ````
 
 ## Code tabs

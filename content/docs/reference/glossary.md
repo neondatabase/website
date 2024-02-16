@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-01-19T14:12:56.666Z'
+updatedOn: '2024-02-08T20:07:48.875Z'
 ---
 
 ## Access token
@@ -93,13 +93,9 @@ A method of creating a pool of connections and caching those connections for reu
 
 A string containing details for connecting to a Neon database. The details include a user name (role), compute endpoint hostname, and database name; for example:
 
-<CodeBlock shouldWrap>
-
-```terminal
+```bash shouldWrap
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
-
-</CodeBlock>
 
 The compute endpoint hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
 
@@ -299,7 +295,7 @@ Older projects may have a `web-access` system role, used by the [SQL Editor](#sq
 
 ## Primary branch
 
-Each Neon project is created with a primary branch called `main`, but you can designate any branch as your project's primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
+Each Neon project is created with a root branch called `main`, which is designated as your project's primary branch by default. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
 
 ### Pro Plan
 
@@ -344,6 +340,10 @@ On the publisher database in a logical replication setup, replication slots trac
 ## Resale
 
 Selling the Neon service as part of another service offering. Neon's Platform Partnership plan offers resale of the Neon service as an option. See [Neon plans](/docs/introduction/plans) for more information.
+
+## Root branch
+
+Each Neon project is created with a root branch called `main`, which cannot be deleted. This branch is designated as your project's [primary branch](#primary-branch) by default, but you can change your primary branch. You can change the name of your root branch, but you cannot designate another branch as your root branch. The root branch created with your project always remains your project's root branch.
 
 ## Safekeeper
 
@@ -428,6 +428,10 @@ Write-ahead logs in a specific LSN range.
 ## WAL stream
 
 The stream of data written to the Write-Ahead Log (WAL) during transactional processing.
+
+## Working set
+
+A subset of frequently accessed or recently used data and indexes that ideally reside in memory (RAM) for quick access, allowing for better performance. See [how to size your compute](/docs/manage/endpoints#how-to-size-your-compute) to learn how to set your minimum compute to an adequate size to handle your working set.
 
 ## Write-Ahead Logging (WAL)
 
