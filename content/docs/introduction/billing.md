@@ -4,13 +4,13 @@ enableTableOfContents: true
 updatedOn: '2024-01-23T17:45:24.327Z'
 ---
 
-As described in [How billing works](/docs/introduction/billing-overview), each of Neon's plans includes **Storage**, **Compute**, and **Project** usage allowances. The [Launch](/docs/introduction/plans##launch) permits extra compute usage. The [Scale](/docs/introduction/plans##scale) plans permits extra compute, storage, and project usage.
+As described in [How billing works](/docs/introduction/billing-overview), each of Neon's plans includes [Storage](#storage), [Compute](#compute), and [Project](#projects) usage allowances. The [Launch](/docs/introduction/plans##launch) permits extra compute usage. The [Scale](/docs/introduction/plans##scale) plans permits extra compute, storage, and project usage.
 
 This topic describes Storage, Compute, and Project usage metrics in more detail so that you can better manage your plan allowances and extra usage. 
 
 ## Storage
 
-The following table outlines storage allowances for each Neon plan:
+The following table outlines data storage allowances for each Neon plan:
 
 |            | Storage    |
 |------------|------------|
@@ -33,7 +33,7 @@ Storage usage is based on the amount of data stored in your project (or projects
 
 ### Storage details
 
-_Storage_ is the total volume of data and history stored in your Neon project, measured in gibibytes (GiB). It includes the following:
+_Storage_ is the total volume of data and history stored in in Neon, measured in gibibytes (GiB). It includes the following:
 
 - **Current data size**
 
@@ -63,7 +63,7 @@ The following table outlines compute allowances for each Neon plan:
 
 |            | Compute                                                                                                              |
 |------------|----------------------------------------------------------------------------------------------------------------------|
-| Free Tier  | 24/7 usage on the primary branch compute (~750 compute hours), 20 _active hours_/month on branch computes.           |
+| Free Tier  | 24/7 usage on the primary branch compute (~750 compute hours), 20 _active hours_ /month on branch computes.           |
 | Launch     | Up to 1,200 _active hours_/month (300 compute hours)                                                                                             |
 | Scale      | Up to 3,000 _active hours_/month (750 compute hours)                                                                                             |
 | Enterprise | Custom                                                                                                            |

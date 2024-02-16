@@ -13,7 +13,7 @@ See [Token](#token).
 
 ## Active time
 
-The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [autosuspend](#autosuspend-compute). The [Neon Free Tier](/docs/introduction/plans#free-tier) has an [Active time](/docs/reference/glossary#active-time) limit of 100 hours per month, but that limit only affects non-primary branch compute usage. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. The primary branch compute always remains available regardless of the limit, ensuring that access to data on the primary branch is never interrupted. Neon Free Tier users can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**. The _Active time_ limit resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _Active time_ limit will reset on February 1st.
+A usage metric that tracks the amount of time a compute is active as opposed to being idle due to being suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
 
 ## Activity Monitor
 
@@ -109,9 +109,17 @@ The number of Compute Units (CU) assigned to a Neon compute. One CU is defined a
 
 A unit that measures the processing power of a Neon compute. A Neon compute can have anywhere from .25 CUs to 7 CUs.
 
-## Compute time
+## Compute hour
 
-A billing metric that measures the amount of computing capacity used within a given billing period. See [Compute time](/docs/introduction/billing#comput-time).
+A usage metric for tracking that amount of compute usage. A compute hour is 1 hour of [active time](#active-time) for a compute with 1 vCPU. Neon supports computes ranging in size from 1 vCPU to 7 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would take 4 hours of active time to use 1 compute hour. On the other hand, If you have a compute with 4 vCPU, it would only take 15 minutes of active time to use 1 compute hour.
+
+To calculate compute hour usage, you would use the following formula:
+
+```
+compute hours = active time x compute size
+```
+
+For more information, see [Compute](/docs/introduction/billing#compute).
 
 ## Console
 
@@ -176,6 +184,10 @@ A custom volume-based paid plan offered by Neon. See [Neon plans](/docs/introduc
 ## Free Tier
 
 See [Neon Free Tier](#neon-free-tier).
+
+## History
+
+The history of data changes for all branches in your Neon project. A history is maintined to support _point-in-time restore_. For more information, see [Storage details](/docs/introduction/billing#storage-details).
 
 ## IP allowlist
 
@@ -364,6 +376,8 @@ A Neon Control Plane operation that starts a compute endpoint when there is an e
 ## Storage
 
 Where data is recorded and stored. Neon storage consists of Pageservers, which store hot data, and a cloud object store, such as Amazon S3, that stores cold data for cost optimization and durability.
+
+Also, a usage metric that tracks the total volume of data and [history](#history) stored in Neon. For more information, see [Storage](/docs/introduction/billing#storage).
 
 ## Subscriber
 
