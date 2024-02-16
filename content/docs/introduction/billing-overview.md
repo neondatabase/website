@@ -42,7 +42,7 @@ Taking advantage of extra usage requires no user action. Extra usage, if support
 
 ### Storage
 
-Extra storage is only available with the [Scale](/docs/introduction/plans##scale) plan. Extra storage is billed for in units of 10 GiB. For example, the Scale plan has an allowance of 50 GiB that is included in the plan's monthly fee. If you go over 50 GiB of storage, you are automatically billed for extra storage in increments of 10 GiB for the price stated on our [pricing](https://neon.tech/pricing) page. For example, as soon as you go over your allowance, say by 1 GiB, you are billed for one 10 GiB unit of storage. If you go over by more than 10 GiB, you will be billed for two 10 GiB units of storage, and so on.
+Extra storage is only available with the [Scale](/docs/introduction/plans##scale) plan. Extra storage is billed in units of 10 GiB. For example, the Scale plan includes an allowance of 50 GiB in the plan's monthly fee. If you go over 50 GiB of storage, you are automatically billed for extra storage in increments of 10 GiB for the price stated on our [pricing](https://neon.tech/pricing) page. For example, as soon as you go over your allowance, say by 1 GiB, you are billed for one 10 GiB storage unit. If you go over by more than 10 GiB, you will be billed for two 10 GiB units of extra storage, and so on.
 
 ### Compute
 
