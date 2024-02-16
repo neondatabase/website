@@ -50,7 +50,7 @@ Extra compute usage is available with the [Launch](/docs/introduction/plans##lau
 
 ### Projects
 
-Extra project usage is only available with the [Scale](/docs/introduction/plans##scale) plan. Extra projects are billed for in units of 10. For example, the Scale plan has an allowance of 50 projects, which is included in the plan's monthly fee. If you use more than 50 projects, you are automatically billed for an extra package of 10 projects for the price stated on our [pricing](https://neon.tech/pricing) page. For example, if you use 51 projects, you are billed for a package of 10 projects. if you use 61 projects, you are billed for two packages of 10 projects, and so on. 
+Extra project usage is only available with the [Scale](/docs/introduction/plans##scale) plan. Extra projects are billed in units of 10. For example, the Scale plan has an allowance of 50 projects, which is included in the plan's monthly fee. If you use more than 50 projects, you are automatically billed for an extra package of 10 projects at the price stated on our [pricing](https://neon.tech/pricing) page. For example, if you use 51 projects, you are billed for a package of 10 projects. If you use 61 projects, you are billed for two packages of 10 projects, and so on. 
 
 
 ## Monitoring billing and usage
