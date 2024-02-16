@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2024-02-15T16:26:27.065Z'
+updatedOn: '2024-02-16T18:37:19.448Z'
 ---
 
 Neon's Community, Expert, Priority, and Enterprise support plans are outlined below.
@@ -17,6 +17,7 @@ Neon's Community, Expert, Priority, and Enterprise support plans are outlined be
 | SLAs                                     |     -     |    -     |          | &check;    |
 
 ## Community support
+
 
 Community support includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged in both communities. 
 
