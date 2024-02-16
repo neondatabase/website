@@ -34,6 +34,28 @@
     {
       "rows": "2",
       "feature": {
+        "title": "Storage"
+      },
+      "free": "0.5 GiB",
+      "launch": "10 GiB",
+      "scale": "50 GiB",
+      "enterprise": "Larger sizes"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Compute",
+        "subtitle": "Based on 0.25 vCPU, 1GB RAM"
+      },
+      "free": "20 hours <span>+ always-available primary</span>",
+      "launch": "1,200 hours <span>per month</span>",
+      "scale": "3,000 hours <span>per month</span>",
+      "enterprise": "Custom"
+    },
+    
+    {
+      "rows": "2",
+      "feature": {
         "title": "Projects"
       },
       "free": "1",
@@ -63,29 +85,28 @@
     },
     {
       "rows": "2",
+      "feature": "Extra Usage"
+    },
+    {
+      "rows": "2",
       "feature": {
         "title": "Storage"
       },
-      "free": "0.5 GB",
-      "launch": "10 GB",
-      "scale": "50 GB",
-      "enterprise": "Larger sizes"
-    },
-    {
-      "rows": "3",
-      "feature": {
-        "title": "Compute",
-        "subtitle": "One compute unit (CU) is 1 vCPU, 4GB RAM"
-      },
-      "free": "183 CU-hours per month <span>+ 20 for branches</span>",
-      "free_tooltip": "183 CU-hours gives you <br/>the ability to run a 0.25 CU <br/>instance 24/7 each month.",
-      "launch": "300 CU-hours <span>per month</span>",
-      "scale": "750 CU-hours <span>per month</span>",
+      "free": false,
+      "launch": false,
+      "scale": "$15 <span>per 10 GiB</span>",
       "enterprise": "Custom"
     },
     {
       "rows": "2",
-      "feature": "Overage Rates"
+      "feature": {
+        "title": "Compute",
+        "subtitle": "Based on 0.25 vCPU, 1GB RAM"
+      },
+      "free": false,
+      "launch": "$0.04 <span>per hour</span>",
+      "scale": "$0.04 <span>per hour</span>",
+      "enterprise": "Custom"
     },
     {
       "rows": "2",
@@ -95,26 +116,6 @@
       "free": false,
       "launch": false,
       "scale": "$50 <span>per 10 projects</span>",
-      "enterprise": "Custom"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Storage"
-      },
-      "free": false,
-      "launch": false,
-      "scale": "$15 <span>per 10 GB</span>",
-      "enterprise": "Custom"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Compute"
-      },
-      "free": false,
-      "launch": "$0.16 <span>per CU-hour</span>",
-      "scale": "$0.16 <span>per CU-hour</span>",
       "enterprise": "Custom"
     },
     {
@@ -133,7 +134,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Read Replicas"
+        "title": "Instant Read Replicas"
       },
       "free": false,
       "launch": true,
@@ -153,12 +154,11 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Autosuspend",
-        "subtitle": "Scale to zero on idle"
+        "title": "Autosuspend"
       },
       "free": "Fixed <span>5 minutes</span>",
-      "launch": "Configurable <span>5 min+ or disabled</span>",
-      "scale": "Configurable <span>1 min+ or disabled</span>",
+      "launch": "Configurable <span>5 min+ or never</span>",
+      "scale": "Configurable <span>1 min+ or never</span>",
       "enterprise": "Fully Configurable"
     },
     {
@@ -231,7 +231,7 @@
       "feature": {
         "title": "Custom Extensions"
       },
-      "free": true,
+      "free": false,
       "launch": true,
       "scale": true,
       "enterprise": true

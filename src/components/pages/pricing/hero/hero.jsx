@@ -22,8 +22,9 @@ const items = [
     price: '$0 <span>/month</span>',
     description: 'Generous free tier for hobby projects, prototypes, and learning Neon	',
     features: [
+      { title: '0.5 GiB storage' },
+      { title: 'Shared compute' },
       { title: '1 project w/10 branches' },
-      { title: 'Shared Compute and 0.5GB storage' },
       { title: 'Project Sharing, Logical Replication' },
       { title: 'Community support' },
     ],
@@ -36,17 +37,14 @@ const items = [
   },
   {
     type: 'Launch',
-    price: '<span>From</span> $19 <span>/month</span>',
+    price: '<header>From</header> $19 <span>/month</span>',
     description: 'All the resources, features and support you need to launch.',
     features: [
+      { title: '10 GiB storage included' },
+      { title: 'Autoscaling up to 4 vCPU, 16 GB' },
       { title: '10 projects w/500 branches each' },
-      {
-        title: 'Preloaded w/$63 of usage',
-        tooltip: '300 CU-hours compute <br/> and 10GB storage.',
-      },
-      { title: 'Autoscaling up to 4 CUs' },
       { title: 'Unlocks Read Replicas' },
-      { title: 'Expert support' },
+      { title: 'Standard support' },
     ],
     button: {
       url: LINKS.signup,
@@ -57,15 +55,12 @@ const items = [
   },
   {
     type: 'Scale',
-    price: '<span>From</span> $69 <span>/month</span>',
+    price: '<header>From</header> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
+      { title: '50 GiB storage included' },
+      { title: 'Autoscaling up to 7 vCPU, 28 GB' },
       { title: '50 projects w/500 branches each' },
-      {
-        title: 'Preloaded with $195 of usage',
-        tooltip: '750 CU-hours compute <br/> and 50GB storage.',
-      },
-      { title: 'Autoscaling up to 7 CUs' },
       { title: 'Unlocks key security features' },
       { title: 'Priority support' },
     ],
@@ -83,8 +78,8 @@ const items = [
     features: [
       { title: 'Custom pricing with discounts' },
       { title: 'Higher resource limits' },
-      { title: 'Customer-Owned S3' },
-      { title: 'Enterprise support' },
+      { title: 'Customer-owned S3' },
+      { title: 'Enterprise support w/SLAs' },
     ],
     button: {
       url: LINKS.contactSales,
@@ -135,8 +130,8 @@ const Hero = () => {
           <span className="text-pricing-primary-1">Hello, Serverless Postgres.</span>
         </Heading>
         <p className="mx-auto mt-5 max-w-[620px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
-          Neon brings serverless architecture to PostgreSQL, which allows us to offer you flexible
-          usage and volume-based plans.
+          Prototype for free, launch with predictable costs, and scale seamlessly when you hit the
+          big time.
         </p>
         <div className="relative mx-auto mt-16 xl:mt-12 lg:w-full lg:max-w-[704px] md:mt-9">
           <h2 className="sr-only">Neon pricing plans</h2>
@@ -176,7 +171,7 @@ const Hero = () => {
                         {type}
                       </h3>
                       <p
-                        className="mt-8 text-[36px] font-light leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4 [&_span]:text-[28px] [&_span]:font-light [&_span]:-tracking-[0.06em] [&_span]:text-gray-new-50"
+                        className="mt-8 text-[36px] font-light leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4 [&_header]:absolute [&_header]:top-12 [&_header]:text-[16px] [&_header]:font-light [&_header]:text-gray-new-50 [&_span]:text-[28px] [&_span]:font-light [&_span]:-tracking-[0.06em] [&_span]:text-gray-new-50"
                         dangerouslySetInnerHTML={{ __html: price }}
                       />
                       {isScalePlan ? (
