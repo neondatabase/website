@@ -13,17 +13,13 @@ With Neon's branch restore capability, you can easily restore a branch to an ear
 
 ## How branch restore works
 
-Neon supports several one-click branch restore methods:
-* **From branch's own history** &#8212; restore a selected branch to any point in your history retention window using a timestamp or LSN.
-* **From another branch** &#8212; restore a destination branch from another (source) branch's data, from either its current state or from an earlier point in its history using a timestamp or LSN.
-
 ### Restore from history
 
-The restore operation lets you revert the state of a selected branch to an earlier point in time. For example, you can revert to a state just before a data loss occurred.
+The restore operation lets you revert the state of a selected branch to an earlier point in time in its own or another branch's history, using time and date or Log Sequence Number (LSN). For example, you can revert to a state just before a data loss occurred.
 
 ![branch restore to timestamp](/docs/guides/branch-restore_feature.png)
 
-By default, the history retention for a Neon project is 7 days. You can revert a branch to any time within that configured [retention window](/docs/manage/projects#configure-history-retention), down to the millisecond.
+By default, the history retention for a Neon project is 7 days for paying users, and 1 day for Free Tier. You can revert a branch to any time within that configured [retention window](/docs/manage/projects#configure-history-retention), down to the millisecond.
 
 A few key points to keep in mind about the restore operation:
 
@@ -101,13 +97,38 @@ The ephemeral endpoints are created according to your configured [default comput
 
 ## How to use branch restore
 
-### Restoring from history
+You can use the Neon Console or the CLI to restore branches
 
 <Tabs labels={["Console", "CLI"]}>
 
 <TabItem>
 
-Use the **Restore** page to restore a branch to an earlier timestamp in its history. Choose your branch, pick your timestamp, and then click the **Restore branch** button.
+### Restoring from history
+
+Use the **Restore** page to restore a branch to an earlier timestamp in its history.
+
+First, select the **Branch to restore**. This is the target branch for the restore operation.
+
+To restore a branch from its own history:
+
+1. Make sure the **From history** tab is selected. 
+1. Choose your timestamp or switch to LSN.
+ 1. Click **Next**.
+
+    A confirmation window opens giving you details about the pending restore operation. Review these details to make sure you've made the correct selections.
+
+1. Click **Restore** to complete the operation.
+
+To restore from another branch:
+
+ 1. Switch to the **From another branch** tab.
+ 1. Select the source branch that that you want to restore data from.
+ 1. By default, the operation pulls the latest data from the source branch. If you want to pull from an earlier point in time, disable **Restore from latest data (head)**.
+
+     The timestamp selector will appear.
+
+ 1. Choose your timestamp or switch to the LSN input.
+ 1. Click **Next**, confirm the details of the operation, then click **Restore** to complete.
 
 ![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
 
