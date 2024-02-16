@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-import infoSvg from 'components/pages/partners/apply/images/info.svg';
 import AnimatedButton from 'components/shared/animated-button';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -13,6 +12,7 @@ import Link from 'components/shared/link';
 import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
+import infoSvg from 'icons/tooltip.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 import sendSegmentEvent from 'utils/send-segment-event';
 
