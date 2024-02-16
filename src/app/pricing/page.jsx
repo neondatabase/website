@@ -12,20 +12,14 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.pricing);
 
 const logos = [
-  'bunnyshell',
-  'hasura',
-  'replit',
-  'vercel',
-  'illa',
-  'octolis',
-  'cloudflare',
-  'airplane',
-  'wundergraph',
-  'fabric-io',
-  'snaplet',
-  'fl0',
-  'dynaboard',
-  'opus',
+  'zimmer',
+  'outfront',
+  'genomics',
+  'supergood',
+  'code-institute',
+  'branch',
+  'eqt',
+  'master-school',
 ];
 
 const sliderItems = [
