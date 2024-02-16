@@ -25,8 +25,8 @@ const Hero = () => (
         Whether you need ten databases or ten thousand, Neon is the cloud platform for serverless
         Postgres:
         <br />
-        Automated, instantaneous, with the battle-tested stability of the world&apos;s most popular
-        database.
+        Automated and instantaneous, with the battle-tested stability of the world&apos;s most
+        popular database.
       </p>
       <AnimatedButton
         className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-[-0.02em] lg:mt-7 md:mt-6"
