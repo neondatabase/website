@@ -50,13 +50,13 @@ Log in to the Neon console and navigate to the [Projects](https://console.neon.t
 
 ### Retrieve your Neon database connection string
 
-Log in to the Neon Console and navigate to the project you created above. Look into the **Connection Details** section on the project page to find your database connection string. It should look similar to this:
+Log in to the Neon Console and navigate to the `Connection Details` section to find your database connection string. It should look similar to this:
 
 ```bash
-postgres://username:password@your-database-url.neon.tech/neondb?sslmode=require
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-Keep this connection string handy for later use.
+Keep your connection string handy for later use.
 
 ## Setting up your Cloudflare Pages project
 
@@ -180,7 +180,7 @@ function App() {
 export default App;
 ```
 
-The `App` component fetches the list of books from the server and displays them. It also provides a form to add new books to the list. Cloudflare Pages allows us to define the api endpoints as serverless functions, which we'll implement next.
+The `App` component fetches the list of books from the server and displays them. It also provides a form to add new books to the list. `Cloudflare` Pages allows us to define the api endpoints as serverless functions, which we'll implement next.
 
 ### Implement the serverless functions
 
@@ -314,7 +314,7 @@ npm run build
 npx wrangler pages deploy dist --project-name <NAME_OF_YOUR_PROJECT>
 ```
 
-Give a unique name to your Cloudflare Pages project above. The Wrangler CLI will output the URL of your application hosted on the Cloudflare platform. Visit this URL in your browser to interact with it.
+Give a unique name to your `Cloudflare Pages` project above. The Wrangler CLI will output the URL of your application hosted on the Cloudflare platform. Visit this URL in your browser to interact with it.
 
 ```bash
 ✨ Compiled Worker successfully
@@ -328,7 +328,7 @@ Give a unique name to your Cloudflare Pages project above. The Wrangler CLI will
 
 ### Add your Neon connection string as an environment variable
 
-The Cloudflare production deployment still doesn't have access to the `DATABASE_URL` environment variable. To add it, we need to navigate to the Cloudflare dashboard and add it manually.
+The Cloudflare production deployment doesn't have access to the `DATABASE_URL` environment variable yet. Hence, we need to navigate to the Cloudflare dashboard and add it manually. 
 
 Navigate to the dashboard and select the `Settings` section in your project. Go to the `Environment Variables` tab and add a new environment variable named `DATABASE_URL` with the value of your Neon database connection string.
 
@@ -338,7 +338,7 @@ To make sure the environment variable is available to the serverless functions, 
 npx wrangler pages deploy dist --project-name <NAME_OF_YOUR_PROJECT>
 ```
 
-Now, visit the URL of your Cloudflare Pages application to interact with it. You should see the list of books fetched from the database and a form to add new books.
+Now, visit the URL of your `Cloudflare Pages` application to interact with it. You should see the list of books fetched from the Neon database and a form to add new books.
 
 ## Removing the example application and Neon project
 
