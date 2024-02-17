@@ -7,7 +7,7 @@ updatedOn: '2024-02-12T00:00:00.000Z'
 
 `Cloudflare Pages` is a modern web application hosting platform that allows you to build, deploy, and scale your web applications. While it is typically used to host static websites, you can also use it to host interactive web applications by leveraging `functions` to run server-side code. Internally, Cloudflare functions are powered by `Cloudflare Workers`, a serverless platform that allows you to run JavaScript code on Cloudflare's edge network.
 
-This guide demonstrates how to connect to a Neon Postgres database from your Cloudflare Pages application. We'll create a simple web application using `React` that tracks our reading list using the database and provides a form to add new books to it. 
+This guide demonstrates how to connect to a Neon Postgres database from your Cloudflare Pages application. We'll create a simple web application using `React` that tracks our reading list using the database and provides a form to add new books to it.
 
 We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the database and make queries.
 
@@ -50,7 +50,7 @@ Log in to the Neon console and navigate to the [Projects](https://console.neon.t
 
 ### Retrieve your Neon database connection string
 
-Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+Log in to the Neon Console and navigate to the project you created above. Look into the **Connection Details** section on the project page to find your database connection string. It should look similar to this:
 
 ```bash
 postgres://username:password@your-database-url.neon.tech/neondb?sslmode=require
@@ -62,36 +62,36 @@ Keep this connection string handy for later use.
 
 ### Create a new project
 
-Run the following command in a terminal window to set up a new Cloudflare Pages project:
+We will create a simple React application using the Vite bundler framework. Run the following command in a terminal window to set up a new Vite project:
 
 ```bash
-npm create cloudflare@latest
+npm create vite@latest
 ```
 
 This initiates an interactive CLI prompt to generate a new project. To follow along with this guide, you can use the following settings:
+
 ```bash
-╭ Create an application with Cloudflare Step 1 of 3
-│
-├ In which directory do you want to create your application?
-│ dir ./my-neon-page
-│
-├ What type of application do you want to create?
-│ type Website or web app
-│
-├ Which development framework do you want to use?
-│ framework React
+✔ Project name: … my-neon-page
+✔ Select a framework: › React
+✔ Select a variant: › JavaScript
+
+Scaffolding project in /Users/ishananand/repos/javascript/my-neon-page...
+
+Done. Now run:
+
+  cd my-neon-page
+  npm install
+  npm run dev
 ```
 
-When asked if you want to deploy your application, select `no`. We'll develop and first test the application locally, before deploying it to the Cloudflare Pages platform. 
+We set up a template React configured to be built using Vite.
 
-The `create-cloudflare` CLI sets up a template `create-react-app` project. It also installs the `wrangler` CLI, which we'll use to test and deploy our application to the Cloudflare platform. 
+### Implement the application frontend
 
-### Implement the application frontend 
-
-The `create-cloudflare` CLI generates a new project in the `my-neon-page` directory. Navigate to this directory and open the `src/App.js` file. Replace the contents of this file with the following code:
+Navigate to the `my-neon-page` directory and open the `src/App.jsx` file. Replace the contents of this file with the following code:
 
 ```jsx
-// src/App.js
+// src/App.jsx
 
 import React, { useState, useEffect } from "react";
 
@@ -123,13 +123,13 @@ function App() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ bookName, authorName }),
+        body: JSON.stringify({ title: bookName, author: authorName }),
       });
       const data = await response.json();
 
       if (data.success) {
         console.log("Success:", data);
-        setBooks([...books, { bookName, authorName }]);
+        setBooks([...books, { title: bookName, author: authorName }]);
       } else {
         console.error("Error adding book:", data.error);
       }
@@ -148,7 +148,7 @@ function App() {
       <ul>
         {books.map((book, index) => (
           <li key={index}>
-            {book.bookName} by {book.authorName}
+            {book.title} by {book.author}
           </li>
         ))}
       </ul>
@@ -184,13 +184,13 @@ The `App` component fetches the list of books from the server and displays them.
 
 ### Implement the serverless functions
 
-We'll use the `neon-serverless` driver to connect to the Neon database, so we need to install it as a dependency first:
+We'll use the `neon-serverless` driver to connect to the Neon database, so we first need to install it as a dependency:
 
 ```bash
 npm install @neondatabase/serverless
 ```
 
-Next, we'll create two serverless functions for the application. 
+Next, we'll create two serverless functions for the application. In a `Cloudflare Pages` project, these must be defined in the `functions` directory at the root of the project. For further details, refer to the [Cloudflare Pages - Functions documentation](https://developers.cloudflare.com/pages/functions/).
 
 #### Function to fetch list of books from the database
 
@@ -200,7 +200,7 @@ Create a new file named `functions/books/index.js` in the project directory with
 import { Client } from '@neondatabase/serverless';
 
 export async function onRequestGet(context) {
-  const client = new Client(env.DATABASE_URL);
+  const client = new Client(context.env.DATABASE_URL);
   await client.connect();
 
   // Logic to fetch books from your database
@@ -219,7 +219,7 @@ Create another file named `functions/books/add.js` in the project directory with
 import { Client } from "@neondatabase/serverless";
 
 export async function onRequestPost(context) {
-  const client = new Client(env.DATABASE_URL);
+  const client = new Client(context.env.DATABASE_URL);
   await client.connect();
 
   // Extract the book details from the request body
@@ -227,7 +227,7 @@ export async function onRequestPost(context) {
 
   // Logic to insert a new book into your database
   const resp = await client.query(
-    "INSERT INTO books_to_read VALUES ($1, $2);",
+    "INSERT INTO books_to_read (title, author) VALUES ($1, $2); ",
     [data.title, data.author],
   );
 
@@ -255,11 +255,11 @@ export async function onRequestPost(context) {
 }
 ```
 
-This function extracts the book details from the request body and inserts it into the `books_to_read` table in the database. It returns a JSON response indicating the success or failure of the operation. 
+This function extracts the book details from the request body and inserts it into the `books_to_read` table in the database. It returns a JSON response indicating the success or failure of the operation.
 
 ### Test the application locally
 
-Our application is now ready to be tested locally. However, we first need to configure the `DATABASE_URL` environment variable to point to our Neon database. 
+Our application is now ready to be tested locally. However, we first need to configure the `DATABASE_URL` environment variable to point to our Neon database.
 
 We can do this by creating a `.dev.vars` file at the root of the project directory with the following content:
 
@@ -267,17 +267,31 @@ We can do this by creating a `.dev.vars` file at the root of the project directo
 DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 ```
 
-Now, to test the `Pages` application locally, we can use the `wrangler` CLI which comes with the Cloudflare project setup.
+Now, to test the `Pages` application locally, we can use the `wrangler` CLI tool used to manage Cloudflare projects. We can use it using the `npx` command as:
 
 ```bash
-npm run pages:dev
+npx wrangler pages dev -- npm run dev
 ```
 
-This command starts a local server simulating the Cloudflare environment.
+This command starts a local server simulating the Cloudflare environment. The function endpoints are run by the Wrangler tool while requests to the root URL are proxied to the Vite development server.
 
 ```bash
-[TODO]
+❯ npx wrangler pages dev -- npm run dev
+Running npm run dev...
+.
+.
+.
+.
+-------------------
+Using vars defined in .dev.vars
+Your worker has access to the following bindings:
+- Vars:
+  - DATABASE_URL: "(hidden)"
+⎔ Starting local server...
+[wrangler:inf] Ready on http://localhost:8788
 ```
+
+Visit the printed localhost URL in your browser to interact with the application. You should see the list of books fetched from the database and a form to add new books.
 
 ## Deploying your application with Cloudflare Pages
 
@@ -291,29 +305,40 @@ npx wrangler login
 
 This command will open a browser window and prompt you to log into your Cloudflare account. After logging in and approving the access request for `Wrangler`, you can close the browser window and return to your terminal.
 
-### Add your Neon connection string as a secret
-
-Use Wrangler to add your Neon database connection string as a secret to your `Cloudflare Pages` project.:
-
-```bash
-npx wrangler secret put DATABASE_URL
-```
-
-When prompted, paste your Neon connection string.
-
 ### Publish your Pages application and verify the deployment
 
 Now, you can deploy your application to `Cloudflare Pages` by running the following command:
 
 ```bash
-npm run pages:deploy
+npm run build
+npx wrangler pages deploy dist --project-name <NAME_OF_YOUR_PROJECT>
 ```
 
-The Wrangler CLI will output the URL of your application hosted on the Cloudflare platform. Visit this URL in your browser to interact with it. 
+Give a unique name to your Cloudflare Pages project above. The Wrangler CLI will output the URL of your application hosted on the Cloudflare platform. Visit this URL in your browser to interact with it.
 
-```text
-[TODO]
+```bash
+✨ Compiled Worker successfully
+🌍  Uploading... (4/4)
+
+✨ Success! Uploaded 0 files (4 already uploaded) (0.72 sec)
+
+✨ Uploading Functions bundle
+✨ Deployment complete! Take a peek over at https://21ea2a57.my-neon-page.pages.dev
 ```
+
+### Add your Neon connection string as an environment variable
+
+The Cloudflare production deployment still doesn't have access to the `DATABASE_URL` environment variable. To add it, we need to navigate to the Cloudflare dashboard and add it manually.
+
+Navigate to the dashboard and select the `Settings` section in your project. Go to the `Environment Variables` tab and add a new environment variable named `DATABASE_URL` with the value of your Neon database connection string.
+
+To make sure the environment variable is available to the serverless functions, go back to the terminal and redeploy the project using the `wrangler` CLI:
+
+```bash
+npx wrangler pages deploy dist --project-name <NAME_OF_YOUR_PROJECT>
+```
+
+Now, visit the URL of your Cloudflare Pages application to interact with it. You should see the list of books fetched from the database and a form to add new books.
 
 ## Removing the example application and Neon project
 
@@ -324,6 +349,7 @@ To delete your Neon project, follow the steps outlined in the Neon documentation
 ## Resources
 
 - [Cloudflare Pages](https://pages.cloudflare.com/)
+- [Cloudflare Pages - Documentation](https://developers.cloudflare.com/pages/)
 - [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)
 - [Neon](https://neon.tech)
 
