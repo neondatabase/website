@@ -52,7 +52,7 @@ _Storage_ is the total volume of data and history stored in Neon, measured in gi
 The usage calculation for _Storage_ is as follows:
 
 ```text
-Storage (GiB) * (seconds stored / 3600)
+storage (GiB) * (seconds stored / 3600)
 ```
 
 The **Storage** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
