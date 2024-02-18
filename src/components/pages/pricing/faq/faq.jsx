@@ -15,12 +15,12 @@ const items = [
   {
     question: 'Can I upgrade or downgrade my plan later?',
     answer:
-      'Yes. You can upgrade from Free Tier to our Pro plan by selecting <a href="https://console.neon.tech/app/billing"><strong>Upgrade to Pro</strong></a>. To upgrade to a custom Enterprise or Platform Partnership plan, contact <a href="https://neon.tech/contact-sales"><strong>Sales</strong></a>. For downgrade instructions, see <a href="/docs/introduction/manage-billing#downgrade-your-plan">Downgrade your plan</a>.',
+      'Yes. You can upgrade or downgrade later by selecting <b>Change Plans</b> on the <a href="https://console.neon.tech/app/billing"><strong>Billing</strong></a> page in the Neon Console. To upgrade to a custom Enterprise plan, contact <a href="https://neon.tech/contact-sales"><strong>Sales</strong></a>. For instructions, see <a href="/docs/introduction/manage-billing#change-your-plan">Change your plan</a>.',
   },
   {
     question: 'What payment methods do you accept?',
     answer:
-      'Neon accepts payment by credit card for the Pro plan. For the Enterprise & Platform Partnership plans, Neon accepts payment by ACH and Wire.',
+      'Neon accepts payment by credit card for the Launch and Scale plans. For the Enterprise plan, Neon accepts payment by ACH, Wire, or through AWS Marketplace or the AWS Private Offers program. For more information, please contact <a href="https://neon.tech/contact-sales"><strong>Sales</strong></a>.',
   },
   {
     question: 'When will I be billed?',
@@ -34,12 +34,12 @@ const items = [
   {
     question: 'Are there any limits or restrictions on usage?',
     answer:
-      'Neon implements limits to protect against unintended usage. For example, a usage-based plan may offer unlimited projects, compute, and storage, but Neon places default limits on those resources to protect your account. For more information, see <a href="/docs/introduction/plans">Plans</a>.',
+      'Neon implements some soft limits to protect against unintended usage. For example, the Launch and Scale plans offer up to 500 branches, but Neon has a soft limit of 100 branches to protect your account. For more information, see <a href="/docs/introduction/plans">Plans</a>.',
   },
   {
     question: 'Is there a minimum commitment period?',
     answer:
-      'The Neon Pro plan is usage-based and has no commitment period.  You can downgrade to the at Free Tier at any time. For more information, see <a href="/docs/introduction/manage-billing#downgrade-your-plan">Downgrade your plan</a>.',
+      'Neon Launch and Scale plans have no commitment period.  You can downgrade to the at Free Tier at any time. For more information, see <a href="/docs/introduction/manage-billing#change-your-plan">Change your plan</a>.',
   },
   {
     question: 'How secure is the payment process?',
