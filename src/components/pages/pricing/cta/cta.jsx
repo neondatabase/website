@@ -45,7 +45,7 @@ const CTA = () => {
             Still have <span className="text-pricing-primary-1">questions?</span>
           </Heading>
           <p className="mt-4 text-lg font-light leading-snug xl:text-base md:mx-auto md:mt-2 md:max-w-[550px] md:text-center">
-            Interested in increasing your free tier limits or learning about pricing? Complete the
+            Interested in learning more about our plans and pricing? Complete the
             form below to get in touch with our Sales team.
           </p>
           <AnimatedButton

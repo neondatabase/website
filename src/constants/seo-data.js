@@ -12,7 +12,7 @@ export default {
   contactSales: {
     title: 'Contact Sales — Neon',
     description:
-      'Interested in increasing your free tier limits or learning about pricing? Contact our sales team.',
+      'Interested in learning more about our plans and pricing? Contact our sales team.',
     pathname: LINKS.contactSales,
   },
   careers: {
