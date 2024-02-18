@@ -58,10 +58,10 @@ Launch plan users can access extra compute hours beyond the 1200 compute hours/m
 
 In addition, Launch plan users have access to the following Neon features:
 
-- [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM
+- [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** or never)
 - [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, Postgres extensions, and custom extensions
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **7 days** in the past
-- [Extra usage](/docs/introduction/billing-overview#extra-usage): Scale plan users can access extra compute usage. Extra compute usage is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute cost.
+- [Extra usage](/docs/introduction/billing-overview#extra-usage): Launch plan users can access extra compute usage, which is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute cost.
 - [Expert support](/docs/introduction/support): Launch plan users have access to **Expert** Neon support, which includes access to the Neon Support team via support tickets.
 
 ### Scale
@@ -78,10 +78,10 @@ The Scale plan provides full platform and support access, and is designed for sc
 
 In addition, Sacle plan users have access to the following Neon features:
 
-- [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM.
+- [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**1 minute+** or never)
 - [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, Postgres extensions, and custom extensions.
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **30 days** in the past.
-- [Extra usage](/docs/introduction/billing-overview#extra-usage): Scale plan users can access extra compute and storage usage, which billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute and extra storage costs.
+- [Extra usage](/docs/introduction/billing-overview#extra-usage): Scale plan users can access extra compute and storage usage, which is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute and extra storage costs.
 - [Expert support](/docs/introduction/support): Scale plan users have access to **Priority** Neon support, which includes _priority_ access to the Neon Support team via support tickets.
 
 ### Enterprise
@@ -206,6 +206,7 @@ Neon's branching feature lets you branch your data the same way you branch your 
 
 ## Notes
 
+- The Neon Launch and Scale plans support up to 500 branches, but there is a soft limit of 100 branches to protect your account from unintended usage. To increase your soft limit, please submit a request to [Neon Support](/docs/introduction/support).
 - Paid plans have a default limit of 20 simultaneously active computes to protect against unintended usage. To increase this limit, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available.
 - Active time: On the Free Tier, your primary branch is available 24/7 (~750 compute hours/month). Branch computes have a 20 hours/month active time allowance. If your branch computes exceed this allowance, they will be suspended until the allowance resets at the beginning of the month. You can monitor _active time_ on the **Usage** widget on the Neon **Dashboard**. The _active time_ allowance resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _active time_ limit will reset on February 1st.
 
