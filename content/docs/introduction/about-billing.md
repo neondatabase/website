@@ -23,9 +23,9 @@ Find out how billing works and the metrics that affect your usage allowances.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/billing-overview" description="Learn about plan allowances, extra usage, and how to monitor usage" icon="chart-bar">How billing works</a>
+<a href="/docs/introduction/how-billing-works" description="Learn about plan allowances, extra usage, and how to monitor usage" icon="chart-bar">How billing works</a>
 
-<a href="/docs/introduction/billing" description="Take a deep dive into the usage metrics behind plan allowances and extra usage" icon="trend-up">Usage metrics</a>
+<a href="/docs/introduction/usage-metrics" description="Take a deep dive into the usage metrics behind plan allowances and extra usage" icon="trend-up">Usage metrics</a>
 
 </DetailIconCards>
 

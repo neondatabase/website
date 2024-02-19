@@ -42,7 +42,7 @@ Creating a read replica involves adding a read-only compute endpoint to a branch
 4. On the **Create Compute Endpoint** dialog, select **Read-only** as the **Compute type**.
 5. Specify the **Compute size** options. You can configure a fixed size compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your compute automatically suspends due to inactivity. The default setting is 5 minutes.
     <Admonition type="note">
-    The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
+    The compute size configuration determines the processing power of your database.
     </Admonition>
 6. When you finish making your selections, click **Create**.
 

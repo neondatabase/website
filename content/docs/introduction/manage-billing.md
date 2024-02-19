@@ -52,7 +52,7 @@ If you are unable to update your billing email, please [open a support ticket](/
 
 ## Invoices
 
-A Neon invoice includes an **Amount due** for the billing period and a cost breakdown by project and [billing metric](/docs/introduction/billing).
+A Neon invoice includes an **Amount due** for the billing period.
 
 ### Download invoices
 

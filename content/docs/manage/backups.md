@@ -24,6 +24,4 @@ This method dumps a single database in a single branch of your Neon project. If 
 
 To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Import from Postgres](/docs/import/import-from-postgres) guide.
 
-Please be aware that dumping data from Neon is considered "data transfer". For data transfer costs, please refer to our [Billing](/docs/introduction/billing) documentation.
-
 <NeedHelp/>

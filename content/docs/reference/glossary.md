@@ -119,7 +119,7 @@ To calculate compute hour usage, you would use the following formula:
 compute hours = active time x compute size
 ```
 
-For more information, see [Compute](/docs/introduction/billing#compute).
+For more information, see [Compute](/docs/introduction/usage-metrics#compute).
 
 ## Console
 
@@ -147,7 +147,7 @@ A method of storing inactive data that converts plaintext data into a coded form
 
 ## Data transfer
 
-A billing metric that measures the total volume of data transferred out of Neon (known as "egress") during a given billing period. See [Data transfer](/docs/introduction/billing#data-transfer).
+A usage metric that measures the total volume of data transferred out of Neon (known as "egress") during a given billing period.
 
 ## Database
 
@@ -187,7 +187,7 @@ See [Neon Free Tier](#neon-free-tier).
 
 ## History
 
-The history of data changes for all branches in your Neon project. A history is maintined to support _point-in-time restore_. For more information, see [Storage details](/docs/introduction/billing#storage-details).
+The history of data changes for all branches in your Neon project. A history is maintained to support _point-in-time restore_. For more information, see [Storage details](/docs/introduction/usahe-metrics#storage-details).
 
 ## IP allowlist
 
@@ -315,7 +315,7 @@ A feature that allows you to share Neon projects with other Neon users. See [Sha
 
 ## Project storage
 
-The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Project storage](/docs/introduction/billing#project-storage).
+The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Storage](/docs/introduction/usage-metrics#storage).
 
 ## Proxy
 
@@ -377,7 +377,7 @@ A Neon Control Plane operation that starts a compute endpoint when there is an e
 
 Where data is recorded and stored. Neon storage consists of Pageservers, which store hot data, and a cloud object store, such as Amazon S3, that stores cold data for cost optimization and durability.
 
-Also, a usage metric that tracks the total volume of data and [history](#history) stored in Neon. For more information, see [Storage](/docs/introduction/billing#storage).
+Also, a usage metric that tracks the total volume of data and [history](#history) stored in Neon. For more information, see [Storage](/docs/introduction/usage-metrics#storage).
 
 ## Subscriber
 
@@ -447,4 +447,4 @@ In logical replication, the WAL records all changes to the data, serving as the 
 
 ## Written data
 
-A billing metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiB). Writing data from compute to storage ensures the durability and integrity of your data. See [Written data](/docs/introduction/billing#written-data).
+A usage metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiB). Writing data from compute to storage ensures the durability and integrity of your data.

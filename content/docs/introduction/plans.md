@@ -65,7 +65,7 @@ In addition, Launch plan users have access to the following Neon features:
 - [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** or never)
 - [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, Postgres extensions, and custom extensions
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **7 days** in the past
-- [Extra usage](/docs/introduction/billing-overview#extra-usage): Launch plan users can access extra compute usage, which is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute cost.
+- [Extra usage](/docs/introduction/how-billing-works#extra-usage): Launch plan users can access extra compute usage, which is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute cost.
 - [Expert support](/docs/introduction/support): Launch plan users have access to **Expert** Neon support, which includes access to the Neon Support team via support tickets.
 
 ### Scale
@@ -85,7 +85,7 @@ In addition, Sacle plan users have access to the following Neon features:
 - [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**1 minute+** or never)
 - [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, Postgres extensions, and custom extensions.
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **30 days** in the past.
-- [Extra usage](/docs/introduction/billing-overview#extra-usage): Scale plan users can access extra compute and storage usage, which is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute and extra storage costs.
+- [Extra usage](/docs/introduction/how-billing-works#extra-usage): Scale plan users can access extra compute and storage usage, which is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute and extra storage costs.
 - [Expert support](/docs/introduction/support): Scale plan users have access to **Priority** Neon support, which includes _priority_ access to the Neon Support team via support tickets.
 
 ### Enterprise

@@ -2,6 +2,8 @@
 title: How billing works
 enableTableOfContents: true
 subtitle: Learn about plan allowances, extra usage, and monitoring usage
+redirectFrom:
+  - /docs/introduction/billing-overview
 updatedOn: '2024-01-23T17:45:24.326Z'
 ---
 
@@ -75,6 +77,6 @@ Here you will find storage and compute usage for the project among other project
 
 ## Learn more about usage metrics
 
-To learn more about Neon usage metrics, see [Usage metrics](/docs/introduction/billing).
+To learn more about Neon usage metrics, see [Usage metrics](/docs/introduction/usage-metrics).
 
 <NeedHelp/>
