@@ -29,7 +29,7 @@ To update your payment method:
 1. Navigate to the Neon Console.
 1. Select your Profile.
 1. Select **Billing** from the menu.
-1. Select **Billing info**
+1. Select **Billing info**.
 1. Locate **Payment method** on the page and click **Edit**.
 
 If you are unable to update your payment method, please [open a support ticket](/docs/introduction/support).
@@ -52,7 +52,7 @@ If you are unable to update your billing email, please [open a support ticket](/
 
 ## Invoices
 
-A Neon invoice includes an **Amount due** for the billing period.
+A Neon invoice includes the amount due for the billing period.
 
 ### Download invoices
 
@@ -73,7 +73,7 @@ To change your plan:
 1. Select **Billing** from the menu.
 1. Select **Change plan**.
 
-Changing your plan to one with lower usage limits may affect the performance of your applications. To compare plan allowances, see [Neon plans](/docs/introduction/plans#neon-plans).
+Changing your plan to one with lower usage allowances may affect the performance of your applications. To compare plan allowances, see [Neon plans](/docs/introduction/plans#neon-plans).
 
 If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances. 
 

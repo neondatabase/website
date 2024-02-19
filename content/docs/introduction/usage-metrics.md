@@ -12,9 +12,9 @@ This topic describes Storage, Compute, and Project usage metrics in more detail 
 
 ## Storage
 
-The following table outlines data storage allowances for each Neon plan:
+The following table outlines data storage allowances for each Neon plan.
 
-|            | Storage    |
+| Plan       | Storage    |
 |------------|------------|
 | Free Tier  | 512 MiB    |
 | Launch     | 10 GiB     |
@@ -61,28 +61,28 @@ The **Storage** is calculated in gibibytes (GiB), otherwise known as binary giga
 
 ## Compute
 
-The following table outlines compute allowances for each Neon plan:
+The following table outlines compute allowances for each Neon plan.
 
-|            | Compute                                                                                                              |
+| Plan       | Compute                                                                                                              |
 |------------|----------------------------------------------------------------------------------------------------------------------|
-| Free Tier  | 24/7 usage on the primary branch compute (~750 compute hours), 20 _active hours_ /month on branch computes.           |
+| Free Tier  | Always-available primary branch compute, 20 _active hours_/month (5 compute hours) on branch computes           |
 | Launch     | Up to 1,200 _active hours_/month (300 compute hours)                                                                                             |
 | Scale      | Up to 3,000 _active hours_/month (750 compute hours)                                                                                             |
 | Enterprise | Custom                                                                                                            |
 
-Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for by compute hour. For example, the Launch plan has an allowance of 1200 compute hours included in the plan's monthly fee. If you use additional compute hours, you are billed for those at the compute-hour price stated on our [pricing](https://neon.tech/pricing) page.
+Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for by compute hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use additional compute hours, you are billed for those at the compute-hour price stated on our [pricing](https://neon.tech/pricing) page.
 
 ### What is active time?
 
-Active time is the actual amount of time a compute is active as opposed to being idle due to being suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
+**Active time** is the actual amount of time a compute is active as opposed to being idle due to being suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
 
 ### What is a compute hour?
 
-A compute hour is 1 hour of _active time_ for a compute with 1 vCPU. Neon supports computes ranging in size from 1 vCPU to 7 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would take 4 hours of active time to use 1 compute hour. On the other hand, If you have a compute with 4 vCPU, it would only take 15 minutes of active time to use 1 compute hour.
+A **compute hour** is 1 hour of _active time_ for a compute with 1 vCPU. Neon supports computes ranging in size from 1 vCPU to 7 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would take 4 hours of active time to use 1 compute hour. On the other hand, If you have a compute with 4 vCPU, it would only take 15 minutes of active time to use 1 compute hour.
 
 ### How Neon compute features affect usage
 
-Compute-hour usage in Neon is affected by features like [autoscaling](/docs/guides/autoscaling-guide), [autosuspend](/docs/guides/auto-suspend-guide), minimum and max [compute sizes](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). With these features enabled, you can get a sense of how your compute usage might accrue in the following graph.
+Compute-hour usage in Neon is affected by [autosuspend](/docs/guides/auto-suspend-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute usage might accrue in the following graph.
 
 ![Compute metrics graph](/docs/introduction/compute-metrics2.png)
 
@@ -121,7 +121,7 @@ Factors that affect _active time_ include:
 Neon uses a small amount of compute time, included in your billed compute hours, to perform a periodic check to ensure that your computes can start and read and write data. See [Availability Checker](/docs/reference/glossary#availability-checker) for more information.
 </Admonition>
 
-The compute hours calculation is as follows:
+The compute hour usage calculation is as follows:
 
 ```text
 compute hour usage = compute size * active time
@@ -145,22 +145,22 @@ To estimate what your compute hour usage might be per month:
    2 * 730 = 1460 compute hours
    ```
 
-   A calculation like this might be useful when trying to select the right plan or estimating the extra compute usage you might need.
+   This calculation is useful when trying to select the right Neon plan or when estimating the extra compute usage you might need.
 
 ## Projects
 
-In Neon, everything starts with a project. A project is a container for your branches, databases, roles, and other resources and settings. A project also defines the region your data and resources reside in. We typically recommend creating a project for each application or each client. In addition to organizing objects, projects are a way to track storage and compute resource usage by application or client.
+In Neon, everything starts with a project. A project is a container for your branches, databases, roles, and other resources and settings. A project also defines the region your data and resources reside in. We typically recommend creating a project for each application or each client. In addition to organizing objects, projects are a way to track storage and compute usage by application or client.
 
 The following table outlines project allowances for each Neon plan.
 
-|            | Projects |
+| Plan       | Projects |
 |------------|----------|
 | Free Tier  | 1        |
 | Launch     | 10       |
 | Scale      | 50       |
 | Enterprise | Unlimited |
 
-- When you reach your limit on the [Free Tier](/docs/introduction/plans#free-tier) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the Launch or [Scale](/docs/introduction/plans#scale) plan, which offer allowances of 10 and 50 projects, respectively.
+- When you reach your limit on the [Free Tier](/docs/introduction/plans#free-tier) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch) or [Scale](/docs/introduction/plans#scale) plan, which offer allowances of 10 and 50 projects, respectively.
 - Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in increments of 10. If you use more than 50 projects, you are automatically billed for an extra package of 10 projects for the price stated on our [pricing](https://neon.tech/pricing) page. For example, if you use 51 projects, you are billed for a package of 10 projects. If you use 61 projects, you are billed for two packages of 10 projects, and so on. 
 
 
