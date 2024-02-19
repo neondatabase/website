@@ -31,7 +31,7 @@ Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon.
 | **Branches**                            | 10 branches                                                   |
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | 0.5 GiB                                                       |
-| **Compute**                             | Always-available primary branch compute, 20 _active hours_ (5 compute hours)/month on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM |
+| **Compute**                             | Always-available primary branch compute, 20 _active hours_/month (5 compute hours) on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM. |
 
 In addition, Free Tier users have access to the following Neon features:
 
@@ -56,7 +56,7 @@ The Launch plan provides all of the resources, features, and support you need to
 | **Branches**                            | 500                                                  |
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | Up to 10 GiB of data storage                                  |
-| **Compute**                             | Up to 1,200 _active hours_/month (300 compute hours/month) for all computes in all projects |
+| **Compute**                             | Up to 1,200 _active hours_/month (300 compute hours) for all computes in all projects |
 
 Launch plan users can access extra compute hours beyond the 1200 compute hours/month included in the Launch plan. Extra compute hours are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour cost.
 
@@ -78,14 +78,14 @@ The Scale plan provides full platform and support access, and is designed for sc
 | **Branches**                            | 500                                                           |
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | Up to 50 GiB of data storage                                  |
-| **Compute**                             | Up to 3,000 _active hours_/month (750 compute hours/month) for all computes in all projects |
+| **Compute**                             | Up to 3,000 _active hours_/month (750 compute hours) for all computes in all projects |
 
 In addition, Sacle plan users have access to the following Neon features:
 
 - [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**1 minute+** or never)
 - [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, Postgres extensions, and custom extensions.
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **30 days** in the past.
-- [Extra usage](/docs/introduction/how-billing-works#extra-usage): Scale plan users can access extra compute and storage usage, which is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute and extra storage costs.
+- [Extra usage](/docs/introduction/how-billing-works#extra-usage): Scale plan users can access extra compute and storage usage, which is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute and extra storage prices.
 - [Expert support](/docs/introduction/support): Scale plan users have access to **Priority** Neon support, which includes _priority_ access to the Neon Support team via support tickets.
 
 ### Enterprise
@@ -132,7 +132,7 @@ Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources
 
 #### Autosuspend
 
-Neon's _Autosuspend_ feature controls when a Neon compute instance transitions to an Idle state (scales to zero) due to inactivity. By default, a Neon compute instance scales to zero after 5 minutes of inactivity. For [Neon Free Tier](#free-tier) users, this setting is fixed. Users on paid plans can increase, decrease, or disable the autosuspend setting, controlling when or if a compute scales to zero.
+Neon's _Autosuspend_ feature controls when a Neon compute instance transitions to an Idle state (scales to zero) due to inactivity. By default, a Neon compute instance scales to zero after 5 minutes of inactivity. For [Neon Free Tier](#free-tier) users, this setting is fixed. Users on paid plans can configure or disable the autosuspend setting, controlling when or if a compute scales to zero.
 
 #### Region availability
 
@@ -144,7 +144,7 @@ Neon can support up to 10,000 concurrent connections. See [Connection pooling](/
 
 #### Tenant isolation
 
-The Neon Enterprise plan offers tenant isolation, segregating your data resources from other tenants. If you are interested in this feature, please contact [Sales](https://neon.tech/contact-sales).
+The Neon Enterprise plan offers tenant isolation, letting you segregate your data resources from other tenants. If you are interested in this feature, please contact [Sales](https://neon.tech/contact-sales).
 
 ### Advanced Postgres features
 
@@ -190,7 +190,7 @@ Neon's Time Travel Assist feature lets you connect to any selected point in time
 
 #### Web console
 
-Neon's easy-to-use web console allows you to manage Neon from a browser. 
+Neon's easy-to-use web console allows you to manage Neon from your browser. 
 
 #### Neon CLI
 
@@ -206,9 +206,9 @@ All Neon plans support sharing your Neon project with other Neon users, giving t
 
 #### Branching
 
-Neon's branching feature lets you branch your data the same way you branch your code. You can instantly create full database copies for development, testing, or any other purpose that requires a database copy. You can easily automate database branching using the Neon API, CLI, or GitHub Actions, enabling you to add database branching to your CI/CD pipeline. Branching is often used with deployment platforms such as Vercel to create a database branch for each preview deployment. To learn more, see [Get started with branching](/docs/guides/branching-intro).
+Neon's branching feature lets you branch your data the same way you branch your code. You can instantly create full database copies for development, testing, or any other purpose. You can easily automate database branching using the Neon API, CLI, or GitHub Actions, enabling you to add database branching to your CI/CD pipeline. Branching is often used with deployment platforms such as Vercel to create a database branch for each preview deployment. To learn more, see [Get started with branching](/docs/guides/branching-intro).
 
-## Notes
+## Limits
 
 - The Neon Launch and Scale plans support up to 500 branches, but there is a soft limit of 100 branches to protect your account from unintended usage. To increase your soft limit, please submit a request to [Neon Support](/docs/introduction/support).
 - Paid plans have a default limit of 20 simultaneously active computes to protect against unintended usage. To increase this limit, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available.
