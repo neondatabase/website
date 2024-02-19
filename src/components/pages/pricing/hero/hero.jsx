@@ -141,7 +141,7 @@ const Hero = () => {
 
               return (
                 <li
-                  className={clsx('group relative rounded-[10px]', isScalePlan && 'xl:-order-1')}
+                  className="group relative rounded-[10px]"
                   key={index}
                   onPointerEnter={() => {
                     if (isScalePlan) {
