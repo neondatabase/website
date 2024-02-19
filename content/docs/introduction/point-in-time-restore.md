@@ -11,7 +11,7 @@ Neon retains a history of changes for all branches. This shared history provides
 
 The history retention period is 7 days, by default, but is configurable. The supported range is 0 to 7 days for [Neon Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Neon Pro Plan](/docs/introduction/pro-plan) users.
 
-You can configure the **History retention** setting in the Neon Console, under **Settings** > **Storage**. For further instructions, see [Configure history retention](/docs/manage/projects#configure-history-retention).
+You can configure the **History retention** setting in the Neon Console, under **Project settings** > **Storage**. For further instructions, see [Configure history retention](/docs/manage/projects#configure-history-retention).
 ![History retention configuration](/docs/relnotes/history_retention.png)
 
 Increasing the history retention period affects all branches in your Neon project and increases [project storage](/docs/introduction/billing#project-storage). You can scale **History retention** down to zero if reducing storage cost is more important than the ability to restore your data to a past state.

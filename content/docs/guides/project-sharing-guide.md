@@ -22,8 +22,8 @@ To share your project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech/app/projects).
 2. Select the project you want to share.
-1. On the Neon **Dashboard**, select **Settings** from the sidebar.
-1. On the **Settings** page, select **Sharing**.
+1. On the Neon **Dashboard**, select **Project settings** from the sidebar.
+1. On the **Project settings** page, select **Sharing**.
 1. Under **Grant access to your project**, enter the email address of the account you want to share your project with.
     ![Grant access to a project](/docs/guides/sharing_grant_access.png)
 1. Click **Grant access**. The email you specify is added to the list of **People who have access to the project**.

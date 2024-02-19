@@ -35,7 +35,7 @@ Configuring the autosuspend setting for an existing project sets the project's d
 To configure the autosuspend default for an existing project:
 
 1. Select a project in the Neon console.
-1. On the Neon **Dashboard**, select **Settings**.
+1. On the Neon **Dashboard**, select **Project settings**.
 1. Select **Compute** and click **Change**.
 1. Select **Suspend compute after a period of inactivity** and specify your delay period (5 minutes or a custom period). The maximum setting is 7 days. Deselecting **Suspend compute after a period of inactivity** means the compute is always active.
 

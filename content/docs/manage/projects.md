@@ -29,7 +29,7 @@ When you add a new project, Neon creates the following resources by default:
 
 ## About the Settings page
 
-Once you open a project, you can use the **Settings** page to manage that particular project and configure any defaults.
+Once you open a project, you can use the **Project settings** page to manage that particular project and configure any defaults.
 
 ![Project Settings page](/docs/manage/settings_page.png)
 
@@ -84,7 +84,7 @@ To edit a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to edit.
-3. Select **Settings**.
+3. Select **Project settings**.
 4. Select **General**.
 5. Make your changes and click **Save**.
 
@@ -96,7 +96,7 @@ To delete a project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to delete.
-3. Select **Settings**.
+3. Select **Project settings**.
 4. Select **Delete**.
 5. Click **Delete project.**
 6. On the confirmation dialog, click **Delete**.
@@ -108,7 +108,7 @@ Project sharing is a Neon Pro Plan feature that allows you to share your project
 To share a project:
 
 1. In the Neon Console, select a project.
-1. Select **Settings**.
+1. Select **Project settings**.
 1. Select **Sharing**.
 1. Under **Grant access to your project**, enter the email address of the account you want to share access with.
 1. Click **Grant access**.
@@ -121,7 +121,7 @@ For additional information, refer to our [Project sharing guide](/docs/guides/pr
 
 ## Advanced settings
 
-From the **Settings** page, you can also set defaults or apply bulk changes across your Neon objects:
+From the **Project settings** page, you can also set defaults or apply bulk changes across your Neon objects:
 
 - [Reset default compute size](#reset-the-default-compute-size) (Neon Pro Plan only)
 - [Configure history retention range](#configure-history-retention)
@@ -136,7 +136,7 @@ For [Neon Free Tier](/docs/introduction/free-tier) users, Neon sets your compute
 
 [Neon Pro Plan](/docs/introduction/pro-plan) users have the flexibility to choose a compute size for each branch's compute endpoint individually. By default, new branches inherit the compute endpoint size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create a series of read-only replicas, where each replica typically requires less compute per branch.
 
-To reset the default compute size, go to **Settings** > **Compute**.
+To reset the default compute size, go to **Project settings** > **Compute**.
 
 You can choose from two options:
 
@@ -154,7 +154,7 @@ By default, Neon retains a 7-day history of changes for all branches in a Neon p
 To configure the history retention period for a project:
 
 1. Select a project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Storage**.
     ![History retention configuration](/docs/manage/history_retention.png)
 4. Use the slider to select the history retention period.
@@ -171,7 +171,7 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 To enable logical replication for your project:
 
 1. Select your project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Beta**.
 4. Click **Enable**.
 
@@ -205,7 +205,7 @@ Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Prot
 To configure an allowlist:
 
 1. Select a project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
     ![IP Allow configuration](/docs/manage/ip_allow.png)
 4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
@@ -318,7 +318,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 <TabItem>
 
 1. Select a project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
 4. Clear the **Allowed IP addresses and ranges** field.
 5. If applicable, clear the **Apply to primary branch only** checkbox.
