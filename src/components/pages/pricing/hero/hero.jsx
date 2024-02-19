@@ -38,7 +38,7 @@ const items = [
   {
     type: 'Launch',
     price:
-      '<header class="absolute -top-6 text-base font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</header> $19 <span>/month</span>',
+      '<em class="absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</em> $19 <span>/month</span>',
     description: 'All the resources, features and support you need to launch.',
     features: [
       { title: '10 GiB storage included' },
@@ -57,7 +57,7 @@ const items = [
   {
     type: 'Scale',
     price:
-      '<header class="absolute -top-6 text-base font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</header> $69 <span>/month</span>',
+      '<em class="absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</em> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
       { title: '50 GiB storage included' },
@@ -84,7 +84,7 @@ const items = [
       { title: 'Enterprise support w/SLAs' },
     ],
     button: {
-      url: LINKS.contactSales,
+      url: `${LINKS.enterprise}#request-trial`,
       text: 'Request trial',
       theme: 'white-outline',
       event: 'pricing_hero_custom_btn_click',

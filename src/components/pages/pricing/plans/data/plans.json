@@ -22,7 +22,7 @@
     "enterprise": {
       "label": "Enterprise",
       "price": "Сustom rates",
-      "buttonUrl": "/enterprise#form",
+      "buttonUrl": "/enterprise#request-trial",
       "buttonText": "Request trial"
     }
   },
