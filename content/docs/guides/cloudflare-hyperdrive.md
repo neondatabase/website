@@ -9,16 +9,18 @@ updatedOn: '2024-02-12T00:00:00.000Z'
 
 This is specifically useful for serverless applications which can't maintain a persistent database connection and need to establish a new connection for each request. Hyperdrive can significantly reduce the latency of these queries and improve latency for your users.
 
-This guide demonstrates how to configure a `Hyperdrive` service to connect to your Neon Postgres database. You cna then use the regular `node-postgres` client library to make queries to your database, and benefit from the performance improvements that Hyperdrive provides. 
-
-NOTE: You need to be on Cloudflare Workers' paid plan to use Hyperdrive.
+This guide demonstrates how to configure a `Hyperdrive` service to connect to your Neon Postgres database. We then implement a regular `Workers` application that connects to the `Hyperdrive` service rather than the `Neon` databse directly, and benefit from the performance improvements that Hyperdrive provides. 
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
+
 - A Cloudflare account. If you do not have one, sign up for [Cloudflare Workers](https://workers.cloudflare.com/) to get started. 
+
+    **NOTE**: You need to be on Cloudflare Workers' paid subscription plan to use Hyperdrive.
+
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and deploy our Workers application. 
 
 ## Setting up your Neon database
@@ -52,85 +54,118 @@ Log in to the Neon console and navigate to the [Projects](https://console.neon.t
 
 ### Retrieve your Neon database connection string
 
-From your project dashboard, navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
-postgres://username:password@your-database-url.neon.tech/neondb?sslmode=require
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-Keep this connection string handy for later use. 
+Keep your connection string handy for later use.
 
-## Implementing your Node.js application
+## Setting up your Hyperdrive service
 
-Create a new directory for your project and initialize a new Node.js project using the following commands:
+
+## Setting up your Cloudflare Workers application
+
+### Create a new Worker project
+
+Run the following command in a terminal window to set up a new Cloudflare Workers project:
 
 ```bash
-mkdir neon-hyperdrive && cd neon-hyperdrive
-npm init -y && npm pkg set type="module"
+npm create cloudflare@latest
+```
+
+This initiates an interactive CLI prompt to generate a new project. To follow along with this guide, you can use the following settings:
+```bash
+├ In which directory do you want to create your application?
+│ dir ./my-neon-worker
+│
+├ What type of application do you want to create?
+│ type "Hello World" Worker
+│
+├ Do you want to use TypeScript?
+│ no typescript
+```
+
+When asked if you want to deploy your application, select `no`. We'll develop and test the application locally before deploying it to Cloudflare Workers platform.
+
+The `create-cloudflare` CLI also installs the `Wrangler` tool to manage the full workflow of testing and managing your Worker applications. 
+
+### Implement the Worker script
+
+We'll use the `node-postgres` library to connect to the Postgres database (directly to Neon first, later we will connect to the Hyperdrive service), so you need to install it as a dependency:
+
+```bash
 npm install pg
-touch .env
 ```
 
-We use the `npm pkg set type="module"` command to enable ES6 module support in our project. We also create a new `.env` file to store the DATABASE_URL environment variable, which we'll use to connect to our Neon database. Lastly, we install the `pg` library which is the Postgres driver we use to connect to our database.
-
-```bash
-# .env
-DATABASE_URL=NEON_DATABASE_CONNECTION_STRING
-```
-
-We implement a simple Node.js application that connects to our Neon database and retrieves the list of books from the `books_to_read` table. Create a new file named `index.js` and add the following code to it:
+Now, you can update the `src/index.js` file in the project directory with the following code:
 
 ```javascript
 import pkg from 'pg';
 
 const { Client } = pkg;
-const client = new Client({ connectionString: process.env.DATABASE_URL });
+const client = new Client({ connectionString: env.DATABASE_URL });
+await client.connect();
 
-async function main() {
-    await client.connect();
-
-    const query = 'SELECT * FROM books_to_read';
-    const result = await client.query(query);
-
-    console.log('Books to read:');
-    result.rows.forEach(row => {
-        console.log(`${row.title} by ${row.author}`);
-    });
-
-    await client.end();
+export default {
+  async fetch(request, env, ctx) {
+    const { rows } = await client.query('SELECT * FROM books_to_read;');
+    return new Response(JSON.stringify(rows));
+  }
 }
-
-main().catch(console.error);
 ```
 
-This code creates a new `Client` instance and connects to the database using the `DATABASE_URL` environment variable. It then runs a simple query to retrieve the list of books from the `books_to_read` table and prints them to the console. 
+The `fetch` handler defined above gets called when the worker receives an HTTP request. It will query the Neon database to fetch the full list of books in our to-read list. 
 
-Test your application by running the following command:
+### Test the worker application locally
+
+You first need to configure the `DATABASE_URL` environment variable to point to our Neon database. You can do this by creating a `.dev.vars` file at the root of the project directory with the following content:
+
+```text
+DATABASE_URL=YOUR_NEON_CONNECTION_STRING
+```
+
+Now, to test the worker application locally, you can use the `wrangler` CLI which comes with the Cloudflare project setup.
 
 ```bash
-node --env-file=.env index.js
+npx wrangler dev
 ```
 
-You should see the list of books printed to the console. 
-```txt
-Books to read:
-The Way of Kings by Brandon Sanderson
-The Name of the Wind by Patrick Rothfuss
-Coders at Work by Peter Seibel
-1984 by George Orwell
+This command starts a local server and simulates the Cloudflare Workers environment.
+
+```bash
+❯ npx wrangler dev
+ ⛅️ wrangler 3.28.1
+-------------------
+Using vars defined in .dev.vars
+Your worker has access to the following bindings:
+- Vars:
+  - DATABASE_URL: "(hidden)"
+⎔ Starting local server...
+[wrangler:inf] Ready on http://localhost:8787
 ```
 
-npx wrangler hyperdrive create neon-test
+You can visit `http://localhost:8787` in your browser to test the worker application. It should return a JSON response with the list of books from the `books_to_read` table. 
 
 ## Setting up Cloudflare Hyperdrive
 
-With our Node.js apllication working, we will now set up Cloudflare Hyperdrive to connect to Neon and accelerate the database queries.
+With our Workers apllication able to query the Neon database, we will now set up Cloudflare Hyperdrive to connect to Neon and accelerate the database queries. 
 
 ### Create a new Hyperdrive service
 
-We need to install the `Wrangler` CLI tool to create and deploy our Hyperdrive service. Run the following command to install the `Wrangler` CLI:
+TODO: https://developers.cloudflare.com/hyperdrive/get-started/
 
-```bash
-npm install wrangler
-```
+## Removing the example application and Neon project
 
+To delete your Worker, you can use the Cloudflare dashboard or run `wrangler delete` from your project directory, specifying your project name. Refer to the [Wrangler documentation](https://developers.cloudflare.com/workers/wrangler/commands/#delete-3) for more details.
+
+To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](/docs/manage/projects#delete-a-project).
+
+## Resources
+
+- [Cloudflare Workers](https://workers.cloudflare.com/)
+- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)
+- [Neon](https://neon.tech)
+
+<NeedHelp/>
