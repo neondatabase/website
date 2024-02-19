@@ -267,6 +267,8 @@
           slug: guides/deno
         - title: Koyeb
           slug: guides/koyeb
+        - title: Netlify Functions
+          slug: guides/netlify-functions
         - title: Vercel
           items:
             - title: Overview
