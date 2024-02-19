@@ -31,7 +31,7 @@ Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon.
 | **Branches**                            | 10 branches                                                   |
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | 0.5 GiB                                                       |
-| **Compute**                             | Always-available primary branch compute, 20 _active hours_/month on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM |
+| **Compute**                             | Always-available primary branch compute, 20 _active hours_ (5 compute hours)/month on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM |
 
 In addition, Free Tier users have access to the following Neon features:
 
@@ -41,6 +41,10 @@ In addition, Free Tier users have access to the following Neon features:
 - [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, Postgres extensions, and custom extensions.
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **24 hours** in the past.
 - [Community support](/docs/introduction/support): Free Tier plan users have access to **Community** support, which includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/).
+
+<Admonition type="tip" title="Free Tier Compute Allowances">
+On the Free Tier, your primary branch compute is always available — it will never be suspended due to running out of compute hours, which means you can always access the data on the primary branch in your Neon project. Branch computes have 20 hours of [active time](/docs/reference/glossary#active-time) (5 [compute hours](/docs/reference/glossary#compute-hour)) per month. If your branch computes exceed this allowance, they are suspended until the allowance resets at the beginning of the month. You can monitor branch compute hours on the [Billing page](/docs/introduction/manage-billing#view-the-billing-page) in the Neon Console. The compute hour allowance for branch computes resets at the beginning of each month. For instance, if you enrolled in the Neon Free Tier in January, the allowance for branch computes resets on February 1st.
+</Admonition>
 
 ### Launch
 
@@ -208,6 +212,5 @@ Neon's branching feature lets you branch your data the same way you branch your 
 
 - The Neon Launch and Scale plans support up to 500 branches, but there is a soft limit of 100 branches to protect your account from unintended usage. To increase your soft limit, please submit a request to [Neon Support](/docs/introduction/support).
 - Paid plans have a default limit of 20 simultaneously active computes to protect against unintended usage. To increase this limit, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available.
-- Active time: On the Free Tier, your primary branch is available 24/7 (~750 compute hours/month). Branch computes have a 20 hours/month active time allowance. If your branch computes exceed this allowance, they will be suspended until the allowance resets at the beginning of the month. You can monitor _active time_ on the **Usage** widget on the Neon **Dashboard**. The _active time_ allowance resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _active time_ limit will reset on February 1st.
 
 
