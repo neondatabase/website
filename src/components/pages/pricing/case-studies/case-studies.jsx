@@ -69,14 +69,14 @@ const CaseStudies = ({ className = null }) => (
           <p className="mt-4 max-w-[362px] text-lg font-light leading-snug xl:max-w-[280px] xl:text-base lg:max-w-[648px] md:mt-2.5 sm:max-w-none sm:pr-1.5">
             Businesses of all sizes leverage features like branching and autoscaling to increase dev
             velocity and gain a competitive advantage.{' '}
-            <Link
-              className="inline-block decoration-1 underline-offset-4 hover:!decoration-green-45/0"
-              to={LINKS.caseStudies}
-              theme="green-underlined"
-            >
-              Explore case studies
-            </Link>
           </p>
+          <Link
+            className="mt-4 inline-block decoration-1 underline-offset-4 hover:!decoration-green-45/0 sm:mt-3"
+            to={LINKS.caseStudies}
+            theme="green-underlined"
+          >
+            Explore case studies
+          </Link>
         </div>
         <ul className="col-start-5 col-end-11 grid max-w-[664px] grid-cols-2 gap-x-[104px] gap-y-9 pl-10 2xl:gap-x-10 xl:col-start-6 xl:col-end-13 xl:max-w-none xl:gap-x-4 xl:pl-0 lg:col-span-full lg:mt-10 lg:gap-10 md:mt-8 md:grid-cols-1 md:gap-y-7">
           {items.map(({ icon, title, description }, index) => (
