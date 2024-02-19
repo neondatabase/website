@@ -4,9 +4,9 @@ enableTableOfContents: true
 updatedOn: '2024-02-16T18:37:19.448Z'
 ---
 
-Neon's Community, Expert, Priority, and Enterprise support plans are outlined below.
+Neon's Community, Standard, Priority, and Enterprise support plans are outlined below.
 
-| Support channels                         | Community | Expert   | Priority | Enterprise |
+| Support channels                         | Community | Standard | Priority | Enterprise |
 | :--------------------------------------- | :-------: | :------: | :------: | :--------: |
 | Neon Discord Server                      |  &check;  | &check;  | &check;  | &check;    |
 | Neon Discourse Community                 |  &check;  | &check;  | &check;  | &check;    |
@@ -21,9 +21,9 @@ Neon's Community, Expert, Priority, and Enterprise support plans are outlined be
 
 Community support includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged in both communities. 
 
-## Expert support
+## Standard support
 
-Expert support includes access to the Neon Support team via support tickets. 
+Standard support includes access to the Neon Support team via support tickets. 
 
 You can open support tickets in the Neon Console. Look for the **Support** link in the sidebar. It opens the **Create Support Ticket** modal, where you can describe your issue. To access the modal directly, [click here](https://console.neon.tech/app/projects?modal=support).
 
