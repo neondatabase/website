@@ -39,7 +39,7 @@ export default {
   awsIsrael: '/partners/aws-israel',
   thankYou: '/thank-you',
   trust: '/trust',
-  billing: '/docs/introduction/billing',
+  billing: '/docs/introduction/about-billing',
   postgres: '/docs/postgres',
   demos: '/demos',
   autoscaling: '/docs/introduction/autoscaling',

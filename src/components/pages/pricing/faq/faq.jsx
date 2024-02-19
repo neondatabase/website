@@ -8,7 +8,7 @@ const items = [
     question: 'Does Neon charge for storage in database branches?',
     answer:
       'Neon charges for unique storage. Data that a branch shares in common with a parent branch is not considered unique, but data changes to a branch are counted toward storage.',
-    linkUrl: '/docs/introduction/billing#project-storage',
+    linkUrl: '/docs/introduction/usage-metrics#storage',
     linkText: 'Read more',
     linkLabel: 'about project storage',
   },
