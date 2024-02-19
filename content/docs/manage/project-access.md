@@ -4,7 +4,7 @@ subtitle: Learn about granting access to your Neon project
 enableTableOfContents: true
 ---
 
-The [Neon Pro Plan](/docs/introduction/pro-plan) allows you to share a Neon project with other Neon users.
+You to share a Neon project with other Neon users.
 
 Users that you share a project with are able to perform any action you can perform in the project, with the exception of deleting the project. For example, users you share a project with are able to:
 
