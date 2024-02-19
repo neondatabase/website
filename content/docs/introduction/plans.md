@@ -38,9 +38,9 @@ In addition, Free Tier users have access to the following Neon features:
 - [Autosuspend](#autosuspend): Compute scales to zero after 5 minutes of inactivity.
 - [Region availabilty](#region-availability): The Free Tier is available in all supported regions.
 - [Project sharing](#project-sharing): Share your project with any Neon user account.
-- [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, Postgres extensions, and custom extensions.
-- [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **24 hours** in the past.
-- [Community support](/docs/introduction/support): Free Tier plan users have access to **Community** support, which includes the [Neon Discord Server](/discord) or the [Neon Discourse Community](https://community.neon.tech/).
+- [Advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, and Standard extensions
+- [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **24 hours** in the past
+- [Community support](/docs/introduction/support): Free Tier plan users have access to **Community** support, which includes the [Neon Discord Server](/discord).
 
 <Admonition type="tip" title="Free Tier Compute Allowances">
 On the Free Tier, your primary branch compute is always available — it will never be suspended due to running out of compute hours, which means you can always access the data on the primary branch in your Neon project. Branch computes have 20 hours of [active time](/docs/reference/glossary#active-time) (5 [compute hours](/docs/reference/glossary#compute-hour)) per month. If your branch computes exceed this allowance, they are suspended until the allowance resets at the beginning of the month. You can monitor branch compute hours on the [Billing page](/docs/introduction/manage-billing#view-the-billing-page) in the Neon Console. The compute hour allowance for branch computes resets at the beginning of each month. For instance, if you enrolled in the Neon Free Tier in January, the allowance for branch computes resets on February 1st.
@@ -58,15 +58,15 @@ The Launch plan provides all of the resources, features, and support you need to
 | **Storage**                             | Up to 10 GiB of data storage                                  |
 | **Compute**                             | Up to 1,200 _active hours_/month (300 compute hours) for all computes in all projects |
 
-Launch plan users can access extra compute hours beyond the 1200 compute hours/month included in the Launch plan. Extra compute hours are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour cost.
+Launch plan users can access extra compute hours beyond the 1,200 compute hours/month included in the Launch plan. Extra compute hours are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour cost.
 
 In addition, Launch plan users have access to the following Neon features:
 
 - [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** or never)
-- [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, Postgres extensions, and custom extensions
+- [Advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, and Standard extensions
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **7 days** in the past
 - [Extra usage](/docs/introduction/how-billing-works#extra-usage): Launch plan users can access extra compute usage, which is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute cost.
-- [Expert support](/docs/introduction/support): Launch plan users have access to **Expert** Neon support, which includes access to the Neon Support team via support tickets.
+- [Standard support](/docs/introduction/support): Launch plan users have access to **Standard** Neon support, which includes access to the Neon Support team via support tickets.
 
 ### Scale
 
@@ -80,13 +80,13 @@ The Scale plan provides full platform and support access, and is designed for sc
 | **Storage**                             | Up to 50 GiB of data storage                                  |
 | **Compute**                             | Up to 3,000 _active hours_/month (750 compute hours) for all computes in all projects |
 
-In addition, Sacle plan users have access to the following Neon features:
+In addition, Scale plan users have access to the following Neon features:
 
 - [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**1 minute+** or never)
 - [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, Postgres extensions, and custom extensions.
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **30 days** in the past.
 - [Extra usage](/docs/introduction/how-billing-works#extra-usage): Scale plan users can access extra compute and storage usage, which is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute and extra storage prices.
-- [Expert support](/docs/introduction/support): Scale plan users have access to **Priority** Neon support, which includes _priority_ access to the Neon Support team via support tickets.
+- [Priority support](/docs/introduction/support): Scale plan users have access to **Priority** Neon support, which includes _priority_ access to the Neon Support team via support tickets.
 
 ### Enterprise
 
@@ -110,7 +110,7 @@ Additionally, the _Enterprise_ plan can be tailored to your specific requirement
 
 Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus retail customer support, Customer Success Team support, and SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
 
-If you are interested in exploring an _Enterprise_ plan with Neon, please reach out to our [Sales team](https://neon.tech/contact-sales).
+If you are interested in exploring an _Enterprise_ plan with Neon, you can  [request an enterprise trial](/enterprise#request-trial) or [get in touch with our sales team](/contact-sales).
 
 ## Features
 
@@ -120,7 +120,7 @@ This section describes the features available with one or more of the Neon plans
 
 #### Compute size
 
-Neon supports compute sizes from .25 vCPU with 1 GB RAM up to 7 vCPU with 28 GB RAM.
+Neon supports compute sizes from 0.25 vCPU with 1 GB RAM up to 7 vCPU with 28 GB RAM.
 
 #### Read replicas
 
@@ -156,7 +156,7 @@ Neon uses [PgBouncer](https://www.pgbouncer.org/) to offer connection pooling su
 
 Logical replication enables replicating data from your Neon database to external destinations, allowing for Change Data Capture (CDC) and real-time analytics. Stream your data to data warehouses, analytical database services, messaging platforms, event-streaming platforms, external Postgres databases, and more. To learn more, see [Get started with logical replication](/docs/guides/logical-replication-guide).
 
-#### Postgres extensions
+#### Standard extensions
 
 Neon supports a large number of Postgres extensions letting you extend the capabilities of Postgres. See [Supported extensions](/docs/extensions/pg-extensions).
 
@@ -176,7 +176,7 @@ Paid plan users can request access to Neon's SOC 2 report on our [Neon Trust Cen
 
 #### Customer-owned S3
 
-The Neon Enterprise plan supports data storage on customer-owned S3. If you are interested in this feature, please contact [Sales](https://neon.tech/contact-sales).
+The Neon Enterprise plan supports data storage on customer-owned S3. If you are interested in this feature, please [contact Sales](https://neon.tech/contact-sales).
 
 ### Additional features
 
