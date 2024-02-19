@@ -131,7 +131,7 @@ const Hero = () => {
           <span>Neon Pricing</span>
         </Heading>
         <p className="mx-auto mt-5 max-w-[680px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
-          Start free, launch your MVP and scale seamlessly with predictable pricing.
+          Start free, launch with predictable costs, and scale efficiently.
         </p>
         <div className="relative mx-auto mt-20 xl:mt-12 lg:w-full lg:max-w-[704px] md:mt-9">
           <h2 className="sr-only">Neon pricing plans</h2>
