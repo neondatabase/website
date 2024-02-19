@@ -2,7 +2,7 @@
 title: Branch reset and restore
 subtitle: Learn about the different branch reset and restore features in Neon
 enableTableOfContents: true
-updatedOn: '2024-01-26T18:19:19.806Z'
+updatedOn: '2024-02-19T18:57:12.560Z'
 ---
 
 Neon retains a history of changes for all branches. This shared history provides the basis for a variety of branch restore and reset operations: resetting a branch to its parent, restoring a branch to its history, creating a new branch from a selected point-in-time, and Time Travel queries against the shared history. You can use these features to reset a development branch to main, to recover lost data, as a database backup strategy, or to view the past state of your database.

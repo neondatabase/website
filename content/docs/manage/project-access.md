@@ -2,6 +2,7 @@
 title: Manage project access
 subtitle: Learn about granting access to your Neon project
 enableTableOfContents: true
+updatedOn: '2024-02-19T18:57:12.561Z'
 ---
 
 You to share a Neon project with other Neon users.
