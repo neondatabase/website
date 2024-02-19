@@ -1,0 +1,346 @@
+{
+  "headings": {
+    "feature": "",
+    "free": {
+      "label": "Free Tier",
+      "price": "Free forever",
+      "buttonUrl": "https://console.neon.tech/signup",
+      "buttonText": "Start for free"
+    },
+    "launch": {
+      "label": "Launch",
+      "price": "<span>From</span> $19<span>/mo</span>",
+      "buttonUrl": "https://console.neon.tech/signup",
+      "buttonText": "Get started"
+    },
+    "scale": {
+      "label": "Scale",
+      "price": "<span>From</span> $69<span>/mo</span>",
+      "buttonUrl": "https://console.neon.tech/signup",
+      "buttonText": "Get started"
+    },
+    "enterprise": {
+      "label": "Enterprise",
+      "price": "Сustom rates",
+      "buttonUrl": "/enterprise#request-trial",
+      "buttonText": "Request trial"
+    }
+  },
+  "cols": [
+    {
+      "rows": "1",
+      "feature": "Included"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Storage"
+      },
+      "free": "0.5 GiB",
+      "launch": "10 GiB",
+      "scale": "50 GiB",
+      "enterprise": "Larger sizes"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Compute",
+        "subtitle": "Based on 0.25 vCPU, 1GB RAM"
+      },
+      "free": "20 hours <span>+ always-available primary</span>",
+      "launch": "1,200 hours <span>per month</span>",
+      "scale": "3,000 hours <span>per month</span>",
+      "enterprise": "Custom"
+    },
+    
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Projects"
+      },
+      "free": "1",
+      "launch": "10",
+      "scale": "50",
+      "enterprise": "Unlimited"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Branches"
+      },
+      "free": "10",
+      "launch": "500 <span>per project</span>",
+      "scale": "500 <span>per project</span>",
+      "enterprise": "Custom"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Databases"
+      },
+      "free": "Unlimited",
+      "launch": "Unlimited",
+      "scale": "Unlimited",
+      "enterprise": "Unlimited"
+    },
+    {
+      "rows": "2",
+      "feature": "Extra Usage"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Storage"
+      },
+      "free": false,
+      "launch": false,
+      "scale": "$15 <span>per 10 GiB</span>",
+      "enterprise": "Custom"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Compute",
+        "subtitle": "Based on 0.25 vCPU, 1GB RAM"
+      },
+      "free": false,
+      "launch": "$0.04 <span>per hour</span>",
+      "scale": "$0.04 <span>per hour</span>",
+      "enterprise": "Custom"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Projects"
+      },
+      "free": false,
+      "launch": false,
+      "scale": "$50 <span>per 10 projects</span>",
+      "enterprise": "Custom"
+    },
+    {
+      "feature": "Compute Features"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Max Compute Size"
+      },
+      "free": "0.25 CU <span>0.25 vCPU, 1 GB RAM</span>",
+      "launch": "4 CU <span>4 vCPU, 16 GB RAM</span>",
+      "scale": "7 CU <span>7 vCPU, 28 GB RAM</span>",
+      "enterprise": "Larger sizes <span>7+ vCPU, 28+ GB RAM</span>"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Instant Read Replicas"
+      },
+      "free": false,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Autoscaling"
+      },
+      "free": false,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Autosuspend"
+      },
+      "free": "Fixed <span>5 minutes</span>",
+      "launch": "Configurable <span>5 min+ or never</span>",
+      "scale": "Configurable <span>1 min+ or never</span>",
+      "enterprise": "Fully Configurable"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Region Availability"
+      },
+      "free": "<a href='/docs/introduction/regions'>All</a>",
+      "launch": "<a href='/docs/introduction/regions'>All</a>",
+      "scale": "<a href='/docs/introduction/regions'>All</a>",
+      "enterprise": "Custom"
+    },
+
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Max Concurrent Connections"
+      },
+      "free": "10,000",
+      "launch": "10,000",
+      "scale": "10,000",
+      "enterprise": "Custom"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Tenant Isolation"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "enterprise": true
+    },
+    {
+      "feature": "Advanced Postgres Features"
+    },
+
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Connection Pooling"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Logical Replication"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Postgres Extensions"
+      },
+      "free": "<a href='/docs/extensions/pg-extensions'>All supported</a>",
+      "launch": "<a href='/docs/extensions/pg-extensions'>All supported</a>",
+      "scale": "<a href='/docs/extensions/pg-extensions'>All supported</a>",
+      "enterprise": "<a href='/docs/extensions/pg-extensions'>All supported</a>"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Custom Extensions"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "feature": "Security Features"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "IP Allow Rules"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "SOC 2 Report"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Customer-Owned S3"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "enterprise": true
+    },
+    {
+      "feature": "Additional Features"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Point-in-time Restore"
+      },
+      "free": "Up to 24 hours",
+      "launch": "Up to 7 days",
+      "scale": "Up to 30 days",
+      "enterprise": "Unlimited"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Time Travel Connections"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Web Console"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Neon CLI"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Management API"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Project Sharing"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Support"
+      },
+      "free": "Community Support",
+      "launch": "Standard Support",
+      "scale": "Priority Support",
+      "enterprise": "Enterprise Support with SLAs"
+    }
+  ]
+}

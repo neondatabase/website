@@ -27,7 +27,8 @@ const exampleApps = [
   {
     icon: imageSearchIcon,
     title: 'Image similarity search',
-    description: 'From the Neon Community: Image similarity search with Vertex AI, Neon, and pgvector.',
+    description:
+      'From the Neon Community: Image similarity search with Vertex AI, Neon, and pgvector.',
     url: 'https://github.com/ItzCrazyKns/Neon-Image-Search',
   },
 ];
