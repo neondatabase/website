@@ -13,7 +13,7 @@ Start with an overview of Neon's pricing plans to learn about usage allowances a
 
 <DetailIconCards>
 
-<a href="/docs/introduction/plans" description="Learn about Neon's pricing plans and what's included'" icon="chart-bar">Plans</a>
+<a href="/docs/introduction/plans" description="Learn about Neon's pricing plans and what's included" icon="chart-bar">Plans</a>
 
 </DetailIconCards>
 
@@ -37,6 +37,6 @@ Find information about invoices, payment methods, changing your plan, and other 
 
 <a href="/docs/introduction/manage-billing" description="View and manage your monthly bill and learn how to change your plan" icon="setup">Manage billing</a>
 
-<a href="/docs/introduction/billing-sample" description="See how billing breaks down for a sample project" icon="chart-bar">Sample project</a>
+<a href="/docs/introduction/billing-sample" description="See how to select the right plan for a sample project" icon="chart-bar">Sample project</a>
 
 </DetailIconCards>
