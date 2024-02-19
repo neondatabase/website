@@ -35,9 +35,9 @@
         - title: Plans
           slug: introduction/plans
         - title: How billing works
-          slug: introduction/billing-overview
+          slug: introduction/how-billing-works
         - title: Usage metrics
-          slug: introduction/billing
+          slug: introduction/usage-metrics
         - title: Manage billing
           slug: introduction/manage-billing
         - title: Sample billing
