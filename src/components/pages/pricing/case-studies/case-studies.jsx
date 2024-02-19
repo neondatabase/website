@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Container from 'components/shared/container';
 import GradientLabel from 'components/shared/gradient-label';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 
 import branchIcon from './images/branch.svg';
 import opusflowIcon from './images/opusflow.svg';
@@ -70,7 +71,7 @@ const CaseStudies = ({ className = null }) => (
             velocity and gain a competitive advantage.{' '}
             <Link
               className="inline-block decoration-1 underline-offset-4 hover:!decoration-green-45/0"
-              to="/case-studies"
+              to={LINKS.caseStudies}
               theme="green-underlined"
             >
               Explore case studies
