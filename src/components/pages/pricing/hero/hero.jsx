@@ -23,7 +23,7 @@ const items = [
     description: 'Generous free tier for hobby projects, prototypes, and learning Neon	',
     features: [
       { title: '0.5 GiB storage' },
-      { title: 'Shared compute' },
+      { title: 'Limited to 0.25 vCPU, 1GB RAM' },
       { title: '1 project w/10 branches' },
       { title: 'Project Sharing, Logical Replication' },
       { title: 'Community support' },
@@ -42,7 +42,7 @@ const items = [
     description: 'All the resources, features and support you need to launch.',
     features: [
       { title: '10 GiB storage included' },
-      { title: 'Autoscaling up to 4 vCPU, 16 GB' },
+      { title: 'Autoscale to 4 vCPU, 16GB RAM' },
       { title: '10 projects w/500 branches each' },
       { title: 'Unlocks Read Replicas' },
       { title: 'Standard support' },
@@ -61,7 +61,7 @@ const items = [
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
       { title: '50 GiB storage included' },
-      { title: 'Autoscaling up to 7 vCPU, 28 GB' },
+      { title: 'Autoscale to 7 vCPU, 28GB RAM' },
       { title: '50 projects w/500 branches each' },
       { title: 'Unlocks key security features' },
       { title: 'Priority support' },
