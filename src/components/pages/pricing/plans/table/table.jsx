@@ -217,9 +217,10 @@ const Table = () => {
                               )}
                             </span>
                             {item[key]?.subtitle && (
-                              <span className="font-light leading-snug tracking-tight text-gray-new-70">
-                                {item[key].subtitle}
-                              </span>
+                              <span
+                                className="font-light leading-snug tracking-tight text-gray-new-70"
+                                dangerouslySetInnerHTML={{ __html: item[key].subtitle }}
+                              />
                             )}
                           </>
                         )}
