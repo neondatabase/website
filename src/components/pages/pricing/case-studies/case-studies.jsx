@@ -6,7 +6,7 @@ import GradientLabel from 'components/shared/gradient-label';
 import Link from 'components/shared/link';
 
 import branchIcon from './images/branch.svg';
-import profitflowIcon from './images/profitflow.svg';
+import opusflowIcon from './images/opusflow.svg';
 import proposalesIcon from './images/proposales.svg';
 import vercelIcon from './images/vercel.svg';
 
@@ -48,10 +48,10 @@ const items = [
     description:
       '75% cost reduction by moving a fleet of databases powering multi-tenant SaaS to Neon.',
     icon: {
-      src: profitflowIcon,
-      alt: 'Profitflow',
+      src: opusflowIcon,
+      alt: 'OpusFlow',
       width: 117,
-      height: 20,
+      height: 23,
     },
   },
 ];
