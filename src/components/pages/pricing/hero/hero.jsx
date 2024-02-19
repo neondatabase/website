@@ -20,7 +20,7 @@ const items = [
   {
     type: 'Free Tier',
     price: '$0 <span>/month</span>',
-    description: 'Generous free tier available to everyone, no credit card required!',
+    description: 'Generous free tier available to everyone, no credit card required.',
     features: [
       { title: '0.5 GiB storage' },
       { title: 'Limited to 0.25 vCPU, 1GB RAM' },
