@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-02-19T00:00:00Z'
 ---
 
-[Render](https://render.com) is a comprehensive cloud service that provides hosting for web applications, and static sites with PR previews, zero-downtime deployments, and more. Unlike serverless platforms like Deno or Cloudflare Workers, Render supports full-stack applications, offering both web services and background workers.
+[Render](https://render.com) is a comprehensive cloud service that provides hosting for web applications and static sites, with PR previews, zero-downtime deployments, and more. Unlike serverless platforms like Deno or Cloudflare Workers, Render supports full-stack applications, offering both web services and background workers.
 
 This guide shows how to deploy a simple Node.js application connected to a Neon Postgres database on Render. 
 
@@ -143,9 +143,9 @@ Next, choose the GitHub repository hosting the Node.js application we created ab
     - **Environment**: Select "Node".
     - **Build Command**: Enter `npm install`.
     - **Start Command**: Enter `node index.js`.
-    - **Environment Variables**: Add your Neon database connection string as an environment variable:
+    - **Environment Variables**: Add your Neon database connection string from earlier as an environment variable:
         - Name: `DATABASE_URL`
-        - Value: `NEON_DATABASE_CONNECTION_STRING`
+        - Value: `{NEON_DATABASE_CONNECTION_STRING}`
 
 Click "Create Web Service" to finish. Render will automatically deploy your application and redirect you to the service dashboard, showing the deployment progress and the logs. 
 
@@ -163,7 +163,7 @@ To delete your Neon project, follow the steps outlined in the Neon documentation
 
 ## Resources
 
-- [Render Documentation](https://render.com/docs)
+- [Render platform](https://render.com/)
 - [Neon](https://neon.tech)
 
 <NeedHelp/>

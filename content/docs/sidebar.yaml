@@ -267,6 +267,8 @@
           slug: guides/deno
         - title: Koyeb
           slug: guides/koyeb
+        - title: Render
+          slug: guides/render
         - title: Vercel
           items:
             - title: Overview
