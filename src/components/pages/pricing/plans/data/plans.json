@@ -217,14 +217,15 @@
       "enterprise": true
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
-        "title": "Postgres Extensions"
+        "title": "Standard Extensions",
+        "subtitle": "View <a href='/docs/extensions/pg-extensions' class='underline'>Supported Extensions</a>"
       },
-      "free": "<a href='/docs/extensions/pg-extensions'>All supported</a>",
-      "launch": "<a href='/docs/extensions/pg-extensions'>All supported</a>",
-      "scale": "<a href='/docs/extensions/pg-extensions'>All supported</a>",
-      "enterprise": "<a href='/docs/extensions/pg-extensions'>All supported</a>"
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
     },
     {
       "rows": "1",
