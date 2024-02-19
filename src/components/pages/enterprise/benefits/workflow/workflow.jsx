@@ -26,7 +26,7 @@ const Workflow = () => (
         >
           testing
         </Link>
-        , deployment less stressful, more automated.
+        , and deployment less stressful and more automated.
       </p>
       <Link
         className="group mt-6 inline-flex items-center rounded-[50px] bg-gray-new-10 py-2.5 pl-4 pr-2.5 leading-tight tracking-extra-tight transition-colors duration-200 hover:bg-gray-new-20 sm:flex-1 xs:w-full"
@@ -42,7 +42,8 @@ const Workflow = () => (
         src={image}
         width={590}
         height={384}
-        alt="Authorize Hasura Cloud"
+        quality={100}
+        alt="Neon branching interface"
       />
     </div>
   </div>

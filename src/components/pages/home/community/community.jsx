@@ -5,6 +5,7 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import discordIcon from 'icons/discord.svg';
+import discourseIcon from 'icons/discourse.svg';
 import githubIcon from 'icons/github.svg';
 import xIcon from 'icons/x.svg';
 
@@ -22,6 +23,11 @@ const links = [
     icon: xIcon,
     to: LINKS.twitter,
     name: 'X',
+  },
+  {
+    icon: discourseIcon,
+    to: LINKS.discourse,
+    name: 'Discourse',
   },
   {
     icon: githubIcon,
