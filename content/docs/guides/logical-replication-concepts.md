@@ -25,7 +25,7 @@ The Postgres logical replication architecture is very simple. It uses a _publish
 In Neon, you can enable logical replication from the Neon Console:
 
 1. Select your project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Replication**.
 4. Click **Enable**.
 

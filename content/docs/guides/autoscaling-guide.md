@@ -35,7 +35,7 @@ Configuring autoscaling for an existing project sets the project's default, whic
 To configure autoscaling default settings for an existing project:
 
 1. Select a project in the Neon console.
-1. On the Neon **Dashboard**, select **Settings**.
+1. On the Neon **Dashboard**, select **Project settings**.
 1. Select **Compute** and click **Change**.
 1. Under **Compute size**, use the slider to specify a minimum and maximum compute size.
     ![Autoscaling](/docs/guides/autoscaling_existing_project.png)

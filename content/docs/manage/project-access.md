@@ -20,7 +20,7 @@ You can think of sharing a Neon project as granting administrator access to your
 
 ## How to share a project
 
-Sharing a project is performed from the **Settings** page in your Neon project.
+Sharing a project is performed from the **Project settings** page in your Neon project.
 
 <video autoPlay playsInline muted loop width="800" height="600">
   <source type="video/mp4" src="/docs/manage/project_sharing.mp4"/>

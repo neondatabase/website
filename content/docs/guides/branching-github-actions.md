@@ -23,7 +23,7 @@ The source code for this action is available on [GitHub](https://github.com/neon
 
 - Using the action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 - Add your Neon API key to your GitHub Secrets:
-    1. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left sidebar.
+    1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
     2. Click **Actions** > **New Repository Secret**.
     3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
     4. Click **Add Secret**.
@@ -50,7 +50,7 @@ jobs:
 
 ### Input variables
 
-- `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Settings** page.
+- `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Project settings** page.
 - `parent_branch_id`: The ID of the parent branch, typically the `main` branch of your project. You can find this value in the Neon Console. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
 - `branch_name`: This is an optional parameter. If unspecified, the branch name will default to the same value as the `branch_id` of the newly created branch, which is a generated value that starts with a `br-` prefix.
 - `api_key`: An API key created in your Neon account. For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
@@ -82,7 +82,7 @@ The source code for this action is available on [GitHub](https://github.com/neon
 
 - Using the action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 - Add your Neon API key to your GitHub Secrets:
-    1. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left sidebar.
+    1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
     2. Click **Actions** > **New Repository Secret**.
     3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
     4. Click **Add Secret**.
@@ -106,7 +106,7 @@ jobs:
 
 ### Input variables
 
-- `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Settings** page.
+- `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Project settings** page.
 - `branch:` The ID or name of the branch you want to delete. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
 - `api_key`: An API key created in your Neon account. For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
@@ -125,7 +125,7 @@ This GitHub Action resets a child branch with the latest data from its parent br
 
 - Using this action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 - Add your Neon API key to your GitHub Secrets:
-    1. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left sidebar.
+    1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
     2. Click **Actions** > **New Repository Secret**.
     3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field.
     4. Click **Add Secret**.
@@ -151,7 +151,7 @@ jobs:
 
 ### Input variables
 
-- `project_id`: The ID of your Neon project. Find this value in the Neon Console on the **Settings** page.
+- `project_id`: The ID of your Neon project. Find this value in the Neon Console on the **Project settings** page.
 - `parent`: If specified, the branch will be reset to the latest (HEAD) of parent branch.
 - `branch`: The name or id of the branch to reset.
 - `api_key`: An API key created in your Neon account. See [Create an API key](/docs/manage/api-keys#create-an-api-key) for instructions.
