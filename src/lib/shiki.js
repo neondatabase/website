@@ -86,7 +86,6 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
 
   await highlighter.loadLanguage(language);
 
-  // return tokensToHTML(tokens, language, highlightedLines);
   return html;
 }
 

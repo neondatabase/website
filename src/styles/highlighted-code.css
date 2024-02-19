@@ -63,7 +63,7 @@
   }
 
   .line .highlighted-word {
-    @apply -mx-[3px] -my-px rounded border border-[#c2c2c4] bg-[#f6f6f7] px-1 py-0.5 dark:border-[#3c3f44] dark:bg-[#202127];
+    @apply -mx-[3px] rounded border border-[#c2c2c4] bg-[#f6f6f7] px-1 py-0.5 dark:border-[#3c3f44] dark:bg-[#202127];
   }
 
   .highlighted-code {
