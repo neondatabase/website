@@ -150,11 +150,60 @@ You can visit `http://localhost:8787` in your browser to test the worker applica
 
 ## Setting up Cloudflare Hyperdrive
 
+<!-- TODO: https://developers.cloudflare.com/hyperdrive/get-started/ -->
+
 With our Workers apllication able to query the Neon database, we will now set up Cloudflare Hyperdrive to connect to Neon and accelerate the database queries. 
 
 ### Create a new Hyperdrive service
 
-TODO: https://developers.cloudflare.com/hyperdrive/get-started/
+You can use the `Wrangler` CLI to create a new Hyperdrive service, using your Neon database connection string from earlier:
+
+```bash
+npx wrangler hyperdrive create neon_example --connection-string=$NEON_DATABASE_CONNECTION_STRING
+```
+
+This command creates a new Hyperdrive service named `neon_example`, and outputs its configuration details. Copy the `id` field from the output, which we will use next. 
+
+### Bind the Worker project to Hyperdrive
+
+Cloudflare workers uses `Bindings` to interact with other resources on the Cloudflare platform. We will update the `wrangler.toml` file in the project directory to bind our Worker project to the Hyperdrive service. Add the following lines to the `wrangler.toml` file:
+
+```toml
+node_compat=true
+
+[[hyperdrive]]
+binding = "HYPERDRIVE"
+id = $id-from-previous-step
+```
+
+This lets us access the Hyperdrive service from our Worker application using the `HYPERDRIVE` binding. 
+
+### Update the Worker script to use Hyperdrive
+
+Now, you can update the `src/index.js` file in the project directory to use the Hyperdrive service to connect to the Neon database:
+
+```javascript
+import pkg from 'pg';
+
+const { Client } = pkg;
+const client = new Client({ connectionString: env.HYPERDRIVE.connectionString });
+await client.connect();
+
+export default {
+  async fetch(request, env, ctx) {
+    const { rows } = await client.query('SELECT * FROM books_to_read;');
+    return new Response(JSON.stringify(rows));
+  }
+}
+```
+
+### Deploy the updated Worker 
+
+Now that we have updated the Worker script to use the Hyperdrive service, we can deploy the updated Worker to the Cloudflare Workers platform:
+
+```bash
+npx wrangler deploy
+```
 
 ## Removing the example application and Neon project
 
