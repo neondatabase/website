@@ -64,7 +64,7 @@ Neon recommends a few tools from the Postgres community that can help you unders
 
 - [pg_stat_activity](#pg_stat_activity)
 - [pg_stat_statements](#pg_stat_statements)
-- `pg_hero`
+- [pg_hero](#pg_hero)
 
 ### pg_stat_activity
 
