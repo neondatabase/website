@@ -63,7 +63,7 @@ const TableHeading = ({
         dangerouslySetInnerHTML={{ __html: price }}
       />
       <Button
-        className="mt-[18px] h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-4 xl:h-9 xl:max-w-[160px] lg:w-[140px] sm:max-w-none"
+        className="mt-[18px] h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-4 xl:h-9 xl:max-w-[200px] lg:w-[160px] sm:w-[150px] sm:max-w-none"
         size="xs"
         theme={isFeaturedPlan ? 'primary' : 'gray-15'}
         to={buttonUrl}
@@ -143,7 +143,7 @@ const Table = () => {
   );
 
   return (
-    <div className="mx-auto mt-12 flex max-w-[720px] flex-col xl:px-10 lg:pl-8 lg:pr-0 md:max-w-none md:pl-4">
+    <div className="mx-auto mt-12 flex max-w-[960px] flex-col xl:px-10 lg:pl-8 lg:pr-0 md:max-w-none md:pl-4">
       <ul
         className={clsx(
           'scrollbar-hidden relative flex w-full pt-5 lg:overflow-x-auto lg:pr-4',
@@ -152,29 +152,22 @@ const Table = () => {
         )}
       >
         {Object.keys(tableData.headings).map((key, i, arr) => {
-          const isScaleColumn = key === 'scale';
           const isLabelsColumn = i === 0;
 
           return (
             <li
               className={clsx(
                 'relative py-5 xl:py-4',
-                isScaleColumn &&
-                  'basis-[308px] before:absolute before:inset-x-7 before:inset-y-0 before:z-0 before:rounded-md before:border before:border-gray-new-15 before:bg-pricing-table-featured-column xl:basis-[236px] xl:before:inset-x-5',
                 isLabelsColumn &&
-                  'z-30 flex-1 bg-black-new lg:sticky  lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)]',
-                i === 1 && 'min-w-[180px] basis-[252px] xl:basis-[196px] lg:basis-[180px]',
-                !isScaleColumn &&
-                  i !== 1 &&
-                  !isLabelsColumn &&
-                  'min-w-[160px] basis-[204px] xl:basis-[160px]'
+                  'z-30 flex-1 bg-black-new lg:sticky lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] sm:min-w-[160px]',
+                i === 1 && 'min-w-[180px] basis-[352px] xl:basis-[296px] lg:basis-[380px]',
+                i !== 1 && !isLabelsColumn && 'min-w-[160px] basis-[304px] xl:basis-[260px]'
               )}
               key={key}
             >
               <TableHeading
                 className={clsx(i === 1 && 'lg:pl-5')}
                 isLabelsColumn={isLabelsColumn}
-                isFeaturedPlan={isScaleColumn}
                 {...labelList[isLabelsColumn ? arr[1] : key]}
               />
               <ul className="relative z-10 flex w-full grow flex-col">
@@ -242,7 +235,6 @@ const Table = () => {
                         item[key] !== undefined &&
                           !rowsWithGroupTitles.includes(index - 1) &&
                           'border-t border-dashed border-gray-new-20/25',
-                        isScaleColumn && 'px-[52px] xl:px-[38px]',
                         currentRow === index.toString() &&
                           !rowsWithGroupTitles.includes(index) &&
                           'bg-gray-new-8 before:opacity-100 lg:bg-transparent',
@@ -282,12 +274,11 @@ const Table = () => {
               {i > 0 && !isHiddenItems && (
                 <Button
                   className={clsx(
-                    isScaleColumn && 'ml-[52px] xl:ml-[38px]',
                     i === 1 && 'lg:ml-5',
-                    'relative z-20 mt-8 h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-6 xl:h-9 xl:max-w-[160px] lg:w-[140px] sm:max-w-none'
+                    'relative z-20 mt-8 h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-6 xl:h-9 xl:max-w-[200px] lg:w-[160px] sm:w-[150px] sm:max-w-none'
                   )}
                   size="xs"
-                  theme={isScaleColumn ? 'primary' : 'gray-15'}
+                  theme="gray-15"
                   to={labelList[key].buttonUrl}
                   onClick={() => {
                     sendGtagEvent('partner_comparison_table', {
