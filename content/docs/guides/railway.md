@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-02-19T00:00:00Z'
 ---
 
-[Railway](https://railway.app) is an application deployment platform that allows users to develop web applications locally, provision infrastructure and then deploy to the cloud. Railway integrates with GitHub for continuous deployment, and supports a variety of programming languages and frameworks. 
+[Railway](https://railway.app) is an application deployment platform that allows users to develop web applications locally, provision infrastructure and then deploy to the cloud. Railway integrates with GitHub for continuous deployment and supports a variety of programming languages and frameworks. 
 
 This guide shows how to deploy a simple Node.js application connected to a Neon Postgres database on Railway. 
 
@@ -22,11 +22,11 @@ To follow along with this guide, you will need:
 
 ### Initialize a new project
 
-Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
+1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 
-- Click the `New Project` button to create a new project.
+2. Click the `New Project` button to create a new project.
 
-- From your project dashboard, navigate to the `SQL Editor` from the sidebar, and run the following SQL command to create a new table in your database:
+3. From your project dashboard, navigate to the `SQL Editor` from the sidebar, and run the following SQL command to create a new table in your database:
 
     ```sql
     CREATE TABLE plant_care_log (
@@ -50,7 +50,7 @@ Log in to the Neon console and navigate to the [Projects](https://console.neon.t
 
 ### Retrieve your Neon database connection string
 
-Log in to the Neon Console and navigate to the `Connection Details` section to find your database connection string. It should look similar to this:
+Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -69,7 +69,7 @@ npm install express pg
 touch .env
 ```
 
-We use the `npm pkg set type="module"` command to enable ES6 module support in our project. We also create a new `.env` file to store the DATABASE_URL environment variable, which we'll use to connect to our Neon database. Lastly, we install the `pg` library which is the Postgres driver we use to connect to our database. 
+We use the `npm pkg set type="module"` command to enable ES6 module support in our project. We also create a new `.env` file to store the `DATABASE_URL` environment variable, which we'll use to connect to our Neon database. Lastly, we install the `pg` library which is the Postgres driver we use to connect to our database. 
 
 ```bash
 # .env 
