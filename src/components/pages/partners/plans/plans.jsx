@@ -17,7 +17,7 @@ const Plans = ({ className }) => (
           tag="h2"
           theme="white"
         >
-          Partner Plan Details
+          Partner plan details
         </Heading>
         <p className="mx-auto mt-3 max-w-[690px] text-center text-lg font-light leading-snug sm:text-base">
           Neon offers two partner tiers to help businesses of all types and sizes deliver serverless

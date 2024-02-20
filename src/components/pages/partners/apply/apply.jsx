@@ -27,7 +27,7 @@ const Testimonial = ({ className = null, ariaHidden = false }) => (
     <figcaption className="mt-4 text-base leading-tight tracking-[-0.02em] lg:mt-5 md:mt-4">
       Lincoln Bergeson –{' '}
       <cite className="inline font-light not-italic text-gray-new-70">
-        Infrastructure Engineer at Replit
+        Infrastructure engineer at Replit
       </cite>
     </figcaption>
   </figure>
