@@ -1,30 +1,43 @@
-import Logos from 'components/pages/partners/logos';
+import CaseStudies from 'components/pages/pricing/case-studies';
 import CTA from 'components/pages/pricing/cta';
-import Estimates from 'components/pages/pricing/estimates';
 import Faq from 'components/pages/pricing/faq';
-import Forecasting from 'components/pages/pricing/forecasting';
 import Hero from 'components/pages/pricing/hero';
+import Plans from 'components/pages/pricing/plans';
 import Layout from 'components/shared/layout';
+import Logos from 'components/shared/logos';
+import Testimonials from 'components/shared/testimonials';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.pricing);
 
 const logos = [
-  'bunnyshell',
-  'hasura',
-  'replit',
-  'vercel',
-  'illa',
-  'octolis',
-  'cloudflare',
-  'airplane',
-  'wundergraph',
-  'fabric-io',
-  'snaplet',
-  'fl0',
-  'dynaboard',
-  'opus',
+  'zimmer',
+  'outfront',
+  'genomics',
+  'supergood',
+  'code-institute',
+  'branch',
+  'eqt',
+  'master-school',
+];
+
+const sliderItems = [
+  {
+    text: 'Branching is as useful as we hoped it would be. Our testers can now play with features earlier, since we can now stage features, requiring different database migrations, in parallel.',
+    authorName: 'Lynn Smeria',
+    authorTitle: 'Principle Engineer of Proposales',
+  },
+  {
+    text: 'Using Neon has meant our developers can continue to spend their time on things that meaningfully drive the business forward, instead of babysitting infrastructure.',
+    authorName: 'Adithya Reddy',
+    authorTitle: 'Developer at Branch',
+  },
+  {
+    text: 'The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer.',
+    authorName: 'Lincoln Bergeson',
+    authorTitle: 'Infrastructure Engineer at Replit',
+  },
 ];
 
 const PricingPage = () => (
@@ -35,9 +48,13 @@ const PricingPage = () => (
     footerWithTopBorder
   >
     <Hero />
-    <Logos className="mt-36 xl:mt-40 lg:mt-28 md:mt-20" logos={logos} />
-    <Forecasting />
-    <Estimates />
+    <Logos className="mt-36 pt-2.5 lg:mt-28 lg:pt-0 md:mt-20" logos={logos} />
+    <CaseStudies className="mt-60 xl:mt-48 lg:mt-[124px] md:mt-[88px]" />
+    <Plans className="my-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
+    <Testimonials
+      className="mb-[200px] min-h-[312px] 2xl:mb-[156px] xl:mb-32 xl:min-h-[290px] lg:mb-28 lg:min-h-[257px] md:mb-20 md:min-h-[225px] sm:min-h-[310px]"
+      items={sliderItems}
+    />
     <Faq />
     <CTA />
   </Layout>

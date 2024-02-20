@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-02-08T15:20:54.295Z'
+updatedOn: '2024-02-19T18:57:12.561Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [primary branch](#primary-branch) called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -22,15 +22,15 @@ When working with branches, it is important to remove old and unused branches. B
 
 Each Neon project has a primary branch. In the Neon Console, your primary branch is identified by a `PRIMARY` tag. You can designate any branch as the primary branch for your project. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch, which is typically the branch used in production.
 
-- For [Neon Free Tier](/docs/introduction/free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
-- For [Neon Pro Plan](/docs/introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
+- For Neon Free Tier users, the compute endpoint associated with the primary branch is always available.
+- For users on paid plans, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
 
 ## Non-primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
-- For [Neon Free Tier](/docs/introduction/free-tier) users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier  _compute active time_ limit of 100 hours per month.
-- For [Neon Pro Plan](/docs/introduction/pro-plan) users, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
+- For Neon Free Tier users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier  _compute active time_ limit of 100 hours per month.
+- For users on paid plans, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Create a branch
 
@@ -48,7 +48,7 @@ To create a branch:
     - **Specific Log Sequence Number**: Creates a branch with data up to a specific [Log Sequence Number (LSN)](/docs/reference/glossary#lsn) in the database log, allowing for precise point-in-time restore.
 
     <Admonition type="note">
-    The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occured after the specified date and time or LSN, which means the branch contains data as it existed previously, allowing for point-in-time restore. You can only specify a date and time or LSN value that falls within your history retention window, which is 7 days by default. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+    The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occured after the specified date and time or LSN, which means the branch contains data as it existed previously, allowing for point-in-time restore. You can only specify a date and time or LSN value that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
     </Admonition>
 
 8. Click **Create new branch** to create your branch.
@@ -68,16 +68,11 @@ Branch details shown on the branch page include:
 
 - **ID**: The branch ID. Branch IDs have a `br-` prefix.
 - **Created**: The date and time the branch was created.
-- **Current Data Size**: The current data size of the branch.
 - **Active Time**: The total amount of time that your branch compute has been active within the current billing period, measured in hours.
 - **Compute Time**: The computing capacity used by the branch within the current billing period, measured in Compute Unit (CU) hours.
-- **Written Data**: The total volume of data written from your branch compute to storage within the current billing period, measured in gibibytes (GiB).
-- **Data Transfer**: The total volume of data transferred out of Neon (known as "egress") within the current billing period, measured in (GiB).
 - **Parent Branch**: The branch from which this branch was created (only visible for child branches).
-- **Date**: The date the parent branch was created (only displayed for branches created with the **Time** option).
-- **Time**: The time the parent branch was created (only displayed for branches created with the **Time** option).
-
-For more information about **Active Time**, **Compute Time**, **Written Data**, and **Data Transfer** usage metrics, refer to our [Billing](/docs/introduction/billing) page.
+- **Branching point**: The point in time, in terms of data, from which the branch was created.
+- **Last data reset**: The last time the branch was reset from the parent branch.
 
 The branch details page also includes details about the compute endpoint associated with the branch. For more information, see [View a compute endpoint](/docs/manage/endpoints#view-a-compute-endpoint).
 
@@ -205,7 +200,7 @@ To delete a branch:
 
 ## Check the data size
 
-Tier limits define the amount of data you can store in a branch. The [Neon Free Tier](/docs/introduction/free-tier) permits 3 GiB per branch. When creating a new branch, the child branch includes the data from the parent branch. For example, if you have a branch with 1 GiB of data, the child branch is created with the same 1 GiB of data.
+Tier limits define the amount of data you can store in a branch. The [Neon Free Tier](/docs/introduction/plans#free-tier) permits 3 GiB per branch. When creating a new branch, the child branch includes the data from the parent branch. For example, if you have a branch with 1 GiB of data, the child branch is created with the same 1 GiB of data.
 
 You can check the data size for a branch by viewing the `Database size` value on the branch details page (see [View branches](#view-branches)). Alternatively, you can run the following query from the Neon SQL Editor:
 
@@ -267,7 +262,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
 }' | jq
 ```
 
-- The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
+- The `project_id` for a Neon project is found on the **Project settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
 - The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's primary branch or a previously created branch.
 
 The response body includes information about the branch, the branch's compute endpoint, and the `create_branch` and `start_compute` operations that were initiated.
@@ -357,7 +352,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
-The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
+The `project_id` for a Neon project is found on the **Project settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
 
 The response body lists the project's primary branch and any child branches. The name of the primary branch in this example is `main`.
 
@@ -411,7 +406,7 @@ curl -X 'DELETE' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
-- The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
+- The `project_id` for a Neon project is found on the **Project settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
 - The `branch_id` can be found by listing the branches for your project. The `<branch_id>` is the `id` of a branch. A branch `id` has a `br-` prefix. See [List branches](#list-branches-with-the-api).
 
 The response body shows information about the branch being deleted and the `suspend_compute` and `delete_timeline` operations that were initiated.

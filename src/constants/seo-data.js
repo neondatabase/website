@@ -12,7 +12,7 @@ export default {
   contactSales: {
     title: 'Contact Sales — Neon',
     description:
-      'Interested in increasing your free tier limits or learning about pricing? Contact our sales team.',
+      'Interested in learning more about our plans and pricing? Contact our sales team.',
     pathname: LINKS.contactSales,
   },
   careers: {
@@ -53,11 +53,12 @@ export default {
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },
-  calculator: {
-    title: 'Pricing Calculator — Neon',
-    description: 'Calculate your Neon usage and get an estimate of your monthly bill.',
-    imagePath: '/images/social-previews/pricing.jpg',
-    pathname: LINKS.calculator,
+  enterprise: {
+    title: 'Neon for Enterprises: Postgres Fleets - Neon',
+    description:
+      'Enterprises use Neon to deliver a Postgres layer that is automated, instantly scalable and cost efficient.',
+    pathname: LINKS.enterprise,
+    imagePath: '/images/social-previews/enterprise.jpg',
   },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',

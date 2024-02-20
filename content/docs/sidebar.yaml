@@ -29,27 +29,15 @@
           slug: introduction/ip-allow
     - title: Regions
       slug: introduction/regions
-    - title: Plans
-      items:
-        - title: Overview
-          slug: introduction/plans
-        - title: Free
-          slug: introduction/free-tier
-        - title: Pro
-          slug: introduction/pro-plan
-        - title: Custom
-          slug: introduction/custom-plan
     - title: Billing
       slug: introduction/about-billing
       items:
-        - title: Billing overview
-          slug: introduction/billing-overview
-        - title: Pricing calculators
-          slug: introduction/billing-calculators
-        - title: Billing metrics
-          slug: introduction/billing
-        - title: Billing rates
-          slug: introduction/billing-rates
+        - title: Plans
+          slug: introduction/plans
+        - title: How billing works
+          slug: introduction/how-billing-works
+        - title: Usage metrics
+          slug: introduction/usage-metrics
         - title: Manage billing
           slug: introduction/manage-billing
         - title: Sample billing
@@ -269,6 +257,12 @@
           slug: guides/deno
         - title: Koyeb
           slug: guides/koyeb
+        - title: Netlify Functions
+          slug: guides/netlify-functions
+        - title: Railway
+          slug: guides/railway
+        - title: Render
+          slug: guides/render
         - title: Vercel
           items:
             - title: Overview

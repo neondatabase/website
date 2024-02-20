@@ -5,51 +5,34 @@ import Item from './item';
 
 const items = [
   {
+    question: 'When will I be billed?',
+    answer: `Neon bills for the past month's usage at the beginning of each calendar month. For more information, see <a href="/docs/introduction/manage-billing">Manage billing</a>.`,
+  },
+  {
+    question: 'What happens if I cancel my subscription?',
+    answer:
+      'If you cancel your subscription you will be be required to downgrade your account to the free limits.',
+  },
+  {
+    question: 'Do I get a notification if I am approaching my usage limits?',
+    answer:
+      'Yes, we display your usage consumption in the Neon admin console and will email you when you are within 20% of your included usage.',
+  },
+  {
+    question: 'Why are we limited to 500 branches per project?',
+    answer: `Neon implements usage limits for branching in order to prevent potential abuse of the service which can negatively impact other users. For customers seeking higher limits please contact <a href="mailto:customer-success@neon.tech">customer-success@neon.tech</a>.`,
+  },
+  {
     question: 'Does Neon charge for storage in database branches?',
     answer:
       'Neon charges for unique storage. Data that a branch shares in common with a parent branch is not considered unique, but data changes to a branch are counted toward storage.',
-    linkUrl: '/docs/introduction/billing#project-storage',
+    linkUrl: '/docs/introduction/usage-metrics#project-storage',
     linkText: 'Read more',
     linkLabel: 'about project storage',
   },
   {
-    question: 'Can I upgrade or downgrade my plan later?',
-    answer:
-      'Yes. You can upgrade from Free Tier to our Pro plan by selecting <a href="https://console.neon.tech/app/billing"><strong>Upgrade to Pro</strong></a>. To upgrade to a custom Enterprise or Platform Partnership plan, contact <a href="https://neon.tech/contact-sales"><strong>Sales</strong></a>. For downgrade instructions, see <a href="/docs/introduction/manage-billing#downgrade-your-plan">Downgrade your plan</a>.',
-  },
-  {
-    question: 'What payment methods do you accept?',
-    answer:
-      'Neon accepts payment by credit card for the Pro plan. For the Enterprise & Platform Partnership plans, Neon accepts payment by ACH and Wire.',
-  },
-  {
-    question: 'When will I be billed?',
-    answer: `Neon bills for the past month's usage at the beginning of each month. For more information, see <a href="/docs/introduction/manage-billing">Manage billing</a>.`,
-  },
-  {
-    question: 'Is there a discount for annual plan subscriptions?',
-    answer:
-      'Discounts are applied for longer duration contracts as well as bulk consumption purchases.',
-  },
-  {
-    question: 'Are there any limits or restrictions on usage?',
-    answer:
-      'Neon implements limits to protect against unintended usage. For example, a usage-based plan may offer unlimited projects, compute, and storage, but Neon places default limits on those resources to protect your account. For more information, see <a href="/docs/introduction/plans">Plans</a>.',
-  },
-  {
-    question: 'Is there a minimum commitment period?',
-    answer:
-      'The Neon Pro plan is usage-based and has no commitment period.  You can downgrade to the at Free Tier at any time. For more information, see <a href="/docs/introduction/manage-billing#downgrade-your-plan">Downgrade your plan</a>.',
-  },
-  {
-    question: 'How secure is the payment process?',
-    answer:
-      'Neon payment processing is powered by <a href="https://stripe.com/" target="_blank" rel="noreferrer noopener">Stripe</a>, which is a certified PCI Service Provider Level 1. For more information, refer to <a href="https://stripe.com/docs/security" target="_blank" rel="noreferrer noopener">Security at Stripe</a>.',
-  },
-  {
-    question: 'Where should I direct pricing-related questions?',
-    answer:
-      'Please contact <a href="https://neon.tech/contact-sales"><strong>Sales</strong></a> with any questions about plans or pricing.',
+    question: 'What happens when I exceed 10 GiB storage on the Launch plan?',
+    answer: `If you exceed your storage quota on the Launch plan, the Neon team will collaborate with you to address your storage needs. This may involve providing guidance on optimizing storage usage or exploring alternative plans that better suit your requirements. It's important to note that Neon does not automatically halt write operations when you surpass your limits. You can send related inquiries to <a href="mailto:customer-success@neon.tech">customer-success@neon.tech</a>.`,
   },
 ];
 

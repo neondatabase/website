@@ -24,8 +24,11 @@ const styles = {
     'gray-dark-outline-black':
       'text-black border border-gray-new-90 bg-gray-new-98 hover:border-gray-new-70 dark:text-white dark:bg-gray-new-10 dark:border-[#37393D] dark:hover:border-white',
     'green-outline': 'bg-transparent text-white border border-green-45 hover:border-white',
+    'green-underlined':
+      'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
     'gray-10': 'bg-gray-new-10 text-white hover:bg-gray-new-20',
+    'gray-15': 'bg-gray-new-15 text-white hover:bg-gray-new-20',
   },
 };
 
