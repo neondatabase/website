@@ -7,8 +7,6 @@ import { useState } from 'react';
 import { InlineWidget } from 'react-calendly';
 
 import Container from 'components/shared/container';
-import Link from 'components/shared/link/link';
-import LINKS from 'constants/links';
 import useHubspotForm from 'hooks/use-hubspot-form';
 
 import 'styles/hubspot-form.css';
@@ -79,16 +77,8 @@ const Apply = () => {
               Become a Partner
             </h2>
             <p className="md:flat-breaks sm:flat-none mt-3 text-lg font-light leading-snug xl:text-base">
-              Not sure about the right partnership option?
-              <br />
-              <Link
-                className="inline-block leading-tight decoration-1 underline-offset-[6px]"
-                to={LINKS.contactSales}
-                theme="green-underlined"
-              >
-                Contact us
-              </Link>{' '}
-              if you have questions.
+              Start the process here. You'll be able to schedule a meeting with our partnerships
+              team as a next step.
             </p>
             <Testimonial className="lg:hidden" />
           </div>
