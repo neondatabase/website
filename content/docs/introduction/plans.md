@@ -120,7 +120,7 @@ This section describes the features available with one or more of the Neon plans
 
 #### Compute size
 
-Neon supports compute sizes from 0.25 vCPU with 1 GB RAM up to 7 vCPU with 28 GB RAM.
+Neon supports compute sizes from 0.25 vCPU with 1 GB RAM up to 8 vCPU with 32 GB RAM.
 
 #### Read replicas
 

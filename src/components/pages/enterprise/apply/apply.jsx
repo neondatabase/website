@@ -13,7 +13,7 @@ import 'styles/hubspot-form.css';
 import 'styles/calendly-widget.css';
 import CloseIcon from './images/close.inline.svg';
 
-const calendlyURL = 'https://calendly.com/alexia-sm';
+const calendlyURL = 'https://calendly.com/alexia-sm/enterprise-trial-request';
 const hubspotFormID = '1bf5e212-bb19-4358-9666-891021ce386c';
 
 const Testimonial = ({ className = null, ariaHidden = false }) => (
