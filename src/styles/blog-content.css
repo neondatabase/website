@@ -78,7 +78,7 @@
     }
 
     pre {
-      @apply !bg-black-new;
+      @apply !bg-black-new px-0;
 
       &.highlight {
         @apply px-0;

@@ -19,7 +19,7 @@ CodeTabs.propTypes = {
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       language: PropTypes.string,
-      code: PropTypes.string.isRequired,
+      code: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
     })
   ).isRequired,
 };

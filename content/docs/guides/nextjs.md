@@ -68,7 +68,7 @@ From your server functions using the App Router, add the following code snippet 
 ```javascript
 import { Pool } from 'pg';
 
-const pool = new Pool({
+const pool = new Pool({ 
   connectionString: process.env.DATABASE_URL,
   ssl: true
 });

@@ -44,7 +44,7 @@ const CodeBlockWrapper = ({
   className = '',
   copyButtonClassName = '',
   children,
-
+  as: Tag = 'figure',
   ...otherProps
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
@@ -52,7 +52,7 @@ const CodeBlockWrapper = ({
   const code = extractTextFromNode(children);
 
   return (
-    <figure className={clsx('code-block group relative', className)} {...otherProps}>
+    <Tag className={clsx('code-block group relative', className)} {...otherProps}>
       {children}
       <button
         className={clsx(
@@ -70,7 +70,7 @@ const CodeBlockWrapper = ({
           <CopyIcon className="text-current" />
         )}
       </button>
-    </figure>
+    </Tag>
   );
 };
 
