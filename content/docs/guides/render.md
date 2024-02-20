@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-02-19T00:00:00Z'
 ---
 
-[Render](https://render.com) is a comprehensive cloud service that provides hosting for web applications and static sites, with PR previews, zero-downtime deployments, and more. Unlike serverless platforms like Deno or Cloudflare Workers, Render supports full-stack applications, offering both web services and background workers.
+[Render](https://render.com) is a comprehensive cloud service that provides hosting for web applications and static sites, with PR previews, zero-downtime deployments, and more. Render supports full-stack applications, offering both web services and background workers.
 
 This guide shows how to deploy a simple Node.js application connected to a Neon Postgres database on Render. 
 
@@ -49,7 +49,7 @@ Log in to the Neon console and navigate to the [Projects](https://console.neon.t
 
 ### Retrieve your Neon database connection string
 
-Log in to the Neon Console and navigate to the `Connection Details` section to find your database connection string. It should look similar to this:
+Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -68,7 +68,7 @@ npm install express pg
 touch .env
 ```
 
-We use the `npm pkg set type="module"` command to enable ES6 module support in our project. We also create a new `.env` file to store the DATABASE_URL environment variable, which we'll use to connect to our Neon database. Lastly, we install the `pg` library which is the Postgres driver we use to connect to our database. 
+We use the `npm pkg set type="module"` command to enable ES6 module support in our project. We also create a new `.env` file to store the `DATABASE_URL` environment variable, which we'll use to connect to our Neon database. Lastly, we install the `pg` library which is the Postgres driver we use to connect to our database. 
 
 ```bash
 # .env 
@@ -116,7 +116,7 @@ We can test this application locally by running:
 node --env-file=.env index.js
 ```
 
-Now, navigate to `http://localhost:3000/` in your browser to check it returns the sample data from the `books_to_read` table.
+Now, navigate to `http://localhost:3000/` in your browser to check that it returns the sample data from the `books_to_read` table.
 
 ## Push Your application to GitHub
 
