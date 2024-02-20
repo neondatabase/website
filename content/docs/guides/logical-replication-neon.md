@@ -3,7 +3,7 @@ title: Manage logical replication in Neon
 subtitle: Learn how to manage logical replication in Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-09T17:53:20.587Z'
+updatedOn: '2024-02-16T18:37:19.448Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots. It also includes information about logical replication specific to Neon, including [known limitations](#known-limitations).
@@ -334,6 +334,10 @@ max_replication_slots = 10
 - The `max_replication_slots` defines the maximum number of replication slots which are used to manage database replication connections. Each replication slot tracks changes in the publisher database to ensure that the connected subscriber stays up to date. You'll want a replication slot for each replication connection. For example, if you expect to have 10 separate subscribers replicating from your database, you would set `max_replication_slots` to 10 to accommodate each connection.
 
 If you require different values for these parameters, please contact Neon support.
+
+### Unused replication slots
+
+Neon removes _unused_ replication slots after a period of time to avoid unnecessary retention of write-ahead logs, which prevents removing data snapshots that are no longer required.
 
 ### Known limitations
 
