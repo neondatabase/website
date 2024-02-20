@@ -26,7 +26,7 @@ const Admonition = ({ children = null, type = 'note', title = null, asHTML = fal
   return (
     <div
       className={clsx(
-        'admonition not-prose mt-5 flex flex-col rounded-[1px] border-l-4 bg-gray-new-98 px-5 py-4 leading-normal dark:bg-gray-new-10 [&_pre[data-theme]]:!bg-white [&_pre[data-theme]]:dark:!bg-gray-new-8 [&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:!text-sm',
+        'admonition not-prose mt-5 flex flex-col rounded-[1px] border-l-4 bg-gray-new-98 px-5 py-4 leading-normal dark:bg-gray-new-10 [&_pre[data-language]]:!bg-white [&_pre[data-language]]:dark:!bg-gray-new-8 [&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:!text-sm',
         borderClassNames[lowerCaseType]
       )}
     >

@@ -3,7 +3,7 @@ title: Postgres logical replication concepts
 subtitle: Learn about PostgreSQL logical replication concepts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-12-21T15:11:12.215Z'
+updatedOn: '2024-02-19T18:57:12.556Z'
 ---
 
 Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or data platform. 
@@ -25,7 +25,7 @@ The Postgres logical replication architecture is very simple. It uses a _publish
 In Neon, you can enable logical replication from the Neon Console:
 
 1. Select your project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Replication**.
 4. Click **Enable**.
 

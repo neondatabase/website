@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-01-10T18:34:05.858Z'
 ---
 
-[Read replicas](/docs/introduction/read-replicas) are supported with the [Neon Pro Plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating and managing read replicas.
+[Read replicas](/docs/introduction/read-replicas) are supported with the Neon paid plans. This guide will lead you through the process of creating and managing read replicas.
 
 The general methodology of using read replicas to segregate read-only work from your production database operations can be applied to a variety of uses cases, such as:
 
@@ -18,7 +18,7 @@ Regardless of the application, the steps for creating, configuring, and connecti
 
 ## Prerequisites
 
-- A [Neon Pro Plan](/docs/introduction/pro-plan) account.
+- A Neon paid plan account
 - A [Neon project](/docs/manage/projects#create-a-project).
 
 ## Create a read replica
@@ -34,9 +34,9 @@ To create a read replica from the Neon Console:
 2. Select the branch where your database resides.
 3. Click **Add compute**.
 4. On the **Create Compute Endpoint** dialog, select **Read-only** as the **Compute type**.
-5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your read-only compute is automatically suspended. The default setting is 5 minutes. You can set this value up 7 days.
+5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your read-only compute is automatically suspended. The default setting is 5 minutes.
     <Admonition type="note">
-    The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
+    The compute size configuration determines the processing power of your database.
     </Admonition>
 6. When you have finished making your selections, click **Create**.
 

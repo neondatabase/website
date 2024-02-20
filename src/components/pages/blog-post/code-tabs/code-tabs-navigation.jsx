@@ -35,7 +35,11 @@ const CodeTabsNavigation = ({ items, highlightedItems }) => {
             return null;
           }
 
-          return <CodeBlockWrapper key={index}>{parse(item)}</CodeBlockWrapper>;
+          return (
+            <CodeBlockWrapper as="div" key={index}>
+              {parse(item)}
+            </CodeBlockWrapper>
+          );
         })}
       </div>
     </>

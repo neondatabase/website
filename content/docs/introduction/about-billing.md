@@ -1,46 +1,42 @@
 ---
 title: Billing
 enableTableOfContents: true
-subtitle: Learn how Neon billing works to save you money
+subtitle: Learn about Neon's pricing plans and billing
 updatedOn: '2024-01-23T17:45:24.324Z'
 ---
 
-<NewPricing/>
+Find all the information you need about Neon's pricing plans and how to manage your monthly bill.
 
-Find all the documentation you need to understand, manage, and optimize the features and metrics that contribute to your monthly Neon bill.
+## Neon plans
 
-## Pricing calculators and billing overview
-
-Start with our pricing calculators to get a sense of how different compute and storage sizes can affect your bill. Then get more detail about the underlying metrics.
+Start with an overview of Neon's pricing plans to learn about usage allowances and the features included with each plan.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/billing-calculators" description="Our pricing calculator and cost estimator tools help you estimate your next Neon bill" icon="transactions">Pricing calculators</a>
-
-<a href="/docs/introduction/billing-overview" description="Quick introduction to how billing works in Neon" icon="chart-bar">Billing overview</a>
+<a href="/docs/introduction/plans" description="Learn about Neon's pricing plans and what's included" icon="chart-bar">Plans</a>
 
 </DetailIconCards>
 
-## Reference
+## Understand how billing works
 
-Find detailed definitions of the metrics that make up your bill and a cost breakdown for compute, storage, and data transfer rates for your region.
+Find out how billing works and the metrics that affect your usage allowances.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/billing" description="Find detailed descriptions of the metrics that make up your bill" icon="trend-up">Billing metrics</a>
+<a href="/docs/introduction/how-billing-works" description="Learn about plan allowances, extra usage, and how to monitor usage" icon="chart-bar">How billing works</a>
 
-<a href="/docs/introduction/billing-rates" description="Reference table of billing rates per region" icon="hourglass">Billing rates</a>
+<a href="/docs/introduction/usage-metrics" description="Take a deep dive into the usage metrics behind plan allowances and extra usage" icon="trend-up">Usage metrics</a>
 
 </DetailIconCards>
 
 ## Manage billing
 
-Find information about invoices, payment methods, and other actions around viewing and managing your bill. Plus a sample project that can help you understand how billing works in a model scenario.
+Find information about invoices, payment methods, changing your plan, and other actions around managing your bill. Plus a sample project showing how to select the right pricing plan in a model scenario.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/manage-billing" description="Manage your monthly bill" icon="setup">Manage billing</a>
+<a href="/docs/introduction/manage-billing" description="View and manage your monthly bill and learn how to change your plan" icon="setup">Manage billing</a>
 
-<a href="/docs/introduction/billing-sample" description="See how billing breaks down for a sample project" icon="chart-bar">Sample projects</a>
+<a href="/docs/introduction/billing-sample" description="See how to select the right plan for a sample project" icon="chart-bar">Sample project</a>
 
 </DetailIconCards>

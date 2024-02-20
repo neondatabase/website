@@ -45,7 +45,7 @@ const Hero = () => {
               Talk to our Sales team
             </h1>
             <p className="mx-auto mt-1.5 max-w-[660px] text-xl 2xl:max-w-[550px] 2xl:text-base md:mt-2">
-              Interested in increasing your free tier limits or learning about pricing? Complete the
+              Interested in learning more about our plans and pricing? Complete the
               form below to get in touch with our Sales team.
             </p>
             <div className="mx-auto mt-16 flex 2xl:mt-12 2xl:max-w-5xl lg:mt-9 lg:max-w-[583px] lg:flex-col lg:space-y-9 md:mt-6 md:space-y-6">
