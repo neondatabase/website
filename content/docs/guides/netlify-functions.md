@@ -7,7 +7,7 @@ updatedOn: '2024-02-19T00:00:00.000Z'
 
 [Netlify Functions](https://www.netlify.com/products/functions/) provide a serverless execution environment for building and deploying backend functionality without managing server infrastructure. It's integrated with Netlify's ecosystem, making it ideal for augmenting web applications with server-side logic, API integrations, and data processing tasks in a scalable way.
 
-This guide will show you how to connect to a Neon Postgres database from your `Netlify Functions` project. We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the database and make queries. 
+This guide will show you how to connect to a Neon Postgres database from your Netlify Functions project. We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the database and make queries. 
 
 ## Prerequisites
 
@@ -149,7 +149,7 @@ This function connects to your Neon database and fetches the list of your favori
 
 ### Implement the frontend
 
-To make use of the `Function` implemented above, we will create a simple HTML page that fetches the coffee information by calling it and displays them. 
+To make use of the `Function` implemented above, we will create a simple HTML page that fetches and displays the coffee information by calling the function. 
 
 Create a new file `index.html` at the root of your project with the following content:
 
@@ -208,7 +208,7 @@ Deploying is straightforward with the Netlify CLI. However, we need to set the `
 netlify env:set DATABASE_URL "YOUR_NEON_CONNECTION_STRING"
 ```
 
-Now, to deploy your site and function, run the below command. When asked to provide a publish directory, enter `.` to deploy the entire project. 
+Now, to deploy your site and function, run the following command. When asked to provide a publish directory, enter `.` to deploy the entire project. 
 
 ```bash
 netlify deploy --prod
