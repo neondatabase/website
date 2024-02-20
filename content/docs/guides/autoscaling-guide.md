@@ -3,12 +3,12 @@ title: Enable Autoscaling in Neon
 subtitle: Learn how to enable Neon's Autoscaling feature to automatically scale compute
   resources on demand
 enableTableOfContents: true
-updatedOn: '2024-02-08T21:31:43.906Z'
+updatedOn: '2024-02-19T18:57:12.553Z'
 ---
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current workload, eliminating the need for manual intervention. This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
 
-_Autoscaling_ is a [Neon Pro Plan](/docs/introduction/pro-plan) feature. Neon Pro Plan users can enable autoscaling for a new project, for an existing project, or for an individual compute endpoint. Autoscaling is supported with both read-write and read-only compute endpoints. Read-only compute endpoints enable Neon's [Read replica](/docs/introduction/read-replicas) feature.
+_Autoscaling_ is a paid plan feature. Users on paid plans can enable autoscaling for a new project, for an existing project, or for an individual compute endpoint. Autoscaling is supported with both read-write and read-only compute endpoints. Read-only compute endpoints enable Neon's [Read replica](/docs/introduction/read-replicas) feature.
 
 ## Enable autoscaling for a new project
 
@@ -35,7 +35,7 @@ Configuring autoscaling for an existing project sets the project's default, whic
 To configure autoscaling default settings for an existing project:
 
 1. Select a project in the Neon console.
-1. On the Neon **Dashboard**, select **Settings**.
+1. On the Neon **Dashboard**, select **Project settings**.
 1. Select **Compute** and click **Change**.
 1. Under **Compute size**, use the slider to specify a minimum and maximum compute size.
     ![Autoscaling](/docs/guides/autoscaling_existing_project.png)
@@ -48,7 +48,7 @@ To configure autoscaling default settings for an existing project:
 
 ## Enable autoscaling for a compute endpoint
 
-[Neon Pro Plan](/docs/introduction/pro-plan) users can edit an individual compute endpoint to alter the compute endpoint configuration, which includes autoscaling.
+Users on paid plans can edit an individual compute endpoint to alter the compute endpoint configuration, which includes autoscaling.
 
 To edit a compute endpoint:
 
