@@ -3,7 +3,7 @@ title: Branch Restore
 subtitle: Learn how to revert changes or recover lost data using Neon Branch Restore
   with Time Travel Assist
 enableTableOfContents: true
-updatedOn: '2024-02-13T20:44:18.898Z'
+updatedOn: '2024-02-20T19:52:17.123Z'
 ---
 
 With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can also use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to.
