@@ -61,9 +61,9 @@ const items = [
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
       { title: '50 GiB storage included' },
-      { title: 'Autoscale to 7 vCPU, 28GB RAM' },
+      { title: 'Autoscale to 8 vCPU, 32GB RAM' },
       { title: '50 projects w/500 branches each' },
-      { title: 'Unlocks key security features' },
+      { title: 'Unlocks additional security features' },
       { title: 'Priority support' },
     ],
     button: {

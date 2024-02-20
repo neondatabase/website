@@ -78,7 +78,7 @@ Extra compute usage is available with the [Launch](/docs/introduction/plans##lau
 
 ### What is a compute hour?
 
-A **compute hour** is 1 hour of _active time_ for a compute with 1 vCPU. Neon supports computes ranging in size from 1 vCPU to 7 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would take 4 hours of active time to use 1 compute hour. On the other hand, If you have a compute with 4 vCPU, it would only take 15 minutes of active time to use 1 compute hour.
+A **compute hour** is 1 hour of _active time_ for a compute with 1 vCPU. Neon supports computes ranging in size from 1 vCPU to 8 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would take 4 hours of active time to use 1 compute hour. On the other hand, If you have a compute with 4 vCPU, it would only take 15 minutes of active time to use 1 compute hour.
 
 ### How Neon compute features affect usage
 
