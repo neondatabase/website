@@ -249,6 +249,8 @@
           slug: guides/polyscale
     - title: Deployment platforms
       items:
+        - title: Cloudflare Pages
+          slug: guides/cloudflare-pages
         - title: Cloudflare Workers
           slug: guides/cloudflare-workers
         - title: Deno
