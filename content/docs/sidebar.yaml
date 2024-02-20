@@ -255,6 +255,8 @@
           slug: guides/deno
         - title: Koyeb
           slug: guides/koyeb
+        - title: Netlify Functions
+          slug: guides/netlify-functions
         - title: Railway
           slug: guides/railway
         - title: Render
