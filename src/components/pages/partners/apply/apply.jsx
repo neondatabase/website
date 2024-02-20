@@ -64,7 +64,7 @@ const Apply = () => {
 
   return (
     <section
-      id="request-trial"
+      id="partners-apply"
       className="apply-form safe-paddings pb-40 pt-[240px] xl:pb-[120px] xl:pt-40 lg:pb-24 lg:pt-32 md:pb-20 md:pt-[90px]"
     >
       <Container className="grid-gap-x grid grid-cols-12" size="medium">
