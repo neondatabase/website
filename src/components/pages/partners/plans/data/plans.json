@@ -1,0 +1,162 @@
+{
+  "headings": {
+    "feature": "",
+    "standard": {
+      "label": "Standard",
+      "price": "",
+      "buttonUrl": "#partners-apply",
+      "buttonText": "Become a partner"
+    },
+    "premier": {
+      "label": "Premier",
+      "price": "",
+      "buttonUrl": "#partners-apply",
+      "buttonText": "Become a partner"
+    }
+  },
+  "cols": [
+    {
+      "rows": "1",
+      "feature": "Commercials"
+    },
+    {
+      "rows": "3",
+      "feature": {
+        "title": "Monthly Price"
+      },
+      "standard": "<span>Starts at</span> $500/mon <span>including usage</span>",
+      "premier": "Custom"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Usage"
+      },
+      "standard": "Billed at a 10% discount versus list price",
+      "premier": "Custom"
+    },
+    {
+      "rows": "1",
+      "feature": "Consumption"
+    },
+    {
+      "rows": "3",
+      "feature": {
+        "title": "Projects"
+      },
+      "standard": "Unlimited <span>If >200 projects contact for custom pricing</span>",
+      "premier": "Unlimited"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Storage"
+      },
+      "standard": "Unlimited",
+      "premier": "Unlimited"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Branches"
+      },
+      "standard": "500<span>per project</span>",
+      "premier": "Unlimited"
+    },{
+      "rows": "2",
+      "feature": {
+        "title": "Max Compute Size"
+      },
+      "standard": "7 CU <span>7 vCPU, 28 GB RAM</span>",
+      "premier": "Larger sizes <span>7+ vCPU, 28+ GB RAM</span>"
+    },
+    {
+      "rows": "1",
+      "feature": "Features"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": ""
+      },
+      "standard": "All <a href='https://neon.tech/docs/introduction/plans#scale'>Scale</a> features.",
+      "premier": "All <a href='https://neon.tech/docs/introduction/plans#enterprise'>Enterprise</a> features."
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Service SLA of 99.99%"
+      },
+      "standard": true,
+      "premier": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Partner API"
+      },
+      "standard": true,
+      "premier": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Custom reporting"
+      },
+      "standard": false,
+      "premier": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Level 1 24/7 support"
+      },
+      "standard": true,
+      "premier": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Level 2 shared 24/7 support"
+      },
+      "standard": false,
+      "premier": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Dedicated partner manager"
+      },
+      "standard": false,
+      "premier": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Custom Domains"
+      },
+      "standard": false,
+      "premier": true
+    },
+    {
+      "rows": "1",
+      "feature": "Marketing"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Blog"
+      },
+      "standard": true,
+      "premier": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "PR"
+      },
+      "standard": false,
+      "premier": true
+    }
+  ]
+}

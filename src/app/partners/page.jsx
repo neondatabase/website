@@ -1,6 +1,7 @@
 import Apply from 'components/pages/partners/apply';
 import Hero from 'components/pages/partners/hero';
 import Integration from 'components/pages/partners/integration';
+import Plans from 'components/pages/partners/plans';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
 import SplitViewGrid from 'components/shared/split-view-grid';
@@ -81,6 +82,7 @@ const PartnersPage = () => (
       name="Guillermo Rauch"
       position="CEO of Vercel"
     />
+    <Plans className="my-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
     <Integration />
     <Apply />
   </Layout>
