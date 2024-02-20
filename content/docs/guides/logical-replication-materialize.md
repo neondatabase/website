@@ -3,7 +3,7 @@ title: Replicate data to Materialize
 subtitle: Learn how to replicate data from Neon to Materialize
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-08T15:20:54.285Z'
+updatedOn: '2024-02-19T18:57:12.558Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -27,7 +27,7 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 To enable logical replication in Neon:
 
 1. Select your project in the [Neon Console](https://console.neon.tech/app/projects).
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Beta**.
 4. Click **Enable** to enable logical replication.
 

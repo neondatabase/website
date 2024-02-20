@@ -2,9 +2,10 @@
 title: Manage project access
 subtitle: Learn about granting access to your Neon project
 enableTableOfContents: true
+updatedOn: '2024-02-19T18:57:12.561Z'
 ---
 
-The [Neon Pro Plan](/docs/introduction/pro-plan) allows you to share a Neon project with other Neon users.
+You to share a Neon project with other Neon users.
 
 Users that you share a project with are able to perform any action you can perform in the project, with the exception of deleting the project. For example, users you share a project with are able to:
 
@@ -20,7 +21,7 @@ You can think of sharing a Neon project as granting administrator access to your
 
 ## How to share a project
 
-Sharing a project is performed from the **Settings** page in your Neon project.
+Sharing a project is performed from the **Project settings** page in your Neon project.
 
 <video autoPlay playsInline muted loop width="800" height="600">
   <source type="video/mp4" src="/docs/manage/project_sharing.mp4"/>

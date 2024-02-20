@@ -12,7 +12,7 @@ export default {
   contactSales: {
     title: 'Contact Sales — Neon',
     description:
-      'Interested in increasing your free tier limits or learning about pricing? Contact our sales team.',
+      'Interested in learning more about our plans and pricing? Contact our sales team.',
     pathname: LINKS.contactSales,
   },
   careers: {
@@ -52,12 +52,6 @@ export default {
       'Neon brings serverless architecture to Postgres, which allows us to offer you flexible usage and volume-based plans.',
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
-  },
-  calculator: {
-    title: 'Pricing Calculator — Neon',
-    description: 'Calculate your Neon usage and get an estimate of your monthly bill.',
-    imagePath: '/images/social-previews/pricing.jpg',
-    pathname: LINKS.calculator,
   },
   enterprise: {
     title: 'Neon for Enterprises: Postgres Fleets - Neon',

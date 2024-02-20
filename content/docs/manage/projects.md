@@ -5,10 +5,10 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2024-01-26T16:30:34.543Z'
+updatedOn: '2024-02-19T18:57:12.562Z'
 ---
 
-With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases, and with the Neon Pro Plan, as many branches of those databases, as your application or workflow needs. However, [tier limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Tier limits you to one project per Neon account.
+With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [tier limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Tier limits you to one project per Neon account.
 
 Learn more about projects and how to manage them in these sections:
 
@@ -29,7 +29,7 @@ When you add a new project, Neon creates the following resources by default:
 
 ## About the Settings page
 
-Once you open a project, you can use the **Settings** page to manage that particular project and configure any defaults.
+Once you open a project, you can use the **Project settings** page to manage that particular project and configure any defaults.
 
 ![Project Settings page](/docs/manage/settings_page.png)
 
@@ -53,13 +53,13 @@ Here are some basic actions you can take to add or manage projects:
 
 ### Create a project
 
-The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Sign up](/docs/get-started-with-neon/signing-up). Neon Free Tier users are limited to a single Neon project. Support for multiple projects is only available to [Neon Pro Plan](/docs/introduction/pro-plan) users.
+The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Sign up](/docs/get-started-with-neon/signing-up). Neon Free Tier users are limited to a single Neon project. Support for multiple projects is only available to users on paid plans.
 
 To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
-3. Specify values for **Name**, **Postgres version**, and **Region**. Project names are limited to 64 characters. If you are a [Neon Pro Plan](/docs/introduction/pro-plan) user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
+3. Specify values for **Name**, **Postgres version**, and **Region**. Project names are limited to 64 characters. If you are a paying user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
     - Neon supports fixed size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
     - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
@@ -84,7 +84,7 @@ To edit a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to edit.
-3. Select **Settings**.
+3. Select **Project settings**.
 4. Select **General**.
 5. Make your changes and click **Save**.
 
@@ -96,19 +96,19 @@ To delete a project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to delete.
-3. Select **Settings**.
+3. Select **Project settings**.
 4. Select **Delete**.
 5. Click **Delete project.**
 6. On the confirmation dialog, click **Delete**.
 
 ### Share a project
 
-Project sharing is a Neon Pro Plan feature that allows you to share your project with other Neon accounts.
+Neon's project sharing feature allows you to share your project with other Neon accounts.
 
 To share a project:
 
 1. In the Neon Console, select a project.
-1. Select **Settings**.
+1. Select **Project settings**.
 1. Select **Sharing**.
 1. Under **Grant access to your project**, enter the email address of the account you want to share access with.
 1. Click **Grant access**.
@@ -121,9 +121,9 @@ For additional information, refer to our [Project sharing guide](/docs/guides/pr
 
 ## Advanced settings
 
-From the **Settings** page, you can also set defaults or apply bulk changes across your Neon objects:
+From the **Project settings** page, you can also set defaults or apply bulk changes across your Neon objects:
 
-- [Reset default compute size](#reset-the-default-compute-size) (Neon Pro Plan only)
+- [Reset default compute size](#reset-the-default-compute-size)
 - [Configure history retention range](#configure-history-retention)
 - [Enable logical replication](#enable-logical-replication)
 - [Configure IP Allow](#configure-ip-allow)
@@ -132,11 +132,11 @@ From the **Settings** page, you can also set defaults or apply bulk changes acro
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
 
-For [Neon Free Tier](/docs/introduction/free-tier) users, Neon sets your compute size to a static shared 1 vCPU, with 1 GB of RAM for each branch (max 10 branches).
+For [Neon Free Tier](/docs/introduction/plans#free-tier) users, Neon sets your compute size to a static shared 1 vCPU, with 1 GB of RAM for each branch (max 10 branches).
 
-[Neon Pro Plan](/docs/introduction/pro-plan) users have the flexibility to choose a compute size for each branch's compute endpoint individually. By default, new branches inherit the compute endpoint size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create a series of read-only replicas, where each replica typically requires less compute per branch.
+Users on paid plans have the flexibility to choose a compute size for each branch's compute endpoint individually. By default, new branches inherit the compute endpoint size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create a series of read-only replicas, where each replica typically requires less compute per branch.
 
-To reset the default compute size, go to **Settings** > **Compute**.
+To reset the default compute size, go to **Project settings** > **Compute**.
 
 You can choose from two options:
 
@@ -149,14 +149,14 @@ _Example: default minimum and maximum autoscale settings_
 
 ### Configure history retention
 
-By default, Neon retains a 7-day history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported range is 0 to 7 days for [Neon Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Neon Pro Plan](/docs/introduction/pro-plan) users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/billing#project-storage).
+By default, Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported limits are 24 hours for [Neon Free Tier](/docs/introduction/plans#free-tier) users, 7 days for [Launch](/docs/introduction/plans#launch) plan users, and 30 days for [Scale](/docs/introduction/plans#scale) plan users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/usage-metrics#storage).
 
 To configure the history retention period for a project:
 
 1. Select a project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Storage**.
-    ![History retention configuration](/docs/relnotes/history_retention.png)
+    ![History retention configuration](/docs/manage/history_retention.png)
 4. Use the slider to select the history retention period.
 5. Click **Save**.
 
@@ -171,7 +171,7 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 To enable logical replication for your project:
 
 1. Select your project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Beta**.
 4. Click **Enable**.
 
@@ -188,7 +188,7 @@ After enabling logical replication, the next steps involve creating publications
 
 ### Configure IP Allow
 
-Available to [Neon Pro Plan](/docs/introduction/pro-plan) users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default. 
+Available to [Scale](/docs/introduction/plans#scale) plan users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default. 
 
 Optionally, you can allow unrestricted access to your project's [non-primary branches](/docs/manage/branches#non-primary-branch). For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing unrestricted access to your development branches.
 
@@ -205,7 +205,7 @@ Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Prot
 To configure an allowlist:
 
 1. Select a project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
     ![IP Allow configuration](/docs/manage/ip_allow.png)
 4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
@@ -318,7 +318,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 <TabItem>
 
 1. Select a project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
 4. Clear the **Allowed IP addresses and ranges** field.
 5. If applicable, clear the **Apply to primary branch only** checkbox.
@@ -379,7 +379,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a project with the API
 
-The following Neon API method creates a project. The [Neon Free Tier](/docs/introduction/free-tier) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
+The following Neon API method creates a project. The [Neon Free Tier](/docs/introduction/plans#free-tier) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
 
 ```http
 POST /projects
