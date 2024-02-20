@@ -78,7 +78,7 @@ Some key points to understand about how your endpoint responds when you make cha
 
 Users on paid plans can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
 
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the vCPUs, as shown in the table below. Currently, a Neon compute can have anywhere from 1/4 (.25) to 7 CUs.
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the vCPUs, as shown in the table below.
 
 | Compute size (in CUs)  | vCPU | RAM    |
 |:--------------|:-----|:-------|
@@ -91,11 +91,13 @@ _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute e
 | 5             | 5    | 20 GB  |
 | 6             | 6    | 24 GB  |
 | 7             | 7    | 28 GB  |
+| 8             | 8    | 32 GB  |
+
 
 Neon supports fixed-size and autoscaling compute configurations.
 
-- **Fixed size:** You can use the slider to select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** You can also use the slider to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. _Autoscaling_ currently supports a range of 1/4 (.25) to 7 CUs. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+- **Fixed size:** You can use the slider to select a fixed compute size. A fixed-size compute does not scale to meet workload demand.
+- **Autoscaling:** You can also use the slider to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 <Admonition type="info">
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
@@ -122,6 +124,7 @@ The following table outlines the vCPU, RAM, `shared_buffer` limit (50 % of RAM),
 | 5            | 5    | 20 GB | 10 GB          | 2253            |
 | 6            | 6    | 24 GB | 12 GB          | 2703            |
 | 7            | 7    | 28 GB | 14 GB          | 3154            |
+| 8            | 8    | 32 GB | 16 GB          | 3,604           |
 
 
 <Admonition type="note">
