@@ -93,7 +93,6 @@ _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute e
 | 7             | 7    | 28 GB  |
 | 8             | 8    | 32 GB  |
 
-
 Neon supports fixed-size and autoscaling compute configurations.
 
 - **Fixed size:** You can use the slider to select a fixed compute size. A fixed-size compute does not scale to meet workload demand.
