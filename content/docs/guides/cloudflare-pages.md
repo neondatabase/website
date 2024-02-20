@@ -17,17 +17,17 @@ To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
 - A Cloudflare account. If you do not have one, sign up for [Cloudflare Pages](https://pages.cloudflare.com/) to get started.
-- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your locat machine. We'll use Node.js to build and deploy our `Pages` application.
+- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and deploy our `Pages` application.
 
 ## Setting up your Neon database
 
 ### Initialize a new project
 
-Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
+1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 
-- Click the `New Project` button to create a new project.
+2. Click the `New Project` button to create a new project.
 
-- From your project dashboard, navigate to the `SQL Editor` from the sidebar, and run the following SQL command to create a new table in your database:
+3. From your project dashboard, navigate to the `SQL Editor` from the sidebar, and run the following SQL command to create a new table in your database:
 
     ```sql
     CREATE TABLE books_to_read (
@@ -50,7 +50,7 @@ Log in to the Neon console and navigate to the [Projects](https://console.neon.t
 
 ### Retrieve your Neon database connection string
 
-Log in to the Neon Console and navigate to the `Connection Details` section to find your database connection string. It should look similar to this:
+Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -180,7 +180,7 @@ function App() {
 export default App;
 ```
 
-The `App` component fetches the list of books from the server and displays them. It also provides a form to add new books to the list. `Cloudflare` Pages allows us to define the api endpoints as serverless functions, which we'll implement next.
+The `App` component fetches the list of books from the server and displays them. It also provides a form to add new books to the list. `Cloudflare` Pages allows us to define the API endpoints as serverless functions, which we'll implement next.
 
 ### Implement the serverless functions
 
@@ -330,7 +330,7 @@ Give a unique name to your `Cloudflare Pages` project above. The Wrangler CLI wi
 
 The Cloudflare production deployment doesn't have access to the `DATABASE_URL` environment variable yet. Hence, we need to navigate to the Cloudflare dashboard and add it manually. 
 
-Navigate to the dashboard and select the `Settings` section in your project. Go to the `Environment Variables` tab and add a new environment variable named `DATABASE_URL` with the value of your Neon database connection string.
+Navigate to the dashboard and select the `Settings` section in your project. Go to the **Environment Variables** tab and add a new environment variable named `DATABASE_URL` with the value of your Neon database connection string.
 
 To make sure the environment variable is available to the serverless functions, go back to the terminal and redeploy the project using the `wrangler` CLI:
 
