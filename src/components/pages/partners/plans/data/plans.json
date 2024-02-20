@@ -3,13 +3,13 @@
     "feature": "",
     "standard": {
       "label": "Standard",
-      "price": "",
+      "price": "<span>Partnership Tier</span>",
       "buttonUrl": "#partners-apply",
       "buttonText": "Become a partner"
     },
     "premier": {
       "label": "Premier",
-      "price": "",
+      "price": "<span>Partnership Tier</span>",
       "buttonUrl": "#partners-apply",
       "buttonText": "Become a partner"
     }
@@ -77,10 +77,10 @@
     {
       "rows": "2",
       "feature": {
-        "title": ""
+        "title": "Pricing Plan Features"
       },
-      "standard": "All <a href='https://neon.tech/docs/introduction/plans#scale'>Scale</a> features.",
-      "premier": "All <a href='https://neon.tech/docs/introduction/plans#enterprise'>Enterprise</a> features."
+      "standard": "<p>All <a class='inline text-green-45 underline decoration-green-45/40' href='https://neon.tech/docs/introduction/plans#scale'>Scale</a> features</p>",
+      "premier": "<p>All <a class='inline text-green-45 underline decoration-green-45/40' href='https://neon.tech/docs/introduction/plans#enterprise'>Enterprise</a> features</p>"
     },
     {
       "rows": "1",

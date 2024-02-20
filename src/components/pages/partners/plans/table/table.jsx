@@ -68,11 +68,11 @@ const TableHeading = ({
         theme={isFeaturedPlan ? 'primary' : 'gray-15'}
         to={buttonUrl}
         onClick={() => {
-          sendGtagEvent('pricing_comparison_table', {
+          sendGtagEvent('partner_comparison_table', {
             event_label: label,
             event_position: 'top',
           });
-          sendSegmentEvent('pricing_comparison_table', {
+          sendSegmentEvent('partner_comparison_table', {
             event_label: label,
             event_position: 'top',
           });
@@ -290,11 +290,11 @@ const Table = () => {
                   theme={isScaleColumn ? 'primary' : 'gray-15'}
                   to={labelList[key].buttonUrl}
                   onClick={() => {
-                    sendGtagEvent('pricing_comparison_table', {
+                    sendGtagEvent('partner_comparison_table', {
                       event_label: labelList[key].label,
                       event_position: 'bottom',
                     });
-                    sendSegmentEvent('pricing_comparison_table', {
+                    sendSegmentEvent('partner_comparison_table', {
                       event_label: labelList[key].label,
                       event_position: 'bottom',
                     });
