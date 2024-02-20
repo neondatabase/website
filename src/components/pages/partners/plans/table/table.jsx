@@ -143,7 +143,7 @@ const Table = () => {
   );
 
   return (
-    <div className="mx-auto mt-12 flex max-w-[680px] flex-col xl:max-w-none xl:px-10 lg:pl-8 lg:pr-0 md:pl-4">
+    <div className="mx-auto mt-12 flex max-w-[680px] flex-col xl:px-10 lg:pl-8 lg:pr-0 md:max-w-none md:pl-4">
       <ul
         className={clsx(
           'scrollbar-hidden relative flex w-full pt-5 lg:overflow-x-auto lg:pr-4',
