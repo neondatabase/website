@@ -25,6 +25,7 @@ neonctl branches <subcommand> [options]
 | [list](#list)    | List branches    |
 | [create](#create)  | Create a branch |
 | [reset](#reset)   | Reset data to parent
+| [restore](#restore) | Restore a branch to a selected point in time
 | [rename](#rename)   | Rename a branch |
 | [set-primary](#set-primary)   | Set a primary branch |
 | [add-compute](#add-compute)   | Add replica to a branch |
@@ -307,6 +308,44 @@ neonctl branches reset mybranch --parent
 ├──────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
 │ br-raspy-meadow-26349337 │ development │ false   │ 2023-11-28T19:19:11Z │ 2023-11-28T19:29:26Z │
 └──────────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
+```
+### restore
+
+This command restores a branch to a specified point in time, leaving a backup branch to rollback the operation.
+
+#### Usage
+
+```bash
+neonctl branches restore <target-id|name> <source>[@(timestamp|lsn)]
+```
+
+`<target-id|name>` specifies the ID or name of the branch that you want to restore.
+
+`<source>` specifies the source branch you want to restore from. Options are:
+- `^self` &#8212; restores to an earlier point in time for the selected target branch. You must select a timestamp or LSN for this option.
+-  `^parent` &#8212; restores the target branch to its parent. If you don't seyou already selected
+
+ It can be a branch ID, branch name, `^self` for the branch itself, or `^parent` for the branch's parent. Append `@(timestamp|lsn)` for a precise point in time, if desired.
+
+#### Options
+
+In addition to the Neon CLI global options, the `restore` subcommand supports these options:
+
+| Option                | Description                                                                   | Type   | Required |
+|-----------------------|-------------------------------------------------------------------------------|--------|:--------:|
+| `--context-file`      | Context file path and file name                                               | string |          |
+| `--project-id`        | Project ID                                                                    | string | Only if your Neon account has more than one project or context is not set |
+| `--preserve-under-name` | Name for the backup created during restore.                                   | string |          |
+
+#### Example
+
+```bash
+neonctl branches restore mybranch source@2021-01-01T00:00:00Z
+┌─────────────────────────────┬─────────────┬─────────┬──────────────────────┬─────────────────────┐
+│ Id                          │ Name        │ Primary │ Created At           │ Restored At         │
+├─────────────────────────────┼─────────────┼─────────┼──────────────────────┼─────────────────────┤
+│ br-silent-hill-26489547     │ mybranch    │ false   │ 2024-02-20T15:30:00Z │ 2024-02-21T08:45:00Z│
+└─────────────────────────────┴─────────────┴─────────┴──────────────────────┴─────────────────────┘
 ```
 
 ### rename
