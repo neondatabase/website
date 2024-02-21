@@ -23,9 +23,9 @@ To follow along with this guide, you will need:
 
 Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 
-1. Click the `New Project` button to create a new project.
+1. Click the **New Project** button to create a new project.
 
-2. From the Neon **Dashboard**, navigate to the `SQL Editor` from the sidebar, and run the following SQL command to create a new table in your database:
+2. From the Neon **Dashboard**, navigate to the **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
 
     ```sql
     CREATE TABLE books_to_read (
@@ -84,7 +84,7 @@ The `create-cloudflare` CLI installs the `Wrangler` tool to manage the full work
 
 ### Implement the Worker script
 
-We'll use the `neon-serverless` driver to connect to the Neon database, so you need to install it as a dependency:
+We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the Neon database, so you need to install it as a dependency:
 
 ```bash
 npm install @neondatabase/serverless
