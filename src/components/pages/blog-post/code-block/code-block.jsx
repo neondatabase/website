@@ -12,8 +12,7 @@ const CodeBlock = async (props) => {
     codeContent = JSON.stringify(codeContent, null, 2);
   }
 
-  const highlightedLines = `${props.highlight}`;
-  const highlightCode = await highlight(codeContent, props.language, highlightedLines);
+  const highlightCode = await highlight(codeContent, props.language);
 
   return <CodeBlockWrapper>{parse(highlightCode)}</CodeBlockWrapper>;
 };

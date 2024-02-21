@@ -16,7 +16,7 @@ In this guide, we'll show you how you can leverage Neon read replicas to efficie
 ## Prerequisites
 
 - An application that uses Prisma with a Neon database.
-- A [Neon Pro Plan](/docs/introduction/pro-plan) account. Read replicas are a Neon Pro Plan feature.
+- A paid plan account. Read replicas are a paid plan feature.
 
 ## Create a read replica
 
@@ -26,7 +26,7 @@ You can create one or more read replicas for any branch in your Neon project. Cr
 2. Select the branch where your database resides.
 3. Click **Add compute**.
 4. On the **Create Compute Endpoint** dialog, select **Read-only** as the **Compute type**.
-5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your read-only compute is automatically suspended. The default setting is 5 minutes. You can set this value up to 7 days.
+5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your read-only compute is automatically suspended. The default setting is 5 minutes.
    <Admonition type="note">
    The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
    </Admonition>

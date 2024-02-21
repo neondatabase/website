@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { LinkedinShareButton, TwitterShareButton, FacebookShareButton } from 'react-share';
 
+import LINKS from 'constants/links';
 import FacebookIcon from 'icons/facebook-sm.inline.svg';
 import LinkedinIcon from 'icons/linkedin-sm.inline.svg';
 import XIcon from 'icons/x.inline.svg';
@@ -12,6 +13,7 @@ const links = [
   {
     icon: XIcon,
     tag: TwitterShareButton,
+    via: LINKS.twitter.split('/')[3],
   },
   {
     icon: FacebookIcon,
@@ -35,8 +37,8 @@ const SocialShare = ({ className = null, slug, title, withTopBorder = false }) =
   >
     <span className="leading-none text-gray-new-80">Share:</span>
     <div className="flex shrink-0 space-x-5">
-      {links.map(({ icon: Icon, tag: Tag }, index) => (
-        <Tag className="group" url={slug} title={title} key={index}>
+      {links.map(({ icon: Icon, tag: Tag, via }, index) => (
+        <Tag className="group" url={slug} title={title} via={via} key={index}>
           <Icon className="h-4 w-4 text-white transition-colors duration-200 group-hover:text-[#47FFC2] lg:h-6 lg:w-6" />
         </Tag>
       ))}

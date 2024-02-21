@@ -1,15 +1,18 @@
 ---
-title: Sign up
+title: Sign up for a Neon account
 subtitle: Sign up for Neon in just a few seconds and start for free
+enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/console/
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2024-02-09T14:18:56.793Z'
+updatedOn: '2024-02-16T18:37:19.445Z'
 ---
 
-You can sign up for free and upgrade to a paid plan when you are ready to scale. For information about what's included with the Neon Free Tier, see [Neon Free Tier](/docs/introduction/free-tier). For information about Neon's paid plan options, see [Neon plans](/docs/introduction/plans).
+You can sign up for free and upgrade to a paid plan when you are ready to scale. For information about what's included with the Neon Free Tier, see [Neon Free Tier](/docs/introduction/plans#free-tier). For information about Neon's paid plan options, see [Neon plans](/docs/introduction/plans).
+
+## Sign up
 
 Signing up for Neon is easy. Simply navigate to [https://console.neon.tech/signup](https://console.neon.tech/signup) and sign up with your email, Github, Google, or partner account.
 ![Neon console sign up](/docs/get-started-with-neon/neon_signup.png)
@@ -31,6 +34,16 @@ If you don't see an **Update Password** button, please sign out and sign back in
 </Admonition>
 
 You will be guided through a few steps, asking you to reauthenticate using your original social account, and then create your new password. After that, you are free to sign into your Neon account using either your social account or the email option.
+
+## Changing your email
+
+If you've signed up with a social or partner login and now want to change your email &#8212; for example, you previously signed up using a work-based social account and now want to use your personal email &#8212; you can make this change under **Profile → Account Settings →  Personal Information**. Or follow this direct link: [change email](https://console.neon.tech/app/settings/profile?modal=change_email)
+
+After you make the change, you'll receive a notification at this new email address asking you to confirm. Once confirmed, you'll be logged out of Neon. Log back in with your new email, and use this email going forward.
+
+<Admonition type="note">
+It is important to note that changing your email will _unlink your existing social account_. After you make this change, you will only be able to use your new email to sign in.
+</Admonition>
 
 ## Next steps
 
