@@ -23,7 +23,7 @@ These allowances are included in your plan's monthly fee, except for the Free Ti
 <Admonition type="tip" title="What is a compute hour?">
 A **compute hour** is 1 hour of _active time_ for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would take 4 hours of _active time_ to use 1 compute hour. On the other hand, If you have a compute with 4 vCPU, it would only take 15 minutes of _active time_ to use 1 compute hour.
 
-**Active time** is the amount of time a compute is active as opposed to being idle due to being suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
+**Active hours** is the amount of time a compute is active as opposed to being idle due to being suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
 </Admonition>
 
 ## Extra usage
