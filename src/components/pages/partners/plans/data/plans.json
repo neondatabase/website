@@ -67,7 +67,7 @@
       "feature": {
         "title": "Compute"
       },
-      "standard": "Max: 8 CU 8 vCPU, 32 GB RAM <span>(at $0.036 per 0.25vCPU 1 GiB RAM)</span>",
+      "standard": "Max: 8 CU 8 vCPU, 32 GB RAM <span>(at $0.036 per 0.25 vCPU 1 GiB RAM)</span>",
       "premier": "Larger sizes <span>8+ vCPU, 32+ GB RAM</span>"
     },
     {
