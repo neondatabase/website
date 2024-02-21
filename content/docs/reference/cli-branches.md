@@ -346,8 +346,15 @@ Examples of the different kinds of restore operations you can do:
 
 #### Restoring a branch to an earlier point in its own history (with backup)
 
-```bash
-neonctl branches restore dev/alex ^self@2024-02-21T10:00:00.000Z --preserve-under-name restore_backup_2024002-20
+This command restores the branch `dev/alex` to an earlier timestamp, saving to a backup branch called `restore_backup_2024-02-20`
+
+```bash shouldWrap
+neonctl branches restore dev/alex ^self@2024-02-21T10:00:00.000Z --preserve-under-name restore_backup_2024-02-20
+```
+
+The results give you the details of successful the operation, using branch ID as the identifier.
+
+```bash shouldWrap
 INFO: Restoring branch br-restless-frost-69810125 to the branch br-restless-frost-69810125 timestamp 2024-02-21T10:00:00.000Z
 Restored branch
 ┌────────────────────────────┬──────────┬──────────────────────┐
@@ -359,14 +366,21 @@ Backup branch
 ┌───────────────────────────┬───────────────────────────┐
 │ Id                        │ Name                      │
 ├───────────────────────────┼───────────────────────────┤
-│ br-patient-union-a5s838zf │ restore_backup_2024002-20 │
+│ br-patient-union-a5s838zf │ restore_backup_2024-02-20 │
 └───────────────────────────┴───────────────────────────┘
 ```
 
 #### Restoring a branch (target) to the head of another branch (source)
 
-```bash
+This command restores the target branch `dev/alex` to latest data (head) from the source branch `main`.
+
+```bash shouldWrap
 neonctl branches restore dev/alex main  
+```
+
+Results of the operation:
+
+```bash shouldWrap
 INFO: Restoring branch br-restless-frost-69810125 to the branch br-curly-bar-82389180 head
 Restored branch
 ┌────────────────────────────┬──────────┬──────────────────────┐
@@ -378,8 +392,15 @@ Restored branch
 
 #### Restoring a branch to its parent at an earlier point in time
 
-```bash
+This command restores the branch `dev/alex` to a selected point in time from its parent branch.
+
+```bash shouldWrap
 neonctl branches restore dev/alex ^parent@2024-02-21T10:30:00.000Z
+```
+
+Results of the operation
+
+```bash shouldWrap
 INFO: Restoring branch br-restless-frost-69810125 to the branch br-patient-union-a5s838zf timestamp 2024-02-21T10:30:00.000Z
 Restored branch
 ┌────────────────────────────┬──────────┬──────────────────────┐
