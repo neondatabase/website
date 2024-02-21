@@ -261,6 +261,8 @@
           slug: guides/polyscale
     - title: Deployment platforms
       items:
+        - title: Cloudflare Hyperdrive
+          slug: guides/cloudflare-hyperdrive
         - title: Deno
           slug: guides/deno
         - title: Koyeb
