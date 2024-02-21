@@ -34,9 +34,7 @@ See [Monitoring Autoscaling](/docs/guides/autoscaling#monitoring-autoscaling) fo
 
 ## Branch-specific metrics
 
-The **Branches** page provides key usage metrics for all your branches, like active time and used space, in a consolidated view.
-
-[screenshot calling out key metrics?]
+The **Branches** page provides key usage metrics for all your branches, like active time, storage space used, and whether the branch includes a read-write compute, all organized into a table view that lets you scan your list of branches. You can also use search if your list of branches is quite long.
 
 ## API metrics
 
@@ -65,7 +63,7 @@ Neon recommends a few tools from the Postgres community that can help you unders
 
 - [pg_stat_activity](#pg_stat_activity)
 - [pg_stat_statements](#pg_stat_statements)
-- [pg_hero](#pg_hero)
+- [PgHero](#PgHero)
 
 ### pg_stat_activity
 
@@ -95,9 +93,9 @@ For more information, see our [pg_stat_statements](/docs/extensions/pg_stat_stat
 Currently, not all information within `pg_stats_statements` persists when a compute instance is autosuspended (scales-to-zero) due to inactivity. For example, the text of your queries may not survive the restart. Our teams are looking into making all `pg_stat_statements` data persistent across compute restarts.
 </Admonition>
 
-### pg_hero
+### PgHero
 
-[pg_hero](https://github.com/pghero/pghero) is an open-source performance tool for Postgres that can help you find and fix data issues, using a dashboard interface.
+[PgHero](https://github.com/pghero/pghero) is an open-source performance tool for Postgres that can help you find and fix data issues, using a dashboard interface.
 
 ## Feedback and future improvements
 
