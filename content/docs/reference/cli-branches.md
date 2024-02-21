@@ -311,7 +311,7 @@ neonctl branches reset mybranch --parent
 ```
 ## restore
 
-This command restores a branch to a specified point in time, leaving a backup branch to rollback the operation.
+This command restores a branch to a specified point in time in its own or another branch's history.
 
 #### Usage
 
@@ -322,7 +322,7 @@ neonctl branches restore <target-id|name> <source>[@(timestamp|lsn)]
 `<target-id|name>` specifies the ID or name of the branch that you want to restore.
 
 `<source>` specifies the source branch you want to restore from. Options are:
-- `^self` &#8212; restores to an earlier point in time for the selected target branch. You must select a timestamp or LSN for this option.
+- `^self` &#8212; restores the selected branch to an earlier point in its own history. You must select a timestamp or LSN for this option (restoring to head is not an option). You also need to include a name for the backup branch using the parameter `preserve-under-name`.
 -  `^parent` &#8212; restores the target branch to its parent. By default the target is restored the latest (head) of its parent. Append `@timestamp` or `@lsn` to restore to an earlier point in the parent's history.
 - `source branch ID` or `source branch name` &#8212; restores the target branch to the selected source branch. It restores the latest (head) by default. Append `@timestamp` or `@lsn` to restore to an earlier point in the source branch's history.
 
@@ -338,18 +338,11 @@ In addition to the Neon CLI global options, the `restore` subcommand supports th
 
 #### Examples
 
-#### Restoring a branch (target) to the head of another branch (source)
+Examples of the different kinds of restore operations you can do:
 
-```bash
-neonctl branches restore dev/alex main  
-INFO: Restoring branch br-restless-frost-69810125 to the branch br-curly-bar-82389180 head
-Restored branch
-┌────────────────────────────┬──────────┬──────────────────────┐
-│ Id                         │ Name     │ Last Reset At        │
-├────────────────────────────┼──────────┼──────────────────────┤
-│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:42:34Z │
-└────────────────────────────┴──────────┴──────────────────────┘
-```
+- [Restoring a branch to an earlier point in its history](#restoring-a-branch-to-an-earlier-point-in-its-own-history-with-backup)
+- [Restoring to another branch's head](#restoring-a-branch-target-to-the-head-of-another-branch-source)
+- [Restoring a branch to its parent](#restoring-a-branch-to-its-parent-branch-at-an-earlier-point-in-time)
 
 #### Restoring a branch to an earlier point in its own history (with backup)
 
@@ -370,7 +363,20 @@ Backup branch
 └───────────────────────────┴───────────────────────────┘
 ```
 
-#### Restoring a branch to its parent branch, at an earlier point in time
+#### Restoring a branch (target) to the head of another branch (source)
+
+```bash
+neonctl branches restore dev/alex main  
+INFO: Restoring branch br-restless-frost-69810125 to the branch br-curly-bar-82389180 head
+Restored branch
+┌────────────────────────────┬──────────┬──────────────────────┐
+│ Id                         │ Name     │ Last Reset At        │
+├────────────────────────────┼──────────┼──────────────────────┤
+│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:42:34Z │
+└────────────────────────────┴──────────┴──────────────────────┘
+```
+
+#### Restoring a branch to its parent at an earlier point in time
 
 ```bash
 neonctl branches restore dev/alex ^parent@2024-02-21T10:30:00.000Z
