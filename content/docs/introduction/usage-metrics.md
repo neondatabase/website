@@ -3,7 +3,7 @@ title: Usage metrics
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
-updatedOn: '2024-02-20T22:52:23.858Z'
+updatedOn: '2024-02-21T13:29:41.905Z'
 ---
 
 As described in [How billing works](/docs/introduction/how-billing-works), each of Neon's plans includes [Storage](#storage), [Compute](#compute), and [Project](#projects) usage allowances. The [Launch](/docs/introduction/plans##launch) permits extra compute usage. The [Scale](/docs/introduction/plans##scale) plans permits extra compute, storage, and project usage.
@@ -161,6 +161,6 @@ The following table outlines project allowances for each Neon plan.
 | Enterprise | Unlimited |
 
 - When you reach your limit on the [Free Tier](/docs/introduction/plans#free-tier) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch) or [Scale](/docs/introduction/plans#scale) plan, which offer allowances of 10 and 50 projects, respectively.
-- Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in increments of 10. If you use more than 50 projects, you are automatically billed for an extra package of 10 projects for the price stated on our [pricing](https://neon.tech/pricing) page. For example, if you use 51 projects, you are billed for a package of 10 projects. If you use 61 projects, you are billed for two packages of 10 projects, and so on. 
+- Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in increments of 10. If you use more than 50 projects, you are automatically billed for an extra package of 10 projects for the price stated on our [pricing](https://neon.tech/pricing) page. For example, if you use 51 projects, you are billed for a package of 10 projects. If you use 61 projects, you are billed for two packages of 10 projects, and so on.
 
 <NeedHelp/>   

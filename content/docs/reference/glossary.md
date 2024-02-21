@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-02-08T20:07:48.875Z'
+updatedOn: '2024-02-21T13:29:41.906Z'
 ---
 
 ## Access token
@@ -111,7 +111,7 @@ A unit that measures the processing power of a Neon compute. A Neon compute can 
 
 ## Compute hour
 
-A usage metric for tracking that amount of compute usage. A compute hour is 1 hour of [active time](#active-time) for a compute with 1 vCPU. Neon supports computes ranging in size from 1 vCPU to 7 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would take 4 hours of active time to use 1 compute hour. On the other hand, If you have a compute with 4 vCPU, it would only take 15 minutes of active time to use 1 compute hour.
+A usage metric for tracking that amount of compute usage. A compute hour is 1 hour of [active time](#active-time) for a compute with 1 vCPU. Neon supports computes ranging in size from 1 vCPU to 8 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would take 4 hours of active time to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes of active time to use 1 compute hour.
 
 To calculate compute hour usage, you would use the following formula:
 

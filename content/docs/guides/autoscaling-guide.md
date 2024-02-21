@@ -3,7 +3,7 @@ title: Enable Autoscaling in Neon
 subtitle: Learn how to enable Neon's Autoscaling feature to automatically scale compute
   resources on demand
 enableTableOfContents: true
-updatedOn: '2024-02-20T22:52:23.854Z'
+updatedOn: '2024-02-21T13:17:01.633Z'
 ---
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current workload, eliminating the need for manual intervention. This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
@@ -74,7 +74,7 @@ The Autoscaling Graphs are available for select users and will be expanded to al
 
 From the Neon Console, you can view how your vCPU and RAM usage scales over time (last hour, day, and week). From the **Branches** page, open the branch you want to inspect, then open the **Edit** modal for its compute endpoint.
 
-![autoscaling graph example](/docs/guides/autoscaling_graphs_sample.png)
+![autoscaling graph example](/docs/guides/autoscaling_graphs_sample.png "no-border")
 
 Some key points about this Autoscaling view:
 
@@ -84,7 +84,7 @@ Some key points about this Autoscaling view:
 
 Place your cursor anywhere in the graph to get more usage detail about that particular point in time.
 
-![autoscaling graph detail](/docs/guides/autoscaling_graph_detail.png)
+![autoscaling graph detail](/docs/guides/autoscaling_graph_detail.png "no-border")
 
 See below for some rules of thumb on actions you might want to take based on trends you see in this view.
 

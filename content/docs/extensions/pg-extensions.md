@@ -3,7 +3,7 @@ title: Supported Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2024-02-19T23:37:53.027Z'
+updatedOn: '2024-02-21T13:43:18.729Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
@@ -41,6 +41,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [pg_graphql](https://github.com/supabase/pg_graphql)               | 1.4.0                 | 1.4.0                  |  1.4.0                  |                                                                                                                   |
 | [pg_hashids](https://github.com/iCyberon/pg_hashids)                | 1.2.1                | 1.2.1                  |  1.2.1                  |                                                                                                                  |
 | [pg_hint_plan](https://github.com/ossc-db/pg_hint_plan)             | 1.4.1                  | 1.5.0                  |  1.6.0                  |                                                                                                                   |
+| [pg_ivm](https://github.com/sraoss/pg_ivm)             | 1.7                  | 1.7                  |  1.7                  |                                                                                                                   |
 | [pg_jsonschema](https://github.com/supabase/pg_jsonschema)            | 0.2.0              | 0.2.0               | 0.2.0               |                                                                                                                  |
 | [pg_prewarm](https://www.postgresql.org/docs/16/pgprewarm.html)              | 1.2        | 1.2         |   1.2         |                                                                                                                  |
 | [pg_roaringbitmap](https://github.com/ChenHuajun/pg_roaringbitmap)          | 0.5          | 0.5         |  0.5         |                                                                                                                  | Install with `CREATE EXTENSION roaringbitmap;`
