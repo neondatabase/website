@@ -2,6 +2,7 @@
 title: Monitoring in Neon
 subtitle: Available monitoring and observability tools and metrics in Neon
 enableTableOfContents: true
+updatedOn: '2024-02-21T13:17:01.635Z'
 ---
 
 ## Overview
