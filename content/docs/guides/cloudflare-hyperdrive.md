@@ -5,15 +5,15 @@ enableTableOfContents: true
 updatedOn: '2024-02-12T00:00:00.000Z'
 ---
 
-[Cloudflare Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a serverless application that proxies queries to Postgres databases, and accelerates them. It works by maintaining a globally distributed pool of connections to your database, and routing queries to the closest available connection. 
+[Cloudflare Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a serverless application that proxies queries to your database and accelerates them. It works by maintaining a globally distributed pool of database connections, and routing queries to the closest available connection. 
 
-This is specifically useful for serverless applications which can't maintain a persistent database connection and need to establish a new connection for each request. Hyperdrive can significantly reduce the latency of these queries and improve latency for your users.
+This is specifically useful for serverless applications that cannot maintain a persistent database connection and need to establish a new connection for each request. Hyperdrive can significantly reduce the latency of these queries for your application users.
 
-This guide demonstrates how to configure a `Hyperdrive` service to connect to your Neon Postgres database. We implement a regular `Workers` application that connects to Neon directly, and then replace it with a `Hyperdrive` connection, to see performance improvements. 
+This guide demonstrates how to configure a Hyperdrive service to connect to your Neon Postgres database. It demonstrates how to implement a regular `Workers` application that connects to Neon directly and then replace that connection with a `Hyperdrive` connection to achieve performance improvements. 
 
 ## Prerequisites
 
-To follow along with this guide, you will need:
+To follow along with this guide, you require:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
 
@@ -27,11 +27,11 @@ To follow along with this guide, you will need:
 
 ### Initialize a new project
 
-Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
+1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 
-- Click the `New Project` button to create a new project.
+2. Click the `New Project` button to create a new project.
 
-- From your project dashboard, navigate to the `SQL Editor` from the sidebar, and run the following SQL command to create a new table in your database:
+3. From your project dashboard, navigate to the `SQL Editor` from the sidebar, and run the following SQL command to create a new table in your database:
 
     ```sql
     CREATE TABLE books_to_read (
@@ -84,7 +84,7 @@ This initiates an interactive CLI prompt to generate a new project. To follow al
 │ no typescript
 ```
 
-When asked if you want to deploy your application, select `no`. We'll develop and test the application locally before deploying it to Cloudflare Workers platform.
+When asked if you want to deploy your application, select `no`. We'll develop and test the application locally before deploying it to the Cloudflare Workers platform.
 
 The `create-cloudflare` CLI also installs the `Wrangler` tool to manage the full workflow of testing and managing your Worker applications. To emulate the Node environment in the Workers runtime, we need to add the following entry to the `wrangler.toml` file. 
 
@@ -137,7 +137,7 @@ This command starts a local server and simulates the Cloudflare Workers environm
 
 ## Setting up Cloudflare Hyperdrive
 
-With our Workers apllication able to query the Neon database, we will now set up Cloudflare Hyperdrive to connect to Neon and accelerate the database queries. 
+With our Workers application able to query the Neon database, we will now set up Cloudflare Hyperdrive to connect to Neon and accelerate the database queries. 
 
 ### Create a new Hyperdrive service
 
@@ -147,7 +147,7 @@ You can use the `Wrangler` CLI to create a new Hyperdrive service, using your Ne
 npx wrangler hyperdrive create neon-guide-drive --connection-string=$NEON_DATABASE_CONNECTION_STRING
 ```
 
-This command creates a new Hyperdrive service named `neon-guide-drive`, and outputs its configuration details. Copy the `id` field from the output, which we will use next. 
+This command creates a new Hyperdrive service named `neon-guide-drive` and outputs its configuration details. Copy the `id` field from the output, which we will use next. 
 
 ### Bind the Worker project to Hyperdrive
 
@@ -189,7 +189,7 @@ Now that we have updated the Worker script to use the Hyperdrive service, we can
 npx wrangler deploy
 ```
 
-This command uploads the updated Worker script to the Cloudflare Workers platform, and makes it available at a public URL. You can visit the URL in your browser to test that the application works. 
+This command uploads the updated Worker script to the Cloudflare Workers platform and makes it available at a public URL. You can visit the URL in your browser to test that the application works. 
 
 ## Removing the example application and Neon project
 
