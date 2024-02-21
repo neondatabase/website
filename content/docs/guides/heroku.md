@@ -92,7 +92,7 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 app.get("/", async (req, res) => {
   try {
-    // Fetch the list of plants from your database using the postgres connection
+    // Fetch the list of music albums from your database using the postgres connection
     const { rows } = await pool.query("SELECT * FROM music_albums;");
     res.json(rows);
   } catch (error) {
@@ -174,7 +174,7 @@ remote: Verifying deploy... done.
 
 Once the deployment is complete, you should see a message with the URL of your deployed application. Navigate to this URL in your browser to see your application live on Heroku. 
 
-You've successfully deployed a Node.js application on Heroku that connects to a Neon Postgres database. For further customization and scaling options, you can explore the Heroku and Neon documentation. 
+You've now successfully deployed a Node.js application on Heroku that connects to a Neon Postgres database. For further customization and scaling options, you can explore the Heroku and Neon documentation. 
 
 ## Removing Your Application and Neon Project
 
