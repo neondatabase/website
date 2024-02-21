@@ -173,6 +173,8 @@ neonctl branches restore dev/alex dev/jordan@0/12345
 ```
 
 This command will restore the target branch `dev/alex` to an earlier point in time from the source branch `dev/jordan`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `dev/jordan`.
+
+For full CLI documentation for `branches restore`, see [branches restore](/docs/reference/cli-branches#restore).
 </TabItem>
 </Tabs>
 
