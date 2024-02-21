@@ -3,12 +3,12 @@ title: Enable Autoscaling in Neon
 subtitle: Learn how to enable Neon's Autoscaling feature to automatically scale compute
   resources on demand
 enableTableOfContents: true
-updatedOn: '2024-02-08T21:31:43.906Z'
+updatedOn: '2024-02-21T13:17:01.633Z'
 ---
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current workload, eliminating the need for manual intervention. This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
 
-_Autoscaling_ is a [Neon Pro Plan](/docs/introduction/pro-plan) feature. Neon Pro Plan users can enable autoscaling for a new project, for an existing project, or for an individual compute endpoint. Autoscaling is supported with both read-write and read-only compute endpoints. Read-only compute endpoints enable Neon's [Read replica](/docs/introduction/read-replicas) feature.
+_Autoscaling_ is a paid plan feature. Users on paid plans can enable autoscaling for a new project, for an existing project, or for an individual compute endpoint. Autoscaling is supported with both read-write and read-only compute endpoints. Read-only compute endpoints enable Neon's [Read replica](/docs/introduction/read-replicas) feature.
 
 ## Enable autoscaling for a new project
 
@@ -35,7 +35,7 @@ Configuring autoscaling for an existing project sets the project's default, whic
 To configure autoscaling default settings for an existing project:
 
 1. Select a project in the Neon console.
-1. On the Neon **Dashboard**, select **Settings**.
+1. On the Neon **Dashboard**, select **Project settings**.
 1. Select **Compute** and click **Change**.
 1. Under **Compute size**, use the slider to specify a minimum and maximum compute size.
     ![Autoscaling](/docs/guides/autoscaling_existing_project.png)
@@ -48,7 +48,7 @@ To configure autoscaling default settings for an existing project:
 
 ## Enable autoscaling for a compute endpoint
 
-[Neon Pro Plan](/docs/introduction/pro-plan) users can edit an individual compute endpoint to alter the compute endpoint configuration, which includes autoscaling.
+Users on paid plans can edit an individual compute endpoint to alter the compute endpoint configuration, which includes autoscaling.
 
 To edit a compute endpoint:
 
@@ -59,7 +59,7 @@ To edit a compute endpoint:
 1. Under **Compute size**, use the slider to specify a minimum and maximum compute size.
     ![Autoscaling edit settings](/docs/guides/autoscaling_edit_settings.png)
 
-    Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 7 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs.
+    Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 8 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs.
 
     <Admonition type="note">
     You can configure the autosuspend setting for your compute endpoint at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".
@@ -74,7 +74,7 @@ The Autoscaling Graphs are available for select users and will be expanded to al
 
 From the Neon Console, you can view how your vCPU and RAM usage scales over time (last hour, day, and week). From the **Branches** page, open the branch you want to inspect, then open the **Edit** modal for its compute endpoint.
 
-![autoscaling graph example](/docs/guides/autoscaling_graphs_sample.png)
+![autoscaling graph example](/docs/guides/autoscaling_graphs_sample.png "no-border")
 
 Some key points about this Autoscaling view:
 
@@ -84,7 +84,7 @@ Some key points about this Autoscaling view:
 
 Place your cursor anywhere in the graph to get more usage detail about that particular point in time.
 
-![autoscaling graph detail](/docs/guides/autoscaling_graph_detail.png)
+![autoscaling graph detail](/docs/guides/autoscaling_graph_detail.png "no-border")
 
 See below for some rules of thumb on actions you might want to take based on trends you see in this view.
 

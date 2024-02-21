@@ -23,7 +23,7 @@ const CaseStudiesPage = async () => {
         titleClassName="-mr-10 sm:max-w-[300px]"
         buttonClassName="px-[77px] xl:px-10 lg:px-9 sm:px-14"
         title="Ready to get started with Neon?"
-        description="Interested in increasing your free tier limits or learning about pricing? Complete the form below to get in touch"
+        description="Interested in learning more about our plans and pricing? Complete the form below to get in touch"
         buttonText="Sign up"
         buttonUrl={LINKS.signup}
         linkText="Contact sales"

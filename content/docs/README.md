@@ -1,5 +1,5 @@
 ---
-updatedOn: '2024-02-08T15:20:54.269Z'
+updatedOn: '2024-02-20T13:24:36.612Z'
 ---
 # Docs
 
@@ -199,6 +199,23 @@ You can use fenced code blocks with three backticks (```) on the lines before an
     ```
 
     ````
+
+- use `[!code highlight]` to highlight a line.
+
+  ```ts
+  export function foo() {
+    console.log('Highlighted') // [!code highlight]
+  }
+  ```
+
+- use `[!code word:xxx]` to highlight a word.
+
+  ```ts
+  export function foo() { // [!code word:Hello]
+    const msg = 'Hello World'
+    console.log(msg) // prints Hello World
+  }
+  ```
 
 - `showLineNumbers` - flag to show on the line numbers in the code block.
   
