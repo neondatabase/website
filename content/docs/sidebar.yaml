@@ -164,10 +164,16 @@
               slug: guides/read-replica-prisma
     - title: Frameworks
       items:
-        - title: Next.js
-          slug: guides/nextjs
         - title: Astro
           slug: guides/astro
+        - title: Django
+          slug: guides/django
+        - title: Next.js
+          slug: guides/nextjs
+        - title: Quarkus (JDBC)
+          slug: guides/quarkus-jdbc
+        - title: Quarkus (Reactive)
+          slug: guides/quarkus-reactive
         - title: Remix
           slug: guides/remix
         - title: Ruby on Rails
@@ -181,10 +187,6 @@
           ariaLabel: Connect a Go application to Neon
         - title: Java
           items:
-            - title: Quarkus (JDBC)
-              slug: guides/quarkus-jdbc
-            - title: Quarkus (Reactive)
-              slug: guides/quarkus-reactive
             - title: JDBC
               slug: guides/java
         - title: Javascript
@@ -201,8 +203,6 @@
               slug: guides/symfony
         - title: Python
           items:
-            - title: Django
-              slug: guides/django
             - title: Psycopg
               slug: guides/python
             - title: SQL Alchemy
