@@ -14,7 +14,7 @@ updatedOn: '2024-01-19T14:15:57.929Z'
 
 The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the primary branch and adding a compute endpoint to a branch. You can create a [read replica](/docs/introduction/read-replicas) by adding a read-only compute endpoint.
 
-### Usage
+## Usage
 
 ```bash
 neonctl branches <subcommand> [options]
@@ -25,13 +25,14 @@ neonctl branches <subcommand> [options]
 | [list](#list)    | List branches    |
 | [create](#create)  | Create a branch |
 | [reset](#reset)   | Reset data to parent
+| [restore](#restore) | Restore a branch to a selected point in time
 | [rename](#rename)   | Rename a branch |
 | [set-primary](#set-primary)   | Set a primary branch |
 | [add-compute](#add-compute)   | Add replica to a branch |
 | [delete](#delete)  | Delete a branch |
 | [get](#get)     | Get a branch    |
 
-### list
+## list
 
 This subcommand allows you to list branches in a Neon project.
 
@@ -107,7 +108,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ]
     ```
 
-### create
+## create
 
 This subcommand allows you to create a branch in a Neon project.
 
@@ -274,7 +275,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     neonctl branch create --psql -- -c "SELECT version()"
     ```
 
-### reset
+## reset
 
 This command resets a child branch to the latest data from its parent.
 
@@ -308,8 +309,108 @@ neonctl branches reset mybranch --parent
 │ br-raspy-meadow-26349337 │ development │ false   │ 2023-11-28T19:19:11Z │ 2023-11-28T19:29:26Z │
 └──────────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
+## restore
 
-### rename
+This command restores a branch to a specified point in time in its own or another branch's history.
+
+#### Usage
+
+```bash
+neonctl branches restore <target-id|name> <source>[@(timestamp|lsn)]
+```
+
+`<target-id|name>` specifies the ID or name of the branch that you want to restore.
+
+`<source>` specifies the source branch you want to restore from. Options are:
+- `^self` &#8212; restores the selected branch to an earlier point in its own history. You must select a timestamp or LSN for this option (restoring to head is not an option). You also need to include a name for the backup branch using the parameter `preserve-under-name`.
+-  `^parent` &#8212; restores the target branch to its parent. By default the target is restored the latest (head) of its parent. Append `@timestamp` or `@lsn` to restore to an earlier point in the parent's history.
+- `source branch ID` or `source branch name` &#8212; restores the target branch to the selected source branch. It restores the latest (head) by default. Append `@timestamp` or `@lsn` to restore to an earlier point in the source branch's history.
+
+#### Options
+
+In addition to the Neon CLI global options, the `restore` subcommand supports these options:
+
+| Option                | Description                                                                   | Type   | Required |
+|-----------------------|-------------------------------------------------------------------------------|--------|:--------:|
+| `--context-file`      | Context file path and file name                                               | string |          |
+| `--project-id`        | Project ID                                                                    | string | Only if your Neon account has more than one project or context is not set |
+| `--preserve-under-name` | Name for the backup created during restore.                                   | string |  When restoring to `^self`    |
+
+#### Examples
+
+Examples of the different kinds of restore operations you can do:
+
+- [Restoring a branch to an earlier point in its history](#restoring-a-branch-to-an-earlier-point-in-its-own-history-with-backup)
+- [Restoring to another branch's head](#restoring-a-branch-target-to-the-head-of-another-branch-source)
+- [Restoring a branch to its parent](#restoring-a-branch-to-its-parent-at-an-earlier-point-in-time)
+
+#### Restoring a branch to an earlier point in its own history (with backup)
+
+This command restores the branch `dev/alex` to an earlier timestamp, saving to a backup branch called `restore_backup_2024-02-20`
+
+```bash shouldWrap
+neonctl branches restore dev/alex ^self@2024-02-21T10:00:00.000Z --preserve-under-name restore_backup_2024-02-20
+```
+
+Results of the operation:
+
+```bash shouldWrap
+INFO: Restoring branch br-restless-frost-69810125 to the branch br-restless-frost-69810125 timestamp 2024-02-21T10:00:00.000Z
+Restored branch
+┌────────────────────────────┬──────────┬──────────────────────┐
+│ Id                         │ Name     │ Last Reset At        │
+├────────────────────────────┼──────────┼──────────────────────┤
+│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:48:05Z │
+└────────────────────────────┴──────────┴──────────────────────┘
+Backup branch
+┌───────────────────────────┬───────────────────────────┐
+│ Id                        │ Name                      │
+├───────────────────────────┼───────────────────────────┤
+│ br-patient-union-a5s838zf │ restore_backup_2024-02-20 │
+└───────────────────────────┴───────────────────────────┘
+```
+
+#### Restoring a branch (target) to the head of another branch (source)
+
+This command restores the target branch `dev/alex` to latest data (head) from the source branch `main`.
+
+```bash shouldWrap
+neonctl branches restore dev/alex main  
+```
+
+Results of the operation:
+
+```bash shouldWrap
+INFO: Restoring branch br-restless-frost-69810125 to the branch br-curly-bar-82389180 head
+Restored branch
+┌────────────────────────────┬──────────┬──────────────────────┐
+│ Id                         │ Name     │ Last Reset At        │
+├────────────────────────────┼──────────┼──────────────────────┤
+│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:42:34Z │
+└────────────────────────────┴──────────┴──────────────────────┘
+```
+
+#### Restoring a branch to its parent at an earlier point in time
+
+This command restores the branch `dev/alex` to a selected point in time from its parent branch.
+
+```bash shouldWrap
+neonctl branches restore dev/alex ^parent@2024-02-21T10:30:00.000Z
+```
+
+Results of the operation:
+
+```bash shouldWrap
+INFO: Restoring branch br-restless-frost-69810125 to the branch br-patient-union-a5s838zf timestamp 2024-02-21T10:30:00.000Z
+Restored branch
+┌────────────────────────────┬──────────┬──────────────────────┐
+│ Id                         │ Name     │ Last Reset At        │
+├────────────────────────────┼──────────┼──────────────────────┤
+│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:55:04Z │
+└────────────────────────────┴──────────┴──────────────────────┘
+```
+
+## rename
 
 This subcommand allows you to update a branch in a Neon project.
 
@@ -341,7 +442,7 @@ neonctl branches rename mybranch teambranch
 └───────────────────────┴────────────┴──────────────────────┴──────────────────────┘
 ```
 
-### set-primary
+## set-primary
 
 This subcommand allows you to set a branch as the primary branch in your Neon project.
 
@@ -373,7 +474,7 @@ neonctl branches set-primary mybranch
 └────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
 
-### add-compute
+## add-compute
 
 This subcommand allows you to add a compute endpoint to an existing branch in your Neon project.
 
@@ -406,7 +507,7 @@ neonctl branches add-compute mybranch --type read_only
 └─────────────────────┴──────────────────────────────────────────────────┘
 ```
 
-### delete
+## delete
 
 This subcommand allows you to delete a branch in a Neon project.
 
@@ -438,7 +539,7 @@ neonctl branches delete br-rough-sky-158193
 └─────────────────────┴─────────────────┴──────────────────────┴──────────────────────┘
 ```
 
-### get
+## get
 
 This subcommand allows you to retrieve details about a branch.
 
