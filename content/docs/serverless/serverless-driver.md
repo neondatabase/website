@@ -425,5 +425,6 @@ The GitHub repository and [changelog](https://github.com/neondatabase/serverless
 - [Zapatos](https://jawj.github.io/zapatos/)
 - [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions)
 - [Cloudflare Workers](https://developers.cloudflare.com/workers/)
+- [Use Neon with Cloudflare Workers](/docs/guides/cloudflare-workers)
 
 <NeedHelp/>

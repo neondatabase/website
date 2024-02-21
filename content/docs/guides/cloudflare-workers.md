@@ -84,7 +84,7 @@ The `create-cloudflare` CLI installs the `Wrangler` tool to manage the full work
 
 ### Implement the Worker script
 
-We'll use the `neon-serverless` driver to connect to the Neon database, so you need to install it as a dependency:
+We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the Neon database, so you need to install it as a dependency:
 
 ```bash
 npm install @neondatabase/serverless

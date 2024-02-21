@@ -184,7 +184,7 @@ The `App` component fetches the list of books from the server and displays them.
 
 ### Implement the serverless functions
 
-We'll use the `neon-serverless` driver to connect to the Neon database, so we first need to install it as a dependency:
+We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the Neon database, so we first need to install it as a dependency:
 
 ```bash
 npm install @neondatabase/serverless
