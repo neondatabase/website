@@ -29,9 +29,9 @@ To follow along with this guide, you require:
 
 1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 
-2. Click the `New Project` button to create a new project.
+2. Click the **New Project** button to create a new project.
 
-3. From your project dashboard, navigate to the `SQL Editor` from the sidebar, and run the following SQL command to create a new table in your database:
+3. From your project dashboard, navigate to the **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
 
     ```sql
     CREATE TABLE books_to_read (
