@@ -70,7 +70,7 @@ In addition, Launch plan users have access to the following Neon features:
 
 ### Scale
 
-The Scale plan provides full platform and support access, and is designed for scaling production workloads. It includes the following usage:
+The Scale plan provides full platform and support access and is designed for scaling production workloads. It includes the following usage:
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
