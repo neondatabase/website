@@ -7,7 +7,7 @@ updatedOn: '2024-02-21T00:00:00.000Z'
 
 [Heroku](https://heroku.com) is a popular platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. It simplifies the deployment process, making it a favorite among developers for its ease of use and integration capabilities.
 
-This guide will walk you through deploying a simple Node.js application connected to a Neon Postgres database, on Heroku.
+This guide walks you through deploying a simple Node.js application connected to a Neon Postgres database, on Heroku.
 
 ## Prerequisites
 
@@ -24,9 +24,9 @@ To follow along with this guide, you will need:
 
 1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/projects) section.
 
-2. Click `New Project` to create a new project.
+2. Click **New Project** to create a new project.
 
-3. In your project dashboard, go to the `SQL Editor` and run the following SQL command to create a new table:
+3. In your project dashboard, go to the **SQL Editor** and run the following SQL command to create a new table:
 
     ```sql
     CREATE TABLE music_albums (
@@ -64,8 +64,7 @@ npm install express pg
 touch .env
 ```
 
-We use the `npm pkg set type="module"` command to enable ES6 module support in our project. We also create a new `.env` file to store the `DATABASE_URL` environment variable, which we'll use to connect to our Neon database. Lastly, we install the `pg` library which is the Postgres driver we use to connect to our database. 
-
+We use the `npm pkg set type="module"` command to enable ES6 module support in our project. We'll also create a new `.env` file to store the `DATABASE_URL` environment variable, which we'll use to connect to our Neon database. Lastly, we install the `pg` library which is the Postgres driver we use to connect to our database. 
 
 In the `.env` file, store your Neon database connection string:
 
@@ -187,5 +186,6 @@ To delete your Neon project, follow the steps outlined in the Neon documentation
 - [Heroku Documentation](https://devcenter.heroku.com/)
 - [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 - [Neon](https://neon.tech/docs)
+- [Import data from Heroku Postgres to Neon](/docs/import/import-from-heroku)
 
 <NeedHelp/>
