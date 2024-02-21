@@ -342,7 +342,7 @@ Examples of the different kinds of restore operations you can do:
 
 - [Restoring a branch to an earlier point in its history](#restoring-a-branch-to-an-earlier-point-in-its-own-history-with-backup)
 - [Restoring to another branch's head](#restoring-a-branch-target-to-the-head-of-another-branch-source)
-- [Restoring a branch to its parent](#restoring-a-branch-to-its-parent-branch-at-an-earlier-point-in-time)
+- [Restoring a branch to its parent](#restoring-a-branch-to-its-parent-at-an-earlier-point-in-time)
 
 #### Restoring a branch to an earlier point in its own history (with backup)
 
@@ -352,7 +352,7 @@ This command restores the branch `dev/alex` to an earlier timestamp, saving to a
 neonctl branches restore dev/alex ^self@2024-02-21T10:00:00.000Z --preserve-under-name restore_backup_2024-02-20
 ```
 
-The results give you the details of successful the operation, using branch ID as the identifier.
+Results of the operation:
 
 ```bash shouldWrap
 INFO: Restoring branch br-restless-frost-69810125 to the branch br-restless-frost-69810125 timestamp 2024-02-21T10:00:00.000Z
