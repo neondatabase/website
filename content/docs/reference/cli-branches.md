@@ -14,7 +14,7 @@ updatedOn: '2024-01-19T14:15:57.929Z'
 
 The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the primary branch and adding a compute endpoint to a branch. You can create a [read replica](/docs/introduction/read-replicas) by adding a read-only compute endpoint.
 
-### Usage
+## Usage
 
 ```bash
 neonctl branches <subcommand> [options]
@@ -32,17 +32,17 @@ neonctl branches <subcommand> [options]
 | [delete](#delete)  | Delete a branch |
 | [get](#get)     | Get a branch    |
 
-### list
+## list
 
 This subcommand allows you to list branches in a Neon project.
 
-#### Usage
+### Usage
 
 ```bash
 neonctl branches list [options]
 ```
 
-#### Options
+### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `list` subcommand supports these options:
 
@@ -52,7 +52,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--project-id` | Project ID    | string | Only if your Neon account has more than one project |
 
 
-#### Examples
+### Examples
 
 - List branches with the default `table` output format. The information provided with this output format is limited compared to other formats, such as `json`.
 
@@ -108,17 +108,17 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ]
     ```
 
-### create
+## create
 
 This subcommand allows you to create a branch in a Neon project.
 
-#### Usage
+### Usage
 
 ```bash
 neonctl branches create [options]
 ```
 
-#### Options
+### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `create` subcommand supports these options:
 
@@ -133,7 +133,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--suspend-timeout` | Duration of inactivity in seconds after which the compute endpoint is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number |             |
 | `--psql` | Connect to a new branch via `psql`. `psql` must be installed to use this option. | boolean |             |
 
-#### Examples
+### Examples
 
 - Create a branch:
 
@@ -275,11 +275,11 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     neonctl branch create --psql -- -c "SELECT version()"
     ```
 
-### reset
+## reset
 
 This command resets a child branch to the latest data from its parent.
 
-#### Usage
+### Usage
 
 ```bash
 neonctl branches reset <id|name> --parent
@@ -288,7 +288,7 @@ neonctl branches reset <id|name> --parent
 
 `--parent` specifies the type of reset operation. Currently, Neon only supports reset from parent. This parameter is required for the operation to work. In the future, Neon might add support for other reset types: for example, rewinding a branch to an earlier period in time.
 
-#### Options
+### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `reset` subcommand supports these options:
 
@@ -299,7 +299,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--parent`  | Reset to a parent branch  | boolean |  |
 | `--preserve-under-name`  | The name under which to preserve the old branch | string |  |
 
-#### Example
+### Example
 
 ```bash
 neonctl branches reset mybranch --parent
@@ -309,11 +309,11 @@ neonctl branches reset mybranch --parent
 │ br-raspy-meadow-26349337 │ development │ false   │ 2023-11-28T19:19:11Z │ 2023-11-28T19:29:26Z │
 └──────────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
-### restore
+## restore
 
 This command restores a branch to a specified point in time, leaving a backup branch to rollback the operation.
 
-#### Usage
+### Usage
 
 ```bash
 neonctl branches restore <target-id|name> <source>[@(timestamp|lsn)]
@@ -323,11 +323,10 @@ neonctl branches restore <target-id|name> <source>[@(timestamp|lsn)]
 
 `<source>` specifies the source branch you want to restore from. Options are:
 - `^self` &#8212; restores to an earlier point in time for the selected target branch. You must select a timestamp or LSN for this option.
--  `^parent` &#8212; restores the target branch to its parent. If you don't seyou already selected
+-  `^parent` &#8212; restores the target branch to its parent. By default the target is restored the latest (head) of its parent. Append `@timestamp` or `@lsn` to restore to an earlier point in the parent's history.
+- `source branch ID` or `source branch name` &#8212; restores the target branch to the selected source branch. It restores the latest (head) by default. Append `@timestamp` or `@lsn` to restore to an earlier point in the source branch's history.
 
- It can be a branch ID, branch name, `^self` for the branch itself, or `^parent` for the branch's parent. Append `@(timestamp|lsn)` for a precise point in time, if desired.
-
-#### Options
+### Options
 
 In addition to the Neon CLI global options, the `restore` subcommand supports these options:
 
@@ -337,22 +336,58 @@ In addition to the Neon CLI global options, the `restore` subcommand supports th
 | `--project-id`        | Project ID                                                                    | string | Only if your Neon account has more than one project or context is not set |
 | `--preserve-under-name` | Name for the backup created during restore.                                   | string |          |
 
-#### Example
+### Examples
+
+#### Restoring a branch (target) to the head of another branch (source)
 
 ```bash
-neonctl branches restore mybranch source@2021-01-01T00:00:00Z
-┌─────────────────────────────┬─────────────┬─────────┬──────────────────────┬─────────────────────┐
-│ Id                          │ Name        │ Primary │ Created At           │ Restored At         │
-├─────────────────────────────┼─────────────┼─────────┼──────────────────────┼─────────────────────┤
-│ br-silent-hill-26489547     │ mybranch    │ false   │ 2024-02-20T15:30:00Z │ 2024-02-21T08:45:00Z│
-└─────────────────────────────┴─────────────┴─────────┴──────────────────────┴─────────────────────┘
+neonctl branches restore dev/alex main  
+INFO: Restoring branch br-restless-frost-69810125 to the branch br-curly-bar-82389180 head
+Restored branch
+┌────────────────────────────┬──────────┬──────────────────────┐
+│ Id                         │ Name     │ Last Reset At        │
+├────────────────────────────┼──────────┼──────────────────────┤
+│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:42:34Z │
+└────────────────────────────┴──────────┴──────────────────────┘
 ```
 
-### rename
+#### Restoring a branch to an earlier point in its own history (with backup)
+
+```bash
+neonctl branches restore dev/alex ^self@2024-02-21T10:00:00.000Z --preserve-under-name restore_backup_2024002-20
+INFO: Restoring branch br-restless-frost-69810125 to the branch br-restless-frost-69810125 timestamp 2024-02-21T10:00:00.000Z
+Restored branch
+┌────────────────────────────┬──────────┬──────────────────────┐
+│ Id                         │ Name     │ Last Reset At        │
+├────────────────────────────┼──────────┼──────────────────────┤
+│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:48:05Z │
+└────────────────────────────┴──────────┴──────────────────────┘
+Backup branch
+┌───────────────────────────┬───────────────────────────┐
+│ Id                        │ Name                      │
+├───────────────────────────┼───────────────────────────┤
+│ br-patient-union-a5s838zf │ restore_backup_2024002-20 │
+└───────────────────────────┴───────────────────────────┘
+```
+
+#### Restoring a branch to its parent branch, at an earlier point in time
+
+```bash
+neonctl branches restore dev/alex ^parent@2024-02-21T10:30:00.000Z
+INFO: Restoring branch br-restless-frost-69810125 to the branch br-patient-union-a5s838zf timestamp 2024-02-21T10:30:00.000Z
+Restored branch
+┌────────────────────────────┬──────────┬──────────────────────┐
+│ Id                         │ Name     │ Last Reset At        │
+├────────────────────────────┼──────────┼──────────────────────┤
+│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:55:04Z │
+└────────────────────────────┴──────────┴──────────────────────┘
+```
+
+## rename
 
 This subcommand allows you to update a branch in a Neon project.
 
-#### Usage
+### Usage
 
 ```bash
 neonctl branches rename <id|name> <new-name> [options]
@@ -360,7 +395,7 @@ neonctl branches rename <id|name> <new-name> [options]
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
 
-#### Options
+### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `rename` subcommand supports these options:
 
@@ -369,7 +404,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
-#### Example
+### Example
 
 ```bash
 neonctl branches rename mybranch teambranch
@@ -380,11 +415,11 @@ neonctl branches rename mybranch teambranch
 └───────────────────────┴────────────┴──────────────────────┴──────────────────────┘
 ```
 
-### set-primary
+## set-primary
 
 This subcommand allows you to set a branch as the primary branch in your Neon project.
 
-#### Usage
+### Usage
 
 ```bash
 neonctl branches set-primary <id|name> [options]
@@ -392,7 +427,7 @@ neonctl branches set-primary <id|name> [options]
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
 
-#### Options
+### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `set-primary` subcommand supports this option:
 
@@ -401,7 +436,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
-#### Example
+### Example
 
 ```bash
 neonctl branches set-primary mybranch
@@ -412,11 +447,11 @@ neonctl branches set-primary mybranch
 └────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
 
-### add-compute
+## add-compute
 
 This subcommand allows you to add a compute endpoint to an existing branch in your Neon project.
 
-#### Usage
+### Usage
 
 ```bash
 neonctl branches add-compute <id|name>
@@ -424,7 +459,7 @@ neonctl branches add-compute <id|name>
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
 
-#### Options
+### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `add-compute` subcommand supports these options:
 
@@ -434,7 +469,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 | `--type`| Type of compute to add. Choices are `read_only` (the default) or `read_write`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas). A branch can have a single read-write and multiple read-only compute endpoints.                                     | string |             |
 
-#### Example
+### Example
 
 ```bash
 neonctl branches add-compute mybranch --type read_only 
@@ -445,11 +480,11 @@ neonctl branches add-compute mybranch --type read_only
 └─────────────────────┴──────────────────────────────────────────────────┘
 ```
 
-### delete
+## delete
 
 This subcommand allows you to delete a branch in a Neon project.
 
-#### Usage
+### Usage
 
 ```bash
 neonctl branches delete <id|name> [options]
@@ -457,7 +492,7 @@ neonctl branches delete <id|name> [options]
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
 
-#### Options
+### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `delete` subcommand supports this option:
 
@@ -466,7 +501,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
-#### Example
+### Example
 
 ```bash
 neonctl branches delete br-rough-sky-158193
@@ -477,28 +512,28 @@ neonctl branches delete br-rough-sky-158193
 └─────────────────────┴─────────────────┴──────────────────────┴──────────────────────┘
 ```
 
-### get
+## get
 
 This subcommand allows you to retrieve details about a branch.
 
-#### Usage
+### Usage
 
 ```bash
 neonctl branches get <id|name> [options]
 ```
 
-#### Options
+### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `get` subcommand supports this option:
 
-#### Options
+### Options
 
 | Option        | Description | Type   | Required |
 | ------------- | ----------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
 | `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
 
-#### Examples
+### Examples
 
 ```bash
 neonctl branches get main
