@@ -69,7 +69,7 @@ const EnterprisePage = () => (
       className="mt-[200px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
       quote="Branching is as useful as we hoped it would be. Our testers can now play with features earlier, since we can now stage features, requiring different database migrations, in parallel."
       name="Lynn Smeria"
-      position="Principle Engineer, Proposales"
+      position="Principal Engineer, Proposales"
     />
     <SplitViewGrid
       className="mt-[136px] xl:mt-[104px] lg:mt-20 md:mt-16"
