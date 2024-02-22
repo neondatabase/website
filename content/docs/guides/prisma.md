@@ -50,7 +50,7 @@ If you plan to use Prisma Client from a serverless function, see [Use connection
 
 ## Use connection pooling with Prisma
 
-Serverless functions can end up requiring a large number of database connections as demand increases. If you use serverless functions in your application, it is recommended that you use a pooled Neon connection string with the `pgbouncer=true` option, as shown:
+Serverless functions can require a large number of database connections as demand increases. If you use serverless functions in your application, it is recommended that you use a pooled Neon connection string, as shown:
 
 ```ini shouldWrap
 # Pooled Neon connection string
@@ -58,8 +58,8 @@ DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2
 ```
 
 - A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connection Details** widget on the Neon **Dashboard**. Use the **Pooled connection** checkbox to add the `-pooler` suffix.
-- Neon uses PgBouncer to provide [connection pooling](/docs/connect/connection-pooling). Prisma requires the `pgbouncer=true` flag when using Prisma Client with PgBouncer, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
-- Both the pooled Neon connection string and the `pgbouncer=true` flag are required to use Noen's connection pooler with Prisma. See the example above.
+- Neon uses PgBouncer to provide [connection pooling](/docs/connect/connection-pooling). Prisma Client v5.9 and earlier requires the `pgbouncer=true` flag when using Prisma Client with PgBouncer, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url). Both the pooled Neon connection string and the `pgbouncer=true` flag are required.
+- Prisma Client v5.10 and higher does not require the `pgbouncer=true` flag when using a pooled connection. You can exlcude this option from your connection string if you are using the latest Prisma Client.
 
 ### Connection pooling with Prisma Migrate
 
@@ -106,11 +106,11 @@ DIRECT_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon
 
 #### Using a pooled connection with Prisma Migrate
 
-Prisma Client v5.10 or higher supports using the same pooled Neon connection string for Prisma Client and Prisma Migrate. In this case, you only need to define the pooled connection string in your `schema.prisma` file. The `DIRECT_URL` setting is not required.
+With Prisma Client v5.10 or higher, you can use a pooled Neon connection string for Prisma Migrate. In this case, you only need to define the pooled connection string in your `schema.prisma` file. A separate `DIRECT_URL` setting is not required.
 
 ```ini shouldWrap
 # Pooled Neon connection string
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&pgbouncer=true"
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
 ## Use the Neon serverless driver with Prisma
