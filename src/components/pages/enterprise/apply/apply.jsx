@@ -83,7 +83,10 @@ const Apply = () => {
             <Testimonial className="lg:hidden" />
           </div>
           <div className="hubspot-form-wrapper col-span-5 xl:col-span-7 lg:col-span-full lg:mt-10 md:mt-6">
-            <div className="hubspot-form not-prose" data-form-id={hubspotFormID} />
+            <div
+              className="hubspot-form not-prose with-link-primary"
+              data-form-id={hubspotFormID}
+            />
           </div>
           <Testimonial className="col-span-full hidden lg:mt-10 lg:block md:mt-8" ariaHidden />
         </div>
