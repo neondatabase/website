@@ -11,9 +11,9 @@ updatedOn: '2024-02-21T13:29:41.906Z'
 
 See [Token](#token).
 
-## Active time
+## Active hours
 
-A usage metric that tracks the amount of time a compute is active as opposed to being idle due to being suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
+A usage metric that tracks the amount of time a compute is active, rather than idle when suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
 
 ## Activity Monitor
 
@@ -111,12 +111,12 @@ A unit that measures the processing power of a Neon compute. A Neon compute can 
 
 ## Compute hour
 
-A usage metric for tracking that amount of compute usage. A compute hour is 1 hour of [active time](#active-time) for a compute with 1 vCPU. Neon supports computes ranging in size from 1 vCPU to 8 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would take 4 hours of active time to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes of active time to use 1 compute hour.
+A usage metric for tracking compute usage. 1 compute hour is equal to one _active hour_ for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
 
 To calculate compute hour usage, you would use the following formula:
 
 ```
-compute hours = active time x compute size
+compute hours = active hours x compute size
 ```
 
 For more information, see [Compute](/docs/introduction/usage-metrics#compute).

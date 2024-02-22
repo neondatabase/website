@@ -34,7 +34,7 @@ See [Monitoring Autoscaling](/docs/guides/autoscaling#monitoring-autoscaling) fo
 
 ## Branch-specific metrics
 
-The **Branches** page provides key usage metrics for all your branches, like active time, storage space used, and whether the branch includes a read-write compute, all organized into a table view that lets you scan your list of branches. You can also use search if your list of branches is quite long.
+The **Branches** page provides key usage metrics for all your branches, like active hours, compute hours, storage space used, and whether the branch includes a read-write compute, all organized into a table view that lets you scan your list of branches. You can also use search if your list of branches is quite long.
 
 ## API metrics
 
