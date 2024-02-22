@@ -24,13 +24,18 @@ const getAllWpBlogCategories = async () => {
         nodes {
           name
           slug
+          posts {
+            nodes {
+              id
+            }
+          }
         }
       }
     }
   `;
   const data = await graphQLClient.request(categoriesQuery);
   const filteredCategories = data?.categories?.nodes.filter(
-    (category) => category.slug !== 'uncategorized'
+    (category) => category.slug !== 'uncategorized' && category.posts.nodes.length > 0
   );
 
   return [...filteredCategories, { name: 'All posts', slug: 'all-posts' }];
