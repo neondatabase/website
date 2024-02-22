@@ -63,7 +63,7 @@ DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2
 
 ### Connection pooling with Prisma Migrate
 
-You cannot use a pooled connection for certain operations in Prisma that require a direct connection to the database; for example, schema migration with Prisma Migrate. Attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes the following error:
+Prior to Prisma v5.10, attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes the following error:
 
 ```text
 Error undefined: Database error
@@ -71,7 +71,9 @@ Error querying the database: db error: ERROR: prepared statement
 "s0" already exists
 ```
 
-To avoid this issue, make sure you are using a direct connection to the database for Prisma Migrate. Neon supports both pooled and direct connections to the same database.
+To avoid this issue, you can define a direct connection to the database for Prisma Migrate or you can upgrade your Prisma Client to v5.10 or higher.
+
+#### Using a direct connection to the database 
 
 You can configure a direct connection while allowing applications to use Prisma Client with a pooled connection by adding a `directUrl` property to the datasource block in your `schema.prisma` file. For example:
 
@@ -100,6 +102,15 @@ DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2
 
 # Unpooled Neon connection string
 DIRECT_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
+```
+
+#### Using a pooled connection with Prisma Migrate
+
+Prisma Client v5.10 or higher supports using the same pooled Neon connection string for Prisma Client and Prisma Migrate. In this case, you only need to define the pooled connection string in your `schema.prisma` file. The `DIRECT_URL` setting is not required.
+
+```ini shouldWrap
+# Pooled Neon connection string
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&pgbouncer=true"
 ```
 
 ## Use the Neon serverless driver with Prisma
