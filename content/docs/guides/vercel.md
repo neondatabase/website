@@ -50,7 +50,7 @@ To add the integration:
    ![Add integration](/docs/guides/vercel_add_integration.png)
 1. Select a **Vercel Account** to add the integration to.
 1. Select the Vercel projects to add the integration to. You can select **All Projects** or **Specific Projects** but be aware that you can only connect one Vercel project to one Neon project and vice versa. By selecting **All projects**, you are simply making the integration available to use with all of your Vercel projects.
-1. Review the permissions required by the integration, and click **Add Integration**.
+1. Review the permissions required by the integration, and click **Install**.
 1. In the **Integrate Neon** dialog:
     1. Select a Vercel project.
       ![Select a Vercel project](/docs/guides/vercel_select_project.png)
@@ -85,6 +85,10 @@ To add the integration:
     1. Select **Settings** > **Environment Variables**.
        You should see the `DATABASE_URL` variable settings added by the integration.
        ![Vercel environment variables](/docs/guides/vercel_env_variables.png)
+
+   <Admonition type="note">
+   The `DATABASE_URL` variable set by the integration is set to a pooled Neon database connection string. The `DATABASE_URL_UNPOOLED` variable provides a direction connection to the database, in case you need it. For more information, see []().
+   </Admonition>
 
 ## Use the Neon Vercel Integration
 
@@ -125,9 +129,10 @@ The Neon Free Tier lets you create up to 10 branches. To avoid running out of br
 
 ## Manage Vercel environment variables
 
-The Neon Vercel Integration initially sets the `DATABASE_URL` environment variable for your Vercel **Production** and **Development** environments. When you create a preview deployment, the integration also sets this variable for your **Preview** environment. If you want to use different Postgres environment variables, the Neon Vercel Integration also supports these variables for defining your database connection:
+The Neon Vercel Integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED` environment variables for your Vercel **Production** and **Development** environments. These variables are set to a pooled and direct Neon database connection string, respectively (see [Connection pooling](/docs/connect/connection-pooling) for more information.). When you create a preview deployment, the integration also sets this variable for your **Preview** environment. If you want to use different Postgres environment variables, the Neon Vercel Integration also supports these variables for defining your database connection:
 
-- `PGHOST`
+- `PGHOST` (set to a pooled Neon database connection string)
+- `PGHOST_UNPOOLED` (set to a direct Neon database connection string)
 - `PGUSER`
 - `PGDATABASE`
 - `PGPASSWORD`
@@ -141,7 +146,7 @@ You can enable these variables from the Neon Console:
 
 <Admonition type="note" title="Notes">
 - Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next push.
-- The integration appends the `sslmode=require` option to the Neon connection string that it sets for the `DATABASE_URL` environment variable in Vercel.
+- The integration appends the `sslmode=require` option to all Neon connection strings.
 </Admonition> 
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
