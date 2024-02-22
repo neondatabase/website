@@ -72,13 +72,13 @@ The following table outlines compute allowances for each Neon plan.
 
 Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for by compute hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use additional compute hours, you are billed for those at the compute-hour price stated on our [pricing](https://neon.tech/pricing) page.
 
-### What is active time?
+### What are active hours?
 
-**Active time** is the actual amount of time a compute is active as opposed to being idle due to being suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
+**Active hours** measures the amount of time a compute is active, rather than idle when suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
 
 ### What is a compute hour?
 
-A **compute hour** is 1 hour of _active time_ for a compute with 1 vCPU. Neon supports computes ranging in size from 1 vCPU to 8 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would take 4 hours of active time to use 1 compute hour. On the other hand, If you have a compute with 4 vCPU, it would only take 15 minutes of active time to use 1 compute hour.
+A **compute hour** is 1 hour is equal to one _active hour_ for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
 
 ### How Neon compute features affect usage
 
@@ -90,9 +90,9 @@ You can see how compute size scales between your minimum and maximum CPU setting
 
 ### Compute usage details
 
-Compute hour usage is calculated by multiplying compute size by _active time_ hours. Neon measures compute size at regular intervals and averages those values to calculate your compute hour usage.
+Compute hour usage is calculated by multiplying compute size by _active hours_. Neon measures compute size at regular intervals and averages those values to calculate your compute hour usage.
 
-_Active time_ is the amount of time that your computes have been active, measured in hours. This includes all computes in your Neon project but excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale-to-zero).
+_Active hours_ is the amount of time that your computes have been active. This includes all computes in your Neon project but excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale-to-zero).
 
 Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
 
@@ -110,7 +110,7 @@ Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and
 
 A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an `Idle` state.
 
-Factors that affect _active time_ include:
+Factors that affect _active hours_ include:
 
 - The number of active computes
 - The size of each compute
@@ -124,7 +124,7 @@ Neon uses a small amount of compute time, included in your billed compute hours,
 The compute hour usage calculation is as follows:
 
 ```text
-compute hour usage = compute size * active time
+compute hour usage = compute size * active hours
 ```
 
 ### Estimate your compute hour usage
@@ -132,11 +132,11 @@ compute hour usage = compute size * active time
 To estimate what your compute hour usage might be per month:
 
 1. Determine the compute size you require, in Compute Units (CUs).
-1. Estimate the amount of _active time_ per month for your compute(s).
+1. Estimate the amount of _active hours_ per month for your compute(s).
 1. Input the values into the compute hours formula:
 
    ```text
-   compute hours = compute size * active time
+   compute hours = compute size * active hours
    ```
 
    For example, this is a calculation for a 2 vCPU compute that is active for all hours in a month (approx. 730 hours):

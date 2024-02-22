@@ -29,7 +29,7 @@ Each Neon project has a primary branch. In the Neon Console, your primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
-- For Neon Free Tier users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier  _compute active time_ limit of 100 hours per month.
+- For Neon Free Tier users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier  _active hours_ limit of 20 hours per month.
 - For users on paid plans, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Create a branch
@@ -68,8 +68,8 @@ Branch details shown on the branch page include:
 
 - **ID**: The branch ID. Branch IDs have a `br-` prefix.
 - **Created**: The date and time the branch was created.
-- **Active Time**: The total amount of time that your branch compute has been active within the current billing period, measured in hours.
-- **Compute Time**: The computing capacity used by the branch within the current billing period, measured in Compute Unit (CU) hours.
+- **Active Time**: The total amount of active hours for your branch compute within the current billing period.
+- **Compute Time**: The compute hours used by the branch within the current billing period.
 - **Parent Branch**: The branch from which this branch was created (only visible for child branches).
 - **Branching point**: The point in time, in terms of data, from which the branch was created.
 - **Last data reset**: The last time the branch was reset from the parent branch.
