@@ -1,10 +1,10 @@
 ---
 title: How billing works
 enableTableOfContents: true
-subtitle: Learn about plan allowances, extra usage, and monitoring usage
+subtitle: 'Learn about plan allowances, extra usage, and monitoring usage'
 redirectFrom:
   - /docs/introduction/billing-overview
-updatedOn: '2024-01-23T17:45:24.326Z'
+updatedOn: '2024-02-22T14:29:54.384Z'
 ---
 
 ## Usage allowances
