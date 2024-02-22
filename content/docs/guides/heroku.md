@@ -1,8 +1,9 @@
 ---
 title: Deploy Your Node.js App with Neon Postgres on Heroku
-subtitle: A step-by-step guide to deploying a Node application with a Neon Postgres database on Heroku
+subtitle: A step-by-step guide to deploying a Node application with a Neon Postgres
+  database on Heroku
 enableTableOfContents: true
-updatedOn: '2024-02-21T00:00:00.000Z'
+updatedOn: '2024-02-22T00:06:09.652Z'
 ---
 
 [Heroku](https://heroku.com) is a popular platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. It simplifies the deployment process, making it a favorite among developers for its ease of use and integration capabilities.
