@@ -261,6 +261,8 @@
               slug: guides/cloudflare-workers
         - title: Deno
           slug: guides/deno
+        - title: Heroku
+          slug: guides/heroku
         - title: Koyeb
           slug: guides/koyeb
         - title: Netlify Functions
