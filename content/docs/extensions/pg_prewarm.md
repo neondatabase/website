@@ -47,7 +47,7 @@ The `pg_prewarm` function does not support specifying multiple table names in a 
 
 Running `pg_prewarm` on frequently-used indexes can help improve query performance after a Postgres restart. You might also run `pg_prewarm` on indexes that are not frequently used but will be involved in upcoming heavy read operations.
 
-Running `pg_prewarm` on an index is similar to running it on a table, but you specify the index's OID (Object Identifier) or its fully qualified name (schema name plus index name) instead. 
+Running `pg_prewarm` on an index is similar to running it on a table, but you specify the index's fully qualified name (schema name plus index name) or OID (Object Identifier) instead. 
 
 Here's an example that demonstrates how to use `pg_prewarm` to preload an index into memory:
 
@@ -143,12 +143,9 @@ In this example, you create a table, check its data size, run `pg_prewarm`, and 
             36700160
     ```
 
-    The values for the size of the table and the size of the data loaded into the buffer cache as shown in the example above match exactly, which is an ideal scenario. However, there are cases where these values might not match, indicating that not all the data was loaded into the buffer cache; for example:
-    - Partial prewarming: If `pg_prewarm` only partially loads the table into the buffer cache due to constraints like memory availability. This can happen if the system doesn't have enough available memory in the buffer cache to hold the entire table.
-    - `TOAST`ed data: Postgres uses a mechanism called `TOAST` (The Oversized-Attribute Storage Technique) to store large attributes of a table out of line. If your table contains large data types (like `text` or `bytea`) that are compressed and stored out of the main table area, the size calculation might not directly match because `pg_prewarm` might not effectively prewarm these out-of-line, compressed data portions.
-    - Concurrent modifications: If the table is being modified by inserts, updates, and deletes while the prewarming process is happening or between the size check and the prewarming operation, this could lead to differences. The actual data size in the table might change between the time it's measured and the time `pg_prewarm` runs or completes.
-    - Index data: The example shown above does not include indexes that might be associated with the table. `pg_prewarm` can also prewarm indexes, but if you're only looking at the table's data size, any loaded index data won't be counted.
-    - Overhead and metadata: There is internal overhead and metadata associated with Postgres data storage that might affect calculations.
+    <Admonition type="note">
+    The values for the size of the table and the size of the data loaded into the buffer cache as shown in the example above match exactly, which is an ideal scenario. However, there are cases where these values might not match, indicating that not all the data was loaded into the buffer cache; for example, this can happen if `pg_prewarm` only partially loads the table into the buffer cache due to lack of memory availability. Concurrent data modifications could also cause sizes to differ. 
+    </Admonition>  
 
 ## Demonstrating the effect of pg_prewarm
 
