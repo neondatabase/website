@@ -144,7 +144,9 @@ In this example, you create a table, check its data size, run `pg_prewarm`, and 
     ```
 
     <Admonition type="note">
-    The values for the size of the table and the size of the data loaded into the buffer cache as shown in the example above match exactly, which is an ideal scenario. However, there are cases where these values might not match, indicating that not all the data was loaded into the buffer cache; for example, this can happen if `pg_prewarm` only partially loads the table into the buffer cache due to lack of memory availability. Concurrent data modifications could also cause sizes to differ. 
+    The values for the size of the table and the size of the data loaded into the buffer cache as shown in the example above match exactly, which is an ideal scenario. However, there are cases where these values might not match, indicating that not all the data was loaded into the buffer cache; for example, this can happen if `pg_prewarm` only partially loads the table into the buffer cache due to lack of memory availability. Concurrent data modifications could also cause sizes to differ.
+
+    To understand how much memory is available to your Postgres instance on Neon, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
     </Admonition>  
 
 ## Demonstrating the effect of pg_prewarm
@@ -234,5 +236,6 @@ Prewarming your table data and indexes can help improve read performance, especi
 ## Resources
 
 - [PostgreSQL pg_prewarm documentation](https://www.postgresql.org/docs/current/pgprewarm.html)
+- [How to size your compute in Neon](/docs/manage/endpoints#how-to-size-your-compute)
 
 <NeedHelp/>
