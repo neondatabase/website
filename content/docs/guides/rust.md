@@ -24,6 +24,10 @@ To create a Neon project:
 
 ## Configure the connection
 
+<Admonition type="note">
+To run the Rust solution below you have to install the required dependencies. You can do this by running `cargo add postgres postgres_openssl openssl`.
+</Admonition>
+
 Add the Neon connection details to your `main.rs` file, as in the following example:
 
 ```rust
