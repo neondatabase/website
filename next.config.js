@@ -89,6 +89,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/2024-plan-updates',
+        destination: '/pricing',
+        permanent: true,
+      },
+      {
         source: '/blog/category/case-study',
         destination: '/case-studies',
         permanent: true,
