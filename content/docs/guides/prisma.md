@@ -50,20 +50,18 @@ If you plan to use Prisma Client from a serverless function, see [Use connection
 
 ## Use connection pooling with Prisma
 
-Serverless functions can end up requiring a large number of database connections as demand increases. If you use serverless functions in your application, it is recommended that you use a pooled Neon connection string with the `pgbouncer=true` option, as shown:
+Serverless functions can require a large number of database connections as demand increases. If you use serverless functions in your application, we recommend that you use a pooled Neon connection string, as shown:
 
 ```ini shouldWrap
 # Pooled Neon connection string
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&pgbouncer=true"
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
-- A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connection Details** widget on the Neon **Dashboard**. Use the **Pooled connection** checkbox to add the `-pooler` suffix.
-- Neon uses PgBouncer to provide [connection pooling](/docs/connect/connection-pooling). Prisma requires the `pgbouncer=true` flag when using Prisma Client with PgBouncer, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
-- Both the pooled Neon connection string and the `pgbouncer=true` flag are required to use Noen's connection pooler with Prisma. See the example above.
+A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connection Details** widget on the Neon **Dashboard**. Use the **Pooled connection** checkbox to add the `-pooler` suffix.
 
 ### Connection pooling with Prisma Migrate
 
-You cannot use a pooled connection for certain operations in Prisma that require a direct connection to the database; for example, schema migration with Prisma Migrate. Attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes the following error:
+Prior to Prisma ORM 5.10, attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection caused the following error:
 
 ```text
 Error undefined: Database error
@@ -71,7 +69,9 @@ Error querying the database: db error: ERROR: prepared statement
 "s0" already exists
 ```
 
-To avoid this issue, make sure you are using a direct connection to the database for Prisma Migrate. Neon supports both pooled and direct connections to the same database.
+To avoid this issue, you can define a direct connection to the database for Prisma Migrate or you can upgrade Prisma ORM to 5.10 or higher.
+
+#### Using a direct connection to the database 
 
 You can configure a direct connection while allowing applications to use Prisma Client with a pooled connection by adding a `directUrl` property to the datasource block in your `schema.prisma` file. For example:
 
@@ -96,10 +96,31 @@ When you finish updating your `.env` file, your variable settings should appear 
 
 ```ini shouldWrap
 # Pooled Neon connection string
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&pgbouncer=true"
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 
 # Unpooled Neon connection string
 DIRECT_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
+```
+
+#### Using a pooled connection with Prisma Migrate
+
+With Prisma ORM 5.10 or higher, you can use a pooled Neon connection string with Prisma Migrate. In this case, you only need to define the pooled connection string in your `schema.prisma` file. Adding a `directUrl` property to the datasource block in your `schema.prisma` file and defining a `DIRECT_URL` setting in your environment file are not required. Your complete configuration will look like this:
+
+`schema.prisma` file:
+
+```typescript
+datasource db {
+  provider = "postgresql"
+  url   = env("DATABASE_URL")
+}
+```
+
+`.env` file:
+
+
+```ini
+# Pooled Neon connection string
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
 ## Use the Neon serverless driver with Prisma
