@@ -25,9 +25,9 @@ Here's a snapshot of what we're working on now:
 
 ### Observability
 
-* **Autoscaling visualizations**
+* **Autoscaling charts in Project Dashboard**
 
-    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time. See [Monitoring autoscaling](/docs/guides/autoscaling-guide#monitor-autoscaling) for a sneak peek.
+    Keeping with our improvements to monitoring and observability in Neon, the new Autoscaling graphs now available when you edit a branch's compute instance will soon be added to the Project Dashboard as well. See [Monitoring autoscaling](/docs/guides/autoscaling-guide#monitor-autoscaling) for a the current view, available for all paying users.
 
 ### Developer workflows
 
