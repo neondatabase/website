@@ -110,12 +110,12 @@ With Prisma ORM 5.10 or higher, you can use a pooled Neon connection string with
 
 `schema.prisma` file:
 
-   ```typescript
-   datasource db {
-     provider = "postgresql"
-     url   = env("DATABASE_URL")
-   }
-   ```
+```typescript
+datasource db {
+  provider = "postgresql"
+  url   = env("DATABASE_URL")
+}
+```
 
 `.env` file:
 
