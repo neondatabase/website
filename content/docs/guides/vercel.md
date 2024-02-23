@@ -129,7 +129,7 @@ The Neon Free Tier lets you create up to 10 branches. To avoid running out of br
 
 ## Manage Vercel environment variables
 
-The Neon Vercel Integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED` environment variables for your Vercel **Production** and **Development** environments. These variables are set to a pooled and direct Neon database connection string, respectively (see [Connection pooling](/docs/connect/connection-pooling) for more information.). When you create a preview deployment, the integration also sets this variable for your **Preview** environment. If you want to use different Postgres environment variables, the Neon Vercel Integration also supports these variables for defining your database connection:
+The Neon Vercel Integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED` environment variables for your Vercel **Production** and **Development** environments. These variables are set to a pooled and direct Neon database connection string, respectively (see [Connection pooling](/docs/connect/connection-pooling) for more information). When you create a preview deployment, the integration also sets this variable for your **Preview** environment. If you want to use different Postgres environment variables, the Neon Vercel Integration also supports these variables for defining your database connection:
 
 - `PGHOST` (set to a pooled Neon database connection string)
 - `PGHOST_UNPOOLED` (set to a direct Neon database connection string)
@@ -142,10 +142,11 @@ You can enable these variables from the Neon Console:
 1. In the Neon Console, select your project.
 2. Select the **Integrations** page.
 3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
-4. In the **Vercel integration** drawer, select the environment variables you require. The selected variables will be set in your Vercel project with your next push. 
+4. In the **Vercel integration** drawer, select the environment variables you require. 
+5. Click **Save changes**. Your variable selection is saved and will be applied to your Vercel project on your next deployment. 
 
 <Admonition type="note" title="Notes">
-- Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next push.
+- Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next deployment.
 - The integration appends the `sslmode=require` option to all Neon connection strings.
 </Admonition> 
 
