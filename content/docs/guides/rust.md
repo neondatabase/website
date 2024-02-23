@@ -4,7 +4,7 @@ subtitle: Set up a Neon project in seconds and connect from a Rust application
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2023-11-24T11:25:06.755Z'
+updatedOn: '2024-02-23T00:24:06.826Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Rust application.
@@ -23,6 +23,10 @@ To create a Neon project:
 3. Specify your project settings and click **Create Project**.
 
 ## Configure the connection
+
+<Admonition type="note">
+To run the Rust solution below you have to install the required dependencies. You can do this by running `cargo add postgres postgres_openssl openssl`.
+</Admonition>
 
 Add the Neon connection details to your `main.rs` file, as in the following example:
 
