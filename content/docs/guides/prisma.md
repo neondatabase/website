@@ -61,7 +61,7 @@ A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells N
 
 ### Connection pooling with Prisma Migrate
 
-Prior to Prisma ORM 5.10, attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes the following error:
+Prior to Prisma ORM 5.10, attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection caused the following error:
 
 ```text
 Error undefined: Database error
