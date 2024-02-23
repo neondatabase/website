@@ -50,7 +50,7 @@ If you plan to use Prisma Client from a serverless function, see [Use connection
 
 ## Use connection pooling with Prisma
 
-Serverless functions can require a large number of database connections as demand increases. If you use serverless functions in your application, it is recommended that you use a pooled Neon connection string, as shown:
+Serverless functions can require a large number of database connections as demand increases. If you use serverless functions in your application, we recommend that you use a pooled Neon connection string, as shown:
 
 ```ini shouldWrap
 # Pooled Neon connection string
