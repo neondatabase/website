@@ -30,7 +30,7 @@ In any of these widgets, you can click the link in the top right corner to get m
 
 For Pro users, when you edit your compute from the **Branches** page, there is a graph showing your recent vCPU and RAM usage. This can help visualize whether your current minimum and maximum sizes are suitable for your current level of demand.
 
-See [Monitoring Autoscaling](/docs/guides/autoscaling#monitoring-autoscaling) for details.
+See [Monitoring Autoscaling](/docs/guides/autoscaling-guide#monitoring-autoscaling) for details.
 
 ## Branch-specific metrics
 
