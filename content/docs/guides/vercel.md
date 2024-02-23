@@ -3,7 +3,7 @@ title: Connect with the Neon Vercel Integration
 subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel
   Integration
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.291Z'
+updatedOn: '2024-02-23T20:32:29.800Z'
 ---
 
 This guide describes how to connect using the [Neon Vercel Integration](https://vercel.com/integrations/neon) from the Vercel marketplace. The integration connects your Vercel project to a Neon database and enables creating a database branch for each preview deployment.
@@ -42,7 +42,7 @@ Prerequisites:
 
 - A [Vercel account](https://vercel.com).
 - A Vercel project. If you do not have one, see [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project), in the _Vercel documentation_.
-- The integration initially sets the `DATABASE_URL` environment variable for your Vercel **Production** and **Development** environments. When you create a preview deployment, the integration will also set this variable for your **Preview** environment. Make sure this variable does not already exist in your Vercel project settings. To use different Postgres variables with the Neon integration, see [Manage Vercel environment variables](#manage-vercel-environment-variables). 
+- The integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED`environment variables for your Vercel **Production** and **Development** environments. When you create a preview deployment, the integration will also set these variables for your **Preview** environment. Make sure these variables do not already exist in your Vercel project settings. To use different Postgres variables with the Neon integration, see [Manage Vercel environment variables](#manage-vercel-environment-variables). 
 
 To add the integration:
 
@@ -50,7 +50,7 @@ To add the integration:
    ![Add integration](/docs/guides/vercel_add_integration.png)
 1. Select a **Vercel Account** to add the integration to.
 1. Select the Vercel projects to add the integration to. You can select **All Projects** or **Specific Projects** but be aware that you can only connect one Vercel project to one Neon project and vice versa. By selecting **All projects**, you are simply making the integration available to use with all of your Vercel projects.
-1. Review the permissions required by the integration, and click **Add Integration**.
+1. Review the permissions required by the integration, and click **Install**.
 1. In the **Integrate Neon** dialog:
     1. Select a Vercel project.
       ![Select a Vercel project](/docs/guides/vercel_select_project.png)
@@ -83,8 +83,12 @@ To add the integration:
     1. Navigate to [Vercel](https://vercel.com/).
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**.
-       You should see the `DATABASE_URL` variable settings added by the integration.
+       You should see the `DATABASE_URL` and `DATABASE_URL_UNPOOLED` variable settings added by the integration.
        ![Vercel environment variables](/docs/guides/vercel_env_variables.png)
+
+   <Admonition type="note">
+   The `DATABASE_URL` variable set by the integration is set to a pooled Neon database connection string. The `DATABASE_URL_UNPOOLED` variable is set to an unpooled connection string for tools or applications that require a direct connection to the database. For more information, see [Manage Vercel environment variables](#manage-vercel-environment-variables).
+   </Admonition>
 
 ## Use the Neon Vercel Integration
 
@@ -94,7 +98,7 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
 
    ```bash
    cd myapp
-   git checkout -b myapp-update
+   git checkout -b patch-1
    ```
 
 2. Make changes to your application on the local branch.
@@ -114,20 +118,21 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
 
    - The commit triggers a preview deployment in Vercel, as would occur without the Neon integration.
      ![Neon preview deployment branch](/docs/guides/vercel_deployments.png)
-   - The integration creates a branch in Neon. This branch is an isolated copy-on-write clone of your root branch, with its own dedicated compute endpoint. The branch is created with the same name as your `git` branch.
+   - The integration creates a branch in Neon. This branch is an isolated copy-on-write clone of your primary branch, with its own dedicated compute endpoint. The branch is created with the same name as your `git` branch.
      ![Neon preview deployment branch](/docs/guides/vercel_neon_app_update.png)
    - The integration sets Vercel preview environment variables to connect the preview deployment to the new branch.
      ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)
 
 <Admonition type="note">
-The Neon Free Tier lets you create up to 10 branches. To avoid running out of branches for new preview deployments, remove old branches regularly. See [Delete a branch](/docs/manage/branches#delete-a-branch) for instructions.
+The Neon Free Tier lets you create up to 10 branches. To avoid running out of branches for new preview deployments or using up your storage allowances, remove old branches regularly. See [Delete a branch](/docs/manage/branches#delete-a-branch) for instructions.
 </Admonition>
 
 ## Manage Vercel environment variables
 
-The Neon Vercel Integration initially sets the `DATABASE_URL` environment variable for your Vercel **Production** and **Development** environments. When you create a preview deployment, the integration also sets this variable for your **Preview** environment. If you want to use different Postgres environment variables, the Neon Vercel Integration also supports these variables for defining your database connection:
+The Neon Vercel Integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED` environment variables for your Vercel **Production** and **Development** environments. These variables are set to a pooled and direct Neon database connection string, respectively (see [Connection pooling](/docs/connect/connection-pooling) for more information). When you create a preview deployment, the integration also sets these variables for your Vercel **Preview** environment. If you want to use different Postgres environment variables, the Neon Vercel Integration also supports these variables for defining your database connection:
 
-- `PGHOST`
+- `PGHOST` (set to a pooled Neon database connection string)
+- `PGHOST_UNPOOLED` (set to a direct Neon database connection string)
 - `PGUSER`
 - `PGDATABASE`
 - `PGPASSWORD`
@@ -137,11 +142,12 @@ You can enable these variables from the Neon Console:
 1. In the Neon Console, select your project.
 2. Select the **Integrations** page.
 3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
-4. In the **Vercel integration** drawer, select the environment variables you require. The selected variables will be set in your Vercel project with your next push. 
+4. In the **Vercel integration** drawer, select the environment variables you require. 
+5. Click **Save changes**. Your variable selection is saved and will be applied to your Vercel project on your next deployment. 
 
 <Admonition type="note" title="Notes">
-- Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next push.
-- The integration appends the `sslmode=require` option to the Neon connection string that it sets for the `DATABASE_URL` environment variable in Vercel.
+- Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next deployment.
+- The integration appends the `sslmode=require` option to all Neon connection strings.
 </Admonition> 
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
@@ -158,10 +164,10 @@ Please be aware that the Neon Vercel Integration connects one Vercel project to 
    1. On the Vercel Dashboard, select **Integrations**.
    1. Find the Neon Postgres integration, and select **Manage**.
    1. On the Neon Postgres integration page, select **Manage Access**.
-   1. On the **Manage Access for Neon Postgres** modal, make sure that the Neon Postgres integration has access to the Vercel project. You can do so by selecting **Specific Projects** and choosing a Vercel project, or by granting access to **All Projects**. If you previously granted access to **All Projects**, no change is necessary.
+   1. On the **Manage Access for Neon Postgres** modal, make sure that the Neon Postgres integration has access to the Vercel project. You can do so by selecting **Specific Projects** and choosing a Vercel project or by granting access to **All Projects**. If you previously granted access to **All Projects**, no change is necessary.
    1. Click **Save**.
 1. Navigate to this URL: [https://vercel.com/integrations/neon/new](https://vercel.com/integrations/neon/new).
-1. Follow the prompts. When you reach the **Integrate Neon** dialog, select the Vercel project that you want to add the integration to. Vercel projects that are already integrated with Neon are identified as `CONNECTED`, so you'll have to select a different Vercel project.
+1. Follow the prompts. When you reach the **Integrate Neon** dialog, select the Vercel project you want to add the integration to. Vercel projects that are already integrated with Neon are identified as `CONNECTED`, so you'll have to select a different Vercel project.
    ![Confirm integration settings](/docs/guides/vercel_add_new_project.png)
 1. Continue following the prompts to complete the setup. These are the same steps described above, in [Add the Neon integration](#add-the-neon-vercel-integration). When you select a Neon project to connect to, be sure to select one that is not already connected to a Vercel project, as you cannot connect one Vercel project to multiple Neon projects or vice versa.
 
@@ -186,7 +192,7 @@ In this case, you can remove or rename the existing environment variables in you
    Alternatively, you can remove the conflicting integration, assuming it is no longer required. This may be a previous Neon integration or another integration. Removing the integration removes the variables set by the integration.
    </Admonition>
 
-3. Try adding the Neon integration again. See [Add the Neon Vercel Integration](#add-the-neon-vercel-integration).
+3. Try adding the integration again. See [Add the Neon Vercel Integration](#add-the-neon-vercel-integration).
 
 ### DATABASE_URL not set on first preview deployment
 
