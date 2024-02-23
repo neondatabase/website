@@ -61,7 +61,7 @@ A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells N
 
 ### Connection pooling with Prisma Migrate
 
-Prior to Prisma v5.10, attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes the following error:
+Prior to Prisma ORM 5.10, attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes the following error:
 
 ```text
 Error undefined: Database error
@@ -69,7 +69,7 @@ Error querying the database: db error: ERROR: prepared statement
 "s0" already exists
 ```
 
-To avoid this issue, you can define a direct connection to the database for Prisma Migrate or you can upgrade your Prisma Client to v5.10 or higher.
+To avoid this issue, you can define a direct connection to the database for Prisma Migrate or you can upgrade Prisma ORM to 5.10 or higher.
 
 #### Using a direct connection to the database 
 

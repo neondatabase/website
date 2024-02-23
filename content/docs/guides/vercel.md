@@ -87,7 +87,7 @@ To add the integration:
        ![Vercel environment variables](/docs/guides/vercel_env_variables.png)
 
    <Admonition type="note">
-   The `DATABASE_URL` variable set by the integration is set to a pooled Neon database connection string. The `DATABASE_URL_UNPOOLED` variable provides a direction connection to the database, in case your tools or application requires it. For more information, see [Manage Vercel environment variables](#manage-vercel-environment-variables).
+   The `DATABASE_URL` variable set by the integration is set to a pooled Neon database connection string. The `DATABASE_URL_UNPOOLED` variable is set to an unpooled connection string for tools or applications that require a direct connection to the database. For more information, see [Manage Vercel environment variables](#manage-vercel-environment-variables).
    </Admonition>
 
 ## Use the Neon Vercel Integration
@@ -98,7 +98,7 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
 
    ```bash
    cd myapp
-   git checkout -b patch-update
+   git checkout -b patch-1
    ```
 
 2. Make changes to your application on the local branch.
@@ -124,12 +124,12 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
      ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)
 
 <Admonition type="note">
-The Neon Free Tier lets you create up to 10 branches. To avoid running out of branches for new preview deployments or using storage allowances, remove old branches regularly. See [Delete a branch](/docs/manage/branches#delete-a-branch) for instructions.
+The Neon Free Tier lets you create up to 10 branches. To avoid running out of branches for new preview deployments or using up your storage allowances, remove old branches regularly. See [Delete a branch](/docs/manage/branches#delete-a-branch) for instructions.
 </Admonition>
 
 ## Manage Vercel environment variables
 
-The Neon Vercel Integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED` environment variables for your Vercel **Production** and **Development** environments. These variables are set to a pooled and direct Neon database connection string, respectively (see [Connection pooling](/docs/connect/connection-pooling) for more information). When you create a preview deployment, the integration also sets this variable for your **Preview** environment. If you want to use different Postgres environment variables, the Neon Vercel Integration also supports these variables for defining your database connection:
+The Neon Vercel Integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED` environment variables for your Vercel **Production** and **Development** environments. These variables are set to a pooled and direct Neon database connection string, respectively (see [Connection pooling](/docs/connect/connection-pooling) for more information). When you create a preview deployment, the integration also sets these variables for your Vercel **Preview** environment. If you want to use different Postgres environment variables, the Neon Vercel Integration also supports these variables for defining your database connection:
 
 - `PGHOST` (set to a pooled Neon database connection string)
 - `PGHOST_UNPOOLED` (set to a direct Neon database connection string)
