@@ -7,7 +7,7 @@ updatedOn: '2024-01-26T20:27:59.554Z'
 
 ## Generative AI example
 
-To give you a clearer sense of how billing works for Neon Pro users, let's explore a real-world example. Consider a simple image generation app that leverages Neon as the serverless database for storing user authentication details as well as records of image generation per user. Analyzing this usage over a monthly billing period can help you understand the nuances of Neon billing based on actual scenarios.
+To give you a clearer sense of how billing works, let's explore a real-world example. Consider a simple image generation app that leverages Neon as the serverless database for storing user authentication details as well as records of image generation per user. Analyzing this usage over a monthly billing period can help you understand the nuances of Neon billing based on actual scenarios and choose the right pricing plan.
 
 ## Overview: Costs by usage
 
@@ -27,19 +27,19 @@ Roughly six months since launch, this high-traffic application attracts about 80
 * **User activity.** Each user's usage is capped at 5 generations per month. This includes logging IDs of generated photos and the incremental number of generations, which are written to the relevant tables.
 
 <Admonition type="note">
-Given the high number of connections used by this application, [connection pooling](/docs/connect/connection-pooling) is essential. And since the database connection is managed through Prisma, the database connection string also requires the addition of `?pgbouncer=true` for proper performance (see [Use connection pooling with Prisma](/docs/guides/prisma#use-connection-pooling-with-prisma)). 
+Given the high number of connections used by this application, [connection pooling](/docs/connect/connection-pooling) is essential.
 </Admonition>
 
-### Compute, storage, data write and transfer:
+### Compute hours and storage:
 
-* **Compute time.** This metric refers to the size of CPU required to handle your interactions plus the length of time your compute is active. The average daily compute usage is 23.94 hours, totaling 718.35 hours for the sample month. This indicates steady but low-intensity database usage.
-* **Storage size.** The amount of database storage currently used by your project. It includes the total volume of data across all branches plus the shared history. The database is now over 25 GiB and growing steadily with new written data as the user base grows.
+* **Compute hours.** This metric refers to the size of CPU required to handle your interactions plus the length of time your compute is active. The average daily compute usage is 23.94 hours, totaling 718.35 hours for the sample month. This indicates steady but low-intensity database usage.
+* **Storage.** The amount of database storage currently used by your project. It includes the total volume of data across all branches plus the shared history. The database is now over 25 GiB and growing steadily with new written data as the user base grows.
 
 ### Which Pricing Plan fits best?
 
-With Neon pricing, two key metrics help you decide which [pricing plan](https://neon.tech/pricing) is right for you: compute time and storage.
+With Neon pricing, two key metrics help you decide which [pricing plan](https://neon.tech/pricing) is right for you: compute hours and storage.
 
-At roughly 718 compute hours for the month, this application is well under the 1,200 hours/month limit for the Launch plan. However, with a storage size of 25 GiB, the storage needs for this application are well over the Launch plan limit of 10 GiB. That makes the [Scale](/docs/introduction/plans#scale) plan the right choice: 3,000 hours/month compute and 50 GiB storage.
+At roughly 718 compute hours for the month, with a compute size of 0.25 vCPU, this application is well under the 1,200 active hours/month limit for the Launch plan. However, with a storage size of 25 GiB, the storage needs for this application are well over the Launch plan limit of 10 GiB. That makes the [Scale](/docs/introduction/plans#scale) plan the right choice: 3,000 active hours/month compute and 50 GiB storage.
 
 ## Consumption breakdown for the month
 
@@ -53,7 +53,7 @@ Compute usage is steady at almost 24 compute hours per day across the month.
 
 Daily average of 23.94 compute hours leads to a total of 713.35 compute hours for the month.
 
-This is well below the [Scale](/docs/introduction/plans#scale) plan limit of 3,000 hours/month, so there will be no charge for extra usage. The application is on track to be charged the set monthly rate for the Scale plan.
+This is well below the [Scale](/docs/introduction/plans#scale) plan limit of 3,000 hours/month, so there will be no charge for extra usage. The application is on track to be charged the set monthly rate for the Scale plan. The extra monthly compute allowance in this case could even be used to increase the size of your compute or enable Autoscaling for optimal performance. 
 
 ### Storage
 
@@ -63,18 +63,13 @@ This storage level is too high for the Launch plan but well under the 50 GiB lim
 
 ![Sample storage graph](/docs/introduction/billing_storage_graph.png)
 
-### Data throughput
-Written data to Neon storage and data transfer out of Neon do not incur any costs. This view shows the amount of data written to storage or transferred out of the application: a reasonable amount with no charge.
-
-![Sample storage graph](/docs/introduction/billing_data_graph.png)
-
 ### Table view
 
 Here are the daily averages and monthly totals for the 2 key usage metrics that Neon uses to calculate how much you are consuming within your selected plan.
 
 | Metric          | Daily Average | Monthly Total |
 |-----------------|---------------|---------------|
-| Compute Time    | 23.94 compute-hours      | 718.35 compute-hours    |
+| Compute hours    | 23.94 compute hours      | 718.35 compute hours    |
 
  Metric           | Start of billing period| End of billing period |
 |-----------------|---------------|---------------|
@@ -82,4 +77,4 @@ Here are the daily averages and monthly totals for the 2 key usage metrics that 
 
 ## Bill for the month
 
-Since compute-hours and storage size are well below the limits for the selected [Scale](/docs/introduction/plans#scale) plan, the bill for the month will come in at the set rate of **$69**.
+Since compute hours and storage size are well below the limits for the selected [Scale](/docs/introduction/plans#scale) plan, the bill for the month will come in at the set rate of **$69**.
