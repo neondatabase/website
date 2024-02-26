@@ -130,32 +130,11 @@ The following table outlines the vCPU, RAM, `shared_buffer` limit (50 % of RAM),
 Users on paid plans can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
 </Admonition> 
 
-When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your computed based on the working set](#sizing-your-computed-based-on-the-working-set).
+When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set).
 
 Regarding connection limits, you'll want a compute size that can support your anticipated maximum number of concurrent connections. If you are using _Autoscaling_, it is important to remember that your `max_connections` setting is based on the _minimum compute size_ in your autoscaling configuration. The `max_connections` setting does not scale with your compute. To avoid the `max_connections` constraint, you can use a pooled connection with your application, which supports up to 10,000 concurrent user connections. See [Connection pooling](/docs/connect/connection-pooling).
 
-#### Sizing your computed based on the working set
 
-If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is a subset of frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your workload. The cache hit ratio measures how many queries are serviced from memory compared to how many queries are received. Queries not serviced from memory must bypass the cache to retrieve data from disk. 
-
-For example, if you have 100 queries successfully served from memory, and two queries go to disk, your cache hit ratio is 100/102, which is 98%.
-
-You can use the following query to find your cache hit ratio:
-
-```sql
-SELECT 
-  sum(heap_blks_read) as heap_read,
-  sum(heap_blks_hit)  as heap_hit,
-  sum(heap_blks_hit) / (sum(heap_blks_hit) + sum(heap_blks_read)) as ratio
-FROM 
-  pg_statio_user_tables;
-```
-
-If this query does not return a cache hit ratio of 99%, your working set is not fully or adequately in memory. In this case, consider using a larger compute with more memory.
-
-<Admonition type="note">
-The cache hit ratio query is based on statistics that represent the lifetime of your compute instance, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has had time to run. For example, say that you increased your compute size after seeing a cache hit ratio below 99%. Changing the compute size restarts your compute, so you lose all of your current usage statistics. In this case, you should run a representative workload before you try the cache hit ratio query again to see if your cache hit ratio improved.
-</Admonition>
 
 #### Autoscaling considerations
 
