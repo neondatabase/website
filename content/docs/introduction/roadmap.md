@@ -27,11 +27,11 @@ Here's a snapshot of what we're working on now:
 
 * **Autoscaling charts in Project Dashboard**
 
-    Keeping with our improvements to monitoring and observability in Neon, our new [Autoscaling graphs](/docs/guides/autoscaling-guide#monitor-autoscaling) &#8212; available now when you edit a branch's compute instance &#8212; will soon be added to the Project Dashboard as well.
+    Continuing with our improvements to monitoring and observability in Neon, our new [Autoscaling graphs](/docs/guides/autoscaling-guide#monitor-autoscaling) &#8212; available now when you edit a branch's compute instance &#8212; will soon be added to the Project Dashboard as well.
 
 * **New Monitoring page**
 
-   We are also working on adding a new Monitoring page to the Neon Console that will display key Posgres, connection, and resource usage metrics in a dashboard.
+   We are also working on adding a new Monitoring page to the Neon Console that will display key Postgres, connection, and resource usage metrics in a dashboard.
 
 ### Developer workflows
 
