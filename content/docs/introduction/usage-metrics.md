@@ -27,12 +27,6 @@ Extra storage is available with the [Scale](/docs/introduction/plans##scale) pla
 
 Neon storage uses copy-on-write branching to keep storage size as small as possible. This can make it hard to visualize "how big is my database", since branches with a shared history don't immediately add to storage. Storage size is a combination of your total data plus the shared change history that is used to enable branching-related features like [point-in-time restore](/docs/introduction/point-in-time-restore), [query testing](/docs/guides/branching-test-queries), and [reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
 
-### How is storage usage measured?
-
-Storage usage is based on the amount of data stored in your project (or projects) and how long it is stored.
-
-![Storage calculation](/docs/introduction/storage_calc.png)
-
 ### Storage details
 
 _Storage_ is the total volume of data and history stored in Neon, measured in gibibytes (GiB). It includes the following:
@@ -50,12 +44,6 @@ _Storage_ is the total volume of data and history stored in Neon, measured in gi
     When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's virtual snapshot still exists in the parent branch's _history_, which means that it shares this data in common with the parent branch. A branch begins adding to storage when data changes are introduced or when the branch's virtual snapshot falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data or allow the branch to age out of the parent branch's _history_.
 
     Database branches can also share a _history_. For example, two branches created from the same parent at or around the same time share a _history_, which avoids additional storage. The same is true for a branch created from another branch. Wherever possible, Neon minimizes storage through shared history. Additionally, to keep storage to a minimum, Neon takes a new branch snapshot if the amount of data changes grows to the point that a new snapshot consumes less storage than retained WAL records.
-
-The usage calculation for _Storage_ is as follows:
-
-```text
-storage (GiB) * (seconds stored / 3600)
-```
 
 The **Storage** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 
