@@ -83,7 +83,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash shouldWrap
-neonctl ip-allow add 192.168.1.3 --project-id cold-grass-40154007
+neonctl ip-allow add 192.0.2.3 --project-id cold-grass-40154007
 ```
 
 ### remove
@@ -108,7 +108,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash shouldWrap
-neonctl ip-allow remove 192.168.1.3 --project-id cold-grass-40154007
+neonctl ip-allow remove 192.0.2.3 --project-id cold-grass-40154007
 ```
 
 ### reset
@@ -133,7 +133,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash shouldWrap
-neonctl ip-allow reset 192.168.1.1 --project-id cold-grass-40154007
+neonctl ip-allow reset 192.0.2.1 --project-id cold-grass-40154007
 ```
 
 <NeedHelp/>

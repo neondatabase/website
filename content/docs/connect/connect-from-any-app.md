@@ -72,7 +72,7 @@ See our [Framework, language, and platform guides](https://neon.tech/docs/guides
 
 ## Network protocol support
 
-Neon currently supports **IPv4**. Support for other network protocols, including IPv6, is **not available** at this time.
+Neon supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses.
 
 Additionally, Neon provides a serverless driver that supports both WebSocket and HTTP connections. For further information, refer to our [Neon serverless driver](/docs/serverless/serverless-driver) documentation.
 
