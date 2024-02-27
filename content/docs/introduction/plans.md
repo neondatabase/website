@@ -10,6 +10,7 @@ redirectFrom:
   - /docs/introduction/free-tier
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
+  - /docs/reference/technical-preview-free-tier
 updatedOn: '2024-02-22T14:29:54.386Z'
 ---
 
