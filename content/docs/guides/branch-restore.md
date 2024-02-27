@@ -94,9 +94,9 @@ The ephemeral endpoints are created according to your configured [default comput
 
 ## How to use branch restore
 
-You can use the Neon Console or the CLI to restore branches.
+You can use the Neon Console, CLI, or API to restore branches.
 
-<Tabs labels={["Console", "CLI"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -175,6 +175,98 @@ neonctl branches restore dev/alex dev/jordan@0/12345
 This command will restore the target branch `dev/alex` to an earlier point in time from the source branch `dev/jordan`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `dev/jordan`.
 
 For full CLI documentation for `branches restore`, see [branches restore](/docs/reference/cli-branches#restore).
+</TabItem>
+
+<TabItem>
+To restore a branch using the API, use the endpoint:
+
+`POST /projects/{project_id}/branches/{branch_id_to_restore}/restore`
+
+This endpoint initiates a branch restore operation based on the provided request parameters:
+
+- **source_branch_id**: `string` (required)  
+  The ID of the branch you want to restore from.
+  
+  To restore to the latest data (head), omit `source_timestamp` and `source_lsn`.
+  
+  To restore a branch to its own history (`source_branch_id` equals branch's own Id), you must include:
+  
+  - A time period: `source_timestamp` or `source_lsn`
+  - A backup branch: `preserve_under_name`
+
+- **source_lsn**: `string` (optional)  
+  A Log Sequence Number (LSN) on the source branch. The branch will be restored with data up to this LSN.
+
+- **source_timestamp**: `string` (optional)  
+  A timestamp indicating the point in time on the source branch to restore from. Use ISO 8601 format for the date-time string.
+
+- **preserve_under_name**: `string` (optional)  
+  If specified, a backup is created: the latest version of the branch's state is preserved under a new branch using the specified name. This field is required if:
+
+  - The branch has children. All child branches will be moved to the newly created branch.
+  - You are restoring a branch to its own history ( `source_branch_id` equals the branch's own ID).
+
+#### Restoring a branch to its own history
+
+In the following example, we are restoring branch `br-twilight-river-31791249` to an earlier point in time, `2024-02-27T00:00:00Z`, with a new backup branch named `backup-before-restore`.
+
+```bash shouldWrap
+curl --request POST \
+     --url https://console.stage.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-twilight-river-31791249/restore \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
+     --data '
+{
+  "source_branch_id": "br-twilight-river-31791249",
+  "source_timestamp": "2024-02-27T00:00:00Z",
+  "preserve_under_name": "backup-before-restore"
+}
+' | jq
+```
+And here is a sample response:
+
+<details>
+<summary>Response body</summary>
+
+```json
+{
+  "branch": {
+    "id": "br-twilight-river-31791249",
+    "project_id": "floral-disk-86322740",
+    "parent_id": "br-muddy-sun-19285989",
+    "parent_lsn": "0/29954D0",
+    "parent_timestamp": "2024-02-08T02:53:46Z",
+    "name": "dev/alex",
+    "current_state": "ready",
+    "logical_size": 36945920,
+    "creation_source": "console",
+    "primary": false,
+    "cpu_used_sec": 439,
+    "compute_time_seconds": 439,
+    "active_time_seconds": 1660,
+    "written_data_bytes": 120488,
+    "data_transfer_bytes": 14605,
+    "created_at": "2024-02-12T17:30:10Z",
+    "updated_at": "2024-02-27T14:19:08Z",
+    "last_reset_at": "2024-02-27T14:19:08Z"
+  },
+  "operations": [
+    {
+      "id": "3b77cfb7-72d7-4b1f-a0a7-f98d960697a6",
+      "project_id": "floral-disk-86322740",
+      "branch_id": "br-twilight-river-31791249",
+      "action": "create_branch",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2024-02-27T14:19:08Z",
+      "updated_at": "2024-02-27T14:19:08Z",
+      "total_duration_ms": 0
+    }
+  ]
+}
+</details>
+
 </TabItem>
 </Tabs>
 

@@ -67,19 +67,13 @@ Recover lost data or track down issues by restoring a branch to its history, or 
 
 <a href="/docs/guides/branch-restore" description="Learn how to revert changes or recover lost data using Neon Branch Restore with Time Travel Assist" icon="invert">Branch Restore with Time Travel Assist</a>
 
-<a href="/docs/guides/branching-pitr" description="Learn how to create point-in-time branches" icon="screen">Create a branch from the past</a>
-
-<a href="https://neon.tech/blog/time-travel-with-postgres" description="Blog: Time travel with database branching to recover lost data" icon="screen">Time Travel with Postgres</a>
-
 </DetailIconCards>
 
 ## Branching guides
 
-Learn how to refresh a branch or promote a branch to become your primary branch.
+Learn how to promote a branch to become your primary branch.
 
 <DetailIconCards>
-
-<a href="/docs/guides/branch-refresh" description="Learn how to refresh a branch with the latest data using the Neon API" icon="split-branch">Refresh a branch</a>
 
 <a href="/docs/guides/branch-promote" description="Promote a branch to the primary branch of your Neon project using the Neon API" icon="split-branch">Promote a branch</a>
 

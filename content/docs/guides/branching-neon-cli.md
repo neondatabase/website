@@ -94,4 +94,14 @@ You do not need to specify the variable name explicitly when using a Neon CLI co
 
 This API key configuration ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Remember, you should handle your API key with the same level of security as your other credentials.
 
+## Restoring a branch to its own or another branch's history
+
+Using the CLI, you can restore a branch to an earlier point in its history or another branch's history using the following command:
+
+``` bash shouldWrap
+neonctl branches restore <target id|name> <source id|name @ timestamp|lsn>
+```
+
+For full details about the different restore options available with this command, see [Restoring using the CLI](\docs\guides\branch-restore#how-to-use-branch-restore).
+
 <NeedHelp/>

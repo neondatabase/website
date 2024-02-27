@@ -181,7 +181,14 @@ Read more about performing branching actions from the CLI in [CLI - branches](/d
 </TabItem>
 
 <TabItem>
-Resetting from parent is not yet directly supported from the API. However, you can use the instructions on [Refreshing a branch](/docs/guides/branch-refresh) to perform a similar operation. It involves using the API to create a new branch, transfer the compute endpoint, deleting the old branch, and (optionally) renaming the new branch.
+To reset a branch to its parent using the API, use the branch restore endpoint, selecting the parent as the source:
+
+```bash
+POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
+```
+
+For details, see [Branch Restore using the API](\docs\guides\branch-restore#how-to-use-branch-restore)
+
 </TabItem>
 
 </Tabs>
