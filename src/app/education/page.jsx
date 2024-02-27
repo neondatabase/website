@@ -17,7 +17,7 @@ export const metadata = getMetadata({
   robotsNoindex: 'noindex',
 });
 
-const FreecodecampPage = () => (
+const EducationPage = () => (
   <Layout headerTheme="black" footerWithTopBorder withOverflowHidden>
     <Hero />
     <CTA />
@@ -32,6 +32,6 @@ const FreecodecampPage = () => (
   </Layout>
 );
 
-export default FreecodecampPage;
+export default EducationPage;
 
 export const revalidate = 60;
