@@ -10,7 +10,6 @@ import Button from 'components/shared/button/button';
 import useAbortController from 'hooks/use-abort-controller';
 import useDocsAIChatStream from 'hooks/use-docs-ai-chat-stream';
 import sendGtagEvent from 'utils/send-gtag-event';
-import sendSegmentEvent from 'utils/send-segment-event';
 
 import ChatInput from './chat-input';
 import AttentionIcon from './images/attention.inline.svg';
@@ -65,7 +64,6 @@ const ChatWidget = () => {
       value: e.target.textContent,
     };
     sendGtagEvent(eventName, properties);
-    sendSegmentEvent(eventName, properties);
     inputRef.current.value = e.target.textContent;
     inputRef.current.focus();
   };
@@ -90,9 +88,6 @@ const ChatWidget = () => {
       if (!isLoading && inputText) {
         setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
         sendGtagEvent('chat_widget_submit', {
-          value: inputText,
-        });
-        sendSegmentEvent('chat_widget_submit', {
           value: inputText,
         });
         setSelectedValue('');
@@ -125,9 +120,6 @@ const ChatWidget = () => {
     setIsStopped(true);
     const lastMessage = messages.findLast((message) => message.role === 'user');
     sendGtagEvent('chat_widget_stop_generating_answer', {
-      value: lastMessage?.content,
-    });
-    sendSegmentEvent('chat_widget_stop_generating_answer', {
       value: lastMessage?.content,
     });
   };
@@ -276,7 +268,6 @@ const ChatWidgetTrigger = ({ className, isSidebar }) => {
   const onClickHandler = () => {
     setIsOpen(true);
     sendGtagEvent('chat_widget_open');
-    sendSegmentEvent('chat_widget_open');
   };
 
   return (

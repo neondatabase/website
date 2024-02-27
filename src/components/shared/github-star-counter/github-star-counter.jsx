@@ -8,7 +8,6 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import GitHubIcon from 'icons/github.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
-import sendSegmentEvent from 'utils/send-segment-event';
 
 const API_URL = 'https://api.github.com/repos/neondatabase/neon';
 
@@ -51,7 +50,6 @@ const GithubStarCounter = ({ className = '', isThemeBlack = false }) => {
       rel="noopener noreferrer"
       onClick={() => {
         sendGtagEvent('click_star_us_button');
-        sendSegmentEvent('click_star_us_button');
       }}
     >
       <GitHubIcon width={20} height={20} />
