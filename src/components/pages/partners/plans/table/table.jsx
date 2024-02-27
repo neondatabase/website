@@ -174,7 +174,7 @@ const Table = () => {
                 isFeaturedPlan={isFeaturedPlan}
                 {...labelList[isLabelsColumn ? arr[1] : key]}
               />
-              <ul className="relative z-10 flex w-full grow flex-col">
+              <ul className="flex w-full grow flex-col">
                 {tableRows.map((item, index) => {
                   if (i === 0) {
                     const isGroupTitle = typeof item[key] === 'string';
@@ -277,30 +277,31 @@ const Table = () => {
                       )}
                       {typeof item[key] === 'object' && (
                         <div className="flex flex-col items-start justify-start">
-                          <div
-                            className="group relative inline-flex items-center justify-start"
-                            data-tooltip-id={item[key]?.tooltip && `${key}_tooltip_${index}`}
-                            data-tooltip-html={item[key]?.tooltip && item[key]?.tooltip}
-                          >
+                          <div className="group relative inline-flex items-center justify-start">
                             <span>{item[key].label}</span>
                             {item[key].tooltip && (
                               <>
-                                <img
-                                  className="ml-1.5 transition-opacity duration-200 group-hover:opacity-0"
-                                  src={tooltipSvg}
-                                  width={14}
-                                  height={14}
-                                  alt=""
-                                  loading="lazy"
-                                />
-                                <img
-                                  className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                                  src={tooltipHoveredSvg}
-                                  width={14}
-                                  height={14}
-                                  alt=""
-                                  loading="lazy"
-                                />
+                                <span
+                                  data-tooltip-id={`${key}_tooltip_${index}`}
+                                  data-tooltip-html={item[key]?.tooltip}
+                                >
+                                  <img
+                                    className="ml-1.5 transition-opacity duration-200 group-hover:opacity-0"
+                                    src={tooltipSvg}
+                                    width={14}
+                                    height={14}
+                                    alt=""
+                                    loading="lazy"
+                                  />
+                                  <img
+                                    className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                                    src={tooltipHoveredSvg}
+                                    width={14}
+                                    height={14}
+                                    alt=""
+                                    loading="lazy"
+                                  />
+                                </span>
                                 <Tooltip
                                   className="z-30"
                                   arrowColor="#303236"
