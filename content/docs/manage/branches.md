@@ -187,7 +187,7 @@ To reset a branch to its parent using the API, use the branch restore endpoint, 
 POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
 ```
 
-For details, see [Branch Restore using the API](\docs\guides\branch-restore#how-to-use-branch-restore)
+For details, see [Branch Restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore)
 
 </TabItem>
 

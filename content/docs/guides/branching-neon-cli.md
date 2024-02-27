@@ -102,6 +102,6 @@ Using the CLI, you can restore a branch to an earlier point in its history or an
 neonctl branches restore <target id|name> <source id|name @ timestamp|lsn>
 ```
 
-For full details about the different restore options available with this command, see [Restoring using the CLI](\docs\guides\branch-restore#how-to-use-branch-restore).
+For full details about the different restore options available with this command, see [Restoring using the CLI](/docs/guides/branch-restore#how-to-use-branch-restore).
 
 <NeedHelp/>
