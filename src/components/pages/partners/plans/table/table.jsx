@@ -182,7 +182,7 @@ const Table = () => {
                     return (
                       <li
                         className={clsx(
-                          'relative flex flex-col transition-colors',
+                          'relative flex flex-col transition-colors before:absolute before:-inset-y-px before:-left-5 before:z-0 before:w-5 before:rounded-bl-lg before:rounded-tl-lg before:border-t before:border-dashed before:border-gray-new-20/50',
                           getColumnAlignment(item),
                           isHiddenItems &&
                             'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-20/25',
@@ -195,7 +195,7 @@ const Table = () => {
                           currentRow === index.toString() && !isGroupTitle
                             ? 'bg-gray-new-8 before:opacity-100 lg:bg-transparent'
                             : 'before:opacity-0',
-                          'before:absolute before:-inset-y-px before:-left-5 before:z-0 before:w-5 before:rounded-bl-lg before:rounded-tl-lg before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
+                          'before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
                         )}
                         data-row-id={index}
                         key={index}
@@ -261,7 +261,7 @@ const Table = () => {
                       {typeof item[key] === 'string' && (
                         <>
                           <span
-                            className="flex flex-col font-light leading-snug tracking-tight [&_span]:text-gray-new-70"
+                            className="flex flex-col font-light leading-snug tracking-extra-tight [&_span]:tracking-extra-tight [&_span]:text-gray-new-80"
                             data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
                             data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
                             dangerouslySetInnerHTML={{ __html: item[key] }}
@@ -311,7 +311,9 @@ const Table = () => {
                               </>
                             )}
                           </div>
-                          <span className="text-sm text-gray-new-60">{item[key].description}</span>
+                          <span className="mt-1 text-sm tracking-extra-tight text-gray-new-60">
+                            {item[key].description}
+                          </span>
                         </div>
                       )}
                     </li>

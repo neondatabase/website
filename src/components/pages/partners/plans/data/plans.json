@@ -20,7 +20,6 @@
       "feature": "Features"
     },
     {
-      
       "feature": {
         "title": "Service SLA of 99.99%"
       },
@@ -43,7 +42,6 @@
       "premier": true
     },
     {
-      
       "feature": {
         "title": "Level 1 24/7 support"
       },
@@ -143,7 +141,7 @@
       "feature": {
         "title": "Storage"
       },
-      "standard": "Unlimited <span>$1.35 per GiB</span>",
+      "standard": { "label": "Unlimited", "description": "$1.35 per GiB" },
       "premier": "Unlimited"
     },
     {
@@ -151,8 +149,8 @@
       "feature": {
         "title": "Compute"
       },
-      "standard": "Limited size <span>Max: 8 CU 8 vCPU, 32 GB RAM</span>",
-      "premier": "Larger sizes <span>8+ vCPU, 32+ GB RAM</span>"
+      "standard": { "label": "Limited size", "description": "8 CU 8 vCPU, 32 GB RAM" },
+      "premier": { "label": "Larger sizes", "description": "8+ vCPU, 32+ GB RAM" }
     },
     {
       "rows": "2",
