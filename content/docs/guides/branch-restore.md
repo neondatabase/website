@@ -213,14 +213,14 @@ This endpoint initiates a branch restore operation based on the provided request
 In the following example, we are restoring branch `br-twilight-river-31791249` to an earlier point in time, `2024-02-27T00:00:00Z`, with a new backup branch named `backup-before-restore`. Note that the branch id in the `url` matches the value for `source_branch_id`.
 
 ```bash shouldWrap
-curl --request POST \
-     --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-twilight-river-31791249/restore \ // [!code word:br-twilight-river-31791249]
+curl --request POST \ // [!code word:br-twilight-river-31791249]
+     --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-twilight-river-31791249/restore \
      --header 'Accept: application/json' \
      --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {
-  "source_branch_id": "br-twilight-river-31791249", // [!code word:br-twilight-river-31791249]
+  "source_branch_id": "br-twilight-river-31791249",
   "source_timestamp": "2024-02-27T00:00:00Z",
   "preserve_under_name": "backup-before-restore"
 }
