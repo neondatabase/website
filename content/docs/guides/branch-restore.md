@@ -187,7 +187,7 @@ To restore a branch using the API, use the endpoint:
 POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
 ```
 
-This endpoint initiates a branch restore operation based on the provided request parameters:
+This endpoint lets you restore a branch using the following request parameters:
 
 | Parameter              | Type     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |------------------------|----------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
