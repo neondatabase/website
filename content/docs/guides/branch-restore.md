@@ -186,27 +186,18 @@ POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
 
 This endpoint initiates a branch restore operation based on the provided request parameters:
 
-- **source_branch_id**: `string` (required)  
-  The ID of the branch you want to restore from.
-  
-  To restore to the latest data (head), omit `source_timestamp` and `source_lsn`.
-  
-  To restore a branch to its own history (`source_branch_id` equals branch's own Id), you must include:
-  
-  - A time period: `source_timestamp` or `source_lsn`
-  - A backup branch: `preserve_under_name`
+| Parameter              | Type     | Required | Description                                                                                                                                                                                                                                                                                                                                                           |
+|------------------------|----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **source_branch_id**   | `string` | Yes      | The ID of the branch you want to restore from. To restore to the latest data (head), omit `source_timestamp` and `source_lsn`. To restore a branch to its own history (`source_branch_id` equals branch's own Id), you must include: 
 
-- **source_lsn**: `string` (optional)  
-  A Log Sequence Number (LSN) on the source branch. The branch will be restored with data up to this LSN.
+- A time period: `source_timestamp` or `source_lsn`
+- A backup branch: `preserve_under_name`                                           |
+| **source_lsn**         | `string` | No       | A Log Sequence Number (LSN) on the source branch. The branch will be restored with data up to this LSN.                                                                                                                                                                                                                                                               |
+| **source_timestamp**   | `string` | No       | A timestamp indicating the point in time on the source branch to restore from. Use ISO 8601 format for the date-time string.                                                                                                                                                                                                                                          |
+| **preserve_under_name**| `string` | No       | If specified, a backup is created: the latest version of the branch's state is preserved under a new branch using the specified name. This field is required if:
 
-- **source_timestamp**: `string` (optional)  
-  A timestamp indicating the point in time on the source branch to restore from. Use ISO 8601 format for the date-time string.
-
-- **preserve_under_name**: `string` (optional)  
-  If specified, a backup is created: the latest version of the branch's state is preserved under a new branch using the specified name. This field is required if:
-
-  - The branch has children. All child branches will be moved to the newly created branch.
-  - You are restoring a branch to its own history ( `source_branch_id` equals the branch's own ID).
+- The branch has children. All child branches will be moved to the newly created branch.
+- You are restoring a branch to its own history (`source_branch_id` equals the branch's own ID).                   |
 
 #### Restoring a branch to its own history
 
