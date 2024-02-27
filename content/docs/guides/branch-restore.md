@@ -261,8 +261,6 @@ curl --request POST \
 ' | jq
 ```
 
-</details>
-
 </TabItem>
 </Tabs>
 
