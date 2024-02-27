@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2024-02-09T17:53:20.588Z'
+updatedOn: '2024-02-27T20:16:54.561Z'
 ---
 
 Neon is a fully managed serverless Postgres with a [generous free tier](https://console.neon.tech). Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
