@@ -256,7 +256,7 @@ curl --request POST \ // [!code word:br-damp-smoke-91135977]
      --data '
 { 
   "source_branch_id": "br-jolly-star-07007859", 
-   [!code word:2024-02-26T12:00:00Z] "source_timestamp": "2024-02-26T12:00:00Z"
+  "source_timestamp": "2024-02-26T12:00:00Z"
 }
 ' | jq
 ```
