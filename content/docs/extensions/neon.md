@@ -4,7 +4,7 @@ enableTableOfContents: true
 updatedOn: '2024-02-08T15:20:54.277Z'
 ---
 
-The `neon` extension includes functions and views designed to gather Neon-specific metrics. Currently, the `neon` extension includes a single user-accessible view that shows local file cache statistics.  
+The `neon` extension provides functions and views designed to gather Neon-specific metrics. Currently, the `neon` extension includes a single user-accessible view that shows local file cache statistics.  
 
 ## The neon_stat_file_cache view
 
@@ -14,20 +14,20 @@ Neon computes use a local file cache to extend Postgres shared buffers memory to
 - `file_cache_hits`: The number of times requested data was found in the local file cache.
 - `file_cache_used`: The number of times the local file cache was used.
 - `file_cache_writes`: The number of writes to the local file cache.
-- `file_cache_hit_ratio`: The cache hit ratio for the local file cache. The file cache hit ratio is calculated as follows:
+- `file_cache_hit_ratio`: The cache hit ratio for the local file cache. The file cache hit ratio is calculated according to the following formula:
 
 
 \[ \text{File Cache Hit Ratio} = \left( \frac{\text{File Cache Hits}}{\text{File Cache Hits} + \text{File Cache Misses}} \right) \times 100 \]
 
 The cache hit ratio is useful for determining the percentage of requests served from memory rather than disk. For better query performance, frequently accessed data should reside in memory. Generally, you should aim for a cache hit ratio of 99% or better.
 
-To use the 
+To use the `neon_stat_file_cache` view, install the `neon` extension:
 
 ```sql
 CREATE EXTENSION neon;
 ```
 
-The output looks like the following:
+Issue the following query to view the local file cache usage data:
 
 ```sql
 SELECT * FROM neon.neon_stat_file_cache;
@@ -37,19 +37,13 @@ SELECT * FROM neon.neon_stat_file_cache;
 (1 row)
 ```
 
-## The neon_stat_file_cache view
-
-The `neon_stat_file_cache` view 
-
-
-
 ## Views for Neon internal use
 
-Neon also installs the `neon` extension to a `postgres` database in each Neon project by default. 
+The `neon` extension is installed to a system-owned `postgres` database in each Neon project by default. 
 
-There are two views owned by a Neon system role (`cloud_admin`) as shown below, which are used to collect local file cache statistics. The metrics are intended for use by the Neon team for the purpose of enhancing our service. The views are currently not user-accessible.
+There are two views owned by a Neon system role (`cloud_admin`) as shown below, which are used to collect local file cache statistics. The metrics are used by the Neon team for the purpose of enhancing the Neon service. The views are currently not user-accessible.
 
-```bash shouldWrap
+```bash
 postgres=> \dv neon.*
             List of relations
 Schema |      Name      | Type |    Owner    
