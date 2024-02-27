@@ -193,6 +193,16 @@ For details, see [Branch Restore using the API](\docs\guides\branch-restore#how-
 
 </Tabs>
 
+## Restore a branch to its own or another branch's history
+
+There are several restore operations available using Neon's Branch Restore feature:
+
+- Restore a branch to its own history
+- Restore a branch to the head of another branch
+- Restore a branch to the history of another branch
+
+You can use the Neon Console, CLI, or API. For more detail, see [Branch Restore](/docs/guide/branch-restore).
+
 ## Delete a branch
 
 Deleting a branch is a permanent action. Deleting a branch also deletes the databases and roles that belong to the branch as well as the compute endpoint associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
@@ -462,5 +472,6 @@ The response body shows information about the branch being deleted and the `susp
 </details>
 
 You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches-with-the-api). The deleted branch should no longer be listed.
+
 
 <NeedHelp/>
