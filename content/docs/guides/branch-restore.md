@@ -252,10 +252,10 @@ curl --request POST \ // [!code word:br-twilight-river-31791249]
      --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-damp-smoke-91135977/restore \
      --header 'Accept: application/json' \
      --header "Authorization: Bearer $NEON_API_KEY" \
-     --header 'Content-Type: application/json' \ //  [!code word:bbr-jolly-star-07007859] 
+     --header 'Content-Type: application/json' \ //  [!code word:br-jolly-star-07007859] 
      --data '
 { 
-  "source_branch_id": "br-jolly-star-07007859", // [!code word:2024-02-26T12:00:00Z]
+  "source_branch_id": "br-jolly-star-07007859", \ // [!code word:2024-02-26T12:00:00Z]
   "source_timestamp": "2024-02-26T12:00:00Z"
 }
 ' | jq
