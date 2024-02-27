@@ -106,7 +106,7 @@ The `neon_utils` extension provides a `num_cpus()` function you can use to monit
 
 The size of your compute determines the amount of memory available to cache your frequently accessed data and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues. 
 
-In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a local file cache to extend the amount of memory allocated to shared buffers to 50% of your compute's RAM. The 50% RAM limit is a guideline rather than an enforced limit, but it's advisable not to exceed this maximum; otherwise, you might encounter out-of-memory errors.
+In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a local file cache to extend your data cache to approximately 50% of your compute's RAM. The 50% RAM limit is a guideline rather than an enforced limit, but it's advisable not to exceed this maximum; otherwise, you might encounter out-of-memory errors.
 
 The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size. Larger computes support higher maximum connection limits.
 
@@ -130,10 +130,23 @@ The following table outlines the vCPU, RAM, `shared_buffer` limit (50 % of RAM),
 Users on paid plans can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
 </Admonition> 
 
-When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set).
+When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your computed based on the working set](#sizing-your-computed-based-on-the-working-set).
 
 Regarding connection limits, you'll want a compute size that can support your anticipated maximum number of concurrent connections. If you are using _Autoscaling_, it is important to remember that your `max_connections` setting is based on the _minimum compute size_ in your autoscaling configuration. The `max_connections` setting does not scale with your compute. To avoid the `max_connections` constraint, you can use a pooled connection with your application, which supports up to 10,000 concurrent user connections. See [Connection pooling](/docs/connect/connection-pooling).
 
+#### Sizing your computed based on the working set
+
+If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is a subset of frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio measures how many queries are served from memory compared to the total number of queries. Queries not served from memory bypass the cache to retrieve data from disk, which can affect query performance. 
+
+For example, if you have 100 queries successfully served from memory, and two queries go to disk, your cache hit ratio is 100/102, which is 98%.
+
+Neon 
+
+If this query does not return a cache hit ratio of 99%, your working set is not fully or adequately in memory. In this case, consider using a larger compute with more memory.
+
+<Admonition type="note">
+The cache hit ratio query is based on statistics that represent the lifetime of your compute instance, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has had time to run. For example, say that you increased your compute size after seeing a cache hit ratio below 99%. Changing the compute size restarts your compute, so you lose all of your current usage statistics. In this case, you should run a representative workload before you try the cache hit ratio query again to see if your cache hit ratio improved.
+</Admonition>
 
 
 #### Autoscaling considerations
