@@ -50,6 +50,14 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/aws-lambda-logo.svg" width="36" height="36" alt="AWS Lambda" href="/docs/guides/aws-lambda" title="Connect from AWS Lambda to Neon" />
 
+<img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Hyperdrive" href="/docs/guides/cloudflare-hyperdrive" title="Use Neon with Cloudflare Hyperdrive" />
+
+<img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Pages" href="/docs/guides/cloudflare-pages" title="Use Neon with Cloudflare Pages" />
+
+<img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Workers" href="/docs/guides/cloudflare-workers" title="Use Neon with Cloudflare Workers" />
+
+<img src="/images/technology-logos/deno-logo.svg" width="36" height="36" alt="Deno Deploy" href="/docs/guides/deno" title="Use Neon with Deno Deploy" />
+
 <img src="/images/technology-logos/django-logo.svg" width="29" height="36" alt="Django" href="/docs/guides/django" title="Connect a Django application to Neon" />
 
 <img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir-ecto" title="Connect from Elixir with Ecto to Neon" />
@@ -67,6 +75,8 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 <img src="/images/technology-logos/grafbase-logo.svg" width="36" height="36" alt="Grafbase" href="/docs/guides/grafbase" title="Use Grafbase Edge Resolvers with Neon" />
 
 <img src="/images/technology-logos/hasura-logo.svg" width="35" height="36" alt="Hasura" href="/docs/guides/hasura" title="Connect from Hasura Cloud to Neon" />
+
+<img src="/images/technology-logos/heroku-logo.svg" width="36" height="36" alt="Heroku" href="/docs/guides/heroku" title="Deploy Your App with Neon Postgres on Heroku" />
 
 <img src="/images/technology-logos/java-logo.svg" width="27" height="36" alt="Java" href="/docs/guides/java" title="Connect a Java application to Neon" />
 
