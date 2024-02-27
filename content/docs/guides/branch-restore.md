@@ -3,6 +3,9 @@ title: Branch Restore
 subtitle: Learn how to revert changes or recover lost data using Neon Branch Restore
   with Time Travel Assist
 enableTableOfContents: true
+redirectFrom:
+ - /docs/guides/brancing-pitr
+ - /docs/guides/branch-refresh
 updatedOn: '2024-02-21T19:34:16.273Z'
 ---
 
