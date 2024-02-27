@@ -16,8 +16,9 @@ Neon computes use a local file cache to extend Postgres shared buffers memory to
 - `file_cache_writes`: The number of writes to the local file cache.
 - `file_cache_hit_ratio`: The cache hit ratio for the local file cache. The file cache hit ratio is calculated according to the following formula:
 
-
-\[ \text{File Cache Hit Ratio} = \left( \frac{\text{File Cache Hits}}{\text{File Cache Hits} + \text{File Cache Misses}} \right) \times 100 \]
+```
+file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100
+```
 
 The cache hit ratio is useful for determining the percentage of requests served from memory rather than disk. For better query performance, frequently accessed data should reside in memory. Generally, you should aim for a cache hit ratio of 99% or better.
 
@@ -41,7 +42,7 @@ SELECT * FROM neon.neon_stat_file_cache;
 
 The `neon` extension is installed to a system-owned `postgres` database in each Neon project by default. 
 
-There are two views owned by a Neon system role (`cloud_admin`) as shown below, which are used to collect local file cache statistics. The metrics are used by the Neon team for the purpose of enhancing the Neon service. The views are currently not user-accessible.
+There are two views owned by a Neon system role (`cloud_admin`) as shown below, which are used to collect local file cache statistics. The metrics are used by the Neon team for the purpose of enhancing the Neon service. The views are not user-visible or accessible.
 
 ```bash
 postgres=> \dv neon.*
