@@ -17,7 +17,7 @@ import tableData from '../data/plans.json';
 
 // Styles to set fixed height for table cells
 const rowClass = {
-  1: 'h-[49px]',
+  1: 'h-[48px]',
   2: 'h-[72px] lg:h-[82px]',
   3: 'h-[94px] lg:h-[90px]',
 };
@@ -42,7 +42,7 @@ const TableHeading = ({
           data-label={label}
         />
         <span
-          className="mt-3 block text-lg leading-snug tracking-tighter [&_span]:text-gray-new-70"
+          className="mt-3 block text-lg font-light leading-snug tracking-extra-tight [&_span]:tracking-extra-tight [&_span]:text-gray-new-70"
           dangerouslySetInnerHTML={{ __html: price }}
         />
         <span className="mt-[18px] block h-10 xl:mt-4 xl:h-9" />
@@ -61,7 +61,7 @@ const TableHeading = ({
         {label}
       </h3>
       <span
-        className="mt-3 block text-lg leading-snug tracking-tighter sm:whitespace-nowrap [&_span]:text-gray-new-70"
+        className="mt-3 block text-lg leading-snug tracking-extra-tight sm:whitespace-nowrap [&_span]:tracking-extra-tight [&_span]:text-gray-new-70"
         dangerouslySetInnerHTML={{ __html: price }}
       />
       <Button
@@ -182,7 +182,7 @@ const Table = () => {
                     return (
                       <li
                         className={clsx(
-                          'relative flex flex-col transition-colors before:absolute before:-inset-y-px before:-left-5 before:z-0 before:w-5 before:rounded-bl-lg before:rounded-tl-lg before:border-t before:border-dashed before:border-gray-new-20/50',
+                          'relative flex flex-col transition-colors',
                           getColumnAlignment(item),
                           isHiddenItems &&
                             'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-20/25',
@@ -195,7 +195,7 @@ const Table = () => {
                           currentRow === index.toString() && !isGroupTitle
                             ? 'bg-gray-new-8 before:opacity-100 lg:bg-transparent'
                             : 'before:opacity-0',
-                          'before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
+                          'before:absolute before:-inset-y-px before:-left-5 before:z-0 before:w-5 before:rounded-bl-lg before:rounded-tl-lg before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
                         )}
                         data-row-id={index}
                         key={index}
@@ -206,7 +206,7 @@ const Table = () => {
                           </span>
                         ) : (
                           <>
-                            <span className="relative w-fit text-lg font-medium leading-snug tracking-tight sm:text-base">
+                            <span className="relative w-fit text-lg leading-snug tracking-extra-tight sm:text-base">
                               {item[key].title}
                               {!!item.soon && (
                                 <span className="relative -top-0.5 ml-4 inline-block rounded-full bg-yellow-70/10 px-2.5 py-[5px] text-[10px] font-semibold uppercase leading-none tracking-wide text-yellow-70 xl:ml-2.5 xl:px-1.5 xl:py-1 xl:text-[8px]">
