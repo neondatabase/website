@@ -4,15 +4,24 @@ enableTableOfContents: true
 updatedOn: '2024-02-08T15:20:54.277Z'
 ---
 
-The `neon` extension includes functions and views designed to gather Neon-specific metrics. Currently, the `neon` extension includes a single user-accessible view showing cache statistics  
+The `neon` extension includes functions and views designed to gather Neon-specific metrics. Currently, the `neon` extension includes a single user-accessible view that shows local file cache statistics.  
 
 ## The neon_stat_file_cache view
 
-Neon computes use a local file cache to extend the amount of memory allocated to shared buffers to 50% of your compute's RAM. 
+Neon computes use a local file cache to extend Postgres shared buffers memory to approximately 50% of your compute's RAM. The `neon_stat_file_cache` view provides information about local file cache usage. The view includes the following columns:
 
-The following example shows how to use the view:
+- `file_cache_misses`: The number of times requested data was not found in the local file cache.
+- `file_cache_hits`: The number of times requested data was found in the local file cache.
+- `file_cache_used`: The number of times the local file cache was used.
+- `file_cache_writes`: The number of writes to the local file cache.
+- `file_cache_hit_ratio`: The cache hit ratio for the local file cache. The file cache hit ratio is calculated as follows:
 
-This view can be used by an end user as follows:
+
+\[ \text{File Cache Hit Ratio} = \left( \frac{\text{File Cache Hits}}{\text{File Cache Hits} + \text{File Cache Misses}} \right) \times 100 \]
+
+The cache hit ratio is useful for determining the percentage of requests served from memory rather than disk. For better query performance, frequently accessed data should reside in memory. Generally, you should aim for a cache hit ratio of 99% or better.
+
+To use the 
 
 ```sql
 CREATE EXTENSION neon;
