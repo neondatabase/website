@@ -195,7 +195,7 @@ Optionally, you can allow unrestricted access to your project's [non-primary bra
 By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
 
 <Admonition type="note">
-Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4).
+Currently, supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses.
 </Admonition>
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
@@ -219,25 +219,25 @@ To configure an allowlist:
 The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
 
 ```bash
-neonctl ip-allow add 192.168.1.1 192.168.1.2
+neonctl ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
 │ Id                  │ Name                │ IP Addresses │ Primary Branch Only │
 ├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
-│ wispy-haze-26469780 │ wispy-haze-26469780 │ 192.168.1.1  │ false               │
-│                     │                     │ 192.168.1.2  │                     │
+│ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
+│                     │                     │ 203.0.113.1  │                     │
 └─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
 ```
 
 To apply an IP allowlist to the primary branch only, use the you can `--primary-only` option:
 
 ```bash
-neonctl ip-allow add 192.168.1.1 --primary-only
+neonctl ip-allow add 203.0.113.1 --primary-only
 ```
 
 To reverse that setting, use `--primary-only false`.
 
 ```bash
-neonctl ip-allow add 192.168.1.1 --primary-only false
+neonctl ip-allow add 203.0.113.1 --primary-only false
 ```
 
 </TabItem>
@@ -259,7 +259,7 @@ curl -X PATCH \
       "allowed_ips": {
         "primary_branch_only": true,
         "ips": [
-          "192.168.1.1", "192.168.1.2"
+          "203.0.113.0", "203.0.113.1"
         ]
       }
     }
@@ -278,34 +278,40 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
 - **Add individual IP addresses**: You can add individual IP addresses that you want to allow. This is useful for granting access to specific users or devices. This example represents a single IP address:
 
   ```text
-  192.168.1.15
+  192.0.2.1
   ```
 
-- **Define IP ranges**: For broader access control, you can define IP ranges. This is useful for allowing access from a company network or a range of known IPs. This example range includes all IP addresses from `192.168.1.20` to `192.168.1.30`: 
+- **Define IP ranges**: For broader access control, you can define IP ranges. This is useful for allowing access from a company network or a range of known IPs. This example range includes all IP addresses from `198.51.100.20` to `198.51.100.50`: 
 
   ```text
-  192.168.1.20-192.168.1.30
+  198.51.100.20-198.51.100.50
   ```
 
 - **Use CIDR notation**: For more advanced control, you can use [CIDR (Classless Inter-Domain Routing) notation](/docs/reference/glossary#cidr-notation). This is a compact way of defining a range of IPs and is useful for larger networks or subnets. Using CIDR notation can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network.
 
-  This CIDR notation example represents all 256 IP addresses from  `192.168.1.0` to `192.168.1.255`. 
+  This CIDR notation example represents all 256 IP addresses from  `203.0.113.0` to `203.0.113.255`. 
 
   ```text
-  192.168.1.0/24
+  203.0.113.0/24
+  ```
+
+- **Use IPv6 addresses**: Neon also supports specifying IPv6 addresses. For example:
+
+  ```text
+  2001:DB8:5432::/48
   ```
 
 A combined example using all three options above, specified as a comma-separated list, would appear similar to the following:
 
   ```text
-  192.168.1.15, 192.168.1.16, 192.168.1.20-192.168.1.30, 192.168.1.0/24S
+  192.0.2.1, 198.51.100.20-198.51.100.50, 203.0.113.0/24, 2001:DB8:5432::/48
   ```
 
-This list combines individual IP addresses, a range of IP addresses, and a CIDR block. It illustrates how different types of IP specifications can be used together in a single allowlist configuration, offering a flexible approach to access control.
+This list combines individual IP addresses, a range of IP addresses, a CIDR block, and an IPv6 address. It illustrates how different types of IP specifications can be used together in a single allowlist configuration, offering a flexible approach to access control.
 
 #### Update an IP Allow configuration
 
-You can update your IP Allow configuration via the Neon Console or API as described in [Configure IP Allow](#configure-ip-allow). Replace the current configuration with the new configuration. For example, if your IP Allow configuration currently allows access from IP address `192.168.1.1`, and you want to extend access to IP address `192.168.1.2`, specify both addresses in your new configuration: `192.168.1.1, 192.168.1.2`. You cannot append values to an existing configuration. You can only replace an existing configuration with a new one.
+You can update your IP Allow configuration via the Neon Console or API as described in [Configure IP Allow](#configure-ip-allow). Replace the current configuration with the new configuration. For example, if your IP Allow configuration currently allows access from IP address `192.0.2.1`, and you want to extend access to IP address `192.0.2.2`, specify both addresses in your new configuration: `192.0.2.1, 192.0.2.2`. You cannot append values to an existing configuration. You can only replace an existing configuration with a new one.
 
 The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](/docs/reference/cli-ip-allow).
 

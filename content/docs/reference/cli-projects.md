@@ -229,7 +229,7 @@ neonctl projects update muddy-wood-859533 --name dev_project_1
 Update the IP allowlist. Multiple values are specified as a list without a delimiter.
 
 ```bash
-neonctl projects update withered-dream-91802149 --ip-allow 192.168.1.1 192.168.1.2 
+neonctl projects update withered-dream-91802149 --ip-allow 192.0.2.1 192.0.2.2 
 ┌─────────────────────────┬───────────┬───────────────┬──────────────────────┐
 │ Id                      │ Name      │ Region Id     │ Created At           │
 ├─────────────────────────┼───────────┼───────────────┼──────────────────────┤
