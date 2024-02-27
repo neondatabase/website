@@ -75,6 +75,7 @@
       "premier": true
     },
     {
+      "rows": "2",
       "feature": {
         "title": "Pricing plan features"
       },
@@ -94,7 +95,7 @@
       "premier": true
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
         "title": "PR"
       },
@@ -114,7 +115,7 @@
       "premier": "Custom"
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
         "title": "Usage"
       },
