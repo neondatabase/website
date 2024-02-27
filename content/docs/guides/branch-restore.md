@@ -180,7 +180,9 @@ For full CLI documentation for `branches restore`, see [branches restore](/docs/
 <TabItem>
 To restore a branch using the API, use the endpoint:
 
-`POST /projects/{project_id}/branches/{branch_id_to_restore}/restore`
+```bash
+POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
+```
 
 This endpoint initiates a branch restore operation based on the provided request parameters:
 
@@ -208,11 +210,11 @@ This endpoint initiates a branch restore operation based on the provided request
 
 #### Restoring a branch to its own history
 
-In the following example, we are restoring branch `br-twilight-river-31791249` to an earlier point in time, `2024-02-27T00:00:00Z`, with a new backup branch named `backup-before-restore`.
+In the following example, we are restoring branch `br-twilight-river-31791249` to an earlier point in time, `2024-02-27T00:00:00Z`, with a new backup branch named `backup-before-restore`. Note that the branch id in the `url` matches the value for `source_branch_id`.
 
 ```bash shouldWrap
 curl --request POST \
-     --url https://console.stage.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-twilight-river-31791249/restore \
+     --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-twilight-river-31791249/restore \
      --header 'Accept: application/json' \
      --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
@@ -224,47 +226,41 @@ curl --request POST \
 }
 ' | jq
 ```
-And here is a sample response:
 
-<details>
-<summary>Response body</summary>
+### Restoring to the latest data from another branch
 
-```json
+In this example, we are restoring a development branch `dev/alex` (branch ID `br-twilight-river-31791249`) to the latest data (head) of its parent branch `br-jolly-star-07007859`. Note that we don't include any time identifier or backup branch name; this is a straight reset of the branch to the head of its parent.
+
+```bash shouldWrap
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-twilight-river-31791249/restore \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
+     --data '
 {
-  "branch": {
-    "id": "br-twilight-river-31791249",
-    "project_id": "floral-disk-86322740",
-    "parent_id": "br-muddy-sun-19285989",
-    "parent_lsn": "0/29954D0",
-    "parent_timestamp": "2024-02-08T02:53:46Z",
-    "name": "dev/alex",
-    "current_state": "ready",
-    "logical_size": 36945920,
-    "creation_source": "console",
-    "primary": false,
-    "cpu_used_sec": 439,
-    "compute_time_seconds": 439,
-    "active_time_seconds": 1660,
-    "written_data_bytes": 120488,
-    "data_transfer_bytes": 14605,
-    "created_at": "2024-02-12T17:30:10Z",
-    "updated_at": "2024-02-27T14:19:08Z",
-    "last_reset_at": "2024-02-27T14:19:08Z"
-  },
-  "operations": [
-    {
-      "id": "3b77cfb7-72d7-4b1f-a0a7-f98d960697a6",
-      "project_id": "floral-disk-86322740",
-      "branch_id": "br-twilight-river-31791249",
-      "action": "create_branch",
-      "status": "running",
-      "failures_count": 0,
-      "created_at": "2024-02-27T14:19:08Z",
-      "updated_at": "2024-02-27T14:19:08Z",
-      "total_duration_ms": 0
-    }
-  ]
+  "source_branch_id": "br-jolly-star-07007859"}
+' | jq
+```
+
+### Restoring to the earlier state of another branch
+
+In this example, we are restoring branch `dev/jordan` (branch ID `br-damp-smoke-91135977`) to branch `dev/alex` (branch ID `br-twilight-river-31791249`) at the point in time of `Feb 26, 2024 12:00:00.000 AM`.
+
+```bash shouldWrap
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-damp-smoke-91135977/restore \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
+     --data '
+{
+  "source_branch_id": "br-jolly-star-07007859",
+  "source_timestamp": "2024-02-26T12:00:00Z"
 }
+' | jq
+```
+
 </details>
 
 </TabItem>
