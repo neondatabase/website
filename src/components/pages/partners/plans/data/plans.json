@@ -131,7 +131,11 @@
       "feature": {
         "title": "Projects"
       },
-      "standard": "Unlimited <span>$4.5 per project</span>",
+      "standard": {
+        "label": "Unlimited",
+        "tooltip": "For custom pricing on projects<br/> exceeding 200, contact us.",
+        "description": "$4.5 per project"
+      },
       "premier": "Unlimited"
     },
     {
