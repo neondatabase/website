@@ -187,7 +187,7 @@ const Table = () => {
                           isHiddenItems &&
                             'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-20/25',
                           isGroupTitle
-                            ? 'pb-3 pt-4 lg:pt-10'
+                            ? 'pb-3 pt-11 lg:pt-10'
                             : ['py-3 lg:py-2.5', rowClass[item.rows]],
                           !isGroupTitle &&
                             !rowsWithGroupTitles.includes(index - 1) &&
@@ -206,7 +206,7 @@ const Table = () => {
                           </span>
                         ) : (
                           <>
-                            <span className="relative w-fit text-lg leading-snug tracking-extra-tight sm:text-base">
+                            <span className="relative w-fit text-lg leading-snug tracking-extra-tight lg:text-base">
                               {item[key].title}
                               {!!item.soon && (
                                 <span className="relative -top-0.5 ml-4 inline-block rounded-full bg-yellow-70/10 px-2.5 py-[5px] text-[10px] font-semibold uppercase leading-none tracking-wide text-yellow-70 xl:ml-2.5 xl:px-1.5 xl:py-1 xl:text-[8px]">
@@ -235,7 +235,7 @@ const Table = () => {
                           'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-20/25',
                         i === 1 && 'pr-12 xl:pr-9 lg:pl-5',
                         rowsWithGroupTitles.includes(index)
-                          ? 'h-[42px] lg:h-[66px]'
+                          ? 'h-[70px] lg:h-[66px]'
                           : ['py-3 lg:py-2.5', rowClass[item.rows]],
                         item[key] !== undefined &&
                           !rowsWithGroupTitles.includes(index - 1) &&
@@ -305,7 +305,7 @@ const Table = () => {
                                   className="z-30"
                                   arrowColor="#303236"
                                   id={`${key}_tooltip_${index}`}
-                                  place="top-start"
+                                  place="right"
                                   style={{ backgroundColor: '#303236', color: '#fff' }}
                                 />
                               </>

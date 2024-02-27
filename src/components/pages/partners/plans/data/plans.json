@@ -16,7 +16,6 @@
   },
   "cols": [
     {
-      "rows": "1",
       "feature": "Features"
     },
     {
@@ -76,7 +75,7 @@
       "premier": true
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Pricing plan features"
       },
@@ -84,7 +83,7 @@
       "premier": "<p class='with-link-primary'>All <a href='/docs/introduction/plans#enterprise'>Enterprise</a> features</p>"
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": "Marketing"
     },
     {
@@ -96,7 +95,7 @@
       "premier": true
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "PR"
       },
@@ -116,7 +115,7 @@
       "premier": "Custom"
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Usage"
       },
@@ -124,7 +123,7 @@
       "premier": "Custom"
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": "Consumption"
     },
     {
@@ -156,7 +155,7 @@
       "premier": { "label": "Larger sizes", "description": "8+ vCPU, 32+ GB RAM" }
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Branches"
       },

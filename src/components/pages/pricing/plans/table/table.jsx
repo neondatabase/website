@@ -189,7 +189,7 @@ const Table = () => {
                           isHiddenItems &&
                             'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-20/25',
                           isGroupTitle
-                            ? 'pb-3 pt-11 lg:pt-10'
+                            ? 'pb-3 pt-11 lg:pt-[42px]'
                             : ['py-3 lg:py-2.5', rowClass[item.rows]],
                           !isGroupTitle &&
                             !rowsWithGroupTitles.includes(index - 1) &&
@@ -203,12 +203,12 @@ const Table = () => {
                         key={index}
                       >
                         {isGroupTitle ? (
-                          <span className="text-sm font-medium uppercase leading-none tracking-wide text-yellow-70">
+                          <span className="whitespace-nowrap text-sm font-medium uppercase leading-none tracking-wide text-yellow-70 lg:text-xs">
                             {item[key]}
                           </span>
                         ) : (
                           <>
-                            <span className="relative w-fit text-lg leading-tight tracking-extra-tight">
+                            <span className="relative w-fit text-lg leading-tight tracking-extra-tight lg:text-base">
                               {item[key].title}
                               {!!item.soon && (
                                 <span className="relative -top-0.5 ml-4 inline-block rounded-full bg-yellow-70/10 px-2.5 py-[5px] text-[10px] font-semibold uppercase leading-none tracking-wide text-yellow-70 xl:ml-2.5 xl:px-1.5 xl:py-1 xl:text-[8px]">

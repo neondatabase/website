@@ -21,7 +21,7 @@
     },
     "enterprise": {
       "label": "Enterprise",
-      "price": "Сustom rates",
+      "price": "<span>Custom rates</span>",
       "buttonUrl": "/enterprise#request-trial",
       "buttonText": "Request trial"
     }
