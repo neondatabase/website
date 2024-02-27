@@ -74,6 +74,7 @@ const PartnersPage = () => (
       description="At Neon, we deeply value our partners and believe they are vital to our mission of
             making Serverless Postgres the go-to choice for developers everywhere."
       items={items}
+      isGradientLabel
     />
     <Testimonial
       className="mt-[200px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"

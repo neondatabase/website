@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { InlineWidget } from 'react-calendly';
 
 import Container from 'components/shared/container';
+import GradientLabel from 'components/shared/gradient-label';
 import useHubspotForm from 'hooks/use-hubspot-form';
 
 import 'styles/hubspot-form.css';
@@ -70,9 +71,7 @@ const Apply = () => {
       <Container className="grid-gap-x grid grid-cols-12" size="medium">
         <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 xl:col-span-full xl:col-start-1 xl:grid-cols-12">
           <div className="col-span-5 lg:col-span-full lg:text-center">
-            <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green-45">
-              Apply now
-            </span>
+            <GradientLabel className="inline-block">Apply now</GradientLabel>
             <h2 className="mt-3 text-5xl font-medium leading-none tracking-[-0.02em] xl:text-[44px] lg:text-4xl md:text-[32px]">
               Become a Partner
             </h2>

@@ -49,7 +49,7 @@ const TableHeading = ({
   }
 
   return (
-    <div className={clsx('relative z-10', isFeaturedPlan && 'px-[52px] xl:px-[38px]', className)}>
+    <div className={clsx('relative z-10', className)}>
       <h3
         className={clsx(
           isFeaturedPlan && 'text-green-45',
@@ -59,7 +59,7 @@ const TableHeading = ({
         {label}
       </h3>
       <span
-        className="mt-3 block text-lg leading-snug tracking-tighter [&_span]:text-gray-new-70"
+        className="mt-3 block text-lg leading-snug tracking-tighter sm:whitespace-nowrap [&_span]:text-gray-new-70"
         dangerouslySetInnerHTML={{ __html: price }}
       />
       <Button
@@ -143,15 +143,16 @@ const Table = () => {
   );
 
   return (
-    <div className="mx-auto mt-12 flex max-w-[960px] flex-col xl:px-10 lg:pl-8 lg:pr-0 md:max-w-none md:pl-4">
+    <div className="mx-auto mt-12 flex max-w-[1220px] flex-col xl:px-10 lg:pl-8 lg:pr-0 md:max-w-none md:pl-4">
       <ul
         className={clsx(
-          'scrollbar-hidden relative flex w-full pt-5 lg:overflow-x-auto lg:pr-4',
+          'scrollbar-hidden relative flex w-full pt-3 lg:overflow-x-auto lg:pr-4',
           isHiddenItems &&
             'after:absolute after:inset-x-0 after:bottom-0 after:h-1.5 after:bg-black-new'
         )}
       >
         {Object.keys(tableData.headings).map((key, i, arr) => {
+          const isFeaturedPlan = key === 'premier';
           const isLabelsColumn = i === 0;
 
           return (
@@ -160,14 +161,15 @@ const Table = () => {
                 'relative py-5 xl:py-4',
                 isLabelsColumn &&
                   'z-30 flex-1 bg-black-new lg:sticky lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] sm:min-w-[160px]',
-                i === 1 && 'min-w-[180px] basis-[352px] xl:basis-[296px] lg:basis-[380px]',
-                i !== 1 && !isLabelsColumn && 'min-w-[160px] basis-[304px] xl:basis-[260px]'
+                i === 1 && 'min-w-[180px] basis-[338px] xl:basis-[296px] lg:basis-[280px]',
+                i !== 1 && !isLabelsColumn && 'min-w-[160px] basis-[252px] xl:basis-[260px]'
               )}
               key={key}
             >
               <TableHeading
                 className={clsx(i === 1 && 'lg:pl-5')}
                 isLabelsColumn={isLabelsColumn}
+                isFeaturedPlan={isFeaturedPlan}
                 {...labelList[isLabelsColumn ? arr[1] : key]}
               />
               <ul className="relative z-10 flex w-full grow flex-col">
@@ -182,7 +184,7 @@ const Table = () => {
                           isHiddenItems &&
                             'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-20/25',
                           isGroupTitle
-                            ? 'pb-3 pt-11 lg:pt-10'
+                            ? 'pb-3 pt-4 lg:pt-10'
                             : ['py-3 lg:py-2.5', rowClass[item.rows]],
                           !isGroupTitle &&
                             !rowsWithGroupTitles.includes(index - 1) &&
@@ -201,7 +203,7 @@ const Table = () => {
                           </span>
                         ) : (
                           <>
-                            <span className="relative w-fit text-lg font-medium leading-snug tracking-tight">
+                            <span className="relative w-fit text-lg font-medium leading-snug tracking-tight sm:text-base">
                               {item[key].title}
                               {!!item.soon && (
                                 <span className="relative -top-0.5 ml-4 inline-block rounded-full bg-yellow-70/10 px-2.5 py-[5px] text-[10px] font-semibold uppercase leading-none tracking-wide text-yellow-70 xl:ml-2.5 xl:px-1.5 xl:py-1 xl:text-[8px]">
@@ -230,7 +232,7 @@ const Table = () => {
                           'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-20/25',
                         i === 1 && 'pr-12 xl:pr-9 lg:pl-5',
                         rowsWithGroupTitles.includes(index)
-                          ? 'h-[70px] lg:h-[66px]'
+                          ? 'h-[42px] lg:h-[66px]'
                           : ['py-3 lg:py-2.5', rowClass[item.rows]],
                         item[key] !== undefined &&
                           !rowsWithGroupTitles.includes(index - 1) &&
@@ -271,29 +273,6 @@ const Table = () => {
                   );
                 })}
               </ul>
-              {i > 0 && !isHiddenItems && (
-                <Button
-                  className={clsx(
-                    i === 1 && 'lg:ml-5',
-                    'relative z-20 mt-8 h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-6 xl:h-9 xl:max-w-[200px] lg:w-[160px] sm:w-[150px] sm:max-w-none'
-                  )}
-                  size="xs"
-                  theme="gray-15"
-                  to={labelList[key].buttonUrl}
-                  onClick={() => {
-                    sendGtagEvent('partner_comparison_table', {
-                      event_label: labelList[key].label,
-                      event_position: 'bottom',
-                    });
-                    sendSegmentEvent('partner_comparison_table', {
-                      event_label: labelList[key].label,
-                      event_position: 'bottom',
-                    });
-                  }}
-                >
-                  {labelList[key].buttonText}
-                </Button>
-              )}
             </li>
           );
         })}
