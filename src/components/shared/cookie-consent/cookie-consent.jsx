@@ -63,8 +63,14 @@ const CookieConsent = ({}) => {
   }, []);
 
   return visualState === 'visible' ? (
-    <div className="fixed bottom-4 left-4 z-50 flex max-w-md items-center gap-4 rounded-[10px] border border-gray-new-30 bg-gray-new-15 px-6 py-4 text-white shadow-md">
-      <p>We use third-party cookies in order to personalize your site experience.</p>
+    <div className="fixed bottom-4 left-4 z-50 flex max-w-[590px] items-center gap-4 rounded-[10px] border border-gray-new-30 bg-gray-new-15 px-6 py-4 text-white shadow-md">
+      <p className="text-sm">
+        We use cookies to improve your website experience. Click Accept to agree to the{' '}
+        <Link to={LINKS.cookiePolicy} className="underline">
+          Cookie Policy
+        </Link>
+        .
+      </p>
       <Button className="h-9" size="xxs" theme="white-outline" onClick={expandBanner}>
         Customize
       </Button>
@@ -76,9 +82,8 @@ const CookieConsent = ({}) => {
     <>
       <div className="fixed bottom-4 left-4 z-50 flex w-full max-w-md flex-col gap-4 rounded-[10px] border border-gray-new-30 bg-gray-new-15 px-6 py-4 text-white shadow-md">
         <span className="text-xl font-bold">Cookie Settings</span>
-        <p className="mb-4">
-          We use cookies to collect analytics and provide personalized content. You can read the
-          details in our{' '}
+        <p className="mb-4 text-sm">
+          We use cookies to improve your website experience. Click Accept to agree to the{' '}
           <Link to={LINKS.cookiePolicy} className="underline">
             Cookie Policy
           </Link>
