@@ -4,11 +4,18 @@ enableTableOfContents: true
 updatedOn: '2024-02-08T15:20:54.277Z'
 ---
 
-With each Neon project, Neon creates  a "neon" extension, which includes functions and views designed to gather Neon-specific metrics. The metrics are intended for use by the Neon team for the purpose of enhancing our service. The views are owned by a Neon system role (`cloud_admin`), but you are able to view them by connecting to the `postgres` database using `psql` and executing the command `\dv neon.*`, as shown below. At present, the extension includes two views for local file cache metrics. We may incorporate additional views in future releases.
+The `neon` extension includes functions and views designed to gather Neon-specific metrics. 
+
+## 
+
+
+## Views for Neon internal use
+
+Neon also installs the `neon` extension to a `postgres` database in each Neon project by default. 
+
+There are two views owned by a Neon system role (`cloud_admin`) as shown below, which are used to collect local file cache statistics. The metrics are intended for use by the Neon team for the purpose of enhancing our service. The views are currently not user-accessible.
 
 ```bash shouldWrap
-psql 'postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require'
-
 postgres=> \dv neon.*
             List of relations
 Schema |      Name      | Type |    Owner    
