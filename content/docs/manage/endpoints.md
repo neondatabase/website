@@ -146,7 +146,7 @@ To use the `neon_stat_file_cache` view, you must first install the `neon` extens
 CREATE EXTENSION neon;
 ```
 
-After installign the extension and allowing time for data to be gathered, you can issue the following query to view local file cache usage data:
+After installing the extension and allowing time for data to be gathered, you can issue the following query to view local file cache usage data:
 
 ```sql
 SELECT * FROM neon.neon_stat_file_cache;
