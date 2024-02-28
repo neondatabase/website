@@ -34,13 +34,6 @@ const RootLayout = ({ children }) => (
       <link rel="preconnect" href="https://console.neon.tech" />
     </head>
     <body>
-      {process.env.NODE_ENV === 'production' && (
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJLTK6F" height="0" width="0" style="display: none; visibility: hidden" aria-hidden="true"></iframe>`,
-          }}
-        />
-      )}
       <ThemeProvider>
         <TopBar />
         {children}
