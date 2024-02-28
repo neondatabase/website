@@ -41,10 +41,10 @@ export default async function BlogPage() {
       <FeaturedPostsList posts={featuredPosts} />
       <PostsList title="Community" posts={communityFeaturedPosts} alignment="right" />
       <PostsList title="Postgres" posts={postgresFeaturedPosts} alignment="left" />
-      <ChangelogList items={featuredChangelogPosts} />
+      <VideoList videos={videos} />
       <PostsList title="AI" posts={aiFeaturedPosts} alignment="right" />
       <PostsList title="Company" posts={companyFeaturedPosts} alignment="left" />
-      <VideoList videos={videos} />
+      <ChangelogList items={featuredChangelogPosts} />
       <SubscribeForm size="md" dataTest="blog-subscribe-form" />
       <AppearanceEngineering
         appearancesPosts={appearances}
