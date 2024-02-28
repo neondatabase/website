@@ -4,7 +4,7 @@ enableTableOfContents: true
 updatedOn: '2024-02-08T15:20:54.277Z'
 ---
 
-The `neon` extension provides functions and views designed to gather Neon-specific metrics.  
+The `neon` extension provides functions and views designed to gather Neon-specific metrics.
 
 ## The `neon_stat_file_cache` view
 
