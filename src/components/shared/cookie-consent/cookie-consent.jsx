@@ -12,17 +12,17 @@ const CookieConsent = ({}) => {
   const [visible, setVisible] = useState(false);
 
   const consentAll = () => {
-    if (zaraz && zaraz.consent) {
-      zaraz.consent.setAll(true);
-      zaraz.consent.sendQueuedEvents();
+    if (window.zaraz && window.zaraz.consent) {
+      window.zaraz.consent.setAll(true);
+      window.zaraz.consent.sendQueuedEvents();
     }
     sendGtagEvent('cookie_consent', { action: 'accept_all' });
     setVisible(false);
   };
 
   const rejectAll = () => {
-    if (zaraz && zaraz.consent) {
-      zaraz.consent.setAll(false);
+    if (window.zaraz && window.zaraz.consent) {
+      window.zaraz.consent.setAll(false);
     }
     sendGtagEvent('cookie_consent', { action: 'reject_all' });
     setVisible(false);

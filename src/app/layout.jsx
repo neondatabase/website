@@ -18,7 +18,9 @@ export const preferredRegion = 'edge';
 const RootLayout = ({ children }) => (
   <html lang="en">
     <head>
-      <Script strategy="afterInteractive" src="https://neondata.cloud/cb.js" />
+      {process.env.NODE_ENV === 'production' && (
+        <Script strategy="afterInteractive" src="https://neonapi.io/cb.js" />
+      )}
       {fontsPaths.map((fontPath, index) => (
         <link
           rel="preload"
