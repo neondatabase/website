@@ -35,20 +35,26 @@ const CookieConsent = ({}) => {
   }, []);
 
   return visible ? (
-    <div className="fixed bottom-4 left-4 z-50 flex max-w-[510px] items-end  gap-4 rounded-[10px] border border-gray-new-30 bg-gray-new-15 px-6 py-4 text-white shadow-md">
-      <p className="text-sm">
+    <div className="fixed bottom-4 left-4 z-50 flex max-w-[560px] items-end gap-x-10 rounded-[10px] border border-gray-2 bg-gray-1 px-6 py-5 text-white md:right-4 sm:flex-col sm:items-start sm:gap-y-4">
+      <p>
         We use first-party cookies to improve our services. Learn more at{' '}
-        <Link to={LINKS.cookiePolicy} className="underline">
+        <Link
+          className="whitespace-nowrap underline-offset-[3px]"
+          theme="green-underlined"
+          to={LINKS.cookiePolicy}
+        >
           Cookie Policy
         </Link>
         .
       </p>
-      <Button className="h-9" size="xxs" theme="gray-dark-outline" onClick={rejectAll}>
-        Opt Out
-      </Button>
-      <Button className="h-9" size="xxs" theme="quaternary" onClick={consentAll}>
-        Accept
-      </Button>
+      <div className="flex gap-x-3">
+        <Button className="h-9" size="xxs" theme="gray-2-outline" onClick={rejectAll}>
+          Opt Out
+        </Button>
+        <Button className="h-9" size="xxs" theme="white-filled" onClick={consentAll}>
+          Accept
+        </Button>
+      </div>
     </div>
   ) : (
     <></>
@@ -56,5 +62,3 @@ const CookieConsent = ({}) => {
 };
 
 export default CookieConsent;
-
-CookieConsent.propTypes = {};
