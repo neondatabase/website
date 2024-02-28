@@ -151,7 +151,7 @@
       "feature": {
         "title": "Compute"
       },
-      "standard": { "label": "Limited size", "description": "8 CU 8 vCPU, 32 GB RAM" },
+      "standard": { "label": "Limited size","tooltip": "at $0.036 per 0.25 vCPU 1 GiB RAM", "description": "8 CU 8 vCPU, 32 GB RAM" },
       "premier": { "label": "Larger sizes", "description": "8+ vCPU, 32+ GB RAM" }
     },
     {
