@@ -136,7 +136,7 @@ Regarding connection limits, you'll want a compute size that can support your an
 
 #### Sizing your computed based on the working set
 
-If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory compared to the total number of queries. Queries not served from memory bypass the cache to retrieve data from disk, which can affect query performance. 
+If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from Neon's storage, which can affect query performance. 
 
 As mentioned above, Neon computes use a local file cache to extend Postgres shared buffers. To query the cache hit ratio for your compute's local file cache, Neon provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view.
 
