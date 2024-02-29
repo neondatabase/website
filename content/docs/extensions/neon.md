@@ -20,7 +20,7 @@ To speed up data retrieval, Neon computes include a dedicated Local File Cache (
     file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100
     ```
 
-    You can use the cache hit ratio as a measure of requests served from memory rather than Neon's storage layer. For better query performance, frequently accessed data should reside in memory. Generally, for OLTP workloads you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio can depend on the specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a significant amount of sequential scanning of large tables where caching might be less effective.
+    In general, you want a high cache hit ratio. It means more of your requests are served directly from memory rather than the slower storage layer. For OLTP workloads, you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio can depend on your specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a lot of sequential scanning of large tables where caching might be less effective.
 
 ### Using the `neon_stat_file_cache` view
 
