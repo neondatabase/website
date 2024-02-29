@@ -14,7 +14,7 @@ To speed up data retrieval, Neon computes include a dedicated Local File Cache (
 - `file_cache_hits`: The number of times requested data was successfully found in the Local File Cache. A higher number indicates better performance where data is found in the cache versus the slower storage layer.
 - `file_cache_used`: The number of times the local file cache was used.
 - `file_cache_writes`: The number of writes to the local file cache. A higher number means more active data caching, which is important for keeping the cache up-to-date with recent changes.
-- `file_cache_hit_ratio`: The cache hit ratio for the local file cache. The file cache hit ratio is calculated according to the following formula:
+- `file_cache_hit_ratio`: Measures the effectiveness of the Local File Cache by comparing the number of hits to the total access attempts (hits plus misses) as calculated using the following formula:```
 
     ```
     file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100
