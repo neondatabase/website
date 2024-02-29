@@ -106,7 +106,7 @@ The `neon_utils` extension provides a `num_cpus()` function you can use to monit
 
 The size of your compute determines the amount of frequently accessed data you can cache in memory and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues. 
 
-In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a local file cache to extend the amount of memory available for caching data. The local file cache can use up to 50% of your compute's RAM. The 50% RAM limit is a guideline rather than an enforced limit, but it's advisable not to exceed this maximum; otherwise, you might encounter out-of-memory errors.
+In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a local file cache to extend the amount of memory available for caching data. The Local File Cache can use up to 50% of your compute's RAM. The 50% RAM limit is a guideline rather than an enforced limit, but it's advisable not to exceed this maximum; otherwise, you might encounter out-of-memory errors.
 
 The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size. Larger computes support higher maximum connection limits.
 
