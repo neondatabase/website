@@ -48,6 +48,8 @@
       slug: introduction/status
     - title: Monitoring
       slug: introduction/monitoring
+- title: Database workflow
+  slug: workflow/quickstart
 - title: Get started
   items:
     - title: Sign up
