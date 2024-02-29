@@ -291,6 +291,14 @@ A custom volume-based paid plan offered by Neon that includes support for resale
 
 Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. By default, Neon retains a history of changes for all branches in a project. The supported limits are 24 hours for [Neon Free Tier](/docs/introduction/plans#free-tier) users, 7 days for [Launch](/docs/introduction/plans#launch) plan users, and 30 days for [Scale](/docs/introduction/plans#scale) plan users. For more information about this feature, see [Branching — Point-in-time restore](https://neon.tech/docs/guides/branching-pitr).
 
+## pooled connection string
+
+A pooled connection string in Neon includes a `-pooler` option, which directs your connection to a pooled connection port, where it is able to obtain a connection from a pool of connections. This is an example of a pooled connection:
+
+```text
+
+```
+
 ## PostgreSQL
 
 An open-source relational database management system (RDBMS) emphasizing extensibility and SQL compliance.
