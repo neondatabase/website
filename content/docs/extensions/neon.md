@@ -8,7 +8,7 @@ The `neon` extension provides functions and views designed to gather Neon-specif
 
 ## The `neon_stat_file_cache` view
 
-Neon computes have a local file cache that extends Postgres shared buffers to approximately 50% of your compute's RAM. The `neon_stat_file_cache` view provides the following data about local file cache usage:
+To speed up data retrieval, Neon computes include a dedicated Local File Cache (LFC) that extends Postgres shared buffers to approximately 50% of your compute's RAM. The `neon_stat_file_cache` view gives you insights into how effectively the cache is being used through the following metrics:
 
 - `file_cache_misses`: The number of times requested data was not found in the local file cache.
 - `file_cache_hits`: The number of times requested data was found in the local file cache.
