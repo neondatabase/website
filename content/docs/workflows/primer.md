@@ -1,12 +1,12 @@
 ---
 title: Database workflows
-subtitle: Use this quickstart to learn how you can fold your Postgres database into your development workflow
+subtitle: Use this primer to find out different ways you can integrate your Postgres database into your development workflow
 enableTableOfContents: true
 ---
 
 ## Neon Database Branching
 
-Neon enables you to work with your data just like code with database branching. You can instantly create branches of your data and include them in your workflow.
+With Neon, you can work with your data just like you work with your code. The key is database branching, where you can instantly create branches of your data and include them in your workflow, as many branches as you need.
 
 Neon branches are:
 
@@ -27,30 +27,33 @@ postgres://database_name_owner:AbC123dEf@ep-hidden-hall-a5x58cuv.us-east-2.aws.n
 
 You can create all of your branches from the primary branch or set up a dedicated branch that you use as a base. The former approach is simpler, while the latter provides greater data isolation.
 
-![93.jpg](Neon%20Cookbook%20Marketing%20Page%20c609d68667bf40dfb5559e1e7055140b/93.jpg)
+![database workflow A B](/docs/workflows/database_workflow_AB.jpg)
 
 ### Creating branches
 
 Branches can be created using the [Neon CLI](https://neon.tech/docs/reference/neon-cli). This allows you to create branches without leaving your editor and automate creating them in your CI/CD pipeline. 
 
-- Neon CLI
-    
-    ![Untitled](Neon%20Cookbook%20Marketing%20Page%20c609d68667bf40dfb5559e1e7055140b/Untitled.png)
-    
-    ```bash
-    # Create branch
-    neonctl branches create [options]
-    
-    # Get Connection string
-    neonctl connection-string [branch] [options]
-    
-    # Delete branch
-    neonctl branches delete <id|name> [options]
-    
-    ```
-    
+#### Neon CLI
 
-If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actions for [creating](https://neon.tech/docs/guides/branching-github-actions#create-branch-action) and [deleting branch](https://neon.tech/docs/guides/branching-github-actions#delete-branch-action)es. 
+<InstallCLI/>
+
+And here are the key CLI actions you can use:
+
+```bash
+# Create branch
+neonctl branches create [options]
+    
+# Get Connection string
+neonctl connection-string [branch] [options]
+    
+# Delete branch
+neonctl branches delete <id|name> [options]
+```
+For more information about the CLI, see our [CLI Reference](/docs/reference/neon-cli).
+
+#### GitHub Actions
+
+If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actions for [creating](/docs/guides/branching-github-actions#create-branch-action) and [deleting](/docs/guides/branching-github-actions#delete-branch-action)branches. 
 
 - GitHub Actions
     
@@ -89,39 +92,38 @@ If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actio
           branch: br-long-forest-224191
           api_key: {{ secrets.NEON_API_KEY }}
     ```
-    
-
-Here's how you can integrate Neon branching into your workflow:
 
 ## A branch for every environment
+
+Here's how you can integrate Neon branching into your workflow:
 
 ### Development
 
 You can create a Neon branch for every developer on your team. This ensures that every developer has an isolated environment that includes schemas and data. These branches are meant to be long-lived, so each developer can tailor their branch based on their needs. With Neon's [branch reset capability](https://neon.tech/docs/manage/branches#reset-a-branch-from-parent), developers can refresh their branch anytime with the latest schemas and data.
 
-<aside>
-<img src="https://www.notion.so/icons/info-alternate_gray.svg" alt="https://www.notion.so/icons/info-alternate_gray.svg" width="40px" /> To easily identify branches dedicated to development, we recommend prefixing the branch name with `dev/<developer-name>` or `dev/<feature-name>` if multiple developers collaborate on the same development branch.
+<Annotation type="note">To easily identify branches dedicated to development, we recommend prefixing the branch name with `dev/<developer-name>` or `dev/<feature-name>` if multiple developers collaborate on the same development branch.
 
 Examples: `dev/alice`, `dev/new-onboarding`
-
-</aside>
+</Annotation>
 
 ### Preview Environments
 
 Whenever you create a pull request, you can create a Neon branch for your preview deployment. This allows you to test your code changes and SQL migrations against production-like data.
 
-<aside>
-<img src="https://www.notion.so/icons/info-alternate_gray.svg" alt="https://www.notion.so/icons/info-alternate_gray.svg" width="40px" /> We recommend following the naming convention of `preview/pr-<pull_request_number>-<git-branch-name>` to identify these branches easily.
+![Alt text](database_workflow_AB.jpg)We recommend following the naming convention of `preview/pr-<pull_request_number>-<git-branch-name>` to identify these branches easily.
 
 Example: `preview/pr-123-feat/new-login-screen`
-
-</aside>
+</Annotation>
 
 You can also automate branch creation for every preview. These example applications show how to create Neon branches with GitHub Actions for every preview environment.
 
-[https://github.com/neondatabase/preview-branches-with-fly](https://github.com/neondatabase/preview-branches-with-fly)
+<DetailIconCards>
 
-[https://github.com/neondatabase/preview-branches-with-vercel](https://github.com/neondatabase/preview-branches-with-vercel)
+<a href="https://github.com/neondatabase/preview-branches-with-fly" description="Sample project showing you how to create a branch for every Fly.io preview deployment" icon="fly">Preview branches with Fly.io</a>
+
+<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Sample project showing you how to create a branch for every Vercel preview deployment" icon="vercel">Preview branches with Vercel</a>
+
+</DetailIconCards>
 
 ### Testing
 
@@ -136,6 +138,8 @@ Example: `test/feat/new-login-loginPageFunctionality-1a2b3c4d-20240211T1530`
 
 </aside>
 
-You can create test branches from the same date and time or Log Sequence Number (LSN) for tests requiring static or deterministic data. 
+You can create test branches from the same date and time or Log Sequence Number (LSN) for tests requiring static or deterministic data.
 
-— — —
+### Production
+
+[leave providers out of it, keep generic with dedicated guides later]
