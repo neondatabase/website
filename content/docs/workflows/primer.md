@@ -35,8 +35,6 @@ Branches can be created using the [Neon CLI](https://neon.tech/docs/reference/ne
 
 #### Neon CLI
 
-<InstallCLI/>
-
 And here are the key CLI actions you can use:
 
 ```bash
