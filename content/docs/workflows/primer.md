@@ -138,4 +138,10 @@ You can create test branches from the same date and time or Log Sequence Number 
 
 ### Production
 
+ optimimizing and maintaining your production database Neon
+
 [leave providers out of it, keep generic with dedicated guides later]
+
+- tune your system: autoscaling, autosuspend, ip allow
+- data recovery: restore
+- scale with read-replicas: run read-writes on system but some of your big queries are taking up a lot of compute; segregate your big reads to another system; basically adding more compute capacity; protect your data
