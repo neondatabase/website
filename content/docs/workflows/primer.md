@@ -47,17 +47,18 @@ neonctl connection-string [branch] [options]
 # Delete branch
 neonctl branches delete <id|name> [options]
 ```
+
 For more information about the CLI, see our [CLI Reference](/docs/reference/neon-cli).
 
 #### GitHub Actions
 
-If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actions for [creating](/docs/guides/branching-github-actions#create-branch-action) and [deleting](/docs/guides/branching-github-actions#delete-branch-action)branches. 
+If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actions for [creating](/docs/guides/branching-github-actions#create-branch-action) and [deleting](/docs/guides/branching-github-actions#delete-branch-action)branches.
 
 - GitHub Actions
-    
+
     [Create branch Action](https://github.com/neondatabase/create-branch-action)
-    
-    ```yaml
+
+    ```bash
     name: Create Neon Branch with GitHub Actions Demo
     run-name: Create a Neon Branch 🚀
     jobs:
@@ -72,9 +73,9 @@ If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actio
       - run: echo project_id ${{ steps.create-branch.outputs.project_id}}
       - run: echo branch_id ${{ steps.create-branch.outputs.branch_id}}
     ```
-    
+
     [Delete branch Action](https://github.com/neondatabase/delete-branch-action)
-    
+
     ```yaml
     name: Delete Neon Branch with GitHub Actions
     run-name: Delete a Neon Branch 🚀
@@ -103,12 +104,11 @@ To easily identify branches dedicated to development, we recommend prefixing the
 
 Examples: `dev/alice`, `dev/new-onboarding`
 
-
 ### Preview Environments
 
 Whenever you create a pull request, you can create a Neon branch for your preview deployment. This allows you to test your code changes and SQL migrations against production-like data.
 
-![Alt text](/docs/workflows/database_workflow_AB.jpg)
+
 
 We recommend following the naming convention of `preview/pr-[pull_request_number]-[git_branch_name]` to identify these branches easily.
 
