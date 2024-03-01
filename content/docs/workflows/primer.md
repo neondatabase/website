@@ -108,7 +108,7 @@ Examples: `dev/alice`, `dev/new-onboarding`
 
 Whenever you create a pull request, you can create a Neon branch for your preview deployment. This allows you to test your code changes and SQL migrations against production-like data.
 
-
+![Alt text](/docs/workflows/database_workflow_AB.jpg)
 
 We recommend following the naming convention of `preview/pr-[pull_request_number]-[git_branch_name]` to identify these branches easily.
 
@@ -118,9 +118,9 @@ You can also automate branch creation for every preview. These example applicati
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/preview-branches-with-fly" description="Sample project showing you how to create a branch for every Fly.io preview deployment" icon="fly">Preview branches with Fly.io</a>
+<a href="https://github.com/neondatabase/preview-branches-with-fly" description="Sample project showing you how to create a branch for every Fly.io preview deployment" icon="github">Preview branches with Fly.io</a>
 
-<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Sample project showing you how to create a branch for every Vercel preview deployment" icon="vercel">Preview branches with Vercel</a>
+<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Sample project showing you how to create a branch for every Vercel preview deployment" icon="github">Preview branches with Vercel</a>
 
 </DetailIconCards>
 
