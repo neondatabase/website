@@ -114,9 +114,10 @@ Whenever you create a pull request, you can create a Neon branch for your previe
 
 ![database workflow A B](/docs/workflows/database_workflow_AB.jpg)
 
-We recommend following the naming convention of `preview/pr-[pull_request_number]-[git_branch_name]` to identify these branches easily.
+<Admonition type="note">We recommend following the naming convention of `preview/pr-<pull-request-number>-[git_branch_name]` to identify these branches easily.
 
 Example: `preview/pr-123-feat/new-login-screen`
+</Admonition>
 
 You can also automate branch creation for every preview. These example applications show how to create Neon branches with GitHub Actions for every preview environment.
 
