@@ -35,6 +35,8 @@ Branches can be created using the [Neon CLI](https://neon.tech/docs/reference/ne
 
 #### Neon CLI
 
+<InstallCLI/>
+
 And here are the key CLI actions you can use:
 
 ```bash
@@ -108,7 +110,7 @@ Examples: `dev/alice`, `dev/new-onboarding`
 
 Whenever you create a pull request, you can create a Neon branch for your preview deployment. This allows you to test your code changes and SQL migrations against production-like data.
 
-![Alt text](/docs/workflows/database_workflow_AB.jpg)
+![database workflow A B](/docs/workflows/database_workflow_AB.jpg)
 
 We recommend following the naming convention of `preview/pr-[pull_request_number]-[git_branch_name]` to identify these branches easily.
 
