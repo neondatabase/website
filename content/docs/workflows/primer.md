@@ -133,12 +133,11 @@ You can also automate branch creation for every preview. These example applicati
 
 When running automated tests that require a database, each test run can have its branch with its own compute resources. You can create a branch at the start of a test run and delete it at the end.
 
-<Admonition type="note">We recommend following the naming convention of `test/<git_branch_name-test_run_name-commit_SHA-time_of_the_test_execution>` to identify these branches easily.
+We recommend following the naming convention of `test/[git_branch_name-test_run_name-commit_SHA-time_of_the_test_execution]` to identify these branches easily.
 
 The time of the test execution can be an epoch UNIX timestamp (e.g., 1704305739)
 
 Example: `test/feat/new-login-loginPageFunctionality-1a2b3c4d-20240211T1530`
-</Admonition>
 
 You can create test branches from the same date and time or Log Sequence Number (LSN) for tests requiring static or deterministic data.
 
