@@ -6,11 +6,11 @@ redirectFrom:
 updatedOn: '2024-02-16T12:00:44.905Z'
 ---
 
-Neon is protocol and application-compatible with Postgres. However, when using the Neon cloud service, there are some limitations that you should be aware of.
+**Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
 
 ## Postgres versions
 
-Neon cloud service is currently compatible with Postgres 14, 15, and 16. You can select the Postgres version you want to use when creating a Neon project. Postgres 16 is selected by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects).
+Neon supports Postgres 14, 15, and 16. You can select the Postgres version you want to use when creating a Neon project. Postgres 16 is selected by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects).
 
 ## Postgres extensions
 
@@ -18,7 +18,7 @@ Neon supports numerous Postgres extensions, and we regularly add support for mor
 
 ## Roles and permissions
 
-Neon is a managed Postgres service, so you cannot access the host operating system, and you can't connect using the Postgres `superuser` account like you can in a standalone Postgres installation.
+Neon is a managed Postgres service, so you cannot access the host operating system, and you can't connect using the Postgres `superuser` account.
 
 Roles created in the Neon console, CLI, or API, including the default role created with a Neon project, are granted membership in the `neon_superuser` role. For information about the privileges associated with this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
@@ -52,7 +52,7 @@ Unlogged tables are maintained on Neon compute local storage. These tables do no
 
 ## Spill and index build handling
 
-Certain queries in Postgres can generate large datasets that do not fit in memory. In such cases, storage spills the data. In Neon, the size of compute local storage limits the ability to create large indexes or execute certain queries that generate large datasets.
+Certain queries in Postgres can generate large datasets that do not fit in memory. In Neon, the size of compute local storage limits the ability to create large indexes or execute certain queries that generate large datasets.
 
 ## Temporary tables
 
@@ -64,7 +64,7 @@ The Neon cloud service automatically closes idle connections after a period of i
 
 ## Statistics collection
 
-Statistics collected by the Postgres [cumulative statistics system](https://www.postgresql.org/docs/14/monitoring-stats.html) are currently not saved when the Neon compute node is placed into an `Idle` state due to inactivity or restarted. For information about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/).
+Statistics collected by the Postgres [cumulative statistics system](https://www.postgresql.org/docs/current/monitoring-stats.html) are currently not saved when the Neon compute node is placed into an `Idle` state due to inactivity or restarted. For information about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/).
 
 ## Database encoding
 
