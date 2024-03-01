@@ -101,4 +101,4 @@ Currently, not all information within `pg_stats_statements` persists when a comp
 
 At Neon, we understand that observability and monitoring are critical for running successful applications.
 
-Check out our [roadmap](/docs/introduction/roadmap) to see what's coming next. And if you've got feature requests or feedback about what you'd like to see in Neon observability features, let us know in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042).
+Check out our [roadmap](/docs/introduction/roadmap) to see what's coming next. And if you've got feature requests or feedback about what you'd like to see in Neon observability features, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
