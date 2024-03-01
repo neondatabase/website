@@ -6,19 +6,19 @@ redirectFrom:
 updatedOn: '2024-02-16T12:00:44.905Z'
 ---
 
-Neon is protocol and application-compatible with Postgres. However, when using the Neon cloud service, there are some limitations that you should be aware of.
+**Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
 
 ## Postgres versions
 
-Neon cloud service is currently compatible with Postgres 14, 15, and 16. You can select the Postgres version you want to use when creating a Neon project. Postgres 16 is selected by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects).
+Neon supports Postgres 14, 15, and 16. You can select the Postgres version you want to use when creating a Neon project. Postgres 16 is selected by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.  
 
 ## Postgres extensions
 
-Neon supports numerous Postgres extensions, and we regularly add support for more. For a list of supported extensions, see [Postgres Extensions](/docs/extensions/pg-extensions). To request support for additional extensions, please reach out to us on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
+Neon supports numerous Postgres extensions, and we regularly add support for more. For the extensions that Neon supports, see [Postgres Extensions](/docs/extensions/pg-extensions). To request support for additional extensions, please reach out to us on our [Discord Server](https://discord.com/invite/92vNTzKDGp). Please keep in mind that privilege requirements, local file system access, and functionality that is incompatible with Neon features such as Autoscaling and Autosuspend may prevent Neon from being able to offer support for certain extensions.
 
 ## Roles and permissions
 
-Neon is a managed Postgres service, so you cannot access the host operating system, and you can't connect using the Postgres `superuser` account like you can in a standalone Postgres installation.
+Neon is a managed Postgres service, so you cannot access the host operating system, and you can't connect using the Postgres `superuser` account. In place of the Postgres superuser role, Neon provides a `neon_superuser` role.
 
 Roles created in the Neon console, CLI, or API, including the default role created with a Neon project, are granted membership in the `neon_superuser` role. For information about the privileges associated with this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
@@ -50,9 +50,9 @@ Currently, Postgres server logs can only be accessed Neon Support team. Should y
 
 Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restarts (including when a Neon compute instance is placed into an `Idle` state after a period of inactivity). This is unlike a standalone Postgres installation, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local storage size.
 
-## Spill and index build handling
+## Memory
 
-Certain queries in Postgres can generate large datasets that do not fit in memory. In such cases, storage spills the data. In Neon, the size of compute local storage limits the ability to create large indexes or execute certain queries that generate large datasets.
+SQL queries and index builds can generate large volumes of data that may not fit in memory. In Neon, the size of your compute determines the amount of memory that is available. For information about compute size and available memory, see [How to size your compute](https://neon.tech/docs/manage/endpoints#how-to-size-your-compute).
 
 ## Temporary tables
 
@@ -60,15 +60,27 @@ Temporary tables, which are stored in compute local storage, are limited by comp
 
 ## Session context
 
-The Neon cloud service automatically closes idle connections after a period of inactivity, as described in [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). When connections are closed, anything defined within a session context is forgotten and must be recreated before being used again. For example, temporary tables, prepared statements, advisory locks, and notifications and listeners that were defined using the [NOTIFY](https://www.postgresql.org/docs/14/sql-notify.html)/[LISTEN](https://www.postgresql.org/docs/14/sql-listen.html) commands only exist for the duration of the current session and are lost when the session ends.
+The Neon cloud service automatically closes idle connections after a period of inactivity, as described in [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). When connections are closed, anything that exists within a session context is forgotten and must be recreated before being used again. For example, in-memory statistics, temporary tables, prepared statements, advisory locks, and notifications and listeners defined using [NOTIFY](https://www.postgresql.org/docs/14/sql-notify.html)/[LISTEN](https://www.postgresql.org/docs/14/sql-listen.html) commands only exist for the duration of the current session and are lost when the session ends.
 
 ## Statistics collection
 
-Statistics collected by the Postgres [cumulative statistics system](https://www.postgresql.org/docs/14/monitoring-stats.html) are currently not saved when the Neon compute node is placed into an `Idle` state due to inactivity or restarted. For information about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/).
+Statistics collected by the Postgres [cumulative statistics system](https://www.postgresql.org/docs/current/monitoring-stats.html) are currently not saved when the Neon compute node is placed into an `Idle` state due to inactivity or restarted. For information about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/).
 
 ## Database encoding
 
-Neon does not currently support changing the database encoding.
+Neon does not currently support changing the database encoding. However, Neon does support [ICU Custom Collations](https://www.postgresql.org/docs/current/collation.html#ICU-CUSTOM-COLLATIONS), which lets you define collation objects using ICU as the collation provider. For example:
+
+```sql
+CREATE COLLATION german (provider = icu, locale = 'de');
+CREATE TABLE books (id int, title text COLLATE "german");
+``` 
+
+or 
+
+```sql
+CREATE COLLATION arabic (provider = icu, locale = 'ar');
+CREATE TABLE books (id int, title text COLLATE "arabic");
+```
 
 ## PostgreSQL documentation
 
