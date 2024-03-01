@@ -49,7 +49,9 @@
     - title: Monitoring
       slug: introduction/monitoring
 - title: Database workflows
-  slug: workflows/primer
+  items:
+    - title: Workflow primer
+      slug: workflows/primer
 - title: Get started
   items:
     - title: Sign up
