@@ -45,11 +45,11 @@
       "rows": "2",
       "feature": {
         "title": "Compute",
-        "subtitle": "Based on 0.25 vCPU, 1GB RAM"
+        "subtitle": "[LINK TO WHAT IS CU]"
       },
-      "free": "20 hours <span>+ always-available primary</span>",
-      "launch": "1,200 hours <span>per month</span>",
-      "scale": "3,000 hours <span>per month</span>",
+      "free": "5 Compute-hours <span>+ always-available primary</span>",
+      "launch": "300 Compute-hours <span>per month</span>",
+      "scale": "750 Compute-hours <span>per month</span>",
       "enterprise": "Custom"
     },
     

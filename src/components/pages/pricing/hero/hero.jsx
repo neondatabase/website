@@ -42,6 +42,7 @@ const items = [
     description: 'All the resources, features and support you need to launch.',
     features: [
       { title: '10 GiB storage included' },
+      { title: '300 Compute-hours included' },
       { title: 'Autoscale to 4 vCPU, 16GB RAM' },
       { title: '10 projects w/500 branches each' },
       { title: 'Unlocks Read Replicas' },
@@ -61,6 +62,7 @@ const items = [
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
       { title: '50 GiB storage included' },
+      { title: '750 Compute-hours included' },
       { title: 'Autoscale to 8 vCPU, 32GB RAM' },
       { title: '50 projects w/500 branches each' },
       { title: 'Unlocks additional security features' },
@@ -78,7 +80,7 @@ const items = [
     price: 'Custom',
     description: 'Custom plans for large teams and database fleets.',
     features: [
-      { title: 'Custom pricing with discounts' },
+      { title: 'Storage and compute discounts' },
       { title: 'Higher resource limits' },
       { title: 'Customer-owned S3' },
       { title: 'Enterprise support w/SLAs' },
