@@ -46,6 +46,6 @@ Neon Free Tier users are limited to a single project. In this case, you can expo
 
 Moving data to a new Neon project may require downtime if you are moving a production database, as the import procedure may take some time depending on the size of your data. To prevent the loss of data during the import operation, consider disabling writes from your applications before initiating the import operation. You can re-enable writes when the import is completed. Neon does not currently support disabling database writes. Writes must be disabled at the application level.
 
-Neon regularly reviews opportunities for expanding into new regions. We welcome your input regarding where you'd like to see us next. Please share your suggestions or express your interest in specific regions by posting in the **#feedback** channel on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
+Neon regularly reviews opportunities for expanding into new regions. We welcome your input regarding where you'd like to see us next. Please share your suggestions or express your interest in specific regions via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
 
 <NeedHelp/>

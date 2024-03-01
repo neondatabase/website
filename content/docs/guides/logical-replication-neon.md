@@ -11,7 +11,7 @@ This topic provides commands for managing publications, subscriptions, and repli
 For step-by-step setup instructions, refer to our [logical replication guides](/docs/guides/logical-replication-guide).
 
 <Admonition type="note">
-Logical replication in Neon is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the **Feedback** link in the Neon Console or by reaching out to us on [Discord](https://t.co/kORvEuCUpJ).
+Logical replication in Neon is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://t.co/kORvEuCUpJ).
 </Admonition>
 
 ## Publications
