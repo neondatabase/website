@@ -1,19 +1,13 @@
 'use client';
 
-import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
-import { InlineWidget } from 'react-calendly';
 
 import Container from 'components/shared/container';
 import useHubspotForm from 'hooks/use-hubspot-form';
 
 import 'styles/hubspot-form.css';
-import 'styles/calendly-widget.css';
-import CloseIcon from './images/close.inline.svg';
 
-const calendlyURL = 'https://calendly.com/alexia-sm/enterprise-trial-request';
 const hubspotFormID = '1bf5e212-bb19-4358-9666-891021ce386c';
 
 const Testimonial = ({ className = null, ariaHidden = false }) => (
@@ -39,28 +33,7 @@ Testimonial.propTypes = {
 };
 
 const Apply = () => {
-  const [userData, setUserData] = useState({
-    email: '',
-    name: '',
-  });
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useHubspotForm('hubspot-form', {
-    onFormSubmitted: (form, data) => {
-      const { submissionValues } = data;
-      const name = `${submissionValues.firstname || ''} ${submissionValues.lastname || ''}`.trim();
-
-      // setIsModalOpen(true);
-      setUserData({
-        email: submissionValues.email || '',
-        name,
-      });
-    },
-  });
-
-  const handleOpenChange = () => {
-    setIsModalOpen(false);
-  };
+  useHubspotForm('hubspot-form');
 
   return (
     <section
@@ -91,42 +64,6 @@ const Apply = () => {
           <Testimonial className="col-span-full hidden lg:mt-10 lg:block md:mt-8" ariaHidden />
         </div>
       </Container>
-      <Dialog.Root open={isModalOpen} onOpenChange={handleOpenChange}>
-        <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 z-[150] bg-[rgba(12,13,13,0.2)] data-[state=closed]:animate-fade-out-overlay data-[state=open]:animate-fade-in-overlay dark:bg-black/80" />
-          <Dialog.Content className="fixed left-1/2 top-1/2 z-[150] mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2 lg:h-full lg:max-h-full lg:max-w-full">
-            <div className="relative flex h-full max-h-[85vh] flex-col rounded-[10px] border border-gray-new-20 bg-gray-new-8 pt-4 text-white shadow-[4px_4px_10px_rgba(0,0,0,0.5)] data-[state=closed]:animate-dialog-hide data-[state=open]:animate-dialog-show lg:h-full lg:max-h-screen lg:rounded-none">
-              <div className="mt-6 flex h-full max-h-[calc(100vh_-_62px)] flex-col overflow-y-auto pb-12 md:mt-12">
-                <div className="calendly-spinner">
-                  <div className="calendly-bounce1" />
-                  <div className="calendly-bounce2" />
-                  <div className="calendly-bounce3" />
-                </div>
-                <InlineWidget
-                  url={calendlyURL}
-                  pageSettings={{
-                    backgroundColor: '131415',
-                    primaryColor: '00e599',
-                    textColor: 'ffffff',
-                    hideGdprBanner: true,
-                  }}
-                  prefill={userData}
-                />
-              </div>
-              <Dialog.Close asChild>
-                <button
-                  className="absolute right-5 top-4 flex h-6 w-6 items-center justify-center"
-                  aria-label="Close"
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                >
-                  <CloseIcon className="h-4 w-4 text-gray-new-60 dark:text-gray-new-50" />
-                </button>
-              </Dialog.Close>
-            </div>
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
     </section>
   );
 };
