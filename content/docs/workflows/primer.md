@@ -101,10 +101,10 @@ Here's how you can integrate Neon branching into your workflow:
 
 You can create a Neon branch for every developer on your team. This ensures that every developer has an isolated environment that includes schemas and data. These branches are meant to be long-lived, so each developer can tailor their branch based on their needs. With Neon's [branch reset capability](https://neon.tech/docs/manage/branches#reset-a-branch-from-parent), developers can refresh their branch anytime with the latest schemas and data.
 
-<Annotation type="note">To easily identify branches dedicated to development, we recommend prefixing the branch name with `dev/<developer-name>` or `dev/<feature-name>` if multiple developers collaborate on the same development branch.
+<Admonition type="note">To easily identify branches dedicated to development, we recommend prefixing the branch name with `dev/<developer-name>` or `dev/<feature-name>` if multiple developers collaborate on the same development branch.
 
 Examples: `dev/alice`, `dev/new-onboarding`
-</Annotation>
+</Admonition>
 
 ### Preview Environments
 
@@ -112,10 +112,10 @@ Whenever you create a pull request, you can create a Neon branch for your previe
 
 ![Alt text](database_workflow_AB.jpg)
 
-<Annotation type="note">We recommend following the naming convention of `preview/pr-<pull_request_number>-<git-branch-name>` to identify these branches easily.
+<Admonition type="note">We recommend following the naming convention of `preview/pr-<pull_request_number>-<git-branch-name>` to identify these branches easily.
 
 Example: `preview/pr-123-feat/new-login-screen`
-</Annotation>
+</Admonition>
 
 You can also automate branch creation for every preview. These example applications show how to create Neon branches with GitHub Actions for every preview environment.
 
@@ -131,12 +131,12 @@ You can also automate branch creation for every preview. These example applicati
 
 When running automated tests that require a database, each test run can have its branch with its own compute resources. You can create a branch at the start of a test run and delete it at the end. 
 
-<Annotation type="note">We recommend following the naming convention of `test/<git_branch_name-test_run_name-commit_SHA-time_of_the_test_execution>` to identify these branches easily.
+<Admonition type="note">We recommend following the naming convention of `test/<git_branch_name-test_run_name-commit_SHA-time_of_the_test_execution>` to identify these branches easily.
 
 The time of the test execution can be an epoch UNIX timestamp (e.g.1704305739)
 
 Example: `test/feat/new-login-loginPageFunctionality-1a2b3c4d-20240211T1530`
-</Annotation>
+</Admonition>
 
 You can create test branches from the same date and time or Log Sequence Number (LSN) for tests requiring static or deterministic data.
 
