@@ -50,7 +50,7 @@ const Apply = () => {
       const { submissionValues } = data;
       const name = `${submissionValues.firstname || ''} ${submissionValues.lastname || ''}`.trim();
 
-      setIsModalOpen(true);
+      // setIsModalOpen(true);
       setUserData({
         email: submissionValues.email || '',
         name,
