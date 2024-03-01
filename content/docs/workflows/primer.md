@@ -110,7 +110,9 @@ Examples: `dev/alice`, `dev/new-onboarding`
 
 Whenever you create a pull request, you can create a Neon branch for your preview deployment. This allows you to test your code changes and SQL migrations against production-like data.
 
-![Alt text](database_workflow_AB.jpg)We recommend following the naming convention of `preview/pr-<pull_request_number>-<git-branch-name>` to identify these branches easily.
+![Alt text](database_workflow_AB.jpg)
+
+<Annotation type="note">We recommend following the naming convention of `preview/pr-<pull_request_number>-<git-branch-name>` to identify these branches easily.
 
 Example: `preview/pr-123-feat/new-login-screen`
 </Annotation>
@@ -129,14 +131,12 @@ You can also automate branch creation for every preview. These example applicati
 
 When running automated tests that require a database, each test run can have its branch with its own compute resources. You can create a branch at the start of a test run and delete it at the end. 
 
-<aside>
-<img src="https://www.notion.so/icons/info-alternate_gray.svg" alt="https://www.notion.so/icons/info-alternate_gray.svg" width="40px" /> We recommend following the naming convention of `test/<git_branch_name-test_run_name-commit_SHA-time_of_the_test_execution>` to identify these branches easily.
+<Annotation type="note">We recommend following the naming convention of `test/<git_branch_name-test_run_name-commit_SHA-time_of_the_test_execution>` to identify these branches easily.
 
 The time of the test execution can be an epoch UNIX timestamp (e.g.1704305739)
 
 Example: `test/feat/new-login-loginPageFunctionality-1a2b3c4d-20240211T1530`
-
-</aside>
+</Annotation>
 
 You can create test branches from the same date and time or Log Sequence Number (LSN) for tests requiring static or deterministic data.
 
