@@ -4,7 +4,7 @@ subtitle: Step-by-step guide showing you how to compare two development branches
 enableTableOfContents: true
 ---
 
-In this guide we will create an initial schema on a new database called `staging` on our `main` branch. We'll then create two child development branches called `dev/alex` and `dev/jordan`, following our recommended convention for naming development branches. After making schema changes on `dev/jordan`, we'll use use the **Schema Diff** tool on the **Restore** page to get a side-by-side, Github-style visual comparison between these two development branches.
+In this guide we will create an initial schema on a new database called `staging` on our `main` branch. We'll then create two child development branches called `dev/alex` and `dev/jordan`, following our recommended convention for naming development branches. After making schema changes on `dev/jordan`, we we'll use the **Schema Diff** tool on the **Restore** page to get a side-by-side, Github-style visual comparison between these two development branches.
 
 ## Initial Setup
 
