@@ -102,7 +102,7 @@ Here's how you can integrate Neon branching into your workflow:
 You can create a Neon branch for every developer on your team. This ensures that every developer has an isolated environment that includes schemas and data. These branches are meant to be long-lived, so each developer can tailor their branch based on their needs. With Neon's [branch reset capability](https://neon.tech/docs/manage/branches#reset-a-branch-from-parent), developers can refresh their branch anytime with the latest schemas and data.
 
 <Admonition type="note">
-To easily identify branches dedicated to development, we recommend prefixing the branch name with <code>dev/<developer-name></code> or <code>dev/<feature-name></code> if multiple developers collaborate on the same development branch:
+To easily identify branches dedicated to development, we recommend prefixing the branch name with <code>dev/&lt;developer-name&gt;</code> or <code>dev/&lt;feature-name&gt;</code> if multiple developers collaborate on the same development branch:
 
 Examples: <code>dev/alice</code>, <code>dev/new-onboarding</code>
 </Admonition>
@@ -113,7 +113,7 @@ Whenever you create a pull request, you can create a Neon branch for your previe
 
 ![Alt text](database_workflow_AB.jpg)
 
-<Admonition type="note">We recommend following the naming convention of <code>preview/pr-<pull_request_number>-<git-branch-name></code> to identify these branches easily.
+<Admonition type="note">We recommend following the naming convention of <code>preview/pr-&lt;pull_request_number&gt;-&lt;git_branch_name&gt;</code> to identify these branches easily.
 
 Example: `preview/pr-123-feat/new-login-screen`
 </Admonition>
@@ -130,11 +130,11 @@ You can also automate branch creation for every preview. These example applicati
 
 ### Testing
 
-When running automated tests that require a database, each test run can have its branch with its own compute resources. You can create a branch at the start of a test run and delete it at the end. 
+When running automated tests that require a database, each test run can have its branch with its own compute resources. You can create a branch at the start of a test run and delete it at the end.
 
-<Admonition type="note">We recommend following the naming convention of <code>test/<git_branch_name-test_run_name-commit_SHA-time_of_the_test_execution></code> to identify these branches easily.
+<Admonition type="note">We recommend following the naming convention of <code>test/&lt;git_branch_name-test_run_name-commit_SHA-time_of_the_test_execution&gt;</code> to identify these branches easily.
 
-The time of the test execution can be an epoch UNIX timestamp (e.g.1704305739)
+The time of the test execution can be an epoch UNIX timestamp (e.g., 1704305739)
 
 Example: `test/feat/new-login-loginPageFunctionality-1a2b3c4d-20240211T1530`
 </Admonition>
