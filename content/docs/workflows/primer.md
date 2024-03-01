@@ -1,6 +1,6 @@
 ---
-title: Database workflows
-subtitle: Use this primer to find out different ways you can integrate your Postgres database into your development workflow
+title: Database workflow primer
+subtitle: A primer on how you can integrate your Postgres database into your development workflow
 enableTableOfContents: true
 ---
 
@@ -102,9 +102,11 @@ Here's how you can integrate Neon branching into your workflow:
 
 You can create a Neon branch for every developer on your team. This ensures that every developer has an isolated environment that includes schemas and data. These branches are meant to be long-lived, so each developer can tailor their branch based on their needs. With Neon's [branch reset capability](https://neon.tech/docs/manage/branches#reset-a-branch-from-parent), developers can refresh their branch anytime with the latest schemas and data.
 
-To easily identify branches dedicated to development, we recommend prefixing the branch name with `dev/[developer-name] or `dev/[feature-name]` if multiple developers collaborate on the same development branch:
+<Admonition type="note">
+To easily identify branches dedicated to development, we recommend prefixing the branch name with `dev/<developer-name>` or `dev/<feature-name>` if multiple developers collaborate on the same development branch:
 
 Examples: `dev/alice`, `dev/new-onboarding`
+</Admonition>
 
 ### Preview Environments
 
