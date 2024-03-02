@@ -50,7 +50,7 @@
       slug: introduction/monitoring
 - title: Database workflows
   items:
-    - title: Workflow primer
+    - title: Database workflow primer
       slug: workflows/primer
 - title: Get started
   items:
