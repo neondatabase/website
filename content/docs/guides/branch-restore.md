@@ -6,7 +6,7 @@ enableTableOfContents: true
 updatedOn: '2024-02-21T19:34:16.273Z'
 ---
 
-With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can also use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to.
+With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can also use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, Github-style visual comparison of your selected branches before restoring.
 
 ## How branch restore works
 
@@ -91,6 +91,12 @@ However, you can see the history of operations related to the creation and delet
 #### How long do ephemeral endpoints remain active
 
 The ephemeral endpoints are created according to your configured [default compute size](/docs/manage/projects#reset-the-default-compute-size). An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
+
+### Schema Diff
+
+The Schema Diff tool lets you compare an SQL script of your selected branch's schemas in a side-by-side visualization. Built into the Time Travel assist editor, Schema Diff is meant to help you when restoring branches, letting you compare states of your branch against its own or another branch's history before you complete the restore operation.
+
+![relevant screenshot?]()
 
 ## How to use branch restore
 
@@ -185,9 +191,9 @@ If you do need to revert your changes, you can [Reset from parent](/docs/manage/
 
 Here is how to use the Time Travel Assist SQL editor:
 
-1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
+1. Make the branch selections that you would make to [Restore a branch](#how-to-use-branch-restore).
 
-    This makes the selection for Time Travel Assist. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
+    The target branch is now selected for Time Travel assist. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
     ![Time travel assist](/docs/guides/time_travel_assist.png)
   
 1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
@@ -203,6 +209,18 @@ Depending on your query and the selected timestamp, instead of a table of result
 | If you query from earlier than your history retention window | Console request failed with 400 Bad Request: timestamp [timestamp] recedes your project's history retention window of 168h0m0s, try a more recent timestamp |
 
 Adjust your selected timestamp accordingly.
+
+### Using Schema Diff
+
+Just like with Time Travel assist, your first step is to choose the branch you want to restore, then choose where you want to restore from: its own history or from another branch's history.
+
+Click the **Schema Diff** button and the two-pane view opens, showing the SQL view for both your target and your selected branches.
+
+[NOTE: placeholder image needs updating with better comparison and after UI is finalized]
+
+![schema diff results](/docs/guides/schema_diff_result.png)
+
+For a quick tutorial on using Schema Diff in a sample dev team scenario, see [Schema diff tutorial](/docs/guides/schema-diff-tutorial).
 
 ## Billing considerations
 

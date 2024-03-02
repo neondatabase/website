@@ -119,4 +119,4 @@ From the Neon Console, go to the **Restore** page. The Schema Diff tool is meant
 
     ![schema diff results](/docs/guides/schema_diff_result.png)
 
-    You will see the schema differnces between the two develpment branches including the new address table that we added to the `dev\jordan` branch.
+    You will see the schema differences between the two develpment branches, including the new address table that we added to the `dev\jordan` branch.
