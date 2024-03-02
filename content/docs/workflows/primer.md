@@ -204,4 +204,4 @@ Neon retains a history of changes for all branches. Change the 1-day default [he
 
 #### Offload workloads with [read replicas](/docs/guides/read-replica-guide)
 
-Offload your large read operations to dedicated computes, safeguard your data, and balance your workloads by creating as many read-only replicas as you need, without incurring additional costs.
+Offload your large read operations to dedicated computes or safeguard your data by creating as many read-only replicas as you need, without incurring additional costs.
