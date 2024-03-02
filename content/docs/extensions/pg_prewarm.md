@@ -74,7 +74,7 @@ Then, you can use the OID with `pg_prewarm` like so:
 SELECT pg_prewarm(your_index_oid);
 ```
 
-## Check the proportion of a table loaded into cache
+## Check the proportion of a table loaded into memory
 
 In this example, you create a table, check its data size, run `pg_prewarm`, and then check to see how much of the table's data was loaded into memory.
 
@@ -183,9 +183,9 @@ This example shows how preloading data can improve query performance. We'll crea
     FROM generate_series('2010-01-01 00:00:00'::timestamptz, '2018-02-01 00:00:00'::timestamptz, '1 minutes'::interval) a(x);
     ```
 
-2. Restart your Postgres instance to clear the buffer cache. On Neon, you can do this by [restarting your compute](/docs/manage/endpoints#restart-a-compute-endpoint).
+2. Restart your Postgres instance to clear the cache. On Neon, you can do this by [restarting your compute](/docs/manage/endpoints#restart-a-compute-endpoint).
 
-2. Prewarm the first sample table:
+3. Prewarm the first sample table:
 
     ```sql
     SELECT pg_prewarm('tbl_transactions_1') AS blocks_loaded;
@@ -199,7 +199,7 @@ This example shows how preloading data can improve query performance. We'll crea
             27805
     ```
 
-3. Now, compare the execution plan of the prewarmed table vs. a non-prewarmed table to see the performance improvement.
+4. Now, compare the execution plan of the prewarmed table vs. a non-prewarmed table to see the performance improvement.
 
     ```sql
     EXPLAIN ANALYZE SELECT * FROM tbl_transactions_1;
