@@ -337,7 +337,15 @@ If you require different values for these parameters, please contact Neon suppor
 
 ### Unused replication slots
 
-Neon removes _unused_ replication slots after a period of time to avoid unnecessary retention of write-ahead logs, which prevents removing data snapshots that are no longer required.
+**Neon automatically removes _inactive_ replication slots to avoid storage bloat**. This occurs when your compute is actively replicating WAL records but your replication subscriber does not acknowledge progress for an extended time allowing WAL logs to be cleared on your source Neon database. An inactive replication slot is typically removed after a few hours but this depends on the volume of data being replicated. 
+
+Removal of _inactive_ replication slots is often the result of a _dead subscriber_, where the replication slot is not dropped after a subscriber is deactivated or becomes unavailable. It can also occur in cases where a replication delay is configured on the subscriber. For example, some subscribers allow you to configure replication frequency or may even configure a lengthy replication delay by default to minimize usage.
+
+To avoid having replication slots automatically removed from your Neon database:
+
+- Always check the default replication frequency setting on the subscriber.
+- Ensure that your replication frequency is a **number of minutes**, not a number of hours.
+- If using Debezium, ensure that [flush.lsn.source](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-flush-lsn-source) is set to `true` to allow WAL logs on the source to be cleared. For other subscribers, check for an equivalent setting and make sure it's configured to avoid WAL record accumulation on your source Neon database.
 
 ### Known limitations
 
