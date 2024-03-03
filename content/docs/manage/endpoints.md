@@ -106,7 +106,7 @@ The `neon_utils` extension provides a `num_cpus()` function you can use to monit
 
 The size of your compute determines the amount of frequently accessed data you can cache in memory and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues. 
 
-In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The Local File Cache can use up to 50% of your compute's RAM. The 50% RAM limit is a guideline rather than an enforced limit, but it's advisable not to exceed this maximum; otherwise, you might encounter out-of-memory errors.
+In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The LFC can use up to 50% of your compute's RAM. The 50% RAM limit is a guideline rather than an enforced limit, but it's advisable not to exceed this maximum; otherwise, you might encounter out-of-memory errors.
 
 The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size. Larger computes support higher maximum connection limits.
 
@@ -136,9 +136,9 @@ Regarding connection limits, you'll want a compute size that can support your an
 
 #### Sizing your computed based on the working set
 
-If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from Neon's storage, which can affect query performance. 
+If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from Neon storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance. 
 
-As mentioned above, Neon computes use a Local File Cache to extend Postgres shared buffers. To query the cache hit ratio for your compute's file cache, Neon provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view.
+As mentioned above, Neon computes use a Local File Cache (LFC) to extend Postgres shared buffers. To query the cache hit ratio for your compute's LFC, Neon provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view.
 
 To use the `neon_stat_file_cache` view, you must first install the `neon` extension:
 
@@ -146,7 +146,7 @@ To use the `neon_stat_file_cache` view, you must first install the `neon` extens
 CREATE EXTENSION neon;
 ```
 
-After installing the extension and allowing time for data to be gathered, you can issue the following query to view Local File Cache usage data:
+After installing the extension and allowing time for data to be collected, you can issue the following query to view LFC usage data:
 
 ```sql
 SELECT * FROM neon.neon_stat_file_cache;
@@ -162,10 +162,10 @@ The `file_cache_hit_ratio` is calculated according to the following formula:
 file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100
 ```
 
-If your `file_cache_hit_ratio` is not 99% or above, your working set is not fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables. Your compute runs an instance of Postgres, which could contain multiple databases and tables.
+For OLTP workloads, you should aim for a `file_cache_hit_ratio` above 99%. If you hit ration is below that, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
 
 <Admonition type="note">
-The cache hit ratio query is based on statistics that represent the lifetime of your compute, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you increased your compute size after seeing a cache hit ratio below 99%. Changing the compute size restarts your compute, so you lose all of your current usage statistics. In this case, you should run a representative workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the `pg_prewarm` extension to pre-load data into memory after a compute restart. See [The pg_prewarm extension](/docs/extensions/pg_prewarm).
+The cache hit ratio query is based on statistics that represent the lifetime of your compute, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you increased your compute size after seeing a cache hit ratio below 99%. Changing the compute size restarts your compute, so you lose all of your current usage statistics. In this case, you should run your workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the `pg_prewarm` extension to pre-load data into memory after a compute restart. See [The pg_prewarm extension](/docs/extensions/pg_prewarm).
 </Admonition>
 
 #### Autoscaling considerations

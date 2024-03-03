@@ -103,11 +103,24 @@ Connection strings for a Neon databases can be obtained from the **Connection De
 
 ## Compute size
 
-The number of Compute Units (CU) assigned to a Neon compute. One CU is defined as having 1 vCPU with 4 GB of RAM. A Neon compute can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of the compute.
+The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can have anywhere from .25 to 7 CU. The number of units determines the processing capacity of the compute.
 
 ## Compute Unit (CU)
 
-A unit that measures the processing power of a Neon compute. A Neon compute can have anywhere from .25 CUs to 7 CUs.
+A unit that describes the processing power of a Neon compute. A Compute Unit comprises the vCPU size and the amount of RAM. A Neon compute can have anywhere from .25 CUs to 7 CUs. The following table shows Compute Units (CU), vCPU size, and RAM for the compute sizes that Neon supports:
+
+| Compute size (in CUs)  | vCPU | RAM    |
+|:--------------|:-----|:-------|
+| .25           | .25  | 1 GB   |
+| .5            | .5   | 2 GB   |
+| 1             | 1    | 4 GB   |
+| 2             | 2    | 8 GB   |
+| 3             | 3    | 12 GB  |
+| 4             | 4    | 16 GB  |
+| 5             | 5    | 20 GB  |
+| 6             | 6    | 24 GB  |
+| 7             | 7    | 28 GB  |
+| 8             | 8    | 32 GB  |
 
 ## Compute hour
 
