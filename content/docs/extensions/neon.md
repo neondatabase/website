@@ -87,6 +87,6 @@ LFC statistics are for the lifetime of your compute, from the last time the comp
 
 ## Views for Neon internal use
 
-The `neon` extension is installed by default to a system-owned `postgres` database in each Neon project. The `postgres` database includes functions and views owned by the Neon system role (`cloud_admin`) that are used used to collect statistics. This data helps the Neon team enhance the Neon service. 
+The `neon` extension is installed by default to a system-owned `postgres` database in each Neon project. The `postgres` database includes functions and views owned by the Neon system role (`cloud_admin`) that are used to collect statistics. This data helps the Neon team enhance the Neon service. 
 
 <NeedHelp/>
