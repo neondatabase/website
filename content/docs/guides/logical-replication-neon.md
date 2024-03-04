@@ -355,6 +355,10 @@ If you have more than one replication slot and want to avoid having "inactive" r
 
 If using Debezium, ensure that [flush.lsn.source](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-flush-lsn-source) is set to `true` to allow WAL logs on the source to be cleared. For other subscriber platforms, check for an equivalent setting to make sure it's configured to acknowledge progress on the subscriber.
 
+#### What to do if your replication slot is removed
+
+If you find that a replication slot was removed and you need to add it back, please see [Create a replication slot](/docs/guides/logical-replication-neon#create-a-replication-slot) for instructions or refer to the replication slot creation instructions for your subscriber platform.
+
 ### Known limitations
 
 Neon is working toward removing the following limitations in future releases:
