@@ -293,11 +293,15 @@ Restoration of data to a state that existed at an earlier time. Neon retains a h
 
 ## pooled connection string
 
-A pooled connection string in Neon includes a `-pooler` option, which directs your connection to a pooled connection port, where it is able to obtain a connection from a pool of connections. This is an example of a pooled connection:
+A pooled connection string in Neon includes a `-pooler` option, which directs your connection to a pooled connection port at the Neon Proxy. This is an example of a pooled connection:
 
 ```text
-
+postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
 ```
+
+A pooled connection can support a high number of concurrent users and is recommended for use with serverless and edge functions. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+
+You can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Select the **Pooled connection** option to add the `-pooler` option to the connection string. For further instructions, see [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling).
 
 ## PostgreSQL
 
@@ -410,6 +414,16 @@ An encrypted access token that enables you to authenticate with Neon using the N
 ## tmpfs
 
 A temporary file storage system that uses a portion of a system's RAM to store files, improving performance by reducing disk usage.
+
+## unpooled connection string
+
+An unpooled connection string connects to your Neon database directly. It does not use [connection pooling](#connection-pooling), and it looks similar to this:
+
+```text
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+```
+
+You can obtain an unpooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Ensure that the **Pooled connection** option is **not** selected. A direct connection is subject to the `max_connections` limit for your compute. For more information, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 ## User
 
