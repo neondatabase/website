@@ -104,16 +104,22 @@ To learn more about Neon usage metrics, see [Usage metrics](/docs/introduction/u
 
 ## Neon pricing guide
 
-You can use this guide to estimate your monthly bill with Neon's based on your selected plan and estimated usage.
+You can use this guide to estimate your monthly bill with Neon based on your selected plan and estimated usage.
 
-### Step 1: Select Your Plan
+1. [Select your plan](#step-1-select-your-plan)
+2. [Monthly base fee](#step-2-monthly-base-fee)
+3. [Estimate your usage](#step-3-estimate-your-usage)
+4. [Calculate extra usage fees (if applicable)](#step-4-calculate-extra-usage-fees-if-applicable)
+5. [Total monthly estimate](#step-5-total-monthly-estimate)
+
+### Step 1: Select your plan
 
 First, identify which plan you are using or plan to use. The available plans are:
 
-Free Tier: $0/month
-Launch: $19/month
-Scale: $69/month
-Enterprise: Custom pricing (contact us for details)
+- Free Tier: $0/month
+- Launch: $19/month
+- Scale: $69/month
+- Enterprise: Custom pricing (contact us for details)
 
 ### Step 2: Monthly base fee
 
@@ -133,39 +139,43 @@ Based on your plan, calculate any extra fees for exceeding your plan's allowance
 
 #### For the Launch plan:
 
-Extra Compute: If you exceed 300 compute hours, extra compute is billed at $0.04/hour.
+- Extra Compute: If you exceed 300 compute hours, extra compute is billed at $0.04/hour.
 
 #### For the Scale plan:
 
-Extra Storage: If you exceed 50 GiB, extra storage is billed in increments of 10 GiB at $15 per increment.
-Extra Compute: If you exceed 750 compute hours, extra compute is billed at $0.04/hour.
-Extra Projects: If you exceed 50 projects, extra projects are billed in units of 10 projects at $50 per unit.
+- Extra Storage: If you exceed 50 GiB, extra storage is billed in increments of 10 GiB at $15 per increment.
+- Extra Compute: If you exceed 750 compute hours, extra compute is billed at $0.04/hour.
+- Extra Projects: If you exceed 50 projects, extra projects are billed in units of 10 projects at $50 per unit.
 
 ##### Step 5: Total monthly estimate
 
 Add up the base monthly fee and any applicable extra usage fees to estimate your total monthly bill.
 
+```
 Total Monthly Estimate = Monthly Base Fee + Extra Storage Fee + Extra Compute Fee + Extra Project Fee
+```
 
 **Launch plan example**
 
-Base Fee: $19
-Compute Usage: 350 hours (50 hours over the allowance)
-Extra Compute Fee: 50 hours * $0.04 = $2
-Total Estimate: $19 + $2 = $21 per month
+- Base Fee: $19
+- Compute Usage: 350 hours (50 hours over the allowance)
+- Extra Compute Fee: 50 hours * $0.04 = $2
+
+**Total Estimate**: $19 + $2 = $21 per month
 
 **Scale plan example**
 
-Base Fee: $69
-Storage Usage: 60 GiB (10 GiB over the allowance)
-Compute Usage: 800 hours (50 hours over the allowance)
-Project Usage: 55 projects (5 projects over the allowance)
-Extra Storage Fee: 1 * $15 = $15
-Extra Compute Fee: 50 * $0.04 = $2
-Extra Project Fee: 1 * $50 = $50
-Total Estimate: $69 + $15 + $2 + $50 = $136 per month
+- Base Fee: $69
+- Storage Usage: 60 GiB (10 GiB over the allowance)
+- Compute Usage: 800 hours (50 hours over the allowance)
+- Project Usage: 55 projects (5 projects over the allowance)
+- Extra Storage Fee: 1 * $15 = $15
+- Extra Compute Fee: 50 * $0.04 = $2
+- Extra Project Fee: 1 * $50 = $50
 
-<Admonition type="note">
+**Total Estimate**: $69 + $15 + $2 + $50 = $136 per month
+
+<Admonition type="note" title="Notes">
 - Adjust your usage estimates as needed to reflect your actual or projected usage.
 - For Enterprise plan users, please contact our sales team for a personalized estimate based on your custom needs.
 </Admonition>
