@@ -154,6 +154,10 @@ DROP SUBSCRIPTION my_subscription;
 
 Replication slots are created on the publisher database to track replication progress, ensuring that no data in the WAL is purged before the subscriber has successfully replicated it. This mechanism serves to maintain data consistency and prevent data loss in cases of network interruption or subscriber downtime.
 
+<Admonition type="important">
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](#unused-replication-slots) to learn more.
+</Admonition>
+
 ### Create a replication slot
 
 Replication slots are typically created automatically with new subscriptions, but they can be created manually using the `pg_create_logical_replication_slot` function. Some "subscriber" data services and platforms require that you create a dedicated replication slot. This is accomplished using the following syntax:
@@ -337,9 +341,15 @@ If you require different values for these parameters, please contact Neon suppor
 
 ### Unused replication slots
 
-To prevent storage bloat, **Neon automatically removes an _inactive_ replication slot if you have other _active_ replication slots**. If you have only one replication slot, and that slot becomes inactive, it is not removed due to inactivity because a single replication slot does not create bloat. If you find that your single replication slot has been removed, please contact [Neon Support](/docs/introduction/support) for remediation.
+To prevent storage bloat, **Neon automatically removes an _inactive_ replication slot if you have other _active_ replication slots**. Removal occurs after 75 minutes. 
+
+If you have only one replication slot, and that slot becomes inactive, it is not removed due to inactivity because a single replication slot does not create bloat. If you find that your single replication slot has been removed, please contact [Neon Support](/docs/introduction/support) for remediation.
+
+#### What causes a replication slot to become inactive? 
 
 An _inactive_ replication slot is often the result of a _dead subscriber_, where the replication slot is not dropped after a subscriber is deactivated or becomes unavailable. An inactive replication slot can also result from a replication delay configured on the subscriber. For example, some subscribers allow you to configure the frequency of replication or set a replication delay to minimize usage.
+
+#### How to avoid removal of inactive replication slots
 
 If you have more than one replication slot and want to avoid having "inactive" replication slots removed automatically, ensure that the replication frequency for your "additional" subscribers is less than 75 minutes. 
 
@@ -351,6 +361,7 @@ Neon is working toward removing the following limitations in future releases:
 
 - Only your default Neon Postgres role and roles created via the Neon Console, CLI, or API have the `REPLICATION` privilege. This privilege cannot be granted to other roles. You can expect this limitation to be lifted in a future release. Roles created via SQL do not have the `REPLICATION` privilege, and this privilege cannot be granted.
 - `max_slot_wal_keep_size` is set to 1 GB, limiting the maximum size of WAL files that replication slots are allowed to retain in the `pg_wal` directory. This is a temporary limit that will be removed in a future release. The limit avoids an accumulation of WAL data at the publisher due to a lagging subscriber, which could cause a slow compute start.
+- To avoid storage bloat, Neon automatically removes an _inactive_ replication slot if you have other _active_ replication slots. See [Unused replication slots](#unused-replication-slots).
 
 ## References
 
