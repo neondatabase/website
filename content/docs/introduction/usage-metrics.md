@@ -54,19 +54,19 @@ The following table outlines compute allowances for each Neon plan.
 | Plan       | Compute                                                                                                              |
 |------------|----------------------------------------------------------------------------------------------------------------------|
 | Free Tier  | Always-available primary branch compute, 20 _active hours_/month (5 compute hours) on branch computes           |
-| Launch     | Up to 1,200 _active hours_/month (300 compute hours)                                                                                             |
-| Scale      | Up to 3,000 _active hours_/month (750 compute hours)                                                                                             |
+| Launch     | 300 compute hours (1,200 _active hours_)/month                                                                                           |
+| Scale      | 750 compute hours (3,000 _active hours_)/month                                                                                            |
 | Enterprise | Custom                                                                                                            |
 
 Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for by compute hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use additional compute hours, you are billed for those at the compute-hour price stated on our [pricing](https://neon.tech/pricing) page.
 
 ### What are active hours?
 
-**Active hours** measures the amount of time a compute is active, rather than idle when suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
+**Active hours** is the amount of time a compute is active, rather than idle when suspended due to inactivity.
 
 ### What is a compute hour?
 
-A **compute hour** is 1 hour is equal to one _active hour_ for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+A **compute hour** is equal to one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it takes only 15 minutes to use 1 compute hour.
 
 ### How Neon compute features affect usage
 

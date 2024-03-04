@@ -14,7 +14,7 @@ Each of Neon's plans includes **Storage**, **Compute**, and **Project** usage al
 |            | Free Tier                                                    | Launch          | Scale             | Enterprise       |
 |------------|--------------------------------------------------------------|-----------------|-------------------|------------------|
 | Storage    | 512 MiB                                                      | 10 GiB          | 50 GiB            |  Larger sizes                |
-| Compute    | Always-available primary branch compute, 20 _active hours_ (5 compute hours)/month on branch computes. | Up to 1,200 _active hours_/month (300 compute hours) | Up to 3,000 _active hours_/month (750 compute hours)  |  Custom                |
+| Compute    | Always-available primary branch compute, 5 compute hours (20 _active hours_)/month on branch computes. | 300 compute hours (1,200 _active hours_)/month | 750 compute hours (3,000 _active hours_)/month  |  Custom                |
 | Projects   | 1                                                            | 10              | 50                |  Unlimited                |
 
 
@@ -22,9 +22,9 @@ These allowances are included in your plan's monthly fee, except for the Free Ti
 
 <Admonition type="tip" title="What is a compute hour?">
 
-**Active hours** measures the amount of time a compute is active, rather than idle when suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
+**Active hours** refers to the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
 
-A single **compute hour** is equal to one _active hour_ for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+A **compute hour** is equal to one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it takes only 15 minutes to use 1 compute hour.
 
 </Admonition>
 
@@ -50,12 +50,11 @@ Extra storage is only available with the [Scale](/docs/introduction/plans##scale
 
 ### Compute
 
-Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed by _compute hour_. For example, the Launch plan has an allowance of 1200 compute hours included in the plan's monthly fee. If you use additional compute hours, you are billed for those at the compute-hour price stated on our [pricing](https://neon.tech/pricing) page.
+Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed by _compute hour_. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use additional compute hours, you are billed for those at the compute-hour price stated on our [pricing](https://neon.tech/pricing) page.
 
 ### Projects
 
 Extra project usage is only available with the [Scale](/docs/introduction/plans##scale) plan. Extra projects are billed in units of 10. For example, the Scale plan has an allowance of 50 projects, which is included in the plan's monthly fee. If you use more than 50 projects, you are automatically billed for an extra package of 10 projects at the price stated on our [pricing](https://neon.tech/pricing) page. For example, if you use 51 projects, you are billed for a package of 10 projects. If you use 61 projects, you are billed for two packages of 10 projects, and so on. 
-
 
 ## Monitoring billing and usage
 
