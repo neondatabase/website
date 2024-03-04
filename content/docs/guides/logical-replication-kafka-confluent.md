@@ -140,6 +140,10 @@ SELECT pg_create_logical_replication_slot('debezium', 'pgoutput');
 - `debezium` is the name assigned to the replication slot. You will need to provide the slot name when you set up your source connector in Confluent.
 - `pgoutput` is the logical decoder plugin used in this example. Neon supports both `pgoutput` and `wal2json` decoder plugins.
 
+<Admonition type="important">
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
+</Admonition>
+
 ## Set up a Kafka cluster in Confluent Cloud
 
 1. Sign in to Confluent Cloud at [https://confluent.cloud](https://confluent.cloud).
