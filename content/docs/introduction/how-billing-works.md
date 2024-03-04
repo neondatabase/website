@@ -75,7 +75,9 @@ You can monitor usage for a single project from the **Usage** widget on your pro
 
 ![Monitor usage widget](/docs/introduction/monitor_usage_widget.png)
 
-Here you will find storage and compute usage for the project among other project usage metrics.
+Here you will find storage and compute usage for the project among other project usage metrics. 
+
+adm Please note that **Compute** usage is tracked in **compute hours**.
 
 ## Learn more about usage metrics
 
