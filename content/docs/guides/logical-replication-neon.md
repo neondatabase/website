@@ -337,15 +337,13 @@ If you require different values for these parameters, please contact Neon suppor
 
 ### Unused replication slots
 
-**Neon automatically removes _inactive_ replication slots to avoid storage bloat**. This occurs when your compute is active, replicating data, but your replication subscriber does not acknowledge progress for an extended time. An inactive replication slot is typically removed after a few hours but the timing depends on the volume of data being replicated. 
+To prevent storage bloat, **Neon automatically removes an _inactive_ replication slot if you have other _active_ replication slots**. If you have only one replication slot, and that slot becomes inactive, it is not removed due to inactivity because a single replication slot does not create bloat. If you find that your single replication slot has been removed, please contact [Neon Support](/docs/introduction/support) for remediation.
 
-Removal of an _inactive_ replication slot is often the result of a _dead subscriber_, where the replication slot is not dropped after a subscriber is deactivated or becomes unavailable. Removal of a slot can also occur in cases where a replication delay is configured on the subscriber. For example, some subscribers allow you to configure replication frequency or set a replication delay by default to minimize usage.
+An _inactive_ replication slot is often the result of a _dead subscriber_, where the replication slot is not dropped after a subscriber is deactivated or becomes unavailable. An inactive replication slot can also result from a replication delay configured on the subscriber. For example, some subscribers allow you to configure the frequency of replication or set a replication delay to minimize usage.
 
-To avoid having replication slots removed automatically from your Neon database:
+If you have more than one replication slot and want to avoid having "inactive" replication slots removed automatically, ensure that the replication frequency for your "additional" subscribers is less than 75 minutes. 
 
-- Always check for a default replication frequency on the subscriber.
-- Ensure that your replication frequency is at least once per hour, and replicate more frequently if you are replicating large volumes of data. 
-- If using Debezium, ensure that [flush.lsn.source](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-flush-lsn-source) is set to `true` to allow WAL logs on the source to be cleared. For other subscriber platforms, check for an equivalent setting and make sure it's configured to avoid replication delays.
+If using Debezium, ensure that [flush.lsn.source](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-flush-lsn-source) is set to `true` to allow WAL logs on the source to be cleared. For other subscriber platforms, check for an equivalent setting to make sure it's configured to acknowledge progress on the subscriber.
 
 ### Known limitations
 
