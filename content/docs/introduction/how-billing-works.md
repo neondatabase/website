@@ -77,10 +77,97 @@ You can monitor usage for a single project from the **Usage** widget on your pro
 
 Here you will find storage and compute usage for the project among other project usage metrics. 
 
-adm Please note that **Compute** usage is tracked in **compute hours**.
+#### Interpreting usage
+
+**Compute** usage is tracked in **compute hours**. A compute hour is 1 active hour for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour. Neon's [Pricing](https://neon.tech/pricing) page outlines monthly compute allowances in both **active hours** and **compute hours**. Active hours are based on a compute with 0.25 vCPU, and compute hours are based on a compute with 1 vCPU, as outlined below. 
+
+<Admonition type="note">
+On the Free Tier, the primary branch compute is a 0.25 vCPU compute that is always available, so allowances do not apply. You can run your 0.25 vCPU compute on the Free Tier 24/7. Only branch computes on the Free Tier have an allowance, which is the 5 compute hour/month allowance Free Tier users see on the **Billing** page. On the Free Tier, this is actually 20 hours of usage because Free Tier computes always have 0.25 vCPU. You cannot increase the compute size on the Free Tier.
+</Admonition>
+
+| Plan        | Compute hours (based on a 1 vCPU compute) | Active hours (based on a 0.25 vCPU compute) |
+|-------------|------------------------|---------------------------|
+| Free        | 5 (for branch computes)  | 20                        |
+| Launch      | 300                       |  1200                  |
+| Scale       | 750                       |  3000                  |
+| Enterprise  | Custom                       | Custom              |
+
+Storage and project allowances are straightforward. Refer to the allowances for your chosen [plan](/docs/introductions/plans). 
+
+**What about extra usage?**
+
+If your plan supports extra usage, extra storage, compute, and project allowances are automatically added (and billed for) when you exceed your allowances. See [Extra usage](#extra-usage) for details about the extra usage options for each plan. If extra usage is allocated, it is reflected in your monthly allowances on the **Billing** page. For example, if you are allocated an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page.
 
 ## Learn more about usage metrics
 
 To learn more about Neon usage metrics, see [Usage metrics](/docs/introduction/usage-metrics).
+
+## Neon pricing guide
+
+You can use this guide to estimate your monthly bill with Neon's based on your selected plan and estimated usage.
+
+### Step 1: Select Your Plan
+
+First, identify which plan you are using or plan to use. The available plans are:
+
+Free Tier: $0/month
+Launch: $19/month
+Scale: $69/month
+Enterprise: Custom pricing (contact us for details)
+
+### Step 2: Monthly base fee
+
+Note the base monthly fee associated with your plan from the list above.
+
+### Step 3: Estimate your usage
+
+Estimate your monthly usage in the following areas:
+
+- Storage (GiB): How much storage you expect to use.
+- Compute (Hours): How many compute hours you expect to need.
+- Projects: The number of projects you will be running.
+
+### Step 4: Calculate extra usage fees (if applicable)
+
+Based on your plan, calculate any extra fees for exceeding your plan's allowances.
+
+#### For the Launch plan:
+
+Extra Compute: If you exceed 300 compute hours, extra compute is billed at $0.04/hour.
+
+#### For the Scale plan:
+
+Extra Storage: If you exceed 50 GiB, extra storage is billed in increments of 10 GiB at $15 per increment.
+Extra Compute: If you exceed 750 compute hours, extra compute is billed at $0.04/hour.
+Extra Projects: If you exceed 50 projects, extra projects are billed in units of 10 projects at $50 per unit.
+
+##### Step 5: Total monthly estimate
+
+Add up the base monthly fee and any applicable extra usage fees to estimate your total monthly bill.
+
+Total Monthly Estimate = Monthly Base Fee + Extra Storage Fee + Extra Compute Fee + Extra Project Fee
+
+**Launch plan example**
+
+Base Fee: $19
+Compute Usage: 350 hours (50 hours over the allowance)
+Extra Compute Fee: 50 hours * $0.04 = $2
+Total Estimate: $19 + $2 = $21 per month
+
+**Scale plan example**
+
+Base Fee: $69
+Storage Usage: 60 GiB (10 GiB over the allowance)
+Compute Usage: 800 hours (50 hours over the allowance)
+Project Usage: 55 projects (5 projects over the allowance)
+Extra Storage Fee: 1 * $15 = $15
+Extra Compute Fee: 50 * $0.04 = $2
+Extra Project Fee: 1 * $50 = $50
+Total Estimate: $69 + $15 + $2 + $50 = $136 per month
+
+<Admonition type="note">
+- Adjust your usage estimates as needed to reflect your actual or projected usage.
+- For Enterprise plan users, please contact our sales team for a personalized estimate based on your custom needs.
+</Admonition>
 
 <NeedHelp/>
