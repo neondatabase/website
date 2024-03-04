@@ -337,15 +337,15 @@ If you require different values for these parameters, please contact Neon suppor
 
 ### Unused replication slots
 
-**Neon automatically removes _inactive_ replication slots to avoid storage bloat**. This occurs when your compute is actively replicating WAL records but your replication subscriber does not acknowledge progress for an extended time allowing WAL logs to be cleared on your source Neon database. An inactive replication slot is typically removed after a few hours but this depends on the volume of data being replicated. 
+**Neon automatically removes _inactive_ replication slots to avoid storage bloat**. This occurs when your compute is active, replicating data, but your replication subscriber does not acknowledge progress for an extended time. An inactive replication slot is typically removed after a few hours but the timing depends on the volume of data being replicated. 
 
-Removal of _inactive_ replication slots is often the result of a _dead subscriber_, where the replication slot is not dropped after a subscriber is deactivated or becomes unavailable. It can also occur in cases where a replication delay is configured on the subscriber. For example, some subscribers allow you to configure replication frequency or may even configure a lengthy replication delay by default to minimize usage.
+Removal of an _inactive_ replication slot is often the result of a _dead subscriber_, where the replication slot is not dropped after a subscriber is deactivated or becomes unavailable. Removal of a slot can also occur in cases where a replication delay is configured on the subscriber. For example, some subscribers allow you to configure replication frequency or set a replication delay by default to minimize usage.
 
-To avoid having replication slots automatically removed from your Neon database:
+To avoid having replication slots removed automatically from your Neon database:
 
-- Always check the default replication frequency setting on the subscriber.
-- Ensure that your replication frequency is a **number of minutes**, not a number of hours.
-- If using Debezium, ensure that [flush.lsn.source](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-flush-lsn-source) is set to `true` to allow WAL logs on the source to be cleared. For other subscribers, check for an equivalent setting and make sure it's configured to avoid WAL record accumulation on your source Neon database.
+- Always check for a default replication frequency on the subscriber.
+- Ensure that your replication frequency is at least once per hour, and replicate more frequently if you are replicating large volumes of data. 
+- If using Debezium, ensure that [flush.lsn.source](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-flush-lsn-source) is set to `true` to allow WAL logs on the source to be cleared. For other subscriber platforms, check for an equivalent setting and make sure it's configured to avoid replication delays.
 
 ### Known limitations
 
