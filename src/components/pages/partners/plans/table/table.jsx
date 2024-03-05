@@ -8,13 +8,15 @@ import Button from 'components/shared/button';
 import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import checkIcon from 'icons/pricing/check.svg';
+import tooltipHoveredSvg from 'icons/tooltip-hovered.svg';
+import tooltipSvg from 'icons/tooltip.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import tableData from '../data/plans.json';
 
 // Styles to set fixed height for table cells
 const rowClass = {
-  1: 'h-[49px]',
+  1: 'h-[48px]',
   2: 'h-[72px] lg:h-[82px]',
   3: 'h-[94px] lg:h-[90px]',
 };
@@ -39,7 +41,7 @@ const TableHeading = ({
           data-label={label}
         />
         <span
-          className="mt-3 block text-lg leading-snug tracking-tighter [&_span]:text-gray-new-70"
+          className="mt-3 block text-lg font-light leading-snug tracking-extra-tight [&_span]:tracking-extra-tight [&_span]:text-gray-new-70"
           dangerouslySetInnerHTML={{ __html: price }}
         />
         <span className="mt-[18px] block h-10 xl:mt-4 xl:h-9" />
@@ -48,7 +50,7 @@ const TableHeading = ({
   }
 
   return (
-    <div className={clsx('relative z-10', isFeaturedPlan && 'px-[52px] xl:px-[38px]', className)}>
+    <div className={clsx('relative z-10', className)}>
       <h3
         className={clsx(
           isFeaturedPlan && 'text-green-45',
@@ -58,7 +60,7 @@ const TableHeading = ({
         {label}
       </h3>
       <span
-        className="mt-3 block text-lg leading-snug tracking-tighter [&_span]:text-gray-new-70"
+        className="mt-3 block text-lg leading-snug tracking-extra-tight sm:whitespace-nowrap [&_span]:tracking-extra-tight [&_span]:text-gray-new-70"
         dangerouslySetInnerHTML={{ __html: price }}
       />
       <Button
@@ -138,15 +140,16 @@ const Table = () => {
   );
 
   return (
-    <div className="mx-auto mt-12 flex max-w-[960px] flex-col xl:px-10 lg:pl-8 lg:pr-0 md:max-w-none md:pl-4">
+    <div className="mx-auto mt-12 flex max-w-[1220px] flex-col xl:px-10 lg:pl-8 lg:pr-0 md:max-w-none md:pl-4">
       <ul
         className={clsx(
-          'scrollbar-hidden relative flex w-full pt-5 lg:overflow-x-auto lg:pr-4',
+          'scrollbar-hidden relative flex w-full pt-3 lg:overflow-x-auto lg:pr-4',
           isHiddenItems &&
             'after:absolute after:inset-x-0 after:bottom-0 after:h-1.5 after:bg-black-new'
         )}
       >
         {Object.keys(tableData.headings).map((key, i, arr) => {
+          const isFeaturedPlan = key === 'premier';
           const isLabelsColumn = i === 0;
 
           return (
@@ -155,20 +158,22 @@ const Table = () => {
                 'relative py-5 xl:py-4',
                 isLabelsColumn &&
                   'z-30 flex-1 bg-black-new lg:sticky lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] sm:min-w-[160px]',
-                i === 1 && 'min-w-[180px] basis-[352px] xl:basis-[296px] lg:basis-[380px]',
-                i !== 1 && !isLabelsColumn && 'min-w-[160px] basis-[304px] xl:basis-[260px]'
+                i === 1 && 'min-w-[200px] basis-[338px] xl:basis-[296px] lg:basis-[280px]',
+                i !== 1 && !isLabelsColumn && 'min-w-[220px] basis-[252px] xl:basis-[260px]'
               )}
               key={key}
             >
               <TableHeading
                 className={clsx(i === 1 && 'lg:pl-5')}
                 isLabelsColumn={isLabelsColumn}
+                isFeaturedPlan={isFeaturedPlan}
                 {...labelList[isLabelsColumn ? arr[1] : key]}
               />
-              <ul className="relative z-10 flex w-full grow flex-col">
+              <ul className="flex w-full grow flex-col">
                 {tableRows.map((item, index) => {
                   if (i === 0) {
                     const isGroupTitle = typeof item[key] === 'string';
+
                     return (
                       <li
                         className={clsx(
@@ -196,7 +201,7 @@ const Table = () => {
                           </span>
                         ) : (
                           <>
-                            <span className="relative w-fit text-lg font-medium leading-snug tracking-tight">
+                            <span className="relative w-fit text-lg leading-snug tracking-extra-tight lg:text-base">
                               {item[key].title}
                               {!!item.soon && (
                                 <span className="relative -top-0.5 ml-4 inline-block rounded-full bg-yellow-70/10 px-2.5 py-[5px] text-[10px] font-semibold uppercase leading-none tracking-wide text-yellow-70 xl:ml-2.5 xl:px-1.5 xl:py-1 xl:text-[8px]">
@@ -239,7 +244,7 @@ const Table = () => {
                       data-row-id={index}
                       key={index}
                     >
-                      {typeof item[key] === 'boolean' ? (
+                      {typeof item[key] === 'boolean' && (
                         <>
                           {item[key] ? (
                             <img src={checkIcon} width="24" height="24" alt="" loading="lazy" />
@@ -247,44 +252,70 @@ const Table = () => {
                             <span className="inline-block h-[1.4px] w-4 rounded-full bg-gray-new-30" />
                           )}
                         </>
-                      ) : (
-                        <span
-                          className="flex flex-col font-light leading-snug tracking-tight [&_span]:text-gray-new-70"
-                          data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
-                          data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
-                          dangerouslySetInnerHTML={{ __html: item[key] }}
-                        />
                       )}
-                      {item[`${key}_tooltip`] && (
-                        <Tooltip
-                          className="w-sm z-20"
-                          id={`${key}_tooltip_${index}`}
-                          place="top-center"
-                        />
+                      {typeof item[key] === 'string' && (
+                        <>
+                          <span
+                            className="flex flex-col font-light leading-snug tracking-extra-tight [&_span]:tracking-extra-tight [&_span]:text-gray-new-80"
+                            data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
+                            data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
+                            dangerouslySetInnerHTML={{ __html: item[key] }}
+                          />
+                          {item[`${key}_tooltip`] && (
+                            <Tooltip
+                              className="z-[99]"
+                              id={`${key}_tooltip_${index}`}
+                              place="top-center"
+                            />
+                          )}
+                        </>
+                      )}
+                      {typeof item[key] === 'object' && (
+                        <div className="flex flex-col items-start justify-start">
+                          <div className="group relative inline-flex items-center justify-start">
+                            <span>{item[key].label}</span>
+                            {item[key].tooltip && (
+                              <>
+                                <span
+                                  data-tooltip-id={`${key}_tooltip_${index}`}
+                                  data-tooltip-html={item[key]?.tooltip}
+                                >
+                                  <img
+                                    className="ml-1.5 transition-opacity duration-200 group-hover:opacity-0"
+                                    src={tooltipSvg}
+                                    width={14}
+                                    height={14}
+                                    alt=""
+                                    loading="lazy"
+                                  />
+                                  <img
+                                    className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                                    src={tooltipHoveredSvg}
+                                    width={14}
+                                    height={14}
+                                    alt=""
+                                    loading="lazy"
+                                  />
+                                </span>
+                                <Tooltip
+                                  className="z-30"
+                                  arrowColor="#303236"
+                                  id={`${key}_tooltip_${index}`}
+                                  place="right"
+                                  style={{ backgroundColor: '#303236', color: '#fff' }}
+                                />
+                              </>
+                            )}
+                          </div>
+                          <span className="mt-1 text-sm tracking-extra-tight text-gray-new-60">
+                            {item[key].description}
+                          </span>
+                        </div>
                       )}
                     </li>
                   );
                 })}
               </ul>
-              {i > 0 && !isHiddenItems && (
-                <Button
-                  className={clsx(
-                    i === 1 && 'lg:ml-5',
-                    'relative z-20 mt-8 h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-6 xl:h-9 xl:max-w-[200px] lg:w-[160px] sm:w-[150px] sm:max-w-none'
-                  )}
-                  size="xs"
-                  theme="gray-15"
-                  to={labelList[key].buttonUrl}
-                  onClick={() => {
-                    sendGtagEvent('partner_comparison_table', {
-                      event_label: labelList[key].label,
-                      event_position: 'bottom',
-                    });
-                  }}
-                >
-                  {labelList[key].buttonText}
-                </Button>
-              )}
             </li>
           );
         })}

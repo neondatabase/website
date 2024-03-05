@@ -3,7 +3,7 @@
     "feature": "",
     "free": {
       "label": "Free Tier",
-      "price": "Free forever",
+      "price": "<span>Free forever</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Start for free"
     },
@@ -21,7 +21,7 @@
     },
     "enterprise": {
       "label": "Enterprise",
-      "price": "Сustom rates",
+      "price": "<span>Custom rates</span>",
       "buttonUrl": "/enterprise#request-trial",
       "buttonText": "Request trial"
     }

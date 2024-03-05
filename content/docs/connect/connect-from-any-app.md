@@ -2,7 +2,7 @@
 title: Connect from any application
 subtitle: Learn how to connect to Neon from any application
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.274Z'
+updatedOn: '2024-02-27T14:37:51.432Z'
 ---
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch.
 
@@ -72,7 +72,7 @@ See our [Framework, language, and platform guides](https://neon.tech/docs/guides
 
 ## Network protocol support
 
-Neon currently supports **IPv4**. Support for other network protocols, including IPv6, is **not available** at this time.
+Neon supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses.
 
 Additionally, Neon provides a serverless driver that supports both WebSocket and HTTP connections. For further information, refer to our [Neon serverless driver](/docs/serverless/serverless-driver) documentation.
 

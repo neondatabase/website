@@ -12,6 +12,7 @@ const Tooltip = ({
   className = null,
   offset = 10,
   anchorSelect = null,
+  ...rest
 }) => {
   const [isTooltipVisible, setTooltipVisibility] = useState(false);
 
@@ -31,6 +32,7 @@ const Tooltip = ({
         offset={offset}
         anchorSelect={anchorSelect}
         multiline
+        {...rest}
       />
     );
   }

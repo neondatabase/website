@@ -30,7 +30,7 @@ In any of these widgets, you can click the link in the top right corner to get m
 
 For Pro users, when you edit your compute from the **Branches** page, there is a graph showing your recent vCPU and RAM usage. This can help visualize whether your current minimum and maximum sizes are suitable for your current level of demand.
 
-See [Monitoring Autoscaling](/docs/guides/autoscaling#monitoring-autoscaling) for details.
+See [Monitoring Autoscaling](/docs/guides/autoscaling-guide#monitoring-autoscaling) for details.
 
 ## Branch-specific metrics
 
@@ -101,4 +101,4 @@ Currently, not all information within `pg_stats_statements` persists when a comp
 
 At Neon, we understand that observability and monitoring are critical for running successful applications.
 
-Check out our [roadmap](/docs/introduction/roadmap) to see what's coming next. And if you've got feature requests or feedback about what you'd like to see in Neon observability features, let us know in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042).
+Check out our [roadmap](/docs/introduction/roadmap) to see what's coming next. And if you've got feature requests or feedback about what you'd like to see in Neon observability features, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.

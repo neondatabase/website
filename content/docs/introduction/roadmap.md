@@ -25,23 +25,25 @@ Here's a snapshot of what we're working on now:
 
 ### Observability
 
-* **Autoscaling visualizations**
+* **Autoscaling charts in Project Dashboard**
 
-    Adding dynamic charts, populated with real-time data, to help you visualize how autoscaling impacts CPU and RAM usage over time. See [Monitoring autoscaling](/docs/guides/autoscaling-guide#monitor-autoscaling) for a sneak peek.
+    Continuing with our improvements to monitoring and observability in Neon, our new [Autoscaling graphs](/docs/guides/autoscaling-guide#monitor-autoscaling) &#8212; available now when you edit a branch's compute instance &#8212; will soon be added to the Project Dashboard as well.
+
+* **New Monitoring page**
+
+   We are also working on adding a new Monitoring page to the Neon Console that will display key Postgres, connection, and resource usage metrics in a dashboard.
 
 ### Developer workflows
 
-* **Branch restore with Time Travel Assist**
+* **Schema Diff**
 
-    Instantly restore a branch to an earlier state in its history. Use Time Travel Assist to run queries against historical data, making sure you are restoring to the right point in time.
-
-    We'll be adding the ability to restore to another branch as well soon after.
+    We are currently building a Schema Diff tool that lets you precisely compare database schemas between different branches to help streamline your integration process.
 
     If there are any new branching features that you think could help your development team's workflow, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042).
 
 * **Improvements to Vercel integration**
 
-    To ensure that users of the integration that access Neon from Vercel's serverless environment do not run out of connections, we're changing the database connection settings added to a Vercel project to pooled connections by default.
+    Some upcoming improvements to the Vercel integration include a method for removing old preview deployment branches, as well as new Neon actions and better error messaging to let you do more right from the Vercel integration drawer.
 
 ### Account management
 
@@ -51,7 +53,7 @@ Here's a snapshot of what we're working on now:
 
 ### More regions
 
-*  We are currently evaluating new regions. Please reach out on Discord to let us know which region you would like to see next. 
+* We are currently evaluating new regions. Please reach out on Discord to let us know which region you would like to see next.
 
 ## A brief history of Neon
 
@@ -67,7 +69,7 @@ In the summer of 2023, we released the [Neon CLI](/docs/reference/neon-cli). New
 
 In the fall of 2023, we added [IP allowlisting](/docs/introduction/ip-allow), email signup, and [logical replication](/docs/introduction/logical-replication). We also announced [SOC 2 Type 2](https://neon.tech/blog/soc2-type2) compliance.
 
-In January of 2024, we added support for the Asia Pacific (Sydney) region.
+In the winter of 2024, we added support for the Asia Pacific (Sydney) region, [Branch Restore](/docs/guides/branch-restore) with Time Travel Assist, and new [Pricing](https://neon.tech/pricing) plans.
 
 ## Technical Preview
 

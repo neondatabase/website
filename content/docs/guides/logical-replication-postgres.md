@@ -10,6 +10,10 @@ Neon's logical replication feature allows you to replicate data from Neon to ext
 
 You will learn how to enable logical replication in Neon, create a publication, and configure an external Postgres database as a subscriber.
 
+<Admonition type="important">
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
+</Admonition>
+
 ## Enable logical replication
 
 <Admonition type="important">

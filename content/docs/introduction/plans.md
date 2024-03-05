@@ -10,7 +10,8 @@ redirectFrom:
   - /docs/introduction/free-tier
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
-updatedOn: '2024-02-22T14:29:54.386Z'
+  - /docs/reference/technical-preview-free-tier
+updatedOn: '2024-02-27T16:17:40.463Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [pricing](https://neon.tech/pricing) page for an overview of our plans and pricing. 

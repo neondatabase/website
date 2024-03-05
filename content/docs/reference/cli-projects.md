@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-02-19T18:57:12.562Z'
+updatedOn: '2024-02-27T14:37:51.437Z'
 ---
 
 ## Before you begin
@@ -229,7 +229,7 @@ neonctl projects update muddy-wood-859533 --name dev_project_1
 Update the IP allowlist. Multiple values are specified as a list without a delimiter.
 
 ```bash
-neonctl projects update withered-dream-91802149 --ip-allow 192.168.1.1 192.168.1.2 
+neonctl projects update withered-dream-91802149 --ip-allow 192.0.2.1 192.0.2.2 
 ┌─────────────────────────┬───────────┬───────────────┬──────────────────────┐
 │ Id                      │ Name      │ Region Id     │ Created At           │
 ├─────────────────────────┼───────────┼───────────────┼──────────────────────┤

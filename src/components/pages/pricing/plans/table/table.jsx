@@ -39,7 +39,7 @@ const TableHeading = ({
           data-label={label}
         />
         <span
-          className="mt-3 block text-lg leading-snug tracking-tighter [&_span]:text-gray-new-70"
+          className="mt-3 block text-lg leading-snug tracking-extra-tight [&_span]:tracking-extra-tight [&_span]:text-gray-new-70"
           dangerouslySetInnerHTML={{ __html: price }}
         />
         <span className="mt-[18px] block h-10 xl:mt-4 xl:h-9" />
@@ -58,7 +58,7 @@ const TableHeading = ({
         {label}
       </h3>
       <span
-        className="mt-3 block text-lg leading-snug tracking-tighter [&_span]:text-gray-new-70"
+        className="mt-3 block text-lg leading-snug tracking-extra-tight [&_span]:tracking-extra-tight [&_span]:text-gray-new-70"
         dangerouslySetInnerHTML={{ __html: price }}
       />
       <Button
@@ -184,7 +184,7 @@ const Table = () => {
                           isHiddenItems &&
                             'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-20/25',
                           isGroupTitle
-                            ? 'pb-3 pt-11 lg:pt-10'
+                            ? 'pb-3 pt-11 lg:pt-[42px]'
                             : ['py-3 lg:py-2.5', rowClass[item.rows]],
                           !isGroupTitle &&
                             !rowsWithGroupTitles.includes(index - 1) &&
@@ -198,12 +198,12 @@ const Table = () => {
                         key={index}
                       >
                         {isGroupTitle ? (
-                          <span className="text-sm font-medium uppercase leading-none tracking-wide text-yellow-70">
+                          <span className="whitespace-nowrap text-sm font-medium uppercase leading-none tracking-wide text-yellow-70 lg:text-xs">
                             {item[key]}
                           </span>
                         ) : (
                           <>
-                            <span className="relative w-fit text-lg font-medium leading-snug tracking-tight">
+                            <span className="relative w-fit text-lg leading-tight tracking-extra-tight lg:text-base">
                               {item[key].title}
                               {!!item.soon && (
                                 <span className="relative -top-0.5 ml-4 inline-block rounded-full bg-yellow-70/10 px-2.5 py-[5px] text-[10px] font-semibold uppercase leading-none tracking-wide text-yellow-70 xl:ml-2.5 xl:px-1.5 xl:py-1 xl:text-[8px]">
@@ -213,7 +213,7 @@ const Table = () => {
                             </span>
                             {item[key]?.subtitle && (
                               <span
-                                className="font-light leading-snug tracking-tight text-gray-new-70"
+                                className="mt-1 text-sm font-light leading-snug tracking-tight text-gray-new-70"
                                 dangerouslySetInnerHTML={{ __html: item[key].subtitle }}
                               />
                             )}
@@ -257,7 +257,7 @@ const Table = () => {
                         </>
                       ) : (
                         <span
-                          className="flex flex-col font-light leading-snug tracking-tight [&_span]:text-gray-new-70"
+                          className="flex flex-col gap-y-1 font-light leading-snug tracking-extra-tight [&_span]:text-sm [&_span]:text-gray-new-60"
                           data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
                           data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
                           dangerouslySetInnerHTML={{ __html: item[key] }}
