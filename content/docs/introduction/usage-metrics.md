@@ -138,11 +138,13 @@ To estimate what your compute hour usage might be per month:
    This calculation is useful when trying to select the right Neon plan or when estimating the extra compute usage you might need.
 
    <Admonition type="note">
-   If you are using Neon's _Autoscaling_ feature, **compute hours** is more challenging to estimate. Autoscaling adjusts the compute size based on demand within the defined minimum and maximum compute size thresholds. To estimate compute hours in a dynamic environment like this, you could try estimating an average compute size and modifying your formula as follows:
+   If you plan to use Neon's _Autoscaling_ feature, estimating **compute hours** is more challenging. Autoscaling adjusts the compute size based on demand within the defined minimum and maximum compute size thresholds. The best approach is to estimate an average compute size and modify the compute hours formula as follows:
 
    ```text
    compute hours = average compute size * active hours
    ```
+
+   To estimate an average compute size, start with a minimum compute size that can hold your data or working set (see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute)). Pick a maximum compute size that can handle your peak loads. Try estimating an average compute size between those thresholds based on your workload profile for a typical day.
 
    </Admonition>
 
