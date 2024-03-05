@@ -9,7 +9,7 @@ updatedOn: '2024-02-22T14:29:54.384Z'
 
 ## Usage allowances
 
-Each of Neon's plans includes **Storage**, **Compute**, and **Project** usage allowances as outlined in the following table. 
+Each of Neon's plans includes **Storage**, **Compute**, and **Project** usage allowances in the base monthly fee as outlined in the following table. You do not pay anything extra for these monthly allowances.
 
 |            | Free Tier                                                    | Launch          | Scale             | Enterprise       |
 |------------|--------------------------------------------------------------|-----------------|-------------------|------------------|
@@ -19,13 +19,18 @@ Each of Neon's plans includes **Storage**, **Compute**, and **Project** usage al
 | Projects allowance  | 1                                                            | 10              | 50                |  Unlimited                |
 
 
-These allowances are included in your plan's monthly fee, except for the Free Tier, which is always free. The [Enterprise](/docs/introduction/plans#enterprise) plan is completely customizable with respect to allowances.
+The [Enterprise](/docs/introduction/plans#enterprise) plan is customizable with respect to allowances.
 
 <Admonition type="tip" title="What are active hours and compute hours?">
 
-An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted. In the table above, _active hours_ are based on a compute with 0.25 vCPU.
+- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted. In the table above, _active hours_ are based on a 0.25 vCPU compute size.
+- A **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
 
-A **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
+**Compute hours formula**
+
+```
+compute hours = compute size * active hours
+```
 
 </Admonition>
 
