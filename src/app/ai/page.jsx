@@ -1,3 +1,4 @@
+import Boost from 'components/pages/ai/boost';
 import Examples from 'components/pages/ai/examples';
 import Hero from 'components/pages/ai/hero';
 import Integration from 'components/pages/ai/integration';
@@ -77,6 +78,7 @@ const AIPage = () => (
       items={items}
       isGradientLabel
     />
+    <Boost />
     <Examples />
     {/* removed testimonials section for now as part of removing the pg_embedding references */}
     {/* <Testimonials
