@@ -25,12 +25,11 @@ The [Enterprise](/docs/introduction/plans#enterprise) plan is customizable with 
 
 - An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted. In the table above, _active hours_ are based on a 0.25 vCPU compute size.
 - A **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
+- **Compute hours formula**
 
-**Compute hours formula**
-
-```
-compute hours = compute size * active hours
-```
+  ```
+  compute hours = compute size * active hours
+  ```
 
 </Admonition>
 
@@ -187,6 +186,6 @@ On the Free Tier, the primary branch compute is a 0.25 vCPU compute that is alwa
 
 **What about extra usage?**
 
-The Launch plan supports extra compute usage. The Scale paln supports extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. See [Extra usage](#extra-usage) for details. If extra usage occurs, it is reflected in your monthly allowances on the **Billing** page. For example, if you are allocated an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page.
+The Launch plan supports extra compute usage. The Scale paln supports extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. See [Extra usage](#extra-usage) for details. If extra usage occurs, it is reflected in your monthly allowance on the **Billing** page. For example, if you are allocated an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page.
 
 <NeedHelp/>
