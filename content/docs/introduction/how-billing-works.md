@@ -93,19 +93,21 @@ Here you will find storage and compute usage for the project among other project
 | Scale       | 750                       |  3000                  |
 | Enterprise  | Custom                       | Custom              |
 
+<Admonition type="note">
+On the Free Tier, the primary branch compute is a 0.25 vCPU compute that is always available, so allowances do not apply. You can run your 0.25 vCPU compute on the Free Tier 24/7. Only branch computes on the Free Tier have an allowance, which is the 5 compute hour/month allowance that Free Tier users see on the **Billing** page. On the Free Tier, this is actually 20 hours of usage because Free Tier computes always have 0.25 vCPU. You cannot increase the compute size on the Free Tier.
+</Admonition>
 
-
-Storage and project allowances are straightforward. Refer to the allowances for your chosen [plan](/docs/introductions/plans). 
+**Storage** includes your data size and history. Neon maintains a history of changes to support _point-in-time restore_. On the Free Tier, your default history retention period is 24 hours. The Launch plan supports up to 7 days of history retention, and the Scale plan supports up to 30 days. Keep in mind that history retention increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the history retention setting for your project. See [Configure history retention](/docs/manage/projects#configure-history-retention).
 
 **What about extra usage?**
 
-If your plan supports extra usage, extra storage, compute, and project allowances are automatically added (and billed for) when you exceed your allowances. See [Extra usage](#extra-usage) for details about the extra usage options for each plan. If extra usage is allocated, it is reflected in your monthly allowances on the **Billing** page. For example, if you are allocated an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page.
+The Launch plan supports extra compute usage. The Scale paln supports extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. See [Extra usage](#extra-usage) for details. If extra usage occurs, it is reflected in your monthly allowances on the **Billing** page. For example, if you are allocated an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page.
 
 ## Learn more about usage metrics
 
-To learn more about Neon usage metrics, see [Usage metrics](/docs/introduction/usage-metrics).
+To learn more about Neon **Compute**, **Storage**, and **Project** metrics, see [Usage metrics](/docs/introduction/usage-metrics).
 
-## Neon pricing guide
+## Neon pricing estimation guide
 
 You can use this guide to estimate your monthly bill with Neon based on your selected plan and estimated usage.
 
@@ -117,12 +119,12 @@ You can use this guide to estimate your monthly bill with Neon based on your sel
 
 ### Step 1: Select your plan
 
-First, identify which plan you are using or plan to use. The available plans are:
+First, select a plan that best fits your requirements. For **Storage**, **Compute**, and **Project** usage allowances, see [above](#usage-allowances), or refer to our [Pricing](https://neon.tech/pricing) page, which provides a detailed plan comparison. The available plans are:
 
 - Free Tier: $0/month
 - Launch: $19/month
 - Scale: $69/month
-- Enterprise: Custom pricing (contact us for details)
+- Enterprise: Custom pricing (contact [Sales](/contact-sales) for pricing details)
 
 ### Step 2: Monthly base fee
 
@@ -130,27 +132,31 @@ Note the base monthly fee associated with your plan from the list above.
 
 ### Step 3: Estimate your usage
 
-Estimate your monthly usage in the following areas:
+Estimate your monthly usage in the following areas to see if any "extra usage" is required beyond what's included in your plan.
 
-- Storage (GiB): How much storage you expect to use.
-- Compute (Hours): How many compute hours you expect to need.
-- Projects: The number of projects you will be running.
+- **Storage (GiB)**: How much storage do you expect to use?  Remember that storage includes both data and history. You will need to account for the storage required beyond the size of the data stored in your databases. For more information, see [Storage](/docs/introduction/usage-metrics#storage).
+- **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Noen supports compute sizes ranging from .25 vCPU to 8 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute hour usage.
+- **Projects**: How many projects you will be running? Neon recommends a project per application or client.
 
 ### Step 4: Calculate extra usage fees (if applicable)
 
-Based on your plan, calculate any extra fees for exceeding your plan's allowances.
+Each [plan](/docs/introduction/plans) comes with a base allowance of **Storage**, **Compute**, and **Projects**. Based on the plan your usage estimates, calculate any extra fees for exceeding your plan's allowances.
 
 #### For the Launch plan:
 
-- Extra Compute: If you exceed 300 compute hours, extra compute is billed at $0.04/hour.
+The Launch plan supports extra compute usage. If you need extra storage or projects, you'll need to move up to the Scale plan.
+
+- **Extra Compute**: If you exceed 300 compute hours, extra compute is billed at $0.04/hour.
 
 #### For the Scale plan:
 
-- Extra Storage: If you exceed 50 GiB, extra storage is billed in increments of 10 GiB at $15 per increment.
-- Extra Compute: If you exceed 750 compute hours, extra compute is billed at $0.04/hour.
-- Extra Projects: If you exceed 50 projects, extra projects are billed in units of 10 projects at $50 per unit.
+The Scale plan supports extra **Storage**, **Compute**, and **Projects**.
 
-##### Step 5: Total monthly estimate
+- **Extra Storage**: If you exceed 50 GiB, extra storage is billed in increments of 10 GiB at $15 per increment.
+- **Extra Compute**: If you exceed 750 compute hours, extra compute is billed at $0.04/hour.
+- **Extra Projects**: If you exceed 50 projects, extra projects are billed in units of 10 projects at $50 per unit.
+
+### Step 5: Total monthly estimate
 
 Add up the base monthly fee and any applicable extra usage fees to estimate your total monthly bill.
 
@@ -158,29 +164,29 @@ Add up the base monthly fee and any applicable extra usage fees to estimate your
 Total Monthly Estimate = Monthly Base Fee + Extra Storage Fee + Extra Compute Fee + Extra Project Fee
 ```
 
-**Launch plan example**
+**Launch plan example**:
 
-- Base Fee: $19
-- Compute Usage: 350 hours (50 hours over the allowance)
-- Extra Compute Fee: 50 hours * $0.04 = $2
+- Base fee: $19
+- Compute usage: 350 hours (50 hours over the allowance)
+- Extra compute fee: 50 hours * $0.04 = $2
 
-**Total Estimate**: $19 + $2 = $21 per month
+_Total estimate_: $19 + $2 = $21 per month
 
-**Scale plan example**
+**Scale plan example**:
 
-- Base Fee: $69
-- Storage Usage: 60 GiB (10 GiB over the allowance)
-- Compute Usage: 800 hours (50 hours over the allowance)
-- Project Usage: 55 projects (5 projects over the allowance)
-- Extra Storage Fee: 1 * $15 = $15
-- Extra Compute Fee: 50 * $0.04 = $2
-- Extra Project Fee: 1 * $50 = $50
+- Base fee: $69
+- Storage usage: 60 GiB (10 GiB over the allowance)
+- Compute usage: 800 hours (50 hours over the allowance)
+- Project usage: 55 projects (5 projects over the allowance)
+- Extra storage fee: 1 * $15 = $15
+- Extra compute fee: 50 * $0.04 = $2
+- Extra project fee: 1 * $50 = $50
 
-**Total Estimate**: $69 + $15 + $2 + $50 = $136 per month
+_Total estimate_: $69 + $15 + $2 + $50 = $136 per month
 
 <Admonition type="note" title="Notes">
 - Adjust your usage estimates as needed to reflect your actual or projected usage.
-- For Enterprise plan users, please contact our sales team for a personalized estimate based on your custom needs.
+- For Enterprise plan users, please contact our [Sales](/contact-sales) team for a personalized estimate based on your custom needs.
 </Admonition>
 
 <NeedHelp/>
