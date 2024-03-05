@@ -113,6 +113,10 @@ SELECT pg_create_logical_replication_slot('airbyte_slot', 'pgoutput');
 
 `airbyte_slot` is the name assigned to the replication slot. You will need to provide this name when you set up your Airbyte source.
 
+<Admonition type="important">
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
+</Admonition>
+
 ## Create a publication
 
 Perform the following steps for each table you want to replicate data from:
