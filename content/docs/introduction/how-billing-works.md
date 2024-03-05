@@ -62,47 +62,6 @@ Extra compute usage is available with the [Launch](/docs/introduction/plans##lau
 
 Extra project usage is only available with the [Scale](/docs/introduction/plans##scale) plan. Extra projects are billed in units of 10. For example, the Scale plan has an allowance of 50 projects, which is included in the plan's monthly fee. If you use more than 50 projects, you are automatically billed for an extra package of 10 projects at $50 per package. For example, if you use 51 projects, you are billed for 1 package of 10 projects (an extra $50). If you use 61 projects, you are billed for 2 packages of 10 projects (an extra $100), and so on. 
 
-## Monitoring billing and usage
-
-You can monitor billing and usage for all projects in your Neon account from the **Billing** page in the Neon Console.
-
-1. Navigate to the Neon Console.
-1. Select your Profile.
-1. Select **Billing** from the menu.
-
-Here you will find the current bill and your current usage for all projects in your Neon account. Usage is reset to zero at the beginning of each month. For example, on the Launch plan, compute usage will be set back to **0/300h** at the beginning of each month.
-
-![Monitor billing and usage](/docs/introduction/monitor_billing_usage.png)
-
-### Monitor usage for a project
-
-You can monitor usage for a single project from the **Usage** widget on your project's **Dashboard** in the Neon Console.
-
-![Monitor usage widget](/docs/introduction/monitor_usage_widget.png)
-
-Here you will find storage and compute usage for the project among other project usage metrics. 
-
-#### Interpreting usage
-
-**Compute** usage is tracked in **compute hours**. A compute hour is 1 active hour for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour. Neon's [Pricing](https://neon.tech/pricing) page outlines monthly compute allowances in both **active hours** and **compute hours**. Active hours are based on a compute with 0.25 vCPU, and compute hours are based on a compute with 1 vCPU, as outlined below. 
-
-| Plan        | Compute hours (based on a 1 vCPU compute) | Active hours (based on a 0.25 vCPU compute) |
-|-------------|------------------------|---------------------------|
-| Free        | 5 (for branch computes)  | 20                        |
-| Launch      | 300                       |  1200                  |
-| Scale       | 750                       |  3000                  |
-| Enterprise  | Custom                       | Custom              |
-
-<Admonition type="note">
-On the Free Tier, the primary branch compute is a 0.25 vCPU compute that is always available, so allowances do not apply. You can run your 0.25 vCPU compute on the Free Tier 24/7. Only branch computes on the Free Tier have an allowance, which is the 5 compute hour/month allowance that Free Tier users see on the **Billing** page. On the Free Tier, this is actually 20 hours of usage because Free Tier computes always have 0.25 vCPU. You cannot increase the compute size on the Free Tier.
-</Admonition>
-
-**Storage** includes your data size and history. Neon maintains a history of changes to support _point-in-time restore_. On the Free Tier, your default history retention period is 24 hours. The Launch plan supports up to 7 days of history retention, and the Scale plan supports up to 30 days. Keep in mind that history retention increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the history retention setting for your project. See [Configure history retention](/docs/manage/projects#configure-history-retention).
-
-**What about extra usage?**
-
-The Launch plan supports extra compute usage. The Scale paln supports extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. See [Extra usage](#extra-usage) for details. If extra usage occurs, it is reflected in your monthly allowances on the **Billing** page. For example, if you are allocated an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page.
-
 ## Learn more about usage metrics
 
 To learn more about Neon **Compute**, **Storage**, and **Project** metrics, see [Usage metrics](/docs/introduction/usage-metrics).
@@ -188,5 +147,46 @@ _Total estimate_: $69 + $15 + $2 + $50 = $136 per month
 - Adjust your usage estimates as needed to reflect your actual or projected usage.
 - For Enterprise plan users, please contact our [Sales](/contact-sales) team for a personalized estimate based on your custom needs.
 </Admonition>
+
+## Monitoring billing and usage
+
+You can monitor billing and usage for all projects in your Neon account from the **Billing** page in the Neon Console.
+
+1. Navigate to the Neon Console.
+1. Select your Profile.
+1. Select **Billing** from the menu.
+
+Here you will find the current bill and your current usage for all projects in your Neon account. Usage is reset to zero at the beginning of each month. For example, on the Launch plan, compute usage will be set back to **0/300h** at the beginning of each month.
+
+![Monitor billing and usage](/docs/introduction/monitor_billing_usage.png)
+
+### Monitor usage for a project
+
+You can monitor usage for a single project from the **Usage** widget on your project's **Dashboard** in the Neon Console.
+
+![Monitor usage widget](/docs/introduction/monitor_usage_widget.png)
+
+Here you will find storage and compute usage for the project among other project usage metrics. 
+
+#### Interpreting usage
+
+**Compute** usage is tracked in **compute hours**. A compute hour is 1 active hour for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour. Neon's [Pricing](https://neon.tech/pricing) page outlines monthly compute allowances in both **active hours** and **compute hours**. Active hours are based on a compute with 0.25 vCPU, and compute hours are based on a compute with 1 vCPU, as outlined below. 
+
+| Plan        | Compute hours (based on a 1 vCPU compute) | Active hours (based on a 0.25 vCPU compute) |
+|-------------|------------------------|---------------------------|
+| Free        | 5 (for branch computes)  | 20                        |
+| Launch      | 300                       |  1200                  |
+| Scale       | 750                       |  3000                  |
+| Enterprise  | Custom                       | Custom              |
+
+<Admonition type="note">
+On the Free Tier, the primary branch compute is a 0.25 vCPU compute that is always available, so allowances do not apply. You can run your 0.25 vCPU compute on the Free Tier 24/7. Only branch computes on the Free Tier have an allowance, which is the 5 compute hour/month allowance that Free Tier users see on the **Billing** page. On the Free Tier, this is actually 20 hours of usage because Free Tier computes always have 0.25 vCPU. You cannot increase the compute size on the Free Tier.
+</Admonition>
+
+**Storage** includes your data size and history. Neon maintains a history of changes to support _point-in-time restore_. On the Free Tier, your default history retention period is 24 hours. The Launch plan supports up to 7 days of history retention, and the Scale plan supports up to 30 days. Keep in mind that history retention increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the history retention setting for your project. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+
+**What about extra usage?**
+
+The Launch plan supports extra compute usage. The Scale paln supports extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. See [Extra usage](#extra-usage) for details. If extra usage occurs, it is reflected in your monthly allowances on the **Billing** page. For example, if you are allocated an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page.
 
 <NeedHelp/>
