@@ -5,7 +5,7 @@ import Link from 'components/shared/link/link';
 import Increase from './images/increase.inline.svg';
 
 const Boost = () => (
-  <section className="boost mt-[154px]">
+  <section className="boost mt-[154px] xl:mt-28 lg:mt-24 md:mt-20">
     <Container className="flex flex-col items-center" size="medium">
       <GradientLabel>Perfomance</GradientLabel>
       <h2 className="mt-3 text-center text-5xl font-medium leading-dense tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
@@ -29,7 +29,8 @@ const Boost = () => (
         , ensuring seamless scaling for your AI applications.
       </p>
     </Container>
-    <Container className="mt-[78px] !p-0" size="medium">
+    {/* TODO: adaptive mt */}
+    <Container className="mt-[78px] !p-0 xl:mt-[65px]" size="medium">
       <div className="aspect-[1472/521] w-full overflow-hidden">
         {/* TODO: optimize svg rendering */}
         <Increase className="relative right-1.5 aspect-[1472/858] h-auto w-full [shape-rendering:geometricprecision]" />
