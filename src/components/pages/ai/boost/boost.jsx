@@ -17,7 +17,7 @@ const Boost = () => (
         Experience up to 30x&nbsp;
         {/* TODO: insert href */}
         <Link
-          className="!text-lg tracking-extra-tight underline-offset-[5px] xl:!text-base"
+          className="!text-lg tracking-normal underline-offset-[3px] xl:!text-base"
           theme="green-underlined"
           to="/"
           // target={linkTarget}
@@ -33,7 +33,7 @@ const Boost = () => (
     <Container className="mt-[78px] !p-0 xl:mt-[65px]" size="medium">
       <div className="aspect-[1472/521] w-full overflow-hidden">
         {/* TODO: optimize svg rendering */}
-        <Increase className="relative right-1.5 aspect-[1472/858] h-auto w-full [shape-rendering:geometricprecision]" />
+        <Increase className="relative aspect-[1472/858] h-auto w-full [shape-rendering:geometricprecision]" />
       </div>
     </Container>
   </section>
