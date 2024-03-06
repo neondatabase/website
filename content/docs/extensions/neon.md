@@ -1,6 +1,6 @@
 ---
 title: The neon extension
-title: An extension for Neon-specific statistics including the Local File Cache hit rartio 
+title: An extension for Neon-specific statistics including the Local File Cache hit ratio 
 enableTableOfContents: true
 updatedOn: '2024-02-08T15:20:54.277Z'
 ---
