@@ -8,6 +8,8 @@ There are many factors that can impact the performance of your Postgres database
 
 ## Collecting statistics
 
+Optimizing performance requires data. a
+
 ## Optimizing query performance
 
 ### Using EXPLAIN ANALYZE
