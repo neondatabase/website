@@ -1,13 +1,13 @@
 ---
 title: Integrate Neon Postgres with Prisma ORM
-subtitle: Set up Neon Postgres and run migrations for your TypeScript project using Prisma ORM
+subtitle: Set up Neon Postgres and run migrations for your Javascript project using Prisma ORM
 enableTableOfContents: true
 updatedOn: '2024-03-06T10:15:00.000Z'
 ---
 
 [Prisma](https://www.prisma.io/) is an open-source ORM for Node.js and Typescript, known for its ease of use and focus on type safety. It supports many databases, including Postgres, and provides a robust system for managing database schemas and migrations.
 
-This guide will walk you through using `Prisma` ORM with the `Neon` managed Postgres database in a TypeScript project. We'll create a Node.js application, set up Prisma, and showcase the workflow of setting up and interacting with the database using Prisma.
+This guide will walk you through using `Prisma` ORM with the `Neon` managed Postgres database in a Javascript project. We'll create a Node.js application, set up Prisma, and showcase the workflow of setting up and interacting with the database using Prisma.
 
 ## Prerequisites
 
