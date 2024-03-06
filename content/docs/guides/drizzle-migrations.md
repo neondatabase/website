@@ -390,9 +390,11 @@ npm run dev
 
 You can navigate to `http://localhost:3000/authors` in your browser to check the each author entry has a `country` field, currently set to `null`. 
 
-## Resources
+## Conclusion
 
 In this guide, we set up a new TypeScript project using `Hono.js` and `Drizzle` ORM, and connected it to a `Neon` Postgres database. We created a schema for the database, generated and ran migrations, and implemented API endpoints to query the database. 
+
+## Resources
 
 For more information on the tools used in this guide, refer to the following resources:
 

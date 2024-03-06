@@ -196,7 +196,7 @@
             - title: Prisma
               slug: guides/prisma
             - title: Migrations with Drizzle
-              slug: guides/migrations-drizzle
+              slug: guides/drizzle-migrations
         - title: PHP
           items:
             - title: Laravel
