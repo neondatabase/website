@@ -50,7 +50,6 @@ const SocialShare = ({ className = null, slug, title, withTopBorder = false }) =
           key={index}
           onClick={() => {
             sendGtagEvent(eventName);
-            console.log(eventName);
           }}
         >
           <Icon className="h-4 w-4 text-white transition-colors duration-200 group-hover:text-[#47FFC2] lg:h-6 lg:w-6" />
