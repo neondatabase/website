@@ -2,90 +2,26 @@
   "headings": {
     "feature": "",
     "standard": {
-      "label": "Standard",
-      "price": "<span>Partnership Tier</span>",
+      "label": "Standard Tier",
+      "price": "<span>Basic partner access</span>",
       "buttonUrl": "#partners-apply",
-      "buttonText": "Become a partner"
+      "buttonText": "Get started"
     },
     "premier": {
-      "label": "Premier",
-      "price": "<span>Partnership Tier</span>",
+      "label": "Premier Tier",
+      "price": "<span>Enhanced partner benefits</span>",
       "buttonUrl": "#partners-apply",
-      "buttonText": "Become a partner"
+      "buttonText": "Get started"
     }
   },
   "cols": [
     {
-      "rows": "1",
-      "feature": "Commercials"
-    },
-    {
-      "rows": "3",
-      "feature": {
-        "title": "Monthly Price"
-      },
-      "standard": "<span>Starts at</span> $500/month <span>including usage</span>",
-      "premier": "Custom"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Usage"
-      },
-      "standard": "Billed at a 10% discount versus list price",
-      "premier": "Custom"
-    },
-    {
-      "rows": "1",
-      "feature": "Consumption"
-    },
-    {
-      "rows": "3",
-      "feature": {
-        "title": "Projects"
-      },
-      "standard": "Unlimited (at $4.5/project) <span>If >200 projects contact for custom pricing</span>",
-      "premier": "Unlimited"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Storage"
-      },
-      "standard": "Unlimited <span>(at $1.35 per GiB)</span>",
-      "premier": "Unlimited"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Branches"
-      },
-      "standard": "500<span>per project</span>",
-      "premier": "Unlimited"
-    },{
-      "rows": "2",
-      "feature": {
-        "title": "Compute"
-      },
-      "standard": "Max: 8 CU 8 vCPU, 32 GB RAM <span>(at $0.036 per 0.25 vCPU 1 GiB RAM)</span>",
-      "premier": "Larger sizes <span>8+ vCPU, 32+ GB RAM</span>"
-    },
-    {
-      "rows": "1",
       "feature": "Features"
     },
     {
-      "rows": "2",
-      "feature": {
-        "title": "Pricing Plan Features"
-      },
-      "standard": "<p>All <a class='inline text-green-45 underline decoration-green-45/40' href='https://neon.tech/docs/introduction/plans#scale'>Scale</a> features</p>",
-      "premier": "<p>All <a class='inline text-green-45 underline decoration-green-45/40' href='https://neon.tech/docs/introduction/plans#enterprise'>Enterprise</a> features</p>"
-    },
-    {
       "rows": "1",
       "feature": {
-        "title": "Service SLA of 99.99%"
+        "title": "Service SLA of 99.95%"
       },
       "standard": true,
       "premier": true
@@ -140,6 +76,14 @@
     },
     {
       "rows": "1",
+      "feature": {
+        "title": "Pricing plan features"
+      },
+      "standard": "<p class='with-link-primary'>All <a href='/docs/introduction/plans#scale'>Scale</a> features</p>",
+      "premier": "<p class='with-link-primary'>All <a href='/docs/introduction/plans#enterprise'>Enterprise</a> features</p>"
+    },
+    {
+      "rows": "2",
       "feature": "Marketing"
     },
     {
@@ -157,6 +101,66 @@
       },
       "standard": false,
       "premier": true
+    },
+    {
+      "rows": "1",
+      "feature": "Commercials"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Monthly price"
+      },
+      "standard": "<p><span>From</span> $500/month</p>",
+      "premier": "Custom"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Usage"
+      },
+      "standard": "<p><span>Billed at a</span> 10% discount</p>",
+      "premier": "Custom"
+    },
+    {
+      "rows": "2",
+      "feature": "Consumption"
+    },
+    {
+      "rows": "3",
+      "feature": {
+        "title": "Projects"
+      },
+      "standard": {
+        "label": "Unlimited",
+        "tooltip": "For custom pricing on projects<br/> exceeding 200, contact us.",
+        "description": "$4.5 per project"
+      },
+      "premier": "Unlimited"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Storage"
+      },
+      "standard": { "label": "Unlimited", "description": "$1.35 per GiB" },
+      "premier": "Unlimited"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Compute"
+      },
+      "standard": { "label": "Limited size","tooltip": "at $0.036 per 0.25 vCPU 1 GiB RAM", "description": "8 CU 8 vCPU, 32 GB RAM" },
+      "premier": { "label": "Larger sizes", "description": "8+ vCPU, 32+ GB RAM" }
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Branches"
+      },
+      "standard": "500 per project",
+      "premier": "Unlimited"
     }
   ]
 }
