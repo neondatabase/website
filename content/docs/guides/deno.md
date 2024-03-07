@@ -48,7 +48,6 @@ Next, create the `server.ts` script on your local machine.
 ```ts
 // server.ts
 
-import { serve } from "https://deno.land/std@0.214.0/http/server.ts";
 import * as postgres from "https://deno.land/x/postgres@v0.17.0/mod.ts";
 
 const databaseUrl = Deno.env.get("DATABASE_URL")!;
@@ -84,14 +83,13 @@ try {
   connection.release();
 }
 
-serve(async (req) => {
+Deno.serve(async (req) => {
   const url = new URL(req.url);
   if (url.pathname !== "/books") {
     return new Response("Not Found", { status: 404 });
   }
 
   const connection = await pool.connect();
-
   try {
     switch (req.method) {
       case "GET": {
