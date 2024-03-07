@@ -24,10 +24,9 @@ const items = [
     description: 'Generous always-available free tier available to everyone, no card required.',
     features: [
       { title: '0.5 GiB storage' },
-      { title: '0.25 vCPU, 1GB RAM' },
+      { title: '0.25 CU' },
       { title: 'Autoscaling', disabled: true },
       { title: '1 project with 10 branches' },
-      { title: 'Project Sharing' },
       { title: 'Read Replicas', disabled: true },
       { title: 'IP Allow Rules', disabled: true },
       { title: 'Support', disabled: true },
@@ -47,9 +46,8 @@ const items = [
     features: [
       { title: '10 GiB storage included', tooltip: 'Then $15 per 10 GiB after' },
       { title: '300 CU-hours included', tooltip: 'Then $0.16 per CU-hour after' },
-      { title: 'Autoscaling up to 4 vCPU, 16GB RAM' },
+      { title: 'Autoscaling up to 4 CU' },
       { title: '10 projects w/500 branches each' },
-      { title: 'Project Sharing' },
       { title: 'Read Replicas' },
       { title: 'IP Allow Rules', disabled: true },
       { title: 'Standard support' },
@@ -69,9 +67,8 @@ const items = [
     features: [
       { title: '50 GiB storage included', tooltip: 'Then $15 per 10 GiB after' },
       { title: '750 CU-hours included', tooltip: 'Then $0.16 per CU-hour after' },
-      { title: 'Autoscaling up to 8 vCPU, 32GB RAM' },
+      { title: 'Autoscaling up to 8 CU' },
       { title: '50 projects w/500 branches each' },
-      { title: 'Project Sharing' },
       { title: 'Read Replicas' },
       { title: 'IP Allow Rules' },
       { title: 'Priority support' },
