@@ -31,7 +31,7 @@ const partners = [
 const Label = ({ text, isYellow }) => (
   <div
     className={clsx(
-      'relative mt-14 w-fit rounded-full px-3 py-1.5 text-[13px] leading-none tracking-[0.02em]',
+      'relative mt-14 w-fit whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] leading-none tracking-[0.02em] lg:mt-6',
       isYellow ? 'text-yellow-70' : 'text-blue-80'
     )}
   >
@@ -53,14 +53,11 @@ Label.propTypes = {
 };
 
 const Collaboration = () => (
-  <section className="collab mt-[192px]">
-    <Container size="medium">
-      <div className="flex flex-col items-center">
+  <section className="collaboration mb-[100px] mt-[192px]">
+    <Container className="grid-gap-x grid grid-cols-12" size="medium">
+      <div className="col-span-10 col-start-2 flex flex-col items-center xl:col-span-full xl:col-start-1">
         <GradientLabel>Partners</GradientLabel>
-        <h2
-          className="mt-4 text-center text-[48px] font-medium leading-none tracking-extra-tight"
-          // lg:text-4xl sm:text-[36px]
-        >
+        <h2 className="mt-4 text-center text-[48px] font-medium leading-none tracking-extra-tight lg:text-4xl sm:text-[36px]">
           Featured partners
         </h2>
         <p className="mt-3 text-center text-lg font-light leading-snug sm:text-base">
@@ -68,15 +65,14 @@ const Collaboration = () => (
         </p>
 
         {/* cards */}
-        <ul className="mt-12 flex max-w-[1220px] gap-x-8 md:gap-x-6">
+        <ul className="mt-12 grid grid-cols-3 gap-8 lg:grid-cols-2 md:gap-6 sm:grid-cols-1">
           {partners.map(({ logo: Logo, label, isYellowLabel, description }, index) => (
-            <li className="nw-full" key={index}>
+            <li key={index}>
               <GradientCard className="p-8 pb-7">
-                <div className="flex h-full flex-col">
+                <div className="flex flex-col">
                   <Logo />
                   <Label text={label} isYellow={isYellowLabel} />
                   <p className="mt-3 line-clamp-3 font-light leading-snug text-gray-new-60">
-                    {/* xl:mt-10 lg:mt-8 md:mt-6 */}
                     {description}
                   </p>
                 </div>

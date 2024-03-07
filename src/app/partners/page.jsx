@@ -84,7 +84,7 @@ const PartnersPage = () => (
       name="Guillermo Rauch"
       position="CEO of Vercel"
     />
-    <Plans className="my-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
+    <Plans className="mt-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
     <Collaboration />
     <Integration />
     <Apply />
