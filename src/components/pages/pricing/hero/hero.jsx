@@ -12,6 +12,7 @@ import Link from 'components/shared/link';
 import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
+import XIcon from 'icons/no.inline.svg';
 import infoSvg from 'icons/tooltip.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 import sendSegmentEvent from 'utils/send-segment-event';
@@ -20,13 +21,16 @@ const items = [
   {
     type: 'Free Tier',
     price: '$0 <span>/month</span>',
-    description: 'Generous free tier available to everyone, no credit card required.',
+    description: 'Generous always-available free tier available to everyone, no card required.',
     features: [
       { title: '0.5 GiB storage' },
-      { title: 'Limited to 0.25 vCPU, 1GB RAM' },
-      { title: '1 project w/10 branches' },
-      { title: 'Project Sharing, Logical Replication' },
-      { title: 'Community support' },
+      { title: '0.25 vCPU, 1GB RAM' },
+      { title: 'Autoscaling', disabled: true },
+      { title: '1 project with 10 branches' },
+      { title: 'Project Sharing' },
+      { title: 'Read Replicas', disabled: true },
+      { title: 'IP Allow Rules', disabled: true },
+      { title: 'Support', disabled: true },
     ],
     button: {
       url: LINKS.signup,
@@ -41,11 +45,13 @@ const items = [
       '<em class="absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</em> $19 <span>/month</span>',
     description: 'All the resources, features and support you need to launch.',
     features: [
-      { title: '10 GiB storage included' },
-      { title: '300 Compute-hours included' },
-      { title: 'Autoscale to 4 vCPU, 16GB RAM' },
+      { title: '10 GiB storage included', tooltip: 'Then $15 per 10 GiB after' },
+      { title: '300 CU-hours included', tooltip: 'Then $0.16 per CU-hour after' },
+      { title: 'Autoscaling up to 4 vCPU, 16GB RAM' },
       { title: '10 projects w/500 branches each' },
-      { title: 'Unlocks Read Replicas' },
+      { title: 'Project Sharing' },
+      { title: 'Read Replicas' },
+      { title: 'IP Allow Rules', disabled: true },
       { title: 'Standard support' },
     ],
     button: {
@@ -61,11 +67,13 @@ const items = [
       '<em class="absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</em> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
-      { title: '50 GiB storage included' },
-      { title: '750 Compute-hours included' },
-      { title: 'Autoscale to 8 vCPU, 32GB RAM' },
+      { title: '50 GiB storage included', tooltip: 'Then $15 per 10 GiB after' },
+      { title: '750 CU-hours included', tooltip: 'Then $0.16 per CU-hour after' },
+      { title: 'Autoscaling up to 8 vCPU, 32GB RAM' },
       { title: '50 projects w/500 branches each' },
-      { title: 'Unlocks additional security features' },
+      { title: 'Project Sharing' },
+      { title: 'Read Replicas' },
+      { title: 'IP Allow Rules' },
       { title: 'Priority support' },
     ],
     button: {
@@ -200,15 +208,30 @@ const Hero = () => {
                     </div>
                     <div className="mt-auto flex grow flex-col">
                       <ul className="flex flex-col flex-wrap gap-y-4">
-                        {features.map(({ title, tooltip }, index) => (
-                          <li className="relative pl-6 leading-tight tracking-tight" key={index}>
-                            <CheckIcon
-                              className={clsx(
-                                isScalePlan ? 'text-green-45' : 'text-gray-new-70',
-                                'absolute left-0 top-[2px] h-4 w-4 '
-                              )}
-                              aria-hidden
-                            />
+                        {features.map(({ title, tooltip, disabled }, index) => (
+                          <li
+                            className={clsx(
+                              disabled ? 'text-gray-new-50' : 'text-gray-new-70',
+                              'relative pl-6 leading-tight tracking-tight'
+                            )}
+                            key={index}
+                          >
+                            {disabled ? (
+                              <XIcon
+                                className={clsx(
+                                  'absolute left-0 top-[2px] h-4 w-4 text-gray-new-50'
+                                )}
+                                aria-hidden
+                              />
+                            ) : (
+                              <CheckIcon
+                                className={clsx(
+                                  isScalePlan ? 'text-green-45' : 'text-gray-new-70',
+                                  'absolute left-0 top-[2px] h-4 w-4 '
+                                )}
+                                aria-hidden
+                              />
+                            )}
                             <span
                               data-tooltip-id={tooltip && `${type}_tooltip_${index}`}
                               data-tooltip-html={tooltip && tooltip}
