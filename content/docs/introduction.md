@@ -5,14 +5,22 @@ updatedOn: '2024-02-27T20:16:54.561Z'
 
 Neon is a fully managed serverless Postgres with a [generous free tier](https://console.neon.tech). Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
 
+<CTA title="Branch your data just like code" description="Learn how Neon's database branching can help you integrate Postgres into your development workflow." buttonText="Read our primer" buttonUrl="/docs/workflows/primer" />
+
 ## Get started
 
-Refer to our _Get started_ documentation to get up and running in just a few minutes. You will learn how to:
+<DetailIconCards>
 
-- [Sign up](/docs/get-started-with-neon/signing-up)
-- [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
-- [Connect with psql](/docs/connect/query-with-psql-editor)
-- [Install the Neon CLI](/docs/reference/cli-install)
+<a href="/docs/get-started-with-neon/signing-up" description="Sign up for Neon in just a few seconds and start for free
+" icon="enable">1. Sign up</a>
+
+<a href="/docs/get-started-with-neon/query-with-neon-sql-editor" description="Query your database from the Neon Console using the Neon SQL Editor" icon="queries">2. Query with Neon's SQL Editor</a>
+
+<a href="/docs/connect/query-with-psql-editor" description="Connect to your database from the command line" icon="setup">3. Connect with psql</a>
+
+<a href="/docs/reference/cli-install" description="Manage your branches from the command line" icon="cli">4. Install the CLI</a>
+
+</DetailIconCards>
 
 ## Explore the docs
 
@@ -32,7 +40,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 </DetailIconCards>
 
-## Guides
+## Integration Guides
 
 <TechnologyNavigation>
 
