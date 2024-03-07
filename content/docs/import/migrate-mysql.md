@@ -34,6 +34,16 @@ Log in to the Neon Console and navigate to the **Connection Details** section to
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
+Now, modify the connection string as follows to pass your endpoint ID to Neon with your password:
+
+```bash
+postgres://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+```
+
+<Admonition type="note">
+Passing the `endpoint_id` with your password is a required workaround for some Postgres drivers, including the one used by `pgloader`. For more information, refer to our [connection workaround](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) documentation. 
+</Admonition>
+
 Keep your connection string handy for later use.
 
 ### Install pgloader
