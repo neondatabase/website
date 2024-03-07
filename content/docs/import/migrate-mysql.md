@@ -40,7 +40,7 @@ Keep your connection string handy for later use.
 
 Here's how you can set up `pgloader` and prepare for your database migration:
 
-1. Install the `pgloader` utility using your preferred installation method. Debian (apt), RPM package, and Docker methods are supported. See [Installing pgloader](https://pgloader.readthedocs.io/en/latest/install.html).
+1. Install the `pgloader` utility using your preferred installation method. Debian (apt), RPM package, and Docker methods are supported, and installation is also supported with Homebrew for macOS users (`brew install pgloader`). See [Installing pgloader](https://pgloader.readthedocs.io/en/latest/install.html). 
 2. Create a `pgloader` configuration file (for example, named `config.load`). Use your MySQL database credentials to define the connection string for your database source. Use the Neon database connection string you retrieved in the previous step as the destination.
 
    Example configuration in `config.load`:
