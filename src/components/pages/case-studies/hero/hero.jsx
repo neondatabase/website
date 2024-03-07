@@ -9,21 +9,27 @@ import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
 const CardItem = ({ title, description, logo, post, index }) => (
   <li>
-    <GradientCard as={Link} to={`${LINKS.blog}/${post.slug}`}>
-      <Image
-        className="xl:h-12 xl:w-fit"
-        src={logo.mediaItemUrl}
-        alt={title}
-        width={logo.mediaDetails.width}
-        height={logo.mediaDetails.height}
-        priority={index < 6}
-      />
-      <p className="mb-4 mt-12 line-clamp-3 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-8 md:mt-6">
-        <span className="font-normal text-white">{title}</span>. {description}
-      </p>
-      <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
-        Read case study
-        <ArrowIcon className="ml-1" />
+    <GradientCard
+      className="px-8 pb-10 pt-9 md:p-7 md:pb-8"
+      as={Link}
+      to={`${LINKS.blog}/${post.slug}`}
+    >
+      <div className="flex h-full flex-col">
+        <Image
+          className="xl:h-12 xl:w-fit"
+          src={logo.mediaItemUrl}
+          alt={title}
+          width={logo.mediaDetails.width}
+          height={logo.mediaDetails.height}
+          priority={index < 6}
+        />
+        <p className="mb-4 mt-12 line-clamp-3 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-8 md:mt-6">
+          <span className="font-normal text-white">{title}</span>. {description}
+        </p>
+        <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
+          Read case study
+          <ArrowIcon className="ml-1" />
+        </div>
       </div>
     </GradientCard>
   </li>
