@@ -1,4 +1,5 @@
 import Apply from 'components/pages/partners/apply';
+import Collaboration from 'components/pages/partners/collaboration';
 import Hero from 'components/pages/partners/hero';
 import Integration from 'components/pages/partners/integration';
 import Plans from 'components/pages/partners/plans';
@@ -84,6 +85,7 @@ const PartnersPage = () => (
       position="CEO of Vercel"
     />
     <Plans className="my-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
+    <Collaboration />
     <Integration />
     <Apply />
   </Layout>
