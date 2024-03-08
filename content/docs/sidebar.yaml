@@ -405,6 +405,8 @@
       slug: import/import-from-heroku
     - title: Migrate data with AWS DMS
       slug: import/migrate-aws-dms
+    - title: Migrate from MySQL to Postgres
+      slug: import/migrate-mysql
     - title: Sample data
       slug: import/import-sample-data
 - title: Security
