@@ -5,9 +5,9 @@ enableTableOfContents: true
 updatedOn: '2024-02-21T10:15:00.000Z'
 ---
 
-[Drizzle](https://orm.drizzle.team/) is a TypeScript-first ORM that connects to all major databases and works across most Javascript runtimes. It provides a simple way to define database schemas and queries in a sql-like dialect, and tools to generate/run migrations. 
+[Drizzle](https://orm.drizzle.team/) is a TypeScript-first ORM that connects to all major databases and works across most Javascript runtimes. It provides a simple way to define database schemas and queries in an SQL-like dialect and tools to generate and run migrations. 
 
-This guide shows how to use `Drizzle` along with the `Neon` Postgres database in a Typescript project. We'll create a simple Node.js application with `Hono.js` and demonstrate the full workflow of setting up and working with the Database using `Drizzle`.
+This guide shows how to use `Drizzle` with the `Neon` Postgres database in a Typescript project. We'll create a simple Node.js application with `Hono.js` and demonstrate the full workflow of setting up and working with your database using `Drizzle`.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ To follow along with this guide, you will need:
 ### Initialize a new project
 
 1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
-2. Choose and existing project or click the `New Project` button to create a new one. 
+2. Select a project or click the `New Project` button to create a new one. 
 
 ### Retrieve your Neon database connection string
 
@@ -37,7 +37,7 @@ Keep your connection string handy for later use.
 
 ### Create a new Hono.js project
 
-We'll create a simple catalog, with API endpoints that query the database for authors and list of their books. Run the following command in your terminal to set up a new project using `Hono.js`:
+We'll create a simple catalog, with API endpoints that query the database for authors and a list of their books. Run the following command in your terminal to set up a new project using `Hono.js`:
 
 ```bash
 npm create hono@latest neon-drizzle-guide
@@ -66,18 +66,18 @@ npm install drizzle-orm @neondatabase/serverless
 npm install -D drizzle-kit dotenv
 ```
 
-We add the DATABASE_URL environment variable to the `.env` file, which we'll use to connect to our Neon database. Use the connection string obtained from the Neon console earlier:
+Add the `DATABASE_URL` environment variable to your `.env` file, which you'll use to connect to our Neon database. Use the connection string that you obtained from the Neon console earlier:
 
 ```bash
 # .env
 DATABASE_URL=NEON_DATABASE_CONNECTION_STRING
 ```
 
-Test that the starter `Hono.js` application is working by running `npm run dev` in the terminal. You should see the `Hello, Hono!` message by navigating to `http://localhost:3000` in your browser.
+Test that the starter `Hono.js` application works by running `npm run dev` in the terminal. You should see the `Hello, Hono!` message when you navigate to `http://localhost:3000` in your browser.
 
 ### Set up the database schema
 
-Now, we will define the schema for our application using the `Drizzle` ORM. Create a new file at `src/schema.ts` and add the following code to it. 
+Now, we will define the schema for the application using the `Drizzle` ORM. Create a new `schema.ts` file in your `src` directory and add the following code: 
 
 ```typescript
 // src/schema.ts
@@ -99,7 +99,7 @@ export const books = pgTable("books", {
 });
 ```
 
-We defined two tables: `authors`, which will contain the list of all the authors, and `books`, which will contain the list of books written by them. Each book is associated with an author using the `authorId` field.
+The code defines two tables: `authors`, which will contain the list of all the authors, and `books`, which will contain the list of books written by the authors. Each book is associated with an author using the `authorId` field.
 
 To generate a migration to create these tables in the database, we'll use the `drizzle-kit` command. Add the following script to the `package.json` file at the root of your project:
 
@@ -121,9 +121,9 @@ This command generates a new folder named `drizzle` containing the migration fil
 
 ### Run the migration
 
-The generated migration file os written in SQL and contain the necessary commands to create the tables in the database. To apply these migrations, we'll use the `Neon` driver and helper functions provided by the `drizzle-orm` library. 
+The generated migration file is written in SQL and contains the necessary commands to create the tables in the database. To apply these migrations, we'll use the [Neon serverless driver](/docs/serverless/serverless-driver) and helper functions provided by the `drizzle-orm` library. 
 
-Create a new file at `src/migrate.ts` and add the following code to it:
+Create a new `migrate.ts` in your `src` directory and add the following code:
 
 ```typescript
 // src/migrate.ts
@@ -151,7 +151,7 @@ const main = async () => {
 main();
 ```
 
-The `drizzle-orm` package comes with an integration for the `Neon` database, which allows us to run the migrations using the `migrate` function. Add a new script to the `package.json` file that executes the migration.
+The `drizzle-orm` package comes with an integration for `Neon`, which allows us to run the migrations using the `migrate` function. Add a new script to the `package.json` file that executes the migration.
 
 ```json
 {
@@ -331,7 +331,7 @@ Run the application using the following command:
 npm run dev
 ```
 
-This will start a `Hono.js` server at `http://localhost:3000`. Navigate to `http://localhost:3000/authors` and `http://localhost:3000/books/1` in your browser to check the API works as expected. 
+This will start a `Hono.js` server at `http://localhost:3000`. Navigate to `http://localhost:3000/authors` and `http://localhost:3000/books/1` in your browser to check that the API works as expected. 
 
 ## Migration after a schema change
 
@@ -388,11 +388,11 @@ To verify that the schema change was successful, run the application using the f
 npm run dev
 ```
 
-You can navigate to `http://localhost:3000/authors` in your browser to check the each author entry has a `country` field, currently set to `null`. 
+You can navigate to `http://localhost:3000/authors` in your browser to check that each author entry has a `country` field, currently set to `null`. 
 
 ## Conclusion
 
-In this guide, we set up a new TypeScript project using `Hono.js` and `Drizzle` ORM, and connected it to a `Neon` Postgres database. We created a schema for the database, generated and ran migrations, and implemented API endpoints to query the database. 
+In this guide, we set up a new TypeScript project using `Hono.js` and `Drizzle` ORM and connected it to a `Neon` Postgres database. We created a schema for the database, generated and ran migrations, and implemented API endpoints to query the database. 
 
 ## Resources
 
@@ -400,6 +400,5 @@ For more information on the tools used in this guide, refer to the following res
 
 - [Drizzle ORM](https://orm.drizzle.team/)
 - [Hono.js](https://hono.dev/)
-- [Neon](https://neon.tech)
 
 <NeedHelp/>

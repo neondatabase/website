@@ -195,8 +195,6 @@
               slug: guides/node
             - title: Prisma
               slug: guides/prisma
-            - title: Migrations with Drizzle
-              slug: guides/drizzle-migrations
         - title: PHP
           items:
             - title: Laravel
@@ -227,6 +225,8 @@
           slug: guides/wundergraph
     - title: Schema migration
       items:
+        - title: Migrations with Drizzle
+          slug: guides/drizzle-migrations
         - title: Flyway
           items:
             - title: Get started
