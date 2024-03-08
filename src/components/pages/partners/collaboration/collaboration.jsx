@@ -45,17 +45,15 @@ const Collaboration = () => (
         {/* cards */}
         <ul className="mt-12 grid grid-cols-3 gap-8 lg:grid-cols-2 md:gap-6 sm:grid-cols-1">
           {partners.map(({ logo, label, labelColor, description }, index) => (
-            <li key={index}>
-              <GradientCard className="p-8 pb-7">
-                <div className="flex flex-col">
-                  <Image src={logo.icon} alt={logo.alt} width={logo.width} height={logo.height} />
-                  <Label label={label} color={labelColor} />
-                  <p className="mt-3 line-clamp-3 font-light leading-snug text-gray-new-60">
-                    {description}
-                  </p>
-                </div>
-              </GradientCard>
-            </li>
+            <GradientCard className="p-8 pb-7" as="li" key={index}>
+              <div className="flex flex-col">
+                <Image src={logo.icon} alt={logo.alt} width={logo.width} height={logo.height} />
+                <Label label={label} color={labelColor} />
+                <p className="mt-3 line-clamp-3 font-light leading-snug text-gray-new-60">
+                  {description}
+                </p>
+              </div>
+            </GradientCard>
           ))}
         </ul>
       </div>

@@ -19,7 +19,7 @@ const colorClassName = {
 const Label = ({ label, color = 'blue' }) => (
   <span
     className={clsx(
-      'relative mt-14 w-fit whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] leading-none tracking-[0.02em] lg:mt-6',
+      'relative mt-14 w-fit whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] leading-none -tracking-extra-tight lg:mt-6',
       colorClassName[color].text
     )}
   >
