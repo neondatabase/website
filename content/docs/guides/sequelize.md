@@ -1,13 +1,13 @@
 ---
-title: Integrate Neon Postgres with Sequelize ORM
+title: Schema migration with Neon Postgres and Sequelize
 subtitle: Set up Neon Postgres and run migrations for your Javascript project using Sequelize ORM
 enableTableOfContents: true
 updatedOn: '2024-03-06T10:15:00.000Z'
 ---
 
-[Sequelize](https://sequelize.org/) is a promise-based Node.js ORM that supports multiple relational databases. In this guide, we'll explore how to use `Sequelize` ORM with the `Neon` managed Postgres database in a JavaScript project. 
+[Sequelize](https://sequelize.org/) is a promise-based Node.js ORM that supports multiple relational databases. In this guide, we'll explore how to use `Sequelize` ORM with a Neon Postgres database in a JavaScript project. 
 
-We'll create a Node.js application, configure `Sequelize`, and showcase the workflow of setting up and interacting with the database using `Sequelize`.
+We'll create a Node.js application, configure `Sequelize`, and show how to set up and run migrations with `Sequelize`.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ To follow along with this guide, you will need:
 ### Initialize a new project
 
 1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
-2. Choose and existing project or click the `New Project` button to create a new one. 
+2. Select an existing project or click the `New Project` button to create a new one. 
 
 ### Retrieve your Neon database connection string
 
@@ -37,7 +37,7 @@ Keep your connection string handy for later use.
 
 ### Create a new Node project
 
-We'll create a simple catalog, with API endpoints that query the database for authors and list of their books. Run the following command in your terminal to set up a new project using `Express.js`:
+We'll create a simple catalog with API endpoints that query the database for authors and a list of their books. Run the following commands in your terminal to set up a new project using `Express.js`:
 
 ```bash
 mkdir neon-sequelize-guide && cd neon-sequelize-guide
@@ -45,14 +45,14 @@ npm init -y && touch .env index.js
 npm install express dotenv
 ```
 
-We add the DATABASE_URL environment variable to the `.env` file, which we'll use to connect to our Neon database. Use the connection string obtained from the Neon console earlier:
+Add the `DATABASE_URL` environment variable to the `.env` file, which you'll use to connect to your Neon database. Use the connection string that you obtained from the Neon console earlier:
 
 ```bash
 # .env
 DATABASE_URL=NEON_DATABASE_CONNECTION_STRING
 ```
 
-To use the `Sequelize` ORM for making queries, we need to install the `sequelize` package and the `pg` driver to connect to Postgres from Node.js. We also install the `sequelize-cli` package to manage data models and run migrations. Run the following command to install the required packages:
+To use the `Sequelize` ORM to run queries, we need to install the `sequelize` package and the `pg` driver to connect to Postgres from Node.js. We also need to install the `sequelize-cli` package to manage data models and run migrations. Run the following commands to install the required packages:
 
 ```bash
 npm install sequelize pg pg-hstore
@@ -67,9 +67,9 @@ Run the following command to initialize the `sequelize` configuration:
 npx sequelize init
 ```
 
-This command creates a `config`, `migrations`, `models`, and `seeders` directory at the project root. 
+This command creates `config`, `migrations`, `models`, and `seeders` directories at the project root. 
 
-The `config` directory contains the `config.json` file, which holds the database configuration. We want to use the database URL read as an environment variable, so we replace it with a `config.js` file. Create a new file at `config/config.js` and add the following code:
+The `config` directory contains the `config.json` file, which holds the database configuration. We want to have the database URL read as an environment variable, so we replace it with a `config.js` file. Create a `config.js` file in your `config/` directory and add the following code:
 
 ```javascript
 // config/config.js
@@ -86,7 +86,7 @@ module.exports = {
 };
 ```
 
-To make the `sequelize` CLI aware of the path to the new configuration file, we need to create a `.sequelizerc` file at the project root, and add the following code to it. 
+To make the `sequelize` CLI aware of the path to the new configuration file, we need to create a `.sequelizerc` file at the project root and add the following code: 
 
 ```javascript
 // .sequelizerc
@@ -100,14 +100,14 @@ module.exports = {
 
 ### Create models and set up migrations
 
-We'll create an `Author` and a `Book` model to represent the tables in our database. Run the following command to create both the models:
+We'll create an `Author` and a `Book` model to represent the tables in our database. Run the following commands to create the models:
 
 ```bash
 npx sequelize model:generate --name Author --attributes name:string,bio:string
 npx sequelize model:generate --name Book --attributes title:string
 ```
 
-Sequelize creates a new file for each model in the `models/` directory and a corresponding migration file in `migrations/`. It automatically adds an `id` field as the primary key for each model, and `createdAt` and `updatedAt` fields to track the creation and update times of each record. 
+Sequelize creates a new file for each model in the `models/` directory and a corresponding migration file in the `migrations/` directory. Sequelize automatically adds an `id` field as the primary key for each model, and `createdAt` and `updatedAt` fields to track the creation and update times of each record. 
 
 We still need to define the relationships between the `Author` and `Book` models. Update the `book.js` file with the following code:
 
@@ -315,7 +315,7 @@ app.listen(port, () => {
 });
 ```
 
-This code sets up a simple API with two endpoints: `/authors` and `/books/:authorId`. The `/authors` endpoint returns a list of all the authors, and the `/books/:authorId` endpoint returns a list of books written by the specific author with the given `authorId`. 
+This code sets up a simple API with two endpoints: `/authors` and `/books/:authorId`. The `/authors` endpoint returns a list of all the authors, and the `/books/:authorId` endpoint returns a list of books written by the specific author for the given `authorId`. 
 
 Run the application using the following command:
 
@@ -323,7 +323,7 @@ Run the application using the following command:
 node index.js
 ```
 
-This will start the server at `http://localhost:3000`. Navigate to `http://localhost:3000/authors` and `http://localhost:3000/books/1` in your browser to check the API works as expected. 
+This will start the server at `http://localhost:3000`. Navigate to `http://localhost:3000/authors` and `http://localhost:3000/books/1` in your browser to check that the API works as expected. 
 
 ## Conclusion
 
@@ -335,6 +335,5 @@ For more information on the tools used in this guide, refer to the following res
 
 - [Sequelize](https://sequelize.org/)
 - [Express.js](https://expressjs.com/)
-- [Neon](https://neon.tech)
 
 <NeedHelp/>

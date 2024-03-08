@@ -195,8 +195,6 @@
               slug: guides/node
             - title: Prisma
               slug: guides/prisma
-            - title: Sequelize
-              slug: guides/sequelize
         - title: PHP
           items:
             - title: Laravel
@@ -239,6 +237,8 @@
               slug: guides/liquibase
             - title: Developer workflow
               slug: guides/liquibase-workflow
+        - title: Sequelize
+          slug: guides/sequelize
     - title: Serverless
       items:
         - title: Neon serverless driver
