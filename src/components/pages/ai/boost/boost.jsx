@@ -33,7 +33,7 @@ const Boost = () => (
     <Container className="mt-[78px] !p-0 xl:mt-[65px]" size="medium">
       <div className="aspect-[1472/521] w-full overflow-hidden">
         {/* TODO: optimize svg rendering */}
-        <Increase className="relative aspect-[1472/858] h-auto w-full [shape-rendering:geometricprecision]" />
+        <Increase className="relative aspect-[1472/568] h-auto w-full [shape-rendering:geometricprecision]" />
       </div>
     </Container>
   </section>
