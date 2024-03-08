@@ -1,57 +1,34 @@
-import clsx from 'clsx';
 import Image from 'next/image';
-import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import GradientCard from 'components/shared/gradient-card';
 import GradientLabel from 'components/shared/gradient-label';
+import Label from 'components/shared/label';
 
 import koyeb from './images/koyeb.svg';
-import shuttle from './images/shuttle.svg';
+import replit from './images/replit.svg';
 import vercel from './images/vercel.svg';
 
 const partners = [
   {
     logo: { icon: vercel, alt: 'Vercel', width: 122, height: 32 },
     label: 'Front-end platforms',
-    isYellowLabel: true,
+    labelColor: 'yellow',
     description: `Vercel is the Frontend Cloud. Build, scale, and secure a faster, personalized web.`,
   },
   {
     logo: { icon: koyeb, alt: 'Koyeb', width: 123, height: 32 },
     label: 'Backend-as-a-service',
+    labelColor: 'blue',
     description: 'Koyeb is a developer-friendly serverless platform to deploy apps globally.',
   },
   {
-    logo: { icon: shuttle, alt: 'Shuttle', width: 132, height: 32 },
-    label: 'Backend-as-a-service',
-    description: 'Shuttle is a build & ship backend platform with no infrastructure files.',
+    logo: { icon: replit, alt: 'Replit', width: 140, height: 32 },
+    label: 'Other platforms',
+    labelColor: 'pink',
+    description: 'Replit added support for Postgres databases by leveraging Neon’s API.',
   },
 ];
-
-const Label = ({ text, isYellow }) => (
-  <div
-    className={clsx(
-      'relative mt-14 w-fit whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] leading-none tracking-[0.02em] lg:mt-6',
-      isYellow ? 'text-yellow-70' : 'text-blue-80'
-    )}
-  >
-    <div
-      className={clsx(
-        'absolute inset-0 rounded-[inherit]',
-        isYellow
-          ? 'border-image-[linear-gradient(124.33deg,rgba(240,240,117,0.24)_17.11%,rgba(240,240,117,0.12)_74.09%)]'
-          : 'border-image-[linear-gradient(124.33deg,rgba(173,224,235,0.24)_17.11%,rgba(173,224,235,0.12)_74.09%)]'
-      )}
-    />
-    {text}
-  </div>
-);
-
-Label.propTypes = {
-  text: PropTypes.string.isRequired,
-  isYellow: PropTypes.bool,
-};
 
 const Collaboration = () => (
   <section className="collaboration mb-[100px] mt-[192px]">
@@ -67,12 +44,12 @@ const Collaboration = () => (
 
         {/* cards */}
         <ul className="mt-12 grid grid-cols-3 gap-8 lg:grid-cols-2 md:gap-6 sm:grid-cols-1">
-          {partners.map(({ logo, label, isYellowLabel, description }, index) => (
+          {partners.map(({ logo, label, labelColor, description }, index) => (
             <li key={index}>
               <GradientCard className="p-8 pb-7">
                 <div className="flex flex-col">
                   <Image src={logo.icon} alt={logo.alt} width={logo.width} height={logo.height} />
-                  <Label text={label} isYellow={isYellowLabel} />
+                  <Label label={label} color={labelColor} />
                   <p className="mt-3 line-clamp-3 font-light leading-snug text-gray-new-60">
                     {description}
                   </p>
