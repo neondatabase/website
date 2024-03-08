@@ -6,7 +6,6 @@ import Link from 'components/shared/link';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 import pagesWithNoTopbar from 'utils/pages-with-no-topbar';
 import sendGtagEvent from 'utils/send-gtag-event';
-import sendSegmentEvent from 'utils/send-segment-event';
 
 // TODO: If you want to change the background color of the topbar, please update the themeColor in function getMetadata (src/utils/get-metadata.js) as well
 // It is recommended to set background color for tab bar in safari browser https://github.com/neondatabase/website/assets/48465000/d79fba3a-ac4a-4e81-be64-b2cf371d57bc
@@ -21,7 +20,6 @@ const TopBar = () => {
       to="https://console.neon.tech/signup"
       onClick={() => {
         sendGtagEvent('click_announcement_banner');
-        sendSegmentEvent('click_announcement_banner');
       }}
     >
       <span className="mr-4 truncate border-r border-black border-opacity-20 py-1 pr-4 text-sm font-medium sm:mr-0 sm:border-none sm:pr-0">
