@@ -41,7 +41,7 @@ const CookieConsent = ({}) => {
   return visible ? (
     <div className="fixed bottom-4 left-4 z-50 flex max-w-[560px] items-end gap-x-10 rounded-[10px] border border-gray-2 bg-gray-1 px-6 py-5 text-white md:right-4 sm:flex-col sm:items-start sm:gap-y-4">
       <p>
-        We use first-party cookies to improve our services. Learn more in our{' '}
+        We use cookies to improve our services. Learn more in our{' '}
         <Link
           className="whitespace-nowrap underline-offset-[3px]"
           theme="green-underlined"
