@@ -54,10 +54,11 @@ Here's how you can set up `pgloader` and prepare for your database migration:
 2. Create a `pgloader` configuration file (for example, named `config.load`). Use your MySQL database credentials to define the connection string for your database source. Use the Neon database connection string you retrieved in the previous step as the destination.
 
    Example configuration in `config.load`:
+   
    ```plaintext
    load database
-     from mysql://user:password@host/source_db
-     into postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+     from mysql://user:password@host/source_db?sslmode=require
+     into postgres://alex:endpoint=ep-cool-darkness-123456:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require;
    ```
 
 ## Run the Migration with pgloader
