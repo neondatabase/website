@@ -225,6 +225,8 @@
           slug: guides/wundergraph
     - title: Schema migration
       items:
+        - title: Drizzle
+          slug: guides/drizzle-migrations
         - title: Flyway
           items:
             - title: Get started
