@@ -1,5 +1,5 @@
 ---
-title: Use Neon Postgres with Drizzle ORM
+title: Schema migration with Neon Postgres and Drizzle ORM
 subtitle: Set up Neon Postgres and run migrations for your TypeScript project using Drizzle ORM
 enableTableOfContents: true
 updatedOn: '2024-02-21T10:15:00.000Z'

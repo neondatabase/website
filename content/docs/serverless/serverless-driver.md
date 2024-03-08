@@ -421,7 +421,7 @@ The GitHub repository and [changelog](https://github.com/neondatabase/serverless
 - [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 - [node-postgres](https://node-postgres.com/)
 - [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon)
-- [Use Neon Postgres with Drizzle ORM](/docs/guides/drizzle-migrations)
+- [Schema migration with Neon Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
 - [kysely](https://github.com/kysely-org/kysely)
 - [Zapatos](https://jawj.github.io/zapatos/)
 - [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions)
