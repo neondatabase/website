@@ -93,12 +93,12 @@ Note the base monthly fee associated with your plan from the list above.
 Estimate your monthly usage in the following areas to see if any "extra usage" is required beyond what's included in your plan.
 
 - **Storage (GiB)**: How much storage do you expect to use?  Storage includes the size of your data and a history of changes to support features like branching and point-in-time restore. For more information, see [Storage](/docs/introduction/usage-metrics#storage).
-- **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Noen supports compute sizes ranging from .25 vCPU to 8 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute hour usage.
+- **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Neon supports compute sizes ranging from .25 vCPU to 8 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute hour usage.
 - **Projects**: How many projects you will be running? Neon recommends a project per application or client.
 
 ### Step 4: Calculate extra usage fees (if applicable)
 
-Each [plan](/docs/introduction/plans) comes with a base allowance of **Storage**, **Compute**, and **Projects**. Based on the plan your usage estimates, calculate any extra fees for exceeding your plan's allowances.
+Each [plan](/docs/introduction/plans) comes with base allowances for **Storage**, **Compute**, and **Projects**. Based on the plan your usage estimates, calculate any extra fees for exceeding your plan's allowances.
 
 #### For the Launch plan:
 
@@ -179,6 +179,6 @@ On the Free Tier, the primary branch compute is a 0.25 vCPU compute that is alwa
 
 **What about extra usage?**
 
-The Launch plan supports extra compute usage. The Scale paln supports extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. See [Extra usage](#extra-usage) for details. If extra usage occurs, it is reflected in your monthly allowance on the **Billing** page. For example, if you allocate an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page.
+The Launch plan supports extra compute usage. The Scale plan supports extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. See [Extra usage](#extra-usage) for details. If extra usage occurs, it is reflected in your monthly allowance on the **Billing** page. For example, if you allocate an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page.
 
 <NeedHelp/>
