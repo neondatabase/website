@@ -235,5 +235,6 @@ For additional information about connecting from Prisma, refer to the following 
 - [Database connection issues](https://www.prisma.io/dataguide/managing-databases/database-troubleshooting#database-connection-issues)
 - [PostgreSQL database connector](https://www.prisma.io/docs/concepts/database-connectors/postgresql)
 - [Increasing the pool timeout](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#increasing-the-pool-timeout)
+- [Schema migration with Neon Postgres and Prisma ORM](/docs/guides/prisma-migrations)
 
 <NeedHelp/>
