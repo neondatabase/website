@@ -143,7 +143,7 @@ You can enable these variables from the Neon Console:
 2. Select the **Integrations** page.
 3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
 4. In the **Vercel integration** drawer, select the environment variables you require. 
-5. Click **Save changes**. Your variable selection is saved and will be applied to your Vercel project on your next deployment. 
+5. Click **Save changes**. Your variable selection is saved to your Vercel project and will be applied on your next deployment. Viewing your new variable selection in Vercel may require refreshing your project's **Environment Variables** page. 
 
 <Admonition type="note" title="Notes">
 - Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next deployment.
