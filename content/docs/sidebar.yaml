@@ -225,6 +225,8 @@
           slug: guides/wundergraph
     - title: Schema migration
       items:
+        - title: Drizzle
+          slug: guides/drizzle-migrations
         - title: Flyway
           items:
             - title: Get started
@@ -237,6 +239,10 @@
               slug: guides/liquibase
             - title: Developer workflow
               slug: guides/liquibase-workflow
+        - title: Prisma
+          slug: guides/prisma-migrations
+        - title: Sequelize
+          slug: guides/sequelize
     - title: Serverless
       items:
         - title: Neon serverless driver

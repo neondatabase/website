@@ -132,9 +132,9 @@
         "title": "Projects"
       },
       "standard": {
-        "label": "Unlimited",
-        "tooltip": "For custom pricing on projects<br/> exceeding 200, contact us.",
-        "description": "$4.5 per project"
+        "label": "500 active projects",
+        "tooltip": "Active projects are those that had more than 0.5 active hours in a month.",
+        "description": "Then $4.5 per active project after"
       },
       "premier": "Unlimited"
     },
