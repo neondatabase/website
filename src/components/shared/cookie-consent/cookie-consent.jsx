@@ -29,12 +29,13 @@ const CookieConsent = ({}) => {
   };
 
   useEffect(() => {
-    if (
-      document.cookie.indexOf('neon_consent') === -1 &&
-      document.cookie.indexOf('ajs_user_id') === -1
-    ) {
-      setVisible(true);
-    }
+    window.addEventListener(
+      'showCookieConsentDialog',
+      () => {
+        setVisible(true);
+      },
+      false
+    );
   }, []);
 
   return visible ? (
