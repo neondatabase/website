@@ -119,7 +119,7 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 </DetailIconCards>
 
-## Index / Table Optimizations
+## Index / Table optimization
 
 <DetailIconCards>
 
@@ -163,7 +163,7 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 </DetailIconCards>
 
-## Procedural Languages
+## Procedural languages
 
 <DetailIconCards>
 
@@ -177,7 +177,7 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 </DetailIconCards>
 
-## Query Optimization
+## Query optimization
 
 <DetailIconCards>
 
@@ -187,7 +187,7 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 </DetailIconCards>
 
-## Scientific Computing
+## Scientific computing
 
 <DetailIconCards>
 
