@@ -23,4 +23,6 @@ Find instructions for importing data from Postgres, CSV, other Neon projects, an
 
 <a href="/docs/import/import-sample-data" description="Load one of several sample datasets for exploration and testing" icon="import">Load sample data</a>
 
+<a href="/docs/import/migrate-mysql" description="Learn how to migrate your MySQL database to Neon Postgres using pgloader." icon="import">Load sample data</a>
+
 </DetailIconCards>

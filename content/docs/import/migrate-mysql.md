@@ -6,17 +6,17 @@ isDraft: false
 
 This topic describes how to migrate your MySQL database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
 
-The `pgloader` utility transforms the data to a Postgres-compatible format as it is read from your MySQL database. It uses the `COPY` Postgres protocol to stream the data into your Postgres instance.
+The `pgloader` utility transforms data to a Postgres-compatible format as it is read from your MySQL database. It uses the `COPY` Postgres protocol to stream the data into your Postgres database.
 
 ## Before you begin
 
-Before you start, make sure that you have the following:
+Before you begin, make sure that you have the following:
 
 - A Neon account and a project. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A properly named database. For example, if you are migrating a database named `sakila`, you might want to create a database of the same name in Neon. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 - Neon's Free Tier supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
-Also, a close review of the [Pgloader MySQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mysql.html) guide is recommended before you start. This guide will provide you with a good understanding of `pgloader` capabilities and where you may need to adapt your `pgloader` configuration file.
+Also, a close review of the [Pgloader MySQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mysql.html) guide is recommended before you start. This guide will provide you with a good understanding of `pgloader` capabilities and how to configure your `pgloader` configuration file, if necessary.
 
 ## Retrieve Your MySQL database credentials
 
@@ -29,35 +29,39 @@ Before starting the migration process, collect your MySQL database credentials:
    - Username
    - Password
 
-### Retrieve your Neon database connection string
+Keep your MySQL database connection details handy for later use.
 
-Log in to the Neon Console and navigate to the **Connection Details** section to find your Postgres database connection string. It should look similar to this:
+## Retrieve your Neon database connection string
 
-```bash
+Log in to the Neon Console and navigate to the **Connection Details** section on the **Dashboard** to find your Postgres database connection string. It should look similar to this:
+
+```bash shouldWrap
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-Now, modify the connection string as follows to pass your **endpoint ID** (`ep-cool-darkness-123456` in this example) to Neon with your password using the `endpoint` keyword, shown here:
+Now, modify the connection string as follows to pass your **endpoint ID** (`ep-cool-darkness-123456` in this example) to Neon with your password using the `endpoint` keyword, as shown here:
 
-```bash
-postgres://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+```bash shouldWrap
+postgres://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require // [!code word:endpoint=ep-cool-darkness-123456;AbC123dEf]
 ```
 
 <Admonition type="note">
 Passing the `endpoint ID` with your password is a required workaround for some Postgres drivers, including the one used by `pgloader`. For more information about this workaround and why it's required, refer to our [connection workaround](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) documentation. 
 </Admonition>
 
-Keep your connection string handy for later use.
+Keep your Neon connection string handy for later use.
 
 ### Install pgloader
 
 Here's how you can set up `pgloader` for your database migration:
 
-1. Install the `pgloader` utility using your preferred installation method. Debian (apt), RPM package, and Docker methods are supported, as well as Homebrew for macOS (`brew install pgloader`). If your macOS has an ARM processor, use the Homebrew installation method. See [Installing pgloader](https://pgloader.readthedocs.io/en/latest/install.html) for Debian (apt), RPM package, and Docker installation instructions. 
+1. Install the `pgloader` utility using your preferred installation method. Debian (apt), RPM package, and Docker methods are supported, as well as Homebrew for macOS (`brew install pgloader`). If your macOS has an ARM processor, use the Homebrew installation method. 
+
+   See [Installing pgloader](https://pgloader.readthedocs.io/en/latest/install.html) for Debian (apt), RPM package, and Docker installation instructions. 
 2. Create a `pgloader` configuration file (e.g., `config.load`). Use your MySQL database credentials to define the connection string for your database source. Use the Neon database connection string you retrieved and modified in the previous step as the destination.
 
    <Admonition type="note">
-   If you need to specify an SSL mode in your connection string, we found that this format worked well: `sslmode=require`
+   If you need to specify an SSL mode in your connection string, the following format is recommended: `sslmode=require`. Other formats may not work.
    </Admonition>
 
    Example configuration in `config.load`:
