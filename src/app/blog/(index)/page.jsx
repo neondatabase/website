@@ -32,17 +32,19 @@ export default async function BlogPage() {
     appearances,
     engineeringFeaturedPosts,
     aiFeaturedPosts,
+    postgresFeaturedPosts,
   } = await getWpBlogPage();
 
   return (
     <>
       <h1 className="sr-only">Blog</h1>
       <FeaturedPostsList posts={featuredPosts} />
-      <PostsList title="AI" posts={aiFeaturedPosts} alignment="right" />
-      <ChangelogList items={featuredChangelogPosts} />
-      <PostsList title="Company" posts={companyFeaturedPosts} alignment="left" />
       <PostsList title="Community" posts={communityFeaturedPosts} alignment="right" />
+      <PostsList title="Postgres" posts={postgresFeaturedPosts} alignment="left" />
       <VideoList videos={videos} />
+      <PostsList title="AI" posts={aiFeaturedPosts} alignment="right" />
+      <PostsList title="Company" posts={companyFeaturedPosts} alignment="left" />
+      <ChangelogList items={featuredChangelogPosts} />
       <SubscribeForm size="md" dataTest="blog-subscribe-form" />
       <AppearanceEngineering
         appearancesPosts={appearances}

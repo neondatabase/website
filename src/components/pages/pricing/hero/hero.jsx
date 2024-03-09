@@ -14,7 +14,6 @@ import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import infoSvg from 'icons/tooltip.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
-import sendSegmentEvent from 'utils/send-segment-event';
 
 const items = [
   {
@@ -158,7 +157,6 @@ const Hero = () => {
                     to={button.url}
                     onClick={() => {
                       sendGtagEvent(button.event);
-                      sendSegmentEvent(button.event);
                     }}
                   >
                     <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">

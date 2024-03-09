@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Element, scroller } from 'react-scroll';
 
 import useWindowSize from 'hooks/use-window-size';
-import sendSegmentEvent from 'utils/send-segment-event';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 export const MOBILE_WIDTH = 768;
 
@@ -108,7 +108,7 @@ const Select = (props) => {
                     onHover(type, item);
                     setIsSelected(true);
                     setActiveItems({ ...activeItems, [type]: item });
-                    sendSegmentEvent('pricing_wizard_clicked', {
+                    sendGtagEvent('pricing_wizard_clicked', {
                       step: index + 1,
                       button: title,
                     });

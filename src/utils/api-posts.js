@@ -41,11 +41,12 @@ const getAllWpBlogCategories = async () => {
   return [...filteredCategories, { name: 'All posts', slug: 'all-posts' }];
 };
 
-const getWpPostsByCategorySlug = async (slug) => {
+const fetchWpPostsByCategorySlug = async (slug, after) => {
   const postsQuery = gql`
-    query Query($categoryName: String!, $first: Int!) {
+    query Query($categoryName: String!, $first: Int!, $after: String) {
       posts(
         first: $first
+        after: $after
         where: { categoryName: $categoryName, orderby: { field: DATE, order: DESC } }
       ) {
         nodes {
@@ -74,13 +75,17 @@ const getWpPostsByCategorySlug = async (slug) => {
             }
           }
         }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
       }
     }
   `;
 
   const allPostsQuery = gql`
-    query AllPosts($first: Int!) {
-      posts(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+    query AllPosts($first: Int!, $after: String) {
+      posts(first: $first, after: $after, where: { orderby: { field: DATE, order: DESC } }) {
         nodes {
           categories {
             nodes {
@@ -115,6 +120,10 @@ const getWpPostsByCategorySlug = async (slug) => {
             }
           }
         }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
       }
     }
   `;
@@ -122,18 +131,36 @@ const getWpPostsByCategorySlug = async (slug) => {
   if (slug === 'all-posts') {
     const allPostsData = await graphQLClient.request(allPostsQuery, {
       first: BLOG_POSTS_PER_PAGE,
+      after,
     });
 
-    return allPostsData?.posts?.nodes;
+    return allPostsData?.posts;
   }
   const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
 
   const data = await graphQLClient.request(postsQuery, {
     first: BLOG_POSTS_PER_PAGE,
+    after,
     categoryName,
   });
 
-  return data?.posts?.nodes;
+  return data?.posts;
+};
+
+const getWpPostsByCategorySlug = async (slug) => {
+  let allPosts = [];
+  let afterCursor = null;
+
+  while (true) {
+    // eslint-disable-next-line no-await-in-loop
+    const { nodes: posts, pageInfo } = await fetchWpPostsByCategorySlug(slug, afterCursor);
+
+    allPosts = allPosts.concat(posts);
+    if (!pageInfo.hasNextPage) break;
+    afterCursor = pageInfo.endCursor;
+  }
+
+  return allPosts;
 };
 
 const getWpBlogPage = async () => {
@@ -211,6 +238,36 @@ const getWpBlogPage = async () => {
                 }
               }
               communityFeaturedPosts {
+                post {
+                  ... on Post {
+                    title(format: RENDERED)
+                    slug
+                    date
+                    pageBlogPost {
+                      largeCover {
+                        altText
+                        mediaItemUrl
+                      }
+                      authors {
+                        author {
+                          ... on PostAuthor {
+                            title
+                            postAuthor {
+                              role
+                              url
+                              image {
+                                altText
+                                mediaItemUrl
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              postgresFeaturedPosts {
                 post {
                   ... on Post {
                     title(format: RENDERED)
@@ -353,10 +410,10 @@ const getWpBlogPage = async () => {
   return data?.page?.template?.pageBlog;
 };
 
-const getAllWpPosts = async () => {
+const fetchAllWpPosts = async (after) => {
   const allPostsQuery = gql`
-    query AllPosts($first: Int!) {
-      posts(first: $first) {
+    query AllPosts($first: Int!, $after: String) {
+      posts(first: $first, after: $after) {
         nodes {
           categories {
             nodes {
@@ -393,14 +450,35 @@ const getAllWpPosts = async () => {
             }
           }
         }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
       }
     }
   `;
   const data = await graphQLClient.request(allPostsQuery, {
     first: BLOG_POSTS_PER_PAGE,
+    after,
   });
 
-  return data?.posts?.nodes;
+  return data?.posts;
+};
+
+const getAllWpPosts = async () => {
+  let allPosts = [];
+  let afterCursor = null;
+
+  while (true) {
+    // eslint-disable-next-line no-await-in-loop
+    const { nodes: posts, pageInfo } = await fetchAllWpPosts(afterCursor);
+
+    allPosts = allPosts.concat(posts);
+    if (!pageInfo.hasNextPage) break;
+    afterCursor = pageInfo.endCursor;
+  }
+
+  return allPosts;
 };
 
 const getWpPostBySlug = async (slug) => {
@@ -750,6 +828,7 @@ const getAllWpCaseStudiesPosts = async () => {
 };
 
 export {
+  fetchAllWpPosts,
   getAllWpPosts,
   getWpPostBySlug,
   getWpPreviewPostData,

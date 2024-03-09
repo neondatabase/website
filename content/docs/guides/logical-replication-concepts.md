@@ -6,6 +6,8 @@ isDraft: false
 updatedOn: '2024-02-19T18:57:12.556Z'
 ---
 
+<LRNotice/>
+
 Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or data platform. 
 
 With logical replication, you can copy some or all of your data to a different location and continue sending updates from your source database in real-time, allowing you to maintain up-to-date copies of your data in different locations.
@@ -97,6 +99,10 @@ The `max_replication_slots` configuration parameter on Neon is set to `10` by de
 ```ini
 max_replication_slots = 10
 ```
+
+<Admonition type="important">
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
+</Admonition>
 
 ### Decoder plugins
 
