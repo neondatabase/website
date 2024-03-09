@@ -7,11 +7,17 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 ## AI and machine learning
 
+<DetailIconCards>
+
 <a href="/docs/extensions/pg_tiktoken" description="Experimental extension for tokenization and text analysis within Postgres">pg_tiktoken</a>
 
 <a href="/docs/extensions/pgvector" description="Supports efficient vector operations, beneficial in machine learning and similar applications.">pgvector</a>
 
+</DetailIconCards>
+
 ## Analytics
+
+<DetailIconCards>
 
 <a href="https://github.com/citusdata/postgresql-hll" description="Implements HyperLogLog data structures in Postgres for efficient cardinality estimation with minimal memory">hll</a>
 
@@ -19,13 +25,21 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 <a href="/docs/extensions/timescaledb" description="An extension for Postgres designed to enhance its capabilities as a time-series database.">timescaledb</a>
 
+</DetailIconCards>
+
 ## Auditing / Logging
+
+<DetailIconCards>
 
 <a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically inserts the current username into a specified column, facilitating auditing and tracking of changes">insert_username (spi)</a>
 
 <a href="https://www.postgresql.org/docs/16/pgrowlocks.html" description="Provides a view that shows row locking information for tables, aiding in concurrency and deadlock debugging.">pgrowlocks</a>
 
+</DetailIconCards>
+
 ## Data / Transformations
+
+<DetailIconCards>
 
 <a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="Normalizes and standardizes postal addresses within Postgres">address_standardizer</a>
 
@@ -67,7 +81,11 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 <a href="https://www.postgresql.org/docs/current/xml2.html" description="Enables XML data manipulation and XPath queries directly within Postgres, facilitating XML data processing.">xml2</a>
 
+</DetailIconCards>
+
 ## Debugging
+
+<DetailIconCards>
 
 <a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically updates a timestamp column to the current timestamp whenever a row is modified in Postgres">moddatetime (spi)</a>
 
@@ -75,7 +93,11 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 <a href="https://pgxn.org/dist/plpgsql_check/" description="Provides a linter and debugger for PL/pgSQL code, helping identify errors and optimize PL/pgSQL functions.">plpgsql_check</a>
 
+</DetailIconCards>
+
 ## Geospatial
+
+<DetailIconCards>
 
 <a href="https://www.postgresql.org/docs/16/earthdistance.html" description="Calculates great-circle distances on the surface of the Earth directly within Postgres">earthdistance</a>
 
@@ -95,7 +117,11 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 <a href="https://www.postgis.net/docs/Topology.html" description="Extends PostGIS with support for topological data types and functions, facilitating the analysis of spatial relationships.">postgis_topology</a>
 
+</DetailIconCards>
+
 ## Index / Table Optimizations
+
+<DetailIconCards>
 
 <a href="https://www.postgresql.org/docs/16/bloom.html" description="Implements a bloom filter index type for efficient and compact data representation in Postgres">bloom</a>
 
@@ -113,7 +139,11 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 <a href="https://github.com/ChenHuajun/pg_roaringbitmap" description="Implements Roaring Bitmaps for efficient and compact storage of integer sets within Postgres.">roaringbitmap</a>
 
+</DetailIconCards>
+
 ## Metrics
+
+<DetailIconCards>
 
 <a href="/docs/extensions/pg_stat_statements" description="Tracks execution statistics for all SQL statements executed, aiding in performance analysis and tuning">pg_stat_statements</a>
 
@@ -123,11 +153,19 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 <a href="https://www.postgresql.org/docs/16/tsm-system-time.html" description="Offers a table sampling method based on system time, enabling consistent sample data retrieval over time.">tsm_system_time</a>
 
+</DetailIconCards>
+
 ## Orchestration
+
+<DetailIconCards>
 
 <a href="https://www.postgresql.org/docs/16/tcn.html" description="Provides a trigger-based change notification system, allowing applications to respond to changes in the database.">tcn</a>
 
+</DetailIconCards>
+
 ## Procedural Languages
+
+<DetailIconCards>
 
 <a href="https://github.com/plv8/plv8/" description="Enables writing stored procedures and functions in CoffeeScript, a programming language that transcompiles to JavaScript.">plcoffee</a>
 
@@ -137,19 +175,31 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 <a href="https://plv8.github.io/" description="Integrates V8 JavaScript Engine with Postgres, allowing for JavaScript stored procedures and functions.">plv8</a>
 
+</DetailIconCards>
+
 ## Query Optimization
+
+<DetailIconCards>
 
 <a href="https://hypopg.readthedocs.io/en/rel1_stable/" description="Provides the ability to create hypothetical indexes in Postgres for performance testing without altering the physical disk structure">hypopg</a>
 
 <a href="https://github.com/ossc-db/pg_hint_plan" description="Allows developers to influence query plans with hints, improving performance and control over query execution">pg_hint_plan</a>
 
+</DetailIconCards>
+
 ## Scientific Computing
+
+<DetailIconCards>
 
 <a href="https://github.com/rdkit/rdkit" description="Integrates the RDKit cheminformatics toolkit with Postgres, enabling chemical informatics operations directly in the database.">rdkit</a>
 
 <a href="https://github.com/df7cb/postgresql-unit" description="Supports the storage, manipulation, and calculation of scientific units, enhancing Postgres capabilities for scientific data.">unit</a>
 
+</DetailIconCards>
+
 ## Search
+
+<DetailIconCards>
 
 <a href="https://www.postgresql.org/docs/16/dict-int.html" description="Provides a text search dictionary template for indexing integer data in Postgres">dict_int</a>
 
@@ -163,13 +213,21 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 
 <a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres.">unaccent</a>
 
+</DetailIconCards>
+
 ## Security
+
+<DetailIconCards>
 
 <a href="https://www.postgresql.org/docs/16/pgcrypto.html" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres">pgcrypto</a>
 
 <a href="https://github.com/michelp/pgjwt" description="Implements JSON Web Tokens (JWT) in Postgres, allowing for secure token creation and verification.">pgjwt</a>
 
+</DetailIconCards>
+
 ## Tooling / Admin
+
+<DetailIconCards>
 
 <a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically increments numeric columns in Postgres, mimicking auto-increment functionality">autoinc (spi)</a>
 
@@ -186,3 +244,5 @@ Explore the Postgres extensions by category. For a list of supported extensions 
 <a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions.">pgtap</a>
 
 <a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Provides referential integrity triggers, helping maintain foreign key relationships automatically.">refint (spi)</a>
+
+</DetailIconCards>
