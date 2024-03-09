@@ -329,7 +329,6 @@
         - title: UUID
           slug: data-types/uuid
     - title: Extensions
-      slug: extensions/extensions-intro
       items:
         - title: Supported extensions
           slug: extensions/pg-extensions
