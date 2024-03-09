@@ -26,7 +26,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <a href="/docs/introduction/branching" description="Learn to optimize development workflows with database branching" icon="split-branch">Branching</a>
 
-<a href="/docs/extensions/extensions-intro" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
+<a href="/docs/extensions/pg-extensions" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
 
 <a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
 
