@@ -5,13 +5,13 @@ enableTableOfContents: true
 
 Explore supported Postgres extensions by category. For a list of supported extensions with the supported versions and installation instructions, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
 
-## AI and machine learning
+## AI / Machine Learning
 
 <DetailIconCards>
 
-<a href="/docs/extensions/pg_tiktoken" description="Experimental extension for tokenization and text analysis within Postgres" icon="app-store" icon="app-store">pg_tiktoken</a>
+<a href="/docs/extensions/pg_tiktoken" description="Tokenize data in your Postgres database using the OpenAI tiktoken library" icon="app-store" icon="app-store">pg_tiktoken</a>
 
-<a href="/docs/extensions/pgvector" description="Supports efficient vector operations, beneficial in machine learning and similar applications." icon="app-store" icon="app-store">pgvector</a>
+<a href="/docs/extensions/pgvector" description="Store vector embeddings and perform vector similarity search in Postgres. Supports ivfflat and hnsw indexing." icon="app-store" icon="app-store">pgvector</a>
 
 </DetailIconCards>
 
@@ -19,11 +19,9 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://github.com/citusdata/postgresql-hll" description="Implements HyperLogLog data structures in Postgres for efficient cardinality estimation with minimal memory" icon="app-store" icon="app-store">hll</a>
+<a href="https://github.com/citusdata/postgresql-hll" description="Implements a HyperLogLog data structure as a native data type for efficient and tunable distinct value counting" icon="app-store" icon="app-store">hll</a>
 
-<a href="https://github.com/supabase/pg_graphql" description="Integrates GraphQL directly into Postgres, allowing for GraphQL queries to be executed alongside SQL" icon="app-store">pg_graphql</a>
-
-<a href="/docs/extensions/timescaledb" description="An extension for Postgres designed to enhance its capabilities as a time-series database." icon="app-store">timescaledb</a>
+<a href="/docs/extensions/timescaledb" description="Enables Postgres as a time-series database for efficient storage and retrieval of time-series data" icon="app-store">timescaledb</a>
 
 </DetailIconCards>
 
@@ -31,9 +29,13 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically inserts the current username into a specified column, facilitating auditing and tracking of changes" icon="app-store">insert_username (spi)</a>
+<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Implements an insert_username() trigger that stores the current user's name into a text field, which is useful for tracking who last modified a particular row within a table" icon="app-store">insert_username</a>
 
-<a href="https://www.postgresql.org/docs/16/pgrowlocks.html" description="Provides a view that shows row locking information for tables, aiding in concurrency and deadlock debugging." icon="app-store">pgrowlocks</a>
+<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically updates a timestamp column to the current timestamp whenever a row is modified in Postgres" icon="app-store">moddatetime</a>
+
+<a href="https://www.postgresql.org/docs/16/pgrowlocks.html" description="Provides a pgrowlocks() function that shows row locking information for a specified table, which can aid in concurrency and deadlock debugging" icon="app-store">pgrowlocks</a>
+
+<a href="https://www.postgresql.org/docs/16/tcn.html" description="Provides a trigger function to notify listeners of changes to a table, allowing applications to respond to changes in the database." icon="app-store">tcn</a>
 
 </DetailIconCards>
 
@@ -41,45 +43,47 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="Normalizes and standardizes postal addresses within Postgres" icon="app-store">address_standardizer</a>
+<a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="A signle-line address parser that takes an input address and normalizes it based on a set of rules" icon="app-store">address_standardizer</a>
 
-<a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="Provides U.S. address standardization data for use with the address_standardizer extension" icon="app-store">address_standardizer_data_us</a>
+<a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="A packaged extension that contains data for standardizing US addresses for use with the address_standardizer extension" icon="app-store">address_standardizer_data_us</a>
 
-<a href="/docs/extensions/citext" description="Supports case-insensitive text data types, facilitating case-insensitive comparisons in Postgres" icon="app-store">citext</a>
+<a href="/docs/extensions/citext" description="Provides a case-insensitive character string type that internally calls lower when comparing values in Postgres" icon="app-store">citext</a>
 
-<a href="https://www.postgresql.org/docs/16/cube.html" description="Supports multidimensional cube data types for complex data structures in Postgres" icon="app-store">cube</a>
+<a href="https://www.postgresql.org/docs/16/cube.html" description="Implements the cube data type for representing multidimensional cubes in Postgres" icon="app-store">cube</a>
 
-<a href="https://www.postgresql.org/docs/16/earthdistance.html" description="Calculates great-circle distances on the surface of the Earth directly within Postgres" icon="app-store">earthdistance</a>
+<a href="https://www.postgresql.org/docs/16/earthdistance.html" description="Provides cube-based and point-based approaches to calculating great circle distances on the surface of the Earth" icon="app-store">earthdistance</a>
 
-<a href="/docs/extensions/hstore" description="Enables storage and manipulation of sets of key-value pairs within a single Postgres value" icon="app-store">hstore</a>
+<a href="/docs/extensions/hstore" description="Implements an hstore data type for storing and manipulating sets of key-value pairs within a single Postgres value" icon="app-store">hstore</a>
 
-<a href="https://www.postgresql.org/docs/16/intagg.html" description="Supports integer aggregation and provides additional aggregate functions for Postgres" icon="app-store">intagg</a>
+<a href="https://www.postgresql.org/docs/16/intagg.html" description="Provides an integer aggregator and enumerator for Postgres" icon="app-store">intagg</a>
 
 <a href="https://www.postgresql.org/docs/16/intarray.html" description="Offers functions and operators for manipulating and searching arrays of integers within Postgres" icon="app-store">intarray</a>
 
-<a href="https://www.postgresql.org/docs/16/isn.html" description="Implements data types for several International Standard Numbers (ISNs), including ISBNs and ISSNs, in Postgres" icon="app-store">isn</a>
+<a href="https://www.postgresql.org/docs/16/isn.html" description="Implements data types for international product numbering standards: EAN13, UPC, ISBN (books), ISMN (music), and ISSN (serials)" icon="app-store">isn</a>
 
-<a href="https://www.postgresql.org/docs/16/ltree.html" description="Supports data structures for representing labels of tree-like structures, enabling hierarchical data storage in Postgres" icon="app-store">ltree</a>
+<a href="https://www.postgresql.org/docs/16/ltree.html" description="Provides data types for representing labels of data stored in a hierarchical tree-like structure and supports operators, functions, and indexes for searching through label trees" icon="app-store">ltree</a>
+
+<a href="https://github.com/supabase/pg_graphql" description="Adds GraphQL support to your Postgres database, allowing any programming language that can connect to your database to query via GraphQL" icon="app-store">pg_graphql</a>
 
 <a href="https://github.com/iCyberon/pg_hashids" description="Enables the generation of short, unique hash ids from integers, useful for obfuscating internal ids" icon="app-store">pg_hashids</a>
 
-<a href="https://github.com/supabase/pg_jsonschema" description="Validates JSON documents against JSON Schema definitions directly in Postgres" icon="app-store">pg_jsonschema</a>
+<a href="https://github.com/supabase/pg_jsonschema" description="Provides support for JSON schema validation on json and jsonb data types in Postgres" icon="app-store">pg_jsonschema</a>
 
-<a href="https://github.com/fboulnois/pg_uuidv7" description="Implements the UUIDv7 standard in Postgres, providing globally unique identifiers with temporal ordering" icon="app-store">pg_uuidv7</a>
+<a href="https://github.com/fboulnois/pg_uuidv7" description="Enables creating valid UUID Version 7 values in Postgres, providing globally unique identifiers with temporal ordering" icon="app-store">pg_uuidv7</a>
 
-<a href="https://github.com/pksunkara/pgx_ulid" description="Provides functions to generate and work with ULID (Universally Unique Lexicographically Sortable Identifiers) in Postgres." icon="app-store">pgx_ulid</a>
+<a href="https://github.com/pksunkara/pgx_ulid" description="A full-featured extension for generating and working with ULID (Universally Unique Lexicographically Sortable Identifiers) in Postgres." icon="app-store">pgx_ulid</a>
 
-<a href="https://www.postgresql.org/docs/16/seg.html" description="Supports the storage and manipulation of line segments or floating-point ranges, useful for geometric and scientific applications." icon="app-store">seg</a>
+<a href="https://www.postgresql.org/docs/16/seg.html" description="Implements the seg data type for storage and manipulation of line segments or floating-point ranges, useful for geometric and scientific applications." icon="app-store">seg</a>
 
-<a href="https://www.postgresql.org/docs/16/tablefunc.html" description="Contains functions that return tables, including crosstab, which can pivot row data into columns dynamically." icon="app-store">tablefunc</a>
+<a href="https://www.postgresql.org/docs/16/tablefunc.html" description="Contains functions that return tables (multiple rows), including crosstab, which can pivot row data into columns dynamically." icon="app-store">tablefunc</a>
 
 <a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres." icon="app-store">unaccent</a>
 
-<a href="https://github.com/df7cb/postgresql-unit" description="Supports the storage, manipulation, and calculation of scientific units, enhancing Postgres capabilities for scientific data." icon="app-store">unit</a>
+<a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte for storage, manipulation, and calculation of scientific units, enhancing Postgres capabilities for scientific data." icon="app-store">unit</a>
 
 <a href="https://www.postgresql.org/docs/16/uuid-ossp.html" description="Provides functions to generate universally unique identifiers (UUIDs) in Postgres, supporting various UUID standards." icon="app-store">uuid-ossp</a>
 
-<a href="https://www.postgresql.org/docs/current/xml2.html" description="Enables XML data manipulation and XPath queries directly within Postgres, facilitating XML data processing." icon="app-store">xml2</a>
+<a href="https://www.postgresql.org/docs/current/xml2.html" description="Enables XPath queries and XSLT functionality directly within Postgres, facilitating XML data processing." icon="app-store">xml2</a>
 
 </DetailIconCards>
 
@@ -88,6 +92,8 @@ Explore supported Postgres extensions by category. For a list of supported exten
 <DetailIconCards>
 
 <a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically updates a timestamp column to the current timestamp whenever a row is modified in Postgres" icon="app-store">moddatetime (spi)</a>
+
+<a href="https://www.postgresql.org/docs/16/pgrowlocks.html" description="Provides a pgrowlocks() function that shows row locking information for a specified table, which can aid in concurrency and deadlock debugging" icon="app-store">pgrowlocks</a>
 
 <a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions." icon="app-store">pgtap</a>
 
@@ -99,19 +105,21 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://www.postgresql.org/docs/16/earthdistance.html" description="Calculates great-circle distances on the surface of the Earth directly within Postgres" icon="app-store">earthdistance</a>
+<a href="https://www.postgresql.org/docs/16/cube.html" description="Implements a data type for representing multidimensional cubes in Postgres" icon="app-store">cube</a>
 
-<a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="Integrates Uber's H3 spatial indexing system into Postgres, enhancing geospatial querying capabilities" icon="app-store">h3</a>
+<a href="https://www.postgresql.org/docs/16/earthdistance.html" description="Provides cube-based and point-based approaches to calculating great circle distances on the surface of the Earth" icon="app-store">earthdistance</a>
+
+<a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="Integrates Uber's H3 geospatial indexing system that combines the benefits of a hexagonal grid with S2's hierarchical subdivisions into Postgres" icon="app-store">h3</a>
 
 <a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="A PostGIS extension for H3, enabling advanced spatial analysis and indexing in conjunction with PostGIS" icon="app-store">h3_postgis</a>
 
-<a href="https://docs.pgrouting.org/3.4/en/index.html" description="Extends PostGIS/Postgres databases to provide geospatial routing functionality." icon="app-store">pgrouting</a>
+<a href="https://docs.pgrouting.org/" description="Extends PostGIS/Postgres databases provide geospatial routing and other network analysis functionality.." icon="app-store">pgrouting</a>
 
-<a href="/docs/extensions/postgis" description="Extends Postgres to support geographic objects, enabling spatial queries directly in SQL." icon="app-store">postgis</a>
+<a href="/docs/extensions/postgis" description="Extends Postgres to allows GIS (Geographic Information Systems) objects to be stored in the database, enabling spatial queries directly in SQL." icon="app-store">postgis</a>
 
 <a href="https://postgis.net/docs/RT_reference.html" description="Adds support for raster data to PostGIS, enabling advanced geospatial analysis on raster images." icon="app-store">postgis_raster</a>
 
-<a href="https://oslandia.gitlab.io/SFCGAL/" description="Provides support for advanced 3D geometries in PostGIS, based on the SFCGAL library." icon="app-store">postgis_sfcgal</a>
+<a href="https://postgis.net/docs/reference.html#reference_sfcgal" description="Provides support for advanced 3D geometries in PostGIS, based on the SFCGAL library." icon="app-store">postgis_sfcgal</a>
 
 <a href="https://postgis.net/docs/Extras.html#Tiger_Geocoder" description="Enables geocoding and reverse geocoding capabilities in PostGIS using TIGER/Line data." icon="app-store">postgis_tiger_geocoder</a>
 
@@ -123,7 +131,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://www.postgresql.org/docs/16/bloom.html" description="Implements a bloom filter index type for efficient and compact data representation in Postgres" icon="app-store">bloom</a>
+<a href="https://www.postgresql.org/docs/16/bloom.html" description="Provides support for Bloom indexes for efficient and compact data representation in Postgres" icon="app-store">bloom</a>
 
 <a href="https://www.postgresql.org/docs/16/btree-gin.html" description="Provides B-tree equivalent functionality for GIN indexes, enhancing index performance in Postgres" icon="app-store">btree_gin</a>
 
@@ -159,7 +167,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://www.postgresql.org/docs/16/tcn.html" description="Provides a trigger-based change notification system, allowing applications to respond to changes in the database." icon="app-store">tcn</a>
+<a href="https://www.postgresql.org/docs/16/tcn.html" description="Provides a trigger function to notify listeners of changes to a table, allowing applications to respond to changes in the database." icon="app-store">tcn</a>
 
 </DetailIconCards>
 
@@ -191,15 +199,22 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
+<a href="https://www.postgresql.org/docs/16/cube.html" description="Implements the cube data type for representing multidimensional cubes in Postgres" icon="app-store">cube</a>
+
 <a href="https://github.com/rdkit/rdkit" description="Integrates the RDKit cheminformatics toolkit with Postgres, enabling chemical informatics operations directly in the database." icon="app-store">rdkit</a>
 
-<a href="https://github.com/df7cb/postgresql-unit" description="Supports the storage, manipulation, and calculation of scientific units, enhancing Postgres capabilities for scientific data." icon="app-store">unit</a>
+<a href="https://www.postgresql.org/docs/16/seg.html" description="Implements the seg data type for storage and manipulation of line segments or floating-point ranges, useful for geometric and scientific applications." icon="app-store">seg</a>
+
+<a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte for storage, manipulation, and calculation of scientific units, enhancing Postgres capabilities for scientific data." icon="app-store">unit</a>
+
 
 </DetailIconCards>
 
 ## Search
 
 <DetailIconCards>
+
+<a href="/docs/extensions/citext" description="Provides a case-insensitive character string type that internally calls lower when comparing values in Postgres" icon="app-store">citext</a>
 
 <a href="https://www.postgresql.org/docs/16/dict-int.html" description="Provides a text search dictionary template for indexing integer data in Postgres" icon="app-store">dict_int</a>
 
