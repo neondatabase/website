@@ -131,7 +131,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://www.postgresql.org/docs/16/bloom.html" description="Provides support for Bloom indexes for efficient and compact data representation in Postgres" icon="app-store">bloom</a>
+<a href="https://www.postgresql.org/docs/16/bloom.html" description="Provides an index access method for Postgres based on Bloom filters" icon="app-store">bloom</a>
 
 <a href="https://www.postgresql.org/docs/16/btree-gin.html" description="Provides B-tree equivalent functionality for GIN indexes, enhancing index performance in Postgres" icon="app-store">btree_gin</a>
 
