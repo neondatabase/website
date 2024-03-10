@@ -133,19 +133,19 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://www.postgresql.org/docs/16/bloom.html" description="Provides an index access method for Postgres based on Bloom filters" icon="app-store">bloom</a>
 
-<a href="https://www.postgresql.org/docs/16/btree-gin.html" description="Provides B-tree equivalent functionality for GIN indexes, enhancing index performance in Postgres" icon="app-store">btree_gin</a>
+<a href="https://www.postgresql.org/docs/16/btree-gin.html" description="Provides GIN operator classes that implement B-tree equivalent behavior" icon="app-store">btree_gin</a>
 
-<a href="https://www.postgresql.org/docs/16/btree-gist.html" description="Allows B-tree-like operations on GiST indexes, improving indexing flexibility in Postgres" icon="app-store">btree_gist</a>
+<a href="https://www.postgresql.org/docs/16/btree-gist.html" description="Provides GiST index operator classes that implement B-tree equivalent behavior" icon="app-store">btree_gist</a>
 
-<a href="https://github.com/RhodiumToad/ip4r" description="Provides types and functions for efficiently storing and querying IPv4 and IPv6 ranges and addresses in Postgres" icon="app-store">ip4r</a>
+<a href="https://github.com/RhodiumToad/ip4r" description="Provides a range index type and functions for efficiently storing and querying IPv4 and IPv6 ranges and addresses in Postgres" icon="app-store">ip4r</a>
 
-<a href="https://github.com/sraoss/pg_ivm" description="Implements Incremental View Maintenance (IVM) for faster refresh of materialized views" icon="app-store">pg_ivm</a>
+<a href="https://github.com/sraoss/pg_ivm" description="Provides an Incremental View Maintenance (IVM) feature for Postgres" icon="app-store">pg_ivm</a>
 
-<a href="https://www.postgresql.org/docs/16/pgprewarm.html" description="Allows manual preloading of relation data into the buffer cache, reducing access times for frequently queried tables" icon="app-store">pg_prewarm</a>
+<a href="/docs/extensions/pg_prewarm" description="Allows manual preloading of relation data into the Postgres buffer cache, reducing access times for frequently queried tables" icon="app-store">pg_prewarm</a>
 
 <a href="https://github.com/ChenHuajun/pg_roaringbitmap" description="Implements Roaring Bitmaps in Postgres for efficient storage and manipulation of bit sets" icon="app-store">pg_roaringbitmap</a>
 
-<a href="https://github.com/ChenHuajun/pg_roaringbitmap" description="Implements Roaring Bitmaps for efficient and compact storage of integer sets within Postgres." icon="app-store">roaringbitmap</a>
+<a href="https://github.com/postgrespro/rum" description="Provides an access method to work with a RUM index, designed to speed up full-text searches" icon="app-store">rum</a>
 
 </DetailIconCards>
 
@@ -153,7 +153,9 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="/docs/extensions/pg_stat_statements" description="Tracks execution statistics for all SQL statements executed, aiding in performance analysis and tuning" icon="app-store">pg_stat_statements</a>
+<a href="/docs/extensions/neon" description="Provides functions and views designed to gather Neon-specific metrics" icon="app-store">neon</a>
+
+<a href="/docs/extensions/pg_stat_statements" description="Tracks planning and execution statistics for all SQL statements executed, aiding in performance analysis and tuning" icon="app-store">pg_stat_statements</a>
 
 <a href="https://www.postgresql.org/docs/16/pgstattuple.html" description="Offers functions to show tuple-level statistics for tables, helping identify bloat and efficiency opportunities." icon="app-store">pgstattuple</a>
 
@@ -175,13 +177,9 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://github.com/plv8/plv8/" description="Enables writing stored procedures and functions in CoffeeScript, a programming language that transcompiles to JavaScript." icon="app-store">plcoffee</a>
-
-<a href="https://github.com/plv8/plv8/" description="Allows the use of LiveScript, a language that compiles to JavaScript, for writing functions and stored procedures in Postgres." icon="app-store">plls</a>
+<a href="https://github.com/plv8/plv8/" description="A Postgres procedural language powered by V8 Javascript Engine for writing functions in Javascript that are callable from SQL" icon="app-store">plcoffee</a>
 
 <a href="https://www.postgresql.org/docs/16/plpgsql.html" description="The default procedural language for Postgres, enabling the creation of complex functions and triggers." icon="app-store">plpgsql</a>
-
-<a href="https://plv8.github.io/" description="Integrates V8 JavaScript Engine with Postgres, allowing for JavaScript stored procedures and functions." icon="app-store">plv8</a>
 
 </DetailIconCards>
 
@@ -189,9 +187,9 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://hypopg.readthedocs.io/en/rel1_stable/" description="Provides the ability to create hypothetical indexes in Postgres for performance testing without altering the physical disk structure" icon="app-store">hypopg</a>
+<a href="https://hypopg.readthedocs.io/en/rel1_stable/" description="Provides the ability to create hypothetical (virtual) indexes in Postgres for performance testing" icon="app-store">hypopg</a>
 
-<a href="https://github.com/ossc-db/pg_hint_plan" description="Allows developers to influence query plans with hints, improving performance and control over query execution" icon="app-store">pg_hint_plan</a>
+<a href="https://github.com/ossc-db/pg_hint_plan" description="Allows developers to influence query plans with hints in SQL comments, improving performance and control over query execution" icon="app-store">pg_hint_plan</a>
 
 </DetailIconCards>
 
@@ -201,9 +199,9 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://www.postgresql.org/docs/16/cube.html" description="Implements the cube data type for representing multidimensional cubes in Postgres" icon="app-store">cube</a>
 
-<a href="https://github.com/rdkit/rdkit" description="Integrates the RDKit cheminformatics toolkit with Postgres, enabling chemical informatics operations directly in the database." icon="app-store">rdkit</a>
+<a href="https://github.com/rdkit/rdkit" description="Integrates the RDKit cheminformatics toolkit with Postgres, enabling chemical informatics operations directly in the database" icon="app-store">rdkit</a>
 
-<a href="https://www.postgresql.org/docs/16/seg.html" description="Implements the seg data type for storage and manipulation of line segments or floating-point ranges, useful for geometric and scientific applications." icon="app-store">seg</a>
+<a href="https://www.postgresql.org/docs/16/seg.html" description="Implements the seg data type for storage and manipulation of line segments or floating-point intervals, useful for representing laboratory measurements" icon="app-store">seg</a>
 
 <a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte for storage, manipulation, and calculation of scientific units, enhancing Postgres capabilities for scientific data." icon="app-store">unit</a>
 
@@ -218,13 +216,11 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://www.postgresql.org/docs/16/dict-int.html" description="Provides a text search dictionary template for indexing integer data in Postgres" icon="app-store">dict_int</a>
 
-<a href="https://www.postgresql.org/docs/16/fuzzystrmatch.html" description="Offers several functions to help match and compare strings with approximate equality in Postgres" icon="app-store">fuzzystrmatch</a>
+<a href="https://www.postgresql.org/docs/16/fuzzystrmatch.html" description="Provides several functions to determine similarities and distance between strings in Postgres" icon="app-store">fuzzystrmatch</a>
 
-<a href="/docs/extensions/pg_trgm" description="Supports text search and similarity measurements using trigram matching, enhancing full-text search capabilities" icon="app-store">pg_trgm</a>
+<a href="/docs/extensions/pg_trgm" description="Provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, and index operator classes for fast string similarity search" icon="app-store">pg_trgm</a>
 
-<a href="https://github.com/dimitri/prefix" description="Supports efficient queries on text columns with prefix-based searching capabilities." icon="app-store">prefix</a>
-
-<a href="https://github.com/postgrespro/rum" description="Provides a RUM index type, designed to speed up full-text searches and other operations that benefit from immediate consistency." icon="app-store">rum</a>
+<a href="https://github.com/dimitri/prefix" description="A prefix range module that supports efficient queries on text columns with prefix-based searching and matching capabilities." icon="app-store">prefix</a>
 
 <a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres." icon="app-store">unaccent</a>
 
@@ -236,7 +232,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://www.postgresql.org/docs/16/pgcrypto.html" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres" icon="app-store">pgcrypto</a>
 
-<a href="https://github.com/michelp/pgjwt" description="Implements JSON Web Tokens (JWT) in Postgres, allowing for secure token creation and verification." icon="app-store">pgjwt</a>
+<a href="https://github.com/michelp/pgjwt" description="Implements JSON Web Tokens (JWT) in Postgres, allowing for secure token creation and verification" icon="app-store">pgjwt</a>
 
 </DetailIconCards>
 
@@ -244,20 +240,18 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically increments numeric columns in Postgres, mimicking auto-increment functionality" icon="app-store">autoinc (spi)</a>
+<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Provides an autoinc() function that stores the next value of a sequence into an integer field" icon="app-store">autoinc</a>
 
-<a href="https://hypopg.readthedocs.io/en/rel1_stable/" description="Provides the ability to create hypothetical indexes in Postgres for performance testing without altering the physical disk structure" icon="app-store">hypopg</a>
+<a href="https://hypopg.readthedocs.io/en/rel1_stable/" description="Provides the ability to create hypothetical (virtual) indexes in Postgres for performance testing" icon="app-store">hypopg</a>
 
 <a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically inserts the username of the person executing an insert operation into a specified table in Postgres" icon="app-store">insert_username (spi)</a>
 
-<a href="https://www.postgresql.org/docs/16/lo.html" description="Manages large objects (LOBs) within Postgres, allowing for the storage and manipulation of binary data" icon="app-store">lo</a>
+<a href="https://www.postgresql.org/docs/16/lo.html" description="Provides support for managing large objects (LOBs) in Postgres, including a data type lo and a trigger lo_manage" icon="app-store">lo</a>
 
-<a href="/docs/extensions/neon" description="Placeholder description for neon extension, please provide an actual description" icon="app-store">neon</a>
-
-<a href="/docs/extensions/neon-utils" description="Placeholder description for neon_utils extension, please provide an actual description" icon="app-store">neon_utils</a>
+<a href="/docs/extensions/neon-utils" description="Provides a num_cpus() function for monitoring how Neon's Autoscaling feature allocates vCPU in response to workload" icon="app-store">neon_utils</a>
 
 <a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions." icon="app-store">pgtap</a>
 
-<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Provides referential integrity triggers, helping maintain foreign key relationships automatically." icon="app-store">refint (spi)</a>
+<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Provides functions for maintaining foreign key constraints" icon="app-store">refint (spi)</a>
 
 </DetailIconCards>
