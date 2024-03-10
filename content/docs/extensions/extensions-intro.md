@@ -43,7 +43,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="A signle-line address parser that takes an input address and normalizes it based on a set of rules" icon="app-store">address_standardizer</a>
+<a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="A single-line address parser that takes an input address and normalizes it based on a set of rules" icon="app-store">address_standardizer</a>
 
 <a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="A packaged extension that contains data for standardizing US addresses for use with the address_standardizer extension" icon="app-store">address_standardizer_data_us</a>
 
@@ -113,9 +113,9 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="A PostGIS extension for H3, enabling advanced spatial analysis and indexing in conjunction with PostGIS" icon="app-store">h3_postgis</a>
 
-<a href="https://docs.pgrouting.org/" description="Extends PostGIS/Postgres databases provide geospatial routing and other network analysis functionality" icon="app-store">pgrouting</a>
+<a href="https://docs.pgrouting.org/" description="Extends PostGIS/Postgres databases, providing geospatial routing and other network analysis functionality" icon="app-store">pgrouting</a>
 
-<a href="/docs/extensions/postgis" description="Extends Postgres to allows GIS (Geographic Information Systems) objects to be stored in the database, enabling spatial queries directly in SQL" icon="app-store">postgis</a>
+<a href="/docs/extensions/postgis" description="Extends Postgres to allow GIS (Geographic Information Systems) objects to be stored in the database, enabling spatial queries directly in SQL" icon="app-store">postgis</a>
 
 <a href="https://postgis.net/docs/RT_reference.html" description="Adds support for raster data to PostGIS, enabling advanced geospatial analysis on raster images" icon="app-store">postgis_raster</a>
 
