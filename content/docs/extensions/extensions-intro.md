@@ -11,7 +11,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="/docs/extensions/pg_tiktoken" description="Tokenize data in your Postgres database using the OpenAI tiktoken library" icon="app-store" icon="app-store">pg_tiktoken</a>
 
-<a href="/docs/extensions/pgvector" description="Store vector embeddings and perform vector similarity search in Postgres. Supports ivfflat and hnsw indexing." icon="app-store" icon="app-store">pgvector</a>
+<a href="/docs/extensions/pgvector" description="Store vector embeddings and perform vector similarity search in Postgres. Supports ivfflat and hnsw indexing" icon="app-store" icon="app-store">pgvector</a>
 
 </DetailIconCards>
 
@@ -35,7 +35,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://www.postgresql.org/docs/16/pgrowlocks.html" description="Provides a pgrowlocks() function that shows row locking information for a specified table, which can aid in concurrency and deadlock debugging" icon="app-store">pgrowlocks</a>
 
-<a href="https://www.postgresql.org/docs/16/tcn.html" description="Provides a trigger function to notify listeners of changes to a table, allowing applications to respond to changes in the database." icon="app-store">tcn</a>
+<a href="https://www.postgresql.org/docs/16/tcn.html" description="Provides a trigger function to notify listeners of changes to a table, allowing applications to respond to changes in the database" icon="app-store">tcn</a>
 
 </DetailIconCards>
 
@@ -71,19 +71,19 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://github.com/fboulnois/pg_uuidv7" description="Enables creating valid UUID Version 7 values in Postgres, providing globally unique identifiers with temporal ordering" icon="app-store">pg_uuidv7</a>
 
-<a href="https://github.com/pksunkara/pgx_ulid" description="A full-featured extension for generating and working with ULID (Universally Unique Lexicographically Sortable Identifiers) in Postgres." icon="app-store">pgx_ulid</a>
+<a href="https://github.com/pksunkara/pgx_ulid" description="A full-featured extension for generating and working with ULID (Universally Unique Lexicographically Sortable Identifiers) in Postgres" icon="app-store">pgx_ulid</a>
 
-<a href="https://www.postgresql.org/docs/16/seg.html" description="Implements the seg data type for storage and manipulation of line segments or floating-point ranges, useful for geometric and scientific applications." icon="app-store">seg</a>
+<a href="https://www.postgresql.org/docs/16/seg.html" description="Implements the seg data type for storage and manipulation of line segments or floating-point ranges, useful for geometric and scientific applications" icon="app-store">seg</a>
 
-<a href="https://www.postgresql.org/docs/16/tablefunc.html" description="Contains functions that return tables (multiple rows), including crosstab, which can pivot row data into columns dynamically." icon="app-store">tablefunc</a>
+<a href="https://www.postgresql.org/docs/16/tablefunc.html" description="Contains functions that return tables (multiple rows), including crosstab, which can pivot row data into columns dynamically" icon="app-store">tablefunc</a>
 
 <a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres." icon="app-store">unaccent</a>
 
-<a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte for storage, manipulation, and calculation of scientific units, enhancing Postgres capabilities for scientific data." icon="app-store">unit</a>
+<a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte for storage, manipulation, and calculation of scientific units, enhancing Postgres capabilities for scientific data" icon="app-store">unit</a>
 
-<a href="https://www.postgresql.org/docs/16/uuid-ossp.html" description="Provides functions to generate universally unique identifiers (UUIDs) in Postgres, supporting various UUID standards." icon="app-store">uuid-ossp</a>
+<a href="https://www.postgresql.org/docs/16/uuid-ossp.html" description="Provides functions to generate universally unique identifiers (UUIDs) in Postgres, supporting various UUID standard." icon="app-store">uuid-ossp</a>
 
-<a href="https://www.postgresql.org/docs/current/xml2.html" description="Enables XPath queries and XSLT functionality directly within Postgres, facilitating XML data processing." icon="app-store">xml2</a>
+<a href="https://www.postgresql.org/docs/current/xml2.html" description="Enables XPath queries and XSLT functionality directly within Postgres, facilitating XML data processing" icon="app-store">xml2</a>
 
 </DetailIconCards>
 
@@ -95,9 +95,9 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://www.postgresql.org/docs/16/pgrowlocks.html" description="Provides a pgrowlocks() function that shows row locking information for a specified table, which can aid in concurrency and deadlock debugging" icon="app-store">pgrowlocks</a>
 
-<a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions." icon="app-store">pgtap</a>
+<a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions" icon="app-store">pgtap</a>
 
-<a href="https://pgxn.org/dist/plpgsql_check/" description="Provides a linter and debugger for PL/pgSQL code, helping identify errors and optimize PL/pgSQL functions." icon="app-store">plpgsql_check</a>
+<a href="https://pgxn.org/dist/plpgsql_check/" description="Provides a linter and debugger for PL/pgSQL code, helping identify errors and optimize PL/pgSQL functions" icon="app-store">plpgsql_check</a>
 
 </DetailIconCards>
 
@@ -113,17 +113,17 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="A PostGIS extension for H3, enabling advanced spatial analysis and indexing in conjunction with PostGIS" icon="app-store">h3_postgis</a>
 
-<a href="https://docs.pgrouting.org/" description="Extends PostGIS/Postgres databases provide geospatial routing and other network analysis functionality.." icon="app-store">pgrouting</a>
+<a href="https://docs.pgrouting.org/" description="Extends PostGIS/Postgres databases provide geospatial routing and other network analysis functionality" icon="app-store">pgrouting</a>
 
-<a href="/docs/extensions/postgis" description="Extends Postgres to allows GIS (Geographic Information Systems) objects to be stored in the database, enabling spatial queries directly in SQL." icon="app-store">postgis</a>
+<a href="/docs/extensions/postgis" description="Extends Postgres to allows GIS (Geographic Information Systems) objects to be stored in the database, enabling spatial queries directly in SQL" icon="app-store">postgis</a>
 
-<a href="https://postgis.net/docs/RT_reference.html" description="Adds support for raster data to PostGIS, enabling advanced geospatial analysis on raster images." icon="app-store">postgis_raster</a>
+<a href="https://postgis.net/docs/RT_reference.html" description="Adds support for raster data to PostGIS, enabling advanced geospatial analysis on raster images" icon="app-store">postgis_raster</a>
 
-<a href="https://postgis.net/docs/reference.html#reference_sfcgal" description="Provides support for advanced 3D geometries in PostGIS, based on the SFCGAL library." icon="app-store">postgis_sfcgal</a>
+<a href="https://postgis.net/docs/reference.html#reference_sfcgal" description="Provides support for advanced 3D geometries in PostGIS, based on the SFCGAL library" icon="app-store">postgis_sfcgal</a>
 
-<a href="https://postgis.net/docs/Extras.html#Tiger_Geocoder" description="Enables geocoding and reverse geocoding capabilities in PostGIS using TIGER/Line data." icon="app-store">postgis_tiger_geocoder</a>
+<a href="https://postgis.net/docs/Extras.html#Tiger_Geocoder" description="Enables geocoding and reverse geocoding capabilities in PostGIS using TIGER/Line data" icon="app-store">postgis_tiger_geocoder</a>
 
-<a href="https://www.postgis.net/docs/Topology.html" description="Extends PostGIS with support for topological data types and functions, facilitating the analysis of spatial relationships." icon="app-store">postgis_topology</a>
+<a href="https://www.postgis.net/docs/Topology.html" description="Extends PostGIS with support for topological data types and functions, facilitating the analysis of spatial relationships" icon="app-store">postgis_topology</a>
 
 </DetailIconCards>
 
@@ -157,11 +157,11 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="/docs/extensions/pg_stat_statements" description="Tracks planning and execution statistics for all SQL statements executed, aiding in performance analysis and tuning" icon="app-store">pg_stat_statements</a>
 
-<a href="https://www.postgresql.org/docs/16/pgstattuple.html" description="Offers functions to show tuple-level statistics for tables, helping identify bloat and efficiency opportunities." icon="app-store">pgstattuple</a>
+<a href="https://www.postgresql.org/docs/16/pgstattuple.html" description="Offers functions to show tuple-level statistics for tables, helping identify bloat and efficiency opportunities" icon="app-store">pgstattuple</a>
 
-<a href="https://www.postgresql.org/docs/16/tsm-system-rows.html" description="Provides a table sampling method that selects a fixed number of table rows randomly." icon="app-store">tsm_system_rows</a>
+<a href="https://www.postgresql.org/docs/16/tsm-system-rows.html" description="Provides a table sampling method that selects a fixed number of table rows randomly" icon="app-store">tsm_system_rows</a>
 
-<a href="https://www.postgresql.org/docs/16/tsm-system-time.html" description="Offers a table sampling method based on system time, enabling consistent sample data retrieval over time." icon="app-store">tsm_system_time</a>
+<a href="https://www.postgresql.org/docs/16/tsm-system-time.html" description="Offers a table sampling method based on system time, enabling consistent sample data retrieval over time" icon="app-store">tsm_system_time</a>
 
 </DetailIconCards>
 
@@ -169,7 +169,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://www.postgresql.org/docs/16/tcn.html" description="Provides a trigger function to notify listeners of changes to a table, allowing applications to respond to changes in the database." icon="app-store">tcn</a>
+<a href="https://www.postgresql.org/docs/16/tcn.html" description="Provides a trigger function to notify listeners of changes to a table, allowing applications to respond to changes in the database" icon="app-store">tcn</a>
 
 </DetailIconCards>
 
@@ -179,7 +179,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://github.com/plv8/plv8/" description="A Postgres procedural language powered by V8 Javascript Engine for writing functions in Javascript that are callable from SQL" icon="app-store">plcoffee</a>
 
-<a href="https://www.postgresql.org/docs/16/plpgsql.html" description="The default procedural language for Postgres, enabling the creation of complex functions and triggers." icon="app-store">plpgsql</a>
+<a href="https://www.postgresql.org/docs/16/plpgsql.html" description="The default procedural language for Postgres, enabling the creation of complex functions and triggers" icon="app-store">plpgsql</a>
 
 </DetailIconCards>
 
@@ -203,7 +203,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://www.postgresql.org/docs/16/seg.html" description="Implements the seg data type for storage and manipulation of line segments or floating-point intervals, useful for representing laboratory measurements" icon="app-store">seg</a>
 
-<a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte for storage, manipulation, and calculation of scientific units, enhancing Postgres capabilities for scientific data." icon="app-store">unit</a>
+<a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte for storage, manipulation, and calculation of scientific units, enhancing Postgres capabilities for scientific data" icon="app-store">unit</a>
 
 
 </DetailIconCards>
@@ -220,9 +220,9 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="/docs/extensions/pg_trgm" description="Provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, and index operator classes for fast string similarity search" icon="app-store">pg_trgm</a>
 
-<a href="https://github.com/dimitri/prefix" description="A prefix range module that supports efficient queries on text columns with prefix-based searching and matching capabilities." icon="app-store">prefix</a>
+<a href="https://github.com/dimitri/prefix" description="A prefix range module that supports efficient queries on text columns with prefix-based searching and matching capabilities" icon="app-store">prefix</a>
 
-<a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres." icon="app-store">unaccent</a>
+<a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres" icon="app-store">unaccent</a>
 
 </DetailIconCards>
 
@@ -250,7 +250,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="/docs/extensions/neon-utils" description="Provides a num_cpus() function for monitoring how Neon's Autoscaling feature allocates vCPU in response to workload" icon="app-store">neon_utils</a>
 
-<a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions." icon="app-store">pgtap</a>
+<a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions" icon="app-store">pgtap</a>
 
 <a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Provides functions for maintaining foreign key constraints" icon="app-store">refint (spi)</a>
 
