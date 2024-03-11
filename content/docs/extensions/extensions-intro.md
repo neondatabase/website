@@ -3,15 +3,20 @@ title: Postgres extensions
 enableTableOfContents: true
 ---
 
-Explore supported Postgres extensions by category. For a list of supported extensions with the supported versions and installation instructions, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
+Explore supported Postgres extensions by category. Also see:
+
+- [Supported Postgres extensions](/docs/extensions/pg-extensions) for a list of supported extensions with the supported versions and usage notes.
+- [Install an extension](/docs/extensions/pg-extensions#install-an-extension)
+- [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version)
+- [Request extension support](/docs/extensions/pg-extensions#request-extension-support)
 
 ## AI / Machine Learning
 
 <DetailIconCards>
 
-<a href="/docs/extensions/pg_tiktoken" description="Tokenize data in your Postgres database using the OpenAI tiktoken library" icon="app-store" icon="app-store">pg_tiktoken</a>
+<a href="/docs/extensions/pg_tiktoken" description="Tokenize data in Postgres using the OpenAI tiktoken library" icon="app-store" icon="app-store">pg_tiktoken</a>
 
-<a href="/docs/extensions/pgvector" description="Store vector embeddings and perform vector similarity search in Postgres. Supports ivfflat and hnsw indexing" icon="app-store" icon="app-store">pgvector</a>
+<a href="/docs/extensions/pgvector" description="Store vector embeddings and perform vector similarity search in Postgres" icon="app-store" icon="app-store">pgvector</a>
 
 </DetailIconCards>
 
@@ -29,11 +34,11 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Implements an insert_username() trigger that stores the current user's name into a text field, which is useful for tracking who last modified a particular row within a table" icon="app-store">insert_username</a>
+<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Implements a trigger that stores the current user's name into a text field, useful for tracking who modified a particular row within a table" icon="app-store">insert_username</a>
 
-<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically updates a timestamp column to the current timestamp whenever a row is modified in Postgres" icon="app-store">moddatetime</a>
+<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Implements a trigger that automatically updates a timestamp column to the current timestamp whenever a row is modified" icon="app-store">moddatetime</a>
 
-<a href="https://www.postgresql.org/docs/16/pgrowlocks.html" description="Provides a pgrowlocks() function that shows row locking information for a specified table, which can aid in concurrency and deadlock debugging" icon="app-store">pgrowlocks</a>
+<a href="https://www.postgresql.org/docs/16/pgrowlocks.html" description="Provides a function that shows row locking information for a specified table, useful in concurrency and deadlock debugging" icon="app-store">pgrowlocks</a>
 
 <a href="https://www.postgresql.org/docs/16/tcn.html" description="Provides a trigger function to notify listeners of changes to a table, allowing applications to respond to changes in the database" icon="app-store">tcn</a>
 
@@ -45,7 +50,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="A single-line address parser that takes an input address and normalizes it based on a set of rules" icon="app-store">address_standardizer</a>
 
-<a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="A packaged extension that contains data for standardizing US addresses for use with the address_standardizer extension" icon="app-store">address_standardizer_data_us</a>
+<a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="Provides data for standardizing US addresses, for use with the address_standardizer extension" icon="app-store">address_standardizer_data_us</a>
 
 <a href="/docs/extensions/citext" description="Provides a case-insensitive character string type that internally calls lower when comparing values in Postgres" icon="app-store">citext</a>
 
@@ -61,29 +66,29 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://www.postgresql.org/docs/16/isn.html" description="Implements data types for international product numbering standards: EAN13, UPC, ISBN (books), ISMN (music), and ISSN (serials)" icon="app-store">isn</a>
 
-<a href="https://www.postgresql.org/docs/16/ltree.html" description="Provides data types for representing labels of data stored in a hierarchical tree-like structure and supports operators, functions, and indexes for searching through label trees" icon="app-store">ltree</a>
+<a href="https://www.postgresql.org/docs/16/ltree.html" description="Provides data types for representing labels of data stored in a hierarchical tree-like structure and facilities for searching through label trees" icon="app-store">ltree</a>
 
-<a href="https://github.com/supabase/pg_graphql" description="Adds GraphQL support to your Postgres database, allowing any programming language that can connect to your database to query via GraphQL" icon="app-store">pg_graphql</a>
+<a href="https://github.com/supabase/pg_graphql" description="Adds GraphQL support to Postgres, allowing you to query your database via GraphQL" icon="app-store">pg_graphql</a>
 
 <a href="https://github.com/iCyberon/pg_hashids" description="Enables the generation of short, unique hash ids from integers, useful for obfuscating internal ids" icon="app-store">pg_hashids</a>
 
-<a href="https://github.com/supabase/pg_jsonschema" description="Provides support for JSON schema validation on json and jsonb data types in Postgres" icon="app-store">pg_jsonschema</a>
+<a href="https://github.com/supabase/pg_jsonschema" description="Provides support for JSON schema validation on json and jsonb data types" icon="app-store">pg_jsonschema</a>
 
-<a href="https://github.com/fboulnois/pg_uuidv7" description="Enables creating valid UUID Version 7 values in Postgres, providing globally unique identifiers with temporal ordering" icon="app-store">pg_uuidv7</a>
+<a href="https://github.com/fboulnois/pg_uuidv7" description="Enables creating valid UUID Version 7 values in Postgres, enabling globally unique identifiers with temporal ordering" icon="app-store">pg_uuidv7</a>
 
-<a href="https://github.com/pksunkara/pgx_ulid" description="A full-featured extension for generating and working with ULID (Universally Unique Lexicographically Sortable Identifiers) in Postgres" icon="app-store">pgx_ulid</a>
+<a href="https://github.com/pksunkara/pgx_ulid" description="A full-featured extension for generating and working with ULID (Universally Unique Lexicographically Sortable Identifiers)" icon="app-store">pgx_ulid</a>
 
 <a href="https://www.postgresql.org/docs/16/seg.html" description="Implements the seg data type for storage and manipulation of line segments or floating-point ranges, useful for geometric and scientific applications" icon="app-store">seg</a>
 
 <a href="https://www.postgresql.org/docs/16/tablefunc.html" description="Contains functions that return tables (multiple rows), including crosstab, which can pivot row data into columns dynamically" icon="app-store">tablefunc</a>
 
-<a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres." icon="app-store">unaccent</a>
+<a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres" icon="app-store">unaccent</a>
 
-<a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte for storage, manipulation, and calculation of scientific units, enhancing Postgres capabilities for scientific data" icon="app-store">unit</a>
+<a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte, for storage, manipulation, and calculation of scientific units" icon="app-store">unit</a>
 
-<a href="https://www.postgresql.org/docs/16/uuid-ossp.html" description="Provides functions to generate universally unique identifiers (UUIDs) in Postgres, supporting various UUID standard." icon="app-store">uuid-ossp</a>
+<a href="https://www.postgresql.org/docs/16/uuid-ossp.html" description="Provides functions to generate universally unique identifiers (UUIDs) in Postgres, supporting various UUID standards" icon="app-store">uuid-ossp</a>
 
-<a href="https://www.postgresql.org/docs/current/xml2.html" description="Enables XPath queries and XSLT functionality directly within Postgres, facilitating XML data processing" icon="app-store">xml2</a>
+<a href="https://www.postgresql.org/docs/current/xml2.html" description="Enables XPath queries and XSLT functionality directly within Postgres, enabling XML data processing" icon="app-store">xml2</a>
 
 </DetailIconCards>
 
@@ -91,11 +96,11 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
-<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically updates a timestamp column to the current timestamp whenever a row is modified in Postgres" icon="app-store">moddatetime (spi)</a>
+<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically updates a timestamp column to the current timestamp whenever a row is modified in Postgres" icon="app-store">moddatetime</a>
 
-<a href="https://www.postgresql.org/docs/16/pgrowlocks.html" description="Provides a pgrowlocks() function that shows row locking information for a specified table, which can aid in concurrency and deadlock debugging" icon="app-store">pgrowlocks</a>
+<a href="https://www.postgresql.org/docs/16/pgrowlocks.html" description="Provides a function that shows row locking information for a specified table, which can aid in concurrency and deadlock debugging" icon="app-store">pgrowlocks</a>
 
-<a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions" icon="app-store">pgtap</a>
+<a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions" icon="app-store">pgTap</a>
 
 <a href="https://pgxn.org/dist/plpgsql_check/" description="Provides a linter and debugger for PL/pgSQL code, helping identify errors and optimize PL/pgSQL functions" icon="app-store">plpgsql_check</a>
 
@@ -109,9 +114,9 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://www.postgresql.org/docs/16/earthdistance.html" description="Provides cube-based and point-based approaches to calculating great circle distances on the surface of the Earth" icon="app-store">earthdistance</a>
 
-<a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="Integrates Uber's H3 geospatial indexing system that combines the benefits of a hexagonal grid with S2's hierarchical subdivisions into Postgres" icon="app-store">h3</a>
+<a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="Integrates Uber's H3 geospatial indexing system that combines the benefits of a hexagonal grid with S2's hierarchical subdivisions" icon="app-store">h3</a>
 
-<a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="A PostGIS extension for H3, enabling advanced spatial analysis and indexing in conjunction with PostGIS" icon="app-store">h3_postgis</a>
+<a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="A PostGIS extension for H3, enabling advanced spatial analysis and indexing" icon="app-store">h3_postgis</a>
 
 <a href="https://docs.pgrouting.org/" description="Extends PostGIS/Postgres databases, providing geospatial routing and other network analysis functionality" icon="app-store">pgrouting</a>
 
@@ -203,7 +208,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://www.postgresql.org/docs/16/seg.html" description="Implements the seg data type for storage and manipulation of line segments or floating-point intervals, useful for representing laboratory measurements" icon="app-store">seg</a>
 
-<a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte for storage, manipulation, and calculation of scientific units, enhancing Postgres capabilities for scientific data" icon="app-store">unit</a>
+<a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte, for storage, manipulation, and calculation of scientific units" icon="app-store">unit</a>
 
 
 </DetailIconCards>
@@ -230,6 +235,8 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <DetailIconCards>
 
+<a href="https://github.com/iCyberon/pg_hashids" description="Enables the generation of short, unique hash ids from integers, useful for obfuscating internal ids" icon="app-store">pg_hashids</a>
+
 <a href="https://www.postgresql.org/docs/16/pgcrypto.html" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres" icon="app-store">pgcrypto</a>
 
 <a href="https://github.com/michelp/pgjwt" description="Implements JSON Web Tokens (JWT) in Postgres, allowing for secure token creation and verification" icon="app-store">pgjwt</a>
@@ -248,7 +255,7 @@ Explore supported Postgres extensions by category. For a list of supported exten
 
 <a href="https://www.postgresql.org/docs/16/lo.html" description="Provides support for managing large objects (LOBs) in Postgres, including a data type lo and a trigger lo_manage" icon="app-store">lo</a>
 
-<a href="/docs/extensions/neon-utils" description="Provides a num_cpus() function for monitoring how Neon's Autoscaling feature allocates vCPU in response to workload" icon="app-store">neon_utils</a>
+<a href="/docs/extensions/neon-utils" description="Provides a function for monitoring how Neon's Autoscaling feature allocates vCPU in response to workload" icon="app-store">neon_utils</a>
 
 <a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions" icon="app-store">pgtap</a>
 
