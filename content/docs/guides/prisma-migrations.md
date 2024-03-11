@@ -99,7 +99,7 @@ model Book {
 }
 ```
 
-Two models are deifined above: `Author`, which contains information about authors, and `Book`, for details about published books. The `Book` model includes a foreign key that references the `Author` model.
+Two models are defined above: `Author`, which contains information about authors, and `Book`, for details about published books. The `Book` model includes a foreign key that references the `Author` model.
 
 ### Generate Prisma client and run migrations
 
@@ -123,7 +123,7 @@ We'll use this client later to interact with the database.
 
 ### Seed the Database
 
-To test that the application works, we need to add some example data to our tables. Create a `seed.js` fifle in your project and add the following code to it:
+To test that the application works, we need to add some example data to our tables. Create a `seed.js` file in your project and add the following code to it:
 
 ```javascript
 // seed.js
