@@ -260,11 +260,6 @@ export default {
       title: 'Changelog',
       slug: LINKS.changelog,
     },
-    {
-      icon: PostgresDocsIcon,
-      title: 'Postgres Docs',
-      slug: LINKS.postgres,
-    },
   ],
   postgresSidebar: [
     {
