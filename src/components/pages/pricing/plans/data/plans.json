@@ -95,7 +95,7 @@
       "free": "Fixed at 0.25 CU <span>0.25 vCPU, 1 GB RAM</span>",
       "launch": "Up to 4 CU <span>4 vCPU, 16 GB RAM</span>",
       "scale": "Up to 8 CU <span>8 vCPU, 32 GB RAM</span>",
-      "enterprise": "Larger sizes <span>7+ vCPU, 28+ GB RAM</span>"
+      "enterprise": "Larger sizes <span>8+ vCPU, 32+ GB RAM</span>"
     },
     {
       "rows": "1",
