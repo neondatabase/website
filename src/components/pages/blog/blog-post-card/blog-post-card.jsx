@@ -52,6 +52,8 @@ const BlogPostCard = ({
   const formattedDate = getFormattedDate(date);
   const link = url || `${LINKS.blog}/${slug}`;
 
+  const smallSizes = size === 'md' || size === 'sm' || size === 'xs';
+
   return (
     <article
       className={clsx(
@@ -132,12 +134,13 @@ const BlogPostCard = ({
               {
                 'text-4xl leading-dense tracking-tighter xl:text-3xl md:text-2xl': size === 'xl',
                 'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base': size === 'lg',
-                'line-clamp-2 text-lg leading-tight tracking-[-0.02em] lg:text-base':
-                  size === 'md' || size === 'sm' || size === 'xs',
+                'line-clamp-2 text-lg leading-tight tracking-[-0.02em] lg:text-base': smallSizes,
                 'mt-2 md:mt-1.5': !!category,
                 'mt-5 md:mt-4': !category && size === 'lg',
                 'mt-4': !category && size === 'md',
                 'mt-3': !category && size === 'sm',
+                'mt-1.5 line-clamp-2 text-base font-medium leading-5 tracking-extra-tight':
+                  size === 'video',
               }
             )}
           >
@@ -147,8 +150,7 @@ const BlogPostCard = ({
             className={clsx('flex items-center', {
               'mt-3 md:mt-2.5': size === 'lg' || size === 'xl' || withAuthorPhoto,
               'md:mt-2.5': withAuthorPhoto,
-              'mt-2 lg:mt-1.5':
-                (size === 'md' || size === 'sm' || size === 'xs') && !withAuthorPhoto,
+              'mt-2 lg:mt-1.5': smallSizes && !withAuthorPhoto,
             })}
           >
             <Image
@@ -164,16 +166,22 @@ const BlogPostCard = ({
             />
 
             <div
-              className={clsx('flex items-center', {
-                'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start xs:flex-row xs:items-center':
-                  size === 'sm',
-                'xl:flex-col xl:items-start md:flex-row md:items-center': withAuthorPhoto,
-              })}
+              className={clsx(
+                'flex items-center',
+                {
+                  'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start xs:flex-row xs:items-center':
+                    size === 'sm',
+                  'xl:flex-col xl:items-start md:flex-row md:items-center': withAuthorPhoto,
+                },
+                size === 'video' && 'mt-0.5'
+              )}
             >
               <span
                 className={clsx(
                   'leading-none tracking-[-0.02em] text-gray-new-80',
-                  size === 'lg' ? 'text-[15px] lg:text-sm xs:text-[13px]' : 'text-sm lg:text-[13px]'
+                  size === 'lg' && 'text-[15px] lg:text-sm xs:text-[13px]',
+                  { 'text-sm lg:text-[13px]': size === 'xl' || smallSizes },
+                  size === 'video' && 'line-clamp-1 text-[13px] leading-none tracking-extra-tight'
                 )}
               >
                 {size === 'sm' ? (
@@ -199,7 +207,8 @@ const BlogPostCard = ({
                       size === 'sm',
                     'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-[11px] md:before:inline-block':
                       withAuthorPhoto,
-                  }
+                  },
+                  size === 'video' && 'text-[11px]'
                 )}
                 dateTime={date}
               >
@@ -248,7 +257,7 @@ export const BlogPostCardPropTypes = {
 
 BlogPostCard.propTypes = {
   className: PropTypes.string,
-  size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm', 'xs']),
+  size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm', 'xs', 'video']),
   ...BlogPostCardPropTypes,
 };
 
