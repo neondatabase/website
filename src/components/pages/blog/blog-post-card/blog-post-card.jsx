@@ -169,14 +169,14 @@ const BlogPostCard = ({
                 size === 'sm' &&
                   'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start xs:flex-row xs:items-center',
                 withAuthorPhoto && 'xl:flex-col xl:items-start md:flex-row md:items-center',
-                size === 'video' && 'mt-0.5'
+                size === 'video' && 'mt-0.5 w-full'
               )}
             >
               <span
                 className={clsx(
                   'leading-none tracking-extra-tight text-gray-new-80',
                   size === 'lg' && 'text-[15px] lg:text-sm xs:text-[13px]',
-                  size === 'video' && 'line-clamp-1 text-[13px]',
+                  size === 'video' && 'truncate text-[13px] leading-[1.2em]',
                   checkSize('xl', 'md', 'sm', 'xs') && 'text-sm lg:text-[13px]'
                 )}
               >
@@ -202,7 +202,7 @@ const BlogPostCard = ({
                     'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden xs:mt-0 xs:pl-[11px] xs:before:inline-block',
                   withAuthorPhoto &&
                     'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-[11px] md:before:inline-block',
-                  size === 'video' && 'text-[11px]'
+                  size === 'video' && 'pt-px text-[11px]'
                 )}
                 dateTime={date}
               >
