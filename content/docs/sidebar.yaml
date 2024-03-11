@@ -303,6 +303,7 @@
         - title: Google Colab
           slug: ai/ai-google-colab
 - title: Postgres
+  slug: postgres/postgres-intro
   items:
     - title: Data types
       items:
