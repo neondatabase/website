@@ -7,7 +7,7 @@ import Link from 'components/shared/link/link';
 import increase from './images/increase.svg';
 
 const Boost = () => (
-  <section className="boost mt-[154px] xl:mt-28 lg:mt-24 md:mt-20">
+  <section className="boost safe-paddings mt-48 xl:mt-[124px] lg:mt-28 md:mt-20">
     <Container className="flex flex-col items-center" size="medium">
       <GradientLabel>Perfomance</GradientLabel>
       <h2 className="mt-3 text-center text-5xl font-medium leading-dense tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
@@ -18,7 +18,7 @@ const Boost = () => (
       <p className="mt-3 max-w-[485px] text-center text-lg font-light leading-snug tracking-normal xl:text-base">
         Experience up to 30x&nbsp;
         {/* TODO: insert href */}
-        <Link theme="green-underlined" to="/" size="sm">
+        <Link className="underline-offset-[3px]" theme="green-underlined" to="/" size="sm">
           faster index builds
         </Link>
         , ensuring seamless scaling for your AI applications.
