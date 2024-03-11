@@ -203,7 +203,7 @@ const BlogPostCard = ({
                     'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden xs:mt-0 xs:pl-[11px] xs:before:inline-block',
                   withAuthorPhoto &&
                     'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-[11px] md:before:inline-block',
-                  size === 'video' && 'font-regular text-[11px] text-gray-new-70'
+                  size === 'video' && 'text-[11px] font-normal text-gray-new-70'
                 )}
                 dateTime={date}
               >
