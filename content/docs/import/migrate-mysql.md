@@ -109,13 +109,11 @@ COPY Threads Completion          0          4                     0.905s
 
 ## SSL verify error
 
-Users attempting a `pgloader` migration via Docker reported an `SSL verify error: 20 X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY` error while attempting the instructions described above.
+If you encounter an `SSL verify error: 20 X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY` error while attempting the instructions described above using `pgloader` from a Docker container, try the solution identified in this [GitHub issue](https://github.com/dimitri/pgloader/issues/768#issuecomment-693390290), which involves specifying `sslmode=allow` in the Postgres connection string and using the `--no-ssl-cert-verification` option with `pgloader`. 
 
-A solution was identified in this GitHub issue: [SSL verify error: 19 X509_V_ERR_SELF_SIGNED_CERT_IN_CHAIN](https://github.com/dimitri/pgloader/issues/768#issuecomment-693390290). The solution requires specifying `sslmode=allow` in the Postgres connection string and using the `--no-ssl-cert-verification` option with `pgloader`. 
+The following configuration file and Docker command were verified to work with Docker on Windows but may apply generally when using `pgloader` in a Docker container. In your `pgloader` config file, replace the MySQL and Postgres connection string values with your own. In the Docker command, specify the path to your `pgloader` config file, and replace the container ID value (the long alphanumeric string) with your own.
 
-The following configuration file and Docker command were verified to work with Docker on Windows but may apply to other platforms as well:
-
-`pgloader` config.load file:
+`pgloader` config.load file: 
 
 ```plaintext
 load database
@@ -126,7 +124,7 @@ load database
 Docker command:
 
 ```plaintext
-docker run -v C:\path\to\config.load:/config.load d183dc1003daf5e703bd867b3b7826c117fa16b7ee2cd360af591dc895b121dc pgloader --no-ssl-cert-verification /config.load
+docker run -v C:\path\to\config.load:/config.load d183dc100d3af5e703bd867b3b7826c117fa16b7ee2cd360af591dc895b121dc pgloader --no-ssl-cert-verification /config.load
 ```
 
 ## References
