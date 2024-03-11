@@ -5,11 +5,11 @@ import { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
 
 const VideoList = ({ videos }) => (
   <section className="videos flex flex-col">
-    <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-pink-90">
+    <h2 className="flex items-center text-xs font-semibold uppercase leading-none -tracking-extra-tight text-pink-90">
       <span>Video</span>
       <span className="ml-2 h-px grow bg-gray-new-20" />
     </h2>
-    <div className="mt-6 grid grid-cols-6 gap-x-[21px] 2xl:gap-x-6 lg:mt-5 md:grid-cols-1 md:gap-y-10">
+    <div className="mt-6 grid grid-cols-6 gap-x-[21px] 2xl:gap-x-4 lg:mt-5 md:grid-cols-1 md:gap-y-10">
       {videos.map(({ post }, index) => (
         <BlogPostCard
           {...post}

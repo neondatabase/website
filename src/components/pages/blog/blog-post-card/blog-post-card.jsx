@@ -53,6 +53,7 @@ const BlogPostCard = ({
   const link = url || `${LINKS.blog}/${slug}`;
 
   const smallSizes = size === 'md' || size === 'sm' || size === 'xs';
+  const notLgSizes = smallSizes || size === 'xl';
 
   return (
     <article
@@ -139,9 +140,8 @@ const BlogPostCard = ({
                 'mt-5 md:mt-4': !category && size === 'lg',
                 'mt-4': !category && size === 'md',
                 'mt-3': !category && size === 'sm',
-                'mt-1.5 line-clamp-2 text-base font-medium leading-5 tracking-extra-tight':
-                  size === 'video',
-              }
+              },
+              size === 'video' && 'mt-1.5 line-clamp-2 text-base leading-5 tracking-extra-tight'
             )}
           >
             {title}
@@ -168,11 +168,9 @@ const BlogPostCard = ({
             <div
               className={clsx(
                 'flex items-center',
-                {
-                  'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start xs:flex-row xs:items-center':
-                    size === 'sm',
-                  'xl:flex-col xl:items-start md:flex-row md:items-center': withAuthorPhoto,
-                },
+                size === 'sm' &&
+                  'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start xs:flex-row xs:items-center',
+                withAuthorPhoto && 'xl:flex-col xl:items-start md:flex-row md:items-center',
                 size === 'video' && 'mt-0.5'
               )}
             >
@@ -180,8 +178,8 @@ const BlogPostCard = ({
                 className={clsx(
                   'leading-none tracking-extra-tight text-gray-new-80',
                   size === 'lg' && 'text-[15px] lg:text-sm xs:text-[13px]',
-                  { 'text-sm lg:text-[13px]': size === 'xl' || smallSizes },
-                  size === 'video' && 'line-clamp-1 text-[13px] leading-none'
+                  size === 'video' && 'line-clamp-1 text-[13px]',
+                  notLgSizes && 'text-sm lg:text-[13px]'
                 )}
               >
                 {size === 'sm' ? (
@@ -198,16 +196,14 @@ const BlogPostCard = ({
 
               <time
                 className={clsx(
-                  'relative block shrink-0 pl-[11px] font-light uppercase leading-none tracking-extra-tight text-gray-new-80 before:absolute before:left-[4px] before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
-                  size === 'lg'
-                    ? 'text-[15px] lg:text-sm xs:text-xs'
-                    : 'text-[13px] lg:text-xs lg:leading-none',
-                  {
-                    'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden xs:mt-0 xs:pl-[11px] xs:before:inline-block':
-                      size === 'sm',
-                    'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-[11px] md:before:inline-block':
-                      withAuthorPhoto,
-                  },
+                  'relative block shrink-0 pl-[11px] font-light uppercase leading-none tracking-extra-tight text-gray-new-80',
+                  'before:absolute before:left-1 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
+                  size === 'lg' && 'text-[15px] lg:text-sm xs:text-xs',
+                  notLgSizes && 'text-[13px] lg:text-xs lg:leading-none',
+                  size === 'sm' &&
+                    'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden xs:mt-0 xs:pl-[11px] xs:before:inline-block',
+                  withAuthorPhoto &&
+                    'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-[11px] md:before:inline-block',
                   size === 'video' && 'text-[11px]'
                 )}
                 dateTime={date}
