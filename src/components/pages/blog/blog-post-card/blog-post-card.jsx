@@ -40,6 +40,7 @@ const BlogPostCard = ({
   imageWidth = null,
   imageHeight = null,
 }) => {
+  const checkSize = (...sizes) => sizes.includes(size);
   const category = categories?.nodes[0];
   const postAuthor = authors?.[0]?.author || author;
 
@@ -51,9 +52,6 @@ const BlogPostCard = ({
 
   const formattedDate = getFormattedDate(date);
   const link = url || `${LINKS.blog}/${slug}`;
-
-  const smallSizes = size === 'md' || size === 'sm' || size === 'xs';
-  const notLgSizes = smallSizes || size === 'xl';
 
   return (
     <article
@@ -132,31 +130,31 @@ const BlogPostCard = ({
           <h1
             className={clsx(
               'font-medium transition-colors duration-200 group-hover:text-green-45',
-              {
-                'text-4xl leading-dense tracking-tighter xl:text-3xl md:text-2xl': size === 'xl',
-                'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base': size === 'lg',
-                'line-clamp-2 text-lg leading-tight tracking-extra-tight lg:text-base': smallSizes,
-                'mt-2 md:mt-1.5': !!category,
-                'mt-5 md:mt-4': !category && size === 'lg',
-                'mt-4': !category && size === 'md',
-                'mt-3': !category && size === 'sm',
-              },
+              size === 'xl' && 'text-4xl leading-dense tracking-tighter xl:text-3xl md:text-2xl',
+              size === 'lg' && 'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base',
+              checkSize('md', 'sm', 'xs') &&
+                'line-clamp-2 text-lg leading-tight tracking-extra-tight lg:text-base',
+              !!category && 'mt-2 md:mt-1.5',
+              !category && size === 'lg' && 'mt-5 md:mt-4',
+              !category && size === 'md' && 'mt-4',
+              !category && size === 'sm' && 'mt-3',
               size === 'video' && 'mt-1.5 line-clamp-2 text-base leading-5 tracking-extra-tight'
             )}
           >
             {title}
           </h1>
           <div
-            className={clsx('flex items-center', {
-              'mt-3 md:mt-2.5': size === 'lg' || size === 'xl' || withAuthorPhoto,
-              'md:mt-2.5': withAuthorPhoto,
-              'mt-2 lg:mt-1.5': smallSizes && !withAuthorPhoto,
-            })}
+            className={clsx(
+              'flex items-center',
+              (checkSize('lg', 'xl') || withAuthorPhoto) && 'mt-3 md:mt-2.5',
+              withAuthorPhoto && 'md:mt-2.5',
+              checkSize('md', 'sm', 'xs') && !withAuthorPhoto && 'mt-2 lg:mt-1.5'
+            )}
           >
             <Image
               className={clsx(
                 'rounded-full md:h-6 md:w-6 xs:mr-2 xs:block',
-                size === 'lg' || size === 'xl' || withAuthorPhoto ? 'mr-2 block' : 'hidden'
+                checkSize('lg', 'xl') || withAuthorPhoto ? 'mr-2 block' : 'hidden'
               )}
               src={postAuthor.postAuthor?.image?.mediaItemUrl}
               alt={postAuthor?.title}
@@ -179,7 +177,7 @@ const BlogPostCard = ({
                   'leading-none tracking-extra-tight text-gray-new-80',
                   size === 'lg' && 'text-[15px] lg:text-sm xs:text-[13px]',
                   size === 'video' && 'line-clamp-1 text-[13px]',
-                  notLgSizes && 'text-sm lg:text-[13px]'
+                  checkSize('xl', 'md', 'sm', 'xs') && 'text-sm lg:text-[13px]'
                 )}
               >
                 {size === 'sm' ? (
@@ -199,7 +197,7 @@ const BlogPostCard = ({
                   'relative block shrink-0 pl-[11px] font-light uppercase leading-none tracking-extra-tight text-gray-new-80',
                   'before:absolute before:left-1 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
                   size === 'lg' && 'text-[15px] lg:text-sm xs:text-xs',
-                  notLgSizes && 'text-[13px] lg:text-xs lg:leading-none',
+                  checkSize('xl', 'md', 'sm', 'xs') && 'text-[13px] lg:text-xs lg:leading-none',
                   size === 'sm' &&
                     'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden xs:mt-0 xs:pl-[11px] xs:before:inline-block',
                   withAuthorPhoto &&
