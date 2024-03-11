@@ -37,19 +37,19 @@
         "title": "Storage"
       },
       "free": "0.5 GiB",
-      "launch": "10 GiB",
-      "scale": "50 GiB",
+      "launch": "10 GiB <span>Extra at $3.5 per 2 GiB</span>",
+      "scale": "50 GiB<span>Extra at $15 per 10 GiB</span>",
       "enterprise": "Larger sizes"
     },
     {
       "rows": "2",
       "feature": {
         "title": "Compute",
-        "subtitle": "[LINK TO WHAT IS CU]"
+        "subtitle": "1 CU = 0.25 vCPU, 1GB RAM"
       },
-      "free": "5 Compute-hours <span>+ always-available primary</span>",
-      "launch": "300 Compute-hours <span>per month</span>",
-      "scale": "750 Compute-hours <span>per month</span>",
+      "free": "187.5 CU-hours per month <span>+ 5 CU per month for branches</span>",
+      "launch": "300 CU-hours per month <span>Extra at $0.16 per CU-hour</span>",
+      "scale": "750 CU-hours per month <span>Extra at $0.16 per CU-hour</span>",
       "enterprise": "Custom"
     },
     
@@ -60,7 +60,7 @@
       },
       "free": "1",
       "launch": "10",
-      "scale": "50",
+      "scale": "50  <span>Extra at $50 per 10 projects</span>",
       "enterprise": "Unlimited"
     },
     {
@@ -83,52 +83,18 @@
       "scale": "Unlimited",
       "enterprise": "Unlimited"
     },
-    {
-      "rows": "2",
-      "feature": "Extra Usage"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Storage"
-      },
-      "free": false,
-      "launch": false,
-      "scale": "$15 <span>per 10 GiB</span>",
-      "enterprise": "Custom"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Compute",
-        "subtitle": "Based on 0.25 vCPU, 1GB RAM"
-      },
-      "free": false,
-      "launch": "$0.04 <span>per hour</span>",
-      "scale": "$0.04 <span>per hour</span>",
-      "enterprise": "Custom"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Projects"
-      },
-      "free": false,
-      "launch": false,
-      "scale": "$50 <span>per 10 projects</span>",
-      "enterprise": "Custom"
-    },
+   
     {
       "feature": "Compute Features"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Max Compute Size"
+        "title": "Compute Size"
       },
-      "free": "0.25 CU <span>0.25 vCPU, 1 GB RAM</span>",
-      "launch": "4 CU <span>4 vCPU, 16 GB RAM</span>",
-      "scale": "8 CU <span>8 vCPU, 32 GB RAM</span>",
+      "free": "Fixed at 0.25 CU <span>0.25 vCPU, 1 GB RAM</span>",
+      "launch": "Up to 4 CU <span>4 vCPU, 16 GB RAM</span>",
+      "scale": "Up to 8 CU <span>8 vCPU, 32 GB RAM</span>",
       "enterprise": "Larger sizes <span>7+ vCPU, 28+ GB RAM</span>"
     },
     {
