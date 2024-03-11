@@ -169,7 +169,7 @@ const BlogPostCard = ({
                 size === 'sm' &&
                   'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start xs:flex-row xs:items-center',
                 withAuthorPhoto && 'xl:flex-col xl:items-start md:flex-row md:items-center',
-                size === 'video' && 'mt-0.5 w-full'
+                size === 'video' && 'mt-0.5 w-full text-gray-new-70'
               )}
             >
               <span
@@ -194,15 +194,16 @@ const BlogPostCard = ({
 
               <time
                 className={clsx(
-                  'relative block shrink-0 pl-[11px] font-light uppercase leading-none tracking-extra-tight text-gray-new-80',
+                  'relative block shrink-0 pl-[11px] uppercase leading-none tracking-extra-tight',
                   'before:absolute before:left-1 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
-                  size === 'lg' && 'text-[15px] lg:text-sm xs:text-xs',
-                  checkSize('xl', 'md', 'sm', 'xs') && 'text-[13px] lg:text-xs lg:leading-none',
+                  size === 'lg' && 'text-[15px] font-light text-gray-new-80 lg:text-sm xs:text-xs',
+                  checkSize('xl', 'md', 'sm', 'xs') &&
+                    'text-[13px] font-light text-gray-new-80 lg:text-xs lg:leading-none',
                   size === 'sm' &&
                     'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden xs:mt-0 xs:pl-[11px] xs:before:inline-block',
                   withAuthorPhoto &&
                     'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-[11px] md:before:inline-block',
-                  size === 'video' && 'text-[11px]'
+                  size === 'video' && 'font-regular text-[11px] text-gray-new-70'
                 )}
                 dateTime={date}
               >
