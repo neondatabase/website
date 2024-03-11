@@ -3,13 +3,13 @@ import Image from 'next/image';
 import Container from 'components/shared/container';
 import GradientCard from 'components/shared/gradient-card';
 import GradientLabel from 'components/shared/gradient-label';
-import Label from 'components/shared/label';
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 
 import koyeb from './images/koyeb.svg';
 import replit from './images/replit.svg';
 import vercel from './images/vercel.svg';
+import Label from './label';
 
 const partners = [
   {
@@ -20,18 +20,18 @@ const partners = [
     slug: 'neon-postgres-on-vercel',
   },
   {
-    logo: { icon: koyeb, alt: 'Koyeb', width: 123, height: 32 },
-    label: 'Backend-as-a-service',
-    labelColor: 'blue',
-    description: `Gives their users scalable, fully managed serverless Postgres databases via Neon.`,
-    slug: '#',
-  },
-  {
     logo: { icon: replit, alt: 'Replit', width: 140, height: 32 },
     label: 'Other platforms',
     labelColor: 'pink',
     description: 'Replit added support for Postgres databases by leveraging Neon’s API.',
     slug: 'neon-replit-integration',
+  },
+  {
+    logo: { icon: koyeb, alt: 'Koyeb', width: 123, height: 32 },
+    label: 'Backend-as-a-service',
+    labelColor: 'blue',
+    description: `Gives their users scalable, fully managed serverless Postgres databases via Neon.`,
+    slug: '',
   },
 ];
 
@@ -51,7 +51,12 @@ const Collaboration = () => (
         <ul className="mt-12 grid grid-cols-3 gap-8 lg:grid-cols-2 md:gap-6 sm:grid-cols-1">
           {partners.map(({ logo, label, labelColor, description, slug }, index) => (
             <li>
-              <GradientCard className="p-8 pb-7" as={Link} to={`${LINKS.blog}/${slug}`} key={index}>
+              <GradientCard
+                className="p-8 pb-7"
+                as={slug ? Link : 'div'}
+                to={slug ? `${LINKS.blog}/${slug}` : null}
+                key={index}
+              >
                 <div className="flex flex-col">
                   <Image src={logo.icon} alt={logo.alt} width={logo.width} height={logo.height} />
                   <Label label={label} color={labelColor} />
