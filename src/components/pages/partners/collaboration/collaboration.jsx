@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
@@ -57,6 +58,18 @@ const Collaboration = () => (
                 to={slug ? `${LINKS.blog}/${slug}` : null}
                 key={index}
               >
+                {/* badge "coming soon" */}
+                {!slug && (
+                  <div
+                    className={clsx(
+                      'text-[10px] font-semibold leading-none -tracking-extra-tight text-gray-new-90',
+                      'absolute -right-4 -top-4 w-fit rounded-3xl bg-[rgba(228,229,231,0.12)] px-2.5 py-[5px]'
+                    )}
+                  >
+                    COMING SOON
+                  </div>
+                )}
+
                 <div className="flex flex-col">
                   <Image src={logo.icon} alt={logo.alt} width={logo.width} height={logo.height} />
                   <Label label={label} color={labelColor} />
