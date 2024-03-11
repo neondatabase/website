@@ -40,7 +40,7 @@ The examples that follow assume that your database connection string is assigned
 
 The Neon serverless driver uses the [neon](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neon-function) function for queries over HTTP.
 
-You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety. Please note that [Drizzle Kit](https://orm.drizzle.team/kit-docs/overview) does not support the Neon serverless driver — you'll have to use a standard Postgres driver with Drizzle Kit, like `node-postgres` or `postgres.js`.
+You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
 
 <CodeTabs labels={["Node.js", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
@@ -274,7 +274,7 @@ Consider using the driver with `Pool` or `Client` in the following scenarios:
 - You are writing a new code base and want to use a package that expects a `node-postgres-compatible` driver.
 - Your backend service uses sessions / interactive transactions with multiple queries per connection.
 
-You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead. Please note that [Drizzle Kit](https://orm.drizzle.team/kit-docs/overview) does not support the Neon serverless driver — you'll have to use a standard Postgres driver with Drizzle Kit, like `node-postgres` or `postgres.js`.
+You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
 
 <CodeTabs labels={["Node.js", "Prisma", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
