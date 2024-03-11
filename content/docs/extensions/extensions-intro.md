@@ -251,7 +251,7 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://hypopg.readthedocs.io/en/rel1_stable/" description="Provides the ability to create hypothetical (virtual) indexes in Postgres for performance testing" icon="app-store">hypopg</a>
 
-<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically inserts the username of the person executing an insert operation into a specified table in Postgres" icon="app-store">insert_username (spi)</a>
+<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Automatically inserts the username of the person executing an insert operation into a specified table in Postgres" icon="app-store">insert_username</a>
 
 <a href="https://www.postgresql.org/docs/16/lo.html" description="Provides support for managing large objects (LOBs) in Postgres, including a data type lo and a trigger lo_manage" icon="app-store">lo</a>
 
@@ -259,6 +259,6 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions" icon="app-store">pgtap</a>
 
-<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Provides functions for maintaining foreign key constraints" icon="app-store">refint (spi)</a>
+<a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Provides functions for maintaining foreign key constraints" icon="app-store">refint</a>
 
 </DetailIconCards>
