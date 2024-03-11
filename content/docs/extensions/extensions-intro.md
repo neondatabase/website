@@ -50,7 +50,7 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="A single-line address parser that takes an input address and normalizes it based on a set of rules" icon="app-store">address_standardizer</a>
 
-<a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="Provides data for standardizing US addresses, for use with the address_standardizer extension" icon="app-store">address_standardizer_data_us</a>
+<a href="https://postgis.net/docs/Extras.html#Address_Standardizer_Tables" description="Provides data for standardizing US addresses, for use with the address_standardizer extension" icon="app-store">address_standardizer_data_us</a>
 
 <a href="/docs/extensions/citext" description="Provides a case-insensitive character string type that internally calls lower when comparing values in Postgres" icon="app-store">citext</a>
 
@@ -182,7 +182,11 @@ Explore supported Postgres extensions by category. Also see:
 
 <DetailIconCards>
 
-<a href="https://github.com/plv8/plv8/" description="A Postgres procedural language powered by V8 Javascript Engine for writing functions in Javascript that are callable from SQL" icon="app-store">plcoffee</a>
+<a href="https://coffeescript.org/" description="Enables writing functions in CoffeeScript, a Javascript dialect with a syntax similar to Ruby" icon="app-store">plcoffee</a>
+
+<a href="https://livescript.net/" description="Enables writing functions in LiveScript, a Javascript dialect that serves as a more powerful successor to CoffeeScript" icon="app-store">plls</a>
+
+<a href="https://github.com/plv8/plv8/" description="A Postgres procedural language powered by V8 Javascript Engine for writing functions in Javascript that are callable from SQL" icon="app-store">plv8</a>
 
 <a href="https://www.postgresql.org/docs/16/plpgsql.html" description="The default procedural language for Postgres, enabling the creation of complex functions and triggers" icon="app-store">plpgsql</a>
 
@@ -234,8 +238,6 @@ Explore supported Postgres extensions by category. Also see:
 ## Security
 
 <DetailIconCards>
-
-<a href="https://github.com/iCyberon/pg_hashids" description="Enables the generation of short, unique hash ids from integers, useful for obfuscating internal ids" icon="app-store">pg_hashids</a>
 
 <a href="https://www.postgresql.org/docs/16/pgcrypto.html" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres" icon="app-store">pgcrypto</a>
 
