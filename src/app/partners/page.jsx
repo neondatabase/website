@@ -77,6 +77,7 @@ const PartnersPage = () => (
       items={items}
       isGradientLabel
     />
+    <Collaboration />
     <Testimonial
       className="mt-[200px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
       quote="By partnering with Neon, Vercel’s frontend platform is now the end&#8209;to&#8209;end
@@ -84,8 +85,7 @@ const PartnersPage = () => (
       name="Guillermo Rauch"
       position="CEO of Vercel"
     />
-    <Plans className="mt-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
-    <Collaboration />
+    <Plans className="my-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
     <Integration />
     <Apply />
   </Layout>
