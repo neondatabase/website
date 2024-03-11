@@ -134,7 +134,7 @@ const BlogPostCard = ({
               {
                 'text-4xl leading-dense tracking-tighter xl:text-3xl md:text-2xl': size === 'xl',
                 'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base': size === 'lg',
-                'line-clamp-2 text-lg leading-tight tracking-[-0.02em] lg:text-base': smallSizes,
+                'line-clamp-2 text-lg leading-tight tracking-extra-tight lg:text-base': smallSizes,
                 'mt-2 md:mt-1.5': !!category,
                 'mt-5 md:mt-4': !category && size === 'lg',
                 'mt-4': !category && size === 'md',
@@ -178,10 +178,10 @@ const BlogPostCard = ({
             >
               <span
                 className={clsx(
-                  'leading-none tracking-[-0.02em] text-gray-new-80',
+                  'leading-none tracking-extra-tight text-gray-new-80',
                   size === 'lg' && 'text-[15px] lg:text-sm xs:text-[13px]',
                   { 'text-sm lg:text-[13px]': size === 'xl' || smallSizes },
-                  size === 'video' && 'line-clamp-1 text-[13px] leading-none tracking-extra-tight'
+                  size === 'video' && 'line-clamp-1 text-[13px] leading-none'
                 )}
               >
                 {size === 'sm' ? (
@@ -198,7 +198,7 @@ const BlogPostCard = ({
 
               <time
                 className={clsx(
-                  'relative block shrink-0 pl-[11px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-[4px] before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
+                  'relative block shrink-0 pl-[11px] font-light uppercase leading-none tracking-extra-tight text-gray-new-80 before:absolute before:left-[4px] before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
                   size === 'lg'
                     ? 'text-[15px] lg:text-sm xs:text-xs'
                     : 'text-[13px] lg:text-xs lg:leading-none',
