@@ -35,6 +35,7 @@ const BlogPostCard = ({
   pageBlogPost: { url, authors, largeCover, author },
   size = 'lg',
   withAuthorPhoto = false,
+  hideAuthorPhoto = false,
   withImageHover = true,
   isPriority = false,
   imageWidth = null,
@@ -151,9 +152,11 @@ const BlogPostCard = ({
               checkSize('md', 'sm', 'xs') && !withAuthorPhoto && 'mt-2 lg:mt-1.5'
             )}
           >
+            {/* avatar */}
             <Image
               className={clsx(
-                'rounded-full md:h-6 md:w-6 xs:mr-2 xs:block',
+                'rounded-full md:h-6 md:w-6 xs:mr-2',
+                !hideAuthorPhoto && 'xs:block',
                 checkSize('lg', 'xl') || withAuthorPhoto ? 'mr-2 block' : 'hidden'
               )}
               src={postAuthor.postAuthor?.image?.mediaItemUrl}
@@ -169,15 +172,16 @@ const BlogPostCard = ({
                 size === 'sm' &&
                   'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start xs:flex-row xs:items-center',
                 withAuthorPhoto && 'xl:flex-col xl:items-start md:flex-row md:items-center',
-                size === 'video' && 'mt-0.5 w-full text-gray-new-70'
+                size === 'video' && 'mt-2 w-full'
               )}
             >
+              {/* author */}
               <span
                 className={clsx(
-                  'leading-none tracking-extra-tight text-gray-new-80',
-                  size === 'lg' && 'text-[15px] lg:text-sm xs:text-[13px]',
-                  size === 'video' && 'truncate text-[13px] leading-[1.2em]',
-                  checkSize('xl', 'md', 'sm', 'xs') && 'text-sm lg:text-[13px]'
+                  'tracking-extra-tight text-gray-new-80',
+                  size === 'lg' && 'text-[15px] leading-none lg:text-sm xs:text-[13px]',
+                  size === 'video' && 'truncate text-[13px] leading-[1.2em] !text-gray-new-70',
+                  checkSize('xl', 'md', 'sm', 'xs') && 'text-sm leading-none lg:text-[13px]'
                 )}
               >
                 {size === 'sm' ? (
