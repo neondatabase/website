@@ -4,7 +4,7 @@ import Container from 'components/shared/container';
 import phoneIllustration from 'images/pages/home/lightning/phone.png';
 
 const Lightning = () => (
-  <section className="lightning safe-paddings mt-[216px] bg-black">
+  <section className="lightning safe-paddings mt-[216px]">
     <Container className="pb-[311px]" size="960">
       <h2 className="text-[128px] font-medium leading-[0.95] -tracking-wider text-white">
         Lightning fast. Edge&nbsp;ready.

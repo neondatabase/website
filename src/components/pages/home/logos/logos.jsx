@@ -42,7 +42,7 @@ const logos = [
 ];
 
 const Logos = () => (
-  <section className="safe-paddings mt-[172px] bg-black">
+  <section className="safe-paddings mt-[172px]">
     <Container className="z-20 flex items-center justify-between" size="1100">
       <h2 className="max-w-[370px] text-[36px] font-medium leading-dense tracking-extra-tight text-white">
         We separated storage and&nbsp;compute.
