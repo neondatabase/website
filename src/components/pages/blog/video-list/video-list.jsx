@@ -18,7 +18,6 @@ const VideoList = ({ videos }) => (
           withImageHover={false}
           imageWidth={380}
           imageHeight={196}
-          hideAuthorPhoto
         />
       ))}
     </div>

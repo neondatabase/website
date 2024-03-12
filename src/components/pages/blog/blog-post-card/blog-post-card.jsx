@@ -35,7 +35,6 @@ const BlogPostCard = ({
   pageBlogPost: { url, authors, largeCover, author },
   size = 'lg',
   withAuthorPhoto = false,
-  hideAuthorPhoto = false,
   withImageHover = true,
   isPriority = false,
   imageWidth = null,
@@ -155,8 +154,7 @@ const BlogPostCard = ({
             {/* avatar */}
             <Image
               className={clsx(
-                'rounded-full md:h-6 md:w-6 xs:mr-2',
-                !hideAuthorPhoto && 'xs:block',
+                'rounded-full md:h-6 md:w-6 xs:mr-2 xs:block',
                 checkSize('lg', 'xl') || withAuthorPhoto ? 'mr-2 block' : 'hidden'
               )}
               src={postAuthor.postAuthor?.image?.mediaItemUrl}
