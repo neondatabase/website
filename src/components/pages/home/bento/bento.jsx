@@ -5,7 +5,6 @@ import apiAndCliImage from 'images/pages/home/bento/api-and-cli.jpg';
 import regionsImage from 'images/pages/home/bento/regions.jpg';
 import timerImage from 'images/pages/home/bento/timer.jpg';
 
-// TODO: add border gradient
 const Bento = () => (
   <section className="bento safe-paddings mt-16">
     <Container size="960">
@@ -31,8 +30,12 @@ const Bento = () => (
               Compute scales scales dynamically to ensure you&apos;re ready for peak hours.
             </p>
           </div>
+          <div
+            className="border-linear absolute inset-0 z-20 rounded-[inherit] border-image-home-bento-regions-border"
+            aria-hidden
+          />
         </div>
-        <div className="grid min-h-[491px] grid-cols-1 grid-rows-1 overflow-hidden rounded-[10px]">
+        <div className="relative grid min-h-[491px] grid-cols-1 grid-rows-1 overflow-hidden rounded-[10px]">
           <div className="relative z-10 col-span-full row-span-full">
             <Image
               className="absolute inset-0"
@@ -48,8 +51,12 @@ const Bento = () => (
               Manage your database programmatically or from the terminal.
             </p>
           </div>
+          <div
+            className="border-linear absolute inset-0 z-20 rounded-[inherit] border-image-home-bento-api-and-cli-border"
+            aria-hidden
+          />
         </div>
-        <div className="grid min-h-[491px] grid-cols-1 grid-rows-1 overflow-hidden rounded-[10px]">
+        <div className="relative grid min-h-[491px] grid-cols-1 grid-rows-1 overflow-hidden rounded-[10px] bg-home-bento-timer-border">
           <div className="relative z-10 col-span-full row-span-full">
             <Image className="absolute inset-0" src={timerImage} width={470} height={491} alt="" />
           </div>
@@ -59,6 +66,10 @@ const Bento = () => (
               up to 30 days, granularity down to the transaction or second.
             </p>
           </div>
+          <div
+            className="border-linear absolute inset-0 z-20 rounded-[inherit] border-image-home-bento-timer-border"
+            aria-hidden
+          />
         </div>
       </div>
     </Container>

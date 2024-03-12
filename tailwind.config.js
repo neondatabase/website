@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 const defaultTheme = require('tailwindcss/defaultTheme');
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   darkMode: 'class',
@@ -149,6 +150,25 @@ module.exports = {
           'linear-gradient(160deg, rgba(173, 224, 235, 0.00) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0.00) 77%);',
         'pricing-table-featured-column':
           'linear-gradient(180deg, rgba(19, 20, 21, 0.40) 92.77%, rgba(19, 20, 21, 0.00) 100%);',
+        'home-bento-regions-border':
+          'radial-gradient(42.03% 56.98% at 0% 100%, #847A9D 0%, rgba(132, 122, 157, 0) 89.37%),' +
+          'radial-gradient(20.73% 29.17% at 24.37% 100%, #545C8D 0%, rgba(84, 92, 141, 0) 89.37%),' +
+          'radial-gradient(22.14% 53.65% at 68.28% 0%, #545C8D 0%, rgba(84, 92, 141, 0) 95.75%),' +
+          'radial-gradient(12.86% 25.51% at 100% 30.86%, #2A2D32 0%, rgba(42, 45, 50, 0) 100%),' +
+          'radial-gradient(12.81% 27.6% at 37.08% 0%, #2A2D32 0%, rgba(42, 45, 50, 0) 100%),' +
+          'linear-gradient(0deg, #181818, #181818)',
+        'home-bento-api-and-cli-border':
+          'radial-gradient(26.24% 29.12% at 66.81% 0%, #24272C 0%, rgba(36, 39, 44, 0) 100%),' +
+          'radial-gradient(35.43% 29.25% at 100% 62.63%, #24272C 0%, rgba(36, 39, 44, 0) 100%),' +
+          'radial-gradient(39.25% 39.33% at 0% 3.24%, #EFF4F4 0%, #78E8E1 8.96%, #3ABC96 18.57%, #24624F 41.92%, rgba(36, 98, 79, 0) 100%),' +
+          'linear-gradient(0deg, #171717, #171717)',
+        'home-bento-timer-border':
+          'radial-gradient(7.07% 9.37% at 64.68% 0%, #2559B9 0%, rgba(37, 89, 185, 0) 100%),' +
+          'radial-gradient(19.61% 26.58% at 73.83% 0%, rgba(231, 232, 236, 0.9) 0%, rgba(231, 232, 236, 0) 60.81%),' +
+          'radial-gradient(21.49% 21.49% at 33.94% 0%, #293244 0%, rgba(41, 50, 68, 0) 100%),' +
+          'radial-gradient(41.6% 38.11% at 0% 58.25%, #121212 0%, rgba(18, 18, 18, 0) 100%),' +
+          'radial-gradient(32.34% 44.6% at 100% 86.35%, #121212 0%, rgba(18, 18, 18, 0) 100%),' +
+          'linear-gradient(0deg, #191919, #191919)',
       }),
       keyframes: (theme) => ({
         'text-blink': {
@@ -251,6 +271,16 @@ module.exports = {
     require('@headlessui/tailwindcss'),
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
+    }),
+    plugin(({ matchUtilities, theme }) => {
+      matchUtilities(
+        {
+          'border-image': (value) => ({
+            background: `${value.replaceAll(/(, ?[a-z]+-gradient)/g, ' border-box$1')} border-box`,
+          }),
+        },
+        { values: theme('backgroundImage') }
+      );
     }),
   ],
 };
