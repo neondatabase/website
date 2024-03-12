@@ -93,11 +93,11 @@ const ChangelogPost = async ({ currentSlug }) => {
       )}
       <div className="col-span-6 -mx-10 flex flex-col 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
         <Hero
-          className="flex justify-center lg:pt-16 md:py-10 sm:py-7 dark:bg-gray-new-8 dark:text-white"
+          className="flex justify-center dark:bg-gray-new-8 dark:text-white lg:pt-16 md:py-10 sm:py-7"
           date={label}
           withContainer
         />
-        <div className="flex grow pb-28 lg:pb-20 md:pb-16 dark:bg-gray-new-8">
+        <div className="flex grow pb-28 dark:bg-gray-new-8 lg:pb-20 md:pb-16">
           <Container size="xs" className="relative flex w-full pb-10">
             <article className="relative flex w-full max-w-full flex-col items-start">
               <h2>

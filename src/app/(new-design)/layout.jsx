@@ -4,7 +4,7 @@ import Script from 'next/script';
 
 import TopBar from 'components/shared/topbar';
 
-import ThemeProvider from './provider';
+import ThemeProvider from '../provider';
 
 const fontsBasePath = '/fonts';
 const fontsPaths = [
