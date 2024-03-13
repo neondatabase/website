@@ -142,7 +142,7 @@ The latest version of the Neon integration displays a message on the **Deploymen
 
 ## Manage integration settings
 
-You can manage Vercel environment variables and the default database and role used by the integration from the Neon Console.
+You can manage Vercel environment variables as well as the default database and role used by the integration from the Neon Console.
 
 ### Configure environment variables
 
