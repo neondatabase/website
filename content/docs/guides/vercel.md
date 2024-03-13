@@ -137,7 +137,7 @@ You can also remove branches from your Neon project using the Console, CLI, or A
 <Admonition type="note">
 The latest version of the Neon integration displays a message on the **Deployment Details** page in Vercel under **Running checks** if you exceed the branch limit for your Neon project.
 
-![Vrecel branch limit](/docs/guides/vercel_branch_limit.png)
+![Vercel branch limit](/docs/guides/vercel_branch_limit.png)
 </Admonition>
 
 ## Manage integration settings
