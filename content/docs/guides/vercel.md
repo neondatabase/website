@@ -146,7 +146,7 @@ You can manage Vercel environment variables and the default database and role us
 
 ### Configure environment variables
 
-The Neon Vercel Integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED` environment variables for your Vercel **Production** and **Development** environments. These variables are set to a pooled and direct Neon database connection string, respectively (see [Connection pooling](/docs/connect/connection-pooling) for more information). When you create a preview deployment, the integration also sets these variables for your Vercel **Preview** environment. If you want to use different Postgres environment variables, the integration also supports these variables for defining your database connection:
+The Neon Vercel Integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED` environment variables for your Vercel **Production** and **Development** environments. These variables are set to a pooled and direct Neon database connection string, respectively (see [Connection pooling](/docs/connect/connection-pooling) for more information). When you create a preview deployment, the integration also sets these variables for your Vercel **Preview** environment. If you want to use different Postgres environment variables, the integration also supports this set of variables for defining your database connection:
 
 - `PGHOST` (set to a pooled Neon database connection string)
 - `PGHOST_UNPOOLED` (set to a direct Neon database connection string)
@@ -182,11 +182,11 @@ To change the database and role for new preview deployment branches:
 3. In the **Vercel integration** drawer, select the **Settings** tab.
 4. Under **Default database and role**, select a new **Database** and **Role**.
 
-Your change will be reflected in the Vercel Preview environment variables set by the integration on the next preview deployment.
+Your change will be reflected in your Vercel **Preview** environment variables on the next preview deployment.
 
 ## Disconnect the integration
 
-If you want to disconnect the Neon Vercel Integration from your Vercel project, you can do so from the Neon Console. Removing the connection from Neon stops the integration from creating preview branches and setting environment variables for those branches in Vercel. It does not remove the integration from your Vercel project. To fully remove the integration from your Vercel project, you must do so in Vercel. See [Manage the Neon Postgres integration in Vercel](#manage-the-integration-in-vercel) for instructions.
+If you want to disconnect the Neon Vercel Integration from your Vercel project, you can do so from the Neon Console. Disconnecting stops the integration from creating preview branches and setting environment variables for those branches in Vercel. It does not remove the integration from your Vercel project. To fully remove the integration from your Vercel project, you must do so in Vercel. See [Manage the Neon Postgres integration in Vercel](#manage-the-integration-in-vercel) for instructions.
 
 To disconnect the Neon integration from your Vercel project:
 
@@ -211,9 +211,20 @@ The Neon Vercel Integration can be used with more than one Vercel project, but i
    1. On the **Manage Access for Neon Postgres** modal, make sure that the Neon Postgres integration has access to the Vercel project. You can do so by selecting **Specific Projects** and choosing a Vercel project or by granting access to **All Projects**. If you previously granted access to **All Projects**, no change is necessary.
    1. Click **Save**.
 1. Navigate to this URL: [https://vercel.com/integrations/neon/new](https://vercel.com/integrations/neon/new).
-1. Follow the prompts. When you reach the **Integrate Neon** dialog, select the Vercel project you want to add the integration to. Vercel projects that are already integrated with Neon are identified as `CONNECTED`, so you'll have to select a different Vercel project.
+1. Follow the prompts. When you reach the **Integrate Neon** dialog, select the Vercel project you want to add the integration to. Vercel projects that are already integrated with Neon are identified as `CONNECTED`.
    ![Confirm integration settings](/docs/guides/vercel_add_new_project.png)
-1. Continue following the prompts to complete the setup. These are the same steps described above, in [Add the Neon integration](#add-the-neon-vercel-integration). When you select a Neon project to connect to, be sure to select one that is not already connected to a Vercel project, as you cannot connect one Vercel project to multiple Neon projects or vice versa.
+1. Continue following the prompts to complete the setup. These are the same steps described above, in [Add the Neon integration](#add-the-neon-vercel-integration). When you select a Neon project to connect to, be sure to select one that is not already connected to a Vercel project, as you cannot connect a Vercel project to multiple Neon projects or vice versa.
+
+## Manage the integration in Vercel
+
+To view permissions, manage which Vercel projects your integration has access to, or uninstall the Neon integration from Vercel:
+
+1. On the Vercel dashboard, select **Settings** > **Integrations**.
+1. Find the **Neon** integration and select **Configure**.
+
+   <Admonition type="note">
+   Removing the Neon Vercel Integration removes the Vercel environment variables set by the integration. It does not remove Neon branches created by the integration. To remove Neon branches, see [Delete a branch](/docs/manage/branches#delete-a-branch).
+   </Admonition>
 
 ## Troubleshoot connection issues
 
@@ -244,15 +255,5 @@ In earlier versions of the integration, the preview environment `DATABASE_URL` i
 
 To avoid this issue, you can reinstall the integration to update to the latest version. Alternatively, a workaround is to redeploy your preview deployment in Vercel. The preview environment `DATABASE_URL` is set on the next deployment. For redeploy instructions, see [Managing Deployments](https://vercel.com/docs/deployments/managing-deployments), in the _Vercel documentation_.
 
-## Manage the integration in Vercel
-
-To view permissions, manage which Vercel projects your integration has access to, or uninstall the Neon integration:
-
-1. On the Vercel dashboard, select **Settings** > **Integrations**.
-1. Find the **Neon** integration and select **Configure**.
-
-   <Admonition type="note">
-   Removing the Neon Vercel Integration removes the Vercel environment variables set by the integration. It does not remove Neon branches created by the integration. To remove Neon branches, see [Delete a branch](/docs/manage/branches#delete-a-branch).
-   </Admonition>
 
 <NeedHelp/>
