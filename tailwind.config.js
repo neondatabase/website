@@ -150,6 +150,8 @@ module.exports = {
           'linear-gradient(160deg, rgba(173, 224, 235, 0.00) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0.00) 77%);',
         'pricing-table-featured-column':
           'linear-gradient(180deg, rgba(19, 20, 21, 0.40) 92.77%, rgba(19, 20, 21, 0.00) 100%);',
+        'home-lightning-title':
+          'radial-gradient(22.52% 105.36% at 59.98% 95.29%, #070707 8.6%, #525252 36.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
         'home-bento-regions-border':
           'radial-gradient(42.03% 56.98% at 0% 100%, #847A9D 0%, rgba(132, 122, 157, 0) 89.37%),' +
           'radial-gradient(20.73% 29.17% at 24.37% 100%, #545C8D 0%, rgba(84, 92, 141, 0) 89.37%),' +

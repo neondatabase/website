@@ -3,13 +3,14 @@ import Image from 'next/image';
 import Container from 'components/shared/container';
 import phoneIllustration from 'images/pages/home/lightning/phone.png';
 
+// TODO: add responsive styles, rive animation, check heading gradient when font will be available
 const Lightning = () => (
   <section className="lightning safe-paddings mt-[216px]">
     <Container className="pb-[311px]" size="960">
-      <h2 className="text-[128px] font-medium leading-[0.95] -tracking-wider text-white">
+      <h2 className="inline-block bg-home-lightning-title bg-clip-text pb-6 text-[128px] font-medium leading-[0.95] -tracking-wider text-transparent">
         Lightning fast. Edge&nbsp;ready.
       </h2>
-      <div className="ml-32 mt-[104px] font-medium leading-none text-white">
+      <div className="ml-32 mt-20 font-medium leading-none text-white">
         <span className="text-[128px] tracking-[-0.06em]">10</span>
         <span className="text-[38px] tracking-extra-tight">ms</span>
       </div>
