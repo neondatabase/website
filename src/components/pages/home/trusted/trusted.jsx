@@ -30,7 +30,7 @@ Card.propTypes = {
 };
 
 const Trusted = () => (
-  <section className="trusted my-[224px]">
+  <section className="trusted mt-[224px]">
     <Container size="1152">
       <h2
         className={clsx(

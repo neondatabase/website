@@ -6,7 +6,7 @@ import bgImage from 'images/pages/home/get-started/dots.webp';
 
 const GetStarted = () => (
   <section className="get-started mb-[358px] mt-[445px]">
-    <Container className="relative flex flex-col items-center justify-center" size="1100">
+    <Container className="flex flex-col items-center justify-center" size="1100">
       <Image
         className="absolute max-w-none"
         src={bgImage}
@@ -17,7 +17,12 @@ const GetStarted = () => (
         Features of tomorrow.
         <br /> Available today.
       </h2>
-      <Button className="relative mt-9" size="new-lg" theme="green-outline">
+      <Button
+        className="relative mt-9 !font-semibold tracking-tighter"
+        size="lg"
+        theme="green-outline"
+        to="#"
+      >
         Get Started
       </Button>
     </Container>
