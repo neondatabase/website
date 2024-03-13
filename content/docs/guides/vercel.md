@@ -146,7 +146,7 @@ You can manage Vercel environment variables as well as the default database and 
 
 ### Configure environment variables
 
-The Neon Vercel Integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED` environment variables for your Vercel **Production** and **Development** environments. These variables are set to a pooled and direct Neon database connection string, respectively (see [Connection pooling](/docs/connect/connection-pooling) for more information). When you create a preview deployment, the integration also sets these variables for your Vercel **Preview** environment. If you want to use different Postgres environment variables, the integration also supports this set of variables for defining your database connection:
+The Neon Vercel Integration automatically sets the environment variables `DATABASE_URL` (pooled connection) and `DATABASE_URL_UNPOOLED` (direct connection)  for your Vercel **Production** and **Development** environments. See [Connection pooling](/docs/connect/connection-pooling) for more information. When you create a preview deployment, the integration also sets these same variables for the Vercel **Preview**  environment. If you want to define your database connection using different Postgres environment variables, the integration also supports the following:
 
 - `PGHOST` (set to a pooled Neon database connection string)
 - `PGHOST_UNPOOLED` (set to a direct Neon database connection string)
