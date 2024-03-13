@@ -1,3 +1,4 @@
+import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
 import Lightning from 'components/pages/home/lightning';
 import Logos from 'components/pages/home/logos';
@@ -8,6 +9,7 @@ const HomeLayout = () => (
     <Logos />
     <Lightning />
     <Bento />
+    <AiIndex />
   </Layout>
 );
 
