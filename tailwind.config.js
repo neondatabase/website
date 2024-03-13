@@ -171,6 +171,17 @@ module.exports = {
           'radial-gradient(41.6% 38.11% at 0% 58.25%, #121212 0%, rgba(18, 18, 18, 0) 100%),' +
           'radial-gradient(32.34% 44.6% at 100% 86.35%, #121212 0%, rgba(18, 18, 18, 0) 100%),' +
           'linear-gradient(0deg, #191919, #191919)',
+        'home-trusted-github-card':
+          'radial-gradient(32.79% 54.55% at 67.38% 0%, #18604C 0%, rgba(24, 96, 76, 0) 91.3%),' +
+          'linear-gradient(208.46deg, #161818 8.65%, #141414 84.9%)',
+        'home-trusted-digit-card':
+          'radial-gradient(73.81% 84.98% at 1.56% 0%, #A1ACC4 0%, #8594B3 19.86%, rgba(133, 148, 179, 0) 100%),' +
+          'linear-gradient(140.09deg, #6B768C 9.16%, #1C1C1C 46.69%),' +
+          'radial-gradient(21.81% 24.47% at 1.09% 1.16%, #FFFFFF 0%, rgba(255, 255, 255, 0) 63.02%)',
+        'home-trusted-soc-card':
+          'radial-gradient(46.96% 46.96% at 0% 3.24%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
+          'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
+          'linear-gradient(0deg, #141416, #141416)',
       }),
       keyframes: (theme) => ({
         'text-blink': {
