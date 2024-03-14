@@ -46,7 +46,7 @@ Layout.propTypes = {
   className: PropTypes.string,
   headerClassName: PropTypes.string,
   headerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
-  footerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']),
+  footerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'black-pure', 'gray-8']),
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
   isHeaderSticky: PropTypes.bool,

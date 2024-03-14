@@ -18,7 +18,9 @@ const Card = ({ className, borderClassName, bgImage, children }) => (
       alt=""
     />
     <div className={clsx('absolute inset-0 z-10 rounded-[inherit]', borderClassName)} />
-    <p className="t-lg relative leading-snug tracking-extra-tight text-gray-new-50">{children}</p>
+    <p className="t-lg relative z-20 leading-snug tracking-extra-tight text-gray-new-50">
+      {children}
+    </p>
   </div>
 );
 

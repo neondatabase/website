@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -57,7 +58,7 @@ const Testimonial = ({ quote, avatar, name, position, className }) => (
 
 Testimonial.propTypes = {
   quote: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
+  avatar: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
   className: PropTypes.string,
@@ -76,7 +77,7 @@ const Industry = () => (
         <div className="mt-48 flex flex-col gap-[184px]">
           {TESTIMONIALS.map((testimonal, index) => (
             <Testimonial
-              className={index !== 1 && 'opacity-40 blur-[2px]'}
+              className={clsx(index !== 1 && 'opacity-40 blur-[2px]')}
               {...testimonal}
               key={index}
             />

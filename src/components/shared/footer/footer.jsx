@@ -49,11 +49,11 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
       <Container
         className={clsx(
           'flex justify-between',
-          theme === 'black-pure' ? 'max-w-[1344px] gap-x-10 pb-14 pt-10 2xl:px-8' : 'py-10 xl:py-8',
-          theme === 'black-pure' &&
+          isNewTheme ? 'gap-x-10 pb-14 pt-10' : 'py-10 xl:py-8',
+          isNewTheme &&
             'before:absolute before:-left-[20%] before:top-0 before:h-px before:w-[140%] before:bg-white before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);]'
         )}
-        size={isNewTheme ? undefined : 'lg'}
+        size={isNewTheme ? '1344' : 'lg'}
       >
         <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
           <div className="mb-7 flex flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-start md:justify-between">
@@ -93,10 +93,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
           )}
         >
           {MENUS.footer.map(({ heading, links }, index) => (
-            <div
-              className={clsx('flex flex-col xl:w-full', theme === 'black-pure' && 'pt-3')}
-              key={index}
-            >
+            <div className={clsx('flex flex-col xl:w-full', isNewTheme && 'pt-3')} key={index}>
               <span
                 className={clsx(
                   'relative uppercase leading-none',
@@ -114,7 +111,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
               <ul
                 className={clsx(
                   'flex grow flex-col',
-                  theme === 'black-pure' ? 'mt-7 gap-y-5' : 'mt-6 gap-y-[18px]'
+                  isNewTheme ? 'mt-7 gap-y-5' : 'mt-6 gap-y-[18px]'
                 )}
               >
                 {links.map(({ to, text, icon }, index) => {
@@ -124,7 +121,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                       <Link
                         className={clsx(
                           'group relative flex items-center gap-2 whitespace-nowrap leading-none',
-                          theme === 'black-pure' && 'tracking-extra-tight'
+                          isNewTheme && 'tracking-extra-tight'
                         )}
                         to={to}
                         theme={styles.menuLinkTheme[theme]}
