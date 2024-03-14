@@ -135,7 +135,7 @@ Total Monthly Estimate = Monthly Base Fee + Extra Storage Fee + Extra Compute Fe
 - Extra storage fee: 2 * $3.5 = $7
 - Extra compute fee: 50 hours * $0.04 = $2
 
-_Total estimate_: $19 + 7 + $2 = $28 per month
+_Total estimate_: $19 + $7 + $2 = $28 per month
 
 **Scale plan example**:
 
