@@ -63,6 +63,10 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
     neonctl <command> [options]
     ```
 
+    <Admonition type="note">
+    The Linux binary is currently not supported on ARM64. Use `npm` or Homebrew instead.
+    </Admonition> 
+
 - **Windows**
 
     Download the Windows binary:
