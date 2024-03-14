@@ -7,6 +7,7 @@ import BranchLogo from './images/branch.inline.svg';
 import BunnyshellLogo from './images/bunnyshell.inline.svg';
 import CloudflareLogo from './images/cloudflare.inline.svg';
 import CodeInstituteLogo from './images/code-institute.inline.svg';
+import EncoreLogo from './images/encore.inline.svg';
 import EqtLogo from './images/eqt.inline.svg';
 import Fl0Logo from './images/fl0.inline.svg';
 import GenomicsLogo from './images/genomics.inline.svg';
@@ -45,6 +46,7 @@ const allLogos = {
   supergood: SupergoodLogo,
   zimmer: ZimmerBioLogo,
   eqt: EqtLogo,
+  encore: EncoreLogo,
 };
 
 const LogosWall = ({ className, fill, logos }) => (

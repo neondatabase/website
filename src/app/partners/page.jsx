@@ -54,6 +54,7 @@ const logos = [
   'fabric-io',
   'snaplet',
   'fl0',
+  'encore',
 ];
 
 const PartnersPage = () => (
