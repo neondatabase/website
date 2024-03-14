@@ -23,9 +23,9 @@ The following table outlines data storage allowances per month for each Neon pla
 | Scale      | 50 GiB     |
 | Enterprise | Larger sizes |
 
-Extra storage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans.
-- On the Launch plan, extra storage is billed for in units of 2 GiB at $3.5 each.
-- On the Scale plan, extra storage is billed for in units of 10 GiB at $15 each.
+Extra storage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans:
+- On the Launch plan, extra storage is billed for in units of 2 GiB at $3.5 each
+- On the Scale plan, extra storage is billed for in units of 10 GiB at $15 each
 
 ### Storage details
 
