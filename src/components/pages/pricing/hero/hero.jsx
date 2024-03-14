@@ -23,7 +23,7 @@ const items = [
     price: '$0 <span>/month</span>',
     description: 'Generous always-available free tier, no credit card required.',
     features: [
-      { title: 'Fixed capacity of 0.25 CU', tooltip: '0.25 CU = 1 vCPU, 4 GiB RAM' },
+      { title: 'Fixed capacity of 0.25 CU', tooltip: '0.25 CU = 0.25 vCPU, 1 GiB RAM' },
       { title: '187.5 CU-hours of usage', tooltip: 'Enough to run your database 24/7' },
       { title: '0.5 GiB of storage' },
       { title: 'Community support ' },
