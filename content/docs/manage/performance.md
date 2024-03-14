@@ -5,11 +5,7 @@ enableTableOfContents: true
 ---
 
 
-There are many factors that can impact the performance of your Postgres database, ranging from proper indexing and database maintenance to optimizing queries and system resources. With such a wide range of factors, where do you start? This topic outlines several strategies you can use to optimize the performance of your Postgres database in Neon.
-
-## Collecting statistics
-
-There are many factors that can impact the performance of your Postgres database, ranging from insufficient indexing or database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, where do you start? This topic outlines several strategies you can use to optimize the performance of your Postgres database.
+Many factors that can impact the performance of your Postgres database, ranging from insufficient indexing or database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, where do you start? This topic outlines several strategies for optimizing the performance of your Postgres database.
 
 ## Collecting statistics
 
@@ -72,6 +68,10 @@ Generally, pg_stat_statements is found to have a very small impact, and many use
 
 After allowing time for statistics to be collected, you can run queries like these to start gathering data about your queries.
 
+### Long-running queries
+
+This `pg_stat_statements` query returns the longest-running queries by mean execution time.
+
 ```
 WITH statements AS (
     SELECT *
@@ -96,9 +96,12 @@ ORDER BY
 LIMIT 10;
 ```
 
-Long-running queries are candidates for optimization. As a next step, you can run `EXPLAIN (ANALYZE)` on each to identify opportunities for optimization, such as full table scans or inefficient joins.
 
 There are many other useful queries you can run with pg_stat_statements, which you can find online and in our [pg_stat_statements guide](/docs/extensions/pg_stat_statements). 
+
+Long-running queries are candidates for optimization. As a next step, you can run `EXPLAIN (ANALYZE)` on each to identify opportunities for optimization, such as full table scans or inefficient joins.
+
+
 
 ## Optimizing query performance
 
