@@ -89,4 +89,4 @@ _Total estimate_: $19 + $28 = $47 per month
 
 _Total estimate_: $69 per month
 
-The Launch plan is more economical in the short term, but you should consider upgrading to the [Scale](/docs/introduction/plans#scale) plan when purchasing extra storage on the Launch plan is no longer cheaper than the $69 per month Scale plan. The Scale plan has a higher monthly storage allowance (50 GiB) and a cheaper per-unit extra storage cost (10 GiB at $15 vs. 2 GiB at $3.5). The Scale plan also offers additional features and more projects, which may factor into your decision about when to upgrade from the Launch plan.
+The Launch plan is more economical in the short term, but you should consider upgrading to the [Scale](/docs/introduction/plans#scale) plan when purchasing extra storage on the Launch plan is no longer cheaper than the $69 per month Scale plan. The Scale plan has a higher monthly storage allowance (50 GiB) and a cheaper per-unit extra storage cost (10 GiB at $15 vs. 2 GiB at $3.5). The Scale plan also offers additional features and more projects, which may factor into your decision about when to upgrade.
