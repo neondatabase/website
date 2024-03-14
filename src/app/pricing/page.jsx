@@ -20,6 +20,7 @@ const logos = [
   'branch',
   'eqt',
   'master-school',
+  'encore',
 ];
 
 const sliderItems = [
