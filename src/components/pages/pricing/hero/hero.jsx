@@ -70,7 +70,7 @@ const items = [
       { title: '50 GiB storage included', tooltip: 'Addtional storage: $15 for 10 GiB' },
       { title: 'Priority support' },
       { title: 'Autoscaling from 0 to 8 CU', tooltip: 'Scale automatically up to 8 vCPU 32GB RAM' },
-      { title: 'Read replicas' },
+      { title: 'Read Replicas' },
       { title: 'IP Allow Rules' },
     ],
     button: {
