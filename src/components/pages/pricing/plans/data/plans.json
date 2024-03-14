@@ -45,7 +45,7 @@
       "rows": "2",
       "feature": {
         "title": "Compute",
-        "subtitle": "1 CU = 0.25 vCPU, 1GB RAM"
+        "subtitle": "1 CU = 1 vCPU, 4GB RAM"
       },
       "free": "187.5 CU-hours per month <span>+ 5 CU per month for branches</span>",
       "launch": "300 CU-hours per month <span>Extra at $0.16 per CU-hour</span>",
