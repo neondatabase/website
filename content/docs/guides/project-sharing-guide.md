@@ -29,7 +29,7 @@ To share your project:
 1. Click **Grant access**. The email you specify is added to the list of **Users with access to the project**.
     ![People with access](/docs/guides/sharing_people_with_access.png)
 
-    The Neon account associated with the email address is granted full access to the project with the exception privileges required to delete the project. This account is also able to share the project with other Neon users. When the user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
+    The Neon account associated with the email address is granted full access to the project with the exception privileges required to delete the project. This account can also share the project with other Neon users. When the user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
 
     ![Project shared with me](/docs/guides/shared_with_me.png)
 
