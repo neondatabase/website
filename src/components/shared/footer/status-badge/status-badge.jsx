@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import Link from 'components/shared/link';
 
@@ -34,11 +35,13 @@ const fetchStatus = async () => {
   return 'UP';
 };
 
-const StatusBadge = ({ isDocPage = false, inView = false }) => {
+const StatusBadge = ({ isDocPage = false, isNewTheme = false }) => {
   const [currentStatus, setCurrentStatus] = useState(null);
+  const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '0px 0px 200px 0px' });
 
   useEffect(() => {
     if (inView) {
+      console.log('Requesting status...');
       fetchStatus()
         .then((status) => {
           setCurrentStatus(status);
@@ -58,6 +61,7 @@ const StatusBadge = ({ isDocPage = false, inView = false }) => {
         'flex items-center justify-center gap-x-1.5',
         isDocPage ? 'mt-12 lg:mt-10' : 'mt-[100px] lg:mt-16 md:mt-8'
       )}
+      ref={ref}
     >
       <span
         className={clsx(
@@ -65,13 +69,18 @@ const StatusBadge = ({ isDocPage = false, inView = false }) => {
           currentStatus ? statusData[currentStatus].color : 'bg-gray-new-50'
         )}
       />
-      <span className="whitespace-nowrap text-sm leading-none tracking-[0.02em]">
+      <span
+        className={clsx(
+          'whitespace-nowrap text-sm leading-none',
+          isNewTheme ? 'tracking-extra-tight' : 'tracking-[0.02em]'
+        )}
+      >
         {currentStatus ? statusData[currentStatus].text : 'All systems operational'}
       </span>
     </Link>
   );
 };
 
-StatusBadge.propTypes = { isDocPage: PropTypes.bool, inView: PropTypes.bool };
+StatusBadge.propTypes = { isDocPage: PropTypes.bool, isNewTheme: PropTypes.bool };
 
 export default StatusBadge;
