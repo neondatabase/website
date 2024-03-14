@@ -21,7 +21,7 @@ const items = [
   {
     type: 'Free Tier',
     price: '$0 <span>/month</span>',
-    description: 'Generous always-available free tier available to everyone, no card required.',
+    description: 'Generous always-available free tier, no credit card required.',
     features: [
       { title: 'Fixed capacity of 0.25 CU', tooltip: '1 CU = 1 vCPU, 4 GiB RAM' },
       { title: '187.5 CU-hours of usage', tooltip: 'Enough to run 1 database 24/7' },
