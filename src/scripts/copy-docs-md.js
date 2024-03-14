@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
+/* eslint-disable no-console */
 
 const fs = require('fs').promises;
 const path = require('path');
@@ -25,4 +26,8 @@ const copyMarkdownFiles = async (src, dest) => {
   }
 };
 
-copyMarkdownFiles('content/docs', 'public/md');
+(async () => {
+  console.log('copying docs md...');
+  await copyMarkdownFiles('content/docs', 'public/md');
+  console.log('done');
+})();
