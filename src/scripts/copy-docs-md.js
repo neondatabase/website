@@ -1,0 +1,28 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
+
+const fs = require('fs').promises;
+const path = require('path');
+
+const copyMarkdownFiles = async (src, dest) => {
+  // Create destination directory if it doesn't exist
+  await fs.mkdir(dest, { recursive: true });
+
+  // Read all items in the source directory
+  const items = await fs.readdir(src, { withFileTypes: true });
+
+  for (const item of items) {
+    const srcPath = path.join(src, item.name);
+    const destPath = path.join(dest, item.name);
+
+    if (item.isDirectory()) {
+      // If item is a directory, recurse
+      await copyMarkdownFiles(srcPath, destPath);
+    } else if (item.isFile() && path.extname(item.name) === '.md') {
+      // If item is a Markdown file, copy it
+      await fs.copyFile(srcPath, destPath);
+    }
+  }
+};
+
+copyMarkdownFiles('content/docs', 'public/md');

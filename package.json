@@ -8,8 +8,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "dev:build": "next build",
+    "build": "npm run copy-docs-md; next build",
+    "dev:build": "npm run copy-docs-md; next build",
     "postbuild": "next-sitemap --config next-sitemap.config.js && next-sitemap --config next-sitemap-postgres.config.js",
     "start": "next start",
     "format": "prettier --write .",
@@ -21,7 +21,8 @@
     "lint:md:fix": "markdownlint --fix --ignore-path .gitignore .",
     "check:broken-links": "linkinator --config linkinator.config.json",
     "prepare": "husky install",
-    "test": "npx cypress open"
+    "test": "npx cypress open",
+    "copy-docs-md": "node src/scripts/copy-docs-md.js"
   },
   "dependencies": {
     "@docsearch/react": "^3.5.2",
