@@ -56,7 +56,7 @@ const items = [
       url: LINKS.signup,
       text: 'Get started',
       theme: 'primary',
-      event: 'pricing_hero_launch_btn_click',
+      event: 'pricing_hero_pro_btn_click',
     },
   },
   {
@@ -77,7 +77,7 @@ const items = [
       url: LINKS.signup,
       text: 'Get started',
       theme: 'white-outline',
-      event: 'pricing_hero_scale_btn_click',
+      event: 'pricing_hero_pro_btn_click',
     },
   },
   {
@@ -148,7 +148,7 @@ const Feature = ({ title, tooltip, disabled, type, index }) => {
             return (
               <strong
                 className={clsx(
-                  'relative cursor-pointer font-medium',
+                  'relative font-medium',
                   type === 'Scale' ? 'text-green-45' : 'text-white'
                 )}
                 data-tooltip-id={tooltipId}
