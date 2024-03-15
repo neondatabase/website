@@ -47,7 +47,7 @@ You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.t
 ```javascript
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.DATABASE_URL!);
+const sql = neon(process.env.DATABASE_URL);
 const {rows: [post]} = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
 // `post` is now [{ id: 12, title: 'My post', ... }] (or undefined)
 ```
@@ -71,7 +71,7 @@ export default async () => {
 import { neon } from '@neondatabase/serverless';
 
 export default async (req: Request) => {
-  const sql = neon(process.env.DATABASE_URL!);
+  const sql = neon(process.env.DATABASE_URL);
   const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
   return new Response(JSON.stringify(post));
 }
