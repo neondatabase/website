@@ -9,8 +9,8 @@ import AnimatedButton from 'components/shared/animated-button';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import Info from 'components/shared/info';
-import Tooltip from 'components/shared/tooltip';
+import HintText from 'components/shared/hint-text';
+import InfoIcon from 'components/shared/info-icon';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import XIcon from 'icons/no.inline.svg';
@@ -116,8 +116,8 @@ const scaleCardBorderVariants = {
 };
 
 const Feature = ({ title, tooltip, disabled, type, index }) => {
-  const tooltipId = tooltip ? `${type}_tooltip_${index}` : null;
   const hasInlineTooltip = title.includes('*');
+
   return (
     <li
       className={clsx(
@@ -138,54 +138,22 @@ const Feature = ({ title, tooltip, disabled, type, index }) => {
         />
       )}
 
-      {/* title with inline tooltip */}
-      {hasInlineTooltip && (
-        <div>
-          {title.split('*').map((part, index) => {
-            if (index !== 1) {
-              return part;
-            }
-            return (
-              <strong
-                className={clsx(
-                  'relative font-medium',
-                  type === 'Scale' ? 'text-green-45' : 'text-white'
-                )}
-                data-tooltip-id={tooltipId}
-                data-tooltip-html={tooltip}
-              >
-                {/* underlining */}
-                <span
-                  className={clsx(
-                    'absolute -bottom-0.5 h-px w-full border-b border-dashed',
-                    type === 'Scale' ? 'border-green-45' : 'border-gray-new-90'
-                  )}
-                />
-                {part}
-              </strong>
-            );
-          })}
-        </div>
-      )}
-
-      {/* title with info icon */}
-      {!hasInlineTooltip && (
-        <div className="flex items-center gap-1.5">
-          {title}
-          {tooltip && <Info data-tooltip-id={tooltipId} data-tooltip-html={tooltip} aria-hidden />}
-        </div>
-      )}
-
-      {/* tooltip */}
-      {tooltip && (
-        <Tooltip
-          className="w-sm z-20 !bg-gray-new-15"
-          id={tooltipId}
-          positionStrategy="fixed"
-          place={hasInlineTooltip ? 'top-center' : 'right'}
-          arrowColor="#242628"
-        />
-      )}
+      <div className="flex items-center gap-1.5">
+        {hasInlineTooltip && (
+          <HintText
+            text={title}
+            tooltip={tooltip}
+            tooltipId={`${type}_tooltip_${index}`}
+            greenHighlight={type === 'Scale'}
+          />
+        )}
+        {!hasInlineTooltip && (
+          <>
+            {title}
+            {tooltip && <InfoIcon tooltip={tooltip} tooltipId={`${type}_tooltip_${index}`} />}
+          </>
+        )}
+      </div>
     </li>
   );
 };

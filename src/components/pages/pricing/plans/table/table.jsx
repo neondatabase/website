@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
+import HintText from 'components/shared/hint-text';
+import InfoIcon from 'components/shared/info-icon';
 import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import checkIcon from 'icons/pricing/check.svg';
@@ -169,6 +171,7 @@ const Table = () => {
                   !isLabelsColumn &&
                   'min-w-[160px] basis-[204px] xl:basis-[160px]'
               )}
+              style={{ zIndex: 100 - i }}
               key={key}
             >
               <TableHeading
@@ -228,6 +231,46 @@ const Table = () => {
                     );
                   }
 
+                  let cell;
+                  if (typeof item[key] === 'boolean') {
+                    cell = item[key] ? (
+                      <img src={checkIcon} width="24" height="24" alt="" loading="lazy" />
+                    ) : (
+                      <span className="inline-block h-[1.4px] w-4 rounded-full bg-gray-new-30" />
+                    );
+                  } else if (typeof item[key] !== 'object') {
+                    cell = (
+                      <span
+                        className="flex flex-col gap-y-1 font-light leading-snug tracking-extra-tight [&_span]:text-sm [&_span]:text-gray-new-60"
+                        data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
+                        data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
+                        dangerouslySetInnerHTML={{ __html: item[key] }}
+                      />
+                    );
+                  } else {
+                    const { title, hint, info } = item[key];
+                    cell = (
+                      <div className="font-light leading-snug tracking-extra-tight">
+                        {hint && (
+                          <HintText
+                            text={title}
+                            tooltip={hint}
+                            tooltipId={`${key}_tooltip_${index}`}
+                            tooltipPlace="top-start"
+                          />
+                        )}
+                        {!hint && title}
+                        {info && (
+                          <InfoIcon
+                            className="relative top-0.5 ml-1.5 inline-block"
+                            tooltip={info}
+                            tooltipId={`${key}_tooltip_${index}`}
+                          />
+                        )}
+                      </div>
+                    );
+                  }
+
                   return (
                     <li
                       className={clsx(
@@ -249,25 +292,11 @@ const Table = () => {
                         i === arr.length - 1 &&
                           'before:absolute before:-inset-y-px before:-right-5 before:z-0 before:w-5 before:rounded-br-lg before:rounded-tr-lg before:bg-gray-new-8 before:opacity-0 before:transition-opacity lg:before:hidden'
                       )}
+                      style={{ zIndex: 100 - index }}
                       data-row-id={index}
                       key={index}
                     >
-                      {typeof item[key] === 'boolean' ? (
-                        <>
-                          {item[key] ? (
-                            <img src={checkIcon} width="24" height="24" alt="" loading="lazy" />
-                          ) : (
-                            <span className="inline-block h-[1.4px] w-4 rounded-full bg-gray-new-30" />
-                          )}
-                        </>
-                      ) : (
-                        <span
-                          className="flex flex-col gap-y-1 font-light leading-snug tracking-extra-tight [&_span]:text-sm [&_span]:text-gray-new-60"
-                          data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
-                          data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
-                          dangerouslySetInnerHTML={{ __html: item[key] }}
-                        />
-                      )}
+                      {cell}
                       {item[`${key}_tooltip`] && (
                         <Tooltip
                           className="w-sm z-20"

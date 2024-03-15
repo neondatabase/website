@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
-import Info from 'components/shared/info';
+import InfoIcon from 'components/shared/info-icon';
 import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import checkIcon from 'icons/pricing/check.svg';
@@ -279,20 +279,11 @@ const Table = () => {
                           <div className="relative inline-flex items-center justify-start">
                             <span>{item[key].label}</span>
                             {item[key].tooltip && (
-                              <>
-                                <Info
-                                  className="ml-1.5"
-                                  data-tooltip-id={`${key}_tooltip_${index}`}
-                                  data-tooltip-html={item[key]?.tooltip}
-                                />
-                                <Tooltip
-                                  className="z-30"
-                                  arrowColor="#303236"
-                                  id={`${key}_tooltip_${index}`}
-                                  place="right"
-                                  style={{ backgroundColor: '#303236', color: '#fff' }}
-                                />
-                              </>
+                              <InfoIcon
+                                className="ml-1.5"
+                                tooltip={item[key].tooltip}
+                                tooltipId={`${key}_tooltip_${index}`}
+                              />
                             )}
                           </div>
                           <span className="mt-1 text-sm tracking-extra-tight text-gray-new-60">

@@ -37,22 +37,39 @@
         "title": "Storage"
       },
       "free": "0.5 GiB",
-      "launch": "10 GiB <span>Extra at $3.5 per 2 GiB</span>",
-      "scale": "50 GiB<span>Extra at $15 per 10 GiB</span>",
+      "launch": {
+        "title": "10 GiB",
+        "info": "Extra at $3.5 per 2 GiB"
+      },
+      "scale": {
+        "title": "50 GiB",
+        "info": "Extra at $15 per 10 GiB"
+      },
       "enterprise": "Larger sizes"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Compute",
-        "subtitle": "1 CU = 1 vCPU, 4GB RAM"
+        "title": "Compute"
       },
-      "free": "187.5 CU-hours per month <span>+ 5 CU per month for branches</span>",
-      "launch": "300 CU-hours per month <span>Extra at $0.16 per CU-hour</span>",
-      "scale": "750 CU-hours per month <span>Extra at $0.16 per CU-hour</span>",
+      "free": {
+        "title": "187.5 *CU*-hours per month",
+        "info": "+ 5 CU per month for branches",
+        "hint": "1 CU = 1 vCPU, 4GB RAM"
+      },
+      "launch": {
+        "title": "300 *CU*-hours per month",
+        "info": "Extra at $0.16 per CU-hour",
+        "hint": "1 CU = 1 vCPU, 4GB RAM"
+      },
+      "scale": {
+        "title": "750 *CU*-hours per month",
+        "info": "Extra at $0.16 per CU-hour",
+        "hint": "1 CU = 1 vCPU, 4GB RAM"
+      },
       "enterprise": "Custom"
     },
-    
+
     {
       "rows": "2",
       "feature": {
@@ -60,7 +77,10 @@
       },
       "free": "1",
       "launch": "10",
-      "scale": "50  <span>Extra at $50 per 10 projects</span>",
+      "scale": {
+        "title": "50",
+        "info": "Extra at $50 per 10 projects"
+      },
       "enterprise": "Unlimited"
     },
     {
@@ -83,7 +103,7 @@
       "scale": "Unlimited",
       "enterprise": "Unlimited"
     },
-   
+
     {
       "feature": "Compute Features"
     },
@@ -92,10 +112,22 @@
       "feature": {
         "title": "Compute Size"
       },
-      "free": "Fixed at 0.25 CU <span>0.25 vCPU, 1 GB RAM</span>",
-      "launch": "Up to 4 CU <span>4 vCPU, 16 GB RAM</span>",
-      "scale": "Up to 8 CU <span>8 vCPU, 32 GB RAM</span>",
-      "enterprise": "Larger sizes <span>8+ vCPU, 32+ GB RAM</span>"
+      "free": {
+        "title": "Fixed at 0.25 CU",
+        "info": "0.25 vCPU, 1 GB RAM"
+      },
+      "launch": {
+        "title": "Up to 4 CU",
+        "info": "4 vCPU, 16 GB RAM"
+      },
+      "scale": {
+        "title": "Up to 8 CU",
+        "info": "8 vCPU, 32 GB RAM"
+      },
+      "enterprise": {
+        "title": "Larger sizes",
+        "info": "8+ vCPU, 32+ GB RAM"
+      }
     },
     {
       "rows": "1",
