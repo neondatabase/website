@@ -2,6 +2,8 @@
 
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
+import Image from 'next/image';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 import AnimatedButton from 'components/shared/animated-button';
@@ -23,7 +25,7 @@ const items = [
     price: '$0 <span>/month</span>',
     description: 'Generous always-available free tier, no credit card required.',
     features: [
-      { title: 'Fixed capacity at 0.25 CU', tooltip: '0.25 CU = 0.25 vCPU, 1 GiB RAM' },
+      { title: 'Fixed capacity at *0.25 CU*', tooltip: '0.25 CU = 0.25 vCPU, 1 GiB RAM' },
       { title: '24/7 for your main compute', tooltip: 'Plus 20h of usage for secondary computes ' },
       { title: '0.5 GiB of storage' },
       { title: 'Community support ' },
@@ -44,7 +46,7 @@ const items = [
       '<em class="absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</em> $19 <span>/month</span>',
     description: 'All the resources, features and support you need to launch.',
     features: [
-      { title: 'Up to 4 CU compute capacity', tooltip: '4 CU = 4 vCPU, 16 GiB RAM' },
+      { title: 'Up to *4 CU* compute capacity', tooltip: '4 CU = 4 vCPU, 16 GiB RAM' },
       { title: '300 CU-hours included', tooltip: 'Additional usage: $0.16 per CU-hour' },
       { title: '10 GiB storage included', tooltip: 'Addtional storage: $3.5 for 2 GiB' },
       { title: 'Standard support' },
@@ -65,7 +67,7 @@ const items = [
       '<em class="absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</em> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
-      { title: 'Up to 8 CU compute capacity', tooltip: '8 CU = 8 vCPU, 32 GiB RAM ' },
+      { title: 'Up to *8 CU* compute capacity', tooltip: '8 CU = 8 vCPU, 32 GiB RAM ' },
       { title: '750 CU-hours included', tooltip: 'Additional usage: $0.16 per CU-hour' },
       { title: '50 GiB storage included', tooltip: 'Addtional storage: $15 for 10 GiB' },
       { title: 'Priority support' },
@@ -113,6 +115,96 @@ const scaleCardBorderVariants = {
   exit: {
     opacity: 0,
   },
+};
+
+const Feature = ({ title, tooltip, disabled, type, index }) => {
+  const tooltipId = tooltip ? `${type}_tooltip_${index}` : null;
+  const hasInlineTooltip = title.includes('*');
+  return (
+    <li
+      className={clsx(
+        type === 'Scale' && 'text-white',
+        disabled ? 'text-gray-new-30' : 'text-gray-new-80',
+        'relative pl-6 leading-tight tracking-tight'
+      )}
+    >
+      {disabled ? (
+        <XIcon className={clsx('absolute left-0 top-[2px] h-4 w-4 text-gray-new-50')} aria-hidden />
+      ) : (
+        <CheckIcon
+          className={clsx(
+            type === 'Scale' ? 'text-green-45' : 'text-gray-new-70',
+            'absolute left-0 top-[2px] h-4 w-4'
+          )}
+          aria-hidden
+        />
+      )}
+
+      {/* title with inline tooltip */}
+      {hasInlineTooltip && (
+        <span>
+          {title.split('*').map((part, index) => {
+            if (index !== 1) {
+              return part;
+            }
+            return (
+              <strong
+                className={clsx(
+                  'relative font-medium',
+                  type === 'Scale' ? 'text-green-45' : 'text-white'
+                )}
+                data-tooltip-id={tooltipId}
+                data-tooltip-html={tooltip}
+              >
+                <span
+                  className={clsx(
+                    'absolute -bottom-[2px] h-px w-full border-b border-dashed',
+                    type === 'Scale' ? 'border-green-45' : 'border-gray-new-90'
+                  )}
+                />
+                {part}
+              </strong>
+            );
+          })}
+        </span>
+      )}
+
+      {/* title with info icon */}
+      {!hasInlineTooltip && (
+        <span data-tooltip-id={tooltipId} data-tooltip-html={tooltip}>
+          {title}
+          {tooltip && (
+            <Image
+              className="relative -top-px ml-1.5 inline"
+              src={infoSvg}
+              width={14}
+              height={14}
+              alt=""
+              loading="lazy"
+              aria-hidden
+            />
+          )}
+        </span>
+      )}
+
+      {/* tooltip */}
+      {tooltip && (
+        <Tooltip
+          className="w-sm z-20"
+          id={tooltipId}
+          place="top-center"
+          arrowColor={hasInlineTooltip || undefined}
+        />
+      )}
+    </li>
+  );
+};
+Feature.propTypes = {
+  title: PropTypes.string.isRequired,
+  tooltip: PropTypes.string,
+  disabled: PropTypes.bool,
+  type: PropTypes.string,
+  index: PropTypes.number,
 };
 
 const Hero = () => {
@@ -205,56 +297,8 @@ const Hero = () => {
                     </div>
                     <div className="mt-auto flex grow flex-col">
                       <ul className="flex flex-col flex-wrap gap-y-4">
-                        {features.map(({ title, tooltip, disabled }, index) => (
-                          <li
-                            className={clsx(
-                              isScalePlan && 'text-white',
-                              disabled ? 'text-gray-new-30' : 'text-gray-new-80',
-                              'relative pl-6 leading-tight tracking-tight'
-                            )}
-                            key={index}
-                          >
-                            {disabled ? (
-                              <XIcon
-                                className={clsx(
-                                  'absolute left-0 top-[2px] h-4 w-4 text-gray-new-50'
-                                )}
-                                aria-hidden
-                              />
-                            ) : (
-                              <CheckIcon
-                                className={clsx(
-                                  isScalePlan ? 'text-green-45' : 'text-gray-new-70',
-                                  'absolute left-0 top-[2px] h-4 w-4 '
-                                )}
-                                aria-hidden
-                              />
-                            )}
-                            <span
-                              data-tooltip-id={tooltip && `${type}_tooltip_${index}`}
-                              data-tooltip-html={tooltip && tooltip}
-                            >
-                              {title}
-                              {tooltip && (
-                                <img
-                                  className="relative -top-px ml-1.5 inline"
-                                  src={infoSvg}
-                                  width={14}
-                                  height={14}
-                                  alt=""
-                                  loading="lazy"
-                                  aria-hidden
-                                />
-                              )}
-                            </span>
-                            {tooltip && (
-                              <Tooltip
-                                className="w-sm z-20"
-                                id={`${type}_tooltip_${index}`}
-                                place="top-center"
-                              />
-                            )}
-                          </li>
+                        {features.map((feature, index) => (
+                          <Feature {...feature} type={type} index={index} key={index} />
                         ))}
                       </ul>
                     </div>
