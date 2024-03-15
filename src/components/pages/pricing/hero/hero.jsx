@@ -127,7 +127,7 @@ const Feature = ({ title, tooltip, disabled, type, index }) => {
       )}
     >
       {disabled ? (
-        <XIcon className={clsx('absolute left-0 top-[2px] h-4 w-4 text-gray-new-50')} aria-hidden />
+        <XIcon className={clsx('absolute left-0 top-[2px] h-4 w-4 text-gray-new-30')} aria-hidden />
       ) : (
         <CheckIcon
           className={clsx(
