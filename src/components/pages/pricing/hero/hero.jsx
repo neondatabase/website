@@ -190,10 +190,11 @@ const Feature = ({ title, tooltip, disabled, type, index }) => {
       {/* tooltip */}
       {tooltip && (
         <Tooltip
-          className="w-sm z-20"
+          className="w-sm z-20 !bg-gray-new-15"
           id={tooltipId}
           place="top-center"
-          arrowColor={hasInlineTooltip || undefined}
+          noArrow={!hasInlineTooltip}
+          arrowColor="#242628"
         />
       )}
     </li>
