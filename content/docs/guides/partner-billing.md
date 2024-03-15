@@ -96,7 +96,7 @@ When any configured metric reaches its quota limit, all active computes for that
 See [Querying metrics and quotas](#querying-metrics-and-quotas) to find your reset date, billing period, and other values related to the project's consumption.
 
 <Admonition type="note">
-Neon tracks these consumption metrics on a monthly cycle. If you want to track metrics on a different cycle, you need to take snapshots of your metrics at the desired interval and store the data externally. You can also use the Preview [Consumption API](#retrieving-metrics-for-all-projects) to collect metrics from across a range of billing periods.
+Neon tracks these consumption metrics on a monthly cycle. If you want to track metrics on a different cycle, you need to take snapshots of your metrics at the desired interval and store the data externally. You can also use the [Consumption API](#retrieving-metrics-for-all-projects) to collect metrics from across a range of billing periods.
 </Admonition>
 
 ## Configuring quotas
@@ -253,10 +253,6 @@ Looking at this response, here are some conclusions we can draw:
 ### Retrieving metrics for all projects
 
 Instead of retrieving metrics for a single project per request, you can use the [Consumption API](https://api-docs.neon.tech/reference/listprojectsconsumption) to get a full list of key consumption metrics for all the projects in your Neon account in a single API request. You can specify a date range to get metrics from across multiple billing periods and control pagination for large result sets.
-
-<Admonition type="warning" title="Preview API">
-This functionality is part of the preview API and is subject to change in the future.
-</Admonition>
 
 Here is the URL in the Neon API where you can get details for all projects in your account:
 

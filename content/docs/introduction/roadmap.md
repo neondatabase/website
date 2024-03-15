@@ -33,6 +33,10 @@ Here's a snapshot of what we're working on now:
 
    We are also working on adding a new Monitoring page to the Neon Console that will display key Postgres, connection, and resource usage metrics in a dashboard.
 
+* **For partners, a more granular Consumption API**
+
+  Our current Consumption API provides cumulative consumption metrics across all projects in your account for the selected billing period. We are expanding our APIs to also allow for daily consumption metrics.
+
 ### Developer workflows
 
 * **Schema Diff**
@@ -44,6 +48,14 @@ Here's a snapshot of what we're working on now:
 * **Improvements to Vercel integration**
 
     Some upcoming improvements to the Vercel integration include a method for removing old preview deployment branches, as well as new Neon actions and better error messaging to let you do more right from the Vercel integration drawer.
+
+* **Adding Time Travel Assist to the SQL editor**
+
+   To help with data recovery workflows, we're making our Time Travel Assist feature available in the SQL editor in the Neon Console. Time Travel Assist is available now on the **Restore** page, but it's a great feature and we want to make it more convenient for you to use, wherever you might need it in the console.
+
+* **Support for anonymizing data**
+
+   To help with workflows that require protecting personal information, we're adding support for anonymizing data. For example, if you derive your staging branch directly from production, you might want to anonymize the data on staging, which you can then use as the source for all of your development and testing branches.
 
 ### Account management
 
