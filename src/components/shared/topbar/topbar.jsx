@@ -27,7 +27,7 @@ const TopBar = () => {
         automatically.
       </span>
       <span className="inline-flex items-center text-sm font-bold sm:hidden">
-        <span>Sign Up</span>
+        <span>Learn here</span>
         <ArrowRightIcon className="ml-1" />
       </span>
       <ArrowRightIcon className="ml-2 hidden sm:flex" />
