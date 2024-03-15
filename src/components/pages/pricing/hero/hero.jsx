@@ -160,7 +160,7 @@ const Hero = () => {
                     className={clsx(
                       !isScalePlan &&
                         'border border-transparent bg-gray-new-8 group-hover:border-gray-new-15 group-hover:bg-gray-new-10',
-                      'relative z-10 flex min-h-full flex-col rounded-[10px]  px-7 pb-9 pt-5 transition-colors duration-500 xl:px-6 xl:py-5 sm:p-5'
+                      'relative z-10 flex min-h-full flex-col rounded-[10px] px-7 pb-9 pt-5 transition-colors duration-500 xl:px-6 xl:py-5 sm:p-5'
                     )}
                     to={button.url}
                     onClick={() => {
@@ -199,7 +199,7 @@ const Hero = () => {
                           {button.text}
                         </Button>
                       )}
-                      <p className="mt-9 font-light leading-snug tracking-tight text-gray-new-70  2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
+                      <p className="mt-9 font-light leading-snug tracking-tight text-gray-new-70 2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
                         {description}
                       </p>
                     </div>
@@ -208,7 +208,8 @@ const Hero = () => {
                         {features.map(({ title, tooltip, disabled }, index) => (
                           <li
                             className={clsx(
-                              disabled ? 'text-gray-new-50' : 'text-gray-new-70',
+                              isScalePlan && 'text-white',
+                              disabled ? 'text-gray-new-30' : 'text-gray-new-80',
                               'relative pl-6 leading-tight tracking-tight'
                             )}
                             key={index}
