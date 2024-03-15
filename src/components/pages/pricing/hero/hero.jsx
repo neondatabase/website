@@ -2,7 +2,6 @@
 
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
@@ -10,11 +9,11 @@ import AnimatedButton from 'components/shared/animated-button';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import Info from 'components/shared/info';
 import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import XIcon from 'icons/no.inline.svg';
-import infoSvg from 'icons/tooltip.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 import sendSegmentEvent from 'utils/send-segment-event';
 
@@ -141,7 +140,7 @@ const Feature = ({ title, tooltip, disabled, type, index }) => {
 
       {/* title with inline tooltip */}
       {hasInlineTooltip && (
-        <span>
+        <div>
           {title.split('*').map((part, index) => {
             if (index !== 1) {
               return part;
@@ -166,25 +165,15 @@ const Feature = ({ title, tooltip, disabled, type, index }) => {
               </strong>
             );
           })}
-        </span>
+        </div>
       )}
 
       {/* title with info icon */}
       {!hasInlineTooltip && (
-        <span data-tooltip-id={tooltipId} data-tooltip-html={tooltip}>
+        <div className="flex items-center gap-1.5">
           {title}
-          {tooltip && (
-            <Image
-              className="relative -top-px ml-1.5 inline"
-              src={infoSvg}
-              width={14}
-              height={14}
-              alt=""
-              loading="lazy"
-              aria-hidden
-            />
-          )}
-        </span>
+          {tooltip && <Info data-tooltip-id={tooltipId} data-tooltip-html={tooltip} aria-hidden />}
+        </div>
       )}
 
       {/* tooltip */}
@@ -192,14 +181,15 @@ const Feature = ({ title, tooltip, disabled, type, index }) => {
         <Tooltip
           className="w-sm z-20 !bg-gray-new-15"
           id={tooltipId}
-          place="top-center"
-          noArrow={!hasInlineTooltip}
+          positionStrategy="fixed"
+          place={hasInlineTooltip ? 'top-center' : 'right'}
           arrowColor="#242628"
         />
       )}
     </li>
   );
 };
+
 Feature.propTypes = {
   title: PropTypes.string.isRequired,
   tooltip: PropTypes.string,
@@ -242,9 +232,10 @@ const Hero = () => {
               return (
                 <li
                   className={clsx(
-                    'group relative z-10 flex min-h-full flex-col rounded-[10px] px-7 pb-9 pt-5 xl:px-6 xl:py-5 sm:p-5',
+                    'group relative flex min-h-full flex-col rounded-[10px] px-7 pb-9 pt-5 xl:px-6 xl:py-5 sm:p-5',
                     !isScalePlan && 'border border-transparent bg-gray-new-8'
                   )}
+                  style={{ zIndex: 100 - index }}
                   key={index}
                   onPointerEnter={() => {
                     if (isScalePlan) {
@@ -297,13 +288,6 @@ const Hero = () => {
                       {description}
                     </p>
                   </div>
-                  <div className="mt-auto flex grow flex-col">
-                    <ul className="flex flex-col flex-wrap gap-y-4">
-                      {features.map((feature, index) => (
-                        <Feature {...feature} type={type} index={index} key={index} />
-                      ))}
-                    </ul>
-                  </div>
                   {isScalePlan && (
                     <LazyMotion features={domAnimation}>
                       <m.span
@@ -319,6 +303,13 @@ const Hero = () => {
                       />
                     </LazyMotion>
                   )}
+                  <div className="mt-auto flex grow flex-col">
+                    <ul className="flex flex-col flex-wrap gap-y-4">
+                      {features.map((feature, index) => (
+                        <Feature {...feature} type={type} index={index} key={index} />
+                      ))}
+                    </ul>
+                  </div>
                 </li>
               );
             })}
