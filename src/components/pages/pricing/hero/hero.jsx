@@ -10,7 +10,6 @@ import AnimatedButton from 'components/shared/animated-button';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import Link from 'components/shared/link';
 import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
@@ -150,15 +149,16 @@ const Feature = ({ title, tooltip, disabled, type, index }) => {
             return (
               <strong
                 className={clsx(
-                  'relative font-medium',
+                  'relative cursor-pointer font-medium',
                   type === 'Scale' ? 'text-green-45' : 'text-white'
                 )}
                 data-tooltip-id={tooltipId}
                 data-tooltip-html={tooltip}
               >
+                {/* underlining */}
                 <span
                   className={clsx(
-                    'absolute -bottom-[2px] h-px w-full border-b border-dashed',
+                    'absolute -bottom-0.5 h-px w-full border-b border-dashed',
                     type === 'Scale' ? 'border-green-45' : 'border-gray-new-90'
                   )}
                 />
@@ -240,7 +240,10 @@ const Hero = () => {
 
               return (
                 <li
-                  className="group relative rounded-[10px]"
+                  className={clsx(
+                    'group relative z-10 flex min-h-full flex-col rounded-[10px] px-7 pb-9 pt-5 xl:px-6 xl:py-5 sm:p-5',
+                    !isScalePlan && 'border border-transparent bg-gray-new-8'
+                  )}
                   key={index}
                   onPointerEnter={() => {
                     if (isScalePlan) {
@@ -248,61 +251,58 @@ const Hero = () => {
                     }
                   }}
                 >
-                  <Link
-                    className={clsx(
-                      !isScalePlan &&
-                        'border border-transparent bg-gray-new-8 group-hover:border-gray-new-15 group-hover:bg-gray-new-10',
-                      'relative z-10 flex min-h-full flex-col rounded-[10px] px-7 pb-9 pt-5 transition-colors duration-500 xl:px-6 xl:py-5 sm:p-5'
-                    )}
-                    to={button.url}
-                    onClick={() => {
-                      sendGtagEvent(button.event);
-                      sendSegmentEvent(button.event);
-                    }}
-                  >
-                    <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">
-                      <h3
-                        className={clsx(
-                          isScalePlan && 'text-green-45',
-                          'text-xl font-medium leading-none tracking-tight text-gray-new-80 xl:text-lg'
-                        )}
-                      >
-                        {type}
-                      </h3>
-                      <p
-                        className="relative mt-14 text-[36px] leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4 [&_span]:text-[28px] [&_span]:font-light [&_span]:-tracking-[0.06em] [&_span]:text-gray-new-50"
-                        dangerouslySetInnerHTML={{ __html: price }}
-                      />
-                      {isScalePlan ? (
-                        <AnimatedButton
-                          className="mt-7 w-full !bg-green-45 !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[#00ffaa] xl:mt-7 sm:max-w-none"
-                          animationColor="#00e599"
-                          theme="primary"
-                          size="sm"
-                          isAnimated
-                        >
-                          {button.text}
-                        </AnimatedButton>
-                      ) : (
-                        <Button
-                          className="mt-7 w-full bg-gray-new-15 !py-4 !text-lg !font-medium tracking-tight xl:mt-7 sm:max-w-none"
-                          size="sm"
-                        >
-                          {button.text}
-                        </Button>
+                  <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">
+                    <h3
+                      className={clsx(
+                        isScalePlan && 'text-green-45',
+                        'text-xl font-medium leading-none tracking-tight text-gray-new-80 xl:text-lg'
                       )}
-                      <p className="mt-9 font-light leading-snug tracking-tight text-gray-new-70 2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
-                        {description}
-                      </p>
-                    </div>
-                    <div className="mt-auto flex grow flex-col">
-                      <ul className="flex flex-col flex-wrap gap-y-4">
-                        {features.map((feature, index) => (
-                          <Feature {...feature} type={type} index={index} key={index} />
-                        ))}
-                      </ul>
-                    </div>
-                  </Link>
+                    >
+                      {type}
+                    </h3>
+                    <p
+                      className="relative mt-14 text-[36px] leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4 [&_span]:text-[28px] [&_span]:font-light [&_span]:-tracking-[0.06em] [&_span]:text-gray-new-50"
+                      dangerouslySetInnerHTML={{ __html: price }}
+                    />
+                    {isScalePlan ? (
+                      <AnimatedButton
+                        className="mt-7 w-full !bg-green-45 !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[#00ffaa] xl:mt-7 sm:max-w-none"
+                        animationColor="#00e599"
+                        theme="primary"
+                        size="sm"
+                        to={button.url}
+                        isAnimated
+                        onClick={() => {
+                          sendGtagEvent(button.event);
+                          sendSegmentEvent(button.event);
+                        }}
+                      >
+                        {button.text}
+                      </AnimatedButton>
+                    ) : (
+                      <Button
+                        className="mt-7 w-full bg-gray-new-15 !py-4 !text-lg !font-medium tracking-tight transition-colors duration-500 hover:bg-gray-new-30 xl:mt-7 sm:max-w-none"
+                        size="sm"
+                        to={button.url}
+                        onClick={() => {
+                          sendGtagEvent(button.event);
+                          sendSegmentEvent(button.event);
+                        }}
+                      >
+                        {button.text}
+                      </Button>
+                    )}
+                    <p className="mt-9 font-light leading-snug tracking-tight text-gray-new-70 2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
+                      {description}
+                    </p>
+                  </div>
+                  <div className="mt-auto flex grow flex-col">
+                    <ul className="flex flex-col flex-wrap gap-y-4">
+                      {features.map((feature, index) => (
+                        <Feature {...feature} type={type} index={index} key={index} />
+                      ))}
+                    </ul>
+                  </div>
                   {isScalePlan && (
                     <LazyMotion features={domAnimation}>
                       <m.span
