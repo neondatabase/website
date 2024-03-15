@@ -9,7 +9,13 @@ import Trusted from 'components/pages/home/trusted';
 import Layout from 'components/shared/layout';
 
 const HomeLayout = () => (
-  <Layout className="bg-black-pure" headerTheme="black" footerTheme="black-pure" withOverflowHidden>
+  <Layout
+    className="bg-black-pure"
+    headerTheme="black-pure"
+    footerTheme="black-pure"
+    withOverflowHidden
+    isNewDesign
+  >
     <Logos />
     <Lightning />
     <Bento />

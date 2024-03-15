@@ -10,6 +10,7 @@ const styles = {
     sm: 'max-w-[1460px] 2xl:max-w-[1216px] xl:max-w-[936px]',
     xs: 'max-w-[860px]',
     1344: 'max-w-[1344px] 2xl:px-8',
+    1216: 'max-w-[1216px] xl:px-8',
     1152: 'max-w-[1152px]',
     1100: 'max-w-[1100px]',
     960: 'max-w-[960px]',

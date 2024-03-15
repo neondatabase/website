@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import CookieConsent from 'components/shared/cookie-consent';
 import Footer from 'components/shared/footer';
 import Header from 'components/shared/header';
+import HeaderNew from 'components/shared/header/header-new';
 
 const Layout = async ({
   className = null,
@@ -17,17 +18,27 @@ const Layout = async ({
   footerWithTopBorder = false,
   isDocPage = false,
   isBlogPage = false,
+  isNewDesign = false,
 }) => (
-  // 44px is the height of the topbar
-  <div className="relative flex min-h-[calc(100vh-44px)] flex-col">
-    <Header
-      className={headerClassName}
-      withBottomBorder={headerWithBottomBorder}
-      theme={headerTheme}
-      isSticky={isHeaderSticky}
-      isDocPage={isDocPage}
-      isBlogPage={isBlogPage}
-    />
+  // 44px and 36px is the height of the topbar
+  <div
+    className={clsx(
+      'relative flex flex-col',
+      isNewDesign ? 'min-h-[calc(100vh-36px)]' : 'min-h-[calc(100vh-44px)]'
+    )}
+  >
+    {isNewDesign ? (
+      <HeaderNew className={headerClassName} theme={headerTheme} />
+    ) : (
+      <Header
+        className={headerClassName}
+        withBottomBorder={headerWithBottomBorder}
+        theme={headerTheme}
+        isSticky={isHeaderSticky}
+        isDocPage={isDocPage}
+        isBlogPage={isBlogPage}
+      />
+    )}
     <main
       className={clsx(
         withOverflowHidden && 'overflow-hidden',
@@ -45,7 +56,7 @@ const Layout = async ({
 Layout.propTypes = {
   className: PropTypes.string,
   headerClassName: PropTypes.string,
-  headerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
+  headerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'black-pure', 'gray-8']).isRequired,
   footerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'black-pure', 'gray-8']),
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
@@ -54,6 +65,7 @@ Layout.propTypes = {
   footerWithTopBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
   isBlogPage: PropTypes.bool,
+  isNewDesign: PropTypes.bool,
 };
 
 export default Layout;

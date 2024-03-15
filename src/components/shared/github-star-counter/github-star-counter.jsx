@@ -12,7 +12,7 @@ import sendGtagEvent from 'utils/send-gtag-event';
 const API_URL = 'https://api.github.com/repos/neondatabase/neon';
 const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
-const GithubStarCounter = ({ className = '', isThemeBlack = false }) => {
+const GithubStarCounter = ({ className = '', isThemeBlack = false, isNewDesign }) => {
   const [starsCount, setStarsCount] = useState(null);
 
   const fetchStarCount = async () => {
@@ -52,8 +52,9 @@ const GithubStarCounter = ({ className = '', isThemeBlack = false }) => {
   return (
     <Link
       className={clsx(
-        'text-16 flex items-center gap-x-2.5 leading-none tracking-extra-tight transition-colors duration-200',
+        'flex items-center leading-none tracking-extra-tight transition-colors duration-200',
         className,
+        isNewDesign ? 'gap-x-1.5 text-[13px] font-semibold' : 'gap-x-2.5 text-base',
         isThemeBlack
           ? 'text-white hover:text-green-45'
           : 'text-gray-new-8 hover:text-green-45 dark:text-white dark:hover:text-green-45'
@@ -66,7 +67,7 @@ const GithubStarCounter = ({ className = '', isThemeBlack = false }) => {
       }}
     >
       <GitHubIcon width={20} height={20} />
-      <span className="w-10 whitespace-nowrap xl:hidden">
+      <span className={clsx('whitespace-nowrap', isNewDesign ? 'w-8' : 'w-10 xl:hidden')}>
         {starsCount ? `${(starsCount / 1000).toFixed(1)}k` : '...'}
       </span>
     </Link>
@@ -78,4 +79,5 @@ export default GithubStarCounter;
 GithubStarCounter.propTypes = {
   className: PropTypes.string,
   isThemeBlack: PropTypes.bool,
+  isNewDesign: PropTypes.bool,
 };
