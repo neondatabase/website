@@ -186,7 +186,7 @@ A dataset containing information about movies and tv shows on Netflix.
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
     ```bash
-    psql -d "postgres://[user]:[password]@[neon_hostname]/netflix" -f netflix_shows.sql
+    psql -d "postgres://[user]:[password]@[neon_hostname]/netflix" -f netflix.sql
     ```
 
 4. Connect to the `netflix` database:
