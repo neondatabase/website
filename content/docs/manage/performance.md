@@ -209,6 +209,7 @@ file_cache_writes:                 10767410
 file_cache_hit_ratio:              98.08
 ```
 
+
 The ratio is calculated according to the following formula:
 
 ```plaintext
@@ -225,15 +226,15 @@ Please remember that the local file cache statistics are for the entire compute,
 The cache hit ratio query is based on statistics that represent the lifetime of your Postgres instance, from the last time you started it until the time you ran the query. Statistics are lost when your instance stops and gathered again from scratch when your instance restarts. In Neon, your compute runs Postgres, so starting and stopping a compute also starts and stops Postgres. Additionally, you'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you restart Postgres. In this case, you should run a representative workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the pg_prewarm extension to pre-load data into memory after a restart. 
 </Admonition>
 
-## Optimizing query performance
-
-### Using EXPLAIN ANALYZE to optimize queries
+## Optimizing queries with EXPLAIN ANALYZE
 
 Using EXPLAIN ANALYZE in PostgreSQL is a powerful technique to optimize queries by providing insights into how the database executes a query. This tool is invaluable for developers and database administrators aiming to improve the performance of their SQL queries. Below, is an introductory guide to using EXPLAIN ANALYZE, focusing on its purpose, how to use it, and interpreting its output for optimization.
 
 ### Cache optimization
 
-### Slow queries
+### Indexing
+
+### Right-sizing your compute
 
 ### Right-sizing your compute
 
