@@ -305,6 +305,6 @@ Generally, you’ll want to perform these types of operations when it will have 
 
 ### Right-sizing your compute
 
-
+### Optimizing connections
 
 ### 
