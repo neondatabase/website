@@ -167,7 +167,7 @@ LIMIT
     10;
 ```
 
-## Cache hit ratio
+## Cache optimization
 
 A cache hit ratio tells you what percentage of queries are served from memory. Queries not served from memory retrieve data from disk, which is more costly and can result in slower query performance.
 
@@ -228,14 +228,83 @@ The cache hit ratio query is based on statistics that represent the lifetime of 
 
 ## Optimizing queries with EXPLAIN ANALYZE
 
-Using EXPLAIN ANALYZE in PostgreSQL is a powerful technique to optimize queries by providing insights into how the database executes a query. This tool is invaluable for developers and database administrators aiming to improve the performance of their SQL queries. Below, is an introductory guide to using EXPLAIN ANALYZE, focusing on its purpose, how to use it, and interpreting its output for optimization.
+Using EXPLAIN ANALYZE in Postgres can help you optimize queries by providing insights into how the database executes a query. Below, is an introductory guide to using EXPLAIN ANALYZE, focusing on its purpose, how to use it, and interpreting its output for optimization.
 
-### Cache optimization
+EXPLAIN ANALYZE is a command in Postgres that shows the execution plan of a SQL query. This plan details how the PostgreSQL planner and optimizer interpret your query, including the paths taken to retrieve the data, the cost of each operation, and the time each step takes. Using EXPLAIN ANALYZE helps identify bottlenecks or inefficiencies in query execution.
+
+### How to Use EXPLAIN ANALYZE
+
+To use EXPLAIN ANALYZE, prefix it to your SQL query like so:
+
+```sql
+EXPLAIN ANALYZE SELECT * FROM your_table WHERE condition = 'value';
+```
+
+This command will not return the query's result set but will instead provide a detailed report on how the query was executed, including the time taken for each operation.
+
+### Interpreting the output
+
+The output of `EXPLAIN ANALYZE` can be complex, but there are key elements to focus on:
+
+- Query Plan: This shows the steps PostgreSQL took to execute your query, such as sequential scans, index scans, joins, etc.
+Execution Time: The total time taken to execute the query.
+- Costs: Estimated startup cost and total cost to execute the plan, which helps in comparing the efficiency of different execution strategies.
+- Rows: The number of rows processed at each stage of the query.
+- Actual Time: Shows the actual time spent on each node of the plan, helping to pinpoint slow operations.
+
+### Tips for optimization
+
+1. Look for Sequential Scans: If your query involves large tables, sequential scans can be slow. Consider using indexes to speed up data retrieval.
+2. Analyze Joins: Make sure that joins are using indexes. If not, it might be beneficial to add indexes or revise the join conditions.
+3. Optimize Filters: Check if the conditions in the WHERE clause can be optimized. Using efficient indexes can dramatically reduce the search space.
+4. Subquery Performance: Subqueries can sometimes be inefficient. Look for opportunities to rewrite them as joins or to simplify them.
+5. Use ANALYZE: Regularly run the ANALYZE command on your database. This updates statistics, helping Postgres make better planning decisions.
+
+### Additional resources
+
+Optimizing queries using `EXPLAIN ANALYZE` is a large topic, with many resources you can draw upon. Here are a few of those resources to help you get started:
+
+- [Using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html), in the official PostgreSQL documentation:
+- [Using EXPLAIN](https://wiki.postgresql.org/wiki/Using_EXPLAIN). This topic provides links to a variety of resources and tutorials.
+- [Postgres Explain Visualizer](https://www.pgexplain.dev/)
+
+## Checking for table or index bloat
+
+If there is some issue with Postgres [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM), this can lead to table and index bloat. 
+
+Bloat refers to the condition where tables and indexes occupy more space on disk than is necessary for storing the data. Bloat can occur over time due to the way Postgres handles updates and deletes.
+
+### Table Bloat
+
+When a row is updated, the database doesn’t overwrite the existing row. Instead, it marks the old row version as obsolete and creates a new version of the row elsewhere in the table. Similarly, when a row is deleted, it is not immediately removed; it’s just marked as inaccessible. The space occupied by these obsolete or deleted rows contributes to table bloat.
+
+This mechanism supports Postgres MVCC (Multi-Version Concurrency Control), allowing for more efficient query processing without locking rows for reading. However, the downside is that it can lead to wasted space and decreased performance over time as the table grows larger than necessary.
+
+### Index Bloat
+
+Indexes can also experience bloat. As rows are updated and deleted, the indexes that point to those rows can become inefficient. Index bloat happens because, similar to tables, indexes also retain pointers to obsolete row versions. Over time, the index can grow larger, consuming more space than necessary.
+
+Index bloat can degrade the performance of read operations. Since indexes are used to speed up data retrieval, a bloated index can have the opposite effect, making queries slower.
+
+### Checking for bloat
+
+There are SQL queries you can run to check for table and index bloat. There are several good sources for bloat check queries, including these:
+
+- [Show database bloat – PostgreSQL wiki](https://wiki.postgresql.org/wiki/Show_database_bloat)
+- [Index and table bloat check scripts from PostgreSQL Experts](https://github.com/pgexperts/pgx_scripts/tree/master/bloat)
+
+### Reducing bloat
+
+To reduce table bloat, you can run the [VACUUM](https://www.postgresql.org/docs/current/sql-vacuum.html) command. `VACUUM` cleans up these obsolete records and makes space available for reuse within the table. For more aggressive space reclamation, you can use VACUUM FULL, but this command locks the table, which can be disruptive.
+
+To remove index bloat, you can use the [REINDEX](https://www.postgresql.org/docs/current/sql-reindex.html) command, which rebuilds the index from scratch. Be aware that this can be an intensive operation, especially for large indexes, as it requires an exclusive lock on the index.
+
+Generally, you’ll want to perform these types of operations when it will have the least impact, or you’ll want to plan some maintenance downtime for a clean-up. 
 
 ### Indexing
 
 ### Right-sizing your compute
 
-### Right-sizing your compute
+
 
 ### 
