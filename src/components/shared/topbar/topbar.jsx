@@ -17,16 +17,17 @@ const TopBar = () => {
   return isTopBarHidden ? null : (
     <Link
       className="safe-paddings relative z-40 flex h-11 w-full items-center justify-center bg-primary-1 px-4 py-3 leading-none transition-colors duration-200 hover:bg-[#1AFFB2] xs:h-auto"
-      to="https://console.neon.tech/signup"
+      to="https://neon.tech/docs/guides/vercel"
       onClick={() => {
         sendGtagEvent('click_announcement_banner');
       }}
     >
       <span className="mr-4 truncate border-r border-black border-opacity-20 py-1 pr-4 text-sm font-medium sm:mr-0 sm:border-none sm:pr-0">
-        🇦🇺 Hello Australia! Sydney region is officially live on Neon.
+        ▲ Vercel Integration now GA - Create a database branch for every preview deployment,
+        automatically.
       </span>
       <span className="inline-flex items-center text-sm font-bold sm:hidden">
-        <span>Sign Up</span>
+        <span>Learn here</span>
         <ArrowRightIcon className="ml-1" />
       </span>
       <ArrowRightIcon className="ml-2 hidden sm:flex" />
