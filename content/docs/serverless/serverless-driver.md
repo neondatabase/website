@@ -48,7 +48,7 @@ You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.t
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.DATABASE_URL);
-const {rows: [post]} = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
+const post = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
 // `post` is now [{ id: 12, title: 'My post', ... }] (or undefined)
 ```
 
@@ -72,7 +72,7 @@ import { neon } from '@neondatabase/serverless';
 
 export default async (req: Request) => {
   const sql = neon(process.env.DATABASE_URL);
-  const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+  const post = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
   return new Response(JSON.stringify(post));
 }
 
@@ -90,7 +90,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const sql = neon(process.env.DATABASE_URL!);
-  const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+  const post = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
  
   return res.status(500).send(post);
 }
@@ -282,7 +282,7 @@ You can use the Neon serverless driver in the same way you would use `node-postg
 import { Pool } from '@neondatabase/serverless';
 
 const pool = new Pool({connectionString: process.env.DATABASE_URL});
-const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
+const post = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
 pool.end();
 ```
 
@@ -334,7 +334,7 @@ export default async (req: Request, ctx: any) => {
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
   await pool.connect();
 
-  const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const post = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
   
   ctx.waitUntil(pool.end());
 
@@ -357,7 +357,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
-  const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const post = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
   
   await pool.end();
 
