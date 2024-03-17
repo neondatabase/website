@@ -40,6 +40,7 @@ const BlogPostCard = ({
   imageWidth = null,
   imageHeight = null,
 }) => {
+  const checkSize = (...sizes) => sizes.includes(size);
   const category = categories?.nodes[0];
   const postAuthor = authors?.[0]?.author || author;
 
@@ -129,32 +130,32 @@ const BlogPostCard = ({
           <h1
             className={clsx(
               'font-medium transition-colors duration-200 group-hover:text-green-45',
-              {
-                'text-4xl leading-dense tracking-tighter xl:text-3xl md:text-2xl': size === 'xl',
-                'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base': size === 'lg',
-                'line-clamp-2 text-lg leading-tight tracking-[-0.02em] lg:text-base':
-                  size === 'md' || size === 'sm' || size === 'xs',
-                'mt-2 md:mt-1.5': !!category,
-                'mt-5 md:mt-4': !category && size === 'lg',
-                'mt-4': !category && size === 'md',
-                'mt-3': !category && size === 'sm',
-              }
+              size === 'xl' && 'text-4xl leading-dense tracking-tighter xl:text-3xl md:text-2xl',
+              size === 'lg' && 'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base',
+              checkSize('md', 'sm', 'xs') &&
+                'line-clamp-2 text-lg leading-tight tracking-extra-tight lg:text-base',
+              !!category && 'mt-2 md:mt-1.5',
+              !category && size === 'lg' && 'mt-5 md:mt-4',
+              !category && size === 'md' && 'mt-4',
+              !category && size === 'sm' && 'mt-3',
+              size === 'video' && 'mt-1.5 line-clamp-2 text-base leading-5 tracking-extra-tight'
             )}
           >
             {title}
           </h1>
           <div
-            className={clsx('flex items-center', {
-              'mt-3 md:mt-2.5': size === 'lg' || size === 'xl' || withAuthorPhoto,
-              'md:mt-2.5': withAuthorPhoto,
-              'mt-2 lg:mt-1.5':
-                (size === 'md' || size === 'sm' || size === 'xs') && !withAuthorPhoto,
-            })}
+            className={clsx(
+              'flex items-center',
+              (checkSize('lg', 'xl') || withAuthorPhoto) && 'mt-3 md:mt-2.5',
+              withAuthorPhoto && 'md:mt-2.5',
+              checkSize('md', 'sm', 'xs') && !withAuthorPhoto && 'mt-2 lg:mt-1.5'
+            )}
           >
+            {/* avatar */}
             <Image
               className={clsx(
                 'rounded-full md:h-6 md:w-6 xs:mr-2 xs:block',
-                size === 'lg' || size === 'xl' || withAuthorPhoto ? 'mr-2 block' : 'hidden'
+                checkSize('lg', 'xl') || withAuthorPhoto ? 'mr-2 block' : 'hidden'
               )}
               src={postAuthor.postAuthor?.image?.mediaItemUrl}
               alt={postAuthor?.title}
@@ -164,16 +165,21 @@ const BlogPostCard = ({
             />
 
             <div
-              className={clsx('flex items-center', {
-                'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start xs:flex-row xs:items-center':
-                  size === 'sm',
-                'xl:flex-col xl:items-start md:flex-row md:items-center': withAuthorPhoto,
-              })}
+              className={clsx(
+                'flex items-center',
+                size === 'sm' &&
+                  'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start xs:flex-row xs:items-center',
+                withAuthorPhoto && 'xl:flex-col xl:items-start md:flex-row md:items-center',
+                size === 'video' && 'mt-2 w-full'
+              )}
             >
+              {/* author */}
               <span
                 className={clsx(
-                  'leading-none tracking-[-0.02em] text-gray-new-80',
-                  size === 'lg' ? 'text-[15px] lg:text-sm xs:text-[13px]' : 'text-sm lg:text-[13px]'
+                  'tracking-extra-tight text-gray-new-80',
+                  size === 'lg' && 'text-[15px] leading-none lg:text-sm xs:text-[13px]',
+                  size === 'video' && 'truncate text-[13px] leading-[1.2em] !text-gray-new-70',
+                  checkSize('xl', 'md', 'sm', 'xs') && 'text-sm leading-none lg:text-[13px]'
                 )}
               >
                 {size === 'sm' ? (
@@ -190,16 +196,16 @@ const BlogPostCard = ({
 
               <time
                 className={clsx(
-                  'relative block shrink-0 pl-[11px] font-light uppercase leading-none tracking-[-0.02em] text-gray-new-80 before:absolute before:left-[4px] before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
-                  size === 'lg'
-                    ? 'text-[15px] lg:text-sm xs:text-xs'
-                    : 'text-[13px] lg:text-xs lg:leading-none',
-                  {
-                    'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden xs:mt-0 xs:pl-[11px] xs:before:inline-block':
-                      size === 'sm',
-                    'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-[11px] md:before:inline-block':
-                      withAuthorPhoto,
-                  }
+                  'relative block shrink-0 pl-[11px] uppercase leading-none tracking-extra-tight',
+                  'before:absolute before:left-1 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
+                  size === 'lg' && 'text-[15px] font-light text-gray-new-80 lg:text-sm xs:text-xs',
+                  checkSize('xl', 'md', 'sm', 'xs') &&
+                    'text-[13px] font-light text-gray-new-80 lg:text-xs lg:leading-none',
+                  size === 'sm' &&
+                    'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden xs:mt-0 xs:pl-[11px] xs:before:inline-block',
+                  withAuthorPhoto &&
+                    'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-[11px] md:before:inline-block',
+                  size === 'video' && 'text-[11px] font-normal text-gray-new-70'
                 )}
                 dateTime={date}
               >
@@ -248,7 +254,7 @@ export const BlogPostCardPropTypes = {
 
 BlogPostCard.propTypes = {
   className: PropTypes.string,
-  size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm', 'xs']),
+  size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm', 'xs', 'video']),
   ...BlogPostCardPropTypes,
 };
 

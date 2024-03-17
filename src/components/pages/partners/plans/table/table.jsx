@@ -10,7 +10,6 @@ import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import checkIcon from 'icons/pricing/check.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
-import sendSegmentEvent from 'utils/send-segment-event';
 
 import tableData from '../data/plans.json';
 
@@ -70,10 +69,6 @@ const TableHeading = ({
         to={buttonUrl}
         onClick={() => {
           sendGtagEvent('partner_comparison_table', {
-            event_label: label,
-            event_position: 'top',
-          });
-          sendSegmentEvent('partner_comparison_table', {
             event_label: label,
             event_position: 'top',
           });
