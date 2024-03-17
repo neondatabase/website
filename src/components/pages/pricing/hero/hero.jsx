@@ -15,7 +15,6 @@ import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import XIcon from 'icons/no.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
-import sendSegmentEvent from 'utils/send-segment-event';
 
 const items = [
   {
@@ -223,7 +222,6 @@ const Hero = () => {
                         isAnimated
                         onClick={() => {
                           sendGtagEvent(button.event);
-                          sendSegmentEvent(button.event);
                         }}
                       >
                         {button.text}
@@ -235,7 +233,6 @@ const Hero = () => {
                         to={button.url}
                         onClick={() => {
                           sendGtagEvent(button.event);
-                          sendSegmentEvent(button.event);
                         }}
                       >
                         {button.text}
