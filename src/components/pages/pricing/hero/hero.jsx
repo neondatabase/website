@@ -23,8 +23,8 @@ const items = [
     price: '$0 <span>/month</span>',
     description: 'Generous always-available free tier, no credit card required.',
     features: [
-      { title: 'Fixed capacity at *0.25 CU*', tooltip: '0.25 CU = 0.25 vCPU, 1 GiB RAM' },
-      { title: '24/7 for your main compute', tooltip: 'Plus 20h of usage for secondary computes ' },
+      { title: 'Fixed capacity at *0.25 CU*', hint: '0.25 CU = 0.25 vCPU, 1 GiB RAM' },
+      { title: '24/7 for your main compute', info: 'Plus 20h of usage for secondary computes ' },
       { title: '0.5 GiB of storage' },
       { title: 'Community support ' },
       { title: 'Autoscaling', disabled: true },
@@ -44,11 +44,11 @@ const items = [
       '<em class="absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</em> $19 <span>/month</span>',
     description: 'All the resources, features and support you need to launch.',
     features: [
-      { title: 'Up to *4 CU* compute capacity', tooltip: '4 CU = 4 vCPU, 16 GiB RAM' },
-      { title: '300 CU-hours included', tooltip: 'Additional usage: $0.16 per CU-hour' },
-      { title: '10 GiB storage included', tooltip: 'Addtional storage: $3.5 for 2 GiB' },
+      { title: 'Up to *4 CU* compute capacity', hint: '4 CU = 4 vCPU, 16 GiB RAM' },
+      { title: '300 CU-hours included', info: 'Additional usage: $0.16 per CU-hour' },
+      { title: '10 GiB storage included', info: 'Addtional storage: $3.5 for 2 GiB' },
       { title: 'Standard support' },
-      { title: 'Autoscaling from 0 to 4 CU', tooltip: 'Scale automatically up to 4 vCPU 16GB RAM' },
+      { title: 'Autoscaling from 0 to 4 CU', info: 'Scale automatically up to 4 vCPU 16GB RAM' },
       { title: 'Read Replicas' },
       { title: 'IP Allow Rules', disabled: true },
     ],
@@ -65,11 +65,11 @@ const items = [
       '<em class="absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</em> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
-      { title: 'Up to *8 CU* compute capacity', tooltip: '8 CU = 8 vCPU, 32 GiB RAM ' },
-      { title: '750 CU-hours included', tooltip: 'Additional usage: $0.16 per CU-hour' },
-      { title: '50 GiB storage included', tooltip: 'Addtional storage: $15 for 10 GiB' },
+      { title: 'Up to *8 CU* compute capacity', hint: '8 CU = 8 vCPU, 32 GiB RAM ' },
+      { title: '750 CU-hours included', info: 'Additional usage: $0.16 per CU-hour' },
+      { title: '50 GiB storage included', info: 'Addtional storage: $15 for 10 GiB' },
       { title: 'Priority support' },
-      { title: 'Autoscaling from 0 to 8 CU', tooltip: 'Scale automatically up to 8 vCPU 32GB RAM' },
+      { title: 'Autoscaling from 0 to 8 CU', info: 'Scale automatically up to 8 vCPU 32GB RAM' },
       { title: 'Read Replicas' },
       { title: 'IP Allow Rules' },
     ],
@@ -115,52 +115,42 @@ const scaleCardBorderVariants = {
   },
 };
 
-const Feature = ({ title, tooltip, disabled, type, index }) => {
-  const hasInlineTooltip = title.includes('*');
-
-  return (
-    <li
-      className={clsx(
-        type === 'Scale' && 'text-white',
-        disabled ? 'text-gray-new-30' : 'text-gray-new-80',
-        'relative pl-6 leading-tight tracking-tight'
-      )}
-    >
-      {disabled ? (
-        <XIcon className={clsx('absolute left-0 top-[2px] h-4 w-4 text-gray-new-30')} aria-hidden />
-      ) : (
-        <CheckIcon
-          className={clsx(
-            type === 'Scale' ? 'text-green-45' : 'text-gray-new-70',
-            'absolute left-0 top-[2px] h-4 w-4'
-          )}
-          aria-hidden
-        />
-      )}
-
-      <div className="flex items-center gap-1.5">
-        {hasInlineTooltip && (
-          <HintText
-            text={title}
-            tooltip={tooltip}
-            tooltipId={`${type}_tooltip_${index}`}
-            greenHighlight={type === 'Scale'}
-          />
+const Feature = ({ title, info, hint, disabled, type, index }) => (
+  <li
+    className={clsx(
+      type === 'Scale' && 'text-white',
+      disabled ? 'text-gray-new-30' : 'text-gray-new-80',
+      'relative pl-6 leading-tight tracking-tight'
+    )}
+  >
+    {disabled ? (
+      <XIcon className={clsx('absolute left-0 top-[2px] h-4 w-4 text-gray-new-30')} aria-hidden />
+    ) : (
+      <CheckIcon
+        className={clsx(
+          type === 'Scale' ? 'text-green-45' : 'text-gray-new-70',
+          'absolute left-0 top-[2px] h-4 w-4'
         )}
-        {!hasInlineTooltip && (
-          <>
-            {title}
-            {tooltip && <InfoIcon tooltip={tooltip} tooltipId={`${type}_tooltip_${index}`} />}
-          </>
-        )}
-      </div>
-    </li>
-  );
-};
+        aria-hidden
+      />
+    )}
+
+    <div className="flex items-center gap-1.5">
+      <HintText
+        text={title}
+        tooltip={hint}
+        tooltipId={`${type}_tooltip_${index}`}
+        greenHighlight={type === 'Scale'}
+      />
+      {info && <InfoIcon tooltip={info} tooltipId={`${type}_tooltip_${index}`} />}
+    </div>
+  </li>
+);
 
 Feature.propTypes = {
   title: PropTypes.string.isRequired,
-  tooltip: PropTypes.string,
+  info: PropTypes.string,
+  hint: PropTypes.string,
   disabled: PropTypes.bool,
   type: PropTypes.string,
   index: PropTypes.number,
@@ -203,7 +193,6 @@ const Hero = () => {
                     'group relative flex min-h-full flex-col rounded-[10px] px-7 pb-9 pt-5 xl:px-6 xl:py-5 sm:p-5',
                     !isScalePlan && 'border border-transparent bg-gray-new-8'
                   )}
-                  style={{ zIndex: 100 - index }}
                   key={index}
                   onPointerEnter={() => {
                     if (isScalePlan) {

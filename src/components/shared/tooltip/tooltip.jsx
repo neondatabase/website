@@ -1,7 +1,9 @@
 'use client';
 
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 
@@ -21,9 +23,9 @@ const Tooltip = ({
   }, []);
 
   if (isTooltipVisible) {
-    return (
+    return createPortal(
       <ReactTooltip
-        className={className}
+        className={clsx('z-[9999]', className)}
         arrowColor={arrowColor}
         id={id}
         place={place}
@@ -33,9 +35,11 @@ const Tooltip = ({
         anchorSelect={anchorSelect}
         multiline
         {...rest}
-      />
+      />,
+      document.body
     );
   }
+
   return null;
 };
 

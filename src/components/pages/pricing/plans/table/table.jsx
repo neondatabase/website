@@ -171,7 +171,6 @@ const Table = () => {
                   !isLabelsColumn &&
                   'min-w-[160px] basis-[204px] xl:basis-[160px]'
               )}
-              style={{ zIndex: 100 - i }}
               key={key}
             >
               <TableHeading
@@ -238,7 +237,35 @@ const Table = () => {
                     ) : (
                       <span className="inline-block h-[1.4px] w-4 rounded-full bg-gray-new-30" />
                     );
-                  } else if (typeof item[key] !== 'object') {
+                  } else if (typeof item[key] === 'object') {
+                    const { title, hint, info } = item[key];
+                    const words = title.split(' ');
+                    cell = (
+                      <div className="font-light leading-snug tracking-extra-tight">
+                        <HintText
+                          text={words.slice(0, -1).join(' ')}
+                          tooltip={hint}
+                          tooltipId={`${key}_tooltip_${index}`}
+                          greenHighlight={isScaleColumn}
+                        />{' '}
+                        <span className="whitespace-nowrap">
+                          <HintText
+                            text={words.at(-1)}
+                            tooltip={hint}
+                            tooltipId={`${key}_tooltip_${index}`}
+                            greenHighlight={isScaleColumn}
+                          />
+                          {info && (
+                            <InfoIcon
+                              className="relative top-0.5 ml-1.5 inline-block"
+                              tooltip={info}
+                              tooltipId={`${key}_tooltip_${index}`}
+                            />
+                          )}
+                        </span>
+                      </div>
+                    );
+                  } else {
                     cell = (
                       <span
                         className="flex flex-col gap-y-1 font-light leading-snug tracking-extra-tight [&_span]:text-sm [&_span]:text-gray-new-60"
@@ -246,28 +273,6 @@ const Table = () => {
                         data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
                         dangerouslySetInnerHTML={{ __html: item[key] }}
                       />
-                    );
-                  } else {
-                    const { title, hint, info } = item[key];
-                    cell = (
-                      <div className="font-light leading-snug tracking-extra-tight">
-                        {hint && (
-                          <HintText
-                            text={title}
-                            tooltip={hint}
-                            tooltipId={`${key}_tooltip_${index}`}
-                            tooltipPlace="top-start"
-                          />
-                        )}
-                        {!hint && title}
-                        {info && (
-                          <InfoIcon
-                            className="relative top-0.5 ml-1.5 inline-block"
-                            tooltip={info}
-                            tooltipId={`${key}_tooltip_${index}`}
-                          />
-                        )}
-                      </div>
                     );
                   }
 
@@ -292,17 +297,12 @@ const Table = () => {
                         i === arr.length - 1 &&
                           'before:absolute before:-inset-y-px before:-right-5 before:z-0 before:w-5 before:rounded-br-lg before:rounded-tr-lg before:bg-gray-new-8 before:opacity-0 before:transition-opacity lg:before:hidden'
                       )}
-                      style={{ zIndex: 100 - index }}
                       data-row-id={index}
                       key={index}
                     >
                       {cell}
                       {item[`${key}_tooltip`] && (
-                        <Tooltip
-                          className="w-sm z-20"
-                          id={`${key}_tooltip_${index}`}
-                          place="top-center"
-                        />
+                        <Tooltip className="w-sm z-20" id={`${key}_tooltip_${index}`} />
                       )}
                     </li>
                   );

@@ -113,15 +113,18 @@
         "title": "Compute Size"
       },
       "free": {
-        "title": "Fixed at 0.25 CU",
+        "title": "Fixed at 0.25 *CU*",
+        "hint": "1 CU = 1 vCPU, 4GB RAM",
         "info": "0.25 vCPU, 1 GB RAM"
       },
       "launch": {
-        "title": "Up to 4 CU",
+        "title": "Up to 4 *CU*",
+        "hint": "1 CU = 1 vCPU, 4GB RAM",
         "info": "4 vCPU, 16 GB RAM"
       },
       "scale": {
-        "title": "Up to 8 CU",
+        "title": "Up to 8 *CU*",
+        "hint": "1 CU = 1 vCPU, 4GB RAM",
         "info": "8 vCPU, 32 GB RAM"
       },
       "enterprise": {
