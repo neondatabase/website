@@ -13,7 +13,7 @@ import HintText from 'components/shared/hint-text';
 import InfoIcon from 'components/shared/info-icon';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
-import XIcon from 'icons/no.inline.svg';
+import CrossIcon from 'icons/cross.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const items = [
@@ -40,7 +40,7 @@ const items = [
   {
     type: 'Launch',
     price:
-      '<em class="absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</em> $19 <span>/month</span>',
+      '<em class="xl:-top-1 block absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:-mt-4 md:mt-0">From</em> $19 <span>/month</span>',
     description: 'All the resources, features and support you need to launch.',
     features: [
       { title: 'Up to *4 CU* compute capacity', hint: '4 CU = 4 vCPU, 16 GiB RAM' },
@@ -61,7 +61,7 @@ const items = [
   {
     type: 'Scale',
     price:
-      '<em class="absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</em> $69 <span>/month</span>',
+      '<em class="absolute block xl:-top-1 -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:-mt-4 md:mt-0">From</em> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
       { title: 'Up to *8 CU* compute capacity', hint: '8 CU = 8 vCPU, 32 GiB RAM ' },
@@ -123,7 +123,10 @@ const Feature = ({ title, info, hint, disabled, type, index }) => (
     )}
   >
     {disabled ? (
-      <XIcon className={clsx('absolute left-0 top-[2px] h-4 w-4 text-gray-new-30')} aria-hidden />
+      <CrossIcon
+        className={clsx('absolute left-0 top-[2px] h-4 w-4 text-gray-new-30')}
+        aria-hidden
+      />
     ) : (
       <CheckIcon
         className={clsx(
@@ -133,16 +136,22 @@ const Feature = ({ title, info, hint, disabled, type, index }) => (
         aria-hidden
       />
     )}
-
-    <div className="flex items-center gap-1.5">
-      <HintText
-        text={title}
-        tooltip={hint}
-        tooltipId={`${type}_tooltip_${index}`}
-        greenHighlight={type === 'Scale'}
-      />
-      {info && <InfoIcon tooltip={info} tooltipId={`${type}_tooltip_${index}`} />}
-    </div>
+    <HintText
+      text={title}
+      tooltip={hint}
+      tooltipId={`${type}_tooltip_${index}`}
+      greenHighlight={type === 'Scale'}
+    />
+    {info && (
+      <span className="whitespace-nowrap">
+        &nbsp;
+        <InfoIcon
+          className="relative top-0.5 ml-0.5 inline-block"
+          tooltip={info}
+          tooltipId={`${type}_tooltip_${index}`}
+        />
+      </span>
+    )}
   </li>
 );
 
@@ -209,7 +218,7 @@ const Hero = () => {
                       {type}
                     </h3>
                     <p
-                      className="relative mt-14 text-[36px] leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4 [&_span]:text-[28px] [&_span]:font-light [&_span]:-tracking-[0.06em] [&_span]:text-gray-new-50"
+                      className="relative mt-14 text-[36px] leading-none tracking-tighter xl:mt-9 xl:text-[32px] md:mt-4 [&_span]:text-[28px] [&_span]:font-light [&_span]:-tracking-[0.06em] [&_span]:text-gray-new-50"
                       dangerouslySetInnerHTML={{ __html: price }}
                     />
                     {isScalePlan ? (

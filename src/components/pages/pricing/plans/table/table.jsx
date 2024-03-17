@@ -234,30 +234,24 @@ const Table = () => {
                     );
                   } else if (typeof item[key] === 'object') {
                     const { title, hint, info } = item[key];
-                    const words = title.split(' ');
                     cell = (
                       <div className="font-light leading-snug tracking-extra-tight">
                         <HintText
-                          text={words.slice(0, -1).join(' ')}
+                          text={title}
                           tooltip={hint}
                           tooltipId={`${key}_tooltip_${index}`}
                           greenHighlight={isScaleColumn}
-                        />{' '}
-                        <span className="whitespace-nowrap">
-                          <HintText
-                            text={words.at(-1)}
-                            tooltip={hint}
-                            tooltipId={`${key}_tooltip_${index}`}
-                            greenHighlight={isScaleColumn}
-                          />
-                          {info && (
+                        />
+                        {info && (
+                          <span className="whitespace-nowrap">
+                            &nbsp;
                             <InfoIcon
-                              className="relative top-0.5 ml-1.5 inline-block"
+                              className="relative top-0.5 ml-0.5 inline-block"
                               tooltip={info}
                               tooltipId={`${key}_tooltip_${index}`}
                             />
-                          )}
-                        </span>
+                          </span>
+                        )}
                       </div>
                     );
                   } else {

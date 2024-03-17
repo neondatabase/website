@@ -22,13 +22,13 @@ const HintText = ({
         return (
           <strong
             className={clsx(
-              'relative font-medium',
-              'after:absolute after:inset-x-0 after:-bottom-0.5 after:border-b after:border-dashed',
-              !greenHighlight && 'text-white after:border-gray-new-90',
-              greenHighlight && 'text-green-45 after:border-green-45'
+              'relative border-b border-dashed pb-px font-medium',
+              !greenHighlight && 'text-white before:border-gray-new-90',
+              greenHighlight && 'text-green-45 before:border-green-45'
             )}
             data-tooltip-id={`hint-text-${tooltipId}`}
             data-tooltip-html={tooltip}
+            key={index}
           >
             {part}
           </strong>
