@@ -21,7 +21,7 @@ const items = [
     answer: `You can get a good idea by estimating how many hours your databases run and at which capacity. For example: imagine you’re running a 2 CPU, 8 GB RAM database for 2 hours a day (or 62 hours per month). This equals [2 CU * 62 hours] = 124 compute-hours per month.`,
   },
   {
-    question: 'How can I predict my costs with autoscaling?',
+    question: 'How can I control my costs with autoscaling?',
     answer: `When enabling <a herf="/docs/introduction/autoscaling">autoscaling</a>, you will set a maximum autoscaling limit (e.g. 5 CPU) that will de-facto act as a cost limit.`,
   },
   {
