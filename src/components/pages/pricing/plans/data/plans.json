@@ -110,13 +110,13 @@
         "title": "Compute Size"
       },
       "free": {
-        "title": "Fixed at 0.25 CPU, 1 GB RAM",
+        "title": "Fixed at 0.25 CPU, 1 GB RAM"
       },
       "launch": {
-        "title": "Up to 4 CPU, 16 GB RAM",
+        "title": "Up to 4 CPU, 16 GB RAM"
       },
       "scale": {
-        "title": "Up to 8 CPU, 32 GB RAM",
+        "title": "Up to 8 CPU, 32 GB RAM"
       },
       "enterprise": {
         "title": "Larger sizes",
