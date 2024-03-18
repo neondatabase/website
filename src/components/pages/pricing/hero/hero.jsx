@@ -25,7 +25,7 @@ const items = [
       { title: '24/7 for your main compute', info: 'Plus 20h of usage for branches' },
       { title: 'Community support' },
       { title: 'Fixed capacity at 0.25 vCPU' },
-      { title: 'Ephemeral Read Replicas', disabled: true },
+      { title: 'Instant Read Replicas', disabled: true },
       { title: 'IP Allow Rules', disabled: true },
     ],
     button: {
@@ -48,7 +48,7 @@ const items = [
       { title: '300 compute-hours included', info: 'Additional usage: $0.16 per compute-hour' },
       { title: 'Standard support' },
       { title: 'Autoscaling from 0 to 4 vCPU', info: '4 vCPU, 16 GB RAM' },
-      { title: 'Ephemeral Read Replicas' },
+      { title: 'Instant Read Replicas' },
       { title: 'IP Allow Rules', disabled: true },
     ],
     button: {
@@ -68,7 +68,7 @@ const items = [
       { title: '750 compute-hours included', info: 'Additional usage: $0.16 per compute-hour' },
       { title: 'Priority support' },
       { title: 'Autoscaling from 0 to 8 vCPU', info: '8 vCPU, 32 GB RAM' },
-      { title: 'Ephemeral Read Replicas' },
+      { title: 'Instant Read Replicas' },
       { title: 'IP Allow Rules' },
     ],
     button: {

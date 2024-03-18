@@ -3,19 +3,19 @@
     "feature": "",
     "free": {
       "label": "Free Tier",
-      "price": "<span>Free forever</span>",
+      "price": "<span>$0/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Start for free"
     },
     "launch": {
       "label": "Launch",
-      "price": "<span>From</span> $19<span>/mo</span>",
+      "price": "<span>From</span> $19<span>/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
     "scale": {
       "label": "Scale",
-      "price": "<span>From</span> $69<span>/mo</span>",
+      "price": "<span>From</span> $69<span>/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
@@ -39,7 +39,7 @@
       "free": "0.5 GiB",
       "launch": {
         "title": "10 GiB",
-        "info": "Extra at $3.5 per 2 GiB"
+        "info": "Extra at $3.50 per 2 GiB"
       },
       "scale": {
         "title": "50 GiB",
@@ -50,19 +50,19 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Compute",
+        "title": "Compute (monthly)",
         "subtitle": "Compute-hours = CPU size x active time"
       },
       "free": {
-        "title": "187.5 CU-hours per month",
-        "info": "+ 5 CU per month for branches"
+        "title": "187.5 compute-hours",
+        "info": "+ 5 compute-hours per month for branches"
       },
       "launch": {
-        "title": "300 CU-hours per month",
+        "title": "300 compute-hours",
         "info": "Extra at $0.16 per CU-hour"
       },
       "scale": {
-        "title": "750 CU-hours per month",
+        "title": "750 compute-hours",
         "info": "Extra at $0.16 per CU-hour"
       },
       "enterprise": "Custom"
