@@ -3,19 +3,19 @@
     "feature": "",
     "free": {
       "label": "Free Tier",
-      "price": "<span>Free forever</span>",
+      "price": "<span>$0/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Start for free"
     },
     "launch": {
       "label": "Launch",
-      "price": "<span>From</span> $19<span>/mo</span>",
+      "price": "<span>From</span> $19<span>/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
     "scale": {
       "label": "Scale",
-      "price": "<span>From</span> $69<span>/mo</span>",
+      "price": "<span>From</span> $69<span>/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
@@ -37,22 +37,37 @@
         "title": "Storage"
       },
       "free": "0.5 GiB",
-      "launch": "10 GiB",
-      "scale": "50 GiB",
+      "launch": {
+        "title": "10 GiB",
+        "info": "Extra at $3.50 per 2 GiB"
+      },
+      "scale": {
+        "title": "50 GiB",
+        "info": "Extra at $15 per 10 GiB"
+      },
       "enterprise": "Larger sizes"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Compute",
-        "subtitle": "Based on 0.25 vCPU, 1GB RAM"
+        "title": "Compute (monthly)",
+        "subtitle": "Compute-hours = CPU size x active time"
       },
-      "free": "20 hours <span>+ always-available primary</span>",
-      "launch": "1,200 hours <span>per month</span>",
-      "scale": "3,000 hours <span>per month</span>",
+      "free": {
+        "title": "187.5 compute-hours",
+        "info": "+ 5 compute-hours per month for branches"
+      },
+      "launch": {
+        "title": "300 compute-hours",
+        "info": "Extra at $0.16 per CU-hour"
+      },
+      "scale": {
+        "title": "750 compute-hours",
+        "info": "Extra at $0.16 per CU-hour"
+      },
       "enterprise": "Custom"
     },
-    
+
     {
       "rows": "2",
       "feature": {
@@ -60,7 +75,10 @@
       },
       "free": "1",
       "launch": "10",
-      "scale": "50",
+      "scale": {
+        "title": "50",
+        "info": "Extra at $50 per 10 projects"
+      },
       "enterprise": "Unlimited"
     },
     {
@@ -84,52 +102,26 @@
       "enterprise": "Unlimited"
     },
     {
-      "rows": "2",
-      "feature": "Extra Usage"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Storage"
-      },
-      "free": false,
-      "launch": "$3.50 <span>per 2 GiB</span>",
-      "scale": "$15 <span>per 10 GiB</span>",
-      "enterprise": "Custom"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Compute",
-        "subtitle": "Based on 0.25 vCPU, 1GB RAM"
-      },
-      "free": false,
-      "launch": "$0.04 <span>per hour</span>",
-      "scale": "$0.04 <span>per hour</span>",
-      "enterprise": "Custom"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Projects"
-      },
-      "free": false,
-      "launch": false,
-      "scale": "$50 <span>per 10 projects</span>",
-      "enterprise": "Custom"
-    },
-    {
       "feature": "Compute Features"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Max Compute Size"
+        "title": "Compute Size"
       },
-      "free": "0.25 CU <span>0.25 vCPU, 1 GB RAM</span>",
-      "launch": "4 CU <span>4 vCPU, 16 GB RAM</span>",
-      "scale": "8 CU <span>8 vCPU, 32 GB RAM</span>",
-      "enterprise": "Larger sizes <span>7+ vCPU, 28+ GB RAM</span>"
+      "free": {
+        "title": "Fixed at 0.25 CPU, 1 GB RAM"
+      },
+      "launch": {
+        "title": "Up to 4 CPU, 16 GB RAM"
+      },
+      "scale": {
+        "title": "Up to 8 CPU, 32 GB RAM"
+      },
+      "enterprise": {
+        "title": "Larger sizes",
+        "info": "8+ vCPU, 32+ GB RAM"
+      }
     },
     {
       "rows": "1",

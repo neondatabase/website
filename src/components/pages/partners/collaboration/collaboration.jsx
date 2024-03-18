@@ -51,7 +51,7 @@ const Collaboration = () => (
         {/* cards */}
         <ul className="mt-12 grid grid-cols-3 gap-8 lg:grid-cols-2 md:gap-6 sm:grid-cols-1">
           {partners.map(({ logo, label, labelColor, description, slug }, index) => (
-            <li>
+            <li key={index}>
               <GradientCard
                 className="p-8 pb-7"
                 as={slug ? Link : 'div'}
