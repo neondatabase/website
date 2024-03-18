@@ -5,34 +5,36 @@ import Item from './item';
 
 const items = [
   {
+    question: 'How does billing work?',
+    answer: `In Neon, you are charged a monthly fee (corresponding to your pricing plan) plus any additional compute and/or storage usage over the limits included in your plan. For example, the Launch plan includes 300 CU-hours of compute usage;  if you consume 320 CU-hours in a month, you will be billed additionally for 20 CU-hours.`,
+  },
+  {
     question: 'When will I be billed?',
     answer: `Neon bills for the past month's usage at the beginning of each calendar month. For more information, see <a href="/docs/introduction/manage-billing">Manage billing</a>.`,
   },
   {
-    question: 'What happens if I cancel my subscription?',
-    answer:
-      'If you cancel your subscription you will be be required to downgrade your account to the free limits.',
+    question: 'What is CU and CU-hours?',
+    answer: `Compute units (or CU) measure compute capacity in Neon. 1 CU = 1 vCPU, 4 GB RAM. CU-hours measure compute usage in Neon; it is short of “number of CUs consumed in an hour”. (Remember, Neon is serverless Postgres—it is able to scale dynamically with your load when you enable <a href="/docs/introduction/autoscaling">autoscaling</a>).`,
+  },
+  {
+    question: 'How many CU-hours it’ll take to run my workload?',
+    answer: `You can get a good idea by estimating how many hours your databases run and at which capacity. For example: imagine you’re running a 2 CPU, 8 GB RAM database for 2 hours a day (or 62 hours per month). This equals [2 CU * 62 hours] = 124 CU-hours per month.`,
+  },
+  {
+    question: 'How can I predict my costs with autoscaling?',
+    answer: `When enabling <a herf="/docs/introduction/autoscaling">autoscaling</a>, you will set a maximum autoscaling limit (e.g. 5 CPU) that will de-facto act as a cost limit.`,
+  },
+  {
+    question: 'How is storage charged in Neon?',
+    answer: `Neon implements a unique storage engine that enables it to create instant database copies (branches) without duplicating storage. In Neon, you only pay for the same data once: <a href="/docs/introduction/branching">you can create development, test, staging, and preview database branches without adding to the storage bill</a>.`,
   },
   {
     question: 'Do I get a notification if I am approaching my usage limits?',
-    answer:
-      'Yes, we display your usage consumption in the Neon admin console and will email you when you are within 20% of your included usage.',
+    answer: `Yes, we display your usage consumption in the Neon admin console and we will also email you when you’re getting close.`,
   },
   {
     question: 'Why are we limited to 500 branches per project?',
     answer: `Neon implements usage limits for branching in order to prevent potential abuse of the service which can negatively impact other users. For customers seeking higher limits please contact <a href="mailto:customer-success@neon.tech">customer-success@neon.tech</a>.`,
-  },
-  {
-    question: 'Does Neon charge for storage in database branches?',
-    answer:
-      'Neon charges for unique storage. Data that a branch shares in common with a parent branch is not considered unique, but data changes to a branch are counted toward storage.',
-    linkUrl: '/docs/introduction/usage-metrics#project-storage',
-    linkText: 'Read more',
-    linkLabel: 'about project storage',
-  },
-  {
-    question: 'What happens when I exceed 10 GiB storage on the Launch plan?',
-    answer: `If you exceed your storage quota on the Launch plan, the Neon team will collaborate with you to address your storage needs. This may involve providing guidance on optimizing storage usage or exploring alternative plans that better suit your requirements. It's important to note that Neon does not automatically halt write operations when you surpass your limits. You can send related inquiries to <a href="mailto:customer-success@neon.tech">customer-success@neon.tech</a>.`,
   },
 ];
 

@@ -24,6 +24,7 @@ const items = [
       { title: '0.5 GiB of storage' },
       { title: '24/7 for your main compute', info: 'Plus 20h of usage for branches' },
       { title: 'Community support' },
+      { title: 'Fixed capacity at 0.25 vCPU' },
       { title: 'Ephemeral Read Replicas', disabled: true },
       { title: 'IP Allow Rules', disabled: true },
     ],
@@ -42,10 +43,9 @@ const items = [
     features: [
       {
         title: '10 GiB storage included',
-        info: '10 GiB storage included	Addtional storage: $3.5 for 2 GiB',
+        info: 'Addtional storage: $3.5 for 2 GiB',
       },
       { title: '300 compute-hours included', info: 'Additional usage: $0.16 per compute-hour' },
-      { title: '10 GiB storage included', info: 'Addtional storage: $3.5 for 2 GiB' },
       { title: 'Standard support' },
       { title: 'Autoscaling from 0 to 4 CU', info: '4 vCPU, 16 GB RAM' },
       { title: 'Ephemeral Read Replicas' },
