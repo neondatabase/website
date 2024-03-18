@@ -93,7 +93,7 @@
         "title": "Storage"
       },
       "free": false,
-      "launch": false,
+      "launch": "$3.50 <span>per 2 GiB</span>",
       "scale": "$15 <span>per 10 GiB</span>",
       "enterprise": "Custom"
     },
