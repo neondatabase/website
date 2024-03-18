@@ -235,7 +235,7 @@ const Table = () => {
                     const { title, info } = item[key];
                     cell = (
                       <div className="font-light leading-snug tracking-extra-tight">
-                        <span>{title}</span>
+                        {title}
                         {info && (
                           <span className="whitespace-nowrap">
                             &nbsp;

@@ -135,7 +135,7 @@ const Feature = ({ title, info, disabled, type, index }) => (
         aria-hidden
       />
     )}
-    <span>{title}</span>
+    {title}
     {info && (
       <span className="whitespace-nowrap">
         &nbsp;
