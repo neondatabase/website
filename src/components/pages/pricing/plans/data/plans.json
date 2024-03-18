@@ -158,9 +158,9 @@
       "feature": {
         "title": "Region Availability"
       },
-      "free": "<a href='/docs/introduction/regions'>All supported</a>",
-      "launch": "<a href='/docs/introduction/regions'>All supported</a>",
-      "scale": "<a href='/docs/introduction/regions'>All supported</a>",
+      "free": "<a href='/docs/introduction/regions'>All</a>",
+      "launch": "<a href='/docs/introduction/regions'>All</a>",
+      "scale": "<a href='/docs/introduction/regions'>All</a>",
       "enterprise": "Custom"
     },
 
