@@ -26,7 +26,9 @@ const items = [
   },
   {
     question: 'How is storage charged in Neon?',
-    answer: `Neon implements a unique storage engine that enables it to create instant database copies (branches) without duplicating storage. In Neon, you only pay for the same data once: <a href="/docs/introduction/branching">you can create development, test, staging, and preview database branches without adding to the storage bill</a>.`,
+    answer: `Neon implements a unique storage engine that automatically retains a history of changes across all branches within a project, empowering users with the capability to restore data to any point within the defined retention period. It also enables database branching without duplicate storage: you can create instant database copies (database branches) without adding to the storage bill. 
+The size of storage for a Neon project will be calculated as the sum of two variables: data size (the size of your tables in the main branch) and history size (corresponding to the WAL size up to the configurable history retention period). Remember: non-primary branches (like development, testing, and staging branches) don’t add to the storage bill. 
+The default history retention periods vary by pricing plan (24 hours for Free, 7 days for Launch, and 30 days for Scale). If you’re in Launch or Scale plans, you can configure a shorter retention period to prioritize storage savings.`,
   },
   {
     question: 'Do I get a notification if I am approaching my usage limits?',
