@@ -55,7 +55,7 @@ const items = [
       url: LINKS.signup,
       text: 'Get started',
       theme: 'primary',
-      event: 'pricing_hero_pro_btn_click',
+      event: 'pricing_hero_launch_btn_click',
     },
   },
   {
@@ -76,7 +76,7 @@ const items = [
       url: LINKS.signup,
       text: 'Get started',
       theme: 'white-outline',
-      event: 'pricing_hero_pro_btn_click',
+      event: 'pricing_hero_scale_btn_click',
     },
   },
   {
