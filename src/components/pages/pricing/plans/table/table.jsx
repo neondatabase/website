@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
-import HintText from 'components/shared/hint-text';
 import InfoIcon from 'components/shared/info-icon';
 import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
@@ -233,15 +232,10 @@ const Table = () => {
                       <span className="inline-block h-[1.4px] w-4 rounded-full bg-gray-new-30" />
                     );
                   } else if (typeof item[key] === 'object') {
-                    const { title, hint, info } = item[key];
+                    const { title, info } = item[key];
                     cell = (
                       <div className="font-light leading-snug tracking-extra-tight">
-                        <HintText
-                          text={title}
-                          tooltip={hint}
-                          tooltipId={`${key}_tooltip_${index}`}
-                          greenHighlight={isScaleColumn}
-                        />
+                        <span>{title}</span>
                         {info && (
                           <span className="whitespace-nowrap">
                             &nbsp;

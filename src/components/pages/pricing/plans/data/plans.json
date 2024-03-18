@@ -50,22 +50,20 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Compute"
+        "title": "Compute",
+        "subtitle": "Based on 0.25 vCPU, 1GB RAM"
       },
       "free": {
-        "title": "187.5 *CU*-hours per month",
-        "info": "+ 5 CU per month for branches",
-        "hint": "1 CU = 1 vCPU, 4GB RAM"
+        "title": "187.5 CU-hours per month",
+        "info": "+ 5 CU per month for branches"
       },
       "launch": {
-        "title": "300 *CU*-hours per month",
-        "info": "Extra at $0.16 per CU-hour",
-        "hint": "1 CU = 1 vCPU, 4GB RAM"
+        "title": "300 CU-hours per month",
+        "info": "Extra at $0.16 per CU-hour"
       },
       "scale": {
-        "title": "750 *CU*-hours per month",
-        "info": "Extra at $0.16 per CU-hour",
-        "hint": "1 CU = 1 vCPU, 4GB RAM"
+        "title": "750 CU-hours per month",
+        "info": "Extra at $0.16 per CU-hour"
       },
       "enterprise": "Custom"
     },
@@ -113,18 +111,15 @@
         "title": "Compute Size"
       },
       "free": {
-        "title": "Fixed at 0.25 *CU*",
-        "hint": "1 CU = 1 vCPU, 4GB RAM",
+        "title": "Fixed at 0.25 CU",
         "info": "0.25 vCPU, 1 GB RAM"
       },
       "launch": {
-        "title": "Up to 4 *CU*",
-        "hint": "1 CU = 1 vCPU, 4GB RAM",
+        "title": "Up to 4 CU",
         "info": "4 vCPU, 16 GB RAM"
       },
       "scale": {
-        "title": "Up to 8 *CU*",
-        "hint": "1 CU = 1 vCPU, 4GB RAM",
+        "title": "Up to 8 CU",
         "info": "8 vCPU, 32 GB RAM"
       },
       "enterprise": {
