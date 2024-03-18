@@ -9,7 +9,6 @@ import AnimatedButton from 'components/shared/animated-button';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import HintText from 'components/shared/hint-text';
 import InfoIcon from 'components/shared/info-icon';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
@@ -22,12 +21,10 @@ const items = [
     price: '$0 <span>/month</span>',
     description: 'Generous always-available free tier, no credit card required.',
     features: [
-      { title: 'Fixed capacity at *0.25 CU*', hint: '0.25 CU = 0.25 vCPU, 1 GiB RAM' },
-      { title: '24/7 for your main compute', info: 'Plus 20h of usage for secondary computes ' },
       { title: '0.5 GiB of storage' },
-      { title: 'Community support ' },
-      { title: 'Autoscaling', disabled: true },
-      { title: 'Read Replicas', disabled: true },
+      { title: '24/7 for your main compute', info: 'Plus 20h of usage for branches' },
+      { title: 'Community support' },
+      { title: 'Ephemeral Read Replicas', disabled: true },
       { title: 'IP Allow Rules', disabled: true },
     ],
     button: {
@@ -43,12 +40,15 @@ const items = [
       '<em class="xl:-top-1 block absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:-mt-4 md:mt-0">From</em> $19 <span>/month</span>',
     description: 'All the resources, features and support you need to launch.',
     features: [
-      { title: 'Up to *4 CU* compute capacity', hint: '4 CU = 4 vCPU, 16 GiB RAM' },
-      { title: '300 CU-hours included', info: 'Additional usage: $0.16 per CU-hour' },
+      {
+        title: '10 GiB storage included',
+        info: '10 GiB storage included	Addtional storage: $3.5 for 2 GiB',
+      },
+      { title: '300 compute-hours included', info: 'Additional usage: $0.16 per compute-hour' },
       { title: '10 GiB storage included', info: 'Addtional storage: $3.5 for 2 GiB' },
       { title: 'Standard support' },
-      { title: 'Autoscaling from 0 to 4 CU', info: 'Scale automatically up to 4 vCPU 16GB RAM' },
-      { title: 'Read Replicas' },
+      { title: 'Autoscaling from 0 to 4 CU', info: '4 vCPU, 16 GB RAM' },
+      { title: 'Ephemeral Read Replicas' },
       { title: 'IP Allow Rules', disabled: true },
     ],
     button: {
@@ -64,12 +64,11 @@ const items = [
       '<em class="absolute block xl:-top-1 -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:-mt-4 md:mt-0">From</em> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
-      { title: 'Up to *8 CU* compute capacity', hint: '8 CU = 8 vCPU, 32 GiB RAM ' },
-      { title: '750 CU-hours included', info: 'Additional usage: $0.16 per CU-hour' },
       { title: '50 GiB storage included', info: 'Addtional storage: $15 for 10 GiB' },
+      { title: '750 compute-hours included', info: 'Additional usage: $0.16 per compute-hour' },
       { title: 'Priority support' },
-      { title: 'Autoscaling from 0 to 8 CU', info: 'Scale automatically up to 8 vCPU 32GB RAM' },
-      { title: 'Read Replicas' },
+      { title: 'Autoscaling from 0 to 8 vCPU', info: '8 vCPU, 32 GB RAM' },
+      { title: 'Ephemeral Read Replicas' },
       { title: 'IP Allow Rules' },
     ],
     button: {
@@ -114,7 +113,7 @@ const scaleCardBorderVariants = {
   },
 };
 
-const Feature = ({ title, info, hint, disabled, type, index }) => (
+const Feature = ({ title, info, disabled, type, index }) => (
   <li
     className={clsx(
       type === 'Scale' && 'text-white',
@@ -136,12 +135,7 @@ const Feature = ({ title, info, hint, disabled, type, index }) => (
         aria-hidden
       />
     )}
-    <HintText
-      text={title}
-      tooltip={hint}
-      tooltipId={`${type}_tooltip_${index}`}
-      greenHighlight={type === 'Scale'}
-    />
+    <span>{title}</span>
     {info && (
       <span className="whitespace-nowrap">
         &nbsp;
@@ -158,7 +152,6 @@ const Feature = ({ title, info, hint, disabled, type, index }) => (
 Feature.propTypes = {
   title: PropTypes.string.isRequired,
   info: PropTypes.string,
-  hint: PropTypes.string,
   disabled: PropTypes.bool,
   type: PropTypes.string,
   index: PropTypes.number,
