@@ -111,7 +111,7 @@ const Header = ({
                                 to={to}
                               >
                                 <img
-                                  src={icon}
+                                  src={icon.old}
                                   alt="text"
                                   width={44}
                                   height={44}

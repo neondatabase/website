@@ -1,14 +1,19 @@
 import CalendarIcon from 'icons/calendar.inline.svg';
 import ConsoleIcon from 'icons/console.inline.svg';
-import aboutUsIcon from 'icons/header/about-us.svg';
 import aiIcon from 'icons/header/ai.svg';
 import autoscalingIcon from 'icons/header/autoscaling.svg';
 import branchingIcon from 'icons/header/branching.svg';
-import careersIcon from 'icons/header/careers.svg';
-import caseStudiesIcon from 'icons/header/case-studies.svg';
 import cliIcon from 'icons/header/cli.svg';
-import EnterpriseIcon from 'icons/header/enterprise.svg';
-import partnersIcon from 'icons/header/partners.svg';
+import aboutUsOldIcon from 'icons/header/old/about-us.svg';
+import aiOldIcon from 'icons/header/old/ai.svg';
+import autoscalingOldIcon from 'icons/header/old/autoscaling.svg';
+import branchingOldIcon from 'icons/header/old/branching.svg';
+import careersOldIcon from 'icons/header/old/careers.svg';
+import caseStudiesOldIcon from 'icons/header/old/case-studies.svg';
+import cliOldIcon from 'icons/header/old/cli.svg';
+import EnterpriseOldIcon from 'icons/header/old/enterprise.svg';
+import partnersOldIcon from 'icons/header/old/partners.svg';
+import onDemandStorageOldIcon from 'icons/header/old/storage.svg';
 import onDemandStorageIcon from 'icons/header/storage.svg';
 import PostgresDocsIcon from 'icons/postgres.inline.svg';
 import TransactionsIcon from 'icons/transactions.inline.svg';
@@ -21,31 +26,46 @@ export default {
       text: 'Features',
       items: [
         {
-          icon: branchingIcon,
+          icon: {
+            new: branchingIcon,
+            old: branchingOldIcon,
+          },
           text: 'Branching',
           description: 'Work with data like code',
           to: LINKS.branching,
         },
         {
-          icon: autoscalingIcon,
+          icon: {
+            new: autoscalingIcon,
+            old: autoscalingOldIcon,
+          },
           text: 'Autoscaling',
           description: 'Scale compute on demand',
           to: LINKS.autoscaling,
         },
         {
-          icon: cliIcon,
+          icon: {
+            new: cliIcon,
+            old: cliOldIcon,
+          },
           text: 'CLI',
           description: 'Neon in your terminal',
           to: LINKS.cliReference,
         },
         {
-          icon: onDemandStorageIcon,
+          icon: {
+            new: onDemandStorageIcon,
+            old: onDemandStorageOldIcon,
+          },
           text: 'On-demand storage',
           description: 'Custom-built for the cloud',
           to: LINKS.onDemandStorage,
         },
         {
-          icon: aiIcon,
+          icon: {
+            new: aiIcon,
+            old: aiOldIcon,
+          },
           text: 'AI',
           description: 'Neon as your vector store',
           to: LINKS.ai,
@@ -68,31 +88,46 @@ export default {
       text: 'Company',
       items: [
         {
-          icon: aboutUsIcon,
+          icon: {
+            new: branchingIcon,
+            old: aboutUsOldIcon,
+          },
           text: 'About us',
           description: 'Meet the team',
           to: LINKS.aboutUs,
         },
         {
-          icon: careersIcon,
+          icon: {
+            new: autoscalingIcon,
+            old: careersOldIcon,
+          },
           text: 'Careers',
           description: 'Become a member',
           to: LINKS.careers,
         },
         {
-          icon: partnersIcon,
+          icon: {
+            new: cliIcon,
+            old: partnersOldIcon,
+          },
           text: 'Partners',
           description: 'Become a partner',
           to: LINKS.partners,
         },
         {
-          icon: caseStudiesIcon,
+          icon: {
+            new: onDemandStorageIcon,
+            old: caseStudiesOldIcon,
+          },
           text: 'Case studies',
           description: 'Explore customer stories',
           to: LINKS.caseStudies,
         },
         {
-          icon: EnterpriseIcon,
+          icon: {
+            new: aiIcon,
+            old: EnterpriseOldIcon,
+          },
           text: 'Enterprise',
           description: 'Scale & grow',
           to: LINKS.enterprise,
