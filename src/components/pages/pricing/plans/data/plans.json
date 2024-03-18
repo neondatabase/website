@@ -51,7 +51,7 @@
       "rows": "2",
       "feature": {
         "title": "Compute",
-        "subtitle": "Based on 0.25 vCPU, 1GB RAM"
+        "subtitle": "Compute-hours = CPU size x active time"
       },
       "free": {
         "title": "187.5 CU-hours per month",
@@ -110,16 +110,13 @@
         "title": "Compute Size"
       },
       "free": {
-        "title": "Fixed at 0.25 CU",
-        "info": "0.25 vCPU, 1 GB RAM"
+        "title": "Fixed at 0.25 CPU, 1 GB RAM",
       },
       "launch": {
-        "title": "Up to 4 CU",
-        "info": "4 vCPU, 16 GB RAM"
+        "title": "Up to 4 CPU, 16 GB RAM",
       },
       "scale": {
-        "title": "Up to 8 CU",
-        "info": "8 vCPU, 32 GB RAM"
+        "title": "Up to 8 CPU, 32 GB RAM",
       },
       "enterprise": {
         "title": "Larger sizes",
@@ -161,9 +158,9 @@
       "feature": {
         "title": "Region Availability"
       },
-      "free": "<a href='/docs/introduction/regions'>All</a>",
-      "launch": "<a href='/docs/introduction/regions'>All</a>",
-      "scale": "<a href='/docs/introduction/regions'>All</a>",
+      "free": "<a href='/docs/introduction/regions'>All supported</a>",
+      "launch": "<a href='/docs/introduction/regions'>All supported</a>",
+      "scale": "<a href='/docs/introduction/regions'>All supported</a>",
       "enterprise": "Custom"
     },
 
