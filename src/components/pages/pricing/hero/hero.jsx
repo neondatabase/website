@@ -47,7 +47,7 @@ const items = [
       },
       { title: '300 compute-hours included', info: 'Additional usage: $0.16 per compute-hour' },
       { title: 'Standard support' },
-      { title: 'Autoscaling from 0 to 4 CU', info: '4 vCPU, 16 GB RAM' },
+      { title: 'Autoscaling from 0 to 4 vCPU', info: '4 vCPU, 16 GB RAM' },
       { title: 'Ephemeral Read Replicas' },
       { title: 'IP Allow Rules', disabled: true },
     ],

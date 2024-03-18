@@ -6,19 +6,19 @@ import Item from './item';
 const items = [
   {
     question: 'How does billing work?',
-    answer: `In Neon, you are charged a monthly fee (corresponding to your pricing plan) plus any additional compute and/or storage usage over the limits included in your plan. For example, the Launch plan includes 300 CU-hours of compute usage;  if you consume 320 CU-hours in a month, you will be billed additionally for 20 CU-hours.`,
+    answer: `In Neon, you are charged a monthly fee (corresponding to your pricing plan) plus any additional compute and/or storage usage over the limits included in your plan. For example, the Launch plan includes 300 compute-hours of compute usage;  if you consume 320 compute-hours in a month, you will be billed additionally for 20 compute-hours.`,
   },
   {
     question: 'When will I be billed?',
     answer: `Neon bills for the past month's usage at the beginning of each calendar month. For more information, see <a href="/docs/introduction/manage-billing">Manage billing</a>.`,
   },
   {
-    question: 'What is CU and CU-hours?',
-    answer: `Compute units (or CU) measure compute capacity in Neon. 1 CU = 1 vCPU, 4 GB RAM. CU-hours measure compute usage in Neon; it is short of “number of CUs consumed in an hour”. (Remember, Neon is serverless Postgres—it is able to scale dynamically with your load when you enable <a href="/docs/introduction/autoscaling">autoscaling</a>).`,
+    question: 'What is a compute-hour?',
+    answer: `Compute-hours is the metric for compute usage in Neon. It is short for “compute capacity consumed in a given hour”. The quick math: Compute-hours = CPU used x active time.`,
   },
   {
-    question: 'How many CU-hours it’ll take to run my workload?',
-    answer: `You can get a good idea by estimating how many hours your databases run and at which capacity. For example: imagine you’re running a 2 CPU, 8 GB RAM database for 2 hours a day (or 62 hours per month). This equals [2 CU * 62 hours] = 124 CU-hours per month.`,
+    question: 'How many compute-hours it’ll take to run my workload?',
+    answer: `You can get a good idea by estimating how many hours your databases run and at which capacity. For example: imagine you’re running a 2 CPU, 8 GB RAM database for 2 hours a day (or 62 hours per month). This equals [2 CU * 62 hours] = 124 compute-hours per month.`,
   },
   {
     question: 'How can I predict my costs with autoscaling?',
