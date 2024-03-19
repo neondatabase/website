@@ -26,7 +26,7 @@ const TopBar = () => {
         ▲ Vercel Integration now GA - Create a database branch for every preview deployment,
         automatically.
       </span>
-      <span className="inline-flex items-center text-sm font-bold sm:hidden">
+      <span className="inline-flex items-center text-sm font-bold md:hidden">
         <span>Learn here</span>
         <ArrowRightIcon className="ml-1" />
       </span>
