@@ -1,17 +1,87 @@
 ---
-title: Performance optimization in Postgres
-subtitle: Learn about strategies for optimizing Postgres performance in Neon
+title: Optimizing query performance
+subtitle: Learn about strategies for optimizing Postgres query performance in Neon
 enableTableOfContents: true
 ---
 
+Many factors can impact query performance in Postgres, ranging from insufficient indexing or database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, where do you start? This topic outlines several strategies for optimizing query performance in Postgres.
 
-Many factors can impact the performance of your Postgres database, ranging from insufficient indexing or database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, where do you start? This topic outlines several strategies for optimizing the performance of your Postgres database.
+## Use indexes
 
-## Collecting statistics
+Indexes are crucial for query performance, especially in applications dealing with large tables. They significantly reduce the time required to access data, which can be the difference between a slow application and a fast one.
 
-A good first step is to make sure you are gathering statistics that can aid in identifying performance issues.
+Suppose that you have a large `users` table like this with several million rows:
 
-In addition to the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html), where Postgres collects and reports information about server activity, Neon supports the [pg_stat_statements](/docs/extensions/pg_stat_statements) extension for monitoring and analyzing SQL query performance.
+```sql
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    last_login TIMESTAMP WITH TIME ZONE
+);
+```
+
+If you frequently search for users by their username or email, you might want to create indexes on those columns to improve search performance:
+
+```sql
+CREATE INDEX idx_users_username ON users(username);
+CREATE INDEX idx_users_email ON users(email);
+```
+
+### View table indexes
+
+You can use the following query to view the indexes defined on a table. You should at least have an index defined on your primary key, and if you know the columns used in your queries, consider adding indexes to those too. However, note that indexes are best suited to columns with high cardinality (a high number of unique values). Postgres might ignore indexes defined on low-cardinality columns, in which case you would be consuming storage space unnecessarily.  
+
+```sql
+SELECT
+    tablename AS table_name,
+    indexname AS index_name,
+    indexdef AS index_definition
+FROM
+    pg_indexes
+WHERE
+    tablename = 'your_table_name' -- replace 'your_table_name' with the actual table name
+    AND schemaname = 'public'; -- adjust the schema name as necessary
+```
+
+### Check for missing indexes
+
+This query checks for potential indexing opportunities in a given schema by comparing sequential scans and index scans. The query suggests whether to "Check indexes" based on whether the number of sequential scans exceeds the number of index scans (if any). It prioritizes tables with a higher discrepancy between sequential and index scans and limits the results to the top 10 tables for a quick review.
+
+```sql
+SELECT
+  relname AS table_name,
+  CASE
+    WHEN seq_scan > COALESCE(idx_scan, 0) THEN 'Check indexes'
+    ELSE 'OK'
+  END AS recommendation
+FROM
+  pg_stat_user_tables
+WHERE
+  schemaname = 'public' -- Adjust as necessary for your schema
+ORDER BY
+  (seq_scan - COALESCE(idx_scan, 0)) DESC
+LIMIT 10; -- Adjust as necessary for the number of results
+```
+
+A "Check indexes" recommendation appears similar to the following:
+
+```sql
+ table_name | recommendation 
+------------+----------------
+ users      | Check indexes
+```
+
+<Admonition type="note">
+Please note that statistics are cumulative for the lifetime of your compute instance. The number of index scans has to exceed the number of sequential scans before the missing index check will report "OK" instead of "Check indexes". So, if you add a missing index and rerun a query, don't expect the recommendation to change immediately.
+</Admonition>
+
+The `PgHero` utility also supports identifying missing indexes. See [PgHero](/docs/introduction/monitoring#pghero). 
+
+## Collect query statistics
+
+A good first step is to make sure you are gathering statistics that can aid in identifying performance issues. Neon supports the [pg_stat_statements](/docs/extensions/pg_stat_statements) extension for monitoring and analyzing SQL query performance.
 
 The [pg_stat_statements](/docs/extensions/pg_stat_statements) extension provides aggregated query statistics for executed SQL statements. The data collected includes the number of query executions, total execution time, rows returned by the query, and much more. 
 
@@ -20,8 +90,6 @@ This extension isn’t installed by default, so your first step is to install it
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
-
-You can do this from the Neon SQL Editor or a Postgres client such as `psql` that is connected to your database.
 
 Once installed, you can run the following query to view the types of data that `pg_stat_statements` collects:
 
@@ -59,7 +127,7 @@ For a description of each metric, refer to the official Postgres documentation: 
 Generally, `pg_stat_statements` is found to have a very small performance impact, and many users will keep it installed so that it’s available when needed. For a discussion on this topic, please see this [Database Administrators Stack Exchange article](https://dba.stackexchange.com/questions/303503/what-is-the-performance-impact-of-pg-stat-statements).
 </Admonition>
 
-After allowing time for statistics to be collected, you can run queries like these to identify queries that are candidates for optimization:
+After allowing time for statistics collection, you can run queries like these to identify queries that are candidates for optimization:
 
 ### Most frequently executed queries
 
@@ -111,6 +179,51 @@ LIMIT
     100;
 ```
 
+## Use EXPLAIN ANALYZE
+
+The EXPLAIN statement provides the execution plan that the Postgres planner creates for a query.
+
+The plan shows how tables that are accessed by a query are scanned — by an index scan, sequential scan, etc. If the query access more than one table, the plan shows what join algorithm is used.
+
+The key information provided by EXPLAIN includes the start-cost before the first row can be returned and the total cost to return the result set.
+
+### How to use EXPLAIN
+
+To use `EXPLAIN`, prefix it to your SQL query like so:
+
+```sql
+EXPLAIN SELECT * FROM your_table WHERE condition = 'value';
+```
+
+This command will not return the query's result set but will instead provide a detailed report on how the query was executed, including the time taken for each operation.
+
+### Interpreting the output
+
+The output of `EXPLAIN ANALYZE` can be complex, but there are key elements to focus on:
+
+- **Query Plan**: This shows the steps PostgreSQL took to execute your query, such as sequential scans, index scans, joins, etc.
+- **Execution Time**: The total time taken to execute the query.
+- **Costs**: Estimated startup cost and total cost to execute the plan, which helps in comparing the efficiency of different execution strategies.
+- **Rows**: The number of rows processed at each stage of the query.
+- **Actual Time**: Shows the actual time spent on each node of the plan, helping to pinpoint slow operations.
+
+### Tips for optimization
+
+1. **Look for Sequential Scans**: If your query involves large tables, sequential scans can be slow. Consider using indexes to speed up data retrieval.
+2. **Analyze Joins**: Make sure that joins are using indexes. If not, it might be beneficial to add indexes or revise the join conditions.
+3. **Optimize Filters**: Check if the conditions in the WHERE clause can be optimized. Using efficient indexes can dramatically reduce the search space.
+4. **Subquery Performance**: Subqueries can sometimes be inefficient. Look for opportunities to rewrite them as joins or to simplify them.
+5. **Use ANALYZE**: Regularly run the ANALYZE command on your database. This updates statistics, helping Postgres make better planning decisions.
+
+### Additional resources
+
+Optimizing queries using `EXPLAIN ANALYZE` is a large topic, with many resources you can draw upon. Here are a few of those resources to help you get started:
+
+- [Using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html), in the official PostgreSQL documentation:
+- [Using EXPLAIN](https://wiki.postgresql.org/wiki/Using_EXPLAIN). This topic provides links to a variety of resources and tutorials.
+- [Postgres Explain Visualizer](https://www.pgexplain.dev/)
+
+
 ## Cache optimization
 
 A cache hit ratio tells you what percentage of queries are served from memory. Queries not served from memory retrieve data from disk, which is more costly and can result in slower query performance.
@@ -152,45 +265,7 @@ Remember that the local file cache statistics are for the entire compute, not sp
 The cache hit ratio query is based on statistics that represent the lifetime of your Postgres instance, from the last time you started it until the time you ran the query. Statistics are lost when your instance stops and gathered again from scratch when your instance restarts. In Neon, your compute runs Postgres, so starting and stopping a compute also starts and stops Postgres. Additionally, you'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you restart Postgres. In this case, you should run a representative workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the [pg_prewarm](/docs/extensions/pg_prewarm) extension to pre-load data into memory after a restart. 
 </Admonition>
 
-## Optimizing queries with EXPLAIN ANALYZE
 
-Using `EXPLAIN ANALYZE` in Postgres can help you optimize queries by providing insights into how the database executes a query. It shows the execution plan of an SQL query. This plan details how the PostgreSQL planner and optimizer interpret your query, including the paths taken to retrieve the data, the cost of each operation, and the time each step takes, which can help you identify bottlenecks or inefficiencies in query execution.
-
-### How to use EXPLAIN ANALYZE
-
-To use `EXPLAIN ANALYZE`, prefix it to your SQL query like so:
-
-```sql
-EXPLAIN ANALYZE SELECT * FROM your_table WHERE condition = 'value';
-```
-
-This command will not return the query's result set but will instead provide a detailed report on how the query was executed, including the time taken for each operation.
-
-### Interpreting the output
-
-The output of `EXPLAIN ANALYZE` can be complex, but there are key elements to focus on:
-
-- **Query Plan**: This shows the steps PostgreSQL took to execute your query, such as sequential scans, index scans, joins, etc.
-- **Execution Time**: The total time taken to execute the query.
-- **Costs**: Estimated startup cost and total cost to execute the plan, which helps in comparing the efficiency of different execution strategies.
-- **Rows**: The number of rows processed at each stage of the query.
-- **Actual Time**: Shows the actual time spent on each node of the plan, helping to pinpoint slow operations.
-
-### Tips for optimization
-
-1. **Look for Sequential Scans**: If your query involves large tables, sequential scans can be slow. Consider using indexes to speed up data retrieval.
-2. **Analyze Joins**: Make sure that joins are using indexes. If not, it might be beneficial to add indexes or revise the join conditions.
-3. **Optimize Filters**: Check if the conditions in the WHERE clause can be optimized. Using efficient indexes can dramatically reduce the search space.
-4. **Subquery Performance**: Subqueries can sometimes be inefficient. Look for opportunities to rewrite them as joins or to simplify them.
-5. **Use ANALYZE**: Regularly run the ANALYZE command on your database. This updates statistics, helping Postgres make better planning decisions.
-
-### Additional resources
-
-Optimizing queries using `EXPLAIN ANALYZE` is a large topic, with many resources you can draw upon. Here are a few of those resources to help you get started:
-
-- [Using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html), in the official PostgreSQL documentation:
-- [Using EXPLAIN](https://wiki.postgresql.org/wiki/Using_EXPLAIN). This topic provides links to a variety of resources and tutorials.
-- [Postgres Explain Visualizer](https://www.pgexplain.dev/)
 
 ## Checking for table or index bloat
 
@@ -225,101 +300,8 @@ To remove index bloat, you can use the [REINDEX](https://www.postgresql.org/docs
 
 Generally, you’ll want to perform these types of operations when it will have the least impact, or you’ll want to plan some maintenance downtime for a clean-up. 
 
-## Indexing
 
-Indexes are crucial for enhancing database performance, especially in applications dealing with large volumes of data. They significantly reduce the time required to access data, which can be the difference between a slow application and a fast one.
 
-### Creating an index
-
-Let's take a simple table like this one:
-
-```sql
-CREATE TABLE users (id serial, name text);
-```
-
-You might want to query users by id to find information or to check if a user exists. For example:
-
-```sql
-SELECT * FROM users WHERE id = '2';
-```
-
-If you run a query like this without an index, the response time will be high because the query will scan all records in the table. You can verify this by inserting some data into our exmaple table. The following queries insert 5.5 million rows:
-
-```sql
-INSERT INTO users (name) SELECT 'alex' FROM generate_series(1,2750000);
-INSERT INTO users (name) SELECT 'dana' FROM generate_series(1,2750000);
-```
-
-After inserting this much data, it's a good idea to run `ANALYZE` to ensure that optimizer statistics are up to date. The optimizer requires the statistics to determine the best query plan, including whether or not to use an index. We'll run `ANALYZE VERBOSE` on the `user` table to see what it does.
-
-```sql
-INFO:  analyzing "public.users"
-INFO:  "users": scanned 29730 of 29730 pages, containing 5500000 live rows and 0 dead rows; 30000 rows in sample, 5500000 estimated total rows
-ANALYZE
-```
-
-As you can see below, without any index defined, the query will be executed using a `Parallel Seq Scan`, and the execution time for that plan is very high.
-
-```sql
-EXPLAIN ANALYZE SELECT * FROM users WHERE id = '2';
-                                                       QUERY PLAN                                                       
-Gather  (cost=1000.00..59375.93 rows=1 width=9) (actual time=2.087..5952.280 rows=1 loops=1)
-   Workers Planned: 2
-   Workers Launched: 2
-   ->  Parallel Seq Scan on users  (cost=0.00..58375.83 rows=1 width=9) (actual time=3961.255..5943.782 rows=0 loops=3)
-         Filter: (id = 2)
-         Rows Removed by Filter: 1833333
- Planning Time: 2.960 ms
- Execution Time: 5952.310 ms
-(8 rows)
-```
-
-Let's compare after creating an index:
-
-```sql
-CREATE INDEX idx_user_id on users (id);
-```
-
-Now, try the explain query once more. As shown below, the scan is performed `using idx_user_id on users` and the execution time is significantly better.
-
-```sql
-EXPLAIN ANALYZE SELECT * FROM users WHERE id = '2';
-                                                    QUERY PLAN                                                     
--------------------------------------------------------------------------------------------------------------------
- Index Scan using idx_user_id on users  (cost=0.43..8.45 rows=1 width=9) (actual time=0.034..0.035 rows=1 loops=1)
-   Index Cond: (id = 2)
- Planning Time: 3.634 ms
- Execution Time: 0.064 ms
-(4 rows)
-```
-
-The example above demonstrates how indexes can improve query performance. However, it is important to remember that indexes are not free. They take up storage space and can impact write performance, as you now need to write to the index in addition to the table when you modify data in your table. To compare the size of your table to the size of your index, you can run the following commands:
-
-Table size:
-
-```sql
-\dt+
-                                     List of relations
- Schema | Name  | Type  |    Owner     | Persistence | Access method |  Size  | Description 
---------+-------+-------+--------------+-------------+---------------+--------+-------------
- public | users | table | neondb_owner | permanent   | heap          | 232 MB | 
-```
-
-Index size:
-
-```sql
-\di+
-                                            List of relations
- Schema |    Name     | Type  |    Owner     | Table | Persistence | Access method |  Size  | Description 
---------+-------------+-------+--------------+-------+-------------+---------------+--------+-------------
- public | idx_user_id | index | neondb_owner | users | permanent   | btree         | 118 MB | 
-```
-
-As you can see above, the index is more than half the table size. The amount of storage required for your indexes should always be considered when evaluating whether a particular index is worth the performance benefit.
-
-### When to use indexes
-
-- 
 
 
 ## Right-sizing your compute
