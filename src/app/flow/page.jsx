@@ -4,7 +4,7 @@ import getMetadata from 'utils/get-metadata';
 
 export async function generateMetadata() {
   return getMetadata({
-    title: 'GitOps for Databases',
+    title: 'GitOps for Databases - Neon',
     description: 'Bring your data to your GitHub workflow to streamline development',
     type: 'article',
   });
