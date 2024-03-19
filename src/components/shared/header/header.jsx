@@ -164,7 +164,10 @@ const Header = ({
               )}
 
               <Burger
-                className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
+                className={clsx(
+                  'relative -mr-1 -mt-1',
+                  isThemeBlack ? 'text-white' : 'text-black dark:text-white'
+                )}
                 isToggled={isMobileMenuOpen}
                 onClick={handleBurgerClick}
               />

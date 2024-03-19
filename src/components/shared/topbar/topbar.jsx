@@ -23,7 +23,7 @@ const TopBar = () => {
 
   return (
     <Link
-      className="safe-paddings relative z-40 flex h-9 w-full items-center justify-center overflow-hidden bg-gray-new-8 px-4 py-2.5 leading-none transition-colors duration-200 hover:bg-gray-new-10 xs:h-auto"
+      className="safe-paddings relative z-40 flex h-9 w-full items-center justify-center overflow-hidden bg-gray-new-8 px-4 py-2.5 leading-none transition-colors duration-200 hover:bg-gray-new-10"
       to="https://console.neon.tech/signup"
       onClick={() => {
         sendGtagEvent('click_announcement_banner');

@@ -32,6 +32,8 @@ const styles = {
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
     'gray-10': 'bg-gray-new-10 text-white hover:bg-gray-new-20',
     'gray-15': 'bg-gray-new-15 text-white hover:bg-gray-new-20',
+    'gray-15-outline':
+      'border bg-transparent border-gray-new-15 text-white hover:border-gray-new-30',
   },
 };
 

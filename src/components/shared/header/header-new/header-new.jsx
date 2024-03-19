@@ -1,38 +1,20 @@
-'use client';
-
 import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
-import useMedia from 'react-use/lib/useMedia';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
 import Link from 'components/shared/link';
-import MobileMenu from 'components/shared/mobile-menu';
+import MobileMenuNew from 'components/shared/mobile-menu/mobile-menu-new';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import arrowIcon from 'icons/header/arrow-right.svg';
 import logoWhite from 'images/logo-white-28.svg';
 
-import Burger from '../burger';
-
 const HeaderNew = ({ className = null, theme }) => {
   const isThemeBlack = theme === 'black-pure';
-  const headerRef = useRef(null);
-  const isMobile = useMedia('(max-width: 1023px)', false);
-
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const handleMobileMenuOutsideClick = () => {
-    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
-  };
-
-  const handleBurgerClick = () => {
-    setIsMobileMenuOpen((isMobileMenuOpen) => !isMobileMenuOpen);
-  };
 
   return (
     <>
@@ -41,7 +23,6 @@ const HeaderNew = ({ className = null, theme }) => {
           'safe-paddings absolute left-0 right-0 top-0 z-40 h-16 w-full bg-black-pure lg:relative',
           className
         )}
-        ref={headerRef}
       >
         <Container className="flex items-center justify-between py-4" size="1216">
           <div className="flex items-center gap-x-16">
@@ -134,10 +115,10 @@ const HeaderNew = ({ className = null, theme }) => {
             </nav>
           </div>
 
-          <div className="flex items-center gap-x-6 lg:hidden">
+          <div className="flex items-center gap-x-6 lg:pr-12 md:hidden">
             <GithubStarCounter isThemeBlack isNewDesign />
             <Link
-              className="text-[13px] font-semibold leading-none tracking-extra-tight"
+              className="text-[13px] font-semibold leading-none tracking-extra-tight lg:hidden"
               to={LINKS.login}
               theme="white"
             >
@@ -145,29 +126,16 @@ const HeaderNew = ({ className = null, theme }) => {
             </Link>
 
             <Button
-              className="h-8 px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200"
+              className="h-8 px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
               to={LINKS.signup}
               theme="primary"
             >
               Sign Up
             </Button>
           </div>
-          {isMobile && (
-            <div className="flex items-center gap-x-3 md:gap-x-5">
-              <Burger
-                className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
-                isToggled={isMobileMenuOpen}
-                onClick={handleBurgerClick}
-              />
-            </div>
-          )}
         </Container>
       </header>
-      <MobileMenu
-        isOpen={isMobileMenuOpen}
-        headerRef={headerRef}
-        onOutsideClick={handleMobileMenuOutsideClick}
-      />
+      <MobileMenuNew isThemeBlack={isThemeBlack} />
     </>
   );
 };
