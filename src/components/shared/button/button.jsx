@@ -17,7 +17,9 @@ const styles = {
     secondary: 'bg-black text-white hover:bg-[#292929] disabled:bg-[#292929]',
     tertiary: 'bg-transparent text-white border border-white hover:border-primary-2',
     quaternary: 'bg-white text-black border border-black hover:border-primary-2',
+    'white-filled': 'bg-white text-black hover:bg-gray-6',
     'white-outline': 'bg-transparent text-white border border-white hover:border-primary-2',
+    'gray-2-outline': 'bg-gray-2 border border-gray-3 text-white hover:border-white',
     'gray-outline':
       'text-black border-gray-new-90 bg-gray-new-98 dark:bg-transparent dark:text-white border dark:border-gray-new-30 dark:hover:border-white hover:border-gray-new-70',
     'gray-dark-outline': 'bg-gray-new-10 text-white border border-[#37393D] hover:border-white',

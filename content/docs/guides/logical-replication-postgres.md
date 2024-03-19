@@ -6,6 +6,8 @@ isDraft: false
 updatedOn: '2024-02-19T18:57:12.559Z'
 ---
 
+<LRNotice/>
+
 Neon's logical replication feature allows you to replicate data from Neon to external subscribers. This guide shows you how to stream data from a Neon Postgres database to an external Postgres database.
 
 You will learn how to enable logical replication in Neon, create a publication, and configure an external Postgres database as a subscriber.

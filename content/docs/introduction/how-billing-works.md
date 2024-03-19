@@ -39,11 +39,11 @@ The [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/pl
 
 |                | Launch   | Scale    |
 |----------------|----------|----------|
+| Extra Storage  | &check;  | &check;  |
 | Extra Compute  | &check;  | &check;  |
 | Extra Projects |          | &check;  |
-| Extra Storage  |          | &check;  |
 
-The Launch plan only supports extra compute usage. If you are on the Launch plan and require extra projects or storage, you must upgrade to the Scale plan, which provides higher storage and project allowances. Once on the Scale plan, you have access to all extra usage types (storage, compute, and project) should you require it.
+The Launch plan does not support extra projects. If you are on the Launch plan and require extra projects, you must upgrade to the Scale plan, which provides higher project allowances.
 
 ## How does extra usage work?
 
@@ -51,7 +51,11 @@ Taking advantage of extra usage requires no user action. Extra usage, if support
 
 ### Storage
 
-Extra storage is available with the [Scale](/docs/introduction/plans##scale) plan. Extra storage is billed in increments of 10 GiB at $15 per increment. For example, the Scale plan includes an allowance of 50 GiB in the plan's monthly fee. If you exceed 50 GiB of storage, you are automatically billed for an extra storage increment of 10 GiB at $15 per increment. If you exceed 60 GiB, you are billed for 2 increments of 10 GiB (an extra $30), and so on. 
+Extra storage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans:
+- On the Launch plan, extra storage is billed for in units of 2 GiB at $3.5 each
+- On the Scale plan, extra storage is billed for in units of 10 GiB at $15 each
+
+For example, the Launch plan includes an allowance of 10 GiB in the plan's monthly fee. If you exceed 10 GiB of storage, you are automatically billed for an extra storage unit of 2 GiB at $3.5 per unit. If you exceed 12 GiB, you are billed for 2 units of 2 GiB (an extra $7), and so on. It works the same way on the Storage plan, but with 10 GiB units of storage at $15 per unit.
 
 ### Compute
 
@@ -93,17 +97,18 @@ Note the base monthly fee associated with your plan from the list above.
 Estimate your monthly usage in the following areas to see if any "extra usage" is required beyond what's included in your plan.
 
 - **Storage (GiB)**: How much storage do you expect to use?  Storage includes the size of your data and a history of changes to support features like branching and point-in-time restore. For more information, see [Storage](/docs/introduction/usage-metrics#storage).
-- **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Noen supports compute sizes ranging from .25 vCPU to 8 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute hour usage.
+- **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Neon supports compute sizes ranging from .25 vCPU to 8 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute hour usage.
 - **Projects**: How many projects you will be running? Neon recommends a project per application or client.
 
 ### Step 4: Calculate extra usage fees (if applicable)
 
-Each [plan](/docs/introduction/plans) comes with a base allowance of **Storage**, **Compute**, and **Projects**. Based on the plan your usage estimates, calculate any extra fees for exceeding your plan's allowances.
+Each [plan](/docs/introduction/plans) comes with base allowances for **Storage**, **Compute**, and **Projects**. Based on the plan your usage estimates, calculate any extra fees for exceeding your plan's allowances.
 
 #### For the Launch plan:
 
-The Launch plan supports extra compute usage. If you need extra storage or projects, you'll need to move up to the Scale plan.
+The Launch plan supports extra **Storage** and **Compute**. If you need extra projects, you'll need to move up to the Scale plan.
 
+- **Extra Storage**: If you exceed 10 GiB, extra storage is billed in units of 2 GiB at $3.5 per unit.
 - **Extra Compute**: If you exceed 300 compute hours, extra compute is billed at $0.04/hour.
 
 #### For the Scale plan:
@@ -125,10 +130,12 @@ Total Monthly Estimate = Monthly Base Fee + Extra Storage Fee + Extra Compute Fe
 **Launch plan example**:
 
 - Base fee: $19
+- Storage usage: 14 GiB (4 GiB over the allowance)
 - Compute usage: 350 hours (50 hours over the allowance)
+- Extra storage fee: 2 * $3.5 = $7
 - Extra compute fee: 50 hours * $0.04 = $2
 
-_Total estimate_: $19 + $2 = $21 per month
+_Total estimate_: $19 + $7 + $2 = $28 per month
 
 **Scale plan example**:
 
@@ -179,6 +186,6 @@ On the Free Tier, the primary branch compute is a 0.25 vCPU compute that is alwa
 
 **What about extra usage?**
 
-The Launch plan supports extra compute usage. The Scale paln supports extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. See [Extra usage](#extra-usage) for details. If extra usage occurs, it is reflected in your monthly allowance on the **Billing** page. For example, if you allocate an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page.
+The Launch plan supports extra compute usage. The Scale plan supports extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. See [Extra usage](#extra-usage) for details. If extra usage occurs, it is reflected in your monthly allowance on the **Billing** page. For example, if you allocate an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page.
 
 <NeedHelp/>

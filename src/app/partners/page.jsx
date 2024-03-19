@@ -1,4 +1,5 @@
 import Apply from 'components/pages/partners/apply';
+import Collaboration from 'components/pages/partners/collaboration';
 import Hero from 'components/pages/partners/hero';
 import Integration from 'components/pages/partners/integration';
 import Plans from 'components/pages/partners/plans';
@@ -49,12 +50,11 @@ const logos = [
   'illa',
   'octolis',
   'cloudflare',
-  'airplane',
   'wundergraph',
   'fabric-io',
   'snaplet',
   'fl0',
-  'dynaboard',
+  'encore',
 ];
 
 const PartnersPage = () => (
@@ -76,6 +76,7 @@ const PartnersPage = () => (
       items={items}
       isGradientLabel
     />
+    <Collaboration />
     <Testimonial
       className="mt-[200px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
       quote="By partnering with Neon, Vercel’s frontend platform is now the end&#8209;to&#8209;end

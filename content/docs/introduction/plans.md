@@ -59,14 +59,14 @@ The Launch plan provides all of the resources, features, and support you need to
 | **Storage**                             | Up to 10 GiB of data storage                                  |
 | **Compute**                             | Up to  300 compute hours (1,200 _active hours_)/month for all computes in all projects |
 
-Launch plan users can access extra compute hours beyond the 300 compute hours/month included in the Launch plan. Extra compute hours are billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour cost.
+Launch plan users can access extra compute hours beyond the 300 compute hours/month included in the Launch plan. Extra compute hours are billed automatically.
 
 In addition, Launch plan users have access to the following Neon features:
 
 - [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** or never).
 - [Advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, and 60+ Postgres extensions.
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **7 days** in the past, time travel connections, and more.
-- [Extra usage](/docs/introduction/how-billing-works#extra-usage): Launch plan users can access extra compute usage, which is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute cost.
+- [Extra usage](/docs/introduction/how-billing-works#extra-usage): Launch plan users can access extra compute and storage usage, which is billed automatically.
 - [Standard support](/docs/introduction/support): Launch plan users have access to **Standard** Neon support, which offers access to the Neon Support team via support tickets.
 
 ### Scale
@@ -86,7 +86,7 @@ In addition, Scale plan users have access to the following Neon features:
 - [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** or never).
 - [All advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions.
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **30 days** in the past, time travel connections, and more.
-- [Extra usage](/docs/introduction/how-billing-works#extra-usage): Scale plan users can access extra compute and storage usage, which is billed automatically. Please refer to our [pricing](https://neon.tech/pricing) page for the per-hour compute and extra storage prices.
+- [Extra usage](/docs/introduction/how-billing-works#extra-usage): Scale plan users can access extra compute and storage usage, which is billed automatically.
 - [Priority support](/docs/introduction/support): Scale plan users have access to **Priority** Neon support, which offers _priority_ access to the Neon Support team via support tickets.
 
 ### Enterprise

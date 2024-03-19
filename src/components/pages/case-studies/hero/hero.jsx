@@ -2,21 +2,19 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
+import GradientCard from 'components/shared/gradient-card';
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
 const CardItem = ({ title, description, logo, post, index }) => (
-  <li className="relative rounded-xl">
-    <span className="absolute -inset-0.5 rounded-xl bg-[linear-gradient(150deg,rgba(92,97,101,1)0%,rgba(255,255,255,0.02)50%,rgba(30,31,33,1)100%)]" />
-    <Link
-      className="group relative z-10 flex h-full flex-col justify-start overflow-hidden rounded-xl px-8 pb-10 pt-9 md:p-7 md:pb-8"
+  <li>
+    <GradientCard
+      className="px-8 pb-10 pt-9 md:p-7 md:pb-8"
+      as={Link}
       to={`${LINKS.blog}/${post.slug}`}
     >
-      <span className="absolute inset-0 bg-[radial-gradient(162.08%_141.42%_at_0%_0%,rgba(48,50,54,0.20)0%,rgba(48,50,54,0.00)48.97%),linear-gradient(165deg,#1A1C1E_6.13%,#111213_75.96%)] opacity-100 transition-opacity duration-300 group-hover:opacity-0" />
-      <span className="absolute inset-0 bg-[radial-gradient(162.08%_141.42%_at_0%_0%,rgba(58,60,64,0.50)0%,rgba(58,60,64,0.00)48.97%),linear-gradient(165deg,#2C2E32_6.13%,#18191B_75.96%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      <span className="absolute inset-0 bg-[url('/images/noise.png')] bg-cover opacity-40" />
-      <div className="relative z-10 flex h-full flex-col justify-start">
+      <div className="flex h-full flex-col">
         <Image
           className="xl:h-12 xl:w-fit"
           src={logo.mediaItemUrl}
@@ -33,7 +31,7 @@ const CardItem = ({ title, description, logo, post, index }) => (
           <ArrowIcon className="ml-1" />
         </div>
       </div>
-    </Link>
+    </GradientCard>
   </li>
 );
 
