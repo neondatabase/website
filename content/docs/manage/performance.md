@@ -115,24 +115,7 @@ LIMIT
 
 A cache hit ratio tells you what percentage of queries are served from memory. Queries not served from memory retrieve data from disk, which is more costly and can result in slower query performance.
 
-In Postgres, you can query the cache hit ratio with an SQL statement similar to this one, which looks for shared buffer block hits.
-
-```sql
-SELECT 
-  sum(heap_blks_read) as heap_read,
-  sum(heap_blks_hit)  as heap_hit,
-  sum(heap_blks_hit) / (sum(heap_blks_hit) + sum(heap_blks_read)) as ratio
-FROM 
-  pg_statio_user_tables;
-```
-
-In Neon, it’s a little different. Neon extends Postgres shared buffers with a local file cache (local to your Neon compute instance).To query your cache hit ratio in Neon, you need to look at local file cache hits instead of shared buffer hits. 
-
-### The neon_stat_file_cache view
-
-<Admonition type="note">
-This feature is not yet available in Neon. You can expect it to be released soon.
-</Admonition>
+In a standalone Postgres instance, you can query the cache hit ratio with an SQL statement that looks for `shared buffers` block hits. In Neon, it’s a little different. Neon extends Postgres shared buffers with a local file cache (local to your Neon compute instance). To query your cache hit ratio in Neon, you need to look at local file cache hits instead of shared buffer hits. 
 
 To enable querying local file cache statistics, Neon provides a `neon_stat_file_cache` view. To access this view, you must first install the neon extension:
 
@@ -161,12 +144,12 @@ file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses))
 
 If the `file_cache_hit_ratio` is below 99%, your working set (your most frequently accessed data) may not be adequately in memory. This could be due to your Postgres instance not having sufficient memory.
 
-If it’s a lack of memory, you can consider allocating more. In Postgres, this requires increasing your shared_buffers setting, assuming your system has memory resources to support it. In Neon, `shared_buffers` is always set to 128 MB. To increase available memory in Neon, you can increase the size of your compute. Larger computes have larger local file caches. For information about selecting an appropriate compute size in Neon, refer to [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+To increase available memory in Neon, you can increase the size of your compute. Larger computes have larger local file caches. For information about selecting an appropriate compute size in Neon, refer to [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 Remember that the local file cache statistics are for the entire compute, not specific databases or tables. A Neon compute runs an instance of Postgres, which can have multiple databases and tables.
 
 <Admonition type="note">
-The cache hit ratio query is based on statistics that represent the lifetime of your Postgres instance, from the last time you started it until the time you ran the query. Statistics are lost when your instance stops and gathered again from scratch when your instance restarts. In Neon, your compute runs Postgres, so starting and stopping a compute also starts and stops Postgres. Additionally, you'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you restart Postgres. In this case, you should run a representative workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the pg_prewarm extension to pre-load data into memory after a restart. 
+The cache hit ratio query is based on statistics that represent the lifetime of your Postgres instance, from the last time you started it until the time you ran the query. Statistics are lost when your instance stops and gathered again from scratch when your instance restarts. In Neon, your compute runs Postgres, so starting and stopping a compute also starts and stops Postgres. Additionally, you'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you restart Postgres. In this case, you should run a representative workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the [pg_prewarm](/docs/extensions/pg_prewarm) extension to pre-load data into memory after a restart. 
 </Admonition>
 
 ## Optimizing queries with EXPLAIN ANALYZE
@@ -248,56 +231,102 @@ Indexes are crucial for enhancing database performance, especially in applicatio
 
 ### Creating an index
 
-PostgreSQL supports different types of indexes, each designed for specific scenarios, but the most common type, used for queries involving comparisons (<, <=, =, >=, >), is the B-tree index. 
-
-Let's take this table for example: 
+Let's take a simple table like this one:
 
 ```sql
-CREATE TABLE customer (
-    customer_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    registration_date DATE NOT NULL
-);
+CREATE TABLE users (id serial, name text);
 ```
 
-You might want to query users by customer name to find customer information or to check if a user exists. For example:
+You might want to query users by id to find information or to check if a user exists. For example:
 
 ```sql
-SELECT * FROM customer WHERE name = 'John Doe';
+SELECT * FROM users WHERE id = '2';
 ```
 
-Creating a B-tree index on the name column can significantly improve the performance of these queries. The B-tree index is efficient for operations involving comparisons, making it an ideal choice for this scenario.
-
-WWithout an index, PostgreSQL must perform a full table scan to find records matching the query condition, which becomes increasingly inefficient as the size of the table grows.
-
-To create a B-tree index on the `name` column of the customer table, you use the `CREATE INDEX` statement as follows:
+If you run a query like this without an index, the response time will be high because the query will scan all records in the table. You can verify this by inserting some data into our exmaple table. The following queries insert 5.5 million rows:
 
 ```sql
-CREATE INDEX idx_customer_name ON customer (name);
+INSERT INTO users (name) SELECT 'alex' FROM generate_series(1,2750000);
+INSERT INTO users (name) SELECT 'dana' FROM generate_series(1,2750000);
 ```
 
-This SQL command instructs Postgres to create a B-tree index (the default type if not specified) named `idx_customer_name` on the name column in the customer table. Once created, Postgres will automatically use this index to speed up queries that search or filter by the name column.
-
-After creating the index, if you run a query like the one below to find a customer by name, Postgres can utilize the `idx_customer_name` index to quickly locate the record:
+After inserting this much data, it's a good idea to run `ANALYZE` to ensure that optimizer statistics are up to date. The optimizer requires the statistics to determine the best query plan, including whether or not to use an index. We'll run `ANALYZE VERBOSE` on the `user` table to see what it does.
 
 ```sql
-SELECT * FROM customer WHERE name = 'John Doe';
+INFO:  analyzing "public.users"
+INFO:  "users": scanned 29730 of 29730 pages, containing 5500000 live rows and 0 dead rows; 30000 rows in sample, 5500000 estimated total rows
+ANALYZE
 ```
 
-Instead of scanning the entire table, PostgreSQL can now navigate the B-tree structure to find 'John Doe' more efficiently.
-
-### Monitoring index usage
-
-To ensure that your index is being used, you can analyze query performance using the `EXPLAIN` command. By prefixing your query with `EXPLAIN`, Postgres will return a plan showing how the query will be executed, including whether the index is utilized:
+As you can see below, without any index defined, the query will be executed using a `Parallel Seq Scan`, and the execution time for that plan is very high.
 
 ```sql
-EXPLAIN SELECT * FROM customer WHERE name = 'John Doe';
+EXPLAIN ANALYZE SELECT * FROM users WHERE id = '2';
+                                                       QUERY PLAN                                                       
+Gather  (cost=1000.00..59375.93 rows=1 width=9) (actual time=2.087..5952.280 rows=1 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   ->  Parallel Seq Scan on users  (cost=0.00..58375.83 rows=1 width=9) (actual time=3961.255..5943.782 rows=0 loops=3)
+         Filter: (id = 2)
+         Rows Removed by Filter: 1833333
+ Planning Time: 2.960 ms
+ Execution Time: 5952.310 ms
+(8 rows)
 ```
 
-Look for the `Index Scan`` or `Bitmap Heap Scan` on `idx_customer_name` in the plan output, indicating that the index is effectively supporting the query.
+Let's compare after creating an index:
+
+```sql
+CREATE INDEX idx_user_id on users (id);
+```
+
+Now, try the explain query once more. As shown below, the scan is performed `using idx_user_id on users` and the execution time is significantly better.
+
+```sql
+EXPLAIN ANALYZE SELECT * FROM users WHERE id = '2';
+                                                    QUERY PLAN                                                     
+-------------------------------------------------------------------------------------------------------------------
+ Index Scan using idx_user_id on users  (cost=0.43..8.45 rows=1 width=9) (actual time=0.034..0.035 rows=1 loops=1)
+   Index Cond: (id = 2)
+ Planning Time: 3.634 ms
+ Execution Time: 0.064 ms
+(4 rows)
+```
+
+The example above demonstrates how indexes can improve query performance. However, it is important to remember that indexes are not free. They take up storage space and can impact write performance, as you now need to write to the index in addition to the table when you modify data in your table. To compare the size of your table to the size of your index, you can run the following commands:
+
+Table size:
+
+```sql
+\dt+
+                                     List of relations
+ Schema | Name  | Type  |    Owner     | Persistence | Access method |  Size  | Description 
+--------+-------+-------+--------------+-------------+---------------+--------+-------------
+ public | users | table | neondb_owner | permanent   | heap          | 232 MB | 
+```
+
+Index size:
+
+```sql
+\di+
+                                            List of relations
+ Schema |    Name     | Type  |    Owner     | Table | Persistence | Access method |  Size  | Description 
+--------+-------------+-------+--------------+-------+-------------+---------------+--------+-------------
+ public | idx_user_id | index | neondb_owner | users | permanent   | btree         | 118 MB | 
+```
+
+As you can see above, the index is more than half the table size. The amount of storage required for your indexes should always be considered when evaluating whether a particular index is worth the performance benefit.
+
+### When to use indexes
+
+- 
+
 
 ## Right-sizing your compute
+
+The size of your compute determines the amount of memory available to cache your frequently accessed data and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues. 
+
+For infomration about right-sizing your compute in Neon, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 ## Optimizing connections
 
