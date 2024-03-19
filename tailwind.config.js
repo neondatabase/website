@@ -1,5 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 const defaultTheme = require('tailwindcss/defaultTheme');
+/* eslint-disable import/no-extraneous-dependencies, global-require */
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   darkMode: 'class',
@@ -249,6 +251,20 @@ module.exports = {
     require('@headlessui/tailwindcss'),
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
+    }),
+
+    plugin(({ matchUtilities, theme }) => {
+      matchUtilities(
+        {
+          'border-image': (value) => ({
+            border: '1px solid transparent',
+            background: `${value.replaceAll(/(, ?[a-z]+-gradient)/g, ' border-box$1')} border-box`,
+            mask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
+            maskComposite: 'exclude',
+          }),
+        },
+        { values: theme('backgroundImage') }
+      );
     }),
   ],
 };

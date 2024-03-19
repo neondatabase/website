@@ -75,7 +75,7 @@ To change your plan:
 
 Changing your plan to one with lower usage allowances may affect the performance of your applications. To compare plan allowances, see [Neon plans](/docs/introduction/plans#neon-plans).
 
-If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances. 
+If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances.
 
 <Admonition type="note">
 Downgrading directly from [Scale](/docs/introduction/plans#scale) to [Launch](/docs/introduction/plans#launch) is currently not supported. You must downgrade to the Free Tier first, and then upgrade to Launch. This limitation will be removed in a future release.

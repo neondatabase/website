@@ -230,4 +230,14 @@ The response shows information about the branch being deleted and the `suspend_c
 
 You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches-with-the-api). The deleted branch should no longer be listed.
 
+## Restoring a branch using the API
+
+To revert changes or recover lost data, you can use the branch restore endpoint in the Neon API.
+
+```bash
+POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
+```
+
+For details on how to use this endpoint to restore a branch to its own or another branch's history, restore a branch to the head of its parent, and other restore options, see [Branch Restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore).
+
 <NeedHelp/>
