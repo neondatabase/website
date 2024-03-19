@@ -27,18 +27,19 @@ Traditionally, database operations remained isolated from the main application d
 <Admonition type="info">
 **The data challenge**
 <br/>
-The concept of integrating database management with development practices—often referred to as “Database DevOps”—is not novel. A variety of tools now exist to support the management of schema changes, simplifying the process for developers. But to effectively merge backend processes into development workflows demands the ability to replicate large data volumes across environments and manage different data states, including rolling back to previous states when necessary. 
+The concept of integrating database management with development practices—often referred to as “Database DevOps”—is not novel. A variety of tools now exist to support the management of schema changes, simplifying the process for developers. But to effectively merge backend processes into development workflows demands the ability to replicate large data volumes across environments and manage different data states, including rolling back to previous states when necessary.
 <br/>
 Git repositories mitigate similar risks in code development by maintaining a complete history of commits, thus offering a safety net. The objective is to mirror this level of security and efficiency with databases by introducing the concept of database branches. These branches encapsulate a comprehensive history of data snapshots, ensuring that developers can manage and revert data states with the same ease as managing code versions.
 </Admonition>
 
-## The objective: to treat databases as cattle, not pets 
+## The objective: to treat databases as cattle, not pets
+
 We’ll first set common ground by sharing our assumptions of how modern development teams work:
 
-- Your team collaborates on a codebase hosted on platforms like GitHub. You follow the Github flow: you use feature branches, pull requests (PRs), automated checks, peer reviews, and merges into the main branch. 
-- Your database schema is managed as code. The source of truth for your database schema lives in your repo, and changes to the schema are traceable and version-controlled. 
-- CI/CD automation tools are integral to your workflow. They automate the deployment pipeline. 
-- The database is at the core of your architecture. It is an essential component of your application's functionality and acts as the source of truth for data and state. 
+- Your team collaborates on a codebase hosted on platforms like GitHub. You follow the Github flow: you use feature branches, pull requests (PRs), automated checks, peer reviews, and merges into the main branch.
+- Your database schema is managed as code. The source of truth for your database schema lives in your repo, and changes to the schema are traceable and version-controlled.
+- CI/CD automation tools are integral to your workflow. They automate the deployment pipeline.
+- The database is at the core of your architecture. It is an essential component of your application's functionality and acts as the source of truth for data and state.
 
 Within this context, the objectives are clear:
 
@@ -48,7 +49,7 @@ Within this context, the objectives are clear:
 - Ensure testing, preview, and staging databases stay up-to-date with production through continuous synchronization mechanisms.
 - Streamline database operations through automation and integration with existing development tools and workflows.
 
-##Executing a Git-driven database flow
+## Executing a Git-driven database flow
 
 <Admonition type="tip">
 💡 **The Tools** section lists a variety of tools to help you build this workflow. These include tools for database branching, anonymizing production data, and tracking schema changes.
@@ -92,12 +93,13 @@ Within this context, the objectives are clear:
    b. Once the PR is merged, delete the preview branch and your preview environment.
    c. For every test run execution, create a **test database branch** derived from the staging database branch. If you don’t have a staging environment, derive them directly from the production database.
    d. Once the test is done, delete the test database branch.
-10. Integrate **schema migrations** into your CI/CD pipelines by including scripts in your version control system. 
+10. Integrate **schema migrations** into your CI/CD pipelines by including scripts in your version control system.
    a. Regularly check for schema drift, ensuring that the database schema matches the expected state before applying changes.  
 
-## Implementation scenarios 
+## Implementation scenarios
 
 ### Use case 1: Staging with production-like data
+
 _For environments where mirroring production data is essential for development and testing._
 
 - The staging database branch is directly derived from production.
@@ -109,6 +111,7 @@ _For environments where mirroring production data is essential for development a
 ![Staging with production-like data widget](/flow/use-case-1.png)
 
 ### Use case 2: Transformed data for staging
+
 _For environments with strict privacy regulations or where transformed datasets work best for development and testing purposes._
 
 - An independent staging database branch is created with its own transformed or synthetic dataset to avoid using real emails or PII.
@@ -116,7 +119,8 @@ _For environments with strict privacy regulations or where transformed datasets 
 
 ![Transformed data for staging widget](/flow/use-case-2.png)
 
-### Use case 3: Simplified deployment 
+### Use case 3: Simplified deployment
+
 _For more simple deployments may not have a staging environment, e.g. in pre-production scenarios that prioritize engineering velocity._
 
 - The development database branches are derived directly from the main production database branch.
@@ -124,23 +128,24 @@ _For more simple deployments may not have a staging environment, e.g. in pre-pro
 
 ![Simplified deployment widget](/flow/use-case-3.png)
 
-### Use case 4: Multi-tenancy with customer isolation 
-_For multi-tenancy deployments with full isolation requirements (e.g. one database per customer)._ 
+### Use case 4: Multi-tenancy with customer isolation
+
+_For multi-tenancy deployments with full isolation requirements (e.g. one database per customer)._
 
 - One production database branch is created per customer, enabling customer-specific point-in-time restores.
 - A separate staging branch is created, with development, preview, and testing databases derived from it.
 
 ![Multi-tenancy with customer isolation widget](/flow/use-case-4.png)
 
-## Workflow example 
- 
+## Workflow example
+
 <Admonition type="important">
 ⚠️  Take this code as a general guideline. The main goal of this example is to illustrate the entirety of the workflow. Make sure you adapt the code to your particular use case, tools, and needs.
 </Admonition>
 
-If you wanted to implement a scenario like the one in [Use case 1](#use-case-1-staging-with-production-like-data), here’s what the workflow would look like. This example workflow uses [Neon](/) to create database branches, [Prisma](https://www.prisma.io/) for schema migrations, and [GitHub Actions](https://docs.github.com/en/actions) for CI/CD. Navigate to the [Tools](#tools) section for more information. 
+If you wanted to implement a scenario like the one in [Use case 1](#use-case-1-staging-with-production-like-data), here’s what the workflow would look like. This example workflow uses [Neon](/) to create database branches, [Prisma](https://www.prisma.io/) for schema migrations, and [GitHub Actions](https://docs.github.com/en/actions) for CI/CD. Navigate to the [Tools](#tools) section for more information.
 
-- Create a Neon project with a main database branch as your production database: 
+- Create a Neon project with a main database branch as your production database:
 
 ```yaml
 curl -X DELETE \
@@ -164,14 +169,14 @@ curl -X DELETE \
 # ... set up roles and access restrictions (consider Neon's role management commands)
 ```
 
-- Create a staging database branch derived from the production database branch: 
+- Create a staging database branch derived from the production database branch:
 
 ```yaml
 - name: Create staging branch
   run: neonctl branches create staging --project <project_name> --parent main
 ```
 
-- Create a main dev database branch derived from the staging database branch. From this primary branch, create one dev database branch for every engineer: 
+- Create a main dev database branch derived from the staging database branch. From this primary branch, create one dev database branch for every engineer:
 
 ```yaml
 - name: Create main dev branch (if not exists)
@@ -188,7 +193,7 @@ curl -X DELETE \
     done
 ```
 
-- When starting a new line of work, reset to a clean state. 
+- When starting a new line of work, reset to a clean state.
 
 ```fish
 neonctl branches reset ${{ developer }} --project <project_name>
@@ -222,8 +227,8 @@ jobs:
         run: neonctl branches delete preview-$(echo $GITHUB_SHA | cut -c1-8) --project <project_name> 
 ```
 
-- Similar to previews, for every test run execution, create a test database branch derived from the staging database branch. Once the test is done, delete the test database branch. 
-- Integrate schema migrations into your CI/CD pipelines. Example script: 
+- Similar to previews, for every test run execution, create a test database branch derived from the staging database branch. Once the test is done, delete the test database branch.
+- Integrate schema migrations into your CI/CD pipelines. Example script:
 
 ```bash
 #!/bin/bash
@@ -250,7 +255,7 @@ fi
 echo "Database schema is in sync."
 ```
 
-- Within your GitHub Actions, you would include a step that executes this script. 
+- Within your GitHub Actions, you would include a step that executes this script.
 
 ```yaml
 - name: Schema Migrations and Drift Check
@@ -259,14 +264,14 @@ echo "Database schema is in sync."
 
 ## Tools
 
-- [Neon](/): A serverless, branch-based Postgres database. Neon allows you to create database branches instantly (including schema + data) and to manage thousands of them programmatically. [See this example repo](https://github.com/neondatabase/preview-branches-with-vercel). 
-- [GitHub Actions](https://docs.github.com/en/actions): GitHub's built-in CI/CD platform that lets you automate workflows like testing, building, and deployments directly within your repositories. [This guide includes Actions you can use to automate the creation and deletion database branches.](/docs/guides/branching-github-actions) 
-- [PostgreSQL Anonymizer](https://postgresql-anonymizer.readthedocs.io/en/stable/): This extension allows you to anonymize sensitive data (PII) for your non-production environments. This tutorial shows you how to use PostgreSQL Anonymizer in Neon. _This is interesting if you’re directly deriving your staging database branch from the production branch (as in [Example 1](#use-case-1-staging-with-production-like-data))_. 
-- [Neosync](https://www.neosync.dev/): This tool allows you to build fully synthetic datasets that mimic your production data. [This blog post introduces you to the concept of synthetic data](/blog/how-to-use-synthetic-data-to-catch-more-bugs-with-neosync); for steps on how to implement this in Neon,[see this tutorial.](https://www.neosync.dev/blog/neosync-neon-data-gen-job) _Synthetic datasets are interesting if you’re choosing to completely avoid production data in non-production environments (see [Example 2](#use-case-2-transformed-data-for-staging))_. 
-- [Prisma](https://www.prisma.io/): A framework for Node.js and TypeScript, popular for database schema management, migrations, and data access. [This guide shows you how to manage schema migrations using Prisma and Neon.](/docs/guides/prisma-migrations) 
+- [Neon](/): A serverless, branch-based Postgres database. Neon allows you to create database branches instantly (including schema + data) and to manage thousands of them programmatically. [See this example repo](https://github.com/neondatabase/preview-branches-with-vercel).
+- [GitHub Actions](https://docs.github.com/en/actions): GitHub's built-in CI/CD platform that lets you automate workflows like testing, building, and deployments directly within your repositories. [This guide includes Actions you can use to automate the creation and deletion database branches.](/docs/guides/branching-github-actions)
+- [PostgreSQL Anonymizer](https://postgresql-anonymizer.readthedocs.io/en/stable/): This extension allows you to anonymize sensitive data (PII) for your non-production environments. This tutorial shows you how to use PostgreSQL Anonymizer in Neon. _This is interesting if you’re directly deriving your staging database branch from the production branch (as in [Example 1](#use-case-1-staging-with-production-like-data))_.
+- [Neosync](https://www.neosync.dev/): This tool allows you to build fully synthetic datasets that mimic your production data. [This blog post introduces you to the concept of synthetic data](/blog/how-to-use-synthetic-data-to-catch-more-bugs-with-neosync); for steps on how to implement this in Neon,[see this tutorial.](https://www.neosync.dev/blog/neosync-neon-data-gen-job) _Synthetic datasets are interesting if you’re choosing to completely avoid production data in non-production environments (see [Example 2](#use-case-2-transformed-data-for-staging))_.
+- [Prisma](https://www.prisma.io/): A framework for Node.js and TypeScript, popular for database schema management, migrations, and data access. [This guide shows you how to manage schema migrations using Prisma and Neon.](/docs/guides/prisma-migrations)
 - [Drizzle](https://orm.drizzle.team): A TypeScript ORM that connects to all major databases and works across most Javascript runtimes. [This guide shows you how to manage schema migrations using Drizzle and Neon.](/docs/guides/drizzle-migrations)
-- [Liquibase](https://www.liquibase.com): An open-source library for database change management. [This guide shows you how to manage schema migrations using Liquibase and Neon.](/docs/guides/liquibase) 
-- [Flyway](https://flywaydb.org/):  A database migration tool that facilitates version control for databases. [This guide shows you how to manage schema migrations using Flyway and Neon.](/docs/guides/flyway) 
+- [Liquibase](https://www.liquibase.com): An open-source library for database change management. [This guide shows you how to manage schema migrations using Liquibase and Neon.](/docs/guides/liquibase)
+- [Flyway](https://flywaydb.org/):  A database migration tool that facilitates version control for databases. [This guide shows you how to manage schema migrations using Flyway and Neon.](/docs/guides/flyway)
 
 <Admonition type="info">
 📖 **Contribute**
@@ -276,10 +281,4 @@ Help us improve this list! If you know of more great tools, share them with us i
 
 ## Acknowledgments
 
-This content is inspired by the community. Special mention to Eric Bernhandsson ([article](https://erikbern.com/2021/04/19/software-infrastructure-2.0-a-wishlist.html)), Ryan Booz ([article](https://www.softwareandbooz.com/10-requirements-for-managing-database-changes/)), Evis Drenova, Martin Fowler ([article](https://martinfowler.com/articles/evodb.html)), Tonie Huizer ([article](https://www.sqlservercentral.com/articles/a-version-control-strategy-for-branch-based-database-development)), Franck Pachot, Jacob Prall, Umair Shahid, and Alex Klarfeld. Additional references: [Github flow](https://docs.github.com/en/get-started/using-github/github-flow), [The Planetscale workflow](https://planetscale.com/docs/concepts/planetscale-workflow), [Framework-defined infrastructure by Vercel](https://vercel.com/blog/framework-defined-infrastructure), [Guide to Database DevOps](https://www.liquibase.com/resources/guides/database-devops) and [Database GitOps](https://www.liquibase.com/gitops) by Liquibase. 
-
-
-
-
-
-
+This content is inspired by the community. Special mention to Eric Bernhandsson ([article](https://erikbern.com/2021/04/19/software-infrastructure-2.0-a-wishlist.html)), Ryan Booz ([article](https://www.softwareandbooz.com/10-requirements-for-managing-database-changes/)), Evis Drenova, Martin Fowler ([article](https://martinfowler.com/articles/evodb.html)), Tonie Huizer ([article](https://www.sqlservercentral.com/articles/a-version-control-strategy-for-branch-based-database-development)), Franck Pachot, Jacob Prall, Umair Shahid, and Alex Klarfeld. Additional references: [Github flow](https://docs.github.com/en/get-started/using-github/github-flow), [The Planetscale workflow](https://planetscale.com/docs/concepts/planetscale-workflow), [Framework-defined infrastructure by Vercel](https://vercel.com/blog/framework-defined-infrastructure), [Guide to Database DevOps](https://www.liquibase.com/resources/guides/database-devops) and [Database GitOps](https://www.liquibase.com/gitops) by Liquibase.
