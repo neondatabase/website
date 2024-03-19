@@ -206,8 +206,8 @@ const defaultConfig = {
         destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
       },
       {
-        source: '/discord',
-        destination: 'https://discord.gg/92vNTzKDGp',
+        source: '/developer-days/:path*',
+        destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
       },
     ];
   },

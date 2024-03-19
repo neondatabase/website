@@ -82,6 +82,19 @@ CREATE COLLATION arabic (provider = icu, locale = 'ar');
 CREATE TABLE books (id int, title text COLLATE "arabic");
 ```
 
+## Event triggers
+
+Postgres [event triggers](/docs/current/event-triggers.html), which require Postgres superuser privileges, are currently not supported. Unlike regular triggers, which are attached to a single table and capture only DML events, event triggers are global to a particular database and are capable of capturing DDL events.
+
+Attempting to create an event trigger will produce errors similar to these:
+
+```sql
+ERROR: permission denied to create event trigger "your_trigger_name" (SQLSTATE 42501)
+
+ERROR:  permission denied to create event trigger "your_trigger_name"
+HINT:  Must be superuser to create an event trigger.
+```
+
 ## PostgreSQL documentation
 
 Neon provides a mirror of the official PostgreSQL documentation on the [Neon documentation site](https://neon.tech/docs/introduction) for the convenience of our users. As Neon is built on standard PostgreSQL, most information from the official PostgreSQL documentation applies to our platform. However, there are a few key differences to consider when referencing the official PostgreSQL docs:

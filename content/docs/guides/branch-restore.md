@@ -4,7 +4,7 @@ subtitle: Learn how to revert changes or recover lost data using Neon Branch Res
   with Time Travel Assist
 enableTableOfContents: true
 redirectFrom:
- - /docs/guides/brancing-pitr
+ - /docs/guides/branching-pitr
  - /docs/guides/branch-refresh
 updatedOn: '2024-02-21T19:34:16.273Z'
 ---
