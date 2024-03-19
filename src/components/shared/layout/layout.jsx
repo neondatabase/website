@@ -20,13 +20,8 @@ const Layout = async ({
   isBlogPage = false,
   isNewDesign = false,
 }) => (
-  // 44px and 36px is the height of the topbar
-  <div
-    className={clsx(
-      'relative flex flex-col',
-      isNewDesign ? 'min-h-[calc(100vh-36px)]' : 'min-h-[calc(100vh-44px)]'
-    )}
-  >
+  // 36px is the height of the topbar
+  <div className="relative flex min-h-[calc(100vh-36px)] flex-col">
     {isNewDesign ? (
       <HeaderNew className={headerClassName} theme={headerTheme} />
     ) : (

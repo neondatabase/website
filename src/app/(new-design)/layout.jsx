@@ -20,7 +20,7 @@ const RootLayout = ({ children }) => (
     </head>
     <body>
       <ThemeProvider>
-        <TopBar isNewDesign />
+        <TopBar />
         {children}
       </ThemeProvider>
     </body>

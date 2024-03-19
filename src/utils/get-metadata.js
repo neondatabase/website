@@ -54,7 +54,7 @@ export default function getMetadata({
     manifest: `${SITE_URL}/manifest.json`,
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots,
-    themeColor: pagesWithNoTopbar.includes(pathname) ? '#0c0d0d' : '#00e699',
+    themeColor: pagesWithNoTopbar.includes(pathname) ? '#0c0d0d' : '#131415',
     icons: {
       icon: '/favicon/favicon.png',
       apple: [
