@@ -1,5 +1,14 @@
 import Post from 'components/pages/doc/post';
 import { getPostBySlug, getTableOfContents, FLOW_DIR_PATH } from 'utils/api-docs';
+import getMetadata from 'utils/get-metadata';
+
+export async function generateMetadata() {
+  return getMetadata({
+    title: 'GitOps for Databases',
+    description: 'Bring your data to your GitHub workflow to streamline development',
+    type: 'article',
+  });
+}
 
 const FlowPage = () => {
   const currentSlug = 'git-ops-for-databases';

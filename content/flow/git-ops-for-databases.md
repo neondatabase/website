@@ -22,7 +22,9 @@ Traditionally, database operations remained isolated from the main application d
 - **Database version control** applies version control to database changes (schema and data) in a similar way to source code version control. This means changes to the database are tracked, can be reviewed, reverted, or applied to different environments with a clear history of modifications.
 - **Automations** allow to integrate database operations into existing CI/CD pipelines. This ensures automated testing, building, and deploying of database changes alongside application code, reducing manual intervention while ensuring data consistency.
 
-![Automation widget](/flow/automation.png)
+<video autoPlay playsInline muted loop width="auto" height="auto">
+  <source type="video/mp4" src="/flow/workflow.mp4"/>
+</video>
 
 <Admonition type="info">
 **The data challenge**
@@ -65,20 +67,20 @@ Within this context, the objectives are clear:
 #### Staging (optional)
 
 3. If you have a fixed staging environment, create a **staging database branch**. To populate it with data, have two options:
-   a. Derive it directly from the production database branch (see [Use case 1](#use-case-1)).
-      i. If you follow this route, set up automation to regularly reset the staging database branch to avoid drifting from production.
-      ii. Consider anonymizing personal information, if appropriate.
-   b. Use a separate, transformed dataset for staging—e.g. to avoid real emails or PII (see [Use case 2](#use-case-2)).
-      i. In this case, create an independent 'staging' database branch and load it with its own synthetic or transformed dataset.
+   1. Derive it directly from the production database branch (see [Use case 1](#use-case-1)).
+      1. If you follow this route, set up automation to regularly reset the staging database branch to avoid drifting from production.
+      2. Consider anonymizing personal information, if appropriate.
+   2. Use a separate, transformed dataset for staging—e.g. to avoid real emails or PII (see [Use case 2](#use-case-2)).
+      1. In this case, create an independent 'staging' database branch and load it with its own synthetic or transformed dataset.
 
 #### Development
 
 4. Create a **main dev database branch**.
-   a. From this primary branch, create one **dev database branch for every engineer**. When starting a new line of work, reset to a clean state.
-   b. For features that need extra testing before they are committed or merged, you can also consider creating short-lived **feature dev database branches** derived from the main dev branch.
+    1. From this primary branch, create one **dev database branch for every engineer**. When starting a new line of work, reset to a clean state.
+    2. For features that need extra testing before they are committed or merged, you can also consider creating short-lived **feature dev database branches** derived from the main dev branch.
 5. To populate the main dev database branch with data, you have two options:
-   a. Derive it from the staging database branch, if it exists (See [Use case 1](#use-case-1), [Use case 2](#use-case-2)).
-   b. For simpler deployments without a staging environment, you can derive it directly from the production database (see [Use case 3](#use-case-3)).
+   1. Derive it from the staging database branch, if it exists (See [Use case 1](#use-case-1), [Use case 2](#use-case-2)).
+   2. For simpler deployments without a staging environment, you can derive it directly from the production database (see [Use case 3](#use-case-3)).
 6. When starting a new line of work in the 'dev' database branches, reset to clean state.
 7. Set up roles and restrict access for safety.
 
