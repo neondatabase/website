@@ -1,3 +1,5 @@
+import { cache } from 'react';
+
 import { BLOG_POSTS_PER_PAGE } from 'constants/blog';
 import { gql, graphQLClient, graphQLClientAdmin } from 'lib/graphQLClient';
 
@@ -17,7 +19,7 @@ const POST_SEO_FRAGMENT = gql`
   }
 `;
 
-const getAllWpBlogCategories = async () => {
+const getAllWpBlogCategories = cache(async () => {
   const categoriesQuery = gql`
     query Categories {
       categories {
@@ -39,7 +41,7 @@ const getAllWpBlogCategories = async () => {
   );
 
   return [...filteredCategories, { name: 'All posts', slug: 'all-posts' }];
-};
+});
 
 const fetchWpPostsByCategorySlug = async (slug, after) => {
   const postsQuery = gql`
@@ -147,7 +149,7 @@ const fetchWpPostsByCategorySlug = async (slug, after) => {
   return data?.posts;
 };
 
-const getWpPostsByCategorySlug = async (slug) => {
+const getWpPostsByCategorySlug = cache(async (slug) => {
   let allPosts = [];
   let afterCursor = null;
 
@@ -161,9 +163,9 @@ const getWpPostsByCategorySlug = async (slug) => {
   }
 
   return allPosts;
-};
+});
 
-const getWpBlogPage = async () => {
+const getWpBlogPage = cache(async () => {
   const blogPageQuery = gql`
     query BlogPage {
       page(idType: URI, id: "blog") {
@@ -408,7 +410,7 @@ const getWpBlogPage = async () => {
   const data = await graphQLClient.request(blogPageQuery);
 
   return data?.page?.template?.pageBlog;
-};
+});
 
 const fetchAllWpPosts = async (after) => {
   const allPostsQuery = gql`
@@ -465,7 +467,7 @@ const fetchAllWpPosts = async (after) => {
   return data?.posts;
 };
 
-const getAllWpPosts = async () => {
+const getAllWpPosts = cache(async () => {
   let allPosts = [];
   let afterCursor = null;
 
@@ -479,9 +481,9 @@ const getAllWpPosts = async () => {
   }
 
   return allPosts;
-};
+});
 
-const getWpPostBySlug = async (slug) => {
+const getWpPostBySlug = cache(async (slug) => {
   const postBySlugQuery = gql`
     query PostBySlug($id: ID!) {
       post(id: $id, idType: URI) {
@@ -571,7 +573,7 @@ const getWpPostBySlug = async (slug) => {
     post: data?.post,
     relatedPosts: sortedPosts,
   };
-};
+});
 
 // Query that executes when user requests a preview on a CMS,
 // the difference from a standard post query is that it uses Admin token to access unpublished posts and revisions of published posts
