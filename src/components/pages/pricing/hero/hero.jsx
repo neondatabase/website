@@ -43,7 +43,7 @@ const items = [
     features: [
       {
         title: '10 GiB storage included',
-        info: 'Addtional storage: $3.5 for 2 GiB',
+        info: 'Additional storage: $3.5 for 2 GiB',
       },
       { title: '300 compute-hours included', info: 'Additional usage: $0.16 per compute-hour' },
       { title: 'Standard support' },
@@ -64,7 +64,7 @@ const items = [
       '<em class="absolute block xl:-top-1 -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:-mt-4 md:mt-0">From</em> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
-      { title: '50 GiB storage included', info: 'Addtional storage: $15 for 10 GiB' },
+      { title: '50 GiB storage included', info: 'Additional storage: $15 for 10 GiB' },
       { title: '750 compute-hours included', info: 'Additional usage: $0.16 per compute-hour' },
       { title: 'Priority support' },
       { title: 'Autoscaling from 0 to 8 vCPU', info: '8 vCPU, 32 GB RAM' },
