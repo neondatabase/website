@@ -68,10 +68,14 @@ Within this context, the objectives are clear:
 
 3. If you have a fixed staging environment, create a **staging database branch**. To populate it with data, have two options:
    1. Derive it directly from the production database branch (see [Use case 1](#use-case-1)).
-      1. If you follow this route, set up automation to regularly reset the staging database branch to avoid drifting from production.
-      2. Consider anonymizing personal information, if appropriate.
+      <ol>
+      <li style={{ listStyleType: 'lower-roman' }}> If you follow this route, set up automation to regularly reset the staging database branch to avoid drifting from production.</li>
+      <li style={{ listStyleType: 'lower-roman' }}>Consider anonymizing personal information, if appropriate.</li>
+      </ol>
    2. Use a separate, transformed dataset for staging—e.g. to avoid real emails or PII (see [Use case 2](#use-case-2)).
-      1. In this case, create an independent 'staging' database branch and load it with its own synthetic or transformed dataset.
+      <ol>
+      <li style={{ listStyleType: 'lower-roman' }}>In this case, create an independent 'staging' database branch and load it with its own synthetic or transformed dataset.</li>
+      </ol>
 
 #### Development
 
