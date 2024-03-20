@@ -35,6 +35,10 @@ Neon has successfully completed SOC 2 Type 1 and Type 2 audits. For more informa
 
 You can request access to our SOC 2 report or directly download the public-facing SOC 3 compliance report on our [Neon Trust Center](https://trust.neon.tech/).
 
+## GitHub secret scanning
+
+Passwords and API key tokens generated for use with your Neon databases and projects are secured through the [GitHub secret scanning partner program](https://docs.github.com/en/code-security/secret-scanning/secret-scanning-partner-program). If passwords or API key tokens are committed in plain text to a public GitHub repository, Neon will notify the email address associated with the Neon project so that you may take corrective action.
+
 ## Security reporting
 
 Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](https://neon.tech/security.txt) file.
