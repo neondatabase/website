@@ -3,8 +3,7 @@ title: Postgres
 enableTableOfContents: false
 ---
 
-</DetailIconCards>
-Explore Postgres features with Neon's POstgres guides. Learn about data types, extensions, functions, and optimizing query performance. Access our [mirror of the official PostgreSQL documentation]() for a comprehensive understanding. Remember, **Neon is Postgres**, so you're encouraged to reference both our materials and the official PostgreSQL documentation.
+Explore Postgres features with Neon's POstgres guides. Learn about data types, extensions, functions, and optimizing query performance. Access our [mirror of the official PostgreSQL documentation](/docs/postgres/index) for a comprehensive understanding. Remember, **Neon is Postgres**, so you're encouraged to reference both our materials and the official PostgreSQL documentation.
 
 <DetailIconCards>
 
