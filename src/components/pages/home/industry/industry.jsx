@@ -38,18 +38,18 @@ const TESTIMONIALS = [
 
 const Testimonial = ({ quote, avatar, name, position, className }) => (
   <figure className={className}>
-    <blockquote className="text-2xl font-light leading-snug tracking-extra-tight text-white">
+    <blockquote className="text-2xl font-light leading-snug tracking-extra-tight text-white xl:text-xl lg:text-base">
       <p>{quote}</p>
     </blockquote>
-    <figcaption className="mt-6 flex items-center gap-3 text-lg leading-normal tracking-normal">
+    <figcaption className="mt-6 flex items-center gap-3 text-lg tracking-normal xl:mt-4 xl:gap-2.5 lg:mt-3">
       <Image
-        className="h-8 w-8 rounded-full grayscale"
+        className="h-8 w-8 rounded-full grayscale xl:h-7 xl:w-7 lg:h-6 lg:h-6"
         src={avatar}
         width={avatar.width / 2}
         height={avatar.height / 2}
         alt={name}
       />
-      <div className="text-lg leading-normal text-gray-new-60">
+      <div className="text-lg leading-normal text-gray-new-60 xl:text-base lg:text-sm">
         {name} <cite className="font-light not-italic text-gray-new-40">- {position}</cite>
       </div>
     </figcaption>
@@ -66,15 +66,28 @@ Testimonial.propTypes = {
 
 // TODO: implement blur on scroll
 const Industry = () => (
-  <section className="industry mt-[264px]">
-    <Container className="flex gap-24" size="960">
-      <Image src={linesImage} width={linesImage.width / 2} height={linesImage.height / 2} />
+  <section className="industry mt-[264px] xl:mt-[75px] lg:mt-24 md:mt-20">
+    <Container
+      className="flex gap-24 xl:max-w-[768px] xl:max-w-none xl:gap-[76px] lg:gap-[67px]"
+      size="960"
+    >
+      <Image
+        className="xl:w-[180px] lg:w-36"
+        src={linesImage}
+        width={linesImage.width / 2}
+        height={linesImage.height / 2}
+      />
       <div>
         {/* TODO: get rid of &nbsp; */}
-        <h2 className="mt-11 text-[88px] font-medium leading-[0.96] -tracking-[0.03em] text-white">
+        <h2
+          className={clsx(
+            'mt-[62px] text-[88px] font-medium leading-[0.96] -tracking-[0.03em] text-white',
+            'xl:mt-[64px] xl:text-7xl lg:mt-6 lg:text-[56px] md:mt-0 md:text-[32px] md:leading-[0.9em] md:tracking-extra-tight'
+          )}
+        >
           Industry&nbsp;leaders trust Neon
         </h2>
-        <div className="mt-48 flex flex-col gap-[184px]">
+        <div className="mt-48 flex flex-col gap-[184px] xl:mt-[123px] xl:gap-[142px] lg:mt-[98px] lg:gap-[78px] md:mt-6">
           {TESTIMONIALS.map((testimonal, index) => (
             <Testimonial
               className={clsx(index !== 1 && 'opacity-40 blur-[2px]')}
