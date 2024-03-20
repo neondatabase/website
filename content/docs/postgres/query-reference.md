@@ -4,7 +4,7 @@ subtitle: Find examples and templates for commonly-used Postgres queries
 enableTableOfContents: true
 ---
 
-This page provides a reference for common Postgres queries, covering basic operations to advanced techniques. Aimed at both beginners and seasoned users, it provides practical examples you can use when workign with with your Postgres database in Neon.
+This page provides a reference for common Postgres queries, providing examples for basic operations to advanced use cases.
 
 - [Basic operations](#basic-operations)
   - [Creating a table](#creating-a-table)
@@ -20,9 +20,14 @@ This page provides a reference for common Postgres queries, covering basic opera
   - [Transactions](#transactions)
   - [Indexes](#indexes)
   - [Views](#views)
-  - [Stored procedures and functions](#stored-procedures-and-functions)
+  - [Functions](#functions)
+  - [Stored procedures](#stored-procedures) 
 - [Performance tuning](#performance-tuning)
-  - [Analyzing query performance](#analyzing-query-performance)
+  - [Using EXPLAIN](#using-explain)
+  - [Using EXPLAIN ANALYZE](#using-explain-analyze)
+  - [Using pg_stat_statements](#using-pg_stat_statements)
+  - [Viewing activity and locks](#viewing-activity-and-locks)
+  - [Analyzing index usage](#analyzing-index-usage)
 - [Troubleshooting](#troubleshooting)
   - [View running queries](#view-running-queries)
   - [Cancel a running query](#cancel-a-running-query)
