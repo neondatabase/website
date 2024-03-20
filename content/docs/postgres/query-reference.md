@@ -27,7 +27,7 @@ CREATE TABLE users (
 INSERT INTO users (username, email) VALUES ('johndoe', 'john.doe@example.com');
 ```
 
-### Updating Data
+### Updating data
 
 ```sql
 UPDATE users SET email = 'new.johndoe@example.com' WHERE user_id = 1;
@@ -43,7 +43,7 @@ DELETE FROM users WHERE user_id = 1;
 
 ### Select queries
 
-Here are a few representative examples of `SELECT` queries in Postgres that cover common use cases:
+Here are a few examples of `SELECT` queries in Postgres that cover common use cases:
 
 
 ```sql
@@ -92,10 +92,10 @@ SELECT * FROM sales WHERE amount > 500 AND (sales_date >= '2023-01-01' AND sales
 SELECT * FROM users WHERE last_login IS NULL;
 
 -- Filter using subqueries
-SELECT * FROM orders WHERE customer_id IN (SELECT customer_id FROM customers WHERE city = 'New York');
+SELECT * FROM orders WHERE customer_id IN (SELECT customer_id FROM customers WHERE country = 'Spain');
 ```
 
-These examples illustrate how to filter query results based on exact matches, ranges, lists of values, pattern matching with LIKE, combining multiple conditions with AND and OR, handling NULL values, and leveraging subqueries for more complex conditions.
+These examples illustrate how to filter query results based on exact matches, ranges, lists of values, pattern matching with `LIKE`, combining multiple conditions with `AND` and `OR`, handling `NULL` values, and leveraging subqueries for more complex conditions.
 
 ### Sorting data
 
@@ -215,7 +215,7 @@ UPDATE accounts SET balance = balance - 100 WHERE user_id = 3;
 ROLLBACK TO SAVEPOINT my_savepoint;
 
 -- Proceed with other operations or end transaction
-COMMIT
+COMMIT;
 ```
 
 These examples show the basic structure of transactions in Postgres, including how to start (`BEGIN`), commit (`COMMIT`), and roll back (`ROLLBACK`) transactions. The use of a savepoint (`SAVEPOINT`) is also demonstrated, allowing partial rollback within a transaction. Transactions are crucial for maintaining data integrity, especially when multiple related operations must either all succeed or fail together.
@@ -380,7 +380,7 @@ EXPLAIN ANALYZE SELECT * FROM employees WHERE department_id = 1;
 
 ### Using pg_stat_statements
 
-`pg_stat_statements` is an extension that provides a means to track execution statistics of all SQL statements executed by a server.
+`pg_stat_statements` is an extension that provides a means to track execution statistics of all executed SQL statements.
 
 First, ensure the extension is enabled in your Postgres database:
 
@@ -388,7 +388,7 @@ First, ensure the extension is enabled in your Postgres database:
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-Then, you can query the `pg_stat_statements` view to analyze performance:
+Then, you can query the `pg_stat_statements` view to analyze query performance:
 
 ```sql
 SELECT query, calls, total_exec_time, rows, avg_exec_time
