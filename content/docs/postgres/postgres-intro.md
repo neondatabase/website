@@ -15,7 +15,7 @@ Explore Postgres features with Neon's Postgres guides. Learn about data types, e
 
 <a href="/docs/postgres/query-performance" description="Strategies for optimizing Postgres query performance in Neon" icon="app-store" icon="app-store">Optimize query performance</a>
 
-<a href="/docs/ppostgres/query-reference" description="Find examples and templates for commonly-used Postgres queries" icon="app-store" icon="app-store">Postgres query reference</a>
+<a href="/docs/postgres/query-reference" description="Find examples and templates for commonly-used Postgres queries" icon="app-store" icon="app-store">Postgres query reference</a>
 
 <a href="/docs/reference/compatibility" description="Learn about Neon as a managed Postgres service" icon="app-store" icon="app-store">Postgres compatibility in Neon</a>
 
