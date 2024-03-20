@@ -268,22 +268,20 @@ In this case, the query plan shows that two parallel workers were launched to ru
 Using `EXPLAIN` to optimize queries is a large subject area, but there are numerous resources you can draw upon. Here are a few to get you started:
 
 - [Using EXPLAIN — official PostgreSQL documentation](https://www.postgresql.org/docs/current/using-explain.html)
-- [Using EXPLAIN — PostgreSQL wiki](https://wiki.postgresql.org/wiki/Using_EXPLAIN). 
-- [PostgreSQL EXPLAIN](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-explain/)
-- [How to interpret PostgreSQL EXPLAIN ANALYZE output](https://www.cybertec-postgresql.com/en/how-to-interpret-postgresql-explain-analyze-output/)
-- [Postgres Explain Visualizer](https://www.pgexplain.dev/)
+- [Using EXPLAIN — PostgreSQL wiki resource list](https://wiki.postgresql.org/wiki/Using_EXPLAIN). 
+- [PostgreSQL EXPLAIN tutorial](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-explain/)
 
 <Admonition type="tip">
-The Neon SQL Editor provides a visual explain capability, providing query plans in a visual form. See [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+The Neon SQL Editor provides a visual `EXPLAIN` and `ANALYZE` capability, providing query plans in a visual form. See [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 </Admonition>
 
 ## Cache your data
 
-A cache hit ratio tells you what percentage of queries are served from memory. Queries not served from memory retrieve data from disk, which is more costly and can result in slower query performance.
+A cache hit ratio tells you the percentage of queries served from memory. Queries not served from memory retrieve data from disk, which is more costly and can result in slower query performance.
 
 In a standalone Postgres instance, you can query the cache hit ratio with an SQL statement that looks for `shared buffers` block hits. In Neon, it’s a little different. Neon extends Postgres shared buffers with a local file cache (local to your Neon compute instance). To query your cache hit ratio in Neon, you need to look at local file cache hits instead of shared buffer hits. 
 
-To enable querying local file cache statistics, Neon provides a `neon_stat_file_cache` view. To access this view, you must first install the neon extension:
+To enable querying local file cache statistics, Neon provides a `neon_stat_file_cache` view. To access this view, you need to install the neon extension:
 
 ```sql
 CREATE EXTENSION neon;
@@ -361,7 +359,7 @@ REINDEX TABLE your_table_name;
 
 This command rebuilds all indexes on the specified table.
 
-Generally, you’ll want to perform these types of operations when it will have the least impact, or you’ll want to plan some maintenance downtime for a clean-up. 
+Generally, you’ll want to perform these types of operations when they will have the least impact, or you’ll want to plan some maintenance downtime for a clean-up. 
 
 ## Right-size your compute
 
@@ -373,9 +371,7 @@ For information about right-sizing your compute in Neon, see [How to size your c
 
 Connection pooling improves performance by minimizing the overhead associated with creating and tearing down database connections. Neon uses PgBouncer to offer support for connection pooling, enabling up to 10,000 concurrent connections. 
 
-Enabling connection pooling in Neon requires adding a `-pooler` option to your Neon connection string (to your Neon hostname). Connections that specify the `-pooler` option use a pooled connection.
-
-You can add the `-pooler` option to your connection string as shown:
+Enabling connection pooling in Neon requires adding a `-pooler` option to your Neon connection string (to your Neon hostname), as shown here:
 
 ```plaintext
 postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
@@ -387,15 +383,15 @@ For more information about connection pooling in Neon, see [Connection pooling](
 
 ## Use prepared statements
 
-Prepared statements are another way you can optimize query performance. They let you prepare a query plan once and use it multiple times, which minimizes processing time for repetitive query execution. This not only reduces the overhead associated with these stages for subsequent executions but also reduces risk of SQL injection attacks by ensuring that data is safely bound to parameters. 
+Prepared statements are another way you can optimize query performance. They let you prepare a query plan once and use it multiple times, which minimizes processing time for repetitive query execution. 
 
-Imagine you need to fetch all users from a database with a given name:
+For example, imagine you need to fetch all users from a database with a given name:
 
 ```sql
 SELECT * FROM users WHERE name = 'alex';
 ```
 
-To enhance performance when running this query for various names, you can use a prepared statement:
+To enhance performance when running this query for various names, you can use a prepared statement as shown here:
 
 ```sql
 PREPARE user_fetch_plan (text) AS SELECT * FROM users WHERE name = $1;
@@ -403,39 +399,37 @@ EXECUTE user_fetch_plan('alex');
 EXECUTE user_fetch_plan('dana');
 ```
 
-This approach prepares the query a single time and then uses the same execution plan for subsequent runs, offering potential performance gains.
-
 ### Use joins instead of subqueries
 
 Optimizing subqueries can significantly enhance the performance of your database queries. Consider a situation where you need to fetch all orders for customers residing in a specific country:
 
 ```sql
-SELECT * FROM orders WHERE customer_id IN (SELECT id FROM customers WHERE city = 'Spain');
+SELECT * FROM orders WHERE customer_id IN (SELECT id FROM customers WHERE country = 'Spain');
 ```
 
-This approach uses a subquery to identify customer IDs based in Spain. To optimize, you could transform this into a `JOIN` operation:
+This approach uses a subquery to identify customer IDs based in Spain. To optimize, you can transform this query into a `JOIN` operation:
 
 ```sql
-SELECT orders.* FROM orders JOIN customers ON orders.customer_id = customers.id WHERE customers.city = 'New York';
+SELECT orders.* FROM orders JOIN customers ON orders.customer_id = customers.id WHERE customers.country = 'Spain';
 ```
 
-Replacing a subquery with a `JOIN` can expedite query execution, especially beneficial when dealing with a large volume of records in the `orders` table. This is because a `JOIN` i generally more efficient in processing large datasets, allowing the database engine to utilize indexes more effectively.
+Joins are generally more efficient because they replace multiple queries with one join query, reducing trips to the database.
 
 ### Use efficient data types
 
-Every data type in Postgres has its own storage requirements, so it’s better to avoid selecting a data type that is larger than necessary. For example: 
+Generally, you should avoid selecting a data type that is larger than necessary. 
 
 Postgres offers a range of numeric types, including `INTEGER`, `NUMERIC`, `REAL`, and `DOUBLE PRECISION`. Each has its use case, but `INTEGER` types are often sufficient for counts and identifiers and use less space than floating-point types.
 
 If you’re storing small integers, you can use the `SMALLINT` type instead of `INTEGER` or `BIGINT`, as it uses less space.
 
-Imagine a scenario where your `users` table includes an `age` column. If operations such as computing the average age of users are common, you can optimize your database's efficiency by switching to a more compact data type, such as `SMALLINT` instead of the standard `INTEGER`:
+For example, imagine a scenario where your `users` table includes an `age` column. If operations such as computing the average age of users are common, you can optimize your database's efficiency by switching to a more compact data type, such as `SMALLINT` instead of the standard `INTEGER`:
 
 ```sql
 ALTER TABLE users ALTER COLUMN age TYPE SMALLINT;
 ```
 
-This change will decrease the memory footprint for storing `age` data, potentially improving the performance of queries that perform operations using that data.
+This change decreases the memory footprint for storing `age` data, potentially improving the performance of queries that perform operations using that data.
 
 ### Limit your result sets
 
@@ -445,7 +439,7 @@ Consider a scenario where you're fetching all entries from an `orders` table wit
 SELECT * FROM orders;
 ```
 
-This approach might become inefficient and consume considerable resources when dealing with a large table. To optimize this query, you can add the `LIMIT` clause to restrict the output to a specific number of rows. For example:
+This approach might become inefficient and consume considerable resources when working with a large table. To optimize this query, you can add the `LIMIT` clause to restrict the output to a specific number of rows. For example:
 
 ```sql
 SELECT * FROM orders LIMIT 100;
