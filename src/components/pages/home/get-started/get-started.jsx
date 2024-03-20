@@ -5,6 +5,7 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import bgImage from 'images/pages/home/get-started/dots.webp';
 
+// TODO: implement rive animation
 const GetStarted = () => (
   <section
     className={clsx(

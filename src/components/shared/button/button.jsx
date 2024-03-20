@@ -6,7 +6,7 @@ import Link from 'components/shared/link';
 const styles = {
   base: 'inline-flex items-center justify-center font-bold !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
   size: {
-    lg: 'text-base h-12 px-[54px] lg-new:h-11 lg-new:px-11 lg-new:text-sm',
+    lg: 'text-base h-12 px-[54px] lg:h-11 lg:px-11 lg:text-sm',
     md: 't-2xl py-7 px-11 2xl:py-[26px] xl:py-[21px] xl:px-9 md:py-5 md:px-8',
     sm: 't-xl py-[26px] px-11 2xl:py-[21px] 2xl:px-9 xl:py-5 xl:px-8',
     'new-md': 't-base py-[11px] px-[26px]',
