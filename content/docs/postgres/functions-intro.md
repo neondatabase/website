@@ -3,7 +3,7 @@ title: Postgres functions
 enableTableOfContents: false
 ---
 
-Learn about Postgres functions.
+Learn about commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation. 
 
 <DetailIconCards>
 
@@ -40,10 +40,5 @@ Learn about Postgres functions.
 <a href="/docs/functions/json_to_record" description="Converts a JSON object to a record" icon="app-store">json_to_record()</a>
 
 <a href="/docs/functions/jsonb_to_record" description="Convert a JSONB object to a record" icon="app-store">jsonb_to_record()</a>
-
-
-
-
-
 
 </DetailIconCards>
