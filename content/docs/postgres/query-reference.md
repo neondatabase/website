@@ -6,33 +6,10 @@ enableTableOfContents: true
 
 This page provides a reference for common Postgres queries, providing examples for basic operations to advanced use cases.
 
-- [Basic operations](#basic-operations)
-  - [Creating a table](#creating-a-table)
-  - [Inserting data](#inserting-data)
-  - [Updating Data](#updating-data)
-  - [Deleting data](#deleting-data)
-- [Querying data](#querying-data)
-  - [Select queries](#select-queries)
-  - [Filtering data](#filtering-data)
-  - [Sorting data](#sorting-data)
-  - [Joining tables](#joining-tables)
-- [Advanced topics](#advanced-topics)
-  - [Transactions](#transactions)
-  - [Indexes](#indexes)
-  - [Views](#views)
-  - [Functions](#functions)
-  - [Stored procedures](#stored-procedures) 
-- [Performance tuning](#performance-tuning)
-  - [Using EXPLAIN](#using-explain)
-  - [Using EXPLAIN ANALYZE](#using-explain-analyze)
-  - [Using pg_stat_statements](#using-pg_stat_statements)
-  - [Viewing activity and locks](#viewing-activity-and-locks)
-  - [Analyzing index usage](#analyzing-index-usage)
-- [Troubleshooting](#troubleshooting)
-  - [View running queries](#view-running-queries)
-  - [Cancel a running query](#cancel-a-running-query)
-
 ## Basic operations
+
+Here are some examples of basic database operations in Postgres:
+
 ### Creating a table
 
 ```sql
