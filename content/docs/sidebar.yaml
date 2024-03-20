@@ -390,6 +390,8 @@
           slug: functions/jsonb_to_record
     - title: Optimize queries
       slug: /postgres/query-performance
+    - title: Query reference
+      slug: /postgres/query-reference
     - title: Compatibility
       slug: reference/compatibility
 - title: Import data

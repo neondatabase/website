@@ -3,7 +3,7 @@ title: Postgres
 enableTableOfContents: false
 ---
 
-Explore Postgres features with Neon's POstgres guides. Learn about data types, extensions, functions, and optimizing query performance. Access our [mirror of the official PostgreSQL documentation](/docs/postgres/index) for a comprehensive understanding. Remember, **Neon is Postgres**, so you're encouraged to reference both our materials and the official PostgreSQL documentation.
+Explore Postgres features with Neon's Postgres guides. Learn about data types, extensions, functions, and optimizing query performance. Remember, **Neon is Postgres**, so you're encouraged to reference both our materials and the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/).
 
 <DetailIconCards>
 
@@ -13,10 +13,10 @@ Explore Postgres features with Neon's POstgres guides. Learn about data types, e
 
 <a href="/docs/postgres/functions-intro" description="Learn about Postgres functions" icon="app-store" icon="app-store">Postgres functions</a>
 
-<a href="/docs/postgres/query-performance" description="Learn about Neon as a managed Postgres service" icon="app-store" icon="app-store">Optimize query performance</a>
+<a href="/docs/postgres/query-performance" description="Strategies for optimizing Postgres query performance in Neon" icon="app-store" icon="app-store">Optimize query performance</a>
+
+<a href="/docs/ppostgres/query-reference" description="Find examples and templates for commonly-used Postgres queries" icon="app-store" icon="app-store">Postgres query reference</a>
 
 <a href="/docs/reference/compatibility" description="Learn about Neon as a managed Postgres service" icon="app-store" icon="app-store">Postgres compatibility in Neon</a>
-
-<a href="/docs/postgres/index" description="Neon is Postgres. Access our mirror of the official PostgreSQL documentation" icon="app-store" icon="app-store">Official PostgreSQL Documentation</a>
 
 </DetailIconCards>

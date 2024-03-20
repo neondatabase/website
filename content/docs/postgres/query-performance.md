@@ -1,5 +1,5 @@
 ---
-title: Optimizing query performance
+title: Optimize query performance
 subtitle: Learn about strategies for optimizing Postgres query performance in Neon
 enableTableOfContents: true
 ---
