@@ -61,7 +61,7 @@ DELETE FROM users WHERE user_id = 1;
 
 ### Select queries
 
-Here are a few representative examples of SELECT queries in PostgreSQL that cover a range of common use cases:
+Here are a few representative examples of `SELECT` queries in Postgres that cover common use cases:
 
 
 ```sql
@@ -85,7 +85,7 @@ These examples show how to perform a basic retrieval of all or specific columns 
 
 ### Filtering data
 
-Here are some examples of using the WHERE clause to filter data in PostgreSQL, showcasing various filtering scenarios:
+Here are some examples of using the `WHERE` clause to filter data in Postgres, showcasing various filtering scenarios:
 
 ```sql
 -- Filter by an exact match
@@ -117,7 +117,7 @@ These examples illustrate how to filter query results based on exact matches, ra
 
 ### Sorting data
 
-Here are examples of sorting data in PostgreSQL, demonstrating various ways to order your query results:
+Here are examples of sorting data in Postgres, demonstrating various ways to order your query results:
 
 ```sql
 -- Sort results in ascending order by a single column
@@ -143,11 +143,11 @@ SELECT * FROM tasks ORDER BY due_date ASC NULLS LAST;
 SELECT * FROM tasks ORDER BY due_date DESC NULLS FIRST;
 ```
 
-These queries illustrate the flexibility of PostgreSQL's ORDER BY clause, enabling sorting by single or multiple columns, using column aliases, sorting by computed expressions, and explicitly controlling the order of null values.
+These queries demonstrate the flexibility of the Postgres `ORDER BY` clause, enabling sorting by single or multiple columns, using column aliases, sorting by computed expressions, and explicitly controlling the order of null values.
 
 ### Joining tables
 
-Here are some examples illustrating different ways to join tables in PostgreSQL, which can be essential for queries involving data that spans multiple tables:
+Here are some examples illustrating different ways to join tables in Postgres, which can be essential for queries involving data that spans multiple tables:
 
 ```sql
 -- INNER JOIN to select rows that have matching values in both tables
@@ -192,12 +192,12 @@ FROM employees
 JOIN departments USING(department_id);
 ```
 
-These examples cover the spectrum of joins available in PostgreSQL, from the basic inner join to more complex scenarios involving multiple tables, self-joins, and using the USING() clause for join conditions.
+These examples cover the spectrum of joins available in Postgres, from the basic inner join to more complex scenarios involving multiple tables, self-joins, and using the `USING()` clause for join conditions.
 
 ## Advanced topics
 ### Transactions
 
-Transactions in Postgres ensure that a sequence of operations are executed as a single unit of work, either completely succeeding or failing together. Here are basic examples demonstrating how to use transactions in Postgres:
+Transactions in Postgres ensure that a sequence of operations is executed as a single unit of work, either completely succeeding or failing together. Here are basic examples demonstrating how to use transactions in Postgres:
 
 ```sql
 -- Start a transaction
@@ -236,11 +236,11 @@ ROLLBACK TO SAVEPOINT my_savepoint;
 COMMIT
 ```
 
-These examples show the basic structure of transactions in PostgreSQL, including how to start (BEGIN), commit (COMMIT), and roll back (ROLLBACK) transactions. The use of a savepoint (SAVEPOINT) is also demonstrated, allowing partial rollback within a transaction. Transactions are crucial for maintaining data integrity, especially when multiple related operations must either all succeed or fail together.
+These examples show the basic structure of transactions in Postgres, including how to start (`BEGIN`), commit (`COMMIT`), and roll back (`ROLLBACK`) transactions. The use of a savepoint (`SAVEPOINT`) is also demonstrated, allowing partial rollback within a transaction. Transactions are crucial for maintaining data integrity, especially when multiple related operations must either all succeed or fail together.
 
 ### Indexes
 
-Creating and managing indexes is crucial for improving query performance in PostgreSQL. Here are some basic examples of how to work with indexes:
+Creating and managing indexes is crucial for improving query performance in Postgres. Here are some basic examples of how to work with indexes:
 
 ```sql
 -- Create a basic index on a single column
@@ -271,11 +271,11 @@ REINDEX INDEX idx_user_email;
 CREATE INDEX CONCURRENTLY idx_concurrent_email ON users(email);
 ```
 
-These examples showcase the variety of indexes that can be created in PostgreSQL, including basic, unique, composite, partial, expression-based, and GIN indexes. They also cover index maintenance operations such as dropping, reindexing, and creating indexes concurrently to minimize lock contention.
+These examples showcase the variety of indexes that can be created in Postgres, including basic, unique, composite, partial, expression-based, and GIN indexes. They also cover index maintenance operations such as dropping, reindexing, and creating indexes concurrently to minimize lock contention.
 
 ### Views
 
-Here are some examples of how to work with views in PostgreSQL, which can help simplify complex queries, provide a level of abstraction, or secure data access:
+Here are some examples of how to work with views in Postgres, which can help simplify complex queries, provide a level of abstraction, or secure data access:
 
 ```sql
 -- Creating a view
@@ -315,11 +315,11 @@ SELECT * FROM department_summary;
 DROP MATERIALIZED VIEW IF EXISTS department_summary;
 ```
 
-These examples cover creating and using both standard and materialized views in PostgreSQL. Standard views are virtual tables that do not store the data directly but represent the results of a query. Materialized views, on the other hand, store the result of the query on disk, acting like a snapshot that can boost performance for costly operations, at the expense of needing periodic refreshes to stay up-to-date.
+These examples cover creating and using both standard and materialized views in Postgres. Standard views are virtual tables that do not store the data directly but represent the results of a query. Materialized views, on the other hand, store the result of the query on disk, acting like a snapshot that can boost performance for costly operations, at the expense of needing periodic refreshes to stay up-to-date.
 
 ### Stored procedures
 
-Stored procedures in PostgreSQL are used for performing actions that do not necessarily return a result set, such as modifying data or working with transaction control.
+Stored procedures in Postgres are used for performing actions that do not necessarily return a result set, such as modifying data or working with transaction control.
 
 ```sql
 -- Creating a stored procedure
@@ -340,12 +340,12 @@ $$;
 CALL transfer_funds(1, 2, 100.00);
 ```
 
-Stored procedures are typically used for executing tasks that may or may not return data and can include transaction control statements like COMMIT and ROLLBACK.
+Stored procedures are typically used for executing tasks that may or may not return data and can include transaction control statements like `COMMIT` and `ROLLBACK`.
 
 
 ## Functions
 
-Functions in PostgreSQL can return a single value, a record, or a set of records.
+Functions in Postgres can return a single value, a record, or a set of records.
 
 ```sql
 -- Creating a simple function
@@ -378,11 +378,11 @@ Functions are typically used for computations and can return data.
 
 ## Performance tuning
 
-To analyze query performance in PostgreSQL, you can use a combination of built-in views, extensions, and commands that help identify performance bottlenecks and optimize query execution. Here are some foundational techniques and examples:
+To analyze query performance in Postgres, you can use a combination of built-in views, extensions, and commands that help identify performance bottlenecks and optimize query execution. Here are some foundational techniques and examples:
 
 ### Using EXPLAIN
 
-The EXPLAIN command shows the execution plan of a query, detailing how tables are scanned, joined, and which indexes are used.
+The `EXPLAIN` command shows the execution plan of a query, detailing how tables are scanned, joined, and which indexes are used.
 
 ```sql
 EXPLAIN SELECT * FROM employees WHERE department_id = 1;
@@ -390,7 +390,7 @@ EXPLAIN SELECT * FROM employees WHERE department_id = 1;
 
 ### Using EXPLAIN ANALYZE
 
-This is a step further than EXPLAIN, as it executes the query and provides actual execution times and row counts.
+This is a step further than `EXPLAIN`, as it executes the query and provides actual execution times and row counts.
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM employees WHERE department_id = 1;
@@ -398,15 +398,15 @@ EXPLAIN ANALYZE SELECT * FROM employees WHERE department_id = 1;
 
 ### Using pg_stat_statements
 
-pg_stat_statements is an extension that provides a means to track execution statistics of all SQL statements executed by a server.
+`pg_stat_statements` is an extension that provides a means to track execution statistics of all SQL statements executed by a server.
 
-First, ensure the extension is enabled in your PostgreSQL database:
+First, ensure the extension is enabled in your Postgres database:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-Then, you can query the pg_stat_statements view to analyze performance:
+Then, you can query the `pg_stat_statements` view to analyze performance:
 
 ```sql
 SELECT query, calls, total_exec_time, rows, avg_exec_time
