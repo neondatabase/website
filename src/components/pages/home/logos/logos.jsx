@@ -42,15 +42,24 @@ const logos = [
 ];
 
 const Logos = () => (
-  <section className="safe-paddings mt-[172px]">
-    <Container className="z-20 flex items-center justify-between" size="1100">
-      <h2 className="max-w-[370px] text-[36px] font-medium leading-dense tracking-extra-tight text-white">
+  <section className="safe-paddings mt-[172px] xl:mt-24 lg:mt-20 sm:mt-16">
+    <Container
+      className="z-20 flex flex-wrap items-center justify-between gap-y-6 xl:max-w-[960px] sm:flex-col sm:items-start"
+      size="1100"
+    >
+      <h2 className="max-w-[370px] text-[36px] font-medium leading-dense tracking-extra-tight text-white xl:text-[32px] lg:max-w-[300px] lg:text-[26px] sm:text-[22px]">
         We separated storage and&nbsp;compute.
       </h2>
-      <ul className="mr-[108px] grid grid-cols-[0.61fr_.664fr_1fr] justify-center gap-x-14 gap-y-12">
+      <ul className="mr-[108px] grid shrink grid-cols-[0.61fr_.664fr_1fr] justify-center gap-x-14 gap-y-12 xl:mr-[69px] xl:gap-x-12 xl:gap-y-10 lg:mr-6 lg:gap-x-8 lg:gap-y-7 md:mr-0 sm:gap-y-5">
         {logos.map(({ logo, width, alt }) => (
-          <li key={alt}>
-            <Image className="h-7 w-auto" src={logo} height={28} width={width} alt={alt} />
+          <li className="flex" key={alt}>
+            <Image
+              className="h-7 w-auto xl:h-6 lg:h-5"
+              src={logo}
+              height={28}
+              width={width}
+              alt={alt}
+            />
           </li>
         ))}
       </ul>
