@@ -456,7 +456,7 @@ ORDER BY seq_scan DESC;
 
 This `pg_stat_user_tables` query helps identify tables where sequential scans are more common than index scans, indicating potential areas for performance improvement through better indexing. The `pg_stat_user_tables` view is part of the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
 
-Also see the [Use indexes](/docs/postgres/query-performance#use-indexes) section in our query performance optimization guide.
+Also, see the [Use indexes](/docs/postgres/query-performance#use-indexes) section in our query performance optimization guide.
 
 ## Troubleshooting
 
