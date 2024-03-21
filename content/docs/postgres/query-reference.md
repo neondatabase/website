@@ -6,11 +6,7 @@ enableTableOfContents: true
 
 This page provides a reference for common Postgres queries, providing examples for basic operations to advanced use cases.
 
-## Basic operations
-
-Here are some examples of basic database operations in Postgres:
-
-### Creating a table
+## Creating a table
 
 ```sql
 CREATE TABLE users (
@@ -23,7 +19,7 @@ CREATE TABLE users (
 
 See [CREATE TABLE](https://www.postgresql.org/docs/current/sql-createtable.html) for more information. 
 
-### Inserting data
+## Inserting data
 
 ```sql
 INSERT INTO users (username, email) VALUES ('alex', 'alex@domain.com');
@@ -31,7 +27,7 @@ INSERT INTO users (username, email) VALUES ('alex', 'alex@domain.com');
 
 See [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) for more information.
 
-### Updating data
+## Updating data
 
 ```sql
 UPDATE users SET email = 'new.alex@domain.com' WHERE user_id = 1;
@@ -39,7 +35,7 @@ UPDATE users SET email = 'new.alex@domain.com' WHERE user_id = 1;
 
 See [Update](https://www.postgresql.org/docs/current/sql-update.html) for more information.
 
-### Deleting data
+## Deleting data
 
 ```sql
 DELETE FROM users WHERE user_id = 1;
@@ -49,7 +45,7 @@ See [Delete](https://www.postgresql.org/docs/current/sql-delete.html) for more i
 
 ## Querying data
 
-### Select queries
+## Select queries
 
 Here are a few examples of `SELECT` queries in Postgres that cover common use cases:
 
@@ -75,7 +71,7 @@ These examples show how to perform a basic retrieval of all or specific columns 
 
 See [SELECT](https://www.postgresql.org/docs/current/sql-select.html) for more information.
 
-### Filtering data
+## Filtering data
 
 Here are some examples of using the `WHERE` clause to filter data in Postgres, showcasing various filtering scenarios:
 
@@ -183,7 +179,7 @@ These examples illustrate how to filter query results based on exact matches, ra
 
 See [WHERE clause](https://www.postgresql.org/docs/7.1/queries.html#QUERIES-WHERE) for more information and examples.
 
-### Sorting data
+## Sorting data
 
 Here are examples of sorting data in Postgres, demonstrating various ways to order your query results:
 
@@ -253,7 +249,7 @@ These queries demonstrate the flexibility of the Postgres `ORDER BY` clause, ena
 
 For additional information, see [Sorting Rows](https://www.postgresql.org/docs/current/queries-order.html).
 
-### Joining tables
+## Joining tables
 
 Here are some examples illustrating different ways to join tables in Postgres, which can be essential for queries involving data that spans multiple tables:
 
@@ -378,8 +374,7 @@ These examples cover the different types of joins available in Postgres, from th
 
 For additional examples and information, see [Joins between tables](https://www.postgresql.org/docs/current/tutorial-join.html).
 
-## Advanced topics
-### Transactions
+## Transactions
 
 Transactions in Postgres ensure that a sequence of operations is executed as a single unit of work, either completely succeeding or failing together. Here are basic examples demonstrating how to use transactions in Postgres:
 
@@ -440,7 +435,7 @@ These examples show the basic structure of transactions in Postgres, including h
 
 For additional information, see [Transactions](https://www.postgresql.org/docs/current/tutorial-transactions.html).
 
-### Indexes
+## Indexes
 
 Creating and managing indexes is crucial for improving query performance in Postgres. Here are some basic examples of how to work with indexes:
 
@@ -505,7 +500,7 @@ These examples showcase the variety of indexes that can be created in Postgres, 
 
 For more information about indexes in Postgres, see [Indexes](https://www.postgresql.org/docs/current/indexes.html).
 
-### Views
+## Views
 
 Here are some examples of how to work with views in Postgres, which can help simplify complex queries, provide a level of abstraction, or secure data access:
 
@@ -573,7 +568,7 @@ These examples cover creating and using both standard and materialized views in 
 
 For more information about views in Postgres, see [Views](https://www.postgresql.org/docs/current/tutorial-views.html).
 
-### Stored procedures
+## Stored procedures
 
 Stored procedures in Postgres are used for performing actions that do not necessarily return a result set, such as modifying data or working with transaction control.
 
@@ -768,13 +763,13 @@ SELECT schemaname, relname, last_vacuum, last_autovacuum, last_analyze, last_aut
 FROM pg_stat_user_tables;
 ```
 
-### Show all Postgres settings
+### View Postgres settings
 
 ```sql
 SHOW ALL;
 ```
 
-## Troubleshooting
+## Connection queries
 
 The queries in this section use the [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) view, which is part of the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
 
@@ -790,7 +785,7 @@ SELECT COUNT(*) FROM pg_stat_activity;
 SELECT COUNT(*) FROM pg_stat_activity WHERE datname = 'your_database_name';
 ```
 
-### Check for connections by user:
+### Check for connections by user
 
 ```sql
 SELECT usename, count(*)
