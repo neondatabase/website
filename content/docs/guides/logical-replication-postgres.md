@@ -24,7 +24,7 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 
 To enable logical replication in Neon:
 
-1. Select your project in the Neon console.
+1. Select your project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Beta**.
 4. Click **Enable**.

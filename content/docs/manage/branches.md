@@ -68,11 +68,11 @@ Branch details shown on the branch page include:
 
 - **ID**: The branch ID. Branch IDs have a `br-` prefix.
 - **Created**: The date and time the branch was created.
-- **Active Time**: The total amount of active hours for your branch compute within the current billing period.
-- **Compute Time**: The compute hours used by the branch within the current billing period.
-- **Parent Branch**: The branch from which this branch was created (only visible for child branches).
-- **Branching point**: The point in time, in terms of data, from which the branch was created.
-- **Last data reset**: The last time the branch was reset from the parent branch.
+- **Active  Since**: The active hours used by the branch compute in the current billing period.
+- **Compute Time**: The compute hours used by the branch in the current billing period.
+- **Parent Branch**: The branch from which this branch was created (only applicable to child branches).
+- **Branching Point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
+- **Last Data Reset**: The last time the branch was reset from the parent branch (only applicable to child branches).
 
 The branch details page also includes details about the compute endpoint associated with the branch. For more information, see [View a compute endpoint](/docs/manage/endpoints#view-a-compute-endpoint).
 
