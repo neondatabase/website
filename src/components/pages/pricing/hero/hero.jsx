@@ -45,7 +45,7 @@ const items = [
         title: '10 GiB storage included',
         info: 'Additional storage: $3.5 for 2 GiB',
       },
-      { title: '300 compute hours included', info: 'Additional usage: $0.16 per compute-hour' },
+      { title: '300 compute hours included', info: 'Additional usage: $0.16 per compute hour' },
       { title: 'Standard support' },
       { title: 'Autoscaling from 0 to 4 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
       { title: 'Instant Read Replicas' },
@@ -65,7 +65,7 @@ const items = [
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
       { title: '50 GiB storage included', info: 'Additional storage: $15 for 10 GiB' },
-      { title: '750 compute hours included', info: 'Additional usage: $0.16 per compute-hour' },
+      { title: '750 compute hours included', info: 'Additional usage: $0.16 per compute hour' },
       { title: 'Priority support' },
       { title: 'Autoscaling from 0 to 8 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
       { title: 'Instant Read Replicas' },
