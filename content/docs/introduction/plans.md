@@ -41,7 +41,7 @@ In addition, Free Tier users have access to the following Neon features:
 - [Project sharing](#project-sharing): Share your project with any Neon user account.
 - [Advanced Postgres features](#advanced-postgres-features): Connection pooling, logical replication, and 60+ Postgres extensions
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **24 hours** in the past, time travel connections, and more.
-- [Community support](/docs/introduction/support): Free Tier plan users have access to **Community** support on our [Neon Discord Server](/discord).
+- [Community support](/docs/introduction/support): Free Tier plan users have access to **Community** support on our [Neon Discord Server](https://discord.gg/92vNTzKDGp).
 
 <Admonition type="tip" title="Free Tier Compute Allowances">
 On the Free Tier, your primary branch compute is always available — it will never be suspended due to running out of compute hours, which means you can always access the data on the primary branch in your Neon project. Branch computes have 20 [active hours](/docs/reference/glossary#active-time) (5 [compute hours](/docs/reference/glossary#compute-hour)) per month. If your branch computes exceed this allowance, they are suspended until the allowance resets at the beginning of the month. You can monitor branch compute hours on the [Billing page](/docs/introduction/manage-billing#view-the-billing-page) in the Neon Console. The compute hour allowance for branch computes resets at the beginning of each month. For instance, if you enrolled in the Neon Free Tier in January, the allowance for branch computes resets on February 1st.
