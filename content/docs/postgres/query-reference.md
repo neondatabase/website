@@ -21,7 +21,7 @@ CREATE TABLE users (
 );
 ```
 
-For the full syntax, see [CREATE TABLE](https://www.postgresql.org/docs/current/sql-createtable.html). 
+See [CREATE TABLE](https://www.postgresql.org/docs/current/sql-createtable.html) for more information. 
 
 ### Inserting data
 
@@ -29,7 +29,7 @@ For the full syntax, see [CREATE TABLE](https://www.postgresql.org/docs/current/
 INSERT INTO users (username, email) VALUES ('alex', 'alex@domain.com');
 ```
 
-For the full syntax, see [INSERT](https://www.postgresql.org/docs/current/sql-insert.html).
+See [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) for more information.
 
 ### Updating data
 
@@ -37,7 +37,7 @@ For the full syntax, see [INSERT](https://www.postgresql.org/docs/current/sql-in
 UPDATE users SET email = 'new.alex@domain.com' WHERE user_id = 1;
 ```
 
-For the full syntax, see [Update](https://www.postgresql.org/docs/current/sql-update.html).
+See [Update](https://www.postgresql.org/docs/current/sql-update.html) for more information.
 
 ### Deleting data
 
@@ -45,7 +45,7 @@ For the full syntax, see [Update](https://www.postgresql.org/docs/current/sql-up
 DELETE FROM users WHERE user_id = 1;
 ```
 
-For the full syntax, see [Delete](https://www.postgresql.org/docs/current/sql-delete.html).
+See [Delete](https://www.postgresql.org/docs/current/sql-delete.html) for more information.
 
 ## Querying data
 
@@ -73,7 +73,7 @@ SELECT COUNT(*) AS total_users, EXTRACT(YEAR FROM created_at) AS year FROM users
 
 These examples show how to perform a basic retrieval of all or specific columns from a table, filter results using a condition, order and limit the output, and use aggregation functions along with grouping to summarize data.
 
-For the full syntax, see [SELECT](https://www.postgresql.org/docs/current/sql-select.html).
+See [SELECT](https://www.postgresql.org/docs/current/sql-select.html) for more information.
 
 ### Filtering data
 
@@ -107,7 +107,7 @@ SELECT * FROM orders WHERE customer_id IN (SELECT customer_id FROM customers WHE
 
 These examples illustrate how to filter query results based on exact matches, ranges, lists of values, pattern matching with `LIKE`, combining multiple conditions with `AND` and `OR`, handling `NULL` values, and leveraging subqueries for more complex conditions.
 
-For additional information and examples, see [WHERE clause](https://www.postgresql.org/docs/7.1/queries.html#QUERIES-WHERE).
+See [WHERE clause](https://www.postgresql.org/docs/7.1/queries.html#QUERIES-WHERE) for more information and examples.
 
 ### Sorting data
 
@@ -188,7 +188,7 @@ FROM employees
 JOIN departments USING(department_id);
 ```
 
-These examples cover the spectrum of joins available in Postgres, from the basic inner join to more complex scenarios involving multiple tables, self-joins, and using the `USING()` clause for join conditions.
+These examples cover the different types of joins available in Postgres, from the basic inner join to more complex scenarios involving multiple tables, self-joins, and using the `USING()` clause for join conditions.
 
 For additional examples and information, see [Joins between tables](https://www.postgresql.org/docs/current/tutorial-join.html).
 
@@ -234,9 +234,9 @@ ROLLBACK TO SAVEPOINT my_savepoint;
 COMMIT;
 ```
 
-These examples show the basic structure of transactions in Postgres, including how to start (`BEGIN`), commit (`COMMIT`), and roll back (`ROLLBACK`) transactions. The use of a savepoint (`SAVEPOINT`) is also demonstrated, allowing partial rollback within a transaction. Transactions are crucial for maintaining data integrity, especially when multiple related operations must either all succeed or fail together.
+These examples show the basic structure of transactions in Postgres, including how to start (`BEGIN`), commit (`COMMIT`), and roll back (`ROLLBACK`) transactions. The use of a savepoint (`SAVEPOINT`) is also demonstrated, allowing partial rollback within a transaction. Transactions are important for maintaining data integrity, especially when multiple related operations must either all succeed or fail together.
 
-For addition information, see [Transactions](https://www.postgresql.org/docs/current/tutorial-transactions.html).
+For additional information, see [Transactions](https://www.postgresql.org/docs/current/tutorial-transactions.html).
 
 ### Indexes
 
@@ -383,7 +383,7 @@ Functions are typically used for computations and can return data. For additiona
 
 ## Performance tuning
 
-To analyze query performance in Postgres, you can use a combination of built-in views, extensions, and commands that help identify performance bottlenecks and optimize query execution. Here are some foundational techniques and examples:
+To analyze query performance in Postgres, you can use a combination of built-in views, extensions, and commands that help identify performance bottlenecks and optimize query execution. Here are some examples:
 
 ### Using EXPLAIN
 
@@ -441,7 +441,7 @@ JOIN pg_stat_activity ON pg_locks.pid = pg_stat_activity.pid
 WHERE NOT granted;
 ```
 
-The queries above use the [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) view, which is part of the Postges [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
+The queries above use the [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) view, which is part of the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
 
 ### Analyzing index usage
 
@@ -454,7 +454,9 @@ WHERE idx_scan < seq_scan AND idx_scan > 0
 ORDER BY seq_scan DESC;
 ```
 
-This `pg_stat_user_tables` query helps identify tables where sequential scans are more common than index scans, indicating potential areas for performance improvement through better indexing. The `pg_stat_user_tables` view is part of the Postges [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
+This `pg_stat_user_tables` query helps identify tables where sequential scans are more common than index scans, indicating potential areas for performance improvement through better indexing. The `pg_stat_user_tables` view is part of the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
+
+Also see the [Use indexes](/docs/postgres/query-performance#use-indexes) section in our query performance optimization guide.
 
 ## Troubleshooting
 
@@ -464,7 +466,7 @@ This `pg_stat_user_tables` query helps identify tables where sequential scans ar
 SELECT pid, query, state FROM pg_stat_activity WHERE state != 'idle';
 ```
 
-This query uses the [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) view, which is part of the Postges [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
+This query uses the [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) view, which is part of the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
 
 ### Cancel a running query
 
