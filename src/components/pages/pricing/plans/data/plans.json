@@ -110,7 +110,7 @@
         "title": "Compute Size"
       },
       "free": {
-        "title": "Fixed at 0.25 vCPU, 1 GB RAM"
+        "title": "0.25 vCPU, 1 GB RAM"
       },
       "launch": {
         "title": "Up to 4 vCPU, 16 GB RAM"
