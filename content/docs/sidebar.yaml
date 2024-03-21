@@ -247,6 +247,8 @@
           slug: guides/aws-lambda
     - title: Caching
       items:
+        - title: Cloudflare Hyperdrive
+          slug: guides/cloudflare-hyperdrive
         - title: PolyScale integration
           slug: guides/polyscale-integration
         - title: PolyScale manual setup
@@ -255,8 +257,6 @@
       items:
         - title: Cloudflare
           items:
-            - title: Cloudflare Hyperdrive
-              slug: guides/cloudflare-hyperdrive
             - title: Cloudflare Pages
               slug: guides/cloudflare-pages
             - title: Cloudflare Workers
