@@ -13,14 +13,14 @@ import socImage from 'images/pages/home/trusted/soc.jpg';
 const Card = ({ className, borderClassName, bgImage, children }) => (
   <div
     className={clsx(
-      'relative flex items-end rounded-[10px] p-6 xl:rounded-lg xl:p-5 lg:rounded-[10px] md:p-4',
+      'relative flex items-end rounded-[10px] p-6 xl:rounded-lg xl:p-5 lg:rounded-[10px] sm:p-4',
       className
     )}
   >
     <Image
       className="absolute inset-0 h-full w-full rounded-[inherit] object-cover"
-      width={bgImage.width}
-      height={bgImage.height}
+      width={bgImage.width / 2}
+      height={bgImage.height / 2}
       src={bgImage}
       alt=""
     />
@@ -28,7 +28,7 @@ const Card = ({ className, borderClassName, bgImage, children }) => (
     <p
       className={clsx(
         'relative z-20 text-lg leading-snug tracking-extra-tight text-gray-new-50',
-        'xl:text-sm xl:leading-tight lg:text-base lg:leading-snug md:text-[15px] md:leading-tight'
+        'xl:text-sm xl:leading-tight lg:text-base lg:leading-snug sm:text-[15px] sm:leading-tight'
       )}
     >
       {children}
@@ -44,13 +44,13 @@ Card.propTypes = {
 };
 
 const Trusted = () => (
-  <section className="trusted mt-[224px] xl:mt-28 md:mt-20">
-    <Container className="xl:px-[80px]" size="1152">
+  <section className="trusted mt-[224px] xl:mt-28 sm:mt-20">
+    <Container className="xl:max-w-[864px]" size="1152">
       <h2
         className={clsx(
           '-mb-14 bg-white bg-clip-text text-center text-[152px] font-medium leading-none -tracking-[0.05em] text-transparent',
           'bg-[radial-gradient(34.86%_84.21%_at_71.59%_84.21%,_#000_17.9%,_#FFF_64%)]',
-          'xl:-mb-[46px] xl:text-[112px] lg:mb-8 lg:bg-none lg:text-[72px] lg:text-white md:mb-7 md:text-[40px] md:leading-[0.95em] md:tracking-tighter'
+          'xl:-mb-[46px] xl:text-[112px] lg:mb-8 lg:bg-none lg:text-[72px] lg:text-white sm:mb-7 sm:text-[40px] sm:leading-[0.95em] sm:tracking-tighter'
         )}
       >
         Trusted Postgres
@@ -58,11 +58,11 @@ const Trusted = () => (
       <div
         className={clsx(
           'grid grid-cols-[22.22%_27.86%_25%_auto] items-end justify-center gap-x-8 px-0',
-          'xl:gap-6 lg:grid-cols-[1fr_1fr] lg:gap-5 lg:px-8 md:grid-cols-[minmax(0,320px)] md:gap-3 md:px-0'
+          'xl:gap-6 lg:grid-cols-[1fr_1fr] lg:gap-5 lg:px-8 md:px-0 sm:grid-cols-[minmax(0,320px)] sm:gap-3'
         )}
       >
         <Card
-          className="aspect-[256/198] justify-center lg:order-3 lg:aspect-[310/220] md:order-5"
+          className="aspect-[256/198] justify-center lg:order-3 lg:aspect-[310/220] sm:order-5"
           borderClassName="border-linear border-image-home-trusted-github-card"
           bgImage={githubImage}
         >
