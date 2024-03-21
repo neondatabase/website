@@ -23,4 +23,10 @@ Integrations that are not yet available have a **Request** button, which opens a
 
 ## Suggest an integration
 
-If you can't find the integration you're looking for, let us know via the **feedback** channel on our [Discord Server](https://discord.gg/92vNTzKDGp).
+If you can't find the integration you're looking for:
+
+1. Click the **Suggest an integration** button on the **Integrations** page.
+2. Fill out the necessary details for the integration you'd like to see added.
+3. Click **Suggest integration**.
+
+The Neon team will review your request.
