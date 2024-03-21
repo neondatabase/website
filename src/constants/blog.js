@@ -9,13 +9,6 @@ const CATEGORY_COLORS = {
   'case-study': 'text-pink-90',
 };
 
-const CATEGORY_HOVER_COLORS = {
-  company: 'hover:text-[#4DFFC4]',
-  engineering: 'hover:text-[#CAC2F0]',
-  community: 'hover:text-[#F7F7B6]',
-  ai: 'hover:text-[#C1E8FF]',
-};
-
 const CATEGORY_BG_COLORS = {
   company: 'bg-green-45/10',
   engineering: 'bg-purple-70/10',
@@ -28,7 +21,6 @@ export {
   BLOG_BASE_PATH,
   BLOG_POSTS_PER_PAGE,
   CATEGORY_COLORS,
-  CATEGORY_HOVER_COLORS,
   CATEGORY_BG_COLORS,
   BLOG_CATEGORY_BASE_PATH,
 };
