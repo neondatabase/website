@@ -14,7 +14,7 @@ const items = [
   },
   {
     question: 'What is a compute hour?',
-    answer: `Compute hour is the metric for compute usage in Neon. The quick math: Compute hours = compute size (CU) x active time (h). We measure compute size in CUs; 1 CU = 1 vCPU, 4 GB RAM.`,
+    answer: `Compute hour is the metric for compute usage in Neon. The quick math: Compute hour = compute size (CU) x active time (h). We measure compute size in CU; 1 CU = 1 vCPU, 4 GB RAM.`,
   },
   {
     question: 'How many compute hours it’ll take to run my workload?',
@@ -22,7 +22,7 @@ const items = [
   },
   {
     question: 'How can I control my costs with autoscaling?',
-    answer: `When enabling <a herf="/docs/introduction/autoscaling">autoscaling</a>, you will set a maximum autoscaling limit (e.g. 5 CPU) that will de-facto act as a cost limit.`,
+    answer: `When enabling <a herf="/docs/introduction/autoscaling">autoscaling</a>, you will set a maximum autoscaling limit (e.g. 2 CU) that will de-facto act as a cost limit.`,
   },
   {
     question: 'How is storage charged in Neon?',
