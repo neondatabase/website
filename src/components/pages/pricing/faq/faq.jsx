@@ -14,11 +14,11 @@ const items = [
   },
   {
     question: 'What is a compute hour?',
-    answer: `Compute hour is the metric for compute usage in Neon. The quick math: Compute hours = CPU size x active time (h).`,
+    answer: `Compute hour is the metric for compute usage in Neon. The quick math: Compute hours = compute size (CU) x active time (h). We measure compute size in CUs; 1 CU = 1 vCPU, 4 GB RAM.`,
   },
   {
     question: 'How many compute hours it’ll take to run my workload?',
-    answer: `You can get a good idea by estimating how many hours your databases run and at which capacity. For example: imagine you’re running a 2 CPU, 8 GB RAM database for 2 hours a day (or 62 hours per month). This equals [2 CU * 62 hours] = 124 compute hours per month.`,
+    answer: `You can get a good idea by estimating how many hours your databases run and at which compute size. For example: imagine you’re running a 2 CPU, 8 GB RAM database for 2 hours a day (or 62 hours per month). This equals [2 CU * 62 hours] = 124 compute hours per month.`,
   },
   {
     question: 'How can I control my costs with autoscaling?',
