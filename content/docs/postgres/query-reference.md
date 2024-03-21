@@ -79,6 +79,80 @@ See [SELECT](https://www.postgresql.org/docs/current/sql-select.html) for more i
 
 Here are some examples of using the `WHERE` clause to filter data in Postgres, showcasing various filtering scenarios:
 
+{/* 
+
+CREATE TABLE orders (
+    order_id SERIAL PRIMARY KEY,
+    customer_id INT NOT NULL,
+    order_date DATE NOT NULL,
+    total_amount DECIMAL NOT NULL
+);
+
+INSERT INTO orders (customer_id, order_date, total_amount) VALUES
+(1, '2023-01-10', 100.00),
+(2, '2023-01-20', 150.50),
+(3, '2023-02-05', 200.75);
+
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    category_id INT NOT NULL,
+    price DECIMAL NOT NULL
+);
+
+INSERT INTO products (name, category_id, price) VALUES
+('Laptop', 1, 1200.00),
+('Smartphone', 2, 800.00),
+('Headphones', 5, 150.00);
+
+CREATE TABLE employees (
+    employee_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    department_id INT NOT NULL
+);
+
+INSERT INTO employees (name, department_id) VALUES
+('John Doe', 1),
+('Jane Smith', 2),
+('Alice Johnson', 3);
+
+CREATE TABLE customers (
+    customer_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    country VARCHAR(50) NOT NULL
+);
+
+INSERT INTO customers (name, email, country) VALUES
+('Customer One', 'one@domain.com', 'Spain'),
+('Customer Two', 'two@otherdomain.com', 'France'),
+('Customer Three', 'three@domain.com', 'Spain');
+
+
+CREATE TABLE sales (
+    sale_id SERIAL PRIMARY KEY,
+    amount DECIMAL NOT NULL,
+    sales_date DATE NOT NULL
+);
+
+INSERT INTO sales (amount, sales_date) VALUES
+(550.00, '2023-01-15'),
+(450.00, '2023-02-10'),
+(600.00, '2023-01-25');
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    last_login DATE
+);
+
+INSERT INTO users (username, last_login) VALUES
+('alex', NULL),
+('dana', '2023-01-01'),
+('pat', NULL);
+
+ */}
+
 ```sql
 -- Filter by an exact match
 SELECT * FROM users WHERE username = 'alex';
@@ -113,6 +187,44 @@ See [WHERE clause](https://www.postgresql.org/docs/7.1/queries.html#QUERIES-WHER
 
 Here are examples of sorting data in Postgres, demonstrating various ways to order your query results:
 
+{/* 
+
+CREATE TABLE orders (
+    order_id SERIAL PRIMARY KEY,
+    customer_id INT,
+    status VARCHAR(50),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO orders (customer_id, status, created_at) VALUES
+(1, 'shipped', '2023-03-20 10:00:00'),
+(2, 'pending', '2023-03-21 08:30:00'),
+(3, 'completed', '2023-03-19 09:45:00');
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (username, created_at) VALUES
+('john_doe', '2022-01-15 07:00:00'),
+('jane_smith', '2021-05-20 13:00:00'),
+('alice_jones', '2023-02-11 16:30:00');
+
+CREATE TABLE tasks (
+    task_id SERIAL PRIMARY KEY,
+    description TEXT,
+    due_date DATE NULL
+);
+
+INSERT INTO tasks (description, due_date) VALUES
+('Finish project report', '2023-04-20'),
+('Prepare for presentation', NULL),
+('Update website', '2023-03-25');
+
+ */}
+
 ```sql
 -- Sort results in ascending order by a single column
 SELECT * FROM users ORDER BY username ASC;
@@ -144,6 +256,80 @@ For additional information, see [Sorting Rows](https://www.postgresql.org/docs/c
 ### Joining tables
 
 Here are some examples illustrating different ways to join tables in Postgres, which can be essential for queries involving data that spans multiple tables:
+
+{/* 
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    department_id INT,
+    manager_id INT REFERENCES employees(id)
+);
+
+-- Sample inserts
+INSERT INTO employees (name, department_id, manager_id) VALUES
+('John Doe', 1, NULL), -- Assuming John Doe is a manager
+('Jane Smith', 1, 1),
+('Alice Johnson', 2, NULL); -- Assuming Alice Johnson is a manager
+
+
+CREATE TABLE departments (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    office_id INT -- This will reference `offices` table
+);
+
+-- Sample inserts
+INSERT INTO departments (name, office_id) VALUES
+('Engineering', 1),
+('Marketing', 2);
+
+CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL
+);
+
+-- Sample inserts (Optional for CROSS JOIN, but provides context)
+INSERT INTO projects (title) VALUES
+('Project Alpha'),
+('Project Beta');
+
+CREATE TABLE offices (
+    id SERIAL PRIMARY KEY,
+    location VARCHAR(255) NOT NULL
+);
+
+-- Sample inserts
+INSERT INTO offices (location) VALUES
+('New York'),
+('San Francisco');
+
+-- Last join
+
+CREATE TABLE departments (
+    department_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES departments(department_id)
+);
+
+-- Insert into departments
+INSERT INTO departments (name) VALUES ('Engineering'), ('Marketing');
+
+-- Assuming 'Engineering' has department_id = 1, 'Marketing' = 2
+-- Insert into employees
+INSERT INTO employees (name, department_id) VALUES ('John Doe', 1), ('Jane Smith', 2);
+
+SELECT employees.name, departments.name AS department_name
+FROM employees
+JOIN departments USING(department_id);
+
+ */}
 
 ```sql
 -- INNER JOIN to select rows that have matching values in both tables
@@ -197,6 +383,22 @@ For additional examples and information, see [Joins between tables](https://www.
 
 Transactions in Postgres ensure that a sequence of operations is executed as a single unit of work, either completely succeeding or failing together. Here are basic examples demonstrating how to use transactions in Postgres:
 
+{/* 
+
+CREATE TABLE accounts (
+    account_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    balance DECIMAL NOT NULL
+);
+
+INSERT INTO accounts (user_id, balance) VALUES
+(1, 1000),  -- Initial balance for user 1
+(2, 500),   -- Initial balance for user 2
+(3, 200);   -- Initial balance for user 3
+
+ */}
+
+
 ```sql
 -- Start a transaction
 BEGIN;
@@ -242,6 +444,34 @@ For additional information, see [Transactions](https://www.postgresql.org/docs/c
 
 Creating and managing indexes is crucial for improving query performance in Postgres. Here are some basic examples of how to work with indexes:
 
+{/* 
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    active BOOLEAN NOT NULL,
+    preferences JSONB
+);
+
+-- Sample inserts
+INSERT INTO users (email, username, active, preferences) VALUES
+('john.doe@example.com', 'johndoe', TRUE, '{"theme": "dark", "notifications": "enabled"}'),
+('jane.doe@example.com', 'janedoe', FALSE, '{"theme": "light", "notifications": "disabled"}');
+
+CREATE TABLE events (
+    event_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    event_date DATE NOT NULL
+);
+
+-- Sample inserts
+INSERT INTO events (name, event_date) VALUES
+('Product Launch', '2023-05-15'),
+('Annual Meeting', '2023-12-20');
+
+ */}
+
 ```sql
 -- Create a basic index on a single column
 CREATE INDEX idx_user_email ON users(email);
@@ -278,6 +508,28 @@ For more information about indexes in Postgres, see [Indexes](https://www.postgr
 ### Views
 
 Here are some examples of how to work with views in Postgres, which can help simplify complex queries, provide a level of abstraction, or secure data access:
+
+{/* 
+
+CREATE TABLE employees (
+    employee_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    department VARCHAR(100) NOT NULL,
+    position VARCHAR(100) NOT NULL,
+    active BOOLEAN NOT NULL,
+    hire_date DATE NOT NULL,
+    salary DECIMAL(10, 2) NOT NULL
+);
+
+-- Inserting sample data into the employees table
+INSERT INTO employees (name, department, position, active, hire_date, salary) VALUES
+('John Doe', 'Engineering', 'Software Engineer', true, '2018-06-12', 90000.00),
+('Jane Smith', 'Marketing', 'Marketing Manager', true, '2019-07-16', 85000.00),
+('Jim Brown', 'Engineering', 'DevOps Specialist', false, '2020-08-20', 95000.00),
+('Emily White', 'Sales', 'Sales Representative', true, '2021-09-23', 65000.00);
+
+ */}
+
 
 ```sql
 -- Creating a view
@@ -325,6 +577,19 @@ For more information about views in Postgres, see [Views](https://www.postgresql
 
 Stored procedures in Postgres are used for performing actions that do not necessarily return a result set, such as modifying data or working with transaction control.
 
+{/* 
+
+CREATE TABLE accounts (
+    account_id SERIAL PRIMARY KEY,
+    balance DECIMAL(10, 2) NOT NULL
+);
+
+INSERT INTO accounts (account_id, balance) VALUES
+(1, 1000.00),
+(2, 500.00);
+
+ */}
+
 ```sql
 -- Creating a stored procedure
 CREATE OR REPLACE PROCEDURE transfer_funds(source_acc INT, dest_acc INT, transfer_amount DECIMAL)
@@ -342,6 +607,9 @@ $$;
 
 -- Calling the stored procedure
 CALL transfer_funds(1, 2, 100.00);
+
+-- See result
+SELECT * FROM accounts;
 ```
 
 Stored procedures are typically used for executing tasks that may or may not return data and can include transaction control statements like `COMMIT` and `ROLLBACK`.
@@ -351,6 +619,23 @@ For additional information and syntax, see [CREATE PROCEDURE](https://www.postgr
 ## Functions
 
 Functions in Postgres can return a single value, a record, or a set of records.
+
+{/* 
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    department VARCHAR(100)
+);
+
+INSERT INTO employees (name, department) VALUES
+('John Doe', 'Engineering'),
+('Jane Smith', 'Marketing'),
+('Alice Johnson', 'Human Resources'),
+('Bob Brown', 'Engineering');
+
+
+ */}
 
 ```sql
 -- Creating a simple function
@@ -411,13 +696,18 @@ First, ensure the extension is enabled in your Postgres database:
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-Then, you can query the `pg_stat_statements` view to analyze query performance:
+Then, you can query the `pg_stat_statements` view to analyze query performance. For example, this query lists the top 100 most frequently executed queries in the database:
 
 ```sql
-SELECT query, calls, total_exec_time, rows, avg_exec_time
+SELECT
+  userid,
+  query,
+  calls,
+  total_exec_time / 1000 AS total_seconds,
+  mean_exec_time AS avg_ms
 FROM pg_stat_statements
-ORDER BY total_exec_time DESC
-LIMIT 10;
+ORDER BY calls DESC
+LIMIT 100;
 ```
 
 For more information and examples, refer to our [pg_stat_statements extension guide](/docs/extensions/pg_stat_statements).
@@ -436,7 +726,8 @@ ORDER BY duration DESC;
 To check for locks that might be affecting performance:
 
 ```sql
-SELECT pid, relation::regclass, mode, query FROM pg_locks
+SELECT pg_locks.pid, relation::regclass, mode, query 
+FROM pg_locks
 JOIN pg_stat_activity ON pg_locks.pid = pg_stat_activity.pid
 WHERE NOT granted;
 ```
@@ -458,20 +749,82 @@ This `pg_stat_user_tables` query helps identify tables where sequential scans ar
 
 Also, see the [Use indexes](/docs/postgres/query-performance#use-indexes) section in our query performance optimization guide.
 
+### Table access statistics
+
+This query how frequently tables are accessed, which can help in identifying which tables are hot for reads or writes.
+
+```sql
+SELECT relname, seq_scan, idx_scan, n_tup_ins, n_tup_upd, n_tup_del
+FROM pg_stat_user_tables
+ORDER BY n_tup_ins + n_tup_upd + n_tup_del DESC;
+```
+
+### VACUUM and ANALYZE statistics
+
+Check the last time a vacuum and analyze were run on each table. This can help ensure that your database is being maintained properly for query optimization.
+
+```sql
+SELECT schemaname, relname, last_vacuum, last_autovacuum, last_analyze, last_autoanalyze
+FROM pg_stat_user_tables;
+```
+
+### Show all Postgres settings
+
+```sql
+SHOW ALL;
+```
+
 ## Troubleshooting
 
-### View running queries
+The queries in this section use the [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) view, which is part of the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
+
+### Get the current number of connections
 
 ```sql
-SELECT pid, query, state FROM pg_stat_activity WHERE state != 'idle';
+SELECT COUNT(*) FROM pg_stat_activity;
 ```
 
-This query uses the [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) view, which is part of the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
-
-### Cancel a running query
+### Get the current number of connections for a database
 
 ```sql
-SELECT pg_cancel_backend(pid);
+SELECT COUNT(*) FROM pg_stat_activity WHERE datname = 'your_database_name';
 ```
+
+### Check for connections by user:
+
+```sql
+SELECT usename, count(*)
+FROM pg_stat_activity
+GROUP BY usename;
+```
+
+### Find long-running or idle connections
+
+```sql
+SELECT
+  pid,
+  now() - pg_stat_activity.query_start AS duration,
+  query,
+  state
+FROM
+  pg_stat_activity
+WHERE
+  (now() - pg_stat_activity.query_start) > INTERVAL '1 minute'
+  OR state = '<idle>';
+```
+
+### Drop long-running or idle connections
+
+```sql
+SELECT pg_terminate_backend(pid)
+FROM pg_stat_activity
+WHERE datname = 'databasename'
+  AND pid <> pg_backend_pid()
+  AND state IN ('idle');
+```
+
+<Admonition type="note">
+To terminate a session, you can run either `pg_cancel_backend(pid)` or `pg_terminate_backend(pid)`. The first command terminates the currently executing query, and the second one (used in the query above) terminates both the query and the session.
+</Admonition>
 
 <NeedHelp/>
