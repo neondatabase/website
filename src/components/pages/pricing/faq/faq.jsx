@@ -18,7 +18,7 @@ const items = [
   },
   {
     question: 'How many compute hours it’ll take to run my workload?',
-    answer: `You can get a good idea by estimating how many hours your databases run and at which compute size. For example: imagine you’re running a 2 CPU, 8 GB RAM database for 2 hours a day (or 62 hours per month). This equals [2 CU * 62 hours] = 124 compute hours per month.`,
+    answer: `You can get a good idea by estimating how many hours your databases run, and at which compute size. For example: imagine you’re running a 2 CPU, 8 GB RAM database for 2 hours a day (or 62 hours per month). This equals [2 CU * 62 hours] = 124 compute hours per month.`,
   },
   {
     question: 'How can I control my costs with autoscaling?',
