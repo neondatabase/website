@@ -51,7 +51,7 @@
       "rows": "2",
       "feature": {
         "title": "Compute (monthly)",
-        "subtitle": "[Compute hrs]=[compute size]x[active hrs]"
+        "subtitle": "Compute hrs = CPU size x active hrs"
       },
       "free": {
         "title": "24/7 for main compute",
