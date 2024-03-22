@@ -59,7 +59,7 @@ For example, the Launch plan includes an allowance of 10 GiB in the plan's month
 
 ### Compute
 
-Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed by _compute hour_ at $0.04 per hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the billing period, you are billed an extra $4 (100 x $0.04).
+Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed by _compute hour_ at $0.16 per hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the billing period, you are billed an extra $16.00 (100 x $0.16).
 
 ### Projects
 
@@ -109,14 +109,14 @@ Each [plan](/docs/introduction/plans) comes with base allowances for **Storage**
 The Launch plan supports extra **Storage** and **Compute**. If you need extra projects, you'll need to move up to the Scale plan.
 
 - **Extra Storage**: If you exceed 10 GiB, extra storage is billed in units of 2 GiB at $3.5 per unit.
-- **Extra Compute**: If you exceed 300 compute hours, extra compute is billed at $0.04/hour.
+- **Extra Compute**: If you exceed 300 compute hours, extra compute is billed at $0.16/hour.
 
 #### For the Scale plan:
 
 The Scale plan supports extra **Storage**, **Compute**, and **Projects**.
 
 - **Extra Storage**: If you exceed 50 GiB, extra storage is billed in increments of 10 GiB at $15 per increment.
-- **Extra Compute**: If you exceed 750 compute hours, extra compute is billed at $0.04/hour.
+- **Extra Compute**: If you exceed 750 compute hours, extra compute is billed at $0.16/hour.
 - **Extra Projects**: If you exceed 50 projects, extra projects are billed in units of 10 projects at $50 per unit.
 
 ### Step 5: Total monthly estimate
@@ -133,7 +133,7 @@ Total Monthly Estimate = Monthly Base Fee + Extra Storage Fee + Extra Compute Fe
 - Storage usage: 14 GiB (4 GiB over the allowance)
 - Compute usage: 350 hours (50 hours over the allowance)
 - Extra storage fee: 2 * $3.5 = $7
-- Extra compute fee: 50 hours * $0.04 = $2
+- Extra compute fee: 50 hours * $0.16 = $2
 
 _Total estimate_: $19 + $7 + $2 = $28 per month
 
@@ -144,10 +144,10 @@ _Total estimate_: $19 + $7 + $2 = $28 per month
 - Compute usage: 800 hours (50 hours over the allowance)
 - Project usage: 55 projects (5 projects over the allowance)
 - Extra storage fee: 1 * $15 = $15
-- Extra compute fee: 50 * $0.04 = $2
+- Extra compute fee: 50 * $0.16 = $8
 - Extra project fee: 1 * $50 = $50
 
-_Total estimate_: $69 + $15 + $2 + $50 = $136 per month
+_Total estimate_: $69 + $15 + $8 + $50 = $142 per month
 
 <Admonition type="note" title="Notes">
 - Adjust your usage estimates as needed to reflect your actual or projected usage.
