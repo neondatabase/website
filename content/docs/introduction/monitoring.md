@@ -128,7 +128,7 @@ Next, grab your Neon database connection string from the **Connection Details** 
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
-Finally, run this command, replacing $NEON_DB with your Neon database connection string.
+Finally, run this command, replacing `$NEON_DB` with your Neon database connection string.
 
 ```
 docker run -ti -e DATABASE_URL='$NEON_DB' -p 8080:8080 ankane/pghero
