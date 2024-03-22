@@ -7,10 +7,6 @@ updatedOn: '2024-02-21T23:59:47.049Z'
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
 
-<Admonition type="note">
-The Neon serverless driver is also available as a [JavaScript Registry (JSR)](https://jsr.io/docs/introduction) package: [https://jsr.io/@neon/serverless](https://jsr.io/@neon/serverless). The JavaScript Registry (JSR) is a package registry for JavaScript and TypeScript. JSR works with many runtimes (Node.js, Deno, browsers, and more) and is backward compatible with `npm`.
-</Admonition>
-
 When to query over HTTP vs WebSockets:
 
 - **HTTP**: Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single, non-interactive transactions, also referred to as "one-shot queries". Issuing [multiple queries](#issue-multiple-queries-with-the-transaction-function) via a single, non-interactive transaction is also supported. See [Use the driver over HTTP](#use-the-driver-over-http).
