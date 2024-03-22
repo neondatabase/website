@@ -13,16 +13,16 @@ const items = [
     answer: `Neon bills for the past month's usage at the beginning of each calendar month. For more information, see <a href="/docs/introduction/manage-billing">Manage billing</a>.`,
   },
   {
-    question: 'What is a compute-hour?',
-    answer: `Compute-hours is the metric for compute usage in Neon. It is short for “compute capacity consumed in a given hour”. The quick math: Compute-hours = CPU used x active time.`,
+    question: 'What is a compute hour?',
+    answer: `Compute hour is the metric for compute usage in Neon. The quick math: [compute hours] = [compute size] x [hours your compute runs]. Each pricing plan includes a certain number of compute hours; how quickly you consume these hours depends on the size of your compute and how long it runs. Once you exceed the allocated amount of compute hours, you'll be billed for overages in a given month.`,
   },
   {
-    question: 'How many compute-hours it’ll take to run my workload?',
-    answer: `You can get a good idea by estimating how many hours your databases run and at which capacity. For example: imagine you’re running a 2 CPU, 8 GB RAM database for 2 hours a day (or 62 hours per month). This equals [2 CU * 62 hours] = 124 compute-hours per month.`,
+    question: 'How many compute hours will it take to run my workload?',
+    answer: `You can get a good idea by estimating how many hours your databases run, and at which compute size. For example: imagine you’re running a 2 CPU, 8 GB RAM database for 2 hours a day (or 62 hours per month). This equals [2 CU * 62 hours] = 124 compute hours per month.`,
   },
   {
     question: 'How can I control my costs with autoscaling?',
-    answer: `When enabling <a herf="/docs/introduction/autoscaling">autoscaling</a>, you will set a maximum autoscaling limit (e.g. 5 CPU) that will de-facto act as a cost limit.`,
+    answer: `When enabling <a href="/docs/introduction/autoscaling">autoscaling</a>, you will set a maximum autoscaling limit (e.g. 2 CU) that will act as a de-facto cost limit.`,
   },
   {
     question: 'How is storage charged in Neon?',

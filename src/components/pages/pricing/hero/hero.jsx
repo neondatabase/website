@@ -21,7 +21,7 @@ const items = [
     price: '$0 <span>/month</span>',
     description: 'Generous always-available free tier, no credit card required.',
     features: [
-      { title: '0.5 GiB of storage' },
+      { title: '0.5 GiB storage' },
       { title: '24/7 for your main compute', info: 'Plus 20h of usage for branches' },
       { title: 'Community support' },
       { title: 'Fixed capacity at 0.25 vCPU' },
@@ -43,11 +43,11 @@ const items = [
     features: [
       {
         title: '10 GiB storage included',
-        info: 'Additional storage: $3.5 for 2 GiB',
+        info: 'Additional storage: $3.5 per 2 GiB',
       },
-      { title: '300 compute-hours included', info: 'Additional usage: $0.16 per compute-hour' },
+      { title: '300 compute hours included', info: 'Additional usage: $0.16 per compute hour' },
       { title: 'Standard support' },
-      { title: 'Autoscaling from 0 to 4 vCPU', info: '4 vCPU, 16 GB RAM' },
+      { title: 'Autoscaling up to 4 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
       { title: 'Instant Read Replicas' },
       { title: 'IP Allow Rules', disabled: true },
     ],
@@ -64,10 +64,10 @@ const items = [
       '<em class="absolute block xl:-top-1 -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:-mt-4 md:mt-0">From</em> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
-      { title: '50 GiB storage included', info: 'Additional storage: $15 for 10 GiB' },
-      { title: '750 compute-hours included', info: 'Additional usage: $0.16 per compute-hour' },
+      { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
+      { title: '750 compute hours included', info: 'Additional usage: $0.16 per compute hour' },
       { title: 'Priority support' },
-      { title: 'Autoscaling from 0 to 8 vCPU', info: '8 vCPU, 32 GB RAM' },
+      { title: 'Autoscaling up to 8 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
       { title: 'Instant Read Replicas' },
       { title: 'IP Allow Rules' },
     ],

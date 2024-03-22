@@ -51,19 +51,19 @@
       "rows": "2",
       "feature": {
         "title": "Compute (monthly)",
-        "subtitle": "Compute-hours = CPU size x active time"
+        "subtitle": "Compute hrs = CPU size x active hrs"
       },
       "free": {
-        "title": "187.5 compute-hours",
-        "info": "+ 5 compute-hours per month for branches"
+        "title": "24/7 for main compute",
+        "info": "+20h of usage for branches"
       },
       "launch": {
-        "title": "300 compute-hours",
-        "info": "Extra at $0.16 per CU-hour"
+        "title": "300 compute hours",
+        "info": "Extra at $0.16 per compute hour"
       },
       "scale": {
-        "title": "750 compute-hours",
-        "info": "Extra at $0.16 per CU-hour"
+        "title": "750 compute hours",
+        "info": "Extra at $0.16 per compute hour"
       },
       "enterprise": "Custom"
     },
@@ -107,16 +107,16 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Compute Size"
+        "title": "Compute size"
       },
       "free": {
-        "title": "Fixed at 0.25 CPU, 1 GB RAM"
+        "title": "0.25 vCPU, 1 GB RAM"
       },
       "launch": {
-        "title": "Up to 4 CPU, 16 GB RAM"
+        "title": "Up to 4 vCPU, 16 GB RAM"
       },
       "scale": {
-        "title": "Up to 8 CPU, 32 GB RAM"
+        "title": "Up to 8 vCPU, 32 GB RAM"
       },
       "enterprise": {
         "title": "Larger sizes",
@@ -192,16 +192,6 @@
       "rows": "1",
       "feature": {
         "title": "Connection Pooling"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "enterprise": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Logical Replication"
       },
       "free": true,
       "launch": true,
