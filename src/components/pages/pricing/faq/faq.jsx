@@ -14,7 +14,7 @@ const items = [
   },
   {
     question: 'What is a compute hour?',
-    answer: `Compute hour is the metric for compute usage in Neon. The quick math: [compute hours] = [CPU size] x [hours your compute runs]. Each pricing plan includes a certain number of compute hours; how quickly you consume these hours depends on the size of your compute and how long it runs. Once you exceed the allocated amount of compute hours, you'll be billed for overages in a given month.`,
+    answer: `Compute hour is the metric for compute usage in Neon. The quick math: [compute hours] = [compute size] x [hours your compute runs]. Each pricing plan includes a certain number of compute hours; how quickly you consume these hours depends on the size of your compute and how long it runs. Once you exceed the allocated amount of compute hours, you'll be billed for overages in a given month.`,
   },
   {
     question: 'How many compute hours will it take to run my workload?',
