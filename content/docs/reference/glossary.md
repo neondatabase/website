@@ -124,7 +124,6 @@ A unit that measures the processing power of a Neon compute or the "compute size
 | 7             | 7    | 28 GB  |
 | 8             | 8    | 32 GB  |
 
-
 ## Compute hours
 
 A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
