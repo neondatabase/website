@@ -51,7 +51,7 @@
       "rows": "2",
       "feature": {
         "title": "Compute (monthly)",
-        "subtitle": "Compute hour = CU x active time"
+        "subtitle": "Compute hours = CU x active hours"
       },
       "free": {
         "title": "24/7 for main compute",
@@ -107,7 +107,7 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Compute Size"
+        "title": "Compute size"
       },
       "free": {
         "title": "0.25 vCPU, 1 GB RAM"
