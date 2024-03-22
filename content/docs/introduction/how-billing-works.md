@@ -59,7 +59,7 @@ For example, the Launch plan includes an allowance of 10 GiB in the plan's month
 
 ### Compute
 
-Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed by _compute hour_ at $0.16 per hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the billing period, you are billed an extra $16.00 (100 x $0.16).
+Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed by _compute hour_ at $0.16 per hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the billing period, you are billed an extra $16 (100 x $0.16).
 
 ### Projects
 
@@ -133,9 +133,9 @@ Total Monthly Estimate = Monthly Base Fee + Extra Storage Fee + Extra Compute Fe
 - Storage usage: 14 GiB (4 GiB over the allowance)
 - Compute usage: 350 hours (50 hours over the allowance)
 - Extra storage fee: 2 * $3.5 = $7
-- Extra compute fee: 50 hours * $0.16 = $2
+- Extra compute fee: 50 hours * $0.16 = $8
 
-_Total estimate_: $19 + $7 + $2 = $28 per month
+_Total estimate_: $19 + $7 + $8 = $34 per month
 
 **Scale plan example**:
 
