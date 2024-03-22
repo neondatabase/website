@@ -20,7 +20,7 @@ To follow along with this guide, you will need:
 
 ### Initialize a new project
 
-1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
+1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 2. Select a project or click the `New Project` button to create a new one. 
 
 ### Retrieve your Neon database connection string
@@ -66,7 +66,7 @@ npm install drizzle-orm @neondatabase/serverless
 npm install -D drizzle-kit dotenv
 ```
 
-Add the `DATABASE_URL` environment variable to your `.env` file, which you'll use to connect to our Neon database. Use the connection string that you obtained from the Neon console earlier:
+Add the `DATABASE_URL` environment variable to your `.env` file, which you'll use to connect to our Neon database. Use the connection string that you obtained from the Neon Console earlier:
 
 ```bash
 # .env

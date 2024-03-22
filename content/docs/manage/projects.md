@@ -153,7 +153,7 @@ By default, Neon retains a history of changes for all branches in a Neon project
 
 To configure the history retention period for a project:
 
-1. Select a project in the Neon console.
+1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Storage**.
     ![History retention configuration](/docs/manage/history_retention.png)
@@ -170,7 +170,7 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 
 To enable logical replication for your project:
 
-1. Select your project in the Neon console.
+1. Select your project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Beta**.
 4. Click **Enable**.
@@ -204,7 +204,7 @@ Neon supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_versio
 
 To configure an allowlist:
 
-1. Select a project in the Neon console.
+1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
     ![IP Allow configuration](/docs/manage/ip_allow.png)
@@ -323,7 +323,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 
 <TabItem>
 
-1. Select a project in the Neon console.
+1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
 4. Clear the **Allowed IP addresses and ranges** field.

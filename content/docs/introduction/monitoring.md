@@ -17,7 +17,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 ## Dashboard
 
-When you open a project in the Neon console, the Dashboard gives you a snapshot view of the most recent usage metrics for that project:
+When you open a project in the Neon Console, the Dashboard gives you a snapshot view of the most recent usage metrics for that project:
 
 - **Branches** widget &#8212; Shows how much storage your main branch has currently used. It also lists a subset of other branches.
 - **Usage since...** widget  &#8212; Shows a snapshot of your current consumption metrics since your last billing date (the last day of the previous month).

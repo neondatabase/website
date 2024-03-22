@@ -13,7 +13,7 @@ The Neon SQL Editor allows you to run queries on your Neon databases directly fr
 
 To use the SQL Editor:
 
-1. Navigate to the [Neon console](https://console.neon.tech/).
+1. Navigate to the [Neon Console](https://console.neon.tech/).
 2. Select your project.
 3. Select **SQL Editor**.
 4. Select a branch and database.

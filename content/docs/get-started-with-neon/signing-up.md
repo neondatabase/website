@@ -15,10 +15,10 @@ You can sign up for free and upgrade to a paid plan when you are ready to scale.
 ## Sign up
 
 Signing up for Neon is easy. Simply navigate to [https://console.neon.tech/signup](https://console.neon.tech/signup) and sign up with your email, Github, Google, or partner account.
-![Neon console sign up](/docs/get-started-with-neon/neon_signup.png)
+![Neon Console sign up](/docs/get-started-with-neon/neon_signup.png)
 
 After signing up, you are directed to the Neon Console to create your first project. Enter a name for your project, select a Postgres version, provide a database name, and select a region. Generally, you'll want to select the region closest to your application. When you're finished, click **Create project**.
-![Neon console sign up](/docs/get-started-with-neon/create_first_project.png)
+![Neon Console sign up](/docs/get-started-with-neon/create_first_project.png)
 
 You are presented with the connection details for your new project, which you can use to connect to your database from a client or application. You can save the connection details or retrieve them later from the **Connection details** widget on the Neon **Dashboard**.
 ![Connection details dialog](/docs/get-started-with-neon/connection_details_modal.png)
