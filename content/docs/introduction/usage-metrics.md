@@ -58,7 +58,7 @@ The following table outlines compute allowances per month for each Neon plan.
 | Scale      | 750 compute hours (3,000 _active hours_)/month                                                                                            |
 | Enterprise | Custom                                                                                                            |
 
-Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for at $0.04 per compute hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the monthly billing period, you are billed an extra $4 (100 x $0.04) for the month.
+Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for at $0.16 per compute hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the monthly billing period, you are billed an extra $16 (100 x $0.16) for the month.
 
 <Admonition type="tip" title="What are active hours and compute hours?">
 
