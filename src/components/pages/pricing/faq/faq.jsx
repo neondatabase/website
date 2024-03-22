@@ -22,7 +22,7 @@ const items = [
   },
   {
     question: 'How can I control my costs with autoscaling?',
-    answer: `When enabling <a herf="/docs/introduction/autoscaling">autoscaling</a>, you will set a maximum autoscaling limit (e.g. 2 CU) that will de-facto act as a cost limit.`,
+    answer: `When enabling <a href="/docs/introduction/autoscaling">autoscaling</a>, you will set a maximum autoscaling limit (e.g. 2 CU) that will de-facto act as a cost limit.`,
   },
   {
     question: 'How is storage charged in Neon?',
