@@ -4,7 +4,7 @@ subtitle: Learn about strategies for optimizing Postgres query performance in Ne
 enableTableOfContents: true
 ---
 
-Many factors can impact query performance in Postgres, ranging from insufficient indexing or database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, where do you start? This topic outlines several strategies for optimizing query performance in Postgres.
+Many factors can impact query performance in Postgres, ranging from insufficient indexing or database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, it can be difficult to know where to start. This topic outlines several strategies for optimizing query performance in Postgres.
 
 - [Gather statistics](#gather-statistics)
 - [Use indexes](#use-indexes)
@@ -23,7 +23,7 @@ Gathering query statistics can aid in identifying performance issues and opportu
 
 The [pg_stat_statements](/docs/extensions/pg_stat_statements) extension provides aggregated query statistics for executed SQL statements. The data collected includes the number of query executions, total execution time, rows returned by the query, and more. 
 
-This extension isn’t installed by default, so your first step is to install it and allow some time for statistics collection. To install the extension, run the following `CREATE EXTENSION` statement.
+This extension isn’t installed by default, so your first step is to install it and then allow some time for statistics collection. To install the extension, run the following `CREATE EXTENSION` statement.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
@@ -62,10 +62,10 @@ neondb=> \d pg_stat_statements
 For a description of each metric, refer to the official Postgres documentation: [The pg_stat_statements View](https://www.postgresql.org/docs/current/pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS).
 
 <Admonition type="note" title="WHAT’S THE PERFORMANCE IMPACT OF PG_STAT_STATEMENTS?">
-Generally, `pg_stat_statements` is found to have a very small performance impact, and many users will keep it installed so that it’s available when needed. For a discussion on this topic, please see this [Database Administrators Stack Exchange article](https://dba.stackexchange.com/questions/303503/what-is-the-performance-impact-of-pg-stat-statements).
+Generally, `pg_stat_statements` is found to have a very small performance impact. Many users keep it installed so that it’s available when needed. For a discussion on this topic, please see this [Database Administrators Stack Exchange article](https://dba.stackexchange.com/questions/303503/what-is-the-performance-impact-of-pg-stat-statements).
 </Admonition>
 
-After allowing time for statistics collection, you can run queries like these to identify opportunities for optimization:
+After allowing time for statistics collection, you can run queries like these to identify opportunities for query optimization:
 
 ### Most frequently executed queries
 
@@ -217,7 +217,7 @@ SUMMARY
 FORMAT { TEXT | XML | JSON | YAML }
 ```
 
-The `ANALYZE` option executes the SQL statement first and includes actual run times and other statistics in the information that it returns, so it's helpful to include this option when explaining `SELECT` queries. For other types of statements such as `INSERT`, `UPDATE`, or `DELETE`, which you may not want to actually run, you can enclose an `EXPLAIN ANALYZE` statement in a transaction, as shown below. This way, your data remains unaffected by the `EXPLAIN ANALYZE` statement.
+The `ANALYZE` option executes the SQL statement first and includes actual run times and other statistics in your query plans, so it's helpful to include this option when explaining `SELECT` queries. For other types of statements such as `INSERT`, `UPDATE`, or `DELETE`, which affect your data, you can enclose an `EXPLAIN ANALYZE` statement in a transaction, as shown below. This way, your data will not be changed by the `EXPLAIN ANALYZE` statement.
 
 ```sql
 BEGIN;
@@ -243,15 +243,15 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE id = '1';
  Execution Time: 6479.526 ms
 ```
 
-In this case, the query plan shows that two parallel workers were launched to run a sequential scan on the `users` table. The presence of a sequential scan and a lengthy execution time indicates an opportunity for optimization, such as adding an index to the `id` column of the `users` table if one is not defined already to replace the costly sequential scan with an index scan.
+In this case, the query plan shows that two parallel workers were launched to run a sequential scan on the `users` table. The presence of a sequential scan and a lengthy execution time indicates an opportunity for optimization, such as adding an index to the `id` column of the `users` table to replace the costly sequential scan with an index scan.
 
 ### Interpreting EXPLAIN output
 
 `EXPLAIN` output can be complex. Here are some key elements to focus on:
 
-- **Query Plan**: This shows the steps Postgres took to execute your query, such as sequential scans, index scans, joins, etc.
+- **Query Plan**: The overall plan shows the steps Postgres took to execute your query, such as sequential scans, index scans, joins, etc.
 - **Execution Time**: The total time taken to execute the query.
-- **Cost**: Estimated startup cost and total cost to execute the plan, which helps in comparing the efficiency of different execution strategies.
+- **Cost**: Estimated startup cost and total cost to execute the plan, which may be helpful when comparing the efficiency of different execution strategies.
 - **Rows**: The number of rows processed at each stage of the query.
 - **Actual Time**: The actual time spent on each node of the plan, helping to pinpoint slow operations.
 
@@ -261,11 +261,11 @@ In this case, the query plan shows that two parallel workers were launched to ru
 2. **Analyze joins**: Make sure that joins are using indexes. If not, it might be beneficial to add indexes on the join columns or revise the join conditions.
 3. **Optimize filters**: Check if the conditions in the `WHERE` clause can be optimized. Using efficient indexes can dramatically reduce the search space.
 4. **Subquery performance**: Subqueries can sometimes be inefficient. Look for opportunities to rewrite subqueries as joins. See [Use joins instead of subqueries](#use-joins-instead-of-subqueries).
-5. **Use ANALYZE**: Regularly run the `ANALYZE` command on your database. This updates statistics, helping Postgres make better planning decisions. will automatically issue `ANALYZE` commands whenever the content of a table has changed sufficiently, but if you're working with very large tables, this may not happen as often as expected.
+5. **Use ANALYZE**: Regularly run the `ANALYZE` command on your database. This updates statistics, helping Postgres make better planning decisions. The Postgres `autovacuum` process, which is enabled in Neon, will automatically issue `ANALYZE` commands whenever the content of a table has changed sufficiently, but if you're working with very large tables, this may not happen as often as expected. For a query that shows when vacuum was last run, see [VACUUM and ANALYZE statistics](/docs/postgres/query-reference#vacuum-and-analyze-statistics).
 
 ### Additional resources
 
-Using `EXPLAIN` to optimize queries is a large subject area, but there are numerous resources you can draw upon. Here are a few to get you started:
+Using `EXPLAIN` to optimize queries is a large subject, but there are numerous resources you can draw upon. Here are a few to get you started:
 
 - [Using EXPLAIN — official PostgreSQL documentation](https://www.postgresql.org/docs/current/using-explain.html)
 - [Using EXPLAIN — PostgreSQL wiki resource list](https://wiki.postgresql.org/wiki/Using_EXPLAIN). 
@@ -279,9 +279,13 @@ The Neon SQL Editor provides a visual `EXPLAIN` and `ANALYZE` capability, provid
 
 A cache hit ratio tells you the percentage of queries served from memory. Queries not served from memory retrieve data from disk, which is more costly and can result in slower query performance.
 
-In a standalone Postgres instance, you can query the cache hit ratio with an SQL statement that looks for `shared buffers` block hits. In Neon, it’s a little different. Neon extends Postgres shared buffers with a local file cache (local to your Neon compute instance). To query your cache hit ratio in Neon, you need to look at local file cache hits instead of shared buffer hits. 
+In a standalone Postgres instance, you can query the cache hit ratio with an SQL statement that looks for `shared buffers` block hits. In Neon, it’s a little different. Neon extends Postgres shared buffers with a local file cache (local to your Neon compute instance). To query your cache hit ratio in Neon, you need to look at local file cache hits instead of shared buffer hits.
 
-To enable querying local file cache statistics, Neon provides a `neon_stat_file_cache` view. To access this view, you need to install the neon extension:
+<Admonition type="note">
+This `neon_stat_file_cache` view and the `neon` extension that provides it are not yet available in Neon. You can expect it to be released soon.
+</Admonition>
+
+To enable querying local file cache statistics, Neon provides a `neon_stat_file_cache` view. To access this view, you need to install the `neon` extension:
 
 ```sql
 CREATE EXTENSION neon;
@@ -308,7 +312,7 @@ file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses))
 
 If the `file_cache_hit_ratio` is below 99%, your working set (your most frequently accessed data) may not be adequately in memory. This could be due to your Postgres instance not having sufficient memory.
 
-To increase available memory in Neon, you can increase the size of your compute. Larger computes have larger local file caches. For information about selecting an appropriate compute size in Neon, refer to [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+To increase available memory for a POstgres instance in Neon, you can increase the size of your compute. Larger computes have larger local file caches. For information about selecting an appropriate compute size in Neon, refer to [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 Remember that the local file cache statistics are for the entire compute, not specific databases or tables. A Neon compute runs an instance of Postgres, which can have multiple databases and tables.
 
@@ -349,17 +353,17 @@ To reduce table bloat, you can run the [VACUUM](https://www.postgresql.org/docs/
 VACUUM your_table_name;
 ```
 
-For more aggressive space reclamation, you can use `VACUUM FULL`, but this command locks the table, which can be disruptive.
+For more aggressive space reclamation, you can use `VACUUM FULL`, but this command locks the table, which can be disruptive — affecting database performance significantly.
 
 To remove index bloat, you can use the [REINDEX](https://www.postgresql.org/docs/current/sql-reindex.html) command, which rebuilds the index from scratch. Be aware that this can be an intensive operation, especially for large indexes, as it requires an exclusive lock on the index.
+
+This command rebuilds all indexes on the specified table:
 
 ```sql
 REINDEX TABLE your_table_name;
 ```
 
-This command rebuilds all indexes on the specified table.
-
-Generally, you’ll want to perform these types of operations when they will have the least impact, or you’ll want to plan some maintenance downtime for a clean-up. 
+Generally, you’ll want to perform vacuum and reindex operations when they will have the least impact, or you’ll want to plan some maintenance downtime to run them. 
 
 ## Right-size your compute
 
@@ -369,15 +373,15 @@ For information about right-sizing your compute in Neon, see [How to size your c
 
 ## Use connection pooling
 
-Connection pooling improves performance by minimizing the overhead associated with creating and tearing down database connections. Neon uses PgBouncer to offer support for connection pooling, enabling up to 10,000 concurrent connections. 
+Connection pooling improves performance by minimizing the overhead associated with creating and tearing down database connections. Neon uses PgBouncer to provide connection pooling support, enabling up to 10,000 concurrent connections. 
 
-Enabling connection pooling in Neon requires adding a `-pooler` option to your Neon connection string (to your Neon hostname), as shown here:
+Enabling connection pooling in Neon requires adding a `-pooler` option to your Neon connection string (to the Neon hostname), as shown here:
 
 ```plaintext
 postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
 ```
 
-Alternatively, you can grab a pooled connection string from the **Connection Details** widget in the Neon Dashboard.
+Alternatively, you can grab a pooled connection string from the **Connection Details** widget on the Neon Dashboard.
 
 For more information about connection pooling in Neon, see [Connection pooling](/docs/connect/connection-pooling).
 
@@ -391,7 +395,7 @@ For example, imagine you need to fetch all users from a database with a given na
 SELECT * FROM users WHERE name = 'alex';
 ```
 
-To enhance performance when running this query for various names, you can use a prepared statement as shown here:
+To enhance performance when running this type of, you can use a prepared statement, as shown here:
 
 ```sql
 PREPARE user_fetch_plan (text) AS SELECT * FROM users WHERE name = $1;
@@ -413,7 +417,7 @@ This approach uses a subquery to identify customer IDs based in Spain. To optimi
 SELECT orders.* FROM orders JOIN customers ON orders.customer_id = customers.id WHERE customers.country = 'Spain';
 ```
 
-Joins are generally more efficient because they replace multiple queries with one join query, reducing trips to the database.
+Joins are generally more efficient because they replace multiple queries with one join query, reducing the number of trips to the database.
 
 ### Use efficient data types
 
@@ -423,13 +427,13 @@ Postgres offers a range of numeric types, including `INTEGER`, `NUMERIC`, `REAL`
 
 If you’re storing small integers, you can use the `SMALLINT` type instead of `INTEGER` or `BIGINT`, as it uses less space.
 
-For example, imagine a scenario where your `users` table includes an `age` column. If operations such as computing the average age of users are common, you can optimize your database's efficiency by switching to a more compact data type, such as `SMALLINT` instead of the standard `INTEGER`:
+For example, imagine a scenario where your `users` table includes an `age` column. If operations such as computing the average age of users are common, you can optimize database efficiency by switching to a more compact data type, such as `SMALLINT` instead of the standard `INTEGER`:
 
 ```sql
 ALTER TABLE users ALTER COLUMN age TYPE SMALLINT;
 ```
 
-This change decreases the memory footprint for storing `age` data, potentially improving the performance of queries that perform operations using that data.
+This change decreases the memory footprint for storing `age` data, potentially improving the performance of queries that operate on that data.
 
 ### Limit your result sets
 

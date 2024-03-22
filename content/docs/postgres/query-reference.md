@@ -1,6 +1,6 @@
 ---
 title: Postgres query reference
-subtitle: Find examples and templates for commonly-used Postgres queries
+subtitle: Find examples for commonly-used Postgres queries
 enableTableOfContents: true
 ---
 
@@ -73,7 +73,7 @@ See [SELECT](https://www.postgresql.org/docs/current/sql-select.html) for more i
 
 ## Filtering data
 
-Here are some examples of using the `WHERE` clause to filter data in Postgres, showcasing various filtering scenarios:
+Here are more examples of using the `WHERE` clause to filter data in Postgres, showcasing various filtering scenarios:
 
 {/* 
 
@@ -251,7 +251,7 @@ For additional information, see [Sorting Rows](https://www.postgresql.org/docs/c
 
 ## Joining tables
 
-Here are some examples illustrating different ways to join tables in Postgres, which can be essential for queries involving data that spans multiple tables:
+Here are some examples illustrating different ways to join tables in Postgres for queries involving data that spans multiple tables:
 
 {/* 
 
@@ -570,7 +570,7 @@ For more information about views in Postgres, see [Views](https://www.postgresql
 
 ## Stored procedures
 
-Stored procedures in Postgres are used for performing actions that do not necessarily return a result set, such as modifying data or working with transaction control.
+Stored procedures in Postgres are used for performing actions that do not necessarily return a result set, such as modifying data or working with transaction control statements like `COMMIT` and `ROLLBACK`.
 
 {/* 
 
@@ -606,8 +606,6 @@ CALL transfer_funds(1, 2, 100.00);
 -- See result
 SELECT * FROM accounts;
 ```
-
-Stored procedures are typically used for executing tasks that may or may not return data and can include transaction control statements like `COMMIT` and `ROLLBACK`.
 
 For additional information and syntax, see [CREATE PROCEDURE](https://www.postgresql.org/docs/current/sql-createprocedure.html).
 
@@ -659,7 +657,7 @@ $$ LANGUAGE plpgsql;
 SELECT get_employee_department(1);
 ```
 
-Functions are typically used for computations and can return data. For additional information and syntax, see [CREATE FUNCTION](https://www.postgresql.org/docs/current/sql-createfunction.html).
+Functions are typically used to perform computations. For additional information and syntax, see [CREATE FUNCTION](https://www.postgresql.org/docs/current/sql-createfunction.html).
 
 ## Performance tuning
 
@@ -673,7 +671,7 @@ The `EXPLAIN` command shows the execution plan of a query, detailing how tables 
 EXPLAIN SELECT * FROM employees WHERE department_id = 1;
 ```
 
-Using `EXPLAIN ANALYZE` is a step further than `EXPLAIN`, as it executes the query and provides actual execution times and row counts.
+Using `EXPLAIN ANALYZE` is a step further than `EXPLAIN`, as it executes the query, providing actual execution times and row counts instead of estimated values.
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM employees WHERE department_id = 1;
@@ -746,7 +744,7 @@ Also, see the [Use indexes](/docs/postgres/query-performance#use-indexes) sectio
 
 ### Table access statistics
 
-This query how frequently tables are accessed, which can help in identifying which tables are hot for reads or writes.
+This query shows how frequently tables are accessed, which can help in identifying which tables are hot for reads or writes.
 
 ```sql
 SELECT relname, seq_scan, idx_scan, n_tup_ins, n_tup_upd, n_tup_del
@@ -756,20 +754,31 @@ ORDER BY n_tup_ins + n_tup_upd + n_tup_del DESC;
 
 ### VACUUM and ANALYZE statistics
 
-Check the last time a vacuum and analyze were run on each table. This can help ensure that your database is being maintained properly for query optimization.
+This query checks the last time vacuum and analyze were run on each table, which helps ensure that your database is being maintained properly for query optimization.
 
 ```sql
 SELECT schemaname, relname, last_vacuum, last_autovacuum, last_analyze, last_autoanalyze
 FROM pg_stat_user_tables;
 ```
 
+
+### View the Postgres version
+
+Run this query to view the Postgres version:
+
+```sql
+SELECT version();
+```
+
 ### View Postgres settings
+
+Run this query to view parameter settings for your Postgres instance.
 
 ```sql
 SHOW ALL;
 ```
 
-## Connection queries
+## Connections
 
 The queries in this section use the [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) view, which is part of the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
 
@@ -819,7 +828,7 @@ WHERE datname = 'databasename'
 ```
 
 <Admonition type="note">
-To terminate a session, you can run either `pg_cancel_backend(pid)` or `pg_terminate_backend(pid)`. The first command terminates the currently executing query, and the second one (used in the query above) terminates both the query and the session.
+To terminate a session, you can run `pg_cancel_backend(pid)` or `pg_terminate_backend(pid)`. The first command terminates the currently executing query, and the second one (used in the query above) terminates both the query and the session.
 </Admonition>
 
 <NeedHelp/>
