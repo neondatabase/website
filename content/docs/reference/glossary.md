@@ -109,7 +109,21 @@ The number of Compute Units (CU) assigned to a Neon compute. One CU is defined a
 
 ## Compute Unit (CU)
 
-A unit that measures the processing power of a Neon compute. A Neon compute can have anywhere from .25 CUs to 7 CUs.
+A unit that measures the processing power of a Neon compute or the "compute size". A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 CUs to 8 CUs. The following table shows the vCPU and RAM for each CU:
+
+| Compute Unit (CU)  | vCPU | RAM    |
+|:--------------|:-----|:-------|
+| .25           | .25  | 1 GB   |
+| .5            | .5   | 2 GB   |
+| 1             | 1    | 4 GB   |
+| 2             | 2    | 8 GB   |
+| 3             | 3    | 12 GB  |
+| 4             | 4    | 16 GB  |
+| 5             | 5    | 20 GB  |
+| 6             | 6    | 24 GB  |
+| 7             | 7    | 28 GB  |
+| 8             | 8    | 32 GB  |
+
 
 ## Compute hours
 
