@@ -221,6 +221,8 @@
           slug: guides/wundergraph
     - title: Schema migration
       items:
+        - title: Django
+          slug: guides/django-migrations
         - title: Drizzle
           slug: guides/drizzle-migrations
         - title: Flyway
