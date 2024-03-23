@@ -239,6 +239,8 @@
           slug: guides/prisma-migrations
         - title: Sequelize
           slug: guides/sequelize
+        - title: SQLAlchemy
+          slug: guides/sqlalchemy-migrations
     - title: Serverless
       items:
         - title: Neon serverless driver
