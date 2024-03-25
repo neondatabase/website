@@ -21,25 +21,16 @@ CREATE TABLE users (
 
 See [CREATE TABLE](https://www.postgresql.org/docs/current/sql-createtable.html) for more information.
 
-## Add a column
+## Add, rename, drop a column
 
 ```sql
+-- Add a column to the table
 ALTER TABLE users ADD COLUMN date_of_birth DATE;
-```
 
-See [ALTER TABLE](https://www.postgresql.org/docs/current/sql-altertable.html) for more information.
-
-## Rename a column
-
-```sql
+-- Rename a column in the table
 ALTER TABLE users RENAME COLUMN email TO user_email;
-```
 
-See [ALTER TABLE](https://www.postgresql.org/docs/current/sql-altertable.html) for more information.
-
-## Drop a column
-
-```sql
+-- Drop a column from the table
 ALTER TABLE users DROP COLUMN date_of_birth;
 ```
 
