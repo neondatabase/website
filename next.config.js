@@ -181,7 +181,7 @@ const defaultConfig = {
         permanent: true,
       },
       {
-        source: '/koyeb-case-study',
+        source: '/blog/koyeb-case-study',
         destination: 'https://www.koyeb.com/blog/serverless-postgres-public-preview',
         permanent: true,
       },
