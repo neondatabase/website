@@ -36,34 +36,25 @@ ALTER TABLE users DROP COLUMN date_of_birth;
 
 See [ALTER TABLE](https://www.postgresql.org/docs/current/sql-altertable.html) for more information.
 
-## Insert data
+## Insert, update, delete data
 
 ```sql
+-- Insert data into the users table
 INSERT INTO users (username, email) VALUES ('alex', 'alex@domain.com');
-```
 
-See [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) for more information.
-
-## Update data
-
-```sql
+-- Update data in the users table
 UPDATE users SET email = 'new.alex@domain.com' WHERE user_id = 1;
-```
 
-See [Update](https://www.postgresql.org/docs/current/sql-update.html) for more information.
-
-## Delete data
-
-```sql
+-- Delete data from the users table
 DELETE FROM users WHERE user_id = 1;
 ```
 
-See [Delete](https://www.postgresql.org/docs/current/sql-delete.html) for more information.
+See [INSERT](https://www.postgresql.org/docs/current/sql-insert.html), [Update](https://www.postgresql.org/docs/current/sql-update.html), and [Delete](https://www.postgresql.org/docs/current/sql-delete.html) for more information.
+
 
 ## SELECT queries
 
 Here are a few examples of `SELECT` queries in Postgres that cover common use cases:
-
 
 ```sql
 -- Basic SELECT to retrieve all columns from a table
