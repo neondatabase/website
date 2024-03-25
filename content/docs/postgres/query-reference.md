@@ -6,6 +6,8 @@ enableTableOfContents: true
 
 This page provides a reference for common Postgres queries, providing examples for basic operations to advanced use cases.
 
+<CTA />
+
 ## Create a table
 
 ```sql
