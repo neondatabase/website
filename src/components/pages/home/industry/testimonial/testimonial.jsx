@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Testimonial = ({ quote, avatar, name, position, logo, className }) => (
   <figure
     className={clsx(
-      'sm:max-w-[320px] sm:rounded-lg sm:border sm:border-gray-new-10 sm:bg-black-new sm:p-5',
+      'sm:grid sm:min-h-[190px] sm:max-w-md sm:justify-self-end sm:rounded-lg sm:border sm:border-gray-new-10 sm:bg-black-new sm:p-5',
       className
     )}
   >
