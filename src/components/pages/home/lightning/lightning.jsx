@@ -16,7 +16,7 @@ const Lightning = () => (
         Lightning fast. Edge&nbsp;ready.
       </h2>
       <Video />
-      <p className="relative z-10 -mt-[84px] ml-32 max-w-[288px] font-light tracking-extra-tight text-gray-new-80 xl:-mt-16 xl:ml-24 xl:leading-snug lg:-mt-16 lg:ml-8 lg:max-w-[256px] md:ml-0 sm:-mt-14 sm:max-w-[212px] sm:text-[15px]">
+      <p className="relative z-10 -mt-[84px] ml-32 max-w-[288px] font-light tracking-extra-tight text-gray-new-80 xl:-mt-16 xl:ml-24 xl:leading-snug lg:-mt-16 lg:ml-8 lg:max-w-[256px] md:ml-0 sm:-mt-[53px] sm:max-w-[212px] sm:text-[15px]">
         <span className="font-medium text-white">Achieve low-latency</span> from an edge function to
         your regional compute.
       </p>

@@ -21,7 +21,7 @@ const Video = () => {
 
   return (
     <div
-      className="relative z-10 -mt-10 ml-32 aspect-[1.181818] max-w-[431px] mix-blend-plus-lighter xl:-mt-14 xl:ml-24 xl:max-w-[333px] lg:-mt-[72px] lg:ml-8 lg:max-w-[297px] md:ml-0 md:max-w-[277px] sm:mt-[-60px] sm:max-w-[232px]"
+      className="relative z-10 -mt-10 ml-32 aspect-[1.181818] max-w-[431px] mix-blend-plus-lighter xl:-mt-14 xl:ml-24 xl:max-w-[333px] lg:-mt-[72px] lg:ml-8 lg:max-w-[297px] md:ml-0 md:max-w-[277px] sm:mt-[-60px] sm:max-w-[226px]"
       ref={ref}
     >
       <video ref={videoRef} controls={false} width={431} height={365} loop playsInline muted>
