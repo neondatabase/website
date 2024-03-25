@@ -530,8 +530,8 @@ const getWpPostBySlug = cache(async (slug) => {
         }
         ...wpPostSeo
       }
-
-      posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
+      # filters out the Uncategorized category from related posts
+      posts(first: 4, where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "dGVybTox" }) {
         nodes {
           categories {
             nodes {
