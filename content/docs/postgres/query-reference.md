@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 This page provides a reference for common Postgres queries, providing examples for basic operations to advanced use cases.
 
-## Creating a table
+## Create a table
 
 ```sql
 CREATE TABLE users (
@@ -19,7 +19,7 @@ CREATE TABLE users (
 
 See [CREATE TABLE](https://www.postgresql.org/docs/current/sql-createtable.html) for more information. 
 
-## Inserting data
+## Insert data
 
 ```sql
 INSERT INTO users (username, email) VALUES ('alex', 'alex@domain.com');
@@ -27,7 +27,7 @@ INSERT INTO users (username, email) VALUES ('alex', 'alex@domain.com');
 
 See [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) for more information.
 
-## Updating data
+## Update data
 
 ```sql
 UPDATE users SET email = 'new.alex@domain.com' WHERE user_id = 1;
@@ -35,7 +35,7 @@ UPDATE users SET email = 'new.alex@domain.com' WHERE user_id = 1;
 
 See [Update](https://www.postgresql.org/docs/current/sql-update.html) for more information.
 
-## Deleting data
+## Delete data
 
 ```sql
 DELETE FROM users WHERE user_id = 1;
@@ -69,7 +69,7 @@ These examples show how to perform a basic retrieval of all or specific columns 
 
 See [SELECT](https://www.postgresql.org/docs/current/sql-select.html) for more information.
 
-## Filtering data
+## Filter data
 
 Here are more examples of using the `WHERE` clause to filter data in Postgres, showcasing various filtering scenarios:
 
@@ -177,7 +177,7 @@ These examples illustrate how to filter query results based on exact matches, ra
 
 See [WHERE clause](https://www.postgresql.org/docs/7.1/queries.html#QUERIES-WHERE) for more information and examples.
 
-## Sorting data
+## Sort data
 
 Here are examples of sorting data in Postgres, demonstrating various ways to order your query results:
 
@@ -247,7 +247,7 @@ These queries demonstrate the flexibility of the Postgres `ORDER BY` clause, ena
 
 For additional information, see [Sorting Rows](https://www.postgresql.org/docs/current/queries-order.html).
 
-## Joining tables
+## Join tables
 
 Here are some examples illustrating different ways to join tables in Postgres for queries involving data that spans multiple tables:
 
@@ -677,7 +677,7 @@ EXPLAIN ANALYZE SELECT * FROM employees WHERE department_id = 1;
 
 For more information, refer to the [EXPLAIN](/docs/postgres/query-performance#use-explain) section in our query optimization guide.
 
-### Using pg_stat_statements
+### Use pg_stat_statements
 
 `pg_stat_statements` is an extension that provides a means to track execution statistics of all executed SQL statements.
 
@@ -777,7 +777,7 @@ This query checks for deadlocks that have occurred, summarized by database.
 SELECT datname, deadlocks FROM pg_stat_database;
 ```
 
-### Check for locks by table and lock mode
+### Count locks by table and lock mode
 
 This query counts the number of locks per lock mode and table in a PostgreSQL database, excluding system tables prefixed with "pg_".
 
