@@ -180,6 +180,11 @@ const defaultConfig = {
         destination: '/docs/postgres/:path*',
         permanent: true,
       },
+      {
+        source: '/koyeb-case-study',
+        destination: 'https://www.koyeb.com/blog/serverless-postgres-public-preview',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },
