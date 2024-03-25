@@ -419,9 +419,9 @@ const getWpBlogPage = cache(async () => {
 
 const fetchAllWpPosts = async (after) => {
   const allPostsQuery = gql`
-    # filters out the Uncategorized category
-    query AllPosts($first: Int!, $after: String, where: { categoryNotIn: "dGVybTox"}) {
-      posts(first: $first, after: $after) {
+    query AllPosts($first: Int!, $after: String) {
+      # filters out the Uncategorized category
+      posts(first: $first, after: $after, where: { categoryNotIn: "dGVybTox" }) {
         nodes {
           categories {
             nodes {
