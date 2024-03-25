@@ -29,7 +29,7 @@ ALTER TABLE users ADD COLUMN date_of_birth DATE;
 
 See [ALTER TABLE](https://www.postgresql.org/docs/current/sql-altertable.html) for more information.
 
-# Rename a column
+## Rename a column
 
 ```sql
 ALTER TABLE users RENAME COLUMN email TO user_email;
@@ -37,7 +37,7 @@ ALTER TABLE users RENAME COLUMN email TO user_email;
 
 See [ALTER TABLE](https://www.postgresql.org/docs/current/sql-altertable.html) for more information.
 
-# Drop a column
+## Drop a column
 
 ```sql
 ALTER TABLE users DROP COLUMN date_of_birth;
@@ -892,13 +892,15 @@ The queries in this section use the [pg_stat_activity](https://www.postgresql.or
 SELECT COUNT(*) FROM pg_stat_activity WHERE state='active';
 ```
 
-### Get the maximum number of connections for your compute
+### Get the maximum number of connections
+
+Get the maximum number of connections for your Postgres instance.
 
 ```sql
 SHOW max_connections;
 ```
 
-The `max_connections` setting is configured by Neon according to your compute size. See [Default connection limits](https://neon.tech/docs/connect/connection-pooling#default-connection-limits). You can use [connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-pooling) to increase the number of available connections. 
+The `max_connections` setting is configured by Neon according to your compute size. See [Default connection limits](https://neon.tech/docs/connect/connection-pooling#default-connection-limits). You can use [connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-pooling) to increase your connection limit.
 
 ### Get the percentage of maximum connections in use
 
