@@ -43,9 +43,7 @@ DELETE FROM users WHERE user_id = 1;
 
 See [Delete](https://www.postgresql.org/docs/current/sql-delete.html) for more information.
 
-## Querying data
-
-## Select queries
+## SELECT queries
 
 Here are a few examples of `SELECT` queries in Postgres that cover common use cases:
 
