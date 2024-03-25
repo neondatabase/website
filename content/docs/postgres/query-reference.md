@@ -669,22 +669,6 @@ Functions are typically used to perform computations. For additional information
 
 To analyze query performance in Postgres, you can use a combination of built-in views, extensions, and commands that help identify performance bottlenecks and optimize query execution. Here are some examples:
 
-### Using EXPLAIN
-
-The `EXPLAIN` command shows the execution plan of a query, detailing how tables are scanned, joined, and which indexes are used.
-
-```sql
-EXPLAIN SELECT * FROM employees WHERE department_id = 1;
-```
-
-Using `EXPLAIN ANALYZE` is a step further than `EXPLAIN`, as it executes the query, providing actual execution times and row counts instead of estimated values.
-
-```sql
-EXPLAIN ANALYZE SELECT * FROM employees WHERE department_id = 1;
-```
-
-For more information, refer to the [EXPLAIN](/docs/postgres/query-performance#use-explain) section in our query optimization guide.
-
 ### Use pg_stat_statements
 
 `pg_stat_statements` is an extension that provides a means to track execution statistics of all executed SQL statements.
@@ -711,16 +695,21 @@ LIMIT 100;
 
 For more information and examples, refer to our [pg_stat_statements extension guide](/docs/extensions/pg_stat_statements).
 
-### List running queries by duration
+### Use EXPLAIN
 
-To see currently running queries and their execution time, which can help identify long-running queries:
+The `EXPLAIN` command shows the execution plan of a query, detailing how tables are scanned, joined, and which indexes are used.
 
 ```sql
-SELECT pid, now() - pg_stat_activity.query_start AS duration, query
-FROM pg_stat_activity
-WHERE state = 'active'
-ORDER BY duration DESC;
+EXPLAIN SELECT * FROM employees WHERE department_id = 1;
 ```
+
+Using `EXPLAIN ANALYZE` is a step further than `EXPLAIN`, as it executes the query, providing actual execution times and row counts instead of estimated values.
+
+```sql
+EXPLAIN ANALYZE SELECT * FROM employees WHERE department_id = 1;
+```
+
+For more information, refer to the [EXPLAIN](/docs/postgres/query-performance#use-explain) section in our query optimization guide.
 
 ### Index metrics 
 
@@ -754,16 +743,27 @@ SELECT datname, tup_returned FROM pg_stat_database;
 
 ### Write metrics
 
-This query returns the number of rows inserted, updated, or deleted per user-defined database. 
+This query returns the number of rows inserted, updated, or deleted per database. 
 
 ```sql
 SELECT datname, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database;
 ```
 
-This query returns the number of rows inserted, updated, or deleted per user-defined tables.
+This query returns the number of rows inserted, updated, or deleted per table.
 
 ```sql
 SELECT relname, n_tup_ins, n_tup_upd, n_tup_del FROM pg_stat_user_tables;
+```
+
+### List running queries by duration
+
+To see currently running queries and their execution time, which can help identify long-running queries:
+
+```sql
+SELECT pid, now() - pg_stat_activity.query_start AS duration, query
+FROM pg_stat_activity
+WHERE state = 'active'
+ORDER BY duration DESC;
 ```
 
 ### Check for locks waiting to be granted
