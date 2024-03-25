@@ -87,7 +87,12 @@ const fetchWpPostsByCategorySlug = async (slug, after) => {
 
   const allPostsQuery = gql`
     query AllPosts($first: Int!, $after: String) {
-      posts(first: $first, after: $after, where: { orderby: { field: DATE, order: DESC } }) {
+      posts(
+        first: $first
+        after: $after
+        # filters out the Uncategorized category
+        where: { categoryNotIn: "dGVybTox", orderby: { field: DATE, order: DESC } }
+      ) {
         nodes {
           categories {
             nodes {
@@ -414,7 +419,8 @@ const getWpBlogPage = cache(async () => {
 
 const fetchAllWpPosts = async (after) => {
   const allPostsQuery = gql`
-    query AllPosts($first: Int!, $after: String) {
+    # filters out the Uncategorized category
+    query AllPosts($first: Int!, $after: String, where: { categoryNotIn: "dGVybTox"}) {
       posts(first: $first, after: $after) {
         nodes {
           categories {
@@ -831,12 +837,12 @@ const getAllWpCaseStudiesPosts = async () => {
 
 export {
   fetchAllWpPosts,
-  getAllWpPosts,
-  getWpPostBySlug,
-  getWpPreviewPostData,
-  getWpPreviewPost,
-  getWpBlogPage,
   getAllWpBlogCategories,
-  getWpPostsByCategorySlug,
   getAllWpCaseStudiesPosts,
+  getAllWpPosts,
+  getWpBlogPage,
+  getWpPostBySlug,
+  getWpPostsByCategorySlug,
+  getWpPreviewPost,
+  getWpPreviewPostData,
 };
