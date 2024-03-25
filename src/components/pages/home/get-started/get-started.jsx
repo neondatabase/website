@@ -1,28 +1,24 @@
 import clsx from 'clsx';
-import Image from 'next/image';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import bgImage from 'images/pages/home/get-started/dots.webp';
+import RiveAnimation from 'components/shared/rive-animation';
 
-// TODO: implement rive animation
 const GetStarted = () => (
   <section
     className={clsx(
-      'get-started mb-[358px] mt-[445px]',
-      'xl:mb-[230px] xl:mt-[230px] lg:mb-[156px] lg:mt-[179px] sm:mb-[110px] sm:mt-[116px]'
+      'get-started relative overflow-hidden pb-[356px] pt-[445px]',
+      'xl:pb-[218px] xl:pt-[230px] lg:pb-[148px] lg:pt-[179px] sm:pb-[100px] sm:pt-[116px]'
     )}
   >
+    <RiveAnimation
+      className="absolute left-1/2 top-[152px] aspect-[1.87365] w-[1703px] -translate-x-1/2 xl:-top-4 xl:w-[1432px] lg:w-[1126px] sm:-top-6 sm:w-[818px]"
+      src="/animations/footer.riv"
+      artboard="footer"
+      intersetionRootMargin="0px 0px 600px 0px"
+      animationRootMargin="0px 0px 300px 0px"
+    />
     <Container className="flex flex-col items-center justify-center" size="1100">
-      <Image
-        className={clsx(
-          'absolute max-w-none',
-          'xl:max-w-[1426px] lg:max-w-[1073px] lg:-translate-y-2 lg:translate-x-px sm:max-w-[872px]'
-        )}
-        src={bgImage}
-        width={bgImage.width / 2}
-        height={bgImage.height / 2}
-      />
       <h2
         className={clsx(
           'relative text-center text-[68px] font-medium leading-[0.9] -tracking-[0.03em] text-white',
