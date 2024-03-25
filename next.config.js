@@ -165,6 +165,10 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/discord',
+        destination: 'https://discord.gg/92vNTzKDGp'
+      },
+      {
         source: '/developer-days',
         destination: 'https://devdays.neon.tech',
         permanent: true,
