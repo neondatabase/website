@@ -705,7 +705,7 @@ LIMIT 100;
 
 For more information and examples, refer to our [pg_stat_statements extension guide](/docs/extensions/pg_stat_statements).
 
-### Viewing activity and locks
+### List running queries by duration
 
 To see currently running queries and their execution time, which can help identify long-running queries:
 
@@ -716,7 +716,53 @@ WHERE state = 'active'
 ORDER BY duration DESC;
 ```
 
-To check for locks that might be affecting performance:
+### Index metrics 
+
+This query lists the number of index scans performed for all user-defined indexes.
+
+```sql
+SELECT indexrelname, relname, idx_scan FROM pg_stat_user_indexes;
+```
+
+The query returns the number of sequential scans for all user-defined tables, indicating missing indexes.
+
+```sql
+SELECT relname, seq_scan FROM pg_stat_user_tables;
+```
+
+For related information and more queries, see [Use indexes](/docs/postgres/query-performance#use-indexes) in our query performance guide.
+
+### Read metrics
+
+This query returns the number of rows fetched per database from storage or memory. It includes rows that are accessed to fulfill queries, which may involve filtering, joining, or processing of data. Not all fetched rows necessarily result in being sent back to the client, as some may be intermediate results used for query processing.
+
+```sql
+SELECT datname, tup_fetched FROM pg_stat_database;
+```
+
+This query returns the number of rows returned per database to the client after a query. This is the final set of rows after applying any filters, aggregates, or transformations specified by the query. These are typically the number of rows the client application or user sees as the query result.
+
+```sql
+SELECT datname, tup_returned FROM pg_stat_database;
+```
+
+### Write metrics
+
+This query returns the number of rows inserted, updated, or deleted per user-defined database. 
+
+```sql
+SELECT datname, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database;
+```
+
+This query returns the number of rows inserted, updated, or deleted per user-defined tables.
+
+```sql
+SELECT relname, n_tup_ins, n_tup_upd, n_tup_del FROM pg_stat_user_tables;
+```
+
+### Check for locks waiting to be granted
+
+This query checks for locks that are currently waiting to be granted, which can be a sign of potential performance issues or deadlocks.
 
 ```sql
 SELECT pg_locks.pid, relation::regclass, mode, query 
@@ -725,9 +771,35 @@ JOIN pg_stat_activity ON pg_locks.pid = pg_stat_activity.pid
 WHERE NOT granted;
 ```
 
-The queries above use the [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) view, which is part of the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
+### Check for deadlocks by database
 
-### Analyzing index usage
+This query checks for deadlocks that have occurred, summarized by database.
+
+```sql
+SELECT datname, deadlocks FROM pg_stat_database;
+```
+
+### Check for locks by table and lock mode
+
+This query counts the number of locks per lock mode and table in a PostgreSQL database, excluding system tables prefixed with "pg_".
+
+```sql
+SELECT 
+    mode, 
+    pg_class.relname, 
+    COUNT(*)
+FROM 
+    pg_locks
+    JOIN pg_class ON pg_locks.relation = pg_class.oid
+WHERE 
+    pg_locks.mode IS NOT NULL
+    AND pg_class.relname NOT LIKE 'pg\_%' ESCAPE '\'
+GROUP BY 
+    pg_class.relname, 
+    mode;
+```
+
+### Index usage
 
 To assess how effectively your queries are using indexes:
 
@@ -761,32 +833,57 @@ SELECT schemaname, relname, last_vacuum, last_autovacuum, last_analyze, last_aut
 FROM pg_stat_user_tables;
 ```
 
+### Check for dead rows
 
-### View the Postgres version
-
-Run this query to view the Postgres version:
+This query fetches the names of user tables and the number of dead tuples (rows) in each.
 
 ```sql
-SELECT version();
+SELECT relname, n_dead_tup FROM pg_stat_user_tables;
 ```
 
-### View Postgres settings
+### Dead row percentage
 
-Run this query to view parameter settings for your Postgres instance.
+This query calculates the percentage of dead rows compared to the total number of rows (alive and dead) in each user table within a PostgreSQL database, helping identify potential table bloat and optimization opportunities. For related information, see [Check for table or index bloat](/docs/postgres/query-performance#check-for-table-or-index-bloat).
 
 ```sql
-SHOW ALL;
+SELECT 
+    relname, 
+    n_dead_tup,
+    (CASE WHEN (n_live_tup + n_dead_tup) > 0 THEN
+        ROUND((n_dead_tup::FLOAT / (n_live_tup + n_dead_tup))::numeric, 2)
+    ELSE
+        0
+    END) AS dead_rows_percentage
+FROM 
+    pg_stat_user_tables;
 ```
 
 ## Connections
 
 The queries in this section use the [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) view, which is part of the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
 
-### Get the current number of connections
+### Get the number of active connections
 
 ```sql
-SELECT COUNT(*) FROM pg_stat_activity;
+SELECT COUNT(*) FROM pg_stat_activity WHERE state='active';
 ```
+
+### Get the maximum number of connections for your compute
+
+```sql
+SHOW max_connections;
+```
+
+The `max_connections` setting is configured by Neon according to your compute size. See [Default connection limits](https://neon.tech/docs/connect/connection-pooling#default-connection-limits). You can use [connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-pooling) to increase the number of available connections. 
+
+### Get the percentage of maximum connections in use
+
+```sql
+SELECT (SELECT SUM(numbackends) FROM pg_stat_database) / (SELECT
+setting::float FROM pg_settings WHERE name = 'max_connections');
+```
+
+This query only considers your `max_connections` setting. It does not account for [connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-pooling).
 
 ### Get the current number of connections for a database
 
@@ -829,6 +926,37 @@ WHERE datname = 'databasename'
 
 <Admonition type="note">
 To terminate a session, you can run `pg_cancel_backend(pid)` or `pg_terminate_backend(pid)`. The first command terminates the currently executing query, and the second one (used in the query above) terminates both the query and the session.
+</Admonition>
+
+## Postgres version
+
+Run this query to view the Postgres version:
+
+```sql
+SELECT version();
+```
+
+## Postgres settings
+
+Run this query to view parameter settings for your Postgres instance.
+
+```sql
+SHOW ALL;
+```
+
+## Data size
+
+Run this query to check the logical data size for a branch in Neon:
+
+```sql
+SELECT pg_size_pretty(sum(pg_database_size(datname)))
+FROM pg_database;
+```
+
+Alternatively, you can check the `Data size` value on the **Branches** widget in the Neon Console. 
+
+<Admonition type="note">
+Data size does not include the [history](/docs/reference/glossary#history) that is maintained to support point-in-time restore.
 </Admonition>
 
 <NeedHelp/>
