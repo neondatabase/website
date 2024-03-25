@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
-import apiAndCliImage from 'images/pages/home/bento/api-and-cli.jpg';
+import RiveAnimation from 'components/shared/rive-animation';
 import regionsImage from 'images/pages/home/bento/regions.jpg';
 import timerImage from 'images/pages/home/bento/timer.jpg';
 
@@ -39,12 +39,13 @@ const Bento = () => (
         </div>
         <div className="relative grid min-h-[491px] grid-cols-1 grid-rows-1 overflow-hidden rounded-[10px] xl:min-h-[360px] lg:aspect-[0.9572] md:min-h-min sm:col-span-full sm:min-h-[250px]">
           <div className="relative z-10 col-span-full row-span-full">
-            <Image
-              className="absolute inset-0 sm:inset-auto sm:left-1/2 sm:top-1/2 sm:h-full sm:w-auto sm:max-w-none sm:-translate-x-1/2 sm:-translate-y-1/2"
-              src={apiAndCliImage}
-              width={470}
-              height={491}
-              alt=""
+            <RiveAnimation
+              className="absolute inset-0 h-full w-full overflow-hidden rounded-[10px]"
+              src="/animations/pages/home/api.riv"
+              artboard="main"
+              intersetionRootMargin="0px 0px 600px 0px"
+              alignment="TopCenter"
+              fit="FitWidth"
             />
           </div>
           <div className="pointer-events-none relative z-20 col-span-full row-span-full flex items-end px-6 pb-7 xl:px-5 xl:pb-6 sm:p-4">
