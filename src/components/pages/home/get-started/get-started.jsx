@@ -1,24 +1,35 @@
-import Image from 'next/image';
+import clsx from 'clsx';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import bgImage from 'images/pages/home/get-started/dots.webp';
+import RiveAnimation from 'components/shared/rive-animation';
 
 const GetStarted = () => (
-  <section className="get-started mb-[358px] mt-[445px]">
+  <section
+    className={clsx(
+      'get-started relative overflow-hidden pb-[356px] pt-[445px]',
+      'xl:pb-[218px] xl:pt-[230px] lg:pb-[148px] lg:pt-[179px] sm:pb-[100px] sm:pt-[116px]'
+    )}
+  >
+    <RiveAnimation
+      className="absolute left-1/2 top-[152px] aspect-[1.87365] w-[1703px] -translate-x-1/2 xl:-top-4 xl:w-[1432px] lg:w-[1126px] sm:-top-6 sm:w-[818px]"
+      src="/animations/footer.riv"
+      artboard="footer"
+      intersetionRootMargin="0px 0px 600px 0px"
+      animationRootMargin="0px 0px 300px 0px"
+    />
     <Container className="flex flex-col items-center justify-center" size="1100">
-      <Image
-        className="absolute max-w-none"
-        src={bgImage}
-        width={bgImage.width / 2}
-        height={bgImage.height / 2}
-      />
-      <h2 className="relative text-center text-[68px] font-medium leading-[0.9] -tracking-[0.03em] text-white">
+      <h2
+        className={clsx(
+          'relative text-center text-[68px] font-medium leading-[0.9] -tracking-[0.03em] text-white',
+          'xl:text-[56px] xl:leading-none xl:tracking-extra-tight lg:text-[44px] sm:text-[32px]'
+        )}
+      >
         Features of tomorrow.
         <br /> Available today.
       </h2>
       <Button
-        className="relative mt-9 !font-semibold tracking-tighter"
+        className="relative mt-9 !font-semibold tracking-tighter xl:mt-8 lg:mt-7 sm:mt-5"
         size="lg"
         theme="green-outline"
         to="#"
