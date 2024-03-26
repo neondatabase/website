@@ -1,12 +1,33 @@
 'use client';
 
-import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
+import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const RiveAnimation = ({
+const useCurrentTime = () => {
+  const currentTime = new Date();
+  const [time, setTime] = useState({
+    hours: currentTime.getHours(),
+    minutes: currentTime.getMinutes(),
+  });
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const updatedTime = new Date();
+      setTime({
+        hours: updatedTime.getHours(),
+        minutes: updatedTime.getMinutes(),
+      });
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return time;
+};
+
+const ClockAnimation = ({
   className = '',
   intersectionClassName = '',
   src,
@@ -19,6 +40,7 @@ const RiveAnimation = ({
   animationRootMargin = '300px 0px',
   onLoad,
 }) => {
+  const { hours, minutes } = useCurrentTime();
   const [containerRef, isIntersecting] = useInView({
     triggerOnce: true,
     rootMargin: intersectionRootMargin,
@@ -40,6 +62,21 @@ const RiveAnimation = ({
     },
   });
 
+  const hourTensInput = useStateMachineInput(
+    rive,
+    stateMachines,
+    'Number 1',
+    Math.floor(hours / 10)
+  );
+  const hourOnesInput = useStateMachineInput(rive, stateMachines, 'Number 2', hours % 10);
+  const minuteTensInput = useStateMachineInput(
+    rive,
+    stateMachines,
+    'Number 3',
+    Math.floor(minutes / 10)
+  );
+  const minuteOnesInput = useStateMachineInput(rive, stateMachines, 'Number 4', minutes % 10);
+
   useEffect(() => {
     if (!rive) {
       return;
@@ -51,6 +88,21 @@ const RiveAnimation = ({
       rive.pause();
     }
   }, [rive, isVisible]);
+
+  useEffect(
+    () => {
+      if (!rive || !hourOnesInput || !hourTensInput || !minuteOnesInput || !minuteTensInput) {
+        return;
+      }
+
+      hourTensInput.value = Math.floor(hours / 10);
+      hourOnesInput.value = hours % 10;
+      minuteTensInput.value = Math.floor(minutes / 10);
+      minuteOnesInput.value = minutes % 10;
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [minutes]
+  );
 
   return (
     <>
@@ -70,7 +122,7 @@ const RiveAnimation = ({
   );
 };
 
-RiveAnimation.propTypes = {
+ClockAnimation.propTypes = {
   src: PropTypes.string.isRequired,
   artboard: PropTypes.string.isRequired,
   stateMachines: PropTypes.string,
@@ -84,4 +136,4 @@ RiveAnimation.propTypes = {
   intersectionClassName: PropTypes.string,
 };
 
-export default RiveAnimation;
+export default ClockAnimation;
