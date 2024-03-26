@@ -113,9 +113,9 @@ To share a project:
 1. Under **Grant access to your project**, enter the email address of the account you want to share access with.
 1. Click **Grant access**.
 
-The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
+The email you specify is added to the list of **Users with access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. This account can also share the project with other Neon users. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
 
-The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
+The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
 
 For additional information, refer to our [Project sharing guide](/docs/guides/project-sharing-guide).
 
@@ -153,7 +153,7 @@ By default, Neon retains a history of changes for all branches in a Neon project
 
 To configure the history retention period for a project:
 
-1. Select a project in the Neon console.
+1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Storage**.
     ![History retention configuration](/docs/manage/history_retention.png)
@@ -170,7 +170,7 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 
 To enable logical replication for your project:
 
-1. Select your project in the Neon console.
+1. Select your project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Beta**.
 4. Click **Enable**.
@@ -204,7 +204,7 @@ Neon supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_versio
 
 To configure an allowlist:
 
-1. Select a project in the Neon console.
+1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
     ![IP Allow configuration](/docs/manage/ip_allow.png)
@@ -323,7 +323,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 
 <TabItem>
 
-1. Select a project in the Neon console.
+1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
 4. Clear the **Allowed IP addresses and ranges** field.

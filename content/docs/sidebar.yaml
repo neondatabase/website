@@ -42,6 +42,8 @@
           slug: introduction/manage-billing
         - title: Sample billing
           slug: introduction/billing-sample
+        - title: AWS Marketplace
+          slug: introduction/billing-aws-marketplace
     - title: Support
       slug: introduction/support
     - title: Status
@@ -125,8 +127,6 @@
           items:
             - title: Branch Restore
               slug: guides/branch-restore
-            - title: Branching — Point-in-time restore
-              slug: guides/branching-pitr
             - title: Branching — Testing queries
               slug: guides/branching-test-queries
             - title: Branching with the CLI
@@ -135,8 +135,6 @@
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
-            - title: Refresh a branch with the Neon API
-              slug: guides/branch-refresh
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
         - title: Logical replication
@@ -225,6 +223,8 @@
           slug: guides/wundergraph
     - title: Schema migration
       items:
+        - title: Drizzle
+          slug: guides/drizzle-migrations
         - title: Flyway
           items:
             - title: Get started
@@ -237,6 +237,10 @@
               slug: guides/liquibase
             - title: Developer workflow
               slug: guides/liquibase-workflow
+        - title: Prisma
+          slug: guides/prisma-migrations
+        - title: Sequelize
+          slug: guides/sequelize
     - title: Serverless
       items:
         - title: Neon serverless driver
@@ -245,6 +249,8 @@
           slug: guides/aws-lambda
     - title: Caching
       items:
+        - title: Cloudflare Hyperdrive
+          slug: guides/cloudflare-hyperdrive
         - title: PolyScale integration
           slug: guides/polyscale-integration
         - title: PolyScale manual setup
@@ -253,8 +259,6 @@
       items:
         - title: Cloudflare
           items:
-            - title: Cloudflare Hyperdrive
-              slug: guides/cloudflare-hyperdrive
             - title: Cloudflare Pages
               slug: guides/cloudflare-pages
             - title: Cloudflare Workers
@@ -323,6 +327,7 @@
         - title: UUID
           slug: data-types/uuid
     - title: Extensions
+      slug: extensions/extensions-intro
       items:
         - title: Supported extensions
           slug: extensions/pg-extensions
@@ -399,6 +404,8 @@
       slug: import/import-from-heroku
     - title: Migrate data with AWS DMS
       slug: import/migrate-aws-dms
+    - title: Migrate from MySQL to Postgres
+      slug: import/migrate-mysql
     - title: Sample data
       slug: import/import-sample-data
 - title: Security

@@ -68,11 +68,11 @@ Branch details shown on the branch page include:
 
 - **ID**: The branch ID. Branch IDs have a `br-` prefix.
 - **Created**: The date and time the branch was created.
-- **Active Time**: The total amount of active hours for your branch compute within the current billing period.
-- **Compute Time**: The compute hours used by the branch within the current billing period.
-- **Parent Branch**: The branch from which this branch was created (only visible for child branches).
-- **Branching point**: The point in time, in terms of data, from which the branch was created.
-- **Last data reset**: The last time the branch was reset from the parent branch.
+- **Active  Since**: The active hours used by the branch compute in the current billing period.
+- **Compute Time**: The compute hours used by the branch in the current billing period.
+- **Parent Branch**: The branch from which this branch was created (only applicable to child branches).
+- **Branching Point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
+- **Last Data Reset**: The last time the branch was reset from the parent branch (only applicable to child branches).
 
 The branch details page also includes details about the compute endpoint associated with the branch. For more information, see [View a compute endpoint](/docs/manage/endpoints#view-a-compute-endpoint).
 
@@ -181,10 +181,27 @@ Read more about performing branching actions from the CLI in [CLI - branches](/d
 </TabItem>
 
 <TabItem>
-Resetting from parent is not yet directly supported from the API. However, you can use the instructions on [Refreshing a branch](/docs/guides/branch-refresh) to perform a similar operation. It involves using the API to create a new branch, transfer the compute endpoint, deleting the old branch, and (optionally) renaming the new branch.
+To reset a branch to its parent using the API, use the branch restore endpoint, selecting the parent as the source:
+
+```bash
+POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
+```
+
+For details, see [Branch Restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore)
+
 </TabItem>
 
 </Tabs>
+
+## Restore a branch to its own or another branch's history
+
+There are several restore operations available using Neon's Branch Restore feature:
+
+- Restore a branch to its own history
+- Restore a branch to the head of another branch
+- Restore a branch to the history of another branch
+
+You can use the Neon Console, CLI, or API. For more detail, see [Branch Restore](/docs/guide/branch-restore).
 
 ## Delete a branch
 
@@ -455,5 +472,6 @@ The response body shows information about the branch being deleted and the `susp
 </details>
 
 You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches-with-the-api). The deleted branch should no longer be listed.
+
 
 <NeedHelp/>

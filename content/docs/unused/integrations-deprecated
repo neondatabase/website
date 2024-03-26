@@ -22,7 +22,7 @@ Hasura is a cloud-based GraphQL provider for existing databases. This guide will
 
 First, set up a Neon project:
 
-1. Go to the Neon console <https://console.neon.tech/app/projects>.
+1. Go to the Neon Console <https://console.neon.tech/app/projects>.
 2. Create a new Project or choose any existing one.
 3. Open the Project page and click the 'Generate token' button.
 4. Copy DATABASE_URL. We will need it later.

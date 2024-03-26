@@ -19,16 +19,16 @@ Databases belong to a branch. If you create a child branch, databases from the p
 
 Neon supports creating and managing databases from the following interfaces:
 
-- [Neon console](#manage-databases-in-the-neon-console)
+- [Neon Console](#manage-databases-in-the-neon-console)
 - [Neon CLI](#manage-databases-with-the-neon-cli)
 - [Neon API](#manage-databases-with-the-neon-api)
 - [SQL](#manage-databases-with-sql)
 
-## Manage databases in the Neon console
+## Manage databases in the Neon Console
 
 This section describes how to create, view, and delete databases in the Neon Console.
 
-The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon consoles. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
+The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon Consoles. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
 ### Create a database
 

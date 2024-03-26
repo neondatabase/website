@@ -6,13 +6,15 @@ redirectFrom:
 updatedOn: '2024-02-26T19:37:28.835Z'
 ---
 
-As described in [How billing works](/docs/introduction/how-billing-works), each of Neon's plans includes [Storage](#storage), [Compute](#compute), and [Project](#projects) usage allowances. The [Launch](/docs/introduction/plans##launch) permits extra compute usage. The [Scale](/docs/introduction/plans##scale) plans permits extra compute, storage, and project usage.
+As described in [How billing works](/docs/introduction/how-billing-works), each of Neon's plans includes [Storage](#storage), [Compute](#compute), and [Project](#projects) usage allowances. The [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans permit extra usage.
 
 This topic describes Storage, Compute, and Project usage metrics in more detail so that you can better manage your plan allowances and extra usage. 
 
 ## Storage
 
-The following table outlines data storage allowances for each Neon plan.
+Storage is a combination of your data size plus the shared change history that is used to enable branching-related features like [point-in-time restore](/docs/introduction/point-in-time-restore), [query testing](/docs/guides/branching-test-queries), and [reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
+
+The following table outlines data storage allowances per month for each Neon plan.
 
 | Plan       | Storage    |
 |------------|------------|
@@ -21,52 +23,54 @@ The following table outlines data storage allowances for each Neon plan.
 | Scale      | 50 GiB     |
 | Enterprise | Larger sizes |
 
-Extra storage is available with the [Scale](/docs/introduction/plans##scale) plan. Extra storage is billed for in units of 10 GiB. For example, the Scale plan has an allowance of 50 GiB included in the plan's monthly fee. If you go over 50 GiB of storage, you are automatically billed for extra storage in increments of 10 GiB for the price stated on our [pricing](https://neon.tech/pricing) page. For example, as soon as you go over your allowance, say by 1 GiB, you are billed for one 10 GiB unit of storage. If you go over by more than 10 GiB, you will be billed for two 10 GiB units of storage, and so on.
-
-### What is "storage" in Neon? 
-
-Neon storage uses copy-on-write branching to keep storage size as small as possible. This can make it hard to visualize "how big is my database", since branches with a shared history don't immediately add to storage. Storage size is a combination of your total data plus the shared change history that is used to enable branching-related features like [point-in-time restore](/docs/introduction/point-in-time-restore), [query testing](/docs/guides/branching-test-queries), and [reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
+Extra storage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans:
+- On the Launch plan, extra storage is billed for in units of 2 GiB at $3.5 each
+- On the Scale plan, extra storage is billed for in units of 10 GiB at $15 each
 
 ### Storage details
 
 _Storage_ is the total volume of data and history stored in Neon, measured in gibibytes (GiB). It includes the following:
 
-- **Current data size**
+- **Data size**
 
   The size of all databases in your Neon projects. You can think of this as a _snapshot_ of your data at a point in time.
 
 - **History**
 
-  Neon retains a history of changes for all branches to support _point-in-time restore_.
+  Neon retains a history of changes for all branches to support _point-in-time restore_ and _branching_.
 
   - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon retains a history of changes in the form of WAL records. You can configure the history retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). WAL records that age out of the history retention period are evicted from storage and no longer count toward storage.
-  - A _database branch_ is a virtual snapshot of your data at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
+  - A _branch_ is a virtual snapshot of your data at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
     When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's virtual snapshot still exists in the parent branch's _history_, which means that it shares this data in common with the parent branch. A branch begins adding to storage when data changes are introduced or when the branch's virtual snapshot falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data or allow the branch to age out of the parent branch's _history_.
 
     Database branches can also share a _history_. For example, two branches created from the same parent at or around the same time share a _history_, which avoids additional storage. The same is true for a branch created from another branch. Wherever possible, Neon minimizes storage through shared history. Additionally, to keep storage to a minimum, Neon takes a new branch snapshot if the amount of data changes grows to the point that a new snapshot consumes less storage than retained WAL records.
 
-The **Storage** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
+**Storage** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 
 ## Compute
 
-The following table outlines compute allowances for each Neon plan.
+The following table outlines compute allowances per month for each Neon plan.
 
 | Plan       | Compute                                                                                                              |
 |------------|----------------------------------------------------------------------------------------------------------------------|
-| Free Tier  | Always-available primary branch compute, 20 _active hours_/month (5 compute hours) on branch computes           |
-| Launch     | Up to 1,200 _active hours_/month (300 compute hours)                                                                                             |
-| Scale      | Up to 3,000 _active hours_/month (750 compute hours)                                                                                             |
+| Free Tier  | Always-available primary branch compute, 5 compute hours (20 _active hours_)/month on branch computes           |
+| Launch     | 300 compute hours (1,200 _active hours_)/month                                                                                           |
+| Scale      | 750 compute hours (3,000 _active hours_)/month                                                                                            |
 | Enterprise | Custom                                                                                                            |
 
-Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for by compute hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use additional compute hours, you are billed for those at the compute-hour price stated on our [pricing](https://neon.tech/pricing) page.
+Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for at $0.16 per compute hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the monthly billing period, you are billed an extra $16 (100 x $0.16) for the month.
 
-### What are active hours?
+<Admonition type="tip" title="What are active hours and compute hours?">
 
-**Active hours** measures the amount of time a compute is active, rather than idle when suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
+- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted. In the table above, _active hours_ are based on a 0.25 vCPU compute size.
+- A **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
+- **Compute hours formula**
 
-### What is a compute hour?
+  ```
+  compute hours = compute size * active hours
+  ```
 
-A **compute hour** is 1 hour is equal to one _active hour_ for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+</Admonition>
 
 ### How Neon compute features affect usage
 
@@ -109,10 +113,10 @@ Factors that affect _active hours_ include:
 Neon uses a small amount of compute time, included in your billed compute hours, to perform a periodic check to ensure that your computes can start and read and write data. See [Availability Checker](/docs/reference/glossary#availability-checker) for more information.
 </Admonition>
 
-The compute hour usage calculation is as follows:
+The compute hours formula is as follows:
 
 ```text
-compute hour usage = compute size * active hours
+compute hours = compute size * active hours
 ```
 
 ### Estimate your compute hour usage
@@ -135,6 +139,17 @@ To estimate what your compute hour usage might be per month:
 
    This calculation is useful when trying to select the right Neon plan or when estimating the extra compute usage you might need.
 
+   <Admonition type="note">
+   If you plan to use Neon's _Autoscaling_ feature, estimating **compute hours** is more challenging. Autoscaling adjusts the compute size based on demand within the defined minimum and maximum compute size thresholds. The best approach is to estimate an average compute size and modify the compute hours formula as follows:
+
+   ```text
+   compute hours = average compute size * active hours
+   ```
+
+   To estimate an average compute size, start with a minimum compute size that can hold your data or working set (see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute)). Pick a maximum compute size that can handle your peak loads. Try estimating an average compute size between those thresholds based on your workload profile for a typical day.
+
+   </Admonition>
+
 ## Projects
 
 In Neon, everything starts with a project. A project is a container for your branches, databases, roles, and other resources and settings. A project also defines the region your data and resources reside in. We typically recommend creating a project for each application or each client. In addition to organizing objects, projects are a way to track storage and compute usage by application or client.
@@ -149,6 +164,6 @@ The following table outlines project allowances for each Neon plan.
 | Enterprise | Unlimited |
 
 - When you reach your limit on the [Free Tier](/docs/introduction/plans#free-tier) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch) or [Scale](/docs/introduction/plans#scale) plan, which offer allowances of 10 and 50 projects, respectively.
-- Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in increments of 10. If you use more than 50 projects, you are automatically billed for an extra package of 10 projects for the price stated on our [pricing](https://neon.tech/pricing) page. For example, if you use 51 projects, you are billed for a package of 10 projects. If you use 61 projects, you are billed for two packages of 10 projects, and so on.
+- Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in increments of 10 for $50 each. If you use more than 50 projects, you are automatically billed for an extra package of 10 projects. For example, if you use 51 projects during the billign period, you are billed for a package of 10 projects for the month($50). If you use 61 projects, you are billed for two packages of 10 projects ($100) for the month, and so on.
 
 <NeedHelp/>   

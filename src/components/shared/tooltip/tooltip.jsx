@@ -1,9 +1,13 @@
 'use client';
 
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
+
+import useWindowSize from 'hooks/use-window-size';
 
 const Tooltip = ({
   id = null,
@@ -14,6 +18,7 @@ const Tooltip = ({
   anchorSelect = null,
   ...rest
 }) => {
+  const { width } = useWindowSize();
   const [isTooltipVisible, setTooltipVisibility] = useState(false);
 
   useEffect(() => {
@@ -21,21 +26,24 @@ const Tooltip = ({
   }, []);
 
   if (isTooltipVisible) {
-    return (
+    return createPortal(
       <ReactTooltip
-        className={className}
+        className={clsx('z-[9999] sm:max-w-[80vw]', className)}
         arrowColor={arrowColor}
         id={id}
-        place={place}
+        place={width < 640 ? 'top-center' : place}
         effect="solid"
         type="dark"
         offset={offset}
         anchorSelect={anchorSelect}
+        opacity={1}
         multiline
         {...rest}
-      />
+      />,
+      document.body
     );
   }
+
   return null;
 };
 

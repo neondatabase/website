@@ -3,6 +3,9 @@ title: Branch Restore
 subtitle: Learn how to revert changes or recover lost data using Neon Branch Restore
   with Time Travel Assist
 enableTableOfContents: true
+redirectFrom:
+ - /docs/guides/branching-pitr
+ - /docs/guides/branch-refresh
 updatedOn: '2024-02-21T19:34:16.273Z'
 ---
 
@@ -100,9 +103,9 @@ The Schema Diff tool lets you compare an SQL script of your selected branch's sc
 
 ## How to use branch restore
 
-You can use the Neon Console or the CLI to restore branches.
+You can use the Neon Console, CLI, or API to restore branches.
 
-<Tabs labels={["Console", "CLI"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -182,6 +185,77 @@ This command will restore the target branch `dev/alex` to an earlier point in ti
 
 For full CLI documentation for `branches restore`, see [branches restore](/docs/reference/cli-branches#restore).
 </TabItem>
+
+<TabItem>
+To restore a branch using the API, use the endpoint:
+
+```bash
+POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
+```
+
+This endpoint lets you restore a branch using the following request parameters:
+
+| Parameter              | Type     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|------------------------|----------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **source_branch_id**   | `string` | Yes      | The ID of the branch you want to restore from.<br /><br />To restore to the latest data (head), omit `source_timestamp` and `source_lsn`.<br /><br />To restore a branch to its own history (`source_branch_id` equals branch's own Id), you must include:<br />- A time period: `source_timestamp` or `source_lsn`<br />- A backup branch: `preserve_under_name`                                                                                       |
+| **source_lsn**         | `string` | No       | A Log Sequence Number (LSN) on the source branch. The branch will be restored with data up to this LSN.                                                                                                                                                                                                                                                                                                                          |
+| **source_timestamp**   | `string` | No       | A timestamp indicating the point in time on the source branch to restore from. Use ISO 8601 format for the date-time string.                                                                                                                                                                                                                                                                                                     |
+| **preserve_under_name**| `string` | No       | If specified, a backup is created: the latest version of the branch's state is preserved under a new branch using the specified name.<br /><br />**Note:** This field is required if:<br />- The branch has children. All child branches will be moved to the newly created branch.<br />- You are restoring a branch to its own history (`source_branch_id` equals the branch's own ID).                                                               |
+
+#### Restoring a branch to its own history
+
+In the following example, we are restoring branch `br-twilight-river-31791249` to an earlier point in time, `2024-02-27T00:00:00Z`, with a new backup branch named `backup-before-restore`. Note that the branch id in the `url` matches the value for `source_branch_id`.
+
+```bash shouldWrap
+curl --request POST \ // [!code word:br-twilight-river-31791249]
+     --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-twilight-river-31791249/restore \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
+     --data '
+{
+  "source_branch_id": "br-twilight-river-31791249",
+  "source_timestamp": "2024-02-27T00:00:00Z",
+  "preserve_under_name": "backup-before-restore"
+}
+' | jq
+```
+
+### Restoring to the latest data from another branch
+
+In this example, we are restoring a development branch `dev/alex` (branch ID `br-twilight-river-31791249`) to the latest data (head) of its parent branch `br-jolly-star-07007859`. Note that we don't include any time identifier or backup branch name; this is a straight reset of the branch to the head of its parent.
+
+```bash shouldWrap
+curl --request POST \ // [!code word:br-twilight-river-31791249]
+     --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-twilight-river-31791249/restore \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \ // [!code word:br-jolly-star-07007859]
+     --data '
+{ 
+  "source_branch_id": "br-jolly-star-07007859"}
+' | jq
+```
+
+### Restoring to the earlier state of another branch
+
+In this example, we are restoring branch `dev/jordan` (branch ID `br-damp-smoke-91135977`) to branch `dev/alex` (branch ID `br-twilight-river-31791249`) at the point in time of `Feb 26, 2024 12:00:00.000 AM`.
+
+```bash shouldWrap
+curl --request POST \ // [!code word:br-damp-smoke-91135977]
+     --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-damp-smoke-91135977/restore \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \ //  [!code word:br-jolly-star-07007859]
+     --header 'Content-Type: application/json' \ 
+     --data '
+{ 
+  "source_branch_id": "br-jolly-star-07007859", 
+  "source_timestamp": "2024-02-26T12:00:00Z"
+}
+' | jq
+```
+
+</TabItem>
 </Tabs>
 
 To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it.
@@ -243,3 +317,5 @@ A couple of details to note:
 
 - You cannot delete a backup branch without first removing the child branch.
 - Once you restore a branch, [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) restores from the restore backup branch, not the original parent.
+
+  For example, let's say you have a `main` branch with a child development branch `dev/alex`. You are working on `dev/alex` and decide to restore to an earlier point in time to fix something during development. At this point, `dev/alex`'s parent switches from `main` to the backup `dev/alex_old_timestamp`. A day later, you want to refresh `dev/alex` with the latest data from `main`. You can't use **Reset from parent**, since the backup is now the parent. Instead, use **Branch Restore** and select the original parent `main` as the source. 

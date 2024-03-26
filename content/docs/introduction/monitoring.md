@@ -17,7 +17,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 ## Dashboard
 
-When you open a project in the Neon console, the Dashboard gives you a snapshot view of the most recent usage metrics for that project:
+When you open a project in the Neon Console, the Dashboard gives you a snapshot view of the most recent usage metrics for that project:
 
 - **Branches** widget &#8212; Shows how much storage your main branch has currently used. It also lists a subset of other branches.
 - **Usage since...** widget  &#8212; Shows a snapshot of your current consumption metrics since your last billing date (the last day of the previous month).
@@ -101,4 +101,4 @@ Currently, not all information within `pg_stats_statements` persists when a comp
 
 At Neon, we understand that observability and monitoring are critical for running successful applications.
 
-Check out our [roadmap](/docs/introduction/roadmap) to see what's coming next. And if you've got feature requests or feedback about what you'd like to see in Neon observability features, let us know in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042).
+Check out our [roadmap](/docs/introduction/roadmap) to see what's coming next. And if you've got feature requests or feedback about what you'd like to see in Neon observability features, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.

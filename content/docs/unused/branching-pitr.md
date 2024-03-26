@@ -10,7 +10,7 @@ updatedOn: '2024-02-08T15:20:54.280Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
-A simpler one-click branch restore operation is available now for select users, coming soon to all users. Read more about it [here](/docs/guides/branch-restore). The restore procedure described on this page is still valid and might fit your specific use case.
+A simpler one-click branch restore operation is now available. Read more about it [here](/docs/guides/branch-restore). The restore procedure described on this page is still valid and might fit your specific use case.
 </Admonition>
 
 Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined history retention period. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
