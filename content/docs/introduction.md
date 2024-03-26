@@ -100,7 +100,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
 
-<img src="/images/technology-logos/prisma-logo.svg" width="29" height="36" alt="Prisma Migrate" href="/docs/guides/prisma-migrations" title="Schema migration with Neon Postgres and Prisma ORM" />
+<img src="/images/technology-logos/prisma-logo.svg" width="29" height="36" alt="Prisma" href="/docs/guides/prisma-migrations" title="Schema migration with Neon Postgres and Prisma ORM" />
 
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-jdbc" title="Connect Quarkus (JDBC) to Neon" />
 
