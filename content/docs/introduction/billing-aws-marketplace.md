@@ -17,7 +17,7 @@ At present, only the **Scale** plan is available via the AWS Marketplace.
 1. Click on **View Purchasing Options**. 
 1. Select your preferred contract options:
     1. If you’d like a monthly subscription, select **1 month**. If you prefer a yearly subscription, select **12 months**. See our [pricing page](https://neon.tech/pricing) for a refresh on what’s included in the Scale plan. 
-    1. In the Renewal settings, select “Yes”.  
+    1. In the Renewal settings, select **Yes**.  
     1. Under Units, write down **1**. 
 1. Click on **Create contract**.
 1. Review and confirm your order details. Once you subscribe, you'll receive instructions on how to access and start using Neon.
