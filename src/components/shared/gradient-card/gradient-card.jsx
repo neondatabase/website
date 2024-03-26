@@ -42,7 +42,7 @@ const GradientCard = ({ className, children, as: Tag = 'div', ...rest }) => {
 GradientCard.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
-  as: PropTypes.oneOf([PropTypes.string, PropTypes.func]),
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
 };
 
 export default GradientCard;
