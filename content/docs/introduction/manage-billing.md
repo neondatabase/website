@@ -85,10 +85,10 @@ To downgrade from an [Enterprise](/docs/introduction/plans#enterprise) plan, ple
 
 ## Deactivate your account
 
-You can deactivate your Neon account by submitting a deactivation request to the Neon support team. Launch and Scale plan users can open a support ticket in the Neon Console. Look for the **Support** link in the sidebar. It opens the **Create Support Ticket** modal, where you can request an account deactivation. To access the modal directly, [click here](https://console.neon.tech/app/projects?modal=support). Free Tier users, who do not have access to the **Create Support Ticket** modal in the Neon Console, can send deactivation requests to `support@neon.tech`.
+ To deactivate your Neon account, please initiate a deactivation request through the Neon support team. If you're a Launch or Scale plan subscriber, you can generate a support ticket directly from the Neon Console. Navigate to the **Support** link located in the Neon Console sidebar to open the **Create Support Ticket** modal. Here, you can formally request the deactivation of your account. For direct access to this modal, [click here](https://console.neon.tech/app/projects?modal=support). If you are a Free Tier user and do not have the **Create Support Ticket** modal available in the Neon Console, please direct your deactivation requests to `support@neon.tech`.
 
 <Admonition type="important">
-Before Neon can deactivate your account, you must delete all active projects. For instructions, see [Delete a project](/docs/manage/projects#delete-a-project).
+Before Neon can proceed with deactivating your account, it is necessary to ensure all active projects have been deleted. To learn how to delete your projects, please refer to the [Delete a project](/docs/manage/projects#delete-a-project) section for detailed instructions.
 </Admonition>
 
 ## Purchase Neon on AWS Marketplace
