@@ -39,4 +39,6 @@ Find information about invoices, payment methods, changing your plan, and other 
 
 <a href="/docs/introduction/billing-sample" description="See how to select the right plan for a sample project" icon="chart-bar">Sample project</a>
 
+<a href="/docs/introduction/billing-aws-marketplace" description="Learn how you can pay for Neon with your AWS Billing account" icon="chart-bar">AWS Marketplace</a>
+
 </DetailIconCards>
