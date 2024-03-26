@@ -24,6 +24,9 @@ const BlogPage = async ({ params, searchParams }) => {
 
   let postResult;
 
+  // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
+  await Promise.resolve(JSON.stringify(searchParams));
+
   if (isDraftModeEnabled) {
     postResult = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
   } else {
