@@ -202,7 +202,7 @@
       "rows": "2",
       "feature": {
         "title": "Standard Extensions",
-        "subtitle": "View <a href='/docs/extensions/pg-extensions' class='underline'>Supported Extensions</a>"
+        "subtitle": "View <a href='/docs/extensions/extensions-intro' class='underline'>Supported Extensions</a>"
       },
       "free": true,
       "launch": true,
