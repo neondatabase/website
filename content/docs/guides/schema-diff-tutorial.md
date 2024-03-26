@@ -18,10 +18,16 @@ neonctl databases create --name staging
 
 Now create the initial schema that will serve as the base from which future changes and branches will diverge.
 
-1. Connect to the new database with psql:
+1. First, copy your connection string:
 
     ```bash
-    psql 'postgresql://alex:*********@ep-sparkling-rain-93067869.us-east-2.aws.neon.build/staging?sslmode=require'
+    neonctl connection-string --database-name staging
+    ```
+
+2. Connect to the `staging`` with psql:
+
+    ```bash
+    psql 'postgres://neondb_owner:*********@ep-crimson-frost-a5i6p18z.us-east-2.aws.neon.tech/staging?sslmode=require'
     ```
 
 2. Create the schema:
@@ -57,13 +63,13 @@ If you want to verity that these branches include the initial schema, connect to
     This gives you the connection string which you can then copy.
 
     ```bash
-    postgres://alex:*********@ep-hidden-rain-a5pe72oi.us-east-2.aws.neon.tech/staging?sslmode=require
+    postgres://neondb_owner:*********@ep-hidden-rain-a5pe72oi.us-east-2.aws.neon.tech/staging?sslmode=require
     ```
 
 1. Connect to `staging` using psql.
 
     ```bash
-    psql 'postgres://alex:*********@ep-hidden-rain-a5pe72oi.us-east-2.aws.neon.tech/staging?sslmode=require'
+    psql 'postgres://neondb_owner:*********@ep-hidden-rain-a5pe72oi.us-east-2.aws.neon.tech/staging?sslmode=require'
     ```
 
 1. View the schema for the `person` table we created earlier.
@@ -85,6 +91,8 @@ If you want to verity that these branches include the initial schema, connect to
         "person_pkey" PRIMARY KEY, btree (id)
         "person_email_key" UNIQUE CONSTRAINT, btree (email)
     ```
+
+You can do the same thing for your `dev/jordan` branch and get identical results.
 
 ### Step 3: Update schema on a dev branch
 
@@ -111,11 +119,11 @@ CREATE TABLE address (
 From the Neon Console, go to the **Restore** page. The Schema Diff tool is meant to assist you with restoring branches and is built into the Time Travel assist editor. Just like with Time Travel assist, your first step is to choose a target and source branch:
 
 1. For the target, using the **Branch to restore** dropdown, select `dev\alex`.
-1. For the source, switch to the **From another branch** tab and from the **REstore from** dropdown, select `dev\jordan`.
+1. For the source, switch to the **From another branch** tab and from the **Restore from** dropdown, select `dev\jordan`.
 
    ![select branches for schema diff](/docs/guides/schema_diff_make_selection.png)
 
-1. In the Time travel assist editor, click the **Schema Diff** button.
+1. In the Time travel assist editor, click the **Schema Diff** button. Verify that your selections are correct and press **Compare**.
 
     ![schema diff results](/docs/guides/schema_diff_result.png)
 
