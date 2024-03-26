@@ -27,7 +27,7 @@ const TESTIMONIALS = [
     avatar: avatar2,
     name: 'Guillermo Rauch',
     position: 'CEO at Vercel',
-    logo: { src: vercelLogo, width: 111, height: 36, alt: 'Vercal logo' },
+    logo: { src: vercelLogo, width: 111, height: 36, alt: 'Vercel' },
   },
   {
     quote: `The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer.`,
@@ -56,6 +56,7 @@ const Industry = () => (
         src={linesImage}
         width={linesImage.width / 2}
         height={linesImage.height / 2}
+        alt=""
       />
       <div className="sm:flex sm:w-full sm:flex-col sm:items-center">
         <h2

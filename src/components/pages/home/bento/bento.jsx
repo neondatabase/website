@@ -33,7 +33,7 @@ const Bento = () => (
             </p>
           </div>
           <div
-            className="border-linear absolute inset-0 z-10 rounded-[inherit] border-image-home-bento-regions-border"
+            className="border-linear pointer-events-none absolute inset-0 z-10 rounded-[inherit] border-image-home-bento-regions-border"
             aria-hidden
           />
         </div>
@@ -55,7 +55,7 @@ const Bento = () => (
             </p>
           </div>
           <div
-            className="border-linear absolute inset-0 z-10 rounded-[inherit] border-image-home-bento-api-and-cli-border"
+            className="border-linear pointer-events-none absolute inset-0 z-10 rounded-[inherit] border-image-home-bento-api-and-cli-border"
             aria-hidden
           />
         </div>
@@ -76,7 +76,7 @@ const Bento = () => (
             </p>
           </div>
           <div
-            className="border-linear absolute inset-0 z-10 rounded-[inherit] border-image-home-bento-timer-border"
+            className="border-linear pointer-events-none absolute inset-0 z-10 rounded-[inherit] border-image-home-bento-timer-border"
             aria-hidden
           />
         </div>
