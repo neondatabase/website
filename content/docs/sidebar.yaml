@@ -42,6 +42,8 @@
           slug: introduction/manage-billing
         - title: Sample billing
           slug: introduction/billing-sample
+        - title: AWS Marketplace
+          slug: introduction/billing-aws-marketplace
     - title: Support
       slug: introduction/support
     - title: Status
