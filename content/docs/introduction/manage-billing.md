@@ -83,6 +83,14 @@ Downgrading directly from [Scale](/docs/introduction/plans#scale) to [Launch](/d
 
 To downgrade from an [Enterprise](/docs/introduction/plans#enterprise) plan, please contact [Sales](https://neon.tech/contact-sales). Cancellation of an Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
 
+## Deactivate your account
+
+ To deactivate your Neon account, please initiate a deactivation request through the Neon support team. If you're a Launch or Scale plan subscriber, you can generate a support ticket directly from the Neon Console. Navigate to the **Support** link located in the Neon Console sidebar to open the **Create Support Ticket** modal. Here, you can formally request the deactivation of your account. For direct access to this modal, [click here](https://console.neon.tech/app/projects?modal=support). If you are a Free Tier user and do not have access to the **Create Support Ticket** modal in the Neon Console, please direct your deactivation request to `support@neon.tech`.
+
+<Admonition type="important">
+Before Neon can proceed with deactivating your account, it is necessary to ensure all active projects have been deleted. To learn how to delete your projects, please refer to the [Delete a project](/docs/manage/projects#delete-a-project) section for detailed instructions.
+</Admonition>
+
 ## Purchase Neon on AWS Marketplace
 
 As an alternative to Neon billing, you can purchase Neon on the [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-o32z34khv4272?sr=0-1&applicationId=AWSMPContessa&utm_campaign=Developer%20Days&utm_source=hs_email&utm_medium=email&_hsenc=p2ANqtz-8U-1v7Sm5HHexFnV3Mkkwwsq5hnq9ThQnbQOqhuB11RT9cNwtAoalhaq98WMgL70rwfFhq) or through the [AWS Private Offers](https://docs.aws.amazon.com/marketplace/latest/userguide/private-offers-overview.html) program.
