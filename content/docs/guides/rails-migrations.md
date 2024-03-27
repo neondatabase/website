@@ -97,7 +97,7 @@ production:
 
 ### Generate models and migrations
 
-Let's create models for our application. Run the following commands to generate the `Author` and `Book` models:
+Next, we will create the data models for our application. Run the following commands to generate the `Author` and `Book` models:
 
 ```bash
 rails generate model Author name:string bio:text
@@ -174,7 +174,7 @@ This command inserts the sample authors and books data into the database. Note t
 
 ### Create controllers and views
 
-Let's create controllers and views to display the authors and books in our application. Run the following commands to generate the controllers:
+Next, we will create controllers and views to display the authors and books in our application. Run the following commands to generate the controllers:
 
 ```bash
 rails generate controller Authors index
