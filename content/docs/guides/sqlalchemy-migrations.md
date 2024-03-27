@@ -21,7 +21,7 @@ To follow along with this guide, you will need:
 ### Initialize a new project
 
 1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
-2. Select a project or click the `New Project` button to create a new one.
+2. Select a project or click the **New Project** button to create a new one.
 
 ### Retrieve your Neon database connection string
 
@@ -139,7 +139,7 @@ class Book(Base):
     author = relationship("Author", back_populates="books")
 ```
 
-This code defines two models: `Author` and `Book`. The `Author` model represents an author with fields for name, bio, and created_at timestamp. The `Book` model represents a book with fields for title, author (as a foreign key to the `Author` model), and created_at timestamp. The `relationship` function is used to define the one-to-many relationship between `Author` and `Book`.
+This code defines two models: `Author` and `Book`. The `Author` model represents an author with fields for `name`, `bio`, and a `created_at` timestamp. The `Book` model represents a book with fields for `title`, `author` (as a foreign key to the `Author` model), and a `created_at` timestamp. The `relationship` function is used to define the one-to-many relationship between `Author` and `Book`.
 
 ### Initialize Alembic
 
@@ -353,6 +353,14 @@ Navigate to `http://localhost:8000/authors` in your browser to view the list of 
 ## Conclusion
 
 In this guide, we demonstrated how to set up a FastAPI project with `Neon` Postgres, define database models using SQLAlchemy, generate migrations using Alembic, and run them. Alembic makes it easy to interact with the database and manage schema evolution over time.
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/guide-neon-sqlalchemy" description="Running migrations in a Neon-SQLAlchemy project" icon="github">Neon SQLAlchemy Migrations</a>
+</DetailIconCards>
 
 ## Resources
 
