@@ -1,6 +1,6 @@
 ---
 title: Postgres query reference
-subtitle: Find examples for commonly-used Postgres queries
+subtitle: Find examples of commonly-used Postgres queries for basic to advanced operations
 enableTableOfContents: true
 ---
 

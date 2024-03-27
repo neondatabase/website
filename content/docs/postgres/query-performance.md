@@ -1,10 +1,10 @@
 ---
-title: Optimize query performance
-subtitle: Learn about strategies for optimizing Postgres query performance in Neon
+title: Optimize Postgres query performance
+subtitle: Learn about strategies for optimizing Postgres query performance
 enableTableOfContents: true
 ---
 
-Many factors can impact query performance in Postgres, ranging from insufficient indexing or database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, it can be difficult to know where to start. This topic outlines several strategies for optimizing query performance in Postgres.
+Many factors can impact query performance in Postgres, ranging from insufficient indexing and database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, it can be difficult to know where to start. In this topic, we'll look at several strategies you can use to optimize query performance in Postgres.
 
 - [Gather statistics](#gather-statistics)
 - [Use indexes](#use-indexes)
@@ -69,7 +69,7 @@ After allowing time for statistics collection, you can run queries like these to
 
 ### Most frequently executed queries
 
-This query lists the top 100 most frequently executed queries in the database, detailing each query's executing user with total and average execution times.
+This query lists the top 100 most frequently executed queries with the executing user and total and average execution time.
 
 ```sql
 SELECT
@@ -102,7 +102,7 @@ LIMIT 100;
 
 ### Queries that return the most rows
 
-This query showcases the top 100 queries that yield the most rows, ordered by the number of rows returned. It includes the average execution time for each query.
+This query showcases the top 100 queries that return the most rows, ordered by the number of rows returned. It includes the average execution time for each query.
 
 ```sql
 SELECT 
@@ -121,7 +121,7 @@ LIMIT
 
 Indexes are crucial for query performance, especially in applications with large tables. They significantly reduce the time required to access data, which can be the difference between a slow application and a fast one.
 
-Suppose that you have a large `users` table like this with million of rows:
+Suppose that you have a large `users` table like this with millions of rows:
 
 ```sql
 CREATE TABLE users (
@@ -259,7 +259,7 @@ In this case, the query plan shows that two parallel workers were launched to ru
 
 1. **Look for sequential Scans**: If your query involves large tables, sequential scans can be slow. Consider using indexes to speed up data retrieval.
 2. **Analyze joins**: Make sure that joins are using indexes. If not, it might be beneficial to add indexes on the join columns or revise the join conditions.
-3. **Optimize filters**: Check if the conditions in the `WHERE` clause can be optimized. Using efficient indexes can dramatically reduce the search space.
+3. **Optimize filters**: Check if the conditions in the `WHERE` clause can be optimized. Conditions should be written in a way that allows the database to use indexes effectively. For example, avoid using functions on column names in the `WHERE` clause (like `WHERE YEAR(column) = 2021`) because they can prevent the use of indexes due to the database having to compute the result of that function for every row in the table before it can determine which rows satisfy the condition.
 4. **Subquery performance**: Subqueries can sometimes be inefficient. Look for opportunities to rewrite subqueries as joins. See [Use joins instead of subqueries](#use-joins-instead-of-subqueries).
 5. **Use ANALYZE**: Regularly run the `ANALYZE` command on your database. This updates statistics, helping Postgres make better planning decisions. The Postgres `autovacuum` process, which is enabled in Neon, will automatically issue `ANALYZE` commands whenever the content of a table has changed sufficiently, but if you're working with very large tables, this may not happen as often as expected. For a query that shows when vacuum was last run, see [VACUUM and ANALYZE statistics](/docs/postgres/query-reference#vacuum-and-analyze-statistics).
 
