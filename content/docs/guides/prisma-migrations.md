@@ -287,7 +287,15 @@ To verify the migration, run the application again:
 npm run start
 ```
 
-You can navigate to `http://localhost:3000/authors` in your browser to check that each author entry has a `country` field, currently set to `null`. 
+You can navigate to `http://localhost:3000/authors` in your browser to check that each author entry has a `country` field, currently set to `null`.
+
+## Source code
+
+You can find the source code for the application describe in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/guide-neon-prisma" description="Running Neon database migrations using Prisma" icon="github">Neon Prisma Migrations</a>
+</DetailIconCards>
 
 ## Conclusion
 
