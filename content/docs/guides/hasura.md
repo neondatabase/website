@@ -78,4 +78,8 @@ To view the newly created tables from the Neon Console:
 
 If you are migrating from Hasura with Heroku Postgres to Neon, refer to the [Import data from Heroku](/docs/import/import-from-heroku) guide for data import instructions. For general data import instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
 
+## Maximum connections configuration
+
+In Neon, the maximum number of concurrent connections is defined according to the size of your compute instance. For example, a 0.25 vCPU compute in Neon supports 112 connections. The connection limit is higher with larger compute sizes (see [How to size])). and you can also enable connection pooling in Neon to support up to 10,000 concurrent connections. However, Hasura also has a connection limit
+
 <NeedHelp/>
