@@ -46,7 +46,7 @@ If you already have a PolyScale account, click the **New Cache** button in the u
 ![Create a PolyScale cache](/docs/guides/polyscale_success.png)
 
     <Admonition type="note">
-    The [Neon serverless driver](/docs/serverless/serverless-driver) is not compatible with a PolyScale integration, as it only supports a direct connection to your Neon database. Use a standard Postgres driver such as `node-postgres` instead.
+    The [Neon serverless driver](/docs/serverless/serverless-driver) is not compatible with a PolyScale integration, as it only supports a direct connection to a Neon database. Use a standard Postgres driver such as `node-postgres` instead.
     </Admonition>
 
 After queries from your application start passing through PolyScale, you can monitor traffic and caching behavior on the **Observability** tab in PolyScale. For more information, see [Observability](https://docs.polyscale.ai/database-observability/), in the _PolyScale documentation_.
