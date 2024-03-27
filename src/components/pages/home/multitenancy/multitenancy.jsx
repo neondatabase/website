@@ -5,7 +5,7 @@ import neonGridImage from 'images/pages/home/multitenancy/neon-grid.jpg';
 
 // TODO: add video instead of image
 const Multitenancy = () => (
-  <section className="multitenancy safe-paddings mt-[88px] overflow-hidden xl:mt-1 lg:mt-0 md:mt-16">
+  <section className="multitenancy safe-paddings mt-8 overflow-hidden xl:-mt-9 lg:-mt-8 md:mt-12">
     <Container className="relative z-10 xl:max-w-[704px] lg:pl-24" size="960">
       <h2 className="text-[68px] font-medium leading-[0.9] tracking-extra-tight text-white xl:text-[56px] lg:text-[44px] sm:text-[32px]">
         Next-gen multitenancy
