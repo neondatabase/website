@@ -217,7 +217,7 @@ SUMMARY
 FORMAT { TEXT | XML | JSON | YAML }
 ```
 
-The `ANALYZE` option executes the SQL statement first and includes actual run times and other statistics in your query plans, so it's helpful to include this option when explaining `SELECT` queries. For other types of statements such as `INSERT`, `UPDATE`, or `DELETE`, which affect your data, you can enclose an `EXPLAIN ANALYZE` statement in a transaction, as shown below. This way, your data will not be changed by the `EXPLAIN ANALYZE` statement.
+The `ANALYZE` option executes the SQL statement first and includes actual run times and other statistics in your query plans, so it's helpful to include this option when explaining `SELECT` queries. For other types of statements such as `INSERT`, `UPDATE`, or `DELETE`, you can enclose an `EXPLAIN ANALYZE` statement in a transaction, as shown below, to prevent the `EXPLAIN ANALYZE` statement from altering your data.
 
 ```sql
 BEGIN;
@@ -257,7 +257,8 @@ There are numerous other resources you can draw upon to learn more about leverag
 
 <Admonition type="tip" title="Tips">
 - The Neon SQL Editor provides a visual `EXPLAIN` and `ANALYZE` capability, providing query plans in a visual form. See [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
-- Regularly run the `ANALYZE` command on your database. This updates statistics, helping Postgres produce better query plans. The Postgres `autovacuum` process, which is enabled in Neon, will automatically issue `ANALYZE` commands whenever the content of a table has changed sufficiently, but if you're working with very large tables, this may not happen as often as expected. For a query that shows when vacuum or autovacuum was last run, see [VACUUM and ANALYZE statistics](/docs/postgres/query-reference#vacuum-and-analyze-statistics).
+- You can run the `ANALYZE` command on your database to updates statistics. This helps Postgres produce better query plans. The Postgres `autovacuum` process, which is enabled in Neon, automatically issues the `ANALYZE` command whenever the content of a table has changed sufficiently, but if you're working with large tables, this may not happen as often as expected. For a query that shows when vacuum or autovacuum
+ was last run, see [VACUUM and ANALYZE statistics](/docs/postgres/query-reference#vacuum-and-analyze-statistics).
 </Admonition> 
 
 ## Cache your data
@@ -297,12 +298,12 @@ file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses))
 
 If the `file_cache_hit_ratio` is below 99%, your working set (your most frequently accessed data) may not be adequately in memory. This could be due to your Postgres instance not having sufficient memory.
 
-To increase available memory for a POstgres instance in Neon, you can increase the size of your compute. Larger computes have larger local file caches. For information about selecting an appropriate compute size in Neon, refer to [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+To increase available memory for a Postgres instance in Neon, you can increase the size of your compute. Larger computes have larger local file caches. For information about selecting an appropriate compute size in Neon, refer to [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 Remember that the local file cache statistics are for the entire compute, not specific databases or tables. A Neon compute runs an instance of Postgres, which can have multiple databases and tables.
 
 <Admonition type="note">
-The cache hit ratio query is based on statistics that represent the lifetime of your Postgres instance, from the last time you started it until the time you ran the query. Statistics are lost when your instance stops and gathered again from scratch when your instance restarts. In Neon, your compute runs Postgres, so starting and stopping a compute also starts and stops Postgres. Additionally, you'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you restart Postgres. In this case, you should run a representative workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the [pg_prewarm](/docs/extensions/pg_prewarm) extension to pre-load data into memory after a restart. 
+The cache hit ratio query is based on statistics that represent the lifetime of your Postgres instance, from the last time you started it until the time you ran the query. Statistics are lost when your instance stops and gathered again from scratch when your instance restarts. In Neon, your compute runs Postgres, so starting and stopping a compute also starts and stops Postgres. Additionally, you'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you restart Postgres. In this case, you should run a representative workload before you try the cache hit ratio query again to see if your cache hit ratio improved.
 </Admonition>
 
 ## Check for table or index bloat
@@ -311,13 +312,13 @@ If there is some issue with Postgres [autovacuum](https://www.postgresql.org/doc
 
 Bloat refers to the condition where tables and indexes occupy more space on disk than is necessary for storing the data. Bloat can occur over time due to the way Postgres handles updates and deletes.
 
-### Table Bloat
+### Table bloat
 
 When a row is updated, the database doesn’t overwrite the existing row. Instead, it just marks the old row version as obsolete and creates a new version of the row elsewhere in the table. Similarly, when a row is deleted, it is not immediately removed; it’s just marked as deleted. The space occupied by these obsolete or deleted rows contributes to table bloat.
 
 This mechanism supports Postgres MVCC (Multi-Version Concurrency Control), allowing for more efficient query processing without locking rows for reading. However, the downside is that it can lead to wasted space and decreased performance over time as the table grows larger than necessary.
 
-### Index Bloat
+### Index bloat
 
 Indexes can also experience bloat. As rows are updated and deleted, the indexes that point to those rows can become inefficient. Index bloat happens because, similar to tables, indexes also retain pointers to obsolete row versions. Over time, the index can grow larger, consuming more space than necessary.
 
@@ -366,7 +367,7 @@ Enabling connection pooling in Neon requires adding a `-pooler` option to your N
 postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
 ```
 
-Alternatively, you can grab a pooled connection string from the **Connection Details** widget on the Neon Dashboard.
+Alternatively, you can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard.
 
 For more information about connection pooling in Neon, see [Connection pooling](/docs/connect/connection-pooling).
 
@@ -388,6 +389,10 @@ EXECUTE user_fetch_plan('alex');
 EXECUTE user_fetch_plan('dana');
 ```
 
+<Admonition type="note">
+If you are using a pooled connection for your Neon database, only protocol-level prepared statements are supported. See [Optimize queries with PgBouncer and prepared statements](https://neon.tech/docs/connect/connection-pooling#optimize-queries-with-pgbouncer-and-prepared-statements).
+</Admonition>
+
 ### Use joins instead of subqueries
 
 Optimizing subqueries can significantly enhance the performance of your database queries. Consider a situation where you need to fetch all orders for customers residing in a specific country:
@@ -404,9 +409,11 @@ SELECT orders.* FROM orders JOIN customers ON orders.customer_id = customers.id 
 
 Joins are generally more efficient because they replace multiple queries with one join query, reducing the number of trips to the database.
 
+For Postgres join examples, see [Join tables](/docs/postgres/query-reference#join-tables).
+
 ### Use efficient data types
 
-Generally, you should avoid selecting a data type that is larger than necessary. 
+Generally, you should avoid using a data type that is larger than necessary. 
 
 Postgres offers a range of numeric types, including `INTEGER`, `NUMERIC`, `REAL`, and `DOUBLE PRECISION`. Each has its use case, but `INTEGER` types are often sufficient for counts and identifiers and use less space than floating-point types.
 
@@ -419,6 +426,8 @@ ALTER TABLE users ALTER COLUMN age TYPE SMALLINT;
 ```
 
 This change decreases the memory footprint for storing `age` data, potentially improving the performance of queries that operate on that data.
+
+For an overview of common Postgres data types, refer to our [data types](/docs/postgres/data-types-intro) guide.
 
 ### Limit your result sets
 

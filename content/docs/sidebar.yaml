@@ -306,6 +306,7 @@
   slug: postgres/postgres-intro
   items:
     - title: Data types
+      slug: postgres/data-types-intro
       items:
         - title: Array
           slug: data-types/array
@@ -353,6 +354,7 @@
         - title: timescaledb
           slug: extensions/timescaledb
     - title: Functions
+      slug: postgres/functions-intro
       items:
         - title: array_to_json
           slug: functions/array_to_json
