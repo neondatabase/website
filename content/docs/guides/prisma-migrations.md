@@ -296,7 +296,7 @@ In this guide, we set up a new Javascript project using `Express.js` and `Prisma
 
 ## Source code
 
-You can find the source code for the application describe in this guide on GitHub.
+You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/guide-neon-prisma" description="Run Neon database migrations using Prisma" icon="github">Migrations with Neon and Prisma</a>
