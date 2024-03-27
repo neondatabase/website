@@ -307,7 +307,7 @@ Navigate to the url `http://localhost:8000/catalog/authors/` in your browser to 
 
 ## Applying schema changes
 
-Let's demonstrate how to handle schema changes by adding a new field `country` to the `Author` model, to store the author's country of origin.
+We will demonstrate how to handle schema changes by adding a new field `country` to the `Author` model, to store the author's country of origin.
 
 ### Update the data model
 
