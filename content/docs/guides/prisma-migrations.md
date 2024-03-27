@@ -289,6 +289,11 @@ npm run start
 
 You can navigate to `http://localhost:3000/authors` in your browser to check that each author entry has a `country` field, currently set to `null`.
 
+
+## Conclusion
+
+In this guide, we set up a new Javascript project using `Express.js` and `Prisma` ORM and connected it to a `Neon` Postgres database. We created a schema for the database, generated and ran migrations, and implemented API endpoints to query the database. 
+
 ## Source code
 
 You can find the source code for the application describe in this guide on GitHub.
@@ -297,9 +302,6 @@ You can find the source code for the application describe in this guide on GitHu
 <a href="https://github.com/neondatabase/guide-neon-prisma" description="Run Neon database migrations using Prisma" icon="github">Migrations with Neon and Prisma</a>
 </DetailIconCards>
 
-## Conclusion
-
-In this guide, we set up a new Javascript project using `Express.js` and `Prisma` ORM and connected it to a `Neon` Postgres database. We created a schema for the database, generated and ran migrations, and implemented API endpoints to query the database. 
 
 ## Resources
 
