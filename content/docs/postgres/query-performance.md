@@ -247,28 +247,22 @@ In this case, the query plan shows that two parallel workers were launched to ru
 
 ### Interpreting EXPLAIN output
 
-`EXPLAIN` output can be complex. Here are some key elements to focus on:
+Interpreting `EXPLAIN` output can be a little daunting at first, but you can learn the basics here: [EXPLAIN Basics](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-BASICS).
 
-- **Query Plan**: The overall plan shows the steps Postgres took to execute your query, such as sequential scans, index scans, joins, etc.
-- **Execution Time**: The total time taken to execute the query.
-- **Cost**: Estimated startup cost and total cost to execute the plan, which may be helpful when comparing the efficiency of different execution strategies.
-- **Rows**: The number of rows processed at each stage of the query.
-- **Actual Time**: The actual time spent on each node of the plan, helping to pinpoint slow operations.
-
-### Optimization tips
+As you become more familiar with `EXPLAIN` output, you can start applying these query optimization strategies:
 
 1. **Look for sequential Scans**: If your query involves large tables, sequential scans can be slow. Consider using indexes to speed up data retrieval.
 2. **Analyze joins**: Make sure that joins are using indexes. If not, it might be beneficial to add indexes on the join columns or revise the join conditions.
-3. **Optimize filters**: Check if the conditions in the `WHERE` clause can be optimized. Conditions should be written in a way that allows the database to use indexes effectively. For example, avoid using functions on column names in the `WHERE` clause (like `WHERE YEAR(column) = 2021`) because they can prevent the use of indexes due to the database having to compute the result of that function for every row in the table before it can determine which rows satisfy the condition.
+3. **Optimize filters**: Check if the conditions in the `WHERE` clause can be optimized. Conditions should be written in a way that allows the database to use indexes effectively. For example, avoid using functions on column names in the `WHERE` clause (like `WHERE YEAR(column) = 2021`) because they can prevent the use of indexes due to the database computing the result of that function for every row.
 4. **Subquery performance**: Subqueries can sometimes be inefficient. Look for opportunities to rewrite subqueries as joins. See [Use joins instead of subqueries](#use-joins-instead-of-subqueries).
 5. **Use ANALYZE**: Regularly run the `ANALYZE` command on your database. This updates statistics, helping Postgres make better planning decisions. The Postgres `autovacuum` process, which is enabled in Neon, will automatically issue `ANALYZE` commands whenever the content of a table has changed sufficiently, but if you're working with very large tables, this may not happen as often as expected. For a query that shows when vacuum was last run, see [VACUUM and ANALYZE statistics](/docs/postgres/query-reference#vacuum-and-analyze-statistics).
 
 ### Additional resources
 
-Using `EXPLAIN` to optimize queries is a large subject, but there are numerous resources you can draw upon. Here are a few to get you started:
+There are numerous resources you can draw upon to learn more about leveraging `EXPLAIN` to optimize queries. Here are a few to get you started:
 
 - [Using EXPLAIN — official PostgreSQL documentation](https://www.postgresql.org/docs/current/using-explain.html)
-- [Using EXPLAIN — PostgreSQL wiki resource list](https://wiki.postgresql.org/wiki/Using_EXPLAIN). 
+- [Using EXPLAIN — PostgreSQL wiki](https://wiki.postgresql.org/wiki/Using_EXPLAIN). 
 - [PostgreSQL EXPLAIN tutorial](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-explain/)
 
 <Admonition type="tip">
