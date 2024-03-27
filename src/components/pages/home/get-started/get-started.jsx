@@ -18,7 +18,10 @@ const GetStarted = () => (
       intersectionRootMargin="0px 0px 600px 0px"
       animationRootMargin="0px 0px 300px 0px"
     />
-    <Container className="flex flex-col items-center justify-center" size="1100">
+    <Container
+      className="pointer-events-none flex flex-col items-center justify-center"
+      size="1100"
+    >
       <h2
         className={clsx(
           'relative text-center text-[68px] font-medium leading-[0.9] -tracking-[0.03em] text-white',
@@ -29,7 +32,7 @@ const GetStarted = () => (
         <br /> Available today.
       </h2>
       <Button
-        className="relative mt-9 !font-semibold tracking-tighter xl:mt-8 lg:mt-7 sm:mt-5"
+        className="pointer-events-auto relative mt-9 !font-semibold tracking-tighter xl:mt-8 lg:mt-7 sm:mt-5"
         size="lg"
         theme="green-outline"
         to="#"
