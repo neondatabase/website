@@ -349,6 +349,15 @@ Navigate to the url `http://localhost:3000/authors` to view the list of authors.
 
 In this guide, we demonstrated how to set up a Ruby on Rails project with Neon Postgres, define database models, generate migrations, and run them. Rails' Active Record ORM and migration system make it easy to interact with the database and manage schema evolution over time.
 
+## Source code
+
+You can find the source code for the application describe in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/guide-neon-rails" description="Run migrations in a Neon-Rails project" icon="github">Migrations with Neon and Rails</a>
+</DetailIconCards>
+
+
 ## Resources
 
 For more information on the tools and concepts used in this guide, refer to the following resources:
