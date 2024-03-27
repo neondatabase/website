@@ -801,10 +801,12 @@ const getWpPreviewPost = async (id) => {
 const getAllWpCaseStudiesPosts = async () => {
   const caseStudiesQuery = gql`
     query CaseStudies {
-      caseStudies(where: { orderby: { field: DATE, order: ASC } }) {
+      caseStudies(where: { orderby: { field: DATE, order: ASC } }, first: 24) {
         nodes {
           caseStudyPost {
             description
+            isInternal
+            externalUrl
             post {
               ... on Post {
                 slug
