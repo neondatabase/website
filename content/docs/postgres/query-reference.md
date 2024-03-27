@@ -4,8 +4,6 @@ subtitle: Find examples of commonly-used Postgres queries for basic to advanced 
 enableTableOfContents: true
 ---
 
-This page provides a reference for common Postgres queries, providing examples for basic operations to advanced use cases.
-
 <CTA />
 
 ## Create a table
@@ -49,12 +47,12 @@ UPDATE users SET email = 'new.alex@domain.com' WHERE user_id = 1;
 DELETE FROM users WHERE user_id = 1;
 ```
 
-See [INSERT](https://www.postgresql.org/docs/current/sql-insert.html), [Update](https://www.postgresql.org/docs/current/sql-update.html), and [Delete](https://www.postgresql.org/docs/current/sql-delete.html) for more information.
+See [INSERT](https://www.postgresql.org/docs/current/sql-insert.html), [UPDATE](https://www.postgresql.org/docs/current/sql-update.html), and [DELETE](https://www.postgresql.org/docs/current/sql-delete.html) for more information.
 
 
 ## SELECT queries
 
-Here are a few examples of `SELECT` queries in Postgres that cover common use cases:
+These Postgres `SELECT` query examples cover a number of common use cases.
 
 ```sql
 -- Basic SELECT to retrieve all columns from a table
@@ -73,13 +71,11 @@ SELECT username, email FROM users ORDER BY created_at DESC LIMIT 5;
 SELECT COUNT(*) AS total_users, EXTRACT(YEAR FROM created_at) AS year FROM users GROUP BY year ORDER BY year;
 ```
 
-These examples show how to perform a basic retrieval of all or specific columns from a table, filter results using a condition, order and limit the output, and use aggregation functions along with grouping to summarize data.
-
 See [SELECT](https://www.postgresql.org/docs/current/sql-select.html) for more information.
 
 ## Filter data
 
-Here are more examples of using the `WHERE` clause to filter data in Postgres, showcasing various filtering scenarios:
+These Postgres `WHERE` clause examples showcase various filtering scenarios.
 
 {/* 
 
@@ -181,13 +177,11 @@ SELECT * FROM users WHERE last_login IS NULL;
 SELECT * FROM orders WHERE customer_id IN (SELECT customer_id FROM customers WHERE country = 'Spain');
 ```
 
-These examples illustrate how to filter query results based on exact matches, ranges, lists of values, pattern matching with `LIKE`, combining multiple conditions with `AND` and `OR`, handling `NULL` values, and leveraging subqueries for more complex conditions.
-
 See [WHERE clause](https://www.postgresql.org/docs/7.1/queries.html#QUERIES-WHERE) for more information and examples.
 
 ## Sort data
 
-Here are examples of sorting data in Postgres, demonstrating various ways to order your query results:
+These sorting examples demonstrate various ways to order your query results.
 
 {/* 
 
@@ -251,13 +245,11 @@ SELECT * FROM tasks ORDER BY due_date ASC NULLS LAST;
 SELECT * FROM tasks ORDER BY due_date DESC NULLS FIRST;
 ```
 
-These queries demonstrate the flexibility of the Postgres `ORDER BY` clause, enabling sorting by single or multiple columns, using column aliases, sorting by computed expressions, and explicitly controlling the order of null values.
-
 For additional information, see [Sorting Rows](https://www.postgresql.org/docs/current/queries-order.html).
 
 ## Join tables
 
-Here are some examples illustrating different ways to join tables in Postgres for queries involving data that spans multiple tables:
+These examples illustrate different ways to join tables in Postgres for queries involving data that spans multiple tables.
 
 {/* 
 
@@ -376,8 +368,6 @@ FROM employees
 JOIN departments USING(department_id);
 ```
 
-These examples cover the different types of joins available in Postgres, from the basic inner join to more complex scenarios involving multiple tables, self-joins, and using the `USING()` clause for join conditions.
-
 For additional examples and information, see [Joins between tables](https://www.postgresql.org/docs/current/tutorial-join.html).
 
 ## Transactions
@@ -436,8 +426,6 @@ ROLLBACK TO SAVEPOINT my_savepoint;
 -- Proceed with other operations or end transaction
 COMMIT;
 ```
-
-These examples show the basic structure of transactions in Postgres, including how to start (`BEGIN`), commit (`COMMIT`), and roll back (`ROLLBACK`) transactions. The use of a savepoint (`SAVEPOINT`) is also demonstrated, allowing partial rollback within a transaction. Transactions are important for maintaining data integrity, especially when multiple related operations must either all succeed or fail together.
 
 For additional information, see [Transactions](https://www.postgresql.org/docs/current/tutorial-transactions.html).
 
@@ -502,13 +490,11 @@ REINDEX INDEX idx_user_email;
 CREATE INDEX CONCURRENTLY idx_concurrent_email ON users(email);
 ```
 
-These examples showcase the variety of indexes that can be created in Postgres, including basic, unique, composite, partial, expression-based, and GIN indexes. They also cover index maintenance operations such as dropping, reindexing, and creating indexes concurrently to minimize lock contention.
-
 For more information about indexes in Postgres, see [Indexes](https://www.postgresql.org/docs/current/indexes.html).
 
 ## Views
 
-Here are some examples of how to work with views in Postgres, which can help simplify complex queries, provide a level of abstraction, or secure data access:
+These examples demonstrate how to work with views in Postgres, which can help simplify complex queries, provide a level of abstraction, or secure data access.
 
 {/* 
 
@@ -570,7 +556,7 @@ SELECT * FROM department_summary;
 DROP MATERIALIZED VIEW IF EXISTS department_summary;
 ```
 
-These examples cover creating and using both standard and materialized views in Postgres. Standard views are virtual tables that do not store the data directly but represent the results of a query. Materialized views, on the other hand, store the result of the query on disk, acting like a snapshot that can boost performance for costly operations, at the expense of needing periodic refreshes to stay up-to-date.
+Standard views are virtual tables that do not store the data directly but represent the results of a query. Materialized views, on the other hand, store the result of the query on disk, acting like a snapshot that can boost performance for costly operations, at the expense of needing periodic refreshes to stay up-to-date.
 
 For more information about views in Postgres, see [Views](https://www.postgresql.org/docs/current/tutorial-views.html).
 
@@ -693,7 +679,7 @@ ORDER BY calls DESC
 LIMIT 100;
 ```
 
-For more information and examples, refer to our [pg_stat_statements extension guide](/docs/extensions/pg_stat_statements).
+For more information and examples, refer to our [pg_stat_statements extension guide](/docs/extensions/pg_stat_statements), or [Gathering statistics](/docs/postgres/query-performance#gather-statistics) in our query optimization guide.
 
 ### Use EXPLAIN
 
@@ -725,11 +711,11 @@ The query returns the number of sequential scans for all user-defined tables, in
 SELECT relname, seq_scan FROM pg_stat_user_tables;
 ```
 
-For related information and more queries, see [Use indexes](/docs/postgres/query-performance#use-indexes) in our query performance guide.
+For related information and more queries, see [Use indexes](/docs/postgres/query-performance#use-indexes) in our query optimization guide.
 
 ### Read metrics
 
-This query returns the number of rows fetched per database from storage or memory. It includes rows that are accessed to fulfill queries, which may involve filtering, joining, or processing of data. Not all fetched rows necessarily result in being sent back to the client, as some may be intermediate results used for query processing.
+This query returns the number of rows fetched per database from storage or memory. It includes rows that are accessed to fulfill queries, which may involve filtering, joining, or processing of data. Not all fetched rows are necessarily sent back to the client, as some may be intermediate results used for query processing.
 
 ```sql
 SELECT datname, tup_fetched FROM pg_stat_database;
@@ -743,13 +729,13 @@ SELECT datname, tup_returned FROM pg_stat_database;
 
 ### Write metrics
 
-This query returns the number of rows inserted, updated, or deleted per database. 
+This query returns the number of rows inserted, updated, or deleted _per database_.
 
 ```sql
 SELECT datname, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database;
 ```
 
-This query returns the number of rows inserted, updated, or deleted per table.
+This query returns the number of rows inserted, updated, or deleted _per table_.
 
 ```sql
 SELECT relname, n_tup_ins, n_tup_upd, n_tup_del FROM pg_stat_user_tables;
@@ -757,7 +743,7 @@ SELECT relname, n_tup_ins, n_tup_upd, n_tup_del FROM pg_stat_user_tables;
 
 ### List running queries by duration
 
-To see currently running queries and their execution time, which can help identify long-running queries:
+To see currently running queries and their execution time, which can help identify long-running queries.
 
 ```sql
 SELECT pid, now() - pg_stat_activity.query_start AS duration, query
@@ -787,7 +773,7 @@ SELECT datname, deadlocks FROM pg_stat_database;
 
 ### Count locks by table and lock mode
 
-This query counts the number of locks per lock mode and table in a PostgreSQL database, excluding system tables prefixed with "pg_".
+This query counts the number of locks per lock mode and table in a Postgres database, excluding system tables prefixed with `pg_`.
 
 ```sql
 SELECT 
@@ -807,7 +793,7 @@ GROUP BY
 
 ### Index usage
 
-To assess how effectively your queries are using indexes:
+Run this query to assess how effectively your queries are using indexes.
 
 ```sql
 SELECT relname, seq_scan, idx_scan, n_tup_ins, n_tup_upd, n_tup_del
@@ -818,7 +804,7 @@ ORDER BY seq_scan DESC;
 
 This `pg_stat_user_tables` query helps identify tables where sequential scans are more common than index scans, indicating potential areas for performance improvement through better indexing. The `pg_stat_user_tables` view is part of the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
 
-Also, see the [Use indexes](/docs/postgres/query-performance#use-indexes) section in our query performance optimization guide.
+Also, see the [Use indexes](/docs/postgres/query-performance#use-indexes) section in our query optimization guide.
 
 ### Table access statistics
 
@@ -849,7 +835,7 @@ SELECT relname, n_dead_tup FROM pg_stat_user_tables;
 
 ### Dead row percentage
 
-This query calculates the percentage of dead rows compared to the total number of rows (alive and dead) in each user table within a PostgreSQL database, helping identify potential table bloat and optimization opportunities. For related information, see [Check for table or index bloat](/docs/postgres/query-performance#check-for-table-or-index-bloat).
+This query calculates the percentage of dead rows compared to the total number of rows (alive and dead) in each user table within a Postgres database, helping identify potential table bloat and optimization opportunities. For related information, see [Check for table or index bloat](/docs/postgres/query-performance#check-for-table-or-index-bloat).
 
 ```sql
 SELECT 
@@ -882,7 +868,11 @@ Get the maximum number of connections for your Postgres instance.
 SHOW max_connections;
 ```
 
-The `max_connections` setting is configured by Neon according to your compute size. See [Default connection limits](https://neon.tech/docs/connect/connection-pooling#default-connection-limits). You can use [connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-pooling) to increase your connection limit.
+The `max_connections` setting is configured by Neon according to your compute size. See [Default connection limits](https://neon.tech/docs/connect/connection-pooling#default-connection-limits). 
+
+<Admonition type="tip">
+You can use [connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-pooling) to increase your concurrent connection limit.
+</Admonition> 
 
 ### Get the percentage of maximum connections in use
 
@@ -938,7 +928,7 @@ To terminate a session, you can run `pg_cancel_backend(pid)` or `pg_terminate_ba
 
 ## Postgres version
 
-Run this query to view the Postgres version:
+Run this query to view your Postgres version.
 
 ```sql
 SELECT version();
@@ -954,7 +944,7 @@ SHOW ALL;
 
 ## Data size
 
-Run this query to check the logical data size for a branch in Neon:
+Run this query to check the logical data size for a branch in Neon.
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))
@@ -964,7 +954,7 @@ FROM pg_database;
 Alternatively, you can check the `Data size` value on the **Branches** widget in the Neon Console. 
 
 <Admonition type="note">
-Data size does not include the [history](/docs/reference/glossary#history) that is maintained to support point-in-time restore.
+Data size does not include the [history](/docs/reference/glossary#history) that is maintained in Neon to support features like point-in-time restore.
 </Admonition>
 
 <NeedHelp/>
