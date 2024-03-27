@@ -225,6 +225,8 @@
       items:
         - title: Drizzle
           slug: guides/drizzle-migrations
+        - title: Entity Framework
+          slug: guides/entity-migrations
         - title: Flyway
           items:
             - title: Get started
