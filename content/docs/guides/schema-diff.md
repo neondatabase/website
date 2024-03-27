@@ -4,43 +4,56 @@ subtitle: Learn how to use Neon's Schema Diff tool to compare branches of your d
 enableTableOfContents: true
 ---
 
-Neon's Schema Diff tool provides an easy way to compare the SQL schemas of two branches within a project. Whether you're reviewing changes before restoring branches, auditing historical schema changes, or ensuring consistency across environments, Schema Diff offers an intuitive, side-by-side visual comparison similar to diff tools used for code review.
+<ComingSoon/>
 
-## Key Features
+Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side visualization.
 
-- **Visual Comparisons**: View changes between schemas in a side-by-side layout, highlighting additions, deletions, and modifications.
-- **Integration with Time Travel Assist**: Directly compare schemas at different points in time within the same branch or across branches.
-- **Support for Multiple Databases**: Compare schemas across all databases contained within a branch, offering comprehensive coverage of your project's data structure.
+## How Schema Diff works
+
+Schema Diff is available in the Neon Console for use in two ways:
+
+- Compare a branch's schema to its parent
+- Compare selected branches during a Branch restore operation
+
+### Compare to parent
+
+In the detailed view for any child branch, you can check the schema differences between the selected branch and its parent. Use this view to verify the state of these schemas before you [Reset from parent](/docs/guides/reset-from-parent).
+
+### Compare to another branch's history
+
+Built into the Time Travel assist editor, you can use Schema Diff to help when restoring branches, letting you compare states of your branch against its own or another branch's history before you complete a [Branch restore](/docs/guides/branch-restore) operation.
+
+### Practical Applications
+
+- **Pre-Migration Reviews**: Before migrating schemas from a development branch into main, use Schema Diff to ensure only intended schema changes are applied.
+- **Audit Changes**: Historically compare schema changes to understand the evolution of your database structure.
+- **Consistency Checks**: Ensure environmental consistency by comparing schemas across development, staging, and production branches.
 
 ## How to Use Schema Diff
 
-### Accessing Schema Diff
+You can launch the Schema Diff viewer from the **Branches** and **Restore** pages in the Neon Console.
 
-Schema Diff is integrated into the Neon Console, enabling quick access from the **Branches** page. Select the branches you wish to compare and click on the **Schema Diff** button.
+### From the Branches page
 
-### Running a Comparison
+Open the detailed view for the branch whose schema you want to inspect. In the row of details for the parent branch, under the **COMPARE TO PARENT** block, click **Open schema diff**.
 
-1. **Select the Target Branch**: This is the branch you're currently working on or interested in comparing.
-2. **Choose the Comparison Branch**: Select another branch or a point in time within the same branch to compare against the target.
-3. **View the Differences**: The Schema Diff tool displays the SQL script differences side-by-side, clearly marking additions, deletions, and modifications.
+![Schema diff from branches page](/docs/guides/schema_diff_compare_parent.png)
+
+### From the Restore page
+
+Just like with [Time Travel Assist](/docs/guides/branch-restore#using-time-travel-assist), your first step is to choose the branch you want to restore, then choose where you want to restore from: its own history or from another branch's history.
+
+Click the **Schema Diff** button, verify that your selections are correct, then click **Compare**.
+
+The two-pane view shows the SQL for both your target and your selected branches, clearly marking additions, deletions, and modifications.
+
+![schema diff results](/docs/guides/schema_diff_result.png)
 
 ### Understanding the Output
 
 - **Green Highlight**: Indicates additions or new elements in the schema.
 - **Red Highlight**: Marks deletions or removed elements from the schema.
-- **Blue Highlight**: Shows modifications or changes to existing schema elements.
 
-## Practical Applications
+## Tutorial
 
-- **Pre-Merge Reviews**: Before merging feature branches into the main branch, use Schema Diff to ensure only intended schema changes are applied.
-- **Audit Changes**: Historically compare schema changes to understand the evolution of your database structure.
-- **Consistency Checks**: Ensure environmental consistency by comparing schemas across development, staging, and production branches.
-
-## Limitations
-
-- **Large Schemas**: Very large database schemas may result in longer loading times for the comparison output.
-- **Binary Data**: Schema Diff focuses on textual SQL schema representation and might not fully represent binary data or specific database extensions.
-
-For more details on how to effectively use the Schema Diff tool within your workflow, see our comprehensive guide [here](/docs/guides/schema-diff-tutorial).
-
-
+For a step-by-step guide showing you how to compare two development branches using Schema Diff, see [Schema diff tutorial](/docs/guides/schema-diff-tutorial).

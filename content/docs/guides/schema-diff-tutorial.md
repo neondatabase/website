@@ -4,11 +4,11 @@ subtitle: Step-by-step guide showing you how to compare two development branches
 enableTableOfContents: true
 ---
 
+<ComingSoon/>
+
 In this guide we will create an initial schema on a new database called `staging` on our `main` branch. We'll then create two child development branches called `dev/alex` and `dev/jordan`, following our recommended convention for naming development branches. After making schema changes on `dev/jordan`, we we'll use the **Schema Diff** tool on the **Restore** page to get a side-by-side, Github-style visual comparison between these two development branches.
 
-## Initial Setup
-
-### Step 1: Create the Initial Schema
+## Step 1: Create the Initial Schema
 
 Start by creating a new `staging` database using the CLI. If you've got multiple projects, include `--project-id`.
 
@@ -40,7 +40,7 @@ Now create the initial schema that will serve as the base from which future chan
     );
     ```
 
-### Step 2: Create your team's branches
+## Step 2: Create your team's branches
 
 If you're still in `psql`, exit using `\q`. Using the CLI, create child branches for each member of your team. Include `--project-id` if you have multiple projects.
 
@@ -94,7 +94,7 @@ If you want to verity that these branches include the initial schema, connect to
 
 You can do the same thing for your `dev/jordan` branch and get identical results.
 
-### Step 3: Update schema on a dev branch
+## Step 3: Update schema on a dev branch
 
 Now, let's make some schema changes on the dedicated branch for `dev\jordan`, adding a new table to store relevant addresses.
 
@@ -114,7 +114,7 @@ CREATE TABLE address (
 );
 ```
 
-### Step 4: Visualize the schema differences
+## Step 4: Visualize the schema differences
 
 From the Neon Console, go to the **Restore** page. The Schema Diff tool is meant to assist you with restoring branches and is built into the Time Travel assist editor. Just like with Time Travel assist, your first step is to choose a target and source branch:
 
