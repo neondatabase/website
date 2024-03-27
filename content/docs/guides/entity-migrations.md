@@ -118,6 +118,8 @@ This code defines two entities: `Author` and `Book`. The `Author` entity represe
 Also, create a new file named `ApplicationDbContext.cs` in the project directory and add the following code:
 
 ```csharp
+# ApplicationDbContext.cs
+
 using Microsoft.EntityFrameworkCore;
 using GuideNeonEF.Models;
 using dotenv.net;
@@ -159,6 +161,8 @@ The `ApplicationDbContext` class derives from `DbContext` and represents the dat
 To seed the database with some initial data, create another script named `ModelBuilderExtensions.cs` in the project directory and add the following code:
 
 ```csharp
+# ModelBuilderExtensions.cs
+
 using Microsoft.EntityFrameworkCore;
 using GuideNeonEF.Models;
 
@@ -221,6 +225,8 @@ This command executes the migration file and creates the necessary tables in the
 The project directory has a `Program.cs` file that contains the application entry point. Replace the contents of this file with the following code:
 
 ```csharp
+# Program.cs
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -278,7 +284,7 @@ public class Author
 }
 ```
 
-Also, update the seed data entries to include the `Country` property:
+Also, update the seed data entries for the `Author` model to include the `Country` property:
 
 ```csharp
 # ModelBuilderExtensions.cs
