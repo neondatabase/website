@@ -152,14 +152,16 @@ To delete a branch:
 
 ## Check the data size
 
-Tier limits define the amount of data you can store in a branch. The [Neon Free Tier](/docs/introduction/plans#free-tier) permits 3 GiB per branch. When creating a new branch, the child branch includes the data from the parent branch. For example, if you have a branch with 1 GiB of data, the child branch is created with the same 1 GiB of data.
+Plan limits define the amount of data you can store.
 
-You can check the data size for a branch by viewing the `Database size` value on the branch details page (see [View branches](#view-branches)). Alternatively, you can run the following query from the Neon SQL Editor:
+You can check the logical data size of each branch by viewing the `Data size` value on the **Branches** widget or page in the Neon Console. Alternatively, you can run the following query:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))
 FROM pg_database;
 ```
+
+Data size does not include [history](/docs/reference/glossary#history).
 
 <Admonition type="info">
 Neon stores data in its own internal format.

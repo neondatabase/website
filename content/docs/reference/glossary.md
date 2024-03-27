@@ -204,7 +204,7 @@ See [Neon Free Tier](#neon-free-tier).
 
 ## History
 
-The history of data changes for all branches in your Neon project. A history is maintained to support _point-in-time restore_. For more information, see [Storage details](/docs/introduction/usahe-metrics#storage-details).
+The history of data changes for all branches in your Neon project. A history is maintained to support _point-in-time restore_. For more information, see [Storage details](/docs/introduction/usage-metrics#storage-details).
 
 ## IP allowlist
 
