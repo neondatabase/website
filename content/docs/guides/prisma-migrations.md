@@ -294,7 +294,7 @@ You can navigate to `http://localhost:3000/authors` in your browser to check tha
 You can find the source code for the application describe in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/guide-neon-prisma" description="Running Neon database migrations using Prisma" icon="github">Neon Prisma Migrations</a>
+<a href="https://github.com/neondatabase/guide-neon-prisma" description="Run Neon database migrations using Prisma" icon="github">Migrations with Neon and Prisma</a>
 </DetailIconCards>
 
 ## Conclusion
