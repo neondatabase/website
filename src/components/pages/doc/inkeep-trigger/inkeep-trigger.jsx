@@ -10,9 +10,9 @@ import ExampleIcon from './images/example.inline.svg';
 import SparksIcon from './images/sparks.inline.svg';
 
 const baseSettings = {
-  apiKey: process.env.NEXT_PUBLIC_INKEEP_DOCS_API_KEY,
-  integrationId: process.env.NEXT_PUBLIC_INKEEP_DOCS_INTEGRATION_ID,
-  organizationId: process.env.NEXT_PUBLIC_INKEEP_ORGANIZATION_ID,
+  apiKey: process.env.INKEEP_INTEGRATION_API_KEY,
+  integrationId: process.env.INKEEP_INTEGRATION_ID,
+  organizationId: process.env.INKEEP_ORGANIZATION_ID,
   primaryBrandColor: '#00E599',
   organizationDisplayName: 'Neon',
 };
