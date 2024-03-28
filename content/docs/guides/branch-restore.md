@@ -97,9 +97,7 @@ The ephemeral endpoints are created according to your configured [default comput
 
 ### Schema Diff
 
-The Schema Diff tool lets you compare an SQL script of your selected branch's schemas in a side-by-side visualization. Built into the Time Travel assist editor, Schema Diff is meant to help you when restoring branches, letting you compare states of your branch against its own or another branch's history before you complete the restore operation.
-
-![relevant screenshot?]()
+The Schema Diff tool lets you compare an SQL script of your selected branch's schemas in a side-by-side visualization. See [Schema diff](/docs/guides/schema-diff) for more information.
 
 ## How to use branch restore
 
@@ -286,15 +284,9 @@ Adjust your selected timestamp accordingly.
 
 ### Using Schema Diff
 
-Just like with Time Travel assist, your first step is to choose the branch you want to restore, then choose where you want to restore from: its own history or from another branch's history.
+You can also use Schema Diff to visualy inspect the schema differences between your selected branches before you go through with the restore operation.
 
-Click the **Schema Diff** button and the two-pane view opens, showing the SQL view for both your target and your selected branches.
-
-[NOTE: placeholder image needs updating with better comparison and after UI is finalized]
-
-![schema diff results](/docs/guides/schema_diff_result.png)
-
-For a quick tutorial on using Schema Diff in a sample dev team scenario, see [Schema diff tutorial](/docs/guides/schema-diff-tutorial).
+See [Schema diff](/docs/guides/schema-diff) to learn more, or [Schema diff tutorial](/docs/guides/schema-diff-tutorial) for a step-by-step guide comparing two development branches.
 
 ## Billing considerations
 
