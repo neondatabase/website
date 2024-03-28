@@ -7,7 +7,7 @@ updatedOn: '2024-03-04T14:30:00.000Z'
 
 [Django](https://www.djangoproject.com/) is a high-level Python framework to make database-driven web applications. It provides an ORM (Object-Relational Mapping) layer that abstracts database operations, making it easy to interact with databases using Python code. Django also includes a powerful migration system that allows you to define and manage database schema changes over time.
 
-This guide demonstrates how to use Django with the Neon Postgres database. We'll create a simple Django application and walk through the process of setting up the database, defining models, generating and running migrations to manage schema changes. 
+This guide demonstrates how to use Django with a Neon Postgres database. We'll create a simple Django application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes. 
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ To follow along with this guide, you will need:
 
 ### Retrieve your Neon database connection string
 
-Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+On your Neon project dashboard, navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -62,7 +62,7 @@ pip install python-dotenv dj-database-url
 pip freeze > requirements.txt
 ```
 
-We installed Django and the `psycopg2-binary` package to connect to the Neon Postgres database. We also added the `python-dotenv` to read environment variables easily and the `dj-database-url` package to parse the Neon connection string into Django settings. We also saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
+We installed Django and the `psycopg2-binary` package to connect to the Neon Postgres database. We also added the `python-dotenv` to read environment variables easily, and the `dj-database-url` package to parse the Neon connection string into Django settings. We also saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
 
 ### Create a new Django project
 
@@ -76,7 +76,7 @@ This command creates a new Django project named `guide_neon_django` in the curre
 
 ### Set up the Database configuration
 
-Create a `.env` file in the project root directory and add the `DATABASE_URL` environment variable to it. Use the connection string that you obtained from the Neon Console earlier:
+Create a `.env` file in the project root directory and add the `DATABASE_URL` environment variable to it. Use the connection string that you obtained from the Neon Console earlier.
 
 ```bash
 # .env
@@ -140,7 +140,7 @@ class Book(models.Model):
         return self.title
 ```
 
-This code defines two models: `Author` and `Book`. The `Author` model represents an author with fields for name, bio, and created_at timestamp. The `Book` model represents a book with fields for title, author (as a foreign key to the `Author` model), and created_at timestamp. Django automatically creates an `id` field for each model as the primary key. 
+This code defines two models: `Author` and `Book`. The `Author` model represents an author with fields for `name`, `bio`, and a `created_at` timestamp. The `Book` model represents a book with fields for `title`, `author` (as a foreign key to the `Author` model), and a `created_at` timestamp. Django automatically creates an `id` field for each model as the primary key. 
 
 ### Generate migration files
 
@@ -352,7 +352,15 @@ Navigate to the url `http://localhost:8000/catalog/authors` to view the list of 
 
 ## Conclusion
 
-In this guide, we demonstrated how to set up a Django project with `Neon` Postgres, define database models, generate migrations and run them. Django's ORM and migration system make it easy to interact with the database and manage schema evolution over time.
+In this guide, we demonstrated how to set up a Django project with Neon Postgres, define database models, and generate migrations and run them. Django's ORM and migration system make it easy to interact with the database and manage schema evolution over time.
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/guide-neon-django" description="Run migrations in a Neon-Django project" icon="github">Migrations with Neon and Django</a>
+</DetailIconCards>
 
 ## Resources
 
