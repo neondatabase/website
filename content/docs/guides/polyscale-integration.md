@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2023-12-04T18:49:23.387Z'
 ---
 
-[PolyScale](https://docs.polyscale.ai/) allows you to easily cache your data globally through its low-latency [regional edge network](https://docs.polyscale.ai/edge-network-and-security/#regional-edge-network). Enjoy benefits like speedy access to your data from anywhere in the world, reduced load on your database, and improved slow query performance. A PolyScale global cache is also an alternative to cross-regional replication without the added complexity. No coding or infrastructure changes are required to use PolyScale. You can have it up and running in just a few minutes.
+With [PolyScale](https://docs.polyscale.ai/) you can easily cache your data globally through its low-latency [regional edge network](https://docs.polyscale.ai/edge-network-and-security/#regional-edge-network). Enjoy benefits like speedy access to your data from anywhere in the world, reduced load on your database, and improved slow query performance. A PolyScale global cache is also an alternative to cross-regional replication without the added complexity. No coding or infrastructure changes are required to use PolyScale. You can have it up and running in just a few minutes.
 
 Adding the PolyScale integration to a Neon project automatically creates a global cache and provides you with a PolyScale connection string, which you can use in your application as a direct replacement for your Neon connection string.
 
