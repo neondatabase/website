@@ -52,7 +52,7 @@ const items = [
       { title: 'IP Allow Rules', disabled: true },
     ],
     button: {
-      url: LINKS.signup,
+      url: `${LINKS.console}/?upgrade=launch`,
       text: 'Get started',
       theme: 'primary',
       event: 'pricing_hero_launch_btn_click',
@@ -72,7 +72,7 @@ const items = [
       { title: 'IP Allow Rules' },
     ],
     button: {
-      url: LINKS.signup,
+      url: `${LINKS.console}/?upgrade=scale`,
       text: 'Get started',
       theme: 'white-outline',
       event: 'pricing_hero_scale_btn_click',
