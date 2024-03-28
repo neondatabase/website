@@ -7,7 +7,7 @@ updatedOn: '2024-03-04T14:30:00.000Z'
 
 [Ruby on Rails](https://rubyonrails.org/) is a popular web application framework for Ruby developers. It provides an ORM (Object-Relational Mapping) layer called `Active Record`, that simplifies database interactions and schema management. Rails also includes a powerful migration system that allows you to define and manage database schema changes over time.
 
-This guide demonstrates how to run schema migrations in your Ruby on Rails project backed by the `Neon` Postgres database. We'll create a simple Rails application and walk through the process of setting up the database, defining models, generating and running migrations to manage schema changes.
+This guide demonstrates how to run schema migrations in your Ruby on Rails project backed by the `Neon` Postgres database. We'll create a simple Rails application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
 
 ## Prerequisites
 
@@ -28,11 +28,11 @@ To follow along with this guide, you will need:
 ### Initialize a new project
 
 1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
-2. Select a project or click the `New Project` button to create a new one.
+2. Select a project or click the **New Project** button to create a new one.
 
 ### Retrieve your Neon database connection string
 
-Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+On your project dashboard in Neon, navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -50,7 +50,7 @@ Open your terminal and run the following command to create a new Rails project:
 rails new guide-neon-rails --database=postgresql
 ```
 
-This command creates a new Rails project named `guide-neon-rails` with PostgreSQL as the default database. It will also generate the necessary project files and directories, and install the required dependencies.
+This command creates a new Rails project named `guide-neon-rails` with Postgres as the default database. It will also generate the necessary project files and directories, and install the required dependencies.
 
 ### Set up the Database configuration
 
@@ -356,7 +356,6 @@ You can find the source code for the application describe in this guide on GitHu
 <DetailIconCards>
 <a href="https://github.com/neondatabase/guide-neon-rails" description="Run migrations in a Neon-Rails project" icon="github">Migrations with Neon and Rails</a>
 </DetailIconCards>
-
 
 ## Resources
 
