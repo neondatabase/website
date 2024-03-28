@@ -1,13 +1,18 @@
 'use client';
 
-import { InkeepCustomTrigger } from '@inkeep/widgets';
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
 
 import ExampleIcon from './images/example.inline.svg';
 import SparksIcon from './images/sparks.inline.svg';
+
+const InkeepCustomTrigger = dynamic(
+  () => import('@inkeep/widgets').then((mod) => mod.InkeepCustomTrigger),
+  { ssr: false }
+);
 
 const baseSettings = {
   apiKey: process.env.INKEEP_INTEGRATION_API_KEY,
@@ -18,7 +23,7 @@ const baseSettings = {
 };
 
 const InkeepTrigger = ({ className, isSidebar }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const { theme } = useTheme();
 
   const handleClose = useCallback(() => {
