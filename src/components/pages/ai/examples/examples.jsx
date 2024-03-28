@@ -34,7 +34,7 @@ const exampleApps = [
 ];
 
 const Examples = () => (
-  <section className="safe-paddings mt-40 bg-black-new xl:mt-[120px] lg:mt-28 md:mt-20">
+  <section className="safe-paddings mt-1.5 bg-black-new">
     <Container size="medium" className="grid grid-cols-12 gap-x-10 xl:gap-x-6 md:gap-x-4">
       <div className="col-span-10 col-start-2 flex flex-col items-center xl:col-span-full xl:col-start-1">
         <GradientLabel>Example Apps</GradientLabel>
