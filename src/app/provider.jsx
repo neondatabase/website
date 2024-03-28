@@ -6,7 +6,7 @@ import { ThemeProvider as PreferredProvider } from 'next-themes';
 // eslint-disable-next-line react/prop-types
 const ThemeProvider = ({ children }) => {
   const pathname = usePathname();
-  const isDocPage = pathname.startsWith('/docs');
+  const isDocPage = pathname.startsWith('/docs') || pathname.startsWith('/flow');
 
   return (
     <PreferredProvider

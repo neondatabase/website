@@ -57,6 +57,10 @@ export default {
       to: LINKS.docs,
     },
     {
+      text: 'Flow',
+      to: LINKS.flow,
+    },
+    {
       text: 'Pricing',
       to: LINKS.pricing,
     },

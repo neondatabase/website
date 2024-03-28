@@ -1,5 +1,6 @@
 export default {
   docs: '/docs',
+  flow: '/flow',
   aboutUs: '/about-us',
   careers: '/careers',
   blog: '/blog',
