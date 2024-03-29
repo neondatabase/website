@@ -158,7 +158,7 @@ Error: P1001: Can't reach database server at `ep-white-thunder-826300.us-east-2.
 Please make sure your database server is running at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`.
 ```
 
-A compute node in Neon has two main states: **Active** and **Idle**. Active means that Postgres is currently running. If there are no active queries for 5 minutes, the activity monitor gracefully places the compute node into an idle state to save energy and resources.
+A compute in Neon has two main states: **Active** and **Idle**. Active means that Postgres is currently running. If there are no active queries for 5 minutes, the activity monitor gracefully places the compute into an idle state to reduce compute usage.
 
 When you connect to an idle compute, Neon automatically activates it. Activation typically happens within a few seconds. If the error above is reported, it most likely means that the Prisma query engine timed out before your Neon compute was activated. For dealing with this connection timeout scenario, refer to the [connection timeout](/docs/guides/prisma#connection-timeouts) instructions in our Prisma documentation. Our [connection latency and timeout](/docs/connect/connection-latency) documentation may also be useful in addressing this issue.
 

@@ -428,10 +428,6 @@ Neon is currently in Technical Preview, meaning that some intended core function
 
 An encrypted access token that enables you to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Manage API keys](/docs/manage/api-keys).
 
-## tmpfs
-
-A temporary file storage system that uses a portion of a system's RAM to store files, improving performance by reducing disk usage.
-
 ## unpooled connection string
 
 An unpooled connection string connects to your Neon database directly. It does not use [connection pooling](#connection-pooling), and it looks similar to this:
