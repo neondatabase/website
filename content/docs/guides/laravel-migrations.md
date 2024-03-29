@@ -7,7 +7,7 @@ updatedOn: '2024-03-04T14:30:00.000Z'
 
 [Laravel](https://laravel.com/) is a popular PHP web application framework that provides an expressive and elegant syntax for building web applications. It includes an ORM (Object-Relational Mapping) called Eloquent, which allows you to interact with databases using a fluent API. Laravel also provides a powerful migration system to manage database schema changes over time.
 
-This guide demonstrates how to use Laravel with the Neon Postgres database. We'll create a simple Laravel application and walk through the process of setting up the database, defining models, generating and running migrations to manage schema changes.
+This guide demonstrates how to use Laravel with the Neon Postgres database. We'll create a simple Laravel application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
 
 ## Prerequisites
 
@@ -22,11 +22,11 @@ To follow along with this guide, you will need:
 ### Initialize a new project
 
 1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
-2. Select a project or click the `New Project` button to create a new one.
+2. Select a project or click the **New Project** button to create a new one.
 
 ### Retrieve your Neon database connection string
 
-Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+On the Neon project dashboard, navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -111,7 +111,7 @@ php artisan make:migration create_authors_table
 php artisan make:migration create_books_table
 ```
 
-These commands generate empty migration files in the `database/migrations` directory. Unlike frameworks like Django, Laravel does not generate the schema automatically based on the model definitions. Instead, you define the schema in the migration files.
+These commands generate empty migration files in the `database/migrations` directory. Unlike frameworks such as Django, Laravel does not generate the schema automatically based on the model definitions. Instead, you define the schema in the migration files.
 
 Open the `create_authors_table` migration file and update the `up` method to define the table schema:
 
@@ -293,7 +293,7 @@ Navigate to the url `http://localhost:8000/authors` in your browser to view the 
 
 ## Applying schema changes
 
-We will demonstrate how to handle schema changes by adding a new field `country` to the `Author` model, to store the author's country of origin.
+We will demonstrate how to handle schema changes by adding a new field `country` to the `Author` model, which will store the author's country of origin.
 
 ### Update the data model
 
@@ -343,6 +343,15 @@ Navigate to the url `http://localhost:8000/authors` to view the list of authors.
 ## Conclusion
 
 In this guide, we demonstrated how to set up a Laravel project with `Neon` Postgres, define database models using Eloquent, generate migrations, and run them. Laravel's Eloquent ORM and migration system make it easy to interact with the database and manage schema evolution over time.
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/guide-neon-laravel" description="Run Neon database migrations in a Laravel project" icon="github">Migrations with Neon and Laravel</a>
+</DetailIconCards>
+
 
 ## Resources
 
