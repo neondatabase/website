@@ -7,7 +7,7 @@ updatedOn: '2024-03-04T14:30:00.000Z'
 
 [Entity Framework](https://learn.microsoft.com/en-us/ef/) is a popular Object-Relational Mapping (ORM) framework for .NET applications. It simplifies database access by allowing developers to work with domain-specific objects and properties without focusing on the underlying database tables and columns. Entity Framework also provides a powerful migration system that enables you to define and manage database schema changes over time.
 
-This guide demonstrates how to use Entity Framework with the Neon Postgres database. We'll create a simple .NET application and walk through the process of setting up the database, defining models, generating and running migrations to manage schema changes.
+This guide demonstrates how to use Entity Framework with the Neon Postgres database. We'll create a simple .NET application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
 
 ## Prerequisites
 
@@ -21,17 +21,17 @@ To follow along with this guide, you will need:
 ### Initialize a new project
 
 1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
-2. Select a project or click the `New Project` button to create a new one.
+2. Select a project or click the **New Project** button to create a new one.
 
 ### Retrieve your Neon database connection string
 
-Navigate to the **Connection Details** section in your project dashboard to find your database connection URI. It should be in the format below:
+On the Neon project dashboard, navigate to the **Connection Details** section in your project dashboard to find your database connection URI. It should be in the format below:
 
 ```
 postgres://username:password@hostname/dbname?sslmode=require
 ```
 
-The Postgres client library we are using in this guide requires the connection string to be in the following format:
+The Postgres client library we use in this guide requires the connection string to be in the following format:
 
 ```
 Host=hostname;Port=5432;Database=dbname;Username=username;Password=password;SSLMode=Require
@@ -78,7 +78,7 @@ Create a new file named `.env` in the project root directory and add the followi
 DATABASE_URL=NEON_POSTGRES_CONNECTION_STRING
 ```
 
-Replace `NEON_POSTGRES_CONNECTION_STRING` with the **formatted** connection string we constructed earlier.
+Replace `NEON_POSTGRES_CONNECTION_STRING` with the **formatted** connection string you constructed earlier.
 
 ## Defining data models and running migrations
 
@@ -337,6 +337,14 @@ Now, if you navigate to the `/authors` endpoint, you should see the new `Country
 ```bash
 curl http://localhost:5000/authors
 ```
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/guide-neon-entityframework" description="Run Neon database migrations an Entity Framework project" icon="github">Migrations with Neon and Entity Framework</a>
+</DetailIconCards>
 
 ## Conclusion
 
