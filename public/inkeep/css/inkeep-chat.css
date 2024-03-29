@@ -28,10 +28,7 @@
   background: #E4E5E7;
 }
 
-/* ikp-bot-avatar__box, ikp-message-header__avatar-user */
-
 .ikp-modal-widget__content{
-  min-width: min(90vw,756px);
   box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.06);
   border: 1px solid #E4E5E7;
   background: #FAFAFA;
