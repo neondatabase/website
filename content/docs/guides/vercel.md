@@ -26,8 +26,6 @@ Neon’s branching feature addresses these challenges. A branch is a copy-on-wri
 
 When you push changes to the repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a branch in Neon and connects it to your preview deployment by setting Vercel preview environment variables.
 
-
-
 ## Add the Neon Vercel Integration
 
 This section describes how to add the Neon Vercel Integration to your Vercel project.
@@ -35,6 +33,7 @@ This section describes how to add the Neon Vercel Integration to your Vercel pro
 <Admonition type="note" title="Notes">
 - The Neon Vercel Integration can be used with more than one Vercel project, but it can only connect one Vercel project to one Neon project. It does not support connecting multiple Vercel projects to one Neon project or connecting multiple Neon projects to one Vercel project.
 - The Neon Vercel Integration is supported with GitHub, GitLab, and Bitbucket source code repositories.
+- The integration is not supported with [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres) databases.
 </Admonition>
 
 Prerequisites:
