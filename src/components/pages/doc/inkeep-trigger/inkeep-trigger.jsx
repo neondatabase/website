@@ -22,6 +22,20 @@ const baseSettings = {
   organizationDisplayName: 'Neon',
 };
 
+const aiChatSettings = {
+  placeholder: 'How can I help you?',
+  quickQuestionsLabel: 'Examples',
+  quickQuestions: [
+    'What’s Neon?',
+    'How do I sign up for Neon?',
+    'How to create a project?',
+    'How to get started with the Neon API?',
+  ],
+  botAvatarSrcUrl: '/inkeep/images/example.svg',
+  botAvatarDarkSrcUrl: '/inkeep/images/example.svg',
+  userAvatarSrcUrl: '/inkeep/images/user.svg',
+};
+
 const InkeepTrigger = ({ className, isSidebar }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme } = useTheme();
@@ -33,13 +47,14 @@ const InkeepTrigger = ({ className, isSidebar }) => {
   const inkeepCustomTriggerProps = {
     isOpen,
     onClose: handleClose,
-    stylesheetUrls: ['/css/inkeep-chat.css'],
+    stylesheetUrls: ['/inkeep/css/inkeep-chat.css'],
     baseSettings: {
       ...baseSettings,
       colorMode: {
         forcedColorMode: theme,
       },
     },
+    aiChatSettings,
     modalSettings: {
       defaultView: 'AI_CHAT',
     },
