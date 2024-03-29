@@ -524,7 +524,6 @@ const getWpPostBySlug = cache(async (slug) => {
         }
         ...wpPostSeo
       }
-
       posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
         nodes {
           categories {
@@ -802,10 +801,12 @@ const getWpPreviewPost = async (id) => {
 const getAllWpCaseStudiesPosts = async () => {
   const caseStudiesQuery = gql`
     query CaseStudies {
-      caseStudies(where: { orderby: { field: DATE, order: ASC } }) {
+      caseStudies(where: { orderby: { field: DATE, order: ASC } }, first: 24) {
         nodes {
           caseStudyPost {
             description
+            isInternal
+            externalUrl
             post {
               ... on Post {
                 slug
@@ -831,12 +832,12 @@ const getAllWpCaseStudiesPosts = async () => {
 
 export {
   fetchAllWpPosts,
-  getAllWpPosts,
-  getWpPostBySlug,
-  getWpPreviewPostData,
-  getWpPreviewPost,
-  getWpBlogPage,
   getAllWpBlogCategories,
-  getWpPostsByCategorySlug,
   getAllWpCaseStudiesPosts,
+  getAllWpPosts,
+  getWpBlogPage,
+  getWpPostBySlug,
+  getWpPostsByCategorySlug,
+  getWpPreviewPost,
+  getWpPreviewPostData,
 };

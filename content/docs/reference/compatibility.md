@@ -1,5 +1,6 @@
 ---
 title: Postgres compatibility
+subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
