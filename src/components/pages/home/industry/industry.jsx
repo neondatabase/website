@@ -13,7 +13,6 @@ import Testimonial from './testimonial';
 // TODO: update logos and avatars
 // TODO: implement slider for mobiles
 // TODO: implement rive animation
-// TODO: update font-family for h2
 const TESTIMONIALS = [
   {
     quote: `Neon is very easy to use. You create an account and a project, you get a database string, and that’s that. It’s still the Postgres that you’re used to.`,
@@ -61,7 +60,7 @@ const Industry = () => (
       <div className="sm:flex sm:w-full sm:flex-col sm:items-center">
         <h2
           className={clsx(
-            'mt-11 text-[88px] font-medium leading-[0.96] -tracking-[0.03em] text-white',
+            'mt-11 font-title text-[88px] font-medium leading-[0.96] -tracking-[0.03em] text-white',
             'xl:mt-[64px] xl:text-[72px] lg:mt-6 lg:text-[56px]',
             'sm:mt-0 sm:text-center sm:text-[32px] sm:leading-[0.9em] sm:tracking-extra-tight'
           )}

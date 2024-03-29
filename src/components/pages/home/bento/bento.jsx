@@ -9,7 +9,7 @@ import ClockAnimation from './clock-animation';
 const Bento = () => (
   <section className="bento safe-paddings mt-16 xl:mt-10 lg:mt-9">
     <Container className="xl:max-w-[704px] lg:max-w-full" size="960">
-      <h2 className="text-[68px] font-medium leading-[0.9] tracking-extra-tight text-white xl:text-[56px] lg:pl-16 lg:text-[44px] sm:pl-0 sm:text-[32px]">
+      <h2 className="font-title text-[68px] font-medium leading-[0.9] tracking-extra-tight text-white xl:text-[56px] lg:pl-16 lg:text-[44px] sm:pl-0 sm:text-[32px]">
         Better database.
         <br />
         For&nbsp;modern workflows.

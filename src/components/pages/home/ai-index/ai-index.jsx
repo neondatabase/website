@@ -8,7 +8,7 @@ const AiIndex = () => (
       className="relative z-10 flex flex-col pr-24 xl:max-w-[704px] xl:pr-0 lg:!max-w-[640px] md:max-w-none"
       size="960"
     >
-      <h2 className="max-w-3xl text-[68px] font-medium leading-[0.9] tracking-extra-tight text-white xl:text-[56px] lg:text-[44px] sm:text-[32px]">
+      <h2 className="max-w-3xl font-title text-[68px] font-medium leading-[0.9] tracking-extra-tight text-white xl:text-[56px] lg:text-[44px] sm:text-[32px]">
         Unleashing Cutting-
         <br />
         Edge AI Applications.

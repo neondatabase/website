@@ -24,7 +24,7 @@ const GetStarted = () => (
     >
       <h2
         className={clsx(
-          'relative text-center text-[68px] font-medium leading-[0.9] -tracking-[0.03em] text-white',
+          'relative text-center font-title text-[68px] font-medium leading-[0.9] -tracking-[0.03em] text-white',
           'xl:text-[56px] xl:leading-none xl:tracking-extra-tight lg:text-[44px] sm:text-[32px]'
         )}
       >

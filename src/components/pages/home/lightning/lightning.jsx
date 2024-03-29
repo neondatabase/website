@@ -12,7 +12,7 @@ const Lightning = () => (
       className="pb-[295px] xl:max-w-[704px] xl:pb-[156px] lg:!max-w-[640px] lg:pb-[60px] md:!max-w-none md:pl-[84px] sm:pl-5"
       size="960"
     >
-      <h2 className="inline-block bg-home-lightning-title bg-clip-text pb-6 text-[128px] font-medium leading-[0.95] -tracking-wider text-transparent xl:text-[96px] lg:max-w-lg lg:text-[72px] sm:text-[52px]">
+      <h2 className="inline-block bg-home-lightning-title bg-clip-text pb-6 font-title text-[128px] font-medium leading-[0.95] -tracking-wider text-transparent xl:text-[96px] lg:max-w-lg lg:text-[72px] sm:text-[52px]">
         Lightning fast. Edge&nbsp;ready.
       </h2>
       <Video />

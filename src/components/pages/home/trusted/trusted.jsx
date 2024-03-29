@@ -9,7 +9,6 @@ import githubImage from 'images/pages/home/trusted/github.jpg';
 import socImage from 'images/pages/home/trusted/soc.jpg';
 
 // TODO: update images
-// TODO: update font-family for h2
 const Card = ({ className, borderClassName, bgImage, children }) => (
   <div
     className={clsx(
@@ -48,7 +47,7 @@ const Trusted = () => (
     <Container className="xl:max-w-[864px]" size="1152">
       <h2
         className={clsx(
-          '-mb-14 bg-white bg-clip-text text-center text-[152px] font-medium leading-none -tracking-[0.05em] text-transparent',
+          '-mb-14 bg-white bg-clip-text text-center font-title text-[152px] font-medium leading-none -tracking-[0.05em] text-transparent',
           'bg-[radial-gradient(34.86%_84.21%_at_71.59%_84.21%,_#000_17.9%,_#FFF_64%)]',
           'xl:-mb-[46px] xl:text-[112px] lg:mb-8 lg:bg-none lg:text-[72px] lg:text-white sm:mb-7 sm:text-[40px] sm:leading-[0.95em] sm:tracking-tighter'
         )}

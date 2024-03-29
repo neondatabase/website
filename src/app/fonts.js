@@ -1,8 +1,19 @@
 import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 
-export const inter = Inter({
+const inter = Inter({
   weight: ['300', '400', '500'],
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
 });
+
+const esbuild = localFont({
+  src: '../fonts/esbuild/ESBuild-medium.woff2',
+  weight: '500',
+  style: 'normal',
+  display: 'swap',
+  variable: '--font-esbuild',
+});
+
+export { inter, esbuild };
