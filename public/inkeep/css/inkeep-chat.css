@@ -51,6 +51,10 @@
   padding-right: 0;
   justify-content: flex-start;
 }
+.ikp-chat-bubble__message-content-wrapper ol,
+.ikp-chat-bubble__message-content-wrapper ul{
+  padding-left: 20px;
+}
 .ikp-chat-bubble__message-content-wrapper > div{
   font-size: 16px;
   color: #0C0D0D;
