@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 const esbuild = localFont({
-  src: '../fonts/esbuild/ESBuild-medium.woff2',
+  src: '../fonts/esbuild/ESBuild-Medium.woff2',
   weight: '500',
   style: 'normal',
   display: 'swap',

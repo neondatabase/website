@@ -6,25 +6,32 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+const DELAY_BEFORE_COUNTDOWN = 1400;
+const COUNTDOWN_DURATION = 2100;
+
 const useCurrentTime = () => {
-  const currentTime = new Date();
   const [time, setTime] = useState({
-    hours: currentTime.getHours(),
-    minutes: currentTime.getMinutes(),
+    hours: new Date().getHours(),
+    minutes: new Date().getMinutes(),
   });
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const updatedTime = new Date();
+  const updateTime = (minutesAdjustment) => {
+    if (minutesAdjustment === undefined) {
+      const currentTime = new Date();
+      setTime({
+        hours: currentTime.getHours(),
+        minutes: currentTime.getMinutes(),
+      });
+    } else {
+      const updatedTime = new Date(new Date().getTime() - minutesAdjustment * 60000);
       setTime({
         hours: updatedTime.getHours(),
         minutes: updatedTime.getMinutes(),
       });
-    }, 1000);
-    return () => clearInterval(intervalId);
-  }, []);
+    }
+  };
 
-  return time;
+  return [time, updateTime];
 };
 
 const ClockAnimation = ({
@@ -40,7 +47,8 @@ const ClockAnimation = ({
   animationRootMargin = '300px 0px',
   onLoad,
 }) => {
-  const { hours, minutes } = useCurrentTime();
+  const [isCountingDown, setIsCountingDown] = useState(false);
+  const [{ hours, minutes }, updateTime] = useCurrentTime(isCountingDown);
   const [containerRef, isIntersecting] = useInView({
     triggerOnce: true,
     rootMargin: intersectionRootMargin,
@@ -62,6 +70,9 @@ const ClockAnimation = ({
     },
   });
 
+  // TODO: ask for file with correct input name (coundown -> countdown)
+  const countDownInput = useStateMachineInput(rive, stateMachines, 'coundown');
+
   const hourTensInput = useStateMachineInput(
     rive,
     stateMachines,
@@ -77,17 +88,51 @@ const ClockAnimation = ({
   );
   const minuteOnesInput = useStateMachineInput(rive, stateMachines, 'Number 4', minutes % 10);
 
-  useEffect(() => {
-    if (!rive) {
-      return;
-    }
+  const countDownAnimation = () => {
+    countDownInput.fire();
+    setIsCountingDown(true);
 
-    if (isVisible) {
-      rive.play();
-    } else {
-      rive.pause();
-    }
-  }, [rive, isVisible]);
+    setTimeout(() => {
+      const startTime = Date.now();
+      const endTime = startTime + COUNTDOWN_DURATION;
+
+      const step = () => {
+        const now = Date.now();
+        const timeElapsed = now - startTime;
+        const progress = timeElapsed / COUNTDOWN_DURATION;
+
+        const speedAdjustment = (progress * 1.5) ** 4;
+
+        updateTime(speedAdjustment * 2);
+
+        if (now < endTime) {
+          requestAnimationFrame(step);
+        } else {
+          setIsCountingDown(false);
+          setTimeout(updateTime, DELAY_BEFORE_COUNTDOWN);
+        }
+      };
+
+      requestAnimationFrame(step);
+    }, DELAY_BEFORE_COUNTDOWN);
+  };
+
+  useEffect(
+    () => {
+      if (!rive || !countDownInput) {
+        return;
+      }
+
+      if (isVisible) {
+        rive.play();
+        countDownAnimation();
+      } else {
+        rive.pause();
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [rive, isVisible, countDownInput]
+  );
 
   useEffect(
     () => {
