@@ -3,7 +3,7 @@
 }
 .ikp-modal__backdrop {
   backdrop-filter: blur(0px);
-  background: rgba(12, 13, 13, 0.2);
+  background: rgba(12, 13, 13, 0.3);
 }
 
 .ikp-message-header{
@@ -48,6 +48,11 @@
   padding-right: 0;
   justify-content: flex-start;
 }
+
+.ikp-chat-bubble__message-content-wrapper > .ikp-h_48px{
+  height: 28px;
+  margin-bottom: 24px;
+}
 .ikp-chat-bubble__message-content-wrapper ol,
 .ikp-chat-bubble__message-content-wrapper ul{
   padding-left: 20px;
@@ -84,6 +89,7 @@
 }
 
 .ikp-ai-chat__toolbar-header{
+  font-weight: 500;
   font-size: 20px;
   line-height: 1.125;
   color: #0C0D0D;
@@ -156,7 +162,7 @@
   margin-bottom: 8px;
   padding-left: 20px;
   font-size: 16px;
-  color: #94979E;
+  color: #797D86;
   text-transform: none;
   letter-spacing: 0;
   font-weight: normal;
@@ -212,6 +218,9 @@
 
 .ikp-ai-chat-footer__content-wrapper::before{
   background: linear-gradient(180deg, transparent 0%, #FAFAFA 100%);
+}
+.ikp-modal__closeTrigger{
+  opacity: 0.9;
 }
 
 [data-theme='dark'] {
@@ -276,5 +285,17 @@
 
   .ikp-ai-chat__message-box{
     border: 1px solid #303236;
+  }
+  .ikp-modal__closeTrigger{
+    opacity: 1;
+  }
+}
+
+@media (max-width: 528px) {
+  .ikp-modal-widget__content{
+    border-radius: 0px;
+  }
+  .ikp-modal__closeTrigger:hover{
+    background: transparent;
   }
 }

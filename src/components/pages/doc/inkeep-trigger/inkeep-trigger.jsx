@@ -6,6 +6,7 @@ import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
 
+import closeIcon from './images/close.svg';
 import ExampleIcon from './images/example.inline.svg';
 import SparksIcon from './images/sparks.inline.svg';
 
@@ -20,6 +21,9 @@ const baseSettings = {
   organizationId: process.env.INKEEP_ORGANIZATION_ID,
   primaryBrandColor: '#00E599',
   organizationDisplayName: 'Neon',
+  customIcons: {
+    close: { custom: closeIcon },
+  },
 };
 
 const aiChatSettings = {
