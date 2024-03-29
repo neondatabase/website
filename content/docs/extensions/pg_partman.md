@@ -118,8 +118,13 @@ VALUES
 
 We can query against the `user_activities` table as if it were a single table, and Postgres will automatically route the query to the correct partition(s) based on the `activity_time` column. 
 
+```sql
+SELECT * FROM user_activities WHERE activity_time BETWEEN '2024-03-20' AND '2024-03-25';
+```
+
+This query returns the following results:
+
 ```text
-neondb=> SELECT * FROM user_activities WHERE activity_time BETWEEN '2024-03-20' AND '2024-03-25';
  activity_id |     activity_time      | activity_type | content_id | user_id
 -------------+------------------------+---------------+------------+---------
           16 | 2024-03-20 08:00:00+00 | like          |       1006 |     106
@@ -132,8 +137,12 @@ neondb=> SELECT * FROM user_activities WHERE activity_time BETWEEN '2024-03-20' 
 
 To see the list of all partitions created for the `user_activities` table, you can run the following query:
 
+```sql
+SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name LIKE 'user_activities_%';
+```
+
+This will return the following results:
 ```text
-neondb=> SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name LIKE 'user_activities_%';
         table_name
 ---------------------------
  user_activities_p20240329
@@ -162,6 +171,29 @@ WHERE parent_table = 'public.user_activities';
 ```
 
 The background worker process that comes bundled with  `pg_partman` will automatically detach the old partitions that are older than 4 weeks from the main table. Since, we've set `retention_keep_table` to `true`, the old partitions will be kept as separate tables, and not dropped from the database. 
+
+## Uniqueness constraint on partitioned table
+
+Postgres doesn't support indexes or unique constraints that span multiple tables. Since a partitioned table is made up of multiple physical tables, you can't create a unique constraint that spans all the partitions. For example, the following query will fail:
+
+```sql
+ALTER TABLE user_activities ADD CONSTRAINT unique_activity UNIQUE (activity_id);
+``` 
+
+It will return the following error:
+
+```text
+ERROR:  unique constraint on partitioned table must include all partitioning columns
+DETAIL:  UNIQUE constraint on table "user_activities" lacks column "activity_time" which is part of the partition key.
+```
+
+When the unique constraint involves the partition key columns, then postgres can guarantee uniqueness across all partitions. Different partitions can't share the same values for the partition key columns, and hence the unique constraint can be enforced.
+
+For example, including the `activity_time` column in the unique constraint will work:
+
+```sql
+ALTER TABLE user_activities ADD CONSTRAINT unique_activity UNIQUE (activity_id, activity_time);
+```
 
 ## Conclusion
 
