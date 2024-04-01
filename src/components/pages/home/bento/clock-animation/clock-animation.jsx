@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const DELAY_BEFORE_COUNTDOWN = 1100;
-const COUNTDOWN_DURATION = 2400;
+const DELAY_BEFORE_COUNTDOWN = 800;
+const COUNTDOWN_DURATION = 3500;
 
 const useCurrentTime = () => {
   const [time, setTime] = useState({
@@ -101,7 +101,7 @@ const ClockAnimation = ({
         const timeElapsed = now - startTime;
         const progress = timeElapsed / COUNTDOWN_DURATION;
 
-        const speedAdjustment = (progress * 1.65) ** 6;
+        const speedAdjustment = (progress * 2) ** 7;
 
         updateTime(speedAdjustment * 3);
 
@@ -109,7 +109,10 @@ const ClockAnimation = ({
           requestAnimationFrame(step);
         } else {
           setIsCountingDown(false);
-          setTimeout(updateTime, DELAY_BEFORE_COUNTDOWN);
+          setTimeout(() => updateTime(-3), DELAY_BEFORE_COUNTDOWN + 1000);
+          setTimeout(() => updateTime(-2), DELAY_BEFORE_COUNTDOWN + 1500);
+          setTimeout(() => updateTime(-1), DELAY_BEFORE_COUNTDOWN + 1900);
+          setTimeout(updateTime, DELAY_BEFORE_COUNTDOWN + 2200);
         }
       };
 
