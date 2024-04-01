@@ -97,7 +97,7 @@ The ephemeral endpoints are created according to your configured [default comput
 
 ### Schema Diff
 
-The Schema Diff tool lets you compare an SQL script of your selected branch's schemas in a side-by-side visualization. See [Schema diff](/docs/guides/schema-diff) for more information.
+The Schema Diff tool lets you compare an SQL script of your selected branch's schemas in a side-by-side view. See [Schema diff](/docs/guides/schema-diff) for more information.
 
 ## How to use branch restore
 
