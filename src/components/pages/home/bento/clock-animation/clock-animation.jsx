@@ -3,11 +3,13 @@
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 const DELAY_BEFORE_COUNTDOWN = 800;
+const DELAY_AFTER_COUNTDOWN = DELAY_BEFORE_COUNTDOWN + 1000;
 const COUNTDOWN_DURATION = 3500;
+const MINUTES_DOWN_RESULT = 260;
 
 const useCurrentTime = () => {
   const [time, setTime] = useState({
@@ -34,6 +36,33 @@ const useCurrentTime = () => {
   return [time, updateTime];
 };
 
+function useCombinedInView(options1, options2) {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isThresholded, setIshresholded] = useState(false);
+  const elementRef = useRef(null);
+
+  const [ref1, inView1] = useInView(options1);
+  const [ref2, inView2] = useInView(options2);
+
+  // Monitor changes to inView states from both useInView instances
+  useEffect(() => {
+    setIsVisible(inView1);
+  }, [inView1]);
+
+  useEffect(() => {
+    setIshresholded(inView2);
+  }, [inView2]);
+
+  // Combined ref callback that updates both refs
+  const setRefs = (element) => {
+    elementRef.current = element;
+    ref1(element);
+    ref2(element);
+  };
+
+  return [setRefs, isVisible, isThresholded];
+}
+
 const ClockAnimation = ({
   className = '',
   intersectionClassName = '',
@@ -44,16 +73,17 @@ const ClockAnimation = ({
   fit = 'FitWidth',
   alignment = 'TopCenter',
   intersectionRootMargin = '500px 0px',
-  animationRootMargin = '300px 0px',
   onLoad,
 }) => {
-  const [isCountingDown, setIsCountingDown] = useState(false);
-  const [{ hours, minutes }, updateTime] = useCurrentTime(isCountingDown);
+  const [setRefs, isVisible, isThresholded] = useCombinedInView(
+    { rootMargin: '200px 0px 200px 0px' },
+    { threshold: 0.5 }
+  );
+  const [{ hours, minutes }, updateTime] = useCurrentTime(isThresholded);
   const [containerRef, isIntersecting] = useInView({
     triggerOnce: true,
     rootMargin: intersectionRootMargin,
   });
-  const [animationRef, isVisible] = useInView({ rootMargin: animationRootMargin });
 
   const { rive, RiveComponent } = useRive({
     src,
@@ -72,6 +102,7 @@ const ClockAnimation = ({
 
   // TODO: ask for file with correct input name (coundown -> countdown)
   const countDownInput = useStateMachineInput(rive, stateMachines, 'coundown');
+  const resetCountDownInput = useStateMachineInput(rive, stateMachines, 'reset');
 
   const hourTensInput = useStateMachineInput(
     rive,
@@ -87,37 +118,57 @@ const ClockAnimation = ({
     Math.floor(minutes / 10)
   );
   const minuteOnesInput = useStateMachineInput(rive, stateMachines, 'Number 4', minutes % 10);
+  let animationFrameId;
+  let timeoutIds = [];
+
+  const resetAnimation = () => {
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+    }
+    timeoutIds.forEach(clearTimeout);
+    timeoutIds = [];
+    resetCountDownInput.fire();
+    updateTime();
+  };
 
   const countDownAnimation = () => {
+    resetAnimation();
     countDownInput.fire();
-    setIsCountingDown(true);
 
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       const startTime = Date.now();
       const endTime = startTime + COUNTDOWN_DURATION;
 
       const step = () => {
+        if (!isThresholded) return;
+
         const now = Date.now();
         const timeElapsed = now - startTime;
         const progress = timeElapsed / COUNTDOWN_DURATION;
-
         const speedAdjustment = (progress * 2) ** 7;
 
         updateTime(speedAdjustment * 3);
 
         if (now < endTime) {
-          requestAnimationFrame(step);
+          animationFrameId = requestAnimationFrame(step);
         } else {
-          setIsCountingDown(false);
-          setTimeout(() => updateTime(-3), DELAY_BEFORE_COUNTDOWN + 1000);
-          setTimeout(() => updateTime(-2), DELAY_BEFORE_COUNTDOWN + 1500);
-          setTimeout(() => updateTime(-1), DELAY_BEFORE_COUNTDOWN + 1900);
-          setTimeout(updateTime, DELAY_BEFORE_COUNTDOWN + 2200);
+          resetCountDownInput.fire();
+          timeoutIds.push(setTimeout(() => updateTime(MINUTES_DOWN_RESULT), DELAY_AFTER_COUNTDOWN));
+          timeoutIds.push(
+            setTimeout(() => updateTime(MINUTES_DOWN_RESULT + 1), DELAY_AFTER_COUNTDOWN + 500)
+          );
+          timeoutIds.push(
+            setTimeout(() => updateTime(MINUTES_DOWN_RESULT + 2), DELAY_AFTER_COUNTDOWN + 900)
+          );
+          timeoutIds.push(
+            setTimeout(() => updateTime(MINUTES_DOWN_RESULT + 3), DELAY_AFTER_COUNTDOWN + 1200)
+          );
         }
       };
 
-      requestAnimationFrame(step);
+      animationFrameId = requestAnimationFrame(step);
     }, DELAY_BEFORE_COUNTDOWN);
+    timeoutIds.push(timeout);
   };
 
   useEffect(
@@ -128,13 +179,29 @@ const ClockAnimation = ({
 
       if (isVisible) {
         rive.play();
-        countDownAnimation();
       } else {
         rive.pause();
+        resetAnimation();
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rive, isVisible, countDownInput]
+    [rive, isVisible]
+  );
+
+  useEffect(
+    () => {
+      if (!rive || !countDownInput) {
+        return;
+      }
+
+      if (isThresholded) {
+        countDownAnimation();
+      } else {
+        resetAnimation();
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [rive, isThresholded]
   );
 
   useEffect(
@@ -142,14 +209,13 @@ const ClockAnimation = ({
       if (!rive || !hourOnesInput || !hourTensInput || !minuteOnesInput || !minuteTensInput) {
         return;
       }
-
       hourTensInput.value = Math.floor(hours / 10);
       hourOnesInput.value = hours % 10;
       minuteTensInput.value = Math.floor(minutes / 10);
       minuteOnesInput.value = minutes % 10;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [minutes]
+    [rive, minutes]
   );
 
   return (
@@ -161,7 +227,7 @@ const ClockAnimation = ({
       />
       <div
         className={clsx(className, '[&_canvas]:!h-auto [&_canvas]:!w-full')}
-        ref={animationRef}
+        ref={setRefs}
         aria-hidden
       >
         {isIntersecting ? <RiveComponent /> : null}
@@ -179,7 +245,6 @@ ClockAnimation.propTypes = {
   alignment: PropTypes.oneOf(Object.keys(Alignment)),
   onLoad: PropTypes.func,
   intersectionRootMargin: PropTypes.string,
-  animationRootMargin: PropTypes.string,
   className: PropTypes.string,
   intersectionClassName: PropTypes.string,
 };
