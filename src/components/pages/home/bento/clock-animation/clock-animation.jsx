@@ -9,7 +9,7 @@ import { useInView } from 'react-intersection-observer';
 const DELAY_BEFORE_COUNTDOWN = 800;
 const DELAY_AFTER_COUNTDOWN = DELAY_BEFORE_COUNTDOWN + 1000;
 const COUNTDOWN_DURATION = 3500;
-const MINUTES_DOWN_RESULT = 260;
+const MINUTES_DOWN_RESULT = 720;
 
 const useCurrentTime = () => {
   const [time, setTime] = useState({
@@ -79,7 +79,7 @@ const ClockAnimation = ({
     { rootMargin: '200px 0px 200px 0px' },
     { threshold: 0.5 }
   );
-  const [{ hours, minutes }, updateTime] = useCurrentTime(isThresholded);
+  const [{ hours, minutes }, updateTime] = useCurrentTime();
   const [containerRef, isIntersecting] = useInView({
     triggerOnce: true,
     rootMargin: intersectionRootMargin,
@@ -103,6 +103,12 @@ const ClockAnimation = ({
   // TODO: ask for file with correct input name (coundown -> countdown)
   const countDownInput = useStateMachineInput(rive, stateMachines, 'coundown');
   const resetCountDownInput = useStateMachineInput(rive, stateMachines, 'reset');
+  const indicatorInput = useStateMachineInput(
+    rive,
+    stateMachines,
+    'indicator-reverse',
+    hours > 7 && hours < 22
+  );
 
   const hourTensInput = useStateMachineInput(
     rive,
@@ -122,12 +128,12 @@ const ClockAnimation = ({
   let timeoutIds = [];
 
   const resetAnimation = () => {
+    resetCountDownInput.fire();
     if (animationFrameId) {
       cancelAnimationFrame(animationFrameId);
     }
     timeoutIds.forEach(clearTimeout);
     timeoutIds = [];
-    resetCountDownInput.fire();
     updateTime();
   };
 
@@ -152,16 +158,17 @@ const ClockAnimation = ({
         if (now < endTime) {
           animationFrameId = requestAnimationFrame(step);
         } else {
-          resetCountDownInput.fire();
-          timeoutIds.push(setTimeout(() => updateTime(MINUTES_DOWN_RESULT), DELAY_AFTER_COUNTDOWN));
           timeoutIds.push(
-            setTimeout(() => updateTime(MINUTES_DOWN_RESULT + 1), DELAY_AFTER_COUNTDOWN + 500)
+            setTimeout(() => updateTime(MINUTES_DOWN_RESULT - 3), DELAY_AFTER_COUNTDOWN)
           );
           timeoutIds.push(
-            setTimeout(() => updateTime(MINUTES_DOWN_RESULT + 2), DELAY_AFTER_COUNTDOWN + 900)
+            setTimeout(() => updateTime(MINUTES_DOWN_RESULT - 2), DELAY_AFTER_COUNTDOWN + 500)
           );
           timeoutIds.push(
-            setTimeout(() => updateTime(MINUTES_DOWN_RESULT + 3), DELAY_AFTER_COUNTDOWN + 1200)
+            setTimeout(() => updateTime(MINUTES_DOWN_RESULT - 1), DELAY_AFTER_COUNTDOWN + 900)
+          );
+          timeoutIds.push(
+            setTimeout(() => updateTime(MINUTES_DOWN_RESULT), DELAY_AFTER_COUNTDOWN + 1200)
           );
         }
       };
@@ -179,13 +186,14 @@ const ClockAnimation = ({
 
       if (isVisible) {
         rive.play();
+        updateTime();
       } else {
         rive.pause();
         resetAnimation();
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rive, isVisible]
+    [rive, isVisible, countDownInput]
   );
 
   useEffect(
@@ -193,26 +201,50 @@ const ClockAnimation = ({
       if (!rive || !countDownInput) {
         return;
       }
+      let timeoutId = null;
+        let intervalId = null;
 
       if (isThresholded) {
-        countDownAnimation();
+        timeoutId = setTimeout(countDownAnimation, 2000);
+        intervalId = setInterval(() => {
+          resetAnimation();
+          countDownAnimation();
+        }, 20000);
       } else {
         resetAnimation();
       }
+
+      return () => {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+      };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rive, isThresholded]
+    [rive, isThresholded, countDownInput]
   );
 
   useEffect(
     () => {
-      if (!rive || !hourOnesInput || !hourTensInput || !minuteOnesInput || !minuteTensInput) {
+      if (
+        !rive ||
+        !hourOnesInput ||
+        !hourTensInput ||
+        !minuteOnesInput ||
+        !minuteTensInput ||
+        !indicatorInput
+      ) {
         return;
       }
+
       hourTensInput.value = Math.floor(hours / 10);
       hourOnesInput.value = hours % 10;
       minuteTensInput.value = Math.floor(minutes / 10);
       minuteOnesInput.value = minutes % 10;
+      indicatorInput.value = hours > 7 && hours < 22;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [rive, minutes]
