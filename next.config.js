@@ -270,6 +270,11 @@ const defaultConfig = {
 
     return config;
   },
+  env: {
+    INKEEP_INTEGRATION_API_KEY: process.env.INKEEP_INTEGRATION_API_KEY,
+    INKEEP_INTEGRATION_ID: process.env.INKEEP_INTEGRATION_ID,
+    INKEEP_ORGANIZATION_ID: process.env.INKEEP_ORGANIZATION_ID,
+  },
 };
 
 module.exports = withBundleAnalyzer(defaultConfig);
