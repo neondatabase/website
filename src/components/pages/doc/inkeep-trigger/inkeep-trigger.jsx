@@ -42,7 +42,7 @@ const aiChatSettings = {
 
 const InkeepTrigger = ({ className, isSidebar }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
@@ -55,7 +55,7 @@ const InkeepTrigger = ({ className, isSidebar }) => {
     baseSettings: {
       ...baseSettings,
       colorMode: {
-        forcedColorMode: theme,
+        forcedColorMode: theme === 'system' ? systemTheme : theme,
       },
     },
     aiChatSettings,

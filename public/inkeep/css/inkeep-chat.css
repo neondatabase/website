@@ -29,10 +29,15 @@
 }
 
 .ikp-modal-widget__content{
+  top: 140px;
   box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.06);
   border: 1px solid #E4E5E7;
   background: #FAFAFA;
   border-radius: 10px;
+}
+
+.ikp-modal-widget__content .ikp-max-h_min\(85vh\,_900px\){
+  max-height: min(calc(100vh - 200px),900px)
 }
 
 .ikp-switch-to-search-button{
@@ -291,11 +296,24 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .ikp-modal-widget__content{
+    top: 100px;
+  }
+  
+  .ikp-modal-widget__content .ikp-max-h_min\(85vh\,_900px\){
+    max-height: min(calc(100vh - 192px),900px)
+  }
+}
+
 @media (max-width: 528px) {
   .ikp-modal-widget__content{
     border-radius: 0px;
   }
   .ikp-modal__closeTrigger:hover{
     background: transparent;
+  }
+  .ikp-modal-widget__content{
+    top: 0px;
   }
 }
