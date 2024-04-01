@@ -27,7 +27,7 @@ Built into the Time Travel assist editor, you can use Schema Diff to help when r
 
 - **Pre-Migration Reviews**: Before migrating schemas from a development branch into main, use Schema Diff to ensure only intended schema changes are applied.
 - **Audit Changes**: Historically compare schema changes to understand the evolution of your database structure.
-- **Consistency Checks**: Ensure environmental consistency by comparing schemas across development, staging, and production branches.
+- **Consistency Checks**: Ensure environment consistency by comparing schemas across development, staging, and production branches.
 
 ## How to Use Schema Diff
 
