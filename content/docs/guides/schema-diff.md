@@ -21,7 +21,7 @@ In the detailed view for any child branch, you can check the schema differences 
 
 ### Compare to another branch's history
 
-Built into the Time Travel assist editor, you can use Schema Diff to help when restoring branches, letting you compare states of your branch against its own or another branch's history before you complete a [Branch restore](/docs/guides/branch-restore) operation.
+Built into the Time Travel assist editor, you can use Schema Diff to help when restoring branches, letting you compare states of your branch against its own or another branch's history before you complete a [branch restore](/docs/guides/branch-restore) operation.
 
 ### Practical Applications
 
