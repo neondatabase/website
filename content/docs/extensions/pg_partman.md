@@ -1,20 +1,20 @@
 ---
 title: The pg_partman extension
-subtitle: Manage large Postgres tables using the PostgresQL Partition Manager extension
+subtitle: Manage large Postgres tables using the PostgreSQL Partition Manager extension
 enableTableOfContents: true
 updatedOn: '2024-03-17T20:32:29.796Z'
 ---
 
-`pg_partman` is a Postgres extension to simplify management of partitioned tables. Partitioning refers to splitting a single table into smaller pieces called `partitions`. This is done based on the values in a key column or set of columns. Even though partitions are stored as separate physical tables, the partitioned table can still be queried as a single logical table. This can significantly enhance query performance and also help you manage the lifecycle of data in tables that grow very large.
+`pg_partman` is a Postgres extension that simplifies the management of partitioned tables. Partitioning refers to splitting a single table into smaller pieces called `partitions`. This is done based on the values in a key column or set of columns. Even though partitions are stored as separate physical tables, the partitioned table can still be queried as a single logical table. This can significantly enhance query performance and also help you manage the data lifecycle of tables that grow very large.
 
-While Postgres natively supports partitioning, `pg_partman` helps set up and manage partitioned tables, by automating steps like creation of new partitions and handle data lifecycle given the retention policy. 
+While Postgres natively supports partitioning, `pg_partman` helps set up and manage partitioned tables by automating steps like creating new partitions and handling the data lifecycle for a given retention policy. 
 
 <CTA />
 
-In this guide, we’ll learn how to set up and use the `pg_partman` extension within your Neon Postgres project. We'll cover why is partitioning helpful, how to enable `pg_partman`, creating partitioned tables, and automating partition maintenance. 
+In this guide, we’ll learn how to set up and use the `pg_partman` extension with your Neon Postgres project. We'll cover why partitioning is helpful, how to enable `pg_partman`, creating partitioned tables, and automating partition maintenance. 
 
 <Admonition type="note">
-    `pg_partman` is an open-source for Postgres that can be installed in any Neon project, using the instructions below. Detailed installation instructions and compatibility information can be found at [pg_partman Documentation](https://github.com/pgpartman/pg_partman).
+    `pg_partman` is an open-source Postgres extension that can be installed in any Neon project using the instructions below. Detailed installation instructions and compatibility information can be found in the [pg_partman](https://github.com/pgpartman/pg_partman) documentation.
 </Admonition>
 
 ## Enable the `pg_partman` extension
@@ -29,32 +29,30 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 **Version Compatibility:**
 
-`pg_partman` works with PostgreSQL 14 and above, complementing the native partitioning features introduced in these versions. The exact version of `pg_partman` available in Neon depends on the version of Postgres you select for your Neon project.
-
-[TODO: add version information](https://neon.tech/docs/extensions/pg-extensions)
+`pg_partman` works with Postgres 14 and above, complementing the native partitioning features introduced in these versions.
 
 ## Why Partition Your Data?
 
-For a table that might grow really large, partitioning it offers a few benefits:
+For tables that grow very large, partitioning offers several benefits:
 
-- **Faster queries:** Partitioning allows PostgreSQL to quickly locate and retrieve data within a specific partition, rather than scanning the entire table. 
-- **Scalability:** Partioning makes database administration simpler. For example, smaller partitions are easier to load and delete, or back up and recover, compared to running a bulk query on the full table.
+- **Faster queries:** Partitioning allows Postgres to quickly locate and retrieve data within a specific partition, rather than scanning the entire table. 
+- **Scalability:** Partitioning makes database administration simpler. For example, smaller partitions are easier to load and delete or back up and recover.
 - **Managing Data Lifecycle:** Easier management of data lifecycle by archiving or purging old partitions, which can be moved to cheaper storage options without affecting the active dataset.
 
 ### Native partitioning vs pg_partman
 
 Postgres supports partitioning tables natively, with the following strategies to divide the data:
 
-- List partitioning: Data is distributed across partitions based on a list of values, such as a category or location. 
-- Range partitioning: Data is distributed across partitions based on ranges of values, such as dates or numerical ranges.
+- **List partitioning**: Data is distributed across partitions based on a list of values, such as a category or location. 
+- **Range partitioning**: Data is distributed across partitions based on ranges of values, such as dates or numerical ranges.
 
-With native partitoning, you need to manually create and manage partitions for your table. 
+With native partitioning, you need to manually create and manage partitions for your table. 
 
 ```sql
 CREATE TABLE measurement (
     city_id         int not null,
     logdate         date not null,
-    peaktemp        int,
+    peaktemp        int
 ) PARTITION BY RANGE (logdate);
 
 -- Create a partition for each month of logged data
@@ -65,15 +63,15 @@ CREATE TABLE measurement_y2006m02 PARTITION OF measurement
 ALTER TABLE measurement DETACH PARTITION measurement_y2005m10;
 ```
 
-`pg_partman` only supports creating partitions that are number/time-based, each partition covering a range of values. However, it simplifies the process of creating and managing partitions. 
+`pg_partman` only supports creating partitions that are number or time-based, with each partition covering a range of values. However, this simplifies the process of creating and managing partitions. 
 
 ## Example: partitioning user-activity data
 
-Consider a social media platform that tracks user interactions on their website/app, such as likes, comments, and shares. The data is stored in a table called `user_activity`, where `activity_type` could store the type of activity and details could store additional JSON-formatted information about it. 
+Consider a social media platform that tracks user interactions in their website application, such as likes, comments, and shares. The data is stored in a table called `user_activities`, where `activity_type` stores the type of activity and the other columns store additional information about the activity. 
 
-### Set up partitioned table
+### Setting up a partitioned table
 
-Given the large volume of data generated by user interactions, partitioning the `user_activities` table can help keep queries tractable. Recent activity data is typically the most interesting for both the platform and its users, so `activity_time` is a good candidate to partition on. 
+Given the large volume of data generated by user interactions, partitioning the `user_activities` table can help keep queries manageable. Recent activity data is typically the most interesting for both the platform and its users, so `activity_time` is a good candidate to partition on. 
 
 ```sql
 CREATE TABLE user_activities (
@@ -89,7 +87,7 @@ PARTITION BY RANGE (activity_time);
 To create a partition for each week of activity data, you can run the following query:
 
 ```sql
-SELECT partman.create_parent('public.user_activities', 'activity_time', '1 week');
+SELECT create_parent('public.user_activities', 'activity_time', '1 week');
 ```
 
 This will create a new partition for each week of data in the `user_activities` table. We can insert some sample data into the table:
@@ -114,7 +112,7 @@ VALUES
     ('2024-03-29 15:30:00', 'comment', 1015, 115);
 ```
 
-### Querying partitioned table
+### Querying partitioned tables
 
 We can query against the `user_activities` table as if it were a single table, and Postgres will automatically route the query to the correct partition(s) based on the `activity_time` column. 
 
@@ -158,21 +156,21 @@ This will return the following results:
 (10 rows)
 ```
 
-`pg_partman` automatically created tables for weekly intervals close to the current data. As more data is inserted in the future, it will create new partitions for them. Additionally, there is a `user_activities_default` table that stores data that doesn't fit into any of the existing partitions. 
+`pg_partman` automatically created tables for weekly intervals close to the current data. As more data is inserted, it will create new partitions. Additionally, there is a `user_activities_default` table that stores data that doesn't fit into any of the existing partitions. 
 
-### Data Retention Policy
+### Data retention policies
 
 To make sure that old data is automatically removed from the main table, you can set up a retention policy:
 
 ```sql
-UPDATE partman.part_config 
+UPDATE part_config 
 SET retention = '4 weeks', retention_keep_table = true
 WHERE parent_table = 'public.user_activities';
 ```
 
-The background worker process that comes bundled with  `pg_partman` will automatically detach the old partitions that are older than 4 weeks from the main table. Since, we've set `retention_keep_table` to `true`, the old partitions will be kept as separate tables, and not dropped from the database. 
+The background worker process that comes bundled with `pg_partman` automatically detaches the old partitions that are older than 4 weeks from the main table. Since we've set `retention_keep_table` to `true`, the old partitions are kept as separate tables, and not dropped from the database. 
 
-## Uniqueness constraint on partitioned table
+## Uniqueness constraints on partitioned tables
 
 Postgres doesn't support indexes or unique constraints that span multiple tables. Since a partitioned table is made up of multiple physical tables, you can't create a unique constraint that spans all the partitions. For example, the following query will fail:
 
@@ -180,16 +178,16 @@ Postgres doesn't support indexes or unique constraints that span multiple tables
 ALTER TABLE user_activities ADD CONSTRAINT unique_activity UNIQUE (activity_id);
 ``` 
 
-It will return the following error:
+It returns the following error:
 
 ```text
 ERROR:  unique constraint on partitioned table must include all partitioning columns
 DETAIL:  UNIQUE constraint on table "user_activities" lacks column "activity_time" which is part of the partition key.
 ```
 
-When the unique constraint involves the partition key columns, then postgres can guarantee uniqueness across all partitions. Different partitions can't share the same values for the partition key columns, and hence the unique constraint can be enforced.
+However, when the unique constraint involves the partition key columns, Postgres can guarantee uniqueness across all partitions. In this way, different partitions cannot share the same values for the partition key columns, which allows unique constraints to be enforced.
 
-For example, including the `activity_time` column in the unique constraint will work:
+For example, including the `activity_time` column in the unique constraint will work because `activity_time` is a partition key column:
 
 ```sql
 ALTER TABLE user_activities ADD CONSTRAINT unique_activity UNIQUE (activity_id, activity_time);
@@ -197,7 +195,7 @@ ALTER TABLE user_activities ADD CONSTRAINT unique_activity UNIQUE (activity_id, 
 
 ## Conclusion
 
-By leveraging `pg_partman`, you can significantly enhance PostgreSQL's native partitioning functionality, particularly for large-scale and time-series datasets. The extension simplifies partition management, automates retention/archival tasks, and improves query performance. 
+By leveraging `pg_partman`, you can significantly enhance the native partitioning functionality of Postgres, particularly for large-scale and time-series datasets. The extension simplifies partition management, automates retention and archival tasks, and improves query performance. 
 
 ## Reference
 
