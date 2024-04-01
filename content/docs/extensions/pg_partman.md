@@ -185,7 +185,7 @@ ERROR:  unique constraint on partitioned table must include all partitioning col
 DETAIL:  UNIQUE constraint on table "user_activities" lacks column "activity_time" which is part of the partition key.
 ```
 
-However, when the unique constraint involves the partition key columns, Postgres can guarantee uniqueness across all partitions. In this way, different partitions cannot share the same values for the partition key columns, which allows unique constraints to be enforced.
+However, when the unique constraint involves partition key columns, Postgres can guarantee uniqueness across all partitions. In this way, different partitions cannot share the same values for the partition key columns, which allows unique constraints to be enforced.
 
 For example, including the `activity_time` column in the unique constraint will work because `activity_time` is a partition key column:
 
