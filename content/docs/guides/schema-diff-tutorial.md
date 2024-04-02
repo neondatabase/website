@@ -98,7 +98,7 @@ You can do the same thing for your `dev/jordan` branch and get identical results
 
 Now, let's make some schema changes on the dedicated branch for `dev\jordan`, adding a new table to store relevant addresses.
 
-This time, we'll use the **SQL editor** in the Neon Console. Make sure you select `dev\jordan` as the branch and `staging` as the database.
+This time, we'll use the **SQL Editor** in the Neon Console. Make sure you select `dev\jordan` as the branch and `staging` as the database.
 
 Enter this SQL statemenet to create a new `address` table.
 
