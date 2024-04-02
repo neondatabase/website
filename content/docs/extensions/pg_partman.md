@@ -31,7 +31,7 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 `pg_partman` works with Postgres 14 and above, complementing the native partitioning features introduced in these versions.
 
-## Why Partition Your Data?
+## Why partition your data?
 
 For tables that grow very large, partitioning offers several benefits:
 
@@ -170,7 +170,7 @@ WHERE parent_table = 'public.user_activities';
 
 The background worker process that comes bundled with `pg_partman` automatically detaches the old partitions that are older than 4 weeks from the main table. Since we've set `retention_keep_table` to `true`, the old partitions are kept as separate tables, and not dropped from the database. 
 
-## Uniqueness constraints on partitioned tables
+## Uniqueness constraints
 
 Postgres doesn't support indexes or unique constraints that span multiple tables. Since a partitioned table is made up of multiple physical tables, you can't create a unique constraint that spans all the partitions. For example, the following query will fail:
 
