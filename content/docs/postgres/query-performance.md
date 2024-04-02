@@ -367,11 +367,7 @@ A cache hit ratio tells you the percentage of queries served from memory. Querie
 
 In a standalone Postgres instance, you can query the cache hit ratio with an SQL statement that looks for `shared buffers` block hits. In Neon, it’s a little different. Neon extends Postgres shared buffers with a local file cache (local to your Neon compute instance). To query your cache hit ratio in Neon, you need to look at local file cache hits instead of shared buffer hits.
 
-<Admonition type="note">
-This `neon_stat_file_cache` view and the `neon` extension that provides it are not yet available in Neon. You can expect it to be released soon.
-</Admonition>
-
-To enable querying local file cache statistics, Neon provides a `neon_stat_file_cache` view. To access this view, you need to install the `neon` extension:
+To enable querying local file cache statistics, Neon provides a [neon_stat_file_cache](/docs/extensions/neon#the-neonstatfilecache-view) view. To access this view, you need to install the [neon](/docs/extensions/neon) extension:
 
 ```sql
 CREATE EXTENSION neon;
