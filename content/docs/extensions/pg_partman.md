@@ -37,7 +37,7 @@ For tables that grow very large, partitioning offers several benefits:
 
 - **Faster queries:** Partitioning allows Postgres to quickly locate and retrieve data within a specific partition, rather than scanning the entire table. 
 - **Scalability:** Partitioning makes database administration simpler. For example, smaller partitions are easier to load and delete or back up and recover.
-- **Managing Data Lifecycle:** Easier management of data lifecycle by archiving or purging old partitions, which can be moved to cheaper storage options without affecting the active dataset.
+- **Managing the data lifecycle:** Easier management of the data lifecycle by archiving or purging old partitions, which can be moved to cheaper storage options without affecting the active dataset.
 
 ### Native partitioning vs pg_partman
 
@@ -65,7 +65,7 @@ ALTER TABLE measurement DETACH PARTITION measurement_y2005m10;
 
 `pg_partman` only supports creating partitions that are number or time-based, with each partition covering a range of values. However, this simplifies the process of creating and managing partitions. 
 
-## Example: partitioning user-activity data
+## Example: Partitioning user-activity data
 
 Consider a social media platform that tracks user interactions in their website application, such as likes, comments, and shares. The data is stored in a table called `user_activities`, where `activity_type` stores the type of activity and the other columns store additional information about the activity. 
 
