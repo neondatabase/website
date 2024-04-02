@@ -106,25 +106,24 @@ The `neon_utils` extension provides a `num_cpus()` function you can use to monit
 
 The size of your compute determines the amount of frequently accessed data you can cache in memory and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues. 
 
-In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The LFC can use up to 50% of your compute's RAM. This limit is a guideline rather than an enforced limit, but it's advisable not to exceed this maximum; otherwise, you might encounter out-of-memory errors.
+In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The LFC can use up to 80% of your compute's RAM.
 
 The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size. Larger computes support higher maximum connection limits.
 
 The following table outlines the vCPU, RAM, LFC size (50 % of RAM), and the `max_connections` limit for each compute size that Neon supports.
 
 | Compute Size (CU) | vCPU | RAM   | LFC size | max_connections | 
-|--------------|------|-------|----------------|-----------------|
-| 0.25         | 0.25 | 1 GB  | 0.5 GB         | 112             |
-| 0.50         | 0.50 | 2 GB  | 1 GB           | 225             |
-| 1            | 1    | 4 GB  | 2 GB           | 450             |
-| 2            | 2    | 8 GB  | 4 GB           | 901             |
-| 3            | 3    | 12 GB | 6 GB           | 1351            |
-| 4            | 4    | 16 GB | 8 GB           | 1802            |
-| 5            | 5    | 20 GB | 10 GB          | 2253            |
-| 6            | 6    | 24 GB | 12 GB          | 2703            |
-| 7            | 7    | 28 GB | 14 GB          | 3154            |
-| 8            | 8    | 32 GB | 16 GB          | 3,604           |
-
+|-------------------|------|-------|----------|-----------------|
+| 0.25              | 0.25 | 1 GB  | 0.8 GB   | 112             |
+| 0.50              | 0.50 | 2 GB  | 1.6 GB   | 225             |
+| 1                 | 1    | 4 GB  | 3.2 GB   | 450             |
+| 2                 | 2    | 8 GB  | 6.4 GB   | 901             |
+| 3                 | 3    | 12 GB | 9.6 GB   | 1351            |
+| 4                 | 4    | 16 GB | 12.8 GB  | 1802            |
+| 5                 | 5    | 20 GB | 16 GB    | 2253            |
+| 6                 | 6    | 24 GB | 19.2 GB  | 2703            |
+| 7                 | 7    | 28 GB | 22.4 GB  | 3154            |
+| 8                 | 8    | 32 GB | 25.6 GB  | 3,604           |
 
 <Admonition type="note">
 Users on paid plans can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
