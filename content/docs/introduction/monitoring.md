@@ -8,12 +8,60 @@ updatedOn: '2024-02-22T14:29:54.385Z'
 ## Overview
 
 To find out what's going on with your Neon projects and databases, Neon offers several ways to visualize your usage and track your metrics:
+- [Monitoring page](#monitoring-page) Find key metrics for your Neon project for everything from RAM and CPU to connection counts and deadlocks 
 - [Project dashboard](#dashboard) &#8212; Find widgets that display the most recent usage metrics across your project
 - [Autoscaling graphs](#autoscaling-graphs) &#8212; a visualization of recent vCPU and RAM usage to help understand your sizing needs.
 - [Branch-specific metrics](#branch-specific-metrics) &#8212; View key metrics for all branches in your project on the **Branches** page.
 - [API metrics](#api-metrics) &#8212; Use the [Neon API](link) to gather a variety of usage metrics for your project.
 - [neon_utils](#the-neon_utils-extension) &#8212; A custom Postgres extension that helps you monitor how autoscaling allocates vCPU in response to workload.
 - [Other Postgres options](#other-postgres-options) &#8212; Other extensions and tools like [pg_stat_statements](https://neon.tech/docs/extensions/pg_stat_statements) and [PgHero](https://github.com/ankane/pghero) can provide details about SQL execution counts, totals, average execution time, and other insights into how your database is being used.
+
+
+## Monitoring page
+
+The **Monitoring** page in the Neon console provides several graphs for monitoring the state your Neon project. You can access the **Monitoring** page from the sidebar in the Neon Console. The observable metrics are described below.
+
+### RAM
+
+The **RAM** graph shows the amount of RAM allocated for your compute and the amount of RAM used over time.
+
+![Monitoring page RAM graph](/docs/introduction/monitor_ram.png)
+
+### CPU
+
+The **CPU** graph shows the allocated CPU size CPU usage over time. CPU is measure in Compute Unit (CU) size.
+
+![Monitoring page CPU graph](/docs/introduction/monitor_cpu.png)
+
+### Connections count
+
+The **Connections count** graph shows the number of idle connections, active connections, and the total number of connections over time.
+
+![Monitoring page connections graph](/docs/introduction/monitor_connections.png)
+
+### Buffer cache hit rate
+
+The **Buffer cache hit rate** rate graph shows the percentage of read request served from your computes buffer cache.
+
+![Monitoring page cache hit rate graph](/docs/introduction/monitor_cache.png)
+
+### Database size
+
+The **Database size** graph shows the size of your database.
+
+![Monitoring page database size graph](/docs/introduction/monitor_data_size.png)
+
+### Deadlocks
+
+The **Deadlocks** graph shows a count of deadlocks over time.
+
+![Monitoring page deadlocks graph](/docs/introduction/monitor_deadlocks.png)
+
+### Rows
+
+The **Rows** graph shows rows deleted, updated, and inserted.
+
+![Monitoring page rows graph](/docs/introduction/monitor_rows.png)
 
 ## Dashboard
 
