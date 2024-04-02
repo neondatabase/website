@@ -1,6 +1,6 @@
 ---
 title: The neon extension
-title: An extension for Neon-specific statistics including the Local File Cache hit ratio 
+subtitle: An extension for Neon-specific statistics including the Local File Cache hit ratio 
 enableTableOfContents: true
 updatedOn: '2024-02-08T15:20:54.277Z'
 ---
@@ -20,7 +20,7 @@ Neon computes have a Local File Cache (LFC), which is a layer of caching that st
 
 When data is requested, Postgres checks shared buffers first, then the LFC. If the requested data is not found in the LFC, it is read from Neon storage. Shared buffers and the LFC both cache your most frequently or most recently accessed data, but they may not cache exactly the same data due to different cache eviction patterns. The LFC is also much larger than shared buffers, so it stores significantly more data.
 
-### `neon_stat_file_cache` metrics
+### neon_stat_file_cache metrics
 
 The `neon_stat_file_cache` view includes the following metrics:
 
