@@ -44,7 +44,6 @@ function useCombinedInView(options1, options2) {
   const [ref1, inView1] = useInView(options1);
   const [ref2, inView2] = useInView(options2);
 
-  // Monitor changes to inView states from both useInView instances
   useEffect(() => {
     setIsVisible(inView1);
   }, [inView1]);
@@ -53,7 +52,6 @@ function useCombinedInView(options1, options2) {
     setIshresholded(inView2);
   }, [inView2]);
 
-  // Combined ref callback that updates both refs
   const setRefs = (element) => {
     elementRef.current = element;
     ref1(element);
@@ -85,6 +83,8 @@ const ClockAnimation = ({
     rootMargin: intersectionRootMargin,
   });
 
+  const isDayTime = hours > 7 && hours < 22;
+
   const { rive, RiveComponent } = useRive({
     src,
     artboard,
@@ -100,15 +100,9 @@ const ClockAnimation = ({
     },
   });
 
-  // TODO: ask for file with correct input name (coundown -> countdown)
   const countDownInput = useStateMachineInput(rive, stateMachines, 'coundown');
   const resetCountDownInput = useStateMachineInput(rive, stateMachines, 'reset');
-  const indicatorInput = useStateMachineInput(
-    rive,
-    stateMachines,
-    'indicator-reverse',
-    hours > 7 && hours < 22
-  );
+  const indicatorInput = useStateMachineInput(rive, stateMachines, 'indicator-reverse', isDayTime);
 
   const hourTensInput = useStateMachineInput(
     rive,
@@ -128,6 +122,7 @@ const ClockAnimation = ({
   let timeoutIds = [];
 
   const resetAnimation = () => {
+    if (!resetCountDownInput) return;
     resetCountDownInput.fire();
     if (animationFrameId) {
       cancelAnimationFrame(animationFrameId);
@@ -138,23 +133,19 @@ const ClockAnimation = ({
   };
 
   const countDownAnimation = () => {
+    if (!countDownInput) return;
     resetAnimation();
     countDownInput.fire();
-
     const timeout = setTimeout(() => {
       const startTime = Date.now();
       const endTime = startTime + COUNTDOWN_DURATION;
-
       const step = () => {
         if (!isThresholded) return;
-
         const now = Date.now();
         const timeElapsed = now - startTime;
         const progress = timeElapsed / COUNTDOWN_DURATION;
-        const speedAdjustment = (progress * 2) ** 7;
-
+        const speedAdjustment = progress > 0.55 ? (progress * 2.5) ** 8 : (progress * 2) ** 7;
         updateTime(speedAdjustment * 3);
-
         if (now < endTime) {
           animationFrameId = requestAnimationFrame(step);
         } else {
@@ -172,7 +163,6 @@ const ClockAnimation = ({
           );
         }
       };
-
       animationFrameId = requestAnimationFrame(step);
     }, DELAY_BEFORE_COUNTDOWN);
     timeoutIds.push(timeout);
@@ -180,41 +170,41 @@ const ClockAnimation = ({
 
   useEffect(
     () => {
-      if (!rive || !countDownInput) {
+      if (!rive) {
         return;
       }
 
       if (isVisible) {
         rive.play();
-        updateTime();
+        resetAnimation();
       } else {
         rive.pause();
-        resetAnimation();
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rive, isVisible, countDownInput]
+    [rive, isVisible]
   );
 
   useEffect(
     () => {
-      if (!rive || !countDownInput) {
+      if (!rive || !countDownInput || !resetCountDownInput) {
         return;
       }
       let timeoutId = null;
-        let intervalId = null;
+      let intervalId = null;
 
-      if (isThresholded) {
+      if (!isThresholded) {
+        resetAnimation();
+      } else {
         timeoutId = setTimeout(countDownAnimation, 2000);
         intervalId = setInterval(() => {
           resetAnimation();
-          countDownAnimation();
+          setTimeout(countDownAnimation, 2000);
         }, 20000);
-      } else {
-        resetAnimation();
       }
 
       return () => {
+        resetAnimation();
         if (timeoutId) {
           clearTimeout(timeoutId);
         }
@@ -224,7 +214,7 @@ const ClockAnimation = ({
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rive, isThresholded, countDownInput]
+    [rive, countDownInput, resetCountDownInput, isThresholded]
   );
 
   useEffect(
@@ -244,10 +234,10 @@ const ClockAnimation = ({
       hourOnesInput.value = hours % 10;
       minuteTensInput.value = Math.floor(minutes / 10);
       minuteOnesInput.value = minutes % 10;
-      indicatorInput.value = hours > 7 && hours < 22;
+      indicatorInput.value = isDayTime;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rive, minutes]
+    [rive, indicatorInput, minutes, isDayTime, isVisible]
   );
 
   return (
