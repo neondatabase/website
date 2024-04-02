@@ -45,7 +45,7 @@ Just like with [Time Travel Assist](/docs/guides/branch-restore#using-time-trave
 
 Click the **Schema Diff** button, verify that your selections are correct, then click **Compare**.
 
-The two-pane view shows the SQL for both your target and your selected branches, clearly marking additions, deletions, and modifications.
+The two-pane view shows the schema for both your target and your selected branches.
 
 ![schema diff results](/docs/guides/schema_diff_result.png)
 
