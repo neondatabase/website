@@ -230,14 +230,20 @@
           slug: guides/wundergraph
     - title: Schema migration
       items:
+        - title: Django
+          slug: guides/django-migrations
         - title: Drizzle
           slug: guides/drizzle-migrations
+        - title: Entity Framework
+          slug: guides/entity-migrations
         - title: Flyway
           items:
             - title: Get started
               slug: guides/flyway
             - title: Manage multiple environments
               slug: guides/flyway-multiple-environments
+        - title: Laravel
+          slug: guides/laravel-migrations
         - title: Liquibase
           items:
             - title: Get started
@@ -246,6 +252,8 @@
               slug: guides/liquibase-workflow
         - title: Prisma
           slug: guides/prisma-migrations
+        - title: Rails
+          slug: guides/rails-migrations
         - title: Sequelize
           slug: guides/sequelize
         - title: SQLAlchemy
