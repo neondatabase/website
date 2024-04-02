@@ -8,21 +8,24 @@ import elephantImage from 'images/pages/home/trusted/elephant.jpg';
 import githubImage from 'images/pages/home/trusted/github.jpg';
 import socImage from 'images/pages/home/trusted/soc.jpg';
 
-// TODO: update images
-const Card = ({ className, borderClassName, bgImage, children }) => (
+const Card = ({ className, borderClassName, bgClassName, bgImage, children }) => (
   <div
     className={clsx(
-      'relative flex items-end rounded-[10px] p-6 xl:rounded-lg xl:p-5 lg:rounded-[10px] sm:p-4',
+      'relative flex items-end overflow-hidden rounded-[10px] p-6 xl:rounded-lg xl:p-5 lg:rounded-[10px] sm:p-4',
       className
     )}
   >
-    <Image
-      className="absolute inset-0 h-full w-full rounded-[inherit] object-cover"
-      width={bgImage.width / 2}
-      height={bgImage.height / 2}
-      src={bgImage}
-      alt=""
-    />
+    <div className={clsx('absolute', bgClassName || 'inset-0')}>
+      <Image
+        className="h-full w-full object-cover"
+        width={bgImage.width / 2}
+        height={bgImage.height / 2}
+        sizes="(max-width: 1024px) 440px, 240px"
+        quality={95}
+        src={bgImage}
+        alt=""
+      />
+    </div>
     <div className={clsx('absolute inset-0 z-10 rounded-[inherit]', borderClassName)} />
     <p
       className={clsx(
@@ -38,6 +41,7 @@ const Card = ({ className, borderClassName, bgImage, children }) => (
 Card.propTypes = {
   className: PropTypes.string,
   borderClassName: PropTypes.string,
+  bgClassName: PropTypes.string,
   bgImage: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
 };
@@ -63,6 +67,7 @@ const Trusted = () => (
         <Card
           className="aspect-[256/198] justify-center lg:order-3 lg:aspect-[310/220] sm:order-5"
           borderClassName="border-linear border-image-home-trusted-github-card"
+          bgClassName="inset-0 sm:top-auto sm:bottom-[-26%]"
           bgImage={githubImage}
         >
           <strong className="mx-auto font-medium text-white">neondatabase/neon</strong>
@@ -70,6 +75,7 @@ const Trusted = () => (
         <Card
           className="relative z-10 aspect-[321/303] lg:order-1 lg:aspect-[310/220]"
           borderClassName="border-linear border-image-home-trusted-digit-card"
+          bgClassName="inset-0"
           bgImage={digitImage}
         >
           <strong className="font-medium text-white">Databases under management.</strong>{' '}
@@ -81,6 +87,7 @@ const Trusted = () => (
             'shadow-[0px_-10px_62px_12px_rgba(0,0,0,0.9),30px_10px_60px_0px_rgba(0,0,0,0.8),-50px_10px_60px_0px_rgba(0,0,0,0.9)]'
           )}
           borderClassName="border-gray-new-10 border"
+          bgClassName="inset-0 lg:top-auto lg:bottom-[-6%] md:bottom-[-4%] sm:bottom-[-8%]"
           bgImage={elephantImage}
         >
           <strong className="font-medium text-white">Actually just Postgres.</strong>{' '}
@@ -89,6 +96,7 @@ const Trusted = () => (
         <Card
           className="aspect-[192/247] lg:order-4 lg:aspect-[310/220] lg:justify-center"
           borderClassName="border-linear border-image-home-trusted-soc-card"
+          bgClassName="inset-[auto_auto_-19px_-51px] xl:inset-[auto_auto_-75px_-60px] w-[340px] h-[340px] lg:inset-0 lg:w-full lg:h-full"
           bgImage={socImage}
         >
           <strong className="font-medium text-white">SOC2 Compliance</strong>
