@@ -6,6 +6,8 @@ isDraft: false
 updatedOn: '2024-02-19T18:57:12.557Z'
 ---
 
+<LRNotice/>
+
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 [Fivetran](https://fivetran.com/) is an automated data movement platform that helps you centralize data from disparate sources, which you can then manage directly from your browser. Fivetran extracts your data and loads it into your data destination.
@@ -25,7 +27,7 @@ Enabling logical replication modifies the Postgres `wal_level` configuration par
 
 To enable logical replication in Neon:
 
-1. Select your project in the Neon console.
+1. Select your project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Beta**.
 4. Click **Enable** to enable logical replication.

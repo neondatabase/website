@@ -1,24 +1,23 @@
 import PropTypes from 'prop-types';
 
-import BlogPostCard from '../blog-post-card';
-import { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
+import { BlogPostCardPropTypes } from 'components/pages/blog/blog-post-card';
+
+import VideoPreview from './video-preview';
 
 const VideoList = ({ videos }) => (
   <section className="videos flex flex-col">
-    <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-pink-90">
+    <h2 className="flex items-center text-xs font-semibold uppercase leading-none -tracking-extra-tight text-pink-90">
       <span>Video</span>
       <span className="ml-2 h-px grow bg-gray-new-20" />
     </h2>
-    <div className="mt-6 grid grid-cols-3 gap-x-10 2xl:gap-x-6 lg:mt-5 md:grid-cols-1 md:gap-y-10">
+    <div className="mt-6 grid grid-cols-6 gap-5 lg:mt-5 lg:grid-cols-4 md:gap-x-6 md:gap-y-10 sm:grid-cols-2 xs:grid-cols-1">
       {videos.map(({ post }, index) => (
-        <BlogPostCard
+        <VideoPreview
           {...post}
           key={index}
-          size="md"
           withImageHover={false}
           imageWidth={380}
           imageHeight={196}
-          withAuthorPhoto
         />
       ))}
     </div>

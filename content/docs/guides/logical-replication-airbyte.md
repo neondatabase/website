@@ -6,6 +6,8 @@ isDraft: false
 updatedOn: '2024-02-19T18:57:12.556Z'
 ---
 
+<LRNotice/>
+
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 [Airbyte](https://airbyte.com/) is an open-source data integration platform that moves data from a source to a destination system. Airbyte offers a large library of connectors for various data sources and destinations.
@@ -25,7 +27,7 @@ Enabling logical replication modifies the Postgres `wal_level` configuration par
 
 To enable logical replication in Neon:
 
-1. Select your project in the Neon console.
+1. Select your project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Beta**.
 4. Click **Enable** to enable logical replication.

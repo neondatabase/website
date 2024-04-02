@@ -13,7 +13,7 @@ import useClickOutside from 'hooks/use-click-outside';
 import useWindowSize from 'hooks/use-window-size';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
-import { ChatWidgetTrigger } from '../chat-widget';
+import InkeepTrigger from '../inkeep-trigger';
 import { sidebarPropTypes } from '../sidebar/sidebar';
 
 const ANIMATION_DURATION = 0.2;
@@ -119,7 +119,7 @@ const MobileNav = ({ className = null, sidebar, basePath, isPostgres = false }) 
         >
           {!isPostgres && (
             <>
-              <ChatWidgetTrigger className="mb-3.5 mt-2.5 flex" isSidebar />
+              <InkeepTrigger className="mb-3.5 mt-2.5 flex" isSidebar />
               <ul className="mb-7">
                 {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
                   <li className="py-[7px] first:pt-0 last:pb-0" key={index}>

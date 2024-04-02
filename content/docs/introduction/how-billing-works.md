@@ -39,11 +39,11 @@ The [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/pl
 
 |                | Launch   | Scale    |
 |----------------|----------|----------|
+| Extra Storage  | &check;  | &check;  |
 | Extra Compute  | &check;  | &check;  |
 | Extra Projects |          | &check;  |
-| Extra Storage  |          | &check;  |
 
-The Launch plan only supports extra compute usage. If you are on the Launch plan and require extra projects or storage, you must upgrade to the Scale plan, which provides higher storage and project allowances. Once on the Scale plan, you have access to all extra usage types (storage, compute, and project) should you require it.
+The Launch plan does not support extra projects. If you are on the Launch plan and require extra projects, you must upgrade to the Scale plan, which provides higher project allowances.
 
 ## How does extra usage work?
 
@@ -51,11 +51,15 @@ Taking advantage of extra usage requires no user action. Extra usage, if support
 
 ### Storage
 
-Extra storage is available with the [Scale](/docs/introduction/plans##scale) plan. Extra storage is billed in increments of 10 GiB at $15 per increment. For example, the Scale plan includes an allowance of 50 GiB in the plan's monthly fee. If you exceed 50 GiB of storage, you are automatically billed for an extra storage increment of 10 GiB at $15 per increment. If you exceed 60 GiB, you are billed for 2 increments of 10 GiB (an extra $30), and so on. 
+Extra storage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans:
+- On the Launch plan, extra storage is billed for in units of 2 GiB at $3.5 each
+- On the Scale plan, extra storage is billed for in units of 10 GiB at $15 each
+
+For example, the Launch plan includes an allowance of 10 GiB in the plan's monthly fee. If you exceed 10 GiB of storage, you are automatically billed for an extra storage unit of 2 GiB at $3.5 per unit. If you exceed 12 GiB, you are billed for 2 units of 2 GiB (an extra $7), and so on. It works the same way on the Storage plan, but with 10 GiB units of storage at $15 per unit.
 
 ### Compute
 
-Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed by _compute hour_ at $0.04 per hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the billing period, you are billed an extra $4 (100 x $0.04).
+Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed by _compute hour_ at $0.16 per hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the billing period, you are billed an extra $16 (100 x $0.16).
 
 ### Projects
 
@@ -102,16 +106,17 @@ Each [plan](/docs/introduction/plans) comes with base allowances for **Storage**
 
 #### For the Launch plan:
 
-The Launch plan supports extra compute usage. If you need extra storage or projects, you'll need to move up to the Scale plan.
+The Launch plan supports extra **Storage** and **Compute**. If you need extra projects, you'll need to move up to the Scale plan.
 
-- **Extra Compute**: If you exceed 300 compute hours, extra compute is billed at $0.04/hour.
+- **Extra Storage**: If you exceed 10 GiB, extra storage is billed in units of 2 GiB at $3.5 per unit.
+- **Extra Compute**: If you exceed 300 compute hours, extra compute is billed at $0.16/hour.
 
 #### For the Scale plan:
 
 The Scale plan supports extra **Storage**, **Compute**, and **Projects**.
 
 - **Extra Storage**: If you exceed 50 GiB, extra storage is billed in increments of 10 GiB at $15 per increment.
-- **Extra Compute**: If you exceed 750 compute hours, extra compute is billed at $0.04/hour.
+- **Extra Compute**: If you exceed 750 compute hours, extra compute is billed at $0.16/hour.
 - **Extra Projects**: If you exceed 50 projects, extra projects are billed in units of 10 projects at $50 per unit.
 
 ### Step 5: Total monthly estimate
@@ -125,10 +130,12 @@ Total Monthly Estimate = Monthly Base Fee + Extra Storage Fee + Extra Compute Fe
 **Launch plan example**:
 
 - Base fee: $19
+- Storage usage: 14 GiB (4 GiB over the allowance)
 - Compute usage: 350 hours (50 hours over the allowance)
-- Extra compute fee: 50 hours * $0.04 = $2
+- Extra storage fee: 2 * $3.5 = $7
+- Extra compute fee: 50 hours * $0.16 = $8
 
-_Total estimate_: $19 + $2 = $21 per month
+_Total estimate_: $19 + $7 + $8 = $34 per month
 
 **Scale plan example**:
 
@@ -137,10 +144,10 @@ _Total estimate_: $19 + $2 = $21 per month
 - Compute usage: 800 hours (50 hours over the allowance)
 - Project usage: 55 projects (5 projects over the allowance)
 - Extra storage fee: 1 * $15 = $15
-- Extra compute fee: 50 * $0.04 = $2
+- Extra compute fee: 50 * $0.16 = $8
 - Extra project fee: 1 * $50 = $50
 
-_Total estimate_: $69 + $15 + $2 + $50 = $136 per month
+_Total estimate_: $69 + $15 + $8 + $50 = $142 per month
 
 <Admonition type="note" title="Notes">
 - Adjust your usage estimates as needed to reflect your actual or projected usage.

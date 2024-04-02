@@ -28,7 +28,7 @@ Copy the hostname. In the example above, the hostname is this part of the connec
  ep-raspy-cherry-95040071.us-east-2.aws.neon.tech
  ```
 
-Also, make note of the user, password, and database name. You will need those details when you configure a connection from your  application to PolyScale.
+Also, make note of the user, password, and database name. You will need those details when you configure a connection from your application to PolyScale.
 
 ## Create a PolyScale cache
 
@@ -44,6 +44,10 @@ If you already have a PolyScale account, click the **New Cache** button in the u
 ![Create a PolyScale cache](/docs/guides/polyscale_create_cache.png)
 4. Click **Create**. PolyScale creates a cache for your Neon database and provides a new **Connection URI** to use in your application in place of the Neon connection string. Simply replace `[USERNAME]`, `[PASSWORD]`, and `[DATABASE]` with the values from your Neon connection string.
 ![Create a PolyScale cache](/docs/guides/polyscale_success.png)
+
+    <Admonition type="note">
+    The [Neon serverless driver](/docs/serverless/serverless-driver) is not compatible with a PolyScale integration, as it only supports a direct connection to a Neon database. Use a standard Postgres driver such as `node-postgres` instead.
+    </Admonition>
 
 After queries from your application start passing through PolyScale, you can monitor traffic and caching behavior on the **Observability** tab in PolyScale. For more information, see [Observability](https://docs.polyscale.ai/database-observability/), in the _PolyScale documentation_.
 

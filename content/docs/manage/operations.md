@@ -38,6 +38,8 @@ Operation details include:
 - **Duration**: The duration of the operation.
 - **Date**: The date and time the operation occurred.
 
+Possible **Status** values are `OK`, `Scheduling`, `In progress`, and `Error`.
+
 </TabItem>
 
 <TabItem>

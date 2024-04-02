@@ -5,13 +5,11 @@ import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
+import InfoIcon from 'components/shared/info-icon';
 import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import checkIcon from 'icons/pricing/check.svg';
-import tooltipHoveredSvg from 'icons/tooltip-hovered.svg';
-import tooltipSvg from 'icons/tooltip.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
-import sendSegmentEvent from 'utils/send-segment-event';
 
 import tableData from '../data/plans.json';
 
@@ -71,10 +69,6 @@ const TableHeading = ({
         to={buttonUrl}
         onClick={() => {
           sendGtagEvent('partner_comparison_table', {
-            event_label: label,
-            event_position: 'top',
-          });
-          sendSegmentEvent('partner_comparison_table', {
             event_label: label,
             event_position: 'top',
           });
@@ -277,39 +271,14 @@ const Table = () => {
                       )}
                       {typeof item[key] === 'object' && (
                         <div className="flex flex-col items-start justify-start">
-                          <div className="group relative inline-flex items-center justify-start">
+                          <div className="relative inline-flex items-center justify-start">
                             <span>{item[key].label}</span>
                             {item[key].tooltip && (
-                              <>
-                                <span
-                                  data-tooltip-id={`${key}_tooltip_${index}`}
-                                  data-tooltip-html={item[key]?.tooltip}
-                                >
-                                  <img
-                                    className="ml-1.5 transition-opacity duration-200 group-hover:opacity-0"
-                                    src={tooltipSvg}
-                                    width={14}
-                                    height={14}
-                                    alt=""
-                                    loading="lazy"
-                                  />
-                                  <img
-                                    className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                                    src={tooltipHoveredSvg}
-                                    width={14}
-                                    height={14}
-                                    alt=""
-                                    loading="lazy"
-                                  />
-                                </span>
-                                <Tooltip
-                                  className="z-30"
-                                  arrowColor="#303236"
-                                  id={`${key}_tooltip_${index}`}
-                                  place="right"
-                                  style={{ backgroundColor: '#303236', color: '#fff' }}
-                                />
-                              </>
+                              <InfoIcon
+                                className="ml-1.5"
+                                tooltip={item[key].tooltip}
+                                tooltipId={`${key}_tooltip_${index}`}
+                              />
                             )}
                           </div>
                           <span className="mt-1 text-sm tracking-extra-tight text-gray-new-60">

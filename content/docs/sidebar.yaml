@@ -42,6 +42,8 @@
           slug: introduction/manage-billing
         - title: Sample billing
           slug: introduction/billing-sample
+        - title: AWS Marketplace
+          slug: introduction/billing-aws-marketplace
     - title: Support
       slug: introduction/support
     - title: Status
@@ -125,8 +127,6 @@
           items:
             - title: Branch Restore
               slug: guides/branch-restore
-            - title: Branching — Point-in-time restore
-              slug: guides/branching-pitr
             - title: Branching — Testing queries
               slug: guides/branching-test-queries
             - title: Branching with the CLI
@@ -135,8 +135,6 @@
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
-            - title: Refresh a branch with the Neon API
-              slug: guides/branch-refresh
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
         - title: Logical replication
@@ -225,18 +223,34 @@
           slug: guides/wundergraph
     - title: Schema migration
       items:
+        - title: Django
+          slug: guides/django-migrations
+        - title: Drizzle
+          slug: guides/drizzle-migrations
+        - title: Entity Framework
+          slug: guides/entity-migrations
         - title: Flyway
           items:
             - title: Get started
               slug: guides/flyway
             - title: Manage multiple environments
               slug: guides/flyway-multiple-environments
+        - title: Laravel
+          slug: guides/laravel-migrations
         - title: Liquibase
           items:
             - title: Get started
               slug: guides/liquibase
             - title: Developer workflow
               slug: guides/liquibase-workflow
+        - title: Prisma
+          slug: guides/prisma-migrations
+        - title: Rails
+          slug: guides/rails-migrations
+        - title: Sequelize
+          slug: guides/sequelize
+        - title: SQLAlchemy
+          slug: guides/sqlalchemy-migrations
     - title: Serverless
       items:
         - title: Neon serverless driver
@@ -245,6 +259,8 @@
           slug: guides/aws-lambda
     - title: Caching
       items:
+        - title: Cloudflare Hyperdrive
+          slug: guides/cloudflare-hyperdrive
         - title: PolyScale integration
           slug: guides/polyscale-integration
         - title: PolyScale manual setup
@@ -253,8 +269,6 @@
       items:
         - title: Cloudflare
           items:
-            - title: Cloudflare Hyperdrive
-              slug: guides/cloudflare-hyperdrive
             - title: Cloudflare Pages
               slug: guides/cloudflare-pages
             - title: Cloudflare Workers
@@ -301,8 +315,10 @@
         - title: Google Colab
           slug: ai/ai-google-colab
 - title: Postgres
+  slug: postgres/postgres-intro
   items:
     - title: Data types
+      slug: postgres/data-types-intro
       items:
         - title: Array
           slug: data-types/array
@@ -323,6 +339,7 @@
         - title: UUID
           slug: data-types/uuid
     - title: Extensions
+      slug: extensions/extensions-intro
       items:
         - title: Supported extensions
           slug: extensions/pg-extensions
@@ -349,6 +366,7 @@
         - title: timescaledb
           slug: extensions/timescaledb
     - title: Functions
+      slug: postgres/functions-intro
       items:
         - title: array_to_json
           slug: functions/array_to_json
@@ -384,6 +402,10 @@
           slug: functions/json_to_record
         - title: jsonb_to_record
           slug: functions/jsonb_to_record
+    - title: Optimize queries
+      slug: postgres/query-performance
+    - title: Query reference
+      slug: postgres/query-reference
     - title: Compatibility
       slug: reference/compatibility
 - title: Import data
@@ -399,6 +421,8 @@
       slug: import/import-from-heroku
     - title: Migrate data with AWS DMS
       slug: import/migrate-aws-dms
+    - title: Migrate from MySQL to Postgres
+      slug: import/migrate-mysql
     - title: Sample data
       slug: import/import-sample-data
 - title: Security
