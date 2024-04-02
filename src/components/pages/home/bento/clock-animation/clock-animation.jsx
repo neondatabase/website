@@ -176,7 +176,6 @@ const ClockAnimation = ({
 
       if (isVisible) {
         rive.play();
-        resetAnimation();
       } else {
         rive.pause();
       }
@@ -237,7 +236,7 @@ const ClockAnimation = ({
       indicatorInput.value = isDayTime;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rive, indicatorInput, minutes, isDayTime, isVisible]
+    [rive, minutes, isDayTime, isVisible]
   );
 
   return (
