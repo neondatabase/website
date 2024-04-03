@@ -50,6 +50,15 @@
       slug: introduction/status
     - title: Monitoring
       slug: introduction/monitoring
+      items:
+        - title: Monitoring dashboard
+          slug: introduction/monitoring-page
+        - title: Usage
+          slug: introduction/monitor-usage
+        - title: Postgres statistics
+          slug: introduction/monitor-postgres-stats
+        - title: External monitoring tools
+          slug: introduction/monitor-external-tools
 - title: Get started
   items:
     - title: Sign up
