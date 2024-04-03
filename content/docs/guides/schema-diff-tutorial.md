@@ -114,7 +114,7 @@ CREATE TABLE address (
 );
 ```
 
-## Step 4: Visualize the schema differences
+## Step 4: View the schema differences
 
 From the Neon Console, go to the **Restore** page. The Schema Diff tool is meant to assist you with restoring branches and is built into the Time Travel assist editor. Just like with Time Travel assist, your first step is to choose a target and source branch:
 
