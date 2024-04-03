@@ -233,7 +233,7 @@ CREATE TABLE address (
 </TabItem>
 </Tabs>
 
-## Step 4: Visualize the schema differences
+## Step 4: View the schema differences
 
 Now that you have some differences between your branches, from the Neon Console go to the **Branches** page.
 
