@@ -17,20 +17,12 @@ const useCurrentTime = () => {
     minutes: new Date().getMinutes(),
   });
 
-  const updateTime = (minutesAdjustment) => {
-    if (minutesAdjustment === undefined) {
-      const currentTime = new Date();
-      setTime({
-        hours: currentTime.getHours(),
-        minutes: currentTime.getMinutes(),
-      });
-    } else {
-      const updatedTime = new Date(new Date().getTime() - minutesAdjustment * 60000);
-      setTime({
-        hours: updatedTime.getHours(),
-        minutes: updatedTime.getMinutes(),
-      });
-    }
+  const updateTime = (minutesAdjustment = 0) => {
+    const updatedTime = new Date(new Date().getTime() - minutesAdjustment * 60000);
+    setTime({
+      hours: updatedTime.getHours(),
+      minutes: updatedTime.getMinutes(),
+    });
   };
 
   return [time, updateTime];
@@ -121,7 +113,7 @@ const ClockAnimation = ({
   let animationFrameId;
   let timeoutIds = [];
 
-  const resetAnimation = () => {
+  const resetAnimation = (resetTime) => {
     if (!resetCountDownInput) return;
     resetCountDownInput.fire();
     if (animationFrameId) {
@@ -129,10 +121,12 @@ const ClockAnimation = ({
     }
     timeoutIds.forEach(clearTimeout);
     timeoutIds = [];
-    updateTime();
+    if (resetTime) {
+      updateTime();
+    }
   };
 
-  const countDownAnimation = () => {
+  const countDownAnimation = (minutesAdjustment = 0) => {
     if (!countDownInput) return;
     resetAnimation();
     countDownInput.fire();
@@ -145,21 +139,27 @@ const ClockAnimation = ({
         const timeElapsed = now - startTime;
         const progress = timeElapsed / COUNTDOWN_DURATION;
         const speedAdjustment = progress > 0.55 ? (progress * 2.5) ** 8 : (progress * 2) ** 7;
-        updateTime(speedAdjustment * 3);
+        updateTime(minutesAdjustment + speedAdjustment * 3);
         if (now < endTime) {
           animationFrameId = requestAnimationFrame(step);
         } else {
           timeoutIds.push(
-            setTimeout(() => updateTime(MINUTES_DOWN_RESULT - 3), DELAY_AFTER_COUNTDOWN)
-          );
-          timeoutIds.push(
-            setTimeout(() => updateTime(MINUTES_DOWN_RESULT - 2), DELAY_AFTER_COUNTDOWN + 500)
-          );
-          timeoutIds.push(
-            setTimeout(() => updateTime(MINUTES_DOWN_RESULT - 1), DELAY_AFTER_COUNTDOWN + 900)
-          );
-          timeoutIds.push(
-            setTimeout(() => updateTime(MINUTES_DOWN_RESULT), DELAY_AFTER_COUNTDOWN + 1200)
+            setTimeout(
+              () => updateTime(minutesAdjustment + MINUTES_DOWN_RESULT - 3),
+              DELAY_AFTER_COUNTDOWN
+            ),
+            setTimeout(
+              () => updateTime(minutesAdjustment + MINUTES_DOWN_RESULT - 2),
+              DELAY_AFTER_COUNTDOWN + 500
+            ),
+            setTimeout(
+              () => updateTime(minutesAdjustment + MINUTES_DOWN_RESULT - 1),
+              DELAY_AFTER_COUNTDOWN + 900
+            ),
+            setTimeout(
+              () => updateTime(minutesAdjustment + MINUTES_DOWN_RESULT),
+              DELAY_AFTER_COUNTDOWN + 1200
+            )
           );
         }
       };
@@ -193,17 +193,19 @@ const ClockAnimation = ({
       let intervalId = null;
 
       if (!isThresholded) {
-        resetAnimation();
+        resetAnimation(true);
       } else {
         timeoutId = setTimeout(countDownAnimation, 2000);
+        let i = 0;
         intervalId = setInterval(() => {
+          i++;
           resetAnimation();
-          setTimeout(countDownAnimation, 2000);
+          setTimeout(() => countDownAnimation(i * MINUTES_DOWN_RESULT), 2000);
         }, 20000);
       }
 
       return () => {
-        resetAnimation();
+        resetAnimation(true);
         if (timeoutId) {
           clearTimeout(timeoutId);
         }
@@ -216,16 +218,10 @@ const ClockAnimation = ({
     [rive, countDownInput, resetCountDownInput, isThresholded]
   );
 
+  // timer control
   useEffect(
     () => {
-      if (
-        !rive ||
-        !hourOnesInput ||
-        !hourTensInput ||
-        !minuteOnesInput ||
-        !minuteTensInput ||
-        !indicatorInput
-      ) {
+      if (!rive || !hourOnesInput || !hourTensInput || !minuteOnesInput || !minuteTensInput) {
         return;
       }
 
@@ -233,10 +229,22 @@ const ClockAnimation = ({
       hourOnesInput.value = hours % 10;
       minuteTensInput.value = Math.floor(minutes / 10);
       minuteOnesInput.value = minutes % 10;
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [rive, minutes, isVisible]
+  );
+
+  // day/night indicator
+  useEffect(
+    () => {
+      if (!rive || !indicatorInput) {
+        return;
+      }
+
       indicatorInput.value = isDayTime;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rive, minutes, isDayTime, isVisible]
+    [rive, isDayTime]
   );
 
   return (
