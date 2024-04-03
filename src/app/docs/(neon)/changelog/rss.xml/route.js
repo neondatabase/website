@@ -33,11 +33,11 @@ export async function GET() {
     const category = slug.slice(slug.lastIndexOf('-') + 1);
     const capitalisedCategory = category.charAt(0).toUpperCase() + category.slice(1);
 
-    const { datetime } = getChangelogDateFromSlug(slug);
+    const { label, datetime } = getChangelogDateFromSlug(slug);
 
     feed.item({
       id: url,
-      title: `${capitalisedCategory} release`,
+      title: `${capitalisedCategory} release - ${label}`,
       url,
       guid: url,
       date: new Date(datetime),

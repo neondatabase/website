@@ -3,8 +3,10 @@ title: Replicate data with Airbyte
 subtitle: Learn how to replicate data from Neon with Airbyte
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-08T15:20:54.284Z'
+updatedOn: '2024-02-19T18:57:12.556Z'
 ---
+
+<LRNotice/>
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
@@ -25,8 +27,8 @@ Enabling logical replication modifies the Postgres `wal_level` configuration par
 
 To enable logical replication in Neon:
 
-1. Select your project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
+1. Select your project in the Neon Console.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Beta**.
 4. Click **Enable** to enable logical replication.
 
@@ -112,6 +114,10 @@ SELECT pg_create_logical_replication_slot('airbyte_slot', 'pgoutput');
 ```
 
 `airbyte_slot` is the name assigned to the replication slot. You will need to provide this name when you set up your Airbyte source.
+
+<Admonition type="important">
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
+</Admonition>
 
 ## Create a publication
 

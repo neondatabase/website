@@ -1,5 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 const defaultTheme = require('tailwindcss/defaultTheme');
+/* eslint-disable import/no-extraneous-dependencies, global-require */
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   darkMode: 'class',
@@ -145,6 +147,8 @@ module.exports = {
           'radial-gradient(100% 2244.95% at 100% 100%, #262626 0%, rgba(38, 38, 38, 0.1) 63.96%);',
         'subscribe-sm':
           'linear-gradient(160deg, rgba(173, 224, 235, 0.00) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0.00) 77%);',
+        'pricing-table-featured-column':
+          'linear-gradient(180deg, rgba(19, 20, 21, 0.40) 92.77%, rgba(19, 20, 21, 0.00) 100%);',
       }),
       keyframes: (theme) => ({
         'text-blink': {
@@ -218,6 +222,10 @@ module.exports = {
             transform: 'translateY(-2%) scale(.96)',
           },
         },
+        inkeepLoading: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
       }),
       animation: {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -226,6 +234,7 @@ module.exports = {
         'dialog-show': 'dialogShow 0.3s cubic-bezier(.16,1,.3,1)',
         'dialog-hide': 'dialogHide 0.3s cubic-bezier(.16,1,.3,1)',
         loading: 'loading 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'inkeep-portal-fade-in': 'inkeepLoading .3s ease forwards 0.15s',
       },
       typography: () => ({
         DEFAULT: {
@@ -247,6 +256,20 @@ module.exports = {
     require('@headlessui/tailwindcss'),
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
+    }),
+
+    plugin(({ matchUtilities, theme }) => {
+      matchUtilities(
+        {
+          'border-image': (value) => ({
+            border: '1px solid transparent',
+            background: `${value.replaceAll(/(, ?[a-z]+-gradient)/g, ' border-box$1')} border-box`,
+            mask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
+            maskComposite: 'exclude',
+          }),
+        },
+        { values: theme('backgroundImage') }
+      );
     }),
   ],
 };

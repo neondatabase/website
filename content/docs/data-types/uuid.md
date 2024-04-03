@@ -1,6 +1,6 @@
 ---
 title: Postgres UUID data type
-subtitle: Working with UUIDs in Postgres
+subtitle: Work with UUIDs in Postgres
 enableTableOfContents: true
 updatedOn: '2024-01-28T13:46:59.385Z'
 ---

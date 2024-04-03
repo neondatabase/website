@@ -4,16 +4,18 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-02-08T20:07:48.875Z'
+updatedOn: '2024-02-27T14:37:51.437Z'
 ---
 
 ## Access token
 
 See [Token](#token).
 
-## Active time
+## Active hours
 
-The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [autosuspend](#autosuspend-compute). The [Neon Free Tier](/docs/introduction/free-tier) has an [Active time](/docs/reference/glossary#active-time) limit of 100 hours per month, but that limit only affects non-primary branch compute usage. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. The primary branch compute always remains available regardless of the limit, ensuring that access to data on the primary branch is never interrupted. Neon Free Tier users can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**. The _Active time_ limit resets at the beginning of each month. For instance, if you enroll in the Neon Free Tier on January 15th, your _Active time_ limit will reset on February 1st.
+A usage metric that tracks the amount of time a compute is active, rather than idle when suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
+
+Also see [Compute hours](#compute-hours).
 
 ## Activity Monitor
 
@@ -33,7 +35,7 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 ## Autosuspend compute
 
-A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Neon Pro Plan users can configure the _Autosuspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable autosuspend completely to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Users on paid plans can configure the _Autosuspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable autosuspend completely to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
 ## autoscaler-agent
 
@@ -71,7 +73,7 @@ Continuous integration and continuous delivery or continuous deployment.
 
 ## CIDR notation
 
-CIDR (Classless Inter-Domain Routing) notation is a method used to define ranges of IP addresses in network management. It is presented in the format of an IP address, followed by a slash, and then a number (e.g., 192.168.1.0/24). The number after the slash represents the size of the address block, providing a compact way to specify a large range of IP addresses. In Neon's IP Allow feature, CIDR notation allows for efficiently specifying a block of IP addresses, especially useful for larger networks or subnets. This can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network. For related information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+CIDR (Classless Inter-Domain Routing) notation is a method used to define ranges of IP addresses in network management. It is presented in the format of an IP address, followed by a slash, and then a number (e.g., 203.0.113.0/24). The number after the slash represents the size of the address block, providing a compact way to specify a large range of IP addresses. In Neon's IP Allow feature, CIDR notation allows for efficiently specifying a block of IP addresses, especially useful for larger networks or subnets. This can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network. For related information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
 ## cgroups
 
@@ -103,15 +105,38 @@ Connection strings for a Neon databases can be obtained from the **Connection De
 
 ## Compute size
 
-The number of Compute Units (CU) assigned to a Neon compute. One CU is defined as having 1 vCPU with 4 GB of RAM. A Neon compute can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of the compute.
+The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can have anywhere from .25 to 8 CU. The number of units determines the processing capacity of the compute.
 
 ## Compute Unit (CU)
 
-A unit that measures the processing power of a Neon compute. A Neon compute can have anywhere from .25 CUs to 7 CUs.
+A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 8 CUs. The following table shows the vCPU and RAM for each CU:
 
-## Compute time
+| Compute Unit (CU)  | vCPU | RAM    |
+|:--------------|:-----|:-------|
+| .25           | .25  | 1 GB   |
+| .5            | .5   | 2 GB   |
+| 1             | 1    | 4 GB   |
+| 2             | 2    | 8 GB   |
+| 3             | 3    | 12 GB  |
+| 4             | 4    | 16 GB  |
+| 5             | 5    | 20 GB  |
+| 6             | 6    | 24 GB  |
+| 7             | 7    | 28 GB  |
+| 8             | 8    | 32 GB  |
 
-A billing metric that measures the amount of computing capacity used within a given billing period. See [Compute time](/docs/introduction/billing#comput-time).
+## Compute hours
+
+A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+
+To calculate compute hour usage, you would use the following formula:
+
+```
+compute hours = active hours x compute size
+```
+
+For more information, see [Compute](/docs/introduction/usage-metrics#compute).
+
+Also see [Active hours](#active-hours).
 
 ## Console
 
@@ -139,7 +164,7 @@ A method of storing inactive data that converts plaintext data into a coded form
 
 ## Data transfer
 
-A billing metric that measures the total volume of data transferred out of Neon (known as "egress") during a given billing period. See [Data transfer](/docs/introduction/billing#data-transfer).
+A usage metric that measures the total volume of data transferred out of Neon (known as "egress") during a given billing period.
 
 ## Database
 
@@ -177,9 +202,13 @@ A custom volume-based paid plan offered by Neon. See [Neon plans](/docs/introduc
 
 See [Neon Free Tier](#neon-free-tier).
 
+## History
+
+The history of data changes for all branches in your Neon project. A history is maintained to support _point-in-time restore_. For more information, see [Storage details](/docs/introduction/usage-metrics#storage-details).
+
 ## IP allowlist
 
-An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a [Neon Pro Plan](/docs/introduction/pro-plan) feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [primary branch](#primary-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
+An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a Scale plan feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [primary branch](#primary-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
 
 ## Kubernetes
 
@@ -207,7 +236,7 @@ A feature provided by some hypervisors, such as QEMU, that allows the transfer o
 
 ## Local File Cache
 
-A layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute instance. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly.
+The Local File Cache (LFC) is a layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute instance. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly. The LFC acts as an add-on or extension of Postgres [shared buffers](#shared-buffers). In Neon the `shared_buffers` setting is always 128 MB, regardless of compute size. The LFC extends cache memory up to 80% of your compute's RAM.
 
 ### Logical data size
 
@@ -239,11 +268,7 @@ A browser-based graphical interface for managing Neon projects and resources.
 
 ## Neon Free Tier
 
-A Neon service tier for which there are no usage charges. For information about the Neon Free Tier and associated limits, see [Neon Free Tier](/docs/introduction/free-tier).
-
-## Neon Pro Plan
-
-A usage-based paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
+A Neon service tier for which there are no usage charges. For information about the Neon Free Tier and associated limits, see [Neon Free Tier](/docs/introduction/plans#free-tier).
 
 ## Neon user
 
@@ -267,7 +292,7 @@ An 8KB unit of data, which is the smallest unit that Postgres uses for storing r
 
 ## Pageserver
 
-A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined history retention period. Neon retains a history for all branches. The default history retention period is 7 days.
+A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined history retention period. Neon retains a history for all branches.
 
 The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. After a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
 
@@ -281,7 +306,19 @@ A custom volume-based paid plan offered by Neon that includes support for resale
 
 ## Point-in-time restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. By default, Neon retains a 7-day history of changes for all branches in a project. The supported range is 0 to 7 days for [Neon Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Neon Pro Plan](/docs/introduction/pro-plan) users. For more information about this feature, see [Branching — Point-in-time restore](https://neon.tech/docs/guides/branching-pitr).
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. By default, Neon retains a history of changes for all branches in a project. The supported limits are 24 hours for [Neon Free Tier](/docs/introduction/plans#free-tier) users, 7 days for [Launch](/docs/introduction/plans#launch) plan users, and 30 days for [Scale](/docs/introduction/plans#scale) plan users. For more information about this feature, see [Branching — Point-in-time restore](https://neon.tech/docs/guides/branching-pitr).
+
+## pooled connection string
+
+A pooled connection string in Neon includes a `-pooler` option, which directs your connection to a pooled connection port at the Neon Proxy. This is an example of a pooled connection:
+
+```text
+postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
+```
+
+A pooled connection can support a high number of concurrent users and is recommended for use with serverless and edge functions. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+
+You can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Select the **Pooled connection** option to add the `-pooler` option to the connection string. For further instructions, see [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling).
 
 ## PostgreSQL
 
@@ -297,10 +334,6 @@ Older projects may have a `web-access` system role, used by the [SQL Editor](#sq
 
 Each Neon project is created with a root branch called `main`, which is designated as your project's primary branch by default. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
 
-### Pro Plan
-
-See [Neon Pro Plan](#neon-pro-plan).
-
 ## Project
 
 A collection of branches, databases, roles, and other project resources and settings. A project contains a compute with a Postgres server and storage for the project data.
@@ -311,7 +344,7 @@ A feature that allows you to share Neon projects with other Neon users. See [Sha
 
 ## Project storage
 
-The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Project storage](/docs/introduction/billing#project-storage).
+The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Storage](/docs/introduction/usage-metrics#storage).
 
 ## Proxy
 
@@ -357,6 +390,10 @@ Scale-to-zero refers to Neon's Autosuspend feature, which places a compute endpo
 
 A cloud-based development model that enables developing and running applications without having to manage servers.
 
+## shared buffers
+
+A memory area in Postgres for caching blocks of data from storage (disk on standalone Postgres or Pageservers in Neon). This cache enhances the performance of database operations by reducing the need to access the slower storage for frequently accessed data. Neon uses a [Local File Cache (LFC)](#local-file-cache), which acts as an add-on or extension of shared buffers. In Neon the `shared_buffers` setting is always 128 MB, regardless of compute size. The LFC extends cache memory up to 80% of your compute's RAM. For additional information about shared buffers in Postgres, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html), in the Postgres documentation.
+
 ## SNI
 
 Server Name Indication. A TLS protocol extension that allows a client or browser to indicate which hostname it wants to connect to at the beginning of a TLS handshake.
@@ -372,6 +409,8 @@ A Neon Control Plane operation that starts a compute endpoint when there is an e
 ## Storage
 
 Where data is recorded and stored. Neon storage consists of Pageservers, which store hot data, and a cloud object store, such as Amazon S3, that stores cold data for cost optimization and durability.
+
+Also, a usage metric that tracks the total volume of data and [history](#history) stored in Neon. For more information, see [Storage](/docs/introduction/usage-metrics#storage).
 
 ## Subscriber
 
@@ -393,9 +432,15 @@ Neon is currently in Technical Preview, meaning that some intended core function
 
 An encrypted access token that enables you to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Manage API keys](/docs/manage/api-keys).
 
-## tmpfs
+## unpooled connection string
 
-A temporary file storage system that uses a portion of a system's RAM to store files, improving performance by reducing disk usage.
+An unpooled connection string connects to your Neon database directly. It does not use [connection pooling](#connection-pooling), and it looks similar to this:
+
+```text
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+```
+
+You can obtain an unpooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Ensure that the **Pooled connection** option is **not** selected. A direct connection is subject to the `max_connections` limit for your compute. For more information, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 ## User
 
@@ -441,4 +486,4 @@ In logical replication, the WAL records all changes to the data, serving as the 
 
 ## Written data
 
-A billing metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiB). Writing data from compute to storage ensures the durability and integrity of your data. See [Written data](/docs/introduction/billing#written-data).
+A usage metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiB). Writing data from compute to storage ensures the durability and integrity of your data.

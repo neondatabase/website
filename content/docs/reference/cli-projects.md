@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-01-19T14:15:57.931Z'
+updatedOn: '2024-02-27T14:37:51.437Z'
 ---
 
 ## Before you begin
@@ -67,7 +67,7 @@ neonctl projects list
 
 This subcommand allows you to create a Neon project.
 
-The [Neon Free Tier](../introduction/free-tier) supports creating a single project. The [Neon Pro Plan](../introduction/pro-plan) allows creating multiple projects.
+The [Neon Free Tier](../introduction/free-tier) supports creating a single project. Paid plans allow multiple projects.
 
 #### Usage
 
@@ -200,7 +200,7 @@ This subcommand allows you to update a Neon project.
 neonctl projects update <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
 
 #### Options
 
@@ -229,7 +229,7 @@ neonctl projects update muddy-wood-859533 --name dev_project_1
 Update the IP allowlist. Multiple values are specified as a list without a delimiter.
 
 ```bash
-neonctl projects update withered-dream-91802149 --ip-allow 192.168.1.1 192.168.1.2 
+neonctl projects update withered-dream-91802149 --ip-allow 192.0.2.1 192.0.2.2 
 ┌─────────────────────────┬───────────┬───────────────┬──────────────────────┐
 │ Id                      │ Name      │ Region Id     │ Created At           │
 ├─────────────────────────┼───────────┼───────────────┼──────────────────────┤
@@ -256,7 +256,7 @@ This subcommand allows you to delete a Neon project.
 neonctl projects delete <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
 
 #### Options
 
@@ -285,7 +285,7 @@ This subcommand allows you to retrieve details about a Neon project.
 neonctl projects get <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
 
 #### Options
 

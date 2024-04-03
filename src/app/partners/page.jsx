@@ -1,8 +1,10 @@
 import Apply from 'components/pages/partners/apply';
+import Collaboration from 'components/pages/partners/collaboration';
 import Hero from 'components/pages/partners/hero';
 import Integration from 'components/pages/partners/integration';
-import Logos from 'components/pages/partners/logos';
+import Plans from 'components/pages/partners/plans';
 import Layout from 'components/shared/layout';
+import Logos from 'components/shared/logos';
 import SplitViewGrid from 'components/shared/split-view-grid';
 import Testimonial from 'components/shared/testimonial';
 import SEO_DATA from 'constants/seo-data';
@@ -48,12 +50,11 @@ const logos = [
   'illa',
   'octolis',
   'cloudflare',
-  'airplane',
   'wundergraph',
   'fabric-io',
   'snaplet',
   'fl0',
-  'dynaboard',
+  'encore',
 ];
 
 const PartnersPage = () => (
@@ -67,13 +68,15 @@ const PartnersPage = () => (
     <Hero />
     <Logos logos={logos} withGreenFade />
     <SplitViewGrid
-      className="mt-[136px] xl:mt-[104px] lg:mt-20 md:mt-16"
+      className="mt-36 xl:mt-[104px] lg:mt-20 md:mt-16"
       label="Benefits"
       title="Why become a partner?"
       description="At Neon, we deeply value our partners and believe they are vital to our mission of
             making Serverless Postgres the go-to choice for developers everywhere."
       items={items}
+      isGradientLabel
     />
+    <Collaboration />
     <Testimonial
       className="mt-[200px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
       quote="By partnering with Neon, Vercel’s frontend platform is now the end&#8209;to&#8209;end
@@ -81,6 +84,7 @@ const PartnersPage = () => (
       name="Guillermo Rauch"
       position="CEO of Vercel"
     />
+    <Plans className="my-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
     <Integration />
     <Apply />
   </Layout>

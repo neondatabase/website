@@ -72,7 +72,7 @@ To create a branch:
 
 ## Retrieve your Neon database connection strings
 
-From the [Neon console](https://console.neon.tech/app/projects), select your project and retrieve connection strings for your target and source databases from the **Connection Details** widget on the Neon **Dashboard**.
+From the [Neon Console](https://console.neon.tech/app/projects), select your project and retrieve connection strings for your target and source databases from the **Connection Details** widget on the Neon **Dashboard**.
 
 <Admonition type="note">
 The target database is the database on your `dev1` branch where you will will do your development work. Your source database is where you will apply your schema changes later, once you are satisfied with the changes on your development branch.
@@ -257,7 +257,7 @@ When you run a changeset for the first time, Liquibase automatically creates two
 - [databasechangelog](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html): Tracks which changesets have been run.
 - [databasechangeloglock](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html): Ensures only one instance of Liquibase runs at a time.
 
-You can verify these tables were created by viewing the `blog` database on your `dev1` branch on the **Tables** page in the Neon console. Select **Tables** from the sidebar.
+You can verify these tables were created by viewing the `blog` database on your `dev1` branch on the **Tables** page in the Neon Console. Select **Tables** from the sidebar.
 </Admonition>
 
 At this point, you can continue to iterate, applying schema changes to your database, until you are satisfied with the modified schema.
@@ -448,7 +448,7 @@ Liquibase command 'update' was executed successfully.
 
 </details>
 
-To ensure that all changes have been applied to the production database, you can rerun the `status`, `updatedSql`, and `diff` commands you ran above. After applying the change, there should be no differences. You can also check your databases in the **Tables** view in the Neon console to verify that the source database now has a `comments` table.
+To ensure that all changes have been applied to the production database, you can rerun the `status`, `updatedSql`, and `diff` commands you ran above. After applying the change, there should be no differences. You can also check your databases in the **Tables** view in the Neon Console to verify that the source database now has a `comments` table.
 
 <Admonition type="note">
 When you run a changeset for the first time on the source database, you will find that Liquibase automatically creates the [databasechangelog](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html) and [databasechangeloglock](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html) tracking tables that were created in your development database. These tracking tables are created on any database where you apply changesets.

@@ -126,7 +126,7 @@ code .
    // Add your neon datasource
    const neon = introspect.postgresql({
      apiNamespace: 'neon',
-     //Your database URL can be found in the Neon console
+     //Your database URL can be found in the Neon Console
      databaseURL: new EnvironmentVariable('NEON_DATABASE_URL'),
    });
 

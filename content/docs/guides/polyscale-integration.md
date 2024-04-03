@@ -5,11 +5,11 @@ enableTableOfContents: true
 updatedOn: '2023-12-04T18:49:23.387Z'
 ---
 
-[PolyScale](https://docs.polyscale.ai/) allows you to easily cache your data globally through its low-latency [regional edge network](https://docs.polyscale.ai/edge-network-and-security/#regional-edge-network). Enjoy benefits like speedy accces to your data from anywhere in the world, reduced load on your database, and improved slow query performance. A PolyScale global cache is also an alternative to cross-regional replication without the added complexity. No coding or infrastructure changes are required to use PolyScale. You can have it up and running in just a few minutes.
+With [PolyScale](https://docs.polyscale.ai/) you can easily cache your data globally through its low-latency [regional edge network](https://docs.polyscale.ai/edge-network-and-security/#regional-edge-network). Enjoy benefits like speedy access to your data from anywhere in the world, reduced load on your database, and improved slow query performance. A PolyScale global cache is also an alternative to cross-regional replication without the added complexity. No coding or infrastructure changes are required to use PolyScale. You can have it up and running in just a few minutes.
 
 Adding the PolyScale integration to a Neon project automatically creates a global cache and provides you with a PolyScale connection string, which you can use in your application as a direct replacement for your Neon connection string.
 
-By default, PolyScale automatically caches all queries that pass through its platform. This means that when you connect through PolyScale, any queries you run will be automatically cached. Requests are routed to the closest Point Of Presence (POP) location where your query results are  cached for low latency access.
+By default, PolyScale automatically caches all queries that pass through its platform. This means that when you connect through PolyScale, any queries you run will be automatically cached. Requests are routed to the closest Point Of Presence (POP) location where your query results are cached for low latency access.
 
 <Admonition type="note">
 The PolyScale integration creates a cache for the read-write compute endpoint associated with the [primary branch](/docs/manage/branches#primary-branch) of your Neon project. It does not cache queries for read-only compute endpoints ([read replicas](/docs/introduction/read-replicas)) or [non-primary branches](/docs/manage/branches#non-primary-branch). If you want to set up a cache for those, please refer to the [manual PolyScale setup instructions](/docs/guides/polyscale).
@@ -42,6 +42,10 @@ To add the PolyScale integration to your Neon project:
 
     Here, you can view information about your newly created PolyScale cache and copy the PolyScale connection string. Use this connection string in place of your Neon connection string in your application.
 
+    <Admonition type="note">
+    The [Neon serverless driver](/docs/serverless/serverless-driver) is not compatible with a PolyScale integration, as it only supports a direct connection to a Neon database. Use a standard Postgres driver such as `node-postgres` instead.
+    </Admonition>
+
     You might notice the drop-down menus for **Database** and **Role**. If you have multiple databases and roles on the primary branch of your Neon project, use the drop-down menus to select the database and role you want to connect with. Your selections will be reflected in the PolyScale connection string.
    
     <Admonition type="note">
@@ -54,7 +58,7 @@ You can access your PolyScale cache directly from the Neon PolyScale integration
 
 1. In the Neon Console, navigate to the **Integrations** page.
 2. Locate the PolyScale integration and click **Manage** to open the **Manage PolyScale** drawer.
-3. Click the **View cache in PolyScale** link. You directed to PolyScale where you will be required to log in if not logged in already.
+3. Click the **View cache in PolyScale** link. You are directed to PolyScale where you will be required to log in if not logged in already.
 
 ## Purging your PolyScale cache
 

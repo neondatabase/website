@@ -3,12 +3,18 @@ title: Replicate data to an external Postgres instance
 subtitle: Learn how to replicate data from Neon to an external Postgres instance
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-01-12T19:25:22.357Z'
+updatedOn: '2024-02-19T18:57:12.559Z'
 ---
+
+<LRNotice/>
 
 Neon's logical replication feature allows you to replicate data from Neon to external subscribers. This guide shows you how to stream data from a Neon Postgres database to an external Postgres database.
 
 You will learn how to enable logical replication in Neon, create a publication, and configure an external Postgres database as a subscriber.
+
+<Admonition type="important">
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
+</Admonition>
 
 ## Enable logical replication
 
@@ -18,8 +24,8 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 
 To enable logical replication in Neon:
 
-1. Select your project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
+1. Select your project in the Neon Console.
+2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Beta**.
 4. Click **Enable**.
 

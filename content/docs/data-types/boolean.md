@@ -1,6 +1,6 @@
 ---
 title: Postgres Boolean data type
-subtitle: Representing truth values in Postgres
+subtitle: Represent truth values in Postgres
 enableTableOfContents: true
 updatedOn: '2024-01-28T13:46:59.383Z'
 ---

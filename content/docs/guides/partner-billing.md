@@ -3,7 +3,7 @@ title: Manage billing with consumption limits
 subtitle: Learn how to set usage quotas per project with the Neon API
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-08T15:20:54.287Z'
+updatedOn: '2024-02-22T14:29:54.382Z'
 ---
 
 When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free tier users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
@@ -31,7 +31,7 @@ There is an additional value that you also might want to track: `logical_size`, 
 
 Neon updates all metrics every 15 minutes but it could take up to 1 hour before they are reportable.
 
-To find the current usage level for any of these metrics, see [retrieving details about a project](#retrieving-details-about-a-project). You can read more about these metrics and how they impact billing [here](/docs/introduction/billing).
+To find the current usage level for any of these metrics, see [retrieving details about a project](#retrieving-details-about-a-project). You can read more about these metrics and how they impact billing [here](/docs/introduction/usage-metrics).
 
 ### Corresponding quotas
 
@@ -57,7 +57,7 @@ Let's say you want to set limits for an application with two tiers, Trial and Pr
 | Parameter (project)  | Trial (.25 vCPU)                 | Pro (max 4 vCPU)                                 |
 | -------------------- | -------------------------------- | ------------------------------------------------ |
 | active_time_seconds  | 633,600 (business month 22 days) | 2,592,000 (30 days)                              |
-| compute_time_seconds | 158,400 (approx 44 hours)        | 10,368,000 (4 times the active time for 4 vCPUs) |
+| compute_time_seconds | 158,400 (approx 44 hours)        | 10,368,000 (4 times the active hours for 4 vCPUs) |
 | written_data_bytes   | 1,000,000,000 (approx. 1 GiB)    | 50,000,000,000 (approx. 50 GiB)                  |
 | data_transfer_bytes  | 500,000,000 (approx. 500 MiB)    | 10,000,000,000 (approx. 10 GiB)                  |
 

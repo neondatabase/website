@@ -6,10 +6,8 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Link from 'components/shared/link/link';
+import ArrowIcon from 'icons/arrow-right-rounded.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
-import sendSegmentEvent from 'utils/send-segment-event';
-
-import ArrowIcon from '../svg/arrow.inline.svg';
 
 const variantsAnimation = {
   open: {
@@ -35,7 +33,6 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, linkLabel = n
       faq_answer: answer,
     };
     sendGtagEvent(eventName, properties);
-    sendSegmentEvent(eventName, properties);
   };
 
   return (

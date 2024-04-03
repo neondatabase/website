@@ -2,14 +2,14 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2024-01-09T20:06:43.407Z'
+updatedOn: '2024-02-21T23:59:47.049Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
 
 When to query over HTTP vs WebSockets:
 
-- **HTTP**: Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single, non-interactive transactions, also referred to as "one-shot queries". Issuing [multiple queries](#issue-multiple-queries-with-the-transaction-function) via a single, non-interactive transaction is also supported. See [Use the driver over HTTP](#how-to-use-the-driver-over-http).
+- **HTTP**: Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single, non-interactive transactions, also referred to as "one-shot queries". Issuing [multiple queries](#issue-multiple-queries-with-the-transaction-function) via a single, non-interactive transaction is also supported. See [Use the driver over HTTP](#use-the-driver-over-http).
 - **WebSockets**: If you require session or interactive transaction support or compatibility with [node-postgres](https://node-postgres.com/) (the popular **npm** `pg` package), use WebSockets. See [Use the driver over WebSockets](#use-the-driver-over-websockets).
 
 <Admonition type="note">
@@ -40,15 +40,15 @@ The examples that follow assume that your database connection string is assigned
 
 The Neon serverless driver uses the [neon](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neon-function) function for queries over HTTP.
 
-You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety. Please note that [Drizzle Kit](https://orm.drizzle.team/kit-docs/overview) does not support the Neon serverless driver — you'll have to use a standard Postgres driver with Drizzle Kit, like `node-postgres` or `postgres.js`.
+You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
 
 <CodeTabs labels={["Node.js", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
 ```javascript
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.DATABASE_URL!);
-const {rows: [post]} = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
+const sql = neon(process.env.DATABASE_URL);
+const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
 // `post` is now [{ id: 12, title: 'My post', ... }] (or undefined)
 ```
 
@@ -71,8 +71,8 @@ export default async () => {
 import { neon } from '@neondatabase/serverless';
 
 export default async (req: Request) => {
-  const sql = neon(process.env.DATABASE_URL!);
-  const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+  const sql = neon(process.env.DATABASE_URL);
+  const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
   return new Response(JSON.stringify(post));
 }
 
@@ -90,7 +90,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const sql = neon(process.env.DATABASE_URL!);
-  const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+  const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
  
   return res.status(500).send(post);
 }
@@ -258,21 +258,6 @@ Note that options **cannot** be supplied for individual queries within a transac
 
 For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
 
-### Experimental connection caching
-
-Connection caching provides server-side connection pooling so that a new connection does not have to be set up for each query over HTTP. You can enable it by setting `fetchConnectionCache` to `true` using the [neonConfig](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration) object.
-
-```javascript
-import { neonConfig } from '@neondatabase/serverless';
-
-// Enable connection cache (pool) on the server for HTTP fetch queries
-neonConfig.fetchConnectionCache = true
-```
-
-<Admonition type="note">
-This experimental option is currently only recommended for use with a non-pooled Neon connection string. For information about pooled and non-pooled Neon connections, see [Connection pooling](/docs/connect/connection-pooling).
-</Admonition>
-
 ### Advanced configuration options
 
 For advanced configuration options, see [neonConfig configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration), in the Neon serverless driver GitHub readme.
@@ -289,7 +274,7 @@ Consider using the driver with `Pool` or `Client` in the following scenarios:
 - You are writing a new code base and want to use a package that expects a `node-postgres-compatible` driver.
 - Your backend service uses sessions / interactive transactions with multiple queries per connection.
 
-You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead. Please note that [Drizzle Kit](https://orm.drizzle.team/kit-docs/overview) does not support the Neon serverless driver — you'll have to use a standard Postgres driver with Drizzle Kit, like `node-postgres` or `postgres.js`.
+You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
 
 <CodeTabs labels={["Node.js", "Prisma", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
@@ -297,7 +282,7 @@ You can use the Neon serverless driver in the same way you would use `node-postg
 import { Pool } from '@neondatabase/serverless';
 
 const pool = new Pool({connectionString: process.env.DATABASE_URL});
-const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
+const posts = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
 pool.end();
 ```
 
@@ -349,7 +334,7 @@ export default async (req: Request, ctx: any) => {
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
   await pool.connect();
 
-  const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
   
   ctx.waitUntil(pool.end());
 
@@ -372,7 +357,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
-  const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
   
   await pool.end();
 
@@ -427,15 +412,20 @@ The Ping Thing application pings a Neon Serverless Postgres database using a Ver
 <a href="https://github.com/neondatabase/ping-thing" description="Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes" icon="github">Ping Thing</a>
 </DetailIconCards>
 
+## Neon serverless driver GitHub repository and changelog
+
+The GitHub repository and [changelog](https://github.com/neondatabase/serverless/blob/main/CHANGELOG.md) for the Neon serverless driver are found [here](https://github.com/neondatabase/serverless).
+
 ## References
 
 - [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-- [Neon serverless driver GitHub repository](https://github.com/neondatabase/serverless)
 - [node-postgres](https://node-postgres.com/)
 - [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon)
+- [Schema migration with Neon Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
 - [kysely](https://github.com/kysely-org/kysely)
 - [Zapatos](https://jawj.github.io/zapatos/)
 - [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions)
 - [Cloudflare Workers](https://developers.cloudflare.com/workers/)
+- [Use Neon with Cloudflare Workers](/docs/guides/cloudflare-workers)
 
 <NeedHelp/>

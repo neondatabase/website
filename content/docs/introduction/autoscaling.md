@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-01-10T18:34:05.859Z'
 ---
 
-Neon's _Autoscaling_ feature, available for [Neon Pro Plan](/docs/introduction/pro-plan) users, dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current load, eliminating the need for manual intervention.
+Neon's _Autoscaling_ feature, available to paying users, dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current load, eliminating the need for manual intervention.
 
 ## Autoscaling benefits
 

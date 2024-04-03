@@ -1,10 +1,11 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
+import CookieConsent from 'components/shared/cookie-consent';
 import Footer from 'components/shared/footer';
 import Header from 'components/shared/header';
 
-const Layout = ({
+const Layout = async ({
   className = null,
   headerClassName = null,
   headerTheme,
@@ -37,6 +38,7 @@ const Layout = ({
       {children}
     </main>
     <Footer isDocPage={isDocPage} theme={footerTheme} withTopBorder={footerWithTopBorder} />
+    <CookieConsent />
   </div>
 );
 

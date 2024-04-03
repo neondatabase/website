@@ -6,7 +6,7 @@
     - title: Neon roadmap
       slug: introduction/roadmap
     - title: Neon architecture
-      items: 
+      items:
         - title: Overview
           slug: introduction/architecture-overview
         - title: Compute lifecycle
@@ -29,35 +29,27 @@
           slug: introduction/ip-allow
     - title: Regions
       slug: introduction/regions
-    - title: Plans
-      items:
-        - title: Overview
-          slug: introduction/plans
-        - title: Free
-          slug: introduction/free-tier
-        - title: Pro
-          slug: introduction/pro-plan
-        - title: Custom
-          slug: introduction/custom-plan
     - title: Billing
       slug: introduction/about-billing
       items:
-        - title: Billing overview
-          slug: introduction/billing-overview
-        - title: Pricing calculators
-          slug: introduction/billing-calculators
-        - title: Billing metrics
-          slug: introduction/billing
-        - title: Billing rates
-          slug: introduction/billing-rates
+        - title: Plans
+          slug: introduction/plans
+        - title: How billing works
+          slug: introduction/how-billing-works
+        - title: Usage metrics
+          slug: introduction/usage-metrics
         - title: Manage billing
           slug: introduction/manage-billing
         - title: Sample billing
           slug: introduction/billing-sample
+        - title: AWS Marketplace
+          slug: introduction/billing-aws-marketplace
     - title: Support
       slug: introduction/support
     - title: Status
       slug: introduction/status
+    - title: Monitoring
+      slug: introduction/monitoring
 - title: Get started
   items:
     - title: Sign up
@@ -108,35 +100,33 @@
     - title: Operations
       slug: manage/operations
     - title: Access
-      items: 
-         - title: Project access
-           slug: manage/project-access
-         - title: Database access
-           slug: manage/database-access
+      items:
+        - title: Project access
+          slug: manage/project-access
+        - title: Database access
+          slug: manage/database-access
     - title: Backups
       slug: manage/backups
     - title: Logical replication
       items:
-         - title: Concepts
-           slug: guides/logical-replication-concepts
-         - title: Manage
-           slug: guides/logical-replication-neon
+        - title: Concepts
+          slug: guides/logical-replication-concepts
+        - title: Manage
+          slug: guides/logical-replication-neon
 - title: Guides
   slug: guides/guides-intro
   items:
     - title: Neon
-      items: 
+      items:
         - title: Autoscaling
           slug: guides/autoscaling-guide
         - title: Autosuspend
           slug: guides/auto-suspend-guide
         - title: Branching
           slug: guides/branching-intro
-          items: 
+          items:
             - title: Branch Restore
               slug: guides/branch-restore
-            - title: Branching — Point-in-time restore
-              slug: guides/branching-pitr
             - title: Branching — Testing queries
               slug: guides/branching-test-queries
             - title: Branching with the CLI
@@ -145,8 +135,6 @@
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
-            - title: Refresh a branch with the Neon API
-              slug: guides/branch-refresh
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
         - title: Logical replication
@@ -171,13 +159,19 @@
             - title: Data analysis and reporting
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
-              slug: guides/read-replica-prisma    
+              slug: guides/read-replica-prisma
     - title: Frameworks
       items:
-        - title: Next.js
-          slug: guides/nextjs
         - title: Astro
           slug: guides/astro
+        - title: Django
+          slug: guides/django
+        - title: Next.js
+          slug: guides/nextjs
+        - title: Quarkus (JDBC)
+          slug: guides/quarkus-jdbc
+        - title: Quarkus (Reactive)
+          slug: guides/quarkus-reactive
         - title: Remix
           slug: guides/remix
         - title: Ruby on Rails
@@ -191,10 +185,6 @@
           ariaLabel: Connect a Go application to Neon
         - title: Java
           items:
-            - title: Quarkus (JDBC)
-              slug: guides/quarkus-jdbc
-            - title: Quarkus (Reactive)
-              slug: guides/quarkus-reactive
             - title: JDBC
               slug: guides/java
         - title: Javascript
@@ -211,9 +201,7 @@
               slug: guides/symfony
         - title: Python
           items:
-            - title: Django
-              slug: guides/django
-            - title: Psycopg 
+            - title: Psycopg
               slug: guides/python
             - title: SQL Alchemy
               slug: guides/sqlalchemy
@@ -235,18 +223,34 @@
           slug: guides/wundergraph
     - title: Schema migration
       items:
+        - title: Django
+          slug: guides/django-migrations
+        - title: Drizzle
+          slug: guides/drizzle-migrations
+        - title: Entity Framework
+          slug: guides/entity-migrations
         - title: Flyway
           items:
             - title: Get started
-              slug: guides/flyway  
+              slug: guides/flyway
             - title: Manage multiple environments
-              slug: guides/flyway-multiple-environments 
+              slug: guides/flyway-multiple-environments
+        - title: Laravel
+          slug: guides/laravel-migrations
         - title: Liquibase
           items:
-             - title: Get started
-               slug: guides/liquibase
-             - title: Developer workflow
-               slug: guides/liquibase-workflow
+            - title: Get started
+              slug: guides/liquibase
+            - title: Developer workflow
+              slug: guides/liquibase-workflow
+        - title: Prisma
+          slug: guides/prisma-migrations
+        - title: Rails
+          slug: guides/rails-migrations
+        - title: Sequelize
+          slug: guides/sequelize
+        - title: SQLAlchemy
+          slug: guides/sqlalchemy-migrations
     - title: Serverless
       items:
         - title: Neon serverless driver
@@ -255,16 +259,32 @@
           slug: guides/aws-lambda
     - title: Caching
       items:
+        - title: Cloudflare Hyperdrive
+          slug: guides/cloudflare-hyperdrive
         - title: PolyScale integration
           slug: guides/polyscale-integration
         - title: PolyScale manual setup
           slug: guides/polyscale
     - title: Deployment platforms
       items:
+        - title: Cloudflare
+          items:
+            - title: Cloudflare Pages
+              slug: guides/cloudflare-pages
+            - title: Cloudflare Workers
+              slug: guides/cloudflare-workers
         - title: Deno
           slug: guides/deno
+        - title: Heroku
+          slug: guides/heroku
         - title: Koyeb
           slug: guides/koyeb
+        - title: Netlify Functions
+          slug: guides/netlify-functions
+        - title: Railway
+          slug: guides/railway
+        - title: Render
+          slug: guides/render
         - title: Vercel
           items:
             - title: Overview
@@ -277,7 +297,7 @@
               slug: guides/vercel-manual
     - title: For Partners
       slug: guides/partner-intro
-      items: 
+      items:
         - title: OAuth
           slug: guides/oauth-integration
         - title: Manage billing with quotas
@@ -295,8 +315,10 @@
         - title: Google Colab
           slug: ai/ai-google-colab
 - title: Postgres
+  slug: postgres/postgres-intro
   items:
     - title: Data types
+      slug: postgres/data-types-intro
       items:
         - title: Array
           slug: data-types/array
@@ -317,19 +339,22 @@
         - title: UUID
           slug: data-types/uuid
     - title: Extensions
+      slug: extensions/extensions-intro
       items:
         - title: Supported extensions
           slug: extensions/pg-extensions
         - title: citext
-          slug: extensions/citext          
+          slug: extensions/citext
         - title: hstore
-          slug: extensions/hstore          
+          slug: extensions/hstore
         - title: neon
           slug: extensions/neon
         - title: neon_utils
-          slug: extensions/neon-utils       
+          slug: extensions/neon-utils
         - title: pgvector
           slug: extensions/pgvector
+        - title: pg_prewarm
+          slug: extensions/pg_prewarm
         - title: pg_stat_statements
           slug: extensions/pg_stat_statements
         - title: pg_tiktoken
@@ -341,6 +366,7 @@
         - title: timescaledb
           slug: extensions/timescaledb
     - title: Functions
+      slug: postgres/functions-intro
       items:
         - title: array_to_json
           slug: functions/array_to_json
@@ -359,7 +385,7 @@
         - title: json_extract_path
           slug: functions/json_extract_path
         - title: jsonb_extract_path
-          slug: functions/jsonb_extract_path          
+          slug: functions/jsonb_extract_path
         - title: json_extract_path_text
           slug: functions/json_extract_path_text
         - title: jsonb_extract_path_text
@@ -376,6 +402,10 @@
           slug: functions/json_to_record
         - title: jsonb_to_record
           slug: functions/jsonb_to_record
+    - title: Optimize queries
+      slug: postgres/query-performance
+    - title: Query reference
+      slug: postgres/query-reference
     - title: Compatibility
       slug: reference/compatibility
 - title: Import data
@@ -391,6 +421,8 @@
       slug: import/import-from-heroku
     - title: Migrate data with AWS DMS
       slug: import/migrate-aws-dms
+    - title: Migrate from MySQL to Postgres
+      slug: import/migrate-mysql
     - title: Sample data
       slug: import/import-sample-data
 - title: Security

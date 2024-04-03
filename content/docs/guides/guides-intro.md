@@ -4,7 +4,7 @@ subtitle: 'Explore Neon framework, language, platform, and feature guides'
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2024-01-16T20:50:14.111Z'
+updatedOn: '2024-02-27T20:16:54.558Z'
 ---
 
 Find detailed instructions for integration across various frameworks, languages, and platforms, or if exploring Neon's features, our guides are tailored to assist you.
@@ -29,7 +29,17 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/aws-lambda-logo.svg" width="36" height="36" alt="AWS Lambda" href="/docs/guides/aws-lambda" title="Connect from AWS Lambda to Neon" />
 
+<img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Hyperdrive" href="/docs/guides/cloudflare-hyperdrive" title="Use Neon with Cloudflare Hyperdrive" />
+
+<img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Pages" href="/docs/guides/cloudflare-pages" title="Use Neon with Cloudflare Pages" />
+
+<img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Workers" href="/docs/guides/cloudflare-workers" title="Use Neon with Cloudflare Workers" />
+
+<img src="/images/technology-logos/deno-logo.svg" width="36" height="36" alt="Deno Deploy" href="/docs/guides/deno" title="Use Neon with Deno Deploy" />
+
 <img src="/images/technology-logos/django-logo.svg" width="29" height="36" alt="Django" href="/docs/guides/django" title="Connect a Django application to Neon" />
+
+<img src="/images/technology-logos/drizzle-logo.svg" width="29" height="36" alt="Drizzle" href="/docs/guides/drizzle-migrations" title="Schema migration with Neon Postgres and Drizzle ORM" />
 
 <img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir-ecto" title="Connect from Elixir with Ecto to Neon" />
 
@@ -47,6 +57,8 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/hasura-logo.svg" width="35" height="36" alt="Hasura" href="/docs/guides/hasura" title="Connect from Hasura Cloud to Neon" />
 
+<img src="/images/technology-logos/heroku-logo.svg" width="36" height="36" alt="Heroku" href="/docs/guides/heroku" title="Deploy Your App with Neon Postgres on Heroku" />
+
 <img src="/images/technology-logos/java-logo.svg" width="27" height="36" alt="Java" href="/docs/guides/java" title="Connect a Java application to Neon" />
 
 <img src="/images/technology-logos/kafka-logo.svg" width="36" height="36" alt="Kafka" href="/docs/guides/logical-replication-kafka-confluent" title="Replicate data from Neon with Kafka (Confluent)" />
@@ -59,7 +71,11 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/materialize-logo.svg" width="36" height="36" alt="Materialize" href="/docs/guides/logical-replication-materialize" title="Replicate data from Neon to Materialize" />
 
+<img src="/images/technology-logos/netlify-logo.svg" width="29" height="36" alt="Netlify Functions" href="/docs/guides/netlify-functions" title="Connect a Neon Postgres database to your Netlify Functions application" />
+
 <img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
+
+<img src="/images/technology-logos/prisma-logo.svg" width="29" height="36" alt="Prisma" href="/docs/guides/prisma-migrations" title="Schema migration with Neon Postgres and Prisma ORM" />
 
 <img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
 
@@ -71,9 +87,15 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/rails-logo.svg" width="36" height="36" alt="Rails" href="/docs/guides/ruby-on-rails" title="Connect a Rails application to Neon" />
 
+<img src="/images/technology-logos/railway-logo.svg" width="36" height="36" alt="Railway" href="/docs/guides/railway" title="Use Neon Postgres with Railway" />
+
 <img src="/images/technology-logos/remix-logo.svg" width="36" height="36" alt="Remix" href="/docs/guides/remix" title="Connect a Remix application to Neon" />
 
+<img src="/images/technology-logos/render-logo.svg" width="36" height="36" alt="Render" href="/docs/guides/render" title="Use Neon Postgres with Render" />
+
 <img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
+
+<img src="/images/technology-logos/sequelize-logo.svg" width="29" height="36" alt="Sequelize" href="/docs/guides/sequelize" title="Schema migration with Neon Postgres and Sequelize" />
 
 <img src="/images/technology-logos/sqlalchemy-logo.svg" width="102" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect an SQLAlchemy application to Neon" />
 

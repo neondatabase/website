@@ -17,15 +17,20 @@ const styles = {
     secondary: 'bg-black text-white hover:bg-[#292929] disabled:bg-[#292929]',
     tertiary: 'bg-transparent text-white border border-white hover:border-primary-2',
     quaternary: 'bg-white text-black border border-black hover:border-primary-2',
+    'white-filled': 'bg-white text-black hover:bg-gray-6',
     'white-outline': 'bg-transparent text-white border border-white hover:border-primary-2',
+    'gray-2-outline': 'bg-gray-2 border border-gray-3 text-white hover:border-white',
     'gray-outline':
       'text-black border-gray-new-90 bg-gray-new-98 dark:bg-transparent dark:text-white border dark:border-gray-new-30 dark:hover:border-white hover:border-gray-new-70',
     'gray-dark-outline': 'bg-gray-new-10 text-white border border-[#37393D] hover:border-white',
     'gray-dark-outline-black':
       'text-black border border-gray-new-90 bg-gray-new-98 hover:border-gray-new-70 dark:text-white dark:bg-gray-new-10 dark:border-[#37393D] dark:hover:border-white',
     'green-outline': 'bg-transparent text-white border border-green-45 hover:border-white',
+    'green-underlined':
+      'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
     'gray-10': 'bg-gray-new-10 text-white hover:bg-gray-new-20',
+    'gray-15': 'bg-gray-new-15 text-white hover:bg-gray-new-20',
   },
 };
 
