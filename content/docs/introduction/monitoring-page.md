@@ -1,7 +1,7 @@
 ---
 title: Monitoring dashboard
 subtitle: Monitor various project metrics from Neon's monitoring dashboard
-enableTableOfContents: true
+enableTableOfContents: false
 ---
 
 The **Monitoring** dashboard page in the Neon console provides several graphs for monitoring the status of your Neon project. You can access the **Monitoring** page from the sidebar in the Neon Console. The observable metrics are described below.

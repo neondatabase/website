@@ -4,7 +4,7 @@ subtitle: Monitor usage metrics for your Neon account and projects from the Neon
 enableTableOfContents: true
 ---
 
-Neon exposes usage metrics in the Neon Console and the through the Neon API.
+Neon exposes usage metrics in the Neon Console and through the Neon API.
 
 ## Usage widget 
 
