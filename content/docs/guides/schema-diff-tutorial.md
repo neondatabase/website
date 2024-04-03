@@ -15,7 +15,7 @@ To complete this tutorial, you'll need:
 - A Neon account. Sign up [here](/docs/get-started-with-neon/signing-up).
 - To interact with your Neon database from the command line:
 
-    - Install the [Neon CLI](docs/reference/cli-install)
+    - Install the [Neon CLI](/docs/reference/cli-install)
     - Download and install the [psql](https://www.postgresql.org/download/) client
 
 ## Step 1: Create the Initial Schema
@@ -107,7 +107,7 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
 
 1. Verify the schema on your new branch
 
-    From the **SQL Editor**, use the meta-command `/d person` to inspect the schema of the `person` table. Make sure that the `people` database on the branch `dev/jordan` is selected.
+    From the **SQL Editor**, use the meta-command `\d person` to inspect the schema of the `person` table. Make sure that the `people` database on the branch `dev/jordan` is selected.
 
     ![use metacommand to inspect schema](/docs/guides/schema_diff_d_metacommand.png)
 
