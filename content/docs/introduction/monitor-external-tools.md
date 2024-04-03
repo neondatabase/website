@@ -4,9 +4,11 @@ subtitle: Monitor your Neon Postgres database with external tools such as PgAdmi
 enableTableOfContents: true
 ---
 
-## PgAdmin
+There are a number of external that you can use to monitor your Neon Postgres database, such as [PgHero](#pghero) and [pgAdmin](#pgadmin). Setup instructions for those tools are provided below.
 
-TBD
+<Admonition type="note">
+Neon currently does support monitoring tools that require installing an agent on the Postgres host system. Please keep an eye on our roadmap for future integrations that will enable these utilities and platforms. 
+</Admonition>
 
 ## PgHero
 
@@ -39,7 +41,9 @@ PgHero is available on [DockerHub](https://hub.docker.com/r/ankane/pghero/). To 
 docker pull ankane/pghero
 ```
 
-Next, grab your Neon database connection string from the **Connection Details** widget in the Neon Dashboard.
+### How to connect to your database from PgHero
+
+Grab your Neon database connection string from the **Connection Details** widget in the Neon Dashboard.
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
@@ -50,3 +54,38 @@ docker run -ti -e DATABASE_URL='$NEON_DB' -p 8080:8080 ankane/pghero
 ```
 
 Then visit http://localhost:8080 in your browser to open the PgHero Dashboard.
+
+## pgAdmin
+
+pgAdmin is a database management tool for Postgres designed to facilitate various database tasks, including monitoring performance metrics. 
+
+![PgAdmin monitoring dashboard](/docs/introduction/pgadmin_monitor.png)
+
+With pgAdmin, you can monitor real-time activity for a variety of metrics including:
+
+- Active sessions (Total, Active, and Idle)
+- Transactions per second (Transactions, Commits, Rollbacks)
+- Tuples in (Inserts, Updates, Deletes)
+- Tuples out (Fetched, Returned)
+- Block I/O for shared buffers (see [Cache your data](/docs/postgres/query-performance#cache-your-data) for information about Neon's Local File Cache)
+- Database activity (Sessions, Locks, Prepared Transactions)
+
+<Admonition type="note">
+Neon currently does not support the `system_stats` extension required to use the **System Statistics** tab in pgAdmin.
+</Admonition>
+
+### How to install pgAdmin
+
+Pre-compiled and configured installation packages for pgAdmin 4 are available for a number of desktop environments. For installation instructions, refer to the [pgAdmin deployment documentation](https://www.pgadmin.org/docs/pgadmin4/8.4/deployment.html). Downloads can be found on the [PgAdmin Downloads](https://www.pgadmin.org/download/) page.
+
+### How to connect to your database from pgAdmin
+
+Grab your Neon database connection string from the **Connection Details** widget in the Neon Dashboard. Select the **Parameters** only option.
+
+![Connection details widget](/docs/connect/connection_details.png)
+
+Enter your connection details as shown [here](https://neon.tech/docs/connect/connect-postgres-gui#connect-to-the-database).
+
+Noen uses the default Postgres port: `5432`
+
+<NeedHelp/>

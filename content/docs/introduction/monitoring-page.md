@@ -10,11 +10,11 @@ The **Monitoring** dashboard page in the Neon console provides several graphs fo
 
 The **RAM** graph shows the amount of RAM allocated for your compute and the amount of RAM used over time.
 
-![Monitoring page RAM graph](/docs/introduction/monitor_ram.png)
+![PgAdmin monitoring dashboard](/docs/introduction/monitor_ram.png)
 
 ### CPU
 
-The **CPU** graph shows the allocated CPU size CPU usage over time. CPU is measure in Compute Unit (CU) size.
+The **CPU** graph shows the allocated CPU size CPU usage over time. CPU is measured in Compute Unit (CU) size.
 
 ![Monitoring page CPU graph](/docs/introduction/monitor_cpu.png)
 
