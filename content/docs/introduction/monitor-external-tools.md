@@ -70,8 +70,8 @@ With pgAdmin, you can monitor real-time activity for a variety of metrics includ
 - Block I/O for shared buffers (see [Cache your data](/docs/postgres/query-performance#cache-your-data) for information about Neon's Local File Cache)
 - Database activity (Sessions, Locks, Prepared Transactions)
 
-<Admonition type="note">
-Neon currently does not support the `system_stats` extension required to use the **System Statistics** tab in pgAdmin.
+<Admonition type="note" title="Notes">
+Neon currently does not support the `system_stats` extension required to use the **System Statistics** tab in pgAdmin. It's also important to note that pgAdmin, while active, polls your database for statistics, which does not allow your compute to suspend as it normally would when there is no other database activity. This will consume additional compute hours if your compute would otherwise be sitting idle for periods of time. 
 </Admonition>
 
 ### How to install pgAdmin
