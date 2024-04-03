@@ -60,6 +60,8 @@ First, create a new database called `people` on the `main` branch and add some s
     neonctl set-context --project-id empty-glade-66712572
     ```
 
+    You can find your project ID on the **Project settings** page in the Neon Console.
+
     </Admonition>
 1. Copy your connection string:
 
