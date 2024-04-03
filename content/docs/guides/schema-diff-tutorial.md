@@ -105,7 +105,7 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
 
 1. Verify the schema on your new branch
 
-    From the **SQL Editor**, use the meta-command `/d person` to inspect the schema of the `person` table. Make sure that the `people` database on the branch `dev/jordan` is selected.
+    From the **SQL Editor**, use the meta-command `\d person` to inspect the schema of the `person` table. Make sure that the `people` database on the branch `dev/jordan` is selected.
 
     ![use metacommand to inspect schema](/docs/guides/schema_diff_d_metacommand.png)
 
