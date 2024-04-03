@@ -15,7 +15,7 @@ To complete this tutorial, you'll need:
 - A Neon account. Sign up [here](/docs/get-started-with-neon/signing-up).
 - To interact with your Neon database from the command line:
 
-    - Install the [Neon CLI](docs/reference/cli-install)
+    - Install the [Neon CLI](/docs/reference/cli-install)
     - Download and install the [psql](https://www.postgresql.org/download/) client
 
 ## Step 1: Create the Initial Schema
