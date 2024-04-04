@@ -30,7 +30,7 @@ This graph shows the amount of RAM allocated (available) to your compute and the
 
 The **CPU** graph shows the allocated CPU size and CPU usage over time. CPU is measured in Compute Unit (CU) size.
 
-**ALLOCATED**: The amount of allocated CPU. CPU is allocated according to the size of your compute or your autoscaling configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated CPU is .25 when your compute is active. With autoscaling, allocated CPU increases and decreases as your compute size scales up and down in response to load. If autosuspend is enabled and your compute transitions to an idle state after a period of inactivity, allocated CPU drops to 0.
+**ALLOCATED**: The amount of allocated CPU. CPU is allocated according to the size of your compute or your autoscaling configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated CPU is .25 when your compute is active. With autoscaling, allocated CPU increases and decreases as your compute size scales up and down in response to load. If autosuspend is enabled and your compute transitions to an idle state after a period of inactivity, the allocated CPU drops to 0.
 
 **CPU (CU)**: The amount of CPU used while your compute is active. If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
