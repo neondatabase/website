@@ -1,11 +1,11 @@
 ---
 title: Monitoring in Neon
-subtitle: Monitoring and observability tools and metrics in Neon
+subtitle: Learn about monitoring and observability resources and metrics in Neon
 enableTableOfContents: true
 updatedOn: '2024-02-22T14:29:54.385Z'
 ---
 
-To find out what's going on with your Neon projects and databases, Neon offers several ways to track your metrics and monitor usage.
+To find out what's going on with your Neon projects and databases, Neon offers several ways to track metrics and monitor usage.
 
 <DetailIconCards>
 
@@ -27,4 +27,4 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 At Neon, we understand that observability and monitoring are critical for running successful applications.
 
-Check out our [roadmap](/docs/introduction/roadmap) to see what's coming next. And if you've got feature requests or feedback about what you'd like to see in Neon observability features, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
+If you've got feature requests or feedback about what you'd like to see in Neon monitoring and observability features, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
