@@ -47,7 +47,7 @@ CREATE EXTENSION neon;
 Issue the following query to view LFC usage data for your compute instance:
 
 ```sql
-SELECT * FROM neon.neon_stat_file_cache;
+SELECT * FROM neon_stat_file_cache;
  file_cache_misses | file_cache_hits | file_cache_used | file_cache_writes | file_cache_hit_ratio  
 -------------------+-----------------+-----------------+-------------------+----------------------
            2133643 |       108999742 |             607 |          10767410 |                98.08
