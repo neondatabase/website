@@ -57,13 +57,13 @@ A mechanism that manages the lag between the Pageserver and compute node or the 
 
 ## Branch
 
-An isolated copy of data, similar to a Git branch. Just as a Git branch allows developers to work on separate features or fixes without impacting the main version of their code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
+An isolated copy of data, similar to a Git branch. Data includes databases, schemas, tables, records, indexes, roles — everything that comprises data in a Postgres instance. Just as a Git branch allows developers to work on separate features or fixes without impacting the main line or version of their code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
 
-Each Neon project is created with a main line of data referred to as the [root branch](#root-branch). A branch created from the root branch or another branch is a  [copy-on-write](#copy-on-write) clone of its parent.
+Each Neon project is created with a main line of data referred to as the [root branch](#root-branch). A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone of the parent branch.
 
-You can create a branch from the current or past state of the parent branch. A branch created from the current state of the parent branch includes the databases and roles that existed on the parent branch at the time of branch creation. A branch created from a past state of the parent branch includes the databases and roles that existed in the past state. 
+You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the databases and roles that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the databases and roles that existed in the past state. 
 
-Connecting to a database on a branch requires connecting via the branch's compute endpoint. See [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
+Connecting to a database on a branch requires connecting via a compute endpoint attached to the branch. See [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
 
 ## Branching
 
@@ -342,7 +342,7 @@ A designation given to a single [branch](#branch) in a Neon project. Each Neon p
 
 The compute endpoint associated with a primary branch remains available if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
 
-A primary branch cannot be deleted.
+You can change your primary branch, but a branch designated as primary cannot be deleted.
 
 For more information, see [Primary branch](/docs/manage/branches#primary-branch).
 
@@ -388,7 +388,9 @@ Selling the Neon service as part of another service offering. Neon's Platform Pa
 
 ## Root branch
 
-The main line of data created with each Neon project. Each Neon project is created with a "root branch" called `main`, which cannot be deleted. This branch is designated as your project's [primary branch](#primary-branch) by default. The root branch created with your project always remains your project's root branch. You cannot change your project's root branch. 
+The "root branch" is the primary line of data for every Neon project, initially named "main." The root branch cannot be deleted and is set as the [primary branch](#primary-branch) of your Neon project by default. It's important to note that once the root branch is established, it cannot be changed or deleted, making it a permanent fixture of your project.
+
+The main line of data created with each Neon project, initially named `main`. Each Neon project is created with a "root branch" called `main`, which cannot be deleted. This branch is designated as your project's [primary branch](#primary-branch) by default. The root branch created with your project always remains your project's root branch. You cannot change your project's root branch. 
 
 ## Safekeeper
 
