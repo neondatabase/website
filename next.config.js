@@ -185,6 +185,11 @@ const defaultConfig = {
         destination: '/docs/postgres/:path*',
         permanent: true,
       },
+      {
+        source: '/sign_in',
+        destination: 'https://console.neon.tech/signup',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },
@@ -269,6 +274,11 @@ const defaultConfig = {
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
+  },
+  env: {
+    INKEEP_INTEGRATION_API_KEY: process.env.INKEEP_INTEGRATION_API_KEY,
+    INKEEP_INTEGRATION_ID: process.env.INKEEP_INTEGRATION_ID,
+    INKEEP_ORGANIZATION_ID: process.env.INKEEP_ORGANIZATION_ID,
   },
 };
 

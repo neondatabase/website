@@ -194,7 +194,6 @@ Strategies in this category include:
 
 - [Use indexes](#use-indexes)
 - [Use efficient data types](#use-efficient-data-types)
-- [Use joins instead of subqueries](#use-joins-instead-of-subqueries)
 - [Limit your result sets](#limit-your-result-sets)
 
 ### Use indexes
@@ -290,23 +289,7 @@ This change decreases the memory footprint for storing `age` data, potentially i
 
 For an overview of common Postgres data types, refer to our [data types](/docs/postgres/data-types-intro) guide.
 
-### Use joins instead of subqueries
 
-Optimizing subqueries can significantly enhance the performance of your database queries. Consider a situation where you need to fetch all orders for customers residing in a specific country:
-
-```sql
-SELECT * FROM orders WHERE customer_id IN (SELECT id FROM customers WHERE country = 'Spain');
-```
-
-This approach uses a subquery to identify customer IDs based in Spain. To optimize, you can transform this query into a `JOIN` operation:
-
-```sql
-SELECT orders.* FROM orders JOIN customers ON orders.customer_id = customers.id WHERE customers.country = 'Spain';
-```
-
-Joins are generally more efficient because they replace multiple queries with one join query, reducing the number of trips to the database.
-
-For Postgres join examples, see [Join tables](/docs/postgres/query-reference#join-tables).
 
 ### Use prepared statements
 
@@ -367,11 +350,7 @@ A cache hit ratio tells you the percentage of queries served from memory. Querie
 
 In a standalone Postgres instance, you can query the cache hit ratio with an SQL statement that looks for `shared buffers` block hits. In Neon, it’s a little different. Neon extends Postgres shared buffers with a local file cache (local to your Neon compute instance). To query your cache hit ratio in Neon, you need to look at local file cache hits instead of shared buffer hits.
 
-<Admonition type="note">
-This `neon_stat_file_cache` view and the `neon` extension that provides it are not yet available in Neon. You can expect it to be released soon.
-</Admonition>
-
-To enable querying local file cache statistics, Neon provides a `neon_stat_file_cache` view. To access this view, you need to install the `neon` extension:
+To enable querying local file cache statistics, Neon provides a [neon_stat_file_cache](/docs/extensions/neon#the-neonstatfilecache-view) view. To access this view, you need to install the [neon](/docs/extensions/neon) extension:
 
 ```sql
 CREATE EXTENSION neon;

@@ -15,6 +15,8 @@ import CheckIcon from 'icons/check.inline.svg';
 import CrossIcon from 'icons/cross.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
+import AWSIcon from './images/aws.inline.svg';
+
 const items = [
   {
     type: 'Free Tier',
@@ -45,14 +47,17 @@ const items = [
         title: '10 GiB storage included',
         info: 'Additional storage: $3.5 per 2 GiB',
       },
-      { title: '300 compute hours included', info: 'Additional usage: $0.16 per compute hour' },
+      {
+        title: '300 <a href="#compute-hour">compute hours</a> included',
+        info: 'Additional usage: $0.16 per compute hour',
+      },
       { title: 'Standard support' },
       { title: 'Autoscaling up to 4 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
       { title: 'Instant Read Replicas' },
       { title: 'IP Allow Rules', disabled: true },
     ],
     button: {
-      url: LINKS.signup,
+      url: `${LINKS.console}/?upgrade=launch`,
       text: 'Get started',
       theme: 'primary',
       event: 'pricing_hero_launch_btn_click',
@@ -65,14 +70,17 @@ const items = [
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
-      { title: '750 compute hours included', info: 'Additional usage: $0.16 per compute hour' },
+      {
+        title: '750 <a href="#compute-hour">compute hours</a> included',
+        info: 'Additional usage: $0.16 per compute hour',
+      },
       { title: 'Priority support' },
       { title: 'Autoscaling up to 8 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
       { title: 'Instant Read Replicas' },
       { title: 'IP Allow Rules' },
     ],
     button: {
-      url: LINKS.signup,
+      url: `${LINKS.console}/?upgrade=scale`,
       text: 'Get started',
       theme: 'white-outline',
       event: 'pricing_hero_scale_btn_click',
@@ -135,7 +143,7 @@ const Feature = ({ title, info, disabled, type, index }) => (
         aria-hidden
       />
     )}
-    {title}
+    <span className="with-link-primary" dangerouslySetInnerHTML={{ __html: title }} />
     {info && (
       <span className="whitespace-nowrap">
         &nbsp;
@@ -201,6 +209,17 @@ const Hero = () => {
                     }
                   }}
                 >
+                  {isScalePlan && (
+                    <a
+                      className="group/aws absolute right-[18px] top-5 flex items-center gap-x-2"
+                      href="https://aws.amazon.com/marketplace/saas/ordering?productId=prod-ro32fhzkkg7ya&offerId=offer-czr2a3vwvrtik"
+                    >
+                      <span className="border-b border-gray-new-40 pb-0.5 text-sm font-light leading-none tracking-extra-tight text-gray-new-70 opacity-90 transition-colors duration-200 group-hover/aws:border-transparent group-hover/aws:text-gray-new-80">
+                        Pay via marketplace
+                      </span>
+                      <AWSIcon className="text-gray-new-50 transition-colors duration-200 group-hover/aws:text-gray-new-60" />
+                    </a>
+                  )}
                   <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">
                     <h3
                       className={clsx(

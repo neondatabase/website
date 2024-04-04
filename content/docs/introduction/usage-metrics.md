@@ -86,7 +86,7 @@ Compute hour usage is calculated by multiplying compute size by _active hours_. 
 
 _Active hours_ is the amount of time that your computes have been active. This includes all computes in your Neon project but excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale-to-zero).
 
-Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
+Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 8 CUs, as outlined below:
 
 | Compute Units | vCPU | RAM    |
 |:--------------|:-----|:-------|
@@ -99,6 +99,7 @@ Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and
 | 5             | 5    | 20 GB  |
 | 6             | 6    | 24 GB  |
 | 7             | 7    | 28 GB  |
+| 8             | 8    | 32 GB  |
 
 A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an `Idle` state.
 

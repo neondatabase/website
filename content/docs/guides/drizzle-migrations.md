@@ -95,7 +95,7 @@ export const books = pgTable("books", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   authorId: integer("author_id").references(() => authors.id),
-  created_at: timestamp("created_at").notNull().defaultNow(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 ```
 
@@ -358,7 +358,7 @@ export const books = pgTable("books", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   authorId: integer("author_id").references(() => authors.id),
-  created_at: timestamp("created_at").notNull().defaultNow(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 ```
 
