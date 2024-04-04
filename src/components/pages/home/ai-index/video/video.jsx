@@ -3,6 +3,8 @@
 import { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import ParallaxVocabulary from '../parallax-vocabulary';
+
 const Video = () => {
   const videoRef = useRef(null);
   const { ref, inView } = useInView({ threshold: 0.2 });
@@ -28,6 +30,7 @@ const Video = () => {
         <source src="/videos/pages/home/ai-loop-crf-32.mp4" type="video/mp4" />
         <source src="/videos/pages/home/ai-loop-crf-40.webm" type="video/webm" />
       </video>
+      <ParallaxVocabulary className="absolute left-1/2 top-[15.5%] -translate-x-1/2" />
     </div>
   );
 };
