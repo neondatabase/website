@@ -15,6 +15,8 @@ import CheckIcon from 'icons/check.inline.svg';
 import CrossIcon from 'icons/cross.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
+import AWSIcon from './images/aws.inline.svg';
+
 const items = [
   {
     type: 'Free Tier',
@@ -207,6 +209,17 @@ const Hero = () => {
                     }
                   }}
                 >
+                  {isScalePlan && (
+                    <a
+                      className="group absolute right-[18px] top-5 flex items-center gap-x-2"
+                      href="https://aws.amazon.com/marketplace/saas/ordering?productId=prod-ro32fhzkkg7ya&offerId=offer-czr2a3vwvrtik"
+                    >
+                      <span className="border-b border-gray-new-40 pb-0.5 text-sm font-light leading-none tracking-extra-tight text-gray-new-70 opacity-90 transition-colors duration-200 hover:border-transparent">
+                        Pay via marketplace
+                      </span>
+                      <AWSIcon className="text-gray-new-50" />
+                    </a>
+                  )}
                   <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">
                     <h3
                       className={clsx(
