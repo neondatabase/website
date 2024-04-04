@@ -43,6 +43,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [pg_hint_plan](https://github.com/ossc-db/pg_hint_plan)             | 1.4.1                  | 1.5.0                  |  1.6.0                  |                                                                                                                   |
 | [pg_ivm](https://github.com/sraoss/pg_ivm)             | 1.7                  | 1.7                  |  1.7                  |                                                                                                                   |
 | [pg_jsonschema](https://github.com/supabase/pg_jsonschema)            | 0.2.0              | 0.2.0               | 0.2.0               |                                                                                                                  |
+| [pg_partman](https://github.com/pgpartman/pg_partman)            | 5.0.1              | 5.0.1               | 5.0.1               |  
 | [pg_prewarm](/docs/extensions/pg_prewarm)              | 1.2        | 1.2         |   1.2         |                                                                                                                  |
 | [pg_roaringbitmap](https://github.com/ChenHuajun/pg_roaringbitmap)          | 0.5          | 0.5         |  0.5         |                                                                                                                  | Install with `CREATE EXTENSION roaringbitmap;`
 | [pg_stat_statements](/docs/extensions/pg_stat_statements)       | 1.9 | 1.10 | 1.10 |

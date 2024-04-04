@@ -146,6 +146,8 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://github.com/sraoss/pg_ivm" description="Provides an Incremental View Maintenance (IVM) feature for Postgres" icon="app-store">pg_ivm</a>
 
+<a href="https://github.com/pgpartman/pg_partman" description="A partition manager extension that enables creating and managing time-based and number-based table partition sets in Postgres" icon="app-store">pg_partman</a>
+
 <a href="/docs/extensions/pg_prewarm" description="Allows manual preloading of relation data into the Postgres buffer cache, reducing access times for frequently queried tables" icon="app-store">pg_prewarm</a>
 
 <a href="https://github.com/ChenHuajun/pg_roaringbitmap" description="Implements Roaring Bitmaps in Postgres for efficient storage and manipulation of bit sets" icon="app-store">pg_roaringbitmap</a>
@@ -175,6 +177,8 @@ Explore supported Postgres extensions by category. Also see:
 <DetailIconCards>
 
 <a href="https://www.postgresql.org/docs/16/tcn.html" description="Provides a trigger function to notify listeners of changes to a table, allowing applications to respond to changes in the database" icon="app-store">tcn</a>
+
+<a href="https://github.com/pgpartman/pg_partman" description="A partition manager extension that enables creating and managing time-based and number-based table partition sets in Postgres" icon="app-store">pg_partman</a>
 
 </DetailIconCards>
 
