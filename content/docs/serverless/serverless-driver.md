@@ -98,10 +98,6 @@ export default async function handler(
 
 </CodeTabs>
 
-<Admonition type="note">
-The maximum request size and response size for queries over HTTP is 10 MB. Additionally, there is a 15-second proxy timeout for SQL requests over HTTP. Long-running queries that exceed the 15-second threshold are terminated.
-</Admonition>
-
 ### neon function configuration options
 
 The `neon(...)` function returns a query function that can be used both as a tagged-template function and as an ordinary function:
