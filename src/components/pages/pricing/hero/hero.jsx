@@ -211,13 +211,13 @@ const Hero = () => {
                 >
                   {isScalePlan && (
                     <a
-                      className="group absolute right-[18px] top-5 flex items-center gap-x-2"
+                      className="group/aws absolute right-[18px] top-5 flex items-center gap-x-2"
                       href="https://aws.amazon.com/marketplace/saas/ordering?productId=prod-ro32fhzkkg7ya&offerId=offer-czr2a3vwvrtik"
                     >
-                      <span className="border-b border-gray-new-40 pb-0.5 text-sm font-light leading-none tracking-extra-tight text-gray-new-70 opacity-90 transition-colors duration-200 hover:border-transparent">
+                      <span className="border-b border-gray-new-40 pb-0.5 text-sm font-light leading-none tracking-extra-tight text-gray-new-70 opacity-90 transition-colors duration-200 group-hover/aws:border-transparent group-hover/aws:text-gray-new-80">
                         Pay via marketplace
                       </span>
-                      <AWSIcon className="text-gray-new-50" />
+                      <AWSIcon className="text-gray-new-50 transition-colors duration-200 group-hover/aws:text-gray-new-60" />
                     </a>
                   )}
                   <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">
