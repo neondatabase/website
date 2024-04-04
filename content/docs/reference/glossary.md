@@ -154,7 +154,7 @@ The part of the Neon architecture that manages cloud storage and compute resourc
 
 ## Copy-on-write
 
-A technique used to copy data efficiently. Neon uses the copy-on-write technique when creating [branches](#branch). Upon branch creation, the data is marked as shared rather than physically duplicated. Both the parent and child branch refer to the same physical data resource. Data is only phyically copied when a write occurs, at which point the affected portion of data is copied and the write is performed on the copied portion of data.
+A technique used to copy data efficiently. Neon uses the copy-on-write technique when creating [branches](#branch). Upon branch creation, data is marked as shared rather than physically duplicated. Both the parent and child branches refer to the same physical data resource. Data is only physically copied when a write occurs, at which point the affected portion of data is copied and the write is performed on the copied portion of data.
 
 ## create_branch
 
@@ -388,9 +388,7 @@ Selling the Neon service as part of another service offering. Neon's Platform Pa
 
 ## Root branch
 
-The "root branch" is the primary line of data for every Neon project, initially named "main." The root branch cannot be deleted and is set as the [primary branch](#primary-branch) of your Neon project by default. It's important to note that once the root branch is established, it cannot be changed or deleted, making it a permanent fixture of your project.
-
-The main line of data created with each Neon project, initially named `main`. Each Neon project is created with a "root branch" called `main`, which cannot be deleted. This branch is designated as your project's [primary branch](#primary-branch) by default. The root branch created with your project always remains your project's root branch. You cannot change your project's root branch. 
+The primary line of data for every Neon project, initially named `main`. The root branch cannot be deleted and is set as the [primary branch](#primary-branch) of your Neon project by default. You can change your project's primary branch, but you cannot change the root branch.
 
 ## Safekeeper
 
