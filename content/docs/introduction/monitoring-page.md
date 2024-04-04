@@ -6,7 +6,7 @@ enableTableOfContents: false
 
 The **Monitoring** dashboard page in the Neon console provides several graphs for monitoring the Neon project metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. The observable metrics are described below.
 
-Your Neon plan defines the data range you can access.
+Your Neon plan defines the data range of data you can access.
 
 | Neon Plan | Data Access  |
 |-----------|--------------|
