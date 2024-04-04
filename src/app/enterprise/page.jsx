@@ -43,6 +43,7 @@ const logos = [
   'hasura',
   'replit',
   'vercel',
+  'retool',
   'illa',
   'octolis',
   'cloudflare',
