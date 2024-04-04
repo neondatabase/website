@@ -30,7 +30,7 @@ const Video = () => {
         <source src="/videos/pages/home/ai-loop-crf-32.mp4" type="video/mp4" />
         <source src="/videos/pages/home/ai-loop-crf-40.webm" type="video/webm" />
       </video>
-      <ParallaxVocabulary className="absolute left-1/2 top-[15.5%] -translate-x-1/2" />
+      <ParallaxVocabulary className="absolute left-1/2 top-[15.5%] w-[1280px] -translate-x-1/2 xl:top-8 xl:w-[930px] lg:-top-14 lg:w-[740px] md:top-[48%] md:w-[110%] md:-translate-x-1/2 md:-translate-y-1/2" />
     </div>
   );
 };

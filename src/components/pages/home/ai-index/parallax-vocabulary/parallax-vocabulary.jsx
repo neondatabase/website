@@ -154,11 +154,12 @@ const ParallaxVocabulary = ({ className }) => {
     <div
       className={clsx(
         className,
-        '[mask-image:radial-gradient(ellipse_50%_70%_at_50%_50%,#000_60%,transparent_100%)]'
+        'aspect-[1.66667] [mask-image:radial-gradient(ellipse_50%_70%_at_50%_50%,#000_60%,transparent_100%)]'
       )}
       ref={svgRef}
     >
       <svg
+        className="w-full"
         width="1280"
         height="768"
         viewBox="0 0 1280 768"
