@@ -61,7 +61,7 @@ An isolated copy of data, similar to a Git branch. Data includes databases, sche
 
 Each Neon project is created with a main line of data referred to as the [root branch](#root-branch). A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone.
 
-You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the databases and roles that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the databases and roles that existed in the past state. 
+You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the data that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the data that existed in the past state. 
 
 Connecting to a database on a branch requires connecting via a compute endpoint attached to the branch. See [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
 
