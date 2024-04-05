@@ -87,7 +87,7 @@ const SubscribeForm = ({
         if (response.ok) {
           doNowOrAfterSomeTime(() => {
             setFormState(STATES.SUCCESS);
-            setEmail(successMessage);
+            setEmail('Thank you!');
           }, loadingAnimationStartedTime);
         } else {
           doNowOrAfterSomeTime(() => {
@@ -107,7 +107,7 @@ const SubscribeForm = ({
   return (
     <section className="safe-paddings overflow-hidden py-[75px] md:py-16">
       <Container className="flex flex-col items-center" size="medium">
-        <div className="mx-auto max-w-[504px]">
+        <div className="mx-auto w-[504px] max-w-full">
           <form className="relative w-full" method="POST" noValidate onSubmit={handleSubmit}>
             <div className="relative z-20">
               <input
@@ -128,7 +128,7 @@ const SubscribeForm = ({
                   {(formState === STATES.DEFAULT || formState === STATES.ERROR) && (
                     <m.button
                       className={clsx(
-                        'absolute inset-y-2.5 right-2 h-11 rounded-[80px] px-7 py-3 font-bold leading-none tracking-tight text-black transition-colors duration-200 sm:inset-y-2 sm:h-10 sm:px-5 xs:flex xs:w-10 xs:items-center xs:justify-center xs:px-0',
+                        'absolute inset-y-2.5 right-3 h-11 rounded-[80px] px-7 py-3 font-bold leading-none tracking-tight text-black transition-colors duration-200 sm:inset-y-2 sm:h-10 sm:px-5 xs:flex xs:w-10 xs:items-center xs:justify-center xs:px-0',
                         formState === STATES.ERROR
                           ? 'bg-secondary-1/50'
                           : 'bg-green-45 hover:bg-[#00FFAA]'
@@ -146,7 +146,7 @@ const SubscribeForm = ({
                   )}
                   {formState === STATES.LOADING && (
                     <m.div
-                      className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-green-45"
+                      className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-green-45"
                       initial="initial"
                       animate="animate"
                       exit="exit"
@@ -175,7 +175,7 @@ const SubscribeForm = ({
                   )}
                   {formState === STATES.SUCCESS && (
                     <m.div
-                      className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-green-45 text-black"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-green-45 text-black"
                       initial="initial"
                       animate="animate"
                       exit="exit"
@@ -184,14 +184,13 @@ const SubscribeForm = ({
                       <FormCheckIcon className="h-10 w-10" />
                     </m.div>
                   )}
+                  {formState === STATES.ERROR && errorMessage && (
+                    <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
+                      {errorMessage}
+                    </span>
+                  )}
                 </AnimatePresence>
               </LazyMotion>
-
-              {formState === STATES.ERROR && errorMessage && (
-                <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
-                  {errorMessage}
-                </span>
-              )}
             </div>
             <LinesIllustration
               className="z-10 !w-[125%]"
@@ -199,11 +198,16 @@ const SubscribeForm = ({
               size="sm"
             />
           </form>
-          {items.length > 0 && (
+          {formState === STATES.SUCCESS && (
+            <p className="relative z-20 mx-auto mt-12 text-center text-base leading-snug text-gray-new-80">
+              {successMessage}
+            </p>
+          )}
+          {formState !== STATES.SUCCESS && items.length > 0 && (
             <ul className="relative z-20 mx-3.5 mt-[52px] flex justify-between gap-x-7 sm:gap-x-4">
               {items.map(({ text }, idx) => (
                 <li
-                  className="flex items-start gap-x-2 text-sm font-light leading-dense tracking-extra-tight text-gray-new-70"
+                  className="flex items-start gap-x-2 text-sm leading-dense tracking-extra-tight text-gray-new-70"
                   key={idx}
                 >
                   <CheckIcon className="h-[14px] w-[14px] shrink-0 text-gray-new-90" aria-hidden />
