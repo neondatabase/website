@@ -1,6 +1,6 @@
 ---
-title: Monitoring Neon usage and consumption metrics
-subtitle: Monitor usage metrics for your Neon account and projects from the Neon Console or API
+title: Neon usage metrics
+subtitle: Monitor usage metrics for your account and projects from the console or API
 enableTableOfContents: true
 ---
 
