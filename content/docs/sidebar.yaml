@@ -353,6 +353,8 @@
           slug: extensions/neon-utils
         - title: pgvector
           slug: extensions/pgvector
+        - title: pg_partman
+          slug: extensions/pg_partman     
         - title: pg_prewarm
           slug: extensions/pg_prewarm
         - title: pg_stat_statements
