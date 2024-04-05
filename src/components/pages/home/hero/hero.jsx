@@ -9,6 +9,7 @@ import Clouflare from 'images/partners-logos/cloudflare.inline.svg';
 import Hasura from 'images/partners-logos/hasura.inline.svg';
 import Koyeb from 'images/partners-logos/koyeb.inline.svg';
 import Replit from 'images/partners-logos/replit.inline.svg';
+import Retool from 'images/partners-logos/retool.inline.svg';
 import Vercel from 'images/partners-logos/vercel.inline.svg';
 import Wundergraph from 'images/partners-logos/wundergraph.inline.svg';
 
@@ -36,6 +37,10 @@ const logos = [
   {
     logo: Wundergraph,
     alt: 'WunderGraph',
+  },
+  {
+    logo: Retool,
+    alt: 'Retool',
   },
 ];
 
@@ -91,7 +96,7 @@ const Hero = () => (
       <p className="mt-[104px] text-center text-lg font-medium leading-snug text-gray-new-60 lg:mt-16 md:mt-14 sm:mt-10">
         Powering 500,000+ databases for developers and partners
       </p>
-      <ul className="mx-auto mt-7 flex w-full max-w-[1472px] justify-center gap-x-16 xl:max-w-[800px] xl:flex-wrap xl:justify-center xl:gap-x-14 xl:gap-y-10 md:gap-y-8 xs:gap-y-6">
+      <ul className="mx-auto mt-7 flex w-full max-w-[1472px] justify-center gap-x-16 2xl:max-w-[800px] 2xl:flex-wrap 2xl:gap-y-10 xl:justify-center xl:gap-x-14 md:gap-y-8 xs:gap-y-6">
         {logos.map(({ logo: Logo, alt }) => (
           <li key={alt}>
             <Logo className="h-9 w-auto text-gray-new-60 2xl:h-8 md:h-7" />

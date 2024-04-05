@@ -18,6 +18,7 @@ import OctolisLogo from './images/octolis.inline.svg';
 import OpusLogo from './images/opus.inline.svg';
 import OutfrontLogo from './images/outfront7.inline.svg';
 import ReplitLogo from './images/replit.inline.svg';
+import RetoolLogo from './images/retool.inline.svg';
 import SnapletLogo from './images/snaplet.inline.svg';
 import SupergoodLogo from './images/supergood.inline.svg';
 import FabricIoLogo from './images/the-fabric-io.inline.svg';
@@ -47,6 +48,7 @@ const allLogos = {
   zimmer: ZimmerBioLogo,
   eqt: EqtLogo,
   encore: EncoreLogo,
+  retool: RetoolLogo,
 };
 
 const LogosWall = ({ className, fill, logos }) => (

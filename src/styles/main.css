@@ -75,6 +75,10 @@
       @apply border-green-45 bg-green-45 bg-[url(/images/check.svg)];
     }
   }
+
+  inkeep-portal {
+    @apply relative z-50 animate-inkeep-portal-fade-in opacity-0;
+  }
 }
 
 @layer utilities {
