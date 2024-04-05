@@ -98,6 +98,10 @@ export default async function handler(
 
 </CodeTabs>
 
+<Admonition type="note">
+The maximum request size and response size for queries over HTTP is 10 MB.
+</Admonition>
+
 ### neon function configuration options
 
 The `neon(...)` function returns a query function that can be used both as a tagged-template function and as an ordinary function:

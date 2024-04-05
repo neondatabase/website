@@ -38,10 +38,24 @@ The `neon_stat_file_cache` view includes the following metrics:
 
 ### Using the neon_stat_file_cache view
 
-To use the `neon_stat_file_cache` view, install the `neon` extension:
+To use the `neon_stat_file_cache` view, install the `neon` extension on a preferred database or connect to the Neon-managed `postgres` database where the `neon` extension is always available.
+
+To install the extension on a preferred database:
 
 ```sql
 CREATE EXTENSION neon;
+```
+
+To connect to the Neon-managed `postgres` database instead:
+
+```bash shouldWrap
+psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require
+```
+
+If you are already connected via `psql`, you can simply switch to the `postgres` database using the `\c` command:
+
+```shell
+\c postgres
 ```
 
 Issue the following query to view LFC usage data for your compute instance:
@@ -55,7 +69,7 @@ SELECT * FROM neon_stat_file_cache;
 
 ### Viewing metrics with EXPLAIN ANALYZE
 
-When the `neon` extension is installed, you can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view LFC cache hit and miss data. For example:
+You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view LFC cache hit and miss data. Installing the `noen` extension is not required. For example:
 
 ```sql {6,12,16,22}
 EXPLAIN (ANALYZE,BUFFERS,PREFETCH,FILECACHE) SELECT COUNT(*) FROM pgbench_accounts;
