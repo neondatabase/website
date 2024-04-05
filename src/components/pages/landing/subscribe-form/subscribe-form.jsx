@@ -112,7 +112,7 @@ const SubscribeForm = ({
             <div className="relative z-20">
               <input
                 className={clsx(
-                  'remove-autocomplete-styles h-16 w-full appearance-none rounded-[50px] border bg-black-new pl-7 pr-48 text-white placeholder:tracking-tight placeholder:text-gray-new-50 focus:outline-none md:pr-40 sm:h-14 xs:pr-14',
+                  'remove-autocomplete-styles h-16 w-full appearance-none rounded-[50px] border bg-black-new pl-7 pr-48 text-white placeholder:tracking-tight placeholder:text-gray-new-50 focus:outline-none disabled:opacity-100 md:pr-40 sm:h-14 xs:pr-14',
                   formState === STATES.ERROR ? 'border-secondary-1' : 'border-green-45',
                   formState === STATES.SUCCESS ? '!pr-14 text-green-45' : 'text-white'
                 )}
@@ -193,7 +193,7 @@ const SubscribeForm = ({
               )}
             </div>
             <LinesIllustration
-              className="!z-0 !w-[125%]"
+              className="z-10 !w-[125%]"
               color={formState === STATES.ERROR ? '#FF4C79' : '#00E599'}
               size="sm"
             />
