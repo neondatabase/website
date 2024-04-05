@@ -184,16 +184,16 @@ const SubscribeForm = ({
                       <FormCheckIcon className="h-10 w-10" />
                     </m.div>
                   )}
-                  {formState === STATES.ERROR && errorMessage && (
-                    <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
-                      {errorMessage}
-                    </span>
-                  )}
                 </AnimatePresence>
               </LazyMotion>
+              {formState === STATES.ERROR && errorMessage && (
+                <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
+                  {errorMessage}
+                </span>
+              )}
             </div>
             <LinesIllustration
-              className="z-10 !w-[125%]"
+              className="!z-0 !w-[125%]"
               color={formState === STATES.ERROR ? '#FF4C79' : '#00E599'}
               size="sm"
             />
