@@ -67,7 +67,7 @@ SELECT * FROM neon_stat_file_cache;
            2133643 |       108999742 |             607 |          10767410 |                98.08
 ```
 
-### Viewing metrics with EXPLAIN ANALYZE
+### Viewing LFC metrics with EXPLAIN ANALYZE
 
 You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view LFC cache hit and miss data. Installing the `noen` extension is not required. For example:
 

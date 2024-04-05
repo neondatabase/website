@@ -139,16 +139,30 @@ If it's not possible to hold your entire dataset in memory, the next best option
 
 As mentioned above, Neon computes use a Local File Cache (LFC) to extend Postgres shared buffers. To query the cache hit ratio for your compute's LFC, Neon provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view.
 
-To use the `neon_stat_file_cache` view, you must first install the `neon` extension:
+To use the `neon_stat_file_cache` view, install the `neon` extension on a preferred database or connect to the Neon-managed `postgres` database where the `neon` extension is always available.
+
+To install the extension on a preferred database:
 
 ```sql
 CREATE EXTENSION neon;
 ```
 
-After installing the extension and allowing time for data to be collected, you can issue the following query to view LFC usage data:
+To connect to the Neon-managed `postgres` database instead:
+
+```bash shouldWrap
+psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require
+```
+
+If you are already connected via `psql`, you can simply switch to the `postgres` database using the `\c` command:
+
+```shell
+\c postgres
+```
+
+Issue the following query to view LFC usage data for your compute instance:
 
 ```sql
-SELECT * FROM neon.neon_stat_file_cache;
+SELECT * FROM neon_stat_file_cache;
  file_cache_misses | file_cache_hits | file_cache_used | file_cache_writes | file_cache_hit_ratio  
 -------------------+-----------------+-----------------+-------------------+----------------------
            2133643 |       108999742 |             607 |          10767410 |                98.08
@@ -160,6 +174,10 @@ The `file_cache_hit_ratio` is calculated according to the following formula:
 ```
 file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100
 ```
+
+<Admonition type="tip">
+You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view data for LFC hits and misses. See [Viewing LFC metrics with EXPLAIN ANALYZE](/docs/extensions/neon#viewing-lfc-metrics-with-explain-analyze).
+</Admonition>
 
 For OLTP workloads, you should aim for a `file_cache_hit_ratio` above 99%. If you hit ration is below that, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
 
