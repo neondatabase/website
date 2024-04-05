@@ -9,7 +9,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <DetailIconCards>
 
-<a href="/docs/introduction/monitoring-page" description="View metrics and statistics graphs for your Neon project on the Monitoring dashboard in the Neon Console" icon="queries">Monitoring dashboard</a>
+<a href="/docs/introduction/monitoring-page" description="View metrics and statistics graphs for your Neon project on the Monitoring dashboard" icon="queries">Monitoring dashboard</a>
 
 <a href="/docs/introduction/monitor-usage" description="Track usage and consumption metrics for your Neon account or project from the Neon Console or Neon API" icon="queries">Usage metrics</a>
 

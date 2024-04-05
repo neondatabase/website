@@ -1,10 +1,9 @@
 ---
 title: Monitoring dashboard
-subtitle: Monitor various project metrics from Neon's monitoring dashboard
 enableTableOfContents: false
 ---
 
-The **Monitoring** dashboard page in the Neon console provides several graphs for monitoring the Neon project metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. The observable metrics are described below.
+The **Monitoring** dashboard page in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. The observable metrics are described below.
 
 Your Neon plan defines the data range of data you can access.
 
@@ -18,21 +17,29 @@ The dashboard displays data for the selected **Branch** and **Compute endpoint**
 
 ### RAM
 
-This graph shows the amount of RAM allocated (available) to your compute and the amount of RAM used over time. 
+This graph shows allocated RAM and usage over time. 
 
-**ALLOCATED**: RAM is allocated according to the size of your compute or your autoscaling configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated RAM is 1 (GiB) when your compute is active. With autoscaling, allocated RAM increases and decreases as your compute size scales up and down in response to load. If autosuspend is enabled and your compute transitions to an idle state after a period of inactivity, allocated RAM drops to 0.
+**ALLOCATED**: The amount of allocated RAM. 
 
-**RAM (GiB)**: The chart plots a line showing the amount of RAM used while your compute is active. If this line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+RAM is allocated according to the size of your compute or your autoscaling configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated RAM is 1 (GiB) when your compute is active. With autoscaling, allocated RAM increases and decreases as your compute size scales up and down in response to load. If autosuspend is enabled and your compute transitions to an idle state after a period of inactivity, allocated RAM drops to 0.
+
+**RAM (GiB)**: The amount of RAM used.
+
+The chart plots a line showing the amount of RAM used. If this line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
 ![Monitoring page RAM graph](/docs/introduction/monitor_ram.png)
 
 ### CPU
 
-The **CPU** graph shows the allocated CPU size and CPU usage over time. CPU is measured in Compute Unit (CU) size.
+This graph shows the amount of allocated CPU and usage over time.
 
-**ALLOCATED**: The amount of allocated CPU. CPU is allocated according to the size of your compute or your autoscaling configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated CPU is .25 when your compute is active. With autoscaling, allocated CPU increases and decreases as your compute size scales up and down in response to load. If autosuspend is enabled and your compute transitions to an idle state after a period of inactivity, the allocated CPU drops to 0.
+**ALLOCATED**: The amount of allocated CPU. 
 
-**CPU (CU)**: The amount of CPU used while your compute is active. If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+CPU is allocated according to the size of your compute or your autoscaling configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated CPU is .25 when your compute is active. With autoscaling, allocated CPU increases and decreases as your compute size scales up and down in response to load. If autosuspend is enabled and your compute transitions to an idle state after a period of inactivity, allocated CPU drops to 0.
+
+**CPU (CU)**: The amount of CPU used. 
+
+If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
 ![Monitoring page CPU graph](/docs/introduction/monitor_cpu.png)
 
@@ -68,12 +75,14 @@ Database size metrics are only shown in the graph while your compute is active. 
 
 The **Deadlocks** graph shows a count of deadlocks over time for the named database on the selected branch. The named database is always the oldest database on the selected branch.
 
-Deadlocks occur in a database when two or more transactions simultaneously block each other by holding onto resources the other transactions need, creating a cycle of dependencies that prevent any of the transactions from proceeding. Monitoring deadlocks is important because they halt transaction progress, potentially leading to performance issues or application errors. For lock-related queries you can run to troubleshoot deadlocks, see [Performance tuning](/docs/postgres/query-reference#performance-tuning). To learn more about deadlocks in Postgres, see [Deadlocks](/docs/current/explicit-locking.html#LOCKING-DEADLOCKS).
+Deadlocks occur in a database when two or more transactions simultaneously block each other by holding onto resources the other transactions need, creating a cycle of dependencies that prevent any of the transactions from proceeding, potentially leading to performance issues or application errors. For lock-related queries you can run to troubleshoot deadlocks, see [Performance tuning](/docs/postgres/query-reference#performance-tuning). To learn more about deadlocks in Postgres, see [Deadlocks](/docs/current/explicit-locking.html#LOCKING-DEADLOCKS).
 
 ![Monitoring page deadlocks graph](/docs/introduction/monitor_deadlocks.png)
 
 ### Rows
 
-The **Rows** graph shows the number of rows deleted, updated, and inserted over time for the named database on the selected branch. The named database is always the oldest database on the selected branch. These metrics are reset on a compute restart. 
+The **Rows** graph shows the number of rows deleted, updated, and inserted over time for the named database on the selected branch. The named database is always the oldest database on the selected branch. Row metrics are reset to zero whenever your compute restarts.
+
+Tracking rows inserted, updated, and deleted over time provides insights into the database's activity patterns. You can also use this data to identify trends, such as unexpected spikes in data insertions which might indicate a successful marketing campaign. It also aids in spotting irregularities in data updates or deletions, which could suggest unauthorized access or system errors.
 
 ![Monitoring page rows graph](/docs/introduction/monitor_rows.png)
