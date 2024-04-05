@@ -57,9 +57,9 @@ A mechanism that manages the lag between the Pageserver and compute node or the 
 
 ## Branch
 
-An isolated copy of data, similar to a Git branch. Data includes databases, schemas, tables, records, indexes, roles — everything that comprises data in a Postgres instance. Just as a Git branch allows developers to work on separate features or fixes without impacting the main line or version of their code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
+An isolated copy of data, similar to a Git branch. Data includes databases, schemas, tables, records, indexes, roles — everything that comprises data in a Postgres instance. Just as a Git branch allows developers to work on separate features or fixes without impacting their main line of code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
 
-Each Neon project is created with a main line of data referred to as the [root branch](#root-branch). A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone of the parent branch.
+Each Neon project is created with a main line of data referred to as the [root branch](#root-branch). A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone.
 
 You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the databases and roles that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the databases and roles that existed in the past state. 
 
@@ -154,7 +154,7 @@ The part of the Neon architecture that manages cloud storage and compute resourc
 
 ## Copy-on-write
 
-A technique used to copy data efficiently. Neon uses the copy-on-write technique when creating [branches](#branch). Upon branch creation, data is marked as shared rather than physically duplicated. Both the parent and child branches refer to the same physical data resource. Data is only physically copied when a write occurs, at which point the affected portion of data is copied and the write is performed on the copied portion of data.
+A technique used to copy data efficiently. Neon uses the copy-on-write technique when creating [branches](#branch). When a branch is created, data is marked as shared rather than physically duplicated. Parent and child branches refer to the same physical data resource. Data is only physically copied when a write occurs. The affected portion of data is copied and the write is performed on the copied data.
 
 ## create_branch
 
@@ -162,7 +162,7 @@ A Neon Control Plane operation that creates a branch in a Neon project. For rela
 
 ## create_timeline
 
-A Neon Control Plane operation that creates a project with a primary branch. See [Operations](/docs/manage/operations) for more information.
+A Neon Control Plane operation that creates a project with a root branch. See [Operations](/docs/manage/operations) for more information.
 
 ## Data-at-rest encryption
 
@@ -286,7 +286,7 @@ A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes clus
 
 ## Non-primary branch
 
-Any branch not designated as the [primary branch](#primary-branch) in a Neon project. For more information, see [Non-primary branch](/docs/manage/branches#non-primary-branch).
+Any branch in a Neon project that is not designated as the [primary branch](#primary-branch). For more information, see [Non-primary branch](/docs/manage/branches#non-primary-branch).
 
 ## Page
 
@@ -338,11 +338,11 @@ Older projects may have a `web-access` system role, used by the [SQL Editor](#sq
 
 ## Primary branch
 
-A designation given to a single [branch](#branch) in a Neon project. Each Neon project is created with a [root branch](#root-branch) called `main`, which carries the _primary branch_ designation by default.
+A designation that is given to a single [branch](#branch) in a Neon project. Each Neon project is created with a [root branch](#root-branch) called `main`, which carries the _primary branch_ designation by default.
 
 The compute endpoint associated with a primary branch remains available if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
 
-You can change your primary branch, but a branch designated as primary cannot be deleted.
+You can change your primary branch, but a branch carrying the primary branch designation cannot be deleted.
 
 For more information, see [Primary branch](/docs/manage/branches#primary-branch).
 
