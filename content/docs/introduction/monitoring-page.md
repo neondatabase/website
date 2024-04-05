@@ -83,6 +83,6 @@ Deadlocks occur in a database when two or more transactions simultaneously block
 
 The **Rows** graph shows the number of rows deleted, updated, and inserted over time for the named database on the selected branch. The named database is always the oldest database on the selected branch. Row metrics are reset to zero whenever your compute restarts.
 
-Tracking rows inserted, updated, and deleted over time provides insights into the database's activity patterns. You can also use this data to identify trends, such as unexpected spikes in data insertions which might indicate a successful marketing campaign. It also aids in spotting irregularities in data updates or deletions, which could suggest unauthorized access or system errors.
+Tracking rows inserted, updated, and deleted over time provides insights into your database's activity patterns. You can also use this data to identify trends or irregularities.
 
 ![Monitoring page rows graph](/docs/introduction/monitor_rows.png)
