@@ -176,7 +176,7 @@ file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses))
 ```
 
 <Admonition type="tip">
-You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view data for LFC hits and misses. See [Viewing LFC metrics with EXPLAIN ANALYZE](/docs/extensions/neon#viewing-lfc-metrics-with-explain-analyze).
+You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view data for LFC hits and misses. See [View LFC metrics with EXPLAIN ANALYZE](/docs/extensions/neon#view-lfc-metrics-with-explain-analyze).
 </Admonition>
 
 For OLTP workloads, you should aim for a `file_cache_hit_ratio` above 99%. If you hit ration is below that, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
