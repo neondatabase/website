@@ -1,10 +1,10 @@
 ---
 title: Monitoring Postgres statistics
-subtitle: Monitor your database with the Postgres cumulative statistics system and the pg_stat_statements extension
+subtitle: Monitor your database with the Postgres Cumulative Statistics System and the pg_stat_statements extension
 enableTableOfContents: true
 ---
 
-You can use the Postgres cumulative statistics system and the [pg_stat_statements] extension to monitor what's happening with your database and queries.
+You can use the [Postgres Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html) and the [pg_stat_statements] extension to monitor what's happening with your database and queries.
 
 - [pg_stat_activity](#pg_stat_activity)
 - [pg_stat_statements](#pg_stat_statements)
