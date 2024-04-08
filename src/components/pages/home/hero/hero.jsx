@@ -91,7 +91,12 @@ const Item = forwardRef(
               style={{ width: progressBarWidth }}
             />
           </div>
-          <p className="mt-3.5 max-w-[366px] tracking-extra-tight text-gray-new-80">
+          <p
+            className={clsx(
+              'mt-3.5 max-w-[366px] tracking-extra-tight transition-colors duration-200',
+              isPlayVideo ? 'text-gray-new-80' : 'text-gray-new-40'
+            )}
+          >
             {description}
           </p>
           <Link
