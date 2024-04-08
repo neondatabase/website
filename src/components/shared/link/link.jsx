@@ -56,13 +56,20 @@ const Link = forwardRef(
       size && theme && styles.base,
       styles.size[size],
       styles.theme[theme],
-      additionalClassName
+      additionalClassName,
+      withArrow && 'group'
     );
 
     const content = (
       <>
         {withArrow ? <span>{children}</span> : children}
-        {withArrow && <ArrowRightIcon className={clsx('ml-2 shrink-0')} />}
+        {withArrow && (
+          <ArrowRightIcon
+            className={clsx(
+              '-mb-px ml-1.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]'
+            )}
+          />
+        )}
       </>
     );
     // TODO: remove this when we upgrade to latest version of Next.js
