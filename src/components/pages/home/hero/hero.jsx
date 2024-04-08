@@ -11,19 +11,22 @@ import bg from 'images/pages/home/hero/bg.png';
 
 const ITEMS = [
   {
-    videoUrl: '/videos/pages/home/ai-loop-crf-32.mp4',
+    videoUrl: '/videos/pages/home/ai-loop.mp4',
     title: 'Scaling',
     description:
       'We separated storage and compute. Compute activates on an incoming connection and shuts down to save resources on inactivity.',
   },
   {
-    videoUrl: '/videos/pages/home/ai-loop-crf-32.mp4',
+    videoUrl: '/videos/pages/home/ai-loop.mp4',
     title: 'Branching',
     description:
       'Neon allows to instantly branch your Postgres database to support a modern development workflow.',
   },
 ];
 
+// TODO: optimize and improve the animation of the transition between cards, as well as:
+//       - make a smooth transition of the progress bar state - at the moment it twitches
+//       - update current videos
 const Item = forwardRef(
   // eslint-disable-next-line react/prop-types
   ({ className, videoUrl, title, description, isPlayVideo, switchVideo }, videoRef) => {
@@ -71,15 +74,17 @@ const Item = forwardRef(
             <source src={videoUrl} type="video/mp4" />
           </video>
         </div>
-        <div className="px-1">
-          <h3 className="mt-5 text-[20px] text-white">{title}</h3>
+        <div className="mt-5 px-1">
+          <h3 className="text-xl leading-dense tracking-extra-tight text-white">{title}</h3>
           <div className="relative mt-3.5 h-px w-full bg-gray-new-15" aria-hidden>
             <span
               className="absolute left-0 top-0 h-full bg-[linear-gradient(90deg,rgba(228,229,231,0.10)_0%,#E4E5E7_100%)] duration-500"
               style={{ width: progressBarWidth }}
             />
           </div>
-          <p className="mt-3.5 text-gray-new-80">{description}</p>
+          <p className="mt-3.5 max-w-[366px] tracking-extra-tight text-gray-new-80">
+            {description}
+          </p>
         </div>
       </div>
     );
@@ -114,7 +119,7 @@ const Hero = () => {
           <h1 className="font-title text-[88px] font-medium leading-dense tracking-extra-tight text-white">
             The Future of Postgres
           </h1>
-          <p className="mx-auto mt-2.5 max-w-[490px] text-[18px] font-light leading-snug -tracking-[0.04em] text-gray-new-80">
+          <p className="mx-auto mt-2.5 max-w-[490px] text-lg font-light leading-snug -tracking-[0.04em] text-gray-new-80">
             Neon is serverless Postgres with autoscaling, on-demand storage and code-like database
             branching
           </p>
