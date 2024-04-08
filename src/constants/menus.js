@@ -1,9 +1,13 @@
 import CalendarIcon from 'icons/calendar.inline.svg';
 import ConsoleIcon from 'icons/console.inline.svg';
+import aboutUsIcon from 'icons/header/about-us.svg';
 import aiIcon from 'icons/header/ai.svg';
 import autoscalingIcon from 'icons/header/autoscaling.svg';
 import branchingIcon from 'icons/header/branching.svg';
+import careersIcon from 'icons/header/careers.svg';
+import caseStudiesIcon from 'icons/header/case-studies.svg';
 import cliIcon from 'icons/header/cli.svg';
+import enterpriseIcon from 'icons/header/enterprise.svg';
 import aboutUsOldIcon from 'icons/header/old/about-us.svg';
 import aiOldIcon from 'icons/header/old/ai.svg';
 import autoscalingOldIcon from 'icons/header/old/autoscaling.svg';
@@ -11,9 +15,10 @@ import branchingOldIcon from 'icons/header/old/branching.svg';
 import careersOldIcon from 'icons/header/old/careers.svg';
 import caseStudiesOldIcon from 'icons/header/old/case-studies.svg';
 import cliOldIcon from 'icons/header/old/cli.svg';
-import EnterpriseOldIcon from 'icons/header/old/enterprise.svg';
+import enterpriseOldIcon from 'icons/header/old/enterprise.svg';
 import partnersOldIcon from 'icons/header/old/partners.svg';
 import onDemandStorageOldIcon from 'icons/header/old/storage.svg';
+import partnersIcon from 'icons/header/partners.svg';
 import onDemandStorageIcon from 'icons/header/storage.svg';
 import PostgresDocsIcon from 'icons/postgres.inline.svg';
 import TransactionsIcon from 'icons/transactions.inline.svg';
@@ -89,7 +94,7 @@ export default {
       items: [
         {
           icon: {
-            new: branchingIcon,
+            new: aboutUsIcon,
             old: aboutUsOldIcon,
           },
           text: 'About us',
@@ -98,7 +103,7 @@ export default {
         },
         {
           icon: {
-            new: autoscalingIcon,
+            new: careersIcon,
             old: careersOldIcon,
           },
           text: 'Careers',
@@ -107,7 +112,7 @@ export default {
         },
         {
           icon: {
-            new: cliIcon,
+            new: partnersIcon,
             old: partnersOldIcon,
           },
           text: 'Partners',
@@ -116,7 +121,7 @@ export default {
         },
         {
           icon: {
-            new: onDemandStorageIcon,
+            new: caseStudiesIcon,
             old: caseStudiesOldIcon,
           },
           text: 'Case studies',
@@ -125,8 +130,8 @@ export default {
         },
         {
           icon: {
-            new: aiIcon,
-            old: EnterpriseOldIcon,
+            new: enterpriseIcon,
+            old: enterpriseOldIcon,
           },
           text: 'Enterprise',
           description: 'Scale & grow',

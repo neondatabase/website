@@ -1,12 +1,13 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
-import clouflareIcon from 'icons/home/logos/cloudflare.svg';
-import hasuraIcon from 'icons/home/logos/hasura.svg';
-import koyebIcon from 'icons/home/logos/koyeb.svg';
+import akqaIcon from 'icons/home/logos/akqa.svg';
+import outfront7Icon from 'icons/home/logos/outfront7.svg';
 import replitIcon from 'icons/home/logos/replit.svg';
+import retoolIcon from 'icons/home/logos/retool.svg';
 import vercelIcon from 'icons/home/logos/vercel.svg';
-import wundergraphIcon from 'icons/home/logos/wundergraph.svg';
+import zimmerBiometIcon from 'icons/home/logos/zimmer-biomet.svg';
 
 const logos = [
   {
@@ -15,44 +16,44 @@ const logos = [
     width: 100,
   },
   {
-    logo: koyebIcon,
-    alt: 'Koyeb',
-    width: 107,
+    logo: zimmerBiometIcon,
+    alt: 'Zimmer Biomet',
+    width: 146,
   },
   {
-    logo: wundergraphIcon,
-    alt: 'WunderGraph',
-    width: 133,
-  },
-  {
-    logo: hasuraIcon,
-    alt: 'Hasura',
-    width: 97,
+    logo: retoolIcon,
+    alt: 'Retool',
+    width: 92,
   },
   {
     logo: replitIcon,
     alt: 'Replit',
-    width: 104,
+    width: 116,
   },
   {
-    logo: clouflareIcon,
-    alt: 'Cloudflare',
-    width: 161,
+    logo: outfront7Icon,
+    alt: 'outfront7',
+    width: 123,
+  },
+  {
+    logo: akqaIcon,
+    alt: 'akqa',
+    width: 58,
   },
 ];
 
 const Logos = () => (
   <section className="safe-paddings mt-[172px] xl:mt-24 lg:mt-20 sm:mt-16">
     <Container
-      className="z-20 flex flex-wrap items-center justify-between gap-y-6 xl:max-w-[960px] sm:flex-col sm:items-start"
+      className="z-20 flex flex-wrap items-center gap-x-36 gap-y-6 xl:max-w-[960px] xl:gap-x-28 lg:justify-center lg:gap-x-[42px] md:items-start md:justify-between sm:flex-col"
       size="1100"
     >
       <h2 className="max-w-[370px] text-[36px] font-medium leading-dense tracking-extra-tight text-white xl:text-[32px] lg:max-w-[300px] lg:text-[26px] sm:text-[22px]">
-        We separated storage and&nbsp;compute.
+        Trusted by customers and&nbsp;partners
       </h2>
-      <ul className="mr-[108px] grid shrink grid-cols-[0.61fr_.664fr_1fr] justify-center gap-x-14 gap-y-12 xl:mr-[69px] xl:gap-x-12 xl:gap-y-10 lg:mr-6 lg:gap-x-8 lg:gap-y-7 md:mr-0 sm:gap-y-5">
-        {logos.map(({ logo, width, alt }) => (
-          <li className="flex" key={alt}>
+      <ul className="grid max-w-[446px] shrink grid-cols-[0.7945fr_1fr_.630137fr] justify-between gap-12 xl:gap-x-12 xl:gap-y-10 lg:gap-x-8 lg:gap-y-7 sm:gap-y-5">
+        {logos.map(({ logo, width, alt }, index) => (
+          <li className={clsx('flex', index !== 0 && index !== 3 && 'justify-center')} key={index}>
             <Image
               className="h-7 w-auto xl:h-6 lg:h-5"
               src={logo}

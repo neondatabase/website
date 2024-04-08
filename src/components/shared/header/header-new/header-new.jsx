@@ -39,11 +39,17 @@ const HeaderNew = ({ className = null, theme }) => {
             </Link>
 
             <nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 xl:relative xl:left-auto xl:top-auto xl:translate-x-0 xl:translate-y-0">
-              <ul className="relative flex gap-x-10 xl:gap-x-8 lg:hidden">
+              <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden">
                 {MENUS.header.map(({ to, text, items }, index) => {
                   const Tag = to ? Link : 'button';
                   return (
-                    <li className={clsx(items?.length > 0 && 'group')} key={index}>
+                    <li
+                      className={clsx(
+                        'relative [perspective:2000px]',
+                        items?.length > 0 && 'group'
+                      )}
+                      key={index}
+                    >
                       <Tag
                         className={clsx(
                           'flex items-center gap-x-1 whitespace-pre text-sm',
@@ -58,46 +64,48 @@ const HeaderNew = ({ className = null, theme }) => {
                         )}
                       </Tag>
                       {items?.length > 0 && (
-                        <div className="group-hover:opacity-1 invisible absolute -left-5 top-full w-[435px] pt-5 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
-                          <ul
-                            className={clsx(
-                              'relative flex min-w-[248px] flex-col gap-y-1.5 rounded-[10px] bg-gray-new-8 p-3',
-                              'before:border-linear before:absolute before:inset-0 before:rounded-[inherit] before:border-image-[linear-gradient(180deg,#1D1E21_0%,rgba(29,30,33,.4)_100%)]'
-                            )}
-                          >
+                        <div
+                          className={clsx(
+                            'absolute -left-5 top-full w-[300px] pt-5',
+                            'pointer-events-none opacity-0',
+                            'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
+                            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
+                          )}
+                        >
+                          <ul className="relative flex min-w-[248px] flex-col gap-y-0.5 rounded-[14px] border border-gray-new-10 bg-black-new p-2.5">
                             {items.map(({ icon, text, description, to }, index) => (
                               <li key={index}>
                                 <Link
                                   className={clsx(
-                                    'group/link relative flex items-center overflow-hidden whitespace-nowrap rounded-xl p-2 text-white hover:text-primary-2',
-                                    'before:absolute before:inset-0 before:z-10 before:bg-[#1D1E20] before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100'
+                                    'group/link relative flex items-center overflow-hidden whitespace-nowrap rounded-[14px] p-2 text-white hover:text-primary-2',
+                                    'before:absolute before:inset-0 before:z-10 before:bg-gray-new-8 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100'
                                   )}
                                   to={to}
                                 >
-                                  <div className="relative z-10 flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-lg border border-gray-new-30">
+                                  <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-new-15 bg-gray-new-8">
                                     <img
                                       src={icon.new}
-                                      width={18}
-                                      height={18}
-                                      className="h-[18px] w-[18px] opacity-80 transition-opacity duration-200 group-hover/link:opacity-100"
+                                      width={20}
+                                      height={20}
+                                      className="h-5 w-5 opacity-80 transition-opacity duration-200 group-hover/link:opacity-100"
                                       loading="lazy"
                                       alt=""
                                       aria-hidden
                                     />
                                   </div>
-                                  <span className="relative z-10 ml-2">
-                                    <span className="mr-2 block text-sm font-medium leading-none transition-colors duration-200">
+                                  <span className="relative z-10 ml-2.5">
+                                    <span className="block text-sm leading-dense tracking-[-0.02em] transition-colors duration-200">
                                       {text}
                                     </span>
-                                    <span className="mt-1.5 block text-[13px] font-light leading-none text-gray-new-60">
+                                    <span className="mt-0.5 block text-sm font-light leading-dense tracking-[-0.02em] text-gray-new-50">
                                       {description}
                                     </span>
                                   </span>
                                   <img
                                     src={arrowIcon}
-                                    width={16}
-                                    height={14}
-                                    className="relative z-10 ml-auto mr-2 h-3.5 w-4 -translate-x-1.5 opacity-0 transition-[opacity,transform] duration-300 group-hover/link:translate-x-0 group-hover/link:opacity-100"
+                                    width={6}
+                                    height={10}
+                                    className="relative z-10 ml-auto mr-1.5 h-2.5 w-1.5 -translate-x-1.5 opacity-0 transition-[opacity,transform] duration-300 group-hover/link:translate-x-0 group-hover/link:opacity-100"
                                     loading="lazy"
                                     alt=""
                                     aria-hidden

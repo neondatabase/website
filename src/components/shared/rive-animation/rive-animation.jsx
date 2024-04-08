@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import useIsTouchDevice from 'hooks/use-is-touch-device';
+
 const RiveAnimation = ({
   className = '',
   intersectionClassName = '',
@@ -19,6 +21,7 @@ const RiveAnimation = ({
   animationRootMargin = '300px 0px',
   onLoad,
 }) => {
+  const isTouch = useIsTouchDevice();
   const [containerRef, isIntersecting] = useInView({
     triggerOnce: true,
     rootMargin: intersectionRootMargin,
@@ -60,7 +63,13 @@ const RiveAnimation = ({
         aria-hidden
       />
       <div
-        className={clsx(className, '[&_canvas]:!h-auto [&_canvas]:!w-full')}
+        className={clsx(
+          className,
+          {
+            'pointer-events-none': isTouch,
+          },
+          '[&_canvas]:!h-auto [&_canvas]:!w-full'
+        )}
         ref={animationRef}
         aria-hidden
       >
