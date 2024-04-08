@@ -74,6 +74,8 @@ Some key points to understand about how your endpoint responds when you make cha
 * Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
 * Changes to autosuspend settings do not require an endpoint restart; existing connections are unaffected.
 
+To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
+
 ### Compute size and autoscaling configuration
 
 Users on paid plans can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
@@ -204,7 +206,7 @@ The maximum **Suspend compute after a period of inactivity** setting is 7 days. 
 It is sometimes necessary to restart a compute endpoint. For example, if you upgrade to a paid plan account, you may want to restart your compute endpoint to immediately apply your upgraded limits.
 
 <Admonition type="important">
-Please be aware that restarting a compute endpoint interrupts any connections currently using the compute endpoint.
+Please be aware that restarting a compute endpoint interrupts any connections currently using the compute endpoint. To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
 </Admonition>
 
 You can restart a compute endpoint using one of the following methods:
