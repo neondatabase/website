@@ -72,32 +72,32 @@ const HeaderNew = ({ className = null, theme }) => {
                             'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
                           )}
                         >
-                          <ul className="relative flex min-w-[248px] flex-col gap-y-0.5 rounded-[14px] border border-gray-new-10 bg-black-new p-2.5">
+                          <ul className="relative flex min-w-[248px] flex-col gap-y-0.5 rounded-[14px] border border-[#16181D] bg-[#0B0C0F] p-2.5 shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]">
                             {items.map(({ icon, text, description, to }, index) => (
                               <li key={index}>
                                 <Link
                                   className={clsx(
-                                    'group/link relative flex items-center overflow-hidden whitespace-nowrap rounded-[14px] p-2 text-white hover:text-primary-2',
-                                    'before:absolute before:inset-0 before:z-10 before:bg-gray-new-8 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100'
+                                    'group/link relative flex items-center overflow-hidden whitespace-nowrap rounded-[14px] p-2 text-white',
+                                    'before:absolute before:inset-0 before:z-10 before:bg-[#16181D] before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100'
                                   )}
                                   to={to}
                                 >
-                                  <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-new-15 bg-gray-new-8">
+                                  <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#2E3038] bg-[#16181D]">
                                     <img
                                       src={icon.new}
                                       width={20}
                                       height={20}
-                                      className="h-5 w-5 opacity-80 transition-opacity duration-200 group-hover/link:opacity-100"
+                                      className="h-5 w-5"
                                       loading="lazy"
                                       alt=""
                                       aria-hidden
                                     />
                                   </div>
                                   <span className="relative z-10 ml-2.5">
-                                    <span className="block text-sm leading-dense tracking-[-0.02em] transition-colors duration-200">
+                                    <span className="block text-sm leading-dense tracking-[-0.01em] transition-colors duration-200">
                                       {text}
                                     </span>
-                                    <span className="mt-0.5 block text-sm font-light leading-dense tracking-[-0.02em] text-gray-new-50">
+                                    <span className="mt-0.5 block text-[13px] font-light leading-dense tracking-[-0.02em] text-gray-new-50">
                                       {description}
                                     </span>
                                   </span>
@@ -105,7 +105,7 @@ const HeaderNew = ({ className = null, theme }) => {
                                     src={arrowIcon}
                                     width={6}
                                     height={10}
-                                    className="relative z-10 ml-auto mr-1.5 h-2.5 w-1.5 -translate-x-1.5 opacity-0 transition-[opacity,transform] duration-300 group-hover/link:translate-x-0 group-hover/link:opacity-100"
+                                    className="relative z-10 ml-auto mr-1.5 h-2.5 w-1.5 -translate-x-1 opacity-0 transition-[opacity,transform] duration-300 group-hover/link:translate-x-0 group-hover/link:opacity-100"
                                     loading="lazy"
                                     alt=""
                                     aria-hidden

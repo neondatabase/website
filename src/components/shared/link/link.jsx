@@ -33,6 +33,7 @@ const styles = {
     'green-underlined':
       'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
     'gray-50': 'text-gray-new-50 transition-colors duration-200 hover:text-green-45',
+    'gray-70': 'text-gray-new-70 transition-colors duration-200 hover:text-green-45',
     'gray-90': 'text-gray-new-90 transition-colors duration-200 hover:text-green-45',
   },
 };

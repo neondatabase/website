@@ -1,5 +1,5 @@
 ---
-title: Postgres Date and Time Data Types
+title: Postgres Date and Time data types
 subtitle: Work with date and time values in Postgres
 enableTableOfContents: true
 updatedOn: '2024-02-04T17:39:41.493Z'
