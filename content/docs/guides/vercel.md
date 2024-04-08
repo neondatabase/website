@@ -125,9 +125,13 @@ After you add the integration to a Vercel project, Neon creates a database branc
 
 ## Manage branches created by the integration
 
-The Neon Vercel Integration creates a branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, old branches should be removed regularly.
+The Neon Vercel Integration creates a branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, old branches should be removed regularly. Different options are supported for branch removal. You can do so automatically, manually from the Vercel integration drawer, or  
 
-To remove branches created by the integration:
+
+
+The integration supports automatic deletion of obsolete preview branches. You can enable this feature by selecting **Automatically delete obsolete Neon branches** when installing the integration. We'll soon add an option to the Vercel integration drawer that lets you enable and disable automatic branch deletion for new and existing integrations. Deletion occurs when the git branch that triggered a branch's creation is deleted.
+
+To remove branches created by the integration manually:
 
 1. In the Neon Console, select your project.
 2. Select the **Integrations** page.
