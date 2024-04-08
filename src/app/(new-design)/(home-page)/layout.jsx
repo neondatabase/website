@@ -1,6 +1,7 @@
 import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
 import GetStarted from 'components/pages/home/get-started';
+import Hero from 'components/pages/home/hero/hero';
 import Industry from 'components/pages/home/industry';
 import Lightning from 'components/pages/home/lightning';
 import Logos from 'components/pages/home/logos';
@@ -16,6 +17,7 @@ const HomeLayout = () => (
     withOverflowHidden
     isNewDesign
   >
+    <Hero />
     <Logos />
     <Lightning />
     <Bento />
