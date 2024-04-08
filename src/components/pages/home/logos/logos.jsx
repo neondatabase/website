@@ -43,7 +43,7 @@ const logos = [
 ];
 
 const Logos = () => (
-  <section className="safe-paddings mt-[172px] xl:mt-24 lg:mt-20 sm:mt-16">
+  <section className="safe-paddings mt-[176px] xl:mt-24 lg:mt-20 sm:mt-16">
     <Container
       className="z-20 flex flex-wrap items-center gap-x-36 gap-y-6 xl:max-w-[960px] xl:gap-x-28 lg:justify-center lg:gap-x-[42px] md:items-start md:justify-between sm:flex-col"
       size="1100"

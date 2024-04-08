@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
+import Link from 'components/shared/link';
 import linesImage from 'images/pages/home/industry/lines.png';
 
 import Testimonials from './testimonials';
@@ -26,7 +27,7 @@ const Industry = () => (
         height={linesImage.height / 2}
         alt=""
       />
-      <div className="sm:flex sm:w-full sm:flex-col sm:items-center">
+      <div className="flex w-full flex-col sm:items-center">
         <h2
           className={clsx(
             'mt-11 font-title text-[88px] font-medium leading-[0.96] -tracking-[0.03em] text-white',
@@ -38,6 +39,13 @@ const Industry = () => (
           <br />
           trust Neon
         </h2>
+        <Link
+          className="mt-5 flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] text-white [&_svg]:ml-[7px] [&_svg]:scale-110"
+          to="#"
+          withArrow
+        >
+          Dive into success stories
+        </Link>
         <Testimonials />
       </div>
     </Container>

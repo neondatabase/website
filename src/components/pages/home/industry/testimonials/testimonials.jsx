@@ -77,7 +77,7 @@ const Testimonials = () => {
   }, [scrollLeft, scrollWidth, windowWidth]);
 
   return (
-    <div className="mt-48 xl:mt-[123px] lg:mt-[98px] sm:mt-6 sm:w-full">
+    <div className="mt-[157px] xl:mt-[88px] lg:mt-[63px] sm:mt-[38px] sm:w-full">
       <div
         className={clsx(
           'flex flex-col gap-[184px] xl:gap-[142px] lg:gap-[78px]',
