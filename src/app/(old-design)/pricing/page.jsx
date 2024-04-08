@@ -19,7 +19,9 @@ const logos = [
   'code-institute',
   'branch',
   'eqt',
+  'retool',
   'master-school',
+  'encore',
 ];
 
 const sliderItems = [

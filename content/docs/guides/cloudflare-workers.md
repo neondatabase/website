@@ -21,7 +21,7 @@ To follow along with this guide, you will need:
 
 ### Initialize a new project
 
-Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
+Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 
 1. Click the **New Project** button to create a new project.
 
@@ -48,10 +48,12 @@ Log in to the Neon console and navigate to the [Projects](https://console.neon.t
 
 ### Retrieve your Neon database connection string
 
-Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. Select the **Pooled connection** option to add the `-pooler` option to your connection string. A pooled connection is recommended for serverless environments. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+
+Your pooled connection string should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Keep your connection string handy for later use.

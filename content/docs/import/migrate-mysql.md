@@ -42,7 +42,7 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 Now, modify the connection string as follows to pass your **endpoint ID** (`ep-cool-darkness-123456` in this example) to Neon with your password using the `endpoint` keyword, as shown here:
 
 ```bash shouldWrap
-postgres://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require // [!code word:endpoint=ep-cool-darkness-123456;AbC123dEf]
+postgres://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 <Admonition type="note">
@@ -105,6 +105,26 @@ COPY Threads Completion          0          4                     0.905s
        Install Comments          0          0                     0.000s
 -----------------------  ---------  ---------  ---------  --------------
       Total import time          ✓          1     0.0 kB          4.064s
+```
+
+## SSL verify error
+
+If you encounter an `SSL verify error: 20 X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY` error while attempting the instructions described above using `pgloader` from a Docker container, try the solution identified in this [GitHub issue](https://github.com/dimitri/pgloader/issues/768#issuecomment-693390290), which involves specifying `sslmode=allow` in the Postgres connection string and using the `--no-ssl-cert-verification` option with `pgloader`. 
+
+The following configuration file and Docker command were verified to work with Docker on Windows but may apply generally when using `pgloader` in a Docker container. In your `pgloader` config file, replace the MySQL and Postgres connection string values with your own. In the Docker command, specify the path to your `pgloader` config file, and replace the container ID value (the long alphanumeric string) with your own.
+
+`pgloader` config.load file: 
+
+```plaintext
+load database
+  from mysql://user:password@host/source_db?sslmode=require
+  into postgresql://alex:endpoint=ep-cool-darkness-123456:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=allow;
+``````
+
+Docker command:
+
+```plaintext
+docker run -v C:\path\to\config.load:/config.load d183dc100d3af5e703bd867b3b7826c117fa16b7ee2cd360af591dc895b121dc pgloader --no-ssl-cert-verification /config.load
 ```
 
 ## References

@@ -113,9 +113,9 @@ To share a project:
 1. Under **Grant access to your project**, enter the email address of the account you want to share access with.
 1. Click **Grant access**.
 
-The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
+The email you specify is added to the list of **Users with access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. This account can also share the project with other Neon users. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
 
-The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
+The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
 
 For additional information, refer to our [Project sharing guide](/docs/guides/project-sharing-guide).
 
@@ -130,18 +130,18 @@ From the **Project settings** page, you can also set defaults or apply bulk chan
 
 ### Reset the default compute size
 
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 8 CUs. Larger compute sizes will be supported in a future release.
 
-For [Neon Free Tier](/docs/introduction/plans#free-tier) users, Neon sets your compute size to a static shared 1 vCPU, with 1 GB of RAM for each branch (max 10 branches).
+For [Neon Free Tier](/docs/introduction/plans#free-tier) users, Neon sets your compute size to a static shared .25 vCPU, with 1 GB of RAM for each branch (max 10 branches).
 
 Users on paid plans have the flexibility to choose a compute size for each branch's compute endpoint individually. By default, new branches inherit the compute endpoint size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create a series of read-only replicas, where each replica typically requires less compute per branch.
 
 To reset the default compute size, go to **Project settings** > **Compute**.
 
-You can choose from two options:
+Using the slider, you can configure a fixed-size compute or enable autoscaling.
 
-- **Fixed Size:** Select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 7 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 8 CUs. A fixed-size compute does not scale to meet workload demand.
+- **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 8 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 _Example: default minimum and maximum autoscale settings_
 
@@ -153,7 +153,7 @@ By default, Neon retains a history of changes for all branches in a Neon project
 
 To configure the history retention period for a project:
 
-1. Select a project in the Neon console.
+1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Storage**.
     ![History retention configuration](/docs/manage/history_retention.png)
@@ -170,7 +170,7 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 
 To enable logical replication for your project:
 
-1. Select your project in the Neon console.
+1. Select your project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Beta**.
 4. Click **Enable**.
@@ -204,7 +204,7 @@ Neon supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_versio
 
 To configure an allowlist:
 
-1. Select a project in the Neon console.
+1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
     ![IP Allow configuration](/docs/manage/ip_allow.png)
@@ -323,7 +323,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 
 <TabItem>
 
-1. Select a project in the Neon console.
+1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
 4. Clear the **Allowed IP addresses and ranges** field.

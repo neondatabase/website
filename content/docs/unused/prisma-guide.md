@@ -194,7 +194,7 @@ found 0 vulnerabilities
 
 To view the `Elements` table that was created in your `neondb` database by the migration performed in the previous step:
 
-1. Navigate to the [Neon console](https://console.neon.tech/).
+1. Navigate to the [Neon Console](https://console.neon.tech/).
 2. Select your project.
 3. Select **Tables**.
 4. Select the `neondb` database and default `public` schema. The `Elements` table should be visible in the sidebar. The table has no data at this point. Data is added later in this guide.
@@ -249,7 +249,7 @@ You have a couple of options for adding data to the `Elements` table. You can ad
 
 ### Option A: Add data using the Neon SQL Editor
 
-1. Navigate to the [Neon console](https://console.neon.tech/).
+1. Navigate to the [Neon Console](https://console.neon.tech/).
 1. Select your project.
 1. Select the **SQL Editor**.
 1. Select the `main` branch of your project and select the `neondb` database.
@@ -425,7 +425,7 @@ Another use case for Introspection is when using plain SQL for schema changes or
 
 Let's assume your database has an extended version of the `Elements` table used in the previous steps. This table is called `Elements_ext`. Let's create that table in the Neon SQL Editor:
 
-1. Navigate to the [Neon console](https://console.neon.tech/).
+1. Navigate to the [Neon Console](https://console.neon.tech/).
 1. Select your project.
 1. Select the **SQL Editor**.
 1. Select the `main` branch of your project and select the `neondb` database.

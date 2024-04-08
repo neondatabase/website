@@ -26,7 +26,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <a href="/docs/introduction/branching" description="Learn to optimize development workflows with database branching" icon="split-branch">Branching</a>
 
-<a href="/docs/extensions/pg-extensions" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
+<a href="/docs/extensions/extensions-intro" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
 
 <a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
 
@@ -60,7 +60,11 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/django-logo.svg" width="29" height="36" alt="Django" href="/docs/guides/django" title="Connect a Django application to Neon" />
 
+<img src="/images/technology-logos/drizzle-logo.svg" width="29" height="36" alt="Drizzle" href="/docs/guides/drizzle-migrations" title="Schema migration with Neon Postgres and Drizzle ORM" />
+
 <img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir-ecto" title="Connect from Elixir with Ecto to Neon" />
+
+<img src="/images/technology-logos/entity-logo.svg" width="36" height="36" alt="Entity Framework" href="/docs/guides/elixir-ecto" title="Schema migration with Neon and Entity Framework" />
 
 <img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Use Exograph with Neon" />
 
@@ -90,11 +94,15 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/materialize-logo.svg" width="36" height="36" alt="Materialize" href="/docs/guides/logical-replication-materialize" title="Replicate data from Neon to Materialize" />
 
+<img src="/images/technology-logos/netlify-logo.svg" width="29" height="36" alt="Netlify Functions" href="/docs/guides/netlify-functions" title="Connect a Neon Postgres database to your Netlify Functions application" />
+
 <img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
 
 <img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale-integration" title="Add the Neon PolyScale integration" />
 
 <img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
+
+<img src="/images/technology-logos/prisma-logo.svg" width="29" height="36" alt="Prisma" href="/docs/guides/prisma-migrations" title="Schema migration with Neon Postgres and Prisma ORM" />
 
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-jdbc" title="Connect Quarkus (JDBC) to Neon" />
 
@@ -109,6 +117,8 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 <img src="/images/technology-logos/render-logo.svg" width="36" height="36" alt="Render" href="/docs/guides/render" title="Use Neon Postgres with Render" />
 
 <img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
+
+<img src="/images/technology-logos/sequelize-logo.svg" width="29" height="36" alt="Sequelize" href="/docs/guides/sequelize" title="Schema migration with Neon Postgres and Sequelize" />
 
 <img src="/images/technology-logos/sqlalchemy-logo.svg" width="102" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect an SQLAlchemy application to Neon" />
 

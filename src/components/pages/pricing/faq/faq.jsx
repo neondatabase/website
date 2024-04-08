@@ -5,34 +5,38 @@ import Item from './item';
 
 const items = [
   {
+    question: 'What is a compute hour?',
+    answer: `Compute hour is the metric for compute usage in Neon. The quick math: [compute hours] = [compute size] x [hours your compute runs]. Each pricing plan includes a certain number of compute hours; how quickly you consume these hours depends on the size of your compute and how long it runs. Once you exceed the allocated amount of compute hours, you'll be billed for overages in a given month.`,
+    id: 'compute-hour',
+    initialState: 'open',
+  },
+  {
+    question: 'How does billing work?',
+    answer: `In Neon, you are charged a monthly fee (corresponding to your pricing plan) plus any additional compute and/or storage usage over the limits included in your plan. For example, the Launch plan includes 300 compute-hours of compute usage;  if you consume 320 compute-hours in a month, you will be billed additionally for 20 compute-hours.`,
+  },
+  {
     question: 'When will I be billed?',
     answer: `Neon bills for the past month's usage at the beginning of each calendar month. For more information, see <a href="/docs/introduction/manage-billing">Manage billing</a>.`,
   },
   {
-    question: 'What happens if I cancel my subscription?',
-    answer:
-      'If you cancel your subscription you will be be required to downgrade your account to the free limits.',
+    question: 'How many compute hours will it take to run my workload?',
+    answer: `You can get a good idea by estimating how many hours your databases run, and at which compute size. For example: imagine you’re running a 2 CPU, 8 GB RAM database for 2 hours a day (or 62 hours per month). This equals [2 CU * 62 hours] = 124 compute hours per month.`,
+  },
+  {
+    question: 'How can I control my costs with autoscaling?',
+    answer: `When enabling <a href="/docs/introduction/autoscaling">autoscaling</a>, you will set a maximum autoscaling limit (e.g. 2 CU) that will act as a de-facto cost limit.`,
+  },
+  {
+    question: 'How is storage charged in Neon?',
+    answer: `Neon implements a unique storage engine that enables database branching on copy-on-write, without duplicate storage. You can create instant database copies (database branches) without adding to the storage bill. Since Neon retains database history, the size of storage for a Neon project will be calculated as the size of your tables plus the WAL up to the configurable history retention period.`,
   },
   {
     question: 'Do I get a notification if I am approaching my usage limits?',
-    answer:
-      'Yes, we display your usage consumption in the Neon admin console and will email you when you are within 20% of your included usage.',
+    answer: `Yes, we display your usage consumption in the Neon admin console and we will also email you when you’re getting close.`,
   },
   {
     question: 'Why are we limited to 500 branches per project?',
     answer: `Neon implements usage limits for branching in order to prevent potential abuse of the service which can negatively impact other users. For customers seeking higher limits please contact <a href="mailto:customer-success@neon.tech">customer-success@neon.tech</a>.`,
-  },
-  {
-    question: 'Does Neon charge for storage in database branches?',
-    answer:
-      'Neon charges for unique storage. Data that a branch shares in common with a parent branch is not considered unique, but data changes to a branch are counted toward storage.',
-    linkUrl: '/docs/introduction/usage-metrics#project-storage',
-    linkText: 'Read more',
-    linkLabel: 'about project storage',
-  },
-  {
-    question: 'What happens when I exceed 10 GiB storage on the Launch plan?',
-    answer: `If you exceed your storage quota on the Launch plan, the Neon team will collaborate with you to address your storage needs. This may involve providing guidance on optimizing storage usage or exploring alternative plans that better suit your requirements. It's important to note that Neon does not automatically halt write operations when you surpass your limits. You can send related inquiries to <a href="mailto:customer-success@neon.tech">customer-success@neon.tech</a>.`,
   },
 ];
 

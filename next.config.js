@@ -165,6 +165,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/discord',
+        destination: 'https://discord.gg/92vNTzKDGp',
+        permanent: false,
+      },
+      {
         source: '/developer-days',
         destination: 'https://devdays.neon.tech',
         permanent: true,
@@ -178,6 +183,11 @@ const defaultConfig = {
       {
         source: '/docs/postgres/:path*.html',
         destination: '/docs/postgres/:path*',
+        permanent: true,
+      },
+      {
+        source: '/sign_in',
+        destination: 'https://console.neon.tech/signup',
         permanent: true,
       },
       ...docsRedirects,
@@ -206,8 +216,8 @@ const defaultConfig = {
         destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
       },
       {
-        source: '/discord',
-        destination: 'https://discord.gg/92vNTzKDGp',
+        source: '/developer-days/:path*',
+        destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
       },
     ];
   },
@@ -264,6 +274,11 @@ const defaultConfig = {
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
+  },
+  env: {
+    INKEEP_INTEGRATION_API_KEY: process.env.INKEEP_INTEGRATION_API_KEY,
+    INKEEP_INTEGRATION_ID: process.env.INKEEP_INTEGRATION_ID,
+    INKEEP_ORGANIZATION_ID: process.env.INKEEP_ORGANIZATION_ID,
   },
 };
 

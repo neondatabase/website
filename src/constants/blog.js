@@ -6,13 +6,7 @@ const CATEGORY_COLORS = {
   engineering: 'text-purple-70',
   community: 'text-yellow-70',
   ai: 'text-blue-80',
-};
-
-const CATEGORY_HOVER_COLORS = {
-  company: 'hover:text-[#4DFFC4]',
-  engineering: 'hover:text-[#CAC2F0]',
-  community: 'hover:text-[#F7F7B6]',
-  ai: 'hover:text-[#C1E8FF]',
+  'case-study': 'text-pink-90',
 };
 
 const CATEGORY_BG_COLORS = {
@@ -20,13 +14,13 @@ const CATEGORY_BG_COLORS = {
   engineering: 'bg-purple-70/10',
   community: 'bg-yellow-70/10',
   ai: 'bg-blue-80/10',
+  'case-study': 'bg-pink-90/10',
 };
 
 export {
   BLOG_BASE_PATH,
   BLOG_POSTS_PER_PAGE,
   CATEGORY_COLORS,
-  CATEGORY_HOVER_COLORS,
   CATEGORY_BG_COLORS,
   BLOG_CATEGORY_BASE_PATH,
 };

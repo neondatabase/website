@@ -40,15 +40,15 @@ The examples that follow assume that your database connection string is assigned
 
 The Neon serverless driver uses the [neon](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neon-function) function for queries over HTTP.
 
-You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety. Please note that [Drizzle Kit](https://orm.drizzle.team/kit-docs/overview) does not support the Neon serverless driver — you'll have to use a standard Postgres driver with Drizzle Kit, like `node-postgres` or `postgres.js`.
+You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
 
 <CodeTabs labels={["Node.js", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
 ```javascript
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.DATABASE_URL!);
-const {rows: [post]} = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
+const sql = neon(process.env.DATABASE_URL);
+const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
 // `post` is now [{ id: 12, title: 'My post', ... }] (or undefined)
 ```
 
@@ -71,8 +71,8 @@ export default async () => {
 import { neon } from '@neondatabase/serverless';
 
 export default async (req: Request) => {
-  const sql = neon(process.env.DATABASE_URL!);
-  const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+  const sql = neon(process.env.DATABASE_URL);
+  const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
   return new Response(JSON.stringify(post));
 }
 
@@ -90,7 +90,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const sql = neon(process.env.DATABASE_URL!);
-  const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+  const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
  
   return res.status(500).send(post);
 }
@@ -99,7 +99,7 @@ export default async function handler(
 </CodeTabs>
 
 <Admonition type="note">
-The maximum request size and response size for queries over HTTP is 10 MB. Additionally, there is a 15-second proxy timeout for SQL requests over HTTP. Long-running queries that exceed the 15-second threshold are terminated.
+The maximum request size and response size for queries over HTTP is 10 MB.
 </Admonition>
 
 ### neon function configuration options
@@ -274,7 +274,7 @@ Consider using the driver with `Pool` or `Client` in the following scenarios:
 - You are writing a new code base and want to use a package that expects a `node-postgres-compatible` driver.
 - Your backend service uses sessions / interactive transactions with multiple queries per connection.
 
-You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead. Please note that [Drizzle Kit](https://orm.drizzle.team/kit-docs/overview) does not support the Neon serverless driver — you'll have to use a standard Postgres driver with Drizzle Kit, like `node-postgres` or `postgres.js`.
+You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
 
 <CodeTabs labels={["Node.js", "Prisma", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
@@ -282,7 +282,7 @@ You can use the Neon serverless driver in the same way you would use `node-postg
 import { Pool } from '@neondatabase/serverless';
 
 const pool = new Pool({connectionString: process.env.DATABASE_URL});
-const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
+const posts = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
 pool.end();
 ```
 
@@ -334,7 +334,7 @@ export default async (req: Request, ctx: any) => {
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
   await pool.connect();
 
-  const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
   
   ctx.waitUntil(pool.end());
 
@@ -357,7 +357,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
-  const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
   
   await pool.end();
 

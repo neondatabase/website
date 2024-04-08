@@ -15,6 +15,8 @@ See [Token](#token).
 
 A usage metric that tracks the amount of time a compute is active, rather than idle when suspended due to inactivity. The time that your compute is idle is not counted toward compute usage.
 
+Also see [Compute hours](#compute-hours).
+
 ## Activity Monitor
 
 A process that monitors a Neon compute instance for activity. During periods of inactivity, the Activity Monitor gracefully places the compute into an `Idle` state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of inactivity. When a connection is made to an idle compute, the Activity Monitor reactivates the compute.
@@ -55,11 +57,17 @@ A mechanism that manages the lag between the Pageserver and compute node or the 
 
 ## Branch
 
-A [copy-on-write](#copy-on-write) clone of a Neon project's primary branch or previously created child branch. A branch can be created from the current or past state of the parent branch. A branch created from the current state of the parent branch includes the databases and roles that existed in the parent branch at the time of branch creation. A branch created from a past state of the parent branch includes the databases and roles that existed in the past state. The data in a branch can be modified independently from its originating data. See [Branching](/docs/introduction/branching). Connecting to a database in a branch requires connecting via the branch's compute endpoint. For more information, see [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
+An isolated copy of data, similar to a Git branch. Data includes databases, schemas, tables, records, indexes, roles — everything that comprises data in a Postgres instance. Just as a Git branch allows developers to work on separate features or fixes without impacting their main line of code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
+
+Each Neon project is created with a main line of data referred to as the [root branch](#root-branch). A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone.
+
+You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the data that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the data that existed in the past state. 
+
+Connecting to a database on a branch requires connecting via a compute endpoint attached to the branch. See [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
 
 ## Branching
 
-A Neon feature that allows you to create a copy-on-write clone (a "branch") of your project data. See [Branch](#branch).
+A Neon feature that allows you to create an isolated copy of your data for parallel database development, testing, and other purposes, similar to branching in Git. See [Branch](#branch).
 
 ## check_availability
 
@@ -103,15 +111,28 @@ Connection strings for a Neon databases can be obtained from the **Connection De
 
 ## Compute size
 
-The number of Compute Units (CU) assigned to a Neon compute. One CU is defined as having 1 vCPU with 4 GB of RAM. A Neon compute can have anywhere from .25 CUs to 7 CUs. The number of CUs determines the processing capacity of the compute.
+The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can have anywhere from .25 to 8 CU. The number of units determines the processing capacity of the compute.
 
 ## Compute Unit (CU)
 
-A unit that measures the processing power of a Neon compute. A Neon compute can have anywhere from .25 CUs to 7 CUs.
+A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 8 CUs. The following table shows the vCPU and RAM for each CU:
 
-## Compute hour
+| Compute Unit (CU)  | vCPU | RAM    |
+|:--------------|:-----|:-------|
+| .25           | .25  | 1 GB   |
+| .5            | .5   | 2 GB   |
+| 1             | 1    | 4 GB   |
+| 2             | 2    | 8 GB   |
+| 3             | 3    | 12 GB  |
+| 4             | 4    | 16 GB  |
+| 5             | 5    | 20 GB  |
+| 6             | 6    | 24 GB  |
+| 7             | 7    | 28 GB  |
+| 8             | 8    | 32 GB  |
 
-A usage metric for tracking compute usage. 1 compute hour is equal to one _active hour_ for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+## Compute hours
+
+A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
 
 To calculate compute hour usage, you would use the following formula:
 
@@ -120,6 +141,8 @@ compute hours = active hours x compute size
 ```
 
 For more information, see [Compute](/docs/introduction/usage-metrics#compute).
+
+Also see [Active hours](#active-hours).
 
 ## Console
 
@@ -131,7 +154,7 @@ The part of the Neon architecture that manages cloud storage and compute resourc
 
 ## Copy-on-write
 
-A technique used to copy data efficiently. Neon uses the copy-on-write technique to copy data when creating a branch.
+A technique used to copy data efficiently. Neon uses the copy-on-write technique when creating [branches](#branch). When a branch is created, data is marked as shared rather than physically duplicated. Parent and child branches refer to the same physical data resource. Data is only physically copied when a write occurs. The affected portion of data is copied and the write is performed on the copied data.
 
 ## create_branch
 
@@ -139,7 +162,7 @@ A Neon Control Plane operation that creates a branch in a Neon project. For rela
 
 ## create_timeline
 
-A Neon Control Plane operation that creates a project with a primary branch. See [Operations](/docs/manage/operations) for more information.
+A Neon Control Plane operation that creates a project with a root branch. See [Operations](/docs/manage/operations) for more information.
 
 ## Data-at-rest encryption
 
@@ -187,7 +210,7 @@ See [Neon Free Tier](#neon-free-tier).
 
 ## History
 
-The history of data changes for all branches in your Neon project. A history is maintained to support _point-in-time restore_. For more information, see [Storage details](/docs/introduction/usahe-metrics#storage-details).
+The history of data changes for all branches in your Neon project. A history is maintained to support _point-in-time restore_. For more information, see [Storage details](/docs/introduction/usage-metrics#storage-details).
 
 ## IP allowlist
 
@@ -219,7 +242,7 @@ A feature provided by some hypervisors, such as QEMU, that allows the transfer o
 
 ## Local File Cache
 
-A layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute instance. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly.
+The Local File Cache (LFC) is a layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute instance. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly. The LFC acts as an add-on or extension of Postgres [shared buffers](#shared-buffers). In Neon the `shared_buffers` setting is always 128 MB, regardless of compute size. The LFC extends cache memory up to 80% of your compute's RAM.
 
 ### Logical data size
 
@@ -263,7 +286,7 @@ A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes clus
 
 ## Non-primary branch
 
-Any branch not designated as the [primary branch](#primary-branch) is considered a non-primary branch. For more information, see [Non-primary branch](/docs/manage/branches#non-primary-branch).
+Any branch in a Neon project that is not designated as the [primary branch](#primary-branch). For more information, see [Non-primary branch](/docs/manage/branches#non-primary-branch).
 
 ## Page
 
@@ -315,7 +338,13 @@ Older projects may have a `web-access` system role, used by the [SQL Editor](#sq
 
 ## Primary branch
 
-Each Neon project is created with a root branch called `main`, which is designated as your project's primary branch by default. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
+A designation that is given to a single [branch](#branch) in a Neon project. Each Neon project is created with a [root branch](#root-branch) called `main`, which carries the _primary branch_ designation by default.
+
+The compute endpoint associated with a primary branch remains available if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
+
+You can change your primary branch, but a branch carrying the primary branch designation cannot be deleted.
+
+For more information, see [Primary branch](/docs/manage/branches#primary-branch).
 
 ## Project
 
@@ -359,7 +388,7 @@ Selling the Neon service as part of another service offering. Neon's Platform Pa
 
 ## Root branch
 
-Each Neon project is created with a root branch called `main`, which cannot be deleted. This branch is designated as your project's [primary branch](#primary-branch) by default, but you can change your primary branch. You can change the name of your root branch, but you cannot designate another branch as your root branch. The root branch created with your project always remains your project's root branch.
+The primary line of data for every Neon project, initially named `main`. The root branch cannot be deleted and is set as the [primary branch](#primary-branch) of your Neon project by default. You can change your project's primary branch, but you cannot change the root branch.
 
 ## Safekeeper
 
@@ -372,6 +401,10 @@ Scale-to-zero refers to Neon's Autosuspend feature, which places a compute endpo
 ## Serverless
 
 A cloud-based development model that enables developing and running applications without having to manage servers.
+
+## shared buffers
+
+A memory area in Postgres for caching blocks of data from storage (disk on standalone Postgres or Pageservers in Neon). This cache enhances the performance of database operations by reducing the need to access the slower storage for frequently accessed data. Neon uses a [Local File Cache (LFC)](#local-file-cache), which acts as an add-on or extension of shared buffers. In Neon the `shared_buffers` setting is always 128 MB, regardless of compute size. The LFC extends cache memory up to 80% of your compute's RAM. For additional information about shared buffers in Postgres, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html), in the Postgres documentation.
 
 ## SNI
 
@@ -410,10 +443,6 @@ Neon is currently in Technical Preview, meaning that some intended core function
 ## Token
 
 An encrypted access token that enables you to authenticate with Neon using the Neon API. An access token is generated when creating a Neon API key. For more information, see [Manage API keys](/docs/manage/api-keys).
-
-## tmpfs
-
-A temporary file storage system that uses a portion of a system's RAM to store files, improving performance by reducing disk usage.
 
 ## unpooled connection string
 

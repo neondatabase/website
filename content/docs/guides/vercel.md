@@ -6,7 +6,7 @@ enableTableOfContents: true
 updatedOn: '2024-02-23T20:32:29.800Z'
 ---
 
-This guide describes how to connect using the [Neon Vercel Integration](https://vercel.com/integrations/neon) from the Vercel marketplace. The integration connects your Vercel project to a Neon database and enables creating a database branch for each preview deployment.
+This guide describes how to connect using the [Neon Vercel Integration](https://vercel.com/integrations/neon) from the Vercel marketplace. The integration connects your Vercel project to a Neon database and creates a database branch for each preview deployment.
 
 
 ## About the Neon Vercel Integration
@@ -24,29 +24,30 @@ Neon’s branching feature addresses these challenges. A branch is a copy-on-wri
 
 ![Branch database](/docs/guides/vercel_branch_database.webp)
 
-When you push changes to the repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a branch in Neon and connects it to your preview deployment by setting Vercel preview environment variables. 
+When you push changes to the repository associated with your Vercel project, triggering a preview deployment, the integration automatically creates a branch in Neon and connects it to your preview deployment by setting Vercel preview environment variables.
 
 ## Add the Neon Vercel Integration
 
 This section describes how to add the Neon Vercel Integration to your Vercel project.
 
 <Admonition type="note" title="Notes">
-- Please be aware that the Neon Vercel Integration connects one Vercel project to one Neon project. It does not support connecting multiple Vercel projects to one Neon project or connecting multiple Neon projects to one Vercel project.
+- The Neon Vercel Integration can be used with more than one Vercel project, but it can only connect one Vercel project to one Neon project. It does not support connecting multiple Vercel projects to one Neon project or connecting multiple Neon projects to one Vercel project.
 - The Neon Vercel Integration is supported with GitHub, GitLab, and Bitbucket source code repositories.
+- The integration is not supported with [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres) databases.
 </Admonition>
 
 Prerequisites:
 
 - A [Vercel account](https://vercel.com).
 - A Vercel project. If you do not have one, see [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project), in the _Vercel documentation_.
-- The integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED`environment variables for your Vercel **Production** and **Development** environments. When you create a preview deployment, the integration will also set these variables for your **Preview** environment. Make sure these variables do not already exist in your Vercel project settings. To use different Postgres variables with the Neon integration, see [Manage Vercel environment variables](#manage-vercel-environment-variables). 
+- The integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED`environment variables for your Vercel **Production** and **Development** environments. When you create a preview deployment, the integration will also set these variables for your **Preview** environment. Variables of the same name will be overwritten. To use different Postgres variables with the Neon integration, see [Manage Vercel environment variables](#manage-vercel-environment-variables). 
 
 To add the integration:
 
 1. Navigate to the [Neon Vercel Integration page](https://vercel.com/integrations/neon), and click **Add integration**.
    ![Add integration](/docs/guides/vercel_add_integration.png)
 1. Select a **Vercel Account** to add the integration to.
-1. Select the Vercel projects to add the integration to. You can select **All Projects** or **Specific Projects** but be aware that you can only connect one Vercel project to one Neon project and vice versa. By selecting **All projects**, you are simply making the integration available to use with all of your Vercel projects.
+1. Select the Vercel projects to add the integration to. You can select **All Projects** or **Specific Projects** but be aware that you can only connect one Vercel project to one Neon project and vice versa. By selecting **All projects**, you are simply [making the integration available to other Vercel projects](#make-the-integration-available-to-other-vercel-projects).
 1. Review the permissions required by the integration, and click **Install**.
 1. In the **Integrate Neon** dialog:
     1. Select a Vercel project.
@@ -55,8 +56,10 @@ To add the integration:
       ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
           The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's primary branch (`main`) that you can modify without affecting data on your primary branch.
+
+          The **Automatically delete obsolete Neon branches** option automatically deletes a Neon preview branch when the git branch that triggered its creation is deleted.
          <Admonition type="note">
-         Branches created for preview deployments are created from the [primary branch](/docs/reference/glossary#primary-branch) of your Neon project. Earlier versions of the integration created branches from the initial [root branch](/docs/reference/glossary#root-branch) of your Neon project, which is designated as the primary branch by default. Neon lets you [change the primary branch](/docs/manage/branches#set-a-branch-as-primary). If you have an older version of the integration that creates branches from your project's root branch, and you want branches created from your primary branch instead, you can upgrade your integration by reinstalling it from the Vercel Marketplace.
+         Branches created for preview deployments are created from the [primary branch](/docs/reference/glossary#primary-branch) of your Neon project. Earlier versions of the integration created branches from the initial [root branch](/docs/reference/glossary#root-branch) of your Neon project, which is designated as the primary branch by default. Neon lets you [change the primary branch](/docs/manage/branches#set-a-branch-as-primary). If you have an older version of the integration that creates branches from your project's root branch, and you want branches created from your primary branch instead, you can upgrade your integration by reinstalling it from the [Vercel Marketplace](https://vercel.com/integrations/neon).
          </Admonition>
 
           When you finish making selections, click **Continue**.
@@ -67,7 +70,7 @@ To add the integration:
       ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
     1. Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
 
-        After the settings are configured, you are presented with a **Success!** dialog.
+        After the settings are configured, you are presented with a **Success** dialog.
         ![Vercel integration success](/docs/guides/vercel_success.png)
     1. Click **Done** to complete the installation.
 1. To view the results of the integration in Neon:
@@ -89,7 +92,7 @@ To add the integration:
 
 ## Use the Neon Vercel Integration
 
-After you add the Neon Vercel Integration to a Vercel project, Neon creates a database branch for each preview deployment. The branch is created when you push commits made on your local branch to your application's source code repository. To see the integration in action, follow these steps:
+After you add the integration to a Vercel project, Neon creates a database branch for each preview deployment. The branch is created when you push commits made on your local branch to your application's source code repository. To see the integration in action, follow these steps:
 
 1. Create a branch in your local source code repository.
 
@@ -115,18 +118,38 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
 
    - The commit triggers a preview deployment in Vercel, as would occur without the Neon integration.
      ![Neon preview deployment branch](/docs/guides/vercel_deployments.png)
-   - The integration creates a branch in Neon. This branch is an isolated copy-on-write clone of your primary branch, with its own dedicated compute endpoint. The branch is created with the same name as your `git` branch.
+   - The integration creates a branch in Neon. This branch is an isolated copy-on-write clone of your primary branch, with its own dedicated compute endpoint. The branch is created with the same name as your `git` branch but includes a `/preview` prefix.
      ![Neon preview deployment branch](/docs/guides/vercel_neon_app_update.png)
    - The integration sets Vercel preview environment variables to connect the preview deployment to the new branch.
      ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)
 
+## Manage branches created by the integration
+
+The Neon Vercel Integration creates a branch for each preview deployment, but it does not remove those branches automatically. To avoid using up your storage allowances or hitting branch limits, you should remove old or obsolete branches regularly.
+
+To remove branches created by the integration:
+
+1. In the Neon Console, select your project.
+2. Select the **Integrations** page.
+3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
+4. In the **Vercel integration** drawer, select the **Branches** tab.
+5. Remove individual preview branches by clicking on the delete icon, or select **Delete all** to remove all preview branches.
+
+You can also remove branches from your Neon project using the Console, CLI, or API. See [Delete a branch](/docs/manage/branches#delete-a-branch).
+
 <Admonition type="note">
-The Neon Free Tier lets you create up to 10 branches. The latest version of the Neon integration displays a message on the **Deployment Details** page in Vercel under **Running checks** if you exceed the branch limit for your Neon project. To avoid running out of branches for new preview deployments or using up your storage allowances, remove old branches regularly. See [Delete a branch](/docs/manage/branches#delete-a-branch) for instructions.
+The latest version of the Neon integration displays a message on the **Deployment Details** page in Vercel under **Running checks** if you exceed the branch limit for your Neon project.
+
+![Vercel branch limit](/docs/guides/vercel_branch_limit.png)
 </Admonition>
 
-## Manage Vercel environment variables
+## Manage integration settings
 
-The Neon Vercel Integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED` environment variables for your Vercel **Production** and **Development** environments. These variables are set to a pooled and direct Neon database connection string, respectively (see [Connection pooling](/docs/connect/connection-pooling) for more information). When you create a preview deployment, the integration also sets these variables for your Vercel **Preview** environment. If you want to use different Postgres environment variables, the Neon Vercel Integration also supports these variables for defining your database connection:
+You can manage Vercel environment variables as well as the default database and role used by the integration from the Neon Console.
+
+### Configure environment variables
+
+The Neon Vercel Integration automatically sets the environment variables `DATABASE_URL` (pooled connection) and `DATABASE_URL_UNPOOLED` (direct connection)  for your Vercel **Production** and **Development** environments. See [Connection pooling](/docs/connect/connection-pooling) for more information. When you create a preview deployment, the integration also sets these same variables for the Vercel **Preview**  environment. If you want to define your database connection using different Postgres environment variables, the integration also supports the following:
 
 - `PGHOST` (set to a pooled Neon database connection string)
 - `PGHOST_UNPOOLED` (set to a direct Neon database connection string)
@@ -134,13 +157,14 @@ The Neon Vercel Integration initially sets the `DATABASE_URL` and `DATABASE_URL_
 - `PGDATABASE`
 - `PGPASSWORD`
 
-You can enable these variables from the Neon Console:
+You can choose the variables you want to use from the Neon Console:
 
 1. In the Neon Console, select your project.
 2. Select the **Integrations** page.
 3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
-4. In the **Vercel integration** drawer, select the environment variables you require. 
-5. Click **Save changes**. Your variable selection is saved to your Vercel project and will be applied on your next deployment. Viewing your new variable selection in Vercel may require refreshing your project's **Environment Variables** page. 
+4. In the **Vercel integration** drawer, select the **Settings** tab.
+5. Select the environment variables you need. 
+6. Click **Save changes**. Your variable selection is saved to your Vercel project and will be applied on your next deployment. Existing variables of the same name in Vercel will be overwritten. Viewing your new variable selection in Vercel may require refreshing your project's **Environment Variables** page. 
 
 <Admonition type="note" title="Notes">
 - Clicking **Redeploy** in Vercel does not apply variable changes made in Neon to your Vercel project. This only occurs with your next deployment.
@@ -149,12 +173,38 @@ You can enable these variables from the Neon Console:
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
 
+### Change the database and role for preview branches
+
+When you install the integration, you select a database and role for your Neon project. These details are used to define the database connection details in the Vercel environment variables mentioned [above](#configure-environment-variables). From the Vercel integration drawer in the Neon Console, you can choose a different database and role for new preview deployment branches.
+
+To change the database and role for new preview deployment branches:
+
+1. In the Neon Console, select your project.
+2. Select the **Integrations** page.
+3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
+3. In the **Vercel integration** drawer, select the **Settings** tab.
+4. Under **Default database and role**, select a new **Database** and **Role**.
+
+Your change will be reflected in your Vercel **Preview** environment variables on the next preview deployment.
+
+## Disconnect the integration
+
+If you want to disconnect the Neon Vercel Integration from your Vercel project, you can do so from the Neon Console. Disconnecting stops the integration from creating preview branches and setting environment variables for those branches in Vercel. It does not remove the integration from your Vercel project. To fully remove the integration from your Vercel project, you must do so in Vercel. See [Manage the Neon Postgres integration in Vercel](#manage-the-integration-in-vercel) for instructions.
+
+To disconnect the Neon integration from your Vercel project:
+
+1. In the Neon Console, select your project.
+2. Select the **Integrations** page.
+3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
+3. In the **Vercel integration** drawer, select the **Disconnect** tab.
+4. Click **Disconnect**.
+
 ## Make the integration available to other Vercel projects
 
 If you added the Neon Vercel Integration to a single Vercel project but would like to make it available for use with your other Vercel projects, complete the steps outlined below.
 
 <Admonition type="important">
-Please be aware that the Neon Vercel Integration connects one Vercel project to one Neon project. It does not support connecting multiple Vercel projects to one Neon project, nor does it support connecting multiple Neon projects to one Vercel project. The steps below outline how to make the integration available to other Vercel projects to use with their own separate and dedicated Neon project.
+The Neon Vercel Integration can be used with more than one Vercel project, but it can only connect one Vercel project to one Neon project. It does not support connecting multiple Vercel projects to one Neon project or connecting multiple Neon projects to one Vercel project. The steps below outline how to make the integration available to other Vercel projects to use with their own separate and dedicated Neon project.
 </Admonition>
 
 1. Make sure the Neon Vercel Integration that you added previously has access to the Vercel project that you want to use with the Neon Vercel Integration.
@@ -164,9 +214,20 @@ Please be aware that the Neon Vercel Integration connects one Vercel project to 
    1. On the **Manage Access for Neon Postgres** modal, make sure that the Neon Postgres integration has access to the Vercel project. You can do so by selecting **Specific Projects** and choosing a Vercel project or by granting access to **All Projects**. If you previously granted access to **All Projects**, no change is necessary.
    1. Click **Save**.
 1. Navigate to this URL: [https://vercel.com/integrations/neon/new](https://vercel.com/integrations/neon/new).
-1. Follow the prompts. When you reach the **Integrate Neon** dialog, select the Vercel project you want to add the integration to. Vercel projects that are already integrated with Neon are identified as `CONNECTED`, so you'll have to select a different Vercel project.
+1. Follow the prompts. When you reach the **Integrate Neon** dialog, select the Vercel project you want to add the integration to. Vercel projects that are already integrated with Neon are identified as `CONNECTED`.
    ![Confirm integration settings](/docs/guides/vercel_add_new_project.png)
-1. Continue following the prompts to complete the setup. These are the same steps described above, in [Add the Neon integration](#add-the-neon-vercel-integration). When you select a Neon project to connect to, be sure to select one that is not already connected to a Vercel project, as you cannot connect one Vercel project to multiple Neon projects or vice versa.
+1. Continue following the prompts to complete the setup. These are the same steps described above, in [Add the Neon integration](#add-the-neon-vercel-integration). When you select a Neon project to connect to, make sure to select one that is not already connected to a Vercel project, as you cannot connect a Vercel project to multiple Neon projects or vice versa.
+
+## Manage the integration in Vercel
+
+To view permissions, manage which Vercel projects your integration has access to, or uninstall the Neon integration from Vercel:
+
+1. On the Vercel dashboard, select **Settings** > **Integrations**.
+1. Find the **Neon** integration and select **Configure**.
+
+   <Admonition type="note">
+   Removing the Neon Vercel Integration removes the Vercel environment variables set by the integration. It does not remove Neon branches created by the integration. To remove Neon branches, see [Delete a branch](/docs/manage/branches#delete-a-branch).
+   </Admonition>
 
 ## Troubleshoot connection issues
 
@@ -197,15 +258,14 @@ In earlier versions of the integration, the preview environment `DATABASE_URL` i
 
 To avoid this issue, you can reinstall the integration to update to the latest version. Alternatively, a workaround is to redeploy your preview deployment in Vercel. The preview environment `DATABASE_URL` is set on the next deployment. For redeploy instructions, see [Managing Deployments](https://vercel.com/docs/deployments/managing-deployments), in the _Vercel documentation_.
 
-## Manage the Neon Postgres integration in Vercel
+## Video: A Postgres database for Every Preview Deployment
 
-To view permissions, manage which Vercel projects your integration has access to, or uninstall the Neon integration:
+Watch this video from the Neon DevRel team for an overview of the Neon Vercel Integration.
 
-1. On the Vercel dashboard, select **Settings** > **Integrations**.
-1. Find the **Neon** integration and select **Configure**.
+<YoutubeIframe embedId="s4vIMI9rXeg?si=LVJqSMCDKJu4NZiH" />
 
-   <Admonition type="note">
-   Removing the Neon Vercel Integration removes the Vercel environment variables set by the integration. It does not remove Neon branches created by the integration. To remove Neon branches, see [Delete a branch](/docs/manage/branches#delete-a-branch).
-   </Admonition>
+<Admonition type="note">
+If you have an existing CI pipeline, this blog post shows how to build the same developer workflow using GitHub Actions and the Vercel CLI: [A database for every preview environment using Neon, GitHub Actions, and Vercel](https://neon.tech/blog/branching-with-preview-environments).
+</Admonition>
 
 <NeedHelp/>

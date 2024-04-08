@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container/container';
 
-import AirplaneLogo from './images/airplane.inline.svg';
 import BranchLogo from './images/branch.inline.svg';
 import BunnyshellLogo from './images/bunnyshell.inline.svg';
 import CloudflareLogo from './images/cloudflare.inline.svg';
 import CodeInstituteLogo from './images/code-institute.inline.svg';
-import DynaboardLogo from './images/dynaboard.inline.svg';
+import EncoreLogo from './images/encore.inline.svg';
 import EqtLogo from './images/eqt.inline.svg';
 import Fl0Logo from './images/fl0.inline.svg';
 import GenomicsLogo from './images/genomics.inline.svg';
@@ -19,6 +18,7 @@ import OctolisLogo from './images/octolis.inline.svg';
 import OpusLogo from './images/opus.inline.svg';
 import OutfrontLogo from './images/outfront7.inline.svg';
 import ReplitLogo from './images/replit.inline.svg';
+import RetoolLogo from './images/retool.inline.svg';
 import SnapletLogo from './images/snaplet.inline.svg';
 import SupergoodLogo from './images/supergood.inline.svg';
 import FabricIoLogo from './images/the-fabric-io.inline.svg';
@@ -34,12 +34,10 @@ const allLogos = {
   illa: IllaLogo,
   octolis: OctolisLogo,
   cloudflare: CloudflareLogo,
-  airplane: AirplaneLogo,
   wundergraph: WundergraphLogo,
   'fabric-io': FabricIoLogo,
   snaplet: SnapletLogo,
   fl0: Fl0Logo,
-  dynaboard: DynaboardLogo,
   opus: OpusLogo,
   genomics: GenomicsLogo,
   branch: BranchLogo,
@@ -49,6 +47,8 @@ const allLogos = {
   supergood: SupergoodLogo,
   zimmer: ZimmerBioLogo,
   eqt: EqtLogo,
+  encore: EncoreLogo,
+  retool: RetoolLogo,
 };
 
 const LogosWall = ({ className, fill, logos }) => (

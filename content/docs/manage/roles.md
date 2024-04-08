@@ -9,7 +9,7 @@ updatedOn: '2024-02-16T18:37:19.449Z'
 
 In Neon, roles are Postgres roles. Each Neon project is created with a default Postgres role that takes its name from your Neon account (the email, GitHub, Google, or partner account that you registered with). This role owns the ready-to-use database (`neondb`) that is created in your Neon project's primary branch.
 
-Your default Postgres role and roles created in the Neon console, API, and CLI are granted membership in the [neon_superuser](#the-neonsuperuser-role) role. Roles created with SQL from clients like [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) are only granted the basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-access).
+Your default Postgres role and roles created in the Neon Console, API, and CLI are granted membership in the [neon_superuser](#the-neonsuperuser-role) role. Roles created with SQL from clients like [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) are only granted the basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-access).
 
 <Admonition type="note">
 Neon is a managed Postgres service, so you cannot access the host operating system, and you can't connect using the Postgres `superuser` account like you can in a standalone Postgres installation.
@@ -21,25 +21,25 @@ In Neon, roles belong to a branch, which could be your main branch or a child br
 
 Neon supports creating and managing roles from the following interfaces:
 
-- [Neon console](#manage-roles-in-the-neon-console)
+- [Neon Console](#manage-roles-in-the-neon-console)
 - [Neon CLI](#manage-roles-with-the-neon-cli)
 - [Neon API](#manage-roles-with-the-neon-api)
 - [SQL](#manage-roles-with-sql)
 
 ## The neon_superuser role
 
-Roles created in the Neon console, CLI, or API, including the default role created with a Neon project, are granted membership in the `neon_superuser` role. Users cannot login as `neon_superuser`, but they inherit the privileges assigned to this role. The privileges and predefined role memberships granted to `neon_superuser` include:
+Roles created in the Neon Console, CLI, or API, including the default role created with a Neon project, are granted membership in the `neon_superuser` role. Users cannot login as `neon_superuser`, but they inherit the privileges assigned to this role. The privileges and predefined role memberships granted to `neon_superuser` include:
 
 - `CREATEDB`: Provides the ability to create databases.
 - `CREATEROLE`: Provides the ability to create new roles (which also means it can alter and drop roles).
 - `BYPASSRLS`: Provides the ability to bypass row-level security (RLS) policies. This attribute is only included in `neon_superuser` roles in projects created after the [August 15, 2023 release](/docs/changelog/2023-08-15-storage-and-compute).
-- `REPLICATION`: Provides the ability to connect to a Postgres server in replication mode and create or drop replication slots.
 - `NOLOGIN`: The role cannot be used to log in to the Postgres server. Neon is a managed Postgres service, so you cannot access the host operating system directly.
 - `pg_read_all_data`: A predefined Postgres role provides the ability to read all data (tables, views, sequences), as if having `SELECT` rights on those objects, and `USAGE` rights on all schemas.
 - `pg_write_all_data`: A predefined Postgres role that provides the ability to write all data (tables, views, sequences), as if having `INSERT`, `UPDATE`, and `DELETE` rights on those objects, and `USAGE` rights on all schemas.
+- `REPLICATION`: Provides the ability to connect to a Postgres server in replication mode and create or drop replication slots. 
 - `pg_create_subscription`:	A predefined Postgres role that lets users with `CREATE` permission on the database issue `CREATE SUBSCRIPTION`. The `pg_create_subscription` role is only available as of Postgres 16. The `neon_superuser` role in Postgres 14 and 15 can issue `CREATE SUBSCRIPTION` with only `CREATE` permission on the database.
 - `pg_monitor`: A predefined Postgres role that provides read/execute privileges on various Postgres monitoring views and functions. The `neon_superuser` role also has `WITH ADMIN` on the `pg_monitor` role, which enables granting the `pg_monitor` to other Postgres roles.
-- `EXECUTE` privilege on the `pg_stat_statements_reset()` function that is part of the `pg_stat_statements` extension. This privilege was introduced with the January 12, 2024 release. If you installed the `pg_stat_statements` extension prior to this release, drop and recreate the `pg_stat_statements` extension to enable this privilege. See [Install an extension](/docs/extensions/pg-extensions#install-an-extension).
+- `EXECUTE` privilege on the `pg_stat_statements_reset()` function that is part of the `pg_stat_statements` extension. This privilege was introduced with the January 12, 2024 release. If you installed the `pg_stat_statements` extension before this release, drop and recreate the `pg_stat_statements` extension to enable this privilege. See [Install an extension](/docs/extensions/pg-extensions#install-an-extension).
 - `GRANT ALL ON TABLES` and `WITH GRANT OPTION` on the `public` schema.
 - `GRANT ALL ON SEQUENCES` and `WITH GRANT OPTION` on the `public` schema.
 
@@ -49,9 +49,9 @@ You can think of roles with `neon_superuser` privileges as administrator roles. 
 Creating a database with the `neon_superuser` role, altering a database to have owner `neon_superuser`, and altering the `neon_superuser role` itself are _not_ permitted. This `NOLOGIN` role is not intended to be used directly or modified.
 </Admonition>
 
-## Manage roles in the Neon console
+## Manage roles in the Neon Console
 
-This section describes how to create, view, and delete roles in the Neon Console. All roles created in the Neon console are granted membership in the [neon_superuser](#the-neonsuperuser-role) role.
+This section describes how to create, view, and delete roles in the Neon Console. All roles created in the Neon Console are granted membership in the [neon_superuser](#the-neonsuperuser-role) role.
 
 ### Create a role
 

@@ -128,13 +128,31 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
           const element =
             domNode.children[0].type === 'tag' ? domNode.children[0] : domNode.children[1];
           const Component = components[element.name];
+
           if (!Component) return <></>;
 
           if (domNode.children[0].name === 'img') {
             const isPriority = isFirstImage;
             isFirstImage = false;
             const props = transformProps(attributesToProps({ ...element.attribs, isPriority }));
-            return <Component {...props} />;
+            const { className: imgClassName, ...otherImgProps } = props;
+            const captionProps = transformProps(attributesToProps(element?.next?.attribs));
+            const { className: captionClassName, ...otherCaptionProps } = captionProps;
+            const caption = element?.next?.children;
+
+            return caption ? (
+              <figure>
+                <Component className={clsx('my-0', imgClassName)} {...otherImgProps} />
+                <figcaption
+                  className={clsx('flex justify-center text-center', captionClassName)}
+                  {...otherCaptionProps}
+                >
+                  {domToReact(caption)}
+                </figcaption>
+              </figure>
+            ) : (
+              <Component {...props} />
+            );
           }
 
           if (element.name === 'a' && element.children[0].name === 'img') {

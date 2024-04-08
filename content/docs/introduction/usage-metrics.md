@@ -23,7 +23,9 @@ The following table outlines data storage allowances per month for each Neon pla
 | Scale      | 50 GiB     |
 | Enterprise | Larger sizes |
 
-Extra storage is available with the [Scale](/docs/introduction/plans##scale) plan and is billed for in units of 10 GiB at $15 each.
+Extra storage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans:
+- On the Launch plan, extra storage is billed for in units of 2 GiB at $3.5 each
+- On the Scale plan, extra storage is billed for in units of 10 GiB at $15 each
 
 ### Storage details
 
@@ -56,7 +58,7 @@ The following table outlines compute allowances per month for each Neon plan.
 | Scale      | 750 compute hours (3,000 _active hours_)/month                                                                                            |
 | Enterprise | Custom                                                                                                            |
 
-Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for at $0.04 per compute hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the monthly billing period, you are billed an extra $4 (100 x $0.04) for the month.
+Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for at $0.16 per compute hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the monthly billing period, you are billed an extra $16 (100 x $0.16) for the month.
 
 <Admonition type="tip" title="What are active hours and compute hours?">
 
@@ -74,7 +76,7 @@ Extra compute usage is available with the [Launch](/docs/introduction/plans##lau
 
 Compute-hour usage in Neon is affected by [autosuspend](/docs/guides/auto-suspend-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute usage might accrue in the following graph.
 
-![Compute metrics graph](/docs/introduction/compute-metrics2.png)
+![Compute metrics graph](/docs/introduction/compute-usage-graph.jpg)
 
 You can see how compute size scales between your minimum and maximum CPU settings, increasing and decreasing compute usage: compute size never rises above your max level, and it never drops below your minimum setting. With autosuspend, no compute time at all accrues during inactive periods. For projects with inconsistent demand, this can save significant compute usage.
 
@@ -84,7 +86,7 @@ Compute hour usage is calculated by multiplying compute size by _active hours_. 
 
 _Active hours_ is the amount of time that your computes have been active. This includes all computes in your Neon project but excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale-to-zero).
 
-Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 7 CUs, as outlined below:
+Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 8 CUs, as outlined below:
 
 | Compute Units | vCPU | RAM    |
 |:--------------|:-----|:-------|
@@ -97,6 +99,7 @@ Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and
 | 5             | 5    | 20 GB  |
 | 6             | 6    | 24 GB  |
 | 7             | 7    | 28 GB  |
+| 8             | 8    | 32 GB  |
 
 A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an `Idle` state.
 

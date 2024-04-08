@@ -1,6 +1,6 @@
 ---
 title: Postgres Floating-point data types
-subtitle: Working with float values in PostgreSQL
+subtitle: Work with float values in Postgres
 enableTableOfContents: true
 updatedOn: '2024-02-03T16:07:31.867Z'
 ---

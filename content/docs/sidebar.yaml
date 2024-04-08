@@ -42,6 +42,8 @@
           slug: introduction/manage-billing
         - title: Sample billing
           slug: introduction/billing-sample
+        - title: AWS Marketplace
+          slug: introduction/billing-aws-marketplace
     - title: Support
       slug: introduction/support
     - title: Status
@@ -221,14 +223,20 @@
           slug: guides/wundergraph
     - title: Schema migration
       items:
+        - title: Django
+          slug: guides/django-migrations
         - title: Drizzle
           slug: guides/drizzle-migrations
+        - title: Entity Framework
+          slug: guides/entity-migrations
         - title: Flyway
           items:
             - title: Get started
               slug: guides/flyway
             - title: Manage multiple environments
               slug: guides/flyway-multiple-environments
+        - title: Laravel
+          slug: guides/laravel-migrations
         - title: Liquibase
           items:
             - title: Get started
@@ -237,8 +245,12 @@
               slug: guides/liquibase-workflow
         - title: Prisma
           slug: guides/prisma-migrations
+        - title: Rails
+          slug: guides/rails-migrations
         - title: Sequelize
           slug: guides/sequelize
+        - title: SQLAlchemy
+          slug: guides/sqlalchemy-migrations
     - title: Serverless
       items:
         - title: Neon serverless driver
@@ -247,6 +259,8 @@
           slug: guides/aws-lambda
     - title: Caching
       items:
+        - title: Cloudflare Hyperdrive
+          slug: guides/cloudflare-hyperdrive
         - title: PolyScale integration
           slug: guides/polyscale-integration
         - title: PolyScale manual setup
@@ -255,8 +269,6 @@
       items:
         - title: Cloudflare
           items:
-            - title: Cloudflare Hyperdrive
-              slug: guides/cloudflare-hyperdrive
             - title: Cloudflare Pages
               slug: guides/cloudflare-pages
             - title: Cloudflare Workers
@@ -303,8 +315,10 @@
         - title: Google Colab
           slug: ai/ai-google-colab
 - title: Postgres
+  slug: postgres/postgres-intro
   items:
     - title: Data types
+      slug: postgres/data-types-intro
       items:
         - title: Array
           slug: data-types/array
@@ -325,6 +339,7 @@
         - title: UUID
           slug: data-types/uuid
     - title: Extensions
+      slug: extensions/extensions-intro
       items:
         - title: Supported extensions
           slug: extensions/pg-extensions
@@ -338,6 +353,8 @@
           slug: extensions/neon-utils
         - title: pgvector
           slug: extensions/pgvector
+        - title: pg_partman
+          slug: extensions/pg_partman     
         - title: pg_prewarm
           slug: extensions/pg_prewarm
         - title: pg_stat_statements
@@ -351,6 +368,7 @@
         - title: timescaledb
           slug: extensions/timescaledb
     - title: Functions
+      slug: postgres/functions-intro
       items:
         - title: array_to_json
           slug: functions/array_to_json
@@ -386,6 +404,10 @@
           slug: functions/json_to_record
         - title: jsonb_to_record
           slug: functions/jsonb_to_record
+    - title: Optimize queries
+      slug: postgres/query-performance
+    - title: Query reference
+      slug: postgres/query-reference
     - title: Compatibility
       slug: reference/compatibility
 - title: Import data
