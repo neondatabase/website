@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2023-12-04T18:49:23.387Z'
 ---
 
-<Admonition type="important" title="Important Update Regarding PolyScale Serverless Product">
+<Admonition type="important" title="Update Regarding PolyScale Support">
 The PolyScale Serverless product will be discontinued as of June 1st, 2024. For an overview of what this means and the reasoning behind the decision, we encourage you to read the official [PolyScale announcement](https://www.polyscale.ai/future/).
 
 In alignment with this change, Neon will sunset its integration with PolyScale. While the instructions for utilizing the PolyScale integration will continue to be accessible to existing users for the time being, they will be phased out from the Neon documentation in the near future. We recommend users begin planning for this transition and explore alternative solutions.
