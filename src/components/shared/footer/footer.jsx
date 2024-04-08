@@ -16,14 +16,14 @@ const styles = {
     white: 'bg-white text-black',
   },
   menuLinkTheme: {
-    'black-pure': 'gray-50',
+    'black-pure': 'gray-70',
     'black-new': 'white',
     'gray-8': 'white',
     black: 'white',
     white: 'black',
   },
   icon: {
-    'black-pure': 'bg-gray-new-50',
+    'black-pure': 'bg-gray-new-70',
     'black-new': 'bg-white',
     'gray-8': 'bg-white',
     black: 'bg-white',
@@ -49,15 +49,20 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
       <Container
         className={clsx(
           'flex justify-between',
-          isNewTheme ? 'gap-x-10 pb-14 pt-10' : 'py-10 xl:py-8',
+          isNewTheme ? 'gap-x-10 pb-[51px] pt-10' : 'py-10 xl:py-8',
           isNewTheme &&
             'before:absolute before:-left-[20%] before:top-0 before:h-px before:w-[140%] before:bg-white before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);]'
         )}
         size={isNewTheme ? '1344' : 'lg'}
       >
         <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
-          <div className="mb-7 flex flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-start md:justify-between">
-            <div className="flex flex-col">
+          <div
+            className={clsx(
+              isNewTheme ? 'mb-[30px]' : 'mb-7',
+              'flex grow flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-start md:justify-between'
+            )}
+          >
+            <div className="flex grow flex-col">
               <Link className="block" to="/">
                 <span className="sr-only">Neon</span>
                 <Logo
@@ -72,10 +77,10 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
           <div
             className={clsx(
               { 'tracking-tight text-gray-new-80': theme === 'black-new' || theme === 'gray-8' },
-              'flex flex-col text-sm leading-none lg:leading-tight',
+              'flex flex-col leading-none lg:leading-tight',
               isNewTheme
-                ? 'gap-y-3 tracking-extra-tight text-[#C9CBCF]'
-                : 'gap-y-[18px] dark:text-gray-new-80'
+                ? 'gap-y-3 text-[13px] tracking-extra-tight text-gray-new-40'
+                : 'gap-y-[18px] text-sm dark:text-gray-new-80'
             )}
           >
             <p>Made in SF and the World</p>
@@ -88,7 +93,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
           className={clsx(
             'flex',
             isNewTheme
-              ? 'w-full max-w-[840px] justify-between xl:max-w-[623px] lg:hidden'
+              ? 'w-full max-w-[860px] justify-between xl:max-w-[623px] lg:hidden'
               : 'gap-x-[123px] xl:gap-x-8 md:hidden [@media(max-width:800px)]:gap-x-6'
           )}
         >
@@ -102,7 +107,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                       theme === 'black-new' || theme === 'gray-8',
                   },
                   isNewTheme
-                    ? 'text-[13px] font-semibold tracking-normal text-white'
+                    ? 'text-xs font-semibold tracking-normal text-white'
                     : 'text-sm font-bold tracking-wider dark:text-gray-new-60'
                 )}
               >
@@ -121,7 +126,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                       <Link
                         className={clsx(
                           'group relative flex items-center gap-2 whitespace-nowrap leading-none',
-                          isNewTheme && 'tracking-extra-tight'
+                          isNewTheme && 'text-[15px] tracking-extra-tight'
                         )}
                         to={to}
                         theme={styles.menuLinkTheme[theme]}
