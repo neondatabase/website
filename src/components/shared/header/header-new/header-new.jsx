@@ -45,7 +45,7 @@ const HeaderNew = ({ className = null, theme }) => {
                   return (
                     <li
                       className={clsx(
-                        'relative [perspective:1000px]',
+                        'relative [perspective:2000px]',
                         items?.length > 0 && 'group'
                       )}
                       key={index}
@@ -68,8 +68,8 @@ const HeaderNew = ({ className = null, theme }) => {
                           className={clsx(
                             'absolute -left-5 top-full w-[300px] pt-5',
                             'pointer-events-none opacity-0',
-                            'origin-top-left transition-[opacity,transform] duration-300 [transform:rotateX(-45deg)_scale(0.9)]',
-                            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:rotateX(0deg)_scale(1)]'
+                            'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
+                            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
                           )}
                         >
                           <ul className="relative flex min-w-[248px] flex-col gap-y-0.5 rounded-[14px] border border-gray-new-10 bg-black-new p-2.5">
