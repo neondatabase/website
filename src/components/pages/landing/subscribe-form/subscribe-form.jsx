@@ -105,14 +105,14 @@ const SubscribeForm = ({
   };
 
   return (
-    <section className="safe-paddings overflow-hidden py-[75px] md:py-16">
+    <section className="safe-paddings overflow-hidden py-[75px] md:py-16 sm:py-14">
       <Container className="flex flex-col items-center" size="medium">
-        <div className="mx-auto w-[504px] max-w-full">
+        <div className="mx-auto w-[504px] max-w-full md:max-w-[90%]">
           <form className="relative w-full" method="POST" noValidate onSubmit={handleSubmit}>
             <div className="relative z-20">
               <input
                 className={clsx(
-                  'remove-autocomplete-styles h-16 w-full appearance-none rounded-[50px] border bg-black-new pl-7 pr-48 text-white placeholder:tracking-tight placeholder:text-gray-new-50 focus:outline-none disabled:opacity-100 md:pr-40 sm:h-14 xs:pr-14',
+                  'remove-autocomplete-styles h-16 w-full appearance-none rounded-[50px] border bg-black-new pl-7 pr-48 text-white placeholder:tracking-tight placeholder:text-gray-new-50 focus:outline-none disabled:opacity-100 md:pr-40 sm:h-14 sm:pl-6 sm:pr-16 sm:placeholder:text-sm',
                   formState === STATES.ERROR ? 'border-secondary-1' : 'border-green-45',
                   formState === STATES.SUCCESS ? '!pr-14 text-green-45' : 'text-white'
                 )}
@@ -128,7 +128,7 @@ const SubscribeForm = ({
                   {(formState === STATES.DEFAULT || formState === STATES.ERROR) && (
                     <m.button
                       className={clsx(
-                        'absolute inset-y-2.5 right-3 h-11 rounded-[80px] px-7 py-3 font-bold leading-none tracking-tight text-black transition-colors duration-200 sm:inset-y-2 sm:h-10 sm:px-5 xs:flex xs:w-10 xs:items-center xs:justify-center xs:px-0',
+                        'absolute inset-y-2.5 right-3 h-11 rounded-[80px] px-7 py-3 font-bold leading-none tracking-tight text-black transition-colors duration-200 sm:inset-y-[6.5px] sm:right-[9px] sm:flex sm:h-10 sm:w-10 sm:items-center sm:justify-center sm:px-0',
                         formState === STATES.ERROR
                           ? 'bg-secondary-1/50'
                           : 'bg-green-45 hover:bg-[#00FFAA]'
@@ -140,8 +140,8 @@ const SubscribeForm = ({
                       aria-label={buttonText}
                       variants={appearAndExitAnimationVariants}
                     >
-                      <span className="xs:hidden">{buttonText}</span>
-                      <SendIcon className="hidden h-6 w-6 xs:block" />
+                      <span className="sm:hidden">{buttonText}</span>
+                      <SendIcon className="hidden h-6 w-6 sm:block" />
                     </m.button>
                   )}
                   {formState === STATES.LOADING && (
@@ -204,7 +204,7 @@ const SubscribeForm = ({
             </p>
           )}
           {formState !== STATES.SUCCESS && items.length > 0 && (
-            <ul className="relative z-20 mx-3.5 mt-[52px] flex justify-between gap-x-7 sm:gap-x-4">
+            <ul className="relative z-20 mx-3.5 mt-[52px] flex justify-between gap-x-7 sm:mx-0.5 sm:mt-11 sm:flex-col sm:gap-y-4">
               {items.map(({ text }, idx) => (
                 <li
                   className="flex items-start gap-x-2 text-sm leading-dense tracking-extra-tight text-gray-new-70"
