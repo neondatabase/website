@@ -78,6 +78,12 @@ or
 endpoint=<endpoint_id>$<password>
 ```
 
+Example: 
+
+```txt
+postgres://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+```
+
 <Admonition type="note">
 Using a dollar sign (`$`) character as a separator may be required if a semicolon (`;`) is not a permitted character in a password field. For example, the [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/) does not permit a semicolon character in the **Password** field when defining connection details for database endpoints.
 </Admonition>

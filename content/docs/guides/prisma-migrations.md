@@ -20,7 +20,7 @@ To follow along with this guide, you will need:
 
 ### Initialize a new project
 
-1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
+1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 2. Select an existing project or click the `New Project` button to create a new one. 
 
 ### Retrieve your Neon database connection string
@@ -66,7 +66,7 @@ datasource db {
 }
 ```
 
-Add the `DATABASE_URL` environment variable to your `.env` file, which you'll use to connect to your Neon database. Use the connection string that you obtained from the Neon console earlier:
+Add the `DATABASE_URL` environment variable to your `.env` file, which you'll use to connect to your Neon database. Use the connection string that you obtained from the Neon Console earlier:
 
 ```bash
 # .env
@@ -99,7 +99,7 @@ model Book {
 }
 ```
 
-Two models are deifined above: `Author`, which contains information about authors, and `Book`, for details about published books. The `Book` model includes a foreign key that references the `Author` model.
+Two models are defined above: `Author`, which contains information about authors, and `Book`, for details about published books. The `Book` model includes a foreign key that references the `Author` model.
 
 ### Generate Prisma client and run migrations
 
@@ -123,7 +123,7 @@ We'll use this client later to interact with the database.
 
 ### Seed the Database
 
-To test that the application works, we need to add some example data to our tables. Create a `seed.js` fifle in your project and add the following code to it:
+To test that the application works, we need to add some example data to our tables. Create a `seed.js` file in your project and add the following code to it:
 
 ```javascript
 // seed.js

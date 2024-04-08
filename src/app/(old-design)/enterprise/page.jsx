@@ -46,12 +46,11 @@ const logos = [
   'illa',
   'octolis',
   'cloudflare',
-  'airplane',
   'wundergraph',
   'fabric-io',
   'snaplet',
   'fl0',
-  'dynaboard',
+  'encore',
 ];
 
 const EnterprisePage = () => (

@@ -81,3 +81,5 @@ yarn-error.log
 .idea/
 .vscode/
 content/docs/shared-content/NewPricing
+public/md
+

@@ -257,7 +257,7 @@ When you run a changeset for the first time, Liquibase automatically creates two
 - [databasechangelog](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html): Tracks which changesets have been run.
 - [databasechangeloglock](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html): Ensures only one instance of Liquibase runs at a time.
 
-You can verify these tables were created by viewing the `blog` database on the **Tables** page in the Neon console. Select **Tables** from the sidebar.
+You can verify these tables were created by viewing the `blog` database on the **Tables** page in the Neon Console. Select **Tables** from the sidebar.
 </Admonition>
 
 ## Rollback a change
@@ -283,7 +283,7 @@ Liquibase command 'rollbackCount' was executed successfully.
 
 </details>
 
-You can verify that creation of the `comments` table was rolled back viewing the `blog` database on the **Tables** page in the Neon console. Select **Tables** from the sidebar.
+You can verify that creation of the `comments` table was rolled back viewing the `blog` database on the **Tables** page in the Neon Console. Select **Tables** from the sidebar.
 
 ## Next steps
 

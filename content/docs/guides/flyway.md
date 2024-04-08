@@ -107,7 +107,7 @@ Migrating schema "PUBLIC" to version 1 - Create person table
 Successfully applied 1 migration to schema "PUBLIC" (execution time 00:00.033s)
 ```
 
-To verify that the `person` table was created, you can view it on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+To verify that the `person` table was created, you can view it on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
 
 ## Add a second migration
 
@@ -136,7 +136,7 @@ Successfully applied 1 migration to schema "public", now at version v2 (executio
 A Flyway report has been generated here: /home/alex/flyway-x.y.z/sql/report.html
 ```
 
-You can verify that the data was added by viewing the table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+You can verify that the data was added by viewing the table on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
 
 ## View your schema migration history
 
@@ -155,7 +155,7 @@ Schema version: 2
 A Flyway report has been generated here: /home/alex/flyway-x.y.z/sql/report.html
 ```
 
-You can also view the table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+You can also view the table on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
 
 ## Next steps
 

@@ -42,6 +42,8 @@
           slug: introduction/manage-billing
         - title: Sample billing
           slug: introduction/billing-sample
+        - title: AWS Marketplace
+          slug: introduction/billing-aws-marketplace
     - title: Support
       slug: introduction/support
     - title: Status
@@ -247,6 +249,8 @@
           slug: guides/aws-lambda
     - title: Caching
       items:
+        - title: Cloudflare Hyperdrive
+          slug: guides/cloudflare-hyperdrive
         - title: PolyScale integration
           slug: guides/polyscale-integration
         - title: PolyScale manual setup
@@ -255,8 +259,6 @@
       items:
         - title: Cloudflare
           items:
-            - title: Cloudflare Hyperdrive
-              slug: guides/cloudflare-hyperdrive
             - title: Cloudflare Pages
               slug: guides/cloudflare-pages
             - title: Cloudflare Workers
@@ -325,6 +327,7 @@
         - title: UUID
           slug: data-types/uuid
     - title: Extensions
+      slug: extensions/extensions-intro
       items:
         - title: Supported extensions
           slug: extensions/pg-extensions
