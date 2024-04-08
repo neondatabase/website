@@ -57,7 +57,7 @@ To add the integration:
 
           The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's primary branch (`main`) that you can modify without affecting data on your primary branch.
 
-          The **Automatically delete obsolete Neon branches** option automatically deletes a Neon preview branch when the git branch that triggered its creation is deleted.
+          The **Automatically delete obsolete Neon branches** option automatically deletes a Neon preview branch when the git branch that triggered its creation is merged or deleted.
          <Admonition type="note">
          Branches created for preview deployments are created from the [primary branch](/docs/reference/glossary#primary-branch) of your Neon project. Earlier versions of the integration created branches from the initial [root branch](/docs/reference/glossary#root-branch) of your Neon project, which is designated as the primary branch by default. Neon lets you [change the primary branch](/docs/manage/branches#set-a-branch-as-primary). If you have an older version of the integration that creates branches from your project's root branch, and you want branches created from your primary branch instead, you can upgrade your integration by reinstalling it from the [Vercel Marketplace](https://vercel.com/integrations/neon).
          </Admonition>
@@ -125,11 +125,19 @@ After you add the integration to a Vercel project, Neon creates a database branc
 
 ## Manage branches created by the integration
 
-The Neon Vercel Integration creates a branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, old branches should be removed regularly. Different options are supported for branch removal. You can do so automatically, manually from the Vercel integration drawer, or  
+The Neon Vercel Integration creates a branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete branches that are no longer required. Different options are supported for branch deletion.
 
+### Automatic deletion
 
+The integration supports automatic deletion of obsolete preview branches when the corresponding Git branch is merged or deleted. If you did not select the **Automatically delete obsolete Neon branches** option when installing the integration, you can do so from the **Branches** tab the Vercel integration drawer.
 
-The integration supports automatic deletion of obsolete preview branches. You can enable this feature by selecting **Automatically delete obsolete Neon branches** when installing the integration. We'll soon add an option to the Vercel integration drawer that lets you enable and disable automatic branch deletion for new and existing integrations. Deletion occurs when the git branch that triggered a branch's creation is deleted.
+1. In the Neon Console, select your project.
+2. Select the **Integrations** page.
+3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
+4. In the **Vercel integration** drawer, select the **Branches** tab.
+5. Check **Automatically delete obsolete Neon branches**.
+
+### Manual deletion from the Vercel integration drawer
 
 To remove branches created by the integration manually:
 
@@ -139,7 +147,9 @@ To remove branches created by the integration manually:
 4. In the **Vercel integration** drawer, select the **Branches** tab.
 5. Remove individual preview branches by clicking on the delete icon, or select **Delete all** to remove all preview branches.
 
-You can also remove branches from your Neon project using the Console, CLI, or API. See [Delete a branch](/docs/manage/branches#delete-a-branch).
+### Manual deletion via the Neon Console, CLI, or API
+
+To remove branches from your Neon project using the Console, CLI, or API, see [Delete a branch](/docs/manage/branches#delete-a-branch).
 
 <Admonition type="note">
 The latest version of the Neon integration displays a message on the **Deployment Details** page in Vercel under **Running checks** if you exceed the branch limit for your Neon project.
