@@ -3,11 +3,15 @@ import React from 'react';
 
 import Link from 'components/shared/link/link';
 
+import AChart from './images/a-chart.inline.svg';
 import AppStore from './images/app-store.inline.svg';
+import Atom from './images/atom.inline.svg';
 import AudioJack from './images/audio-jack.inline.svg';
 import Autoscaling from './images/autoscaling.inline.svg';
 import AWS from './images/aws.inline.svg';
+import BinaryCode from './images/binary-code.inline.svg';
 import Branching from './images/branching.inline.svg';
+import Bug from './images/bug.inline.svg';
 import CalendarDay from './images/calendar-day.inline.svg';
 import Cards from './images/cards.inline.svg';
 import ChartBar from './images/chart-bar.inline.svg';
@@ -17,13 +21,17 @@ import CliCursor from './images/cli-cursor.inline.svg';
 import CLI from './images/cli.inline.svg';
 import Code from './images/code.inline.svg';
 import CSV from './images/csv.inline.svg';
+import Data from './images/data.inline.svg';
 import Database from './images/database.inline.svg';
 import Discord from './images/discord.inline.svg';
 import Download from './images/download.inline.svg';
 import Enable from './images/enable.inline.svg';
 import Filter from './images/filter.inline.svg';
+import FindReplace from './images/find-replace.inline.svg';
 import Gamepad from './images/gamepad.inline.svg';
+import Gear from './images/gear.inline.svg';
 import Github from './images/github.inline.svg';
+import Globe from './images/globe.inline.svg';
 import GUI from './images/gui.inline.svg';
 import Handshake from './images/handshake.inline.svg';
 import Heroku from './images/heroku.inline.svg';
@@ -46,9 +54,12 @@ import Queries from './images/queries.inline.svg';
 import Refresh from './images/refresh.inline.svg';
 import Research from './images/research.inline.svg';
 import RespondArrow from './images/respond-arrow.inline.svg';
+import RowTable from './images/row-table.inline.svg';
 import ScaleUp from './images/scale-up.inline.svg';
 import Screen from './images/screen.inline.svg';
+import SearchContent from './images/search-content.inline.svg';
 import Setup from './images/setup.inline.svg';
+import Sparkle from './images/sparkle.inline.svg';
 import SplitBranch from './images/split-branch.inline.svg';
 import SQL from './images/sql.inline.svg';
 import Stopwatch from './images/stopwatch.inline.svg';
@@ -59,16 +70,22 @@ import Unlock from './images/unlocked.inline.svg';
 import Vercel from './images/vercel.inline.svg';
 import Wallet from './images/wallet.inline.svg';
 import Warning from './images/warning.inline.svg';
+import Wrench from './images/wrench.inline.svg';
 import X from './images/x.inline.svg';
 
 const icons = {
+  'a-chart': AChart,
   'audio-jack': AudioJack,
+  atom: Atom,
   aws: AWS,
+  'binary-code': BinaryCode,
+  bug: Bug,
   cheque: Cheque,
   check: Check,
   code: Code,
   csv: CSV,
   'calendar-day': CalendarDay,
+  data: Data,
   database: Database,
   discord: Discord,
   download: Download,
@@ -78,6 +95,7 @@ const icons = {
   import: Import,
   ladder: Ladder,
   'lock-landscape': LockLandscape,
+  table: RowTable,
   'split-branch': SplitBranch,
   sql: SQL,
   'app-store': AppStore,
@@ -92,8 +110,11 @@ const icons = {
   branching: Branching,
   cli: CLI,
   enable: Enable,
+  'find-replace': FindReplace,
   filter: Filter,
   vercel: Vercel,
+  gear: Gear,
+  globe: Globe,
   handshake: Handshake,
   hourglass: Hourglass,
   hook: Hook,
@@ -111,12 +132,15 @@ const icons = {
   queries: Queries,
   refresh: Refresh,
   setup: Setup,
+  sparkle: Sparkle,
+  search: SearchContent,
   'scale-up': ScaleUp,
   'respond-arrow': RespondArrow,
   'chart-bar': ChartBar,
   screen: Screen,
   x: X,
   unlock: Unlock,
+  wrench: Wrench,
   warning: Warning,
   wallet: Wallet,
 };
