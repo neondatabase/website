@@ -6,6 +6,10 @@ isDraft: false
 updatedOn: '2023-12-04T18:49:23.388Z'
 ---
 
+<Admonition type="important">
+Please be aware that PolyScale will sunset its Serverless product on June 1st, 2024. For additional details, please refer to the [PolyScale announcement](https://www.polyscale.ai/future/). The instructions in this document remain available for current users of PolyScale but will be removed from the Neon documentation at a future date.
+</Admonition>
+
 [PolyScale](https://docs.polyscale.ai/) is a serverless database cache service. With PolyScale, you can distribute and cache your data globally, allowing you to scale your database without altering transactional semantics. No coding or infrastructure changes are required. You can connect Neon to PolyScale in minutes, providing your database-backed applications with speedy access to your Neon data from anywhere in the world. 
 
 <Admonition type="note">
