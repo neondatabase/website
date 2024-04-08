@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 
 import Hero from 'components/pages/landing/hero';
-import SubscribeForm from 'components/pages/landing/subscribe-form';
 import CTA from 'components/pages/pricing/cta';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
@@ -37,7 +36,6 @@ export default async function DynamicPage({ params }) {
     content,
     {
       landinghero: Hero,
-      landingform: SubscribeForm,
       landingfeatures: ({ features, ...restProps }) => {
         const items = features.map((feature) => {
           const icon = icons[feature.iconName];
