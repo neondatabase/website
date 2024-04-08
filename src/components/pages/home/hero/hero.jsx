@@ -2,11 +2,13 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
+import PropTypes from 'prop-types';
 import { forwardRef, useState, useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import Link from 'components/shared/link';
 import bg from 'images/pages/home/hero/bg.png';
 
 const ITEMS = [
@@ -15,12 +17,16 @@ const ITEMS = [
     title: 'Scaling',
     description:
       'We separated storage and compute. Compute activates on an incoming connection and shuts down to save resources on inactivity.',
+    linkLabel: 'Discover Autoscaling',
+    linkUrl: '#',
   },
   {
     videoUrl: '/videos/pages/home/ai-loop.mp4',
     title: 'Branching',
     description:
       'Neon allows to instantly branch your Postgres database to support a modern development workflow.',
+    linkLabel: 'Explore Branching',
+    linkUrl: '#',
   },
 ];
 
@@ -29,7 +35,10 @@ const ITEMS = [
 //       - update current videos
 const Item = forwardRef(
   // eslint-disable-next-line react/prop-types
-  ({ className, videoUrl, title, description, isPlayVideo, switchVideo }, videoRef) => {
+  (
+    { className, videoUrl, title, description, linkLabel, linkUrl, isPlayVideo, switchVideo },
+    videoRef
+  ) => {
     const [visibilityRef, isInView] = useInView();
     const [progress, setProgress] = useState(0);
 
@@ -85,11 +94,29 @@ const Item = forwardRef(
           <p className="mt-3.5 max-w-[366px] tracking-extra-tight text-gray-new-80">
             {description}
           </p>
+          <Link
+            className="mt-2.5 flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white"
+            to={linkUrl}
+            withArrow
+          >
+            {linkLabel}
+          </Link>
         </div>
       </div>
     );
   }
 );
+
+Item.propTypes = {
+  className: PropTypes.string,
+  videoUrl: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  linkLabel: PropTypes.string.isRequired,
+  linkUrl: PropTypes.string.isRequired,
+  isPlayVideo: PropTypes.bool.isRequired,
+  switchVideo: PropTypes.func.isRequired,
+};
 
 const Hero = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);

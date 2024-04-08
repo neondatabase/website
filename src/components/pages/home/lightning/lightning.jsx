@@ -27,7 +27,7 @@ const Lightning = () => (
         seamless data retrieval from both serverless and edge environments, utilizing HTTP.
       </p>
       <Link
-        className="group ml-32 mt-[22px] flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white xl:ml-24 lg:ml-8 md:ml-0"
+        className="ml-32 mt-[22px] flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white xl:ml-24 lg:ml-8 md:ml-0"
         to="#"
         withArrow
       >
