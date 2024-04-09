@@ -71,7 +71,7 @@ Here's a snapshot of what we're working on now:
 
 The Neon **Limited Preview** started in February 2022 and was made available to a small number of select users and friends.
 
-On June 15th, 2022, the Neon team announced the [Technical Preview](#technical-preview), making Neon available to a wider audience. Thousands of users were able to try Neon's [Free Tier](/docs/introduction/free-tier).
+On June 15th, 2022, the Neon team announced a [Technical Preview](#technical-preview), making Neon available to a wider audience. Thousands of users were able to try Neon's [Free Tier](/docs/introduction/free-tier).
 
 On December 6th, 2022, Neon released its branching feature and dropped the invite gate, welcoming everyone to try Neon's Free Tier.
 
@@ -83,6 +83,4 @@ In the fall of 2023, we added [IP allowlisting](/docs/introduction/ip-allow), em
 
 In the winter of 2024, we added support for the Asia Pacific (Sydney) region, [Branch Restore](/docs/guides/branch-restore) with Time Travel Assist, and new [Pricing](https://neon.tech/pricing) plans.
 
-## Technical Preview
-
-Neon sets a high standard for what constitutes a feature-complete product, meaning that all intended core functionality is implemented and operates as expected. While many features may be operational today, there may still be some that are under development or refinement. Neon will remain in Technical Preview while the remaining features are still being developed and perfected.
+On April 15th, 2024, Neon announced General Availability.

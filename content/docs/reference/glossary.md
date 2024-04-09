@@ -436,9 +436,9 @@ Represents the downstream side of logical replication, establishing a connection
 
 A Neon Control Plane operation that suspends a compute endpoint after a period of inactivity. See [Operations](/docs/manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](/docs/introduction/compute-lifecycle).
 
-## Technical Preview
+## Technical preview
 
-Neon is currently in Technical Preview, meaning that some intended core functionalities are still being developed or perfected. Please refer to the [Neon roadmap](/docs/introduction/roadmap) for more information.
+An early version of a feature or changes released for testing and feedback purposes.
 
 ## Token
 
