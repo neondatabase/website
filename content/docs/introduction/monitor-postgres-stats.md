@@ -1,5 +1,5 @@
 ---
-title: Monitoring Postgres statistics
+title: Monitor Postgres statistics
 subtitle: Monitor your database with the Postgres Cumulative Statistics System and the pg_stat_statements extension
 enableTableOfContents: true
 ---

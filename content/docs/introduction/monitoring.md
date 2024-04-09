@@ -9,17 +9,17 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <DetailIconCards>
 
-<a href="/docs/introduction/monitoring-page" description="View metrics and statistics graphs for your Neon project on the Monitoring dashboard" icon="queries">Monitoring dashboard</a>
+<a href="/docs/introduction/monitoring-page" description="View system and database metrics like CPU, RAM, Connections, and more on the Neon Monitoring dashboard" icon="queries">Monitoring dashboard</a>
 
-<a href="/docs/introduction/monitor-usage" description="Track usage and consumption metrics for your Neon account or project from the Neon Console or Neon API" icon="queries">Usage metrics</a>
+<a href="/docs/introduction/monitor-usage" description="Track usage metrics for your Neon account and projects in the Neon Console with the Neon API" icon="queries">Usage metrics</a>
 
-<a href="/docs/guides/autoscaling-guide#monitor-autoscaling" description="Monitor Autoscaling vCPU and RAM usage to help understand your sizing needs using Neon's autoscaling graphs or the neon_utils extension" icon="queries">Autoscaling</a>
+<a href="/docs/guides/autoscaling-guide#monitor-autoscaling" description="Monitor Autoscaling vCPU and RAM usage with Neon's autoscaling graphs or the neon_utils extension" icon="queries">Autoscaling</a>
 
 <a href="/docs/manage/operations" description="Monitor Neon project operations from the Neon Console, API, or CLI" icon="queries">Neon operations</a>
 
 <a href="/docs/introduction/monitor-postgres-stats" description="Monitor database and query statitics with the Postgres Cumulative Statistics System and the pg_stat_statements extension" icon="queries">Postgres statistics</a>
 
-<a href="/docs/introduction/monitor-external-tools" description="Monitor your database with third-party observability tools such as PgAdmin or PgHero" icon="queries">External tools</a>
+<a href="/docs/introduction/monitor-external-tools" description="Monitor database activity and statistics with third-party tools such as PgAdmin and PgHero" icon="queries">External tools</a>
 
 </DetailIconCards>
 
