@@ -148,7 +148,7 @@ const Hero = () => {
 
       <Container size="1100">
         <div className="text-center">
-          <h1 className="font-title text-[88px] font-medium leading-dense tracking-extra-tight text-white">
+          <h1 className="font-title text-[88px] font-medium leading-dense -tracking-[0.03em] text-white">
             The Future of Postgres
           </h1>
           <p className="mx-auto mt-2.5 max-w-[490px] text-lg font-light leading-snug -tracking-[0.04em] text-gray-new-80">
