@@ -19,6 +19,8 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/introduction/monitor-postgres-stats" description="Monitor database and query statitics with the Postgres Cumulative Statistics System and the pg_stat_statements extension" icon="queries">Postgres statistics</a>
 
+
+
 <a href="/docs/introduction/monitor-external-tools" description="Monitor database activity and statistics with third-party tools such as PgAdmin and PgHero" icon="queries">External tools</a>
 
 </DetailIconCards>
