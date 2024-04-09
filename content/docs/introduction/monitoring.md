@@ -1,6 +1,6 @@
 ---
 title: Monitoring in Neon
-subtitle: Learn about monitoring and observability resources and metrics in Neon
+subtitle: Learn about monitoring resources and metrics in Neon
 enableTableOfContents: true
 updatedOn: '2024-02-22T14:29:54.385Z'
 ---
