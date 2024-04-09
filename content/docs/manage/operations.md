@@ -47,7 +47,6 @@ Possible **Status** values are:
 - `finished`
 - `running`
 - `scheduling`
-- `scheduling`
 - `skipped`
 
 </TabItem>
@@ -332,7 +331,6 @@ Possible operation `status` values include:
 - `failed`
 - `finished`
 - `running`
-- `scheduling`
 - `scheduling`
 - `skipped`
 
