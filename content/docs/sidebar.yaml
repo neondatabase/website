@@ -55,8 +55,6 @@
           slug: introduction/monitoring-page
         - title: Usage metrics
           slug: introduction/monitor-usage
-        - title: Postgres statistics
-          slug: introduction/monitor-postgres-stats
         - title: External tools
           slug: introduction/monitor-external-tools
 - title: Get started
