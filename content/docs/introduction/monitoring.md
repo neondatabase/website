@@ -11,7 +11,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/introduction/monitoring-page" description="View system and database metrics like CPU, RAM, Connections, and more on the Neon Monitoring dashboard" icon="queries">Monitoring dashboard</a>
 
-<a href="/docs/introduction/monitor-usage" description="Track usage metrics for your Neon account and projects in the Neon Console with the Neon API" icon="queries">Usage metrics</a>
+<a href="/docs/introduction/monitor-usage" description="Track usage metrics for your Neon account and projects in the Neon Console or with the Neon API" icon="queries">Usage metrics</a>
 
 <a href="/docs/guides/autoscaling-guide#monitor-autoscaling" description="Monitor Autoscaling vCPU and RAM usage with Neon's autoscaling graphs or the neon_utils extension" icon="queries">Autoscaling</a>
 
@@ -19,7 +19,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/extensions/pg_stat_statements" description="Monitor query performance and statistics in Postgres with the pg_stat_statements extension" icon="queries">pg_stat_statements</a>
 
-<a href="/docs/introduction/monitor-external-tools" description="Monitor database activity and statistics with third-party tools such as PgAdmin and PgHero" icon="queries">External tools</a>
+<a href="/docs/introduction/monitor-external-tools" description="Monitor database activity and statistics with third-party tools such as PgHero and PgAdmin" icon="queries">External tools</a>
 
 </DetailIconCards>
 
