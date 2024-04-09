@@ -1,5 +1,7 @@
+import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
+import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import Hero from 'components/pages/landing/hero';
 import CTA from 'components/pages/pricing/cta';
 import Container from 'components/shared/container';
@@ -10,7 +12,12 @@ import replicasIcon from 'icons/landing/replica.svg';
 import scaleIcon from 'icons/landing/scalability.svg';
 import storageIcon from 'icons/landing/storage.svg';
 import timerIcon from 'icons/landing/timer.svg';
-import { getLandingPages, getWpPageBySlug, getStaticPages } from 'utils/api-pages';
+import {
+  getLandingPages,
+  getWpPageBySlug,
+  getStaticPages,
+  getWpPreviewPageData,
+} from 'utils/api-pages';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
@@ -21,8 +28,21 @@ const icons = {
   replicas: replicasIcon,
 };
 
-export default async function DynamicPage({ params }) {
-  const page = await getWpPageBySlug(params.slug);
+export default async function DynamicWpPage({ params, searchParams }) {
+  const { isEnabled: isDraftModeEnabled } = draftMode();
+
+  let pageResult;
+
+  // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
+  await Promise.resolve(JSON.stringify(searchParams));
+
+  if (isDraftModeEnabled) {
+    pageResult = await getWpPreviewPageData(searchParams?.id, searchParams?.status);
+  } else {
+    pageResult = await getWpPageBySlug(params.slug);
+  }
+
+  const page = pageResult;
 
   if (!page) return notFound();
 
@@ -79,6 +99,7 @@ export default async function DynamicPage({ params }) {
           </Container>
         </article>
       )}
+      {isDraftModeEnabled && <PreviewWarning />}
     </Layout>
   );
 }
