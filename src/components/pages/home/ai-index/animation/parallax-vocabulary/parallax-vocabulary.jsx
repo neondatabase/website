@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, useMotionValue, useSpring, m } from 'framer-motion';
 import PropTypes from 'prop-types';

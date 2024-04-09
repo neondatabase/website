@@ -1,6 +1,6 @@
 import Container from 'components/shared/container';
 
-import Video from './video';
+import Animation from './animation';
 
 const AiIndex = () => (
   <section className="ai-index safe-paddings relative mt-64 xl:mt-32 lg:mt-24 md:mt-20">
@@ -18,7 +18,7 @@ const AiIndex = () => (
         high-dimensional vector search remarkably efficient.
       </p>
     </Container>
-    <Video />
+    <Animation />
   </section>
 );
 

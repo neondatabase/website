@@ -2,9 +2,8 @@ import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import PauseableVideo from 'components/shared/pauseable-video';
 import phoneIllustration from 'images/pages/home/lightning/phone.png';
-
-import Video from './video';
 
 // TODO: check heading gradient position when font will be available
 const Lightning = () => (
@@ -16,7 +15,12 @@ const Lightning = () => (
       <h2 className="inline-block bg-home-lightning-title bg-clip-text pb-6 font-title text-[128px] font-medium leading-[0.95] -tracking-wider text-transparent xl:text-[96px] lg:max-w-lg lg:text-[72px] sm:text-[52px]">
         Lightning fast. Edge&nbsp;ready.
       </h2>
-      <Video />
+      <div className="relative z-10 -mt-10 ml-32 aspect-[1.181818] max-w-[431px] mix-blend-plus-lighter xl:-mt-14 xl:ml-24 xl:max-w-[333px] lg:-mt-[72px] lg:ml-8 lg:max-w-[297px] md:ml-0 md:max-w-[277px] sm:mt-[-60px] sm:max-w-[226px]">
+        <PauseableVideo width={431} height={365}>
+          <source src="/videos/pages/home/lightning-loop-crf-22.mp4" type="video/mp4" />
+          <source src="/videos/pages/home/lightning-loop-crf-20.webm" type="video/webm" />
+        </PauseableVideo>
+      </div>
       <p className="relative z-10 -mt-[84px] ml-32 max-w-[288px] font-light tracking-extra-tight text-gray-new-80 xl:-mt-16 xl:ml-24 xl:leading-snug lg:-mt-16 lg:ml-8 lg:max-w-[256px] md:ml-0 sm:-mt-[53px] sm:max-w-[212px] sm:text-[15px]">
         <span className="font-medium text-white">Achieve low-latency</span> from an edge function to
         your regional compute.

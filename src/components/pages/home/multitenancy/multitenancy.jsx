@@ -1,4 +1,5 @@
 import Container from 'components/shared/container';
+import PauseableVideo from 'components/shared/pauseable-video';
 
 const Multitenancy = () => (
   <section className="multitenancy safe-paddings mt-8 overflow-hidden xl:-mt-9 lg:-mt-8 md:mt-12">
@@ -9,19 +10,14 @@ const Multitenancy = () => (
         for modern teams
       </h2>
     </Container>
-    <video
+    <PauseableVideo
       className="relative left-1/2 mt-[54px] max-w-[1920px] -translate-x-1/2 xl:max-w-[1380px] lg:mt-11 lg:max-w-[1150px] md:mt-10 sm:mt-6 sm:max-w-[790px]"
       height={474}
       width={1920}
-      controls={false}
-      muted
-      playsInline
-      loop
-      autoPlay
     >
       <source src="/videos/pages/home/next-gen.mp4" type="video/mp4" />
       <source src="/videos/pages/home/next-gen.webm" type="video/webm" />
-    </video>
+    </PauseableVideo>
     <Container
       className="relative z-10 mt-14 xl:max-w-[704px] lg:mt-[50px] lg:pl-24 md:mt-11 sm:mt-6"
       size="960"
