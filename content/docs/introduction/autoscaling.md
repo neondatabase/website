@@ -27,11 +27,11 @@ You can enable autoscaling when creating a Neon project or afterward using a sim
 
 A Neon project can have one or more computes, each representing an individual Postgres instance. Storage is decoupled from these computes, meaning that the Postgres servers executing queries are physically separate from the data storage location. This separation offers numerous advantages, including enablement of Neon's autoscaling feature.
 
-![High-level architecture diagram](/docs/introduction/autoscale-high-level-architecture.webp)
+![High-level architecture diagram](/docs/introduction/autoscale-high-level-architecture.jpg)
 
 Looking more closely, you can see that each Postgres instance operates within its own virtual machine inside a [Kubernetes cluster](/docs/reference/glossary#kubernetes-cluster), with multiple VMs hosted on each node of the cluster. Autoscaling is implemented by allocating and deallocating [vCPU](/docs/reference/glossary#vcpu) and [RAM](/docs/reference/glossary#ram) to each VM.
 
-![Autoscaling diagram](/docs/introduction/autoscale-architecture.webp)
+![Autoscaling diagram](/docs/introduction/autoscale-architecture.jpg)
 
 ### The autoscaler-agent
 
