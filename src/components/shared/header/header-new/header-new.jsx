@@ -24,7 +24,7 @@ const HeaderNew = ({ className = null, theme }) => {
           className
         )}
       >
-        <Container className="flex items-center justify-between py-4" size="1216">
+        <Container className="flex items-center justify-between py-4 md:!px-5" size="1216">
           <div className="flex items-center gap-x-16">
             <Link to="/">
               <span className="sr-only">Neon</span>
@@ -123,7 +123,7 @@ const HeaderNew = ({ className = null, theme }) => {
             </nav>
           </div>
 
-          <div className="flex items-center gap-x-6 lg:pr-12 md:hidden">
+          <div className="flex items-center gap-x-6 lg:hidden lg:pr-12">
             <GithubStarCounter isThemeBlack isNewDesign />
             <Link
               className="text-[13px] font-semibold leading-none tracking-extra-tight lg:hidden"

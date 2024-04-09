@@ -27,7 +27,7 @@ const variants = {
     },
   },
   to: {
-    zIndex: 99,
+    zIndex: 39,
     opacity: 1,
     translateY: 0,
     transition: {
@@ -36,30 +36,33 @@ const variants = {
   },
 };
 
-const MobileMenuItem = ({ text, to, items, setMenuOpen, menuOpen }) => {
+const MobileMenuItem = ({ text, to, items }) => {
+  const [isMenuItemOpen, setIsMenuItemOpen] = useState();
   const Tag = items ? 'button' : Link;
+
+  const handleMenuItemClick = () => {
+    if (items) {
+      setIsMenuItemOpen(!isMenuItemOpen);
+    }
+  };
+
   return (
-    <li className="block overflow-hidden border-b border-gray-new-10 leading-none">
+    <li className="block shrink-0 overflow-hidden border-b border-gray-new-10 leading-none">
       <Tag
-        className="relative flex w-full items-center py-4 text-sm leading-none text-white after:absolute after:-bottom-4 after:-top-4 after:left-0 after:w-full"
+        className={clsx(
+          isMenuItemOpen ? 'font-medium text-white' : 'text-gray-new-80',
+          'relative flex w-full items-center py-4 leading-none tracking-[-0.01em] transition-colors duration-200'
+        )}
         to={to}
-        onClick={() => {
-          if (items) {
-            if (menuOpen === text) {
-              setMenuOpen(null);
-            } else {
-              setMenuOpen(text);
-            }
-          }
-        }}
+        onClick={handleMenuItemClick}
       >
         <span>{text}</span>
         {items && (
           <ChevronIcon
             className={clsx(
-              'ml-auto inline-block h-2.5 w-2.5 opacity-60 transition-transform duration-200 [&_path]:stroke-2',
+              'ml-auto inline-block h-2.5 w-2.5 text-white transition-transform duration-200 [&_path]:stroke-2',
               {
-                'rotate-180': menuOpen === text,
+                'rotate-180': isMenuItemOpen,
               }
             )}
           />
@@ -67,30 +70,30 @@ const MobileMenuItem = ({ text, to, items, setMenuOpen, menuOpen }) => {
       </Tag>
       {items?.length > 0 && (
         <AnimatePresence>
-          {menuOpen === text && (
+          {isMenuItemOpen && (
             <m.ul
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: ANIMATION_DURATION }}
+              className="flex flex-col gap-y-0.5 border-t border-gray-new-10 py-2"
             >
               {items.map(({ icon, text, description, to }, index) => (
                 <li className="group flex" key={index}>
-                  <Link
-                    className="flex w-full gap-x-3 border-t border-gray-new-10 py-3 pl-5 leading-none"
-                    to={to}
-                  >
+                  <Link className="flex w-full gap-x-3 py-2 leading-none" to={to}>
                     <img
-                      className="h-3.5 w-3.5 shrink"
+                      className="h-[17px] w-[17px] shrink"
                       src={icon.new}
-                      width={14}
-                      height={14}
+                      width={17}
+                      height={17}
                       alt=""
                       loading="lazy"
                     />
-                    <span className="flex flex-col gap-y-1.5">
-                      <span className="text-sm font-medium text-white">{text}</span>
-                      <span className="block text-[13px] font-light text-gray-new-60">
+                    <span className="flex flex-col gap-y-1">
+                      <span className="text-[15px] leading-dense tracking-[-0.01em] text-white">
+                        {text}
+                      </span>
+                      <span className="text-[13px] font-light leading-dense tracking-extra-tight text-gray-new-50">
                         {description}
                       </span>
                     </span>
@@ -115,8 +118,6 @@ MobileMenuItem.propTypes = {
       to: PropTypes.string,
     })
   ),
-  setMenuOpen: PropTypes.func.isRequired,
-  menuOpen: PropTypes.string,
 };
 
 const mobileMenuItems = [
@@ -128,7 +129,6 @@ const mobileMenuItems = [
 ];
 
 const MobileMenuNew = ({ isThemeBlack }) => {
-  const [menuItemOpen, setMenuItemOpen] = useState();
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
 
   return (
@@ -146,35 +146,34 @@ const MobileMenuNew = ({ isThemeBlack }) => {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <m.nav
-              className="safe-paddings absolute inset-0 top-16 z-[-1] hidden h-[calc(100vh-100px)] flex-col justify-between bg-black-pure px-8 lg:flex md:px-5"
+              className="safe-paddings fixed inset-0 z-[-1] hidden flex-col justify-between bg-black-pure lg:flex"
               initial="from"
               animate="to"
               exit="from"
               variants={variants}
             >
-              <div className="no-scrollbars max-h-[calc(100%-108px)] overflow-y-auto sm:max-h-[calc(100%-158px)]">
-                <ul className="flex flex-col">
+              <div className="relative h-full pb-[108px] pt-[97px] sm:pb-[158px]">
+                <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 md:px-5">
                   {mobileMenuItems.map((item, index) => (
-                    <MobileMenuItem
-                      key={index}
-                      {...item}
-                      setMenuOpen={setMenuItemOpen}
-                      menuOpen={menuItemOpen}
-                    />
+                    <MobileMenuItem key={index} {...item} />
                   ))}
                 </ul>
-              </div>
-              <div className="fixed inset-x-0 bottom-0 grid grid-cols-2 gap-x-5 gap-y-3.5 bg-black-pure p-8 md:px-5 sm:grid-cols-1 sm:py-7">
-                <Button
-                  className="h-11 items-center justify-center"
-                  to={LINKS.login}
-                  theme="gray-15-outline"
-                >
-                  Log In
-                </Button>
-                <Button className="h-11 items-center" to={LINKS.signup} theme="primary">
-                  Sign up
-                </Button>
+                <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-5 gap-y-3.5 bg-black-pure p-8 md:px-5 sm:grid-cols-1 sm:py-7">
+                  <Button
+                    className="h-11 items-center justify-center !font-semibold tracking-tight"
+                    to={LINKS.login}
+                    theme="gray-15-outline"
+                  >
+                    Log In
+                  </Button>
+                  <Button
+                    className="h-11 items-center !font-semibold tracking-tight"
+                    to={LINKS.signup}
+                    theme="primary"
+                  >
+                    Sign Up
+                  </Button>
+                </div>
               </div>
             </m.nav>
           )}

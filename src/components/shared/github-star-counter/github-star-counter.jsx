@@ -67,7 +67,7 @@ const GithubStarCounter = ({ className = '', isThemeBlack = false, isNewDesign }
       }}
     >
       <GitHubIcon width={20} height={20} />
-      <span className={clsx('whitespace-nowrap', isNewDesign ? 'w-8' : 'w-10 xl:hidden')}>
+      <span className={clsx('whitespace-nowrap', isNewDesign ? 'w-8' : 'w-10')}>
         {starsCount ? `${(starsCount / 1000).toFixed(1)}k` : '...'}
       </span>
     </Link>
