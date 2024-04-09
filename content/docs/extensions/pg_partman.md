@@ -194,6 +194,116 @@ WHERE parent_table = 'public.user_activities';
 
 The background worker process that comes bundled with `pg_partman` automatically detaches the old partitions that are older than 4 weeks from the main table. Since we've set `retention_keep_table` to `true`, the old partitions are kept as separate tables, and not dropped from the database. 
 
+## Additional considerations
+
+### Partitioning an existing table with `pg_partman`
+
+If you have an existing table that you want to partition, you can use `pg_partman` for it. However, it isn't straightforward since it can't be directly altered into the parent table for a partition set. Instead, you need to create a new partitioned table and copy the data from the existing table into the new partitioned table. 
+
+We describe the `offline` method here, where queries to the existing table are stopped while the data is being copied over to the new partitioned table. It is also possible to achieve this while keeping the existing table operational, but it involves more complex steps. For more details, refer to the [pg_partman documentation](https://github.com/pgpartman/pg_partman/blob/master/doc/pg_partman_howto.md). 
+
+#### Example: Partitioning an existing table
+
+To illustrate, we recreate the `test_user_activities` table from the previous example but without specifying partitioning:
+
+```sql
+CREATE TABLE public.test_user_activities (
+  activity_id serial,
+  activity_time TIMESTAMPTZ NOT NULL,
+  activity_type TEXT NOT NULL,
+  content_id INT NOT NULL,
+  user_id INT NOT NULL
+);
+
+INSERT INTO test_user_activities (activity_time, activity_type, content_id, user_id)
+VALUES
+    ('2024-03-15 10:00:00', 'like', 1001, 101),
+    ('2024-03-16 15:30:00', 'comment', 1002, 102),
+    ('2024-03-17 09:45:00', 'share', 1003, 103),
+    ('2024-03-18 18:20:00', 'like', 1004, 104),
+    ('2024-03-19 12:10:00', 'comment', 1005, 105),
+    ('2024-03-20 08:00:00', 'like', 1006, 106),
+    ('2024-03-21 14:15:00', 'share', 1007, 107),
+    ('2024-03-22 11:30:00', 'like', 1008, 108),
+    ('2024-03-23 16:45:00', 'comment', 1009, 109),
+    ('2024-03-24 20:00:00', 'share', 1010, 110),
+    ('2024-03-25 09:30:00', 'like', 1011, 111),
+    ('2024-03-26 13:45:00', 'comment', 1012, 112),
+    ('2024-03-27 17:00:00', 'share', 1013, 113),
+    ('2024-03-28 11:15:00', 'like', 1014, 114),
+    ('2024-03-29 15:30:00', 'comment', 1015, 115);
+```
+
+Now, we'll partition the existing `test_user_activities` table using `pg_partman`. 
+
+1. Rename the original table so that the partitioned table can be created with the original table's name:
+
+```sql
+ALTER TABLE public.test_user_activities RENAME TO old_user_activities;
+```
+
+2. Create a new table with the same name as the original table, but with partitioning enabled:
+
+```sql
+CREATE TABLE public.test_user_activities (
+  activity_id serial,
+  activity_time TIMESTAMPTZ NOT NULL,
+  activity_type TEXT NOT NULL,
+  content_id INT NOT NULL,
+  user_id INT NOT NULL
+)
+PARTITION BY RANGE (activity_time);
+```
+
+We were using a `SERIAL` column for `activity_id` in the original table. If you want to keep the same sequence for the new table, you can set the sequence value to the last value of the original table:
+
+```sql
+SELECT setval('public.test_user_activities_activity_id_seq', (SELECT MAX(activity_id) FROM public.old_user_activities));
+```
+
+In general, we also need to ensure other properties from the old table, such as privileges, constraints, defaults, indexes, etc. are also applied to the new table.
+
+3. Use the `create_parent()` function provided by `pg_partman` to set up partitioning on the new table:
+
+```sql
+SELECT partman.create_parent(
+  p_parent_table := 'public.test_user_activities',
+  p_control := 'activity_time',
+  p_interval := '1 week'
+);
+```
+
+4. Now, to we can migrate data from the old table to the new partitioned table in smaller batches:
+
+```sql
+CALL partman.partition_data_proc(
+  p_parent_table := 'public.test_user_activities',
+  p_loop_count := 200,
+  p_interval := '1 day',
+  p_source_table := 'public.old_user_activities'
+);
+```
+
+This will move the data from `old_user_activities` to the new `test_user_activities` table in daily intervals, committing after each batch. The `p_interval` parameter specifies the interval of values to select in each batch, and `p_loop_count` specifies the total number of batches to move. 
+
+5. After the data migration is complete, the old table should be empty, and the new partitioned table should contain all the data and child tables. You can verify this by counting the number of rows in both the tables:
+
+```sql
+SELECT COUNT(*) FROM public.test_user_activities
+UNION ALL
+SELECT COUNT(*) FROM public.old_user_activities;
+```
+
+This should return 15 and 0 rows, respectively.
+
+6. Finally, run `VACUUM ANALYZE` on the new partitioned table to update statistics:
+
+```sql
+VACUUM ANALYZE public.test_user_activities;
+```
+
+The `test_user_activities` table is now successfully partitioned using `pg_partman`, with the data migrated from the old table to the new partitioned structure.
+
 ### Uniqueness constraints for partitioned tables
 
 This section applies to partitioned tables created natively in Postgres, as well as those created using `pg_partman`. 
