@@ -61,7 +61,7 @@ const Trusted = () => (
       <div
         className={clsx(
           'grid grid-cols-[22.22%_27.86%_25%_auto] items-end justify-center gap-x-8 px-0',
-          'xl:gap-6 lg:grid-cols-[1fr_1fr] lg:gap-5 lg:px-8 md:px-0 sm:mx-auto sm:max-w-md sm:grid-cols-1 sm:gap-3'
+          'xl:gap-6 lg:grid-cols-[1fr_1fr] lg:gap-5 lg:px-8 md:px-0 sm:mx-auto sm:max-w-xs sm:grid-cols-1 sm:gap-3'
         )}
       >
         <Card

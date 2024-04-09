@@ -58,11 +58,11 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
         <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
           <div
             className={clsx(
-              isNewTheme ? 'mb-[30px]' : 'mb-7',
-              'flex grow flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-start md:justify-between'
+              isNewTheme ? 'mb-[30px]' : 'mb-7 xl:mb-5',
+              'flex grow flex-col md:mb-0 md:w-full md:flex-row md:items-start md:justify-between'
             )}
           >
-            <div className="flex grow flex-col">
+            <div className="flex grow flex-col items-start">
               <Link className="block" to="/">
                 <span className="sr-only">Neon</span>
                 <Logo
