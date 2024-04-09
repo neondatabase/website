@@ -18,12 +18,12 @@ const Card = ({ className, borderClassName, bgClassName, bgImage, children }) =>
     <div className={clsx('absolute', bgClassName || 'inset-0')}>
       <Image
         className="h-full w-full object-cover"
-        width={bgImage.width / 2}
-        height={bgImage.height / 2}
+        width={bgImage.width}
+        height={bgImage.height}
         sizes="(max-width: 1024px) 440px, 240px"
-        quality={95}
         src={bgImage}
         alt=""
+        unoptimized
       />
     </div>
     <div className={clsx('absolute inset-0 z-10 rounded-[inherit]', borderClassName)} />
