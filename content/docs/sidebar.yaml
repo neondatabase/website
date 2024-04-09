@@ -53,7 +53,7 @@
       items:
         - title: Monitoring dashboard
           slug: introduction/monitoring-page
-        - title: Usage
+        - title: Usage metrics
           slug: introduction/monitor-usage
         - title: Postgres statistics
           slug: introduction/monitor-postgres-stats

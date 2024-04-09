@@ -10,17 +10,39 @@ Neon exposes usage metrics in the Neon Console and through the Neon API.
 
 ### Billing page
 
+You can monitor usage metrics for your Neon account from the **Billing** page in the Neon Console. Usage metrics include:
+
+- Branches (Free Tier only)
+- Storage
+- Compute
+- Projects
+
+![Monitor billing and usage](/docs/introduction/monitor_billing_usage.png)
+
+For more information, see [Monitoring billing and usage](/docs/introduction/how-billing-works#monitoring-billing-and-usage).
+
 ### Neon Dashboard 
 
-The Usage widget on the Neon Dashboard shows a snapshot of your current consumption metrics since your last billing date (the last day of the previous month).
+The **Usage** widget on the Neon Dashboard shows a snapshot of your current project usage since your last billing date (the last day of the previous month).
+
+![Monitor usage widget](/docs/introduction/monitor_usage_widget.png)
+
+For information about the metrics displayed here, see [Monitor usage for a project](/docs/introduction/how-billing-works#monitor-usage-for-a-project)
 
 ### Branch-specific usage metrics
 
-The **Branches** page provides key usage metrics for all your branches, like active hours, compute hours, storage space used, and whether the branch includes a read-write compute, all organized into a table view that lets you scan your list of branches. You can also use search if your list of branches is quite long.
+The **Branches** page provides key usage metrics for all your branches, like active time, data size, when the branch was last active, all organized into a table view.
 
-## Request usage metrics with the Neon API
+To view the branches in your Neon project:
 
-Using the Neon API, you can collect a variety of usage-based consumption metrics like  `data_storage_bytes_hour` and `compute_time_seconds`.
+1. In the Neon Console, select a project.
+2. Select **Branches** to view the branches for the project.
+
+You can select a branch from the table to view additional details about the branch.
+
+## Retrieve usage metrics with the Neon API
+
+Using the Neon API, you can retrieve a variety of usage-based consumption metrics like  `data_storage_bytes_hour` and `compute_time_seconds`.
 
 Use this `GET` request to get details from an individual project.
 
@@ -31,6 +53,4 @@ curl --request GET \
      --header "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
-For more details, see [Retrieving details about a project](/docs/guides/partner-billing#retrieving-details-about-a-project).
-
-See [Querying metrics and quotas](https://neon.tech/docs/guides/partner-billing#querying-metrics-and-quotas)
+For more information, see [Retrieving details about a project](/docs/guides/partner-billing#retrieving-details-about-a-project).
