@@ -76,7 +76,7 @@ Extra compute usage is available with the [Launch](/docs/introduction/plans##lau
 
 Compute-hour usage in Neon is affected by [autosuspend](/docs/guides/auto-suspend-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute usage might accrue in the following graph.
 
-![Compute metrics graph](/docs/introduction/compute-metrics2.png)
+![Compute metrics graph](/docs/introduction/compute-usage-graph.jpg)
 
 You can see how compute size scales between your minimum and maximum CPU settings, increasing and decreasing compute usage: compute size never rises above your max level, and it never drops below your minimum setting. With autosuspend, no compute time at all accrues during inactive periods. For projects with inconsistent demand, this can save significant compute usage.
 

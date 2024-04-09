@@ -19,6 +19,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 When you open a project in the Neon Console, the Dashboard gives you a snapshot view of the most recent usage metrics for that project:
 
+- **Monitoring** widget &#8212; Shows the latest CPU and RAM usage for a selected branch's compute endpoint.
 - **Branches** widget &#8212; Shows how much storage your main branch has currently used. It also lists a subset of other branches.
 - **Usage since...** widget  &#8212; Shows a snapshot of your current consumption metrics since your last billing date (the last day of the previous month).
 - **Project settings** widget &#8212; Shows current project settings like your compute size default and history retention window.
@@ -63,7 +64,7 @@ Neon recommends a few tools from the Postgres community that can help you unders
 
 - [pg_stat_activity](#pg_stat_activity)
 - [pg_stat_statements](#pg_stat_statements)
-- [PgHero](#PgHero)
+- [PgHero](#pghero)
 
 ### pg_stat_activity
 
