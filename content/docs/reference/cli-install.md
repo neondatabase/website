@@ -51,10 +51,18 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 
 - **Linux**
 
-    Download the Linux binary:
+    Download the Linux x64 or ARM64 binary:
+
+    x64:
 
     ```bash shouldWrap
-    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux -o neonctl
+    curl -sL https://github.com/neondatabase/neonctl/releases/download/v1.28.0/neonctl-linux-x64 -o neonctl
+    ```
+
+    ARM64:
+
+    ```bash shouldWrap
+    curl -sL https://github.com/neondatabase/neonctl/releases/download/v1.28.0/neonctl-linux-arm64 -o neonctl
     ```
 
     No installation is required. Run the Neon CLI as follows:
