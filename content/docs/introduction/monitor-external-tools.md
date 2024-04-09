@@ -4,10 +4,10 @@ subtitle: Monitor your Neon Postgres database with external tools such as PgAdmi
 enableTableOfContents: true
 ---
 
-There are a number of external tools that you can use to monitor your Neon Postgres database, such as [PgHero](#pghero) and [pgAdmin](#pgadmin). Setup instructions for those tools are provided below.
+There are external tools that you can use to monitor your Neon Postgres database, such as [PgHero](#pghero) and [pgAdmin](#pgadmin). Setup instructions for those tools are provided below.
 
 <Admonition type="note">
-Neon currently does support monitoring tools that require installing an agent on the Postgres host system. Please keep an eye on our roadmap for future integrations that will enable these utilities and platforms. 
+Neon does not currently support monitoring tools or platforms that require installing an agent on the Postgres host system, but please keep an eye on our [roadmap](/docs/introduction/raodmap) for future integrations that enable these monitoring options. 
 </Admonition>
 
 ## PgHero
@@ -71,7 +71,7 @@ With pgAdmin, you can monitor real-time activity for a variety of metrics includ
 - Database activity (Sessions, Locks, Prepared Transactions)
 
 <Admonition type="note" title="Notes">
-Neon currently does not support the `system_stats` extension required to use the **System Statistics** tab in pgAdmin. It's also important to note that pgAdmin, while active, polls your database for statistics, which does not allow your compute to suspend as it normally would when there is no other database activity. This will consume additional compute hours if your compute would otherwise be sitting idle for periods of time. 
+Neon currently does not support the `system_stats` extension required to use the **System Statistics** tab in pgAdmin. It's also important to note that pgAdmin, while active, polls your database for statistics, which does not allow your compute to suspend as it normally would when there is no other database activity.
 </Admonition>
 
 ### How to install pgAdmin
