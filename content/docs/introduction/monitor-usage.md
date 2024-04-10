@@ -4,12 +4,12 @@ subtitle: Monitor usage metrics for your account and projects from the console o
 enableTableOfContents: true
 ---
 
-Neon exposes usage metrics in the Neon Console and through the Neon API. These metrics will tell you things like:
+Neon exposes usage metrics in the Neon Console and through the Neon API. These metrics can answer questions like:
 
-- How many branches do I have?
-- How much storage am I currently using?
+- How much storage am I using?
 - How many compute hours have I used?
 - How many projects do I have?
+- How many branches do I have?
 
 ## View usage metrics in the Neon Console
 
@@ -84,9 +84,9 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-Response body:
+**Response body**
 
-```json {6,11-15}
+```json {7,11-15}
 {
   "branch": {
     "id": "br-polished-flower-a5tq1sdv",
@@ -119,9 +119,9 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY' |jq
 ```
 
-Response body:
+**Response body**
 
-```json {1-8,36}
+```json {3-8,36}
 {
   "project": {
     "data_storage_bytes_hour": 113808080168,

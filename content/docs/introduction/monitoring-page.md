@@ -23,10 +23,10 @@ Your Neon plan defines the range of data you can view.
 
 The dashboard displays metrics for the selected **Branch** and **Compute endpoint**. Use the drop-down menus to view metrics for a different branch or compute endpoint. Use the **Refresh** button to update the displayed metrics.
 
-If you have a new project, branch, or compute endpoint, or there has not been much activity, charts may display a `There is not enough metrics data for this compute` message. In this case, try again later after more usage data has been collected.
+If there has not been much activity, charts may display this message: `There is not enough metrics data for this compute`. In this case, try again later after more usage data has been collected.
 
 <Admonition type="note">
-The values and plotted lines in many graphs report zero (or go to `0`) during periods when compute endpoint is not active. For example, **RAM**, **CPU**, and **Database size** values and plotted lines go to `0` when a compute transitions to an idle state due to being autosuspended after a period of activity.
+The values and plotted lines in your graphs may go to `0` during periods when your compute endpoint is not active. For example, **RAM**, **CPU**, and **Database size** values lines go to `0` when a compute transitions to an idle state due to being suspended after a period of activity.
 </Admonition>
 
 ### RAM
@@ -86,7 +86,7 @@ The **Buffer cache hit rate** graph shows the percentage of read requests served
 The **Database size** graph shows the logical data size (the size of your actual data) for the named database and the total size for all user-created databases (**Database total size**) on the selected branch. The named database is always the oldest database on the selected branch.  Database size differs from the [storage](/docs/introduction/usage-metrics#storage) size of your Neon project, which includes the logical data size plus history. The **Database total size** metric is only shown when there is more than one database on the selected branch.
 
 <Admonition type="important">
-Database size metrics are only displayed in the graph for time your compute is active. When your compute is idle, database size values are not reported, and the **Database size** graph shows zero even though data may be present.
+Database size metrics are only displayed during time your compute is active. When your compute is idle, database size values are not reported, and the **Database size** graph shows zero even though data may be present.
 </Admonition>
 
 ![Monitoring page database size graph](/docs/introduction/monitor_data_size.png "no-border")
