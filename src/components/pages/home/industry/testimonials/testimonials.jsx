@@ -98,8 +98,6 @@ const Testimonials = () => {
   }, [isMobile]);
 
   const thumbStyle = useMemo(() => {
-    if (windowWidth > IS_MOBILE_SCREEN_WIDTH) return;
-
     const width = 1 / TESTIMONIALS.length;
     const left = (scrollLeft / (scrollWidth - windowWidth)) * (1 - width);
     return {
