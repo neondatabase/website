@@ -14,17 +14,17 @@ import bg from 'images/pages/home/hero/bg.png';
 const ITEMS = [
   {
     videoUrl: '/videos/pages/home/ai-loop.mp4',
-    title: 'Scaling',
+    title: 'Serverless',
     description:
-      'We separated storage and compute. Compute activates on an incoming connection and shuts down to save resources on inactivity.',
-    linkLabel: 'Discover Autoscaling',
+      'We separated storage and compute to bring the best of serverless to Postgres: instant provisioning, autoscaling according to load, and scale to zero.',
+    linkLabel: 'Discover Serverless',
     linkUrl: '#',
   },
   {
     videoUrl: '/videos/pages/home/ai-loop.mp4',
     title: 'Branching',
     description:
-      'Neon allows to instantly branch your Postgres database to support a modern development workflow.',
+      'Neon uses copy-on-write to instantly branch your data and schema. Access isolated data copies for development, CI/CD, and schema changes.',
     linkLabel: 'Explore Branching',
     linkUrl: '#',
   },
@@ -84,7 +84,7 @@ const Item = forwardRef(
           </video>
         </div>
         <div className="mt-5 px-1">
-          <h3 className="text-xl leading-dense tracking-extra-tight text-white">{title}</h3>
+          <h2 className="text-xl leading-dense tracking-tighter text-white">{title}</h2>
           <div className="relative mt-3.5 h-px w-full bg-gray-new-15" aria-hidden>
             <span
               className="absolute left-0 top-0 h-full bg-[linear-gradient(90deg,rgba(228,229,231,0.10)_0%,#E4E5E7_100%)] duration-500"
@@ -93,7 +93,7 @@ const Item = forwardRef(
           </div>
           <p
             className={clsx(
-              'mt-3.5 max-w-[366px] tracking-extra-tight transition-colors duration-200',
+              'mt-3.5 max-w-[366px] font-light tracking-extra-tight transition-colors duration-200',
               isPlayVideo ? 'text-gray-new-80' : 'text-gray-new-40'
             )}
           >

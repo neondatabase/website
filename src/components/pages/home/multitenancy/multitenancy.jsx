@@ -5,9 +5,9 @@ const Multitenancy = () => (
   <section className="multitenancy safe-paddings mt-8 overflow-hidden xl:-mt-9 lg:-mt-8 md:mt-12">
     <Container className="relative z-10 xl:max-w-[704px] lg:pl-24" size="960">
       <h2 className="font-title text-[68px] font-medium leading-[0.9] tracking-extra-tight text-white xl:text-[56px] lg:text-[44px] sm:text-[32px]">
-        Next-gen multitenancy
+        Thousands of databases.
         <br />
-        for modern teams
+        Zero overhead.
       </h2>
     </Container>
     <PauseableVideo
@@ -23,9 +23,10 @@ const Multitenancy = () => (
       size="960"
     >
       <p className="max-w-[608px] text-xl leading-snug tracking-extra-tight text-gray-new-50 xl:max-w-xl xl:text-lg lg:max-w-[480px] lg:text-sm sm:text-base">
-        <span className="text-white">Multi-tenant architecture</span> flexibly scales to fit teams
-        of any size, enabling secure data sharing across users or data isolation within
-        a&nbsp;single tenant, ensuring tailored access and privacy.
+        Use the Neon API to deploy{` `}
+        <span className="font-medium text-white">database-per-tenant architectures</span>. Scale to
+        fleets of thousands of databases without touching a server. Rest easy knowing scale to zero
+        keeps costs low.
       </p>
     </Container>
   </section>

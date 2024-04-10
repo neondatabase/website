@@ -1,4 +1,5 @@
 import Container from 'components/shared/container';
+import Link from 'components/shared/link';
 
 import Animation from './animation';
 
@@ -13,10 +14,20 @@ const AiIndex = () => (
         <br />
         Edge AI Applications.
       </h2>
-      <p className="mt-7 max-w-sm self-end text-lg leading-tight tracking-extra-tight text-gray-new-50 xl:mt-6 xl:max-w-xs xl:text-base lg:mt-4 lg:max-w-[256px] lg:text-sm md:mt-3.5 md:max-w-md md:self-start md:text-base">
-        <span className="text-white">The HNSW index algorithm</span> streamlines performance, making
-        high-dimensional vector search remarkably efficient.
-      </p>
+      <div className="mt-7 max-w-sm self-end xl:mt-6 xl:max-w-xs lg:mt-4 lg:max-w-[256px] md:mt-3.5 md:max-w-md md:self-start">
+        <p className="text-lg leading-tight tracking-extra-tight text-gray-new-50 xl:text-base lg:text-sm md:text-base">
+          <span className="text-white">The HNSW index algorithm</span> streamlines performance,
+          making high-dimensional vector search remarkably efficient.
+        </p>
+        {/* TODO: set link  */}
+        <Link
+          className="mt-2.5 flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white"
+          to="#"
+          withArrow
+        >
+          Power your AI apps with Postgres
+        </Link>
+      </div>
     </Container>
     <Animation />
   </section>

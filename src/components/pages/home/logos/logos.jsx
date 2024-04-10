@@ -45,11 +45,11 @@ const logos = [
 const Logos = () => (
   <section className="safe-paddings mt-[176px] xl:mt-24 lg:mt-20 sm:mt-16">
     <Container
-      className="z-20 flex flex-wrap items-center gap-x-36 gap-y-6 xl:max-w-[960px] xl:gap-x-28 lg:justify-center lg:gap-x-[42px] md:items-start md:justify-between sm:flex-col"
+      className="z-20 flex flex-wrap items-center gap-x-[111px] gap-y-6 xl:max-w-[960px] xl:gap-x-20 lg:justify-center lg:gap-x-[42px] md:items-start md:justify-between sm:flex-col"
       size="1100"
     >
-      <h2 className="max-w-[370px] text-[36px] font-medium leading-dense tracking-extra-tight text-white xl:text-[32px] lg:max-w-[300px] lg:text-[26px] sm:text-[22px]">
-        Trusted by customers and&nbsp;partners
+      <h2 className="max-w-[401px] text-[36px] font-medium leading-dense tracking-extra-tight text-white xl:text-[32px] lg:max-w-xs lg:text-[26px] sm:text-[22px]">
+        Trusted in production by&nbsp;thousands of&nbsp;teams.
       </h2>
       <ul className="grid max-w-[446px] shrink grid-cols-[0.7945fr_1fr_.630137fr] justify-between gap-12 xl:gap-x-12 xl:gap-y-10 lg:gap-x-8 lg:gap-y-7 sm:gap-y-5">
         {logos.map(({ logo, width, alt }, index) => (

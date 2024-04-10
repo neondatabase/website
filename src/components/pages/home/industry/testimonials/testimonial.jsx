@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
-const Testimonial = ({ quote, avatar, name, position, logo, className }) => (
+const Testimonial = ({ quote, avatar, name, position, logo, className, isActive }) => (
   <figure
     className={clsx(
       'sm:grid sm:min-h-[190px] sm:w-[calc(100%-32px)] sm:max-w-md sm:rounded-lg',
@@ -11,7 +11,7 @@ const Testimonial = ({ quote, avatar, name, position, logo, className }) => (
     )}
   >
     <Image
-      className="-m-2 hidden sm:block"
+      className="hidden sm:block"
       src={logo}
       width={logo.width}
       height={logo.height}
@@ -19,6 +19,7 @@ const Testimonial = ({ quote, avatar, name, position, logo, className }) => (
     />
     <blockquote
       className={clsx(
+        isActive ? 'text-white' : 'text-[#CCC6EC] sm:text-white',
         'text-2xl font-light leading-snug tracking-extra-tight text-white',
         'xl:text-xl lg:text-base sm:mt-2.5 sm:text-[15px]'
       )}
@@ -57,6 +58,7 @@ Testimonial.propTypes = {
   position: PropTypes.string.isRequired,
   logo: PropTypes.object.isRequired,
   className: PropTypes.string,
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default Testimonial;

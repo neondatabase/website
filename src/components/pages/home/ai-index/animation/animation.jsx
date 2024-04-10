@@ -3,7 +3,7 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import ParallaxVocabulary from './parallax-vocabulary';
 
 const Animation = () => (
-  <div className="relative z-0 mx-auto -mt-48 aspect-square max-w-[1160px] xl:mt-[-152px] xl:max-w-[860px] lg:mt-[-117px] lg:max-w-[680px] sm:-mt-[52px] sm:max-w-[91%]">
+  <div className="relative z-0 mx-auto mt-[-218px] aspect-square max-w-[1160px] xl:-mt-44 xl:max-w-[860px] lg:-mt-36 lg:max-w-[680px] sm:-mt-12 sm:max-w-[91%]">
     <PauseableVideo
       className="mix-blend-lighten [filter:brightness(1)_contrast(105%)_saturate(100%)]"
       width={1160}

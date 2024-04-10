@@ -25,11 +25,11 @@ const Bento = () => (
             </PauseableVideo>
           </div>
           <div className="pointer-events-none relative z-20 col-span-full row-span-full flex items-end px-6 pb-7 xl:px-5 xl:pb-6 sm:p-4">
-            <p className="pointer-events-auto max-w-lg text-lg font-light leading-snug tracking-extra-tight text-white/60 xl:max-w-[412px] xl:text-base sm:leading-tight">
+            <p className="pointer-events-auto max-w-lg text-lg font-light leading-snug tracking-extra-tight text-white/60 xl:max-w-md xl:text-base sm:leading-tight">
               <strong className="font-medium text-white">
-                Read replicas available in 6 regions.
+                Boost your performance with instant read replicas.
               </strong>{' '}
-              Compute scales scales dynamically to ensure you&apos;re ready for peak hours.
+              They scale&nbsp;down to zero when idle and don&apos;t use additional storage.
             </p>
           </div>
           <div
@@ -50,8 +50,10 @@ const Bento = () => (
           </div>
           <div className="pointer-events-none relative z-20 col-span-full row-span-full flex items-end px-6 pb-7 xl:px-5 xl:pb-6 sm:p-4">
             <p className="pointer-events-auto text-lg font-light leading-snug tracking-extra-tight text-white/60 xl:text-base sm:text-[15px] sm:leading-tight">
-              <strong className="font-medium text-white">API and CLI at your disposal.</strong>{' '}
-              Manage your database programmatically or from the terminal.
+              <strong className="font-normal text-white">
+                Easy database ops via the API and CLI.
+              </strong>{' '}
+              Manage thousands of databases programmatically.
             </p>
           </div>
           <div
@@ -72,8 +74,8 @@ const Bento = () => (
           </div>
           <div className="pointer-events-none relative z-20 col-span-full row-span-full flex items-end px-6 pb-7 xl:px-5 xl:pb-6 sm:p-4">
             <p className="pointer-events-auto text-lg font-light leading-snug tracking-extra-tight text-white/60 xl:text-base sm:text-[15px] sm:leading-tight">
-              <strong className="font-medium text-white">Point-in-Time Recovery.</strong> Instant,
-              up to 30 days, granularity down to the transaction or second.
+              <strong className="font-normal text-white">Instant Point-in-time recovery.</strong> Up
+              to 30 days granularity down to the transaction or second.
             </p>
           </div>
           <div

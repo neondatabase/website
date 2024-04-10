@@ -4,42 +4,45 @@ import clsx from 'clsx';
 import { useRef, useState, useEffect, useMemo } from 'react';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
-import avatar1 from 'images/pages/home/industry/avatar-1.png';
-import avatar2 from 'images/pages/home/industry/avatar-2.png';
-import avatar3 from 'images/pages/home/industry/avatar-3.png';
-import vercelLogo from 'images/pages/home/industry/vercel.svg';
+import alexKlarfeldImage from 'images/pages/home/industry/alex-klarfeld.jpg';
+import edouardBonlieuImage from 'images/pages/home/industry/edouard-bonlieu.jpg';
+import himanshuBhandohImage from 'images/pages/home/industry/himanshu-bhandoh.jpg';
+import koyebLogo from 'images/pages/home/industry/koyeb.svg';
+import leonardHenriquezImage from 'images/pages/home/industry/leonard-henriquez.jpg';
+import retoolLogo from 'images/pages/home/industry/retool.svg';
+import supergoodLogo from 'images/pages/home/industry/supergood.svg';
+import topoLogo from 'images/pages/home/industry/topo.svg';
 
 import Testimonial from './testimonial';
 
-// TODO: update logos and avatars
 const TESTIMONIALS = [
   {
-    quote: `Neon is very easy to use. You create an account and a project, you get a database string, and that’s that. It’s still the Postgres that you’re used to.`,
-    avatar: avatar1,
-    name: 'Joey Teunissen',
-    position: 'CTO at Opusflow',
-    logo: { src: vercelLogo, width: 111, height: 36, alt: '' },
+    quote: `Neon allows us to develop much faster than we’ve even been used to`,
+    avatar: alexKlarfeldImage,
+    name: 'Alex Klarfeld',
+    position: 'CEO and co-founder of Supergood.ai',
+    logo: { src: supergoodLogo, width: 124, height: 32, alt: 'Supergood.ai' },
   },
   {
-    quote: `By partnering with Neon, Vercel’s frontend platform is now the end-to-end serverless solution for building on the Web, from Next.js all the way to SQL.`,
-    avatar: avatar2,
-    name: 'Guillermo Rauch',
-    position: 'CEO at Vercel',
-    logo: { src: vercelLogo, width: 111, height: 36, alt: 'Vercel' },
+    quote: `Neon's serverless philosophy is aligned with our vision: no infrastructure to manage, no servers to provision, no database cluster to maintain`,
+    avatar: edouardBonlieuImage,
+    name: 'Edouard Bonlieu',
+    position: 'co-founder at Koyeb',
+    logo: { src: koyebLogo, width: 123, height: 32, alt: 'Koyeb' },
   },
   {
-    quote: `The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer.`,
-    avatar: avatar3,
-    name: 'Lincoln Bergeson',
-    position: 'Infrastructure Engineer at Replit',
-    logo: { src: vercelLogo, width: 111, height: 36, alt: '' },
+    quote: `The killer feature that convinced us to use Neon was branching: it keeps our engineering velocity high`,
+    avatar: leonardHenriquezImage,
+    name: 'Léonard Henriquez',
+    position: 'co-founder and CTO, Topo.io',
+    logo: { src: topoLogo, width: 109, height: 32, alt: 'Topo.io' },
   },
   {
-    quote: `Using Neon has meant our developers can continue to spend their time on things that meaningfully drive the business forward, instead of babysitting infrastructure.`,
-    avatar: avatar3,
-    name: 'Adithya Reddy',
-    position: 'Developer at Branch',
-    logo: { src: vercelLogo, width: 111, height: 36, alt: '' },
+    quote: `We've been able to automate virtually all database tasks via the Neon API, saving us a tremendous amount of time and engineering effort`,
+    avatar: himanshuBhandohImage,
+    name: 'Himanshu Bhandoh',
+    position: 'Software Engineer at Retool',
+    logo: { src: retoolLogo, width: 112, height: 32, alt: 'Retool' },
   },
 ];
 
@@ -47,6 +50,7 @@ const clamp = (min, value, max) => Math.min(Math.max(min, value), max);
 
 const Testimonials = () => {
   const containerRef = useRef(null);
+  const [activeIndex] = useState(1);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [scrollWidth, setScrollWidth] = useState(0);
   const { width: windowWidth } = useWindowSize();
@@ -88,8 +92,11 @@ const Testimonials = () => {
         <div className="hidden shrink-0 sm:block sm:w-[calc((100%-min(100%-32px,448px)-24px)/2)] sm:snap-center" />
         {TESTIMONIALS.map((testimonial, index) => (
           <Testimonial
-            className={clsx(index !== 1 && 'opacity-40 blur-[2px] sm:opacity-100 sm:blur-none')}
+            className={clsx(
+              activeIndex !== index && 'opacity-40 blur-[2px] sm:opacity-100 sm:blur-none'
+            )}
             {...testimonial}
+            isActive={activeIndex === index}
             key={index}
           />
         ))}
