@@ -164,6 +164,7 @@
           slug: guides/time-travel-assist
           items:
           - title: Time Travel Assist tutorial
+            slug: guides/time-travel-tutorial
     - title: Frameworks
       items:
         - title: Astro
