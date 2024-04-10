@@ -26,7 +26,7 @@ The dashboard displays metrics for the selected **Branch** and **Compute endpoin
 If there has not been much activity, charts may display this message: `There is not enough metrics data for this compute`. In this case, try again later after more usage data has been collected.
 
 <Admonition type="note">
-The values and plotted lines in your graphs may go to `0` during periods when your compute endpoint is not active. For example, **RAM**, **CPU**, and **Database size** values lines go to `0` when a compute transitions to an idle state due to being suspended after a period of activity.
+The values and plotted lines in your graphs may go to `0` during periods when your compute endpoint is not active. For example, **RAM**, **CPU**, and **Database size** values lines go to `0` when a compute transitions to an idle state due to being suspended after a period of inactivity.
 </Admonition>
 
 ### RAM
