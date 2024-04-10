@@ -35,7 +35,7 @@ RAM is allocated according to the size of your compute or your autoscaling confi
 
 The chart plots a line showing the amount of RAM used. If this line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
-![Monitoring page RAM graph](/docs/introduction/monitor_ram.png)
+![Monitoring page RAM graph](/docs/introduction/monitor_ram.png "no-border")
 
 ### CPU
 
