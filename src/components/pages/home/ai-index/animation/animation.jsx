@@ -4,11 +4,12 @@ import ParallaxVocabulary from './parallax-vocabulary';
 
 const Animation = () => (
   <div className="relative z-0 mx-auto mt-[-218px] aspect-square max-w-[1160px] xl:-mt-44 xl:max-w-[860px] lg:-mt-36 lg:max-w-[680px] sm:-mt-12 sm:max-w-[91%]">
-    <PauseableVideo
-      className="mix-blend-lighten [filter:brightness(1)_contrast(105%)_saturate(100%)]"
-      width={1160}
-      height={1160}
-    >
+    {/* 
+      Video optimization parameters:
+      mp4: ai-loop.mp4 -c:v libx265 -crf 28 -color_primaries 5 -colorspace 5 -vf scale=2000:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an ai-loop.mp4
+      webm: -c:v libvpx-vp9 -crf 48 -color_primaries 5 -colorspace 5  -vf scale=2000:2000 -deadline best -an ai-loop.webm
+    */}
+    <PauseableVideo width={1160} height={1160}>
       <source src="/videos/pages/home/ai-loop.mp4" type="video/mp4" />
       <source src="/videos/pages/home/ai-loop.webm" type="video/webm" />
     </PauseableVideo>
