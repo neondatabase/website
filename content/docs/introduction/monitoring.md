@@ -15,11 +15,11 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/guides/autoscaling-guide#monitor-autoscaling" description="Monitor Autoscaling vCPU and RAM usage with Neon's autoscaling graphs or the neon_utils extension" icon="queries">Autoscaling</a>
 
-<a href="/docs/manage/operations" description="Monitor Neon project operations from the Neon Console, API, or CLI" icon="queries">Neon operations</a>
+<a href="/docs/manage/operations" description="Monitor Neon project operations such as start compute, suspend compute, and create branch from the Neon Console, API, or CLI" icon="queries">Neon operations</a>
 
 <a href="/docs/extensions/pg_stat_statements" description="Monitor query performance and statistics in Postgres with the pg_stat_statements extension" icon="queries">pg_stat_statements</a>
 
-<a href="/docs/introduction/monitor-external-tools" description="Monitor database activity and statistics with third-party tools such as PgHero and PgAdmin" icon="queries">External tools</a>
+<a href="/docs/introduction/monitor-external-tools" description="Monitor database activity and statistics with third-party client tools like PgHero and PgAdmin" icon="queries">External tools</a>
 
 </DetailIconCards>
 

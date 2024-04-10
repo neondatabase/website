@@ -13,39 +13,45 @@ The **Monitoring** dashboard in the Neon console provides several graphs for mon
 - [Deadlocks](#deadlocks)
 - [Rows](#rows)
 
-Your Neon plan defines the data range of data you can access.
+Your Neon plan defines the range of data you can view.
 
 | Neon Plan | Data Access  |
 |-----------|--------------|
 | [Free Tier](/docs/introduction/plans#free-tier) | Last hour     |
-| [Launch](/docs/introduction/plans#launch)    | Up to the last day (24 hours)       |
-| [Scale](/docs/introduction/plans#scale)     | Up to the last 7 days      |
+| [Launch](/docs/introduction/plans#launch)    | Last day (24 hours)       |
+| [Scale](/docs/introduction/plans#scale)     | Last 7 days      |
 
-The dashboard displays data for the selected **Branch** and **Compute endpoint**. Use the drop-down menus to view metrics for a different branch or compute endpoint.
+The dashboard displays metrics for the selected **Branch** and **Compute endpoint**. Use the drop-down menus to view metrics for a different branch or compute endpoint. Use the **Refresh** button to update the displayed metrics.
+
+If you have a new project, branch, or compute endpoint, or there has not been much activity, charts may display a `There is not enough metrics data for this compute` message. In this case, try again later after more usage data has been collected.
+
+<Admonition type="note">
+The values and plotted lines in many graphs report zero (or go to `0`) during periods when compute endpoint is not active. For example, **RAM**, **CPU**, and **Database size** values and plotted lines go to `0` when a compute transitions to an idle state due to being autosuspended after a period of activity.
+</Admonition>
 
 ### RAM
 
-This graph shows allocated RAM and usage over time. 
+This graph shows allocated RAM and usage over time for the selected compute endpoint. 
 
 **ALLOCATED**: The amount of allocated RAM. 
 
-RAM is allocated according to the size of your compute or your autoscaling configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated RAM is 1 (GiB) when your compute is active. With [autoscaling](/docs/guides/autoscaling-guide), allocated RAM increases and decreases as your compute size scales up and down in response to load. If [autosuspend](/docs/guides/auto-suspend-guide) is enabled and your compute transitions to an idle state after a period of inactivity, allocated RAM drops to 0.
+RAM is allocated according to the size of your compute or your [autoscaling](/docs/guides/autoscaling-guide) configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated RAM is always 1 (GiB). With autoscaling, allocated RAM increases and decreases as your compute size scales up and down in response to load. If [autosuspend](/docs/guides/auto-suspend-guide) is enabled and your compute transitions to an idle state after a period of inactivity, allocated RAM drops to 0.
 
 **Used**: The amount of RAM used.
 
-The chart plots a line showing the amount of RAM used. If this line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+The chart plots a line showing the amount of RAM used. If the line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM allocated for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
 ![Monitoring page RAM graph](/docs/introduction/monitor_ram.png "no-border")
 
 ### CPU
 
-This graph shows the amount of allocated CPU and usage over time.
+This graph shows the amount of allocated CPU and usage over time for the selected compute endpoint.
 
 **ALLOCATED**: The amount of allocated CPU. 
 
-CPU is allocated according to the size of your compute or your [autoscaling](/docs/guides/autoscaling-guide) configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated CPU is .25 when your compute is active. With autoscaling, allocated CPU increases and decreases as your compute size scales up and down in response to load. If [autosuspend](/docs/guides/auto-suspend-guide) is enabled and your compute transitions to an idle state after a period of inactivity, allocated CPU drops to 0.
+CPU is allocated according to the size of your compute or your [autoscaling](/docs/guides/autoscaling-guide) configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated CPU is always 0.25. With autoscaling, allocated CPU increases and decreases as your compute size scales up and down in response to load. If [autosuspend](/docs/guides/auto-suspend-guide) is enabled and your compute transitions to an idle state after a period of inactivity, allocated CPU drops to 0.
 
-**Used**: The amount of CPU used in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu). 
+**Used**: The amount of CPU used, in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu). 
 
 If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
@@ -53,25 +59,25 @@ If the plotted line regularly reaches the maximum amount of allocated CPU, consi
 
 ### Connections count
 
-The **Connections count** graph shows the number of idle connections, active connections, and the total number of connections over time for the selected compute endpoint and branch.
+The **Connections count** graph shows the number of idle connections, active connections, and the total number of connections over time for the selected compute endpoint.
 
-**ACTIVE**: The number of active database connections for the selected compute endpoint and branch. 
+**ACTIVE**: The number of active connections for the selected compute endpoint. 
 
-Monitoring active connections helps you understand the database's workload at any given time. If the number of active connections is consistently high, it might indicate that your database is under heavy load, which could lead to performance issues such as slow query response times. See [Connections](/docs/postgres/query-reference#connections) for related SQL queries.
+Monitoring active connections can help you understand your database workload at any given time. If the number of active connections is consistently high, it might indicate that your database is under heavy load, which could lead to performance issues such as slow query response times. See [Connections](/docs/postgres/query-reference#connections) for related SQL queries.
 
-**IDLE**: The number of idle database connections for the selected compute endpoint and branch. 
+**IDLE**: The number of idle connections for the selected compute endpoint. 
 
 Idle connections are those that are open but not currently being used. While a few idle connections are generally harmless, a large number of idle connections can consume unnecessary resources, leaving less room for active connections and potentially affecting performance. Identifying and closing unnecessary idle connections can help free up resources. See [Find long-running or idle connections](/docs/postgres/query-reference#find-long-running-or-idle-connections).
 
-**TOTAL**: The sum of active and idle connections for the selected compute endpoint and branch. 
+**TOTAL**: The sum of active and idle connections for the selected compute endpoint. 
 
-The limit on the maximum number of simultaneous connections (defined by the Postgres `max_connections` setting) is configured according to your Neon compute size. Monitoring the total number of connections helps ensure you don't hit your connection limit, as reaching it can prevent new connections from being established, leading to connection errors. Knowing your connection usage patterns can help you configure the appropriate connection limits. For the connection limit for each Neon compute size, see [How to size your compute](https://neon.tech/docs/manage/endpoints#how-to-size-your-compute). To learn about connection pooling in Neon, which can support up to 10,000 simultaneous connections, see [Connection pooling](/docs/connect/connection-pooling).
+The limit on the maximum number of simultaneous connections (defined by the Postgres `max_connections` setting) is set according to your Neon compute size. Monitoring the total number of connections helps ensure you don't hit your connection limit, as reaching it can prevent new connections from being established, leading to connection errors. For the connection limit for each Neon compute size, see [How to size your compute](https://neon.tech/docs/manage/endpoints#how-to-size-your-compute). Increasing your compute size is one way to increase your connection limit. Another option is to use connection pooling, which supports up to 10,000 simultaneous connections. To learn more, see [Connection pooling](/docs/connect/connection-pooling).
 
 ![Monitoring page connections graph](/docs/introduction/monitor_connections.png "no-border")
 
 ### Buffer cache hit rate
 
-The **Buffer cache hit rate** graph shows the percentage of read requests served from memory  - from Neon's Local File Cache (LFC). Queries not served from memory retrieve data from storage, which is more costly and can result in slower query performance. For OLTP workloads, you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio depends on your specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a lot of sequential scanning of large tables where caching might be less effective. To learn more, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
+The **Buffer cache hit rate** graph shows the percentage of read requests served from memory &#8212; from Neon's Local File Cache (LFC). Queries not served from memory retrieve data from storage, which is more costly and can result in slower query performance. For OLTP workloads, you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio depends on your specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a lot of sequential scanning of large tables where caching might be less effective. To learn more, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
 
 ![Monitoring page cache hit rate graph](/docs/introduction/monitor_cache.png "no-border")
 
@@ -80,7 +86,7 @@ The **Buffer cache hit rate** graph shows the percentage of read requests served
 The **Database size** graph shows the logical data size (the size of your actual data) for the named database and the total size for all user-created databases (**Database total size**) on the selected branch. The named database is always the oldest database on the selected branch.  Database size differs from the [storage](/docs/introduction/usage-metrics#storage) size of your Neon project, which includes the logical data size plus history. The **Database total size** metric is only shown when there is more than one database on the selected branch.
 
 <Admonition type="important">
-Database size metrics are only displayed in the graph for time your compute is active. When your compute is idle, database size values are not reported, and the **Database size** graph shows zero even though data may be present in your databases.
+Database size metrics are only displayed in the graph for time your compute is active. When your compute is idle, database size values are not reported, and the **Database size** graph shows zero even though data may be present.
 </Admonition>
 
 ![Monitoring page database size graph](/docs/introduction/monitor_data_size.png "no-border")
