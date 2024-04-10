@@ -3,7 +3,7 @@ title: Monitoring dashboard
 enableTableOfContents: true
 ---
 
-The **Monitoring** dashboard page in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
+The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
 
 - [RAM](#ram)
 - [CPU](#cpu)
