@@ -1,6 +1,8 @@
 'use client';
 
 import clsx from 'clsx';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useRef, useState, useEffect, useMemo } from 'react';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
@@ -48,30 +50,56 @@ const TESTIMONIALS = [
 
 const clamp = (min, value, max) => Math.min(Math.max(min, value), max);
 
+const IS_MOBILE_SCREEN_WIDTH = 639;
+
 const Testimonials = () => {
   const containerRef = useRef(null);
-  const [activeIndex] = useState(1);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const [scrollLeft, setScrollLeft] = useState(0);
   const [scrollWidth, setScrollWidth] = useState(0);
+
   const { width: windowWidth } = useWindowSize();
+  const isMobile = windowWidth <= IS_MOBILE_SCREEN_WIDTH;
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    if (isMobile) {
+      const container = containerRef.current;
+      if (!container) return;
 
-    setScrollLeft(container.scrollLeft);
-    setScrollWidth(container.scrollWidth);
-    const onScroll = () => {
       setScrollLeft(container.scrollLeft);
       setScrollWidth(container.scrollWidth);
-    };
 
-    container.addEventListener('scroll', onScroll);
-    // eslint-disable-next-line consistent-return
-    return () => container.removeEventListener('scroll', onScroll);
-  }, [windowWidth]);
+      const onScroll = () => {
+        setScrollLeft(container.scrollLeft);
+        setScrollWidth(container.scrollWidth);
+      };
+
+      container.addEventListener('scroll', onScroll);
+      // eslint-disable-next-line consistent-return
+      return () => container.removeEventListener('scroll', onScroll);
+    }
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray('.testimonial').forEach((panel, i) => {
+      ScrollTrigger.create({
+        trigger: panel,
+        start: 'top center',
+        end: 'bottom center',
+        onEnter: () => setActiveIndex(i),
+        onEnterBack: () => setActiveIndex(i),
+      });
+    });
+
+    return () => {
+      ScrollTrigger.killAll();
+    };
+  }, [isMobile]);
 
   const thumbStyle = useMemo(() => {
+    if (windowWidth > IS_MOBILE_SCREEN_WIDTH) return;
+
     const width = 1 / TESTIMONIALS.length;
     const left = (scrollLeft / (scrollWidth - windowWidth)) * (1 - width);
     return {
@@ -92,9 +120,7 @@ const Testimonials = () => {
         <div className="hidden shrink-0 sm:block sm:w-[calc((100%-min(100%-32px,448px)-24px)/2)] sm:snap-center" />
         {TESTIMONIALS.map((testimonial, index) => (
           <Testimonial
-            className={clsx(
-              activeIndex !== index && 'opacity-40 blur-[2px] sm:opacity-100 sm:blur-none'
-            )}
+            className="testimonial"
             {...testimonial}
             isActive={activeIndex === index}
             key={index}
@@ -102,9 +128,11 @@ const Testimonials = () => {
         ))}
         <div className="hidden shrink-0 sm:block sm:w-[calc((100%-min(100%-32px,448px)-24px)/2)] sm:snap-center" />
       </div>
-      <div className="relative mx-auto mt-8 hidden h-px w-[192px] bg-[#343538] sm:block">
-        <div className="absolute top-0 h-px bg-green-45" style={thumbStyle} />
-      </div>
+      {isMobile && (
+        <div className="relative mx-auto mt-8 h-px w-[192px] bg-[#343538]">
+          <div className="absolute top-0 h-px bg-green-45" style={thumbStyle} />
+        </div>
+      )}
     </div>
   );
 };

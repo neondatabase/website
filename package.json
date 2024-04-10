@@ -48,6 +48,7 @@
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
     "gray-matter": "^4.0.3",
+    "gsap": "^3.12.5",
     "html-react-parser": "^5.0.6",
     "js-yaml": "^4.1.0",
     "lodash.get": "^4.4.2",
