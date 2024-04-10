@@ -47,13 +47,7 @@ const CTA = ({ title = '', description = '', buttonText = '', buttonUrl = '' }) 
             size="2sm"
             asHTML
           >
-            {title || (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: `Still have <span class="text-pricing-primary-1">questions?</span>`,
-                }}
-              />
-            )}
+            {title || 'Still have <span class="text-pricing-primary-1">questions?</span>'}
           </Heading>
           <p className="mt-4 text-lg font-light leading-snug xl:text-base md:mx-auto md:mt-2 md:max-w-[550px] md:text-center">
             {description ||
