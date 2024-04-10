@@ -358,6 +358,10 @@ A feature that allows you to share Neon projects with other Neon users. See [Sha
 
 The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Storage](/docs/introduction/usage-metrics#storage).
 
+## Protected branch
+
+In Neon, you can designate a branch as protected. Role passwords are reset automatically on child branches created from a protected branch to safeguard data on the protected branch. For example, a protected branch designation can be applied to the branch that holds your production data. When you create child branches for test or development purposes, Postgres roles that exist on the production branch are copied, but the passwords for those Postgres roles are reset.
+
 ## Proxy
 
 A Neon component that functions as a multitenant service that accepts and handles connections from clients that use the Postgres protocol.

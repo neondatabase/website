@@ -190,7 +190,7 @@ After enabling logical replication, the next steps involve creating publications
 
 Available to [Scale](/docs/introduction/plans#scale) plan users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default. 
 
-Optionally, you can allow unrestricted access to your project's [non-primary branches](/docs/manage/branches#non-primary-branch). For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing unrestricted access to your development branches.
+Optionally, you can restrict access to your project's [protected branches](/docs/manage/branches#protected-branch) only. For instance, you might want to restrict access to a protected branch to a handful of trusted IPs while allowing unrestricted access to branches you've created as development branches.
 
 By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
 
