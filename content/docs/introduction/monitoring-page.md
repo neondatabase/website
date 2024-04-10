@@ -49,7 +49,7 @@ CPU is allocated according to the size of your compute or your [autoscaling](/do
 
 If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
-![Monitoring page CPU graph](/docs/introduction/monitor_cpu.png)
+![Monitoring page CPU graph](/docs/introduction/monitor_cpu.png )
 
 ### Connections count
 
