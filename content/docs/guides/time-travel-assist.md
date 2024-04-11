@@ -13,9 +13,9 @@ You can use Time Travel Assist from two places in the Neon Console:
 
 ## How Time Travel Assist works
 
-Time Travel Assist leverages Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done querying against this point-in-time connection. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+Time Travel Assist leverages Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which are automatically removed once you are done querying against this point-in-time connection. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
 
-However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
+However, you can see the history of operations related to the creation and deletion of branches and ephemeral compute endpoints on the **Operations** page:
 
 - start_compute
 - create_branch
@@ -28,9 +28,9 @@ The ephemeral endpoints are created according to your configured [default comput
 
 ### History retention
 
-You are only able to run Time Travel queries that fall within your history retention window, which starts at 24 hours for Free Tier users and up to 30 days for Scale plan users.
+You are only able to run Time Travel queries that fall within your history retention window, which starts at 24 hours for Free Tier users, up to 7 days for Launch plan users, and up to 30 days for Scale plan users.
 
-You are unable to select a time outside your current retention window.
+You cannot select a time outside your current retention window.
 
 To change your retention period, see [Configure history retention](/docs/manage/projects#configure-history-retention).
 
@@ -67,7 +67,7 @@ Here is an example of a completed query:
 
 ## How to use Time Travel Assist
 
-Here is how to use the Time Travel Assist from both the **SQL Editor** and from the **Restore** page:
+Here is how to use Time Travel Assist from both the **SQL Editor** and from the **Restore** page:
 
 <Tabs labels={["SQL Editor","Branch Restore"]}>
 
