@@ -6,8 +6,8 @@ import branchingIcon from 'icons/aws/branching.svg';
 import storageIcon from 'icons/aws/storage.svg';
 import timerIcon from 'icons/landing/timer.svg';
 
-import computeIllustration from './images/compute-illustration.svg';
-import storageIllustration from './images/storage-illustration.svg';
+import computeIllustration from './images/compute-illustration.jpg';
+import storageIllustration from './images/storage-illustration.jpg';
 import Row from './row';
 
 const storageItems = [

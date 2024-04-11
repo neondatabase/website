@@ -43,6 +43,7 @@ const Row = ({ title, items, image, imagePosition = 'left' }) => (
         width={590}
         height={332}
         src={image}
+        quality={90}
         alt=""
       />
     </div>
