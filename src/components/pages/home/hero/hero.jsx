@@ -44,24 +44,24 @@ const Hero = () => {
   };
 
   return (
-    <section className="hero safe-paddings relative pt-[136px]">
+    <section className="hero safe-paddings relative pt-[136px] xl:pt-[120px] lg:pt-14 md:pt-8">
       <RiveAnimation
-        className="absolute left-1/2 top-0 min-w-[1920px] -translate-x-1/2"
+        className="absolute left-1/2 top-0 min-w-[1760px] -translate-x-1/2 xl:min-w-[1286px] md:min-w-[1010px] sm:top-28 sm:min-w-[526px]"
         src="/animations/pages/home/hero-bg.riv"
         artboard="hero"
       />
 
-      <Container size="1100">
+      <Container className="2xl:px-10" size="1100">
         <div className="text-center">
-          <h1 className="font-title text-[88px] font-medium leading-dense -tracking-[0.03em] text-white">
+          <h1 className="font-title text-[88px] font-medium leading-dense -tracking-[0.03em] text-white xl:text-[72px] md:text-[56px] xs:text-[32px]">
             The Future of Postgres
           </h1>
-          <p className="mx-auto mt-2.5 max-w-[490px] text-lg font-light leading-snug -tracking-[0.04em] text-gray-new-80">
+          <p className="mx-auto mt-2.5 max-w-[490px] text-lg font-light leading-snug -tracking-[0.04em] text-gray-new-80 md:text-base">
             Neon is serverless Postgres with autoscaling, on-demand storage and code-like database
             branching
           </p>
           <Button
-            className="pointer-events-auto relative mt-9 !font-semibold tracking-tighter xl:mt-8 lg:mt-7 sm:mt-5"
+            className="pointer-events-auto relative mt-9 !font-semibold tracking-tighter xl:mt-8 lg:mt-7 md:mt-6 sm:mt-5"
             size="lg"
             theme="green-outline"
             to="#"
@@ -70,12 +70,14 @@ const Hero = () => {
           </Button>
         </div>
 
-        <div className="mt-[74px] flex gap-x-2.5">
+        <div className="mt-[74px] flex gap-x-2.5 xl:mt-16 md:mt-14 sm:mt-9 sm:flex-col">
           {ITEMS.map((item, index) => (
             <Video
               className={clsx(
                 'transition-all duration-500',
-                currentVideoIndex === index ? 'w-[712px] flex-shrink-0' : 'w-full'
+                currentVideoIndex === index
+                  ? 'w-[64.7273%] flex-shrink-0 xl:w-[61.863%] md:w-[62.746%] sm:w-full'
+                  : 'w-full'
               )}
               {...item}
               isPlayVideo={currentVideoIndex === index}
