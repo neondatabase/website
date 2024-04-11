@@ -57,3 +57,7 @@ The two-pane view shows the schema for both your target and your selected branch
 ## Tutorial
 
 For a step-by-step guide showing you how to compare two development branches using Schema Diff, see [Schema diff tutorial](/docs/guides/schema-diff-tutorial).
+
+## Limitations
+
+Schema Diff is currently unable to compare branches that are protected under an IP Allow list.. If you need to compare a protected branch, consider temporarily removing the IP Allow list to permit Schema Diff. Alternatively, if you are comparing non-primary branches, you can temporarily enable "Allow unrestricted access to non-primary branches" in the [IP Allow](/docs/manage/projects#configure-ip-allow) settings.
