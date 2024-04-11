@@ -76,8 +76,8 @@ const BlogDraft = async ({ searchParams }) => {
   return (
     <Layout
       className="bg-black-new text-white"
-      headerTheme="gray-8"
-      footerTheme="black-new"
+      headerTheme="black-pure"
+      footerTheme="black-pure"
       footerWithTopBorder
       isHeaderSticky
     >

@@ -18,7 +18,7 @@ export const metadata = getMetadata({
 });
 
 const LastWeekInAWS = () => (
-  <Layout headerTheme="black" footerWithTopBorder withOverflowHidden>
+  <Layout headerTheme="black-pure" withOverflowHidden>
     <Hero />
     <CTA />
     <Advantages />

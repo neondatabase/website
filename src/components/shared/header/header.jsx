@@ -1,196 +1,182 @@
-'use client';
-
 import clsx from 'clsx';
-import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
-import useMedia from 'react-use/lib/useMedia';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import GithubStarCounter from 'components/shared/github-star-counter';
 import Link from 'components/shared/link';
-import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
+import ChevronIcon from 'icons/chevron-down.inline.svg';
+import arrowIcon from 'icons/header/arrow-right.svg';
+import logoBlack from 'images/logo-black-28.svg';
+import logoWhite from 'images/logo-white-28.svg';
 
-import GithubStarCounter from '../github-star-counter';
-
-import Burger from './burger';
-
-const Search = dynamic(() => import('components/shared/search'), { ssr: false });
-
+// TODO: update black logo
+// TODO: update white theme styles
+// TODO: implement search
 const Header = ({
   className = null,
-  theme,
+  theme = 'black-pure',
   isSticky = false,
-  withBottomBorder = false,
-  isDocPage = false,
   isBlogPage = false,
+  isDocPage = false,
 }) => {
-  const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
-  const headerRef = useRef(null);
-  const isMobile = useMedia('(max-width: 1023px)', false);
-
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const handleMobileMenuOutsideClick = () => {
-    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
-  };
-
-  const handleBurgerClick = () => {
-    setIsMobileMenuOpen((isMobileMenuOpen) => !isMobileMenuOpen);
-  };
-
-  const findIndexName = () => {
-    if (isDocPage) return process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME;
-    if (isBlogPage) return process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME;
-    return null;
-  };
+  const isThemeBlack = theme === 'black-pure';
 
   return (
     <>
       <header
         className={clsx(
-          'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-gray-new-8 lg:relative lg:h-14',
-          className,
-          isSticky && 'sticky top-0 z-50 md:relative',
-          withBottomBorder &&
-            theme !== 'gray-8' &&
-            'border-b border-gray-new-90 dark:border-gray-new-20',
-          withBottomBorder && theme === 'gray-8' && 'border-b border-gray-new-20',
-          { 'bg-gray-new-8': theme === 'gray-8' },
-          { 'lg:bg-black': theme === 'black' },
-          { 'lg:bg-black-new': theme === 'black-new' },
-          { 'bg-white': theme === 'white' }
+          'safe-paddings left-0 right-0 top-0 z-40 h-16 w-full dark:bg-black-pure',
+          isSticky ? 'sticky md:relative' : 'absolute lg:relative',
+          isThemeBlack ? 'bg-black-pure' : 'bg-white',
+          className
         )}
-        ref={headerRef}
       >
-        <Container className="flex items-center justify-between py-3.5" size="lg">
-          <Link to="/">
-            <span className="sr-only">Neon</span>
-            <Logo isThemeBlack={isThemeBlack} />
-          </Link>
+        <Container className="flex items-center justify-between py-4 md:!px-5" size="1216">
+          <div className="flex items-center gap-x-16">
+            <Link to="/">
+              <span className="sr-only">Neon</span>
+              {isThemeBlack ? (
+                <Image
+                  className={clsx('h-7 w-auto', className)}
+                  src={logoWhite}
+                  alt=""
+                  width={102}
+                  height={28}
+                  aria-hidden
+                />
+              ) : (
+                <Image
+                  className={clsx('h-7 w-auto', className)}
+                  src={logoBlack}
+                  alt=""
+                  width={102}
+                  height={28}
+                  aria-hidden
+                />
+              )}
+            </Link>
 
-          <nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <ul className="flex space-x-12 3xl:space-x-10 2xl:space-x-8 lg:hidden">
-              {MENUS.header.map(({ to, text, items }, index) => {
-                const Tag = to ? Link : 'button';
-                return (
-                  <li className={clsx(items?.length > 0 && 'group relative')} key={index}>
-                    <Tag
+            <nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 xl:relative xl:left-auto xl:top-auto xl:translate-x-0 xl:translate-y-0">
+              <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden">
+                {MENUS.header.map(({ to, text, items }, index) => {
+                  const Tag = to ? Link : 'button';
+                  return (
+                    <li
                       className={clsx(
-                        'whitespace-pre',
-                        items?.length > 0 &&
-                          'relative pr-3.5 leading-none transition-colors duration-200 before:absolute before:right-0 before:top-[7px] before:h-0 before:w-0 before:border-4 before:border-transparent before:transition-[border-color] before:duration-200 hover:text-primary-2 group-hover:text-green-45 group-hover:before:border-t-primary-2 dark:before:border-transparent',
-                        items?.length > 0 && isThemeBlack
-                          ? 'before:border-t-white'
-                          : 'before:border-t-black dark:before:border-t-white',
-                        isThemeBlack ? 'text-white' : 'text-black dark:text-white'
+                        'relative [perspective:2000px]',
+                        items?.length > 0 && 'group'
                       )}
-                      to={to}
-                      theme={isThemeBlack && to ? 'white' : 'black'}
+                      key={index}
                     >
-                      {text}
-                    </Tag>
-                    {items?.length > 0 && (
-                      <div className="group-hover:opacity-1 invisible absolute bottom-0 w-max translate-y-full pt-4 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
-                        <ul
-                          className="min-w-[240px] rounded-2xl bg-white p-3.5"
-                          style={{ boxShadow: '0px 4px 10px rgba(26, 26, 26, 0.2)' }}
+                      <Tag
+                        className={clsx(
+                          'flex items-center gap-x-1 whitespace-pre text-sm',
+                          isThemeBlack ? 'text-white' : 'text-black dark:text-white'
+                        )}
+                        to={to}
+                        theme={isThemeBlack && to ? 'white' : 'black'}
+                      >
+                        {text}
+                        {items?.length > 0 && (
+                          <ChevronIcon className="-mb-px w-2.5 opacity-60 [&_path]:stroke-2" />
+                        )}
+                      </Tag>
+                      {items?.length > 0 && (
+                        <div
+                          className={clsx(
+                            'absolute -left-5 top-full w-[300px] pt-5',
+                            'pointer-events-none opacity-0',
+                            'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
+                            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
+                          )}
                         >
-                          {items.map(({ icon, text, description, to }, index) => (
-                            <li
-                              className={clsx(
-                                index !== 0 && 'mt-3.5 border-t border-t-gray-6 pt-3.5'
-                              )}
-                              key={index}
-                            >
-                              <Link
-                                className="flex items-center whitespace-nowrap hover:text-primary-2"
-                                to={to}
-                              >
-                                <img
-                                  src={icon.old}
-                                  alt="text"
-                                  width={44}
-                                  height={44}
-                                  className="h-11 w-11 shrink-0"
-                                  loading="lazy"
-                                  aria-hidden
-                                />
-                                <span className="ml-3">
-                                  <span className="t-xl mr-2 block font-semibold !leading-none transition-colors duration-200">
-                                    {text}
+                          <ul className="relative flex min-w-[248px] flex-col gap-y-0.5 rounded-[14px] border border-[#16181D] bg-[#0B0C0F] p-2.5 shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]">
+                            {items.map(({ icon, text, description, to }, index) => (
+                              <li key={index}>
+                                <Link
+                                  className={clsx(
+                                    'group/link relative flex items-center overflow-hidden whitespace-nowrap rounded-[14px] p-2 text-white',
+                                    'before:absolute before:inset-0 before:z-10 before:bg-[#16181D] before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100'
+                                  )}
+                                  to={to}
+                                >
+                                  <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#2E3038] bg-[#16181D]">
+                                    <img
+                                      src={icon.new}
+                                      width={20}
+                                      height={20}
+                                      className="h-5 w-5"
+                                      loading="lazy"
+                                      alt=""
+                                      aria-hidden
+                                    />
+                                  </div>
+                                  <span className="relative z-10 ml-2.5">
+                                    <span className="block text-sm leading-dense tracking-[-0.01em] transition-colors duration-200">
+                                      {text}
+                                    </span>
+                                    <span className="mt-0.5 block text-[13px] font-light leading-dense tracking-[-0.02em] text-gray-new-50">
+                                      {description}
+                                    </span>
                                   </span>
-                                  <span className="mt-1.5 block text-sm leading-none text-black">
-                                    {description}
-                                  </span>
-                                </span>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+                                  <img
+                                    src={arrowIcon}
+                                    width={6}
+                                    height={10}
+                                    className="relative z-10 ml-auto mr-1.5 h-2.5 w-1.5 -translate-x-1 opacity-0 transition-[opacity,transform] duration-300 group-hover/link:translate-x-0 group-hover/link:opacity-100"
+                                    loading="lazy"
+                                    alt=""
+                                    aria-hidden
+                                  />
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </div>
 
-          <div className="flex lg:hidden">
-            <GithubStarCounter className="mr-5 xl:mr-3" isThemeBlack={isThemeBlack} />
-            <Button
-              className="mr-3.5 h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:mr-2 xl:px-4"
+          <div className="flex items-center gap-x-6 lg:hidden lg:pr-12">
+            <GithubStarCounter isThemeBlack={isThemeBlack} />
+            <Link
+              className="text-[13px] font-semibold leading-none tracking-extra-tight lg:hidden"
               to={LINKS.login}
-              theme={isThemeBlack ? 'gray-dark-outline' : 'gray-dark-outline-black'}
+              theme={isThemeBlack ? 'white' : 'black'}
             >
               Log In
-            </Button>
+            </Link>
 
             <Button
-              className="h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:px-4"
+              className="h-8 px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
               to={LINKS.signup}
               theme="primary"
             >
               Sign Up
             </Button>
           </div>
-          {isMobile && (
-            <div className="flex items-center gap-x-3 md:gap-x-5">
-              {(isDocPage || isBlogPage) && (
-                <Search className="mobile-search" indexName={findIndexName()} isBlog={isBlogPage} />
-              )}
-
-              <Burger
-                className={clsx(
-                  'relative -mr-1 -mt-1',
-                  isThemeBlack ? 'text-white' : 'text-black dark:text-white'
-                )}
-                isToggled={isMobileMenuOpen}
-                onClick={handleBurgerClick}
-              />
-            </div>
-          )}
         </Container>
       </header>
-      <MobileMenu
-        isOpen={isMobileMenuOpen}
-        headerRef={headerRef}
-        onOutsideClick={handleMobileMenuOutsideClick}
-      />
+      <MobileMenu isThemeBlack={isThemeBlack} isBlogPage={isBlogPage} isDocPage={isDocPage} />
     </>
   );
 };
 
 Header.propTypes = {
   className: PropTypes.string,
-  theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
-  withBottomBorder: PropTypes.bool,
+  theme: PropTypes.oneOf(['black-pure', 'white']).isRequired,
   isSticky: PropTypes.bool,
-  isDocPage: PropTypes.bool,
   isBlogPage: PropTypes.bool,
+  isDocPage: PropTypes.bool,
 };
 
 export default Header;

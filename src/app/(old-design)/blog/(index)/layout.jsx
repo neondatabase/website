@@ -11,10 +11,8 @@ const BlogPageLayout = async ({ children }) => {
   return (
     <Layout
       className="bg-black-new text-white"
-      headerTheme="gray-8"
-      footerTheme="black-new"
-      headerWithBottomBorder
-      footerWithTopBorder
+      headerTheme="black-pure"
+      footerTheme="black-pure"
       isBlogPage
       isHeaderSticky
     >

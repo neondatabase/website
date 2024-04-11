@@ -12,7 +12,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.developerDays1);
 
 const DeveloperDays1Page = () => (
-  <Layout headerTheme="black" footerTheme="black" footerWithTopBorder>
+  <Layout headerTheme="black-pure" footerTheme="black-pure">
     <div className="relative overflow-hidden bg-black text-white">
       <Image
         className="absolute left-1/2 top-0 h-auto w-[1440px] -translate-x-1/2 xl:hidden"

@@ -58,9 +58,8 @@ const EnterprisePage = () => (
   <Layout
     className="bg-black-new text-white"
     headerClassName="lg:!absolute lg:!bg-transparent"
-    headerTheme="black-new"
-    footerTheme="black-new"
-    footerWithTopBorder
+    headerTheme="black-pure"
+    footerTheme="black-pure"
   >
     <Hero />
     <Logos logos={logos} withGreenFade />

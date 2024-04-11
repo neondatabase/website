@@ -6,7 +6,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata({ ...SEO_DATA.thankYou, robotsNoindex: 'noindex' });
 
 const ThankYouPage = () => (
-  <Layout headerTheme="white" footerWithTopBorder>
+  <Layout headerTheme="white">
     <Hero />
   </Layout>
 );
