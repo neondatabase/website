@@ -242,7 +242,7 @@ If you do need to revert your changes, you can [Reset from parent](/docs/manage/
 
 There are minimal impacts to billing from the branch restore and Time Travel Assist features:
 
-- **Branch Restore** &#8212;  &#8212; The backups created when you restore a branch do add to your total number of branches, but since they do not have any compute endpoint attached they do not add to any consumption costs.
+- **Branch Restore** &#8212;  The backups created when you restore a branch do add to your total number of branches, but since they do not have any compute endpoint attached they do not add to any consumption costs.
 - **Time Travel Assist** &#8212; Costs related to Time Travel queries are minimal. See [Billing considerations](/docs/guides/time-travel-assist#billing-considerations).
 
 ## Limitations
