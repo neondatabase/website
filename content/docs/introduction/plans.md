@@ -49,19 +49,19 @@ On the Free Tier, your primary branch compute is always available — it will ne
 
 ### Launch
 
-The Launch plan provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses or applications. It includes the following usage:
+The Launch plan provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses or applications. It includes the following usage allowances:
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
 | **Projects**                            | 10 Neon projects                                              |
 | **Branches**                            | 500                                                  |
 | **Databases**                           | Unlimited                                                     |
-| **Storage**                             | Up to 10 GiB of data storage                                  |
-| **Compute**                             | Up to  300 compute hours (1,200 _active hours_)/month for all computes in all projects |
+| **Storage**                             | 10 GiB of data storage                                  |
+| **Compute**                             | 300 compute hours (1,200 _active hours_)/month for all computes in all projects |
 
 #### Extra usage
 
-Launch plan users can access [extra compute and storage usage](/docs/introduction/how-billing-works#extra-usage), which is billed automatically.
+Launch plan users have access to [extra compute and storage](/docs/introduction/how-billing-works#extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
@@ -77,19 +77,19 @@ In addition, Launch plan users have access to the following Neon features:
 
 ### Scale
 
-The Scale plan provides full platform and support access and is designed for scaling production workloads. It includes the following usage:
+The Scale plan provides full platform and support access and is designed for scaling production workloads. It includes the following usage allowances:
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
-| **Projects**                            | Up to 50 Neon projects                                        |
+| **Projects**                            | 50 Neon projects                                        |
 | **Branches**                            | 500                                                           |
 | **Databases**                           | Unlimited                                                     |
-| **Storage**                             | Up to 50 GiB of data storage                                  |
-| **Compute**                             | Up to 750 compute hours (3,000 _active hours_)/month for all computes in all projects |
+| **Storage**                             | 50 GiB of data storage                                  |
+| **Compute**                             | 750 compute hours (3,000 _active hours_)/month for all computes in all projects |
 
 #### Extra usage
 
-Launch plan users can access [extra compute and storage usage](/docs/introduction/how-billing-works#extra-usage), which is billed automatically.
+Launch plan users have access to [extra compute and storage](/docs/introduction/how-billing-works#extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
