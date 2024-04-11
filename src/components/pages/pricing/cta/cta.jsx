@@ -1,7 +1,8 @@
 'use client';
 
 import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
-// import Image from 'next/image';
+import Image from 'next/image';
+import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -11,7 +12,7 @@ import Heading from 'components/shared/heading';
 import links from 'constants/links';
 import sendGtagEvent from 'utils/send-gtag-event';
 
-const CTA = () => {
+const CTA = ({ title = '', description = '', buttonText = '', buttonUrl = '' }) => {
   const [contentRef, isContentInView] = useInView({ rootMargin: '50px 0px', triggerOnce: true });
   const {
     rive,
@@ -40,17 +41,22 @@ const CTA = () => {
     <section className="safe-paddings pt-16">
       <Container className="grid grid-cols-12 items-center gap-4" size="md">
         <div className="z-10 col-span-4 col-start-2 mb-24 xl:col-span-5 xl:col-start-1 lg:mb-12 md:col-span-full">
-          <Heading className="whitespace-nowrap md:text-center" tag="h2" size="2sm">
-            Still have <span className="text-pricing-primary-1">questions?</span>
+          <Heading
+            className="whitespace-nowrap md:text-center [&>strong]:font-medium [&>strong]:text-pricing-primary-1"
+            tag="h2"
+            size="2sm"
+            asHTML
+          >
+            {title || 'Still have <span class="text-pricing-primary-1">questions?</span>'}
           </Heading>
           <p className="mt-4 text-lg font-light leading-snug xl:text-base md:mx-auto md:mt-2 md:max-w-[550px] md:text-center">
-            Interested in learning more about our plans and pricing? Complete the form below to get
-            in touch with our Sales team.
+            {description ||
+              'Interested in learning more about our plans and pricing? Complete the form below to get in touch with our Sales team.'}
           </p>
           <AnimatedButton
             className="mt-8 inline-flex !px-14 !py-5 !text-lg tracking-tight hover:bg-[#00FFAA] xl:!px-11 xl:!py-[17px] lg:mt-6 md:mx-auto md:flex md:w-48"
             theme="primary"
-            to={links.contactSales}
+            to={buttonUrl || links.contactSales}
             size="sm"
             linesOffsetTop={24}
             linesOffsetSide={24}
@@ -60,14 +66,14 @@ const CTA = () => {
               sendGtagEvent('pricing_cta_click');
             }}
           >
-            Talk to Sales
+            {buttonText || 'Talk to Sales'}
           </AnimatedButton>
         </div>
         <div
           className="relative col-span-7 col-start-6 self-end md:z-20 md:col-span-full"
           ref={contentRef}
         >
-          <img
+          <Image
             className="relative mx-auto min-h-[345px] lg:min-h-0 sm:left-1/2 sm:right-1/2 sm:-ml-[50vw] sm:-mr-[50vw] sm:w-screen sm:min-w-[100vw]"
             src="/images/pages/pricing/cta.jpg"
             width={842}
@@ -89,6 +95,13 @@ const CTA = () => {
       </Container>
     </section>
   );
+};
+
+CTA.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  buttonText: PropTypes.string,
+  buttonUrl: PropTypes.string,
 };
 
 export default CTA;

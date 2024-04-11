@@ -11,7 +11,6 @@ import changelogIcon from 'icons/header/changelog.svg';
 import cliIcon from 'icons/header/cli.svg';
 import demosIcon from 'icons/header/demos.svg';
 import discordIcon from 'icons/header/discord.svg';
-import docsIcon from 'icons/header/docs.svg';
 import EnterpriseIcon from 'icons/header/enterprise.svg';
 import partnersIcon from 'icons/header/partners.svg';
 import onDemandStorageIcon from 'icons/header/storage.svg';
@@ -62,14 +61,12 @@ export default {
       to: LINKS.pricing,
     },
     {
+      text: 'Docs',
+      to: LINKS.docs,
+    },
+    {
       text: 'Resources',
       items: [
-        {
-          icon: docsIcon,
-          text: 'Docs',
-          description: 'Read the documentation',
-          to: LINKS.docs,
-        },
         {
           icon: blogIcon,
           text: 'Blog',

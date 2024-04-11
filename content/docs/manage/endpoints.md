@@ -74,6 +74,8 @@ Some key points to understand about how your endpoint responds when you make cha
 * Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
 * Changes to autosuspend settings do not require an endpoint restart; existing connections are unaffected.
 
+To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
+
 ### Compute size and autoscaling configuration
 
 Users on paid plans can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
@@ -139,16 +141,30 @@ If it's not possible to hold your entire dataset in memory, the next best option
 
 As mentioned above, Neon computes use a Local File Cache (LFC) to extend Postgres shared buffers. To query the cache hit ratio for your compute's LFC, Neon provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view.
 
-To use the `neon_stat_file_cache` view, you must first install the `neon` extension:
+To use the `neon_stat_file_cache` view, install the `neon` extension on a preferred database or connect to the Neon-managed `postgres` database where the `neon` extension is always available.
+
+To install the extension on a preferred database:
 
 ```sql
 CREATE EXTENSION neon;
 ```
 
-After installing the extension and allowing time for data to be collected, you can issue the following query to view LFC usage data:
+To connect to the Neon-managed `postgres` database instead:
+
+```bash shouldWrap
+psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require
+```
+
+If you are already connected via `psql`, you can simply switch to the `postgres` database using the `\c` command:
+
+```shell
+\c postgres
+```
+
+Issue the following query to view LFC usage data for your compute instance:
 
 ```sql
-SELECT * FROM neon.neon_stat_file_cache;
+SELECT * FROM neon_stat_file_cache;
  file_cache_misses | file_cache_hits | file_cache_used | file_cache_writes | file_cache_hit_ratio  
 -------------------+-----------------+-----------------+-------------------+----------------------
            2133643 |       108999742 |             607 |          10767410 |                98.08
@@ -160,6 +176,10 @@ The `file_cache_hit_ratio` is calculated according to the following formula:
 ```
 file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100
 ```
+
+<Admonition type="tip">
+You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view data for LFC hits and misses. See [View LFC metrics with EXPLAIN ANALYZE](/docs/extensions/neon#view-lfc-metrics-with-explain-analyze).
+</Admonition>
 
 For OLTP workloads, you should aim for a `file_cache_hit_ratio` above 99%. If you hit ration is below that, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
 
@@ -186,14 +206,14 @@ The maximum **Suspend compute after a period of inactivity** setting is 7 days. 
 It is sometimes necessary to restart a compute endpoint. For example, if you upgrade to a paid plan account, you may want to restart your compute endpoint to immediately apply your upgraded limits.
 
 <Admonition type="important">
-Please be aware that restarting a compute endpoint interrupts any connections currently using the compute endpoint.
+Please be aware that restarting a compute endpoint interrupts any connections currently using the compute endpoint. To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
 </Admonition>
 
 You can restart a compute endpoint using one of the following methods:
 
 - Stop activity on your compute endpoint (stop running queries) and wait for your compute endpoint to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`. 
-- Issue [Suspend endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. You can do this directly from the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api), using the **Try It!** feature. You'll need an [API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
-- Users on paid plans can temporarily set a compute's **Suspend compute after a period of inactivity** setting to 1 second to initiate a restart (the default setting is 5 minutes). See [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console to see if your compute endpoint restarted. Look for `suspend_compute` and `start_compute` actions.
+- Issue a [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) using the **Try It!** feature. You'll need an [API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
+- Users on paid plans can temporarily set a compute's **Suspend compute after a period of inactivity** to a low value to initiate a suspension (the default setting is 5 minutes). See [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console. Look for `suspend_compute` action. Any activity on the compute endpoint will restart it, such as running a query. Watch for a `start_compute` action on the **Operations** page.
 
 ## Delete a compute endpoint
 
