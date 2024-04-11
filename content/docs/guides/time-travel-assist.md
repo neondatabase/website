@@ -67,7 +67,7 @@ Here is an example of a completed query:
 
 ## How to use Time Travel Assist
 
-Here is how to use the Time Travel Assist from both the **SQL Editor** and from the **Restore** page:
+Here is how to use Time Travel Assist from both the **SQL Editor** and from the **Restore** page:
 
 <Tabs labels={["SQL Editor","Branch Restore"]}>
 
