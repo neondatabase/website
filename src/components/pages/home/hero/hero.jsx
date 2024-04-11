@@ -1,7 +1,6 @@
 'use client';
 
 import clsx from 'clsx';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { forwardRef, useState, useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -9,7 +8,7 @@ import { useInView } from 'react-intersection-observer';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
-import bg from 'images/pages/home/hero/bg.png';
+import RiveAnimation from 'components/shared/rive-animation';
 
 const ITEMS = [
   {
@@ -137,13 +136,12 @@ const Hero = () => {
 
   return (
     <section className="hero safe-paddings relative pt-[136px]">
-      <Image
+      <RiveAnimation
         className="absolute left-1/2 top-0 min-w-[1920px] -translate-x-1/2"
-        src={bg}
-        height={1080}
-        width={1920}
-        alt=""
-        priority
+        src="/animations/pages/home/hero-bg.riv"
+        artboard="hero"
+        intersectionRootMargin="0px 0px 600px 0px"
+        animationRootMargin="0px 0px 300px 0px"
       />
 
       <Container size="1100">
