@@ -30,7 +30,7 @@ The ephemeral endpoints are created according to your configured [default comput
 
 You are only able to run Time Travel queries that fall within your history retention window, which starts at 24 hours for Free Tier users, up to 7 days for Launch plan users, and up to 30 days for Scale plan users.
 
-You are unable to select a time outside your current retention window.
+You cannot select a time outside your current retention window.
 
 To change your retention period, see [Configure history retention](/docs/manage/projects#configure-history-retention).
 
