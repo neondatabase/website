@@ -56,7 +56,7 @@ const logos = [
 
 const EnterprisePage = () => (
   <Layout
-    className="bg-black-new text-white"
+    className="bg-black-pure text-white"
     headerClassName="lg:!absolute lg:!bg-transparent"
     headerTheme="black-pure"
     footerTheme="black-pure"

@@ -156,7 +156,7 @@ const Table = () => {
               className={clsx(
                 'relative py-5 xl:py-4',
                 isLabelsColumn &&
-                  'z-30 flex-1 bg-black-new lg:sticky lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] sm:min-w-[160px]',
+                  'z-30 flex-1 bg-black-pure lg:sticky lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] sm:min-w-[160px]',
                 i === 1 && 'min-w-[200px] basis-[338px] xl:basis-[296px] lg:basis-[280px]',
                 i !== 1 && !isLabelsColumn && 'min-w-[220px] basis-[252px] xl:basis-[260px]'
               )}

@@ -67,7 +67,7 @@ const BlogPage = async ({ params, searchParams }) => {
 
   return (
     <Layout
-      className="bg-black-new text-white"
+      className="bg-pure text-white"
       headerTheme="black-pure"
       footerTheme="black-pure"
       isHeaderSticky

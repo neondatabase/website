@@ -11,7 +11,7 @@ export const metadata = getMetadata(SEO_DATA.caseStudies);
 const CaseStudiesPage = async () => {
   const allCaseStudies = await getAllWpCaseStudiesPosts();
   return (
-    <Layout className="bg-black-new text-white" headerTheme="black-pure" footerTheme="black-pure">
+    <Layout className="bg-black-pure text-white" headerTheme="black-pure" footerTheme="black-pure">
       <Hero items={allCaseStudies} />
       <CTAWithElephant
         className="mt-[200px] 2xl:mt-40 xl:mt-[125px] lg:mt-16 sm:mt-0"

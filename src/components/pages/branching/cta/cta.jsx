@@ -8,7 +8,7 @@ import LINKS from 'constants/links';
 import illustration from './images/illustration.png';
 
 const CTA = () => (
-  <section className="cta safe-paddings overflow-x-hidden bg-black pt-[200px] text-white 2xl:pt-36 xl:pt-32 lg:pt-28 md:pt-20">
+  <section className="cta safe-paddings overflow-x-hidden bg-black-pure pt-[200px] text-white 2xl:pt-36 xl:pt-32 lg:pt-28 md:pt-20">
     <Container
       className="flex items-center justify-between space-x-10 lg:flex-col lg:justify-center lg:space-x-0 lg:space-y-16 md:space-y-10"
       size="sm"

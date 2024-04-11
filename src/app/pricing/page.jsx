@@ -43,7 +43,7 @@ const sliderItems = [
 ];
 
 const PricingPage = () => (
-  <Layout className="bg-black-new text-white" headerTheme="black-pure" footerTheme="black-pure">
+  <Layout className="bg-black-pure text-white" headerTheme="black-pure" footerTheme="black-pure">
     <Hero />
     <Logos className="mt-36 pt-2.5 lg:mt-28 lg:pt-0 md:mt-20" logos={logos} />
     <CaseStudies className="mt-60 xl:mt-48 lg:mt-[124px] md:mt-[88px]" />

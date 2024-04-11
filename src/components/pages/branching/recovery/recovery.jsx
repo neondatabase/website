@@ -9,7 +9,7 @@ const items = [
 ];
 
 const Recovery = () => (
-  <section className="recovery safe-paddings bg-black pt-[200px] text-white 2xl:pt-36 xl:pt-32 lg:pt-28 md:pt-20">
+  <section className="recovery safe-paddings bg-black-pure pt-[200px] text-white 2xl:pt-36 xl:pt-32 lg:pt-28 md:pt-20">
     <Container size="sm">
       <Heading className="t-5xl font-bold" tag="h2">
         Data recovery and debugging

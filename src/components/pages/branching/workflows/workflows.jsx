@@ -111,7 +111,10 @@ const Workflows = () => {
   }, [rive, currentItemIndex]);
 
   return (
-    <section className="workflows safe-paddings bg-black pt-20 text-white lg:pt-0" ref={wrapperRef}>
+    <section
+      className="workflows safe-paddings bg-black-pure pt-20 text-white lg:pt-0"
+      ref={wrapperRef}
+    >
       <Container
         className="grid-gap-x grid grid-cols-12 border-y border-dashed border-gray-2"
         size="md"
