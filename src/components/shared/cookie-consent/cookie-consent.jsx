@@ -39,23 +39,23 @@ const CookieConsent = ({}) => {
   }, []);
 
   return visible ? (
-    <div className="fixed bottom-4 left-4 z-50 flex max-w-[560px] items-end gap-x-10 rounded-[10px] border border-gray-2 bg-gray-1 px-6 py-5 text-white md:right-4 sm:flex-col sm:items-start sm:gap-y-4">
-      <p>
+    <div className="fixed bottom-[50px] left-12 z-50 flex max-w-[503px] items-end gap-x-10 rounded-lg border border-[#16181D] bg-[#0B0C0F] p-4 shadow-[0px_14px_20px_0px_rgba(0,0,0,0.10)] md:bottom-4 md:left-4 md:right-4 sm:flex-col sm:items-start sm:gap-y-4">
+      <p className="text-sm font-light leading-snug tracking-extra-tight text-gray-new-80">
         We use cookies to improve our services. Learn more in our{' '}
         <Link
-          className="whitespace-nowrap underline-offset-[3px]"
-          theme="green-underlined"
+          className="whitespace-nowrap font-normal underline-offset-[3px]"
+          theme="white-underlined"
           to={LINKS.cookiePolicy}
         >
           Cookie Policy
         </Link>
         .
       </p>
-      <div className="flex gap-x-3">
-        <Button className="h-9" size="xxs" theme="gray-2-outline" onClick={rejectAll}>
-          Opt Out
+      <div className="flex gap-x-3.5">
+        <Button className="font-medium" size="xxs" theme="black-outline" onClick={rejectAll}>
+          Opt out
         </Button>
-        <Button className="h-9" size="xxs" theme="white-filled" onClick={consentAll}>
+        <Button className="font-medium" size="xxs" theme="gray-94-filled" onClick={consentAll}>
           Accept
         </Button>
       </div>

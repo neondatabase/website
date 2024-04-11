@@ -4,7 +4,7 @@
     -webkit-tap-highlight-color: transparent;
   }
   .new-design body {
-    @apply font-sans-inter;
+    @apply bg-black-pure font-sans-inter;
   }
 
   input[type='number']::-webkit-outer-spin-button,
