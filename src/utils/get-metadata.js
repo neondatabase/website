@@ -1,7 +1,5 @@
 import SEO_DATA, { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 
-import pagesWithNoTopbar from './pages-with-no-topbar';
-
 const DEFAULT_TITLE = SEO_DATA.index.title;
 const DEFAULT_DESCRIPTION = SEO_DATA.index.description;
 
@@ -54,7 +52,7 @@ export default function getMetadata({
     manifest: `${SITE_URL}/manifest.json`,
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots,
-    themeColor: pagesWithNoTopbar.includes(pathname) ? '#0c0d0d' : '#131415',
+    themeColor: '#0B0C0F',
     icons: {
       icon: '/favicon/favicon.png',
       apple: [
