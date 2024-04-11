@@ -12,6 +12,17 @@ import sendGtagEvent from 'utils/send-gtag-event';
 const API_URL = 'https://api.github.com/repos/neondatabase/neon';
 const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
+const formatStars = (starsCount) => {
+  if (!starsCount) return '...';
+
+  const fixedThousands = (starsCount / 1000).toFixed(1);
+  if (fixedThousands.endsWith('.0')) {
+    return `${fixedThousands.replace('.0', '')}k`;
+  }
+
+  return `${fixedThousands}k`;
+};
+
 const GithubStarCounter = ({ className = '', isThemeBlack = false, isNewDesign }) => {
   const [starsCount, setStarsCount] = useState(null);
 
@@ -68,7 +79,7 @@ const GithubStarCounter = ({ className = '', isThemeBlack = false, isNewDesign }
     >
       <GitHubIcon width={20} height={20} />
       <span className={clsx('whitespace-nowrap', isNewDesign ? 'w-8' : 'w-10')}>
-        {starsCount ? `${(starsCount / 1000).toFixed(1)}k` : '...'}
+        {formatStars(starsCount)}
       </span>
     </Link>
   );
