@@ -4,7 +4,7 @@ subtitle: Learn how to query point-in-time connections against your data's histo
 enableTableOfContents: true
 ---
 
-To help troubleshoot your data's history, Time Travel Assist lets you connect to any selected point in time within your history retention window and then run queries against that connection.
+To help review your data's history, Time Travel Assist lets you connect to any selected point in time within your history retention window and then run queries against that connection.
 
 You can use Time Travel Assist from two places in the Neon Console:
 
