@@ -7,7 +7,7 @@ enableTableOfContents: true
 There are external tools that you can use to monitor your Neon Postgres database, such as [PgHero](#pghero) and [pgAdmin](#pgadmin). Setup instructions for those tools are provided below.
 
 <Admonition type="note">
-Neon does not currently support monitoring tools or platforms that require installing an agent on the Postgres host system, but please keep an eye on our [roadmap](/docs/introduction/raodmap) for future integrations that enable these monitoring options. 
+Neon does not currently support monitoring tools or platforms that require installing an agent on the Postgres host system, but please keep an eye on our [roadmap](/docs/introduction/roadmap) for future integrations that enable these monitoring options. 
 </Admonition>
 
 ## PgHero
