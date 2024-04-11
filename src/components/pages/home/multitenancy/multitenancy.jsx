@@ -20,8 +20,8 @@ const Multitenancy = () => (
       height={474}
       width={1920}
     >
-      <source src="/videos/pages/home/next-gen.mp4" type="video/mp4" />
-      <source src="/videos/pages/home/next-gen.webm" type="video/webm" />
+      <source src="/videos/pages/home/next-gen.mp4?updated=20240411193959" type="video/mp4" />
+      <source src="/videos/pages/home/next-gen.webm?updated=20240411193959" type="video/webm" />
     </PauseableVideo>
     <Container
       className="relative z-10 mt-14 xl:max-w-[704px] lg:mt-[50px] lg:pl-24 md:mt-11 sm:mt-6"
