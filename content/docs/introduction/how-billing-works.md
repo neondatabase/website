@@ -55,7 +55,23 @@ Extra storage is available with the [Launch](/docs/introduction/plans##launch) a
 - On the Launch plan, extra storage is billed for in units of 2 GiB at $3.5 each
 - On the Scale plan, extra storage is billed for in units of 10 GiB at $15 each
 
-For example, the Launch plan includes an allowance of 10 GiB in the plan's monthly fee. If you exceed 10 GiB of storage, you are automatically billed for an extra storage unit of 2 GiB at $3.5 per unit. If you exceed 12 GiB, you are billed for 2 units of 2 GiB (an extra $7), and so on. It works the same way on the Storage plan, but with 10 GiB units of storage at $15 per unit.
+For example, the Launch plan includes an allowance of 10 GiB in the plan's monthly fee. If you exceed 10 GiB of storage at any point during the month, you are automatically billed for an extra storage unit of 2 GiB at $3.5 per unit. If you exceed 12 GiB, you are billed for 2 units of 2 GiB (an extra $7), and so on. It works the same way on the Storage plan, but with 10 GiB units of storage at $15 per unit. However, the extra storage charge is prorated for the month. 
+
+<Admonition type="note" title="How extra storage charges are prorated">
+The proration formula for calculating the cost of extra storage purchased at some point during a monthly billing period is:
+
+```
+Cost = Units x (Unit Price/Days in Month) x Days Left in Month
+```
+​
+Where:
+
+- **Cost** is the amount charged for an extra unit of storage. 
+- **Units** is the number fo storage units purchased.
+- **Unit Price** is the cost per storage unit. On the Launch plan, it is $3.50 per 2 GiB unit. On the Scale plan, it is $15.00 per 10 GiB unit.
+- **Days** is the total number of days in the month.
+- **Days Left in Month** is the number of days remaining in the month after going over the storage limit.
+</Admonition>
 
 ### Compute
 
@@ -151,6 +167,7 @@ _Total estimate_: $69 + $15 + $8 + $50 = $142 per month
 
 <Admonition type="note" title="Notes">
 - Adjust your usage estimates as needed to reflect your actual or projected usage.
+- Extra storage costs are prorated based when the storage was purchased during the monthly billing period. See [Storage](#storage) for the proration formula.
 - For Enterprise plan users, please contact our [Sales](/contact-sales) team for an estimate based on your custom needs.
 </Admonition>
 

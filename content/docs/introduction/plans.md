@@ -14,7 +14,7 @@ redirectFrom:
 updatedOn: '2024-02-27T16:17:40.463Z'
 ---
 
-Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [pricing](https://neon.tech/pricing) page for an overview of our plans and pricing. 
+Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [pricing](https://neon.tech/pricing) page for an overview of plan features and pricing. 
 
 This page provides additional information to help you understand our plans and find the one that's right for you.
 
@@ -22,9 +22,17 @@ This page provides additional information to help you understand our plans and f
 
 Neon offers four pricing plans: [Free Tier](#free-tier), [Launch](#launch), [Scale](#scale), and [Enterprise](#enterprise).
 
+<Admonition type="tip" title="Plan Allowances and Extra Usage">
+Neon plans are structured around **Allowances** and **Extra usage**. All plans include allowances. For paid plans, allowances are included in the plan's monthly fee. Neon's Launch and Scale plans support **Extra usage** for a fee. 
+</Admonition>
+
 ### Free Tier
 
-Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon. It includes the following usage:
+Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon.
+
+#### Allowances
+
+The Free Tier includes the following usage allowances:
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
@@ -49,7 +57,11 @@ On the Free Tier, your primary branch compute is always available — it will ne
 
 ### Launch
 
-The Launch plan provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses or applications. It includes the following usage allowances:
+The Launch plan provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses or applications. 
+
+#### Allowances
+
+The Launch plan includes the following usage allowances:
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
@@ -65,7 +77,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
-| **Extra Storage**                             |  Billed for in units of 2 GiB at $3.5 each, prorated for the month                                 |
+| **Extra Storage**                             |  Billed for in units of 2 GiB at $3.5 per unit, prorated for the month                                 |
 | **Extra Compute**                             |  Billed by compute hour at $0.16 per hour                                 |
 
 In addition, Launch plan users have access to the following Neon features:
@@ -77,7 +89,11 @@ In addition, Launch plan users have access to the following Neon features:
 
 ### Scale
 
-The Scale plan provides full platform and support access and is designed for scaling production workloads. It includes the following usage allowances:
+The Scale plan provides full platform and support access and is designed for scaling production workloads.
+
+#### Allowances
+
+The Scale plan includes the following usage allowances:
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
@@ -93,8 +109,9 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 
 |                                         |                                                               |
 |-----------------------------------------|---------------------------------------------------------------|
-| **Extra Storage**                             |   Billed for in units of 10 GiB at $15 each, prorated for the month                               |
+| **Extra Storage**                             |   Billed for in units of 10 GiB at $15 per unit, prorated for the month                               |
 | **Extra Compute**                             |   Billed by compute hour at $0.16 per hour                                |
+| **Extra Projects**                             |   Billed for in units of 10 at $50 per unit                                |
 
 In addition, Scale plan users have access to the following Neon features:
 
