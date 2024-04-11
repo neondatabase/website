@@ -72,7 +72,7 @@ const Apply = () => {
         <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 xl:col-span-full xl:col-start-1 xl:grid-cols-12">
           <div className="col-span-5 lg:col-span-full lg:text-center">
             <GradientLabel className="inline-block">Apply now</GradientLabel>
-            <h2 className="mt-3 text-5xl font-medium leading-none tracking-[-0.02em] xl:text-[44px] lg:text-4xl md:text-[32px]">
+            <h2 className="mt-3 font-title text-5xl font-medium leading-none tracking-[-0.02em] xl:text-[44px] lg:text-4xl md:text-[32px]">
               Become a Partner
             </h2>
             <p className="md:flat-breaks sm:flat-none mt-3 text-lg font-light leading-snug xl:text-base">

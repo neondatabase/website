@@ -41,7 +41,7 @@ const Collaboration = () => (
     <Container className="grid-gap-x grid grid-cols-12" size="medium">
       <div className="col-span-10 col-start-2 flex flex-col items-center xl:col-span-full xl:col-start-1">
         <GradientLabel>Partners</GradientLabel>
-        <h2 className="mt-4 text-center text-[48px] font-medium leading-none tracking-extra-tight lg:text-4xl sm:text-[36px]">
+        <h2 className="mt-4 text-center font-title text-[48px] font-medium leading-none tracking-extra-tight lg:text-4xl sm:text-[36px]">
           Featured partners
         </h2>
         <p className="mt-3 text-center text-lg font-light leading-snug sm:text-base">

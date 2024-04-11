@@ -39,7 +39,12 @@ const Heading = forwardRef(
     },
     ref
   ) => {
-    const className = clsx(styles.size[size], styles.theme[theme], additionalClassName);
+    const className = clsx(
+      'font-title',
+      styles.size[size],
+      styles.theme[theme],
+      additionalClassName
+    );
 
     if (asHTML) {
       return badge ? (

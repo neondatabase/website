@@ -23,7 +23,7 @@ const SplitViewGrid = ({
               {label}
             </span>
           )}
-          <h2 className="mt-3 max-w-[322px] text-[52px] font-medium leading-none tracking-[-0.02em] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]">
+          <h2 className="mt-3 max-w-[322px] font-title text-[52px] font-medium leading-none tracking-[-0.02em] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]">
             {title}
           </h2>
           <p className="mt-4 max-w-[362px] text-lg font-light leading-snug xl:max-w-[280px] xl:text-base lg:max-w-[648px] md:mt-2.5 sm:max-w-none sm:pr-1.5">
@@ -46,7 +46,7 @@ const SplitViewGrid = ({
                 aria-hidden
               />
               <div className="flex flex-col">
-                <h3 className="text-[22px] font-medium leading-tight tracking-[-0.02em] xl:text-xl">
+                <h3 className="font-title text-[22px] font-medium leading-tight tracking-[-0.02em] xl:text-xl">
                   {title}
                 </h3>
                 <p className="mt-2 font-light leading-snug text-gray-new-70">{description}</p>
