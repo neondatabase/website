@@ -140,8 +140,6 @@ const Hero = () => {
         className="absolute left-1/2 top-0 min-w-[1920px] -translate-x-1/2"
         src="/animations/pages/home/hero-bg.riv"
         artboard="hero"
-        intersectionRootMargin="0px 0px 600px 0px"
-        animationRootMargin="0px 0px 300px 0px"
       />
 
       <Container size="1100">
