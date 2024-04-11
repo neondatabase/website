@@ -11,7 +11,7 @@ import PlayIcon from './images/play.inline.svg';
 const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
   <section className="appearance-engineering grid grid-cols-10 gap-x-10 2xl:gap-x-6 lt:grid-cols-12 md:gap-y-20">
     <div className="col-span-4 xl:mr-4 lt:col-span-5 lt:mr-0 md:col-span-full">
-      <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-blue-80">
+      <h2 className="flex items-center font-title text-xs font-medium uppercase leading-none tracking-[0.02em] text-blue-80">
         <span>Appearances</span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>
@@ -48,7 +48,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
                 )}
 
                 <div>
-                  <h3 className="line-clamp-2 text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-green-45 lg:text-base">
+                  <h3 className="line-clamp-2 font-title text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-green-45 lg:text-base">
                     {title}
                   </h3>
                   <div className="mt-2 flex items-center">
@@ -65,7 +65,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
       </ul>
     </div>
     <div className="col-span-6 flex flex-col xl:-ml-4 lt:col-span-7 lt:ml-0 md:col-span-full">
-      <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-[#B8ADEB]">
+      <h2 className="flex items-center font-title text-xs font-medium uppercase leading-none tracking-[0.02em] text-[#B8ADEB]">
         <span>Engineering</span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>

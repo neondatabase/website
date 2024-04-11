@@ -74,7 +74,7 @@ CardItem.propTypes = {
 const Hero = ({ items }) => (
   <section className="hero safe-paddings pt-36 xl:pt-[120px] lg:pt-11 md:pt-8">
     <Container className="flex flex-col items-center" size="medium">
-      <h1 className="text-center text-[72px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px]">
+      <h1 className="text-center font-title text-[72px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px]">
         Explore <span className="text-green-45">success stories</span>
       </h1>
       <p className="mx-auto mt-5 max-w-[664px] text-center text-xl font-light leading-snug lg:text-lg md:text-base">

@@ -42,7 +42,7 @@ const Hero = () => (
   <section className="hero safe-paddings pt-36 xl:pt-32 lg:pt-14 md:pt-10">
     <Container className="grid-gap-x grid grid-cols-12 lg:grid-cols-1" size="medium">
       <div className="col-span-10 col-start-2 lg:col-span-full lg:col-start-1">
-        <h1 className="text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl sm:text-3xl">
+        <h1 className="font-title text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl sm:text-3xl">
           <span className="text-green-45">Serverless showcase:</span>
           <br /> unleashing the power of Neon
         </h1>
@@ -50,7 +50,7 @@ const Hero = () => (
           Explore interactive demos unveiling cutting-edge apps in the serverless era.
         </p>
         <div className="mt-20 lg:mt-16 md:mt-10">
-          <h2 className="flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green-45">
+          <h2 className="flex items-center font-title text-xs font-medium uppercase leading-none tracking-[0.02em] text-green-45">
             <span>Featured</span>
             <span className="ml-2 h-px grow bg-gray-new-20" />
           </h2>

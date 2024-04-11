@@ -17,7 +17,7 @@ export default async function StaticPage({ params }) {
     <Layout headerTheme="white" footerWithTopBorder>
       <article className="safe-paddings py-48 3xl:py-44 2xl:py-40 xl:py-32 lg:pb-24 lg:pt-12 md:pb-20 md:pt-6">
         <Container size="xs">
-          <h1 className="t-5xl font-semibold">{title}</h1>
+          <h1 className="t-5xl font-title font-medium">{title}</h1>
         </Container>
         <Container size="xs">
           <Content className="prose-static mt-8 2xl:mt-7 xl:mt-6" content={content} asHTML />

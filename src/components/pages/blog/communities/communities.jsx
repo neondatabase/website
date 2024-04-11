@@ -42,7 +42,7 @@ const items = [
 const Communities = () => (
   <section className="pb-[104px] pt-20 xl:pb-[88px] xl:pt-16 lg:pb-20 lg:pt-14 md:py-12">
     <Container className="flex flex-col items-center" size="medium">
-      <h2 className="text-4xl leading-none tracking-tighter xl:text-[32px] lg:text-[28px] md:text-center md:text-2xl">
+      <h2 className="font-title text-4xl font-medium leading-none tracking-tighter xl:text-[32px] lg:text-[28px] md:text-center md:text-2xl">
         Connect with Neon’s communities
       </h2>
       <ul className="mt-14 grid w-full grid-cols-3 gap-x-10 gap-y-4 xl:mt-10 xl:gap-x-6 lg:mt-9 md:mt-7 md:grid-cols-1">

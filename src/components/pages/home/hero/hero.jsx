@@ -84,7 +84,9 @@ const Item = forwardRef(
           </video>
         </div>
         <div className="mt-5 px-1">
-          <h2 className="text-xl leading-dense tracking-tighter text-white">{title}</h2>
+          <h2 className="font-title text-xl font-medium leading-dense tracking-tighter text-white">
+            {title}
+          </h2>
           <div className="relative mt-3.5 h-px w-full bg-gray-new-15" aria-hidden>
             <span
               className="absolute left-0 top-0 h-full bg-[linear-gradient(90deg,rgba(228,229,231,0.10)_0%,#E4E5E7_100%)] duration-500"
