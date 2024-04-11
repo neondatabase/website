@@ -314,7 +314,7 @@ export default async function Home() {
       <div className="w-full text-center">
         <input
           type="submit"
-          value={"Save Message"}
+          value={"Save Quote"}
           className="bg-[#00E699] cursor-pointer transition-colors hover:bg-[#00e5BF] text-gray-800 font-semibold py-2 px-4 rounded focus:outline-none"
         />
       </div>
@@ -354,6 +354,14 @@ In this guide, we walked through setting up a simple Next.js application with us
 Next, we can add more routes and features to the application. The `Clerk` middleware ensures that only authenticated users can access any app routes, and the `ClerkProvider` component provides the user context to each of them. 
 
 To view and manage the users who authenticated with your application, you can navigate to the [Clerk Dashboard](https://dashboard.clerk.dev/). 
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/guide-neon-next-clerk" description="Authenticate users of your Neon application with Clerk" icon="github">Authentication flow with Clerk</a>
+</DetailIconCards>
 
 ## Resources
 
