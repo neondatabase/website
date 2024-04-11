@@ -15,7 +15,7 @@ You can use Time Travel Assist from two places in the Neon Console:
 
 Time Travel Assist leverages Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which are automatically removed once you are done querying against this point-in-time connection. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
 
-However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
+However, you can see the history of operations related to the creation and deletion of branches and ephemeral compute endpoints on the **Operations** page:
 
 - start_compute
 - create_branch
