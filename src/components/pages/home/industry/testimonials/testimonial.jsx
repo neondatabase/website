@@ -11,7 +11,10 @@ const Testimonial = ({ className, quote, avatar, name, position, logo, isActive 
         'sm:shrink-0 sm:snap-center sm:border sm:border-gray-new-10 sm:bg-black-new sm:p-5',
         className
       )}
-      animate={{ opacity: isActive ? 1 : 0.4, filter: isActive ? 'none' : 'blur(2px)' }}
+      animate={{
+        opacity: isActive ? 1 : 0.4,
+        filter: isActive ? 'none' : 'blur(2px)',
+      }}
       transition={{ duration: 0.3 }}
     >
       <Image
