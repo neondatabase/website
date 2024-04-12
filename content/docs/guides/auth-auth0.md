@@ -1,5 +1,5 @@
 ---
-title: Authenticate users of your Neon application with Auth0
+title: Authenticate Neon Postgres application users with Auth0
 subtitle: Learn how to add authentication to a Neon-backed application using Auth0
 enableTableOfContents: true
 updatedOn: '2024-03-04T11:30:00.000Z'
