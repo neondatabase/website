@@ -17,9 +17,9 @@ Your Neon plan defines the range of data you can view.
 
 | Neon Plan | Data Access  |
 |-----------|--------------|
-| [Free Tier](/docs/introduction/plans#free-tier) | Last hour     |
-| [Launch](/docs/introduction/plans#launch)    | Last day (24 hours)       |
-| [Scale](/docs/introduction/plans#scale)     | Last 7 days      |
+| [Free Tier](/docs/introduction/plans#free-tier) | Last day (24 hours)     |
+| [Launch](/docs/introduction/plans#launch)      | Last 7 days (168 hours)    |
+| [Scale](/docs/introduction/plans#scale)     | Last 7 days (168 hours)     |
 
 The dashboard displays metrics for the selected **Branch** and **Compute endpoint**. Use the drop-down menus to view metrics for a different branch or compute endpoint. Use the **Refresh** button to update the displayed metrics.
 
