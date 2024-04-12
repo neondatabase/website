@@ -67,7 +67,7 @@ Understanding the information provided by the **Explain** and **Analyze** featur
 
 ## Using meta-commands
 
-The Neon SQL Editor supports the use of Postgres meta-commands, which act like shortcuts for interacting with your database. If you are already familiar with using meta-commands from the `psql` command-line interface, you can use those same commands right from the SQL Editor.
+The Neon SQL Editor supports the use of Postgres meta-commands, which act like shortcuts for interacting with your database. If you are already familiar with using meta-commands from the `psql` command-line interface, you can use many of those same commands right from the SQL Editor.
 
 ### Available meta-commands
 
@@ -76,8 +76,10 @@ Here are some of the meta-commands that you can use within the Neon SQL Editor:
 - `\dt` — List all tables in the current database.
 - `\d [table_name]` — Describe a table's structure.
 - `\l` — List all databases.
+- `\?` - A cheat sheet of available meta-commands
+- `\h [NAME]` - Get help for any Postgres command. For example, try `\h SELECT`.
 
-For more information about meta-commands, see [PostgreSQL Meta-Commands](https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMANDS). Note that not all meta-commands are supported in the SQL Editor
+For more information about meta-commands, see [PostgreSQL Meta-Commands](https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMANDS). Note that not all meta-commands are supported in the SQL Editor.
 
 ### How to Use Meta-Commands
 
