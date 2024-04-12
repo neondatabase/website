@@ -1,6 +1,6 @@
 ---
-title: Authenticate users of your Neon application with Okta
-subtitle: Learn how to add authentication to your Next.js application backed by Neon, using Okta
+title: Authenticate Neon Postgres application users with Okta
+subtitle: Learn how to add authentication to a Neon Postgres database application with Okta
 enableTableOfContents: true
 updatedOn: '2024-03-04T11:30:00.000Z'
 ---
@@ -14,7 +14,7 @@ In this guide, we'll walk through building a simple Next.js application using [N
 - Define a database schema using Drizzle ORM and generate migrations
 - Store and retrieve user data associated with Okta user IDs
 
-**Note:** Okta provides a different solution named the [Customer Identity Cloud](https://www.okta.com/customer-identity/), powered by `Auth0` to authenticate external customers for Saas applications. This guide focuses on the Workforce Identity Cloud for internal applications. For an example guide using `Auth0`, refer to the [Authenticate users of your Neon application with Auth0](/docs/guides/auth-auth0) post.
+**Note:** Okta provides a different solution called [Customer Identity Cloud](https://www.okta.com/customer-identity/), powered by `Auth0`, to authenticate external customers for Saas applications. This guide focuses on the [Workforce Identity Cloud](https://www.okta.com/workforce-identity/) for internal applications. For an example guide using `Auth0`, refer to our [Auth0](/docs/guides/auth-auth0) guide.
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ npm install -D drizzle-kit dotenv
 npm install next-auth@beta
 ```
 
-The `@neondatabase/serverless` package provides the Neon Postgres client while `drizzle-orm` is a lightweight typescript ORM that we'll use to interact with the database. We also use `dotenv` to manage environment variables and the `drizzle-kit` CLI tool for generating database migrations. For authentication, we'll use the `auth.js` library (aliased as v5 of the `next-auth` package), which provides a simple way to add authentication to Next.js applications. It comes with built-in support for Okta. 
+We use the `@neondatabase/serverless` package as the Postgres client, and `drizzle-orm`, a lightweight typescript ORM, to interact with the database. We also use `dotenv` to manage environment variables and the `drizzle-kit` CLI tool for generating database migrations. For authentication, we'll use the `auth.js` library (aliased as v5 of the `next-auth` package), which provides a simple way to add authentication to Next.js applications. It comes with built-in support for Okta. 
 
 Also, add a `.env.local` file to the root of your project, which we'll use to store Neon/Okta connection parameters:
 
@@ -53,8 +53,8 @@ touch .env.local
 ### Initialize a new project
 
 1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section. 
-2. Select an existing project or click the `New Project` button to create a new one.
-3. Choose the desired region and Postgres version for your project, then click `Create Project`.
+2. Select an existing project or click the **New Project** button to create a new one.
+3. Choose the desired region and Postgres version for your project, then click **Create Project**.
 
 ### Retrieve your Neon database connection string
 
@@ -76,16 +76,16 @@ DATABASE_URL=NEON_DB_CONNECTION_STRING
 
 ### Create an Okta application
 
-1. Log in to your Okta developer account and navigate to the `Applications` section. Click the `Create App Integration` button.
-2. Select `OIDC - OpenID Connect` as the sign-in method.
-3. Select `Web Application` as the application type and click `Next`.
+1. Log in to your Okta developer account and navigate to the **Applications** section. Click the **Create App Integration** button.
+2. Select **OIDC - OpenID Connect** as the sign-in method.
+3. Select **Web Application** as the application type and click **Next**.
 4. Provide a name for your application, e.g., "Neon Next Guide". 
-5. Set the `Sign-in redirect URIs` to `http://localhost:3000/api/auth/callback/okta` and the `Sign-out redirect URIs` to `http://localhost:3000`.
-6. Click `Save` to create the application.
+5. Set **Sign-in redirect URIs** to `http://localhost:3000/api/auth/callback/okta` and **Sign-out redirect URIs** to `http://localhost:3000`.
+6. Click **Save** to create the application.
 
 ### Retrieve your Okta configuration
 
-From the application's `General` tab, find the `Client ID` and `Client SECRET`. Also note down your Okta `Issuer URI`, which is the first part of your Okta account's URL, e.g., `https://dev-12345.okta.com`. If it isn't clear, visit the `Security > API` section from the sidebar in the console to find the `Issuer URI` and remove the `/oauth2/default` from the end. 
+From the application's **General** tab, find the **Client ID** and **Client SECRET**. Also note down your Okta **Issuer URI**, which is the first part of your Okta account's URL, e.g., `https://dev-12345.okta.com`. If it isn't clear, visit the **Security > API** section from the sidebar in the console to find the **Issuer URI** and remove `/oauth2/default` from the end. 
 
 Add these as environment variables to the `.env.local` file in your Next.js project:
 
@@ -104,7 +104,9 @@ The last variable, `AUTH_SECRET`, is a random string used by `Auth.js` to encryp
 npx auth secret
 ```
 
-**Note**: If you set up an Okta organization account specifically for this guide, you might need to assign yourself to the created Okta application to test the authentication flow. Visit `Applications > Applications` from the sidebar and select the application you created. In the `Assignments` tab, click `Assign` and select your own user account. 
+<Admonition type="note">
+If you set up an Okta organization account specifically for this guide, you might need to assign yourself to the created Okta application to test the authentication flow. Visit **Applications > Applications** from the sidebar and select the application you created. In the **Assignments** tab, click **Assign** and select your own user account. 
+</Admonition>
 
 ## Implementing the application
 
@@ -223,9 +225,9 @@ import { handlers } from "@/auth";
 export const { GET, POST } = handlers;
 ```
 
-This route file imports the authentication handlers from the `auth.ts` file that handle all auth-related requests - sign-in, sign-out, and redirect after authentication. 
+This route file imports the authentication handlers from the `auth.ts` file that handle all auth-related requests &#8212; sign-in, sign-out, and redirect after authentication. 
 
-The `auth` object exported from `./auth.ts` is the universal method we can use to interact with the authentication state in the application. For example, we add a `User information` bar to the app layout that indicates the current user's name and provides a sign-out button. 
+The `auth` object exported from `./auth.ts` is the universal method we can use to interact with the authentication state in the application. For example, we add a **User information** bar to the app layout that indicates the current user's name and provides a sign-out button. 
 
 Replace the contents of the `app/layout.tsx` file with the following:
 
@@ -278,7 +280,7 @@ export default function RootLayout({
 
 ### Add interactivity to the application
 
-Our application has a single page that lets the logged-in user store their favorite quote and displays it. We implement `Next.js` server actions to handle the form submission and database interaction.
+Our application has a single page that lets the logged-in user store their favorite quote and display it. We implement `Next.js` server actions to handle the form submission and database interaction.
 
 Create a new file at `app/actions.ts` with the following content:
 
@@ -408,7 +410,7 @@ export default async function Home() {
 }
 ```
 
-This implements a form with a single text field that lets the user input a quote, and submit it, whereby it gets stored in the database, associated with their `Okta` user ID. If a quote is already stored, it displays the quote and provides a button to delete it. 
+This code implements a form with a single text field that lets the user input a quote, and submit it, whereby the quote is stored in the database and associated with the user's `Okta` user ID. If a quote is already stored, it displays the quote and provides a button to delete it. 
 
 The `user.id` property set on the session object provides the current user's ID, which we use to interact with the database on their behalf. If the user is not authenticated, the page displays a login button instead.
 
@@ -430,14 +432,14 @@ In this guide, we walked through setting up a simple Next.js application with us
 
 Next, we can add more routes and features to the application. The `auth` method can be used in the Next.js API routes or middleware to protect endpoints that require authentication. 
 
-To view and manage the users who authenticated with your application, you can navigate to your Okta admin console and view the `Directory > People` section in the sidebar. 
+To view and manage the users who authenticated with your application, you can navigate to your Okta admin console and view the **Directory > People** section in the sidebar. 
 
 ## Source code
 
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/guide-neon-next-okta" description="Authenticate users of your Neon application with Okta" icon="github">Authentication flow with Okta</a>
+<a href="https://github.com/neondatabase/guide-neon-next-okta" description="Authenticate Neon application users with Okta" icon="github">Authentication flow with Okta</a>
 </DetailIconCards>
 
 ## Resources
