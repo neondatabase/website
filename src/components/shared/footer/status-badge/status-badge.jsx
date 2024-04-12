@@ -35,7 +35,7 @@ const fetchStatus = async () => {
   return 'UP';
 };
 
-const StatusBadge = ({ isDocPage = false, isNewTheme = false }) => {
+const StatusBadge = ({ isDocPage = false, isDarkTheme = true }) => {
   const [currentStatus, setCurrentStatus] = useState(null);
   const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '0px 0px 200px 0px' });
 
@@ -71,8 +71,8 @@ const StatusBadge = ({ isDocPage = false, isNewTheme = false }) => {
       />
       <span
         className={clsx(
-          'whitespace-nowrap text-sm leading-none',
-          isNewTheme ? 'tracking-extra-tight' : 'tracking-[0.02em]'
+          'whitespace-nowrap text-sm leading-none tracking-extra-tight dark:text-white',
+          isDarkTheme ? 'text-white' : 'text-black-new'
         )}
       >
         {currentStatus ? statusData[currentStatus].text : 'All systems operational'}
@@ -81,6 +81,6 @@ const StatusBadge = ({ isDocPage = false, isNewTheme = false }) => {
   );
 };
 
-StatusBadge.propTypes = { isDocPage: PropTypes.bool, isNewTheme: PropTypes.bool };
+StatusBadge.propTypes = { isDocPage: PropTypes.bool, isDarkTheme: PropTypes.bool };
 
 export default StatusBadge;

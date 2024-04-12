@@ -92,7 +92,7 @@ const Partners = () => (
         </div>
         <div className="flex flex-col items-start lt:max-w-lg">
           <GradientLabel>Apply now</GradientLabel>
-          <h2 className="mt-3 text-[52px] font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
+          <h2 className="mt-3 font-title text-[52px] font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
             Become a Partner
           </h2>
           <p className="mt-4 text-lg font-light leading-snug xl:text-base md:max-w-xs">

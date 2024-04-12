@@ -14,7 +14,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
     <section className="posts-list flex flex-col">
       <h2
         className={clsx(
-          'flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em]',
+          'flex items-center font-title text-xs font-medium font-semibold uppercase leading-none tracking-[0.02em]',
           CATEGORY_COLORS[lowerCaseTitle] || 'text-green-45'
         )}
       >

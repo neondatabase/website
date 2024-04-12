@@ -23,7 +23,7 @@ const Integration = async () => {
     <section className="integration safe-paddings mt-48 xl:mt-[124px] lg:mt-28 md:mt-20">
       <Container className="flex flex-col items-center" size="medium">
         <GradientLabel>Get Started</GradientLabel>
-        <h2 className="flat-breaks sm:flat-none mt-5 text-center text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:mt-3 md:text-[32px]">
+        <h2 className="flat-breaks sm:flat-none mt-5 text-center font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:mt-3 md:text-[32px]">
           Simple to use,
           <br /> scales automatically
         </h2>

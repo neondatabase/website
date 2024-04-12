@@ -9,7 +9,7 @@ import LINKS from 'constants/links';
 import illustration from './images/illustration.png';
 
 const Hero = () => (
-  <section className="hero safe-paddings overflow-hidden bg-black pt-[158px] text-white xl:pt-[136px] lg:pt-9 sm:pt-6">
+  <section className="hero safe-paddings overflow-hidden bg-black-pure pt-[158px] text-white xl:pt-[136px] lg:pt-9 sm:pt-6">
     <Container
       className="flex w-full items-end justify-between space-x-14 border-b border-dashed border-gray-2 lg:flex-col lg:items-center lg:space-x-0 lg:space-y-14"
       size="sm"

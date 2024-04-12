@@ -135,12 +135,12 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
       >
         <div className="relative z-20 lg:text-center">
           {size === 'sm' ? (
-            <h2 className="w-[220px] shrink text-2xl leading-dense tracking-tighter">
+            <h2 className="w-[220px] shrink font-title text-2xl font-medium leading-dense tracking-tighter">
               Subscribe to receive our latest updates
             </h2>
           ) : (
             <>
-              <h2 className="text-4xl leading-none tracking-tighter xl:text-[32px] sm:text-[28px]">
+              <h2 className="font-title text-4xl font-medium leading-none tracking-tighter xl:text-[32px] sm:text-[28px]">
                 Subscribe to <mark className="bg-transparent text-green-45">Neon’s News</mark>
               </h2>
               <p className="mt-4 text-lg leading-none tracking-[-0.02em] text-gray-new-80 xl:mt-2 xl:text-base xl:leading-tight sm:mx-auto sm:mt-2.5 sm:max-w-[300px]">

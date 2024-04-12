@@ -6,7 +6,7 @@ import VideoPreview from './video-preview';
 
 const VideoList = ({ videos }) => (
   <section className="videos flex flex-col">
-    <h2 className="flex items-center text-xs font-semibold uppercase leading-none -tracking-extra-tight text-pink-90">
+    <h2 className="flex items-center font-title text-xs font-medium uppercase leading-none -tracking-extra-tight text-pink-90">
       <span>Video</span>
       <span className="ml-2 h-px grow bg-gray-new-20" />
     </h2>

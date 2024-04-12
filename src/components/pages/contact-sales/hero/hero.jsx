@@ -41,12 +41,12 @@ const Hero = () => {
               transition: { duration: APPEAR_AND_EXIT_ANIMATION_DURATION },
             }}
           >
-            <h1 className="text-[72px] font-bold leading-tight 2xl:text-[56px] 2xl:leading-dense md:text-[36px]">
+            <h1 className="font-title text-[72px] font-medium leading-tight 2xl:text-[56px] 2xl:leading-dense md:text-[36px]">
               Talk to our Sales team
             </h1>
             <p className="mx-auto mt-1.5 max-w-[660px] text-xl 2xl:max-w-[550px] 2xl:text-base md:mt-2">
-              Interested in learning more about our plans and pricing? Complete the
-              form below to get in touch with our Sales team.
+              Interested in learning more about our plans and pricing? Complete the form below to
+              get in touch with our Sales team.
             </p>
             <div className="mx-auto mt-16 flex 2xl:mt-12 2xl:max-w-5xl lg:mt-9 lg:max-w-[583px] lg:flex-col lg:space-y-9 md:mt-6 md:space-y-6">
               <div
@@ -66,7 +66,7 @@ const Hero = () => {
                 <div className="relative z-10 flex h-full w-full flex-col overflow-hidden rounded-r-[20px] bg-secondary-2 pt-10 lg:flex-row lg:rounded-[20px] lg:pt-0 md:flex-col md:items-center">
                   <div className="px-11 lg:order-1 lg:self-center lg:pl-[18px] lg:pr-8 lg:text-left md:order-none md:px-8 md:pl-4 md:pr-4 md:pt-5 md:text-center">
                     <h2
-                      className="text-[56px] font-bold leading-none 2xl:text-5xl lg:text-[36px]"
+                      className="font-title text-[56px] font-medium leading-none 2xl:text-5xl lg:text-[36px]"
                       style={{
                         background:
                           'linear-gradient(180deg, #1A1A1A 0%, rgba(26, 26, 26, 0.8) 100%)',

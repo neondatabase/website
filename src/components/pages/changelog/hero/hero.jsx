@@ -20,12 +20,12 @@ const Hero = ({ className = null, withContainer = false }) => {
         })}
         size="sm"
       >
-        <h1 className="text-[36px] font-semibold xl:text-3xl">{TITLE}</h1>
+        <h1 className="font-title text-[36px] font-medium xl:text-3xl">{TITLE}</h1>
         <div className="flex items-center justify-between sm:flex-col sm:items-start sm:gap-y-4">
           <p>{DESCRIPTION}</p>
           {!withContainer && (
             <a
-              className="ml-3 flex items-center text-secondary-8 transition-colors duration-200 hover:text-secondary-7 sm:ml-0 dark:text-primary-1 dark:hover:text-primary-2"
+              className="ml-3 flex items-center text-secondary-8 transition-colors duration-200 hover:text-secondary-7 dark:text-primary-1 dark:hover:text-primary-2 sm:ml-0"
               href={`${CHANGELOG_BASE_PATH}rss.xml`}
             >
               <RSSLogo className="mr-1.5" />

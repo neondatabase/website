@@ -3,9 +3,6 @@
     @apply relative min-w-[320px] !overflow-x-hidden font-sans text-black antialiased;
     -webkit-tap-highlight-color: transparent;
   }
-  .new-design body {
-    @apply bg-black-pure font-sans-inter;
-  }
 
   input[type='number']::-webkit-outer-spin-button,
   input[type='number']::-webkit-inner-spin-button,

@@ -8,137 +8,72 @@ import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus.js';
 
-const styles = {
-  wrapper: {
-    'black-pure': 'bg-black-pure text-white',
-    'black-new': 'border-gray-new-15 bg-black-new text-white',
-    black: 'bg-black text-white',
-    white: 'bg-white text-black',
-  },
-  menuLinkTheme: {
-    'black-pure': 'gray-70',
-    'black-new': 'white',
-    'gray-8': 'white',
-    black: 'white',
-    white: 'black',
-  },
-  icon: {
-    'black-pure': 'bg-gray-new-70',
-    'black-new': 'bg-white',
-    'gray-8': 'bg-white',
-    black: 'bg-white',
-    white: 'bg-black group-hover:bg-primary-2 dark:bg-white dark:group-hover:bg-primary-2',
-  },
-};
-
 // TODO: add responsive styles for black-pure theme, fix logo size
-const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) => {
-  const isNewTheme = theme === 'black-pure';
-  const isDarkTheme =
-    theme === 'black' || theme === 'black-new' || theme === 'gray-8' || isNewTheme;
+const Footer = ({ isDocPage = false, theme = 'white' }) => {
+  const isDarkTheme = theme === 'black-pure';
 
   return (
     <footer
       className={clsx(
-        'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-gray-new-8 dark:text-white',
-        !isDarkTheme && withTopBorder && 'border-t border-gray-new-90 dark:border-gray-new-20',
-        isDarkTheme && withTopBorder && 'border-t border-gray-2',
-        styles.wrapper[theme] || null
+        'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-black-pure dark:text-white',
+        isDarkTheme ? 'bg-black-pure' : 'bg-white'
       )}
     >
       <Container
         className={clsx(
-          'flex justify-between',
-          isNewTheme ? 'gap-x-10 pb-[51px] pt-10' : 'py-10 xl:py-8',
-          isNewTheme &&
-            'before:absolute before:-left-[20%] before:top-0 before:h-px before:w-[140%] before:bg-white before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);]'
+          'flex justify-between gap-x-10 pb-[51px] pt-10',
+          'before:absolute before:-left-[20%] before:top-0 before:h-px before:w-[140%] before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);]',
+          'dark:before:bg-white',
+          isDarkTheme ? 'before:bg-white' : 'before:bg-gray-new-10'
         )}
-        size={isNewTheme ? '1344' : 'lg'}
+        size="1344"
       >
-        <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
-          <div
-            className={clsx(
-              isNewTheme ? 'mb-[30px]' : 'mb-7 xl:mb-5',
-              'flex grow flex-col md:mb-0 md:w-full md:flex-row md:items-start md:justify-between'
-            )}
-          >
+        <div className="flex flex-col items-start justify-between md:w-full md:gap-y-8 sm:gap-y-6">
+          <div className="md:justify-between' mb-[30px] flex grow flex-col md:mb-0 md:w-full md:flex-row md:items-start">
             <div className="flex grow flex-col items-start">
               <Link className="block" to="/">
                 <span className="sr-only">Neon</span>
-                <Logo
-                  className={clsx('w-auto sm:h-6', isNewTheme === 'max-w-[116px]')}
-                  isThemeBlack={isDarkTheme}
-                />
+                <Logo className="w-auto max-w-[116px] sm:h-6" isThemeBlack={isDarkTheme} />
               </Link>
-              <StatusBadge isDocPage={isDocPage} isNewTheme={isNewTheme} />
-              {isDocPage && <ThemeSelect className="mt-7 xl:mt-6 md:mt-0" />}
+              <StatusBadge isDocPage={isDocPage} isDarkTheme={isDarkTheme} />
+              {isDocPage && <ThemeSelect className="mt-7 xl:mt-6 md:mt-3" />}
             </div>
           </div>
-          <div
-            className={clsx(
-              { 'tracking-tight text-gray-new-80': theme === 'black-new' || theme === 'gray-8' },
-              'flex flex-col leading-none lg:leading-tight',
-              isNewTheme
-                ? 'gap-y-3 text-[13px] tracking-extra-tight text-gray-new-40'
-                : 'gap-y-[18px] text-sm dark:text-gray-new-80'
-            )}
-          >
+          <div className="flex flex-col gap-y-3 text-[13px] leading-none tracking-extra-tight text-gray-new-40 lg:leading-tight">
             <p>Made in SF and the World</p>
             <p>
               <span className="lg:hidden">Copyright </span>Ⓒ 2022 – 2024 Neon, Inc.
             </p>
           </div>
         </div>
-        <div
-          className={clsx(
-            'flex',
-            isNewTheme
-              ? 'w-full max-w-[860px] justify-between xl:max-w-[623px] lg:hidden'
-              : 'gap-x-[123px] xl:gap-x-8 md:hidden [@media(max-width:800px)]:gap-x-6'
-          )}
-        >
+        <div className="flex w-full max-w-[860px] justify-between xl:max-w-[623px] lg:hidden">
           {MENUS.footer.map(({ heading, links }, index) => (
-            <div className={clsx('flex flex-col xl:w-full', isNewTheme && 'pt-3')} key={index}>
+            <div className="flex flex-col pt-3 xl:w-full" key={index}>
               <span
                 className={clsx(
-                  'relative uppercase leading-none',
-                  {
-                    'text-[13px] font-semibold text-gray-new-60':
-                      theme === 'black-new' || theme === 'gray-8',
-                  },
-                  isNewTheme
-                    ? 'text-xs font-semibold tracking-normal text-white'
-                    : 'text-sm font-bold tracking-wider dark:text-gray-new-60'
+                  'relative text-xs font-semibold uppercase leading-none tracking-normal dark:text-white',
+                  isDarkTheme ? 'text-white' : 'text-gray-new-10'
                 )}
               >
                 {heading}
               </span>
-              <ul
-                className={clsx(
-                  'flex grow flex-col',
-                  isNewTheme ? 'mt-7 gap-y-5' : 'mt-6 gap-y-[18px]'
-                )}
-              >
+              <ul className="mt-7 flex grow flex-col gap-y-5">
                 {links.map(({ to, text, icon }, index) => {
                   const isExternalUrl = to.startsWith('http');
                   return (
                     <li className="flex" key={index}>
                       <Link
-                        className={clsx(
-                          'group relative flex items-center gap-2 whitespace-nowrap leading-none',
-                          isNewTheme && 'text-[15px] tracking-extra-tight'
-                        )}
+                        className="group relative flex items-center gap-2 whitespace-nowrap text-[15px] leading-none tracking-extra-tight dark:text-gray-new-70 dark:hover:text-green-45"
                         to={to}
-                        theme={styles.menuLinkTheme[theme]}
-                        target={isExternalUrl ? '_blank' : null}
+                        theme={isDarkTheme ? 'gray-70' : 'gray-30'}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
                       >
                         {icon && (
                           <span
                             className={clsx(
                               icon,
-                              'inline-block h-4 w-4 transition-colors duration-200 group-hover:bg-primary-2',
-                              styles.icon[theme]
+                              'inline-block h-4 w-4 transition-colors duration-200 group-hover:bg-primary-2 dark:text-gray-new-70 dark:group-hover:text-green-45',
+                              isDarkTheme ? 'bg-gray-new-70' : 'bg-gray-new-30'
                             )}
                           />
                         )}
@@ -158,8 +93,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
 
 Footer.propTypes = {
   isDocPage: PropTypes.bool,
-  withTopBorder: PropTypes.bool,
-  theme: PropTypes.oneOf(['white', 'black', 'black-new', 'black-pure', 'gray-8']),
+  theme: PropTypes.oneOf(['white', 'black-pure']),
 };
 
 export default Footer;

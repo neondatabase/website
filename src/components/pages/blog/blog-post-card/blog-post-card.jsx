@@ -129,7 +129,7 @@ const BlogPostCard = ({
         >
           <h1
             className={clsx(
-              'font-medium transition-colors duration-200 group-hover:text-green-45',
+              'font-title font-medium transition-colors duration-200 group-hover:text-green-45',
               size === 'xl' && 'text-4xl leading-dense tracking-tighter xl:text-3xl md:text-2xl',
               size === 'lg' && 'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base',
               checkSize('md', 'sm', 'xs') &&

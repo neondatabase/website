@@ -23,7 +23,7 @@ const formatStars = (starsCount) => {
   return `${fixedThousands}k`;
 };
 
-const GithubStarCounter = ({ className = '', isThemeBlack = false, isNewDesign }) => {
+const GithubStarCounter = ({ className = '', isThemeBlack = false }) => {
   const [starsCount, setStarsCount] = useState(null);
 
   const fetchStarCount = async () => {
@@ -63,9 +63,8 @@ const GithubStarCounter = ({ className = '', isThemeBlack = false, isNewDesign }
   return (
     <Link
       className={clsx(
-        'flex items-center leading-none tracking-extra-tight transition-colors duration-200',
+        'flex items-center gap-x-1.5 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200',
         className,
-        isNewDesign ? 'gap-x-1.5 text-[13px] font-semibold' : 'gap-x-2.5 text-base',
         isThemeBlack
           ? 'text-white hover:text-green-45'
           : 'text-gray-new-8 hover:text-green-45 dark:text-white dark:hover:text-green-45'
@@ -78,9 +77,7 @@ const GithubStarCounter = ({ className = '', isThemeBlack = false, isNewDesign }
       }}
     >
       <GitHubIcon width={20} height={20} />
-      <span className={clsx('whitespace-nowrap', isNewDesign ? 'w-8' : 'w-10')}>
-        {formatStars(starsCount)}
-      </span>
+      <span className="w-8 whitespace-nowrap">{formatStars(starsCount)}</span>
     </Link>
   );
 };
@@ -90,5 +87,4 @@ export default GithubStarCounter;
 GithubStarCounter.propTypes = {
   className: PropTypes.string,
   isThemeBlack: PropTypes.bool,
-  isNewDesign: PropTypes.bool,
 };
