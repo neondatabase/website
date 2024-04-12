@@ -13,7 +13,7 @@ const GetStarted = () => (
   >
     <RiveAnimation
       className="absolute left-1/2 top-[152px] aspect-[1.87365] w-[1703px] -translate-x-1/2 xl:-top-4 xl:w-[1432px] lg:w-[1126px] sm:-top-6 sm:w-[818px]"
-      src="/animations/footer.riv?updated=20240411184427"
+      src="/animations/pages/home/get-started.riv"
       artboard="footer"
       intersectionRootMargin="0px 0px 600px 0px"
       animationRootMargin="0px 0px 300px 0px"
