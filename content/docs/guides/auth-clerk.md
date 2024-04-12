@@ -1,15 +1,15 @@
 ---
-title: Authenticate users of your Neon application with Clerk
-subtitle: Learn how to add authentication to your Next.js application backed by Neon, using Clerk
+title: Authenticate your Neon application users with Clerk
+subtitle: Learn how to add authentication to a Neon-backed application using Clerk
 enableTableOfContents: true
 updatedOn: '2024-03-04T10:15:00.000Z'
 ---
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing any personally identifiable information (PII) about the users requires a secure solution compliant with data protection regulations.
 
-[Clerk](https://clerk.com/) is a user authentication and identity management platform that provides these features out of the box. It comes with adapters for popular web frameworks, making it easy to integrate with your application backed by `Neon Postgres` database. 
+[Clerk](https://clerk.com/) is a user authentication and identity management platform that provides these features out of the box. It comes with adapters for popular web frameworks, making it easy to integrate with an application backed by a Neon Postgres database.
 
-In this guide, we'll walk through setting up a simple Next.js application using [Neon's](https://neon.tech) serverless Postgres, and add user authentication to it using [Clerk](https://clerk.com/). We will go over how to:
+In this guide, we'll walk through setting up a simple Next.js application using Neon Postgres as the database, and add user authentication using [Clerk](https://clerk.com/). We will go over how to:
 - Set up a Next.js project with Clerk for authentication 
 - Create a Neon Postgres database and connect it to your application
 - Define a database schema using Drizzle ORM and generate migrations
@@ -52,8 +52,8 @@ touch .env.local
 ### Initialize a new project
 
 1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
-2. Select an existing project or click the `New Project` button to create a new one. 
-3. Choose the desired region and Postgres version for your project, then click `Create Project`.
+2. Select an existing project or click the **New Project** button to create a new one. 
+3. Choose the desired region and Postgres version for your project, then click **Create Project**.
 
 ### Retrieve your Neon database connection string
 
@@ -79,7 +79,7 @@ DATABASE_URL=NEON_DB_CONNECTION_STRING
 
 ### Retrieve your API keys
 
-From the sidebar, click on `Developers > API Keys` to find your API keys, needed to authenticate your application with Clerk. Select the `Next.js` option to get them as environment variables for your Next.js project. It should look similar to this:
+From the sidebar, click on **Developers > API Keys** to find your API keys, needed to authenticate your application with Clerk. Select the `Next.js` option to get them as environment variables for your Next.js project. It should look similar to this:
 
 ```bash
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=**************
@@ -351,7 +351,7 @@ This will start the Next.js development server. Open your browser and navigate t
 
 In this guide, we walked through setting up a simple Next.js application with user authentication using Clerk and a Neon Postgres database. We defined a database schema using Drizzle ORM, generated migrations, and interacted with the database to store and retrieve user data. 
 
-Next, we can add more routes and features to the application. The `Clerk` middleware ensures that only authenticated users can access any app routes, and the `ClerkProvider` component provides the user context to each of them. 
+Next, we can add more routes and features to the application. The Clerk middleware ensures that only authenticated users can access any app routes, and the `ClerkProvider` component provides the user context to each of them. 
 
 To view and manage the users who authenticated with your application, you can navigate to the [Clerk Dashboard](https://dashboard.clerk.dev/). 
 
