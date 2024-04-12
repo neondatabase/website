@@ -12,6 +12,7 @@ import Layout from 'components/shared/layout';
 const HomeLayout = () => (
   <Layout
     className="bg-black-pure"
+    headerClassName="bg-transparent"
     headerTheme="black-pure"
     footerTheme="black-pure"
     withOverflowHidden

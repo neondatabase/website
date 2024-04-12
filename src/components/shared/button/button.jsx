@@ -11,7 +11,7 @@ const styles = {
     sm: 't-xl py-[26px] px-11 2xl:py-[21px] 2xl:px-9 xl:py-5 xl:px-8',
     'new-md': 't-base py-[11px] px-[26px]',
     xs: 't-base py-[14px] px-[26px]',
-    xxs: 'px-3 py-1.5 text-xs uppercase tracking-wider',
+    xxs: 'h-8 px-4 text-sm tracking-extra-tight',
   },
   theme: {
     primary: 'bg-primary-1 text-black hover:bg-[#00e5bf]',
@@ -20,6 +20,7 @@ const styles = {
     quaternary: 'bg-white text-black border border-black hover:border-primary-2',
     'white-filled': 'bg-white text-black hover:bg-gray-6',
     'white-outline': 'bg-transparent text-white border border-white hover:border-primary-2',
+    'black-outline': 'bg-transparent text-white border border-[#2E3038] hover:border-primary-2',
     'gray-2-outline': 'bg-gray-2 border border-gray-3 text-white hover:border-white',
     'gray-outline':
       'text-black border-gray-new-90 bg-gray-new-98 dark:bg-transparent dark:text-white border dark:border-gray-new-30 dark:hover:border-white hover:border-gray-new-70',
@@ -32,6 +33,7 @@ const styles = {
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
     'gray-10': 'bg-gray-new-10 text-white hover:bg-gray-new-20',
     'gray-15': 'bg-gray-new-15 text-white hover:bg-gray-new-20',
+    'gray-94-filled': 'bg-gray-new-94 text-black hover:bg-gray-6',
     'gray-15-outline':
       'border bg-transparent border-gray-new-15 text-white hover:border-gray-new-30',
   },

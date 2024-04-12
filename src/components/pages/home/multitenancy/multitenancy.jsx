@@ -10,13 +10,18 @@ const Multitenancy = () => (
         Zero overhead.
       </h2>
     </Container>
+    {/* 
+        Video optimization parameters:
+        -mp4: -pix_fmt yuv420p -vf scale=:3840-2 -movflags faststart -vcodec libx264 -crf 20
+        -webm: -c:v libvpx-vp9 -crf 20 -vf scale=3840:-2 -deadline best -an
+    */}
     <PauseableVideo
       className="relative left-1/2 mt-[54px] max-w-[1920px] -translate-x-1/2 xl:max-w-[1380px] lg:mt-11 lg:max-w-[1150px] md:mt-10 sm:mt-6 sm:max-w-[790px]"
       height={474}
       width={1920}
     >
-      <source src="/videos/pages/home/next-gen.mp4" type="video/mp4" />
-      <source src="/videos/pages/home/next-gen.webm" type="video/webm" />
+      <source src="/videos/pages/home/next-gen.mp4?updated=20240411193959" type="video/mp4" />
+      <source src="/videos/pages/home/next-gen.webm?updated=20240411193959" type="video/webm" />
     </PauseableVideo>
     <Container
       className="relative z-10 mt-14 xl:max-w-[704px] lg:mt-[50px] lg:pl-24 md:mt-11 sm:mt-6"

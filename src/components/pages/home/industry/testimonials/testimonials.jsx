@@ -120,7 +120,7 @@ const Testimonials = () => {
           <Testimonial
             className="testimonial"
             {...testimonial}
-            isActive={activeIndex === index}
+            isActive={activeIndex === index || isMobile}
             key={index}
           />
         ))}
