@@ -1,6 +1,6 @@
 ---
 title: Authenticate Neon Postgres application users with Clerk
-subtitle: Learn how to add authentication to a Neon Postgres application using Clerk
+subtitle: Learn how to add authentication to a Neon Postgres database application using Clerk
 enableTableOfContents: true
 updatedOn: '2024-03-04T10:15:00.000Z'
 ---
