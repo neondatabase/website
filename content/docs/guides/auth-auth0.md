@@ -7,9 +7,9 @@ updatedOn: '2024-03-04T11:30:00.000Z'
 
 User authentication is an essential part of most web applications. Modern apps often require features like social login, multi-factor authentication, and secure user data management that complies with privacy regulations. 
 
-[Auth0](https://auth0.com/) is an authentication and authorization platform that provides these features out of the box. It offers SDKs for popular web frameworks, making it straightforward to integrate with your application backed by a `Neon Postgres` database. 
+[Auth0](https://auth0.com/) is an authentication and authorization platform that provides these features out of the box. It offers SDKs for popular web frameworks, making it straightforward to integrate with your application backed by a Neon Postgres database. 
 
-In this guide, we'll walk through setting up a simple Next.js application using [Neon's](https://neon.tech) serverless Postgres, and add user authentication to it using [Auth0](https://auth0.com/). We will cover how to:
+In this guide, we'll walk through setting up a simple Next.js application using Neon Postgres as the database, and add user authentication using [Auth0](https://auth0.com/). We will cover how to:
 
 - Set up a Next.js project with Auth0 for authentication
 - Create a Neon Postgres database and connect it to your application  
@@ -26,7 +26,7 @@ To follow along with this guide, you will need:
 
 ## Initialize your Next.js project
 
-We will create a simple web app that lets you add a favorite quote to the home page, and edit it afterwards. Run the following command in your terminal to create a new `Next.js` project:
+We will create a simple web app that lets you add a favorite quote to the home page, and edit it afterward. Run the following command in your terminal to create a new `Next.js` project:
 
 ```bash
 npx create-next-app guide-neon-next-auth0 --typescript --eslint --tailwind --use-npm --no-src-dir --app --import-alias "@/*"
@@ -40,7 +40,7 @@ npm install -D drizzle-kit dotenv
 npm install @auth0/nextjs-auth0
 ```
 
-The `@neondatabase/serverless` package provides the Neon Postgres client while `drizzle-orm` is a lightweight typescript ORM that we'll use to interact with the database. `@auth0/nextjs-auth0` is the Auth0 SDK for Next.js applications. We also use `dotenv` to manage environment variables and the `drizzle-kit` CLI tool for generating database migrations.
+We use the `@neondatabase/serverless` package as the Postgres client, and `drizzle-orm`, a lightweight typescript ORM, to interact with the database. `@auth0/nextjs-auth0` is the Auth0 SDK for Next.js applications. We also use `dotenv` to manage environment variables and the `drizzle-kit` CLI tool for generating database migrations.
 
 Also, add a `.env.local` file to the root of your project, which we'll use to store Neon/Auth0 connection parameters:
 
@@ -48,7 +48,8 @@ Also, add a `.env.local` file to the root of your project, which we'll use to st
 touch .env.local
 ```
 
-**Note**: At the time of this post, the `@auth0/nextjs-auth0` package caused import errors related to one of its dependencies (`oauth4webapi`). To stop Next.js from raising the error, add the following to your `nextjs.config.mjs` file:
+<Admonition type="note">
+At the time of this post, the `@auth0/nextjs-auth0` package caused import errors related to one of its dependencies (`oauth4webapi`). To stop Next.js from raising the error, add the following to your `nextjs.config.mjs` file:
 
 ```js
 /** @type {import('next').NextConfig} */
@@ -58,6 +59,7 @@ const nextConfig = {
 
 export default nextConfig;
 ```
+</Admonition>
 
 Now, we can start building the application.
 
@@ -66,8 +68,8 @@ Now, we can start building the application.
 ### Initialize a new project
 
 1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section. 
-2. Select an existing project or click the `New Project` button to create a new one.
-3. Choose the desired region and Postgres version for your project, then click `Create Project`.
+2. Select an existing project or click the **New Project** button to create a new one.
+3. Choose the desired region and Postgres version for your project, then click **Create Project**.
 
 ### Retrieve your Neon database connection string
 
@@ -123,7 +125,7 @@ node -e "console.log(crypto.randomBytes(32).toString('hex'))"
 
 ## Implementing the application
 
-### Define database connection and schema
+### Define your database connection and schema
 
 Create a `db` folder inside the `app/` directory. This is where we'll define the database schema and connection code. 
 
@@ -428,7 +430,7 @@ In this guide, we walked through setting up a simple Next.js application with us
 
 Next, we can add more routes and features to the application. The `UserProvider` component from `@auth0/nextjs-auth0` provides the user context to each page, allowing you to conditionally render content based on the user's authentication state.
 
-To view and manage the users who authenticated with your application, you can navigate to the [Auth0 Dashboard](https://manage.auth0.com/) and click on the `User Management > Users` text in the sidebar. Here, you can see the list of users who have logged in and take actions for them. 
+To view and manage the users who authenticated with your application, you can navigate to the [Auth0 Dashboard](https://manage.auth0.com/) and click on **User Management > Users** in the sidebar. Here, you can see the list of users who have logged in and perform any necessary actions for those users. 
 
 ## Source code
 
