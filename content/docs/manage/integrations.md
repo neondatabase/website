@@ -17,7 +17,11 @@ For integrations listed as **Added**, you can click **Manage** on the integratio
 
 For integrations that are not added, you can click **Add** and follow the instructions to get started. Some integrations support an automated integration setup. Others are documented integrations, which involve a manual setup procedure.
 
-## Express interest in upcoming integrations
+## Manual integrations
+
+Integrations currently requiring a manual setup have a **Read** button, which opens a modal where you can read about how to integrate the selected platform or service with Neon.
+
+## Express interest in future integrations
 
 Integrations that are not yet available have a **Request** button, which opens a modal where you can express your interest and share your use case. This information helps the Neon team prioritize integration rollouts and build exactly what you need.
 

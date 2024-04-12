@@ -272,6 +272,10 @@ In earlier versions of the integration, the preview environment `DATABASE_URL` i
 
 To avoid this issue, you can reinstall the integration to update to the latest version. Alternatively, a workaround is to redeploy your preview deployment in Vercel. The preview environment `DATABASE_URL` is set on the next deployment. For redeploy instructions, see [Managing Deployments](https://vercel.com/docs/deployments/managing-deployments), in the _Vercel documentation_.
 
+### Stored passwords missing in the selected Neon project
+
+Neon projects created after March, 2023 store role passwords in a secure storage vault associated with the project, allowing passwords to be retrieved by the Neon Vercel integration for the purpose of setting Postgres connection environment variables in Vercel. Projects created before March 2023, do not store role passwords, and are therefore not compatible with the Neon Vercel integration. The current workaround for this issue is to migrate your data to a new Neon project. See [Import data from another Neon project](/docs/import/import-from-neon).
+
 ## Video: A Postgres database for Every Preview Deployment
 
 Watch this video from the Neon DevRel team for an overview of the Neon Vercel Integration.
