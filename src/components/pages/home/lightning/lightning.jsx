@@ -15,26 +15,31 @@ const Lightning = () => (
       <h2 className="inline-block bg-home-lightning-title bg-clip-text pb-6 font-title text-[128px] font-medium leading-[0.95] -tracking-wider text-transparent xl:text-[96px] lg:max-w-lg lg:text-[72px] sm:text-[52px]">
         Lightning fast. Edge&nbsp;ready.
       </h2>
-      <div className="relative z-10 -mt-10 ml-32 aspect-[1.181818] max-w-[431px] mix-blend-plus-lighter xl:-mt-14 xl:ml-24 xl:max-w-[333px] lg:-mt-[72px] lg:ml-8 lg:max-w-[297px] md:ml-0 md:max-w-[277px] sm:mt-[-60px] sm:max-w-[226px]">
-        <PauseableVideo width={431} height={365}>
-          <source src="/videos/pages/home/lightning-loop-crf-22.mp4" type="video/mp4" />
-          <source src="/videos/pages/home/lightning-loop-crf-20.webm" type="video/webm" />
+      <div className="relative z-10 ml-32 mt-[-113px] aspect-[1.181818] mix-blend-plus-lighter xl:ml-24 xl:mt-[-103px] xl:min-w-[647px] lg:ml-20 lg:mt-[-91px] lg:min-w-0 lg:max-w-[482px] md:ml-[27px] md:max-w-[484px] sm:ml-0 sm:mt-[-85px] sm:min-w-[484px]">
+        {/* 
+          Video optimization parameters:
+          -mp4: -pix_fmt yuv420p -vf scale=1656:-2 -movflags faststart -vcodec libx264 -crf 20
+          -webm: -c:v libvpx-vp9 -crf 20 -vf scale=1656:-2 -deadline best -an
+        */}
+        <PauseableVideo width={828} height={684}>
+          <source src="/videos/pages/home/lightning.mp4" type="video/mp4" />
+          <source src="/videos/pages/home/lightning.webm" type="video/webm" />
         </PauseableVideo>
       </div>
-      <p className="relative z-10 -mt-[84px] ml-32 max-w-[288px] font-light tracking-extra-tight text-gray-new-80 xl:-mt-16 xl:ml-24 xl:leading-snug lg:-mt-16 lg:ml-8 lg:max-w-[256px] md:ml-0 sm:-mt-[53px] sm:max-w-[212px] sm:text-[15px]">
+      <p className="relative z-10 ml-32 mt-[-347px] max-w-[288px] font-light tracking-extra-tight text-gray-new-80 xl:ml-24 xl:mt-[-283px] xl:leading-snug lg:ml-8 lg:mt-[-201px] lg:max-w-[250px] md:ml-[27px] sm:ml-0 sm:mt-[-203px] sm:max-w-[212px] sm:text-[15px]">
         <span className="font-medium text-white">The Neon serverless driver</span>, designed for
         JavaScript and TypeScript, ensures low-latency Postgres queries. It unlocks database
         connectivity for both serverless and edge environments, utilizing HTTP.
       </p>
       <Link
-        className="ml-32 mt-[22px] flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white xl:ml-24 lg:ml-8 md:ml-0"
+        className="ml-32 mt-[22px] flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white xl:ml-24 lg:ml-8 md:ml-[27px] sm:ml-0"
         to="#"
         withArrow
       >
         Get the Serverless Driver
       </Link>
       <Image
-        className="absolute -right-6 top-32 xl:-right-11 xl:top-[84px] xl:max-w-[348px] lg:left-[337px] lg:right-auto lg:top-14 lg:max-w-[271px] sm:left-56 sm:top-6"
+        className="absolute right-[-21px] top-[130px] xl:right-[-57px] xl:top-[84px] xl:max-w-[362px] lg:left-[338px] lg:right-auto lg:top-14 lg:max-w-[271px] sm:left-[247px] sm:top-6 sm:min-w-[271px]"
         src={phoneIllustration}
         width={464}
         height={840}

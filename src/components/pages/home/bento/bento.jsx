@@ -5,7 +5,7 @@ import RiveAnimation from 'components/shared/rive-animation';
 import ClockAnimation from './clock-animation';
 
 const Bento = () => (
-  <section className="bento safe-paddings mt-11 xl:mt-[38px] lg:mt-9">
+  <section className="bento safe-paddings mt-11 xl:mt-[38px] lg:mt-[74px]">
     <Container className="xl:max-w-[704px] lg:max-w-full" size="960">
       <h2 className="font-title text-[68px] font-medium leading-[0.9] tracking-extra-tight text-white xl:text-[56px] lg:pl-16 lg:text-[44px] sm:pl-0 sm:text-[32px]">
         Better database.
