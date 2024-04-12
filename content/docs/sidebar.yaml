@@ -50,6 +50,13 @@
       slug: introduction/status
     - title: Monitoring
       slug: introduction/monitoring
+      items:
+        - title: Monitoring dashboard
+          slug: introduction/monitoring-page
+        - title: Usage metrics
+          slug: introduction/monitor-usage
+        - title: External tools
+          slug: introduction/monitor-external-tools
 - title: Get started
   items:
     - title: Sign up
