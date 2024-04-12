@@ -362,6 +362,10 @@ The total volume of data stored in your Neon project. Also, a billing metric tha
 
 A Neon component that functions as a multitenant service that accepts and handles connections from clients that use the Postgres protocol.
 
+## Protected branch
+
+A designation given to a branch that restricts IP access to the branch to addresses defined in the project's IP allowlist. Typically, the protected branch designation is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan. For information about how to configure a protected branch, see [Set a branch as protected](#set-a-branch-as-protected).
+
 ## Publisher
 
 In the context of logical replication, the publisher is the primary data source where changes occur. It's responsible for sending those changes to one or more subscribers. A Neon database can act as a publisher in a logical replication setup. See [Logical replication](/docs/guides/logical-replication-guide). 
