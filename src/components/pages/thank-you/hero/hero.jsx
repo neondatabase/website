@@ -6,7 +6,7 @@ import Container from 'components/shared/container';
 import illustration from './images/illustration.jpg';
 
 const Hero = () => (
-  <section className="grow pb-24 pt-20 dark:bg-gray-new-8 dark:text-white lg:pt-0 md:py-14 xs:pt-10">
+  <section className="grow pb-24 pt-20 dark:bg-black-pure dark:text-white lg:pt-0 md:py-14 xs:pt-10">
     <Container
       className="grid grid-cols-12 items-start gap-x-8 lg:items-center md:items-stretch md:gap-x-0 md:gap-y-10"
       size="md"

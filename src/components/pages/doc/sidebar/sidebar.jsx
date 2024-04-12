@@ -42,7 +42,7 @@ NavWithIcon.propTypes = {
 const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = false }) => (
   <aside
     className={clsx(
-      'relative col-start-1 col-end-4 max-w-[254px] before:absolute before:-bottom-20 before:-right-5 before:-top-[110px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-gray-new-10 lg:hidden',
+      'relative col-start-1 col-end-4 max-w-[254px] before:absolute before:-bottom-20 before:-right-5 before:-top-[104px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-gray-new-10 lg:hidden',
       className
     )}
   >

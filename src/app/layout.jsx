@@ -2,8 +2,6 @@ import 'styles/globals.css';
 
 import Script from 'next/script';
 
-import TopBar from 'components/shared/topbar';
-
 import { inter, esbuild } from './fonts';
 import ThemeProvider from './provider';
 
@@ -19,10 +17,7 @@ const RootLayout = ({ children }) => (
       <link rel="preconnect" href="https://console.neon.tech" />
     </head>
     <body>
-      <ThemeProvider>
-        <TopBar />
-        {children}
-      </ThemeProvider>
+      <ThemeProvider>{children}</ThemeProvider>
     </body>
   </html>
 );
