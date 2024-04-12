@@ -90,7 +90,7 @@ With the pre-activation state confirmed, now check the feature flag's status imm
 
 ### Adjust Time Selector to Post-Activation:
 
- Move to a time just after the feature's activation. For example, one minute after the timestampe copied from Step 2, so `2023-04-09 at 6:12 PM EST`. Re-execute the query.
+ Move to a time just after the feature's activation. For example, one minute after the timestamp copied from Step 2, so `2023-04-09 at 6:12 PM EST`. Re-execute the query.
 
 ```sql
 SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';
