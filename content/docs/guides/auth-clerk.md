@@ -1,6 +1,6 @@
 ---
-title: Authenticate your Neon application users with Clerk
-subtitle: Learn how to add authentication to a Neon-backed application using Clerk
+title: Authenticate Neon Postgres application users with Clerk
+subtitle: Learn how to add authentication to a Neon Postgres database application using Clerk
 enableTableOfContents: true
 updatedOn: '2024-03-04T10:15:00.000Z'
 ---
@@ -25,7 +25,7 @@ To follow along with this guide, you will need:
 
 ## Initialize your Next.js project
 
-We will create a simple web app that lets you add a favorite quote to the home page, and edit it afterwards. Run the following command in your terminal to create a new `Next.js` project:
+We will create a simple web app that lets you add a favorite quote to the home page, and edit it afterward. Run the following command in your terminal to create a new `Next.js` project:
 
 ```bash
 npx create-next-app guide-neon-next-clerk --typescript --eslint --tailwind --use-npm --no-src-dir --app --import-alias "@/*"
@@ -39,7 +39,7 @@ npm install -D drizzle-kit dotenv
 npm install @clerk/nextjs
 ```
 
-The `@neondatabase/serverless` package provides the Neon Postgres client while `drizzle-orm` is a lightweight typescript ORM that we'll use to interact with the database. `@clerk/nextjs` is the Clerk SDK for Next.js applications. We also use `dotenv` to manage environment variables and the `drizzle-kit` CLI tool for generating database migrations. 
+We use the `@neondatabase/serverless` package as the Postgres client, and `drizzle-orm`, a lightweight typescript ORM, to interact with the database. `@clerk/nextjs` is the Clerk SDK for Next.js applications. We also use `dotenv` to manage environment variables and the `drizzle-kit` CLI tool for generating database migrations. 
 
 Also, add a `.env.local` file to the root of your project, which we'll use to store Neon/Clerk connection parameters: 
 
@@ -90,7 +90,7 @@ Add these variables to the `.env.local` file in your Next.js project.
 
 ## Implementing the application
 
-### Define database connection and schema
+### Define your database connection and schema
 
 Create a `db` folder inside the `app/` directory. This is where we'll define the database schema and connection code. 
 
