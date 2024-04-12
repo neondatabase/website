@@ -10,13 +10,11 @@ import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
-import arrowIcon from 'icons/header/arrow-right.svg';
+import ArrowIcon from 'icons/header/arrow-right.inline.svg';
 import logoBlack from 'images/logo-black-28.svg';
 import logoWhite from 'images/logo-white-28.svg';
 
 // TODO: update black logo
-// TODO: update white theme styles
-// TODO: implement search
 const Header = ({
   className = null,
   theme = 'black-pure',
@@ -83,7 +81,12 @@ const Header = ({
                       >
                         {text}
                         {items?.length > 0 && (
-                          <ChevronIcon className="-mb-px w-2.5 opacity-60 [&_path]:stroke-2" />
+                          <ChevronIcon
+                            className={clsx(
+                              '-mb-px w-2.5 opacity-60 dark:text-white [&_path]:stroke-2',
+                              isThemeBlack ? 'text-white' : 'text-black-new'
+                            )}
+                          />
                         )}
                       </Tag>
                       {items?.length > 0 && (
@@ -95,22 +98,42 @@ const Header = ({
                             'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
                           )}
                         >
-                          <ul className="relative flex min-w-[248px] flex-col gap-y-0.5 rounded-[14px] border border-[#16181D] bg-[#0B0C0F] p-2.5 shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]">
+                          <ul
+                            className={clsx(
+                              'relative flex min-w-[248px] flex-col gap-y-0.5 rounded-[14px] border p-2.5 dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]',
+                              isThemeBlack
+                                ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
+                                : 'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]'
+                            )}
+                          >
                             {items.map(({ icon, text, description, to }, index) => (
                               <li key={index}>
                                 <Link
                                   className={clsx(
-                                    'group/link relative flex items-center overflow-hidden whitespace-nowrap rounded-[14px] p-2 text-white',
-                                    'before:absolute before:inset-0 before:z-10 before:bg-[#16181D] before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100'
+                                    'group/link relative flex items-center overflow-hidden whitespace-nowrap rounded-[14px] p-2 dark:text-white',
+                                    'before:absolute before:inset-0 before:z-10 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 dark:before:bg-[#16181D]',
+                                    isThemeBlack
+                                      ? 'text-white before:bg-[#16181D]'
+                                      : 'text-black-new before:bg-[#f5f5f5]'
                                   )}
                                   to={to}
                                 >
-                                  <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#2E3038] bg-[#16181D]">
+                                  <div
+                                    className={clsx(
+                                      'relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border dark:border-[#2E3038] dark:bg-[#16181D]',
+                                      isThemeBlack
+                                        ? 'border-[#2E3038] bg-[#16181D]'
+                                        : 'border-gray-new-90 bg-[#F5F5F5]'
+                                    )}
+                                  >
                                     <img
-                                      src={icon.new}
+                                      className={clsx(
+                                        'h-5 w-5 dark:opacity-100 dark:invert-0',
+                                        !isThemeBlack && 'opacity-90 invert'
+                                      )}
+                                      src={icon}
                                       width={20}
                                       height={20}
-                                      className="h-5 w-5"
                                       loading="lazy"
                                       alt=""
                                       aria-hidden
@@ -120,18 +143,22 @@ const Header = ({
                                     <span className="block text-sm leading-dense tracking-[-0.01em] transition-colors duration-200">
                                       {text}
                                     </span>
-                                    <span className="mt-0.5 block text-[13px] font-light leading-dense tracking-[-0.02em] text-gray-new-50">
+                                    <span
+                                      className={clsx(
+                                        'mt-0.5 block text-[13px] font-light leading-dense tracking-[-0.02em]',
+                                        isThemeBlack
+                                          ? 'text-gray-new-50'
+                                          : 'text-gray-new-40 dark:text-gray-new-50'
+                                      )}
+                                    >
                                       {description}
                                     </span>
                                   </span>
-                                  <img
-                                    src={arrowIcon}
-                                    width={6}
-                                    height={10}
-                                    className="relative z-10 ml-auto mr-1.5 h-2.5 w-1.5 -translate-x-1 opacity-0 transition-[opacity,transform] duration-300 group-hover/link:translate-x-0 group-hover/link:opacity-100"
-                                    loading="lazy"
-                                    alt=""
-                                    aria-hidden
+                                  <ArrowIcon
+                                    className={clsx(
+                                      'relative z-10 ml-auto mr-1.5 h-2.5 w-1.5 -translate-x-1 opacity-0 transition-[opacity,transform] duration-300 group-hover/link:translate-x-0 group-hover/link:opacity-100 dark:text-gray-new-70',
+                                      isThemeBlack ? 'text-gray-new-70' : 'text-gray-new-40'
+                                    )}
                                   />
                                 </Link>
                               </li>

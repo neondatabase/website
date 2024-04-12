@@ -37,7 +37,14 @@ const variants = {
   },
 };
 
-const MobileMenuItem = ({ text, to, items }) => {
+const getItemTitleStyles = (isThemeBlack, isMenuItemOpen) => {
+  if (isMenuItemOpen && isThemeBlack) return 'text-white';
+  if (!isMenuItemOpen && isThemeBlack) return 'text-gray-new-80';
+  if (isMenuItemOpen && !isThemeBlack) return 'text-black-new dark:text-white';
+  if (!isMenuItemOpen && !isThemeBlack) return 'text-gray-new-20 dark:text-gray-new-80';
+};
+
+const MobileMenuItem = ({ text, to, items, isThemeBlack }) => {
   const [isMenuItemOpen, setIsMenuItemOpen] = useState();
   const Tag = items ? 'button' : Link;
 
@@ -48,10 +55,16 @@ const MobileMenuItem = ({ text, to, items }) => {
   };
 
   return (
-    <li className="block shrink-0 overflow-hidden border-b border-gray-new-10 leading-none">
+    <li
+      className={clsx(
+        'block shrink-0 overflow-hidden border-b leading-none dark:border-gray-new-10',
+        isThemeBlack ? 'border-gray-new-10' : 'border-gray-new-94'
+      )}
+    >
       <Tag
         className={clsx(
-          isMenuItemOpen ? 'font-medium text-white' : 'text-gray-new-80',
+          isMenuItemOpen && 'font-medium',
+          getItemTitleStyles(isThemeBlack, isMenuItemOpen),
           'relative flex w-full items-center py-4 leading-none tracking-[-0.01em] transition-colors duration-200'
         )}
         to={to}
@@ -61,10 +74,9 @@ const MobileMenuItem = ({ text, to, items }) => {
         {items && (
           <ChevronIcon
             className={clsx(
-              'ml-auto inline-block h-2.5 w-2.5 text-white transition-transform duration-200 [&_path]:stroke-2',
-              {
-                'rotate-180': isMenuItemOpen,
-              }
+              'ml-auto inline-block h-2.5 w-2.5 transition-transform duration-200 dark:text-white [&_path]:stroke-2',
+              isThemeBlack ? 'text-white' : 'text-grayn-new-40',
+              isMenuItemOpen && 'rotate-180'
             )}
           />
         )}
@@ -77,24 +89,40 @@ const MobileMenuItem = ({ text, to, items }) => {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: ANIMATION_DURATION }}
-              className="flex flex-col gap-y-0.5 border-t border-gray-new-10 py-2"
+              className={clsx(
+                'flex flex-col gap-y-0.5 border-t py-2 dark:border-gray-new-10',
+                isThemeBlack ? 'border-gray-new-10' : 'border-gray-new-94'
+              )}
             >
               {items.map(({ icon, text, description, to }, index) => (
                 <li className="group flex" key={index}>
                   <Link className="flex w-full gap-x-3 py-2 leading-none" to={to}>
                     <img
-                      className="h-[17px] w-[17px] shrink"
-                      src={icon.new}
+                      className={clsx(
+                        'h-[17px] w-[17px] shrink dark:opacity-100 dark:invert-0',
+                        !isThemeBlack && 'opacity-90 invert'
+                      )}
+                      src={icon}
                       width={17}
                       height={17}
                       alt=""
                       loading="lazy"
                     />
                     <span className="flex flex-col gap-y-1">
-                      <span className="text-[15px] leading-dense tracking-[-0.01em] text-white">
+                      <span
+                        className={clsx(
+                          'text-[15px] leading-dense tracking-[-0.01em] dark:text-white',
+                          isThemeBlack ? 'text-white' : 'text-black-new'
+                        )}
+                      >
                         {text}
                       </span>
-                      <span className="text-[13px] font-light leading-dense tracking-extra-tight text-gray-new-50">
+                      <span
+                        className={clsx(
+                          'text-[13px] font-light leading-dense tracking-extra-tight dark:text-gray-new-50',
+                          isThemeBlack ? 'text-gray-new-50' : 'text-gray-new-40'
+                        )}
+                      >
                         {description}
                       </span>
                     </span>
@@ -112,6 +140,7 @@ const MobileMenuItem = ({ text, to, items }) => {
 MobileMenuItem.propTypes = {
   text: PropTypes.string.isRequired,
   to: PropTypes.string,
+  isThemeBlack: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string,
@@ -160,7 +189,10 @@ const MobileMenu = ({ isThemeBlack, isBlogPage = false, isDocPage = false }) => 
         <AnimatePresence>
           {isMobileMenuOpen && (
             <m.nav
-              className="safe-paddings fixed inset-0 z-[-1] hidden flex-col justify-between bg-black-pure lg:flex"
+              className={clsx(
+                'safe-paddings fixed inset-0 z-[-1] hidden flex-col justify-between dark:bg-black-pure lg:flex',
+                isThemeBlack ? 'bg-black-pure' : 'bg-white'
+              )}
               initial="from"
               animate="to"
               exit="from"
@@ -169,12 +201,20 @@ const MobileMenu = ({ isThemeBlack, isBlogPage = false, isDocPage = false }) => 
               <div className="relative h-full pb-[108px] pt-[97px] sm:pb-[158px]">
                 <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 md:px-5">
                   {mobileMenuItems.map((item, index) => (
-                    <MobileMenuItem key={index} {...item} />
+                    <MobileMenuItem key={index} {...item} isThemeBlack={isThemeBlack} />
                   ))}
                 </ul>
-                <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-5 gap-y-3.5 bg-black-pure p-8 md:px-5 sm:grid-cols-1 sm:py-7">
+                <div
+                  className={clsx(
+                    'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-5 gap-y-3.5 p-8 dark:bg-black-pure md:px-5 sm:grid-cols-1 sm:py-7',
+                    isThemeBlack ? 'bg-black-pure' : 'bg-white'
+                  )}
+                >
                   <Button
-                    className="h-11 items-center justify-center !font-semibold tracking-tight"
+                    className={clsx(
+                      'h-11 items-center justify-center !font-semibold tracking-tight dark:!border-gray-new-15 dark:!text-white',
+                      !isThemeBlack && '!border-gray-new-90 !text-black-new'
+                    )}
                     to={LINKS.login}
                     theme="gray-15-outline"
                   >

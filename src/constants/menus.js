@@ -8,16 +8,6 @@ import careersIcon from 'icons/header/careers.svg';
 import caseStudiesIcon from 'icons/header/case-studies.svg';
 import cliIcon from 'icons/header/cli.svg';
 import enterpriseIcon from 'icons/header/enterprise.svg';
-import aboutUsOldIcon from 'icons/header/old/about-us.svg';
-import aiOldIcon from 'icons/header/old/ai.svg';
-import autoscalingOldIcon from 'icons/header/old/autoscaling.svg';
-import branchingOldIcon from 'icons/header/old/branching.svg';
-import careersOldIcon from 'icons/header/old/careers.svg';
-import caseStudiesOldIcon from 'icons/header/old/case-studies.svg';
-import cliOldIcon from 'icons/header/old/cli.svg';
-import enterpriseOldIcon from 'icons/header/old/enterprise.svg';
-import partnersOldIcon from 'icons/header/old/partners.svg';
-import onDemandStorageOldIcon from 'icons/header/old/storage.svg';
 import partnersIcon from 'icons/header/partners.svg';
 import onDemandStorageIcon from 'icons/header/storage.svg';
 import PostgresDocsIcon from 'icons/postgres.inline.svg';
@@ -31,46 +21,31 @@ export default {
       text: 'Features',
       items: [
         {
-          icon: {
-            new: branchingIcon,
-            old: branchingOldIcon,
-          },
+          icon: branchingIcon,
           text: 'Branching',
           description: 'Work with data like code',
           to: LINKS.branching,
         },
         {
-          icon: {
-            new: autoscalingIcon,
-            old: autoscalingOldIcon,
-          },
+          icon: autoscalingIcon,
           text: 'Autoscaling',
           description: 'Scale compute on demand',
           to: LINKS.autoscaling,
         },
         {
-          icon: {
-            new: cliIcon,
-            old: cliOldIcon,
-          },
+          icon: cliIcon,
           text: 'CLI',
           description: 'Neon in your terminal',
           to: LINKS.cliReference,
         },
         {
-          icon: {
-            new: onDemandStorageIcon,
-            old: onDemandStorageOldIcon,
-          },
+          icon: onDemandStorageIcon,
           text: 'On-demand storage',
           description: 'Custom-built for the cloud',
           to: LINKS.onDemandStorage,
         },
         {
-          icon: {
-            new: aiIcon,
-            old: aiOldIcon,
-          },
+          icon: aiIcon,
           text: 'AI',
           description: 'Neon as your vector store',
           to: LINKS.ai,
@@ -93,46 +68,31 @@ export default {
       text: 'Company',
       items: [
         {
-          icon: {
-            new: aboutUsIcon,
-            old: aboutUsOldIcon,
-          },
+          icon: aboutUsIcon,
           text: 'About us',
           description: 'Meet the team',
           to: LINKS.aboutUs,
         },
         {
-          icon: {
-            new: careersIcon,
-            old: careersOldIcon,
-          },
+          icon: careersIcon,
           text: 'Careers',
           description: 'Become a member',
           to: LINKS.careers,
         },
         {
-          icon: {
-            new: partnersIcon,
-            old: partnersOldIcon,
-          },
+          icon: partnersIcon,
           text: 'Partners',
           description: 'Become a partner',
           to: LINKS.partners,
         },
         {
-          icon: {
-            new: caseStudiesIcon,
-            old: caseStudiesOldIcon,
-          },
+          icon: caseStudiesIcon,
           text: 'Case studies',
           description: 'Explore customer stories',
           to: LINKS.caseStudies,
         },
         {
-          icon: {
-            new: enterpriseIcon,
-            old: enterpriseOldIcon,
-          },
+          icon: enterpriseIcon,
           text: 'Enterprise',
           description: 'Scale & grow',
           to: LINKS.enterprise,
