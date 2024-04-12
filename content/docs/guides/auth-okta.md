@@ -14,7 +14,9 @@ In this guide, we'll walk through building a simple Next.js application using [N
 - Define a database schema using Drizzle ORM and generate migrations
 - Store and retrieve user data associated with Okta user IDs
 
-**Note:** Okta provides a different solution called [Customer Identity Cloud](https://www.okta.com/customer-identity/), powered by `Auth0`, to authenticate external customers for Saas applications. This guide focuses on the [Workforce Identity Cloud](https://www.okta.com/workforce-identity/) for internal applications. For an example guide using `Auth0`, refer to our [Auth0](/docs/guides/auth-auth0) guide.
+<Admonition type="note">
+Okta provides a different solution called [Customer Identity Cloud](https://www.okta.com/customer-identity/), powered by `Auth0`, to authenticate external customers for Saas applications. This guide focuses on the [Workforce Identity Cloud](https://www.okta.com/workforce-identity/) for internal applications. For an example guide using `Auth0`, refer to our [Auth0](/docs/guides/auth-auth0) guide.
+</Admonition>
 
 ## Prerequisites
 
