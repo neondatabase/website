@@ -6,12 +6,19 @@ import { useState, useRef } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import RiveAnimation from 'components/shared/rive-animation';
+import branchingIcon from 'icons/home/hero/branching.svg';
+import serverlessIcon from 'icons/home/hero/serverless.svg';
 
 import Video from './video';
 
 const ITEMS = [
   {
-    videoUrl: '/videos/pages/home/ai-loop.mp4',
+    video: {
+      icon: serverlessIcon,
+      title: 'Serverless',
+      mp4: '/videos/pages/home/serverless.mp4',
+      webm: '/videos/pages/home/serverless.webm',
+    },
     title: 'Serverless',
     description:
       'We separated storage and compute to bring the best of serverless to Postgres: instant provisioning, autoscaling according to load, and scale to zero.',
@@ -19,7 +26,12 @@ const ITEMS = [
     linkUrl: '#',
   },
   {
-    videoUrl: '/videos/pages/home/ai-loop.mp4',
+    video: {
+      icon: branchingIcon,
+      title: 'Branching',
+      mp4: '/videos/pages/home/branching.mp4',
+      webm: '/videos/pages/home/branching.webm',
+    },
     title: 'Branching',
     description:
       'Neon uses copy-on-write to instantly branch your data and schema. Access isolated data copies for development, CI/CD, and schema changes.',
@@ -82,8 +94,8 @@ const Hero = () => {
                   : 'w-full'
               )}
               {...item}
-              isPlayVideo={currentVideoIndex === index}
-              switchVideo={() => switchVideo(index)}
+              isActive={currentVideoIndex === index}
+              switchVideo={() => switchVideo((currentVideoIndex + 1) % ITEMS.length)}
               ref={videoRefs[index]}
               key={index}
             />

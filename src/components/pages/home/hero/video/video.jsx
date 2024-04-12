@@ -1,50 +1,93 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { forwardRef, useState, useEffect } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Link from 'components/shared/link';
 
 const Video = forwardRef(
-  // eslint-disable-next-line react/prop-types
   (
-    { className, videoUrl, title, description, linkLabel, linkUrl, isPlayVideo, switchVideo },
+    {
+      className,
+      video: { icon, title: videoTitle, mp4, webm },
+      title,
+      description,
+      linkLabel,
+      linkUrl,
+      isActive,
+      switchVideo,
+    },
     videoRef
   ) => {
     const [visibilityRef, isInView] = useInView();
-    const [progress, setProgress] = useState(0);
+    const progressBarRef = useRef(null);
 
     useEffect(() => {
       const video = videoRef.current;
 
       const updateProgress = () => {
-        requestAnimationFrame(() => {
-          const { currentTime } = video;
-          const { duration } = video;
-          setProgress((currentTime / duration) * 100);
-        });
+        const progress = progressBarRef.current;
+        const percentage = (video.currentTime / video.duration) * 100;
+        progress.style.width = `${percentage}%`;
       };
 
-      if (isInView && isPlayVideo) {
+      if (isInView && isActive) {
         video.play();
       } else {
         video.pause();
       }
 
       video.addEventListener('timeupdate', updateProgress);
+      video.addEventListener('ended', switchVideo);
 
       return () => {
         video.removeEventListener('timeupdate', updateProgress);
+        video.removeEventListener('ended', switchVideo);
       };
-    }, [isInView, isPlayVideo, videoRef]);
-
-    const progressBarWidth = `${progress}%`;
+    }, [isInView, isActive, videoRef, switchVideo]);
 
     return (
-      <div className={className} ref={visibilityRef} onClick={switchVideo}>
-        <div className="rounded-[14px] bg-black-pure/40 p-1">
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+      <div
+        className={clsx(
+          'cursor-pointer',
+          {
+            'pointer-events-none cursor-default': isActive,
+          },
+          className
+        )}
+        ref={visibilityRef}
+        onClick={switchVideo}
+      >
+        <div
+          className={clsx(
+            'relative rounded-[14px] bg-black-pure/40 p-1 transition-opacity duration-300 hover:opacity-100',
+            isActive ? 'opacity-100' : 'opacity-50'
+          )}
+        >
+          <div
+            className={clsx(
+              'absolute left-10 top-11 opacity-0 transition-opacity duration-300 lt:left-8 lt:top-10 md:left-4 md:top-6',
+              {
+                'opacity-100': !isActive,
+              }
+            )}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="ml-auto w-auto md:h-6 xs:h-4"
+              height={32}
+              width={32}
+              src={icon}
+              alt=""
+              loading="eager"
+            />
+            <h2 className="font-title text-[64px] font-medium leading-none tracking-[-0.04em] text-white lt:text-[48px] md:text-[42px] xs:text-[30px]">
+              {videoTitle}
+            </h2>
+          </div>
           <video
-            className="h-[466px] rounded-[14px] mix-blend-lighten xl:h-[407px] md:h-[296px]"
+            className="h-[466px] rounded-[14px] mix-blend-lighten xl:h-[330px] md:h-[296px] sm:h-auto"
             height={466}
             width={704}
             controls={false}
@@ -52,21 +95,25 @@ const Video = forwardRef(
             muted
             playsInline
           >
-            <source src={videoUrl} type="video/mp4" />
+            <source src={mp4} type="video/mp4" />
+            <source src={webm} type="video/webm" />
           </video>
         </div>
         <div className="mt-5 px-1">
-          <h2 className="text-xl leading-dense tracking-tighter text-white md:text-lg">{title}</h2>
-          <div className="relative mt-3.5 h-px w-full bg-gray-new-15" aria-hidden>
-            <span
-              className="absolute left-0 top-0 h-full bg-[linear-gradient(90deg,rgba(228,229,231,0.10)_0%,#E4E5E7_100%)] duration-500"
-              style={{ width: progressBarWidth }}
+          <h3 className="text-xl leading-dense tracking-tighter text-white md:text-lg">{title}</h3>
+          <div className="mt-3.5 h-px w-full bg-gray-new-15" aria-hidden>
+            <div
+              className={clsx(
+                'h-full w-0 bg-[linear-gradient(90deg,rgba(228,229,231,0.10)_0%,#E4E5E7_100%)] opacity-0 [transition:width_0.5s_ease-out]',
+                isActive && 'opacity-100'
+              )}
+              ref={progressBarRef}
             />
           </div>
           <p
             className={clsx(
               'mt-3.5 max-w-[366px] font-light tracking-extra-tight transition-colors duration-200 md:text-[15px]',
-              isPlayVideo ? 'text-gray-new-80' : 'text-gray-new-40'
+              isActive ? 'text-gray-new-80' : 'text-gray-new-40'
             )}
           >
             {description}
@@ -86,12 +133,17 @@ const Video = forwardRef(
 
 Video.propTypes = {
   className: PropTypes.string,
-  videoUrl: PropTypes.string.isRequired,
+  video: PropTypes.shape({
+    icon: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    mp4: PropTypes.string.isRequired,
+    webm: PropTypes.string.isRequired,
+  }).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   linkLabel: PropTypes.string.isRequired,
   linkUrl: PropTypes.string.isRequired,
-  isPlayVideo: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool.isRequired,
   switchVideo: PropTypes.func.isRequired,
 };
 
