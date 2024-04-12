@@ -54,7 +54,7 @@ You can monitor usage metrics for your Neon account from the **Billing** page in
 
 For more information, see [Monitoring billing and usage](/docs/introduction/how-billing-works#monitoring-billing-and-usage).
 
-### Branches pages
+### Branches page
 
 The **Branches** page in the Neon Console provides branch-specific metrics, including:
 
