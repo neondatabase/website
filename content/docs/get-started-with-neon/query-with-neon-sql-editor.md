@@ -65,4 +65,33 @@ The Neon SQL Editor provides **Explain** and **Analyze** features.
 
 Understanding the information provided by the **Explain** and **Analyze** features requires familiarity with the Postgres [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) command and its `ANALYZE` parameter. Refer to the [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) documentation and the [Using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html) topic in the _PostgreSQL documentation_.
 
+## Using meta-commands
+
+The Neon SQL Editor supports the use of Postgres meta-commands, which act like shortcuts for interacting with your database. If you are already familiar with using meta-commands from the `psql` command-line interface, you can use those same commands right from the SQL Editor.
+
+### Available meta-commands
+
+Here are some of the meta-commands that you can use within the Neon SQL Editor:
+
+- `\dt` — List all tables in the current database.
+- `\d [table_name]` — Describe a table's structure.
+- `\l` — List all databases.
+
+For more information about meta-commands, see [PostgreSQL Meta-Commands](https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMANDS). Note that not all meta-commands are supported in the SQL Editor
+
+### How to Use Meta-Commands
+
+To use a meta-command in the SQL Editor:
+
+1. Enter the meta-command in the editor, just like you would a SQL query.
+1. Press **Run**. The result of the meta-command will be displayed in the output pane, similar to how SQL query results are shown.
+
+    For example, here's the schema for the `playing_with_neon` table we created above, using the meta-command `\d playing_with_neon`:
+
+   ![metacommand example](/docs/get-started-with-neon/sql_editor_metacommand.png)
+
+### Benefits of Meta-Commands
+
+Meta-commands can significantly speed up your workflow by providing quick access to database schemas and other critical information without needing to write full SQL queries. They are especially useful for database management tasks, making it easier to handle administrative duties directly from the Neon Console.
+
 <NeedHelp/>
