@@ -295,6 +295,10 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
+    - title: Authentication
+      items:
+        - title: Clerk
+          slug: guides/auth-clerk
     - title: For Partners
       slug: guides/partner-intro
       items:
