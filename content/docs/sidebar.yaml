@@ -301,6 +301,8 @@
           slug: guides/auth-auth0
         - title: Clerk
           slug: guides/auth-clerk
+        - title: Okta
+          slug: guides/auth-okta
     - title: For Partners
       slug: guides/partner-intro
       items:
