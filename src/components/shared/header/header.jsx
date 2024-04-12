@@ -34,7 +34,7 @@ const Header = ({
           className
         )}
       >
-        <Container className="flex items-center justify-between py-4 md:!px-5" size="1216">
+        <Container className="flex items-center justify-between py-4 md:!px-5" size="1344">
           <div className="flex items-center gap-x-16">
             <Link to="/">
               <span className="sr-only">Neon</span>

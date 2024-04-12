@@ -42,11 +42,11 @@ NavWithIcon.propTypes = {
 const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = false }) => (
   <aside
     className={clsx(
-      'relative col-start-1 col-end-4 max-w-[254px] before:absolute before:-bottom-20 before:-right-5 before:-top-[104px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-gray-new-10 lg:hidden',
+      'relative col-start-1 col-end-4 max-w-[254px] before:absolute before:-bottom-20 before:-right-5 before:-top-[104px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-[#0A0A0A] lg:hidden',
       className
     )}
   >
-    <div className="sticky top-[104px] z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-16 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-gray-new-10 dark:after:to-gray-new-10">
+    <div className="sticky top-[104px] z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-16 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-[#0A0A0A] dark:after:to-[#0A0A0A]">
       <Search className="z-30" indexName={indexName} />
       <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-8">
         {isPostgres ? (
