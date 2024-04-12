@@ -18,10 +18,12 @@ To follow this tutorial, you'll need:
 To simulate this scenario, create a `feature_flags` table used for controlling new feature availability.
 
 1. **Create `project_db` Database:**
-   - In the **Neon Console**, create a new database named `project_db`.
+   
+   In the **Neon Console**, create a new database named `project_db`.
 
 2. **Initialize `feature_flags` Table:**
-   - Execute the following in the **SQL Editor**, with `product_db` selected as the database:
+   
+   Execute the following in the **SQL Editor**, with `product_db` selected as the database:
 
     ```sql
     CREATE TABLE feature_flags (
@@ -31,7 +33,8 @@ To simulate this scenario, create a `feature_flags` table used for controlling n
     ```
 
 3. **Insert Sample Data:**
-   - Populate the table with an initial feature flag:
+   
+   Populate the table with an initial feature flag:
 
     ```sql
     INSERT INTO feature_flags (feature_name, enabled)
