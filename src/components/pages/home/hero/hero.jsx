@@ -51,7 +51,7 @@ const Hero = () => {
         artboard="hero"
       />
 
-      <Container className="2xl:px-10" size="1100">
+      <Container className="pointer-events-none 2xl:px-10" size="1100">
         <div className="text-center">
           <h1 className="font-title text-[88px] font-medium leading-dense -tracking-[0.03em] text-white xl:text-[72px] md:text-[56px] xs:text-[32px]">
             The Future of Postgres
@@ -69,7 +69,9 @@ const Hero = () => {
             Get Started
           </Button>
         </div>
+      </Container>
 
+      <Container className="2xl:px-10" size="1100">
         <div className="mt-[74px] flex gap-x-2.5 xl:mt-16 md:mt-14 sm:mt-9 sm:flex-col">
           {ITEMS.map((item, index) => (
             <Video
