@@ -29,7 +29,7 @@ const items = [
     icon: {
       src: branchIcon,
       alt: 'Branch',
-      width: 75,
+      width: 84,
       height: 27,
     },
   },
