@@ -189,6 +189,18 @@ Bold markup: **strong**
 monospace: `backtick`
 ```
 
+## Comment tags
+
+To comment out content in a markdown file use JSX comment tags. Other methods are not supported.
+
+```md
+{/* 
+
+content
+
+ */}
+```
+
 ## Code blocks
 
 To insert a code block into your Markdown file, specify three backticks (```) on the lines before and after the code. Specify the language identifier to enable code highlighting, as in this example:
