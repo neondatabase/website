@@ -90,8 +90,8 @@ const Trusted = () => (
           bgClassName="inset-0 lg:top-auto lg:bottom-[-6%] md:bottom-[-4%] sm:bottom-[-8%]"
           bgImage={elephantImage}
         >
-          <strong className="font-medium text-white">Actually just Postgres.</strong>{' '}
-          <span className="font-regular">With the Neon API, you can create account.</span>
+          <strong className="font-medium text-white">100% Postgres.</strong> Not a fork, not a
+          rewrite.
         </Card>
         <Card
           className="aspect-[192/247] lg:order-4 lg:aspect-[310/220] lg:justify-center"
