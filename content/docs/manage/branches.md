@@ -34,7 +34,7 @@ Any branch not designated as the primary branch is considered a non-primary bran
 
 ## Protected branch
 
-"Protected" is a status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch.  Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan, where you can designate up to 5 protected branches. For information about how to configure a protected branch, see [Set a branch as protected](#set-a-branch-as-protected).
+"Protected" is a status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan, where you can designate up to 5 protected branches. For information about how to configure a protected branch, see [Set a branch as protected](#set-a-branch-as-protected).
 
 ## Create a branch
 
