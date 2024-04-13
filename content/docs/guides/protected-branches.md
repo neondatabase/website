@@ -9,11 +9,11 @@ Neon's protected branches feature lets you apply IP restrictions to specific bra
 
 ## How to set up protected branches
 
-The protected branches feature works in combination with Neon's IP Allow feature. The basic setup steps are:
+The protected branches feature works in combination with Neon's [IP Allow](/docs/introduction/ip-allow) feature. The basic setup steps are:
 
-1. Define an IP allowlist for your project
-2. Restrict IP access to protected branches only
-3. Set a branch as protected
+1. [Define an IP allowlist for your project](#define-an-ip-allowlist-for-your-project)
+2. [Restrict IP access to protected branches only](#restrict-ip-access-to-protected-branches-only)
+3. [Set a branch as protected](#set-a-branch-as-protected)
 
 ## Define an IP allowlist for your project
 
@@ -90,6 +90,8 @@ curl -X PATCH \
 
 </Tabs>
 
+For details specifying IP addresses, see [How to specify IP addresses](/docs/manage/projects#how-to-specify-ip-addresses).
+
 ## Restrict IP access to protected branches only
 
 After defining an IP allowlist, the next step is to select the **Restrict access to protected branches only** option.
@@ -98,7 +100,7 @@ After defining an IP allowlist, the next step is to select the **Restrict access
 
 This option removes IP restrictions from _all branches_ in your Neon project and applies them to protected branches only.
 
-After you've selected the protectd branches option, click **Save changes** to apply the new configuration.
+After you've selected the protected branches option, click **Save changes** to apply the new configuration.
 
 ## Set a branch as protected
 
@@ -120,7 +122,7 @@ To set a branch as protected:
 
     ![Set as protected confirmation](/docs/guides/ip_allow_set_as_protected_confirmation.png)
 
-    Your branch is now designated as protected, as indicated by the protected branch shield. Only IP addresses on your IP allowlist will be able to connect to this branch. The other branches in your project will not have IP restrictions.
+    Your branch is now designated as protected, as indicated by the protected branch shield, shown below. Only IP addresses on your IP allowlist will be able to connect to this branch. The other branches in your project do not have IP restrictions.
 
     ![Branch page badge](/docs/guides/ip_allow_branch_badge.png)
 
@@ -128,3 +130,8 @@ To set a branch as protected:
 
     ![Branches page badge](/docs/guides/ip_allow_branch_badge_2.png)
 
+<Admonition type="note">
+Removing a protected branch designation can be done from the **More** drop-down menu on the branches page. 
+</Admonition>
+
+<NeedHelp/>
