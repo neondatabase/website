@@ -20,10 +20,15 @@ This page provides additional information to help you understand our plans and f
 
 ## Pricing plans
 
-Neon offers four pricing plans: [Free Tier](#free-tier), [Launch](#launch), [Scale](#scale), and [Enterprise](#enterprise).
+Neon offers four plans: 
+
+- [Free Tier](#free-tier)
+- [Launch](#launch)
+- [Scale](#scale)
+- [Enterprise](#enterprise)
 
 <Admonition type="tip" title="Plan Allowances and Extra Usage">
-Neon plans are structured around **Allowances** and **Extra usage**. All plans include allowances. For paid plans, allowances are included in the plan's monthly fee. Neon's Launch and Scale plans support **Extra usage** for a fee. 
+Neon plans are structured around **Allowances** and **Extra usage**. The Free Tier, Launch, and Scale plans include allowances for projects, branches, databases, compute, and storage. Paid plan allowances are included in the plan's monthly fee. The Launch and Scale plans support extra usage for a fee. The Enterprise plan is fully customizable.
 </Admonition>
 
 ### Free Tier
@@ -34,7 +39,7 @@ Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon.
 
 The Free Tier includes the following usage allowances:
 
-|                                         |                                                               |
+| Usage type                              | Plan allowance                                                |
 |-----------------------------------------|---------------------------------------------------------------|
 | **Projects**                            | 1 Neon project                                                |
 | **Branches**                            | 10 branches                                                   |
@@ -63,7 +68,7 @@ The Launch plan provides all of the resources, features, and support you need to
 
 The Launch plan includes the following usage allowances:
 
-|                                         |                                                               |
+| Usage type                              | Plan allowance                                                |
 |-----------------------------------------|---------------------------------------------------------------|
 | **Projects**                            | 10 Neon projects                                              |
 | **Branches**                            | 500                                                  |
@@ -75,9 +80,9 @@ The Launch plan includes the following usage allowances:
 
 Launch plan users have access to [extra compute and storage](/docs/introduction/how-billing-works#extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
-|                                         |                                                               |
+|  Extra usage type                             | Cost                                                |
 |-----------------------------------------|---------------------------------------------------------------|
-| **Extra Storage**                             |  Billed for in units of 2 GiB at $3.5 per unit, prorated for the month                                 |
+| **Extra Storage**                             |  Billed for in units of 2 GiB at $3.5 per unit, prorated for the month    |
 | **Extra Compute**                             |  Billed by compute hour at $0.16 per hour                                 |
 
 In addition, Launch plan users have access to the following Neon features:
@@ -95,7 +100,7 @@ The Scale plan provides full platform and support access and is designed for sca
 
 The Scale plan includes the following usage allowances:
 
-|                                         |                                                               |
+| Usage type                              |  Plan allowance                                                             |
 |-----------------------------------------|---------------------------------------------------------------|
 | **Projects**                            | 50 Neon projects                                        |
 | **Branches**                            | 500                                                           |
@@ -107,7 +112,7 @@ The Scale plan includes the following usage allowances:
 
 Launch plan users have access to [extra compute and storage](/docs/introduction/how-billing-works#extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
-|                                         |                                                               |
+|  Extra usage type                                       | Clost                                                              |
 |-----------------------------------------|---------------------------------------------------------------|
 | **Extra Storage**                             |   Billed for in units of 10 GiB at $15 per unit, prorated for the month                               |
 | **Extra Compute**                             |   Billed by compute hour at $0.16 per hour                                |
@@ -126,7 +131,7 @@ The Enterprise plan is a custom plan intended for large teams, enterprises requi
 
 Enterprise plan usage is entirely customizable and can support large data sizes.
 
-|                                         |                                                               |
+| Usage type                              | Plan allowance                                                |
 |-----------------------------------------|---------------------------------------------------------------|
 | **Projects**                            | Unlimited                                        |
 | **Branches**                            | Custom                                                           |
@@ -164,7 +169,7 @@ Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources
 
 #### Autosuspend
 
-Neon's _Autosuspend_ feature controls when a Neon compute instance transitions to an Idle state (scales to zero) due to inactivity. By default, a Neon compute instance scales to zero after 5 minutes of inactivity. For [Neon Free Tier](#free-tier) users, this setting is fixed. Users on paid plans can configure or disable the autosuspend setting, controlling when or if a compute scales to zero.
+Neon's _Autosuspend_ feature controls when a Neon compute instance transitions to an Idle state (scales to zero) due to inactivity. By default, a Neon compute instance scales to zero after 5 minutes of inactivity. For [Neon Free Tier](#free-tier) users, this setting is fixed. Users on paid plans can configure or disable the autosuspend setting, controlling when or if a compute scales to zero. For more information, refer to our [Autosuspend](/docs/guides/auto-suspend-guide) guide.
 
 #### Region availability
 
