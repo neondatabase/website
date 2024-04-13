@@ -121,6 +121,8 @@ To designate a branch as protected:
 4. On the branch page, click the **More** drop-down menu and select **Set as protected**.
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
 
+For step-by-step instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
+
 ## Connect to a branch
 
 Connecting to a database in a branch requires connecting via a compute endpoint associated with the branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.

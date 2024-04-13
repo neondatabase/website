@@ -364,7 +364,7 @@ A Neon component that functions as a multitenant service that accepts and handle
 
 ## Protected branch
 
-A status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan. For information about how to configure a protected branch, see [Set a branch as protected](#set-a-branch-as-protected).
+A status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan. For information about how to configure a protected branch, refer to the [Protected branches guide](/docs/guides/protected-branches).
 
 ## Publisher
 

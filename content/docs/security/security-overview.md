@@ -23,7 +23,7 @@ Neon's IP Allow feature, available with the [Scale](/docs/introduction/plans#sca
 
 ## Protected branches
 
-You can designate any branch as a "protected branch". A protected status limits access to the branch based on IP addresses. Only IPs listed in your project’s IP allowlist can access this branch. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan. For information about how to configure a protected branch, see [Set a branch as protected](#set-a-branch-as-protected). 
+You can designate any branch as a "protected branch". A protected status limits access to the branch based on IP addresses. Only IPs listed in your project’s IP allowlist can access this branch. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
 
 ## Data-at-rest encryption
 
