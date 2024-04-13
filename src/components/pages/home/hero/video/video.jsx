@@ -27,8 +27,8 @@ const Video = forwardRef(
 
       const updateProgress = () => {
         const progress = progressBarRef.current;
-        const percentage = (video.currentTime / video.duration) * 100;
-        progress.style.width = `${percentage}%`;
+        const percentage = (video.currentTime + 0.2) / video.duration;
+        progress.style.transform = `scaleX(${percentage})`;
       };
 
       if (isInView && isActive) {
@@ -101,10 +101,10 @@ const Video = forwardRef(
         </div>
         <div className="mt-5 px-1">
           <h3 className="text-xl leading-dense tracking-tighter text-white md:text-lg">{title}</h3>
-          <div className="mt-3.5 h-px w-full bg-gray-new-15" aria-hidden>
+          <div className="mt-3.5 h-px w-full overflow-hidden bg-gray-new-15" aria-hidden>
             <div
               className={clsx(
-                'h-full w-0 bg-[linear-gradient(90deg,rgba(228,229,231,0.10)_0%,#E4E5E7_100%)] opacity-0 [transition:width_0.5s_ease-out]',
+                'h-full w-full origin-left scale-x-0 bg-[linear-gradient(90deg,rgba(228,229,231,0.10)_0%,#E4E5E7_100%)] opacity-0 transition-[transform,opacity] duration-[400ms] ease-linear',
                 isActive && 'opacity-100'
               )}
               ref={progressBarRef}
