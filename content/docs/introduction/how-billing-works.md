@@ -59,7 +59,7 @@ Extra storage is available with the [Launch](/docs/introduction/plans##launch) a
 | Scale   | 10 GiB            | $15           |
 
 
-For example, the Launch plan includes an allowance of 10 GiB in the plan's monthly fee. If you exceed 10 GiB of storage at any point during the month, you are automatically billed for an extra storage unit of 2 GiB at $3.5 per unit. If you exceed 12 GiB, you are billed for 2 units of 2 GiB (an extra $7), and so on. It works the same way on the Storage plan, but with 10 GiB units of storage at $15 per unit. However, the extra storage charge is prorated for the month. 
+For example, the Launch plan includes an allowance of 10 GiB in the plan's monthly fee. If you exceed 10 GiB of storage at any point during the month, you are automatically billed for an extra storage unit of 2 GiB at $3.5 per unit. If you exceed 12 GiB, you are billed for 2 units of 2 GiB (an extra $7), and so on. It works the same way on the Scale plan, but with 10 GiB units of storage at $15 per unit. However, the extra storage charge is prorated for the month. 
 
 <Admonition type="note" title="How extra storage charges are prorated">
 The proration formula for calculating the cost of extra storage purchased at some point during a monthly billing period is:
@@ -171,7 +171,7 @@ _Total estimate_: $69 + $15 + $8 + $50 = $142 per month
 
 <Admonition type="note" title="Notes">
 - Adjust your usage estimates as needed to reflect your actual or projected usage.
-- Extra storage costs are prorated based when the storage was purchased during the monthly billing period. See [Storage](#storage) for the proration formula.
+- Extra storage costs are prorated based on when the storage was purchased during the monthly billing period. See [Storage](#storage) for the proration formula.
 - For Enterprise plan users, please contact our [Sales](/contact-sales) team for an estimate based on your custom needs.
 </Admonition>
 

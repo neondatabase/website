@@ -358,6 +358,10 @@ A feature that allows you to share Neon projects with other Neon users. See [Sha
 
 The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Storage](/docs/introduction/usage-metrics#storage).
 
+## Prorate
+
+Adjusting a payment or charge so it corresponds to the actual usage or time period involved, rather than charging a full amount. Neon prorates the cost for extra units of storage when you exceed your plan's allowance. For example, if you purchase an extra unit of storage halfway through the monthly billing period, you are only charged half the unit price.
+
 ## Proxy
 
 A Neon component that functions as a multitenant service that accepts and handles connections from clients that use the Postgres protocol.
