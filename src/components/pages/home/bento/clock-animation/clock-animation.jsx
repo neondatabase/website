@@ -7,22 +7,24 @@ import { useEffect, useState, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 const DELAY_BEFORE_COUNTDOWN = 800;
-const DELAY_AFTER_COUNTDOWN = DELAY_BEFORE_COUNTDOWN + 1000;
-const COUNTDOWN_DURATION = 3500;
+const DELAY_AFTER_COUNTDOWN = DELAY_BEFORE_COUNTDOWN + 900;
+const COUNTDOWN_DURATION = 3400;
 const MINUTES_DOWN_RESULT = 720;
 
 const useCurrentTime = () => {
   const [time, setTime] = useState({
     hours: new Date().getHours(),
     minutes: new Date().getMinutes(),
+    dayOfWeek: new Date().getDay(),
   });
 
   const updateTime = (minutesAdjustment = 0) => {
     const updatedTime = new Date(new Date().getTime() - minutesAdjustment * 60000);
-    setTime({
+    setTime((prev) => ({
+      ...prev,
       hours: updatedTime.getHours(),
       minutes: updatedTime.getMinutes(),
-    });
+    }));
   };
 
   return [time, updateTime];
@@ -69,7 +71,7 @@ const ClockAnimation = ({
     { rootMargin: '200px 0px 200px 0px' },
     { threshold: 0.5 }
   );
-  const [{ hours, minutes }, updateTime] = useCurrentTime();
+  const [{ hours, minutes, dayOfWeek }, updateTime] = useCurrentTime();
   const [containerRef, isIntersecting] = useInView({
     triggerOnce: true,
     rootMargin: intersectionRootMargin,
@@ -92,9 +94,11 @@ const ClockAnimation = ({
     },
   });
 
+  useStateMachineInput(rive, stateMachines, 'day', dayOfWeek);
   const countDownInput = useStateMachineInput(rive, stateMachines, 'coundown');
   const resetCountDownInput = useStateMachineInput(rive, stateMachines, 'reset');
   const indicatorInput = useStateMachineInput(rive, stateMachines, 'indicator-reverse', isDayTime);
+  const amPmInput = useStateMachineInput(rive, stateMachines, 'AM/PM', hours > 12);
 
   const hourTensInput = useStateMachineInput(
     rive,
@@ -143,11 +147,14 @@ const ClockAnimation = ({
         if (now < endTime) {
           animationFrameId = requestAnimationFrame(step);
         } else {
+          const amPmAdditionalUpdates = setInterval(() => {
+            amPmInput.value = !amPmInput.value;
+          }, 100);
           timeoutIds.push(
-            setTimeout(
-              () => updateTime(minutesAdjustment + MINUTES_DOWN_RESULT - 3),
-              DELAY_AFTER_COUNTDOWN
-            ),
+            setTimeout(() => {
+              clearInterval(amPmAdditionalUpdates);
+              updateTime(minutesAdjustment + MINUTES_DOWN_RESULT - 3);
+            }, DELAY_AFTER_COUNTDOWN),
             setTimeout(
               () => updateTime(minutesAdjustment + MINUTES_DOWN_RESULT - 2),
               DELAY_AFTER_COUNTDOWN + 500
@@ -221,7 +228,14 @@ const ClockAnimation = ({
   // timer control
   useEffect(
     () => {
-      if (!rive || !hourOnesInput || !hourTensInput || !minuteOnesInput || !minuteTensInput) {
+      if (
+        !rive ||
+        !hourOnesInput ||
+        !hourTensInput ||
+        !minuteOnesInput ||
+        !minuteTensInput ||
+        !amPmInput
+      ) {
         return;
       }
 
@@ -229,6 +243,7 @@ const ClockAnimation = ({
       hourOnesInput.value = hours % 10;
       minuteTensInput.value = Math.floor(minutes / 10);
       minuteOnesInput.value = minutes % 10;
+      amPmInput.value = hours > 12;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [rive, minutes, isVisible]
