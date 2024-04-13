@@ -160,6 +160,8 @@
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
               slug: guides/read-replica-prisma
+        - title: Protected branches
+          slug: guides/protected-branches
     - title: Frameworks
       items:
         - title: Astro
