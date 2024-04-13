@@ -14,11 +14,7 @@ redirectFrom:
 updatedOn: '2024-02-27T16:17:40.463Z'
 ---
 
-Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [pricing](https://neon.tech/pricing) page for an overview of plan features and pricing. 
-
-This page provides additional information to help you understand our plans and find the one that's right for you.
-
-## Pricing plans
+Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [pricing](https://neon.tech/pricing) page for pricing and a feature comparison. 
 
 Neon offers four plans: 
 
@@ -31,11 +27,11 @@ Neon offers four plans:
 Neon plans are structured around **Allowances** and **Extra usage**. The Free Tier, Launch, and Scale plans include allowances for projects, branches, databases, compute, and storage. Paid plan allowances are included in the plan's monthly fee. The Launch and Scale plans support extra usage for a fee. The Enterprise plan is fully customizable.
 </Admonition>
 
-### Free Tier
+## Free Tier
 
 Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon.
 
-#### Allowances
+### Allowances
 
 The Free Tier includes the following usage allowances:
 
@@ -46,6 +42,8 @@ The Free Tier includes the following usage allowances:
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | 0.5 GiB                                                       |
 | **Compute**                             | Always-available primary branch compute, 5 compute hours (20 _active hours_)/month on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM. |
+
+### Features
 
 In addition, Free Tier users have access to the following Neon features:
 
@@ -60,11 +58,11 @@ In addition, Free Tier users have access to the following Neon features:
 On the Free Tier, your primary branch compute is always available — it will never be suspended due to running out of compute hours, which means you can always access the data on the primary branch in your Neon project. Branch computes have 20 [active hours](/docs/reference/glossary#active-time) (5 [compute hours](/docs/reference/glossary#compute-hour)) per month. If your branch computes exceed this allowance, they are suspended until the allowance resets at the beginning of the month. You can monitor branch compute hours on the [Billing page](/docs/introduction/manage-billing#view-the-billing-page) in the Neon Console. The compute hour allowance for branch computes resets at the beginning of each month. For instance, if you enrolled in the Neon Free Tier in January, the allowance for branch computes resets on February 1st.
 </Admonition>
 
-### Launch
+## Launch
 
 The Launch plan provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses or applications. 
 
-#### Allowances
+### Allowances
 
 The Launch plan includes the following usage allowances:
 
@@ -76,7 +74,7 @@ The Launch plan includes the following usage allowances:
 | **Storage**                             | 10 GiB of data storage                                  |
 | **Compute**                             | 300 compute hours (1,200 _active hours_)/month for all computes in all projects |
 
-#### Extra usage
+### Extra usage
 
 Launch plan users have access to [extra compute and storage](/docs/introduction/how-billing-works#extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
@@ -85,6 +83,8 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 | **Extra Storage**                             |  Billed for in units of 2 GiB at $3.5 per unit, prorated for the month    |
 | **Extra Compute**                             |  Billed by compute hour at $0.16 per hour                                 |
 
+### Features
+
 In addition, Launch plan users have access to the following Neon features:
 
 - [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** or never).
@@ -92,11 +92,11 @@ In addition, Launch plan users have access to the following Neon features:
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **7 days** in the past, time travel connections, and more.
 - [Standard support](/docs/introduction/support): Launch plan users have access to **Standard** Neon support, which offers access to the Neon Support team via support tickets.
 
-### Scale
+## Scale
 
 The Scale plan provides full platform and support access and is designed for scaling production workloads.
 
-#### Allowances
+### Allowances
 
 The Scale plan includes the following usage allowances:
 
@@ -108,7 +108,7 @@ The Scale plan includes the following usage allowances:
 | **Storage**                             | 50 GiB of data storage                                  |
 | **Compute**                             | 750 compute hours (3,000 _active hours_)/month for all computes in all projects |
 
-#### Extra usage
+### Extra usage
 
 Launch plan users have access to [extra compute and storage](/docs/introduction/how-billing-works#extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
@@ -118,6 +118,8 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 | **Extra Compute**                             |   Billed by compute hour at $0.16 per hour                                |
 | **Extra Projects**                             |   Billed for in units of 10 at $50 per unit                                |
 
+### Features
+
 In addition, Scale plan users have access to the following Neon features:
 
 - [All compute features](#compute-features): Includes [compute sizes](#compute-size) up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** or never).
@@ -125,7 +127,7 @@ In addition, Scale plan users have access to the following Neon features:
 - [All additional features](#additional-features): Includes [point-in-time restore](#point-in-time-recovery) up to **30 days** in the past, time travel connections, and more.
 - [Priority support](/docs/introduction/support): Scale plan users have access to **Priority** Neon support, which offers _priority_ access to the Neon Support team via support tickets.
 
-### Enterprise
+## Enterprise
 
 The Enterprise plan is a custom plan intended for large teams, enterprises requiring database fleets, or SaaS vendors interested in reselling Neon or integrating Neon into their service.
 
