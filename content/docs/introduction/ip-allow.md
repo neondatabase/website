@@ -13,4 +13,4 @@ You can configure **IP Allow** in your Neon project's settings. To get started, 
 
 ## Protected branches
 
-For more granular control over how IP restrictions are applied within your Neon project, you can designate specific branches as protected and restrict access to those branches only by selecting the **Restrict IP access to protected branches only** option. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, see [Set a branch as protected](#set-a-branch-as-protected).
+You can apply IP restrictions more precisely by designating specific branches in your Neon project as protected and enabling the **Restrict IP access to protected branches only** option. Typically, branches that contain production or sensitive data are marked as protected. For instructions on setting up protected branches, refer to [Set a branch as protected](#set-a-branch-as-protected).
