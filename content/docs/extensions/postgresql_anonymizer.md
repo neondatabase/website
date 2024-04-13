@@ -51,7 +51,7 @@ CREATE TABLE customers (
 Let's insert some sample data into the `customers` table:
 
 ```sql
-INSERT INTO customers (first_name, last_name, email, phone, credit_card)
+INSERT INTO customers (first_name, last_name, email, credit_card, join_date)
 VALUES
     ('John', 'Doe', 'john.doe@example.com', '4111111111111111', '2022-01-15'),
     ('Jane', 'Smith', 'jane.smith@example.com', '4222222222222222', '2022-07-24'),
@@ -70,7 +70,7 @@ Static masking is a _destructive_ operation since it permanently replaces the or
 
 `Neon` offers a unique `branching` feature that lets you make copies of your database. They are low-cost, copy-on-write clones of your database that are created instantly, for testing, development, or other purposes. To create a new branch, navigate to your Neon project in the dashboard and click on the `Branches` tab from the sidebar. Click on the `Create Branch` button to create a new branch and give it a name, such as `masked_data`. 
 
-If you are using `psql`, you can fetch the connection string for the new branch by selecting it from the list of branches in the `Connection Details` section on the `Project overview` page. The `SQL Editor` in the Neon console also has a dropdown to select the branch you want to run queries against. 
+If you are using `psql`, you can fetch the connection string for the new branch by selecting it from the list of branches in the `Connection Details` section of your Neon project dashboard. The `SQL Editor` in the Neon console also has a dropdown to select the branch you want to run queries against. 
 
 #### Defining masking rules
 
@@ -88,7 +88,7 @@ IS 'MASKED WITH FUNCTION anon.fake_email()';
 
 -- Mask credit card numbers
 SECURITY LABEL FOR anon ON COLUMN customers.credit_card
-IS 'MASKED WITH FUNCTION anon.partial(credit_card, 2, ''*'', 4)';
+IS 'MASKED WITH FUNCTION anon.partial(credit_card, 2, ''xx-xxxx-xxxx-'', 4)';
 ```
 
 In this example, `anon.fake_email` replaces email addresses with fake email addresses that preserve the format. While, `anon.partial` masks credit card numbers by replacing all but the first 2 and the last 4 digits with asterisks. 
@@ -105,57 +105,75 @@ Now, to verify that the data has been masked, you can query the `customers` tabl
 SELECT * FROM customers;
 ```
 
-This query returns the masked data:
+This query returns the following data:
 
 ```text
+ customer_id | first_name | last_name |          email           |     credit_card     | join_date
+-------------+------------+-----------+--------------------------+---------------------+------------
+           1 | John       | Doe       | sjimenez@graham.org      | 41xx-xxxx-xxxx-1111 | 2022-01-15
+           2 | Jane       | Smith     | lukereed@smith.info      | 42xx-xxxx-xxxx-2222 | 2022-07-24
+           3 | Alice      | Johnson   | whitneyjodi@rojas.com    | 43xx-xxxx-xxxx-3333 | 2023-02-11
+           4 | Bob        | Williams  | mckinneydakota@yahoo.com | 44xx-xxxx-xxxx-4444 | 2023-09-30
+           5 | Emma       | Brown     | xritter@yahoo.com        | 45xx-xxxx-xxxx-5555 | 2024-03-17
+(5 rows)
 ```
+
+We can see that the `email` and `credit_card` columns have been replaced with fake/masked values, while the other columns remain unchanged. 
 
 ### Dynamic masking
 
 To mask the data in real-time when it is queried, without altering the original data, you can use dynamic masking. 
 
-This is specifically helpful for scenarios where you need to share data with third parties or for testing purposes. You can create a new role for the test users and apply masking rules that apply only when the role is used to query the data. This way, the original database and queries can be used for development and testing purposes without exposing sensitive information.
+This is specifically helpful for scenarios where you need to share data with third parties or for testing purposes. You can create a new role for the test users and apply masking rules that apply only when the role is used to query the data. This way, the original database and queries can be used for development and testing purposes without exposing sensitive information. 
+
+We will revert back to the `main` branch of the project for this example since dynamic masking rules can be applied and removed at any time without affecting the original data.
 
 #### Creating a new role
 
 To create a new role, run the following SQL statement:
 
 ```sql
-CREATE ROLE test_user;
-GRANT SELECT ON customers TO test_user;
-
+CREATE ROLE test_user LOGIN password 'change-me-123';
+GRANT SELECT ON TABLE customers TO test_user;
 SECURITY LABEL FOR anon ON ROLE test_user IS 'MASKED';
 ```
 
-```sql
--- Start dynamic masking for `masked` users like `test_user`
-SELECT anon.start_dynamic_masking();
+In this example, we created a new role `test_user` with a password and granted `SELECT` permission on the `customers` table. We also applied a security label to it to indicate that any masking rules defined for the database will apply when the `test_user` role is used to query the data. 
 
--- Mask email addresses
+Now, we can define some dynamic masking rules for the `customers` table. 
+
+```sql
 SECURITY LABEL FOR anon ON COLUMN customers.email
 IS 'MASKED WITH FUNCTION anon.fake_email()';
-
--- Mask join dates by a month
 SECURITY LABEL FOR anon ON COLUMN customers.join_date
 IS 'MASKED WITH FUNCTION anon.dnoise(customers.join_date, ''28 days''::interval)';
+SELECT anon.start_dynamic_masking();
 ```
 
-In this example, we are masking the `email` column with fake email addresses and the `join_date` column by adding noise to the date. To test the dynamic masking, you can switch to the `test_user` role and query the `customers` table:
+In this example, we are masking the `email` column with fake email addresses and the `join_date` column by adding noise to the date. To test the dynamic masking, connect to the database using the `test_user` role and query the `customers` table:
 
 ```sql
-SET ROLE test_user;
-
 SELECT * FROM customers;
 ```
 
-The query results will show the masked data for the `email` and `join_date` columns, while the other columns will remain unmasked. The results will look like this:
+The results will look similar to this:
 
 ```text
+ customer_id | first_name | last_name |            email            |   credit_card    | join_date
+-------------+------------+-----------+-----------------------------+------------------+------------
+           1 | John       | Doe       | avaughan@johnson-snyder.com | 4111111111111111 | 2022-01-20
+           2 | Jane       | Smith     | xmiller@green.biz           | 4222222222222222 | 2022-08-02
+           3 | Alice      | Johnson   | sandradunlap@klein.info     | 4333333333333333 | 2023-02-10
+           4 | Bob        | Williams  | dustinhardin@hotmail.com    | 4444444444444444 | 2023-10-26
+           5 | Emma       | Brown     | ddominguez@anthony.com      | 4555555555555555 | 2024-03-26
+(5 rows)
 ```
 
+The query results have masked data for the `email` and `join_date` columns, while the other columns retain their original values.
+
 ## Conclusion
+
 The `postgresql_anonymizer` extension provides a powerful and flexible way to protect sensitive data in your Postgres database. By leveraging static and dynamic masking techniques, you can ensure that sensitive information is anonymized while still preserving the utility of the data for various purposes, such as testing, analytics, or sharing with third parties.
 
 ## Reference
 - [postgresql_anonymizer Documentation](https://gitlab.com/dalibo/postgresql_anonymizer)
-- [PostgreSQL Data Masking Techniques](https://www.postgresql.org/docs/current/ddl-others.html#DDL-DATA-MASKING)
