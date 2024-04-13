@@ -90,7 +90,7 @@ curl -X PATCH \
 
 </Tabs>
 
-For details specifying IP addresses, see [How to specify IP addresses](/docs/manage/projects#how-to-specify-ip-addresses).
+For details about specifying IP addresses, see [How to specify IP addresses](/docs/manage/projects#how-to-specify-ip-addresses).
 
 ## Restrict IP access to protected branches only
 
@@ -113,7 +113,7 @@ To set a branch as protected:
 
     ![Branch page](/docs/guides/ip_allow_branch_page.png)
 
-3. Select a branch from the table. In this example, we'll set our primary branch `main` as a protected branch.
+3. Select a branch from the table. In this example, we'll configure our primary branch `main` as a protected branch.
 4. On the branch page, click the **More** drop-down menu and select **Set as protected**.
 
     ![Set as protected](/docs/guides/ip_allow_set_as_protected.png)
@@ -122,7 +122,11 @@ To set a branch as protected:
 
     ![Set as protected confirmation](/docs/guides/ip_allow_set_as_protected_confirmation.png)
 
-    Your branch is now designated as protected, as indicated by the protected branch shield, shown below. Only IP addresses on your IP allowlist will be able to connect to this branch. The other branches in your project do not have IP restrictions.
+    Your branch is now designated as protected, as indicated by the protected branch shield icon, shown below. Only the trusted IP addresses on your IP allowlist will be able to connect to this branch.
+
+    <Admonition type="note">
+    Other branches in your project will not restrict IP access.
+    </Admonition>
 
     ![Branch page badge](/docs/guides/ip_allow_branch_badge.png)
 
@@ -131,7 +135,7 @@ To set a branch as protected:
     ![Branches page badge](/docs/guides/ip_allow_branch_badge_2.png)
 
 <Admonition type="note">
-Removing a protected branch designation can be done from the **More** drop-down menu on the branches page. 
+Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **More** drop-down menu on the branch page.
 </Admonition>
 
 <NeedHelp/>
