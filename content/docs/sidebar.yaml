@@ -29,7 +29,7 @@
           slug: introduction/ip-allow
     - title: Regions
       slug: introduction/regions
-    - title: Billing
+    - title: Plans and billing
       slug: introduction/about-billing
       items:
         - title: Plans

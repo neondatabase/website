@@ -1,5 +1,5 @@
 ---
-title: Billing
+title: Plans and billing
 enableTableOfContents: true
 subtitle: Learn about Neon's pricing plans and billing
 updatedOn: '2024-01-23T17:45:24.324Z'
