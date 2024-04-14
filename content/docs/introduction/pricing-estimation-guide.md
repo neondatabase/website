@@ -1,7 +1,7 @@
 ---
 title: Pricing estimation guide
 enableTableOfContents: true
-subtitle: Estimate your monthly bill with Neon Postgres
+subtitle: Estimate your monthly bill with Neon
 redirectFrom:
   - /docs/introduction/how-billing-works#neon-pricing-estimation-guide
 ---
@@ -101,3 +101,5 @@ Total Estimate = Plan Fee + Extra Storage Fee + Extra Compute Fee + Extra Projec
 | Compute Usage | 800 hours (50 hours over, $8 extra)|
 | Project Usage | 55 projects (5 over, $50 extra)    |
 | **Total Estimate**| $142 per month                 |
+
+For examples where limits are exceeded mid-month and usage fluctuates during the billing period, see [Extra usage](/docs/introduction/extra-usage).
