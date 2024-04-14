@@ -48,9 +48,9 @@ _Storage_ is the total volume of data and history stored in Neon, measured in gi
 **Storage** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 
 <Admonition type="tip" title="Tips for minimizing storage">
-- Minimize your history retention period. Your retention period dictates how much database change history you retain, which adds to storage. A quick way to reduce storage usage is to decrease your history retention period. On the other hand, decreasing your history retention period reduces the window available for point-in-time restore or time travel connections. See [History retention](https://neon.tech/docs/introduction/point-in-time-restore#history-retention).
-- Counterintuitively, deleting records from a table can increase storage, as those records are only delete-marked initially, and the delete operations are added to your change history. A `DELETE TABLE` operation is more effective, as it does not substantively increase your history size.
-- Remove or reset branches before they fall out of your history retention period. For example, if your history retention period is 7 days, remove branches before they age beyond this 7-day window, in which they share a change history with the parent branch.
+- Minimize your history retention period, which controls how much change history your project retains in the form of WAL records. On the other hand, decreasing your history retention period reduces the window available for point-in-time restore or time travel connections. See [History retention](https://neon.tech/docs/introduction/point-in-time-restore#history-retention) for more information.
+- Counterintuitively, deleting records from a table increases storage, as those delete operations are added to your change history. A `DELETE TABLE` operation is more storage-efficient if you are removing all records from a table.
+- Remove or reset branches before they fall out of your history retention period. Otherwise, a change history must be held for those branches, which increases storage.
 </Admonition>
 
 ## Compute
