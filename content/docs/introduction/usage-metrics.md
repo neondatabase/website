@@ -116,6 +116,6 @@ The following table outlines project allowances for each Neon plan.
 | Enterprise | Unlimited |
 
 - When you reach your limit on the [Free Tier](/docs/introduction/plans#free-tier) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch) or [Scale](/docs/introduction/plans#scale) plan, which offer allowances of 10 and 50 projects, respectively.
-- Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in increments of 10 for $50 each. If you use more than 50 projects, you are automatically billed for an extra package of 10 projects. For example, if you use 51 projects during the billign period, you are billed for a package of 10 projects for the month($50). If you use 61 projects, you are billed for two packages of 10 projects ($100) for the month, and so on.
+- Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in increments of 10 for $50 each.
 
 <NeedHelp/>   
