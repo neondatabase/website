@@ -1,7 +1,7 @@
 ---
 title: How billing works
 enableTableOfContents: true
-subtitle: 'Learn about plan allowances, extra usage, and monitoring usage'
+subtitle: Learn about plan allowances, extra usage, and monitoring usage
 redirectFrom:
   - /docs/introduction/billing-overview
 updatedOn: '2024-02-22T14:29:54.384Z'
@@ -89,91 +89,7 @@ Extra project usage is available with the [Scale](/docs/introduction/plans##scal
 
 To learn more about Neon **Compute**, **Storage**, and **Project** metrics, see [Usage metrics](/docs/introduction/usage-metrics).
 
-## Neon pricing estimation guide
 
-You can use this guide to estimate your monthly bill with Neon based on your selected plan and estimated usage.
-
-1. [Select your plan](#step-1-select-your-plan)
-2. [Monthly base fee](#step-2-monthly-base-fee)
-3. [Estimate your usage](#step-3-estimate-your-usage)
-4. [Calculate extra usage fees (if applicable)](#step-4-calculate-extra-usage-fees-if-applicable)
-5. [Total monthly estimate](#step-5-total-monthly-estimate)
-
-### Step 1: Select your plan
-
-First, select a plan that best fits your requirements. For **Storage**, **Compute**, and **Project** usage allowances, see [above](#usage-allowances), or refer to our [Pricing](https://neon.tech/pricing) page, which provides a detailed plan comparison and outlines the features included in each plan. The available plans are:
-
-- Free Tier: $0/month
-- Launch: $19/month
-- Scale: $69/month
-- Enterprise: Custom pricing (contact [Sales](/contact-sales) for pricing details)
-
-### Step 2: Monthly base fee
-
-Note the base monthly fee associated with your plan from the list above.
-
-### Step 3: Estimate your usage
-
-Estimate your monthly usage in the following areas to see if any "extra usage" is required beyond what's included in your plan.
-
-- **Storage (GiB)**: How much storage do you expect to use?  Storage includes the size of your data and a history of changes to support features like branching and point-in-time restore. For more information, see [Storage](/docs/introduction/usage-metrics#storage).
-- **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Neon supports compute sizes ranging from .25 vCPU to 8 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute hour usage.
-- **Projects**: How many projects you will be running? Neon recommends a project per application or client.
-
-### Step 4: Calculate extra usage fees (if applicable)
-
-Each [plan](/docs/introduction/plans) comes with base allowances for **Storage**, **Compute**, and **Projects**. Based on the plan your usage estimates, calculate any extra fees for exceeding your plan's allowances.
-
-#### For the Launch plan:
-
-The Launch plan supports extra **Storage** and **Compute**. If you need extra projects, you'll need to move up to the Scale plan.
-
-- **Extra Storage**: If you exceed 10 GiB, extra storage is billed in units of 2 GiB at $3.5 per unit.
-- **Extra Compute**: If you exceed 300 compute hours, extra compute is billed at $0.16/hour.
-
-#### For the Scale plan:
-
-The Scale plan supports extra **Storage**, **Compute**, and **Projects**.
-
-- **Extra Storage**: If you exceed 50 GiB, extra storage is billed in increments of 10 GiB at $15 per increment.
-- **Extra Compute**: If you exceed 750 compute hours, extra compute is billed at $0.16/hour.
-- **Extra Projects**: If you exceed 50 projects, extra projects are billed in units of 10 projects at $50 per unit.
-
-### Step 5: Total monthly estimate
-
-Add up the base monthly fee and any applicable extra usage fees to estimate your total monthly bill.
-
-```
-Total Monthly Estimate = Monthly Base Fee + Extra Storage Fee + Extra Compute Fee + Extra Project Fee
-```
-
-**Launch plan example**:
-
-- Base fee: $19
-- Storage usage: 14 GiB (4 GiB over the allowance)
-- Compute usage: 350 hours (50 hours over the allowance)
-- Extra storage fee: 2 * $3.5 = $7
-- Extra compute fee: 50 hours * $0.16 = $8
-
-_Total estimate_: $19 + $7 + $8 = $34 per month
-
-**Scale plan example**:
-
-- Base fee: $69
-- Storage usage: 60 GiB (10 GiB over the allowance)
-- Compute usage: 800 hours (50 hours over the allowance)
-- Project usage: 55 projects (5 projects over the allowance)
-- Extra storage fee: 1 * $15 = $15
-- Extra compute fee: 50 * $0.16 = $8
-- Extra project fee: 1 * $50 = $50
-
-_Total estimate_: $69 + $15 + $8 + $50 = $142 per month
-
-<Admonition type="note" title="Notes">
-- Adjust your usage estimates as needed to reflect your actual or projected usage.
-- Extra storage costs are prorated based on when the storage was purchased during the monthly billing period. See [Storage](#storage) for the proration formula.
-- For Enterprise plan users, please contact our [Sales](/contact-sales) team for an estimate based on your custom needs.
-</Admonition>
 
 ## Monitoring billing and usage
 

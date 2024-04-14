@@ -55,7 +55,7 @@ The Free Tier includes the following usage allowances:
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
 <Admonition type="tip" title="Free Tier Compute Allowances">
-On the Free Tier, your primary branch compute is always available — it will never be suspended due to running out of compute hours, which means you can always access the data on the primary branch in your Neon project. Branch computes have 20 [active hours](/docs/reference/glossary#active-time) (5 [compute hours](/docs/reference/glossary#compute-hour)) per month. If your branch computes exceed this allowance, they are suspended until the allowance resets at the beginning of the month. You can monitor branch compute hours on the [Billing page](/docs/introduction/manage-billing#view-the-billing-page) in the Neon Console. The compute hour allowance for branch computes resets at the beginning of each month. For instance, if you enrolled in the Neon Free Tier in January, the allowance for branch computes resets on February 1st.
+On the Free Tier, your primary branch compute is always available — it will never be suspended, which means you can always access the data on the primary branch in your Neon project. Branch computes have 20 [active hours](/docs/reference/glossary#active-time) (5 [compute hours](/docs/reference/glossary#compute-hour)) per month. If your branch computes exceed this allowance, they are suspended until the allowance resets at the beginning of the month. You can monitor branch compute hours on the [Billing page](/docs/introduction/manage-billing#view-the-billing-page) in the Neon Console. The compute hour allowance for branch computes resets at the beginning of each month. For instance, if you enrolled in the Neon Free Tier in January, the allowance for branch computes resets on February 1st.
 </Admonition>
 
 ## Launch
@@ -87,7 +87,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 
 - Compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** or never)
 - Advanced Postgres features including connection pooling, logical replication, and 60+ Postgres extensions
-- Neon features such as [point-in-time restore](#point-in-time-recovery) up to **7 days** in the past, time travel connections, and more
+- Neon features such as branching, point-in-time restore up to **7 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
@@ -110,7 +110,7 @@ The Scale plan includes the following usage allowances:
 
 ### Extra usage
 
-Launch plan users have access to [extra compute and storage](/docs/introduction/how-billing-works#extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
+Scale plan users have access to [extra compute, storage, and projects](/docs/introduction/how-billing-works#extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
 |  Extra usage type                                       | Clost                                                              |
 |-----------------------------------------|---------------------------------------------------------------|
@@ -122,7 +122,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 
 - Compute up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** or never)
 - Advanced Postgres features including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions
-- Neon features such as [point-in-time restore](#point-in-time-recovery) up to **30 days** in the past, time travel connections, and more
+- Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
 - [Priority support](/docs/introduction/support)
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
