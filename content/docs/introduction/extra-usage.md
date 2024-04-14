@@ -95,5 +95,57 @@ Extra compute usage is available with the [Launch](/docs/introduction/plans##lau
 
 ## Extra usage examples
 
+The following examples illustrate how extra usage is billed in Neon. The same approach applies for extra project usage. All of these examples are for the Scale plan, which comes with a 50 GiB storage allowance.
 
+### Example 1: Steady extra storage usage
+
+This example illustrates how steady extra storage usage is billed.
+
+**Period:** 1st June–30th June  
+**Usage:** Steady at 55 GiB throughout the month
+
+**Billing Details:**
+- **Scale Plan:** 1 month = $69
+- **Extra Storage:** 10 GiB extra storage pack at $15/month from 1st June–30th June = $15
+
+**Total:** $84
+
+| Item          | Details                            |
+|---------------|------------------------------------|
+| Plan Fee      | 1 month = $69                                |
+| Extra Storage | 10 GiB extra storage pack at $15/month from 1st June–30th June = $15    |
+| **Total**| $84                 |
+
+### Example 2: Storage exceeds and falls below the limit halfway through the month
+
+This example illustrates how extra storage is billed from the date the extra storage is allocated until the end of the month, not just for the days the storage limit was exceeded.
+
+**Period:** 1st June–15th June  
+**Usage:** 55 GiB  
+**Change:** On 16th June, usage decreased to 45 GiB until the end of the month
+
+| Item          | Details                            |
+|---------------|------------------------------------|
+| Plan Fee      | 1 month = $69                                |
+| Extra Storage | 10 GiB extra storage pack at $15/month from 1st June–30th June = $15    |
+| **Total**| $84                 |
+
+<Admonition type="note">
+If usage remained at 45 GiB, no extra storage would be needed, and July's total would be $69 for the Scale plan.
+</Admonition> 
+
+### Example 3: Storage exceeds and falls below the limit at the end of the month
+
+This example illustrates a prorated charge for extra storage that occurred at the end of the billing period. The charge is prorated from the date the extra storage was allocated.
+
+**Period:** 
+- **1st June–27th June:** Usage up to 49 GiB
+- **28th June:** Usage increased to 55 GiB
+- **29th June:** Usage decreased back to 45 GiB and remained so until the end of the month
+
+| Item          | Details                            |
+|---------------|------------------------------------|
+| Plan Fee      | 1 month = $69                                |
+| Extra Storage | 10 GiB extra storage pack at $15/month prorated for 3 days (28th–30th June) = $1.50    |
+| **Total**| $70.50                 |
 
