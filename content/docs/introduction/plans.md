@@ -43,6 +43,18 @@ The Free Tier includes the following usage allowances:
 | **Storage**                             | 0.5 GiB                                                       |
 | **Compute**                             | Always-available primary branch compute, 5 compute hours (20 _active hours_)/month on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM. |
 
+<Admonition type="tip" title="What are active hours and compute hours?">
+
+- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted. In the table above, _active hours_ are based on a 0.25 vCPU compute size.
+- A **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
+- **Compute hours formula**
+
+  ```
+  compute hours = compute size * active hours
+  ```
+
+</Admonition>
+
 ### Features
 
 - Autosuspend

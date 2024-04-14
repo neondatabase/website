@@ -122,7 +122,7 @@ This example illustrates how steady extra storage usage is billed.
 | Extra Storage | 10 GiB extra storage pack at $15/month from June 1st – June 30th = $15    |
 | **Total**| $84                 |
 
-### Example 2: Storage exceeds limit at the start of the month
+### Example 2: Storage exceeds the limit at the start of the month
 
 This example illustrates how extra storage is billed from the date the extra storage is allocated until the end of the month, not just for the days the storage limit was exceeded.
 
