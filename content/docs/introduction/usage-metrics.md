@@ -12,23 +12,6 @@ This topic describes Storage, Compute, and Project usage metrics in more detail 
 
 ## Storage
 
-Storage is a combination of your data size plus the shared change history that is used to enable branching-related features like [point-in-time restore](/docs/introduction/point-in-time-restore), [query testing](/docs/guides/branching-test-queries), and [reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
-
-The following table outlines data storage allowances per month for each Neon plan.
-
-| Plan       | Storage    |
-|------------|------------|
-| Free Tier  | 512 MiB    |
-| Launch     | 10 GiB     |
-| Scale      | 50 GiB     |
-| Enterprise | Larger sizes |
-
-Extra storage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans:
-- On the Launch plan, extra storage is billed for in units of 2 GiB at $3.5 each
-- On the Scale plan, extra storage is billed for in units of 10 GiB at $15 each
-
-### Storage details
-
 _Storage_ is the total volume of data and history stored in Neon, measured in gibibytes (GiB). It includes the following:
 
 - **Data size**
@@ -55,39 +38,6 @@ _Storage_ is the total volume of data and history stored in Neon, measured in gi
 
 ## Compute
 
-The following table outlines compute allowances per month for each Neon plan.
-
-| Plan       | Compute                                                                                                              |
-|------------|----------------------------------------------------------------------------------------------------------------------|
-| Free Tier  | Always-available primary branch compute, 5 compute hours (20 _active hours_)/month on branch computes           |
-| Launch     | 300 compute hours (1,200 _active hours_)/month                                                                                           |
-| Scale      | 750 compute hours (3,000 _active hours_)/month                                                                                            |
-| Enterprise | Custom                                                                                                            |
-
-Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans. Extra compute usage is billed for at $0.16 per compute hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the monthly billing period, you are billed an extra $16 (100 x $0.16) for the month.
-
-<Admonition type="tip" title="What are active hours and compute hours?">
-
-- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted. In the table above, _active hours_ are based on a 0.25 vCPU compute size.
-- A **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
-- **Compute hours formula**
-
-  ```
-  compute hours = compute size * active hours
-  ```
-
-</Admonition>
-
-### How Neon compute features affect usage
-
-Compute-hour usage in Neon is affected by [autosuspend](/docs/guides/auto-suspend-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute usage might accrue in the following graph.
-
-![Compute metrics graph](/docs/introduction/compute-usage-graph.jpg)
-
-You can see how compute size scales between your minimum and maximum CPU settings, increasing and decreasing compute usage: compute size never rises above your max level, and it never drops below your minimum setting. With autosuspend, no compute time at all accrues during inactive periods. For projects with inconsistent demand, this can save significant compute usage.
-
-### Compute usage details
-
 Compute hour usage is calculated by multiplying compute size by _active hours_. Neon measures compute size at regular intervals and averages those values to calculate your compute hour usage.
 
 _Active hours_ is the amount of time that your computes have been active. This includes all computes in your Neon project but excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale-to-zero).
@@ -109,22 +59,17 @@ Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and
 
 A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an `Idle` state.
 
-Factors that affect _active hours_ include:
+### How Neon compute features affect usage
 
-- The number of active computes
-- The size of each compute
-- The _Autosuspend_ feature, which suspends a compute after 5 minutes of inactivity by default. Users on paid plans can configure the autosuspend timeout or disable it entirely.
-- The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Compute size automatically scales up and down between these boundaries based on workload.
+Compute-hour usage in Neon is affected by [autosuspend](/docs/guides/auto-suspend-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute usage might accrue in the following graph.
+
+![Compute metrics graph](/docs/introduction/compute-usage-graph.jpg)
+
+You can see how compute size scales between your minimum and maximum CPU settings, increasing and decreasing compute usage: compute size never rises above your max level, and it never drops below your minimum setting. With autosuspend, no compute time at all accrues during inactive periods. For projects with inconsistent demand, this can save significant compute usage.
 
 <Admonition type="note">
 Neon uses a small amount of compute time, included in your billed compute hours, to perform a periodic check to ensure that your computes can start and read and write data. See [Availability Checker](/docs/reference/glossary#availability-checker) for more information.
 </Admonition>
-
-The compute hours formula is as follows:
-
-```text
-compute hours = compute size * active hours
-```
 
 ### Estimate your compute hour usage
 
