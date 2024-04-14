@@ -37,15 +37,9 @@ You will be guided through a few steps, asking you to reauthenticate using your 
 
 ## Changing your email
 
-If you've signed up with a social or partner login and now want to change your email &#8212; for example, you previously signed up using a GitHub or Google account and now want to use your personal email &#8212; you can make this change under **Profile → Account Settings →  Personal Information**. Or follow this direct link: [change email](https://console.neon.tech/app/settings/profile?modal=change_email)
+If you've signed up with a social or partner login and now want to change your email &#8212; for example, you previously signed up using a GitHub, Google, or Hasura account and now want to use your personal email &#8212; you can make this change under **Profile → Account Settings →  Personal Information**. Or follow this direct link: [change email](https://console.neon.tech/app/settings/profile?modal=change_email)
 
 After you make the change, you'll receive a notification at this new email address asking you to confirm. Once confirmed, you'll be logged out of Neon. Log back in with your new email, and use this email going forward.
-
-For Hasuara users, changing email is not yet supported.
-
-<Admonition type="note">
-It is important to note that changing your email will _unlink your existing social account_. After you make this change, you will only be able to use your new email to sign in.
-</Admonition>
 
 ## Next steps
 

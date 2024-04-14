@@ -54,6 +54,13 @@
       slug: introduction/status
     - title: Monitoring
       slug: introduction/monitoring
+      items:
+        - title: Monitoring dashboard
+          slug: introduction/monitoring-page
+        - title: Usage metrics
+          slug: introduction/monitor-usage
+        - title: External tools
+          slug: introduction/monitor-external-tools
 - title: Get started
   items:
     - title: Sign up
@@ -299,6 +306,14 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
+    - title: Authentication
+      items:
+        - title: Auth0
+          slug: guides/auth-auth0
+        - title: Clerk
+          slug: guides/auth-clerk
+        - title: Okta
+          slug: guides/auth-okta
     - title: For Partners
       slug: guides/partner-intro
       items:
