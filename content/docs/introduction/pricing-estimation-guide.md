@@ -102,4 +102,4 @@ Total Estimate = Plan Fee + Extra Storage Fee + Extra Compute Fee + Extra Projec
 | Project Usage | 55 projects (5 over, $50 extra)    |
 | **Total Estimate**| $142 per month                 |
 
-For examples where limits are exceeded mid-month and usage fluctuates during the billing period, see [Extra usage](/docs/introduction/extra-usage).
+For examples illustrating extra usage incurred mid-month, usage fluctuations during the billing period, and prorated charges, see [Extra usage](/docs/introduction/extra-usage).

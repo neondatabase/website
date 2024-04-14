@@ -7,11 +7,11 @@ redirectFrom:
   - /docs/introduction/how-billing-works
 ---
 
-Find all the information you need about Neon's pricing plans and how to manage your monthly bill.
+Find all the information you need about Neon's plans and how to manage your monthly bill.
 
-## Neon plans and price estimates
+## Neon plans and pricing
 
-Start with an overview of Neon's pricing plans to learn what's included, and use our pricing estimation guide to estimate your monthly bill.
+Start with an overview of Neon's pricing plans to learn what's included, then use our pricing estimation guide to estimate your monthly bill.
 
 <DetailIconCards>
 
@@ -23,7 +23,7 @@ Start with an overview of Neon's pricing plans to learn what's included, and use
 
 ## Understand how billing works
 
-Find out how allowances and extra usage work, learn more about Neon's usage metrics, and explore a sample billing scenario.
+Find out how billing works, learn more about Neon's usage metrics, plus a sample project showing how to select the right pricing plan in a sample billing scenario.
 
 <DetailIconCards>
 
@@ -37,7 +37,7 @@ Find out how allowances and extra usage work, learn more about Neon's usage metr
 
 ## Manage billing
 
-Find information about invoices, payment methods, changing your plan, and other actions around managing your bill. Plus a sample project showing how to select the right pricing plan in a model scenario.
+Find information about invoices, payment methods, changing your plan, and how you can pay for Neon with your AWS account.
 
 <DetailIconCards>
 

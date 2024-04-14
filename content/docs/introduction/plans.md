@@ -14,7 +14,7 @@ redirectFrom:
 updatedOn: '2024-02-27T16:17:40.463Z'
 ---
 
-Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed feature comparison. 
+Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison. 
 
 Neon offers four plans: 
 
@@ -76,7 +76,7 @@ The Launch plan includes the following usage allowances:
 
 ### Extra usage
 
-Launch plan users have access to [extra compute and storage](/docs/introduction/how-billing-works#extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
+Launch plan users have access to [extra compute and storage](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
 |  Extra usage type                             | Cost                                                |
 |-----------------------------------------|---------------------------------------------------------------|
@@ -110,7 +110,7 @@ The Scale plan includes the following usage allowances:
 
 ### Extra usage
 
-Scale plan users have access to [extra compute, storage, and projects](/docs/introduction/how-billing-works#extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
+Scale plan users have access to [extra compute, storage, and projects](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
 |  Extra usage type                                       | Clost                                                              |
 |-----------------------------------------|---------------------------------------------------------------|
