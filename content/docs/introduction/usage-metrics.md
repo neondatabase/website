@@ -6,7 +6,7 @@ redirectFrom:
 updatedOn: '2024-02-26T19:37:28.835Z'
 ---
 
-As described in [How billing works](/docs/introduction/how-billing-works), each of Neon's plans includes [Storage](#storage), [Compute](#compute), and [Project](#projects) usage allowances. The [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans permit extra usage.
+Each of Neon's plans includes [Storage](#storage), [Compute](#compute), and [Project](#projects) usage allowances. The [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans permit extra usage.
 
 This topic describes Storage, Compute, and Project usage metrics in more detail so that you can better manage your plan allowances and extra usage. 
 
