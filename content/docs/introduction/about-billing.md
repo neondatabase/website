@@ -23,7 +23,7 @@ Start with an overview of Neon's pricing plans to learn what's included, and use
 
 ## Understand how billing works
 
-Find out how allowances and extra usage work, learn more about Neon's usage metrics, and explore a billing scenario for a sample project.
+Find out how allowances and extra usage work, learn more about Neon's usage metrics, and explore a sample billing scenario.
 
 <DetailIconCards>
 
@@ -31,7 +31,7 @@ Find out how allowances and extra usage work, learn more about Neon's usage metr
 
 <a href="/docs/introduction/usage-metrics" description="Take a deep dive into the usage metrics behind plan allowances and extra usage" icon="metrics">Usage metrics</a>
 
-<a href="/docs/introduction/billing-sample" description="See how to select the right plan for a sample project" icon="cli-cursor">Sample project</a>
+<a href="/docs/introduction/billing-sample" description="See how to select the right plan for a sample project" icon="cli-cursor">Sample billing scenario</a>
 
 </DetailIconCards>
 
