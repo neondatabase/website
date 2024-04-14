@@ -14,7 +14,7 @@ redirectFrom:
 updatedOn: '2024-02-27T16:17:40.463Z'
 ---
 
-Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [pricing](https://neon.tech/pricing) page for pricing and a feature comparison. 
+Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed feature comparison. 
 
 Neon offers four plans: 
 
@@ -49,7 +49,7 @@ The Free Tier includes the following usage allowances:
 - All supported regions
 - Project sharing
 - Advanced Postgres features such as connection pooling, logical replication, and 60+ Postgres extensions
-- Neon features such as [point-in-time restore](#point-in-time-recovery) up to **24 hours** in the past, time travel connections, and more
+- Neon features such as branching, point-in-time restore up to **24 hours** in the past, time travel connections, and more
 - [Community support](/docs/introduction/support)
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
