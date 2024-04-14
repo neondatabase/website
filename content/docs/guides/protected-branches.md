@@ -124,8 +124,8 @@ To set a branch as protected:
 
     Your branch is now designated as protected, as indicated by the protected branch shield icon, shown below. Only the trusted IP addresses on your IP allowlist will be able to connect to this branch.
 
-    <Admonition type="note">
-    Other branches in your project will not restrict IP access.
+    <Admonition type="important">
+    With this configuration, there is no restriction on IP access to the other branches in your project.
     </Admonition>
 
     ![Branch page badge](/docs/guides/ip_allow_branch_badge.png)
