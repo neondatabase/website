@@ -24,11 +24,7 @@ Neon offers four plans:
 - [Enterprise](#enterprise)
 
 <Admonition type="tip" title="Plan Allowances and Extra Usage">
-Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in the monthly fee. Extra usage is available for a fee.
-</Admonition>
-
-<Admonition type="tip" title="Plan Allowances and Extra Usage">
-Neon plans are structured around **Allowances** and **Extra usage**. The Free Tier, Launch, and Scale plans include allowances for projects, branches, databases, compute, and storage. Paid plan allowances are included in the plan's monthly fee. The Launch and Scale plans support extra usage for a fee. The Enterprise plan is fully customizable.
+Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, extra usage is available for a fee.
 </Admonition>
 
 ## Free Tier
