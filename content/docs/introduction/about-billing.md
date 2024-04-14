@@ -11,7 +11,7 @@ Find all the information you need about Neon's plans and how to manage your mont
 
 ## Neon plans and pricing
 
-Start with an overview of Neon's pricing plans to learn what's included, then use our pricing estimation guide to estimate your monthly bill. Plus a sample project showing how to select the right pricing plan in a sample billing scenario.
+Start with an overview of Neon's pricing plans to learn what's included, then use our pricing estimation guide to estimate your monthly bill. Plus a sample project showing how to select the right pricing plan in a model scenario.
 
 <DetailIconCards>
 
@@ -19,7 +19,7 @@ Start with an overview of Neon's pricing plans to learn what's included, then us
 
 <a href="/docs/introduction/plans" description="Estimate your monthly bill with Neon" icon="cards">Pricing estimation guide</a>
 
-<a href="/docs/introduction/billing-sample" description="See how to select the right plan for a sample project" icon="cli-cursor">Sample billing scenario</a>
+<a href="/docs/introduction/billing-sample" description="See how to select the right pricing plan for a sample project" icon="cli-cursor">Sample project billing</a>
 
 </DetailIconCards>
 
