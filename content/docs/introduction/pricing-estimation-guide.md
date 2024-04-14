@@ -9,9 +9,9 @@ redirectFrom:
 You can use this guide to estimate your monthly bill with Neon based on your selected plan and estimated usage.
 
 1. [Select your plan and note the monthly fee](#step-1-select-a-plan-and-note-the-monthly-fee)
-2. [Estimate your usage]()
-3. [Calculate extra usage fees (if applicable)]()
-4. [Total monthly estimate]()
+2. [Estimate your usage](#step-2-estimate-your-usage)
+3. [Calculate extra usage fees (if applicable)](#step-3-calculate-extra-usage-fees)
+4. [Total monthly estimate](#step-4-total-monthly-estimate)
 
 ## Step 1: Select a plan and note the monthly fee
 
@@ -27,7 +27,7 @@ This table provides an overview of plan fees with allowances for storage, comput
 | Enterprise | Custom | Custom        | Custom            | Custom               |
 
 <Admonition type="note" title="Notes">
-For Enterprise plan users, please contact our [Sales](/contact-sales) team for an estimate based on your custom needs.
+For the Enterprise plan, please contact our [Sales](/contact-sales) team for an estimate based on your custom needs.
 </Admonition>
 
 ## Step 2: Estimate your usage
@@ -43,7 +43,9 @@ Estimate your monthly usage to see if any "extra usage" is required beyond the s
 Based on your usage estimates, calculate the fees for extra storage units, compute hours, and project units.
 
 <Admonition type="important">
-**On paid plans, extra usage is billed automatically when you exceed plan limits.** Extra usage fees for storage and projects are prorated for the month, meaning that you are not billed the full amount if you purchase units of extra storage or projects partway through the month. However, once you purchase an extra unit of storage or projects, you are billed for that extra unit through to the end of the month. If you reduce your usage and no longer require extra units of storage or projects, the extra usage charge is removed at the beginning of the next month when your bill resets based on current usage. For more, see [Extra usage](/docs/introduction/billing/extra-usage).
+**On paid plans, extra usage is billed automatically when you exceed plan limits.** 
+- However, extra usage fees for storage and projects are prorated for the month, meaning that you are not billed the full amount if you purchase units of extra storage or projects partway through the month. 
+- Once you purchase an extra unit of storage or projects, you are billed for that extra unit for the remainder of the month. If you reduce your usage during that month and no longer require extra units of storage or projects, the extra usage charge is dropped at the beginning of the next month when your bill resets based on your current usage. For more, see [Extra usage](/docs/introduction/billing/extra-usage).
 </Admonition>
 
 ### For the Launch plan:
@@ -77,7 +79,9 @@ The Scale plan supports extra **Storage**, **Compute**, and **Projects**.
 
 Add up your plan's monthly fee and extra usage fees to estimate your total monthly bill.
 
+```plaintext
 Total Estimate = Plan Fee + Extra Storage Fee + Extra Compute Fee + Extra Project Fee
+```
 
 ### Launch plan example
 
@@ -86,15 +90,14 @@ Total Estimate = Plan Fee + Extra Storage Fee + Extra Compute Fee + Extra Projec
 | Plan Fee      | $19                                           |
 | Storage Usage | 14 GiB (4 GiB over, $7 extra)                 |
 | Compute Usage | 350 hours (50 hours over, $8 extra)           |
-| Total Estimate| $34 per month                                 |
+| **Total Estimate**| $34 per month                             |
 
 ### Scale plan example
 
-| Item          | Details                                       |
+| Item          | Details                            |
 |---------------|------------------------------------|
 | Plan Fee      | $69                                |
 | Storage Usage | 60 GiB (10 GiB over, $15 extra)    |
 | Compute Usage | 800 hours (50 hours over, $8 extra)|
 | Project Usage | 55 projects (5 over, $50 extra)    |
-| Total Estimate| $142 per month                     |
-
+| **Total Estimate**| $142 per month                 |
