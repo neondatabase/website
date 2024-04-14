@@ -20,7 +20,7 @@ _Storage_ is the total volume of data and history stored in Neon, measured in gi
 
   Neon retains a history of changes for all branches to support _point-in-time restore_ and _branching_.
 
-  - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon retains a history of changes in the form of WAL records. You can configure the history retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). WAL records that age out of the history retention period are evicted from storage and no longer count toward storage.
+  - _Point-in-time restore_ is the ability to restore data to an earlier point in time. Neon retains a history of changes in the form of Wite-Ahead Log (WAL) records. You can configure the history retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). WAL records that age out of the history retention period are evicted from storage and no longer count toward storage.
   - A _branch_ is a virtual snapshot of your data at the point of branch creation combined with WAL records that capture the branch's data change history from that point forward.
     When a branch is first created, it adds no storage. No data changes have been introduced yet, and the branch's virtual snapshot still exists in the parent branch's _history_, which means that it shares this data in common with the parent branch. A branch begins adding to storage when data changes are introduced or when the branch's virtual snapshot falls out of the parent branch's _history_, in which case the branch's data is no longer shared in common. In other words, branches add storage when you modify data or allow the branch to age out of the parent branch's _history_.
 
@@ -29,18 +29,27 @@ _Storage_ is the total volume of data and history stored in Neon, measured in gi
 **Storage** is calculated in gibibytes (GiB), otherwise known as binary gigabytes. One gibibyte equals 2<sup>30</sup> or 1,073,741,824 bytes.
 
 <Admonition type="tip" title="Tips for minimizing storage">
-- Minimize your history retention period, which controls how much change history your project retains in the form of WAL records. On the other hand, decreasing your history retention period reduces the window available for point-in-time restore or time travel connections. See [History retention](https://neon.tech/docs/introduction/point-in-time-restore#history-retention) for more information.
-- Counterintuitively, deleting records from a table increases storage, as those delete operations are added to your change history. A `DELETE TABLE` operation is more storage-efficient if you are removing all records from a table.
-- Remove or reset branches before they fall out of your history retention period. Otherwise, a change history must be held for those branches, which increases storage.
+- Minimize your history retention period, which controls how much change history your project retains in the form of WAL records. On the other hand, decreasing your history retention period reduces the window available for point-in-time restore or time-travel connections. See [History retention](https://neon.tech/docs/introduction/point-in-time-restore#history-retention) for more information.
+- Counterintuitively, deleting records from a table increases storage in the short term, as those delete operations become part of your change history until they age out of your history retention window. A `DELETE TABLE` operation is more storage-efficient if you are removing all records from a table.
+- Remove or reset branches before they fall out of your history retention period. WAL records must be retained to support older branches, adding to your storage.
 </Admonition>
 
 ## Compute
 
-Compute hour usage is calculated by multiplying compute size by _active hours_. Neon measures compute size at regular intervals and averages those values to calculate your compute hour usage.
+Compute hour usage is calculated by multiplying compute size by _active hours_. 
 
-_Active hours_ is the amount of time that your computes have been active. This includes all computes in your Neon project but excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute) (scale-to-zero).
+<Admonition type="tip" title="Compute Hours Formula">
 
-Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 8 CUs, as outlined below:
+ ```
+  compute hours = compute size * active hours
+  ```
+
+</Admonition>
+
+- A single **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it would 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it would only 15 minutes to use 1 
+- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
+compute hour.
+- **Compute size** is measured at regular intervals and averaged to calculate compute hour usage. Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 8 CUs, as outlined below:
 
 | Compute Units | vCPU | RAM    |
 |:--------------|:-----|:-------|
@@ -59,7 +68,7 @@ A connection from a client or application activates a compute. Activity on the c
 
 ### How Neon compute features affect usage
 
-Compute-hour usage in Neon is affected by [autosuspend](/docs/guides/auto-suspend-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute usage might accrue in the following graph.
+Compute-hour usage in Neon is affected by [autosuspend](/docs/guides/auto-suspend-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute hour usage might accrue in the following graph.
 
 ![Compute metrics graph](/docs/introduction/compute-usage-graph.jpg)
 
@@ -114,6 +123,6 @@ The following table outlines project allowances for each Neon plan.
 | Enterprise | Unlimited |
 
 - When you reach your limit on the [Free Tier](/docs/introduction/plans#free-tier) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch) or [Scale](/docs/introduction/plans#scale) plan, which offer allowances of 10 and 50 projects, respectively.
-- Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in increments of 10 for $50 each.
+- Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in units of 10 for $50 each.
 
 <NeedHelp/>   
