@@ -1,11 +1,12 @@
 ---
-title: Neon usage metrics
-subtitle: Monitor usage metrics for your account and projects from the console or API
+title: Neon billing and usage metrics
+subtitle: Monitor billing and usage metrics for your account and projects from the console or API
 enableTableOfContents: true
 ---
 
 Neon exposes usage metrics in the Neon Console and through the Neon API. These metrics can answer questions like:
 
+- What's my current bill?
 - How much storage am I using?
 - How many compute hours have I used?
 - How many projects do I have?
@@ -43,16 +44,36 @@ FROM pg_database;
 
 ### Billing page
 
-You can monitor usage metrics for your Neon account from the **Billing** page in the Neon Console. Usage metrics include:
+You can monitor billing and usage for all projects in your Neon account from the **Billing** page in the Neon Console.
 
-- **Storage**: Storage is total volume of data and history for your project, measured in gibibytes (GiB). Data refers to the logical data size. History consists of  Write-Ahead Logging (WAL) records capturing the data’s change history that is used to enable branching-related features.
-- **Compute**: The total number of compute hours used during the current billing period.
-- **Projects**: Number of projects currently active in your account.
+1. Navigate to the Neon Console.
+1. Select your Profile.
+1. Select **Billing** from the menu.
+
+Here you will find the current bill and total usage for all projects in your Neon account.  
+
+Usage metrics on the **Billing page** include:
+
+- **Storage**: Storage is total volume of data and history for your project, measured in gibibytes (GiB). Data refers to the logical data size. History consists of  Write-Ahead Logging (WAL) records capturing the data’s change history that is used to enable branching-related features. The displayed value reflects your current usage, including any extra storage that has been automatically added as a result of exceeding your plan's allowances. 
+- **Compute**: The total number of compute hours used during the current billing period. Compute usage is reset to zero at the beginning of each month. For example, on the Launch plan, compute usage will be set back to **0/300h** at the beginning of each month.
+- **Projects**: Number of projects currently active in your account. The displayed value reflects your current usage, including any extra projects that have been automatically added as a result of exceeding your plan's allowances. 
 - **Branches** (Free Tier only) Number of database branches currently active in your account. On The Free Tier, there is a 10-branch limit.
 
 ![Monitor billing and usage](/docs/introduction/monitor_billing_usage.png)
 
-For more information, see [Monitoring billing and usage](/docs/introduction/how-billing-works#monitoring-billing-and-usage).
+#### Interpreting usage metrics
+
+- **Compute** usage is tracked in **compute hours**. A compute hour is 1 active hour for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour. 
+
+  <Admonition type="note">
+  On the Free Tier, the primary branch compute is a 0.25 vCPU compute that is always available, so allowances do not apply to your primary branch. You can run your 0.25 vCPU compute on the Free Tier 24/7. Only branch computes on the Free Tier have an allowance, which is the 5 compute hour/month allowance that Free Tier users see on the **Billing** page. On the Free Tier, this is actually 20 hours of usage because Free Tier computes always have 0.25 vCPU. You cannot increase the compute size on the Free Tier.
+  </Admonition>
+
+- **Storage** includes your data size and history. Neon maintains a history of changes to support branching-related features such as _point-in-time restore_. The Launch plan supports up to 7 days of history retention, and the Scale plan supports up to 30 days. Keep in mind that history retention increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the history retention setting for your project. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+
+- **What about extra usage?**
+
+  The Launch plan supports extra storage and compute usage. The Scale plan supports extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. If extra usage occurs, it is reflected in your monthly allowance on the **Billing** page. For example, if you purchased an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page. Extra storage and projects reset at the beginning of the next month based on current usage. See [Extra usage](/docs/introduction/extra-usage) to learn more.
 
 ### Branches page
 

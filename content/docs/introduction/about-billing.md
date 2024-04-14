@@ -44,7 +44,7 @@ Find information about invoices, payment methods, changing your plan, monitoring
 
 <a href="/docs/introduction/manage-billing" description="View and manage your monthly bill and learn how to change your plan" icon="setup">Manage billing</a>
 
-<a href="/docs/introduction/monitor-billing" description="Learn how to monitor billing and usage in Neon" icon="setup">Manage billing and usage</a>
+<a href="/docs/introduction/monitor-usage" description="Learn how to monitor billing and usage in Neon" icon="setup">Monitor billing and usage</a>
 
 <a href="/docs/introduction/billing-aws-marketplace" description="Find out how you can pay for Neon with your AWS Billing account" icon="aws">AWS Marketplace</a>
 
