@@ -24,6 +24,10 @@ Neon offers four plans:
 - [Enterprise](#enterprise)
 
 <Admonition type="tip" title="Plan Allowances and Extra Usage">
+Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in the monthly fee. Extra usage is available for a fee.
+</Admonition>
+
+<Admonition type="tip" title="Plan Allowances and Extra Usage">
 Neon plans are structured around **Allowances** and **Extra usage**. The Free Tier, Launch, and Scale plans include allowances for projects, branches, databases, compute, and storage. Paid plan allowances are included in the plan's monthly fee. The Launch and Scale plans support extra usage for a fee. The Enterprise plan is fully customizable.
 </Admonition>
 
@@ -52,7 +56,7 @@ The Free Tier includes the following usage allowances:
 - Neon features such as [point-in-time restore](#point-in-time-recovery) up to **24 hours** in the past, time travel connections, and more
 - [Community support](/docs/introduction/support)
 
-For a complete list of features, refer to the feature comparison table on the [Neon pricing](https://neon.tech/pricing) page.
+For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
 <Admonition type="tip" title="Free Tier Compute Allowances">
 On the Free Tier, your primary branch compute is always available — it will never be suspended due to running out of compute hours, which means you can always access the data on the primary branch in your Neon project. Branch computes have 20 [active hours](/docs/reference/glossary#active-time) (5 [compute hours](/docs/reference/glossary#compute-hour)) per month. If your branch computes exceed this allowance, they are suspended until the allowance resets at the beginning of the month. You can monitor branch compute hours on the [Billing page](/docs/introduction/manage-billing#view-the-billing-page) in the Neon Console. The compute hour allowance for branch computes resets at the beginning of each month. For instance, if you enrolled in the Neon Free Tier in January, the allowance for branch computes resets on February 1st.
@@ -90,7 +94,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 - Neon features such as [point-in-time restore](#point-in-time-recovery) up to **7 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
 
-For a complete list of features, refer to the feature comparison table on the [Neon pricing](https://neon.tech/pricing) page.
+For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
 ## Scale
 
@@ -125,7 +129,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 - Neon features such as [point-in-time restore](#point-in-time-recovery) up to **30 days** in the past, time travel connections, and more
 - [Priority support](/docs/introduction/support)
 
-For a complete list of features, refer to the feature comparison table on the [Neon pricing](https://neon.tech/pricing) page.
+For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
 ## Enterprise
 
