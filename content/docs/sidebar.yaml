@@ -42,6 +42,8 @@
           slug: introduction/usage-metrics
         - title: Manage billing
           slug: introduction/manage-billing
+        - title: Monitor billing
+          slug: introduction/monitor-billing
         - title: Sample billing
           slug: introduction/billing-sample
         - title: AWS Marketplace
