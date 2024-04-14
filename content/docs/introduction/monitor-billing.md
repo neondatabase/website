@@ -12,7 +12,7 @@ You can monitor billing and usage for all projects in your Neon account from the
 1. Select your Profile.
 1. Select **Billing** from the menu.
 
-Here you will find the current bill and your current usage for all projects in your Neon account. Usage is reset to zero at the beginning of each month. For example, on the Launch plan, compute usage will be set back to **0/300h** at the beginning of each month.
+Here you will find the current bill and usage for all projects in your Neon account. Compute usage is reset to zero at the beginning of each month. For example, on the Launch plan, compute usage will be set back to **0/300h** at the beginning of each month. Storage and project usage reflect your current usage, including any extra storage or projects that have been automatically added as a result of exceeding your plan's allowances. 
 
 ![Monitor billing and usage](/docs/introduction/monitor_billing_usage.png)
 

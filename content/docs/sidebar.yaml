@@ -36,6 +36,8 @@
           slug: introduction/plans
         - title: Pricing estimation guide
           slug: introduction/pricing-estimation-guide
+        - title: Sample billing
+          slug: introduction/billing-sample
         - title: Extra usage
           slug: introduction/extra-usage
         - title: Usage metrics
@@ -44,8 +46,6 @@
           slug: introduction/manage-billing
         - title: Monitor billing
           slug: introduction/monitor-billing
-        - title: Sample billing
-          slug: introduction/billing-sample
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
     - title: Support

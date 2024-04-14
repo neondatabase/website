@@ -11,7 +11,7 @@ Find all the information you need about Neon's plans and how to manage your mont
 
 ## Neon plans and pricing
 
-Start with an overview of Neon's pricing plans to learn what's included, then use our pricing estimation guide to estimate your monthly bill.
+Start with an overview of Neon's pricing plans to learn what's included, then use our pricing estimation guide to estimate your monthly bill. Plus a sample project showing how to select the right pricing plan in a sample billing scenario.
 
 <DetailIconCards>
 
@@ -19,11 +19,13 @@ Start with an overview of Neon's pricing plans to learn what's included, then us
 
 <a href="/docs/introduction/plans" description="Estimate your monthly bill with Neon" icon="cards">Pricing estimation guide</a>
 
+<a href="/docs/introduction/billing-sample" description="See how to select the right plan for a sample project" icon="cli-cursor">Sample billing scenario</a>
+
 </DetailIconCards>
 
 ## Understand how billing works
 
-Find out how billing works, learn more about Neon's usage metrics, plus a sample project showing how to select the right pricing plan in a sample billing scenario.
+Find out how billing works and learn more about Neon's usage metrics.
 
 <DetailIconCards>
 
@@ -31,18 +33,19 @@ Find out how billing works, learn more about Neon's usage metrics, plus a sample
 
 <a href="/docs/introduction/usage-metrics" description="Take a deep dive into the usage metrics behind plan allowances and extra usage" icon="metrics">Usage metrics</a>
 
-<a href="/docs/introduction/billing-sample" description="See how to select the right plan for a sample project" icon="cli-cursor">Sample billing scenario</a>
 
 </DetailIconCards>
 
 ## Manage billing
 
-Find information about invoices, payment methods, changing your plan, and how you can pay for Neon with your AWS account.
+Find information about invoices, payment methods, changing your plan, monitoring billing and usage, and how you can pay for Neon with your AWS account.
 
 <DetailIconCards>
 
 <a href="/docs/introduction/manage-billing" description="View and manage your monthly bill and learn how to change your plan" icon="setup">Manage billing</a>
 
-<a href="/docs/introduction/billing-aws-marketplace" description="Learn how you can pay for Neon with your AWS Billing account" icon="aws">AWS Marketplace</a>
+<a href="/docs/introduction/monitor-billing" description="Learn how to monitor billing and usage in Neon" icon="setup">Manage billing and usage</a>
+
+<a href="/docs/introduction/billing-aws-marketplace" description="Find out how you can pay for Neon with your AWS Billing account" icon="aws">AWS Marketplace</a>
 
 </DetailIconCards>
