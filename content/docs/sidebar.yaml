@@ -380,6 +380,8 @@
           slug: extensions/pg_trgm
         - title: postgis
           slug: extensions/postgis
+        - title: postgresql_anonymizer
+          slug: extensions/postgresql_anonymizer
         - title: timescaledb
           slug: extensions/timescaledb
     - title: Functions
