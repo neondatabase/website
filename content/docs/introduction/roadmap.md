@@ -37,7 +37,7 @@ Here's a snapshot of what we're working on now:
 
 * **GitHub integration**
 
-  We're working on GitHub integration for Neon that will create and delete Neon branches in synchronization with git branch actions.
+  We're working on a GitHub integration for Neon that will create and delete Neon branches in synchronization with git branch actions.
 
 * **Support for anonymizing data**
 
