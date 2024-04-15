@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2024-02-22T14:29:54.384Z'
 ---
 
-Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, extra usage is automatically allocated for a fee.
+Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, extra usage is available for a fee.
 
 ## Plan fees and allowances
 
