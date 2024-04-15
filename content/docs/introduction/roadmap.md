@@ -71,4 +71,4 @@ In the third quarter of 2023, we added [IP allowlisting](/docs/introduction/ip-a
 
 In the fourth quarter of 2023, we added support for the Asia Pacific (Sydney) region, [Branch Restore](/docs/guides/branch-restore) with Time Travel Assist, and new [Pricing](https://neon.tech/pricing) plans.
 
-On April 15th, 2024, Neon announced General Availability.
+On April 15th, 2024, Neon announced [General Availability](https://neon.tech/blog/neon-ga).
