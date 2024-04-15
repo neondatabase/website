@@ -121,7 +121,7 @@ The following table outlines project allowances for each Neon plan.
 | Scale      | 50       |
 | Enterprise | Unlimited |
 
-- When you reach your limit on the [Free Tier](/docs/introduction/plans#free-tier) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch) or [Scale](/docs/introduction/plans#scale) plan, which offer allowances of 10 and 50 projects, respectively.
+- When you reach your limit on the [Free Tier](/docs/introduction/plans#free-tier) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch) or [Scale](/docs/introduction/plans#scale) plan, which offers allowances of 10 and 50 projects, respectively.
 - Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in units of 10 for $50 each.
 
 <NeedHelp/>   
