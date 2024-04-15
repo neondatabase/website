@@ -60,8 +60,24 @@ const Video = forwardRef(
         ref={visibilityRef}
         onClick={switchVideo}
       >
-        <div className={clsx('relative rounded-[14px] bg-black-pure p-1')}>
+        <div className="relative rounded-[14px] bg-black-pure p-1">
           <div className="relative h-[466px] overflow-hidden rounded-[14px] 2xl:h-[430px] md:h-[317px] sm:h-auto">
+            <video
+              className={clsx(
+                'absolute left-0 top-0 h-auto min-w-[704px] rounded-[14px] transition-all duration-300 2xl:min-w-[652px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
+                videoClassName,
+                isActive && '!left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0'
+              )}
+              height={466}
+              width={704}
+              controls={false}
+              ref={videoRef}
+              muted
+              playsInline
+            >
+              <source src={mp4} type="video/mp4" />
+              <source src={webm} type="video/webm" />
+            </video>
             <div
               className={clsx(
                 'absolute left-10 top-11 opacity-0 transition-opacity duration-300 lt:left-8 lt:top-10 md:left-4 md:top-6',
@@ -83,22 +99,6 @@ const Video = forwardRef(
                 {videoTitle}
               </h2>
             </div>
-            <video
-              className={clsx(
-                'absolute left-0 top-0 h-auto min-w-[704px] rounded-[14px] mix-blend-lighten transition-all duration-300 2xl:min-w-[652px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
-                videoClassName,
-                isActive && '!left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0'
-              )}
-              height={466}
-              width={704}
-              controls={false}
-              ref={videoRef}
-              muted
-              playsInline
-            >
-              <source src={mp4} type="video/mp4" />
-              <source src={webm} type="video/webm" />
-            </video>
           </div>
         </div>
         <div className="mt-5 px-1">
