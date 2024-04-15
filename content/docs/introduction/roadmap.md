@@ -35,6 +35,12 @@ Here's a snapshot of what we're working on now:
 
 ### Developer workflows
 
+* **Schema Diff**
+
+    We are currently building a Schema Diff tool that lets you precisely compare database schemas between different branches to help streamline your integration process.
+
+    If there are any new branching features that you think could help your development team's workflow, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042).
+
 * **GitHub integration**
 
   We're working on GitHub integration for Neon that will create and delete Neon branches in synchronization with git branch actions.
