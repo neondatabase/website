@@ -35,12 +35,6 @@ Here's a snapshot of what we're working on now:
 
 ### Developer workflows
 
-* **Schema Diff**
-
-    We are currently building a Schema Diff tool that lets you precisely compare database schemas between different branches to help streamline your integration process.
-
-    If there are any new branching features that you think could help your development team's workflow, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042).
-
 * **GitHub integration**
 
   We're working on GitHub integration for Neon that will create and delete Neon branches in synchronization with git branch actions.
@@ -48,6 +42,8 @@ Here's a snapshot of what we're working on now:
 * **Support for anonymizing data**
 
    To help with workflows that require protecting personal information, we're adding support for anonymizing data. For example, if you derive your staging branch directly from production, you might want to anonymize the data on staging, which you can then use as the source for all of your development and testing branches.
+
+If there are any new branching features that you think could help your development team's workflow, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042).
 
 ### Account management
 
