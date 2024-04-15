@@ -1,19 +1,19 @@
 ---
-title: Time Travel Assist
+title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
 ---
 
-To help review your data's history, Time Travel Assist lets you connect to any selected point in time within your history retention window and then run queries against that connection.
+To help review your data's history, Time Travel lets you connect to any selected point in time within your history retention window and then run queries against that connection.
 
-You can use Time Travel Assist from two places in the Neon Console:
+You can use Time Travel from two places in the Neon Console:
 
 - **SQL Editor** &#8212; Time Travel is built into the SQL editor letting you switch between queries of your current data and previous iterations of your data in the same view.
 - **Restore** &#8212; Time Travel Assist is also built into the Branch Restore flow where it can help you make sure you've targeted the correct restore point before you restore a branch.
 
-## How Time Travel Assist works
+## How Time Travel works
 
-Time Travel Assist leverages Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which are automatically removed once you are done querying against this point-in-time connection. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+Time Travel leverages Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which are automatically removed once you are done querying against this point-in-time connection. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
 
 However, you can see the history of operations related to the creation and deletion of branches and ephemeral compute endpoints on the **Operations** page:
 
@@ -36,11 +36,13 @@ To change your retention period, see [Configure history retention](/docs/manage/
 
 ### Data integrity
 
-Time Travel Assist only allows non-destructive read-only queries. You cannot alter historical data in any way. If you try to run any query that could alter historical data, you will get an error message like the following:
+Time Travel only allows non-destructive read-only queries. You cannot alter historical data in any way. If you try to run any query that could alter historical data, you will get an error message like the following:
 
 ![time travel error message](/docs/guides/time_travel_error.png "no-border")
 
 ### Time Travel with the SQL editor
+
+<ComingSoon/>
 
 Time Travel in the SQL Editor offers a non-destructive way to explore your database's historical data through read-only queries. By toggling Time Travel in the editor, you switch from querying your current data to querying against a selected point within your history retention window.
 
@@ -65,9 +67,9 @@ Here is an example of a completed query:
 
 ![Time travel assist](/docs/guides/time_travel_assist.png)
 
-## How to use Time Travel Assist
+## How to use Time Travel
 
-Here is how to use Time Travel Assist from both the **SQL Editor** and from the **Restore** page:
+Here is how to use Time Travel from both the **SQL Editor** and from the **Restore** page:
 
 <Tabs labels={["SQL Editor","Branch Restore"]}>
 
@@ -108,7 +110,7 @@ Here is how to use Time Travel Assist from both the **SQL Editor** and from the 
 
 ## Billing considerations
 
-The ephemeral endpoints used to run your Time Travel Assist queries do contribute to your consumption usage totals for the billing period, like any other active endpoint that consumes resources.
+The ephemeral endpoints used to run your Time Travel queries do contribute to your consumption usage totals for the billing period, like any other active endpoint that consumes resources.
 
 A couple of details to note:
 
