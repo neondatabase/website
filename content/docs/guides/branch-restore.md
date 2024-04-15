@@ -9,7 +9,7 @@ redirectFrom:
 updatedOn: '2024-02-21T19:34:16.273Z'
 ---
 
-With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can also use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to.
+With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, Github-style visual comparison of your selected branches before restoring.
 
 ## How branch restore works
 
@@ -138,7 +138,7 @@ If you want to restore a branch to an earlier point in time, use the syntax `^se
 neonctl branches restore dev/alex ^self@2024-01-01T00:00:00Z --preserve-under-name alex_old
 ```
 
-This command resets the target branch `dev/alex` to its state at the start of 2024, saving the latest data in a backup called `alex_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
+This command resets the target branch `dev/alex` to its state at the start of 2024. The command also preserves the original state of the branch in a backup file called `alex_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
 
 #### Restore from parent
 

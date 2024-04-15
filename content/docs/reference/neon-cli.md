@@ -7,7 +7,91 @@ updatedOn: '2024-02-21T19:34:16.277Z'
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the Neon CLI.
 
-For installation instructions, see [Neon CLI — Install and connect](/docs/reference/cli-install).
+## Install
+
+<Tabs labels={["npm", "Homebrew", "Binary"]}>
+
+<TabItem>
+
+To install the Neon CLI via [npm](https://www.npmjs.com/package/neonctl):
+
+```shell
+npm i -g neonctl
+```
+
+Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
+
+</TabItem>
+
+<TabItem>
+
+To install the Neon CLI with [Homebrew](https://formulae.brew.sh/formula/neonctl):
+
+```bash
+brew install neonctl
+```
+
+</TabItem>
+
+<TabItem>
+
+To install a [binary](https://github.com/neondatabase/neonctl/releases):
+
+- **macOS**
+
+    Download the macOS binary:
+
+    ```bash shouldWrap
+    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
+    ```
+
+    No installation is required. Run the Neon CLI as follows:
+
+    ```bash
+    neonctl <command> [options]
+    ```
+
+- **Linux**
+
+    Download the Linux x64 or ARM64 binary:
+
+    x64:
+
+    ```bash shouldWrap
+    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
+    ```
+
+    ARM64:
+
+    ```bash shouldWrap
+    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
+    ```
+
+    No installation is required. Run the Neon CLI as follows:
+
+    ```bash
+    neonctl <command> [options]
+    ```
+
+- **Windows**
+
+    Download the Windows binary:
+
+    ```bash shouldWrap
+    curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
+    ```
+
+    No installation is required. Run the Neon CLI as follows:
+
+    ```bash
+    neonctl-win.exe <command> [options]
+    ```
+
+</TabItem>
+
+</Tabs>
+
+For more about installing, upgrading, and connecting, see [Neon CLI — Install and connect](/docs/reference/cli-install).
 
 ## Synopsis
 
@@ -19,6 +103,7 @@ Commands:
   neonctl auth                        Authenticate              [aliases: login]
   neonctl me                          Show current user
   neonctl projects                    Manage projects         [aliases: project]
+  neonctl ip-allow                    Manage IP Allow
   neonctl branches                    Manage branches          [aliases: branch]
   neonctl databases                   Manage databases   [aliases: database, db]
   neonctl roles                       Manage roles               [aliases: role]
@@ -30,13 +115,15 @@ Commands:
 Global options:
   -o, --output      Set output format
                   [string] [choices: "json", "yaml", "table"] [default: "table"]
-      --config-dir  Path to config directory
-                             [string] [default: ""]
-      --api-key     API key  [string] [default: ""]
-      --analytics   Manage analytics. Example: --no-analytics, --analytics false
+  --config-dir      Path to config directory [string] [default: ""]
+  --api-key         API key  [string] [default: ""]
+  --analytics       Manage analytics. Example: --no-analytics, --analytics false
                                                        [boolean] [default: true]
   -v, --version     Show version number                                [boolean]
   -h, --help        Show help                                          [boolean]
+
+Options:
+--context-file      Context file [string] [default: (current-context-file)]
 ```
 
 ## Commands
@@ -131,6 +218,22 @@ Global options are supported with any Neon CLI command.
   
   neonctl branches create --help
   ```
+
+## Options
+
+| Option      | Description                         | Type   | Default                           |
+| :---------  | :---------------------------------- | :----- | :-------------------------------- |
+| [--context-file](#context-file)| The context file for CLI sessions                 | string | current-context-file                           |
+
+- <a id="context-file"></a>`--context-file`
+
+  Sets a background context for your CLI sessions, letting you perform project or branch-specific actions without having to specify the project or branch id in every command. For example, this command lists all branches using the `branches list` command. No need to specify the project since the context file provides it. 
+
+  ```bash
+  neonctl branches list --context-file path/to/context_file_name
+  ```
+
+  To define a context file, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
 
 ## GitHub repository
 

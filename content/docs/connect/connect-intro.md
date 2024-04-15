@@ -15,13 +15,13 @@ Learn how to establish a connection to Neon from any application.
 
 <DetailIconCards>
 
-<a href="/docs/connect/connect-from-any-app" description="Learn about connection strings and how to connect to Neon from any application" icon="audio-jack">Connect from any app</a>
+<a href="/docs/connect/connect-from-any-app" description="Learn about connection strings and how to connect to Neon from any application" icon="gamepad">Connect from any app</a>
 
-<a href="/docs/connect/connect-postgres-gui" description="Learn how to connect to a Neon database from a GUI application" icon="audio-jack">Connect a GUI application</a>
+<a href="/docs/connect/connect-postgres-gui" description="Learn how to connect to a Neon database from a GUI application" icon="gui">Connect a GUI application</a>
 
-<a href="/docs/connect/query-with-psql-editor" description="Connect with psql, the native command-line client for Postgres" icon="audio-jack">Connect with psql</a>
+<a href="/docs/connect/query-with-psql-editor" description="Connect with psql, the native command-line client for Postgres" icon="cli">Connect with psql</a>
 
-<a href="/docs/connect/passwordless-connect" description="Connect without a password using Neon's psql passwordless auth feature" icon="audio-jack">Passwordless auth</a>
+<a href="/docs/connect/passwordless-connect" description="Connect without a password using Neon's psql passwordless auth feature" icon="unlock">Passwordless auth</a>
 
 </DetailIconCards>
 
@@ -31,9 +31,9 @@ Troubleshoot and resolve common connection issues.
 
 <DetailIconCards>
 
-<a href="/docs/connect/connection-errors" description="Learn how to resolve commonly-encountered connection errors" icon="audio-jack">Connection errors</a>
+<a href="/docs/connect/connection-errors" description="Learn how to resolve commonly-encountered connection errors" icon="warning">Connection errors</a>
 
-<a href="/docs/connect/connection-latency" description="Learn about strategies for managing connection latency and timeouts" icon="audio-jack">Connect latency and timeouts</a>
+<a href="/docs/connect/connection-latency" description="Learn about strategies for managing connection latency and timeouts" icon="stopwatch">Connect latency and timeouts</a>
 
 </DetailIconCards>
 
@@ -43,9 +43,9 @@ Ensure the integrity and security of your connections to Neon.
 
 <DetailIconCards>
 
-<a href="/docs/connect/connect-securely" description="Learn how to connect to Neon securely using SSL/TLS encrypted connections" icon="audio-jack">Connect to Neon securely</a>
+<a href="/docs/connect/connect-securely" description="Learn how to connect to Neon securely using SSL/TLS encrypted connections" icon="privacy">Connect to Neon securely</a>
 
-<a href="https://neon.tech/blog/avoid-mitm-attacks-with-psql-postgres-16" description="Learn how the psql client in Postgres 16 makes it simple to connect securely" icon="audio-jack">Avoid MME attacks in Postgres 16</a>
+<a href="https://neon.tech/blog/avoid-mitm-attacks-with-psql-postgres-16" description="Learn how the psql client in Postgres 16 makes it simple to connect securely" icon="lock-landscape">Avoid MME attacks in Postgres 16</a>
 
 </DetailIconCards>
 
@@ -55,8 +55,8 @@ Optimize your connections by enabling connection pooling.
 
 <DetailIconCards>
 
-<a href="/docs/connect/connection-pooling" description="Learn how to enable connection pooling to support up to 10,000 concurrent connections" icon="audio-jack">Connection pooling in Neon</a>
+<a href="/docs/connect/connection-pooling" description="Learn how to enable connection pooling to support up to 10,000 concurrent connections" icon="network">Connection pooling in Neon</a>
 
-<a href="/docs/guides/prisma#connect-from-serverless-functions" description="Learn about connecting from Prisma to Neon from serverless functions" icon="audio-jack">Connection pooling with Prisma</a>
+<a href="/docs/guides/prisma#connect-from-serverless-functions" description="Learn about connecting from Prisma to Neon from serverless functions" icon="prisma">Connection pooling with Prisma</a>
 
 </DetailIconCards>
