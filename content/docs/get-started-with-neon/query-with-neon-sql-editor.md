@@ -65,9 +65,27 @@ The Neon SQL Editor provides **Explain** and **Analyze** features.
 
 Understanding the information provided by the **Explain** and **Analyze** features requires familiarity with the Postgres [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) command and its `ANALYZE` parameter. Refer to the [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) documentation and the [Using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html) topic in the _PostgreSQL documentation_.
 
-## Using meta-commands
+## Time Travel
+
+<ComingSoon/>
+
+You can toggle Time Travel in the SQL Editor to switch from querying your current data to querying against a selected point within your [history retention window](/docs/manage/projects#configure-history-retention).
+
+![time travel in SQL Editor](/docs/get-started-with-neon/time_travel_sql_editor.png "no-border")
+
+For more details about using Time Travel queries, see:
+- [Time Travel](/docs/guides/time-travel-assist)
+- [Time Travel tutorial](/docs/guides/time-travel-tutorial)
+
+## Meta-commands
+
+<ComingSoon/>
 
 The Neon SQL Editor supports the use of Postgres meta-commands, which act like shortcuts for interacting with your database. If you are already familiar with using meta-commands from the `psql` command-line interface, you can use many of those same commands right from the SQL Editor.
+
+### Benefits of Meta-Commands
+
+Meta-commands can significantly speed up your workflow by providing quick access to database schemas and other critical information without needing to write full SQL queries. They are especially useful for database management tasks, making it easier to handle administrative duties directly from the Neon Console.
 
 ### Available meta-commands
 
@@ -79,7 +97,71 @@ Here are some of the meta-commands that you can use within the Neon SQL Editor:
 - `\?` - A cheat sheet of available meta-commands
 - `\h [NAME]` - Get help for any Postgres command. For example, try `\h SELECT`.
 
-For more information about meta-commands, see [PostgreSQL Meta-Commands](https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMANDS). Note that not all meta-commands are supported in the SQL Editor.
+Note that not all meta-commands are supported in the SQL Editor. To get a list of supported commands, use `\?`.
+
+<details>
+<summary>Example of supported commands</summary>
+```bash
+Informational
+  (options: S = show system objects, + = additional detail)
+  \d[S+]                 list tables, views, and sequences
+  \d[S+]  NAME           describe table, view, sequence, or index
+  \da[S]  [PATTERN]      list aggregates
+  \dA[+]  [PATTERN]      list access methods
+  \dAc[+] [AMPTRN [TYPEPTRN]]  list operator classes
+  \dAf[+] [AMPTRN [TYPEPTRN]]  list operator families
+  \dAo[+] [AMPTRN [OPFPTRN]]   list operators of operator families
+  \dAp[+] [AMPTRN [OPFPTRN]]   list support functions of operator families
+  \db[+]  [PATTERN]      list tablespaces
+  \dc[S+] [PATTERN]      list conversions
+  \dconfig[+] [PATTERN]  list configuration parameters
+  \dC[+]  [PATTERN]      list casts
+  \dd[S]  [PATTERN]      show object descriptions not displayed elsewhere
+  \dD[S+] [PATTERN]      list domains
+  \ddp    [PATTERN]      list default privileges
+  \dE[S+] [PATTERN]      list foreign tables
+  \des[+] [PATTERN]      list foreign servers
+  \det[+] [PATTERN]      list foreign tables
+  \deu[+] [PATTERN]      list user mappings
+  \dew[+] [PATTERN]      list foreign-data wrappers
+  \df[anptw][S+] [FUNCPTRN [TYPEPTRN ...]]
+                         list [only agg/normal/procedure/trigger/window] functions
+  \dF[+]  [PATTERN]      list text search configurations
+  \dFd[+] [PATTERN]      list text search dictionaries
+  \dFp[+] [PATTERN]      list text search parsers
+  \dFt[+] [PATTERN]      list text search templates
+  \dg[S+] [PATTERN]      list roles
+  \di[S+] [PATTERN]      list indexes
+  \dl[+]                 list large objects, same as \lo_list
+  \dL[S+] [PATTERN]      list procedural languages
+  \dm[S+] [PATTERN]      list materialized views
+  \dn[S+] [PATTERN]      list schemas
+  \do[S+] [OPPTRN [TYPEPTRN [TYPEPTRN]]]
+                         list operators
+  \dO[S+] [PATTERN]      list collations
+  \dp[S]  [PATTERN]      list table, view, and sequence access privileges
+  \dP[itn+] [PATTERN]    list [only index/table] partitioned relations [n=nested]
+  \drds [ROLEPTRN [DBPTRN]] list per-database role settings
+  \drg[S] [PATTERN]      list role grants
+  \dRp[+] [PATTERN]      list replication publications
+  \dRs[+] [PATTERN]      list replication subscriptions
+  \ds[S+] [PATTERN]      list sequences
+  \dt[S+] [PATTERN]      list tables
+  \dT[S+] [PATTERN]      list data types
+  \du[S+] [PATTERN]      list roles
+  \dv[S+] [PATTERN]      list views
+  \dx[+]  [PATTERN]      list extensions
+  \dX     [PATTERN]      list extended statistics
+  \dy[+]  [PATTERN]      list event triggers
+  \l[+]   [PATTERN]      list databases
+  \lo_list[+]            list large objects
+  \sf[+]  FUNCNAME       show a function's definition
+  \sv[+]  VIEWNAME       show a view's definition
+  \z[S]   [PATTERN]      same as \dp
+  ```
+</details>
+
+For more information about meta-commands, see [PostgreSQL Meta-Commands](https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMANDS).
 
 ### How to Use Meta-Commands
 
@@ -91,9 +173,5 @@ To use a meta-command in the SQL Editor:
     For example, here's the schema for the `playing_with_neon` table we created above, using the meta-command `\d playing_with_neon`:
 
    ![metacommand example](/docs/get-started-with-neon/sql_editor_metacommand.png)
-
-### Benefits of Meta-Commands
-
-Meta-commands can significantly speed up your workflow by providing quick access to database schemas and other critical information without needing to write full SQL queries. They are especially useful for database management tasks, making it easier to handle administrative duties directly from the Neon Console.
 
 <NeedHelp/>
