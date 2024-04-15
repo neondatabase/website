@@ -92,7 +92,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 
 |  Extra usage type                             | Cost                                                |
 |-----------------------------------------|---------------------------------------------------------------|
-| **Extra Storage**                             |  Billed for in units of 2 GiB at $3.5 per unit, prorated for the month    |
+| **Extra Storage**                             |  Billed for in units of 2 GiB at $3.50 per unit, prorated for the month    |
 | **Extra Compute**                             |  Billed by compute hour at $0.16 per hour                                 |
 
 ### Features

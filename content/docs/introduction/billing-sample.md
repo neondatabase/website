@@ -67,14 +67,14 @@ Here are the monthly totals for compute and storage usage.
 
 ### Which Neon pricing plan fits best?
 
-At roughly 718 active hours for the month with a compute size of 0.25 vCPU, this application is well under the 300 compute hours (1,200 active hours)/month allowance for the [Launch](/docs/introduction/plans##launch) plan and 750 compute hours (3000 active hours)/month for the [Scale](/docs/introduction/plans#scale) plan. However, with a storage size of 25 GiB, the storage requirements for the application are over the Launch plan allowance of 10 GiB. You could go with the Launch plan which offers 10 GiB of storage plus extra storage at $3.5 per 2 GiB unit or the Scale plan which offers 50 GiB storage. Let's do that math to compare monthly bills:
+At roughly 718 active hours for the month with a compute size of 0.25 vCPU, this application is well under the 300 compute hours (1,200 active hours)/month allowance for the [Launch](/docs/introduction/plans##launch) plan and 750 compute hours (3000 active hours)/month for the [Scale](/docs/introduction/plans#scale) plan. However, with a storage size of 25 GiB, the storage requirements for the application are over the Launch plan allowance of 10 GiB. You could go with the Launch plan which offers 10 GiB of storage plus extra storage at $3.50 per 2 GiB unit or the Scale plan which offers 50 GiB storage. Let's do that math to compare monthly bills:
 
 **Launch plan**:
 
 - Base fee: $19
 - Storage usage: 25 GiB (15 GiB over the allowance)
 - Compute usage: 718 active hours (within the 300 compute hour/1200 active hour allowance)
-- Extra storage fee: 8 * $3.5 = $28
+- Extra storage fee: 8 * $3.50 = $28
 - Extra compute fee: $0
 
 _Total estimate_: $19 + $28 = $47 per month
