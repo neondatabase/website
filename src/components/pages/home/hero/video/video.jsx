@@ -66,7 +66,7 @@ const Video = forwardRef(
               className={clsx(
                 'absolute left-0 top-0 h-auto min-w-[704px] rounded-[14px] transition-all duration-300 2xl:min-w-[652px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
                 videoClassName,
-                isActive && '!left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0'
+                isActive && '!left-0 lg:!left-1/2 lg:-translate-x-1/2 sm:left-0 sm:translate-x-0'
               )}
               height={466}
               width={704}
@@ -78,10 +78,11 @@ const Video = forwardRef(
               <source src={mp4} type="video/mp4" />
               <source src={webm} type="video/webm" />
             </video>
+
             <div
               className={clsx(
-                'absolute top-11 transition-all duration-1000 lt:left-8 lt:top-10 md:left-4 md:top-6',
-                isActive ? '-left-full opacity-0' : 'left-10 opacity-100'
+                'absolute top-11 transition-all delay-700 duration-1000 lt:top-10 md:top-6',
+                isActive ? '-left-full opacity-0' : 'left-10 opacity-100 lt:left-8 md:left-4'
               )}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
