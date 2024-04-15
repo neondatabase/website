@@ -125,7 +125,7 @@ const Feature = ({ title, info, disabled, type, index }) => (
   <li
     className={clsx(
       type === 'Scale' && 'text-white',
-      disabled ? 'text-gray-new-30' : 'text-gray-new-80',
+      disabled ? 'text-gray-new-30 opacity-80' : 'text-gray-new-70',
       'relative pl-6 leading-tight tracking-tight'
     )}
   >
@@ -179,7 +179,7 @@ const Hero = () => {
 
   return (
     <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-[40px]">
-      <Container className="flex flex-col items-center" size="medium">
+      <Container className="flex flex-col items-center" size="1344">
         <Heading
           className="inline-flex flex-col text-center font-medium !leading-none tracking-tighter md:text-4xl"
           tag="h1"
@@ -192,7 +192,7 @@ const Hero = () => {
         </p>
         <div className="relative mx-auto mt-20 xl:mt-12 lg:w-full lg:max-w-[704px] md:mt-9">
           <h2 className="sr-only">Neon pricing plans</h2>
-          <ul className="grid-gap relative z-10 grid grid-cols-4 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
+          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
             {items.map(({ type, price, description, features, button }, index) => {
               const isScalePlan = type === 'Scale';
 
@@ -200,7 +200,7 @@ const Hero = () => {
                 <li
                   className={clsx(
                     'group relative flex min-h-full flex-col rounded-[10px] px-7 pb-9 pt-5 xl:px-6 xl:py-5 sm:p-5',
-                    !isScalePlan && 'border border-transparent bg-gray-new-8'
+                    !isScalePlan && 'border border-transparent bg-black-new'
                   )}
                   key={index}
                   onPointerEnter={() => {
@@ -224,7 +224,7 @@ const Hero = () => {
                     <h3
                       className={clsx(
                         isScalePlan && 'text-green-45',
-                        'text-xl font-medium leading-none tracking-tight text-gray-new-80 xl:text-lg'
+                        'text-xl font-medium leading-none tracking-tight text-gray-new-70 xl:text-lg'
                       )}
                     >
                       {type}
@@ -249,7 +249,7 @@ const Hero = () => {
                       </AnimatedButton>
                     ) : (
                       <Button
-                        className="mt-7 w-full bg-gray-new-15 !py-4 !text-lg !font-medium tracking-tight transition-colors duration-500 hover:bg-gray-new-30 xl:mt-7 sm:max-w-none"
+                        className="mt-7 w-full bg-gray-new-15 bg-opacity-80 !py-4 !text-lg !font-medium tracking-tight transition-colors duration-500 hover:bg-gray-new-30 xl:mt-7 sm:max-w-none"
                         size="sm"
                         to={button.url}
                         onClick={() => {
@@ -259,7 +259,7 @@ const Hero = () => {
                         {button.text}
                       </Button>
                     )}
-                    <p className="mt-9 font-light leading-snug tracking-tight text-gray-new-70 2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
+                    <p className="mt-9 font-light leading-snug tracking-tighter text-gray-new-50 2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
                       {description}
                     </p>
                   </div>
@@ -290,7 +290,7 @@ const Hero = () => {
             })}
           </ul>
         </div>
-        <p className="mt-16 text-center text-lg font-light leading-snug">
+        <p className="mt-16 text-center text-lg font-light leading-snug text-gray-new-80">
           Not sure which plan is right for you?
           <br />
           Explore the{' '}
