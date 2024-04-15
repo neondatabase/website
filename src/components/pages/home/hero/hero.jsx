@@ -67,7 +67,7 @@ const Hero = () => {
         priority
       />
 
-      <Container className="pointer-events-none 2xl:px-10" size="1100">
+      <Container className="2xl:px-10" size="1100">
         <div className="text-center">
           <h1 className="font-title text-[88px] font-medium leading-dense -tracking-[0.03em] text-white xl:text-[72px] md:text-[56px] xs:text-[32px]">
             The Future of Postgres
@@ -85,10 +85,8 @@ const Hero = () => {
             Get Started
           </Button>
         </div>
-      </Container>
 
-      <Container className="2xl:px-10" size="1100">
-        <div className="mt-[74px] flex gap-x-2.5 xl:mt-16 md:mt-14 sm:mt-9 sm:flex-col">
+        <div className="mt-[74px] flex gap-x-2.5 xl:mt-16 md:mt-14 sm:mt-9 sm:flex-col sm:gap-y-8">
           {ITEMS.map((item, index) => (
             <Video
               className={clsx(
@@ -97,6 +95,7 @@ const Hero = () => {
                   ? 'w-[64.7273%] flex-shrink-0 xl:w-[61.863%] md:w-[62.746%] sm:w-full'
                   : 'w-full'
               )}
+              videoClassName={index === 1 && 'left-[-172px]'}
               {...item}
               isActive={currentVideoIndex === index}
               switchVideo={() => switchVideo((currentVideoIndex + 1) % ITEMS.length)}
