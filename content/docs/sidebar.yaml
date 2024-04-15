@@ -132,16 +132,18 @@
         - title: Branching
           slug: guides/branching-intro
           items:
+            - title: Reset from parent
+              slug: guides/reset-from-parent
             - title: Branch Restore
               slug: guides/branch-restore
-            - title: Branching — Testing queries
-              slug: guides/branching-test-queries
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
             - title: Branching with the API
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
+            - title: Branching — Testing queries
+              slug: guides/branching-test-queries
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
         - title: Logical replication
@@ -167,6 +169,11 @@
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
               slug: guides/read-replica-prisma
+        - title: Schema diff
+          slug: guides/schema-diff
+          items:
+            - title: Schema diff tutorial
+              slug: guides/schema-diff-tutorial
         - title: Protected branches
           slug: guides/protected-branches
     - title: Frameworks

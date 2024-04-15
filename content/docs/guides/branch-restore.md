@@ -9,7 +9,7 @@ redirectFrom:
 updatedOn: '2024-02-21T19:34:16.273Z'
 ---
 
-With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can also use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to.
+With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, Github-style visual comparison of your selected branches before restoring.
 
 ## How branch restore works
 
@@ -95,6 +95,10 @@ However, you can see the history of operations related to the creation and delet
 
 The ephemeral endpoints are created according to your configured [default compute size](/docs/manage/projects#reset-the-default-compute-size). An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
+### Schema Diff
+
+The Schema Diff tool lets you compare an SQL script of your selected branch's schemas in a side-by-side view. See [Schema diff](/docs/guides/schema-diff) for more information.
+
 ## How to use branch restore
 
 You can use the Neon Console, CLI, or API to restore branches.
@@ -155,7 +159,7 @@ If you want to restore a branch to an earlier point in time, use the syntax `^se
 neonctl branches restore dev/alex ^self@2024-01-01T00:00:00Z --preserve-under-name alex_old
 ```
 
-This command resets the target branch `dev/alex` to its state at the start of 2024, saving the latest data in a backup called `alex_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
+This command resets the target branch `dev/alex` to its state at the start of 2024. The command also preserves the original state of the branch in a backup file called `alex_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
 
 #### Restore from parent
 
@@ -259,9 +263,9 @@ If you do need to revert your changes, you can [Reset from parent](/docs/manage/
 
 Here is how to use the Time Travel Assist SQL editor:
 
-1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
+1. Make the branch selections that you would make to [Restore a branch](#how-to-use-branch-restore).
 
-    This makes the selection for Time Travel Assist. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
+    The target branch is now selected for Time Travel assist. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
     ![Time travel assist](/docs/guides/time_travel_assist.png)
   
 1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
@@ -277,6 +281,12 @@ Depending on your query and the selected timestamp, instead of a table of result
 | If you query from earlier than your history retention window | Console request failed with 400 Bad Request: timestamp [timestamp] recedes your project's history retention window of 168h0m0s, try a more recent timestamp |
 
 Adjust your selected timestamp accordingly.
+
+### Using Schema Diff
+
+You can also use Schema Diff to visualy inspect the schema differences between your selected branches before you go through with the restore operation.
+
+See [Schema diff](/docs/guides/schema-diff) to learn more, or [Schema diff tutorial](/docs/guides/schema-diff-tutorial) for a step-by-step guide comparing two development branches.
 
 ## Billing considerations
 
