@@ -29,7 +29,7 @@ Find out how billing works and learn more about Neon's usage metrics.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/extra-usage" description="Learn about plan allowances and usage" icon="wallet">Extra usage</a>
+<a href="/docs/introduction/extra-usage" description="Learn about plan allowances and how extra usage works" icon="wallet">Extra usage</a>
 
 <a href="/docs/introduction/usage-metrics" description="Take a deep dive into the usage metrics behind plan allowances and extra usage" icon="metrics">Usage metrics</a>
 
@@ -44,7 +44,7 @@ Find information about invoices, payment methods, changing your plan, monitoring
 
 <a href="/docs/introduction/manage-billing" description="View and manage your monthly bill and learn how to change your plan" icon="setup">Manage billing</a>
 
-<a href="/docs/introduction/monitor-usage" description="Learn how to monitor billing and usage in Neon" icon="setup">Monitor billing and usage</a>
+<a href="/docs/introduction/monitor-usage" description="Learn how to monitor billing and usage metrics in Neon" icon="setup">Monitor billing and usage</a>
 
 <a href="/docs/introduction/billing-aws-marketplace" description="Find out how you can pay for Neon with your AWS Billing account" icon="aws">AWS Marketplace</a>
 

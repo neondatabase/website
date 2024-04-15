@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2024-02-22T14:29:54.384Z'
 ---
 
-Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, extra usage is available for a fee.
+Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, extra usage is automatically allocated for a fee.
 
 ## Plan fees and allowances
 
@@ -42,7 +42,7 @@ The [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/pl
 
 The Launch plan supports extra **Storage** and **Compute** usage. If you need extra projects, you'll need to move up to the Scale plan.
 
-- **Extra Storage**: If you exceed 10 GiB, extra storage is billed for in units of 2 GiB at $3.50 per unit.
+- **Extra Storage**: If you exceed 10 GiB, extra storage is allocated in units of 2 GiB at $3.50 per unit.
 - **Extra Compute**: If you exceed 300 compute hours, extra compute is billed at $0.16/compute hour.
 
 | Resource | Unit         | Price     |
@@ -55,9 +55,9 @@ The Launch plan supports extra **Storage** and **Compute** usage. If you need ex
 
 The Scale plan supports extra **Storage**, **Compute**, and **Project** usage.
 
-- **Extra Storage**: If you exceed 50 GiB, extra storage is billed for in units of 10 GiB at $15 per unit.
+- **Extra Storage**: If you exceed 50 GiB, extra storage is allocated in units of 10 GiB at $15 per unit.
 - **Extra Compute**: If you exceed 750 compute hours, extra compute is billed at $0.16/compute hour.
-- **Extra Projects**: If you exceed 50 projects, extra projects are billed for in units of 10 projects at $50 per unit.
+- **Extra Projects**: If you exceed 50 projects, extra projects are allocated in units of 10 projects at $50 per unit.
 
 | Resource | Unit         | Price     |
 |----------|--------------|-----------|
@@ -67,18 +67,22 @@ The Scale plan supports extra **Storage**, **Compute**, and **Project** usage.
 
 ## How does extra usage work?
 
-Taking advantage of extra usage requires no user action. Extra usage, if supported with your plan, is available by default. If you use more storage, compute, or projects than your monthly allowance provides, the extra usage is automatically added to your monthly bill.-
+Taking advantage of extra usage requires no user action. Extra usage, if supported with your plan, is allocated by default. If you use more storage, compute, or projects than your monthly allowance provides, the extra usage is automatically allocated and charged to your monthly bill.
 
 **Storage**
 
-For example, the Launch plan includes an allowance of 10 GiB in the plan's monthly fee. If you exceed 10 GiB of storage at any point during the month, you are automatically billed for an extra storage unit of 2 GiB at $3.50 per unit. If you exceed 12 GiB, you are billed for 2 units of 2 GiB (an extra $7), and so on. It works the same way on the Scale plan, but with 10 GiB units of storage at $15 per unit. However, the extra charge is prorated from the date the extra usage was incurred, meaning that you are not billed the full amount if you purchase extra storage units partway through the month.
+For example, the Launch plan includes an allowance of 10 GiB in the plan's monthly fee. If you exceed 10 GiB of storage at any point during the month, you are automatically allocated an extra storage unit of 2 GiB at $3.50 per unit. If you exceed 12 GiB, you are allocated 2 units of 2 GiB (an extra $7), and so on. It works the same way on the Scale plan, but with 10 GiB units of storage at $15 per unit. However, the extra charge is prorated from the date the extra usage was allocated, meaning that you are not billed the full amount if extra storage units were allocated partway through the month.
+
+<Admonition type="note">
+In the context of billing, allocation of extra storage refers to an increases in the storage allowance rather than physical storage allocation.
+</Admonition>
 
 **Projects**
 
-Billing for extra projects, which are available with the [Scale](/docs/introduction/plans##scale) plan, works in the same way as storage. Extra projects are billed for in units of 10. For example, the Scale plan has an allowance of 50 projects. If you use more than 50 projects, you are automatically billed for an extra unit of 10 projects at $50 per unit. For example, if you use 51 projects, you are billed for 1 unit of 10 projects (an extra $50). If you use 61 projects, you are billed for 2 units of 10 projects (an extra $100), and so on. The extra charge is prorated from the date the extra usage was incurred, meaning that you are not billed the full amount if you purchase extra project units partway through the month.
+Billing for extra projects, which are available with the [Scale](/docs/introduction/plans##scale) plan, works in the same way as storage. Extra projects are allocated in units of 10. For example, the Scale plan has an allowance of 50 projects. If you use more than 50 projects, you are automatically allocated an extra unit of 10 projects at $50 per unit. For example, if you use 51 projects, you are allocated 1 unit of 10 projects (an extra $50). If you use 61 projects, you are allocated 2 units of 10 projects (an extra $100), and so on. The extra charge is prorated from the date the extra usage was allocated, meaning that you are not billed the full amount if extra project units are allocated partway through the month.
 
 <Admonition type="note" title="How extra storage and project charges are prorated">
-The proration formula for calculating the cost of extra storage or projects purchased during a monthly billing period is:
+The proration formula for calculating the cost of extra storage or projects allocated during a monthly billing period is:
 
 ```plaintext
 Cost = Units x (Unit Price/Days in Month) x Days Left in Month
@@ -92,7 +96,7 @@ Where:
 - **Days** is the total number of days in the month
 - **Days Left in Month** is the number of days remaining in the month after going over your limit
 
-Once you purchase an extra unit of storage or projects, you are billed for that extra unit for the remainder of the month. If you reduce your usage during that month and no longer require extra units of storage or projects, the extra usage charge is dropped at the beginning of the next month when your bill resets based on current usage.
+Once an extra unit of storage or projects is allocated, you are billed for that extra unit for the remainder of the month. If you reduce your usage during that month and no longer require extra units of storage or projects, the extra usage charge is dropped at the beginning of the next month when your bill resets based on current usage.
 </Admonition>
 
 **Compute**
@@ -101,7 +105,7 @@ Extra compute usage is available with the [Launch](/docs/introduction/plans##lau
 
 ## Extra usage examples
 
-The following examples illustrate how extra storage usage is billed in Neon. The same approach applies to extra project usage. The examples are based on the Scale plan, which comes with a 50 GiB storage allowance. The Launch plan has a different storage allowance (10 GiB) and cost per extra storage unit ($3.50 per 2 GiB), but the same methodology applies.
+The following examples illustrate how extra storage is allocated and billed in Neon. The same method applies to extra project usage. The examples are based on the Scale plan, which comes with a 50 GiB storage allowance. The Launch plan has a different storage allowance (10 GiB) and cost per extra storage unit ($3.50 per 2 GiB), but the examples still apply.
 
 ### Example 1: Steady extra storage usage
 
@@ -119,7 +123,7 @@ This example illustrates how a steady amount of extra storage usage is billed.
 
 ### Example 2: Storage exceeds the limit at the start of the month
 
-This example illustrates how extra storage is billed from the date the extra storage usage was incurred until the end of the month, not just for the days the storage limit was exceeded.
+This example illustrates how extra storage is billed from the date the extra storage usage is allocated until the end of the month, not just for the days the storage limit was exceeded.
 
 **Plan**: Scale
 **Period:** June 1st – June 15th  
@@ -138,7 +142,7 @@ If usage remained at 45 GiB through to the end of July, no extra storage would b
 
 ### Example 3: Storage exceeds and falls below the limit at the end of the month
 
-This example illustrates a prorated charge for extra storage that was incurred toward the end of the billing period. The charge is prorated from the date the extra storage usage was incurred.
+This example illustrates a prorated charge for extra storage that was allocated toward the end of the billing period. The charge is prorated from the date the extra storage usage was allocated.
 
 **Plan**: Scale
 **Period:** 
