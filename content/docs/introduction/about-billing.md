@@ -29,7 +29,7 @@ Find out how billing works and learn more about Neon's usage metrics.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/extra usage" description="Learn about plan allowances and usage" icon="wallet">Extra usage</a>
+<a href="/docs/introduction/extra-usage" description="Learn about plan allowances and usage" icon="wallet">Extra usage</a>
 
 <a href="/docs/introduction/usage-metrics" description="Take a deep dive into the usage metrics behind plan allowances and extra usage" icon="metrics">Usage metrics</a>
 
