@@ -366,6 +366,10 @@ Adjusting a payment or charge so it corresponds to the actual usage or time peri
 
 A Neon component that functions as a multitenant service that accepts and handles connections from clients that use the Postgres protocol.
 
+## Protected branch
+
+A status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan. For information about how to configure a protected branch, refer to the [Protected branches guide](/docs/guides/protected-branches).
+
 ## Publisher
 
 In the context of logical replication, the publisher is the primary data source where changes occur. It's responsible for sending those changes to one or more subscribers. A Neon database can act as a publisher in a logical replication setup. See [Logical replication](/docs/guides/logical-replication-guide). 
@@ -440,9 +444,9 @@ Represents the downstream side of logical replication, establishing a connection
 
 A Neon Control Plane operation that suspends a compute endpoint after a period of inactivity. See [Operations](/docs/manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](/docs/introduction/compute-lifecycle).
 
-## Technical Preview
+## Technical preview
 
-Neon is currently in Technical Preview, meaning that some intended core functionalities are still being developed or perfected. Please refer to the [Neon roadmap](/docs/introduction/roadmap) for more information.
+An early version of a feature or changes released for testing and feedback purposes.
 
 ## Token
 
