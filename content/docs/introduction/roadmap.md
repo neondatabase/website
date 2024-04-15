@@ -25,13 +25,9 @@ Here's a snapshot of what we're working on now:
 
 ### Observability
 
-* **Autoscaling charts in the Project Dashboard**
+* **More metrics for the Monitoring page**
 
-    Continuing with our improvements to monitoring and observability in Neon, our new [Autoscaling graphs](/docs/guides/autoscaling-guide#monitor-autoscaling) &#8212; available now when you edit a branch's compute instance &#8212; will soon be added to the Project Dashboard as well.
-
-* **New Monitoring page**
-
-   We are also working on adding a new Monitoring page to the Neon Console that will display key Postgres, connection, and resource usage metrics in a dashboard.
+   We are also working on adding more metrics to the Monitoring page in the Neon Console to provide the key Postgres and resource usage metrics you require to effectively manage your projects and databases.
 
 * **For partners, a more granular Consumption API**
 
@@ -39,23 +35,15 @@ Here's a snapshot of what we're working on now:
 
 ### Developer workflows
 
-* **Schema Diff**
+* **GitHub integration**
 
-    We are currently building a Schema Diff tool that lets you precisely compare database schemas between different branches to help streamline your integration process.
-
-    If there are any new branching features that you think could help your development team's workflow, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042).
-
-* **Improvements to Vercel integration**
-
-    Some upcoming improvements to the Vercel integration include a method for removing old preview deployment branches, as well as new Neon actions and better error messaging to let you do more right from the Vercel integration drawer.
-
-* **Adding Time Travel Assist to the SQL Editor**
-
-   To help with data recovery workflows, we're making our Time Travel Assist feature available in the SQL Editor in the Neon Console. Time Travel Assist is available now on the **Restore** page, but it's a great feature and we want to make it more convenient for you to use, wherever you might need it in the console.
+  We're working on a GitHub integration for Neon that will create and delete Neon branches in synchronization with git branch actions.
 
 * **Support for anonymizing data**
 
    To help with workflows that require protecting personal information, we're adding support for anonymizing data. For example, if you derive your staging branch directly from production, you might want to anonymize the data on staging, which you can then use as the source for all of your development and testing branches.
+
+If there are any new branching features that you think could help your development team's workflow, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042).
 
 ### Account management
 
@@ -83,4 +71,4 @@ In the third quarter of 2023, we added [IP allowlisting](/docs/introduction/ip-a
 
 In the fourth quarter of 2023, we added support for the Asia Pacific (Sydney) region, [Branch Restore](/docs/guides/branch-restore) with Time Travel Assist, and new [Pricing](https://neon.tech/pricing) plans.
 
-On April 15th, 2024, Neon announced General Availability.
+On April 15th, 2024, Neon announced [General Availability](https://neon.tech/blog/neon-ga).
