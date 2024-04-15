@@ -63,7 +63,10 @@ const TableHeading = ({
         dangerouslySetInnerHTML={{ __html: price }}
       />
       <Button
-        className="mt-[18px] h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-4 xl:h-9 xl:max-w-[200px] lg:w-[160px] sm:w-[150px] sm:max-w-none"
+        className={clsx(
+          'mt-[18px] h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-4 xl:h-9 xl:max-w-[200px] lg:w-[160px] sm:w-[150px] sm:max-w-none',
+          !isFeaturedPlan && 'bg-opacity-80'
+        )}
         size="xs"
         theme={isFeaturedPlan ? 'primary' : 'gray-15'}
         to={buttonUrl}
@@ -144,7 +147,7 @@ const Table = () => {
         className={clsx(
           'scrollbar-hidden relative flex w-full pt-3 lg:overflow-x-auto lg:pr-4',
           isHiddenItems &&
-            'after:absolute after:inset-x-0 after:bottom-0 after:h-1.5 after:bg-black-new'
+            'after:absolute after:inset-x-0 after:bottom-0 after:h-1.5 after:bg-black-pure'
         )}
       >
         {Object.keys(tableData.headings).map((key, i, arr) => {

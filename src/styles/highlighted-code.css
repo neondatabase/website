@@ -82,11 +82,7 @@
       content: counter(line);
 
       /* Other styling */
-      display: inline-block;
-      width: 1rem;
-      margin-right: 1.25rem;
-      text-align: right;
-      color: gray;
+      @apply mr-5 inline-block text-right text-gray-new-50;
     }
   }
 }

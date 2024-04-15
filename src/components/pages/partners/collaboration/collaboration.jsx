@@ -73,7 +73,7 @@ const Collaboration = () => (
                 <div className="flex flex-col">
                   <Image src={logo.icon} alt={logo.alt} width={logo.width} height={logo.height} />
                   <Label label={label} color={labelColor} />
-                  <p className="mt-3 line-clamp-3 font-light leading-snug text-gray-new-60 text-gray-new-90">
+                  <p className="mt-3 line-clamp-3 font-light leading-snug text-gray-new-80">
                     {description}
                   </p>
                 </div>
