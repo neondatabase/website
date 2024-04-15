@@ -98,7 +98,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 ### Features
 
 - Compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** or never)
-- Advanced Postgres features including connection pooling, logical replication, and 60+ Postgres extensions
+- Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
 - Neon features such as branching, point-in-time restore up to **7 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
 
@@ -133,7 +133,7 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 ### Features
 
 - Compute up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** or never)
-- Advanced Postgres features including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions
+- Advanced Postgres features, including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions
 - Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
 - [Priority support](/docs/introduction/support)
 
