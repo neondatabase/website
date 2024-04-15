@@ -37,7 +37,7 @@ const CTA = () => {
   }, [rive, isContentInView]);
 
   return (
-    <section className="safe-paddings bg-black-new pt-16">
+    <section className="safe-paddings bg-black-pure pt-16">
       <Container className="grid grid-cols-12 items-center gap-4" size="md">
         <div className="z-10 col-span-4 col-start-2 mb-24 xl:col-span-5 xl:col-start-1 lg:mb-12 md:col-span-full">
           <Heading className="whitespace-nowrap md:text-center" tag="h2" size="2sm">
