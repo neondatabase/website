@@ -1,13 +1,14 @@
 'use client';
 
 import clsx from 'clsx';
+import Image from 'next/image';
 import { useState, useRef } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import RiveAnimation from 'components/shared/rive-animation';
 import branchingIcon from 'icons/home/hero/branching.svg';
 import serverlessIcon from 'icons/home/hero/serverless.svg';
+import bg from 'images/pages/home/hero/bg.jpg';
 
 import Video from './video';
 
@@ -57,10 +58,13 @@ const Hero = () => {
 
   return (
     <section className="hero safe-paddings relative pt-[136px] xl:pt-[120px] lg:pt-14 md:pt-8">
-      <RiveAnimation
-        className="absolute left-1/2 top-0 aspect-[1.77761] min-w-[1920px] -translate-x-1/2 xl:min-w-[1286px] md:min-w-[1010px] sm:top-28 sm:min-w-[526px]"
-        src="/animations/pages/home/hero-bg.riv?updated=20240412113723"
-        artboard="hero"
+      <Image
+        className="absolute left-1/2 top-0 -translate-x-1/2 xl:min-w-[1286px] md:min-w-[1010px] sm:top-28 sm:min-w-[526px]"
+        src={bg}
+        width={1760}
+        height={980}
+        quality={100}
+        priority
       />
 
       <Container className="pointer-events-none 2xl:px-10" size="1100">
