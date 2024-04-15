@@ -38,6 +38,7 @@ const styles = {
     'gray-50': 'text-gray-new-50 transition-colors duration-200 hover:text-green-45',
     'gray-70':
       'text-gray-new-70 dark:text-gray-new-70 transition-colors duration-200 hover:text-green-45',
+    'gray-80': 'text-gray-new-80 transition-colors duration-200 hover:text-green-45',
     'gray-90': 'text-gray-new-90 transition-colors duration-200 hover:text-green-45',
   },
 };

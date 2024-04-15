@@ -54,7 +54,7 @@ const Hero = () => (
             <span>Featured</span>
             <span className="ml-2 h-px grow bg-gray-new-20" />
           </h2>
-          <ul className="mt-6 grid grid-cols-10 grid-rows-2 gap-x-10 gap-y-9 lg:grid-cols-2 md:grid-cols-1">
+          <ul className="mt-6 grid grid-cols-10 grid-rows-2 gap-x-10 gap-y-7 lg:grid-cols-2 md:grid-cols-1">
             {items.map(({ image, imageWidth, imageHeight, title, demoLink, sourceLink }, index) => (
               <li
                 className={clsx(
@@ -93,7 +93,7 @@ const Hero = () => (
                 <div className="mt-4 flex items-center justify-start gap-x-4 text-[15px] leading-none">
                   {demoLink !== '#' && (
                     <Link
-                      className="flex items-center rounded-full bg-gray-new-15 px-5 py-3 text-[15px] font-medium leading-none transition-colors duration-200 hover:bg-gray-new-30"
+                      className="flex items-center rounded-full bg-gray-new-15 bg-opacity-80 px-5 py-3 text-[15px] font-medium leading-none transition-colors duration-200 hover:bg-gray-new-20"
                       to={demoLink}
                       target={demoLink.startsWith('http') ? '_blank' : '_self'}
                       rel={demoLink.startsWith('http') ? 'noopener noreferrer' : ''}
@@ -106,7 +106,7 @@ const Hero = () => (
                     className="text-[15px] leading-none"
                     to={sourceLink}
                     target="_blank"
-                    theme="gray-90"
+                    theme="gray-80"
                     rel="noopener noreferrer"
                   >
                     Source
