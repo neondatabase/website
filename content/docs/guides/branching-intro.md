@@ -67,7 +67,7 @@ Recover lost data or track down issues by restoring a branch to its history, or 
 
 <a href="/docs/guides/branch-restore" description="Learn how to revert changes or recover lost data using Neon Branch Restore with Time Travel Assist" icon="invert">Branch Restore with Time Travel Assist</a>
 
-<a href="/docs/guides/time-travel-assist" description="Query point-in-time connections with Time Travel Assist " icon="invert">Time Travel Assist</a>
+<a href="/docs/guides/time-travel-assist" description="Query point-in-time connections with Time Travel " icon="invert">Time Travel</a>
 
 <a href="/docs/guides/schema-diff" description="Visualize schema differences between branches to help with troubleshooting" icon="invert">Schema diff</a>
 
