@@ -7,15 +7,15 @@ redirectFrom:
 updatedOn: '2024-02-22T14:29:54.387Z'
 ---
 
-Data resides in a branch. Each Neon project is created with a [primary branch](#primary-branch) called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
+Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [primary branch](#primary-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
 
 A child branch is a copy-on-write clone of the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
 
-You can create and manage branches using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). This topic covers both methods.
+You can create and manage branches using the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="important">
-When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated. Neon retains a 7-day data history, by default. You can configure the retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). To keep data storage to a minimum, remove branches before they age out of the history retention window.
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated. Neon retains a data history by default. You can configure the retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). To keep data storage to a minimum, remove branches before they age out of the history retention window.
 </Admonition>
 
 ## Primary branch
@@ -31,6 +31,10 @@ Any branch not designated as the primary branch is considered a non-primary bran
 
 - For Neon Free Tier users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier  _active hours_ limit of 20 hours per month.
 - For users on paid plans, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
+
+## Protected branch
+
+"Protected" is a status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan, where you can designate up to 5 protected branches. For information about how to configure a protected branch, see [Set a branch as protected](#set-a-branch-as-protected).
 
 ## Create a branch
 
@@ -98,6 +102,27 @@ To set a branch as the primary branch:
 4. On the branch page, click the **More** drop-down menu and select **Set as primary**.
 5. In the **Set as primary** confirmation dialog, click **Set as Primary** to confirm your selection.
 
+## Set a branch as protected
+
+"Protected" is a status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. This feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan, which supports up to five protected branches.
+
+For the protected status to have any effect, you must:
+
+1. Define an IP allowlist.
+2. Select the **Restrict IP access to protected branches only** option.
+
+For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+
+To designate a branch as protected:
+
+1. In the Neon Console, select a project.
+2. Select **Branches** to view the branches for the project.
+3. Select a branch from the table.
+4. On the branch page, click the **More** drop-down menu and select **Set as protected**.
+5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
+
+For step-by-step instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
+
 ## Connect to a branch
 
 Connecting to a database in a branch requires connecting via a compute endpoint associated with the branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
@@ -137,7 +162,7 @@ When working with database branches, you might find yourself in a situation wher
 <TabItem>
 On the **Branches** page in the Neon Console, select the branch that you want to reset.
 
-The console opens to the details page for your branch, giving you key information about the branch and its child status: its parent, the last time it was reset, and other relevent detail.
+The console opens to the details page for your branch, giving you key information about the branch and its child status: its parent, the last time it was reset, and other relevant details.
 
 To reset the branch, select **Reset from parent** from either the **More** dropdown or the **Last Data Reset** panel.
 
