@@ -56,7 +56,7 @@ const CodeBlockWrapper = ({
       {children}
       <button
         className={clsx(
-          'invisible absolute right-2 top-2 rounded border border-gray-6 bg-white p-1.5 text-gray-2 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-black dark:text-gray-8 lg:visible lg:opacity-100',
+          'invisible absolute right-2 top-2 rounded p-1.5 text-gray-new-10 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-black dark:text-gray-8 lg:visible lg:opacity-100',
           copyButtonClassName
         )}
         type="button"
