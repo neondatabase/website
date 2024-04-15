@@ -105,8 +105,9 @@ The following examples illustrate how extra storage usage is billed in Neon. The
 
 ### Example 1: Steady extra storage usage
 
-This example illustrates how steady extra storage usage is billed.
+This example illustrates how a steady amount of extra storage usage is billed.
 
+**Plan**: Scale
 **Period:** June 1st – June 30th  
 **Usage:** Steady at 55 GiB throughout the month
 
@@ -118,8 +119,9 @@ This example illustrates how steady extra storage usage is billed.
 
 ### Example 2: Storage exceeds the limit at the start of the month
 
-This example illustrates how extra storage is billed from the date the extra storage is allocated until the end of the month, not just for the days the storage limit was exceeded.
+This example illustrates how extra storage is billed from the date the extra storage usage was incurred until the end of the month, not just for the days the storage limit was exceeded.
 
+**Plan**: Scale
 **Period:** June 1st – June 15th  
 **Usage:** 55 GiB  
 **Change:** On June 16th, usage decreased to 45 GiB until the end of the month
@@ -131,13 +133,14 @@ This example illustrates how extra storage is billed from the date the extra sto
 | **Total**| $84                 |
 
 <Admonition type="note">
-If usage remained at 45 GiB through July, no extra storage would be needed, and July's total would be $69 for the Scale plan.
+If usage remained at 45 GiB through to the end of July, no extra storage would be needed, and July's total would be $69 for the Scale plan.
 </Admonition> 
 
 ### Example 3: Storage exceeds and falls below the limit at the end of the month
 
-This example illustrates a prorated charge for extra storage that was incurred toward the end of the billing period. The charge is prorated from the date the extra storage was allocated.
+This example illustrates a prorated charge for extra storage that was incurred toward the end of the billing period. The charge is prorated from the date the extra storage usage was incurred.
 
+**Plan**: Scale
 **Period:** 
 - **June 1st – June 27th:** Usage up to 49 GiB
 - **June 28th:** Usage increased to 55 GiB
