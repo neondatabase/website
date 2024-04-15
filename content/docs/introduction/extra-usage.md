@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2024-02-22T14:29:54.384Z'
 ---
 
-Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, extra usage is available for a fee.
+Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, you can purchase extra usage in set increments for when you need to go over your allowance.
 
 ## Plan fees and allowances
 
@@ -140,7 +140,7 @@ This example illustrates how extra storage is billed from the date the extra sto
 If usage remained at 45 GiB through to the end of July, no extra storage would be needed, and July's total would be $69 for the Scale plan.
 </Admonition> 
 
-### Example 3: Storage exceeds and falls below the limit at the end of the month
+### Example 3: Storage spikes briefly at the end of the month
 
 This example illustrates a prorated charge for extra storage that was allocated toward the end of the billing period. The charge is prorated from the date the extra storage usage was allocated.
 

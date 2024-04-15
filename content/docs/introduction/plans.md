@@ -24,7 +24,7 @@ Neon offers four plans:
 - [Enterprise](#enterprise)
 
 <Admonition type="tip" title="Plan Allowances and Extra Usage">
-Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, extra usage is available for a fee.
+Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, you can purchase [extra usage](/docs/introduction/extra-usage) in set increments for when you need to go over your allowance.
 </Admonition>
 
 ## Free Tier
