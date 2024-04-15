@@ -28,17 +28,17 @@ const CardItem = ({
 
   return (
     <li>
-      <GradientCard className="px-8 pb-10 pt-9 md:p-7 md:pb-8" {...linkProps}>
+      <GradientCard className="p-8 md:p-7 md:pb-8" {...linkProps}>
         <div className="flex h-full flex-col">
           <Image
-            className="xl:h-12 xl:w-fit"
+            className="h-10 w-fit"
             src={logo.mediaItemUrl}
             alt={title}
             width={logo.mediaDetails.width}
             height={logo.mediaDetails.height}
             priority={index < 6}
           />
-          <p className="mb-4 mt-12 line-clamp-3 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-8 md:mt-6">
+          <p className="mb-4 mt-[60px] line-clamp-3 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-8 md:mt-6">
             <span className="font-normal text-white">{title}</span>. {description}
           </p>
           {!!linkUrl && (
@@ -81,8 +81,8 @@ const Hero = ({ items }) => (
         Discover the diverse and captivating stories of our valued partners, each a testament to
         unique experiences and successes.
       </p>
-      <div className="grid-gap-x grid grid-cols-12">
-        <ul className="col-span-10 col-start-2 mt-20 grid grid-cols-3 gap-x-8 gap-y-7 xl:col-span-full xl:col-start-1 xl:mt-16 lg:mt-12 lg:grid-cols-2 md:mt-10 md:gap-6 sm:grid-cols-1">
+      <div className="grid-gap-x grid grid-cols-12 gap-x-[34px]">
+        <ul className="col-span-10 col-start-2 mt-20 grid grid-cols-3 gap-x-8 gap-y-9 xl:col-span-full xl:col-start-1 xl:mt-16 lg:mt-12 lg:grid-cols-2 md:mt-10 md:gap-6 sm:grid-cols-1">
           {items.map(({ title, caseStudyPost }, index) => (
             <CardItem {...caseStudyPost} title={title} key={index} index={index} />
           ))}
