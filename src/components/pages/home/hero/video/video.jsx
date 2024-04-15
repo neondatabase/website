@@ -64,7 +64,7 @@ const Video = forwardRef(
           <div className="relative h-[466px] overflow-hidden rounded-[10px] 2xl:h-[430px] md:h-[317px] sm:h-auto">
             <video
               className={clsx(
-                'absolute left-0 top-0 h-auto min-w-[704px] transition-all duration-300 2xl:min-w-[652px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
+                'absolute left-0 top-0 h-auto min-w-[704px] transition-all duration-1000 2xl:min-w-[652px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
                 videoClassName,
                 isActive && '!left-0 lg:!left-1/2 lg:-translate-x-1/2 sm:left-0 sm:translate-x-0'
               )}
