@@ -2,6 +2,8 @@
 title: Monitor billing and usage metrics
 subtitle: Monitor billing and usage metrics for your account and projects from the console or API
 enableTableOfContents: true
+redirectFrom:
+  - /docs/introduction/billing
 ---
 
 Neon exposes usage metrics in the Neon Console and through the Neon API. These metrics can answer questions like:
@@ -14,33 +16,7 @@ Neon exposes usage metrics in the Neon Console and through the Neon API. These m
 
 ## View usage metrics in the Neon Console
 
-Usage metrics in the console can be found on the **Project Dashboard**, the **Billing**, and the **Branches** page. 
-
-### Project Dashboard 
-
-The **Usage** widget on the Neon Dashboard shows a snapshot of project usage.
-
-![Monitor usage widget](/docs/introduction/monitor_usage_widget.png)
-
-Usage metrics include:
-
-- **Storage**: The total volume of data and history for your project, measured in gibibytes (GiB). Data refers to the logical data size. History consists of  Write-Ahead Logging (WAL) records capturing the data’s change history that is used to enable branching-related features. 
-- **Data transfer**: The total volume of data transferred out of Neon (known as "egress") during the current billing period.
-- **Written data**: The total volume of data written from compute to storage during the current billing period, measured in gigibytes (GiB).
-- **Compute**: The total number of compute hours used during the current billing period.
-- **Active computes**: The current number of active computes in your project.
-- **Branches**: The number of branches in your project.
-
-The **Branches** widget shows a **Data size** metric, which is the size of the actual data on your branch. It does not include history.
-
-![Monitor branches widget](/docs/introduction/monitor_branches_widget.png)
-
-You can select a branch in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and run this query to get the same data (rounded):
-
-```sql
-SELECT pg_size_pretty(sum(pg_database_size(datname)))
-FROM pg_database;
-```
+Usage metrics in the console can be found on the **Billing** page, the **Project Dashboard**, and the **Branches** page. 
 
 ### Billing page
 
@@ -74,6 +50,32 @@ Usage metrics on the **Billing page** include:
 - **What about extra usage?**
 
   The Launch plan supports extra storage and compute usage. The Scale plan supports extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. If extra usage occurs, it is reflected in your monthly allowance on the **Billing** page. For example, if you purchased an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page. Extra storage and projects reset at the beginning of the next month based on current usage. See [Extra usage](/docs/introduction/extra-usage) to learn more.
+
+### Project Dashboard 
+
+The **Usage** widget on the Neon Dashboard shows a snapshot of project usage.
+
+![Monitor usage widget](/docs/introduction/monitor_usage_widget.png)
+
+Usage metrics include:
+
+- **Storage**: The total volume of data and history for your project, measured in gibibytes (GiB). Data refers to the logical data size. History consists of  Write-Ahead Logging (WAL) records capturing the data’s change history that is used to enable branching-related features. 
+- **Data transfer**: The total volume of data transferred out of Neon (known as "egress") during the current billing period.
+- **Written data**: The total volume of data written from compute to storage during the current billing period, measured in gigibytes (GiB).
+- **Compute**: The total number of compute hours used during the current billing period.
+- **Active computes**: The current number of active computes in your project.
+- **Branches**: The number of branches in your project.
+
+The **Branches** widget shows a **Data size** metric, which is the size of the actual data on your branch. It does not include history.
+
+![Monitor branches widget](/docs/introduction/monitor_branches_widget.png)
+
+You can select a branch in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and run this query to get the same data (rounded):
+
+```sql
+SELECT pg_size_pretty(sum(pg_database_size(datname)))
+FROM pg_database;
+```
 
 ### Branches page
 
