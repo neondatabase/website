@@ -12,21 +12,18 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
   const secondaryPosts = posts.slice(1, 6);
   return (
     <section className="posts-list flex flex-col">
-      <h2
-        className={clsx(
-          'flex items-center font-title text-xs font-medium font-semibold uppercase leading-none tracking-[0.02em]',
-          CATEGORY_COLORS[lowerCaseTitle] || 'text-green-45'
-        )}
-      >
-        <span>{title}</span>
+      <h2 className={clsx('flex items-center', CATEGORY_COLORS[lowerCaseTitle] || 'text-green-45')}>
+        <span className="text-[11px] font-semibold uppercase leading-none -tracking-extra-tight">
+          {title}
+        </span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>
-      <div className="mt-6 grid grid-cols-10 gap-x-10 gap-y-5 2xl:gap-x-6 lt:grid-cols-12 lg:mt-5 md:gap-y-10">
+      <div className="mt-6 grid grid-cols-12 gap-y-5 lt:gap-x-6 lg:mt-5 md:gap-y-10">
         <BlogPostCard
           className={clsx(
             alignment === 'left'
-              ? 'col-span-6 col-start-1 xl:col-span-5 lt:col-span-6'
-              : 'col-span-6 col-start-5 xl:col-span-5 xl:col-start-6 lt:col-span-7 lt:col-start-6 lg:col-span-6 lg:col-start-7',
+              ? 'col-span-7 col-start-1 lt:col-span-6'
+              : 'col-span-7 col-start-6 lt:col-span-7 lt:col-start-6 lg:col-span-6 lg:col-start-7',
             'sm:col-span-full'
           )}
           {...primaryPost.post}
@@ -34,8 +31,8 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
         <div
           className={clsx(
             alignment === 'left'
-              ? 'col-span-4 col-start-7 xl:col-span-5 xl:col-start-6 lt:col-span-6 lt:col-start-7'
-              : 'col-start-1 col-end-5 row-start-1 divide-y divide-gray-new-15 xl:col-end-6 lt:col-end-6 lg:col-end-7 sm:order-1 sm:row-start-2',
+              ? 'col-span-5 col-start-8 pl-7 xl:pl-6 lt:col-span-6 lt:col-start-7 lt:pl-0'
+              : 'col-start-1 col-end-6 row-start-1 divide-y divide-gray-new-15 pr-7 xl:pr-6 lt:col-end-6 lt:pr-0 lg:col-end-7 sm:order-1 sm:row-start-2',
             'sm:col-span-full'
           )}
         >
@@ -44,7 +41,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
               .slice(0, 3)
               .map(({ post }, index) => (
                 <BlogPostCard
-                  className="py-[18px] first:pt-0 last:pb-0 md:py-4"
+                  className="py-4 first:pt-0 last:pb-0"
                   {...post}
                   size={index === 0 ? 'md' : 'xs'}
                   key={index}
@@ -52,7 +49,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
               ))}
           {alignment === 'left' && (
             <>
-              <div className="grid grid-cols-2 gap-x-10 pb-[18px] 2xl:gap-x-6 lg:pb-5 xs:grid-cols-1 xs:gap-y-10">
+              <div className="grid grid-cols-2 gap-x-7 pb-6 2xl:gap-x-6 lg:pb-5 xs:grid-cols-1 xs:gap-y-10">
                 {secondaryPosts.slice(0, 2).map(({ post }, index) => (
                   <BlogPostCard {...post} size="sm" key={index} />
                 ))}
@@ -60,7 +57,7 @@ const PostsList = ({ title, posts, alignment = 'left' }) => {
               <div>
                 {secondaryPosts.slice(2, 6).map(({ post }, index) => (
                   <BlogPostCard
-                    className="border-t border-gray-new-15 py-[18px] last:pb-0 lg:py-4"
+                    className="border-t border-gray-new-15 py-4 last:pb-0"
                     {...post}
                     size="xs"
                     key={index}

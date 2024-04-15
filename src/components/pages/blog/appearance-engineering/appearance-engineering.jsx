@@ -9,13 +9,13 @@ import { BlogPostCardPropTypes } from '../blog-post-card/blog-post-card';
 import PlayIcon from './images/play.inline.svg';
 
 const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
-  <section className="appearance-engineering grid grid-cols-10 gap-x-10 2xl:gap-x-6 lt:grid-cols-12 md:gap-y-20">
-    <div className="col-span-4 xl:mr-4 lt:col-span-5 lt:mr-0 md:col-span-full">
+  <section className="appearance-engineering grid grid-cols-5 gap-x-14 xl:gap-x-6 md:grid-cols-1 md:gap-y-20">
+    <div className="col-span-2 pr-6 md:col-span-full md:pr-0">
       <h2 className="flex items-center font-title text-xs font-medium uppercase leading-none tracking-[0.02em] text-blue-80">
         <span>Appearances</span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>
-      <ul>
+      <ul className="mt-6 flex flex-col gap-y-7 xl:gap-y-6">
         {appearancesPosts.map(
           (
             {
@@ -26,7 +26,7 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
             },
             index
           ) => (
-            <li key={index} className="mt-6 lg:mt-5 md:mt-6 md:first:mt-5">
+            <li key={index}>
               <Link className="group group flex items-center space-x-4" to={url}>
                 {coverImage ? (
                   <Image
@@ -48,12 +48,12 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
                 )}
 
                 <div>
-                  <h3 className="line-clamp-2 font-title text-lg font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-green-45 lg:text-base">
+                  <h3 className="line-clamp-2 font-title text-lg font-medium leading-dense tracking-extra-tight transition-colors duration-200 group-hover:text-green-45 lg:text-base">
                     {title}
                   </h3>
                   <div className="mt-2 flex items-center">
                     <PlayIcon className="mr-2 inline-block" />
-                    <span className="text-sm font-medium leading-tight tracking-[-0.02em] text-blue-80 transition-colors duration-200 group-hover:text-[#C2E8F0]">
+                    <span className="text-sm font-medium leading-tight tracking-extra-tight text-blue-80 transition-colors duration-200 group-hover:text-[#C2E8F0]">
                       Listen now
                     </span>
                   </div>
@@ -64,12 +64,12 @@ const AppearanceEngineering = ({ appearancesPosts, engineeringPosts }) => (
         )}
       </ul>
     </div>
-    <div className="col-span-6 flex flex-col xl:-ml-4 lt:col-span-7 lt:ml-0 md:col-span-full">
+    <div className="col-span-3 -ml-6 flex flex-col md:col-span-full md:ml-0">
       <h2 className="flex items-center font-title text-xs font-medium uppercase leading-none tracking-[0.02em] text-[#B8ADEB]">
         <span>Engineering</span>
         <span className="ml-2 h-px grow bg-gray-new-20" />
       </h2>
-      <div className="mt-6 grid grid-cols-6 gap-x-10 2xl:gap-x-6 lt:col-span-4 lt:grid-cols-7 lg:mt-5 md:gap-y-10">
+      <div className=" mt-6 grid grid-cols-6 gap-x-7 xl:gap-x-6 lt:col-span-4 lt:grid-cols-7 lg:mt-5 md:gap-y-10">
         <div className="col-span-4 xl:col-span-3 xl:-mr-12 lt:col-span-4 lt:mr-0 md:col-span-full">
           {engineeringPosts.slice(0, 1).map(({ post }, index) => (
             <BlogPostCard className="pb-[18px] lg:pb-2.5" {...post} size="md" key={index} />

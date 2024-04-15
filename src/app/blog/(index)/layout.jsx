@@ -17,9 +17,9 @@ const BlogPageLayout = async ({ children }) => {
       isHeaderSticky
     >
       <div className="safe-paddings pt-16 lt:pt-0">
-        <Container className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lt:gap-x-4" size="lg">
+        <Container className="flex lt:flex-col" size="1344">
           <Sidebar categories={categories} />
-          <div className="relative col-span-10 col-start-3 -mx-8 grid max-w-[1220px] gap-y-20 pb-40 2xl:mx-0 2xl:pl-16 xl:gap-y-16 xl:pb-32 lt:col-span-full lt:pl-0 lt:pt-8 lg:gap-y-20 lg:pb-28 md:pb-20">
+          <div className="grow-1 relative grid gap-y-20 pb-40 2xl:pl-16 xl:gap-y-16 xl:pb-32 lt:pl-0 lt:pt-8 lg:gap-y-20 lg:pb-28 md:pb-20">
             {children}
           </div>
         </Container>

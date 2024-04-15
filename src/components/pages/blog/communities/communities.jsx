@@ -40,7 +40,7 @@ const items = [
 ];
 
 const Communities = () => (
-  <section className="pb-[104px] pt-20 xl:pb-[88px] xl:pt-16 lg:pb-20 lg:pt-14 md:py-12">
+  <section className="mb-40 xl:mb-[88px] lg:mb-20 md:my-12">
     <Container className="flex flex-col items-center" size="1344">
       <h2 className="font-title text-4xl font-medium leading-none tracking-tighter xl:text-[32px] lg:text-[28px] md:text-center md:text-2xl">
         Connect with Neon’s communities
@@ -62,7 +62,7 @@ const Communities = () => (
               >
                 <div
                   className={clsx(
-                    'relative z-10 flex h-full w-full items-center justify-between overflow-hidden rounded-md bg-black-new px-7 py-6 xl:flex-col xl:items-start xl:justify-normal xl:p-5 lg:p-4 md:flex-row md:items-center md:justify-between md:py-5'
+                    'relative z-10 flex h-full w-full items-center justify-between overflow-hidden rounded-md bg-black-pure px-7 py-5 xl:flex-col xl:items-start xl:justify-normal xl:p-5 lg:p-4 md:flex-row md:items-center md:justify-between md:py-5'
                   )}
                 >
                   <img
@@ -75,7 +75,7 @@ const Communities = () => (
                   />
                   <div className="xl:order-1 xl:mt-2 md:order-none">
                     <h3
-                      className="text-2xl font-medium leading-none tracking-tighter xl:text-xl lg:text-lg [&_mark]:bg-transparent"
+                      className="font-title text-2xl font-medium leading-none tracking-tighter xl:text-xl lg:text-lg [&_mark]:bg-transparent"
                       dangerouslySetInnerHTML={{ __html: name }}
                     />
                     <p className="mt-2.5 text-sm leading-none tracking-[-0.02em] text-gray-new-70 xl:leading-tight">
