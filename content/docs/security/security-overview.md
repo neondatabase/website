@@ -21,6 +21,10 @@ In addition, Neon requires a 60-bit entropy password for all PostgreSQL roles. T
 
 Neon's IP Allow feature, available with the [Scale](/docs/introduction/plans#scale) plan, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
+## Protected branches
+
+You can designate any branch as a "protected branch". A protected status limits access to the branch based on IP addresses. Only IPs listed in your project’s IP allowlist can access this branch. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
+
 ## Data-at-rest encryption
 
 Data-at-rest encryption is a method of storing inactive data that converts plaintext data into a coded form or cipher text, making it unreadable without an encryption key. Neon stores inactive data in [NVMe SSD volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes). The data on NVMe instance storage is encrypted using an `XTS-AES-256` block cipher implemented in a hardware module on the instance.

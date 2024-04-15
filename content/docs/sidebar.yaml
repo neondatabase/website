@@ -50,6 +50,13 @@
       slug: introduction/status
     - title: Monitoring
       slug: introduction/monitoring
+      items:
+        - title: Monitoring dashboard
+          slug: introduction/monitoring-page
+        - title: Usage metrics
+          slug: introduction/monitor-usage
+        - title: External tools
+          slug: introduction/monitor-external-tools
 - title: Get started
   items:
     - title: Sign up
@@ -167,6 +174,8 @@
           items:
             - title: Schema diff tutorial
               slug: guides/schema-diff-tutorial
+        - title: Protected branches
+          slug: guides/protected-branches
     - title: Frameworks
       items:
         - title: Astro
@@ -302,6 +311,14 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
+    - title: Authentication
+      items:
+        - title: Auth0
+          slug: guides/auth-auth0
+        - title: Clerk
+          slug: guides/auth-clerk
+        - title: Okta
+          slug: guides/auth-okta
     - title: For Partners
       slug: guides/partner-intro
       items:
@@ -360,6 +377,8 @@
           slug: extensions/neon-utils
         - title: pgvector
           slug: extensions/pgvector
+        - title: pg_partman
+          slug: extensions/pg_partman     
         - title: pg_prewarm
           slug: extensions/pg_prewarm
         - title: pg_stat_statements

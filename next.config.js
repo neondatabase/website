@@ -185,6 +185,11 @@ const defaultConfig = {
         destination: '/docs/postgres/:path*',
         permanent: true,
       },
+      {
+        source: '/sign_in',
+        destination: 'https://console.neon.tech/signup',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },

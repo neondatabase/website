@@ -74,6 +74,8 @@ Some key points to understand about how your endpoint responds when you make cha
 * Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
 * Changes to autosuspend settings do not require an endpoint restart; existing connections are unaffected.
 
+To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
+
 ### Compute size and autoscaling configuration
 
 Users on paid plans can change compute size settings when [editing a compute endpoint](#edit-a-compute-endpoint).
@@ -104,37 +106,86 @@ The `neon_utils` extension provides a `num_cpus()` function you can use to monit
 
 ### How to size your compute
 
-The size of your compute determines the amount of memory available to cache your frequently accessed data and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues. 
+The size of your compute determines the amount of frequently accessed data you can cache in memory and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues. 
 
-In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a local file cache to extend the amount of memory allocated to shared buffers to 50% of your compute's RAM. The 50% RAM limit is a guideline rather than an enforced limit, but it's advisable not to exceed this maximum; otherwise, you might encounter out-of-memory errors.
+In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The LFC can use up to 80% of your compute's RAM.
 
 The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size. Larger computes support higher maximum connection limits.
 
-The following table outlines the vCPU, RAM, `shared_buffer` limit (50 % of RAM), and the `max_connections` limit for each compute size that Neon supports.
+The following table outlines the vCPU, RAM, LFC size (50 % of RAM), and the `max_connections` limit for each compute size that Neon supports.
 
-| Compute Size (CU) | vCPU | RAM   | shared_buffers | max_connections | 
-|--------------|------|-------|----------------|-----------------|
-| 0.25         | 0.25 | 1 GB  | 0.5 GB         | 112             |
-| 0.50         | 0.50 | 2 GB  | 1 GB           | 225             |
-| 1            | 1    | 4 GB  | 2 GB           | 450             |
-| 2            | 2    | 8 GB  | 4 GB           | 901             |
-| 3            | 3    | 12 GB | 6 GB           | 1351            |
-| 4            | 4    | 16 GB | 8 GB           | 1802            |
-| 5            | 5    | 20 GB | 10 GB          | 2253            |
-| 6            | 6    | 24 GB | 12 GB          | 2703            |
-| 7            | 7    | 28 GB | 14 GB          | 3154            |
-| 8            | 8    | 32 GB | 16 GB          | 3,604           |
-
+| Compute Size (CU) | vCPU | RAM   | LFC size | max_connections | 
+|-------------------|------|-------|----------|-----------------|
+| 0.25              | 0.25 | 1 GB  | 0.8 GB   | 112             |
+| 0.50              | 0.50 | 2 GB  | 1.6 GB   | 225             |
+| 1                 | 1    | 4 GB  | 3.2 GB   | 450             |
+| 2                 | 2    | 8 GB  | 6.4 GB   | 901             |
+| 3                 | 3    | 12 GB | 9.6 GB   | 1351            |
+| 4                 | 4    | 16 GB | 12.8 GB  | 1802            |
+| 5                 | 5    | 20 GB | 16 GB    | 2253            |
+| 6                 | 6    | 24 GB | 19.2 GB  | 2703            |
+| 7                 | 7    | 28 GB | 22.4 GB  | 3154            |
+| 8                 | 8    | 32 GB | 25.6 GB  | 3,604           |
 
 <Admonition type="note">
 Users on paid plans can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
 </Admonition> 
 
-When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set).
+When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
 Regarding connection limits, you'll want a compute size that can support your anticipated maximum number of concurrent connections. If you are using _Autoscaling_, it is important to remember that your `max_connections` setting is based on the _minimum compute size_ in your autoscaling configuration. The `max_connections` setting does not scale with your compute. To avoid the `max_connections` constraint, you can use a pooled connection with your application, which supports up to 10,000 concurrent user connections. See [Connection pooling](/docs/connect/connection-pooling).
 
+#### Sizing your compute based on the working set
 
+If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from Neon storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance. 
+
+As mentioned above, Neon computes use a Local File Cache (LFC) to extend Postgres shared buffers. To query the cache hit ratio for your compute's LFC, Neon provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view.
+
+To use the `neon_stat_file_cache` view, install the `neon` extension on a preferred database or connect to the Neon-managed `postgres` database where the `neon` extension is always available.
+
+To install the extension on a preferred database:
+
+```sql
+CREATE EXTENSION neon;
+```
+
+To connect to the Neon-managed `postgres` database instead:
+
+```bash shouldWrap
+psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require
+```
+
+If you are already connected via `psql`, you can simply switch to the `postgres` database using the `\c` command:
+
+```shell
+\c postgres
+```
+
+Issue the following query to view LFC usage data for your compute instance:
+
+```sql
+SELECT * FROM neon_stat_file_cache;
+ file_cache_misses | file_cache_hits | file_cache_used | file_cache_writes | file_cache_hit_ratio  
+-------------------+-----------------+-----------------+-------------------+----------------------
+           2133643 |       108999742 |             607 |          10767410 |                98.08
+(1 row)
+```
+
+The `file_cache_hit_ratio` is calculated according to the following formula:
+
+```
+file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100
+```
+
+<Admonition type="tip">
+You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view data for LFC hits and misses. See [View LFC metrics with EXPLAIN ANALYZE](/docs/extensions/neon#view-lfc-metrics-with-explain-analyze).
+</Admonition>
+
+For OLTP workloads, you should aim for a `file_cache_hit_ratio` above 99%. If you hit ration is below that, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
+
+<Admonition type="note">
+The cache hit ratio query is based on statistics that represent the lifetime of your compute, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you increased your compute size after seeing a cache hit ratio below 99%. Changing the compute size restarts your compute, so you lose all of your current usage statistics. In this case, you should run your workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the `pg_prewarm` extension to pre-load data into memory after a compute restart. See [The pg_prewarm extension](/docs/extensions/pg_prewarm).
+</Admonition>
 
 #### Autoscaling considerations
 
@@ -155,14 +206,14 @@ The maximum **Suspend compute after a period of inactivity** setting is 7 days. 
 It is sometimes necessary to restart a compute endpoint. For example, if you upgrade to a paid plan account, you may want to restart your compute endpoint to immediately apply your upgraded limits.
 
 <Admonition type="important">
-Please be aware that restarting a compute endpoint interrupts any connections currently using the compute endpoint.
+Please be aware that restarting a compute endpoint interrupts any connections currently using the compute endpoint. To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
 </Admonition>
 
 You can restart a compute endpoint using one of the following methods:
 
 - Stop activity on your compute endpoint (stop running queries) and wait for your compute endpoint to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`. 
-- Issue [Suspend endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. You can do this directly from the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api), using the **Try It!** feature. You'll need an [API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
-- Users on paid plans can temporarily set a compute's **Suspend compute after a period of inactivity** setting to 1 second to initiate a restart (the default setting is 5 minutes). See [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console to see if your compute endpoint restarted. Look for `suspend_compute` and `start_compute` actions.
+- Issue a [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) using the **Try It!** feature. You'll need an [API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
+- Users on paid plans can temporarily set a compute's **Suspend compute after a period of inactivity** to a low value to initiate a suspension (the default setting is 5 minutes). See [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console. Look for `suspend_compute` action. Any activity on the compute endpoint will restart it, such as running a query. Watch for a `start_compute` action on the **Operations** page.
 
 ## Delete a compute endpoint
 

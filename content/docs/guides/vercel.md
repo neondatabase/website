@@ -57,7 +57,7 @@ To add the integration:
 
           The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's primary branch (`main`) that you can modify without affecting data on your primary branch.
 
-          The **Automatically delete obsolete Neon branches** option automatically deletes a Neon preview branch when the git branch that triggered its creation is deleted.
+          With **Automatically delete obsolete Neon branches** enabled, Neon preview branches will be deleted whenever the git branch that triggered its creation is merged or deleted.
          <Admonition type="note">
          Branches created for preview deployments are created from the [primary branch](/docs/reference/glossary#primary-branch) of your Neon project. Earlier versions of the integration created branches from the initial [root branch](/docs/reference/glossary#root-branch) of your Neon project, which is designated as the primary branch by default. Neon lets you [change the primary branch](/docs/manage/branches#set-a-branch-as-primary). If you have an older version of the integration that creates branches from your project's root branch, and you want branches created from your primary branch instead, you can upgrade your integration by reinstalling it from the [Vercel Marketplace](https://vercel.com/integrations/neon).
          </Admonition>
@@ -125,9 +125,21 @@ After you add the integration to a Vercel project, Neon creates a database branc
 
 ## Manage branches created by the integration
 
-The Neon Vercel Integration creates a branch for each preview deployment, but it does not remove those branches automatically. To avoid using up your storage allowances or hitting branch limits, you should remove old or obsolete branches regularly.
+The Neon Vercel Integration creates a branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete branches that are no longer required. Different options are supported for branch deletion.
 
-To remove branches created by the integration:
+### Automatic deletion
+
+The integration supports automatic deletion of obsolete preview branches when the corresponding Git branch is merged or deleted. If you did not select the **Automatically delete obsolete Neon branches** option when installing the integration, you can do so from the **Branches** tab the Vercel integration drawer.
+
+1. In the Neon Console, select your project.
+2. Select the **Integrations** page.
+3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
+4. In the **Vercel integration** drawer, select the **Branches** tab.
+5. Check **Automatically delete obsolete Neon branches**.
+
+### Manual deletion from the Vercel integration drawer
+
+To remove branches created by the integration manually:
 
 1. In the Neon Console, select your project.
 2. Select the **Integrations** page.
@@ -135,7 +147,9 @@ To remove branches created by the integration:
 4. In the **Vercel integration** drawer, select the **Branches** tab.
 5. Remove individual preview branches by clicking on the delete icon, or select **Delete all** to remove all preview branches.
 
-You can also remove branches from your Neon project using the Console, CLI, or API. See [Delete a branch](/docs/manage/branches#delete-a-branch).
+### Manual deletion via the Neon Console, CLI, or API
+
+To remove branches from your Neon project using the Console, CLI, or API, see [Delete a branch](/docs/manage/branches#delete-a-branch).
 
 <Admonition type="note">
 The latest version of the Neon integration displays a message on the **Deployment Details** page in Vercel under **Running checks** if you exceed the branch limit for your Neon project.
@@ -257,6 +271,10 @@ In this case, you can remove or rename the existing environment variables in you
 In earlier versions of the integration, the preview environment `DATABASE_URL` is not set by the Neon Vercel Integration on the first preview deployment after adding the integration to a Vercel project.
 
 To avoid this issue, you can reinstall the integration to update to the latest version. Alternatively, a workaround is to redeploy your preview deployment in Vercel. The preview environment `DATABASE_URL` is set on the next deployment. For redeploy instructions, see [Managing Deployments](https://vercel.com/docs/deployments/managing-deployments), in the _Vercel documentation_.
+
+### Stored passwords missing in the selected Neon project
+
+Neon projects created after March, 2023 store role passwords in a secure storage vault associated with the project, allowing passwords to be retrieved by the Neon Vercel integration for the purpose of setting Postgres connection environment variables in Vercel. Projects created before March 2023, do not store role passwords, and are therefore not compatible with the Neon Vercel integration. The current workaround for this issue is to migrate your data to a new Neon project. See [Import data from another Neon project](/docs/import/import-from-neon).
 
 ## Video: A Postgres database for Every Preview Deployment
 
