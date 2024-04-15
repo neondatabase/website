@@ -81,7 +81,7 @@ For more details about using Time Travel queries, see:
 
 <ComingSoon/>
 
-The Neon SQL Editor supports the use of Postgres meta-commands, which act like shortcuts for interacting with your database. If you are already familiar with using meta-commands from the `psql` command-line interface, you can use many of those same commands right from the SQL Editor.
+The Neon SQL Editor supports using Postgres meta-commands, which act like shortcuts for interacting with your database. If you are already familiar with using meta-commands from the `psql` command-line interface, you can use many of those same commands in the SQL Editor.
 
 ### Benefits of Meta-Commands
 
