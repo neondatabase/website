@@ -61,7 +61,7 @@ const Video = forwardRef(
         onClick={switchVideo}
       >
         <div className="relative rounded-2xl bg-[linear-gradient(180deg,#111313_51.48%,#050505_100%)] p-1.5 shadow-[-2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,0px_2px_2px_0px_rgba(0,0,0,0.30)_inset,0px_1.4px_0px_0px_rgba(255,255,255,0.03)]">
-          <div className="relative h-[466px] overflow-hidden rounded-[14px] 2xl:h-[430px] md:h-[317px] sm:h-auto">
+          <div className="relative h-[466px] overflow-hidden rounded-[10px] 2xl:h-[430px] md:h-[317px] sm:h-auto">
             <video
               className={clsx(
                 'absolute left-0 top-0 h-auto min-w-[704px] transition-all duration-300 2xl:min-w-[652px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
