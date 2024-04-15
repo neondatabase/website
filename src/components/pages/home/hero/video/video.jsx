@@ -80,10 +80,8 @@ const Video = forwardRef(
             </video>
             <div
               className={clsx(
-                'absolute left-10 top-11 opacity-0 transition-opacity duration-300 lt:left-8 lt:top-10 md:left-4 md:top-6',
-                {
-                  'opacity-100': !isActive,
-                }
+                'absolute top-11 transition-all duration-1000 lt:left-8 lt:top-10 md:left-4 md:top-6',
+                isActive ? '-left-full opacity-0' : 'left-10 opacity-100'
               )}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
