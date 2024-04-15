@@ -30,7 +30,7 @@ const Hero = () => {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section className="relative grow overflow-hidden bg-black pb-40 pt-44 text-white 2xl:pb-36 2xl:pt-[136px] lg:pb-28 lg:pt-9 md:pb-24">
+      <section className="relative grow overflow-hidden bg-black-pure pb-40 pt-44 text-white 2xl:pb-36 2xl:pt-[136px] lg:pb-28 lg:pt-9 md:pb-24">
         <AnimatePresence>
           <m.div
             className="mx-auto min-h-[653px] max-w-[1216px] text-center xl:max-w-[936px] lg:max-w-none lg:px-8 md:min-h-[500px] md:px-4"
