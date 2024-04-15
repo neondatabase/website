@@ -4,7 +4,7 @@ enableTableOfContents: true
 updatedOn: '2023-10-07T10:43:33.430Z'
 ---
 
-Neon is currently in Technical Preview. We have established a security reporting procedure to address security issues quickly.
+We have established the following security reporting procedure to address security issues quickly.
 
 <Admonition type="important">
 If you have a security concern or believe you have found a vulnerability in any part of our infrastructure, please contact us at [security@neon.tech](mailto:security@neon.tech). If you need to share sensitive information, we can provide you with a security contact number through [Signal](https://signal.org/).

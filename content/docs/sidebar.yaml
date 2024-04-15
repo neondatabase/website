@@ -50,6 +50,13 @@
       slug: introduction/status
     - title: Monitoring
       slug: introduction/monitoring
+      items:
+        - title: Monitoring dashboard
+          slug: introduction/monitoring-page
+        - title: Usage metrics
+          slug: introduction/monitor-usage
+        - title: External tools
+          slug: introduction/monitor-external-tools
 - title: Get started
   items:
     - title: Sign up
@@ -125,16 +132,18 @@
         - title: Branching
           slug: guides/branching-intro
           items:
+            - title: Reset from parent
+              slug: guides/reset-from-parent
             - title: Branch Restore
               slug: guides/branch-restore
-            - title: Branching — Testing queries
-              slug: guides/branching-test-queries
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
             - title: Branching with the API
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
+            - title: Branching — Testing queries
+              slug: guides/branching-test-queries
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
         - title: Logical replication
@@ -165,6 +174,15 @@
           items:
             - title: Time Travel Assist tutorial
               slug: guides/time-travel-tutorial
+        - title: Time Travel Assist
+          slug: guides/time-travel-assist
+        - title: Schema diff
+          slug: guides/schema-diff
+          items:
+            - title: Schema diff tutorial
+              slug: guides/schema-diff-tutorial
+        - title: Protected branches
+          slug: guides/protected-branches
     - title: Frameworks
       items:
         - title: Astro
@@ -300,6 +318,14 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
+    - title: Authentication
+      items:
+        - title: Auth0
+          slug: guides/auth-auth0
+        - title: Clerk
+          slug: guides/auth-clerk
+        - title: Okta
+          slug: guides/auth-okta
     - title: For Partners
       slug: guides/partner-intro
       items:
