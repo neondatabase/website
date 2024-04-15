@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 <ComingSoon/>
 
-Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view.
+Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
 
 ## How Schema Diff works
 
