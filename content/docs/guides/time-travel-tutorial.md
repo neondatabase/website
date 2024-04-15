@@ -1,17 +1,19 @@
 ---
-title: Time Travel Assist tutorial
-subtitle: Use Time Travel Assist to analyze changes made to your database over time
+title: Time Travel tutorial
+subtitle: Use Time Travel to analyze changes made to your database over time
 enableTableOfContents: true
 ---
 
-This guide demonstrates how you could use Time Travel Assist to address a common development scenario: debugging issues following a CI/CD deployment to production.
+<ComingSoon/>
+
+This guide demonstrates how you could use Time Travel to address a common development scenario: debugging issues following a CI/CD deployment to production.
 
 In this scenario, your team has recently introduced a streamlined checkout process, managed by a `new_checkout_process` feature flag. Soon after this flag was enabled, customer support started receiving complaints related to the new feature. As a developer, you're tasked with investigating the issues to confirm whether they are directly linked to the feature's activation.
 
 ## Before You Start
 To follow this tutorial, you'll need:
 - A Neon account. [Sign up here](/docs/get-started-with-neon/signing-up).
-- A [history retention](/docs/manage/projects#configure-history-retention) period that covers the timeframe of interest, allowing for effective use of Time Travel Assist.
+- A [history retention](/docs/manage/projects#configure-history-retention) period that covers the timeframe of interest, allowing for effective use of Time Travel.
 
 
 ## Step 1: Preparing Your Database
