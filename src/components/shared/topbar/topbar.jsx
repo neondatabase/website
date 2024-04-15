@@ -23,7 +23,8 @@ const TopBar = () => {
       }}
     >
       <span className="mr-4 truncate border-r border-black border-opacity-20 py-1 pr-4 text-sm font-medium sm:mr-0 sm:border-none sm:pr-0">
-        Neon is Generally Available! Serverless Postgres with branching to boost your development velocity.  
+        Neon is Generally Available! Serverless Postgres with branching to boost your development
+        velocity.
       </span>
       <span className="inline-flex items-center text-sm font-bold md:hidden">
         <span>Read more</span>

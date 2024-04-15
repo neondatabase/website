@@ -169,6 +169,8 @@
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
               slug: guides/read-replica-prisma
+        - title: Time Travel Assist
+          slug: guides/time-travel-assist
         - title: Schema diff
           slug: guides/schema-diff
           items:

@@ -74,30 +74,9 @@ Similar to the manual restore operation using the Neon Console and API described
 
 ### Time Travel Assist
 
-To help troubleshoot your data's history, you can use Time Travel Assist to connect to any selected point in time within your history retention window and then run queries against that connection. It's a good idea to run this kind of query to make sure you've targeted the correct restore point before you restore a branch.
+Use Time Travel Assist to make sure you've targetted the correct restore point before you restore your branch.
 
-The restore operation and Time Travel Assist are meant to work together. When you select a branch and timestamp, you can either use that selection as your restore point or as the point in time connection to query against.
-
-![Time travel assist](/docs/guides/branch_time_travel.png)
-
-#### Ephemeral endpoints
-
-Time travel assist leverages Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done querying against this point-in-time connection. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
-
-However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
-
-- start_compute
-- create_branch
-- delete_timeline
-- suspend_compute
-
-#### How long do ephemeral endpoints remain active
-
-The ephemeral endpoints are created according to your configured [default compute size](/docs/manage/projects#reset-the-default-compute-size). An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
-
-### Schema Diff
-
-The Schema Diff tool lets you compare an SQL script of your selected branch's schemas in a side-by-side view. See [Schema diff](/docs/guides/schema-diff) for more information.
+See [Time Travel Assist](/docs/guides/time-travel-assist) to learn more.
 
 ## How to use branch restore
 
@@ -256,54 +235,15 @@ curl --request POST \ // [!code word:br-damp-smoke-91135977]
 </TabItem>
 </Tabs>
 
-To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it.
+To make sure you choose the right restore point, we encourage you to use [Time Travel Assist](/docs/guides//time-travel-assist) before running a restore job, but the backup branch is there if you need it.
 If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branch's relationship to the restore point backup.
-
-### Using Time Travel Assist
-
-Here is how to use the Time Travel Assist SQL editor:
-
-1. Make the branch selections that you would make to [Restore a branch](#how-to-use-branch-restore).
-
-    The target branch is now selected for Time Travel assist. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
-    ![Time travel assist](/docs/guides/time_travel_assist.png)
-  
-1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
-1. Write your read-only query in the editor, then click **Query at timestamp** to run the query. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
-
-If your query is successful, you will see a table of results under the editor.
-
-Depending on your query and the selected timestamp, instead of a table of results, you might see different error messages like:
-| Error                | Explanation             |
-|----------------------|-------------------------|
-| If you query a timestamp in the future         | Console request failed with 400 Bad Request: timestamp [timestamp] is in the future, try an older timestamp |
-| If you query a timestamp from before your project was created | Console request failed with 400 Bad Request: parent timestamp [timestamp] is earlier than the project creation timestamp [timestamp], try a more recent timestamp |
-| If you query from earlier than your history retention window | Console request failed with 400 Bad Request: timestamp [timestamp] recedes your project's history retention window of 168h0m0s, try a more recent timestamp |
-
-Adjust your selected timestamp accordingly.
-
-### Using Schema Diff
-
-You can also use Schema Diff to visualy inspect the schema differences between your selected branches before you go through with the restore operation.
-
-See [Schema diff](/docs/guides/schema-diff) to learn more, or [Schema diff tutorial](/docs/guides/schema-diff-tutorial) for a step-by-step guide comparing two development branches.
 
 ## Billing considerations
 
-There are minimal impacts to billing from the branch restore and Time Travel Assist features.
+There are minimal impacts to billing from the branch restore and Time Travel Assist features:
 
-### Restore from history (billing)
-
-Restoring a branch to its own history adds to your number of branches &#8212; due to the restore_backup branch &#8212; but since they do not have any compute endpoint attached, they do not add to any consumption costs.
-
-### Time travel Assist (billing)
-
-The ephemeral endpoints used to run your Time Travel Assist queries do contribute to your consumption usage totals for the billing period, like any other active endpoint that consumes resources.
-
-A couple of details to note:
-
-- The endpoints are shortlived. They are suspended 10 seconds after you stop querying.
-- Since these endpoints are created according to your default compute size (which applies to all new branch computes you create),  you may want to reduce this default if you're performing a lot of time-travel queries for troubleshooting.
+- **Branch Restore** &#8212;  The backups created when you restore a branch do add to your total number of branches, but since they do not have any compute endpoint attached they do not add to any consumption costs.
+- **Time Travel Assist** &#8212; Costs related to Time Travel queries are minimal. See [Billing considerations](/docs/guides/time-travel-assist#billing-considerations).
 
 ## Limitations
 
