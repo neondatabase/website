@@ -127,10 +127,30 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 
 Unlike replicating to other destinations, you don't need to configure a publication and replication slot manually. DoubleCloud Transfer does that for you automatically.
 
+## Add DoubleCloud Transfer's IPs to the allowlist
+
+If you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, add DoubleCloud Transfer's IPs to your allowlist in Neon:
+
+```
+# IPv6
+2a05:d014:e78:3500::/56
+```
+
+```
+# IPv4
+3.77.1.232
+3.74.181.206
+3.78.156.2
+3.77.29.32
+3.125.212.122
+```
+
+For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow). You'll need to do this before you can validate your connection in the next step. If you are not using Neon's **IP Allow** feature, you can skip this step.
+
 ## Create a managed ClickHouse cluster on DoubleCloud
 
 <Admonition type="tip">
-If you already have a ClickHouse instance — for example, an on-premise one — and you want to transfer data there, skip this step and continue with steps described in [Create a transfer in DoubleCloud](#create-a-transfer-in-doublecloud).
+If you already have a ClickHouse instance — for example, an on-premise one — and you want to transfer data there, skip this step and continue with steps described in [Create endpoints in DoubleCloud](#create-endpoints-in-doublecloud).
 </Admonition>
 
 1. Log in to the [DoubleCloud console](https://console.double.cloud/).
@@ -180,14 +200,18 @@ If you already have a ClickHouse instance — for example, an on-premise one —
     └────────────────────┘
     ```
 
-## Create a transfer in DoubleCloud
+## Create endpoints in DoubleCloud
 
-1. In the left menu in the console, select **Transfer** and click **Create transfer**.
-1. Under **Endpoints**, click **Create new** next to **Source**.
+Before you create a transfer in DoubleCloud, you need to create a source endpoint that fetches data from Neon and a target endpoint that writes the data to ClickHouse.
+
+To create a source endpoint:
+
+1. In the left menu in the console, select **Transfer** and navigate to the **Endpoints** tab.
+1. Click **Create endpoint** → **Source**.
 1. Under **Basic settings**, select **PostgreSQL** as the source type.
 1. Enter a name for your source endpoint, for example `neon`.
 1. Under **Endpoint parameters**, enter connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project.
-   For example, let's say this is your connection string:
+    For example, let's say this is your connection string:
 
     ```bash shouldWrap
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -201,29 +225,24 @@ If you already have a ClickHouse instance — for example, an on-premise one —
     - **Password**: AbC123dEf
     - **Database Name**: dbname
 
-1. If you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, add DoubleCloud Transfer's IPs to your allowlist in Neon:
-
-    ```
-    # IPv6
-    2a05:d014:e78:3500::/56
-    ```
-
-    ```
-    # IPv4
-    3.77.1.232
-    3.74.181.206
-    3.78.156.2
-    3.77.29.32
-    3.125.212.122
-    ```
-
-    For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow). You'll need to do this before you can validate your connection in the next step. If you are not using Neon's **IP Allow** feature, you can skip this step.
-
 1. Click **Test connection** and if it's successful, click **Submit**.
-1. Select the ClickHouse cluster where you want to transfer data.
-    If you created a managed ClickHouse cluster in the previous step, select it as the target endpoint.
 
-    If you want to transfer data to a ClickHouse cluster elsewhere, click **Create new** next to **Target** and specify the connection details.
+To create a target endpoint: 
+
+1. In the left menu in the console, select **Transfer** and navigate to the **Endpoints** tab.
+1. Click **Create endpoint** → **Target**.
+1. Under **Basic settings**, select **ClickHouse** as the target type.
+1. Enter a name for your source endpoint, for example `clickhouse`.
+1. If you created a managed ClickHouse cluster in DoubleCloud, select it as the target endpoint in **Connection settings** → **Managed cluster**.
+
+    If you want to transfer data to a ClickHouse instance elsewhere, select **On-premise** in **Connection settings** → **Connection type** and specify the connection details.
+1. Enter the database name.
+1. Click **Test connection** and if it's successful, click **Submit**.
+
+## Create a transfer in DoubleCloud
+
+1. In the left menu in the console, select **Transfer** and click **Create transfer**.
+1. Under **Endpoints**, select the source and target endpoints you created in the previous step.
 1. Enter the transfer name, for example `neon-to-clickhouse`
 1. Under **Transfer settings**, select **Snapshot and replication** as the transfer type and specify transfer parameters if needed.
 
