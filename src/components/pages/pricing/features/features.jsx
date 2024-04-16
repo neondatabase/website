@@ -13,13 +13,13 @@ import Row from './row';
 const storageItems = [
   {
     icon: branchingIcon,
-    title: 'Branch-based databases',
-    text: 'Postgres databases in Neon reside within database branches. These branches, housed within projects, hold both schema and data',
+    title: 'Branch-based Postgres',
+    text: 'Databases in Neon are brancheable (both schema and data). Think of code branches, but for your data.',
   },
   {
     icon: storageIcon,
     title: 'All branches within a project share storage',
-    text: 'Branch databases instantly without extra storage. Ideal for creating dev, staging, preview, and test databases cost-effectively',
+    text: 'When you branch a database, the new branch won't add to your storage bill. Branches are ready instantly—even with large datasets.',
   },
 ];
 
@@ -31,8 +31,8 @@ const computeItems = [
   },
   {
     icon: timerIcon,
-    title: 'Compute usage measured in CU-hours',
-    text: 'Example: a 4 CU compute running for 20 hours uses 80 compute hours. Monthly plans include generous usage, with extra hours billed separately',
+    title: 'Compute usage is measured in compute hours',
+    text: 'Example: a 4 CU compute running for 20 hours uses 80 compute hours. All monthly plans include generous usage, with extra compute hours billed separately.',
   },
 ];
 
@@ -49,7 +49,7 @@ const Features = () => (
           Neon billing fundamentals
         </Heading>
         <p className="mt-3 text-center text-lg font-light leading-snug sm:text-base">
-          The Neon architecture is unique — and so is our billing.
+          An architecture with branch-based storage and compute that autoscales
         </p>
       </div>
       <div className="col-span-10 col-start-2 mt-[72px] flex flex-col items-center gap-y-20 xl:col-span-full xl:col-start-1 xl:gap-y-[104px] md:gap-y-16">
