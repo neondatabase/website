@@ -19,7 +19,7 @@ const storageItems = [
   {
     icon: storageIcon,
     title: 'Branches share storage',
-    text: 'When you branch a database, the new branch won't add to your storage bill. Branches are ready instantly, no matter how large the dataset.',
+    text: 'When you branch a database, the new branch won&apos;t add to your storage bill. Branches are ready instantly, no matter how large the dataset.',
   },
 ];
 
