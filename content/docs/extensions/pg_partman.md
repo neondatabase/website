@@ -16,20 +16,21 @@ While Postgres natively supports partitioning a table, `pg_partman` helps set up
 In this guide, we’ll learn how to set up and use the `pg_partman` extension with your Neon Postgres project. We'll cover why partitioning is helpful, how to enable `pg_partman`, creating partitioned tables, and automating partition maintenance. 
 
 <Admonition type="note">
-    `pg_partman` is an open-source Postgres extension that can be installed in any Neon project using the instructions below. Detailed installation instructions and compatibility information can be found in the [pg_partman](https://github.com/pgpartman/pg_partman) documentation.
+`pg_partman` is an open-source Postgres extension that can be installed in any Neon project using the instructions below. Detailed installation instructions and compatibility information can be found in the [pg_partman](https://github.com/pgpartman/pg_partman) documentation.
 </Admonition>
 
 ## Enable the `pg_partman` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon. Creatig a `partman` schema is optional (but recommended) and you can name the schema whatever you like, but it cannot be changed after installation.
 
 ```sql
-CREATE EXTENSION IF NOT EXISTS pg_partman;
+CREATE SCHEMA partman;
+CREATE EXTENSION pg_partman SCHEMA partman;
 ```
 
-`pg_partman` runs a background worker process that automates table maintenance tasks, including DDL operations like creating and detaching partitions. So, while it does not require a superuser to run, it is helpful to create a dedicated role with the necessary privileges to manage partitioned tables. 
+The `pg_partman` extension does not require a superuser to run, but it's recommended to create a dedicated role for running `pg_partman` functions and to act as the owner of all partition sets that `pg_partman` will maintain.
 
-Here is a sample SQL script to create a dedicated role for running `pg_partman` functions and assign it the necessary privileges:
+Here is a sample SQL script to create a dedicated role with the minimum required privileges, assuming that `pg_partman` is installed to the `partman` schema and the dedicated role is named `partman_user`:
 
 ```sql
 CREATE ROLE partman_user WITH LOGIN;
@@ -43,7 +44,14 @@ GRANT ALL ON SCHEMA '{WORKING_SCHEMA_NAME}' TO partman_user;
 GRANT TEMPORARY ON DATABASE '{WORKING_DATABASE_NAME}' to partman_user; -- allow creation of temp tables to move data out of default
 ```
 
-When you create a new `Neon` project, the default database name is `neondb` and the default schema name is `public`. Replace `{WORKING_DATABASE_NAME}` and `{WORKING_SCHEMA_NAME}` with the actual database and schema names you want to manage the partitioned tables in. To find out more about the privileges needed to run `pg_partman`, see the [project documentation](https://github.com/pgpartman/pg_partman). 
+If the role needs to create schemas, you'll have to grant `CREATE` on the database as well. This is only required if you give the role above the `CREATE` privilege on pre-existing schemas that will contain partition sets.
+
+
+```sql
+GRANT CREATE ON DATABASE '{WORKING_DATABASE_NAME}' TO partman_user;
+```
+
+When you create a new `Neon` project, the default database name is `neondb` and the default schema name is `public`. Replace `{WORKING_DATABASE_NAME}` and `{WORKING_SCHEMA_NAME}` with the actual database and schema names you want to manage the partitioned tables in. To find out more about the privileges needed to run `pg_partman`, refer to the [pg_partman documentation](https://github.com/pgpartman/pg_partman). 
 
 For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor). 
 
