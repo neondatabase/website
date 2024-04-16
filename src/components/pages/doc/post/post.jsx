@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import ReleaseNoteList from 'components/pages/changelog/changelog-list';
@@ -56,11 +55,7 @@ const Post = ({
 
   return (
     <>
-      <div
-        className={clsx(
-          'col-span-6 -mx-10 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8'
-        )}
-      >
+      <div className="col-span-6 -mr-12 ml-[-33px] flex flex-col 2xl:-ml-4 xl:col-span-9 xl:ml-10 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
         {breadcrumbs.length > 0 && <Breadcrumbs breadcrumbs={breadcrumbs} />}
         {isChangelog ? (
           <Changelog currentSlug={currentSlug} items={changelogPosts} />
@@ -93,7 +88,7 @@ const Post = ({
         <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
       </div>
 
-      <div className={clsx('col-start-11 col-end-13 -ml-11 h-full 2xl:ml-0 xl:hidden')}>
+      <div className="col-start-10 col-end-13 ml-[50px] h-full xl:ml-0 xl:hidden">
         <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
           {enableTableOfContents && <TableOfContents items={tableOfContents} />}
         </nav>

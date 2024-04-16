@@ -42,7 +42,7 @@ NavWithIcon.propTypes = {
 const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = false }) => (
   <aside
     className={clsx(
-      'relative col-start-1 col-end-4 max-w-[254px] before:absolute before:-bottom-20 before:-right-5 before:-top-[104px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-[#0A0A0A] lg:hidden',
+      'relative col-start-1 col-end-4 max-w-[254px] pt-0.5 before:absolute before:-bottom-20 before:-right-5 before:-top-[104px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-[#0A0A0A] lg:hidden',
       className
     )}
   >
@@ -57,7 +57,7 @@ const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = 
             <NavWithIcon className="mb-11" items={MENUS.docSidebar} />
           </>
         )}
-        <ul className={clsx({ 'mt-5': !isPostgres })}>
+        <ul className={clsx({ 'mt-14': !isPostgres })}>
           {sidebar.map((item, index) => (
             <Item {...item} key={index} basePath={basePath} isChildren={false} />
           ))}

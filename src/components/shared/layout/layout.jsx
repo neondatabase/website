@@ -13,6 +13,7 @@ const Layout = async ({
   footerTheme = 'white',
   withOverflowHidden = false,
   children,
+  headerWithBorder = false,
   isHeaderSticky = false,
   isDocPage = false,
   isBlogPage = false,
@@ -27,6 +28,7 @@ const Layout = async ({
         isSticky={isHeaderSticky}
         isDocPage={isDocPage}
         isBlogPage={isBlogPage}
+        withBorder={headerWithBorder}
       />
       <main
         className={clsx(
@@ -51,6 +53,7 @@ Layout.propTypes = {
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
   isHeaderSticky: PropTypes.bool,
+  headerWithBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
   isBlogPage: PropTypes.bool,
 };

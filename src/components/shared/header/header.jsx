@@ -21,6 +21,7 @@ const Header = ({
   isSticky = false,
   isBlogPage = false,
   isDocPage = false,
+  withBorder = false,
 }) => {
   const isThemeBlack = theme === 'black-pure';
 
@@ -31,6 +32,7 @@ const Header = ({
           'safe-paddings left-0 right-0 top-0 z-40 h-16 w-full dark:bg-black-pure',
           isSticky ? 'sticky md:relative' : 'absolute lg:relative',
           isThemeBlack ? 'bg-black-pure' : 'bg-white',
+          withBorder && 'border-b border-gray-new-94 dark:border-gray-new-10',
           className
         )}
       >
@@ -204,6 +206,7 @@ Header.propTypes = {
   isSticky: PropTypes.bool,
   isBlogPage: PropTypes.bool,
   isDocPage: PropTypes.bool,
+  withBorder: PropTypes.bool,
 };
 
 export default Header;
