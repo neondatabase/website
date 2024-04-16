@@ -18,9 +18,9 @@ const Layout = async ({
   isDocPage = false,
   isBlogPage = false,
 }) => (
-  // 36px is the height of the topbar
   <>
     <Topbar isThemeBlack={headerTheme === 'black-pure'} />
+    {/* 36px is the height of the topbar */}
     <div className="relative flex min-h-[calc(100vh-36px)] flex-col">
       <Header
         className={headerClassName}
@@ -31,11 +31,7 @@ const Layout = async ({
         withBorder={headerWithBorder}
       />
       <main
-        className={clsx(
-          withOverflowHidden && 'overflow-hidden',
-          'flex flex-1 flex-col dark:bg-black',
-          className
-        )}
+        className={clsx(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col', className)}
       >
         {children}
       </main>

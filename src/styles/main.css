@@ -1,6 +1,6 @@
 @layer base {
   body {
-    @apply relative min-w-[320px] !overflow-x-hidden font-sans text-black antialiased;
+    @apply relative min-w-[320px] !overflow-x-hidden bg-white font-sans text-black antialiased dark:bg-black-pure;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -78,6 +78,10 @@
 
   inkeep-portal {
     @apply relative z-50 animate-inkeep-portal-fade-in opacity-0;
+  }
+
+  [data-docsearch-fixed] {
+    @apply sr-only;
   }
 }
 

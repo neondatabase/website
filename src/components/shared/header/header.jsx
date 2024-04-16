@@ -12,7 +12,6 @@ import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import ArrowIcon from 'icons/header/arrow-right.inline.svg';
 
-// TODO: update black logo
 const Header = ({
   className = null,
   theme = 'black-pure',
