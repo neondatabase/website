@@ -109,7 +109,7 @@ The following examples illustrate how extra storage is allocated and billed in N
 
 ### Example 1: Steady extra storage usage
 
-This example illustrates how a steady amount of extra storage usage is billed.
+This example illustrates how a steady amount of extra storage is billed.
 
 **Plan**: Scale
 **Period:** June 1st – June 30th  
@@ -118,12 +118,12 @@ This example illustrates how a steady amount of extra storage usage is billed.
 | Item          | Details                            |
 |---------------|------------------------------------|
 | Plan Fee      | 1 month = $69                                |
-| Extra Storage | 10 GiB extra storage pack at $15/month from June 1st – June 30th = $15    |
+| Extra Storage | 10 GiB extra storage unit at $15/month from June 1st – June 30th = $15    |
 | **Total**| $84                 |
 
 ### Example 2: Storage exceeds the limit at the start of the month
 
-This example illustrates how extra storage is billed from the date the extra storage usage is allocated until the end of the month, not just for the days the storage limit was exceeded.
+This example illustrates how extra storage is billed from the date the extra storage is allocated until the end of the month, not just for the days the storage limit was exceeded.
 
 **Plan**: Scale
 **Period:** June 1st – June 15th  
@@ -133,7 +133,7 @@ This example illustrates how extra storage is billed from the date the extra sto
 | Item          | Details                            |
 |---------------|------------------------------------|
 | Plan Fee      | 1 month = $69                                |
-| Extra Storage | 10 GiB extra storage pack at $15/month from June 1st – June 30th = $15    |
+| Extra Storage | 10 GiB extra storage unit at $15/month from June 1st – June 30th = $15    |
 | **Total**| $84                 |
 
 <Admonition type="note">
@@ -153,6 +153,6 @@ This example illustrates a prorated charge for extra storage that was allocated 
 | Item          | Details                            |
 |---------------|------------------------------------|
 | Plan Fee      | 1 month = $69                                |
-| Extra Storage | 10 GiB extra storage pack at $15/month prorated for 3 days (June 28th – June 30th) = $1.50    |
+| Extra Storage | 10 GiB extra storage unit at $15/month prorated for 3 days (June 28th – June 30th) = $1.50    |
 | **Total**| $70.50                 |
 

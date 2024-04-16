@@ -1,8 +1,6 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-redirectFrom:
-  - /docs/introduction/billing
 updatedOn: '2024-02-26T19:37:28.835Z'
 ---
 
