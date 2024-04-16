@@ -243,7 +243,7 @@ To create a target endpoint:
 
 1. In the left menu in the console, select **Transfer** and click **Create transfer**.
 1. Under **Endpoints**, select the source and target endpoints you created in the previous step.
-1. Enter the transfer name, for example `neon-to-clickhouse`
+1. Enter the transfer name, for example `neon-to-clickhouse`.
 1. Under **Transfer settings**, select **Snapshot and replication** as the transfer type and specify transfer parameters if needed.
 
     <Admonition type="tip">
