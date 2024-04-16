@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 import Hero from 'components/pages/changelog/hero';
 import Container from 'components/shared/container';
@@ -20,7 +20,7 @@ import getMetadata from 'utils/get-metadata';
 export async function generateStaticParams() {
   const changelogPosts = await getAllChangelogPosts();
 
-  return [...changelogPosts].map(({ slug }) => {
+  return changelogPosts.map(({ slug }) => {
     const slugsArray = slug.split('/');
 
     return {
@@ -41,8 +41,8 @@ export async function generateMetadata({ params }) {
   description = `The latest product updates from Neon`;
 
   if (isChangelogPage) {
-    const { label: date } = getChangelogDateFromSlug(currentSlug);
     if (!getPostBySlug(currentSlug, CHANGELOG_DIR_PATH)) return notFound();
+    const { label: date } = getChangelogDateFromSlug(currentSlug);
     const { content } = getPostBySlug(currentSlug, CHANGELOG_DIR_PATH);
     label = `Changelog ${date}`;
     socialPreviewTitle = `Changelog - ${date}`;
@@ -64,9 +64,19 @@ export async function generateMetadata({ params }) {
 }
 
 const ChangelogPost = async ({ currentSlug }) => {
-  const { datetime, label } = getChangelogDateFromSlug(currentSlug);
+  if (
+    currentSlug === 'storage-and-compute' ||
+    currentSlug === 'console' ||
+    currentSlug === 'compute' ||
+    currentSlug === 'drivers' ||
+    currentSlug === 'plans' ||
+    currentSlug === 'docs'
+  )
+    redirect('/docs/changelog');
 
   if (!getPostBySlug(currentSlug, CHANGELOG_DIR_PATH)) return notFound();
+
+  const { datetime, label } = getChangelogDateFromSlug(currentSlug);
 
   const { content } = getPostBySlug(currentSlug, CHANGELOG_DIR_PATH);
 
