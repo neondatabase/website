@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import BlogNavLink from 'components/pages/blog/blog-nav-link';
 import LINKS from 'constants/links';
 import DiscordIcon from 'icons/discord-sm.inline.svg';
-import GitHubIcon from 'icons/github-sm.inline.svg';
 import LinkedInIcon from 'icons/linkedin-sm.inline.svg';
 import XIcon from 'icons/x.inline.svg';
 import YouTubeIcon from 'icons/youtube-sm.inline.svg';
@@ -21,11 +20,6 @@ const socialLinks = [
     name: 'LinkedIn',
     url: LINKS.linkedin,
     icon: LinkedInIcon,
-  },
-  {
-    name: 'GitHub',
-    url: LINKS.github,
-    icon: GitHubIcon,
   },
   {
     name: 'YouTube',
