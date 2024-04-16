@@ -33,7 +33,7 @@ const Footer = ({ isDocPage = false, theme = 'white' }) => {
             <div className="flex grow flex-col items-start">
               <Link className="block" to="/">
                 <span className="sr-only">Neon</span>
-                <Logo className="w-auto max-w-[116px] sm:h-6" isThemeBlack={isDarkTheme} />
+                <Logo className="h-8" isThemeBlack={isDarkTheme} width={116} height={32} />
               </Link>
               <StatusBadge isDocPage={isDocPage} isDarkTheme={isDarkTheme} />
               {isDocPage && <ThemeSelect className="mt-7 xl:mt-6 md:mt-3" />}

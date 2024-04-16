@@ -1,18 +1,16 @@
 import clsx from 'clsx';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
 import Link from 'components/shared/link';
+import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import ArrowIcon from 'icons/header/arrow-right.inline.svg';
-import logoBlack from 'images/logo-black-28.svg';
-import logoWhite from 'images/logo-white-28.svg';
 
 // TODO: update black logo
 const Header = ({
@@ -40,25 +38,7 @@ const Header = ({
           <div className="flex items-center gap-x-16">
             <Link to="/">
               <span className="sr-only">Neon</span>
-              {isThemeBlack ? (
-                <Image
-                  className={clsx('h-7 w-auto', className)}
-                  src={logoWhite}
-                  alt=""
-                  width={102}
-                  height={28}
-                  aria-hidden
-                />
-              ) : (
-                <Image
-                  className={clsx('h-7 w-auto', className)}
-                  src={logoBlack}
-                  alt=""
-                  width={102}
-                  height={28}
-                  aria-hidden
-                />
-              )}
+              <Logo className="h-7" isThemeBlack={isThemeBlack} width={102} height={28} priority />
             </Link>
 
             <nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 xl:relative xl:left-auto xl:top-auto xl:translate-x-0 xl:translate-y-0">

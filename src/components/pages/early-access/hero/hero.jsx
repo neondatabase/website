@@ -98,7 +98,7 @@ const Hero = () => {
       <div className="relative min-w-[768px] bg-black p-8 text-white 2xl:min-w-0 lg:order-last lg:max-w-none lg:py-7 md:px-4">
         <div className="m-auto max-w-[520px]">
           <Link className="inline-block align-top lg:hidden" to="/">
-            <img src={logoWhite} alt="Neon" width={128} height={36} />
+            <img src={logoWhite} alt="Neon" width={102} height={28} />
           </Link>
           <h2 className="mt-28 font-title text-[28px] font-medium 2xl:mt-12 lg:mt-0 lg:max-w-[450px] md:text-[26px]">
             Neon Technical Preview
