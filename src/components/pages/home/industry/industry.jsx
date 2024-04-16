@@ -10,12 +10,42 @@ import Link from 'components/shared/link';
 
 import Testimonials from './testimonials';
 
+const Hls = require('hls.js/dist/hls.light.min.js');
+
 const TESTIMONIAL_VIDEO_FRAMES = [60, 200, 350, 500];
 const FRAME_RATE = 30;
 
 const Industry = () => {
   const videoRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(null);
+
+  useEffect(() => {
+    const videoElement = videoRef?.current;
+
+    if (!videoElement) {
+      return;
+    }
+
+    // Detecting browser type
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // Each video is optimized to work well in different browsers
+    const videoSrc = isSafari
+      ? '/videos/pages/home/industry/testimonials.mp4'
+      : '/videos/pages/home/industry/testimonials.m3u8';
+
+    // Using HLS.js for browsers that support it, except for Safari which has native HLS support.
+    if (Hls.isSupported() && !isSafari) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(videoElement);
+    } else {
+      const source = document.createElement('source');
+      source.src = videoSrc;
+      source.type = 'video/mp4';
+      videoElement.appendChild(source);
+    }
+  }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -72,7 +102,7 @@ const Industry = () => {
         {/* 
             Video optimization parameters:
             -mp4: -pix_fmt yuv420p -vf "scale=-2:3254" -movflags faststart -vcodec libx264 -crf 20 -g 1
-            -webm: -c:v libvpx-vp9 -crf 20 -vf scale=448:-2 -deadline best -g 1 -an
+            -m3u8: -codec: copy -start_number 0 -hls_time 3 -hls_list_size 0 -f hls testimonials.m3u8
         */}
         <video
           className="max-w-[230px] xl:w-[180px] lg:w-36 sm:hidden"
@@ -83,9 +113,7 @@ const Industry = () => {
           preload="auto"
           muted
           playsInline
-        >
-          <source src="/videos/pages/home/industry/testimonials.mp4" type="video/mp4" />
-        </video>
+        />
         <div className="flex w-full flex-col sm:items-center">
           <h2
             className={clsx(
