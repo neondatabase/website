@@ -35,13 +35,13 @@ const Header = ({
         )}
       >
         <Container className="flex items-center justify-between py-4 md:!px-5" size="1344">
-          <div className="flex items-center gap-x-16">
+          <div className="flex items-center gap-x-[90px] xl:gap-x-16">
             <Link to="/">
               <span className="sr-only">Neon</span>
               <Logo className="h-7" isThemeBlack={isThemeBlack} width={102} height={28} priority />
             </Link>
 
-            <nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 xl:relative xl:left-auto xl:top-auto xl:translate-x-0 xl:translate-y-0">
+            <nav>
               <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden">
                 {MENUS.header.map(({ to, text, items }, index) => {
                   const Tag = to ? Link : 'button';
