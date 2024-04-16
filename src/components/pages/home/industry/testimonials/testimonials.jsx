@@ -1,8 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
+import PropTypes from 'prop-types';
 import { useRef, useState, useEffect, useMemo } from 'react';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
@@ -52,10 +51,8 @@ const clamp = (min, value, max) => Math.min(Math.max(min, value), max);
 
 const IS_MOBILE_SCREEN_WIDTH = 639;
 
-const Testimonials = () => {
+const Testimonials = ({ activeIndex, setActiveIndex }) => {
   const containerRef = useRef(null);
-
-  const [activeIndex, setActiveIndex] = useState(0);
 
   const [scrollLeft, setScrollLeft] = useState(0);
   const [scrollWidth, setScrollWidth] = useState(0);
@@ -80,22 +77,7 @@ const Testimonials = () => {
       // eslint-disable-next-line consistent-return
       return () => container.removeEventListener('scroll', onScroll);
     }
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.utils.toArray('.testimonial').forEach((panel, i) => {
-      ScrollTrigger.create({
-        trigger: panel,
-        start: 'top center',
-        end: 'bottom center',
-        onEnter: () => setActiveIndex(i),
-        onEnterBack: () => setActiveIndex(i),
-      });
-    });
-
-    return () => {
-      ScrollTrigger.killAll();
-    };
-  }, [isMobile]);
+  }, [isMobile, setActiveIndex]);
 
   const thumbStyle = useMemo(() => {
     const width = 1 / TESTIMONIALS.length;
@@ -133,6 +115,11 @@ const Testimonials = () => {
       )}
     </div>
   );
+};
+
+Testimonials.propTypes = {
+  activeIndex: PropTypes.number.isRequired,
+  setActiveIndex: PropTypes.func.isRequired,
 };
 
 export default Testimonials;
