@@ -10,45 +10,52 @@ import Link from 'components/shared/link';
 
 import Testimonials from './testimonials';
 
-const TESTIMONIAL_VIDEO_FRAMES = [70, 250, 380, 500];
+const TESTIMONIAL_VIDEO_FRAMES = [60, 200, 350, 500];
 const FRAME_RATE = 30;
 
 const Industry = () => {
   const videoRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const testimonialsRef = useRef([]);
+  const [activeIndex, setActiveIndex] = useState(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const video = videoRef.current;
 
-    testimonialsRef.current.forEach((testimonial, index) => {
-      const frameStart = TESTIMONIAL_VIDEO_FRAMES[index];
-      const startTime = frameStart / FRAME_RATE;
-      const nextFrameStart = TESTIMONIAL_VIDEO_FRAMES[index + 1] || frameStart + 30; // Handling last frame scenario
-      const endTime = nextFrameStart / FRAME_RATE;
+    ScrollTrigger.create({
+      trigger: video,
+      start: '+=400 center',
+      end: 'bottom center',
+      scrub: true,
+      onUpdate: (self) => {
+        const scrollProgress = self.progress; // Progress is from 0 to 1
+        const totalVideoTime = video.duration;
+        const currentTime = scrollProgress * totalVideoTime;
+        video.currentTime = currentTime;
 
-      ScrollTrigger.create({
-        trigger: testimonial,
-        start: '-=200 center', // Adjust based on when you want the trigger to start
-        end: 'bottom center',
-        scrub: false,
-        onUpdate: (self) => {
-          const { progress } = self;
-          const targetTime = startTime + progress * (endTime - startTime);
-          video.currentTime = targetTime;
-          // Set active index if the current time is greater than or equal to start time
-          if (video.currentTime >= startTime) {
-            setActiveIndex(index);
+        // Calculate the current frame based on the current time
+        const currentFrame = currentTime * FRAME_RATE;
+
+        // Determine the correct active index based on the current frame
+        let newIndex = TESTIMONIAL_VIDEO_FRAMES.findIndex((frame, index) => {
+          if (index === TESTIMONIAL_VIDEO_FRAMES.length - 1) {
+            return currentFrame >= frame; // Always set the last index if it reaches the last frame threshold
           }
-        },
-      });
+          return currentFrame >= frame && currentFrame < TESTIMONIAL_VIDEO_FRAMES[index + 1];
+        });
+
+        // If no appropriate index is found, retain the last index
+        if (newIndex === -1) {
+          newIndex = TESTIMONIAL_VIDEO_FRAMES.length - 1;
+        }
+
+        if (newIndex !== activeIndex) {
+          setActiveIndex(newIndex);
+        }
+      },
     });
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, [setActiveIndex]);
+    return () => ScrollTrigger.killAll();
+  }, [activeIndex]); // Keep the dependency array to ensure it re-runs only if necessary
 
   return (
     <section className="industry mt-[264px] xl:mt-[75px] lg:mt-24 sm:mt-20">
@@ -99,11 +106,7 @@ const Industry = () => {
             Dive into success stories
           </Link>
 
-          <Testimonials
-            activeIndex={activeIndex}
-            setActiveIndex={setActiveIndex}
-            testimonialsRef={testimonialsRef}
-          />
+          <Testimonials activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
         </div>
       </Container>
     </section>

@@ -51,7 +51,7 @@ const clamp = (min, value, max) => Math.min(Math.max(min, value), max);
 
 const IS_MOBILE_SCREEN_WIDTH = 639;
 
-const Testimonials = ({ activeIndex, setActiveIndex, testimonialsRef }) => {
+const Testimonials = ({ activeIndex, setActiveIndex }) => {
   const containerRef = useRef(null);
 
   const [scrollLeft, setScrollLeft] = useState(0);
@@ -104,7 +104,6 @@ const Testimonials = ({ activeIndex, setActiveIndex, testimonialsRef }) => {
             {...testimonial}
             isActive={activeIndex === index || isMobile}
             key={index}
-            ref={(el) => (testimonialsRef.current[index] = el)}
           />
         ))}
         <div className="hidden shrink-0 sm:block sm:w-[calc((100%-min(100%-32px,448px)-24px)/2)] sm:snap-center" />
@@ -121,7 +120,6 @@ const Testimonials = ({ activeIndex, setActiveIndex, testimonialsRef }) => {
 Testimonials.propTypes = {
   activeIndex: PropTypes.number.isRequired,
   setActiveIndex: PropTypes.func.isRequired,
-  testimonialsRef: PropTypes.shape({ current: PropTypes.arrayOf(PropTypes.object) }).isRequired,
 };
 
 export default Testimonials;
