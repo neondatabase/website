@@ -18,7 +18,7 @@ const storageItems = [
   },
   {
     icon: storageIcon,
-    title: 'All branches within a project share storage',
+    title: 'Branches share storage',
     text: 'When you branch a database, the new branch won't add to your storage bill. Branches are ready instantly, no matter how large the dataset.',
   },
 ];
