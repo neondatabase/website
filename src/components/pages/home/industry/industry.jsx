@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useRef, useState, useEffect } from 'react';
 
 import Container from 'components/shared/container';
@@ -9,29 +10,45 @@ import Link from 'components/shared/link';
 
 import Testimonials from './testimonials';
 
-const TESTIMONIAL_VIDEO_FRAMES = [70, 250, 360, 550];
+const TESTIMONIAL_VIDEO_FRAMES = [70, 250, 380, 500];
+const FRAME_RATE = 30;
 
 const Industry = () => {
   const videoRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const testimonialsRef = useRef([]);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     const video = videoRef.current;
-    if (!video) return;
 
-    const targetTime = TESTIMONIAL_VIDEO_FRAMES[activeIndex] / 30;
-    const { currentTime } = video;
-    const timeDifference = Math.abs(targetTime - currentTime);
+    testimonialsRef.current.forEach((testimonial, index) => {
+      const frameStart = TESTIMONIAL_VIDEO_FRAMES[index];
+      const startTime = frameStart / FRAME_RATE;
+      const nextFrameStart = TESTIMONIAL_VIDEO_FRAMES[index + 1] || frameStart + 30; // Handling last frame scenario
+      const endTime = nextFrameStart / FRAME_RATE;
 
-    // Dynamically calculate the duration of the animation
-    const animationDuration = Math.min(1.5, timeDifference / 3);
-
-    gsap.to(video, {
-      currentTime: targetTime,
-      duration: animationDuration,
-      ease: 'none',
+      ScrollTrigger.create({
+        trigger: testimonial,
+        start: '-=200 center', // Adjust based on when you want the trigger to start
+        end: 'bottom center',
+        scrub: false,
+        onUpdate: (self) => {
+          const { progress } = self;
+          const targetTime = startTime + progress * (endTime - startTime);
+          video.currentTime = targetTime;
+          // Set active index if the current time is greater than or equal to start time
+          if (video.currentTime >= startTime) {
+            setActiveIndex(index);
+          }
+        },
+      });
     });
-  }, [activeIndex]);
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [setActiveIndex]);
 
   return (
     <section className="industry mt-[264px] xl:mt-[75px] lg:mt-24 sm:mt-20">
@@ -56,6 +73,7 @@ const Industry = () => {
           width={448}
           controls={false}
           ref={videoRef}
+          preload="auto"
           muted
           playsInline
         >
@@ -80,7 +98,12 @@ const Industry = () => {
           >
             Dive into success stories
           </Link>
-          <Testimonials activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+
+          <Testimonials
+            activeIndex={activeIndex}
+            setActiveIndex={setActiveIndex}
+            testimonialsRef={testimonialsRef}
+          />
         </div>
       </Container>
     </section>

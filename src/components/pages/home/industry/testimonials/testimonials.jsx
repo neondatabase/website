@@ -1,8 +1,6 @@
 'use client';
 
 import clsx from 'clsx';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 import PropTypes from 'prop-types';
 import { useRef, useState, useEffect, useMemo } from 'react';
 import useWindowSize from 'react-use/lib/useWindowSize';
@@ -53,7 +51,7 @@ const clamp = (min, value, max) => Math.min(Math.max(min, value), max);
 
 const IS_MOBILE_SCREEN_WIDTH = 639;
 
-const Testimonials = ({ activeIndex, setActiveIndex }) => {
+const Testimonials = ({ activeIndex, setActiveIndex, testimonialsRef }) => {
   const containerRef = useRef(null);
 
   const [scrollLeft, setScrollLeft] = useState(0);
@@ -79,21 +77,6 @@ const Testimonials = ({ activeIndex, setActiveIndex }) => {
       // eslint-disable-next-line consistent-return
       return () => container.removeEventListener('scroll', onScroll);
     }
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.utils.toArray('.testimonial').forEach((panel, i) => {
-      ScrollTrigger.create({
-        trigger: panel,
-        start: 'top center',
-        end: 'bottom center',
-        onEnter: () => setActiveIndex(i),
-        onEnterBack: () => setActiveIndex(i),
-      });
-    });
-
-    return () => {
-      ScrollTrigger.killAll();
-    };
   }, [isMobile, setActiveIndex]);
 
   const thumbStyle = useMemo(() => {
@@ -121,6 +104,7 @@ const Testimonials = ({ activeIndex, setActiveIndex }) => {
             {...testimonial}
             isActive={activeIndex === index || isMobile}
             key={index}
+            ref={(el) => (testimonialsRef.current[index] = el)}
           />
         ))}
         <div className="hidden shrink-0 sm:block sm:w-[calc((100%-min(100%-32px,448px)-24px)/2)] sm:snap-center" />
@@ -137,6 +121,7 @@ const Testimonials = ({ activeIndex, setActiveIndex }) => {
 Testimonials.propTypes = {
   activeIndex: PropTypes.number.isRequired,
   setActiveIndex: PropTypes.func.isRequired,
+  testimonialsRef: PropTypes.shape({ current: PropTypes.arrayOf(PropTypes.object) }).isRequired,
 };
 
 export default Testimonials;
