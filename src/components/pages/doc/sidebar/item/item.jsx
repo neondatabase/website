@@ -49,7 +49,7 @@ const Item = ({
     <li className="group/item flex flex-col">
       <Tag
         className={clsx(
-          'group flex w-full items-start justify-between py-2 text-left text-sm transition-colors duration-200',
+          'group flex w-full items-start justify-between py-2 text-left text-sm tracking-extra-tight transition-colors duration-200',
           { 'group-first/item:pt-0': !isChildren },
           currentSlug === slug
             ? 'font-medium text-black-new dark:text-white'

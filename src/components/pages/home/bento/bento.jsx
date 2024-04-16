@@ -1,7 +1,7 @@
 import Container from 'components/shared/container';
 import PauseableVideo from 'components/shared/pauseable-video';
-import RiveAnimation from 'components/shared/rive-animation';
 
+import ApiCliAnimation from './api-cli-animation';
 import ClockAnimation from './clock-animation';
 
 const Bento = () => (
@@ -39,7 +39,7 @@ const Bento = () => (
         </div>
         <div className="relative grid min-h-[491px] grid-cols-1 grid-rows-1 overflow-hidden rounded-[10px] xl:min-h-[360px] lg:aspect-[0.9572] md:min-h-min sm:col-span-full sm:min-h-[250px]">
           <div className="relative z-10 col-span-full row-span-full">
-            <RiveAnimation
+            <ApiCliAnimation
               className="absolute inset-0 h-full w-full overflow-hidden rounded-[10px]"
               src="/animations/pages/home/api.riv"
               artboard="main"

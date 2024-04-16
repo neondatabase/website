@@ -202,7 +202,7 @@ const ClockAnimation = ({
       if (!isThresholded) {
         resetAnimation(true);
       } else {
-        timeoutId = setTimeout(countDownAnimation, 2000);
+        timeoutId = setTimeout(countDownAnimation, 3500);
         let i = 0;
         intervalId = setInterval(() => {
           i++;

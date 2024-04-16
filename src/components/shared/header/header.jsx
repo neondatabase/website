@@ -1,18 +1,16 @@
 import clsx from 'clsx';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
 import Link from 'components/shared/link';
+import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import ArrowIcon from 'icons/header/arrow-right.inline.svg';
-import logoBlack from 'images/logo-black-28.svg';
-import logoWhite from 'images/logo-white-28.svg';
 
 // TODO: update black logo
 const Header = ({
@@ -21,6 +19,7 @@ const Header = ({
   isSticky = false,
   isBlogPage = false,
   isDocPage = false,
+  withBorder = false,
 }) => {
   const isThemeBlack = theme === 'black-pure';
 
@@ -31,35 +30,18 @@ const Header = ({
           'safe-paddings left-0 right-0 top-0 z-40 h-16 w-full dark:bg-black-pure',
           isSticky ? 'sticky md:relative' : 'absolute lg:relative',
           isThemeBlack ? 'bg-black-pure' : 'bg-white',
+          withBorder && 'border-b border-gray-new-94 dark:border-gray-new-10',
           className
         )}
       >
         <Container className="flex items-center justify-between py-4 md:!px-5" size="1344">
-          <div className="flex items-center gap-x-16">
+          <div className="flex items-center gap-x-[90px] xl:gap-x-16">
             <Link to="/">
               <span className="sr-only">Neon</span>
-              {isThemeBlack ? (
-                <Image
-                  className={clsx('h-7 w-auto', className)}
-                  src={logoWhite}
-                  alt=""
-                  width={102}
-                  height={28}
-                  aria-hidden
-                />
-              ) : (
-                <Image
-                  className={clsx('h-7 w-auto', className)}
-                  src={logoBlack}
-                  alt=""
-                  width={102}
-                  height={28}
-                  aria-hidden
-                />
-              )}
+              <Logo className="h-7" isThemeBlack={isThemeBlack} width={102} height={28} priority />
             </Link>
 
-            <nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 xl:relative xl:left-auto xl:top-auto xl:translate-x-0 xl:translate-y-0">
+            <nav>
               <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden">
                 {MENUS.header.map(({ to, text, items }, index) => {
                   const Tag = to ? Link : 'button';
@@ -204,6 +186,7 @@ Header.propTypes = {
   isSticky: PropTypes.bool,
   isBlogPage: PropTypes.bool,
   isDocPage: PropTypes.bool,
+  withBorder: PropTypes.bool,
 };
 
 export default Header;
