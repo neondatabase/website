@@ -153,6 +153,8 @@
           items:
             - title: Airbyte
               slug: guides/logical-replication-airbyte
+            - title: ClickHouse
+              slug: guides/logical-replication-clickhouse
             - title: Fivetran
               slug: guides/logical-replication-fivetran
             - title: Kafka (Confluent)
