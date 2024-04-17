@@ -11,7 +11,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/introduction/monitoring-page" description="View system and database metrics like CPU, RAM, Connections, and more on the Neon Monitoring dashboard" icon="queries">Monitoring dashboard</a>
 
-<a href="/docs/introduction/monitor-usage" description="Track usage metrics for your Neon account and projects in the Neon Console or with the Neon API" icon="chart-bar">Usage metrics</a>
+<a href="/docs/introduction/monitor-usage" description="Monitor billing and usage metrics for your Neon account and projects in the Neon Console or with the Neon API" icon="chart-bar">Monitor billing and usage</a>
 
 <a href="/docs/guides/autoscaling-guide#monitor-autoscaling" description="Monitor Autoscaling vCPU and RAM usage with Neon's autoscaling graphs or the neon_utils extension" icon="autoscaling">Autoscaling</a>
 

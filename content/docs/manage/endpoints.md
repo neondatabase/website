@@ -131,11 +131,11 @@ The following table outlines the vCPU, RAM, LFC size (50 % of RAM), and the `max
 Users on paid plans can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
 </Admonition> 
 
-When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your computed based on the working set](#sizing-your-computed-based-on-the-working-set).
+When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
 Regarding connection limits, you'll want a compute size that can support your anticipated maximum number of concurrent connections. If you are using _Autoscaling_, it is important to remember that your `max_connections` setting is based on the _minimum compute size_ in your autoscaling configuration. The `max_connections` setting does not scale with your compute. To avoid the `max_connections` constraint, you can use a pooled connection with your application, which supports up to 10,000 concurrent user connections. See [Connection pooling](/docs/connect/connection-pooling).
 
-#### Sizing your computed based on the working set
+#### Sizing your compute based on the working set
 
 If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from Neon storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance. 
 
