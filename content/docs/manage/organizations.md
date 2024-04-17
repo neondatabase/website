@@ -94,7 +94,7 @@ Permissions within the organization are exclusively managed by Administrators. A
 Admins can also invite external guests to collaborate on specific projects through [project sharing](/docs/guides/project-sharing-guide). Guests will not have access to the organization itself but can access any projects shared with them from the **Projects** page of their personal account, under **Shared with Me**.
 
 <Admonition type="note">
-Any users you've already shared projects with will appear as guests on the Guests page if those projects were transferred during the organization conversion.
+Any users you've already shared projects with will appear as guests on the **Guests** page if those projects were transferred during the organization conversion.
 </Admonition>
 
 ![organization guests](/docs/manage/org_guests.png)
