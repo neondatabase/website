@@ -69,7 +69,7 @@ Easily switch between your personal account and any organization you are a membe
 
 ### Invite Members
 
-Only Administrators have the authority to invite new members to the organization. Invitations are issued via email. If a recipient does not have a Neon account, they will receive instructions to create one.
+Only Admins have the authority to invite new members to the organization. Invitations are issued via email. If a recipient does not have a Neon account, they will receive instructions to create one.
 
 ![organizations people tab](/docs/manage/orgs_people.png)
 
