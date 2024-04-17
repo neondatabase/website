@@ -77,7 +77,7 @@ const Footer = ({ isDocPage = false, theme = 'white' }) => {
                           <span
                             className={clsx(
                               icon,
-                              'inline-block h-4 w-4 transition-colors duration-200 group-hover:bg-primary-2 dark:text-gray-new-70 dark:group-hover:text-green-45',
+                              'inline-block h-4 w-4 transition-colors duration-200 group-hover:bg-primary-2 dark:bg-gray-new-70 dark:group-hover:bg-green-45',
                               isDarkTheme ? 'bg-gray-new-70' : 'bg-gray-new-30'
                             )}
                           />
