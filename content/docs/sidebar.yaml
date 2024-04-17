@@ -108,6 +108,8 @@
       slug: manage/integrations
     - title: Operations
       slug: manage/operations
+    - title: Organizations
+      slug: manage/organizations
     - title: Access
       items:
         - title: Project access
