@@ -146,7 +146,7 @@ export default {
           to: LINKS.partners,
         },
         {
-          text: 'Case studies',
+          text: 'Case Studies',
           to: LINKS.caseStudies,
         },
         {
@@ -161,10 +161,10 @@ export default {
           text: 'Contact Sales',
           to: LINKS.contactSales,
         },
-        // {
-        //   text: 'Changelog',
-        //   to: LINKS.changelog,
-        // },
+        {
+          text: 'Early Access',
+          to: LINKS.earlyAccess,
+        },
       ],
     },
     {
@@ -204,7 +204,7 @@ export default {
       heading: 'Community',
       links: [
         {
-          text: 'X',
+          text: 'X.com',
           to: LINKS.twitter,
           icon: 'x-icon',
         },
@@ -213,10 +213,6 @@ export default {
           to: LINKS.linkedin,
           icon: 'linkedin-icon',
         },
-        // {
-        //   text: 'Discord',
-        //   to: LINKS.discord,
-        // },
         {
           text: 'GitHub',
           to: LINKS.github,

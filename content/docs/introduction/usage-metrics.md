@@ -1,8 +1,6 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-redirectFrom:
-  - /docs/introduction/billing
 updatedOn: '2024-02-26T19:37:28.835Z'
 ---
 
@@ -30,8 +28,8 @@ _Storage_ is the total volume of data and history stored in Neon, measured in gi
 
 <Admonition type="tip" title="Tips for minimizing storage">
 - Minimize your history retention period, which controls how much change history your project retains in the form of WAL records. On the other hand, decreasing your history retention period reduces the window available for point-in-time restore or time-travel connections. See [History retention](https://neon.tech/docs/introduction/point-in-time-restore#history-retention) for more information.
-- Counterintuitively, deleting records from a table increases storage in the short term, as those delete operations become part of your change history until they age out of your history retention window. A `DELETE TABLE` operation is more storage-efficient if you are removing all records from a table.
-- Remove or reset branches before they fall out of your history retention period. WAL records must be retained to support older branches, adding to your storage.
+- While it may seem counterintuitive, deleting records from a table increases storage in the short term, as those delete operations become part of your change history until they age out of your [history retention window](https://neon.tech/docs/introduction/point-in-time-restore#history-retention). A `DELETE TABLE` operation is more storage-efficient if you are removing all records from a table, as only this single operation would be added to your change history.
+- Remove or reset branches before they fall out of your history retention window. WAL records must be retained to support older branches, adding to your storage.
 </Admonition>
 
 ## Compute
