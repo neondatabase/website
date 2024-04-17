@@ -26,6 +26,10 @@ npm install @neondatabase/serverless
 
 The driver includes TypeScript types (the equivalent of `@types/pg`). No additional installation is required.
 
+<Admonition type="note">
+The Neon serverless driver is also available as a [JavaScript Registry (JSR)](https://jsr.io/docs/introduction) package: [https://jsr.io/@neon/serverless](https://jsr.io/@neon/serverless). The JavaScript Registry (JSR) is a package registry for JavaScript and TypeScript. JSR works with many runtimes (Node.js, Deno, browsers, and more) and is backward compatible with `npm`.
+</Admonition>
+
 ## Configure your Neon database connection
 
 You can obtain a connection string for your database from the **Connection Details** widget on the Neon **Dashboard**. Your Neon connection string will look something like this:
