@@ -83,7 +83,7 @@ To invite members:
 
 Permissions within the organization are exclusively managed by Admins. As an Admin:
 
-- You can promote any member to an admin, granting them full administrative privileges.
+- You can promote any member to an Admin, granting them full administrative privileges.
 - You can demote any admin to a regular member.
 - You cannot leave the organization if you are the only Admin. Promote a member to admin before you try to leave the org.
 
