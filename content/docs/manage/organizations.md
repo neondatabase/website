@@ -124,7 +124,7 @@ Members have different capabilities based on their roles:
 
 During the private preview, a new organization account is created with the same pricing plan as your current paid personal account. Following the conversion, your personal account will switch to the Free Tier, letting you manage any new personal projects separately.
 
-As the admin for the organization account:
+As the Admin for the organization account:
 
 - You have full access to edit all billing information.
 - Promote a Member to Admin if you want to delegate billing management; however, all Admins will have the capability to edit billing details.
