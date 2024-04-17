@@ -81,7 +81,7 @@ To invite members:
 
 #### Set Permissions
 
-Permissions within the organization are exclusively managed by Administrators. As an admin:
+Permissions within the organization are exclusively managed by Admins. As an Admin:
 
 - You can promote any member to an admin, granting them full administrative privileges.
 - You can demote any admin to a regular member.
