@@ -118,7 +118,7 @@ Members have different capabilities based on their roles:
 
 - Any member can create a project under the organization's ownership.
 - Members cannot delete projects owned by the organization. They can only delete personal projects from their personal account (switch to personal account via breadcrumb).
-- Administrators can delete any project within the organization.
+- Admins can delete any project within the organization.
 
 ### Billing
 
