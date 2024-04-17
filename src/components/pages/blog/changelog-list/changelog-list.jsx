@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
-import getChangelogCategoryFromSlug from 'utils/get-changelog-category-from-slug';
 import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
 
 const ChangelogList = ({ items }) => (
@@ -18,9 +17,8 @@ const ChangelogList = ({ items }) => (
         All changelog posts
       </Link>
     </div>
-    <ul className="mt-6 grid grid-cols-4 gap-x-[50px] border-t border-gray-new-20/60 pt-8 xl:grid-cols-3 lg:mt-6 lg:grid-cols-2 md:mt-5 md:grid-cols-1 md:gap-y-7 md:pt-6">
+    <ul className="mt-8 grid grid-cols-4 gap-x-[50px] xl:grid-cols-3 lg:mt-6 lg:grid-cols-2 md:mt-5 md:grid-cols-1 md:gap-y-7">
       {items.map(({ slug, title }, index) => {
-        const { capitalisedCategory: category } = getChangelogCategoryFromSlug(slug);
         const { datetime, label } = getChangelogDateFromSlug(slug);
 
         return (
@@ -38,9 +36,6 @@ const ChangelogList = ({ items }) => (
               aria-hidden
             />
             <Link className="group/link flex flex-col" to={`${LINKS.changelog}/${slug}`}>
-              <span className="line-clamp-1 text-xs font-medium uppercase leading-none tracking-wider text-blue-80">
-                {category}
-              </span>
               <div className="relative mt-4 after:absolute after:left-0 after:top-1/2 after:h-px after:w-[calc(100%+50px)] after:-translate-y-1/2 after:bg-blue-80 group-last:after:w-full xl:last:hidden xl:group-[:nth-last-child(2)]:after:w-full lg:group-[:nth-last-child(3)]:after:w-full md:mt-0 md:hidden md:after:hidden">
                 <span className="relative z-10 flex h-2.5 w-2.5 rounded-full border-[1.4px] border-blue-80 bg-black-new md:hidden" />
                 <img
