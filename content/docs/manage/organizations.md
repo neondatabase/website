@@ -23,7 +23,7 @@ From the Neon Console, you can navigate to your Organization dashboard, where yo
 Within each organization are three types of users:
 
 - **Admin** &#8212; Administrators have access to all projects in the organization. Additionally, admins manage all permissions, invitations, and billing details.
-- **Members** &#8212; Members have access to all the projects that belong to the organization. They need to be invited to the organization by an Administrator.
+- **Members** &#8212; Members have access to all the projects that belong to the organization. They need to be invited to the organization by an Admin.
 - **Guests** &#8212; Guests are people given limited access to particular projects, using [project sharing](/docs/guides/project-sharing-guide). They do not have access to the Organization dashboard. Projects will appear under the **Shared with me** grouping in their personal account.
 
 ## Request access to the private preview
