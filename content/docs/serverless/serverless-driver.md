@@ -372,6 +372,7 @@ export default async function handler(
 - In Node.js and some other environments, there's no built-in WebSocket support. In these cases, supply a WebSocket constructor function.
 
   ```javascript
+  import { Pool, neonConfig } from '@neondatabase/serverless';
   import ws from 'ws';
   neonConfig.webSocketConstructor = ws;
   ```
