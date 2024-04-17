@@ -103,7 +103,7 @@ To invite new guests, click **Invite guests** and select the project you want to
 
 #### Manage guests
 
-Click the kebab menu next to the row in the Guests table to manage guest access. You have two options:
+Click the kebab menu next to the row in the **Guests** table to manage guest access. You have two options:
 
 - **Convert to member** — promote the guest to a full member, granting access to all projects in the organization.
 - **Remove from project** — revoke the guest's access to the shared project.
