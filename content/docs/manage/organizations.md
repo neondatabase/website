@@ -36,7 +36,7 @@ During the private preview, you cannot directly create your own organization. He
 1. **Provide Organization Details** &#8212; During the request process, you will be asked to provide:
 
    - The email of the Neon account you would like to designate as the Organization admin.
-   - The name of your new Organization as it will appear for all members in the Neon Console.
+   - The name of your new Organization as it will appear for all Members in the Neon Console.
    - Your informed consent, acknowledging that you understand the current [limitations](#feature-limitations) of the private preview.
 
 ### What Happens Next
