@@ -12,7 +12,7 @@ Available in **private preview** for existing paid accounts by request only. To 
 
 ## What are Organizations in Neon?
 
-Organizations are a type of paid account in Neon, separate from your personal account. Any Neon user can create an organization &#8212; or get invited to an organization &#8212; as a way of sharing projects across the multiple members that make up your team. Whether you create the organization, or you are invited to one, you keep your personal account, where you can manage personal projects independent of any organization you belong to.
+Organizations are a type of paid account in Neon, separate from your personal account. Any Neon user can create an organization &#8212; or get invited to one or more organizations &#8212; as a way of sharing projects across the various members that make up your teams. Whether you create an organization or are invited to join, you maintain your personal account, which allows you to manage personal projects independent of any organizations you belong to.
 
 From the Neon Console, you can navigate to your Organization dashboard, where you'll find all projects in the organization and various user management actions that you can take as the Admin.
 
@@ -22,7 +22,7 @@ From the Neon Console, you can navigate to your Organization dashboard, where yo
 
 Within each organization are three types of users:
 
-- **Admin** &#8212; Administrators have access to all projects in the organization. In addition, admins handle all permissions and invites.
+- **Admin** &#8212; Administrators have access to all projects in the organization. Additionally, admins manage all permissions, invitations, and billing details.
 - **Members** &#8212; Members have access to all the projects that belong to the organization. They need to be invited to the organization by an Administrator.
 - **Guests** &#8212; Guests are people given limited access to particular projects, using [project sharing](/docs/guides/project-sharing-guide). They do not have access to the Organization dashboard. Projects will appear under the **Shared with me** grouping in their personal account.
 
