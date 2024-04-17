@@ -127,7 +127,7 @@ During the private preview, a new organization account is created with the same 
 As the admin for the organization account:
 
 - You have full access to edit all billing information.
-- Promote a member to admin if you want to delegate billing management; however, all admins will have the capability to edit billing details.
+- Promote a Member to Admin if you want to delegate billing management; however, all Admins will have the capability to edit billing details.
 - While all members can view the **Billing** page, only admins can make changes.
 
 For detailed information on pricing and plans, refer to [Neon plans](/docs/introduction/plans).
