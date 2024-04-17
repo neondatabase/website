@@ -7,7 +7,7 @@ import phoneIllustration from 'images/pages/home/lightning/phone.png';
 
 // TODO: check heading gradient position when font will be available
 const Lightning = () => (
-  <section className="lightning safe-paddings mt-[208px] xl:mt-32 lg:mt-24 sm:mt-20">
+  <section className="lightning safe-paddings mt-[209px] xl:mt-32 lg:mt-24 sm:mt-20">
     <Container
       className="pb-[280px] xl:max-w-[704px] xl:pb-[178px] lg:!max-w-[640px] lg:pb-6 md:!max-w-none md:pl-[84px] sm:pl-5"
       size="960"

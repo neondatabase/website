@@ -7,8 +7,8 @@ import RiveAnimation from 'components/shared/rive-animation';
 const GetStarted = () => (
   <section
     className={clsx(
-      'get-started relative overflow-hidden pb-[356px] pt-[445px]',
-      'xl:pb-[218px] xl:pt-[230px] lg:pb-[148px] lg:pt-[179px] sm:pb-[100px] sm:pt-[116px]'
+      'get-started relative overflow-hidden pb-[307px] pt-[445px]',
+      'xl:py-[230px] lg:pb-[156px] lg:pt-[179px] sm:pb-[110px] sm:pt-[116px]'
     )}
   >
     <RiveAnimation
@@ -25,14 +25,14 @@ const GetStarted = () => (
       <h2
         className={clsx(
           'relative text-center font-title text-[68px] font-medium leading-[0.9] -tracking-[0.03em] text-white',
-          'xl:text-[56px] xl:leading-none xl:tracking-extra-tight lg:text-[44px] sm:text-[32px]'
+          'xl:text-[56px] xl:tracking-extra-tight lg:text-[44px] sm:text-[32px]'
         )}
       >
         Features of tomorrow.
         <br /> Available today.
       </h2>
       <Button
-        className="pointer-events-auto relative mt-9 !font-semibold tracking-tighter xl:mt-8 lg:mt-7 sm:mt-5"
+        className="pointer-events-auto relative mt-9 !font-semibold tracking-tighter xl:mt-8 lg:mt-7 sm:mt-5 sm:h-10"
         size="lg"
         theme="green-outline"
         to="#"

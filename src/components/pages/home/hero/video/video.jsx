@@ -106,7 +106,7 @@ const Video = forwardRef(
           </div>
         </div>
         <div className="mt-5 px-1">
-          <h3 className="text-xl leading-dense tracking-tighter text-white md:text-lg">{title}</h3>
+          <h3 className="text-xl leading-dense tracking-tighter text-white lg:text-lg">{title}</h3>
           <div className="mt-3.5 h-px w-full overflow-hidden bg-gray-new-15" aria-hidden>
             <div
               className={clsx(
@@ -118,8 +118,10 @@ const Video = forwardRef(
           </div>
           <p
             className={clsx(
-              'mt-3.5 max-w-[366px] font-light tracking-extra-tight transition-colors duration-200 md:text-[15px]',
-              isActive ? 'text-gray-new-80' : 'text-gray-new-40'
+              'mt-3.5 max-w-[366px] font-light tracking-extra-tight transition-colors duration-200 lg:text-[15px]',
+              isActive
+                ? 'text-gray-new-80'
+                : 'text-gray-new-40 lg:min-h-[90px] sm:!min-h-0 [@media(max-width:840px)]:min-h-[112px]'
             )}
           >
             {description}

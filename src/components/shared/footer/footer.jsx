@@ -21,19 +21,24 @@ const Footer = ({ isDocPage = false, theme = 'white' }) => {
     >
       <Container
         className={clsx(
-          'flex justify-between gap-x-10 pb-[51px] pt-10',
+          'flex justify-between gap-x-10 pb-[51px] pt-10 xl:pt-9 sm:py-8',
           'before:absolute before:-left-[20%] before:top-0 before:h-px before:w-[140%] before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);]',
           'dark:before:bg-white',
           isDarkTheme ? 'before:bg-white' : 'before:bg-gray-new-10'
         )}
         size="1344"
       >
-        <div className="flex flex-col items-start justify-between md:w-full md:gap-y-8 sm:gap-y-6">
-          <div className="md:justify-between' mb-[30px] flex grow flex-col md:mb-0 md:w-full md:flex-row md:items-start">
+        <div className="flex flex-col items-start justify-between md:w-full md:gap-y-8 sm:gap-y-5">
+          <div className="mb-[30px] flex grow flex-col md:mb-0 md:w-full md:flex-row md:items-start md:justify-between">
             <div className="flex grow flex-col items-start">
               <Link className="block" to="/">
                 <span className="sr-only">Neon</span>
-                <Logo className="h-8" isThemeBlack={isDarkTheme} width={116} height={32} />
+                <Logo
+                  className="h-8 lg:h-7 sm:h-[26px]"
+                  isThemeBlack={isDarkTheme}
+                  width={116}
+                  height={32}
+                />
               </Link>
               <StatusBadge isDocPage={isDocPage} isDarkTheme={isDarkTheme} />
               {isDocPage && <ThemeSelect className="mt-7 xl:mt-6 md:mt-3" />}
