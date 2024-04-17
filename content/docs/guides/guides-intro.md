@@ -27,7 +27,11 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Astro" href="/docs/guides/astro" title="Connect an Astro site or app to Neon" />
 
+<img src="/images/technology-logos/auth0-logo.svg" width="36" height="36" alt="Auth0" href="/docs/guides/auth-clerk" title="Authenticate Neon Postgres application users with Auth0" />
+
 <img src="/images/technology-logos/aws-lambda-logo.svg" width="36" height="36" alt="AWS Lambda" href="/docs/guides/aws-lambda" title="Connect from AWS Lambda to Neon" />
+
+<img src="/images/technology-logos/clerk-logo.svg" width="36" height="36" alt="Clerk" href="/docs/guides/auth-clerk" title="Authenticate Neon Postgres application users with Clerk" />
 
 <img src="/images/technology-logos/clickhouse-logo.svg" width="36" height="36" alt="ClickHouse" href="/docs/guides/logical-replication-clickhouse" title="Replicate data from Neon to ClickHouse (DoubleCloud)" />
 
