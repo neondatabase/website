@@ -45,7 +45,7 @@ Once your request is processed:
 
 1. **Project Transfer** &#8212; All existing projects in your personal account will be automatically transferred to your new organization.
 1. **Admin Role** &#8212; You will be assigned as the Admin of the organization, letting you invite Members to get started working together.
-1. **Billing Transition** &#8212; Your existing paid plan (Launch, Scale, or Enterprise) will transfer to the organization. Any admin can manage billing details. To delegate billing management, promote a regular member to admin.
+1. **Billing Transition** &#8212; Your existing paid plan (Launch, Scale, or Enterprise) will transfer to the organization. Any Admin can manage billing details. To delegate billing management, promote a regular Member to Admin.
 1. **Personal Account Adjustment** &#8212; Your personal account will convert to a Free Tier, allowing you to continue individual projects without affecting your organization.
 
 We value your [feedback](#feedback-and-future-improvements) throughout this preview phase to enhance and refine the Organizations feature.
