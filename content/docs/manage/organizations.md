@@ -28,16 +28,16 @@ Within each organization are three types of users:
 
 ## Request access to the private preview
 
-While Organization features are currently in private preview, you can't create your own organization directly. Here’s how you can request access and what to expect:
+During the private preview, you cannot directly create your own organization. Here’s how you can request a new Organization and what to expect:
 
 ### How to Request Access
 
 1. **Submit a Request** &#8212; Contact our [Customer Success](mailto:customer-success@neon.tech) team and ask to join the private preview for Organizations and we'll start the process.
-1. **Provide Organization Details** &#8212; During the request process, you will need to tell us:
+1. **Provide Organization Details** &#8212; During the request process, you will be asked to provide:
 
-    - Your user ID.
-    - Your informed consent, acknowledging that you understand the current [limitations](#feature-limitations) of the private preview.
-    - Your desired organization name, which will be visible to all future members.
+   - The email of the Neon account you would like to designate as the Organization admin.
+   - The name of your new Organization as it will appear for all members in the Neon Console.
+   - Your informed consent, acknowledging that you understand the current [limitations](#feature-limitations) of the private preview.
 
 ### What Happens Next
 
@@ -112,18 +112,22 @@ Click the kebab menu next to the row in the Guests table to manage guest access.
 
 ### Manage Projects
 
-All members can create new projects. Deleting depends on permissions and ownership.
+All members can create new projects from the Organization's **Projects** page; however, the organization itself retains ownership of these projects, not the individual user.
 
-- Any member can create a project and will automatically become that project's project owner.
-- Administrators can delete any project.
-- Members can only delete projects where they are the owner.
+Members have different capabilities based on their roles:
+
+- Any member can create a project under the organization's ownership.
+- Members cannot delete projects owned by the organization. They can only delete personal projects from their personal account (switch to personal account via breadcrumb).
+- Administrators can delete any project within the organization.
 
 ### Billing
 
-During the private preview, your organization inherits the pricing plan from your personal account. As the admin:
+During the private preview, a new organization account is created with the same pricing plan as your current paid personal account. Following the conversion, your personal account will switch to the Free Tier, letting you manage any new personal projects separately.
+
+As the admin for the organization account:
 
 - You have full access to edit all billing information.
-- Promote a member to admin if you wish to delegate billing management; however, all admins will have the capability to edit billing details.
+- Promote a member to admin if you want to delegate billing management; however, all admins will have the capability to edit billing details.
 - While all members can view the billing page, only admins can make changes.
 
 For detailed information on pricing and plans, refer to [Neon plans](/docs/introduction/plans).
