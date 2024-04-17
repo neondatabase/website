@@ -138,7 +138,7 @@ As we continue to refine our Organizations feature during this private preview p
 
 - **Integration limitations** — You cannot install new Vercel integrations on organization-owned projects. However, existing integrations will continue to work on projects transferred from personal to the organization account.
 - **Connection Restrictions** — Passwordless connect is not available for organization-owned projects. Users must use standard authentication methods.
-- **Branch Management** — All users currently have the ability to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
+- **Branch management** — All users currently have the ability to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
 - **Project Transfer Restrictions** — Currently, transferring projects to an organization is done in bulk ("all or nothing") during the Neon-managed conversion. Selective and self-serve transfers are planned for future updates.
 - **Permissions and Roles** — The current permissions system may not meet all needs for granular control. Users are encouraged to share their feedback and requirements for more detailed permissions settings.
 
