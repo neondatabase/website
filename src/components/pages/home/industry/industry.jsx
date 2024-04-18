@@ -13,7 +13,7 @@ import Testimonials from './testimonials';
 
 const Hls = require('hls.js/dist/hls.light.min.js');
 
-const TESTIMONIAL_VIDEO_FRAMES = [60, 250, 360, 550];
+const TESTIMONIAL_VIDEO_FRAMES = [120, 275, 425, 550];
 const IS_MOBILE_SCREEN_WIDTH = 639;
 
 const Industry = () => {
@@ -66,15 +66,10 @@ const Industry = () => {
     const targetTime = TESTIMONIAL_VIDEO_FRAMES[activeIndex]
       ? TESTIMONIAL_VIDEO_FRAMES[activeIndex] / 30
       : 0;
-    const { currentTime } = video;
-    const timeDifference = Math.abs(targetTime - currentTime);
-
-    // Dynamically calculate the duration of the animation
-    const animationDuration = Math.min(1.5, timeDifference / 3);
 
     gsap.to(video, {
       currentTime: targetTime,
-      duration: animationDuration,
+      duration: 1,
       ease: 'none',
     });
   }, [activeIndex, isInView]);

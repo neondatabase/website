@@ -103,7 +103,7 @@ const Testimonials = ({ activeIndex, setActiveIndex, windowWidth, isMobile }) =>
     <div className="mt-[157px] xl:mt-[88px] lg:mt-[63px] sm:mt-[38px] sm:w-full">
       <div
         className={clsx(
-          'flex flex-col gap-[184px] xl:gap-[142px] lg:gap-32',
+          'flex flex-col gap-[216px] xl:gap-[160px] lg:gap-[142px]',
           'sm:no-scrollbars sm:snap-x sm:snap-mandatory sm:flex-row sm:gap-3 sm:overflow-x-auto'
         )}
         ref={containerRef}
