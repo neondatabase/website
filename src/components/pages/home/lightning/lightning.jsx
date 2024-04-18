@@ -43,6 +43,7 @@ const Lightning = () => (
         src={phoneIllustration}
         width={464}
         height={840}
+        quality={50}
         alt=""
       />
     </Container>
