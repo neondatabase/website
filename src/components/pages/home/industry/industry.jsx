@@ -17,7 +17,7 @@ const FRAME_RATE = 30;
 
 const Industry = () => {
   const videoRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(-1);
 
   useEffect(() => {
     const videoElement = videoRef?.current;

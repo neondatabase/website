@@ -108,11 +108,12 @@ const Testimonials = ({ activeIndex, setActiveIndex }) => {
         ))}
         <div className="hidden shrink-0 sm:block sm:w-[calc((100%-min(100%-32px,448px)-24px)/2)] sm:snap-center" />
       </div>
-      {isMobile && (
-        <div className="relative mx-auto mt-8 h-px w-[192px] bg-[#343538]">
-          <div className="absolute top-0 h-px bg-green-45" style={thumbStyle} />
-        </div>
-      )}
+      <div
+        className="relative mx-auto mt-8 hidden h-px w-[192px] bg-[#343538] sm:block"
+        aria-hidden
+      >
+        <div className="absolute top-0 h-px bg-green-45" style={thumbStyle} />
+      </div>
     </div>
   );
 };

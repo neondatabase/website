@@ -96,7 +96,7 @@ const Hero = () => {
                   ? 'w-[64.7273%] flex-shrink-0 xl:w-[61.863%] lg:w-[62.746%] sm:w-full'
                   : 'w-full'
               )}
-              videoClassName={index === 1 && 'left-[-172px]'}
+              videoClassName={clsx(index === 1 && 'left-[-172px]')}
               {...item}
               isActive={currentVideoIndex === index}
               switchVideo={() => switchVideo((currentVideoIndex + 1) % ITEMS.length)}
