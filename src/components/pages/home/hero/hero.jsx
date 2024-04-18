@@ -59,7 +59,7 @@ const Hero = () => {
   return (
     <section className="hero safe-paddings relative pt-[142px] xl:pt-[120px] lg:pt-8">
       <Image
-        className="absolute left-1/2 top-0 -translate-x-1/2 xl:min-w-[1286px] md:min-w-[1010px] sm:top-28 sm:min-w-[526px]"
+        className="absolute left-1/2 top-0 min-w-[1760px] -translate-x-1/2 xl:min-w-[1286px] md:min-w-[1010px] sm:top-28 sm:min-w-[526px]"
         src={bg}
         width={1760}
         height={980}
