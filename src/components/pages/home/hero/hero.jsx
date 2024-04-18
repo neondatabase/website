@@ -61,6 +61,7 @@ const Hero = () => {
       <Image
         className="absolute left-1/2 top-0 min-w-[1760px] -translate-x-1/2 xl:min-w-[1286px] md:min-w-[1010px] sm:top-28 sm:min-w-[526px]"
         src={bg}
+        sizes="(max-width: 639px) 526px"
         width={1760}
         height={980}
         quality={100}
