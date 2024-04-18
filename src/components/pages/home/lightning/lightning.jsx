@@ -39,7 +39,7 @@ const Lightning = () => (
       </Link>
       <Image
         className="absolute right-[-21px] top-[130px] xl:right-[-57px] xl:top-[84px] xl:max-w-[362px] lg:left-[338px] lg:right-auto lg:top-14 lg:max-w-[271px] sm:left-[247px] sm:top-6 sm:min-w-[271px]"
-        sizes="(max-width: 639px) 271px"
+        sizes="(max-width: 1280px) 362px, (max-width: 1024px) 271px, 464px"
         src={phoneIllustration}
         width={464}
         height={840}
