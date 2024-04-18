@@ -5,14 +5,13 @@ import Link from 'components/shared/link';
 import PauseableVideo from 'components/shared/pauseable-video';
 import phoneIllustration from 'images/pages/home/lightning/phone.png';
 
-// TODO: check heading gradient position when font will be available
 const Lightning = () => (
   <section className="lightning safe-paddings mt-[209px] xl:mt-32 lg:mt-24 sm:mt-20">
     <Container
       className="pb-[280px] xl:max-w-[704px] xl:pb-[178px] lg:!max-w-[640px] lg:pb-6 md:!max-w-none md:pl-[84px] sm:pl-5"
       size="960"
     >
-      <h2 className="inline-block bg-home-lightning-title bg-clip-text pb-6 font-title text-[128px] font-medium leading-[0.95] -tracking-wider text-transparent xl:text-[96px] lg:max-w-lg lg:text-[72px] sm:text-[52px]">
+      <h2 className="inline-block bg-home-lightning-title bg-clip-text pb-6 font-title text-[128px] font-medium leading-[0.95] -tracking-wider text-transparent xl:text-[96px] lg:max-w-lg lg:text-[72px] sm:bg-home-lightning-title-sm sm:text-[52px]">
         Lightning fast. Edge&nbsp;ready.
       </h2>
       <div className="relative z-10 ml-32 mt-[-113px] aspect-[1.181818] mix-blend-plus-lighter xl:ml-24 xl:mt-[-103px] xl:min-w-[647px] lg:ml-20 lg:mt-[-91px] lg:min-w-0 lg:max-w-[482px] md:ml-[27px] md:max-w-[484px] sm:ml-0 sm:mt-[-85px] sm:min-w-[484px]">

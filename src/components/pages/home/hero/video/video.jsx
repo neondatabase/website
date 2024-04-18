@@ -127,7 +127,7 @@ const Video = forwardRef(
             {description}
           </p>
           <Link
-            className="mt-2.5 flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white"
+            className="pointer-events-auto mt-2.5 flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white"
             to={linkUrl}
             withArrow
           >
