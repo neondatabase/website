@@ -63,7 +63,8 @@ const Hero = () => {
         src={bg}
         width={1760}
         height={980}
-        quality={100}
+        alt=""
+        unoptimized
         priority
       />
 
