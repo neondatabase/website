@@ -36,12 +36,14 @@
           slug: introduction/plans
         - title: Pricing estimation guide
           slug: introduction/pricing-estimation-guide
-        - title: Sample project billing
-          slug: introduction/billing-sample
         - title: Extra usage
           slug: introduction/extra-usage
         - title: Usage metrics
           slug: introduction/usage-metrics
+        - title: Sample project billing
+          slug: introduction/billing-sample
+        - title: Monitor billing and usage
+          slug: introduction/monitor-usage
         - title: Manage billing
           slug: introduction/manage-billing
         - title: AWS Marketplace
@@ -55,8 +57,6 @@
       items:
         - title: Monitoring dashboard
           slug: introduction/monitoring-page
-        - title: Usage metrics
-          slug: introduction/monitor-usage
         - title: External tools
           slug: introduction/monitor-external-tools
 - title: Get started
