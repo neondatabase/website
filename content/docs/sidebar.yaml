@@ -57,7 +57,7 @@
       items:
         - title: Monitoring dashboard
           slug: introduction/monitoring-page
-        - title: Usage metrics
+        - title: Monitor billing and usage
           slug: introduction/monitor-usage
         - title: External tools
           slug: introduction/monitor-external-tools

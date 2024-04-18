@@ -1,5 +1,5 @@
 ---
-title: Monitor billing and usage metrics
+title: Monitor billing and usage
 subtitle: Monitor billing and usage metrics for your account and projects from the console or API
 enableTableOfContents: true
 redirectFrom:
