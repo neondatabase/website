@@ -7,7 +7,7 @@ const Testimonial = ({ className, quote, avatar, name, position, logo, isActive 
   <LazyMotion features={domAnimation}>
     <m.figure
       className={clsx(
-        'sm:grid sm:min-h-[190px] sm:w-[calc(100%-32px)] sm:max-w-md sm:rounded-lg',
+        'opacity-40 blur-[2px] sm:grid sm:min-h-[190px] sm:w-[calc(100%-32px)] sm:max-w-md sm:rounded-lg',
         'sm:shrink-0 sm:snap-center sm:border sm:border-gray-new-10 sm:bg-black-new sm:p-5',
         className
       )}
@@ -15,7 +15,7 @@ const Testimonial = ({ className, quote, avatar, name, position, logo, isActive 
         opacity: isActive ? 1 : 0.4,
         filter: isActive ? 'none' : 'blur(2px)',
       }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.5 }}
     >
       <Image
         className="hidden sm:block"
@@ -26,7 +26,7 @@ const Testimonial = ({ className, quote, avatar, name, position, logo, isActive 
       />
       <blockquote
         className={clsx(
-          'text-2xl font-light leading-snug tracking-extra-tight text-[#CCC6EC] sm:text-white',
+          'text-2xl font-light leading-snug tracking-extra-tight text-[#CCC6EC] transition-colors duration-500 sm:text-white',
           'xl:text-xl lg:text-base sm:mt-2.5 sm:text-[15px]',
           {
             'text-white': isActive,
