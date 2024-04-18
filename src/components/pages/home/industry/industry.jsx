@@ -2,8 +2,9 @@
 
 import clsx from 'clsx';
 import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useRef, useState, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import useWindowSize from 'react-use/lib/useWindowSize';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
@@ -12,17 +13,25 @@ import Testimonials from './testimonials';
 
 const Hls = require('hls.js/dist/hls.light.min.js');
 
-const TESTIMONIAL_VIDEO_FRAMES = [60, 200, 350, 500];
-const FRAME_RATE = 30;
+const TESTIMONIAL_VIDEO_FRAMES = [60, 250, 360, 550];
+const IS_MOBILE_SCREEN_WIDTH = 639;
 
 const Industry = () => {
+  const [videoVisibilityRef, isInView] = useInView({
+    triggerOnce: true,
+    rootMargin: '0px 0px 900px 0px',
+  });
+
   const videoRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(-1);
+
+  const { width: windowWidth } = useWindowSize();
+  const isMobile = windowWidth <= IS_MOBILE_SCREEN_WIDTH;
 
   useEffect(() => {
     const videoElement = videoRef?.current;
 
-    if (!videoElement) {
+    if (!videoElement || !isInView || isMobile) {
       return;
     }
 
@@ -45,50 +54,36 @@ const Industry = () => {
       source.type = 'video/mp4';
       videoElement.appendChild(source);
     }
-  }, []);
+  }, [isInView, isMobile]);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     const video = videoRef.current;
 
-    ScrollTrigger.create({
-      trigger: video,
-      start: '+=400 center',
-      end: 'bottom center',
-      scrub: true,
-      onUpdate: (self) => {
-        const scrollProgress = self.progress; // Progress is from 0 to 1
-        const totalVideoTime = video.duration;
-        const currentTime = scrollProgress * totalVideoTime;
-        video.currentTime = currentTime;
+    if (!video || !isInView) {
+      return;
+    }
 
-        // Calculate the current frame based on the current time
-        const currentFrame = currentTime * FRAME_RATE;
+    const targetTime = TESTIMONIAL_VIDEO_FRAMES[activeIndex]
+      ? TESTIMONIAL_VIDEO_FRAMES[activeIndex] / 30
+      : 0;
+    const { currentTime } = video;
+    const timeDifference = Math.abs(targetTime - currentTime);
 
-        // Determine the correct active index based on the current frame
-        let newIndex = TESTIMONIAL_VIDEO_FRAMES.findIndex((frame, index) => {
-          if (index === TESTIMONIAL_VIDEO_FRAMES.length - 1) {
-            return currentFrame >= frame; // Always set the last index if it reaches the last frame threshold
-          }
-          return currentFrame >= frame && currentFrame < TESTIMONIAL_VIDEO_FRAMES[index + 1];
-        });
+    // Dynamically calculate the duration of the animation
+    const animationDuration = Math.min(1.5, timeDifference / 3);
 
-        // If no appropriate index is found, retain the last index
-        if (newIndex === -1) {
-          newIndex = TESTIMONIAL_VIDEO_FRAMES.length - 1;
-        }
-
-        if (newIndex !== activeIndex) {
-          setActiveIndex(newIndex);
-        }
-      },
+    gsap.to(video, {
+      currentTime: targetTime,
+      duration: animationDuration,
+      ease: 'none',
     });
-
-    return () => ScrollTrigger.killAll();
-  }, [activeIndex]); // Keep the dependency array to ensure it re-runs only if necessary
+  }, [activeIndex, isInView]);
 
   return (
-    <section className="industry mt-[264px] xl:mt-[75px] lg:mt-24 sm:mt-20">
+    <section
+      className="industry mt-[264px] xl:mt-[75px] lg:mt-24 sm:mt-20"
+      ref={videoVisibilityRef}
+    >
       <Container
         className={clsx(
           'box-content flex gap-24',
@@ -134,7 +129,12 @@ const Industry = () => {
             Dive into success stories
           </Link>
 
-          <Testimonials activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+          <Testimonials
+            activeIndex={activeIndex}
+            setActiveIndex={setActiveIndex}
+            isMobile={isMobile}
+            windowWidth={windowWidth}
+          />
         </div>
       </Container>
     </section>

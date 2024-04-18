@@ -1,9 +1,10 @@
 'use client';
 
 import clsx from 'clsx';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import PropTypes from 'prop-types';
 import { useRef, useState, useEffect, useMemo } from 'react';
-import useWindowSize from 'react-use/lib/useWindowSize';
 
 import alexKlarfeldImage from 'images/pages/home/industry/alex-klarfeld.jpg';
 import edouardBonlieuImage from 'images/pages/home/industry/edouard-bonlieu.jpg';
@@ -49,16 +50,11 @@ const TESTIMONIALS = [
 
 const clamp = (min, value, max) => Math.min(Math.max(min, value), max);
 
-const IS_MOBILE_SCREEN_WIDTH = 639;
-
-const Testimonials = ({ activeIndex, setActiveIndex }) => {
+const Testimonials = ({ activeIndex, setActiveIndex, windowWidth, isMobile }) => {
   const containerRef = useRef(null);
 
   const [scrollLeft, setScrollLeft] = useState(0);
   const [scrollWidth, setScrollWidth] = useState(0);
-
-  const { width: windowWidth } = useWindowSize();
-  const isMobile = windowWidth <= IS_MOBILE_SCREEN_WIDTH;
 
   useEffect(() => {
     if (isMobile) {
@@ -77,6 +73,21 @@ const Testimonials = ({ activeIndex, setActiveIndex }) => {
       // eslint-disable-next-line consistent-return
       return () => container.removeEventListener('scroll', onScroll);
     }
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray('.testimonial').forEach((panel, i) => {
+      ScrollTrigger.create({
+        trigger: panel,
+        start: 'top center',
+        end: 'bottom center',
+        onEnter: () => setActiveIndex(i),
+        onEnterBack: () => setActiveIndex(i),
+      });
+    });
+
+    return () => {
+      ScrollTrigger.killAll();
+    };
   }, [isMobile, setActiveIndex]);
 
   const thumbStyle = useMemo(() => {
@@ -121,6 +132,8 @@ const Testimonials = ({ activeIndex, setActiveIndex }) => {
 Testimonials.propTypes = {
   activeIndex: PropTypes.number.isRequired,
   setActiveIndex: PropTypes.func.isRequired,
+  windowWidth: PropTypes.number.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export default Testimonials;
