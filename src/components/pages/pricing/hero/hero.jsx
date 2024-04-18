@@ -89,12 +89,14 @@ const items = [
   {
     type: 'Enterprise',
     price: 'Custom',
-    description: 'Custom plans for large teams and database fleets.',
+    description: 'Custom plans for large datasets and database fleets.',
     features: [
-      { title: 'Storage and compute discounts' },
+      { title: 'Storage discounts' },
       { title: 'Higher resource limits' },
-      { title: 'Customer-owned S3' },
+      { title: 'Thousands of databases' },
       { title: 'Enterprise support w/SLAs' },
+      { title: 'Audit logging' },
+      { title: 'SOC 2 compliance' },
     ],
     button: {
       url: `${LINKS.enterprise}#request-trial`,
