@@ -16,7 +16,7 @@ const Bento = () => (
         <div className="relative col-span-2 grid min-h-[384px] grid-cols-1 grid-rows-1 overflow-hidden rounded-[10px] xl:min-h-[282px] xl:rounded-lg lg:aspect-[2.5] lg:min-h-min sm:min-h-[250px] sm:w-full">
           <div className="relative z-10 col-span-full row-span-full">
             <PauseableVideo
-              className="absolute inset-0 sm:inset-auto sm:left-1/2 sm:top-1/2 sm:h-full sm:w-auto sm:max-w-none sm:-translate-x-1/2 sm:-translate-y-1/2"
+              videoClassName="sm:inset-auto sm:left-1/2 sm:top-1/2 sm:h-full sm:w-auto sm:max-w-none sm:-translate-x-1/2 sm:-translate-y-1/2"
               width={960}
               height={384}
             >

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const PauseableVideo = ({ children, className, width, height }) => {
+const PauseableVideo = ({ children, className, videoClassName, width, height }) => {
   const videoRef = useRef(null);
 
   const [videoVisibilityRef, isInView] = useInView({
@@ -38,11 +38,16 @@ const PauseableVideo = ({ children, className, width, height }) => {
 
   return (
     <LazyMotion features={domAnimation}>
-      <div ref={videoVisibilityRef}>
+      <div className={clsx('relative h-full w-full', className)} ref={videoVisibilityRef}>
+        <img
+          src={`data:image/svg+xml;charset=utf-8,%3Csvg width='${width}' height='${height}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
+          alt=""
+          aria-hidden
+        />
         <AnimatePresence>
           {isInView && (
             <m.video
-              className={clsx(className)}
+              className={clsx('absolute inset-0', videoClassName)}
               ref={videoRef}
               controls={false}
               width={width}
@@ -71,6 +76,7 @@ PauseableVideo.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   className: PropTypes.string,
+  videoClassName: PropTypes.string,
 };
 
 export default PauseableVideo;

@@ -52,11 +52,13 @@ const clamp = (min, value, max) => Math.min(Math.max(min, value), max);
 
 const Testimonials = ({ activeIndex, setActiveIndex, windowWidth, isMobile }) => {
   const containerRef = useRef(null);
+  const testimonialsRef = useRef([]);
 
   const [scrollLeft, setScrollLeft] = useState(0);
   const [scrollWidth, setScrollWidth] = useState(0);
 
   useEffect(() => {
+    console.log(testimonialsRef);
     if (isMobile) {
       const container = containerRef.current;
       if (!container) return;
@@ -75,13 +77,23 @@ const Testimonials = ({ activeIndex, setActiveIndex, windowWidth, isMobile }) =>
     }
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.utils.toArray('.testimonial').forEach((panel, i) => {
+    // gsap.utils.toArray('.testimonial').forEach((panel, i) => {
+    //   ScrollTrigger.create({
+    //     trigger: panel,
+    //     start: 'top center',
+    //     end: 'bottom center',
+    //     onEnter: () => setActiveIndex(i),
+    //     onEnterBack: () => setActiveIndex(i),
+    //   });
+    // });
+
+    testimonialsRef.current.forEach((testimonial, index) => {
       ScrollTrigger.create({
-        trigger: panel,
-        start: 'top center',
+        trigger: testimonial,
+        start: '-=200 center', // Adjust based on when you want the trigger to start
         end: 'bottom center',
-        onEnter: () => setActiveIndex(i),
-        onEnterBack: () => setActiveIndex(i),
+        onEnter: () => setActiveIndex(index),
+        onEnterBack: () => setActiveIndex(index),
       });
     });
 
@@ -111,10 +123,12 @@ const Testimonials = ({ activeIndex, setActiveIndex, windowWidth, isMobile }) =>
         <div className="hidden shrink-0 sm:block sm:w-[calc((100%-min(100%-32px,448px)-24px)/2)] sm:snap-center" />
         {TESTIMONIALS.map((testimonial, index) => (
           <Testimonial
-            className="testimonial"
             {...testimonial}
             isActive={activeIndex === index || isMobile}
             key={index}
+            ref={(el) => {
+              testimonialsRef.current[index] = el;
+            }}
           />
         ))}
         <div className="hidden shrink-0 sm:block sm:w-[calc((100%-min(100%-32px,448px)-24px)/2)] sm:snap-center" />

@@ -16,7 +16,8 @@ const Multitenancy = () => (
         -webm: -c:v libvpx-vp9 -crf 20 -vf scale=3840:-2 -deadline best -an
     */}
     <PauseableVideo
-      className="relative left-1/2 mt-[54px] max-w-[1920px] -translate-x-1/2 xl:mt-11 xl:max-w-[1380px] lg:mt-10 lg:max-w-[1150px] sm:mt-6 sm:max-w-[790px]"
+      className="mt-[54px] xl:mt-11 lg:mt-10 sm:mt-6"
+      videoClassName="max-w-[1920px] xl:max-w-[1380px] lg:max-w-[1150px] sm:max-w-[790px] -translate-x-1/2 left-1/2"
       height={474}
       width={1920}
     >
