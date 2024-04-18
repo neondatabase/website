@@ -6,7 +6,7 @@ import Footer from 'components/shared/footer';
 import Header from 'components/shared/header';
 import Topbar from 'components/shared/topbar';
 
-const Layout = async ({
+const Layout = ({
   className = null,
   headerClassName = null,
   headerTheme = 'white',
