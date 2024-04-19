@@ -182,7 +182,7 @@ You can now use Prisma Client as you normally would with full type-safety. Prism
 If you encounter a `TypeError: bufferUtil.mask is not a function` error when building your application, this is likely due to a missing Websocket implementation required to use the `Client` or `Pool` constructs with the Neon serverless driver. You can address this requirement by installing the `bufferutil` package:
 
 ```shell
-npm i bufferutil --save-dev`
+npm i bufferutil --save-dev
 ```
 </Admonition>
 
