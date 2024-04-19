@@ -8,6 +8,7 @@ import useWindowSize from 'react-use/lib/useWindowSize';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import useIsSafari from 'hooks/use-is-safari';
 
 import Testimonials from './testimonials';
 
@@ -28,15 +29,14 @@ const Industry = () => {
   const { width: windowWidth } = useWindowSize();
   const isMobile = windowWidth <= IS_MOBILE_SCREEN_WIDTH;
 
+  const isSafari = useIsSafari();
+
   useEffect(() => {
     const videoElement = videoRef?.current;
 
     if (!videoElement || !isInView || isMobile) {
       return;
     }
-
-    // Detecting browser type
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
     // Each video is optimized to work well in different browsers
     const videoSrc = isSafari
@@ -54,7 +54,7 @@ const Industry = () => {
       source.type = 'video/mp4';
       videoElement.appendChild(source);
     }
-  }, [isInView, isMobile]);
+  }, [isInView, isSafari, isMobile]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -69,10 +69,10 @@ const Industry = () => {
 
     gsap.to(video, {
       currentTime: targetTime,
-      duration: 1,
+      duration: isSafari ? 0 : 1,
       ease: 'none',
     });
-  }, [activeIndex, isInView]);
+  }, [activeIndex, isSafari, isInView]);
 
   return (
     <section
@@ -91,7 +91,7 @@ const Industry = () => {
       >
         {/* 
             Video optimization parameters:
-            -mp4: -pix_fmt yuv420p -vf "scale=-2:3254" -movflags faststart -vcodec libx264 -crf 20 -g 1
+            -mp4: -pix_fmt yuv420p -vf "scale=-2:3254" -movflags faststart -vcodec libx264 -crf 28 -g 1
             -m3u8: -codec: copy -start_number 0 -hls_time 3 -hls_list_size 0 -f hls testimonials.m3u8
         */}
         <video
