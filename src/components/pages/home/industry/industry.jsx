@@ -28,15 +28,15 @@ const Industry = () => {
   const { width: windowWidth } = useWindowSize();
   const isMobile = windowWidth <= IS_MOBILE_SCREEN_WIDTH;
 
+  // Detecting browser type
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
   useEffect(() => {
     const videoElement = videoRef?.current;
 
     if (!videoElement || !isInView || isMobile) {
       return;
     }
-
-    // Detecting browser type
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
     // Each video is optimized to work well in different browsers
     const videoSrc = isSafari
@@ -54,7 +54,7 @@ const Industry = () => {
       source.type = 'video/mp4';
       videoElement.appendChild(source);
     }
-  }, [isInView, isMobile]);
+  }, [isInView, isSafari, isMobile]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -69,10 +69,10 @@ const Industry = () => {
 
     gsap.to(video, {
       currentTime: targetTime,
-      duration: 1,
+      duration: isSafari ? 0 : 1,
       ease: 'none',
     });
-  }, [activeIndex, isInView]);
+  }, [activeIndex, isSafari, isInView]);
 
   return (
     <section
