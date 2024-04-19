@@ -66,7 +66,7 @@ const Video = forwardRef(
               'relative h-[466px] overflow-hidden rounded-[10px] group-hover:after:opacity-0 2xl:h-[430px] md:h-[317px] sm:h-auto',
               'after:absolute after:inset-0 after:bg-[linear-gradient(180deg,#131515_51.48%,#050505_100%)] after:opacity-50 after:transition-opacity after:duration-300',
               {
-                'after:opacity-0': isActive,
+                'after:!opacity-0': isActive,
               }
             )}
           >
