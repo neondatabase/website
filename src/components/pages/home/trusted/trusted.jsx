@@ -41,7 +41,7 @@ const Trusted = () => (
           bgImage={digitImage}
         >
           <strong className="font-medium text-white">Databases under management.</strong>{' '}
-          <span className="font-light">Reliable partner for everyone.</span>
+          <span className="font-light">Postgres for the World.</span>
         </Card>
         <Card
           className={clsx(
