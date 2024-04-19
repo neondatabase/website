@@ -151,9 +151,15 @@ module.exports = {
         'pricing-table-featured-column':
           'linear-gradient(180deg, rgba(19, 20, 21, 0.40) 92.77%, rgba(19, 20, 21, 0.00) 100%);',
         'home-lightning-title':
-          'radial-gradient(22.52% 105.36% at 59.98% 95.29%, #070707 8.6%, #525252 36.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
+          'radial-gradient(30.52% 57.36% at 67.98% 84.29%, #070707 8.6%, #525252 44.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
+        'home-lightning-title-xl':
+          'radial-gradient(15.52% 40% at 58.98% 87.29%, #070707 8.6%, #525252 39.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
+        'home-lightning-title-lg':
+          'radial-gradient(16% 40% at 64% 83.29%, #070707 7%, #525252 40.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
+        'home-lightning-title-md':
+          'radial-gradient(16% 40% at 63% 70.29%, #070707 7%, #525252 40.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
         'home-lightning-title-sm':
-          'radial-gradient(22.52% 105.36% at 235px 80%, #070707 8.6%, #525252 36.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
+          'radial-gradient(26.52% 69.36% at 261px 80%, #070707 8.6%, #525252 39.72%, #A7A7A7 73.37%, #FFFFFF 100%)',
         'home-bento-regions-border':
           'radial-gradient(42.03% 56.98% at 0% 100%, #847A9D 0%, rgba(132, 122, 157, 0) 89.37%),' +
           'radial-gradient(20.73% 29.17% at 24.37% 100%, #545C8D 0%, rgba(84, 92, 141, 0) 89.37%),' +
