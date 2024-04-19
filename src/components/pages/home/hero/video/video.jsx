@@ -16,6 +16,7 @@ const Video = forwardRef(
       linkLabel,
       linkUrl,
       isActive,
+      isMobile,
       switchVideo,
     },
     videoRef
@@ -23,14 +24,28 @@ const Video = forwardRef(
     const [visibilityRef, isInView] = useInView();
     const progressBarRef = useRef(null);
 
-    useEffect(() => {
-      const video = videoRef.current;
+    const updateProgress = (video) => () => {
+      const progress = progressBarRef.current;
+      const percentage = (video.currentTime + 0.2) / video.duration;
+      progress.style.transform = `scaleX(${percentage})`;
+    };
 
-      const updateProgress = () => {
-        const progress = progressBarRef.current;
-        const percentage = (video.currentTime + 0.2) / video.duration;
-        progress.style.transform = `scaleX(${percentage})`;
-      };
+    useEffect(() => {
+      const video = videoRef?.current;
+
+      if (!video) {
+        return;
+      }
+
+      if (isMobile) {
+        if (isInView) {
+          video.play();
+        } else {
+          video.pause();
+        }
+
+        return;
+      }
 
       if (isInView && isActive) {
         video.play();
@@ -38,14 +53,14 @@ const Video = forwardRef(
         video.pause();
       }
 
-      video.addEventListener('timeupdate', updateProgress);
+      video.addEventListener('timeupdate', updateProgress(video));
       video.addEventListener('ended', switchVideo);
 
       return () => {
-        video.removeEventListener('timeupdate', updateProgress);
+        video.removeEventListener('timeupdate', updateProgress(video));
         video.removeEventListener('ended', switchVideo);
       };
-    }, [isInView, isActive, videoRef, switchVideo]);
+    }, [isInView, isActive, isMobile, videoRef, switchVideo]);
 
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -53,17 +68,17 @@ const Video = forwardRef(
         className={clsx(
           'group cursor-pointer',
           {
-            'pointer-events-none cursor-default': isActive,
+            'pointer-events-none cursor-default': isActive || isMobile,
           },
           className
         )}
         ref={visibilityRef}
-        onClick={switchVideo}
+        onClick={!isMobile && switchVideo}
       >
         <div className="relative rounded-2xl bg-[linear-gradient(180deg,#111313_51.48%,#050505_100%)] p-1.5 shadow-[-2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,0px_2px_2px_0px_rgba(0,0,0,0.30)_inset,0px_1.4px_0px_0px_rgba(255,255,255,0.03)]">
           <div
             className={clsx(
-              'relative h-[466px] overflow-hidden rounded-[10px] group-hover:after:opacity-0 2xl:h-[430px] md:h-[317px] sm:h-auto',
+              'relative h-[466px] overflow-hidden rounded-[10px] group-hover:after:opacity-0 2xl:h-[430px] md:h-[317px] sm:h-auto sm:after:hidden',
               'after:absolute after:inset-0 after:bg-[linear-gradient(180deg,#131515_51.48%,#050505_100%)] after:opacity-50 after:transition-opacity after:duration-300',
               {
                 'after:!opacity-0': isActive,
@@ -85,6 +100,7 @@ const Video = forwardRef(
               width={704}
               controls={false}
               ref={videoRef}
+              loop={isMobile}
               muted
               playsInline
             >
@@ -115,7 +131,7 @@ const Video = forwardRef(
         </div>
         <div className="mt-5 px-1">
           <h3 className="text-xl leading-dense tracking-tighter text-white lg:text-lg">{title}</h3>
-          <div className="mt-3.5 h-px w-full overflow-hidden bg-gray-new-15" aria-hidden>
+          <div className="mt-3.5 h-px w-full overflow-hidden bg-gray-new-15 sm:hidden" aria-hidden>
             <div
               className={clsx(
                 'h-full w-full origin-left scale-x-0 bg-[linear-gradient(90deg,rgba(228,229,231,0.10)_0%,#E4E5E7_100%)] opacity-0 transition-[transform,opacity] duration-[400ms] ease-linear',
@@ -161,6 +177,7 @@ Video.propTypes = {
   linkLabel: PropTypes.string.isRequired,
   linkUrl: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   switchVideo: PropTypes.func.isRequired,
 };
 
