@@ -51,7 +51,7 @@ const Video = forwardRef(
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
       <div
         className={clsx(
-          'cursor-pointer',
+          'group cursor-pointer',
           {
             'pointer-events-none cursor-default': isActive,
           },
@@ -61,7 +61,15 @@ const Video = forwardRef(
         onClick={switchVideo}
       >
         <div className="relative rounded-2xl bg-[linear-gradient(180deg,#111313_51.48%,#050505_100%)] p-1.5 shadow-[-2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,0px_2px_2px_0px_rgba(0,0,0,0.30)_inset,0px_1.4px_0px_0px_rgba(255,255,255,0.03)]">
-          <div className="relative h-[466px] overflow-hidden rounded-[10px] 2xl:h-[430px] md:h-[317px] sm:h-auto">
+          <div
+            className={clsx(
+              'relative h-[466px] overflow-hidden rounded-[10px] group-hover:after:opacity-0 2xl:h-[430px] md:h-[317px] sm:h-auto',
+              'after:absolute after:inset-0 after:bg-[linear-gradient(180deg,#131515_51.48%,#050505_100%)] after:opacity-50 after:transition-opacity after:duration-300',
+              {
+                'after:opacity-0': isActive,
+              }
+            )}
+          >
             {/* 
                 Video optimization parameters:
                 -mp4: -pix_fmt yuv420p -vf scale=:704-2 -movflags faststart -vcodec libx264 -crf 20
