@@ -20,7 +20,7 @@ const Lightning = () => (
           -webm: -c:v libvpx-vp9 -crf 20 -vf scale=1656:-2 -deadline best -an
         */}
       <PauseableVideo
-        className="z-10 ml-32 mt-[-113px] aspect-[1.181818] mix-blend-plus-lighter xl:ml-24 xl:mt-[-103px] xl:min-w-[647px] lg:ml-20 lg:mt-[-91px] lg:min-w-0 lg:max-w-[482px] md:ml-[27px] md:max-w-[484px] sm:ml-0 sm:mt-[-85px] sm:min-w-[484px]"
+        className="z-10 ml-32 mt-[-113px] aspect-[1.181818] mix-blend-plus-lighter [mask-image:radial-gradient(120%_120%_at_45%_-10%,black_77%,transparent_90%)] xl:ml-24 xl:mt-[-103px] xl:min-w-[647px] lg:ml-20 lg:mt-[-91px] lg:min-w-0 lg:max-w-[482px] md:ml-[27px] md:max-w-[484px] sm:ml-0 sm:mt-[-85px] sm:min-w-[484px]"
         width={828}
         height={684}
       >
