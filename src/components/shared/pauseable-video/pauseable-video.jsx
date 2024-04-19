@@ -79,7 +79,6 @@ PauseableVideo.propTypes = {
   height: PropTypes.number.isRequired,
   className: PropTypes.string,
   videoClassName: PropTypes.string,
-  placeholderClassName: PropTypes.string,
 };
 
 export default PauseableVideo;
