@@ -94,11 +94,11 @@ const Hero = () => {
   );
 
   return (
-    <section className="hero safe-paddings relative pt-[142px] xl:pt-[120px] lg:pt-8">
+    <section className="hero safe-paddings relative pt-[142px] xl:pt-[120px] lg:pt-24">
       <Image
-        className="absolute left-1/2 top-0 min-w-[1760px] -translate-x-1/2 xl:min-w-[1286px] md:min-w-[1010px] sm:top-28 sm:min-w-[526px]"
+        className="absolute left-1/2 top-0 min-w-[1760px] -translate-x-1/2 xl:min-w-[1588px] lg:top-[-22px] lg:min-w-[1420px] md:top-[46px] md:min-w-[1058px]"
         src={bg}
-        sizes="(max-width: 639px) 526px"
+        sizes="(max-width: 639px) 1058px"
         width={1760}
         height={980}
         quality={100}
@@ -106,7 +106,7 @@ const Hero = () => {
         priority
       />
 
-      <Container size="1100">
+      <Container className="xl:px-8" size="1100">
         <div className="text-center">
           <h1 className="font-title text-[88px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[72px] lg:text-[56px] sm:text-[32px]">
             The Future of Postgres
