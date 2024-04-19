@@ -117,7 +117,7 @@ const Workflows = () => {
     >
       <Container
         className="grid-gap-x grid grid-cols-12 border-y border-dashed border-gray-2"
-        size="md"
+        size="1344"
         ref={containerRef}
       >
         <div className="relative col-start-2 col-end-5 flex justify-between xl:col-start-1 md:hidden">
