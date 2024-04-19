@@ -91,7 +91,7 @@ const Industry = () => {
       >
         {/* 
             Video optimization parameters:
-            -mp4: -pix_fmt yuv420p -vf "scale=-2:3254" -movflags faststart -vcodec libx264 -crf 20 -g 1
+            -mp4: -pix_fmt yuv420p -vf "scale=-2:3254" -movflags faststart -vcodec libx264 -crf 28 -g 1
             -m3u8: -codec: copy -start_number 0 -hls_time 3 -hls_list_size 0 -f hls testimonials.m3u8
         */}
         <video
