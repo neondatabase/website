@@ -40,8 +40,8 @@ const Industry = () => {
 
     // Each video is optimized to work well in different browsers
     const videoSrc = isSafari
-      ? '/videos/pages/home/industry/testimonials.mp4'
-      : '/videos/pages/home/industry/testimonials.m3u8';
+      ? '/videos/pages/home/industry/testimonials.mp4?updated=20240419181923'
+      : '/videos/pages/home/industry/testimonials.m3u8?updated=20240419181923';
 
     // Using HLS.js for browsers that support it, except for Safari which has native HLS support.
     if (Hls.isSupported() && !isSafari) {
