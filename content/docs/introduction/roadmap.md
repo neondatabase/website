@@ -13,6 +13,16 @@ As always, we are listening. If you see something you like, something you disagr
 
 <CommunityBanner buttonText="Leave feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Share your ideas in&nbsp;Discord</CommunityBanner>
 
+Alternatively, if you would like to get a little more involved, consider signing up for the **[**Neon Early Access Program**](https://neon.tech/early-access-program)**.
+
+Benefits of joining:
+
+- **Exclusive Early Access**: Get a first look at upcoming features before they go live.
+- **Private community**: Gain access to a dedicated Discord channel to connect with the Neon team and provide feedback to help shape what comes next.
+- **Weekly insights**: Receive updates on Neon's latest developments and future plans.
+
+[Sign Up Now](https://neon.tech/early-access-program) and start influencing the future of Neon!
+
 For the latest features and fixes, check our [Changelog](/docs/changelog), updated every Friday. You can subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
 ## Coming soon
