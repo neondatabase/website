@@ -88,7 +88,10 @@ const Video = forwardRef(
             {/* 
                 Video optimization parameters:
                 -mp4: -pix_fmt yuv420p -vf scale=:704-2 -movflags faststart -vcodec libx264 -crf 20
-                -webm: -c:v libvpx-vp9 -crf 20 -vf scale=704:-2 -deadline best -an
+                Serverless
+                  -m3u8: -codec: copy -start_number 0 -hls_time 2 -hls_list_size 0 -f hls serverless.m3u8
+                Branching
+                  -m3u8: -codec: copy -start_number 0 -hls_time 3 -hls_list_size 0 -f hls branching.m3u8
             */}
             <video
               className={clsx(
