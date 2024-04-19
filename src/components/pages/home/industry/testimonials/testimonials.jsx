@@ -58,7 +58,6 @@ const Testimonials = ({ activeIndex, setActiveIndex, windowWidth, isMobile }) =>
   const [scrollWidth, setScrollWidth] = useState(0);
 
   useEffect(() => {
-    console.log(testimonialsRef);
     if (isMobile) {
       const container = containerRef.current;
       if (!container) return;
@@ -76,16 +75,6 @@ const Testimonials = ({ activeIndex, setActiveIndex, windowWidth, isMobile }) =>
       return () => container.removeEventListener('scroll', onScroll);
     }
     gsap.registerPlugin(ScrollTrigger);
-
-    // gsap.utils.toArray('.testimonial').forEach((panel, i) => {
-    //   ScrollTrigger.create({
-    //     trigger: panel,
-    //     start: 'top center',
-    //     end: 'bottom center',
-    //     onEnter: () => setActiveIndex(i),
-    //     onEnterBack: () => setActiveIndex(i),
-    //   });
-    // });
 
     testimonialsRef.current.forEach((testimonial, index) => {
       ScrollTrigger.create({

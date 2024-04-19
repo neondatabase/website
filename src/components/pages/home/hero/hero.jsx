@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useState, useRef } from 'react';
+import useWindowSize from 'react-use/lib/useWindowSize';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -11,6 +12,8 @@ import serverlessIcon from 'icons/home/hero/serverless.svg';
 import bg from 'images/pages/home/hero/bg.jpg';
 
 import Video from './video';
+
+const IS_MOBILE_SCREEN_WIDTH = 639;
 
 const ITEMS = [
   {
@@ -42,10 +45,13 @@ const ITEMS = [
 ];
 
 // TODO: optimize and improve the animation of the transition between cards, as well as:
-//       - make a smooth transition of the progress bar state - at the moment it twitches
 //       - update current videos
+//       - add hls support
 const Hero = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+  const { width: windowWidth } = useWindowSize();
+  const isMobile = windowWidth <= IS_MOBILE_SCREEN_WIDTH;
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const videoRefs = ITEMS.map(() => useRef(null));
@@ -100,6 +106,7 @@ const Hero = () => {
               videoClassName={clsx(index === 1 && 'left-[-172px]')}
               {...item}
               isActive={currentVideoIndex === index}
+              isMobile={isMobile}
               switchVideo={() => switchVideo((currentVideoIndex + 1) % ITEMS.length)}
               ref={videoRefs[index]}
               key={index}
