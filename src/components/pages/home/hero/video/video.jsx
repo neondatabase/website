@@ -10,7 +10,7 @@ const Video = forwardRef(
     {
       className,
       videoClassName,
-      video: { icon, title: videoTitle, mp4, webm },
+      video: { icon, title: videoTitle },
       title,
       description,
       linkLabel,
@@ -103,10 +103,7 @@ const Video = forwardRef(
               loop={isMobile}
               muted
               playsInline
-            >
-              <source src={mp4} type="video/mp4" />
-              <source src={webm} type="video/webm" />
-            </video>
+            />
 
             <div
               className={clsx(
@@ -169,8 +166,6 @@ Video.propTypes = {
   video: PropTypes.shape({
     icon: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    mp4: PropTypes.string.isRequired,
-    webm: PropTypes.string.isRequired,
   }).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

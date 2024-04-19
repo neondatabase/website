@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useState, useRef } from 'react';
+import { useState, useRef, createRef, useEffect, useCallback } from 'react';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
 import Button from 'components/shared/button';
@@ -13,6 +13,8 @@ import bg from 'images/pages/home/hero/bg.jpg';
 
 import Video from './video';
 
+const Hls = require('hls.js/dist/hls.light.min.js');
+
 const IS_MOBILE_SCREEN_WIDTH = 639;
 
 const ITEMS = [
@@ -20,8 +22,8 @@ const ITEMS = [
     video: {
       icon: serverlessIcon,
       title: 'Serverless',
-      mp4: '/videos/pages/home/serverless.mp4',
-      webm: '/videos/pages/home/serverless.webm',
+      mp4: '/videos/pages/home/hero/serverless.mp4',
+      m3u8: '/videos/pages/home/hero/serverless.m3u8',
     },
     title: 'Serverless',
     description:
@@ -33,8 +35,8 @@ const ITEMS = [
     video: {
       icon: branchingIcon,
       title: 'Branching',
-      mp4: '/videos/pages/home/branching.mp4',
-      webm: '/videos/pages/home/branching.webm',
+      mp4: '/videos/pages/home/hero/branching.mp4',
+      m3u8: '/videos/pages/home/hero/branching.m3u8',
     },
     title: 'Branching',
     description:
@@ -46,21 +48,62 @@ const ITEMS = [
 
 // TODO: optimize and improve the animation of the transition between cards, as well as:
 //       - update current videos
-//       - add hls support
 const Hero = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   const { width: windowWidth } = useWindowSize();
   const isMobile = windowWidth <= IS_MOBILE_SCREEN_WIDTH;
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const videoRefs = ITEMS.map(() => useRef(null));
+  const videoRefs = useRef(ITEMS.map(() => createRef()));
+  // Detecting browser type
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-  const switchVideo = (index) => {
-    videoRefs[currentVideoIndex].current.pause();
-    videoRefs[currentVideoIndex].current.currentTime = 0;
-    setCurrentVideoIndex(index);
-  };
+  useEffect(() => {
+    if (isMobile) {
+      return;
+    }
+
+    videoRefs.current.forEach((ref, index) => {
+      const videoElement = ref.current;
+      const videoSrc = isSafari ? ITEMS[index].video.mp4 : ITEMS[index].video.m3u8;
+
+      if (!videoElement) return;
+
+      // Using HLS.js for browsers that support it, except for Safari which has native HLS support.
+      if (Hls.isSupported() && !isSafari) {
+        const hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(videoElement);
+      } else {
+        const source = document.createElement('source');
+        source.src = videoSrc;
+        source.type = 'video/mp4';
+        videoElement.appendChild(source);
+      }
+    });
+  }, [isMobile, videoRefs, isSafari]);
+
+  // useEffect(() => {
+  //   videoRefs.current.forEach((ref, index) => {
+  //     const videoElement = ref.current;
+  //     const videoSrc = isSafari ? ITEMS[index].video.mp4 : ITEMS[index].video.m3u8;
+
+  //     if (!videoElement || !Hls.isSupported() || isMobile) return;
+
+  //     const hls = new Hls();
+  //     hls.loadSource(videoSrc);
+  //     hls.attachMedia(videoElement);
+  //   });
+  // }, [isMobile]);
+
+  const switchVideo = useCallback(
+    (index) => {
+      videoRefs.current[currentVideoIndex].current.pause();
+      videoRefs.current[currentVideoIndex].current.currentTime = 0;
+      setCurrentVideoIndex(index);
+    },
+    [currentVideoIndex]
+  );
 
   return (
     <section className="hero safe-paddings relative pt-[142px] xl:pt-[120px] lg:pt-8">
@@ -108,7 +151,7 @@ const Hero = () => {
               isActive={currentVideoIndex === index}
               isMobile={isMobile}
               switchVideo={() => switchVideo((currentVideoIndex + 1) % ITEMS.length)}
-              ref={videoRefs[index]}
+              ref={videoRefs.current[index]}
               key={index}
             />
           ))}
