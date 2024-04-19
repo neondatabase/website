@@ -38,8 +38,10 @@ const PauseableVideo = ({ children, className, videoClassName, width, height }) 
 
   return (
     <LazyMotion features={domAnimation}>
-      <div className={clsx('relative h-full w-full', className)} ref={videoVisibilityRef}>
+      <div className={clsx('relative overflow-hidden', className)} ref={videoVisibilityRef}>
+        {/* TODO: Need to reconsider the use of placeholder for video which gets around the layout shift issue */}
         <img
+          className={clsx('relative', videoClassName)}
           src={`data:image/svg+xml;charset=utf-8,%3Csvg width='${width}' height='${height}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`}
           alt=""
           aria-hidden
@@ -77,6 +79,7 @@ PauseableVideo.propTypes = {
   height: PropTypes.number.isRequired,
   className: PropTypes.string,
   videoClassName: PropTypes.string,
+  placeholderClassName: PropTypes.string,
 };
 
 export default PauseableVideo;
