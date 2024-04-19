@@ -12,17 +12,27 @@ const items = [
   {
     className: 'bg-secondary-2',
     icon: DataIcon,
-    text: 'Perform scenario analysis on production-like data',
+    text: <>Perform scenario analysis on production-like data</>,
   },
   {
     className: 'bg-secondary-6',
     icon: QueriesIcon,
-    text: 'Optimize queries<br/> on production data',
+    text: (
+      <>
+        Optimize queries
+        <br /> on production data
+      </>
+    ),
   },
   {
     className: 'bg-secondary-4',
     icon: TestIcon,
-    text: 'A/B test<br/> new products',
+    text: (
+      <>
+        A/B test
+        <br /> new products
+      </>
+    ),
   },
 ];
 
@@ -47,9 +57,7 @@ const Features = () => (
             key={index}
           >
             <Icon className="h-16 w-16 2xl:h-14 2xl:w-14 xl:h-12 xl:w-12 lg:h-11 lg:w-11" />
-            <Heading className="t-3xl mt-5 text-center font-semibold" theme="black" tag="h3" asHTML>
-              {text}
-            </Heading>
+            <h3 className="t-3xl mt-5 text-center font-title font-medium text-black-new">{text}</h3>
           </div>
         ))}
       </div>
