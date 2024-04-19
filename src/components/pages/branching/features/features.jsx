@@ -38,7 +38,7 @@ const items = [
 
 const Features = () => (
   <section className="features safe-paddings bg-black-pure pt-[200px] text-white 2xl:pt-36 xl:pt-32 lg:pt-28 md:pt-20">
-    <Container size="md">
+    <Container size="1344">
       <Heading className="t-5xl text-center font-bold leading-snug" tag="h2">
         Run simulations and answer{' '}
         <span>
