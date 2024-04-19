@@ -8,6 +8,7 @@ import useWindowSize from 'react-use/lib/useWindowSize';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import useIsSafari from 'hooks/use-is-safari';
 
 import Testimonials from './testimonials';
 
@@ -28,8 +29,7 @@ const Industry = () => {
   const { width: windowWidth } = useWindowSize();
   const isMobile = windowWidth <= IS_MOBILE_SCREEN_WIDTH;
 
-  // Detecting browser type
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const isSafari = useIsSafari();
 
   useEffect(() => {
     const videoElement = videoRef?.current;

@@ -7,6 +7,7 @@ import useWindowSize from 'react-use/lib/useWindowSize';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import useIsSafari from 'hooks/use-is-safari';
 import branchingIcon from 'icons/home/hero/branching.svg';
 import serverlessIcon from 'icons/home/hero/serverless.svg';
 import bg from 'images/pages/home/hero/bg.jpg';
@@ -55,8 +56,8 @@ const Hero = () => {
   const isMobile = windowWidth <= IS_MOBILE_SCREEN_WIDTH;
 
   const videoRefs = useRef(ITEMS.map(() => createRef()));
-  // Detecting browser type
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+  const isSafari = useIsSafari();
 
   useEffect(() => {
     if (isMobile) {
