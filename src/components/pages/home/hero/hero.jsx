@@ -83,19 +83,6 @@ const Hero = () => {
     });
   }, [isMobile, videoRefs, isSafari]);
 
-  // useEffect(() => {
-  //   videoRefs.current.forEach((ref, index) => {
-  //     const videoElement = ref.current;
-  //     const videoSrc = isSafari ? ITEMS[index].video.mp4 : ITEMS[index].video.m3u8;
-
-  //     if (!videoElement || !Hls.isSupported() || isMobile) return;
-
-  //     const hls = new Hls();
-  //     hls.loadSource(videoSrc);
-  //     hls.attachMedia(videoElement);
-  //   });
-  // }, [isMobile]);
-
   const switchVideo = useCallback(
     (index) => {
       videoRefs.current[currentVideoIndex].current.pause();
