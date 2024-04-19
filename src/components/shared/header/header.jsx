@@ -157,7 +157,7 @@ const Header = ({
           <div className="flex items-center gap-x-6 lg:hidden lg:pr-12">
             <GithubStarCounter isThemeBlack={isThemeBlack} />
             <Link
-              className="text-[13px] font-semibold leading-none tracking-extra-tight lg:hidden"
+              className="text-[13px] leading-none tracking-extra-tight lg:hidden"
               to={LINKS.login}
               theme={isThemeBlack ? 'white' : 'black'}
             >

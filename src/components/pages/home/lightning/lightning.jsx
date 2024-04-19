@@ -34,7 +34,7 @@ const Lightning = () => (
         connectivity for both serverless and edge environments, utilizing HTTP.
       </p>
       <Link
-        className="ml-32 mt-[22px] flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white xl:ml-24 lg:ml-8 md:ml-[27px] sm:ml-0"
+        className="relative z-10 ml-32 mt-[22px] flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white xl:ml-24 lg:ml-8 md:ml-[27px] sm:ml-0"
         to="#"
         withArrow
       >

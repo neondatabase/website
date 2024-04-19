@@ -29,14 +29,14 @@ const TESTIMONIALS = [
     quote: `Neon's serverless philosophy is aligned with our vision: no infrastructure to manage, no servers to provision, no database cluster to maintain`,
     avatar: edouardBonlieuImage,
     name: 'Edouard Bonlieu',
-    position: 'co-founder at Koyeb',
+    position: 'Co-founder at Koyeb',
     logo: { src: koyebLogo, width: 123, height: 32, alt: 'Koyeb' },
   },
   {
     quote: `The killer feature that convinced us to use Neon was branching: it keeps our engineering velocity high`,
     avatar: leonardHenriquezImage,
     name: 'Léonard Henriquez',
-    position: 'co-founder and CTO, Topo.io',
+    position: 'Co-founder and CTO, Topo.io',
     logo: { src: topoLogo, width: 109, height: 32, alt: 'Topo.io' },
   },
   {

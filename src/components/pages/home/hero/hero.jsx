@@ -69,7 +69,7 @@ const Hero = () => {
         priority
       />
 
-      <Container className="2xl:px-10" size="1100">
+      <Container size="1100">
         <div className="text-center">
           <h1 className="font-title text-[88px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[72px] lg:text-[56px] sm:text-[32px]">
             The Future of Postgres
