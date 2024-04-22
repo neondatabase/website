@@ -12,7 +12,6 @@ import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import Admonition from 'components/shared/admonition';
-import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData } from 'utils/api-posts';
 import getFormattedDate from 'utils/get-formatted-date';
@@ -66,12 +65,7 @@ const BlogPage = async ({ params, searchParams }) => {
   };
 
   return (
-    <Layout
-      className="bg-black-pure text-white"
-      headerTheme="black-pure"
-      footerTheme="black-pure"
-      isHeaderSticky
-    >
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -114,7 +108,7 @@ const BlogPage = async ({ params, searchParams }) => {
         </article>
       </div>
       {isDraftModeEnabled && <PreviewWarning />}
-    </Layout>
+    </>
   );
 };
 
