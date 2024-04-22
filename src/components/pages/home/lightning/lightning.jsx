@@ -44,7 +44,7 @@ const Lightning = () => (
       </p>
       <Link
         className="relative z-10 ml-32 mt-[22px] flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white xl:ml-24 lg:ml-8 sm:ml-0"
-        to="#"
+        to="/docs/serverless/serverless-driver"
         withArrow
       >
         Get the Serverless Driver

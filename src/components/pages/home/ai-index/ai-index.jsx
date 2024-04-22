@@ -1,5 +1,6 @@
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 
 import Animation from './animation';
 
@@ -22,7 +23,7 @@ const AiIndex = () => (
         {/* TODO: set link  */}
         <Link
           className="mt-2.5 flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white"
-          to="#"
+          to={LINKS.ai}
           withArrow
         >
           Power your AI apps with Postgres

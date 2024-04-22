@@ -149,7 +149,10 @@ const Video = forwardRef(
             {description}
           </p>
           <Link
-            className="pointer-events-auto mt-2.5 flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white"
+            className={clsx(
+              'mt-2.5 flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white',
+              isActive ? 'pointer-events-auto' : 'pointer-events-none'
+            )}
             to={linkUrl}
             withArrow
           >

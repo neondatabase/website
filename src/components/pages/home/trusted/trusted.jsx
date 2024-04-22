@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 
 import Container from 'components/shared/container';
+import LINKS from 'constants/links';
+import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 import digitImage from 'images/pages/home/trusted/digit.jpg';
 import elephantImage from 'images/pages/home/trusted/elephant.jpg';
 import githubImage from 'images/pages/home/trusted/github.jpg';
@@ -32,8 +34,12 @@ const Trusted = () => (
           borderClassName="border-linear border-image-home-trusted-github-card"
           bgClassName="inset-0 sm:top-auto sm:bottom-[-26%]"
           bgImage={githubImage}
+          to={LINKS.github}
         >
-          <strong className="mx-auto font-medium text-white">neondatabase/neon</strong>
+          <span className="mx-auto flex items-center font-medium text-white">
+            neondatabase/neon
+            <ArrowRightIcon className="-mb-px ml-1.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]" />
+          </span>
         </Card>
         <Card
           className="relative z-10 aspect-[321/303] lg:order-1 lg:aspect-[310/220] sm:aspect-[320/220]"
@@ -62,8 +68,12 @@ const Trusted = () => (
           bgClassName="top-[-43%] left-[-43%] w-[454px] xl:w-[342px] lg:inset-0 lg:w-full lg:h-full"
           bgImage={socImage}
           mobileBgImage={socMdImage}
+          to="/blog/soc2-type2"
         >
-          <strong className="font-medium text-white">SOC2 Compliance</strong>
+          <span className="flex items-end font-medium text-white">
+            <span>SOC2 Compliance</span>
+            <ArrowRightIcon className="relative -left-5 -top-2 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px] xl:-left-1 xl:-top-1 lg:-top-1.5 lg:left-1.5 sm:-top-1" />
+          </span>
         </Card>
       </div>
     </Container>

@@ -7,6 +7,7 @@ import useWindowSize from 'react-use/lib/useWindowSize';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import LINKS from 'constants/links';
 import useIsSafari from 'hooks/use-is-safari';
 import branchingIcon from 'icons/home/hero/branching.svg';
 import serverlessIcon from 'icons/home/hero/serverless.svg';
@@ -30,7 +31,7 @@ const ITEMS = [
     description:
       'We separated storage and compute to bring the best of serverless to Postgres: instant provisioning, autoscaling according to load, and scale to zero.',
     linkLabel: 'Discover Serverless',
-    linkUrl: '#',
+    linkUrl: LINKS.autoscaling,
   },
   {
     video: {
@@ -43,7 +44,7 @@ const ITEMS = [
     description:
       'Neon uses copy-on-write to instantly branch your data and schema. Access isolated data copies for development, CI/CD, and schema changes.',
     linkLabel: 'Explore Branching',
-    linkUrl: '#',
+    linkUrl: LINKS.branching,
   },
 ];
 
@@ -105,17 +106,18 @@ const Hero = () => {
       <Container className="xl:px-8" size="1100">
         <div className="text-center">
           <h1 className="font-title text-[88px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[72px] lg:text-[56px] sm:text-[32px]">
-            The Future of Postgres
+            Serverless Postgres
           </h1>
-          <p className="mx-auto mt-3 max-w-[490px] text-lg font-light leading-snug -tracking-[0.04em] text-gray-new-80 lg:mt-2.5 lg:max-w-[396px] lg:text-base">
-            Neon is serverless Postgres with autoscaling, on-demand storage and code-like database
-            branching
+          <p className="mx-auto mt-3 max-w-lg text-lg font-light leading-snug -tracking-[0.04em] text-gray-new-80 lg:mt-2.5 lg:max-w-[396px] lg:text-base">
+            The fully managed serverless Postgres with a generous free tier. We separate storage and
+            compute to offer autoscaling, branching, and bottomless storage.
           </p>
           <Button
             className="pointer-events-auto relative mt-9 !font-semibold tracking-tighter xl:mt-8 lg:mt-6 sm:h-10"
             size="lg"
             theme="green-outline"
-            to="#"
+            to={LINKS.signup}
+            target="_blank"
           >
             Get Started
           </Button>
