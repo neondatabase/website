@@ -69,11 +69,7 @@ const Link = forwardRef(
       <>
         {withArrow ? <span>{children}</span> : children}
         {withArrow && (
-          <ArrowRightIcon
-            className={clsx(
-              '-mb-px ml-1.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]'
-            )}
-          />
+          <ArrowRightIcon className="-mb-px ml-1.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]" />
         )}
       </>
     );

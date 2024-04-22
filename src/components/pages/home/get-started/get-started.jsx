@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import RiveAnimation from 'components/shared/rive-animation';
+import LINKS from 'constants/links';
 
 const GetStarted = () => (
   <section
@@ -35,7 +36,8 @@ const GetStarted = () => (
         className="pointer-events-auto relative mt-9 !font-semibold tracking-tighter xl:mt-8 lg:mt-7 sm:mt-5 sm:h-10"
         size="lg"
         theme="green-outline"
-        to="#"
+        to={LINKS.signup}
+        target="_blank"
       >
         Get Started
       </Button>

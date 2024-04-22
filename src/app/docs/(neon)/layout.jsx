@@ -9,7 +9,14 @@ const NeonDocsLayout = async ({ children }) => {
   const sidebar = await getSidebar();
 
   return (
-    <Layout headerTheme="white" burgerWithoutBorder isDocPage isHeaderSticky headerWithBorder>
+    <Layout
+      className="bg-blur"
+      headerTheme="white"
+      burgerWithoutBorder
+      isDocPage
+      isHeaderSticky
+      headerWithBorder
+    >
       <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
         <MobileNav className="hidden lg:block" sidebar={sidebar} basePath={DOCS_BASE_PATH} />
 

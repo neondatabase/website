@@ -8,6 +8,7 @@ import useWindowSize from 'react-use/lib/useWindowSize';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 import useIsSafari from 'hooks/use-is-safari';
 
 import Testimonials from './testimonials';
@@ -118,7 +119,7 @@ const Industry = () => {
           </h2>
           <Link
             className="mt-5 flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] text-white [&_svg]:ml-[7px] [&_svg]:scale-110"
-            to="#"
+            to={LINKS.caseStudies}
             withArrow
           >
             Dive into success stories

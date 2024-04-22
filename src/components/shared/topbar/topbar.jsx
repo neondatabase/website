@@ -3,6 +3,7 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 import patternImage from './images/pattern.svg';
@@ -15,7 +16,7 @@ const TopBar = ({ isThemeBlack }) => (
       'safe-paddings relative z-40 flex h-9 w-full items-center justify-center gap-x-2.5 overflow-hidden px-4 py-2.5 leading-none transition-colors duration-200 dark:bg-[#0B0C0F] dark:hover:bg-gray-new-8',
       isThemeBlack ? 'bg-[#0B0C0F] hover:bg-gray-new-8' : 'bg-[#F5FBFD] hover:bg-[#f1fcff]'
     )}
-    to="https://console.neon.tech/signup"
+    to={LINKS.signup}
   >
     <span
       className={clsx(

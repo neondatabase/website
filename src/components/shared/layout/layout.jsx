@@ -21,7 +21,7 @@ const Layout = async ({
   <>
     <Topbar isThemeBlack={headerTheme === 'black-pure'} />
     {/* 36px is the height of the topbar */}
-    <div className="relative flex min-h-[calc(100vh-36px)] flex-col">
+    <div className="relative flex min-h-[calc(100vh-36px)] flex-col pt-safe">
       <Header
         className={headerClassName}
         theme={headerTheme}
