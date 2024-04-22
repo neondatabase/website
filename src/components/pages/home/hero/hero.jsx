@@ -78,7 +78,7 @@ const Hero = () => {
         videoElement.appendChild(source);
       }
     });
-  }, [isMobile, videoRefs, isSafari]);
+  }, [videoRefs, isSafari]);
 
   const switchVideo = useCallback(
     (index) => {
