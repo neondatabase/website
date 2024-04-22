@@ -60,10 +60,6 @@ const Hero = () => {
   const isSafari = useIsSafari();
 
   useEffect(() => {
-    if (isMobile) {
-      return;
-    }
-
     videoRefs.current.forEach((ref, index) => {
       const videoElement = ref.current;
       const videoSrc = isSafari ? ITEMS[index].video.mp4 : ITEMS[index].video.m3u8;
