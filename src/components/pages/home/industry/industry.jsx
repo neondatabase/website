@@ -41,8 +41,8 @@ const Industry = () => {
 
     // Each video is optimized to work well in different browsers
     const videoSrc = isSafari
-      ? '/videos/pages/home/industry/testimonials.mp4?updated=20240419181923'
-      : '/videos/pages/home/industry/testimonials.m3u8?updated=20240419181923';
+      ? '/videos/pages/home/industry/testimonials.mp4?updated=20240422183243'
+      : '/videos/pages/home/industry/testimonials.m3u8?updated=20240422183243';
 
     // Using HLS.js for browsers that support it, except for Safari which has native HLS support.
     if (Hls.isSupported() && !isSafari) {
@@ -92,7 +92,7 @@ const Industry = () => {
       >
         {/* 
             Video optimization parameters:
-            -mp4: -pix_fmt yuv420p -vf "scale=-2:3254" -movflags faststart -vcodec libx264 -crf 28 -g 1
+            -mp4: -pix_fmt yuv420p -vf "scale=-2:3254" -movflags faststart -vcodec libx264 -crf 20 -g 1
             -m3u8: -codec: copy -start_number 0 -hls_time 3 -hls_list_size 0 -f hls testimonials.m3u8
         */}
         <video
