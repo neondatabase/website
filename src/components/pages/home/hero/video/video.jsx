@@ -23,7 +23,7 @@ const Video = forwardRef(
     videoRef
   ) => {
     const [visibilityRef, isInView] = useInView({
-      threshold: 0.8,
+      threshold: 0.5,
     });
     const progressBarRef = useRef(null);
 
