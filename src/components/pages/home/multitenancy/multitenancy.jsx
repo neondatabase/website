@@ -2,7 +2,7 @@ import Container from 'components/shared/container';
 import PauseableVideo from 'components/shared/pauseable-video';
 
 const Multitenancy = () => (
-  <section className="multitenancy safe-paddings mt-8 overflow-hidden xl:-mt-9 lg:-mt-7 md:mt-12">
+  <section className="multitenancy safe-paddings mt-8 overflow-hidden xl:-mt-9 lg:-mt-7 md:-mt-2 sm:mt-0">
     <Container className="relative z-10 xl:max-w-[704px] lg:pl-24" size="960">
       <h2 className="font-title text-[68px] font-medium leading-[0.9] tracking-extra-tight text-white xl:text-[56px] lg:text-[44px] sm:text-[32px]">
         Thousands of databases.

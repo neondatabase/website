@@ -78,7 +78,7 @@ const Video = forwardRef(
         <div className="relative rounded-2xl bg-[linear-gradient(180deg,#111313_51.48%,#050505_100%)] p-1.5 shadow-[-2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,0px_2px_2px_0px_rgba(0,0,0,0.30)_inset,0px_1.4px_0px_0px_rgba(255,255,255,0.03)]">
           <div
             className={clsx(
-              'relative h-[466px] overflow-hidden rounded-[10px] group-hover:after:opacity-0 2xl:h-[430px] md:h-[317px] sm:h-auto sm:after:hidden',
+              'relative h-[466px] overflow-hidden rounded-[10px] group-hover:after:opacity-0 2xl:h-[430px] xl:h-[403px] lg:h-[340px] md:h-[317px] sm:h-auto sm:after:hidden',
               'after:absolute after:inset-0 after:bg-[linear-gradient(180deg,#131515_51.48%,#050505_100%)] after:opacity-50 after:transition-opacity after:duration-300',
               {
                 'after:!opacity-0': isActive,
@@ -95,7 +95,7 @@ const Video = forwardRef(
             */}
             <video
               className={clsx(
-                'absolute left-0 top-0 h-auto min-w-[704px] transition-all duration-1000 2xl:min-w-[652px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
+                'absolute left-0 top-0 h-auto min-w-[704px] transition-all duration-1000 2xl:min-w-[652px] xl:min-w-[608px] lg:min-w-[514px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
                 videoClassName,
                 isActive && '!left-0 lg:!left-1/2 lg:-translate-x-1/2 sm:left-0 sm:translate-x-0'
               )}

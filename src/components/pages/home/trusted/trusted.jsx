@@ -4,12 +4,13 @@ import Container from 'components/shared/container';
 import digitImage from 'images/pages/home/trusted/digit.jpg';
 import elephantImage from 'images/pages/home/trusted/elephant.jpg';
 import githubImage from 'images/pages/home/trusted/github.jpg';
+import socMdImage from 'images/pages/home/trusted/soc-md.jpg';
 import socImage from 'images/pages/home/trusted/soc.jpg';
 
 import Card from './card';
 
 const Trusted = () => (
-  <section className="trusted mt-[224px] xl:mt-[70px] lg:mt-[42px] sm:mt-20">
+  <section className="trusted mt-[224px] xl:mt-[70px] lg:mt-20">
     <Container className="xl:max-w-[864px]" size="1152">
       <h2
         className={clsx(
@@ -57,9 +58,10 @@ const Trusted = () => (
         </Card>
         <Card
           className="aspect-[192/247] lg:order-4 lg:aspect-[310/220] lg:justify-center sm:aspect-[320/220]"
-          borderClassName="border-linear border-image-home-trusted-soc-card"
+          borderClassName="border-linear border-image-home-trusted-soc-card lg:border-image-home-trusted-soc-card-md"
           bgClassName="top-[-43%] left-[-43%] w-[454px] xl:w-[342px] lg:inset-0 lg:w-full lg:h-full"
           bgImage={socImage}
+          mobileBgImage={socMdImage}
         >
           <strong className="font-medium text-white">SOC2 Compliance</strong>
         </Card>

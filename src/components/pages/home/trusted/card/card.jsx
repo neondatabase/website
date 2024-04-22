@@ -2,7 +2,14 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
-const Card = ({ className, borderClassName, bgClassName, bgImage, children }) => (
+const Card = ({
+  className,
+  borderClassName,
+  bgClassName,
+  bgImage,
+  mobileBgImage = null,
+  children,
+}) => (
   <div
     className={clsx(
       'relative flex items-end overflow-hidden rounded-[10px] p-6 xl:rounded-lg xl:p-5 lg:rounded-[10px] sm:p-4',
@@ -11,7 +18,7 @@ const Card = ({ className, borderClassName, bgClassName, bgImage, children }) =>
   >
     <div className={clsx('absolute', bgClassName || 'inset-0')}>
       <Image
-        className="h-full w-full object-cover"
+        className={clsx('h-full w-full object-cover', mobileBgImage && 'lg:hidden')}
         width={bgImage.width}
         height={bgImage.height}
         sizes="(max-width: 1024px) 440px, 240px"
@@ -19,6 +26,16 @@ const Card = ({ className, borderClassName, bgClassName, bgImage, children }) =>
         alt=""
         unoptimized
       />
+      {mobileBgImage && (
+        <Image
+          className={clsx('hidden h-full w-full object-cover lg:block')}
+          width={mobileBgImage.width / 2}
+          height={mobileBgImage.height / 2}
+          src={mobileBgImage}
+          alt=""
+          unoptimized
+        />
+      )}
     </div>
     <div className={clsx('absolute inset-0 z-10 rounded-[inherit]', borderClassName)} />
     <p
@@ -37,6 +54,7 @@ Card.propTypes = {
   borderClassName: PropTypes.string,
   bgClassName: PropTypes.string,
   bgImage: PropTypes.object.isRequired,
+  mobileBgImage: PropTypes.object,
   children: PropTypes.node.isRequired,
 };
 
