@@ -22,11 +22,11 @@ const ITEMS = [
   {
     video: {
       icon: serverlessIcon,
-      title: 'Serverless',
+      title: 'Scaling',
       mp4: '/videos/pages/home/hero/serverless.mp4',
       m3u8: '/videos/pages/home/hero/serverless.m3u8',
     },
-    title: 'Serverless',
+    title: 'Scaling',
     description:
       'We separated storage and compute to bring the best of serverless to Postgres: instant provisioning, autoscaling according to load, and scale to zero.',
     linkLabel: 'Discover Serverless',
@@ -53,11 +53,15 @@ const Hero = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   const { width: windowWidth } = useWindowSize();
-  const isMobile = windowWidth <= IS_MOBILE_SCREEN_WIDTH;
+  const [isMobile, setIsMobile] = useState(false);
 
   const videoRefs = useRef(ITEMS.map(() => createRef()));
 
   const isSafari = useIsSafari();
+
+  useEffect(() => {
+    setIsMobile(windowWidth <= IS_MOBILE_SCREEN_WIDTH);
+  }, [windowWidth]);
 
   useEffect(() => {
     videoRefs.current.forEach((ref, index) => {
@@ -135,6 +139,7 @@ const Hero = () => {
               isActive={currentVideoIndex === index}
               isMobile={isMobile}
               switchVideo={() => switchVideo((currentVideoIndex + 1) % ITEMS.length)}
+              setActiveVideoIndex={() => setCurrentVideoIndex(index)}
               ref={videoRefs.current[index]}
               key={index}
             />
