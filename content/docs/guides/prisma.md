@@ -50,7 +50,7 @@ To establish a basic connection from Prisma to Neon, perform the following steps
     }
     ```
 <Admonition type="important">
-Failure to specify the `anon_fake_data_tables` will result in the error `cannot drop type anon_fake_data_tables because extension anon requires it` when performing pushing changes using Prisma. The `prisma db pull` command can be used to retrieve the latest version of the `anon_fake_data_tables` enum from your Postgres database on Neon.
+Failure to specify the `anon_fake_data_tables` will result in the error `cannot drop type anon_fake_data_tables because extension anon requires it` when pushing changes using Prisma. The `prisma db pull` command can be used to retrieve the latest version of the `anon_fake_data_tables` enum from your Postgres database on Neon.
 </Admonition>
 
 3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
