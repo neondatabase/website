@@ -18,10 +18,13 @@ const Video = forwardRef(
       isActive,
       isMobile,
       switchVideo,
+      setActiveVideoIndex,
     },
     videoRef
   ) => {
-    const [visibilityRef, isInView] = useInView();
+    const [visibilityRef, isInView] = useInView({
+      threshold: 0.5,
+    });
     const progressBarRef = useRef(null);
 
     const updateProgress = (video) => () => {
@@ -33,17 +36,7 @@ const Video = forwardRef(
     useEffect(() => {
       const video = videoRef?.current;
 
-      if (!video) {
-        return;
-      }
-
-      if (isMobile) {
-        if (isInView) {
-          video.play();
-        } else {
-          video.pause();
-        }
-
+      if (!video || isMobile) {
         return;
       }
 
@@ -62,6 +55,23 @@ const Video = forwardRef(
       };
     }, [isInView, isActive, isMobile, videoRef, switchVideo]);
 
+    useEffect(() => {
+      const video = videoRef?.current;
+
+      if (!video || !isMobile) {
+        return;
+      }
+
+      if (isInView) {
+        video.currentTime = 0;
+        video.play();
+        setActiveVideoIndex();
+      } else {
+        video.pause();
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [videoRef, isInView, isMobile]);
+
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
       <div
@@ -73,7 +83,7 @@ const Video = forwardRef(
           className
         )}
         ref={visibilityRef}
-        onClick={!isMobile && switchVideo}
+        onClick={!isMobile ? switchVideo : undefined}
       >
         <div className="relative rounded-2xl bg-[linear-gradient(180deg,#111313_51.48%,#050505_100%)] p-1.5 shadow-[-2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,0px_2px_2px_0px_rgba(0,0,0,0.30)_inset,0px_1.4px_0px_0px_rgba(255,255,255,0.03)]">
           <div
@@ -178,6 +188,7 @@ Video.propTypes = {
   isActive: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   switchVideo: PropTypes.func.isRequired,
+  setActiveVideoIndex: PropTypes.func.isRequired,
 };
 
 export default Video;

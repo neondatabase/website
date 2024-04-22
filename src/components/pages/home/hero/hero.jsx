@@ -54,11 +54,15 @@ const Hero = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   const { width: windowWidth } = useWindowSize();
-  const isMobile = windowWidth <= IS_MOBILE_SCREEN_WIDTH;
+  const [isMobile, setIsMobile] = useState(false);
 
   const videoRefs = useRef(ITEMS.map(() => createRef()));
 
   const isSafari = useIsSafari();
+
+  useEffect(() => {
+    setIsMobile(windowWidth <= IS_MOBILE_SCREEN_WIDTH);
+  }, [windowWidth]);
 
   useEffect(() => {
     videoRefs.current.forEach((ref, index) => {
@@ -137,6 +141,7 @@ const Hero = () => {
               isActive={currentVideoIndex === index}
               isMobile={isMobile}
               switchVideo={() => switchVideo((currentVideoIndex + 1) % ITEMS.length)}
+              setActiveVideoIndex={() => setCurrentVideoIndex(index)}
               ref={videoRefs.current[index]}
               key={index}
             />
