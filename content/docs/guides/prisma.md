@@ -179,7 +179,7 @@ const prisma = new PrismaClient({ adapter })
 You can now use Prisma Client as you normally would with full type-safety. Prisma Migrate, introspection, and Prisma Studio will continue working as before, using the Neon connection string defined by the `DATABASE_URL` variable in your `schema.prisma` file.
 
 <Admonition type="note">
-If you encounter a `TypeError: bufferUtil.mask is not a function` error when building your application, this is likely due to a missing Websocket implementation required to use the `Client` or `Pool` constructs with the Neon serverless driver. You can address this requirement by installing the `bufferutil` package:
+If you encounter a `TypeError: bufferUtil.mask is not a function` error when building your application, this is likely due to a missing dependency that the `ws` module requires when using `Client` and `Pool` constructs. You can address this requirement by installing the `bufferutil` package:
 
 ```shell
 npm i bufferutil --save-dev
