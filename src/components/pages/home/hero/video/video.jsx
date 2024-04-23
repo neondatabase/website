@@ -97,7 +97,7 @@ const Video = forwardRef(
           >
             {/* 
                 Video optimization parameters:
-                -mp4: -pix_fmt yuv420p -vf scale=:704-2 -movflags faststart -vcodec libx264 -crf 20
+                -mp4: -pix_fmt yuv420p -vf "scale=-2:932" -movflags faststart -vcodec libx264 -crf 20
                 Serverless
                   -m3u8: -codec: copy -start_number 0 -hls_time 2 -hls_list_size 0 -f hls serverless.m3u8
                 Branching
@@ -118,25 +118,27 @@ const Video = forwardRef(
               playsInline
             />
 
-            <div
-              className={clsx(
-                'absolute top-11 transition-all delay-700 duration-1000 lt:top-10 md:top-6',
-                isActive ? '-left-full opacity-0' : 'left-10 opacity-100 lt:left-8 md:left-4'
-              )}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className="ml-auto w-auto md:h-6 xs:h-4"
-                height={32}
-                width={32}
-                src={icon}
-                alt=""
-                loading="eager"
-              />
-              <h2 className="font-title text-[64px] font-medium leading-none tracking-[-0.04em] text-white lt:text-[48px] md:text-[42px] xs:text-[30px]">
-                {videoTitle}
-              </h2>
-            </div>
+            {videoTitle && (
+              <div
+                className={clsx(
+                  'absolute top-11 transition-all delay-700 duration-1000 lt:top-10 md:top-6',
+                  isActive ? '-left-full opacity-0' : 'left-10 opacity-100 lt:left-8 md:left-4'
+                )}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className="ml-auto w-auto md:h-6 xs:h-4"
+                  height={32}
+                  width={32}
+                  src={icon}
+                  alt=""
+                  loading="eager"
+                />
+                <h2 className="font-title text-[64px] font-medium leading-none tracking-[-0.04em] text-white lt:text-[48px] md:text-[42px] xs:text-[30px]">
+                  {videoTitle}
+                </h2>
+              </div>
+            )}
           </div>
         </div>
         <div className="mt-5 px-1 xl:min-h-[172px] lg:min-h-[186px] md:min-h-[209px] sm:min-h-0">
