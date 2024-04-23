@@ -91,16 +91,6 @@
       "scale": "500 <span>per project</span>",
       "enterprise": "Custom"
     },
-        {
-      "rows": "2",
-      "feature": {
-        "title": " Data transfer (monthly)"
-      },
-      "free": "5 GB",
-      "launch": "Unlimited",
-      "scale": "Unlimited",
-      "enterprise": "Unlimited"
-    },
     {
       "rows": "2",
       "feature": {
