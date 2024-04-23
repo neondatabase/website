@@ -52,16 +52,24 @@ const ApiCliAnimation = ({
       return;
     }
 
+    let intervalId;
+
     if (!isVisible) {
       rive.pause();
+      clearInterval(intervalId);
     } else {
       rive.play();
       const timeoutId = setTimeout(() => {
         changeInput.fire();
+        intervalId = setInterval(() => {
+          changeInput.fire();
+        }, 6000);
       }, 1000);
 
-      // Cleanup function to clear the timeout
-      return () => clearTimeout(timeoutId);
+      return () => {
+        clearTimeout(timeoutId);
+        clearInterval(intervalId);
+      };
     }
   }, [rive, isVisible, changeInput]);
 
