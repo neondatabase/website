@@ -28,7 +28,7 @@ const styles = {
     'gray-dark-outline-black':
       'text-black border border-gray-new-90 bg-gray-new-98 hover:border-gray-new-70 dark:text-white dark:bg-gray-new-10 dark:border-[#37393D] dark:hover:border-white',
     'green-outline':
-      'bg-[#0D0D0D] text-white border transition-shadow duration-500 border-green-45 hover:shadow-[0px_8px_44px_0px_rgba(0,229,153,.3)]',
+      'bg-[#0D0D0D] text-white border transition-shadow duration-500 border-green-45 hover:shadow-[0px_8px_30px_0px_rgba(0,229,153,.16)]',
     'green-underlined':
       'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
