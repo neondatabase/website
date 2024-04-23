@@ -6,10 +6,11 @@ enableTableOfContents: true
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your history retention window and then run queries against that connection.
 
-You can use Time Travel from two places in the Neon Console:
+You can use Time Travel from two places in the Neon Console, and from the Neon CLI:
 
 - **SQL Editor** &#8212; Time Travel is built into the SQL editor letting you switch between queries of your current data and previous iterations of your data in the same view.
 - **Restore** &#8212; Time Travel Assist is also built into the Branch Restore flow where it can help you make sure you've targeted the correct restore point before you restore a branch.
+- **Neon CLI** &#8212; Use the Neon CLI to quickly establish point-in-time connections for automated scripts or command-line-based data analysis.
 
 ## How Time Travel works
 
@@ -71,7 +72,7 @@ Here is an example of a completed query:
 
 Here is how to use Time Travel from both the **SQL Editor** and from the **Restore** page:
 
-<Tabs labels={["SQL Editor","Branch Restore"]}>
+<Tabs labels={["SQL Editor", "Branch Restore", "CLI"]}>
 
 <TabItem>
 
@@ -106,6 +107,73 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
     ![time travel results](/docs/guides/time_travel_results.png)
 
 </TabItem>
+
+<TabItem>
+
+Using the Neon CLI, you can establish a connection to a specific point in your branch's history. To get the connection string, use the following command:
+
+```bash
+neonctl connection-string <branch>@<timestamp|LSN>
+```
+
+In the `branch` field, specify the name of the branch you want to connect to. Omit the `branch` field to connect to your primary branch. Replace the `timestamp|LSN` field with the specific timestamp (in ISO 8601 format) or Log Sequence Number for the point in time you want to access.
+
+Example:
+
+```bash
+neonctl connetion-string main@2024-04-21T00:00:00Z       
+postgres://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
+```
+
+### Connect directly with psql
+
+Appending `--psql` to the command for a one-step psql connection. For example, to connect to `main` at its state on Jan 1st, 2024:
+
+```bash
+neonctl connection-string main@2024-01-01T00:00:00Z --psql
+```
+
+Here is the same command using aliases:
+
+```bash
+neon cs main@2024-01-01T00:00:00Z --psql
+```
+
+### Query at Specific LSNs
+
+For more granular control, you can also establish the connection using a specific LSN.
+
+Example:
+
+```bash
+neon cs main@0/234235
+```
+
+This retrieves the connection string for querying the 'main' branch at a specific Log Sequence Number, providing access to the exact state of the database at that point in the transaction log.
+
+### Include project ID for multiple projects
+
+If you are working with multiple Neon projects, specify the project ID to target the correct project:
+
+```bash
+neonctl connection-string <branch>@<timestamp|LSN> --project-id <project id>
+```
+
+Example:
+```bash
+neon cs main@2024-01-01T00:00:00Z --project-id noisy-pond-12345678
+```
+
+Alternatively, you can set a durable project context that remains active until you remove or change the context:
+
+```bash
+neon set-context --project-id <project id>
+```
+
+Read more about getting connection strings from the CLI in [Neon CLI commands — connection-string](/docs/reference/cli-connection-string), and more about setting contexts in [CLI - set-context](/docs/reference/cli-set-context).
+
+</TabItem>
+
 </Tabs>
 
 ## Billing considerations
