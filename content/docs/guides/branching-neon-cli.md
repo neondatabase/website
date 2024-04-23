@@ -131,7 +131,7 @@ You do not need to specify the variable name explicitly when using a Neon CLI co
 
 This API key configuration ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Remember, you should handle your API key with the same level of security as your other credentials.
 
-## Resetting a branch to its parent
+## Resetting a branch from its parent
 
 Depending on your development workflow, you might need to periodically reset a branch to match the latest state of its parent. This is useful, for example, when resetting a long-lived development branch back to the main branch before starting work on a new feature.
 
