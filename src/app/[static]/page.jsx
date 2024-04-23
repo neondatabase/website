@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
 import Container from 'components/shared/container';
@@ -6,7 +7,7 @@ import Layout from 'components/shared/layout';
 import { getStaticPageBySlug, getStaticPages } from 'utils/api-pages';
 import getMetadata from 'utils/get-metadata';
 
-export default async function StaticPage({ params }) {
+const StaticPage = async ({ params }) => {
   const page = await getStaticPageBySlug(params.static);
 
   if (!page) return notFound();
@@ -25,7 +26,11 @@ export default async function StaticPage({ params }) {
       </article>
     </Layout>
   );
-}
+};
+
+export const viewport = {
+  themeColor: '#ffffff',
+};
 
 export async function generateStaticParams() {
   const payload = await getStaticPages();
@@ -64,3 +69,5 @@ export async function generateMetadata({ params }) {
 }
 
 export const revalidate = 60;
+
+export default StaticPage;

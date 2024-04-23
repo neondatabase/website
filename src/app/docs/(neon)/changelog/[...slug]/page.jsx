@@ -143,7 +143,7 @@ const ChangelogCategoryPage = ({ currentSlug, currentChangelogPosts }) => {
   );
 };
 
-export default async function ChangelogPostPage({ params }) {
+const ChangelogPostPage = async ({ params }) => {
   const currentSlug = params?.slug.join('/');
   const isChangelogPage = CHANGELOG_SLUG_REGEX.test(currentSlug);
   const allChangelogPosts = await getAllChangelogPosts();
@@ -161,4 +161,6 @@ export default async function ChangelogPostPage({ params }) {
       currentChangelogPosts={currentChangelogPosts}
     />
   );
-}
+};
+
+export default ChangelogPostPage;

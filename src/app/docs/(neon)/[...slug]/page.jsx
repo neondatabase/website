@@ -71,7 +71,7 @@ export async function generateMetadata({ params }) {
   });
 }
 
-export default async function DocPost({ params }) {
+const DocPost = async ({ params }) => {
   const { slug } = params;
   const currentSlug = slug.join('/');
 
@@ -123,4 +123,6 @@ export default async function DocPost({ params }) {
       />
     </>
   );
-}
+};
+
+export default DocPost;
