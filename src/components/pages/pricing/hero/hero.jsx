@@ -211,7 +211,7 @@ const Hero = () => {
                     }
                   }}
                 >
-                  {isScalePlan && (
+                  {(isScalePlan || type === 'Launch') && (
                     <a
                       className="group/aws absolute right-[18px] top-5 flex items-center gap-x-2"
                       href="https://aws.amazon.com/marketplace/saas/ordering?productId=prod-ro32fhzkkg7ya&offerId=offer-czr2a3vwvrtik"
