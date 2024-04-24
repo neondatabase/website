@@ -68,7 +68,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ```bash
     neonctl connection-string @2024-04-21T00:00:00Z
     ```
-
+    For additional examples, see [How to use Time Travel](/docs/guides/time-travel-assist#how-to-use-time-travel).
 - Get a connection string and connect with `psql`.
 
     ```bash
