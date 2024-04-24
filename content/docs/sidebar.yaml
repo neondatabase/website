@@ -244,6 +244,8 @@
           slug: guides/grafbase
         - title: Hasura
           slug: guides/hasura
+        - title: Sequin
+          slug: guides/sequin
         - title: StepZen
           slug: guides/stepzen
         - title: WunderGraph
