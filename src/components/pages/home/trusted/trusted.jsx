@@ -36,7 +36,7 @@ const Trusted = () => (
           bgImage={githubImage}
           to={LINKS.github}
         >
-          <span className="mx-auto flex items-center font-medium text-white">
+          <span className="mx-auto flex items-center font-medium text-white transition-colors duration-200 group-hover:text-green-45">
             neondatabase/neon
             <ArrowRightIcon className="-mb-px ml-1.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]" />
           </span>
@@ -70,7 +70,7 @@ const Trusted = () => (
           mobileBgImage={socMdImage}
           to="/blog/soc2-type2"
         >
-          <span className="flex items-end font-medium text-white">
+          <span className="flex items-end font-medium text-white transition-colors duration-200 group-hover:text-green-45">
             <span>SOC2 Compliance</span>
             <ArrowRightIcon className="relative -left-5 -top-2 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px] xl:-left-1 xl:-top-1 lg:-top-1.5 lg:left-1.5 sm:-top-1" />
           </span>

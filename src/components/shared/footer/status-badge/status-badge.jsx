@@ -59,7 +59,7 @@ const StatusBadge = ({ isDocPage = false, isDarkTheme = true }) => {
       rel="noopener noreferrer"
       className={clsx(
         'flex items-center justify-center gap-x-1.5',
-        isDocPage ? 'mt-12 lg:mt-10' : 'mt-auto lg:mt-16 md:mt-8'
+        isDocPage ? 'mt-12 lg:mt-8' : 'mt-auto lg:mt-8 md:mt-8'
       )}
       ref={ref}
     >

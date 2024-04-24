@@ -118,8 +118,9 @@ const Industry = () => {
             trust Neon
           </h2>
           <Link
-            className="mt-5 flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] text-white [&_svg]:ml-[7px] [&_svg]:scale-110"
+            className="mt-5 flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] [&_svg]:ml-[7px] [&_svg]:scale-110"
             to={LINKS.caseStudies}
+            theme="white"
             withArrow
           >
             Dive into success stories

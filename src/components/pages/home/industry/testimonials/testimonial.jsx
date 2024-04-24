@@ -57,7 +57,7 @@ const Testimonial = forwardRef(
               'xl:text-base lg:text-sm sm:leading-snug'
             )}
           >
-            {name} <cite className="font-light not-italic text-gray-new-40">- {position}</cite>
+            {name} <cite className="font-light not-italic text-gray-new-40">– {position}</cite>
           </div>
         </figcaption>
       </m.figure>

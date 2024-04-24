@@ -89,10 +89,8 @@ const Video = forwardRef(
           <div
             className={clsx(
               'relative h-[466px] overflow-hidden rounded-[10px] group-hover:after:opacity-0 2xl:h-[430px] xl:h-[403px] lg:h-[340px] md:h-[317px] sm:h-auto sm:after:hidden',
-              'after:absolute after:inset-0 after:bg-[linear-gradient(180deg,#131515_51.48%,#050505_100%)] after:opacity-50 after:transition-opacity after:duration-300',
-              {
-                'after:!opacity-0': isActive,
-              }
+              'after:pointer-events-none after:absolute after:-inset-px after:z-10 after:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(12,13,13,.3)_0%,#0C0D0D_100%)] after:transition-opacity after:duration-300',
+              !isActive ? 'after:opacity-70' : 'after:opacity-0'
             )}
           >
             {/* 
@@ -105,7 +103,7 @@ const Video = forwardRef(
             */}
             <video
               className={clsx(
-                'absolute left-0 top-0 h-auto min-w-[704px] transition-all duration-1000 2xl:min-w-[652px] xl:min-w-[608px] lg:min-w-[514px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
+                'absolute left-0 top-0 z-0 h-auto min-w-[704px] transition-all duration-1000 2xl:min-w-[652px] xl:min-w-[608px] lg:min-w-[514px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
                 videoClassName,
                 isActive && '!left-0 lg:!left-1/2 lg:-translate-x-1/2 sm:left-0 sm:translate-x-0'
               )}
@@ -142,7 +140,9 @@ const Video = forwardRef(
           </div>
         </div>
         <div className="mt-5 px-1 xl:min-h-[172px] lg:min-h-[186px] md:min-h-[209px] sm:min-h-0">
-          <h3 className="text-xl leading-dense tracking-tighter text-white lg:text-lg">{title}</h3>
+          <h3 className="text-xl leading-dense tracking-tighter text-white lg:text-lg sm:text-[20px]">
+            {title}
+          </h3>
           <div className="mt-3.5 h-px w-full overflow-hidden bg-gray-new-15 sm:hidden" aria-hidden>
             <div
               className={clsx(
@@ -154,7 +154,7 @@ const Video = forwardRef(
           </div>
           <p
             className={clsx(
-              'mt-3.5 max-w-[366px] font-light tracking-extra-tight transition-colors duration-200 lg:text-[15px]',
+              'mt-3.5 max-w-[366px] font-light tracking-extra-tight transition-colors duration-200 xl:max-w-[350px] lg:text-[15px] md:mt-2.5',
               isActive ? 'text-gray-new-80' : 'text-gray-new-40'
             )}
           >
@@ -162,10 +162,11 @@ const Video = forwardRef(
           </p>
           <Link
             className={clsx(
-              'mt-2.5 flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white',
+              'mt-2.5 flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em]',
               isActive ? 'pointer-events-auto' : 'pointer-events-none'
             )}
             to={linkUrl}
+            theme="white"
             withArrow
           >
             {linkLabel}

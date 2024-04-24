@@ -61,7 +61,7 @@ const TopBar = ({ isThemeBlack }) => (
     />
     <span
       className={clsx(
-        'relative z-50 truncate py-1 text-sm font-medium tracking-extra-tight dark:text-gray-new-80 dark:opacity-95',
+        'relative z-50 truncate py-1 text-sm font-medium tracking-extra-tight dark:text-gray-new-80 dark:opacity-95 sm:text-[13px]',
         isThemeBlack ? 'text-gray-new-80 opacity-95' : 'text-gray-new-15'
       )}
     >

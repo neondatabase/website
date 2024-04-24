@@ -95,7 +95,7 @@ const Hero = () => {
   );
 
   return (
-    <section className="hero safe-paddings relative pt-[142px] xl:pt-[120px] lg:pt-24">
+    <section className="hero safe-paddings relative pt-[136px] xl:pt-[120px] lg:pt-24">
       <Image
         className="absolute left-1/2 top-0 min-w-[1760px] -translate-x-1/2 xl:min-w-[1588px] lg:top-[-22px] lg:min-w-[1420px] md:top-[46px] md:min-w-[1058px]"
         src={bg}
@@ -112,12 +112,12 @@ const Hero = () => {
           <h1 className="font-title text-[88px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[72px] lg:text-[56px] sm:text-[32px]">
             Serverless Postgres
           </h1>
-          <p className="mx-auto mt-3 max-w-lg text-lg font-light leading-snug -tracking-[0.04em] text-gray-new-80 lg:mt-2.5 lg:max-w-[396px] lg:text-base">
+          <p className="mx-auto mt-2.5 max-w-[40rem] text-lg font-light leading-snug -tracking-[0.04em] text-gray-new-80 lg:mt-2.5 lg:max-w-[396px] lg:text-base">
             The fully managed serverless Postgres with a generous free tier. We separate storage and
             compute to offer autoscaling, branching, and bottomless storage.
           </p>
           <Button
-            className="pointer-events-auto relative mt-9 !font-semibold tracking-tighter xl:mt-8 lg:mt-6 sm:h-10"
+            className="pointer-events-auto relative mt-7 h-12 !font-semibold tracking-tighter xl:mt-8 lg:mt-6 sm:h-10"
             size="lg"
             theme="green-outline"
             to={LINKS.signup}

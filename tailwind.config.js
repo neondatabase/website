@@ -155,7 +155,7 @@ module.exports = {
         'home-lightning-title-xl':
           'radial-gradient(15.52% 40% at 58.98% 87.29%, #070707 8.6%, #525252 39.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
         'home-lightning-title-lg':
-          'radial-gradient(16% 40% at 64% 83.29%, #070707 7%, #525252 40.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
+          'radial-gradient(16% 47% at 64% 83.29%, #070707 7%, #525252 40.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
         'home-lightning-title-md':
           'radial-gradient(16% 40% at 72% 78.29%, #070707 7%, #525252 40.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
         'home-lightning-title-sm':

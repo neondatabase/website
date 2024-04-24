@@ -16,9 +16,9 @@ const Lightning = () => (
         className={clsx(
           'relative z-20 inline-block max-w-[790px] bg-home-lightning-title bg-clip-text pb-6 font-title text-[128px] font-medium leading-[0.95] -tracking-wider text-transparent [mask-image:radial-gradient(80px_80px_at_77.8%_86%,transparent_50%,transparent_94%,black_90%)]',
           'xl:max-w-2xl xl:bg-home-lightning-title-xl xl:text-[96px] xl:[mask-image:radial-gradient(39px_71px_at_67.9%_84%,transparent_100%,black)]',
-          'lg:max-w-lg lg:bg-home-lightning-title-lg lg:text-[72px] lg:[mask-image:radial-gradient(34px_55px_at_69.1%_76%,transparent_100%,black)]',
+          'lg:max-w-lg lg:bg-home-lightning-title-lg lg:text-[72px] lg:[mask-image:radial-gradient(34px_55px_at_68.6%_76%,transparent_100%,black)]',
           'md:max-w-md md:bg-home-lightning-title-md md:text-[72px] md:[mask-image:radial-gradient(40px_68px_at_78.1%_82%,transparent_100%,black)]',
-          'sm:min-w-[320px] sm:max-w-xs sm:bg-home-lightning-title-sm sm:text-[52px] sm:[mask-image:radial-gradient(57px_53px_at_91.5%_72.6%,transparent_98%,black)]'
+          'sm:min-w-[320px] sm:max-w-xs sm:bg-home-lightning-title-sm sm:text-[52px] sm:[mask-image:radial-gradient(49px_55px_at_93.6%_73%,transparent_97%,black)]'
         )}
       >
         Lightning fast. Edge&nbsp;ready.
@@ -29,7 +29,7 @@ const Lightning = () => (
           -webm: -c:v libvpx-vp9 -crf 20 -vf scale=1656:-2 -deadline best -an
         */}
       <PauseableVideo
-        className="z-10 ml-32 mt-[-113px] aspect-[1.181818] [mask-image:radial-gradient(120%_120%_at_45%_-10%,black_77%,transparent_90%)] xl:ml-24 xl:mt-[-103px] xl:min-w-[647px] lg:ml-20 lg:mt-[-91px] lg:min-w-0 lg:max-w-[482px] md:ml-8 md:min-w-[560px] sm:ml-0 sm:mt-[-85px] sm:min-w-[484px]"
+        className="z-10 ml-32 mt-[-113px] aspect-[1.181818] [mask-image:radial-gradient(120%_120%_at_45%_-10%,black_77%,transparent_90%)] xl:ml-24 xl:mt-[-103px] xl:min-w-[647px] lg:ml-8 lg:mt-[-95px] lg:w-full lg:min-w-0 lg:max-w-[620px] md:ml-8 md:w-[560px] sm:ml-0 sm:mt-[-85px] sm:w-[500px]"
         width={828}
         height={684}
       >
@@ -37,14 +37,15 @@ const Lightning = () => (
         <source src="/videos/pages/home/lightning.webm" type="video/webm" />
       </PauseableVideo>
 
-      <p className="relative z-10 ml-32 mt-[-347px] max-w-[288px] font-light tracking-extra-tight text-gray-new-80 xl:ml-24 xl:mt-[-283px] xl:leading-snug lg:ml-8 lg:mt-[-201px] lg:max-w-[250px] sm:ml-0 sm:mt-[-203px] sm:max-w-[212px] sm:text-[15px]">
-        <span className="font-medium text-white">The Neon serverless driver</span>, designed for
-        JavaScript and TypeScript, ensures low-latency Postgres queries. It unlocks database
+      <p className="relative z-10 ml-32 mt-[-347px] max-w-[288px] font-light tracking-extra-tight text-gray-new-70 xl:ml-24 xl:mt-[-283px] xl:leading-snug lg:-mt-56 lg:ml-8 lg:max-w-[250px] sm:ml-0 sm:mt-[-203px] sm:max-w-[212px] sm:text-[15px]">
+        <span className="font-medium text-gray-new-94">The Neon serverless driver</span>, designed
+        for JavaScript and TypeScript, ensures low-latency Postgres queries. It unlocks database
         connectivity for both serverless and edge environments, utilizing HTTP.
       </p>
       <Link
-        className="relative z-10 ml-32 mt-[22px] flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em] text-white xl:ml-24 lg:ml-8 sm:ml-0"
+        className="relative z-10 ml-32 mt-[22px] flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] xl:ml-24 lg:ml-8 sm:ml-0"
         to="/docs/serverless/serverless-driver"
+        theme="white"
         withArrow
       >
         Get the Serverless Driver

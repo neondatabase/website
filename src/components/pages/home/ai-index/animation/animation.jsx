@@ -3,7 +3,7 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import ParallaxVocabulary from './parallax-vocabulary';
 
 const Animation = () => (
-  <div className="relative z-0 mx-auto mt-[-218px] aspect-square max-w-[1160px] xl:mt-[-147px] xl:max-w-[860px] lg:mt-[-120px] lg:max-w-[680px] sm:-mt-12 sm:max-w-[91%]">
+  <div className="relative z-0 mx-auto mt-[-218px] aspect-square max-w-[1160px] xl:mt-[-147px] xl:max-w-[860px] lg:mt-[-120px] lg:max-w-[680px] sm:-mx-4 sm:-mt-12 sm:w-[calc(100%+32px)]">
     {/* 
       Video optimization parameters:
       mp4: -pix_fmt yuv420p -vf scale=2000:-2 -movflags faststart -vcodec libx264 -crf 20
