@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { forwardRef, useEffect, useCallback, useRef } from 'react';
-import { useInView } from 'react-intersection-observer';
+import React, { forwardRef, useEffect, useRef } from 'react';
 
 import Link from 'components/shared/link';
+
+import useVideoPlayback from './use-video-playback';
 
 const Video = forwardRef(
   (
@@ -24,91 +25,27 @@ const Video = forwardRef(
     },
     videoRef
   ) => {
-    const [visibilityRef, isInView] = useInView({
-      threshold: 0.5,
-    });
     const progressBarRef = useRef(null);
 
-    const updateProgress = useCallback(
-      (video) => () => {
-        const progress = progressBarRef.current;
-        const percentage = (video.currentTime + 0.2) / video.duration;
-        progress.style.transform = `scaleX(${percentage})`;
-      },
-      []
-    );
+    const { visibilityRef, handleDesktopVideoPlayback, handleMobileVideoPlayback } =
+      useVideoPlayback(
+        videoRef,
+        progressBarRef,
+        isActive,
+        isMobile,
+        switchVideo,
+        setActiveVideoIndex,
+        initialVideoPlayback,
+        setInitialVideoPlayback
+      );
 
-    const handleInitialPlayVideo = useCallback(
-      (video) => () => {
-        const timer = setTimeout(() => {
-          video.play();
-          setInitialVideoPlayback(false);
-        }, 1200);
-
-        return () => clearTimeout(timer);
-      },
-      [setInitialVideoPlayback]
-    );
-
-    // Handles the video playback based on the visibility and initial playback state
-    const handleVideoPlayback = useCallback(() => {
-      const video = videoRef.current;
-
-      if (!video || isMobile) {
-        return;
-      }
-
-      if (isInView && isActive) {
-        if (initialVideoPlayback) {
-          video.addEventListener('loadedmetadata', handleInitialPlayVideo(video), { once: true });
-        } else {
-          video.play();
-        }
-      } else {
-        video.pause();
-      }
-
-      video.addEventListener('timeupdate', updateProgress(video));
-      video.addEventListener('ended', switchVideo);
-
-      return () => {
-        video.removeEventListener('timeupdate', updateProgress(video));
-        video.removeEventListener('ended', switchVideo);
-        video.removeEventListener('loadedmetadata', handleInitialPlayVideo(video));
-      };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [videoRef, isInView, isActive, isMobile, switchVideo]);
-
-    // Desktop video playback
     useEffect(() => {
-      handleVideoPlayback();
-    }, [handleVideoPlayback]);
+      handleDesktopVideoPlayback();
+    }, [handleDesktopVideoPlayback]);
 
-    // Mobile video playback
     useEffect(() => {
-      const video = videoRef?.current;
-
-      if (!video || !isMobile) {
-        return;
-      }
-
-      if (isInView) {
-        if (initialVideoPlayback) {
-          video.addEventListener('loadedmetadata', handleInitialPlayVideo(video));
-        } else {
-          video.currentTime = 0;
-          video.play();
-          setActiveVideoIndex();
-        }
-      } else {
-        video.pause();
-      }
-
-      return () => {
-        video.removeEventListener('loadedmetadata', handleInitialPlayVideo(video));
-      };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [videoRef, isInView, isMobile, initialVideoPlayback]);
+      handleMobileVideoPlayback();
+    }, [handleMobileVideoPlayback]);
 
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -223,15 +160,15 @@ Video.propTypes = {
   video: PropTypes.shape({
     icon: PropTypes.string,
     title: PropTypes.string,
-  }),
-  title: PropTypes.string,
-  description: PropTypes.string,
-  linkLabel: PropTypes.string,
-  linkUrl: PropTypes.string,
-  isActive: PropTypes.bool,
-  isMobile: PropTypes.bool,
-  switchVideo: PropTypes.func,
-  setActiveVideoIndex: PropTypes.func,
-  initialVideoPlayback: PropTypes.bool,
-  setInitialVideoPlayback: PropTypes.func,
+  }).isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  linkLabel: PropTypes.string.isRequired,
+  linkUrl: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  switchVideo: PropTypes.func.isRequired,
+  setActiveVideoIndex: PropTypes.func.isRequired,
+  initialVideoPlayback: PropTypes.bool.isRequired,
+  setInitialVideoPlayback: PropTypes.func.isRequired,
 };
