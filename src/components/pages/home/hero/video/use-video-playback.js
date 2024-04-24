@@ -24,7 +24,7 @@ const useVideoPlayback = (
     [progressBarRef]
   );
 
-  const handleInitialPlayVideo = useCallback(
+  const handleInitialVideoPlay = useCallback(
     (video) => () => {
       const timer = setTimeout(() => {
         video.play();
@@ -45,7 +45,7 @@ const useVideoPlayback = (
 
     if (isInView && isActive) {
       if (initialVideoPlayback) {
-        video.addEventListener('loadedmetadata', handleInitialPlayVideo(video), { once: true });
+        video.addEventListener('loadedmetadata', handleInitialVideoPlay(video), { once: true });
       } else {
         video.play();
       }
@@ -59,7 +59,7 @@ const useVideoPlayback = (
     return () => {
       video.removeEventListener('timeupdate', updateProgress(video));
       video.removeEventListener('ended', switchVideo);
-      video.removeEventListener('loadedmetadata', handleInitialPlayVideo(video));
+      video.removeEventListener('loadedmetadata', handleInitialVideoPlay(video));
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,7 +74,7 @@ const useVideoPlayback = (
 
     if (isInView) {
       if (initialVideoPlayback) {
-        video.addEventListener('loadedmetadata', handleInitialPlayVideo(video));
+        video.addEventListener('loadedmetadata', handleInitialVideoPlay(video));
       } else {
         video.currentTime = 0;
         video.play();
@@ -85,7 +85,7 @@ const useVideoPlayback = (
     }
 
     return () => {
-      video.removeEventListener('loadedmetadata', handleInitialPlayVideo(video));
+      video.removeEventListener('loadedmetadata', handleInitialVideoPlay(video));
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoRef, isInView, isMobile, initialVideoPlayback]);
