@@ -55,6 +55,7 @@ const Hero = () => {
 
   const { width: windowWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
+  const [initialVideoPlayback, setInitialVideoPlayback] = useState(true);
 
   const videoRefs = useRef(ITEMS.map(() => createRef()));
 
@@ -142,6 +143,8 @@ const Hero = () => {
               isMobile={isMobile}
               switchVideo={() => switchVideo((currentVideoIndex + 1) % ITEMS.length)}
               setActiveVideoIndex={() => setCurrentVideoIndex(index)}
+              initialVideoPlayback={initialVideoPlayback}
+              setInitialVideoPlayback={setInitialVideoPlayback}
               ref={videoRefs.current[index]}
               key={index}
             />

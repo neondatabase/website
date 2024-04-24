@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { forwardRef, useState, useEffect, useRef } from 'react';
+import React, { forwardRef, useEffect, useCallback, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Link from 'components/shared/link';
@@ -19,6 +19,8 @@ const Video = forwardRef(
       isMobile,
       switchVideo,
       setActiveVideoIndex,
+      initialVideoPlayback,
+      setInitialVideoPlayback,
     },
     videoRef
   ) => {
@@ -26,27 +28,42 @@ const Video = forwardRef(
       threshold: 0.5,
     });
     const progressBarRef = useRef(null);
-    const [initialTitleVisibility, setInitialTitleVisibility] = useState(true);
 
-    const updateProgress = (video) => () => {
-      const progress = progressBarRef.current;
-      const percentage = (video.currentTime + 0.2) / video.duration;
-      progress.style.transform = `scaleX(${percentage})`;
-    };
+    const updateProgress = useCallback(
+      (video) => () => {
+        const progress = progressBarRef.current;
+        const percentage = (video.currentTime + 0.2) / video.duration;
+        progress.style.transform = `scaleX(${percentage})`;
+      },
+      []
+    );
 
-    useEffect(() => {
-      setInitialTitleVisibility(false);
-    }, []);
+    const handleInitialPlayVideo = useCallback(
+      (video) => () => {
+        const timer = setTimeout(() => {
+          video.play();
+          setInitialVideoPlayback(false);
+        }, 1200);
 
-    useEffect(() => {
-      const video = videoRef?.current;
+        return () => clearTimeout(timer);
+      },
+      [setInitialVideoPlayback]
+    );
+
+    // Handles the video playback based on the visibility and initial playback state
+    const handleVideoPlayback = useCallback(() => {
+      const video = videoRef.current;
 
       if (!video || isMobile) {
         return;
       }
 
       if (isInView && isActive) {
-        video.play();
+        if (initialVideoPlayback) {
+          video.addEventListener('loadedmetadata', handleInitialPlayVideo(video), { once: true });
+        } else {
+          video.play();
+        }
       } else {
         video.pause();
       }
@@ -57,9 +74,17 @@ const Video = forwardRef(
       return () => {
         video.removeEventListener('timeupdate', updateProgress(video));
         video.removeEventListener('ended', switchVideo);
+        video.removeEventListener('loadedmetadata', handleInitialPlayVideo(video));
       };
-    }, [isInView, isActive, isMobile, videoRef, switchVideo]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [videoRef, isInView, isActive, isMobile, switchVideo]);
 
+    // Desktop video playback
+    useEffect(() => {
+      handleVideoPlayback();
+    }, [handleVideoPlayback]);
+
+    // Mobile video playback
     useEffect(() => {
       const video = videoRef?.current;
 
@@ -68,14 +93,22 @@ const Video = forwardRef(
       }
 
       if (isInView) {
-        video.currentTime = 0;
-        video.play();
-        setActiveVideoIndex();
+        if (initialVideoPlayback) {
+          video.addEventListener('loadedmetadata', handleInitialPlayVideo(video));
+        } else {
+          video.currentTime = 0;
+          video.play();
+          setActiveVideoIndex();
+        }
       } else {
         video.pause();
       }
+
+      return () => {
+        video.removeEventListener('loadedmetadata', handleInitialPlayVideo(video));
+      };
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [videoRef, isInView, isMobile]);
+    }, [videoRef, isInView, isMobile, initialVideoPlayback]);
 
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -124,7 +157,7 @@ const Video = forwardRef(
             <div
               className={clsx(
                 'absolute left-10 transition-all delay-200 duration-1000 lt:left-8 lt:top-10 md:left-4 md:top-6',
-                isActive && !initialTitleVisibility
+                isActive && !initialVideoPlayback
                   ? '!-top-full opacity-0'
                   : 'top-11 opacity-100 lt:top-10 md:top-6'
               )}
@@ -182,21 +215,23 @@ const Video = forwardRef(
   }
 );
 
+export default Video;
+
 Video.propTypes = {
   className: PropTypes.string,
   videoClassName: PropTypes.string,
   video: PropTypes.shape({
-    icon: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  linkLabel: PropTypes.string.isRequired,
-  linkUrl: PropTypes.string.isRequired,
-  isActive: PropTypes.bool.isRequired,
-  isMobile: PropTypes.bool.isRequired,
-  switchVideo: PropTypes.func.isRequired,
-  setActiveVideoIndex: PropTypes.func.isRequired,
+    icon: PropTypes.string,
+    title: PropTypes.string,
+  }),
+  title: PropTypes.string,
+  description: PropTypes.string,
+  linkLabel: PropTypes.string,
+  linkUrl: PropTypes.string,
+  isActive: PropTypes.bool,
+  isMobile: PropTypes.bool,
+  switchVideo: PropTypes.func,
+  setActiveVideoIndex: PropTypes.func,
+  initialVideoPlayback: PropTypes.bool,
+  setInitialVideoPlayback: PropTypes.func,
 };
-
-export default Video;
