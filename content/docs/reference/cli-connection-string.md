@@ -22,7 +22,7 @@ This command gets a Postgres connection string for connecting to a database in y
 neonctl connection-string [branch[@timestamp|@LSN]] [options]
 ```
 
-`branch` specifies the branch name or id. If a branch name or ID is omitted, the primary branch is used. `@timestamp|@LSN` is used to specify a specific point in the branch's history for time travel connections. If omitted, current (HEAD) is used.
+`branch` specifies the branch name or ID. If a branch name or ID is omitted, the primary branch is used. `@timestamp|@LSN` is used to specify a specific point in the branch's history for time travel connections. If omitted, the current state (HEAD) is used.
 
 ### Options
 
