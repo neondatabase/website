@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, { forwardRef, useState, useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Link from 'components/shared/link';
@@ -26,12 +26,17 @@ const Video = forwardRef(
       threshold: 0.5,
     });
     const progressBarRef = useRef(null);
+    const [initialTitleVisibility, setInitialTitleVisibility] = useState(true);
 
     const updateProgress = (video) => () => {
       const progress = progressBarRef.current;
       const percentage = (video.currentTime + 0.2) / video.duration;
       progress.style.transform = `scaleX(${percentage})`;
     };
+
+    useEffect(() => {
+      setInitialTitleVisibility(false);
+    }, []);
 
     useEffect(() => {
       const video = videoRef?.current;
@@ -119,7 +124,9 @@ const Video = forwardRef(
             <div
               className={clsx(
                 'absolute left-10 transition-all delay-200 duration-1000 lt:left-8 lt:top-10 md:left-4 md:top-6',
-                isActive ? '-top-full opacity-0' : 'top-11 opacity-100 lt:top-10 md:top-6'
+                isActive && !initialTitleVisibility
+                  ? '!-top-full opacity-0'
+                  : 'top-11 opacity-100 lt:top-10 md:top-6'
               )}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
