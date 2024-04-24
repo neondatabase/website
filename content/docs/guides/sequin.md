@@ -28,7 +28,7 @@ As a first step, create a table in your Neon database for Sequin to sync API dat
 
 1. Select your project in the Neon Console
 2. Navigate to the SQL Editor in the sidebar.
-3. Create a sequin schema by running the following statement:
+3. Create a `sequin` schema by running the following statement:
 
     ```sql
     create schema sequin;
@@ -79,16 +79,16 @@ These statements do the following:
 
 With this user, Sequin will only have access to the tables it needs and will not be able to modify any other data in your database.
 
-With your sequin schema and records table in your Neon database, you’ll now configure Sequin to authenticate with your API source, create a sync, and stream data to your database.
+With your `sequin` schema and `records` table in your Neon database, you’ll now configure Sequin to authenticate with your API source, create a sync, and stream data to your database.
 
 ## Connect Sequin to an API source
 
 You can connect Sequin to an upstream API using either the Sequin console or API. For this guide, let’s use the Sequin Console for simplicity:
 
-1. Login to the Sequin console and click the + Add sync button
+1. Login to the Sequin console and click the **+ Add sync** button
 2. Select the source you want to sync.
-3. Click the + Add new button in the credential section to complete the authentication flow for your selected API source.
-4. Once authenticated, you’ll see a list of objects available to sync. Select the object you want to sync and click the Start syncing button.
+3. Click the **+ Add new** button in the credential section to complete the authentication flow for your selected API source.
+4. Once authenticated, you’ll see a list of objects available to sync. Select the object you want to sync and click the **Start syncing** button.
 
 Sequin will begin to backfill all historic records from the API source and set up a real-time stream as new records are created, updated, and deleted.
 
@@ -98,25 +98,25 @@ Next, you'll create a Postgres consumer to stream data from your API source to y
 
 As a first step, you need to connect your Neon database to Sequin as a target:
 
-1. In the Sequin Console, navigate to the Targets tab and click the + Add target button. Enter the credentials for your database:
-   - You’ll find the host and database in the connection details tab of your Neon project dashboard.
+1. In the Sequin Console, navigate to the **Targets** tab and click the **+ Add target** button. Enter the credentials for your database:
+   - You’ll find the host and database on the **Connection Details** widget on your Neon project dashboard.
    - The port is `5432`
-   - Make sure you check the SSL option. (This is required by Neon.)
-   - Use the username and password for the sequin user you created earlier.
-2. Sequin will validate its connection to your Neon database and you’ll be able to Save.
+   - Make sure you check the **SSL** option. (This is required by Neon.)
+   - Use the username and password for the `sequin` user you created earlier.
+2. Sequin will validate its connection to your Neon database and you’ll be able to **Save**.
 
 Now, create a consumer to stream data from your Sync to your Neon database target. Consumers allow you to sync multiple sources into one Neon DB target:
 
-1. In the Sequin Console, navigate to the Consumers tab and click the + Add consumer button.
+1. In the Sequin Console, navigate to the **Consumers** tab and click the **+ Add consumer** button.
 2. Select your API provider (e.g. GitHub, Stripe, etc) and your Sync.
-3. Then select your Neon database for the target and enter the scheme (i.e. sequin) and table (i.e. records) you set up earlier.
-4. Sequin will confirm your database is configured properly - then click the Start consumer button.
+3. Then select your Neon database for the target and enter the schema (i.e., `sequin`) and table (i.e., `records`) you set up earlier.
+4. Sequin will confirm your database is configured properly - then click the **Start consumer** button.
 
 At this point, your API data should be flowing into Neon Postgres! Let's verify by querying the database.
 
 ## Query your API data in Neon Postgres
 
-In the Neon Console, open the SQL editor.
+In the Neon Console, open the **SQL Editor**.
 
 Verify data is being synced by running this query:
 
