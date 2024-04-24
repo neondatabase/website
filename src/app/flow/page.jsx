@@ -1,5 +1,5 @@
 import Post from 'components/pages/doc/post';
-import { getPostBySlug, getTableOfContents, FLOW_DIR_PATH } from 'utils/api-docs';
+import { FLOW_DIR_PATH, getPostBySlug, getTableOfContents } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
 
 export async function generateMetadata() {
@@ -25,6 +25,7 @@ const FlowPage = () => {
       currentSlug={currentSlug}
       fileOriginPath={fileOriginPath}
       tableOfContents={tableOfContents}
+      isFlowPage
     />
   );
 };
