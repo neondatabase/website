@@ -105,6 +105,8 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/sequelize-logo.svg" width="29" height="36" alt="Sequelize" href="/docs/guides/sequelize" title="Schema migration with Neon Postgres and Sequelize" />
 
+<img src="/images/technology-logos/sequin-logo.svg" width="29" height="36" alt="Sequin" href="/docs/guides/sequin" title="Sync data from APIs to Neon in real time " />
+
 <img src="/images/technology-logos/sqlalchemy-logo.svg" width="36" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect an SQLAlchemy application to Neon" />
 
 <img src="/images/technology-logos/stepzen-logo.svg" width="36" height="36" alt="StepZen" href="/docs/guides/stepzen" title="Use StepZen with Neon" />
