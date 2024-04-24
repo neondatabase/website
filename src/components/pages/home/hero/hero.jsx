@@ -24,8 +24,8 @@ const ITEMS = [
     video: {
       icon: serverlessIcon,
       title: 'Scaling',
-      mp4: '/videos/pages/home/hero/serverless.mp4?updated=20240424155646',
-      m3u8: '/videos/pages/home/hero/serverless.m3u8?updated=20240424155646',
+      mp4: '/videos/pages/home/hero/serverless.mp4?updated=20240424170105',
+      m3u8: '/videos/pages/home/hero/serverless.m3u8?updated=20240424170105',
     },
     title: 'Scaling',
     description:

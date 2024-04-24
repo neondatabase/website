@@ -3,11 +3,11 @@
 #EXT-X-TARGETDURATION:3
 #EXT-X-MEDIA-SEQUENCE:0
 #EXTINF:3.100000,
-serverless0.ts
+serverless0.ts?updated=20240424170105
 #EXTINF:1.500000,
-serverless1.ts
+serverless1.ts?updated=20240424170105
 #EXTINF:1.900000,
-serverless2.ts
-#EXTINF:2.500000,
-serverless3.ts
+serverless2.ts?updated=20240424170105
+#EXTINF:1.266667,
+serverless3.ts?updated=20240424170105
 #EXT-X-ENDLIST
