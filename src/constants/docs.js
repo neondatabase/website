@@ -3,7 +3,7 @@ const CHANGELOG_PER_PAGE = 40;
 const CHANGELOG_SLUG = 'changelog';
 const CHANGELOG_BASE_PATH = `${DOCS_BASE_PATH}${CHANGELOG_SLUG}/`;
 const CHANGELOG_DIR_PATH = `content/${CHANGELOG_SLUG}`;
-const CHANGELOG_SLUG_REGEX = /\d{4}-\d{2}-\d{2}-[a-z]*/;
+const CHANGELOG_SLUG_REGEX = /\d{4}-\d{2}-\d{2}/;
 
 const POSTGRES_DOCS_BASE_PATH = '/docs/postgres/';
 

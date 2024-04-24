@@ -1,5 +1,5 @@
 ---
-title: Postgres Character Data Types
+title: Postgres Character data types
 subtitle: Work with text data in Postgres
 enableTableOfContents: true
 updatedOn: '2024-02-04T14:22:44.186Z'

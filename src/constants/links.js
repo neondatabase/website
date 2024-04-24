@@ -4,6 +4,7 @@ export default {
   aboutUs: '/about-us',
   careers: '/careers',
   blog: '/blog',
+  console: 'https://console.neon.tech',
   signup: 'https://console.neon.tech/signup',
   login: 'https://console.neon.tech/login',
   security: '/docs/security/security-overview',
@@ -46,4 +47,5 @@ export default {
   autoscaling: '/docs/introduction/autoscaling',
   onDemandStorage: '/docs/introduction/about#bottomless-storage',
   caseStudies: '/case-studies',
+  earlyAccess: '/early-access-program',
 };

@@ -20,7 +20,7 @@ To follow along with this guide, you will need:
 
 ### Initialize a new project
 
-1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
+1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 2. Select an existing project or click the `New Project` button to create a new one. 
 
 ### Retrieve your Neon database connection string
@@ -45,7 +45,7 @@ npm init -y && touch .env index.js
 npm install express dotenv
 ```
 
-Add the `DATABASE_URL` environment variable to the `.env` file, which you'll use to connect to your Neon database. Use the connection string that you obtained from the Neon console earlier:
+Add the `DATABASE_URL` environment variable to the `.env` file, which you'll use to connect to your Neon database. Use the connection string that you obtained from the Neon Console earlier:
 
 ```bash
 # .env
@@ -327,7 +327,15 @@ This will start the server at `http://localhost:3000`. Navigate to `http://local
 
 ## Conclusion
 
-In this guide, we set up a new Javascript project using `Express.js` and the `Sequelize` ORM, and connected it to a `Neon` Postgres database. We created a schema for the database, generated and ran migrations, and implemented API endpoints to query the database. 
+In this guide, we set up a new Javascript project using `Express.js` and the `Sequelize` ORM, and connected it to a `Neon` Postgres database. We created a schema for the database, generated and ran migrations, and implemented API endpoints to query the database.
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/guide-neon-sequelize" description="Run Neon database migrations using Sequelize" icon="github">Migrations with Neon and Sequelize</a>
+</DetailIconCards>
 
 ## Resources
 

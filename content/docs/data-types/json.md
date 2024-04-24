@@ -1,6 +1,6 @@
 ---
-title: Postgres JSON Data Types
-subtitle: Modeling JSON data in Postgres
+title: Postgres JSON data types
+subtitle: Model JSON data in Postgres
 enableTableOfContents: true
 updatedOn: '2024-02-04T13:56:31.612Z'
 ---

@@ -5,39 +5,32 @@ isDraft: false
 updatedOn: '2024-01-12T16:49:12.349Z'
 ---
 
-The **Integrations** page in the Neon Console provides a hub for managing third-party integrations with your Neon project. Use these supported integrations to optimize and extend Neon's functionality and streamline your workflow.
+The **Integrations** page in the Neon Console provides a hub for managing third-party integrations with your Neon project. You can use these supported integrations to optimize and extend Neon's functionality and streamline your workflow.
 
-When visiting the **Integrations** page in your console, you'll notice different categories:
-
-- **Manage**: A list of integrations that have already been added to your project.
-- **Add**: Integrations that are available for you to add and use immediately.
-- **Request**: Upcoming integrations that you can express interest in to help prioritize their release.
+When visiting the **Integrations** page, you'll notice different categories of integrations, which you can browse to find the one you need.
 
 ## Manage integrations
 
-For integrations listed under the **Manage** section, click the **Manage** link to configure or remove the integration.
+For integrations listed as **Added**, you can click **Manage** on the integration card to configure or remove the integration.
 
 ## Add integrations
 
-For integrations listed under the **Add** section, follow the provided instructions to get started.
+For integrations that are not added, you can click **Add** and follow the instructions to get started. Some integrations support an automated integration setup. Others are documented integrations, which involve a manual setup procedure.
 
-## Express interest in upcoming integrations
+## Manual integrations
 
-For integrations listed under **Request**, you have the option to express your interest. This helps the Neon team gauge user demand and prioritize integration rollouts.
+Integrations currently requiring a manual setup have a **Read** button, which opens a modal where you can read about how to integrate the selected platform or service with Neon.
 
-To express interest:
+## Express interest in future integrations
 
-1. Locate the integration you're interested in.
-2. Click the **Request** link.
-3. Type your message and click **Yes, I'm interested**.
+Integrations that are not yet available have a **Request** button, which opens a modal where you can express your interest and share your use case. This information helps the Neon team prioritize integration rollouts and build exactly what you need.
 
 ## Suggest an integration
 
 If you can't find the integration you're looking for:
 
-1. Navigate to the bottom of the page.
-2. Click the **Suggest** link in the **Suggest an integration** card.
-3. Fill out the necessary details for the integration you'd like to see added.
-4. Click **Suggest integration**.
+1. Click the **Suggest an integration** button on the **Integrations** page.
+2. Fill out the necessary details for the integration you'd like to see added.
+3. Click **Suggest integration**.
 
-The Neon team will review your request and get back to you.
+The Neon team will review your request.

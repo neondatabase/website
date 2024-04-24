@@ -2,30 +2,33 @@
 
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 import AnimatedButton from 'components/shared/animated-button';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import Link from 'components/shared/link';
-import Tooltip from 'components/shared/tooltip';
+import InfoIcon from 'components/shared/info-icon';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
-import infoSvg from 'icons/tooltip.svg';
+import CrossIcon from 'icons/cross.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
+
+import AWSIcon from './images/aws.inline.svg';
 
 const items = [
   {
     type: 'Free Tier',
     price: '$0 <span>/month</span>',
-    description: 'Generous free tier available to everyone, no credit card required.',
+    description: 'Generous always-available free tier, no credit card required.',
     features: [
       { title: '0.5 GiB storage' },
-      { title: 'Limited to 0.25 vCPU, 1GB RAM' },
-      { title: '1 project w/10 branches' },
-      { title: 'Project Sharing, Logical Replication' },
+      { title: '24/7 for your main compute', info: 'Plus 20h of usage for branches' },
       { title: 'Community support' },
+      { title: 'Fixed capacity at 0.25 vCPU' },
+      { title: 'Instant Read Replicas', disabled: true },
+      { title: 'IP Allow Rules', disabled: true },
     ],
     button: {
       url: LINKS.signup,
@@ -37,50 +40,63 @@ const items = [
   {
     type: 'Launch',
     price:
-      '<em class="absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</em> $19 <span>/month</span>',
+      '<em class="xl:-top-1 block absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:-mt-4 md:mt-0">From</em> $19 <span>/month</span>',
     description: 'All the resources, features and support you need to launch.',
     features: [
-      { title: '10 GiB storage included' },
-      { title: 'Autoscale to 4 vCPU, 16GB RAM' },
-      { title: '10 projects w/500 branches each' },
-      { title: 'Unlocks Read Replicas' },
+      {
+        title: '10 GiB storage included',
+        info: 'Additional storage: $3.5 per 2 GiB',
+      },
+      {
+        title: '300 <a href="#compute-hour">compute hours</a> included',
+        info: 'Additional usage: $0.16 per compute hour',
+      },
       { title: 'Standard support' },
+      { title: 'Autoscaling up to 4 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
+      { title: 'Instant Read Replicas' },
+      { title: 'IP Allow Rules', disabled: true },
     ],
     button: {
-      url: LINKS.signup,
+      url: `${LINKS.console}/?upgrade=launch`,
       text: 'Get started',
       theme: 'primary',
-      event: 'pricing_hero_pro_btn_click',
+      event: 'pricing_hero_launch_btn_click',
     },
   },
   {
     type: 'Scale',
     price:
-      '<em class="absolute -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:top-0 xl:mb-1.5">From</em> $69 <span>/month</span>',
+      '<em class="absolute block xl:-top-1 -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:-mt-4 md:mt-0">From</em> $69 <span>/month</span>',
     description: 'Full platform and support access, designed for scaling production workloads.',
     features: [
-      { title: '50 GiB storage included' },
-      { title: 'Autoscale to 8 vCPU, 32GB RAM' },
-      { title: '50 projects w/500 branches each' },
-      { title: 'Unlocks additional security features' },
+      { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
+      {
+        title: '750 <a href="#compute-hour">compute hours</a> included',
+        info: 'Additional usage: $0.16 per compute hour',
+      },
       { title: 'Priority support' },
+      { title: 'Autoscaling up to 8 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
+      { title: 'Instant Read Replicas' },
+      { title: 'IP Allow Rules' },
     ],
     button: {
-      url: LINKS.signup,
+      url: `${LINKS.console}/?upgrade=scale`,
       text: 'Get started',
       theme: 'white-outline',
-      event: 'pricing_hero_pro_btn_click',
+      event: 'pricing_hero_scale_btn_click',
     },
   },
   {
     type: 'Enterprise',
     price: 'Custom',
-    description: 'Custom plans for large teams and database fleets.',
+    description: 'Custom plans for large datasets and database fleets.',
     features: [
-      { title: 'Custom pricing with discounts' },
+      { title: 'Storage discounts' },
       { title: 'Higher resource limits' },
-      { title: 'Customer-owned S3' },
+      { title: 'Thousands of databases' },
       { title: 'Enterprise support w/SLAs' },
+      { title: 'Audit logging' },
+      { title: 'SOC 2 compliance' },
     ],
     button: {
       url: `${LINKS.enterprise}#request-trial`,
@@ -105,6 +121,50 @@ const scaleCardBorderVariants = {
   exit: {
     opacity: 0,
   },
+};
+
+const Feature = ({ title, info, disabled, type, index }) => (
+  <li
+    className={clsx(
+      type === 'Scale' && 'text-white',
+      disabled ? 'text-gray-new-30' : 'text-gray-new-80',
+      'relative pl-6 leading-tight tracking-tight'
+    )}
+  >
+    {disabled ? (
+      <CrossIcon
+        className={clsx('absolute left-0 top-[2px] h-4 w-4 text-gray-new-30')}
+        aria-hidden
+      />
+    ) : (
+      <CheckIcon
+        className={clsx(
+          type === 'Scale' ? 'text-green-45' : 'text-gray-new-70',
+          'absolute left-0 top-[2px] h-4 w-4'
+        )}
+        aria-hidden
+      />
+    )}
+    <span className="with-link-primary" dangerouslySetInnerHTML={{ __html: title }} />
+    {info && (
+      <span className="whitespace-nowrap">
+        &nbsp;
+        <InfoIcon
+          className="relative top-0.5 ml-0.5 inline-block"
+          tooltip={info}
+          tooltipId={`${type}_tooltip_${index}`}
+        />
+      </span>
+    )}
+  </li>
+);
+
+Feature.propTypes = {
+  title: PropTypes.string.isRequired,
+  info: PropTypes.string,
+  disabled: PropTypes.bool,
+  type: PropTypes.string,
+  index: PropTypes.number,
 };
 
 const Hero = () => {
@@ -140,7 +200,10 @@ const Hero = () => {
 
               return (
                 <li
-                  className="group relative rounded-[10px]"
+                  className={clsx(
+                    'group relative flex min-h-full flex-col rounded-[10px] px-7 pb-9 pt-5 xl:px-6 xl:py-5 sm:p-5',
+                    !isScalePlan && 'border border-transparent bg-gray-new-8'
+                  )}
                   key={index}
                   onPointerEnter={() => {
                     if (isScalePlan) {
@@ -148,92 +211,60 @@ const Hero = () => {
                     }
                   }}
                 >
-                  <Link
-                    className={clsx(
-                      !isScalePlan &&
-                        'border border-transparent bg-gray-new-8 group-hover:border-gray-new-15 group-hover:bg-gray-new-10',
-                      'relative z-10 flex min-h-full flex-col rounded-[10px]  px-7 pb-9 pt-5 transition-colors duration-500 xl:px-6 xl:py-5 sm:p-5'
-                    )}
-                    to={button.url}
-                    onClick={() => {
-                      sendGtagEvent(button.event);
-                    }}
-                  >
-                    <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">
-                      <h3
-                        className={clsx(
-                          isScalePlan && 'text-green-45',
-                          'text-xl font-medium leading-none tracking-tight text-gray-new-80 xl:text-lg'
-                        )}
-                      >
-                        {type}
-                      </h3>
-                      <p
-                        className="relative mt-14 text-[36px] leading-none tracking-tighter xl:mt-5 xl:text-[32px] md:mt-4 [&_span]:text-[28px] [&_span]:font-light [&_span]:-tracking-[0.06em] [&_span]:text-gray-new-50"
-                        dangerouslySetInnerHTML={{ __html: price }}
-                      />
-                      {isScalePlan ? (
-                        <AnimatedButton
-                          className="mt-7 w-full !bg-green-45 !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[#00ffaa] xl:mt-7 sm:max-w-none"
-                          animationColor="#00e599"
-                          theme="primary"
-                          size="sm"
-                          isAnimated
-                        >
-                          {button.text}
-                        </AnimatedButton>
-                      ) : (
-                        <Button
-                          className="mt-7 w-full bg-gray-new-15 !py-4 !text-lg !font-medium tracking-tight xl:mt-7 sm:max-w-none"
-                          size="sm"
-                        >
-                          {button.text}
-                        </Button>
+                  {isScalePlan && (
+                    <a
+                      className="group/aws absolute right-[18px] top-5 flex items-center gap-x-2"
+                      href="https://aws.amazon.com/marketplace/saas/ordering?productId=prod-ro32fhzkkg7ya&offerId=offer-czr2a3vwvrtik"
+                    >
+                      <span className="border-b border-gray-new-40 pb-0.5 text-sm font-light leading-none tracking-extra-tight text-gray-new-70 opacity-90 transition-colors duration-200 group-hover/aws:border-transparent group-hover/aws:text-gray-new-80">
+                        Pay via marketplace
+                      </span>
+                      <AWSIcon className="text-gray-new-50 transition-colors duration-200 group-hover/aws:text-gray-new-60" />
+                    </a>
+                  )}
+                  <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">
+                    <h3
+                      className={clsx(
+                        isScalePlan && 'text-green-45',
+                        'text-xl font-medium leading-none tracking-tight text-gray-new-80 xl:text-lg'
                       )}
-                      <p className="mt-9 font-light leading-snug tracking-tight text-gray-new-70  2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
-                        {description}
-                      </p>
-                    </div>
-                    <div className="mt-auto flex grow flex-col">
-                      <ul className="flex flex-col flex-wrap gap-y-4">
-                        {features.map(({ title, tooltip }, index) => (
-                          <li className="relative pl-6 leading-tight tracking-tight" key={index}>
-                            <CheckIcon
-                              className={clsx(
-                                isScalePlan ? 'text-green-45' : 'text-gray-new-70',
-                                'absolute left-0 top-[2px] h-4 w-4 '
-                              )}
-                              aria-hidden
-                            />
-                            <span
-                              data-tooltip-id={tooltip && `${type}_tooltip_${index}`}
-                              data-tooltip-html={tooltip && tooltip}
-                            >
-                              {title}
-                              {tooltip && (
-                                <img
-                                  className="relative -top-px ml-1.5 inline"
-                                  src={infoSvg}
-                                  width={14}
-                                  height={14}
-                                  alt=""
-                                  loading="lazy"
-                                  aria-hidden
-                                />
-                              )}
-                            </span>
-                            {tooltip && (
-                              <Tooltip
-                                className="w-sm z-20"
-                                id={`${type}_tooltip_${index}`}
-                                place="top-center"
-                              />
-                            )}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </Link>
+                    >
+                      {type}
+                    </h3>
+                    <p
+                      className="relative mt-14 text-[36px] leading-none tracking-tighter xl:mt-9 xl:text-[32px] md:mt-4 [&_span]:text-[28px] [&_span]:font-light [&_span]:-tracking-[0.06em] [&_span]:text-gray-new-50"
+                      dangerouslySetInnerHTML={{ __html: price }}
+                    />
+                    {isScalePlan ? (
+                      <AnimatedButton
+                        className="mt-7 w-full !bg-green-45 !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[#00ffaa] xl:mt-7 sm:max-w-none"
+                        animationColor="#00e599"
+                        theme="primary"
+                        size="sm"
+                        to={button.url}
+                        isAnimated
+                        onClick={() => {
+                          sendGtagEvent(button.event);
+                        }}
+                      >
+                        {button.text}
+                      </AnimatedButton>
+                    ) : (
+                      <Button
+                        className="mt-7 w-full bg-gray-new-15 !py-4 !text-lg !font-medium tracking-tight transition-colors duration-500 hover:bg-gray-new-30 xl:mt-7 sm:max-w-none"
+                        size="sm"
+                        to={button.url}
+                        onClick={() => {
+                          sendGtagEvent(button.event);
+                        }}
+                      >
+                        {button.text}
+                      </Button>
+                    )}
+                    <p className="mt-9 font-light leading-snug tracking-tight text-gray-new-70 2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
+                      {description}
+                    </p>
+                  </div>
                   {isScalePlan && (
                     <LazyMotion features={domAnimation}>
                       <m.span
@@ -249,6 +280,13 @@ const Hero = () => {
                       />
                     </LazyMotion>
                   )}
+                  <div className="mt-auto flex grow flex-col">
+                    <ul className="flex flex-col flex-wrap gap-y-4">
+                      {features.map((feature, index) => (
+                        <Feature {...feature} type={type} index={index} key={index} />
+                      ))}
+                    </ul>
+                  </div>
                 </li>
               );
             })}

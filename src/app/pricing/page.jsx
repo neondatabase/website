@@ -1,6 +1,6 @@
-import CaseStudies from 'components/pages/pricing/case-studies';
 import CTA from 'components/pages/pricing/cta';
 import Faq from 'components/pages/pricing/faq';
+import Features from 'components/pages/pricing/features';
 import Hero from 'components/pages/pricing/hero';
 import Plans from 'components/pages/pricing/plans';
 import Layout from 'components/shared/layout';
@@ -19,6 +19,7 @@ const logos = [
   'code-institute',
   'branch',
   'eqt',
+  'retool',
   'master-school',
   'encore',
 ];
@@ -50,10 +51,10 @@ const PricingPage = () => (
   >
     <Hero />
     <Logos className="mt-36 pt-2.5 lg:mt-28 lg:pt-0 md:mt-20" logos={logos} />
-    <CaseStudies className="mt-60 xl:mt-48 lg:mt-[124px] md:mt-[88px]" />
+    <Features />
     <Plans className="my-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
     <Testimonials
-      className="mb-[200px] min-h-[312px] 2xl:mb-[156px] xl:mb-32 xl:min-h-[290px] lg:mb-28 lg:min-h-[257px] md:mb-20 md:min-h-[225px] sm:min-h-[310px]"
+      className="mb-[200px] mt-48 min-h-[312px] 2xl:my-[156px] xl:my-32 xl:min-h-[290px] lg:my-28 lg:min-h-[257px] md:my-20 md:min-h-[225px] sm:min-h-[310px]"
       items={sliderItems}
     />
     <Faq />

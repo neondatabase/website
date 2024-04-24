@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Link from 'components/shared/link';
 import MENUS from 'constants/menus';
 
-import { ChatWidgetTrigger } from '../chat-widget';
+import InkeepTrigger from '../inkeep-trigger';
 
 import Item from './item';
 
@@ -53,7 +53,7 @@ const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = 
           <NavWithIcon className="mb-8" items={MENUS.postgresSidebar} />
         ) : (
           <>
-            <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
+            <InkeepTrigger className="mb-3.5 flex" isSidebar />
             <NavWithIcon className="mb-11" items={MENUS.docSidebar} />
           </>
         )}

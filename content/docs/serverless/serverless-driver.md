@@ -26,6 +26,10 @@ npm install @neondatabase/serverless
 
 The driver includes TypeScript types (the equivalent of `@types/pg`). No additional installation is required.
 
+<Admonition type="note">
+The Neon serverless driver is also available as a [JavaScript Registry (JSR)](https://jsr.io/docs/introduction) package: [https://jsr.io/@neon/serverless](https://jsr.io/@neon/serverless). The JavaScript Registry (JSR) is a package registry for JavaScript and TypeScript. JSR works with many runtimes (Node.js, Deno, browsers, and more) and is backward compatible with `npm`.
+</Admonition>
+
 ## Configure your Neon database connection
 
 You can obtain a connection string for your database from the **Connection Details** widget on the Neon **Dashboard**. Your Neon connection string will look something like this:
@@ -48,7 +52,7 @@ You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.t
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.DATABASE_URL);
-const {rows: [post]} = await sql('SELECT * FROM posts WHERE id =$1', [postId]);
+const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
 // `post` is now [{ id: 12, title: 'My post', ... }] (or undefined)
 ```
 
@@ -72,7 +76,7 @@ import { neon } from '@neondatabase/serverless';
 
 export default async (req: Request) => {
   const sql = neon(process.env.DATABASE_URL);
-  const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+  const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
   return new Response(JSON.stringify(post));
 }
 
@@ -90,7 +94,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const sql = neon(process.env.DATABASE_URL!);
-  const {rows: [post]} = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+  const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
  
   return res.status(500).send(post);
 }
@@ -99,7 +103,7 @@ export default async function handler(
 </CodeTabs>
 
 <Admonition type="note">
-The maximum request size and response size for queries over HTTP is 10 MB. Additionally, there is a 15-second proxy timeout for SQL requests over HTTP. Long-running queries that exceed the 15-second threshold are terminated.
+The maximum request size and response size for queries over HTTP is 10 MB.
 </Admonition>
 
 ### neon function configuration options
@@ -282,7 +286,7 @@ You can use the Neon serverless driver in the same way you would use `node-postg
 import { Pool } from '@neondatabase/serverless';
 
 const pool = new Pool({connectionString: process.env.DATABASE_URL});
-const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
+const posts = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
 pool.end();
 ```
 
@@ -334,7 +338,7 @@ export default async (req: Request, ctx: any) => {
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
   await pool.connect();
 
-  const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
   
   ctx.waitUntil(pool.end());
 
@@ -357,7 +361,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
-  const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
   
   await pool.end();
 
@@ -372,6 +376,7 @@ export default async function handler(
 - In Node.js and some other environments, there's no built-in WebSocket support. In these cases, supply a WebSocket constructor function.
 
   ```javascript
+  import { Pool, neonConfig } from '@neondatabase/serverless';
   import ws from 'ws';
   neonConfig.webSocketConstructor = ws;
   ```

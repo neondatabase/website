@@ -28,6 +28,7 @@
     "@headlessui/react": "^1.7.17",
     "@headlessui/tailwindcss": "^0.2.0",
     "@hookform/resolvers": "^3.3.2",
+    "@inkeep/widgets": "^0.2.271",
     "@next/bundle-analyzer": "^14.0.3",
     "@octokit/core": "^5.0.2",
     "@radix-ui/react-dialog": "^1.0.5",

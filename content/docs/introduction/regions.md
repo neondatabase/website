@@ -19,7 +19,6 @@ Neon currently supports the following AWS regions:
 - Europe (Frankfurt) &mdash; `aws-eu-central-1`
 - Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
 - Asia Pacific (Sydney)	&mdash; `aws-ap-southeast-2`
-- Israel (Tel Aviv) &mdash; `aws-il-central-1`
 
 ## Select a region for your Neon project
 

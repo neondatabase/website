@@ -21,7 +21,7 @@ Before starting, ensure you have:
 
 ### Initialize a new project
 
-After logging into the Neon console, proceed to the [Projects](https://console.neon.tech/app/projects) section.
+After logging into the Neon Console, proceed to the [Projects](https://console.neon.tech/app/projects) section.
 
 1. Click `New Project` to start a new one.
 

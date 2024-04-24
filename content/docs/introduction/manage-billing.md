@@ -77,16 +77,12 @@ Changing your plan to one with lower usage allowances may affect the performance
 
 If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances.
 
-<Admonition type="note">
-Downgrading directly from [Scale](/docs/introduction/plans#scale) to [Launch](/docs/introduction/plans#launch) is currently not supported. You must downgrade to the Free Tier first, and then upgrade to Launch. This limitation will be removed in a future release.
-</Admonition>
-
 To downgrade from an [Enterprise](/docs/introduction/plans#enterprise) plan, please contact [Sales](https://neon.tech/contact-sales). Cancellation of an Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
 
-## Purchase Neon on AWS Marketplace
+## Deactivate your account
 
-As an alternative to Neon billing, you can purchase Neon on the [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-o32z34khv4272?sr=0-1&applicationId=AWSMPContessa&utm_campaign=Developer%20Days&utm_source=hs_email&utm_medium=email&_hsenc=p2ANqtz-8U-1v7Sm5HHexFnV3Mkkwwsq5hnq9ThQnbQOqhuB11RT9cNwtAoalhaq98WMgL70rwfFhq) or through the [AWS Private Offers](https://docs.aws.amazon.com/marketplace/latest/userguide/private-offers-overview.html) program.
+ To deactivate your Neon account, please initiate a deactivation request through the Neon support team. If you're a Launch or Scale plan subscriber, you can generate a support ticket directly from the Neon Console. Navigate to the **Support** link located in the Neon Console sidebar to open the **Create support ticket** modal. Here, you can formally request the deactivation of your account. For direct access to this modal, [click here](https://console.neon.tech/app/projects?modal=support). If you are a Free Tier user and do not have access to the **Create support ticket** modal in the Neon Console, please direct your deactivation request to `support@neon.tech`.
 
-Purchasing Neon from the AWS Marketplace gives you consolidated billing, seamless provisioning, and the ability to use AWS credits on Neon.
-
-If you have any questions about this billing option, please reach out to our [Sales](https://neon.tech/contact-sales) team. 
+<Admonition type="important">
+Before Neon can proceed with deactivating your account, it is necessary to ensure all active projects have been deleted. To learn how to delete your projects, please refer to [Delete a project](/docs/manage/projects#delete-a-project) for instructions.
+</Admonition>

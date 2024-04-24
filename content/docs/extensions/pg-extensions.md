@@ -36,13 +36,14 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [lo](https://www.postgresql.org/docs/16/lo.html)                       | 1.1               | 1.1               |  1.1               |                                                                                                                     |
 | [ltree](https://www.postgresql.org/docs/16/ltree.html)                    | 1.2            | 1.2           |   1.2           |                                                                                                                  |
 | [moddatetime (spi)](https://www.postgresql.org/docs/current/contrib-spi.html)         | 1.0 | 1.0  |   1.0  |                                                                                                                  |
-| [neon](/docs/extensions/neon)               | 1.1                               | 1.1                               |     1.1              |                                                                                                                   |
+| [neon](/docs/extensions/neon)               | 1.3                               | 1.3                               |     1.3              |                                                                                                                   |
 | [neon_utils](/docs/extensions/neon-utils)               | 1.0                              | 1.0                               |     1.0              |                                                                                                                   |
 | [pg_graphql](https://github.com/supabase/pg_graphql)               | 1.4.0                 | 1.4.0                  |  1.4.0                  |                                                                                                                   |
 | [pg_hashids](https://github.com/iCyberon/pg_hashids)                | 1.2.1                | 1.2.1                  |  1.2.1                  |                                                                                                                  |
 | [pg_hint_plan](https://github.com/ossc-db/pg_hint_plan)             | 1.4.1                  | 1.5.0                  |  1.6.0                  |                                                                                                                   |
 | [pg_ivm](https://github.com/sraoss/pg_ivm)             | 1.7                  | 1.7                  |  1.7                  |                                                                                                                   |
 | [pg_jsonschema](https://github.com/supabase/pg_jsonschema)            | 0.2.0              | 0.2.0               | 0.2.0               |                                                                                                                  |
+| [pg_partman](https://github.com/pgpartman/pg_partman)            | 5.0.1              | 5.0.1               | 5.0.1               |  
 | [pg_prewarm](/docs/extensions/pg_prewarm)              | 1.2        | 1.2         |   1.2         |                                                                                                                  |
 | [pg_roaringbitmap](https://github.com/ChenHuajun/pg_roaringbitmap)          | 0.5          | 0.5         |  0.5         |                                                                                                                  | Install with `CREATE EXTENSION roaringbitmap;`
 | [pg_stat_statements](/docs/extensions/pg_stat_statements)       | 1.9 | 1.10 | 1.10 |
@@ -119,7 +120,7 @@ When Neon releases a new extension or new extension version, a compute restart i
 
 ## Request extension support
 
-To request support for a Postgres extension, paid plan users can [open a support ticket](https://console.neon.tech/app/projects?modal=support). Free plan users can submit a request via the **feedback** channel on our [Discord Server](https://neon.tech/discord).
+To request support for a Postgres extension, paid plan users can [open a support ticket](https://console.neon.tech/app/projects?modal=support). Free plan users can submit a request via the **feedback** channel on our [Discord Server](https://discord.gg/92vNTzKDGp).
 
 ### Custom-built extensions
 
