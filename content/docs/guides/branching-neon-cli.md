@@ -135,7 +135,7 @@ This API key configuration ensures that the API key is kept secure while still p
 
 Depending on your development workflow, you might need to periodically reset a branch to match the latest state of its parent. This is useful, for example, when resetting a long-lived development branch back to the main branch before starting work on a new feature.
 
-Use the following command To reset a branch to the current (HEAD) of its parent branch:
+Use the following command to reset a branch to the current state (HEAD) of its parent branch:
 
 ``` bash
 neonctl branches reset <id|name> --parent
