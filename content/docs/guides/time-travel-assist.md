@@ -43,8 +43,6 @@ Time Travel only allows non-destructive read-only queries. You cannot alter hist
 
 ### Time Travel with the SQL editor
 
-<ComingSoon/>
-
 Time Travel in the SQL Editor offers a non-destructive way to explore your database's historical data through read-only queries. By toggling Time Travel in the editor, you switch from querying your current data to querying against a selected point within your history retention window.
 
 You can use this feature to help with scenarios like:
