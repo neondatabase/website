@@ -4,8 +4,6 @@ subtitle: Use Time Travel to analyze changes made to your database over time
 enableTableOfContents: true
 ---
 
-<ComingSoon/>
-
 This guide demonstrates how you could use Time Travel to address a common development scenario: debugging issues following a CI/CD deployment to production.
 
 In this scenario, your team has recently introduced a streamlined checkout process, managed by a `new_checkout_process` feature flag. Soon after this flag was enabled, customer support started receiving complaints related to the new feature. As a developer, you're tasked with investigating the issues to confirm whether they are directly linked to the feature's activation.
