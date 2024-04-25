@@ -72,13 +72,13 @@ const useVideoPlayback = (
   // Needed to catch the end of the video when it loops and show the title again
   const handleChangeVisibilityTitle = useCallback(
     (video) => () => {
-      if (video.currentTime >= video.duration - 1 && !isTitleVisible) {
+      if (video.currentTime >= video.duration - 1) {
         return setIsTitleVisible(true);
       }
 
       setIsTitleVisible(false);
     },
-    [isTitleVisible]
+    []
   );
 
   const handleMobileVideoPlayback = useCallback(() => {
@@ -102,7 +102,7 @@ const useVideoPlayback = (
       setIsTitleVisible(true);
     }
 
-    video.addEventListener('timeupdate', handleChangeVisibilityTitle(video));
+    video.addEventListener('ended', handleChangeVisibilityTitle(video));
 
     return () => {
       video.removeEventListener('loadedmetadata', handleInitialVideoPlay(video));
