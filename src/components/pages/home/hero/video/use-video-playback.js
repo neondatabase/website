@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 const useVideoPlayback = (
@@ -11,6 +11,7 @@ const useVideoPlayback = (
   initialVideoPlayback,
   setInitialVideoPlayback
 ) => {
+  const [isTitleVisible, setIsTitleVisible] = useState(true);
   const [visibilityRef, isInView] = useInView({
     threshold: 0.5,
   });
@@ -29,6 +30,7 @@ const useVideoPlayback = (
       const timer = setTimeout(() => {
         video.play();
         setInitialVideoPlayback(false);
+        setIsTitleVisible(false);
       }, 1200);
 
       return () => clearTimeout(timer);
@@ -48,9 +50,11 @@ const useVideoPlayback = (
         video.addEventListener('loadedmetadata', handleInitialVideoPlay(video), { once: true });
       } else {
         video.play();
+        setIsTitleVisible(false);
       }
     } else {
       video.pause();
+      setIsTitleVisible(true);
     }
 
     video.addEventListener('timeupdate', updateProgress(video));
@@ -65,6 +69,18 @@ const useVideoPlayback = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoRef, isInView, isActive, isMobile, switchVideo]);
 
+  // Needed to catch the end of the video when it loops and show the title again
+  const handleChangeVisibilityTitle = useCallback(
+    (video) => () => {
+      if (video.currentTime >= video.duration - 1 && !isTitleVisible) {
+        return setIsTitleVisible(true);
+      }
+
+      setIsTitleVisible(false);
+    },
+    [isTitleVisible]
+  );
+
   const handleMobileVideoPlayback = useCallback(() => {
     const video = videoRef.current;
 
@@ -78,20 +94,26 @@ const useVideoPlayback = (
       } else {
         video.currentTime = 0;
         video.play();
+        setIsTitleVisible(false);
         setActiveVideoIndex();
       }
     } else {
       video.pause();
+      setIsTitleVisible(true);
     }
+
+    video.addEventListener('timeupdate', handleChangeVisibilityTitle(video));
 
     return () => {
       video.removeEventListener('loadedmetadata', handleInitialVideoPlay(video));
+      video.removeEventListener('timeupdate', handleChangeVisibilityTitle(video));
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoRef, isInView, isMobile, initialVideoPlayback]);
 
   return {
     visibilityRef,
+    isTitleVisible,
     handleDesktopVideoPlayback,
     handleMobileVideoPlayback,
   };
