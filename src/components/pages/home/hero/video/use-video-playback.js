@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer';
 
 let titleVisible;
 
+// TODO: revise and optimize logic
 const useVideoPlayback = (
   videoRef,
   progressBarRef,
