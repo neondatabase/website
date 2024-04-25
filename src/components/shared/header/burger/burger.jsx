@@ -4,102 +4,83 @@ import PropTypes from 'prop-types';
 
 const ANIMATION_DURATION = 0.2;
 
-const Burger = ({ className = null, isToggled = null, onClick = null, isNewDesign = false }) => (
+const Burger = ({ className = null, isToggled = null, onClick = null }) => (
   <LazyMotion features={domAnimation}>
     <m.button
-      className={clsx(
-        '-mr-1 flex h-8 w-7 shrink rounded-full',
-        isNewDesign ? '-mt-1.5' : ' -mt-1',
-        className
-      )}
+      className={clsx('-mr-1 -mt-1.5 flex h-8 w-7 shrink rounded-full', className)}
       type="button"
       animate={isToggled ? 'toggled' : 'initial'}
       aria-label={isToggled ? 'Close menu' : 'Open menu'}
       onClick={onClick}
     >
       <m.span
-        className={clsx(
-          'absolute block h-0.5 rounded-full bg-current',
-          isNewDesign ? 'left-px top-2 w-6' : 'left-1.5 top-2.5 w-4'
-        )}
+        className="absolute left-px top-2 block h-0.5 w-6 rounded-full bg-current"
         variants={{
           initial: {
-            top: isNewDesign ? 8 : 10,
-            display: 'block',
+            top: 8,
+            visibility: 'visible',
             transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
           },
           toggled: {
             top: 12,
             transition: { duration: ANIMATION_DURATION },
-            transitionEnd: { display: 'none' },
+            transitionEnd: { visibility: 'hidden' },
           },
         }}
       />
       <m.span
-        className={clsx(
-          'absolute block h-0.5 rounded-full bg-current',
-          isNewDesign ? 'left-px top-4 w-6' : 'left-1.5 top-[15px] w-4'
-        )}
+        className="absolute left-px top-4 block h-0.5 w-6 rounded-full bg-current"
         variants={{
           initial: {
-            display: 'block',
+            visibility: 'visible',
             transition: { delay: ANIMATION_DURATION },
           },
           toggled: {
-            display: 'none',
+            visibility: 'hidden',
             transition: { delay: ANIMATION_DURATION },
           },
         }}
       />
       <m.span
-        className={clsx(
-          'absolute block h-0.5 rounded-full bg-current',
-          isNewDesign ? 'bottom-1.5 left-px w-6' : 'bottom-2.5 left-1.5 w-4'
-        )}
+        className="absolute bottom-1.5 left-px block h-0.5 w-6 rounded-full bg-current"
         variants={{
           initial: {
-            bottom: isNewDesign ? 6 : 10,
-            display: 'block',
+            bottom: 6,
+            visibility: 'visible',
             transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
           },
           toggled: {
             bottom: 12,
             transition: { duration: ANIMATION_DURATION },
-            transitionEnd: { display: 'none' },
+            transitionEnd: { visibility: 'hidden' },
           },
         }}
       />
       <m.span
-        className={clsx(
-          'absolute hidden h-0.5 w-4 rounded-full bg-current',
-          isNewDesign ? 'left-[3px] top-4 w-[22px]' : 'left-1.5 top-3.5 w-4'
-        )}
+        className="absolute left-[3px] top-4 h-0.5 w-[22px] rounded-full bg-current"
         variants={{
           initial: {
             rotate: '0deg',
             transition: { duration: ANIMATION_DURATION },
-            transitionEnd: { display: 'none' },
+            transitionEnd: { visibility: 'hidden' },
           },
           toggled: {
-            display: 'block',
+            visibility: 'visible',
             rotate: '45deg',
             transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
           },
         }}
       />
       <m.span
-        className={clsx(
-          'absolute hidden h-0.5 w-4 rounded-full bg-current',
-          isNewDesign ? 'left-[3px] top-4 w-[22px]' : 'left-1.5 top-3.5 w-4'
-        )}
+        className="absolute left-[3px] top-4 h-0.5 w-[22px] rounded-full bg-current"
         variants={{
           initial: {
             rotate: '0deg',
             transition: { duration: ANIMATION_DURATION },
-            transitionEnd: { display: 'none' },
+            transitionEnd: { visibility: 'hidden' },
           },
           toggled: {
-            display: 'block',
+            visibility: 'visible',
             rotate: '-45deg',
             transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
           },
@@ -113,7 +94,6 @@ Burger.propTypes = {
   className: PropTypes.string,
   isToggled: PropTypes.bool,
   onClick: PropTypes.func,
-  isNewDesign: PropTypes.bool,
 };
 
 export default Burger;

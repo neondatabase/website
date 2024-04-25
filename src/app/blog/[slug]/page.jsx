@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
@@ -157,6 +158,6 @@ export async function generateStaticParams() {
   }));
 }
 
-export default BlogPage;
-
 export const revalidate = 60;
+
+export default BlogPage;
