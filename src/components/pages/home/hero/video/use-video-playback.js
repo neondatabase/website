@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+let titleVisible;
+
 const useVideoPlayback = (
   videoRef,
   progressBarRef,
@@ -73,10 +75,13 @@ const useVideoPlayback = (
   const handleChangeVisibilityTitle = useCallback(
     (video) => () => {
       if (video.currentTime >= video.duration - 1.5) {
+        titleVisible = true;
         return setIsTitleVisible(true);
       }
-
-      setIsTitleVisible(false);
+      if (titleVisible) {
+        titleVisible = false;
+        return setIsTitleVisible(false);
+      }
     },
     []
   );
