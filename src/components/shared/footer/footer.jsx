@@ -21,15 +21,15 @@ const Footer = ({ isDocPage = false, theme = 'white' }) => {
     >
       <Container
         className={clsx(
-          'flex justify-between gap-x-10 pb-[51px] pt-10 xl:pt-9 sm:py-8',
+          'flex justify-between gap-x-10 pb-[51px] pt-10 xl:pt-9 lg:pb-9 sm:py-8',
           'before:absolute before:-left-[20%] before:top-0 before:h-px before:w-[140%] before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);]',
           'dark:before:bg-white',
           isDarkTheme ? 'before:bg-white' : 'before:bg-gray-new-10'
         )}
         size="1344"
       >
-        <div className="flex flex-col items-start justify-between md:w-full md:gap-y-8 sm:gap-y-5">
-          <div className="mb-[30px] flex grow flex-col md:mb-0 md:w-full md:flex-row md:items-start md:justify-between">
+        <div className="flex flex-col items-start justify-between lg:w-full lg:flex-row sm:flex-col sm:gap-y-5">
+          <div className="mb-[30px] flex grow flex-col lg:mb-0 sm:w-full sm:flex-row sm:justify-between">
             <div className="flex grow flex-col items-start">
               <Link className="block" to="/">
                 <span className="sr-only">Neon</span>
@@ -44,7 +44,7 @@ const Footer = ({ isDocPage = false, theme = 'white' }) => {
               {isDocPage && <ThemeSelect className="mt-7 xl:mt-6 md:mt-3" />}
             </div>
           </div>
-          <div className="flex flex-col gap-y-3 text-[13px] leading-none tracking-extra-tight text-gray-new-40 lg:leading-tight">
+          <div className="flex flex-col gap-x-1 gap-y-3 text-[13px] leading-none tracking-extra-tight text-gray-new-40 lg:flex-row lg:self-end lg:leading-tight sm:flex-col sm:self-start">
             <p>Made in SF and the World</p>
             <p>
               <span className="lg:hidden">Copyright </span>Ⓒ 2022 – 2024 Neon, Inc.

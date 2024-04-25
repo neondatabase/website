@@ -20,7 +20,7 @@ const formatStars = (starsCount) => {
 const GithubStarCounter = ({ className = '', isThemeBlack = false, starsCount }) => (
   <Link
     className={clsx(
-      'flex items-center gap-x-1.5 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200',
+      'flex items-center gap-x-1.5 text-[13px] leading-none tracking-extra-tight transition-colors duration-200',
       className,
       isThemeBlack
         ? 'text-white hover:text-green-45'

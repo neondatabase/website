@@ -117,15 +117,19 @@ const ParallaxVocabulary = ({ className }) => {
   ITEMS[4].spring = useDynamicSpring(mouseX, mouseY, gRefs[4], svgRef, true);
   ITEMS[5].spring = useDynamicSpring(mouseX, mouseY, gRefs[5], svgRef);
 
-  const [activeIndexes, setActiveIndexes] = useState(() => {
-    const indexes = new Set();
-    while (indexes.size < 3) {
-      indexes.add(Math.floor(Math.random() * 6));
-    }
-    return Array.from(indexes);
-  });
+  const [activeIndexes, setActiveIndexes] = useState([]);
 
   const isHoveredElements = ITEMS.find(({ spring }) => spring.isActive);
+
+  useEffect(() => {
+    setActiveIndexes(() => {
+      const indexes = new Set();
+      while (indexes.size < 3) {
+        indexes.add(Math.floor(Math.random() * 6));
+      }
+      return Array.from(indexes);
+    });
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {

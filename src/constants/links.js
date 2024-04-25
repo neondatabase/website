@@ -44,6 +44,7 @@ export default {
   postgres: '/docs/postgres',
   demos: '/demos',
   autoscaling: '/docs/introduction/autoscaling',
+  docsBranching: '/docs/introduction/branching',
   onDemandStorage: '/docs/introduction/about#bottomless-storage',
   caseStudies: '/case-studies',
 };

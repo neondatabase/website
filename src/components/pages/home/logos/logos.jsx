@@ -43,9 +43,9 @@ const logos = [
 ];
 
 const Logos = () => (
-  <section className="safe-paddings mt-[176px] xl:mt-24 lg:mt-20 sm:mt-16">
+  <section className="safe-paddings mt-[176px] xl:mt-24 lg:mt-20 sm:mt-24">
     <Container
-      className="z-20 flex flex-wrap items-center gap-x-[111px] gap-y-6 xl:max-w-[960px] xl:gap-x-20 lg:justify-center lg:gap-x-[42px] md:items-start md:justify-between sm:flex-col"
+      className="z-20 flex flex-wrap items-center gap-x-[111px] gap-y-6 xl:max-w-[960px] xl:gap-x-20 lg:justify-center lg:gap-x-[42px] md:items-start sm:flex-col [@media(max-width:840px)]:justify-between"
       size="1100"
     >
       <h2 className="max-w-[401px] text-[36px] font-medium leading-dense tracking-extra-tight text-white xl:text-[32px] lg:max-w-xs lg:text-[26px] sm:text-[22px]">

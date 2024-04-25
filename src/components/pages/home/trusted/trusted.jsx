@@ -1,15 +1,18 @@
 import clsx from 'clsx';
 
 import Container from 'components/shared/container';
+import LINKS from 'constants/links';
+import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 import digitImage from 'images/pages/home/trusted/digit.jpg';
 import elephantImage from 'images/pages/home/trusted/elephant.jpg';
 import githubImage from 'images/pages/home/trusted/github.jpg';
+import socMdImage from 'images/pages/home/trusted/soc-md.jpg';
 import socImage from 'images/pages/home/trusted/soc.jpg';
 
 import Card from './card';
 
 const Trusted = () => (
-  <section className="trusted mt-[224px] xl:mt-[70px] lg:mt-[42px] sm:mt-20">
+  <section className="trusted mt-[224px] xl:mt-[70px] lg:mt-20">
     <Container className="xl:max-w-[864px]" size="1152">
       <h2
         className={clsx(
@@ -31,8 +34,12 @@ const Trusted = () => (
           borderClassName="border-linear border-image-home-trusted-github-card"
           bgClassName="inset-0 sm:top-auto sm:bottom-[-26%]"
           bgImage={githubImage}
+          to={LINKS.github}
         >
-          <strong className="mx-auto font-medium text-white">neondatabase/neon</strong>
+          <span className="mx-auto flex items-center font-medium text-white transition-colors duration-200 group-hover:text-green-45">
+            neondatabase/neon
+            <ArrowRightIcon className="-mb-px ml-1.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]" />
+          </span>
         </Card>
         <Card
           className="relative z-10 aspect-[321/303] lg:order-1 lg:aspect-[310/220] sm:aspect-[320/220]"
@@ -41,7 +48,7 @@ const Trusted = () => (
           bgImage={digitImage}
         >
           <strong className="font-medium text-white">Databases under management.</strong>{' '}
-          <span className="font-light">Reliable partner for everyone.</span>
+          <span className="font-light">Postgres for the World.</span>
         </Card>
         <Card
           className={clsx(
@@ -57,11 +64,16 @@ const Trusted = () => (
         </Card>
         <Card
           className="aspect-[192/247] lg:order-4 lg:aspect-[310/220] lg:justify-center sm:aspect-[320/220]"
-          borderClassName="border-linear border-image-home-trusted-soc-card"
+          borderClassName="border-linear border-image-home-trusted-soc-card lg:border-image-home-trusted-soc-card-md"
           bgClassName="top-[-43%] left-[-43%] w-[454px] xl:w-[342px] lg:inset-0 lg:w-full lg:h-full"
           bgImage={socImage}
+          mobileBgImage={socMdImage}
+          to="/blog/soc2-type2"
         >
-          <strong className="font-medium text-white">SOC2 Compliance</strong>
+          <span className="flex items-end font-medium text-white transition-colors duration-200 group-hover:text-green-45">
+            <span>SOC2 Compliance</span>
+            <ArrowRightIcon className="relative -left-5 -top-2 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px] xl:-left-1 xl:-top-1 lg:-top-1.5 lg:left-1.5 sm:-top-1" />
+          </span>
         </Card>
       </div>
     </Container>

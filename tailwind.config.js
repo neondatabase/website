@@ -151,7 +151,15 @@ module.exports = {
         'pricing-table-featured-column':
           'linear-gradient(180deg, rgba(19, 20, 21, 0.40) 92.77%, rgba(19, 20, 21, 0.00) 100%);',
         'home-lightning-title':
-          'radial-gradient(22.52% 105.36% at 59.98% 95.29%, #070707 8.6%, #525252 36.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
+          'radial-gradient(30.52% 57.36% at 67.98% 84.29%, #070707 8.6%, #525252 44.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
+        'home-lightning-title-xl':
+          'radial-gradient(15.52% 40% at 58.98% 87.29%, #070707 8.6%, #525252 39.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
+        'home-lightning-title-lg':
+          'radial-gradient(16% 47% at 64% 83.29%, #070707 7%, #525252 40.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
+        'home-lightning-title-md':
+          'radial-gradient(16% 40% at 72% 78.29%, #070707 7%, #525252 40.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
+        'home-lightning-title-sm':
+          'radial-gradient(26.52% 69.36% at 261px 80%, #070707 8.6%, #525252 39.72%, #A7A7A7 73.37%, #FFFFFF 100%)',
         'home-bento-regions-border':
           'radial-gradient(42.03% 56.98% at 0% 100%, #847A9D 0%, rgba(132, 122, 157, 0) 89.37%),' +
           'radial-gradient(20.73% 29.17% at 24.37% 100%, #545C8D 0%, rgba(84, 92, 141, 0) 89.37%),' +
@@ -180,6 +188,10 @@ module.exports = {
           'radial-gradient(21.81% 24.47% at 1.09% 1.16%, #FFFFFF 0%, rgba(255, 255, 255, 0) 63.02%)',
         'home-trusted-soc-card':
           'radial-gradient(46.96% 46.96% at 0% 3.24%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
+          'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
+          'linear-gradient(0deg, #141416, #141416)',
+        'home-trusted-soc-card-md':
+          'radial-gradient(18.96% 17.96% at 13% -1%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
           'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
           'linear-gradient(0deg, #141416, #141416)',
       }),

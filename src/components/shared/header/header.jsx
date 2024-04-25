@@ -12,6 +12,8 @@ import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import ArrowIcon from 'icons/header/arrow-right.inline.svg';
 
+import HeaderWrapper from './header-wrapper';
+
 const GithubStarCounter = dynamic(() => import('components/shared/github-star-counter'));
 
 const GITHUB_STARS_ENDPOINT = '/api/github-stars';
@@ -47,16 +49,13 @@ const Header = async ({
 
   return (
     <>
-      <header
-        className={clsx(
-          'safe-paddings left-0 right-0 top-0 z-40 h-16 w-full dark:bg-black-pure',
-          isSticky ? 'sticky md:relative' : 'absolute lg:relative',
-          isThemeBlack ? 'bg-black-pure' : 'bg-white',
-          withBorder && 'border-b border-gray-new-94 dark:border-gray-new-10',
-          className
-        )}
+      <HeaderWrapper
+        className={className}
+        isSticky={isSticky}
+        isThemeBlack={isThemeBlack}
+        withBorder={withBorder}
       >
-        <Container className="flex items-center justify-between py-4 md:!px-5" size="1344">
+        <Container className="z-10 flex items-center justify-between md:!px-5" size="1344">
           <div className="flex items-center gap-x-[90px] xl:gap-x-16">
             <Link to="/">
               <span className="sr-only">Neon</span>
@@ -182,7 +181,7 @@ const Header = async ({
               <GithubStarCounter isThemeBlack={isThemeBlack} starsCount={starsCount} />
             )}
             <Link
-              className="text-[13px] font-semibold leading-none tracking-extra-tight lg:hidden"
+              className="text-[13px] leading-none tracking-extra-tight lg:hidden"
               to={LINKS.login}
               theme={isThemeBlack ? 'white' : 'black'}
             >
@@ -198,7 +197,7 @@ const Header = async ({
             </Button>
           </div>
         </Container>
-      </header>
+      </HeaderWrapper>
       <MobileMenu isThemeBlack={isThemeBlack} isBlogPage={isBlogPage} isDocPage={isDocPage} />
     </>
   );
