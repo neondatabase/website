@@ -1,9 +1,9 @@
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import GithubStarCounter from 'components/shared/github-star-counter';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
@@ -14,7 +14,29 @@ import ArrowIcon from 'icons/header/arrow-right.inline.svg';
 
 import HeaderWrapper from './header-wrapper';
 
-const Header = ({
+const GithubStarCounter = dynamic(() => import('components/shared/github-star-counter'));
+
+const GITHUB_STARS_ENDPOINT = '/api/github-stars';
+
+const getGithubStars = async () => {
+  const baseUrl = process.env.VERCEL_BRANCH_URL
+    ? `https://${process.env.VERCEL_BRANCH_URL}`
+    : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+
+  const response = await fetch(`${baseUrl}${GITHUB_STARS_ENDPOINT}`, {
+    next: { revalidate: 60 * 60 * 12 },
+  });
+
+  if (response.ok) {
+    const json = await response.json();
+
+    return json.starsCount;
+  }
+
+  return null;
+};
+
+const Header = async ({
   className = null,
   theme = 'black-pure',
   isSticky = false,
@@ -23,6 +45,7 @@ const Header = ({
   withBorder = false,
 }) => {
   const isThemeBlack = theme === 'black-pure';
+  const starsCount = await getGithubStars();
 
   return (
     <>
@@ -154,7 +177,9 @@ const Header = ({
           </div>
 
           <div className="flex items-center gap-x-6 lg:hidden lg:pr-12">
-            <GithubStarCounter isThemeBlack={isThemeBlack} />
+            {!!starsCount && (
+              <GithubStarCounter isThemeBlack={isThemeBlack} starsCount={starsCount} />
+            )}
             <Link
               className="text-[13px] leading-none tracking-extra-tight lg:hidden"
               to={LINKS.login}

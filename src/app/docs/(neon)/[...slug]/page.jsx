@@ -49,18 +49,15 @@ export async function generateMetadata({ params }) {
 
   const isChangelog = currentSlug === 'changelog';
 
-  if (!post) return notFound();
+  if (!isChangelog && !post) return notFound();
 
-  const {
-    data: { title },
-    excerpt,
-  } = post;
+  const title = post?.data?.title || 'Changelog';
 
   const encodedTitle = Buffer.from(title).toString('base64');
 
   return getMetadata({
     title: `${title} - Neon Docs`,
-    description: isChangelog ? 'The latest product updates from Neon' : excerpt,
+    description: isChangelog ? 'The latest product updates from Neon' : post.excerpt,
     imagePath:
       title.length < MAX_TITLE_LENGTH
         ? `${VERCEL_URL}/docs/og?title=${encodedTitle}`
@@ -88,9 +85,26 @@ const DocPost = async ({ params }) => {
     ? process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH
     : `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;
 
-  if (!getPostBySlug(currentSlug, DOCS_DIR_PATH)) return notFound();
+  const post = getPostBySlug(currentSlug, DOCS_DIR_PATH);
+  if (!isChangelogIndex && !post) return notFound();
 
-  const { data, content } = getPostBySlug(currentSlug, DOCS_DIR_PATH);
+  if (isChangelogIndex) {
+    return (
+      <Post
+        data={{}}
+        content={{}}
+        breadcrumbs={[]}
+        currentSlug={currentSlug}
+        fileOriginPath={fileOriginPath}
+        changelogPosts={allChangelogPosts}
+        navigationLinks={navigationLinks}
+        changelogActiveLabel="all"
+        isChangelog
+      />
+    );
+  }
+
+  const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
 
   const jsonLd = {
@@ -114,11 +128,8 @@ const DocPost = async ({ params }) => {
         data={data}
         breadcrumbs={breadcrumbs}
         navigationLinks={navigationLinks}
-        isChangelog={isChangelogIndex}
-        changelogActiveLabel="all"
         currentSlug={currentSlug}
         fileOriginPath={fileOriginPath}
-        changelogPosts={allChangelogPosts}
         tableOfContents={tableOfContents}
       />
     </>
