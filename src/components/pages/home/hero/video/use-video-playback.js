@@ -13,7 +13,7 @@ const useVideoPlayback = (
 ) => {
   const [isTitleVisible, setIsTitleVisible] = useState(true);
   const [visibilityRef, isInView] = useInView({
-    threshold: 0.8,
+    threshold: 0.6,
   });
 
   const updateProgress = useCallback(
