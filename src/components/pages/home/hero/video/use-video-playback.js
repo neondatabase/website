@@ -92,13 +92,13 @@ const useVideoPlayback = (
       if (initialVideoPlayback) {
         video.addEventListener('loadedmetadata', handleInitialVideoPlay(video));
       } else {
-        video.currentTime = 0;
         video.play();
         setIsTitleVisible(false);
         setActiveVideoIndex();
       }
     } else {
       video.pause();
+      video.currentTime = 0;
       setIsTitleVisible(true);
     }
 
