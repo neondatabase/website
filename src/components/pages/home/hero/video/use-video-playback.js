@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-let titleVisible;
-
 // TODO: revise and optimize logic
 const useVideoPlayback = (
   videoRef,
@@ -72,21 +70,6 @@ const useVideoPlayback = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoRef, isInView, isActive, isMobile, switchVideo]);
 
-  // Needed to catch the end of the video when it loops and show the title again
-  const handleChangeVisibilityTitle = useCallback(
-    (video) => () => {
-      if (video.currentTime >= video.duration - 1.5) {
-        titleVisible = true;
-        return setIsTitleVisible(true);
-      }
-      if (titleVisible) {
-        titleVisible = false;
-        return setIsTitleVisible(false);
-      }
-    },
-    []
-  );
-
   const handleMobileVideoPlayback = useCallback(() => {
     const video = videoRef.current;
 
@@ -108,11 +91,8 @@ const useVideoPlayback = (
       setIsTitleVisible(true);
     }
 
-    video.addEventListener('timeupdate', handleChangeVisibilityTitle(video));
-
     return () => {
       video.removeEventListener('loadedmetadata', handleInitialVideoPlay(video));
-      video.removeEventListener('timeupdate', handleChangeVisibilityTitle(video));
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoRef, isInView, isMobile, initialVideoPlayback]);
