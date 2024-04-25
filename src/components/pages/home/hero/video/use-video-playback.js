@@ -102,7 +102,7 @@ const useVideoPlayback = (
       setIsTitleVisible(true);
     }
 
-    video.addEventListener('ended', handleChangeVisibilityTitle(video));
+    video.addEventListener('timeupdate', handleChangeVisibilityTitle(video));
 
     return () => {
       video.removeEventListener('loadedmetadata', handleInitialVideoPlay(video));
