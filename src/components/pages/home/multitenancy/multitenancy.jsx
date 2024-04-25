@@ -28,7 +28,7 @@ const Multitenancy = () => (
       className="relative z-10 mt-14 xl:mt-[50px] xl:max-w-[704px] lg:mt-[42px] lg:pl-24 md:mt-11 sm:mt-[22px]"
       size="960"
     >
-      <p className="max-w-[608px] text-xl leading-snug tracking-extra-tight text-gray-new-50 xl:max-w-xl xl:text-lg lg:max-w-[480px] lg:text-sm sm:text-base">
+      <p className="max-w-[608px] text-xl leading-snug tracking-extra-tight text-gray-new-50 xl:max-w-xl xl:text-lg lg:max-w-[480px] lg:text-base">
         Use the Neon API to deploy{` `}
         <span className="font-medium text-white">database-per-tenant architectures</span>. Scale to
         fleets of thousands of databases without touching a server. Rest easy knowing scale to zero

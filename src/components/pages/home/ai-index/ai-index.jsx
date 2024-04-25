@@ -18,7 +18,7 @@ const AiIndex = () => (
       <div className="mt-7 max-w-sm self-end xl:mt-6 xl:max-w-xs lg:mt-4 lg:max-w-[256px] md:mt-3.5 md:max-w-md md:self-start">
         <p className="text-lg font-light leading-tight tracking-extra-tight text-gray-new-70 xl:text-base lg:text-sm md:text-base">
           <span className="font-medium text-gray-new-94">The HNSW index algorithm</span> streamlines
-          performance, making high-dimensional vector search remarkably efficient.
+          performance, making high-dimensional vector&nbsp;search&nbsp;remarkably efficient.
         </p>
         {/* TODO: set link  */}
         <Link

@@ -43,7 +43,7 @@ const Lightning = () => (
         connectivity for both serverless and edge environments, utilizing HTTP.
       </p>
       <Link
-        className="relative z-10 ml-32 mt-[22px] flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] xl:ml-24 lg:ml-8 sm:ml-0"
+        className="relative z-10 ml-32 mt-[22px] flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] xl:ml-24 lg:ml-8 sm:ml-0 sm:mt-3.5"
         to="/docs/serverless/serverless-driver"
         theme="white"
         withArrow
