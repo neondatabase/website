@@ -72,7 +72,7 @@ const useVideoPlayback = (
   // Needed to catch the end of the video when it loops and show the title again
   const handleChangeVisibilityTitle = useCallback(
     (video) => () => {
-      if (video.currentTime >= video.duration - 1) {
+      if (video.currentTime >= video.duration - 1.5) {
         return setIsTitleVisible(true);
       }
 
