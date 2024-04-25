@@ -7,7 +7,11 @@ import { getAboutPage } from 'utils/api-pages';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
-export default async function StaticPage() {
+export const viewport = {
+  themeColor: '#ffffff',
+};
+
+const AboutUsPage = async () => {
   const page = await getAboutPage();
 
   if (!page) return notFound();
@@ -24,7 +28,7 @@ export default async function StaticPage() {
   );
 
   return <Layout headerTheme="white">{contentWithLazyBlocks}</Layout>;
-}
+};
 
 export async function generateMetadata() {
   const page = await getAboutPage();
@@ -54,3 +58,5 @@ export async function generateMetadata() {
 }
 
 export const revalidate = 60;
+
+export default AboutUsPage;

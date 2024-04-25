@@ -5,6 +5,10 @@ import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata({ ...SEO_DATA.thankYou, robotsNoindex: 'noindex' });
 
+export const viewport = {
+  themeColor: '#ffffff',
+};
+
 const ThankYouPage = () => (
   <Layout headerTheme="white">
     <Hero />

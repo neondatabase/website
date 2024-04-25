@@ -7,6 +7,10 @@ import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.pingThing);
 
+export const viewport = {
+  themeColor: '#ffffff',
+};
+
 const PingThingPage = () => (
   <Layout headerTheme="white">
     <div>Ping Thing</div>

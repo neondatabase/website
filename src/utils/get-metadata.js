@@ -36,11 +36,6 @@ export default function getMetadata({
     metadataBase: new URL(SITE_URL),
     title: metaTitle,
     description: metaDescription,
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
-      viewportFit: 'cover',
-    },
     alternates: {
       canonical: isPostgres
         ? `https://www.postgresql.org/docs/16/${currentSlug}.html`
@@ -52,7 +47,6 @@ export default function getMetadata({
     manifest: `${SITE_URL}/manifest.json`,
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots,
-    themeColor: '#0B0C0F',
     icons: {
       icon: '/favicon/favicon.png',
       apple: [
