@@ -212,7 +212,7 @@ const MobileMenu = ({ isThemeBlack, isBlogPage = false, isDocPage = false }) => 
                 >
                   <Button
                     className={clsx(
-                      'h-11 items-center justify-center !font-semibold tracking-tight dark:!border-gray-new-15 dark:!text-white',
+                      'h-11 items-center justify-center text-[15px] !font-semibold tracking-tight dark:!border-gray-new-15 dark:!text-white',
                       !isThemeBlack && '!border-gray-new-90 !text-black-new'
                     )}
                     to={LINKS.login}
@@ -221,7 +221,7 @@ const MobileMenu = ({ isThemeBlack, isBlogPage = false, isDocPage = false }) => 
                     Log In
                   </Button>
                   <Button
-                    className="h-11 items-center !font-semibold tracking-tight"
+                    className="h-11 items-center text-[15px] !font-semibold tracking-tight"
                     to={LINKS.signup}
                     theme="primary"
                   >
