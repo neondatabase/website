@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import MobileNav from 'components/pages/doc/mobile-nav';
 import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';

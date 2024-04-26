@@ -38,6 +38,9 @@
   .DocSearch-SearchBar {
     @apply flex border-b border-gray-new-90 px-2 py-2 dark:border-gray-new-20;
   }
+  .DocSearch-VisuallyHiddenForAccessibility {
+    @apply sr-only;
+  }
 
   .DocSearch-Dropdown {
     @apply h-[calc(100vh-160px)] max-h-[450px] overflow-y-scroll;

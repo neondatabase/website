@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
