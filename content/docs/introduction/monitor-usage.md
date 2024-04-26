@@ -35,6 +35,8 @@ Usage metrics on the **Billing page** include:
 - **Projects**: Number of projects currently active in your account. The displayed value reflects your current usage, including any extra projects that have been automatically added as a result of exceeding your plan's allowances. 
 - **Branches** (Free Tier only) Number of database branches currently active in your account. On The Free Tier, there is a 10-branch allowance.
 
+The peak usage triangle indicates the highest usage level reached for that metric during the current billing period. Extra charges are automatically applied based on the number of additional units needed to cover your excess usage, prorated from the date the excess was allocated.
+
 ![Monitor billing and usage](/docs/introduction/monitor_billing_usage.png)
 
 #### Interpreting usage metrics
