@@ -265,6 +265,16 @@
       "scale": "Up to 30 days",
       "enterprise": "Unlimited"
     },
+        {
+      "rows": "1",
+      "feature": {
+        "title": "Monitoring"
+      },
+      "free": "Up to 24 hours",
+      "launch": "Up to 7 days",
+      "scale": "Up to 7 days",
+      "enterprise": "Custom"
+    },
     {
       "rows": "1",
       "feature": {

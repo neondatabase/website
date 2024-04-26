@@ -211,10 +211,12 @@ const Hero = () => {
                     }
                   }}
                 >
-                  {isScalePlan && (
+                  {(isScalePlan || type === 'Launch') && (
                     <a
                       className="group/aws absolute right-[18px] top-5 flex items-center gap-x-2"
-                      href="https://aws.amazon.com/marketplace/saas/ordering?productId=prod-ro32fhzkkg7ya&offerId=offer-czr2a3vwvrtik"
+                      href="https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       <span className="border-b border-gray-new-40 pb-0.5 text-sm font-light leading-none tracking-extra-tight text-gray-new-70 opacity-90 transition-colors duration-200 group-hover/aws:border-transparent group-hover/aws:text-gray-new-80">
                         Pay via marketplace
