@@ -77,7 +77,7 @@
   }
 
   inkeep-portal {
-    @apply relative z-50 animate-inkeep-portal-fade-in opacity-0;
+    @apply relative z-50;
   }
 
   [data-docsearch-fixed] {

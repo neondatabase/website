@@ -107,7 +107,12 @@ const getAllChangelogPosts = async () => {
       const post = getPostBySlug(slug, CHANGELOG_DIR_PATH);
       const { data, content } = post;
 
-      return { slug: slug.replace('/', ''), isDraft: data?.isDraft, content };
+      return {
+        slug: slug.replace('/', ''),
+        isDraft: data?.isDraft,
+        content,
+        redirectFrom: data?.redirectFrom,
+      };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };

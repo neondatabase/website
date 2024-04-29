@@ -358,9 +358,17 @@ A feature that allows you to share Neon projects with other Neon users. See [Sha
 
 The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Storage](/docs/introduction/usage-metrics#storage).
 
+## Prorate
+
+Adjusting a payment or charge so it corresponds to the actual usage or time period involved, rather than charging a full amount. Neon prorates the cost for extra units of storage when you exceed your plan's allowance. For example, if you purchase an extra unit of storage halfway through the monthly billing period, you are only charged half the unit price.
+
 ## Proxy
 
 A Neon component that functions as a multitenant service that accepts and handles connections from clients that use the Postgres protocol.
+
+## Protected branch
+
+A status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan. For information about how to configure a protected branch, refer to the [Protected branches guide](/docs/guides/protected-branches).
 
 ## Publisher
 
@@ -436,9 +444,9 @@ Represents the downstream side of logical replication, establishing a connection
 
 A Neon Control Plane operation that suspends a compute endpoint after a period of inactivity. See [Operations](/docs/manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](/docs/introduction/compute-lifecycle).
 
-## Technical Preview
+## Technical preview
 
-Neon is currently in Technical Preview, meaning that some intended core functionalities are still being developed or perfected. Please refer to the [Neon roadmap](/docs/introduction/roadmap) for more information.
+An early version of a feature or changes released for testing and feedback purposes.
 
 ## Token
 

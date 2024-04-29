@@ -125,7 +125,7 @@ const InkeepTrigger = ({ className, isSidebar }) => {
           </h3>
         </div>
       </button>
-      {isOpen && <InkeepCustomTrigger {...inkeepCustomTriggerProps} />}
+      <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
     </>
   );
 };

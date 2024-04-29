@@ -7,6 +7,10 @@
       @apply mt-0;
     }
 
+    p {
+      @apply my-3;
+    }
+
     p:last-child {
       @apply mb-0;
     }

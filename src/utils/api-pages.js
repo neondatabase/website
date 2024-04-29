@@ -17,6 +17,24 @@ const PAGE_SEO_FRAGMENT = gql`
   }
 `;
 
+const getLandingPages = async () => {
+  const allLandingPagesQuery = gql`
+    {
+      pages {
+        nodes {
+          slug
+          template {
+            templateName
+          }
+        }
+      }
+    }
+  `;
+  const data = await graphQLClient.request(allLandingPagesQuery);
+
+  return data?.pages.nodes.filter((node) => node.template.templateName === 'Landing');
+};
+
 const getStaticPages = async () => {
   const allStaticPagesQuery = gql`
     {
@@ -35,18 +53,21 @@ const getStaticPages = async () => {
   return data?.pages.nodes.filter((node) => node.template.templateName === 'Static');
 };
 
-const getStaticPageBySlug = async (slug) => {
-  const staticPageBySlugQuery = gql`
-    query staticPage($slug: ID!) {
+const getWpPageBySlug = async (slug) => {
+  const wpPageBySlugQuery = gql`
+    query wpPage($slug: ID!) {
       page(id: $slug, idType: URI) {
         content(format: RENDERED)
         title(format: RENDERED)
+        template {
+          templateName
+        }
         ...wpPageSeo
       }
     }
     ${PAGE_SEO_FRAGMENT}
   `;
-  const data = await graphQLClient.request(staticPageBySlugQuery, { slug });
+  const data = await graphQLClient.request(wpPageBySlugQuery, { slug });
 
   return data?.page;
 };
@@ -66,4 +87,4 @@ const getAboutPage = async () => {
   return data?.page;
 };
 
-export { getStaticPages, getStaticPageBySlug, getAboutPage };
+export { getLandingPages, getStaticPages, getWpPageBySlug, getAboutPage };

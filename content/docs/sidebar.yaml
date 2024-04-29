@@ -29,19 +29,23 @@
           slug: introduction/ip-allow
     - title: Regions
       slug: introduction/regions
-    - title: Billing
+    - title: Plans and billing
       slug: introduction/about-billing
       items:
         - title: Plans
           slug: introduction/plans
-        - title: How billing works
-          slug: introduction/how-billing-works
+        - title: Pricing estimation guide
+          slug: introduction/pricing-estimation-guide
+        - title: Extra usage
+          slug: introduction/extra-usage
         - title: Usage metrics
           slug: introduction/usage-metrics
+        - title: Sample project billing
+          slug: introduction/billing-sample
+        - title: Monitor billing and usage
+          slug: introduction/monitor-usage
         - title: Manage billing
           slug: introduction/manage-billing
-        - title: Sample billing
-          slug: introduction/billing-sample
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
     - title: Support
@@ -50,6 +54,11 @@
       slug: introduction/status
     - title: Monitoring
       slug: introduction/monitoring
+      items:
+        - title: Monitoring dashboard
+          slug: introduction/monitoring-page
+        - title: External tools
+          slug: introduction/monitor-external-tools
 - title: Get started
   items:
     - title: Sign up
@@ -99,6 +108,8 @@
       slug: manage/integrations
     - title: Operations
       slug: manage/operations
+    - title: Organizations
+      slug: manage/organizations
     - title: Access
       items:
         - title: Project access
@@ -125,16 +136,18 @@
         - title: Branching
           slug: guides/branching-intro
           items:
+            - title: Reset from parent
+              slug: guides/reset-from-parent
             - title: Branch Restore
               slug: guides/branch-restore
-            - title: Branching — Testing queries
-              slug: guides/branching-test-queries
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
             - title: Branching with the API
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
+            - title: Branching — Testing queries
+              slug: guides/branching-test-queries
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
         - title: Logical replication
@@ -142,6 +155,8 @@
           items:
             - title: Airbyte
               slug: guides/logical-replication-airbyte
+            - title: ClickHouse (DoubleCloud)
+              slug: guides/logical-replication-clickhouse
             - title: Fivetran
               slug: guides/logical-replication-fivetran
             - title: Kafka (Confluent)
@@ -160,6 +175,18 @@
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
               slug: guides/read-replica-prisma
+        - title: Time Travel
+          slug: guides/time-travel-assist
+          items:
+            - title: Time Travel tutorial
+              slug: guides/time-travel-tutorial
+        - title: Schema diff
+          slug: guides/schema-diff
+          items:
+            - title: Schema diff tutorial
+              slug: guides/schema-diff-tutorial
+        - title: Protected branches
+          slug: guides/protected-branches
     - title: Frameworks
       items:
         - title: Astro
@@ -217,6 +244,8 @@
           slug: guides/grafbase
         - title: Hasura
           slug: guides/hasura
+        - title: Sequin
+          slug: guides/sequin
         - title: StepZen
           slug: guides/stepzen
         - title: WunderGraph
@@ -295,6 +324,14 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
+    - title: Authentication
+      items:
+        - title: Auth0
+          slug: guides/auth-auth0
+        - title: Clerk
+          slug: guides/auth-clerk
+        - title: Okta
+          slug: guides/auth-okta
     - title: For Partners
       slug: guides/partner-intro
       items:
@@ -354,7 +391,7 @@
         - title: pgvector
           slug: extensions/pgvector
         - title: pg_partman
-          slug: extensions/pg_partman     
+          slug: extensions/pg_partman
         - title: pg_prewarm
           slug: extensions/pg_prewarm
         - title: pg_stat_statements
