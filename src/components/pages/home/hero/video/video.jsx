@@ -49,18 +49,16 @@ const Video = forwardRef(
 
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-      <div
-        className={clsx(
-          'group cursor-pointer',
-          {
-            'pointer-events-none cursor-default': isActive || isMobile,
-          },
-          className
-        )}
-        ref={visibilityRef}
-        onClick={!isMobile ? switchVideo : undefined}
-      >
-        <div className="relative rounded-2xl bg-[linear-gradient(180deg,#111313_51.48%,#050505_100%)] p-1.5 shadow-[-2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,0px_2px_2px_0px_rgba(0,0,0,0.30)_inset,0px_1.4px_0px_0px_rgba(255,255,255,0.03)]">
+      <div className={clsx(className)} ref={visibilityRef}>
+        <div
+          className={clsx(
+            'group relative cursor-pointer rounded-2xl bg-[linear-gradient(180deg,#111313_51.48%,#050505_100%)] p-1.5 shadow-[-2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,2px_0px_2px_0px_rgba(0,0,0,0.25)_inset,0px_2px_2px_0px_rgba(0,0,0,0.30)_inset,0px_1.4px_0px_0px_rgba(255,255,255,0.03)]',
+            {
+              'pointer-events-none cursor-default': isActive || isMobile,
+            }
+          )}
+          onClick={!isMobile ? switchVideo : undefined}
+        >
           <div
             className={clsx(
               'relative h-[466px] overflow-hidden rounded-[10px] group-hover:after:opacity-0 2xl:h-[430px] xl:h-[403px] lg:h-[340px] md:h-[317px] sm:h-auto sm:after:hidden',
@@ -134,10 +132,7 @@ const Video = forwardRef(
             {description}
           </p>
           <Link
-            className={clsx(
-              'mt-2.5 flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em]',
-              isActive ? 'pointer-events-auto' : 'pointer-events-none'
-            )}
+            className="mt-2.5 flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em]"
             to={linkUrl}
             theme="white"
             withArrow
