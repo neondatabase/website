@@ -1,32 +1,15 @@
-import AiIndex from 'components/pages/home/ai-index';
-import Bento from 'components/pages/home/bento';
-import GetStarted from 'components/pages/home/get-started';
-import Hero from 'components/pages/home/hero/hero';
-import Industry from 'components/pages/home/industry';
-import Lightning from 'components/pages/home/lightning';
-import Logos from 'components/pages/home/logos';
-import Multitenancy from 'components/pages/home/multitenancy';
-import Trusted from 'components/pages/home/trusted';
 import Layout from 'components/shared/layout';
 
-const HomeLayout = () => (
+// eslint-disable-next-line react/prop-types
+const HomeLayout = ({ children }) => (
   <Layout
     className="bg-black-pure"
     headerClassName="!bg-transparent lg:!absolute"
     headerTheme="black-pure"
     footerTheme="black-pure"
     withOverflowHidden
-    isNewDesign
   >
-    <Hero />
-    <Logos />
-    <Lightning />
-    <Bento />
-    <AiIndex />
-    <Multitenancy />
-    <Industry />
-    <Trusted />
-    <GetStarted />
+    {children}
   </Layout>
 );
 
