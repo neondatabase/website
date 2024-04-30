@@ -184,7 +184,7 @@ const ParallaxVocabulary = ({ className }) => {
                     'text-xl font-medium uppercase transition-[opacity,colors,filter] duration-[500ms] sm:text-[21px]',
                     isActive ? 'text-gray-8' : 'text-[#CCC6EC] opacity-80 blur-[2px]'
                   )}
-                  animate={defaultAnimation}
+                  animate={!isActive || !spring.isActive ? defaultAnimation : undefined}
                   x={x}
                   y={y}
                   fill="currentColor"
