@@ -23,16 +23,41 @@ const statusData = {
 };
 
 const fetchStatus = async () => {
-  const res = await fetch('https://neonstatus.com/api/v1/summary');
-  const data = await res.json();
+  try {
+    const res = await fetch('https://neonstatus.com/api/v1/summary');
+    if (!res.ok) {
+      throw new Error(`Neonstatus response was not ok: ${res.status}`);
+    }
 
-  if (data.ongoing_incidents.length > 0) {
+    const data = await res.json();
+
+    if (!data?.subpages) {
+      return 'HASISSUES';
+    }
+
+    const ongoingIncidents = [];
+    const inProgressMaintenances = [];
+
+    data.subpages.forEach((subpage) => {
+      if (subpage.summary.ongoing_incidents.length > 0) {
+        ongoingIncidents.push(...subpage.summary.ongoing_incidents);
+      }
+      if (subpage.summary.in_progress_maintenances.length > 0) {
+        inProgressMaintenances.push(...subpage.summary.in_progress_maintenances);
+      }
+    });
+
+    if (ongoingIncidents.length > 0) {
+      return 'HASISSUES';
+    }
+    if (inProgressMaintenances.length > 0) {
+      return 'UNDERMAINTENANCE';
+    }
+    return 'UP';
+  } catch (error) {
+    console.error('Error fetching or processing data:', error);
     return 'HASISSUES';
   }
-  if (data.in_progress_maintenances.length > 0) {
-    return 'UNDERMAINTENANCE';
-  }
-  return 'UP';
 };
 
 const StatusBadge = ({ isDocPage = false, isDarkTheme = true }) => {

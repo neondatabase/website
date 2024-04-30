@@ -1,9 +1,10 @@
 import clsx from 'clsx';
-import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
+import { Suspense } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import GithubStarCounter from 'components/shared/github-star-counter';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
@@ -14,26 +15,15 @@ import ArrowIcon from 'icons/header/arrow-right.inline.svg';
 
 import HeaderWrapper from './header-wrapper';
 
-const GithubStarCounter = dynamic(() => import('components/shared/github-star-counter'));
-
-const GITHUB_STARS_ENDPOINT = '/api/github-stars';
+const API_URL = 'https://api.github.com/repos/neondatabase/neon';
 
 const getGithubStars = async () => {
-  const baseUrl = process.env.VERCEL_BRANCH_URL
-    ? `https://${process.env.VERCEL_BRANCH_URL}`
-    : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
-
-  const response = await fetch(`${baseUrl}${GITHUB_STARS_ENDPOINT}`, {
-    next: { revalidate: 60 * 60 * 12 },
-  });
-
-  if (response.ok) {
-    const json = await response.json();
-
-    return json.starsCount;
+  const response = await fetch(API_URL, { next: { revalidate: 60 * 60 * 12 } });
+  const json = await response.json();
+  if (response.status >= 400) {
+    throw new Error('Error fetching GitHub stars');
   }
-
-  return null;
+  return json.stargazers_count;
 };
 
 const Header = async ({
@@ -177,9 +167,9 @@ const Header = async ({
           </div>
 
           <div className="flex items-center gap-x-6 lg:hidden lg:pr-12">
-            {!!starsCount && (
+            <Suspense>
               <GithubStarCounter isThemeBlack={isThemeBlack} starsCount={starsCount} />
-            )}
+            </Suspense>
             <Link
               className="text-[13px] leading-none tracking-extra-tight lg:hidden"
               to={LINKS.login}
