@@ -7,12 +7,17 @@ enableTableOfContents: true
 Organizations let you work with your Neon projects as a team. By creating an organization, you can bring together Members and Guests, manage permissions, and organize all of your team's projects under a single umbrella.
 
 <Admonition type="comingSoon" title="Feature Coming Soon">
-Available in **private preview** for existing paid accounts by request only. To start using the Organizations feature, [request access](#request-access-to-the-private-preview) and we'll help you get set up.
+Available in **private preview** for existing **paid accounts only**. To start using the Organizations feature, [request access](#request-access-to-the-private-preview) and we'll help you get set up.
 </Admonition>
 
 ## What are Organizations in Neon?
 
-Organizations are a type of paid account in Neon, separate from your personal account. Any Neon user can create an organization &#8212; or get invited to one or more organizations &#8212; as a way of sharing projects across the various Members that make up your teams. Whether you create an organization or are invited to join, you maintain your personal account, which allows you to manage personal projects independent of any organizations you belong to.
+There are two account types available in Neon:
+
+- **Personal account**
+- **Organization account**
+
+Any Neon user with a **paid personal account** can request an Organization account, which allows for sharing projects across the various members that make up your team. Whether you create an organization or are invited to join one, you will retain your personal account, letting you manage personal projects independently of any organizations you belong to.
 
 From the Neon Console, you can navigate to your Organization dashboard, where you'll find all projects in the organization and various user management actions that you can take as the Admin.
 
@@ -28,7 +33,7 @@ Within each organization are three types of users:
 
 ## Request access to the private preview
 
-During the private preview, you cannot directly create your own organization. Here’s how you can request a new Organization and what to expect:
+During the private preview, direct creation of your own organization is not available. This feature is exclusively available to users with **paid Neon accounts**. Here’s how you can request a new Organization and what to expect:
 
 ### How to Request Access
 
@@ -122,7 +127,7 @@ Members have different capabilities based on their roles:
 
 ### Billing
 
-During the private preview, a new organization account is created with the same pricing plan as your current paid personal account. Following the conversion, your personal account will switch to the Free Tier, letting you manage any new personal projects separately.
+On creating an organization, your existing paid plan (Launch, Scale, or Enterprise) will be transferred to the new organization account. Following the conversion, your personal account will switch to the Free Tier, letting you manage any new personal projects separately.
 
 As the Admin for the organization account:
 
@@ -134,7 +139,7 @@ For detailed information on pricing and plans, refer to [Neon plans](/docs/intro
 
 ## Feature limitations
 
-As we continue to refine our Organizations feature during this private preview phase, there are some temporary limitations you should be aware of:
+As we continue to refine our Organizations feature during this private preview phase, please remember that these features are only available under paid account plans. Here are some temporary limitations you should be aware of:
 
 - **Integration limitations** — You cannot install new Vercel integrations on organization-owned projects. However, existing integrations will continue to work on projects transferred from personal to the organization account.
 - **Connection restrictions** — Passwordless connect is not available for organization-owned projects. Users must use standard authentication methods.
