@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import akqaIcon from 'icons/home/logos/akqa.svg';
@@ -54,12 +53,13 @@ const Logos = () => (
       <ul className="grid max-w-[446px] shrink grid-cols-[0.7945fr_1fr_.630137fr] justify-between gap-12 xl:gap-x-12 xl:gap-y-10 lg:gap-x-8 lg:gap-y-7 sm:gap-y-5">
         {logos.map(({ logo, width, alt }, index) => (
           <li className={clsx('flex', index !== 0 && index !== 3 && 'justify-center')} key={index}>
-            <Image
+            <img
               className="h-7 w-auto xl:h-6 lg:h-5"
               src={logo}
               height={28}
               width={width}
               alt={alt}
+              loading="lazy"
             />
           </li>
         ))}

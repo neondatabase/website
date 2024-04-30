@@ -34,7 +34,7 @@ const Footer = ({ isDocPage = false, theme = 'white' }) => {
               <Link className="block" to="/">
                 <span className="sr-only">Neon</span>
                 <Logo
-                  className="h-8 lg:h-7 sm:h-[26px]"
+                  className="h-8 w-[116px] lg:h-7 lg:w-auto sm:h-[26px]"
                   isThemeBlack={isDarkTheme}
                   width={116}
                   height={32}

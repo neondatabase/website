@@ -8,7 +8,7 @@ import logoWhite from 'images/logo-white.svg';
 const Logo = ({ className = null, isThemeBlack, width, height, priority = undefined }) =>
   isThemeBlack ? (
     <Image
-      className={clsx('w-auto', className)}
+      className={clsx(className)}
       src={logoWhite}
       alt=""
       width={width}
@@ -19,7 +19,7 @@ const Logo = ({ className = null, isThemeBlack, width, height, priority = undefi
   ) : (
     <>
       <Image
-        className={clsx('w-auto dark:hidden', className)}
+        className={clsx('dark:hidden', className)}
         src={logoBlack}
         alt=""
         width={width}
@@ -28,7 +28,7 @@ const Logo = ({ className = null, isThemeBlack, width, height, priority = undefi
         aria-hidden
       />
       <Image
-        className={clsx('hidden w-auto dark:block', className)}
+        className={clsx('hidden dark:block', className)}
         src={logoWhite}
         alt=""
         width={width}
