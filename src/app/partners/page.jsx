@@ -8,9 +8,9 @@ import Logos from 'components/shared/logos';
 import SplitViewGrid from 'components/shared/split-view-grid';
 import Testimonial from 'components/shared/testimonial';
 import SEO_DATA from 'constants/seo-data';
+import compatibilityIcon from 'icons/ai/compatibility.svg';
 import currencyIcon from 'icons/partners/currency.svg';
-import priorityLowIcon from 'icons/partners/priority-low.svg';
-import screenIcon from 'icons/partners/screen.svg';
+import speedIcon from 'icons/partners/speed.svg';
 import userIcon from 'icons/partners/user.svg';
 import getMetadata from 'utils/get-metadata';
 
@@ -18,27 +18,27 @@ export const metadata = getMetadata(SEO_DATA.partners);
 
 const items = [
   {
+    icon: compatibilityIcon,
+    title: 'Deliver seamless experience',
+    description:
+      'Integrate a fully managed database directly into your platform for enhanced functionality.',
+  },
+  {
     icon: currencyIcon,
     title: 'Boost your revenue',
     description:
-      'Offer Serverless Postgres to your customers by reselling Neon. We offer volume discounts.',
+      'Tapping into additional revenue streams through Postgres as a value-added service.',
   },
   {
-    icon: priorityLowIcon,
-    title: 'Reduce costs',
+    icon: speedIcon,
+    title: 'Accelerate onboarding',
     description:
-      'Neon scales to zero when not in use and never overprovisions, making it cost-effective.',
+      'Reduce friction and time-to-value for your users so they can start building instantly.',
   },
   {
     icon: userIcon,
     title: 'Meet customer demand',
-    description:
-      'Providing your customers with a fully-managed Postgres solution has never been easier.',
-  },
-  {
-    icon: screenIcon,
-    title: 'Scale effortlessly',
-    description: 'Host fleets of databases that scale automatically to handle demanding workloads.',
+    description: 'Postgres is the most-loved relational database by developers worldwide.',
   },
 ];
 
@@ -72,21 +72,20 @@ const PartnersPage = () => (
       className="mt-36 xl:mt-[104px] lg:mt-20 md:mt-16"
       label="Benefits"
       title="Why become a partner?"
-      description="At Neon, we deeply value our partners and believe they are vital to our mission of
-            making Serverless Postgres the go-to choice for developers everywhere."
+      description="Follow the lead of Vercel, Retool, Replit, Koyeb, and many more."
       items={items}
       isGradientLabel
     />
     <Collaboration />
-    <Testimonial
-      className="mt-[200px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
-      quote="By partnering with Neon, Vercel’s frontend platform is now the end&#8209;to&#8209;end
-          serverless solution for building on the Web, from Next.js all&nbsp;the way to SQL."
-      name="Guillermo Rauch"
-      position="CEO of Vercel"
-    />
-    <Plans className="my-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
     <Integration />
+    <Testimonial
+      className="mt-[168px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
+      quoteClassName="text-[32px] xl:text-[28px] lg:text-xl md:text-lg"
+      quote="We’ve been able to automate virtually all database tasks via the Neon API. This saved us a tremendous amount of time and engineering effort."
+      name="Himanshu Bhandoh"
+      position="Software Engineer at Retool"
+    />
+    <Plans className="mt-[176px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
     <Apply />
   </Layout>
 );

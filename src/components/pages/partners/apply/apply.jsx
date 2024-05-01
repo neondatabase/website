@@ -25,7 +25,7 @@ const Testimonial = ({ className = null, ariaHidden = false }) => (
         Neon a no-brainer.
       </p>
     </blockquote>
-    <figcaption className="mt-4 text-base leading-tight tracking-[-0.02em] lg:mt-5 md:mt-4">
+    <figcaption className="mt-4 text-base leading-tight tracking-extra-tight lg:mt-5 md:mt-4">
       Lincoln Bergeson –{' '}
       <cite className="inline font-light not-italic text-gray-new-70">
         Infrastructure engineer at Replit
@@ -66,13 +66,13 @@ const Apply = () => {
   return (
     <section
       id="partners-apply"
-      className="apply-form safe-paddings pb-40 pt-[240px] xl:pb-[120px] xl:pt-40 lg:pb-24 lg:pt-32 md:pb-20 md:pt-[90px]"
+      className="apply-form safe-paddings mb-[137px] mt-[200px] xl:mb-[120px] xl:mt-40 lg:mb-24 lg:mt-32 md:mb-20 md:mt-[90px]"
     >
       <Container className="grid-gap-x grid grid-cols-12" size="medium">
         <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 xl:col-span-full xl:col-start-1 xl:grid-cols-12">
           <div className="col-span-5 lg:col-span-full lg:text-center">
             <GradientLabel className="inline-block">Apply now</GradientLabel>
-            <h2 className="mt-3 text-5xl font-medium leading-none tracking-[-0.02em] xl:text-[44px] lg:text-4xl md:text-[32px]">
+            <h2 className="mt-3 text-[52px] font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
               Become a Partner
             </h2>
             <p className="md:flat-breaks sm:flat-none mt-3 text-lg font-light leading-snug xl:text-base">
