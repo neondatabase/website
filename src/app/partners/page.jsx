@@ -19,7 +19,7 @@ export const metadata = getMetadata(SEO_DATA.partners);
 const items = [
   {
     icon: compatibilityIcon,
-    title: 'Deliver seamless experience',
+    title: 'Supercharge your platform',
     description:
       'Integrate a fully managed database directly into your platform for enhanced functionality.',
   },
@@ -27,7 +27,7 @@ const items = [
     icon: currencyIcon,
     title: 'Boost your revenue',
     description:
-      'Tapping into additional revenue streams through Postgres as a value-added service.',
+      'Tap into additional revenue streams through Postgres as a value-added service.',
   },
   {
     icon: speedIcon,
@@ -37,7 +37,7 @@ const items = [
   },
   {
     icon: userIcon,
-    title: 'Meet customer demand',
+    title: 'Offer managed Postgres',
     description: 'Postgres is the most-loved relational database by developers worldwide.',
   },
 ];
