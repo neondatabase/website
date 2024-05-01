@@ -183,6 +183,7 @@ const Table = () => {
                           isGroupTitle
                             ? 'pb-3 pt-11 lg:pt-10'
                             : ['py-3 lg:py-2.5', rowClass[item.rows]],
+                          index === 0 && isGroupTitle && '-mt-6',
                           !isGroupTitle &&
                             !rowsWithGroupTitles.includes(index - 1) &&
                             'border-t border-dashed border-gray-new-20/25',
@@ -231,6 +232,9 @@ const Table = () => {
                         rowsWithGroupTitles.includes(index)
                           ? 'h-[70px] lg:h-[66px]'
                           : ['py-3 lg:py-2.5', rowClass[item.rows]],
+                        index === 0 &&
+                          rowsWithGroupTitles.includes(index) &&
+                          'h-[46px] lg:h-[42px]',
                         item[key] !== undefined &&
                           !rowsWithGroupTitles.includes(index - 1) &&
                           'border-t border-dashed border-gray-new-20/25',
