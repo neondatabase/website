@@ -52,7 +52,7 @@ To help manage your storage size, here are some strategies to consider:
 Your storage allowance varies depending on your Neon plan.
 
 - **Free Tier**: If you reach your storage limit on the Free Tier (0.5 GiB), any further database operations that would increase storage (INSERTs or UPDATEs for example) will fail, and you will receive an error message.
-- **Launch and Scale Plans**: For users on Launch and Scale plans, exceeding your storage limit will result in [additional charges](/docs/introduction/extra-usage). Charges are added in units of 2 GiB based on the maximum size your storage reaches and are prorated based on when in the month your storage size increased.
+- **Launch and Scale Plans**: For users on Launch and Scale plans, exceeding your storage limit will result in [additional charges](/docs/introduction/extra-usage). Charges are added based on the maximum size your storage reaches and are prorated based on when in the month your storage size increased.
 
 ## Compute
 
