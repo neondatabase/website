@@ -37,7 +37,7 @@ const partners = [
 ];
 
 const Collaboration = () => (
-  <section className="collaboration safe-paddings mt-40 2xl:mt-36 lg:mt-28 md:mt-20">
+  <section className="collaboration safe-paddings mt-[152px] 2xl:mt-36 lg:mt-28 md:mt-20">
     <Container className="grid-gap-x grid grid-cols-12" size="medium">
       <div className="col-span-8 col-start-3 flex flex-col items-center xl:col-span-10 xl:col-start-2 lg:col-span-full lg:col-start-1">
         <GradientLabel>Case studies</GradientLabel>

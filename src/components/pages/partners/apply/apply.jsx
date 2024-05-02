@@ -66,7 +66,7 @@ const Apply = () => {
   return (
     <section
       id="partners-apply"
-      className="apply-form safe-paddings mb-[137px] mt-[200px] xl:mb-[120px] xl:mt-40 lg:mb-24 lg:mt-32 md:mb-20 md:mt-[90px]"
+      className="apply-form safe-paddings mt-[192px] xl:mt-40 lg:mt-32 md:mt-[90px]"
     >
       <Container className="grid-gap-x grid grid-cols-12" size="medium">
         <div className="grid-gap-x col-span-10 col-start-2 grid grid-cols-10 xl:col-span-full xl:col-start-1 xl:grid-cols-12">

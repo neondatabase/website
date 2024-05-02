@@ -9,7 +9,7 @@ const Api = () => (
       <h3 className="text-4xl font-medium leading-tight tracking-tighter xl:text-[28px] lg:text-[24px] md:text-[22px]">
         Full automation with the Neon&nbsp;API
       </h3>
-      <p className="mt-2.5 max-w-[550px] text-lg font-light leading-snug xl:text-base md:mt-2">
+      <p className="mt-2.5 max-w-[550px] text-lg font-light leading-snug xl:text-base lg:max-w-none md:mt-2">
         Effortlessly integrate Neon into your product suite. Manage expansive database fleets with
         ease by handling all database tasks via our API endpoints.
       </p>
