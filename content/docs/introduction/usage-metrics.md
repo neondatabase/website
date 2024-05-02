@@ -27,7 +27,7 @@ Storage size changes in Neon are influenced by typical database operations as we
 - **Standard database operations**: Like any database, inserting data increases data size, while deleting data decreases it. However, since each operation generates a WAL record, even deletions temporarily increase your history size until those records age out.
 - **WAL records and aging**: Every database operation temporarily increases the size of your history. As WAL records age out of your configured [retention window](/docs/introduction/point-in-time-restore#history-retention), they are removed, reducing your history and potentially decreasing your total storage size.
 - **Branching**: When branches are created, they initially do not add to storage since they use shared data. However, as soon as changes are made within a branch, new WAL records are created, adding to your history.
-- **Aged-out branches**: Over time, if branches age out of the retention window, their data becomes unique and is counted independently, thus adding to the storage.
+- **Aged-out branches**: Over time, as branches age out of the retention window, their data becomes unique and is counted independently, thus adding to the storage.
 
 All this is to say, your storage size is a moving target. We recommend you regularly [monitor your usage](/docs/introduction/monitor-usage) and adjust settings to effectively manage your storage costs.
 
