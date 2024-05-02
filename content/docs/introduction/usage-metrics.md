@@ -27,7 +27,7 @@ Storage size changes in Neon are influenced by typical database operations as we
 - **Standard database operations**: Like any database, inserting data increases data size, while deleting data decreases it. However, since each operation generates a WAL record, even deletions temporarily increase your history size until those records age out.
 - **WAL records and aging**: Every database operation temporarily increases the size of your history. As WAL records age out of your configured [retention window](/docs/introduction/point-in-time-restore#history-retention), they are removed, reducing your history and potentially decreasing your total storage size.
 - **Branching**: When branches are created, they initially do not add to storage since they use shared data. However, as soon as changes are made within a branch, new WAL records are created, adding to your history.
-- **Aged-out branches**: Over time, as branches age out of the retention window, their data becomes unique and is counted independently, thus adding to the storage.
+- **Aged-out branches**: Over time, as branches age out of the retention window, their data is no longer shared with its parent and is counted independently, thus adding to the storage.
 
 All this is to say, your storage size is a moving target. We recommend you regularly [monitor your usage](/docs/introduction/monitor-usage) and adjust settings to effectively manage your storage costs.
 
@@ -52,7 +52,7 @@ To help manage your storage size, here are some strategies to consider:
 Your storage allowance varies depending on your Neon plan.
 
 - **Free Tier**: If you reach your storage limit on the Free Tier (0.5 GiB), any further database operations that would increase storage (INSERTs or UPDATEs for example) will fail, and you will receive an error message.
-- **Launch and Scale Plans: For users on Launch and Scale plans, exceeding your storage limit will result in [additional charges](/docs/introduction/extra-usage). Charges are added in units of 2 GiB based on the maximum size your storage reaches and are prorated based on when in the month your storage size increased.
+- **Launch and Scale Plans**: For users on Launch and Scale plans, exceeding your storage limit will result in [additional charges](/docs/introduction/extra-usage). Charges are added in units of 2 GiB based on the maximum size your storage reaches and are prorated based on when in the month your storage size increased.
 
 ## Compute
 
