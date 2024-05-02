@@ -24,8 +24,8 @@ const ITEMS = [
     video: {
       icon: serverlessIcon,
       title: 'Scaling',
-      mp4: '/videos/pages/home/hero/serverless.mp4?updated=20240424170105',
-      m3u8: '/videos/pages/home/hero/serverless.m3u8?updated=20240424170105',
+      mp4: '/videos/pages/home/hero/scaling.mp4?updated=20240502140505',
+      m3u8: '/videos/pages/home/hero/scaling.m3u8?updated=20240502140505',
     },
     title: 'Scaling',
     description:
@@ -37,8 +37,8 @@ const ITEMS = [
     video: {
       icon: branchingIcon,
       title: 'Branching',
-      mp4: '/videos/pages/home/hero/branching.mp4?updated=20240426210205',
-      m3u8: '/videos/pages/home/hero/branching.m3u8?updated=20240426210205',
+      mp4: '/videos/pages/home/hero/branching.mp4?updated=20240502140105',
+      m3u8: '/videos/pages/home/hero/branching.m3u8?updated=20240502140105',
     },
     title: 'Branching',
     description:
