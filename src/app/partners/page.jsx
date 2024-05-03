@@ -29,7 +29,7 @@ const items = [
     icon: currencyIcon,
     title: 'Scale as you go',
     description:
-      'With Neon's scale to zero, you only pay for what customers actually use.',
+      'Pay only for what you use, with scale to zero and usage-based pricing.',
   },
   {
     icon: userIcon,
