@@ -23,23 +23,25 @@ const items = [
     icon: compatibilityIcon,
     title: 'Supercharge your platform',
     description:
-      'Integrate a fully managed database directly into your platform for enhanced functionality.',
+      'Offer managed Postgres, the most-loved relational database by developers.',
   },
   {
     icon: currencyIcon,
-    title: 'Boost your revenue',
-    description: 'Tap into additional revenue streams through Postgres as a value-added service.',
-  },
-  {
-    icon: speedIcon,
-    title: 'Accelerate onboarding',
+    title: 'Scale as you go',
     description:
-      'Reduce friction and time-to-value for your users so they can start building instantly.',
+      'With Neon's scale to zero, you only pay for what customers actually use.',
   },
   {
     icon: userIcon,
-    title: 'Offer managed Postgres',
-    description: 'Postgres is the most-loved relational database by developers worldwide.',
+    title: 'Accelerate onboarding',
+    description:
+      'Reduce friction for your users so they can start building instantly.',
+  },
+  {
+    icon: speedIcon,
+    title: 'Easy management',
+    description:
+      'Give dedicated URLs to your users and handle all database tasks via an API.',
   },
 ];
 
