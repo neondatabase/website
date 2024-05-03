@@ -20,22 +20,6 @@ const defaultConfig = {
   async headers() {
     return [
       {
-        source: '/',
-        destination: 'https://console.neon.tech',
-        has: [
-          {
-            type: 'cookie',
-            key: 'ajs_user_id',
-          },
-        ],
-        missing: [
-          {
-            type: 'query',
-            key: 'force',
-          },
-        ],
-      },
-      {
         source: '/fonts/:slug*',
         headers: [
           {
@@ -120,6 +104,23 @@ const defaultConfig = {
     }, []);
 
     return [
+      {
+        source: '/',
+        destination: 'https://console.neon.tech',
+        permanent: false,
+        has: [
+          {
+            type: 'cookie',
+            key: 'ajs_user_id',
+          },
+        ],
+        missing: [
+          {
+            type: 'query',
+            key: 'force',
+          },
+        ],
+      },
       {
         source: '/2024-plan-updates',
         destination: '/pricing',
