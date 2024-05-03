@@ -1,6 +1,6 @@
 export default function getCookie(name) {
   const cookieValue =
-    document &&
+    typeof document !== 'undefined' &&
     document.cookie
       .split('; ')
       .find((row) => row.startsWith(`${name}=`))
