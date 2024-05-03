@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import Button from 'components/shared/button';
 import Heading from 'components/shared/heading';
 import { FORM_STATES } from 'constants/forms';
+import getHomepageRoute from 'utils/get-homepage-route';
 
 import ContactForm from './contact-form';
 import illustrationPricing from './images/illustration-pricing.png';
@@ -45,8 +46,8 @@ const Hero = () => {
               Talk to our Sales team
             </h1>
             <p className="mx-auto mt-1.5 max-w-[660px] text-xl 2xl:max-w-[550px] 2xl:text-base md:mt-2">
-              Interested in learning more about our plans and pricing? Complete the
-              form below to get in touch with our Sales team.
+              Interested in learning more about our plans and pricing? Complete the form below to
+              get in touch with our Sales team.
             </p>
             <div className="mx-auto mt-16 flex 2xl:mt-12 2xl:max-w-5xl lg:mt-9 lg:max-w-[583px] lg:flex-col lg:space-y-9 md:mt-6 md:space-y-6">
               <div
@@ -130,7 +131,7 @@ const Hero = () => {
                 className="relative mt-9 px-9 py-6 !text-lg xl:!text-base"
                 theme="primary"
                 size="sm"
-                to="/"
+                to={getHomepageRoute()}
               >
                 <span
                   className="pointer-events-none absolute inset-x-0 top-0 h-[232px] w-full rounded-[32px] opacity-40 blur-[30px] lg:h-[146px] sm:h-[92px]"

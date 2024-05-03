@@ -11,6 +11,7 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import getHomepageRoute from 'utils/get-homepage-route';
 
 const pVariants = {
   from: {
@@ -137,7 +138,7 @@ const CTA = () => {
             className="t-xl invisible mx-auto mt-[56px] hidden max-w-[500px] text-white opacity-0 2xl:mt-[46px] 2xl:max-w-[450px] xl:mt-10 xl:max-w-[400px]"
           >
             Same Postgres command as you used to will get you{' '}
-            <Link to="/" theme="underline-primary-1">
+            <Link to={getHomepageRoute()} theme="underline-primary-1">
               a smooth database creation
             </Link>{' '}
             experience.

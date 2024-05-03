@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import getHomepageRoute from 'utils/get-homepage-route';
 
 import illustration from './images/illustration.png';
 
@@ -21,12 +22,17 @@ const CTA = ({ isDocsPage = false }) =>
         className="DocSearch-notFound my-8"
         indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
       />
-      <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
+      <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to={getHomepageRoute()}>
         Back to home
       </Link>
     </div>
   ) : (
-    <Button className="mt-11 self-start lg:mt-8 sm:w-full" size="md" theme="primary" to="/">
+    <Button
+      className="mt-11 self-start lg:mt-8 sm:w-full"
+      size="md"
+      theme="primary"
+      to={getHomepageRoute()}
+    >
       Back to Home
     </Button>
   );

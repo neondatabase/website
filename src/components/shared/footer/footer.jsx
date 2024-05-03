@@ -10,6 +10,7 @@ import ThemeSelect from 'components/shared/footer/theme-select';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus.js';
+import getHomepageRoute from 'utils/get-homepage-route';
 
 const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) => {
   const isDarkTheme = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
@@ -30,7 +31,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
         <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
           <div className="mb-7 flex flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-start md:justify-between">
             <div className="flex flex-col">
-              <Link className="block" to="/">
+              <Link className="block" to={getHomepageRoute()}>
                 <span className="sr-only">Neon</span>
                 <Logo className="w-auto sm:h-6" isThemeBlack={isDarkTheme} />
               </Link>

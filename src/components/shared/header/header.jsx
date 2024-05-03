@@ -13,6 +13,8 @@ import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
+import getCookie from 'utils/get-cookie';
+import getHomepageRoute from 'utils/get-homepage-route';
 
 import GithubStarCounter from '../github-star-counter';
 
@@ -67,7 +69,7 @@ const Header = ({
         ref={headerRef}
       >
         <Container className="flex items-center justify-between py-3.5" size="lg">
-          <Link to="/">
+          <Link to={getHomepageRoute()}>
             <span className="sr-only">Neon</span>
             <Logo isThemeBlack={isThemeBlack} />
           </Link>
@@ -141,21 +143,33 @@ const Header = ({
 
           <div className="flex lg:hidden">
             <GithubStarCounter className="mr-5 xl:mr-3" isThemeBlack={isThemeBlack} />
-            <Button
-              className="mr-3.5 h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:mr-2 xl:px-4"
-              to={LINKS.login}
-              theme={isThemeBlack ? 'gray-dark-outline' : 'gray-dark-outline-black'}
-            >
-              Log In
-            </Button>
+            {getCookie('ajs_user_id') ? (
+              <Button
+                className="h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:px-4"
+                to={LINKS.signup}
+                theme="primary"
+              >
+                Go to Console
+              </Button>
+            ) : (
+              <>
+                <Button
+                  className="mr-3.5 h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:mr-2 xl:px-4"
+                  to={LINKS.login}
+                  theme={isThemeBlack ? 'gray-dark-outline' : 'gray-dark-outline-black'}
+                >
+                  Log In
+                </Button>
 
-            <Button
-              className="h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:px-4"
-              to={LINKS.signup}
-              theme="primary"
-            >
-              Sign Up
-            </Button>
+                <Button
+                  className="h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:px-4"
+                  to={LINKS.signup}
+                  theme="primary"
+                >
+                  Sign Up
+                </Button>
+              </>
+            )}
           </div>
           {isMobile && (
             <div className="flex items-center gap-x-3 md:gap-x-5">

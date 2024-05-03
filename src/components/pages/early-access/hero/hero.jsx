@@ -15,6 +15,7 @@ import useLocalStorage from 'hooks/use-local-storage';
 import logoBlack from 'images/logo-black.svg';
 import logoWhite from 'images/logo-white.svg';
 import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
+import getHomepageRoute from 'utils/get-homepage-route';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import CheckIcon from './images/check.inline.svg';
@@ -97,7 +98,7 @@ const Hero = () => {
     <section className="safe-paddings flex h-screen min-h-[760px] lg:h-auto lg:min-h-screen lg:flex-col">
       <div className="relative min-w-[768px] bg-black p-8 text-white 2xl:min-w-0 lg:order-last lg:max-w-none lg:py-7 md:px-4">
         <div className="m-auto max-w-[520px]">
-          <Link className="inline-block align-top lg:hidden" to="/">
+          <Link className="inline-block align-top lg:hidden" to={getHomepageRoute()}>
             <img src={logoWhite} alt="Neon" width={128} height={36} />
           </Link>
           <h2 className="mt-28 text-[28px]  font-bold 2xl:mt-12 lg:mt-0 lg:max-w-[450px] md:text-[26px]">
@@ -124,7 +125,7 @@ const Hero = () => {
       </div>
       <div className="flex grow items-center justify-center">
         <div className="max-w-[470px] lg:pb-10 lg:pt-3.5 md:w-full md:max-w-none md:px-4">
-          <Link className="lg:alight-top hidden lg:inline-block" to="/">
+          <Link className="lg:alight-top hidden lg:inline-block" to={getHomepageRoute()}>
             <img src={logoBlack} alt="Neon" />
           </Link>
           <h1 className="text-[28px] font-bold lg:mt-10 lg:text-center md:text-[26px]">
