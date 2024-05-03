@@ -1,7 +1,4 @@
-import { cookies } from 'next/headers';
-
 export default {
-  home: cookies().get('ajs_user_id') ? '/home' : '/',
   docs: '/docs',
   aboutUs: '/about-us',
   careers: '/careers',
