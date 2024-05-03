@@ -146,7 +146,7 @@ const Header = ({
             {getCookie('ajs_user_id') ? (
               <Button
                 className="h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:px-4"
-                to={LINKS.signup}
+                to={LINKS.login}
                 theme="primary"
               >
                 Go to Console
