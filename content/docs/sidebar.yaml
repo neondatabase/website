@@ -106,7 +106,7 @@
       slug: manage/databases
     - title: Integrations
       slug: manage/integrations
-    - title: Operations
+    - title: System operations
       slug: manage/operations
     - title: Organizations
       slug: manage/organizations
