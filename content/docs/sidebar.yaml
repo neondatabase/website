@@ -3,10 +3,14 @@
   items:
     - title: Why Neon?
       slug: introduction/about #new page combining what is neon and carlotta's
-    - title: Quick Start
-      slug: getting_started/quickstart # sign-up plus all the basics to start working with your new db from command line/ include sample db or link migrate
-    - title: Workflows
-      slug: getting_started/primer
+    - title: Day 1 - Getting set up # sign-up plus all the basics to start working with your new db from command line/ include sample db or link migrate
+      slug: getting_started/setup
+    - title: Day 2 - Add Neon to your stack
+      slug: getting_stated/connections
+    - title: Day 3 - Branching in your CI/CD
+      slug: getting_started/primer 
+    - title: Day 4 - Tuning production # or production checklist
+      slug: getting_started/production
     - title: Frameworks
       # slug: getting_started/frameworks # a new landing page dedicated to frameworks
       items:
