@@ -20,6 +20,22 @@ const defaultConfig = {
   async headers() {
     return [
       {
+        source: '/',
+        destination: 'https://console.neon.tech',
+        has: [
+          {
+            type: 'cookie',
+            key: 'ajs_user_id',
+          },
+        ],
+        missing: [
+          {
+            type: 'query',
+            key: 'force',
+          },
+        ],
+      },
+      {
         source: '/fonts/:slug*',
         headers: [
           {
