@@ -24,21 +24,7 @@ The full workflow involves interaction with all three services, so there are a n
 
 ## Retrieve your Neon database connection string and other parameters
 
-Navigate to the **Connection Details** on the Neon **Project Dashboard** to find your database connection string. It should look similar to this:
-
-```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
-```
-
-Add this connection string to both the `.env` and `.secrets` files as the variable `DIRECT_URL`. This is needed by the Prisma package to run migrations reliably. 
-
-```bash
-DIRECT_URL=NEON_DATABASE_CONNECTION_STRING
-```
-
-Toggling the `Pooled Connection` checkbox will give you the connection string for a pooled connection to the Neon database. This is useful in serverless environments like Vercel. 
-
-Again, add it to both the `.env` and `.secrets` files as the variable `DATABASE_URL`.
+Navigate to the **Connection Details** on the Neon **Project Dashboard** to find your database connection string. Toggle the `Pooled Connection` checkbox to get a pooled connection string for your Neon database, which is useful in serverless environments like Vercel. 
 
 ```bash
 DATABASE_URL=POOLED_NEON_DATABASE_CONNECTION_STRING
@@ -75,7 +61,7 @@ cd guide-branching-prisma-vercel-github && npm install
 
 ### Run Prisma migrations
 
-This project defines a simple `Element` model with an `id`, `elementName`, `atomicNumber`, and `symbol` fields.
+This project defines a simple `Element` model with `id`, `elementName`, `atomicNumber`, and `symbol` fields.
 
 ```prisma
 model Element {
@@ -108,14 +94,11 @@ npm run dev
 
 ### Create new project and deploy the application
 
-Log in to your Vercel account and navigate to the vercel dashboard. Click on the `Add New` button to create a new project. When asked to import a Git repository, select the forked repository from your GitHub account. 
+Log in to your Vercel account and navigate to the Vercel dashboard. Click on the `Add New` button to create a new project. When asked to import a Git repository, select the forked repository from your GitHub account. 
 
 Next, you need to configure the project before Vercel can deploy it. 
 
-1. Add the following variables present in the local `.env` file to the `Environment variables` section in the form:
-
-   - `DATABASE_URL`: The pooled connection string to the Neon database.
-   - `DIRECT_URL`: The direct connection string to the Neon database.
+1. Add the `DATABASE_URL` variable defined in your local `.env` file to the `Environment variables` section in the form.
 
 2. Under `Build and Output Settings`, toggle `override` for the `Build command` setting and replace it with `prisma generate && next build`. 
 
@@ -153,7 +136,6 @@ Add all the secrets from the `.secrets` file to the repository secrets:
 - `NEON_DATABASE_USERNAME`: The username from the Neon database connection string.
 - `NEON_API_KEY`: The API key obtained from the Neon account. 
 - `DATABASE_URL`: The pooled connection string to the Neon database.
-- `DIRECT_URL`: The direct connection string to the Neon database. 
 - `VERCEL_TOKEN`: The API key created from your Vercel dashboard. 
 - `GH_TOKEN`: The personal access token created from your GitHub account.
 
@@ -175,7 +157,7 @@ We will make a small change to the data schema and test the workflow by creating
 
 ### Make changes to the application
 
-Navigate to the `prisma/schema.prisma` file in the project repository and add a new field to the `Element` model:
+Navigate to the `prisma/schema.prisma` file in the project repository and add a new `atomicMass` field to the `Element` model:
 
 ```prisma
 model Element {
