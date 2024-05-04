@@ -22,17 +22,9 @@ The full workflow involves interaction with all three services, so there are a n
 1. A `.secrets` file. We'll upload them to the Github repository, so Github Actions can access them. 
 2. An `.env` file. We need the Neon database connection strings to run initial setup commands, and create migration files.
 
-## Setting up the Neon Database
+## Retrieve your Neon database connection string and other parameters
 
-### Create a new Neon project
-
-1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
-2. Click the `New Project` button to create a new project.
-3. Choose the desired region and Postgres version for your project, then click `Create Project`.
-
-### Retrieve your Neon database connection string
-
-Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+Navigate to the **Connection Details** on the Neon **Project Dashboard** to find your database connection string. It should look similar to this:
 
 ```bash
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -94,6 +86,7 @@ model Element {
   symbol       String
 }
 ```
+
 
 Run the setup script so Prisma can execute the initial migrations and add seed data to the table:
 
