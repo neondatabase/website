@@ -19,8 +19,16 @@ const useVideoPlayback = (
 
   const updateProgress = useCallback(
     (video) => () => {
+      const { currentTime } = video;
+
+      // It is necessary that before switching to the next video progress bar remains filled in those cases
+      // when we add a delay before automatic switching to the next video. - handleVideoSwitchDelay
+      if (currentTime === 0.1) {
+        return;
+      }
+
       const progress = progressBarRef.current;
-      const percentage = (video.currentTime + 0.2) / video.duration;
+      const percentage = currentTime / video.duration;
       progress.style.transform = `scaleX(${percentage})`;
     },
     [progressBarRef]
@@ -37,6 +45,20 @@ const useVideoPlayback = (
       return () => clearTimeout(timer);
     },
     [setInitialVideoPlayback]
+  );
+
+  const handleVideoSwitchDelay = useCallback(
+    (video) => () => {
+      video.currentTime = 0.1;
+      setIsTitleVisible(true);
+
+      const timer = setTimeout(() => {
+        switchVideo();
+      }, 2500);
+
+      return () => clearTimeout(timer);
+    },
+    [switchVideo]
   );
 
   const handleDesktopVideoPlayback = useCallback(() => {
@@ -59,11 +81,11 @@ const useVideoPlayback = (
     }
 
     video.addEventListener('timeupdate', updateProgress(video));
-    video.addEventListener('ended', switchVideo);
+    video.addEventListener('ended', handleVideoSwitchDelay(video));
 
     return () => {
       video.removeEventListener('timeupdate', updateProgress(video));
-      video.removeEventListener('ended', switchVideo);
+      video.removeEventListener('ended', handleVideoSwitchDelay(video));
       video.removeEventListener('loadedmetadata', handleInitialVideoPlay(video));
     };
 
