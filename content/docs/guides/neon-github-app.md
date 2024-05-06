@@ -20,7 +20,6 @@ To add the GitHub integration to your Neon project:
 2. Locate the GitHub integration and click **Manage** to open the **GitHub integration** drawer.
 3. Select a GitHub repository to connect to and click **Save**.
 
-
 ## Remove the GitHub integration
 
 Removal of the GitHub integration removes:
