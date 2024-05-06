@@ -12,7 +12,7 @@ When you connect your GitHub application repository to your Neon project, the in
 2. Generates a new Neon API key for your Neon account.
 3. Creates a global secret in the GitHub repository containing the Neon API key.
 
-## How to install the Neon GitHub app
+## Install GitHub integration
 
 To add the GitHub integration to your Neon project:
 
@@ -21,4 +21,16 @@ To add the GitHub integration to your Neon project:
 3. Select a GitHub repository to connect to and click **Save**.
 
 
+## Remove the GitHub integration
 
+Removal of the GitHub integration removes:
+
+- The global variable in the GitHub repo containing your Neon project ID 
+- The global secret in the GitHub repository containing the Neon API key
+- Removes the Neon API key from your Neon account
+
+To remove the integration:
+
+1. In the Neon Console, navigate to the **Integrations** page for your project.
+2. Locate the GitHub integration and click **Manage** to open the **GitHub integration** drawer.
+3. Click **Remove**.
