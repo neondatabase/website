@@ -84,12 +84,12 @@ In Neon, the maximum number of concurrent connections is defined according to th
 
 ## Autosuspend considerations
 
-By default, Neon suspends a compute endpoint after five minutes of inactivity. This behavior is configurable on Neon's paid plans. For more information, refer to [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
+By default, Neon suspends a compute after five minutes of inactivity. This behavior is configurable on Neon's paid plans. For more information, refer to [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
 
-If you rely on Neon's autosuspend capability to minimize database usage, note that certain Hasura configuration options can either wake up or keep your Neon compute endpoint in an active state:
+If you rely on Neon's autosuspend feature to minimize database usage, note that certain Hasura configuration options can keep your Neon compute in an active state:
 
 - [Event triggers](https://hasura.io/docs/latest/event-triggers/overview/) may periodically poll your Neon database for new events.
-- [Cron triggers](https://hasura.io/docs/latest/scheduled-triggers/create-cron-trigger/) can invoke HTTP endpoints that execute custom business logic, possibly involving your Neon database.
-- [Source Health Checks](https://hasura.io/docs/latest/deployment/health-checks/source-health-check/) can keep your Neon compute active if the metadata database resides in Neon. In this case, any health check API call will query the metadata database.
+- [Cron triggers](https://hasura.io/docs/latest/scheduled-triggers/create-cron-trigger/) can invoke HTTP endpoints that execute custom business logic involving your Neon database.
+- [Source Health Checks](https://hasura.io/docs/latest/deployment/health-checks/source-health-check/) can keep your Neon compute active if the metadata database resides in Neon.
 
 <NeedHelp/>
