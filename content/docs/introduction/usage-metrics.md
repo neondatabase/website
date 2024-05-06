@@ -16,7 +16,7 @@ In Neon, your storage is made up of the combined total of these two elements:
 
 - **History**
 
-    Your history consists of Write-Ahead Log (WAL) records, which log all changes made to your database over time. This shared history is what enables features like instant [branching](/docs/introduction/branching) and [point-in-time restore](/docs/introduction/point-in-time-restore). Initially, branches don’t add extra storage since they use shared data from existing snapshots.
+    Your history consists of Write-Ahead Log (WAL) records, which log all changes made to your database over time. This configurable history is what enables features like instant [branching](/docs/introduction/branching) and [point-in-time restore](/docs/introduction/point-in-time-restore). Initially, branches don’t add extra storage since they use shared data from existing snapshots.
 
 Your total storage size is calculated in gibibytes (GiB).
 
