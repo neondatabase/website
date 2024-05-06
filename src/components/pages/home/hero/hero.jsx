@@ -10,7 +10,7 @@ import Container from 'components/shared/container';
 import LINKS from 'constants/links';
 import useIsSafari from 'hooks/use-is-safari';
 import branchingIcon from 'icons/home/hero/branching.svg';
-import serverlessIcon from 'icons/home/hero/serverless.svg';
+import scalingIcon from 'icons/home/hero/scaling.svg';
 import bg from 'images/pages/home/hero/bg.jpg';
 
 import Video from './video';
@@ -22,10 +22,10 @@ const IS_MOBILE_SCREEN_WIDTH = 639;
 const ITEMS = [
   {
     video: {
-      icon: serverlessIcon,
+      icon: scalingIcon,
       title: 'Scaling',
-      mp4: '/videos/pages/home/hero/scaling.mp4?updated=20240502140505',
-      m3u8: '/videos/pages/home/hero/scaling.m3u8?updated=20240502140505',
+      mp4: '/videos/pages/home/hero/scaling.mp4?updated=20240506171725',
+      m3u8: '/videos/pages/home/hero/scaling.m3u8?updated=20240506171725',
     },
     title: 'Scaling',
     description:
