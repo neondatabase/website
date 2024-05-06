@@ -7,284 +7,223 @@ updatedOn: '2024-02-27T14:37:51.432Z'
 
 ---
 
-The agility of modern development seems to hit a bottleneck when it comes to the backend. Teams building apps face data issues that can hinder progress, such as:
+Git revolutionized the way we develop software, but when databases are involved, the story is quite different. Rapid development cycles with databases remain elusive, as they continue to stubbornly resist the agility tooling that have become standard in other parts of our tech stack.
 
-- Provisioning new databases quickly
-- Reverting to previous data states
-- Accessing production-like data for development securely
-- Maintaining data consistency across development, staging, and production
-- Developing collaboratively without interference
-- Managing schema migrations across different environments
+## Bringing branching to databases 
 
-Traditionally, database operations remained isolated from the main application development process. Instead, we propose an approach that integrates the database into existing pipelines via a combination of database branching, database version control, and automation:
-
-- **Database branching** extends the Git concept of branching to data. Database branches make data copies instantaneously accessible via copy-on-write, which can be modified without affecting the primary. Having access to database branches eliminates the waiting associated with database provisioning; it also minimizes the risks of development by introducing a navigable history of data modifications, making data as safely modifiable as source code. The improved data experience mirrors the experience Git introduced to code versioning.
-- **Database version control** applies version control to database changes (schema and data) in a similar way to source code version control. This means changes to the database are tracked, can be reviewed, reverted, or applied to different environments with a clear history of modifications.
-- **Automations** allow to integrate database operations into existing CI/CD pipelines. This ensures automated testing, building, and deploying of database changes alongside application code, reducing manual intervention while ensuring data consistency.
-
-<video autoPlay playsInline muted loop width="auto" height="auto">
-  <source type="video/mp4" src="/flow/workflow.mp4"/>
-</video>
+To change this, in Neon we propose adopting [database branching](/docs/introduction/branching), including both schema and data. Database branches enable instantaneous access to copies of data and schema for developers, who can then modify them without impacting the production database—effectively extending the Git concept of code branching to data.
 
 <Admonition type="info">
-**The data challenge**
-<br/>
-The concept of integrating database management with development practices—often referred to as “Database DevOps”—is not novel. A variety of tools now exist to support the management of schema changes, simplifying the process for developers. But to effectively merge backend processes into development workflows demands the ability to replicate large data volumes across environments and manage different data states, including rolling back to previous states when necessary.
-<br/>
-Git repositories mitigate similar risks in code development by maintaining a complete history of commits, thus offering a safety net. The objective is to mirror this level of security and efficiency with databases by introducing the concept of database branches. These branches encapsulate a comprehensive history of data snapshots, ensuring that developers can manage and revert data states with the same ease as managing code versions.
+
+**Beyond schema changes: tracking data history**
+
+The integration of databases within development practices isn’t a new idea. Modern teams already use tools to manage schema changes for example, and an increasing number of databases are embracing *schema branching*. But to effectively unblock development workflows involving databases, developers need the ability to not only alter schemas but also isolated data copies across different environments in a similar way that code can be safely modified via branches. 
+
+Git enables collaboration and rapid development by maintaining a detailed history of commits. [Neon mirrors this concept via a custom-built, log-structured storage system, which treats the database as a record of transactions](/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal). Neon captures a comprehensive history of data snapshots, ensuring that developers can manage and revert changes in data states with the same ease as they do with code versions.
+
+
 </Admonition>
 
-## The objective: to treat databases as cattle, not pets
+## Adopting branch-based deployments
 
-We’ll first set common ground by sharing our assumptions of how modern development teams work:
+Traditionally, database deployments are instance-based, with each environment represented as a separate, self-contained instance. By shifting our perspective to view these as branch-based instead, we can align more closely with familiar Git workflows. In this model, each environment has a database branch which functions similarly to a code branch, e.g.:
 
-- Your team collaborates on a codebase hosted on platforms like GitHub. You follow the Github flow: you use feature branches, pull requests (PRs), automated checks, peer reviews, and merges into the main branch.
-- Your database schema is managed as code. The source of truth for your database schema lives in your repo, and changes to the schema are traceable and version-controlled.
-- CI/CD automation tools are integral to your workflow. They automate the deployment pipeline.
-- The database is at the core of your architecture. It is an essential component of your application's functionality and acts as the source of truth for data and state.
+- Production database branch: The main branch where the live data resides.
+- Preview database branches: Temporary branches for reviewing new features or updates.
+- Testing branches: Temporary branches dedicated to automated testing.
+- Development branches: Where developers experiment and iterate on new features.
 
-Within this context, the objectives are clear:
+![Adopting branch-based deployments](/flow/git-ops-for-databases/deployments.png)
 
-- Provide each developer with a dedicated development database environment, ready and populated with data, allowing for immediate synchronization with the current codebase.
-- Automate the application of schema migration scripts for each release, automatically testing the migration before proceeding to ensure integrity and accuracy.
-- Align database operations with the deployment cadence in Git, ensuring that database changes are as easily reversible as application code updates.
-- Ensure testing, preview, and staging databases stay up-to-date with production through continuous synchronization mechanisms.
-- Streamline database operations through automation and integration with existing development tools and workflows.
+## Database branching workflows
 
-## Executing a Git-driven database flow
+To illustrate how this can be implemented in practice, we’ll cover two key workflows: 
 
-<Admonition type="tip">
-💡 **The Tools** section lists a variety of tools to help you build this workflow. These include tools for database branching, anonymizing production data, and tracking schema changes.
-</Admonition>
+1. **Preview environments**. By automatically creating a database branch for every pull request, any code modifications can be tested against production-like data. Once the PR is merged, the database branch is automatically deleted. We'll demonstrate how to implement this via an [example repo](https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file) using Fly.io and Neon, for projects built with Fastify and managed via GitHub Actions, utilizing Drizzle as the ORM.
+2. **Development environments**. Database branching simplifies the creation of personalized development environments for each engineer, providing instant access to a copy of production-like data without leaving their VPC. We’ll share how to set this up using the Neon CLI.
 
-### Environments
+![Database branching workflows](/flow/git-ops-for-databases/branching-workflows.png)
 
-#### Production
+### Workflow for preview environments (one per PR)
 
-1. Establish a **main database branch** as your production database.
-2. Just like in your code repository, apply special protections to this database branch, setting up roles and restricting access.
+All code is included in [this repo](https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file).
 
-#### Staging (optional)
+### Prerequisites
 
-3. If you have a fixed staging environment, create a **staging database branch**. To populate it with data, have two options:
-   1. Derive it directly from the production database branch (see [Use case 1](#use-case-1)).
-      <ol>
-      <li style={{ listStyleType: 'lower-roman' }}> If you follow this route, set up automation to regularly reset the staging database branch to avoid drifting from production.</li>
-      <li style={{ listStyleType: 'lower-roman' }}>Consider anonymizing personal information, if appropriate.</li>
-      </ol>
-   2. Use a separate, transformed dataset for staging—e.g. to avoid real emails or PII (see [Use case 2](#use-case-2)).
-      <ol>
-      <li style={{ listStyleType: 'lower-roman' }}>In this case, create an independent 'staging' database branch and load it with its own synthetic or transformed dataset.</li>
-      </ol>
+This example uses the following tech stack:
+- Database: [Neon](/)
+- Hosting: [Fly.io](http://fly.io)
+- App: [Fastify](https://fastify.dev/)
+- Node Package Management: [pnpm](https://pnpm.io/)
+- ORM: [Drizzle](https://orm.drizzle.team/)
 
-#### Development
+You can copy the files located at .github/workflows/ and add them to your own project.
 
-4. Create a **main dev database branch**.
-    1. From this primary branch, create one **dev database branch for every engineer**. When starting a new line of work, reset to a clean state.
-    2. For features that need extra testing before they are committed or merged, you can also consider creating short-lived **feature dev database branches** derived from the main dev branch.
-5. To populate the main dev database branch with data, you have two options:
-   1. Derive it from the staging database branch, if it exists (See [Use case 1](#use-case-1), [Use case 2](#use-case-2)).
-   2. For simpler deployments without a staging environment, you can derive it directly from the production database (see [Use case 3](#use-case-3)).
-6. When starting a new line of work in the 'dev' database branches, reset to clean state.
-7. Set up roles and restrict access for safety.
+You will then need to set the following secrets in your repository:
 
-#### Database version control
+- `FLY_API_TOKEN`: Your Fly.io API token, you can find it in your Fly.io account settings.
+- `NEON_PROJECT_ID`: The ID of your Neon project, you can find it in your Neon project settings.
+- `NEON_API_KEY`: Your Neon API key, you can find it in your Neon account settings.
+- `NEON_DATABASE_USERNAME`: The username for your Neon database. This is the same as the username for your production database.
+- `DATABASE_URL`: The connection string for your production database. You can find it in your Neon project's connection details.
+- `GH_TOKEN`: A GitHub token with access to your repository, you can create one in your GitHub account settings. You will need to give it access to the repo scope so that the deploy-preview workflow can comment on the pull request. You can uncomment the step which uses this token in the .github/workflows/deploy-preview.yml workflow file.
 
-8. Store your database schema and changes in a **version control system** alongside your application code, treating your main database branch as your production state.
+### How it works
 
-#### CI/CD automations
+#### Setting up the preview deployment
 
-9. Use GitHub Actions or similar tools to manage the lifecycle of 'preview' and 'testing' database branches, including their automatic creation and deletion:
-   a. For every pull request you open, create a **preview database branch** derived from the staging database branch (see [Use case 1](#use-case-1), [Use case 2](#use-case-2)). If you don’t have a staging environment, derive them directly from the production database branch.
-   b. Once the PR is merged, delete the preview branch and your preview environment.
-   c. For every test run execution, create a **test database branch** derived from the staging database branch. If you don’t have a staging environment, derive them directly from the production database.
-   d. Once the test is done, delete the test database branch.
-10. Integrate **schema migrations** into your CI/CD pipelines by including scripts in your version control system.
-   a. Regularly check for schema drift, ensuring that the database schema matches the expected state before applying changes.  
+[.github/workflows/deploy-preview.yml](https://github.com/neondatabase/preview-branches-with-fly/blob/main/.github/workflows/deploy-preview.yml) automates the deployment process to a preview environment, activated on a `pull_request` event.
 
-## Implementation scenarios
-
-### Use case 1: Staging with production-like data
-
-_For environments where mirroring production data is essential for development and testing._
-
-- The staging database branch is directly derived from production.
-- Dev branches are derived from the staging branch.
-- Short-lived preview database branches are created for every PR and commit and deleted once PRs are merged.
-- Similarly, short-lived test branches are created and deleted for every test.
-- All operations are automated within the CI/CD pipeline, including schema migrations.
-
-![Staging with production-like data widget](/flow/use-case-1.png)
-
-### Use case 2: Transformed data for staging
-
-_For environments with strict privacy regulations or where transformed datasets work best for development and testing purposes._
-
-- An independent staging database branch is created with its own transformed or synthetic dataset to avoid using real emails or PII.
-- Dev, preview, and test databases are derived from the staging branch.
-
-![Transformed data for staging widget](/flow/use-case-2.png)
-
-### Use case 3: Simplified deployment
-
-_For more simple deployments may not have a staging environment, e.g. in pre-production scenarios that prioritize engineering velocity._
-
-- The development database branches are derived directly from the main production database branch.
-- The dev branches are often reset from the parent to mirror the latest state.
-
-![Simplified deployment widget](/flow/use-case-3.png)
-
-### Use case 4: Multi-tenancy with customer isolation
-
-_For multi-tenancy deployments with full isolation requirements (e.g. one database per customer)._
-
-- One production database branch is created per customer, enabling customer-specific point-in-time restores.
-- A separate staging branch is created, with development, preview, and testing databases derived from it.
-
-![Multi-tenancy with customer isolation widget](/flow/use-case-4.png)
-
-## Workflow example
-
-<Admonition type="important">
-⚠️  Take this code as a general guideline. The main goal of this example is to illustrate the entirety of the workflow. Make sure you adapt the code to your particular use case, tools, and needs.
-</Admonition>
-
-If you wanted to implement a scenario like the one in [Use case 1](#use-case-1-staging-with-production-like-data), here’s what the workflow would look like. This example workflow uses [Neon](/) to create database branches, [Prisma](https://www.prisma.io/) for schema migrations, and [GitHub Actions](https://docs.github.com/en/actions) for CI/CD. Navigate to the [Tools](#tools) section for more information.
-
-- Create a Neon project with a main database branch as your production database:
-
-```yaml
-curl -X DELETE \
-- name: Authenticate with Neon
-  run: neonctl auth
-
-- name: Create Neon project (if not exists)
-  id: create_project
-  run: |
-    if ! neonctl projects list | grep -q "<project_name>"; then
-      neonctl projects create <project_name> 
-    fi
-
-- name: Create main production branch (if not exists)
-  id: create_main_branch
-  run: |
-    if ! neonctl branches list --project <project_name> | grep -q "main"; then
-      neonctl branches create main --project <project_name>
-    fi 
-
-# ... set up roles and access restrictions (consider Neon's role management commands)
+```
+on: [pull_request]
 ```
 
-- Create a staging database branch derived from the production database branch:
+The workflow has a single job called `deploy-preview`: 
 
-```yaml
-- name: Create staging branch
-  run: neonctl branches create staging --project <project_name> --parent main
 ```
-
-- Create a main dev database branch derived from the staging database branch. From this primary branch, create one dev database branch for every engineer:
-
-```yaml
-- name: Create main dev branch (if not exists)
-  id: create_main_dev
-  run: |
-    if ! neonctl branches list --project <project_name> | grep -q "dev"; then
-      neonctl branches create dev --project <project_name> --parent staging
-    fi
-
-- name: Create developer branches
-  run: |
-    for developer in dev1 dev2 dev3; do  
-      neonctl branches create ${developer} --project <project_name> --parent dev
-    done
-```
-
-- When starting a new line of work, reset to a clean state.
-
-```fish
-neonctl branches reset ${{ developer }} --project <project_name>
-```
-
-- For every pull request you open, use GitHub Actions to create a preview database branch derived from the staging database branch.  Once the PR is merged, delete the preview database branch.
-
-```yaml
-name: Database CI/CD
-
-on: 
-  pull_request:
-    branches: [ main ] 
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      # ... Install Neon CLI, Authenticate 
-
-      - name: Create preview branch
-        run: neonctl branches create preview-$(echo $GITHUB_SHA | cut -c1-8) --project <project_name> --parent staging
-
-      - name: Run migrations
-        run: npx prisma migrate deploy
-
-      # ... Your testing steps
-
-      - if: ${{ github.event.action == 'closed' }} 
-        name: Delete preview branch
-        run: neonctl branches delete preview-$(echo $GITHUB_SHA | cut -c1-8) --project <project_name> 
+  deploy-preview:
 ```
 
-- Similar to previews, for every test run execution, create a test database branch derived from the staging database branch. Once the test is done, delete the test database branch.
-- Integrate schema migrations into your CI/CD pipelines. Example script:
+This job includes the following steps:
 
-```bash
-#!/bin/bash
+1. Ensures concurrency control, allowing only one deployment at a time per pull request.
+   ```
+    concurrency:
+      group: pr-${{ github.event.number }}
 
-# Install Prisma CLI if needed
-if ! command -v prisma &> /dev/null
-then
-    npm install -g prisma
-fi
+   ```
+2. Checks out the codebase
+   ```
+     - uses: actions/checkout@v4
+   ```
+3. Sets up PNPM (you can use another package manager depending on your setup)
+   ```
+     - uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
-# 1. Generate Prisma Client (adjust if not needed for your workflow)
-npx prisma generate
+   ```
+4. Configures Node.js version with caching for PNPM
+   ```
+     - name: Use Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "pnpm"
+   ```
+5. Installs dependencies
+   ```
+    - name: Install dependencies
+      run: pnpm install
+   ```
+6. Installs dependencies
+   ```
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v8
 
-# 2. Apply Migrations
-npx prisma migrate deploy
+   ```
+7. Installs dependencies
+   ```
+    - name: Create Neon Branch
+    id: create-branch
+    uses: neondatabase/create-branch-action@v4
+    with:
+      project_id: ${{ env.NEON_PROJECT_ID }}
+      # parent: dev # optional (defaults to your primary branch)
+      branch_name: preview/pr-${{ github.event.number }}-${{ steps.branch-name.outputs.current_branch }}
+      username: ${{ env.NEON_DATABASE_USERNAME }}
+      api_key: ${{ env.NEON_API_KEY }}
+   ```
+8. Creates a Neon database branch for every pull request. By default, the database branch name will be `preview/<git-branch-name>-<commit_SHA>`. 
+   ```
+      - name: Run Migrations
+        run: |
+          touch .env
 
-# 3. Schema Drift Detection (Simplified)
-npx prisma migrate diff --from schema.prisma --to postgresql://...  # Replace with your database URL
-if [ $? -ne 0 ]; then
-  echo "**Schema drift detected!** Review changes before proceeding."
-  exit 1  # You might want a more nuanced approach than simply failing the build
-fi
+          echo DATABASE_URL=${{ steps.create-branch.outputs.db_url_with_pooler }}?sslmode=require >> .env
 
-echo "Database schema is in sync."
-```
+          pnpm run db:migrate
+   ```
+9. Deploys the application while including the Neon database URL.
+    ```
+    - name: Deploy
+      id: deploy
+      uses: superfly/fly-pr-review-apps@1.2.0
+      with:
+        secrets: DATABASE_URL=${{ steps.create-branch.outputs.db_url }}?sslmode=require
+    ```
+10. Comments on the pull request with deployment and database branch details. Here's an [example comment](https://github.com/neondatabase/preview-branches-with-fly/pull/9#issuecomment-1924660371):
+    ```
+     - name: Comment on Pull Request
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          # GITHUB_TOKEN: ${{ env.GH_TOKEN }} # Required for commenting on pull requests for private repos
+          message: |
+            Fly Preview URL :balloon: : ${{ steps.deploy.outputs.url }}
+            Neon branch :elephant: : https://console.neon.tech/app/projects/${{ secrets.NEON_PROJECT_ID }}/branches/${{ steps.create-branch.outputs.branch_id }}
+    ```
 
-- Within your GitHub Actions, you would include a step that executes this script.
+#### Automatic deployment process
 
-```yaml
-- name: Schema Migrations and Drift Check
-  run: ./prisma_migrate_and_check.sh 
-```
+[.github/workflows/deploy-production.yml](https://github.com/neondatabase/preview-branches-with-fly/blob/main/.github/workflows/deploy-production.yml) automates the deployment process to a production environment. It is activated on a push event to the main branch and uses the `FLY_API_TOKEN` and `DATABASE_URL` secrets that are set in the repository.
 
-## Tools
+The workflow has a single job called production-deploy and it consists of the following steps:
 
-- [Neon](/): A serverless, branch-based Postgres database. Neon allows you to create database branches instantly (including schema + data) and to manage thousands of them programmatically. [See this example repo](https://github.com/neondatabase/preview-branches-with-vercel).
-- [GitHub Actions](https://docs.github.com/en/actions): GitHub's built-in CI/CD platform that lets you automate workflows like testing, building, and deployments directly within your repositories. [This guide includes Actions you can use to automate the creation and deletion database branches.](/docs/guides/branching-github-actions)
-- [PostgreSQL Anonymizer](https://postgresql-anonymizer.readthedocs.io/en/stable/): This extension allows you to anonymize sensitive data (PII) for your non-production environments. This tutorial shows you how to use PostgreSQL Anonymizer in Neon. _This is interesting if you’re directly deriving your staging database branch from the production branch (as in [Example 1](#use-case-1-staging-with-production-like-data))_.
-- [Neosync](https://www.neosync.dev/): This tool allows you to build fully synthetic datasets that mimic your production data. [This blog post introduces you to the concept of synthetic data](/blog/how-to-use-synthetic-data-to-catch-more-bugs-with-neosync); for steps on how to implement this in Neon,[see this tutorial.](https://www.neosync.dev/blog/neosync-neon-data-gen-job) _Synthetic datasets are interesting if you’re choosing to completely avoid production data in non-production environments (see [Example 2](#use-case-2-transformed-data-for-staging))_.
-- [Prisma](https://www.prisma.io/): A framework for Node.js and TypeScript, popular for database schema management, migrations, and data access. [This guide shows you how to manage schema migrations using Prisma and Neon.](/docs/guides/prisma-migrations)
-- [Drizzle](https://orm.drizzle.team): A TypeScript ORM that connects to all major databases and works across most Javascript runtimes. [This guide shows you how to manage schema migrations using Drizzle and Neon.](/docs/guides/drizzle-migrations)
-- [Liquibase](https://www.liquibase.com): An open-source library for database change management. [This guide shows you how to manage schema migrations using Liquibase and Neon.](/docs/guides/liquibase)
-- [Flyway](https://flywaydb.org/):  A database migration tool that facilitates version control for databases. [This guide shows you how to manage schema migrations using Flyway and Neon.](/docs/guides/flyway)
+1. Checks out the codebase using actions/checkout@v4
+2. Sets up PNPM using pnpm/action-setup@v2 and specifies version 8. (You can use another package manager depending on your setup.)
+3. Configures the environment to use Node.js version 18 using actions/setup-node@v4, with a cache configured for PNPM.
+4. Installs project dependencies using pnpm install.
+5. Runs database migrations with the command pnpm run db:migrate.
+6. Sets up Fly CLI (flyctl) using [superfly/flyctl-actions/setup-flyctl@master](https://github.com/marketplace/actions/github-action-for-flyctl).
+7. Finally, deploys the application using Fly CLI with the command flyctl deploy --remote-only.
 
-<Admonition type="info">
-📖 **Contribute**
+#### Deleting database branches
 
-Help us improve this list! If you know of more great tools, share them with us in [Discord](/discord) or [Twitter](https://x.com/neondatabase).
-</Admonition>
+.github/workflows/delete-neon-branch.yml automates the cleanup of branches in Neon. It is activated on a pull_request event with the action closed. This will ensure that Neon branches are deleted when a pull request is closed/merged.
 
-## Acknowledgments
+The workflow uses [neondatabase/delete-branch-action@v3.1.3](https://github.com/neondatabase/delete-branch-action/tree/v3.1.3/) action which uses the NEON_API_KEY and NEON_PROJECT_ID secrets that are set in the repository.
 
-This content is inspired by the community. Special mention to Eric Bernhandsson ([article](https://erikbern.com/2021/04/19/software-infrastructure-2.0-a-wishlist.html)), Ryan Booz ([article](https://www.softwareandbooz.com/10-requirements-for-managing-database-changes/)), Evis Drenova, Martin Fowler ([article](https://martinfowler.com/articles/evodb.html)), Tonie Huizer ([article](https://www.sqlservercentral.com/articles/a-version-control-strategy-for-branch-based-database-development)), Franck Pachot, Jacob Prall, Umair Shahid, and Alex Klarfeld. Additional references: [Github flow](https://docs.github.com/en/get-started/using-github/github-flow), [The Planetscale workflow](https://planetscale.com/docs/concepts/planetscale-workflow), [Framework-defined infrastructure by Vercel](https://vercel.com/blog/framework-defined-infrastructure), [Guide to Database DevOps](https://www.liquibase.com/resources/guides/database-devops) and [Database GitOps](https://www.liquibase.com/gitops) by Liquibase.
+## Workflow for dev environments (one per engineer) 
+
+### Prerequisites
+
+You’ll need:
+- Database: [Neon](/)
+- CLI Tool: [Neon CLI](/docs/reference/neon-cli)
+
+### Step-by-step guide
+
+1. Set up your environment to use the Neon API key:
+   ```bash
+   export NEON_API_KEY=your_neon_api_key_here
+   ```
+2. Create a database branch for each engineer:
+   ```bash
+   neonctl branches create --name engineer_name_branch
+   ```
+3. Get unique connection string:
+   ```bash
+   neonctl connection-string --branch engineer_name_branch
+   ```
+4. If needed, you can reset your branch to mirror the parent branch. This is useful for discarding all changes in the dev branch and starting fresh based on the latest state of the parent’s data and schema:
+   ```bash
+   neonctl branches reset --name engineer_name_branch --parent
+   ```
+5. Once a dev branch is no longer needed, delete it:
+   ```bash
+   neonctl branches delete --name engineer_name_branch
+   ```
+
+## Future Improvements
+
+In the near future, we’ll be expanding this document to include more workflows, for example covering **staging environments**. Stay tuned.
+
+## Additional resources
+- [Using Vercel for your preview deployments](/docs/guides/vercel) (guide)
+- [A Postgres database for every Fly.io preview](https://www.youtube.com/watch?v=EOVa68Uviks) (video)
+- [A Postgres database for every Vercel preview](https://www.youtube.com/watch?v=s4vIMI9rXeg) (video)
+- Guides for [Prisma](/docs/guides/prisma-migrations), [Django](/docs/guides/django-migrations), [Liquibase](/docs/guides/liquibase), [Flyway](/docs/guides/flyway), and [more](/docs/guides/guides-intro)
+- [About Branch Reset](/blog/announcing-branch-reset) 
+- [About the Neon CLI](/blog/cli)
