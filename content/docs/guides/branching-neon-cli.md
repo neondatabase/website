@@ -143,6 +143,8 @@ neonctl branches reset <id|name> --parent
 
 Example:
 
+This example resets a developer's branch to match the latest state of its parent branch:
+
 ``` bash
 neonctl branches reset dev/alex --parent
 ┌────────────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
@@ -153,7 +155,7 @@ neonctl branches reset dev/alex --parent
 
 If the branch you want to reset has child branches, you need to include the `preserve-under-name` parameter. This will save the current state of your branch under a new name before performing the reset. The child branches will then show this newly named branch as their parent. This step ensures that your original branch can be reset cleanly, as all child branches will have been transferred to the new parent name.
 
-For example, here we are resetting `dev/alex` to its parent, while preserving its latest state under the branch name `dev/alex_backup`:
+For example, here we are resetting `dev/alex` to its parent while preserving its latest state under the branch name `dev/alex_backup`:
 
 ```bash
 neon branches reset dev/alex --parent --preserve-under-name dev/alex_backup
