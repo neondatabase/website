@@ -4,8 +4,6 @@ subtitle: Step-by-step guide showing you how to compare two development branches
 enableTableOfContents: true
 ---
 
-<ComingSoon/>
-
 In this guide we will create an initial schema on a new database called `people` on our `main` branch. We'll then create a development branch called `dev/jordan`, following our recommended convention for naming development branches. After making schema changes on `dev/jordan`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, Github-style visual comparison between the `dev/jordan` development branch and `main`.
 
 ## Before you start

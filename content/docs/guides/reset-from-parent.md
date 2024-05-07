@@ -53,7 +53,7 @@ Using the CLI, you can reset a branch from parent using the following command:
 neonctl branches reset <id|name> --parent
 ```
 
-In the `id|name` field, specify the branch ID or name of the child branch whose data you want to reset. The `--parent` parameter specifies the kind of reset action that Neon will perform. In the future, there may be other kinds of resets available. For example, rewinding a branch to an earlier period in time.
+In the `id|name` field, specify the branch ID or name of the child branch whose data you want to reset. The `--parent` parameter specifies the kind of reset action that Neon will perform.
 
 If you have multiple projects in your account, you'll also have to include the `project-id` in the command along with the branch.
 

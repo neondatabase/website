@@ -64,19 +64,31 @@ You are directed to the **Branches** page where you are shown the details for yo
 To view the branches in a Neon project:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** to view the branches for the project.
-3. Select a branch from the table to view details about the branch.
-![View branch details](/docs/manage/branch_details.png)
+1. Select **Branches** to view all current branches in the project.
 
-Branch details shown on the branch page include:
+   ![all branches](/docs/manage/branches_all_list.png)
 
-- **ID**: The branch ID. Branch IDs have a `br-` prefix.
-- **Created**: The date and time the branch was created.
-- **Active  Since**: The active hours used by the branch compute in the current billing period.
-- **Compute Time**: The compute hours used by the branch in the current billing period.
-- **Parent Branch**: The branch from which this branch was created (only applicable to child branches).
-- **Branching Point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
-- **Last Data Reset**: The last time the branch was reset from the parent branch (only applicable to child branches).
+   Branch details in this table view include:
+
+   - **Parent**: Indicates the parent from which this branch was created, helping you track your branch hierarchy.
+   - **Active time**: Number of hours the branch's compute was active so far in the current billing period.
+   - **RW Compute**: Shows the current compute size and activity status for the branch's compute.
+   - **Data size**: Indicates the logical data size of each branch, helping you monitor your plan's storage limit. Does not include shared history.
+   - **Last active**: Shows when the branch's compute was last active.
+
+1. Select a branch from the table to view details about the branch.
+
+    ![View branch details](/docs/manage/branch_details.png)
+
+    Branch details shown on the branch page include:
+
+    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
+    - **Created**: The date and time the branch was created.
+    - **Active  Since**: The active hours used by the branch compute in the current billing period.
+    - **Compute Time**: The compute hours used by the branch in the current billing period.
+    - **Parent Branch**: The branch from which this branch was created (only applicable to child branches).
+    - **Branching Point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
+    - **Last Data Reset**: The last time the branch was reset from the parent branch (only applicable to child branches).
 
 The branch details page also includes details about the compute endpoint associated with the branch. For more information, see [View a compute endpoint](/docs/manage/endpoints#view-a-compute-endpoint).
 

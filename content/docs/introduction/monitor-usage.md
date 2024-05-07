@@ -1,5 +1,5 @@
 ---
-title: Monitor billing and usage metrics
+title: Monitor billing and usage
 subtitle: Monitor billing and usage metrics for your account and projects from the console or API
 enableTableOfContents: true
 redirectFrom:
@@ -30,10 +30,12 @@ Here you will find the current bill and total usage for all projects in your Neo
 
 Usage metrics on the **Billing page** include:
 
-- **Storage**: Storage is total volume of data and history for your project, measured in gibibytes (GiB). Data refers to the logical data size. History consists of  Write-Ahead Logging (WAL) records capturing the data’s change history that is used to enable branching-related features. The displayed value reflects your current usage, including any extra storage that has been automatically added as a result of exceeding your plan's allowances. 
-- **Compute**: The total number of compute hours used during the current billing period. Compute usage is reset to zero at the beginning of each month. For example, on the Launch plan, compute usage will be set back to **0/300h** at the beginning of each month.
+- **Storage**: Storage is the total volume of data and history for your project, measured in gibibytes (GiB). Data refers to the logical data size. History consists of  Write-Ahead Logging (WAL) records capturing the data’s change history that is used to enable branching-related features. The displayed value reflects your current usage, including any extra storage that has been automatically added as a result of exceeding your plan's allowances. 
+- **Compute**: The total number of [compute hours](/docs/reference/glossary#compute-hours) used during the current billing period. Compute usage is reset to zero at the beginning of each month. For example, on the Launch plan, compute usage will be set back to **0/300h** at the beginning of each month. On the Free Tier, this metric only applies to [non-primary branch](/docs/reference/glossary#non-primary-branch) computes.
 - **Projects**: Number of projects currently active in your account. The displayed value reflects your current usage, including any extra projects that have been automatically added as a result of exceeding your plan's allowances. 
-- **Branches** (Free Tier only) Number of database branches currently active in your account. On The Free Tier, there is a 10-branch limit.
+- **Branches** (Free Tier only) Number of database branches currently active in your account. On The Free Tier, there is a 10-branch allowance.
+
+The peak usage triangle indicates the highest usage level reached for that metric during the current billing period. Extra charges are automatically applied based on the number of additional units needed to cover your excess usage, prorated from the date the excess was allocated.
 
 ![Monitor billing and usage](/docs/introduction/monitor_billing_usage.png)
 
@@ -42,10 +44,10 @@ Usage metrics on the **Billing page** include:
 - **Compute** usage is tracked in **compute hours**. A compute hour is 1 active hour for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour. 
 
   <Admonition type="note">
-  On the Free Tier, the primary branch compute is a 0.25 vCPU compute that is always available, so allowances do not apply to your primary branch. You can run your 0.25 vCPU compute on the Free Tier 24/7. Only branch computes on the Free Tier have an allowance, which is the 5 compute hour/month allowance that Free Tier users see on the **Billing** page. On the Free Tier, this is actually 20 hours of usage because Free Tier computes always have 0.25 vCPU. You cannot increase the compute size on the Free Tier.
+  On the Free Tier, the [primary branch](/docs/reference/glossary#primary-branch) compute is a 0.25 vCPU compute that is always available, so allowances do not apply to your primary branch. You can run your 0.25 vCPU compute on the Free Tier 24/7. Only branch computes on the Free Tier have an allowance, which is the 5 compute hour/month allowance that Free Tier users see on the **Billing** page. On the Free Tier, this is actually 20 hours of usage because the compute size on the Free Tier is 0.25 vCPU. You cannot increase the compute size on the Free Tier.
   </Admonition>
 
-- **Storage** includes your data size and history. Neon maintains a history of changes to support branching-related features such as _point-in-time restore_. The Launch plan supports up to 7 days of history retention, and the Scale plan supports up to 30 days. Keep in mind that history retention increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the history retention setting for your project. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+- **Storage** includes your data size and history. Neon maintains a history of changes to support branching-related features such as [point-in-time restore](/docs/reference/glossary#point-in-time-restore). The Launch plan supports up to 7 days of history retention, and the Scale plan supports up to 30 days. Keep in mind that history retention increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the history retention setting for your project. See [Configure history retention](/docs/manage/projects#configure-history-retention).
 
 - **What about extra usage?**
 
@@ -60,9 +62,9 @@ The **Usage** widget on the Neon Dashboard shows a snapshot of project usage.
 Usage metrics include:
 
 - **Storage**: The total volume of data and history for your project, measured in gibibytes (GiB). Data refers to the logical data size. History consists of  Write-Ahead Logging (WAL) records capturing the data’s change history that is used to enable branching-related features. 
-- **Data transfer**: The total volume of data transferred out of Neon (known as "egress") during the current billing period.
+- **Data transfer**: The total volume of data transferred out of Neon (known as "egress") during the current billing period. The Free Tier has an egress limit of 5 GiB per month.
 - **Written data**: The total volume of data written from compute to storage during the current billing period, measured in gigibytes (GiB).
-- **Compute**: The total number of compute hours used during the current billing period.
+- **Compute**: The total number of [compute hours](/docs/reference/glossary#compute-hours) used during the current billing period.
 - **Active computes**: The current number of active computes in your project.
 - **Branches**: The number of branches in your project.
 
@@ -70,19 +72,12 @@ The **Branches** widget shows a **Data size** metric, which is the size of the a
 
 ![Monitor branches widget](/docs/introduction/monitor_branches_widget.png)
 
-You can select a branch in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and run this query to get the same data (rounded):
-
-```sql
-SELECT pg_size_pretty(sum(pg_database_size(datname)))
-FROM pg_database;
-```
-
 ### Branches page
 
 The **Branches** page in the Neon Console provides branch-specific metrics, including:
 
-- **Active time**: The active time for the branch compute.
-- **Data size**: The size of the actual data on your branch, not including history.
+- **Active time**: The [active hours](/docs/reference/glossary#active-hours) for the branch compute.
+- **Data size**: The size of the actual data on your branch, not including [history](https://neon.tech/docs/reference/glossary#history).
 - **Last active**: The data and time the branch was last active.
 
 To view the branches in your Neon project:

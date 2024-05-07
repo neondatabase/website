@@ -67,8 +67,6 @@ Understanding the information provided by the **Explain** and **Analyze** featur
 
 ## Time Travel
 
-<ComingSoon/>
-
 You can toggle Time Travel in the SQL Editor to switch from querying your current data to querying against a selected point within your [history retention window](/docs/manage/projects#configure-history-retention).
 
 ![time travel in SQL Editor](/docs/get-started-with-neon/time_travel_sql_editor.png "no-border")
@@ -78,8 +76,6 @@ For more details about using Time Travel queries, see:
 - [Time Travel tutorial](/docs/guides/time-travel-tutorial)
 
 ## Meta-commands
-
-<ComingSoon/>
 
 The Neon SQL Editor supports using Postgres meta-commands, which act like shortcuts for interacting with your database. If you are already familiar with using meta-commands from the `psql` command-line interface, you can use many of those same commands in the SQL Editor.
 

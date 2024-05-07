@@ -27,7 +27,11 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Astro" href="/docs/guides/astro" title="Connect an Astro site or app to Neon" />
 
+<img src="/images/technology-logos/auth0-logo.svg" width="36" height="36" alt="Auth0" href="/docs/guides/auth-clerk" title="Authenticate Neon Postgres application users with Auth0" />
+
 <img src="/images/technology-logos/aws-lambda-logo.svg" width="36" height="36" alt="AWS Lambda" href="/docs/guides/aws-lambda" title="Connect from AWS Lambda to Neon" />
+
+<img src="/images/technology-logos/clerk-logo.svg" width="36" height="36" alt="Clerk" href="/docs/guides/auth-clerk" title="Authenticate Neon Postgres application users with Clerk" />
 
 <img src="/images/technology-logos/clickhouse-logo.svg" width="36" height="36" alt="ClickHouse" href="/docs/guides/logical-replication-clickhouse" title="Replicate data from Neon to ClickHouse (DoubleCloud)" />
 
@@ -45,7 +49,7 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir-ecto" title="Connect from Elixir with Ecto to Neon" />
 
-<img src="/images/technology-logos/entity-logo.svg" width="36" height="36" alt="Entity Framework" href="/docs/guides/elixir-ecto" title="Schema migration with Neon and Entity Framework" />
+<img src="/images/technology-logos/entity-logo.svg" width="36" height="36" alt="Entity Framework" href="/docs/guides/entity-migrations" title="Schema migration with Neon and Entity Framework" />
 
 <img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Use Exograph with Neon" />
 
@@ -83,8 +87,6 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
 
-<img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale-integration" title="Add the Neon PolyScale integration" />
-
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-jdbc" title="Connect Quarkus (JDBC) to Neon" />
 
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-reactive" title="Connect Quarkus (Reactive) to Neon" />
@@ -100,6 +102,8 @@ Integrate your applications with Neon.
 <img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
 
 <img src="/images/technology-logos/sequelize-logo.svg" width="29" height="36" alt="Sequelize" href="/docs/guides/sequelize" title="Schema migration with Neon Postgres and Sequelize" />
+
+<img src="/images/technology-logos/sequin-logo.svg" width="29" height="36" alt="Sequin" href="/docs/guides/sequin" title="Sync data from APIs to Neon in real time " />
 
 <img src="/images/technology-logos/sqlalchemy-logo.svg" width="36" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect an SQLAlchemy application to Neon" />
 
