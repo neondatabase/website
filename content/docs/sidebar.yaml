@@ -5,7 +5,7 @@
     - title: Why Neon?
       slug: introduction/about #new page combining what is neon and carlotta's
     - title: Day 1 - Sign-up and get started # sign-up plus all the basics to start working with your new db from command line/ include sample db or link migrate
-      slug: getting_started/setup
+      slug: get-started-with-neon/signing-up
     - title: Day 2 - Add Neon to your stack
       slug: getting_stated/connections
     - title: Day 3 - CI/CD Automation
