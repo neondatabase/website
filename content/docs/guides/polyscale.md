@@ -2,7 +2,6 @@
 title: Connect Neon to PolyScale manually
 subtitle: Connect Neon to PolyScale to distribute and cache your data globally
 enableTableOfContents: true
-updatedOn: '2023-12-04T18:49:23.388Z'
 ---
 
 <Admonition type="important" title="Important Update Regarding PolyScale Support">
