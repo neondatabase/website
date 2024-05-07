@@ -54,7 +54,7 @@ const useVideoPlayback = (
 
       const timer = setTimeout(() => {
         switchVideo();
-      }, 2500);
+      }, 5000);
 
       return () => clearTimeout(timer);
     },
