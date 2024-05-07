@@ -1,6 +1,8 @@
 ---
 title: Connect Neon to PolyScale manually
 subtitle: Connect Neon to PolyScale to distribute and cache your data globally
+redirectFrom:
+  - /docs/guides/polyscale-integration
 enableTableOfContents: true
 ---
 
