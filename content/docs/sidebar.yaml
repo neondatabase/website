@@ -290,6 +290,8 @@
       items:
         - title: Cloudflare Hyperdrive
           slug: guides/cloudflare-hyperdrive
+        - title: PolyScale
+          slug: guides/polyscale
     - title: Deployment platforms
       items:
         - title: Cloudflare
