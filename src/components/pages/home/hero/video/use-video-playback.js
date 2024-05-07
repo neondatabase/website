@@ -77,7 +77,10 @@ const useVideoPlayback = (
       }
     } else {
       video.pause();
-      setIsTitleVisible(true);
+
+      if (video.currentTime === 0) {
+        setIsTitleVisible(true);
+      }
     }
 
     video.addEventListener('timeupdate', updateProgress(video));
