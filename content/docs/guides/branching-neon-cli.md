@@ -148,7 +148,7 @@ neonctl branches reset dev/alex --parent
 ┌────────────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                         │ Name     │ Primary │ Created At           │ Last Reset At        │
 ├────────────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-twilight-smoke-123456 │ dev/alex │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T17:57:35Z │
+│ br-twilight-smoke-123456   │ dev/alex │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T17:57:35Z │
 ```
 
 If the branch you want to reset has child branches, you need to include the `preserve-under-name` parameter. This will save the current state of your branch under a new name before performing the reset. The child branches will then show this newly named branch as their parent. This step ensures that your original branch can be reset cleanly, as all child branches will have been transferred to the new parent name.
@@ -171,6 +171,30 @@ Using the CLI, you can restore a branch to an earlier point in its history or an
 
 ``` bash shouldWrap
 neonctl branches restore <target id|name> <source id|name @ timestamp|lsn>
+```
+
+This command restores the branch `main` to an earlier timestamp in it's own history, saving to a backup branch called `main_restore_backup_2024-02-20`
+
+```bash shouldWrap
+neonctl branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06   
+```
+
+Results of the operation:
+
+```bash shouldWrap
+INFO: Restoring branch br-purple-dust-a5hok5mk to the branch br-purple-dust-a5hok5mk timestamp 2024-05-06T10:00:00.000Z
+Restored branch
+┌─────────────────────────┬──────┬──────────────────────┐
+│ Id                      │ Name │ Last Reset At        │
+├─────────────────────────┼──────┼──────────────────────┤
+│ br-purple-dust-a5hok5mk │ main │ 2024-05-07T09:45:21Z │
+└─────────────────────────┴──────┴──────────────────────┘
+Backup branch
+┌─────────────────────────┬────────────────────────────────┐
+│ Id                      │ Name                           │
+├─────────────────────────┼────────────────────────────────┤
+│ br-flat-forest-a5z016gm │ main_restore_backup_2024-05-06 │
+└─────────────────────────┴────────────────────────────────┘
 ```
 
 For full details about the different restore options available with this command, see [Restoring using the CLI](/docs/guides/branch-restore#how-to-use-branch-restore).
