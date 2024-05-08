@@ -89,7 +89,7 @@ const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {
               (code, index) =>
                 index === activeTab && (
                   <m.div
-                    className="dark"
+                    className="homepage-shiki"
                     key={index}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
