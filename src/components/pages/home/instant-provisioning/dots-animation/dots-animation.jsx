@@ -73,7 +73,7 @@ const DotsAnimation = ({
       tabInput.value = activeTab + 1;
       const timeoutId = setTimeout(() => {
         changeInput.fire();
-      }, 2000);
+      }, 300);
 
       return () => clearTimeout(timeoutId);
     },
