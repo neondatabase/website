@@ -82,7 +82,7 @@ Now, let's add the server action to insert the data into your Postgres (powered 
     async function create(formData: FormData) {
       "use server";
       // Create a client instance using `node-postgres`
-      const client = new Client(`${process.env.POSTGRES_URL}`);
+      const client = new Client(`${process.env.DATABASE_URL}`);
       await client.connect();
       // Create the comments table if it does not exist
       await client.query("CREATE TABLE IF NOT EXISTS comments (comment TEXT)");
