@@ -20,7 +20,6 @@ const DotsAnimation = ({
   fit = 'FitWidth',
   alignment = 'TopCenter',
   intersectionRootMargin = '500px 0px',
-  animationRootMargin = '300px 0px',
   onLoad,
 }) => {
   const isTouch = useIsTouchDevice();
@@ -29,7 +28,7 @@ const DotsAnimation = ({
     triggerOnce: true,
     rootMargin: intersectionRootMargin,
   });
-  const [animationRef, isVisible] = useInView({ rootMargin: animationRootMargin });
+  const [animationRef, isVisible] = useInView({ threshold: 0.3 });
 
   const { rive, RiveComponent } = useRive({
     src,
@@ -46,7 +45,7 @@ const DotsAnimation = ({
     },
   });
 
-  const tabInput = useStateMachineInput(rive, stateMachines, 'tab', 0);
+  const tabInput = useStateMachineInput(rive, stateMachines, 'tab', 1);
   const changeInput = useStateMachineInput(rive, stateMachines, 'change');
 
   useEffect(
@@ -71,13 +70,15 @@ const DotsAnimation = ({
         return;
       }
 
-      tabInput.value = activeTab;
-      // setTimeout(() => {
-      //   changeInput.fire();
-      // }, 200);
+      tabInput.value = activeTab + 1;
+      const timeoutId = setTimeout(() => {
+        changeInput.fire();
+      }, 2000);
+
+      return () => clearTimeout(timeoutId);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rive, isVisible]
+    [rive, isVisible, activeTab]
   );
 
   return (
@@ -114,7 +115,6 @@ DotsAnimation.propTypes = {
   onLoad: PropTypes.func,
   intersectionRootMargin: PropTypes.string,
   className: PropTypes.string,
-  animationRootMargin: PropTypes.string,
   intersectionClassName: PropTypes.string,
 };
 

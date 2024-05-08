@@ -31,7 +31,7 @@ const InstantProvisioning = () => (
               'before:pointer-events-none before:absolute before:-inset-x-1.5 before:inset-y-px before:rounded-[100%] before:bg-white before:opacity-[0.22] before:blur-md'
             )}
           >
-            <span className="relative opacity-80">Provisioned for 300ms</span>
+            <span className="relative opacity-80">Provisioned in 300ms</span>
           </p>
           <div className="relative z-10 mt-2.5 rounded-[14px] bg-white bg-opacity-5 p-1.5 backdrop-blur-[1px]">
             <div
