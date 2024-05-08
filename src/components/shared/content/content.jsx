@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import clsx from 'clsx';
-import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
+
 
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
@@ -24,6 +24,8 @@ import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 import DocCta from '../doc-cta';
+
+import ImageBlock from './image-block'
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });
@@ -86,15 +88,9 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   },
   img: (props) => {
     const { className, title, ...rest } = props;
+
     return (
-      <Image
-        className={clsx(className, { 'no-border': title === 'no-border' })}
-        width={isReleaseNote ? 762 : 796}
-        height={isReleaseNote ? 428 : 447}
-        style={{ width: '100%', height: '100%' }}
-        title={title !== 'no-border' ? title : undefined}
-        {...rest}
-      />
+      <ImageBlock className={className} title={title} isReleaseNote={isReleaseNote} {...rest} />
     );
   },
   p: (props) => {
