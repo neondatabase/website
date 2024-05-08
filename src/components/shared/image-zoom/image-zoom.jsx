@@ -7,7 +7,12 @@ import 'react-medium-image-zoom/dist/styles.css';
 import 'styles/image-zoom.css';
 
 const ImageZoom = ({ src, isDark, children }) => (
-  <Zoom classDialog={clsx('zoom-modal', isDark && 'dark')} zoomImg={{ src }} zoomMargin={16}>
+  <Zoom
+    classDialog={clsx('zoom-modal', isDark && 'dark')}
+    zoomImg={{ src }}
+    zoomMargin={16}
+    wrapElement="span"
+  >
     {children}
   </Zoom>
 );
