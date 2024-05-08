@@ -5,7 +5,55 @@ import { getHighlightedCodeArray } from 'lib/shiki';
 
 import Navigation from './navigation';
 
-const CODE = `// app.js
+const codeSnippets = [
+  {
+    name: 'Ruby',
+    iconName: 'ruby',
+    language: 'ruby',
+    code: `class HelloWorld
+  def initialize(name)
+      @name = name.capitalize
+  end
+  def sayHi
+      puts "Hello #{@name}!"
+  end
+ end
+ hello = HelloWorld.new("World")
+ hello.sayHi`,
+  },
+  {
+    name: 'Python',
+    iconName: 'python',
+    language: 'python',
+    code: `print("Hello, World!")`,
+  },
+  {
+    name: 'Go',
+    iconName: 'go',
+    language: 'go',
+    code: `package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}`,
+  },
+  {
+    name: 'Java',
+    iconName: 'java',
+    language: 'java',
+    code: `public class HelloWorld {
+  public static void main(String[] args) {
+      System.out.println("Hello, World!");
+  }
+}`,
+  },
+  {
+    name: 'Node',
+    iconName: 'nodejs',
+    language: 'javascript',
+    code: `// app.js
 const postgres = require('postgres');
 require('dotenv').config();
 
@@ -28,44 +76,16 @@ async function getPgVersion() {
   console.log(result);
 }
 
-getPgVersion();`;
-
-const codeSnippets = [
-  {
-    name: 'Ruby',
-    iconName: 'ruby',
-    language: 'ruby',
-    code: CODE,
-  },
-  {
-    name: 'Python',
-    iconName: 'python',
-    language: 'python',
-    code: CODE,
-  },
-  {
-    name: 'Go',
-    iconName: 'go',
-    language: 'go',
-    code: CODE,
-  },
-  {
-    name: 'Java',
-    iconName: 'java',
-    language: 'java',
-    code: CODE,
-  },
-  {
-    name: 'Node',
-    iconName: 'nodejs',
-    language: 'javascript',
-    code: CODE,
+getPgVersion();`,
   },
   {
     name: 'Prisma',
     iconName: 'prisma',
     language: 'javascript',
-    code: CODE,
+    code: `datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}`,
   },
 ];
 
