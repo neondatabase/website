@@ -132,7 +132,7 @@ const Hero = () => {
           {ITEMS.map((item, index) => (
             <Video
               className={clsx(
-                'transition-all duration-1000',
+                'transition-all duration-700',
                 currentVideoIndex === index
                   ? 'w-[64.7273%] flex-shrink-0 xl:w-[61.863%] lg:w-[62.746%] sm:w-full'
                   : 'w-full'

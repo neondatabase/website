@@ -76,8 +76,9 @@ const Video = forwardRef(
             */}
             <video
               className={clsx(
-                'absolute left-0 top-0 z-0 h-auto min-w-[704px] transition-all duration-1000 2xl:min-w-[652px] xl:min-w-[608px] lg:min-w-[514px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
+                'absolute left-0 top-0 z-0 h-auto min-w-[704px] 2xl:min-w-[652px] xl:min-w-[608px] lg:min-w-[514px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
                 videoClassName,
+                !isActive && 'transition-all delay-700 duration-700',
                 isActive && '!left-0 lg:!left-1/2 lg:-translate-x-1/2 sm:left-0 sm:translate-x-0'
               )}
               height={466}
