@@ -9,18 +9,18 @@ import DotsAnimation from './dots-animation';
 
 // TODO: add lights under codeblock
 const InstantProvisioning = () => (
-  <section className="instant-provising safe-paddings relative mt-[168px] xl:mt-28 lg:pt-24">
+  <section className="instant-provising safe-paddings relative mt-[168px] xl:mt-28 lg:mt-24">
     <Container className="flex flex-wrap justify-center gap-x-[58px] xl:gap-x-[29px]" size="1100">
       <ActiveTabContext>
-        <div className="w-[384px] xl:w-[352px]">
-          <h2 className="font-title text-[68px] font-medium leading-[0.9] tracking-extra-tight text-white xl:text-[56px] lg:pl-16 lg:text-[44px] sm:pl-0 sm:text-[32px]">
+        <div className="w-[384px] xl:w-[352px] lg:w-[256px]">
+          <h2 className="font-title text-[68px] font-medium leading-[0.9] tracking-extra-tight text-white xl:text-[56px] lg:text-[44px] sm:pl-0 sm:text-[32px]">
             Instant Provisioning
           </h2>
-          <p className="mt-[18px] text-xl font-light tracking-extra-tight text-gray-new-70 xl:mt-4 xl:text-lg">
+          <p className="mt-[18px] text-xl font-light tracking-extra-tight text-gray-new-70 xl:mt-4 xl:text-lg lg:mt-3 lg:text-base">
             No waiting. No config.
           </p>
         </div>
-        <div className="relative flex w-[652px] flex-col pb-[171px] pt-[100px] xl:w-[580px] xl:pb-[148px] xl:pt-[84px]">
+        <div className="relative flex w-[652px] flex-col pb-[171px] pt-[100px] xl:w-[580px] xl:pb-[148px] xl:pt-[84px] lg:w-[417px] lg:pb-[105px] lg:pt-[61px]">
           <div className="absolute -left-20 top-32 z-0 h-[133px] w-[205px] rounded-[100%] border border-white bg-[#16182D] opacity-30 blur-3xl" />
           <div
             className="pointer-events-none absolute -right-20 top-8 h-[133px] w-[398px] rounded-[100%] bg-[#16182D] opacity-35 blur-3xl"
@@ -28,7 +28,7 @@ const InstantProvisioning = () => (
           />
           <p
             className={clsx(
-              'relative mr-3 self-end font-mono text-xs leading-none tracking-extra-tight',
+              'relative mr-3 self-end font-mono text-xs leading-none tracking-extra-tight lg:mr-2',
               'before:pointer-events-none before:absolute before:-inset-x-1.5 before:inset-y-px before:rounded-[100%] before:bg-white before:opacity-[0.22] before:blur-md'
             )}
           >
@@ -36,23 +36,25 @@ const InstantProvisioning = () => (
               Provisioned in 300ms
             </span>
           </p>
-          <div className="relative z-10 mt-2.5 rounded-[14px] bg-white bg-opacity-5 p-1.5 backdrop-blur-[1px]">
+          <div className="relative z-10 mt-2.5 rounded-[14px] bg-white bg-opacity-5 p-1.5 backdrop-blur-[1px] xl:rounded-xl">
             <div
               className="absolute inset-0 z-0 rounded-[inherit] border border-white/[0.04] mix-blend-overlay"
               aria-hidden
             />
-            <div className="relative z-10 flex h-12 items-center gap-x-3.5 rounded-[10px] border border-white border-opacity-[0.03] bg-black-new pl-[18px] font-mono text-[13px] tracking-extra-tight xl:h-[43px] xl:pl-4">
+            <div className="relative z-10 flex h-12 gap-x-3.5 rounded-[10px] border border-white border-opacity-[0.03] bg-black-new pl-[18px] pt-4 tracking-extra-tight xl:h-[43px] xl:rounded-lg xl:pl-4 xl:pt-[14px]">
               <span
-                className="relative h-1.5 w-1.5 gap-x-3.5 rounded-full bg-primary-1 shadow-[0px_0px_9px_0px_#4BFFC3] xl:h-[5px] xl:w-[5px]"
+                className="relative mt-1 h-1.5 w-1.5 rounded-full bg-primary-1 shadow-[0px_0px_9px_0px_#4BFFC3] xl:h-[5px] xl:w-[5px]"
                 aria-hidden
               >
                 <span className="absolute inset-px h-1 w-1 rounded-full bg-[#D9FDF1] opacity-70 blur-[1px]" />
               </span>
-              postgresql://example@ep-938132.eu-central-1.aws.neon.tech/primary
+              <span className="line-clamp-1 h-[14px] font-mono text-[13px] leading-none">
+                postgresql://example@ep-938132.eu-central-1.aws.neon.tech/primary
+              </span>
             </div>
           </div>
           <DotsAnimation
-            className="absolute -bottom-1.5 left-1/2 aspect-[3.49726] w-[640px] -translate-x-1/2 xl:w-[568px]"
+            className="absolute -bottom-1.5 left-1/2 aspect-[3.49726] w-[640px] -translate-x-1/2 xl:w-[568px] lg:w-[417px]"
             src="/animations/pages/home/dots-stack.riv"
             artboard="dots"
             intersectionRootMargin="0px 0px 600px 0px"
@@ -60,18 +62,18 @@ const InstantProvisioning = () => (
           />
         </div>
 
-        <div className="w-[384px] pt-7 xl:w-[352px] xl:pt-1">
-          <h2 className="font-title text-[68px] font-medium leading-[0.9] tracking-extra-tight text-white xl:text-[56px] lg:pl-16 lg:text-[44px] sm:pl-0 sm:text-[32px]">
+        <div className="w-[384px] pt-7 xl:w-[352px] xl:pt-1 lg:w-[256px] lg:pt-0">
+          <h2 className="font-title text-[68px] font-medium leading-[0.9] tracking-extra-tight text-white xl:text-[56px] lg:text-[44px] sm:pl-0 sm:text-[32px]">
             Works with
             <br />
             your stack
           </h2>
-          <p className="mt-7 font-light tracking-extra-tight text-gray-new-70 xl:mt-5 xl:max-w-xs xl:text-lg">
+          <p className="mt-7 font-light tracking-extra-tight text-gray-new-70 xl:mt-5 xl:max-w-xs xl:text-lg lg:mt-4 lg:text-base">
             Neon is an easy-to-use serverless Postgres. Integrate it into your language or framework
             within minutes and unlock a new developer workflow.
           </p>
           <Link
-            className="relative z-10 mt-7 flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] xl:mt-5"
+            className="relative z-10 mt-7 flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] xl:mt-5 lg:mt-4"
             to="/docs/serverless/serverless-driver"
             theme="white"
             withArrow
@@ -80,16 +82,16 @@ const InstantProvisioning = () => (
           </Link>
         </div>
 
-        <div className="relative z-10 w-[652px] rounded-[14px] bg-white bg-opacity-5 p-1.5 backdrop-blur-[1px] xl:w-[580px]">
-          <div className="absolute -left-40 -top-44 z-0 h-[482px] w-[470px] rounded-[100%] bg-[linear-gradient(180deg,rgba(25,27,52,0)_0%,#16182D_88.36%)] opacity-65 blur-3xl xl:-left-36 xl:-top-40 xl:h-[427px] xl:w-[417]" />
-          <div className="absolute -right-32 -top-28 z-0 h-[316px] w-[316px] rounded-[100%] bg-[#16182D] opacity-20 blur-3xl" />
-          <div className="absolute -bottom-36 -right-36 z-0 h-[377px] w-[377px] rounded-[100%] bg-[#16182D] opacity-30 blur-3xl" />
+        <div className="relative z-10 w-[652px] rounded-[14px] bg-white bg-opacity-5 p-1.5 backdrop-blur-[1px] xl:w-[580px] xl:rounded-xl lg:w-[417px]">
+          <div className="pointer-events-none absolute -left-40 -top-44 z-0 h-[482px] w-[470px] rounded-[100%] bg-[linear-gradient(180deg,rgba(25,27,52,0)_0%,#16182D_88.36%)] opacity-65 blur-3xl xl:-left-36 xl:-top-40 xl:h-[427px] xl:w-[417]" />
+          <div className="pointer-events-none absolute -right-32 -top-28 z-0 h-[316px] w-[316px] rounded-[100%] bg-[#16182D] opacity-20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-36 -right-36 z-0 h-[377px] w-[377px] rounded-[100%] bg-[#16182D] opacity-30 blur-3xl" />
           <div
-            className="absolute inset-0 z-0 rounded-[inherit] border border-white/[0.04] mix-blend-overlay"
+            className="pointer-events-none absolute inset-0 z-0 rounded-[inherit] border border-white/[0.04] mix-blend-overlay"
             aria-hidden
           />
-          <div className="relative z-10 rounded-[10px] border border-white border-opacity-[0.03] bg-black-new">
-            <CodeTabs className="scrollbar-hidden overflow-auto" />
+          <div className="relative z-10 rounded-[10px] border border-white border-opacity-[0.03] bg-black-new xl:rounded-lg">
+            <CodeTabs />
           </div>
         </div>
       </ActiveTabContext>

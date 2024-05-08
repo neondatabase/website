@@ -7,7 +7,7 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import phoneCameraIllustration from 'images/pages/home/lightning/phone-camera.png';
 
 const Lightning = () => (
-  <section className="lightning safe-paddings mt-60 xl:mt-32 lg:mt-24 sm:mt-20">
+  <section className="lightning safe-paddings mt-60 xl:mt-32 lg:mt-[76px] sm:mt-20">
     <Container
       className="pb-[280px] xl:max-w-[704px] xl:pb-[178px] lg:!max-w-[640px] lg:pb-6 md:!max-w-none md:pl-[84px] sm:pl-5"
       size="960"
