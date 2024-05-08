@@ -3,14 +3,13 @@ import clsx from 'clsx';
 import parse, { attributesToProps, domToReact } from 'html-react-parser';
 import isBoolean from 'lodash.isboolean';
 import isEmpty from 'lodash.isempty';
-
+import Image from 'next/image';
 
 import EmbedTweet from 'components/shared/embed-tweet';
 import Link from 'components/shared/link';
 
 import AnchorHeading from '../components/shared/anchor-heading';
-
-import ImageBlock from './image-block';
+import ImageZoom from '../components/shared/image-zoom';
 
 function isBooleanString(string) {
   return string === 'true' || string === 'false';
@@ -67,7 +66,25 @@ function transformProps(props) {
 
 const sharedComponents = {
   h2: AnchorHeading('h2'),
-  img: (props) => <ImageBlock {...props} />,
+  img: (props) => {
+    const { src, className, width, height, alt, isPriority } = props;
+    const urlWithoutSize = src.replace(/-\d+x\d+/i, '');
+
+    return (
+      <ImageZoom src={urlWithoutSize}>
+        <Image
+          className={clsx('rounded-md', className)}
+          src={urlWithoutSize}
+          width={width || 975}
+          height={height || 512}
+          quality={85}
+          alt={alt || 'Post image'}
+          priority={isPriority || false}
+          sizes="(max-width: 767px) 100vw"
+        />
+      </ImageZoom>
+    );
+  },
   a: (props) => {
     const { href, ...otherProps } = props;
     return <Link to={href} {...otherProps} />;
