@@ -42,7 +42,6 @@ const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {
               <button
                 className={clsx(
                   'group relative flex h-[30px] shrink-0 items-center overflow-hidden rounded-md px-3 leading-none outline-none xl:h-[27px] xl:py-[7px]',
-                  'after:absolute after:left-1/2 after:top-full after:h-9 after:w-[67px] after:-translate-x-1/2 after:rounded-full after:bg-[#D9D9D9] after:blur-md after:transition-opacity after:duration-200',
                   index === activeTab ? 'after:opacity-40' : 'after:opacity-0'
                 )}
                 type="button"
@@ -51,10 +50,19 @@ const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {
               >
                 <span
                   className={clsx(
-                    'border-linear absolute inset-0 z-10 rounded-[inherit] transition-colors duration-200',
+                    'border-linear absolute inset-0 z-10 rounded-[inherit] bg-gradient-to-b from-white/90 to-white/[0.72] mix-blend-overlay group-hover:opacity-0',
+                    index === activeTab && 'opacity-0'
+                  )}
+                  aria-hidden
+                />
+                <span
+                  className={clsx(
+                    'absolute inset-0 z-10 rounded-[inherit] opacity-0 transition-colors duration-200',
+                    'before:absolute before:inset-px before:rounded-[inherit] before:bg-black-new',
+                    'after:absolute after:left-1/2 after:top-full after:h-9 after:w-[67px] after:-translate-x-1/2 after:rounded-full after:bg-[#D9D9D9] after:blur-md after:transition-opacity after:duration-200',
                     index === activeTab
-                      ? 'bg-[radial-gradient(64.39%_110%_at_50%_-20%,#FFFFFF_27.27%,rgba(255,255,255,.1)_69.23%)]'
-                      : 'bg-gradient-to-b from-white/90 to-white/[0.72] mix-blend-overlay group-hover:bg-gray-new-80 group-hover:mix-blend-normal'
+                      ? 'bg-[radial-gradient(64.39%_110%_at_50%_120%,#FFFFFF_27.27%,rgba(255,255,255,.1)_69.23%)] !opacity-100 after:opacity-40'
+                      : 'bg-gradient-to-b from-white to-white/40 after:opacity-0 group-hover:opacity-30'
                   )}
                   aria-hidden
                 />
