@@ -41,6 +41,7 @@ const Post = ({
   breadcrumbs,
   navigationLinks: { previousLink, nextLink },
   isChangelog = false,
+  isGuidePage = false,
   changelogPosts = [],
   currentSlug,
   fileOriginPath,
@@ -58,7 +59,10 @@ const Post = ({
     <>
       <div
         className={clsx(
-          'col-span-6 -mx-10 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8'
+          'col-span-6 -mx-10 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
+          isGuidePage
+            ? 'col-start-4 -mx-[26px] 2xl:col-span-8 2xl:col-start-2 2xl:mx-5 xl:col-span-7 xl:col-start-3 md:mx-auto'
+            : ''
         )}
       >
         {breadcrumbs.length > 0 && <Breadcrumbs breadcrumbs={breadcrumbs} />}
@@ -114,6 +118,7 @@ Post.propTypes = {
     nextLink: PropTypes.shape({}),
   }).isRequired,
   isChangelog: PropTypes.bool,
+  isGuidePage: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,
