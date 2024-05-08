@@ -31,7 +31,7 @@ const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {
     <>
       <div
         className={clsx(
-          'relative flex gap-x-2 px-4 py-2.5',
+          'relative flex gap-x-2 px-4 py-2.5 xl:gap-x-1.5 xl:px-[14px] xl:py-2',
           'after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-white after:opacity-50 after:mix-blend-overlay'
         )}
       >
@@ -40,36 +40,34 @@ const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {
           return (
             <button
               className={clsx(
-                'group relative overflow-hidden rounded-md px-3 py-2 leading-none lg:flex-1',
+                'group relative flex h-[30px] items-center overflow-hidden rounded-md px-3 leading-none outline-none xl:h-[27px] xl:py-[7px]',
                 'after:absolute after:left-1/2 after:top-full after:h-9 after:w-[67px] after:-translate-x-1/2 after:rounded-full after:bg-[#D9D9D9] after:blur-md after:transition-opacity after:duration-200',
-                index === activeTab
-                  ? 'after:opacity-40'
-                  : 'after:opacity-0 group-hover:after:opacity-100'
+                index === activeTab ? 'after:opacity-40' : 'after:opacity-0'
               )}
               type="button"
               key={index}
               onClick={() => setActiveTab(index)}
             >
+              <span
+                className={clsx(
+                  'border-linear absolute inset-0 z-10 rounded-[inherit] transition-colors duration-200',
+                  index === activeTab
+                    ? 'bg-[radial-gradient(64.39%_110%_at_50%_-20%,#FFFFFF_27.27%,rgba(255,255,255,.1)_69.23%)]'
+                    : 'bg-gradient-to-b from-white/90 to-white/[0.72] mix-blend-overlay group-hover:from-white group-hover:to-white/50 group-hover:mix-blend-normal'
+                )}
+                aria-hidden
+              />
               <img
-                className="relative z-20 mr-1.5 inline-block h-3.5"
+                className="relative z-20 mr-1.5 inline-block h-3.5 xl:h-[13px]"
                 src={icon.src}
                 width={icon.width}
                 height={icon.height}
                 alt=""
                 loading="lazy"
               />
-              <span className="z-20 bg-gradient-to-b from-white via-white via-25% to-white/50 bg-clip-text text-sm tracking-tighter text-transparent md:hidden">
+              <span className="z-20 bg-gradient-to-b from-white via-white via-25% to-white/50 bg-clip-text text-sm leading-none tracking-tighter text-transparent xl:text-[13px]">
                 {name}
               </span>
-              <span
-                className={clsx(
-                  'border-linear absolute inset-0 z-10 rounded-[inherit] transition-colors duration-200',
-                  index === activeTab
-                    ? 'bg-[radial-gradient(64.39%_110%_at_50%_-20%,#FFFFFF_27.27%,rgba(255,255,255,.1)_69.23%)]'
-                    : 'bg-gradient-to-b from-white/90 to-white/[0.72] mix-blend-overlay group-hover:from-white group-hover:to-white/50'
-                )}
-                aria-hidden
-              />
             </button>
           );
         })}
@@ -83,11 +81,11 @@ const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {
                   <m.div
                     className="dark"
                     key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.2 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <CodeBlockWrapper className="show-linenumbers highlighted-code min-h-[383px] [&_[data-line]]:px-3 [&_[data-line]]:text-xs [&_[data-line]]:leading-[1.21] [&_pre]:pt-3 [&_pre_code>.line::before]:mr-7">
+                    <CodeBlockWrapper className="show-linenumbers highlighted-code min-h-[440px] [&_[data-line]]:px-3 [&_[data-line]]:text-xs [&_[data-line]]:leading-[1.21] [&_pre]:pt-3 [&_pre_code>.line::before]:mr-7">
                       {parse(code)}
                     </CodeBlockWrapper>
                   </m.div>

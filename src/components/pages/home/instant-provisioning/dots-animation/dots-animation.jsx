@@ -71,11 +71,7 @@ const DotsAnimation = ({
       }
 
       tabInput.value = activeTab + 1;
-      const timeoutId = setTimeout(() => {
-        changeInput.fire();
-      }, 300);
-
-      return () => clearTimeout(timeoutId);
+      changeInput.fire();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [rive, isVisible, activeTab]
