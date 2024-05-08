@@ -29,7 +29,7 @@ const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {
 
   return (
     <>
-      <div className="relative rounded-[inherit] before:pointer-events-none before:absolute before:-inset-x-px before:inset-y-px before:z-30 before:rounded-[inherit] before:bg-[linear-gradient(90deg,#0c0d0d,transparent_14px,transparent_calc(100%-14px),#0c0d0d_100%)]">
+      <div className="relative rounded-[inherit] before:pointer-events-none before:absolute before:inset-x-0 before:inset-y-px before:z-30 before:rounded-[inherit] before:bg-[linear-gradient(90deg,#0c0d0d,transparent_14px,transparent_calc(100%-14px),#0c0d0d_100%)]">
         <div
           className={clsx(
             'no-scrollbars relative flex gap-x-2 overflow-x-auto px-4 py-2.5 xl:gap-x-1.5 xl:px-[14px] xl:py-2 lg:py-[7px]',
@@ -54,7 +54,7 @@ const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {
                     'border-linear absolute inset-0 z-10 rounded-[inherit] transition-colors duration-200',
                     index === activeTab
                       ? 'bg-[radial-gradient(64.39%_110%_at_50%_-20%,#FFFFFF_27.27%,rgba(255,255,255,.1)_69.23%)]'
-                      : 'bg-gradient-to-b from-white/90 to-white/[0.72] mix-blend-overlay group-hover:from-white group-hover:to-white/50 group-hover:mix-blend-normal'
+                      : 'bg-gradient-to-b from-white/90 to-white/[0.72] mix-blend-overlay group-hover:bg-gray-new-80 group-hover:mix-blend-normal'
                   )}
                   aria-hidden
                 />

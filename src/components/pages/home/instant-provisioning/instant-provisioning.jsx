@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
@@ -6,6 +7,30 @@ import Link from 'components/shared/link';
 import ActiveTabContext from './active-tab-context';
 import CodeTabs from './code-tabs';
 import DotsAnimation from './dots-animation';
+
+const BlurWrapper = ({ children, className }) => (
+  <div
+    className={clsx(
+      'relative z-10 rounded-[14px] bg-white bg-opacity-[0.03] p-1.5 backdrop-blur-[4px] xl:rounded-xl',
+      className
+    )}
+  >
+    <div
+      className="absolute inset-0 z-10 rounded-[inherit] border border-white/[0.04]"
+      aria-hidden
+    />
+    <div
+      className="absolute inset-[5px] z-10 rounded-[10px] border border-white/[0.04]"
+      aria-hidden
+    />
+    {children}
+  </div>
+);
+
+BlurWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+};
 
 const InstantProvisioning = () => (
   <section className="instant-provising safe-paddings relative mt-[168px] xl:mt-28 lg:mt-24 sm:mt-20">
@@ -20,9 +45,9 @@ const InstantProvisioning = () => (
           </p>
         </div>
         <div className="relative flex w-[652px] flex-col pb-[171px] pt-[100px] xl:w-[580px] xl:pb-[148px] xl:pt-[84px] lg:w-[417px] lg:pb-[105px] lg:pt-[61px] md:mt-3 md:w-full md:max-w-[580px] md:py-0">
-          <div className="pointer-events-none absolute -left-20 top-32 z-0 h-[133px] w-[205px] rounded-[100%] border border-white bg-[#16182D] opacity-30 blur-3xl md:top-0" />
+          <div className="pointer-events-none absolute -left-20 top-32 z-0 h-[133px] w-[205px] rounded-[100%] border border-white bg-[#16182D] opacity-40 blur-3xl md:top-0" />
           <div
-            className="pointer-events-none absolute -right-20 top-8 h-[133px] w-[398px] rounded-[100%] bg-[#16182D] opacity-35 blur-3xl"
+            className="pointer-events-none absolute -right-20 top-8 h-[133px] w-[398px] rounded-[100%] bg-[#16182D] opacity-40 blur-3xl"
             aria-hidden
           />
           <p
@@ -35,12 +60,8 @@ const InstantProvisioning = () => (
               Provisioned in 300ms
             </span>
           </p>
-          <div className="relative z-10 mt-2.5 rounded-[14px] bg-white bg-opacity-5 p-1.5 backdrop-blur-[1px] xl:rounded-xl md:mt-1.5 md:p-1">
-            <div
-              className="absolute inset-0 z-0 rounded-[inherit] border border-white/[0.04] mix-blend-overlay"
-              aria-hidden
-            />
-            <div className="relative z-10 flex h-12 gap-x-3.5 rounded-[10px] border border-white border-opacity-[0.03] bg-black-new pl-[18px] pt-4 tracking-extra-tight xl:h-[43px] xl:rounded-lg xl:pl-4 xl:pt-[14px] lg:gap-x-3 md:h-9 md:gap-x-2.5 md:pl-[14px] md:pt-[13px]">
+          <BlurWrapper className="mt-2.5 md:mt-1.5 md:p-1">
+            <div className="relative z-20 flex h-12 gap-x-3.5 rounded-[10px] border-opacity-[0.05] bg-black-new pl-[18px] pt-4 tracking-extra-tight xl:h-[43px] xl:rounded-lg xl:pl-4 xl:pt-[14px] lg:gap-x-3 md:h-9 md:gap-x-2.5 md:pl-[14px] md:pt-[13px]">
               <span
                 className="relative mt-1 h-1.5 w-1.5 rounded-full bg-primary-1 shadow-[0px_0px_9px_0px_#4BFFC3] xl:h-[5px] xl:w-[5px]"
                 aria-hidden
@@ -51,9 +72,9 @@ const InstantProvisioning = () => (
                 postgresql://example@ep-938132.eu-central-1.aws.neon.tech/primary
               </span>
             </div>
-          </div>
+          </BlurWrapper>
           <DotsAnimation
-            className="absolute -bottom-1.5 left-1/2 aspect-[3.49726] w-[640px] -translate-x-1/2 xl:w-[568px] lg:w-[417px] md:relative md:bottom-auto md:-mt-3 md:w-full"
+            className="absolute -bottom-1.5 left-1/2 aspect-[3.49726] w-[640px] -translate-x-1/2 mix-blend-lighten xl:w-[568px] lg:w-[417px] md:relative md:bottom-auto md:-mt-3 md:w-full"
             src="/animations/pages/home/dots-stack.riv"
             artboard="dots"
             intersectionRootMargin="0px 0px 600px 0px"
@@ -81,18 +102,14 @@ const InstantProvisioning = () => (
           </Link>
         </div>
 
-        <div className="relative z-10 w-[652px] rounded-[14px] bg-white bg-opacity-5 p-1.5 backdrop-blur-[1px] xl:w-[580px] xl:rounded-xl lg:w-[417px] md:mt-5 md:w-full md:max-w-[580px]">
+        <BlurWrapper className="w-[652px] p-1.5 xl:w-[580px] lg:w-[417px] md:mt-5 md:w-full md:max-w-[580px]">
           <div className="pointer-events-none absolute -left-40 -top-44 z-0 h-[482px] w-[470px] rounded-[100%] bg-[linear-gradient(180deg,rgba(25,27,52,0)_0%,#16182D_88.36%)] opacity-65 blur-3xl xl:-left-36 xl:-top-40 xl:h-[427px] xl:w-[417]" />
-          <div className="pointer-events-none absolute -right-32 -top-28 z-0 h-[316px] w-[316px] rounded-[100%] bg-[#16182D] opacity-20 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-36 -right-36 z-0 h-[377px] w-[377px] rounded-[100%] bg-[#16182D] opacity-30 blur-3xl" />
-          <div
-            className="pointer-events-none absolute inset-0 z-0 rounded-[inherit] border border-white/[0.04] mix-blend-overlay"
-            aria-hidden
-          />
-          <div className="relative z-10 rounded-[10px] border border-white border-opacity-[0.03] bg-black-new xl:rounded-lg">
+          <div className="pointer-events-none absolute -right-32 -top-28 z-0 h-[316px] w-[316px] rounded-[100%] bg-[#16182D] opacity-30 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-36 -right-36 z-0 h-[377px] w-[377px] rounded-[100%] bg-[#16182D] opacity-40 blur-3xl" />
+          <div className="relative z-20 rounded-[10px] bg-black-new xl:rounded-lg">
             <CodeTabs />
           </div>
-        </div>
+        </BlurWrapper>
       </ActiveTabContext>
     </Container>
   </section>
