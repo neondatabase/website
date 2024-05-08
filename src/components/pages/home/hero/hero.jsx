@@ -37,8 +37,8 @@ const ITEMS = [
     video: {
       icon: branchingIcon,
       title: 'Branching',
-      mp4: '/videos/pages/home/hero/branching.mp4?updated=20240507143503',
-      m3u8: '/videos/pages/home/hero/branching.m3u8?updated=20240507143503',
+      mp4: '/videos/pages/home/hero/branching.mp4?updated=20240508184252',
+      m3u8: '/videos/pages/home/hero/branching.m3u8?updated=20240508184252',
     },
     title: 'Branching',
     description:
