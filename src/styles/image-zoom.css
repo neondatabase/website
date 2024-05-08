@@ -1,0 +1,3 @@
+[data-rmiz-modal-overlay='visible'] {
+  @apply dark:bg-black;
+}

@@ -71,7 +71,7 @@ const sharedComponents = {
     const urlWithoutSize = src.replace(/-\d+x\d+/i, '');
 
     return (
-      <ImageZoom src={urlWithoutSize}>
+      <ImageZoom src={urlWithoutSize} isDark>
         <Image
           className={clsx('rounded-md', className)}
           src={urlWithoutSize}
