@@ -7,6 +7,35 @@ import Navigation from './navigation';
 
 const codeSnippets = [
   {
+    name: 'Node',
+    iconName: 'nodejs',
+    language: 'javascript',
+    code: `// app.js
+const postgres = require('postgres');
+require('dotenv').config();
+
+let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
+
+const sql = postgres({
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
+  port: 5432,
+  ssl: 'require',
+  connection: {
+    options: \`project=\${ENDPOINT_ID}\`,
+  },
+});
+
+async function getPgVersion() {
+  const result = await sql\`select version()\`;
+  console.log(result);
+}
+
+getPgVersion();`,
+  },
+  {
     name: 'Ruby',
     iconName: 'ruby',
     language: 'ruby',
@@ -48,35 +77,6 @@ func main() {
       System.out.println("Hello, World!");
   }
 }`,
-  },
-  {
-    name: 'Node',
-    iconName: 'nodejs',
-    language: 'javascript',
-    code: `// app.js
-const postgres = require('postgres');
-require('dotenv').config();
-
-let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
-
-const sql = postgres({
-  host: PGHOST,
-  database: PGDATABASE,
-  username: PGUSER,
-  password: PGPASSWORD,
-  port: 5432,
-  ssl: 'require',
-  connection: {
-    options: \`project=\${ENDPOINT_ID}\`,
-  },
-});
-
-async function getPgVersion() {
-  const result = await sql\`select version()\`;
-  console.log(result);
-}
-
-getPgVersion();`,
   },
   {
     name: 'Prisma',
