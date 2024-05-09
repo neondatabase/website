@@ -29,11 +29,10 @@ const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {
 
   return (
     <>
-      <div className="relative rounded-[inherit] before:pointer-events-none before:absolute before:inset-x-0 before:inset-y-px before:z-30 before:rounded-[inherit] before:bg-[linear-gradient(90deg,#0c0d0d,transparent_14px,transparent_calc(100%-14px),#0c0d0d_100%)]">
+      <div className="border-b border-white/[0.03]">
         <div
           className={clsx(
-            'no-scrollbars relative flex gap-x-2 overflow-x-auto px-4 py-2.5 xl:gap-x-1.5 xl:px-[14px] xl:py-2 lg:py-[7px]',
-            'after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-white after:opacity-50 after:mix-blend-overlay'
+            'no-scrollbars relative flex gap-x-2 overflow-x-auto px-4 py-2.5 [mask-image:linear-gradient(90deg,transparent_4px,black_14px,black_calc(100%-14px),transparent_calc(100%-4px))] xl:gap-x-1.5 xl:px-[14px] xl:py-2 lg:py-[7px]'
           )}
         >
           {codeSnippets.map(({ name, iconName }, index) => {
@@ -50,7 +49,7 @@ const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {
               >
                 <span
                   className={clsx(
-                    'border-linear absolute inset-0 z-10 rounded-[inherit] bg-gradient-to-b from-white/90 to-white/[0.72] mix-blend-overlay group-hover:opacity-0',
+                    'border-linear absolute inset-0 z-10 rounded-[inherit] bg-white/[0.05] group-hover:opacity-0',
                     index === activeTab && 'opacity-0'
                   )}
                   aria-hidden
