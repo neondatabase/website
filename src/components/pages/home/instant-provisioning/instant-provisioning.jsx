@@ -6,6 +6,7 @@ import Link from 'components/shared/link';
 
 import ActiveTabContext from './active-tab-context';
 import CodeTabs from './code-tabs';
+import ConnectionString from './connection-string';
 import DotsAnimation from './dots-animation';
 
 const BlurWrapper = ({ children, className }) => (
@@ -61,17 +62,7 @@ const InstantProvisioning = () => (
             </span>
           </p>
           <BlurWrapper className="mt-2.5 md:mt-1.5 md:p-1">
-            <div className="relative z-20 flex h-12 gap-x-3.5 rounded-[10px] border-opacity-[0.05] bg-black-new pl-[18px] pt-4 tracking-extra-tight xl:h-[43px] xl:rounded-lg xl:pl-4 xl:pt-[14px] lg:gap-x-3 md:h-9 md:gap-x-2.5 md:pl-[14px] md:pt-[13px]">
-              <span
-                className="relative mt-1 h-1.5 w-1.5 rounded-full bg-primary-1 shadow-[0px_0px_9px_0px_#4BFFC3] xl:h-[5px] xl:w-[5px]"
-                aria-hidden
-              >
-                <span className="absolute inset-px h-1 w-1 rounded-full bg-[#D9FDF1] opacity-70 blur-[1px]" />
-              </span>
-              <span className="line-clamp-1 h-[14px] font-mono text-[13px] leading-none md:h-3 md:text-[11px]">
-                postgresql://example@ep-938132.eu-central-1.aws.neon.tech/primary
-              </span>
-            </div>
+            <ConnectionString url="postgresql://example@ep-938132.eu-central-1.aws.neon.tech/primary" />
           </BlurWrapper>
           <DotsAnimation
             className="absolute -bottom-1.5 left-1/2 aspect-[3.49726] w-[640px] -translate-x-1/2 mix-blend-lighten xl:w-[568px] lg:w-[417px] md:relative md:bottom-auto md:-mt-3 md:w-full"
