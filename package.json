@@ -66,6 +66,7 @@
     "react": "^18.2.0",
     "react-calendly": "^4.3.0",
     "react-dom": "^18.2.0",
+    "react-medium-image-zoom": "^5.2.0",
     "react-hook-form": "^7.51.3",
     "react-intersection-observer": "^9.8.2",
     "react-paginate": "^8.2.0",

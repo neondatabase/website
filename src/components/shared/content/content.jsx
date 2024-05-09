@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
+
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
@@ -24,6 +25,7 @@ import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 import DocCta from '../doc-cta';
+import ImageZoom from '../image-zoom'
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });
@@ -85,16 +87,20 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
     );
   },
   img: (props) => {
-    const { className, title, ...rest } = props;
+    const { className, title, src, ...rest } = props;
+
     return (
-      <Image
-        className={clsx(className, { 'no-border': title === 'no-border' })}
-        width={isReleaseNote ? 762 : 796}
-        height={isReleaseNote ? 428 : 447}
-        style={{ width: '100%', height: '100%' }}
-        title={title !== 'no-border' ? title : undefined}
-        {...rest}
-      />
+      <ImageZoom src={src}>
+        <Image
+          className={clsx(className, { 'no-border': title === 'no-border' })}
+          src={src}
+          width={isReleaseNote ? 762 : 796}
+          height={isReleaseNote ? 428 : 447}
+          style={{ width: '100%', height: '100%' }}
+          title={title !== 'no-border' ? title : undefined}
+          {...rest}
+        />
+      </ImageZoom>
     );
   },
   p: (props) => {

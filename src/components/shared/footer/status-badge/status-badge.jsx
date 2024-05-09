@@ -23,41 +23,22 @@ const statusData = {
 };
 
 const fetchStatus = async () => {
-  try {
-    const res = await fetch('https://neonstatus.com/api/v1/summary');
-    if (!res.ok) {
-      throw new Error(`Neonstatus response was not ok: ${res.status}`);
-    }
+  const res = await fetch('https://neonstatus.com/api/v1/summary');
+  const response = await res.json();
+  const data = response.subpages;
 
-    const data = await res.json();
+  const hasOngoingIncidents = data.some((subpage) => subpage.summary.ongoing_incidents.length > 0);
+  const hasInProgressMaintenances = data.some(
+    (subpage) => subpage.summary.in_progress_maintenances.length > 0
+  );
 
-    if (!data?.subpages) {
-      return 'HASISSUES';
-    }
-
-    const ongoingIncidents = [];
-    const inProgressMaintenances = [];
-
-    data.subpages.forEach((subpage) => {
-      if (subpage.summary.ongoing_incidents.length > 0) {
-        ongoingIncidents.push(...subpage.summary.ongoing_incidents);
-      }
-      if (subpage.summary.in_progress_maintenances.length > 0) {
-        inProgressMaintenances.push(...subpage.summary.in_progress_maintenances);
-      }
-    });
-
-    if (ongoingIncidents.length > 0) {
-      return 'HASISSUES';
-    }
-    if (inProgressMaintenances.length > 0) {
-      return 'UNDERMAINTENANCE';
-    }
-    return 'UP';
-  } catch (error) {
-    console.error('Error fetching or processing data:', error);
+  if (hasOngoingIncidents) {
     return 'HASISSUES';
   }
+  if (hasInProgressMaintenances) {
+    return 'UNDERMAINTENANCE';
+  }
+  return 'UP';
 };
 
 const StatusBadge = ({ isDocPage = false, isDarkTheme = true }) => {
@@ -66,7 +47,6 @@ const StatusBadge = ({ isDocPage = false, isDarkTheme = true }) => {
 
   useEffect(() => {
     if (inView) {
-      console.log('Requesting status...');
       fetchStatus()
         .then((status) => {
           setCurrentStatus(status);

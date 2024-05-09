@@ -240,6 +240,11 @@ export default {
           to: LINKS.youtube,
           icon: 'youtube-icon',
         },
+        {
+          text: 'Creators',
+          to: LINKS.creators,
+          icon: 'creators-icon',
+        },
       ],
     },
     {

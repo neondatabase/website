@@ -48,4 +48,5 @@ export default {
   onDemandStorage: '/docs/introduction/about#bottomless-storage',
   caseStudies: '/case-studies',
   earlyAccess: '/early-access-program',
+  creators: '/creators',
 };
