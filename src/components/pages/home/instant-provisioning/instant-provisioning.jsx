@@ -1,37 +1,11 @@
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 
 import ActiveTabContext from './active-tab-context';
+import BlurWrapper from './blur-wrapper';
 import CodeTabs from './code-tabs';
 import ConnectionString from './connection-string';
 import DotsAnimation from './dots-animation';
-
-const BlurWrapper = ({ children, className }) => (
-  <div
-    className={clsx(
-      'relative z-10 rounded-[14px] bg-white bg-opacity-[0.03] p-1.5 backdrop-blur-[4px] xl:rounded-xl',
-      className
-    )}
-  >
-    <div
-      className="absolute inset-0 z-10 rounded-[inherit] border border-white/[0.04]"
-      aria-hidden
-    />
-    <div
-      className="absolute inset-[5px] z-10 rounded-[10px] border border-white/[0.04] mix-blend-overlay"
-      aria-hidden
-    />
-    {children}
-  </div>
-);
-
-BlurWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-};
 
 const InstantProvisioning = () => (
   <section className="instant-provising safe-paddings relative mt-[168px] xl:mt-28 lg:mt-24 sm:mt-20">
@@ -51,19 +25,7 @@ const InstantProvisioning = () => (
             className="pointer-events-none absolute -right-20 top-8 h-[133px] w-[398px] rounded-[100%] bg-[#16182D] opacity-40 blur-3xl"
             aria-hidden
           />
-          <p
-            className={clsx(
-              'relative mr-3 self-end font-mono text-xs leading-none tracking-extra-tight lg:mr-2',
-              'before:pointer-events-none before:absolute before:-inset-x-1.5 before:inset-y-px before:rounded-[100%] before:bg-white before:opacity-[0.22] before:blur-md'
-            )}
-          >
-            <span className="relative text-xs tracking-extra-tight opacity-80 xl:text-[11px]">
-              Provisioned in 300ms
-            </span>
-          </p>
-          <BlurWrapper className="mt-2.5 md:mt-1.5 md:p-1">
-            <ConnectionString url="postgresql://example@ep-938132.eu-central-1.aws.neon.tech/primary" />
-          </BlurWrapper>
+          <ConnectionString url="postgresql://example@ep-938132.eu-central-1.aws.neon.tech/primary" />
           <DotsAnimation
             className="absolute -bottom-1.5 left-1/2 aspect-[3.49726] w-[640px] -translate-x-1/2 mix-blend-lighten xl:w-[568px] lg:w-[417px] md:relative md:bottom-auto md:-mt-3 md:w-full"
             src="/animations/pages/home/dots-stack.riv"
