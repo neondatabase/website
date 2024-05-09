@@ -39,7 +39,7 @@ Traditionally, database deployments are *instance-based*, with each environment 
 To illustrate how this can be implemented in practice, we’ll cover two key workflows:
 
 1. **Preview environments**. 
-   1. BWe’ll automatically create a [preview environment for every pull request](https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file) with its associated Neon database branch. We’ll use Fly.io as the deployment platform and Drizzle as the ORM.
+   1. We’ll automatically create a [preview environment for every pull request](https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file) with its associated Neon database branch. We’ll use Fly.io as the deployment platform and Drizzle as the ORM.
    2. This preview database branch will give the developer access to an isolated “copy” of the dataset. Any code modifications will be tested against this data.
    3. Once the PR is merged, the preview environment and its associated database branch will be automatically deleted. 
 
