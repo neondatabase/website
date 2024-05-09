@@ -1,6 +1,7 @@
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 
+// eslint-disable-next-line react/prop-types
 const NeonFlowLayout = async ({ children }) => (
   <Layout
     headerTheme="white"

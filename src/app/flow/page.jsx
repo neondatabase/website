@@ -1,17 +1,12 @@
 import Post from 'components/pages/doc/post';
+import SEO_DATA from 'constants/seo-data';
 import { FLOW_DIR_PATH, getPostBySlug, getTableOfContents } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
 
-export async function generateMetadata() {
-  return getMetadata({
-    title: 'GitOps for Databases - Neon',
-    description: 'Bring your data to your GitHub workflow to streamline development',
-    type: 'article',
-  });
-}
+export const metadata = getMetadata(SEO_DATA.flow);
 
 const FlowPage = () => {
-  const currentSlug = 'git-ops-for-databases';
+  const currentSlug = 'index';
   const { data, content } = getPostBySlug(currentSlug, FLOW_DIR_PATH);
   const tableOfContents = getTableOfContents(content);
   const fileOriginPath = `${process.env.NEXT_PUBLIC_FLOW_GITHUB_PATH}${currentSlug}.md`;

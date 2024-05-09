@@ -11,8 +11,7 @@ export default {
   },
   contactSales: {
     title: 'Contact Sales — Neon',
-    description:
-      'Interested in learning more about our plans and pricing? Contact our sales team.',
+    description: 'Interested in learning more about our plans and pricing? Contact our sales team.',
     pathname: LINKS.contactSales,
   },
   careers: {
@@ -21,6 +20,13 @@ export default {
       'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
     imagePath: '/images/social-previews/careers.jpg',
     pathname: LINKS.careers,
+  },
+  flow: {
+    title: 'Database Branching Workflows - Neon',
+    description: 'Boost development velocity by adding data to your existing GitHub workflows',
+    imagePath: '/images/social-previews/flow.jpg',
+    type: 'article',
+    pathname: LINKS.flow,
   },
   blog: {
     title: 'Our Blog — Neon',
