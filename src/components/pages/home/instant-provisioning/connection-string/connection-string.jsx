@@ -4,11 +4,13 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useWindowSize } from 'react-use';
 
 import BlurWrapper from '../blur-wrapper';
 
 const DICTIONARY = '0123456789qwertyuiopasdfghjklzxcvbnm!?></\\a~+*=@#$%'.split('');
 const COUNT_RANDOM_FRAMES = 36;
+const IS_MOBILE_SCREEN_WIDTH = 1023;
 
 const getRandomIndex = () => Math.floor(Math.random() * DICTIONARY.length);
 
@@ -23,6 +25,8 @@ const generateRandomString = (length) => {
 const ConnectionString = ({ url }) => {
   // NOTE: we use two strings array, where the first string is the revealed part of the url and the second string is the random part
   const [currentStringArray, setCurrentStringArr] = useState([url, '']);
+  const { width: windowWidth } = useWindowSize();
+  const [isMobile, setIsMobile] = useState(false);
   const frameRef = useRef();
   const frameCountRef = useRef(0);
   const { ref: animationRef, inView: isVisible } = useInView({ threshold: 0.75 });
@@ -30,9 +34,13 @@ const ConnectionString = ({ url }) => {
   const displayText = currentStringArray.join('');
   const isAnimated = displayText !== url;
 
+  useEffect(() => {
+    setIsMobile(windowWidth <= IS_MOBILE_SCREEN_WIDTH);
+  }, [windowWidth]);
+
   useEffect(
     () => {
-      if (!isVisible || !isAnimated) {
+      if (!isVisible || !isAnimated || isMobile) {
         return;
       }
 
@@ -62,20 +70,26 @@ const ConnectionString = ({ url }) => {
       return () => cancelAnimationFrame(frameRef.current);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [url, isVisible]
+    [url, isVisible, isMobile]
   );
 
   useEffect(() => {
-    if (!inView) {
+    if (!inView && !isMobile) {
       setCurrentStringArr(() => ['', generateRandomString(url.length)]);
     }
-  }, [url, inView]);
+  }, [url, inView, isMobile]);
+
+  useEffect(() => {
+    if (isMobile) {
+      setCurrentStringArr(() => [url, '']);
+    }
+  }, [isMobile, url]);
 
   return (
     <>
       <p
         className={clsx(
-          'relative mr-3 self-end font-mono text-xs leading-none tracking-extra-tight transition-[opacity,transform] duration-300 lg:mr-2',
+          'relative mr-3 self-end font-mono text-xs leading-none tracking-extra-tight transition-[opacity,transform] duration-300 lg:mr-2 sm:mr-0',
           'before:pointer-events-none before:absolute before:-inset-x-1.5 before:inset-y-px before:rounded-[100%] before:bg-white before:opacity-[0.22] before:blur-md',
           isAnimated ? 'translate-y-[3px] opacity-0' : 'translate-y-0 opacity-100'
         )}
@@ -84,7 +98,7 @@ const ConnectionString = ({ url }) => {
           Provisioned in 300ms
         </span>
       </p>
-      <BlurWrapper className="mt-2.5 md:mt-1.5 md:p-1">
+      <BlurWrapper className="mt-2.5 md:mt-8 md:p-1">
         <div
           className="relative z-20 flex h-12 gap-x-3.5 rounded-[10px] border-opacity-[0.05] bg-black-new pl-[18px] pt-4 tracking-extra-tight xl:h-[43px] xl:rounded-lg xl:pl-4 xl:pt-[14px] lg:gap-x-3 md:h-9 md:gap-x-2.5 md:pl-[14px] md:pt-[13px]"
           ref={containerRef}

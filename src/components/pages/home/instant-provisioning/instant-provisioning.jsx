@@ -19,7 +19,7 @@ const InstantProvisioning = () => (
             No waiting. No config.
           </p>
         </div>
-        <div className="relative flex w-[652px] flex-col pb-[171px] pt-[100px] xl:w-[580px] xl:pb-[148px] xl:pt-[84px] lg:w-[417px] lg:pb-[105px] lg:pt-[61px] md:mt-3 md:w-full md:max-w-[580px] md:py-0">
+        <div className="relative flex w-[652px] flex-col pb-[171px] pt-[100px] xl:w-[580px] xl:pb-[148px] xl:pt-[84px] lg:w-[417px] lg:pb-[105px] lg:pt-[61px] md:-mt-4 md:w-full md:max-w-[580px] md:pb-36 md:pt-0 sm:overflow-hidden">
           <div className="pointer-events-none absolute -left-20 top-32 z-0 h-[133px] w-[205px] rounded-[100%] border border-white bg-[#16182D] opacity-40 blur-3xl md:top-0" />
           <div
             className="pointer-events-none absolute -right-20 top-8 h-[133px] w-[398px] rounded-[100%] bg-[#16182D] opacity-40 blur-3xl"
@@ -27,7 +27,7 @@ const InstantProvisioning = () => (
           />
           <ConnectionString url="postgresql://example@ep-938132.eu-central-1.aws.neon.tech/primary" />
           <DotsAnimation
-            className="absolute -bottom-1.5 left-1/2 aspect-[3.49726] w-[640px] -translate-x-1/2 mix-blend-lighten xl:w-[568px] lg:w-[417px] md:relative md:bottom-auto md:-mt-3 md:w-full"
+            className="absolute -bottom-1.5 left-1/2 aspect-[3.49726] w-[640px] -translate-x-1/2 mix-blend-lighten xl:w-[568px] lg:w-[417px] md:bottom-0 md:h-40 md:w-full md:[mask-image:linear-gradient(to_bottom,black,black_calc(100%-40px),transparent)] sm:overflow-hidden"
             src="/animations/pages/home/dots-stack.riv"
             artboard="dots"
             intersectionRootMargin="0px 0px 600px 0px"

@@ -32,7 +32,9 @@ const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {
       <div className="border-b border-white/[0.03]">
         <div
           className={clsx(
-            'no-scrollbars relative flex gap-x-2 overflow-x-auto px-4 py-2.5 [mask-image:linear-gradient(90deg,transparent_4px,black_14px,black_calc(100%-14px),transparent_calc(100%-4px))] xl:gap-x-1.5 xl:px-[14px] xl:py-2 lg:py-[7px]'
+            'no-scrollbars relative flex gap-x-2 overflow-x-auto px-4 py-2.5 [mask-image:linear-gradient(90deg,transparent_4px,black_14px,black_calc(100%-14px),transparent_calc(100%-4px))] xl:gap-x-1.5 xl:px-[14px] xl:py-2 lg:py-[7px] lg:pr-8',
+            'lg:[mask-image:linear-gradient(90deg,transparent_4px,black_20px,black_calc(100%-40px),transparent_calc(100%-16px))]',
+            'md:[mask-image:linear-gradient(90deg,transparent_4px,black_20px,black_calc(100%-32px),transparent_calc(100%-12px))]'
           )}
         >
           {codeSnippets.map(({ name, iconName }, index) => {

@@ -28,7 +28,7 @@ const DotsAnimation = ({
     triggerOnce: true,
     rootMargin: intersectionRootMargin,
   });
-  const [animationRef, isVisible] = useInView({ threshold: 0.3 });
+  const [animationRef, isVisible] = useInView({ threshold: 0.2 });
 
   const { rive, RiveComponent } = useRive({
     src,
@@ -89,7 +89,10 @@ const DotsAnimation = ({
           className,
           {
             'pointer-events-none': isTouch,
+            'opacity-0': !isVisible,
           },
+          'transition-opacity duration-300',
+          'md:h-40 md:min-w-[560px]',
           '[&_canvas]:!h-auto [&_canvas]:!w-full'
         )}
         ref={animationRef}
