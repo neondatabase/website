@@ -9,7 +9,7 @@ updatedOn: '2024-02-27T14:37:51.432Z'
 
 Git revolutionized how we develop software, but the story is quite different when databases are involved. Rapid development cycles with databases remain elusive as they continue to stubbornly resist the agile tooling that has become standard in other parts of our tech stack.
 
-## Bringing branching to databases 
+## Bringing branching to databases
 
 To change this, in Neon we propose adopting [database branching](/docs/introduction/branching), including both data and schema. Database branches enable instantaneous access to copies of data and schema for developers, who can then modify them without impacting the production database—effectively extending the Git concept of code branching to data.
 
@@ -25,7 +25,7 @@ Git enables collaboration and rapid development by maintaining a detailed histor
 
 ## Adopting branch-based deployments
 
-Traditionally, database deployments are *instance-based*, with each environment represented as a separate, self-contained instance. By shifting our perspective to view these as *branch-based*, we can align more closely with familiar Git workflows. In this model, each environment has a database branch which functions similarly to a code branch, e.g.: 
+Traditionally, database deployments are *instance-based*, with each environment represented as a separate, self-contained instance. By shifting our perspective to view these as *branch-based*, we can align more closely with familiar Git workflows. In this model, each environment has a database branch which functions similarly to a code branch, e.g.:
 
 - Production database branch: The main branch where the live data resides.
 - Preview database branches: Temporary branches for reviewing new features or updates.
@@ -38,15 +38,15 @@ Traditionally, database deployments are *instance-based*, with each environment 
 
 To illustrate how this can be implemented in practice, we’ll cover two key workflows:
 
-1. **Preview environments**. 
+1. **Preview environments**.
    1. We’ll automatically create a [preview environment for every pull request](https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file) with its associated Neon database branch. We’ll use Fly.io as the deployment platform and Drizzle as the ORM.
    2. This preview database branch will give the developer access to an isolated “copy” of the dataset. Any code modifications will be tested against this data.
-   3. Once the PR is merged, the preview environment and its associated database branch will be automatically deleted. 
+   3. Once the PR is merged, the preview environment and its associated database branch will be automatically deleted.
 
 2. **Development environments**.
    1. We’ll showcase how to use database branching for creating personalized dev development environments for every engineer in a team.
    2. Each engineer will have instant access to an isolated “copy” of production-like data.
-   3. When the work is done, they can reset their dev environment to the `main` state (data and schema). 
+   3. When the work is done, they can reset their dev environment to the `main` state (data and schema).
 
 ![Database branching workflows](/flow/branching-workflows.jpg)
 
@@ -54,7 +54,7 @@ To illustrate how this can be implemented in practice, we’ll cover two key wor
 
 All code is included in [this repo](https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file).  The workflow is also described in this video:
 
-<YoutubeIframe embedId="EOVa68Uviks" />
+<YoutubeIframe embedId="6XezQQJGdjI" />
 
 ### Tech stack
 
@@ -130,7 +130,8 @@ jobs:
             Neon branch :elephant: : https://console.neon.tech/app/projects/${{ env.NEON_PROJECT_ID }}/branches/${{ steps.create-branch.outputs.branch_id }}
 ```
 
-Let’s break down the steps: 
+Let’s break down the steps:
+
 1. Checkout code. Checks out the code of the PR to the runner.
 2. Setup Node.js. Sets up a Node.js environment, using version 4 of the actions/setup-node action.
 3. Install dependencies. Runs npm install to install necessary Node.js packages.
@@ -166,31 +167,38 @@ jobs:
 
 ```
 
-`superfly/fly-pr-review-apps@1.2.0` deletes the preview environment associated with the PR, while  `neondatabase/delete-branch-action@v3.1.3` action deletes the associated database branches. 
+`superfly/fly-pr-review-apps@1.2.0` deletes the preview environment associated with the PR, while  `neondatabase/delete-branch-action@v3.1.3` action deletes the associated database branches.
 
 ## Workflow for local dev environments (one database branch per developer)
 
-### Tech stack 
+### Tech stack
 
-* Database: [Neon](/)
-* CLI Tool: [Neon CLI](/docs/reference/neon-cli)
+- Database: [Neon](/)
+- CLI Tool: [Neon CLI](/docs/reference/neon-cli)
 
-### Steps 
+### Steps
 
 1. [Download the Neon CLI](/docs/reference/neon-cli#install)
 2. Connect your Neon account
+
    ```bash
    neonctl auth
    ```
+
 3. Create a database branch for each engineer:
+
    ```bash
    neonctl branches create --name dev/developer_name
    ```
+
 4. Get the connection string:
+
    ```bash
    neonctl connection-string dev/developer_name
    ```
+
 5. If needed, you can reset your branch to mirror the parent branch. This is useful for discarding all changes in the dev branch and starting fresh based on the latest state of the parent’s data and schema:
+
    ```bash
    neonctl branches reset  dev/developer_name --parent
    ```
@@ -200,9 +208,10 @@ jobs:
 This is only the most basic version of the workflows. We’ll keep expanding them to include complete production deployments with staging environments and PII. Work ongoing.
 
 ## Additional resources
+
 - [Using Vercel for your preview deployments](/docs/guides/vercel)
 - [A Postgres database for every Fly.io preview](https://www.youtube.com/watch?v=EOVa68Uviks)
 - [A Postgres database for every Vercel preview](https://www.youtube.com/watch?v=s4vIMI9rXeg)
 - Guides for [Prisma](/docs/guides/prisma-migrations), [Django](/docs/guides/django-migrations), [Liquibase](/docs/guides/liquibase), [Flyway](/docs/guides/flyway), and [more](/docs/guides/guides-intro)
-- [About Branch Reset](/blog/announcing-branch-reset) 
+- [About Branch Reset](/blog/announcing-branch-reset)
 - [About the Neon CLI](/blog/cli)
