@@ -87,7 +87,7 @@ const useDynamicSpring = (mouseX, mouseY, gRef, svgRef, wideRadius = false) => {
     setIsActive(isCurrentlyActive);
 
     // Apply damping effect to motionX and motionY
-    const dampingFactor = 0.1; // Adjust this value to control the damping effect
+    const dampingFactor = 0.5; // Adjust this value to control the damping effect
     const targetX = isCurrentlyActive ? distanceX * dampingFactor : 0;
     const targetY = isCurrentlyActive ? distanceY * dampingFactor : 0;
 
