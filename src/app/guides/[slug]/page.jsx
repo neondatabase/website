@@ -1,0 +1,108 @@
+/* eslint-disable react/prop-types */
+import { notFound } from 'next/navigation';
+
+import Post from 'components/pages/guides/post';
+import Container from 'components/shared/container';
+import Layout from 'components/shared/layout';
+import Link from 'components/shared/link/link';
+import { VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/guides';
+import LINKS from 'constants/links';
+import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
+import {
+  GUIDES_DIR_PATH,
+  getAllPosts,
+  getNavigationLinks,
+  getPostBySlug,
+  getTableOfContents,
+} from 'utils/api-guides';
+import getMetadata from 'utils/get-metadata';
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  const post = getPostBySlug(slug, GUIDES_DIR_PATH);
+  if (!post) return notFound();
+  const {
+    data: { title },
+    excerpt,
+  } = post;
+  const encodedTitle = Buffer.from(title).toString('base64');
+  return getMetadata({
+    title: `${title} - Neon Guides`,
+    description: excerpt,
+    imagePath:
+      title.length < MAX_TITLE_LENGTH
+        ? `${VERCEL_URL}/guides/og?title=${encodedTitle}`
+        : DEFAULT_IMAGE_PATH,
+    pathname: `${LINKS.guides}/${slug}`,
+    rssPathname: null,
+    type: 'article',
+  });
+}
+
+export default async function GuidePost({ params }) {
+  const { slug } = params;
+  const posts = await getAllPosts();
+  const navigationLinks = getNavigationLinks(slug, posts);
+  const fileOriginPath = `${`${process.env.NEXT_PUBLIC_GUIDES_GITHUB_PATH}${slug}`}.md`;
+  const postBySlug = getPostBySlug(slug, GUIDES_DIR_PATH);
+  if (!postBySlug) return notFound();
+  const { data, content } = postBySlug;
+  const tableOfContents = getTableOfContents(content);
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: data.title,
+    author: {
+      '@type': 'Organization',
+      name: 'Neon',
+    },
+  };
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <Layout
+        headerTheme="white"
+        headerWithBottomBorder
+        footerWithTopBorder
+        burgerWithoutBorder
+        isGuidePage
+        isHeaderSticky
+      >
+        <div className="safe-paddings flex flex-1 flex-col dark:bg-gray-new-8 dark:text-white lg:block">
+          <Container
+            className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
+            size="medium"
+          >
+            <aside className="col-span-2 pb-10 lt:col-span-full lt:pb-0">
+              <div className="relative flex h-full flex-col gap-y-10 lt:h-auto lt:min-h-fit">
+                <Link className="" to={LINKS.guides}>
+                  All guides
+                </Link>
+              </div>
+            </aside>
+            <Post
+              content={content}
+              data={data}
+              navigationLinks={navigationLinks}
+              slug={slug}
+              fileOriginPath={fileOriginPath}
+              tableOfContents={tableOfContents}
+              isGuidePage
+            />
+          </Container>
+        </div>
+      </Layout>
+    </>
+  );
+}

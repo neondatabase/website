@@ -1,9 +1,7 @@
 const fs = require('fs');
-const path = require('path');
 
 const { glob } = require('glob');
 const matter = require('gray-matter');
-const jsYaml = require('js-yaml');
 const slugify = require('slugify');
 
 const sharedMdxComponents = require('../../content/guides/shared-content');
@@ -55,39 +53,10 @@ const getAllPosts = async () => {
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
-const getSidebar = () =>
-  jsYaml.load(fs.readFileSync(path.resolve('content/guides/sidebar.yaml'), 'utf8'));
-
-const getBreadcrumbs = (slug, flatSidebar) => {
-  const path = flatSidebar.find((item) => item.slug === slug)?.path;
-  const arr = [];
-  if (path) {
-    path.reduce((prev, cur) => {
-      const current = prev[cur] || prev.items[cur];
-      arr.push({ title: current.title, slug: current.slug });
-      return current;
-    }, getSidebar());
-
-    return arr.slice(0, -1);
-  }
-
-  return [];
-};
-
-const getFlatSidebar = (sidebar, path = []) =>
-  sidebar.reduce((acc, item, index) => {
-    const current = { title: item.title, slug: item.slug, path: [...path, index] };
-    if (item.items) {
-      return [...acc, current, ...getFlatSidebar(item.items, current.path)];
-    }
-    return [...acc, { ...item, path: [...path, index] }];
-  }, []);
-
-const getDocPreviousAndNextLinks = (slug, flatSidebar) => {
-  const items = flatSidebar.filter((item) => item.slug !== undefined);
-  const currentItemIndex = items.findIndex((item) => item.slug === slug);
-  const previousItem = items[currentItemIndex - 1];
-  const nextItem = items[currentItemIndex + 1];
+const getNavigationLinks = (slug, posts) => {
+  const currentItemIndex = posts.findIndex((item) => item.slug === slug);
+  const previousItem = posts[currentItemIndex - 1];
+  const nextItem = posts[currentItemIndex + 1];
 
   return {
     previousLink: { title: previousItem?.title, slug: previousItem?.slug },
@@ -159,10 +128,7 @@ const getTableOfContents = (content) => {
 module.exports = {
   getPostSlugs,
   getPostBySlug,
-  getSidebar,
-  getBreadcrumbs,
-  getFlatSidebar,
-  getDocPreviousAndNextLinks,
+  getNavigationLinks,
   getAllPosts,
   getTableOfContents,
   GUIDES_DIR_PATH,

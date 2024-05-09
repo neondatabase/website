@@ -84,7 +84,7 @@ const getFlatSidebar = (sidebar, path = []) =>
     return [...acc, { ...item, path: [...path, index] }];
   }, []);
 
-const getDocPreviousAndNextLinks = (slug, flatSidebar) => {
+const getNavigationLinks = (slug, flatSidebar) => {
   const items = flatSidebar.filter((item) => item.slug !== undefined);
   const currentItemIndex = items.findIndex((item) => item.slug === slug);
   const previousItem = items[currentItemIndex - 1];
@@ -182,7 +182,7 @@ module.exports = {
   getSidebar,
   getBreadcrumbs,
   getFlatSidebar,
-  getDocPreviousAndNextLinks,
+  getNavigationLinks,
   getAllChangelogPosts,
   getAllPosts,
   getTableOfContents,

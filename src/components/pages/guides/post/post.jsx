@@ -1,20 +1,17 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
-import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import DocFooter from 'components/pages/doc/doc-footer';
-import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
-import TableOfContents from 'components/pages/doc/table-of-contents';
 import Content from 'components/shared/content';
+import NavigationLinks from 'components/shared/navigation-links';
+import TableOfContents from 'components/shared/table-of-contents';
 import { GUIDES_BASE_PATH } from 'constants/guides';
 
 const Post = ({
   data: { title, subtitle, enableTableOfContents = false, updatedOn = null },
   content,
-  breadcrumbs,
   navigationLinks: { previousLink, nextLink },
-  isGuidePage = false,
-  currentSlug,
+  slug,
   fileOriginPath,
   tableOfContents,
 }) => {
@@ -28,15 +25,7 @@ const Post = ({
 
   return (
     <>
-      <div
-        className={clsx(
-          'col-span-6 -mx-10 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
-          isGuidePage
-            ? 'col-start-4 -mx-[26px] 2xl:col-span-8 2xl:col-start-2 2xl:mx-5 xl:col-span-7 xl:col-start-3 md:mx-auto'
-            : ''
-        )}
-      >
-        {breadcrumbs.length > 0 && <Breadcrumbs breadcrumbs={breadcrumbs} />}
+      <div className="col-span-6 col-start-4 -mx-[26px] flex flex-col 2xl:col-span-8 2xl:col-start-2 2xl:mx-5 xl:col-span-7 xl:col-start-3 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
         <article>
           <h1 className="text-[36px] font-semibold leading-tight xl:text-3xl">{title}</h1>
           {subtitle && (
@@ -52,12 +41,12 @@ const Post = ({
           )}
         </article>
 
-        <PreviousAndNextLinks
+        <NavigationLinks
           previousLink={previousLink}
           nextLink={nextLink}
           basePath={GUIDES_BASE_PATH}
         />
-        <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
+        <DocFooter fileOriginPath={fileOriginPath} slug={slug} />
       </div>
 
       <div className={clsx('col-start-11 col-end-13 -ml-11 h-full 2xl:ml-0 xl:hidden')}>
@@ -77,13 +66,11 @@ Post.propTypes = {
     updatedOn: PropTypes.string,
   }).isRequired,
   content: PropTypes.string.isRequired,
-  breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   navigationLinks: PropTypes.exact({
     previousLink: PropTypes.shape({}),
     nextLink: PropTypes.shape({}),
   }).isRequired,
-  isGuidePage: PropTypes.bool,
-  currentSlug: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
   fileOriginPath: PropTypes.string.isRequired,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
 };

@@ -68,7 +68,7 @@ const getAllPosts = async () => {
 
 const getTitleWithInlineCode = (title) => title.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-const getDocPreviousAndNextLinks = (slug) => {
+const getNavigationLinks = (slug) => {
   const flatSidebarJson = fs.readFileSync('content/postgresql/sidebar/flat-sidebar.json', 'utf8');
   const flatSidebar = JSON.parse(flatSidebarJson);
   const currentIndex = flatSidebar.findIndex((item) => item.currentSlug === slug);
@@ -133,6 +133,6 @@ export {
   getPostBySlug,
   getPostSlugs,
   getSidebar,
-  getDocPreviousAndNextLinks,
+  getNavigationLinks,
   POSTGRES_DIR_PATH,
 };

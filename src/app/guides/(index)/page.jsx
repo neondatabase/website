@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 export async function generateMetadata() {
   // TO-DO: Update real data here
   return getMetadata({
-    title: 'Neon Guides',
+    title: 'Neon guides',
     // description: '',
     // type: '',
   });

@@ -10,7 +10,7 @@ import {
   getAllPosts,
   getAllChangelogPosts,
   getBreadcrumbs,
-  getDocPreviousAndNextLinks,
+  getNavigationLinks,
   getFlatSidebar,
   getPostBySlug,
   getSidebar,
@@ -83,7 +83,7 @@ export default async function DocPost({ params }) {
   const allChangelogPosts = await getAllChangelogPosts();
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
-  const navigationLinks = getDocPreviousAndNextLinks(currentSlug, flatSidebar);
+  const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
   const fileOriginPath = isChangelogIndex
     ? process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH
     : `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;

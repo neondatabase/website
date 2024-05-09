@@ -5,11 +5,11 @@ import ReleaseNoteList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import DocFooter from 'components/pages/doc/doc-footer';
-import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
-import TableOfContents from 'components/pages/doc/table-of-contents';
+import Content from 'components/shared/content';
+import NavigationLinks from 'components/shared/navigation-links';
+import TableOfContents from 'components/shared/table-of-contents';
 // import Pagination from 'components/pages/changelog/pagination';
 // import ChangelogFilter from 'components/pages/changelog/changelog-filter';
-import Content from 'components/shared/content';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
 // TODO: Add pagination for changelog
@@ -78,7 +78,7 @@ const Post = ({
         )}
 
         {!isChangelog && (
-          <PreviousAndNextLinks
+          <NavigationLinks
             previousLink={previousLink}
             nextLink={nextLink}
             basePath={DOCS_BASE_PATH}

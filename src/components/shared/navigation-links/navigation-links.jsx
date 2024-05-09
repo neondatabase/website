@@ -12,7 +12,7 @@ const getUrl = (slug, basePath) => {
   return `${basePath}${slug}`;
 };
 
-const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }) => {
+const NavigationLinks = ({ previousLink = null, nextLink = null, basePath }) => {
   const previousLinkUrl = previousLink?.slug && getUrl(previousLink.slug, basePath);
   const nextLinkUrl = nextLink?.slug && getUrl(nextLink.slug, basePath);
 
@@ -54,7 +54,7 @@ const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }
   );
 };
 
-PreviousAndNextLinks.propTypes = {
+NavigationLinks.propTypes = {
   previousLink: PropTypes.exact({
     title: PropTypes.string,
     slug: PropTypes.string,
@@ -66,4 +66,4 @@ PreviousAndNextLinks.propTypes = {
   basePath: PropTypes.string.isRequired,
 };
 
-export default PreviousAndNextLinks;
+export default NavigationLinks;
