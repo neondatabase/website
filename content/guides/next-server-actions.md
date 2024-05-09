@@ -123,6 +123,7 @@ Now, let's add the server action to insert the data into your Postgres (powered 
     );
   }
   ```
+</CodeTabs>
 
 ## Run the app
 
@@ -131,7 +132,5 @@ Execute the following command to run your application locally:
 ```shell
 npm run dev
 ```
-
-</CodeTabs>
 
 <NeedHelp />
