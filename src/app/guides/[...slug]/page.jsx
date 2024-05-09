@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
-import Post from 'components/pages/doc/post';
+import Post from 'components/pages/guides/post';
 import { VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/guides';
 import LINKS from 'constants/links';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';

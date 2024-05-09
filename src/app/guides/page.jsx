@@ -33,7 +33,7 @@ export default async function GuidePage() {
 
   return (
     <div className="col-span-6 col-start-4 -mx-10 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
-      <ul className="mt-5 flex flex-col space-y-6">
+      <ul className="flex flex-col space-y-6">
         {posts.map(({ title, slug }) => (
           <li key={slug}>
             <Link className="group" to={`${LINKS.guides}/${slug}`}>

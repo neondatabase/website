@@ -16,6 +16,7 @@ const Layout = async ({
   headerWithBottomBorder = false,
   footerWithTopBorder = false,
   isDocPage = false,
+  isGuidePage = false,
   isBlogPage = false,
 }) => (
   // 44px is the height of the topbar
@@ -26,6 +27,7 @@ const Layout = async ({
       theme={headerTheme}
       isSticky={isHeaderSticky}
       isDocPage={isDocPage}
+      isGuidePage={isGuidePage}
       isBlogPage={isBlogPage}
     />
     <main
@@ -37,7 +39,12 @@ const Layout = async ({
     >
       {children}
     </main>
-    <Footer isDocPage={isDocPage} theme={footerTheme} withTopBorder={footerWithTopBorder} />
+    <Footer
+      isDocPage={isDocPage}
+      isGuidePage={isGuidePage}
+      theme={footerTheme}
+      withTopBorder={footerWithTopBorder}
+    />
     <CookieConsent />
   </div>
 );

@@ -40,7 +40,7 @@ const fetchStatus = async () => {
   return 'UP';
 };
 
-const StatusBadge = ({ isDocPage = false, inView = false }) => {
+const StatusBadge = ({ isDocPage = false, isGuidePage = false, inView = false }) => {
   const [currentStatus, setCurrentStatus] = useState(null);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const StatusBadge = ({ isDocPage = false, inView = false }) => {
       rel="noopener noreferrer"
       className={clsx(
         'flex items-center justify-center gap-x-1.5',
-        isDocPage ? 'mt-12 lg:mt-10' : 'mt-[100px] lg:mt-16 md:mt-8'
+        isDocPage || isGuidePage ? 'mt-12 lg:mt-10' : 'mt-[100px] lg:mt-16 md:mt-8'
       )}
     >
       <span
@@ -78,6 +78,10 @@ const StatusBadge = ({ isDocPage = false, inView = false }) => {
   );
 };
 
-StatusBadge.propTypes = { isDocPage: PropTypes.bool, inView: PropTypes.bool };
+StatusBadge.propTypes = {
+  isDocPage: PropTypes.bool,
+  isGuidePage: PropTypes.bool,
+  inView: PropTypes.bool,
+};
 
 export default StatusBadge;

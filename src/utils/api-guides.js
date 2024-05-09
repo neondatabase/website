@@ -7,7 +7,6 @@ const jsYaml = require('js-yaml');
 const slugify = require('slugify');
 
 const sharedMdxComponents = require('../../content/guides/shared-content');
-const { CHANGELOG_DIR_PATH } = require('../constants/guides');
 
 const getExcerpt = require('./get-excerpt');
 const parseMDXHeading = require('./parse-mdx-heading');
@@ -96,25 +95,6 @@ const getDocPreviousAndNextLinks = (slug, flatSidebar) => {
   };
 };
 
-const getAllChangelogPosts = async () => {
-  const slugs = await getPostSlugs(CHANGELOG_DIR_PATH);
-
-  return slugs
-    .map((slug) => {
-      if (!getPostBySlug(slug, CHANGELOG_DIR_PATH)) return;
-      const post = getPostBySlug(slug, CHANGELOG_DIR_PATH);
-      const { data, content } = post;
-
-      return {
-        slug: slug.replace('/', ''),
-        isDraft: data?.isDraft,
-        content,
-        redirectFrom: data?.redirectFrom,
-      };
-    })
-    .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
-};
-
 const buildNestedToc = (headings, currentLevel) => {
   const toc = [];
 
@@ -183,9 +163,7 @@ module.exports = {
   getBreadcrumbs,
   getFlatSidebar,
   getDocPreviousAndNextLinks,
-  getAllChangelogPosts,
   getAllPosts,
   getTableOfContents,
   GUIDES_DIR_PATH,
-  CHANGELOG_DIR_PATH,
 };

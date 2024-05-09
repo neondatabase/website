@@ -26,6 +26,7 @@ const Header = ({
   isSticky = false,
   withBottomBorder = false,
   isDocPage = false,
+  isGuidePage = false,
   isBlogPage = false,
 }) => {
   const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
@@ -44,6 +45,7 @@ const Header = ({
 
   const findIndexName = () => {
     if (isDocPage) return process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME;
+    if (isGuidePage) return process.env.NEXT_PUBLIC_ALGOLIA_GUIDES_INDEX_NAME;
     if (isBlogPage) return process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME;
     return null;
   };
@@ -159,7 +161,7 @@ const Header = ({
           </div>
           {isMobile && (
             <div className="flex items-center gap-x-3 md:gap-x-5">
-              {(isDocPage || isBlogPage) && (
+              {(isDocPage || isGuidePage || isBlogPage) && (
                 <Search className="mobile-search" indexName={findIndexName()} isBlog={isBlogPage} />
               )}
 
@@ -187,6 +189,7 @@ Header.propTypes = {
   withBottomBorder: PropTypes.bool,
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
+  isGuidePage: PropTypes.bool,
   isBlogPage: PropTypes.bool,
 };
 
