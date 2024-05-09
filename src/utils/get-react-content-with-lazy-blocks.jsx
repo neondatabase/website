@@ -9,6 +9,7 @@ import EmbedTweet from 'components/shared/embed-tweet';
 import Link from 'components/shared/link';
 
 import AnchorHeading from '../components/shared/anchor-heading';
+import ImageZoom from '../components/shared/image-zoom';
 
 function isBooleanString(string) {
   return string === 'true' || string === 'false';
@@ -66,19 +67,22 @@ function transformProps(props) {
 const sharedComponents = {
   h2: AnchorHeading('h2'),
   img: (props) => {
-    const urlWithoutSize = props.src.replace(/-\d+x\d+/i, '');
+    const { src, className, width, height, alt, isPriority } = props;
+    const urlWithoutSize = src.replace(/-\d+x\d+/i, '');
 
     return (
-      <Image
-        className={clsx('rounded-md', props.className)}
-        src={urlWithoutSize}
-        width={props.width || 975}
-        height={props.height || 512}
-        quality={85}
-        alt={props.alt || 'Post image'}
-        priority={props.isPriority || false}
-        sizes="(max-width: 767px) 100vw"
-      />
+      <ImageZoom src={urlWithoutSize} isDark>
+        <Image
+          className={clsx('rounded-md', className)}
+          src={urlWithoutSize}
+          width={width || 975}
+          height={height || 512}
+          quality={85}
+          alt={alt || 'Post image'}
+          priority={isPriority || false}
+          sizes="(max-width: 767px) 100vw"
+        />
+      </ImageZoom>
     );
   },
   a: (props) => {
