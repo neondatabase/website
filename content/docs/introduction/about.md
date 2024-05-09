@@ -9,7 +9,7 @@ updatedOn: '2024-01-26T16:30:34.542Z'
 
 ## Neon is Postgres
 
-Postgres is the world's most popular open-source database. From its beginning as a [DARPA-sponsored project at Berkley](https://www.postgresql.org/docs/current/history.html), Postgres has fostered an ever-growing community and is a preferred choice among developers because of its performance, reliability, extensibility, and support for features like ACID transactions, advanced SQL, and NoSQL/JSON. Neon supports all of the latest Postgres versions and numerous [Postgres extensions](/docs/extensions/extensions-intro). 
+Postgres is the world's most popular open-source database. From its beginning as a [DARPA-sponsored project at Berkley](https://www.postgresql.org/docs/current/history.html), Postgres has fostered an ever-growing community and is a preferred database among developers because of its performance, reliability, extensibility, and support for features like ACID transactions, advanced SQL, and NoSQL/JSON. Neon supports all of the latest Postgres versions and numerous [Postgres extensions](/docs/extensions/extensions-intro). 
 
 **If your application runs on Postgres, it runs on Neon**. If it doesn't run on Postgres, [sign up](https://console.neon.tech/signup) for a Free Tier account, join our [Discord server](https://discord.gg/92vNTzKDGp), and start the journey with us.
 
@@ -23,11 +23,11 @@ Separation of compute and storage enables scalability as these resources can be 
 
 - **Autoscaling**
 
-  Neon's autoscaling capability automatically and transparently scales up compute resources on demand, in response to your application workload, and scales down during periods of inactivity. This ensures that you are maximizing your compute allowances while minimizing extra usage. Neon’s serverless approach removes the need for manual scaling, allowing you to focus more on your application and less on managing infrastructure. To learn more, see our [Autoscaling](/docs/introduction/autoscaling-guide) guide.
+  Neon's autoscaling capability automatically and transparently scales up compute resources on demand, in response to your application workload, and scales down during periods of inactivity. This ensures that you are minimizing compute usage. Neon’s serverless approach removes the need for manual scaling, allowing you to focus more on your application and less on managing infrastructure. To learn more, see our [Autoscaling](/docs/introduction/autoscaling-guide) guide.
 
 - **Scale to zero**
 
-  Neon's _Autosuspend_ feature automatically transitions a Neon compute instance (where Postgres runs) to an idle state, effectively scaling it to zero, after a period of inactivity to minimize compute costs. 
+  Neon's _Autosuspend_ feature automatically transitions a Neon compute instance (where Postgres runs) to an idle state, effectively scaling it to zero, after a period of inactivity to minimize compute usage. 
 
   _Why do you need a database that scales to zero?_ Combined with Neon's branching capability, scale to zero allows you to instantly spin up databases for development, experimentation, or testing without the typical costs associated with "always-running" databases with relatively little usage. This approach is ideal for various scenarios:
 
@@ -35,7 +35,7 @@ Separation of compute and storage enables scalability as these resources can be 
   - _Internal apps_: These apps often experience downtime during off-hours or holidays. Scale to zero ensures their supporting databases pause during inactivity, cutting costs without affecting usage during active periods.
   - _Small projects_: Implementing scale to zero for these projects' databases enhances cost efficiency without significantly impacting user experience.
 
-  Learn more: [Why you want a database that scales to zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero)
+  Learn more about [why you want a database that scales to zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero)
 
 - **Bottomless storage**
 
@@ -57,7 +57,7 @@ Neon's [connection pooling](/docs/connect/connection-pooling) feature supports u
 
 ## Neon supports edge and serverless environments
 
-The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from edge and serverless environments over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve sub-10ms Postgres query times when querying from Edge or serverless functions.
+The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver), which currently has over [100K weekly downloads](https://www.npmjs.com/package/@neondatabase/serverless), is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from edge and serverless environments over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve sub-10ms Postgres query times when querying from Edge or serverless functions.
 
 ## Developer velocity with database branching workflows
 
