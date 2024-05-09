@@ -42,15 +42,15 @@ Here's a snapshot of what we're working on now:
 
    We are also working on adding more metrics to the Monitoring page in the Neon Console to provide the key Postgres and resource usage metrics you require to effectively manage your projects and databases.
 
-* **For partners, a more granular Consumption API**
-
-  Our current Consumption API provides cumulative consumption metrics across all projects in your account for the selected billing period. We are expanding our APIs to also allow for daily consumption metrics.
-
 ### Developer workflows
 
-* **GitHub integration**
+* **GitHub App**
 
-  We're working on a GitHub integration for Neon that will create and delete Neon branches in synchronization with git branch actions.
+  We're working on a GitHub App for Neon that will create and delete Neon branches in synchronization with git branch actions.
+
+* **Outerbase integration**
+
+  We are adding Outerbase as one of our available integrations. You will soon be able to use [Outerbase](https://www.outerbase.com/) to view, query, visualize, and edit your Neon data with the power of AI.
 
 * **Support for anonymizing data**
 

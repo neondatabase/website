@@ -49,7 +49,7 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir-ecto" title="Connect from Elixir with Ecto to Neon" />
 
-<img src="/images/technology-logos/entity-logo.svg" width="36" height="36" alt="Entity Framework" href="/docs/guides/elixir-ecto" title="Schema migration with Neon and Entity Framework" />
+<img src="/images/technology-logos/entity-logo.svg" width="36" height="36" alt="Entity Framework" href="/docs/guides/entity-migrations" title="Schema migration with Neon and Entity Framework" />
 
 <img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Use Exograph with Neon" />
 
@@ -87,8 +87,6 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
 
-<img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale-integration" title="Add the Neon PolyScale integration" />
-
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-jdbc" title="Connect Quarkus (JDBC) to Neon" />
 
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-reactive" title="Connect Quarkus (Reactive) to Neon" />
@@ -104,6 +102,8 @@ Integrate your applications with Neon.
 <img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
 
 <img src="/images/technology-logos/sequelize-logo.svg" width="29" height="36" alt="Sequelize" href="/docs/guides/sequelize" title="Schema migration with Neon Postgres and Sequelize" />
+
+<img src="/images/technology-logos/sequin-logo.svg" width="29" height="36" alt="Sequin" href="/docs/guides/sequin" title="Sync data from APIs to Neon in real time " />
 
 <img src="/images/technology-logos/sqlalchemy-logo.svg" width="36" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect an SQLAlchemy application to Neon" />
 

@@ -106,7 +106,7 @@
       slug: manage/databases
     - title: Integrations
       slug: manage/integrations
-    - title: Operations
+    - title: System operations
       slug: manage/operations
     - title: Organizations
       slug: manage/organizations
@@ -244,6 +244,8 @@
           slug: guides/grafbase
         - title: Hasura
           slug: guides/hasura
+        - title: Sequin
+          slug: guides/sequin
         - title: StepZen
           slug: guides/stepzen
         - title: WunderGraph
@@ -288,9 +290,7 @@
       items:
         - title: Cloudflare Hyperdrive
           slug: guides/cloudflare-hyperdrive
-        - title: PolyScale integration
-          slug: guides/polyscale-integration
-        - title: PolyScale manual setup
+        - title: PolyScale
           slug: guides/polyscale
     - title: Deployment platforms
       items:

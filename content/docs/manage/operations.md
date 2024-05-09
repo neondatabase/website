@@ -1,5 +1,5 @@
 ---
-title: Operations
+title: System operations
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-01-23T23:09:11.247Z'
@@ -20,21 +20,22 @@ An operation is an action performed by the Neon Control Plane on a Neon object o
 
 ## View operations
 
-You can view operations via the Neon Console, [Neon CLI](https://neon.tech/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+You can view system operations via the Neon Console, [Neon CLI](https://neon.tech/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 
 <TabItem>
 
-You can view operations in the **Operations** widget on the Neon **Dashboard** or by selecting the **Operations** page in the sidebar.
+You can view system operations via the **Monitoring** page in the Neon Console.
 
-![Operations](/docs/manage/operations.png)
+![System operations](/docs/relnotes/operations_monitoring.png)
 
 Operation details include:
 
-- **Action**: The action performed by the operation.
+- **Operation**: The action performed by the operation.
 - **Branch**: The branch on which the operation was performed.
-- **Status**: The status of the operation.
+- **Compute**: The compute on which the operation occurred.
+- **Operation status**: The status of the operation.
 - **Duration**: The duration of the operation.
 - **Date**: The date and time the operation occurred.
 
@@ -146,7 +147,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations' \
 
 ### List operations with pagination
 
-Pagination allows you to limit the number of operations displayed, as the number of operations for project can be large. To paginate responses, issue an initial request with a `limit` value. For brevity, the limit is set to 1 in the following example.
+Pagination allows you to limit the number of operations displayed, as the number of operations for a project can be large. To paginate responses, issue an initial request with a `limit` value. For brevity, the limit is set to 1 in the following example.
 
 cURL command:
 

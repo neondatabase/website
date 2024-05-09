@@ -3,14 +3,16 @@ import Collaboration from 'components/pages/partners/collaboration';
 import Hero from 'components/pages/partners/hero';
 import Integration from 'components/pages/partners/integration';
 import Plans from 'components/pages/partners/plans';
+import CTAWithElephant from 'components/shared/cta-with-elephant';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
 import SplitViewGrid from 'components/shared/split-view-grid';
 import Testimonial from 'components/shared/testimonial';
+import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
+import compatibilityIcon from 'icons/ai/compatibility.svg';
 import currencyIcon from 'icons/partners/currency.svg';
-import priorityLowIcon from 'icons/partners/priority-low.svg';
-import screenIcon from 'icons/partners/screen.svg';
+import speedIcon from 'icons/partners/speed.svg';
 import userIcon from 'icons/partners/user.svg';
 import getMetadata from 'utils/get-metadata';
 
@@ -18,27 +20,28 @@ export const metadata = getMetadata(SEO_DATA.partners);
 
 const items = [
   {
-    icon: currencyIcon,
-    title: 'Boost your revenue',
+    icon: compatibilityIcon,
+    title: 'Supercharge your platform',
     description:
-      'Offer Serverless Postgres to your customers by reselling Neon. We offer volume discounts.',
+      'Offer managed Postgres, the most-loved relational database by developers.',
   },
   {
-    icon: priorityLowIcon,
-    title: 'Reduce costs',
+    icon: currencyIcon,
+    title: 'Scale as you go',
     description:
-      'Neon scales to zero when not in use and never overprovisions, making it cost-effective.',
+      'Pay only for what you use, with scale to zero and usage-based pricing.',
   },
   {
     icon: userIcon,
-    title: 'Meet customer demand',
+    title: 'Accelerate onboarding',
     description:
-      'Providing your customers with a fully-managed Postgres solution has never been easier.',
+      'Reduce friction for your users so they can start building instantly.',
   },
   {
-    icon: screenIcon,
-    title: 'Scale effortlessly',
-    description: 'Host fleets of databases that scale automatically to handle demanding workloads.',
+    icon: speedIcon,
+    title: 'Easy management',
+    description:
+      'Give dedicated URLs to your users and handle all database tasks via an API.',
   },
 ];
 
@@ -72,22 +75,30 @@ const PartnersPage = () => (
       className="mt-36 xl:mt-[104px] lg:mt-20 md:mt-16"
       label="Benefits"
       title="Why become a partner?"
-      description="At Neon, we deeply value our partners and believe they are vital to our mission of
-            making Serverless Postgres the go-to choice for developers everywhere."
+      description="Follow the lead of Vercel, Retool, Replit, Koyeb, and many more."
       items={items}
       isGradientLabel
     />
     <Collaboration />
-    <Testimonial
-      className="mt-[200px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
-      quote="By partnering with Neon, Vercel’s frontend platform is now the end&#8209;to&#8209;end
-          serverless solution for building on the Web, from Next.js all&nbsp;the way to SQL."
-      name="Guillermo Rauch"
-      position="CEO of Vercel"
-    />
-    <Plans className="my-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
-    <Integration />
     <Apply />
+    <Plans className="mt-40 scroll-mt-5 px-safe 2xl:mt-36 xl:mt-32 lg:mt-28 md:mt-20" />
+    <Integration />
+    <Testimonial
+      className="mt-[176px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
+      quoteClassName="text-[32px] xl:text-[28px] lg:text-xl md:text-lg"
+      quote="We’ve been able to automate virtually all database tasks via the Neon API. This saved us a tremendous amount of time and engineering effort."
+      name="Himanshu Bhandoh"
+      position="Software Engineer at Retool"
+    />
+    <CTAWithElephant
+      className="mt-[178px] 2xl:mt-40 xl:mt-[125px] lg:mt-16 sm:mt-0"
+      titleClassName="-mr-10 sm:max-w-[300px]"
+      buttonClassName="px-[77px] xl:px-10 lg:px-9 sm:px-14"
+      title="Ready to get started with Neon?"
+      description="The fully managed multi-cloud Postgres with a generous free tier. We separated storage and compute to offer autoscaling, branching, and bottomless storage."
+      buttonText="Sign up"
+      buttonUrl={LINKS.signup}
+    />
   </Layout>
 );
 

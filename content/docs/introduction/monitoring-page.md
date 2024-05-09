@@ -41,7 +41,7 @@ RAM is allocated according to the size of your compute or your [autoscaling](/do
 
 The chart plots a line showing the amount of RAM used. If the line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM allocated for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
-![Monitoring page RAM graph](/docs/introduction/monitor_ram.png "no-border")
+![Monitoring page RAM graph](/docs/introduction/monitor_ram.jpg)
 
 ### CPU
 
@@ -55,7 +55,7 @@ CPU is allocated according to the size of your compute or your [autoscaling](/do
 
 If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
-![Monitoring page CPU graph](/docs/introduction/monitor_cpu.png "no-border")
+![Monitoring page CPU graph](/docs/introduction/monitor_cpu.jpg)
 
 ### Connections count
 
@@ -73,13 +73,13 @@ Idle connections are those that are open but not currently being used. While a f
 
 The limit on the maximum number of simultaneous connections (defined by the Postgres `max_connections` setting) is set according to your Neon compute size. Monitoring the total number of connections helps ensure you don't hit your connection limit, as reaching it can prevent new connections from being established, leading to connection errors. For the connection limit for each Neon compute size, see [How to size your compute](https://neon.tech/docs/manage/endpoints#how-to-size-your-compute). Increasing your compute size is one way to increase your connection limit. Another option is to use connection pooling, which supports up to 10,000 simultaneous connections. To learn more, see [Connection pooling](/docs/connect/connection-pooling).
 
-![Monitoring page connections graph](/docs/introduction/monitor_connections.png "no-border")
+![Monitoring page connections graph](/docs/introduction/monitor_connections.jpg)
 
 ### Buffer cache hit rate
 
 The **Buffer cache hit rate** graph shows the percentage of read requests served from memory &#8212; from Neon's Local File Cache (LFC). Queries not served from memory retrieve data from storage, which is more costly and can result in slower query performance. For OLTP workloads, you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio depends on your specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a lot of sequential scanning of large tables where caching might be less effective. To learn more, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
 
-![Monitoring page cache hit rate graph](/docs/introduction/monitor_cache.png "no-border")
+![Monitoring page cache hit rate graph](/docs/introduction/monitor_cache.jpg)
 
 ### Database size
 
@@ -89,7 +89,7 @@ The **Database size** graph shows the logical data size (the size of your actual
 Database size metrics are only displayed while your compute is active. When your compute is idle, database size values are not reported, and the **Database size** graph shows zero even though data may be present.
 </Admonition>
 
-![Monitoring page database size graph](/docs/introduction/monitor_data_size.png "no-border")
+![Monitoring page database size graph](/docs/introduction/monitor_data_size.jpg)
 
 ### Deadlocks
 
@@ -97,7 +97,7 @@ The **Deadlocks** graph shows a count of deadlocks over time for the named datab
 
 Deadlocks occur in a database when two or more transactions simultaneously block each other by holding onto resources the other transactions need, creating a cycle of dependencies that prevent any of the transactions from proceeding, potentially leading to performance issues or application errors. For lock-related queries you can use to investigate deadlocks, see [Performance tuning](/docs/postgres/query-reference#performance-tuning). To learn more about deadlocks in Postgres, see [Deadlocks](/docs/current/explicit-locking.html#LOCKING-DEADLOCKS).
 
-![Monitoring page deadlocks graph](/docs/introduction/monitor_deadlocks.png "no-border")
+![Monitoring page deadlocks graph](/docs/introduction/monitor_deadlocks.jpg)
 
 ### Rows
 
@@ -105,4 +105,4 @@ The **Rows** graph shows the number of rows deleted, updated, and inserted over 
 
 Tracking rows inserted, updated, and deleted over time provides insights into your database's activity patterns. You can use this data to identify trends or irregularities, such as insert spikes or an unusual number of deletions. 
 
-![Monitoring page rows graph](/docs/introduction/monitor_rows.png "no-border")
+![Monitoring page rows graph](/docs/introduction/monitor_rows.jpg)

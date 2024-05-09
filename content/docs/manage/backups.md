@@ -24,4 +24,8 @@ This method dumps a single database in a single branch of your Neon project. If 
 
 To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Import from Postgres](/docs/import/import-from-postgres) guide.
 
+## Automate Postgres Backups with a GitHub Action
+
+This blog post from a Neon community member describes how to set up a nightly backup to an AWS S3 storage bucket using a GitHub Action: [Nightly Postgres Backups via GitHub Actions](https://joshstrange.com/2024/04/26/nightly-postgres-backups-via-github-actions/).
+
 <NeedHelp/>

@@ -42,6 +42,8 @@ The Free Tier includes the following usage allowances:
 | **Databases**                           | Unlimited                                                     |
 | **Storage**                             | 0.5 GiB                                                       |
 | **Compute**                             | Always-available primary branch compute, 5 compute hours (20 _active hours_)/month on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM. |
+| **Data Transfer (Egress)**              | 5 GiB per month                                                          |
+
 
 <Admonition type="tip" title="What are active hours and compute hours?">
 
