@@ -3,8 +3,8 @@ import GradientLabel from 'components/shared/gradient-label';
 import LINKS from 'constants/links';
 
 import Api from './api';
-import autoscalingChart from './images/autoscaling-chart.png';
-import databaseTable from './images/database-table.png';
+import autoscalingChart from './images/autoscaling-chart.svg';
+import databaseTable from './images/database-table.svg';
 import Row from './row';
 
 const Integration = () => (
