@@ -17,14 +17,13 @@ const TopBar = () => {
   return isTopBarHidden ? null : (
     <Link
       className="safe-paddings relative z-40 flex h-11 w-full items-center justify-center bg-primary-1 px-4 py-3 leading-none transition-colors duration-200 hover:bg-[#1AFFB2] xs:h-auto"
-      to="https://neon.tech/blog/neon-ga"
+      to="https://neon.tech/flow"
       onClick={() => {
         sendGtagEvent('click_announcement_banner');
       }}
     >
       <span className="mr-4 truncate border-r border-black border-opacity-20 py-1 pr-4 text-sm font-medium sm:mr-0 sm:border-none sm:pr-0">
-        Neon is Generally Available! Serverless Postgres with branching to boost your development
-        velocity.
+        Ship faster with database branching workflows - Add prod-like data copies to your preview and local dev environments.
       </span>
       <span className="inline-flex items-center text-sm font-bold md:hidden">
         <span>Read more</span>
