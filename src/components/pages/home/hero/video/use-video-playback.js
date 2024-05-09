@@ -35,7 +35,7 @@ const useVideoPlayback = (
   );
 
   const handleInitialVideoPlay = useCallback(
-    (video) => () => {
+    (video) => {
       const timer = setTimeout(() => {
         video.play();
         setInitialVideoPlayback(false);
@@ -70,7 +70,7 @@ const useVideoPlayback = (
 
     if (isInView && isActive) {
       if (initialVideoPlayback) {
-        video.addEventListener('loadedmetadata', handleInitialVideoPlay(video), { once: true });
+        handleInitialVideoPlay(video);
       } else {
         video.play();
         setIsTitleVisible(false);
@@ -89,7 +89,6 @@ const useVideoPlayback = (
     return () => {
       video.removeEventListener('timeupdate', updateProgress(video));
       video.removeEventListener('ended', handleVideoSwitchDelay(video));
-      video.removeEventListener('loadedmetadata', handleInitialVideoPlay(video));
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -104,7 +103,7 @@ const useVideoPlayback = (
 
     if (isInView) {
       if (initialVideoPlayback) {
-        video.addEventListener('loadedmetadata', handleInitialVideoPlay(video));
+        handleInitialVideoPlay(video);
       } else {
         video.play();
         setIsTitleVisible(false);
@@ -116,9 +115,6 @@ const useVideoPlayback = (
       setIsTitleVisible(true);
     }
 
-    return () => {
-      video.removeEventListener('loadedmetadata', handleInitialVideoPlay(video));
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoRef, isInView, isMobile, initialVideoPlayback]);
 
