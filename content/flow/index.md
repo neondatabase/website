@@ -134,10 +134,11 @@ Let’s break down the steps:
 
 1. Checkout code. Checks out the code of the PR to the runner.
 2. Setup Node.js. Sets up a Node.js environment, using version 4 of the actions/setup-node action.
-3. Install dependencies. Runs npm install to install necessary Node.js packages.
-4. Neon database branch. Uses the `neondatabase/pr-review-branch@v1` action to set up a preview database branch and exports a `DATABASE_URL` environment variable for further use.
-5. Schema migrations. Executes `npm run db:migrate` to apply database migrations using the DATABASE_URL from the previous step.
-6. Deploy. Uses the `superfly/fly-pr-review-apps@1.2.0` action to deploy the application to Fly.io. This action takes the `DATABASE_URL` as input under secrets, ensuring the app connects to the correct Neon database branch.
+3. Install dependencies. Runs pnpm install to install necessary Node.js packages.
+4. Get the git branch name. Uses the `tj-actions/branch-names@v8` action to get the name of the current branch.
+5. Neon database branch. Uses the `neondatabase/create-branch-action@v5` action to set up a preview database branch and exports a `DATABASE_URL` environment variable for further use.
+6. Schema migrations. Executes `pnpm run db:migrate` to apply database migrations using the DATABASE_URL from the previous step.
+7. Deploy. Uses the `superfly/fly-pr-review-apps@1.2.0` action to deploy the application to Fly.io. This action takes the `DATABASE_URL` as input under secrets, ensuring the app connects to the correct Neon database branch.
 
 To automatically delete preview environments (including the associated database branches) when the PR is closed, [we use](https://github.com/neondatabase/preview-branches-with-fly/blob/main/.github/workflows/cleanup-preview.yml):
 
