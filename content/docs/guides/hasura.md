@@ -82,4 +82,14 @@ If you are migrating from Hasura with Heroku Postgres to Neon, refer to the [Imp
 
 In Neon, the maximum number of concurrent connections is defined according to the size of your compute instance. For example, a 0.25 vCPU compute in Neon supports 112 connections. The connection limit is higher with larger compute sizes (see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute)). You can also enable connection pooling in Neon to support up to 10,000 concurrent connections. However, it is important to note that Hasura has a `HASURA_GRAPHQL_PG_CONNECTIONS` setting that limits Postgres connections to `50` by default. If you start encountering errors related to "max connections", try increasing the value of this setting as a first step, staying within the connection limit for your Neon compute instance. For information about the Hasura connection limit setting, refer to the [Hasura Postgres configuration documentation](https://hasura.io/docs/latest/deployment/performance-tuning/#postgres-configuration).
 
+## Autosuspend considerations
+
+By default, Neon suspends a compute after five minutes of inactivity. This behavior is configurable on Neon's paid plans. For more information, refer to [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
+
+If you rely on Neon's autosuspend feature to minimize database usage, note that certain Hasura configuration options can keep your Neon compute in an active state:
+
+- [Event triggers](https://hasura.io/docs/latest/event-triggers/overview/) may periodically poll your Neon database for new events.
+- [Cron triggers](https://hasura.io/docs/latest/scheduled-triggers/create-cron-trigger/) can invoke HTTP endpoints that execute custom business logic involving your Neon database.
+- [Source Health Checks](https://hasura.io/docs/latest/deployment/health-checks/source-health-check/) can keep your Neon compute active if the metadata database resides in Neon.
+
 <NeedHelp/>
