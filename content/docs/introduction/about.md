@@ -13,7 +13,7 @@ Postgres is the world's most popular open-source database. From its beginning as
 
 **If your application runs on Postgres, it runs on Neon**. If it doesn't run on Postgres, [sign up](https://console.neon.tech/signup) for a Free Tier account, join our [Discord server](https://discord.gg/92vNTzKDGp), and start the journey with us.
 
-## Cost-optimized serverless architecture
+## Neon is serverless
 
 Neon's architecture separates compute from storage, which enables serverless features like [Autoscaling](#autoscaling), [Autosuspend](#scale-to-zero), and [Bottomless Storage](#bottomless-storage). 
 
@@ -47,19 +47,19 @@ Separation of compute and storage enables scalability as these resources can be 
 
   The entire Neon storage framework is developed in Rust for maximum performance and usability.
 
-## The Neon serverless driver
+## Neon is fully managed
 
-The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from serverless and edge environments over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve sub-10ms Postgres query times when querying from Edge or serverless functions.
+Being a fully managed service means that Neon provides high availability without requiring users to handle administrative, maintenance, or scaling burdens associated with managing a database system. This approach allows developers to focus more on developing applications and less on the operational aspects of database management. Neon takes care of the complexities of scaling, backups, maintenance, and ensuring availability, enabling developers to manage their data without worrying about the underlying infrastructure.
 
 ## Neon supports thousands of connections
 
 Neon's [connection pooling](/docs/connect/connection-pooling) feature supports up to 10,000 concurrent connections. Connection pooling works by caching and reusing database connections, which helps to significantly optimize resource usage and enhance performance. It reduces the overhead associated with establishing new connections and closing old ones, allowing applications to handle a higher volume of requests more efficiently. Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling.
 
-## Neon is fully managed
+## Neon supports edge and serverless environments
 
-Being a fully managed service means that Neon provides high availability without requiring users to handle administrative, maintenance, or scaling burdens associated with managing a database system. This approach allows developers to focus more on developing applications and less on the operational aspects of database management. Neon takes care of the complexities of scaling, backups, maintenance, and ensuring availability, enabling developers to manage their data without worrying about the underlying infrastructure.
+The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from edge and serverless environments over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve sub-10ms Postgres query times when querying from Edge or serverless functions.
 
-## Developer velocity with database branching
+## Developer velocity with database branching workflows
 
 Neon's branching feature lets you branch your data the same way you branch your code. You can instantly create full database copies for integration with your development workflows.
 
@@ -73,15 +73,15 @@ Create a development branch from `main`:
 neonctl branches create --name dev/alex
 ```
 
-Keep your development branch up-to-date by resetting schema and data to the latest from `main`.
+Keep your development branch up-to-date by resetting your schema and data to the latest from `main`.
 
 ```bash
 neonctl branches reset dev/daniel --parent
 ```
 
-Branching can be used with deployment platforms such as Vercel to create a database branch for each preview deployment. If you'd rather not build your own workflow, use the [Neon Vercel integration](https://vercel.com/integrations/neon) to set one up in a few clicks.
+Branching can be used with deployment platforms such as Vercel to create a database branch for each preview deployment. If you'd rather not build your own workflow, use the [Neon Vercel integration](https://vercel.com/integrations/neon) to set one up in just a few clicks.
 
-To learn more, read our [Database branching workflow guide for developers](https://neon.tech/blog/database-branching-workflows-a-guide-for-developers).
+To learn more, read [Database Branching Workflows](https://neon.tech/flow), and the [Database branching workflow guide for developers](https://neon.tech/blog/database-branching-workflows-a-guide-for-developers).
 
 **Schema Diff**
 
@@ -103,23 +103,29 @@ Neon is built for automation. Use our CLI, API, or GitHub Actions to build your 
 
 -  **Neon CLI**
 
-  With the Neon CLI, you can integrate Neon with development tools and CI/CD pipelines to enhance your development workflows, reducing the friction associated with database-related operations like creating projects, databases, and branches. Once you have your connection string, you can manage your entire Neon database from the command line. This makes it possible to quickly set up deployment pipelines using GitHub Actions, GitLab CI/CD, or Vercel Preview Environments. These operations and pipelines can also be treated as code and live alongside your applications as they evolve and mature.
+    With the Neon CLI, you can integrate Neon with development tools and CI/CD pipelines to enhance your development workflows, reducing the friction associated with database-related operations like creating projects, databases, and branches. Once you have your connection string, you can manage your entire Neon database from the command line. This makes it possible to quickly set up deployment pipelines using GitHub Actions, GitLab CI/CD, or Vercel Preview Environments. These operations and pipelines can also be treated as code and live alongside your applications as they evolve and mature.
 
 - **Neon API**
 
-  The Neon API is a REST API that enables you to manage your Neon projects programmatically. It provides resource-oriented URLs, accepts request bodies, returns JSON responses, and uses standard HTTP response codes. This API allows for a wide range of operations, enabling automation management of various aspects of Neon, including projects, branches, computes, databases, and roles. Like the Neon CLI, you can use the Neon API for seamless integration of Neon's capabilities into automated workflows, CI/CD pipelines, and developer tools.
+    The Neon API is a REST API that enables you to manage your Neon projects programmatically. It provides resource-oriented URLs, accepts request bodies, returns JSON responses, and uses standard HTTP response codes. This API allows for a wide range of operations, enabling automation management of various aspects of Neon, including projects, branches, computes, databases, and roles. Like the Neon CLI, you can use the Neon API for seamless integration of Neon's capabilities into automated workflows, CI/CD pipelines, and developer tools.
 
 - **GitHub Actions**
 
-  Neon provides the GitHub Actions for working with database branches, which you can add to your CI workflows. To learn more, see [Automate branching with GitHub Actions](/docs/guides/branching-github-actions).
+    Neon provides the GitHub Actions for working with database branches, which you can add to your CI workflows. To learn more, see [Automate branching with GitHub Actions](/docs/guides/branching-github-actions).
 
 ## Change Data Capture (CDC) and real-time analytics
 
 Neon's Logical Replication feature enables replicating data from your Neon database to external destinations, allowing for Change Data Capture (CDC) and real-time analytics. Stream your data to data warehouses, analytical database services, messaging platforms, event-streaming platforms, external Postgres databases, and more. To learn more, see [Get started with logical replication](/docs/guides/logical-replication-guide).
 
-## Scale
+## Scale automatically and instantly
 
-In addition to Neon's Autoscaling capability that automatically scales compute capacity on demand, Neon supports read replicas that let you instantly scale your application by offloading read-only workloads to independent read-only compute instances. To learn more, see [Read replicas](/docs/introduction/read-replicas).
+In addition to Neon's Autoscaling capability that automatically scales compute capacity on demand, Neon supports Read Replicas that let you instantly scale your application by offloading read-only workloads to independent read-only compute instances. To learn more, see [Read replicas](/docs/introduction/read-replicas).
+
+Create a read replica with the Neon CLI:
+
+```bash
+neonctl branches create --name my_read_replica_branch --type read_only
+```
 
 ## Who should use Neon?
 
@@ -132,5 +138,5 @@ Neon is designed for a wide range of users, from individual developers to enterp
 In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, and cost savings provided by a serverless architecture.
 
 <Admonition type="tip" title="Neon's Free Tier is here to stay">
-Neon's Free Tier is a fundamental part of our commitment to users. Our architecture, which separates storage and compute, forms the backbone of Neon's sustainable approach. With Neon, you can build your personal project or PoC with confidence, knowing that our Free Tier is here to stay. [Read what our CEO has to say about Neon's Free Tier](https://twitter.com/nikitabase/status/1758639571414446415).
+Neon's Free Tier is a fundamental part of our commitment to users. Our architecture, which separates storage and compute, enables a sustainable Free Tier. You can build your personal project or PoC with confidence, knowing that our Free Tier is here to stay. [Read what our CEO has to say about Neon's Free Tier](https://twitter.com/nikitabase/status/1758639571414446415).
 </Admonition>
