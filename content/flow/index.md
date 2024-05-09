@@ -3,7 +3,7 @@
 title: 'Database Branching Workflows'
 subtitle: Boost development velocity by adding data to your existing GitHub workflows
 enableTableOfContents: true
-updatedOn: '2024-05-10T14:37:51.432Z'
+updatedOn: '2024-05-09T14:37:51.432Z'
 
 ---
 
