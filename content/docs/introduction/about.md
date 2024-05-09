@@ -9,7 +9,7 @@ updatedOn: '2024-01-26T16:30:34.542Z'
 
 ## Neon is Postgres
 
-Postgres is the world's most popular open-source database. From its beginning as a [DARPA-sponsored project at Berkley](https://www.postgresql.org/docs/current/history.html), Postgres has fostered an ever-growing community and is a preferred choice among developers because of its performance, reliability, extensibility, and support for features like ACID transactions, advanced SQL, and NoSQL/JSON. Neon supports all of the latest Postgres versions and a numerous [Postgres extensions](/docs/extensions/extensions-intro). 
+Postgres is the world's most popular open-source database. From its beginning as a [DARPA-sponsored project at Berkley](https://www.postgresql.org/docs/current/history.html), Postgres has fostered an ever-growing community and is a preferred choice among developers because of its performance, reliability, extensibility, and support for features like ACID transactions, advanced SQL, and NoSQL/JSON. Neon supports all of the latest Postgres versions and numerous [Postgres extensions](/docs/extensions/extensions-intro). 
 
 **If your application runs on Postgres, it runs on Neon**. If it doesn't run on Postgres, [sign up](https://console.neon.tech/signup) for a Free Tier account, join our [Discord server](https://discord.gg/92vNTzKDGp), and start the journey with us.
 
@@ -119,7 +119,7 @@ Neon's Logical Replication feature enables replicating data from your Neon datab
 
 ## Scale
 
-In addition to Neon's Autoscaling capability that automatically scales compute capacity on demand, Neon supports read replicas let you instantly scale your application by offloading read-only workloads to independent read-only compute instances. To learn more, see [Read replicas](/docs/introduction/read-replicas).
+In addition to Neon's Autoscaling capability that automatically scales compute capacity on demand, Neon supports read replicas that let you instantly scale your application by offloading read-only workloads to independent read-only compute instances. To learn more, see [Read replicas](/docs/introduction/read-replicas).
 
 ## Who should use Neon?
 
