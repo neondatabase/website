@@ -140,7 +140,7 @@ To learn more, see [Read replicas](/docs/introduction/read-replicas).
 
 ## More Neon features
 
-For an overview of all the features that Neon supports, including security features, visit [Detailed Plan Comparison](https://neon.tech/pricing#plans) on the the [Neon Pricing](https://neon.tech/pricing) page. 
+For an overview of all the features that Neon supports, including security features, visit [Detailed Plan Comparison](https://neon.tech/pricing#plans) on the [Neon Pricing](https://neon.tech/pricing) page. 
 
 ## Who should use Neon?
 
