@@ -14,9 +14,9 @@ import {
   getFlatSidebar,
   getPostBySlug,
   getSidebar,
-  getTableOfContents,
 } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
+import getTableOfContents from 'utils/get-table-of-contents';
 
 const isUnusedOrSharedContent = (slug) =>
   slug.includes('unused/') ||

@@ -8,14 +8,9 @@ import Link from 'components/shared/link/link';
 import { VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/guides';
 import LINKS from 'constants/links';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
-import {
-  GUIDES_DIR_PATH,
-  getAllPosts,
-  getNavigationLinks,
-  getPostBySlug,
-  getTableOfContents,
-} from 'utils/api-guides';
+import { GUIDES_DIR_PATH, getAllPosts, getNavigationLinks, getPostBySlug } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
+import getTableOfContents from 'utils/get-table-of-contents';
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
