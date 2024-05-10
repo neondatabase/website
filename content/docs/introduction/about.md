@@ -13,7 +13,7 @@ Postgres is the world's most popular open-source database. From its beginning as
 
 **If your application runs on Postgres, it runs on Neon**. If it doesn't run on Postgres, [sign up](https://console.neon.tech/signup) for a Free Tier account, join our [Discord server](https://discord.gg/92vNTzKDGp), and start the journey with us.
 
-## Neon's serverless architecture brings cost efficiency and peace of mind
+## A serverless architecture for cost efficiency and peace of mind
 
 Neon's [architecture](/docs/introduction/architecture-overview) separates compute from storage, which enables serverless features like [Autoscaling](#autoscaling), [Autosuspend](#scale-to-zero), and [Bottomless Storage](#bottomless-storage). 
 
