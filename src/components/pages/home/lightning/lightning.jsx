@@ -88,7 +88,10 @@ const Lightning = () => {
               height={684}
               ref={videoActiveRef}
             >
-              <source src="/videos/pages/home/lightning/active.mp4" type="video/mp4" />
+              <source
+                src="/videos/pages/home/lightning/active.mp4?updated=20240510184805"
+                type="video/mp4"
+              />
             </PauseableVideo>
           </div>
 
@@ -102,7 +105,10 @@ const Lightning = () => {
             width={828}
             height={684}
           >
-            <source src="/videos/pages/home/lightning/idle.mp4" type="video/mp4" />
+            <source
+              src="/videos/pages/home/lightning/idle.mp4?updated=20240510184805"
+              type="video/mp4"
+            />
           </PauseableVideo>
 
           <div className="absolute bottom-0 left-[54%] w-[42.188%]">
