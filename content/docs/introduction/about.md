@@ -114,19 +114,64 @@ Neon is built for DevOps. Use our CLI, API, or GitHub Actions to build your CI/C
 
     With the Neon CLI, you can integrate Neon with development tools and CI/CD pipelines to enhance your development workflows, reducing the friction associated with database-related operations like creating projects, databases, and branches. Once you have your connection string, you can manage your entire Neon database from the command line. This makes it possible to quickly set up deployment pipelines using GitHub Actions, GitLab CI/CD, or Vercel Preview Environments. These operations and pipelines can also be treated as code and live alongside your applications as they evolve and mature.
 
+    ```bash
+    neonctl branches create --name dev/alex
+    ```
+
 - **Neon API**
 
     The Neon API is a REST API that enables you to manage your Neon projects programmatically. It provides resource-oriented URLs, accepts request bodies, returns JSON responses, and uses standard HTTP response codes. This API allows for a wide range of operations, enabling automation management of various aspects of Neon, including projects, branches, computes, databases, and roles. Like the Neon CLI, you can use the Neon API for seamless integration of Neon's capabilities into automated workflows, CI/CD pipelines, and developer tools.
+
+    ```bash
+    curl --request POST \
+        --url https://console.neon.tech/api/v2/projects/ancient-rice-43775340/branches \
+        --header 'accept: application/json' \
+        --header 'authorization: Bearer $NEON_API_KEY' \
+        --header 'content-type: application/json' \
+        --data '
+    {
+      "branch": {
+        "name": "dev/alex"
+      },
+      "endpoints": [
+        {
+          "type": "read_write"
+        }
+      ]
+    }
+    '
+    ```
 
 - **GitHub Actions**
 
     Neon provides the GitHub Actions for working with database branches, which you can add to your CI workflows. To learn more, see [Automate branching with GitHub Actions](/docs/guides/branching-github-actions).
 
+    ```yaml
+    name: Create Neon Branch with GitHub Actions Demo
+    run-name: Create a Neon Branch 🚀
+    jobs:
+      Create-Neon-Branch:
+        uses: neondatabase/create-branch-action@v5
+        with:
+          project_id: rapid-haze-373089
+          # optional (defaults to your primary branch)
+          parent: dev
+          # optional (defaults to neondb)
+          database: my-database
+          branch_name: from_action_reusable
+          username: db_user_for_url
+          api_key: ${{ secrets.NEON_API_KEY }}
+        id: create-branch
+      - run: echo db_url ${{ steps.create-branch.outputs.db_url }}
+      - run: echo host ${{ steps.create-branch.outputs.host }}
+      - run: echo branch_id ${{ steps.create-branch.outputs.branch_id }}
+    ```
+
 ## Change Data Capture (CDC) with Logical Replication
 
 Neon's Logical Replication feature enables replicating data from your Neon database to external destinations, allowing for Change Data Capture (CDC) and real-time analytics. Stream your data to data warehouses, analytical database services, messaging platforms, event-streaming platforms, external Postgres databases, and more. To learn more, see [Get started with logical replication](/docs/guides/logical-replication-guide).
 
-## Scale out with Instant Read Replicas
+## Scale with Instant Read Replicas
 
 Neon supports Instant Read Replicas that let you instantly scale your application by offloading read-only workloads to independent read-only compute instances that access the same data as your read-write computes.
 
