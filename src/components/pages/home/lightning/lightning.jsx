@@ -23,16 +23,16 @@ import phoneCameraIllustration from 'images/pages/home/lightning/phone-camera.pn
 */
 const VIDEO_PATHS = {
   active: {
-    mp4: '/videos/pages/home/lightning/active.mp4?updated=20240510184805',
-    webm: '/videos/pages/home/lightning/active.webm',
+    mp4: '/videos/pages/home/lightning/active.mp4?updated=20240510192048',
+    webm: '/videos/pages/home/lightning/active.webm?updated=20240510192048',
   },
   idle: {
-    mp4: '/videos/pages/home/lightning/idle.mp4?updated=20240510184805',
-    webm: '/videos/pages/home/lightning/idle.webm',
+    mp4: '/videos/pages/home/lightning/idle.mp4?updated=20240510192048',
+    webm: '/videos/pages/home/lightning/idle.webm?updated=20240510192048',
   },
   popup: {
-    mp4: '/videos/pages/home/lightning/popup.mp4',
-    webm: '/videos/pages/home/lightning/popup.webm',
+    mp4: '/videos/pages/home/lightning/popup.mp4?updated=20240510192048',
+    webm: '/videos/pages/home/lightning/popup.webm?updated=20240510192048',
   },
 };
 
