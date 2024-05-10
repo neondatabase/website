@@ -75,6 +75,14 @@ For more details about using Time Travel queries, see:
 - [Time Travel](/docs/guides/time-travel-assist)
 - [Time Travel tutorial](/docs/guides/time-travel-tutorial)
 
+## Export data to CSV, JSON and XLSX
+
+The Neon SQL Editor supports exporting your data to `JSON`, `CSV` and `XLSX`. You can access the download button from the bottom right corner of the **SQL Editor** page. The download button only appears when there is a result set to download.
+
+##  Expand results section of the SQL Editor window
+
+You can expand the results section of the SQL Editor window by selecting the expand window button from the bottom right corner of the **SQL Editor** page. There must be query results to display, otherwise the expanded results section will appear blank.
+
 ## Meta-commands
 
 The Neon SQL Editor supports using Postgres meta-commands, which act like shortcuts for interacting with your database. If you are already familiar with using meta-commands from the `psql` command-line interface, you can use many of those same commands in the SQL Editor.
