@@ -15,7 +15,7 @@ Postgres is the world's most popular open-source database. From its beginning as
 
 ## Neon's serverless architecture brings cost efficiency and peace of mind
 
-Neon's architecture separates compute from storage, which enables serverless features like [Autoscaling](#autoscaling), [Autosuspend](#scale-to-zero), and [Bottomless Storage](#bottomless-storage). 
+Neon's [architecture](/docs/introduction/architecture-overview) separates compute from storage, which enables serverless features like [Autoscaling](#autoscaling), [Autosuspend](#scale-to-zero), and [Bottomless Storage](#bottomless-storage). 
 
 Separating compute from storage refers to an architecture where the database computation processes (queries, transactions, etc.) are handled by one set of resources (compute), while the data itself is stored on a separate set of resources (storage). This design contrasts with traditional architectures where compute and storage are tightly coupled on the same server. In Neon, Postgres runs on a compute, and data, except for what's cached in memory, resides on Neon's storage layer.
 
@@ -24,14 +24,15 @@ Separation of compute and storage enables scalability as these resources can be 
 ### Autoscaling
 
 Neon's autoscaling capability automatically and transparently scales up compute resources on demand, in response to your application workload, and scales down during periods of inactivity. What does this mean for you?
-- **You can stop paying for compute resources that you only use sometimes**. With Neon's Autoscaling feature, you can set your minimum and maximum autoscaling range and stop worrying about usage peaks and occasional traffic spikes.   
-- **No more manual scaling and associated disruptions**. With autoscaling, you can focus more on your application and less on managing infrastructure. 
+- **You are always ready for increased load**. Enable autoscaling and stop worrying about occasional traffic spikes.   
+- **You can stop paying for compute resources that you only use sometimes**. You no longer have to run a maximum potential load configuration at all times.
+- **No more manual scaling disruptions**. With autoscaling, you can focus more on your application and less on managing infrastructure. 
 
 To learn more, see our [Autoscaling](/docs/introduction/autoscaling-guide) guide.
 
 ### Scale to zero
 
-Neon's _Autosuspend_ feature automatically transitions a Neon compute instance (where Postgres runs) to an idle state when it not being used, effectively scaling it to zero to minimize compute usage. 
+Neon's _Autosuspend_ feature automatically transitions a Neon compute instance (where Postgres runs) to an idle state when it not being used, effectively scaling it to zero to minimize compute usage and costs. 
 
 **Why do you need a database that scales to zero?** Combined with Neon's branching capability, scale to zero allows you to instantly spin up databases for development, experimentation, or testing without the typical costs associated with "always-running" databases with relatively little usage. This approach is ideal for various scenarios:
 
@@ -39,7 +40,7 @@ Neon's _Autosuspend_ feature automatically transitions a Neon compute instance (
 - **Internal apps**: These apps often experience downtime during off-hours or holidays. Scale to zero ensures their supporting databases pause during inactivity, cutting costs without affecting usage during active periods.
 - **Small projects**: Implementing scale to zero for these projects' databases enhances cost efficiency without significantly impacting user experience.
 
-  Learn more about [why you want a database that scales to zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero)
+  Learn more about [why you want a database that scales to zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero).
 
 ### Bottomless storage
 
@@ -49,7 +50,7 @@ Neon storage is architected to integrate storage, backups, and archiving into on
 
 Neon uses cloud-based object storage solutions, like S3, for relocating less frequently accessed data to the most cost-efficient storage option. For your most frequently accessed data, which requires rapid access and high throughput, Neon uses locally attached SSDs to ensure high performance and low latency. 
 
-The entire Neon storage framework is developed in Rust for maximum performance and usability.
+The entire Neon storage framework is developed in Rust for maximum performance and usability. Read about [how we scale an open source, multi-tenant storage engine for Postgres written in Rust](https://neon.tech/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust), or [take a deep dive into the Neon storage engine](https://neon.tech/blog/get-page-at-lsn) with Neon Co-Founder, Heikki Linnakangas.
 
 ## Developer velocity with database branching workflows
 
@@ -57,7 +58,7 @@ Neon's branching feature lets you branch your data the same way you branch your 
 
 ![Branching workflows](/docs/introduction/branching_workflow.jpg)
 
-You can easily build your own database branching workflows using the Neon CLI, Neon API, or GitHub Actions. For example, this example shows how to create a development branch from `main` with a simple CLI command:
+You can build your own database branching workflows using the Neon CLI, Neon API, or GitHub Actions. For example, this example shows how to create a development branch from `main` with a simple CLI command:
 
 ```bash
 neonctl branches create --name dev/alex
@@ -91,7 +92,9 @@ Neon's [connection pooling](/docs/connect/connection-pooling) feature supports u
 
 ## Connect from Edge and Serverless environments with Neon's popular serverless driver
 
-The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver), which currently has over [100K weekly downloads](https://www.npmjs.com/package/@neondatabase/serverless), is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from edge and serverless environments over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve sub-10ms Postgres query times when querying from Edge or serverless functions.
+The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver), which currently has over [100K weekly downloads](https://www.npmjs.com/package/@neondatabase/serverless), is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from edge and serverless environments over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve [sub-10ms Postgres query times](https://neon.tech/blog/sub-10ms-postgres-queries-for-vercel-edge-functions) when querying from Edge or serverless functions. But don't take our word for it. Try it for yourself with Vercel's [Functions + Database Latency app](https://db-latency.vercel.app/). This graph shows latencies for Neon's serverless driver.
+
+[Vercel's Functions Database Latency app](/docs/introduction/latency_distribution-graph.png)
 
 ## Instant database recovery with Neon's Point-in-Time Restore and Time Travel Assist
 
@@ -141,9 +144,9 @@ For an overview of all the features that Neon supports, including security featu
 
 ## Who should use Neon?
 
-Neon is designed for a wide range of users, from individual developers to enterprises, seeking a modern, serverless Postgres experience. It caters to those who need a fully managed, scalable, and cost-effective database solution. Key users include:
+**You**, and we're ready to help you get started. Neon is designed for a wide range of users, from individual developers to enterprises, seeking modern, serverless Postgres capabilities. It caters to those who need a fully managed, scalable, and cost-effective database solution. Key users include:
 
-- **Individual developers** looking for a fast and easy way to set up, manage, and scale Postgres databases without the hassle of server management. Neon's Free Tier makes it easy to get started. Free Tier users get access to features like project sharing and branching, and when you are ready to scale, you can easily upgrade your account to a paid plan for more computing power and storage. Its instant branching feature and serverless architecture make it ideal for development, testing, and staging environments.
+- **Individual developers** looking for a fast and easy way to set up, manage, and scale Postgres databases without the hassle of server management. Neon's Free Tier makes it easy to get started. Free Tier users get access to features like project sharing and branching, and when you are ready to scale, you can easily upgrade your account to a paid plan for more computing power, storage, and advanced features.
   
   <Admonition type="tip" title="Neon's Free Tier is here to stay">
   Neon's Free Tier is a fundamental part of our commitment to users. Our architecture, which separates storage and compute, enables a sustainable Free Tier. You can build your personal project or PoC with confidence, knowing that our Free Tier is here to stay. [Read what our CEO has to say about Neon's Free Tier](https://twitter.com/nikitabase/status/1758639571414446415).
@@ -151,6 +154,6 @@ Neon is designed for a wide range of users, from individual developers to enterp
 - **Teams and organizations** that aim to enhance their development workflows with the ability to create database branches for testing new features or updates, mirroring the branching process used in code version control.
 - **Enterprises** requiring scalable, high-performance database solutions with advanced features like autoscaling, autosuspend, point-in-time restore, and logical replication. Enterprises can benefit from custom pricing, higher resource allowances, and enterprise-level support to meet their specific requirements.
 
-In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, and cost savings provided by a serverless architecture.
+In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, cost savings, and advanced capabilities provided by Neon's serverless architecture.
 
 
