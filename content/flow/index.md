@@ -205,7 +205,7 @@ These are the basic steps to implement a local development workflow with a datab
 
 ## Upcoming Improvements
 
-The workflows described above are basic examples. We’ll keep expanding on them to provide complete production deployments with staging environments and handling of Personal Identifiable Information (PII).
+The workflows described above are basic examples. We’ll keep expanding on them to provide complete production deployments with staging environments and handling of Personal Identifiable Information (PII). This work is ongoing.
 
 ## Additional Resources
 
