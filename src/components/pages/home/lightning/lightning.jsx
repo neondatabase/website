@@ -23,20 +23,44 @@ const Lightning = () => (
       >
         Lightning fast. Edge&nbsp;ready.
       </h2>
-      {/* 
-          Video optimization parameters:
-          -mp4: -pix_fmt yuv420p -vf scale=1656:-2 -movflags faststart -vcodec libx264 -crf 20
-          -webm: -c:v libvpx-vp9 -crf 20 -vf scale=1656:-2 -deadline best -an
-        */}
-      <PauseableVideo
-        className="z-10 ml-32 mt-[-113px] aspect-[1.181818] [mask-image:radial-gradient(120%_120%_at_45%_-10%,black_77%,transparent_90%)] xl:ml-24 xl:mt-[-103px] xl:min-w-[647px] lg:ml-8 lg:mt-[-95px] lg:w-full lg:min-w-0 lg:max-w-[620px] md:ml-8 md:w-[560px] sm:ml-0 sm:mt-[-85px] sm:w-[500px]"
-        width={828}
-        height={684}
-      >
-        <source src="/videos/pages/home/lightning.mp4" type="video/mp4" />
-        <source src="/videos/pages/home/lightning.webm" type="video/webm" />
-      </PauseableVideo>
 
+      <div className="group relative ml-32 mt-[-113px] aspect-[1.181818] xl:ml-24 xl:mt-[-103px] xl:min-w-[647px] lg:ml-8 lg:mt-[-95px] lg:w-full lg:min-w-0 lg:max-w-[620px] md:ml-8 md:w-[560px] sm:ml-0 sm:mt-[-85px] sm:w-[500px]">
+        {/* 
+          Video optimization parameters:
+            active
+              -mp4: -pix_fmt yuv420p -vf scale=1656:-2 -movflags faststart -vcodec libx264 -crf 20
+              -webm: -c:v libvpx-vp9 -crf 20 -vf scale=1656:-2 -deadline best -an
+            idle
+              -mp4: -pix_fmt yuv420p -vf scale=1656:-2 -movflags faststart -vcodec libx264 -crf 20
+              -webm: -c:v libvpx-vp9 -crf 20 -vf scale=1656:-2 -deadline best -an
+            popup
+              -mp4: -pix_fmt yuv420p -vf scale=702:-2 -movflags faststart -vcodec libx264 -crf 20
+              -webm: -c:v libvpx-vp9 -crf 20 -vf scale=702:-2 -deadline best -an
+        */}
+        <div className="absolute">
+          <PauseableVideo
+            className="[mask-image:radial-gradient(120%_120%_at_45%_-10%,black_77%,transparent_90%)]"
+            width={828}
+            height={684}
+          >
+            <source src="/videos/pages/home/lightning/active.mp4" type="video/mp4" />
+          </PauseableVideo>
+        </div>
+
+        <PauseableVideo
+          className="transition-opacity duration-500 [mask-image:radial-gradient(120%_120%_at_45%_-10%,black_77%,transparent_90%)] group-hover:opacity-0"
+          width={828}
+          height={684}
+        >
+          <source src="/videos/pages/home/lightning/idle.mp4" type="video/mp4" />
+        </PauseableVideo>
+
+        <div className="absolute bottom-0 left-[54%] w-[42.188%]">
+          <PauseableVideo className="" width={351} height={298}>
+            <source src="/videos/pages/home/lightning/popup.mp4" type="video/mp4" />
+          </PauseableVideo>
+        </div>
+      </div>
       <p className="relative z-10 ml-32 mt-[-347px] max-w-[288px] font-light tracking-extra-tight text-gray-new-70 xl:ml-24 xl:mt-[-283px] xl:leading-snug lg:-mt-56 lg:ml-8 lg:max-w-[250px] sm:ml-0 sm:mt-[-203px] sm:max-w-[212px] sm:text-[15px]">
         <span className="font-medium text-gray-new-94">The Neon serverless driver</span>, designed
         for JavaScript and TypeScript, ensures low-latency Postgres queries. It unlocks database
