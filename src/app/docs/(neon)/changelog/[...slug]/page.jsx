@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { CHANGELOG_CATEGORIES } from 'components/pages/changelog/changelog-filter';
+import { notFound, redirect } from 'next/navigation';
+
 import Hero from 'components/pages/changelog/hero';
-import Post from 'components/pages/doc/post';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
@@ -13,7 +13,6 @@ import {
 } from 'constants/docs';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import { getAllChangelogPosts, getPostBySlug, CHANGELOG_DIR_PATH } from 'utils/api-docs';
-import getChangelogCategoryFromSlug from 'utils/get-changelog-category-from-slug';
 import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
 import getExcerpt from 'utils/get-excerpt';
 import getMetadata from 'utils/get-metadata';
@@ -21,7 +20,7 @@ import getMetadata from 'utils/get-metadata';
 export async function generateStaticParams() {
   const changelogPosts = await getAllChangelogPosts();
 
-  return [...CHANGELOG_CATEGORIES, ...changelogPosts].map(({ slug }) => {
+  return changelogPosts.map(({ slug }) => {
     const slugsArray = slug.split('/');
 
     return {
@@ -38,14 +37,14 @@ export async function generateMetadata({ params }) {
   let socialPreviewTitle = '';
   const currentSlug = slug.join('/');
   const isChangelogPage = CHANGELOG_SLUG_REGEX.test(currentSlug);
-  const { capitalisedCategory } = getChangelogCategoryFromSlug(currentSlug);
   label = 'Changelog';
   description = `The latest product updates from Neon`;
 
   if (isChangelogPage) {
+    if (!getPostBySlug(currentSlug, CHANGELOG_DIR_PATH)) return notFound();
     const { label: date } = getChangelogDateFromSlug(currentSlug);
     const { content } = getPostBySlug(currentSlug, CHANGELOG_DIR_PATH);
-    label = `${capitalisedCategory} changelog ${date}`;
+    label = `Changelog ${date}`;
     socialPreviewTitle = `Changelog - ${date}`;
     description = getExcerpt(content, 160);
   }
@@ -65,8 +64,19 @@ export async function generateMetadata({ params }) {
 }
 
 const ChangelogPost = async ({ currentSlug }) => {
+  if (
+    currentSlug === 'storage-and-compute' ||
+    currentSlug === 'console' ||
+    currentSlug === 'compute' ||
+    currentSlug === 'drivers' ||
+    currentSlug === 'plans' ||
+    currentSlug === 'docs'
+  )
+    redirect('/docs/changelog');
+
+  if (!getPostBySlug(currentSlug, CHANGELOG_DIR_PATH)) return notFound();
+
   const { datetime, label } = getChangelogDateFromSlug(currentSlug);
-  const { capitalisedCategory } = getChangelogCategoryFromSlug(currentSlug);
 
   const { content } = getPostBySlug(currentSlug, CHANGELOG_DIR_PATH);
 
@@ -75,7 +85,7 @@ const ChangelogPost = async ({ currentSlug }) => {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `${capitalisedCategory} changelog ${label}`,
+    headline: `Changelog ${label}`,
     datePublished: datetime,
     author: {
       '@type': 'Organization',
@@ -93,11 +103,11 @@ const ChangelogPost = async ({ currentSlug }) => {
       )}
       <div className="col-span-6 -mx-10 flex flex-col 2xl:mx-0 xl:col-span-9 xl:ml-11 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
         <Hero
-          className="flex justify-center lg:pt-16 md:py-10 sm:py-7 dark:bg-gray-new-8 dark:text-white"
+          className="flex justify-center dark:bg-gray-new-8 dark:text-white lg:pt-16 md:py-10 sm:py-7"
           date={label}
           withContainer
         />
-        <div className="flex grow pb-28 lg:pb-20 md:pb-16 dark:bg-gray-new-8">
+        <div className="flex grow pb-28 dark:bg-gray-new-8 lg:pb-20 md:pb-16">
           <Container size="xs" className="relative flex w-full pb-10">
             <article className="relative flex w-full max-w-full flex-col items-start">
               <h2>
@@ -125,40 +135,8 @@ const ChangelogPost = async ({ currentSlug }) => {
   );
 };
 
-const ChangelogCategoryPage = ({ currentSlug, currentChangelogPosts }) => {
-  const fileOriginPath = process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH;
-
-  return (
-    <Post
-      content={{}}
-      data={{}}
-      breadcrumbs={[]}
-      navigationLinks={{}}
-      currentSlug={currentSlug}
-      fileOriginPath={fileOriginPath}
-      changelogPosts={currentChangelogPosts}
-      changelogActiveLabel={currentSlug}
-      isChangelog
-    />
-  );
-};
-
 export default async function ChangelogPostPage({ params }) {
   const currentSlug = params?.slug.join('/');
-  const isChangelogPage = CHANGELOG_SLUG_REGEX.test(currentSlug);
-  const allChangelogPosts = await getAllChangelogPosts();
-  const currentChangelogPosts = allChangelogPosts.filter((item) => {
-    const { slug } = item;
-    const { category } = getChangelogCategoryFromSlug(slug);
 
-    return category === currentSlug;
-  });
-  return isChangelogPage ? (
-    <ChangelogPost currentSlug={currentSlug} />
-  ) : (
-    <ChangelogCategoryPage
-      currentSlug={currentSlug}
-      currentChangelogPosts={currentChangelogPosts}
-    />
-  );
+  return <ChangelogPost currentSlug={currentSlug} />;
 }

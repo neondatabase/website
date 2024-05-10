@@ -23,12 +23,18 @@ const statusData = {
 
 const fetchStatus = async () => {
   const res = await fetch('https://neonstatus.com/api/v1/summary');
-  const data = await res.json();
+  const response = await res.json();
+  const data = response.subpages;
 
-  if (data.ongoing_incidents.length > 0) {
+  const hasOngoingIncidents = data.some((subpage) => subpage.summary.ongoing_incidents.length > 0);
+  const hasInProgressMaintenances = data.some(
+    (subpage) => subpage.summary.in_progress_maintenances.length > 0
+  );
+
+  if (hasOngoingIncidents) {
     return 'HASISSUES';
   }
-  if (data.in_progress_maintenances.length > 0) {
+  if (hasInProgressMaintenances) {
     return 'UNDERMAINTENANCE';
   }
   return 'UP';

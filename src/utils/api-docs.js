@@ -13,6 +13,7 @@ const getExcerpt = require('./get-excerpt');
 const parseMDXHeading = require('./parse-mdx-heading');
 
 const DOCS_DIR_PATH = 'content/docs';
+const FLOW_DIR_PATH = 'content/flow';
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
@@ -105,7 +106,12 @@ const getAllChangelogPosts = async () => {
       const post = getPostBySlug(slug, CHANGELOG_DIR_PATH);
       const { data, content } = post;
 
-      return { slug: slug.replace('/', ''), isDraft: data?.isDraft, content };
+      return {
+        slug: slug.replace('/', ''),
+        isDraft: data?.isDraft,
+        content,
+        redirectFrom: data?.redirectFrom,
+      };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
@@ -182,5 +188,6 @@ module.exports = {
   getAllPosts,
   getTableOfContents,
   DOCS_DIR_PATH,
+  FLOW_DIR_PATH,
   CHANGELOG_DIR_PATH,
 };

@@ -30,6 +30,8 @@ To learn more about Postgres logical replication, see [Learn about logical repli
 
 <img src="/images/technology-logos/airbyte-logo.svg" width="36" height="36" alt="Airbyte" href="/docs/guides/logical-replication-airbyte" title="Replicate data from Neon with Airbyte" />
 
+<img src="/images/technology-logos/clickhouse-logo.svg" width="36" height="36" alt="ClickHouse" href="/docs/guides/logical-replication-clickhouse" title="Replicate data from Neon to ClickHouse (DoubleCloud)" />
+
 <img src="/images/technology-logos/fivetran-logo.svg" width="36" height="36" alt="Fivetran" href="/docs/guides/logical-replication-fivetran" title="Replicate data from Neon with Fivetran" />
 
 <img src="/images/technology-logos/kafka-logo.svg" width="36" height="36" alt="Kafka" href="/docs/guides/logical-replication-kafka-confluent" title="Replicate data from Neon with Kafka (Confluent)" />

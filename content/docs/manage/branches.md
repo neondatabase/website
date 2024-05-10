@@ -7,15 +7,15 @@ redirectFrom:
 updatedOn: '2024-02-22T14:29:54.387Z'
 ---
 
-Data resides in a branch. Each Neon project is created with a [primary branch](#primary-branch) called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
+Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [primary branch](#primary-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
 
 A child branch is a copy-on-write clone of the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
 
-You can create and manage branches using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). This topic covers both methods.
+You can create and manage branches using the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="important">
-When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated. Neon retains a 7-day data history, by default. You can configure the retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). To keep data storage to a minimum, remove branches before they age out of the history retention window.
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated. Neon retains a data history by default. You can configure the retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). To keep data storage to a minimum, remove branches before they age out of the history retention window.
 </Admonition>
 
 ## Primary branch
@@ -31,6 +31,10 @@ Any branch not designated as the primary branch is considered a non-primary bran
 
 - For Neon Free Tier users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier  _active hours_ limit of 20 hours per month.
 - For users on paid plans, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
+
+## Protected branch
+
+"Protected" is a status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan, where you can designate up to 5 protected branches. For information about how to configure a protected branch, see [Set a branch as protected](#set-a-branch-as-protected).
 
 ## Create a branch
 
@@ -60,19 +64,31 @@ You are directed to the **Branches** page where you are shown the details for yo
 To view the branches in a Neon project:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** to view the branches for the project.
-3. Select a branch from the table to view details about the branch.
-![View branch details](/docs/manage/branch_details.png)
+1. Select **Branches** to view all current branches in the project.
 
-Branch details shown on the branch page include:
+   ![all branches](/docs/manage/branches_all_list.png)
 
-- **ID**: The branch ID. Branch IDs have a `br-` prefix.
-- **Created**: The date and time the branch was created.
-- **Active  Since**: The active hours used by the branch compute in the current billing period.
-- **Compute Time**: The compute hours used by the branch in the current billing period.
-- **Parent Branch**: The branch from which this branch was created (only applicable to child branches).
-- **Branching Point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
-- **Last Data Reset**: The last time the branch was reset from the parent branch (only applicable to child branches).
+   Branch details in this table view include:
+
+   - **Parent**: Indicates the parent from which this branch was created, helping you track your branch hierarchy.
+   - **Active time**: Number of hours the branch's compute was active so far in the current billing period.
+   - **RW Compute**: Shows the current compute size and activity status for the branch's compute.
+   - **Data size**: Indicates the logical data size of each branch, helping you monitor your plan's storage limit. Does not include shared history.
+   - **Last active**: Shows when the branch's compute was last active.
+
+1. Select a branch from the table to view details about the branch.
+
+    ![View branch details](/docs/manage/branch_details.png)
+
+    Branch details shown on the branch page include:
+
+    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
+    - **Created**: The date and time the branch was created.
+    - **Active  Since**: The active hours used by the branch compute in the current billing period.
+    - **Compute Time**: The compute hours used by the branch in the current billing period.
+    - **Parent Branch**: The branch from which this branch was created (only applicable to child branches).
+    - **Branching Point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
+    - **Last Data Reset**: The last time the branch was reset from the parent branch (only applicable to child branches).
 
 The branch details page also includes details about the compute endpoint associated with the branch. For more information, see [View a compute endpoint](/docs/manage/endpoints#view-a-compute-endpoint).
 
@@ -97,6 +113,27 @@ To set a branch as the primary branch:
 3. Select a branch from the table.
 4. On the branch page, click the **More** drop-down menu and select **Set as primary**.
 5. In the **Set as primary** confirmation dialog, click **Set as Primary** to confirm your selection.
+
+## Set a branch as protected
+
+"Protected" is a status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. This feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan, which supports up to five protected branches.
+
+For the protected status to have any effect, you must:
+
+1. Define an IP allowlist.
+2. Select the **Restrict IP access to protected branches only** option.
+
+For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+
+To designate a branch as protected:
+
+1. In the Neon Console, select a project.
+2. Select **Branches** to view the branches for the project.
+3. Select a branch from the table.
+4. On the branch page, click the **More** drop-down menu and select **Set as protected**.
+5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
+
+For step-by-step instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
 
 ## Connect to a branch
 
@@ -124,74 +161,9 @@ If you want to connect from an application, the **Connection Details** widget on
 
 ## Reset a branch from parent
 
-When working with database branches, you might find yourself in a situation where you need to update your working branch to the latest data from your main branch. For example, let's say you have two child branches `staging` and `development` forked from your `main` branch. You have been working on the `development` branch and find it is now too far out of date with `main`. You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the **Reset from parent** feature, you can perform a clean reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
+Use Neon's **Reset from parent** feature to instantly update a branch with the latest schema and data from its parent. This feature can be an integral part of your CI/CD automation.
 
-<u>Key points</u>:
-
-- You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are not currently supported.
-- This reset is a complete overwrite, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
-- Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
-
-<Tabs labels={["Console", "CLI", "API"]}>
-
-<TabItem>
-On the **Branches** page in the Neon Console, select the branch that you want to reset.
-
-The console opens to the details page for your branch, giving you key information about the branch and its child status: its parent, the last time it was reset, and other relevent detail.
-
-To reset the branch, select **Reset from parent** from either the **More** dropdown or the **Last Data Reset** panel.
-
-![Reset from parent](/docs/manage/reset_from_parent.png)
-
-<Admonition type="note">
-If this branch has children of its own, resetting is blocked. The resulting error dialog lets you delete these child branches, after which you can continue with the reset.
-</Admonition>
-
-</TabItem>
-
-<TabItem>
-Using the CLI, you can reset a branch from parent using the following command:
-
-``` bash
-neonctl branches reset <id|name> --parent
-```
-
-In the `id|name` field, specify the branch ID or name of the child branch whose data you want to reset. The `--parent` parameter specifies the kind of reset action that Neon will perform. In the future, there may be other kinds of resets available. For example, rewinding a branch to an earlier period in time.
-
-If you have multiple projects in your account, you'll also have to include the `project-id` in the command along with the branch.
-
-``` bash
-neonctl branches reset <id|name> --parent --project-id <project id>
-```
-
-Example:
-
-``` bash
-neonctl branches reset development --parent --project-id noisy-pond-12345678
-```
-
-Alternatively, you can set the `project-id` as a background context for your CLI session, letting you perform other actions against that project without having to include the `project-id` in every command. The setting is saved in a `context-file` and remains in place until you set a new context, or you remove the `context-file`.
-
-```bash
-neonctl set-context --project-id <project id>
-```
-
-Read more about performing branching actions from the CLI in [CLI - branches](/docs/reference/cli-branches), and more about setting contexts in [CLI - set-context](/docs/reference/cli-set-context).
-
-</TabItem>
-
-<TabItem>
-To reset a branch to its parent using the API, use the branch restore endpoint, selecting the parent as the source:
-
-```bash
-POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
-```
-
-For details, see [Branch Restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore)
-
-</TabItem>
-
-</Tabs>
+You can use the Neon Console, CLI, or API. For more detail, see [Reset from parent](/docs/guides/reset-from-parent).
 
 ## Restore a branch to its own or another branch's history
 
@@ -201,7 +173,7 @@ There are several restore operations available using Neon's Branch Restore featu
 - Restore a branch to the head of another branch
 - Restore a branch to the history of another branch
 
-You can use the Neon Console, CLI, or API. For more detail, see [Branch Restore](/docs/guide/branch-restore).
+You can use the Neon Console, CLI, or API. For more detail, see [Branch Restore](/docs/guides/branch-restore).
 
 ## Delete a branch
 

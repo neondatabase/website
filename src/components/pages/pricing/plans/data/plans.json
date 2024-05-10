@@ -245,15 +245,25 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Customer-Owned S3"
+        "title": "Protected Branch"
       },
       "free": false,
       "launch": false,
-      "scale": false,
-      "enterprise": true
+      "scale": true,
+      "enterprise": "Custom"
     },
     {
       "feature": "Additional Features"
+    },
+        {
+      "rows": "1",
+      "feature": {
+        "title": "Organization Accounts"
+      },
+      "free": false,
+      "launch": true,
+      "scale": true,
+      "enterprise": "Custom"
     },
     {
       "rows": "1",
@@ -265,10 +275,30 @@
       "scale": "Up to 30 days",
       "enterprise": "Unlimited"
     },
+        {
+      "rows": "1",
+      "feature": {
+        "title": "Monitoring"
+      },
+      "free": "Up to 24 hours",
+      "launch": "Up to 7 days",
+      "scale": "Up to 14 days",
+      "enterprise": "Custom"
+    },
     {
       "rows": "1",
       "feature": {
         "title": "Time Travel Connections"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+        {
+      "rows": "1",
+      "feature": {
+        "title": "Schema Diff"
       },
       "free": true,
       "launch": true,
