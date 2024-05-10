@@ -59,7 +59,7 @@ The Free Tier includes the following usage allowances:
 
 ### Features
 
-- Autosuspend
+- Autosuspend (after 5 minutes of inactivity)
 - All supported regions
 - Project sharing
 - Advanced Postgres features such as connection pooling, logical replication, and 60+ Postgres extensions
@@ -99,7 +99,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 
 ### Features
 
-- Compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** or never)
+- Compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** to **7 days**)
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
 - Neon features such as branching, point-in-time restore up to **7 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
@@ -134,7 +134,7 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 
 ### Features
 
-- Compute up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** or never)
+- Compute up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
 - Advanced Postgres features, including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions
 - Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
 - [Priority support](/docs/introduction/support)
@@ -159,6 +159,7 @@ Additionally, the _Enterprise_ plan can be tailored to your specific requirement
 
 - Custom pricing with discounts
 - Higher resource allowances for projects, branches, storage, and compute
+- _Autosuspend_ (disabled entirely or up to **7 days**)
 - Customer-owned S3
 
 Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus retail customer support, Customer Success Team support, and SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
