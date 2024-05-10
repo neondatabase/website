@@ -1,6 +1,6 @@
 ---
 title: Why Neon?
-subtitle: Neon is serverless Postgres optimized for developer experience, velocity, and scalability
+subtitle: Neon is serverless Postgres optimized for user experience, velocity, and scalability
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
