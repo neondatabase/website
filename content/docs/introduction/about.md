@@ -135,20 +135,22 @@ neonctl branches create --name my_read_replica_branch --type read_only
 
 To learn more, see [Read replicas](/docs/introduction/read-replicas).
 
-## Additional features
+## More Neon features
 
-For an overview of all the features that Neon supports, including security related features, visit the [Neon Pricing](https://neon.tech/pricing) page and navigate down the page to the **Detailed Plan Comparison** section. 
+For an overview of all the features that Neon supports, including security features, visit [Detailed Plan Comparison](https://neon.tech/pricing#plans) on the the [Neon Pricing](https://neon.tech/pricing) page. 
 
 ## Who should use Neon?
 
 Neon is designed for a wide range of users, from individual developers to enterprises, seeking a modern, serverless Postgres experience. It caters to those who need a fully managed, scalable, and cost-effective database solution. Key users include:
 
 - **Individual developers** looking for a fast and easy way to set up, manage, and scale Postgres databases without the hassle of server management. Neon's Free Tier makes it easy to get started. Free Tier users get access to features like project sharing and branching, and when you are ready to scale, you can easily upgrade your account to a paid plan for more computing power and storage. Its instant branching feature and serverless architecture make it ideal for development, testing, and staging environments.
+  
+  <Admonition type="tip" title="Neon's Free Tier is here to stay">
+  Neon's Free Tier is a fundamental part of our commitment to users. Our architecture, which separates storage and compute, enables a sustainable Free Tier. You can build your personal project or PoC with confidence, knowing that our Free Tier is here to stay. [Read what our CEO has to say about Neon's Free Tier](https://twitter.com/nikitabase/status/1758639571414446415).
+  </Admonition>
 - **Teams and organizations** that aim to enhance their development workflows with the ability to create database branches for testing new features or updates, mirroring the branching process used in code version control.
 - **Enterprises** requiring scalable, high-performance database solutions with advanced features like autoscaling, autosuspend, point-in-time restore, and logical replication. Enterprises can benefit from custom pricing, higher resource allowances, and enterprise-level support to meet their specific requirements.
 
 In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, and cost savings provided by a serverless architecture.
 
-<Admonition type="tip" title="Neon's Free Tier is here to stay">
-Neon's Free Tier is a fundamental part of our commitment to users. Our architecture, which separates storage and compute, enables a sustainable Free Tier. You can build your personal project or PoC with confidence, knowing that our Free Tier is here to stay. [Read what our CEO has to say about Neon's Free Tier](https://twitter.com/nikitabase/status/1758639571414446415).
-</Admonition>
+
