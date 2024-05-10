@@ -199,7 +199,7 @@ These are the basic steps to implement a local development workflow with a datab
    neonctl branches reset  dev/developer_name --parent
    ```
 
-   This is useful when you want to discard all changes in your dev branch and start fresh with a dev branch that reflects the latest state of the parent branch's data and schema.
+   This is useful when you want to discard the changes in your existing dev branch and start fresh with updated dev branch that reflects the current state of the parent's data and schema.
 
 ## Upcoming Improvements
 
