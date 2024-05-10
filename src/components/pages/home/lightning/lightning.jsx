@@ -122,7 +122,7 @@ const Lightning = () => {
             <source src={VIDEO_PATHS.idle.webm} type="video/webm" />
           </PauseableVideo>
 
-          <div className="absolute bottom-0 left-[54%] w-[42.188%]">
+          <div className="absolute bottom-[9.5%] left-[53.6%] w-[42.188%]">
             <PauseableVideo
               className="[mask-image:radial-gradient(120%_120%_at_45%_-10%,black_77%,transparent_90%)]"
               width={351}
