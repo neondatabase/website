@@ -13,7 +13,7 @@ Git revolutionized how we develop software, but the story is quite different whe
 
 To change this, Neon proposes adopting [database branching](/docs/introduction/branching) that includes both data and schema. Database branches enable instantaneous access to full database copies for developers, who can then modify those copies without impacting the production database &#8212; effectively extending the Git concept of code branching to your data.
 
-<Admonition type="info" title="Branching data and schema">
+<Admonition type="tip" title="Branching data and schema">
 The integration of databases within development practices isn’t a new idea. Modern teams already use tools to manage schema changes, and an increasing number of database providers are embracing *schema branching*. But for development workflows involving databases to be effectively unblocked, developers require the ability to not only modify schemas but also work with isolated data copies across different environments, similar to how code can be safely modified in Git branches.
 
 Git enables collaboration and rapid development by maintaining a detailed history of commits. [Neon mirrors this concept via a custom-built, log-structured storage system, which treats the database as a record of transactions](/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal). Neon captures a comprehensive history of data snapshots, ensuring that developers can manage and revert changes in data states with the same ease as they do with code versions.
