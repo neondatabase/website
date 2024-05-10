@@ -14,6 +14,7 @@ import getTableOfContents from 'utils/get-table-of-contents';
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
+  if (!posts) return notFound();
   return posts.map((post) => ({
     slug: post.slug,
   }));

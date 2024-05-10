@@ -1,7 +1,9 @@
 ---
 title: Sample
 subtitle: Learn how to query Postgres (powered by Neon) in Next.js using Server Actions
+author: John Doe
 enableTableOfContents: true
+date: '2024-05-08T00:00:00.000Z'
 updatedOn: '2024-05-08T00:00:00.000Z'
 ---
 
