@@ -46,7 +46,8 @@ To illustrate how a branch-based deployment model can be achieved in practice, w
 
 ![Database branching workflows](/flow/branching-workflows.jpg)
 
-### Preview Environment Workflow (one database branch per pull request)
+### Preview Environment Workflow 
+**One database branch per pull request**
 
 The code for this workflow is provided in [this repo](https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file), and also described in the following video:
 
@@ -163,7 +164,8 @@ jobs:
 
 The `superfly/fly-pr-review-apps@1.2.0` action deletes the preview environment associated with the PR, while the `neondatabase/delete-branch-action@v3.1.3` action deletes the associated database branch.
 
-## Local Development Environment Workflow (one database branch per developer)
+## Local Development Environment Workflow
+**One database branch per developer**
 
 ### The Tech Stack
 
