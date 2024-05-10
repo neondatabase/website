@@ -94,7 +94,7 @@ Neon's [connection pooling](/docs/connect/connection-pooling) feature supports u
 
 The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver), which currently has over [100K weekly downloads](https://www.npmjs.com/package/@neondatabase/serverless), is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from edge and serverless environments over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve [sub-10ms Postgres query times](https://neon.tech/blog/sub-10ms-postgres-queries-for-vercel-edge-functions) when querying from Edge or serverless functions. But don't take our word for it. Try it for yourself with Vercel's [Functions + Database Latency app](https://db-latency.vercel.app/). This graph shows latencies for Neon's serverless driver.
 
-[Vercel's Functions Database Latency app](/docs/introduction/latency_distribution-graph.png)
+![Vercel's Functions Database Latency app](/docs/introduction/latency_distribution-graph.png)
 
 ## Instant database recovery with Neon's Point-in-Time Restore and Time Travel Assist
 
