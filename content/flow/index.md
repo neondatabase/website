@@ -32,7 +32,7 @@ Traditionally, database deployments are *instance-based*, with each environment 
 
 ## Database Branching Workflows
 
-To illustrate how this can be achieved in practice, we’ll cover two key workflows:
+To illustrate how a branch-based deployment model can be achieved in practice, we’ll cover two key workflows:
 
 1. **Preview Environment Workflow (one database branch per PR)**
    1. In this workflow, we automatically create a [preview environment for every pull request](https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file) with its own Neon database branch. We use Fly.io as the deployment platform and Drizzle as the ORM.
@@ -42,13 +42,13 @@ To illustrate how this can be achieved in practice, we’ll cover two key workfl
 2. **Local Development Environment Workflow (one database branch per developer)**
    1. This workflow showcases how to use database branching to create personalized development environments for every developer on a team.
    2. Each developer gets instant access to an isolated “copy” of production-like data.
-   3. When the work is done, a developer can reset their development environment to the current state of `main` (data and schema).
+   3. When the work is done, a developer can reset their development environment to the current state of `main` (both data and schema).
 
 ![Database branching workflows](/flow/branching-workflows.jpg)
 
 ### Preview Environment Workflow (one database branch per pull request)
 
-The code for this workflow is included in [this repo](https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file), and also described in this video:
+The code for this workflow is provided in [this repo](https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file), and also described in the following video:
 
 <YoutubeIframe embedId="6XezQQJGdjI" />
 
@@ -62,7 +62,7 @@ The code for this workflow is included in [this repo](https://github.com/neondat
 
 ### How it Works
 
-This is a [GitHub Actions workflow](https://github.com/neondatabase/preview-branches-with-fly/blob/main/.github/workflows/deploy-preview.yml) that automatically deploys preview applications associated with PRs using Fly.io. Each preview environment is deployed with its own database branch:
+This is a [GitHub Actions workflow](https://github.com/neondatabase/preview-branches-with-fly/blob/main/.github/workflows/deploy-preview.yml) that automatically deploys preview applications associated with PRs using Fly.io. Each preview environment is deployed with its own Neon database branch:
 
 ```yaml
 name: Preview Deployment
@@ -135,7 +135,7 @@ Let’s break down the steps in this preview environment workflow where we have 
 6. **Schema migrations:** Executes `pnpm run db:migrate` to apply database migrations using the `DATABASE_URL` from the previous step.
 7. **Deploy:** Uses the `superfly/fly-pr-review-apps@1.2.0` action to deploy the application to Fly.io. This action takes the `DATABASE_URL` as input under `secrets`, ensuring the app connects to the correct Neon database branch.
 
-To automatically delete preview environments when the PR is closed, including associated Neon database branches, we use this [Clean up Preview Deployment](https://github.com/neondatabase/preview-branches-with-fly/blob/main/.github/workflows/cleanup-preview.yml) GitHub Actions workflow:
+To automatically delete a preview environment when a PR is closed, including the associated Neon database branch, we use this [Clean up Preview Deployment](https://github.com/neondatabase/preview-branches-with-fly/blob/main/.github/workflows/cleanup-preview.yml) GitHub Actions workflow:
 
 ```yaml
 name: Clean up Preview Deployment
@@ -161,7 +161,7 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
-The `superfly/fly-pr-review-apps@1.2.0` action deletes the preview environment associated with the PR, while the `neondatabase/delete-branch-action@v3.1.3` action deletes the associated database branches.
+The `superfly/fly-pr-review-apps@1.2.0` action deletes the preview environment associated with the PR, while the `neondatabase/delete-branch-action@v3.1.3` action deletes the associated database branch.
 
 ## Local Development Environment Workflow (one database branch per developer)
 
@@ -193,17 +193,17 @@ These are the basic steps to implement a local development workflow with a datab
    neonctl connection-string dev/developer_name
    ```
 
-5. Reset the development branch to the current state of `main` (data and schema). 
+5. Optionally, reset the development branch to the current state of `main` (data and schema). 
 
    ```bash
    neonctl branches reset  dev/developer_name --parent
    ```
 
-   This is useful when you want to discard the changes in your existing dev branch and start fresh with updated dev branch that reflects the current state of the parent's data and schema.
+   This step is useful when you want to discard the changes in your existing dev branch and start fresh with a fresh dev branch that reflects the current state of the parent's data and schema.
 
 ## Upcoming Improvements
 
-The workflows described above are basic examples. We’ll keep expanding on them to provide complete production deployments with staging environments and and handling of Personal Identifiable Information (PII).
+The workflows described above are basic examples. We’ll keep expanding on them to provide complete production deployments with staging environments and handling of Personal Identifiable Information (PII).
 
 ## Additional Resources
 
