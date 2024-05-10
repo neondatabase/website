@@ -99,11 +99,11 @@ We've all read about multi-hour outages and data losses due to some errant query
 
 To help you find the right restore point, Neon provides a [Time Travel Assist](/docs/guides/time-travel-assist) feature that lets you connect to any selected time or LSN within your database history and run queries. Time Travel Assist is designed to work in tandem with Neon's restore capability to facilitate precise and informed restorations.
 
-### You can build AI apps with Neon Postgres
+### Build AI apps with Neon Postgres and pgvector
 
 Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension for storing and retrieving vector embeddings within your Postgres database. This feature is essential for building next-generation AI applications, enabling operations like fast and accurate similarity search, information retrieval, and recommendation systems directly in Postgres. Why pay for a specialized vecrtor database service when you have state-of-the-art capabilities in Postgres? Neon's own **Ask Neon AI** chat, built in collaboration with [InKeep](https://inkeep.com/), uses Neon with [pgvector](/docs/extensions/pgvector). For more, see [Powering next gen AI apps with Postgres](https://neon.tech/ai).
 
-## Neon brings Postgres to DevOps
+## Bring Postgres to DevOps with Neon's CLI, API, and GitHub Actions
 
 Neon is built for DevOps. Use our CLI, API, or GitHub Actions to build your CI/CI pipelines.
 
@@ -134,6 +134,10 @@ neonctl branches create --name my_read_replica_branch --type read_only
 ```
 
 To learn more, see [Read replicas](/docs/introduction/read-replicas).
+
+## Additional features
+
+For an overview of all the features that Neon supports, including security related features, visit the [Neon Pricing](https://neon.tech/pricing) page and navigate down the page to the **Detailed Plan Comparison** section. 
 
 ## Who should use Neon?
 
