@@ -34,6 +34,10 @@ Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon.
 | **Storage**                             | 0.5 GiB                                                       |
 | **Compute**                             | Always-available primary branch compute, 5 compute hours (20 _active hours_)/month on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM. |
 
+  <Admonition type="tip" title="Neon's Free Tier is here to stay">
+  Neon's Free Tier is a fundamental part of our commitment to users. Our architecture, which separates storage and compute, enables a sustainable Free Tier. You can build your personal project or PoC with confidence, knowing that our Free Tier is here to stay. [Learn more about our Free Tier from Neon's CEO](https://twitter.com/nikitabase/status/1758639571414446415).
+  </Admonition>
+
 In addition, Free Tier users have access to the following Neon features:
 
 - [Autosuspend](#autosuspend): Compute scales to zero after 5 minutes of inactivity.

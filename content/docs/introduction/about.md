@@ -78,7 +78,7 @@ Branching can be used with deployment platforms such as Vercel to create a datab
 
 To learn more, read [Database Branching Workflows](https://neon.tech/flow), and the [Database branching workflow guide for developers](https://neon.tech/blog/database-branching-workflows-a-guide-for-developers).
 
-<Admonition type="tip" title="Compare your Branches with Schema Diff">
+<Admonition type="tip" title="Compare Database Branches with Schema Diff">
 Neon's Schema Diff tool lets you compare the schemas for two selected branches in a side-by-side view. For more, see [Schema Diff](/docs/guides/schema-diff).
 </Admonition> 
 
@@ -92,15 +92,15 @@ Neon's [connection pooling](/docs/connect/connection-pooling) feature supports u
 
 ## Low-latency connections from Edge and Serverless environments
 
-The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver), which currently has over [100K weekly downloads](https://www.npmjs.com/package/@neondatabase/serverless), is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from edge and serverless environments over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve [sub-10ms Postgres query times](https://neon.tech/blog/sub-10ms-postgres-queries-for-vercel-edge-functions) when querying from Edge or serverless functions. But don't take our word for it. Try it for yourself with Vercel's [Functions + Database Latency app](https://db-latency.vercel.app/). This graph shows latencies for Neon's serverless driver.
+The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver), which currently has over [100K weekly downloads](https://www.npmjs.com/package/@neondatabase/serverless), is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from edge and serverless environments over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve [sub-10ms Postgres query times](https://neon.tech/blog/sub-10ms-postgres-queries-for-vercel-edge-functions) when querying from Edge or serverless functions. But don't take our word for it. Try it for yourself with Vercel's [Functions + Database Latency app](https://db-latency.vercel.app/). This graph shows latencies for Neon's serverless driver:
 
 ![Vercel's Functions Database Latency app](/docs/introduction/latency_distribution_graph.png)
 
 ## Instant database recovery with Point-in-Time Restore and Time Travel Assist
 
-We've all read about multi-hour outages and data losses due to some errant query or database migration. Neon's [Point-in-Time Restore](/docs/guides/branch-restore) feature allows you to instantly restore your data to a point in time before the issue occurred. With Neon, you cajn perform a restore operation in a few clicks, letting you get back online in the time it takes to select a restore point, which can be a date and time or Log Sequence Number (LSN).
+We've all heard about multi-hour outages and data losses due to errant queries or problematic migrations. Neon's [Point-in-Time Restore](/docs/guides/branch-restore) feature allows you to instantly restore your data to a point in time before the issue occurred. With Neon, you can perform a restore operation in a few clicks, letting you get back online in the time it takes to choose a restore point, which in Neon can be a date and time or a Log Sequence Number (LSN).
 
-To help you find the right restore point, Neon provides a [Time Travel Assist](/docs/guides/time-travel-assist) feature that lets you connect to any selected time or LSN within your database history and run queries. Time Travel Assist is designed to work in tandem with Neon's restore capability to facilitate precise and informed restorations.
+To help you find the correct restore point, Neon provides a [Time Travel Assist](/docs/guides/time-travel-assist) feature that lets you connect to any selected time or LSN within your database history and run queries. Time Travel Assist is designed to work in tandem with Neon's restore capability to facilitate precise and informed restore operations.
 
 ### Build AI apps with Postgres and pgvector
 
@@ -149,7 +149,7 @@ For an overview of all the features that Neon supports, including security featu
 - **Individual developers** looking for a fast and easy way to set up, manage, and scale Postgres databases without the hassle of server management. Neon's Free Tier makes it easy to get started. Free Tier users get access to features like project sharing and branching, and when you are ready to scale, you can easily upgrade your account to a paid plan for more computing power, storage, and advanced features.
   
   <Admonition type="tip" title="Neon's Free Tier is here to stay">
-  Neon's Free Tier is a fundamental part of our commitment to users. Our architecture, which separates storage and compute, enables a sustainable Free Tier. You can build your personal project or PoC with confidence, knowing that our Free Tier is here to stay. [Read what our CEO has to say about Neon's Free Tier](https://twitter.com/nikitabase/status/1758639571414446415).
+  Neon's Free Tier is a fundamental part of our commitment to users. Our architecture, which separates storage and compute, enables a sustainable Free Tier. You can build your personal project or PoC with confidence, knowing that our Free Tier is here to stay. [Learn more about our Free Tier from Neon's CEO](https://twitter.com/nikitabase/status/1758639571414446415).
   </Admonition>
 - **Teams and organizations** that aim to enhance their development workflows with the ability to create database branches for testing new features or updates, mirroring the branching process used in code version control.
 - **Enterprises** requiring scalable, high-performance database solutions with advanced features like autoscaling, autosuspend, point-in-time restore, and logical replication. Enterprises can benefit from custom pricing, higher resource allowances, and enterprise-level support to meet their specific requirements.
