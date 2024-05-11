@@ -7,9 +7,9 @@ redirectFrom:
 updatedOn: '2024-01-26T16:30:34.542Z'
 ---
 
-Thank you for your interest in Neon. Now that you are here, let us make the case for why you should go a step further and take Neon for a test drive.
+Thank you for your interest in Neon. We're excited that you're here. Let us share some information about **Why Neon?**
 
-## We make it really easy to get started
+## We make it easy to get started
 
 **You can set up a Postgres database in seconds**
 
@@ -17,7 +17,7 @@ Thank you for your interest in Neon. Now that you are here, let us make the case
 2. Provide a project name, database name, and select a region.
 3. Click **Create Project**.
 
-It's that easy. At Neon, we like to say **Database as a URL**. Neon's architecture allows us to spin up a Postgres database almost instantly and provide you with a database URL, which you can plug into your application or database client.
+At Neon, we like to say **Database as a URL**. Neon's architecture allows us to spin up a Postgres database almost instantly and provide you with a database URL, which you can plug into your application or database client.
 
 ```sql
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
