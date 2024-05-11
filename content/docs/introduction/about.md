@@ -7,29 +7,7 @@ redirectFrom:
 updatedOn: '2024-01-26T16:30:34.542Z'
 ---
 
-Thank you for your interest in Neon. We're excited that you're here. Let us share some information about **Why Neon?**
-
-## We make it easy to get started
-
-**You can set up a Postgres database in seconds**
-
-1. Login with an email address, Google, or GitHub account.
-2. Provide a project name, database name, and select a region.
-3. Click **Create Project**.
-
-At Neon, we like to say **Database as a URL**. Neon's architecture allows us to spin up a Postgres database almost instantly and provide you with a database URL, which you can plug into your application or database client.
-
-```sql
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
-```
-
-Additionally, after signing up, we land you on your project dashboard, where you can find connection snippets for a variety of frameworks, languages, and platforms.
-
-![Next.js connection snippet from the Connection details widget on the Neon Dashboard](/docs/introduction/connection_snippet.png)
-
-If you are not quite ready to hook up an application, you can explore Neon from the Console. Create the `playing_with_neon` table using the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), run some queries, or create a database branch. 
-
-Initially, you'll be signed up for Neon's [Free Tier](/docs/introduction/plans#free-tier), but you can easily upgrade to one of our [paid plans](/docs/introduction/plans) when you're ready.
+Thank you for your interest in Neon. We're excited that you're here. Let us share some information about **Why**.
 
 ## Neon is Postgres
 
@@ -246,4 +224,26 @@ For an overview of all the features that Neon supports, including security featu
 
 In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, cost savings, and advanced capabilities provided by Neon's serverless architecture.
 
-<CTA title="Ready to get started?" description="We're excited that you're here! After signing up, don't forget to join us on Discord, where you'll find an active community and the Neon team ready to help you get going." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />
+## It's easy to get started
+
+**You can set up a Postgres database in seconds**
+
+1. Login with an email address, Google, or GitHub account.
+2. Provide a project name, database name, and select a region.
+3. Click **Create Project**.
+
+At Neon, we like to say **Database as a URL**. Neon's architecture allows us to spin up a Postgres database almost instantly and provide you with a database URL, which you can plug into your application or database client.
+
+```sql
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+```
+
+Additionally, after signing up, we land you on your project dashboard, where you can find connection snippets for a variety of frameworks, languages, and platforms.
+
+![Next.js connection snippet from the Connection details widget on the Neon Dashboard](/docs/introduction/connection_snippet.png)
+
+If you are not quite ready to hook up an application, you can explore Neon from the Console. Create the `playing_with_neon` table using the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), run some queries, or create a database branch. 
+
+Initially, you'll be signed up for Neon's [Free Tier](/docs/introduction/plans#free-tier), but you can easily upgrade to one of our [paid plans](/docs/introduction/plans) when you're ready.
+
+<CTA title="Are you ready?" description="We're excited that you're here! After signing up, don't forget to join our Discord community, where you'll find an active Neon users the Neon team members ready to help." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />
