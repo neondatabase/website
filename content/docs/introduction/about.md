@@ -1,13 +1,36 @@
 ---
 title: Why Neon?
-subtitle: Neon is serverless Postgres optimized for user experience, velocity, and scalability
+subtitle: Neon is Serverless Postgres built for the cloud
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
 updatedOn: '2024-01-26T16:30:34.542Z'
 ---
 
-Thank you for your interest in Neon. We're excited that you're here. Let us share some information about **Why**.
+Thank you for your interest in Neon Postgres. We're excited that you're here. Let us share some information about **Why Neon**.
+
+Looking back at Neon's very first blog post, [SELECT ’Hello, World’](https://neon.tech/blog/hello-world), the fundamental reasons for **Why Neon** remain the same. We set out to build **the best Postgres experience in the cloud**, which is still our core mission today. It was clear to us then, as it is now, that **database workloads are shifting into the cloud &#8212; and no one wants to manage a database themselves**. We also stated our belief that **in the ever-changing technology stack, Postgres is here to stay**. Just like the Linux operating system or Git version control, we believe Postgres is the default choice for a relational database system. That’s why all of the major platforms like AWS, Azure, Google Cloud, Digital Ocean, Heroku, and the many newcomers that have recently entered this space offer Postgres as a service.
+
+Given the many "Postgres as a service" options available to you today, let's take a look at the reasons why **you** should choose Neon:
+
+- [Neon is Postgres](neon-is-postgres)
+- [A serverless architecture for scale, cost efficiency, and peace of mind](a-serverless-architecture-for-scale-cost-efficiency-and-peace-of-mind)
+  - [Autoscaling](autoscaling)
+  - [Scale to zero](scale-to-zero)
+  - [Bottomless storage](bottomless-storage)
+- [Developer velocity with database branching workflows](developer-velocity-with-database-branching-workflows)
+- [Neon is fully managed](neon-is-fully-managed)
+- [Support for thousands of connections](support-for-thousands-of-connections)
+- [Postgres extension support](postgres-extension-support)
+- [Low-latency connections from Edge and Serverless environments](low-latency-connections-from-edge-and-serverless-environments)
+- [Instant database recovery with Point-in-Time Restore and Time Travel Assist](instant-database-recovery-with-point-in-time-restore-and-time-travel-assist)
+- [Build AI applications with Postgres and pgvector](build-ai-applications-with-postgres-and-pgvector)
+- [Database DevOps with Neon's CLI, API, and GitHub Actions](database-devops-with-neons-cli-api-and-github-actions)
+- [Change Data Capture (CDC) with Logical Replication](change-data-capture-with-logical-replication)
+- [Scale with Instant Read Replicas](scale-with-instant-read-replicas)
+- [More Neon features](more-neon-features)
+- [Who should use Neon?](who-should-use-neon)
+- [Neon makes it easy to get started with Postgres](neon-makes-it-easy-to-get-started-with-Postgres)
 
 ## Neon is Postgres
 
@@ -224,7 +247,7 @@ For an overview of all the features that Neon supports, including security featu
 
 In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, cost savings, and advanced capabilities provided by Neon's serverless architecture.
 
-## It's easy to get started
+## Neon makes it easy to get started with Postgres
 
 **You can set up a Postgres database in seconds**
 
