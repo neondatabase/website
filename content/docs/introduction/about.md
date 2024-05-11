@@ -25,7 +25,7 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 
 Additionally, after signing up, we land you on your project dashboard, where you can find connection snippets for a variety of frameworks, languages, and platforms.
 
-![Next.js connection snippet from the Connection details widget on the Neon Dashboard](connection_snippet.png)
+![Next.js connection snippet from the Connection details widget on the Neon Dashboard](/docs/introduction/connection_snippet.png)
 
 If you are not quite ready to hook up an application, you can explore Neon from the Console. Create the `playing_with_neon` table using the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), run some queries, or create a database branch. 
 
