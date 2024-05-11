@@ -7,6 +7,30 @@ redirectFrom:
 updatedOn: '2024-01-26T16:30:34.542Z'
 ---
 
+Thank you for your interest in Neon. Now that you are here, let us make the case for why you should go a step further and take Neon for a test drive.
+
+## We make it really easy to get started
+
+**You can set up a Postgres database in seconds**
+
+1. Login with an email address, Google, or GitHub account.
+2. Provide a project name, database name, and select a region.
+3. Click **Create Project**.
+
+It's that easy. At Neon, we like to say **Database as a URL**. Neon's architecture allows us to spin up a Postgres database almost instantly and provide you with a database URL, which you can plug into your application or database client.
+
+```sql
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+```
+
+Additionally, after signing up, we land you on your project dashboard, where you can find connection snippets for a variety of frameworks, languages, and platforms.
+
+![Next.js connection snippet from the Connection details widget on the Neon Dashboard](connection_snippet.png)
+
+If you are not quite ready to hook up an application, you can explore Neon from the Console. Create the `playing_with_neon` table using the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), run some queries, or create a database branch. 
+
+Initially, you'll be signed up for Neon's [Free Tier](/docs/introduction/plans#free-tier), but you can easily upgrade to one of our [paid plans](/docs/introduction/plans) when you're ready.
+
 ## Neon is Postgres
 
 Postgres is the world's most popular open-source database. From its beginning as a [DARPA-sponsored project at Berkley](https://www.postgresql.org/docs/current/history.html), Postgres has fostered an ever-growing community and is a preferred database among developers because of its performance, reliability, extensibility, and support for features like ACID transactions, advanced SQL, and NoSQL/JSON. Neon supports all of the latest Postgres versions and numerous [Postgres extensions](/docs/extensions/extensions-intro). 
@@ -89,6 +113,27 @@ Being a fully managed service means that Neon provides high availability without
 ## Support for thousands of connections
 
 Neon's [connection pooling](/docs/connect/connection-pooling) feature supports up to 10,000 concurrent connections. Connection pooling works by caching and reusing database connections, which helps to significantly optimize resource usage and enhance performance. It reduces the overhead associated with establishing new connections and closing old ones, allowing applications to handle a higher volume of requests more efficiently. Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling.
+
+## Postgres extension support
+
+Postgres extensions are add-ons that enhance the functionality of Postgres, letting you tailor your Postgres database to your specific requirements. They offer features ranging from advanced indexing and data types to geospatial capabilities and analytics, allowing you to significantly expand the native capabilities of Postgres. Some of the more popular Postgres extensions include:
+
+- **PostGIS**: Adds support for geographic objects, turning PostgreSQL into a spatial database.
+- **pg_stat_statements**: Tracks execution statistics of all SQL queries for performance tuning.
+- **pg_partman**]()**: Simplifies partition management, making it easier to maintain time-based or serial-based table partitions.
+- **pg_trgm**: Provides fast similarity search using trigrams, ideal for full-text search.
+- **hstore**: Implements key-value pairs for semi-structured data storage.
+- **plpgsql**: Enables procedural language functions with PL/pgSQL scripting.
+- **pgcrypto**: Offers cryptographic functions, including data encryption and decryption.
+- **pgvector**: Brings vector similarity search to Postgres for building AI applications.
+
+These are just a few of the extensions supported by Neon. Explore all supported extensions [here](/docs/extensions/extensions-intro).
+
+Extensions can be installed with a simple `CREATE EXTENSION` command from Neon's [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) any SQL client; for example:
+
+```sql
+CREATE EXTENSION pgcrypto;
+```
 
 ## Low-latency connections from Edge and Serverless environments
 
@@ -189,7 +234,7 @@ For an overview of all the features that Neon supports, including security featu
 
 ## Who should use Neon?
 
-**You**, and we're ready to help. Neon is designed for a wide range of users, from individual developers to enterprises, seeking modern, serverless Postgres capabilities. It caters to those who need a fully managed, scalable, and cost-effective database solution. Key users include:
+**You**, and we're ready to help you get started. Neon is designed for a wide range of users, from individual developers to enterprises, seeking modern, serverless Postgres capabilities. It caters to those who need a fully managed, scalable, and cost-effective database solution. Key users include:
 
 - **Individual developers** looking for a fast and easy way to set up, manage, and scale Postgres databases without the hassle of server management. Neon's Free Tier makes it easy to get started. Free Tier users get access to features like project sharing and branching, and when you are ready to scale, you can easily upgrade your account to a paid plan for more computing power, storage, and advanced features.
   
@@ -199,4 +244,6 @@ For an overview of all the features that Neon supports, including security featu
 - **Teams and organizations** that aim to enhance their development workflows with the ability to create database branches for testing new features or updates, mirroring the branching process used in code version control.
 - **Enterprises** requiring scalable, high-performance database solutions with advanced features like autoscaling, autosuspend, point-in-time restore, and logical replication. Enterprises can benefit from custom pricing, higher resource allowances, and enterprise-level support to meet their specific requirements.
 
-In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, cost savings, and the advanced capabilities provided by Neon's serverless architecture.
+In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, cost savings, and advanced capabilities provided by Neon's serverless architecture.
+
+<CTA title="Ready to get started?" description="We're excited that you're here! After signing up, don't forget to join us on Discord, where you'll find an active community and the Neon team ready to help you get going." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />
