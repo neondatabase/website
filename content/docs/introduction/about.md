@@ -246,4 +246,4 @@ If you are not quite ready to hook up an application, you can explore Neon from 
 
 Initially, you'll be signed up for Neon's [Free Tier](/docs/introduction/plans#free-tier), but you can easily upgrade to one of our [paid plans](/docs/introduction/plans) when you're ready.
 
-<CTA title="Are you ready?" description="We're excited that you're here! After signing up, don't forget to join our Discord community, where you'll find an active Neon users the Neon team members ready to help." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Are you ready?" description="We're excited that you're here! After signing up, don't forget to join our active Discord community, where you'll find Neon users and team members ready to help." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />
