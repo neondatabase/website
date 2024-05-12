@@ -13,25 +13,6 @@ Looking back at Neon's very first blog post, [SELECT ’Hello, World’](https:/
 
 Given the many "Postgres as a service" options available to you today, let's take a look at the reasons why **you** should choose Neon:
 
-- [Neon is Postgres](neon-is-postgres)
-- [A serverless architecture for scale, cost efficiency, and peace of mind](a-serverless-architecture-for-scale-cost-efficiency-and-peace-of-mind)
-  - [Autoscaling](autoscaling)
-  - [Scale to zero](scale-to-zero)
-  - [Bottomless storage](bottomless-storage)
-- [Developer velocity with database branching workflows](developer-velocity-with-database-branching-workflows)
-- [Neon is fully managed](neon-is-fully-managed)
-- [Support for thousands of connections](support-for-thousands-of-connections)
-- [Postgres extension support](postgres-extension-support)
-- [Low-latency connections from Edge and Serverless environments](low-latency-connections-from-edge-and-serverless-environments)
-- [Instant database recovery with Point-in-Time Restore and Time Travel Assist](instant-database-recovery-with-point-in-time-restore-and-time-travel-assist)
-- [Build AI applications with Postgres and pgvector](build-ai-applications-with-postgres-and-pgvector)
-- [Database DevOps with Neon's CLI, API, and GitHub Actions](database-devops-with-neons-cli-api-and-github-actions)
-- [Change Data Capture (CDC) with Logical Replication](change-data-capture-with-logical-replication)
-- [Scale with Instant Read Replicas](scale-with-instant-read-replicas)
-- [More Neon features](more-neon-features)
-- [Who should use Neon?](who-should-use-neon)
-- [Neon makes it easy to get started with Postgres](neon-makes-it-easy-to-get-started-with-Postgres)
-
 ## Neon is Postgres
 
 Postgres is the world's most popular open-source database. From its beginning as a [DARPA-sponsored project at Berkley](https://www.postgresql.org/docs/current/history.html), Postgres has fostered an ever-growing community and is a preferred database among developers because of its performance, reliability, extensibility, and support for features like ACID transactions, advanced SQL, and NoSQL/JSON. Neon supports all of the latest Postgres versions and numerous [Postgres extensions](/docs/extensions/extensions-intro). 
@@ -231,7 +212,13 @@ To learn more, see [Read replicas](/docs/introduction/read-replicas).
 
 ## More Neon features
 
-For an overview of all the features that Neon supports, including security features, visit [Detailed Plan Comparison](https://neon.tech/pricing#plans) on the [Neon Pricing](https://neon.tech/pricing) page. 
+For an overview of all the features that Neon supports, including security features, visit [Detailed Plan Comparison](https://neon.tech/pricing#plans) on the [Neon Pricing](https://neon.tech/pricing) page.
+
+## We are open source
+
+Neon is not the first to offer separation of storage and compute for Postgres. AWS Aurora is probably the most famous example; however, it is proprietary and tied to AWS’s internal infrastructure.
+
+We think we have an opportunity to define the standard for cloud Postgres. We carefully designed our storage focusing on cloud independence, performance, manageability, DevX, and cost. We chose the most permissive open source license, Apache 2.0, and invited the world to participate. You can already build and run your own fully-featured instance of Neon.
 
 ## Who should use Neon?
 
