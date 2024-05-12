@@ -7,11 +7,14 @@ redirectFrom:
 updatedOn: '2024-01-26T16:30:34.542Z'
 ---
 
-Thank you for your interest in Neon Postgres. We're excited that you're here. Let us share some information about **Why Neon**.
+Looking back at Neon's debut blog post, [SELECT ’Hello, World’](https://neon.tech/blog/hello-world), the fundamental reasons for **Why Neon** remain the same:
 
-Looking back at Neon's very first blog post, [SELECT ’Hello, World’](https://neon.tech/blog/hello-world), the fundamental reasons for **Why Neon** remain the same. We set out to build **the best Postgres experience in the cloud**, which is still our core mission today. It was clear to us then, as it is now, that **database workloads are shifting into the cloud &#8212; and no one wants to manage a database themselves**. We also stated our belief that **in the ever-changing technology stack, Postgres is here to stay**. Just like the Linux operating system or Git version control, we believe Postgres is the default choice for a relational database system. That’s why all of the major platforms like AWS, Azure, Google Cloud, Digital Ocean, Heroku, and the many newcomers that have recently entered this space offer Postgres as a service.
+- **To build the best Postgres experience in the cloud**. This is still our core mission today. It was clear to us then, as it is now, that database workloads are shifting into the cloud &#8212; and no one wants to manage a database themselves.
+- **In an ever-changing technology stack, we believe Postgres is here to stay**. Just like the Linux operating system or Git version control, we believe Postgres is the default choice for a relational database system. That’s why all of the major platforms like AWS, Azure, Google Cloud, Digital Ocean, and the many newcomers that have recently entered this space offer Postgres as a service.
+- **An idea that a modern Postgres cloud service can be designed differently to be cheaper and more efficient**. We call this approach _separation of storage and compute_, which allows us to architect the service around performance, reliability, manageability, and cost.
+- **Belief that our architecture can provide a better Developer Experience (DevX)**. Features such as branching, time travel, elastic autoscaling, and seamless backup and restore, improve the developer experience by allowing quick environment setup, efficient developer workflows, and immediate database availability.
 
-Given the many "Postgres as a service" options available to you today, let's take a look at the reasons why **you** should choose Neon:
+These are Neon's reasons, but given the many _Postgres as a service_ options available to you today, let's take a look at the reasons why **you** should choose Neon:
 
 ## Neon is Postgres
 
@@ -19,7 +22,7 @@ Postgres is the world's most popular open-source database. From its beginning as
 
 **If your application runs on Postgres, it runs on Neon**. If it doesn't run on Postgres, [sign up](https://console.neon.tech/signup) for a Free Tier account, join our [Discord server](https://discord.gg/92vNTzKDGp), and start the journey with us.
 
-## A serverless architecture for scale, cost efficiency, and peace of mind
+## A serverless architecture for performance, reliability, manageability, and cost
 
 Neon's [architecture](/docs/introduction/architecture-overview) separates compute from storage, which enables serverless features like [Autoscaling](#autoscaling), [Autosuspend](#scale-to-zero), and [Bottomless Storage](#bottomless-storage). 
 
