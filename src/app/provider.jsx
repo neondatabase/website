@@ -7,11 +7,12 @@ import { ThemeProvider as PreferredProvider } from 'next-themes';
 const ThemeProvider = ({ children }) => {
   const pathname = usePathname();
   const isDocPage = pathname.startsWith('/docs');
+  const isGuidePage = pathname.startsWith('/guides');
 
   return (
     <PreferredProvider
       attribute="class"
-      forcedTheme={isDocPage ? null : 'light'}
+      forcedTheme={isDocPage || isGuidePage ? null : 'light'}
       storageKey="neon-theme"
       disableTransitionOnChange
     >
