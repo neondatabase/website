@@ -22,11 +22,6 @@ function extractTextFromNode(node) {
     if (Array.isArray(node.props.children)) {
       node.props.children.forEach((child) => {
         text += extractTextFromNode(child);
-
-        // Add a new line if 'data-line' property exists.
-        if (child.props && 'data-line' in child.props) {
-          text += '\n';
-        }
       });
     } else {
       // If there's only one child, process that child directly.
