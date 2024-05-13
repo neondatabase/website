@@ -44,7 +44,6 @@ export default async function GuidesPage() {
                   className="border-b border-gray-new-15/20 py-6 first:pt-0 last:border-none last:pb-0 dark:border-gray-new-15/80"
                 >
                   <GuideCard
-                    key={slug}
                     title={title}
                     subtitle={subtitle}
                     author={author}
