@@ -71,6 +71,12 @@ Neon uses cloud-based object storage solutions, like S3, to relocate less freque
 
 The entire Neon storage framework is developed in Rust for maximum performance and usability. Read about [how we scale an open source, multi-tenant storage engine for Postgres written in Rust](https://neon.tech/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust), or [take a deep dive into the Neon storage engine](https://neon.tech/blog/get-page-at-lsn) with Neon Co-Founder, Heikki Linnakangas.
 
+## Neon is fully managed
+
+**Leave the database administrative, maintenance, and scaling burdens to us.**
+
+Being a fully managed service means that Neon provides high availability without requiring users to handle administrative, maintenance, or scaling burdens associated with managing a database system. This approach allows developers to focus more on developing applications and less on the operational aspects of database management. Neon takes care of the complexities of scaling, backups, maintenance, and ensuring availability, enabling developers to manage their data without worrying about the underlying infrastructure.
+
 ## Developer velocity with database branching workflows
 
 **Branch your data like code for local and preview development workflows.**
@@ -103,53 +109,6 @@ To learn more, read [Database Branching Workflows](https://neon.tech/flow), and 
 Neon's Schema Diff tool lets you compare the schemas for two selected branches in a side-by-side view. For more, see [Schema Diff](/docs/guides/schema-diff).
 </Admonition>
 
-## Neon is fully managed
-
-**Leave the database administrative, maintenance, and scaling burdens to us.**
-
-Being a fully managed service means that Neon provides high availability without requiring users to handle administrative, maintenance, or scaling burdens associated with managing a database system. This approach allows developers to focus more on developing applications and less on the operational aspects of database management. Neon takes care of the complexities of scaling, backups, maintenance, and ensuring availability, enabling developers to manage their data without worrying about the underlying infrastructure.
-
-## Support for thousands of connections
-
-**Add support for thousands of concurrent connections with a pooled connection string.**
-
-Neon's [connection pooling](/docs/connect/connection-pooling) feature supports up to 10,000 concurrent connections. Connection pooling works by caching and reusing database connections, which helps to significantly optimize resource usage and enhance performance. It reduces the overhead associated with establishing new connections and closing old ones, allowing applications to handle a higher volume of requests more efficiently. Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling. Enabling connection pooling is easy. Just grab a pooled connection string from the console:
-
-```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
-```
-
-## Postgres extension support
-
-**No database is more extensible than Postgres.**
-
-Postgres extensions are add-ons that enhance the functionality of Postgres, letting you tailor your Postgres database to your specific requirements. They offer features ranging from advanced indexing and data types to geospatial capabilities and analytics, allowing you to significantly expand the native capabilities of Postgres. Some of the more popular Postgres extensions include:
-
-- **PostGIS**: Adds support for geographic objects, turning PostgreSQL into a spatial database.
-- **pg_stat_statements**: Tracks execution statistics of all SQL queries for performance tuning.
-- **pg_partman**: Simplifies partition management, making it easier to maintain time-based or serial-based table partitions.
-- **pg_trgm**: Provides fast similarity search using trigrams, ideal for full-text search.
-- **hstore**: Implements key-value pairs for semi-structured data storage.
-- **plpgsql**: Enables procedural language functions with PL/pgSQL scripting.
-- **pgcrypto**: Offers cryptographic functions, including data encryption and decryption.
-- **pgvector**: Brings vector similarity search to Postgres for building AI applications.
-
-These are just a few of the extensions supported by Neon. Explore all supported extensions [here](/docs/extensions/extensions-intro).
-
-Extensions can be installed with a simple `CREATE EXTENSION` command from Neon's [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client; for example:
-
-```sql
-CREATE EXTENSION pgcrypto;
-```
-
-## Low-latency connections
-
-**Connect from Edge and serverless environments.**
-
-The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver), which currently has over [100K weekly downloads](https://www.npmjs.com/package/@neondatabase/serverless), is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from edge and serverless environments like **Vercel Edge Functions** or **Cloudflare Workers** over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve [sub-10ms Postgres query times](https://neon.tech/blog/sub-10ms-postgres-queries-for-vercel-edge-functions) when querying from Edge or serverless functions. But don't take our word for it. Try it for yourself with Vercel's [Functions + Database Latency app](https://db-latency.vercel.app/). This graph shows latencies for Neon's serverless driver:
-
-![Vercel's Functions Database Latency app](/docs/introduction/latency_distribution_graph.png)
-
 ## Instant database recovery
 
 **Instant Point-in-Time Restore with Time Travel Assist**
@@ -157,12 +116,6 @@ The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver
 We've all heard about multi-hour outages and data losses due to errant queries or problematic migrations. Neon's [Point-in-Time Restore](/docs/guides/branch-restore) feature allows you to instantly restore your data to a point in time before the issue occurred. With Neon, you can perform a restore operation in a few clicks, letting you get back online in the time it takes to choose a restore point, which can be a date and time or a Log Sequence Number (LSN).
 
 To help you find the correct restore point, Neon provides a [Time Travel Assist](/docs/guides/time-travel-assist) feature that lets you connect to any selected time or LSN within your database history and run queries. Time Travel Assist is designed to work in tandem with Neon's restore capability to facilitate precise and informed restore operations.
-
-## Build your AI applications with Postgres
-
-**Why pay for a specialized vector database service when you can just use Postgres?**
-
-Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension for storing and retrieving vector embeddings within your Postgres database. This feature is essential for building next-generation AI applications, enabling operations like fast and accurate similarity search, information retrieval, and recommendation systems directly in Postgres. Why pay for or add the complexity of a specialized vector database service when you have leading-egde capabilities in Postgres? Neon's own **Ask Neon AI** chat, built in collaboration with [InKeep](https://inkeep.com/), uses Neon with [pgvector](/docs/extensions/pgvector). For more, see [Powering next gen AI apps with Postgres](https://neon.tech/ai).
 
 ## Database DevOps with Neon's CLI, API, and GitHub Actions
 
@@ -224,6 +177,53 @@ Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension for s
       - run: echo host ${{ steps.create-branch.outputs.host }}
       - run: echo branch_id ${{ steps.create-branch.outputs.branch_id }}
     ```
+
+## Support for thousands of connections
+
+**Add support for thousands of concurrent connections with a pooled connection string.**
+
+Neon's [connection pooling](/docs/connect/connection-pooling) feature supports up to 10,000 concurrent connections. Connection pooling works by caching and reusing database connections, which helps to significantly optimize resource usage and enhance performance. It reduces the overhead associated with establishing new connections and closing old ones, allowing applications to handle a higher volume of requests more efficiently. Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling. Enabling connection pooling is easy. Just grab a pooled connection string from the console:
+
+```bash
+postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
+```
+
+## Low-latency connections
+
+**Connect from Edge and serverless environments.**
+
+The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver), which currently has over [100K weekly downloads](https://www.npmjs.com/package/@neondatabase/serverless), is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from edge and serverless environments like **Vercel Edge Functions** or **Cloudflare Workers** over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve [sub-10ms Postgres query times](https://neon.tech/blog/sub-10ms-postgres-queries-for-vercel-edge-functions) when querying from Edge or serverless functions. But don't take our word for it. Try it for yourself with Vercel's [Functions + Database Latency app](https://db-latency.vercel.app/). This graph shows latencies for Neon's serverless driver:
+
+![Vercel's Functions Database Latency app](/docs/introduction/latency_distribution_graph.png)
+
+## Postgres extension support
+
+**No database is more extensible than Postgres.**
+
+Postgres extensions are add-ons that enhance the functionality of Postgres, letting you tailor your Postgres database to your specific requirements. They offer features ranging from advanced indexing and data types to geospatial capabilities and analytics, allowing you to significantly expand the native capabilities of Postgres. Some of the more popular Postgres extensions include:
+
+- **PostGIS**: Adds support for geographic objects, turning PostgreSQL into a spatial database.
+- **pg_stat_statements**: Tracks execution statistics of all SQL queries for performance tuning.
+- **pg_partman**: Simplifies partition management, making it easier to maintain time-based or serial-based table partitions.
+- **pg_trgm**: Provides fast similarity search using trigrams, ideal for full-text search.
+- **hstore**: Implements key-value pairs for semi-structured data storage.
+- **plpgsql**: Enables procedural language functions with PL/pgSQL scripting.
+- **pgcrypto**: Offers cryptographic functions, including data encryption and decryption.
+- **pgvector**: Brings vector similarity search to Postgres for building AI applications.
+
+These are just a few of the extensions supported by Neon. Explore all supported extensions [here](/docs/extensions/extensions-intro).
+
+Extensions can be installed with a simple `CREATE EXTENSION` command from Neon's [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client; for example:
+
+```sql
+CREATE EXTENSION pgcrypto;
+```
+
+## Build your AI applications with Postgres
+
+**Why pay for a specialized vector database service when you can just use Postgres?**
+
+Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension for storing and retrieving vector embeddings within your Postgres database. This feature is essential for building next-generation AI applications, enabling operations like fast and accurate similarity search, information retrieval, and recommendation systems directly in Postgres. Why pay for or add the complexity of a specialized vector database service when you have leading-egde capabilities in Postgres? Neon's own **Ask Neon AI** chat, built in collaboration with [InKeep](https://inkeep.com/), uses Neon with [pgvector](/docs/extensions/pgvector). For more, see [Powering next gen AI apps with Postgres](https://neon.tech/ai).
 
 ## Change Data Capture (CDC) with Logical Replication
 
