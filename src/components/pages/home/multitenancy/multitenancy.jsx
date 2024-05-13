@@ -12,7 +12,7 @@ const Multitenancy = () => (
     </Container>
     {/* 
         Video optimization parameters:
-        -mp4: -pix_fmt yuv420p -vf scale=:3840-2 -movflags faststart -vcodec libx264 -crf 20
+        -mp4: -pix_fmt yuv420p -vf scale=3840:-2 -movflags faststart -vcodec libx264 -crf 20
         -webm: -c:v libvpx-vp9 -crf 20 -vf scale=3840:-2 -deadline best -an
     */}
     <PauseableVideo
@@ -21,8 +21,8 @@ const Multitenancy = () => (
       height={474}
       width={1920}
     >
-      <source src="/videos/pages/home/next-gen.mp4?updated=20240411193959" type="video/mp4" />
-      <source src="/videos/pages/home/next-gen.webm?updated=20240411193959" type="video/webm" />
+      <source src="/videos/pages/home/next-gen.mp4?updated=20240513193559" type="video/mp4" />
+      <source src="/videos/pages/home/next-gen.webm?updated=20240513193559" type="video/webm" />
     </PauseableVideo>
     <Container
       className="relative z-10 mt-14 xl:mt-[50px] xl:max-w-[704px] lg:mt-[42px] lg:pl-24 md:mt-11 sm:mt-[22px]"

@@ -51,7 +51,7 @@ const ITEMS = [
   {
     x: '17%',
     y: '76%',
-    label: 'Works with pg_vector',
+    label: 'Works with PGVECTOR',
   },
   {
     x: '68%',
