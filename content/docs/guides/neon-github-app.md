@@ -91,7 +91,13 @@ The GitHub integration is intended to simplify setting up developer workflows us
 
 Once you install the Neon GitHub integration, you can proceed with setting up your GitHub Action workflow knowing that these steps are completed.
 
-For example applications that use the Neon's GitHub Actions, see [Example applications](/docs/guides/branching-github-actions#example-applications).
+For example applications that use Neon's GitHub Actions, see [Example applications](/docs/guides/branching-github-actions#example-applications).
+
+For more GitHub Action and workflow-related resources, please see:
+
+- [A database for every preview environment using Neon, GitHub Actions, and Vercel](https://neon.tech/blog/branching-with-preview-environments)
+- [Database Branching Workflows](https://neon.tech/flow)
+- [Database branching workflow guide for developers](https://neon.tech/blog/database-branching-workflows-a-guide-for-developers).
 
 ## Remove the GitHub integration
 
