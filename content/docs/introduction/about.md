@@ -259,7 +259,7 @@ We believe we have an opportunity to define the standard for cloud Postgres. We 
 
 ## Neon doesn't lock you in
 
-**As a true Postgres platform, there's no lock-in with Neon.
+**As a true Postgres platform, there's no lock-in with Neon.**
 
 Building on Neon is building on Postgres. If you are already running Postgres, getting started is easy. [Import your data](https://neon.tech/docs/import/import-intro) and [connect](https://neon.tech/docs/connect/connect-intro). Migrating from other databases like MySQL or MongoDB is just as easy. 
 
