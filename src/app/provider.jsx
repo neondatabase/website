@@ -8,11 +8,12 @@ const ThemeProvider = ({ children }) => {
   const pathname = usePathname();
   const isDocPage = pathname.startsWith('/docs');
   const isGuidePage = pathname.startsWith('/guides');
+  const isFlowPage = pathname.startsWith('/flow');
 
   return (
     <PreferredProvider
       attribute="class"
-      forcedTheme={isDocPage || isGuidePage ? null : 'light'}
+      forcedTheme={isDocPage || isGuidePage || isFlowPage ? null : 'light'}
       storageKey="neon-theme"
       disableTransitionOnChange
     >

@@ -21,6 +21,8 @@ Your Neon plan defines the range of data you can view.
 | [Launch](/docs/introduction/plans#launch)      | Last 7 days (168 hours)    |
 | [Scale](/docs/introduction/plans#scale)     | Last 7 days (168 hours)     |
 
+A shorter or custom period can be selected within the permitted range by selecting the desired option from the **Other** menu on the dashboard.
+
 The dashboard displays metrics for the selected **Branch** and **Compute endpoint**. Use the drop-down menus to view metrics for a different branch or compute endpoint. Use the **Refresh** button to update the displayed metrics.
 
 If your compute was idle or there has not been much activity, charts may display this message: `There is not enough metrics data for this compute`. In this case, try again later after more usage data has been collected.
