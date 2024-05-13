@@ -98,7 +98,7 @@ Once you install the Neon GitHub integration, you can proceed with setting up yo
 For example applications that use Neon's GitHub Actions, see [Example applications](/docs/guides/branching-github-actions#example-applications).
 
 <Admonition type="note">
-This is an early preview of the Neon GitHub integration. Its functionality is currently limited to configuring a project ID variable and Neon API Key secret. You may find that you need to configure additional variables and secrets when building workflows. When you do run into a limitation with our GitHub integration, please let us know and we'll consider it for the next release.
+This is an early preview of the Neon GitHub integration. Its functionality is currently limited to configuring a project ID variable and Neon API Key secret. You may find that you need to configure additional variables and secrets when building workflows. When you run into a limitation with the GitHub integration, please let us know and we'll consider adding functionality to address it in the next release.
 </Admonition>
 
 For more GitHub Action and workflow-related resources, please see:
@@ -123,6 +123,6 @@ To remove the integration:
 3. Click **Disconnect**.
 4. Click **Remove integration** to confirm your choice.
 
-# Feedback and future improvements
+## Feedback and future improvements
 
 If you've got feature requests or feedback about what you'd like to see from the Neon GitHub integration, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
