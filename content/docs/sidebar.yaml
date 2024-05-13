@@ -1,8 +1,8 @@
 - title: Introduction
   slug: introduction
   items:
-    - title: What is Neon?
-      slug: introduction/about
+    - title: Why Neon?
+      slug: introduction/why-neon
     - title: Neon roadmap
       slug: introduction/roadmap
     - title: Neon architecture
