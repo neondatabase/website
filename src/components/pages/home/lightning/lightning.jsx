@@ -39,11 +39,17 @@ const Lightning = () => (
 
       <p className="relative z-10 ml-32 mt-[-347px] max-w-[288px] font-light tracking-extra-tight text-gray-new-70 xl:ml-24 xl:mt-[-283px] xl:leading-snug lg:-mt-56 lg:ml-8 lg:max-w-[250px] sm:ml-0 sm:mt-[-203px] sm:max-w-[212px] sm:text-[15px]">
         <span className="font-medium text-gray-new-94">The Neon serverless driver</span>, designed
-        for JavaScript and TypeScript, ensures low-latency Postgres queries. It unlocks database
-        connectivity for both serverless and edge environments, utilizing HTTP.
+        for fast queries over HTTP
       </p>
+      <code className="relative z-10 ml-32 mt-5 flex max-w-xs flex-col gap-y-2.5 text-[13px] leading-dense text-gray-new-50 [mask-image:radial-gradient(110%_110%_at_29%_52%,rgba(0,0,0,.85),rgba(0,0,0,.8)_35%,transparent_96%)] xl:ml-24 xl:max-w-[300px] lg:ml-8 lg:max-w-[270px] lg:gap-y-2 lg:text-xs sm:ml-0 sm:max-w-[212px]">
+        <span>{`import { neon } from '@neondatabase/\nserverless';`}</span>
+        <span>
+          {`const sql = neon('postgresql://\nusr:pass@proj.us-east-2.aws.neon.tech/db');`}
+        </span>
+        <span>{`const posts = await sql('SELECT * FROM posts');`}</span>
+      </code>
       <Link
-        className="relative z-10 ml-32 mt-[22px] flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] xl:ml-24 lg:ml-8 sm:ml-0 sm:mt-3.5"
+        className="relative z-10 ml-32 mt-6 flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] xl:ml-24 lg:ml-8 sm:ml-0 sm:mt-3.5"
         to="/docs/serverless/serverless-driver"
         theme="white"
         withArrow
