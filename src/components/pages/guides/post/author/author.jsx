@@ -12,11 +12,11 @@ const Author = ({ data, className = null }) => (
     <div className="flex items-center gap-2.5">
       {data.photo && (
         <Image
+          className="block rounded-full"
           src={data.photo}
           alt={data.name}
           width={40}
           height={40}
-          className="block rounded-full"
         />
       )}
       <div>

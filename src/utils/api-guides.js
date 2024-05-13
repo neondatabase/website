@@ -1,7 +1,4 @@
-const VERCEL_URL =
-  process.env.VERCEL_ENV === 'preview'
-    ? `https://${process.env.VERCEL_BRANCH_URL}`
-    : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+import { VERCEL_URL } from '../constants/guides';
 
 const fs = require('fs');
 
@@ -16,7 +13,6 @@ const getPostSlugs = async (pathname) => {
       '**/RELEASE_NOTES_TEMPLATE.md',
       '**/README.md',
       '**/unused/**',
-      '**/shared-content/**',
       '**/GUIDE_TEMPLATE.md',
     ],
   });

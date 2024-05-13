@@ -33,7 +33,7 @@ const Post = ({
         )}
         {author && <Author data={author} className="mt-5 hidden lg:block" />}
         <Content className="mt-5" content={content} />
-        <LastUpdatedDate updatedOn={updatedOn} />
+        {updatedOn && <LastUpdatedDate updatedOn={updatedOn} />}
       </article>
 
       <NavigationLinks

@@ -69,7 +69,7 @@ const Post = ({
             </p>
           )}
           <Content className="mt-5" content={content} />
-          <LastUpdatedDate updatedOn={updatedOn} />
+          {updatedOn && <LastUpdatedDate updatedOn={updatedOn} />}
         </article>
       )}
 

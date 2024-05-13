@@ -177,7 +177,7 @@ class GFG {
 <details>
 <summary>Examples</summary>
 
-![Code tabs example](code-tabs-example.jpg)
+![Code tabs example](../docs/code-tabs-example.jpg)
 
 </details>
 
@@ -269,7 +269,7 @@ Example:
 <details>
 <summary>Examples</summary>
 
-![Admonition example](admonition-example.jpg)
+![Admonition example](../docs/admonition-example.jpg)
 
 </details>
 
@@ -288,7 +288,7 @@ Check the example for default data of CTA block
 <details>
 <summary>Example</summary>
 
-![CTA example](cta-example.jpg)
+![CTA example](../docs/cta-example.jpg)
 
 </details>
 
@@ -387,7 +387,7 @@ Another term for smoke test
 <details>
 <summary>Examples</summary>
 
-![Definition list example](definition-list-example.jpg)
+![Definition list example](../docs/definition-list-example.jpg)
 
 </details>
 
@@ -407,12 +407,12 @@ Another term for smoke test
 
 ## Shared MDX components
 
-Create a [markdown file](https://github.com/neondatabase/website/blob/main/content/guides/shared-content/need-help.md) in folder `content/guides/shared-content/`, add to `sharedMdxComponents` the name of component and the path to component.
+Create a [markdown file](https://github.com/neondatabase/website/blob/main/content/docs/shared-content/need-help.md) in folder `content/docs/shared-content/`, add to `sharedMdxComponents` the name of component and the path to component.
 
 ```js
 const sharedMdxComponents = {
-  // name of component: path to component (not including content/guides/)
-  NeedHelp: 'shared-content/need-help',
+  // name of component: path to component
+  NeedHelp: '../docs/shared-content/need-help',
 };
 
 export default sharedMdxComponents;
@@ -485,7 +485,7 @@ author: rishi-raj-jain
 }
 ```
 
-With this approach, all your author's data will be displayed both on the production in guide's author section.
+With this approach, all your data will be displayed in guide's author section.
 
 ## Contributing
 

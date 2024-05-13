@@ -2,8 +2,7 @@ import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
 import BlogNavLink from 'components/pages/blog/blog-nav-link';
-
-import Socials from '../../../shared/socials';
+import Socials from 'components/shared/socials';
 
 const Search = dynamic(() => import('components/shared/search/search'));
 

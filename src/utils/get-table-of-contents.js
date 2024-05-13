@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const slugify = require('slugify');
 
-const sharedMdxComponents = require('../../content/guides/shared-content');
+const sharedMdxComponents = require('../../content/docs/shared-content');
 
 const parseMDXHeading = require('./parse-mdx-heading');
 
@@ -47,7 +47,7 @@ const getTableOfContents = (content) => {
     const componentName = match[1];
 
     const fileName = sharedMdxComponents[componentName];
-    const mdFilePath = `content/guides/${fileName}.md`;
+    const mdFilePath = `content/docs/${fileName}.md`;
 
     // Check if the MD file exists
     if (fs.existsSync(mdFilePath)) {

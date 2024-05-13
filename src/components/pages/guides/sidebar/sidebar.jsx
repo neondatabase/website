@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-import Socials from '../../../shared/socials';
+import Socials from 'components/shared/socials';
 
 const Search = dynamic(() => import('components/shared/search/search'));
 

@@ -2,7 +2,7 @@ const GUIDES_BASE_PATH = '/guides/';
 
 const POSTGRES_GUIDES_BASE_PATH = '/guides/postgres/';
 
-const VERCEL_URL =
+export const VERCEL_URL =
   process.env.VERCEL_ENV === 'preview'
     ? `https://${process.env.VERCEL_BRANCH_URL}`
     : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
