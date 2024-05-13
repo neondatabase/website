@@ -1,28 +1,31 @@
 ---
 title: The Neon GitHub integration
-subtitle: Connect your GitHub repo to your Neon database
+subtitle: Connect your GitHub application repository to your Neon project and start building workflows
 enableTableOfContents: true
 ---
 
-The Neon GitHub integration connects your GitHub application repository to your Neon project, making it easier to set up developer workflows using Neon's [GitHub Actions](/docs/guides/branching-github-actions).
+The Neon GitHub integration connects your GitHub application repository to your Neon project, making it easier to set up developer workflows using Neon's [GitHub Actions](/docs/guides/branching-github-actions) or other CI/CD tools.
 
 <Admonition type="comingSoon" title="Feature Coming Soon">
-Available in **private preview**. To start using the Neon GitHub integration feature, [request access](#request-access-to-the-private-preview) and we'll help you get set up.
+Available in **private preview**. To start using the Neon GitHub integration, request access by contacting our [Customer Success](mailto:customer-success@neon.tech) team and asking to join the private preview for the GitHub integration.
 </Admonition>
 
 When you connect your GitHub application repository to your Neon project, the integration performs the following actions:
 
-1. Creates a global GitHub variable containing your Neon project ID.
+1. Creates a GitHub variable containing your Neon project ID.
 2. Generates a new Neon API key for your Neon account.
-3. Creates a global GitHub secret containing the Neon API key.
+3. Creates a GitHub secret containing the Neon API key.
 
+<Admonition type="info">
 Neon's GitHub Actions require setting a `NEON_PROJECT_ID` variable and a `NEON_API_KEY` secret in GitHub. The Neon GitHub app does this for you automatically.
+</Admonition>   
 
 The following section describes how to install the GitHub integration.
 
 ## Prerequisites
 
-This installation assumes the following:
+This installation described below assumes the following:
+
 - You already have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
 - You have a GitHub account and a repository that you want to connect to your Neon project.
 
@@ -39,23 +42,24 @@ To add the GitHub integration to your Neon project:
     - Selecting **Only select repositories** lets you choose a repository immediately.
 5. Since Neon's GitHub app is currently designed to work with a single repository, select **Only select repositories** and choose a GitHub repository from the **Select repositories** drop-down list.
 6. Click **Install & Authorize** to complete the installation.
-7. You can directed back to the GitHub integration drawer in the Neon Console.
+
+You are directed back to the GitHub integration drawer in the Neon Console.
 
 ### Changes made by the integration
 
-This section shows you where the Neon GitHub integration has made changes to your GitHub and Neon accounts.
+This section describes where to find the changes made by the Neon GitHub integration to your GitHub and Neon accounts.
 
-- **Installed and AUthorized GitHub Apps**
+- **Installed and Authorized GitHub Apps**
 
-    To view the installed and authorized Neon GitHub application in GitHub:
+    To view the installed and authorized Neon GitHub application:
     
     1. Navigate to your GitHub account page.
     2. From your GitHub profile menu, select **Settings**.
     3. Select **Applications** from the sidebar. 
 
-    The Neon GitHub app should be listed on the **Installed GitHub Apps** and **Authorized GitHub Apps** tabs, where you can configure and revoke permissions, respectively.
+    The Neon GitHub app should be listed on the **Installed GitHub Apps** and **Authorized GitHub Apps** tabs.
 
-- **Neon project ID variable and Neon API key secret in GitHub**
+- **Neon project ID variable and Neon API key secret**
 
     To view the variable containing your Neon project ID:
 
@@ -67,15 +71,15 @@ This section shows you where the Neon GitHub integration has made changes to you
     
     Your `NEON_API_KEY` secret is listed on the **Secrets** tab, and the `NEON_PROJECT_ID` variable is listed on the **Variables** tab.
 
-- **Neon API key in your Neon account**
+- **Neon API key**
 
     To view the Neon API key created by the integration:
 
-    1. In the [Neon Console](https://console.neon.tech), click your profile in the top right corner of the Neon Console.
+    1. In the [Neon Console](https://console.neon.tech), click your profile at the top right corner of the Neon Console.
     2. Select **Account settings**.
     2. Select **API keys**.
 
-    The API key created by the integration should be listed with a name similar to the following: **API key for GitHub (cool-darkness-12345678)**. You cannot view the key itself, only the name it was given, time created, and when it was last used.
+    The API key created by the integration should be listed with a name similar to the following: **API key for GitHub (cool-darkness-12345678)**. You cannot view the key itself, only the name it was given, the time it was created, and when the key was last used.
 
     <Admonition type="note">
     The items listed above are removed when you uninstall the Neon GitHub integration, including the project ID variable, Neon API key secret, and Neon API key. See [Remove the GitHub integration](#remove-the-github-integration).
@@ -83,15 +87,19 @@ This section shows you where the Neon GitHub integration has made changes to you
  
 ## Using the GitHub integration
 
-The GitHub integration is intended to simplify setting up developer workflows using Neon's [GitHub Actions](/docs/guides/branching-github-actions). The GitHub Actions require the actions performed by the Noen GitHub integration to be performed manually, namely:
+The GitHub integration is intended to simplify setting up developer workflows using Neon's [GitHub Actions](/docs/guides/branching-github-actions) or other CI/CD tools. Neon's GitHub Actions require the actions performed by the Noen GitHub integration to be performed manually, namely:
 
-1. Creating a global GitHub variable containing your Neon project ID.
+1. Creating a GitHub variable containing your Neon project ID.
 2. Generating a new Neon API key for your Neon account.
-3. Creating a global GitHub secret containing the Neon API key.
+3. Creating a GitHub secret containing the Neon API key.
 
-Once you install the Neon GitHub integration, you can proceed with setting up your GitHub Action workflow knowing that these steps are completed.
+Once you install the Neon GitHub integration, you can proceed with setting up your GitHub Action workflow knowing that these steps are already completed.
 
 For example applications that use Neon's GitHub Actions, see [Example applications](/docs/guides/branching-github-actions#example-applications).
+
+<Admonition type="note">
+This is an early preview of the Neon GitHub integration. Its functionality is currently limited to configuring a project ID variable and Neon API Key secret. You may find that you need to configure additional variables and secrets when building workflows. When you do run into a limitation with our GitHub integration, please let us know and we'll consider it for the next release.
+</Admonition>
 
 For more GitHub Action and workflow-related resources, please see:
 
@@ -104,9 +112,9 @@ For more GitHub Action and workflow-related resources, please see:
 Removing the integration performs the following actions:
 
 - Terminates connections dependent on the configured variable and secret
-- Removes the global GitHub variable containing your Neon project ID.
+- Removes the GitHub variable containing your Neon project ID.
 - Removes the Neon API key for your Neon account.
-- Removes the global GitHub secret containing the Neon API key.
+- Removes the GitHub secret containing the Neon API key.
 
 To remove the integration:
 

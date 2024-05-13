@@ -146,7 +146,7 @@
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
-            - title: The Neon GitHub App
+            - title: GitHub integration
               slug: guides/neon-github-app
             - title: Branching — Testing queries
               slug: guides/branching-test-queries
