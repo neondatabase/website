@@ -6,11 +6,15 @@ enableTableOfContents: true
 
 The Neon GitHub integration connects your GitHub application repository to your Neon project, making it easier to set up developer workflows using Neon's [GitHub Actions](/docs/guides/branching-github-actions).
 
+<Admonition type="comingSoon" title="Feature Coming Soon">
+Available in **private preview**. To start using the Neon GitHub integration feature, [request access](#request-access-to-the-private-preview) and we'll help you get set up.
+</Admonition>
+
 When you connect your GitHub application repository to your Neon project, the integration performs the following actions:
 
-1. Creates a global variable in the GitHub repo containing your Neon project ID.
+1. Creates a global GitHub variable containing your Neon project ID.
 2. Generates a new Neon API key for your Neon account.
-3. Creates a global secret in the GitHub repository containing the Neon API key.
+3. Creates a global GitHub secret containing the Neon API key.
 
 Neon's GitHub Actions require setting a `NEON_PROJECT_ID` variable and a `NEON_API_KEY` secret in GitHub. The Neon GitHub app does this for you automatically.
 
@@ -33,20 +37,78 @@ To add the GitHub integration to your Neon project:
 4. On the **Install & Authorize** page, select whether to install and authorize the GitHub app for **All repositories** or **Only select repositories**.
     - Selecting **All repositories** directs you back to the GitHub integration drawer in the Neon Console to select a GitHub repository.
     - Selecting **Only select repositories** lets you choose a repository immediately.
-5. Since Neon's GitHub app is currently designed to work with a single repository, select **Only select repositories** and choose a GitHub repository.
+5. Since Neon's GitHub app is currently designed to work with a single repository, select **Only select repositories** and choose a GitHub repository from the **Select repositories** drop-down list.
+6. Click **Install & Authorize** to complete the installation.
+7. You can directed back to the GitHub integration drawer in the Neon Console.
 
+### Changes made by the integration
+
+This section shows you where the Neon GitHub integration has made changes to your GitHub and Neon accounts.
+
+- **Installed and AUthorized GitHub Apps**
+
+    To view the installed and authorized Neon GitHub application in GitHub:
+    
+    1. Navigate to your GitHub account page.
+    2. From your GitHub profile menu, select **Settings**.
+    3. Select **Applications** from the sidebar. 
+
+    The Neon GitHub app should be listed on the **Installed GitHub Apps** and **Authorized GitHub Apps** tabs, where you can configure and revoke permissions, respectively.
+
+- **Neon project ID variable and Neon API key secret in GitHub**
+
+    To view the variable containing your Neon project ID:
+
+    1. Navigate to your GitHub account page.
+    2. From your GitHub profile menu, select **Your repositories**.
+    3. Select the repository that you chose when installing the Neon GitHub integration.
+    4. On the repository page, select the **Settings** tab.
+    5. Select **Secrets and variables** > **Actions** from the sidebar.
+    
+    Your `NEON_API_KEY` secret is listed on the **Secrets** tab, and the `NEON_PROJECT_ID` variable is listed on the **Variables** tab.
+
+- **Neon API key in your Neon account**
+
+    To view the Neon API key created by the integration:
+
+    1. In the [Neon Console](https://console.neon.tech), click your profile in the top right corner of the Neon Console.
+    2. Select **Account settings**.
+    2. Select **API keys**.
+
+    The API key created by the integration should be listed with a name similar to the following: **API key for GitHub (cool-darkness-12345678)**. You cannot view the key itself, only the name it was given, time created, and when it was last used.
+
+    <Admonition type="note">
+    The items listed above are removed when you uninstall the Neon GitHub integration, including the project ID variable, Neon API key secret, and Neon API key. See [Remove the GitHub integration](#remove-the-github-integration).
+    </Admonition>
+ 
 ## Using the GitHub integration
+
+The GitHub integration is intended to simplify setting up developer workflows using Neon's [GitHub Actions](/docs/guides/branching-github-actions). The GitHub Actions require the actions performed by the Noen GitHub integration to be performed manually, namely:
+
+1. Creating a global GitHub variable containing your Neon project ID.
+2. Generating a new Neon API key for your Neon account.
+3. Creating a global GitHub secret containing the Neon API key.
+
+Once you install the Neon GitHub integration, you can proceed with setting up your GitHub Action workflow knowing that these steps are completed.
+
+For example applications that use the Neon's GitHub Actions, see [Example applications](/docs/guides/branching-github-actions#example-applications).
 
 ## Remove the GitHub integration
 
-Removal of the GitHub integration removes:
+Removing the integration performs the following actions:
 
-- The global variable in the GitHub repo containing your Neon project ID 
-- The global secret in the GitHub repository containing the Neon API key
-- Removes the Neon API key from your Neon account
+- Terminates connections dependent on the configured variable and secret
+- Removes the global GitHub variable containing your Neon project ID.
+- Removes the Neon API key for your Neon account.
+- Removes the global GitHub secret containing the Neon API key.
 
 To remove the integration:
 
 1. In the Neon Console, navigate to the **Integrations** page for your project.
 2. Locate the GitHub integration and click **Manage** to open the **GitHub integration** drawer.
-3. Click **Remove**.
+3. Click **Disconnect**.
+4. Click **Remove integration** to confirm your choice.
+
+# Feedback and future improvements
+
+If you've got feature requests or feedback about what you'd like to see from the Neon GitHub integration, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
