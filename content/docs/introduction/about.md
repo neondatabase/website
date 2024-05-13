@@ -10,11 +10,11 @@ updatedOn: '2024-01-26T16:30:34.542Z'
 Looking back at Neon's debut blog post, [SELECT ’Hello, World’](https://neon.tech/blog/hello-world), the fundamental reasons for **Why Neon** remain the same:
 
 - **To build the best Postgres experience in the cloud**. This is still our core mission today. It was clear to us then, as it is now, that database workloads are shifting into the cloud &#8212; and no one wants to manage a database themselves.
-- **In an ever-changing technology stack, we believe Postgres is here to stay**. Just like the Linux operating system or Git version control, we believe Postgres is the default choice for a relational database system. That’s why all of the major platforms like AWS, Azure, Google Cloud, Digital Ocean, and the many newcomers that have recently entered this space offer Postgres as a service.
-- **An idea that a modern Postgres cloud service can be designed differently**. We call this approach _separation of storage and compute_, which allows us to architect the service around performance, reliability, manageability, and cost-efficiency.
-- **Belief in an architecture that can provide a better Developer Experience (DevX)**. Features such as branching, time travel, elastic autoscaling,  instant databases, backups, read replicas, and restore improve the developer experience by allowing quick environment setup, efficient developer workflows, and immediate database availability.
+- **In an ever-changing technology stack, we believe Postgres is here to stay**. Just like the Linux operating system or Git version control, we believe Postgres is the default choice for a relational database system. That’s why all of the major platforms like AWS, Azure, Google Cloud, Digital Ocean, and many newcomers to this space offer Postgres as a service.
+- **An idea that a modern Postgres cloud service can be designed differently**. We call this approach _separation of storage and compute_, which lets us architect the service around performance, reliability, manageability, and cost-efficiency.
+- **Belief that our architecture can provide a better Developer Experience (DevX)**. Features such as autoscaling, branching, time travel, and instant databases, backups, and restore improve the developer experience by allowing quick environment setup, efficient developer workflows, and immediate database availability.
 
-These are Neon's reasons, but given the many _database-as-a-service_ options available to you today, let's take a look at the reasons why **you** should choose Neon:
+These are Neon's reasons, but given the many _database-as-a-service_ options available today, let's take a look at the reasons why **you** should choose Neon:
 
 ## Neon is Postgres
 
@@ -38,7 +38,7 @@ Separation of compute and storage enables scalability as these resources can be 
 
 **Automatically scale to meet demand.**
 
-Neon's autoscaling capability automatically and transparently scales up compute resources on demand, in response to your application workload, and scales down during periods of inactivity. What does this mean for you?
+Neon's autoscaling feature automatically and transparently scales up compute resources on demand, in response to your application workload, and scales down during periods of inactivity. What does this mean for you?
 - **You are always ready for increased load**. Enable autoscaling and stop worrying about occasional traffic spikes.   
 - **You can stop paying for compute resources that you only use sometimes**. You no longer have to run a maximum potential load configuration at all times.
 - **No more manual scaling disruptions**. With autoscaling, you can focus more on your application and less on managing infrastructure. 
@@ -105,11 +105,19 @@ Neon's Schema Diff tool lets you compare the schemas for two selected branches i
 
 ## Neon is fully managed
 
+**Leave the database administrative, maintenance, and scaling burdens to us.**
+
 Being a fully managed service means that Neon provides high availability without requiring users to handle administrative, maintenance, or scaling burdens associated with managing a database system. This approach allows developers to focus more on developing applications and less on the operational aspects of database management. Neon takes care of the complexities of scaling, backups, maintenance, and ensuring availability, enabling developers to manage their data without worrying about the underlying infrastructure.
 
 ## Support for thousands of connections
 
-Neon's [connection pooling](/docs/connect/connection-pooling) feature supports up to 10,000 concurrent connections. Connection pooling works by caching and reusing database connections, which helps to significantly optimize resource usage and enhance performance. It reduces the overhead associated with establishing new connections and closing old ones, allowing applications to handle a higher volume of requests more efficiently. Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling.
+**Add support for thousands of concurrent connections with a pooled connection string.**
+
+Neon's [connection pooling](/docs/connect/connection-pooling) feature supports up to 10,000 concurrent connections. Connection pooling works by caching and reusing database connections, which helps to significantly optimize resource usage and enhance performance. It reduces the overhead associated with establishing new connections and closing old ones, allowing applications to handle a higher volume of requests more efficiently. Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling. Enabling connection pooling is easy. Just grab a pooled connection string from the console:
+
+```bash
+postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
+```
 
 ## Postgres extension support
 
@@ -136,7 +144,7 @@ CREATE EXTENSION pgcrypto;
 
 ## Low-latency connections
 
-**Connect from Edge and Serverless environments**
+**Connect from Edge and serverless environments**
 
 The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver), which currently has over [100K weekly downloads](https://www.npmjs.com/package/@neondatabase/serverless), is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from edge and serverless environments like **Vercel Edge Functions** or **Cloudflare Workers** over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve [sub-10ms Postgres query times](https://neon.tech/blog/sub-10ms-postgres-queries-for-vercel-edge-functions) when querying from Edge or serverless functions. But don't take our word for it. Try it for yourself with Vercel's [Functions + Database Latency app](https://db-latency.vercel.app/). This graph shows latencies for Neon's serverless driver:
 
@@ -150,7 +158,7 @@ We've all heard about multi-hour outages and data losses due to errant queries o
 
 To help you find the correct restore point, Neon provides a [Time Travel Assist](/docs/guides/time-travel-assist) feature that lets you connect to any selected time or LSN within your database history and run queries. Time Travel Assist is designed to work in tandem with Neon's restore capability to facilitate precise and informed restore operations.
 
-## Build AI applications with Postgres and pgvector
+## Build your AI applications with Postgres
 
 **Why pay for a specialized vector database service when you can just use Postgres?**
 
@@ -243,9 +251,19 @@ For an overview of all the features that Neon supports, including security featu
 
 ## Neon is open source
 
+**Neon is developed under an Apache 2.0 license**
+
 Neon is not the first to offer separation of storage and compute for Postgres. AWS Aurora is probably the most famous example; however, it is proprietary and tied to AWS’s internal infrastructure.
 
 We think we have an opportunity to define the standard for cloud Postgres. We carefully designed our storage focusing on cloud independence, performance, manageability, DevX, and cost. We chose the most permissive open source license, Apache 2.0, and invited the world to participate. You can already build and run your own self-hosted instance of Neon. Check out our [neon GitHub repository](https://github.com/neondatabase), and the [#self-hosted](https://discord.com/channels/1176467419317940276/1184894814769127464) channel on our Discord server.
+
+## Neon doesn't lock you in
+
+**As a true Postgres platform, there's no lock-in with Neon.
+
+Building on Neon is building on Postgres. If you are already running Postgres, getting started is easy. [Import your data](https://neon.tech/docs/import/import-intro) and [connect](https://neon.tech/docs/connect/connect-intro). Migrating from other databases like MySQL or MongoDB is just as easy. 
+
+If you need to move data, you won't have to tear apart your application to remove proprietary application layers. Neon is pro-ecosystem and pro-integration. We encourage you to build with the frameworks, platforms, and services that best fit your requirements. Neon works to enable that. Check out our ever-expanding [Framework, language, and platform guides](/docs/guides/guides-intro).
 
 ## Who should use Neon?
 
@@ -253,7 +271,7 @@ We think we have an opportunity to define the standard for cloud Postgres. We ca
 
 Neon is designed for a wide range of users, from individual developers to enterprises, seeking modern, serverless Postgres capabilities. It caters to those who need a fully managed, scalable, and cost-effective database solution. Key users include:
 
-- **Individual developers** looking for a fast and easy way to set up, manage, and scale Postgres databases without the hassle of server management. Neon's Free Tier makes it easy to get started. Free Tier users get access to features like project sharing and branching, and when you are ready to scale, you can easily upgrade your account to a paid plan for more computing power, storage, and advanced features.
+- **Individual developers** looking for a fast and easy way to set up a Postgres database without the hassle of installation or configuration. Neon's Free Tier makes it easy to get started. [Free Tier](/docs/introduction/plans#free-tier) users get access to all regions and features like connection pooling, project sharing, and branching. When you are ready to scale, you can easily upgrade your account to a paid plan for more computing power, storage, and advanced features.
   
   <Admonition type="tip" title="Neon's Free Tier is here to stay">
   Neon's Free Tier is a fundamental part of our commitment to users. Our architecture, which separates storage and compute, enables a sustainable Free Tier. You can build your personal project or PoC with confidence, knowing that our Free Tier is here to stay. [Learn more about our Free Tier from Neon's CEO](https://twitter.com/nikitabase/status/1758639571414446415).
@@ -261,13 +279,13 @@ Neon is designed for a wide range of users, from individual developers to enterp
 - **Teams and organizations** that aim to enhance their development workflows with the ability to create database branches for testing new features or updates, mirroring the branching process used in code version control.
 - **Enterprises** requiring scalable, high-performance database solutions with advanced features like autoscaling, autosuspend, point-in-time restore, and logical replication. Enterprises can benefit from custom pricing, higher resource allowances, and enterprise-level support to meet their specific requirements.
 
-In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, cost savings, and advanced capabilities provided by Neon's serverless architecture.
+In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, cost savings, and advanced DevX capabilities provided by Neon's serverless architecture.
 
 ## Neon makes it easy to get started with Postgres
 
 **Set up your Postgres database in seconds.**
 
-1. Login with an email address, Google, or GitHub account.
+1. [Log in](https://console.neon.tech/signup) with an email address, Google, or GitHub account.
 2. Provide a project name, database name, and select a region.
 3. Click **Create Project**.
 
