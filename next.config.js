@@ -9,7 +9,6 @@ const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 const defaultConfig = {
   poweredByHeader: false,
   images: {
-    domains: ['localhost'],
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {

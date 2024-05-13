@@ -1,5 +1,3 @@
-import { VERCEL_URL } from '../constants/guides';
-
 const fs = require('fs');
 
 const { glob } = require('glob');
@@ -24,7 +22,7 @@ const getAuthor = (id) => {
     const authors = fs.readFileSync(`${GUIDES_DIR_PATH}/authors/data.json`, 'utf8');
     const authorsData = JSON.parse(authors);
     const authorData = authorsData[id];
-    const authorPhoto = `${VERCEL_URL}/images/authors/${id}.jpg`;
+    const authorPhoto = `/guides/authors/${id}.jpg`;
     const author = {
       ...authorData,
       photo: authorPhoto,
