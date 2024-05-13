@@ -1,0 +1,20 @@
+{
+  "rishi-raj-jain": {
+    "name": "Rishi Raj Jain",
+    "position": "Developer",
+    "bio": "Previously, Technical Support Engineer @lmsqueezy, Technical CSM @Edgio & Ambassador @storyblok.",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/rishi-raj-jain"
+    }
+  },
+  "mahmoud-abdelwahab": {
+    "name": "Mahmoud Abdelwahab",
+    "position": "Developer Advocate",
+    "bio": "Developer, writer, and maker. Obsessed with & creating exceptional, high-quality, content and applications.",
+    "link": {
+      "title": "GitHub",
+      "url": "#"
+    }
+  }
+}

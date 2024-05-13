@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import Post from 'components/pages/guides/post';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
-import Link from 'components/shared/link/link';
 import { VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/guides';
 import LINKS from 'constants/links';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
@@ -49,7 +48,7 @@ export default async function GuidePost({ params }) {
   const fileOriginPath = `${`${process.env.NEXT_PUBLIC_GUIDES_GITHUB_PATH}${slug}`}.md`;
   const postBySlug = getPostBySlug(slug, GUIDES_DIR_PATH);
   if (!postBySlug) return notFound();
-  const { data, content } = postBySlug;
+  const { data, content, author } = postBySlug;
   const tableOfContents = getTableOfContents(content);
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -80,21 +79,14 @@ export default async function GuidePost({ params }) {
             className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
             size="medium"
           >
-            <aside className="col-span-2 pb-10 lt:col-span-full lt:pb-0">
-              <div className="relative flex h-full flex-col gap-y-10 lt:h-auto lt:min-h-fit">
-                <Link className="" to={LINKS.guides}>
-                  All guides
-                </Link>
-              </div>
-            </aside>
             <Post
-              content={content}
               data={data}
+              author={author}
+              content={content}
               navigationLinks={navigationLinks}
               slug={slug}
               fileOriginPath={fileOriginPath}
               tableOfContents={tableOfContents}
-              isGuidePage
             />
           </Container>
         </div>

@@ -8,8 +8,12 @@ import NavigationLinks from 'components/shared/navigation-links';
 import TableOfContents from 'components/shared/table-of-contents';
 import { GUIDES_BASE_PATH } from 'constants/guides';
 
+import Author from './author';
+import Sidebar from './sidebar';
+
 const Post = ({
   data: { title, subtitle, enableTableOfContents = false, updatedOn = null },
+  author,
   content,
   navigationLinks: { previousLink, nextLink },
   slug,
@@ -17,6 +21,8 @@ const Post = ({
   tableOfContents,
 }) => (
   <>
+    <Sidebar />
+
     <div className="col-span-6 col-start-4 -mx-[26px] flex flex-col 2xl:col-span-8 2xl:col-start-2 2xl:mx-5 xl:col-span-7 xl:col-start-3 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
       <article>
         <h1 className="text-[36px] font-semibold leading-tight xl:text-3xl">{title}</h1>
@@ -25,6 +31,7 @@ const Post = ({
             {subtitle}
           </p>
         )}
+        {author && <Author data={author} className="hidden lg:block" />}
         <Content className="mt-5" content={content} />
         <LastUpdatedDate updatedOn={updatedOn} />
       </article>
@@ -40,6 +47,9 @@ const Post = ({
     <div className={clsx('col-start-11 col-end-13 -ml-11 h-full 2xl:ml-0 xl:hidden')}>
       <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
         {enableTableOfContents && <TableOfContents items={tableOfContents} />}
+        {author && (
+          <Author data={author} className={clsx('lg:hidden', enableTableOfContents && 'mt-14')} />
+        )}
       </nav>
     </div>
   </>
@@ -51,6 +61,16 @@ Post.propTypes = {
     subtitle: PropTypes.string,
     enableTableOfContents: PropTypes.bool,
     updatedOn: PropTypes.string,
+  }).isRequired,
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    position: PropTypes.string,
+    bio: PropTypes.string,
+    link: PropTypes.shape({
+      url: PropTypes.string,
+      title: PropTypes.string,
+    }),
+    photo: PropTypes.string,
   }).isRequired,
   content: PropTypes.string.isRequired,
   navigationLinks: PropTypes.exact({
