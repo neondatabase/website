@@ -91,7 +91,7 @@ This section describes where to find the changes made by the Neon GitHub integra
  
 ## Using the GitHub integration
 
-The GitHub integration is intended to simplify setting up developer workflows using Neon's [GitHub Actions](/docs/guides/branching-github-actions) or other CI/CD tools. Neon's GitHub Actions require the actions performed by the Noen GitHub integration to be performed manually, namely:
+The GitHub integration is intended to simplify setting up developer workflows using Neon's [GitHub Actions](/docs/guides/branching-github-actions) or other CI/CD tools. Neon's GitHub Actions require the actions performed by the Neon GitHub integration to be performed manually, namely:
 
 1. Creating a GitHub variable containing your Neon project ID.
 2. Generating a new Neon API key for your Neon account.
