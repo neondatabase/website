@@ -36,11 +36,19 @@ const VIDEO_PATHS = {
   },
 };
 
+// Array of time intervals during which the video should not play
+const restrictedTimeIntervals = [
+  [0.969188, 2.026088],
+  [2.888731, 4.078483],
+  [4.993024, 6],
+];
+
 const Lightning = () => {
   const videoContainerRef = useRef(null);
   const videoActiveRef = useRef(null);
 
   const [isVideoActive, setIsVideoActive] = useState(false);
+  const [timeoutId, setTimeoutId] = useState(null);
 
   const handleVideoOnFocus = () => {
     const video = videoActiveRef?.current;
@@ -49,12 +57,17 @@ const Lightning = () => {
 
     const { currentTime } = video;
 
-    if (currentTime >= 3 && currentTime <= 4) {
-      const timeout = setTimeout(() => {
-        setIsVideoActive(true);
-      }, 1000);
+    for (let i = 0; i < restrictedTimeIntervals.length; i++) {
+      const [start, end] = restrictedTimeIntervals[i];
 
-      return () => clearTimeout(timeout);
+      if (currentTime >= start && currentTime <= end) {
+        const newTimeoutId = setTimeout(() => {
+          setIsVideoActive(true);
+        }, 500);
+
+        setTimeoutId(newTimeoutId);
+        return;
+      }
     }
 
     setIsVideoActive(true);
@@ -66,13 +79,25 @@ const Lightning = () => {
     if (!container) return;
 
     container.addEventListener('mouseenter', handleVideoOnFocus);
-    container.addEventListener('mouseleave', () => setIsVideoActive(false));
+    container.addEventListener('mouseleave', () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        setTimeoutId(null);
+      }
+      setIsVideoActive(false);
+    });
 
     return () => {
       container.removeEventListener('mouseenter', handleVideoOnFocus);
-      container.removeEventListener('mouseleave', () => setIsVideoActive(false));
+      container.removeEventListener('mouseleave', () => {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+          setTimeoutId(null);
+        }
+        setIsVideoActive(false);
+      });
     };
-  }, [videoContainerRef, videoActiveRef]);
+  }, [videoContainerRef, videoActiveRef, timeoutId]);
 
   return (
     <section className="lightning safe-paddings mt-60 xl:mt-32 lg:mt-[76px] sm:mt-20">
