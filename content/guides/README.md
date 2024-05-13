@@ -18,11 +18,12 @@ Welcome to Neon guides! This folder contains the source code of the [Neon guides
 Right now Markdown files accept the following fields:
 
 1. `title` — title of the page (required)
-2. `subTitle` — subtitle of the page.
-3. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/guides/old-path/`
-4. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
-5. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
-6. `ogImage` - the social preview image of the page.
+2. `subtitle` — subtitle of the page.
+3. `author` — your author ID.
+4. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/guides/old-path/`
+5. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
+6. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
+7. `ogImage` - the social preview image of the page.
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 
@@ -247,7 +248,7 @@ curl --request POST \
 
 ## Admonition
 
-To improve the documentation readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
+To improve the guides readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
 
 There are 6 types of Admonition: `note`, `important`, `tip`, `warning`, `info`, `comingSoon`; the default is `note`.
 
@@ -328,7 +329,7 @@ If you need an image without border to show an annotated piece of UI, use the `"
 ![Neon architecture diagram](/guides/conceptual-guides/neon_architecture_2.png "no-border")
 ```
 
-With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.
+With this approach, all images on your guide pages will be displayed both on the production and GitHub preview.
 
 ## Definition list
 
@@ -428,6 +429,59 @@ Insert a shared markdown and render inline.
 <NeedHelp/>
 
 ```
+
+## Author data
+
+Your author's data should be sourced in `content/guides/authors/data.json` file.
+
+You should start with your name as the ID for the object in kebab-case. Then you can use these fields inside the object:
+
+1. `name` — your name (required).
+2. `position` — your position.
+3. `bio` — your bio.
+4. `link` — link to one of your social media accounts. Each link should have `title` and `url` fields.
+
+Then you can add your photo to `public/guides/authors/` folder with the filename as your ID.
+
+Please make sure that your ID is the same in your author's data, in `content/guides/authors/data.json`, and the photo filename.
+
+Example usage:
+
+```md
+---
+title: ...
+author: rishi-raj-jain
+...
+---
+```
+
+```json
+{
+  "rishi-raj-jain": {
+    "name": "Rishi Raj Jain",
+    "position": "Software Engineer",
+    "bio": "Technical Writer",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/rishi-raj-jain"
+    }
+  }
+}
+```
+
+```md
+├── content
+│ ├── guides
+│   ├── next-server-actions.md // your guide
+│   ├── authors
+│     ├── data.jspn // your data here
+├── public
+│ ├── guides
+│   ├── authors
+│     ├── rishi-raj-jain.jpg // your photo
+```
+
+With this approach, all images on your guide pages will be displayed both on the production and GitHub preview.
 
 ## Contributing
 
