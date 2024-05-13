@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Link from 'components/shared/link/link';
 
 const Author = ({ data, className = null }) => (
-  <div className={clsx(className, 'md:bg-gray-new-95 md:p-5 dark:md:bg-gray-new-10')}>
+  <div className={clsx(className, 'lg:bg-gray-new-95 lg:p-5 dark:lg:bg-gray-new-10')}>
     <p className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-gray-new-60 dark:text-gray-new-50 lg:hidden">
       Author
     </p>
