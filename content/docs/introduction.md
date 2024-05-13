@@ -5,14 +5,21 @@ updatedOn: '2024-02-27T20:16:54.561Z'
 
 Neon is a fully managed serverless Postgres with a [generous free tier](https://console.neon.tech). Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
 
+<CTA title="Branch your data just like code" description="Learn how Neon's database branching can help you integrate Postgres into your development workflow." buttonText="Read our primer" buttonUrl="/docs/get-started-with-neon/workflow-primer" />
+
 ## Get started
 
-Refer to our _Get started_ documentation to get up and running in just a few minutes. You will learn how to:
+<DetailIconCards>
 
-- [Sign up](/docs/get-started-with-neon/signing-up)
-- [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
-- [Connect with psql](/docs/connect/query-with-psql-editor)
-- [Install the Neon CLI](/docs/reference/cli-install)
+<a href="/docs/get-started-with-neon/signing-up" description="Sign up for free and learn the basics of database branching with Neon" icon="enable">Day 1 - Playing with Neon</a>
+
+<a href="/docs/get-started-with-neon/tech-stack" description="Connect Neon to the platform, language, ORM and other tools in your tech stack" icon="queries">Day 2 - Connect Neon to your stack</a>
+
+<a href="/docs/get-started-with-neon/workflow-primer" description="Add branching to your CI/CD automation" icon="setup">Day 3 - Branching workflows</a>
+
+<a href="/docs/get-started-with-neon/production" description="Key features to get you production ready" icon="cli">Day 4 - Ready for production</a>
+
+</DetailIconCards>
 
 ## Explore the docs
 
@@ -26,13 +33,13 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <a href="/docs/introduction/branching" description="Learn to optimize development workflows with database branching" icon="split-branch">Branching</a>
 
-<a href="/docs/extensions/extensions-intro" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
+<a href="/docs/extensions/pg-extensions" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
 
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
 
 </DetailIconCards>
 
-## Guides
+## Integration Guides
 
 <TechnologyNavigation>
 
@@ -48,11 +55,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Astro" href="/docs/guides/astro" title="Connect an Astro site or app to Neon" />
 
-<img src="/images/technology-logos/auth0-logo.svg" width="36" height="36" alt="Auth0" href="/docs/guides/auth-clerk" title="Authenticate Neon Postgres application users with Auth0" />
-
 <img src="/images/technology-logos/aws-lambda-logo.svg" width="36" height="36" alt="AWS Lambda" href="/docs/guides/aws-lambda" title="Connect from AWS Lambda to Neon" />
-
-<img src="/images/technology-logos/clerk-logo.svg" width="36" height="36" alt="Clerk" href="/docs/guides/auth-clerk" title="Authenticate Neon Postgres application users with Clerk" />
 
 <img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Hyperdrive" href="/docs/guides/cloudflare-hyperdrive" title="Use Neon with Cloudflare Hyperdrive" />
 
@@ -64,11 +67,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/django-logo.svg" width="29" height="36" alt="Django" href="/docs/guides/django" title="Connect a Django application to Neon" />
 
-<img src="/images/technology-logos/drizzle-logo.svg" width="29" height="36" alt="Drizzle" href="/docs/guides/drizzle-migrations" title="Schema migration with Neon Postgres and Drizzle ORM" />
-
 <img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir-ecto" title="Connect from Elixir with Ecto to Neon" />
-
-<img src="/images/technology-logos/entity-logo.svg" width="36" height="36" alt="Entity Framework" href="/docs/guides/elixir-ecto" title="Schema migration with Neon and Entity Framework" />
 
 <img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Use Exograph with Neon" />
 
@@ -78,7 +77,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/flyway-logo.svg" width="36" height="36" alt="Flyway" href="/docs/guides/flyway" title="Use Flyway with Neon" />
 
-<img src="/images/technology-logos/go-logo.svg" width="36" height="36" alt="Go" href="/docs/guides/go" title="Connect a Go application to Neon" />
+<img src="/images/technology-logos/go-logo.svg" width="80" height="36" alt="Go" href="/docs/guides/go" title="Connect a Go application to Neon" />
 
 <img src="/images/technology-logos/grafbase-logo.svg" width="36" height="36" alt="Grafbase" href="/docs/guides/grafbase" title="Use Grafbase Edge Resolvers with Neon" />
 
@@ -98,13 +97,11 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/materialize-logo.svg" width="36" height="36" alt="Materialize" href="/docs/guides/logical-replication-materialize" title="Replicate data from Neon to Materialize" />
 
-<img src="/images/technology-logos/netlify-logo.svg" width="29" height="36" alt="Netlify Functions" href="/docs/guides/netlify-functions" title="Connect a Neon Postgres database to your Netlify Functions application" />
-
 <img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
 
-<img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
+<img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale-integration" title="Add the Neon PolyScale integration" />
 
-<img src="/images/technology-logos/prisma-logo.svg" width="29" height="36" alt="Prisma" href="/docs/guides/prisma-migrations" title="Schema migration with Neon Postgres and Prisma ORM" />
+<img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
 
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-jdbc" title="Connect Quarkus (JDBC) to Neon" />
 
@@ -120,15 +117,13 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
 
-<img src="/images/technology-logos/sequelize-logo.svg" width="29" height="36" alt="Sequelize" href="/docs/guides/sequelize" title="Schema migration with Neon Postgres and Sequelize" />
-
-<img src="/images/technology-logos/sqlalchemy-logo.svg" width="36" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect an SQLAlchemy application to Neon" />
+<img src="/images/technology-logos/sqlalchemy-logo.svg" width="102" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect an SQLAlchemy application to Neon" />
 
 <img src="/images/technology-logos/stepzen-logo.svg" width="36" height="36" alt="StepZen" href="/docs/guides/stepzen" title="Use StepZen with Neon" />
 
 <img src="/images/technology-logos/symfony-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Symfony with Doctrine to Neon" />
 
-<img src="/images/technology-logos/vercel-logo.svg"  width="36" height="36" alt="Vercel" href="/docs/guides/vercel" title="Connect with the Neon Vercel Integration" />
+<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel" title="Connect with the Neon Vercel Integration" />
 
 <img src="/images/technology-logos/wundergraph-logo.svg" width="36" height="36" alt="Wundergraph" href="/docs/guides/wundergraph" title="Use Wundergraph with Neon" />
 
