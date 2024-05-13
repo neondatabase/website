@@ -3,13 +3,13 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 const LastUpdatedDate = ({ className = null, updatedOn }) => {
-  const lastUpdatedOn = updatedOn
-    ? new Date(updatedOn).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })
-    : null;
+  if (!updatedOn) return null;
+
+  const lastUpdatedOn = new Date(updatedOn).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
   return (
     <p className={clsx('mt-10 text-sm text-gray-new-40 dark:text-gray-new-80', className)}>
