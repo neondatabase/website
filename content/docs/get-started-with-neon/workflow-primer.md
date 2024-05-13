@@ -35,7 +35,7 @@ You can use either the Neon CLI or GitHub actions to incorporate branching into 
 
 Using the [Neon CLI](https://neon.tech/docs/reference/neon-cli) you can create branches without leaving your editor or automate branch creation in your CI/CD pipeline.
 
-<InstallCLI/>
+...this could move to Day 1...
 
 And here are the key CLI actions you can use:
 
