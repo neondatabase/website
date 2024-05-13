@@ -83,6 +83,10 @@ Note that roles are defined at the database cluster level, and so are valid in a
 
 * \[ `ENCRYPTED` ] `PASSWORD` '*`password`*'`PASSWORD NULL`
 
+  <Admonition type="tip" title="Neon Postgres Note">
+  Roles created in Neon Postgres require a password, which means that the `PASSWORD` option cannot be ommitted. For details and password requirements, please see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql) in the Neon documentation.
+  </Admonition>
+
   Sets the role's password. (A password is only of use for roles having the `LOGIN` attribute, but you can nonetheless define one for roles without it.) If you do not plan to use password authentication you can omit this option. If no password is specified, the password will be set to null and password authentication will always fail for that user. A null password can optionally be written explicitly as `PASSWORD NULL`.
 
   ### Note
