@@ -9,7 +9,7 @@ const Author = ({ data, className = null }) => (
     <p className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-gray-new-60 dark:text-gray-new-50 lg:hidden">
       Author
     </p>
-    <div className="flex items-center gap-2.5">
+    <div className="flex items-start gap-2.5">
       {data.photo && (
         <Image
           className="block rounded-full"

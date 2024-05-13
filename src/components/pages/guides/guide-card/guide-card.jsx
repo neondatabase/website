@@ -18,15 +18,15 @@ const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
           <h1 className="line-clamp-2 text-[20px] font-semibold leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
             {title}
           </h1>
-          <p className="mt-1.5 leading-snug tracking-tighter text-gray-new-40 dark:text-gray-new-50">
+          <p className="mt-1.5 leading-snug tracking-tighter text-gray-new-40 dark:text-gray-new-50 sm:mt-1">
             {subtitle}
           </p>
-          <div className="mt-3 flex items-center gap-2">
+          <div className="mt-3 flex items-center gap-2 sm:mt-2.5">
             {author && (
               <div className="flex items-center gap-2">
                 {author.photo && (
                   <Image
-                    className="block rounded-full md:h-6 md:w-6"
+                    className="block rounded-full md:h-6 md:w-6 sm:h-5 sm:w-5"
                     src={author.photo}
                     alt={author.name}
                     width={26}
@@ -39,15 +39,15 @@ const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
               </div>
             )}
             <time
-              className="relative block shrink-0 pl-[11px] text-[15px] font-light uppercase leading-none tracking-extra-tight text-gray-new-50 before:absolute before:left-0 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-70 dark:text-gray-new-70 dark:before:bg-gray-new-30"
+              className="relative block shrink-0 pl-[11px] text-[15px] font-light uppercase leading-none tracking-extra-tight text-gray-new-50 before:absolute before:left-0 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-70 dark:text-gray-new-70 dark:before:bg-gray-new-30 md:text-sm"
               dateTime={createdAt}
             >
               {formattedDate}
             </time>
           </div>
         </div>
-        <div className="flex items-center gap-1 border-b border-transparent text-[15px] text-secondary-8 transition-colors duration-200 group-hover:border-secondary-8 dark:text-green-45 dark:group-hover:border-green-45 md:text-sm sm:mt-4">
-          <span className="leading-tight">Read guide</span>
+        <div className="flex w-fit items-center gap-1 border-b border-transparent text-secondary-8 transition-colors duration-200 group-hover:border-secondary-8 dark:text-green-45 dark:group-hover:border-green-45 sm:mt-4">
+          <span className="text-[15px] leading-tight md:text-sm">Read guide</span>
           <ArrowIcon className="shrink-0" />
         </div>
       </article>
