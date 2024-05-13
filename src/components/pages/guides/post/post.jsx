@@ -23,7 +23,7 @@ const Post = ({
   <>
     <Sidebar />
 
-    <div className="col-span-6 col-start-4 -mx-[26px] flex flex-col 2xl:col-span-8 2xl:col-start-2 2xl:mx-5 xl:col-span-7 xl:col-start-3 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
+    <div className="col-span-6 col-start-4 -mx-[26px] flex flex-col xl:col-span-8 xl:col-start-1 xl:mx-0">
       <article>
         <h1 className="text-[36px] font-semibold leading-tight xl:text-3xl">{title}</h1>
         {subtitle && (
@@ -31,7 +31,7 @@ const Post = ({
             {subtitle}
           </p>
         )}
-        {author && <Author data={author} className="hidden lg:block" />}
+        {author && <Author data={author} className="mt-5 hidden lg:block" />}
         <Content className="mt-5" content={content} />
         <LastUpdatedDate updatedOn={updatedOn} />
       </article>
@@ -44,7 +44,7 @@ const Post = ({
       <DocFooter fileOriginPath={fileOriginPath} slug={slug} />
     </div>
 
-    <div className={clsx('col-start-11 col-end-13 -ml-11 h-full 2xl:ml-0 xl:hidden')}>
+    <div className="col-start-11 col-end-13 -ml-11 h-full max-w-[256px] xl:col-start-10 lg:hidden">
       <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
         {enableTableOfContents && <TableOfContents items={tableOfContents} />}
         {author && (

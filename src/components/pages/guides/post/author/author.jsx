@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Link from 'components/shared/link/link';
 
 const Author = ({ data, className = null }) => (
-  <div className={clsx(className)}>
+  <div className={clsx(className, 'md:bg-gray-new-95 md:p-5 dark:md:bg-gray-new-10')}>
     <p className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-gray-new-60 dark:text-gray-new-50 lg:hidden">
       Author
     </p>
@@ -29,13 +29,13 @@ const Author = ({ data, className = null }) => (
       </div>
     </div>
     {data.bio && (
-      <p className="mt-4 text-[14px] leading-normal text-gray-new-40 dark:text-gray-new-80 lg:text-sm xs:text-[13px]">
+      <p className="mt-4 text-[14px] leading-normal text-gray-new-40 dark:text-gray-new-80 lg:text-sm md:mt-3 xs:text-[13px]">
         {data.bio}
       </p>
     )}
     {data.link && (
       <Link
-        className="mt-2 block w-fit border-b border-secondary-8 leading-tight text-secondary-8 transition-colors duration-200 hover:!border-transparent dark:border-green-45 dark:text-green-45"
+        className="mt-2 block w-fit border-b border-secondary-8 leading-tight text-secondary-8 transition-colors duration-200 hover:!border-transparent dark:border-green-45 dark:text-green-45 md:mt-1.5"
         to={data.link.url}
         target="_blank"
       >
