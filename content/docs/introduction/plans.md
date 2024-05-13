@@ -122,7 +122,7 @@ The Scale plan includes the following usage allowances:
 | **Storage**                             | 50 GiB of data storage                                  |
 | **Compute**                             | 750 compute hours (3,000 _active hours_)/month for all computes in all projects |
 
-### Scal plan extra usage
+### Scale plan extra usage
 
 Scale plan users have access to [extra compute, storage, and projects](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
