@@ -4,6 +4,7 @@ subtitle: Neon is Serverless Postgres built for the cloud
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
+  - /docs/introduction/about
 updatedOn: '2024-01-26T16:30:34.542Z'
 ---
 
