@@ -42,8 +42,8 @@ const InstantProvisioning = () => (
             your stack
           </h2>
           <p className="mt-7 font-light tracking-extra-tight text-gray-new-70 xl:mt-5 xl:max-w-xs xl:text-lg lg:mt-4 lg:text-base md:mt-2.5 md:max-w-none">
-            Neon is an easy-to-use serverless Postgres. Integrate it into your language or framework
-            within minutes and unlock a new developer workflow.
+            Integrate it into your language or framework within minutes and unlock a simpler
+            developer workflow.
           </p>
           <Link
             className="relative z-10 mt-7 flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] xl:mt-5 lg:mt-4 md:mt-2.5"
