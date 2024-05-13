@@ -448,12 +448,28 @@ Please make sure that your ID is the same in your author's data, in `content/gui
 Example usage:
 
 ```md
+├── content
+│ ├── guides
+│   ├── next-server-actions.md // your guide
+│   ├── authors
+│     ├── data.json // your data here
+├── public
+│ ├── guides
+│   ├── authors
+│     ├── rishi-raj-jain.jpg // your photo
+```
+
+`content/guides/next-server-actions.md`:
+
+```md
 ---
 title: ...
 author: rishi-raj-jain
 ...
 ---
 ```
+
+`content/guides/authors/data.json`:
 
 ```json
 {
@@ -469,19 +485,7 @@ author: rishi-raj-jain
 }
 ```
 
-```md
-├── content
-│ ├── guides
-│   ├── next-server-actions.md // your guide
-│   ├── authors
-│     ├── data.jspn // your data here
-├── public
-│ ├── guides
-│   ├── authors
-│     ├── rishi-raj-jain.jpg // your photo
-```
-
-With this approach, all images on your guide pages will be displayed both on the production and GitHub preview.
+With this approach, all your author's data will be displayed both on the production in guide's author section.
 
 ## Contributing
 
