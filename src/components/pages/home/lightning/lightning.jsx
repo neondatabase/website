@@ -98,7 +98,8 @@ const Lightning = () => {
         clearTimeout(timeoutId);
       }
     };
-  }, [videoContainerRef, videoActiveRef, timeoutId, handleVideoOnFocus]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoContainerRef]);
 
   return (
     <section className="lightning safe-paddings mt-60 xl:mt-32 lg:mt-[76px] sm:mt-20">
