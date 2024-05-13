@@ -6,14 +6,13 @@ import { ThemeProvider as PreferredProvider } from 'next-themes';
 // eslint-disable-next-line react/prop-types
 const ThemeProvider = ({ children }) => {
   const pathname = usePathname();
-  const isDocPage = pathname.startsWith('/docs');
-  const isGuidePage = pathname.startsWith('/guides');
-  const isFlowPage = pathname.startsWith('/flow');
+  const isDocPage =
+    pathname.startsWith('/docs') || pathname.startsWith('/guides') || pathname.startsWith('/flow');
 
   return (
     <PreferredProvider
       attribute="class"
-      forcedTheme={isDocPage || isGuidePage || isFlowPage ? null : 'light'}
+      forcedTheme={isDocPage ? null : 'light'}
       storageKey="neon-theme"
       disableTransitionOnChange
     >

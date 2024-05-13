@@ -11,7 +11,7 @@ const Sidebar = () => (
         <nav className="no-scrollbars sticky top-32">
           <Search
             className="max-w-[192px]"
-            indexName={process.env.NEXT_PUBLIC_ALGOLIA_GUIDES_INDEX_NAME}
+            indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
           />
         </nav>
       </div>

@@ -71,7 +71,7 @@ export default async function GuidePost({ params }) {
         headerWithBottomBorder
         footerWithTopBorder
         burgerWithoutBorder
-        isGuidePage
+        isDocPage
         isHeaderSticky
       >
         <div className="safe-paddings flex flex-1 flex-col dark:bg-gray-new-8 dark:text-white lg:block">
