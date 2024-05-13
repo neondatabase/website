@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
@@ -38,9 +38,9 @@ const VIDEO_PATHS = {
 
 // Array of time intervals during which the video should not play
 const restrictedTimeIntervals = [
-  [0.969188, 2.026088],
-  [2.888731, 4.078483],
-  [4.993024, 6],
+  [0.529137, 2.057776],
+  [2.228894, 4.078483],
+  [4.202068, 6],
 ];
 
 const Lightning = () => {
@@ -50,20 +50,29 @@ const Lightning = () => {
   const [isVideoActive, setIsVideoActive] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
 
-  const handleVideoOnFocus = () => {
+  const handleVideoOnFocus = useCallback(() => {
     const video = videoActiveRef?.current;
 
     if (!video) return;
 
     const { currentTime } = video;
 
+    // Clear any previous timeout
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      setTimeoutId(null);
+    }
+
     for (let i = 0; i < restrictedTimeIntervals.length; i++) {
       const [start, end] = restrictedTimeIntervals[i];
 
       if (currentTime >= start && currentTime <= end) {
+        // Calculate the delay to setTimeout based on the end of the current interval
+        const delay = (end - currentTime) * 1000; // Convert to milliseconds
+
         const newTimeoutId = setTimeout(() => {
           setIsVideoActive(true);
-        }, 500);
+        }, delay);
 
         setTimeoutId(newTimeoutId);
         return;
@@ -71,7 +80,7 @@ const Lightning = () => {
     }
 
     setIsVideoActive(true);
-  };
+  }, [timeoutId]);
 
   useEffect(() => {
     const container = videoContainerRef?.current;
@@ -79,25 +88,17 @@ const Lightning = () => {
     if (!container) return;
 
     container.addEventListener('mouseenter', handleVideoOnFocus);
-    container.addEventListener('mouseleave', () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-        setTimeoutId(null);
-      }
-      setIsVideoActive(false);
-    });
+    container.addEventListener('mouseleave', () => setIsVideoActive(false));
 
     return () => {
       container.removeEventListener('mouseenter', handleVideoOnFocus);
-      container.removeEventListener('mouseleave', () => {
-        if (timeoutId) {
-          clearTimeout(timeoutId);
-          setTimeoutId(null);
-        }
-        setIsVideoActive(false);
-      });
+      container.removeEventListener('mouseleave', () => setIsVideoActive(false));
+
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
     };
-  }, [videoContainerRef, videoActiveRef, timeoutId]);
+  }, [videoContainerRef, videoActiveRef, timeoutId, handleVideoOnFocus]);
 
   return (
     <section className="lightning safe-paddings mt-60 xl:mt-32 lg:mt-[76px] sm:mt-20">
