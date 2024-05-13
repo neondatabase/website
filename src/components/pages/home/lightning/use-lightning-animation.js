@@ -11,11 +11,12 @@ const restrictedTimeIntervals = [
 const useLightningAnimation = () => {
   const [visibilityRef, isInView] = useInView({
     triggerOnce: true,
-    threshold: 0.6,
+    threshold: 0.7,
   });
 
   const videoContainerRef = useRef(null);
   const videoActiveRef = useRef(null);
+  const videoIdleRef = useRef(null);
 
   const [isVideoActive, setIsVideoActive] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
@@ -99,6 +100,9 @@ const useLightningAnimation = () => {
       return;
     }
 
+    videoActiveRef.current.currentTime = 0;
+    videoIdleRef.current.currentTime = 0;
+
     setIsVideoActive(true);
 
     const timeout = setTimeout(() => {
@@ -115,7 +119,7 @@ const useLightningAnimation = () => {
 
   useImperativeHandle(visibilityRef, () => videoContainerRef.current);
 
-  return { visibilityRef, videoContainerRef, videoActiveRef, isVideoActive };
+  return { visibilityRef, videoContainerRef, videoActiveRef, videoIdleRef, isVideoActive };
 };
 
 export default useLightningAnimation;

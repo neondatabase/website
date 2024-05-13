@@ -38,7 +38,8 @@ const VIDEO_PATHS = {
 };
 
 const Lightning = () => {
-  const { videoContainerRef, videoActiveRef, isVideoActive } = useLightningAnimation();
+  const { videoContainerRef, videoActiveRef, videoIdleRef, isVideoActive } =
+    useLightningAnimation();
 
   return (
     <section className="lightning safe-paddings mt-60 xl:mt-32 lg:mt-[76px] sm:mt-20">
@@ -83,6 +84,7 @@ const Lightning = () => {
             )}
             width={828}
             height={684}
+            ref={videoIdleRef}
           >
             <source src={VIDEO_PATHS.idle.mp4} type="video/mp4" />
             <source src={VIDEO_PATHS.idle.webm} type="video/webm" />
