@@ -3,8 +3,8 @@ title: Querying Postgres in Next.js Server Actions
 subtitle: Learn how to query Postgres (powered by Neon) in Next.js using Server Actions
 author: rishi-raj-jain
 enableTableOfContents: true
-createdAt: '2024-05-07T00:00:00.000Z'
-updatedOn: '2024-05-08T00:00:00.000Z'
+createdAt: '2024-05-13T13:24:36.612Z'
+updatedOn: '2024-05-13T13:24:36.612Z'
 ---
 
 In this guide, you will learn the the process of creating a simple web application using Next.js Server Actions that allows you to capture user input via forms, and insert them into Postgres (powered by Neon) via `pg` and `@neondatabase/serverless`.
