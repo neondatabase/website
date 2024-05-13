@@ -27,9 +27,16 @@ const Bento = () => (
           </div>
           <div className="pointer-events-none relative z-20 col-span-full row-span-full flex items-end px-6 pb-7 xl:px-5 xl:pb-6 sm:bg-gradient-to-b sm:from-transparent sm:via-transparent sm:via-60% sm:to-black-new/30 sm:p-4">
             <p className="pointer-events-auto max-w-lg text-lg font-light leading-snug tracking-extra-tight text-white/60 xl:max-w-md xl:text-base sm:leading-tight">
-              <Link className="font-medium" to="/docs/introduction/read-replicas" theme="white">
-                Boost your performance with instant read replicas.
-              </Link>{' '}
+              <strong className="font-medium text-white">
+                Boost your performance with instant{' '}
+                <Link
+                  className="underline decoration-white/60 underline-offset-4 hover:decoration-primary-1/60"
+                  to="/docs/introduction/read-replicas"
+                  theme="white"
+                >
+                  read replicas.
+                </Link>
+              </strong>{' '}
               They scale&nbsp;down to zero when idle and don&apos;t use additional storage.
             </p>
           </div>
@@ -43,11 +50,19 @@ const Bento = () => (
             <p className="pointer-events-auto text-lg font-light leading-snug tracking-extra-tight text-white/60 xl:text-base sm:text-[15px] sm:leading-tight">
               <strong className="font-normal text-white">
                 Easy database ops via the{' '}
-                <Link to={LINKS.apiReference} theme="white">
+                <Link
+                  className="underline decoration-white/60 underline-offset-4 hover:decoration-primary-1/60"
+                  to={LINKS.apiReference}
+                  theme="white"
+                >
                   API
                 </Link>{' '}
                 and{' '}
-                <Link to={LINKS.cliReference} theme="white">
+                <Link
+                  className="underline decoration-white/60 underline-offset-4 hover:decoration-primary-1/60"
+                  to={LINKS.cliReference}
+                  theme="white"
+                >
                   CLI
                 </Link>
                 .
@@ -63,13 +78,16 @@ const Bento = () => (
         <RiveCard animation="clock">
           <div className="pointer-events-none relative z-20 col-span-full row-span-full flex items-end px-6 pb-7 xl:px-5 xl:pb-6 sm:p-4">
             <p className="pointer-events-auto text-lg font-light leading-snug tracking-extra-tight text-white/60 xl:text-base sm:text-[15px] sm:leading-tight">
-              <Link
-                className="font-normal text-white"
-                to="/blog/point-in-time-recovery-in-postgres"
-                theme="white"
-              >
-                Instant Point-in-time recovery.
-              </Link>{' '}
+              <strong className="font-normal text-white">
+                Instant{` `}
+                <Link
+                  className="underline decoration-white/60 underline-offset-4 hover:decoration-primary-1/60"
+                  to="/blog/point-in-time-recovery-in-postgres"
+                  theme="white"
+                >
+                  Point-in-time recovery.
+                </Link>
+              </strong>{' '}
               Up to 30 days granularity down to the transaction or second.
             </p>
           </div>
