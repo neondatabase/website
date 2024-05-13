@@ -3,10 +3,10 @@
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useEffect, useRef } from 'react';
+import { forwardRef, useEffect, useRef, useImperativeHandle } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const PauseableVideo = ({ children, className, videoClassName, width, height }) => {
+const PauseableVideo = forwardRef(({ children, className, videoClassName, width, height }, ref) => {
   const videoRef = useRef(null);
 
   const [videoVisibilityRef, isInView] = useInView({
@@ -35,6 +35,9 @@ const PauseableVideo = ({ children, className, videoClassName, width, height }) 
       }
     }
   }, [inView]);
+
+  // Combine the external ref with the internal videoRef
+  useImperativeHandle(ref, () => videoRef.current);
 
   return (
     <LazyMotion features={domAnimation}>
@@ -71,7 +74,7 @@ const PauseableVideo = ({ children, className, videoClassName, width, height }) 
       </div>
     </LazyMotion>
   );
-};
+});
 
 PauseableVideo.propTypes = {
   children: PropTypes.node.isRequired,
