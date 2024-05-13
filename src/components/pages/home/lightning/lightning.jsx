@@ -2,12 +2,13 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useState, useEffect, useRef, useCallback } from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import PauseableVideo from 'components/shared/pauseable-video';
 import phoneCameraIllustration from 'images/pages/home/lightning/phone-camera.png';
+
+import useLightningAnimation from './use-lightning-animation';
 
 /* 
   Video optimization parameters:
@@ -36,70 +37,8 @@ const VIDEO_PATHS = {
   },
 };
 
-// Array of time intervals during which the video should not play
-const restrictedTimeIntervals = [
-  [0.529137, 2.057776],
-  [2.228894, 4.078483],
-  [4.202068, 6],
-];
-
 const Lightning = () => {
-  const videoContainerRef = useRef(null);
-  const videoActiveRef = useRef(null);
-
-  const [isVideoActive, setIsVideoActive] = useState(false);
-  const [timeoutId, setTimeoutId] = useState(null);
-
-  const handleVideoOnFocus = useCallback(() => {
-    const video = videoActiveRef?.current;
-
-    if (!video) return;
-
-    const { currentTime } = video;
-
-    // Clear any previous timeout
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-      setTimeoutId(null);
-    }
-
-    for (let i = 0; i < restrictedTimeIntervals.length; i++) {
-      const [start, end] = restrictedTimeIntervals[i];
-
-      if (currentTime >= start && currentTime <= end) {
-        // Calculate the delay to setTimeout based on the end of the current interval
-        const delay = (end - currentTime) * 1000; // Convert to milliseconds
-
-        const newTimeoutId = setTimeout(() => {
-          setIsVideoActive(true);
-        }, delay);
-
-        setTimeoutId(newTimeoutId);
-        return;
-      }
-    }
-
-    setIsVideoActive(true);
-  }, [timeoutId]);
-
-  useEffect(() => {
-    const container = videoContainerRef?.current;
-
-    if (!container) return;
-
-    container.addEventListener('mouseenter', handleVideoOnFocus);
-    container.addEventListener('mouseleave', () => setIsVideoActive(false));
-
-    return () => {
-      container.removeEventListener('mouseenter', handleVideoOnFocus);
-      container.removeEventListener('mouseleave', () => setIsVideoActive(false));
-
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videoContainerRef]);
+  const { videoContainerRef, videoActiveRef, isVideoActive } = useLightningAnimation();
 
   return (
     <section className="lightning safe-paddings mt-60 xl:mt-32 lg:mt-[76px] sm:mt-20">
