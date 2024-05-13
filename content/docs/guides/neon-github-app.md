@@ -31,6 +31,10 @@ This installation described below assumes the following:
 
 ## Install GitHub integration
 
+<Admonition type="note">
+If you previously installed the integration for a different Neon project, remove the previous integration before installing. For instructions, see [Remove the GitHub integration](/docs/guides/neon-github-app#remove-the-github-integration).
+</Admonition>
+
 To add the GitHub integration to your Neon project:
 
 1. In the Neon Console, navigate to the **Integrations** page for your project.
