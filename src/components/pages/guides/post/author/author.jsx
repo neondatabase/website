@@ -6,7 +6,7 @@ import Link from 'components/shared/link/link';
 
 const Author = ({ data, className = null }) => (
   <div className={clsx(className)}>
-    <p className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue-80 lg:hidden">
+    <p className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-gray-new-60 dark:text-gray-new-50 lg:hidden">
       Author
     </p>
     <div className="flex items-center gap-2.5">
@@ -22,14 +22,14 @@ const Author = ({ data, className = null }) => (
       <div>
         <span className="block leading-tight">{data.name}</span>
         {data.position && (
-          <span className="mt-1 block leading-none text-gray-new-40 dark:text-gray-new-60">
+          <span className="mt-1 block leading-none text-gray-new-50 dark:text-gray-new-60">
             {data.position}
           </span>
         )}
       </div>
     </div>
     {data.bio && (
-      <p className="mt-4 text-[14px] leading-normal text-gray-new-20 dark:text-gray-new-80 lg:text-sm xs:text-[13px]">
+      <p className="mt-4 text-[14px] leading-normal text-gray-new-40 dark:text-gray-new-80 lg:text-sm xs:text-[13px]">
         {data.bio}
       </p>
     )}
