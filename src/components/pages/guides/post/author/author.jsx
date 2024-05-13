@@ -16,26 +16,26 @@ const Author = ({ data, className = null }) => (
           alt={data.name}
           width={40}
           height={40}
-          className="block rounded-full md:h-6 md:w-6"
+          className="block rounded-full"
         />
       )}
       <div>
         <span className="block leading-tight">{data.name}</span>
         {data.position && (
-          <span className="mt-1 block leading-none text-gray-new-50 dark:text-gray-new-60">
+          <span className="mt-1 block text-[14px] leading-none text-gray-new-50 dark:text-gray-new-60">
             {data.position}
           </span>
         )}
       </div>
     </div>
     {data.bio && (
-      <p className="mt-4 text-[14px] leading-normal text-gray-new-40 dark:text-gray-new-80 lg:text-sm md:mt-3 xs:text-[13px]">
+      <p className="mt-4 text-[14px] leading-normal text-gray-new-40 dark:text-gray-new-80 lg:text-sm md:mt-3">
         {data.bio}
       </p>
     )}
     {data.link && (
       <Link
-        className="mt-2 block w-fit border-b border-secondary-8 leading-tight text-secondary-8 transition-colors duration-200 hover:!border-transparent dark:border-green-45 dark:text-green-45 md:mt-1.5"
+        className="mt-2 block w-fit border-b border-secondary-8 text-[14px] leading-tight text-secondary-8 transition-colors duration-200 hover:!border-transparent dark:border-green-45 dark:text-green-45 md:mt-1.5"
         to={data.link.url}
         target="_blank"
       >
