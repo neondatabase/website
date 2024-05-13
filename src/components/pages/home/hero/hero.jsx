@@ -110,17 +110,16 @@ const Hero = () => {
 
       <Container className="xl:px-8" size="1100">
         <div className="text-center">
-          <h1 className="font-title text-[88px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[72px] lg:text-[56px] sm:text-[32px]">
-            Serverless Postgres
+          <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[48px] md:text-[40px] sm:text-[32px]">
+            Ship faster with Serverless&nbsp;Postgres
           </h1>
-          <p className="mx-auto mt-2.5 max-w-[40rem] text-lg font-light leading-snug -tracking-[0.04em] text-gray-new-80 lg:mt-2.5 lg:max-w-[396px] lg:text-base">
-            The fully managed serverless Postgres with a generous free tier. We separate storage and
-            compute to offer autoscaling, branching, and bottomless storage.
+          <p className="mx-auto mt-3.5 max-w-xl text-[19px] font-light leading-snug -tracking-[0.04em] text-gray-new-80 lg:mt-2.5 lg:max-w-lg lg:text-base">
+            The database you love, on a next-gen platform designed to help you confidently ship
+            reliable and scalable applications.
           </p>
           <Button
-            className="pointer-events-auto relative mt-7 h-12 !font-semibold tracking-tighter xl:mt-8 lg:mt-6 sm:h-10"
-            size="lg"
-            theme="green-outline"
+            className="pointer-events-auto relative mt-[26px] !h-11 w-[144px] text-[15px] !font-semibold tracking-tighter xl:mt-8 lg:mt-6 sm:h-10"
+            theme="primary"
             to={LINKS.signup}
             target="_blank"
           >
