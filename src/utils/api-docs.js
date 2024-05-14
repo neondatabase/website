@@ -13,6 +13,7 @@ const getExcerpt = require('./get-excerpt');
 const parseMDXHeading = require('./parse-mdx-heading');
 
 const DOCS_DIR_PATH = 'content/docs';
+const FLOW_DIR_PATH = 'content/flow';
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
@@ -187,5 +188,6 @@ module.exports = {
   getAllPosts,
   getTableOfContents,
   DOCS_DIR_PATH,
+  FLOW_DIR_PATH,
   CHANGELOG_DIR_PATH,
 };

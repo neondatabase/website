@@ -4,8 +4,6 @@ subtitle: 'Explore Neon framework, language, platform, and feature guides'
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-  - /docs/guides/polyscale-integration
-  - /docs/guides/polyscale
 updatedOn: '2024-02-27T20:16:54.558Z'
 ---
 

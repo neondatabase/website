@@ -1,5 +1,6 @@
 export default {
   docs: '/docs',
+  flow: '/flow',
   aboutUs: '/about-us',
   careers: '/careers',
   blog: '/blog',
@@ -47,4 +48,5 @@ export default {
   onDemandStorage: '/docs/introduction/about#bottomless-storage',
   caseStudies: '/case-studies',
   earlyAccess: '/early-access-program',
+  creators: '/creators',
 };

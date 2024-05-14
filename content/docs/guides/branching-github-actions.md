@@ -30,45 +30,87 @@ The source code for this action is available on [GitHub](https://github.com/neon
 
 ### Example
 
-The following example creates a branch from the `main` branch in your Neon project 
+The following example creates a branch based on the specified parent branch:
 
 ```yaml
 name: Create Neon Branch with GitHub Actions Demo
 run-name: Create a Neon Branch 🚀
 jobs:
   Create-Neon-Branch:
-    uses: neondatabase/create-branch-action@v4
+    uses: neondatabase/create-branch-action@v5
     with:
       project_id: rapid-haze-373089
-      parent_id: br-long-forest-224191
+      # optional (defaults to your primary branch)
+      parent: dev
+      # optional (defaults to neondb)
+      database: my-database
       branch_name: from_action_reusable
-      api_key: {{ secrets.NEON_API_KEY }}
+      username: db_user_for_url
+      api_key: ${{ secrets.NEON_API_KEY }}
     id: create-branch
-  - run: echo project_id ${{ steps.create-branch.outputs.project_id}}
-  - run: echo branch_id ${{ steps.create-branch.outputs.branch_id}}
+  - run: echo db_url ${{ steps.create-branch.outputs.db_url }}
+  - run: echo host ${{ steps.create-branch.outputs.host }}
+  - run: echo branch_id ${{ steps.create-branch.outputs.branch_id }}
 ```
 
 ### Input variables
 
-- `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Project settings** page.
-- `parent_branch_id`: The ID of the parent branch, typically the `main` branch of your project. You can find this value in the Neon Console. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
-- `branch_name`: This is an optional parameter. If unspecified, the branch name will default to the same value as the `branch_id` of the newly created branch, which is a generated value that starts with a `br-` prefix.
-- `api_key`: An API key created in your Neon account. For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+```yaml
+inputs:
+  project_id:
+    required: true
+    description: 'The project id'
+  branch_name:
+    required: false
+    description: 'The branch name'
+  api_key:
+    description: 'The Neon API key'
+    required: true
+  username:
+    description: 'The db role name'
+    required: true
+  database:
+    description: 'The database name'
+    default: neondb
+  prisma:
+    description: 'Use prisma or not'
+    default: 'false'
+  parent:
+    description: 'The parent branch name or id or LSN or timestamp. By default the primary branch is used'
+  suspend_timeout:
+    description: >
+      Duration of inactivity in seconds after which the compute endpoint is
+      For more information, see [Auto-suspend configuration](https://neon.tech/docs/manage/endpoints#auto-suspend-configuration).
+    default: '0'
+  ssl:
+    description: >
+      Add sslmode to the connection string. Supported values are: "require", "verify-ca", "verify-full", "omit".
+    default: 'require'
+```
 
 ### Outputs
 
 ```yaml
 outputs:
+  db_url:
+    description: 'New branch DATABASE_URL'
+    value: ${{ steps.create-branch.outputs.db_url }}
+  db_url_with_pooler:
+    description: 'New branch DATABASE_URL with pooling enabled'
+    value: ${{ steps.create-branch.outputs.db_url_with_pooler }}
+  host:
+    description: 'New branch host'
+    value: ${{ steps.create-branch.outputs.host }}
+  host_with_pooler:
+    description: 'New branch host with pooling enabled'
+    value: ${{ steps.create-branch.outputs.host_with_pooler }}
   branch_id:
-    description: "Newly created branch Id"
-    value: ${{ steps.output-branch-id.outputs.branch_id }}
-  project_id:
-    description: "Project Id"
-    value: ${{ steps.output-project-id.outputs.project_id }}
+    description: 'New branch id'
+    value: ${{ steps.create-branch.outputs.branch_id }}
+  password:
+    description: 'Password for connecting to the new branch database with the input username'
+    value: ${{ steps.create-branch.outputs.password }}
 ```
-
-- `branch_id`: The ID of the newly created branch.
-- `project_id`: The ID of the parent branch.
 
 ## Delete branch action
 
@@ -106,9 +148,20 @@ jobs:
 
 ### Input variables
 
-- `project_id`: The ID of your Neon project. You can find this value in the Neon Console, on the **Project settings** page.
-- `branch:` The ID or name of the branch you want to delete. Select **Branches** from the sidebar, and then select the branch. A branch ID has a `br-` prefix.
-- `api_key`: An API key created in your Neon account. For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+```yaml
+inputs:
+  project_id:
+    required: true
+    description: "The Neon project id"
+  branch_id:
+    description: "The Neon branch id"
+    deprecationMessage: "The `branch_id` input is deprecated in favor of `branch`"
+  api_key:
+    description: "The Neon API key, read more at https://neon.tech/docs/manage/api-keys"
+    required: true
+  branch:
+    description: "The Neon branch name or id"
+```
 
 ### Outputs
 
@@ -151,20 +204,30 @@ jobs:
 
 ### Input variables
 
-- `project_id`: The ID of your Neon project. Find this value in the Neon Console on the **Project settings** page.
-- `parent`: If specified, the branch will be reset to the latest (HEAD) of parent branch.
-- `branch`: The name or id of the branch to reset.
-- `api_key`: An API key created in your Neon account. See [Create an API key](/docs/manage/api-keys#create-an-api-key) for instructions.
+```yaml
+inputs:
+  project_id:
+    required: true
+    description: 'The project id'
+  branch:
+    required: true
+    description: 'The branch name or id to reset'
+  api_key:
+    description: 'The Neon API key'
+    required: true
+  parent:
+    description: 'If specified, the branch will be reset to the parent branch'
+    required: false
+```
 
 ### Outputs
 
 ```yaml
 outputs:
   branch_id:
-    description: "Reset branch id"
+    description: 'Reset branch id'
     value: ${{ steps.reset-branch.outputs.branch_id }}
 ```
-- `branch_id`: The ID of the newly reset branch.
 
 ## Example applications
 
