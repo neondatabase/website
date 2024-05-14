@@ -147,6 +147,7 @@ const ClockAnimation = ({
         if (now < endTime) {
           animationFrameId = requestAnimationFrame(step);
         } else {
+          updateTime(minutesAdjustment + MINUTES_DOWN_RESULT - 3);
           const amPmAdditionalUpdates = setInterval(() => {
             amPmInput.value = !amPmInput.value;
           }, 100);
