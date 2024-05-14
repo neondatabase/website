@@ -146,8 +146,6 @@
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
-            - title: GitHub integration
-              slug: guides/neon-github-app
             - title: Branching — Testing queries
               slug: guides/branching-test-queries
             - title: Promote a branch with the Neon API
@@ -220,8 +218,6 @@
           items:
             - title: Node.js
               slug: guides/node
-            - title: Prisma
-              slug: guides/prisma
         - title: PHP
           items:
             - title: Laravel
@@ -332,6 +328,16 @@
           slug: guides/auth-clerk
         - title: Okta
           slug: guides/auth-okta
+    - title: CI/CD
+      items:
+        - title: GitHub integration
+          slug: guides/neon-github-app
+    - title: Tools
+      items:
+        - title: Outerbase
+          slug: guides/outerbase
+        - title: Prisma
+          slug: guides/prisma
     - title: For Partners
       slug: guides/partner-intro
       items:
