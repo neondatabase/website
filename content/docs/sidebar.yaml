@@ -7,12 +7,12 @@
     - title: Day 1 - Playing with Neon # sign-up plus all the basics to start working with your new db from command line/ include sample db or link migrate
       slug: get-started-with-neon/signing-up
     - title: Day 2 - Add Neon to your stack
-      slug: getting_started/tech-stack
+      slug: get-started-with-neon/tech-stack
     - title: Day 3 - CI/CD Automation
       slug: get-started-with-neon/workflow-primer 
     - title: Day 4 - Production checklist # or production checklist
       slug: getting_started/production
-    - title: Frameworks
+    - title: Framework quickstarts # too on-the-nose cribbing from sb?
       # slug: getting_started/frameworks # a new landing page dedicated to frameworks
       items:
         - title: Astro
@@ -29,7 +29,7 @@
           slug: guides/remix
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
-    - title: Languages
+    - title: Language quickstarts # too on-the-nose cribbing from sb?
       # slug: getting_started/languages # new landing page for languages
       items:
         - title: Elixir
@@ -78,6 +78,16 @@
           slug: import/migrate-mysql
         - title: Sample data
           slug: import/import-sample-data
+    - title: Architecture
+      items:
+        - title: Overview
+          slug: introduction/architecture-overview
+        - title: Compute lifecycle
+          slug: introduction/compute-lifecycle
+    - title: Regions
+      slug: introduction/regions
+    - title: Neon roadmap
+      slug: introduction/roadmap
 - title: Connect
   slug: connect/connect-intro
   items:
@@ -105,36 +115,84 @@
           slug: connect/connection-errors
         - title: Latency and timeouts
           slug: connect/connection-latency
-- title: Architecture
-  items:
-    - title: Overview
-      slug: introduction/architecture-overview
-    - title: Compute lifecycle
-      slug: introduction/compute-lifecycle
-- title: Platform managment
+- title: Platform
   items:
    # - title: Overview   # this object hiearchy page does not quite fit; refactor and put in architecture?
    #   slug: manage/overview
    # - title: API keys # should this go in API section? not first in the list anyway
    #   slug: manage/api-keys
+    - title: Accounts
+      items:
+        - title: E-mail signup
+          slug: manage/email-signup
+        - title: Organizations
+          slug: manage/organizations
     - title: Access control # this should cover personal v org accounts; accounts should come before projects?
-      slug: manage/access
-    - title: Projects
-      slug: manage/projects
-    - title: Branches
-      slug: manage/branches
-    - title: Computes
-      slug: manage/endpoints
-    - title: Roles
-      slug: manage/roles
-    - title: Databases
-      slug: manage/databases
-    - title: Integrations
-      slug: manage/integrations
-    - title: System operations
-      slug: manage/operations
-    - title: Organizations
-      slug: manage/organizations
+      items:
+        - title: Project access
+          slug: manage/project-access
+        - title: Project sharing
+          slug: guides/project-sharing-guide
+        - title: Database access
+          slug: manage/database-access
+    - title: Plans and billing
+      slug: introduction/about-billing
+      items:
+        - title: Plans
+          slug: introduction/plans
+        - title: Pricing estimation guide
+          slug: introduction/pricing-estimation-guide
+        - title: Extra usage
+          slug: introduction/extra-usage
+        - title: Usage metrics
+          slug: introduction/usage-metrics
+        - title: Sample project billing
+          slug: introduction/billing-sample
+        - title: Monitor billing and usage
+          slug: introduction/monitor-usage
+        - title: Manage billing
+          slug: introduction/manage-billing
+        - title: AWS Marketplace
+          slug: introduction/billing-aws-marketplace
+    - title: Project management
+      items:
+        - title: Projects
+          slug: manage/projects
+        - title: Branches
+          slug: manage/branches
+        - title: Computes
+          slug: manage/endpoints
+        - title: Roles
+          slug: manage/roles
+        - title: Databases
+          slug: manage/databases
+    - title: Monitoring
+      slug: introduction/monitoring
+      items:
+        - title: Monitoring dashboard
+          slug: introduction/monitoring-page
+        - title: System operations
+          slug: manage/operations
+        - title: External tools
+          slug: introduction/monitor-external-tools
+    - title: Security
+      items:
+        - title: Overview
+          slug: manage/security-overview
+        - title: Best practices
+          slug: manage/security-best-practices
+        - title: Security reporting
+          slug: security/security-reporting
+        - title: SOC 2 compliance
+          slug: security/soc2-compliance
+        - title: Acceptable Use Policy
+          slug: security/acceptable-use-policy
+    - title: Backups
+      slug: manage/backups
+    - title: Support
+      slug: introduction/support
+    - title: Status
+      slug: introduction/status
   #  - title: Access # this could be reorganized I think
   #   items:
   #  - title: Project access # this is more project sharing
@@ -149,19 +207,30 @@
   #        slug: guides/logical-replication-concepts
   #      - title: Manage
   #        slug: guides/logical-replication-neon
-- title: Feature guides
+- title: Features
   items:
     - title: Autoscaling
-      slug: guides/autoscaling-guide
+      slug: introduction/autoscaling
+      items:
+        - title: Autoscaling guide
+          slug: guides/autoscaling-guide
     - title: Autosuspend
-      slug: guides/auto-suspend-guide
+      slug: introduction/auto-suspend
+      items:
+        - title: Autosuspend guide
+          slug: guides/auto-suspend-guide
     - title: Branching
       slug: guides/branching-intro
       items:
-         - title: Reset from parent
-           slug: guides/reset-from-parent
-         - title: Branch Restore
-           slug: guides/branch-restore
+         - title: About branching
+           slug: introduction/branching
+         - title: Branch reset and restore
+           slug: introduction/point-in-time-restore
+           items:
+            - title: Reset from parent
+              slug: guides/reset-from-parent
+            - title: Branch Restore
+              slug: guides/branch-restore
          - title: Branching with the CLI
            slug: guides/branching-neon-cli
          - title: Branching with the API
@@ -172,9 +241,10 @@
            slug: guides/branching-test-queries
          - title: Promote a branch with the Neon API
            slug: guides/branch-promote
-    - title: Project sharing
-      slug: guides/project-sharing-guide
+    - title: Logical replication
+      slug: introduction/logical-replication  
     - title: Read replicas
+      slug: introduction/read-replicas
       items:
         - title: Working with read replicas
           slug: guides/read-replica-guide
@@ -194,3 +264,289 @@
           slug: guides/schema-diff-tutorial
     - title: Protected branches
       slug: guides/protected-branches
+    - title: IP Allow
+      slug: introduction/ip-allow
+- title: Integrations
+  slug: manage/integrations
+  items:
+    - title: Deployment
+      items:
+        - title: Vercel
+          items:
+            - title: Overview
+              slug: guides/vercel-overview
+            - title: Vercel Postgres
+              slug: guides/vercel-postgres
+            - title: Neon Vercel Integration
+              slug: guides/vercel
+            - title: Connect manually
+              slug: guides/vercel-manual
+        - title: Cloudflare
+          items:
+            - title: Cloudflare Pages
+              slug: guides/cloudflare-pages
+            - title: Cloudflare Workers
+              slug: guides/cloudflare-workers
+        - title: Deno
+          slug: guides/deno
+        - title: Heroku
+          slug: guides/heroku
+        - title: Koyeb
+          slug: guides/koyeb
+        - title: Netlify Functions
+          slug: guides/netlify-functions
+        - title: Railway
+          slug: guides/railway
+        - title: Render
+          slug: guides/render
+        - title: Backend-as-a-service
+          items:
+            - title: Exograph
+              slug: guides/exograph
+            - title: FerretDB
+              slug: guides/ferretdb
+            - title: Grafbase
+              slug: guides/grafbase
+            - title: Hasura
+              slug: guides/hasura
+            - title: Sequin
+              slug: guides/sequin
+            - title: StepZen
+              slug: guides/stepzen
+            - title: WunderGraph
+              slug: guides/wundergraph
+        - title: Serverless
+          items:
+            - title: Neon serverless driver
+              slug: serverless/serverless-driver
+            - title: AWS Lambda
+              slug: guides/aws-lambda
+    - title: Caching
+      items:
+        - title: Cloudflare Hyperdrive
+          slug: guides/cloudflare-hyperdrive
+        - title: PolyScale
+          slug: guides/polyscale
+    - title: CI/CD
+      items:
+        - title: GitHub integration
+          slug: guides/neon-github-app
+    - title: Replication
+      items:
+        - title: Concepts
+          slug: guides/logical-replication-concepts
+        - title: Manage
+          slug: guides/logical-replication-neon
+        - title: Airbyte
+          slug: guides/logical-replication-airbyte
+        - title: ClickHouse (DoubleCloud)
+          slug: guides/logical-replication-clickhouse
+        - title: Fivetran
+          slug: guides/logical-replication-fivetran
+        - title: Confluent
+          slug: guides/logical-replication-kafka-confluent
+        - title: Materialize
+          slug: guides/logical-replication-materialize
+        - title: Postgres
+          slug: guides/logical-replication-postgres
+    - title: Migrations
+      items:
+        - title: Django
+          slug: guides/django-migrations
+        - title: Drizzle
+          slug: guides/drizzle-migrations
+        - title: Entity Framework
+          slug: guides/entity-migrations
+        - title: Flyway
+          items:
+            - title: Get started
+              slug: guides/flyway
+            - title: Manage multiple environments
+              slug: guides/flyway-multiple-environments
+        - title: Laravel
+          slug: guides/laravel-migrations
+        - title: Liquibase
+          items:
+            - title: Get started
+              slug: guides/liquibase
+            - title: Developer workflow
+              slug: guides/liquibase-workflow
+        - title: Prisma
+          slug: guides/prisma-migrations
+        - title: Rails
+          slug: guides/rails-migrations
+        - title: Sequelize
+          slug: guides/sequelize
+        - title: SQLAlchemy
+          slug: guides/sqlalchemy-migrations
+    - title: Tools
+      items:
+        - title: Outerbase
+          slug: guides/outerbase
+        - title: Prisma
+          slug: guides/prisma
+    - title: Serverless
+      items:
+        - title: Neon serverless driver
+          slug: serverless/serverless-driver
+        - title: AWS Lambda
+          slug: guides/aws-lambda
+    - title: Authentication
+      items:
+        - title: Auth0
+          slug: guides/auth-auth0
+        - title: Clerk
+          slug: guides/auth-clerk
+        - title: Okta
+          slug: guides/auth-okta
+- title: AI & embeddings
+  items:
+    - title: Introduction
+      slug: ai/ai-intro
+    - title: AI concepts
+      slug: ai/ai-concepts
+    - title: Scale with Neon
+      slug: ai/ai-scale-with-neon
+    - title: AI tools
+      items:
+        - title: Google Colab
+          slug: ai/ai-google-colab
+- title: Postgres
+  slug: postgres/postgres-intro
+  items:
+    - title: Data types
+      slug: postgres/data-types-intro
+      items:
+        - title: Array
+          slug: data-types/array
+        - title: Boolean
+          slug: data-types/boolean
+        - title: Date and time
+          slug: data-types/date-and-time
+        - title: Character
+          slug: data-types/character
+        - title: JSON
+          slug: data-types/json
+        - title: Decimal
+          slug: data-types/decimal
+        - title: Floating point
+          slug: data-types/floating-point
+        - title: Integer
+          slug: data-types/integer
+        - title: UUID
+          slug: data-types/uuid
+    - title: Extensions
+      slug: extensions/extensions-intro
+      items:
+        - title: Supported extensions
+          slug: extensions/pg-extensions
+        - title: citext
+          slug: extensions/citext
+        - title: hstore
+          slug: extensions/hstore
+        - title: neon
+          slug: extensions/neon
+        - title: neon_utils
+          slug: extensions/neon-utils
+        - title: pgvector
+          slug: extensions/pgvector
+        - title: pg_partman
+          slug: extensions/pg_partman
+        - title: pg_prewarm
+          slug: extensions/pg_prewarm
+        - title: pg_stat_statements
+          slug: extensions/pg_stat_statements
+        - title: pg_tiktoken
+          slug: extensions/pg_tiktoken
+        - title: pg_trgm
+          slug: extensions/pg_trgm
+        - title: postgis
+          slug: extensions/postgis
+        - title: timescaledb
+          slug: extensions/timescaledb
+    - title: Functions
+      slug: postgres/functions-intro
+      items:
+        - title: array_to_json
+          slug: functions/array_to_json
+        - title: dense_rank
+          slug: functions/dense_rank
+        - title: json_array_elements
+          slug: functions/json_array_elements
+        - title: jsonb_array_elements
+          slug: functions/jsonb_array_elements
+        - title: json_build_object
+          slug: functions/json_build_object
+        - title: json_each
+          slug: functions/json_each
+        - title: jsonb_each
+          slug: functions/jsonb_each
+        - title: json_extract_path
+          slug: functions/json_extract_path
+        - title: jsonb_extract_path
+          slug: functions/jsonb_extract_path
+        - title: json_extract_path_text
+          slug: functions/json_extract_path_text
+        - title: jsonb_extract_path_text
+          slug: functions/jsonb_extract_path_text
+        - title: json_object
+          slug: functions/json_object
+        - title: jsonb_object
+          slug: functions/jsonb_object
+        - title: json_populate_record
+          slug: functions/json_populate_record
+        - title: jsonb_populate_record
+          slug: functions/jsonb_populate_record
+        - title: json_to_record
+          slug: functions/json_to_record
+        - title: jsonb_to_record
+          slug: functions/jsonb_to_record
+    - title: Optimize queries
+      slug: postgres/query-performance
+    - title: Query reference
+      slug: postgres/query-reference
+    - title: Compatibility
+      slug: reference/compatibility
+- title: CLI Reference
+  slug: reference/neon-cli
+  items:
+    - title: Install and connect
+      slug: reference/cli-install
+    - title: auth
+      slug: reference/cli-auth
+    - title: me
+      slug: reference/cli-me
+    - title: projects
+      slug: reference/cli-projects
+    - title: ip-allow
+      slug: reference/cli-ip-allow
+    - title: branches
+      slug: reference/cli-branches
+    - title: databases
+      slug: reference/cli-databases
+    - title: roles
+      slug: reference/cli-roles
+    - title: operations
+      slug: reference/cli-operations
+    - title: connection-string
+      slug: reference/cli-connection-string
+    - title: set-context
+      slug: reference/cli-set-context
+    - title: completion
+      slug: reference/cli-completion
+- title: SDKs
+  slug: reference/sdk
+- title: Partner guide
+  slug: guides/partner-intro
+  items:
+    - title: OAuth
+      slug: guides/oauth-integration
+    - title: Manage billing with quotas
+      slug: guides/partner-billing
+- title: Community
+  slug: community/community-intro
+  items:
+    - title: Docs Contribution Guide
+      slug: community/contribution-guide
+- title: Glossary
+  slug: /reference/glossary
