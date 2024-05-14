@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Bemi is an open-source solution that plugs into PostgreSQL and ORMs to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
+[Bemi](https://bemi.io/) is an open-source solution that plugs into PostgreSQL and ORMs to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
 
 Designed with simplicity and non-invasiveness in mind, Bemi doesn't require any alterations to your existing database structure. It operates in the background, empowering you with data change tracking features.
 
@@ -13,8 +13,8 @@ In this guide, we'll show you how to replicate data from Neon with Bemi to creat
 
 ## Prerequisites
 
-- A [Bemi account](https://bemi.io/)
-- A [Neon account](https://console.neon.tech/)
+- A [Bemi account](https://bemi.io/).
+- A [Neon account](https://console.neon.tech/).
 
 ## Enable logical replication in Neon
 
@@ -38,7 +38,7 @@ wal_level
 logical
 ```
 
-## Create a Postgres role for replication**
+## Create a Postgres role for replication
 
 It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
@@ -90,7 +90,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 ## Grant schema access to your Postgres role
 
-If you won’t be using the default [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role)r to connect to Bemi or your replication role does not own the schemas and tables you are tracking, make sure to grant access. Run these commands in your Neon SQL Editor for each schema:
+If you won’t be using the default [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) to connect to Bemi or your replication role does not own the schemas and tables you are tracking, make sure to grant access. Run these commands in your Neon SQL Editor for each schema:
 
 ```sql
 GRANT USAGE ON SCHEMA public TO <role_name>;
@@ -103,6 +103,8 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO <role_name>;
 ```
 
 ## Create a replication slot and publication
+
+If you won’t be using the default [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) role to connect to Bemi, run these commands to create a Postgres publication and add the required replication identity:
 
 ```sql
 -- Create "bemi" PUBLICATION to enable logical replication
@@ -127,7 +129,7 @@ CALL _bemi_set_replica_identity();
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
     ```
 
-    Enter the details in the **Create a source** dialog as shown below. Your values will differ.
+    Enter the details in the **Connect PostgreSQL Database** dialog as shown below. Your values will differ.
 
     - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
     - **Port**: 5432
@@ -137,15 +139,15 @@ CALL _bemi_set_replica_identity();
 
     ![Bemi Connect PostgreSQL Database](/docs/guides/bemi_connect_postgres.png)
 
-    2. During the **Source Database** connection setup or any time after, you can configure what tables you want to track:
+2. During the connection setup or any time after, you can configure the tables you want to track:
 
-        ![Bemi Tracked Tables](/docs/guides/bemi_tracked_tables.png)
+    ![Bemi Tracked Tables](/docs/guides/bemi_tracked_tables.png)
 
-    3. Please wait a few minutes while the infrastructure is being provisioned. Once this succeeds, you’ve successfully configured a Bemi Postgres source for your Neon database.
+3. Please wait a few minutes while Bemi provisions the infrastructure. Once this succeeds, you’ve successfully configured a Bemi Postgres source for your Neon database.
 
 ## Allow inbound traffic
 
-If you’re using Neon's IP Allow feature to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Bemi. [Contact Bemi](mailto: hi@bemi.io) to get the static IPs that need to be allowlisted. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+If you’re using Neon's IP Allow feature to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Bemi. [Contact Bemi](mailto:hi@bemi.io) to get the static IPs that need to be allowlisted. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
  ## **References**
 
