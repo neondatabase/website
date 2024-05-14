@@ -29,7 +29,7 @@ This installation described below assumes the following:
 - You already have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
 - You have a GitHub account and a repository that you want to connect to your Neon project.
 
-## Install GitHub integration
+## Install the GitHub integration
 
 <Admonition type="note">
 If you previously installed the integration for a different Neon project, remove the previous integration before installing. For instructions, see [Remove the GitHub integration](/docs/guides/neon-github-app#remove-the-github-integration).
