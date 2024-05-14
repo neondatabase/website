@@ -332,6 +332,10 @@
           slug: guides/auth-clerk
         - title: Okta
           slug: guides/auth-okta
+    - title: Tools
+      items:
+        - title: Outerbase
+          slug: guides/outerbase
     - title: For Partners
       slug: guides/partner-intro
       items:
