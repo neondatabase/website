@@ -41,7 +41,7 @@ You are taken to Outerbase's **Get Started tour** where you are guided through t
 
 For a conceptual overview of Outerbase, see [Outerbase concepts](https://docs.outerbase.com/introduction/concepts).
 
-## Outerbase resources and support
+## Outerbase support
 
 For Outerbase support and additional resources, refer to [Outerbase Community & Support](https://docs.outerbase.com/introduction/community-support).
 
