@@ -18,7 +18,7 @@ In this guide, we'll show you how to replicate data from Neon with Bemi to creat
 
 ## Enable logical replication in Neon
 
-<Admonition type="IMPORTANT">
+<Admonition type="important">
 Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from replica to logical for all databases in your Neon project. Once the `wal_level` setting is changed to logical, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be dropped and have to reconnect.
 </Admonition>
 
