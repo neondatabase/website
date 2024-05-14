@@ -1,5 +1,5 @@
 ---
-title: Create an Automatic Audit Trail with Bemi
+title: Create an automatic audit trail with Bemi
 subtitle: Learn how to replicate data from Neon with Bemi
 enableTableOfContents: true
 isDraft: true
