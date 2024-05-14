@@ -13,7 +13,7 @@ The Outerbase integration is currently in **private preview**. To start using it
 
 ## Prerequisites
 
-This setup described below assumes that you have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up). An Outerbase account is also required, but if you do not have one, you can set one up when adding the integration.
+The setup described below assumes that you have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up). An Outerbase account is also required, but if you do not have one, you can set one up when adding the integration.
 
 ## Add the Outerbase integration
 
