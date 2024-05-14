@@ -24,8 +24,8 @@ const ITEMS = [
     video: {
       icon: scalingIcon,
       title: 'Scaling',
-      mp4: '/videos/pages/home/hero/scaling.mp4?updated=20240506171725',
-      m3u8: '/videos/pages/home/hero/scaling.m3u8?updated=20240506171725',
+      mp4: '/videos/pages/home/hero/scaling.mp4?updated=20240514120633',
+      m3u8: '/videos/pages/home/hero/scaling.m3u8?updated=20240514120633',
     },
     title: 'Scaling',
     description:
