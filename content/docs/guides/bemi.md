@@ -121,7 +121,7 @@ END $$ LANGUAGE plpgsql;
 CALL _bemi_set_replica_identity();
 ```
 
-## Create a Postgres Connection to Bemi
+## Create a Postgres connection to Bemi
 
 1. Create a [new database connection](https://dashboard.bemi.io/databases/source/new) by entering the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project. For example, given a connection string like this:
 
