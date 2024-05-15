@@ -8,10 +8,12 @@ import PropTypes from 'prop-types';
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import bunIcon from 'icons/home/instant-provisioning/bun.svg';
 import denoIcon from 'icons/home/instant-provisioning/deno.svg';
+import drizzleIcon from 'icons/home/instant-provisioning/drizzle.svg';
 import goIcon from 'icons/home/instant-provisioning/go.svg';
 import javaIcon from 'icons/home/instant-provisioning/java.svg';
 import nextjsIcon from 'icons/home/instant-provisioning/nextjs.svg';
 import nodejsIcon from 'icons/home/instant-provisioning/nodejs.svg';
+import prismaIcon from 'icons/home/instant-provisioning/prisma.svg';
 import pythonIcon from 'icons/home/instant-provisioning/python.svg';
 import rubyIcon from 'icons/home/instant-provisioning/ruby.svg';
 import rustIcon from 'icons/home/instant-provisioning/rust.svg';
@@ -28,6 +30,8 @@ const icons = {
   python: { src: pythonIcon, width: 14, height: 14 },
   ruby: { src: rubyIcon, width: 10, height: 14 },
   rust: { src: rustIcon, width: 14, height: 14 },
+  prisma: { src: prismaIcon, width: 14, height: 14 },
+  drizzle: { src: drizzleIcon, width: 14, height: 14 },
 };
 
 const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {

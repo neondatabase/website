@@ -22,7 +22,7 @@ export async function GET() {
   },
   {
     name: 'Drizzle',
-    iconName: 'nextjs',
+    iconName: 'drizzle',
     language: 'javascript',
     code: `import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
@@ -35,7 +35,7 @@ const result = await db.select().from(...);`,
   },
   {
     name: 'Prisma',
-    iconName: 'nextjs',
+    iconName: 'prisma',
     language: 'javascript',
     code: `import { Pool } from '@neondatabase/serverless'
 import { PrismaNeon } from '@prisma/adapter-neon'
