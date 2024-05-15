@@ -56,13 +56,29 @@ CREATE TABLE public.users (
 );
 ```
 
-3. Next, navigate to the Dashboard in Neon and copy the connection string from the **Connection Details** widget. It shoould look something like this:
+3. Next, navigate to the **Dashboard** in Neon and copy the connection string from the **Connection Details** widget. It should look something like this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neosync-source?sslmode=require
 ```
 
-4. Navigate to [Neosync](https://www.neosync.dev/) and login. Go to **Connections** > **New Connection** then click on **Postgres**.
+4. Next, navigate to [Neosync](https://www.neosync.dev/) and login. Go to **Connections** > **New Connection** then click on **Postgres**.
+
+5. Enter a unique name for the connection in the **Connection Name** field. We'll give it the same name as the database in this example: `neosync-source`
+
+6. Paste the Neon database connection string in **Connection URL** field and click **Test Connection** to verify that the connection works.
+
+7. Click **Submit** to save the connection configuration.
+
+8. To generate data, create a Job in Neosync. Click on **Jobs** and then click on **New Job**. You are presented with a few job types. Since you are seeding a table from scratch, select the **Data Generation** job type and click **Next**.
+
+9. Give the job a name and then set **Initiate Job Run** to **Yes**. You can leave the schedule and advanced options alone.
+
+10. Click **Next** to move onto the Connect page. Select the connection you configured previously (`neosync-source`) from the dropdown and click **Next**.
+
+11. Specify a value for Number of Rows. We'll create 1000 rows of data in this example.
+
+12. Select the schema and table where you want to generate synthetic data.
 
 
 ### Create your schema
