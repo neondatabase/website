@@ -89,7 +89,7 @@ const Bento = () => (
                   Point-in-time recovery
                 </Link>
                 .
-              </strong>
+              </strong>{' '}
               Up to 30 days granularity down to the transaction or second.
             </p>
           </div>
