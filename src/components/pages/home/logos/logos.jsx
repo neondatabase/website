@@ -2,8 +2,8 @@ import clsx from 'clsx';
 
 import Container from 'components/shared/container';
 import akqaIcon from 'icons/home/logos/akqa.svg';
+import bcgIcon from 'icons/home/logos/bcg.svg';
 import outfront7Icon from 'icons/home/logos/outfront7.svg';
-import replitIcon from 'icons/home/logos/replit.svg';
 import retoolIcon from 'icons/home/logos/retool.svg';
 import vercelIcon from 'icons/home/logos/vercel.svg';
 import zimmerBiometIcon from 'icons/home/logos/zimmer-biomet.svg';
@@ -25,8 +25,8 @@ const logos = [
     width: 92,
   },
   {
-    logo: replitIcon,
-    alt: 'Replit',
+    logo: bcgIcon,
+    alt: 'Boston Consulting Group',
     width: 116,
   },
   {
