@@ -18,7 +18,7 @@ const TopBar = ({ isThemeBlack }) => (
       'safe-paddings relative z-40 flex h-9 w-full items-center justify-center gap-x-2.5 overflow-hidden px-4 py-2.5 leading-none transition-colors duration-200 dark:bg-[#0B0C0F] dark:hover:bg-gray-new-8',
       isThemeBlack ? 'bg-[#0B0C0F] hover:bg-gray-new-8' : 'bg-[#F5FBFD] hover:bg-[#f1fcff]'
     )}
-    to="https://neon.tech/blog/neon-ga"
+    to="https://neon.tech/flow"
     onClick={() => {
       sendGtagEvent('click_announcement_banner');
     }}
