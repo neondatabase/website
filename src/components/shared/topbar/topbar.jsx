@@ -28,7 +28,7 @@ const TopBar = ({ isThemeBlack }) => (
         'absolute left-1/2 -z-20 h-[106px] w-[29px] origin-center -translate-y-1/2 rotate-[226deg] rounded-[100%] mix-blend-plus-lighter blur-lg dark:opacity-100 sm:left-[30%]',
         isThemeBlack
           ? 'top-1/2 translate-x-[-280px] bg-[linear-gradient(-19deg,#FFF_51%,rgba(255,255,255,0)_30.57%)] sm:translate-x-0'
-          : '-top-2 z-40 -translate-x-60 bg-[linear-gradient(265.08deg,#FFFFFF_52.92%,rgba(255,255,255,0)_53.57%)] opacity-50'
+          : '-top-2 z-40 -translate-x-60 bg-[linear-gradient(265.08deg,#FFFFFF_52.92%,rgba(255,255,255,0)_53.57%)] opacity-50 sm:translate-x-0'
       )}
     />
     <span
