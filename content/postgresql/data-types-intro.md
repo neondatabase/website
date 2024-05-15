@@ -1,7 +1,4 @@
----
-title: Postgres data types
-enableTableOfContents: false
----
+# Postgres data types
 
 Get started with commonly-used Postgres data types with Neon's data type guides. For other data types that Postgres supports, visit the official Postgres [Data Types](https://www.postgresql.org/docs/current/datatype.html) documentation. 
 

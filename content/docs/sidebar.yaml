@@ -358,11 +358,13 @@
         - title: Google Colab
           slug: ai/ai-google-colab
 - title: Postgres
-  slug: postgres/postgres-intro
   items:
+    - title: Introduction
+      slug: postgres/postgres-intro
     - title: Data types
-      slug: postgres/data-types-intro
       items:
+        - title: Overview
+          slug: postgres/data-types-intro
         - title: Array
           slug: data-types/array
         - title: Boolean
@@ -411,8 +413,9 @@
         - title: timescaledb
           slug: extensions/timescaledb
     - title: Functions
-      slug: postgres/functions-intro
       items:
+        - title: Overview
+          slug: postgres/functions-intro
         - title: array_to_json
           slug: functions/array_to_json
         - title: dense_rank
