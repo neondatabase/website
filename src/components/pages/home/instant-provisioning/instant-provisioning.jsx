@@ -47,7 +47,7 @@ const InstantProvisioning = () => (
           </p>
           <Link
             className="relative z-10 mt-7 flex w-fit items-center text-[15px] font-medium leading-none tracking-[-0.03em] xl:mt-5 lg:mt-4 md:mt-2.5"
-            to="/docs/serverless/serverless-driver"
+            to="/docs/guides/guides-intro"
             theme="white"
             withArrow
           >
