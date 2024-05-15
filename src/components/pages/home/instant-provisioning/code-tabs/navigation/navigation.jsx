@@ -6,22 +6,28 @@ import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
+import bunIcon from 'icons/home/instant-provisioning/bun.svg';
+import denoIcon from 'icons/home/instant-provisioning/deno.svg';
 import goIcon from 'icons/home/instant-provisioning/go.svg';
 import javaIcon from 'icons/home/instant-provisioning/java.svg';
+import nextjsIcon from 'icons/home/instant-provisioning/nextjs.svg';
 import nodejsIcon from 'icons/home/instant-provisioning/nodejs.svg';
-import prismaIcon from 'icons/home/instant-provisioning/prisma.svg';
 import pythonIcon from 'icons/home/instant-provisioning/python.svg';
 import rubyIcon from 'icons/home/instant-provisioning/ruby.svg';
+import rustIcon from 'icons/home/instant-provisioning/rust.svg';
 
 import { useActiveTab } from '../../active-tab-context';
 
 const icons = {
   go: { src: goIcon, width: 30, height: 14 },
   java: { src: javaIcon, width: 11, height: 14 },
-  prisma: { src: prismaIcon, width: 12, height: 14 },
+  deno: { src: denoIcon, width: 12, height: 14 },
+  bun: { src: bunIcon, width: 12, height: 14 },
   nodejs: { src: nodejsIcon, width: 13, height: 14 },
+  nextjs: { src: nextjsIcon, width: 14, height: 14 },
   python: { src: pythonIcon, width: 14, height: 14 },
   ruby: { src: rubyIcon, width: 10, height: 14 },
+  rust: { src: rustIcon, width: 14, height: 14 },
 };
 
 const Navigation = ({ codeSnippets, highlightedCodeSnippets }) => {
