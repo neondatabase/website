@@ -10,12 +10,14 @@ const useVideoPlayback = (
   switchVideo,
   setActiveVideoIndex,
   initialVideoPlayback,
-  setInitialVideoPlayback
+  setInitialVideoPlayback,
+  index
 ) => {
-  const [isTitleVisible, setIsTitleVisible] = useState(true);
   const [visibilityRef, isInView] = useInView({
     threshold: 0.6,
   });
+
+  const [isTitleVisible, setIsTitleVisible] = useState(true);
 
   const updateProgress = useCallback(
     (video) => () => {
@@ -36,29 +38,33 @@ const useVideoPlayback = (
 
   const handleInitialVideoPlay = useCallback(
     (video) => {
-      const timer = setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         video.play();
         setInitialVideoPlayback(false);
         setIsTitleVisible(false);
       }, 1200);
 
-      return () => clearTimeout(timer);
+      return () => clearTimeout(timeoutId);
     },
     [setInitialVideoPlayback]
   );
 
   const handleVideoSwitchDelay = useCallback(
     (video) => () => {
-      video.currentTime = 0.1;
-      setIsTitleVisible(true);
+      if (index === 1) {
+        video.currentTime = 0.1;
+        setIsTitleVisible(true);
 
-      const timer = setTimeout(() => {
-        switchVideo();
-      }, 5000);
+        const timeoutId = setTimeout(() => {
+          switchVideo();
+        }, 5000);
 
-      return () => clearTimeout(timer);
+        return () => clearTimeout(timeoutId);
+      }
+
+      return switchVideo();
     },
-    [switchVideo]
+    [switchVideo, index]
   );
 
   const handleDesktopVideoPlayback = useCallback(() => {

@@ -22,6 +22,7 @@ const Video = forwardRef(
       setActiveVideoIndex,
       initialVideoPlayback,
       setInitialVideoPlayback,
+      index,
     },
     videoRef
   ) => {
@@ -36,7 +37,8 @@ const Video = forwardRef(
         switchVideo,
         setActiveVideoIndex,
         initialVideoPlayback,
-        setInitialVideoPlayback
+        setInitialVideoPlayback,
+        index
       );
 
     useEffect(() => {
@@ -66,14 +68,6 @@ const Video = forwardRef(
               !isActive ? 'after:opacity-70' : 'after:opacity-0'
             )}
           >
-            {/* 
-                Video optimization parameters:
-                -mp4: -pix_fmt yuv420p -vf "scale=-2:932" -movflags faststart -vcodec libx264 -crf 20
-                Scaling
-                  -m3u8: -codec: copy -start_number 0 -hls_time 2 -hls_list_size 0 -f hls scaling.m3u8
-                Branching
-                  -m3u8: -codec: copy -start_number 0 -hls_time 3 -hls_list_size 0 -f hls branching.m3u8
-            */}
             <video
               className={clsx(
                 'absolute left-0 top-0 z-0 h-auto min-w-[704px] 2xl:min-w-[652px] xl:min-w-[608px] lg:min-w-[514px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
@@ -165,4 +159,5 @@ Video.propTypes = {
   setActiveVideoIndex: PropTypes.func.isRequired,
   initialVideoPlayback: PropTypes.bool.isRequired,
   setInitialVideoPlayback: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };
