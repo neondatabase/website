@@ -70,8 +70,8 @@ const TopBar = ({ isThemeBlack }) => (
         isThemeBlack ? 'text-gray-new-80 opacity-95' : 'text-gray-new-15'
       )}
     >
-      Neon is Generally Available! Serverless Postgres with branching to boost your development
-      velocity.
+      Ship faster with database branching workflows: Add prod-like data to your preview and local
+      dev environments.
     </span>
     <ChevronIcon
       className={clsx(
