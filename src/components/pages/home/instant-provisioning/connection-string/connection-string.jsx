@@ -89,7 +89,7 @@ const ConnectionString = ({ url }) => {
     <>
       <p
         className={clsx(
-          'relative mr-3 self-end font-mono text-xs leading-none tracking-extra-tight transition-[opacity,transform] duration-300 lg:mr-2 sm:mr-0',
+          'relative mr-3 self-end font-mono text-xs leading-none tracking-extra-tight transition-[opacity,transform] duration-200 lg:mr-2 sm:mr-0',
           'before:pointer-events-none before:absolute before:-inset-x-1.5 before:inset-y-px before:rounded-[100%] before:bg-white before:opacity-[0.22] before:blur-md',
           isAnimated ? 'translate-y-[3px] opacity-0' : 'translate-y-0 opacity-100'
         )}
@@ -109,18 +109,18 @@ const ConnectionString = ({ url }) => {
           />
           <span
             className={clsx(
-              'relative mt-1 h-1.5 w-1.5 rounded-full transition-[background-color,box-shadow] duration-300 xl:h-[5px] xl:w-[5px]',
+              'relative mt-1 h-1.5 w-1.5 shrink-0 rounded-full transition-[background-color,box-shadow] duration-200 xl:h-[5px] xl:w-[5px]',
               isAnimated
                 ? 'animate-pulse bg-[#C0C0C0] shadow-[0px_0px_9px_0px_#BABABA]'
                 : 'bg-primary-1 shadow-[0px_0px_9px_0px_#4BFFC3]'
             )}
             aria-hidden
           >
-            <span className="absolute inset-px h-1 w-1 rounded-full bg-[#D9FDF1] opacity-70 blur-[1px]" />
+            <span className="absolute left-1/2 top-1/2 h-1 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D9FDF1] opacity-70 blur-[1px]" />
           </span>
           <span
             className={clsx(
-              'line-clamp-1 h-[14px] font-mono text-[13px] leading-none transition-colors duration-300 md:h-3 md:text-[11px]',
+              'line-clamp-1 h-[14px] font-mono text-[13px] leading-none transition-colors duration-200 md:h-3 md:text-[11px]',
               isAnimated ? 'text-gray-new-60' : 'text-white'
             )}
           >

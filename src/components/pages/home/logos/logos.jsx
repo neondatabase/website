@@ -27,7 +27,7 @@ const logos = [
   {
     logo: bcgIcon,
     alt: 'Boston Consulting Group',
-    width: 116,
+    width: 101,
   },
   {
     logo: outfront7Icon,

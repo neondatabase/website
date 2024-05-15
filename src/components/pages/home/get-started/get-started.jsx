@@ -33,9 +33,8 @@ const GetStarted = () => (
         <br /> Available today.
       </h2>
       <Button
-        className="pointer-events-auto relative mt-9 !font-semibold tracking-tighter xl:mt-8 lg:mt-7 sm:mt-5 sm:h-10"
-        size="lg"
-        theme="green-outline"
+        className="pointer-events-auto relative mt-[38px] h-11 w-[144px] text-[15px] !font-semibold tracking-tighter xl:mt-8 lg:mt-7 sm:mt-5 sm:h-10"
+        theme="primary"
         to={LINKS.signup}
         target="_blank"
       >

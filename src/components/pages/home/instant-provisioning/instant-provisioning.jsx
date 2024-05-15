@@ -19,7 +19,7 @@ const InstantProvisioning = () => (
             No waiting. No config.
           </p>
         </div>
-        <div className="relative flex w-[652px] flex-col pb-[171px] pt-[100px] xl:w-[580px] xl:pb-[148px] xl:pt-[84px] lg:w-[417px] lg:pb-[105px] lg:pt-[61px] md:-mt-4 md:w-full md:max-w-[580px] md:pb-36 md:pt-0 sm:overflow-hidden">
+        <div className="relative flex w-[652px] flex-col pb-[171px] pt-[100px] xl:w-[580px] xl:pb-[148px] xl:pt-[84px] lg:w-[417px] lg:pb-[105px] lg:pt-[61px] md:-mt-4 md:w-full md:max-w-[580px] md:pb-36 md:pt-0 sm:-mt-8 sm:overflow-hidden sm:pt-4">
           <div className="pointer-events-none absolute -left-20 top-32 z-0 h-[133px] w-[205px] rounded-[100%] border border-white bg-[#16182D] opacity-40 blur-3xl md:top-0" />
           <div
             className="pointer-events-none absolute -right-20 top-8 h-[133px] w-[398px] rounded-[100%] bg-[#16182D] opacity-40 blur-3xl"
