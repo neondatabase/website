@@ -1,7 +1,4 @@
----
-title: Postgres
-enableTableOfContents: false
----
+# Postgres
 
 Explore Postgres features with Neon's Postgres guides. Learn about data types, extensions, functions, and optimizing query performance. Remember, **Neon is Postgres**, so you're encouraged to reference both the Neon documentation and the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/).
 
