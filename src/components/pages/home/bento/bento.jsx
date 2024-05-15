@@ -30,7 +30,7 @@ const Bento = () => (
               <strong className="font-medium text-white">
                 Boost your performance with instant{' '}
                 <Link
-                  className="underline decoration-white/60 decoration-1 underline-offset-[5px] hover:decoration-primary-1/60 lg:underline-offset-4"
+                  className="underline decoration-white/40 decoration-1 underline-offset-[5px] hover:decoration-primary-1/60 lg:underline-offset-4"
                   to="/docs/introduction/read-replicas"
                   theme="white"
                 >
@@ -52,7 +52,7 @@ const Bento = () => (
               <strong className="font-normal text-white">
                 Easy database ops via the{' '}
                 <Link
-                  className="underline decoration-white/60 decoration-1 underline-offset-[5px] hover:decoration-primary-1/60 lg:underline-offset-4"
+                  className="underline decoration-white/40 decoration-1 underline-offset-[5px] hover:decoration-primary-1/60 lg:underline-offset-4"
                   to={LINKS.apiReference}
                   theme="white"
                 >
@@ -60,7 +60,7 @@ const Bento = () => (
                 </Link>{' '}
                 and{' '}
                 <Link
-                  className="underline decoration-white/60 decoration-1 underline-offset-[5px] hover:decoration-primary-1/60 lg:underline-offset-4"
+                  className="underline decoration-white/40 decoration-1 underline-offset-[5px] hover:decoration-primary-1/60 lg:underline-offset-4"
                   to={LINKS.cliReference}
                   theme="white"
                 >
@@ -82,14 +82,14 @@ const Bento = () => (
               <strong className="font-normal text-white">
                 Instant{` `}
                 <Link
-                  className="underline decoration-white/60 decoration-1 underline-offset-[5px] hover:decoration-primary-1/60 lg:underline-offset-4"
+                  className="underline decoration-white/40 decoration-1 underline-offset-[5px] hover:decoration-primary-1/60 lg:underline-offset-4"
                   to="/blog/point-in-time-recovery-in-postgres"
                   theme="white"
                 >
                   Point-in-time recovery
                 </Link>
                 .
-              </strong>
+              </strong>{' '}
               Up to 30 days granularity down to the transaction or second.
             </p>
           </div>

@@ -3,6 +3,7 @@ import Bento from 'components/pages/home/bento';
 import GetStarted from 'components/pages/home/get-started';
 import Hero from 'components/pages/home/hero/hero';
 import Industry from 'components/pages/home/industry';
+import InstantProvisioning from 'components/pages/home/instant-provisioning';
 import Lightning from 'components/pages/home/lightning';
 import Logos from 'components/pages/home/logos';
 import Multitenancy from 'components/pages/home/multitenancy';
@@ -19,6 +20,7 @@ const CodingForEntrepreuneursPage = () => (
   <>
     <Hero />
     <Logos />
+    <InstantProvisioning />
     <Lightning />
     <Bento />
     <AiIndex />

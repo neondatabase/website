@@ -10,49 +10,44 @@ const codeSnippets = [
     name: 'Next.js',
     iconName: 'nextjs',
     language: 'javascript',
-    code: `import postgres from 'postgres';
+    code: `import { neon } from '@neondatabase/serverless';
 
-async function getData() {
-  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
-  const response = await sql\`SELECT version()\`;
-  console.log(response);
-  return response;
-}
+export async function GET() {
+    const sql = neon(process.env.DATABASE_URL);
 
-export default async function Page() {
-  const data = await getData();
+    const rows = await sql("SELECT * FROM posts");
+
+    return Response.json({ rows })
 }`,
   },
   {
-    name: 'Node',
-    iconName: 'nodejs',
+    name: 'Drizzle',
+    iconName: 'drizzle',
     language: 'javascript',
-    code: `const postgres = require('postgres');
-require('dotenv').config();
-
-const sql = postgres(process.env.DATABASE_URL);
-
-async function getPgVersion() {
-  const result = await sql\`select version()\`;
-  console.log(result);
-}
-
-getPgVersion();`,
-  },
-  {
-    name: 'Bun',
-    iconName: 'bun',
-    language: 'javascript',
-    code: `// Use the Neon Serverless Driver
-import { neon } from "@neondatabase/serverless";
-
-// Bun automatically loads the DATABASE_URL from .env.local
-// Refer to: https://bun.sh/docs/runtime/env for more information
+    code: `import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
+    
 const sql = neon(process.env.DATABASE_URL);
 
-const rows = await sql\`SELECT version()\`;
+const db = drizzle(sql);
+    
+const result = await db.select().from(...);`,
+  },
+  {
+    name: 'Prisma',
+    iconName: 'prisma',
+    language: 'javascript',
+    code: `import { Pool } from '@neondatabase/serverless'
+import { PrismaNeon } from '@prisma/adapter-neon'
+import { PrismaClient } from '@prisma/client'
 
-console.log(rows[0].version);`,
+const connectionString = process.env.DATABASE_URL
+
+const pool = new Pool({ connectionString })
+
+const adapter = new PrismaNeon(pool)
+
+const prisma = new PrismaClient({ adapter })`,
   },
   {
     name: 'Python',
@@ -60,66 +55,19 @@ console.log(rows[0].version);`,
     language: 'python',
     code: `import os
 import psycopg2
-from psycopg2 import sql
-from dotenv import load_dotenv
-load_dotenv()
 
-# Get the connection string from the environment variable
-conn_str = os.getenv('DATABASE_URL')
-if not conn_str:
-    raise ValueError("No DATABASE_URL environment variable set")
+# Load the environment variable
+database_url = os.getenv('DATABASE_URL')
 
 # Connect to the PostgreSQL database
-try:
-    with psycopg2.connect(conn_str) as conn:
-        with conn.cursor() as cur:
+conn = psycopg2.connect(database_url)
 
-            # Execute a query, fetch and print result
-            cur.execute("SELECT version()")
-            version = cur.fetchone()
-            print(f"PostgreSQL version: {version[0]}")
+with conn.cursor() as cur:
+    cur.execute("SELECT version()")
+    print(cur.fetchone())
 
-except Exception as e:
-    print(f"Error: {e}")`,
-  },
-  {
-    name: 'Go',
-    iconName: 'go',
-    language: 'go',
-    code: `package main
-import (
-    "database/sql"
-    "fmt"
-    "log"
-    "os"
-
-    _ "github.com/lib/pq"
-    "github.com/joho/godotenv"
-)
-
-func main() {
-    err := godotenv.Load()
-    if err != nil {
-        log.Fatalf("Error loading .env file: %v", err)
-    }
-
-    connStr := os.Getenv("DATABASE_URL")
-    if connStr == "" {
-        panic("DATABASE_URL environment variable is not set")
-    }
-
-    db, err := sql.Open("postgres", connStr)
-    if err != nil {
-        panic(err)
-    }
-    defer db.Close()
-
-    var version string
-    if err := db.QueryRow("select version()").Scan(&version); err != nil {
-        panic(err)
-    }
-    fmt.Printf("version=%s\\n", version)
-}`,
+# Close the connection
+conn.close()`,
   },
   {
     name: 'Ruby',
@@ -171,6 +119,45 @@ fn main() -> Result<(), Box<dyn error::Error>> {
         println!("Result = {}", ret);
     }
     Ok(())
+}`,
+  },
+  {
+    name: 'Go',
+    iconName: 'go',
+    language: 'go',
+    code: `package main
+import (
+    "database/sql"
+    "fmt"
+    "log"
+    "os"
+
+    _ "github.com/lib/pq"
+    "github.com/joho/godotenv"
+)
+
+func main() {
+    err := godotenv.Load()
+    if err != nil {
+        log.Fatalf("Error loading .env file: %v", err)
+    }
+
+    connStr := os.Getenv("DATABASE_URL")
+    if connStr == "" {
+        panic("DATABASE_URL environment variable is not set")
+    }
+
+    db, err := sql.Open("postgres", connStr)
+    if err != nil {
+        panic(err)
+    }
+    defer db.Close()
+
+    var version string
+    if err := db.QueryRow("select version()").Scan(&version); err != nil {
+        panic(err)
+    }
+    fmt.Printf("version=%s\\n", version)
 }`,
   },
 ];

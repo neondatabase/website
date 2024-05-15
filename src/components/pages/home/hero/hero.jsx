@@ -37,7 +37,7 @@ const ITEMS = [
     },
     title: 'Scaling',
     description:
-      'We separated storage and compute to bring the best of serverless to Postgres: instant provisioning, autoscaling according to load, and scale to zero.',
+      'Focus on building applications with time and money-saving features like instant provisioning, autoscaling according to load, and scale to zero.',
     linkLabel: 'Discover Autoscaling',
     linkUrl: LINKS.autoscaling,
   },
@@ -50,7 +50,7 @@ const ITEMS = [
     },
     title: 'Branching',
     description:
-      'Neon uses copy-on-write to instantly branch your data and schema. Access isolated data copies for development, CI/CD, and schema changes.',
+      'Instantly branch your data and schema to access isolated DB copies for development, CI/CD, and schema migrations with copy-on-write storage.',
     linkLabel: 'Explore Branching',
     linkUrl: LINKS.branching,
   },
