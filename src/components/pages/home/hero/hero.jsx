@@ -56,8 +56,6 @@ const ITEMS = [
   },
 ];
 
-// TODO: optimize and improve the animation of the transition between cards, as well as:
-//       - update current videos
 const Hero = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
