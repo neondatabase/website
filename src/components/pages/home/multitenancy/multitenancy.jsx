@@ -33,7 +33,7 @@ const Multitenancy = () => (
       <p className="max-w-[608px] text-xl leading-snug tracking-extra-tight text-gray-new-50 xl:max-w-xl xl:text-lg lg:max-w-[480px] lg:text-base">
         Use the Neon API to deploy{` `}
         <Link
-          className="underline decoration-white/60 underline-offset-4 hover:decoration-primary-1/60"
+          className="underline decoration-white/60 decoration-1 underline-offset-[5px] hover:decoration-primary-1/60 lg:underline-offset-4"
           to={LINKS.enterprise}
           theme="white"
         >
