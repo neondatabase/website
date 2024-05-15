@@ -34,8 +34,9 @@ const Bento = () => (
                   to="/docs/introduction/read-replicas"
                   theme="white"
                 >
-                  read replicas.
+                  read replicas
                 </Link>
+                .
               </strong>{' '}
               They scale&nbsp;down to zero when idle and don&apos;t use additional storage.
             </p>
@@ -51,7 +52,7 @@ const Bento = () => (
               <strong className="font-normal text-white">
                 Easy database ops via the{' '}
                 <Link
-                  className="underline decoration-white/60 underline-offset-4 hover:decoration-primary-1/60"
+                  className="underline decoration-white/60 underline-offset-[5px] hover:decoration-primary-1/60"
                   to={LINKS.apiReference}
                   theme="white"
                 >
@@ -59,7 +60,7 @@ const Bento = () => (
                 </Link>{' '}
                 and{' '}
                 <Link
-                  className="underline decoration-white/60 underline-offset-4 hover:decoration-primary-1/60"
+                  className="underline decoration-white/60 underline-offset-[5px] hover:decoration-primary-1/60"
                   to={LINKS.cliReference}
                   theme="white"
                 >
@@ -81,13 +82,14 @@ const Bento = () => (
               <strong className="font-normal text-white">
                 Instant{` `}
                 <Link
-                  className="underline decoration-white/60 underline-offset-4 hover:decoration-primary-1/60"
+                  className="underline decoration-white/60 underline-offset-[5px] hover:decoration-primary-1/60"
                   to="/blog/point-in-time-recovery-in-postgres"
                   theme="white"
                 >
-                  Point-in-time recovery.
+                  Point-in-time recovery
                 </Link>
-              </strong>{' '}
+                .
+              </strong>
               Up to 30 days granularity down to the transaction or second.
             </p>
           </div>
