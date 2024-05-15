@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Link from 'components/shared/link';
 import MENUS from 'constants/menus';
 
-import { ChatWidgetTrigger } from '../chat-widget';
+import InkeepTrigger from '../inkeep-trigger';
 
 import Item from './item';
 
@@ -42,22 +42,22 @@ NavWithIcon.propTypes = {
 const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = false }) => (
   <aside
     className={clsx(
-      'relative col-start-1 col-end-4 max-w-[254px] before:absolute before:-bottom-20 before:-right-5 before:-top-[110px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-gray-new-10 lg:hidden',
+      'relative col-start-1 col-end-4 max-w-[254px] pt-0.5 before:absolute before:-bottom-20 before:-right-5 before:-top-[104px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-black-new lg:hidden',
       className
     )}
   >
-    <div className="sticky top-[104px] z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-16 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-gray-new-10 dark:after:to-gray-new-10">
+    <div className="sticky top-[104px] z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-16 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-black-new dark:after:to-black-new">
       <Search className="z-30" indexName={indexName} />
       <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-8">
         {isPostgres ? (
           <NavWithIcon className="mb-8" items={MENUS.postgresSidebar} />
         ) : (
           <>
-            <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
+            <InkeepTrigger className="mb-3.5 flex" isSidebar />
             <NavWithIcon className="mb-11" items={MENUS.docSidebar} />
           </>
         )}
-        <ul className={clsx({ 'mt-5': !isPostgres })}>
+        <ul className={clsx({ 'mt-14': !isPostgres })}>
           {sidebar.map((item, index) => (
             <Item {...item} key={index} basePath={basePath} isChildren={false} />
           ))}

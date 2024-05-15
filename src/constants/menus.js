@@ -3,11 +3,15 @@ import ConsoleIcon from 'icons/console.inline.svg';
 import aboutUsIcon from 'icons/header/about-us.svg';
 import aiIcon from 'icons/header/ai.svg';
 import autoscalingIcon from 'icons/header/autoscaling.svg';
+import blogIcon from 'icons/header/blog.svg';
 import branchingIcon from 'icons/header/branching.svg';
 import careersIcon from 'icons/header/careers.svg';
 import caseStudiesIcon from 'icons/header/case-studies.svg';
+import changelogIcon from 'icons/header/changelog.svg';
 import cliIcon from 'icons/header/cli.svg';
-import EnterpriseIcon from 'icons/header/enterprise.svg';
+import demosIcon from 'icons/header/demos.svg';
+import discordIcon from 'icons/header/discord.svg';
+import enterpriseIcon from 'icons/header/enterprise.svg';
 import partnersIcon from 'icons/header/partners.svg';
 import onDemandStorageIcon from 'icons/header/storage.svg';
 import PostgresDocsIcon from 'icons/postgres.inline.svg';
@@ -53,16 +57,41 @@ export default {
       ],
     },
     {
-      text: 'Docs',
-      to: LINKS.docs,
-    },
-    {
       text: 'Pricing',
       to: LINKS.pricing,
     },
     {
-      text: 'Blog',
-      to: LINKS.blog,
+      text: 'Docs',
+      to: LINKS.docs,
+    },
+    {
+      text: 'Resources',
+      items: [
+        {
+          icon: blogIcon,
+          text: 'Blog',
+          description: 'Learn from the experts',
+          to: LINKS.blog,
+        },
+        {
+          icon: changelogIcon,
+          text: 'Changelog',
+          description: 'Explore product updates',
+          to: LINKS.changelog,
+        },
+        {
+          icon: demosIcon,
+          text: 'Demos',
+          description: 'Try interactive demos',
+          to: LINKS.demos,
+        },
+        {
+          icon: discordIcon,
+          text: 'Discord',
+          description: 'Join the community',
+          to: LINKS.discord,
+        },
+      ],
     },
     {
       text: 'Company',
@@ -92,7 +121,7 @@ export default {
           to: LINKS.caseStudies,
         },
         {
-          icon: EnterpriseIcon,
+          icon: enterpriseIcon,
           text: 'Enterprise',
           description: 'Scale & grow',
           to: LINKS.enterprise,
@@ -117,7 +146,7 @@ export default {
           to: LINKS.partners,
         },
         {
-          text: 'Case studies',
+          text: 'Case Studies',
           to: LINKS.caseStudies,
         },
         {
@@ -132,10 +161,10 @@ export default {
           text: 'Contact Sales',
           to: LINKS.contactSales,
         },
-        // {
-        //   text: 'Changelog',
-        //   to: LINKS.changelog,
-        // },
+        {
+          text: 'Early Access',
+          to: LINKS.earlyAccess,
+        },
       ],
     },
     {
@@ -175,7 +204,7 @@ export default {
       heading: 'Community',
       links: [
         {
-          text: 'X',
+          text: 'x.com',
           to: LINKS.twitter,
           icon: 'x-icon',
         },
@@ -184,10 +213,6 @@ export default {
           to: LINKS.linkedin,
           icon: 'linkedin-icon',
         },
-        // {
-        //   text: 'Discord',
-        //   to: LINKS.discord,
-        // },
         {
           text: 'GitHub',
           to: LINKS.github,
@@ -207,6 +232,11 @@ export default {
           text: 'YouTube',
           to: LINKS.youtube,
           icon: 'youtube-icon',
+        },
+        {
+          text: 'Creators',
+          to: LINKS.creators,
+          icon: 'creators-icon',
         },
       ],
     },

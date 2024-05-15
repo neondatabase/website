@@ -1,5 +1,5 @@
 ---
-title: Postgres Array Data Type
+title: Postgres Array data type
 subtitle: Manage collections of elements using arrays
 enableTableOfContents: true
 updatedOn: '2024-02-03T13:30:12.163Z'

@@ -26,6 +26,10 @@ npm install @neondatabase/serverless
 
 The driver includes TypeScript types (the equivalent of `@types/pg`). No additional installation is required.
 
+<Admonition type="note">
+The Neon serverless driver is also available as a [JavaScript Registry (JSR)](https://jsr.io/docs/introduction) package: [https://jsr.io/@neon/serverless](https://jsr.io/@neon/serverless). The JavaScript Registry (JSR) is a package registry for JavaScript and TypeScript. JSR works with many runtimes (Node.js, Deno, browsers, and more) and is backward compatible with `npm`.
+</Admonition>
+
 ## Configure your Neon database connection
 
 You can obtain a connection string for your database from the **Connection Details** widget on the Neon **Dashboard**. Your Neon connection string will look something like this:
@@ -99,7 +103,7 @@ export default async function handler(
 </CodeTabs>
 
 <Admonition type="note">
-The maximum request size and response size for queries over HTTP is 10 MB. Additionally, there is a 15-second proxy timeout for SQL requests over HTTP. Long-running queries that exceed the 15-second threshold are terminated.
+The maximum request size and response size for queries over HTTP is 10 MB.
 </Admonition>
 
 ### neon function configuration options
@@ -372,6 +376,7 @@ export default async function handler(
 - In Node.js and some other environments, there's no built-in WebSocket support. In these cases, supply a WebSocket constructor function.
 
   ```javascript
+  import { Pool, neonConfig } from '@neondatabase/serverless';
   import ws from 'ws';
   neonConfig.webSocketConstructor = ws;
   ```

@@ -43,6 +43,7 @@ const logos = [
   'hasura',
   'replit',
   'vercel',
+  'retool',
   'illa',
   'octolis',
   'cloudflare',
@@ -55,11 +56,10 @@ const logos = [
 
 const EnterprisePage = () => (
   <Layout
-    className="bg-black-new text-white"
+    className="bg-black-pure text-white"
     headerClassName="lg:!absolute lg:!bg-transparent"
-    headerTheme="black-new"
-    footerTheme="black-new"
-    footerWithTopBorder
+    headerTheme="black-pure"
+    footerTheme="black-pure"
   >
     <Hero />
     <Logos logos={logos} withGreenFade />

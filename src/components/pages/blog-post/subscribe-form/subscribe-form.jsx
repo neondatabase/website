@@ -106,7 +106,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
         {
           'pb-[125px] pt-[118px] xl:pb-[123px] xl:pt-[104px] lg:pb-28 lg:pt-20 md:pb-24 md:pt-16':
             size === 'lg',
-          'mt:pt-7 -mx-10 rounded-xl bg-black-new p-[70px] pr-28 2xl:mx-0 2xl:px-10 xl:py-14 lt:px-11 lg:pb-16 md:px-5 md:pb-12 md:pt-7':
+          'mt:pt-7 -mx-7 rounded-xl bg-black-new px-[60px] py-[70px] 2xl:mx-0 2xl:px-7 xl:py-14 lt:px-11 lg:pb-16 md:px-5 md:pb-12 md:pt-7':
             size === 'md',
           'relative overflow-hidden rounded-md px-7 py-6': size === 'sm',
           'before:absolute before:inset-0 before:z-[0] before:rounded-md before:bg-secondary-9 before:bg-opacity-10 before:bg-subscribe-sm after:absolute after:inset-px after:z-[0] after:rounded-md after:bg-black-new':
@@ -126,7 +126,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
       )}
       <div
         className={clsx(
-          'mx-auto flex max-w-[1166px] items-center justify-between',
+          'mx-auto flex items-center justify-between',
           size === 'sm' ? 'md:flex-col md:items-center' : 'lg:flex-col',
           {
             'pr-12 2xl:px-10 2xl:pr-0 lg:px-8 md:px-4': size === 'lg',
@@ -135,12 +135,12 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
       >
         <div className="relative z-20 lg:text-center">
           {size === 'sm' ? (
-            <h2 className="w-[220px] shrink text-2xl leading-dense tracking-tighter">
+            <h2 className="w-[220px] shrink font-title text-2xl font-medium leading-dense tracking-tighter">
               Subscribe to receive our latest updates
             </h2>
           ) : (
             <>
-              <h2 className="text-4xl leading-none tracking-tighter xl:text-[32px] sm:text-[28px]">
+              <h2 className="font-title text-4xl font-medium leading-none tracking-tighter xl:text-[32px] sm:text-[28px]">
                 Subscribe to <mark className="bg-transparent text-green-45">Neon’s News</mark>
               </h2>
               <p className="mt-4 text-lg leading-none tracking-[-0.02em] text-gray-new-80 xl:mt-2 xl:text-base xl:leading-tight sm:mx-auto sm:mt-2.5 sm:max-w-[300px]">

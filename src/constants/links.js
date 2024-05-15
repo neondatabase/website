@@ -1,8 +1,10 @@
 export default {
   docs: '/docs',
+  flow: '/flow',
   aboutUs: '/about-us',
   careers: '/careers',
   blog: '/blog',
+  console: 'https://console.neon.tech',
   signup: 'https://console.neon.tech/signup',
   login: 'https://console.neon.tech/login',
   security: '/docs/security/security-overview',
@@ -43,6 +45,9 @@ export default {
   postgres: '/docs/postgres',
   demos: '/demos',
   autoscaling: '/docs/introduction/autoscaling',
+  docsBranching: '/docs/introduction/branching',
   onDemandStorage: '/docs/introduction/about#bottomless-storage',
   caseStudies: '/case-studies',
+  earlyAccess: '/early-access-program',
+  creators: '/creators',
 };

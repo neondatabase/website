@@ -19,10 +19,10 @@ This command gets a Postgres connection string for connecting to a database in y
 ### Usage
 
 ```bash
-neonctl connection-string [branch] [options]
+neonctl connection-string [branch[@timestamp|@LSN]] [options]
 ```
 
-`branch` specifies the branch name or id. If a branch name or ID is ommited, the primary branch is used.
+`branch` specifies the branch name or ID. If a branch name or ID is omitted, the primary branch is used. `@timestamp|@LSN` is used to specify a specific point in the branch's history for time travel connections. If omitted, the current state (HEAD) is used.
 
 ### Options
 
@@ -63,6 +63,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?connect_timeout=30
     ```
 
+- Get a connection string to a specific point in a branch's history by appending `@timestamp` or `@lsn`. Availability depends on your configured [history retention](/docs/manage/projects#configure-history-retention) window.
+
+    ```bash
+    neonctl connection-string @2024-04-21T00:00:00Z
+    ```
+    For additional examples, see [How to use Time Travel](/docs/guides/time-travel-assist#how-to-use-time-travel).
 - Get a connection string and connect with `psql`.
 
     ```bash

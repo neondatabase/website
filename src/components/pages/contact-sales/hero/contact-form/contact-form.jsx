@@ -100,7 +100,7 @@ const ContactForm = ({ formState, setFormState }) => {
   };
   return (
     <form
-      className="relative z-10 grid gap-y-10 rounded-[20px] bg-gray-1 p-12 pb-14 2xl:gap-y-9 2xl:p-10 2xl:pb-10 md:gap-y-5 md:p-6 md:pb-6"
+      className="relative z-10 grid gap-y-10 rounded-[20px] bg-black-new p-12 pb-14 2xl:gap-y-9 2xl:p-10 2xl:pb-10 md:gap-y-5 md:p-6 md:pb-6"
       style={{ boxShadow: '0px 20px 40px rgba(26, 26, 26, 0.4)' }}
       method="POST"
       onSubmit={handleSubmit(onSubmit)}

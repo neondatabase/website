@@ -1,5 +1,6 @@
 ---
 title: Postgres compatibility
+subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
@@ -84,7 +85,7 @@ CREATE TABLE books (id int, title text COLLATE "arabic");
 
 ## Event triggers
 
-Postgres [event triggers](/docs/current/event-triggers.html), which require Postgres superuser privileges, are currently not supported. Unlike regular triggers, which are attached to a single table and capture only DML events, event triggers are global to a particular database and are capable of capturing DDL events.
+Postgres [event triggers](https://www.postgresql.org/docs/current/event-triggers.html), which require Postgres superuser privileges, are currently not supported. Unlike regular triggers, which are attached to a single table and capture only DML events, event triggers are global to a particular database and are capable of capturing DDL events.
 
 Attempting to create an event trigger will produce errors similar to these:
 

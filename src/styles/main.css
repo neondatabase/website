@@ -1,6 +1,6 @@
 @layer base {
   body {
-    @apply relative min-w-[320px] !overflow-x-hidden font-sans text-black antialiased;
+    @apply relative min-w-[320px] !overflow-x-hidden bg-white font-sans text-black antialiased dark:bg-black-pure dark:text-white;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -70,10 +70,23 @@
     @apply mask-styles footer-icon-size;
   }
 
+  .creators-icon {
+    -webkit-mask-image: url('/images/footer/creators.svg');
+    @apply mask-styles footer-icon-size;
+  }
+
   .multi-checkbox {
     input[type='checkbox'] {
       @apply border-green-45 bg-green-45 bg-[url(/images/check.svg)];
     }
+  }
+
+  inkeep-portal {
+    @apply relative z-50;
+  }
+
+  [data-docsearch-fixed] {
+    @apply sr-only;
   }
 }
 

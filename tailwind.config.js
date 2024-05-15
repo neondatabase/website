@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 const defaultTheme = require('tailwindcss/defaultTheme');
-/* eslint-disable import/no-extraneous-dependencies, global-require */
 const plugin = require('tailwindcss/plugin');
 
 module.exports = {
@@ -24,6 +23,7 @@ module.exports = {
       black: {
         DEFAULT: '#1a1a1a',
         new: '#0c0d0d',
+        pure: '#000000',
       },
       white: '#ffffff',
       primary: {
@@ -111,7 +111,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['IBM Plex Sans', 'IBM Plex Sans Fallback', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
+        title: ['var(--font-esbuild)', ...defaultTheme.fontFamily.sans],
         mono: ['IBM Plex Mono', 'IBM Plex Mono Fallback', ...defaultTheme.fontFamily.mono],
       },
       fontSize: {
@@ -149,6 +150,54 @@ module.exports = {
           'linear-gradient(160deg, rgba(173, 224, 235, 0.00) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0.00) 77%);',
         'pricing-table-featured-column':
           'linear-gradient(180deg, rgba(19, 20, 21, 0.40) 92.77%, rgba(19, 20, 21, 0.00) 100%);',
+        'home-lightning-title':
+          'radial-gradient(30.52% 57.36% at 67.98% 84.29%, #070707 8.6%, #525252 44.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
+        'home-lightning-title-xl':
+          'radial-gradient(15.52% 40% at 58.98% 87.29%, #070707 8.6%, #525252 39.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
+        'home-lightning-title-xl-ipad':
+          'radial-gradient(149px 165px at 73.95% 81%, transparent, transparent 51%, white), linear-gradient(180deg, white, white 47%, transparent 47%, transparent)',
+        'home-lightning-title-lg':
+          'radial-gradient(16% 47% at 64% 83.29%, #070707 7%, #525252 40.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
+        'home-lightning-title-lg-ipad':
+          'radial-gradient(149px 165px at 78.95% 77%, transparent, transparent 57%, white 74%, white), linear-gradient(180deg, white, white 47%, transparent 47%, transparent)',
+        'home-lightning-title-md':
+          'radial-gradient(16% 40% at 72% 78.29%, #070707 7%, #525252 40.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
+        'home-lightning-title-sm':
+          'radial-gradient(26.52% 69.36% at 261px 80%, #070707 8.6%, #525252 39.72%, #A7A7A7 73.37%, #FFFFFF 100%)',
+        'home-bento-regions-border':
+          'radial-gradient(42.03% 56.98% at 0% 100%, #847A9D 0%, rgba(132, 122, 157, 0) 89.37%),' +
+          'radial-gradient(20.73% 29.17% at 24.37% 100%, #545C8D 0%, rgba(84, 92, 141, 0) 89.37%),' +
+          'radial-gradient(22.14% 53.65% at 68.28% 0%, #545C8D 0%, rgba(84, 92, 141, 0) 95.75%),' +
+          'radial-gradient(12.86% 25.51% at 100% 30.86%, #2A2D32 0%, rgba(42, 45, 50, 0) 100%),' +
+          'radial-gradient(12.81% 27.6% at 37.08% 0%, #2A2D32 0%, rgba(42, 45, 50, 0) 100%),' +
+          'linear-gradient(0deg, #181818, #181818)',
+        'home-bento-api-and-cli-border':
+          'radial-gradient(26.24% 29.12% at 66.81% 0%, #24272C 0%, rgba(36, 39, 44, 0) 100%),' +
+          'radial-gradient(35.43% 29.25% at 100% 62.63%, #24272C 0%, rgba(36, 39, 44, 0) 100%),' +
+          'radial-gradient(39.25% 39.33% at 0% 3.24%, #EFF4F4 0%, #78E8E1 8.96%, #3ABC96 18.57%, #24624F 41.92%, rgba(36, 98, 79, 0) 100%),' +
+          'linear-gradient(0deg, #171717, #171717)',
+        'home-bento-timer-border':
+          'radial-gradient(7.07% 9.37% at 64.68% 0%, #2559B9 0%, rgba(37, 89, 185, 0) 100%),' +
+          'radial-gradient(19.61% 26.58% at 73.83% 0%, rgba(231, 232, 236, 0.9) 0%, rgba(231, 232, 236, 0) 60.81%),' +
+          'radial-gradient(21.49% 21.49% at 33.94% 0%, #293244 0%, rgba(41, 50, 68, 0) 100%),' +
+          'radial-gradient(41.6% 38.11% at 0% 58.25%, #121212 0%, rgba(18, 18, 18, 0) 100%),' +
+          'radial-gradient(32.34% 44.6% at 100% 86.35%, #121212 0%, rgba(18, 18, 18, 0) 100%),' +
+          'linear-gradient(0deg, #191919, #191919)',
+        'home-trusted-github-card':
+          'radial-gradient(32.79% 54.55% at 67.38% 0%, #18604C 0%, rgba(24, 96, 76, 0) 91.3%),' +
+          'linear-gradient(208.46deg, #161818 8.65%, #141414 84.9%)',
+        'home-trusted-digit-card':
+          'radial-gradient(73.81% 84.98% at 1.56% 0%, #A1ACC4 0%, #8594B3 19.86%, rgba(133, 148, 179, 0) 100%),' +
+          'linear-gradient(140.09deg, #6B768C 9.16%, #1C1C1C 46.69%),' +
+          'radial-gradient(21.81% 24.47% at 1.09% 1.16%, #FFFFFF 0%, rgba(255, 255, 255, 0) 63.02%)',
+        'home-trusted-soc-card':
+          'radial-gradient(46.96% 46.96% at 0% 3.24%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
+          'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
+          'linear-gradient(0deg, #141416, #141416)',
+        'home-trusted-soc-card-md':
+          'radial-gradient(18.96% 17.96% at 13% -1%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
+          'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
+          'linear-gradient(0deg, #141416, #141416)',
       }),
       keyframes: (theme) => ({
         'text-blink': {
@@ -252,7 +301,6 @@ module.exports = {
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
     }),
-
     plugin(({ matchUtilities, theme }) => {
       matchUtilities(
         {

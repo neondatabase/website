@@ -29,25 +29,36 @@
           slug: introduction/ip-allow
     - title: Regions
       slug: introduction/regions
-    - title: Billing
+    - title: Plans and billing
       slug: introduction/about-billing
       items:
         - title: Plans
           slug: introduction/plans
-        - title: How billing works
-          slug: introduction/how-billing-works
+        - title: Pricing estimation guide
+          slug: introduction/pricing-estimation-guide
+        - title: Extra usage
+          slug: introduction/extra-usage
         - title: Usage metrics
           slug: introduction/usage-metrics
+        - title: Sample project billing
+          slug: introduction/billing-sample
+        - title: Monitor billing and usage
+          slug: introduction/monitor-usage
         - title: Manage billing
           slug: introduction/manage-billing
-        - title: Sample billing
-          slug: introduction/billing-sample
+        - title: AWS Marketplace
+          slug: introduction/billing-aws-marketplace
     - title: Support
       slug: introduction/support
     - title: Status
       slug: introduction/status
     - title: Monitoring
       slug: introduction/monitoring
+      items:
+        - title: Monitoring dashboard
+          slug: introduction/monitoring-page
+        - title: External tools
+          slug: introduction/monitor-external-tools
 - title: Get started
   items:
     - title: Sign up
@@ -95,8 +106,10 @@
       slug: manage/databases
     - title: Integrations
       slug: manage/integrations
-    - title: Operations
+    - title: System operations
       slug: manage/operations
+    - title: Organizations
+      slug: manage/organizations
     - title: Access
       items:
         - title: Project access
@@ -123,16 +136,18 @@
         - title: Branching
           slug: guides/branching-intro
           items:
+            - title: Reset from parent
+              slug: guides/reset-from-parent
             - title: Branch Restore
               slug: guides/branch-restore
-            - title: Branching — Testing queries
-              slug: guides/branching-test-queries
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
             - title: Branching with the API
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
+            - title: Branching — Testing queries
+              slug: guides/branching-test-queries
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
         - title: Logical replication
@@ -140,6 +155,8 @@
           items:
             - title: Airbyte
               slug: guides/logical-replication-airbyte
+            - title: ClickHouse (DoubleCloud)
+              slug: guides/logical-replication-clickhouse
             - title: Fivetran
               slug: guides/logical-replication-fivetran
             - title: Kafka (Confluent)
@@ -158,6 +175,18 @@
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
               slug: guides/read-replica-prisma
+        - title: Time Travel
+          slug: guides/time-travel-assist
+          items:
+            - title: Time Travel tutorial
+              slug: guides/time-travel-tutorial
+        - title: Schema diff
+          slug: guides/schema-diff
+          items:
+            - title: Schema diff tutorial
+              slug: guides/schema-diff-tutorial
+        - title: Protected branches
+          slug: guides/protected-branches
     - title: Frameworks
       items:
         - title: Astro
@@ -189,8 +218,6 @@
           items:
             - title: Node.js
               slug: guides/node
-            - title: Prisma
-              slug: guides/prisma
         - title: PHP
           items:
             - title: Laravel
@@ -215,20 +242,28 @@
           slug: guides/grafbase
         - title: Hasura
           slug: guides/hasura
+        - title: Sequin
+          slug: guides/sequin
         - title: StepZen
           slug: guides/stepzen
         - title: WunderGraph
           slug: guides/wundergraph
     - title: Schema migration
       items:
+        - title: Django
+          slug: guides/django-migrations
         - title: Drizzle
           slug: guides/drizzle-migrations
+        - title: Entity Framework
+          slug: guides/entity-migrations
         - title: Flyway
           items:
             - title: Get started
               slug: guides/flyway
             - title: Manage multiple environments
               slug: guides/flyway-multiple-environments
+        - title: Laravel
+          slug: guides/laravel-migrations
         - title: Liquibase
           items:
             - title: Get started
@@ -237,8 +272,12 @@
               slug: guides/liquibase-workflow
         - title: Prisma
           slug: guides/prisma-migrations
+        - title: Rails
+          slug: guides/rails-migrations
         - title: Sequelize
           slug: guides/sequelize
+        - title: SQLAlchemy
+          slug: guides/sqlalchemy-migrations
     - title: Serverless
       items:
         - title: Neon serverless driver
@@ -249,9 +288,7 @@
       items:
         - title: Cloudflare Hyperdrive
           slug: guides/cloudflare-hyperdrive
-        - title: PolyScale integration
-          slug: guides/polyscale-integration
-        - title: PolyScale manual setup
+        - title: PolyScale
           slug: guides/polyscale
     - title: Deployment platforms
       items:
@@ -283,6 +320,24 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
+    - title: Authentication
+      items:
+        - title: Auth0
+          slug: guides/auth-auth0
+        - title: Clerk
+          slug: guides/auth-clerk
+        - title: Okta
+          slug: guides/auth-okta
+    - title: CI/CD
+      items:
+        - title: GitHub integration
+          slug: guides/neon-github-app
+    - title: Tools
+      items:
+        - title: Outerbase
+          slug: guides/outerbase
+        - title: Prisma
+          slug: guides/prisma
     - title: For Partners
       slug: guides/partner-intro
       items:
@@ -304,8 +359,12 @@
           slug: ai/ai-google-colab
 - title: Postgres
   items:
+    - title: Introduction
+      slug: postgres/postgres-intro
     - title: Data types
       items:
+        - title: Overview
+          slug: postgres/data-types-intro
         - title: Array
           slug: data-types/array
         - title: Boolean
@@ -339,6 +398,8 @@
           slug: extensions/neon-utils
         - title: pgvector
           slug: extensions/pgvector
+        - title: pg_partman
+          slug: extensions/pg_partman
         - title: pg_prewarm
           slug: extensions/pg_prewarm
         - title: pg_stat_statements
@@ -353,6 +414,8 @@
           slug: extensions/timescaledb
     - title: Functions
       items:
+        - title: Overview
+          slug: postgres/functions-intro
         - title: array_to_json
           slug: functions/array_to_json
         - title: dense_rank
@@ -387,6 +450,10 @@
           slug: functions/json_to_record
         - title: jsonb_to_record
           slug: functions/jsonb_to_record
+    - title: Optimize queries
+      slug: postgres/query-performance
+    - title: Query reference
+      slug: postgres/query-reference
     - title: Compatibility
       slug: reference/compatibility
 - title: Import data

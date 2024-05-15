@@ -86,7 +86,7 @@ const Hero = () => {
         className="container relative z-10 flex flex-col items-center text-center"
         size="medium"
       >
-        <h1 className="xs:flat-breaks text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl">
+        <h1 className="xs:flat-breaks font-title text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl">
           Powering next gen
           <br /> AI apps with Postgres
         </h1>

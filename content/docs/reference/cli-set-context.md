@@ -86,7 +86,7 @@ Set the context to the `context-file` of your choice:
 neonctl set-context --project-id plain-waterfall-84865553 --context-file Documents/MyContext
 ```
 
-List all branches using the `branches list` command. No need to specify the project since the context-file provides it.
+List all branches using the `branches list` command. No need to specify the project since the context file provides it.
 
 ```bash
 neonctl branches list --context-file Documents/MyContext
