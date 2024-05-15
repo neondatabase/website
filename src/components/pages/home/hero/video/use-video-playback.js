@@ -55,6 +55,7 @@ const useVideoPlayback = (
         video.currentTime = 0.1;
         setIsTitleVisible(true);
 
+        // TODO: this timeout needs to be cleared in case of clicking on the first video
         const timeoutId = setTimeout(() => {
           switchVideo();
         }, 5000);
