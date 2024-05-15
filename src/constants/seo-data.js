@@ -4,9 +4,9 @@ export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
 
 export default {
   index: {
-    title: 'Neon — Serverless, Fault-Tolerant, Branchable Postgres',
+    title: 'Neon — Ship faster with Postgres',
     description:
-      'Postgres made for developers. Easy to Use, Scalable, Cost efficient solution for your next project.',
+      'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
     pathname: '',
   },
   contactSales: {

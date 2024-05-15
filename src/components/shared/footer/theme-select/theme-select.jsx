@@ -84,7 +84,7 @@ const ThemeSelect = ({ className = null }) => {
     <div className={clsx('relative h-8 w-36', className)}>
       <div
         className={clsx(
-          'absolute bottom-0 w-36 items-center rounded border border-gray-new-90 bg-white text-sm leading-none transition-shadow duration-200 dark:border-gray-new-40 dark:bg-gray-new-8 md:bottom-auto md:top-0 md:flex md:flex-col-reverse',
+          'absolute bottom-0 w-36 items-center rounded border border-gray-new-90 bg-white text-sm leading-none transition-shadow duration-200 dark:border-gray-new-20 dark:bg-black-pure md:bottom-auto md:top-0 md:flex md:flex-col-reverse',
           showDropdown && 'shadow-select dark:shadow-none'
         )}
         ref={dropdownRef}
@@ -102,7 +102,7 @@ const ThemeSelect = ({ className = null }) => {
                 <m.li key={item} variants={itemVariants}>
                   <button
                     className={clsx(
-                      'flex w-full items-center py-[7px] pl-2.5 pr-3 transition-colors duration-200 hover:bg-gray-new-94 dark:hover:bg-gray-new-20',
+                      'flex w-full items-center py-[7px] pl-2.5 pr-3 transition-colors duration-200 hover:bg-gray-new-94 dark:hover:bg-gray-new-10',
                       index === 0 && 'rounded-t'
                     )}
                     type="button"

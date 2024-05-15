@@ -63,7 +63,10 @@ const TableHeading = ({
         dangerouslySetInnerHTML={{ __html: price }}
       />
       <Button
-        className="mt-[18px] h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-4 xl:h-9 xl:max-w-[200px] lg:w-[160px] sm:w-[150px] sm:max-w-none"
+        className={clsx(
+          'mt-[18px] h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-4 xl:h-9 xl:max-w-[200px] lg:w-[160px] sm:w-[150px] sm:max-w-none',
+          !isFeaturedPlan && 'bg-opacity-80'
+        )}
         size="xs"
         theme={isFeaturedPlan ? 'primary' : 'gray-15'}
         to={buttonUrl}
@@ -144,7 +147,7 @@ const Table = () => {
         className={clsx(
           'scrollbar-hidden relative flex w-full pt-3 lg:overflow-x-auto lg:pr-4',
           isHiddenItems &&
-            'after:absolute after:inset-x-0 after:bottom-0 after:h-1.5 after:bg-black-new'
+            'after:absolute after:inset-x-0 after:bottom-0 after:h-1.5 after:bg-black-pure'
         )}
       >
         {Object.keys(tableData.headings).map((key, i, arr) => {
@@ -156,7 +159,7 @@ const Table = () => {
               className={clsx(
                 'relative py-5 xl:py-4',
                 isLabelsColumn &&
-                  'z-30 flex-1 bg-black-new lg:sticky lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] sm:min-w-[160px]',
+                  'z-30 flex-1 bg-black-pure lg:sticky lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] sm:min-w-[160px]',
                 i === 1 && 'min-w-[200px] basis-[338px] xl:basis-[296px] lg:basis-[280px]',
                 i !== 1 && !isLabelsColumn && 'min-w-[220px] basis-[252px] xl:basis-[260px]'
               )}
