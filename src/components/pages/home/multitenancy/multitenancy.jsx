@@ -1,5 +1,7 @@
 import Container from 'components/shared/container';
+import Link from 'components/shared/link';
 import PauseableVideo from 'components/shared/pauseable-video';
+import LINKS from 'constants/links';
 
 const Multitenancy = () => (
   <section className="multitenancy safe-paddings mt-8 overflow-hidden xl:-mt-9 lg:-mt-7 md:-mt-2 sm:mt-0">
@@ -30,9 +32,15 @@ const Multitenancy = () => (
     >
       <p className="max-w-[608px] text-xl leading-snug tracking-extra-tight text-gray-new-50 xl:max-w-xl xl:text-lg lg:max-w-[480px] lg:text-base">
         Use the Neon API to deploy{` `}
-        <span className="font-medium text-white">database-per-tenant architectures</span>. Scale to
-        fleets of thousands of databases without touching a server. Rest easy knowing scale to zero
-        keeps costs low.
+        <Link
+          className="underline decoration-white/60 underline-offset-4 hover:decoration-primary-1/60"
+          to={LINKS.enterprise}
+          theme="white"
+        >
+          database-per-tenant architectures
+        </Link>
+        . Scale to fleets of thousands of databases without touching a server. Rest easy knowing
+        scale to zero keeps costs low.
       </p>
     </Container>
   </section>
