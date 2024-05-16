@@ -35,7 +35,7 @@ For a table showing the vCPU and memory per compute size and how to select the r
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current workload, eliminating the need for manual intervention.
 
-![Autoscaling control](/docs/guides/autoscaling_control.png)
+![Autoscaling control](/docs/get-started-with-neon/autoscaling_control.png)
 
 Typically, Autoscaling is most effective when your data (either your full dataset or your working set) can be fully cached in memory on the **minimum compute size** defined in your autoscaling configuration. The **maximum compute size** in your configuration can then be set to handle peak or above-normal demand.
 
@@ -48,7 +48,7 @@ To get started with Autoscaling, read:
 
 Neon's Autosuspend feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted on Neon's paid plans.
 
-![Autosuspend control](/docs/guides/autosuspend_control.png)
+![Autosuspend control](/docs/get-started-with-neon/autosuspend_control.png)
 
 For a busy production system that is always active, this setting may not matter much, as your compute will not remain idle long enough for autosuspension to occur. But if your application has any idle periods or inconsistent usage patterns, a proper setting can help minimize cost or optimize responsiveness. To learn more about configuring Autosuspend, [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
 
@@ -68,7 +68,7 @@ Neon retains a history of changes for all branches. This history enables point-i
 
 The history retention limit is 24 hours for Neon Free Tier users, 7 days for Launch plan users, and 30 days for Scale plan users. Before going into production, select a history retention period that suits your operational requirements. 
 
-![History retention setting](/docs/guides/history_retention_settings.png)
+![History retention setting](/docs/get-started-with-neon/history_retention_settings.png)
 
 A longer history retention period expands your point-in-time restore and time travel query horizons at the cost of increased storage usage.
 
@@ -78,7 +78,7 @@ For more, see [Branch reset and restore](/docs/introduction/point-in-time-restor
 
 Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) plan, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
 
-![IP allow setting settings](/docs/guides/ip_allow_settings.png)
+![IP allow setting settings](/docs/get-started-with-neon/ip_allow_settings.png)
 
 You can configure **IP Allow** in your Neon project's settings. To get started, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
