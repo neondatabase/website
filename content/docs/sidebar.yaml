@@ -3,7 +3,13 @@
 - title: Getting Started
   items:
     - title: Why Neon?
-      slug: introduction/about #new page combining what is neon and carlotta's
+      items:
+        - title: Our mission
+          slug: get-started-with-neon/why-neon
+        - title: Developer experience with Neon
+          slug: get-started-with-neon/dev-experience
+        - title: Production readiness with Neon
+          slug: get-started-with-neon/production-readiness
     - title: Day 1 - Playing with Neon # sign-up plus all the basics to start working with your new db from command line/ include sample db or link migrate
       slug: get-started-with-neon/signing-up
     - title: Day 2 - Add Neon to your stack
@@ -115,20 +121,18 @@
           slug: connect/connection-errors
         - title: Latency and timeouts
           slug: connect/connection-latency
-- title: Platform
+- title: Platform management
   items:
    # - title: Overview   # this object hiearchy page does not quite fit; refactor and put in architecture?
    #   slug: manage/overview
    # - title: API keys # should this go in API section? not first in the list anyway
    #   slug: manage/api-keys
-    - title: Accounts
+    - title: Access control
       items:
         - title: E-mail signup
           slug: manage/email-signup
         - title: Organizations
           slug: manage/organizations
-    - title: Access control # this should cover personal v org accounts; accounts should come before projects?
-      items:
         - title: Project access
           slug: manage/project-access
         - title: Project sharing
@@ -166,6 +170,70 @@
           slug: manage/roles
         - title: Databases
           slug: manage/databases
+    - title: Core features
+      items:
+        - title: Autoscaling
+          slug: introduction/autoscaling
+          items:
+            - title: Autoscaling guide
+              slug: guides/autoscaling-guide
+        - title: Autosuspend
+          slug: introduction/auto-suspend
+          items:
+            - title: Autosuspend guide
+              slug: guides/auto-suspend-guide
+        - title: Branching
+          slug: guides/branching-intro
+          items:
+            - title: About branching
+              slug: introduction/branching
+            - title: Branch reset and restore
+              slug: introduction/point-in-time-restore
+              items:
+                - title: Reset from parent
+                  slug: guides/reset-from-parent
+                - title: Branch Restore
+                  slug: guides/branch-restore
+            - title: Branching with the CLI
+              slug: guides/branching-neon-cli
+            - title: Branching with the API
+              slug: guides/branching-neon-api
+            - title: Branching with GitHub Actions
+              slug: guides/branching-github-actions
+            - title: Branching — Testing queries
+              slug: guides/branching-test-queries
+            - title: Promote a branch with the Neon API
+              slug: guides/branch-promote
+        - title: Logical replication
+          slug: introduction/logical-replication 
+          items:
+            - title: Concepts
+              slug: guides/logical-replication-concepts
+            - title: Manage
+              slug: guides/logical-replication-neon 
+        - title: Read replicas
+          slug: introduction/read-replicas
+          items:
+            - title: Working with read replicas
+              slug: guides/read-replica-guide
+            - title: Data analysis and reporting
+              slug: guides/read-replica-data-analysis
+            - title: Use read replicas with Prisma
+              slug: guides/read-replica-prisma
+        - title: Time Travel
+          slug: guides/time-travel-assist
+          items:
+            - title: Time Travel tutorial
+              slug: guides/time-travel-tutorial
+        - title: Schema diff
+          slug: guides/schema-diff
+          items:
+            - title: Schema diff tutorial
+              slug: guides/schema-diff-tutorial
+        - title: Protected branches
+          slug: guides/protected-branches
+        - title: IP Allow
+          slug: introduction/ip-allow
     - title: Monitoring
       slug: introduction/monitoring
       items:
@@ -207,65 +275,6 @@
   #        slug: guides/logical-replication-concepts
   #      - title: Manage
   #        slug: guides/logical-replication-neon
-- title: Features
-  items:
-    - title: Autoscaling
-      slug: introduction/autoscaling
-      items:
-        - title: Autoscaling guide
-          slug: guides/autoscaling-guide
-    - title: Autosuspend
-      slug: introduction/auto-suspend
-      items:
-        - title: Autosuspend guide
-          slug: guides/auto-suspend-guide
-    - title: Branching
-      slug: guides/branching-intro
-      items:
-         - title: About branching
-           slug: introduction/branching
-         - title: Branch reset and restore
-           slug: introduction/point-in-time-restore
-           items:
-            - title: Reset from parent
-              slug: guides/reset-from-parent
-            - title: Branch Restore
-              slug: guides/branch-restore
-         - title: Branching with the CLI
-           slug: guides/branching-neon-cli
-         - title: Branching with the API
-           slug: guides/branching-neon-api
-         - title: Branching with GitHub Actions
-           slug: guides/branching-github-actions
-         - title: Branching — Testing queries
-           slug: guides/branching-test-queries
-         - title: Promote a branch with the Neon API
-           slug: guides/branch-promote
-    - title: Logical replication
-      slug: introduction/logical-replication  
-    - title: Read replicas
-      slug: introduction/read-replicas
-      items:
-        - title: Working with read replicas
-          slug: guides/read-replica-guide
-        - title: Data analysis and reporting
-          slug: guides/read-replica-data-analysis
-        - title: Use read replicas with Prisma
-          slug: guides/read-replica-prisma
-    - title: Time Travel
-      slug: guides/time-travel-assist
-      items:
-        - title: Time Travel tutorial
-          slug: guides/time-travel-tutorial
-    - title: Schema diff
-      slug: guides/schema-diff
-      items:
-        - title: Schema diff tutorial
-          slug: guides/schema-diff-tutorial
-    - title: Protected branches
-      slug: guides/protected-branches
-    - title: IP Allow
-      slug: introduction/ip-allow
 - title: Integrations
   slug: manage/integrations
   items:
@@ -299,28 +308,28 @@
           slug: guides/railway
         - title: Render
           slug: guides/render
-        - title: Backend-as-a-service
-          items:
-            - title: Exograph
-              slug: guides/exograph
-            - title: FerretDB
-              slug: guides/ferretdb
-            - title: Grafbase
-              slug: guides/grafbase
-            - title: Hasura
-              slug: guides/hasura
-            - title: Sequin
-              slug: guides/sequin
-            - title: StepZen
-              slug: guides/stepzen
-            - title: WunderGraph
-              slug: guides/wundergraph
-        - title: Serverless
-          items:
-            - title: Neon serverless driver
-              slug: serverless/serverless-driver
-            - title: AWS Lambda
-              slug: guides/aws-lambda
+    - title: Serverless
+      items:
+        - title: Neon serverless driver
+          slug: serverless/serverless-driver
+        - title: AWS Lambda
+          slug: guides/aws-lambda
+    - title: Backend-as-a-service
+      items:
+        - title: Exograph
+          slug: guides/exograph
+        - title: FerretDB
+          slug: guides/ferretdb
+        - title: Grafbase
+          slug: guides/grafbase
+        - title: Hasura
+          slug: guides/hasura
+        - title: Sequin
+          slug: guides/sequin
+        - title: StepZen
+          slug: guides/stepzen
+        - title: WunderGraph
+          slug: guides/wundergraph
     - title: Caching
       items:
         - title: Cloudflare Hyperdrive
@@ -333,10 +342,6 @@
           slug: guides/neon-github-app
     - title: Replication
       items:
-        - title: Concepts
-          slug: guides/logical-replication-concepts
-        - title: Manage
-          slug: guides/logical-replication-neon
         - title: Airbyte
           slug: guides/logical-replication-airbyte
         - title: ClickHouse (DoubleCloud)
@@ -385,12 +390,6 @@
           slug: guides/outerbase
         - title: Prisma
           slug: guides/prisma
-    - title: Serverless
-      items:
-        - title: Neon serverless driver
-          slug: serverless/serverless-driver
-        - title: AWS Lambda
-          slug: guides/aws-lambda
     - title: Authentication
       items:
         - title: Auth0
@@ -507,35 +506,37 @@
       slug: postgres/query-reference
     - title: Compatibility
       slug: reference/compatibility
-- title: CLI Reference
-  slug: reference/neon-cli
+- title: Command line & SDKs
   items:
-    - title: Install and connect
-      slug: reference/cli-install
-    - title: auth
-      slug: reference/cli-auth
-    - title: me
-      slug: reference/cli-me
-    - title: projects
-      slug: reference/cli-projects
-    - title: ip-allow
-      slug: reference/cli-ip-allow
-    - title: branches
-      slug: reference/cli-branches
-    - title: databases
-      slug: reference/cli-databases
-    - title: roles
-      slug: reference/cli-roles
-    - title: operations
-      slug: reference/cli-operations
-    - title: connection-string
-      slug: reference/cli-connection-string
-    - title: set-context
-      slug: reference/cli-set-context
-    - title: completion
-      slug: reference/cli-completion
-- title: SDKs
-  slug: reference/sdk
+    - title: CLI Reference
+      slug: reference/neon-cli
+      items:
+        - title: Install and connect
+          slug: reference/cli-install
+        - title: auth
+          slug: reference/cli-auth
+        - title: me
+          slug: reference/cli-me
+        - title: projects
+          slug: reference/cli-projects
+        - title: ip-allow
+          slug: reference/cli-ip-allow
+        - title: branches
+          slug: reference/cli-branches
+        - title: databases
+          slug: reference/cli-databases
+        - title: roles
+          slug: reference/cli-roles
+        - title: operations
+          slug: reference/cli-operations
+        - title: connection-string
+          slug: reference/cli-connection-string
+        - title: set-context
+          slug: reference/cli-set-context
+        - title: completion
+          slug: reference/cli-completion
+    - title: SDKs
+      slug: reference/sdk
 - title: Partner guide
   slug: guides/partner-intro
   items:
