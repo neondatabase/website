@@ -17,7 +17,7 @@ To create a Neon project and access it from an Next.js application:
 - [Create access keys for IAM users (in AWS)](#create-access-keys-for-iam-users-in-aws)
 - [Create a new Next.js application](#create-a-new-nextjs-application)
 - [Create a Presigned URL with Amazon S3 SDK](#create-a-presigned-url-with-amazon-s3-sdk)
-- [Save Reference to S3 items in Postgres](#save-reference-to-s3-items-in-postgres)
+- [Save Reference to S3 objects in Postgres](#save-reference-to-s3-objects-in-postgres)
 - [Upload to Presigned URL with in-browser JavaScript](#upload-to-presigned-url-with-in-browser-javascript)
 - [Run the app](#run-the-app)
 
@@ -171,7 +171,14 @@ Mow, let's move on to creating an API route to obtain a presigned URL to upload 
 
 ## Create a Presigned URL with Amazon S3 SDK
 
-Presigned URLs allow you to upload large chunks of data directly at the source (here, `Amazon S3`). instead of processing 
+[Presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) allow you to upload large chunks of data directly at the source (here, `Amazon S3`).
+
+This saves you from the following caveats of a server-based upload operation:
+
+- maximum request payload restrictions (on a hosting service, especially in serverless)
+- huge RAM required to process multiple large file buffers at the same time
+
+You will create an API endpoint that would accept the file name and it's content type that will be uploaded via a presigned URL. In Next.js, you can create an API endpoint by creating a `route.ts` file at any directory level inside the `app` directory. To use `/api/presigned` as the desired API route, create a file `app/api/presigned/route.ts` with the following code:
 
 ```tsx
 // File: app/api/presigned/route.ts
@@ -194,7 +201,9 @@ export async function GET(request: NextRequest) {
 }
 ```
 
-TODO
+The code above defines a `GET` handler that validates the presence of all the environment variables required, and the file name and it's content type.
+
+Next, append the following code to return a JSON from the endpoint containing the presigned URL as `signedUrl`:
 
 ```tsx {4,5,20-34}
 // File: app/api/presigned/route.ts
@@ -234,11 +243,13 @@ export async function GET(request: NextRequest) {
 }
 ```
 
-Now, let's move on to building an endpoint to insert the reference to the uploaded asset in Postgres (powered by Neon).
+The code above creates a S3 client using the `@aws-sdk/client-s3` SDK. Then, it uses the `getSignedUrl` utility (from `@aws-sdk/s3-request-presigner`) to sign the URL.
 
-## Save Reference to S3 items in Postgres
+Now, let's move on to building an endpoint to insert the reference to the uploaded object in Postgres (powered by Neon).
 
-TODO
+## Save Reference to S3 objects in Postgres
+
+You will create an API endpoint that would accept the URL to the object publicly accessible. In this example, you are going to learn how to create a table in Postgres, and associate the object URL with a user, for demonstration purposes. To use `/api/user/image` as the desired API route, create a file `app/api/user/image/route.ts` with the following code:
 
 <CodeTabs labels={["node-postgres", "Neon serverless driver"]}>
 
@@ -305,9 +316,17 @@ TODO
   ```
 </CodeTabs>
 
+The code above defines a POST endpoint, which first, validates the presence of `DATABASE_URL` environment variable. Further, it creates a table named `user` if it does not exist, and inserts the record for a user named `rishi` with the object URL.
+
+Now, let's move on to learning how to call these APIs programtically in the front-end built with React.
+
 ## Upload to Presigned URL with in-browser JavaScript
 
-TODO
+With the API routes defined, the flow to upload the objects and save references to it in the database, is in three steps:
+
+### 1. Accept a file from the user
+
+Using the HTML `<input />` element, accept a file from the user to be uploaded to S3. Attach a listener to change in the file attached to upload programtically.
 
 ```tsx
 // File: app/page.tsx
@@ -333,7 +352,9 @@ export default function Home() {
 }
 ```
 
-TODO
+### 2. Fetch the Presigned URL using the file name and type
+
+Perform a GET call to `/api/presigned` API route with the file name and type as the query params. Obtain the presigned URL, and then upload the file as a Blob to it.
 
 ```tsx {15-28}
 // File: app/page.tsx
@@ -372,7 +393,9 @@ export default function Home() {
 }
 ```
 
-TODO
+### 3. Insert the reference to the object in the Postgres
+
+Perform a `POST` to the `/api/user/image` route, with the presigned URL configured to **not contain the query parameters**. The stripped URL is an absolute reference to the publicly available object uploaded.
 
 ```tsx {26-32}
 // File: app/page.tsx
