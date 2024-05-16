@@ -98,7 +98,7 @@ For query performance and statistics in Postgres, we also recommend installing t
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-The statistics gathered by this extension requires little overhead and lets you quickly look up stats like:
+The statistics gathered by this extension require little overhead and let you quickly access metrics like:
 
 - [Most frequently executed queries](/docs/postgresql/query-performance#most-frequently-executed-queries)
 - [Longest running queries](/docs/postgresql/query-performance#long-running-queries)
