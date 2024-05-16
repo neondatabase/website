@@ -1,6 +1,6 @@
 ---
 title: Ready for production
-subtitle: Explore the features that will help you prepare for production with Neon
+subtitle: Explore Neon features that help you prepare your application for production
 enableTableOfContents: true
 ---
 
