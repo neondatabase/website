@@ -11,28 +11,8 @@ Many factors can impact query performance in Postgres, ranging from insufficient
 Strategies are organized under the following categories:
 
 - [Query analysis and optimization](#query-analysis-and-optimization)
-  - [Gather statistics](#gather-statistics)
-    - [Most frequently executed queries](#most-frequently-executed-queries)
-    - [Long-running queries](#long-running-queries)
-    - [Queries that return the most rows](#queries-that-return-the-most-rows)
-  - [Use EXPLAIN](#use-explain)
-    - [Interpreting EXPLAIN output](#interpreting-explain-output)
 - [Query and database design](#query-and-database-design)
-  - [Use indexes](#use-indexes)
-    - [View table indexes](#view-table-indexes)
-    - [Check for missing indexes](#check-for-missing-indexes)
-  - [Use efficient data types](#use-efficient-data-types)
-  - [Use prepared statements](#use-prepared-statements)
-  - [Limit your result sets](#limit-your-result-sets)
 - [Resource and configuration optimization](#resource-and-configuration-optimization)
-  - [Right-size your compute](#right-size-your-compute)
-  - [Cache your data](#cache-your-data)
-  - [Use connection pooling](#use-connection-pooling)
-  - [Check for table or index bloat](#check-for-table-or-index-bloat)
-    - [Table bloat](#table-bloat)
-    - [Index bloat](#index-bloat)
-    - [Checking for bloat](#checking-for-bloat)
-    - [Reducing bloat](#reducing-bloat)
 
 ## Query analysis and optimization
 
