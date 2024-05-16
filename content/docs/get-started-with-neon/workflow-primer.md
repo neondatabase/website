@@ -1,10 +1,10 @@
 ---
-title: Database workflow primer
-subtitle: An introduction to integrating Postgres into your development workflow
+title: Database branching workflow primer
+subtitle: An introduction to integrating Postgres branching into your development workflow
 enableTableOfContents: true
 ---
 
-With Neon, you can work with your data just like you work with your code. The key is Neon's database branching feature, which lets you instantly create branches of your data that you can include in your workflow, as many branches as you need.
+With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow, as many branches as you need.
 
 Neon branches are:
 
@@ -15,7 +15,7 @@ Neon branches are:
 
 Every Neon branch has a unique Postgres connection string, so they're completely isolated from one another.
 
-```bash shouldWrap
+```bash
 # Branch 1
 postgres://database_name_owner:AbC123dEf@ep-shiny-cell-a5y2zuu0.us-east-2.aws.neon.tech/dbname
 
@@ -33,9 +33,7 @@ You can use either the Neon CLI or GitHub actions to incorporate branching into 
 
 ### Neon CLI
 
-Using the [Neon CLI](https://neon.tech/docs/reference/neon-cli) you can create branches without leaving your editor or automate branch creation in your CI/CD pipeline.
-
-...this could move to Day 1...
+Using the [Neon CLI](https://neon.tech/docs/reference/neon-cli), you can create branches without leaving your editor or automate branch creation in your CI/CD pipeline.
 
 And here are the key CLI actions you can use:
 
@@ -70,7 +68,7 @@ If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actio
 
 Here is an example of what a create branch action might look like:
 
-```bash
+```yaml
 name: Create Neon Branch with GitHub Actions Demo
 run-name: Create a Neon Branch 🚀
 jobs:
@@ -140,7 +138,7 @@ To easily identify branches dedicated to development, we recommend prefixing the
 
 </Admonition>
 
-### Preview Environments
+### Preview environments
 
 Whenever you create a pull request, you can create a Neon branch for your preview deployment. This allows you to test your code changes and SQL migrations against production-like data.
 
@@ -189,19 +187,3 @@ test/feat/new-login-loginPageFunctionality-1a2b3c4d-20240211T1530
 </Admonition>
 
 You can create test branches from the same date and time or Log Sequence Number (LSN) for tests requiring static or deterministic data.
-
-### Production
-
-When it comes to production, Neon offers features that can help tuning your deployment, recovering lost or corrupted data, or scaling your workloads.
-
-#### Tune your system with [Autoscaling](/docs/guides/autoscaling-guide)
-
-Configure your minimum and maximum compute size for Neon autoscaling (available on our paid plans). For Free tier users, the default compute size is 1 shared vCPU with 1 GB of RAM per branch.
-
-#### Data recovery with [Branch restore](/docs/guides/branch-restore)
-
-Neon retains a history of changes for all branches. Change the 1-day default [here](docs/manage/projects#configure-history-retention). You can use Branch Restore to instantly restore your branch to a previous state.
-
-#### Offload workloads with [read replicas](/docs/guides/read-replica-guide)
-
-Offload your large read operations to dedicated computes or safeguard your data by creating as many read-only replicas as you need, without incurring additional costs.

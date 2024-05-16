@@ -13,11 +13,11 @@ Neon is a fully managed serverless Postgres with a [generous free tier](https://
 
 <a href="/docs/get-started-with-neon/signing-up" description="Sign up for free and learn the basics of database branching with Neon" icon="enable">Day 1 - Playing with Neon</a>
 
-<a href="/docs/get-started-with-neon/tech-stack" description="Connect Neon to the platform, language, ORM and other tools in your tech stack" icon="queries">Day 2 - Connect Neon to your stack</a>
+<a href="/docs/get-started-with-neon/connect-neon" description="Connect Neon to the platform, language, ORM and other tools in your tech stack" icon="queries">Day 2 - Connect Neon to your stack</a>
 
 <a href="/docs/get-started-with-neon/workflow-primer" description="Add branching to your CI/CD automation" icon="setup">Day 3 - Branching workflows</a>
 
-<a href="/docs/get-started-with-neon/production" description="Key features to get you production ready" icon="cli">Day 4 - Ready for production</a>
+<a href="/docs/get-started-with-neon/production-checklist" description="Key features to get you production ready" icon="cli">Day 4 - Get ready for production</a>
 
 </DetailIconCards>
 

@@ -12,12 +12,12 @@
           slug: get-started-with-neon/production-readiness
     - title: Day 1 - Playing with Neon # sign-up plus all the basics to start working with your new db from command line/ include sample db or link migrate
       slug: get-started-with-neon/signing-up
-    - title: Day 2 - Add Neon to your stack
-      slug: get-started-with-neon/tech-stack
-    - title: Day 3 - CI/CD Automation
+    - title: Day 2 - Connect Neon to your stack
+      slug: get-started-with-neon/connect-neon
+    - title: Day 3 - Branching workflows
       slug: get-started-with-neon/workflow-primer 
-    - title: Day 4 - Production checklist # or production checklist
-      slug: getting_started/production
+    - title: Day 4 - Getting ready for production # or production checklist
+      slug: get-started-with-neon/production-checklist
     - title: Framework quickstarts # too on-the-nose cribbing from sb?
       # slug: getting_started/frameworks # a new landing page dedicated to frameworks
       items:
@@ -105,8 +105,6 @@
           slug: connect/connect-securely
     - title: Connect
       items:
-        - title: Connect from any application
-          slug: connect/connect-from-any-app
         - title: Connect a GUI application
           slug: connect/connect-postgres-gui
         - title: Connect with psql
@@ -170,70 +168,6 @@
           slug: manage/roles
         - title: Databases
           slug: manage/databases
-    - title: Core features
-      items:
-        - title: Autoscaling
-          slug: introduction/autoscaling
-          items:
-            - title: Autoscaling guide
-              slug: guides/autoscaling-guide
-        - title: Autosuspend
-          slug: introduction/auto-suspend
-          items:
-            - title: Autosuspend guide
-              slug: guides/auto-suspend-guide
-        - title: Branching
-          slug: guides/branching-intro
-          items:
-            - title: About branching
-              slug: introduction/branching
-            - title: Branch reset and restore
-              slug: introduction/point-in-time-restore
-              items:
-                - title: Reset from parent
-                  slug: guides/reset-from-parent
-                - title: Branch Restore
-                  slug: guides/branch-restore
-            - title: Branching with the CLI
-              slug: guides/branching-neon-cli
-            - title: Branching with the API
-              slug: guides/branching-neon-api
-            - title: Branching with GitHub Actions
-              slug: guides/branching-github-actions
-            - title: Branching — Testing queries
-              slug: guides/branching-test-queries
-            - title: Promote a branch with the Neon API
-              slug: guides/branch-promote
-        - title: Logical replication
-          slug: introduction/logical-replication 
-          items:
-            - title: Concepts
-              slug: guides/logical-replication-concepts
-            - title: Manage
-              slug: guides/logical-replication-neon 
-        - title: Read replicas
-          slug: introduction/read-replicas
-          items:
-            - title: Working with read replicas
-              slug: guides/read-replica-guide
-            - title: Data analysis and reporting
-              slug: guides/read-replica-data-analysis
-            - title: Use read replicas with Prisma
-              slug: guides/read-replica-prisma
-        - title: Time Travel
-          slug: guides/time-travel-assist
-          items:
-            - title: Time Travel tutorial
-              slug: guides/time-travel-tutorial
-        - title: Schema diff
-          slug: guides/schema-diff
-          items:
-            - title: Schema diff tutorial
-              slug: guides/schema-diff-tutorial
-        - title: Protected branches
-          slug: guides/protected-branches
-        - title: IP Allow
-          slug: introduction/ip-allow
     - title: Monitoring
       slug: introduction/monitoring
       items:
@@ -275,6 +209,70 @@
   #        slug: guides/logical-replication-concepts
   #      - title: Manage
   #        slug: guides/logical-replication-neon
+- title: Neon features
+  items:
+    - title: Autoscaling
+      slug: introduction/autoscaling
+      items:
+        - title: Autoscaling guide
+          slug: guides/autoscaling-guide
+    - title: Autosuspend
+      slug: introduction/auto-suspend
+      items:
+        - title: Autosuspend guide
+          slug: guides/auto-suspend-guide
+    - title: Branching
+      slug: guides/branching-intro
+      items:
+        - title: About branching
+          slug: introduction/branching
+        - title: Branch reset and restore
+          slug: introduction/point-in-time-restore
+          items:
+            - title: Reset from parent
+              slug: guides/reset-from-parent
+            - title: Branch Restore
+              slug: guides/branch-restore
+        - title: Branching with the CLI
+          slug: guides/branching-neon-cli
+        - title: Branching with the API
+          slug: guides/branching-neon-api
+        - title: Branching with GitHub Actions
+          slug: guides/branching-github-actions
+        - title: Branching — Testing queries
+          slug: guides/branching-test-queries
+        - title: Promote a branch with the Neon API
+          slug: guides/branch-promote
+    - title: Logical replication
+      slug: introduction/logical-replication 
+      items:
+        - title: Concepts
+          slug: guides/logical-replication-concepts
+        - title: Manage
+          slug: guides/logical-replication-neon 
+    - title: Read replicas
+      slug: introduction/read-replicas
+      items:
+        - title: Working with read replicas
+          slug: guides/read-replica-guide
+        - title: Data analysis and reporting
+          slug: guides/read-replica-data-analysis
+        - title: Use read replicas with Prisma
+          slug: guides/read-replica-prisma
+    - title: Time Travel
+      slug: guides/time-travel-assist
+      items:
+        - title: Time Travel tutorial
+          slug: guides/time-travel-tutorial
+    - title: Schema diff
+      slug: guides/schema-diff
+      items:
+        - title: Schema diff tutorial
+          slug: guides/schema-diff-tutorial
+    - title: Protected branches
+      slug: guides/protected-branches
+    - title: IP Allow
+      slug: introduction/ip-allow
 - title: Integrations
   slug: manage/integrations
   items:
