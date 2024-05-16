@@ -68,7 +68,7 @@ Neon retains a history of changes for all branches. This history enables point-i
 
 The history retention limit is 24 hours for Neon Free Tier users, 7 days for Launch plan users, and 30 days for Scale plan users. Before going into production, select a history retention period that suits your operational requirements. 
 
-![History retention setting](/docs/get-started-with-neon/history_retention_settings.png)
+![History retention setting](/docs/get-started-with-neon/history_retention_setting.png)
 
 A longer history retention period expands your point-in-time restore and time travel query horizons at the cost of increased storage usage.
 
