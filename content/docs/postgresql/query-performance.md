@@ -207,7 +207,7 @@ There are numerous other resources you can draw upon to learn more about leverag
 <Admonition type="tip" title="Tips">
 - The Neon SQL Editor provides a visual `EXPLAIN` and `ANALYZE` capability, providing query plans in a visual form. See [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 - You can run the `ANALYZE` command on your database to updates statistics. This helps Postgres produce better query plans. The Postgres `autovacuum` process, which is enabled in Neon, automatically issues the `ANALYZE` command whenever the content of a table has changed sufficiently, but if you're working with large tables, this may not happen as often as expected. For a query that shows when vacuum or autovacuum
- was last run, see [VACUUM and ANALYZE statistics](/docs/postgres/query-reference#vacuum-and-analyze-statistics).
+ was last run, see [VACUUM and ANALYZE statistics](/docs/postgresql/query-reference#vacuum-and-analyze-statistics).
 </Admonition> 
 
 ## Query and database design
@@ -309,7 +309,7 @@ ALTER TABLE users ALTER COLUMN age TYPE SMALLINT;
 
 This change decreases the memory footprint for storing `age` data, potentially improving the performance of queries that operate on that data.
 
-For an overview of common Postgres data types, refer to our [data types](/docs/postgres/data-types-intro) guide.
+For an overview of common Postgres data types, refer to our [data types](/docs/data-types/introduction) guide.
 
 
 

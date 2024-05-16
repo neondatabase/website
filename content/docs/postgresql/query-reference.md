@@ -681,7 +681,7 @@ ORDER BY calls DESC
 LIMIT 100;
 ```
 
-For more information and examples, refer to our [pg_stat_statements extension guide](/docs/extensions/pg_stat_statements), or [Gathering statistics](/docs/postgres/query-performance#gather-statistics) in our query optimization guide.
+For more information and examples, refer to our [pg_stat_statements extension guide](/docs/extensions/pg_stat_statements), or [Gathering statistics](/docs/postgresql/query-performance#gather-statistics) in our query optimization guide.
 
 ### Use EXPLAIN
 
@@ -697,7 +697,7 @@ Using `EXPLAIN ANALYZE` is a step further than `EXPLAIN`, as it executes the que
 EXPLAIN ANALYZE SELECT * FROM employees WHERE department_id = 1;
 ```
 
-For more information, refer to the [EXPLAIN](/docs/postgres/query-performance#use-explain) section in our query optimization guide.
+For more information, refer to the [EXPLAIN](/docs/postgresql/query-performance#use-explain) section in our query optimization guide.
 
 ### Index metrics 
 
@@ -713,7 +713,7 @@ The query returns the number of sequential scans for all user-defined tables, in
 SELECT relname, seq_scan FROM pg_stat_user_tables;
 ```
 
-For related information and more queries, see [Use indexes](/docs/postgres/query-performance#use-indexes) in our query optimization guide.
+For related information and more queries, see [Use indexes](/docs/postgresql/query-performance#use-indexes) in our query optimization guide.
 
 ### Read metrics
 
@@ -806,7 +806,7 @@ ORDER BY seq_scan DESC;
 
 This `pg_stat_user_tables` query helps identify tables where sequential scans are more common than index scans, indicating potential areas for performance improvement through better indexing. The `pg_stat_user_tables` view is part of the Postgres [Cumulative Statistics System](https://www.postgresql.org/docs/current/monitoring-stats.html).
 
-Also, see the [Use indexes](/docs/postgres/query-performance#use-indexes) section in our query optimization guide.
+Also, see the [Use indexes](/docs/postgresql/query-performance#use-indexes) section in our query optimization guide.
 
 ### Table access statistics
 
@@ -837,7 +837,7 @@ SELECT relname, n_dead_tup FROM pg_stat_user_tables;
 
 ### Dead row percentage
 
-This query calculates the percentage of dead rows compared to the total number of rows (alive and dead) in each user table within a Postgres database, helping identify potential table bloat and optimization opportunities. For related information, see [Check for table or index bloat](/docs/postgres/query-performance#check-for-table-or-index-bloat).
+This query calculates the percentage of dead rows compared to the total number of rows (alive and dead) in each user table within a Postgres database, helping identify potential table bloat and optimization opportunities. For related information, see [Check for table or index bloat](/docs/postgresql/query-performance#check-for-table-or-index-bloat).
 
 ```sql
 SELECT 
