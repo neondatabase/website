@@ -1,13 +1,13 @@
 ---
-title: Uploading Objects to AWS S3 and Saving References in Postgres in Next.js
-subtitle: Learn how to upload objects to AWS S3 and save reference to them in Postgres (powered by Neon) in Next.js
+title: Uploading Objects to Amazon S3 and Saving References in Postgres in Next.js
+subtitle: Learn how to upload objects to Amazon S3 and save reference to them in Postgres (powered by Neon) in Next.js
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-05-16T00:00:00.000Z'
 updatedOn: '2024-05-16T00:00:00.000Z'
 ---
 
-In this guide, you will learn the the process of creating a simple web application using Next.js that allows you to upload objects into AWS S3, and insert the reference to them in Postgres (powered by Neon) via `pg` and `@neondatabase/serverless`.
+In this guide, you will learn the the process of creating a simple web application using Next.js that allows you to upload objects to Amazon S3, and insert the reference to them in Postgres (powered by Neon) via `pg` and `@neondatabase/serverless`.
 
 To create a Neon project and access it from an Next.js application:
 
@@ -16,7 +16,7 @@ To create a Neon project and access it from an Next.js application:
 - [Create an Amazon S3 Bucket](#create-an-amazon-s3-bucket)
 - [Create access keys for IAM users (in AWS)](#create-access-keys-for-iam-users-in-aws)
 - [Create a new Next.js application](#create-a-new-nextjs-application)
-- [Create a Presigned URL with AWS S3 SDK](#create-a-presigned-url-with-aws-s3-sdk)
+- [Create a Presigned URL with Amazon S3 SDK](#create-a-presigned-url-with-amazon-s3-sdk)
 - [Save Reference to S3 items in Postgres](#save-reference-to-s3-items-in-postgres)
 - [Upload to Presigned URL with in-browser JavaScript](#upload-to-presigned-url-with-in-browser-javascript)
 - [Run the app](#run-the-app)
@@ -169,9 +169,9 @@ DATABASE_URL="postgresql://neondb_owner:...@...-pooler.us-east-2.aws.neon.tech/n
 
 Mow, let's move on to creating an API route to obtain a presigned URL to upload objects to.
 
-## Create a Presigned URL with AWS S3 SDK
+## Create a Presigned URL with Amazon S3 SDK
 
-TODO
+Presigned URLs allow you to upload large chunks of data directly at the source (here, `Amazon S3`). instead of processing 
 
 ```tsx
 // File: app/api/presigned/route.ts
