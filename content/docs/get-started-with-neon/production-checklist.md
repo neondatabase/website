@@ -37,7 +37,7 @@ enableTableOfContents: true
 
 In a development environment, your application may function perfectly with a small compute size, but before your application goes live, make sure that your database has enough vCPU and memory to handle the expected load.
 
-In Neon, your compute size determines the amount of vCPU and memory your database has to work with. Neon supports computes up to 8 Compute Units (CUs) in size. Larger computes provide more memory. The compute sizes that are available to you depend on your [Neon plan](/docs/get-started-with-neon/plans): 
+In Neon, your compute size determines the amount of vCPU and memory your database has to work with. Neon supports computes up to 8 Compute Units (CUs) in size. Larger computes provide more memory. The compute sizes that are available to you depend on your [Neon plan](/docs/introduction/plans): 
 
 - **Free Tier**: 0.25 CUs (0.25 vCPU, 1 GB RAM)
 - **Launch**: Up to 4 CUs (4 vCPU, 16 GB RAM)
@@ -77,7 +77,7 @@ The Postgres `max_connections` setting defines your basic maximum simultaneous c
 postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-The `-poolerS` flag directs connections to a connection pooling port at the Neon proxy. Unless you have a specific reason to avoid connection pooling, we recommend using it in production. You can copy a pooled connection string for your database from the **Connection Details** widget on your project's **Dashboard** in the Neon Console. Select the **Pooled connection** option. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+The `-pooler` flag directs connections to a connection pooling port at the Neon proxy. Unless you have a specific reason to avoid connection pooling, we recommend using it in production. You can copy a pooled connection string for your database from the **Connectin Details** widget on your project's **Dashboard** in the Neon Console. Select the **Pooled connection** option. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
 ## Configure your history retention period
 
@@ -93,7 +93,7 @@ For more, see [Branch reset and restore](/docs/introduction/point-in-time-restor
 
 ## Configure IP Allow
 
-Neon's IP Allow feature, available with the Neon [Scale](/docs/get-started-with-neon/plans#scale) plan, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
+Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) plan, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
 
 ![IP allow setting settings](/docs/get-started-with-neon/ip_allow_settings.png)
 
@@ -115,13 +115,13 @@ For query performance and statistics in Postgres, we also recommend installing t
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-The statistics gathered by this extension requires little overhead and lets you quickly look up stats like:
+The statistics gathered by this extension require little overhead and let you quickly access metrics like:
 
 - [Most frequently executed queries](/docs/postgresql/query-performance#most-frequently-executed-queries)
 - [Longest running queries](/docs/postgresql/query-performance#long-running-queries)
 - [Queries that return the most rows](/docs/postgresql/query-performance#queries-that-return-the-most-rows)
 
-To learn more about monitoring resources and metrics in Neon, check out our [Monitoring](/docs/get-started-with-neon/monitoring) page.
+To learn more about monitoring resources and metrics in Neon, check out our [Monitoring](/docs/introduction/monitoring) page.
 
 ## Create staging or test branches
 
