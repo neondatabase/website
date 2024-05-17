@@ -67,7 +67,7 @@ The steps should be self-explanatory, but it's important to understand a few key
 
   Once you complete the onboarding, you are presented with the project **Quickstart**. You can use this interactive quickstart to learn the basics &#8212; or follow along with this tutorial for a deeper explanation. You can open the **Quickstart** anytime from the project sidebar.
 
-At this point, if you want to just get started connecting Neon to your toolchain, go to [Day 2 - Connecting Neon to your tools](/docs/get-started-with-neon/tech-stack). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
+At this point, if you want to just get started connecting Neon to your toolchain, go to [Day 2 - Connecting Neon to your tools](/docs/get-started-with-neon/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
 
 ## Step 3 - Add sample data
 
@@ -246,7 +246,7 @@ From the **Branches** page in the Neon Console:
 
 ### Schema Migrations
 
-A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools,  you can use ORMs like [Prisma](https://www.prisma.io/) or [Drizzle](https://drizzle.team/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Add Neon to your stack](/docs/getting_started/tech-stack).
+A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools,  you can use ORMs like [Prisma](https://www.prisma.io/) or [Drizzle](https://drizzle.team/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/getting_started/connect-neon).
 
 ## Step 7 - Reset your dev branch to main
 

@@ -44,11 +44,11 @@ In Neon, your compute size determines the amount of vCPU and memory your databas
 - **Scale**: Up to 8 CUs (8 vCPU, 32 GB RAM)
 - **Enterprise**: Larger sizes
 
-You should start with a compute size that can hold your data or at least your most frequently accessed data (your [working set](/docs/reference/glossary#working-set)) in memory. If you are using Neon's _Autoscaling_ feature, we recommend the same for your **minimum compute size** setting (see [Enable Autoscaling](#enable-autoscaling)).
+You should start with a compute size that can hold your data or at least your most frequently accessed data (your [working set](/docs/reference/glossary#working-set)) in memory. If you are using Neon's _Autoscaling_ feature, we recommend the same for your **minimum compute size** setting (see [Configure Autoscaling](#configure-autoscaling)).
 
 For a table showing the vCPU and memory per compute size and how to select the right compute size, see [How to size your compute](docs/manage/endpoints#how-to-size-your-compute). 
 
-## Enable Autoscaling
+## Configure Autoscaling
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current workload, eliminating the need for manual intervention.
 
@@ -59,7 +59,7 @@ Typically, Autoscaling is most effective when your data (either your full datase
 To get started with Autoscaling, read:
 
 - [Enable Autoscaling in Neon](/docs/guides/autoscaling-guide)
-- [How to size your compute](docs/manage/endpoints#how-to-size-your-compute), including the [Autoscaling considerations](/docs/manage/endpoints#autoscaling-considerations) section.
+- [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute), including the [Autoscaling considerations](/docs/manage/endpoints#autoscaling-considerations) section.
 
 ## Configure Autosuspend
 
