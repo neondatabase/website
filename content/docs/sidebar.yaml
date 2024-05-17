@@ -192,6 +192,7 @@
     - title: Status
       slug: introduction/status
 - title: Neon features
+  slug: guides/neon-features
   items:
     - title: Autoscaling
       slug: introduction/autoscaling
@@ -251,10 +252,11 @@
       items:
         - title: Schema diff tutorial
           slug: guides/schema-diff-tutorial
-    - title: Protected branches
-      slug: guides/protected-branches
     - title: IP Allow
       slug: introduction/ip-allow
+    - title: Protected branches
+      slug: guides/protected-branches
+
 - title: Integration guides
   slug: guides/integrations
   items:
