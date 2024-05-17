@@ -95,20 +95,16 @@
 - title: Connect
   slug: connect/connect-intro
   items:
-    - title: Auth
-      items:
-        - title: Passwordless auth
-          slug: connect/passwordless-connect
-        - title: Connect securely
-          slug: connect/connect-securely
-    - title: Connect
-      items:
-        - title: Connect a GUI application
-          slug: connect/connect-postgres-gui
-        - title: Connect with psql
-          slug: connect/query-with-psql-editor
-        - title: Connect with pgcli
-          slug: connect/connect-pgcli
+    - title: Passwordless auth
+      slug: connect/passwordless-connect
+    - title: Connect securely
+      slug: connect/connect-securely
+    - title: Connect a GUI application
+      slug: connect/connect-postgres-gui
+    - title: Connect with psql
+      slug: connect/query-with-psql-editor
+    - title: Connect with pgcli
+      slug: connect/connect-pgcli
     - title: Connection pooling
       slug: connect/connection-pooling
     - title: Connection issues
