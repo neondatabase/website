@@ -270,6 +270,7 @@
     - title: IP Allow
       slug: introduction/ip-allow
 - title: Integration guides
+  slug: guides/guides-intro
   items:
     - title: Deployment
       items:
