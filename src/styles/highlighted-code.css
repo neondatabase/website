@@ -98,7 +98,7 @@
       content: counter(line);
 
       /* Other styling */
-      @apply mr-5 inline-block text-right text-gray-new-50;
+      @apply mr-5 inline-block w-4 text-right text-gray-new-50;
     }
   }
 
