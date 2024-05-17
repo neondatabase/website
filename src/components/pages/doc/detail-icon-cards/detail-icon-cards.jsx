@@ -154,10 +154,10 @@ const icons = {
 const DetailIconCards = ({ children = null, withBorderWrapper = false }) => (
   <ul
     className={clsx(
-      'not-prose !my-10 grid grid-cols-2 sm:grid-cols-1',
+      'not-prose grid grid-cols-2 sm:grid-cols-1',
       withBorderWrapper
-        ? 'relative gap-6 rounded-[10px] border border-gray-new-94 !p-6 duration-200 dark:border-gray-new-20 sm:!p-3'
-        : 'gap-5 !p-0'
+        ? 'relative !mb-10 !mt-6 gap-6 rounded-[10px] border border-gray-new-94 bg-white !p-6 duration-200 dark:border-gray-new-15 dark:bg-[#0A0A0A] sm:!p-3'
+        : '!my-10 gap-5 !p-0'
     )}
   >
     {React.Children.map(children, (child, index) => {
@@ -171,19 +171,27 @@ const DetailIconCards = ({ children = null, withBorderWrapper = false }) => (
               'relative flex w-full items-start',
               withBorderWrapper
                 ? 'group gap-x-3'
-                : 'gap-x-3.5 rounded-[10px] border border-gray-new-94 px-6 py-5 transition-colors duration-200 before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA_0%,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200 hover:border-gray-new-80 hover:before:opacity-100 dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8)_0%,rgba(36,38,40,0)_100%)] dark:hover:border-gray-new-30 sm:p-3'
+                : 'gap-x-3.5 rounded-[10px] border border-gray-new-94 px-6 py-5 transition-colors duration-200 before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200 hover:border-gray-new-80 hover:before:opacity-100 dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30 sm:p-3'
             )}
             to={href}
           >
             <div
               className={clsx(
-                'relative z-10 shrink-0 ',
+                'relative z-10 shrink-0',
                 withBorderWrapper
-                  ? 'h-6 w-6 rounded border border-gray-new-94 bg-[linear-gradient(180deg,#FFF,#FAFAFA)] p-[5px] dark:border-white/10 dark:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]'
+                  ? 'h-6 w-6 rounded border border-gray-new-94 bg-[linear-gradient(180deg,#FFF,#FAFAFA)] p-[5px] dark:border-none dark:bg-[linear-gradient(180deg,#FFFFFF40,#FFFFFF03)] dark:p-px'
                   : 'mt-0.5 h-4 w-4 text-secondary-8 dark:text-green-45'
               )}
             >
-              <Icon className="h-full w-full" />
+              <div
+                className={clsx(
+                  'h-full w-full',
+                  withBorderWrapper &&
+                    'dark:rounded dark:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20)] dark:p-[5px]'
+                )}
+              >
+                <Icon className="h-full w-full" />
+              </div>
             </div>
             <div
               className={clsx(
