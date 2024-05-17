@@ -86,7 +86,7 @@ The Neon Free Tier logical data size limit is approximately 512 MiB:
 The Neon Launch and Scale plan failsafe limit is 200 GiB:
 
 - `branch_logical_size_limit`: 204800
-- `branch_logical_size_limit_bytes`: 21474836480
+- `branch_logical_size_limit_bytes`: 214748364800
 
 ## Suspending active computes
 
