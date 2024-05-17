@@ -10,16 +10,16 @@
           slug: get-started-with-neon/dev-experience
         - title: Production readiness with Neon
           slug: get-started-with-neon/production-readiness
-    - title: Day 1 - Playing with Neon # sign-up plus all the basics to start working with your new db from command line/ include sample db or link migrate
+    - title: Day 1 - Playing with Neon
       slug: get-started-with-neon/signing-up
     - title: Day 2 - Connect Neon to your stack
       slug: get-started-with-neon/connect-neon
     - title: Day 3 - Branching workflows
       slug: get-started-with-neon/workflow-primer 
-    - title: Day 4 - Getting ready for production # or production checklist
+    - title: Day 4 - Getting ready for production
       slug: get-started-with-neon/production-checklist
-    - title: Framework quickstarts # too on-the-nose cribbing from sb?
-      # slug: getting_started/frameworks # a new landing page dedicated to frameworks
+    - title: Framework quickstarts
+      slug: getting_started/frameworks
       items:
         - title: Astro
           slug: guides/astro
@@ -35,8 +35,8 @@
           slug: guides/remix
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
-    - title: Language quickstarts # too on-the-nose cribbing from sb?
-      # slug: getting_started/languages # new landing page for languages
+    - title: Language quickstarts
+      slug: getting_started/languages
       items:
         - title: Elixir
           slug: guides/elixir-ecto
@@ -115,10 +115,6 @@
           slug: connect/connection-latency
 - title: Platform management
   items:
-   # - title: Overview   # this object hiearchy page does not quite fit; refactor and put in architecture?
-   #   slug: manage/overview
-   # - title: API keys # should this go in API section? not first in the list anyway
-   #   slug: manage/api-keys
     - title: Access control
       items:
         - title: E-mail signup
@@ -131,6 +127,8 @@
           slug: guides/project-sharing-guide
         - title: Database access
           slug: manage/database-access
+        - title: API keys
+          slug: manage/api-keys
     - title: Plans and billing
       slug: introduction/about-billing
       items:
@@ -191,20 +189,6 @@
       slug: introduction/support
     - title: Status
       slug: introduction/status
-  #  - title: Access # this could be reorganized I think
-  #   items:
-  #  - title: Project access # this is more project sharing
-  #      slug: manage/project-access
-  #      - title: Database access
-  #        slug: manage/database-access
-  #  - title: Backups # this seems not "platform management" but db management
-  #    slug: manage/backups
-  #  - title: Logical replication
-  #    items:
-  #      - title: Concepts
-  #        slug: guides/logical-replication-concepts
-  #      - title: Manage
-  #        slug: guides/logical-replication-neon
 - title: Neon features
   items:
     - title: Autoscaling
@@ -270,7 +254,7 @@
     - title: IP Allow
       slug: introduction/ip-allow
 - title: Integration guides
-  slug: guides/guides-intro
+  slug: guides/integrations
   items:
     - title: Deployment
       items:

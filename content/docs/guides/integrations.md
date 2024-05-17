@@ -73,15 +73,6 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 </TechnologyNavigation>
 
 
-## CI/CD
-
-<TechnologyNavigation>
-
-<img src="/images/technology-logos/github-logo.svg" width="36" height="36" alt="GitHub" href="/docs/guides/neon-github-app" title="GitHub integration with Neon" />
-
-</TechnologyNavigation>
-
-
 ## Replication
 
 <TechnologyNavigation>
