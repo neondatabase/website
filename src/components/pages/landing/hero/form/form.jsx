@@ -199,7 +199,7 @@ const Form = ({ hubspotFormId, successMessage, items = [] }) => {
         const data = await getHubspotFormData(hubspotFormId);
         if (data) {
           setFormData(data);
-          const {formFieldGroups} = data;
+          const { formFieldGroups } = data;
           updateYupObject(formFieldGroups);
           if (formFieldGroups.length === 1) {
             setIsSimpleMode(true);
@@ -275,7 +275,7 @@ const Form = ({ hubspotFormId, successMessage, items = [] }) => {
             <Field
               labelClassName="hidden"
               tagClassName={clsx(
-                '!m-0 remove-autocomplete-styles text-base h-16 w-full appearance-none rounded-[50px] !border-[1px] bg-black-new pl-7 pr-48 text-white placeholder:tracking-tight placeholder:text-gray-new-50 focus:outline-none disabled:opacity-100 sm:h-14 sm:pl-6 sm:pr-16 sm:placeholder:text-sm',
+                '!bg-black-pure remove-autocomplete-styles !m-0 h-16 w-full appearance-none rounded-[50px] !border-[1px] bg-black-new pl-7 pr-48 text-base text-white placeholder:tracking-tight placeholder:text-gray-new-50 focus:outline-none disabled:opacity-100 sm:h-14 sm:pl-6 sm:pr-16 sm:placeholder:text-sm',
                 state === FORM_STATES.ERROR ? '!border-secondary-1' : '!border-green-45',
                 state === FORM_STATES.SUCCESS ? '!pr-14 text-green-45' : 'text-white'
               )}
@@ -324,10 +324,8 @@ const Form = ({ hubspotFormId, successMessage, items = [] }) => {
                         className="w-full"
                         name={field.name}
                         label={`${field.label}${field.required ? ' *' : ''}`}
-                        labelClassName={clsx('mb-0 block w-fit text-sm text-gray-new-70')}
-                        tagClassName={clsx(
-                          '!border-[1px] m-0 remove-autocomplete-styles !h-10 !text-base !bg-white/[0.04] text-white placeholder:tracking-tight placeholder:text-gray-new-40 focus:outline-none disabled:opacity-100 sm:placeholder:text-sm'
-                        )}
+                        labelClassName="mb-0 block w-fit text-sm text-gray-new-70"
+                        tagClassName="remove-autocomplete-styles m-0 !h-10 !border-[1px] !bg-white/[0.04] !text-base text-white placeholder:tracking-tight placeholder:text-gray-new-40 focus:outline-none disabled:opacity-100 sm:placeholder:text-sm"
                         type={field.fieldType}
                         autoComplete={field.name}
                         placeholder={field.placeholder}
