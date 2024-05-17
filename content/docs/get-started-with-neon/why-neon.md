@@ -53,7 +53,7 @@ Being a fully managed service means that Neon provides high availability without
 
 ## Neon is open source
 
-**Neon is developed under an Apache 2.0 license**
+**Neon is developed under an Apache 2.0 license.**
 
 Neon is not the first to offer separation of storage and compute for Postgres. AWS Aurora is probably the most famous example; however, it is proprietary and tied to AWS’s internal infrastructure.
 

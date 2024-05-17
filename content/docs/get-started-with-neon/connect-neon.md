@@ -11,7 +11,7 @@ Using Neon as the serverless database in your tech stack means configuring conne
 
 This section provides connection string samples for various frameworks and languages, helping you integrate Neon into your tech stack.
 
-<CodeTabs labels={["psql", ".env", "Next.js", "Prisma", "Node.js", "Django", "SQLAlchemy", "Java", "Symfony", "Go", "Ruby"]}>
+<CodeTabs labels={["psql", ".env", "Next.js", "Node.js", "Drizzle", "Prisma", "Python", "Django",  "Java", "Symfony", "Go", "Ruby"]}>
 
 ```bash
 # psql example connection string
@@ -75,22 +75,33 @@ async function getPgVersion() {
 getPgVersion();
 ```
 
-```python
-# Django example connection string
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'database',
-        'USER': 'username',
-        'PASSWORD': 'password',
-        'HOST': 'hostname',
-        'PORT': '5432',
-    }
-}
+```javascript
+// Drizzle with the Neon serverless driver
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
+    
+const sql = neon(process.env.DATABASE_URL);
+
+const db = drizzle(sql);
+    
+const result = await db.select().from(...);
+```
+
+```javascript
+// Prisma with the Neon serverless driver 
+import { neon } from '@neondatabase/serverless'
+import { PrismaNeonHTTP } from '@prisma/adapter-neon'
+import { PrismaClient } from '@prisma/client'
+
+const sql = neon(process.env.DATABASE_URL)
+
+const adapter = new PrismaNeonHTTP(sql)
+
+const prisma = new PrismaClient({ adapter })
 ```
 
 ```python
-# psycopg2 example
+# Python psycopg2 example
 import os
 import psycopg2
 
@@ -106,6 +117,20 @@ with conn.cursor() as cur:
 
 # Close the connection
 conn.close()
+```
+
+```python
+# Django example connection string
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'database',
+        'USER': 'username',
+        'PASSWORD': 'password',
+        'HOST': 'hostname',
+        'PORT': '5432',
+    }
+}
 ```
 
 ```java
