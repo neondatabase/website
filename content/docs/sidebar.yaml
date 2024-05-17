@@ -51,8 +51,6 @@
           items:
             - title: Node.js
               slug: guides/node
-            - title: Prisma
-              slug: guides/prisma
         - title: PHP
           items:
             - title: Laravel
@@ -396,6 +394,23 @@
           slug: guides/auth-clerk
         - title: Okta
           slug: guides/auth-okta
+    - title: CI/CD
+      items:
+        - title: GitHub integration
+          slug: guides/neon-github-app
+    - title: Tools
+      items:
+        - title: Outerbase
+          slug: guides/outerbase
+        - title: Prisma
+          slug: guides/prisma
+    - title: For Partners
+      slug: guides/partner-intro
+      items:
+        - title: OAuth
+          slug: guides/oauth-integration
+        - title: Manage billing with quotas
+          slug: guides/partner-billing
 - title: AI & embeddings
   items:
     - title: Introduction
@@ -409,10 +424,10 @@
         - title: Google Colab
           slug: ai/ai-google-colab
 - title: Postgres
-  slug: postgres/postgres-intro
+  slug: postgresql/introduction
   items:
     - title: Data types
-      slug: postgres/data-types-intro
+      slug: data-types/introduction
       items:
         - title: Array
           slug: data-types/array
@@ -462,7 +477,7 @@
         - title: timescaledb
           slug: extensions/timescaledb
     - title: Functions
-      slug: postgres/functions-intro
+      slug: functions/introduction
       items:
         - title: array_to_json
           slug: functions/array_to_json
@@ -499,9 +514,9 @@
         - title: jsonb_to_record
           slug: functions/jsonb_to_record
     - title: Optimize queries
-      slug: postgres/query-performance
+      slug: postgresql/query-performance
     - title: Query reference
-      slug: postgres/query-reference
+      slug: postgresql/query-reference
     - title: Compatibility
       slug: reference/compatibility
 - title: Command line & SDKs

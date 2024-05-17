@@ -13,6 +13,7 @@ const getExcerpt = require('./get-excerpt');
 const parseMDXHeading = require('./parse-mdx-heading');
 
 const DOCS_DIR_PATH = 'content/docs';
+const FLOW_DIR_PATH = 'content/flow';
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
@@ -29,7 +30,7 @@ const getPostSlugs = async (pathname) => {
 
 const getPostBySlug = (slug, pathname) => {
   try {
-    const source = fs.readFileSync(`${pathname}/${slug}.md`);
+    const source = fs.readFileSync(`${process.cwd()}/${pathname}/${slug}.md`);
     const { data, content } = matter(source);
     const excerpt = getExcerpt(content, 200);
 
@@ -57,7 +58,9 @@ const getAllPosts = async () => {
 };
 
 const getSidebar = () =>
-  jsYaml.load(fs.readFileSync(path.resolve('content/docs/sidebar.yaml'), 'utf8'));
+  jsYaml.load(
+    fs.readFileSync(path.resolve(`${process.cwd()}/${DOCS_DIR_PATH}/sidebar.yaml`), 'utf8')
+  );
 
 const getBreadcrumbs = (slug, flatSidebar) => {
   const path = flatSidebar.find((item) => item.slug === slug)?.path;
@@ -156,7 +159,7 @@ const getTableOfContents = (content) => {
     const componentName = match[1];
 
     const fileName = sharedMdxComponents[componentName];
-    const mdFilePath = `content/docs/${fileName}.md`;
+    const mdFilePath = `${process.cwd()}/${DOCS_DIR_PATH}/${fileName}.md`;
 
     // Check if the MD file exists
     if (fs.existsSync(mdFilePath)) {
@@ -187,5 +190,6 @@ module.exports = {
   getAllPosts,
   getTableOfContents,
   DOCS_DIR_PATH,
+  FLOW_DIR_PATH,
   CHANGELOG_DIR_PATH,
 };

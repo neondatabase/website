@@ -191,7 +191,7 @@ const Estimates = () => {
           transition={{ duration: 0.2 }}
         >
           <Container className="relative z-10 text-center" size="medium">
-            <h2 className="text-[56px] font-medium leading-none tracking-tighter lg:text-5xl md:text-4xl [&_span]:text-green-45">
+            <h2 className="font-title text-[56px] font-medium leading-none tracking-tighter lg:text-5xl md:text-4xl [&_span]:text-green-45">
               <span>Each user is unique.</span>
               <br /> However, we can give you estimates.
             </h2>

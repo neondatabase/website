@@ -32,6 +32,13 @@ const styles = {
     green: 'text-green-45 transition-colors duration-200 hover:text-[#00FFAA]',
     'green-underlined':
       'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
+    'gray-30': 'text-gray-new-30 transition-colors duration-200 hover:text-green-45',
+    'white-underlined':
+      'underline decoration-white/40 hover:decoration-white/100 text-white transition-colors duration-500',
+    'gray-50': 'text-gray-new-50 transition-colors duration-200 hover:text-green-45',
+    'gray-70':
+      'text-gray-new-70 dark:text-gray-new-70 transition-colors duration-200 hover:text-green-45',
+    'gray-80': 'text-gray-new-80 transition-colors duration-200 hover:text-green-45',
     'gray-90': 'text-gray-new-90 transition-colors duration-200 hover:text-green-45',
   },
 };
@@ -54,13 +61,16 @@ const Link = forwardRef(
       size && theme && styles.base,
       styles.size[size],
       styles.theme[theme],
-      additionalClassName
+      additionalClassName,
+      withArrow && 'group'
     );
 
     const content = (
       <>
         {withArrow ? <span>{children}</span> : children}
-        {withArrow && <ArrowRightIcon className={clsx('ml-2 shrink-0')} />}
+        {withArrow && (
+          <ArrowRightIcon className="-mb-px ml-1.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]" />
+        )}
       </>
     );
     // TODO: remove this when we upgrade to latest version of Next.js

@@ -20,7 +20,7 @@ const DocCta = ({
 }) => (
   <figure className="doc-cta not-prose my-5 flex items-end gap-x-16 rounded-[10px] border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)] px-7 py-6 dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28.86%,#131415_74.18%)] md:flex-col md:items-start sm:p-6">
     <div>
-      <h2 className="!my-0 text-2xl font-medium leading-dense">{title}</h2>
+      <h2 className="!my-0 font-title text-2xl font-medium leading-dense">{title}</h2>
       <p className="mt-2 text-sm font-light text-gray-new-20 dark:text-gray-new-80">
         {description}
       </p>

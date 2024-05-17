@@ -17,7 +17,7 @@ There are two account types available in Neon:
 - **Personal account**
 - **Organization account**
 
-Any Neon user with a **paid personal account** can request an Organization account, which allows for sharing projects across the various members that make up your team. Whether you create an organization or are invited to join one, you retain your personal account, letting you manage personal personal projects independently of any organizations you belong to.
+Any Neon user with a **paid personal account** can request an Organization account, which allows for sharing projects across the various members that make up your team. Whether you create an organization or are invited to join one, you retain your personal account, letting you manage personal projects independently of any organizations you belong to.
 
 From the Neon Console, you can navigate to your Organization dashboard, where you'll find all projects in the organization and various user management actions that you can take as the Admin.
 
