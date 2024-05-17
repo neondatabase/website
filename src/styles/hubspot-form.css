@@ -1,5 +1,5 @@
 .hubspot-form-wrapper {
-  @apply rounded-[10px] bg-gray-new-8 px-9 pb-11 pt-9 xl:px-6 xl:pb-9 md:px-5 md:py-6;
+  @apply rounded-[10px] bg-black-new px-9 pb-11 pt-9 xl:px-6 xl:pb-9 md:px-5 md:py-6;
 }
 
 .hubspot-form {

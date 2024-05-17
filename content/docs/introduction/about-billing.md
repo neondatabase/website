@@ -17,7 +17,7 @@ Start with an overview of Neon's pricing plans to learn what's included, then us
 
 <a href="/docs/introduction/plans" description="Learn about Neon's pricing plans and what's included" icon="cards">Plans</a>
 
-<a href="/docs/introduction/plans" description="Estimate your monthly bill with Neon" icon="cards">Pricing estimation guide</a>
+<a href="/docs/introduction/pricing-estimation-guide" description="Estimate your monthly bill with Neon" icon="cards">Pricing estimation guide</a>
 
 <a href="/docs/introduction/billing-sample" description="See how to select the right pricing plan for a sample project" icon="cli-cursor">Sample project billing</a>
 

@@ -70,7 +70,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
           <Link className="group" to={`${LINKS.blog}/${slug}`}>
             <article className="flex items-center space-x-3">
               <div>
-                <h1 className="line-clamp-2 font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-green-45">
+                <h1 className="line-clamp-2 font-title font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-green-45">
                   {title}
                 </h1>
                 <span className="mt-1.5 text-sm leading-none tracking-[-0.02em] text-gray-new-80">

@@ -9,20 +9,24 @@ import getFormattedDate from 'utils/get-formatted-date';
 
 const imageSizes = {
   xl: {
-    width: 716,
-    height: 403,
+    width: 672,
+    height: 368,
   },
   lg: {
-    width: 716,
-    height: 403,
+    width: 672,
+    height: 368,
   },
   md: {
-    width: 464,
-    height: 260,
+    width: 452,
+    height: 254,
   },
   sm: {
     width: 212,
     height: 119,
+  },
+  video: {
+    width: 204,
+    height: 114,
   },
 };
 
@@ -112,7 +116,7 @@ const BlogPostCard = ({
         {category && size !== 'xs' && (
           <Link
             className={clsx(
-              'text-xs font-semibold uppercase leading-none tracking-[0.02em] lg:text-[11px]',
+              'text-[11px] font-semibold uppercase leading-none -tracking-extra-tight',
               CATEGORY_COLORS[category?.slug] || 'text-green-45',
               size === 'lg' ? 'mt-[18px] md:mt-4' : 'mt-3'
             )}
@@ -129,16 +133,16 @@ const BlogPostCard = ({
         >
           <h1
             className={clsx(
-              'font-medium transition-colors duration-200 group-hover:text-green-45',
-              size === 'xl' && 'text-4xl leading-dense tracking-tighter xl:text-3xl md:text-2xl',
-              size === 'lg' && 'text-3xl leading-dense tracking-tighter lg:text-2xl xs:text-base',
+              'font-title font-medium leading-dense transition-colors duration-200 group-hover:text-green-45',
+              size === 'xl' && 'text-4xl tracking-tighter xl:text-3xl md:text-2xl',
+              size === 'lg' && 'text-3xl tracking-tighter lg:text-2xl xs:text-base',
               checkSize('md', 'sm', 'xs') &&
-                'line-clamp-2 text-lg leading-tight tracking-extra-tight lg:text-base',
+                'line-clamp-2 text-lg tracking-extra-tight lg:text-base',
               !!category && 'mt-2 md:mt-1.5',
               !category && size === 'lg' && 'mt-5 md:mt-4',
-              !category && size === 'md' && 'mt-4',
-              !category && size === 'sm' && 'mt-3',
-              size === 'video' && 'mt-1.5 line-clamp-2 text-base leading-5 tracking-extra-tight'
+              !category && size === 'md' && 'mt-3',
+              !category && size === 'sm' && 'mt-2',
+              size === 'video' && 'mt-2.5 line-clamp-2 text-lg tracking-extra-tight'
             )}
           >
             {title}
@@ -176,9 +180,10 @@ const BlogPostCard = ({
               {/* author */}
               <span
                 className={clsx(
-                  'tracking-extra-tight text-gray-new-80',
-                  size === 'lg' && 'text-[15px] leading-none lg:text-sm xs:text-[13px]',
-                  size === 'video' && 'truncate text-[13px] leading-[1.2em] !text-gray-new-70',
+                  'leading-none tracking-extra-tight',
+                  checkSize('lg', 'xl') ? 'text-gray-new-90' : 'text-gray-new-80',
+                  size === 'lg' && 'text-[15px] lg:text-sm xs:text-[13px]',
+                  size === 'video' && 'truncate text-sm',
                   checkSize('xl', 'md', 'sm', 'xs') && 'text-sm leading-none lg:text-[13px]'
                 )}
               >
@@ -196,16 +201,16 @@ const BlogPostCard = ({
 
               <time
                 className={clsx(
-                  'relative block shrink-0 pl-[11px] uppercase leading-none tracking-extra-tight',
+                  'relative block shrink-0 pl-[11px] uppercase leading-none tracking-extra-tight text-gray-new-70',
                   'before:absolute before:left-1 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
-                  size === 'lg' && 'text-[15px] font-light text-gray-new-80 lg:text-sm xs:text-xs',
+                  size === 'lg' && 'text-[15px] font-light lg:text-sm xs:text-xs',
                   checkSize('xl', 'md', 'sm', 'xs') &&
-                    'text-[13px] font-light text-gray-new-80 lg:text-xs lg:leading-none',
+                    'text-[13px] font-light lg:text-xs lg:leading-none',
                   size === 'sm' &&
                     'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden xs:mt-0 xs:pl-[11px] xs:before:inline-block',
                   withAuthorPhoto &&
                     'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-[11px] md:before:inline-block',
-                  size === 'video' && 'text-[11px] font-normal text-gray-new-70'
+                  size === 'video' && 'text-[11px] font-normal '
                 )}
                 dateTime={date}
               >

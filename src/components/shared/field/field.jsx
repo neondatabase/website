@@ -27,12 +27,12 @@ const Field = forwardRef(
     ref
   ) => (
     <div className={clsx('relative flex flex-col items-start', className)}>
-      <label className={clsx('leading-none', labelClassName)} htmlFor={name}>
+      <label className={clsx('leading-none text-gray-new-80', labelClassName)} htmlFor={name}>
         {label}
       </label>
       <Tag
         className={clsx(
-          'remove-autocomplete-styles-black-theme mt-2.5 w-full appearance-none rounded border-[3px] bg-[#404040] px-4 text-lg text-white outline-none transition-colors duration-200 focus:bg-black',
+          'remove-autocomplete-styles-black-theme mt-2.5 w-full appearance-none rounded border-[3px] bg-white/[0.04] px-4 text-lg text-white outline-none transition-colors duration-200 focus:bg-black',
           (Tag === FIELD_TAGS.INPUT || Tag === FIELD_TAGS.SELECT) && 'h-14 md:h-12',
           Tag === FIELD_TAGS.TEXTAREA && 'min-h-[112px] py-3.5',
           Tag === FIELD_TAGS.SELECT &&
