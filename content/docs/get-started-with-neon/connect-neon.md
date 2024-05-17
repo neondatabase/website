@@ -11,15 +11,15 @@ Using Neon as the serverless database in your tech stack means configuring conne
 
 This section provides connection string samples for various frameworks and languages, helping you integrate Neon into your tech stack.
 
-<CodeTabs labels={["psql", ".env", "Next.js", "Node.js", "Drizzle", "Prisma", "Python", "Django",  "Java", "Symfony", "Go", "Ruby"]}>
+<CodeTabs labels={["psql", ".env", "Next.js", "Drizzle", "Prisma", "Python", "Ruby", "Rust", "Go"]}>
 
 ```bash
 # psql example connection string
 psql postgres://username:password@hostname:5432/database?sslmode=require
 ```
 
-```text
-# .env example connection string
+```ini
+# .env example
 PGHOST=hostname
 PGDATABASE=database
 PGUSER=username
@@ -28,7 +28,7 @@ PGPORT=5432
 ```
 
 ```javascript
-// Next.js example connection string
+// Next.js example
 import postgres from "postgres";
 
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
@@ -49,34 +49,7 @@ function selectAll() {
 ```
 
 ```javascript
-// Node.js example connection string
-const postgres = require('postgres');
-require('dotenv').config();
-
-let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
-
-const sql = postgres({
-  host: PGHOST,
-  database: PGDATABASE,
-  username: PGUSER,
-  password: PGPASSWORD,
-  port: 5432,
-  ssl: 'require',
-  connection: {
-    options: `project=${ENDPOINT_ID}`,
-  },
-});
-
-async function getPgVersion() {
-  const result = await sql`select version()`;
-  console.log(result);
-}
-
-getPgVersion();
-```
-
-```javascript
-// Drizzle with the Neon serverless driver
+// Drizzle example with the Neon serverless driver
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
     
@@ -88,7 +61,7 @@ const result = await db.select().from(...);
 ```
 
 ```javascript
-// Prisma with the Neon serverless driver 
+// Prisma example with the Neon serverless driver 
 import { neon } from '@neondatabase/serverless'
 import { PrismaNeonHTTP } from '@prisma/adapter-neon'
 import { PrismaClient } from '@prisma/client'
@@ -101,7 +74,7 @@ const prisma = new PrismaClient({ adapter })
 ```
 
 ```python
-# Python psycopg2 example
+# Python example with psycopg2
 import os
 import psycopg2
 
@@ -119,37 +92,58 @@ with conn.cursor() as cur:
 conn.close()
 ```
 
-```python
-# Django example connection string
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'database',
-        'USER': 'username',
-        'PASSWORD': 'password',
-        'HOST': 'hostname',
-        'PORT': '5432',
+```ruby
+# Ruby example
+require 'pg'
+require 'dotenv'
+
+# Load environment variables from .env file
+Dotenv.load
+
+# Connect to the PostgreSQL database using the environment variable
+conn = PG.connect(ENV['DATABASE_URL'])
+
+# Execute a query
+conn.exec("SELECT version()") do |result|
+  result.each do |row|
+    puts "Result = #{row['version']}"
+  end
+end
+
+# Close the connection
+conn.close
+```
+
+```rust
+// Rust example
+use postgres::Client;
+use openssl::ssl::{SslConnector, SslMethod};
+use postgres_openssl::MakeTlsConnector;
+use std::error;
+use std::env;
+use dotenv::dotenv;
+
+fn main() -> Result<(), Box<dyn error::Error>> {
+    // Load environment variables from .env file
+    dotenv().ok();
+
+    // Get the connection string from the environment variable
+    let conn_str = env::var("DATABASE_URL")?;
+
+    let builder = SslConnector::builder(SslMethod::tls())?;
+    let connector = MakeTlsConnector::new(builder.build());
+    let mut client = Client::connect(&conn_str, connector)?;
+
+    for row in client.query("select version()", &[])? {
+        let ret: String = row.get(0);
+        println!("Result = {}", ret);
     }
+    Ok(())
 }
 ```
 
-```java
-// Java example connection string
-jdbc:postgresql://hostname/dbname?user=usernamer&password=password&sslmode=require
-```
-
-```yaml
-# Symfony example connection string
-doctrine:
-    dbal:
-        url: '%env(resolve:DATABASE_URL)%'
-
-# In your .env file
-DATABASE_URL="postgres://user:password@hostname/dbname?charset=utf8&sslmode=require"
-```
-
 ```go
-// Go example connection string
+// Go example
 package main
 import (
     "database/sql"
@@ -184,31 +178,6 @@ func main() {
     }
     fmt.Printf("version=%s\n", version)
 }
-```
-
-```ruby
-# config/database.yml
-require 'pg'
-require 'dotenv'
-
-# Load environment variables from .env file
-Dotenv.load
-
-# Connect to the PostgreSQL database using the environment variable
-conn = PG.connect(ENV['DATABASE_URL'])
-
-# Execute a query
-conn.exec("SELECT version()") do |result|
-  result.each do |row|
-    puts "Result = #{row['version']}"
-  end
-end
-
-# Close the connection
-conn.close
-
-### .env File
-DATABASE_URL="postgres://user:password@hostname/dbname"
 ```
 
 </CodeTabs>

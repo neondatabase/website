@@ -1,5 +1,5 @@
 ---
-title: Postgres
+title: Postgres guides
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/postgres-intro

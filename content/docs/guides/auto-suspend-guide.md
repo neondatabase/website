@@ -14,13 +14,12 @@ This guide demonstrates how to configure the autosuspend setting for a new proje
 
 The autosuspend limits differ by [Neon plan](/docs/introduction/plans). The limits for each plan are outlined below. The initial default setting for all plans is 5 minutes.
 
-
 | Plan       | Autosuspend delay                | Can be disabled? |
-|------------|----------------------------------|------------------|
+|:-----------|:---------------------------------|:-----------------|
 | Free Tier  | 5 minutes                        |                  |
 | Launch     | 5 minutes to 7 days              |                  |
 | Scale      | 1 minute to 7 days               |                  |
-| Enterprise | 0 up to 7 days                   | &check;          |
+| Enterprise | 0 up to 7 days                   | ✓                |
 
 ### Configure the autosuspend setting for a new project
 

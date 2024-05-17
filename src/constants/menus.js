@@ -292,7 +292,7 @@ export default {
     },
     {
       icon: PostgresDocsIcon,
-      title: 'Postgres Docs',
+      title: 'PostgreSQL Docs',
       slug: LINKS.postgres,
     },
   ],

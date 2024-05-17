@@ -156,6 +156,8 @@
           slug: introduction/billing-aws-marketplace
     - title: Project management
       items:
+        - title: Object hierarchy
+          slug: manage/overview
         - title: Projects
           slug: manage/projects
         - title: Branches
@@ -166,6 +168,8 @@
           slug: manage/roles
         - title: Databases
           slug: manage/databases
+        - title: Integrations
+          slug: manage/integrations
     - title: Monitoring
       slug: introduction/monitoring
       items:
@@ -178,9 +182,7 @@
     - title: Security
       items:
         - title: Overview
-          slug: manage/security-overview
-        - title: Best practices
-          slug: manage/security-best-practices
+          slug: security/security-overview
         - title: Security reporting
           slug: security/security-reporting
         - title: SOC 2 compliance
@@ -271,8 +273,7 @@
       slug: guides/protected-branches
     - title: IP Allow
       slug: introduction/ip-allow
-- title: Integrations
-  slug: manage/integrations
+- title: Integration guides
   items:
     - title: Deployment
       items:
@@ -404,26 +405,7 @@
           slug: guides/outerbase
         - title: Prisma
           slug: guides/prisma
-    - title: For Partners
-      slug: guides/partner-intro
-      items:
-        - title: OAuth
-          slug: guides/oauth-integration
-        - title: Manage billing with quotas
-          slug: guides/partner-billing
-- title: AI & embeddings
-  items:
-    - title: Introduction
-      slug: ai/ai-intro
-    - title: AI concepts
-      slug: ai/ai-concepts
-    - title: Scale with Neon
-      slug: ai/ai-scale-with-neon
-    - title: AI tools
-      items:
-        - title: Google Colab
-          slug: ai/ai-google-colab
-- title: Postgres
+- title: Postgres guides
   slug: postgresql/introduction
   items:
     - title: Data types
@@ -519,6 +501,18 @@
       slug: postgresql/query-reference
     - title: Compatibility
       slug: reference/compatibility
+- title: AI & embeddings
+  items:
+    - title: Introduction
+      slug: ai/ai-intro
+    - title: AI concepts
+      slug: ai/ai-concepts
+    - title: Scale with Neon
+      slug: ai/ai-scale-with-neon
+    - title: AI tools
+      items:
+        - title: Google Colab
+          slug: ai/ai-google-colab
 - title: Command line & SDKs
   items:
     - title: CLI Reference

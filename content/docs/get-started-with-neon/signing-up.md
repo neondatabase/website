@@ -214,8 +214,8 @@ With `psql` available, let's work from the terminal to connect to your `dev/deve
     ```
     Your response should include the new description column and a new row where name = `Your dev branch` and description = `Exploring schema changes in the dev branch`:
 
-    ```sql
-     id |        name        |    value    |                description                    // [!code word:description]
+    ```sql {1,13}
+     id |        name        |    value    |                description
     ----+--------------------+-------------+--------------------------------------------
       1 | c4ca4238a0         |   0.5315024 | 
       2 | c81e728d9d         |  0.17189825 | 
@@ -227,7 +227,7 @@ With `psql` available, let's work from the terminal to connect to your `dev/deve
       8 | c9f0f895fb         |  0.99945337 | 
       9 | 45c48cce2e         | 0.054623786 | 
      10 | d3d9446802         |  0.36634886 | 
-     11 | Your dev branch    |             | Exploring schema changes in the dev branch   // [!code highlight]
+     11 | Your dev branch    |             | Exploring schema changes in the dev branch
     (11 rows)
     ```
 
