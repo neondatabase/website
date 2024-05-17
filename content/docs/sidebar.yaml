@@ -19,7 +19,7 @@
     - title: Day 4 - Getting ready for production
       slug: get-started-with-neon/production-checklist
     - title: Framework quickstarts
-      slug: getting_started/frameworks
+      slug: get-started-with-neon/frameworks
       items:
         - title: Astro
           slug: guides/astro
@@ -36,7 +36,7 @@
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
     - title: Language quickstarts
-      slug: getting_started/languages
+      slug: get-started-with-neon/languages
       items:
         - title: Elixir
           slug: guides/elixir-ecto
@@ -95,6 +95,8 @@
 - title: Connect
   slug: connect/connect-intro
   items:
+    - title: Neon SQL Editor
+      slug: get-started-with-neon/query-with-neon-sql-editor
     - title: Passwordless auth
       slug: connect/passwordless-connect
     - title: Connect securely
