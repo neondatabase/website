@@ -8,14 +8,13 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import useCookie from 'react-use/lib/useCookie';
 import useLocation from 'react-use/lib/useLocation';
-import * as yup from 'yup';
 
 import Field from 'components/shared/field';
 import LinesIllustration from 'components/shared/lines-illustration';
 import { FORM_STATES } from 'constants/forms';
 import CheckIcon from 'icons/check.inline.svg';
 import FormCheckIcon from 'icons/subscription-form-check.inline.svg';
-import { doNowOrAfterSomeTime, getHubspotFormData, sendHubspotFormData } from 'utils/forms';
+import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 import SendIcon from './images/send.inline.svg';
 
@@ -143,16 +142,19 @@ SubmitButton.propTypes = {
   isSimpleMode: PropTypes.bool,
 };
 
-const Form = ({ hubspotFormId, successMessage, items = [] }) => {
-  const [formData, setFormData] = useState(null);
-  const [fieldGroups, setFieldGroups] = useState([]);
-  const [buttonText, setButtonText] = useState('');
-  const [isSimpleMode, setIsSimpleMode] = useState(false);
-  const [simpleField, setSimpleField] = useState(null);
+const Form = ({ formData, items }) => {
+  const {
+    data,
+    fieldGroups,
+    buttonText,
+    isSimpleMode,
+    simpleField,
+    yupSchema,
+    successMessage,
+    hubspotFormId,
+  } = formData;
   const [state, setState] = useState(FORM_STATES.DEFAULT);
   const [errorMessage, setErrorMessage] = useState('');
-  const [yupSchema, setYupSchema] = useState({});
-  const schema = yup.object(yupSchema).required();
 
   const {
     register,
@@ -160,7 +162,7 @@ const Form = ({ hubspotFormId, successMessage, items = [] }) => {
     handleSubmit,
     formState: { isValid, errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(yupSchema),
   });
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
@@ -169,53 +171,6 @@ const Form = ({ hubspotFormId, successMessage, items = [] }) => {
     hutk: hubspotutk,
     pageUri: href,
   };
-
-  const updateYupObject = (formFieldGroups) => {
-    const newYupObject = {};
-
-    formFieldGroups.forEach((group) => {
-      group.fields.forEach((field) => {
-        if (field.required) {
-          if (field.name === 'email') {
-            newYupObject[field.name] = yup
-              .string()
-              .email('Please enter a valid email')
-              .required('Email address is a required field');
-          } else {
-            newYupObject[field.name] = yup
-              .string()
-              .required('Please complete this required field.');
-          }
-        }
-      });
-    });
-
-    setYupSchema(newYupObject);
-  };
-
-  useEffect(() => {
-    const fetchFormData = async () => {
-      try {
-        const data = await getHubspotFormData(hubspotFormId);
-        if (data) {
-          setFormData(data);
-          const { formFieldGroups } = data;
-          updateYupObject(formFieldGroups);
-          if (formFieldGroups.length === 1) {
-            setIsSimpleMode(true);
-            setSimpleField(formFieldGroups[0].fields[0]);
-          } else {
-            setFieldGroups(formFieldGroups);
-          }
-          setButtonText(data.submitText);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchFormData();
-  }, [hubspotFormId]);
 
   useEffect(() => {
     const hasErrors = Object.keys(errors).length > 0;
@@ -265,7 +220,7 @@ const Form = ({ hubspotFormId, successMessage, items = [] }) => {
     }
   };
 
-  if (!formData) return null;
+  if (!data) return null;
 
   if (isSimpleMode && simpleField)
     return (
@@ -358,8 +313,30 @@ const Form = ({ hubspotFormId, successMessage, items = [] }) => {
 };
 
 Form.propTypes = {
-  hubspotFormId: PropTypes.string.isRequired,
-  successMessage: PropTypes.string.isRequired,
+  formData: PropTypes.shape({
+    data: PropTypes.shape({}),
+    yupSchema: PropTypes.shape({}),
+    fieldGroups: PropTypes.arrayOf({
+      fieldGroup: PropTypes.shape({
+        fields: PropTypes.arrayOf({
+          name: PropTypes.string,
+          label: PropTypes.string,
+          placeholder: PropTypes.string,
+          fieldType: PropTypes.string,
+        }),
+      }),
+    }),
+    simpleField: PropTypes.shape({
+      name: PropTypes.string,
+      label: PropTypes.string,
+      placeholder: PropTypes.string,
+      fieldType: PropTypes.string,
+    }),
+    buttonText: PropTypes.string,
+    isSimpleMode: PropTypes.bool,
+    successMessage: PropTypes.string,
+    hubspotFormId: PropTypes.string.isRequired,
+  }),
   items: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,

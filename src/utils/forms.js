@@ -23,7 +23,7 @@ const getHubspotFormData = async (formId) => {
   );
 
   if (!response.ok) {
-    throw new Error(`Error fetching form data: ${response.statusText}`);
+    console.log(`Error fetching form data: ${response.statusText}`);
   }
 
   const data = await response.json();

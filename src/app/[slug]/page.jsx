@@ -1,5 +1,7 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
+import * as yup from 'yup';
 
 import Hero from 'components/pages/landing/hero';
 import CTA from 'components/pages/pricing/cta';
@@ -12,6 +14,7 @@ import scaleIcon from 'icons/landing/scalability.svg';
 import storageIcon from 'icons/landing/storage.svg';
 import timerIcon from 'icons/landing/timer.svg';
 import { getLandingPages, getWpPageBySlug, getStaticPages } from 'utils/api-pages';
+import { getHubspotFormData } from 'utils/forms';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
@@ -22,7 +25,47 @@ const icons = {
   replicas: replicasIcon,
 };
 
-const DinamicPage = async ({ params }) => {
+const getFormData = async ({ hubspotFormId, successMessage }) => {
+  const formData = {};
+  formData.hubspotFormId = hubspotFormId;
+  formData.successMessage = successMessage;
+
+  const data = await getHubspotFormData(hubspotFormId);
+  if (!data) return formData;
+
+  formData.data = data;
+  const { formFieldGroups } = data;
+  const yupObject = {};
+
+  formFieldGroups.forEach((group) => {
+    group.fields.forEach((field) => {
+      if (field.required) {
+        if (field.name === 'email') {
+          yupObject[field.name] = yup
+            .string()
+            .email('Please enter a valid email')
+            .required('Email address is a required field');
+        } else {
+          yupObject[field.name] = yup.string().required('Please complete this required field.');
+        }
+      }
+    });
+  });
+  formData.yupSchema = yup.object(yupObject).required();
+
+  if (formFieldGroups.length === 1) {
+    formData.isSimpleMode = true;
+    formData.simpleField = formFieldGroups[0].fields[0];
+  } else {
+    formData.isSimpleMode = false;
+    formData.formFieldGroups = formFieldGroups;
+  }
+  formData.buttonText = data.submitText;
+
+  return formData;
+};
+
+const DynamicPage = async ({ params }) => {
   const page = await getWpPageBySlug(params.slug);
 
   if (!page) return notFound();
@@ -36,7 +79,11 @@ const DinamicPage = async ({ params }) => {
   const contentWithLazyBlocks = getReactContentWithLazyBlocks(
     content,
     {
-      landinghero: Hero,
+      landinghero: async ({ hubspotFormId, successMessage, ...restProps }) => {
+        const formData = await getFormData(hubspotFormId, successMessage);
+
+        return <Hero formData={formData} {...restProps} />;
+      },
       landingfeatures: ({ features, ...restProps }) => {
         const items = features.map((feature) => {
           const icon = icons[feature.iconName];
@@ -132,4 +179,4 @@ export async function generateMetadata({ params }) {
 
 export const revalidate = 60;
 
-export default DinamicPage;
+export default DynamicPage;
