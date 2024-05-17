@@ -179,7 +179,7 @@ const DetailIconCards = ({ children = null, withBorderWrapper = false }) => (
               className={clsx(
                 'relative z-10 shrink-0',
                 withBorderWrapper
-                  ? 'h-6 w-6 rounded border border-gray-new-94 bg-[linear-gradient(180deg,#FFF,#FAFAFA)] p-[5px] dark:border-none dark:bg-[linear-gradient(180deg,#FFFFFF40,#FFFFFF03)] dark:p-px'
+                  ? 'h-6 w-6 rounded border border-gray-new-94 bg-gradient-to-b from-white to-gray-new-98 p-[5px] dark:border-none dark:from-white/20 dark:to-white/[1%] dark:p-px'
                   : 'mt-0.5 h-4 w-4 text-secondary-8 dark:text-green-45'
               )}
             >
@@ -187,7 +187,7 @@ const DetailIconCards = ({ children = null, withBorderWrapper = false }) => (
                 className={clsx(
                   'h-full w-full',
                   withBorderWrapper &&
-                    'dark:rounded dark:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20)] dark:p-[5px]'
+                    'dark:rounded dark:bg-gradient-to-b dark:from-gray-new-15 dark:from-30% dark:to-[#1D1E20] dark:p-[5px]'
                 )}
               >
                 <Icon className="h-full w-full" />
