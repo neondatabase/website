@@ -11,49 +11,68 @@ Using Neon as the serverless database in your tech stack means configuring conne
 
 This section provides connection string samples for various frameworks and languages, helping you integrate Neon into your tech stack.
 
-<CodeTabs labels={["psql", ".env", "Next.js", "Prisma", "Node.js", "Django", "SQLAlchemy", "Java", "Symfony", "Go", "Ruby on Rails"]}>
+<CodeTabs labels={["psql", ".env", "Next.js", "Prisma", "Node.js", "Django", "SQLAlchemy", "Java", "Symfony", "Go", "Ruby"]}>
 
 ```bash
 # psql example connection string
-psql postgres://username:password@hostname:5432/database
+psql postgres://username:password@hostname:5432/database?sslmode=require
 ```
 
 ```text
 # .env example connection string
-PGUSER=username
 PGHOST=hostname
 PGDATABASE=database
+PGUSER=username
 PGPASSWORD=password
 PGPORT=5432
 ```
 
 ```javascript
 // Next.js example connection string
-const { Client } = require('pg');
-const client = new Client({
-  connectionString: 'postgres://username:password@hostname:5432/database',
+import postgres from "postgres";
+
+let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+
+
+const conn = postgres({
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
+  port: 5432,
+  ssl: "require",
 });
-client.connect();
-```
 
-```prisma
-// Prisma example connection string
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+function selectAll() {
+  return conn.query("SELECT * FROM hello_world");
 }
-
-// In your .env file
-DATABASE_URL="postgres://username:password@hostname:5432/database"
 ```
 
 ```javascript
 // Node.js example connection string
-const { Client } = require('pg');
-const client = new Client({
-  connectionString: 'postgres://username:password@hostname:5432/database',
+const postgres = require('postgres');
+require('dotenv').config();
+
+let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
+
+const sql = postgres({
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
+  port: 5432,
+  ssl: 'require',
+  connection: {
+    options: `project=${ENDPOINT_ID}`,
+  },
 });
-client.connect();
+
+async function getPgVersion() {
+  const result = await sql`select version()`;
+  console.log(result);
+}
+
+getPgVersion();
 ```
 
 ```python
@@ -71,14 +90,27 @@ DATABASES = {
 ```
 
 ```python
-# SQLAlchemy example connection string
-from sqlalchemy import create_engine
-engine = create_engine('postgresql://username:password@hostname:5432/database')
+# psycopg2 example
+import os
+import psycopg2
+
+# Load the environment variable
+database_url = os.getenv('DATABASE_URL')
+
+# Connect to the PostgreSQL database
+conn = psycopg2.connect(database_url)
+
+with conn.cursor() as cur:
+    cur.execute("SELECT version()")
+    print(cur.fetchone())
+
+# Close the connection
+conn.close()
 ```
 
 ```java
 // Java example connection string
-String url = "jdbc:postgresql://hostname:5432/database?user=username&password=password";
+jdbc:postgresql://hostname/dbname?user=usernamer&password=password&sslmode=require
 ```
 
 ```yaml
@@ -88,28 +120,70 @@ doctrine:
         url: '%env(resolve:DATABASE_URL)%'
 
 # In your .env file
-DATABASE_URL="postgres://username:password@hostname:5432/database"
+DATABASE_URL="postgres://user:password@hostname/dbname?charset=utf8&sslmode=require"
 ```
 
 ```go
 // Go example connection string
+package main
 import (
-  "database/sql"
-  _ "github.com/lib/pq"
+    "database/sql"
+    "fmt"
+    "log"
+    "os"
+
+    _ "github.com/lib/pq"
+    "github.com/joho/godotenv"
 )
-const connStr = "postgres://username:password@hostname:5432/database"
-db, err := sql.Open("postgres", connStr)
+
+func main() {
+    err := godotenv.Load()
+    if err != nil {
+        log.Fatalf("Error loading .env file: %v", err)
+    }
+
+    connStr := os.Getenv("DATABASE_URL")
+    if connStr == "" {
+        panic("DATABASE_URL environment variable is not set")
+    }
+
+    db, err := sql.Open("postgres", connStr)
+    if err != nil {
+        panic(err)
+    }
+    defer db.Close()
+
+    var version string
+    if err := db.QueryRow("select version()").Scan(&version); err != nil {
+        panic(err)
+    }
+    fmt.Printf("version=%s\n", version)
+}
 ```
 
 ```ruby
 # config/database.yml
-production:
-  adapter: postgresql
-  url: <%= ENV['DATABASE_URL'] =%>
+require 'pg'
+require 'dotenv'
+
+# Load environment variables from .env file
+Dotenv.load
+
+# Connect to the PostgreSQL database using the environment variable
+conn = PG.connect(ENV['DATABASE_URL'])
+
+# Execute a query
+conn.exec("SELECT version()") do |result|
+  result.each do |row|
+    puts "Result = #{row['version']}"
+  end
+end
+
+# Close the connection
+conn.close
 
 ### .env File
-DATABASE_URL="postgres://<DB_ROLE>:<DB_PASSWORD>@<DB_HOSTNAME>/<DB_DATABASE_NAME>"
-
+DATABASE_URL="postgres://user:password@hostname/dbname"
 ```
 
 </CodeTabs>
