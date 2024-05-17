@@ -1,5 +1,5 @@
 ---
-title: Ready for production
+title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
 ---

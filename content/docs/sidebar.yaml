@@ -25,6 +25,8 @@
           slug: guides/astro
         - title: Django
           slug: guides/django
+        - title: Laravel
+          slug: guides/laravel
         - title: Next.js
           slug: guides/nextjs
         - title: Quarkus (JDBC)
@@ -35,6 +37,10 @@
           slug: guides/remix
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
+        - title: SQL Alchemy
+          slug: guides/sqlalchemy
+        - title: Symfony
+          slug: guides/symfony
     - title: Language quickstarts
       slug: get-started-with-neon/languages
       items:
@@ -44,25 +50,15 @@
           slug: guides/go
           ariaLabel: Connect a Go application to Neon
         - title: Java
-          items:
-            - title: JDBC
-              slug: guides/java
+          slug: guides/java
         - title: Javascript
           items:
             - title: Node.js
               slug: guides/node
-        - title: PHP
-          items:
-            - title: Laravel
-              slug: guides/laravel
-            - title: Symfony
-              slug: guides/symfony
         - title: Python
           items:
             - title: Psycopg
               slug: guides/python
-            - title: SQL Alchemy
-              slug: guides/sqlalchemy
         - title: Rust
           slug: guides/rust
     - title: Import data
