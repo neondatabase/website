@@ -17,6 +17,19 @@ function doNowOrAfterSomeTime(callback, loadingAnimationStartedTime) {
   }
 }
 
+const getHubspotFormData = async (formId) => {
+  const response = await fetch(
+    `https://forms.hsforms.com/embed/v3/form/${HUBSPOT_FORM_PORTAL_ID}/${formId}/json`
+  );
+
+  if (!response.ok) {
+    throw new Error(`Error fetching form data: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return data.form;
+};
+
 const sendHubspotFormData = async ({ formId, context, values }) => {
   const response = await fetch(
     `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_FORM_PORTAL_ID}/${formId}`,
@@ -36,4 +49,4 @@ const sendHubspotFormData = async ({ formId, context, values }) => {
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export { emailRegexp, doNowOrAfterSomeTime, sendHubspotFormData };
+export { emailRegexp, doNowOrAfterSomeTime, getHubspotFormData, sendHubspotFormData };

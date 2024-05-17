@@ -20,7 +20,7 @@ const LinesIllustration = ({ className: additionalClassName, color }) => {
         aria-hidden
       >
         <svg
-          className="ml-[50%] -translate-x-1/2 mt-0 h-[130px] w-[100%]"
+          className="mt-0 h-full w-full"
           width="300"
           height="150"
           viewBox="0 0 300 150"
@@ -65,7 +65,7 @@ const LinesIllustration = ({ className: additionalClassName, color }) => {
             </linearGradient>
           </defs>
         </svg>
-        <svg width="100%" height="150" fill="none" className="absolute top-0">
+        <svg width="100%" height="100%" fill="none" className="absolute top-0">
           <defs>
             <pattern id="linePattern" patternUnits="userSpaceOnUse" width="200" height="2">
               <line x1="0" y1="0" x2="300" y2="0" stroke="#0C0D0D" strokeWidth="1" />
