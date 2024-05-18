@@ -39,7 +39,7 @@ From its beginning as a [DARPA-sponsored project at Berkley](https://www.postgre
 
 **A serverless architecture built for performance, reliability, manageability, and cost efficiency**
 
-Neon's [architecture](/docs/introduction/architecture-overview) separates compute from storage, which enables serverless features like [Autoscaling](#autoscaling), [Autosuspend](#scale-to-zero), and [Bottomless Storage](#bottomless-storage). 
+Neon's [architecture](/docs/introduction/architecture-overview) separates compute from storage, which enables serverless features like [Autoscaling](/docs/get-started-with-neon/production-readiness#autoscaling), [Autosuspend](/docs/get-started-with-neon/production-readiness##scale-to-zero), and [Bottomless Storage](/docs/get-started-with-neon/production-readiness#bottomless-storage). 
 
 Separating compute from storage refers to an architecture where the database computation processes (queries, transactions, etc.) are handled by one set of resources (compute), while the data itself is stored on a separate set of resources (storage). This design contrasts with traditional architectures where compute and storage are tightly coupled on the same server. In Neon, Postgres runs on a compute, and data (except for what's cached in memory) resides on Neon's storage layer.
 
@@ -65,7 +65,7 @@ We believe we have an opportunity to define the standard for cloud Postgres. We 
 
 Building on Neon is building on Postgres. If you are already running Postgres, getting started is easy. [Import your data](https://neon.tech/docs/import/import-intro) and [connect](https://neon.tech/docs/connect/connect-intro). Migrating from other databases like MySQL or MongoDB is just as easy. 
 
-If you need to move data, you won't have to tear apart your application to remove proprietary application layers. Neon is pro-ecosystem and pro-integration. We encourage you to build with the frameworks, platforms, and services that best fit your requirements. Neon works to enable that. Check out our ever-expanding collection of [Framework, language, and platform guides](/docs/guides/guides-intro).
+If you need to move data, you won't have to tear apart your application to remove proprietary application layers. Neon is pro-ecosystem and pro-integration. We encourage you to build with the frameworks, platforms, and services that best fit your requirements. Neon works to enable that. Check out our ever-expanding collection of [framework](/docs/get-started-with-neon/frameworks), [language](/docs/get-started-with-neon/languages), and [integration](/docs/guides/integrations) guides.
 
 ## Who should use Neon?
 

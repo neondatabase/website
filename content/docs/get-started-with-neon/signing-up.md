@@ -246,7 +246,7 @@ From the **Branches** page in the Neon Console:
 
 ### Schema Migrations
 
-A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools,  you can use ORMs like [Prisma](https://www.prisma.io/) or [Drizzle](https://drizzle.team/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/getting_started/connect-neon).
+A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools,  you can use ORMs like [Prisma](https://www.prisma.io/) or [Drizzle](https://drizzle.team/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
 
 ## Step 7 - Reset your dev branch to main
 
