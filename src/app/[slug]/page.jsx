@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
-import * as yup from 'yup';
 
 import Hero from 'components/pages/landing/hero';
 import CTA from 'components/pages/pricing/cta';
@@ -25,46 +24,6 @@ const icons = {
   replicas: replicasIcon,
 };
 
-const getFormData = async ({ hubspotFormId, successMessage }) => {
-  const formData = {};
-  formData.hubspotFormId = hubspotFormId;
-  formData.successMessage = successMessage;
-
-  const data = await getHubspotFormData(hubspotFormId);
-  if (!data) return formData;
-
-  formData.data = data;
-  const { formFieldGroups } = data;
-  const yupObject = {};
-
-  formFieldGroups.forEach((group) => {
-    group.fields.forEach((field) => {
-      if (field.required) {
-        if (field.name === 'email') {
-          yupObject[field.name] = yup
-            .string()
-            .email('Please enter a valid email')
-            .required('Email address is a required field');
-        } else {
-          yupObject[field.name] = yup.string().required('Please complete this required field.');
-        }
-      }
-    });
-  });
-  formData.yupSchema = yup.object(yupObject).required();
-
-  if (formFieldGroups.length === 1) {
-    formData.isSimpleMode = true;
-    formData.simpleField = formFieldGroups[0].fields[0];
-  } else {
-    formData.isSimpleMode = false;
-    formData.formFieldGroups = formFieldGroups;
-  }
-  formData.buttonText = data.submitText;
-
-  return formData;
-};
-
 const DynamicPage = async ({ params }) => {
   const page = await getWpPageBySlug(params.slug);
 
@@ -79,10 +38,10 @@ const DynamicPage = async ({ params }) => {
   const contentWithLazyBlocks = getReactContentWithLazyBlocks(
     content,
     {
-      landinghero: async ({ hubspotFormId, successMessage, ...restProps }) => {
-        const formData = await getFormData(hubspotFormId, successMessage);
+      landinghero: async ({ hubspotFormId, ...restProps }) => {
+        const formData = await getHubspotFormData(hubspotFormId);
 
-        return <Hero formData={formData} {...restProps} />;
+        return <Hero formData={formData} hubspotFormId={hubspotFormId} {...restProps} />;
       },
       landingfeatures: ({ features, ...restProps }) => {
         const items = features.map((feature) => {

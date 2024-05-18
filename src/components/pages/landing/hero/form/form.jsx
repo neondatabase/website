@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import useCookie from 'react-use/lib/useCookie';
 import useLocation from 'react-use/lib/useLocation';
+import * as yup from 'yup';
 
 import Field from 'components/shared/field';
 import LinesIllustration from 'components/shared/lines-illustration';
@@ -24,15 +25,13 @@ const appearAndExitAnimationVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const Footer = ({ formState, successMessage, items }) => (
-  <>
+const Footer = ({ formState, successMessage, isSimpleMode, items }) => (
+  <div className={clsx('relative z-20', isSimpleMode ? 'mt-12 sm:mt-10' : 'mt-8 sm:px-4')}>
     {formState === FORM_STATES.SUCCESS && (
-      <p className="relative z-20 mx-auto mt-12 text-center text-base leading-snug text-gray-new-80">
-        {successMessage}
-      </p>
+      <p className="text-center text-base leading-snug text-gray-new-80">{successMessage}</p>
     )}
     {!(formState === FORM_STATES.SUCCESS) && items.length > 0 && (
-      <ul className="relative z-20 mx-auto mt-[52px] flex max-w-[480px] justify-between gap-x-7 sm:mx-0.5 sm:mt-11 sm:flex-col sm:gap-y-4">
+      <ul className="mx-auto flex max-w-[492px] justify-between gap-x-7 sm:mx-0.5 sm:flex-col sm:gap-y-4">
         {items.map(({ text }, idx) => (
           <li
             className="flex items-start gap-x-2 text-sm leading-dense tracking-extra-tight text-gray-new-70"
@@ -44,12 +43,13 @@ const Footer = ({ formState, successMessage, items }) => (
         ))}
       </ul>
     )}
-  </>
+  </div>
 );
 
 Footer.propTypes = {
-  formState: PropTypes.string.isRequired,
-  successMessage: PropTypes.string.isRequired,
+  formState: PropTypes.string,
+  successMessage: PropTypes.string,
+  isSimpleMode: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
@@ -64,10 +64,10 @@ const SubmitButton = ({ formState, buttonText, isSimpleMode = false }) => (
         <m.button
           className={clsx(
             isSimpleMode
-              ? 'absolute inset-y-2.5 right-3 h-11 rounded-[80px] sm:inset-y-[6.5px] sm:right-[9px] '
+              ? 'absolute inset-y-2.5 right-3 h-11 rounded-[80px] sm:inset-y-[6.5px] sm:right-[9px] sm:flex sm:h-10 sm:w-10 sm:items-center sm:justify-center sm:px-0 '
               : 'mt-9 block h-12 w-full rounded-[60px] text-lg',
-            'px-7 py-3 font-semibold leading-none tracking-tight text-black transition-colors duration-200 sm:flex sm:h-10 sm:w-10 sm:items-center sm:justify-center sm:px-0 sm:text-base',
-            formState === FORM_STATES.ERROR ? 'bg-secondary-1/50' : 'bg-green-45 hover:bg-[#00FFAA]'
+            'bg-green-45 px-7 py-3 font-semibold leading-none tracking-tight text-black transition-colors duration-200 hover:bg-[#00FFAA] sm:text-base',
+            formState === FORM_STATES.ERROR && '!bg-secondary-1/50'
           )}
           type="submit"
           initial="initial"
@@ -76,8 +76,8 @@ const SubmitButton = ({ formState, buttonText, isSimpleMode = false }) => (
           aria-label={buttonText}
           variants={appearAndExitAnimationVariants}
         >
-          <span className="sm:hidden">{buttonText}</span>
-          <SendIcon className="hidden h-6 w-6 sm:block" />
+          {isSimpleMode && <SendIcon className="hidden h-6 w-6 sm:block" />}
+          <span className={clsx(isSimpleMode && 'sm:hidden')}>{buttonText}</span>
         </m.button>
       )}
       {formState === FORM_STATES.LOADING && (
@@ -142,19 +142,38 @@ SubmitButton.propTypes = {
   isSimpleMode: PropTypes.bool,
 };
 
-const Form = ({ formData, items }) => {
-  const {
-    data,
-    fieldGroups,
-    buttonText,
-    isSimpleMode,
-    simpleField,
-    yupSchema,
-    successMessage,
-    hubspotFormId,
-  } = formData;
+const Form = ({ formData, hubspotFormId, successMessage, items }) => {
   const [state, setState] = useState(FORM_STATES.DEFAULT);
   const [errorMessage, setErrorMessage] = useState('');
+  let isSimpleMode = false;
+  let simpleField;
+
+  const { formFieldGroups } = formData;
+  const buttonText = formData.submitText || '';
+
+  const yupObject = {};
+  formFieldGroups.forEach((group) => {
+    group.fields.forEach((field) => {
+      if (field.required) {
+        if (field.name === 'email') {
+          yupObject[field.name] = yup
+            .string()
+            .email('Please enter a valid email')
+            .required('Email address is a required field');
+        } else {
+          yupObject[field.name] = yup.string().required('Please complete this required field.');
+        }
+      }
+    });
+  });
+  const yupSchema = yup.object(yupObject).required();
+
+  if (formFieldGroups.length === 1) {
+    isSimpleMode = true;
+    simpleField = formFieldGroups[0].fields[0];
+  } else {
+    isSimpleMode = false;
+  }
 
   const {
     register,
@@ -182,7 +201,6 @@ const Form = ({ formData, items }) => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    console.log(data);
 
     const values = Object.entries(data).map(([key, value]) => ({
       name: key,
@@ -220,7 +238,7 @@ const Form = ({ formData, items }) => {
     }
   };
 
-  if (!data) return null;
+  if (!formData) return null;
 
   if (isSimpleMode && simpleField)
     return (
@@ -244,7 +262,7 @@ const Form = ({ formData, items }) => {
               errorClassName="ml-7"
               {...register(simpleField.name)}
             />
-            <SubmitButton formState={state} buttonText={buttonText} isSimpleMode={isSimpleMode} />
+            <SubmitButton formState={state} buttonText={buttonText} isSimpleMode />
             {errorMessage && (
               <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
                 {errorMessage}
@@ -257,7 +275,7 @@ const Form = ({ formData, items }) => {
             size="sm"
           />
         </form>
-        <Footer formState={state} successMessage={successMessage} items={items} />
+        <Footer formState={state} successMessage={successMessage} items={items} isSimpleMode />
       </div>
     );
 
@@ -267,11 +285,13 @@ const Form = ({ formData, items }) => {
         <div className="relative z-20 rounded-[10px] bg-[linear-gradient(155deg,#00E59980,#00E5990D_50%,#00E59980_100%)] p-px">
           <div className={clsx(!isSimpleMode && 'rounded-[10px] bg-black-new p-9 sm:px-5 sm:py-6')}>
             <div className="space-y-6">
-              {fieldGroups &&
-                fieldGroups.map((fieldGroup, index) => (
+              {formFieldGroups &&
+                formFieldGroups.map((fieldGroup, index) => (
                   <fieldset
                     key={index}
-                    className={clsx(fieldGroup.fields.length > 1 && 'flex gap-5 gap-6 sm:flex-col')}
+                    className={clsx(
+                      fieldGroup.fields.length > 1 && 'flex gap-[30px] sm:flex-col sm:gap-6'
+                    )}
                   >
                     {fieldGroup.fields.map((field, index) => (
                       <Field
@@ -293,7 +313,7 @@ const Form = ({ formData, items }) => {
                   </fieldset>
                 ))}
             </div>
-            <SubmitButton formState={state} buttonText={buttonText} isSimpleMode={isSimpleMode} />
+            <SubmitButton formState={state} buttonText={buttonText} />
           </div>
           {errorMessage && (
             <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
@@ -302,7 +322,7 @@ const Form = ({ formData, items }) => {
           )}
         </div>
         <LinesIllustration
-          className="-top-[8%] z-10 !h-[116%] !w-[125%]"
+          className="-top-[8%] z-10 !h-[130%] !w-[130%]"
           color="#00E599"
           size="full"
         />
@@ -314,9 +334,7 @@ const Form = ({ formData, items }) => {
 
 Form.propTypes = {
   formData: PropTypes.shape({
-    data: PropTypes.shape({}),
-    yupSchema: PropTypes.shape({}),
-    fieldGroups: PropTypes.arrayOf({
+    formFieldGroups: PropTypes.arrayOf({
       fieldGroup: PropTypes.shape({
         fields: PropTypes.arrayOf({
           name: PropTypes.string,
@@ -326,17 +344,10 @@ Form.propTypes = {
         }),
       }),
     }),
-    simpleField: PropTypes.shape({
-      name: PropTypes.string,
-      label: PropTypes.string,
-      placeholder: PropTypes.string,
-      fieldType: PropTypes.string,
-    }),
-    buttonText: PropTypes.string,
-    isSimpleMode: PropTypes.bool,
-    successMessage: PropTypes.string,
-    hubspotFormId: PropTypes.string.isRequired,
-  }),
+    submitText: PropTypes.string,
+  }).isRequired,
+  hubspotFormId: PropTypes.string.isRequired,
+  successMessage: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
