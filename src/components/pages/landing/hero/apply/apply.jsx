@@ -17,6 +17,7 @@ import CheckIcon from 'icons/check.inline.svg';
 import FormCheckIcon from 'icons/subscription-form-check.inline.svg';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
+import Details from './details';
 import SendIcon from './images/send.inline.svg';
 
 const appearAndExitAnimationVariants = {
@@ -142,7 +143,16 @@ SubmitButton.propTypes = {
   isSimpleMode: PropTypes.bool,
 };
 
-const Form = ({ formData, hubspotFormId, successMessage, items }) => {
+const Apply = ({
+  formData,
+  hubspotFormId,
+  successMessage,
+  items,
+  details = false,
+  detailsLabel,
+  detailsTitle,
+  detailsDescription,
+}) => {
   const [state, setState] = useState(FORM_STATES.DEFAULT);
   const [errorMessage, setErrorMessage] = useState('');
   let isSimpleMode = false;
@@ -280,59 +290,82 @@ const Form = ({ formData, hubspotFormId, successMessage, items }) => {
     );
 
   return (
-    <div className="mx-auto my-[88px] w-[630px] max-w-full md:my-16 sm:my-14">
-      <form className="relative w-full" method="POST" onSubmit={handleSubmit(onSubmit)}>
-        <div className="relative z-20 rounded-[10px] bg-[linear-gradient(155deg,#00E59980,#00E5990D_50%,#00E59980_100%)] p-px">
-          <div className={clsx(!isSimpleMode && 'rounded-[10px] bg-black-new p-9 sm:px-5 sm:py-6')}>
-            <div className="space-y-6">
-              {formFieldGroups &&
-                formFieldGroups.map((fieldGroup, index) => (
-                  <fieldset
-                    key={index}
-                    className={clsx(
-                      fieldGroup.fields.length > 1 && 'flex gap-[30px] sm:flex-col sm:gap-6'
-                    )}
-                  >
-                    {fieldGroup.fields.map((field, index) => (
-                      <Field
-                        key={index}
-                        className="w-full"
-                        name={field.name}
-                        label={`${field.label}${field.required ? ' *' : ''}`}
-                        labelClassName="mb-0 block w-fit text-sm text-gray-new-70"
-                        tagClassName="remove-autocomplete-styles m-0 !h-10 !border-[1px] !bg-white/[0.04] !text-base text-white placeholder:tracking-tight placeholder:text-gray-new-40 focus:outline-none disabled:opacity-100 sm:placeholder:text-sm"
-                        type={field.fieldType}
-                        autoComplete={field.name}
-                        placeholder={field.placeholder}
-                        isDisabled={state === FORM_STATES.LOADING || state === FORM_STATES.SUCCESS}
-                        error={errors[field.name]?.message}
-                        errorClassName="w-full text-right text-xs leading-none"
-                        {...register(field.name)}
-                      />
-                    ))}
-                  </fieldset>
-                ))}
+    <div
+      className={clsx(
+        'flex w-full justify-center',
+        details
+          ? 'my-[120px] gap-[86px] xl:gap-10 lg:my-20 lg:flex-col sm:my-14'
+          : 'my-[88px] lg:my-16 sm:my-14'
+      )}
+    >
+      <div className={clsx('w-full max-w-[630px]', details && 'w-1/2 max-w-[630px] lg:w-full')}>
+        <form className="relative w-full" method="POST" onSubmit={handleSubmit(onSubmit)}>
+          <div
+            className={clsx(
+              'relative z-20 rounded-[10px]',
+              !details && 'bg-[linear-gradient(155deg,#00E59980,#00E5990D_50%,#00E59980_100%)] p-px'
+            )}
+          >
+            <div
+              className={clsx(!isSimpleMode && 'rounded-[10px] bg-black-new p-9 sm:px-5 sm:py-6')}
+            >
+              <div className="space-y-6">
+                {formFieldGroups &&
+                  formFieldGroups.map((fieldGroup, index) => (
+                    <fieldset
+                      key={index}
+                      className={clsx(
+                        fieldGroup.fields.length > 1 && 'flex gap-[30px] sm:flex-col sm:gap-6'
+                      )}
+                    >
+                      {fieldGroup.fields.map((field, index) => (
+                        <Field
+                          key={index}
+                          className="w-full"
+                          name={field.name}
+                          label={`${field.label}${field.required ? ' *' : ''}`}
+                          labelClassName="mb-0 block w-fit text-sm text-gray-new-70"
+                          tagClassName="remove-autocomplete-styles m-0 !h-10 !border-[1px] !bg-white/[0.04] !text-base text-white placeholder:tracking-tight placeholder:text-gray-new-40 focus:outline-none disabled:opacity-100 sm:placeholder:text-sm"
+                          type={field.fieldType}
+                          autoComplete={field.name}
+                          placeholder={field.placeholder}
+                          isDisabled={
+                            state === FORM_STATES.LOADING || state === FORM_STATES.SUCCESS
+                          }
+                          error={errors[field.name]?.message}
+                          errorClassName="w-full text-right text-xs leading-none"
+                          {...register(field.name)}
+                        />
+                      ))}
+                    </fieldset>
+                  ))}
+              </div>
+              <SubmitButton formState={state} buttonText={buttonText} />
             </div>
-            <SubmitButton formState={state} buttonText={buttonText} />
+            {errorMessage && (
+              <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
+                {errorMessage}
+              </span>
+            )}
           </div>
-          {errorMessage && (
-            <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
-              {errorMessage}
-            </span>
+          {!details && (
+            <LinesIllustration
+              className="-top-[8%] z-10 !h-[130%] !w-[130%]"
+              color="#00E599"
+              size="full"
+            />
           )}
-        </div>
-        <LinesIllustration
-          className="-top-[8%] z-10 !h-[130%] !w-[130%]"
-          color="#00E599"
-          size="full"
-        />
-      </form>
-      <Footer formState={state} successMessage={successMessage} items={items} />
+        </form>
+        <Footer formState={state} successMessage={successMessage} items={items} />
+      </div>
+      {details && (
+        <Details label={detailsLabel} title={detailsTitle} description={detailsDescription} />
+      )}
     </div>
   );
 };
 
-Form.propTypes = {
+Apply.propTypes = {
   formData: PropTypes.shape({
     formFieldGroups: PropTypes.arrayOf({
       fieldGroup: PropTypes.shape({
@@ -353,6 +386,10 @@ Form.propTypes = {
       text: PropTypes.string.isRequired,
     })
   ),
+  details: PropTypes.bool,
+  detailsLabel: PropTypes.string,
+  detailsTitle: PropTypes.string,
+  detailsDescription: PropTypes.string,
 };
 
-export default Form;
+export default Apply;

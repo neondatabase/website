@@ -40,7 +40,6 @@ const DynamicPage = async ({ params }) => {
     {
       landinghero: async ({ hubspotFormId, ...restProps }) => {
         const formData = await getHubspotFormData(hubspotFormId);
-
         return <Hero formData={formData} hubspotFormId={hubspotFormId} {...restProps} />;
       },
       landingfeatures: ({ features, ...restProps }) => {
