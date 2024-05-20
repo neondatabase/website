@@ -67,7 +67,7 @@ With pgAdmin, you can monitor real-time activity for a variety of metrics includ
 - Transactions per second (Transactions, Commits, Rollbacks)
 - Tuples in (Inserts, Updates, Deletes)
 - Tuples out (Fetched, Returned)
-- Block I/O for shared buffers (see [Cache your data](/docs/postgres/query-performance#cache-your-data) for information about Neon's Local File Cache)
+- Block I/O for shared buffers (see [Cache your data](/docs/postgresql/query-performance#cache-your-data) for information about Neon's Local File Cache)
 - Database activity (Sessions, Locks, Prepared Transactions)
 
 <Admonition type="note" title="Notes">

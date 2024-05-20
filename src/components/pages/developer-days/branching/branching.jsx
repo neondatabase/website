@@ -47,7 +47,7 @@ const Branching = () => {
   useBodyLockScroll(isOpenModal);
 
   return (
-    <section className="branching safe-paddings sm:pt[190px] bg-black pt-[672px] text-white xl:pt-[408px] md:pt-[364px] sm:pt-[190px]">
+    <section className="branching safe-paddings sm:pt[190px] bg-black-pure pt-[672px] text-white xl:pt-[408px] md:pt-[364px] sm:pt-[190px]">
       <Container
         className="grid-gap-x grid w-full grid-cols-12"
         size="md"

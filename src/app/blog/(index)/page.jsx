@@ -21,7 +21,7 @@ async function getChangelogData() {
 
 export const metadata = getMetadata({ ...SEO_DATA.blog, rssPathname: `${BLOG_BASE_PATH}rss.xml` });
 
-export default async function BlogPage() {
+const BlogPage = async () => {
   const changelogPosts = await getChangelogData();
   const featuredChangelogPosts = changelogPosts.slice(0, 4);
   const {
@@ -52,6 +52,8 @@ export default async function BlogPage() {
       />
     </>
   );
-}
+};
 
 export const revalidate = 60;
+
+export default BlogPage;

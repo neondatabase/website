@@ -123,7 +123,6 @@ To avoid changing connection details in your application, you can reassign the c
 The following GitHub repositories are available for these examples:
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/restore-neon-branch" description="A script to restore a Neon branch to a previous state while preserving the same endpoint" icon="github">Restore a Neon database</a>
 <a href="https://github.com/kelvich/branching_demo_bisect" description="Use Neon branching, the Neon API, and a bisect script to recover lost data" icon="github">Neon branch bisect demo</a>
 </DetailIconCards>
 
