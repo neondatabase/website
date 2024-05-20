@@ -34,7 +34,7 @@ const LinesIllustration = ({ className: additionalClassName, color }) => {
             />
             <path
               d="M30.6924 61.1842C30.6924 44.0161 44.6098 30.0986 61.7779 30.0986H238.212C255.38 30.0986 269.297 44.0161 269.297 61.1842C269.297 93.6127 243.009 119.901 210.58 119.901H89.4094C56.9809 119.901 30.6924 93.6127 30.6924 61.1842Z"
-              stroke="#0C0D0D"
+              stroke="#000"
             />
           </g>
 
@@ -68,13 +68,13 @@ const LinesIllustration = ({ className: additionalClassName, color }) => {
         <svg width="100%" height="100%" fill="none" className="absolute top-0">
           <defs>
             <pattern id="linePattern" patternUnits="userSpaceOnUse" width="200" height="2">
-              <line x1="0" y1="0" x2="300" y2="0" stroke="#0C0D0D" strokeWidth="1" />
-              <line x1="0" y1="2" x2="300" y2="2" stroke="#0C0D0D" strokeWidth="1" />
+              <line x1="0" y1="0" x2="300" y2="0" stroke="#000" strokeWidth="1" />
+              <line x1="0" y1="2" x2="300" y2="2" stroke="#000" strokeWidth="1" />
             </pattern>
           </defs>
           <g className="button-line-animation">
-            <rect width="100%" height="150" y="-1" fill="url(#linePattern)" />
-            <rect width="100%" height="150" y="150" fill="url(#linePattern)" />
+            <rect width="100%" height="100%" y="-1" fill="url(#linePattern)" />
+            <rect width="100%" height="100%" y="100%" fill="url(#linePattern)" />
           </g>
         </svg>
       </m.span>

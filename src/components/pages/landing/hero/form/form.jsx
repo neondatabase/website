@@ -17,7 +17,6 @@ import CheckIcon from 'icons/check.inline.svg';
 import FormCheckIcon from 'icons/subscription-form-check.inline.svg';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
-import Details from './details';
 import SendIcon from './images/send.inline.svg';
 
 const appearAndExitAnimationVariants = {
@@ -26,8 +25,8 @@ const appearAndExitAnimationVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const Footer = ({ formState, successMessage, isSimpleMode, items }) => (
-  <div className={clsx('relative z-20', isSimpleMode ? 'mt-12 sm:mt-10' : 'mt-8 sm:px-4')}>
+const Footer = ({ formState, successMessage, simpleMode, items }) => (
+  <div className={clsx('relative z-20', simpleMode ? 'mt-12 sm:mt-10' : 'mt-8 sm:px-4')}>
     {formState === FORM_STATES.SUCCESS && (
       <p className="text-center text-base leading-snug text-gray-new-80">{successMessage}</p>
     )}
@@ -50,7 +49,7 @@ const Footer = ({ formState, successMessage, isSimpleMode, items }) => (
 Footer.propTypes = {
   formState: PropTypes.string,
   successMessage: PropTypes.string,
-  isSimpleMode: PropTypes.bool,
+  simpleMode: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
@@ -58,14 +57,14 @@ Footer.propTypes = {
   ),
 };
 
-const SubmitButton = ({ formState, buttonText, isSimpleMode = false }) => (
+const SubmitButton = ({ formState, buttonText, simpleMode = false }) => (
   <LazyMotion features={domAnimation}>
     <AnimatePresence>
       {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && (
         <m.button
           className={clsx(
-            isSimpleMode
-              ? 'absolute inset-y-2.5 right-3 h-11 rounded-[80px] sm:inset-y-[6.5px] sm:right-[9px] sm:flex sm:h-10 sm:w-10 sm:items-center sm:justify-center sm:px-0 '
+            simpleMode
+              ? 'absolute inset-y-2.5 right-3 h-11 rounded-[80px] md:inset-y-[6.5px] md:right-[9px] md:flex md:h-10 md:w-10 md:items-center md:justify-center md:px-0 '
               : 'mt-9 block h-12 w-full rounded-[60px] text-lg',
             'bg-green-45 px-7 py-3 font-semibold leading-none tracking-tight text-black transition-colors duration-200 hover:bg-[#00FFAA] sm:text-base',
             formState === FORM_STATES.ERROR && '!bg-secondary-1/50'
@@ -77,14 +76,14 @@ const SubmitButton = ({ formState, buttonText, isSimpleMode = false }) => (
           aria-label={buttonText}
           variants={appearAndExitAnimationVariants}
         >
-          {isSimpleMode && <SendIcon className="hidden h-6 w-6 sm:block" />}
-          <span className={clsx(isSimpleMode && 'sm:hidden')}>{buttonText}</span>
+          {simpleMode && <SendIcon className="hidden h-6 w-6 md:block" />}
+          <span className={clsx(simpleMode && 'md:hidden')}>{buttonText}</span>
         </m.button>
       )}
       {formState === FORM_STATES.LOADING && (
         <m.div
           className={clsx(
-            isSimpleMode
+            simpleMode
               ? 'absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full'
               : 'mt-9 flex h-12 w-full items-center justify-center rounded-[60px]',
             'bg-green-45'
@@ -120,7 +119,7 @@ const SubmitButton = ({ formState, buttonText, isSimpleMode = false }) => (
       {formState === FORM_STATES.SUCCESS && (
         <m.div
           className={clsx(
-            isSimpleMode
+            simpleMode
               ? 'absolute right-3 top-1/2 -translate-y-1/2 rounded-full'
               : 'mt-9 flex h-12 w-full items-center justify-center rounded-[60px]',
             'bg-green-45 text-black'
@@ -140,26 +139,28 @@ const SubmitButton = ({ formState, buttonText, isSimpleMode = false }) => (
 SubmitButton.propTypes = {
   formState: PropTypes.string.isRequired,
   buttonText: PropTypes.string.isRequired,
-  isSimpleMode: PropTypes.bool,
+  simpleMode: PropTypes.bool,
 };
 
-const Apply = ({
-  formData,
-  hubspotFormId,
+const Form = ({
+  simpleMode = false,
+  simpleField,
+  formFieldGroups,
+  buttonText,
   successMessage,
+  hubspotFormId,
   items,
-  details = false,
-  detailsLabel,
-  detailsTitle,
-  detailsDescription,
+  greenMode = false,
 }) => {
   const [state, setState] = useState(FORM_STATES.DEFAULT);
   const [errorMessage, setErrorMessage] = useState('');
-  let isSimpleMode = false;
-  let simpleField;
+  const [hubspotutk] = useCookie('hubspotutk');
+  const { href } = useLocation();
 
-  const { formFieldGroups } = formData;
-  const buttonText = formData.submitText || '';
+  const context = {
+    hutk: hubspotutk,
+    pageUri: href,
+  };
 
   const yupObject = {};
   formFieldGroups.forEach((group) => {
@@ -178,13 +179,6 @@ const Apply = ({
   });
   const yupSchema = yup.object(yupObject).required();
 
-  if (formFieldGroups.length === 1) {
-    isSimpleMode = true;
-    simpleField = formFieldGroups[0].fields[0];
-  } else {
-    isSimpleMode = false;
-  }
-
   const {
     register,
     // reset,
@@ -193,13 +187,6 @@ const Apply = ({
   } = useForm({
     resolver: yupResolver(yupSchema),
   });
-  const [hubspotutk] = useCookie('hubspotutk');
-  const { href } = useLocation();
-
-  const context = {
-    hutk: hubspotutk,
-    pageUri: href,
-  };
 
   useEffect(() => {
     const hasErrors = Object.keys(errors).length > 0;
@@ -248,17 +235,15 @@ const Apply = ({
     }
   };
 
-  if (!formData) return null;
-
-  if (isSimpleMode && simpleField)
+  if (simpleMode)
     return (
-      <div className="mx-auto my-[75px] w-[504px] max-w-full md:my-16 md:max-w-[90%] sm:my-14">
+      <>
         <form className="relative w-full" method="POST" onSubmit={handleSubmit(onSubmit)}>
           <div className="relative z-20">
             <Field
               labelClassName="hidden"
-              tagClassName={clsx(
-                '!bg-black-pure remove-autocomplete-styles !m-0 h-16 w-full appearance-none rounded-[50px] !border-[1px] bg-black-new pl-7 pr-48 text-base text-white placeholder:tracking-tight placeholder:text-gray-new-50 focus:outline-none disabled:opacity-100 sm:h-14 sm:pl-6 sm:pr-16 sm:placeholder:text-sm',
+              inputClassName={clsx(
+                '!bg-black-pure remove-autocomplete-styles !m-0 h-16 w-full appearance-none rounded-[50px] !border-[1px] bg-black-new pl-7 pr-48 text-base text-white placeholder:tracking-tight placeholder:text-gray-new-50 focus:outline-none disabled:opacity-100 md:h-14 md:pl-6 md:pr-16 md:placeholder:text-sm',
                 state === FORM_STATES.ERROR ? '!border-secondary-1' : '!border-green-45',
                 state === FORM_STATES.SUCCESS ? '!pr-14 text-green-45' : 'text-white'
               )}
@@ -272,7 +257,7 @@ const Apply = ({
               errorClassName="ml-7"
               {...register(simpleField.name)}
             />
-            <SubmitButton formState={state} buttonText={buttonText} isSimpleMode />
+            <SubmitButton formState={state} buttonText={buttonText} simpleMode />
             {errorMessage && (
               <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
                 {errorMessage}
@@ -282,103 +267,86 @@ const Apply = ({
           <LinesIllustration
             className="-top-8 z-10 h-[130px] !w-[125%]"
             color={state === FORM_STATES.ERROR ? '#FF4C79' : '#00E599'}
-            size="sm"
           />
         </form>
-        <Footer formState={state} successMessage={successMessage} items={items} isSimpleMode />
-      </div>
+        <Footer formState={state} successMessage={successMessage} items={items} simpleMode />
+      </>
     );
 
   return (
-    <div
-      className={clsx(
-        'flex w-full justify-center',
-        details
-          ? 'my-[120px] gap-[86px] xl:gap-10 lg:my-20 lg:flex-col sm:my-14'
-          : 'my-[88px] lg:my-16 sm:my-14'
-      )}
-    >
-      <div className={clsx('w-full max-w-[630px]', details && 'w-1/2 max-w-[630px] lg:w-full')}>
-        <form className="relative w-full" method="POST" onSubmit={handleSubmit(onSubmit)}>
-          <div
-            className={clsx(
-              'relative z-20 rounded-[10px]',
-              !details && 'bg-[linear-gradient(155deg,#00E59980,#00E5990D_50%,#00E59980_100%)] p-px'
-            )}
-          >
-            <div
-              className={clsx(!isSimpleMode && 'rounded-[10px] bg-black-new p-9 sm:px-5 sm:py-6')}
-            >
-              <div className="space-y-6">
-                {formFieldGroups &&
-                  formFieldGroups.map((fieldGroup, index) => (
-                    <fieldset
-                      key={index}
-                      className={clsx(
-                        fieldGroup.fields.length > 1 && 'flex gap-[30px] sm:flex-col sm:gap-6'
-                      )}
-                    >
-                      {fieldGroup.fields.map((field, index) => (
-                        <Field
-                          key={index}
-                          className="w-full"
-                          name={field.name}
-                          label={`${field.label}${field.required ? ' *' : ''}`}
-                          labelClassName="mb-0 block w-fit text-sm text-gray-new-70"
-                          tagClassName="remove-autocomplete-styles m-0 !h-10 !border-[1px] !bg-white/[0.04] !text-base text-white placeholder:tracking-tight placeholder:text-gray-new-40 focus:outline-none disabled:opacity-100 sm:placeholder:text-sm"
-                          type={field.fieldType}
-                          autoComplete={field.name}
-                          placeholder={field.placeholder}
-                          isDisabled={
-                            state === FORM_STATES.LOADING || state === FORM_STATES.SUCCESS
-                          }
-                          error={errors[field.name]?.message}
-                          errorClassName="w-full text-right text-xs leading-none"
-                          {...register(field.name)}
-                        />
-                      ))}
-                    </fieldset>
-                  ))}
-              </div>
-              <SubmitButton formState={state} buttonText={buttonText} />
-            </div>
-            {errorMessage && (
-              <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
-                {errorMessage}
-              </span>
-            )}
-          </div>
-          {!details && (
-            <LinesIllustration
-              className="-top-[8%] z-10 !h-[130%] !w-[130%]"
-              color="#00E599"
-              size="full"
-            />
+    <>
+      <form className="relative w-full" method="POST" onSubmit={handleSubmit(onSubmit)}>
+        <div
+          className={clsx(
+            'relative z-20 rounded-[10px]',
+            greenMode && 'bg-[linear-gradient(155deg,#00E59980,#00E5990D_50%,#00E59980_100%)] p-px'
           )}
-        </form>
-        <Footer formState={state} successMessage={successMessage} items={items} />
-      </div>
-      {details && (
-        <Details label={detailsLabel} title={detailsTitle} description={detailsDescription} />
-      )}
-    </div>
+        >
+          <div className={clsx(!simpleMode && 'rounded-[10px] bg-black-new p-9 sm:px-5 sm:py-6')}>
+            <div className="space-y-6">
+              {formFieldGroups &&
+                formFieldGroups.map((fieldGroup, index) => (
+                  <fieldset
+                    key={index}
+                    className={clsx(
+                      fieldGroup.fields.length > 1 && 'flex gap-[30px] sm:flex-col sm:gap-6'
+                    )}
+                  >
+                    {fieldGroup.fields.map((field, index) => (
+                      <Field
+                        key={index}
+                        className="w-full"
+                        name={field.name}
+                        label={`${field.label}${field.required ? ' *' : ''}`}
+                        labelClassName="mb-0 block w-fit text-sm text-gray-new-70"
+                        inputClassName="remove-autocomplete-styles m-0 !h-10 !border-[1px] !bg-white/[0.04] !text-base text-white placeholder:tracking-tight placeholder:text-gray-new-40 focus:outline-none disabled:opacity-100 sm:placeholder:text-sm"
+                        type={field.fieldType}
+                        autoComplete={field.name}
+                        placeholder={field.placeholder}
+                        isDisabled={state === FORM_STATES.LOADING || state === FORM_STATES.SUCCESS}
+                        error={errors[field.name]?.message}
+                        errorClassName="w-full text-right text-xs leading-none"
+                        {...register(field.name)}
+                      />
+                    ))}
+                  </fieldset>
+                ))}
+            </div>
+            <SubmitButton formState={state} buttonText={buttonText} />
+          </div>
+          {errorMessage && (
+            <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
+              {errorMessage}
+            </span>
+          )}
+        </div>
+        {greenMode && (
+          <LinesIllustration className="-top-[30%] !h-[160%] !w-[140%]" color="#00E599" speed={1} />
+        )}
+      </form>
+      <Footer formState={state} successMessage={successMessage} items={items} />
+    </>
   );
 };
 
-Apply.propTypes = {
-  formData: PropTypes.shape({
-    formFieldGroups: PropTypes.arrayOf({
-      fieldGroup: PropTypes.shape({
-        fields: PropTypes.arrayOf({
-          name: PropTypes.string,
-          label: PropTypes.string,
-          placeholder: PropTypes.string,
-          fieldType: PropTypes.string,
-        }),
-      }),
+const filedPropTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  fieldType: PropTypes.string.isRequired,
+  required: PropTypes.bool,
+};
+
+Form.propTypes = {
+  simpleMode: PropTypes.bool,
+  greenMode: PropTypes.bool,
+  simpleField: PropTypes.shape(filedPropTypes),
+  formFieldGroups: PropTypes.arrayOf({
+    fieldGroup: PropTypes.shape({
+      fields: PropTypes.arrayOf(filedPropTypes),
     }),
-    submitText: PropTypes.string,
-  }).isRequired,
+  }),
+  buttonText: PropTypes.string,
   hubspotFormId: PropTypes.string.isRequired,
   successMessage: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(
@@ -386,10 +354,6 @@ Apply.propTypes = {
       text: PropTypes.string.isRequired,
     })
   ),
-  details: PropTypes.bool,
-  detailsLabel: PropTypes.string,
-  detailsTitle: PropTypes.string,
-  detailsDescription: PropTypes.string,
 };
 
-export default Apply;
+export default Form;

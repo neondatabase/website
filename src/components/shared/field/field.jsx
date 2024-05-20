@@ -18,7 +18,7 @@ const Field = forwardRef(
       type = 'text',
       children,
       tag: Tag = 'input',
-      tagClassName,
+      inputClassName,
       error,
       errorClassName,
       isDisabled,
@@ -40,7 +40,7 @@ const Field = forwardRef(
           error
             ? 'border-secondary-1 focus:border-secondary-1'
             : 'border-transparent focus:border-primary-1',
-          tagClassName
+          inputClassName
         )}
         ref={ref}
         id={name}
@@ -74,7 +74,7 @@ Field.propTypes = {
   labelClassName: PropTypes.string,
   type: PropTypes.string,
   tag: PropTypes.oneOf(Object.values(FIELD_TAGS)),
-  tagClassName: PropTypes.string,
+  inputClassName: PropTypes.string,
   error: PropTypes.string,
   errorClassName: PropTypes.string,
   children: PropTypes.node,

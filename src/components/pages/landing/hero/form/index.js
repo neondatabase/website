@@ -1,3 +1,3 @@
-import Apply from './apply';
+import Form from './form';
 
-export default Apply;
+export default Form;

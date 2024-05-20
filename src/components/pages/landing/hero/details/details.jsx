@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import GradientLabel from 'components/shared/gradient-label';
 
 const Details = ({ label, title, description }) => (
-  <div className="w-1/2 max-w-[505px] lg:mt-10 lg:w-full">
+  <div className="w-[505px] max-w-full lg:mt-10">
     {label && <GradientLabel className="inline-block">{label}</GradientLabel>}
     {title && (
       <h2 className="mt-3.5 font-title text-[52px] font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
