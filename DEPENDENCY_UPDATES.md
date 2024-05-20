@@ -113,12 +113,10 @@ Space for a free-form description of the problem
 - **Problematic version:** 4.0.0
 - **Last stable version:** 3.0.1
 
-### next
+### eslint-plugin-cypress, eslint
 
-Get the error when update Next.js to v14, can't use serialize in client components.
-Error message: `export 'serialize' (reexported as 'serialize') was not found`.
-[Related issue](https://github.com/hashicorp/next-mdx-remote/issues/416)
+Currently, the [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) does not support eslint version 9. We will refrain from updating both until such support is available. Once compatibility with eslint version 9 is confirmed for eslint-plugin-cypress, we will proceed with updating both dependencies.
 
-- **Issue found on:** 01 December, 2023
-- **Problematic version:** >14.x.x
-- **Last stable version:** 13.5.6
+- **Issue found on:** 23 April, 2024
+- **Problematic version:** eslint-plugin-cypress >3.x.x, eslint >9.0.0
+- **Last stable version:** eslint-plugin-cypress 2.15.2, eslint 8.57.0

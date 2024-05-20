@@ -97,7 +97,7 @@ const Hero = ({
   return (
     <section className="safe-paddings pt-[152px] xl:pt-[120px] lg:pt-11 md:pt-7">
       <Container className="flex flex-col items-center" size="medium">
-        <h1 className="text-center text-[72px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px] md:text-[40px]">
+        <h1 className="text-center font-title text-[72px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px] md:text-[40px]">
           {title}
         </h1>
         <p

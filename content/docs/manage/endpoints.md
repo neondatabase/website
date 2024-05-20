@@ -112,7 +112,7 @@ In Postgres, the `shared_buffers` setting defines the amount of data that can be
 
 The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size. Larger computes support higher maximum connection limits.
 
-The following table outlines the vCPU, RAM, LFC size (50 % of RAM), and the `max_connections` limit for each compute size that Neon supports.
+The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_connections` limit for each compute size that Neon supports.
 
 | Compute Size (CU) | vCPU | RAM   | LFC size | max_connections | 
 |-------------------|------|-------|----------|-----------------|

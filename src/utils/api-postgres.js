@@ -37,8 +37,11 @@ const findTitle = (sidebar, currentSlug) => {
 
 const getPostBySlug = async (path, basePath) => {
   try {
-    const content = fs.readFileSync(`${basePath}${path}.md`, 'utf-8');
-    const sidebar = fs.readFileSync('content/postgresql/sidebar/sidebar.json', 'utf8');
+    const content = fs.readFileSync(`${process.cwd()}/${basePath}${path}.md`, 'utf-8');
+    const sidebar = fs.readFileSync(
+      `${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar/sidebar.json`,
+      'utf8'
+    );
 
     const currentSlug = path.slice(1);
     const sidebarData = JSON.parse(sidebar);
@@ -69,7 +72,10 @@ const getAllPosts = async () => {
 const getTitleWithInlineCode = (title) => title.replace(/`([^`]+)`/g, '<code>$1</code>');
 
 const getNavigationLinks = (slug) => {
-  const flatSidebarJson = fs.readFileSync('content/postgresql/sidebar/flat-sidebar.json', 'utf8');
+  const flatSidebarJson = fs.readFileSync(
+    `${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar/flat-sidebar.json`,
+    'utf8'
+  );
   const flatSidebar = JSON.parse(flatSidebarJson);
   const currentIndex = flatSidebar.findIndex((item) => item.currentSlug === slug);
 
@@ -121,7 +127,10 @@ const getSideBarWithInlineCode = (sidebar) => {
 };
 
 const getSidebar = () => {
-  const sidebarJson = fs.readFileSync('content/postgresql/sidebar/sidebar.json', 'utf8');
+  const sidebarJson = fs.readFileSync(
+    `${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar/sidebar.json`,
+    'utf8'
+  );
   const sidebar = JSON.parse(sidebarJson);
 
   return getSideBarWithInlineCode(sidebar);

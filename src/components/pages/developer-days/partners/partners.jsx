@@ -42,7 +42,7 @@ const Partners = () => {
   useBodyLockScroll(isOpenModal);
 
   return (
-    <section className="branching safe-paddings bg-black pt-[672px] text-white 3xl:pt-[690px] xl:pt-[408px] md:pt-[364px] sm:pt-[190px]">
+    <section className="branching safe-paddings bg-black-pure pt-[672px] text-white 3xl:pt-[690px] xl:pt-[408px] md:pt-[364px] sm:pt-[190px]">
       <Container
         className="grid-gap-x grid w-full grid-cols-12"
         size="md"

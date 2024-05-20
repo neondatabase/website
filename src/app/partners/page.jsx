@@ -22,26 +22,22 @@ const items = [
   {
     icon: compatibilityIcon,
     title: 'Supercharge your platform',
-    description:
-      'Offer managed Postgres, the most-loved relational database by developers.',
+    description: 'Offer managed Postgres, the most-loved relational database by developers.',
   },
   {
     icon: currencyIcon,
     title: 'Scale as you go',
-    description:
-      'Pay only for what you use, with scale to zero and usage-based pricing.',
+    description: 'Pay only for what you use, with scale to zero and usage-based pricing.',
   },
   {
     icon: userIcon,
     title: 'Accelerate onboarding',
-    description:
-      'Reduce friction for your users so they can start building instantly.',
+    description: 'Reduce friction for your users so they can start building instantly.',
   },
   {
     icon: speedIcon,
     title: 'Easy management',
-    description:
-      'Give dedicated URLs to your users and handle all database tasks via an API.',
+    description: 'Give dedicated URLs to your users and handle all database tasks via an API.',
   },
 ];
 
@@ -63,11 +59,10 @@ const logos = [
 
 const PartnersPage = () => (
   <Layout
-    className="bg-black-new text-white"
+    className="bg-black-pure text-white"
     headerClassName="lg:!absolute lg:!bg-transparent"
-    headerTheme="black-new"
-    footerTheme="black-new"
-    footerWithTopBorder
+    headerTheme="black-pure"
+    footerTheme="black-pure"
   >
     <Hero />
     <Logos logos={logos} withGreenFade />

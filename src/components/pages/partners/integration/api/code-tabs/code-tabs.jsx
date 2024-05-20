@@ -69,7 +69,7 @@ const CodeTabs = async ({ className = null }) => {
   const highlightedCodeSnippets = await getHighlightedCodeArray(codeSnippets);
 
   return (
-    <div className={clsx(className, 'rounded-[10px] bg-gray-new-8')}>
+    <div className={clsx(className, 'rounded-[10px] bg-black-new')}>
       <CodeTabsNavigation
         codeSnippets={codeSnippets}
         highlightedCodeSnippets={highlightedCodeSnippets}

@@ -27,7 +27,7 @@ const getPostSlugs = async (pathname) => {
 
 const getPostBySlug = (slug, pathname) => {
   try {
-    const source = fs.readFileSync(`${pathname}/${slug}.md`);
+    const source = fs.readFileSync(`${process.cwd()}/${pathname}/${slug}.md`);
     const { data, content } = matter(source);
     const excerpt = getExcerpt(content, 200);
 
@@ -55,7 +55,9 @@ const getAllPosts = async () => {
 };
 
 const getSidebar = () =>
-  jsYaml.load(fs.readFileSync(path.resolve('content/docs/sidebar.yaml'), 'utf8'));
+  jsYaml.load(
+    fs.readFileSync(path.resolve(`${process.cwd()}/${DOCS_DIR_PATH}/sidebar.yaml`), 'utf8')
+  );
 
 const getBreadcrumbs = (slug, flatSidebar) => {
   const path = flatSidebar.find((item) => item.slug === slug)?.path;

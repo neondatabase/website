@@ -88,7 +88,6 @@ Learn how to promote a branch to become your primary branch.
 Explore example applications that use Neon's branching feature.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/restore-neon-branch" description="A script to restore data to a previous state while preserving the connection configuration" icon="invert">Restore a Neon database</a>
 <a href="https://github.com/kelvich/branching_demo_bisect" description="Use Neon branching, the Neon API, and a bisect script to recover lost data" icon="hourglass">Time Travel Demo</a>
 <a href="https://github.com/neondatabase/neon_twitter" description="Use GitHub Actions to create and delete a branch with each pull request" icon="x">Neon Twitter app</a>
 <a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with preview deployments in Vercel" icon="calendar-day">Preview branches app</a>
