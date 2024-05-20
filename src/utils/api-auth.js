@@ -1,4 +1,4 @@
-import { gql, graphQLClient } from 'lib/graphQLClient';
+import { fetchGraphQL, gql, graphQLClient } from 'lib/graphQLClient';
 
 const getAuthToken = async () => {
   const authQuery = gql`
@@ -9,7 +9,9 @@ const getAuthToken = async () => {
     }
   `;
 
-  return graphQLClient.request(authQuery, { refreshToken: process.env.WP_GRAPHQL_AUTH_TOKEN });
+  return fetchGraphQL(graphQLClient).request(authQuery, {
+    refreshToken: process.env.WP_GRAPHQL_AUTH_TOKEN,
+  });
 };
 
 export default getAuthToken;

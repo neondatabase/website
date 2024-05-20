@@ -1,7 +1,7 @@
 import { cache } from 'react';
 
 import { BLOG_POSTS_PER_PAGE } from 'constants/blog';
-import { gql, graphQLClient, graphQLClientAdmin } from 'lib/graphQLClient';
+import { gql, graphQLClientAdmin, fetchGraphQL, graphQLClient } from 'lib/graphQLClient';
 
 import getAuthToken from './api-auth';
 
@@ -35,7 +35,7 @@ const getAllWpBlogCategories = cache(async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(categoriesQuery);
+  const data = await fetchGraphQL(graphQLClient).request(categoriesQuery);
   const filteredCategories = data?.categories?.nodes.filter(
     (category) => category.slug !== 'uncategorized' && category.posts.nodes.length > 0
   );
@@ -131,7 +131,7 @@ const fetchWpPostsByCategorySlug = async (slug, after) => {
   `;
 
   if (slug === 'all-posts') {
-    const allPostsData = await graphQLClient.request(allPostsQuery, {
+    const allPostsData = await fetchGraphQL(graphQLClient).request(allPostsQuery, {
       first: BLOG_POSTS_PER_PAGE,
       after,
     });
@@ -140,7 +140,7 @@ const fetchWpPostsByCategorySlug = async (slug, after) => {
   }
   const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
 
-  const data = await graphQLClient.request(postsQuery, {
+  const data = await fetchGraphQL(graphQLClient).request(postsQuery, {
     first: BLOG_POSTS_PER_PAGE,
     after,
     categoryName,
@@ -407,7 +407,7 @@ const getWpBlogPage = cache(async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(blogPageQuery);
+  const data = await fetchGraphQL(graphQLClient).request(blogPageQuery);
 
   return data?.page?.template?.pageBlog;
 });
@@ -459,7 +459,7 @@ const fetchAllWpPosts = async (after) => {
       }
     }
   `;
-  const data = await graphQLClient.request(allPostsQuery, {
+  const data = await fetchGraphQL(graphQLClient).request(allPostsQuery, {
     first: BLOG_POSTS_PER_PAGE,
     after,
   });
@@ -564,7 +564,7 @@ const getWpPostBySlug = cache(async (slug) => {
     ${POST_SEO_FRAGMENT}
   `;
 
-  const data = await graphQLClient.request(postBySlugQuery, { id: slug });
+  const data = await fetchGraphQL(graphQLClient).request(postBySlugQuery, { id: slug });
 
   const sortedPosts = data?.posts?.nodes.filter((post) => post.slug !== slug).slice(0, 3);
 
@@ -581,6 +581,7 @@ const getWpPreviewPostData = async (id, status) => {
   const {
     refreshJwtAuthToken: { authToken },
   } = await getAuthToken();
+  const adminClient = graphQLClientAdmin(authToken);
 
   const isDraft = status === 'draft';
   const isRevision = status === 'publish';
@@ -668,7 +669,7 @@ const getWpPreviewPostData = async (id, status) => {
       ${POST_SEO_FRAGMENT}
     `;
 
-    const data = await graphQLClientAdmin(authToken).request(query, { id });
+    const data = await fetchGraphQL(adminClient).request(query, { id });
 
     const sortedPosts = data?.posts?.nodes
       .filter((post) => post.slug !== data?.post?.slug)
@@ -764,7 +765,7 @@ const getWpPreviewPostData = async (id, status) => {
       }
       ${POST_SEO_FRAGMENT}
     `;
-    const revisionPostData = await graphQLClientAdmin(authToken).request(query, {
+    const revisionPostData = await fetchGraphQL(adminClient).request(query, {
       id,
     });
     // TODO: Pass seo data to head component
@@ -784,6 +785,7 @@ const getWpPreviewPost = async (id) => {
   const {
     refreshJwtAuthToken: { authToken },
   } = await getAuthToken();
+  const adminClient = graphQLClientAdmin(authToken);
 
   const findPreviewPostQuery = gql`
     query PreviewPost($id: ID!) {
@@ -795,7 +797,7 @@ const getWpPreviewPost = async (id) => {
     }
   `;
 
-  return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
+  return fetchGraphQL(adminClient).request(findPreviewPostQuery, { id });
 };
 
 const getAllWpCaseStudiesPosts = async () => {
@@ -825,7 +827,7 @@ const getAllWpCaseStudiesPosts = async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(caseStudiesQuery);
+  const data = await fetchGraphQL(graphQLClient).request(caseStudiesQuery);
 
   return data?.caseStudies?.nodes;
 };
