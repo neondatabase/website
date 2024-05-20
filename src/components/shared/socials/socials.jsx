@@ -29,7 +29,7 @@ const socialLinks = [
 
 const Socials = () => (
   <>
-    <span className="text-xs font-semibold uppercase leading-none tracking-[0.02em] text-gray-new-70">
+    <span className="text-xs font-semibold uppercase -tracking-extra-tight text-gray-new-70">
       Follow us
     </span>
     <ul className="mt-4 flex flex-wrap gap-4">

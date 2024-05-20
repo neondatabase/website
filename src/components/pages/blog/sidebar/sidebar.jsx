@@ -34,9 +34,6 @@ const Sidebar = ({ categories }) => {
           </nav>
         </div>
         <div className="sticky bottom-10 leading-none lt:hidden">
-          <span className="text-xs font-semibold uppercase -tracking-extra-tight text-gray-new-70">
-            Follow us
-          </span>
           <Socials />
         </div>
       </div>
