@@ -47,10 +47,10 @@ const Post = ({
     <div className="col-start-11 col-end-13 -ml-11 h-full max-w-[256px] xl:col-start-10 lg:hidden">
       <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
         {enableTableOfContents && <TableOfContents items={tableOfContents} />}
+        {author && (
+          <Author data={author} className={clsx('lg:hidden', enableTableOfContents && 'mt-14')} />
+        )}
       </nav>
-      {author && (
-        <Author data={author} className={clsx('lg:hidden', enableTableOfContents && 'mt-14')} />
-      )}
     </div>
   </>
 );
