@@ -62,7 +62,9 @@ const Post = ({
         <Changelog currentSlug={currentSlug} items={changelogPosts} />
       ) : (
         <article>
-          <h1 className="font-title text-[36px] font-medium leading-tight xl:text-3xl">{title}</h1>
+          <h1 className="font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl">
+            {title}
+          </h1>
           {subtitle && (
             <p className="my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80">
               {subtitle}
