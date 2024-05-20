@@ -1,7 +1,5 @@
 import dynamic from 'next/dynamic';
 
-import Socials from 'components/shared/socials';
-
 const Search = dynamic(() => import('components/shared/search/search'));
 
 const Sidebar = () => (
@@ -14,9 +12,6 @@ const Sidebar = () => (
             indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
           />
         </nav>
-      </div>
-      <div className="sticky bottom-10">
-        <Socials />
       </div>
     </div>
   </aside>
