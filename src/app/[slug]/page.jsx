@@ -85,6 +85,8 @@ const DinamicPage = async ({ params }) => {
 export async function generateViewport({ params }) {
   const page = await getWpPageBySlug(params.slug);
 
+  if (!page) return notFound();
+
   const {
     template: { templateName },
   } = page;
