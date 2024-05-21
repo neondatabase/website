@@ -376,10 +376,6 @@
           slug: guides/auth-clerk
         - title: Okta
           slug: guides/auth-okta
-    - title: CI/CD
-      items:
-        - title: GitHub integration
-          slug: guides/neon-github-app
     - title: Tools
       items:
         - title: Outerbase
