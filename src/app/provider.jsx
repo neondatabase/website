@@ -20,7 +20,8 @@ const whiteThemePages = [
 const ThemeProvider = ({ children }) => {
   const pathname = usePathname();
   const isWhiteThemePage = whiteThemePages.some((page) => pathname.startsWith(page));
-  const isDocPage = pathname.startsWith('/docs') || pathname.startsWith('/flow');
+  const isDocPage =
+    pathname.startsWith('/docs') || pathname.startsWith('/guides') || pathname.startsWith('/flow');
   const forcedTheme = isWhiteThemePage ? 'light' : 'dark';
 
   return (

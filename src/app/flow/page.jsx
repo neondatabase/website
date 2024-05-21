@@ -1,7 +1,8 @@
 import Post from 'components/pages/doc/post';
 import SEO_DATA from 'constants/seo-data';
-import { FLOW_DIR_PATH, getPostBySlug, getTableOfContents } from 'utils/api-docs';
+import { FLOW_DIR_PATH, getPostBySlug } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
+import getTableOfContents from 'utils/get-table-of-contents';
 
 export const metadata = getMetadata(SEO_DATA.flow);
 
