@@ -1,15 +1,15 @@
 - title: Home
   slug: introduction
+- title: Why Neon?
+  items:
+    - title: Our mission
+      slug: get-started-with-neon/why-neon
+    - title: Developer experience with Neon
+      slug: get-started-with-neon/dev-experience
+    - title: Production readiness with Neon
+      slug: get-started-with-neon/production-readiness
 - title: Getting Started
   items:
-    - title: Why Neon?
-      items:
-        - title: Our mission
-          slug: get-started-with-neon/why-neon
-        - title: Developer experience with Neon
-          slug: get-started-with-neon/dev-experience
-        - title: Production readiness with Neon
-          slug: get-started-with-neon/production-readiness
     - title: 1 - Playing with Neon
       slug: get-started-with-neon/signing-up
     - title: 2 - Connect Neon to your stack
