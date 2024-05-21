@@ -41,7 +41,7 @@ export async function generateMetadata({ params }) {
   });
 }
 
-export default async function GuidePost({ params }) {
+const GuidePost = async ({ params }) => {
   const { slug } = params;
   const posts = await getAllPosts();
   const navigationLinks = getNavigationLinks(slug, posts);
@@ -67,17 +67,17 @@ export default async function GuidePost({ params }) {
       />
 
       <Layout
+        className="bg-blur"
         headerTheme="white"
-        headerWithBottomBorder
-        footerWithTopBorder
+        headerWithBorder
         burgerWithoutBorder
         isDocPage
         isHeaderSticky
       >
-        <div className="safe-paddings flex flex-1 flex-col dark:bg-gray-new-8 dark:text-white lg:block">
+        <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
           <Container
             className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-12 xl:gap-x-7 lg:block lg:gap-x-5 md:pt-10 sm:pt-8"
-            size="medium"
+            size="1344"
           >
             <Post
               data={data}
@@ -93,4 +93,6 @@ export default async function GuidePost({ params }) {
       </Layout>
     </>
   );
-}
+};
+
+export default GuidePost;

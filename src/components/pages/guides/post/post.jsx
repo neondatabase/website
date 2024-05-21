@@ -25,7 +25,9 @@ const Post = ({
 
     <div className="col-span-6 col-start-4 -mx-[26px] flex flex-col xl:col-span-8 xl:col-start-1 xl:mx-0">
       <article>
-        <h1 className="text-[36px] font-semibold leading-tight">{title}</h1>
+        <h1 className="font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl">
+          {title}
+        </h1>
         {subtitle && (
           <p className="my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80">
             {subtitle}
@@ -47,10 +49,10 @@ const Post = ({
     <div className="col-start-11 col-end-13 -ml-11 h-full max-w-[256px] xl:col-start-10 lg:hidden">
       <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
         {enableTableOfContents && <TableOfContents items={tableOfContents} />}
+        {author && (
+          <Author data={author} className={clsx('lg:hidden', enableTableOfContents && 'mt-14')} />
+        )}
       </nav>
-      {author && (
-        <Author data={author} className={clsx('lg:hidden', enableTableOfContents && 'mt-14')} />
-      )}
     </div>
   </>
 );

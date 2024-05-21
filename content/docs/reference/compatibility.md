@@ -96,6 +96,10 @@ ERROR:  permission denied to create event trigger "your_trigger_name"
 HINT:  Must be superuser to create an event trigger.
 ```
 
+## Foreign Data Wrappers
+
+Neon does not yet support Foreign Data Wrappers (FDW) or Postgres extensions such as `postgres_fdw` that provide this functionality. We intend to offer FDW support in a future release.
+
 ## PostgreSQL documentation
 
 Neon provides a mirror of the official PostgreSQL documentation on the [Neon documentation site](https://neon.tech/docs/introduction) for the convenience of our users. As Neon is built on standard PostgreSQL, most information from the official PostgreSQL documentation applies to our platform. However, there are a few key differences to consider when referencing the official PostgreSQL docs:

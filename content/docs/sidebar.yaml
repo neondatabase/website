@@ -1,34 +1,132 @@
-- title: Introduction
+- title: Home
   slug: introduction
+- title: Getting Started
   items:
-    - title: What is Neon?
-      slug: introduction/about
-    - title: Neon roadmap
-      slug: introduction/roadmap
-    - title: Neon architecture
+    - title: Why Neon?
+      items:
+        - title: Our mission
+          slug: get-started-with-neon/why-neon
+        - title: Developer experience with Neon
+          slug: get-started-with-neon/dev-experience
+        - title: Production readiness with Neon
+          slug: get-started-with-neon/production-readiness
+    - title: Day 1 - Playing with Neon
+      slug: get-started-with-neon/signing-up
+    - title: Day 2 - Connect Neon to your stack
+      slug: get-started-with-neon/connect-neon
+    - title: Day 3 - Branching workflows
+      slug: get-started-with-neon/workflow-primer 
+    - title: Day 4 - Getting ready for production
+      slug: get-started-with-neon/production-checklist
+    - title: Framework quickstarts
+      slug: get-started-with-neon/frameworks
+      items:
+        - title: Astro
+          slug: guides/astro
+        - title: Django
+          slug: guides/django
+        - title: Laravel
+          slug: guides/laravel
+        - title: Next.js
+          slug: guides/nextjs
+        - title: Quarkus (JDBC)
+          slug: guides/quarkus-jdbc
+        - title: Quarkus (Reactive)
+          slug: guides/quarkus-reactive
+        - title: Remix
+          slug: guides/remix
+        - title: Ruby on Rails
+          slug: guides/ruby-on-rails
+        - title: SQL Alchemy
+          slug: guides/sqlalchemy
+        - title: Symfony
+          slug: guides/symfony
+    - title: Language quickstarts
+      slug: get-started-with-neon/languages
+      items:
+        - title: Elixir
+          slug: guides/elixir-ecto
+        - title: Go
+          slug: guides/go
+          ariaLabel: Connect a Go application to Neon
+        - title: Java
+          slug: guides/java
+        - title: Javascript
+          items:
+            - title: Node.js
+              slug: guides/node
+        - title: Python
+          items:
+            - title: Psycopg
+              slug: guides/python
+        - title: Rust
+          slug: guides/rust
+    - title: Import data
+      slug: import/import-intro
+      items:
+        - title: Import from Postgres
+          slug: import/import-from-postgres
+        - title: Import from a Neon project
+          slug: import/import-from-neon
+        - title: Import from CSV
+          slug: import/import-from-csv
+        - title: Import from Heroku
+          slug: import/import-from-heroku
+        - title: Migrate data with AWS DMS
+          slug: import/migrate-aws-dms
+        - title: Migrate from MySQL to Postgres
+          slug: import/migrate-mysql
+        - title: Sample data
+          slug: import/import-sample-data
+    - title: Architecture
       items:
         - title: Overview
           slug: introduction/architecture-overview
         - title: Compute lifecycle
           slug: introduction/compute-lifecycle
-    - title: Features
-      items:
-        - title: Autoscaling
-          slug: introduction/autoscaling
-        - title: Autosuspend
-          slug: introduction/auto-suspend
-        - title: Branching
-          slug: introduction/branching
-        - title: Branch reset and restore
-          slug: introduction/point-in-time-restore
-        - title: Read replicas
-          slug: introduction/read-replicas
-        - title: Logical replication
-          slug: introduction/logical-replication
-        - title: IP Allow
-          slug: introduction/ip-allow
     - title: Regions
       slug: introduction/regions
+    - title: Neon roadmap
+      slug: introduction/roadmap
+- title: Connect
+  slug: connect/connect-intro
+  items:
+    - title: Neon SQL Editor
+      slug: get-started-with-neon/query-with-neon-sql-editor
+    - title: Passwordless auth
+      slug: connect/passwordless-connect
+    - title: Connect securely
+      slug: connect/connect-securely
+    - title: Connect a GUI application
+      slug: connect/connect-postgres-gui
+    - title: Connect with psql
+      slug: connect/query-with-psql-editor
+    - title: Connect with pgcli
+      slug: connect/connect-pgcli
+    - title: Connection pooling
+      slug: connect/connection-pooling
+    - title: Connection issues
+      items:
+        - title: Connection errors
+          slug: connect/connection-errors
+        - title: Latency and timeouts
+          slug: connect/connection-latency
+- title: Platform management
+  items:
+    - title: Access control
+      items:
+        - title: E-mail signup
+          slug: manage/email-signup
+        - title: Organizations
+          slug: manage/organizations
+        - title: Project access
+          slug: manage/project-access
+        - title: Project sharing
+          slug: guides/project-sharing-guide
+        - title: Database access
+          slug: manage/database-access
+        - title: API keys
+          slug: manage/api-keys
     - title: Plans and billing
       slug: introduction/about-billing
       items:
@@ -48,192 +146,152 @@
           slug: introduction/manage-billing
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
-    - title: Support
-      slug: introduction/support
-    - title: Status
-      slug: introduction/status
+    - title: Project management
+      items:
+        - title: Object hierarchy
+          slug: manage/overview
+        - title: Projects
+          slug: manage/projects
+        - title: Branches
+          slug: manage/branches
+        - title: Computes
+          slug: manage/endpoints
+        - title: Roles
+          slug: manage/roles
+        - title: Databases
+          slug: manage/databases
+        - title: Integrations
+          slug: manage/integrations
     - title: Monitoring
       slug: introduction/monitoring
       items:
         - title: Monitoring dashboard
           slug: introduction/monitoring-page
+        - title: System operations
+          slug: manage/operations
         - title: External tools
           slug: introduction/monitor-external-tools
-- title: Get started
-  items:
-    - title: Sign up
-      slug: get-started-with-neon/signing-up
-    - title: Query with Neon's SQL Editor
-      slug: get-started-with-neon/query-with-neon-sql-editor
-- title: Connect
-  slug: connect/connect-intro
-  items:
-    - title: Connect from any application
-      slug: connect/connect-from-any-app
-    - title: Connect a GUI application
-      slug: connect/connect-postgres-gui
-    - title: Passwordless auth
-      slug: connect/passwordless-connect
-    - title: Connect with psql
-      slug: connect/query-with-psql-editor
-    - title: Connect with pgcli
-      slug: connect/connect-pgcli
-    - title: Connect securely
-      slug: connect/connect-securely
-    - title: Connection pooling
-      slug: connect/connection-pooling
-    - title: Connection issues
+    - title: Security
       items:
-        - title: Connection errors
-          slug: connect/connection-errors
-        - title: Latency and timeouts
-          slug: connect/connection-latency
-- title: Manage
-  items:
-    - title: Overview
-      slug: manage/overview
-    - title: API keys
-      slug: manage/api-keys
-    - title: Projects
-      slug: manage/projects
-    - title: Branches
-      slug: manage/branches
-    - title: Computes
-      slug: manage/endpoints
-    - title: Roles
-      slug: manage/roles
-    - title: Databases
-      slug: manage/databases
-    - title: Integrations
-      slug: manage/integrations
-    - title: System operations
-      slug: manage/operations
-    - title: Organizations
-      slug: manage/organizations
-    - title: Access
-      items:
-        - title: Project access
-          slug: manage/project-access
-        - title: Database access
-          slug: manage/database-access
+        - title: Overview
+          slug: security/security-overview
+        - title: Security reporting
+          slug: security/security-reporting
+        - title: SOC 2 compliance
+          slug: security/soc2-compliance
+        - title: Acceptable Use Policy
+          slug: security/acceptable-use-policy
     - title: Backups
       slug: manage/backups
-    - title: Logical replication
-      items:
-        - title: Concepts
-          slug: guides/logical-replication-concepts
-        - title: Manage
-          slug: guides/logical-replication-neon
-- title: Guides
-  slug: guides/guides-intro
+    - title: Support
+      slug: introduction/support
+    - title: Status
+      slug: introduction/status
+- title: Neon features
+  slug: guides/neon-features
   items:
-    - title: Neon
+    - title: Autoscaling
+      slug: introduction/autoscaling
       items:
-        - title: Autoscaling
+        - title: Autoscaling guide
           slug: guides/autoscaling-guide
-        - title: Autosuspend
+    - title: Autosuspend
+      slug: introduction/auto-suspend
+      items:
+        - title: Autosuspend guide
           slug: guides/auto-suspend-guide
-        - title: Branching
-          slug: guides/branching-intro
+    - title: Branching
+      slug: guides/branching-intro
+      items:
+        - title: About branching
+          slug: introduction/branching
+        - title: Branch reset and restore
+          slug: introduction/point-in-time-restore
           items:
             - title: Reset from parent
               slug: guides/reset-from-parent
             - title: Branch Restore
               slug: guides/branch-restore
-            - title: Branching with the CLI
-              slug: guides/branching-neon-cli
-            - title: Branching with the API
-              slug: guides/branching-neon-api
-            - title: Branching with GitHub Actions
-              slug: guides/branching-github-actions
-            - title: Branching — Testing queries
-              slug: guides/branching-test-queries
-            - title: Promote a branch with the Neon API
-              slug: guides/branch-promote
-        - title: Logical replication
-          slug: guides/logical-replication-guide
-          items:
-            - title: Airbyte
-              slug: guides/logical-replication-airbyte
-            - title: ClickHouse (DoubleCloud)
-              slug: guides/logical-replication-clickhouse
-            - title: Fivetran
-              slug: guides/logical-replication-fivetran
-            - title: Kafka (Confluent)
-              slug: guides/logical-replication-kafka-confluent
-            - title: Materialize
-              slug: guides/logical-replication-materialize
-            - title: Postgres
-              slug: guides/logical-replication-postgres
-        - title: Project sharing
-          slug: guides/project-sharing-guide
-        - title: Read replicas
-          items:
-            - title: Working with read replicas
-              slug: guides/read-replica-guide
-            - title: Data analysis and reporting
-              slug: guides/read-replica-data-analysis
-            - title: Use read replicas with Prisma
-              slug: guides/read-replica-prisma
-        - title: Time Travel
-          slug: guides/time-travel-assist
-          items:
-            - title: Time Travel tutorial
-              slug: guides/time-travel-tutorial
-        - title: Schema diff
-          slug: guides/schema-diff
-          items:
-            - title: Schema diff tutorial
-              slug: guides/schema-diff-tutorial
-        - title: Protected branches
-          slug: guides/protected-branches
-    - title: Frameworks
+        - title: Branching with the CLI
+          slug: guides/branching-neon-cli
+        - title: Branching with the API
+          slug: guides/branching-neon-api
+        - title: Branching with GitHub Actions
+          slug: guides/branching-github-actions
+        - title: Branching — Testing queries
+          slug: guides/branching-test-queries
+        - title: Promote a branch with the Neon API
+          slug: guides/branch-promote
+    - title: Logical replication
+      slug: introduction/logical-replication 
       items:
-        - title: Astro
-          slug: guides/astro
-        - title: Django
-          slug: guides/django
-        - title: Next.js
-          slug: guides/nextjs
-        - title: Quarkus (JDBC)
-          slug: guides/quarkus-jdbc
-        - title: Quarkus (Reactive)
-          slug: guides/quarkus-reactive
-        - title: Remix
-          slug: guides/remix
-        - title: Ruby on Rails
-          slug: guides/ruby-on-rails
-    - title: Languages
+        - title: Concepts
+          slug: guides/logical-replication-concepts
+        - title: Manage
+          slug: guides/logical-replication-neon 
+    - title: Read replicas
+      slug: introduction/read-replicas
       items:
-        - title: Elixir
-          slug: guides/elixir-ecto
-        - title: Go
-          slug: guides/go
-          ariaLabel: Connect a Go application to Neon
-        - title: Java
+        - title: Working with read replicas
+          slug: guides/read-replica-guide
+        - title: Data analysis and reporting
+          slug: guides/read-replica-data-analysis
+        - title: Use read replicas with Prisma
+          slug: guides/read-replica-prisma
+    - title: Time Travel
+      slug: guides/time-travel-assist
+      items:
+        - title: Time Travel tutorial
+          slug: guides/time-travel-tutorial
+    - title: Schema diff
+      slug: guides/schema-diff
+      items:
+        - title: Schema diff tutorial
+          slug: guides/schema-diff-tutorial
+    - title: IP Allow
+      slug: introduction/ip-allow
+    - title: Protected branches
+      slug: guides/protected-branches
+
+- title: Integration guides
+  slug: guides/integrations
+  items:
+    - title: Deployment
+      items:
+        - title: Vercel
           items:
-            - title: JDBC
-              slug: guides/java
-        - title: Javascript
+            - title: Overview
+              slug: guides/vercel-overview
+            - title: Vercel Postgres
+              slug: guides/vercel-postgres
+            - title: Neon Vercel Integration
+              slug: guides/vercel
+            - title: Connect manually
+              slug: guides/vercel-manual
+        - title: Cloudflare
           items:
-            - title: Node.js
-              slug: guides/node
-            - title: Prisma
-              slug: guides/prisma
-        - title: PHP
-          items:
-            - title: Laravel
-              slug: guides/laravel
-            - title: Symfony
-              slug: guides/symfony
-        - title: Python
-          items:
-            - title: Psycopg
-              slug: guides/python
-            - title: SQL Alchemy
-              slug: guides/sqlalchemy
-        - title: Rust
-          slug: guides/rust
+            - title: Cloudflare Pages
+              slug: guides/cloudflare-pages
+            - title: Cloudflare Workers
+              slug: guides/cloudflare-workers
+        - title: Deno
+          slug: guides/deno
+        - title: Heroku
+          slug: guides/heroku
+        - title: Koyeb
+          slug: guides/koyeb
+        - title: Netlify Functions
+          slug: guides/netlify-functions
+        - title: Railway
+          slug: guides/railway
+        - title: Render
+          slug: guides/render
+    - title: Serverless
+      items:
+        - title: Neon serverless driver
+          slug: serverless/serverless-driver
+        - title: AWS Lambda
+          slug: guides/aws-lambda
     - title: Backend-as-a-service
       items:
         - title: Exograph
@@ -250,7 +308,31 @@
           slug: guides/stepzen
         - title: WunderGraph
           slug: guides/wundergraph
-    - title: Schema migration
+    - title: Caching
+      items:
+        - title: Cloudflare Hyperdrive
+          slug: guides/cloudflare-hyperdrive
+        - title: PolyScale
+          slug: guides/polyscale
+    - title: CI/CD
+      items:
+        - title: GitHub integration
+          slug: guides/neon-github-app
+    - title: Replication
+      items:
+        - title: Airbyte
+          slug: guides/logical-replication-airbyte
+        - title: ClickHouse (DoubleCloud)
+          slug: guides/logical-replication-clickhouse
+        - title: Fivetran
+          slug: guides/logical-replication-fivetran
+        - title: Confluent
+          slug: guides/logical-replication-kafka-confluent
+        - title: Materialize
+          slug: guides/logical-replication-materialize
+        - title: Postgres
+          slug: guides/logical-replication-postgres
+    - title: Migrations
       items:
         - title: Django
           slug: guides/django-migrations
@@ -280,48 +362,12 @@
           slug: guides/sequelize
         - title: SQLAlchemy
           slug: guides/sqlalchemy-migrations
-    - title: Serverless
+    - title: Tools
       items:
-        - title: Neon serverless driver
-          slug: serverless/serverless-driver
-        - title: AWS Lambda
-          slug: guides/aws-lambda
-    - title: Caching
-      items:
-        - title: Cloudflare Hyperdrive
-          slug: guides/cloudflare-hyperdrive
-        - title: PolyScale
-          slug: guides/polyscale
-    - title: Deployment platforms
-      items:
-        - title: Cloudflare
-          items:
-            - title: Cloudflare Pages
-              slug: guides/cloudflare-pages
-            - title: Cloudflare Workers
-              slug: guides/cloudflare-workers
-        - title: Deno
-          slug: guides/deno
-        - title: Heroku
-          slug: guides/heroku
-        - title: Koyeb
-          slug: guides/koyeb
-        - title: Netlify Functions
-          slug: guides/netlify-functions
-        - title: Railway
-          slug: guides/railway
-        - title: Render
-          slug: guides/render
-        - title: Vercel
-          items:
-            - title: Overview
-              slug: guides/vercel-overview
-            - title: Vercel Postgres
-              slug: guides/vercel-postgres
-            - title: Neon Vercel Integration
-              slug: guides/vercel
-            - title: Connect manually
-              slug: guides/vercel-manual
+        - title: Outerbase
+          slug: guides/outerbase
+        - title: Prisma
+          slug: guides/prisma
     - title: Authentication
       items:
         - title: Auth0
@@ -330,30 +376,21 @@
           slug: guides/auth-clerk
         - title: Okta
           slug: guides/auth-okta
-    - title: For Partners
-      slug: guides/partner-intro
+    - title: CI/CD
       items:
-        - title: OAuth
-          slug: guides/oauth-integration
-        - title: Manage billing with quotas
-          slug: guides/partner-billing
-- title: AI & embeddings
-  items:
-    - title: Introduction
-      slug: ai/ai-intro
-    - title: AI concepts
-      slug: ai/ai-concepts
-    - title: Scale with Neon
-      slug: ai/ai-scale-with-neon
-    - title: AI tools
+        - title: GitHub integration
+          slug: guides/neon-github-app
+    - title: Tools
       items:
-        - title: Google Colab
-          slug: ai/ai-google-colab
-- title: Postgres
-  slug: postgres/postgres-intro
+        - title: Outerbase
+          slug: guides/outerbase
+        - title: Prisma
+          slug: guides/prisma
+- title: Postgres guides
+  slug: postgresql/introduction
   items:
     - title: Data types
-      slug: postgres/data-types-intro
+      slug: data-types/introduction
       items:
         - title: Array
           slug: data-types/array
@@ -403,7 +440,7 @@
         - title: timescaledb
           slug: extensions/timescaledb
     - title: Functions
-      slug: postgres/functions-intro
+      slug: functions/introduction
       items:
         - title: array_to_json
           slug: functions/array_to_json
@@ -440,41 +477,26 @@
         - title: jsonb_to_record
           slug: functions/jsonb_to_record
     - title: Optimize queries
-      slug: postgres/query-performance
+      slug: postgresql/query-performance
     - title: Query reference
-      slug: postgres/query-reference
+      slug: postgresql/query-reference
     - title: Compatibility
       slug: reference/compatibility
-- title: Import data
-  slug: import/import-intro
+- title: AI & embeddings
   items:
-    - title: Import from Postgres
-      slug: import/import-from-postgres
-    - title: Import from a Neon project
-      slug: import/import-from-neon
-    - title: Import from CSV
-      slug: import/import-from-csv
-    - title: Import from Heroku
-      slug: import/import-from-heroku
-    - title: Migrate data with AWS DMS
-      slug: import/migrate-aws-dms
-    - title: Migrate from MySQL to Postgres
-      slug: import/migrate-mysql
-    - title: Sample data
-      slug: import/import-sample-data
-- title: Security
+    - title: Introduction
+      slug: ai/ai-intro
+    - title: AI concepts
+      slug: ai/ai-concepts
+    - title: Scale with Neon
+      slug: ai/ai-scale-with-neon
+    - title: AI tools
+      items:
+        - title: Google Colab
+          slug: ai/ai-google-colab
+- title: Command line & SDKs
   items:
-    - title: Security overview
-      slug: security/security-overview
-    - title: Security reporting
-      slug: security/security-reporting
-    - title: SOC 2 compliance
-      slug: security/soc2-compliance
-    - title: Acceptable Use Policy
-      slug: security/acceptable-use-policy
-- title: Reference
-  items:
-    - title: Neon CLI
+    - title: CLI Reference
       slug: reference/neon-cli
       items:
         - title: Install and connect
@@ -503,10 +525,17 @@
           slug: reference/cli-completion
     - title: SDKs
       slug: reference/sdk
-    - title: Glossary
-      slug: reference/glossary
+- title: Partner guide
+  slug: guides/partner-intro
+  items:
+    - title: OAuth
+      slug: guides/oauth-integration
+    - title: Manage billing with quotas
+      slug: guides/partner-billing
 - title: Community
   slug: community/community-intro
   items:
     - title: Docs Contribution Guide
       slug: community/contribution-guide
+- title: Glossary
+  slug: /reference/glossary

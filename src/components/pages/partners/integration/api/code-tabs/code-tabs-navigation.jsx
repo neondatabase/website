@@ -24,7 +24,7 @@ const CodeTabsNavigation = ({ codeSnippets, highlightedCodeSnippets }) => {
 
   return (
     <>
-      <div className="border-b border-gray-new-15 lg:flex">
+      <div className="border-b border-gray-new-10 lg:flex">
         {codeSnippets.map(({ name, iconName }, index) => {
           const Icon = icons[iconName];
           return (
