@@ -16,7 +16,7 @@ const Hero = ({
   ...restProps
 }) => {
   const { formFieldGroups } = formData;
-  const buttonText = formData.submitText || '';
+  const buttonText = formData.submitText;
   let simpleMode;
   let simpleField;
 
