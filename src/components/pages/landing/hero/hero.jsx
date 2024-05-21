@@ -16,7 +16,7 @@ const Hero = ({
   ...restProps
 }) => {
   const { formFieldGroups } = formData;
-  const buttonText = formData.submitText;
+  const { submitText } = formData;
   let simpleMode;
   let simpleField;
 
@@ -32,7 +32,7 @@ const Hero = ({
   return (
     <section className="safe-paddings overflow-hidden pt-[152px] xl:pt-[120px] lg:pt-11 md:pt-7">
       <Container className="flex flex-col items-center" size="medium">
-        <h1 className="text-center text-[72px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px] md:text-[40px]">
+        <h1 className="text-center font-title text-[72px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px] md:text-[40px]">
           {title}
         </h1>
         <p
@@ -44,10 +44,9 @@ const Hero = ({
             {simpleMode ? (
               <div className="mx-auto my-[75px] w-[504px] max-w-full md:my-16 md:max-w-[90%] sm:my-14">
                 <Form
-                  formData={formData}
                   formFieldGroups={formFieldGroups}
                   simpleField={simpleField}
-                  buttonText={buttonText}
+                  submitText={submitText}
                   detailsTitle={detailsTitle}
                   detailsDescription={detailsDescription}
                   simpleMode
@@ -65,10 +64,9 @@ const Hero = ({
               >
                 <div className={clsx('max-w-[630px]', hasDetails ? 'w-1/2 lg:w-full' : 'w-full')}>
                   <Form
-                    formData={formData}
                     formFieldGroups={formFieldGroups}
                     greenMode={!hasDetails}
-                    buttonText={buttonText}
+                    submitText={submitText}
                     detailsTitle={detailsTitle}
                     detailsDescription={detailsDescription}
                     {...restProps}

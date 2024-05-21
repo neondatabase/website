@@ -57,7 +57,7 @@ Footer.propTypes = {
   ),
 };
 
-const SubmitButton = ({ formState, buttonText, simpleMode = false }) => (
+const SubmitButton = ({ formState, text, simpleMode = false }) => (
   <LazyMotion features={domAnimation}>
     <AnimatePresence>
       {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && (
@@ -73,11 +73,11 @@ const SubmitButton = ({ formState, buttonText, simpleMode = false }) => (
           initial="initial"
           animate="animate"
           exit="exit"
-          aria-label={buttonText}
+          aria-label={text}
           variants={appearAndExitAnimationVariants}
         >
           {simpleMode && <SendIcon className="hidden h-6 w-6 md:block" />}
-          <span className={clsx(simpleMode && 'md:hidden')}>{buttonText}</span>
+          <span className={clsx(simpleMode && 'md:hidden')}>{text}</span>
         </m.button>
       )}
       {formState === FORM_STATES.LOADING && (
@@ -138,7 +138,7 @@ const SubmitButton = ({ formState, buttonText, simpleMode = false }) => (
 
 SubmitButton.propTypes = {
   formState: PropTypes.string.isRequired,
-  buttonText: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
   simpleMode: PropTypes.bool,
 };
 
@@ -146,7 +146,7 @@ const Form = ({
   simpleMode = false,
   simpleField,
   formFieldGroups,
-  buttonText,
+  submitText,
   successMessage,
   hubspotFormId,
   items,
@@ -257,7 +257,7 @@ const Form = ({
               errorClassName="ml-7"
               {...register(simpleField.name)}
             />
-            <SubmitButton formState={state} buttonText={buttonText} simpleMode />
+            <SubmitButton formState={state} text={submitText} simpleMode />
             {errorMessage && (
               <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
                 {errorMessage}
@@ -267,6 +267,7 @@ const Form = ({
           <LinesIllustration
             className="-top-8 z-10 h-[130px] !w-[125%]"
             color={state === FORM_STATES.ERROR ? '#FF4C79' : '#00E599'}
+            bgColor="#000"
           />
         </form>
         <Footer formState={state} successMessage={successMessage} items={items} simpleMode />
@@ -312,7 +313,7 @@ const Form = ({
                   </fieldset>
                 ))}
             </div>
-            <SubmitButton formState={state} buttonText={buttonText} />
+            <SubmitButton formState={state} text={submitText} />
           </div>
           {errorMessage && (
             <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
@@ -321,7 +322,11 @@ const Form = ({
           )}
         </div>
         {greenMode && (
-          <LinesIllustration className="-top-[30%] !h-[160%] !w-[140%]" color="#00E599" speed={1} />
+          <LinesIllustration
+            className="-top-[25%] !h-[450px] !w-[145%]"
+            color="#00E599"
+            bgColor="#000"
+          />
         )}
       </form>
       <Footer formState={state} successMessage={successMessage} items={items} />
@@ -346,7 +351,7 @@ Form.propTypes = {
       fields: PropTypes.arrayOf(filedPropTypes),
     }),
   }),
-  buttonText: PropTypes.string,
+  submitText: PropTypes.string,
   hubspotFormId: PropTypes.string.isRequired,
   successMessage: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(
