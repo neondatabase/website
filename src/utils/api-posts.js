@@ -581,7 +581,6 @@ const getWpPreviewPostData = async (id, status) => {
   const {
     refreshJwtAuthToken: { authToken },
   } = await getAuthToken();
-  const adminClient = graphQLClientAdmin(authToken);
 
   const isDraft = status === 'draft';
   const isRevision = status === 'publish';
@@ -669,7 +668,7 @@ const getWpPreviewPostData = async (id, status) => {
       ${POST_SEO_FRAGMENT}
     `;
 
-    const data = await fetchGraphQL(adminClient).request(query, { id });
+    const data = await graphQLClientAdmin(authToken).request(query, { id });
 
     const sortedPosts = data?.posts?.nodes
       .filter((post) => post.slug !== data?.post?.slug)
@@ -765,7 +764,7 @@ const getWpPreviewPostData = async (id, status) => {
       }
       ${POST_SEO_FRAGMENT}
     `;
-    const revisionPostData = await fetchGraphQL(adminClient).request(query, {
+    const revisionPostData = await graphQLClientAdmin(authToken).request(query, {
       id,
     });
     // TODO: Pass seo data to head component
@@ -785,7 +784,6 @@ const getWpPreviewPost = async (id) => {
   const {
     refreshJwtAuthToken: { authToken },
   } = await getAuthToken();
-  const adminClient = graphQLClientAdmin(authToken);
 
   const findPreviewPostQuery = gql`
     query PreviewPost($id: ID!) {
@@ -797,7 +795,7 @@ const getWpPreviewPost = async (id) => {
     }
   `;
 
-  return fetchGraphQL(adminClient).request(findPreviewPostQuery, { id });
+  return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
 };
 
 const getAllWpCaseStudiesPosts = async () => {
