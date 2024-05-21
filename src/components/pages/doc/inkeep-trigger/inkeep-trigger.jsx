@@ -95,16 +95,16 @@ const InkeepTrigger = ({ className, isSidebar }) => {
               'mt-2.5 flex min-h-[22px] w-full items-center justify-between xl:mt-0 lg:w-auto'
           )}
         >
-          <h3
+          <span
             className={clsx(
-              'leading-none',
+              'block',
               isSidebar
-                ? 'border-b border-secondary-8/50 text-[11px] font-medium transition-colors duration-200 group-hover:border-transparent dark:border-green-45/50'
+                ? 'border-b border-secondary-8/50 text-[11px] font-medium leading-tight transition-colors duration-200 group-hover:border-transparent dark:border-green-45/50'
                 : 'font-semibold'
             )}
           >
             <span
-              className={clsx({
+              className={clsx('block', {
                 'lg:hidden': !isSidebar,
               })}
             >
@@ -118,7 +118,7 @@ const InkeepTrigger = ({ className, isSidebar }) => {
             >
               Ask Neon AI instead
             </span>
-          </h3>
+          </span>
         </div>
       </button>
       <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
