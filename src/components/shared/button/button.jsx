@@ -1,7 +1,12 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
+import getNodeText from 'utils/get-node-text';
+import sendGtagEvent from 'utils/send-gtag-event';
+
 
 const styles = {
   base: 'inline-flex items-center justify-center font-bold !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
@@ -45,6 +50,7 @@ const Button = ({
   to = null,
   size = null,
   theme = null,
+  tag_name = null,
   children,
   ...otherProps
 }) => {
@@ -53,7 +59,18 @@ const Button = ({
   const Tag = to ? Link : 'button';
 
   return (
-    <Tag className={className} to={to} {...otherProps}>
+    <Tag
+      className={className}
+      to={to}
+      onClick={() => {
+        sendGtagEvent('Button Clicked', {
+          style: theme,
+          text: getNodeText(children),
+          tag_name,
+        });
+      }}
+      {...otherProps}
+    >
       {children}
     </Tag>
   );
@@ -65,6 +82,7 @@ Button.propTypes = {
   size: PropTypes.oneOf(Object.keys(styles.size)),
   theme: PropTypes.oneOf(Object.keys(styles.theme)),
   children: PropTypes.node.isRequired,
+  tag_name: PropTypes.string,
 };
 
 export default Button;
