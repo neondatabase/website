@@ -82,10 +82,15 @@ const getFlatSidebar = (sidebar, path = []) =>
   }, []);
 
 const getNavigationLinks = (slug, flatSidebar) => {
-  const items = flatSidebar.filter((item) => item.slug !== undefined);
-  const currentItemIndex = items.findIndex((item) => item.slug === slug);
-  const previousItem = items[currentItemIndex - 1];
-  const nextItem = items[currentItemIndex + 1];
+  const posts = flatSidebar.filter((item) => item.slug !== undefined);
+  const currentItemIndex = posts.findIndex((item) => item.slug === slug);
+
+  // Determine the previous and next item indices, considering edges
+  const previousItemIndex = currentItemIndex === 0 ? posts.length - 1 : currentItemIndex - 1;
+  const nextItemIndex = currentItemIndex === posts.length - 1 ? 0 : currentItemIndex + 1;
+
+  const previousItem = posts[previousItemIndex];
+  const nextItem = posts[nextItemIndex];
 
   return {
     previousLink: { title: previousItem?.title, slug: previousItem?.slug },

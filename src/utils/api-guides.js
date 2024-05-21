@@ -84,8 +84,13 @@ const getAllPosts = async () => {
 
 const getNavigationLinks = (slug, posts) => {
   const currentItemIndex = posts.findIndex((item) => item.slug === slug);
-  const previousItem = posts[currentItemIndex - 1];
-  const nextItem = posts[currentItemIndex + 1];
+
+  // Determine the previous and next item indices, considering edges
+  const previousItemIndex = currentItemIndex === 0 ? posts.length - 1 : currentItemIndex - 1;
+  const nextItemIndex = currentItemIndex === posts.length - 1 ? 0 : currentItemIndex + 1;
+
+  const previousItem = posts[previousItemIndex];
+  const nextItem = posts[nextItemIndex];
 
   return {
     previousLink: { title: previousItem?.title, slug: previousItem?.slug },
