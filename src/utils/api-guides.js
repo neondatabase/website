@@ -19,7 +19,10 @@ const getPostSlugs = async (pathname) => {
 
 const getAuthor = (id) => {
   try {
-    const authors = fs.readFileSync(`${GUIDES_DIR_PATH}/authors/data.json`, 'utf8');
+    const authors = fs.readFileSync(
+      `${process.cwd()}/${GUIDES_DIR_PATH}/authors/data.json`,
+      'utf8'
+    );
     const authorsData = JSON.parse(authors);
     const authorData = authorsData[id];
     const authorPhoto = `/guides/authors/${id}.jpg`;
@@ -40,7 +43,7 @@ const getAuthor = (id) => {
 
 const getPostBySlug = (slug, pathname) => {
   try {
-    const source = fs.readFileSync(`${pathname}/${slug}.md`);
+    const source = fs.readFileSync(`${process.cwd()}/${pathname}/${slug}.md`, 'utf-8');
     const { data, content } = matter(source);
     const authorID = data.author;
     const author = getAuthor(authorID);
