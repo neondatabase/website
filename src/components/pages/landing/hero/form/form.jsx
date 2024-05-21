@@ -143,7 +143,6 @@ SubmitButton.propTypes = {
 };
 
 const Form = ({
-  simpleMode = false,
   simpleField,
   formFieldGroups,
   submitText,
@@ -235,7 +234,7 @@ const Form = ({
     }
   };
 
-  if (simpleMode)
+  if (simpleField)
     return (
       <>
         <form className="relative w-full" method="POST" onSubmit={handleSubmit(onSubmit)}>
@@ -283,7 +282,7 @@ const Form = ({
             greenMode && 'bg-[linear-gradient(155deg,#00E59980,#00E5990D_50%,#00E59980_100%)] p-px'
           )}
         >
-          <div className={clsx(!simpleMode && 'rounded-[10px] bg-black-new p-9 sm:px-5 sm:py-6')}>
+          <div className={clsx(!simpleField && 'rounded-[10px] bg-black-new p-9 sm:px-5 sm:py-6')}>
             <div className="space-y-6">
               {formFieldGroups &&
                 formFieldGroups.map((fieldGroup, index) => (
@@ -343,7 +342,6 @@ const filedPropTypes = {
 };
 
 Form.propTypes = {
-  simpleMode: PropTypes.bool,
   greenMode: PropTypes.bool,
   simpleField: PropTypes.shape(filedPropTypes),
   formFieldGroups: PropTypes.arrayOf({

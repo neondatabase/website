@@ -15,16 +15,12 @@ const Hero = ({
   detailsDescription,
   ...restProps
 }) => {
-  const { formFieldGroups } = formData;
-  const { submitText } = formData;
-  let simpleMode;
-  let simpleField;
+  const formFieldGroups = formData?.formFieldGroups;
+  const submitText = formData?.submitText;
+  let simpleField = null;
 
-  if (formFieldGroups.length === 1) {
-    simpleMode = true;
+  if (formFieldGroups && formFieldGroups.length === 1 && formFieldGroups[0].fields.length === 1) {
     simpleField = formFieldGroups[0].fields[0];
-  } else {
-    simpleMode = false;
   }
 
   const hasDetails = detailsTitle && detailsDescription;
@@ -39,30 +35,29 @@ const Hero = ({
           className="mx-auto mt-4 max-w-[760px] text-center text-2xl font-light leading-snug lg:text-lg md:max-w-[85%] md:text-base [&>a]:text-green-45"
           dangerouslySetInnerHTML={{ __html: description }}
         />
-        {formData && (
-          <div className="w-full">
-            {simpleMode ? (
-              <div className="mx-auto my-[75px] w-[504px] max-w-full md:my-16 md:max-w-[90%] sm:my-14">
-                <Form
-                  formFieldGroups={formFieldGroups}
-                  simpleField={simpleField}
-                  submitText={submitText}
-                  detailsTitle={detailsTitle}
-                  detailsDescription={detailsDescription}
-                  simpleMode
-                  {...restProps}
-                />
-              </div>
-            ) : (
-              <div
-                className={clsx(
-                  'flex w-full justify-center lg:items-center',
-                  hasDetails
-                    ? 'my-[120px] gap-[86px] xl:gap-10 lg:mx-auto lg:my-20 lg:w-auto lg:flex-col sm:my-14'
-                    : 'my-[88px] lg:my-16 sm:my-14'
-                )}
-              >
-                <div className={clsx('max-w-[630px]', hasDetails ? 'w-1/2 lg:w-full' : 'w-full')}>
+        {formData && simpleField ? (
+          <div className="mx-auto my-[75px] w-[504px] max-w-full md:my-16 md:max-w-[90%] sm:my-14">
+            <Form
+              formFieldGroups={formFieldGroups}
+              simpleField={simpleField}
+              submitText={submitText}
+              detailsTitle={detailsTitle}
+              detailsDescription={detailsDescription}
+              {...restProps}
+            />
+          </div>
+        ) : (
+          (formData || hasDetails) && (
+            <div
+              className={clsx(
+                'flex w-full justify-center lg:items-center',
+                hasDetails
+                  ? 'my-[120px] gap-[86px] xl:gap-10 lg:mx-auto lg:my-20 lg:w-auto lg:flex-col sm:my-14'
+                  : 'my-[88px] lg:my-16 sm:my-14'
+              )}
+            >
+              <div className={clsx('max-w-[630px]', hasDetails ? 'w-1/2 lg:w-full' : 'w-full')}>
+                {formData && (
                   <Form
                     formFieldGroups={formFieldGroups}
                     greenMode={!hasDetails}
@@ -71,17 +66,17 @@ const Hero = ({
                     detailsDescription={detailsDescription}
                     {...restProps}
                   />
-                </div>
-                {hasDetails && (
-                  <Details
-                    label={detailsLabel}
-                    title={detailsTitle}
-                    description={detailsDescription}
-                  />
                 )}
               </div>
-            )}
-          </div>
+              {hasDetails && (
+                <Details
+                  label={detailsLabel}
+                  title={detailsTitle}
+                  description={detailsDescription}
+                />
+              )}
+            </div>
+          )
         )}
       </Container>
     </section>
