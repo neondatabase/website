@@ -1,5 +1,5 @@
 ---
-title: Day 1 - Playing with Neon
+title: Playing with Neon
 subtitle: Sign up for free and learn the basics of database branching with Neon
 enableTableOfContents: true
 redirectFrom:

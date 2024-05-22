@@ -1,22 +1,22 @@
 - title: Home
   slug: introduction
+- title: Why Neon?
+  items:
+    - title: Our mission
+      slug: get-started-with-neon/why-neon
+    - title: Developer experience with Neon
+      slug: get-started-with-neon/dev-experience
+    - title: Production readiness with Neon
+      slug: get-started-with-neon/production-readiness
 - title: Getting Started
   items:
-    - title: Why Neon?
-      items:
-        - title: Our mission
-          slug: get-started-with-neon/why-neon
-        - title: Developer experience with Neon
-          slug: get-started-with-neon/dev-experience
-        - title: Production readiness with Neon
-          slug: get-started-with-neon/production-readiness
-    - title: Day 1 - Playing with Neon
+    - title: 1 - Playing with Neon
       slug: get-started-with-neon/signing-up
-    - title: Day 2 - Connect Neon to your stack
+    - title: 2 - Connect Neon to your stack
       slug: get-started-with-neon/connect-neon
-    - title: Day 3 - Branching workflows
+    - title: 3 - Branching workflows
       slug: get-started-with-neon/workflow-primer 
-    - title: Day 4 - Getting ready for production
+    - title: 4 - Getting ready for production
       slug: get-started-with-neon/production-checklist
     - title: Framework quickstarts
       slug: get-started-with-neon/frameworks
@@ -382,10 +382,6 @@
           slug: guides/auth-clerk
         - title: Okta
           slug: guides/auth-okta
-    - title: CI/CD
-      items:
-        - title: GitHub integration
-          slug: guides/neon-github-app
     - title: Tools
       items:
         - title: Outerbase

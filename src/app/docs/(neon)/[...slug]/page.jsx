@@ -10,13 +10,13 @@ import {
   getAllPosts,
   getAllChangelogPosts,
   getBreadcrumbs,
-  getDocPreviousAndNextLinks,
+  getNavigationLinks,
   getFlatSidebar,
   getPostBySlug,
   getSidebar,
-  getTableOfContents,
 } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
+import getTableOfContents from 'utils/get-table-of-contents';
 
 const isUnusedOrSharedContent = (slug) =>
   slug.includes('unused/') ||
@@ -80,7 +80,7 @@ const DocPost = async ({ params }) => {
   const allChangelogPosts = await getAllChangelogPosts();
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
-  const navigationLinks = getDocPreviousAndNextLinks(currentSlug, flatSidebar);
+  const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
   const fileOriginPath = isChangelogIndex
     ? process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH
     : `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;

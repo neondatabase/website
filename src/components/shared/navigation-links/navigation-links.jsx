@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
@@ -12,7 +13,7 @@ const getUrl = (slug, basePath) => {
   return `${basePath}${slug}`;
 };
 
-const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }) => {
+const NavigationLinks = ({ previousLink = null, nextLink = null, basePath }) => {
   const previousLinkUrl = previousLink?.slug && getUrl(previousLink.slug, basePath);
   const nextLinkUrl = nextLink?.slug && getUrl(nextLink.slug, basePath);
 
@@ -21,9 +22,12 @@ const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }
       {previousLink?.title && previousLink?.slug && (
         <Link
           to={previousLinkUrl}
-          className="group mr-auto flex w-1/2 items-center justify-between rounded border border-gray-new-90 p-4 dark:border-gray-new-20 sm:hidden"
+          className={clsx(
+            'group mr-auto flex w-1/2 items-center justify-between rounded border border-gray-new-90 p-4 dark:border-gray-new-20 sm:w-full sm:space-x-3',
+            nextLink?.title && nextLink?.slug && 'sm:hidden'
+          )}
         >
-          <ArrowIcon className="shrink-0 rotate-180 text-gray-new-70 transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1" />
+          <ArrowIcon className="shrink-0 rotate-180 text-gray-new-70 transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1 sm:block" />
           <div className="flex flex-col items-end">
             <span className="text-sm font-normal text-gray-new-40 dark:text-gray-new-90">
               Previous
@@ -54,7 +58,7 @@ const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }
   );
 };
 
-PreviousAndNextLinks.propTypes = {
+NavigationLinks.propTypes = {
   previousLink: PropTypes.exact({
     title: PropTypes.string,
     slug: PropTypes.string,
@@ -66,4 +70,4 @@ PreviousAndNextLinks.propTypes = {
   basePath: PropTypes.string.isRequired,
 };
 
-export default PreviousAndNextLinks;
+export default NavigationLinks;
