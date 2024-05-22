@@ -72,7 +72,7 @@ Learn how Neon read replicas can help you scale and manage read-only workloads.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/read-replicas" description="Learn how Neon maximizes scalability and more with instant read replicas" icon="scale-up">Learn about read replicas</a>
+<a href="/docs/introduction/read-replicas" description="Learn how Neon maximizes scalability and more with read replicas" icon="scale-up">Learn about read replicas</a>
 
 <a href="/docs/guides/read-replica-guide" description="How to create and manage read replicas" icon="ladder">Working with read replicas</a>
 
