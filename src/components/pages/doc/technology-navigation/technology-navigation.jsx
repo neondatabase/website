@@ -8,8 +8,8 @@ import React, { useState } from 'react';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 
-const TechnologyNavigation = ({ children = null }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const TechnologyNavigation = ({ children = null, open = false }) => {
+  const [isOpen, setIsOpen] = useState(open);
 
   const handleClick = () => {
     setIsOpen((isOpen) => !isOpen);
