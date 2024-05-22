@@ -94,10 +94,16 @@
 }
 
 .ikp-ai-chat__toolbar-header{
+  position: relative;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 0;
   line-height: 1.125;
   color: #0C0D0D;
+
+  &:before {
+    content: 'Ask Neon AI';
+    font-size: 20px;
+  }
 }
 
 .ikp-message__divider-wrapper{
