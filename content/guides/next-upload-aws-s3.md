@@ -165,7 +165,7 @@ Now, let's move on to creating an API route to obtain a presigned URL to upload 
 
 [Presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html) allow you to upload large chunks of data directly at the source (here, `Amazon S3`).
 
-This saves you from the following caveats of a server-based upload operation:
+This saves you from a couple limitations of a server-based upload operation:
 
 - maximum request payload restrictions (on a hosting service, especially in serverless)
 - huge RAM required to process multiple large file buffers at the same time
