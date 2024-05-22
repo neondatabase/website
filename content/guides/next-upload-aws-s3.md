@@ -22,7 +22,7 @@ In this guide, you will learn how to add a feature to a Next.js app that allows 
 
 ## Create a Neon project
 
-If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
+If you do not have one already, create a Neon project.
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
