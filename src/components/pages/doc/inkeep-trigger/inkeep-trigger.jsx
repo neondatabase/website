@@ -99,7 +99,7 @@ const InkeepTrigger = ({ className, isSidebar }) => {
             className={clsx(
               'block',
               isSidebar
-                ? 'border-b border-secondary-8/50 text-[11px] font-medium leading-tight transition-colors duration-200 group-hover:border-transparent dark:border-green-45/50'
+                ? 'border-b border-secondary-8/50 text-[11px] font-medium leading-tight transition-colors duration-200 group-hover:border-transparent dark:border-green-45/50 lg:text-[13px]'
                 : 'font-semibold'
             )}
           >
