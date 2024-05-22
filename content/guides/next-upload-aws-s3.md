@@ -7,7 +7,7 @@ createdAt: '2024-05-16T00:00:00.000Z'
 updatedOn: '2024-05-16T00:00:00.000Z'
 ---
 
-In this guide, you will learn the the process of creating a simple web application using Next.js that allows you to upload objects to Amazon S3, and insert the reference to them in Postgres (powered by Neon) via `pg` and `@neondatabase/serverless`.
+In this guide, you will learn how to add a feature to a Next.js app that allows users to upload files to Amazon S3, and insert the reference to them in Postgres (powered by Neon) via `pg` and `@neondatabase/serverless`.
 
 To create a Neon project and access it from an Next.js application:
 
