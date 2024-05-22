@@ -55,11 +55,15 @@ DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 
 ## Configure the Postgres client
 
-From your `.astro` files, add the following code snippet to connect to your Neon database:
+There a multiple ways to make server side requests with Astro. See below for the different implementations.
+
+### .astro files
+
+In your `.astro` files, use the following code snippet to connect to your Neon database:
 
 <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-```javascript
+```html
 ---
 import { Pool } from 'pg';
 
@@ -82,7 +86,7 @@ try {
 ---
 ```
 
-```javascript
+```html
 ---
 import postgres from 'postgres';
 
@@ -93,7 +97,7 @@ console.log(response);
 ---
 ```
 
-```javascript
+```html
 ---
 import { neon } from '@neondatabase/serverless';
 
@@ -102,6 +106,58 @@ const sql = neon(import.meta.env.DATABASE_URL);
 const response = await sql`SELECT version()`;
 console.log(response);
 ---
+```
+
+</CodeTabs>
+
+### Server Endpoints (API Routes)
+
+In your server endpoints (API Routes) in Astro application, use the following code snippet to connect to your Neon database:
+
+<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+
+```javascript
+import { Pool } from 'pg';
+
+const pool = new Pool({
+  connectionString: import.meta.env.DATABASE_URL,
+  ssl: true
+});
+
+export async function GET() {
+  const client = await pool.connect();
+  let data = {};
+  try {
+    const response = await client.query('SELECT version()');
+    console.log(response.rows[0]);
+    data = response.rows[0];
+  } finally {
+    client.release();
+  }
+  return new Response(JSON.stringiify(data), { headers : { "Content-Type": "application/json" } } );
+}
+```
+
+```javascript
+import postgres from 'postgres';
+
+export async function GET() {
+  const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
+  const response = await sql`SELECT version()`;
+  console.log(response);
+  return new Response(JSON.stringiify(response), { headers : { "Content-Type": "application/json" } } );
+}
+```
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+export async function GET() {
+  const sql = neon(import.meta.env.DATABASE_URL);
+  const response = await sql`SELECT version()`;
+  console.log(response);
+  return new Response(JSON.stringiify(response), { headers : { "Content-Type": "application/json" } } );
+}
 ```
 
 </CodeTabs>
