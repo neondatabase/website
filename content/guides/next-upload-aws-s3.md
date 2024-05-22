@@ -95,7 +95,7 @@ Finally, complete the bucket creation process by clicking the **Create bucket** 
 
 ## Create access keys for IAM users (in AWS)
 
-In the navigation bar on the upper right in your AWS account, choose your name, and then choose **Security credentials**.
+In the navigation bar on the upper right in your AWS account, click on your name, and then choose **Security credentials**.
 
 ![](/guides/images/iam-1.png)
 
