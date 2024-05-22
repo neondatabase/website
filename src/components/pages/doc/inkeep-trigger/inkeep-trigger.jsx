@@ -27,6 +27,7 @@ const baseSettings = {
 };
 
 const aiChatSettings = {
+  botName: 'Neon AI',
   placeholder: 'How can I help you?',
   quickQuestionsLabel: 'Examples',
   quickQuestions: [
