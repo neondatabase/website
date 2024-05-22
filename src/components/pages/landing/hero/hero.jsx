@@ -35,7 +35,7 @@ const Hero = ({
           className="mx-auto mt-4 max-w-[760px] text-center text-2xl font-light leading-snug lg:text-lg md:max-w-[85%] md:text-base [&>a]:text-green-45"
           dangerouslySetInnerHTML={{ __html: description }}
         />
-        {formData && simpleField ? (
+        {simpleField ? (
           <div className="mx-auto my-[75px] w-[504px] max-w-full md:my-16 md:max-w-[90%] sm:my-14">
             <Form
               formFieldGroups={formFieldGroups}
