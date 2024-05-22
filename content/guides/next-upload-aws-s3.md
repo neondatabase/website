@@ -107,7 +107,7 @@ Again, click on **Create access key**.
 
 ![](/guides/images/iam-3.png)
 
-Copy the Access key and Secret access key generated to be used as **AWS_KEY_ID** and **AWS_SECRET_ACCESS_KEY** respectively.
+Copy the Access key and Secret access key, you will add them to your Next.js project later.
 
 ```shell shouldWrap
 AWS_KEY_ID="..."
