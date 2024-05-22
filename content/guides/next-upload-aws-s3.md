@@ -170,7 +170,7 @@ This saves you from a couple limitations of a server-based upload operation:
 - maximum request payload restrictions (on a hosting service, especially in serverless)
 - huge RAM required to process multiple large file buffers at the same time
 
-You will create an API endpoint that would accept the file name and it's content type that will be uploaded via a presigned URL. In Next.js, you can create an API endpoint by creating a `route.ts` file at any directory level inside the `app` directory. To use `/api/presigned` as the desired API route, create a file `app/api/presigned/route.ts` with the following code:
+You will create an API endpoint that accepts the file name and it's content type to be uploaded via a presigned URL. In Next.js, you can create an API endpoint by creating a `route.ts` file at any directory level inside the `app` directory. To use `/api/presigned` as the desired API route, create a file `app/api/presigned/route.ts` with the following code:
 
 ```tsx
 // File: app/api/presigned/route.ts
