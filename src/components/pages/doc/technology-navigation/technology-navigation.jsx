@@ -84,6 +84,7 @@ const TechnologyNavigation = ({ children = null, open = false }) => {
 
 TechnologyNavigation.propTypes = {
   children: PropTypes.node,
+  open: PropTypes.bool
 };
 
 export default TechnologyNavigation;
