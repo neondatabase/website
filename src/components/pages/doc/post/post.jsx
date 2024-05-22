@@ -11,7 +11,7 @@ import NavigationLinks from 'components/shared/navigation-links';
 import TableOfContents from 'components/shared/table-of-contents';
 // import Pagination from 'components/pages/changelog/pagination';
 // import ChangelogFilter from 'components/pages/changelog/changelog-filter';
-import { DOCS_BASE_PATH } from 'constants/docs';
+import { DOCS_BASE_PATH, TAGS_COLORS, TAGS_BG_COLORS } from 'constants/docs';
 
 // TODO: Add pagination for changelog
 const Changelog = ({
@@ -37,7 +37,7 @@ Changelog.propTypes = {
 };
 
 const Post = ({
-  data: { title, subtitle, enableTableOfContents = false, updatedOn = null },
+  data: { title, subtitle, enableTableOfContents = false, tag = null, updatedOn = null },
   content,
   breadcrumbs,
   navigationLinks: { previousLink, nextLink },
@@ -62,9 +62,25 @@ const Post = ({
         <Changelog currentSlug={currentSlug} items={changelogPosts} />
       ) : (
         <article>
-          <h1 className="font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl">
+          <h1
+            className={clsx(
+              'font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl',
+              tag && 'inline'
+            )}
+          >
             {title}
           </h1>
+          {tag && (
+            <span
+              className={clsx(
+                'relative -top-1.5 ml-3 inline w-fit whitespace-nowrap rounded-[40px] px-3.5 py-2 text-[10px] font-semibold uppercase leading-none',
+                TAGS_COLORS[tag] || TAGS_COLORS.default,
+                TAGS_BG_COLORS[tag] || TAGS_BG_COLORS.default
+              )}
+            >
+              {tag}
+            </span>
+          )}
           {subtitle && (
             <p className="my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80">
               {subtitle}
@@ -98,6 +114,7 @@ Post.propTypes = {
     title: PropTypes.string,
     subtitle: PropTypes.string,
     enableTableOfContents: PropTypes.bool,
+    tag: PropTypes.string,
     updatedOn: PropTypes.string,
   }).isRequired,
   content: PropTypes.string.isRequired,

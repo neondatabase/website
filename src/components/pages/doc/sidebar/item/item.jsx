@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Link from 'components/shared/link';
+import { TAGS_COLORS, TAGS_BG_COLORS } from 'constants/docs';
 
 const isActiveItem = (items, currentSlug) =>
   items?.some(
@@ -17,6 +18,7 @@ const Item = ({
   basePath,
   title,
   slug = null,
+  tag = null,
   ariaLabel = null,
   isStandalone = false,
   items = null,
@@ -66,6 +68,17 @@ const Item = ({
           aria-hidden={!!ariaLabel}
           dangerouslySetInnerHTML={{ __html: title }}
         />
+        {tag && (
+          <span
+            className={clsx(
+              'ml-2 mt-0.5 block w-fit whitespace-nowrap rounded-[40px] px-2 py-1 text-[8px] font-semibold uppercase leading-none',
+              TAGS_COLORS[tag] || TAGS_COLORS.default,
+              TAGS_BG_COLORS[tag] || TAGS_BG_COLORS.default
+            )}
+          >
+            {tag}
+          </span>
+        )}
         <span
           className={clsx(
             'arrow-mask block h-4 w-4 transition-[transform,background-color] duration-200',
@@ -114,11 +127,13 @@ Item.propTypes = {
   title: PropTypes.string.isRequired,
   isStandalone: PropTypes.bool,
   slug: PropTypes.string,
+  tag: PropTypes.string,
   ariaLabel: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.exact({
       title: PropTypes.string.isRequired,
       slug: PropTypes.string,
+      tag: PropTypes.string,
       items: PropTypes.arrayOf(PropTypes.any),
       ariaLabel: PropTypes.string,
     })
