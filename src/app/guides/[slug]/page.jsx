@@ -24,13 +24,12 @@ export async function generateMetadata({ params }) {
   const post = getPostBySlug(slug, GUIDES_DIR_PATH);
   if (!post) return notFound();
   const {
-    data: { title },
-    excerpt,
+    data: { title, subtitle },
   } = post;
   const encodedTitle = Buffer.from(title).toString('base64');
   return getMetadata({
     title: `${title} - Neon Guides`,
-    description: excerpt,
+    description: subtitle,
     imagePath:
       title.length < MAX_TITLE_LENGTH
         ? `${VERCEL_URL}/guides/og?title=${encodedTitle}`
