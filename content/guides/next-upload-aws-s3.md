@@ -315,7 +315,7 @@ You will create an API endpoint that accepts the URL to the publicly accessible 
   ```
 </CodeTabs>
 
-The code above defines a POST endpoint, which first, validates the presence of `DATABASE_URL` environment variable. Further, it creates a table named `user` if it does not exist, and inserts the record for a user named `rishi` with the object URL.
+The code above defines a POST endpoint, which first validates the presence of `DATABASE_URL` environment variable. Further, it creates a table named `user` if it does not exist, and inserts the record for a user named `rishi` with the object URL.
 
 Now, let's move on to learning how to call these APIs programtically in the front-end built with React.
 
