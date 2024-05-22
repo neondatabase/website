@@ -48,12 +48,12 @@ const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = 
   >
     <div className="sticky top-[104px] z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-16 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-black-new dark:after:to-black-new">
       <Search className="z-30" indexName={indexName} />
-      <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-8">
+      <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-9">
         {isPostgres ? (
           <NavWithIcon className="mb-8" items={MENUS.postgresSidebar} />
         ) : (
           <>
-            <InkeepTrigger className="mb-3.5 flex" isSidebar />
+            <InkeepTrigger isSidebar />
             <NavWithIcon className="mb-11" items={MENUS.docSidebar} />
           </>
         )}

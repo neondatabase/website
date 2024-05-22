@@ -110,7 +110,7 @@ const MobileNav = ({ className = null, sidebar, basePath, isPostgres = false }) 
       <LazyMotion features={domAnimation}>
         <m.div
           className={clsx(
-            'absolute inset-x-0 top-[calc(100%+1px)] z-20 overflow-y-scroll bg-white pb-4 pl-8 pr-[29px] pt-2 dark:bg-gray-new-10 md:pl-4 md:pr-[13px]'
+            'absolute inset-x-0 top-[calc(100%+1px)] z-20 overflow-y-scroll bg-white pb-4 pl-8 pr-[29px] pt-10 dark:bg-gray-new-10 md:pl-4 md:pr-[13px]'
           )}
           initial="from"
           animate={controls}
@@ -119,7 +119,7 @@ const MobileNav = ({ className = null, sidebar, basePath, isPostgres = false }) 
         >
           {!isPostgres && (
             <>
-              <InkeepTrigger className="mb-3.5 mt-2.5 flex" isSidebar />
+              <InkeepTrigger isSidebar />
               <ul className="mb-7">
                 {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
                   <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
