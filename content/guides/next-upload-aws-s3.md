@@ -1,6 +1,6 @@
 ---
 title: Uploading Objects to Amazon S3 and Saving References in Postgres in Next.js
-subtitle: Learn how to upload objects to Amazon S3 and save reference to them in Postgres (powered by Neon) in Next.js
+subtitle: Let users upload files directly to S3 by creating presigned URLs in Next.js and saving the references in a Postgres database.
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-05-16T00:00:00.000Z'
