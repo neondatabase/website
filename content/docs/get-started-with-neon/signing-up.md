@@ -1,6 +1,7 @@
 ---
 title: Playing with Neon
 subtitle: Sign up for free and learn the basics of database branching with Neon
+tag: new
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/console/

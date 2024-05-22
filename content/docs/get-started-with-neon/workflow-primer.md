@@ -1,6 +1,7 @@
 ---
 title: Database branching workflow primer
 subtitle: An introduction to integrating Postgres branching into your development workflow
+tag: coming soon
 enableTableOfContents: true
 ---
 
