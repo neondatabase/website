@@ -11,7 +11,9 @@ import NavigationLinks from 'components/shared/navigation-links';
 import TableOfContents from 'components/shared/table-of-contents';
 // import Pagination from 'components/pages/changelog/pagination';
 // import ChangelogFilter from 'components/pages/changelog/changelog-filter';
-import { DOCS_BASE_PATH, TAGS_COLORS, TAGS_BG_COLORS } from 'constants/docs';
+import { DOCS_BASE_PATH } from 'constants/docs';
+
+import Tag from '../tag';
 
 // TODO: Add pagination for changelog
 const Changelog = ({
@@ -70,17 +72,7 @@ const Post = ({
           >
             {title}
           </h1>
-          {tag && (
-            <span
-              className={clsx(
-                'relative -top-1.5 ml-3 inline w-fit whitespace-nowrap rounded-[40px] px-3.5 py-2 text-[10px] font-semibold uppercase leading-none',
-                TAGS_COLORS[tag] || TAGS_COLORS.default,
-                TAGS_BG_COLORS[tag] || TAGS_BG_COLORS.default
-              )}
-            >
-              {tag}
-            </span>
-          )}
+          {tag && <Tag className="relative -top-1.5 ml-3 inline" title={tag} />}
           {subtitle && (
             <p className="my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80">
               {subtitle}
