@@ -183,7 +183,7 @@ export default {
           to: LINKS.docs,
         },
         {
-          text: 'Guides',
+          text: 'Community Guides',
           to: LINKS.guides,
         },
         {
