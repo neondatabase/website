@@ -171,7 +171,7 @@ Mow, let's move on to creating an API route to obtain a presigned URL to upload 
 
 ## Create a Presigned URL with Amazon S3 SDK
 
-[Presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) allow you to upload large chunks of data directly at the source (here, `Amazon S3`).
+[Presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html) allow you to upload large chunks of data directly at the source (here, `Amazon S3`).
 
 This saves you from the following caveats of a server-based upload operation:
 
