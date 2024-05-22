@@ -159,7 +159,7 @@ AWS_S3_BUCKET_NAME="...-bucket-0"
 DATABASE_URL="postgresql://neondb_owner:...@...-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
 ```
 
-Mow, let's move on to creating an API route to obtain a presigned URL to upload objects to.
+Now, let's move on to creating an API route to obtain a presigned URL to upload objects to.
 
 ## Create a Presigned URL with Amazon S3 SDK
 
