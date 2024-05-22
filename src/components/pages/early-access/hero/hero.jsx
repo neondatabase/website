@@ -98,10 +98,10 @@ const Hero = () => {
     <section className="safe-paddings flex h-screen min-h-[760px] lg:h-auto lg:min-h-screen lg:flex-col">
       <div className="relative min-w-[768px] bg-black p-8 text-white 2xl:min-w-0 lg:order-last lg:max-w-none lg:py-7 md:px-4">
         <div className="m-auto max-w-[520px]">
-          <Link className="inline-block align-top lg:hidden" to={getHomepageRoute()}>
-            <img src={logoWhite} alt="Neon" width={128} height={36} />
+          <Link className="inline-block align-top lg:hidden" to="/">
+            <img src={logoWhite} alt="Neon" width={102} height={28} />
           </Link>
-          <h2 className="mt-28 text-[28px]  font-bold 2xl:mt-12 lg:mt-0 lg:max-w-[450px] md:text-[26px]">
+          <h2 className="mt-28 font-title text-[28px] font-medium 2xl:mt-12 lg:mt-0 lg:max-w-[450px] md:text-[26px]">
             Neon Technical Preview
           </h2>
           <p className="mt-5 border-t border-t-[#2E3338] pt-5 font-semibold">Free Tier includes:</p>
@@ -128,7 +128,7 @@ const Hero = () => {
           <Link className="lg:alight-top hidden lg:inline-block" to={getHomepageRoute()}>
             <img src={logoBlack} alt="Neon" />
           </Link>
-          <h1 className="text-[28px] font-bold lg:mt-10 lg:text-center md:text-[26px]">
+          <h1 className="font-title text-[28px] font-medium lg:mt-10 lg:text-center md:text-[26px]">
             Get serverless, fault-tolerant, branchable Postgres
           </h1>
           <p className="mt-2.5 lg:text-center">

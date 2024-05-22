@@ -11,7 +11,7 @@ import changelogIcon from 'icons/header/changelog.svg';
 import cliIcon from 'icons/header/cli.svg';
 import demosIcon from 'icons/header/demos.svg';
 import discordIcon from 'icons/header/discord.svg';
-import EnterpriseIcon from 'icons/header/enterprise.svg';
+import enterpriseIcon from 'icons/header/enterprise.svg';
 import partnersIcon from 'icons/header/partners.svg';
 import onDemandStorageIcon from 'icons/header/storage.svg';
 import PostgresDocsIcon from 'icons/postgres.inline.svg';
@@ -121,7 +121,7 @@ export default {
           to: LINKS.caseStudies,
         },
         {
-          icon: EnterpriseIcon,
+          icon: enterpriseIcon,
           text: 'Enterprise',
           description: 'Scale & grow',
           to: LINKS.enterprise,
@@ -204,7 +204,7 @@ export default {
       heading: 'Community',
       links: [
         {
-          text: 'X.com',
+          text: 'x.com',
           to: LINKS.twitter,
           icon: 'x-icon',
         },
@@ -232,6 +232,11 @@ export default {
           text: 'YouTube',
           to: LINKS.youtube,
           icon: 'youtube-icon',
+        },
+        {
+          text: 'Creators',
+          to: LINKS.creators,
+          icon: 'creators-icon',
         },
       ],
     },
@@ -287,7 +292,7 @@ export default {
     },
     {
       icon: PostgresDocsIcon,
-      title: 'Postgres Docs',
+      title: 'PostgreSQL Docs',
       slug: LINKS.postgres,
     },
   ],

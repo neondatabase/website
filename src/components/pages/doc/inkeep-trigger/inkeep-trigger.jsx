@@ -72,10 +72,10 @@ const InkeepTrigger = ({ className, isSidebar }) => {
     <>
       <button
         className={clsx(
-          'chat-widget group flex w-full text-sm focus:outline-none',
+          'chat-widget group flex text-sm focus:outline-none',
           isSidebar
-            ? 'items-center space-x-3'
-            : 'flex-col xl:flex-row xl:items-center xl:space-x-1.5',
+            ? 'absolute right-2 top-1.5 items-center space-x-1 text-secondary-8 dark:text-green-45 lg:right-4 lg:top-3'
+            : 'w-full flex-col xl:flex-row xl:items-center xl:space-x-1.5',
           className
         )}
         type="button"
@@ -83,9 +83,7 @@ const InkeepTrigger = ({ className, isSidebar }) => {
         onClick={handleClick}
       >
         {isSidebar ? (
-          <span className="relative flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
-            <SparksIcon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
-          </span>
+          <SparksIcon className="relative z-10 h-3.5 w-3.5" />
         ) : (
           <span className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[#00CC88] dark:bg-[rgba(0,229,153,0.1)] xl:h-6 xl:w-6 xl:shrink-0 xl:rounded">
             <ExampleIcon className="h-[26px] w-[26px] text-white dark:text-green-45 xl:h-4 xl:w-4" />
@@ -93,22 +91,20 @@ const InkeepTrigger = ({ className, isSidebar }) => {
         )}
         <div
           className={clsx(
-            'flex min-h-[22px] w-full items-center justify-between xl:mt-0 lg:w-auto',
-            {
-              'mt-2.5': !isSidebar,
-            }
+            !isSidebar &&
+              'mt-2.5 flex min-h-[22px] w-full items-center justify-between xl:mt-0 lg:w-auto'
           )}
         >
-          <h3
+          <span
             className={clsx(
-              'leading-none xl:text-sm',
+              'block',
               isSidebar
-                ? 'text-sm font-medium transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45'
+                ? 'border-b border-secondary-8/50 text-[11px] font-medium leading-tight transition-colors duration-200 group-hover:border-transparent dark:border-green-45/50 lg:text-[13px]'
                 : 'font-semibold'
             )}
           >
             <span
-              className={clsx({
+              className={clsx('block', {
                 'lg:hidden': !isSidebar,
               })}
             >
@@ -122,7 +118,7 @@ const InkeepTrigger = ({ className, isSidebar }) => {
             >
               Ask Neon AI instead
             </span>
-          </h3>
+          </span>
         </div>
       </button>
       <InkeepCustomTrigger {...inkeepCustomTriggerProps} />

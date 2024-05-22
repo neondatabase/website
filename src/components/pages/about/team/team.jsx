@@ -30,7 +30,7 @@ const Team = ({ title, description, members }) => (
               loading={index > 5 ? 'lazy' : 'eager'}
             />
             <div className="ml-5 xs:ml-3">
-              <h3 className="max-w-[100px] text-2xl font-semibold leading-snug md:max-w-none xs:text-[20px] xs:leading-tight">
+              <h3 className="max-w-[100px] font-title text-2xl font-medium leading-snug md:max-w-none xs:text-[20px] xs:leading-tight">
                 {name}
               </h3>
               <p className="t-base mt-2 leading-snug text-gray-2 xs:mt-1">{position}</p>

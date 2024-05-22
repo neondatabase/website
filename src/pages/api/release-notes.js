@@ -1,5 +1,4 @@
 import fs from 'fs/promises';
-import path from 'path';
 
 import matter from 'gray-matter';
 
@@ -10,8 +9,7 @@ import getExcerpt from 'utils/get-excerpt';
 // TODO: move this function to utils/api-docs
 const getPostBySlug = async (slug, pathname) => {
   try {
-    const pathDirectory = path.join(process.cwd(), `${pathname}/${slug}.md`);
-    const source = await fs.readFile(pathDirectory, 'utf8');
+    const source = await fs.readFile(`${process.cwd()}/${pathname}/${slug}.md`, 'utf8');
     const { data, content } = matter(source);
 
     const match = content.match(/### (.+)/);

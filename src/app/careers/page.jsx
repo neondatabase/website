@@ -9,7 +9,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.careers);
 
 const CareersPage = () => (
-  <Layout headerTheme="black" footerWithTopBorder>
+  <Layout headerTheme="black-pure">
     <Hero />
     <JobsList />
     <Offsite />

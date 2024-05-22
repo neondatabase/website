@@ -21,6 +21,8 @@ Your Neon plan defines the range of data you can view.
 | [Launch](/docs/introduction/plans#launch)      | Last 7 days (168 hours)    |
 | [Scale](/docs/introduction/plans#scale)     | Last 7 days (168 hours)     |
 
+A shorter or custom period can be selected within the permitted range by selecting the desired option from the **Other** menu on the dashboard.
+
 The dashboard displays metrics for the selected **Branch** and **Compute endpoint**. Use the drop-down menus to view metrics for a different branch or compute endpoint. Use the **Refresh** button to update the displayed metrics.
 
 If your compute was idle or there has not been much activity, charts may display this message: `There is not enough metrics data for this compute`. In this case, try again later after more usage data has been collected.
@@ -63,11 +65,11 @@ The **Connections count** graph shows the number of idle connections, active con
 
 **ACTIVE**: The number of active connections for the selected compute endpoint. 
 
-Monitoring active connections can help you understand your database workload at any given time. If the number of active connections is consistently high, it might indicate that your database is under heavy load, which could lead to performance issues such as slow query response times. See [Connections](/docs/postgres/query-reference#connections) for related SQL queries.
+Monitoring active connections can help you understand your database workload at any given time. If the number of active connections is consistently high, it might indicate that your database is under heavy load, which could lead to performance issues such as slow query response times. See [Connections](/docs/postgresql/query-reference#connections) for related SQL queries.
 
 **IDLE**: The number of idle connections for the selected compute endpoint. 
 
-Idle connections are those that are open but not currently being used. While a few idle connections are generally harmless, a large number of idle connections can consume unnecessary resources, leaving less room for active connections and potentially affecting performance. Identifying and closing unnecessary idle connections can help free up resources. See [Find long-running or idle connections](/docs/postgres/query-reference#find-long-running-or-idle-connections).
+Idle connections are those that are open but not currently being used. While a few idle connections are generally harmless, a large number of idle connections can consume unnecessary resources, leaving less room for active connections and potentially affecting performance. Identifying and closing unnecessary idle connections can help free up resources. See [Find long-running or idle connections](/docs/postgresql/query-reference#find-long-running-or-idle-connections).
 
 **TOTAL**: The sum of active and idle connections for the selected compute endpoint. 
 
@@ -95,7 +97,7 @@ Database size metrics are only displayed while your compute is active. When your
 
 The **Deadlocks** graph shows a count of deadlocks over time for the named database on the selected branch. The named database is always the oldest database on the selected branch.
 
-Deadlocks occur in a database when two or more transactions simultaneously block each other by holding onto resources the other transactions need, creating a cycle of dependencies that prevent any of the transactions from proceeding, potentially leading to performance issues or application errors. For lock-related queries you can use to investigate deadlocks, see [Performance tuning](/docs/postgres/query-reference#performance-tuning). To learn more about deadlocks in Postgres, see [Deadlocks](/docs/current/explicit-locking.html#LOCKING-DEADLOCKS).
+Deadlocks occur in a database when two or more transactions simultaneously block each other by holding onto resources the other transactions need, creating a cycle of dependencies that prevent any of the transactions from proceeding, potentially leading to performance issues or application errors. For lock-related queries you can use to investigate deadlocks, see [Performance tuning](/docs/postgresql/query-reference#performance-tuning). To learn more about deadlocks in Postgres, see [Deadlocks](/docs/current/explicit-locking.html#LOCKING-DEADLOCKS).
 
 ![Monitoring page deadlocks graph](/docs/introduction/monitor_deadlocks.jpg)
 

@@ -1,8 +1,5 @@
-'use client';
-
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
 import StatusBadge from 'components/shared/footer/status-badge';
@@ -10,81 +7,78 @@ import ThemeSelect from 'components/shared/footer/theme-select';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus.js';
-import getHomepageRoute from 'utils/get-homepage-route';
 
-const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) => {
-  const isDarkTheme = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
-  const [ref, inView] = useInView({ triggerOnce: true });
+// TODO: add responsive styles for black-pure theme, fix logo size
+const Footer = ({ isDocPage = false, theme = 'white' }) => {
+  const isDarkTheme = theme === 'black-pure';
+
   return (
     <footer
       className={clsx(
-        'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-gray-new-8 dark:text-white',
-        !isDarkTheme && withTopBorder && 'border-t border-gray-new-90 dark:border-gray-new-20',
-        isDarkTheme && withTopBorder && 'border-t border-gray-2',
-        { 'border-gray-new-15 bg-black-new text-white': theme === 'black-new' },
-        { 'bg-black text-white': theme === 'black' },
-        { 'bg-white text-black': theme === 'white' }
+        'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-black-pure dark:text-white',
+        isDarkTheme ? 'bg-black-pure' : 'bg-white'
       )}
-      ref={ref}
     >
-      <Container className="flex justify-between py-10 xl:py-8" size="lg">
-        <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
-          <div className="mb-7 flex flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-start md:justify-between">
-            <div className="flex flex-col">
-              <Link className="block" to={getHomepageRoute()}>
+      <Container
+        className={clsx(
+          'flex justify-between gap-x-10 pb-[51px] pt-10 xl:pt-9 lg:pb-9 sm:py-8',
+          'before:absolute before:-left-[20%] before:top-0 before:h-px before:w-[140%] before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);]',
+          'dark:before:bg-white',
+          isDarkTheme ? 'before:bg-white' : 'before:bg-gray-new-10'
+        )}
+        size="1344"
+      >
+        <div className="flex flex-col items-start justify-between lg:w-full lg:flex-row sm:flex-col sm:gap-y-5">
+          <div className="mb-[30px] flex grow flex-col lg:mb-0 sm:w-full sm:flex-row sm:justify-between">
+            <div className="flex grow flex-col items-start">
+              <Link className="block" to="/">
                 <span className="sr-only">Neon</span>
-                <Logo className="w-auto sm:h-6" isThemeBlack={isDarkTheme} />
+                <Logo
+                  className="h-8 w-[116px] lg:h-7 lg:w-auto sm:h-[26px]"
+                  isThemeBlack={isDarkTheme}
+                  width={116}
+                  height={32}
+                />
               </Link>
-              <StatusBadge isDocPage={isDocPage} inView={inView} />
+              <StatusBadge isDocPage={isDocPage} isDarkTheme={isDarkTheme} />
+              {isDocPage && <ThemeSelect className="mt-7 xl:mt-6 md:mt-3" />}
             </div>
-            {isDocPage && <ThemeSelect className="mt-7 xl:mt-6 md:mt-0" />}
           </div>
-          <div
-            className={clsx(
-              { 'tracking-tight text-gray-new-80': theme === 'black-new' || theme === 'gray-8' },
-              'space-y-[18px] text-sm leading-none dark:text-gray-new-80 lg:leading-tight'
-            )}
-          >
+          <div className="flex flex-col gap-x-1 gap-y-3 text-[13px] leading-none tracking-extra-tight text-gray-new-40 lg:flex-row lg:self-end lg:leading-tight sm:flex-col sm:self-start">
             <p>Made in SF and the World</p>
             <p>
               <span className="lg:hidden">Copyright </span>Ⓒ 2022 – 2024 Neon, Inc.
             </p>
           </div>
         </div>
-        <div className="flex space-x-[123px] xl:space-x-8 md:hidden [@media(max-width:800px)]:space-x-6">
+        <div className="flex w-full max-w-[860px] justify-between xl:max-w-[623px] lg:hidden">
           {MENUS.footer.map(({ heading, links }, index) => (
-            <div className={clsx('flex flex-col xl:w-full')} key={index}>
+            <div className="flex flex-col pt-3 xl:w-full" key={index}>
               <span
                 className={clsx(
-                  {
-                    'text-[13px] font-semibold text-gray-new-60':
-                      theme === 'black-new' || theme === 'gray-8',
-                  },
-                  'relative text-sm font-bold uppercase leading-none tracking-wider dark:text-gray-new-60'
+                  'relative text-xs font-semibold uppercase leading-none tracking-normal dark:text-white',
+                  isDarkTheme ? 'text-white' : 'text-gray-new-10'
                 )}
               >
                 {heading}
               </span>
-              <ul className="mt-6 flex grow flex-col space-y-[18px]">
+              <ul className="mt-7 flex grow flex-col gap-y-5">
                 {links.map(({ to, text, icon }, index) => {
                   const isExternalUrl = to.startsWith('http');
                   return (
                     <li className="flex" key={index}>
                       <Link
-                        className="group relative flex items-center gap-2 whitespace-nowrap leading-none"
+                        className="group relative flex items-center gap-2 whitespace-nowrap text-[15px] leading-none tracking-extra-tight dark:text-gray-new-70 dark:hover:text-green-45"
                         to={to}
-                        theme={isDarkTheme ? 'white' : 'black'}
-                        target={isExternalUrl ? '_blank' : null}
+                        theme={isDarkTheme ? 'gray-70' : 'gray-30'}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
                       >
                         {icon && (
                           <span
                             className={clsx(
                               icon,
-                              'inline-block h-4 w-4 transition-colors duration-200',
-                              isDarkTheme
-                                ? 'bg-white group-hover:bg-primary-2'
-                                : 'bg-black group-hover:bg-primary-2 dark:bg-white dark:group-hover:bg-primary-2'
+                              'inline-block h-4 w-4 transition-colors duration-200 group-hover:bg-primary-2 dark:bg-gray-new-70 dark:group-hover:bg-green-45',
+                              isDarkTheme ? 'bg-gray-new-70' : 'bg-gray-new-30'
                             )}
                           />
                         )}
@@ -104,8 +98,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
 
 Footer.propTypes = {
   isDocPage: PropTypes.bool,
-  withTopBorder: PropTypes.bool,
-  theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']),
+  theme: PropTypes.oneOf(['white', 'black-pure']),
 };
 
 export default Footer;

@@ -31,7 +31,7 @@ Neon plans are structured around **Allowances** and **Extra usage**. Allowances 
 
 Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon.
 
-### Allowances
+### Free Tier allowances
 
 The Free Tier includes the following usage allowances:
 
@@ -57,9 +57,9 @@ The Free Tier includes the following usage allowances:
 
 </Admonition>
 
-### Features
+### Free Tier features
 
-- Autosuspend
+- Autosuspend (after 5 minutes of inactivity)
 - All supported regions
 - Project sharing
 - Advanced Postgres features such as connection pooling, logical replication, and 60+ Postgres extensions
@@ -76,7 +76,7 @@ On the Free Tier, your primary branch compute is always available — it will ne
 
 The Launch plan provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses or applications. 
 
-### Allowances
+### Launch plan allowances
 
 The Launch plan includes the following usage allowances:
 
@@ -88,7 +88,7 @@ The Launch plan includes the following usage allowances:
 | **Storage**                             | 10 GiB of data storage                                  |
 | **Compute**                             | 300 compute hours (1,200 _active hours_)/month for all computes in all projects |
 
-### Extra usage
+### Launch plan extra usage
 
 Launch plan users have access to [extra compute and storage](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
@@ -97,9 +97,9 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 | **Extra Storage**                             |  Billed for in units of 2 GiB at $3.50 per unit, prorated for the month    |
 | **Extra Compute**                             |  Billed by compute hour at $0.16 per hour                                 |
 
-### Features
+### Launch plan features
 
-- Compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** or never)
+- Compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** to **7 days**)
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
 - Neon features such as branching, point-in-time restore up to **7 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
@@ -110,7 +110,7 @@ For a complete list of features, refer to the **detailed plan comparison** on th
 
 The Scale plan provides full platform and support access and is designed for scaling production workloads.
 
-### Allowances
+### Scale plan allowances
 
 The Scale plan includes the following usage allowances:
 
@@ -122,7 +122,7 @@ The Scale plan includes the following usage allowances:
 | **Storage**                             | 50 GiB of data storage                                  |
 | **Compute**                             | 750 compute hours (3,000 _active hours_)/month for all computes in all projects |
 
-### Extra usage
+### Scale plan extra usage
 
 Scale plan users have access to [extra compute, storage, and projects](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
@@ -132,9 +132,9 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 | **Extra Compute**                             |   Billed by compute hour at $0.16 per hour                                |
 | **Extra Projects**                             |   Billed for in units of 10 at $50 per unit                                |
 
-### Features
+### Scale plan features
 
-- Compute up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** or never)
+- Compute up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
 - Advanced Postgres features, including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions
 - Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
 - [Priority support](/docs/introduction/support)
@@ -159,6 +159,7 @@ Additionally, the _Enterprise_ plan can be tailored to your specific requirement
 
 - Custom pricing with discounts
 - Higher resource allowances for projects, branches, storage, and compute
+- _Autosuspend_ (disabled entirely or up to **7 days**)
 - Customer-owned S3
 
 Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus retail customer support, Customer Success Team support, and SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.

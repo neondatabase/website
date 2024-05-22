@@ -27,7 +27,7 @@ const Hero = () => (
           loading="eager"
         />
       </div>
-      <h1 className="mt-16 text-center text-6xl font-medium leading-none tracking-extra-tight xl:mt-12 xl:text-[56px] lg:mt-10 lg:text-5xl md:mt-9 md:text-4xl">
+      <h1 className="mt-16 text-center font-title text-6xl font-medium leading-none tracking-extra-tight xl:mt-12 xl:text-[56px] lg:mt-10 lg:text-5xl md:mt-9 md:text-4xl">
         AWS Launches in Israel
       </h1>
       <p className="mt-5 text-center text-xl font-light leading-snug xl:text-lg lg:mt-4 md:mt-2.5 md:max-w-xs">

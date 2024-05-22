@@ -15,7 +15,7 @@ Neon supports pooled and direct connections to the database. Use a pooled connec
 A Neon connection string includes the role, password, hostname, and database name.
 
 ```text
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
            ^    ^         ^                                               ^
      role -|    |         |- hostname                                     |- database
                 |
@@ -31,9 +31,9 @@ You can use the details from the connection string or the connection string itse
 `.env` file:
 
 ```text
-PGUSER=alex
 PGHOST=ep-cool-darkness-123456.us-east-2.aws.neon.tech
 PGDATABASE=dbname
+PGUSER=alex
 PGPASSWORD=AbC123dEf
 PGPORT=5432
 ```
@@ -41,17 +41,17 @@ PGPORT=5432
 Variable:
 
 ```text shouldWrap
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
 Command-line:
 
 ```bash shouldWrap
-psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 <Admonition type="note">
-Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
+Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending the `sslmode` parameter to your connection string. For more information, see [Connect to Neon securely](/docs/connect/connect-securely).
 </Admonition>
 
 ## Where do I obtain a password?

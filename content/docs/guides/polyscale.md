@@ -1,8 +1,9 @@
 ---
 title: Connect Neon to PolyScale manually
 subtitle: Connect Neon to PolyScale to distribute and cache your data globally
+redirectFrom:
+  - /docs/guides/polyscale-integration
 enableTableOfContents: true
-updatedOn: '2023-12-04T18:49:23.388Z'
 ---
 
 <Admonition type="important" title="Important Update Regarding PolyScale Support">
@@ -65,4 +66,3 @@ PolyScale identifies caching opportunities by recognizing and remembering patter
 For more information about using PolyScale and how it works, refer to the [PolyScale documentation](https://docs.polyscale.ai/).
 
 <NeedHelp/>
-
