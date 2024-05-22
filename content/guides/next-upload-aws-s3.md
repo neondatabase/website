@@ -152,7 +152,7 @@ The command installed the following libraries:
 - `@aws-sdk/s3-request-presigner`: SDK to generate signed url for S3.
 - `@neondatabase/serverless`: Neon's PostgreSQL driver for JavaScript and TypeScript.
 
-Now, create a `.env` file at the root of your project. You are going to add the `OPENAI_API_KEY` you obtained earlier.
+Now, create a `.env` file at the root of your project. You are going to add the credentials you obtained earlier.
 
 It should look something like this:
 
