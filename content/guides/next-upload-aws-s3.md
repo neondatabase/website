@@ -244,7 +244,7 @@ export async function GET(request: NextRequest) {
 
 The code above creates a S3 client using the `@aws-sdk/client-s3` SDK. Then, it uses the `getSignedUrl` utility (from `@aws-sdk/s3-request-presigner`) to sign the URL.
 
-Now, let's move on to building an endpoint to insert the reference to the uploaded object in Postgres (powered by Neon).
+Now, let's move on to building an endpoint to insert the reference to the uploaded object in Postgres.
 
 ## Save Reference to S3 objects in Postgres
 
