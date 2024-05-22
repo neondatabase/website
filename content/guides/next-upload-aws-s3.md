@@ -27,14 +27,7 @@ If you do not have one already, create a Neon project.
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
-
-## Store your Neon credentials
-
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
-
-```shell shouldWrap
-DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]"
-```
+4. Copy the database connection string to add to your Next.js app later. The connection string looks like `postgres://[user]:[password]@[neon_hostname]/[dbname]` and can be found in the **Connection Details** widget on the Neon **Dashboard**. 
 
 ## Create an Amazon S3 Bucket
 
