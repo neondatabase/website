@@ -2,7 +2,6 @@ import Image from 'next/image';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import getHomepageRoute from 'utils/get-homepage-route';
 
 import illustration from './images/illustration.jpg';
 
@@ -20,12 +19,7 @@ const Hero = () => (
           You&apos;ll receive our latest announcements and product updates in your inbox.
         </p>
 
-        <Button
-          className="mt-11 self-start lg:mt-8 sm:w-full"
-          size="md"
-          theme="primary"
-          to={getHomepageRoute()}
-        >
+        <Button className="mt-11 self-start lg:mt-8 sm:w-full" size="md" theme="primary" to="/">
           Back to Home
         </Button>
       </div>

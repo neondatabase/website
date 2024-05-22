@@ -8,7 +8,6 @@ import React, { useState } from 'react';
 import Button from 'components/shared/button';
 import Heading from 'components/shared/heading';
 import { FORM_STATES } from 'constants/forms';
-import getHomepageRoute from 'utils/get-homepage-route';
 
 import ContactForm from './contact-form';
 import illustrationPricing from './images/illustration-pricing.png';
@@ -131,7 +130,7 @@ const Hero = () => {
                 className="relative mt-9 px-9 py-6 !text-lg xl:!text-base"
                 theme="primary"
                 size="sm"
-                to={getHomepageRoute()}
+                to="/"
               >
                 <span
                   className="pointer-events-none absolute inset-x-0 top-0 h-[232px] w-full rounded-[32px] opacity-40 blur-[30px] lg:h-[146px] sm:h-[92px]"

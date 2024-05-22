@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 
+import { checkCookie } from 'app/actions';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
@@ -35,6 +36,7 @@ const Header = async ({
   withBorder = false,
 }) => {
   const isThemeBlack = theme === 'black-pure';
+  const hasCookie = await checkCookie('ajs_user_id');
   const starsCount = await getGithubStars();
 
   return (
@@ -170,21 +172,33 @@ const Header = async ({
             <Suspense>
               <GithubStarCounter isThemeBlack={isThemeBlack} starsCount={starsCount} />
             </Suspense>
-            <Link
-              className="text-[13px] leading-none tracking-extra-tight lg:hidden"
-              to={LINKS.login}
-              theme={isThemeBlack ? 'white' : 'black'}
-            >
-              Log In
-            </Link>
+            {hasCookie ? (
+              <Button
+                className="h-8 px-[22px] text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 xl:px-4 lg:hidden"
+                to={LINKS.login}
+                theme="primary"
+              >
+                Go to Console
+              </Button>
+            ) : (
+              <>
+                <Link
+                  className="text-[13px] leading-none tracking-extra-tight lg:hidden"
+                  to={LINKS.login}
+                  theme={isThemeBlack ? 'white' : 'black'}
+                >
+                  Log In
+                </Link>
 
-            <Button
-              className="h-8 px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
-              to={LINKS.signup}
-              theme="primary"
-            >
-              Sign Up
-            </Button>
+                <Button
+                  className="h-8 px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
+                  to={LINKS.signup}
+                  theme="primary"
+                >
+                  Sign Up
+                </Button>
+              </>
+            )}
           </div>
         </Container>
       </HeaderWrapper>
