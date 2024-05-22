@@ -63,7 +63,7 @@ In your `.astro` files, use the following code snippet to connect to your Neon d
 
 <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-```html
+```astro
 ---
 import { Pool } from 'pg';
 
@@ -86,7 +86,7 @@ try {
 ---
 ```
 
-```html
+```astro
 ---
 import postgres from 'postgres';
 
@@ -97,7 +97,7 @@ console.log(response);
 ---
 ```
 
-```html
+```astro
 ---
 import { neon } from '@neondatabase/serverless';
 
