@@ -447,4 +447,6 @@ Execute the following command to run your application locally:
 npm run dev
 ```
 
+You should now be able to go through the entire workflow of selecting a file, uploading it to S3, and referencing it later by saving it in the database.
+
 <NeedHelp />
