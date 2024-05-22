@@ -1,6 +1,7 @@
 ---
 title: Querying Postgres in Next.js Server Actions
 subtitle: Learn how to query Postgres (powered by Neon) in Next.js using Server Actions
+excerpt: Learn how to query Postgres (powered by Neon) in Next.js using Server Actions
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-05-13T13:24:36.612Z'
