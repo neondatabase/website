@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/guides/guides-intro
 ---
 
-<TechnologyNavigation>
+<TechnologyNavigation open={true}>
 
 <img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir-ecto" title="Connect from Elixir with Ecto to Neon" />
 
