@@ -1,6 +1,6 @@
 ---
 title: Create an automatic audit trail with Bemi
-subtitle: Learn how to replicate data from Neon with Bemi
+subtitle: Learn how to create an automatic audit trail for your Postgres database with Bemi
 enableTableOfContents: true
 isDraft: false
 ---
@@ -65,7 +65,7 @@ To create a role in the Neon Console:
 The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
 
 ```bash
-neonctl roles create --name <role>
+neonctl roles create --name <role_name>
 ```
 
 </TabItem>
@@ -106,7 +106,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO <role_name>;
 
 ## Create a replication slot and publication
 
-If you won’t be using the default [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) role to connect to Bemi, run these commands to create a Postgres publication and add the required replication identity:
+Run these commands to create a Postgres publication and add the required replication identity:
 
 ```sql
 -- Create "bemi" PUBLICATION to enable logical replication
@@ -141,7 +141,7 @@ CALL _bemi_set_replica_identity();
 
     ![Bemi Connect PostgreSQL Database](/docs/guides/bemi_connect_postgres.png)
 
-2. During the connection setup or any time after, you can configure the tables you want to track:
+2. During the connection setup or any time after, you can configure the tables you want to track changes for:
 
     ![Bemi Tracked Tables](/docs/guides/bemi_tracked_tables.png)
 
