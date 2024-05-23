@@ -4,7 +4,7 @@ subtitle: Neon features for real-world workloads
 enableTableOfContents: true
 ---
 
-Learn how autoscaling, autosuspend, bottomless storage, change data capture, and instant-read replicas can improve performance, reliability, and efficiency for your production environments.
+Learn how autoscaling, scale-to-zero, Neon's storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.
 
 ## Autoscaling
 
@@ -31,11 +31,11 @@ Neon's _Autosuspend_ feature automatically transitions a Neon compute instance (
 
 Learn more about [why you want a database that scales to zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero).
 
-## Bottomless storage
+## A storage architecture built for the cloud
 
-**Any data size; any growth trajectory.**
+**Efficient, performant, reliable storage**
 
-Neon's storage system was purpose-built for the cloud to provide virtually unlimited storage with high availability and durability guarantees. Neon stores every transaction in multiple copies across availability zones and S3. Efficiency and performance are achieved through a multi-tier architecture designed to balance latency, throughput, and cost considerations.
+Neon's storage was built for high availability and durability. Every transaction is stored in multiple copies across availability zones and S3. Efficiency and performance are achieved through a multi-tier architecture designed to balance latency, throughput, and cost considerations.
 
 Neon storage is architected to integrate storage, backups, and archiving into one system to reduce operational headaches and administrative overhead associated with checkpoints, data backups, and restore.
 
@@ -49,11 +49,11 @@ The entire Neon storage framework is developed in Rust for maximum performance a
 
 Neon's Logical Replication feature enables replicating data from your Neon database to external destinations, allowing for Change Data Capture (CDC) and real-time analytics. Stream your data to data warehouses, analytical database services, messaging platforms, event-streaming platforms, external Postgres databases, and more. To learn more, see [Get started with logical replication](/docs/guides/logical-replication-guide).
 
-## Scale with Instant Read Replicas
+## Scale with read replicas
 
 **Add read-only computes to achieve instant scale.**
 
-Neon supports Instant Read Replicas that let you instantly scale your application by offloading read-only workloads to independent read-only compute instances that access the same data as your read-write compute.
+Neon supports read replicas that let you instantly scale your application by offloading read-only workloads to independent read-only compute instances that access the same data as your read-write compute.
 
 Create a read replica with the Neon CLI:
 

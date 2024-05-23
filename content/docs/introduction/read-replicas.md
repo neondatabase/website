@@ -1,6 +1,6 @@
 ---
 title: Read replicas
-subtitle: Maximize scalability and more with Neon's instant read replicas
+subtitle: Maximize scalability and more with read replicas
 enableTableOfContents: true
 updatedOn: '2024-01-10T18:34:05.861Z'
 ---
