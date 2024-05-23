@@ -19,9 +19,7 @@ const TechnologyNavigation = ({ children = null, open = false }) => {
     <>
       <ul className="not-prose !mb-2 !mt-9 grid grid-cols-12 gap-5 !p-0 xs:grid-cols-1">
         {React.Children.map(children, (child, index) => {
-          if (!child) {
-            return null;
-          }
+          if (!child) return null;
 
           const { href, src, alt, title, width, height } = child.props;
 
@@ -67,17 +65,12 @@ const TechnologyNavigation = ({ children = null, open = false }) => {
       </ul>
       {!open && (
         <button
-          className="mx-auto flex items-center rounded-full bg-gray-new-98 px-5 py-2 text-sm font-medium text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:bg-gray-new-15 dark:text-white dark:hover:bg-gray-2"
           type="button"
           onClick={handleClick}
+          className="mx-auto flex items-center rounded-full bg-gray-new-98 px-5 py-2 text-sm font-medium text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:bg-gray-new-15 dark:text-white dark:hover:bg-gray-2"
         >
-          <span>{isOpen ? 'Hide' : 'Show more'}</span>
-          <ChevronRight
-            className={clsx(
-              'ml-2 block shrink-0 text-black-new transition-[transform,color] duration-200 dark:text-white',
-              isOpen ? '-rotate-90' : 'rotate-90'
-            )}
-          />
+          <span>Show more</span>
+          <ChevronRight className="rotate-90 ml-2 block shrink-0 text-black-new transition-[transform,color] duration-200 dark:text-white" />
         </button>
       )}
     </>
