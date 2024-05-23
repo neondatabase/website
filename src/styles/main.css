@@ -125,7 +125,7 @@
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-150px);
+    transform: translateY(-100%);
   }
 }
 
