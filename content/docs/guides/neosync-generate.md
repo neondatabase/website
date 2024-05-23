@@ -6,13 +6,13 @@ enableTableOfContents: true
 
 [Neosync](https://www.neosync.dev/) is an open-source synthetic data orchestration platform that can create synthetic data and sync it across all of your Neon database environments.
 
-In this guide, we'll show you how you can seed a Neon database with synthetic data for testing and rapid development using Neosync.
+In this guide, we'll show you how to seed a Neon database with synthetic data for testing and rapid development using Neosync.
 
 ## Prerequisites
 
 To complete the steps in the guide, you require the following:
 
-- A Neon account and project. If you do not have those, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
+- A Neon account and project. If you do not have those, see [Sign up](/docs/get-started-with-neon/signing-up#step-1-sign-up).
 - A [Neosync](https://www.neosync.dev/) account.
 
 ## Neon setup
@@ -72,13 +72,13 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neosyn
 
 ## Neosync setup
 
-In Neosync, we'll configure a connection to your Neon database and create a job that populates your database with synthetic data.
+In Neosync, we'll configure a connection to your Neon database and create a job that populates the database with synthetic data.
 
 ### Configure a connection to the Neon database
 
 1. Navigate to [Neosync](https://www.neosync.dev/) and login. Go to **Connections** > **New Connection** then click on **Postgres**.
 
-2. Enter a unique name for the connection in the **Connection Name** field. We'll give it the following name: `neon-neosync`
+2. Enter a unique name for the connection in the **Connection Name** field. We'll give the connection the following name: `neon-neosync`
 
 3. Paste the Neon database connection string in the **Connection URL** field and click **Test Connection** to verify that the connection works.
 
@@ -94,7 +94,7 @@ To generate data, you need to create a **Job** in Neosync:
 
     ![Select the Neosync job type](/docs/guides/neosync_job_type.png)
 
-2. Give the job a name and then set **Initiate Job Run** to **Yes**. We'll call it `generate-user-data`. You can leave the schedule and advanced options alone. Click **Next** to move onto the **Connect** page.
+2. Give the job a name and set **Initiate Job Run** to **Yes**. We'll call it `generate-user-data`. You can leave the schedule and advanced options alone. Click **Next** to move onto the **Connect** page.
 
     ![Define Neosync job definition](/docs/guides/neosync_job_definition.png)
 
@@ -106,19 +106,17 @@ To generate data, you need to create a **Job** in Neosync:
 
     ![Define Neosync job connection](/docs/guides/neosync_job_connect.png)
 
-4. On the Schema page:
+4. On the **Schema** page:
 
-    1. Specify a value for **Number of Rows**. We'll create 1000 rows of data to use in this example.
+    - Specify a value for **Number of Rows**. We'll create 1000 rows of data to use in this example.
+    - Under **Table Selection**, select the schema and table (`public.users`) where you want to generate synthetic data and move it from the source to the destination table.
+    - For each column in your table, select a **Transfomer** to define the type of data you want to generate for the column. For the `age` column, we used the `Generate Random Int64` to randomly generate ages between 18 and 40. You can configure the generator by clicking on the edit icon next to the transformer and setting min and max values.
 
-    1. Under **Table Selection**, select the schema and table (`public.users` in this example) where you want to generate synthetic data and move it from the source to the destination table.
+        ![Define Neosync job schema](/docs/guides/neosync_job_schema.png)
 
-    1. For each column in your table, select a **Transfomer** to define the type of data you want to generate for the column. For the `age` column, we used the `Generate Random Int64` to randomly generate ages between 18 and 40. You can configure the generator by clicking on the edit icon next to the transformer and setting min and max values.
+    - After the transformers are configured, select the checkboxes for all of the transformers and click **Submit** to create the **Job** that we defined previously. On the **Job** page, you can see that the job ran successfully, creating 1000 rows of synthetic data to work within just a few seconds.
 
-    ![Define Neosync job schema](/docs/guides/neosync_job_schema.png)
-
-    1. After the transformers are configured, select the checkboxes for all of the transformers and click **Submit** to create the **Job** that we defined previously. On the **Job** page, you can see that the job ran successfully, creating 1000 rows of synthetic data to work within just a few seconds.
-
-    ![Neosync job status](/docs/guides/neosync_job_status.png)
+        ![Neosync job status](/docs/guides/neosync_job_status.png)
 
 8. Verify that the data was created in Neon by navigating to the Neon Console and selecting the **Tables** from the sidebar. Your data should be visible in the `public.users` table.
 

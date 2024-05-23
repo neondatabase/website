@@ -12,7 +12,7 @@ In this guide, we'll show you how to anonymize sensitive data in a Neon database
 
 To complete the steps in the guide, you require the following:
 
-- A Neon account and project. If you do not have those, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
+- A Neon account and project. If you do not have those, see [Sign up](/docs/get-started-with-neon/signing-up#step-1-sign-up).
 - A source database in Neon. This guide uses a source database named `neon-neosync`, which has a `users` table populated with 1000 rows of data. To set up this table, see [Generate synthetic data with Neosync](/docs/guides/neosync-generate).
 - A [Neosync](https://www.neosync.dev/) account.
 
@@ -91,13 +91,13 @@ You'll need the connection string to set up Neosync, which we'll do next.
 
 ## Neosync setup
 
-The Neosync setup involves setting up a connection to the destination database and creating and running a data synchronization job to create anonymized data in the destination database.
+The Neosync setup involves setting up a connection to the destination database and creating a data synchronization job to create anonymized data in the destination database.
 
 ### Create a destination database connection
 
-1. Navigate to [Neosync](https://www.neosync.dev/) and log in. Go to **Connections** > **New Connection** then click on **Postgres**.
+1. Navigate to [Neosync](https://www.neosync.dev/) and log in. Go to **Connections** > **New Connection** and click on **Postgres**.
 
-2. Enter a unique name for the connection in the **Connection Name** field. We'll give it the same name as the database in this example: `neosync-destination`
+2. Enter a unique name for the connection in the **Connection Name** field. We'll give the connection the same name as the database: `neosync-destination`
 
 3. Paste the Neon database connection string in the **Connection URL** field and click **Test Connection** to verify that the connection works.
 
@@ -109,11 +109,11 @@ The Neosync setup involves setting up a connection to the destination database a
 
 To generate anonymized data, we need to create a **Job** in Neosync. 
 
-1. In Neonsync, click on **Jobs** and then click on **New Job**. You are presented with a few job types. Since you are anonymizing existing data, select the **Data Synchronization** job type and click **Next**.
+1. In Neonsync, click on **Jobs** and then click **New Job**. You are presented with a few job types. Since you are anonymizing existing data, select the **Data Synchronization** job type and click **Next**.
 
    ![Select Neosync job type](/docs/guides/neosync_anon_job_type.png)
 
-2. Give the job a name (e.g. `anonymize-user-data`) and then set **Initiate Job Run** to **Yes**.
+2. Give the job a name (e.g. `anonymize-user-data`) and set **Initiate Job Run** to **Yes**.
 
     ![Define Neosync job definition](/docs/guides/neosync_anon_job_definition.png)
 
@@ -139,7 +139,7 @@ To generate anonymized data, we need to create a **Job** in Neosync.
     To learn more about Neosync's subset feature, see [Subsetting with referential integrity](https://www.neosync.dev/blog/subset-referential-integrity).
     </Admonition>
 
-    You can see that the job ran successfully and in just a few seconds, copying, anonymizing, and moving data from your source database to your destination database in Neon.
+    You can see that the job ran successfully, and in just a few seconds, it copied, anonymized, and moved data from your source database to your destination database in Neon.
 
     ![Neosync job status](/docs/guides/neosync_anon_job_status.png)
 
