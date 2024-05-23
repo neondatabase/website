@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
-import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
 import Admonition from 'components/shared/admonition';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
+import NavigationLinks from 'components/shared/navigation-links';
 import { MAX_TITLE_LENGTH, POSTGRES_DOCS_BASE_PATH, VERCEL_URL } from 'constants/docs';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import {
   POSTGRES_DIR_PATH,
   getAllPosts,
-  getDocPreviousAndNextLinks,
+  getNavigationLinks,
   getPostBySlug,
 } from 'utils/api-postgres';
 import getMetadata from 'utils/get-metadata';
@@ -55,7 +55,7 @@ const PostgresPage = async ({ params }) => {
   const { title, content } = post;
   const hasH1 = findH1(content);
 
-  const { previousLink, nextLink } = getDocPreviousAndNextLinks(currentSlug);
+  const { previousLink, nextLink } = getNavigationLinks(currentSlug);
 
   return (
     <div className="col-span-6 -mx-10 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
@@ -79,7 +79,7 @@ const PostgresPage = async ({ params }) => {
         </Admonition>
         <Content className="mt-10" content={content} isPostgres />
       </article>
-      <PreviousAndNextLinks
+      <NavigationLinks
         previousLink={previousLink}
         nextLink={nextLink}
         basePath={POSTGRES_DOCS_BASE_PATH}

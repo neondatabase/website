@@ -10,7 +10,7 @@ import hnswBg from './images/hnsw-bg.jpg';
 import scaleBg from './images/scale-bg.jpg';
 
 const GitHubCard = () => (
-  <div className="relative flex flex-col items-center overflow-hidden rounded-xl bg-gray-new-8 pb-[30px] pt-5 xl:pb-5 xl:pt-4 lg:py-6 sm:pb-8 sm:pt-7">
+  <div className="relative flex flex-col items-center overflow-hidden rounded-xl bg-black-new pb-[30px] pt-5 xl:pb-5 xl:pt-4 lg:py-6 sm:pb-8 sm:pt-7">
     <Image
       className="absolute inset-0 h-full w-full rounded-xl object-cover"
       src={githubBg}
@@ -38,7 +38,7 @@ const GitHubCard = () => (
 const ScaleCard = ({ className, ...props }) => (
   <div
     className={clsx(
-      'relative overflow-hidden rounded-xl bg-gray-new-8 py-[38px] xl:py-7 lg:py-[34px]',
+      'relative overflow-hidden rounded-xl bg-black-new py-[38px] xl:py-7 lg:py-[34px]',
       className
     )}
     {...props}
@@ -48,6 +48,7 @@ const ScaleCard = ({ className, ...props }) => (
       src={scaleBg}
       width={287}
       height={257}
+      quality={99}
       alt=""
     />
     <div className="relative z-10 flex flex-col items-center justify-center">
@@ -94,7 +95,7 @@ const HNSWCard = () => (
       sizes="(max-width: 768px) 50vw, 100vw"
       quality={95}
     />
-    <span className="text-bg-clipped relative z-10 max-w-[127px] bg-[linear-gradient(180deg,#FFF_28.26%,#BFBFBF_100%)] text-center text-[44px] font-medium leading-[1.05] tracking-extra-tight xl:max-w-[93px] xl:text-[32px] lg:text-2xl sm:text-[28px]">
+    <span className="text-bg-clipped relative z-10 max-w-[134px] bg-[linear-gradient(180deg,#FFF_28.26%,#BFBFBF_100%)] text-center text-[44px] font-medium leading-[1.05] tracking-extra-tight xl:max-w-[93px] xl:text-[32px] lg:text-2xl sm:text-[28px]">
       Uses HNSW
     </span>
   </div>
@@ -105,7 +106,7 @@ const Stats = () => (
     <Container className="relative z-20 grid grid-cols-12" size="medium">
       <div className="col-span-full flex flex-col items-center">
         <GradientLabel>Fast and Accurate</GradientLabel>
-        <h2 className="mt-5 max-w-[660px] text-center text-5xl font-medium leading-none tracking-extra-tight xl:mt-4 xl:max-w-[610px] xl:text-[44px] lg:max-w-[550px] lg:text-4xl sm:max-w-[440px] sm:text-[32px]">
+        <h2 className="mt-5 max-w-[660px] text-center font-title text-5xl font-medium leading-none tracking-extra-tight xl:mt-4 xl:max-w-[610px] xl:text-[44px] lg:max-w-[550px] lg:text-4xl sm:max-w-[440px] sm:text-[32px]">
           Scale your AI apps to millions of users with Neon
         </h2>
       </div>
@@ -116,7 +117,7 @@ const Stats = () => (
           <IVFCard className="hidden sm:flex" aria-hidden />
         </div>
         <div className="flex flex-col gap-y-7 xl:col-span-6 xl:gap-y-6 lg:gap-y-4 sm:col-span-full">
-          <div className="rounded-xl bg-gray-new-8 px-6 lg:px-4 sm:px-5">
+          <div className="rounded-xl bg-black-new px-6 lg:px-4 sm:px-5">
             <h3 className="text-20 pb-5 pt-4 text-xl leading-none tracking-extra-tight xl:pb-4 xl:text-lg lg:py-3 lg:text-sm sm:pb-[18px] sm:pt-4 sm:text-base">
               Speed up your queries with HNSW
             </h3>
@@ -148,7 +149,7 @@ const Stats = () => (
               </div>
             </div>
           </div>
-          <div className="grow rounded-xl bg-gray-new-8 px-7 pb-7 pt-6 xl:px-6 xl:pb-5 xl:pt-4 lg:p-5 lg:pb-6 sm:pb-5">
+          <div className="grow rounded-xl bg-black-new px-7 pb-7 pt-6 xl:px-6 xl:pb-5 xl:pt-4 lg:p-5 lg:pb-6 sm:pb-5">
             <p className="text-[26px] font-light leading-snug tracking-extra-tight xl:max-w-[390px] xl:text-lg lg:text-base sm:max-w-none sm:text-lg">
               HNSW indexes bring <mark className="bg-transparent text-green-45">20x the speed</mark>{' '}
               for <mark className="bg-transparent text-green-45">99% accuracy</mark> to graph-based

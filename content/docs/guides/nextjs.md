@@ -61,7 +61,14 @@ There a multiple ways to make server side requests with Next.js. See below for t
 
 ### App Router
 
-From your server functions using the App Router, add the following code snippet to connect to your Neon database:
+There are two methods for fetching and mutating data using server-side requests in Next.js App Router, they are:
+
+1. `Server Components` fetches data at runtime on the server.
+2. `Server Actions` functions executed on the server to perform data mutations.
+
+#### Server Components
+
+In your server components using the App Router, add the following code snippet to connect to your Neon database:
 
 <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
@@ -75,7 +82,6 @@ const pool = new Pool({
 
 async function getData() {
   const client = await pool.connect();
-
   try {
     const response = await client.query('SELECT version()');
     console.log(response.rows[0]);
@@ -95,7 +101,6 @@ import postgres from 'postgres';
 
 async function getData() {
   const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
-
   const response = await sql`SELECT version()`;
   console.log(response);
   return response;
@@ -111,7 +116,6 @@ import { neon } from '@neondatabase/serverless';
 
 async function getData() {
   const sql = neon(process.env.DATABASE_URL);
-
   const response = await sql`SELECT version()`;
   console.log(response);
   return response;
@@ -120,6 +124,78 @@ async function getData() {
 export default async function Page() {
   const data = await getData();
 }
+```
+
+</CodeTabs>
+
+#### Server Actions
+
+In your server actions using the App Router, add the following code snippet to connect to your Neon database:
+
+<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+
+```javascript
+import { Pool } from 'pg';
+
+export default async function Page() {
+  async function create(formData: FormData) {
+    "use server";
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: true
+    });
+    const client = await pool.connect();
+    await client.query("CREATE TABLE IF NOT EXISTS comments (comment TEXT)");
+    const comment = formData.get("comment");
+    await client.query("INSERT INTO comments (comment) VALUES ($1)", [comment]);
+  }
+  return (
+    <form action={create}>
+      <input type="text" placeholder="write a comment" name="comment" />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+```javascript
+import postgres from 'postgres';
+
+export default async function Page() {
+  async function create(formData: FormData) {
+    "use server";
+    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+    await sql`CREATE TABLE IF NOT EXISTS comments (comment TEXT)`;
+    const comment = formData.get("comment");
+    await sql`INSERT INTO comments (comment) VALUES (${comment})`;
+  }
+  return (
+    <form action={create}>
+      <input type="text" placeholder="write a comment" name="comment" />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+export default async function Page() {
+  async function create(formData: FormData) {
+    "use server";
+    const sql = neon(process.env.DATABASE_URL);
+    await sql`CREATE TABLE IF NOT EXISTS comments (comment TEXT)`;
+    const comment = formData.get("comment");
+    await sql("INSERT INTO comments (comment) VALUES ($1)", [comment]);
+  }
+  return (
+    <form action={create}>
+      <input type="text" placeholder="write a comment" name="comment" />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
 
 ```
 
@@ -127,7 +203,7 @@ export default async function Page() {
 
 ### Pages Router
 
-There are two methods for fetching data using server-side requests in Next.js they are:
+There are two methods for fetching data using server-side requests in Next.js Pages Router, they are:
 
 1. `getServerSideProps` fetches data at runtime so that content is always fresh.
 2. `getStaticProps` pre-renders pages at build time for data that is static or changes infrequently.

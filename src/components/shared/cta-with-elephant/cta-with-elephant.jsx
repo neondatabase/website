@@ -26,7 +26,7 @@ const CTAWithElephant = ({
   linkTarget = undefined,
 }) => (
   <section
-    className={clsx('cta-with-elephant safe-paddings overflow-hidden bg-black-new', className)}
+    className={clsx('cta-with-elephant safe-paddings overflow-hidden bg-black-pure', className)}
   >
     <Container
       size="medium"

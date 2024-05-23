@@ -76,7 +76,7 @@ const Item = ({
         >
           <p
             className={clsx(
-              'with-link-primary pl-[42px] pr-24 pt-2.5 text-base font-light leading-tight text-gray-new-94 xl:pr-12 lg:pr-0',
+              'with-link-primary pl-[42px] pr-24 pt-2.5 text-base font-light leading-tight text-gray-new-80 xl:pr-12 lg:pr-0',
               linkText && linkUrl ? 'pb-0' : 'pb-2.5'
             )}
             dangerouslySetInnerHTML={{ __html: answer }}

@@ -1,5 +1,5 @@
 .hubspot-form-wrapper {
-  @apply rounded-[10px] bg-gray-new-8 px-9 pb-11 pt-9 xl:px-6 xl:pb-9 md:px-5 md:py-6;
+  @apply rounded-[10px] bg-black-new px-9 pb-11 pt-9 xl:px-6 xl:pb-9 md:px-5 md:py-6;
 }
 
 .hubspot-form {
@@ -25,7 +25,7 @@
   }
 
   .hs-form {
-    @apply space-y-6;
+    @apply flex flex-col space-y-6;
 
     fieldset {
       -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -55,6 +55,10 @@
             @apply mr-0;
           }
         }
+      }
+
+      &.form-columns-0 {
+        @apply order-1;
       }
     }
 
@@ -146,7 +150,7 @@
     }
 
     .hs-button {
-      @apply inline-flex h-12 items-center justify-center whitespace-nowrap rounded bg-green-45 px-10 text-center text-lg font-medium leading-none tracking-[-0.02em] text-black transition-[color,background-image] duration-200 hover:cursor-pointer hover:bg-[#00e5bf] disabled:pointer-events-none disabled:bg-gray-3 disabled:text-white disabled:hover:bg-primary-1 md:h-[54px] sm:w-full;
+      @apply flex h-12 w-full items-center justify-center whitespace-nowrap rounded-[60px] bg-green-45 px-10 text-center text-lg font-medium leading-none tracking-[-0.02em] text-black transition-[color,background-image] duration-200 hover:cursor-pointer hover:bg-[#00e5bf] disabled:pointer-events-none disabled:bg-gray-3 disabled:text-white disabled:hover:bg-primary-1 md:h-[54px] sm:w-full;
     }
   }
 }

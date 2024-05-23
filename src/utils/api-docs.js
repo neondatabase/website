@@ -1,16 +1,12 @@
 const fs = require('fs');
-const path = require('path');
 
 const { glob } = require('glob');
 const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
-const slugify = require('slugify');
 
-const sharedMdxComponents = require('../../content/docs/shared-content');
 const { CHANGELOG_DIR_PATH } = require('../constants/docs');
 
 const getExcerpt = require('./get-excerpt');
-const parseMDXHeading = require('./parse-mdx-heading');
 
 const DOCS_DIR_PATH = 'content/docs';
 const FLOW_DIR_PATH = 'content/flow';
@@ -30,7 +26,7 @@ const getPostSlugs = async (pathname) => {
 
 const getPostBySlug = (slug, pathname) => {
   try {
-    const source = fs.readFileSync(`${pathname}/${slug}.md`);
+    const source = fs.readFileSync(`${process.cwd()}/${pathname}/${slug}.md`, 'utf-8');
     const { data, content } = matter(source);
     const excerpt = getExcerpt(content, 200);
 
@@ -58,7 +54,7 @@ const getAllPosts = async () => {
 };
 
 const getSidebar = () =>
-  jsYaml.load(fs.readFileSync(path.resolve('content/docs/sidebar.yaml'), 'utf8'));
+  jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/sidebar.yaml`, 'utf8'));
 
 const getBreadcrumbs = (slug, flatSidebar) => {
   const path = flatSidebar.find((item) => item.slug === slug)?.path;
@@ -85,11 +81,12 @@ const getFlatSidebar = (sidebar, path = []) =>
     return [...acc, { ...item, path: [...path, index] }];
   }, []);
 
-const getDocPreviousAndNextLinks = (slug, flatSidebar) => {
-  const items = flatSidebar.filter((item) => item.slug !== undefined);
-  const currentItemIndex = items.findIndex((item) => item.slug === slug);
-  const previousItem = items[currentItemIndex - 1];
-  const nextItem = items[currentItemIndex + 1];
+const getNavigationLinks = (slug, flatSidebar) => {
+  const posts = flatSidebar.filter((item) => item.slug !== undefined);
+  const currentItemIndex = posts.findIndex((item) => item.slug === slug);
+
+  const previousItem = posts[currentItemIndex - 1];
+  const nextItem = posts[currentItemIndex + 1];
 
   return {
     previousLink: { title: previousItem?.title, slug: previousItem?.slug },
@@ -116,77 +113,15 @@ const getAllChangelogPosts = async () => {
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
-const buildNestedToc = (headings, currentLevel) => {
-  const toc = [];
-
-  while (headings.length > 0) {
-    const [depth, title] = parseMDXHeading(headings[0]);
-    const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-    if (depth === currentLevel) {
-      const tocItem = {
-        title: titleWithInlineCode,
-        id: slugify(title, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
-        level: depth,
-      };
-
-      headings.shift(); // remove the current heading
-
-      if (headings.length > 0 && parseMDXHeading(headings[0])[0] > currentLevel) {
-        tocItem.items = buildNestedToc(headings, currentLevel + 1);
-      }
-
-      toc.push(tocItem);
-    } else if (depth < currentLevel) {
-      // Return toc if heading is of shallower level
-      return toc;
-    } else {
-      // Skip headings of deeper levels
-      headings.shift();
-    }
-  }
-
-  return toc;
-};
-
-const getTableOfContents = (content) => {
-  const mdxComponentRegex = /<(\w+)\/>/g;
-  let match;
-  // check if the content has any mdx shared components
-  while ((match = mdxComponentRegex.exec(content)) !== null) {
-    const componentName = match[1];
-
-    const fileName = sharedMdxComponents[componentName];
-    const mdFilePath = `content/docs/${fileName}.md`;
-
-    // Check if the MD file exists
-    if (fs.existsSync(mdFilePath)) {
-      const mdContent = fs.readFileSync(mdFilePath, 'utf8');
-      content = content.replace(new RegExp(`<${componentName}\/>`, 'g'), mdContent);
-    }
-  }
-
-  const codeBlockRegex = /```[\s\S]*?```/g;
-  const headingRegex = /^(#+)\s(.*)$/gm;
-
-  const contentWithoutCodeBlocks = content.replace(codeBlockRegex, '');
-  const headings = contentWithoutCodeBlocks.match(headingRegex) || [];
-
-  const arr = headings.map((item) => item.replace(/(#+)\s/, '$1 '));
-
-  return buildNestedToc(arr, 1);
-};
-
 module.exports = {
   getPostSlugs,
   getPostBySlug,
   getSidebar,
   getBreadcrumbs,
   getFlatSidebar,
-  getDocPreviousAndNextLinks,
+  getNavigationLinks,
   getAllChangelogPosts,
   getAllPosts,
-  getTableOfContents,
   DOCS_DIR_PATH,
   FLOW_DIR_PATH,
   CHANGELOG_DIR_PATH,

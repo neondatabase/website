@@ -1,5 +1,6 @@
 export default {
   docs: '/docs',
+  guides: '/guides',
   flow: '/flow',
   aboutUs: '/about-us',
   careers: '/careers',
@@ -45,6 +46,7 @@ export default {
   postgres: '/docs/postgres',
   demos: '/demos',
   autoscaling: '/docs/introduction/autoscaling',
+  docsBranching: '/docs/introduction/branching',
   onDemandStorage: '/docs/introduction/about#bottomless-storage',
   caseStudies: '/case-studies',
   earlyAccess: '/early-access-program',

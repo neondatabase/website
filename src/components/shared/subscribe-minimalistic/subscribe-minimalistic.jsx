@@ -8,7 +8,7 @@ const SubscribeMinimalistic = () => (
       className="flex items-center justify-center space-x-14 lg:block lg:space-x-0 lg:space-y-7"
       size="md"
     >
-      <h2 className="t-5xl font-bold leading-tight">Subscribe to our newsletter</h2>
+      <h2 className="t-5xl font-title font-medium leading-tight">Subscribe to our newsletter</h2>
       <SubscriptionForm
         className="lg:!mx-auto"
         formId={HUBSPOT_NEWSLETTERS_FORM_ID}

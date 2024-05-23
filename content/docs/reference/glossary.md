@@ -35,7 +35,7 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 ## Autosuspend
 
-A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Users on paid plans can configure the _Autosuspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable autosuspend completely to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to minimize compute usage. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Users on paid plans can configure the _Autosuspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable autosuspend to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
 ## autoscaler-agent
 
@@ -270,7 +270,7 @@ A feature of the Neon Console that provides several graphs to help you monitor s
 
 ## Neon
 
-A fully managed serverless Postgres. Neon separates storage and compute to offer modern developer features such as branching, autoscaling, and bottomless storage. For more information, see [What is Neon?](/docs/introduction/about/).
+A serverless Postgres platform designed to help developers build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 
