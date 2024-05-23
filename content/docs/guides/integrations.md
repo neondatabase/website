@@ -9,7 +9,7 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 ## Deployment
 
-<TechnologyNavigation>
+<TechnologyNavigation open={true}>
 
 <img src="/images/technology-logos/vercel-logo.svg" width="36" height="36" alt="Vercel" href="/docs/guides/vercel" title="Connect with the Neon Vercel Integration" />
 
@@ -33,7 +33,7 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 ## Serverless
 
-<TechnologyNavigation>
+<TechnologyNavigation open={true}>
 
 <img src="/images/technology-logos/neon-logo.svg"  width="42" height="36" alt="Neon" href="/docs/serverless/serverless-driver" title="Connect with the Neon serverless driver" />
 
@@ -44,7 +44,7 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 ## Backend-as-a-service
 
-<TechnologyNavigation>
+<TechnologyNavigation open={true}>
 
 <img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Use Exograph with Neon" />
 
@@ -64,7 +64,7 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 ## Caching
 
-<TechnologyNavigation>
+<TechnologyNavigation open={true}>
 
 <img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Hyperdrive" href="/docs/guides/cloudflare-hyperdrive" title="Use Neon with Cloudflare Hyperdrive" />
 
@@ -75,7 +75,7 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 ## Replication
 
-<TechnologyNavigation>
+<TechnologyNavigation open={true}>
 
 <img src="/images/technology-logos/airbyte-logo.svg" width="36" height="36" alt="Airbyte" href="/docs/guides/logical-replication-airbyte" title="Replicate data from Neon with Airbyte" />
 
@@ -94,7 +94,7 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 ## Migrations
 
-<TechnologyNavigation>
+<TechnologyNavigation open={true}>
 
 <img src="/images/technology-logos/django-logo.svg" width="29" height="36" alt="Django" href="/docs/guides/django-migrations" title="Connect a Django application to Neon" />
 
@@ -121,7 +121,7 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 ## Tools
 
-<TechnologyNavigation>
+<TechnologyNavigation open={true}>
 
 <img src="/images/technology-logos/outerbase-logo.svg" width="36" height="36" alt="Outerbase" href="/docs/guides/outerbase" title="Connect Outerbase to Neon" />
 
@@ -132,7 +132,7 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 ## Authentication
 
-<TechnologyNavigation>
+<TechnologyNavigation open={true}>
 
 <img src="/images/technology-logos/auth0-logo.svg" width="36" height="36" alt="Auth0" href="/docs/guides/auth-auth0" title="Authenticate Neon Postgres application users with Auth0" />
 
