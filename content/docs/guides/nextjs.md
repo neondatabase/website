@@ -31,7 +31,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+    <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
       ```shell
       npm install pg
@@ -70,7 +70,7 @@ There are two methods for fetching and mutating data using server-side requests 
 
 In your server components using the App Router, add the following code snippet to connect to your Neon database:
 
-<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
 import { Pool } from 'pg';
@@ -132,7 +132,7 @@ export default async function Page() {
 
 In your server actions using the App Router, add the following code snippet to connect to your Neon database:
 
-<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
 import { Pool } from 'pg';
@@ -212,7 +212,7 @@ There are two methods for fetching data using server-side requests in Next.js Pa
 
 From `getServerSideProps` using the Pages Router, add the following code snippet to connect to your Neon database:
 
-<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
 import { Pool } from 'pg';
@@ -271,7 +271,7 @@ export default function Page({ data }) {}
 
 From `getStaticProps` using the Pages Router, add the following code snippet to connect to your Neon database:
 
-<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
 import { Pool } from 'pg';
@@ -330,7 +330,7 @@ export default function Page({ data }) {}
 
 From your Serverless Functions, add the following code snippet to connect to your Neon database:
 
-<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
 import { Pool } from 'pg';
