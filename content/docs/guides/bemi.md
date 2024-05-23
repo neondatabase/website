@@ -11,7 +11,7 @@ isDraft: false
 
 Designed with simplicity and non-invasiveness in mind, Bemi doesn't require any alterations to your existing database structure. It operates in the background, empowering you with data change tracking features.
 
-In this guide, we'll show you how to replicate data from Neon with Bemi to create an automatic audit trail.
+In this guide, we'll show you how to connect your Neon database to Bemi to create an automatic audit trail.
 
 ## Prerequisites
 
@@ -40,90 +40,9 @@ wal_level
 logical
 ```
 
-## Create a Postgres role for replication
+## Connect your Neon database to Bemi
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
-
-<Tabs labels={["Neon Console", "CLI", "API"]}>
-
-<TabItem>
-
-To create a role in the Neon Console:
-
-1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select a project.
-3. Select **Roles**.
-4. Select the branch where you want to create the role.
-4. Click **New Role**.
-5. In the role creation dialog, specify a role name.
-6. Click **Create**. The role is created and you are provided with the password for the role.
-
-</TabItem>
-
-<TabItem>
-
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
-
-```bash
-neonctl roles create --name <role_name>
-```
-
-</TabItem>
-
-<TabItem>
-
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](/docs/reference/cli-roles).
-
-```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
-  -H 'Accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "role": {
-    "name": "alex"
-  }
-}' | jq
-```
-
-</TabItem>
-
-</Tabs>
-
-## Grant schema access to your Postgres role
-
-If you won’t be using the default [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) to connect to Bemi or your replication role does not own the schemas and tables you are tracking, make sure to grant access. Run these commands in your Neon SQL Editor for each schema:
-
-```sql
-GRANT USAGE ON SCHEMA public TO <role_name>;
-
--- Grant SELECT access to tables for selective tracking
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO <role_name>;
-
--- Grant SELECT access to new tables created in the future for selective tracking
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO <role_name>;
-```
-
-## Create a replication slot and publication
-
-Run these commands to create a Postgres publication and add the required replication identity:
-
-```sql
--- Create "bemi" PUBLICATION to enable logical replication
-CREATE PUBLICATION bemi FOR ALL TABLES;
-
--- Create a procedure to set REPLICA IDENTITY FULL for tables to track the "before" state on DB row changes
-CREATE OR REPLACE PROCEDURE _bemi_set_replica_identity() AS $$ DECLARE current_tablename TEXT;
-BEGIN
-  FOR current_tablename IN SELECT tablename FROM pg_tables WHERE schemaname = 'public' LOOP
-    EXECUTE format('ALTER TABLE %I REPLICA IDENTITY FULL', current_tablename);
-  END LOOP;
-END $$ LANGUAGE plpgsql;
--- Call the created procedure
-CALL _bemi_set_replica_identity();
-```
-
-## Create a Postgres connection to Bemi
+The following instructions assume that you are using a Postgres role created via the Neon Console, API, or CLI. These roles are automatically granted `neon_superuser` group automatically granted the required REPLICATION privilege.
 
 1. Create a [new database connection](https://dashboard.bemi.io/databases/source/new) by entering the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project. For example, given a connection string like this:
 
@@ -141,11 +60,45 @@ CALL _bemi_set_replica_identity();
 
     ![Bemi Connect PostgreSQL Database](/docs/guides/bemi_connect_postgres.png)
 
-2. During the connection setup or any time after, you can configure the tables you want to track changes for:
+2. During the connection setup, or any time after, you can configure the tables you want to track changes for:
 
     ![Bemi Tracked Tables](/docs/guides/bemi_tracked_tables.png)
 
 3. Please wait a few minutes while Bemi provisions the infrastructure. Once this succeeds, you’ve successfully configured a Bemi Postgres source for your Neon database.
+
+## Use a read-only Postgres role for Bemi
+
+Alternatively, you can manually create read-only PostgreSQL database credentials to connect to your Neon database. To do so requires running the following commands, which are safe to execute without any downtime or performance issues:
+
+- `CREATE ROLE`: Creates a new read-only user for Bemi to read database changes.
+- `CREATE PUBLICATION`: creates a "channel" that we'll subscribe to and track changes in real-time.
+- `REPLICA IDENTITY FULL`: enhances records stored in WAL to record the previous state (“before”) in addition to the tracked by default new state (“after”).
+
+```sql
+-- Create read-only user with REPLICATION permission
+CREATE ROLE [username] WITH LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE REPLICATION PASSWORD '[password]';
+-- Grant SELECT access to tables for selective tracking
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO [username];
+-- Grant SELECT access to new tables created in the future for selective tracking
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO [username];
+
+-- Create "bemi" PUBLICATION to enable logical replication
+CREATE PUBLICATION bemi FOR ALL TABLES;
+
+-- Create a procedure to set REPLICA IDENTITY FULL for tables to track the "before" state on DB row changes
+CREATE OR REPLACE PROCEDURE _bemi_set_replica_identity() AS $$ DECLARE current_tablename TEXT;
+BEGIN
+  FOR current_tablename IN SELECT tablename FROM pg_tables LEFT JOIN pg_class ON relname = tablename WHERE schemaname = 'public' AND relreplident != 'f' LOOP
+    EXECUTE format('ALTER TABLE %I REPLICA IDENTITY FULL', current_tablename);
+  END LOOP;
+END $$ LANGUAGE plpgsql;
+-- Call the created procedure
+CALL _bemi_set_replica_identity();
+```
+
+<Admonition type="note">
+After creating a read-only role, you can find the connection details for this role in the **Connection Details** widget in the Neon console.
+</Admonition>
 
 ## Allow inbound traffic
 
