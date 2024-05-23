@@ -65,9 +65,9 @@ const TechnologyNavigation = ({ children = null, open = false }) => {
       </ul>
       {!open && (
         <button
-          onClick={handleClick}
           type="button"
           className="mx-auto flex items-center rounded-full bg-gray-new-98 px-5 py-2 text-sm font-medium text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:bg-gray-new-15 dark:text-white dark:hover:bg-gray-2"
+          onClick={handleClick}
         >
           <span>Show more</span>
           <ChevronRight className="rotate-90 ml-2 block shrink-0 text-black-new transition-[transform,color] duration-200 dark:text-white" />
