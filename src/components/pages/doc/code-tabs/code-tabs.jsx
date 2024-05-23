@@ -4,13 +4,13 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
 
-const CodeTabs = ({ children = null, labels = [] }) => {
+const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
     <figure className="my-5 max-w-full overflow-hidden rounded-md bg-gray-new-98 dark:bg-gray-new-10 [&_.code-block]:my-0">
       <div className="no-scrollbars bg-grey-15 relative flex w-full flex-nowrap overflow-auto after:absolute after:bottom-0 after:h-px after:w-full after:bg-gray-new-90 dark:after:bg-gray-new-20">
-        {labels.map((label, index) => (
+        {(reverse ? labels.reverse() : labels).map((label, index) => (
           <div
             className={clsx(
               'relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pb-3.5 pt-3 font-medium leading-none transition-colors duration-200 hover:text-secondary-8 dark:hover:text-green-45',
@@ -28,7 +28,7 @@ const CodeTabs = ({ children = null, labels = [] }) => {
           </div>
         ))}
       </div>
-      {children.map((child, index) => {
+      {(reverse ? children.reverse() : children).map((child, index) => {
         if (index !== currentIndex) {
           return null;
         }
@@ -45,6 +45,7 @@ CodeTabs.propTypes = {
     PropTypes.arrayOf(PropTypes.object),
   ]),
   labels: PropTypes.arrayOf(PropTypes.string),
+  reverse: PropTypes.bool,
 };
 
 export default CodeTabs;
