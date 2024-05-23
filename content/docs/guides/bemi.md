@@ -15,8 +15,8 @@ In this guide, we'll show you how to replicate data from Neon with Bemi to creat
 
 ## Prerequisites
 
-- A [Bemi account](https://bemi.io/).
-- A [Neon account](https://console.neon.tech/).
+- A [Bemi account](https://bemi.io/)
+- A [Neon account](https://console.neon.tech/)
 
 ## Enable logical replication in Neon
 
