@@ -2,8 +2,10 @@
 title: Create an automatic audit trail with Bemi
 subtitle: Learn how to replicate data from Neon with Bemi
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
+
+<LRNotice/>
 
 [Bemi](https://bemi.io/) is an open-source solution that plugs into PostgreSQL and ORMs to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
 
