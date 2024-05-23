@@ -2,15 +2,25 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useMemo } from 'react';
 
 const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Precompute the reversed arrays based on the reverse prop
+  const displayedLabels = useMemo(
+    () => (reverse ? [...labels].reverse() : labels),
+    [labels, reverse]
+  );
+  const displayedChildren = useMemo(
+    () => (reverse ? [...children].reverse() : children),
+    [children, reverse]
+  );
+
   return (
     <figure className="my-5 max-w-full overflow-hidden rounded-md bg-gray-new-98 dark:bg-gray-new-10 [&_.code-block]:my-0">
       <div className="no-scrollbars bg-grey-15 relative flex w-full flex-nowrap overflow-auto after:absolute after:bottom-0 after:h-px after:w-full after:bg-gray-new-90 dark:after:bg-gray-new-20">
-        {(reverse ? labels.reverse() : labels).map((label, index) => (
+        {displayedLabels.map((label, index) => (
           <div
             className={clsx(
               'relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pb-3.5 pt-3 font-medium leading-none transition-colors duration-200 hover:text-secondary-8 dark:hover:text-green-45',
@@ -28,11 +38,8 @@ const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
           </div>
         ))}
       </div>
-      {(reverse ? children.reverse() : children).map((child, index) => {
-        if (index !== currentIndex) {
-          return null;
-        }
-
+      {displayedChildren.map((child, index) => {
+        if (index !== currentIndex) return null;
         return <Fragment key={index}>{child}</Fragment>;
       })}
     </figure>

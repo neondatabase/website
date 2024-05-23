@@ -29,7 +29,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+    <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
       ```shell
       npm install pg
@@ -61,7 +61,7 @@ There a multiple ways to make server side requests with Astro. See below for the
 
 In your `.astro` files, use the following code snippet to connect to your Neon database:
 
-<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```astro
 ---
@@ -114,7 +114,7 @@ console.log(response);
 
 In your server endpoints (API Routes) in Astro application, use the following code snippet to connect to your Neon database:
 
-<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
 import { Pool } from 'pg';

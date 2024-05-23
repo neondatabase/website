@@ -243,7 +243,7 @@ Now, let's move on to building an endpoint to insert the reference to the upload
 
 You will create an API endpoint that accepts the URL to the publicly accessible object. In this example, we'll create a table in Postgres, and associate the object URL with a user, for demonstration purposes. To use `/api/user/image` as the desired API route, create a file `app/api/user/image/route.ts` with the following code:
 
-<CodeTabs labels={["node-postgres", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "Neon serverless driver"]}>
 
   ```tsx {3,10-11,14,16,18-21}
   // File: app/api/user/image/route.ts
