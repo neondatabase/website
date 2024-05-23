@@ -13,7 +13,6 @@ import InfoIcon from 'components/shared/info-icon';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import CrossIcon from 'icons/cross.inline.svg';
-import sendGtagEvent from 'utils/send-gtag-event';
 
 import AWSIcon from './images/aws.inline.svg';
 
@@ -34,7 +33,7 @@ const items = [
       url: LINKS.signup,
       text: 'Start for free',
       theme: 'white-outline',
-      event: 'pricing_hero_free_btn_click',
+      event: 'Hero Free Tier Panel',
     },
   },
   {
@@ -60,7 +59,7 @@ const items = [
       url: `${LINKS.console}/?upgrade=launch`,
       text: 'Get started',
       theme: 'primary',
-      event: 'pricing_hero_launch_btn_click',
+      event: 'Hero Launch Panel',
     },
   },
   {
@@ -83,7 +82,7 @@ const items = [
       url: `${LINKS.console}/?upgrade=scale`,
       text: 'Get started',
       theme: 'white-outline',
-      event: 'pricing_hero_scale_btn_click',
+      event: 'Hero Scale Panel',
     },
   },
   {
@@ -102,7 +101,7 @@ const items = [
       url: `${LINKS.enterprise}#request-trial`,
       text: 'Request trial',
       theme: 'white-outline',
-      event: 'pricing_hero_custom_btn_click',
+      event: 'Hero Enterprise Panel',
     },
   },
 ];
@@ -244,10 +243,8 @@ const Hero = () => {
                         theme="primary"
                         size="sm"
                         to={button.url}
+                        tag_name={button.event}
                         isAnimated
-                        onClick={() => {
-                          sendGtagEvent(button.event);
-                        }}
                       >
                         {button.text}
                       </AnimatedButton>
@@ -256,9 +253,7 @@ const Hero = () => {
                         className="mt-7 w-full bg-gray-new-15 bg-opacity-80 !py-4 !text-lg !font-medium tracking-tight transition-colors duration-500 hover:bg-gray-new-30 xl:mt-7 sm:max-w-none"
                         size="sm"
                         to={button.url}
-                        onClick={() => {
-                          sendGtagEvent(button.event);
-                        }}
+                        tag_name={button.event}
                       >
                         {button.text}
                       </Button>
