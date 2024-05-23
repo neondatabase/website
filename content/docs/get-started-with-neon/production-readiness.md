@@ -4,7 +4,7 @@ subtitle: Neon features for real-world workloads
 enableTableOfContents: true
 ---
 
-Learn how autoscaling, scale-to-zero, Neon's purpose-built storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.
+Learn how autoscaling, scale-to-zero, Neon's storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.
 
 ## Autoscaling
 
@@ -31,11 +31,11 @@ Neon's _Autosuspend_ feature automatically transitions a Neon compute instance (
 
 Learn more about [why you want a database that scales to zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero).
 
-## A storage architecture purpose-built for the cloud
+## A storage architecture built for the cloud
 
 **Efficient, performant, reliable storage**
 
-Neon's storage system was purpose-built for the cloud to provide storage with high availability and durability guarantees. Neon stores every transaction in multiple copies across availability zones and S3. Efficiency and performance are achieved through a multi-tier architecture designed to balance latency, throughput, and cost considerations.
+Neon's storage was built for high availability and durability. Every transaction is stored in multiple copies across availability zones and S3. Efficiency and performance are achieved through a multi-tier architecture designed to balance latency, throughput, and cost considerations.
 
 Neon storage is architected to integrate storage, backups, and archiving into one system to reduce operational headaches and administrative overhead associated with checkpoints, data backups, and restore.
 
