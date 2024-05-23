@@ -119,7 +119,7 @@ const Hero = () => {
           <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[48px] md:text-[40px] sm:text-[32px]">
             Ship faster with Postgres
           </h1>
-          <p className="mx-auto mt-3.5 max-w-xl text-[19px] font-light leading-snug -tracking-[0.04em] text-gray-new-80 lg:mt-2.5 lg:max-w-lg lg:text-balance lg:text-balance lg:text-base sm:max-w-xs">
+          <p className="mx-auto mt-3.5 max-w-xl text-[19px] font-light leading-snug -tracking-[0.04em] text-gray-new-80 lg:mt-2.5 lg:max-w-lg lg:text-balance lg:text-base sm:max-w-xs">
             The database you love, on a serverless platform designed to help you build reliable and
             scalable applications faster.
           </p>
