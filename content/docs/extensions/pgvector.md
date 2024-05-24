@@ -142,7 +142,7 @@ For example, if you have a 7 CU compute size, you could set `max_parallel_mainte
 
 ## Differences in behaviour between pgvector 0.5.1 and 0.7.0
 
-If you have existing databases that use `pgvector` 0.5.1, already installed there is a slight difference in behavior in the following corner cases even if you don't run ALTER EXTENSION UPDATE:
+Differences in behavior in the following corner cases were found during our testing of `pgvector` 0.7.0:
 
 ### Distance between a valid and NULL vector
 
