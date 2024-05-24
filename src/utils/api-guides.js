@@ -79,7 +79,8 @@ const getAllPosts = async () => {
         redirectFrom,
       };
     })
-    .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
+    .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft)
+    .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 };
 
 const getNavigationLinks = (slug, posts) => {
