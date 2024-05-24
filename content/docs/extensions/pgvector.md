@@ -153,7 +153,7 @@ By default, `pgvector` performs exact nearest neighbor search, providing perfect
 Supported index types include:
 
 - [HNSW](#hnsw)
-- [IVFFLAT](#ivffalt)
+- [IVFFLAT](#ivfflat)
 
 ### HNSW
 
@@ -217,46 +217,89 @@ This example demonstrates how to set the parameters:
 CREATE INDEX ON items USING hnsw (embedding vector_l2_ops) WITH (m = 16, ef_construction = 64);
 ```
 
-A higher value of `ef_construction` provides better recall at the cost of index build time or insert speed.
+A higher value of `ef_construction` provides better recall at the cost of index build time and insert speed.
 
-### IVFFalt
+#### HNSW query options
 
-You can add an index for each distance function you want to use. For example, the following query adds an `ivfflat` index to the `embedding` column for the L2 distance function:
+You can specify the size of the dynamic candidate list for search. The size is 40 by default.
 
 ```sql
+SET hnsw.ef_search = 100;
+```
+
+A higher value provides better recall at the cost of speed.
+
+This query shows how to use `SET LOCAL` inside a transaction to set `ef_search` for a single query:
+
+```sql
+BEGIN;
+SET LOCAL hnsw.ef_search = 100;
+SELECT ...
+COMMIT;
+```
+
+### IVFFlat
+
+An IVFFlat index divides vectors into lists and searches a subset of those lists that are closest to the query vector. It has faster build times and uses less memory than HNSW, but has lower query performance with respect to the speed-recall tradeoff.
+
+Keys to achieving good recall include:
+
+- Creating the index after the table has some data
+- Choosing an appropriate number of lists. A good starting point is rows/1000 for up to 1M rows and `sqrt(rows)` for over 1M rows.
+- Specify an appropriate number of probes when querying. A higher number is better for recall, and a lower is better for speed. A good starting point is `sqrt(lists)`.
+
+Supported types include:
+
+- `vector` - up to 2,000 dimensions
+- `halfvec` - up to 4,000 dimensions (added in 0.7.0)
+- `bit` - up to 64,000 dimensions (added in 0.7.0)
+
+The following examples show how to add an index for each distance function:
+
+**L2 distance**
+
 CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
-```
-
-This query adds an HNSW index to the `embedding` column for the L2 distance function:
-
-```sql
-CREATE INDEX ON items USING hnsw (embedding vector_l2_ops);
-```
-
-For additional indexing guidance and examples, see [Indexing](https://github.com/pgvector/pgvector/tree/8bf360ed84bfdeba9caa19e9f193fd9ad8dd9e73#indexing), in the _pgvector README_.
 
 <Admonition type="note">
-If you encounter an error similar to the following while attempting to create an index, you can increase the `maintenance_work_mem` setting to the required amount of memory using a `SET` or `ALTER DATABASE` statement.
+Use `halfvec_l2_ops` for halfvec (and similar with the other distance functions).
+</Admonition> 
 
-```text
-ERROR: memory required is 202 MB, maintenance_work_mem is 67 MB
-```
-
-The default `maintenance_work_mem` setting depends on your [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). The `SET` statement changes the value for the current session. `ALTER DATABASE` updates the session default.
+**Inner product**
 
 ```sql
-SET maintenance_work_mem TO '205MB';
+CREATE INDEX ON items USING ivfflat (embedding vector_ip_ops) WITH (lists = 100);
 ```
 
-or
+**Cosine distance**
 
 ```sql
-ALTER DATABASE <dbname> SET maintenance_work_mem TO '205MB';
+CREATE INDEX ON items USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
 ```
 
-Always consider your compute instance's memory resources when adjusting this parameter, as setting it too high could lead to out-of-memory situations or unexpected behavior.
+**Hamming distance - added in 0.7.0**
 
-</Admonition>
+```sql
+CREATE INDEX ON items USING ivfflat (embedding bit_hamming_ops) WITH (lists = 100);
+```
+
+#### IVFFlat query options
+
+You can specify the number of probes, which is 1 by default.
+
+```sql
+SET ivfflat.probes = 10;
+```
+
+A higher value provides better recall at the cost of speed. You can set the value to the number of lists for exact nearest neighbor search, at which point the planner won’t use the index.
+
+You can also use `SET LOCAL` inside a transaction to set the number of probes for a single query:
+
+```sql
+BEGIN;
+SET LOCAL ivfflat.probes = 10;
+SELECT ...
+COMMIT;
+```
 
 ## Optimizing index build time
 
@@ -265,7 +308,7 @@ To optimize index build time, consider configuring the following session variabl
 - [maintenance_work_mem](#maintenance_work_mem)
 - [max_parallel_maintenance_workers](#max_parallel_maintenance_workers)
 
-### maintenance_work_mem
+**maintenance_work_mem**
 
 In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute):
 
@@ -289,7 +332,7 @@ SET maintenance_work_mem='10 GB';
 
 The recommended setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GiB is less than 50% of the RAM available for that compute size.
 
-### max_parallel_maintenance_workers
+**max_parallel_maintenance_workers**
 
 The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`). 
 
