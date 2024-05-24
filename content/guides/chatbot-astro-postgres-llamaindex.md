@@ -18,6 +18,32 @@ To follow along this guide, you will need the following:
 - An [OpenAI](https://platform.openai.com/api-keys) account
 - An [AWS](https://aws.amazon.com/free) account
 
+## Steps
+
+- [Generate the OpenAI API token](#generate-the-openai-api-token)
+- [Provisioning a Serverless Postgres powered by Neon](#provisioning-a-serverless-postgres-powered-by-neon)
+- [Create a new Astro application](#create-a-new-astro-application)
+  - [Add Tailwind CSS to the application](#add-tailwind-css-to-the-application)
+  - [Integrate React in your Astro project](#integrate-react-in-your-astro-project)
+  - [Enabling Server Side Rendering in Astro using Node.js Adapter](#enabling-server-side-rendering-in-astro-using-nodejs-adapter)
+- [Setting up a Postgres Database Connection](#setting-up-a-postgres-database-connection)
+- [Define the Astro application routes](#define-the-astro-application-routes)
+  - [Build Conversation User Interface using Vercel AI SDK](#build-conversation-user-interface-using-vercel-ai-sdk)
+  - [Build UI to update Chabot’s Knowledge](#build-ui-to-update-chabots-knowledge)
+  - [Build an entrypoint React component](#build-an-entrypoint-react-component)
+  - [Initialize Postgres Vector Store in LlamaIndex](#initialize-postgres-vector-store-in-llamaindex)
+  - [Build the Chat API Endpoint](#build-the-chat-api-endpoint)
+  - [Build the Learn API Endpoint](#build-the-learn-api-endpoint)
+- [Dockerize your Astro application](#dockerize-your-astro-application)
+- [Deploy your Astro application to Amazon ECS](#deploy-your-astro-application-to-amazon-ecs)
+  - [Create Amazon ECR private repository](#create-amazon-ecr-private-repository)
+  - [Configure your IAM Roles](#configure-your-iam-roles)
+  - [Create an Amazon ECS Task Definition](#create-an-amazon-ecs-task-definition)
+  - [Create an Amazon ECS Cluster](#create-an-amazon-ecs-cluster)
+  - [Create an Amazon ECS Service](#create-an-amazon-ecs-service)
+  - [Create Access Keys for IAM users](#create-access-keys-for-iam-users)
+- [Configure GitHub Actions for Continuous Deployment (CD) Workflow](#configure-github-actions-for-continuous-deployment-cd-workflow)
+
 ## Generate the OpenAI API token
 
 To create vector embeddings, you are going to use OpenAI API with LlamaIndex. To set up OpenAI, do the following:
