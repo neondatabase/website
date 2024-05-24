@@ -97,6 +97,144 @@ Always consider your compute instance's memory resources when adjusting this par
 
 </Admonition>
 
+## Optimizing index build time
+
+To optimize index build time, consider configuring the following session variables prior to building an index:
+
+- [maintenance_work_mem](#maintenance_work_mem)
+- [max_parallel_maintenance_workers](#max_parallel_maintenance_workers)
+
+### maintenance_work_mem
+
+In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute):
+
+| Compute Units (CU) | vCPU | RAM   |  maintenance_work_mem    |
+|--------------|------|-------|--------------------------|
+| 0.25         | 0.25 | 1 GB  |   64 MB                  |
+| 0.50         | 0.50 | 2 GB  |   64 MB                  |
+| 1            | 1    | 4 GB  |   67 MB                  |
+| 2            | 2    | 8 GB  |   134 MB                 |
+| 3            | 3    | 12 GB |   201 MB                 |
+| 4            | 4    | 16 GB |   268 MB                 |
+| 5            | 5    | 20 GB |   335 MB                 |
+| 6            | 6    | 24 GB |   402 MB                 |
+| 7            | 7    | 28 GB |   470 MB                 |
+
+To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:  
+
+```sql
+SET maintenance_work_mem='10 GB';
+```
+
+The recommended setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GiB is less than 50% of the RAM available for that compute size.
+
+### max_parallel_maintenance_workers
+
+The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`). 
+
+You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:  
+
+```sql
+SET max_parallel_maintenance_workers = 7
+```
+
+For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+
+## Differences in behaviour between pgvector 0.5.1 and 0.7.0
+
+If you have existing databases that use `pgvector` 0.5.1, already installed there is a slight difference in behavior in the following corner cases even if you don't run ALTER EXTENSION UPDATE:
+
+### Distance between a valid and NULL vector
+
+The distance between a valid and `NULL` vector (`NULL::vector`) with `pgvector` 0.7.0 differs from `pgvector` 0.5.1 when using an HNSW or IVFFLAT index, as shown in the following examples: 
+
+**HNSW**
+
+For the following script, comparing the `NULL::vector` to non-null vectors the resulting output changes:
+
+```sql
+SET enable_seqscan = off;
+
+CREATE TABLE t (val vector(3));
+INSERT INTO t (val) VALUES ('[0,0,0]'), ('[1,2,3]'), ('[1,1,1]'), (NULL);
+CREATE INDEX ON t USING hnsw (val vector_l2_ops);
+
+INSERT INTO t (val) VALUES ('[1,2,4]');
+
+SELECT * FROM t ORDER BY val <-> (SELECT NULL::vector);
+```
+
+`pgvector` 0.7.0 output:
+
+```
+   val   
+---------
+ [1,1,1]
+ [1,2,4]
+ [1,2,3]
+ [0,0,0]
+```
+
+`pgvector` 0.5.1 output:
+
+
+```
+   val   
+---------
+ [0,0,0]
+ [1,1,1]
+ [1,2,3]
+ [1,2,4]
+```
+
+**IVFFLAT**
+
+For the following script, comparing the `NULL::vector` to non-null vectors the resulting output changes:
+
+```sql
+SET enable_seqscan = off;
+
+CREATE TABLE t (val vector(3));
+INSERT INTO t (val) VALUES ('[0,0,0]'), ('[1,2,3]'), ('[1,1,1]'), (NULL);
+CREATE INDEX ON t USING ivfflat (val vector_l2_ops) WITH (lists = 1);
+
+INSERT INTO t (val) VALUES ('[1,2,4]');
+
+SELECT * FROM t ORDER BY val <-> (SELECT NULL::vector);
+```
+
+`pgvector` 0.7.0 output:
+
+```sql
+   val   
+---------
+ [0,0,0]
+ [1,2,3]
+ [1,1,1]
+ [1,2,4]
+ ```
+
+ `pgvector` 0.5.1 output:
+
+ ```sql
+    val   
+---------
+ [0,0,0]
+ [1,1,1]
+ [1,2,3]
+ [1,2,4]
+ ```
+
+### Error messages improvement for invalid literals
+
+If you use an invalid literal value for the `vector` data type, you will now see the following error message:
+
+```sql
+SELECT '[4e38,1]'::vector;
+ERROR:  "4e38" is out of range for type vector
+LINE 1: SELECT '[4e38,1]'::vector;
+```
+
 ## Resources
 
 `pgvector` source code: [https://github.com/pgvector/pgvector](https://github.com/pgvector/pgvector)
