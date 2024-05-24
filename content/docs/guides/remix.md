@@ -29,7 +29,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+    <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
       ```shell
       npm install pg
@@ -61,7 +61,7 @@ There are two parts to connecting a Remix application to Neon. The first is `db.
 
 Create a `db.server.ts` file at the root of your `/app` directory and add the following code snippet to connect to your Neon database:
 
-<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
 import pg from 'pg';
@@ -96,7 +96,7 @@ export { sql };
 
 Create a new route in your `app/routes` directory and import the `db.server` file.  
 
-<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
 import { json } from '@remix-run/node';

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
@@ -12,6 +13,7 @@ import scaleIcon from 'icons/landing/scalability.svg';
 import storageIcon from 'icons/landing/storage.svg';
 import timerIcon from 'icons/landing/timer.svg';
 import { getLandingPages, getWpPageBySlug, getStaticPages } from 'utils/api-pages';
+import { getHubspotFormData } from 'utils/forms';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
@@ -22,7 +24,7 @@ const icons = {
   replicas: replicasIcon,
 };
 
-const DinamicPage = async ({ params }) => {
+const DynamicPage = async ({ params }) => {
   const page = await getWpPageBySlug(params.slug);
 
   if (!page) return notFound();
@@ -36,7 +38,10 @@ const DinamicPage = async ({ params }) => {
   const contentWithLazyBlocks = getReactContentWithLazyBlocks(
     content,
     {
-      landinghero: Hero,
+      landinghero: async ({ hubspotFormId, ...restProps }) => {
+        const formData = await getHubspotFormData(hubspotFormId);
+        return <Hero formData={formData} hubspotFormId={hubspotFormId} {...restProps} />;
+      },
       landingfeatures: ({ features, ...restProps }) => {
         const items = features.map((feature) => {
           const icon = icons[feature.iconName];
@@ -85,6 +90,8 @@ const DinamicPage = async ({ params }) => {
 export async function generateViewport({ params }) {
   const page = await getWpPageBySlug(params.slug);
 
+  if (!page) return notFound();
+
   const {
     template: { templateName },
   } = page;
@@ -132,4 +139,4 @@ export async function generateMetadata({ params }) {
 
 export const revalidate = 60;
 
-export default DinamicPage;
+export default DynamicPage;

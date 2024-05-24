@@ -183,6 +183,10 @@ export default {
           to: LINKS.docs,
         },
         {
+          text: 'Community Guides',
+          to: LINKS.guides,
+        },
+        {
           text: 'Changelog',
           to: LINKS.changelog,
         },
@@ -292,7 +296,7 @@ export default {
     },
     {
       icon: PostgresDocsIcon,
-      title: 'Postgres Docs',
+      title: 'PostgreSQL Docs',
       slug: LINKS.postgres,
     },
   ],
