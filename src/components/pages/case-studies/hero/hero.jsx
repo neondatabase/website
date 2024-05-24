@@ -78,8 +78,7 @@ const Hero = ({ items }) => (
         Explore <span className="text-green-45">success stories</span>
       </h1>
       <p className="mx-auto mt-5 max-w-[664px] text-center text-xl font-light leading-snug lg:text-lg md:text-base">
-        Discover the diverse and captivating stories of our valued partners, each a testament to
-        unique experiences and successes.
+        Discover how other companies are using Neon.
       </p>
       <div className="grid-gap-x grid grid-cols-12 gap-x-[34px]">
         <ul className="col-span-10 col-start-2 mt-20 grid grid-cols-3 gap-x-8 gap-y-9 xl:col-span-full xl:col-start-1 xl:mt-16 lg:mt-12 lg:grid-cols-2 md:mt-10 md:gap-6 sm:grid-cols-1">
