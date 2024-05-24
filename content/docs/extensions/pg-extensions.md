@@ -88,7 +88,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 Unless otherwise noted, supported extensions can be installed using [CREATE EXTENSION](https://www.postgresql.org/docs/16/sql-createextension.html) syntax.
 
 ```sql
-CREATE EXTENSION <extension_name>
+CREATE EXTENSION <extension_name>;
 ```
 
 You can install extensions from the Neon SQL Editor or from a client such as `psql` that permits running SQL queries. For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
@@ -104,7 +104,7 @@ SELECT * FROM pg_extension;
 You can update an extension to the latest version using `ALTER EXTENSION <extension_name> UPDATE TO <new_version>` syntax. For example:
 
   ```sql
-  ALTER EXTENSION postgis_topology UPDATE TO '3.3.2';
+  ALTER EXTENSION vector UPDATE TO '0.7.0';
   ```
 
 <Admonition type="important">
