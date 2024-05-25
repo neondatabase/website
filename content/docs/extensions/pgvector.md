@@ -5,7 +5,17 @@ enableTableOfContents: true
 updatedOn: '2024-01-23T19:40:04.086Z'
 ---
 
-The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models. This topic describes how to enable the `pgvector` extension in Neon and how to create, store, and query vectors.
+The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models. 
+
+`pgvector` supports:
+
+- Exact and approximate nearest neighbor search
+- Single-precision, half-precision, binary, and sparse vectors
+- L2 distance, inner product, cosine distance, L1 distance, Hamming distance, and Jaccard distance
+- Any language with a Postgres client
+- ACID compliance, point-in-time recovery, JOINs, and all other features of Postgres
+
+This topic describes how to enable the `pgvector` extension in Neon and how to create, store, and query vectors.
 
 <CTA />
 
@@ -34,13 +44,40 @@ The command generates a table named `items` with an `embedding` column capable o
 
 ## Storing vectors and embeddings
 
-After you have generated an embedding using a service like the OpenAI API, you can store the resulting vector in your database. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings:
+After you have generated an embedding using a service like the OpenAI API, you can store the resulting vector in your database. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings.
+
+This command inserts two new rows into the `items` table with the provided embeddings.
 
 ```sql
 INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]');
 ```
 
-This command inserts two new rows into the items table with the provided embeddings.
+This command loads vectors in bulk using the `COPY` command:
+
+```sql
+COPY items (embedding) FROM STDIN WITH (FORMAT BINARY);
+```
+
+For a Python script example, see [bulk_loading.py](https://github.com/pgvector/pgvector-python/blob/master/examples/bulk_loading.py).
+
+This command how how to upserts vectors:
+
+```sql
+INSERT INTO items (id, embedding) VALUES (1, '[1,2,3]'), (2, '[4,5,6]')
+    ON CONFLICT (id) DO UPDATE SET embedding = EXCLUDED.embedding;
+```
+
+This command shows how to update vectors:
+
+```sql
+UPDATE items SET embedding = '[1,2,3]' WHERE id = 1;
+```
+
+This command shows how to delete vectors:
+
+```sql
+DELETE FROM items WHERE id = 1;
+```
 
 ## Querying vectors
 
@@ -52,50 +89,355 @@ SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
 
 This query computes the Euclidean distance (L2 distance) between the given vector and the vectors stored in the items table, sorts the results by the calculated distance, and returns the top 5 most similar items.
 
-`pgvector` also supports inner product (`<#>`) and cosine distance (`<=>`).
+Supported distance functions include:
 
-For more information about querying vectors, refer to the [pgvector README](https://github.com/pgvector/pgvector).
+- `<->` - L2 distance
+- `<#>` - (negative) inner product
+- `<=>` - cosine distance
+- `<+>` - L1 distance (added in 0.7.0)
+
+<Admonition type="note">
+The inner product operator (`<#>`) returns the negative inner product since Postgres only supports `ASC` order index scans on operators.
+</Admonition>
+
+Get the nearest neighbors to a row:
+
+```sql
+SELECT * FROM items WHERE id != 1 ORDER BY embedding <-> (SELECT embedding FROM items WHERE id = 1) LIMIT 5;
+```
+
+Get rows within a certain distance:
+
+```sql
+SELECT * FROM items WHERE embedding <-> '[3,1,2]' < 5;```
+```
+
+<Admonition type="note">
+Combine with ORDER BY and LIMIT to use an index
+</Admonition>
+
+Get the distance:
+
+```sql
+SELECT embedding <-> '[3,1,2]' AS distance FROM items;
+```
+
+For inner product, multiply by `-1` (since `<#>` returns the negative inner product):
+
+```sql
+SELECT (embedding <#> '[3,1,2]') * -1 AS inner_product FROM items;
+```
+
+For cosine similarity, use 1 - cosine distance:
+
+```sql
+SELECT 1 - (embedding <=> '[3,1,2]') AS cosine_similarity FROM items;
+```
+
+To average vectors:
+
+```sql
+SELECT AVG(embedding) FROM items;
+```
+
+To average groups of vectors:
+
+```sql
+SELECT category_id, AVG(embedding) FROM items GROUP BY category_id;
+```
 
 ## Indexing vectors
 
-Using an index on the vector column can improve query performance with a minor cost in recall.
+By default, `pgvector` performs exact nearest neighbor search, providing perfect recall. Adding an index on the vector column can improve query performance with a minor cost in recall.
 
-You can add an index for each distance function you want to use. For example, the following query adds an ivfflat index to the `embedding` column for the L2 distance function:
+Supported index types include:
 
-```sql
-CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
-```
+- [HNSW](#hnsw)
+- [IVFFLAT](#ivfflat)
 
-This query adds an HNSW index to the `embedding` column for the L2 distance function:
+### HNSW
+
+An HNSW index creates a multilayer graph. It has better query performance than IVFFlat (in terms of speed-recall tradeoff), but has slower build times and uses more memory. Also, an index can be created without any data in the table since there isn’t a training step like IVFFlat.
+
+The following examples show how to add an HNSW index for the supported distance functions. The supported types include:
+
+- `vector` - up to 2,000 dimensions
+- `halfvec` - up to 4,000 dimensions (added in 0.7.0)
+- `bit` - up to 64,000 dimensions (added in 0.7.0)
+- `sparsevec` - up to 1,000 non-zero elements (added in 0.7.0)
+
+**L2 distance**
 
 ```sql
 CREATE INDEX ON items USING hnsw (embedding vector_l2_ops);
 ```
+<Admonition type="note">
+Use `halfvec_l2_ops` for `halfvec` and `sparsevec_l2_ops` for `sparsevec` (and similar for the other distance functions).
+</Admonition>
 
-For additional indexing guidance and examples, see [Indexing](https://github.com/pgvector/pgvector/tree/8bf360ed84bfdeba9caa19e9f193fd9ad8dd9e73#indexing), in the _pgvector README_.
+
+**Inner product**
+
+```sql
+CREATE INDEX ON items USING hnsw (embedding vector_ip_ops);
+```
+
+**Cosine distance**
+
+```sql
+CREATE INDEX ON items USING hnsw (embedding vector_cosine_ops);
+```
+
+**L1 distance - added in 0.7.0**
+
+```sql
+CREATE INDEX ON items USING hnsw (embedding vector_l1_ops);
+```
+
+**Hamming distance - added in 0.7.0**
+
+```sql
+CREATE INDEX ON items USING hnsw (embedding bit_hamming_ops);
+```
+
+**Jaccard distance - added in 0.7.0**
+
+```sql
+CREATE INDEX ON items USING hnsw (embedding bit_jaccard_ops);
+```
+
+#### HNSW index options
+
+- `m` - the max number of connections per layer (16 by default)
+- `ef_construction` - the size of the dynamic candidate list for constructing the graph (64 by default)
+
+This example demonstrates how to set the parameters:
+
+```sql 
+CREATE INDEX ON items USING hnsw (embedding vector_l2_ops) WITH (m = 16, ef_construction = 64);
+```
+
+A higher value of `ef_construction` provides better recall at the cost of index build time and insert speed.
+
+#### HNSW query options
+
+You can specify the size of the dynamic candidate list for search. The size is 40 by default.
+
+```sql
+SET hnsw.ef_search = 100;
+```
+
+A higher value provides better recall at the cost of speed.
+
+This query shows how to use `SET LOCAL` inside a transaction to set `ef_search` for a single query:
+
+```sql
+BEGIN;
+SET LOCAL hnsw.ef_search = 100;
+SELECT ...
+COMMIT;
+```
+
+### IVFFlat
+
+An IVFFlat index divides vectors into lists and searches a subset of those lists that are closest to the query vector. It has faster build times and uses less memory than HNSW, but has lower query performance with respect to the speed-recall tradeoff.
+
+Keys to achieving good recall include:
+
+- Creating the index after the table has some data
+- Choosing an appropriate number of lists. A good starting point is rows/1000 for up to 1M rows and `sqrt(rows)` for over 1M rows.
+- Specify an appropriate number of probes when querying. A higher number is better for recall, and a lower is better for speed. A good starting point is `sqrt(lists)`.
+
+Supported types include:
+
+- `vector` - up to 2,000 dimensions
+- `halfvec` - up to 4,000 dimensions (added in 0.7.0)
+- `bit` - up to 64,000 dimensions (added in 0.7.0)
+
+The following examples show how to add an index for each distance function:
+
+**L2 distance**
+
+CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
 
 <Admonition type="note">
-If you encounter an error similar to the following while attempting to create an index, you can increase the `maintenance_work_mem` setting to the required amount of memory using a `SET` or `ALTER DATABASE` statement.
+Use `halfvec_l2_ops` for halfvec (and similar with the other distance functions).
+</Admonition> 
 
-```text
-ERROR: memory required is 202 MB, maintenance_work_mem is 67 MB
-```
-
-The default `maintenance_work_mem` setting depends on your [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). The `SET` statement changes the value for the current session. `ALTER DATABASE` updates the session default.
+**Inner product**
 
 ```sql
-SET maintenance_work_mem TO '205MB';
+CREATE INDEX ON items USING ivfflat (embedding vector_ip_ops) WITH (lists = 100);
 ```
 
-or
+**Cosine distance**
 
 ```sql
-ALTER DATABASE <dbname> SET maintenance_work_mem TO '205MB';
+CREATE INDEX ON items USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
 ```
 
-Always consider your compute instance's memory resources when adjusting this parameter, as setting it too high could lead to out-of-memory situations or unexpected behavior.
+**Hamming distance - added in 0.7.0**
 
-</Admonition>
+```sql
+CREATE INDEX ON items USING ivfflat (embedding bit_hamming_ops) WITH (lists = 100);
+```
+
+#### IVFFlat query options
+
+You can specify the number of probes, which is 1 by default.
+
+```sql
+SET ivfflat.probes = 10;
+```
+
+A higher value provides better recall at the cost of speed. You can set the value to the number of lists for exact nearest neighbor search, at which point the planner won’t use the index.
+
+You can also use `SET LOCAL` inside a transaction to set the number of probes for a single query:
+
+```sql
+BEGIN;
+SET LOCAL ivfflat.probes = 10;
+SELECT ...
+COMMIT;
+```
+
+## Optimizing index build time
+
+To optimize index build time, consider configuring the following session variables prior to building an index:
+
+- [maintenance_work_mem](#maintenance_work_mem)
+- [max_parallel_maintenance_workers](#max_parallel_maintenance_workers)
+
+**maintenance_work_mem**
+
+In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute):
+
+| Compute Units (CU) | vCPU | RAM   |  maintenance_work_mem    |
+|--------------|------|-------|--------------------------|
+| 0.25         | 0.25 | 1 GB  |   64 MB                  |
+| 0.50         | 0.50 | 2 GB  |   64 MB                  |
+| 1            | 1    | 4 GB  |   67 MB                  |
+| 2            | 2    | 8 GB  |   134 MB                 |
+| 3            | 3    | 12 GB |   201 MB                 |
+| 4            | 4    | 16 GB |   268 MB                 |
+| 5            | 5    | 20 GB |   335 MB                 |
+| 6            | 6    | 24 GB |   402 MB                 |
+| 7            | 7    | 28 GB |   470 MB                 |
+
+To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:  
+
+```sql
+SET maintenance_work_mem='10 GB';
+```
+
+The recommended setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GiB is less than 50% of the RAM available for that compute size.
+
+**max_parallel_maintenance_workers**
+
+The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`). 
+
+You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:  
+
+```sql
+SET max_parallel_maintenance_workers = 7
+```
+
+For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+
+## Differences in behaviour between pgvector 0.5.1 and 0.7.0
+
+Differences in behavior in the following corner cases were found during our testing of `pgvector` 0.7.0:
+
+### Distance between a valid and NULL vector
+
+The distance between a valid and `NULL` vector (`NULL::vector`) with `pgvector` 0.7.0 differs from `pgvector` 0.5.1 when using an HNSW or IVFFLAT index, as shown in the following examples: 
+
+**HNSW**
+
+For the following script, comparing the `NULL::vector` to non-null vectors the resulting output changes:
+
+```sql
+SET enable_seqscan = off;
+
+CREATE TABLE t (val vector(3));
+INSERT INTO t (val) VALUES ('[0,0,0]'), ('[1,2,3]'), ('[1,1,1]'), (NULL);
+CREATE INDEX ON t USING hnsw (val vector_l2_ops);
+
+INSERT INTO t (val) VALUES ('[1,2,4]');
+
+SELECT * FROM t ORDER BY val <-> (SELECT NULL::vector);
+```
+
+`pgvector` 0.7.0 output:
+
+```
+   val   
+---------
+ [1,1,1]
+ [1,2,4]
+ [1,2,3]
+ [0,0,0]
+```
+
+`pgvector` 0.5.1 output:
+
+
+```
+   val   
+---------
+ [0,0,0]
+ [1,1,1]
+ [1,2,3]
+ [1,2,4]
+```
+
+**IVFFLAT**
+
+For the following script, comparing the `NULL::vector` to non-null vectors the resulting output changes:
+
+```sql
+SET enable_seqscan = off;
+
+CREATE TABLE t (val vector(3));
+INSERT INTO t (val) VALUES ('[0,0,0]'), ('[1,2,3]'), ('[1,1,1]'), (NULL);
+CREATE INDEX ON t USING ivfflat (val vector_l2_ops) WITH (lists = 1);
+
+INSERT INTO t (val) VALUES ('[1,2,4]');
+
+SELECT * FROM t ORDER BY val <-> (SELECT NULL::vector);
+```
+
+`pgvector` 0.7.0 output:
+
+```sql
+   val   
+---------
+ [0,0,0]
+ [1,2,3]
+ [1,1,1]
+ [1,2,4]
+ ```
+
+ `pgvector` 0.5.1 output:
+
+ ```sql
+    val   
+---------
+ [0,0,0]
+ [1,1,1]
+ [1,2,3]
+ [1,2,4]
+ ```
+
+### Error messages improvement for invalid literals
+
+If you use an invalid literal value for the `vector` data type, you will now see the following error message:
+
+```sql
+SELECT '[4e38,1]'::vector;
+ERROR:  "4e38" is out of range for type vector
+LINE 1: SELECT '[4e38,1]'::vector;
+```
 
 ## Resources
 

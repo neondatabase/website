@@ -92,7 +92,13 @@ INSERT INTO playing_with_neon(name, value)
 
 Your default branch `main` now has a table with some content.
 
-## Step 4 - Create a dedicated development branch
+## Step 4 - View and modify data in the console
+
+Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, add or remove columns, drop or truncate tables, and export data in `.json` and `.csv` formats. 
+
+![Tables page Drizzle integration](/docs/relnotes/tables_page_drizzle.png)
+
+## Step 5 - Create a dedicated development branch
 
 In this step, you'll create a dedicated development branch using the Neon CLI. This branch will be an exact, isolated copy of `main`. 
 
@@ -140,7 +146,7 @@ You can create and manage branches from the Neon Console, but here we'll use the
 
 There are other branch creation options available when using the CLI. See [Create a branch with the CLI](/docs/guides/branching-neon-cli#create-a-branch-with-the-cli) for more.
 
-## Step 5 - Make some sample schema changes
+## Step 6 - Make some sample schema changes
 
 With your development branch created, you can now make schema changes safely in your own environment. Since the `playing_with_neon` table is already available in the `dev/developer_name` branch, we'll modify its schema and add new data so that it deviates from `main`.
 
@@ -232,7 +238,7 @@ With `psql` available, let's work from the terminal to connect to your `dev/deve
     (11 rows)
     ```
 
-## Step 6 - Check your changes with Schema Diff
+## Step 7 - Check your changes with Schema Diff
 
 After making the schema changes to your development branch, you can use the [Schema Diff](/docs/guides/schema-diff) feature to compare your branch against its parent branch. Schema Diff is a Github-style code-comparison tool used to visualize differences between different branch's databases.
 
@@ -249,7 +255,7 @@ From the **Branches** page in the Neon Console:
 
 A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools,  you can use ORMs like [Prisma](https://www.prisma.io/) or [Drizzle](https://drizzle.team/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
 
-## Step 7 - Reset your dev branch to main
+## Step 8 - Reset your dev branch to main
 
 After experimenting with changes in your development branch, let's now reset the branch to `main`, its parent branch.
 

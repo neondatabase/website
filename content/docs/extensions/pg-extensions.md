@@ -56,7 +56,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [pgrowlocks](https://www.postgresql.org/docs/16/pgrowlocks.html)               | 1.2       | 1.2        |   1.2        |                                                                                                                 |
 | [pgstattuple](https://www.postgresql.org/docs/16/pgstattuple.html)              | 1.5      | 1.5       |  1.5       |                                                                                                                  |
 | [pgtap](https://pgtap.org/documentation.html)                    | 1.2.0                   | 1.2.0       |   1.2.0       |                                                                                                                    |
-| [pgvector](/docs/extensions/pgvector)                 | 0.5.1                   | 0.5.1  | 0.5.1                  | Install with `CREATE EXTENSION vector;`                                                                                                                    |
+| [pgvector](/docs/extensions/pgvector)                 | 0.7.0                   | 0.7.0  | 0.7.0                  | Install with `CREATE EXTENSION vector;`                                                                                                                    |
 | [pgx_ulid](https://github.com/pksunkara/pgx_ulid)                 | 0.1.3                   | 0.1.3  | 0.1.3                                 | Install with `CREATE EXTENSION ulid;`                                                                                                                    |
 | [plcoffee](https://coffeescript.org/)                 | 3.1.5                          | 3.1.5  | 3.1.8                         |                                                                                                                    |
 | [plls](https://livescript.net/)                     | 3.1.5                          | 3.1.5 | 3.1.8                          |                                                                                                                    |  
@@ -88,7 +88,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 Unless otherwise noted, supported extensions can be installed using [CREATE EXTENSION](https://www.postgresql.org/docs/16/sql-createextension.html) syntax.
 
 ```sql
-CREATE EXTENSION <extension_name>
+CREATE EXTENSION <extension_name>;
 ```
 
 You can install extensions from the Neon SQL Editor or from a client such as `psql` that permits running SQL queries. For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
@@ -104,7 +104,7 @@ SELECT * FROM pg_extension;
 You can update an extension to the latest version using `ALTER EXTENSION <extension_name> UPDATE TO <new_version>` syntax. For example:
 
   ```sql
-  ALTER EXTENSION postgis_topology UPDATE TO '3.3.2';
+  ALTER EXTENSION vector UPDATE TO '0.7.0';
   ```
 
 <Admonition type="important">

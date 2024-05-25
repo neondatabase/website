@@ -183,6 +183,10 @@ export default {
           to: LINKS.docs,
         },
         {
+          text: 'Community Guides',
+          to: LINKS.guides,
+        },
+        {
           text: 'Changelog',
           to: LINKS.changelog,
         },

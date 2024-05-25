@@ -243,7 +243,7 @@ Now, let's move on to building an endpoint to insert the reference to the upload
 
 You will create an API endpoint that accepts the URL to the publicly accessible object. In this example, we'll create a table in Postgres, and associate the object URL with a user, for demonstration purposes. To use `/api/user/image` as the desired API route, create a file `app/api/user/image/route.ts` with the following code:
 
-<CodeTabs labels={["node-postgres", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
   ```tsx {3,10-11,14,16,18-21}
   // File: app/api/user/image/route.ts
@@ -267,6 +267,34 @@ You will create an API endpoint that accepts the URL to the publicly accessible 
         user,
         objectUrl,
       ]);
+      return NextResponse.json({ code: 1 });
+    } catch (e) {
+      return NextResponse.json({
+        code: 0,
+        message: e instanceof Error ? e.message : e?.toString(),
+      });
+    }
+  }
+  ```
+
+  ```tsx {3,10-11,14,16,18-21}
+  // File: app/api/user/image/route.ts
+
+  import postgres from 'postgres';
+  import { NextResponse, type NextRequest } from "next/server";
+
+  export async function POST(request: NextRequest) {
+    const { objectUrl } = await request.json();
+    if (!process.env.DATABASE_URL) return new Response(null, { status: 500 });
+    // Create a client instance
+    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+    try {
+      // Create the user table if it does not exist
+      await sql`CREATE TABLE IF NOT EXISTS "user" (name TEXT, image TEXT)`;
+      // Mock call to get the user
+      const user = "rishi"; // getUser();
+      // Insert the user name and the reference to the image into the user table
+      await sql`INSERT INTO "user" (name, image) VALUES (${user}, ${objectUrl})`;
       return NextResponse.json({ code: 1 });
     } catch (e) {
       return NextResponse.json({

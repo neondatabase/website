@@ -324,6 +324,12 @@
       items:
         - title: GitHub integration
           slug: guides/neon-github-app
+        - title: Neosync
+          items:
+            - title: Generate synthetic data
+              slug: guides/neosync-generate
+            - title: Anonymize data
+              slug: guides/neosync-anonymize
     - title: Replication
       items:
         - title: Airbyte

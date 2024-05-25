@@ -270,7 +270,7 @@ A feature of the Neon Console that provides several graphs to help you monitor s
 
 ## Neon
 
-A fully managed serverless Postgres. Neon separates storage and compute to offer modern developer features such as branching, autoscaling, and bottomless storage. For more information, see [What is Neon?](/docs/introduction/about/).
+A serverless Postgres platform designed to help developers build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 
