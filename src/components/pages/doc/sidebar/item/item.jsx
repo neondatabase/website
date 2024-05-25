@@ -69,7 +69,7 @@ const Item = ({
           aria-hidden={!!ariaLabel}
           dangerouslySetInnerHTML={{ __html: title }}
         />
-        {tag && <Tag className="ml-2 mt-0.5" title={tag} size="sm" />}
+        {tag && <Tag className="ml-2 mt-0.5" label={tag} size="sm" />}
         <span
           className={clsx(
             'arrow-mask block h-4 w-4 transition-[transform,background-color] duration-200',

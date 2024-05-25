@@ -72,7 +72,7 @@ const Post = ({
           >
             {title}
           </h1>
-          {tag && <Tag className="relative -top-1.5 ml-3 inline" title={tag} />}
+          {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
           {subtitle && (
             <p className="my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80">
               {subtitle}

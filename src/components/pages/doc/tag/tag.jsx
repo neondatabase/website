@@ -11,25 +11,25 @@ const themes = {
 
 const sizes = {
   sm: 'px-2 py-1 text-[8px]',
-  default: 'px-3.5 py-2 text-[10px]',
+  md: 'px-3.5 py-2 text-[10px]',
 };
 
-const Tag = ({ className, title, size }) => (
+const Tag = ({ className, label, size }) => (
   <span
     className={clsx(
       'block w-fit whitespace-nowrap rounded-[40px] font-semibold uppercase leading-none',
       className,
-      themes?.[title] || themes.default,
-      sizes?.[size] || sizes.default
+      themes?.[label] || themes.default,
+      sizes?.[size] || sizes.md
     )}
   >
-    {title}
+    {label}
   </span>
 );
 
 Tag.propTypes = {
   className: PropTypes.string,
-  title: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   size: PropTypes.string,
 };
 
