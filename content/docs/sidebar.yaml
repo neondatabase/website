@@ -368,12 +368,6 @@
           slug: guides/sequelize
         - title: SQLAlchemy
           slug: guides/sqlalchemy-migrations
-    - title: Tools
-      items:
-        - title: Outerbase
-          slug: guides/outerbase
-        - title: Prisma
-          slug: guides/prisma
     - title: Authentication
       items:
         - title: Auth0
