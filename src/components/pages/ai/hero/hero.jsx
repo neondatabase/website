@@ -4,13 +4,14 @@ import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
 import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container/container';
 import LINKS from 'constants/links';
 import useIsTouchDevice from 'hooks/use-is-touch-device';
+
+import sphereMobile from './images/sphere-mobile.png';
 
 const Spline = dynamic(() => import('@splinetool/react-spline'));
 
@@ -21,41 +22,15 @@ const Hero = () => {
   const isTouch = useIsTouchDevice();
   const { width } = useWindowSize();
 
-  const [spline, setSpline] = useState(null);
-  const [animationVisibilityRef, isInView] = useInView();
-  const [isAnimationStarted, setIsAnimationStarted] = useState(false);
-
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  useEffect(() => {
-    if (!spline) return;
-
-    // launching events that start playing the intro animation
-    if (!isAnimationStarted || spline.time < 10000) {
-      const { keyUp } = spline.getSplineEvents();
-
-      Object.keys(keyUp).forEach((key) => {
-        spline.emitEvent('keyUp', key);
-      });
-
-      setIsAnimationStarted(true);
-      return;
-    }
-
-    if (isInView) {
-      spline.play();
-    } else {
-      spline.stop();
-    }
-  }, [isInView, spline, isAnimationStarted]);
 
   // During server-side rendering, isClient will be false, so the <Image> component will always be rendered
   // After hydration, isClient will be true, so the correct component will be rendered based on the window width
   const ImageOrSplineAnimation =
     isClient && width >= MOBILE_WIDTH ? (
-      <div className="absolute left-0 top-0 h-[1207px] w-full" ref={animationVisibilityRef}>
+      <div className="absolute left-0 top-0 h-[1207px] w-full">
         <Spline
           className={clsx(
             'absolute bottom-9 left-0 h-full w-full xl:bottom-[9.5%] lg:bottom-[19%]',
@@ -64,13 +39,12 @@ const Hero = () => {
             }
           )}
           scene="/animations/pages/ai/scene.splinecode"
-          onLoad={(spline) => setSpline(spline)}
         />
       </div>
     ) : (
       <Image
         className="absolute left-1/2 top-0 hidden -translate-x-1/2 md:block"
-        src="/images/pages/ai/hero-sphere-mobile.png"
+        src={sphereMobile}
         width={340}
         height={357}
         alt=""
@@ -83,7 +57,7 @@ const Hero = () => {
   return (
     <section className="hero safe-paddings relative pb-[390px] pt-36 xl:pt-[120px] lg:pt-11 md:pb-0 md:pt-8">
       <Container
-        className="container relative z-10 flex flex-col items-center text-center"
+        className="relative z-10 flex w-fit flex-col items-center text-center"
         size="medium"
       >
         <h1 className="xs:flat-breaks font-title text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl">
