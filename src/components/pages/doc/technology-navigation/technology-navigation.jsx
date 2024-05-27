@@ -70,7 +70,7 @@ const TechnologyNavigation = ({ children = null, open = false }) => {
           onClick={handleClick}
         >
           <span>Show more</span>
-          <ChevronRight className="rotate-90 ml-2 block shrink-0 text-black-new transition-[transform,color] duration-200 dark:text-white" />
+          <ChevronRight className="ml-2 block shrink-0 rotate-90 text-black-new transition-[transform,color] duration-200 dark:text-white" />
         </button>
       )}
     </>
