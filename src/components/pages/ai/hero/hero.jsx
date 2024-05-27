@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
 import AnimatedButton from 'components/shared/animated-button';
@@ -22,15 +23,28 @@ const Hero = () => {
   const isTouch = useIsTouchDevice();
   const { width } = useWindowSize();
 
+  const [spline, setSpline] = useState(null);
+  const [animationVisibilityRef, isInView] = useInView();
+
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    if (!spline) return;
+
+    if (isInView) {
+      spline.play();
+    } else {
+      spline.stop();
+    }
+  }, [isInView, spline]);
 
   // During server-side rendering, isClient will be false, so the <Image> component will always be rendered
   // After hydration, isClient will be true, so the correct component will be rendered based on the window width
   const ImageOrSplineAnimation =
     isClient && width >= MOBILE_WIDTH ? (
-      <div className="absolute left-0 top-0 h-[1207px] w-full">
+      <div className="absolute left-0 top-0 h-[1207px] w-full" ref={animationVisibilityRef}>
         <Spline
           className={clsx(
             'absolute bottom-9 left-0 h-full w-full xl:bottom-[9.5%] lg:bottom-[19%]',
@@ -39,6 +53,7 @@ const Hero = () => {
             }
           )}
           scene="/animations/pages/ai/scene.splinecode"
+          onLoad={(spline) => setSpline(spline)}
         />
       </div>
     ) : (
