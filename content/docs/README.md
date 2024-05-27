@@ -19,10 +19,11 @@ Right now Markdown files accept the following fields:
 
 1. `title` — title of the page (required)
 2. `subTitle` — subtitle of the page.
-3. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/docs/old-path/`
-4. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
-5. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
-6. `ogImage` - the social preview image of the page.
+3. `tag` — tag for the page. It can be one of the following: `new`, `beta`, `coming soon`, `deprecated`, or you can use your own tag.
+4. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/docs/old-path/`
+5. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
+6. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
+7. `ogImage` - the social preview image of the page.
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 
