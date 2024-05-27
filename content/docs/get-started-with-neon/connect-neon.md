@@ -1,7 +1,6 @@
 ---
 title: Connecting Neon to your stack
 subtitle: Learn how to integrate Neon into your application
-tag: beta
 enableTableOfContents: true
 updatedOn: '2024-02-27T14:37:51.432Z'
 ---

@@ -1,6 +1,5 @@
 ---
 title: Regions
-tag: reference
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
