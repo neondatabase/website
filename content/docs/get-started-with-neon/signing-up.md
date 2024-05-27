@@ -77,7 +77,7 @@ From the Neon Console, use the sidebar navigation to open the **SQL Editor** pag
 
 ![Neon SQL Editor](/docs/get-started-with-neon/sql_editor.png)
 
-The first time you open the SQL Editor for a new project, the editor includes placeholder SQL commands to create and populate a new sample table called `playing with neon`.
+The first time you open the SQL Editor for a new project, the editor includes placeholder SQL commands to create and populate a new sample table called `playing_with_neon`.
 
 For this tutorial, go ahead and create this sample database: click **Run**.
 
