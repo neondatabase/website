@@ -19,7 +19,7 @@ Right now Markdown files accept the following fields:
 
 1. `title` — title of the page (required)
 2. `subTitle` — subtitle of the page.
-3. `tag` — tag for the page. It can be one of the following: `new`, `beta`, `coming soon`, `deprecated`, or you can use your own tag.
+3. `tag` — tag for the page. It can be one of the following: `new`, `beta`, `coming soon`, `deprecated`, or you can use your own tag. Don't forget to add it to the `sidebar.yaml` file as well.
 4. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/docs/old-path/`
 5. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
 6. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
@@ -71,7 +71,7 @@ For example:
 
 ### How to add a new page
 
-In order to add a new page to the root level, add `slug` in the same level with `title`.
+In order to add a new page to the root level, add `slug` in the same level with `title`. You can add `tag` as well if your page is tagged.
 
 ```diff yaml
  - title: Root page 1
@@ -84,9 +84,11 @@ In order to add a new page to the root level, add `slug` in the same level with 
        slug: page-2
 + - title: Root page 1
 +   slug: root-page-1
++   tag: new
 +   items:
 +     - title: Page 1
 +       slug: page-1
++       tag: coming soon
 + - title: Root page 2
 +   slug: root-page-2
 +   items:
