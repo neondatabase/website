@@ -47,11 +47,14 @@ const CodeBlockWrapper = ({
   const code = extractTextFromNode(children);
 
   return (
-    <Tag className={clsx('code-block group relative', className)} {...otherProps}>
+    <Tag
+      className={clsx('code-block group relative flex [&_pre]:min-w-full', className)}
+      {...otherProps}
+    >
       {children}
       <button
         className={clsx(
-          'invisible absolute right-2 top-2 rounded p-1.5 text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-gray-new-10 dark:text-gray-8 lg:visible lg:opacity-100',
+          'invisible absolute right-5 top-2 rounded p-1.5 text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-gray-new-10 dark:text-gray-8 lg:visible lg:opacity-100',
           copyButtonClassName
         )}
         type="button"
