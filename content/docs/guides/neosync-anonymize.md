@@ -6,19 +6,19 @@ enableTableOfContents: true
 
 [Neosync](https://www.neosync.dev/) is an open-source synthetic data orchestration platform that can create anonymized data and sync it across all of your database environments for better security, privacy, and development.
 
-In this guide, we'll show you how to anonymize sensitive data in a Neon database for testing and rapid development using Neosync.
+In this guide, we'll show you how to anonymize sensitive data in a Neon database branch for testing and rapid development using Neosync.
 
 ## Prerequisites
 
 To complete the steps in this guide, you require the following:
 
 - A Neon account and project. If you do not have those, see [Sign up](/docs/get-started-with-neon/signing-up#step-1-sign-up).
-- A source database in Neon. This guide uses a source database named `neon-neosync`, which has a `users` table populated with 1000 rows of data. To set up this table, see [Generate synthetic data with Neosync](/docs/guides/neosync-generate).
+- A source database in Neon. This guide uses a source database named `neon-neosync` on your `main` branch, which has a `users` table populated with 1000 rows of data. To set up this table, see [Generate synthetic data with Neosync](/docs/guides/neosync-generate).
 - A [Neosync](https://www.neosync.dev/) account.
 
 ## Neon setup
 
-Anonymizing data requires source and destination databases. This section describes the source database that is used and how to set up a destination database in Neon where you will sync anonymized data using Neosync. Since Neon supports database branching, we'll create a branch for the destination database.
+Anonymizing data requires source and destination databases. This section describes the source database and how to set up a destination database branch in Neon where you will sync anonymized data using Neosync. A Neon branch is an isolated database environment that you can use for development and testing.
 
 ### The source database
 
@@ -38,7 +38,7 @@ If you do not have a source database and would like to create one with the same 
 
 ### Create a branch for the destination database
 
-To create a branch for the destination database in Neon, which we'll name `neosync-destination`, perform the following steps:
+To create a branch for the destination database, which we'll name `neosync-destination`, perform the following steps:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select your project.
@@ -48,12 +48,12 @@ To create a branch for the destination database in Neon, which we'll name `neosy
 1. Click **Create new branch**. A modal opens with the connection details for your new branch. Copy the connection string. You'll need it to set up Neosync.
 
 <Admonition type="info">
-At this point, you have a source database branch and a destination database branch. The destination database branch is an exact copy of the parent branch, which means that it has the same `users` database and data`. With Neosync, we'll truncate the sensitive data in the destination database and replace it with anonymized data. The data in your `main` branch is not affected.
+At this point, you have a source database branch and a destination database branch. The destination database branch is an exact copy of the parent branch. It has the exactly the same `users` database and data. With Neosync, we'll truncate the sensitive data on the destination database branch and replace it with anonymized data. The data in your `main` branch will not be affected.
 </Admonition>
 
 ## Neosync setup
 
-The Neosync setup involves setting up a connection to the destination database and creating a data synchronization job to create anonymized data in the destination database.
+The Neosync setup involves setting up a connection to the destination database and creating a data synchronization job to create anonymized data.
 
 ### Create a destination database connection
 
