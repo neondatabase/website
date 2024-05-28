@@ -72,6 +72,7 @@ const Footer = ({ isDocPage = false, theme = null }) => {
                         to={to}
                         theme={isDarkTheme ? 'gray-70' : 'gray-30'}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
+                        target={isExternalUrl ? '_blank' : null}
                       >
                         {icon && (
                           <span
