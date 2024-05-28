@@ -176,7 +176,7 @@ async function getPgVersion() {
 getPgVersion();
 ```
 
-## Community Resources
+## Community resources
 
 - [Serverless Node.js Tutorial – Neon Serverless Postgres, AWS Lambda, Next.js, Vercel](https://youtu.be/cxgAN7T3rq8)
 
