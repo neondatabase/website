@@ -49,7 +49,11 @@ SHOW max_connections;
 ```
 
 <Admonition type="note">
-Four connections are reserved for the Neon-managed Postgres `superuser` account. For example, for a 0.25 compute size, 4/112 connections are reserved, so you would only have 108 available connections.
+Four connections are reserved for the Neon-managed Postgres `superuser` account. For example, for a 0.25 compute size, 4/112 connections are reserved, so you would only have 108 available connections. If you are running queries from the Neon SQL Editor, that will also use a connection. To view the currently open connections, you can run the following query:
+
+```sql
+SELECT usename FROM pg_stat_activity WHERE datname = '<database_name>';
+```
 </Admonition>
 
 Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the [Neon Free Tier](/docs/introduction/plans#free-tier), support connection pooling.
@@ -59,7 +63,7 @@ Even with the largest compute size, the `max_connections` limit may not be suffi
 Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations, running many instances of an application, or applications with serverless functions. With regular Postgres, new connections are rejected when reaching the `max_connections` limit. To overcome this limitation, Neon supports connection pooling using [PgBouncer](https://www.pgbouncer.org/), which allows Neon to support up to 10,000 concurrent connections.
 
 <Admonition type="important">
-Connection pooling supports up to 10,000 concurrent connections when multiple Postgres users are connecting to multiple Postgres databases. For a single user connecting to a single database, the maximum number of concurrent connections is 64. This limit is controlled by the PgBouncer `default_pool_size` parameter, which defines the default number of server connections per user/database pair. See [Neon PgBouncer configuration settings](#neon-pgbouncer-configuration-settings). If your application connects to your database using a single Postgres role, expect to encounter this limit when exceeding the 64 concurrent connection limit.
+Connection pooling supports up to 10,000 concurrent connections when multiple Postgres users are connecting to multiple Postgres databases. For a single user connecting to a single database, the maximum number of concurrent connections is 64. This limit is controlled by the PgBouncer `default_pool_size` parameter, which defines the default number of server connections per user/database pair. See [Neon PgBouncer configuration settings](#neon-pgbouncer-configuration-settings). If your application connects to your database using a single Postgres role, expect to encounter this limit when exceeding the 64 concurrent connection limit. For information about creating additional Postgres roles, see [Manage roles](/docs/manage/roles#manage-roles-with-sql). Roles can created via the Neon Console, CLI, API, and SQL.
 </Admonition>
 
 PgBouncer is an open-source connection pooler for Postgres. When an application needs to connect to a database, PgBouncer provides a connection from the pool. Connections in the pool are routed to a smaller number of actual Postgres connections. When a connection is no longer required, it is returned to the pool and is available to be used again. Maintaining a pool of available connections improves performance by reducing the number of connections that need to be created and torn down to service incoming requests. Connection pooling also helps avoid rejected connections. When all connections in the pool are being used, PgBouncer queues a new request until a connection from the pool becomes available.
