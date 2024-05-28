@@ -18,7 +18,7 @@ const TopBar = ({ isThemeBlack }) => (
       'safe-paddings relative z-40 flex h-9 w-full items-center justify-center gap-x-2.5 overflow-hidden px-4 py-2.5 leading-none transition-colors duration-200 dark:bg-[#0B0C0F] dark:hover:bg-gray-new-8',
       isThemeBlack ? 'bg-[#0B0C0F] hover:bg-gray-new-8' : 'bg-[#F5FBFD] hover:bg-[#f1fcff]'
     )}
-    to="https://neon.tech/flow"
+    to="https://neon.tech/blog/how-to-create-previews-with-anonymized-production-like-data-in-seconds"
     onClick={() => {
       sendGtagEvent('click_announcement_banner');
     }}
@@ -70,8 +70,7 @@ const TopBar = ({ isThemeBlack }) => (
         isThemeBlack ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Ship faster with database branching workflows: Add prod-like data to your preview and local
-      dev environments.
+      Your previews will never be the same: Create database branches with anonymized PII in seconds.
     </span>
     <ChevronIcon
       className={clsx(
