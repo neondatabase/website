@@ -76,7 +76,7 @@ In Neosync, we'll configure a connection to your Neon database and create a job 
 
 ### Configure a connection to the Neon database
 
-1. Navigate to [Neosync](https://www.neosync.dev/) and login. Go to **Connections** > **New Connection** then click on **Postgres**.
+1. Navigate to [Neosync](https://www.neosync.dev/) and login. Go to **Connections** > **New Connection** then click on **Neon**.
 
 2. Enter a unique name for the connection in the **Connection Name** field. We'll give the connection the following name: `neon-neosync`
 
