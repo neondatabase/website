@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import logoBlack from 'images/logo-black.svg';
 import logoWhite from 'images/logo-white.svg';
 
-const Logo = ({ className = null, isThemeBlack, width, height, priority = undefined }) =>
-  isThemeBlack ? (
+const Logo = ({ className = null, isDarkTheme, width, height, priority = undefined }) =>
+  isDarkTheme ? (
     <Image
       className={clsx(className)}
       src={logoWhite}
@@ -41,7 +41,7 @@ const Logo = ({ className = null, isThemeBlack, width, height, priority = undefi
 
 Logo.propTypes = {
   className: PropTypes.string,
-  isThemeBlack: PropTypes.bool.isRequired,
+  isDarkTheme: PropTypes.bool.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   priority: PropTypes.bool,

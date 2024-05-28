@@ -9,23 +9,25 @@ import Topbar from 'components/shared/topbar';
 const Layout = ({
   className = null,
   headerClassName = null,
-  headerTheme = 'white',
-  footerTheme = 'white',
+  headerTheme = null,
+  footerTheme = null,
   withOverflowHidden = false,
   children,
   headerWithBorder = false,
   isHeaderSticky = false,
+  isHeaderStickyOverlay = false,
   isDocPage = false,
   isBlogPage = false,
 }) => (
   <>
-    <Topbar isThemeBlack={headerTheme === 'black-pure'} />
+    <Topbar isDarkTheme={headerTheme === 'dark'} />
     {/* 36px is the height of the topbar */}
     <div className="relative flex min-h-[calc(100vh-36px)] flex-col pt-safe">
       <Header
         className={headerClassName}
         theme={headerTheme}
         isSticky={isHeaderSticky}
+        isStickyOverlay={isHeaderStickyOverlay}
         isDocPage={isDocPage}
         isBlogPage={isBlogPage}
         withBorder={headerWithBorder}
@@ -44,11 +46,12 @@ const Layout = ({
 Layout.propTypes = {
   className: PropTypes.string,
   headerClassName: PropTypes.string,
-  headerTheme: PropTypes.oneOf(['white', 'black-pure']).isRequired,
-  footerTheme: PropTypes.oneOf(['white', 'black-pure']),
+  headerTheme: PropTypes.oneOf(['light', 'dark']),
+  footerTheme: PropTypes.oneOf(['light', 'dark']),
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
   isHeaderSticky: PropTypes.bool,
+  isHeaderStickyOverlay: PropTypes.bool,
   headerWithBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
   isBlogPage: PropTypes.bool,

@@ -68,8 +68,8 @@ const DynamicPage = async ({ params }) => {
 
   return (
     <Layout
-      headerTheme={templateName === 'Landing' ? 'black-pure' : 'white'}
-      footerTheme={templateName === 'Landing' ? 'black-pure' : ''}
+      headerTheme={templateName === 'Landing' ? 'dark' : 'light'}
+      footerTheme={templateName === 'Landing' ? 'dark' : 'light'}
     >
       {templateName === 'Landing' ? (
         contentWithLazyBlocks
