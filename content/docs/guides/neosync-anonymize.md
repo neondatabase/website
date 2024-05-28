@@ -10,7 +10,7 @@ In this guide, we'll show you how to anonymize sensitive data in a Neon database
 
 ## Prerequisites
 
-To complete the steps in the guide, you require the following:
+To complete the steps in this guide, you require the following:
 
 - A Neon account and project. If you do not have those, see [Sign up](/docs/get-started-with-neon/signing-up#step-1-sign-up).
 - A source database in Neon. This guide uses a source database named `neon-neosync`, which has a `users` table populated with 1000 rows of data. To set up this table, see [Generate synthetic data with Neosync](/docs/guides/neosync-generate).
@@ -18,7 +18,7 @@ To complete the steps in the guide, you require the following:
 
 ## Neon setup
 
-Anonymizing data requires source and destination databases. This section describes the source database that is used and how to set up a destination database in Neon where you will sync anonymized data using Neosync. 
+Anonymizing data requires source and destination databases. This section describes the source database that is used and how to set up a destination database in Neon where you will sync anonymized data using Neosync. Since Neon supports database branching, we'll create a branch for the destination database.
 
 ### The source database
 
@@ -36,58 +36,20 @@ CREATE TABLE public.users (
 
 If you do not have a source database and would like to create one with the same table and data, see [Generate synthetic data with Neosync](/docs/guides/neosync-generate).
 
-### Create the destination database
+### Create a branch for the destination database
 
-To create a destination database in Neon, which we'll name `neosync-destination`, perform the following steps:
+To create a branch for the destination database in Neon, which we'll name `neosync-destination`, perform the following steps:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select your project.
-1. Select **Databases** from the sidebar.
-1. Select the branch where you want to create the database.
-1. Click **New Database**.
-1. Enter a database name (`neosync-destination`), and select a Postgres role to be the database owner.
-    ![Create a database for neosync](/docs/guides/neosync_anon_create_db.png)
-1. Click **Create**.
+1. Select **Branches** from the sidebar.
+1. Click **New Branch**.
+1. Enter a name for the branch (`neosync-destination`), and select your `main` branch as the parent.
+1. Click **Create new branch**. A modal opens with the connection details for your new branch. Copy the connection string. You'll need it to set up Neosync.
 
-### Create the destination database schema
-
-Your destination database should have the same schema as the source database.
-
-1. In the Neon Console, select the **SQL Editor** from the sidebar.
-2. Select the correct branch and the `neosync-destination` database you just created.
-3. Run the following commands to create your schema:
-
-    ```sql
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
-    CREATE TABLE public.users (
-        id UUID PRIMARY KEY,
-        first_name VARCHAR(255) NOT NULL,
-        last_name VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL,
-        age INTEGER NOT NULL
-    );
-    ```
-
-    <Admonition type="note">
-    Installing the Postgres UUID extension to auto-generate UUIDs for the `id` column is optional. If you prefer, you can let Neonsync generate the UUIDs column values for you.
-    </Admonition>
-
-### Copy the connection string for your destination database
-
-Navigate to the **Dashboard** in Neon and copy the connection string for the destination database from the **Connection Details** widget. 
-
-<Admonition type="note">
-Make sure you select the destination database (`neosync-destination`) from the **Database** drop-down menu.
-</Admonition> 
-
-Your connection string should look something like this:
-
-```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neosync-destination?sslmode=require
-```
-
-You'll need the connection string to set up Neosync, which we'll do next.
+<Admonition type="info">
+At this point, you have a source database branch and a destination database branch. The destination database branch is an exact copy of the parent branch, which means that it has the same `users` database and data`. With Neosync, we'll truncate the sensitive data in the destination database and replace it with anonymized data. The data in your `main` branch is not affected.
+</Admonition>
 
 ## Neosync setup
 
@@ -95,11 +57,11 @@ The Neosync setup involves setting up a connection to the destination database a
 
 ### Create a destination database connection
 
-1. Navigate to [Neosync](https://www.neosync.dev/) and log in. Go to **Connections** > **New Connection** and click on **Postgres**.
+1. Navigate to [Neosync](https://www.neosync.dev/) and log in. Go to **Connections** > **New Connection** and click on **Neon**.
 
 2. Enter a unique name for the connection in the **Connection Name** field. We'll give the connection the same name as the database: `neosync-destination`
 
-3. Paste the Neon database connection string in the **Connection URL** field and click **Test Connection** to verify that the connection works.
+3. Paste the Neon database connection string foe the branch you created in the **Connection URL** field and click **Test Connection** to verify that the connection works.
 
     ![Test Neosync Neon destination database connection](/docs/guides/neosync_anon_test_connection.png)
 
@@ -120,7 +82,7 @@ To generate anonymized data, we need to create a **Job** in Neosync.
 3. Click **Next** to move to the **Connect** page. 
     - Select the source data set from the dropdown. In this example, the source data set is located in the `neon-neosync` database in Neon.
     - Select the destination database where the data should be synced. In this example, the destination is the `neosync-destination` database you configured previously.
-    - We'll also enable the **Truncate Before Insert** option to truncate the table before inserting data so that you get a fresh set of data each time the job runs.
+    - We'll also enable the **Truncate Before Insert** option to truncate the table before inserting data. This will replace the data copied when you created the destination branch in Neon, and it will refresh the data each time you run the job. 
 
     ![Define Neosync job connection](/docs/guides/neosync_anon_job_connect.png)
 
@@ -139,11 +101,11 @@ To generate anonymized data, we need to create a **Job** in Neosync.
     To learn more about Neosync's subset feature, see [Subsetting with referential integrity](https://www.neosync.dev/blog/subset-referential-integrity).
     </Admonition>
 
-    You can see that the job ran successfully, and in just a few seconds, it copied, anonymized, and moved data from your source database to your destination database in Neon.
+    You can see that the job ran successfully, and in just a few seconds, it copied, anonymized, and moved data from your source database to your destination branch in Neon.
 
     ![Neosync job status](/docs/guides/neosync_anon_job_status.png)
 
-8. You can verify that the anonymized data was generated in your destination database by navigating to the Neon Console, selecting **Tables** from the sidebar, and selecting the `neosync-destination` database. Your data should be visible in `public.users` table.
+8. You can verify that the anonymized data was generated in your destination branch by navigating to the Neon Console, selecting **Tables** from the sidebar, and selecting the `neosync-destination` branch. Your data should be visible in `public.users` table.
 
     ![Verify data in Neon](/docs/guides/neosync_verify_anon_data.png)
 
