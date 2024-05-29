@@ -69,7 +69,7 @@ Here's how you can set up `pgloader` for your database migration:
    ```plaintext
    load database
      from mysql://user:password@host/source_db?sslmode=require
-     into postgres://alex:endpoint=ep-cool-darkness-123456:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require;
+     into postgres://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require;
    ```
 
 ## Run the migration with pgloader
@@ -118,7 +118,7 @@ The following configuration file and Docker command were verified to work with D
 ```plaintext
 load database
   from mysql://user:password@host/source_db?sslmode=require
-  into postgresql://alex:endpoint=ep-cool-darkness-123456:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=allow;
+  into postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=allow;
 ``````
 
 Docker command:
