@@ -28,13 +28,13 @@ const getGithubStars = async () => {
 
 const Header = async ({
   className = null,
-  theme = 'black-pure',
+  theme = null,
   isSticky = false,
   isBlogPage = false,
   isDocPage = false,
   withBorder = false,
 }) => {
-  const isThemeBlack = theme === 'black-pure';
+  const isThemeBlack = theme === 'dark';
   const starsCount = await getGithubStars();
 
   return (
@@ -195,7 +195,7 @@ const Header = async ({
 
 Header.propTypes = {
   className: PropTypes.string,
-  theme: PropTypes.oneOf(['black-pure', 'white']).isRequired,
+  theme: PropTypes.oneOf(['light', 'dark']),
   isSticky: PropTypes.bool,
   isBlogPage: PropTypes.bool,
   isDocPage: PropTypes.bool,
