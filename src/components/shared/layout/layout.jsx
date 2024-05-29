@@ -26,6 +26,7 @@ const Layout = ({
       <Header
         className={headerClassName}
         theme={headerTheme}
+        isDarkTheme={headerTheme === 'dark'}
         isSticky={isHeaderSticky}
         isStickyOverlay={isHeaderStickyOverlay}
         isDocPage={isDocPage}
