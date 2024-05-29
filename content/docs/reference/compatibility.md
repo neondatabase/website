@@ -31,7 +31,11 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 
 ## Neon Postgres parameter settings
 
-The following table lists Neon Postgres parameter settings that are set explicitly. These values may differ from standard Postgres defaults. Some settings differ based on your Neon compute size, as noted.
+The following table lists Neon Postgres parameter settings that are set explicitly for your Neon Postgres instance. These values may differ from standard Postgres defaults, and some settings will differ based on your Neon compute size, as noted below. 
+
+<Admonition type="note">
+As a managed Postgres service, settings are not user-configurable, but if you are a paid plan user and require a different setting, please contact [Neon Support](/docs/introduction/support) to see if a different setting is possible.
+</Admonition> 
 
 | Parameter                          | Value    | Note                                                            |
 | ---------------------------------- | -------- | --------------------------------------------------------------- |
@@ -44,7 +48,7 @@ The following table lists Neon Postgres parameter settings that are set explicit
 | `log_connections`                  | on       |                                                                 |
 | `log_disconnections`               | on       |                                                                 |
 | `log_temp_files`                   | 1048576  |                                                                 |
-| `maintenance_work_mem`             | 65536    | The value differs by compute size. See [below].(#parameter-settings-that-differ-by-compute-size).                                                                 |
+| `maintenance_work_mem`             | 65536    | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).(#parameter-settings-that-differ-by-compute-size).                                                                 |
 | `max_connections`                  | 112      | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size). |
 | `max_parallel_workers`             | 8        |                                                                 |
 | `max_replication_flush_lag`        | 10240    |                                                                 |
@@ -52,7 +56,7 @@ The following table lists Neon Postgres parameter settings that are set explicit
 | `max_replication_write_lag`        | 500      |                                                                 |
 | `max_wal_senders`                  | 10       |                                                                 |
 | `max_wal_size`                     | 1024     |                                                                 |
-| `max_worker_processes`             | 26       | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                |
+| `max_worker_processes`             | 26       | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).(#parameter-settings-that-differ-by-compute-size).                                                                |
 | `password_encryption`              | scram-sha-256 |                                                           |
 | `restart_after_crash`              | off      |                                                                 |
 | `shared_buffers`                   | 128MB    | Neon extends cache memory to 80% of compute RAM with a [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache).|
