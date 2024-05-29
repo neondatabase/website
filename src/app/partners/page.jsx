@@ -58,7 +58,7 @@ const logos = [
 ];
 
 const PartnersPage = () => (
-  <Layout isHeaderSticky isHeaderStickyOverlay>
+  <Layout headerClassName="!absolute !bg-transparent">
     <Hero />
     <Logos logos={logos} withGreenFade />
     <SplitViewGrid

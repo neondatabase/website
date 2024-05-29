@@ -55,7 +55,7 @@ const logos = [
 ];
 
 const EnterprisePage = () => (
-  <Layout isHeaderSticky isHeaderStickyOverlay>
+  <Layout headerClassName="!absolute !bg-transparent">
     <Hero />
     <Logos logos={logos} withGreenFade />
     <Benefits />
