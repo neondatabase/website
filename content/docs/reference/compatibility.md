@@ -31,7 +31,7 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 
 ## Neon Postgres parameter settings
 
-The following table lists Neon Postgres parameter settings that are set explicitly in Neon. These values may differ from standard Postgres defaults, and some settings differ based on your Neon compute size.
+The following table lists Neon Postgres parameter settings that are set explicitly. These values may differ from standard Postgres defaults. Some settings differ based on your Neon compute size, as noted.
 
 | Parameter                          | Value    | Note                                                            |
 | ---------------------------------- | -------- | --------------------------------------------------------------- |
@@ -44,24 +44,39 @@ The following table lists Neon Postgres parameter settings that are set explicit
 | `log_connections`                  | on       |                                                                 |
 | `log_disconnections`               | on       |                                                                 |
 | `log_temp_files`                   | 1048576  |                                                                 |
-| `maintenance_work_mem`             | 65536    | The value differs by compute size.                                                                |
-| `max_connections`                  | 112      | The value differs by compute size. See [Connection limits](docs/connect/connection-pooling#default-connection-limits). |
+| `maintenance_work_mem`             | 65536    | The value differs by compute size. See [below].(#parameter-settings-that-differ-by-compute-size).                                                                 |
+| `max_connections`                  | 112      | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size). |
 | `max_parallel_workers`             | 8        |                                                                 |
 | `max_replication_flush_lag`        | 10240    |                                                                 |
 | `max_replication_slots`            | 10       |                                                                 |
 | `max_replication_write_lag`        | 500      |                                                                 |
 | `max_wal_senders`                  | 10       |                                                                 |
 | `max_wal_size`                     | 1024     |                                                                 |
-| `max_worker_processes`             | 26       |                                                                 |
+| `max_worker_processes`             | 26       | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                |
 | `password_encryption`              | scram-sha-256 |                                                           |
 | `restart_after_crash`              | off      |                                                                 |
 | `shared_buffers`                   | 128MB    | Neon extends cache memory to 80% of compute RAM with a [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache).|
 | `superuser_reserved_connections`   | 4        |                                                                 |
 | `synchronous_standby_names`        | 'walproposer' |                                                           |
-| `wal_level`                        | replica  | Support for `wal_level=logical` coming soon. See [logical replication](/docs/introduction/logical-replication).|
+| `wal_level`                        | replica  | Support for `wal_level=logical` is coming soon. See [logical replication](/docs/introduction/logical-replication).|
 | `wal_log_hints`                    | off      |                                                                 |
 | `wal_sender_timeout`               | 10000    |                                                                 |
 
+### Parameter settings that differ by compute size
+
+Of the parameter settings listed above, the `maintenance_work_mem`, `max_connections`, and `max_worker_processes` differ by compute size, which is deifined in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu):
+
+| Compute Size (CU) | `max_connections` | `maintenance_work_mem` | `max_worker_processes` |
+|:-------------|:----------------|:---------------------|:---------------------|
+| 0.25         | 112             | 64 MB                | 10                   |
+| 0.50         | 225             | 64 MB                | 11                   |
+| 1            | 450             | 67 MB                | 12                   |
+| 2            | 901             | 134 MB               | 14                   |
+| 3            | 1351            | 201 MB               | 16                   |
+| 4            | 1802            | 268 MB               | 18                   |
+| 5            | 2253            | 335 MB               | 20                   |
+| 6            | 2703            | 402 MB               | 22                   |
+| 7            | 3154            | 470 MB               | 24                   |
 
 <Admonition type="note">
 You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
