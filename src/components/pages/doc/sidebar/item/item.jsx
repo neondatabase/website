@@ -32,10 +32,6 @@ const Item = ({
   const hasActiveChild = isActiveItem(items, currentSlug);
   const [isOpen, setIsOpen] = useState(() => hasActiveChild);
 
-  if (!isOpen && isActiveItem(items, currentSlug)) {
-    setIsOpen(true);
-  }
-
   const handleClick = () => {
     if (closeMenu && slug) {
       closeMenu();

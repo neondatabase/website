@@ -90,11 +90,8 @@ Learn how to use Django with Neon Postgres with this blog post and the accompany
 <a href="https://github.com/evanshortiss/django-neon-quickstart" description="Django with Neon Postgres" icon="github">Django sample application</a>
 </DetailIconCards>
 
-## Video course: Micro eCommerce with Django and Neon
+## Community resources
 
-Watch Justin Mitchel's video course, _Micro eCommerce with Python, Django, Neon Serverless Postgres, Stripe, TailwindCSS and more_, to learn how to connect a Django application to Neon.
-
-<YoutubeIframe embedId="qx9nshX9CQQ?start=1569" />
-
+- [Django Project: Build a Micro eCommerce with Python, Django, Neon Postgres, Stripe, & TailwindCSS](https://youtu.be/qx9nshX9CQQ?start=1569)
 
 <NeedHelp/>

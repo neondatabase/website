@@ -8,7 +8,7 @@ updatedOn: '2024-02-08T15:20:54.279Z'
 Outerbase is an AI-powered interface for your database that allows you and your team to view, query,  visualize, and edit your data using the power of AI. Outserbase supports both SQL and natural language. To learn more, see [What is Outerbase?](https://docs.outerbase.com/introduction/what-is-outerbase)
 
 <Admonition type="comingSoon" title="Feature Coming Soon">
-The Outerbase integration is currently in **private preview**. To start using it, request access by contacting our [Customer Success](mailto:customer-success@neon.tech) team and asking to join the Outerbase private preview.
+This integration is currently available for **Early Access** users. To start using it right away, become an Early Access member [here](https://neon.tech/early-access-program). It will be released publicly soon.
 </Admonition>
 
 ## Prerequisites
