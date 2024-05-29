@@ -323,6 +323,7 @@ In Postgres, the `maintenance_work_mem` setting determines the maximum memory al
 | 5            | 5    | 20 GB |   335 MB                 |
 | 6            | 6    | 24 GB |   402 MB                 |
 | 7            | 7    | 28 GB |   470 MB                 |
+| 8            | 8    | 32 GB |   537 MB                 |
 
 To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:  
 
