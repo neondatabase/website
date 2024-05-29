@@ -34,7 +34,7 @@ const Header = async ({
   isDocPage = false,
   withBorder = false,
 }) => {
-  const isThemeBlack = theme === 'dark';
+  const isDarkTheme = theme === 'dark';
   const starsCount = await getGithubStars();
 
   return (
@@ -42,14 +42,14 @@ const Header = async ({
       <HeaderWrapper
         className={className}
         isSticky={isSticky}
-        isThemeBlack={isThemeBlack}
+        theme={theme}
         withBorder={withBorder}
       >
         <Container className="z-10 flex items-center justify-between md:!px-5" size="1344">
           <div className="flex items-center gap-x-[90px] xl:gap-x-16">
             <Link to="/">
               <span className="sr-only">Neon</span>
-              <Logo className="h-7" isThemeBlack={isThemeBlack} width={102} height={28} priority />
+              <Logo className="h-7" isDarkTheme={isDarkTheme} width={102} height={28} priority />
             </Link>
 
             <nav>
@@ -67,17 +67,17 @@ const Header = async ({
                       <Tag
                         className={clsx(
                           'flex items-center gap-x-1 whitespace-pre text-sm',
-                          isThemeBlack ? 'text-white' : 'text-black dark:text-white'
+                          isDarkTheme ? 'text-white' : 'text-black dark:text-white'
                         )}
                         to={to}
-                        theme={isThemeBlack && to ? 'white' : 'black'}
+                        theme={isDarkTheme && to ? 'white' : 'black'}
                       >
                         {text}
                         {items?.length > 0 && (
                           <ChevronIcon
                             className={clsx(
                               '-mb-px w-2.5 opacity-60 dark:text-white [&_path]:stroke-2',
-                              isThemeBlack ? 'text-white' : 'text-black-new'
+                              isDarkTheme ? 'text-white' : 'text-black-new'
                             )}
                           />
                         )}
@@ -94,7 +94,7 @@ const Header = async ({
                           <ul
                             className={clsx(
                               'relative flex min-w-[248px] flex-col gap-y-0.5 rounded-[14px] border p-2.5 dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]',
-                              isThemeBlack
+                              isDarkTheme
                                 ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
                                 : 'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]'
                             )}
@@ -105,7 +105,7 @@ const Header = async ({
                                   className={clsx(
                                     'group/link relative flex items-center overflow-hidden whitespace-nowrap rounded-[14px] p-2 dark:text-white',
                                     'before:absolute before:inset-0 before:z-10 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 dark:before:bg-[#16181D]',
-                                    isThemeBlack
+                                    isDarkTheme
                                       ? 'text-white before:bg-[#16181D]'
                                       : 'text-black-new before:bg-[#f5f5f5]'
                                   )}
@@ -114,7 +114,7 @@ const Header = async ({
                                   <div
                                     className={clsx(
                                       'relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border dark:border-[#2E3038] dark:bg-[#16181D]',
-                                      isThemeBlack
+                                      isDarkTheme
                                         ? 'border-[#2E3038] bg-[#16181D]'
                                         : 'border-gray-new-90 bg-[#F5F5F5]'
                                     )}
@@ -122,7 +122,7 @@ const Header = async ({
                                     <img
                                       className={clsx(
                                         'h-5 w-5 dark:opacity-100 dark:invert-0',
-                                        !isThemeBlack && 'opacity-90 invert'
+                                        !isDarkTheme && 'opacity-90 invert'
                                       )}
                                       src={icon}
                                       width={20}
@@ -139,7 +139,7 @@ const Header = async ({
                                     <span
                                       className={clsx(
                                         'mt-0.5 block text-[13px] font-light leading-dense tracking-[-0.02em]',
-                                        isThemeBlack
+                                        isDarkTheme
                                           ? 'text-gray-new-50'
                                           : 'text-gray-new-40 dark:text-gray-new-50'
                                       )}
@@ -150,7 +150,7 @@ const Header = async ({
                                   <ArrowIcon
                                     className={clsx(
                                       'relative z-10 ml-auto mr-1.5 h-2.5 w-1.5 -translate-x-1 opacity-0 transition-[opacity,transform] duration-300 group-hover/link:translate-x-0 group-hover/link:opacity-100 dark:text-gray-new-70',
-                                      isThemeBlack ? 'text-gray-new-70' : 'text-gray-new-40'
+                                      isDarkTheme ? 'text-gray-new-70' : 'text-gray-new-40'
                                     )}
                                   />
                                 </Link>
@@ -168,12 +168,12 @@ const Header = async ({
 
           <div className="flex items-center gap-x-6 lg:hidden lg:pr-12">
             <Suspense>
-              <GithubStarCounter isThemeBlack={isThemeBlack} starsCount={starsCount} />
+              <GithubStarCounter isDarkTheme={isDarkTheme} starsCount={starsCount} />
             </Suspense>
             <Link
               className="text-[13px] leading-none tracking-extra-tight lg:hidden"
               to={LINKS.login}
-              theme={isThemeBlack ? 'white' : 'black'}
+              theme={isDarkTheme ? 'white' : 'black'}
             >
               Log In
             </Link>
@@ -188,7 +188,7 @@ const Header = async ({
           </div>
         </Container>
       </HeaderWrapper>
-      <MobileMenu isThemeBlack={isThemeBlack} isBlogPage={isBlogPage} isDocPage={isDocPage} />
+      <MobileMenu isDarkTheme={isDarkTheme} isBlogPage={isBlogPage} isDocPage={isDocPage} />
     </>
   );
 };
