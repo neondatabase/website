@@ -23,7 +23,7 @@ After signing up, you'll start with a `main` branch and the empty database `neon
 
 ## Step 1 - Sign up
 
-<div style={{ display: 'flex', gap: '20px' }}>
+<div className="flex gap-5 sm:flex-col">
   <div style={{ flex: '0 0 60%' }}>
     If you haven't signed up yet, you can sign up for free here:
 
