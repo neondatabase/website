@@ -72,7 +72,7 @@ Neon uses `PgBouncer` in `transaction mode`. For limitations associated with `tr
 
 ## Neon PgBouncer configuration settings
 
-Neon's PgBouncer configuration is shown below. The settings are not user-configurable.
+Neon's PgBouncer configuration is shown below. The settings are not user-configurable, but if you are a paid plan user and require a different setting, please contact [Neon Support](/docs/introduction/support). 
 
 ```ini
 [pgbouncer]
