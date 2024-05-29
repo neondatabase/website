@@ -8,6 +8,12 @@ export const checkCookie = async (name) => {
   return Boolean(cookie);
 };
 
+export const getCookie = async (name) => {
+  const cookie = cookies().get(name);
+
+  return cookie ? cookie.value : '';
+};
+
 export const getReferer = async () => {
   const referer = headers().get('referer') || headers().get('referrer') || '';
 

@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import { checkCookie, getReferer } from 'app/actions';
+import { getCookie, getReferer } from 'app/actions';
 import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
 import GetStarted from 'components/pages/home/get-started';
@@ -18,8 +18,8 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.index);
 
 const HomePage = async () => {
-  const hasCookie = await checkCookie('ajs_user_id');
-  if (hasCookie) {
+  const is_logged_in = (await getCookie('neon_login_indicator')) === '1';
+  if (is_logged_in) {
     const referer = await getReferer();
     if (
       referer.includes(process.env.VERCEL_BRANCH_URL) ||
