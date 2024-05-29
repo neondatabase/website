@@ -14,6 +14,10 @@
     p:last-child {
       @apply mb-0;
     }
+
+    pre {
+      @apply overflow-x-auto;
+    }
   }
   .postgres-heading {
     > a {
