@@ -12,7 +12,7 @@ export const viewport = {
 };
 
 const PingThingPage = () => (
-  <Layout headerTheme="white">
+  <Layout>
     <div>Ping Thing</div>
   </Layout>
 );

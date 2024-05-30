@@ -9,8 +9,8 @@ import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus.js';
 
 // TODO: add responsive styles for black-pure theme, fix logo size
-const Footer = ({ isDocPage = false, theme = 'white' }) => {
-  const isDarkTheme = theme === 'black-pure';
+const Footer = ({ isDocPage = false, theme = null }) => {
+  const isDarkTheme = theme === 'dark';
 
   return (
     <footer
@@ -35,7 +35,7 @@ const Footer = ({ isDocPage = false, theme = 'white' }) => {
                 <span className="sr-only">Neon</span>
                 <Logo
                   className="h-8 w-[116px] lg:h-7 lg:w-auto sm:h-[26px]"
-                  isThemeBlack={isDarkTheme}
+                  isDarkTheme={isDarkTheme}
                   width={116}
                   height={32}
                 />
@@ -99,7 +99,7 @@ const Footer = ({ isDocPage = false, theme = 'white' }) => {
 
 Footer.propTypes = {
   isDocPage: PropTypes.bool,
-  theme: PropTypes.oneOf(['white', 'black-pure']),
+  theme: PropTypes.oneOf(['light', 'dark']),
 };
 
 export default Footer;

@@ -10,7 +10,7 @@ export const viewport = {
 };
 
 const ThankYouPage = () => (
-  <Layout headerTheme="white">
+  <Layout>
     <Hero />
   </Layout>
 );

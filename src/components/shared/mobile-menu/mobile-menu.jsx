@@ -37,14 +37,14 @@ const variants = {
   },
 };
 
-const getItemTitleStyles = (isThemeBlack, isMenuItemOpen) => {
-  if (isMenuItemOpen && isThemeBlack) return 'text-white';
-  if (!isMenuItemOpen && isThemeBlack) return 'text-gray-new-80';
-  if (isMenuItemOpen && !isThemeBlack) return 'text-black-new dark:text-white';
-  if (!isMenuItemOpen && !isThemeBlack) return 'text-gray-new-20 dark:text-gray-new-80';
+const getItemTitleStyles = (isDarkTheme, isMenuItemOpen) => {
+  if (isMenuItemOpen && isDarkTheme) return 'text-white';
+  if (!isMenuItemOpen && isDarkTheme) return 'text-gray-new-80';
+  if (isMenuItemOpen && !isDarkTheme) return 'text-black-new dark:text-white';
+  if (!isMenuItemOpen && !isDarkTheme) return 'text-gray-new-20 dark:text-gray-new-80';
 };
 
-const MobileMenuItem = ({ text, to, items, isThemeBlack }) => {
+const MobileMenuItem = ({ text, to, items, isDarkTheme }) => {
   const [isMenuItemOpen, setIsMenuItemOpen] = useState();
   const Tag = items ? 'button' : Link;
 
@@ -58,13 +58,13 @@ const MobileMenuItem = ({ text, to, items, isThemeBlack }) => {
     <li
       className={clsx(
         'block shrink-0 overflow-hidden border-b leading-none dark:border-gray-new-10',
-        isThemeBlack ? 'border-gray-new-10' : 'border-gray-new-94'
+        isDarkTheme ? 'border-gray-new-10' : 'border-gray-new-94'
       )}
     >
       <Tag
         className={clsx(
           isMenuItemOpen && 'font-medium',
-          getItemTitleStyles(isThemeBlack, isMenuItemOpen),
+          getItemTitleStyles(isDarkTheme, isMenuItemOpen),
           'relative flex w-full items-center py-4 leading-none tracking-[-0.01em] transition-colors duration-200'
         )}
         to={to}
@@ -75,7 +75,7 @@ const MobileMenuItem = ({ text, to, items, isThemeBlack }) => {
           <ChevronIcon
             className={clsx(
               'ml-auto inline-block h-2.5 w-2.5 transition-transform duration-200 dark:text-white [&_path]:stroke-2',
-              isThemeBlack ? 'text-white' : 'text-grayn-new-40',
+              isDarkTheme ? 'text-white' : 'text-grayn-new-40',
               isMenuItemOpen && 'rotate-180'
             )}
           />
@@ -91,7 +91,7 @@ const MobileMenuItem = ({ text, to, items, isThemeBlack }) => {
               transition={{ duration: ANIMATION_DURATION }}
               className={clsx(
                 'flex flex-col gap-y-0.5 border-t py-2 dark:border-gray-new-10',
-                isThemeBlack ? 'border-gray-new-10' : 'border-gray-new-94'
+                isDarkTheme ? 'border-gray-new-10' : 'border-gray-new-94'
               )}
             >
               {items.map(({ icon, text, description, to }, index) => (
@@ -100,7 +100,7 @@ const MobileMenuItem = ({ text, to, items, isThemeBlack }) => {
                     <img
                       className={clsx(
                         'h-[17px] w-[17px] shrink dark:opacity-100 dark:invert-0',
-                        !isThemeBlack && 'opacity-90 invert'
+                        !isDarkTheme && 'opacity-90 invert'
                       )}
                       src={icon}
                       width={17}
@@ -112,7 +112,7 @@ const MobileMenuItem = ({ text, to, items, isThemeBlack }) => {
                       <span
                         className={clsx(
                           'text-[15px] leading-dense tracking-[-0.01em] dark:text-white',
-                          isThemeBlack ? 'text-white' : 'text-black-new'
+                          isDarkTheme ? 'text-white' : 'text-black-new'
                         )}
                       >
                         {text}
@@ -120,7 +120,7 @@ const MobileMenuItem = ({ text, to, items, isThemeBlack }) => {
                       <span
                         className={clsx(
                           'text-[13px] font-light leading-dense tracking-extra-tight dark:text-gray-new-50',
-                          isThemeBlack ? 'text-gray-new-50' : 'text-gray-new-40'
+                          isDarkTheme ? 'text-gray-new-50' : 'text-gray-new-40'
                         )}
                       >
                         {description}
@@ -140,7 +140,7 @@ const MobileMenuItem = ({ text, to, items, isThemeBlack }) => {
 MobileMenuItem.propTypes = {
   text: PropTypes.string.isRequired,
   to: PropTypes.string,
-  isThemeBlack: PropTypes.bool,
+  isDarkTheme: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string,
@@ -159,7 +159,7 @@ const mobileMenuItems = [
 ];
 
 // TODO: need to refactor this component
-const MobileMenu = ({ isThemeBlack, isBlogPage = false, isDocPage = false }) => {
+const MobileMenu = ({ isDarkTheme, isBlogPage = false, isDocPage = false }) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
   let searchIndexName = null;
   if (isBlogPage) {
@@ -178,7 +178,7 @@ const MobileMenu = ({ isThemeBlack, isBlogPage = false, isDocPage = false }) => 
         <Burger
           className={clsx(
             'relative flex',
-            isThemeBlack ? 'text-white' : 'text-black dark:text-white'
+            isDarkTheme ? 'text-white' : 'text-black dark:text-white'
           )}
           isToggled={isMobileMenuOpen}
           isNewDesign
@@ -191,7 +191,7 @@ const MobileMenu = ({ isThemeBlack, isBlogPage = false, isDocPage = false }) => 
             <m.nav
               className={clsx(
                 'safe-paddings fixed inset-0 z-[-1] hidden flex-col justify-between dark:bg-black-pure lg:flex',
-                isThemeBlack ? 'bg-black-pure' : 'bg-white'
+                isDarkTheme ? 'bg-black-pure' : 'bg-white'
               )}
               initial="from"
               animate="to"
@@ -201,19 +201,19 @@ const MobileMenu = ({ isThemeBlack, isBlogPage = false, isDocPage = false }) => 
               <div className="relative h-full pb-[108px] pt-[97px] sm:pb-[158px]">
                 <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 md:px-5">
                   {mobileMenuItems.map((item, index) => (
-                    <MobileMenuItem key={index} {...item} isThemeBlack={isThemeBlack} />
+                    <MobileMenuItem key={index} {...item} isDarkTheme={isDarkTheme} />
                   ))}
                 </ul>
                 <div
                   className={clsx(
                     'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-5 gap-y-3.5 p-8 dark:bg-black-pure md:px-5 sm:grid-cols-1 sm:py-7',
-                    isThemeBlack ? 'bg-black-pure' : 'bg-white'
+                    isDarkTheme ? 'bg-black-pure' : 'bg-white'
                   )}
                 >
                   <Button
                     className={clsx(
                       'h-11 items-center justify-center text-[15px] !font-semibold tracking-tight dark:!border-gray-new-15 dark:!text-white',
-                      !isThemeBlack && '!border-gray-new-90 !text-black-new'
+                      !isDarkTheme && '!border-gray-new-90 !text-black-new'
                     )}
                     to={LINKS.login}
                     theme="gray-15-outline"
@@ -238,7 +238,7 @@ const MobileMenu = ({ isThemeBlack, isBlogPage = false, isDocPage = false }) => 
 };
 
 MobileMenu.propTypes = {
-  isThemeBlack: PropTypes.bool,
+  isDarkTheme: PropTypes.bool,
   isBlogPage: PropTypes.bool,
   isDocPage: PropTypes.bool,
 };
