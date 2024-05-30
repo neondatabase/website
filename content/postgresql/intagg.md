@@ -2,10 +2,8 @@
 
 ## F.19. intagg — integer aggregator and enumerator [#](#INTAGG)
 
-  * [F.19.1. Functions](intagg#INTAGG-FUNCTIONS)
-  * [F.19.2. Sample Uses](intagg#INTAGG-SAMPLES)
-
-
+- [F.19.1. Functions](intagg#INTAGG-FUNCTIONS)
+- [F.19.2. Sample Uses](intagg#INTAGG-SAMPLES)
 
 The `intagg` module provides an integer aggregator and an enumerator. `intagg` is now obsolete, because there are built-in functions that provide a superset of its capabilities. However, the module is still provided as a compatibility wrapper around the built-in functions.
 
@@ -13,11 +11,7 @@ The `intagg` module provides an integer aggregator and an enumerator. `intagg` i
 
 ### F.19.1. Functions [#](#INTAGG-FUNCTIONS)
 
-
-
 The aggregator is an aggregate function `int_array_aggregate(integer)` that produces an integer array containing exactly the integers it is fed. This is a wrapper around `array_agg`, which does the same thing for any array type.
-
-
 
 The enumerator is a function `int_array_enum(integer[])` that returns `setof integer`. It is essentially the reverse operation of the aggregator: given an array of integers, expand it into a set of rows. This is a wrapper around `unnest`, which does the same thing for any array type.
 

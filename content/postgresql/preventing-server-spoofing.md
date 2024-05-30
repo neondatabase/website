@@ -2,11 +2,9 @@
 
 ## 19.7. Preventing Server Spoofing [#](#PREVENTING-SERVER-SPOOFING)
 
-
-
 While the server is running, it is not possible for a malicious user to take the place of the normal database server. However, when the server is down, it is possible for a local user to spoof the normal server by starting their own server. The spoof server could read passwords and queries sent by clients, but could not return any data because the `PGDATA` directory would still be secure because of directory permissions. Spoofing is possible because any user can start a database server; a client cannot identify an invalid server unless it is specially configured.
 
-One way to prevent spoofing of `local` connections is to use a Unix domain socket directory ([unix\_socket\_directories](runtime-config-connection#GUC-UNIX-SOCKET-DIRECTORIES)) that has write permission only for a trusted local user. This prevents a malicious user from creating their own socket file in that directory. If you are concerned that some applications might still reference `/tmp` for the socket file and hence be vulnerable to spoofing, during operating system startup create a symbolic link `/tmp/.s.PGSQL.5432` that points to the relocated socket file. You also might need to modify your `/tmp` cleanup script to prevent removal of the symbolic link.
+One way to prevent spoofing of `local` connections is to use a Unix domain socket directory ([unix_socket_directories](runtime-config-connection#GUC-UNIX-SOCKET-DIRECTORIES)) that has write permission only for a trusted local user. This prevents a malicious user from creating their own socket file in that directory. If you are concerned that some applications might still reference `/tmp` for the socket file and hence be vulnerable to spoofing, during operating system startup create a symbolic link `/tmp/.s.PGSQL.5432` that points to the relocated socket file. You also might need to modify your `/tmp` cleanup script to prevent removal of the symbolic link.
 
 Another option for `local` connections is for clients to use [`requirepeer`](libpq-connect#LIBPQ-CONNECT-REQUIREPEER) to specify the required owner of the server process connected to the socket.
 

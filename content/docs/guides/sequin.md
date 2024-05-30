@@ -30,26 +30,26 @@ As a first step, create a table in your Neon database for Sequin to sync API dat
 2. Navigate to the SQL Editor in the sidebar.
 3. Create a `sequin` schema by running the following statement:
 
-    ```sql
-    create schema sequin;
-    ```
+   ```sql
+   create schema sequin;
+   ```
 
 4. Run the following command to create a table for Sequin to sync API data to:
 
-    ```sql
-    create table sequin.records (
-    sequin_id uuid not null,
-    sync_id uuid not null,
-    collection_id text not null,
-    upstream_id text not null,
-    payload jsonb not null,
-    upstream_updated_at timestamp with time zone not null,
-    upstream_created_at timestamp with time zone,
-    inserted_at timestamp with time zone not null,
-    updated_at timestamp with time zone not null,
-    primary key (sequin_id)
-    );
-    ```
+   ```sql
+   create table sequin.records (
+   sequin_id uuid not null,
+   sync_id uuid not null,
+   collection_id text not null,
+   upstream_id text not null,
+   payload jsonb not null,
+   upstream_updated_at timestamp with time zone not null,
+   upstream_created_at timestamp with time zone,
+   inserted_at timestamp with time zone not null,
+   updated_at timestamp with time zone not null,
+   primary key (sequin_id)
+   );
+   ```
 
 You can use this table to store data from any API. API data is stored denormalized in the `payload` column. Later, you'll see how to create views on top of this table.
 

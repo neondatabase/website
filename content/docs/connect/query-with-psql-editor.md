@@ -44,7 +44,7 @@ Neon uses the default Postgres port, `5432`. If you need to specify the port in 
 ```bash shouldWrap
 psql postgres://[user]:[password]@[neon_hostname][:port]/[dbname]
 ```
-  
+
 ## Running queries
 
 After establishing a connection, try running the following queries:

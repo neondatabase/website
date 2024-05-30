@@ -2,12 +2,10 @@
 
 ## 7.8. `WITH` Queries (Common Table Expressions) [#](#QUERIES-WITH)
 
-  * [7.8.1. `SELECT` in `WITH`](queries-with#QUERIES-WITH-SELECT)
-  * [7.8.2. Recursive Queries](queries-with#QUERIES-WITH-RECURSIVE)
-  * [7.8.3. Common Table Expression Materialization](queries-with#QUERIES-WITH-CTE-MATERIALIZATION)
-  * [7.8.4. Data-Modifying Statements in `WITH`](queries-with#QUERIES-WITH-MODIFYING)
-
-
+- [7.8.1. `SELECT` in `WITH`](queries-with#QUERIES-WITH-SELECT)
+- [7.8.2. Recursive Queries](queries-with#QUERIES-WITH-RECURSIVE)
+- [7.8.3. Common Table Expression Materialization](queries-with#QUERIES-WITH-CTE-MATERIALIZATION)
+- [7.8.4. Data-Modifying Statements in `WITH`](queries-with#QUERIES-WITH-MODIFYING)
 
 `WITH` provides a way to write auxiliary statements for use in a larger query. These statements, which are often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist just for one query. Each auxiliary statement in a `WITH` clause can be a `SELECT`, `INSERT`, `UPDATE`, or `DELETE`; and the `WITH` clause itself is attached to a primary statement that can be a `SELECT`, `INSERT`, `UPDATE`, `DELETE`, or `MERGE`.
 
@@ -53,17 +51,17 @@ WITH RECURSIVE t(n) AS (
 SELECT sum(n) FROM t;
 ```
 
-The general form of a recursive `WITH` query is always a *non-recursive term*, then `UNION` (or `UNION ALL`), then a *recursive term*, where only the recursive term can contain a reference to the query's own output. Such a query is executed as follows:
+The general form of a recursive `WITH` query is always a _non-recursive term_, then `UNION` (or `UNION ALL`), then a _recursive term_, where only the recursive term can contain a reference to the query's own output. Such a query is executed as follows:
 
 [#id](#id-1.5.6.12.6.3)
 
 **Recursive Query Evaluation**
 
-1. Evaluate the non-recursive term. For `UNION` (but not `UNION ALL`), discard duplicate rows. Include all remaining rows in the result of the recursive query, and also place them in a temporary *working table*.
+1. Evaluate the non-recursive term. For `UNION` (but not `UNION ALL`), discard duplicate rows. Include all remaining rows in the result of the recursive query, and also place them in a temporary _working table_.
 
 2. So long as the working table is not empty, repeat these steps:
 
-   1. Evaluate the recursive term, substituting the current contents of the working table for the recursive self-reference. For `UNION` (but not `UNION ALL`), discard duplicate rows and rows that duplicate any previous result row. Include all remaining rows in the result of the recursive query, and also place them in a temporary *intermediate table*.
+   1. Evaluate the recursive term, substituting the current contents of the working table for the recursive self-reference. For `UNION` (but not `UNION ALL`), discard duplicate rows and rows that duplicate any previous result row. Include all remaining rows in the result of the recursive query, and also place them in a temporary _intermediate table_.
 
    2. Replace the contents of the working table with the contents of the intermediate table, then empty the intermediate table.
 
@@ -359,7 +357,7 @@ This query effectively moves rows from `products` to `products_log`. The `DELETE
 
 A fine point of the above example is that the `WITH` clause is attached to the `INSERT`, not the sub-`SELECT` within the `INSERT`. This is necessary because data-modifying statements are only allowed in `WITH` clauses that are attached to the top-level statement. However, normal `WITH` visibility rules apply, so it is possible to refer to the `WITH` statement's output from the sub-`SELECT`.
 
-Data-modifying statements in `WITH` usually have `RETURNING` clauses (see [Section 6.4](dml-returning)), as shown in the example above. It is the output of the `RETURNING` clause, *not* the target table of the data-modifying statement, that forms the temporary table that can be referred to by the rest of the query. If a data-modifying statement in `WITH` lacks a `RETURNING` clause, then it forms no temporary table and cannot be referred to in the rest of the query. Such a statement will be executed nonetheless. A not-particularly-useful example is:
+Data-modifying statements in `WITH` usually have `RETURNING` clauses (see [Section 6.4](dml-returning)), as shown in the example above. It is the output of the `RETURNING` clause, _not_ the target table of the data-modifying statement, that forms the temporary table that can be referred to by the rest of the query. If a data-modifying statement in `WITH` lacks a `RETURNING` clause, then it forms no temporary table and cannot be referred to in the rest of the query. Such a statement will be executed nonetheless. A not-particularly-useful example is:
 
 ```
 WITH t AS (
@@ -388,7 +386,7 @@ This query would remove all direct and indirect subparts of a product.
 
 Data-modifying statements in `WITH` are executed exactly once, and always to completion, independently of whether the primary query reads all (or indeed any) of their output. Notice that this is different from the rule for `SELECT` in `WITH`: as stated in the previous section, execution of a `SELECT` is carried only as far as the primary query demands its output.
 
-The sub-statements in `WITH` are executed concurrently with each other and with the main query. Therefore, when using data-modifying statements in `WITH`, the order in which the specified updates actually happen is unpredictable. All the statements are executed with the same *snapshot* (see [Chapter 13](mvcc)), so they cannot “see” one another's effects on the target tables. This alleviates the effects of the unpredictability of the actual order of row updates, and means that `RETURNING` data is the only way to communicate changes between different `WITH` sub-statements and the main query. An example of this is that in
+The sub-statements in `WITH` are executed concurrently with each other and with the main query. Therefore, when using data-modifying statements in `WITH`, the order in which the specified updates actually happen is unpredictable. All the statements are executed with the same _snapshot_ (see [Chapter 13](mvcc)), so they cannot “see” one another's effects on the target tables. This alleviates the effects of the unpredictability of the actual order of row updates, and means that `RETURNING` data is the only way to communicate changes between different `WITH` sub-statements and the main query. An example of this is that in
 
 ```
 WITH t AS (

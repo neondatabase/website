@@ -44,9 +44,9 @@ To connect using Neon's `psql` passwordless auth feature:
     current_database
    ------------------
     neondb
-    ```
+   ```
 
-    Switching databases from the `psql` prompt (using `\c <database_name>`, for example) after you have authenticated restarts the passwordless auth authentication process to authenticate a connection to the new database.
+   Switching databases from the `psql` prompt (using `\c <database_name>`, for example) after you have authenticated restarts the passwordless auth authentication process to authenticate a connection to the new database.
 
 ## Running queries
 

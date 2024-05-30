@@ -54,24 +54,24 @@ The example application exposes a `/planets` endpoint that you can use to list p
 
 ```json
 [
-{
+  {
     "id": 1,
     "name": "Mercury"
-},
-{
+  },
+  {
     "id": 2,
     "name": "Venus"
-},
-{
+  },
+  {
     "id": 3,
     "name": "Mars"
-}
+  }
 ]
 ```
 
 ### From the Koyeb CLI
 
-You can also deploy your application using the Koyeb CLI. To install it, follow the instructions in the [Koyeb CLI documentation](https://www.koyeb.com/docs/quickstart/koyeb-cli). 
+You can also deploy your application using the Koyeb CLI. To install it, follow the instructions in the [Koyeb CLI documentation](https://www.koyeb.com/docs/quickstart/koyeb-cli).
 
 Using the CLI requires an API access token, which you can generate in the Koyeb [control panel](https://app.koyeb.com/), under **Organization Settings** > **API**. Once generated, run the command `koyeb login` and enter the token when prompted.
 
@@ -87,7 +87,7 @@ koyeb apps init express-neon \
 --routes /:8080 \
 --env PORT=8080 \
 --env DATABASE_URL="{}"
-``` 
+```
 
 #### Access Koyeb deployment logs
 
@@ -103,7 +103,7 @@ After the build and deployment have finished, you can retrieve the public domain
 
 ```bash
 $ koyeb app get express-neon
-ID          NAME         STATUS         DOMAINS                                CREATED AT          
+ID          NAME         STATUS         DOMAINS                                CREATED AT
 b8611a1d    express-neon HEALTHY        ["express-neon-myorg.koyeb.app"]       16 Feb 23 18:13 UTC
 ```
 
@@ -111,18 +111,18 @@ The example application exposes a `/planets` endpoint that you can use to list p
 
 ```json
 [
-{
+  {
     "id": 1,
     "name": "Mercury"
-},
-{
+  },
+  {
     "id": 2,
     "name": "Venus"
-},
-{
+  },
+  {
     "id": 3,
     "name": "Mars"
-}
+  }
 ]
 ```
 

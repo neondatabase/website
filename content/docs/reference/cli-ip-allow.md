@@ -22,12 +22,12 @@ The `ip-allow` command allows you to perform `list`, `add`, `remove`, and `reset
 neonctl ip-allow <subcommand> [options]
 ```
 
-| Subcommand  | Description      |
-|---------|------------------|
-| [list](#list)    | List the IP allowlist    |
-| [add](#add)  | Add IP addresses to the IP allowlist |
-| [remove](#remove)  | Remove IP addresses from the IP allowlist |
-| [reset](#reset)  | Reset the IP allowlist |
+| Subcommand        | Description                               |
+| ----------------- | ----------------------------------------- |
+| [list](#list)     | List the IP allowlist                     |
+| [add](#add)       | Add IP addresses to the IP allowlist      |
+| [remove](#remove) | Remove IP addresses from the IP allowlist |
+| [reset](#reset)   | Reset the IP allowlist                    |
 
 ### list
 
@@ -43,10 +43,10 @@ neonctl ip-allow list [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `list` subcommand supports these options:
 
-| Option        | Description | Type   | Required  |
-| ------------- | ----------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
+| Option           | Description                                                                                   | Type   |                      Required                       |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
+| `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 
 #### Examples
 
@@ -74,11 +74,11 @@ neonctl ip-allow add [ips ...] [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `add` subcommand supports these options:
 
-| Option        | Description | Type   | Required  |
-| ------------- | ----------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
-| `--primary-branch`  | If true, the list will be applied only to the primary branch. Use `--primary-branch false` to remove this setting. | string | |
+| Option             | Description                                                                                                        | Type   |                      Required                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------ | ------ | :-------------------------------------------------: |
+| `--context-file`   | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                      | string |                                                     |
+| `--project-id`     | Project ID                                                                                                         | string | Only if your Neon account has more than one project |
+| `--primary-branch` | If true, the list will be applied only to the primary branch. Use `--primary-branch false` to remove this setting. | string |                                                     |
 
 #### Example
 
@@ -100,10 +100,10 @@ neonctl ip-allow remove [ips ...] [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `remove` subcommand supports these options:
 
-| Option        | Description | Type   | Required  |
-| ------------- | ----------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
+| Option           | Description                                                                                   | Type   |                      Required                       |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
+| `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 
 #### Example
 
@@ -125,10 +125,10 @@ neonctl ip-allow reset [ips ...] [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `reset` subcommand supports these options:
 
-| Option        | Description | Type   | Required  |
-| ------------- | ----------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id`  | Project ID  | string | Only if your Neon account has more than one project |
+| Option           | Description                                                                                   | Type   |                      Required                       |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
+| `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 
 #### Example
 

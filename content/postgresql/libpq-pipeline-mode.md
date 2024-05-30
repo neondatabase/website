@@ -2,11 +2,9 @@
 
 ## 34.5. Pipeline Mode [#](#LIBPQ-PIPELINE-MODE)
 
-  * [34.5.1. Using Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-USING)
-  * [34.5.2. Functions Associated with Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-FUNCTIONS)
-  * [34.5.3. When to Use Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-TIPS)
-
-
+- [34.5.1. Using Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-USING)
+- [34.5.2. Functions Associated with Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-FUNCTIONS)
+- [34.5.3. When to Use Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-TIPS)
 
 libpq pipeline mode allows applications to send a query without having to read the result of the previously sent query. Taking advantage of the pipeline mode, a client will wait less for the server, since multiple queries/results can be sent/received in a single network transaction.
 
@@ -58,13 +56,13 @@ libpq does not provide any information to the application about the query curren
 
 From the client's perspective, after `PQresultStatus` returns `PGRES_FATAL_ERROR`, the pipeline is flagged as aborted. `PQresultStatus` will report a `PGRES_PIPELINE_ABORTED` result for each remaining queued operation in an aborted pipeline. The result for `PQpipelineSync` is reported as `PGRES_PIPELINE_SYNC` to signal the end of the aborted pipeline and resumption of normal result processing.
 
-The client *must* process results with `PQgetResult` during error recovery.
+The client _must_ process results with `PQgetResult` during error recovery.
 
-If the pipeline used an implicit transaction, then operations that have already executed are rolled back and operations that were queued to follow the failed operation are skipped entirely. The same behavior holds if the pipeline starts and commits a single explicit transaction (i.e. the first statement is `BEGIN` and the last is `COMMIT`) except that the session remains in an aborted transaction state at the end of the pipeline. If a pipeline contains *multiple explicit transactions*, all transactions that committed prior to the error remain committed, the currently in-progress transaction is aborted, and all subsequent operations are skipped completely, including subsequent transactions. If a pipeline synchronization point occurs with an explicit transaction block in aborted state, the next pipeline will become aborted immediately unless the next command puts the transaction in normal mode with `ROLLBACK`.
+If the pipeline used an implicit transaction, then operations that have already executed are rolled back and operations that were queued to follow the failed operation are skipped entirely. The same behavior holds if the pipeline starts and commits a single explicit transaction (i.e. the first statement is `BEGIN` and the last is `COMMIT`) except that the session remains in an aborted transaction state at the end of the pipeline. If a pipeline contains _multiple explicit transactions_, all transactions that committed prior to the error remain committed, the currently in-progress transaction is aborted, and all subsequent operations are skipped completely, including subsequent transactions. If a pipeline synchronization point occurs with an explicit transaction block in aborted state, the next pipeline will become aborted immediately unless the next command puts the transaction in normal mode with `ROLLBACK`.
 
 ### Note
 
-The client must not assume that work is committed when it *sends* a `COMMIT` — only when the corresponding result is received to confirm the commit is complete. Because errors arrive asynchronously, the application needs to be able to restart from the last *received* committed change and resend work done after that point if something goes wrong.
+The client must not assume that work is committed when it _sends_ a `COMMIT` — only when the corresponding result is received to confirm the commit is complete. Because errors arrive asynchronously, the application needs to be able to restart from the last _received_ committed change and resend work done after that point if something goes wrong.
 
 [#id](#LIBPQ-PIPELINE-INTERLEAVE)
 
@@ -80,7 +78,7 @@ An example using `select()` and a simple state machine to track sent and receive
 
 ### 34.5.2. Functions Associated with Pipeline Mode [#](#LIBPQ-PIPELINE-FUNCTIONS)
 
-* `PQpipelineStatus` [#](#LIBPQ-PQPIPELINESTATUS)
+- `PQpipelineStatus` [#](#LIBPQ-PQPIPELINESTATUS)
 
   Returns the current pipeline mode status of the libpq connection.
 
@@ -90,19 +88,19 @@ An example using `select()` and a simple state machine to track sent and receive
 
   `PQpipelineStatus` can return one of the following values:
 
-  * `PQ_PIPELINE_ON`
+  - `PQ_PIPELINE_ON`
 
     The libpq connection is in pipeline mode.
 
-  * `PQ_PIPELINE_OFF`
+  - `PQ_PIPELINE_OFF`
 
-    The libpq connection is *not* in pipeline mode.
+    The libpq connection is _not_ in pipeline mode.
 
-  * `PQ_PIPELINE_ABORTED`
+  - `PQ_PIPELINE_ABORTED`
 
     The libpq connection is in pipeline mode and an error occurred while processing the current pipeline. The aborted flag is cleared when `PQgetResult` returns a result of type `PGRES_PIPELINE_SYNC`.
 
-* `PQenterPipelineMode` [#](#LIBPQ-PQENTERPIPELINEMODE)
+- `PQenterPipelineMode` [#](#LIBPQ-PQENTERPIPELINEMODE)
 
   Causes a connection to enter pipeline mode if it is currently idle or already in pipeline mode.
 
@@ -112,7 +110,7 @@ An example using `select()` and a simple state machine to track sent and receive
 
   Returns 1 for success. Returns 0 and has no effect if the connection is not currently idle, i.e., it has a result ready, or it is waiting for more input from the server, etc. This function does not actually send anything to the server, it just changes the libpq connection state.
 
-* `PQexitPipelineMode` [#](#LIBPQ-PQEXITPIPELINEMODE)
+- `PQexitPipelineMode` [#](#LIBPQ-PQEXITPIPELINEMODE)
 
   Causes a connection to exit pipeline mode if it is currently in pipeline mode with an empty queue and no pending results.
 
@@ -122,7 +120,7 @@ An example using `select()` and a simple state machine to track sent and receive
 
   Returns 1 for success. Returns 1 and takes no action if not in pipeline mode. If the current statement isn't finished processing, or `PQgetResult` has not been called to collect results from all previously sent query, returns 0 (in which case, use [`PQerrorMessage`](libpq-status#LIBPQ-PQERRORMESSAGE) to get more information about the failure).
 
-* `PQpipelineSync` [#](#LIBPQ-PQPIPELINESYNC)
+- `PQpipelineSync` [#](#LIBPQ-PQPIPELINESYNC)
 
   Marks a synchronization point in a pipeline by sending a [sync message](protocol-flow#PROTOCOL-FLOW-EXT-QUERY) and flushing the send buffer. This serves as the delimiter of an implicit transaction and an error recovery point; see [Section 34.5.1.3](libpq-pipeline-mode#LIBPQ-PIPELINE-ERRORS).
 
@@ -132,7 +130,7 @@ An example using `select()` and a simple state machine to track sent and receive
 
   Returns 1 for success. Returns 0 if the connection is not in pipeline mode or sending a [sync message](protocol-flow#PROTOCOL-FLOW-EXT-QUERY) failed.
 
-* `PQsendFlushRequest` [#](#LIBPQ-PQSENDFLUSHREQUEST)
+- `PQsendFlushRequest` [#](#LIBPQ-PQSENDFLUSHREQUEST)
 
   Sends a request for the server to flush its output buffer.
 

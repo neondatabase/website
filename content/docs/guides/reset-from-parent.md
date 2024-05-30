@@ -8,9 +8,9 @@ Neon's **Reset from parent** feature lets you instantly reset all databases on a
 
 ## Example scenario
 
-When working with database branches, you might find yourself in a situation where you need to update your working branch to the latest data from your main branch. 
+When working with database branches, you might find yourself in a situation where you need to update your working branch to the latest data from your main branch.
 
-For example, let's say you have two child branches `staging` and `development` forked from your `main` branch. You have been working on the `development` branch and find it is now too far out of date with `main`. 
+For example, let's say you have two child branches `staging` and `development` forked from your `main` branch. You have been working on the `development` branch and find it is now too far out of date with `main`.
 
 You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the **Reset from parent** feature, you can perform a clean, instant reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
 
@@ -23,7 +23,6 @@ When you reset a branch to its parent, the data and schema is completely replace
 - You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Branch Restore](/docs/guides/branch-restore), a similar feature, with some differences: branch restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
 - This reset is a complete overwrite, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
 - Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
-
 
 ## How to Reset from parent
 
@@ -49,7 +48,7 @@ If this branch has children of its own, resetting is blocked. The resulting erro
 <TabItem>
 Using the CLI, you can reset a branch from parent using the following command:
 
-``` bash
+```bash
 neonctl branches reset <id|name> --parent
 ```
 
@@ -57,13 +56,13 @@ In the `id|name` field, specify the branch ID or name of the child branch whose 
 
 If you have multiple projects in your account, you'll also have to include the `project-id` in the command along with the branch.
 
-``` bash
+```bash
 neonctl branches reset <id|name> --parent --project-id <project id>
 ```
 
 Example:
 
-``` bash
+```bash
 neonctl branches reset development --parent --project-id noisy-pond-12345678
 ```
 

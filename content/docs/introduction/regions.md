@@ -18,7 +18,7 @@ Neon currently supports the following AWS regions:
 - US West (Oregon) &mdash; `aws-us-west-2`
 - Europe (Frankfurt) &mdash; `aws-eu-central-1`
 - Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
-- Asia Pacific (Sydney)	&mdash; `aws-ap-southeast-2`
+- Asia Pacific (Sydney) &mdash; `aws-ap-southeast-2`
 
 ## Select a region for your Neon project
 

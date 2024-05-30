@@ -323,7 +323,7 @@ You should receive the following output:
 
 You may run into space concerns as data accumulates in timescaledb hypertables. While Neon's Postgres service does not support compression, deleting old data is an option if you don't need to hold on to it for long periods of time.
 
-You can use the [`drop_chunks`](https://docs.timescale.com/api/latest/hypertable/drop_chunks/#:~:text=drop_chunks(),always%20before%20the%20end%20time.) function outlined above to easily delete outdated chunks from a hypertable. For example, to delete all chunks older than 3 months:
+You can use the [`drop_chunks`](<https://docs.timescale.com/api/latest/hypertable/drop_chunks/#:~:text=drop_chunks(),always%20before%20the%20end%20time.>) function outlined above to easily delete outdated chunks from a hypertable. For example, to delete all chunks older than 3 months:
 
 ```sql
 SELECT drop_chunks('temperature_data', INTERVAL '3 months');

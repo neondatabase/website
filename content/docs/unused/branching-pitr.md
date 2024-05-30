@@ -28,16 +28,16 @@ To create a point-in-time branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Click **New Branch** to open the branch creation dialog.
-![Create branch dialog](/docs/guides/create_data_recovery_branch.png)
+   ![Create branch dialog](/docs/guides/create_data_recovery_branch.png)
 4. Enter a name for the branch.
 5. Select a parent branch.
 6. Under **Include data up to**, select the **Specific date and time** option, which creates a branch with data up to the specified date and time. For example, if the data loss occurred on Nov 26, 2023 at 5:01pm, select Nov 11, 2023, at 5:00pm, just before the faulty query was run.
 
-    <Admonition type="note">
-    The **Specific date and time** option does not include data changes that occurred after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
-    </Admonition>
+<Admonition type="note">
+The **Specific date and time** option does not include data changes that occurred after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+</Admonition>
 
-8. Click **Create new branch** to create your branch.
+7. Click **Create new branch** to create your branch.
 
 You are directed to the **Branches** page where you are shown the details for your new branch.
 
@@ -64,7 +64,7 @@ To connect to your branch:
 
 1. In the Neon Console, select your project.
 2. On the project **Dashboard**, under **Connection Details**, select your `recovery_branch`, the database, and the role you want to connect with.
-![Connection details widget recovery branch](/docs/guides/data_recovery_connection_details.png)
+   ![Connection details widget recovery branch](/docs/guides/data_recovery_connection_details.png)
 3. Copy the connection string. A connection string includes your role name, password, compute endpoint hostname, and database name.
 4. Connect with `psql`.
 

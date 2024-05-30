@@ -29,21 +29,21 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+   <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-      ```shell
-      npm install pg
-      ```
+   ```shell
+   npm install pg
+   ```
 
-      ```shell
-      npm install postgres
-      ```
+   ```shell
+   npm install postgres
+   ```
 
-      ```shell
-      npm install @neondatabase/serverless
-      ```
+   ```shell
+   npm install @neondatabase/serverless
+   ```
 
-    </CodeTabs>
+   </CodeTabs>
 
 ## Store your Neon credentials
 
@@ -121,7 +121,7 @@ import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: import.meta.env.DATABASE_URL,
-  ssl: true
+  ssl: true,
 });
 
 export async function GET() {
@@ -134,7 +134,7 @@ export async function GET() {
   } finally {
     client.release();
   }
-  return new Response(JSON.stringiify(data), { headers : { "Content-Type": "application/json" } } );
+  return new Response(JSON.stringiify(data), { headers: { 'Content-Type': 'application/json' } });
 }
 ```
 
@@ -145,7 +145,9 @@ export async function GET() {
   const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
   const response = await sql`SELECT version()`;
   console.log(response);
-  return new Response(JSON.stringiify(response), { headers : { "Content-Type": "application/json" } } );
+  return new Response(JSON.stringiify(response), {
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
 ```
 
@@ -156,7 +158,9 @@ export async function GET() {
   const sql = neon(import.meta.env.DATABASE_URL);
   const response = await sql`SELECT version()`;
   console.log(response);
-  return new Response(JSON.stringiify(response), { headers : { "Content-Type": "application/json" } } );
+  return new Response(JSON.stringiify(response), {
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
 ```
 
@@ -167,7 +171,7 @@ export async function GET() {
 When you run `npm run dev` you can expect to see one of the following in your terminal output:
 
 ```shell shouldWrap
-# node-postgres & Neon serverless driver 
+# node-postgres & Neon serverless driver
 
 {
   version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
@@ -181,6 +185,5 @@ Result(1) [
   }
 ]
 ```
-
 
 <NeedHelp/>

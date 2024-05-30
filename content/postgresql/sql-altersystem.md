@@ -27,11 +27,11 @@ Only superusers and users granted `ALTER SYSTEM` privilege on a parameter can ch
 
 ## Parameters
 
-* *`configuration_parameter`*
+- _`configuration_parameter`_
 
   Name of a settable configuration parameter. Available parameters are documented in [Chapter 20](runtime-config).
 
-* *`value`*
+- _`value`_
 
   New value of the parameter. Values can be specified as string constants, identifiers, numbers, or comma-separated lists of these, as appropriate for the particular parameter. `DEFAULT` can be written to specify removing the parameter and its value from `postgresql.auto.conf`.
 
@@ -39,7 +39,7 @@ Only superusers and users granted `ALTER SYSTEM` privilege on a parameter can ch
 
 ## Notes
 
-This command can't be used to set [data\_directory](runtime-config-file-locations#GUC-DATA-DIRECTORY), nor parameters that are not allowed in `postgresql.conf` (e.g., [preset options](runtime-config-preset)).
+This command can't be used to set [data_directory](runtime-config-file-locations#GUC-DATA-DIRECTORY), nor parameters that are not allowed in `postgresql.conf` (e.g., [preset options](runtime-config-preset)).
 
 See [Section 20.1](config-setting) for other ways to set the parameters.
 

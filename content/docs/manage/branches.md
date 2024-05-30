@@ -29,7 +29,7 @@ Each Neon project has a primary branch. In the Neon Console, your primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
-- For Neon Free Tier users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier  _active hours_ limit of 20 hours per month.
+- For Neon Free Tier users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier _active hours_ limit of 20 hours per month.
 - For users on paid plans, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Protected branch
@@ -43,19 +43,20 @@ To create a branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Click **New Branch** to open the branch creation dialog.
-![Create branch dialog](/docs/manage/create_branch.png)
+   ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch.
 5. Select a parent branch. You can branch from your Neon project's [primary branch](#primary-branch) or a [non-primary branch](#non-primary-branch).
 6. Select an **Include data up to** option to specify the data to be included in your branch.
-    - **Current point in time**: Creates a branch with the latest available data from the parent (the default).
-    - **Specific date and time**: Creates a branch with data up to a specific date and time, allowing for point-in-time restore.
-    - **Specific Log Sequence Number**: Creates a branch with data up to a specific [Log Sequence Number (LSN)](/docs/reference/glossary#lsn) in the database log, allowing for precise point-in-time restore.
 
-    <Admonition type="note">
-    The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occured after the specified date and time or LSN, which means the branch contains data as it existed previously, allowing for point-in-time restore. You can only specify a date and time or LSN value that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
-    </Admonition>
+   - **Current point in time**: Creates a branch with the latest available data from the parent (the default).
+   - **Specific date and time**: Creates a branch with data up to a specific date and time, allowing for point-in-time restore.
+   - **Specific Log Sequence Number**: Creates a branch with data up to a specific [Log Sequence Number (LSN)](/docs/reference/glossary#lsn) in the database log, allowing for precise point-in-time restore.
 
-8. Click **Create new branch** to create your branch.
+   <Admonition type="note">
+   The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occured after the specified date and time or LSN, which means the branch contains data as it existed previously, allowing for point-in-time restore. You can only specify a date and time or LSN value that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+   </Admonition>
+
+7. Click **Create new branch** to create your branch.
 
 You are directed to the **Branches** page where you are shown the details for your new branch.
 
@@ -78,17 +79,17 @@ To view the branches in a Neon project:
 
 1. Select a branch from the table to view details about the branch.
 
-    ![View branch details](/docs/manage/branch_details.png)
+   ![View branch details](/docs/manage/branch_details.png)
 
-    Branch details shown on the branch page include:
+   Branch details shown on the branch page include:
 
-    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
-    - **Created**: The date and time the branch was created.
-    - **Active  Since**: The active hours used by the branch compute in the current billing period.
-    - **Compute Time**: The compute hours used by the branch in the current billing period.
-    - **Parent Branch**: The branch from which this branch was created (only applicable to child branches).
-    - **Branching Point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
-    - **Last Data Reset**: The last time the branch was reset from the parent branch (only applicable to child branches).
+   - **ID**: The branch ID. Branch IDs have a `br-` prefix.
+   - **Created**: The date and time the branch was created.
+   - **Active Since**: The active hours used by the branch compute in the current billing period.
+   - **Compute Time**: The compute hours used by the branch in the current billing period.
+   - **Parent Branch**: The branch from which this branch was created (only applicable to child branches).
+   - **Branching Point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
+   - **Last Data Reset**: The last time the branch was reset from the parent branch (only applicable to child branches).
 
 The branch details page also includes details about the compute endpoint associated with the branch. For more information, see [View a compute endpoint](/docs/manage/endpoints#view-a-compute-endpoint).
 
@@ -145,13 +146,13 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 
 1. In the Neon Console, select a project.
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
-![Connection details widget](/docs/connect/connection_details.png)
+   ![Connection details widget](/docs/connect/connection_details.png)
 3. Copy the connection string. A connection string includes your role name, the compute endpoint hostname, and database name.
 4. Connect with `psql` as shown below.
 
-  ```bash shouldWrap
-  psql postgres://[user]:[password]@[neon_hostname]/[dbname]
-  ```
+```bash shouldWrap
+psql postgres://[user]:[password]@[neon_hostname]/[dbname]
+```
 
 <Admonition type="tip">
 A compute endpoint hostname starts with an `ep-` prefix. You can also find a compute endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
@@ -185,7 +186,7 @@ To delete a branch:
 2. Select **Branches**.
 3. Select a branch from the table.
 4. On the branch page, click the **More** drop-down menu and select **Delete**.
-4. On the confirmation dialog, click **Delete**.
+5. On the confirmation dialog, click **Delete**.
 
 ## Check the data size
 
@@ -227,7 +228,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranch).
 
 ```http
-POST /projects/{project_id}/branches 
+POST /projects/{project_id}/branches
 ```
 
 The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without a compute endpoint. The `branch` attribute specifies the parent branch.
@@ -446,6 +447,5 @@ The response body shows information about the branch being deleted and the `susp
 </details>
 
 You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches-with-the-api). The deleted branch should no longer be listed.
-
 
 <NeedHelp/>

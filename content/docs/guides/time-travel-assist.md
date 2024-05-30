@@ -39,7 +39,7 @@ To change your retention period, see [Configure history retention](/docs/manage/
 
 Time Travel only allows non-destructive read-only queries. You cannot alter historical data in any way. If you try to run any query that could alter historical data, you will get an error message like the following:
 
-![time travel error message](/docs/guides/time_travel_error.png "no-border")
+![time travel error message](/docs/guides/time_travel_error.png 'no-border')
 
 ### Time Travel with the SQL editor
 
@@ -77,32 +77,32 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 1. In the Neon Console, open the **SQL Editor**.
 1. Use the **Time Travel** toggle to enable querying against an earlier point in time.
 
-    ![Time Travel toggle](/docs/guides/time_travel_toggle.png)
+   ![Time Travel toggle](/docs/guides/time_travel_toggle.png)
 
 1. Use the Date & Time selector to choose a point within your history retention window.
 1. Write your read-only query in the editor, then click **Run**. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
-</TabItem>
+   </TabItem>
 
 <TabItem>
 
 1. In the Neon Console, go to **Restore**.
 1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
 
-    ![time travel selection](/docs/guides/time_travel_restore_select.png "no-border")
+   ![time travel selection](/docs/guides/time_travel_restore_select.png 'no-border')
 
-    This makes the selection for Time Travel Assist. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
+   This makes the selection for Time Travel Assist. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
 
-    ![Time travel assist](/docs/guides/time_travel_show_selected.png)
+   ![Time travel assist](/docs/guides/time_travel_show_selected.png)
 
 1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
 
-    ![time travel select db](/docs/guides/time_travel_db_select.png)
+   ![time travel select db](/docs/guides/time_travel_db_select.png)
 
 1. Write your read-only query in the editor, then click **Query at timestamp** to run the query. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
 
-    If your query is successful, you will see a table of results under the editor.
+   If your query is successful, you will see a table of results under the editor.
 
-    ![time travel results](/docs/guides/time_travel_results.png)
+   ![time travel results](/docs/guides/time_travel_results.png)
 
 </TabItem>
 
@@ -119,7 +119,7 @@ In the `branch` field, specify the name of the branch you want to connect to. Om
 Example:
 
 ```bash
-neonctl connetion-string main@2024-04-21T00:00:00Z       
+neonctl connetion-string main@2024-04-21T00:00:00Z
 postgres://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
 ```
 
@@ -158,6 +158,7 @@ neonctl connection-string <branch>@<timestamp|LSN> --project-id <project id>
 ```
 
 Example:
+
 ```bash
 neon cs main@2024-01-01T00:00:00Z --project-id noisy-pond-12345678
 ```

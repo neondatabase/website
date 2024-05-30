@@ -27,19 +27,19 @@ You must own the table on which the trigger acts to be allowed to change its pro
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of an existing trigger to alter.
 
-* *`table_name`*
+- _`table_name`_
 
   The name of the table on which this trigger acts.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name for the trigger.
 
-* *`extension_name`*
+- _`extension_name`_
 
   The name of the extension that the trigger is to depend on (or no longer dependent on, if `NO` is specified). A trigger that's marked as dependent on an extension is automatically dropped when the extension is dropped.
 

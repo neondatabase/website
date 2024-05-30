@@ -31,21 +31,21 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+   <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-      ```shell
-      npm install pg
-      ```
+   ```shell
+   npm install pg
+   ```
 
-      ```shell
-      npm install postgres
-      ```
+   ```shell
+   npm install postgres
+   ```
 
-      ```shell
-      npm install @neondatabase/serverless
-      ```
+   ```shell
+   npm install @neondatabase/serverless
+   ```
 
-    </CodeTabs>
+   </CodeTabs>
 
 ## Store your Neon credentials
 
@@ -75,9 +75,9 @@ In your server components using the App Router, add the following code snippet t
 ```javascript
 import { Pool } from 'pg';
 
-const pool = new Pool({ 
+const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: true
+  ssl: true,
 });
 
 async function getData() {
@@ -219,7 +219,7 @@ import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: true
+  ssl: true,
 });
 
 export async function getServerSideProps() {
@@ -278,7 +278,7 @@ import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: true
+  ssl: true,
 });
 
 export async function getStaticProps() {
@@ -337,7 +337,7 @@ import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: true
+  ssl: true,
 });
 
 export default async function handler(req, res) {
@@ -348,9 +348,8 @@ export default async function handler(req, res) {
     console.log(response.rows[0]);
 
     res.status(200).json({
-      data: response.rows[0]
-    })
-
+      data: response.rows[0],
+    });
   } finally {
     client.release();
   }
@@ -367,8 +366,8 @@ export default async function handler(req, res) {
   console.log(response);
 
   res.status(200).json({
-    data: response
-  })
+    data: response,
+  });
 }
 ```
 
@@ -382,8 +381,8 @@ export default async function handler(req, res) {
   console.log(response);
 
   res.status(200).json({
-    data: response
-  })
+    data: response,
+  });
 }
 ```
 
@@ -400,7 +399,7 @@ const sql = neon(process.env.DATABASE_URL);
 
 export default async function handler(req, res) {
   const response = await sql`SELECT version()`;
-  console.log(response)
+  console.log(response);
 
   return Response.json({
     data: response,

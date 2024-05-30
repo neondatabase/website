@@ -24,11 +24,11 @@ However, it is not necessary to remove role memberships involving the role; `DRO
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the role does not exist. A notice is issued in this case.
 
-* *`name`*
+- _`name`_
 
   The name of the role to remove.
 

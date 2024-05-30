@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-GETVALUE)
 
-## SPI\_getvalue
+## SPI_getvalue
 
-SPI\_getvalue — return the string value of the specified column
+SPI_getvalue — return the string value of the specified column
 
 ## Synopsis
 
@@ -22,15 +22,15 @@ The result is returned in memory allocated using `palloc`. (You can use `pfree` 
 
 ## Arguments
 
-* `HeapTuple row`
+- `HeapTuple row`
 
   input row to be examined
 
-* `TupleDesc rowdesc`
+- `TupleDesc rowdesc`
 
   input row description
 
-* `int colnumber`
+- `int colnumber`
 
   column number (count starts at 1)
 
@@ -38,4 +38,4 @@ The result is returned in memory allocated using `palloc`. (You can use `pfree` 
 
 ## Return Value
 
-Column value, or `NULL` if the column is null, *`colnumber`* is out of range (`SPI_result` is set to `SPI_ERROR_NOATTRIBUTE`), or no output function is available (`SPI_result` is set to `SPI_ERROR_NOOUTFUNC`).
+Column value, or `NULL` if the column is null, _`colnumber`_ is out of range (`SPI_result` is set to `SPI_ERROR_NOATTRIBUTE`), or no output function is available (`SPI_result` is set to `SPI_ERROR_NOOUTFUNC`).

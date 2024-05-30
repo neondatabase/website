@@ -1,8 +1,8 @@
 [#id](#CONTRIB-DBLINK-GET-CONNECTIONS)
 
-## dblink\_get\_connections
+## dblink_get_connections
 
-dblink\_get\_connections — returns the names of all open named dblink connections
+dblink_get_connections — returns the names of all open named dblink connections
 
 ## Synopsis
 

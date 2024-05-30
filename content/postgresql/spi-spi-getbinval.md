@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-GETBINVAL)
 
-## SPI\_getbinval
+## SPI_getbinval
 
-SPI\_getbinval — return the binary value of the specified column
+SPI_getbinval — return the binary value of the specified column
 
 ## Synopsis
 
@@ -23,19 +23,19 @@ This function does not allocate new space for the datum. In the case of a pass-b
 
 ## Arguments
 
-* `HeapTuple row`
+- `HeapTuple row`
 
   input row to be examined
 
-* `TupleDesc rowdesc`
+- `TupleDesc rowdesc`
 
   input row description
 
-* `int colnumber`
+- `int colnumber`
 
   column number (count starts at 1)
 
-* `bool * isnull`
+- `bool * isnull`
 
   flag for a null value in the column
 
@@ -43,6 +43,6 @@ This function does not allocate new space for the datum. In the case of a pass-b
 
 ## Return Value
 
-The binary value of the column is returned. The variable pointed to by *`isnull`* is set to true if the column is null, else to false.
+The binary value of the column is returned. The variable pointed to by _`isnull`_ is set to true if the column is null, else to false.
 
 `SPI_result` is set to `SPI_ERROR_NOATTRIBUTE` on error.

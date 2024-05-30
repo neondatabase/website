@@ -24,19 +24,19 @@ The owner of a foreign server can create user mappings for that server for any u
 
 ## Parameters
 
-* `IF NOT EXISTS`
+- `IF NOT EXISTS`
 
   Do not throw an error if a mapping of the given user to the given foreign server already exists. A notice is issued in this case. Note that there is no guarantee that the existing user mapping is anything like the one that would have been created.
 
-* *`user_name`*
+- _`user_name`_
 
   The name of an existing user that is mapped to foreign server. `CURRENT_ROLE`, `CURRENT_USER`, and `USER` match the name of the current user. When `PUBLIC` is specified, a so-called public mapping is created that is used when no user-specific mapping is applicable.
 
-* *`server_name`*
+- _`server_name`_
 
   The name of an existing server for which the user mapping is to be created.
 
-* `OPTIONS ( option 'value' [, ... ] )`
+- `OPTIONS ( option 'value' [, ... ] )`
 
   This clause specifies the options of the user mapping. The options typically define the actual user name and password of the mapping. Option names must be unique. The allowed option names and values are specific to the server's foreign-data wrapper.
 

@@ -41,9 +41,9 @@ Creating a read replica involves adding a read-only compute endpoint to a branch
 3. Click **Add compute**.
 4. On the **Create Compute Endpoint** dialog, select **Read-only** as the **Compute type**.
 5. Specify the **Compute size** options. You can configure a fixed size compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your compute automatically suspends due to inactivity. The default setting is 5 minutes.
-    <Admonition type="note">
-    The compute size configuration determines the processing power of your database.
-    </Admonition>
+   <Admonition type="note">
+   The compute size configuration determines the processing power of your database.
+   </Admonition>
 6. When you finish making your selections, click **Create**.
 
 Your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page. This is your read replica. The following section describes how to connect to your read replica.
@@ -83,28 +83,28 @@ Connecting to a read replica is the same as connecting to any branch, except you
 1. Select a **Database** and the **Role** you want to connect with.
 1. Copy the connection string. This is the information you need to connect to the read replica from you client or application.
 
-    The connection string appears similar to the following:
+   The connection string appears similar to the following:
 
-    ```bash shouldWrap
-    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
-    ```
+   ```bash shouldWrap
+   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+   ```
 
-    If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string.
+   If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string.
 
-    The information in your connection string corresponds to the following connection details:
+   The information in your connection string corresponds to the following connection details:
 
-    - role: `alex`
-    - password:`AbC123dEf`
-    - hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
-    - database name: `dbname`. Your database name may differ.
+   - role: `alex`
+   - password:`AbC123dEf`
+   - hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
+   - database name: `dbname`. Your database name may differ.
 
-    When you connect to a read-only compute, no write operations are permitted on the connection.
+   When you connect to a read-only compute, no write operations are permitted on the connection.
 
 1. Connect to your application from a client such as `psql` or add the connection details to your application. For example, to connect using `psql`, issue the following command:
 
-    ```bash shouldWrap
-    psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
-    ```
+   ```bash shouldWrap
+   psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+   ```
 
 ## Run the analytics query on the read replica
 

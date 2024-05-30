@@ -2,8 +2,6 @@
 
 ## 7.7. `VALUES` Lists [#](#QUERIES-VALUES)
 
-
-
 `VALUES` provides a way to generate a “constant table” that can be used in a query without having to actually create and populate a table on-disk. The syntax is
 
 ```
@@ -46,6 +44,6 @@ Syntactically, `VALUES` followed by expression lists is treated as equivalent to
 SELECT select_list FROM table_expression
 ```
 
-and can appear anywhere a `SELECT` can. For example, you can use it as part of a `UNION`, or attach a *`sort_specification`* (`ORDER BY`, `LIMIT`, and/or `OFFSET`) to it. `VALUES` is most commonly used as the data source in an `INSERT` command, and next most commonly as a subquery.
+and can appear anywhere a `SELECT` can. For example, you can use it as part of a `UNION`, or attach a _`sort_specification`_ (`ORDER BY`, `LIMIT`, and/or `OFFSET`) to it. `VALUES` is most commonly used as the data source in an `INSERT` command, and next most commonly as a subquery.
 
 For more information see [VALUES](sql-values).

@@ -27,24 +27,24 @@ Log in to the Neon Console and navigate to the [Projects](https://console.neon.t
 
 2. From the Neon **Dashboard**, navigate to the **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
 
-    ```sql
-    CREATE TABLE books_to_read (
-        id SERIAL PRIMARY KEY,
-        title TEXT,
-        author TEXT
-    );
-    ```
+   ```sql
+   CREATE TABLE books_to_read (
+       id SERIAL PRIMARY KEY,
+       title TEXT,
+       author TEXT
+   );
+   ```
 
-    Next, insert some sample data into the `books_to_read` table so that you can query it later:
+   Next, insert some sample data into the `books_to_read` table so that you can query it later:
 
-    ```sql
-    INSERT INTO books_to_read (title, author)
-    VALUES
-        ('The Way of Kings', 'Brandon Sanderson'),
-        ('The Name of the Wind', 'Patrick Rothfuss'),
-        ('Coders at Work', 'Peter Seibel'),
-        ('1984', 'George Orwell');
-    ```
+   ```sql
+   INSERT INTO books_to_read (title, author)
+   VALUES
+       ('The Way of Kings', 'Brandon Sanderson'),
+       ('The Name of the Wind', 'Patrick Rothfuss'),
+       ('Coders at Work', 'Peter Seibel'),
+       ('1984', 'George Orwell');
+   ```
 
 ### Retrieve your Neon database connection string
 
@@ -69,6 +69,7 @@ npm create cloudflare@latest
 ```
 
 This initiates an interactive CLI prompt to generate a new project. To follow along with this guide, you can use the following settings:
+
 ```bash
 ├ In which directory do you want to create your application?
 │ dir ./my-neon-worker
@@ -103,8 +104,8 @@ export default {
     await client.connect();
     const { rows } = await client.query('SELECT * FROM books_to_read;');
     return new Response(JSON.stringify(rows));
-  }
-}
+  },
+};
 ```
 
 The `fetch` handler defined above gets called when the worker receives an HTTP request. It will query the Neon database to fetch the full list of books in our to-read list.

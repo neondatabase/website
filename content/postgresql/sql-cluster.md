@@ -20,13 +20,13 @@ where option can be one of:
 
 ## Description
 
-`CLUSTER` instructs PostgreSQL to cluster the table specified by *`table_name`* based on the index specified by *`index_name`*. The index must already have been defined on *`table_name`*.
+`CLUSTER` instructs PostgreSQL to cluster the table specified by _`table_name`_ based on the index specified by _`index_name`_. The index must already have been defined on _`table_name`_.
 
 When a table is clustered, it is physically reordered based on the index information. Clustering is a one-time operation: when the table is subsequently updated, the changes are not clustered. That is, no attempt is made to store new or updated rows according to their index order. (If one wishes, one can periodically recluster by issuing the command again. Also, setting the table's `fillfactor` storage parameter to less than 100% can aid in preserving cluster ordering during updates, since updated rows are kept on the same page if enough space is available there.)
 
 When a table is clustered, PostgreSQL remembers which index it was clustered by. The form `CLUSTER table_name` reclusters the table using the same index as before. You can also use the `CLUSTER` or `SET WITHOUT CLUSTER` forms of [`ALTER TABLE`](sql-altertable) to set the index to be used for future cluster operations, or to clear any previous setting.
 
-`CLUSTER` without a *`table_name`* reclusters all the previously-clustered tables in the current database that the calling user owns, or all such tables if called by a superuser. This form of `CLUSTER` cannot be executed inside a transaction block.
+`CLUSTER` without a _`table_name`_ reclusters all the previously-clustered tables in the current database that the calling user owns, or all such tables if called by a superuser. This form of `CLUSTER` cannot be executed inside a transaction block.
 
 When a table is being clustered, an `ACCESS EXCLUSIVE` lock is acquired on it. This prevents any other database operations (both reads and writes) from operating on the table until the `CLUSTER` is finished.
 
@@ -34,21 +34,21 @@ When a table is being clustered, an `ACCESS EXCLUSIVE` lock is acquired on it. T
 
 ## Parameters
 
-* *`table_name`*
+- _`table_name`_
 
   The name (possibly schema-qualified) of a table.
 
-* *`index_name`*
+- _`index_name`_
 
   The name of an index.
 
-* `VERBOSE`
+- `VERBOSE`
 
   Prints a progress report as each table is clustered.
 
-* *`boolean`*
+- _`boolean`_
 
-  Specifies whether the selected option should be turned on or off. You can write `TRUE`, `ON`, or `1` to enable the option, and `FALSE`, `OFF`, or `0` to disable it. The *`boolean`* value can also be omitted, in which case `TRUE` is assumed.
+  Specifies whether the selected option should be turned on or off. You can write `TRUE`, `ON`, or `1` to enable the option, and `FALSE`, `OFF`, or `0` to disable it. The _`boolean`_ value can also be omitted, in which case `TRUE` is assumed.
 
 [#id](#id-1.9.3.51.7)
 
@@ -60,9 +60,9 @@ In cases where you are accessing single rows randomly within a table, the actual
 
 When an index scan is used, a temporary copy of the table is created that contains the table data in the index order. Temporary copies of each index on the table are created as well. Therefore, you need free space on disk at least equal to the sum of the table size and the index sizes.
 
-When a sequential scan and sort is used, a temporary sort file is also created, so that the peak temporary space requirement is as much as double the table size, plus the index sizes. This method is often faster than the index scan method, but if the disk space requirement is intolerable, you can disable this choice by temporarily setting [enable\_sort](runtime-config-query#GUC-ENABLE-SORT) to `off`.
+When a sequential scan and sort is used, a temporary sort file is also created, so that the peak temporary space requirement is as much as double the table size, plus the index sizes. This method is often faster than the index scan method, but if the disk space requirement is intolerable, you can disable this choice by temporarily setting [enable_sort](runtime-config-query#GUC-ENABLE-SORT) to `off`.
 
-It is advisable to set [maintenance\_work\_mem](runtime-config-resource#GUC-MAINTENANCE-WORK-MEM) to a reasonably large value (but not more than the amount of RAM you can dedicate to the `CLUSTER` operation) before clustering.
+It is advisable to set [maintenance_work_mem](runtime-config-resource#GUC-MAINTENANCE-WORK-MEM) to a reasonably large value (but not more than the amount of RAM you can dedicate to the `CLUSTER` operation) before clustering.
 
 Because the planner records statistics about the ordering of tables, it is advisable to run [`ANALYZE`](sql-analyze) on the newly clustered table. Otherwise, the planner might make poor choices of query plans.
 

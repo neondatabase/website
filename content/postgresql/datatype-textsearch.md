@@ -2,20 +2,16 @@
 
 ## 8.11. Text Search Types [#](#DATATYPE-TEXTSEARCH)
 
-  * [8.11.1. `tsvector`](datatype-textsearch#DATATYPE-TSVECTOR)
-  * [8.11.2. `tsquery`](datatype-textsearch#DATATYPE-TSQUERY)
+- [8.11.1. `tsvector`](datatype-textsearch#DATATYPE-TSVECTOR)
+- [8.11.2. `tsquery`](datatype-textsearch#DATATYPE-TSQUERY)
 
-
-
-PostgreSQL provides two data types that are designed to support full text search, which is the activity of searching through a collection of natural-language *documents* to locate those that best match a *query*. The `tsvector` type represents a document in a form optimized for text search; the `tsquery` type similarly represents a text query. [Chapter 12](textsearch) provides a detailed explanation of this facility, and [Section 9.13](functions-textsearch) summarizes the related functions and operators.
+PostgreSQL provides two data types that are designed to support full text search, which is the activity of searching through a collection of natural-language _documents_ to locate those that best match a _query_. The `tsvector` type represents a document in a form optimized for text search; the `tsquery` type similarly represents a text query. [Chapter 12](textsearch) provides a detailed explanation of this facility, and [Section 9.13](functions-textsearch) summarizes the related functions and operators.
 
 [#id](#DATATYPE-TSVECTOR)
 
 ### 8.11.1. `tsvector` [#](#DATATYPE-TSVECTOR)
 
-
-
-A `tsvector` value is a sorted list of distinct *lexemes*, which are words that have been *normalized* to merge different variants of the same word (see [Chapter 12](textsearch) for details). Sorting and duplicate-elimination are done automatically during input, as shown in this example:
+A `tsvector` value is a sorted list of distinct _lexemes_, which are words that have been _normalized_ to merge different variants of the same word (see [Chapter 12](textsearch) for details). Sorting and duplicate-elimination are done automatically during input, as shown in this example:
 
 ```
 
@@ -45,7 +41,7 @@ SELECT $$the lexeme 'Joe''s' contains a quote$$::tsvector;
  'Joe''s' 'a' 'contains' 'lexeme' 'quote' 'the'
 ```
 
-Optionally, integer *positions* can be attached to lexemes:
+Optionally, integer _positions_ can be attached to lexemes:
 
 ```
 
@@ -55,9 +51,9 @@ SELECT 'a:1 fat:2 cat:3 sat:4 on:5 a:6 mat:7 and:8 ate:9 a:10 fat:11 rat:12'::ts
  'a':1,6,10 'and':8 'ate':9 'cat':3 'fat':2,11 'mat':7 'on':5 'rat':12 'sat':4
 ```
 
-A position normally indicates the source word's location in the document. Positional information can be used for *proximity ranking*. Position values can range from 1 to 16383; larger numbers are silently set to 16383. Duplicate positions for the same lexeme are discarded.
+A position normally indicates the source word's location in the document. Positional information can be used for _proximity ranking_. Position values can range from 1 to 16383; larger numbers are silently set to 16383. Duplicate positions for the same lexeme are discarded.
 
-Lexemes that have positions can further be labeled with a *weight*, which can be `A`, `B`, `C`, or `D`. `D` is the default and hence is not shown on output:
+Lexemes that have positions can further be labeled with a _weight_, which can be `A`, `B`, `C`, or `D`. `D` is the default and hence is not shown on output:
 
 ```
 
@@ -95,9 +91,7 @@ Again, see [Chapter 12](textsearch) for more detail.
 
 ### 8.11.2. `tsquery` [#](#DATATYPE-TSQUERY)
 
-
-
-A `tsquery` value stores lexemes that are to be searched for, and can combine them using the Boolean operators `&` (AND), `|` (OR), and `!` (NOT), as well as the phrase search operator `<->` (FOLLOWED BY). There is also a variant `<N>` of the FOLLOWED BY operator, where *`N`* is an integer constant that specifies the distance between the two lexemes being searched for. `<->` is equivalent to `<1>`.
+A `tsquery` value stores lexemes that are to be searched for, and can combine them using the Boolean operators `&` (AND), `|` (OR), and `!` (NOT), as well as the phrase search operator `<->` (FOLLOWED BY). There is also a variant `<N>` of the FOLLOWED BY operator, where _`N`_ is an integer constant that specifies the distance between the two lexemes being searched for. `<->` is equivalent to `<1>`.
 
 Parentheses can be used to enforce grouping of these operators. In the absence of parentheses, `!` (NOT) binds most tightly, `<->` (FOLLOWED BY) next most tightly, then `&` (AND), with `|` (OR) binding the least tightly.
 

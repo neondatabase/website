@@ -5,7 +5,6 @@ enableTableOfContents: true
 updatedOn: '2024-02-08T15:20:54.290Z'
 ---
 
-
 Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request.
 
 To create a Neon project and access it from a Remix application:
@@ -29,21 +28,21 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+   <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-      ```shell
-      npm install pg
-      ```
+   ```shell
+   npm install pg
+   ```
 
-      ```shell
-      npm install postgres
-      ```
+   ```shell
+   npm install postgres
+   ```
 
-      ```shell
-      npm install @neondatabase/serverless
-      ```
+   ```shell
+   npm install @neondatabase/serverless
+   ```
 
-    </CodeTabs>
+   </CodeTabs>
 
 ## Store your Neon credentials
 
@@ -94,7 +93,7 @@ export { sql };
 
 ### route
 
-Create a new route in your `app/routes` directory and import the `db.server` file.  
+Create a new route in your `app/routes` directory and import the `db.server` file.
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
@@ -159,7 +158,7 @@ export default function Page() {
 When you run `npm run dev` you can expect to see one of the following in your terminal output:
 
 ```shell shouldWrap
-# node-postgres & Neon serverless driver 
+# node-postgres & Neon serverless driver
 
 {
   version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'

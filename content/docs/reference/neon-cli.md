@@ -39,53 +39,53 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 
 - **macOS**
 
-    Download the macOS binary:
+  Download the macOS binary:
 
-    ```bash shouldWrap
-    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
-    ```
+  ```bash shouldWrap
+  curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
+  ```
 
-    No installation is required. Run the Neon CLI as follows:
+  No installation is required. Run the Neon CLI as follows:
 
-    ```bash
-    neonctl <command> [options]
-    ```
+  ```bash
+  neonctl <command> [options]
+  ```
 
 - **Linux**
 
-    Download the Linux x64 or ARM64 binary:
+  Download the Linux x64 or ARM64 binary:
 
-    x64:
+  x64:
 
-    ```bash shouldWrap
-    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
-    ```
+  ```bash shouldWrap
+  curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
+  ```
 
-    ARM64:
+  ARM64:
 
-    ```bash shouldWrap
-    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
-    ```
+  ```bash shouldWrap
+  curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
+  ```
 
-    No installation is required. Run the Neon CLI as follows:
+  No installation is required. Run the Neon CLI as follows:
 
-    ```bash
-    neonctl <command> [options]
-    ```
+  ```bash
+  neonctl <command> [options]
+  ```
 
 - **Windows**
 
-    Download the Windows binary:
+  Download the Windows binary:
 
-    ```bash shouldWrap
-    curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
-    ```
+  ```bash shouldWrap
+  curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
+  ```
 
-    No installation is required. Run the Neon CLI as follows:
+  No installation is required. Run the Neon CLI as follows:
 
-    ```bash
-    neonctl-win.exe <command> [options]
-    ```
+  ```bash
+  neonctl-win.exe <command> [options]
+  ```
 
 </TabItem>
 
@@ -128,32 +128,32 @@ Options:
 
 ## Commands
 
-| Command                                                 | Subcommands                            | Description               |
-|---------------------------------------------------------|----------------------------------------|---------------------------|
-| [auth](/docs/reference/cli-auth)                                     |                                        | Authenticate              |
-| [me](/docs/reference/cli-me)                                         |                                        | Show current user         |
-| [projects](/docs/reference/cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | Manage projects           |
-| [ip-allow](/docs/reference/cli-ip-allow)                             | `list`, `add`, `remove`, `reset`       | Manage IP Allow           |
-| [branches](/docs/reference/cli-branches)                             | `list`, `create`, `reset`, `restore`, `rename`, `add-compute`, `set-primary`, `delete`, `get` | Manage branches           |
-| [databases](/docs/reference/cli-databases)                           | `list`, `create`, `delete`             | Manage databases          |
-| [roles](/docs/reference/cli-roles)                                   | `list`, `create`,  `delete`            | Manage roles              |
-| [operations](/docs/reference/cli-operations)                         | `list`                                 | Manage operations         |
-| [connection-string](/docs/reference/cli-connection-string)           |                                        | Get connection string     |
-| [set-context](/docs/reference/cli-set-context)                       |                                        | Set context for session   |
-| [completion](/docs/reference/cli-completion)                         |                                        | Generate a completion script     |
+| Command                                                    | Subcommands                                                                                   | Description                  |
+| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ---------------------------- |
+| [auth](/docs/reference/cli-auth)                           |                                                                                               | Authenticate                 |
+| [me](/docs/reference/cli-me)                               |                                                                                               | Show current user            |
+| [projects](/docs/reference/cli-projects)                   | `list`, `create`, `update`, `delete`, `get`                                                   | Manage projects              |
+| [ip-allow](/docs/reference/cli-ip-allow)                   | `list`, `add`, `remove`, `reset`                                                              | Manage IP Allow              |
+| [branches](/docs/reference/cli-branches)                   | `list`, `create`, `reset`, `restore`, `rename`, `add-compute`, `set-primary`, `delete`, `get` | Manage branches              |
+| [databases](/docs/reference/cli-databases)                 | `list`, `create`, `delete`                                                                    | Manage databases             |
+| [roles](/docs/reference/cli-roles)                         | `list`, `create`, `delete`                                                                    | Manage roles                 |
+| [operations](/docs/reference/cli-operations)               | `list`                                                                                        | Manage operations            |
+| [connection-string](/docs/reference/cli-connection-string) |                                                                                               | Get connection string        |
+| [set-context](/docs/reference/cli-set-context)             |                                                                                               | Set context for session      |
+| [completion](/docs/reference/cli-completion)               |                                                                                               | Generate a completion script |
 
 ## Global options
 
 Global options are supported with any Neon CLI command.
 
-| Option      | Description                         | Type   | Default                           |
-| :---------  | :---------------------------------- | :----- | :-------------------------------- |
-| [-o, --output](#output)| Set the Neon CLI output format (`json`, `yaml`, or `table`)                 | string | table                           |
-| [--config-dir](#config-dir)| Path to the Neon CLI configuration directory            | string | `/home/<user>/.config/neonctl`   |
-| [--api-key](#api-key)   | Neon API key                             | string | `NEON_API_KEY` environment variable                                |
-| [--analytics](#analytics) | Manage analytics                    | boolean| true                              |
-| [-v, --version](#version)   | Show the Neon CLI version number                 | boolean| -                                 |
-| [-h, --help](#help)      | Show the Neon CLI help                           | boolean| -                                 |
+| Option                      | Description                                                 | Type    | Default                             |
+| :-------------------------- | :---------------------------------------------------------- | :------ | :---------------------------------- |
+| [-o, --output](#output)     | Set the Neon CLI output format (`json`, `yaml`, or `table`) | string  | table                               |
+| [--config-dir](#config-dir) | Path to the Neon CLI configuration directory                | string  | `/home/<user>/.config/neonctl`      |
+| [--api-key](#api-key)       | Neon API key                                                | string  | `NEON_API_KEY` environment variable |
+| [--analytics](#analytics)   | Manage analytics                                            | boolean | true                                |
+| [-v, --version](#version)   | Show the Neon CLI version number                            | boolean | -                                   |
+| [-h, --help](#help)         | Show the Neon CLI help                                      | boolean | -                                   |
 
 - <a id="output"></a>`-o, --output`
 
@@ -184,7 +184,7 @@ Global options are supported with any Neon CLI command.
   ```bash
   export NEON_API_KEY=<neon_api_key>
   ```
-  
+
   <Admonition type="info">
   The authentication flow for the Neon CLI follows this order:
 
@@ -192,8 +192,8 @@ Global options are supported with any Neon CLI command.
   - If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable setting is used.
   - If there is no `--api-key` option or `NEON_API_KEY` environment variable setting, the CLI looks for the `credentials.json` file created by the `neonctl auth` command.
   - If the credentials file is not found, the Neon CLI initiates the `neonctl auth` web authentication process.
-  </Admonition>
-  
+    </Admonition>
+
 - <a id="analytics"></a>`--analytics`
 
   Analytics are enabled by default to gather information about the CLI commands and options that are used by our customers. This data collection assists in offering support, and allows for a better understanding of typical usage patterns so that we can improve user experience. Neon does not collect user-defined data, such as project IDs or command payloads. To opt-out of analytics data collection, specify `--no-analytics` or `--analytics false`.
@@ -213,21 +213,21 @@ Global options are supported with any Neon CLI command.
 
   ```bash
   neonctl --help
- 
+
   neonctl branches --help
-  
+
   neonctl branches create --help
   ```
 
 ## Options
 
-| Option      | Description                         | Type   | Default                           |
-| :---------  | :---------------------------------- | :----- | :-------------------------------- |
-| [--context-file](#context-file)| The context file for CLI sessions                 | string | current-context-file                           |
+| Option                          | Description                       | Type   | Default              |
+| :------------------------------ | :-------------------------------- | :----- | :------------------- |
+| [--context-file](#context-file) | The context file for CLI sessions | string | current-context-file |
 
 - <a id="context-file"></a>`--context-file`
 
-  Sets a background context for your CLI sessions, letting you perform project or branch-specific actions without having to specify the project or branch id in every command. For example, this command lists all branches using the `branches list` command. No need to specify the project since the context file provides it. 
+  Sets a background context for your CLI sessions, letting you perform project or branch-specific actions without having to specify the project or branch id in every command. For example, this command lists all branches using the `branches list` command. No need to specify the project since the context file provides it.
 
   ```bash
   neonctl branches list --context-file path/to/context_file_name

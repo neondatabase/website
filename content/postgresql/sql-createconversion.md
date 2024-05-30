@@ -17,7 +17,7 @@ CREATE [ DEFAULT ] CONVERSION name
 
 `CREATE CONVERSION` defines a new conversion between two character set encodings.
 
-Conversions that are marked `DEFAULT` can be used for automatic encoding conversion between client and server. To support that usage, two conversions, from encoding A to B *and* from encoding B to A, must be defined.
+Conversions that are marked `DEFAULT` can be used for automatic encoding conversion between client and server. To support that usage, two conversions, from encoding A to B _and_ from encoding B to A, must be defined.
 
 To be able to create a conversion, you must have `EXECUTE` privilege on the function and `CREATE` privilege on the destination schema.
 
@@ -25,23 +25,23 @@ To be able to create a conversion, you must have `EXECUTE` privilege on the func
 
 ## Parameters
 
-* `DEFAULT`
+- `DEFAULT`
 
   The `DEFAULT` clause indicates that this conversion is the default for this particular source to destination encoding. There should be only one default encoding in a schema for the encoding pair.
 
-* *`name`*
+- _`name`_
 
   The name of the conversion. The conversion name can be schema-qualified. If it is not, the conversion is defined in the current schema. The conversion name must be unique within a schema.
 
-* *`source_encoding`*
+- _`source_encoding`_
 
   The source encoding name.
 
-* *`dest_encoding`*
+- _`dest_encoding`_
 
   The destination encoding name.
 
-* *`function_name`*
+- _`function_name`_
 
   The function used to perform the conversion. The function name can be schema-qualified. If it is not, the function will be looked up in the path.
 

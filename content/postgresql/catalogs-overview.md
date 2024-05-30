@@ -10,8 +10,8 @@ Most system catalogs are copied from the template database during database creat
 
 **Table 53.1. System Catalogs**
 
-| Catalog Name                                                        | Purpose                                                                                 |
-| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Catalog Name                                                   | Purpose                                                                                 |
+| -------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | [`pg_aggregate`](catalog-pg-aggregate)                         | aggregate functions                                                                     |
 | [`pg_am`](catalog-pg-am)                                       | relation access methods                                                                 |
 | [`pg_amop`](catalog-pg-amop)                                   | access method operators                                                                 |

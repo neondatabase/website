@@ -2,7 +2,7 @@
 
 ## 31.7. Architecture [#](#LOGICAL-REPLICATION-ARCHITECTURE)
 
-* [31.7.1. Initial Snapshot](logical-replication-architecture#LOGICAL-REPLICATION-SNAPSHOT)
+- [31.7.1. Initial Snapshot](logical-replication-architecture#LOGICAL-REPLICATION-SNAPSHOT)
 
 Logical replication starts by copying a snapshot of the data on the publisher database. Once that is done, changes on the publisher are sent to the subscriber as they occur in real time. The subscriber applies data in the order in which commits were made on the publisher so that transactional consistency is guaranteed for the publications within any single subscription.
 

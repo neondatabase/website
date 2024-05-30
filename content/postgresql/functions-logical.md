@@ -2,8 +2,6 @@
 
 ## 9.1. Logical Operators [#](#FUNCTIONS-LOGICAL)
 
-
-
 The usual logical operators are available:
 
 ```
@@ -15,7 +13,7 @@ NOT boolean → boolean
 
 SQL uses a three-valued logic system with true, false, and `null`, which represents “unknown”. Observe the following truth tables:
 
-| *`a`* | *`b`* | *`a`* AND *`b`* | *`a`* OR *`b`* |
+| _`a`_ | _`b`_ | _`a`_ AND _`b`_ | _`a`_ OR _`b`_ |
 | ----- | ----- | --------------- | -------------- |
 | TRUE  | TRUE  | TRUE            | TRUE           |
 | TRUE  | FALSE | FALSE           | TRUE           |
@@ -24,7 +22,7 @@ SQL uses a three-valued logic system with true, false, and `null`, which represe
 | FALSE | NULL  | FALSE           | NULL           |
 | NULL  | NULL  | NULL            | NULL           |
 
-| *`a`* | NOT *`a`* |
+| _`a`_ | NOT _`a`_ |
 | ----- | --------- |
 | TRUE  | FALSE     |
 | FALSE | TRUE      |

@@ -4,11 +4,11 @@
 
 PL/Perl can be used to write event trigger functions. In an event trigger function, the hash reference `$_TD` contains information about the current trigger event. `$_TD` is a global variable, which gets a separate local value for each invocation of the trigger. The fields of the `$_TD` hash reference are:
 
-* `$_TD->{event}`
+- `$_TD->{event}`
 
   The name of the event the trigger is fired for.
 
-* `$_TD->{tag}`
+- `$_TD->{tag}`
 
   The command tag for which the trigger is fired.
 

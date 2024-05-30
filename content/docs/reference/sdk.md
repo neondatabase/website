@@ -42,18 +42,18 @@ To get started with the `@neondatabase/api-client` library, follow these steps:
 
 6. Create an instance of the API client by calling the `createApiClient` function:
 
-    ```typescript
-    const apiClient = createApiClient({
-    apiKey: 'your-api-key',
-    });
-    ```
+   ```typescript
+   const apiClient = createApiClient({
+     apiKey: 'your-api-key',
+   });
+   ```
 
 7. Use the `apiClient` instance to make API calls. For example:
 
-    ```typescript
-    const response = await apiClient.listProjects({});
-    console.log(response);
-    ```
+   ```typescript
+   const response = await apiClient.listProjects({});
+   console.log(response);
+   ```
 
 ## Community SDKs
 

@@ -23,7 +23,6 @@
 | November  | Nov           |
 | December  | Dec           |
 
-
 [Table B.2](datetime-keywords#DATETIME-DOW-TABLE) shows the tokens that are recognized as names of days of the week.
 
 [#id](#DATETIME-DOW-TABLE)
@@ -39,7 +38,6 @@
 | Thursday  | Thu, Thur, Thurs |
 | Friday    | Fri              |
 | Saturday  | Sat              |
-
 
 [Table B.3](datetime-keywords#DATETIME-MOD-TABLE) shows the tokens that serve various modifier purposes.
 

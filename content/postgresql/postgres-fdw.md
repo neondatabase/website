@@ -1,19 +1,17 @@
 [#id](#POSTGRES-FDW)
 
-## F.38. postgres\_fdw — access data stored in external PostgreSQL servers [#](#POSTGRES-FDW)
+## F.38. postgres_fdw — access data stored in external PostgreSQL servers [#](#POSTGRES-FDW)
 
-  * [F.38.1. FDW Options of postgres\_fdw](postgres-fdw#POSTGRES-FDW-OPTIONS)
-  * [F.38.2. Functions](postgres-fdw#POSTGRES-FDW-FUNCTIONS)
-  * [F.38.3. Connection Management](postgres-fdw#POSTGRES-FDW-CONNECTION-MANAGEMENT)
-  * [F.38.4. Transaction Management](postgres-fdw#POSTGRES-FDW-TRANSACTION-MANAGEMENT)
-  * [F.38.5. Remote Query Optimization](postgres-fdw#POSTGRES-FDW-REMOTE-QUERY-OPTIMIZATION)
-  * [F.38.6. Remote Query Execution Environment](postgres-fdw#POSTGRES-FDW-REMOTE-QUERY-EXECUTION-ENVIRONMENT)
-  * [F.38.7. Cross-Version Compatibility](postgres-fdw#POSTGRES-FDW-CROSS-VERSION-COMPATIBILITY)
-  * [F.38.8. Configuration Parameters](postgres-fdw#POSTGRES-FDW-CONFIGURATION-PARAMETERS)
-  * [F.38.9. Examples](postgres-fdw#POSTGRES-FDW-EXAMPLES)
-  * [F.38.10. Author](postgres-fdw#POSTGRES-FDW-AUTHOR)
-
-
+- [F.38.1. FDW Options of postgres_fdw](postgres-fdw#POSTGRES-FDW-OPTIONS)
+- [F.38.2. Functions](postgres-fdw#POSTGRES-FDW-FUNCTIONS)
+- [F.38.3. Connection Management](postgres-fdw#POSTGRES-FDW-CONNECTION-MANAGEMENT)
+- [F.38.4. Transaction Management](postgres-fdw#POSTGRES-FDW-TRANSACTION-MANAGEMENT)
+- [F.38.5. Remote Query Optimization](postgres-fdw#POSTGRES-FDW-REMOTE-QUERY-OPTIMIZATION)
+- [F.38.6. Remote Query Execution Environment](postgres-fdw#POSTGRES-FDW-REMOTE-QUERY-EXECUTION-ENVIRONMENT)
+- [F.38.7. Cross-Version Compatibility](postgres-fdw#POSTGRES-FDW-CROSS-VERSION-COMPATIBILITY)
+- [F.38.8. Configuration Parameters](postgres-fdw#POSTGRES-FDW-CONFIGURATION-PARAMETERS)
+- [F.38.9. Examples](postgres-fdw#POSTGRES-FDW-EXAMPLES)
+- [F.38.10. Author](postgres-fdw#POSTGRES-FDW-AUTHOR)
 
 The `postgres_fdw` module provides the foreign-data wrapper `postgres_fdw`, which can be used to access data stored in external PostgreSQL servers.
 
@@ -41,7 +39,7 @@ Note that a foreign table can be declared with fewer columns, or with a differen
 
 [#id](#POSTGRES-FDW-OPTIONS)
 
-### F.38.1. FDW Options of postgres\_fdw [#](#POSTGRES-FDW-OPTIONS)
+### F.38.1. FDW Options of postgres_fdw [#](#POSTGRES-FDW-OPTIONS)
 
 [#id](#POSTGRES-FDW-OPTIONS-CONNECTION)
 
@@ -49,15 +47,15 @@ Note that a foreign table can be declared with fewer columns, or with a differen
 
 A foreign server using the `postgres_fdw` foreign data wrapper can have the same options that libpq accepts in connection strings, as described in [Section 34.1.2](libpq-connect#LIBPQ-PARAMKEYWORDS), except that these options are not allowed or have special handling:
 
-* `user`, `password` and `sslpassword` (specify these in a user mapping, instead, or use a service file)
+- `user`, `password` and `sslpassword` (specify these in a user mapping, instead, or use a service file)
 
-* `client_encoding` (this is automatically set from the local server encoding)
+- `client_encoding` (this is automatically set from the local server encoding)
 
-* `application_name` - this may appear in *either or both* a connection and [postgres\_fdw.application\_name](postgres-fdw#GUC-PGFDW-APPLICATION-NAME). If both are present, `postgres_fdw.application_name` overrides the connection setting. Unlike libpq, `postgres_fdw` allows `application_name` to include “escape sequences”. See [postgres\_fdw.application\_name](postgres-fdw#GUC-PGFDW-APPLICATION-NAME) for details.
+- `application_name` - this may appear in _either or both_ a connection and [postgres_fdw.application_name](postgres-fdw#GUC-PGFDW-APPLICATION-NAME). If both are present, `postgres_fdw.application_name` overrides the connection setting. Unlike libpq, `postgres_fdw` allows `application_name` to include “escape sequences”. See [postgres_fdw.application_name](postgres-fdw#GUC-PGFDW-APPLICATION-NAME) for details.
 
-* `fallback_application_name` (always set to `postgres_fdw`)
+- `fallback_application_name` (always set to `postgres_fdw`)
 
-* `sslkey` and `sslcert` - these may appear in *either or both* a connection and a user mapping. If both are present, the user mapping setting overrides the connection setting.
+- `sslkey` and `sslcert` - these may appear in _either or both_ a connection and a user mapping. If both are present, the user mapping setting overrides the connection setting.
 
 Only superusers may create or modify user mappings with the `sslcert` or `sslkey` settings.
 
@@ -80,15 +78,15 @@ Care is required to ensure that this does not allow the mapped user the ability 
 
 These options can be used to control the names used in SQL statements sent to the remote PostgreSQL server. These options are needed when a foreign table is created with names different from the underlying remote table's names.
 
-* `schema_name` (`string`)
+- `schema_name` (`string`)
 
   This option, which can be specified for a foreign table, gives the schema name to use for the foreign table on the remote server. If this option is omitted, the name of the foreign table's schema is used.
 
-* `table_name` (`string`)
+- `table_name` (`string`)
 
   This option, which can be specified for a foreign table, gives the table name to use for the foreign table on the remote server. If this option is omitted, the foreign table's name is used.
 
-* `column_name` (`string`)
+- `column_name` (`string`)
 
   This option, which can be specified for a column of a foreign table, gives the column name to use for the column on the remote server. If this option is omitted, the column's name is used.
 
@@ -98,15 +96,15 @@ These options can be used to control the names used in SQL statements sent to th
 
 `postgres_fdw` retrieves remote data by executing queries against remote servers, so ideally the estimated cost of scanning a foreign table should be whatever it costs to be done on the remote server, plus some overhead for communication. The most reliable way to get such an estimate is to ask the remote server and then add something for overhead — but for simple queries, it may not be worth the cost of an additional remote query to get a cost estimate. So `postgres_fdw` provides the following options to control how cost estimation is done:
 
-* `use_remote_estimate` (`boolean`)
+- `use_remote_estimate` (`boolean`)
 
   This option, which can be specified for a foreign table or a foreign server, controls whether `postgres_fdw` issues remote `EXPLAIN` commands to obtain cost estimates. A setting for a foreign table overrides any setting for its server, but only for that table. The default is `false`.
 
-* `fdw_startup_cost` (`floating point`)
+- `fdw_startup_cost` (`floating point`)
 
   This option, which can be specified for a foreign server, is a floating point value that is added to the estimated startup cost of any foreign-table scan on that server. This represents the additional overhead of establishing a connection, parsing and planning the query on the remote side, etc. The default value is `100`.
 
-* `fdw_tuple_cost` (`floating point`)
+- `fdw_tuple_cost` (`floating point`)
 
   This option, which can be specified for a foreign server, is a floating point value that is used as extra cost per-tuple for foreign-table scans on that server. This represents the additional overhead of data transfer between servers. You might increase or decrease this number to reflect higher or lower network delay to the remote server. The default value is `0.01`.
 
@@ -114,7 +112,7 @@ When `use_remote_estimate` is true, `postgres_fdw` obtains row count and cost es
 
 The following option controls how such an `ANALYZE` operation behaves:
 
-* `analyze_sampling` (`text`)
+- `analyze_sampling` (`text`)
 
   This option, which can be specified for a foreign table or a foreign server, determines if `ANALYZE` on a foreign table samples the data on the remote side, or reads and transfers all data and performs the sampling locally. The supported values are `off`, `random`, `system`, `bernoulli` and `auto`. `off` disables remote sampling, so all data are transferred and sampled locally. `random` performs remote sampling using the `random()` function to choose returned rows, while `system` and `bernoulli` rely on the built-in `TABLESAMPLE` methods of those names. `random` works on all remote server versions, while `TABLESAMPLE` is supported only since 9.5. `auto` (the default) picks the recommended sampling method automatically; currently it means either `bernoulli` or `random` depending on the remote server version.
 
@@ -124,17 +122,17 @@ The following option controls how such an `ANALYZE` operation behaves:
 
 By default, only `WHERE` clauses using built-in operators and functions will be considered for execution on the remote server. Clauses involving non-built-in functions are checked locally after rows are fetched. If such functions are available on the remote server and can be relied on to produce the same results as they do locally, performance can be improved by sending such `WHERE` clauses for remote execution. This behavior can be controlled using the following option:
 
-* `extensions` (`string`)
+- `extensions` (`string`)
 
   This option is a comma-separated list of names of PostgreSQL extensions that are installed, in compatible versions, on both the local and remote servers. Functions and operators that are immutable and belong to a listed extension will be considered shippable to the remote server. This option can only be specified for foreign servers, not per-table.
 
-  When using the `extensions` option, *it is the user's responsibility* that the listed extensions exist and behave identically on both the local and remote servers. Otherwise, remote queries may fail or behave unexpectedly.
+  When using the `extensions` option, _it is the user's responsibility_ that the listed extensions exist and behave identically on both the local and remote servers. Otherwise, remote queries may fail or behave unexpectedly.
 
-* `fetch_size` (`integer`)
+- `fetch_size` (`integer`)
 
   This option specifies the number of rows `postgres_fdw` should get in each fetch operation. It can be specified for a foreign table or a foreign server. The option specified on a table overrides an option specified for the server. The default is `100`.
 
-* `batch_size` (`integer`)
+- `batch_size` (`integer`)
 
   This option specifies the number of rows `postgres_fdw` should insert in each insert operation. It can be specified for a foreign table or a foreign server. The option specified on a table overrides an option specified for the server. The default is `1`.
 
@@ -148,7 +146,7 @@ By default, only `WHERE` clauses using built-in operators and functions will be 
 
 `postgres_fdw` supports asynchronous execution, which runs multiple parts of an `Append` node concurrently rather than serially to improve performance. This execution can be controlled using the following option:
 
-* `async_capable` (`boolean`)
+- `async_capable` (`boolean`)
 
   This option controls whether `postgres_fdw` allows foreign tables to be scanned concurrently for asynchronous execution. It can be specified for a foreign table or a foreign server. A table-level option overrides a server-level option. The default is `false`.
 
@@ -162,11 +160,11 @@ By default, only `WHERE` clauses using built-in operators and functions will be 
 
 As described in the Transaction Management section, in `postgres_fdw` transactions are managed by creating corresponding remote transactions, and subtransactions are managed by creating corresponding remote subtransactions. When multiple remote transactions are involved in the current local transaction, by default `postgres_fdw` commits or aborts those remote transactions serially when the local transaction is committed or aborted. When multiple remote subtransactions are involved in the current local subtransaction, by default `postgres_fdw` commits or aborts those remote subtransactions serially when the local subtransaction is committed or aborted. Performance can be improved with the following options:
 
-* `parallel_commit` (`boolean`)
+- `parallel_commit` (`boolean`)
 
   This option controls whether `postgres_fdw` commits, in parallel, remote transactions opened on a foreign server in a local transaction when the local transaction is committed. This setting also applies to remote and local subtransactions. This option can only be specified for foreign servers, not per-table. The default is `false`.
 
-* `parallel_abort` (`boolean`)
+- `parallel_abort` (`boolean`)
 
   This option controls whether `postgres_fdw` aborts, in parallel, remote transactions opened on a foreign server in a local transaction when the local transaction is aborted. This setting also applies to remote and local subtransactions. This option can only be specified for foreign servers, not per-table. The default is `false`.
 
@@ -180,7 +178,7 @@ When these options are enabled, a foreign server with many remote transactions m
 
 By default all foreign tables using `postgres_fdw` are assumed to be updatable. This may be overridden using the following option:
 
-* `updatable` (`boolean`)
+- `updatable` (`boolean`)
 
   This option controls whether `postgres_fdw` allows foreign tables to be modified using `INSERT`, `UPDATE` and `DELETE` commands. It can be specified for a foreign table or a foreign server. A table-level option overrides a server-level option. The default is `true`.
 
@@ -192,7 +190,7 @@ By default all foreign tables using `postgres_fdw` are assumed to be updatable. 
 
 By default all foreign tables using `postgres_fdw` are assumed to be truncatable. This may be overridden using the following option:
 
-* `truncatable` (`boolean`)
+- `truncatable` (`boolean`)
 
   This option controls whether `postgres_fdw` allows foreign tables to be truncated using the `TRUNCATE` command. It can be specified for a foreign table or a foreign server. A table-level option overrides a server-level option. The default is `true`.
 
@@ -206,21 +204,21 @@ By default all foreign tables using `postgres_fdw` are assumed to be truncatable
 
 Importing behavior can be customized with the following options (given in the `IMPORT FOREIGN SCHEMA` command):
 
-* `import_collate` (`boolean`)
+- `import_collate` (`boolean`)
 
   This option controls whether column `COLLATE` options are included in the definitions of foreign tables imported from a foreign server. The default is `true`. You might need to turn this off if the remote server has a different set of collation names than the local server does, which is likely to be the case if it's running on a different operating system. If you do so, however, there is a very severe risk that the imported table columns' collations will not match the underlying data, resulting in anomalous query behavior.
 
   Even when this parameter is set to `true`, importing columns whose collation is the remote server's default can be risky. They will be imported with `COLLATE "default"`, which will select the local server's default collation, which could be different.
 
-* `import_default` (`boolean`)
+- `import_default` (`boolean`)
 
   This option controls whether column `DEFAULT` expressions are included in the definitions of foreign tables imported from a foreign server. The default is `false`. If you enable this option, be wary of defaults that might get computed differently on the local server than they would be on the remote server; `nextval()` is a common source of problems. The `IMPORT` will fail altogether if an imported default expression uses a function or operator that does not exist locally.
 
-* `import_generated` (`boolean`)
+- `import_generated` (`boolean`)
 
   This option controls whether column `GENERATED` expressions are included in the definitions of foreign tables imported from a foreign server. The default is `true`. The `IMPORT` will fail altogether if an imported generated expression uses a function or operator that does not exist locally.
 
-* `import_not_null` (`boolean`)
+- `import_not_null` (`boolean`)
 
   This option controls whether column `NOT NULL` constraints are included in the definitions of foreign tables imported from a foreign server. The default is `true`.
 
@@ -234,7 +232,7 @@ Tables or foreign tables which are partitions of some other table are imported o
 
 By default, all connections that `postgres_fdw` establishes to foreign servers are kept open in the local session for re-use.
 
-* `keep_connections` (`boolean`)
+- `keep_connections` (`boolean`)
 
   This option controls whether `postgres_fdw` keeps the connections to the foreign server open so that subsequent queries can re-use them. It can only be specified for a foreign server. The default is `on`. If set to `off`, all connections to this foreign server will be discarded at the end of each transaction.
 
@@ -242,7 +240,7 @@ By default, all connections that `postgres_fdw` establishes to foreign servers a
 
 ### F.38.2. Functions [#](#POSTGRES-FDW-FUNCTIONS)
 
-* `postgres_fdw_get_connections(OUT server_name text, OUT valid boolean) returns setof record`
+- `postgres_fdw_get_connections(OUT server_name text, OUT valid boolean) returns setof record`
 
   This function returns the foreign server names of all the open connections that `postgres_fdw` established from the local session to the foreign servers. It also returns whether each connection is valid or not. `false` is returned if the foreign server connection is used in the current local transaction but its foreign server or user mapping is changed or dropped (Note that server name of an invalid connection will be `NULL` if the server is dropped), and then such invalid connection will be closed at the end of that transaction. `true` is returned otherwise. If there are no open connections, no record is returned. Example usage of the function:
 
@@ -254,7 +252,7 @@ By default, all connections that `postgres_fdw` establishes to foreign servers a
    loopback2   | f
   ```
 
-* `postgres_fdw_disconnect(server_name text) returns boolean`
+- `postgres_fdw_disconnect(server_name text) returns boolean`
 
   This function discards the open connections that are established by `postgres_fdw` from the local session to the foreign server with the given name. Note that there can be multiple connections to the given server using different user mappings. If the connections are used in the current local transaction, they are not disconnected and warning messages are reported. This function returns `true` if it disconnects at least one connection, otherwise `false`. If no foreign server with the given name is found, an error is reported. Example usage of the function:
 
@@ -265,7 +263,7 @@ By default, all connections that `postgres_fdw` establishes to foreign servers a
    t
   ```
 
-* `postgres_fdw_disconnect_all() returns boolean`
+- `postgres_fdw_disconnect_all() returns boolean`
 
   This function discards all the open connections that are established by `postgres_fdw` from the local session to foreign servers. If the connections are used in the current local transaction, they are not disconnected and warning messages are reported. This function returns `true` if it disconnects at least one connection, otherwise `false`. Example usage of the function:
 
@@ -310,21 +308,21 @@ The query that is actually sent to the remote server for execution can be examin
 
 ### F.38.6. Remote Query Execution Environment [#](#POSTGRES-FDW-REMOTE-QUERY-EXECUTION-ENVIRONMENT)
 
-In the remote sessions opened by `postgres_fdw`, the [search\_path](runtime-config-client#GUC-SEARCH-PATH) parameter is set to just `pg_catalog`, so that only built-in objects are visible without schema qualification. This is not an issue for queries generated by `postgres_fdw` itself, because it always supplies such qualification. However, this can pose a hazard for functions that are executed on the remote server via triggers or rules on remote tables. For example, if a remote table is actually a view, any functions used in that view will be executed with the restricted search path. It is recommended to schema-qualify all names in such functions, or else attach `SET search_path` options (see [CREATE FUNCTION](sql-createfunction)) to such functions to establish their expected search path environment.
+In the remote sessions opened by `postgres_fdw`, the [search_path](runtime-config-client#GUC-SEARCH-PATH) parameter is set to just `pg_catalog`, so that only built-in objects are visible without schema qualification. This is not an issue for queries generated by `postgres_fdw` itself, because it always supplies such qualification. However, this can pose a hazard for functions that are executed on the remote server via triggers or rules on remote tables. For example, if a remote table is actually a view, any functions used in that view will be executed with the restricted search path. It is recommended to schema-qualify all names in such functions, or else attach `SET search_path` options (see [CREATE FUNCTION](sql-createfunction)) to such functions to establish their expected search path environment.
 
 `postgres_fdw` likewise establishes remote session settings for various parameters:
 
-* [TimeZone](runtime-config-client#GUC-TIMEZONE) is set to `UTC`
+- [TimeZone](runtime-config-client#GUC-TIMEZONE) is set to `UTC`
 
-* [DateStyle](runtime-config-client#GUC-DATESTYLE) is set to `ISO`
+- [DateStyle](runtime-config-client#GUC-DATESTYLE) is set to `ISO`
 
-* [IntervalStyle](runtime-config-client#GUC-INTERVALSTYLE) is set to `postgres`
+- [IntervalStyle](runtime-config-client#GUC-INTERVALSTYLE) is set to `postgres`
 
-* [extra\_float\_digits](runtime-config-client#GUC-EXTRA-FLOAT-DIGITS) is set to `3` for remote servers 9.0 and newer and is set to `2` for older versions
+- [extra_float_digits](runtime-config-client#GUC-EXTRA-FLOAT-DIGITS) is set to `3` for remote servers 9.0 and newer and is set to `2` for older versions
 
 These are less likely to be problematic than `search_path`, but can be handled with function `SET` options if the need arises.
 
-It is *not* recommended that you override this behavior by changing the session-level settings of these parameters; that is likely to cause `postgres_fdw` to malfunction.
+It is _not_ recommended that you override this behavior by changing the session-level settings of these parameters; that is likely to cause `postgres_fdw` to malfunction.
 
 [#id](#POSTGRES-FDW-CROSS-VERSION-COMPATIBILITY)
 
@@ -336,23 +334,23 @@ It is *not* recommended that you override this behavior by changing the session-
 
 ### F.38.8. Configuration Parameters [#](#POSTGRES-FDW-CONFIGURATION-PARAMETERS)
 
-* `postgres_fdw.application_name` (`string`) [#](#GUC-PGFDW-APPLICATION-NAME)
+- `postgres_fdw.application_name` (`string`) [#](#GUC-PGFDW-APPLICATION-NAME)
 
-  Specifies a value for [application\_name](runtime-config-logging#GUC-APPLICATION-NAME) configuration parameter used when `postgres_fdw` establishes a connection to a foreign server. This overrides `application_name` option of the server object. Note that change of this parameter doesn't affect any existing connections until they are re-established.
+  Specifies a value for [application_name](runtime-config-logging#GUC-APPLICATION-NAME) configuration parameter used when `postgres_fdw` establishes a connection to a foreign server. This overrides `application_name` option of the server object. Note that change of this parameter doesn't affect any existing connections until they are re-established.
 
-  `postgres_fdw.application_name` can be any string of any length and contain even non-ASCII characters. However when it's passed to and used as `application_name` in a foreign server, note that it will be truncated to less than `NAMEDATALEN` characters and anything other than printable ASCII characters will be replaced with question marks (`?`). See [application\_name](runtime-config-logging#GUC-APPLICATION-NAME) for details.
+  `postgres_fdw.application_name` can be any string of any length and contain even non-ASCII characters. However when it's passed to and used as `application_name` in a foreign server, note that it will be truncated to less than `NAMEDATALEN` characters and anything other than printable ASCII characters will be replaced with question marks (`?`). See [application_name](runtime-config-logging#GUC-APPLICATION-NAME) for details.
 
   `%` characters begin “escape sequences” that are replaced with status information as outlined below. Unrecognized escapes are ignored. Other characters are copied straight to the application name. Note that it's not allowed to specify a plus/minus sign or a numeric literal after the `%` and before the option, for alignment and padding.
 
-  | Escape | Effect                                                                                                            |
-  | ------ | ----------------------------------------------------------------------------------------------------------------- |
-  | `%a`   | Application name on local server                                                                                  |
-  | `%c`   | Session ID on local server (see [log\_line\_prefix](runtime-config-logging#GUC-LOG-LINE-PREFIX) for details) |
-  | `%C`   | Cluster name on local server (see [cluster\_name](runtime-config-logging#GUC-CLUSTER-NAME) for details)      |
-  | `%u`   | User name on local server                                                                                         |
-  | `%d`   | Database name on local server                                                                                     |
-  | `%p`   | Process ID of backend on local server                                                                             |
-  | `%%`   | Literal %                                                                                                         |
+  | Escape | Effect                                                                                                     |
+  | ------ | ---------------------------------------------------------------------------------------------------------- |
+  | `%a`   | Application name on local server                                                                           |
+  | `%c`   | Session ID on local server (see [log_line_prefix](runtime-config-logging#GUC-LOG-LINE-PREFIX) for details) |
+  | `%C`   | Cluster name on local server (see [cluster_name](runtime-config-logging#GUC-CLUSTER-NAME) for details)     |
+  | `%u`   | User name on local server                                                                                  |
+  | `%d`   | Database name on local server                                                                              |
+  | `%p`   | Process ID of backend on local server                                                                      |
+  | `%%`   | Literal %                                                                                                  |
 
   For example, suppose user `local_user` establishes a connection from database `local_db` to `foreign_db` as user `foreign_user`, the setting `'db=%d, user=%u'` is replaced with `'db=local_db, user=local_user'`.
 

@@ -39,49 +39,49 @@ You must own the procedure to use `ALTER PROCEDURE`. To change a procedure's sch
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of an existing procedure. If no argument list is specified, the name must be unique in its schema.
 
-* *`argmode`*
+- _`argmode`_
 
   The mode of an argument: `IN`, `OUT`, `INOUT`, or `VARIADIC`. If omitted, the default is `IN`.
 
-* *`argname`*
+- _`argname`_
 
   The name of an argument. Note that `ALTER PROCEDURE` does not actually pay any attention to argument names, since only the argument data types are used to determine the procedure's identity.
 
-* *`argtype`*
+- _`argtype`_
 
   The data type(s) of the procedure's arguments (optionally schema-qualified), if any. See [DROP PROCEDURE](sql-dropprocedure) for the details of how the procedure is looked up using the argument data type(s).
 
-* *`new_name`*
+- _`new_name`_
 
   The new name of the procedure.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The new owner of the procedure. Note that if the procedure is marked `SECURITY DEFINER`, it will subsequently execute as the new owner.
 
-* *`new_schema`*
+- _`new_schema`_
 
   The new schema for the procedure.
 
-* *`extension_name`*
+- _`extension_name`_
 
   This form marks the procedure as dependent on the extension, or no longer dependent on the extension if `NO` is specified. A procedure that's marked as dependent on an extension is dropped when the extension is dropped, even if cascade is not specified. A procedure can depend upon multiple extensions, and will be dropped when any one of those extensions is dropped.
 
-* `[ EXTERNAL ] SECURITY INVOKER``[ EXTERNAL ] SECURITY DEFINER`
+- `[ EXTERNAL ] SECURITY INVOKER``[ EXTERNAL ] SECURITY DEFINER`
 
   Change whether the procedure is a security definer or not. The key word `EXTERNAL` is ignored for SQL conformance. See [CREATE PROCEDURE](sql-createprocedure) for more information about this capability.
 
-* *`configuration_parameter`**`value`*
+- _`configuration_parameter`\*\*`value`_
 
-  Add or change the assignment to be made to a configuration parameter when the procedure is called. If *`value`* is `DEFAULT` or, equivalently, `RESET` is used, the procedure-local setting is removed, so that the procedure executes with the value present in its environment. Use `RESET ALL` to clear all procedure-local settings. `SET FROM CURRENT` saves the value of the parameter that is current when `ALTER PROCEDURE` is executed as the value to be applied when the procedure is entered.
+  Add or change the assignment to be made to a configuration parameter when the procedure is called. If _`value`_ is `DEFAULT` or, equivalently, `RESET` is used, the procedure-local setting is removed, so that the procedure executes with the value present in its environment. Use `RESET ALL` to clear all procedure-local settings. `SET FROM CURRENT` saves the value of the parameter that is current when `ALTER PROCEDURE` is executed as the value to be applied when the procedure is entered.
 
   See [SET](sql-set) and [Chapter 20](runtime-config) for more information about allowed parameter names and values.
 
-* `RESTRICT`
+- `RESTRICT`
 
   Ignored for conformance with the SQL standard.
 

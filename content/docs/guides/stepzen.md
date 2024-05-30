@@ -213,10 +213,7 @@ type Order {
   carrier: String
   createdat: Date!
   customer: Customer
-    @materializer(
-      query: "getCustomer"
-      arguments: [{ name: "id", field: "customerid" }]
-    )
+    @materializer(query: "getCustomer", arguments: [{ name: "id", field: "customerid" }])
   customerid: Int!
   id: Int!
   lineitemList: [Lineitem] @materializer(query: "getLineitemUsingOrderid")

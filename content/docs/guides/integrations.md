@@ -41,7 +41,6 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 </TechnologyNavigation>
 
-
 ## Backend-as-a-service
 
 <TechnologyNavigation open={true}>
@@ -84,7 +83,6 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 </TechnologyNavigation>
 
-
 ## Replication
 
 <TechnologyNavigation open={true}>
@@ -102,7 +100,6 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 <img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
 
 </TechnologyNavigation>
-
 
 ## Migrations
 
@@ -130,7 +127,6 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 </TechnologyNavigation>
 
-
 ## Tools
 
 <TechnologyNavigation open={true}>
@@ -140,7 +136,6 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 <img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
 
 </TechnologyNavigation>
-
 
 ## Authentication
 

@@ -49,9 +49,9 @@ The project is created with a ready-to-use `neondb` database, which you will con
 
 4. Install `psycopg2` and `python-dotenv` in your project's root directory. You can install them using `pip`:
 
-    ```bash
-    pip install psycopg2-binary python-dotenv
-    ```
+   ```bash
+   pip install psycopg2-binary python-dotenv
+   ```
 
 ## Store your Neon credentials
 

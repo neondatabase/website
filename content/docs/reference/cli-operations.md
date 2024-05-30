@@ -22,9 +22,9 @@ The `operations` command allows you to list operations for a Neon project.
 neonctl operations <subcommand> [options]
 ```
 
-| Subcommand  | Description      |
-|---------|------------------|
-| [list](#list)    | List operations    |
+| Subcommand    | Description     |
+| ------------- | --------------- |
+| [list](#list) | List operations |
 
 ### list
 
@@ -40,15 +40,15 @@ neonctl operations list [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `list` subcommand supports this option:
 
-| Option       | Description | Type   | Required  |
-| ------------ | ----------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--project-id` | Project ID  | string |  Only if your Neon account has more than one project |
+| Option           | Description                                                                                   | Type   |                      Required                       |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
+| `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 
 #### Example
 
 ```bash
-neonctl operations list 
+neonctl operations list
 ┌──────────────────────────────────────┬────────────────────┬──────────┬──────────────────────┐
 │ Id                                   │ Action             │ Status   │ Created At           │
 ├──────────────────────────────────────┼────────────────────┼──────────┼──────────────────────┤

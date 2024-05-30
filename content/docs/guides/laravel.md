@@ -46,18 +46,18 @@ ERROR: The endpoint ID is not specified. Either upgrade the Postgres client libr
 
 If you run into this error, please see the following documentation for an explanation of the issue and workarounds: [The endpoint ID is not specified](/docs/connect/connection-errors#the-endpoint-id-is-not-specified).
 
--  If using a connection string to connect to your database, try [Workaround A. Pass the endpoint ID as an option](https://neon.tech/docs/connect/connection-errors#a-pass-the-endpoint-id-as-an-option). For example:
+- If using a connection string to connect to your database, try [Workaround A. Pass the endpoint ID as an option](https://neon.tech/docs/connect/connection-errors#a-pass-the-endpoint-id-as-an-option). For example:
 
-    ```text
-    postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
-    ```
+  ```text
+  postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
+  ```
 
-    Replace `[endpoint_id]` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
+  Replace `[endpoint_id]` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
 - If using database connection parameters, as shown above, try [Workaround D. Specify the endpoint ID in the password field](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). For example:
 
-    ```text
-    DB_PASSWORD=endpoint=<endpoint_id>$<password>
-    ```
+  ```text
+  DB_PASSWORD=endpoint=<endpoint_id>$<password>
+  ```
 
 <NeedHelp/>

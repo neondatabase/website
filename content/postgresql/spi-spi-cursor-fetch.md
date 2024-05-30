@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-CURSOR-FETCH)
 
-## SPI\_cursor\_fetch
+## SPI_cursor_fetch
 
-SPI\_cursor\_fetch — fetch some rows from a cursor
+SPI_cursor_fetch — fetch some rows from a cursor
 
 ## Synopsis
 
@@ -20,15 +20,15 @@ void SPI_cursor_fetch(Portal portal, bool forward, long count)
 
 ## Arguments
 
-* `Portal portal`
+- `Portal portal`
 
   portal containing the cursor
 
-* `bool forward`
+- `bool forward`
 
   true for fetch forward, false for fetch backward
 
-* `long count`
+- `long count`
 
   maximum number of rows to fetch
 

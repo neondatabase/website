@@ -95,7 +95,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 The following Neon API method creates an API key. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createapikey).
 
 ```http
-POST /api_keys 
+POST /api_keys
 ```
 
 The API method appears as follows when specified in a cURL command. You must specify the `key_name` attribute and a name for the API key.
@@ -187,7 +187,6 @@ curl -X DELETE \
 
 <details>
 <summary>Response body</summary>
-
 
 ```json
 {

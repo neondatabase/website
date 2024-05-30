@@ -23,33 +23,33 @@ ALTER POLICY name ON table_name
 
 To use `ALTER POLICY`, you must own the table that the policy applies to.
 
-In the second form of `ALTER POLICY`, the role list, *`using_expression`*, and *`check_expression`* are replaced independently if specified. When one of those clauses is omitted, the corresponding part of the policy is unchanged.
+In the second form of `ALTER POLICY`, the role list, _`using_expression`_, and _`check_expression`_ are replaced independently if specified. When one of those clauses is omitted, the corresponding part of the policy is unchanged.
 
 [#id](#id-1.9.3.23.6)
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of an existing policy to alter.
 
-* *`table_name`*
+- _`table_name`_
 
   The name (optionally schema-qualified) of the table that the policy is on.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name for the policy.
 
-* *`role_name`*
+- _`role_name`_
 
   The role(s) to which the policy applies. Multiple roles can be specified at one time. To apply the policy to all roles, use `PUBLIC`.
 
-* *`using_expression`*
+- _`using_expression`_
 
   The `USING` expression for the policy. See [CREATE POLICY](sql-createpolicy) for details.
 
-* *`check_expression`*
+- _`check_expression`_
 
   The `WITH CHECK` expression for the policy. See [CREATE POLICY](sql-createpolicy) for details.
 

@@ -16,19 +16,19 @@ The benefits of using FerretDB include:
 
 - **MongoDB compatibility**
 
-    FerretDB gives you access to the syntax, tools, querying language, and commands available in MongoDB for many common use cases. MongoDB is known for its simple and intuitive NoSQL query language which is widely used by many developers. By using FerretDB, you can enable Postgres databases like Neon to run MongoDB workloads.
+  FerretDB gives you access to the syntax, tools, querying language, and commands available in MongoDB for many common use cases. MongoDB is known for its simple and intuitive NoSQL query language which is widely used by many developers. By using FerretDB, you can enable Postgres databases like Neon to run MongoDB workloads.
 
-    For related information, see [MongoDB Compatibility - What's Really Important?](https://blog.ferretdb.io/mongodb-compatibility-whats-really-important/)
+  For related information, see [MongoDB Compatibility - What's Really Important?](https://blog.ferretdb.io/mongodb-compatibility-whats-really-important/)
 
 - **Open source**
 
-    As an open source document database, you won't be at risk of vendor lock-in. Since MongoDB's license change to Server Side Public License (SSPL), there's been a lot of confusion regarding what this means for users and what it would mean for their applications. According to the Open Source Initiative – the steward of open source and the set of rules that define open source software – SSPL is not considered open source.
+  As an open source document database, you won't be at risk of vendor lock-in. Since MongoDB's license change to Server Side Public License (SSPL), there's been a lot of confusion regarding what this means for users and what it would mean for their applications. According to the Open Source Initiative – the steward of open source and the set of rules that define open source software – SSPL is not considered open source.
 
-    FerretDB is licensed under Apache 2.0, makes it a good option for users looking for a MongoDB alternative.
+  FerretDB is licensed under Apache 2.0, makes it a good option for users looking for a MongoDB alternative.
 
 - **Multiple backend options**
 
-    FerretDB currently supports Postgres and SQLite backends, with many ongoing efforts to support other backends. Many databases built on Postgres can serve as a backend for FerretDB, including Neon. That means you can take advantage of all the features available in the backend of your choice to scale and manage your database infrastructure without fear of vendor lock-in.
+  FerretDB currently supports Postgres and SQLite backends, with many ongoing efforts to support other backends. Many databases built on Postgres can serve as a backend for FerretDB, including Neon. That means you can take advantage of all the features available in the backend of your choice to scale and manage your database infrastructure without fear of vendor lock-in.
 
 To learn more, see [Understanding FerretDB](https://docs.ferretdb.io/understanding-ferretdb/).
 
