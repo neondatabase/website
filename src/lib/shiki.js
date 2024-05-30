@@ -2,7 +2,7 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from '@shikijs/transformers';
-import { getHighlighter, createCssVariablesTheme, bundledLanguages, codeToHtml } from 'shiki';
+import { getHighlighter, createCssVariablesTheme, codeToHtml } from 'shiki';
 
 const customTheme = createCssVariablesTheme({
   name: 'css-variables',
@@ -39,13 +39,8 @@ const parseHighlightLines = (meta) => {
   return highlightLines;
 };
 
-export default async function highlight(code, lang = 'bash', meta = '', theme = customTheme) {
-  let language = lang.toLocaleLowerCase();
-
-  // check if language is supported
-  if (!Object.keys(bundledLanguages).includes(lang)) {
-    language = 'bash';
-  }
+export default async function highlight(code, lang = 'text', meta = '', theme = customTheme) {
+  const language = lang.toLocaleLowerCase();
 
   if (!highlighter) {
     highlighter = await getHighlighter({
