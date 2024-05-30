@@ -57,10 +57,14 @@ To start building the application, create a new SvelteKit project. Open your ter
 npm create svelte@latest my-app
 ```
 
-Once the installation is done, you can move into the project directory and start the app. In another terminal window, start the development server by typing:
+When prompted, choose:
+
+- `Skeleton project` for **Which Svelte app template?**
+- `Yes, using Typescript syntax` for **Add type checking with Typescript?**
+
+Press **Enter** to proceed. Now, follow the instructions to install the dependencies and start the development server:
 
 ```bash
-cd my-app
 npm run dev
 ```
 
@@ -68,14 +72,14 @@ The app now should be running on [localhost:5173](http://localhost:5173).
 
 > Note: According to an [advanced SvelteKit guide](https://kit.svelte.dev/docs/server-only-modules), using `.server` in the filename allows you to make it server-only.
 
-Next, in your first terminal window, run the command below to install the necessary libraries and packages for building the application:
+Next, run the command below to install the necessary libraries and packages for building the application:
 
 ```bash
 npm install pg
 npm install -D dotenv tsx @types/pg
 ```
 
-The above command installs the packages passed to the install command, with the -D flag specifying the libraries intended for development purposes only.
+It installs the packages passed to the install command, with the -D flag specifying the libraries intended for development purposes only.
 
 The libraries installed include:
 
@@ -121,11 +125,9 @@ export default {
 Finally, add an import to `app.css` in your `+page.svelte` file:
 
 ```diff
-<script lang="ts">
-+ import '../app.css'
-
-// ...
-</script>
++ <script lang="ts">
++   import '../app.css'
++ </script>
 
 <!-- +page.svelte's HTML -->
 ```
@@ -251,7 +253,7 @@ The above code first updates the value of the feature flag in the database rando
 
 ### Creating a Conditional User Experience
 
-Now, let's look at how the feature flag value can be used in the user interface to conditionally render UI elements. This will allow you to accept payments via PayGM if the `fast_payments` feature flag is enabled. To do that, add the following snippet to `+page.svelte` file:
+Now, let's look at how the feature flag value can be used in the user interface to conditionally render UI elements. This will allow you to accept payments via PayGM if the `fast_payments` feature flag is enabled. To do that, use the following code in `+page.svelte` file:
 
 ```svelte
 <script lang="ts">
