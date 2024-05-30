@@ -4,6 +4,12 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
+const themes = {
+  light: 'bg-white',
+  dark: 'bg-black-pure',
+  default: 'bg-white dark:bg-black-pure',
+};
+
 const HeaderWrapper = ({
   className = null,
   children,
@@ -14,13 +20,7 @@ const HeaderWrapper = ({
 }) => {
   const headerRef = useRef(null);
   const [isStickied, setIsStickied] = useState(false);
-
-  const themeBg = {
-    light: 'bg-white',
-    dark: 'bg-black-pure',
-    default: 'bg-white dark:bg-black-pure',
-  };
-  const bg = themeBg[theme] || themeBg.default;
+  const bg = themes?.[theme] || themes.default;
 
   const handleScroll = () => {
     if (headerRef.current) {
