@@ -9,7 +9,7 @@ const codeSnippets = [
   {
     name: 'macOS',
     iconName: 'macos',
-    language: 'plain',
+    language: 'text',
     code: `brew install neonctl
 neonctl auth
 neonctl branches create --name dev/daniel
@@ -18,7 +18,7 @@ neonctl branches list`,
   {
     name: 'Windows',
     iconName: 'windows',
-    language: 'plain',
+    language: 'text',
     code: `npm install -g neonctl
 neonctl auth
 neonctl branches create --name dev/daniel
@@ -27,7 +27,7 @@ neonctl branches list`,
   {
     name: 'Linux',
     iconName: 'linux',
-    language: 'plain',
+    language: 'text',
     code: `npm install -g neonctl
 neonctl auth
 neonctl branches create --name dev/daniel
