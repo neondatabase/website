@@ -331,25 +331,33 @@ Great! You can use these helper functions in your application to manage and cont
 
 In this section, you will get an example of how feature flag helps test and roll out new features, dynamically. For example, you are a payment processing company. You have just added a payment method named `PayGM` that helps users pay faster. But you want to test it out on a random basis for each cart that you process. Let's walk through a hypothetical code that allows you to understand the usage of feature flag in this case.
 
-### Update Feature Flags Dynamically
+### Computing the user destination
 
-In a SvelteKit route, the data from the server to the user interface is passed via `+page.server.ts` file to `+page.svelte`. For the sake of an example, you will update the feature flag dynamically and load it per request to check if it's enabled. To do that, add the following snippet to `+page.server.ts` file:
+In a SvelteKit route, the data from the server to the user interface is passed via `+page.server.ts` file to `+page.svelte`. For the sake of an example, you will load the feature flag dynamically and check if it's enabled to determine the user's destination experience. To do that, add the following snippet to `+page.server.ts` file:
 
 ```tsx
 // File: src/routes/+page.server.ts
 
 import { isEnabled } from '$lib/feature_flags/get.server'
-import { setEnabled } from '$lib/feature_flags/set.server'
 
-export async function load() {
-  await setEnabled('fast_payments', Math.random() > 0.5)
+/** @type {import('./$types').LayoutServerLoad} */
+export async function load({ cookies }) {
+  const bucket = cookies.get('destination_bucket')
+  if (!bucket) {
+    const tmp = await isEnabled('fast_payments')
+    // If the feature is enabled, try bucketing users randomly
+    if (tmp) cookies.set('destination_bucket', Math.random() > 0.5 ? '1' : '0', { path: '/' })
+    // If the feature is disabled, do not bucket and preserve the current experience
+    else cookies.set('destination_bucket', '0', { path: '/' })
+  }
+  const fast_payments = Boolean(Number(cookies.get('destination_bucket')))
   return {
-    fast_payments: await isEnabled('fast_payments'),
+    fast_payments,
   }
 }
 ```
 
-The above code first updates the value of the feature flag in the database randomly as a boolean whenever the `/` route is visited. Finally, it fetches the feature flag value to check if the fast payment methods are enabled or not.
+The code above first looks for the bucket assigned to the user. If no such bucket is found, it looks for the value of the feature flag in the database, randomly assigns a boolean whenever the `/` route is visited and sets it into the cookie. Finally, it reads the cookie as the source to determine the user experience, in here to check if the fast payment methods are enabled or not.
 
 ### Creating a Conditional User Experience
 
