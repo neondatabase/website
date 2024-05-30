@@ -142,11 +142,11 @@ Create an `app.css` file in the `src` directory, and add the snippet below in it
 
 Next, add the paths to all of your template files in your `tailwind.config.js` file:
 
-```diff
+```js
 /** @type {import('tailwindcss').Config} */
 export default {
--  content: [],
-+  content: ['./src/**/*.{html,js,svelte,ts}'],
+  content: [], // [!code --]
+  content: ['./src/**/*.{html,js,svelte,ts}'], // [!code ++]
   theme: {
     extend: {}
   },
@@ -156,10 +156,10 @@ export default {
 
 Finally, add an import to `app.css` in your `+page.svelte` file:
 
-```diff
-+ <script lang="ts">
-+   import '../app.css'
-+ </script>
+```svelte
+<script lang="ts"> // [!code ++]
+  import '../app.css' // [!code ++]
+</script> // [!code ++]
 
 <!-- +page.svelte's HTML -->
 ```

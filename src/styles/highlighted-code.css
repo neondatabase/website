@@ -110,3 +110,11 @@
     }
   }
 }
+
+.diff.add {
+  background-color: #dcffd199;
+}
+
+.diff.remove {
+  background-color: #ffd1d199;
+}
