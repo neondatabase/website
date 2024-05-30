@@ -74,22 +74,54 @@ The app now should be running on [localhost:5173](http://localhost:5173).
 
 Next, run the command below to install the necessary libraries and packages for building the application:
 
+<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+
+```bash
+npm install @neondatabase/serverless
+npm install -D dotenv tsx
+```
+
 ```bash
 npm install pg
 npm install -D dotenv tsx @types/pg
 ```
 
+</CodeTabs>
+
 It installs the packages passed to the install command, with the -D flag specifying the libraries intended for development purposes only.
+
+
 
 The libraries installed include:
 
+<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+
+```markdown
+- `@neondatabase/serverless`: Neon's PostgreSQL driver for JavaScript and TypeScript.
+```
+
+```markdown
 - `pg`: A PostgreSQL client for Node.js.
+```
+
+</CodeTabs>
 
 The development-specific libraries include:
 
+<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+
+```markdown
+- `tsx`: To execute and rebuild TypeScript efficiently.
+- `dotenv`: A library for handling environment variables.
+```
+
+```markdown
 - `@types/pg`: Type definitions for pg.
 - `tsx`: To execute and rebuild TypeScript efficiently.
 - `dotenv`: A library for handling environment variables.
+```
+
+</CodeTabs>
 
 ## (Optional) Add Tailwind CSS to the application
 
@@ -140,14 +172,32 @@ Feature flags offer a powerful way to control the behavior of your application w
 
 To create a client that interacts with your serverless postgres, create a `postgres.server.ts` file inside the `src/lib` directory with the following content:
 
+<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+
 ```tsx
 // File: src/lib/postgres.server.ts
 
+// Load Environment Variables
+import 'dotenv/config'
+
 // Load the postgres module
-import pg from 'pg'
+import { neon } from '@neondatabase/serverless'
+
+// Create a connection string to the Neon Postgres instance
+const connectionString: string = process.env.DATABASE_URL as string
+
+// Create a in-memory query function
+export default neon(connectionString)
+```
+
+```tsx
+// File: src/lib/postgres.server.ts
 
 // Load Environment Variables
 import 'dotenv/config'
+
+// Load the postgres module
+import pg from 'pg'
 
 // Create a connection string to the Neon Postgres instance
 const connectionString: string = process.env.DATABASE_URL as string
@@ -155,6 +205,8 @@ const connectionString: string = process.env.DATABASE_URL as string
 // Create a in-memory pool so that it's cached for multiple calls
 export default new pg.Pool({ connectionString })
 ```
+
+</CodeTabs>
 
 The code above starts with importing the Postgres client. It further imports the config module by `dotenv` that makes sure that all environment variables are populated in application environment. It then creates a new instance of a PostgreSQL connection pool.
 
@@ -168,13 +220,30 @@ mkdir src/lib/feature_flags
 
 In the `feature_flags` directory, create a file named `setup.server.ts` with the following code which will allow you to create and populate a database table for feature flags.
 
+<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+
+```tsx
+// File: src/lib/feature_flags/setup.server.ts
+
+import sql from '../postgres.server'
+
+async function populateFeatureFlags() {
+  await sql`CREATE TABLE IF NOT EXISTS feature_flags (flagName text PRIMARY KEY, enabled boolean)`
+  console.log('✅ Setup database for feature flag')
+  await sql`INSERT INTO feature_flags (flagName, enabled) VALUES ('fast_payments', true)`
+  console.log('✅ Setup an enabled feature flag to accept fast payment methods.')
+}
+
+populateFeatureFlags()
+```
+
 ```tsx
 // File: src/lib/feature_flags/setup.server.ts
 
 import pool from '../postgres.server'
 
 async function populateFeatureFlags() {
-  await pool.query('CREATE TABLE IF NOT EXISTS feature_flags (flagName text PRIMARY KEY, enabled boolean);')
+  await pool.query('CREATE TABLE IF NOT EXISTS feature_flags (flagName text PRIMARY KEY, enabled boolean)')
   console.log('✅ Setup database for feature flag')
   await pool.query({
     text: 'INSERT INTO feature_flags (flagName, enabled) VALUES ($1, $2)',
@@ -186,11 +255,26 @@ async function populateFeatureFlags() {
 populateFeatureFlags()
 ```
 
+</CodeTabs>
+
 The code snippet above first ensures the existence of a table named `feature_flags` in the PostgreSQL database. Then, it inserts a feature flag named `fast_payments` with the value `true`, indicating that fast payment methods are enabled.
 
 ### READ and UPDATE the Feature Flags
 
 In the `feature_flags` directory, create a file named `get.server.ts` with the following code which will allow you to read the feature flag value in the database.
+
+<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+
+```tsx
+// File: src/lib/feature_flags/get.server.ts
+
+import sql from '../postgres.server'
+
+export const isEnabled = async (flagName: string): Promise<boolean> => {
+  const rows = await sql`SELECT enabled FROM feature_flags WHERE flagName = ${flagName}`
+  return rows[0].enabled
+}
+```
 
 ```tsx
 // File: src/lib/feature_flags/get.server.ts
@@ -206,9 +290,23 @@ export const isEnabled = async (flagName: string): Promise<boolean> => {
 }
 ```
 
+</CodeTabs>
+
 The `isEnabled` function queries the database to check whether a specific feature flag is enabled or not. In this example, you will use it to check if `fast_payments` feature flag is enabled or not.
 
 In the `feature_flags` directory, create a file named `set.server.ts` with the following code which will allow you to update the feature flag value in the database.
+
+<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+
+```tsx
+// File: src/lib/feature_flags/set.server.ts
+
+import sql from '../postgres.server'
+
+export const setEnabled = async (flagName: string, flagValue: boolean) => {
+  await sql`UPDATE feature_flags SET enabled = ${flagValue} WHERE flagName = ${flagName}`
+}
+```
 
 ```tsx
 // File: src/lib/feature_flags/set.server.ts
@@ -222,6 +320,8 @@ export const setEnabled = async (flagName: string, flagValue: boolean) => {
   })
 }
 ```
+
+</CodeTabs>
 
 The `setEnabled` function updates the value of a feature flag in the database. In this example, you will update the `fast_payments` feature dynamically per request to get a taste of how feature flags are used in production.
 
