@@ -8,7 +8,6 @@ The **Monitoring** dashboard in the Neon console provides several graphs for mon
 - [RAM](#ram)
 - [CPU](#cpu)
 - [Connections count](#connections-count)
-- [Buffer cache hit rate](#buffer-cache-hit-rate)
 - [Database size](#database-size)
 - [Deadlocks](#deadlocks)
 - [Rows](#rows)
@@ -19,7 +18,7 @@ Your Neon plan defines the range of data you can view.
 |-----------|--------------|
 | [Free Tier](/docs/introduction/plans#free-tier) | Last day (24 hours)     |
 | [Launch](/docs/introduction/plans#launch)      | Last 7 days (168 hours)    |
-| [Scale](/docs/introduction/plans#scale)     | Last 7 days (168 hours)     |
+| [Scale](/docs/introduction/plans#scale)     | Last 14 days (336 hours)     |
 
 A shorter or custom period can be selected within the permitted range by selecting the desired option from the **Other** menu on the dashboard.
 
@@ -77,11 +76,17 @@ The limit on the maximum number of simultaneous connections (defined by the Post
 
 ![Monitoring page connections graph](/docs/introduction/monitor_connections.jpg)
 
+{/* 
+
+- [Buffer cache hit rate](#buffer-cache-hit-rate)
+
 ### Buffer cache hit rate
 
 The **Buffer cache hit rate** graph shows the percentage of read requests served from memory &#8212; from Neon's Local File Cache (LFC). Queries not served from memory retrieve data from storage, which is more costly and can result in slower query performance. For OLTP workloads, you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio depends on your specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a lot of sequential scanning of large tables where caching might be less effective. To learn more, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
 
 ![Monitoring page cache hit rate graph](/docs/introduction/monitor_cache.jpg)
+
+ */}
 
 ### Database size
 
