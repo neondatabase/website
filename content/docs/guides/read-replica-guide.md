@@ -137,7 +137,8 @@ To edit a read-only compute endpoint using the Neon Console:
 1. Select a branch.
 1. Under **Computes**, identify the read-only compute endpoint you want to modify, click the compute endpoint menu, and select **Edit**.
 1. Specify your **Compute size** or **Suspend compute after a period of inactivity** changes and click **Save**.
-   </TabItem>
+
+</TabItem>
 
 <TabItem>
 In Neon, a read replica is implemented as a read-only compute endpoint. To edit a read-only compute endpoint with the Neon API, use the [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) method.
@@ -180,7 +181,8 @@ To delete a read replica using the Neon Console:
 1. Under **Computes**, find the read-only compute endpoint you want to delete. Read replicas have a `R/O` type.
 1. Click the compute endpoint kebab menu, and select **Delete**.
 1. On the confirmation dialog, click **Delete**.
-   </TabItem>
+
+</TabItem>
 
 <TabItem>
 In Neon, a read replica is implemented as a read-only compute endpoint. To delete a read-only compute endpoint with the Neon API, use the [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint) method.

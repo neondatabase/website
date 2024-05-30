@@ -20,7 +20,7 @@ To enable autoscaling when you first create your project:
 2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
 3. Specify a name, a Postgres version, and a region.
 4. Under **Compute size**, use the slider to specify a minimum and maximum compute size.
-![Autoscaling](/docs/guides/autoscaling_project_creation.png)
+   ![Autoscaling](/docs/guides/autoscaling_project_creation.png)
 
 <Admonition type="note">
 You can configure the autosuspend setting for your compute endpoint at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".
@@ -38,7 +38,7 @@ To configure autoscaling default settings for an existing project:
 1. On the Neon **Dashboard**, select **Project settings**.
 1. Select **Compute** and click **Change**.
 1. Under **Compute size**, use the slider to specify a minimum and maximum compute size.
-![Autoscaling](/docs/guides/autoscaling_existing_project.png)
+   ![Autoscaling](/docs/guides/autoscaling_existing_project.png)
 
 <Admonition type="note">
 You can configure the autosuspend setting for your compute endpoint at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".

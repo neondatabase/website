@@ -81,7 +81,8 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 
 1. Use the Date & Time selector to choose a point within your history retention window.
 1. Write your read-only query in the editor, then click **Run**. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
-   </TabItem>
+
+</TabItem>
 
 <TabItem>
 
