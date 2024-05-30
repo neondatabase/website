@@ -8,36 +8,30 @@ import CodeTabsNavigation from './code-tabs-navigation';
 const codeSnippets = [
   {
     name: 'macOS',
-    iconName: 'ruby',
-    language: 'bash',
-    code: `
-      brew install neonctl
-      neonctl auth
-      neonctl branches create --name dev/daniel
-      neonctl branches list
-    `,
+    iconName: 'macos',
+    language: 'plain',
+    code: `brew install neonctl
+neonctl auth
+neonctl branches create --name dev/daniel
+neonctl branches list`,
   },
   {
     name: 'Windows',
-    iconName: 'php',
-    language: 'bash',
-    code: `
-      npm install -g neonctl
-      neonctl auth
-      neonctl branches create --name dev/daniel
-      neonctl branches list
-    `,
+    iconName: 'windows',
+    language: 'plain',
+    code: `npm install -g neonctl
+neonctl auth
+neonctl branches create --name dev/daniel
+neonctl branches list`,
   },
   {
     name: 'Linux',
-    iconName: 'javascript',
-    language: 'bash',
-    code: `
-      npm install -g neonctl
-      neonctl auth
-      neonctl branches create --name dev/daniel
-      neonctl branches list
-    `,
+    iconName: 'linux',
+    language: 'plain',
+    code: `npm install -g neonctl
+neonctl auth
+neonctl branches create --name dev/daniel
+neonctl branches list`,
   },
 ];
 

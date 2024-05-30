@@ -6,17 +6,16 @@ import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-import BashIcon from 'components/pages/partners/integration/images/bash.inline.svg';
-import JavascriptIcon from 'components/pages/partners/integration/images/javascript.inline.svg';
-import PHPIcon from 'components/pages/partners/integration/images/php.inline.svg';
-import RubyIcon from 'components/pages/partners/integration/images/ruby.inline.svg';
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 
+import LinuxIcon from './images/linux.inline.svg';
+import MacOSIcon from './images/macos.inline.svg';
+import WindowsIcon from './images/windows.inline.svg';
+
 const icons = {
-  javascript: JavascriptIcon,
-  ruby: RubyIcon,
-  php: PHPIcon,
-  bash: BashIcon,
+  linux: LinuxIcon,
+  macos: MacOSIcon,
+  windows: WindowsIcon,
 };
 
 const CodeTabsNavigation = ({ codeSnippets, highlightedCodeSnippets }) => {
@@ -45,7 +44,7 @@ const CodeTabsNavigation = ({ codeSnippets, highlightedCodeSnippets }) => {
           );
         })}
       </div>
-      <div className="h-[401px] lg:h-[386px]">
+      <div className="h-[138px]">
         <LazyMotion features={domAnimation}>
           <AnimatePresence initial={false} mode="wait">
             {highlightedCodeSnippets.map(
@@ -58,7 +57,7 @@ const CodeTabsNavigation = ({ codeSnippets, highlightedCodeSnippets }) => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <CodeBlockWrapper className="h-[132px] [&_[data-line]]:text-[15px]">
+                    <CodeBlockWrapper className="highlighted-code h-[138px] [&_[data-line]]:text-[15px]">
                       {parse(code)}
                     </CodeBlockWrapper>
                   </m.div>

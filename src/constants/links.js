@@ -12,6 +12,7 @@ export default {
   caseStudies: '/case-studies',
   changelog: '/docs/changelog',
   cli: '/cli',
+  cliInstall: '/docs/reference/cli-install',
   cliReference: '/docs/reference/neon-cli',
   console: 'https://console.neon.tech',
   contactSales: '/contact-sales',

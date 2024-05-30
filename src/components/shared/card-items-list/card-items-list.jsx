@@ -50,7 +50,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
       )}
       aria-hidden={ariaHidden}
     >
-      {items.map(({ icon, title, description, url, isDisabled }, index) => (
+      {items.map(({ icon, title, description, linkText = null, url, isDisabled }, index) => (
         <li className="relative" key={index}>
           <Link
             className={clsx(
@@ -109,7 +109,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
               {isLarge && !isDisabled && (
                 <div className="mt-auto inline-flex items-baseline text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
                   <span className="text-[15px] leading-none tracking-extra-tight">
-                    View example
+                    {linkText || 'View example'}
                   </span>
                   <ArrowIcon className="ml-1 shrink-0" />
                 </div>
@@ -148,6 +148,7 @@ CardItemsList.propTypes = {
       icon: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
+      linkText: PropTypes.string,
       url: PropTypes.string.isRequired,
     })
   ).isRequired,

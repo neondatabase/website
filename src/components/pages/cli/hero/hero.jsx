@@ -6,10 +6,10 @@ import LINKS from 'constants/links';
 import CodeTabs from './code-tabs';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative overflow-hidden pb-32 pt-[306px] xl:pb-24 xl:pt-[239px] lg:pb-20 lg:pt-[194px] md:pb-14 md:pt-[164px]">
+  <section className="hero safe-paddings relative overflow-hidden pb-[80px] pt-[152px] md:pb-16 md:pt-32 sm:pb-10 sm:pt-20">
     <Container className="relative z-10 flex flex-col items-center" size="medium">
       <div className="absolute left-1/2 top-0 -z-10 h-[270px] w-3/4 -translate-x-1/2 rounded-[1000px] bg-black-pure blur-[30px] lg:w-full" />
-      <h1 className="mx-auto text-center font-title text-6xl font-medium leading-none tracking-[-0.02em] xl:text-[56px] lg:text-5xl md:text-4xl sm:text-[36px]">
+      <h1 className="xs:flat-breaks mx-auto text-center font-title text-6xl font-medium leading-none tracking-[-0.02em] xl:text-[56px] lg:text-5xl md:text-4xl sm:text-[36px]">
         Your Neon workflow lives
         <br />
         <span className="text-green-45">in the terminal</span>
@@ -18,7 +18,7 @@ const Hero = () => (
         The Neon CLI brings serverless Postgres to your terminal.
       </p>
       <AnimatedButton
-        className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-[-0.02em] lg:mt-7 md:mt-6"
+        className="relative mt-12 px-8 py-[17px] text-lg font-semibold tracking-[-0.02em] lg:mt-7 md:mt-6"
         theme="primary"
         to={LINKS.cliReference}
         linesOffsetTop={22}
@@ -28,9 +28,9 @@ const Hero = () => (
       >
         View setup instructions
       </AnimatedButton>
-      <CodeTabs className="mt-[60px]" />
+      <CodeTabs className="mt-[60px] w-[640px] sm:w-full" />
       <Link
-        className="mt-[18px] flex items-center text-[15px] leading-none tracking-extra-tight md:mt-2"
+        className="mt-[18px] flex items-center text-[15px] leading-none tracking-extra-tight"
         to={LINKS.cliReference}
         theme="green"
         withArrow
