@@ -224,7 +224,7 @@ Indexing `JSON` documents can also significantly improve `json_extract_path` que
 
 - `jsonb_extract_path` - The `jsonb_extract_path` function works with the `jsonb` data type, which offers a binary representation of `JSON` data. This alternative function is generally faster than `json_extract_path` for most operations, as it's optimized for the binary `jsonb` format. This difference in performance is often more pronounced with larger `JSON` structures and frequent path extractions.
 
-{/\*
+{/*
 This example does not work. It returns empty values.
 
 ### Invalid paths
@@ -248,7 +248,7 @@ The query above, which specifies an invalid path (`'speks'` instead of `'specs'`
 |  3 |   (null)     |
 ```
 
-\*/}
+*/}
 
 ## Resources
 

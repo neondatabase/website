@@ -78,7 +78,7 @@ See [SELECT](https://www.postgresql.org/docs/current/sql-select.html) for more i
 
 These Postgres `WHERE` clause examples showcase various filtering scenarios.
 
-{/\*
+{/*
 
 CREATE TABLE orders (
 order_id SERIAL PRIMARY KEY,
@@ -149,7 +149,7 @@ INSERT INTO users (username, last_login) VALUES
 ('dana', '2023-01-01'),
 ('pat', NULL);
 
-\*/}
+*/}
 
 ```sql
 -- Filter by an exact match
@@ -183,7 +183,7 @@ See [WHERE clause](https://www.postgresql.org/docs/7.1/queries.html#QUERIES-WHER
 
 These sorting examples demonstrate various ways to order your query results.
 
-{/\*
+{/*
 
 CREATE TABLE orders (
 order_id SERIAL PRIMARY KEY,
@@ -219,7 +219,7 @@ INSERT INTO tasks (description, due_date) VALUES
 ('Prepare for presentation', NULL),
 ('Update website', '2023-03-25');
 
-\*/}
+*/}
 
 ```sql
 -- Sort results in ascending order by a single column
@@ -251,7 +251,7 @@ For additional information, see [Sorting Rows](https://www.postgresql.org/docs/c
 
 These examples illustrate different ways to join tables in Postgres for queries involving data that spans multiple tables.
 
-{/\*
+{/*
 
 CREATE TABLE employees (
 id SERIAL PRIMARY KEY,
@@ -322,7 +322,7 @@ SELECT employees.name, departments.name AS department_name
 FROM employees
 JOIN departments USING(department_id);
 
-\*/}
+*/}
 
 ```sql
 -- INNER JOIN to select rows that have matching values in both tables
@@ -373,7 +373,7 @@ For additional examples and information, see [Joins between tables](https://www.
 
 Transactions in Postgres ensure that a sequence of operations is executed as a single unit of work, either completely succeeding or failing together. Here are basic examples demonstrating how to use transactions in Postgres:
 
-{/\*
+{/*
 
 CREATE TABLE accounts (
 account_id SERIAL PRIMARY KEY,
@@ -386,7 +386,7 @@ INSERT INTO accounts (user_id, balance) VALUES
 (2, 500), -- Initial balance for user 2
 (3, 200); -- Initial balance for user 3
 
-\*/}
+*/}
 
 ```sql
 -- Start a transaction
@@ -431,7 +431,7 @@ For additional information, see [Transactions](https://www.postgresql.org/docs/c
 
 Creating and managing indexes is crucial for improving query performance in Postgres. Here are some basic examples of how to work with indexes:
 
-{/\*
+{/*
 
 CREATE TABLE users (
 user_id SERIAL PRIMARY KEY,
@@ -457,7 +457,7 @@ INSERT INTO events (name, event_date) VALUES
 ('Product Launch', '2023-05-15'),
 ('Annual Meeting', '2023-12-20');
 
-\*/}
+*/}
 
 ```sql
 -- Create a basic index on a single column
@@ -494,7 +494,7 @@ For more information about indexes in Postgres, see [Indexes](https://www.postgr
 
 These examples demonstrate how to work with views in Postgres, which can help simplify complex queries, provide a level of abstraction, or secure data access.
 
-{/\*
+{/*
 
 CREATE TABLE employees (
 employee_id SERIAL PRIMARY KEY,
@@ -513,7 +513,7 @@ INSERT INTO employees (name, department, position, active, hire_date, salary) VA
 ('Jim Brown', 'Engineering', 'DevOps Specialist', false, '2020-08-20', 95000.00),
 ('Emily White', 'Sales', 'Sales Representative', true, '2021-09-23', 65000.00);
 
-\*/}
+*/}
 
 ```sql
 -- Creating a view
@@ -561,7 +561,7 @@ For more information about views in Postgres, see [Views](https://www.postgresql
 
 Stored procedures in Postgres are used for performing actions that do not necessarily return a result set, such as modifying data or working with transaction control statements like `COMMIT` and `ROLLBACK`.
 
-{/\*
+{/*
 
 CREATE TABLE accounts (
 account_id SERIAL PRIMARY KEY,
@@ -572,7 +572,7 @@ INSERT INTO accounts (account_id, balance) VALUES
 (1, 1000.00),
 (2, 500.00);
 
-\*/}
+*/}
 
 ```sql
 -- Creating a stored procedure
@@ -602,7 +602,7 @@ For additional information and syntax, see [CREATE PROCEDURE](https://www.postgr
 
 Functions in Postgres can return a single value, a record, or a set of records.
 
-{/\*
+{/*
 
 CREATE TABLE employees (
 id SERIAL PRIMARY KEY,
@@ -616,7 +616,7 @@ INSERT INTO employees (name, department) VALUES
 ('Alice Johnson', 'Human Resources'),
 ('Bob Brown', 'Engineering');
 
-\*/}
+*/}
 
 ```sql
 -- Creating a simple function

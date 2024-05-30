@@ -194,11 +194,11 @@ monospace: `backtick`
 To comment out content in a markdown file use JSX comment tags. Other methods are not supported.
 
 ```md
-{/\*
+{/*
 
 content
 
-\*/}
+ */}
 ```
 
 ## Code blocks
