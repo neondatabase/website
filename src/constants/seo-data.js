@@ -49,6 +49,12 @@ export default {
     pathname: LINKS.caseStudies,
     imagePath: '/images/social-previews/case-studies.jpg',
   },
+  cli: {
+    title: 'Your Neon workflow lives in the terminal',
+    description: 'The Neon CLI brings serverless Postgres to your terminal.',
+    pathname: LINKS.cli,
+    imagePath: '/images/social-previews/cli.jpg',
+  },
   contactSales: {
     title: 'Contact Sales — Neon',
     description: 'Interested in learning more about our plans and pricing? Contact our sales team.',
