@@ -2,6 +2,8 @@ import 'styles/globals.css';
 
 import Script from 'next/script';
 
+import { ActiveLabelProvider } from '../components/pages/doc/code-tabs/CodeTabsContext';
+
 import { inter, esbuild } from './fonts';
 import ThemeProvider from './provider';
 
@@ -24,7 +26,9 @@ const RootLayout = ({ children }) => (
       <link rel="preconnect" href="https://console.neon.tech" />
     </head>
     <body>
-      <ThemeProvider>{children}</ThemeProvider>
+      <ThemeProvider>
+        <ActiveLabelProvider>{children}</ActiveLabelProvider>
+      </ThemeProvider>
     </body>
   </html>
 );
