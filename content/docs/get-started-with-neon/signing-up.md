@@ -23,8 +23,8 @@ After signing up, you'll start with a `main` branch and the empty database `neon
 
 ## Step 1 - Sign up
 
-<div style={{ display: 'flex' }}>
-  <div style={{ flex: '0 0 60%', paddingRight: '20px' }}>
+<div className="flex gap-5 sm:flex-col">
+  <div style={{ flex: '0 0 60%' }}>
     If you haven't signed up yet, you can sign up for free here:
 
     [https://console.neon.tech/signup](https://console.neon.tech/signup)
@@ -35,9 +35,9 @@ After signing up, you'll start with a `main` branch and the empty database `neon
     [Neon Free Tier](/docs/introduction/plans#free-tier). For information about Neon's paid options, see
     [Neon Plans](/docs/introduction/plans).
   </div>
-<div style={{ flex: '0 0 40%', display: 'flex', alignItems: 'center' }}>
-    <img src="/docs/get-started-with-neon/sign_up_reduced.png" alt="sign up" style={{ marginTop: '0.75rem' }} />
-</div>
+  <div style={{ flex: '1 1 0', marginTop: '-1.25rem' }}>
+    ![sign_up](/docs/get-started-with-neon/sign_up_reduced.png "no-border")
+  </div>
 </div>
 
 ## Step 2 - Onboarding in the Neon Console
@@ -46,11 +46,11 @@ After you sign up, you are guided through some onboarding steps that ask you to 
 
 <div style={{ display: 'flex' }}>
   <div style={{ flex: '0 0 45%', paddingRight: '20px', marginTop: '.75em'}}>
-  ![onboarding](/docs/get-started-with-neon/onboarding.png "no-border")
+    ![onboarding](/docs/get-started-with-neon/onboarding.png "no-border")
   </div>
-<div style={{ flex: '0 0 55%', display: 'flex', alignItems: 'center' }}>
-  ![quickstart](/docs/get-started-with-neon/quickstart.png "no-border")
-</div>
+  <div style={{ flex: '0 0 55%', display: 'flex', alignItems: 'center' }}>
+    ![quickstart](/docs/get-started-with-neon/quickstart.png "no-border")
+  </div>
 </div>
 
 The steps should be self-explanatory, but it's important to understand a few key points:

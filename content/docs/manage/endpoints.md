@@ -125,7 +125,7 @@ The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_
 | 5                 | 5    | 20 GB | 16 GB    | 2253            |
 | 6                 | 6    | 24 GB | 19.2 GB  | 2703            |
 | 7                 | 7    | 28 GB | 22.4 GB  | 3154            |
-| 8                 | 8    | 32 GB | 25.6 GB  | 3,604           |
+| 8                 | 8    | 32 GB | 25.6 GB  | 3604            |
 
 <Admonition type="note">
 Users on paid plans can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
