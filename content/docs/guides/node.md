@@ -42,7 +42,11 @@ If you do not have one already, create a Neon project.
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs labels={["node-postgres", "postgres.js"]}>
+    <CodeTabs labels={["Neon serverless driver", "node-postgres", "postgres.js"]}>
+
+      ```shell
+      npm install @neondatabase/serverless dotenv
+      ```
 
       ```shell
       npm install pg dotenv
@@ -78,11 +82,28 @@ To ensure the security of your data, never expose your Neon credentials to the b
 
 Add an `app.js` file to your project directory and add the following code snippet to connect to your Neon database:
   
-<CodeTabs labels={["node-postgres", "postgres.js"]}>
+<CodeTabs labels={["Neon serverless driver", "node-postgres", "postgres.js"]}>
 
   ```javascript
-  const { Pool } = require('pg');
   require('dotenv').config();
+
+  const { neon } = require('@neondatabase/serverless');
+
+  const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+  const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`)
+
+  async function getPgVersion() {
+      const result = await sql`SELECT version()`l
+      console.log(result[0]);
+  }
+
+  getPgVersion();
+  ```
+
+  ```javascript
+  require('dotenv').config();
+
+  const { Pool } = require('pg');
 
   let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
@@ -111,8 +132,9 @@ Add an `app.js` file to your project directory and add the following code snippe
   ```
 
   ```javascript
-  const postgres = require('postgres');
   require('dotenv').config();
+
+  const postgres = require('postgres');
 
   let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
