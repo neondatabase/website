@@ -69,6 +69,8 @@ DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=requi
 
 Add a `neon-connect.py` file to your project's root directory and add the following code. The script connects to your Neon database and retrieves the current time and Postgres version.
 
+<CodeTabs labels={["synchronous", "asynchronous"]}>
+
 ```python
 import os
 import psycopg2
@@ -101,6 +103,39 @@ conn.close()
 print('Current time:', time)
 print('PostgreSQL version:', version)
 ```
+
+```python
+import os
+import asyncio
+import asyncpg
+from dotenv import load_dotenv
+
+async def main():
+   # Load .env file
+   load_dotenv()
+
+   # Get the connection string from the environment variable
+   connection_string = os.getenv('DATABASE_URL')
+
+   # Connect to the Postgres database
+   conn = await asyncpg.connect(connection_string)
+
+   # Execute SQL commands to retrieve the current time and version from PostgreSQL
+   time = await conn.fetchval('SELECT NOW();')
+   version = await conn.fetchval('SELECT version();')
+
+   # Close the connection
+   await conn.close()
+
+   # Print the results
+   print('Current time:', time)
+   print('PostgreSQL version:', version)
+
+# Run the asynchronous main function
+asyncio.run(main())
+```
+
+</CodeTabs>
 
 ## Test your connection
 
