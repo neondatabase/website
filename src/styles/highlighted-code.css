@@ -109,12 +109,17 @@
       }
     }
   }
-}
 
-.diff.add {
-  background-color: #dcffd199;
-}
+  .has-diff code .line {
+    @apply pl-6;
 
-.diff.remove {
-  background-color: #ffd1d199;
+    &.diff {
+      &.add {
+        @apply bg-code-green-1/10 before:absolute before:left-2 before:text-code-green-1 before:content-['+'];
+      }
+      &.remove {
+        @apply bg-code-red-1/10 before:absolute before:left-2 before:text-code-red-1/50 before:content-['—'];
+      }
+    }
+  }
 }
