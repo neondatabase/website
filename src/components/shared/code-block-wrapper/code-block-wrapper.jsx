@@ -18,7 +18,7 @@ function extractTextFromNode(node) {
   if (typeof node === 'object' && node.props && node.props.children) {
     // Skip removed lines of code from differences
     if (node.props.className?.includes('remove')) {
-      return '';
+      return '__line_removed_in_code__';
     }
 
     let text = '';
@@ -49,7 +49,7 @@ const CodeBlockWrapper = ({
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
-  const code = extractTextFromNode(children);
+  const code = extractTextFromNode(children).replace(/\n__line_removed_in_code__/g, "");
 
   return (
     <Tag className={clsx('code-block group relative', className)} {...otherProps}>
