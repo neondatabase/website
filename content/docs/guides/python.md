@@ -47,11 +47,19 @@ The project is created with a ready-to-use `neondb` database, which you will con
    source env/bin/activate
    ```
 
-4. Install `psycopg2` and `python-dotenv` in your project's root directory. You can install them using `pip`:
+4. Install the following dependencies in your project's root directory for synchronous and asynchronous code, respectively. You can install them using `pip`:
+
+<CodeTabs labels={["synchronous", "asynchronous"]}>
 
     ```bash
     pip install psycopg2-binary python-dotenv
     ```
+
+    ```bash
+    pip install asyncpg python-dotenv
+    ```
+    
+</CodeTabs>
 
 ## Store your Neon credentials
 
@@ -69,9 +77,11 @@ DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=requi
 
 Add a `neon-connect.py` file to your project's root directory and add the following code. The script connects to your Neon database and retrieves the current time and Postgres version.
 
+<CodeTabs labels={["synchronous", "asynchronous"]}>
+
 ```python
 import os
-import psycopg2
+from psycopg2 import pool
 from dotenv import load_dotenv
 
 # Load .env file
@@ -80,8 +90,19 @@ load_dotenv()
 # Get the connection string from the environment variable
 connection_string = os.getenv('DATABASE_URL')
 
-# Connect to the Postgres database
-conn = psycopg2.connect(connection_string)
+# Create a connection pool
+connection_pool = pool.SimpleConnectionPool(
+    1,  # Minimum number of connections in the pool
+    10,  # Maximum number of connections in the pool
+    connection_string
+)
+
+# Check if the pool was created successfully
+if connection_pool:
+    print("Connection pool created successfully")
+
+# Get a connection from the pool
+conn = connection_pool.getconn()
 
 # Create a cursor object
 cur = conn.cursor()
@@ -93,14 +114,52 @@ time = cur.fetchone()[0]
 cur.execute('SELECT version();')
 version = cur.fetchone()[0]
 
-# Close the cursor and connection
+# Close the cursor and return the connection to the pool
 cur.close()
-conn.close()
+connection_pool.putconn(conn)
+
+# Close all connections in the pool
+connection_pool.closeall()
 
 # Print the results
 print('Current time:', time)
 print('PostgreSQL version:', version)
 ```
+
+```python
+import os
+import asyncio
+import asyncpg
+from dotenv import load_dotenv
+
+async def main():
+    # Load .env file
+    load_dotenv()
+
+    # Get the connection string from the environment variable
+    connection_string = os.getenv('DATABASE_URL')
+
+    # Create a connection pool
+    pool = await asyncpg.create_pool(connection_string)
+
+    # Acquire a connection from the pool
+    async with pool.acquire() as conn:
+        # Execute SQL commands to retrieve the current time and version from PostgreSQL
+        time = await conn.fetchval('SELECT NOW();')
+        version = await conn.fetchval('SELECT version();')
+
+    # Close the pool
+    await pool.close()
+
+    # Print the results
+    print('Current time:', time)
+    print('PostgreSQL version:', version)
+
+# Run the asynchronous main function
+asyncio.run(main())
+```
+
+</CodeTabs>
 
 ## Test your connection
 
