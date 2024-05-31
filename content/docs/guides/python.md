@@ -47,11 +47,19 @@ The project is created with a ready-to-use `neondb` database, which you will con
    source env/bin/activate
    ```
 
-4. Install `psycopg2` and `python-dotenv` in your project's root directory. You can install them using `pip`:
+4. Install the following dependencies in your project's root directory for synchronous and asynchronous code. You can install them using `pip`:
+
+<CodeTabs labels={["synchronous", "asynchronous"]}>
 
     ```bash
     pip install psycopg2-binary python-dotenv
     ```
+
+    ```bash
+    pip install asyncpg python-dotenv
+    ```
+    
+</CodeTabs>
 
 ## Store your Neon credentials
 
