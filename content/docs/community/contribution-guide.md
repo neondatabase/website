@@ -191,15 +191,28 @@ monospace: `backtick`
 
 ## Comment tags
 
-To comment out content in a markdown file use JSX comment tags. Other methods are not supported.
+To comment out content in a markdown file use this construction:
+
+```md
+[comment]: <> (Single line comment.)
+
+[comment]: <> (
+Multiline comment.
+You can't use line breaks or () parentheses here.
+)
+```
+
+If you need to comment out more complicated blocks of code you can use JSX-style comments:
 
 ```md
 {/*
 
-content
+  content
 
- */}
+*/}
 ```
+
+Unfortunately, JSX-style comments have problems with Prettier, so in case of using them you should add your file to [.prettierignore](https://github.com/neondatabase/website/blob/main/.prettierignore).
 
 ## Code blocks
 
@@ -293,13 +306,13 @@ Example file structure:
 ```md
 ├── content
 │ ├── docs
-│ ├── introduction
-│ ├── architecture-overview.md
+│ │ ├── introduction
+│ │ │ ├── architecture-overview.md
 
 ├── public
 │ ├── docs
-│ ├── introduction
-│ ├── neon_architecture.png // put images in the public directory with the same name
+│ │ ├── introduction
+│ │ │ ├── neon_architecture.png // put images in the public directory with the same name
 ```
 
 To add an image to your Markdown file, add an entry that looks like this:
