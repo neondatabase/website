@@ -418,12 +418,12 @@ Example file structure:
 ```md
 ├── public
 │ ├── docs
-│ ├── conceptual-guides
-│ ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
+│ │ ├── conceptual-guides
+│ │ ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
 ├── content
 │ ├── docs
-│ ├── conceptual-guides
-│ ├── architecture-overview.md
+│ │ ├── conceptual-guides
+│ │ ├── architecture-overview.md
 ```
 
 To display images using Markdown syntax, use the following syntax: `![alt text](image url)`. Example content in `architecture-overview.md`:

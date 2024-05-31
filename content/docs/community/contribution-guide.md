@@ -57,19 +57,19 @@ Please reach out to us on our [Discord Server](https://discord.gg/92vNTzKDGp) if
 The Neon documentation file structure reflects the navigation you see on the website. However, the order of the directories under `/content/docs/` is alphabetical.
 
 ```text
-├── content
-   └── docs
-       ├── ai
-       ├── community
-       ├── connect
-       ├── extensions
-       ├── get-started-with-neon
-       ├── guides
-       ├── introduction
-       ├── manage
-       ├── reference
-       ├── security
-       ├── serverless
+└── content
+  └── docs
+    ├── ai
+    ├── community
+    ├── connect
+    ├── extensions
+    ├── get-started-with-neon
+    ├── guides
+    ├── introduction
+    ├── manage
+    ├── reference
+    ├── security
+    └── serverless
 ```
 
 - Every Markdown file in the `/docs` folder becomes a documentation page unless it's defined with an `isDraft: true` property in the page [frontmatter](#markdown-frontmatter).
@@ -205,11 +205,11 @@ You can't use line breaks or () parentheses here.
 If you need to comment out more complicated blocks of code you can use JSX-style comments:
 
 ```md
-{/*
+{/\*
 
-  content
+content
 
-*/}
+\*/}
 ```
 
 Unfortunately, JSX-style comments have problems with Prettier, so in case of using them you should add your file to [.prettierignore](https://github.com/neondatabase/website/blob/main/.prettierignore).
