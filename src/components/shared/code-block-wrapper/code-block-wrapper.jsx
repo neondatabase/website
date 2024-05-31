@@ -16,6 +16,11 @@ function extractTextFromNode(node) {
 
   // Check if the node is an object and has the required properties.
   if (typeof node === 'object' && node.props && node.props.children) {
+    // Skip removed lines of code from differences
+    if (node.props.className?.includes('remove')) {
+      return '';
+    }
+
     let text = '';
 
     // If the children are in an array, loop through them.
@@ -51,7 +56,7 @@ const CodeBlockWrapper = ({
       {children}
       <button
         className={clsx(
-          'invisible absolute right-2 top-2 rounded p-1.5 text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-gray-new-10 dark:text-gray-8 lg:visible lg:opacity-100',
+          'invisible absolute right-2 top-2 rounded border border-gray-7 bg-gray-9 p-1.5  text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-white group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-gray-new-10 dark:text-gray-8 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
           copyButtonClassName
         )}
         type="button"
