@@ -82,6 +82,7 @@ Add a `neon-connect.py` file to your project's root directory and add the follow
 ```python
 import os
 import psycopg2
+from psycopg2 import pool
 from dotenv import load_dotenv
 
 # Load .env file
@@ -90,8 +91,19 @@ load_dotenv()
 # Get the connection string from the environment variable
 connection_string = os.getenv('DATABASE_URL')
 
-# Connect to the Postgres database
-conn = psycopg2.connect(connection_string)
+# Create a connection pool
+connection_pool = psycopg2.pool.SimpleConnectionPool(
+    1,  # Minimum number of connections in the pool
+    10,  # Maximum number of connections in the pool
+    connection_string
+)
+
+# Check if the pool was created successfully
+if connection_pool:
+    print("Connection pool created successfully")
+
+# Get a connection from the pool
+conn = connection_pool.getconn()
 
 # Create a cursor object
 cur = conn.cursor()
@@ -103,9 +115,12 @@ time = cur.fetchone()[0]
 cur.execute('SELECT version();')
 version = cur.fetchone()[0]
 
-# Close the cursor and connection
+# Close the cursor and return the connection to the pool
 cur.close()
-conn.close()
+connection_pool.putconn(conn)
+
+# Close all connections in the pool
+connection_pool.closeall()
 
 # Print the results
 print('Current time:', time)
