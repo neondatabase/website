@@ -205,11 +205,11 @@ You can't use line breaks or () parentheses here.
 If you need to comment out more complicated blocks of code you can use JSX-style comments:
 
 ```md
-{/\*
+{/*
 
 content
 
-\*/}
+*/}
 ```
 
 Unfortunately, JSX-style comments have problems with Prettier, so in case of using them you should add your file to [.prettierignore](https://github.com/neondatabase/website/blob/main/.prettierignore).
