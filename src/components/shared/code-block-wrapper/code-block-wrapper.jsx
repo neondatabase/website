@@ -49,7 +49,7 @@ const CodeBlockWrapper = ({
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
-  const code = extractTextFromNode(children).replace(/\n__line_removed_in_code__/g, "");
+  const code = extractTextFromNode(children).replace(/(\n)?__line_removed_in_code__(\n)?/g, "");
 
   return (
     <Tag className={clsx('code-block group relative', className)} {...otherProps}>
