@@ -81,7 +81,6 @@ Add a `neon-connect.py` file to your project's root directory and add the follow
 
 ```python
 import os
-import psycopg2
 from psycopg2 import pool
 from dotenv import load_dotenv
 
@@ -92,7 +91,7 @@ load_dotenv()
 connection_string = os.getenv('DATABASE_URL')
 
 # Create a connection pool
-connection_pool = psycopg2.pool.SimpleConnectionPool(
+connection_pool = pool.SimpleConnectionPool(
     1,  # Minimum number of connections in the pool
     10,  # Maximum number of connections in the pool
     connection_string
