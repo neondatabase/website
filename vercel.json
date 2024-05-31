@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/regional-latency/:asset*", "destination": "https://latencies-ui.vercel.app/:asset*" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
