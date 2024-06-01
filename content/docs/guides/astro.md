@@ -78,12 +78,13 @@ let data = null;
 
 try {
   const response = await client.query('SELECT version()');
-  console.log(response.rows[0]);
-  data = response.rows[0]
+  data = response.rows[0].version;
 } finally {
   client.release();
 }
 ---
+
+{data}
 ```
 
 ```astro
@@ -93,8 +94,10 @@ import postgres from 'postgres';
 const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
 
 const response = await sql`SELECT version()`;
-console.log(response);
+const data = response[0].version;
 ---
+
+{data}
 ```
 
 ```astro
@@ -104,8 +107,9 @@ import { neon } from '@neondatabase/serverless';
 const sql = neon(import.meta.env.DATABASE_URL);
 
 const response = await sql`SELECT version()`;
-console.log(response);
 ---
+
+{data}
 ```
 
 </CodeTabs>
@@ -129,7 +133,6 @@ export async function GET() {
   let data = {};
   try {
     const response = await client.query('SELECT version()');
-    console.log(response.rows[0]);
     data = response.rows[0];
   } finally {
     client.release();
