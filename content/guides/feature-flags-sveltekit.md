@@ -14,7 +14,7 @@ This guide covers the step-by-step process of integrating feature flags in Svelt
 To follow the steps in this guide, you will need the following:
 
 - [Node.js 18](https://nodejs.org/en/blog/announcements/v18-release-announce) or later
-- A [Neon](https://console.neon.tech/signup) account – The feature flags will be defined (or mutated) in a Serverless Postgres
+- A [Neon](https://console.neon.tech/signup) account – The feature flags will be defined (or mutated) in a  Postgres database
 
 ## Steps
 
