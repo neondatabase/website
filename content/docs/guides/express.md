@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-06-01T15:20:54.286Z'
 ---
 
-This guide describes how to create a Neon project and connect to it from an Express application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
+This guide describes how to create a Neon project and connect to it from an Express application. Examples are provided for using the [Neon serverless driver](https://npmjs.com/package/@neondatabase/serverless), [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
 
 To connect to Neon from an Express application:
 
