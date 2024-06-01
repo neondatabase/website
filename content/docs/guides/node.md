@@ -201,6 +201,14 @@ async function getPgVersion() {
 getPgVersion();
 ```
 
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/with-nodejs" description="Get started with Node.js and Neon" icon="github">Get started with Node.js and Neon</a>
+</DetailIconCards>
+
 ## Community resources
 
 - [Serverless Node.js Tutorial – Neon Serverless Postgres, AWS Lambda, Next.js, Vercel](https://youtu.be/cxgAN7T3rq8)
