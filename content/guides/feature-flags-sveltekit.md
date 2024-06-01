@@ -117,7 +117,7 @@ The development-specific libraries include:
 
 ```markdown
 - `@types/pg`: Type definitions for pg.
-- `tsx`: To execute and rebuild TypeScript efficiently.
+- `tsx`: A library for executing and rebuilding TypeScript efficiently.
 - `dotenv`: A library for handling environment variables.
 ```
 
