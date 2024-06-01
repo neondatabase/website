@@ -208,7 +208,7 @@ export default new pg.Pool({ connectionString })
 
 </CodeTabs>
 
-The code above starts with importing the Postgres client. It further imports the config module by `dotenv` that makes sure that all environment variables are populated in application environment. It then creates a new instance of a PostgreSQL connection pool.
+The code above starts with importing the Postgres client. It further imports the config module by `dotenv` that makes sure that all environment variables are populated in application environment. It then creates a new instance of a Postgres connection pool.
 
 To create, read or update the feature flags from your SvelteKit application, you can use re-usable helper functions. Let's create a new directory by executing the following command in your terminal window to start creating those functions:
 
