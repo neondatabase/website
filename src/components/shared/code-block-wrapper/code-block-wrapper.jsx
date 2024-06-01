@@ -15,29 +15,28 @@ function extractTextFromNode(node) {
   }
 
   // Check if the node is an object and has the required properties.
-  if (typeof node === 'object' && node.props && node.props.children) {
-    // Skip removed lines of code from differences
-    if (node.props.className?.includes('remove')) {
-      return '__line_removed_in_code__';
-    }
-
-    let text = '';
-
-    // If the children are in an array, loop through them.
-    if (Array.isArray(node.props.children)) {
-      node.props.children.forEach((child) => {
-        text += extractTextFromNode(child);
-      });
-    } else {
-      // If there's only one child, process that child directly.
-      text = extractTextFromNode(node.props.children);
-    }
-
-    return text;
+  if (typeof node !== 'object' || !node.props || !node.props.children) {
+    return '';
   }
 
-  // If the node doesn't match the expected structure, return an empty string.
-  return '';
+  // Skip removed lines of code from differences
+  if (node.props.className?.includes('remove')) {
+    return '__line_removed_in_code__';
+  }
+
+  let text = '';
+
+  // If the children are in an array, loop through them.
+  if (Array.isArray(node.props.children)) {
+    node.props.children.forEach((child) => {
+      text += extractTextFromNode(child);
+    });
+  } else {
+    // If there's only one child, process that child directly.
+    text = extractTextFromNode(node.props.children);
+  }
+
+  return text;
 }
 
 const CodeBlockWrapper = ({
@@ -49,7 +48,7 @@ const CodeBlockWrapper = ({
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
-  const code = extractTextFromNode(children).replace(/(\n)?__line_removed_in_code__(\n)?/g, "");
+  const code = extractTextFromNode(children).replace(/(\n)?__line_removed_in_code__(\n)?/g, '');
 
   return (
     <Tag
