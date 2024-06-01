@@ -101,7 +101,7 @@ The libraries installed include:
 ```
 
 ```markdown
-- `pg`: A PostgreSQL client for Node.js.
+- `pg`: A Postgres client for Node.js.
 ```
 
 </CodeTabs>
