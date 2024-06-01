@@ -97,7 +97,7 @@ The libraries installed include:
 <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 
 ```markdown
-- `@neondatabase/serverless`: Neon's PostgreSQL driver for JavaScript and TypeScript.
+- `@neondatabase/serverless`: Neon's serverless Postgres driver for JavaScript and TypeScript.
 ```
 
 ```markdown
