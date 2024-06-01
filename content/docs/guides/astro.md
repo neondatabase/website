@@ -182,5 +182,16 @@ Result(1) [
 ]
 ```
 
+## Source code
+
+You can find the source code for the applications described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/with-astro" description="Get started with Astro and Neon" icon="github">Get started with Astro and Neon</a>
+</DetailIconCards>
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/with-astro-api-routes" description="Get started with Astro API Routes and Neon" icon="github">Get started with Astro API Routes and Neon</a>
+</DetailIconCards>
 
 <NeedHelp/>
