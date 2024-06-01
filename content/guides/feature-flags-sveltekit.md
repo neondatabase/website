@@ -20,7 +20,7 @@ To follow the steps in this guide, you will need the following:
 
 - [Provisioning a Postgres database powered by Neon](#provisioning-a-postgres-database-powered-by-neon)
 - [Creating a new SvelteKit application](#creating-a-new-sveltekit-application)
-- [(Optional) Add Tailwind CSS to the application](#optional-add-tailwind-css-to-the-application)
+- [(Optional) Adding Tailwind CSS to the application](#optional-adding-tailwind-css-to-the-application)
 - [Managing Feature Flags in Serverless Postgres](#managing-feature-flags-in-serverless-postgres)
 - [Dynamic Feature Flag Integration for Testing Fast Payment Methods](#dynamic-feature-flag-integration-for-testing-fast-payment-methods)
 
