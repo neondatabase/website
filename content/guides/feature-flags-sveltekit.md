@@ -132,7 +132,7 @@ npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
 
-Create an `app.css` file in the `src` directory, and add the snippet below in it:
+Create an `app.css` file in the `src` directory, and add the snippet below:
 
 ```css
 @tailwind base;
