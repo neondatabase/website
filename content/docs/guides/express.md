@@ -94,14 +94,13 @@ Add an `index.js` file to your project directory and add the following code snip
   ```javascript
   require('dotenv').config();
 
+  const { Pool } = require('pg');
   const express = require("express");
-  const { neon } = require('@neondatabase/serverless');
 
   const app = express();
   const PORT = process.env.PORT || 4242;
 
   app.get("/", async (_, res) => {
-    const { Pool } = require('pg');
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL
     });
