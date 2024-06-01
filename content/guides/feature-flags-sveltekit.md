@@ -111,7 +111,7 @@ The development-specific libraries include:
 <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 
 ```markdown
-- `tsx`: To execute and rebuild TypeScript efficiently.
+- `tsx`: A library for executing and rebuilding TypeScript efficiently.
 - `dotenv`: A library for handling environment variables.
 ```
 
