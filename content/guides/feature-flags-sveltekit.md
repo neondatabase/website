@@ -123,7 +123,7 @@ The development-specific libraries include:
 
 </CodeTabs>
 
-## (Optional) Add Tailwind CSS to the application
+## (Optional) Adding Tailwind CSS to the application
 
 For styling the app, we will be using Tailwind CSS. Install and set up Tailwind at the root of our project's directory by running:
 
