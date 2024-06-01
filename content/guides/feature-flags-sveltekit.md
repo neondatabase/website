@@ -49,7 +49,7 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>
 
 Save this connecting string somewhere safe to be used as the `DATABASE_URL` further in the guide. Proceed further in this guide to create a SvelteKit application.
 
-## Create a new SvelteKit application
+## Creating a new SvelteKit application
 
 To start building the application, create a new SvelteKit project. Open your terminal and run the following command:
 
