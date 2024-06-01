@@ -399,4 +399,12 @@ In the code above, UI elements related to fast payment methods are conditionally
 
 In this guide, you learned how to add feature flags in your SvelteKit apps using Serverless Postgres powered by Neon. By dynamically updating and utilizing feature flags, you can effectively test and roll out new features like fast payment methods, providing a controlled and iterative approach to your deployments.
 
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/with-sveltekit-feature-flags" description="Feature flags with SvelteKit and Neon" icon="github">Feature flags with SvelteKit and Neon</a>
+</DetailIconCards>
+
 <NeedHelp />
