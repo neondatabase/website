@@ -90,10 +90,11 @@ Add an `app.js` file to your project directory and add the following code snippe
   const { neon } = require('@neondatabase/serverless');
 
   const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+
   const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`)
 
   async function getPgVersion() {
-      const result = await sql`SELECT version()`l
+      const result = await sql`SELECT version()`;
       console.log(result[0]);
   }
 
@@ -105,7 +106,7 @@ Add an `app.js` file to your project directory and add the following code snippe
 
   const { Pool } = require('pg');
 
-  let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+  const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
   const pool = new Pool({
     host: PGHOST,
@@ -136,7 +137,7 @@ Add an `app.js` file to your project directory and add the following code snippe
 
   const postgres = require('postgres');
 
-  let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+  const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
   const sql = postgres({
     host: PGHOST,
@@ -173,10 +174,12 @@ For older clients that do not support Server Name Indication (SNI), the `postgre
 
 ```javascript
 // app.js
-const postgres = require('postgres');
+
 require('dotenv').config();
 
-let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
+const postgres = require('postgres');
+
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 
 const sql = postgres({
   host: PGHOST,
@@ -197,6 +200,14 @@ async function getPgVersion() {
 
 getPgVersion();
 ```
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/with-nodejs" description="Get started with Node.js and Neon" icon="github">Get started with Node.js and Neon</a>
+</DetailIconCards>
 
 ## Community resources
 
