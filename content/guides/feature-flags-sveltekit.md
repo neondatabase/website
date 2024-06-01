@@ -7,7 +7,7 @@ createdAt: '2024-05-24T13:24:36.612Z'
 updatedOn: '2024-05-24T13:24:36.612Z'
 ---
 
-This guide covers the step-by-step process of integrating feature flags in SvelteKit apps with Postgres (powered by Neon). Feature flags provide a way to control the behavior of your application without deploying new code, allowing you to test and roll out new features dynamically. Upon completing the guide, you would have an understanding of managing and rolling out of new features (such as a hypothetical faster payment method) using dynamic feature flags integration.
+This guide covers the step-by-step process of integrating feature flags in SvelteKit apps with Postgres (powered by Neon). Feature flags provide a way to control the behavior of your application without deploying new code, allowing you to test and roll out new features dynamically. Upon completing the guide, you will understand how to manage and roll out new features using dynamic feature flag integration.
 
 ## Prerequisites
 
