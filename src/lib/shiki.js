@@ -1,4 +1,5 @@
 import {
+  transformerNotationDiff,
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from '@shikijs/transformers';
@@ -79,6 +80,7 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
           }
         },
       },
+      transformerNotationDiff(),
       transformerNotationHighlight(),
       transformerNotationWordHighlight(),
     ],

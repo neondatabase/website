@@ -10,29 +10,25 @@ import CopyIcon from './images/copy.inline.svg';
 
 function extractTextFromNode(node) {
   // Base case: if the node is a string, return it.
-  if (typeof node === 'string') {
-    return node;
-  }
+  if (typeof node === 'string') return node;
 
   // Check if the node is an object and has the required properties.
-  if (typeof node === 'object' && node.props && node.props.children) {
+  if (typeof node !== 'object' || !node.props || !node.props.children) return '';
+
+  // Skip removed lines of code from differences
+  if (node.props.className?.includes('remove')) return '__line_removed_in_code__';
+
+  // If the children are in an array, loop through them.
+  if (Array.isArray(node.props.children)) {
     let text = '';
-
-    // If the children are in an array, loop through them.
-    if (Array.isArray(node.props.children)) {
-      node.props.children.forEach((child) => {
-        text += extractTextFromNode(child);
-      });
-    } else {
-      // If there's only one child, process that child directly.
-      text = extractTextFromNode(node.props.children);
-    }
-
+    node.props.children.forEach((child) => {
+      text += extractTextFromNode(child);
+    });
     return text;
   }
-
-  // If the node doesn't match the expected structure, return an empty string.
-  return '';
+  
+  // If there's only one child, process that child directly.
+  return extractTextFromNode(node.props.children);
 }
 
 const CodeBlockWrapper = ({
@@ -44,7 +40,7 @@ const CodeBlockWrapper = ({
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
-  const code = extractTextFromNode(children);
+  const code = extractTextFromNode(children).replace(/(\n)?__line_removed_in_code__(\n)?/g, '');
 
   return (
     <Tag
@@ -54,7 +50,7 @@ const CodeBlockWrapper = ({
       {children}
       <button
         className={clsx(
-          'invisible absolute right-5 top-2 rounded p-1.5 text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-gray-new-10 dark:text-gray-8 lg:visible lg:opacity-100',
+          'invisible absolute right-2 top-2 rounded border border-gray-7 bg-gray-9 p-1.5  text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-white group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-gray-new-10 dark:text-gray-8 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
           copyButtonClassName
         )}
         type="button"
