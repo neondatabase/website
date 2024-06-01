@@ -333,7 +333,7 @@ In this section, you will get an example of how a feature flag helps test and ro
 
 ### Computing the user destination
 
-In a SvelteKit route, the data from the server to the user interface is passed via `+page.server.ts` file to `+page.svelte`. For the sake of an example, you will load the feature flag dynamically and check if it's enabled to determine the user's destination experience. To do that, add the following snippet to `+page.server.ts` file:
+In a SvelteKit route, the data from the server to the user interface is passed via `+page.server.ts` file to `+page.svelte`. For the sake of this example, you will load the feature flag dynamically and check if it's enabled to determine the user's destination experience. To do that, add the following snippet to `+page.server.ts` file:
 
 ```tsx
 // File: src/routes/+page.server.ts
