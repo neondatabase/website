@@ -72,7 +72,7 @@ The app now should be running on [localhost:5173](http://localhost:5173).
 
 > Note: According to an [advanced SvelteKit guide](https://kit.svelte.dev/docs/server-only-modules), using `.server` in the filename allows you to mark the code to be executed on server only.
 
-Next, run the command below to install the necessary libraries and packages for building the application:
+Next, run the commands below to install the necessary libraries and packages for building the application:
 
 <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 
