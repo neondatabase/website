@@ -168,7 +168,7 @@ Finally, add an import to `app.css` in your `+page.svelte` file:
 
 Feature flags offer a powerful way to control the behavior of your application without deploying new code. In a Serverless Postgres environment, you can easily create, read, and update feature flags using the following steps:
 
-### Create a Serverless Postgres Client
+### Create a serverless Postgres client
 
 To create a client that interacts with your serverless postgres, create a `postgres.server.ts` file inside the `src/lib` directory with the following content:
 
