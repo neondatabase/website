@@ -329,7 +329,7 @@ Great! You can use these helper functions in your application to manage and cont
 
 ## Dynamic feature flag integration for testing fast payment methods
 
-In this section, you will get an example of how feature flag helps test and roll out new features, dynamically. For example, you are a payment processing company. You have just added a payment method named `PayGM` that helps users pay faster. But you want to test it out on a random basis for each cart that you process. Let's walk through a hypothetical code that allows you to understand the usage of feature flag in this case.
+In this section, you will get an example of how a feature flag helps test and roll out new features, dynamically. For example, you are a payment processing company. You have just added a payment method named `PayGM` that helps users pay faster. But you want to test it out on a random basis for each cart that you process. Let's walk through the hypothetical code to understand the usage of a feature flag in this case.
 
 ### Computing the user destination
 
