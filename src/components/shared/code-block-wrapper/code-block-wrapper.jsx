@@ -10,33 +10,25 @@ import CopyIcon from './images/copy.inline.svg';
 
 function extractTextFromNode(node) {
   // Base case: if the node is a string, return it.
-  if (typeof node === 'string') {
-    return node;
-  }
+  if (typeof node === 'string') return node;
 
   // Check if the node is an object and has the required properties.
-  if (typeof node !== 'object' || !node.props || !node.props.children) {
-    return '';
-  }
+  if (typeof node !== 'object' || !node.props || !node.props.children) return '';
 
   // Skip removed lines of code from differences
-  if (node.props.className?.includes('remove')) {
-    return '__line_removed_in_code__';
-  }
-
-  let text = '';
+  if (node.props.className?.includes('remove')) return '__line_removed_in_code__';
 
   // If the children are in an array, loop through them.
   if (Array.isArray(node.props.children)) {
+    let text = '';
     node.props.children.forEach((child) => {
       text += extractTextFromNode(child);
     });
-  } else {
-    // If there's only one child, process that child directly.
-    text = extractTextFromNode(node.props.children);
+    return text;
   }
-
-  return text;
+  
+  // If there's only one child, process that child directly.
+  return extractTextFromNode(node.props.children);
 }
 
 const CodeBlockWrapper = ({
