@@ -1,6 +1,6 @@
 ---
 title: Add feature flags in SvelteKit apps with Neon Postgres
-subtitle: Step-by-step guide to integrating feature flags in SvelteKit apps with Postgres
+subtitle: A step-by-step guide to integrating feature flags in SvelteKit apps with Postgres
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-05-24T13:24:36.612Z'
