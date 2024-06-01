@@ -52,7 +52,10 @@ const CodeBlockWrapper = ({
   const code = extractTextFromNode(children).replace(/(\n)?__line_removed_in_code__(\n)?/g, "");
 
   return (
-    <Tag className={clsx('code-block group relative', className)} {...otherProps}>
+    <Tag
+      className={clsx('code-block group relative flex [&_pre]:min-w-full', className)}
+      {...otherProps}
+    >
       {children}
       <button
         className={clsx(

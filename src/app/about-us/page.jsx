@@ -27,7 +27,7 @@ const AboutUsPage = async () => {
     true
   );
 
-  return <Layout headerTheme="white">{contentWithLazyBlocks}</Layout>;
+  return <Layout>{contentWithLazyBlocks}</Layout>;
 };
 
 export async function generateMetadata() {

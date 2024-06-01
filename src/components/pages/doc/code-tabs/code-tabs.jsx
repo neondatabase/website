@@ -2,20 +2,34 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { Fragment, useState, useMemo } from 'react';
+import React, { Fragment, useState, useMemo, useContext, useEffect } from 'react';
+
+import { ActiveLabelContext } from './CodeTabsContext';
 
 const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
+  const { activeLabel, setActiveLabel } = useContext(ActiveLabelContext);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Precompute the reversed arrays based on the reverse prop
+  useEffect(() => {
+    const tmp = labels.indexOf(activeLabel);
+    if (tmp !== -1) setCurrentIndex(tmp);
+  }, [activeLabel, labels]);
+
   const displayedLabels = useMemo(
     () => (reverse ? [...labels].reverse() : labels),
     [labels, reverse]
   );
+
   const displayedChildren = useMemo(
     () => (reverse ? [...children].reverse() : children),
     [children, reverse]
   );
+
+  const handleTabClick = (index) => {
+    const label = labels[index];
+    setCurrentIndex(index);
+    setActiveLabel(label);
+  };
 
   return (
     <figure className="my-5 max-w-full overflow-hidden rounded-md bg-gray-new-98 dark:bg-gray-new-10 [&_.code-block]:my-0">
@@ -31,8 +45,8 @@ const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
             key={`lb-${index}`}
             tabIndex="0"
             role="button"
-            onClick={() => setCurrentIndex(index)}
-            onKeyDown={() => setCurrentIndex(index)}
+            onClick={() => handleTabClick(index)}
+            onKeyDown={() => handleTabClick(index)}
           >
             {label}
           </div>
