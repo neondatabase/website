@@ -257,7 +257,7 @@ populateFeatureFlags()
 
 </CodeTabs>
 
-The code snippet above first ensures the existence of a table named `feature_flags` in the PostgreSQL database. Then, it inserts a feature flag named `fast_payments` with the value `true`, indicating that fast payment methods are enabled.
+The code snippet above first ensures the existence of a table named `feature_flags` in the Postgres database. Then, it inserts a feature flag named `fast_payments` with the value `true`, indicating that fast payment methods are enabled.
 
 ### READ and UPDATE the Feature Flags
 
