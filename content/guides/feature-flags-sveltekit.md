@@ -359,7 +359,7 @@ export async function load({ cookies }) {
 
 The code above first looks for the bucket assigned to the user. If no such bucket is found, it looks for the value of the feature flag in the database, randomly assigns a boolean whenever the `/` route is visited, and sets the value in the cookie. Finally, it reads the cookie as the source to determine the user experience and check if the fast payment methods are enabled or not.
 
-### Creating a Conditional User Experience
+### Creating a conditional user experience
 
 Now, let's look at how the feature flag value can be used in the user interface to conditionally render UI elements. This will allow you to accept payments via PayGM if the `fast_payments` feature flag is enabled. To do that, use the following code in `+page.svelte` file:
 
