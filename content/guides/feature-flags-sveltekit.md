@@ -357,7 +357,7 @@ export async function load({ cookies }) {
 }
 ```
 
-The code above first looks for the bucket assigned to the user. If no such bucket is found, it looks for the value of the feature flag in the database, randomly assigns a boolean whenever the `/` route is visited and sets it into the cookie. Finally, it reads the cookie as the source to determine the user experience, in here to check if the fast payment methods are enabled or not.
+The code above first looks for the bucket assigned to the user. If no such bucket is found, it looks for the value of the feature flag in the database, randomly assigns a boolean whenever the `/` route is visited, and sets the value in the cookie. Finally, it reads the cookie as the source to determine the user experience and check if the fast payment methods are enabled or not.
 
 ### Creating a Conditional User Experience
 
