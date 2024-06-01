@@ -224,6 +224,7 @@ const MobileMenu = ({ isDarkTheme, isBlogPage = false, isDocPage = false }) => {
                     className="h-11 items-center text-[15px] !font-semibold tracking-tight"
                     to={LINKS.signup}
                     theme="primary"
+                    tag_name="MobileMenu"
                   >
                     Sign Up
                   </Button>
