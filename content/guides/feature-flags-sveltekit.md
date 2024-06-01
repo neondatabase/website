@@ -24,7 +24,7 @@ To follow the steps in this guide, you will need the following:
 - [Managing Feature Flags in Serverless Postgres](#managing-feature-flags-in-serverless-postgres)
 - [Dynamic Feature Flag Integration for Testing Fast Payment Methods](#dynamic-feature-flag-integration-for-testing-fast-payment-methods)
 
-## Provisioning a Serverless Postgres powered by Neon
+## Provisioning a Postgres database powered by Neon
 
 Using Serverless Postgres database powered by Neon helps you scale down to zero. With Neon, you only have to pay for what you use.
 
