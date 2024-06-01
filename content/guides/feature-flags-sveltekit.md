@@ -88,7 +88,7 @@ npm install -D dotenv tsx @types/pg
 
 </CodeTabs>
 
-It installs the packages passed to the install command, with the -D flag specifying the libraries intended for development purposes only.
+The commands install the required libraries and packages, with the `-D` flag specifying the libraries intended for development purposes only.
 
 
 
