@@ -18,7 +18,7 @@ To follow the steps in this guide, you will need the following:
 
 ## Steps
 
-- [Provisioning a Serverless Postgres powered by Neon](#provisioning-a-serverless-postgres-powered-by-neon)
+- [Provisioning a Postgres database powered by Neon](#provisioning-a-postgres-database-powered-by-neon)
 - [Create a new SvelteKit application](#create-a-new-sveltekit-application)
 - [(Optional) Add Tailwind CSS to the application](#optional-add-tailwind-css-to-the-application)
 - [Managing Feature Flags in Serverless Postgres](#managing-feature-flags-in-serverless-postgres)
