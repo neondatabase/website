@@ -264,7 +264,7 @@ const Form = ({
             )}
           </div>
           <LinesIllustration
-            className="-top-8 z-10 h-[130px] !w-[125%]"
+            className="-!top-8 z-10 h-[150px] !w-[125%]"
             color={state === FORM_STATES.ERROR ? '#FF4C79' : '#00E599'}
             bgColor="#000"
           />
