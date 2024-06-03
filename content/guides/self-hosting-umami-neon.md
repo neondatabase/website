@@ -168,7 +168,7 @@ This deployment will:
  * create 2 "app" machines
 ```
 
-Once this is deployed, you are left with just one step, i.e. to set the `DATABASE_URL` environment variable that we obtained in the previous section. Let's get to it in the next section.
+Once the deployment is ready, you are left with just one step &#8212; to set the `DATABASE_URL` environment variable that we obtained in the previous section. We'll do that in the next section.
 
 ## Configure Neon Postgres as serverless database for self-hosted Umami analytics
 
