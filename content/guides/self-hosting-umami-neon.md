@@ -169,7 +169,7 @@ This deployment will:
 
 Once this is deployed, you are left with just one step, i.e. to set the `DATABASE_URL` environment variable that we obtained in the previous section. Let's get to it in the next section.
 
-## Set Neon Postgres as Serverless Database for Self-Hosted Umami Analytics
+## Configure Neon Postgres as serverless database for self-hosted Umami analytics
 
 In your Fly.io [Dashboard > Apps](https://fly.io/dashboard), click on your app name, and you would be taken to the overview of your app on Fly.io.
 
