@@ -213,7 +213,7 @@ This command applies the migration to the database, updating the schema to match
 
 ## Create a Data Viewer Dashboard in Reflex with Neon
 
-Learn how to use Reflex with Neon Postgres in the below project to create a an interactive Data Viewer Dashboard application.
+Learn how to use Reflex with Neon Postgres in the following project to create an interactive Data Viewer Dashboard application.
 
 <DetailIconCards>
 
