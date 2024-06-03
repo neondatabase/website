@@ -21,7 +21,7 @@ To follow along and deploy the application in this guide, you will need the foll
 - [What is Umami?](#what-is-umami)
 - [Provisioning a Postgres database using Neon](#provisioning-a-postgres-database-using-neon)
 - [Setup Umami instance for Fly.io](#setup-umami-instance-for-flyio)
-- [Set Neon Postgres as Serverless Database for Self-Hosted Umami Analytics](#set-neon-postgres-as-serverless-database-for-self-hosted-umami-analytics)
+- [Configure Neon Postgres as serverless database for self-hosted Umami analytics](#set-neon-postgres-as-serverless-database-for-self-hosted-umami-analytics)
 - [Deploy To Fly.io](#deploy-to-flyio)
 
 ## What is Umami?
