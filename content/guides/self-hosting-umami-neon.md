@@ -114,7 +114,7 @@ Next, you need to create an app on Fly.io using the configuration present in `fl
 fly launch
 ```
 
-On being prompted by CLI to allow copying of the existing configuration into a new app, answer with a `y`:
+When prompted by the CLI to allow copying of the existing configuration into a new app, answer with a `y`:
 
 ```bash
 An existing fly.toml file was found
