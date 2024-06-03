@@ -13,7 +13,7 @@ In this guide, you will learn how to self host your Umami analytics instance on 
 
 To follow along and deploy the application in this guide, you will need the following:
 
-- [flyctl](https://fly.io/docs/getting-started/installing-flyctl/) – command-line utility that lets you work with the Fly.io platform. You will also need [a fly.io account](https://fly.io/docs/hands-on/sign-up/).
+- [flyctl](https://fly.io/docs/getting-started/installing-flyctl/) – A command-line utility that lets you work with the Fly.io platform. You will also need [a fly.io account](https://fly.io/docs/hands-on/sign-up/).
 - [A Neon account](https://console.neon.tech/signup) – The self-hosted Umami analytics instance will connect to a Neon serverless Postgres database 🚀
 
 ## Steps
