@@ -34,6 +34,8 @@
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
           slug: guides/quarkus-reactive
+        - title: Reflex
+          slug: guides/reflex
         - title: Remix
           slug: guides/remix
         - title: Ruby on Rails
