@@ -54,7 +54,7 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>
 - `dbname` is the name of the database. “neondb” is the default database created with each Neon project if you don't specify your own database name.
 - `?sslmode=require` is an optional query parameter that enforces the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode for better security when connecting to the Postgres instance.
 
-Save this connecting string somewhere safe to be used as the `DATABASE_URL` further as we proceed.
+Please save the connection string somewhere safe. Later, you will use it to configure the `DATABASE_URL` variable.
 
 ## Setup Umami analytics instance for Fly.io
 
