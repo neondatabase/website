@@ -326,8 +326,10 @@
           items:
             - title: Generate synthetic data
               slug: guides/neosync-generate
+              tag: new
             - title: Anonymize data
               slug: guides/neosync-anonymize
+              tag: new
     - title: Replication
       items:
         - title: Airbyte
