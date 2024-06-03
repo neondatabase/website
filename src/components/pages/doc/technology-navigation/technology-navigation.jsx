@@ -8,8 +8,8 @@ import React, { useState } from 'react';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 
-const TechnologyNavigation = ({ children = null, noToggler = false }) => {
-  const [isOpen, setIsOpen] = useState(noToggler);
+const TechnologyNavigation = ({ children = null, open = false }) => {
+  const [isOpen, setIsOpen] = useState(open);
 
   const handleClick = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -63,10 +63,10 @@ const TechnologyNavigation = ({ children = null, noToggler = false }) => {
           );
         })}
       </ul>
-      {!noToggler && (
+      {!open && (
         <button
-          className="mx-auto flex items-center rounded-full bg-gray-new-98 px-5 py-2 text-sm font-medium text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:bg-gray-new-15 dark:text-white dark:hover:bg-gray-2"
           type="button"
+          className="mx-auto flex items-center rounded-full bg-gray-new-98 px-5 py-2 text-sm font-medium text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:bg-gray-new-15 dark:text-white dark:hover:bg-gray-2"
           onClick={handleClick}
         >
           <span>{isOpen ? 'Hide' : 'Show more'}</span>
@@ -84,7 +84,7 @@ const TechnologyNavigation = ({ children = null, noToggler = false }) => {
 
 TechnologyNavigation.propTypes = {
   children: PropTypes.node,
-  noToggler: PropTypes.bool,
+  open: PropTypes.bool,
 };
 
 export default TechnologyNavigation;
