@@ -28,6 +28,7 @@
           slug: guides/django
         - title: Express
           slug: guides/express
+          tag: new
         - title: Laravel
           slug: guides/laravel
         - title: Next.js
