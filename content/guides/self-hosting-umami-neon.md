@@ -139,7 +139,7 @@ Redis:        <none>                 (not requested)
 Opening https://fly.io/cli/launch/641f1a1d67950614e4e92820ba484310 ...
 ```
 
-flyctl will then automatically take you to a webpage which'll allow you to visually edit the default settings. For example, you can change the app name to `self-host-umami-neon` and change the region to say `ams`.
+flyctl will then automatically take you to a web page, which allows you to visually edit the default settings. For example, you can change the app name to `self-host-umami-neon`, and change the region to say `ams`.
 
 ![Fly.io Deployment Setting](/guides/images/self-hosting-umami-neon/307247099-acca8350-75c8-4007-b486-42c4102dfe40.png)
 
