@@ -31,14 +31,23 @@ To create a Neon project:
 
 To set up a Reflex project, you need to install the Reflex CLI and create a new project.
 
-It's recommended to use a virtual environment to manage your project dependencies. To create a virtual environment, run the following command in your project directory:
+It's recommended to use a virtual environment to manage your project dependencies. In this example, `venv` is used to create a virtual environment. You can use any other virtual environment manager of your choice like `poetry`, `pipenv`, or `uv`.
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
+To create a virtual environment, run the following command in your project directory:
 
-In this example, `venv` is used to create a virtual environment. You can use any other virtual environment manager of your choice like `poetry`, `pipenv`, or `uv`.
+<CodeTabs labels={["MacOS", "Windows"]}>
+
+    ```bash
+    python3 -m venv .venv
+    source .venv/bin/activate
+    ```
+
+    ```
+    py -3 -m venv .venv
+    .venv\Scripts\activate
+    ```
+    
+</CodeTabs>
 
 
 ### Install the Reflex CLI
@@ -51,33 +60,26 @@ pip install reflex
 
 ### Create a new Reflex project
 
-To create a new Reflex project, run the following command:
+First, create a project directory for the Reflex app.
 
 ```bash
-reflex new new_project
+mkdir new_project
+cd new_project
 ```
 
-This command creates a new Reflex project named `new_project`.
-
-### Initialize the Reflex project
-
-To initialize the Reflex project, navigate to the project directory and run the following command:
+To initialize the Reflex app, run the following command:
 
 ```bash
-cd new_project
 reflex init
 ```
 
-This command initializes the Reflex project. You can also initialize the project with a specific template by running `reflex init --template <template-name>`. In this case, replace `<template-name>` with the name of the template you want to use. For this guide, 
-we will use the default template.
-
-When a project is initialized, the Reflex CLI creates a project directory. THis directory contains the following files and directories:
+When a project is initialized, the Reflex CLI creates a project directory. This directory will contain the following files and directories:
 
 ```
 <new_project>
 ├── .web
 ├── assets
-├── hello
+├── <new_project>
 │   ├── __init__.py
 │   └── <new_project>.py
 └── rxconfig.py
@@ -86,9 +88,9 @@ When a project is initialized, the Reflex CLI creates a project directory. THis 
 The `rxconfig.py` file contains the project configuration settings. This is where the database connection settings will be defined.
 
 
-### Start the Reflex server
+### Run the Reflex App
 
-To start the Reflex server, run the following command:
+To run the Reflex app, use the following command:
 
 ```bash
 reflex run
@@ -115,8 +117,6 @@ config = rx.Config(
     app_name="new_project",
     # Connect to your own database.
     db_url="<connection-string-from-neon>",
-    # Change the frontend port.
-    frontend_port=3001,
 )
 ```
 
@@ -134,7 +134,6 @@ DB_URL = os.getenv("NEON_DATABASE_URL")
 config = rx.Config(
     app_name="new_project",
     db_url=os.getenv("DB_URL"),
-    frontend_port=3001,
 )
 ```
 
@@ -142,7 +141,7 @@ config = rx.Config(
 
 3. Save the changes to the `rxconfig.py` file.
 
-Now, you can run the Reflex server and start building your Python full-stack application with Reflex and Neon.
+Now, you can run the Reflex app and start building your Python full-stack application with Reflex and Neon.
 
 ## Creating a data model
 
@@ -174,7 +173,7 @@ You can then use this model to interact with the database and perform CRUD opera
 Creating the table with the model:
 
 ```bash
-reflex db create
+reflex db init
 ```
 
 This command creates the table in the database based on the model definition using an alembic migration.
@@ -186,7 +185,7 @@ For example, you can add a new customer to the database as follows:
 ```python
 with rx.session() as session:
     session.add(
-        User(
+        Customer(
             name="Alice",
             email="user@test.com",
             phone="1234567890",
