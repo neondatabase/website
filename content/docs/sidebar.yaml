@@ -26,6 +26,8 @@
           slug: guides/astro
         - title: Django
           slug: guides/django
+        - title: Express
+          slug: guides/express
         - title: Laravel
           slug: guides/laravel
         - title: Next.js
