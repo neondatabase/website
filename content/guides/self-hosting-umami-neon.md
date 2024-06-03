@@ -106,7 +106,7 @@ kill_timeout = "5s"
     grace_period = "1s"
 ```
 
-In the `build` property named `image`, you would see that it's pointing to the latest postgres compatible pre-built Docker image of Umami.
+In the `build` property named `image`, you will see that it's pointing to the latest Postgres compatible pre-built Docker image of Umami.
 
 Next, you need to create an app on Fly.io using the configuration present in `fly.toml` file. In your terminal window, execute the following command to launch a Fly.io app:
 
