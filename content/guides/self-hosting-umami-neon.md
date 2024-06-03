@@ -143,7 +143,7 @@ flyctl will then automatically take you to a web page, which allows you to visua
 
 ![Fly.io Deployment Setting](/guides/images/self-hosting-umami-neon/307247099-acca8350-75c8-4007-b486-42c4102dfe40.png)
 
-Click on `Confirm Settings` to set this configuration, and go back to your terminal window. In your terminal window, you should now see an output like the following:
+Click on `Confirm Settings` to set this configuration, and go back to your terminal window. In your terminal window, you should now see output similar to the following:
 
 ```bash
 Waiting for launch data... Done
