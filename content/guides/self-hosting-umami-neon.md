@@ -35,7 +35,7 @@ Umami is a simple, fast, privacy-focused, open-source analytics solution. Umami 
 Using a serverless Postgres database powered by Neon allows you to scale down to zero when the database is not being used, which saves on compute costs.
 .
 
-To get started, go to the [Neon console](https://console.neon.tech/app/projects) and enter the name of your choice as the project name.
+To get started, go to the [Neon Console](https://console.neon.tech/app/projects) and enter a name for your project.
 
 You will then be presented with a dialog that provides a connecting string of your database. Click on **Pooled connection** on the top right of the dialog and the connecting string automatically updates in the box below it.
 
