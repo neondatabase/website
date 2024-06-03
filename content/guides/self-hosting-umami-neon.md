@@ -180,7 +180,7 @@ Click on `Secrets` in the left sidebar, and then click on `New Secret` on the to
 
 ![](/guides/images/self-hosting-umami-neon/307263442-b835f320-8ae8-4a8a-a4f0-dbeb9e07530f.png)
 
-In the modal, set the name of the secret as `DATABASE_URL` and the `Secret` value to be the one that we obtained the in previous section. Make sure to have `pgbouncer=true&connect_timeout=10` as the query paramters appended to the URL. Click **Set secret** to save the environment variable.
+In the modal, set the name of the secret as `DATABASE_URL`, and set the `Secret` value to be the one that we obtained in the previous section. Click **Set secret** to save the environment variable.
 
 ![](/guides/images/self-hosting-umami-neon/307263972-75bef039-f4d1-4b7d-a66d-dd312290a6d1.png)
 
