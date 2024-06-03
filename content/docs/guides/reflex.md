@@ -109,39 +109,39 @@ To configure the connection settings:
 
 2. Adjust the following code in the `rxconfig.py` file to match your Neon connection details:
 
-```python
-# rxconfig.py
-import reflex as rx
+    ```python
+    # rxconfig.py
+    import reflex as rx
 
-config = rx.Config(
-    app_name="new_project",
-    # Connect to your own database.
-    db_url="<connection-string-from-neon>",
-)
-```
+    config = rx.Config(
+        app_name="new_project",
+        # Connect to your own database.
+        db_url="<connection-string-from-neon>",
+    )
+    ```
 
-Replace `<connection-string-from-neon>` with your Neon connection string. You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+    Replace `<connection-string-from-neon>` with your Neon connection string. You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-<Admonition type="note">
+    <Admonition type="note">
 
-Replace the value for `db_url` with an environment variable or the connection string from Neon. For example, after creating an environment variable named `NEON_DATABASE_URL`, you can use it as follows:
+    Replace the value for `db_url` with an environment variable or the connection string from Neon. For example, after creating an environment variable named `NEON_DATABASE_URL`, you can use it as follows:
 
-```python
-import os
+    ```python
+    import os
 
-DB_URL = os.getenv("NEON_DATABASE_URL")
+    DB_URL = os.getenv("NEON_DATABASE_URL")
 
-config = rx.Config(
-    app_name="new_project",
-    db_url=os.getenv("DB_URL"),
-)
-```
+    config = rx.Config(
+        app_name="new_project",
+        db_url=os.getenv("DB_URL"),
+    )
+    ```
 
-</Admonition>
+    </Admonition>
 
 3. Save the changes to the `rxconfig.py` file.
 
-Now, you can run the Reflex app and start building your Python full-stack application with Reflex and Neon.
+    Now, you can run the Reflex app and start building your Python full-stack application with Reflex and Neon.
 
 ## Creating a data model
 
