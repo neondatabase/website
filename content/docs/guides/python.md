@@ -176,4 +176,16 @@ Current time: 2023-05-24 08:53:10.403140+00:00
 PostgreSQL version: PostgreSQL 15.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
 
+## Source code
+
+You can find the source code for the applications described in this guide on GitHub.
+
+<DetailIconCards>
+
+  <a href="https://github.com/neondatabase/examples/tree/main/with-python-asyncpg" description="Get started with Python and Neon using asyncpg" icon="github">Get started with Python and Neon using asyncpg</a>
+
+  <a href="https://github.com/neondatabase/examples/tree/main/with-python-psycopg2" description="Get started with Python and Neon using psycopg2" icon="github">Get started with Python and Neon using psycopg2</a>
+
+</DetailIconCards>
+
 <NeedHelp/>
