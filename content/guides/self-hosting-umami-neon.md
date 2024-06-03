@@ -172,7 +172,7 @@ Once the deployment is ready, you are left with just one step &#8212; to set the
 
 ## Configure Neon Postgres as serverless database for self-hosted Umami analytics
 
-In your Fly.io [Dashboard > Apps](https://fly.io/dashboard), click on your app name, and you would be taken to the overview of your app on Fly.io.
+In your Fly.io [Dashboard > Apps](https://fly.io/dashboard), click on your app name, and you will be taken to the overview of your app on Fly.io.
 
 ![](/guides/images/self-hosting-umami-neon/307262264-17f870e2-379f-4d80-b37e-6dac9075174c.png)
 
