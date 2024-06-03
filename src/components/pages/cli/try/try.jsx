@@ -28,7 +28,7 @@ const Try = () => (
             to={LINKS.cliInstall}
             isAnimated
           >
-            View installation instructions
+            View setup instructions
           </AnimatedButton>
         </div>
         <div className="animation w-1/2 md:w-full">

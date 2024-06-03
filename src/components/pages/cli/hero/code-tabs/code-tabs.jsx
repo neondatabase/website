@@ -12,7 +12,7 @@ const codeSnippets = [
     language: 'text',
     code: `brew install neonctl
 neonctl auth
-neonctl branches create --name dev/daniel
+neonctl branches create --name dev/alex
 neonctl branches list`,
   },
   {
@@ -21,7 +21,7 @@ neonctl branches list`,
     language: 'text',
     code: `npm install -g neonctl
 neonctl auth
-neonctl branches create --name dev/daniel
+neonctl branches create --name dev/alex
 neonctl branches list`,
   },
   {
@@ -30,7 +30,7 @@ neonctl branches list`,
     language: 'text',
     code: `npm install -g neonctl
 neonctl auth
-neonctl branches create --name dev/daniel
+neonctl branches create --name dev/alex
 neonctl branches list`,
   },
 ];
