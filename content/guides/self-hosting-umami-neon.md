@@ -58,7 +58,7 @@ Please save the connection string somewhere safe. Later, you will use it to conf
 
 ## Setup Umami analytics instance for Fly.io
 
-To self host your Umami analytics instance, you would use [Umami's pre-built Docker container for Postgres](https://github.com/umami-software/umami/pkgs/container/umami/157800125?tag=postgresql-latest). This will allow you to self host an Umami analytics instance on Fly.io with a single `fly.toml` file.
+To self host your Umami analytics instance, you'll use [Umami's pre-built Docker container for Postgres](https://github.com/umami-software/umami/pkgs/container/umami/157800125?tag=postgresql-latest). This will allow you to self host an Umami analytics instance on Fly.io with a single `fly.toml` file.
 
 In your terminal window, execute the following command to create a new directory and change your terminal location to it:
 
