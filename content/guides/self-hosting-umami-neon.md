@@ -32,7 +32,8 @@ Umami is a simple, fast, privacy-focused, open-source analytics solution. Umami 
 
 ## Provisioning a Postgres Database using Neon
 
-Using Serverless Postgres database powered by Neon helps you scale down to zero. With Neon, you only have to pay for what you use.
+Using a serverless Postgres database powered by Neon allows you to scale down to zero when the database is not being used, which saves on compute costs.
+.
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and enter the name of your choice as the project name.
 
