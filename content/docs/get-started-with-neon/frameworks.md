@@ -4,7 +4,7 @@ subtitle: Find detailed instructions for connecting to Neon from various framewo
 enableTableOfContents: true
 ---
 
-<TechnologyNavigation open={true}>
+<TechnologyNavigation noToggler>
 
 <img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/nextjs" title="Connect a Next.js application to Neon" />
 
