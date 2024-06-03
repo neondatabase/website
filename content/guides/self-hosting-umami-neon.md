@@ -121,7 +121,7 @@ An existing fly.toml file was found
 ? Would you like to copy its configuration to the new app? Yes
 ```
 
-Optional: On being prompted by CLI whether you want to tweak the default settings, answer with a `y`:
+Optional: When asked if you want to tweak the default settings, answer with a `y`:
 
 ```bash
 Using build strategies '[the "ghcr.io/umami-software/umami:postgresql-latest" docker image]'. Remove [build] from fly.toml to force a rescan
