@@ -198,6 +198,6 @@ Once deployed, you will be able to log into your self hosted Umami analytics ins
 
 ## Summary
 
-In this guide, you learned how to run your own Umami analytics instance for analytics with Fly.io, powered by Neon postgres as your serverless database.
+In this guide, you learned how to run your own Umami analytics instance for analytics with Fly.io, powered by Neon postgres as your database.
 
 <NeedHelp />
