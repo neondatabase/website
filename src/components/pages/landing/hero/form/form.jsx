@@ -27,12 +27,15 @@ const appearAndExitAnimationVariants = {
 };
 
 const Footer = ({ formState, successMessage, items }) => (
-  <div className={clsx('relative z-20 mt-12 sm:mt-16 sm:px-4')}>
+  <div className="relative z-20 mt-6 sm:px-4">
     {formState === FORM_STATES.SUCCESS && (
-      <p className="text-center text-base leading-snug text-gray-new-80">{successMessage}</p>
+      <p
+        className="px-2 text-center text-base leading-snug text-gray-new-80 sm:px-0 [&_a:hover]:underline [&_a]:text-green-45 [&_a]:underline-offset-2"
+        dangerouslySetInnerHTML={{ __html: successMessage }}
+      />
     )}
-    {!(formState === FORM_STATES.SUCCESS) && items.length > 0 && (
-      <ul className="mx-auto flex max-w-[492px] justify-between gap-x-7 sm:mx-0.5 sm:flex-col sm:gap-y-4">
+    {!(formState === FORM_STATES.SUCCESS) && items?.length > 0 && (
+      <ul className="mx-auto mt-12 flex w-fit max-w-[492px] justify-between gap-x-7 sm:mt-14 sm:flex-col sm:gap-y-4">
         {items.map(({ text }, idx) => (
           <li
             className="flex items-start gap-x-2 text-sm leading-dense tracking-extra-tight text-gray-new-70"
@@ -236,8 +239,9 @@ const Form = ({
         doNowOrAfterSomeTime(() => {
           setState(FORM_STATES.ERROR);
           setErrorMessage(
+            // Different error messages depending on business email field
             hasBusinessEmail
-              ? `Ooops! Only work emails allowed. If this account is for you, <a href="${LINKS.console}">please sign up to Neon here</a>.`
+              ? `Ooops! Only work emails allowed. If this account is for you, <a href="${LINKS.signup}">please sign up to Neon here</a>.`
               : 'Please reload the page and try again'
           );
         }, loadingAnimationStartedTime);
@@ -313,13 +317,26 @@ const Form = ({
                         labelClassName="mb-0 block w-fit text-sm text-gray-new-70"
                         inputClassName="remove-autocomplete-styles m-0 !h-10 !border-[1px] !bg-white/[0.04] !text-base text-white placeholder:tracking-tight placeholder:text-gray-new-40 focus:outline-none disabled:opacity-100 sm:placeholder:text-sm"
                         type={field.fieldType}
+                        tag={field.type === 'enumeration' ? 'select' : 'input'}
+                        defaultValue={field.type === 'enumeration' ? 'hidden' : ''}
                         autoComplete={field.name}
                         placeholder={field.placeholder}
                         isDisabled={state === FORM_STATES.LOADING || state === FORM_STATES.SUCCESS}
                         error={errors[field.name]?.message}
                         errorClassName="w-full text-right text-xs leading-none"
                         {...register(field.name)}
-                      />
+                      >
+                        {field.type === 'enumeration' && field.options && (
+                          <>
+                            <option value="hidden" disabled hidden />
+                            {field.options.map((option, index) => (
+                              <option value={option.value} key={index}>
+                                {option.label}
+                              </option>
+                            ))}
+                          </>
+                        )}
+                      </Field>
                     ))}
                   </fieldset>
                 ))}
