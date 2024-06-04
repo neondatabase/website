@@ -23,6 +23,10 @@ const Hero = ({
     simpleField = formFieldGroups[0].fields[0];
   }
 
+  const hasBusinessEmail = formFieldGroups.some((formFieldGroup) =>
+    formFieldGroup.fields.some((field) => field.label.toLowerCase() === 'business email')
+  );
+
   const hasDetails = detailsTitle && detailsDescription;
 
   return (
@@ -41,6 +45,7 @@ const Hero = ({
               formFieldGroups={formFieldGroups}
               simpleField={simpleField}
               submitText={submitText}
+              hasBusinessEmail={hasBusinessEmail}
               detailsTitle={detailsTitle}
               detailsDescription={detailsDescription}
               {...restProps}
@@ -62,6 +67,7 @@ const Hero = ({
                     formFieldGroups={formFieldGroups}
                     greenMode={!hasDetails}
                     submitText={submitText}
+                    hasBusinessEmail={hasBusinessEmail}
                     detailsTitle={detailsTitle}
                     detailsDescription={detailsDescription}
                     {...restProps}

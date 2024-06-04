@@ -13,6 +13,7 @@ import * as yup from 'yup';
 import Field from 'components/shared/field';
 import LinesIllustration from 'components/shared/lines-illustration';
 import { FORM_STATES } from 'constants/forms';
+import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import FormCheckIcon from 'icons/subscription-form-check.inline.svg';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
@@ -25,8 +26,8 @@ const appearAndExitAnimationVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const Footer = ({ formState, successMessage, simpleMode, items }) => (
-  <div className={clsx('relative z-20', simpleMode ? 'mt-12 sm:mt-10' : 'mt-8 sm:px-4')}>
+const Footer = ({ formState, successMessage, items }) => (
+  <div className={clsx('relative z-20 mt-12 sm:mt-16 sm:px-4')}>
     {formState === FORM_STATES.SUCCESS && (
       <p className="text-center text-base leading-snug text-gray-new-80">{successMessage}</p>
     )}
@@ -49,12 +50,22 @@ const Footer = ({ formState, successMessage, simpleMode, items }) => (
 Footer.propTypes = {
   formState: PropTypes.string,
   successMessage: PropTypes.string,
-  simpleMode: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
     })
   ),
+};
+
+const ErrorMessage = ({ text }) => (
+  <span
+    className="absolute left-7 right-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:left-4 sm:right-4 sm:text-xs sm:leading-tight [&_a]:underline [&_a]:underline-offset-2 [&_a]:hover:no-underline"
+    dangerouslySetInnerHTML={{ __html: text }}
+  />
+);
+
+ErrorMessage.propTypes = {
+  text: PropTypes.string,
 };
 
 const SubmitButton = ({ formState, text, simpleMode = false }) => (
@@ -146,6 +157,7 @@ const Form = ({
   simpleField,
   formFieldGroups,
   submitText,
+  hasBusinessEmail,
   successMessage,
   hubspotFormId,
   items,
@@ -223,7 +235,11 @@ const Form = ({
       } else {
         doNowOrAfterSomeTime(() => {
           setState(FORM_STATES.ERROR);
-          setErrorMessage('Please reload the page and try again');
+          setErrorMessage(
+            hasBusinessEmail
+              ? `Ooops! Only work emails allowed. If this account is for you, <a href="${LINKS.console}">please sign up to Neon here</a>.`
+              : 'Please reload the page and try again'
+          );
         }, loadingAnimationStartedTime);
       }
     } catch (error) {
@@ -257,11 +273,7 @@ const Form = ({
               {...register(simpleField.name)}
             />
             <SubmitButton formState={state} text={submitText} simpleMode />
-            {errorMessage && (
-              <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
-                {errorMessage}
-              </span>
-            )}
+            {errorMessage && <ErrorMessage text={errorMessage} />}
           </div>
           <LinesIllustration
             className="-!top-8 z-10 h-[150px] !w-[125%]"
@@ -269,7 +281,7 @@ const Form = ({
             bgColor="#000"
           />
         </form>
-        <Footer formState={state} successMessage={successMessage} items={items} simpleMode />
+        <Footer formState={state} successMessage={successMessage} items={items} />
       </>
     );
 
@@ -314,11 +326,7 @@ const Form = ({
             </div>
             <SubmitButton formState={state} text={submitText} />
           </div>
-          {errorMessage && (
-            <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
-              {errorMessage}
-            </span>
-          )}
+          {errorMessage && <ErrorMessage text={errorMessage} />}
         </div>
         {greenMode && (
           <LinesIllustration
@@ -349,6 +357,7 @@ Form.propTypes = {
       fields: PropTypes.arrayOf(filedPropTypes),
     }),
   }),
+  hasBusinessEmail: PropTypes.bool,
   submitText: PropTypes.string,
   hubspotFormId: PropTypes.string.isRequired,
   successMessage: PropTypes.string.isRequired,
