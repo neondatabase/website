@@ -79,17 +79,17 @@ From the Neon Console, use the sidebar navigation to open the **SQL Editor** pag
 
 The first time you open the SQL Editor for a new project, the editor includes placeholder SQL commands to create and populate a new sample table called `playing_with_neon`.
 
-For this tutorial, go ahead and create this sample database: click **Run**.
+For this tutorial, go ahead and create this sample table: click **Run**.
 
 Or if you want to add the table from the command line and you already have `psql` installed:
 
-```sql
+```sql shouldWrap
 CREATE TABLE playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
 INSERT INTO playing_with_neon(name, value)
-  SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i)
+  SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
 ```
 
-Your default branch `main` now has a table with some content.
+Your default branch `main` now has a table with some data.
 
 ## Step 4 - View and modify data in the console
 
