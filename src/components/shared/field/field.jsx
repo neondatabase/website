@@ -36,7 +36,7 @@ const Field = forwardRef(
           (Tag === FIELD_TAGS.INPUT || Tag === FIELD_TAGS.SELECT) && 'h-14 md:h-12',
           Tag === FIELD_TAGS.TEXTAREA && 'min-h-[112px] py-3.5',
           Tag === FIELD_TAGS.SELECT &&
-            'bg-[url(/images/chevron-down.svg)] bg-[center_right_1rem] bg-no-repeat',
+            'cursor-pointer truncate bg-[url(/images/chevron-down.svg)] bg-[length:12px] bg-[center_right_1rem] bg-no-repeat pr-8',
           error
             ? 'border-secondary-1 focus:border-secondary-1'
             : 'border-transparent focus:border-primary-1',

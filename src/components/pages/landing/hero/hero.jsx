@@ -23,8 +23,9 @@ const Hero = ({
     simpleField = formFieldGroups[0].fields[0];
   }
 
-  const hasBusinessEmail = formFieldGroups.some((formFieldGroup) =>
-    formFieldGroup.fields.some((field) => field.label.toLowerCase() === 'business email')
+  // Flag for form validation if they contain business email
+  const hasBusinessEmail = formFieldGroups?.some(({ fields }) =>
+    fields?.some(({ validation }) => validation?.useDefaultBlockList)
   );
 
   const hasDetails = detailsTitle && detailsDescription;
