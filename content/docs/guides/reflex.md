@@ -129,11 +129,11 @@ To configure the connection settings:
     ```python
     import os
 
-    DB_URL = os.getenv("NEON_DATABASE_URL")
+    DATABASE_URL = os.getenv("NEON_DATABASE_URL")
 
     config = rx.Config(
         app_name="new_project",
-        db_url=os.getenv("DB_URL"),
+        db_url=DATABASE_URL,
     )
     ```
 
