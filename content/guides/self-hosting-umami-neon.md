@@ -194,7 +194,7 @@ You can now deploy your app to Fly by running the following command:
 flyctl deploy
 ```
 
-Once deployed, you will be able to log into your self hosted Umami analytics instance with the default credentials i.e. **admin** as the username & **umami** as the password. You will then be able to create new websites to start analyzing the traffic coming onto your website.
+Once deployed, you will be able to log into your self hosted Umami analytics instance with the default credentials, i.e.; **admin** as the username & **umami** as the password. You will then be able to create new websites and analyze the traffic to those sites.
 
 ## Summary
 
