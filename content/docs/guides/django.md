@@ -80,6 +80,16 @@ print("libpq version:", psycopg2._psycopg.libpq_version())
 
 The version number for `libpq` is presented in a different format, for example, version 14.1 will be shown as 140001. If your `libpq` version is less than version 14, you can either upgrade your `psycopg2` driver to get a newer `libpq` version or use one of the workarounds described in our [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified) documentation. Upgrading your `psycopg2` driver may introduce compatibility issues with your Django or Python version, so you should test your application thoroughly.
 
+## Schema migration with Django
+
+For schema migration with Django, see our guide:
+
+<DetailIconCards>
+
+<a href="/docs/guides/django-migrations" description="Schema migration with Neon Postgres and Django" icon="app-store" icon="app-store">Django Migrations</a>
+
+</DetailIconCards>
+
 ## Django application blog post and sample application
 
 Learn how to use Django with Neon Postgres with this blog post and the accompanying sample application.
