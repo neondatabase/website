@@ -27,7 +27,7 @@ const FormField = ({
         name={name}
         label={`${label}${required ? ' *' : ''}`}
         labelClassName={labelClassName}
-        tagClassName={inputClassName}
+        inputClassName={inputClassName}
         tag="select"
         defaultValue="hidden"
         isDisabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
@@ -72,7 +72,7 @@ const FormField = ({
       name={name}
       label={`${label}${required ? ' *' : ''}`}
       labelClassName={labelClassName}
-      tagClassName={inputClassName}
+      inputClassName={inputClassName}
       type="text"
       tag="input"
       autoComplete={name}

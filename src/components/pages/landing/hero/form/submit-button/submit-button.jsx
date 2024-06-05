@@ -13,7 +13,7 @@ const appearAndExitAnimationVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const FormSubmit = ({ formState, text, simpleMode = false }) => (
+const SubmitButton = ({ formState, text, simpleMode = false }) => (
   <LazyMotion features={domAnimation}>
     <AnimatePresence>
       {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && (
@@ -92,10 +92,10 @@ const FormSubmit = ({ formState, text, simpleMode = false }) => (
   </LazyMotion>
 );
 
-FormSubmit.propTypes = {
+SubmitButton.propTypes = {
   formState: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   simpleMode: PropTypes.bool,
 };
 
-export default FormSubmit;
+export default SubmitButton;

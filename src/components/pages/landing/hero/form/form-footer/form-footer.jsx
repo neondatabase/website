@@ -4,7 +4,7 @@ import { FORM_STATES } from 'constants/forms';
 import CheckIcon from 'icons/check.inline.svg';
 
 const FormFooter = ({ formState, successMessage, items }) => (
-  <div className="relative z-20 mt-6 sm:px-4">
+  <div className="relative z-20 mt-10 sm:px-4">
     {formState === FORM_STATES.SUCCESS && (
       <p
         className="px-2 text-center text-base leading-snug text-gray-new-80 sm:px-0 [&_a:hover]:underline [&_a]:text-green-45 [&_a]:underline-offset-2"
@@ -12,7 +12,7 @@ const FormFooter = ({ formState, successMessage, items }) => (
       />
     )}
     {!(formState === FORM_STATES.SUCCESS) && items?.length > 0 && (
-      <ul className="mx-auto mt-12 flex w-fit max-w-[492px] justify-between gap-x-7 sm:mt-14 sm:flex-col sm:gap-y-4">
+      <ul className="mx-auto  flex w-fit max-w-[492px] justify-between gap-x-7 sm:flex-col sm:gap-y-4">
         {items.map(({ text }, idx) => (
           <li
             className="flex items-start gap-x-2 text-sm leading-dense tracking-extra-tight text-gray-new-70"

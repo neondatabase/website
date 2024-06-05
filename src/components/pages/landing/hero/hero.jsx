@@ -9,24 +9,20 @@ import Form from './form';
 const Hero = ({
   title,
   description,
+  hubspotFormId,
   formData,
   detailsLabel,
   detailsTitle,
   detailsDescription,
   ...restProps
 }) => {
-  const formFieldGroups = formData?.formFieldGroups;
+  const fieldGroups = formData?.formFieldGroups;
   const submitText = formData?.submitText;
   let simpleField = null;
 
-  if (formFieldGroups && formFieldGroups.length === 1 && formFieldGroups[0].fields.length === 1) {
-    simpleField = formFieldGroups[0].fields[0];
+  if (fieldGroups && fieldGroups.length === 1 && fieldGroups[0].fields.length === 1) {
+    simpleField = fieldGroups[0].fields[0];
   }
-
-  // Flag for form validation if they contain business email
-  const hasBusinessEmail = formFieldGroups?.some(({ fields }) =>
-    fields?.some(({ validation }) => validation?.useDefaultBlockList)
-  );
 
   const hasDetails = detailsTitle && detailsDescription;
 
@@ -43,10 +39,9 @@ const Hero = ({
         {simpleField ? (
           <div className="mx-auto my-[75px] w-[504px] max-w-full md:my-16 md:max-w-[90%] sm:my-14">
             <Form
-              formFieldGroups={formFieldGroups}
+              fieldGroups={fieldGroups}
               simpleField={simpleField}
               submitText={submitText}
-              hasBusinessEmail={hasBusinessEmail}
               detailsTitle={detailsTitle}
               detailsDescription={detailsDescription}
               {...restProps}
@@ -58,17 +53,16 @@ const Hero = ({
               className={clsx(
                 'flex w-full justify-center lg:items-center',
                 hasDetails
-                  ? 'my-[120px] gap-[86px] xl:gap-10 lg:mx-auto lg:my-20 lg:w-auto lg:flex-col sm:my-14'
+                  ? 'my-[120px] gap-[86px] xl:gap-10 lg:mx-auto lg:my-20 lg:flex-col sm:my-14'
                   : 'my-[88px] lg:my-16 sm:my-14'
               )}
             >
               <div className={clsx('max-w-[630px]', hasDetails ? 'w-1/2 lg:w-full' : 'w-full')}>
                 {formData && (
                   <Form
-                    formFieldGroups={formFieldGroups}
+                    fieldGroups={fieldGroups}
                     greenMode={!hasDetails}
                     submitText={submitText}
-                    hasBusinessEmail={hasBusinessEmail}
                     detailsTitle={detailsTitle}
                     detailsDescription={detailsDescription}
                     {...restProps}
@@ -93,6 +87,7 @@ const Hero = ({
 Hero.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  hubspotFormId: PropTypes.string.isRequired,
   formData: PropTypes.shape({
     formFieldGroups: PropTypes.arrayOf({
       fieldGroup: PropTypes.shape({

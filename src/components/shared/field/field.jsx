@@ -29,7 +29,7 @@ const Field = forwardRef(
       type = 'text',
       children = null,
       tag: Tag = 'input',
-      tagClassName,
+      inputClassName,
       error,
       errorClassName,
       isDisabled,
@@ -58,7 +58,7 @@ const Field = forwardRef(
             'cursor-pointer truncate bg-[url(/images/chevron-down.svg)] bg-[length:12px] bg-[center_right_1rem] bg-no-repeat pr-8',
           error ? '!border-secondary-1' : 'border-transparent focus:border-primary-1',
           isDisabled && '!cursor-default',
-          tagClassName
+          inputClassName
         )}
         ref={ref}
         id={name}
@@ -73,13 +73,12 @@ const Field = forwardRef(
       {error && (
         <p
           className={clsx(
-            'absolute top-[calc(100%+0.5rem)] text-sm leading-none text-secondary-1',
+            'absolute right-0 top-[calc(100%+0.5rem)] z-10 max-w-[350px] text-sm leading-none text-secondary-1 [&_a:hover]:no-underline [&_a]:underline [&_a]:underline-offset-2',
             errorClassName
           )}
           data-test="error-field-message"
-        >
-          {error}
-        </p>
+          dangerouslySetInnerHTML={{ __html: error }}
+        />
       )}
     </div>
   )
@@ -93,7 +92,7 @@ Field.propTypes = {
   labelClassName: PropTypes.string,
   type: PropTypes.string,
   tag: PropTypes.oneOf(Object.values(FIELD_TAGS)),
-  tagClassName: PropTypes.string,
+  inputClassName: PropTypes.string,
   error: PropTypes.string,
   errorClassName: PropTypes.string,
   children: PropTypes.node,
