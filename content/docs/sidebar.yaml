@@ -39,6 +39,7 @@
           slug: guides/quarkus-reactive
         - title: Reflex
           slug: guides/reflex
+          tag: new
         - title: Remix
           slug: guides/remix
         - title: Ruby on Rails
