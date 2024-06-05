@@ -8,17 +8,28 @@ export const FIELD_TAGS = {
   SELECT: 'select',
 };
 
+const themes = {
+  default:
+    'mt-2.5 w-full rounded border-[3px] px-4 text-lg text-white outline-none focus:bg-black h-14 md:h-12',
+  checkbox:
+    'absolute pointer-events-none top-1/2 left-0 -translate-y-1/2 w-[18px] h-[18px] rounded !border-white/10 hover:!border-white/50 before:absolute before:inset-0 before:z-10 before:bg-center before:bg-no-repeat checked:bg-white before:bg-[url("/images/check.svg")] before:bg-[length:14px_14px] before:opacity-0 before:transition-opacity before:duration-200 checked:before:opacity-100 disabled:!border-white/10',
+};
+
+const baseStyles =
+  'remove-autocomplete-styles appearance-none bg-white/[0.04] border transition-colors duration-200';
+
 const Field = forwardRef(
   (
     {
       className,
+      theme = 'default',
       name,
       label,
       labelClassName,
       type = 'text',
-      children,
+      children = null,
       tag: Tag = 'input',
-      inputClassName,
+      tagClassName,
       error,
       errorClassName,
       isDisabled,
@@ -27,20 +38,27 @@ const Field = forwardRef(
     ref
   ) => (
     <div className={clsx('relative flex flex-col items-start', className)}>
-      <label className={clsx('leading-none text-gray-new-80', labelClassName)} htmlFor={name}>
+      <label
+        className={clsx(
+          'leading-none text-gray-new-80',
+          theme === 'checkbox' && 'w-fit cursor-pointer pl-7',
+          isDisabled && '!cursor-default',
+          labelClassName
+        )}
+        htmlFor={name}
+      >
         {label}
       </label>
       <Tag
         className={clsx(
-          'remove-autocomplete-styles-black-theme mt-2.5 w-full appearance-none rounded border-[3px] bg-white/[0.04] px-4 text-lg text-white outline-none transition-colors duration-200 focus:bg-black',
-          (Tag === FIELD_TAGS.INPUT || Tag === FIELD_TAGS.SELECT) && 'h-14 md:h-12',
+          baseStyles,
+          themes[theme],
           Tag === FIELD_TAGS.TEXTAREA && 'min-h-[112px] py-3.5',
           Tag === FIELD_TAGS.SELECT &&
             'cursor-pointer truncate bg-[url(/images/chevron-down.svg)] bg-[length:12px] bg-[center_right_1rem] bg-no-repeat pr-8',
-          error
-            ? 'border-secondary-1 focus:border-secondary-1'
-            : 'border-transparent focus:border-primary-1',
-          inputClassName
+          error ? '!border-secondary-1' : 'border-transparent focus:border-primary-1',
+          isDisabled && '!cursor-default',
+          tagClassName
         )}
         ref={ref}
         id={name}
@@ -49,7 +67,7 @@ const Field = forwardRef(
         disabled={isDisabled}
         {...otherProps}
       >
-        {Tag === FIELD_TAGS.SELECT ? children : null}
+        {children}
       </Tag>
 
       {error && (
@@ -69,12 +87,13 @@ const Field = forwardRef(
 
 Field.propTypes = {
   className: PropTypes.string,
+  theme: PropTypes.oneOf(Object.values(FIELD_TAGS)),
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   labelClassName: PropTypes.string,
   type: PropTypes.string,
   tag: PropTypes.oneOf(Object.values(FIELD_TAGS)),
-  inputClassName: PropTypes.string,
+  tagClassName: PropTypes.string,
   error: PropTypes.string,
   errorClassName: PropTypes.string,
   children: PropTypes.node,
