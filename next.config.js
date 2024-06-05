@@ -250,10 +250,6 @@ const defaultConfig = {
         destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres/:path*',
       },
       {
-        source: '/demos/instant-postgres/assets/:path*',
-        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres/assets/:path*',
-      },
-      {
         source: '/developer-days/:path*',
         destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
       },
