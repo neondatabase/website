@@ -97,4 +97,14 @@ For additional information about connecting from SQLAlchemy, refer to the follow
 - [Establishing Connectivity - the Engine](https://docs.sqlalchemy.org/en/14/tutorial/engine.html)
 - [Connecting to PostgreSQL with SQLAlchemy](https://docs.sqlalchemy.org/en/14/core/engines.html#postgresql)
 
+## Schema migration with SQLAlchemy
+
+For schema migration with SQLAlchemy, see our guide:
+
+<DetailIconCards>
+
+<a href="/docs/guides/sqlalchemy-migrations" description="Schema migration with Neon Postgres and SQLAlchemy" icon="app-store" icon="app-store">SQLAlchemy Migrations</a>
+
+</DetailIconCards>
+
 <NeedHelp/>
