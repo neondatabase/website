@@ -253,11 +253,12 @@ const defaultConfig = {
         source: '/developer-days/:path*',
         destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
       },
-      { source: '/regional-latency',
+      {
+        source: '/demos/regional-latency',
         destination: 'https://latencies-ui.vercel.app/regional-latency'
       },
       {
-        source: '/regional-latency/:asset*',
+        source: '/demos/regional-latency/:asset*',
         destination: 'https://latencies-ui.vercel.app/regional-latency/:asset*'
       }
     ];
