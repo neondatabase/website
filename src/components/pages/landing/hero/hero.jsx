@@ -39,6 +39,7 @@ const Hero = ({
         {simpleField ? (
           <div className="mx-auto my-[75px] w-[504px] max-w-full md:my-16 md:max-w-[90%] sm:my-14">
             <Form
+              hubspotFormId={hubspotFormId}
               fieldGroups={fieldGroups}
               simpleField={simpleField}
               submitText={submitText}
@@ -60,6 +61,7 @@ const Hero = ({
               <div className={clsx('max-w-[630px]', hasDetails ? 'w-1/2 lg:w-full' : 'w-full')}>
                 {formData && (
                   <Form
+                    hubspotFormId={hubspotFormId}
                     fieldGroups={fieldGroups}
                     greenMode={!hasDetails}
                     submitText={submitText}
