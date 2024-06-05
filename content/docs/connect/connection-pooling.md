@@ -27,7 +27,7 @@ The `-pooler` option routes the connection to a connection pooling port at the N
 
 ## Connection limits without connection pooling
 
-Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size: 
+Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size &#8212; and if you are using Neon's Autoscaling feature, it is set according to your **minimum** compute size.
 
 | Compute Size (CU) | vCPU | RAM   | max_connections |
 |:------------------|:-----|:------|:----------------|
@@ -42,7 +42,7 @@ Each Postgres connection creates a new process in the operating system, which co
 | 7                 | 7    | 28 GB | 3154            |
 | 8                 | 8    | 32 GB | 3604           |
 
-The formula used to calculate `max_connections` for Neon computes is `RAM in bytes / 9531392 bytes`. For a Neon Free Tier compute, which has 1 GB of RAM, this works out to approximately 112 connections. Larger computes offered with paid plans have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
+The formula used to calculate `max_connections` for Neon computes is `RAM in bytes / 9531392 bytes`. For a Neon Free Tier compute, which has 1 GB of RAM, this works out to approximately 112 connections. Larger computes offered with paid plans have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports up to 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
 
 ```sql
 SHOW max_connections;

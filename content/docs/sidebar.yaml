@@ -26,6 +26,9 @@
           slug: guides/astro
         - title: Django
           slug: guides/django
+        - title: Express
+          slug: guides/express
+          tag: new
         - title: Laravel
           slug: guides/laravel
         - title: Next.js
@@ -34,6 +37,8 @@
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
           slug: guides/quarkus-reactive
+        - title: Reflex
+          slug: guides/reflex
         - title: Remix
           slug: guides/remix
         - title: Ruby on Rails
@@ -323,8 +328,10 @@
           items:
             - title: Generate synthetic data
               slug: guides/neosync-generate
+              tag: new
             - title: Anonymize data
               slug: guides/neosync-anonymize
+              tag: new
     - title: Replication
       items:
         - title: Airbyte
