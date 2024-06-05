@@ -80,7 +80,7 @@ You have a few options here:
 - Use aliases to shorten the command.
 - Include `--database` to reduce the diff to a single database. If you don't specify a database, the diff will include all databases on the branch.
 
-Here is the same command using aliases, with `main` included in `set-context`, and pointing to an LSN from `dev/alex` branch's history:
+Here is the same command using aliases, with `main` included in `set-context`, pointing to an LSN from `dev/alex` branch's history, asking for the diff on the database `people`:
 
 ```bash
 neon branch sd dev/alex@0/123456 --db people

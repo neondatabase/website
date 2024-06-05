@@ -475,9 +475,9 @@ This setting is **optional**. If you leave it out, the operation uses either of 
 Examples of different kinds of schema diff operations you can do:
 
 - [Compare to another branch's head](#compare-to-another-branchs-head)
-- [Comparing a branch to an earlier point in its history](#comparing-a-branch-to-an-earlier-point-in-its-history)
-- [Comparing a branch to its parent](#comparing-a-branch-to-its-parent)
-- [Comparing a branch to an earlier point in another branch's history](#comparing-a-branch-to-an-earlier-point-in-another-branchs-history)
+- [Compare to an earlier point in a branch's history](#comparing-a-branch-to-an-earlier-point-in-its-history)
+- [Compare a branch to its parent](#comparing-a-branch-to-its-parent)
+- [Compare to an earlier point in another branch's history](#comparing-a-branch-to-an-earlier-point-in-another-branchs-history)
 
 #### Compare to another branch's head
 
@@ -487,7 +487,7 @@ This command compares the schema of the `main` branch to the head of the branch 
 neonctl branches schema-diff main dev/alex
 ```
 
-Results of the operation:
+The output indicates that in the table `public.playing_with_neon`, a new column `description character varying(255)` has been added in the `dev/alex` branch that is not present in the `main` branch.
 
 ```diff
 --- Database: neondb	(Branch: br-wandering-firefly-a50un462)
@@ -505,10 +505,6 @@ Results of the operation:
  
  ALTER TABLE public.playing_with_neon OWNER TO neondb_owner;
 ```
-
-Explanation of the operation:
-
-This command shows a comparison between two branches (`main` and `dev/alex`) for the database `neondb`. The output indicates that in the table `public.playing_with_neon`, a new column `description character varying(255)` has been added in the `dev/alex` branch that is not present in the `main` branch.
 
 #### Comparing a branch to an earlier point in its history
 
