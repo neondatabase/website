@@ -12,19 +12,18 @@ import * as yup from 'yup';
 import Field from 'components/shared/field';
 import LinesIllustration from 'components/shared/lines-illustration';
 import { FORM_STATES } from 'constants/forms';
-import LINKS from 'constants/links';
+import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 import ErrorMessage from './error-message';
-import FormField from './field';
-import FormFooter from './footer';
-import FormSubmit from './submit';
+import FormField from './form-field';
+import FormFooter from './form-footer';
+import SubmitButton from './submit-button';
 
 const Form = ({
   simpleField,
-  formFieldGroups,
+  fieldGroups,
   submitText,
-  hasBusinessEmail,
   successMessage,
   hubspotFormId,
   items,
@@ -41,25 +40,32 @@ const Form = ({
   };
 
   const yupObject = {};
-  formFieldGroups.forEach((group) => {
+  fieldGroups.forEach((group) => {
     group.fields.forEach((field) => {
-      if (field.required) {
-        if (field.name === 'email') {
-          yupObject[field.name] = yup
-            .string()
-            .email('Please enter a valid email')
-            .required('Email address is a required field');
-        } else {
-          yupObject[field.name] = yup.string().required('Please complete this required field.');
+      let yupField = yup.string();
+      if (field.name.includes('email')) {
+        yupField = yupField.email('Please enter a valid email');
+
+        if (field.validation.useDefaultBlockList || field.validation.data) {
+          yupField = yupField.test(checkBlacklistEmails(field));
         }
       }
+
+      if (field.required)
+        yupField = yupField.required(
+          field.name.includes('email')
+            ? 'Email address is a required field'
+            : 'Please complete this required field.'
+        );
+
+      yupObject[field.name] = yupField;
     });
   });
   const yupSchema = yup.object(yupObject).required();
 
   const {
     register,
-    // reset,
+    reset,
     handleSubmit,
     formState: { isValid, errors },
   } = useForm({
@@ -97,17 +103,12 @@ const Form = ({
       if (response.ok) {
         doNowOrAfterSomeTime(() => {
           setState(FORM_STATES.SUCCESS);
-          // reset();
+          reset();
         }, loadingAnimationStartedTime);
       } else {
         doNowOrAfterSomeTime(() => {
           setState(FORM_STATES.ERROR);
-          setErrorMessage(
-            // Different error messages depending on business email field
-            hasBusinessEmail
-              ? `Ooops! Only work emails allowed. If this account is for you, <a href="${LINKS.signup}">please sign up to Neon here</a>.`
-              : 'Please reload the page and try again'
-          );
+          setErrorMessage('Please reload the page and try again');
         }, loadingAnimationStartedTime);
       }
     } catch (error) {
@@ -140,7 +141,7 @@ const Form = ({
               errorClassName="ml-7"
               {...register(simpleField.name)}
             />
-            <FormSubmit formState={state} text={submitText} simpleMode />
+            <SubmitButton formState={state} text={submitText} simpleMode />
             {errorMessage && <ErrorMessage text={errorMessage} />}
           </div>
           <LinesIllustration
@@ -149,7 +150,7 @@ const Form = ({
             bgColor="#000"
           />
         </form>
-        <FormFooter formState={state} successMessage={successMessage} items={items} />
+        <FormFooter formState={state} successMessage={successMessage} items={items} greenMode />
       </>
     );
 
@@ -164,8 +165,8 @@ const Form = ({
         >
           <div className={clsx(!simpleField && 'rounded-[10px] bg-black-new p-9 sm:px-5 sm:py-6')}>
             <div className="space-y-6">
-              {formFieldGroups &&
-                formFieldGroups.map((fieldGroup, index) => (
+              {fieldGroups &&
+                fieldGroups.map((fieldGroup, index) => (
                   <fieldset
                     key={index}
                     className={clsx(
@@ -184,7 +185,7 @@ const Form = ({
                   </fieldset>
                 ))}
             </div>
-            <FormSubmit formState={state} text={submitText} />
+            <SubmitButton formState={state} text={submitText} />
           </div>
           {errorMessage && <ErrorMessage text={errorMessage} />}
         </div>
@@ -196,7 +197,12 @@ const Form = ({
           />
         )}
       </form>
-      <FormFooter formState={state} successMessage={successMessage} items={items} />
+      <FormFooter
+        formState={state}
+        successMessage={successMessage}
+        items={items}
+        greenMode={greenMode}
+      />
     </>
   );
 };
@@ -218,12 +224,11 @@ const fieldPropTypes = {
 Form.propTypes = {
   greenMode: PropTypes.bool,
   simpleField: PropTypes.shape(fieldPropTypes),
-  formFieldGroups: PropTypes.arrayOf({
+  fieldGroups: PropTypes.arrayOf({
     fieldGroup: PropTypes.shape({
       fields: PropTypes.arrayOf(fieldPropTypes),
     }),
   }),
-  hasBusinessEmail: PropTypes.bool,
   submitText: PropTypes.string,
   hubspotFormId: PropTypes.string.isRequired,
   successMessage: PropTypes.string.isRequired,
