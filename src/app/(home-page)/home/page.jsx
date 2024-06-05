@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import { getCookie } from 'app/actions';
+import { checkCookie } from 'app/actions';
 import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
 import GetStarted from 'components/pages/home/get-started';
@@ -20,7 +20,7 @@ export const metadata = getMetadata({
 });
 
 const HomePage = async () => {
-  const is_logged_in = (await getCookie('neon_login_indicator')) === '1';
+  const is_logged_in = await checkCookie('neon_login_indicator');
   if (!is_logged_in) {
     return redirect('/');
   }

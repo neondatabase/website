@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 
-import { getCookie } from 'app/actions';
+import { checkCookie } from 'app/actions';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
@@ -36,7 +36,7 @@ const Header = async ({
   withBorder = false,
 }) => {
   const isThemeBlack = theme === 'black-pure';
-  const is_logged_in = (await getCookie('neon_login_indicator')) === '1';
+  const is_logged_in = await checkCookie('neon_login_indicator');
   const starsCount = await getGithubStars();
 
   return (

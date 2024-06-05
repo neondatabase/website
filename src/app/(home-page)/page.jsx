@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import { getCookie, getReferer } from 'app/actions';
+import { checkCookie, getReferer } from 'app/actions';
 import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
 import GetStarted from 'components/pages/home/get-started';
@@ -18,7 +18,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.index);
 
 const HomePage = async () => {
-  const is_logged_in = (await getCookie('neon_login_indicator')) === '1';
+  const is_logged_in = await checkCookie('neon_login_indicator');
   if (is_logged_in) {
     const referer = await getReferer();
     if (
