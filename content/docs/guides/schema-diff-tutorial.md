@@ -235,7 +235,11 @@ CREATE TABLE address (
 
 ## Step 4: View the schema differences
 
-Now that you have some differences between your branches, from the Neon Console go to the **Branches** page.
+Now that you have some differences between your branches, you can view the schema differences.
+
+<Tabs labels={["Console", "CLI"]}>
+
+<TabItem>
 
 1. Click on `dev/jordan` to open the detailed view, then under **Compare to Parent** click **Open schema diff**.
 
@@ -248,3 +252,121 @@ Now that you have some differences between your branches, from the Neon Console 
 You will see the schema differences between `dev/jordan` and its parent `main`, including the new address table that we added to the `dev/jordan` branch.
 
 You can also launch Schema Diff from the **Restore** page, usually as part of verifying schemas before you restore a branch to its own or another branch's history. See [Branch restore](/docs/guides/branch-restore) for more info.
+
+</TabItem>
+
+<TabItem>
+
+Compare the schema of `dev/jordan` to its parent branch using the `schema-diff` command.
+
+```bash
+neonctl branches schema-diff dev/jordan ^parent --project-id quiet-rain-89283904
+```
+
+The result shows a comparison between the `dev/jordan` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added in the `dev/jordan` branch but are not present in its parent branch `main`.
+
+```diff
+--- Database: people	(Branch: br-morning-heart-a5ltt10i)
++++ Database: people	(Branch: br-falling-dust-a5bakdqt)
+@@ -20,46 +20,8 @@
+ 
+ SET default_table_access_method = heap;
+ 
+ --
+--- Name: address; Type: TABLE; Schema: public; Owner: neondb_owner
+---
+-
+-CREATE TABLE public.address (
+-    id integer NOT NULL,
+-    person_id integer NOT NULL,
+-    street text NOT NULL,
+-    city text NOT NULL,
+-    state text NOT NULL,
+-    zip_code text NOT NULL
+-);
+-
+-
+-ALTER TABLE public.address OWNER TO neondb_owner;
+-
+---
+--- Name: address_id_seq; Type: SEQUENCE; Schema: public; Owner: neondb_owner
+---
+-
+-CREATE SEQUENCE public.address_id_seq
+-    AS integer
+-    START WITH 1
+-    INCREMENT BY 1
+-    NO MINVALUE
+-    NO MAXVALUE
+-    CACHE 1;
+-
+-
+-ALTER SEQUENCE public.address_id_seq OWNER TO neondb_owner;
+-
+---
+--- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: neondb_owner
+---
+-
+-ALTER SEQUENCE public.address_id_seq OWNED BY public.address.id;
+-
+-
+---
+ -- Name: person; Type: TABLE; Schema: public; Owner: neondb_owner
+ --
+ 
+ CREATE TABLE public.person (
+@@ -93,30 +55,15 @@
+ ALTER SEQUENCE public.person_id_seq OWNED BY public.person.id;
+ 
+ 
+ --
+--- Name: address id; Type: DEFAULT; Schema: public; Owner: neondb_owner
+---
+-
+-ALTER TABLE ONLY public.address ALTER COLUMN id SET DEFAULT nextval('public.address_id_seq'::regclass);
+-
+-
+---
+ -- Name: person id; Type: DEFAULT; Schema: public; Owner: neondb_owner
+ --
+ 
+ ALTER TABLE ONLY public.person ALTER COLUMN id SET DEFAULT nextval('public.person_id_seq'::regclass);
+ 
+ 
+ --
+--- Name: address address_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+---
+-
+-ALTER TABLE ONLY public.address
+-    ADD CONSTRAINT address_pkey PRIMARY KEY (id);
+-
+-
+---
+ -- Name: person person_email_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+ --
+ 
+ ALTER TABLE ONLY public.person
+@@ -131,16 +78,8 @@
+     ADD CONSTRAINT person_pkey PRIMARY KEY (id);
+ 
+ 
+ --
+--- Name: address address_person_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+---
+-
+-ALTER TABLE ONLY public.address
+-    ADD CONSTRAINT address_person_id_fkey FOREIGN KEY (person_id) REFERENCES public.person(id);
+-
+-
+---
+ -- Name: DEFAULT PRIVILEGES FOR SEQUENCES; Type: DEFAULT ACL; Schema: public; Owner: cloud_admin
+ --
+ 
+ ALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRANT ALL ON SEQUENCES TO neon_superuser WITH GRANT OPTION;
+--- Database: neondb	(Branch: br-morning-heart-a5ltt10i)
++++ Database: neondb	(Branch: br-falling-dust-a5bakdqt)
+```
+
+</TabItem>
+
+</Tabs>
