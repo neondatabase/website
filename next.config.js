@@ -255,11 +255,11 @@ const defaultConfig = {
       },
       {
         source: '/demos/regional-latency',
-        destination: 'https://latencies-ui.vercel.app/regional-latency'
+        destination: 'https://latencies-ui.vercel.app/demos/regional-latency'
       },
       {
         source: '/demos/regional-latency/:asset*',
-        destination: 'https://latencies-ui.vercel.app/regional-latency/:asset*'
+        destination: 'https://latencies-ui.vercel.app/demos/regional-latency/:asset*'
       }
     ];
   },
