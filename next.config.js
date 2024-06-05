@@ -243,11 +243,11 @@ const defaultConfig = {
       },
       {
         source: '/demos/instant-postgres',
-        destination: 'https://instant-postgres.mahmoudw.com/demos/playground',
+        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres',
       },
       {
         source: '/demos/instant-postgres/:path*',
-        destination: 'https://instant-postgres.mahmoudw.com/demos/playground/:path*',
+        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres/:path*',
       },
       {
         source: '/developer-days/:path*',
