@@ -9,7 +9,6 @@ import InfoIcon from 'components/shared/info-icon';
 import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import checkIcon from 'icons/pricing/check.svg';
-import sendGtagEvent from 'utils/send-gtag-event';
 
 import tableData from '../data/plans.json';
 
@@ -70,12 +69,7 @@ const TableHeading = ({
         size="xs"
         theme={isFeaturedPlan ? 'primary' : 'gray-15'}
         to={buttonUrl}
-        onClick={() => {
-          sendGtagEvent('pricing_comparison_table', {
-            event_label: label,
-            event_position: 'top',
-          });
-        }}
+        tag_name={`Details Table Top > ${label}`}
       >
         {buttonText}
       </Button>
@@ -305,12 +299,7 @@ const Table = () => {
                   size="xs"
                   theme={isScaleColumn ? 'primary' : 'gray-15'}
                   to={labelList[key].buttonUrl}
-                  onClick={() => {
-                    sendGtagEvent('pricing_comparison_table', {
-                      event_label: labelList[key].label,
-                      event_position: 'bottom',
-                    });
-                  }}
+                  tag_name={`Details Table Bottom > ${labelList[key].label}`}
                 >
                   {labelList[key].buttonText}
                 </Button>

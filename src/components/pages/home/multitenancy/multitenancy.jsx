@@ -34,7 +34,7 @@ const Multitenancy = () => (
         Use the Neon API to deploy{` `}
         <Link
           className="underline decoration-white/40 decoration-1 underline-offset-[5px] hover:decoration-primary-1/60 lg:underline-offset-4"
-          to={LINKS.enterprise}
+          to={`${LINKS.blog}/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases`}
           theme="white"
         >
           database-per-tenant architectures

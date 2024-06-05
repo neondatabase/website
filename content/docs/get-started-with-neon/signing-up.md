@@ -23,8 +23,8 @@ After signing up, you'll start with a `main` branch and the empty database `neon
 
 ## Step 1 - Sign up
 
-<div style={{ display: 'flex' }}>
-  <div style={{ flex: '0 0 60%', paddingRight: '20px' }}>
+<div className="flex gap-5 sm:flex-col">
+  <div style={{ flex: '0 0 60%' }}>
     If you haven't signed up yet, you can sign up for free here:
 
     [https://console.neon.tech/signup](https://console.neon.tech/signup)
@@ -35,9 +35,9 @@ After signing up, you'll start with a `main` branch and the empty database `neon
     [Neon Free Tier](/docs/introduction/plans#free-tier). For information about Neon's paid options, see
     [Neon Plans](/docs/introduction/plans).
   </div>
-<div style={{ flex: '0 0 40%', display: 'flex', alignItems: 'center' }}>
-    <img src="/docs/get-started-with-neon/sign_up_reduced.png" alt="sign up" style={{ marginTop: '0.75rem' }} />
-</div>
+  <div style={{ flex: '1 1 0', marginTop: '-1.25rem' }}>
+    ![sign_up](/docs/get-started-with-neon/sign_up_reduced.png "no-border")
+  </div>
 </div>
 
 ## Step 2 - Onboarding in the Neon Console
@@ -46,11 +46,11 @@ After you sign up, you are guided through some onboarding steps that ask you to 
 
 <div style={{ display: 'flex' }}>
   <div style={{ flex: '0 0 45%', paddingRight: '20px', marginTop: '.75em'}}>
-  ![onboarding](/docs/get-started-with-neon/onboarding.png "no-border")
+    ![onboarding](/docs/get-started-with-neon/onboarding.png "no-border")
   </div>
-<div style={{ flex: '0 0 55%', display: 'flex', alignItems: 'center' }}>
-  ![quickstart](/docs/get-started-with-neon/quickstart.png "no-border")
-</div>
+  <div style={{ flex: '0 0 55%', display: 'flex', alignItems: 'center' }}>
+    ![quickstart](/docs/get-started-with-neon/quickstart.png "no-border")
+  </div>
 </div>
 
 The steps should be self-explanatory, but it's important to understand a few key points:
@@ -77,21 +77,27 @@ From the Neon Console, use the sidebar navigation to open the **SQL Editor** pag
 
 ![Neon SQL Editor](/docs/get-started-with-neon/sql_editor.png)
 
-The first time you open the SQL Editor for a new project, the editor includes placeholder SQL commands to create and populate a new sample table called `playing with neon`.
+The first time you open the SQL Editor for a new project, the editor includes placeholder SQL commands to create and populate a new sample table called `playing_with_neon`.
 
-For this tutorial, go ahead and create this sample database: click **Run**.
+For this tutorial, go ahead and create this sample table: click **Run**.
 
 Or if you want to add the table from the command line and you already have `psql` installed:
 
-```sql
+```sql shouldWrap
 CREATE TABLE playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
 INSERT INTO playing_with_neon(name, value)
-  SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i)
+  SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
 ```
 
-Your default branch `main` now has a table with some content.
+Your default branch `main` now has a table with some data.
 
-## Step 4 - Create a dedicated development branch
+## Step 4 - View and modify data in the console
+
+Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, add or remove columns, drop or truncate tables, and export data in `.json` and `.csv` formats. 
+
+![Tables page Drizzle integration](/docs/relnotes/tables_page_drizzle.png)
+
+## Step 5 - Create a dedicated development branch
 
 In this step, you'll create a dedicated development branch using the Neon CLI. This branch will be an exact, isolated copy of `main`. 
 
@@ -139,7 +145,7 @@ You can create and manage branches from the Neon Console, but here we'll use the
 
 There are other branch creation options available when using the CLI. See [Create a branch with the CLI](/docs/guides/branching-neon-cli#create-a-branch-with-the-cli) for more.
 
-## Step 5 - Make some sample schema changes
+## Step 6 - Make some sample schema changes
 
 With your development branch created, you can now make schema changes safely in your own environment. Since the `playing_with_neon` table is already available in the `dev/developer_name` branch, we'll modify its schema and add new data so that it deviates from `main`.
 
@@ -231,7 +237,7 @@ With `psql` available, let's work from the terminal to connect to your `dev/deve
     (11 rows)
     ```
 
-## Step 6 - Check your changes with Schema Diff
+## Step 7 - Check your changes with Schema Diff
 
 After making the schema changes to your development branch, you can use the [Schema Diff](/docs/guides/schema-diff) feature to compare your branch against its parent branch. Schema Diff is a Github-style code-comparison tool used to visualize differences between different branch's databases.
 
@@ -248,7 +254,7 @@ From the **Branches** page in the Neon Console:
 
 A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools,  you can use ORMs like [Prisma](https://www.prisma.io/) or [Drizzle](https://drizzle.team/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
 
-## Step 7 - Reset your dev branch to main
+## Step 8 - Reset your dev branch to main
 
 After experimenting with changes in your development branch, let's now reset the branch to `main`, its parent branch.
 

@@ -15,9 +15,10 @@
     - title: 2 - Connect Neon to your stack
       slug: get-started-with-neon/connect-neon
     - title: 3 - Branching workflows
-      slug: get-started-with-neon/workflow-primer 
+      slug: get-started-with-neon/workflow-primer
     - title: 4 - Getting ready for production
       slug: get-started-with-neon/production-checklist
+      enableTableOfContents: true
     - title: Framework quickstarts
       slug: get-started-with-neon/frameworks
       items:
@@ -25,6 +26,9 @@
           slug: guides/astro
         - title: Django
           slug: guides/django
+        - title: Express
+          slug: guides/express
+          tag: new
         - title: Laravel
           slug: guides/laravel
         - title: Next.js
@@ -33,6 +37,8 @@
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
           slug: guides/quarkus-reactive
+        - title: Reflex
+          slug: guides/reflex
         - title: Remix
           slug: guides/remix
         - title: Ruby on Rails
@@ -318,6 +324,14 @@
       items:
         - title: GitHub integration
           slug: guides/neon-github-app
+        - title: Neosync
+          items:
+            - title: Generate synthetic data
+              slug: guides/neosync-generate
+              tag: new
+            - title: Anonymize data
+              slug: guides/neosync-anonymize
+              tag: new
     - title: Replication
       items:
         - title: Airbyte
@@ -362,12 +376,6 @@
           slug: guides/sequelize
         - title: SQLAlchemy
           slug: guides/sqlalchemy-migrations
-    - title: Tools
-      items:
-        - title: Outerbase
-          slug: guides/outerbase
-        - title: Prisma
-          slug: guides/prisma
     - title: Authentication
       items:
         - title: Auth0
@@ -534,4 +542,4 @@
     - title: Docs Contribution Guide
       slug: community/contribution-guide
 - title: Glossary
-  slug: /reference/glossary
+  slug: reference/glossary

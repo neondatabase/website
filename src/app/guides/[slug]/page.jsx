@@ -24,13 +24,12 @@ export async function generateMetadata({ params }) {
   const post = getPostBySlug(slug, GUIDES_DIR_PATH);
   if (!post) return notFound();
   const {
-    data: { title },
-    excerpt,
+    data: { title, subtitle },
   } = post;
   const encodedTitle = Buffer.from(title).toString('base64');
   return getMetadata({
     title: `${title} - Neon Guides`,
-    description: excerpt,
+    description: subtitle,
     imagePath:
       title.length < MAX_TITLE_LENGTH
         ? `${VERCEL_URL}/guides/og?title=${encodedTitle}`
@@ -66,14 +65,7 @@ const GuidePost = async ({ params }) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <Layout
-        className="bg-blur"
-        headerTheme="white"
-        headerWithBorder
-        burgerWithoutBorder
-        isDocPage
-        isHeaderSticky
-      >
+      <Layout headerWithBorder burgerWithoutBorder isDocPage isHeaderSticky>
         <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
           <Container
             className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-12 xl:gap-x-7 lg:block lg:gap-x-5 md:pt-10 sm:pt-8"

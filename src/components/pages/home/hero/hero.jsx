@@ -128,6 +128,7 @@ const Hero = () => {
             theme="primary"
             to={LINKS.signup}
             target="_blank"
+            tag_name="Hero"
           >
             Get Started
           </Button>

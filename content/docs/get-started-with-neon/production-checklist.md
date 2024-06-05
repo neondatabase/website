@@ -4,7 +4,7 @@ subtitle: Explore the features that will help you prepare for production with Ne
 enableTableOfContents: true
 ---
 
-<div style={{ display: 'flex' }}>
+<div style={{ display: 'flex', flexWrap: 'wrap' }}>
   <div style={{ flex: 1, paddingRight: '20px' }}>
     <h3>Performance</h3>
     <p>

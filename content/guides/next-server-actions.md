@@ -32,7 +32,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs labels={["node-postgres", "Neon serverless driver"]}>
+    <CodeTabs reverse={true} labels={["node-postgres", "Neon serverless driver"]}>
 
       ```shell
       npm install pg
@@ -73,7 +73,7 @@ export default function Page() {
 
 Now, let's add the server action to insert the data into your Postgres (powered by Neon).
 
-<CodeTabs labels={["node-postgres", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "Neon serverless driver"]}>
 
   ```tsx {3,6-16}
   // File: app/page.tsx

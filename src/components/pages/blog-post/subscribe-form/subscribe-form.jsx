@@ -264,7 +264,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
             <LinesIllustration
               className="z-10 !w-[125%]"
               color={formState === STATES.ERROR ? '#FF4C79' : '#00E599'}
-              size="sm"
+              bgColor="#0C0D0D"
             />
           )}
         </form>

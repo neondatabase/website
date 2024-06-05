@@ -14,17 +14,20 @@ const Field = forwardRef(
       className,
       name,
       label,
+      labelClassName,
       type = 'text',
       children,
       tag: Tag = 'input',
+      inputClassName,
       error,
+      errorClassName,
       isDisabled,
       ...otherProps
     },
     ref
   ) => (
     <div className={clsx('relative flex flex-col items-start', className)}>
-      <label className="leading-none text-gray-new-80" htmlFor={name}>
+      <label className={clsx('leading-none text-gray-new-80', labelClassName)} htmlFor={name}>
         {label}
       </label>
       <Tag
@@ -36,7 +39,8 @@ const Field = forwardRef(
             'bg-[url(/images/chevron-down.svg)] bg-[center_right_1rem] bg-no-repeat',
           error
             ? 'border-secondary-1 focus:border-secondary-1'
-            : 'border-transparent focus:border-primary-1'
+            : 'border-transparent focus:border-primary-1',
+          inputClassName
         )}
         ref={ref}
         id={name}
@@ -50,7 +54,10 @@ const Field = forwardRef(
 
       {error && (
         <p
-          className="absolute top-[calc(100%+0.5rem)] text-sm leading-none text-secondary-1"
+          className={clsx(
+            'absolute top-[calc(100%+0.5rem)] text-sm leading-none text-secondary-1',
+            errorClassName
+          )}
           data-test="error-field-message"
         >
           {error}
@@ -64,9 +71,12 @@ Field.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  labelClassName: PropTypes.string,
   type: PropTypes.string,
   tag: PropTypes.oneOf(Object.values(FIELD_TAGS)),
+  inputClassName: PropTypes.string,
   error: PropTypes.string,
+  errorClassName: PropTypes.string,
   children: PropTypes.node,
   isDisabled: PropTypes.bool,
 };

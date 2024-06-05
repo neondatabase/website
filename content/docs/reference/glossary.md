@@ -270,7 +270,7 @@ A feature of the Neon Console that provides several graphs to help you monitor s
 
 ## Neon
 
-A fully managed serverless Postgres. Neon separates storage and compute to offer modern developer features such as branching, autoscaling, and bottomless storage. For more information, see [What is Neon?](/docs/introduction/about/).
+A serverless Postgres platform designed to help developers build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 
@@ -328,7 +328,7 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech
 
 A pooled connection can support a high number of concurrent users and is recommended for use with serverless and edge functions. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
-You can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Select the **Pooled connection** option to add the `-pooler` option to the connection string. For further instructions, see [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling).
+You can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Select the **Pooled connection** option to add the `-pooler` option to the connection string. For further instructions, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
 
 ## PostgreSQL
 
