@@ -475,7 +475,7 @@ This setting is **optional**. If you leave it out, the operation uses either of 
 Examples of different kinds of schema diff operations you can do:
 
 - [Compare to another branch's head](#compare-to-another-branchs-head)
-- [Comparing a branch to an earlier point in its own history](#comparing-a-branch-to-an-earlier-point-in-its-own-history)
+- [Comparing a branch to an earlier point in its history](#comparing-a-branch-to-an-earlier-point-in-its-history)
 - [Comparing a branch to its parent](#comparing-a-branch-to-its-parent)
 - [Comparing a branch to an earlier point in another branch's history](#comparing-a-branch-to-an-earlier-point-in-another-branchs-history)
 
@@ -489,7 +489,7 @@ neonctl branches schema-diff main dev/alex
 
 Results of the operation:
 
-```
+```diff
 --- Database: neondb	(Branch: br-wandering-firefly-a50un462)
 +++ Database: neondb	(Branch: br-fancy-sky-a5cydw8p)
 @@ -26,9 +26,10 @@
