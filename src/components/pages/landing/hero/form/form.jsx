@@ -43,35 +43,38 @@ const Form = ({
   const defaultValues = {};
   fieldGroups.forEach((group) => {
     group.fields.forEach((field) => {
-      let yupField = yup;
+      if (field.required || field.name.includes('email')) {
+        let yupField = yup;
 
-      if (field.fieldType === 'text') {
-        yupField = yupField.string();
+        if (field.fieldType === 'text') {
+          yupField = yupField.string();
 
-        if (field.name.includes('email')) {
-          yupField = yupField.email('Please enter a valid email');
+          if (field.name.includes('email')) {
+            yupField = yupField.email('Please enter a valid email');
 
-          // Business email checking
-          if (field.validation.useDefaultBlockList || field.validation.data) {
-            yupField = yupField.test(checkBlacklistEmails(field));
+            // Business email checking
+            if (field.validation.useDefaultBlockList || field.validation.data) {
+              yupField = yupField.test(checkBlacklistEmails(field));
+            }
           }
         }
+
+        if (field.required) {
+          if (field.name.includes('email'))
+            yupField = yupField.required('Email address is a required field');
+          else if (field.fieldType === 'radio')
+            yupField = yupField.string().notOneOf(['hidden'], 'Please choose an option');
+          else if (field.fieldType === 'checkbox') {
+            defaultValues[field.name] = [];
+            yupField = yupField
+              .array()
+              .min(1, 'Please choose at least one option')
+              .required('This field is required');
+          } else yupField = yupField.required('Please complete this required field.');
+        }
+
+        yupObject[field.name] = yupField;
       }
-
-      if (field.required)
-        if (field.name.includes('email'))
-          yupField = yupField.required('Email address is a required field');
-        else if (field.fieldType === 'radio')
-          yupField = yupField.string().notOneOf(['hidden'], 'Please choose an option');
-        else if (field.fieldType === 'checkbox') {
-          defaultValues[field.name] = [];
-          yupField = yupField
-            .array()
-            .min(1, 'Please choose at least one option')
-            .required('This field is required');
-        } else yupField = yupField.required('Please complete this required field.');
-
-      yupObject[field.name] = yupField;
     });
   });
   const yupSchema = yup.object(yupObject).required();
@@ -99,7 +102,7 @@ const Form = ({
 
     const values = Object.entries(data).map(([key, value]) => ({
       name: key,
-      value,
+      value: Array.isArray(value) ? value.join(', ') : value,
     }));
 
     setErrorMessage('');
