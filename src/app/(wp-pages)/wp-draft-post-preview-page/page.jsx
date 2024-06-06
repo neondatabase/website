@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
