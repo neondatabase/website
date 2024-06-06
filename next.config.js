@@ -242,6 +242,10 @@ const defaultConfig = {
         destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
       },
       {
+        source: '/instant-postgres',
+        destination: 'https://instant-postgres.mahmoudw.com/instant-postgres',
+      },
+      {
         source: '/instant-postgres/:path*',
         destination: 'https://instant-postgres.mahmoudw.com/instant-postgres/:path*',
       },
