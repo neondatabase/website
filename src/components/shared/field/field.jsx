@@ -10,13 +10,13 @@ export const FIELD_TAGS = {
 
 const themes = {
   default:
-    'mt-2.5 w-full rounded border-[3px] px-4 text-lg text-white outline-none focus:bg-black h-14 md:h-12',
+    'mt-2.5 w-full border-[3px] px-4 text-lg text-white outline-none focus:bg-black h-14 md:h-12',
   checkbox:
-    'absolute pointer-events-none top-1/2 left-0 -translate-y-1/2 w-[18px] h-[18px] rounded !border-white/10 hover:!border-white/50 before:absolute before:inset-0 before:z-10 before:bg-center before:bg-no-repeat checked:bg-white before:bg-[url("/images/check.svg")] before:bg-[length:14px_14px] before:opacity-0 before:transition-opacity before:duration-200 checked:before:opacity-100 disabled:!border-white/10',
+    'absolute pointer-events-none top-1/2 left-0 -translate-y-1/2 w-[18px] h-[18px] border !border-white/10 hover:!border-white/50 before:absolute before:inset-0 before:z-10 before:bg-center before:bg-no-repeat checked:bg-white before:bg-[url("/images/check.svg")] before:bg-[length:14px_14px] before:opacity-0 before:transition-opacity before:duration-200 checked:before:opacity-100 disabled:!border-white/10',
 };
 
 const baseStyles =
-  'remove-autocomplete-styles appearance-none bg-white/[0.04] border transition-colors duration-200';
+  'remove-autocomplete-styles appearance-none bg-white/[0.04] rounded transition-colors duration-200';
 
 const Field = forwardRef(
   (
@@ -24,6 +24,7 @@ const Field = forwardRef(
       className,
       theme = 'default',
       name,
+      value,
       label,
       labelClassName,
       type = 'text',
@@ -45,7 +46,7 @@ const Field = forwardRef(
           isDisabled && '!cursor-default',
           labelClassName
         )}
-        htmlFor={name}
+        htmlFor={theme === 'checkbox' ? value : name}
       >
         {label}
       </label>
@@ -61,8 +62,9 @@ const Field = forwardRef(
           inputClassName
         )}
         ref={ref}
-        id={name}
+        id={theme === 'checkbox' ? value : name}
         name={name}
+        value={theme === 'checkbox' ? value : null}
         type={type}
         disabled={isDisabled}
         {...otherProps}
@@ -88,6 +90,7 @@ Field.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.oneOf(Object.values(FIELD_TAGS)),
   name: PropTypes.string.isRequired,
+  value: PropTypes.string,
   label: PropTypes.string.isRequired,
   labelClassName: PropTypes.string,
   type: PropTypes.string,
