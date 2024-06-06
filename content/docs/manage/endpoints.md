@@ -201,9 +201,13 @@ Neon's _Autosuspend_ feature automatically transitions a compute endpoint into a
 
 The maximum **Suspend compute after a period of inactivity** setting is 7 days. To disable autosuspend, which results in an always-active compute, deselect **Suspend compute after a period of inactivity**. For more information, refer to [Configuring autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
 
+<Admonition type="important">
+If you disable autosuspension entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute endpoint](https://neon.tech/docs/manage/endpoints#restart-a-compute-endpoint). 
+</Admonition>
+
 ## Restart a compute endpoint
 
-It is sometimes necessary to restart a compute endpoint. For example, if you upgrade to a paid plan account, you may want to restart your compute endpoint to immediately apply your upgraded limits.
+It is sometimes necessary to restart a compute endpoint. For example, if you upgrade to a paid plan account, you may want to restart your compute endpoint to immediately apply your upgraded limits, or maybe you've disabled autosuspesion and want to restart your compute to pick up the latest compute-related updates, which Neon typically releases weekly.
 
 <Admonition type="important">
 Please be aware that restarting a compute endpoint interrupts any connections currently using the compute endpoint. To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
@@ -212,7 +216,13 @@ Please be aware that restarting a compute endpoint interrupts any connections cu
 You can restart a compute endpoint using one of the following methods:
 
 - Stop activity on your compute endpoint (stop running queries) and wait for your compute endpoint to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`. 
-- Issue a [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) using the **Try It!** feature. You'll need an [API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
+- Issue a [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
+  ```bash
+  curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/cool-forest-86753099/endpoints/ep-calm-flower-a5b75h79/restart \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+  ```
 - Users on paid plans can temporarily set a compute's **Suspend compute after a period of inactivity** to a low value to initiate a suspension (the default setting is 5 minutes). See [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console. Look for `suspend_compute` action. Any activity on the compute endpoint will restart it, such as running a query. Watch for a `start_compute` action on the **Operations** page.
 
 ## Delete a compute endpoint
