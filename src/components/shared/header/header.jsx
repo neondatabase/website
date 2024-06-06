@@ -1,193 +1,220 @@
-'use client';
-
 import clsx from 'clsx';
-import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
-import useMedia from 'react-use/lib/useMedia';
+import { Suspense } from 'react';
 
+import { checkCookie } from 'app/actions';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import GithubStarCounter from 'components/shared/github-star-counter';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
+import ChevronIcon from 'icons/chevron-down.inline.svg';
+import ArrowIcon from 'icons/header/arrow-right.inline.svg';
 
-import GithubStarCounter from '../github-star-counter';
+import HeaderWrapper from './header-wrapper';
 
-import Burger from './burger';
+const API_URL = 'https://api.github.com/repos/neondatabase/neon';
 
-const Search = dynamic(() => import('components/shared/search'), { ssr: false });
+const getGithubStars = async () => {
+  const response = await fetch(API_URL, { next: { revalidate: 60 * 60 * 12 } });
+  const json = await response.json();
+  if (response.status >= 400) {
+    throw new Error('Error fetching GitHub stars');
+  }
+  return json.stargazers_count;
+};
 
-const Header = ({
+const Header = async ({
   className = null,
-  theme,
+  theme = null,
   isSticky = false,
-  withBottomBorder = false,
-  isDocPage = false,
   isBlogPage = false,
+  isDocPage = false,
+  withBorder = false,
 }) => {
-  const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
-  const headerRef = useRef(null);
-  const isMobile = useMedia('(max-width: 1023px)', false);
-
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const handleMobileMenuOutsideClick = () => {
-    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
-  };
-
-  const handleBurgerClick = () => {
-    setIsMobileMenuOpen((isMobileMenuOpen) => !isMobileMenuOpen);
-  };
-
-  const findIndexName = () => {
-    if (isDocPage) return process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME;
-    if (isBlogPage) return process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME;
-    return null;
-  };
+  const is_logged_in = await checkCookie('neon_login_indicator');
+  const isDarkTheme = theme === 'dark';
+  const starsCount = await getGithubStars();
 
   return (
     <>
-      <header
-        className={clsx(
-          'safe-paddings absolute left-0 right-0 top-0 z-40 w-full dark:bg-gray-new-8 lg:relative lg:h-14',
-          className,
-          isSticky && 'sticky top-0 z-50 md:relative',
-          withBottomBorder &&
-            theme !== 'gray-8' &&
-            'border-b border-gray-new-90 dark:border-gray-new-20',
-          withBottomBorder && theme === 'gray-8' && 'border-b border-gray-new-20',
-          { 'bg-gray-new-8': theme === 'gray-8' },
-          { 'lg:bg-black': theme === 'black' },
-          { 'lg:bg-black-new': theme === 'black-new' },
-          { 'bg-white': theme === 'white' }
-        )}
-        ref={headerRef}
+      <HeaderWrapper
+        className={className}
+        isSticky={isSticky}
+        theme={theme}
+        withBorder={withBorder}
       >
-        <Container className="flex items-center justify-between py-3.5" size="lg">
-          <Link to="/">
-            <span className="sr-only">Neon</span>
-            <Logo isThemeBlack={isThemeBlack} />
-          </Link>
+        <Container className="z-10 flex items-center justify-between md:!px-5" size="1344">
+          <div className="flex items-center gap-x-[90px] xl:gap-x-16">
+            <Link to="/">
+              <span className="sr-only">Neon</span>
+              <Logo className="h-7" isDarkTheme={isDarkTheme} width={102} height={28} priority />
+            </Link>
 
-          <nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <ul className="flex space-x-12 3xl:space-x-10 2xl:space-x-8 lg:hidden">
-              {MENUS.header.map(({ to, text, items }, index) => {
-                const Tag = to ? Link : 'button';
-                return (
-                  <li className={clsx(items?.length > 0 && 'group relative')} key={index}>
-                    <Tag
+            <nav>
+              <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden">
+                {MENUS.header.map(({ to, text, items }, index) => {
+                  const Tag = to ? Link : 'button';
+                  return (
+                    <li
                       className={clsx(
-                        'whitespace-pre',
-                        items?.length > 0 &&
-                          'relative pr-3.5 leading-none transition-colors duration-200 before:absolute before:right-0 before:top-[7px] before:h-0 before:w-0 before:border-4 before:border-transparent before:transition-[border-color] before:duration-200 hover:text-primary-2 group-hover:text-green-45 group-hover:before:border-t-primary-2 dark:before:border-transparent',
-                        items?.length > 0 && isThemeBlack
-                          ? 'before:border-t-white'
-                          : 'before:border-t-black dark:before:border-t-white',
-                        isThemeBlack ? 'text-white' : 'text-black dark:text-white'
+                        'relative [perspective:2000px]',
+                        items?.length > 0 && 'group'
                       )}
-                      to={to}
-                      theme={isThemeBlack && to ? 'white' : 'black'}
+                      key={index}
                     >
-                      {text}
-                    </Tag>
-                    {items?.length > 0 && (
-                      <div className="group-hover:opacity-1 invisible absolute bottom-0 w-max translate-y-full pt-4 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
-                        <ul
-                          className="min-w-[240px] rounded-2xl bg-white p-3.5"
-                          style={{ boxShadow: '0px 4px 10px rgba(26, 26, 26, 0.2)' }}
+                      <Tag
+                        className={clsx(
+                          'flex items-center gap-x-1 whitespace-pre text-sm',
+                          isDarkTheme ? 'text-white' : 'text-black dark:text-white'
+                        )}
+                        to={to}
+                        theme={isDarkTheme && to ? 'white' : 'black'}
+                      >
+                        {text}
+                        {items?.length > 0 && (
+                          <ChevronIcon
+                            className={clsx(
+                              '-mb-px w-2.5 opacity-60 dark:text-white [&_path]:stroke-2',
+                              isDarkTheme ? 'text-white' : 'text-black-new'
+                            )}
+                          />
+                        )}
+                      </Tag>
+                      {items?.length > 0 && (
+                        <div
+                          className={clsx(
+                            'absolute -left-5 top-full w-[300px] pt-5',
+                            'pointer-events-none opacity-0',
+                            'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
+                            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
+                          )}
                         >
-                          {items.map(({ icon, text, description, to }, index) => (
-                            <li
-                              className={clsx(
-                                index !== 0 && 'mt-3.5 border-t border-t-gray-6 pt-3.5'
-                              )}
-                              key={index}
-                            >
-                              <Link
-                                className="flex items-center whitespace-nowrap hover:text-primary-2"
-                                to={to}
-                              >
-                                <img
-                                  src={icon}
-                                  alt="text"
-                                  width={44}
-                                  height={44}
-                                  className="h-11 w-11 shrink-0"
-                                  loading="lazy"
-                                  aria-hidden
-                                />
-                                <span className="ml-3">
-                                  <span className="t-xl mr-2 block font-semibold !leading-none transition-colors duration-200">
-                                    {text}
+                          <ul
+                            className={clsx(
+                              'relative flex min-w-[248px] flex-col gap-y-0.5 rounded-[14px] border p-2.5 dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]',
+                              isDarkTheme
+                                ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
+                                : 'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]'
+                            )}
+                          >
+                            {items.map(({ icon, text, description, to }, index) => (
+                              <li key={index}>
+                                <Link
+                                  className={clsx(
+                                    'group/link relative flex items-center overflow-hidden whitespace-nowrap rounded-[14px] p-2 dark:text-white',
+                                    'before:absolute before:inset-0 before:z-10 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 dark:before:bg-[#16181D]',
+                                    isDarkTheme
+                                      ? 'text-white before:bg-[#16181D]'
+                                      : 'text-black-new before:bg-[#f5f5f5]'
+                                  )}
+                                  to={to}
+                                >
+                                  <div
+                                    className={clsx(
+                                      'relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border dark:border-[#2E3038] dark:bg-[#16181D]',
+                                      isDarkTheme
+                                        ? 'border-[#2E3038] bg-[#16181D]'
+                                        : 'border-gray-new-90 bg-[#F5F5F5]'
+                                    )}
+                                  >
+                                    <img
+                                      className={clsx(
+                                        'h-5 w-5 dark:opacity-100 dark:invert-0',
+                                        !isDarkTheme && 'opacity-90 invert'
+                                      )}
+                                      src={icon}
+                                      width={20}
+                                      height={20}
+                                      loading="lazy"
+                                      alt=""
+                                      aria-hidden
+                                    />
+                                  </div>
+                                  <span className="relative z-10 ml-2.5">
+                                    <span className="block text-sm leading-dense tracking-[-0.01em] transition-colors duration-200">
+                                      {text}
+                                    </span>
+                                    <span
+                                      className={clsx(
+                                        'mt-0.5 block text-[13px] font-light leading-dense tracking-[-0.02em]',
+                                        isDarkTheme
+                                          ? 'text-gray-new-50'
+                                          : 'text-gray-new-40 dark:text-gray-new-50'
+                                      )}
+                                    >
+                                      {description}
+                                    </span>
                                   </span>
-                                  <span className="mt-1.5 block text-sm leading-none text-black">
-                                    {description}
-                                  </span>
-                                </span>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-
-          <div className="flex lg:hidden">
-            <GithubStarCounter className="mr-5 xl:mr-3" isThemeBlack={isThemeBlack} />
-            <Button
-              className="mr-3.5 h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:mr-2 xl:px-4"
-              to={LINKS.login}
-              theme={isThemeBlack ? 'gray-dark-outline' : 'gray-dark-outline-black'}
-            >
-              Log In
-            </Button>
-
-            <Button
-              className="h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:px-4"
-              to={LINKS.signup}
-              theme="primary"
-            >
-              Sign Up
-            </Button>
+                                  <ArrowIcon
+                                    className={clsx(
+                                      'relative z-10 ml-auto mr-1.5 h-2.5 w-1.5 -translate-x-1 opacity-0 transition-[opacity,transform] duration-300 group-hover/link:translate-x-0 group-hover/link:opacity-100 dark:text-gray-new-70',
+                                      isDarkTheme ? 'text-gray-new-70' : 'text-gray-new-40'
+                                    )}
+                                  />
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
           </div>
-          {isMobile && (
-            <div className="flex items-center gap-x-3 md:gap-x-5">
-              {(isDocPage || isBlogPage) && (
-                <Search className="mobile-search" indexName={findIndexName()} isBlog={isBlogPage} />
-              )}
 
-              <Burger
-                className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
-                isToggled={isMobileMenuOpen}
-                onClick={handleBurgerClick}
-              />
-            </div>
-          )}
+          <div className="flex items-center gap-x-6 lg:hidden lg:pr-12">
+            <Suspense>
+              <GithubStarCounter isDarkTheme={isDarkTheme} starsCount={starsCount} />
+            </Suspense>
+            {is_logged_in ? (
+              <Button
+                className="h-8 px-[22px] text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 xl:px-4 lg:hidden"
+                to={LINKS.login}
+                theme="primary"
+              >
+                Go to Console
+              </Button>
+            ) : (
+              <>
+                <Link
+                  className="text-[13px] leading-none tracking-extra-tight lg:hidden"
+                  to={LINKS.login}
+                  theme={isDarkTheme ? 'white' : 'black'}
+                >
+                  Log In
+                </Link>
+
+                <Button
+                  className="h-8 px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
+                  to={LINKS.signup}
+                  theme="primary"
+                  tag_name="Header"
+                >
+                  Sign Up
+                </Button>
+              </>
+            )}
+          </div>
         </Container>
-      </header>
-      <MobileMenu
-        isOpen={isMobileMenuOpen}
-        headerRef={headerRef}
-        onOutsideClick={handleMobileMenuOutsideClick}
-      />
+      </HeaderWrapper>
+      <MobileMenu isDarkTheme={isDarkTheme} isBlogPage={isBlogPage} isDocPage={isDocPage} />
     </>
   );
 };
 
 Header.propTypes = {
   className: PropTypes.string,
-  theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
-  withBottomBorder: PropTypes.bool,
+  theme: PropTypes.oneOf(['light', 'dark']),
   isSticky: PropTypes.bool,
-  isDocPage: PropTypes.bool,
   isBlogPage: PropTypes.bool,
+  isDocPage: PropTypes.bool,
+  withBorder: PropTypes.bool,
 };
 
 export default Header;

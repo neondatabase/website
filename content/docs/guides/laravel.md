@@ -60,4 +60,14 @@ If you run into this error, please see the following documentation for an explan
     DB_PASSWORD=endpoint=<endpoint_id>$<password>
     ```
 
+## Schema migration with Laravel
+
+For schema migration with Laravel, see our guide:
+
+<DetailIconCards>
+
+<a href="/docs/guides/laravel-migrations" description="Schema migration with Neon Postgres and Laravel" icon="app-store" icon="app-store">Laravel Migrations</a>
+
+</DetailIconCards>
+
 <NeedHelp/>

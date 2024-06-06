@@ -1,6 +1,6 @@
 ---
-title: Sign up for a Neon account
-subtitle: Sign up for Neon in just a few seconds and start for free
+title: Playing with Neon
+subtitle: Sign up for free and learn the basics of database branching with Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/console/
@@ -10,49 +10,286 @@ redirectFrom:
 updatedOn: '2024-02-16T18:37:19.445Z'
 ---
 
-You can sign up for free and upgrade to a paid plan when you are ready to scale. For information about what's included with the Neon Free Tier, see [Neon Free Tier](/docs/introduction/plans#free-tier). For information about Neon's paid plan options, see [Neon plans](/docs/introduction/plans).
+This tutorial guides you through your first steps using Neon as your Postgres database. You'll get familiar with the following concepts:
 
-## Sign up
+- How the Neon [object hierarchy](/docs/manage/overview) works, starting with the **Project**.
+- How [branching](https://neon.tech/docs/introduction/branching) keeps your data isolated from production, and how easy it is to reset development branches when ready to start on new work.
 
-Signing up for Neon is easy. Simply navigate to [https://console.neon.tech/signup](https://console.neon.tech/signup) and sign up with your email, Github, Google, or partner account.
-![Neon Console sign up](/docs/get-started-with-neon/neon_signup.png)
+## About branching
 
-After signing up, you are directed to the Neon Console to create your first project. Enter a name for your project, select a Postgres version, provide a database name, and select a region. Generally, you'll want to select the region closest to your application. When you're finished, click **Create project**.
-![Neon Console sign up](/docs/get-started-with-neon/create_first_project.png)
+Each [branch](/docs/introduction/branching) is a fully-isolated copy of its parent. We suggest creating a long-term branch for each developer on your team to maintain consistent connection strings. You can reset your development branch to main whenever needed.
 
-You are presented with the connection details for your new project, which you can use to connect to your database from a client or application. You can save the connection details or retrieve them later from the **Connection details** widget on the Neon **Dashboard**.
-![Connection details dialog](/docs/get-started-with-neon/connection_details_modal.png)
+After signing up, you'll start with a `main` branch and the empty database `neondb` created during onboarding. You'll add data to the `main` branch's database and then create a new development branch off of `main`.
 
-## Signing in to a social account with your email
+## Step 1 - Sign up
 
-If you already have a Neon account using one of our social or partner login options but you now want to sign in with your email account, all you have to do is add a password to your profile.
+<div className="flex gap-5 sm:flex-col">
+  <div style={{ flex: '0 0 60%' }}>
+    If you haven't signed up yet, you can sign up for free here:
 
-Go to **Profile** and click **Update Password**.
+    [https://console.neon.tech/signup](https://console.neon.tech/signup)
+        
+    Sign up with your email, Github, Google, or other partner account. 
+    
+    For information about what's included with the free plan, see
+    [Neon Free Tier](/docs/introduction/plans#free-tier). For information about Neon's paid options, see
+    [Neon Plans](/docs/introduction/plans).
+  </div>
+  <div style={{ flex: '1 1 0', marginTop: '-1.25rem' }}>
+    ![sign_up](/docs/get-started-with-neon/sign_up_reduced.png "no-border")
+  </div>
+</div>
 
-<Admonition type="note">
-If you don't see an **Update Password** button, please sign out and sign back in. You should then see the option. This is a legacy issue; it will be resolved soon.
-</Admonition>
+## Step 2 - Onboarding in the Neon Console
 
-You will be guided through a few steps, asking you to reauthenticate using your original social account, and then create your new password. After that, you are free to sign into your Neon account using either your social account or the email option.
+After you sign up, you are guided through some onboarding steps that ask you to create a **Project**. After that, you are presented with the project **Quickstart**.
 
-## Changing your email
+<div style={{ display: 'flex' }}>
+  <div style={{ flex: '0 0 45%', paddingRight: '20px', marginTop: '.75em'}}>
+    ![onboarding](/docs/get-started-with-neon/onboarding.png "no-border")
+  </div>
+  <div style={{ flex: '0 0 55%', display: 'flex', alignItems: 'center' }}>
+    ![quickstart](/docs/get-started-with-neon/quickstart.png "no-border")
+  </div>
+</div>
 
-If you've signed up with a social or partner login and now want to change your email &#8212; for example, you previously signed up using a GitHub or Google account and now want to use your personal email &#8212; you can make this change under **Profile → Account Settings →  Personal Information**. Or follow this direct link: [change email](https://console.neon.tech/app/settings/profile?modal=change_email)
+The steps should be self-explanatory, but it's important to understand a few key points:
 
-After you make the change, you'll receive a notification at this new email address asking you to confirm. Once confirmed, you'll be logged out of Neon. Log back in with your new email, and use this email going forward.
+- **In Neon, everything starts with the _Project_**
 
-For Hasuara users, changing email is not yet supported.
+  It is the top-level container that holds your branches, databases, and roles. Typically, you should create a project for each repository in your application. This allows you to manage your database branches just like you manage your code branches: a branch for production, staging, development, new features, previews, and so forth.
 
-<Admonition type="note">
-It is important to note that changing your email will _unlink your existing social account_. After you make this change, you will only be able to use your new email to sign in.
-</Admonition>
+- **We create your default branch `main` for you**
 
-## Next steps
+  `main` is the default (primary) branch and hosts your database, role, and a compute endpoint that you can connect your application to.
 
-- [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
-- [Connect to Neon with psql](/docs/get-started-with-neon/query-with-psql-editor)
-- [Connect to Neon from other applications or clients](/docs/connect/connect-from-any-app)
-- [Install the Neon CLI](/docs/reference/cli-install)
-- [Learn about the Neon object hierarchy and managing your Neon project](/docs/manage/overview)
+- **Use the project _Quickstart_ or this tutorial**
+
+  Once you complete the onboarding, you are presented with the project **Quickstart**. You can use this interactive quickstart to learn the basics &#8212; or follow along with this tutorial for a deeper explanation. You can open the **Quickstart** anytime from the project sidebar.
+
+At this point, if you want to just get started connecting Neon to your toolchain, go to [Day 2 - Connecting Neon to your tools](/docs/get-started-with-neon/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
+
+## Step 3 - Add sample data
+
+Let's get familiar with the **SQL Editor**, where you can run queries against your databases directly from the Neon Console, as well as access more advanced features like [Time Travel](/docs/guides/time-travel-assist) and [Explain and Analyze](/docs/get-started-with-neon/query-with-neon-sql-editor#explain-and-analyze).
+
+From the Neon Console, use the sidebar navigation to open the **SQL Editor** page. Notice that your default branch `main` is already selected, along with the database created during onboarding, `neondb`.
+
+![Neon SQL Editor](/docs/get-started-with-neon/sql_editor.png)
+
+The first time you open the SQL Editor for a new project, the editor includes placeholder SQL commands to create and populate a new sample table called `playing_with_neon`.
+
+For this tutorial, go ahead and create this sample table: click **Run**.
+
+Or if you want to add the table from the command line and you already have `psql` installed:
+
+```sql shouldWrap
+CREATE TABLE playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+INSERT INTO playing_with_neon(name, value)
+  SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
+```
+
+Your default branch `main` now has a table with some data.
+
+## Step 4 - View and modify data in the console
+
+Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, add or remove columns, drop or truncate tables, and export data in `.json` and `.csv` formats. 
+
+![Tables page Drizzle integration](/docs/relnotes/tables_page_drizzle.png)
+
+## Step 5 - Create a dedicated development branch
+
+In this step, you'll create a dedicated development branch using the Neon CLI. This branch will be an exact, isolated copy of `main`. 
+
+Again, we recommend creating a long-lived development branch for every member of your team. This lets you work on feature development, including schema changes, in isolation from your default branch, while maintaining a stable connection string in your application. Reset your branch to `main` at the start of every new feature.
+
+You can create and manage branches from the Neon Console, but here we'll use the Neon CLI.
+
+1. **Install CLI with Brew or NPM**
+
+    Depending on your system, you can install the Neon CLI using either Homebrew (for macOS) or NPM (for other platforms).
+
+    - For macOS using Homebrew:
+    
+      ```bash
+      brew install neonctl
+      ```
+
+    - Using NPM (applicable for all platforms that support Node.js):
+    
+      ```bash
+      npm install -g neonctl
+      ```
+
+1. **Authenticate with Neon**
+
+     Launches a browser window where you can authorize the Neon CLI to access your Neon account.
+
+    ```bash
+    neonctl auth
+    ```
+ 
+    ![neonctl auth](/docs/get-started-with-neon/neonctl_auth.png "no-border")
+
+1. **Create your development branch**
+
+    We recommend the naming convention `dev/developer_name` for all your development branches.
+
+    Example:
+
+    ```branch
+    neonctl branches create --name dev/alex
+    ```
+
+    The command output provides details about your new branch, including the branch ID, compute endpoint ID, and the connection URI that you can use to connect to this branch's database.
+
+There are other branch creation options available when using the CLI. See [Create a branch with the CLI](/docs/guides/branching-neon-cli#create-a-branch-with-the-cli) for more.
+
+## Step 6 - Make some sample schema changes
+
+With your development branch created, you can now make schema changes safely in your own environment. Since the `playing_with_neon` table is already available in the `dev/developer_name` branch, we'll modify its schema and add new data so that it deviates from `main`.
+
+You can use the **SQL Editor** for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
+
+<Tabs labels={["Mac", "Linux", "Windows"]}>
+
+<TabItem>
+```bash
+brew install libpq
+echo 'export PATH="/opt/homebrew/opt/libpq/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+</TabItem>
+
+<TabItem>
+```bash
+sudo apt update
+sudo apt install postgresql-client
+```
+
+</TabItem>
+
+<TabItem>
+Download and install PostgreSQL from:
+
+https://www.postgresql.org/download/windows/
+
+Ensure psql is included in the installation.
+</TabItem>
+
+</Tabs>
+
+With `psql` available, let's work from the terminal to connect to your `dev/developer_name` branch's database and make changes.
+
+1. **Connect to your database**
+
+    Get the connection string to your branch and connect to it directly via `psql`:
+    
+    ```bash shouldWrap
+    neonctl connection-string dev/developer_name --database-name neondb --psql
+    ```
+
+    This command establishes the psql terminal connection to the `neondb` database on your dev branch.
+
+1. **Modify the schema**
+
+    Add a new column `description` and index it:
+
+    ```sql shouldWrap
+    ALTER TABLE playing_with_neon
+    ADD COLUMN description TEXT;
+
+    CREATE INDEX idx_playing_with_neon_description ON playing_with_neon (description);
+    ```
+1. **Insert new data**
+
+    Add new data that will be exclusive to the dev branch.
+
+    ```sql shouldWrap
+    INSERT INTO playing_with_neon (name, description) 
+    VALUES ('Your dev branch', 'Exploring schema changes in the dev branch');
+    ```
+
+1. **Verify the schema changes**
+
+    Query the table to verify your schema changes:
+
+    ```sql
+    SELECT * FROM playing_with_neon;
+    ```
+    Your response should include the new description column and a new row where name = `Your dev branch` and description = `Exploring schema changes in the dev branch`:
+
+    ```sql {1,13}
+     id |        name        |    value    |                description
+    ----+--------------------+-------------+--------------------------------------------
+      1 | c4ca4238a0         |   0.5315024 | 
+      2 | c81e728d9d         |  0.17189825 | 
+      3 | eccbc87e4b         |  0.21428405 | 
+      4 | a87ff679a2         |   0.9721639 | 
+      5 | e4da3b7fbb         |   0.8649301 | 
+      6 | 1679091c5a         |  0.48413596 | 
+      7 | 8f14e45fce         |  0.82630277 | 
+      8 | c9f0f895fb         |  0.99945337 | 
+      9 | 45c48cce2e         | 0.054623786 | 
+     10 | d3d9446802         |  0.36634886 | 
+     11 | Your dev branch    |             | Exploring schema changes in the dev branch
+    (11 rows)
+    ```
+
+## Step 7 - Check your changes with Schema Diff
+
+After making the schema changes to your development branch, you can use the [Schema Diff](/docs/guides/schema-diff) feature to compare your branch against its parent branch. Schema Diff is a Github-style code-comparison tool used to visualize differences between different branch's databases.
+
+For this tutorial, Schema Diff helps with validating isolation: it confirms that schema changes made in your isolated development branch remain separate from the main branch.
+
+From the **Branches** page in the Neon Console:
+
+1. Open the detailed view for your development branch (`dev/alex`) and click **Open schema diff**.
+1. Verify the right branches are selected and click **Compare**. You can see the schema changes we added to our dev branch highlighted in green under Branch 2 `dev/alex`.
+
+    ![Schema diff from branches page](/docs/get-started-with-neon/getting_started_schema_diff.png)
+
+### Schema Migrations
+
+A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools,  you can use ORMs like [Prisma](https://www.prisma.io/) or [Drizzle](https://drizzle.team/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
+
+## Step 8 - Reset your dev branch to main
+
+After experimenting with changes in your development branch, let's now reset the branch to `main`, its parent branch.
+
+[Branch reset](/docs/guides/reset-from-parent) functions much like a `git reset –hard parent` in traditional Git workflows.
+
+Resetting your development branches to your main/production branch ensures that all changes are discarded, and your branch reflects the latest stable state of `main`. This is key to maintaining a clean slate for new development tasks and is a core advantage of Neon's branching capabilities.
+
+You can reset to parent from the **Branches** page of the Neon Console, but here we'll use the Neon CLI.
+
+Use the following command to reset your `dev/development_name` branch to the state of the `main` branch:
+
+    Example:
+    ```bash
+    neonctl branches reset dev/alex --parent
+    ```
+
+If you go back to your **Schema Diff** and compare branches again, you'll see they are now identical:
+
+![schema diff after reset](/docs/get-started-with-neon/getting_started_schema_diff_reset.png)
+
+### When to reset your branch
+
+Depending on your development workflow, you can use branch reset:
+
+- **After a feature is completed and merged**
+
+    Once your changes are merged into `main`, reset the development branch to start on the next feature.
+
+- **When you need to abandon changes**
+
+     If a project direction changes or if experimental changes are no longer needed, resetting the branch quickly reverts to a known good state.
+- **As part of your CI/CD automation**
+
+    With the Neon CLI, you can include branch reset as an enforced part of your CI/CD automation, automatically resetting a branch when a feature is closed or started.
+
+Make sure that your development team is always working from the latest schema and data by including branch reset in your workflow. To read more about using branching in your workflows, see [Day 3 - Branching workfows](/docs/get-started-with-neon/workflow-primer).
 
 <NeedHelp/>

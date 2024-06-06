@@ -11,8 +11,7 @@ import changelogIcon from 'icons/header/changelog.svg';
 import cliIcon from 'icons/header/cli.svg';
 import demosIcon from 'icons/header/demos.svg';
 import discordIcon from 'icons/header/discord.svg';
-import docsIcon from 'icons/header/docs.svg';
-import EnterpriseIcon from 'icons/header/enterprise.svg';
+import enterpriseIcon from 'icons/header/enterprise.svg';
 import partnersIcon from 'icons/header/partners.svg';
 import onDemandStorageIcon from 'icons/header/storage.svg';
 import PostgresDocsIcon from 'icons/postgres.inline.svg';
@@ -62,14 +61,12 @@ export default {
       to: LINKS.pricing,
     },
     {
+      text: 'Docs',
+      to: LINKS.docs,
+    },
+    {
       text: 'Resources',
       items: [
-        {
-          icon: docsIcon,
-          text: 'Docs',
-          description: 'Read the documentation',
-          to: LINKS.docs,
-        },
         {
           icon: blogIcon,
           text: 'Blog',
@@ -124,7 +121,7 @@ export default {
           to: LINKS.caseStudies,
         },
         {
-          icon: EnterpriseIcon,
+          icon: enterpriseIcon,
           text: 'Enterprise',
           description: 'Scale & grow',
           to: LINKS.enterprise,
@@ -149,7 +146,7 @@ export default {
           to: LINKS.partners,
         },
         {
-          text: 'Case studies',
+          text: 'Case Studies',
           to: LINKS.caseStudies,
         },
         {
@@ -164,10 +161,10 @@ export default {
           text: 'Contact Sales',
           to: LINKS.contactSales,
         },
-        // {
-        //   text: 'Changelog',
-        //   to: LINKS.changelog,
-        // },
+        {
+          text: 'Early Access',
+          to: LINKS.earlyAccess,
+        },
       ],
     },
     {
@@ -184,6 +181,10 @@ export default {
         {
           text: 'Docs',
           to: LINKS.docs,
+        },
+        {
+          text: 'Community Guides',
+          to: LINKS.guides,
         },
         {
           text: 'Changelog',
@@ -207,7 +208,7 @@ export default {
       heading: 'Community',
       links: [
         {
-          text: 'X',
+          text: 'x.com',
           to: LINKS.twitter,
           icon: 'x-icon',
         },
@@ -216,10 +217,6 @@ export default {
           to: LINKS.linkedin,
           icon: 'linkedin-icon',
         },
-        // {
-        //   text: 'Discord',
-        //   to: LINKS.discord,
-        // },
         {
           text: 'GitHub',
           to: LINKS.github,
@@ -239,6 +236,11 @@ export default {
           text: 'YouTube',
           to: LINKS.youtube,
           icon: 'youtube-icon',
+        },
+        {
+          text: 'Creators',
+          to: LINKS.creators,
+          icon: 'creators-icon',
         },
       ],
     },
@@ -294,7 +296,7 @@ export default {
     },
     {
       icon: PostgresDocsIcon,
-      title: 'Postgres Docs',
+      title: 'PostgreSQL Docs',
       slug: LINKS.postgres,
     },
   ],

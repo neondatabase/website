@@ -38,7 +38,7 @@ const CTA = ({ title = '', description = '', buttonText = '', buttonUrl = '' }) 
   }, [rive, isContentInView]);
 
   return (
-    <section className="safe-paddings pt-16">
+    <section className="safe-paddings bg-black-pure pt-16">
       <Container className="grid grid-cols-12 items-center gap-4" size="md">
         <div className="z-10 col-span-4 col-start-2 mb-24 xl:col-span-5 xl:col-start-1 lg:mb-12 md:col-span-full">
           <Heading
@@ -47,13 +47,7 @@ const CTA = ({ title = '', description = '', buttonText = '', buttonUrl = '' }) 
             size="2sm"
             asHTML
           >
-            {title || (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: `Still have <span class="text-pricing-primary-1">questions?</span>`,
-                }}
-              />
-            )}
+            {title || 'Still have <span class="text-pricing-primary-1">questions?</span>'}
           </Heading>
           <p className="mt-4 text-lg font-light leading-snug xl:text-base md:mx-auto md:mt-2 md:max-w-[550px] md:text-center">
             {description ||

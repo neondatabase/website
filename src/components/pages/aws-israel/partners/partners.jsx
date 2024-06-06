@@ -76,7 +76,7 @@ const logos = [
 const Partners = () => (
   <section className="partners safe-paddings mt-40 xl:mt-[120px] lg:mt-28 md:mt-20">
     <Container className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4" size="medium">
-      <div className="col-span-10 col-start-2 grid grid-cols-[auto,362px] items-center gap-x-[94px] rounded-2xl bg-gray-new-8 p-12 2xl:gap-x-20 xl:col-span-full xl:col-start-1 xl:p-8 lt:grid-cols-1 lt:gap-y-10 lg:pb-10 lg:pt-9 md:p-8">
+      <div className="col-span-10 col-start-2 grid grid-cols-[auto,362px] items-center gap-x-[94px] rounded-2xl bg-black-new p-12 2xl:gap-x-20 xl:col-span-full xl:col-start-1 xl:p-8 lt:grid-cols-1 lt:gap-y-10 lg:pb-10 lg:pt-9 md:p-8">
         <div className="flex flex-wrap gap-x-[38px] gap-y-10 2xl:gap-x-8 2xl:gap-y-9 lt:order-1">
           {logos.map(({ logo, alt, width }, index) => (
             <img
@@ -92,7 +92,7 @@ const Partners = () => (
         </div>
         <div className="flex flex-col items-start lt:max-w-lg">
           <GradientLabel>Apply now</GradientLabel>
-          <h2 className="mt-3 text-[52px] font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
+          <h2 className="mt-3 font-title text-[52px] font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
             Become a Partner
           </h2>
           <p className="mt-4 text-lg font-light leading-snug xl:text-base md:max-w-xs">

@@ -1,0 +1,18 @@
+{
+  "rishi-raj-jain": {
+    "name": "Rishi Raj Jain",
+    "position": "Technical Writer",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/rishi-raj-jain"
+    }
+  },
+  "bobbyiliev": {
+    "name": "Bobby Iliev",
+    "position": "DevOps/DevEx Engineer",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/bobbyiliev"
+    }
+  }
+}

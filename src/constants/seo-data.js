@@ -4,15 +4,14 @@ export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
 
 export default {
   index: {
-    title: 'Neon — Serverless, Fault-Tolerant, Branchable Postgres',
+    title: 'Neon Serverless Postgres — Ship faster',
     description:
-      'Postgres made for developers. Easy to Use, Scalable, Cost efficient solution for your next project.',
+      'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
     pathname: '',
   },
   contactSales: {
     title: 'Contact Sales — Neon',
-    description:
-      'Interested in learning more about our plans and pricing? Contact our sales team.',
+    description: 'Interested in learning more about our plans and pricing? Contact our sales team.',
     pathname: LINKS.contactSales,
   },
   careers: {
@@ -21,6 +20,13 @@ export default {
       'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
     imagePath: '/images/social-previews/careers.jpg',
     pathname: LINKS.careers,
+  },
+  flow: {
+    title: 'Database Branching Workflows - Neon',
+    description: 'Boost development velocity by adding data to your existing GitHub workflows',
+    imagePath: '/images/social-previews/flow.jpg',
+    type: 'article',
+    pathname: LINKS.flow,
   },
   blog: {
     title: 'Our Blog — Neon',
@@ -89,8 +95,7 @@ export default {
   },
   caseStudies: {
     title: 'Case Studies — Neon',
-    description:
-      'Discover the diverse and captivating stories of our valued partners, each a testament to unique experiences and successes.',
+    description: 'Discover how other companies are using Neon.',
     pathname: LINKS.caseStudies,
     imagePath: '/images/social-previews/case-studies.jpg',
   },

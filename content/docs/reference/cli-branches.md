@@ -129,7 +129,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--name`    | The branch name                                                | string  |             |
 | `--parent`  | Parent branch name, id, timestamp, or LSN. Defaults to the primary branch | string  |             |
 | `--compute`| Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute` | boolean |    |
-| `--type` | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas).                                     | string |             |
+| `--type` | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas).                                     | string |             |
 | `--suspend-timeout` | Duration of inactivity in seconds after which the compute endpoint is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number |             |
 | `--psql` | Connect to a new branch via `psql`. `psql` must be installed to use this option. | boolean |             |
 
@@ -302,13 +302,14 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash
-neonctl branches reset mybranch --parent
-┌──────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                       │ Name        │ Primary │ Created At           │ Last Reset At        │
-├──────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-raspy-meadow-26349337 │ development │ false   │ 2023-11-28T19:19:11Z │ 2023-11-28T19:29:26Z │
-└──────────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
+neonctl branches reset dev/alex --parent
+┌──────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                   │ Name     │ Primary │ Created At           │ Last Reset At        │
+├──────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-aged-sun-a5qowy01 │ dev/alex │ false   │ 2024-05-07T09:31:59Z │ 2024-05-07T09:36:32Z │
+└──────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
+
 ## restore
 
 This command restores a branch to a specified point in time in its own or another branch's history.
@@ -346,28 +347,28 @@ Examples of the different kinds of restore operations you can do:
 
 #### Restoring a branch to an earlier point in its own history (with backup)
 
-This command restores the branch `dev/alex` to an earlier timestamp, saving to a backup branch called `restore_backup_2024-02-20`
+This command restores the branch `main` to an earlier timestamp, saving to a backup branch called `main_restore_backup_2024-02-20`
 
 ```bash shouldWrap
-neonctl branches restore dev/alex ^self@2024-02-21T10:00:00.000Z --preserve-under-name restore_backup_2024-02-20
+neonctl branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06   
 ```
 
 Results of the operation:
 
 ```bash shouldWrap
-INFO: Restoring branch br-restless-frost-69810125 to the branch br-restless-frost-69810125 timestamp 2024-02-21T10:00:00.000Z
+INFO: Restoring branch br-purple-dust-a5hok5mk to the branch br-purple-dust-a5hok5mk timestamp 2024-05-06T10:00:00.000Z
 Restored branch
-┌────────────────────────────┬──────────┬──────────────────────┐
-│ Id                         │ Name     │ Last Reset At        │
-├────────────────────────────┼──────────┼──────────────────────┤
-│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:48:05Z │
-└────────────────────────────┴──────────┴──────────────────────┘
+┌─────────────────────────┬──────┬──────────────────────┐
+│ Id                      │ Name │ Last Reset At        │
+├─────────────────────────┼──────┼──────────────────────┤
+│ br-purple-dust-a5hok5mk │ main │ 2024-05-07T09:45:21Z │
+└─────────────────────────┴──────┴──────────────────────┘
 Backup branch
-┌───────────────────────────┬───────────────────────────┐
-│ Id                        │ Name                      │
-├───────────────────────────┼───────────────────────────┤
-│ br-patient-union-a5s838zf │ restore_backup_2024-02-20 │
-└───────────────────────────┴───────────────────────────┘
+┌─────────────────────────┬────────────────────────────────┐
+│ Id                      │ Name                           │
+├─────────────────────────┼────────────────────────────────┤
+│ br-flat-forest-a5z016gm │ main_restore_backup_2024-05-06 │
+└─────────────────────────┴────────────────────────────────┘
 ```
 
 #### Restoring a branch (target) to the head of another branch (source)

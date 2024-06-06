@@ -28,7 +28,7 @@ const items = [
   },
   {
     question: 'How is storage charged in Neon?',
-    answer: `Neon implements a unique storage engine that enables database branching on copy-on-write, without duplicate storage. You can create instant database copies (database branches) without adding to the storage bill. Since Neon retains database history, the size of storage for a Neon project will be calculated as the size of your tables plus the WAL up to the configurable history retention period.`,
+    answer: `Neon implements a unique storage engine that enables database branching on copy-on-write, without duplicate storage. You can create instant database copies (database branches) without adding to the storage bill. Since Neon retains database history, the size of storage for a Neon project will be calculated as the size of your tables plus the WAL up to the configurable history retention period. <a href="/docs/introduction/usage-metrics">Read more in our docs</a>.`,
   },
   {
     question: 'Do I get a notification if I am approaching my usage limits?',
@@ -41,7 +41,7 @@ const items = [
 ];
 
 const Faq = () => (
-  <section className="faq safe-paddings bg-gray-new-8 py-40 2xl:py-32 xl:py-28 lg:py-20 md:py-16">
+  <section className="faq safe-paddings bg-black-new py-40 2xl:py-32 xl:py-28 lg:py-20 md:py-16">
     <Container className="max-w-[968px]" size="medium">
       <Heading className="text-center" tag="h2" size="2sm">
         Frequently Asked Questions

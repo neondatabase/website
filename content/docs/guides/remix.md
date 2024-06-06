@@ -29,7 +29,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+    <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
       ```shell
       npm install pg
@@ -50,7 +50,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
-DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
+DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
 ```
 
 ## Configure the Postgres client
@@ -61,7 +61,7 @@ There are two parts to connecting a Remix application to Neon. The first is `db.
 
 Create a `db.server.ts` file at the root of your `/app` directory and add the following code snippet to connect to your Neon database:
 
-<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
 import pg from 'pg';
@@ -96,59 +96,58 @@ export { sql };
 
 Create a new route in your `app/routes` directory and import the `db.server` file.  
 
-<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
+import { pool } from '~/db.server';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import { pool } from '~/db.server';
 
 export const loader = async () => {
   const client = await pool.connect();
-
   try {
     const response = await client.query('SELECT version()');
-    console.log(response.rows[0]);
-    return json({ data: response.rows[0] });
+    return response.rows[0].version;
   } finally {
     client.release();
   }
 };
 
 export default function Page() {
-  const data = useLoaderData();
+    const data = useLoaderData();
+    return <>{data}</>;
 }
 ```
 
 ```javascript
+import { sql } from '~/db.server';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import { sql } from '~/db.server';
 
 export const loader = async () => {
   const response = await sql`SELECT version()`;
-  console.log(response);
-  return json({ data: response });
+  return response[0].version;
 };
 
 export default function Page() {
-  const data = useLoaderData();
+    const data = useLoaderData();
+    return <>{data}</>;
 }
 ```
 
 ```javascript
+import { sql } from '~/db.server';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import { sql } from '~/db.server';
 
 export const loader = async () => {
   const response = await sql`SELECT version()`;
-  console.log(response);
-  return json({ data: response });
+  return response[0].version;
 };
 
 export default function Page() {
-  const data = useLoaderData();
+    const data = useLoaderData();
+    return <>{data}</>;
 }
 ```
 
@@ -156,22 +155,20 @@ export default function Page() {
 
 ## Run the app
 
-When you run `npm run dev` you can expect to see one of the following in your terminal output:
+When you run `npm run dev` you can expect to see the following on [localhost:3000](localhost:3000):
 
 ```shell shouldWrap
-# node-postgres & Neon serverless driver 
-
-{
-  version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
-}
-
-# postgres.js
-
-Result(1) [
-  {
-    version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
-  }
-]
+PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+
+  <a href="https://github.com/neondatabase/examples/tree/main/with-remix" description="Get started with Remix and Neon" icon="github">Get started with Remix and Neon</a>
+
+</DetailIconCards>
 
 <NeedHelp/>

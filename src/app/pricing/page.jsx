@@ -1,6 +1,6 @@
-import CaseStudies from 'components/pages/pricing/case-studies';
 import CTA from 'components/pages/pricing/cta';
 import Faq from 'components/pages/pricing/faq';
+import Features from 'components/pages/pricing/features';
 import Hero from 'components/pages/pricing/hero';
 import Plans from 'components/pages/pricing/plans';
 import Layout from 'components/shared/layout';
@@ -43,18 +43,13 @@ const sliderItems = [
 ];
 
 const PricingPage = () => (
-  <Layout
-    className="bg-black-new text-white"
-    headerTheme="black-new"
-    footerTheme="black-new"
-    footerWithTopBorder
-  >
+  <Layout>
     <Hero />
     <Logos className="mt-36 pt-2.5 lg:mt-28 lg:pt-0 md:mt-20" logos={logos} />
-    <CaseStudies className="mt-60 xl:mt-48 lg:mt-[124px] md:mt-[88px]" />
-    <Plans className="my-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
+    <Features />
+    <Plans className="mt-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
     <Testimonials
-      className="mb-[200px] min-h-[312px] 2xl:mb-[156px] xl:mb-32 xl:min-h-[290px] lg:mb-28 lg:min-h-[257px] md:mb-20 md:min-h-[225px] sm:min-h-[310px]"
+      className="my-40 min-h-[312px] 2xl:my-32 xl:my-28 xl:min-h-[290px] lg:my-24 lg:min-h-[257px] md:my-20 md:min-h-[225px] sm:min-h-[310px]"
       items={sliderItems}
     />
     <Faq />

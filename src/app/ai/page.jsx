@@ -54,12 +54,7 @@ const items = [
 // ];
 
 const AIPage = () => (
-  <Layout
-    className="bg-black-new text-white"
-    headerTheme="black-new"
-    footerTheme="black-new"
-    footerWithTopBorder
-  >
+  <Layout>
     <link
       rel="preload"
       href="/animations/pages/ai/scene.splinecode"

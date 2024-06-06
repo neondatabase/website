@@ -30,18 +30,15 @@ export async function GET() {
       `${heading} and more. Check out the full list of changes for this release note.`;
 
     const url = `${SITE_URL}${CHANGELOG_BASE_PATH}${slug}`;
-    const category = slug.slice(slug.lastIndexOf('-') + 1);
-    const capitalisedCategory = category.charAt(0).toUpperCase() + category.slice(1);
 
     const { label, datetime } = getChangelogDateFromSlug(slug);
 
     feed.item({
       id: url,
-      title: `${capitalisedCategory} release - ${label}`,
+      title: `${heading} release - ${label}`,
       url,
       guid: url,
       date: new Date(datetime),
-      categories: [category],
       description,
     });
   });

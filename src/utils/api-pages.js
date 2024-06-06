@@ -1,4 +1,4 @@
-import { gql, graphQLClient, graphQLClientAdmin } from 'lib/graphQLClient';
+import { fetchGraphQL, gql, graphQLClient, graphQLClientAdmin } from 'lib/graphQLClient';
 
 import getAuthToken from './api-auth';
 
@@ -32,7 +32,7 @@ const getLandingPages = async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(allLandingPagesQuery);
+  const data = await fetchGraphQL(graphQLClient).request(allLandingPagesQuery);
 
   return data?.pages.nodes.filter((node) => node.template.templateName === 'Landing');
 };
@@ -50,7 +50,7 @@ const getStaticPages = async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(allStaticPagesQuery);
+  const data = await fetchGraphQL(graphQLClient).request(allStaticPagesQuery);
 
   return data?.pages.nodes.filter((node) => node.template.templateName === 'Static');
 };
@@ -69,7 +69,7 @@ const getWpPageBySlug = async (slug) => {
     }
     ${PAGE_SEO_FRAGMENT}
   `;
-  const data = await graphQLClient.request(wpPageBySlugQuery, { slug });
+  const data = await fetchGraphQL(graphQLClient).request(wpPageBySlugQuery, { slug });
 
   return data?.page;
 };
@@ -142,7 +142,7 @@ const getAboutPage = async () => {
     }
     ${PAGE_SEO_FRAGMENT}
   `;
-  const data = await graphQLClient.request(aboutPageQuery);
+  const data = await fetchGraphQL(graphQLClient).request(aboutPageQuery);
 
   return data?.page;
 };

@@ -31,6 +31,22 @@
     --shiki-token-embed: #ffffff;
   }
 
+  .homepage-shiki {
+    --shiki-color-text: #ffffff;
+    --shiki-color-background: transparent;
+    --shiki-token-constant: #a199ff;
+    --shiki-token-string: #52c9e0;
+    --shiki-token-comment: #797d86;
+    --shiki-token-keyword: #afb1b6;
+    --shiki-token-parameter: #ff990a;
+    --shiki-token-function: #52c9e0;
+    --shiki-token-string-expression: #ecec79;
+    --shiki-token-punctuation: #ffffff;
+    --shiki-token-link: #52c9e0;
+    --shiki-token-operator: #ba8c5e;
+    --shiki-token-embed: #ffffff;
+  }
+
   pre .line {
     &.highlighted,
     &[data-highlighted-line] {
@@ -82,11 +98,28 @@
       content: counter(line);
 
       /* Other styling */
-      display: inline-block;
-      width: 1rem;
-      margin-right: 1.25rem;
-      text-align: right;
-      color: gray;
+      @apply mr-5 inline-block w-4 text-right text-gray-new-50;
+    }
+  }
+
+  .homepage-shiki {
+    .show-linenumbers {
+      pre code > .line::before {
+        @apply text-gray-new-20;
+      }
+    }
+  }
+
+  .has-diff code .line {
+    @apply pl-6;
+
+    &.diff {
+      &.add {
+        @apply bg-[#00E599]/10 before:absolute before:left-2 before:text-code-green-1 before:content-['+'];
+      }
+      &.remove {
+        @apply bg-[#FF275D]/10 before:absolute before:left-2 before:text-code-red-1/50 before:content-['—'];
+      }
     }
   }
 }

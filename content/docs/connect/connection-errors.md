@@ -34,7 +34,7 @@ This error occurs if your client library or application does not support the **S
 
 Neon uses compute endpoint IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
 
-SNI support was added to the `libpq` (the official Postgres client library) in version 14, which was released in September 2021. Clients that use your system's `libpq` library should work if you `libpq` version is >= 14. On Linux and macOS, you can check your `libpq` version by running `pg_config --version`. On Windows, check the `libpq.dll` version in your Postgres installation's `bin` directory. Right click on the file, select **Properties** > **Details**.  
+SNI support was added to `libpq` (the official Postgres client library) in Postgres 14, which was released in September 2021. Clients that use your system's `libpq` library should work if your Postgres version is >= 14. On Linux and macOS, you can check Postgres version by running `pg_config --version`. On Windows, check the `libpq.dll` version in your Postgres installation's `bin` directory. Right-click on the file, select **Properties** > **Details**.
 
 If a library or application upgrade does not help, there are several workarounds, described below, for providing the required domain name information when connecting to Neon.
 
@@ -138,7 +138,7 @@ If you find that your connection string is defined correctly, see the instructio
 
 ## Couldn't connect to compute node
 
-This error arises when the Neon proxy, which accepts and handles connections from clients that use the Postgres protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [Autosuspend](/docs/reference/glossary#autosuspend-compute) (scale to zero). Currently, the transition from an idle state to an active one takes a few seconds.
+This error arises when the Neon proxy, which accepts and handles connections from clients that use the Postgres protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [Autosuspend](/docs/reference/glossary#autosuspend) (scale to zero). Currently, the transition from an idle state to an active one takes a few seconds.
 
 Consider these recommended steps:
 

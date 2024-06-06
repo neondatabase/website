@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 import Aside from 'components/pages/blog-post/aside';
@@ -11,7 +13,6 @@ import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import Admonition from 'components/shared/admonition';
-import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import { getWpPreviewPostData } from 'utils/api-posts';
@@ -31,10 +32,9 @@ import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blo
   You can't have a post in Wordpress with the "wp-draft-post-preview-page" slug. Please be careful.
 */
 const BlogDraft = async ({ searchParams }) => {
-  // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
-  await Promise.resolve(JSON.stringify(searchParams));
+  const { isEnabled: isDraftModeEnabled } = draftMode();
 
-  if (!searchParams?.id || !searchParams?.status) {
+  if (!isDraftModeEnabled) {
     return notFound();
   }
 
@@ -74,18 +74,12 @@ const BlogDraft = async ({ searchParams }) => {
   };
 
   return (
-    <Layout
-      className="bg-black-new text-white"
-      headerTheme="gray-8"
-      footerTheme="black-new"
-      footerWithTopBorder
-      isHeaderSticky
-    >
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="safe-paddings bg-gray-new-8">
+      <div className="safe-paddings bg-black-pure">
         <article className="dark mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pb-40 pt-16 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
           <Hero
             className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
@@ -122,8 +116,8 @@ const BlogDraft = async ({ searchParams }) => {
           />
         </article>
       </div>
-      <PreviewWarning />
-    </Layout>
+      {isDraftModeEnabled && <PreviewWarning />}
+    </>
   );
 };
 

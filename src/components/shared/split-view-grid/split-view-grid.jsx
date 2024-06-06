@@ -18,7 +18,7 @@ const SplitViewGrid = ({
     <Container className="grid-gap-x grid grid-cols-12" size="medium">
       <div
         className={clsx(
-          'col-span-10 col-start-2 grid grid-cols-10 gap-x-10 rounded-2xl bg-gray-new-8 xl:col-span-full xl:col-start-1 xl:grid-cols-12 xl:items-center xl:gap-x-6 lg:gap-x-4',
+          'col-span-10 col-start-2 grid grid-cols-10 gap-x-10 rounded-2xl bg-black-new xl:col-span-full xl:col-start-1 xl:grid-cols-12 xl:items-center xl:gap-x-6 lg:gap-x-4',
           {
             'py-12 xl:py-8 lg:pb-10 lg:pt-9 md:py-8': size === 'md',
             'py-11': size === 'sm',
@@ -42,7 +42,7 @@ const SplitViewGrid = ({
             </span>
           )}
           <h2
-            className={clsx('mt-3 font-medium leading-none', {
+            className={clsx('mt-3 font-title font-medium leading-none', {
               'max-w-[322px] text-[52px] tracking-[-0.02em] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]':
                 size === 'md',
               'text-5xl tracking-tight': size === 'sm',
@@ -90,7 +90,7 @@ const SplitViewGrid = ({
               />
               <div className="flex flex-col">
                 <h3
-                  className={clsx('font-medium leading-tight tracking-[-0.02em]', {
+                  className={clsx('font-title font-medium leading-tight tracking-[-0.02em]', {
                     'text-[22px] xl:text-xl': size === 'md',
                     'text-lg': size === 'sm',
                   })}
@@ -99,7 +99,7 @@ const SplitViewGrid = ({
                 </h3>
                 <p
                   className={clsx(
-                    'mt-2 font-light leading-snug text-gray-new-70',
+                    'mt-2 font-light leading-snug text-gray-new-60',
                     size === 'sm' && 'text-sm'
                   )}
                 >
