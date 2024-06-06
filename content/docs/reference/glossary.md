@@ -196,6 +196,10 @@ Resources including compute and storage dedicated to a single Neon account.
 
 A Neon Control Plane operation that deletes stored data when a Neon project is deleted. See [Operations](/docs/manage/operations) for more information.
 
+## Endpoint ID
+
+A string that identifies a Neon compute endpoint. Neon Endpoint IDs are generated Heroku-like memorable random names, similar to `ep-calm-flower-a5b75h79`. These names are always prefixed by `ep` for "endpoint". You can find your Endpoint ID by navigating to your project in the Neon Console, selecting **Branches** from the sidebar, and clicking on a branch. The Endpoint ID is shown in the table under the **Computes** heading.
+
 ## Egress
 
 The data transferred out of the Neon service to an external destination.
@@ -353,6 +357,10 @@ For more information, see [Primary branch](/docs/manage/branches#primary-branch)
 ## Project
 
 A collection of branches, databases, roles, and other project resources and settings. A project contains a compute with a Postgres server and storage for the project data.
+
+## Project ID
+
+A string that identifies your Neon project. Neon Project IDs are generated Heroku-like memorable random names, similar to `cool-forest-86753099`. You can find your project ID by navigating to your project in the Neon Console and selecting **Settings** from the sidebar. The project ID is also visible in the Neon Console URL after navigating to a project: `https://console.neon.tech/app/projects/cool-forest-86753099` 
 
 ## Project Sharing
 
