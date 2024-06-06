@@ -490,17 +490,21 @@ neonctl branches schema-diff main dev/alex
 The output indicates that in the table `public.playing_with_neon`, a new column `description character varying(255)` has been added in the `dev/alex` branch that is not present in the `main` branch.
 
 ```diff
---- Database: neondb	(Branch: br-wandering-firefly-a50un462)
-+++ Database: neondb	(Branch: br-fancy-sky-a5cydw8p)
+--- Database: neondb	(Branch: br-wandering-firefly-a50un462) // [!code --]
++++ Database: neondb	(Branch: br-fancy-sky-a5cydw8p) // [!code ++]
 @@ -26,9 +26,10 @@
  
  CREATE TABLE public.playing_with_neon (
      id integer NOT NULL,
      name text NOT NULL,
--    value real
-+    value real,
-+    description character varying(255)
+-    value real [!code --]
++    value real, // [!code ++]
++    description character varying(255) // [!code ++]
  );
+ 
+ 
+ ALTER TABLE public.playing_with_neon OWNER TO neondb_owner;
+```
  
  
  ALTER TABLE public.playing_with_neon OWNER TO neondb_owner;

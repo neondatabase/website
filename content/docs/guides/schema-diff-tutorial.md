@@ -266,29 +266,29 @@ neonctl branches schema-diff main dev/jordan --database people
 The result shows a comparison between the `dev/jordan` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added in the `dev/jordan` branch but are not present in its parent branch `main`.
 
 ```diff
---- Database: people	(Branch: br-falling-dust-a5bakdqt)
-+++ Database: people	(Branch: br-morning-heart-a5ltt10i)
+--- Database: people	(Branch: br-falling-dust-a5bakdqt) // [!code --]
++++ Database: people	(Branch: br-morning-heart-a5ltt10i) // [!code ++]
 @@ -20,8 +20,46 @@
  
  SET default_table_access_method = heap;
  
  --
-+-- Name: address; Type: TABLE; Schema: public; Owner: neondb_owner
-+--
-+
-+CREATE TABLE public.address (
-+    id integer NOT NULL,
-+    person_id integer NOT NULL,
-+    street text NOT NULL,
-+    city text NOT NULL,
-+    state text NOT NULL,
-+    zip_code text NOT NULL
-+);
-+
-+
-+ALTER TABLE public.address OWNER TO neondb_owner;
-+
-+...
++-- Name: address; Type: TABLE; Schema: public; Owner: neondb_owner // [!code ++]
++-- // [!code ++]
++ // [!code ++]
++CREATE TABLE public.address ( // [!code ++]
++    id integer NOT NULL, // [!code ++]
++    person_id integer NOT NULL, // [!code ++]
++    street text NOT NULL, // [!code ++]
++    city text NOT NULL, // [!code ++]
++    state text NOT NULL, // [!code ++]
++    zip_code text NOT NULL // [!code ++]
++); // [!code ++]
++ // [!code ++]
++ // [!code ++]
++ALTER TABLE public.address OWNER TO neondb_owner; // [!code ++]
++ // [!code ++]
++... // [!code ++]
 ```
 
 </TabItem>
