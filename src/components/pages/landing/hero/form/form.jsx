@@ -104,6 +104,7 @@ const Form = ({
       name: key,
       value: Array.isArray(value) ? value.join(', ') : value,
     }));
+    console.log(values);
 
     setErrorMessage('');
     setState(FORM_STATES.LOADING);
