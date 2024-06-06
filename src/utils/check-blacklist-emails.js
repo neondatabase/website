@@ -14,7 +14,7 @@ const checkBlacklistEmails = (field) => {
   }
 
   return {
-    name: 'is-domain-not-blacklisted',
+    name: 'domain-not-blacklisted',
     exclusive: true,
     message: `Ooops! Only work emails allowed. If this account is for you, <a href="${LINKS.signup}">please sign up to Neon here</a>.`,
     test: (value) => {

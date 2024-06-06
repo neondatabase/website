@@ -32,14 +32,20 @@ const Input = ({ name, label, placeholder, required, formState, errors, register
     name={name}
     label={`${label}${required ? ' *' : ''}`}
     labelClassName={labelClassName}
-    inputClassName={inputClassName}
+    inputClassName={clsx(
+      inputClassName,
+      errors[name]?.type === 'domain-not-blacklisted' && 'sm:mb-8'
+    )}
     type="text"
     tag="input"
     autoComplete={name}
     placeholder={placeholder}
     isDisabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
     error={errors[name]?.message}
-    errorClassName={errorClassName}
+    errorClassName={clsx(
+      errorClassName,
+      errors[name]?.type === 'domain-not-blacklisted' && 'sm:top-[72px]'
+    )}
     {...register(name)}
   />
 );
