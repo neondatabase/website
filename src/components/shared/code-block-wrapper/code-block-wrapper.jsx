@@ -26,7 +26,7 @@ function extractTextFromNode(node) {
     });
     return text;
   }
-  
+
   // If there's only one child, process that child directly.
   return extractTextFromNode(node.props.children);
 }
