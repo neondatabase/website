@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 
-import { checkCookie } from 'app/actions';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
@@ -35,7 +34,6 @@ const Header = async ({
   isDocPage = false,
   withBorder = false,
 }) => {
-  const is_logged_in = await checkCookie('neon_login_indicator');
   const isDarkTheme = theme === 'dark';
   const starsCount = await getGithubStars();
 
@@ -172,34 +170,22 @@ const Header = async ({
             <Suspense>
               <GithubStarCounter isDarkTheme={isDarkTheme} starsCount={starsCount} />
             </Suspense>
-            {is_logged_in ? (
-              <Button
-                className="h-8 px-[22px] text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 xl:px-4 lg:hidden"
-                to={LINKS.login}
-                theme="primary"
-              >
-                Go to Console
-              </Button>
-            ) : (
-              <>
-                <Link
-                  className="text-[13px] leading-none tracking-extra-tight lg:hidden"
-                  to={LINKS.login}
-                  theme={isDarkTheme ? 'white' : 'black'}
-                >
-                  Log In
-                </Link>
+            <Link
+              className="text-[13px] leading-none tracking-extra-tight lg:hidden"
+              to={LINKS.login}
+              theme={isDarkTheme ? 'white' : 'black'}
+            >
+              Log In
+            </Link>
 
-                <Button
-                  className="h-8 px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
-                  to={LINKS.signup}
-                  theme="primary"
-                  tag_name="Header"
-                >
-                  Sign Up
-                </Button>
-              </>
-            )}
+            <Button
+              className="h-8 px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
+              to={LINKS.signup}
+              theme="primary"
+              tag_name="Header"
+            >
+              Sign Up
+            </Button>
           </div>
         </Container>
       </HeaderWrapper>
