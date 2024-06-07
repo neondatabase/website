@@ -129,7 +129,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--name`    | The branch name                                                | string  |             |
 | `--parent`  | Parent branch name, id, timestamp, or LSN. Defaults to the primary branch | string  |             |
 | `--compute`| Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute` | boolean |    |
-| `--type` | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas).                                     | string |             |
+| `--type` | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas).                                     | string |             |
 | `--suspend-timeout` | Duration of inactivity in seconds after which the compute endpoint is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number |             |
 | `--psql` | Connect to a new branch via `psql`. `psql` must be installed to use this option. | boolean |             |
 

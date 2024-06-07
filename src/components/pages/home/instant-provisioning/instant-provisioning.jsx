@@ -56,7 +56,7 @@ const InstantProvisioning = () => (
         </div>
 
         <BlurWrapper className="w-[652px] p-1.5 xl:w-[580px] lg:w-[417px] md:mt-5 md:w-full md:max-w-[580px]">
-          <div className="opacity-65 pointer-events-none absolute -left-40 -top-44 z-0 h-[482px] w-[470px] rounded-[100%] bg-[linear-gradient(180deg,rgba(25,27,52,0)_0%,#16182D_88.36%)] blur-3xl xl:-left-36 xl:-top-40 xl:h-[427px] xl:w-[417]" />
+          <div className="pointer-events-none absolute -left-40 -top-44 z-0 h-[482px] w-[470px] rounded-[100%] bg-[linear-gradient(180deg,rgba(25,27,52,0)_0%,#16182D_88.36%)] opacity-65 blur-3xl xl:-left-36 xl:-top-40 xl:h-[427px] xl:w-[417]" />
           <div className="pointer-events-none absolute -right-32 -top-28 z-0 h-[316px] w-[316px] rounded-[100%] bg-[#16182D] opacity-30 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-36 -right-36 z-0 h-[377px] w-[377px] rounded-[100%] bg-[#16182D] opacity-40 blur-3xl" />
           <div className="relative z-20 rounded-[10px] bg-black-new xl:rounded-lg">
