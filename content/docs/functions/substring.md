@@ -180,5 +180,3 @@ If you frequently filter based on substrings, consider creating a _functional in
 
 - [PostgreSQL documentation: String functions](https://www.postgresql.org/docs/current/functions-string.html)
 - [PostgreSQL documentation: Pattern matching](https://www.postgresql.org/docs/current/functions-matching.html)
-
-
