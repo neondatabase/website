@@ -443,6 +443,8 @@
       items:
         - title: array_to_json
           slug: functions/array_to_json
+        - title: concat
+          slug: functions/concat
         - title: dense_rank
           slug: functions/dense_rank
         - title: json_array_elements
