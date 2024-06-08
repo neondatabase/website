@@ -167,11 +167,11 @@ This query calculates the number of days since each customer's previous order. T
 
 ### Correctness
 
-The `lag` function relates each row in the result set to a previous row in the same window frame. If the window frame is not explicitly defined, the default frame is the entire partition or result set. Make sure to specify the correct `ORDER BY` and `PARTITION BY` clauses to ensure the desired behavior. 
+The `lag` function relates each row in the result set to a previous row in the same window frame. If the window frame is not explicitly defined, the default frame is the entire result set. Make sure to specify the correct `ORDER BY` and `PARTITION BY` clauses to ensure the desired behavior. 
 
 ### Performance implications
 
-Window functions like `lag` perform calculations across a set of rows defined by the `OVER` clause. This can be computationally expensive, especially for large datasets or complex window definitions.
+Window functions like `lag` perform calculations across a set of rows defined by the `OVER` clause. This can be computationally expensive for large datasets or complex window definitions.
 
 To optimize performance, make sure to:
 - Include an `ORDER BY` clause in the `OVER` clause to avoid sorting the entire dataset.
