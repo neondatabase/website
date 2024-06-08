@@ -171,10 +171,10 @@ If you frequently filter based on substrings, consider creating a _functional in
 
 ### Alternative functions
 
-- `left` - Extracts a specified number of characters from the start of a string.
-- `right` - Extracts a specified number of characters from the end of a string.
-- `split_part` - Splits a string on a specified delimiter and returns the nth substring.
-- `regexp_matches` - Extracts substrings matching a regular expression pattern. Unlike `substring`, it returns an array of all the captured substrings when the regex pattern contains multiple parentheses.
+- `left` - Extracts the specified number of characters from the start of a string.
+- `right` - Extracts the specified number of characters from the end of a string.
+- `split_part` - Splits a string on the specified delimiter and returns the nth substring.
+- `regexp_match` - Extracts the first substring matching a regular expression pattern. Unlike `substring`, it returns an array of all the captured substrings when the regex pattern contains multiple parentheses.
 
 ## Resources
 
