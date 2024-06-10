@@ -781,7 +781,7 @@ FROM
     JOIN pg_class ON pg_locks.relation = pg_class.oid
 WHERE
     pg_locks.mode IS NOT NULL
-    AND pg_class.relname NOT LIKE 'pg\_%' ESCAPE '\'
+    AND pg_class.relname NOT LIKE 'pg_%' ESCAPE '\'
 GROUP BY
     pg_class.relname,
     mode;

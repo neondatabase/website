@@ -34,7 +34,7 @@ pg_archivecleanup:  removing file "archive/00000001000000370000000F"
 pg_archivecleanup:  removing file "archive/00000001000000370000000E"
 ```
 
-pg_archivecleanup assumes that _`archivelocation`_ is a directory readable and writable by the server-owning user.
+pg_archivecleanup assumes that `archivelocation` is a directory readable and writable by the server-owning user.
 
 [#id](#id-1.9.5.4.6)
 

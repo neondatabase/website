@@ -32,8 +32,8 @@ A few key points to keep in mind about the restore operation:
 
 In case you need to rollback a restore, Neon preserves the branch's final state before the restore operation in an automatically created backup branch, which takes the following format:
 
-```md
-{branch*name}\_old*{head_timestamp}
+```
+{branch_name}_old_{head_timestamp}
 ```
 
 You can use this backup to rollback the restore operation if necessary. The backup branches are listed on the **Branches** page in the Neon Console among your other branches.

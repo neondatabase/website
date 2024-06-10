@@ -110,7 +110,7 @@ The following command-line options control the content and format of the output.
 
   Run the dump in parallel by dumping _`njobs`_ tables simultaneously. This option may reduce the time needed to perform the dump but it also increases the load on the database server. You can only use this option with the directory output format because this is the only output format where multiple processes can write their data at the same time.
 
-  pg_dump will open _`njobs`_ + 1 connections to the database, so make sure your [max_connections](runtime-config-connection#GUC-MAX-CONNECTIONS) setting is high enough to accommodate all connections.
+  pg_dump will open `njobs` + 1 connections to the database, so make sure your [max_connections](runtime-config-connection#GUC-MAX-CONNECTIONS) setting is high enough to accommodate all connections.
 
   Requesting exclusive locks on database objects while running a parallel dump could cause the dump to fail. The reason is that the pg_dump leader process requests shared locks ([ACCESS SHARE](explicit-locking#LOCKING-TABLES)) on the objects that the worker processes are going to dump later in order to make sure that nobody deletes them and makes them go away while the dump is running. If another client then requests an exclusive lock on a table, that lock will not be granted but will be queued waiting for the shared lock of the leader process to be released. Consequently any other access to the table will not be granted either and will queue after the exclusive lock request. This includes the worker process trying to dump the table. Without any precautions this would be a classic deadlock situation. To detect this conflict, the pg_dump worker process requests another shared lock using the `NOWAIT` option. If the worker process is not granted this shared lock, somebody else must have requested an exclusive lock in the meantime and there is no way to continue with the dump, so pg_dump has no choice but to abort the dump.
 
@@ -388,7 +388,7 @@ The following command-line options control the database connection parameters.
 
 - `--role=rolename`
 
-  Specifies a role name to be used to create the dump. This option causes pg_dump to issue a `SET ROLE` _`rolename`_ command after connecting to the database. It is useful when the authenticated user (specified by `-U`) lacks privileges needed by pg_dump, but can switch to a role with the required rights. Some installations have a policy against logging in directly as a superuser, and use of this option allows dumps to be made without violating the policy.
+  Specifies a role name to be used to create the dump. This option causes pg\*dump to issue a `SET ROLE` `rolename` command after connecting to the database. It is useful when the authenticated user (specified by `-U`) lacks privileges needed by pg_dump, but can switch to a role with the required rights. Some installations have a policy against logging in directly as a superuser, and use of this option allows dumps to be made without violating the policy.
 
 [#id](#id-1.9.4.13.7)
 

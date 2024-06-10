@@ -36,7 +36,7 @@ Text files created by pg_dump are intended to be read in by the psql program. Th
 psql dbname < dumpfile
 ```
 
-where _`dumpfile`_ is the file output by the pg_dump command. The database _`dbname`_ will not be created by this command, so you must create it yourself from `template0` before executing psql (e.g., with `createdb -T template0 dbname`). psql supports options similar to pg_dump for specifying the database server to connect to and the user name to use. See the [psql](app-psql) reference page for more information. Non-text file dumps are restored using the [pg_restore](app-pgrestore) utility.
+where `dumpfile` is the file output by the pg_dump command. The database `dbname` will not be created by this command, so you must create it yourself from `template0` before executing psql (e.g., with `createdb -T template0 dbname`). psql supports options similar to pg_dump for specifying the database server to connect to and the user name to use. See the [psql](app-psql) reference page for more information. Non-text file dumps are restored using the [pg_restore](app-pgrestore) utility.
 
 Before restoring an SQL dump, all the users who own objects or were granted permissions on objects in the dumped database must already exist. If they do not, the restore will fail to recreate the objects with the original ownership and/or permissions. (Sometimes this is what you want, but usually it is not.)
 

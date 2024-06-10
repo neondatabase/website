@@ -218,7 +218,7 @@ The following command-line options control the database connection parameters.
 
 - `--role=rolename`
 
-  Specifies a role name to be used to create the dump. This option causes pg_dumpall to issue a `SET ROLE` _`rolename`_ command after connecting to the database. It is useful when the authenticated user (specified by `-U`) lacks privileges needed by pg_dumpall, but can switch to a role with the required rights. Some installations have a policy against logging in directly as a superuser, and use of this option allows dumps to be made without violating the policy.
+  Specifies a role name to be used to create the dump. This option causes pg_dumpall to issue a `SET ROLE` `rolename` command after connecting to the database. It is useful when the authenticated user (specified by `-U`) lacks privileges needed by pg_dumpall, but can switch to a role with the required rights. Some installations have a policy against logging in directly as a superuser, and use of this option allows dumps to be made without violating the policy.
 
 [#id](#id-1.9.4.14.7)
 

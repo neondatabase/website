@@ -80,7 +80,7 @@ pg_restore accepts the following command line arguments.
 
 - `-j number-of-jobs``--jobs=number-of-jobs`
 
-  Run the most time-consuming steps of pg_restore — those that load data, create indexes, or create constraints — concurrently, using up to _`number-of-jobs`_ concurrent sessions. This option can dramatically reduce the time to restore a large database to a server running on a multiprocessor machine. This option is ignored when emitting a script rather than connecting directly to a database server.
+  Run the most time-consuming steps of pg_restore — those that load data, create indexes, or create constraints — concurrently, using up to `number-of-jobs` concurrent sessions. This option can dramatically reduce the time to restore a large database to a server running on a multiprocessor machine. This option is ignored when emitting a script rather than connecting directly to a database server.
 
   Each job is one process or one thread, depending on the operating system, and uses a separate connection to the server.
 
@@ -258,7 +258,7 @@ pg_restore also accepts the following command line arguments for connection para
 
 - `--role=rolename`
 
-  Specifies a role name to be used to perform the restore. This option causes pg_restore to issue a `SET ROLE` _`rolename`_ command after connecting to the database. It is useful when the authenticated user (specified by `-U`) lacks privileges needed by pg_restore, but can switch to a role with the required rights. Some installations have a policy against logging in directly as a superuser, and use of this option allows restores to be performed without violating the policy.
+  Specifies a role name to be used to perform the restore. This option causes `pg_restore` to issue a `SET ROLE` `rolename` command after connecting to the database. It is useful when the authenticated user (specified by `-U`) lacks privileges needed by pg_restore, but can switch to a role with the required rights. Some installations have a policy against logging in directly as a superuser, and use of this option allows restores to be performed without violating the policy.
 
 [#id](#id-1.9.4.18.7)
 

@@ -30,5 +30,4 @@ enableTableOfContents: true
 
 <img src="/images/technology-logos/symfony-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Symfony with Doctrine to Neon" />
 
-
 </TechnologyNavigation>

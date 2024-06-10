@@ -44,7 +44,7 @@ Cautious users will want to test their client applications on the new version be
 
 One upgrade method is to dump data from one major version of PostgreSQL and restore it in another — to do this, you must use a _logical_ backup tool like pg_dumpall; file system level backup methods will not work. (There are checks in place that prevent you from using a data directory with an incompatible version of PostgreSQL, so no great harm can be done by trying to start the wrong server version on a data directory.)
 
-It is recommended that you use the pg_dump and pg_dumpall programs from the _newer_ version of PostgreSQL, to take advantage of enhancements that might have been made in these programs. Current releases of the dump programs can read data from any server version back to 9.2.
+It is recommended that you use the `pg_dump` and `pg_dumpall` programs from the _newer_ version of PostgreSQL, to take advantage of enhancements that might have been made in these programs. Current releases of the dump programs can read data from any server version back to 9.2.
 
 These instructions assume that your existing installation is under the `/usr/local/pgsql` directory, and that the data area is in `/usr/local/pgsql/data`. Substitute your paths appropriately.
 

@@ -360,7 +360,7 @@ A collection of branches, databases, roles, and other project resources and sett
 
 ## Project ID
 
-A string that identifies your Neon project. Neon Project IDs are generated Heroku-like memorable random names, similar to `cool-forest-86753099`. You can find your project ID by navigating to your project in the Neon Console and selecting **Settings** from the sidebar. The project ID is also visible in the Neon Console URL after navigating to a project: `https://console.neon.tech/app/projects/cool-forest-86753099` 
+A string that identifies your Neon project. Neon Project IDs are generated Heroku-like memorable random names, similar to `cool-forest-86753099`. You can find your project ID by navigating to your project in the Neon Console and selecting **Settings** from the sidebar. The project ID is also visible in the Neon Console URL after navigating to a project: `https://console.neon.tech/app/projects/cool-forest-86753099`
 
 ## Project Sharing
 

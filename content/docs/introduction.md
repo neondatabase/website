@@ -63,7 +63,6 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 </TechnologyNavigation>
 
-
 ## Explore the docs
 
 <DetailIconCards>
@@ -81,7 +80,6 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 <a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
 
 </DetailIconCards>
-
 
 ## Join the community
 

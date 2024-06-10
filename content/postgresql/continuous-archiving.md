@@ -22,7 +22,7 @@ At all times, PostgreSQL maintains a _write ahead log_ (WAL) in the `pg_wal/` su
 
 ### Note
 
-pg_dump and pg_dumpall do not produce file-system-level backups and cannot be used as part of a continuous-archiving solution. Such dumps are _logical_ and do not contain enough information to be used by WAL replay.
+`pg_dump` and `pg_dumpall` do not produce file-system-level backups and cannot be used as part of a continuous-archiving solution. Such dumps are _logical_ and do not contain enough information to be used by WAL replay.
 
 As with the plain file-system-backup technique, this method can only support restoration of an entire database cluster, not a subset. Also, it requires a lot of archival storage: the base backup might be bulky, and a busy system will generate many megabytes of WAL traffic that have to be archived. Still, it is the preferred backup technique in many situations where high reliability is needed.
 
