@@ -168,7 +168,7 @@ Let's move on to integrating React into the Astro application.
 
 ### Integrate React in your Astro project
 
-To prototype the reactive user interface quickly, you are gonna use React as the library with Astro. In your terminal window, execute the following command:
+To prototype the reactive user interface quickly, you will use React as the library with Astro. In your terminal window, execute the following command:
 
 ```bash
 npx astro add react
