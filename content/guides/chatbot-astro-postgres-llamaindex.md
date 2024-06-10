@@ -401,7 +401,7 @@ Let's move on to building the chat API endpoint.
 
 ### Build the Chat API Endpoint
 
-Vercel AI SDK by default uses to `/api/chat` to obtain the chatbot responses. Create a file `src/pages/api/chat.ts` with the following code:
+The Vercel AI SDK uses `/api/chat` by default to obtain the chatbot responses. Create a file `src/pages/api/chat.ts` with the following code:
 
 ```tsx
 // File: src/pages/api/chat.ts
@@ -643,11 +643,11 @@ In this section, you will learn how to create an Amazon ECR repository for your 
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/bf86c622-e7b2-4d43-80d0-140757512e7d.png)
 
-- Enter a repository name, say `astro-repo` for example. Scroll down and choose **Create repository**.
+- Enter a repository name, say `astro-repo`, for example. Scroll down and choose **Create repository**.
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/9c566960-540a-448e-880e-97ec16ba4f0f.png)
 
-You are now done with setting up an Amazon ECR repository. Let’s move on to configuring IAM roles for your account.
+You are now done setting up an Amazon ECR repository. Let’s move on to configuring IAM roles for your account.
 
 ### Configure your IAM Roles
 
@@ -683,7 +683,7 @@ You are now done with setting up an Amazon ECR repository. Let’s move on to co
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/c6f45124-7441-4562-81d4-d45e93f9a567.png)
 
-You are now done with setting up IAM Roles for your account. Let’s move on to creating an Amazon ECS task definition.
+You are now done setting up IAM Roles for your account. Let’s move on to creating an Amazon ECS task definition.
 
 ### Create an Amazon ECS Task Definition
 
@@ -722,7 +722,7 @@ You are now done with setting up IAM Roles for your account. Let’s move on to 
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/b812ef9a-df98-4d46-aa0a-71711a967eeb.png)
 
-You are now done with setting up an Amazon ECS task definition for your service. Let's move on to creating an Amazon ECS Cluster.
+You are now done setting up an Amazon ECS task definition for your service. Let's move on to creating an Amazon ECS Cluster.
 
 ### Create an Amazon ECS Cluster
 
@@ -734,7 +734,7 @@ You are now done with setting up an Amazon ECS task definition for your service.
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/cb8e6d74-5745-4c2a-88c7-2598ac85e286.png)
 
-You are now done with setting up an Amazon ECS Cluster for your service.
+You are now done setting up an Amazon ECS Cluster for your service.
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/9a88a385-3ff9-496c-8ec0-7389fc4c69b0.png)
 
@@ -759,7 +759,7 @@ Let's move on to creating an Amazon ECS Service.
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/7dc7a5ea-e593-40a0-adb3-f9519536bdea.png)
 
-You are now done with creating an ECS Service in your ECS Cluster. Let's move on to creating access keys for IAM users for your account.
+You are now done creating an ECS Service in your ECS Cluster. Let's move on to creating access keys for IAM users for your account.
 
 ### Create Access Keys for IAM users
 
