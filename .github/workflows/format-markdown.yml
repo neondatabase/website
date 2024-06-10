@@ -33,8 +33,17 @@ jobs:
       run: |
         git config user.name "GitHub Action"
         git config user.email "action@github.com"
+        export HUSKY=0
         git add -A
-        git commit -m "chore: format content markdown files with Prettier" || echo "No changes to commit"
+        # Check for meaningful changes before committing
+        if [ -n "$(git status --porcelain)" ]; then
+          # Commit only modified markdown files, not all changes
+          git commit -m "chore: format content markdown files with Prettier"
+          echo "Changes committed"
+        else
+          echo "No significant changes to commit"
+          exit 0
+        fi
 
     - name: Push changes
       run: git push
