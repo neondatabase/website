@@ -186,7 +186,7 @@ Let's move on to enabling server-side rendering in the Astro application.
 
 ### Enabling Server Side Rendering in Astro using Node.js Adapter
 
-To interact with the chatbot over a server-side API, you are going to enable server-side rendering in your Astro application. Execute the following command in your terminal:
+To interact with the chatbot over a server-side API, you will enable server-side rendering in your Astro application. Execute the following command in your terminal:
 
 ```bash
 npx astro add node
@@ -275,7 +275,7 @@ export default function () {
 
 The code above does the following:
 
-- Imports the `useChat` hook by `ai` SDK to manage the conversation between the user and the chatbot. It simplifies the management of conversation between the user and the chatbot. By default, it posts to the `/api/chat` endpoint to obtain responses from the chatbot.
+- Imports the `useChat` hook by `ai` SDK to manage the conversation between the user and the chatbot. It simplifies the management of the conversation between the user and the chatbot. By default, it posts to the `/api/chat` endpoint to obtain responses from the chatbot.
 - Exports a React component that returns a form containing an `<input>` element to allow users to enter their query.
 - Creates a conversation UI looping over the set of messages (managed by the AI SDK).
 
@@ -376,7 +376,7 @@ The code above imports and renders both the Chat and the Learn component created
 </html>
 ```
 
-The changes above import the App component. Additionally, using Astro's [`client:load` directive](https://docs.astro.build/en/reference/directives-reference/#clientload) the code makes sure that both the React application is hydrated immediately on the page.
+The changes above import the App component. Additionally, using Astro's [`client:load` directive](https://docs.astro.build/en/reference/directives-reference/#clientload) the code makes sure that the React application is hydrated immediately on the page.
 
 Let's move on to using Postgres (powered by Neon) as the vector store for your chatbot.
 
