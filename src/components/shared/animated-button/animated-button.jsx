@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import { useRef, useState, useMemo } from 'react';
 
 import Link from 'components/shared/link';
+import getNodeText from 'utils/get-node-text';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const styles = {
   base: 'inline-flex items-center justify-center font-bold !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
@@ -33,6 +35,7 @@ const AnimatedButton = ({
   isAnimated = false,
   animationColor = '#00E599',
   size = null,
+  tag_name = null,
   theme,
   children,
   linesOffsetTop = 28,
@@ -111,6 +114,13 @@ const AnimatedButton = ({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={() => {
+        sendGtagEvent('Button Clicked', {
+          style: 'Animated',
+          text: getNodeText(children),
+          tag_name,
+        });
+      }}
       {...otherProps}
     >
       <LazyMotion features={domAnimation}>
@@ -145,6 +155,7 @@ AnimatedButton.propTypes = {
   className: PropTypes.string,
   to: PropTypes.string,
   size: PropTypes.oneOf(Object.keys(styles.size)),
+  tag_name: PropTypes.string,
   theme: PropTypes.oneOf(Object.keys(styles.theme)).isRequired,
   children: PropTypes.node.isRequired,
   animationColor: PropTypes.string,

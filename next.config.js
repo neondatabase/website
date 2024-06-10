@@ -242,8 +242,24 @@ const defaultConfig = {
         destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
       },
       {
+        source: '/demos/instant-postgres',
+        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres',
+      },
+      {
+        source: '/demos/instant-postgres/:path*',
+        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres/:path*',
+      },
+      {
         source: '/developer-days/:path*',
         destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
+      },
+      {
+        source: '/demos/regional-latency',
+        destination: 'https://latencies-ui.vercel.app/demos/regional-latency',
+      },
+      {
+        source: '/demos/regional-latency/:asset*',
+        destination: 'https://latencies-ui.vercel.app/demos/regional-latency/:asset*',
       },
     ];
   },

@@ -90,11 +90,67 @@ require('dotenv').config();
 const { neon } = require('@neondatabase/serverless');
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
-const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`)
+
+const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`);
 
 async function getPgVersion() {
-    const result = await sql`SELECT version()`l
-    console.log(result[0]);
+  const result = await sql`SELECT version()`;
+  console.log(result[0]);
+}
+
+getPgVersion();
+```
+
+```javascript
+require('dotenv').config();
+
+const { Pool } = require('pg');
+
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+
+const pool = new Pool({
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
+  port: 5432,
+  ssl: {
+    require: true,
+  },
+});
+
+async function getPgVersion() {
+  const client = await pool.connect();
+  try {
+    const result = await client.query('SELECT version()');
+    console.log(result.rows[0]);
+  } finally {
+    client.release();
+  }
+}
+
+getPgVersion();
+```
+
+```javascript
+require('dotenv').config();
+
+const postgres = require('postgres');
+
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+
+const sql = postgres({
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
+  port: 5432,
+  ssl: 'require',
+});
+
+async function getPgVersion() {
+  const result = await sql`select version()`;
+  console.log(result[0]);
 }
 
 getPgVersion();
@@ -173,10 +229,12 @@ For older clients that do not support Server Name Indication (SNI), the `postgre
 
 ```javascript
 // app.js
-const postgres = require('postgres');
+
 require('dotenv').config();
 
-let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
+const postgres = require('postgres');
+
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 
 const sql = postgres({
   host: PGHOST,
@@ -197,6 +255,14 @@ async function getPgVersion() {
 
 getPgVersion();
 ```
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/with-nodejs" description="Get started with Node.js and Neon" icon="github">Get started with Node.js and Neon</a>
+</DetailIconCards>
 
 ## Community resources
 

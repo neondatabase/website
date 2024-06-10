@@ -50,7 +50,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
-DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
+DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
 ```
 
 ## Configure the Postgres client
@@ -78,12 +78,13 @@ let data = null;
 
 try {
   const response = await client.query('SELECT version()');
-  console.log(response.rows[0]);
-  data = response.rows[0]
+  data = response.rows[0].version;
 } finally {
   client.release();
 }
 ---
+
+{data}
 ```
 
 ```astro
@@ -93,8 +94,10 @@ import postgres from 'postgres';
 const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
 
 const response = await sql`SELECT version()`;
-console.log(response);
+const data = response[0].version;
 ---
+
+{data}
 ```
 
 ```astro
@@ -104,11 +107,21 @@ import { neon } from '@neondatabase/serverless';
 const sql = neon(import.meta.env.DATABASE_URL);
 
 const response = await sql`SELECT version()`;
-console.log(response);
+const data = response[0].version;
 ---
+
+{data}
 ```
 
 </CodeTabs>
+
+#### Run the app
+
+When you run `npm run dev` you can expect to see the following when you visit [localhost:4321](localhost:4321):
+
+```shell shouldWrap
+PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+```
 
 ### Server Endpoints (API Routes)
 
@@ -117,6 +130,8 @@ In your server endpoints (API Routes) in Astro application, use the following co
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
+// File: src/pages/api/index.ts
+
 import { Pool } from 'pg';
 
 const pool = new Pool({
@@ -128,9 +143,8 @@ export async function GET() {
   const client = await pool.connect();
   let data = {};
   try {
-    const response = await client.query('SELECT version()');
-    console.log(response.rows[0]);
-    data = response.rows[0];
+    const { rows } = await client.query('SELECT version()');
+    data = rows[0];
   } finally {
     client.release();
   }
@@ -139,26 +153,28 @@ export async function GET() {
 ```
 
 ```javascript
+// File: src/pages/api/index.ts
+
 import postgres from 'postgres';
 
 export async function GET() {
   const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
   const response = await sql`SELECT version()`;
-  console.log(response);
-  return new Response(JSON.stringiify(response), {
+  return new Response(JSON.stringiify(response[0]), {
     headers: { 'Content-Type': 'application/json' },
   });
 }
 ```
 
 ```javascript
+// File: src/pages/api/index.ts
+
 import { neon } from '@neondatabase/serverless';
 
 export async function GET() {
   const sql = neon(import.meta.env.DATABASE_URL);
   const response = await sql`SELECT version()`;
-  console.log(response);
-  return new Response(JSON.stringiify(response), {
+  return new Response(JSON.stringiify(response[0]), {
     headers: { 'Content-Type': 'application/json' },
   });
 }
@@ -166,24 +182,24 @@ export async function GET() {
 
 </CodeTabs>
 
-## Run the app
+#### Run the app
 
-When you run `npm run dev` you can expect to see one of the following in your terminal output:
+When you run `npm run dev` you can expect to see the following when you visit the [localhost:4321/api](localhost:4321/api) route:
 
 ```shell shouldWrap
-# node-postgres & Neon serverless driver
-
-{
-  version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
-}
-
-# postgres.js
-
-Result(1) [
-  {
-    version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
-  }
-]
+{ version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit' }
 ```
+
+## Source code
+
+You can find the source code for the applications described in this guide on GitHub.
+
+<DetailIconCards>
+
+<a href="https://github.com/neondatabase/examples/tree/main/with-astro" description="Get started with Astro and Neon" icon="github">Get started with Astro and Neon</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/with-astro-api-routes" description="Get started with Astro API Routes and Neon" icon="github">Get started with Astro API Routes and Neon</a>
+
+</DetailIconCards>
 
 <NeedHelp/>

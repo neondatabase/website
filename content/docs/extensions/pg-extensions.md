@@ -124,7 +124,7 @@ To request support for a Postgres extension, paid plan users can [open a support
 
 ### Custom-built extensions
 
-On [Scale](/docs/introduction/plans#scale) and [Enterprise](/docs/introduction/plans#enterprise) plans, Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to us as described above. Please include the following information in your request:
+For [Enterprise](/docs/introduction/plans#enterprise) plan customers, Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to us as described above. Please include the following information in your request:
 
 - A repository link or archive file containing the source code for your extension
 - A description of what the extension does, instructions for compiling it, and any prerequisites

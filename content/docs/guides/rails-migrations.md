@@ -351,7 +351,7 @@ In this guide, we demonstrated how to set up a Ruby on Rails project with Neon P
 
 ## Source code
 
-You can find the source code for the application describe in this guide on GitHub.
+You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/guide-neon-rails" description="Run migrations in a Neon-Rails project" icon="github">Migrations with Neon and Rails</a>

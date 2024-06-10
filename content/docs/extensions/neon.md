@@ -38,9 +38,9 @@ The `neon_stat_file_cache` view includes the following metrics:
 
 ### Using the neon_stat_file_cache view
 
-To use the `neon_stat_file_cache` view, install the `neon` extension on a preferred database or connect to the Neon-managed `postgres` database where the `neon` extension is always available.
+To use the `neon_stat_file_cache` view, install the `neon` extension on your database:
 
-To install the extension on a preferred database:
+To install the extension on a database:
 
 ```sql
 CREATE EXTENSION neon;

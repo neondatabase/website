@@ -182,6 +182,7 @@ const Header = async ({
               className="h-8 px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
               to={LINKS.signup}
               theme="primary"
+              tag_name="Header"
             >
               Sign Up
             </Button>
