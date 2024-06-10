@@ -76,7 +76,7 @@ The limit on the maximum number of simultaneous connections (defined by the Post
 
 ![Monitoring page connections graph](/docs/introduction/monitor_connections.jpg)
 
-{/\*
+{/*
 
 - [Buffer cache hit rate](#buffer-cache-hit-rate)
 
@@ -86,7 +86,7 @@ The **Buffer cache hit rate** graph shows the percentage of read requests served
 
 ![Monitoring page cache hit rate graph](/docs/introduction/monitor_cache.jpg)
 
-\*/}
+*/}
 
 ### Database size
 
