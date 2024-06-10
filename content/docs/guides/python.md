@@ -59,7 +59,7 @@ The project is created with a ready-to-use `neondb` database, which you will con
    pip install asyncpg python-dotenv
    ```
 
-</CodeTabs>
+   </CodeTabs>
 
 ## Store your Neon credentials
 
