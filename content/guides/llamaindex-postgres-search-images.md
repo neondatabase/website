@@ -1,6 +1,6 @@
 ---
 title: Using LlamaIndex with Postgres to Build your own Reverse Image Search Engine
-subtitle: Step-by-step guide to build your own Reverse Image Search engine in an Astro application with LlamaIndex and Postgres powered by Neon
+subtitle: A step-by-step guide to build your own Reverse Image Search engine in an Astro application with LlamaIndex and Postgres
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-11T00:00:00.000Z'
@@ -19,7 +19,7 @@ To follow along this guide, you will need the following:
 
 ## Steps
 
-- [Provisioning a Serverless Postgres powered by Neon](#provisioning-a-serverless-postgres-powered-by-neon)
+- [Provisioning a Serverless Postgres](#provisioning-a-serverless-postgres)
 - [Create a new Astro application](#create-a-new-astro-application)
 - [Enabling Server Side Rendering in Astro with Vercel](#enabling-server-side-rendering-in-astro-with-vercel)
 - [Setting up a Postgres Database Connection](#setting-up-a-postgres-database-connection)
@@ -29,9 +29,9 @@ To follow along this guide, you will need the following:
 - [Build Reverse Image Search User Interface](#build-reverse-image-search-user-interface)
 - [Deploy to Vercel](#deploy-to-vercel)
 
-## Provisioning a Serverless Postgres powered by Neon
+## Provisioning a Serverless Postgres
 
-Using Serverless Postgres database powered by Neon helps you scale down to zero. With Neon, you only have to pay for what you use.
+Using Serverless Postgres database helps you scale down to zero. With Neon, you only have to pay for what you use.
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and enter the name of your choice as the project name.
 
@@ -126,7 +126,7 @@ The command above installed the following dependency:
 
 - `@astrojs/vercel`: The adapter that allows you to server-side render your Astro application on Vercel.
 
-With this, your Astro application is all set to run in the development mode and deploy to Vercel without changes. Now, let' configure connection to Postgres (powered by Neon) to index and query from a given set of images.
+With this, your Astro application is all set to run in the development mode and deploy to Vercel without changes. Now, let' configure connection to Postgres to index and query from a given set of images.
 
 ## Setting up a Postgres Database Connection
 
@@ -140,7 +140,7 @@ POSTGRES_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/
 
 The file, `.env` should be kept secret and not included in Git history. Ensure that `.env` is added to the `.gitignore` file in your project.
 
-Now, let's move on to using Postgres (powered by Neon) as the vector store to power your image search application with reverse image search capabilities.
+Now, let's move on to using Postgres as the vector store to power your image search application with reverse image search capabilities.
 
 ### Initialize Postgres Vector Store in LlamaIndex
 
@@ -374,6 +374,6 @@ The repository is now ready to deploy to Vercel. Use the following steps to depl
 
 ## Summary
 
-In this guide, you learned how to build a reverse image search engine in an Astro application using LlamaIndex and Serverless Postgres Database (powered by Neon). During the process, you learned how to create vector embeddings of the images using ClipEmbeddings, to index and search from them using LlamaIndex Postgres vector store.
+In this guide, you learned how to build a reverse image search engine in an Astro application using LlamaIndex and Serverless Postgres Database. During the process, you learned how to create vector embeddings of the images using ClipEmbeddings, to index and search from them using LlamaIndex Postgres vector store.
 
 <NeedHelp />
