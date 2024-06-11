@@ -1,13 +1,13 @@
 ---
-title: Build a RAG chatbot with Astro, Postgres and LlamaIndex
-subtitle: A step-by-step guide for building a RAG chatbot in an Astro application with LlamaIndex and Postgres powered by Neon
+title: Build a RAG chatbot with Astro, Postgres, and LlamaIndex
+subtitle: A step-by-step guide for building a RAG chatbot in an Astro application with LlamaIndex and Postgres
 author: rishi-raj-jain
 enableTableOfContents: true
-createdAt: '2024-05-24T00:00:00.000Z'
-updatedOn: '2024-05-24T00:00:00.000Z'
+createdAt: '2024-06-11T00:00:00.000Z'
+updatedOn: '2024-06-11T00:00:00.000Z'
 ---
 
-In this guide, you will learn the step-by-step process of building a Retrieval-Augmented Generation chatbot in Astro application with LlamaIndex and Postgres, powered by Neon.
+A step-by-step guide to build a Retrieval-Augmented Generation chatbot in Astro application with LlamaIndex and Postgres.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ To follow the steps in this guide, you will need the following:
 ## Steps
 
 - [Generate the OpenAI API token](#generate-the-openai-api-token)
-- [Provisioning a Serverless Postgres powered by Neon](#provisioning-a-serverless-postgres-powered-by-neon)
+- [Provisioning a Serverless Postgres](#provisioning-a-serverless-postgres)
 - [Create a new Astro application](#create-a-new-astro-application)
   - [Add Tailwind CSS to the application](#add-tailwind-css-to-the-application)
   - [Integrate React in your Astro project](#integrate-react-in-your-astro-project)
@@ -53,9 +53,9 @@ To create vector embeddings, you will use OpenAI API with LlamaIndex. To set up 
 - Enter a name for your token and click the **Create new secret key** button to generate a new key.
 - Copy and securely store this token for later use as the **OPENAI_API_KEY** environment variable.
 
-## Provisioning a Serverless Postgres powered by Neon
+## Provisioning a Serverless Postgres
 
-Using a serverless Postgres database powered by Neon lets you scale compute resources down to zero, which helps you save on compute costs.
+Using a serverless Postgres database lets you scale compute resources down to zero, which helps you save on compute costs.
 
 To get started, go to the [Neon Console](https://console.neon.tech/app/projects) and create a project.
 
@@ -213,7 +213,7 @@ Create an `.env` file in the root directory of your project with the following e
 POSTGRES_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
 ```
 
-The file, `.env`, should be kept secret and not included in your Git history. Ensure that `.env` is added to the ``.gitignore` file in your project.
+The file, `.env`, should be kept secret and not included in your Git history. Ensure that `.env` is added to the `.gitignore` file in your project.
 
 ## Define the Astro application routes
 
@@ -378,11 +378,11 @@ The code above imports and renders both the Chat and the Learn component created
 
 The changes above import the App component. Additionally, using Astro's [`client:load` directive](https://docs.astro.build/en/reference/directives-reference/#clientload) the code makes sure that the React application is hydrated immediately on the page.
 
-Let's move on to using Postgres (powered by Neon) as the vector store for your chatbot.
+Let's move on to using Postgres as the vector store for your chatbot.
 
 ### Initialize Postgres Vector Store in LlamaIndex
 
-To query and add documents to the Postgres (powered by Neon) vector store, you are going to use `PGVectorStore` class to communicate. Inside the `src` directory, create `vectorStore.ts` with the following code:
+To query and add documents to the Postgres vector store, you are going to use `PGVectorStore` class to communicate. Inside the `src` directory, create `vectorStore.ts` with the following code:
 
 ```tsx
 // File: src/vectorStore.ts
@@ -442,7 +442,7 @@ export async function POST({ request }: APIContext) {
 
 The code above does the following:
 
-- Imports the vector store instance that is using Postgres powered by Neon.
+- Imports the vector store instance that is using Postgres.
 - Imports the VectorStoreIndex helper by llamaindex.
 - Exports a POST HTTP Handler which responds to incoming POST requests on `/api/chat`.
 - Destructs messages array from the request body.
@@ -482,7 +482,7 @@ export async function POST({ request }: APIContext) {
 
 The code above does the following:
 
-- Imports the vector store instance that is using Postgres powered by Neon.
+- Imports the vector store instance that is using Postgres.
 - Imports the VectorStoreIndex and storageContextFromDefaults helpers by llamaindex.
 - Exports a POST HTTP Handler which responds to incoming POST requests on `/api/learn`.
 - Destructs the text message from the request body.
