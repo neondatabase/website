@@ -37,11 +37,14 @@
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
           slug: guides/quarkus-reactive
+        - title: Reflex
+          slug: guides/reflex
+          tag: new
         - title: Remix
           slug: guides/remix
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
-        - title: SQL Alchemy
+        - title: SQLAlchemy
           slug: guides/sqlalchemy
         - title: Symfony
           slug: guides/symfony
@@ -260,7 +263,7 @@
 - title: Integration guides
   slug: guides/integrations
   items:
-    - title: Deployment
+    - title: Deploy
       items:
         - title: Vercel
           items:
@@ -296,7 +299,7 @@
           slug: serverless/serverless-driver
         - title: AWS Lambda
           slug: guides/aws-lambda
-    - title: Backend-as-a-service
+    - title: Query
       items:
         - title: Exograph
           slug: guides/exograph
@@ -306,19 +309,15 @@
           slug: guides/grafbase
         - title: Hasura
           slug: guides/hasura
-        - title: Sequin
-          slug: guides/sequin
+        - title: Cloudflare Hyperdrive
+          slug: guides/cloudflare-hyperdrive
+        - title: Outerbase
+          slug: guides/outerbase
         - title: StepZen
           slug: guides/stepzen
         - title: WunderGraph
           slug: guides/wundergraph
-    - title: Caching
-      items:
-        - title: Cloudflare Hyperdrive
-          slug: guides/cloudflare-hyperdrive
-        - title: PolyScale
-          slug: guides/polyscale
-    - title: CI/CD
+    - title: Develop
       items:
         - title: GitHub integration
           slug: guides/neon-github-app
@@ -330,21 +329,25 @@
             - title: Anonymize data
               slug: guides/neosync-anonymize
               tag: new
-    - title: Replication
+        - title: Prisma
+          slug: guides/prisma  
+    - title: Replicate
       items:
         - title: Airbyte
           slug: guides/logical-replication-airbyte
         - title: ClickHouse (DoubleCloud)
           slug: guides/logical-replication-clickhouse
-        - title: Fivetran
-          slug: guides/logical-replication-fivetran
         - title: Confluent
           slug: guides/logical-replication-kafka-confluent
+        - title: Fivetran
+          slug: guides/logical-replication-fivetran
         - title: Materialize
           slug: guides/logical-replication-materialize
         - title: Postgres
           slug: guides/logical-replication-postgres
-    - title: Migrations
+        - title: Sequin
+          slug: guides/sequin
+    - title: Schema Migration
       items:
         - title: Django
           slug: guides/django-migrations
@@ -382,12 +385,6 @@
           slug: guides/auth-clerk
         - title: Okta
           slug: guides/auth-okta
-    - title: Tools
-      items:
-        - title: Outerbase
-          slug: guides/outerbase
-        - title: Prisma
-          slug: guides/prisma
 - title: Postgres guides
   slug: postgresql/introduction
   items:
@@ -444,40 +441,48 @@
     - title: Functions
       slug: functions/introduction
       items:
-        - title: array_to_json
-          slug: functions/array_to_json
-        - title: dense_rank
-          slug: functions/dense_rank
-        - title: json_array_elements
-          slug: functions/json_array_elements
-        - title: jsonb_array_elements
-          slug: functions/jsonb_array_elements
-        - title: json_build_object
-          slug: functions/json_build_object
-        - title: json_each
-          slug: functions/json_each
-        - title: jsonb_each
-          slug: functions/jsonb_each
-        - title: json_extract_path
-          slug: functions/json_extract_path
-        - title: jsonb_extract_path
-          slug: functions/jsonb_extract_path
-        - title: json_extract_path_text
-          slug: functions/json_extract_path_text
-        - title: jsonb_extract_path_text
-          slug: functions/jsonb_extract_path_text
-        - title: json_object
-          slug: functions/json_object
-        - title: jsonb_object
-          slug: functions/jsonb_object
-        - title: json_populate_record
-          slug: functions/json_populate_record
-        - title: jsonb_populate_record
-          slug: functions/jsonb_populate_record
-        - title: json_to_record
-          slug: functions/json_to_record
-        - title: jsonb_to_record
-          slug: functions/jsonb_to_record
+        - title: JSON functions
+          items:
+            - title: array_to_json
+              slug: functions/array_to_json
+            - title: json_array_elements
+              slug: functions/json_array_elements
+            - title: jsonb_array_elements
+              slug: functions/jsonb_array_elements
+            - title: json_build_object
+              slug: functions/json_build_object
+            - title: json_each
+              slug: functions/json_each
+            - title: jsonb_each
+              slug: functions/jsonb_each
+            - title: json_extract_path
+              slug: functions/json_extract_path
+            - title: jsonb_extract_path
+              slug: functions/jsonb_extract_path
+            - title: json_extract_path_text
+              slug: functions/json_extract_path_text
+            - title: jsonb_extract_path_text
+              slug: functions/jsonb_extract_path_text
+            - title: json_object
+              slug: functions/json_object
+            - title: jsonb_object
+              slug: functions/jsonb_object
+            - title: json_populate_record
+              slug: functions/json_populate_record
+            - title: jsonb_populate_record
+              slug: functions/jsonb_populate_record
+            - title: json_to_record
+              slug: functions/json_to_record
+            - title: jsonb_to_record
+              slug: functions/jsonb_to_record
+        - title: Window functions
+          items:
+            - title: dense_rank
+              slug: functions/dense_rank
+            - title: lag
+              slug: functions/window-lag
+            - title: lead
+              slug: functions/window-lead
     - title: Optimize queries
       slug: postgresql/query-performance
     - title: Query reference

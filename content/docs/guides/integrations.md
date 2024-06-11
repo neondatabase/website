@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2024-02-27T20:16:54.558Z'
 ---
 
-## Deployment
+## Deploy
 
 <TechnologyNavigation open>
 
@@ -41,8 +41,7 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 </TechnologyNavigation>
 
-
-## Backend-as-a-service
+## Query
 
 <TechnologyNavigation open>
 
@@ -54,25 +53,17 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 <img src="/images/technology-logos/hasura-logo.svg" width="35" height="36" alt="Hasura" href="/docs/guides/hasura" title="Connect from Hasura Cloud to Neon" />
 
-<img src="/images/technology-logos/sequin-logo.svg" width="29" height="36" alt="Sequin" href="/docs/guides/sequin" title="Sync data from APIs to Neon in real time" />
+<img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Hyperdrive" href="/docs/guides/cloudflare-hyperdrive" title="Use Neon with Cloudflare Hyperdrive" />
 
 <img src="/images/technology-logos/stepzen-logo.svg" width="36" height="36" alt="StepZen" href="/docs/guides/stepzen" title="Use StepZen with Neon" />
 
 <img src="/images/technology-logos/wundergraph-logo.svg" width="36" height="36" alt="Wundergraph" href="/docs/guides/wundergraph" title="Use Wundergraph with Neon" />
 
-</TechnologyNavigation>
-
-## Caching
-
-<TechnologyNavigation open>
-
-<img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Hyperdrive" href="/docs/guides/cloudflare-hyperdrive" title="Use Neon with Cloudflare Hyperdrive" />
-
-<img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale" title="Use PolyScale with Neon" />
+<img src="/images/technology-logos/outerbase-logo.svg" width="36" height="36" alt="Outerbase" href="/docs/guides/outerbase" title="Connect Outerbase to Neon" />
 
 </TechnologyNavigation>
 
-## CI/CD
+## Develop
 
 <TechnologyNavigation>
 
@@ -82,10 +73,11 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 <img src="/images/technology-logos/neosync-logo.svg" width="36" height="36" alt="Neosync" href="/docs/guides/neosync-generate" title="Seed data with Neosync" />
 
+<img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
+
 </TechnologyNavigation>
 
-
-## Replication
+## Replicate
 
 <TechnologyNavigation open>
 
@@ -93,18 +85,19 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 <img src="/images/technology-logos/clickhouse-logo.svg" width="36" height="36" alt="ClickHouse" href="/docs/guides/logical-replication-clickhouse" title="Replicate data from Neon to ClickHouse (DoubleCloud)" />
 
-<img src="/images/technology-logos/fivetran-logo.svg" width="36" height="36" alt="Fivetran" href="/docs/guides/logical-replication-fivetran" title="Replicate data from Neon with Fivetran" />
-
 <img src="/images/technology-logos/kafka-logo.svg" width="36" height="36" alt="Kafka" href="/docs/guides/logical-replication-kafka-confluent" title="Replicate data from Neon with Kafka (Confluent)" />
+
+<img src="/images/technology-logos/fivetran-logo.svg" width="36" height="36" alt="Fivetran" href="/docs/guides/logical-replication-fivetran" title="Replicate data from Neon with Fivetran" />
 
 <img src="/images/technology-logos/materialize-logo.svg" width="36" height="36" alt="Materialize" href="/docs/guides/logical-replication-materialize" title="Replicate data from Neon to Materialize" />
 
 <img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
 
+<img src="/images/technology-logos/sequin-logo.svg" width="29" height="36" alt="Sequin" href="/docs/guides/sequin" title="Sync data from APIs to Neon in real time" />
+
 </TechnologyNavigation>
 
-
-## Migrations
+## Schema Migration
 
 <TechnologyNavigation open>
 
@@ -130,19 +123,7 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 </TechnologyNavigation>
 
-
-## Tools
-
-<TechnologyNavigation open>
-
-<img src="/images/technology-logos/outerbase-logo.svg" width="36" height="36" alt="Outerbase" href="/docs/guides/outerbase" title="Connect Outerbase to Neon" />
-
-<img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
-
-</TechnologyNavigation>
-
-
-## Authentication
+## Authenticate
 
 <TechnologyNavigation open>
 
