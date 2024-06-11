@@ -45,6 +45,14 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 </DetailIconCards>
 
+## String functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/concat" description="Concatenate strings" icon="app-store">concat()</a>
+
+</DetailIconCards>
+
 ## Window functions
 
 <DetailIconCards>
