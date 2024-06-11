@@ -27,12 +27,14 @@ export async function GET(request) {
   try {
     const { searchParams } = request.nextUrl;
 
-    console.log(searchParams);
-
     const hasTitle = searchParams.has('title');
     const title = searchParams.get('title');
-
     const ogTitle = hasTitle && Buffer.from(title, 'base64').toString('utf-8');
+
+    const hasCategory = searchParams.has('category');
+    const category = searchParams.get('category');
+    const ogCategory = hasCategory && Buffer.from(category, 'base64').toString('utf-8');
+    const ogBreadcrumbs = `Docs${ogCategory && ` / ${ogCategory}`}`;
 
     return new ImageResponse(
       (
@@ -74,7 +76,7 @@ export async function GET(request) {
                 whiteSpace: 'pre-wrap',
               }}
             >
-              Docs / Getting Started
+              {ogBreadcrumbs}
             </div>
             <div
               style={{
