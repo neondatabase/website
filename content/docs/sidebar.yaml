@@ -483,6 +483,10 @@
               slug: functions/window-lag
             - title: lead
               slug: functions/window-lead
+        - title: String functions
+          items:
+            - title: concat
+              slug: functions/concat
     - title: Optimize queries
       slug: postgresql/query-performance
     - title: Query reference
