@@ -57,7 +57,7 @@ To create a branch:
 
 8. Click **Create new branch** to create your branch.
 
-You are directed to the **Branches** page where you are shown the details for your new branch.
+You are directed to the **Branch** overview page where you are shown the details for your new branch.
 
 ## View branches
 
@@ -70,6 +70,7 @@ To view the branches in a Neon project:
 
    Branch details in this table view include:
 
+   - **Branch**: The branch name, which is a generated name if no name was specified when created.
    - **Parent**: Indicates the parent from which this branch was created, helping you track your branch hierarchy.
    - **Active time**: Number of hours the branch's compute was active so far in the current billing period.
    - **RW Compute**: Shows the current compute size and status for the branch's compute.
@@ -90,9 +91,9 @@ To view the branches in a Neon project:
     - **Parent branch**: The branch from which this branch was created (only applicable to child branches).
     - **Branching point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
     - **Last data reset**: The last time the branch was reset from the parent branch (only applicable to child branches). For information about the **Reset from parent** option, see [Reset from parent](/docs/guides/reset-from-parent).
-    - **Compare from parent**: For information about the **Open schema diff** option, see [Schema diff](/docs/guides/schema-diff).
+    - **Compare to parent**: For information about the **Open schema diff** option, see [Schema diff](/docs/guides/schema-diff).
 
-The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. In Neon, all of these obejects are associated with a branch. For information about these objects, see:
+The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. In Neon, all of these objects are associated with a particular branch. For information about these objects, see:
 
 - [Manage computes](/docs/manage/endpoints#view-a-compute-endpoint).
 - [Manage roles](/docs/manage/roles)
@@ -106,7 +107,7 @@ Neon permits renaming a branch, including your project's primary branch. To rena
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch page, click the **Actions** drop-down menu and select **Rename**.
+4. On the branch overview page, click the **Actions** drop-down menu and select **Rename**.
 5. Specify a new name for the branch and click **Save**.
 
 ## Set a branch as primary
@@ -118,7 +119,7 @@ To set a branch as the primary branch:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch page, click the **Actions** drop-down menu and select **Set as primary**.
+4. On the branch overview page, click the **Actions** drop-down menu and select **Set as primary**.
 5. In the **Set as primary** confirmation dialog, click **Set as Primary** to confirm your selection.
 
 ## Set a branch as protected
@@ -137,7 +138,7 @@ To designate a branch as protected:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch page, click the **More** drop-down menu and select **Set as protected**.
+4. On the branch overview page, click the **Actions** drop-down menu and select **Set as protected**.
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
 
 For step-by-step instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
@@ -164,7 +165,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 A compute endpoint hostname starts with an `ep-` prefix. You can also find a compute endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
 </Admonition>
 
-If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the [Guides](/docs/guides/guides-intro) section in the documentation provide connection examples for various languages and frameworks. For more information about connecting, see [Connect from any application](/docs/connect/connect-from-any-app).
+If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples. 
 
 ## Reset a branch from parent
 
