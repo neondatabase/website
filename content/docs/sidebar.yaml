@@ -478,8 +478,6 @@
           slug: functions/json_to_record
         - title: jsonb_to_record
           slug: functions/jsonb_to_record
-        - title: substring
-          slug: functions/substring
     - title: Optimize queries
       slug: postgresql/query-performance
     - title: Query reference
