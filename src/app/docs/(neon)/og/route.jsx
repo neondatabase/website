@@ -59,7 +59,7 @@ export async function GET(request) {
               display: 'flex',
               flexDirection: 'column',
               marginTop: 'auto',
-              maxWidth: '800px',
+              maxWidth: '890px',
             }}
           >
             <div
