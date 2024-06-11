@@ -1,11 +1,11 @@
 ---
 title: Postgres concat() function
-subtitle: Concatenate strings together
+subtitle: Concatenate strings in Postgres with the concat() function
 enableTableOfContents: true
 updatedOn: '2024-02-08T09:30:00.000Z'
 ---
 
-The `concat` function in Postgres is used to concatenate two or more strings together into a single string. It is a variadic function, meaning it can accept any number of arguments.
+The `concat()` function in Postgres is used to concatenate two or more strings into a single string. It is a variadic function, meaning it can accept any number of arguments.
 
 It is useful for combining data from multiple columns, generating custom identifiers or labels, or constructing dynamic SQL statements.
 
@@ -13,7 +13,7 @@ It is useful for combining data from multiple columns, generating custom identif
 
 ## Function signature
 
-The `concat` function has two forms:
+The `concat()` function has two forms:
 
 ```sql
 concat(str "any" [, str "any" [, ...] ]) → text
@@ -29,7 +29,7 @@ concat(variadic str "any"[]) → text
 
 ## Example usage
 
-Consider a table `customers` with `first_name` and `last_name` columns. We can use `concat` to combine these into a full name.
+Consider a table `customers` with `first_name` and `last_name` columns. We can use `concat()` to combine these into a full name.
 
 ```sql
 WITH customers AS (
@@ -80,7 +80,7 @@ This query generates a descriptive `product_info` string by concatenating the `n
 
 ### Concatenate an array of strings
 
-You can use the `variadic` form of `concat` to concatenate an array of strings.
+You can use the `variadic` form of `concat()` to concatenate an array of strings.
 
 ```sql
 WITH data AS (
@@ -101,7 +101,7 @@ This query concatenates the elements of the `fruits` array into a single string.
 
 ### Concatenate columns to generate custom keys
 
-`concat` can be used to generate custom identifiers as keys, which you can use for further processing or analysis.
+`concat()` can be used to generate custom identifiers as keys, which you can use for further processing or analysis.
 
 ```sql
 WITH page_interactions AS (
@@ -136,7 +136,7 @@ This query generates a unique identifier for each page visit by concatenating th
 
 ### Handling NULL values
 
-Any null arguments to `concat` are treated as empty strings in the output. This is in contrast to the behavior of the `||` operator, which treats `NULL` values as `NULL`.
+Any null arguments to `concat()` are treated as empty strings in the output. This is in contrast to the behavior of the `||` operator, which treats `NULL` values as `NULL`.
 
 ```sql
 SELECT 
@@ -157,7 +157,7 @@ Pick the right function based on how you want to handle `NULL` values.
 
 - `concat_ws`: Concatenates strings with a separator string between each element.
 - `string_agg`: An aggregation function that combines strings from a column into a single string with a separator.
-- `||` operator: Can also be used to concatenates strings. It treats `NULL` values differently than `concat`.
+- `||` operator: Can also be used to concatenate strings. It treats `NULL` values differently than `concat()`.
 
 ## Resources
 
