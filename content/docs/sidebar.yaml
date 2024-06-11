@@ -479,6 +479,8 @@
           items:
             - title: dense_rank
               slug: functions/dense_rank
+            - title: lag
+              slug: functions/window-lag
             - title: lead
               slug: functions/window-lead
     - title: Optimize queries

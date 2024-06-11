@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-02-08T09:30:00.000Z'
 ---
 
-The `lead` function in Postgres is a window function that allows you to access values from subsequent rows in a result set without the need for a self-join. 
+The `lead()` function in Postgres is a window function that allows you to access values from subsequent rows in a result set without the need for a self-join. 
 
 It's useful for comparing values between the current row and a later row, for example, when calculating the time until the next event, determining the next event in a sequence, or analyzing trends in time series data.
 
@@ -13,7 +13,7 @@ It's useful for comparing values between the current row and a later row, for ex
 
 ## Function signature
 
-The `lead` function has the following forms:
+The `lead()` function has the following forms:
 
 ```sql
 lead(value any [, offset integer [, default any ]]) over (...)
@@ -140,7 +140,7 @@ This query determines the start date of the next task in each project. For the l
 (5 rows)
 ```
 
-### Using `lead` with multiple partitions
+### Using `lead()` with multiple partitions
 
 You can use `lead()` with multiple partitions to perform calculations within different groups of rows simultaneously.
 
@@ -195,7 +195,7 @@ To optimize performance, make sure to:
 
 ### Alternative functions
 
-- `lag()` - Access values from previous rows in a result set. Similar to `lead` but looks behind in the partition instead of ahead.
+- [lag](/docs/functions/window-lag) - Access values from previous rows in a result set. Similar to `lead()` but looks behind in the partition instead of ahead.
 - `first_value()` - Get the first value within a window frame.
 - `last_value()` - Get the last value within a window frame.
 

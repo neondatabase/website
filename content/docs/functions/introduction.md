@@ -51,6 +51,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/dense_rank" description="Returns the rank of the current row without gaps" icon="app-store">dense_rank()</a>
 
+<a href="/docs/functions/window-lag" description="Access values from previous rows in a result set" icon="app-store">lag()</a>
+
 <a href="/docs/functions/window-lead" description="Access values from subsequent rows in a result set" icon="app-store">lead()</a>
 
 </DetailIconCards>
