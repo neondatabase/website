@@ -21,7 +21,7 @@ To follow the steps in this guide, you will need the following:
 ## Steps
 
 - [Generate the OpenAI API token](#generate-the-openai-api-token)
-- [Provisioning a Serverless Postgres powered by Neon](#provisioning-a-serverless-postgres-powered-by-neon)
+- [Provisioning a Serverless Postgres](#provisioning-a-serverless-postgres)
 - [Create a new Astro application](#create-a-new-astro-application)
   - [Add Tailwind CSS to the application](#add-tailwind-css-to-the-application)
   - [Integrate React in your Astro project](#integrate-react-in-your-astro-project)
@@ -53,7 +53,7 @@ To create vector embeddings, you will use OpenAI API with LlamaIndex. To set up 
 - Enter a name for your token and click the **Create new secret key** button to generate a new key.
 - Copy and securely store this token for later use as the **OPENAI_API_KEY** environment variable.
 
-## Provisioning a Serverless Postgres powered by Neon
+## Provisioning a Serverless Postgres
 
 Using a serverless Postgres database lets you scale compute resources down to zero, which helps you save on compute costs.
 
@@ -442,7 +442,7 @@ export async function POST({ request }: APIContext) {
 
 The code above does the following:
 
-- Imports the vector store instance that is using Postgres powered by Neon.
+- Imports the vector store instance that is using Postgres.
 - Imports the VectorStoreIndex helper by llamaindex.
 - Exports a POST HTTP Handler which responds to incoming POST requests on `/api/chat`.
 - Destructs messages array from the request body.
