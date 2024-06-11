@@ -49,6 +49,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <DetailIconCards>
 
+<a href="/docs/functions/concat" description="Concatenate strings" icon="app-store">concat()</a>
+
 <a href="/docs/functions/substring" description="Extract a substring from a string" icon="app-store">substring()</a>
 
 </DetailIconCards>
