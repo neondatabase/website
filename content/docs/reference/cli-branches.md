@@ -27,6 +27,7 @@ neonctl branches <subcommand> [options]
 | [reset](#reset)   | Reset data to parent
 | [restore](#restore) | Restore a branch to a selected point in time
 | [rename](#rename)   | Rename a branch |
+| [schema-diff](#schema-diff) | Compare schemas |
 | [set-primary](#set-primary)   | Set a primary branch |
 | [add-compute](#add-compute)   | Add replica to a branch |
 | [delete](#delete)  | Delete a branch |
@@ -441,6 +442,96 @@ neonctl branches rename mybranch teambranch
 ├───────────────────────┼────────────┼──────────────────────┼──────────────────────┤
 │ br-rough-sound-590393 │ teambranch │ 2023-07-09T20:46:58Z │ 2023-07-09T21:02:27Z │
 └───────────────────────┴────────────┴──────────────────────┴──────────────────────┘
+```
+
+## schema-diff
+
+This command:
+
+- Compares the latest schemas of any two branches
+- Compares against a specific point in its own or another branch’s history
+
+#### Usage
+
+```
+neonctl branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
+```
+
+`[base-branch]` specifies the branch you want to compare against. For example, if you want to compare a development branch against the production branch `main`, select `main` as your base.
+
+This setting is **optional**. If you leave it out, the operation uses either of the following as the base:
+
+- The branch identified in the `set-context` file
+- If no context is configured, it uses your project's primary branch
+
+`[compare-source]` specifies the branch or state to compare against. Options are:
+
+- `^self` &#8212; compares the selected branch to an earlier point in its own history. You must specify a timestamp or LSN.
+- `^parent` &#8212; compares the selected branch to the head of its parent branch. You can append `@timestamp` or `@lsn` to compare to an earlier point in the parent's history.
+- `<compare-branch-id|name>` &#8212; compares the selected branch to the head of another specified branch. Append `@timestamp` or `@lsn` to compare to an earlier point in the specified branch's history.
+
+#### Examples
+
+Examples of different kinds of schema diff operations you can do:
+
+- [Compare to another branch's head](#compare-to-another-branchs-head)
+- [Compare to an earlier point in a branch's history](#comparing-a-branch-to-an-earlier-point-in-its-history)
+- [Compare a branch to its parent](#comparing-a-branch-to-its-parent)
+- [Compare to an earlier point in another branch's history](#comparing-a-branch-to-an-earlier-point-in-another-branchs-history)
+
+#### Compare to another branch's head
+
+This command compares the schema of the `main` branch to the head of the branch `dev/alex`.
+
+```
+neonctl branches schema-diff main dev/alex
+```
+
+The output indicates that in the table `public.playing_with_neon`, a new column `description character varying(255)` has been added in the `dev/alex` branch that is not present in the `main` branch.
+
+```diff
+--- Database: neondb	(Branch: br-wandering-firefly-a50un462) // [!code --]
++++ Database: neondb	(Branch: br-fancy-sky-a5cydw8p) // [!code ++]
+@@ -26,9 +26,10 @@
+ 
+ CREATE TABLE public.playing_with_neon (
+     id integer NOT NULL,
+     name text NOT NULL,
+-    value real [!code --]
++    value real, // [!code ++]
++    description character varying(255) // [!code ++]
+ );
+ 
+ 
+ ALTER TABLE public.playing_with_neon OWNER TO neondb_owner;
+```
+ 
+ 
+ ALTER TABLE public.playing_with_neon OWNER TO neondb_owner;
+```
+
+#### Comparing a branch to an earlier point in its history
+
+This command compares the schema of `dev-alex` to a previous state in its history at LSN 0/123456.
+
+```
+neonctl branches schema-diff dev-alex ^self@0/123456
+```
+
+#### Comparing a branch to its parent
+
+This command compares the schema of `dev/alex` to the head of its parent branch.
+
+```
+neonctl branches schema-diff dev/alex ^parent
+```
+
+#### Comparing a branch to an earlier point in another branch's history
+
+This command compares the schema of the `main` branch to the state of the `dev/jordan` branch at timestamp 2024-06-01T00:00:00.000Z
+
+```bash
+neonctl branches schema-diff main dev/jordan@2024-06-01T00:00:00.000Z
 ```
 
 ## set-primary
