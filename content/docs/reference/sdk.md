@@ -26,11 +26,11 @@ yarn add @neondatabase/api-client
 
 To get started with the `@neondatabase/api-client` library, follow these steps:
 
-1. Obtain an API key from the [Developer Settings](https://console.neon.tech/app/settings/api-keys) page in the Neon Console.
+1. Obtain an API key from the [Account settings](https://console.neon.tech/app/settings/api-keys) page in the Neon Console.
 
 2. Click **Generate new API key**.
 
-3. Enter name for your API key and click **Create**.
+3. Enter a name for your API key and click **Create**.
 
 4. Save your API key to a secure location that enables you to pass it to your code.
 
