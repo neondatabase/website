@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 
@@ -18,18 +18,37 @@ const icons = {
   windows: WindowsIcon,
 };
 
+const detectOS = () => {
+  const { userAgent } = navigator;
+  if (/Mac/i.test(userAgent)) {
+    return 'macOS';
+  } if (/Win/i.test(userAgent)) {
+    return 'Windows';
+  } if (/Linux/i.test(userAgent)) {
+    return 'Linux';
+  }
+
+  return 'macOS';
+};
+
 const CodeTabsNavigation = ({ codeSnippets, highlightedCodeSnippets }) => {
   const [activeItem, setActiveItem] = useState(0);
 
+  useEffect(() => {
+    const osName = detectOS();
+    const osIndex = codeSnippets.findIndex((snippet) => snippet.name === osName);
+    setActiveItem(osIndex >= 0 ? osIndex : 0);
+  }, [codeSnippets]);
+
   return (
     <>
-      <div className="border-b border-gray-new-10 lg:flex">
+      <div className="flex border-b border-gray-new-10">
         {codeSnippets.map(({ name, iconName }, index) => {
           const Icon = icons[iconName];
           return (
             <button
               className={clsx(
-                'relative px-3.5 py-3 transition-colors duration-200 after:absolute after:left-0 after:top-full after:-mt-px after:h-0.5 after:w-full after:transition-colors after:duration-200 hover:text-white lg:flex-1',
+                'relative flex-1 px-3.5 py-3 transition-colors duration-200 after:absolute after:left-0 after:top-full after:-mt-px after:h-0.5 after:w-full after:transition-colors after:duration-200 hover:text-white',
                 index === activeItem
                   ? 'text-white after:bg-green-45 md:after:bg-transparent'
                   : 'text-gray-new-60 after:bg-transparent'
