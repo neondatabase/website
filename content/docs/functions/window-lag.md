@@ -1,17 +1,17 @@
 ---
 title: Postgres lag() window function
-subtitle: Use `lag` to access values from previous rows in a result set
+subtitle: Use lag() to access values from previous rows in a result set
 enableTableOfContents: true
 updatedOn: '2024-02-07T10:15:00.000Z'
 ---
 
-The `lag` function in Postgres is a window function that allows you to access values from previous rows in a result set without the need for a self-join. It is useful for comparing values between the current row and a previous row, for example, when calculating running differences, plotting trends, or doing time series analysis.
+The `lag()` function in Postgres is a window function that allows you to access values from previous rows in a result set without the need for a self-join. It's useful for comparing values between the current row and a previous row, for example, when calculating running differences, plotting trends, or doing time series analysis.
 
 <CTA />
 
 ## Function signature
 
-The `lag` function has the following forms:
+The `lag()` function has the following forms:
 
 ```sql
 lag(value any [, offset integer [, default any ]]) over (...)
@@ -24,7 +24,7 @@ lag(value any [, offset integer [, default any ]]) over (...)
 
 ## Example usage
 
-Consider a table `sales` that contains daily sales data for a company. We can use `lag` to compare each day's sales to the previous day's sales.
+Consider a table `sales` that contains daily sales data for a company. We can use `lag()` to compare each day's sales to the previous day's sales.
 
 ```sql
 WITH sales AS (
@@ -56,7 +56,7 @@ This query calculates the previous day's sales amount (`prev_amount`) and the di
 (4 rows)
 ```
 
-You can also use `lag` to access values from rows further back by specifying an offset. For example, to compare each day's sales to the sales from the same day of the previous week:
+You can also use `lag()` to access values from rows further back by specifying an offset. For example, to compare each day's sales to the sales from the same day of the previous week:
 
 ```sql
 WITH sales AS (
@@ -75,7 +75,7 @@ ORDER BY sale_date DESC
 LIMIT 5;
 ```
 
-This query generates random sales data for each day in January 2023 and compares each day's sales to the sales from the same day of the previous week. The `lag` function with an offset of 7 retrieves the sales amount from 7 days ago. 
+This query generates random sales data for each day in January 2023 and compares each day's sales to the sales from the same day of the previous week. The `lag()` function with an offset of 7 retrieves the sales amount from 7 days ago. 
 
 ```text
        sale_date        | amount | prev_week_amount | diff
@@ -90,9 +90,9 @@ This query generates random sales data for each day in January 2023 and compares
 
 ## Advanced examples
 
-### Using `lag` with a default value
+### Using `lag()` with a default value
 
-When the offset in `lag` goes beyond the start of the window frame, it returns null by default. You can specify a default value to use instead, so the resulting column does not contain nulls.
+When the offset in `lag()` goes beyond the start of the window frame, it returns null by default. You can specify a default value to use instead, so the resulting column does not contain nulls.
 
 ```sql
 WITH inventory AS (
@@ -124,9 +124,9 @@ This query calculates the change in inventory quantity compared to the previous 
 (4 rows)
 ```
 
-### Using `lag` with partitioning
+### Using `lag()` with partitioning
 
-You can use `lag` with partitioning to perform calculations within groups of rows.
+You can use `lag()` with partitioning to perform calculations within groups of rows.
 
 ```sql
 WITH orders AS (
@@ -167,11 +167,11 @@ This query calculates the number of days since each customer's previous order. T
 
 ### Correctness
 
-The `lag` function relates each row in the result set to a previous row in the same window frame. If the window frame is not explicitly defined, the default frame is the entire result set. Make sure to specify the correct `ORDER BY` and `PARTITION BY` clauses to ensure the desired behavior. 
+The `lag()` function relates each row in the result set to a previous row in the same window frame. If the window frame is not explicitly defined, the default frame is the entire result set. Make sure to specify the correct `ORDER BY` and `PARTITION BY` clauses to ensure the desired behavior. 
 
 ### Performance implications
 
-Window functions like `lag` perform calculations across a set of rows defined by the `OVER` clause. This can be computationally expensive for large datasets or complex window definitions.
+Window functions like `lag()` perform calculations across a set of rows defined by the `OVER` clause. This can be computationally expensive for large datasets or complex window definitions.
 
 To optimize performance, make sure to:
 - Include an `ORDER BY` clause in the `OVER` clause to avoid sorting the entire dataset.
@@ -180,9 +180,9 @@ To optimize performance, make sure to:
 
 ### Alternative functions
 
-- `lead` - Access values from subsequent rows in a result set. Similar to `lag` but looks ahead in the partition instead of behind.
-- `first_value` - Get the first value within a window frame.
-- `last_value` - Get the last value within a window frame.
+- `lead()` - Access values from subsequent rows in a result set. Similar to `lag()` but looks ahead in the partition instead of behind.
+- `first_value()` - Get the first value within a window frame.
+- `last_value()` - Get the last value within a window frame.
 
 ## Resources
 
