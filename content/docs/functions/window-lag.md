@@ -180,7 +180,7 @@ To optimize performance, make sure to:
 
 ### Alternative functions
 
-- `lead()` - Access values from subsequent rows in a result set. Similar to `lag()` but looks ahead in the partition instead of behind.
+- [lead](/docs/functions/window-lead) - Access values from subsequent rows in a result set. Similar to `lag()` but looks ahead in the partition instead of behind.
 - `first_value()` - Get the first value within a window frame.
 - `last_value()` - Get the last value within a window frame.
 
