@@ -5,15 +5,15 @@ enableTableOfContents: true
 updatedOn: '2024-02-07T10:15:00.000Z'
 ---
 
-The `substring` function in Postgres is used to extract a portion of a string based on specified start and end positions, or a regular expression pattern.
+The `substring()` function in Postgres is used to extract a portion of a string based on specified start and end positions, or a regular expression pattern.
 
-It is useful for data cleaning and transformation where you might need to extract relevant parts of a string. For example, when working with semi-structured data like an address, where you want to extract the zip code. Or, to extract the timestamp of events when working with machine-generated data like logs. 
+It's useful for data cleaning and transformation where you might need to extract relevant parts of a string. For example, when working with semi-structured data like an address, where you want to extract the zip code. Or, to extract the timestamp of events when working with machine-generated data like logs. 
 
 <CTA />
 
 ## Function signature
 
-The `Substring` function has two forms:
+The `substring()` function has two forms:
 
 ```sql
 substring(string text [from int] [for int]) -> text
@@ -32,7 +32,7 @@ substring(string text from pattern text) -> text
 
 ## Example usage
 
-Consider a table `users` with a `user_id` column that contains IDs in the format "user_123". We can use `substring` to extract just the numeric part of the ID.
+Consider a table `users` with a `user_id` column that contains IDs in the format "user_123". We can use `substring()` to extract just the numeric part of the ID.
 
 ```sql
 WITH users AS (
@@ -104,7 +104,7 @@ This query extracts the timestamp portion from the `log_entry` column. It assume
 
 ### Extract a substring matching a regex pattern with capture groups
 
-The `substring` function extracts the first part of the string that matches the regular expression pattern. However, if the pattern contains capture groups (specified using parentheses), it returns the substring matched by the first parenthesized subexpression. 
+The `substring()` function extracts the first part of the string that matches the regular expression pattern. However, if the pattern contains capture groups (specified using parentheses), it returns the substring matched by the first parenthesized subexpression. 
 
 ```sql
 WITH orders AS (
@@ -134,9 +134,9 @@ This query extracts the order number and order amount from the `order_info` colu
 (3 rows)
 ```
 
-### Use `substring` in a `WHERE` clause
+### Use `substring()` in a `WHERE` clause
 
-You can use `substring` in a `WHERE` clause to filter rows based on a substring condition.
+You can use `substring()` in a `WHERE` clause to filter rows based on a substring condition.
 
 ```sql
 WITH users AS (
@@ -165,7 +165,7 @@ This query selects all rows from the `users` table where the email address has t
 
 ### Performance implications
 
-When working with large datasets, using `substring` in a `WHERE` clause may impact query performance since it requires scanning the entire string column to extract substrings and compare them. 
+When working with large datasets, using `substring()` in a `WHERE` clause may impact query performance since it requires scanning the entire string column to extract substrings and compare them. 
 
 If you frequently filter based on substrings, consider creating a _functional index_ on the relevant column using the substring expression, to improve query performance.
 
@@ -174,7 +174,7 @@ If you frequently filter based on substrings, consider creating a _functional in
 - `left` - Extracts the specified number of characters from the start of a string.
 - `right` - Extracts the specified number of characters from the end of a string.
 - `split_part` - Splits a string on the specified delimiter and returns the nth substring.
-- `regexp_match` - Extracts the first substring matching a regular expression pattern. Unlike `substring`, it returns an array of all the captured substrings when the regex pattern contains multiple parentheses.
+- `regexp_match` - Extracts the first substring matching a regular expression pattern. Unlike `substring()`, it returns an array of all the captured substrings when the regex pattern contains multiple parentheses.
 
 ## Resources
 
