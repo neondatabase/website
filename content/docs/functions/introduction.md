@@ -7,11 +7,11 @@ redirectFrom:
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation. 
 
+## JSON functions
+
 <DetailIconCards>
 
 <a href="/docs/functions/array_to_json" description="Converts an SQL array to a JSON array" icon="app-store">array_to_json()</a>
-
-<a href="/docs/functions/dense_rank" description="Returns the rank of the current row without gaps" icon="app-store">dense_rank()</a>
 
 <a href="/docs/functions/json_array_elements" description="Expand a JSON array into a set of rows" icon="app-store">json_array_elements()</a>
 
@@ -42,5 +42,17 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 <a href="/docs/functions/json_to_record" description="Converts a JSON object to a record" icon="app-store">json_to_record()</a>
 
 <a href="/docs/functions/jsonb_to_record" description="Convert a JSONB object to a record" icon="app-store">jsonb_to_record()</a>
+
+</DetailIconCards>
+
+## Window functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/dense_rank" description="Returns the rank of the current row without gaps" icon="app-store">dense_rank()</a>
+
+<a href="/docs/functions/window-lag" description="Access values from previous rows in a result set" icon="app-store">lag()</a>
+
+<a href="/docs/functions/window-lead" description="Access values from subsequent rows in a result set" icon="app-store">lead()</a>
 
 </DetailIconCards>
