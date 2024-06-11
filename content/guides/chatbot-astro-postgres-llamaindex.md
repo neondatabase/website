@@ -3,8 +3,8 @@ title: Build a RAG chatbot with Astro, Postgres and LlamaIndex
 subtitle: A step-by-step guide for building a RAG chatbot in an Astro application with LlamaIndex and Postgres powered by Neon
 author: rishi-raj-jain
 enableTableOfContents: true
-createdAt: '2024-05-24T00:00:00.000Z'
-updatedOn: '2024-05-24T00:00:00.000Z'
+createdAt: '2024-06-11T00:00:00.000Z'
+updatedOn: '2024-06-11T00:00:00.000Z'
 ---
 
 In this guide, you will learn the step-by-step process of building a Retrieval-Augmented Generation chatbot in Astro application with LlamaIndex and Postgres, powered by Neon.
