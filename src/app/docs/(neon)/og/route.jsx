@@ -34,7 +34,7 @@ export async function GET(request) {
     const hasCategory = searchParams.has('category');
     const category = searchParams.get('category');
     const ogCategory = hasCategory && Buffer.from(category, 'base64').toString('utf-8');
-    const ogBreadcrumbs = `Docs${ogCategory && ` / ${ogCategory}`}`;
+    const ogBreadcrumbs = `Docs${ogCategory ? ` / ${ogCategory}` : ''}`;
 
     return new ImageResponse(
       (
