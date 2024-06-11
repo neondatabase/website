@@ -7,8 +7,6 @@ createdAt: '2024-06-11T00:00:00.000Z'
 updatedOn: '2024-06-11T00:00:00.000Z'
 ---
 
-A step-by-step guide to build a Retrieval-Augmented Generation chatbot in Astro application with LlamaIndex and Postgres.
-
 ## Prerequisites
 
 To follow the steps in this guide, you will need the following:
