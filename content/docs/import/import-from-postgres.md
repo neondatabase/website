@@ -7,17 +7,17 @@ redirectFrom:
 updatedOn: '2024-02-08T15:20:54.293Z'
 ---
 
-This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore` command line utilities.
+This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore`, and `@neondatabase/pg-import` command line utilities.
 
 <Admonition type="important">
-Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
+Avoid using `pg_dump` or `@neondatabase/pg-import` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
 </Admonition>
 
 Repeat the `pg_dump` and `pg_restore` process for each database you want to migrate.
 
 ## Before you begin
 
-- Neon supports PostgreSQL 14, 15, and 16. We recommend that clients are the same version as source Postgres instance. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`
+- Neon supports PostgreSQL 14, 15, and 16. We recommend that clients are the same version as source Postgres instance. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`. `@neondatabase/pg-import` detects and installs the required version automatically.
 - Retrieve the connection parameters or connection string for your source Postgres database. The instructions below use a [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), but you can use the connection format you prefer. If you are logged in to a local Postgres instance, you may only need to provide the database name. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for information about connection parameters.
 - Optionally, create a role in Neon to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. For example, if you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
 - If you have assigned database object ownership to different roles in your source database, read [Database object ownership considerations](#database-object-ownership-considerations). You may want to add the `-O, --no-owner` option to your `pg_restore` command to avoid errors.
@@ -48,6 +48,21 @@ The `pg_dump` command above includes these arguments:
 
 For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pgdump-and-pgrestore-options).
 
+## Export data with @neondatabase/pg-import
+
+Export your data from the source database with `@neondatabase/pg-import`:
+
+```bash shouldWrap
+npx @neondatabase/pg-import --source <source_database_connection_string> --backup-file-path <dump_file_name>
+```
+
+The `@neondatabase/pg-import` command above includes these arguments:
+
+- `--source`: Specifies the source database name or [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
+- `--backup-file-path`: The dump file name. It can be any name you choose (`./mydumpfile.bak`, for example).
+
+For more command options, see [all @neondatabase/pg-import options](https://github.com/neondatabase/pg-import?tab=readme-ov-file#flags-and-options).
+
 ## Restore data to Neon with pg_restore
 
 Restore your data to the target database in Neon with `pg_restore`.
@@ -68,6 +83,21 @@ The example above includes these arguments:
 
 For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pgdump-and-pgrestore-options).
 
+## Restore data to Neon with @neondatabase/pg-import
+
+Restore your data to the target database in Neon with `@neondatabase/pg-import`.
+
+```bash shouldWrap
+npx @neondatabase/pg-import --destination <neon_database_connection_string> --backup-file-path <dump_file_name>
+```
+
+The `@neondatabase/pg-import` command above includes these arguments:
+
+- `--destination`: Specifies the destination database name or [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
+- `--backup-file-path`: The dump file name. It can be any name you choose (`./mydumpfile.bak`, for example).
+
+For more command options, see [all @neondatabase/pg-import options](https://github.com/neondatabase/pg-import?tab=readme-ov-file#flags-and-options).
+
 ## pg_dump and pg_restore example
 
 The following example shows how data from a `pagila` source database is dumped and restored to a `pagila` database in Neon using the commands described in the previous sections. (A database named `pagila` was created in Neon prior to running the restore operation.)
@@ -80,6 +110,20 @@ The following example shows how data from a `pagila` source database is dumped a
 mydumpfile.bak
 
 ~/mydump$ pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak
+```
+
+## @neondatabase/pg-import example
+
+The following example shows how data from a `pagila` source database is dumped and restored to a `pagila` database in Neon using the commands described in the previous sections. (A database named `pagila` was created in Neon prior to running the restore operation.)
+
+```bash shouldWrap
+~$ cd mydump
+~/mydump$ npx @neondatabase/pg-import --source postgres://[user]:[password]@[neon_hostname]/pagila --backup-file-path ./mydumpfile.bak 
+
+~/mydump$ ls
+mydumpfile.bak
+
+~/mydump$ npx @neondatabase/pg-import --destination postgres://[user]:[password]@[neon_hostname]/pagila --backup-file-path ./mydumpfile.bak
 ```
 
 ## Pipe pg_dump to pg_restore
@@ -99,6 +143,18 @@ pg_dump -Fc -v -d <source_database_connection_string> | pg_restore -v -d <neon-d
 Piping is not recommended for large databases, as it is susceptible to failures during lengthy migration operations.
 
 When piping `pg_dump` output directly to `pg_restore`, the custom output format (`-Fc`) is most efficient. The directory format (`-Fd`) format cannot be piped to `pg_restore`.
+
+## Backup and Restore with @neondatabase/pg-import
+
+For small databases, the standard output of `pg_dump` can be piped directly into a `pg_restore` command to minimize migration downtime. `@neondatabase/pg-import` makes it easier for you with a single command.
+
+For example:
+
+```bash shouldWrap
+npx @neondatabase/pg-import --source <source_database_connection_string> --destination <neon-database-connection-string>
+```
+
+Above is not recommended for large databases, as it is susceptible to failures during lengthy migration operations.
 
 ## Post-migration steps
 
@@ -170,5 +226,6 @@ For information about the Postgres client utilities referred to in this topic, r
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
 - [psql](https://www.postgresql.org/docs/current/app-psql.html)
+- [@neondatabase/pg-import](https://github.com/neondatabase/pg-import)
 
 <NeedHelp/>
