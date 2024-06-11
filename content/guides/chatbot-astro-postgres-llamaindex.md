@@ -1,5 +1,5 @@
 ---
-title: Build a RAG chatbot with Astro, Postgres and LlamaIndex
+title: Build a RAG chatbot with Astro, Postgres, and LlamaIndex
 subtitle: A step-by-step guide for building a RAG chatbot in an Astro application with LlamaIndex and Postgres powered by Neon
 author: rishi-raj-jain
 enableTableOfContents: true
@@ -213,7 +213,7 @@ Create an `.env` file in the root directory of your project with the following e
 POSTGRES_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
 ```
 
-The file, `.env`, should be kept secret and not included in your Git history. Ensure that `.env` is added to the ``.gitignore` file in your project.
+The file, `.env`, should be kept secret and not included in your Git history. Ensure that `.env` is added to the `.gitignore` file in your project.
 
 ## Define the Astro application routes
 
