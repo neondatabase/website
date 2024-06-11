@@ -1,13 +1,13 @@
 ---
 title: Postgres lead() window function
-subtitle: Use `lead` to access values from subsequent rows in a result set
+subtitle: Use lead() to access values from subsequent rows in a result set
 enableTableOfContents: true
 updatedOn: '2024-02-08T09:30:00.000Z'
 ---
 
 The `lead` function in Postgres is a window function that allows you to access values from subsequent rows in a result set without the need for a self-join. 
 
-It is useful for comparing values between the current row and a later row, for example, when calculating the time until the next event, determining the next event in a sequence, or analyzing trends in time series data.
+It's useful for comparing values between the current row and a later row, for example, when calculating the time until the next event, determining the next event in a sequence, or analyzing trends in time series data.
 
 <CTA />
 
@@ -26,7 +26,7 @@ lead(value any [, offset integer [, default any ]]) over (...)
 
 ## Example usage
 
-Consider a table `shipments` that contains information about product shipments. We can use `lead` to determine the next scheduled shipment date for each product.
+Consider a table `shipments` that contains information about product shipments. We can use `lead()` to determine the next scheduled shipment date for each product.
 
 ```sql
 WITH shipments AS (
@@ -61,7 +61,7 @@ This query calculates the next shipment date (`next_ship_date`) and the number o
 (5 rows)
 ```
 
-You can also use `lead` to access values from rows further ahead by specifying an offset. For example, to compute the net return on investment for a stock ticker over each 2-year period:
+You can also use `lead()` to access values from rows further ahead by specifying an offset. For example, to compute the net return on investment for a stock ticker over each 2-year period:
 
 ```sql
 WITH stock_prices AS (
@@ -102,9 +102,9 @@ This query calculates the price of each stock ticker 2 years later (`price_2_yea
 
 ## Advanced examples
 
-### Using `lead` with a default value
+### Using `lead()` with a default value
 
-When the offset in `lead` goes beyond the end of the window frame, it returns null by default. You can specify a default value to use instead, so the resulting column does not contain nulls.
+When the offset in `lead()` goes beyond the end of the window frame, it returns null by default. You can specify a default value to use instead, so the resulting column does not contain nulls.
 
 ```sql
 WITH tasks AS (
@@ -142,7 +142,7 @@ This query determines the start date of the next task in each project. For the l
 
 ### Using `lead` with multiple partitions
 
-You can use `lead` with multiple partitions to perform calculations within different groups of rows simultaneously.
+You can use `lead()` with multiple partitions to perform calculations within different groups of rows simultaneously.
 
 ```sql
 WITH readings AS (
@@ -182,11 +182,11 @@ This query calculates the next temperature reading (`next_temperature`) and the 
 
 ### Correctness
 
-The `lead` function relates each row in the result set to a subsequent row in the same window frame. If the window frame is not explicitly defined, the default frame is the entire partition or result set. Make sure to specify the correct `ORDER BY` and `PARTITION BY` clauses to ensure the desired behavior.
+The `lead()` function relates each row in the result set to a subsequent row in the same window frame. If the window frame is not explicitly defined, the default frame is the entire partition or result set. Make sure to specify the correct `ORDER BY` and `PARTITION BY` clauses to ensure the desired behavior.
 
 ### Performance implications
 
-Window functions like `lead` perform calculations across a set of rows defined by the `OVER` clause. This can be computationally expensive, especially for large datasets or complex window definitions.
+Window functions like `lead()` perform calculations across a set of rows defined by the `OVER` clause. This can be computationally expensive, especially for large datasets or complex window definitions.
 
 To optimize performance, make sure to:
 - Include an `ORDER BY` clause in the `OVER` clause to avoid sorting the entire dataset.
@@ -195,9 +195,9 @@ To optimize performance, make sure to:
 
 ### Alternative functions
 
-- `lag` - Access values from previous rows in a result set. Similar to `lead` but looks behind in the partition instead of ahead.
-- `first_value` - Get the first value within a window frame.
-- `last_value` - Get the last value within a window frame.
+- `lag()` - Access values from previous rows in a result set. Similar to `lead` but looks behind in the partition instead of ahead.
+- `first_value()` - Get the first value within a window frame.
+- `last_value()` - Get the last value within a window frame.
 
 ## Resources
 
