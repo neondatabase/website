@@ -45,6 +45,14 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 </DetailIconCards>
 
+## String functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/substring" description="Extract a substring from a string" icon="app-store">substring()</a>
+
+</DetailIconCards>
+
 ## Window functions
 
 <DetailIconCards>
@@ -56,3 +64,5 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 <a href="/docs/functions/window-lead" description="Access values from subsequent rows in a result set" icon="app-store">lead()</a>
 
 </DetailIconCards>
+
+
