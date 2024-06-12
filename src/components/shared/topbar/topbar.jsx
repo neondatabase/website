@@ -70,15 +70,15 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      In Neon, Postgres databases take <1s to provision. Check out this demo 
-    </span>
-    <ChevronIcon
-      className={clsx(
-        'relative z-50 w-[9px] shrink-0 origin-center -rotate-90 opacity-60 dark:text-white',
-        isDarkTheme ? 'text-white' : 'text-black-new'
-      )}
-    />
-  </Link>
+      <span className="mr-4 truncate border-r border-black border-opacity-20 py-1 pr-4 text-sm font-medium sm:mr-0 sm:border-none sm:pr-0">
+        In Neon, Postgres databases take less than a second to provision.
+      </span>
+      <span className="inline-flex items-center text-sm font-bold md:hidden">
+        <span>Check out this demo</span>
+        <ArrowRightIcon className="ml-1" />
+      </span>
+      <ArrowRightIcon className="ml-2 hidden sm:flex" />
+    </Link>
 );
 
 TopBar.propTypes = {
