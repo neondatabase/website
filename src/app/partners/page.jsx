@@ -58,12 +58,7 @@ const logos = [
 ];
 
 const PartnersPage = () => (
-  <Layout
-    className="bg-black-pure text-white"
-    headerClassName="lg:!absolute lg:!bg-transparent"
-    headerTheme="black-pure"
-    footerTheme="black-pure"
-  >
+  <Layout headerClassName="!absolute !bg-transparent">
     <Hero />
     <Logos logos={logos} withGreenFade />
     <SplitViewGrid

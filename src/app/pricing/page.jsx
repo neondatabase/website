@@ -43,13 +43,13 @@ const sliderItems = [
 ];
 
 const PricingPage = () => (
-  <Layout className="bg-black-pure text-white" headerTheme="black-pure" footerTheme="black-pure">
+  <Layout>
     <Hero />
     <Logos className="mt-36 pt-2.5 lg:mt-28 lg:pt-0 md:mt-20" logos={logos} />
     <Features />
-    <Plans className="my-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
+    <Plans className="mt-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
     <Testimonials
-      className="mb-[200px] mt-48 min-h-[312px] 2xl:my-[156px] xl:my-32 xl:min-h-[290px] lg:my-28 lg:min-h-[257px] md:my-20 md:min-h-[225px] sm:min-h-[310px]"
+      className="my-40 min-h-[312px] 2xl:my-32 xl:my-28 xl:min-h-[290px] lg:my-24 lg:min-h-[257px] md:my-20 md:min-h-[225px] sm:min-h-[310px]"
       items={sliderItems}
     />
     <Faq />

@@ -43,6 +43,7 @@ export default {
   privacy: '/privacy-policy',
   privacyGuide: '/privacy-guide',
   privacyPolicy: '/privacy-policy',
+  scaleTrial: '/scale-trial',
   security: '/docs/security/security-overview',
   signup: 'https://console.neon.tech/signup',
   subprocessors: '/subprocessors',

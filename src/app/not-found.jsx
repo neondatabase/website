@@ -11,7 +11,7 @@ const NotFoundPage = () => (
     />
     <title>{SEO_DATA[404].title}</title>
 
-    <Layout headerTheme="white" footerWithTopBorder>
+    <Layout>
       <Hero />
     </Layout>
   </>

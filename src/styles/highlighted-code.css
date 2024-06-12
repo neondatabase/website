@@ -109,4 +109,17 @@
       }
     }
   }
+
+  .has-diff code .line {
+    @apply pl-6;
+
+    &.diff {
+      &.add {
+        @apply bg-[#00E599]/10 before:absolute before:left-2 before:text-code-green-1 before:content-['+'];
+      }
+      &.remove {
+        @apply bg-[#FF275D]/10 before:absolute before:left-2 before:text-code-red-1/50 before:content-['—'];
+      }
+    }
+  }
 }

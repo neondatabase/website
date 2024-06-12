@@ -17,12 +17,12 @@ const formatStars = (starsCount) => {
   return `${fixedThousands}k`;
 };
 
-const GithubStarCounter = ({ className = '', isThemeBlack = false, starsCount }) => (
+const GithubStarCounter = ({ className = '', isDarkTheme = false, starsCount }) => (
   <Link
     className={clsx(
       'flex items-center gap-x-1.5 text-[13px] leading-none tracking-extra-tight transition-colors duration-200',
       className,
-      isThemeBlack
+      isDarkTheme
         ? 'text-white hover:text-green-45'
         : 'text-gray-new-8 hover:text-green-45 dark:text-white dark:hover:text-green-45'
     )}
@@ -44,6 +44,6 @@ export default GithubStarCounter;
 
 GithubStarCounter.propTypes = {
   className: PropTypes.string,
-  isThemeBlack: PropTypes.bool,
+  isDarkTheme: PropTypes.bool,
   starsCount: PropTypes.number.isRequired,
 };

@@ -4,15 +4,23 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
+const themes = {
+  light: 'bg-white',
+  dark: 'bg-black-pure',
+  default: 'bg-white dark:bg-black-pure',
+};
+
 const HeaderWrapper = ({
   className = null,
   children,
   isSticky = false,
-  isThemeBlack = true,
+  isStickyOverlay = false,
+  theme = null,
   withBorder = false,
 }) => {
   const headerRef = useRef(null);
   const [isStickied, setIsStickied] = useState(false);
+  const bg = themes?.[theme] || themes.default;
 
   const handleScroll = () => {
     if (headerRef.current) {
@@ -28,10 +36,10 @@ const HeaderWrapper = ({
   return (
     <header
       className={clsx(
-        'left-0 right-0 top-0 z-40 w-full dark:bg-black-pure lg:relative lg:h-16',
-        isSticky ? 'sticky transition-[padding] duration-200' : 'absolute',
-        isStickied && isSticky ? 'py-[13px]' : 'py-4',
-        isThemeBlack ? 'bg-black-pure' : 'bg-white',
+        'left-0 right-0 top-0 z-40 w-full lg:relative lg:h-16',
+        isSticky ? 'sticky transition-[padding,background-color] duration-200' : 'absolute',
+        isStickyOverlay ? '-mb-16' : bg,
+        isSticky && isStickied ? `py-[13px] ${bg}` : 'py-4',
         withBorder && 'border-b border-gray-new-94 dark:border-gray-new-10',
         className
       )}
@@ -44,9 +52,10 @@ const HeaderWrapper = ({
 
 HeaderWrapper.propTypes = {
   children: PropTypes.node.isRequired,
+  theme: PropTypes.oneOf(['light', 'dark']),
   className: PropTypes.string,
   isSticky: PropTypes.bool,
-  isThemeBlack: PropTypes.bool,
+  isStickyOverlay: PropTypes.bool,
   withBorder: PropTypes.bool,
 };
 

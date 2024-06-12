@@ -3,7 +3,7 @@ title: Replicate data to a ClickHouse database on DoubleCloud
 subtitle: Learn how to replicate data from Neon to a ClickHouse database on DoubleCloud
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-04-16T00:00:00.000Z'
+updatedOn: '2024-06-04T00:00:00.000Z'
 ---
 
 <LRNotice/>
@@ -206,8 +206,8 @@ Before you create a transfer in DoubleCloud, you need to create a source endpoin
 
 To create a source endpoint:
 
-1. In the left menu in the console, select **Transfer** and navigate to the **Endpoints** tab.
-1. Click **Create endpoint** → **Source**.
+1. In the left menu in the console, select **Transfer**.
+1. Click **Create** → **Source endpoint**.
 1. Under **Basic settings**, select **PostgreSQL** as the source type.
 1. Enter a name for your source endpoint, for example `neon`.
 1. Under **Endpoint parameters**, enter connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project.
@@ -229,8 +229,8 @@ To create a source endpoint:
 
 To create a target endpoint: 
 
-1. In the left menu in the console, select **Transfer** and navigate to the **Endpoints** tab.
-1. Click **Create endpoint** → **Target**.
+1. In the left menu in the console, select **Transfer**.
+1. Click **Create** → **Target endpoint**.
 1. Under **Basic settings**, select **ClickHouse** as the target type.
 1. Enter a name for your source endpoint, for example `clickhouse`.
 1. If you created a managed ClickHouse cluster in DoubleCloud, select it as the target endpoint in **Connection settings** → **Managed cluster**.

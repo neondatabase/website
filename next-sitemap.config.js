@@ -20,6 +20,7 @@ module.exports = {
     '/blog/*',
   ],
   generateRobotsTxt: true,
+  additionalPaths: async (config) => [await config.transform(config, '/')],
   robotsTxtOptions: {
     policies: [
       {
@@ -38,6 +39,7 @@ module.exports = {
           '/docs/postgres*',
           '/thank-you$',
           '/cfe$',
+          '/home$',
         ],
       },
     ],
