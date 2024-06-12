@@ -501,6 +501,18 @@
       slug: ai/ai-concepts
     - title: Scale with Neon
       slug: ai/ai-scale-with-neon
+    - title: Example apps
+      items:
+        - title: Ask Postgres chatbot
+          slug: https://github.com/neondatabase/ask-neon
+        - title: Semantic search
+          slug: https://github.com/neondatabase/yc-idea-matcher
+        - title: Build a RAG chatbot
+          slug: https://neon.tech/guides/chatbot-astro-postgres-llamaindex
+          tag: community
+        - title: Image similarity search
+          slug: https://github.com/ItzCrazyKns/Neon-Image-Search
+          tag: community
     - title: AI tools
       items:
         - title: Google Colab
