@@ -21,7 +21,7 @@ Add new rows to your tables using the **Add record** button.
 A couple of things to note:
 
 - You need to hit `Enter` for your input to register. When editing existing fields, you don't have to do this. But for new fields, if you tab to the next cell, you'll lose your input.
-- You can leave `DEFAUlT` fields untouched and the cell will inherit the right value based on your schema definition. For example, defaults for boolean fields are automatically applied when you click `Save changes`.
+- You can leave `DEFAULT` fields untouched and the cell will inherit the right value based on your schema definition. For example, defaults for boolean fields are automatically applied when you click `Save changes`.
 
 ## Toggle columns
 
