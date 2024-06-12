@@ -95,15 +95,15 @@ The above command installs the following packages:
 
 Then, make the following additions in your `tsconfig.json` file to make relative imports within the project easier:
 
-```diff
+```json
 {
   "extends": "astro/tsconfigs/base",
-+  "compilerOptions": {
-+    "baseUrl": ".",
-+    "paths": {
-+      "@/*": ["src/*"]
-+    }
-+  }
+  "compilerOptions": { // [!code ++]
+    "baseUrl": ".", // [!code ++]
+    "paths": { // [!code ++]
+      "@/*": ["src/*"] // [!code ++]
+    } // [!code ++]
+  } // [!code ++]
 }
 ```
 
