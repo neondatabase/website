@@ -59,11 +59,11 @@ To create a role:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Roles**.
+3. Select **Branches**.
 4. Select the branch where you want to create the role.
-4. Click **New Role**.
-5. In the role creation dialog, specify a role name. The length of the role name is limited to 63 bytes.
-6. Click **Create**. The role is created and you are provided with the password for the role.
+5. On the **Roles & Databases** tab, click **Add role**.
+6. In the role creation modal, specify a role name. The branch is pre-selected.
+7. Click **Create**. The role is created and you are provided with the password for the role.
 
 <Admonition type="note">
 Role names cannot exceed 63 characters, and some names are not permitted. See [Protected role names](#protected-role-names).
@@ -71,16 +71,16 @@ Role names cannot exceed 63 characters, and some names are not permitted. See [P
 
 ### Delete a role
 
-Deleting a role is a permanent action that cannot be undone, and you cannot delete a role that owns a database. The database must be deleted before you can deleting the role that owns the database.
+Deleting a role is a permanent action that cannot be undone, and you cannot delete a role that owns a database. The database must be deleted before deleting the role that owns the database.
 
 To delete a role:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Roles**.
-4. Select a branch to view roles in the branch.
-5. Click the delete icon for the role you want to delete.
-6. On the delete role dialog, click **Delete**.
+3. Select **Branches**.
+4. Select the branch where you want to delete a role.
+5. On the **Roles & Databases** tab, select **Delete role** from the role menu.
+6. On the confirmation modal, click **Delete**.
 
 ### Reset a password
 
@@ -88,10 +88,10 @@ To reset a role's password:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Roles**.
-4. Select a branch to view roles in the branch.
-5. Select **Reset password**.
-6. On the confirmation dialog, click **Sure, reset**. A reset password dialog is displayed with your new password.
+3. Select **Branches**.
+4. Select the role's branch.
+5. On the **Roles & Databases** tab, select **Reset password** from the role menu.
+6. On the **Reset password** modal, click **Reset**. A reset password modal is displayed with your new password.
 
 <Admonition type="note">
 Resetting a password in the Neon Console resets the password to a generated value. To set your own password value, you can reset the password using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor) with the following syntax:
