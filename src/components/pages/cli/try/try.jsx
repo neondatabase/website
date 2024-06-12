@@ -1,12 +1,8 @@
-import Image from 'next/image';
-import React from 'react';
-
 import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
-
-import animation from './images/animation.png';
 
 const Try = () => (
   <section className="safe-paddings pb-36 pt-[80px] md:pb-32 md:pt-16 sm:py-10 sm:pb-20">
@@ -31,8 +27,11 @@ const Try = () => (
             View setup instructions
           </AnimatedButton>
         </div>
-        <div className="animation w-1/2 md:w-full">
-          <Image className="w-full" src={animation} width={576} height={259} alt="" />
+        <div className="w-1/2 rounded-[10px] md:w-full">
+          <PauseableVideo width={1152} height={698}>
+            <source src="/videos/pages/cli/code.mp4" type="video/mp4" />
+            <source src="/videos/pages/cli/code.webm" type="video/webm" />
+          </PauseableVideo>
         </div>
       </div>
     </Container>
