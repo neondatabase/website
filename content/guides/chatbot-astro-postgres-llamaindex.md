@@ -106,7 +106,7 @@ The app should be running on [localhost:4321](http://localhost:4321/). Let's clo
 Next, execute the command in your terminal window below to install the necessary libraries and packages for building the application:
 
 ```bash
-npm install dotenv ai llamaindex
+npm install dotenv ai llamaindex@0.3.4
 ```
 
 The command installs the following packages:
@@ -117,10 +117,10 @@ The command installs the following packages:
 
 Next, make the following additions in your `astro.config.mjs` file to populate the environment variables and make them accessible via `process.env` object:
 
-```diff
+```tsx
 // File: astro.config.mjs
 
-+ import 'dotenv/config';
+import 'dotenv/config'; // [!code ++]
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
@@ -129,15 +129,15 @@ export default defineConfig({});
 
 Then, add the following code to your `tsconfig.json` file to make relative imports within the project easier:
 
-```diff
+```json
 {
   "extends": "astro/tsconfigs/base",
-+  "compilerOptions": {
-+    "baseUrl": ".",
-+    "paths": {
-+      "@/*": ["src/*"]
-+    }
-+  }
+  "compilerOptions": { // [!code ++]
+    "baseUrl": ".", // [!code ++]
+    "paths": { // [!code ++]
+      "@/*": ["src/*"] // [!code ++]
+    } // [!code ++]
+  } // [!code ++]
 }
 ```
 
@@ -350,11 +350,11 @@ export default function () {
 
 The code above imports and renders both the Chat and the Learn component created earlier. Finally, update the `index.astro` file to import the `App` component:
 
-```diff
+```astro
 ---
-+ // File: src/pages/index.astro
+// File: src/pages/index.astro // [!code ++]
 
-+ import App from "../App";
+import App from "../App"; // [!code ++]
 ---
 
 <html lang="en">
@@ -366,10 +366,10 @@ The code above imports and renders both the Chat and the Learn component created
     <title>Astro</title>
   </head>
   <body
-+   class="flex w-screen flex-col md:flex-row items-center md:items-start md:justify-center md:gap-x-3 md:mt-12"
+   class="flex w-screen flex-col md:flex-row items-center md:items-start md:justify-center md:gap-x-3 md:mt-12" // [!code ++]
   >
--    <h1>Astro</h1>
-+    <App client:load />
+    <h1>Astro</h1> // [!code --]
+    <App client:load /> // [!code ++]
   </body>
 </html>
 ```

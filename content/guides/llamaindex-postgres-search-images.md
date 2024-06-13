@@ -84,7 +84,7 @@ The app should be running on [localhost:4321](http://localhost:4321/). Let's clo
 Next, execute the command in your terminal window below to install the necessary libraries and packages for building the application:
 
 ```bash
-npm install dotenv llamaindex uuid
+npm install dotenv llamaindex@0.3.4 uuid
 ```
 
 The above command installs the following packages:
@@ -95,15 +95,15 @@ The above command installs the following packages:
 
 Then, make the following additions in your `tsconfig.json` file to make relative imports within the project easier:
 
-```diff
+```json
 {
   "extends": "astro/tsconfigs/base",
-+  "compilerOptions": {
-+    "baseUrl": ".",
-+    "paths": {
-+      "@/*": ["src/*"]
-+    }
-+  }
+  "compilerOptions": { // [!code ++]
+    "baseUrl": ".", // [!code ++]
+    "paths": { // [!code ++]
+      "@/*": ["src/*"] // [!code ++]
+    } // [!code ++]
+  } // [!code ++]
 }
 ```
 
