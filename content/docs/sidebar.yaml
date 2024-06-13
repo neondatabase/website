@@ -33,6 +33,7 @@
           slug: guides/laravel
         - title: Next.js
           slug: guides/nextjs
+
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
@@ -71,7 +72,9 @@
     - title: Import data
       slug: import/import-intro
       items:
-        - title: Import from Postgres
+        - title: Import from Postgres with pg_dump and pg_restore
+          slug: import/import-from-postgres
+        - title: Import from Postgres with pg-import
           slug: import/import-from-postgres
         - title: Import from a Neon project
           slug: import/import-from-neon

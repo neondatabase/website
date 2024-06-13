@@ -11,7 +11,9 @@ Find instructions for importing data from Postgres, CSV, other Neon projects, an
 
 <DetailIconCards>
 
-<a href="/docs/import/import-from-postgres" description="Import data from another Postgres database using pg_dump and pg_restore" icon="postgres">Import from Postgres</a>
+<a href="/docs/import/import-from-postgres" description="Import data from another Postgres database using the Postgres pg_dump and pg_restore client utilities" icon="postgres">Import with pg_dump and pg_restore</a>
+
+<a href="/docs/import/import-from-postgres-pg-import" description="Easily import data from another Postgres database with the pg-import CLI" icon="postgres">Import with pg-import</a>
 
 <a href="/docs/import/import-from-neon" description="Import data from another Neon project for Postgres version upgrades or region migration" icon="neon">Import from a Neon project</a>
 
