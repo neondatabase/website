@@ -75,7 +75,7 @@
         - title: Import from Postgres with pg_dump and pg_restore
           slug: import/import-from-postgres
         - title: Import from Postgres with pg-import
-          slug: import/import-from-postgres
+          slug: import/import-from-postgres-pg-import
         - title: Import from a Neon project
           slug: import/import-from-neon
         - title: Import from CSV
