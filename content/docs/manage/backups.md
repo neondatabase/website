@@ -1,7 +1,7 @@
 ---
 title: Backups
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.759Z'
+updatedOn: '2024-06-13T20:09:36.714Z'
 ---
 
 Neon does not yet provide support for configuring automated backups in the Neon Console or API. This feature is on our roadmap. You can expect it to be introduced in the coming months. In the meantime, we support the following backup options:
@@ -23,6 +23,21 @@ Avoid using `pg_dump` over a [pooled Neon connection](https://neon.tech/docs/con
 This method dumps a single database in a single branch of your Neon project. If you need to create backups for multiple databases in multiple branches, you must perform a dump operation for each database in each branch separately.
 
 To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Import from Postgres](/docs/import/import-from-postgres) guide.
+
+## Backups with @neondatabase/pg-import
+
+Export your data from the source database with `@neondatabase/pg-import`:
+
+```bash shouldWrap
+npx @neondatabase/pg-import --source <source_database_connection_string> --backup-file-path <dump_file_name>
+```
+
+The `@neondatabase/pg-import` command above includes these arguments:
+
+- `--source`: Specifies the source database name or [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
+- `--backup-file-path`: The dump file name. It can be any name you choose (`./mydumpfile.bak`, for example).
+
+For more command options, see [all @neondatabase/pg-import options](https://github.com/neondatabase/pg-import?tab=readme-ov-file#flags-and-options).
 
 ## Automate Postgres Backups with a GitHub Action
 
