@@ -28,6 +28,11 @@ const Try = () => (
           </AnimatedButton>
         </div>
         <div className="w-1/2 rounded-[10px] md:w-full">
+          {/* 
+            Video optimization parameters:
+            mp4: -pix_fmt yuv420p -vf scale=1152:-2 -movflags faststart -vcodec libx264 -crf 20
+            webm: -c:v libvpx-vp9 -crf 20 -vf scale=1152:-2 -deadline best -an
+          */}
           <PauseableVideo width={1152} height={698}>
             <source src="/videos/pages/cli/code.mp4" type="video/mp4" />
             <source src="/videos/pages/cli/code.webm" type="video/webm" />
