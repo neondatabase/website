@@ -106,7 +106,7 @@ The app should be running on [localhost:4321](http://localhost:4321/). Let's clo
 Next, execute the command in your terminal window below to install the necessary libraries and packages for building the application:
 
 ```bash
-npm install dotenv ai llamaindex
+npm install dotenv ai llamaindex@0.3.4
 ```
 
 The command installs the following packages:
