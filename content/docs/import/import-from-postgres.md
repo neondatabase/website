@@ -1,13 +1,13 @@
 ---
-title: Import data from Postgres
+title: Import data from Postgres with pg_dump and pg_restore
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
-updatedOn: '2024-02-08T15:20:54.293Z'
+updatedOn: '2024-06-13T20:09:36.712Z'
 ---
 
-This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore` command line utilities.
+This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore`.
 
 <Admonition type="important">
 Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
@@ -17,7 +17,7 @@ Repeat the `pg_dump` and `pg_restore` process for each database you want to migr
 
 ## Before you begin
 
-- Neon supports PostgreSQL 14, 15, and 16. We recommend that clients are the same version as source Postgres instance. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`
+- Neon supports PostgreSQL 14, 15, and 16. We recommend that clients are the same version as source Postgres instance. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`.
 - Retrieve the connection parameters or connection string for your source Postgres database. The instructions below use a [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), but you can use the connection format you prefer. If you are logged in to a local Postgres instance, you may only need to provide the database name. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for information about connection parameters.
 - Optionally, create a role in Neon to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. For example, if you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
 - If you have assigned database object ownership to different roles in your source database, read [Database object ownership considerations](#database-object-ownership-considerations). You may want to add the `-O, --no-owner` option to your `pg_restore` command to avoid errors.

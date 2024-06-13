@@ -237,7 +237,11 @@ CREATE TABLE address (
 
 ## Step 4: View the schema differences
 
-Now that you have some differences between your branches, from the Neon Console go to the **Branches** page.
+Now that you have some differences between your branches, you can view the schema differences.
+
+<Tabs labels={["Console", "CLI"]}>
+
+<TabItem>
 
 1. Click on `dev/jordan` to open the detailed view, then under **Compare to Parent** click **Open schema diff**.
 
@@ -250,3 +254,45 @@ Now that you have some differences between your branches, from the Neon Console 
 You will see the schema differences between `dev/jordan` and its parent `main`, including the new address table that we added to the `dev/jordan` branch.
 
 You can also launch Schema Diff from the **Restore** page, usually as part of verifying schemas before you restore a branch to its own or another branch's history. See [Branch restore](/docs/guides/branch-restore) for more info.
+
+</TabItem>
+
+<TabItem>
+
+Compare the schema of `dev/jordan` to its parent branch using the `schema-diff` command.
+
+```bash
+neonctl branches schema-diff main dev/jordan --database people
+```
+
+The result shows a comparison between the `dev/jordan` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added in the `dev/jordan` branch but are not present in its parent branch `main`.
+
+```diff
+--- Database: people	(Branch: br-falling-dust-a5bakdqt) // [!code --]
++++ Database: people	(Branch: br-morning-heart-a5ltt10i) // [!code ++]
+@@ -20,8 +20,46 @@
+ 
+ SET default_table_access_method = heap;
+ 
+ --
++-- Name: address; Type: TABLE; Schema: public; Owner: neondb_owner // [!code ++]
++-- // [!code ++]
++ // [!code ++]
++CREATE TABLE public.address ( // [!code ++]
++    id integer NOT NULL, // [!code ++]
++    person_id integer NOT NULL, // [!code ++]
++    street text NOT NULL, // [!code ++]
++    city text NOT NULL, // [!code ++]
++    state text NOT NULL, // [!code ++]
++    zip_code text NOT NULL // [!code ++]
++); // [!code ++]
++ // [!code ++]
++ // [!code ++]
++ALTER TABLE public.address OWNER TO neondb_owner; // [!code ++]
++ // [!code ++]
++... // [!code ++]
+```
+
+</TabItem>
+
+</Tabs>

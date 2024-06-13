@@ -219,8 +219,8 @@ export async function onRequestPost(context) {
 
   // Logic to insert a new book into your database
   const resp = await client.query('INSERT INTO books_to_read (title, author) VALUES ($1, $2); ', [
-    data.title,
-    data.author,
+    book.title,
+    book.author,
   ]);
 
   // Check if insert query was successful

@@ -30,6 +30,7 @@ const Header = async ({
   className = null,
   theme = null,
   isSticky = false,
+  isStickyOverlay = false,
   isBlogPage = false,
   isDocPage = false,
   withBorder = false,
@@ -42,6 +43,7 @@ const Header = async ({
       <HeaderWrapper
         className={className}
         isSticky={isSticky}
+        isStickyOverlay={isStickyOverlay}
         theme={theme}
         withBorder={withBorder}
       >
@@ -198,6 +200,7 @@ Header.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.oneOf(['light', 'dark']),
   isSticky: PropTypes.bool,
+  isStickyOverlay: PropTypes.bool,
   isBlogPage: PropTypes.bool,
   isDocPage: PropTypes.bool,
   withBorder: PropTypes.bool,

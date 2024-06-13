@@ -26,15 +26,14 @@ Tier limits define resources (vCPUs and RAM) available to a compute endpoint. Th
 
 ## View a compute endpoint
 
-A compute endpoint is associated with a branch. To view a compute endpoint, select **Branches** in the Neon Console, and select a branch. If the branch has a compute endpoint, it is shown on the branch page.
+A compute endpoint is associated with a branch. To view a compute endpoint, select **Branches** in the Neon Console, and select a branch. If the branch has a compute endpoint, it is shown on the **Computes** tab on the branch page.
 
 Compute endpoint details shown on the branch page include:
 
-- **Id**: The compute endpoint ID.
-  -- **Type**: The type of compute endpoint. `R/W` (Read-write) or `R/O` (Read-only).
-- **Status**: The compute endpoint status (`Active`, `Idle`, or `Stopped`).
-- **Compute size**: The size of the compute endpoint. Users on paid plans can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint. Shows autoscaling minimum and maximum vCPU values if autoscaling is enabled.
-- **Auto-suspend delay**: The number of seconds of inactivity after which a compute endpoint is automatically suspended. The default is 300 seconds (5 minutes). For more information, see [Autosuspend configuration](#auto-suspend-configuration).
+- The type of compute, which can be **RW Compute** (read-write) or **RO compute** (read-only).
+- The compute status, typically **Active** or **Idle**.
+- **Compute ID**: The compute endpoint ID, which always starts with an `ep-` prefix; for example: `ep-quiet-butterfly-w2qres1h`
+- - **Size**: The size of the compute endpoint. Users on paid plans can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint. Shows autoscaling minimum and maximum vCPU values if autoscaling is enabled.
 - **Last active**: The date and time the compute was last active.
 
 ## Create a compute endpoint
@@ -44,9 +43,9 @@ You can only create a read-write compute endpoint for a branch that does not hav
 To create an endpoint:
 
 1. In the Neon Console, select **Branches**.
-1. Select a branch that does not have an endpoint
-1. Click **Add compute**.
-1. On the **Create compute endpoint** dialog, specify your settings and click **Create**. Selecting **Read-only** creates a [Read replica](/docs/introduction/read-replicas).
+1. Select a branch.
+1. Click **Add a compute**.
+1. On the **Add compute endpoint** dialog, specify your compute settings, including compute type, size, autoscaling, and autosuspend settings, and click **Create**. Selecting the **RO replica** compute type creates a [Read replica](/docs/introduction/read-replicas).
 
 ## Edit a compute endpoint
 
@@ -56,13 +55,13 @@ To edit a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Click the kebab menu in the **Computes** table, and select **Edit**.
+1. From the Compute tab, select **Edit** for the compute endpoint you wnat to edit.
 
-   The **Edit** window opens, letting you take a range of actions, depending on your tier.
+   The **Edit** window opens, letting you modify settings such as compute size, the autoscaling configuration (if applicable), and your autosuspend setting.
 
 1. Once you've made your changes, click **Save**. All changes take immediate effect.
 
-For information about selecting an appropriate compute size, see [How to size your compute](#how-to-size-your-compute).
+For information about selecting an appropriate compute size or autoscaling configuration, see [How to size your compute](#how-to-size-your-compute).
 
 ### What happens to the compute endpoint when making changes
 
@@ -72,8 +71,10 @@ Some key points to understand about how your endpoint responds when you make cha
   <Admonition type="note">
   When your compute resizes automatically as part of the autoscaling feature, there are no restarts or disconnects; it just scales.
   </Admonition>
-- Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
-- Changes to autosuspend settings do not require an endpoint restart; existing connections are unaffected.
+
+* Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
+* Changes to autosuspend settings do not require an endpoint restart; existing connections are unaffected.
+* If you disable autosuspend entirely, you will need to restart your compute manually to get the latest compute-related release updates from Neon. See [Restart a compute endpoint](#restart-a-compute-endpoint).
 
 To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
 
@@ -234,8 +235,8 @@ To delete a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Click the kebab menu in the **Computes** table, and select **Delete**.
-1. On the confirmation dialog, click **Delete**.
+1. From the **Compute** tab, click **Edit** for the compute you want to delete.
+1. At the bottom of the **Edit compute endpoint** drawer, click **Delete compute**.
 
 ## Manage compute endpoints with the Neon API
 
