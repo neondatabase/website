@@ -530,17 +530,15 @@ export default sharedMdxComponents;
 Insert a shared markdown and render inline.
 
 ```md
-
 ## Resources
 
- - [Open AI tiktoken source code on GitHub](https://github.com/openai/tiktoken)
- - [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
+- [Open AI tiktoken source code on GitHub](https://github.com/openai/tiktoken)
+- [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
 
 <NeedHelp/>
+```
 
- ```
-
-##    Contributing
+## Contributing
 
 For small changes and spelling fixes, we recommend using the GitHub UI because Markdown files are relatively easy to edit.
 
