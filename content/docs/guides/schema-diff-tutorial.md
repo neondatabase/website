@@ -271,9 +271,9 @@ The result shows a comparison between the `dev/jordan` branch and its parent bra
 --- Database: people	(Branch: br-falling-dust-a5bakdqt) // [!code --]
 +++ Database: people	(Branch: br-morning-heart-a5ltt10i) // [!code ++]
 @@ -20,8 +20,46 @@
- 
+
  SET default_table_access_method = heap;
- 
+
  --
 +-- Name: address; Type: TABLE; Schema: public; Owner: neondb_owner // [!code ++]
 +-- // [!code ++]

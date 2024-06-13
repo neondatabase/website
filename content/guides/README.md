@@ -451,8 +451,6 @@ Example usage:
 ---
 title: ...
 author: rishi-raj-jain
-...
-
 ---
 ```
 

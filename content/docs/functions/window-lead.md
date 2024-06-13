@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-02-08T09:30:00.000Z'
 ---
 
-The `lead()` function in Postgres is a window function that allows you to access values from subsequent rows in a result set without the need for a self-join. 
+The `lead()` function in Postgres is a window function that allows you to access values from subsequent rows in a result set without the need for a self-join.
 
 It's useful for comparing values between the current row and a later row, for example, when calculating the time until the next event, determining the next event in a sequence, or analyzing trends in time series data.
 
@@ -189,6 +189,7 @@ The `lead()` function relates each row in the result set to a subsequent row in 
 Window functions like `lead()` perform calculations across a set of rows defined by the `OVER` clause. This can be computationally expensive, especially for large datasets or complex window definitions.
 
 To optimize performance, make sure to:
+
 - Include an `ORDER BY` clause in the `OVER` clause to avoid sorting the entire dataset.
 - Use partitioning (`PARTITION BY`) to divide the data into smaller chunks when possible.
 - Create appropriate indexes on the columns used in the `OVER` clause.
