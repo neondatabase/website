@@ -14,7 +14,7 @@ Neon supports the `pgvector` open-source extension, which enables Postgres as a 
 The _Neon AI Starter Kit_ includes:
 
 - Neon Postgres with the latest version of `pgvector` for storing vector embeddings
-- The `neon_vecs` Python client for managing and querying vector embeddings in Postgres with the `pgvector` extension
+- The `neon_vecs` Python and JavaScript SDKs for managing and querying vector embeddings in Postgres with the `pgvector` extension
 - The `neon_ai` utility for generating vector embeddings with your chosen LLM and storing them in Postgres
 - Starter apps to get you up and running in minutes:
     - AI chatbot starter app
