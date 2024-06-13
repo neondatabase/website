@@ -1,14 +1,10 @@
 import clsx from 'clsx';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React, { forwardRef, useEffect, useRef } from 'react';
 
 import Link from 'components/shared/link';
 
 import useVideoPlayback from './use-video-playback';
-
-const videoBaseClassName =
-  'absolute left-0 top-0 z-0 h-auto min-w-[704px] 2xl:min-w-[652px] xl:min-w-[608px] lg:min-w-[514px] md:min-w-[480px] sm:h-auto sm:min-w-0 sm:!left-0 sm:!translate-x-0 pointer-events-none';
 
 const Video = forwardRef(
   (
@@ -72,22 +68,9 @@ const Video = forwardRef(
               !isActive ? 'after:opacity-70' : 'after:opacity-0'
             )}
           >
-            {bgImage && (
-              <Image
-                className={clsx(
-                  videoBaseClassName,
-                  videoClassName,
-                  isActive && '!left-0 lg:!left-1/2 lg:-translate-x-1/2'
-                )}
-                src={bgImage}
-                width={bgImage.width}
-                height={bgImage.height}
-                alt=""
-              />
-            )}
             <video
               className={clsx(
-                videoBaseClassName,
+                'pointer-events-none absolute left-0 top-0 z-0 h-auto min-w-[704px] 2xl:min-w-[652px] xl:min-w-[608px] lg:min-w-[514px] md:min-w-[480px] sm:!left-0 sm:h-auto sm:min-w-0 sm:!translate-x-0',
                 videoClassName,
                 !isActive && 'transition-all delay-700 duration-700',
                 isActive && '!left-0 lg:!left-1/2 lg:-translate-x-1/2'
@@ -97,6 +80,7 @@ const Video = forwardRef(
               controls={false}
               ref={videoRef}
               loop={isMobile}
+              poster={bgImage || undefined}
               muted
               playsInline
             />
@@ -165,7 +149,7 @@ Video.propTypes = {
   video: PropTypes.shape({
     icon: PropTypes.string,
     title: PropTypes.string,
-    bgImage: PropTypes.object,
+    bgImage: PropTypes.string,
   }).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

@@ -13,8 +13,6 @@ import branchingIcon from 'icons/home/hero/branching.svg';
 import scalingIcon from 'icons/home/hero/scaling.svg';
 import bg from 'images/pages/home/hero/bg.jpg';
 
-import branchingBg from './images/branching-bg.jpg';
-import scalingBg from './images/scaling-bg.jpg';
 import Video from './video';
 
 const Hls = require('hls.js/dist/hls.light.min.js');
@@ -36,7 +34,7 @@ const ITEMS = [
       title: 'Scaling',
       mp4: '/videos/pages/home/hero/scaling.mp4?updated=20240514120633',
       m3u8: '/videos/pages/home/hero/scaling.m3u8?updated=20240514120633',
-      bgImage: scalingBg,
+      bgImage: '/videos/pages/home/hero/scaling.jpg',
     },
     title: 'Scaling',
     description:
@@ -50,7 +48,7 @@ const ITEMS = [
       title: 'Branching',
       mp4: '/videos/pages/home/hero/branching.mp4?updated=20240508184252',
       m3u8: '/videos/pages/home/hero/branching.m3u8?updated=20240508184252',
-      bgImage: branchingBg,
+      bgImage: '/videos/pages/home/hero/branching.jpg',
     },
     title: 'Branching',
     description:
