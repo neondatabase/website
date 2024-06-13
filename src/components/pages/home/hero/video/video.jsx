@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React, { forwardRef, useEffect, useRef } from 'react';
 
@@ -6,12 +7,15 @@ import Link from 'components/shared/link';
 
 import useVideoPlayback from './use-video-playback';
 
+const videoBaseClassName =
+  'absolute left-0 top-0 z-0 h-auto min-w-[704px] 2xl:min-w-[652px] xl:min-w-[608px] lg:min-w-[514px] md:min-w-[480px] sm:h-auto sm:min-w-0 sm:!left-0 sm:!translate-x-0 pointer-events-none';
+
 const Video = forwardRef(
   (
     {
       className,
       videoClassName,
-      video: { icon, title: videoTitle },
+      video: { icon, title: videoTitle, bgImage },
       title,
       description,
       linkLabel,
@@ -63,17 +67,30 @@ const Video = forwardRef(
         >
           <div
             className={clsx(
-              'relative h-[466px] overflow-hidden rounded-[10px] group-hover:after:opacity-0 2xl:h-[430px] xl:h-[403px] lg:h-[340px] md:h-[317px] sm:h-auto sm:after:hidden',
+              'relative h-[466px] overflow-hidden rounded-[10px] group-hover:after:opacity-0 2xl:h-[430px] xl:h-[403px] lg:h-[340px] md:h-[317px] sm:aspect-[1.51] sm:h-auto sm:after:hidden',
               'after:pointer-events-none after:absolute after:-inset-px after:z-10 after:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(12,13,13,.3)_0%,#0C0D0D_100%)] after:transition-opacity after:duration-300',
               !isActive ? 'after:opacity-70' : 'after:opacity-0'
             )}
           >
+            {bgImage && (
+              <Image
+                className={clsx(
+                  videoBaseClassName,
+                  videoClassName,
+                  isActive && '!left-0 lg:!left-1/2 lg:-translate-x-1/2'
+                )}
+                src={bgImage}
+                width={bgImage.width}
+                height={bgImage.height}
+                alt=""
+              />
+            )}
             <video
               className={clsx(
-                'absolute left-0 top-0 z-0 h-auto min-w-[704px] 2xl:min-w-[652px] xl:min-w-[608px] lg:min-w-[514px] md:min-w-[480px] sm:static sm:h-auto sm:min-w-0',
+                videoBaseClassName,
                 videoClassName,
                 !isActive && 'transition-all delay-700 duration-700',
-                isActive && '!left-0 lg:!left-1/2 lg:-translate-x-1/2 sm:left-0 sm:translate-x-0'
+                isActive && '!left-0 lg:!left-1/2 lg:-translate-x-1/2'
               )}
               height={466}
               width={704}
@@ -148,6 +165,7 @@ Video.propTypes = {
   video: PropTypes.shape({
     icon: PropTypes.string,
     title: PropTypes.string,
+    bgImage: PropTypes.object,
   }).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
