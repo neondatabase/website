@@ -498,24 +498,92 @@
   items:
     - title: AI concepts
       slug: ai/ai-concepts
-    - title: Scale with Neon
-      slug: ai/ai-scale-with-neon
-    - title: Example apps
+    - title: AI quickstarts
+      items:
+        - title: Build an AI chatbot
+          slug: tbd
+        - title: Build a RAG application
+          slug: tbd
+        - title: Build a sematic search application
+          slug: tbd
+        - title: Build a hybrid search application
+          slug: tbd
+        - title: Build an image search application
+          slug: tbd
+        - title: Build a ChatGPT plugin
+          slug: tbd
+    - title: AI integrations
+      items: 
+        - title: Amazon Bedrock
+          slug: ai/amazon-bedrock
+        - title: Amazon Titan
+          slug: ai/amazon-titan
+        - title: Claude
+          slug: ai/claude
+        - title: Cohere
+          slug: ai/cohere
+        - title: Fireworks.ai
+          slug: ai/fireworks-ai
+        - title: Hugging Face
+          slug: ai/hugging-face
+        - title: Jurassic
+          slug: ai/jurassic
+        - title: LangChain
+          slug: ai/langchain
+        - title: LlamaIndex
+          slug: ai/llamaindex
+        - title: MemGPT
+          slug: ai/memgpt
+        - title: Mistral
+          slug: ai/mistral
+        - title: OpenAI
+          slug: ai/openai
+        - title: Portkey AI
+          slug: ai/portkey-ai
+        - title: Roboflow
+          slug: ai/roboflow
+        - title: Stable Diffusion
+          slug: ai/stable-diffusion
+        - title: Vertex AI
+          slug: ai/vertex-ai
+    - title: AI tools
+      items:
+        - title: Google Colab
+          slug: ai/ai-google-colab
+        - title: Jupyter Notebook
+          slug: ai/jupyter-notebook
+        - title: Microsoft Azure Notebooks
+          slug: ai/azure-notebooks
+        - title: Kaggle Kernels
+          slug: ai/kaggle-kernels
+        - title: Amazon SageMaker Notebooks
+          slug: ai/amazon-sagemake-notebooks
+    - title: Prepare your AI app for production
+      items:
+        - title: AI scaling guide
+          slug: ai/ai-scale-with-neon
+        - title: AI production checklist
+          slug: ai/ai-production-checklist
+    - title: AI example apps
       items:
         - title: Ask Postgres chatbot
           slug: https://github.com/neondatabase/ask-neon
         - title: Semantic search
           slug: https://github.com/neondatabase/yc-idea-matcher
+        - title: AI SQL Playground
+          slug: https://neon.tech/blog/postgres-ai-playground
+        - title: Create a custom ChatGPT plugin
+          slug: https://neon.tech/blog/openais-gpt-store-is-live-create-and-publish-a-custom-postgres-gpt-expert
+        - title: Text-to-SQL with Mistral and LangChain  
+          slug: https://github.com/mistralai/cookbook/blob/main/third_party/Neon/neon_text_to_sql.ipynb
+          tag: community
         - title: Build a RAG chatbot
           slug: https://neon.tech/guides/chatbot-astro-postgres-llamaindex
           tag: community
         - title: Image similarity search
           slug: https://github.com/ItzCrazyKns/Neon-Image-Search
           tag: community
-    - title: AI tools
-      items:
-        - title: Google Colab
-          slug: ai/ai-google-colab
+
 - title: Command line & SDKs
   items:
     - title: CLI Reference
