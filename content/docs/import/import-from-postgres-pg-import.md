@@ -1,5 +1,5 @@
 ---
-title: Import data from Postgres with pg-import
+title: Import data from Postgres with the @neondatabase/pg-import CLI
 enableTableOfContents: true
 updatedOn: '2024-02-08T15:20:54.293Z'
 ---
@@ -7,7 +7,7 @@ updatedOn: '2024-02-08T15:20:54.293Z'
 This topic describes migrating data from another Postgres database to Neon using the `@neondatabase/pg-import` CLI.  This tool is built on top of the Postgres `pg_dump` and `pg_restore` client utilities. It is intended to simplify data migrations for smaller, less complex databases compared to using the `pg_dump` and `pg_restore` client utilities directly, as described in [Import data from Postgres](/docs/import/import-from-postgres).
 
 <Admonition type="important">
-The `pg-import` CLI is experimental. There may be bugs, and the API is subject to change.
+The `@neondatabase/pg-import` CLI is experimental. There may be bugs, and the API is subject to change.
 </Admonition>
 
 The`@neondatabase/pg-import` utility supports all Neon Postgres versions.
