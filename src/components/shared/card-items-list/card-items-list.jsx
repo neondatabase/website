@@ -103,9 +103,8 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
                   'mt-1.5 text-[15px] font-light leading-tight text-gray-new-70',
                   isLarge ? 'mb-9 lg:mb-6 lg:mt-1.5 md:mb-3.5 md:mt-1' : 'md:mt-2.5'
                 )}
-              >
-                {description}
-              </p>
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
               {isLarge && !isDisabled && (
                 <div className="mt-auto inline-flex items-baseline text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
                   <span className="text-[15px] leading-none tracking-extra-tight">

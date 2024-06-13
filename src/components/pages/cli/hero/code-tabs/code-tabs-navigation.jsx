@@ -7,10 +7,9 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
-
-import LinuxIcon from './images/linux.inline.svg';
-import MacOSIcon from './images/macos.inline.svg';
-import WindowsIcon from './images/windows.inline.svg';
+import LinuxIcon from 'icons/linux.inline.svg';
+import MacOSIcon from 'icons/macos.inline.svg';
+import WindowsIcon from 'icons/windows.inline.svg';
 
 const icons = {
   linux: LinuxIcon,
@@ -22,9 +21,11 @@ const detectOS = () => {
   const { userAgent } = navigator;
   if (/Mac/i.test(userAgent)) {
     return 'macOS';
-  } if (/Win/i.test(userAgent)) {
+  }
+  if (/Win/i.test(userAgent)) {
     return 'Windows';
-  } if (/Linux/i.test(userAgent)) {
+  }
+  if (/Linux/i.test(userAgent)) {
     return 'Linux';
   }
 
