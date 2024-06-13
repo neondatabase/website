@@ -99,11 +99,7 @@ When you finish testing your query, you can delete the test branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Select the test branch from the table.
-   <<<<<<< HEAD
-4. On the branch page, click the **More** drop-down menu and select **Delete**.
-5. # On the confirmation dialog, click **Delete**.
-6. From the **Actions** menu on the branch overview page, select **Delete**.
-   > > > > > > > origin/main
+4. From the **Actions** menu on the branch overview page, select **Delete**.
 
 You can also delete a branch using the [Neon CLI](/docs/reference/cli-branches#delete) or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api).
 
