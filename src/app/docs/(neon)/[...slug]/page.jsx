@@ -52,15 +52,19 @@ export async function generateMetadata({ params }) {
   if (!isChangelog && !post) return notFound();
 
   const title = post?.data?.title || 'Changelog';
-
   const encodedTitle = Buffer.from(title).toString('base64');
+
+  const flatSidebar = await getFlatSidebar(getSidebar());
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
+  const category = breadcrumbs.length > 0 ? breadcrumbs[0].title : '';
+  const encodedCategory = category && Buffer.from(category).toString('base64');
 
   return getMetadata({
     title: `${title} - Neon Docs`,
     description: isChangelog ? 'The latest product updates from Neon' : post.excerpt,
     imagePath:
       title.length < MAX_TITLE_LENGTH
-        ? `${VERCEL_URL}/docs/og?title=${encodedTitle}`
+        ? `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`
         : DEFAULT_IMAGE_PATH,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,

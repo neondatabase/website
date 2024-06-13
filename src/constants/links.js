@@ -51,4 +51,5 @@ export default {
   caseStudies: '/case-studies',
   earlyAccess: '/early-access-program',
   creators: '/creators',
+  scaleTrial: '/scale-trial',
 };
