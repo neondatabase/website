@@ -45,6 +45,9 @@ jobs:
           exit 0
         fi
 
+    - name: Pull latest changes
+      run: git pull --rebase
+
     - name: Push changes
       run: git push
       env:
