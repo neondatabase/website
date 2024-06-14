@@ -26,8 +26,8 @@ const items = [
       { title: '24/7 for your main compute', info: 'Plus 20h of usage for branches' },
       { title: 'Community support' },
       { title: 'Fixed capacity at 0.25 vCPU' },
-      { title: 'Instant Read Replicas', disabled: true },
-      { title: 'IP Allow Rules', disabled: true },
+      { title: 'PITR (24 h)', },
+      { title: 'Organization accounts', disabled: true },
     ],
     button: {
       url: LINKS.signup,
@@ -52,8 +52,8 @@ const items = [
       },
       { title: 'Standard support' },
       { title: 'Autoscaling up to 4 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
-      { title: 'Instant Read Replicas' },
-      { title: 'IP Allow Rules', disabled: true },
+      { title: 'PITR (7 days)', },
+      { title: 'Organization accounts' },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=launch`,
@@ -75,8 +75,8 @@ const items = [
       },
       { title: 'Priority support' },
       { title: 'Autoscaling up to 8 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
-      { title: 'Instant Read Replicas' },
-      { title: 'IP Allow Rules' },
+      { title: 'PITR (30 days)', },
+      { title: 'Organization accounts' },
     ],
     button: {
       url: `${LINKS.scaleTrial}`,
@@ -90,12 +90,11 @@ const items = [
     price: 'Custom',
     description: 'Custom plans for large datasets and database fleets.',
     features: [
-      { title: 'Storage discounts' },
+      { title: 'Special pricing' },
       { title: 'Higher resource limits' },
-      { title: 'Thousands of databases' },
+      { title: 'Thousands of projects' },
       { title: 'Enterprise support w/SLAs' },
       { title: 'Audit logging' },
-      { title: 'SOC 2 compliance' },
     ],
     button: {
       url: `${LINKS.enterprise}#request-trial`,
