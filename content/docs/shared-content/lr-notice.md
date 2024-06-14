@@ -1,5 +1,5 @@
 ---
-updatedOn: '2024-06-14T07:55:54.426Z'
+updatedOn: '2024-06-14T07:58:56.523Z'
 ---
 
 <Admonition type="important" title="Enrollment Pause for Logical Replication Beta">
