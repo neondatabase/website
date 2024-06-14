@@ -26,7 +26,7 @@ const items = [
       { title: '24/7 for your main compute', info: 'Plus 20h of usage for branches' },
       { title: 'Community support' },
       { title: 'Fixed capacity at 0.25 vCPU' },
-      { title: 'PITR (24 h)', },
+      { title: 'Point-in-time restore (24 h)', },
       { title: 'Organization accounts', disabled: true },
     ],
     button: {
@@ -52,7 +52,7 @@ const items = [
       },
       { title: 'Standard support' },
       { title: 'Autoscaling up to 4 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
-      { title: 'PITR (7 days)', },
+      { title: 'Point-in-time restore (7 days)', },
       { title: 'Organization accounts' },
     ],
     button: {
@@ -75,7 +75,7 @@ const items = [
       },
       { title: 'Priority support' },
       { title: 'Autoscaling up to 8 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
-      { title: 'PITR (30 days)', },
+      { title: 'Point-in-time restore (30 days)', },
       { title: 'Organization accounts' },
     ],
     button: {
