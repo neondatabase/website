@@ -90,11 +90,11 @@ const items = [
     price: 'Custom',
     description: 'Custom plans for large datasets and database fleets.',
     features: [
-      { title: 'Special pricing' },
       { title: 'Higher resource limits' },
       { title: 'Thousands of projects' },
-      { title: 'Enterprise support w/SLAs' },
-      { title: 'Audit logging' },
+      { title: '99.95% SLA' },
+      { title: '24x7 customer support' },
+      { title: 'Dedicated Slack channel' },
     ],
     button: {
       url: `${LINKS.enterprise}#request-trial`,
