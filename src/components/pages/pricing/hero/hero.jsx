@@ -66,7 +66,7 @@ const items = [
     type: 'Scale',
     price:
       '<em class="absolute block xl:-top-1 -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:-mt-4 md:mt-0">From</em> $69 <span>/month</span>',
-    description: 'Full platform and support access, designed for scaling production workloads.',
+    description: 'Full platform access for scaling production workloads.',
     features: [
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
       {
