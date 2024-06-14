@@ -68,6 +68,10 @@ To create a Neon project:
 
 After creating a project, you are presented with a dialog that provides your connection details for a ready-to-use `neondb` database. The connection details include your password.
 
+<Admonition type="tip">
+Similar to **docs.new** for instantly creating Google Docs or **repo.new** for adding new GitHub repositories, you can use [pg.new](https://pg.new) to create a new Neon Postgres project. Simply visit [pg.new](https://pg.new) and you'll be taken straight to the **Create project** page where you can create your new project.
+</Admonition>
+
 ### View projects
 
 To view your projects:
