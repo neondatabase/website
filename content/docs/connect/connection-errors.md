@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2024-02-08T15:20:54.276Z'
+updatedOn: '2024-06-14T07:55:54.363Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -78,7 +78,7 @@ or
 endpoint=<endpoint_id>$<password>
 ```
 
-Example: 
+Example:
 
 ```txt
 postgres://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -96,21 +96,21 @@ Clients on the [list of drivers](https://wiki.postgresql.org/wiki/List_of_driver
 
 Neon has tested the following drivers for SNI support:
 
-| Driver            | Language    | SNI Support | Notes                                                                                                                                             |
-| ----------------- | ----------- | -------------|-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| npgsql            | C#          | &check;      |                                                                                                                                                   |
-| Postgrex          | Elixir      | &check;      | [Requires ssl_opts with server_name_indication](https://neon.tech/docs/guides/elixir-ecto#configure-ecto)                                         |
-| github.com/lib/pq | Go          | &check;      | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22                                                                       |
-| pgx               | Go          | &check;     | SNI support merged with v5.0.0-beta.3 yet                                                                                                            |
-| go-pg             | Go          | &check;      | requires `verify-full` mode                                                                                                                       |
-| JDBC              | Java        | &check;      |                                                                                                                                                   |
-| node-postgres     | JavaScript  | &check;      | Requires the `ssl: {'sslmode': 'require'}` option                                                                                                 |
-| postgres.js       | JavaScript  | &check;      | Requires the `ssl: 'require'` option                                                                                                              |
-| asyncpg           | Python      | &check;      |                                                                                                                                                   |
-| pg8000            | Python      | &check;      | Requires [scramp >= v1.4.3](https://pypi.org/project/scramp/), which is included in [pg8000 v1.29.3](https://pypi.org/project/pg8000/) and higher |
-| PostgresClientKit | Swift       | &#x2717;     |                                                                                                                                                   |
-| PostgresNIO       | Swift       | &check;      |                                                                                                                                                   |
-| postgresql-client | TypeScript  | &check;      |                                                                                                                                                   |
+| Driver            | Language   | SNI Support | Notes                                                                                                                                             |
+| ----------------- | ---------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| npgsql            | C#         | &check;     |                                                                                                                                                   |
+| Postgrex          | Elixir     | &check;     | [Requires ssl_opts with server_name_indication](https://neon.tech/docs/guides/elixir-ecto#configure-ecto)                                         |
+| github.com/lib/pq | Go         | &check;     | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22                                                                       |
+| pgx               | Go         | &check;     | SNI support merged with v5.0.0-beta.3 yet                                                                                                         |
+| go-pg             | Go         | &check;     | requires `verify-full` mode                                                                                                                       |
+| JDBC              | Java       | &check;     |                                                                                                                                                   |
+| node-postgres     | JavaScript | &check;     | Requires the `ssl: {'sslmode': 'require'}` option                                                                                                 |
+| postgres.js       | JavaScript | &check;     | Requires the `ssl: 'require'` option                                                                                                              |
+| asyncpg           | Python     | &check;     |                                                                                                                                                   |
+| pg8000            | Python     | &check;     | Requires [scramp >= v1.4.3](https://pypi.org/project/scramp/), which is included in [pg8000 v1.29.3](https://pypi.org/project/pg8000/) and higher |
+| PostgresClientKit | Swift      | &#x2717;    |                                                                                                                                                   |
+| PostgresNIO       | Swift      | &check;     |                                                                                                                                                   |
+| postgresql-client | TypeScript | &check;     |                                                                                                                                                   |
 
 ## Password authentication failed for user
 
@@ -178,7 +178,7 @@ Prisma Migrate requires a direct connection to the database. It does not support
 
 The `terminating connection due to administrator command` error is typically encountered when running a query from a connection that has sat idle long enough for the compute endpoint to suspend due to inactivity. Neon automatically suspends a compute endpoint after 5 minutes of inactivity, by default. You can reproduce this error by connecting to your database from an application or client such as `psql`, letting the connection remain idle until the compute suspends, and then running a query from the same connection.
 
-If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a paying user, you can disable autosuspend or configure a different suspension period. For instructions, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).  [Neon Free Tier](/docs/introduction/plans#free-tier) users cannot modify the default 5 minute autosuspend setting.
+If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a paying user, you can disable autosuspend or configure a different suspension period. For instructions, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide). [Neon Free Tier](/docs/introduction/plans#free-tier) users cannot modify the default 5 minute autosuspend setting.
 
 ## Unsupported startup parameter
 

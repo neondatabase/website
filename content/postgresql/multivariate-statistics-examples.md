@@ -2,11 +2,9 @@
 
 ## 76.2. Multivariate Statistics Examples [#](#MULTIVARIATE-STATISTICS-EXAMPLES)
 
-  * [76.2.1. Functional Dependencies](multivariate-statistics-examples#FUNCTIONAL-DEPENDENCIES)
-  * [76.2.2. Multivariate N-Distinct Counts](multivariate-statistics-examples#MULTIVARIATE-NDISTINCT-COUNTS)
-  * [76.2.3. MCV Lists](multivariate-statistics-examples#MCV-LISTS)
-
-
+- [76.2.1. Functional Dependencies](multivariate-statistics-examples#FUNCTIONAL-DEPENDENCIES)
+- [76.2.2. Multivariate N-Distinct Counts](multivariate-statistics-examples#MULTIVARIATE-NDISTINCT-COUNTS)
+- [76.2.3. MCV Lists](multivariate-statistics-examples#MCV-LISTS)
 
 [#id](#FUNCTIONAL-DEPENDENCIES)
 

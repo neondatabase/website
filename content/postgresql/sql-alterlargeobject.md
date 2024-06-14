@@ -22,11 +22,11 @@ You must own the large object to use `ALTER LARGE OBJECT`. To alter the owner, y
 
 ## Parameters
 
-* *`large_object_oid`*
+- _`large_object_oid`_
 
   OID of the large object to be altered
 
-* *`new_owner`*
+- _`new_owner`_
 
   The new owner of the large object
 

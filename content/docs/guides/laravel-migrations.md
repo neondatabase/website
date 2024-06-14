@@ -2,7 +2,7 @@
 title: Schema migration with Neon Postgres and Laravel
 subtitle: Set up Neon Postgres and run migrations for your Laravel project
 enableTableOfContents: true
-updatedOn: '2024-03-04T14:30:00.000Z'
+updatedOn: '2024-06-14T07:55:54.394Z'
 ---
 
 [Laravel](https://laravel.com/) is a popular PHP web application framework that provides an expressive and elegant syntax for building web applications. It includes an ORM (Object-Relational Mapping) called Eloquent, which allows you to interact with databases using a fluent API. Laravel also provides a powerful migration system to manage database schema changes over time.
@@ -62,7 +62,7 @@ Replace `NEON_POSTGRES_CONNECTION_STRING` with the connection string you retriev
 
 ### Specify the data model
 
-Data models are defined using the `Elquent` ORM in Laravel. Our application is a simple catalog of authors and books, where each author can have multiple books. We'll create two models, `Author` and `Book`, to represent the data. 
+Data models are defined using the `Elquent` ORM in Laravel. Our application is a simple catalog of authors and books, where each author can have multiple books. We'll create two models, `Author` and `Book`, to represent the data.
 
 Create a new file `Author.php` in the `app/Models` directory with the following code:
 
@@ -279,7 +279,7 @@ class BookController extends Controller
 }
 ```
 
-These controllers define the `index` action to retrieve all authors and books by a specific author, respectively. The data is returned as JSON responses. 
+These controllers define the `index` action to retrieve all authors and books by a specific author, respectively. The data is returned as JSON responses.
 
 ### Run the Laravel development server
 
@@ -351,7 +351,6 @@ You can find the source code for the application described in this guide on GitH
 <DetailIconCards>
 <a href="https://github.com/neondatabase/guide-neon-laravel" description="Run Neon database migrations in a Laravel project" icon="github">Migrations with Neon and Laravel</a>
 </DetailIconCards>
-
 
 ## Resources
 

@@ -8,29 +8,29 @@ When several data types share near-identical sorting semantics, their operator c
 
 There are some basic assumptions that a btree operator family must satisfy:
 
-* An `=` operator must be an equivalence relation; that is, for all non-null values *`A`*, *`B`*, *`C`* of the data type:
+- An `=` operator must be an equivalence relation; that is, for all non-null values _`A`_, _`B`_, _`C`_ of the data type:
 
-  * *`A`* `=` *`A`* is true (*reflexive law*)
+  - _`A`_ `=` _`A`_ is true (_reflexive law_)
 
-  * if *`A`* `=` *`B`*, then *`B`* `=` *`A`* (*symmetric law*)
+  - if _`A`_ `=` _`B`_, then _`B`_ `=` _`A`_ (_symmetric law_)
 
-  * if *`A`* `=` *`B`* and *`B`* `=` *`C`*, then *`A`* `=` *`C`* (*transitive law*)
+  - if _`A`_ `=` _`B`_ and _`B`_ `=` _`C`_, then _`A`_ `=` _`C`_ (_transitive law_)
 
-* A `<` operator must be a strong ordering relation; that is, for all non-null values *`A`*, *`B`*, *`C`*:
+- A `<` operator must be a strong ordering relation; that is, for all non-null values _`A`_, _`B`_, _`C`_:
 
-  * *`A`* `<` *`A`* is false (*irreflexive law*)
+  - _`A`_ `<` _`A`_ is false (_irreflexive law_)
 
-  * if *`A`* `<` *`B`* and *`B`* `<` *`C`*, then *`A`* `<` *`C`* (*transitive law*)
+  - if _`A`_ `<` _`B`_ and _`B`_ `<` _`C`_, then _`A`_ `<` _`C`_ (_transitive law_)
 
-* Furthermore, the ordering is total; that is, for all non-null values *`A`*, *`B`*:
+- Furthermore, the ordering is total; that is, for all non-null values _`A`_, _`B`_:
 
-  * exactly one of *`A`* `<` *`B`*, *`A`* `=` *`B`*, and *`B`* `<` *`A`* is true (*trichotomy law*)
+  - exactly one of _`A`_ `<` _`B`_, _`A`_ `=` _`B`_, and _`B`_ `<` _`A`_ is true (_trichotomy law_)
 
   (The trichotomy law justifies the definition of the comparison support function, of course.)
 
 The other three operators are defined in terms of `=` and `<` in the obvious way, and must act consistently with them.
 
-For an operator family supporting multiple data types, the above laws must hold when *`A`*, *`B`*, *`C`* are taken from any data types in the family. The transitive laws are the trickiest to ensure, as in cross-type situations they represent statements that the behaviors of two or three different operators are consistent. As an example, it would not work to put `float8` and `numeric` into the same operator family, at least not with the current semantics that `numeric` values are converted to `float8` for comparison to a `float8`. Because of the limited accuracy of `float8`, this means there are distinct `numeric` values that will compare equal to the same `float8` value, and thus the transitive law would fail.
+For an operator family supporting multiple data types, the above laws must hold when _`A`_, _`B`_, _`C`_ are taken from any data types in the family. The transitive laws are the trickiest to ensure, as in cross-type situations they represent statements that the behaviors of two or three different operators are consistent. As an example, it would not work to put `float8` and `numeric` into the same operator family, at least not with the current semantics that `numeric` values are converted to `float8` for comparison to a `float8`. Because of the limited accuracy of `float8`, this means there are distinct `numeric` values that will compare equal to the same `float8` value, and thus the transitive law would fail.
 
 Another requirement for a multiple-data-type family is that any implicit or binary-coercion casts that are defined between data types included in the operator family must not change the associated sort ordering.
 

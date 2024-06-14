@@ -4,7 +4,7 @@
 
 A procedural language must be “installed” into each database where it is to be used. But procedural languages installed in the database `template1` are automatically available in all subsequently created databases, since their entries in `template1` will be copied by `CREATE DATABASE`. So the database administrator can decide which languages are available in which databases and can make some languages available by default if desired.
 
-For the languages supplied with the standard distribution, it is only necessary to execute `CREATE EXTENSION` *`language_name`* to install the language into the current database. The manual procedure described below is only recommended for installing languages that have not been packaged as extensions.
+For the languages supplied with the standard distribution, it is only necessary to execute `CREATE EXTENSION` _`language_name`_ to install the language into the current database. The manual procedure described below is only recommended for installing languages that have not been packaged as extensions.
 
 [#id](#id-1.8.7.5.4)
 
@@ -52,7 +52,7 @@ A procedural language is installed in a database in five steps, which must be ca
        [VALIDATOR validator_function_name] ;
    ```
 
-   The optional key word `TRUSTED` specifies that the language does not grant access to data that the user would not otherwise have. Trusted languages are designed for ordinary database users (those without superuser privilege) and allows them to safely create functions and procedures. Since PL functions are executed inside the database server, the `TRUSTED` flag should only be given for languages that do not allow access to database server internals or the file system. The languages PL/pgSQL, PL/Tcl, and PL/Perl are considered trusted; the languages PL/TclU, PL/PerlU, and PL/PythonU are designed to provide unlimited functionality and should *not* be marked trusted.
+   The optional key word `TRUSTED` specifies that the language does not grant access to data that the user would not otherwise have. Trusted languages are designed for ordinary database users (those without superuser privilege) and allows them to safely create functions and procedures. Since PL functions are executed inside the database server, the `TRUSTED` flag should only be given for languages that do not allow access to database server internals or the file system. The languages PL/pgSQL, PL/Tcl, and PL/Perl are considered trusted; the languages PL/TclU, PL/PerlU, and PL/PythonU are designed to provide unlimited functionality and should _not_ be marked trusted.
 
 [Example 42.1](xplang-install#XPLANG-INSTALL-EXAMPLE) shows how the manual installation procedure would work with the language PL/Perl.
 
@@ -87,6 +87,5 @@ CREATE TRUSTED LANGUAGE plperl
 ```
 
 then defines that the previously declared functions should be invoked for functions and procedures where the language attribute is `plperl`.
-
 
 In a default PostgreSQL installation, the handler for the PL/pgSQL language is built and installed into the “library” directory; furthermore, the PL/pgSQL language itself is installed in all databases. If Tcl support is configured in, the handlers for PL/Tcl and PL/TclU are built and installed in the library directory, but the language itself is not installed in any database by default. Likewise, the PL/Perl and PL/PerlU handlers are built and installed if Perl support is configured, and the PL/PythonU handler is installed if Python support is configured, but these languages are not installed by default.

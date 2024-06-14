@@ -2,7 +2,7 @@
 
 ## 33.4. TAP Tests [#](#REGRESS-TAP)
 
-* [33.4.1. Environment Variables](regress-tap#REGRESS-TAP-VARS)
+- [33.4.1. Environment Variables](regress-tap#REGRESS-TAP-VARS)
 
 Various tests, particularly the client program tests under `src/bin`, use the Perl TAP tools and are run using the Perl testing program `prove`. You can pass command-line options to `prove` by setting the `make` variable `PROVE_FLAGS`, for example:
 
@@ -28,7 +28,7 @@ It's important to realize that the TAP tests will start test server(s) even when
 
 ### 33.4.1. Environment Variables [#](#REGRESS-TAP-VARS)
 
-Data directories are named according to the test filename, and will be retained if a test fails. If the environment variable `PG_TEST_NOCLEAN` is set, data directories will be retained regardless of test status. For example, retaining the data directory regardless of test results when running the pg\_dump tests:
+Data directories are named according to the test filename, and will be retained if a test fails. If the environment variable `PG_TEST_NOCLEAN` is set, data directories will be retained regardless of test status. For example, retaining the data directory regardless of test results when running the pg_dump tests:
 
 ```
 PG_TEST_NOCLEAN=1 make -C src/bin/pg_dump check

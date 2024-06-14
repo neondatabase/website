@@ -2,18 +2,19 @@
 title: The pg_partman extension
 subtitle: Manage large Postgres tables using the PostgreSQL Partition Manager extension
 enableTableOfContents: true
-updatedOn: '2024-03-17T20:32:29.796Z'
+updatedOn: '2024-06-14T07:55:54.370Z'
 ---
 
 `pg_partman` is a Postgres extension that simplifies the management of partitioned tables. Partitioning refers to splitting a single table into smaller pieces called `partitions`. This is done based on the values in a key column or set of columns. Even though partitions are stored as separate physical tables, the partitioned table can still be queried as a single logical table. This can significantly enhance query performance and also help you manage the data lifecycle of tables that grow very large.
 
-While Postgres natively supports partitioning a table, `pg_partman` helps set up and manage partitioned tables: 
-- **Automated partition creation**: `pg_partman` automatically creates new partitions as new records are inserted, based on a specified interval for the partition key. 
+While Postgres natively supports partitioning a table, `pg_partman` helps set up and manage partitioned tables:
+
+- **Automated partition creation**: `pg_partman` automatically creates new partitions as new records are inserted, based on a specified interval for the partition key.
 - **Automated maintenance**: `pg_partman` bundles a background worker process that manages maintenance tasks without needing an external scheduler or cron job. For example, it can automatically detach old partitions from the main table based on a retention policy, run `analyze` on partitions to update statistics, and more.
 
 <CTA />
 
-In this guide, we’ll learn how to set up and use the `pg_partman` extension with your Neon Postgres project. We'll cover why partitioning is helpful, how to enable `pg_partman`, creating partitioned tables, and automating partition maintenance. 
+In this guide, we’ll learn how to set up and use the `pg_partman` extension with your Neon Postgres project. We'll cover why partitioning is helpful, how to enable `pg_partman`, creating partitioned tables, and automating partition maintenance.
 
 <Admonition type="note">
 `pg_partman` is an open-source Postgres extension that can be installed in any Neon project using the instructions below. Detailed installation instructions and compatibility information can be found in the [pg_partman](https://github.com/pgpartman/pg_partman) documentation.
@@ -46,14 +47,13 @@ GRANT TEMPORARY ON DATABASE '{WORKING_DATABASE_NAME}' to partman_user; -- allow 
 
 If the role needs to create schemas, you'll have to grant `CREATE` on the database as well. This is only required if you give the role above the `CREATE` privilege on pre-existing schemas that will contain partition sets.
 
-
 ```sql
 GRANT CREATE ON DATABASE '{WORKING_DATABASE_NAME}' TO partman_user;
 ```
 
-When you create a new `Neon` project, the default database name is `neondb` and the default schema name is `public`. Replace `{WORKING_DATABASE_NAME}` and `{WORKING_SCHEMA_NAME}` with the actual database and schema names you want to manage the partitioned tables in. To find out more about the privileges needed to run `pg_partman`, refer to the [pg_partman documentation](https://github.com/pgpartman/pg_partman). 
+When you create a new `Neon` project, the default database name is `neondb` and the default schema name is `public`. Replace `{WORKING_DATABASE_NAME}` and `{WORKING_SCHEMA_NAME}` with the actual database and schema names you want to manage the partitioned tables in. To find out more about the privileges needed to run `pg_partman`, refer to the [pg_partman documentation](https://github.com/pgpartman/pg_partman).
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor). 
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 **Version Compatibility:**
 
@@ -63,7 +63,7 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 For tables that grow very large, partitioning offers several benefits:
 
-- **Faster queries:** Partitioning allows Postgres to quickly locate and retrieve data within a specific partition, rather than scanning the entire table. 
+- **Faster queries:** Partitioning allows Postgres to quickly locate and retrieve data within a specific partition, rather than scanning the entire table.
 - **Scalability:** Partitioning makes database administration simpler. For example, smaller partitions are easier to load and delete or back up and recover.
 - **Managing the data lifecycle:** Easier management of the data lifecycle by archiving or purging old partitions, which can be moved to cheaper storage options without affecting the active dataset.
 
@@ -71,10 +71,10 @@ For tables that grow very large, partitioning offers several benefits:
 
 Postgres supports partitioning tables natively, with the following strategies to divide the data:
 
-- **List partitioning**: Data is distributed across partitions based on a list of values, such as a category or location. 
+- **List partitioning**: Data is distributed across partitions based on a list of values, such as a category or location.
 - **Range partitioning**: Data is distributed across partitions based on ranges of values, such as dates or numerical ranges.
 
-With native partitioning, you need to manually create and manage partitions for your table. 
+With native partitioning, you need to manually create and manage partitions for your table.
 
 ```sql
 CREATE TABLE measurement (
@@ -83,7 +83,7 @@ CREATE TABLE measurement (
     peaktemp        int
 ) PARTITION BY RANGE (logdate);
 
--- Create a partition for each month of logged data. 
+-- Create a partition for each month of logged data.
 -- Records with `logdate` in this range are automatically routed to this partition table
 CREATE TABLE measurement_y2006m02 PARTITION OF measurement
     FOR VALUES FROM ('2006-02-01') TO ('2006-03-01');
@@ -93,15 +93,15 @@ CREATE TABLE measurement_y2006m02 PARTITION OF measurement
 ALTER TABLE measurement DETACH PARTITION measurement_y2005m10;
 ```
 
-`pg_partman` supports creating partitions that are number or time-based, with each partition covering a range of values. It is particularly useful when partitions need to be created automatically as new records come in. So, list partitioning isn't applicable since the partition key values are not known in advance. 
+`pg_partman` supports creating partitions that are number or time-based, with each partition covering a range of values. It is particularly useful when partitions need to be created automatically as new records come in. So, list partitioning isn't applicable since the partition key values are not known in advance.
 
 ## Example: Partitioning user-activity data
 
-Consider a social media platform that tracks user interactions in their website application, such as likes, comments, and shares. The data is stored in a table called `user_activities`, where `activity_type` stores the type of activity and the other columns store additional information about the activity. 
+Consider a social media platform that tracks user interactions in their website application, such as likes, comments, and shares. The data is stored in a table called `user_activities`, where `activity_type` stores the type of activity and the other columns store additional information about the activity.
 
 ### Setting up a new partitioned table
 
-Given the large volume of data generated by user interactions, partitioning the `user_activities` table can help keep queries manageable. Recent activity data is typically the most interesting for both the platform and its users, so `activity_time` is a good candidate to partition on. 
+Given the large volume of data generated by user interactions, partitioning the `user_activities` table can help keep queries manageable. Recent activity data is typically the most interesting for both the platform and its users, so `activity_time` is a good candidate to partition on.
 
 We can create the partitioned table using the following SQL statement, similar to defining a native partitioned table:
 
@@ -146,7 +146,7 @@ VALUES
 
 ### Querying partitioned tables
 
-We can query against the `user_activities` table as if it were a single table, and Postgres will automatically route the query to the correct partition(s) based on the `activity_time` column. 
+We can query against the `user_activities` table as if it were a single table, and Postgres will automatically route the query to the correct partition(s) based on the `activity_time` column.
 
 ```sql
 SELECT * FROM user_activities WHERE activity_time BETWEEN '2024-03-20' AND '2024-03-25';
@@ -172,6 +172,7 @@ SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' A
 ```
 
 This will return the following results:
+
 ```text
         table_name
 ---------------------------
@@ -188,27 +189,27 @@ This will return the following results:
 (10 rows)
 ```
 
-`pg_partman` automatically created tables for weekly intervals close to the current data. As more data is inserted, it will create new partitions. Additionally, there is a `user_activities_default` table that stores data that doesn't fit into any of the existing partitions. 
+`pg_partman` automatically created tables for weekly intervals close to the current data. As more data is inserted, it will create new partitions. Additionally, there is a `user_activities_default` table that stores data that doesn't fit into any of the existing partitions.
 
 ### Data retention policies
 
 To make sure that old data is automatically removed from the main table, you can set up a retention policy:
 
 ```sql
-UPDATE part_config 
+UPDATE part_config
 SET retention = '4 weeks', retention_keep_table = true
 WHERE parent_table = 'public.user_activities';
 ```
 
-The background worker process that comes bundled with `pg_partman` automatically detaches the old partitions that are older than 4 weeks from the main table. Since we've set `retention_keep_table` to `true`, the old partitions are kept as separate tables, and not dropped from the database. 
+The background worker process that comes bundled with `pg_partman` automatically detaches the old partitions that are older than 4 weeks from the main table. Since we've set `retention_keep_table` to `true`, the old partitions are kept as separate tables, and not dropped from the database.
 
 ## Additional considerations
 
 ### Partitioning an existing table with `pg_partman`
 
-If you have an existing table that you want to partition, you can use `pg_partman` for it. However, it isn't straightforward since it can't be directly altered into the parent table for a partition set. Instead, you need to create a new partitioned table and copy the data from the existing table into the new partitioned table. 
+If you have an existing table that you want to partition, you can use `pg_partman` for it. However, it isn't straightforward since it can't be directly altered into the parent table for a partition set. Instead, you need to create a new partitioned table and copy the data from the existing table into the new partitioned table.
 
-We describe the `offline` method here, where queries to the existing table are stopped while the data is being copied over to the new partitioned table. It is also possible to achieve this while keeping the existing table operational, but it involves more complex steps. For more details, refer to the [pg_partman documentation](https://github.com/pgpartman/pg_partman/blob/master/doc/pg_partman_howto.md). 
+We describe the `offline` method here, where queries to the existing table are stopped while the data is being copied over to the new partitioned table. It is also possible to achieve this while keeping the existing table operational, but it involves more complex steps. For more details, refer to the [pg_partman documentation](https://github.com/pgpartman/pg_partman/blob/master/doc/pg_partman_howto.md).
 
 #### Example: Partitioning an existing table
 
@@ -242,7 +243,7 @@ VALUES
     ('2024-03-29 15:30:00', 'comment', 1015, 115);
 ```
 
-Now, we'll partition the existing `test_user_activities` table using `pg_partman`. 
+Now, we'll partition the existing `test_user_activities` table using `pg_partman`.
 
 1. Rename the original table so that the partitioned table can be created with the original table's name:
 
@@ -292,7 +293,7 @@ CALL partman.partition_data_proc(
 );
 ```
 
-This will move the data from `old_user_activities` to the new `test_user_activities` table in daily intervals, committing after each batch. The `p_interval` parameter specifies the interval of values to select in each batch, and `p_loop_count` specifies the total number of batches to move. 
+This will move the data from `old_user_activities` to the new `test_user_activities` table in daily intervals, committing after each batch. The `p_interval` parameter specifies the interval of values to select in each batch, and `p_loop_count` specifies the total number of batches to move.
 
 5. After the data migration is complete, the old table should be empty, and the new partitioned table should contain all the data and child tables. You can verify this by counting the number of rows in both the tables:
 
@@ -314,13 +315,13 @@ The `test_user_activities` table is now successfully partitioned using `pg_partm
 
 ### Uniqueness constraints for partitioned tables
 
-This section applies to partitioned tables created natively in Postgres, as well as those created using `pg_partman`. 
+This section applies to partitioned tables created natively in Postgres, as well as those created using `pg_partman`.
 
 Postgres doesn't support indexes or unique constraints that span multiple tables. Since a partitioned table is made up of multiple physical tables, you can't create a unique constraint that spans all the partitions. For example, the following query will fail:
 
 ```sql
 ALTER TABLE user_activities ADD CONSTRAINT unique_activity UNIQUE (activity_id);
-``` 
+```
 
 It returns the following error:
 
@@ -339,7 +340,7 @@ ALTER TABLE user_activities ADD CONSTRAINT unique_activity UNIQUE (activity_id, 
 
 ## Conclusion
 
-By leveraging `pg_partman`, you can significantly enhance the native partitioning functionality of Postgres, particularly for large-scale and time-series datasets. The extension simplifies partition management, automates retention and archival tasks, and improves query performance. 
+By leveraging `pg_partman`, you can significantly enhance the native partitioning functionality of Postgres, particularly for large-scale and time-series datasets. The extension simplifies partition management, automates retention and archival tasks, and improves query performance.
 
 ## Reference
 

@@ -2,8 +2,6 @@
 
 ## 2.9. Deletions [#](#TUTORIAL-DELETE)
 
-
-
 Rows can be removed from a table using the `DELETE` command. Suppose you are no longer interested in the weather of Hayward. Then you can do the following to delete those rows from the table:
 
 ```
@@ -30,4 +28,4 @@ One should be wary of statements of the form
 DELETE FROM tablename;
 ```
 
-Without a qualification, `DELETE` will remove *all* rows from the given table, leaving it empty. The system will not request confirmation before doing this!
+Without a qualification, `DELETE` will remove _all_ rows from the given table, leaving it empty. The system will not request confirmation before doing this!

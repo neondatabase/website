@@ -2,7 +2,7 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 enableTableOfContents: true
-updatedOn: '2023-12-01T19:05:09.469Z'
+updatedOn: '2024-06-14T07:55:54.386Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -83,7 +83,7 @@ connection_uris
 The following Neon CLI command lists all branches in your Neon project, as well as any branches shared with you. If your Neon account has more than one project, you will be required to specify a project ID using the `--project-id` option. To view the CLI documentation for this method, refer to the [Neon CLI reference](https://neon.tech/docs/reference/cli-branches#list).
 
 ```bash
-neonctl projects list  
+neonctl projects list
 Projects
 ┌────────────────────────┬────────────────────┬───────────────┬──────────────────────┐
 │ Id                     │ Name               │ Region Id     │ Created At           │
@@ -137,7 +137,7 @@ Depending on your development workflow, you might need to periodically reset a b
 
 Use the following command to reset a branch to the current state (HEAD) of its parent branch:
 
-``` bash
+```bash
 neonctl branches reset <id|name> --parent
 ```
 
@@ -145,7 +145,7 @@ Example:
 
 This example resets a developer's branch to match the latest state of its parent branch:
 
-``` bash
+```bash
 neonctl branches reset dev/alex --parent
 ┌────────────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                         │ Name     │ Primary │ Created At           │ Last Reset At        │
@@ -171,14 +171,14 @@ For more details, see [Reset from parent](/docs/guides/reset-from-parent).
 
 Using the CLI, you can restore a branch to an earlier point in its history or another branch's history using the following command:
 
-``` bash shouldWrap
+```bash shouldWrap
 neonctl branches restore <target id|name> <source id|name @ timestamp|lsn>
 ```
 
 This command restores the branch `main` to an earlier timestamp in it's own history, saving to a backup branch called `main_restore_backup_2024-02-20`
 
 ```bash shouldWrap
-neonctl branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06   
+neonctl branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06
 ```
 
 Results of the operation:

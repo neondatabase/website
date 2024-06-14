@@ -6,23 +6,23 @@ The columns of the information schema views use special data types that are defi
 
 These types are:
 
-* `cardinal_number`
+- `cardinal_number`
 
   A nonnegative integer.
 
-* `character_data`
+- `character_data`
 
   A character string (without specific maximum length).
 
-* `sql_identifier`
+- `sql_identifier`
 
   A character string. This type is used for SQL identifiers, the type `character_data` is used for any other kind of text data.
 
-* `time_stamp`
+- `time_stamp`
 
   A domain over the type `timestamp with time zone`
 
-* `yes_or_no`
+- `yes_or_no`
 
   A character string domain that contains either `YES` or `NO`. This is used to represent Boolean (true/false) data in the information schema. (The information schema was invented before the type `boolean` was added to the SQL standard, so this convention is necessary to keep the information schema backward compatible.)
 

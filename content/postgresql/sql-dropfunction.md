@@ -21,31 +21,31 @@ DROP FUNCTION [ IF EXISTS ] name [ ( [ [ argmode ] [ argname ] argtype [, ...] ]
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the function does not exist. A notice is issued in this case.
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of an existing function. If no argument list is specified, the name must be unique in its schema.
 
-* *`argmode`*
+- _`argmode`_
 
   The mode of an argument: `IN`, `OUT`, `INOUT`, or `VARIADIC`. If omitted, the default is `IN`. Note that `DROP FUNCTION` does not actually pay any attention to `OUT` arguments, since only the input arguments are needed to determine the function's identity. So it is sufficient to list the `IN`, `INOUT`, and `VARIADIC` arguments.
 
-* *`argname`*
+- _`argname`_
 
   The name of an argument. Note that `DROP FUNCTION` does not actually pay any attention to argument names, since only the argument data types are needed to determine the function's identity.
 
-* *`argtype`*
+- _`argtype`_
 
   The data type(s) of the function's arguments (optionally schema-qualified), if any.
 
-* `CASCADE`
+- `CASCADE`
 
   Automatically drop objects that depend on the function (such as operators or triggers), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend)).
 
-* `RESTRICT`
+- `RESTRICT`
 
   Refuse to drop the function if any objects depend on it. This is the default.
 
@@ -85,11 +85,11 @@ which refers to a function with zero arguments, whereas the first variant can re
 
 This command conforms to the SQL standard, with these PostgreSQL extensions:
 
-* The standard only allows one function to be dropped per command.
+- The standard only allows one function to be dropped per command.
 
-* The `IF EXISTS` option
+- The `IF EXISTS` option
 
-* The ability to specify argument modes and names
+- The ability to specify argument modes and names
 
 [#id](#id-1.9.3.114.9)
 

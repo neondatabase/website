@@ -2,8 +2,8 @@
 
 ## 70.4. Implementation [#](#GIN-IMPLEMENTATION)
 
-* [70.4.1. GIN Fast Update Technique](gin-implementation#GIN-FAST-UPDATE)
-* [70.4.2. Partial Match Algorithm](gin-implementation#GIN-PARTIAL-MATCH)
+- [70.4.1. GIN Fast Update Technique](gin-implementation#GIN-FAST-UPDATE)
+- [70.4.2. Partial Match Algorithm](gin-implementation#GIN-PARTIAL-MATCH)
 
 Internally, a GIN index contains a B-tree index constructed over keys, where each key is an element of one or more indexed items (a member of an array, for example) and where each tuple in a leaf page contains either a pointer to a B-tree of heap pointers (a “posting tree”), or a simple list of heap pointers (a “posting list”) when the list is small enough to fit into a single index tuple along with the key value. [Figure 70.1](gin-implementation#GIN-INTERNALS-FIGURE) illustrates these components of a GIN index.
 
@@ -20,7 +20,7 @@ Multicolumn GIN indexes are implemented by building a single B-tree over composi
 
 ### 70.4.1. GIN Fast Update Technique [#](#GIN-FAST-UPDATE)
 
-Updating a GIN index tends to be slow because of the intrinsic nature of inverted indexes: inserting or updating one heap row can cause many inserts into the index (one for each key extracted from the indexed item). GIN is capable of postponing much of this work by inserting new tuples into a temporary, unsorted list of pending entries. When the table is vacuumed or autoanalyzed, or when `gin_clean_pending_list` function is called, or if the pending list becomes larger than [gin\_pending\_list\_limit](runtime-config-client#GUC-GIN-PENDING-LIST-LIMIT), the entries are moved to the main GIN data structure using the same bulk insert techniques used during initial index creation. This greatly improves GIN index update speed, even counting the additional vacuum overhead. Moreover the overhead work can be done by a background process instead of in foreground query processing.
+Updating a GIN index tends to be slow because of the intrinsic nature of inverted indexes: inserting or updating one heap row can cause many inserts into the index (one for each key extracted from the indexed item). GIN is capable of postponing much of this work by inserting new tuples into a temporary, unsorted list of pending entries. When the table is vacuumed or autoanalyzed, or when `gin_clean_pending_list` function is called, or if the pending list becomes larger than [gin_pending_list_limit](runtime-config-client#GUC-GIN-PENDING-LIST-LIMIT), the entries are moved to the main GIN data structure using the same bulk insert techniques used during initial index creation. This greatly improves GIN index update speed, even counting the additional vacuum overhead. Moreover the overhead work can be done by a background process instead of in foreground query processing.
 
 The main disadvantage of this approach is that searches must scan the list of pending entries in addition to searching the regular index, and so a large list of pending entries will slow searches significantly. Another disadvantage is that, while most updates are fast, an update that causes the pending list to become “too large” will incur an immediate cleanup cycle and thus be much slower than other updates. Proper use of autovacuum can minimize both of these problems.
 

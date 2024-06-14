@@ -2,16 +2,14 @@
 
 ## 8.16. Composite Types [#](#ROWTYPES)
 
-  * [8.16.1. Declaration of Composite Types](rowtypes#ROWTYPES-DECLARING)
-  * [8.16.2. Constructing Composite Values](rowtypes#ROWTYPES-CONSTRUCTING)
-  * [8.16.3. Accessing Composite Types](rowtypes#ROWTYPES-ACCESSING)
-  * [8.16.4. Modifying Composite Types](rowtypes#ROWTYPES-MODIFYING)
-  * [8.16.5. Using Composite Types in Queries](rowtypes#ROWTYPES-USAGE)
-  * [8.16.6. Composite Type Input and Output Syntax](rowtypes#ROWTYPES-IO-SYNTAX)
+- [8.16.1. Declaration of Composite Types](rowtypes#ROWTYPES-DECLARING)
+- [8.16.2. Constructing Composite Values](rowtypes#ROWTYPES-CONSTRUCTING)
+- [8.16.3. Accessing Composite Types](rowtypes#ROWTYPES-ACCESSING)
+- [8.16.4. Modifying Composite Types](rowtypes#ROWTYPES-MODIFYING)
+- [8.16.5. Using Composite Types in Queries](rowtypes#ROWTYPES-USAGE)
+- [8.16.6. Composite Type Input and Output Syntax](rowtypes#ROWTYPES-IO-SYNTAX)
 
-
-
-A *composite type* represents the structure of a row or record; it is essentially just a list of field names and their data types. PostgreSQL allows composite types to be used in many of the same ways that simple types can be used. For example, a column of a table can be declared to be of a composite type.
+A _composite type_ represents the structure of a row or record; it is essentially just a list of field names and their data types. PostgreSQL allows composite types to be used in many of the same ways that simple types can be used. For example, a column of a table can be declared to be of a composite type.
 
 [#id](#ROWTYPES-DECLARING)
 
@@ -64,13 +62,11 @@ CREATE TABLE inventory_item (
 );
 ```
 
-then the same `inventory_item` composite type shown above would come into being as a byproduct, and could be used just as above. Note however an important restriction of the current implementation: since no constraints are associated with a composite type, the constraints shown in the table definition *do not apply* to values of the composite type outside the table. (To work around this, create a [**](glossary#GLOSSARY-DOMAIN)*[domain](glossary#GLOSSARY-DOMAIN)* over the composite type, and apply the desired constraints as `CHECK` constraints of the domain.)
+then the same `inventory_item` composite type shown above would come into being as a byproduct, and could be used just as above. Note however an important restriction of the current implementation: since no constraints are associated with a composite type, the constraints shown in the table definition _do not apply_ to values of the composite type outside the table. (To work around this, create a [\*\*](glossary#GLOSSARY-DOMAIN)_[domain](glossary#GLOSSARY-DOMAIN)_ over the composite type, and apply the desired constraints as `CHECK` constraints of the domain.)
 
 [#id](#ROWTYPES-CONSTRUCTING)
 
 ### 8.16.2. Constructing Composite Values [#](#ROWTYPES-CONSTRUCTING)
-
-
 
 To write a composite value as a literal constant, enclose the field values within parentheses and separate them by commas. You can put double quotes around any field value, and must do so if it contains commas or parentheses. (More details appear [below](rowtypes#ROWTYPES-IO-SYNTAX).) Thus, the general format of a composite constant is the following:
 
@@ -203,7 +199,7 @@ This query produces a single composite-valued column, so we might get output lik
 
 Note however that simple names are matched to column names before table names, so this example works only because there is no column named `c` in the query's tables.
 
-The ordinary qualified-column-name syntax *`table_name`*`.`*`column_name`* can be understood as applying [field selection](sql-expressions#FIELD-SELECTION) to the composite value of the table's current row. (For efficiency reasons, it's not actually implemented that way.)
+The ordinary qualified-column-name syntax _`table_name`_`.`_`column_name`_ can be understood as applying [field selection](sql-expressions#FIELD-SELECTION) to the composite value of the table's current row. (For efficiency reasons, it's not actually implemented that way.)
 
 When we write
 
@@ -243,7 +239,7 @@ SELECT m.* FROM some_table, LATERAL myfunc(x) AS m;
 
 Placing the function in a `LATERAL` `FROM` item keeps it from being invoked more than once per row. `m.*` is still expanded into `m.a, m.b, m.c`, but now those variables are just references to the output of the `FROM` item. (The `LATERAL` keyword is optional here, but we show it to clarify that the function is getting `x` from `some_table`.)
 
-The *`composite_value`*`.*` syntax results in column expansion of this kind when it appears at the top level of a [`SELECT` output list](queries-select-lists), a [`RETURNING` list](dml-returning) in `INSERT`/`UPDATE`/`DELETE`, a [`VALUES` clause](queries-values), or a [row constructor](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS). In all other contexts (including when nested inside one of those constructs), attaching `.*` to a composite value does not change the value, since it means “all columns” and so the same composite value is produced again. For example, if `somefunc()` accepts a composite-valued argument, these queries are the same:
+The _`composite_value`_`.*` syntax results in column expansion of this kind when it appears at the top level of a [`SELECT` output list](queries-select-lists), a [`RETURNING` list](dml-returning) in `INSERT`/`UPDATE`/`DELETE`, a [`VALUES` clause](queries-values), or a [row constructor](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS). In all other contexts (including when nested inside one of those constructs), attaching `.*` to a composite value does not change the value, since it means “all columns” and so the same composite value is produced again. For example, if `somefunc()` accepts a composite-valued argument, these queries are the same:
 
 ```
 SELECT somefunc(c.*) FROM inventory_item c;
@@ -269,7 +265,7 @@ SELECT * FROM inventory_item c ORDER BY (c.name, c.supplier_id, c.price);
 
 (The last case uses a row constructor with the key word `ROW` omitted.)
 
-Another special syntactical behavior associated with composite values is that we can use *functional notation* for extracting a field of a composite value. The simple way to explain this is that the notations `field(table)` and `table.field` are interchangeable. For example, these queries are equivalent:
+Another special syntactical behavior associated with composite values is that we can use _functional notation_ for extracting a field of a composite value. The simple way to explain this is that the notations `field(table)` and `table.field` are interchangeable. For example, these queries are equivalent:
 
 ```
 SELECT c.name FROM inventory_item c WHERE c.price > 1000;
@@ -302,7 +298,7 @@ The external text representation of a composite value consists of items that are
 
 the whitespace will be ignored if the field type is integer, but not if it is text.
 
-As shown previously, when writing a composite value you can write double quotes around any individual field value. You *must* do so if the field value would otherwise confuse the composite-value parser. In particular, fields containing parentheses, commas, double quotes, or backslashes must be double-quoted. To put a double quote or backslash in a quoted composite field value, precede it with a backslash. (Also, a pair of double quotes within a double-quoted field value is taken to represent a double quote character, analogously to the rules for single quotes in SQL literal strings.) Alternatively, you can avoid quoting and use backslash-escaping to protect all data characters that would otherwise be taken as composite syntax.
+As shown previously, when writing a composite value you can write double quotes around any individual field value. You _must_ do so if the field value would otherwise confuse the composite-value parser. In particular, fields containing parentheses, commas, double quotes, or backslashes must be double-quoted. To put a double quote or backslash in a quoted composite field value, precede it with a backslash. (Also, a pair of double quotes within a double-quoted field value is taken to represent a double quote character, analogously to the rules for single quotes in SQL literal strings.) Alternatively, you can avoid quoting and use backslash-escaping to protect all data characters that would otherwise be taken as composite syntax.
 
 A completely empty field value (no characters at all between the commas or parentheses) represents a NULL. To write a value that is an empty string rather than NULL, write `""`.
 

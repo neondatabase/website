@@ -2,7 +2,7 @@
 title: Neon CLI commands — auth
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-01-10T17:27:58.298Z'
+updatedOn: '2024-06-14T07:55:54.421Z'
 ---
 
 ## Before you begin
@@ -34,6 +34,7 @@ The authentication flow for the Neon CLI follows this order:
 - If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable setting is used.
 - If there is no `--api-key` option or `NEON_API_KEY` environment variable setting, the CLI looks for the `credentials.json` file created by the `neonctl auth` command.
 - If the credentials file is not found, the Neon CLI initiates the `neonctl auth` web authentication process.
+
 </Admonition>
 
 #### Options

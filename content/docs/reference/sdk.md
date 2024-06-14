@@ -1,7 +1,7 @@
 ---
 title: SDKs for the Neon API
 enableTableOfContents: true
-updatedOn: '2023-11-30T17:39:12.805Z'
+updatedOn: '2024-06-14T07:55:54.425Z'
 ---
 
 Neon provides support for the [@neondatabase/api-client](https://www.npmjs.com/package/@neondatabase/api-client) library, which is a wrapper for the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). It provides a convenient way to interact with the Neon API using TypeScript.
@@ -26,11 +26,11 @@ yarn add @neondatabase/api-client
 
 To get started with the `@neondatabase/api-client` library, follow these steps:
 
-1. Obtain an API key from the [Developer Settings](https://console.neon.tech/app/settings/api-keys) page in the Neon Console.
+1. Obtain an API key from the [Account settings](https://console.neon.tech/app/settings/api-keys) page in the Neon Console.
 
 2. Click **Generate new API key**.
 
-3. Enter name for your API key and click **Create**.
+3. Enter a name for your API key and click **Create**.
 
 4. Save your API key to a secure location that enables you to pass it to your code.
 
@@ -42,18 +42,18 @@ To get started with the `@neondatabase/api-client` library, follow these steps:
 
 6. Create an instance of the API client by calling the `createApiClient` function:
 
-    ```typescript
-    const apiClient = createApiClient({
-    apiKey: 'your-api-key',
-    });
-    ```
+   ```typescript
+   const apiClient = createApiClient({
+     apiKey: 'your-api-key',
+   });
+   ```
 
 7. Use the `apiClient` instance to make API calls. For example:
 
-    ```typescript
-    const response = await apiClient.listProjects({});
-    console.log(response);
-    ```
+   ```typescript
+   const response = await apiClient.listProjects({});
+   console.log(response);
+   ```
 
 ## Community SDKs
 

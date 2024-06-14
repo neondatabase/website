@@ -4,7 +4,7 @@ subtitle: Create a Neon branch to test queries before running them in production
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/test-queries
-updatedOn: '2024-01-08T20:02:33.920Z'
+updatedOn: '2024-06-14T07:55:54.386Z'
 ---
 
 Complex queries that modify data or alter schemas have the potential to be destructive. It is advisable to test these types of queries before running them in production. On other database systems, testing potentially destructive queries can be time and resource intensive. For example, testing may involve setting up a separate database instance and replicating data. With Neon, you can instantly create a database branch with a full copy-on-write clone of your production data in just a few clicks. When you finish testing, you can remove the branch just as easily.
@@ -12,8 +12,8 @@ Complex queries that modify data or alter schemas have the potential to be destr
 This guide walks you through creating a branch of your production data, testing a potentially destructive query, and deleting the branch when you are finished.
 
 1. [Create a test branch](#create-a-test-branch)
-3. [Test your query](#test-your-query)
-4. [Delete the test branch](#delete-the-test-branch)
+2. [Test your query](#test-your-query)
+3. [Delete the test branch](#delete-the-test-branch)
 
 For the purpose of this guide, let's assume you have a database in Neon with the following table and data:
 
@@ -41,8 +41,8 @@ VALUES
 
 1. In the Neon Console, select your project.
 2. Select **Branches**.
-3. Click **New Branch** to open the branch creation dialog.
-![Create branch dialog](/docs/manage/create_branch.png)
+3. Click **Create branch** to open the branch creation dialog.
+   ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch. This guide uses the name `my_test_branch`.
 5. Select a parent branch. Select the branch defined as your primary branch.
 6. Under **Include data up to**, select the **Current point in time** option to create a branch with the latest available data from the parent branch (the default).
@@ -99,8 +99,7 @@ When you finish testing your query, you can delete the test branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Select the test branch from the table.
-4. On the branch page, click the **More** drop-down menu and select **Delete**.
-4. On the confirmation dialog, click **Delete**.
+4. From the **Actions** menu on the branch overview page, select **Delete**.
 
 You can also delete a branch using the [Neon CLI](/docs/reference/cli-branches#delete) or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api).
 

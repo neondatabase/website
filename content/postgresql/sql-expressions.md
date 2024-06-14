@@ -2,56 +2,54 @@
 
 ## 4.2. Value Expressions [#](#SQL-EXPRESSIONS)
 
-  * [4.2.1. Column References](sql-expressions#SQL-EXPRESSIONS-COLUMN-REFS)
-  * [4.2.2. Positional Parameters](sql-expressions#SQL-EXPRESSIONS-PARAMETERS-POSITIONAL)
-  * [4.2.3. Subscripts](sql-expressions#SQL-EXPRESSIONS-SUBSCRIPTS)
-  * [4.2.4. Field Selection](sql-expressions#FIELD-SELECTION)
-  * [4.2.5. Operator Invocations](sql-expressions#SQL-EXPRESSIONS-OPERATOR-CALLS)
-  * [4.2.6. Function Calls](sql-expressions#SQL-EXPRESSIONS-FUNCTION-CALLS)
-  * [4.2.7. Aggregate Expressions](sql-expressions#SYNTAX-AGGREGATES)
-  * [4.2.8. Window Function Calls](sql-expressions#SYNTAX-WINDOW-FUNCTIONS)
-  * [4.2.9. Type Casts](sql-expressions#SQL-SYNTAX-TYPE-CASTS)
-  * [4.2.10. Collation Expressions](sql-expressions#SQL-SYNTAX-COLLATE-EXPRS)
-  * [4.2.11. Scalar Subqueries](sql-expressions#SQL-SYNTAX-SCALAR-SUBQUERIES)
-  * [4.2.12. Array Constructors](sql-expressions#SQL-SYNTAX-ARRAY-CONSTRUCTORS)
-  * [4.2.13. Row Constructors](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS)
-  * [4.2.14. Expression Evaluation Rules](sql-expressions#SYNTAX-EXPRESS-EVAL)
+- [4.2.1. Column References](sql-expressions#SQL-EXPRESSIONS-COLUMN-REFS)
+- [4.2.2. Positional Parameters](sql-expressions#SQL-EXPRESSIONS-PARAMETERS-POSITIONAL)
+- [4.2.3. Subscripts](sql-expressions#SQL-EXPRESSIONS-SUBSCRIPTS)
+- [4.2.4. Field Selection](sql-expressions#FIELD-SELECTION)
+- [4.2.5. Operator Invocations](sql-expressions#SQL-EXPRESSIONS-OPERATOR-CALLS)
+- [4.2.6. Function Calls](sql-expressions#SQL-EXPRESSIONS-FUNCTION-CALLS)
+- [4.2.7. Aggregate Expressions](sql-expressions#SYNTAX-AGGREGATES)
+- [4.2.8. Window Function Calls](sql-expressions#SYNTAX-WINDOW-FUNCTIONS)
+- [4.2.9. Type Casts](sql-expressions#SQL-SYNTAX-TYPE-CASTS)
+- [4.2.10. Collation Expressions](sql-expressions#SQL-SYNTAX-COLLATE-EXPRS)
+- [4.2.11. Scalar Subqueries](sql-expressions#SQL-SYNTAX-SCALAR-SUBQUERIES)
+- [4.2.12. Array Constructors](sql-expressions#SQL-SYNTAX-ARRAY-CONSTRUCTORS)
+- [4.2.13. Row Constructors](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS)
+- [4.2.14. Expression Evaluation Rules](sql-expressions#SYNTAX-EXPRESS-EVAL)
 
-
-
-Value expressions are used in a variety of contexts, such as in the target list of the `SELECT` command, as new column values in `INSERT` or `UPDATE`, or in search conditions in a number of commands. The result of a value expression is sometimes called a *scalar*, to distinguish it from the result of a table expression (which is a table). Value expressions are therefore also called *scalar expressions* (or even simply *expressions*). The expression syntax allows the calculation of values from primitive parts using arithmetic, logical, set, and other operations.
+Value expressions are used in a variety of contexts, such as in the target list of the `SELECT` command, as new column values in `INSERT` or `UPDATE`, or in search conditions in a number of commands. The result of a value expression is sometimes called a _scalar_, to distinguish it from the result of a table expression (which is a table). Value expressions are therefore also called _scalar expressions_ (or even simply _expressions_). The expression syntax allows the calculation of values from primitive parts using arithmetic, logical, set, and other operations.
 
 A value expression is one of the following:
 
-* A constant or literal value
+- A constant or literal value
 
-* A column reference
+- A column reference
 
-* A positional parameter reference, in the body of a function definition or prepared statement
+- A positional parameter reference, in the body of a function definition or prepared statement
 
-* A subscripted expression
+- A subscripted expression
 
-* A field selection expression
+- A field selection expression
 
-* An operator invocation
+- An operator invocation
 
-* A function call
+- A function call
 
-* An aggregate expression
+- An aggregate expression
 
-* A window function call
+- A window function call
 
-* A type cast
+- A type cast
 
-* A collation expression
+- A collation expression
 
-* A scalar subquery
+- A scalar subquery
 
-* An array constructor
+- An array constructor
 
-* A row constructor
+- A row constructor
 
-* Another value expression in parentheses (used to group subexpressions and override precedence)
+- Another value expression in parentheses (used to group subexpressions and override precedence)
 
 In addition to this list, there are a number of constructs that can be classified as an expression but do not follow any general syntax rules. These generally have the semantics of a function or operator and are explained in the appropriate location in [Chapter 9](functions). An example is the `IS NULL` clause.
 
@@ -61,21 +59,17 @@ We have already discussed constants in [Section 4.1.2](sql-syntax-lexical#SQL-S
 
 ### 4.2.1. Column References [#](#SQL-EXPRESSIONS-COLUMN-REFS)
 
-
-
 A column can be referenced in the form:
 
 ```
 correlation.columnname
 ```
 
-*`correlation`* is the name of a table (possibly qualified with a schema name), or an alias for a table defined by means of a `FROM` clause. The correlation name and separating dot can be omitted if the column name is unique across all the tables being used in the current query. (See also [Chapter 7](queries).)
+_`correlation`_ is the name of a table (possibly qualified with a schema name), or an alias for a table defined by means of a `FROM` clause. The correlation name and separating dot can be omitted if the column name is unique across all the tables being used in the current query. (See also [Chapter 7](queries).)
 
 [#id](#SQL-EXPRESSIONS-PARAMETERS-POSITIONAL)
 
 ### 4.2.2. Positional Parameters [#](#SQL-EXPRESSIONS-PARAMETERS-POSITIONAL)
-
-
 
 A positional parameter reference is used to indicate a value that is supplied externally to an SQL statement. Parameters are used in SQL function definitions and in prepared queries. Some client libraries also support specifying data values separately from the SQL command string, in which case parameters are used to refer to the out-of-line data values. The form of a parameter reference is:
 
@@ -97,8 +91,6 @@ Here the `$1` references the value of the first function argument whenever the f
 
 ### 4.2.3. Subscripts [#](#SQL-EXPRESSIONS-SUBSCRIPTS)
 
-
-
 If an expression yields a value of an array type, then a specific element of the array value can be extracted by writing
 
 ```
@@ -111,9 +103,9 @@ or multiple adjacent elements (an “array slice”) can be extracted by writing
 expression[lower_subscript:upper_subscript]
 ```
 
-(Here, the brackets `[ ]` are meant to appear literally.) Each *`subscript`* is itself an expression, which will be rounded to the nearest integer value.
+(Here, the brackets `[ ]` are meant to appear literally.) Each _`subscript`_ is itself an expression, which will be rounded to the nearest integer value.
 
-In general the array *`expression`* must be parenthesized, but the parentheses can be omitted when the expression to be subscripted is just a column reference or positional parameter. Also, multiple subscripts can be concatenated when the original array is multidimensional. For example:
+In general the array _`expression`_ must be parenthesized, but the parentheses can be omitted when the expression to be subscripted is just a column reference or positional parameter. Also, multiple subscripts can be concatenated when the original array is multidimensional. For example:
 
 ```
 mytable.arraycolumn[4]
@@ -128,15 +120,13 @@ The parentheses in the last example are required. See [Section 8.15](arrays) fo
 
 ### 4.2.4. Field Selection [#](#FIELD-SELECTION)
 
-
-
 If an expression yields a value of a composite type (row type), then a specific field of the row can be extracted by writing
 
 ```
 expression.fieldname
 ```
 
-In general the row *`expression`* must be parenthesized, but the parentheses can be omitted when the expression to be selected from is just a table reference or positional parameter. For example:
+In general the row _`expression`_ must be parenthesized, but the parentheses can be omitted when the expression to be selected from is just a table reference or positional parameter. For example:
 
 ```
 mytable.mycolumn
@@ -165,16 +155,14 @@ This notation behaves differently depending on context; see [Section 8.16.5](ro
 
 ### 4.2.5. Operator Invocations [#](#SQL-EXPRESSIONS-OPERATOR-CALLS)
 
-
-
 There are two possible syntaxes for an operator invocation:
 
 |                                                                    |
 | ------------------------------------------------------------------ |
-| *`expression`* *`operator`* *`expression`* (binary infix operator) |
-| *`operator`* *`expression`* (unary prefix operator)                |
+| _`expression`_ _`operator`_ _`expression`_ (binary infix operator) |
+| _`operator`_ _`expression`_ (unary prefix operator)                |
 
-where the *`operator`* token follows the syntax rules of [Section 4.1.3](sql-syntax-lexical#SQL-SYNTAX-OPERATORS), or is one of the key words `AND`, `OR`, and `NOT`, or is a qualified operator name in the form:
+where the _`operator`_ token follows the syntax rules of [Section 4.1.3](sql-syntax-lexical#SQL-SYNTAX-OPERATORS), or is one of the key words `AND`, `OR`, and `NOT`, or is a qualified operator name in the form:
 
 ```
 OPERATOR(schema.operatorname)
@@ -185,8 +173,6 @@ Which particular operators exist and whether they are unary or binary depends on
 [#id](#SQL-EXPRESSIONS-FUNCTION-CALLS)
 
 ### 4.2.6. Function Calls [#](#SQL-EXPRESSIONS-FUNCTION-CALLS)
-
-
 
 The syntax for a function call is the name of a function (possibly qualified with a schema name), followed by its argument list enclosed in parentheses:
 
@@ -214,9 +200,7 @@ A function that takes a single argument of composite type can optionally be call
 
 ### 4.2.7. Aggregate Expressions [#](#SYNTAX-AGGREGATES)
 
-
-
-An *aggregate expression* represents the application of an aggregate function across the rows selected by a query. An aggregate function reduces multiple inputs to a single output value, such as the sum or average of the inputs. The syntax of an aggregate expression is one of the following:
+An _aggregate expression_ represents the application of an aggregate function across the rows selected by a query. An aggregate function reduces multiple inputs to a single output value, such as the sum or average of the inputs. The syntax of an aggregate expression is one of the following:
 
 ```
 aggregate_name (expression [ , ... ] [ order_by_clause ] ) [ FILTER ( WHERE filter_clause ) ]
@@ -226,15 +210,15 @@ aggregate_name ( * ) [ FILTER ( WHERE filter_clause ) ]
 aggregate_name ( [ expression [ , ... ] ] ) WITHIN GROUP ( order_by_clause ) [ FILTER ( WHERE filter_clause ) ]
 ```
 
-where *`aggregate_name`* is a previously defined aggregate (possibly qualified with a schema name) and *`expression`* is any value expression that does not itself contain an aggregate expression or a window function call. The optional *`order_by_clause`* and *`filter_clause`* are described below.
+where _`aggregate_name`_ is a previously defined aggregate (possibly qualified with a schema name) and _`expression`_ is any value expression that does not itself contain an aggregate expression or a window function call. The optional _`order_by_clause`_ and _`filter_clause`_ are described below.
 
-The first form of aggregate expression invokes the aggregate once for each input row. The second form is the same as the first, since `ALL` is the default. The third form invokes the aggregate once for each distinct value of the expression (or distinct set of values, for multiple expressions) found in the input rows. The fourth form invokes the aggregate once for each input row; since no particular input value is specified, it is generally only useful for the `count(*)` aggregate function. The last form is used with *ordered-set* aggregate functions, which are described below.
+The first form of aggregate expression invokes the aggregate once for each input row. The second form is the same as the first, since `ALL` is the default. The third form invokes the aggregate once for each distinct value of the expression (or distinct set of values, for multiple expressions) found in the input rows. The fourth form invokes the aggregate once for each input row; since no particular input value is specified, it is generally only useful for the `count(*)` aggregate function. The last form is used with _ordered-set_ aggregate functions, which are described below.
 
 Most aggregate functions ignore null inputs, so that rows in which one or more of the expression(s) yield null are discarded. This can be assumed to be true, unless otherwise specified, for all built-in aggregates.
 
 For example, `count(*)` yields the total number of input rows; `count(f1)` yields the number of input rows in which `f1` is non-null, since `count` ignores nulls; and `count(distinct f1)` yields the number of distinct non-null values of `f1`.
 
-Ordinarily, the input rows are fed to the aggregate function in an unspecified order. In many cases this does not matter; for example, `min` produces the same result no matter what order it receives the inputs in. However, some aggregate functions (such as `array_agg` and `string_agg`) produce results that depend on the ordering of the input rows. When using such an aggregate, the optional *`order_by_clause`* can be used to specify the desired ordering. The *`order_by_clause`* has the same syntax as for a query-level `ORDER BY` clause, as described in [Section 7.5](queries-order), except that its expressions are always just expressions and cannot be output-column names or numbers. For example:
+Ordinarily, the input rows are fed to the aggregate function in an unspecified order. In many cases this does not matter; for example, `min` produces the same result no matter what order it receives the inputs in. However, some aggregate functions (such as `array_agg` and `string_agg`) produce results that depend on the ordering of the input rows. When using such an aggregate, the optional _`order_by_clause`_ can be used to specify the desired ordering. The _`order_by_clause`_ has the same syntax as for a query-level `ORDER BY` clause, as described in [Section 7.5](queries-order), except that its expressions are always just expressions and cannot be output-column names or numbers. For example:
 
 ```
 SELECT array_agg(a ORDER BY b DESC) FROM table;
@@ -254,13 +238,13 @@ SELECT string_agg(a ORDER BY a, ',') FROM table;  -- incorrect
 
 The latter is syntactically valid, but it represents a call of a single-argument aggregate function with two `ORDER BY` keys (the second one being rather useless since it's a constant).
 
-If `DISTINCT` is specified in addition to an *`order_by_clause`*, then all the `ORDER BY` expressions must match regular arguments of the aggregate; that is, you cannot sort on an expression that is not included in the `DISTINCT` list.
+If `DISTINCT` is specified in addition to an _`order_by_clause`_, then all the `ORDER BY` expressions must match regular arguments of the aggregate; that is, you cannot sort on an expression that is not included in the `DISTINCT` list.
 
 ### Note
 
 The ability to specify both `DISTINCT` and `ORDER BY` in an aggregate function is a PostgreSQL extension.
 
-Placing `ORDER BY` within the aggregate's regular argument list, as described so far, is used when ordering the input rows for general-purpose and statistical aggregates, for which ordering is optional. There is a subclass of aggregate functions called *ordered-set aggregates* for which an *`order_by_clause`* is *required*, usually because the aggregate's computation is only sensible in terms of a specific ordering of its input rows. Typical examples of ordered-set aggregates include rank and percentile calculations. For an ordered-set aggregate, the *`order_by_clause`* is written inside `WITHIN GROUP (...)`, as shown in the final syntax alternative above. The expressions in the *`order_by_clause`* are evaluated once per input row just like regular aggregate arguments, sorted as per the *`order_by_clause`*'s requirements, and fed to the aggregate function as input arguments. (This is unlike the case for a non-`WITHIN GROUP` *`order_by_clause`*, which is not treated as argument(s) to the aggregate function.) The argument expressions preceding `WITHIN GROUP`, if any, are called *direct arguments* to distinguish them from the *aggregated arguments* listed in the *`order_by_clause`*. Unlike regular aggregate arguments, direct arguments are evaluated only once per aggregate call, not once per input row. This means that they can contain variables only if those variables are grouped by `GROUP BY`; this restriction is the same as if the direct arguments were not inside an aggregate expression at all. Direct arguments are typically used for things like percentile fractions, which only make sense as a single value per aggregation calculation. The direct argument list can be empty; in this case, write just `()` not `(*)`. (PostgreSQL will actually accept either spelling, but only the first way conforms to the SQL standard.)
+Placing `ORDER BY` within the aggregate's regular argument list, as described so far, is used when ordering the input rows for general-purpose and statistical aggregates, for which ordering is optional. There is a subclass of aggregate functions called _ordered-set aggregates_ for which an _`order_by_clause`_ is _required_, usually because the aggregate's computation is only sensible in terms of a specific ordering of its input rows. Typical examples of ordered-set aggregates include rank and percentile calculations. For an ordered-set aggregate, the _`order_by_clause`_ is written inside `WITHIN GROUP (...)`, as shown in the final syntax alternative above. The expressions in the _`order_by_clause`_ are evaluated once per input row just like regular aggregate arguments, sorted as per the _`order_by_clause`_'s requirements, and fed to the aggregate function as input arguments. (This is unlike the case for a non-`WITHIN GROUP` _`order_by_clause`_, which is not treated as argument(s) to the aggregate function.) The argument expressions preceding `WITHIN GROUP`, if any, are called _direct arguments_ to distinguish them from the _aggregated arguments_ listed in the _`order_by_clause`_. Unlike regular aggregate arguments, direct arguments are evaluated only once per aggregate call, not once per input row. This means that they can contain variables only if those variables are grouped by `GROUP BY`; this restriction is the same as if the direct arguments were not inside an aggregate expression at all. Direct arguments are typically used for things like percentile fractions, which only make sense as a single value per aggregation calculation. The direct argument list can be empty; in this case, write just `()` not `(*)`. (PostgreSQL will actually accept either spelling, but only the first way conforms to the SQL standard.)
 
 An example of an ordered-set aggregate call is:
 
@@ -273,7 +257,7 @@ SELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY income) FROM households;
 
 which obtains the 50th percentile, or median, value of the `income` column from table `households`. Here, `0.5` is a direct argument; it would make no sense for the percentile fraction to be a value varying across rows.
 
-If `FILTER` is specified, then only the input rows for which the *`filter_clause`* evaluates to true are fed to the aggregate function; other rows are discarded. For example:
+If `FILTER` is specified, then only the input rows for which the _`filter_clause`_ evaluates to true are fed to the aggregate function; other rows are discarded. For example:
 
 ```
 SELECT
@@ -290,15 +274,13 @@ The predefined aggregate functions are described in [Section 9.21](functions-ag
 
 An aggregate expression can only appear in the result list or `HAVING` clause of a `SELECT` command. It is forbidden in other clauses, such as `WHERE`, because those clauses are logically evaluated before the results of aggregates are formed.
 
-When an aggregate expression appears in a subquery (see [Section 4.2.11](sql-expressions#SQL-SYNTAX-SCALAR-SUBQUERIES) and [Section 9.23](functions-subquery)), the aggregate is normally evaluated over the rows of the subquery. But an exception occurs if the aggregate's arguments (and *`filter_clause`* if any) contain only outer-level variables: the aggregate then belongs to the nearest such outer level, and is evaluated over the rows of that query. The aggregate expression as a whole is then an outer reference for the subquery it appears in, and acts as a constant over any one evaluation of that subquery. The restriction about appearing only in the result list or `HAVING` clause applies with respect to the query level that the aggregate belongs to.
+When an aggregate expression appears in a subquery (see [Section 4.2.11](sql-expressions#SQL-SYNTAX-SCALAR-SUBQUERIES) and [Section 9.23](functions-subquery)), the aggregate is normally evaluated over the rows of the subquery. But an exception occurs if the aggregate's arguments (and _`filter_clause`_ if any) contain only outer-level variables: the aggregate then belongs to the nearest such outer level, and is evaluated over the rows of that query. The aggregate expression as a whole is then an outer reference for the subquery it appears in, and acts as a constant over any one evaluation of that subquery. The restriction about appearing only in the result list or `HAVING` clause applies with respect to the query level that the aggregate belongs to.
 
 [#id](#SYNTAX-WINDOW-FUNCTIONS)
 
 ### 4.2.8. Window Function Calls [#](#SYNTAX-WINDOW-FUNCTIONS)
 
-
-
-A *window function call* represents the application of an aggregate-like function over some portion of the rows selected by a query. Unlike non-window aggregate calls, this is not tied to grouping of the selected rows into a single output row — each row remains separate in the query output. However the window function has access to all the rows that would be part of the current row's group according to the grouping specification (`PARTITION BY` list) of the window function call. The syntax of a window function call is one of the following:
+A _window function call_ represents the application of an aggregate-like function over some portion of the rows selected by a query. Unlike non-window aggregate calls, this is not tied to grouping of the selected rows into a single output row — each row remains separate in the query output. However the window function has access to all the rows that would be part of the current row's group according to the grouping specification (`PARTITION BY` list) of the window function call. The syntax of a window function call is one of the following:
 
 ```
 function_name ([expression [, expression ... ]]) [ FILTER ( WHERE filter_clause ) ] OVER window_name
@@ -307,7 +289,7 @@ function_name ( * ) [ FILTER ( WHERE filter_clause ) ] OVER window_name
 function_name ( * ) [ FILTER ( WHERE filter_clause ) ] OVER ( window_definition )
 ```
 
-where *`window_definition`* has the syntax
+where _`window_definition`_ has the syntax
 
 ```
 [ existing_window_name ]
@@ -316,14 +298,14 @@ where *`window_definition`* has the syntax
 [ frame_clause ]
 ```
 
-The optional *`frame_clause`* can be one of
+The optional _`frame_clause`_ can be one of
 
 ```
 { RANGE | ROWS | GROUPS } frame_start [ frame_exclusion ]
 { RANGE | ROWS | GROUPS } BETWEEN frame_start AND frame_end [ frame_exclusion ]
 ```
 
-where *`frame_start`* and *`frame_end`* can be one of
+where _`frame_start`_ and _`frame_end`_ can be one of
 
 ```
 UNBOUNDED PRECEDING
@@ -333,7 +315,7 @@ offset FOLLOWING
 UNBOUNDED FOLLOWING
 ```
 
-and *`frame_exclusion`* can be one of
+and _`frame_exclusion`_ can be one of
 
 ```
 EXCLUDE CURRENT ROW
@@ -342,37 +324,37 @@ EXCLUDE TIES
 EXCLUDE NO OTHERS
 ```
 
-Here, *`expression`* represents any value expression that does not itself contain window function calls.
+Here, _`expression`_ represents any value expression that does not itself contain window function calls.
 
-*`window_name`* is a reference to a named window specification defined in the query's `WINDOW` clause. Alternatively, a full *`window_definition`* can be given within parentheses, using the same syntax as for defining a named window in the `WINDOW` clause; see the [SELECT](sql-select) reference page for details. It's worth pointing out that `OVER wname` is not exactly equivalent to `OVER (wname ...)`; the latter implies copying and modifying the window definition, and will be rejected if the referenced window specification includes a frame clause.
+_`window_name`_ is a reference to a named window specification defined in the query's `WINDOW` clause. Alternatively, a full _`window_definition`_ can be given within parentheses, using the same syntax as for defining a named window in the `WINDOW` clause; see the [SELECT](sql-select) reference page for details. It's worth pointing out that `OVER wname` is not exactly equivalent to `OVER (wname ...)`; the latter implies copying and modifying the window definition, and will be rejected if the referenced window specification includes a frame clause.
 
-The `PARTITION BY` clause groups the rows of the query into *partitions*, which are processed separately by the window function. `PARTITION BY` works similarly to a query-level `GROUP BY` clause, except that its expressions are always just expressions and cannot be output-column names or numbers. Without `PARTITION BY`, all rows produced by the query are treated as a single partition. The `ORDER BY` clause determines the order in which the rows of a partition are processed by the window function. It works similarly to a query-level `ORDER BY` clause, but likewise cannot use output-column names or numbers. Without `ORDER BY`, rows are processed in an unspecified order.
+The `PARTITION BY` clause groups the rows of the query into _partitions_, which are processed separately by the window function. `PARTITION BY` works similarly to a query-level `GROUP BY` clause, except that its expressions are always just expressions and cannot be output-column names or numbers. Without `PARTITION BY`, all rows produced by the query are treated as a single partition. The `ORDER BY` clause determines the order in which the rows of a partition are processed by the window function. It works similarly to a query-level `ORDER BY` clause, but likewise cannot use output-column names or numbers. Without `ORDER BY`, rows are processed in an unspecified order.
 
-The *`frame_clause`* specifies the set of rows constituting the *window frame*, which is a subset of the current partition, for those window functions that act on the frame instead of the whole partition. The set of rows in the frame can vary depending on which row is the current row. The frame can be specified in `RANGE`, `ROWS` or `GROUPS` mode; in each case, it runs from the *`frame_start`* to the *`frame_end`*. If *`frame_end`* is omitted, the end defaults to `CURRENT ROW`.
+The _`frame_clause`_ specifies the set of rows constituting the _window frame_, which is a subset of the current partition, for those window functions that act on the frame instead of the whole partition. The set of rows in the frame can vary depending on which row is the current row. The frame can be specified in `RANGE`, `ROWS` or `GROUPS` mode; in each case, it runs from the _`frame_start`_ to the _`frame_end`_. If _`frame_end`_ is omitted, the end defaults to `CURRENT ROW`.
 
-A *`frame_start`* of `UNBOUNDED PRECEDING` means that the frame starts with the first row of the partition, and similarly a *`frame_end`* of `UNBOUNDED FOLLOWING` means that the frame ends with the last row of the partition.
+A _`frame_start`_ of `UNBOUNDED PRECEDING` means that the frame starts with the first row of the partition, and similarly a _`frame_end`_ of `UNBOUNDED FOLLOWING` means that the frame ends with the last row of the partition.
 
-In `RANGE` or `GROUPS` mode, a *`frame_start`* of `CURRENT ROW` means the frame starts with the current row's first *peer* row (a row that the window's `ORDER BY` clause sorts as equivalent to the current row), while a *`frame_end`* of `CURRENT ROW` means the frame ends with the current row's last peer row. In `ROWS` mode, `CURRENT ROW` simply means the current row.
+In `RANGE` or `GROUPS` mode, a _`frame_start`_ of `CURRENT ROW` means the frame starts with the current row's first _peer_ row (a row that the window's `ORDER BY` clause sorts as equivalent to the current row), while a _`frame_end`_ of `CURRENT ROW` means the frame ends with the current row's last peer row. In `ROWS` mode, `CURRENT ROW` simply means the current row.
 
-In the *`offset`* `PRECEDING` and *`offset`* `FOLLOWING` frame options, the *`offset`* must be an expression not containing any variables, aggregate functions, or window functions. The meaning of the *`offset`* depends on the frame mode:
+In the _`offset`_ `PRECEDING` and _`offset`_ `FOLLOWING` frame options, the _`offset`_ must be an expression not containing any variables, aggregate functions, or window functions. The meaning of the _`offset`_ depends on the frame mode:
 
-* In `ROWS` mode, the *`offset`* must yield a non-null, non-negative integer, and the option means that the frame starts or ends the specified number of rows before or after the current row.
+- In `ROWS` mode, the _`offset`_ must yield a non-null, non-negative integer, and the option means that the frame starts or ends the specified number of rows before or after the current row.
 
-* In `GROUPS` mode, the *`offset`* again must yield a non-null, non-negative integer, and the option means that the frame starts or ends the specified number of *peer groups* before or after the current row's peer group, where a peer group is a set of rows that are equivalent in the `ORDER BY` ordering. (There must be an `ORDER BY` clause in the window definition to use `GROUPS` mode.)
+- In `GROUPS` mode, the _`offset`_ again must yield a non-null, non-negative integer, and the option means that the frame starts or ends the specified number of _peer groups_ before or after the current row's peer group, where a peer group is a set of rows that are equivalent in the `ORDER BY` ordering. (There must be an `ORDER BY` clause in the window definition to use `GROUPS` mode.)
 
-* In `RANGE` mode, these options require that the `ORDER BY` clause specify exactly one column. The *`offset`* specifies the maximum difference between the value of that column in the current row and its value in preceding or following rows of the frame. The data type of the *`offset`* expression varies depending on the data type of the ordering column. For numeric ordering columns it is typically of the same type as the ordering column, but for datetime ordering columns it is an `interval`. For example, if the ordering column is of type `date` or `timestamp`, one could write `RANGE BETWEEN '1 day' PRECEDING AND '10 days' FOLLOWING`. The *`offset`* is still required to be non-null and non-negative, though the meaning of “non-negative” depends on its data type.
+- In `RANGE` mode, these options require that the `ORDER BY` clause specify exactly one column. The _`offset`_ specifies the maximum difference between the value of that column in the current row and its value in preceding or following rows of the frame. The data type of the _`offset`_ expression varies depending on the data type of the ordering column. For numeric ordering columns it is typically of the same type as the ordering column, but for datetime ordering columns it is an `interval`. For example, if the ordering column is of type `date` or `timestamp`, one could write `RANGE BETWEEN '1 day' PRECEDING AND '10 days' FOLLOWING`. The _`offset`_ is still required to be non-null and non-negative, though the meaning of “non-negative” depends on its data type.
 
 In any case, the distance to the end of the frame is limited by the distance to the end of the partition, so that for rows near the partition ends the frame might contain fewer rows than elsewhere.
 
 Notice that in both `ROWS` and `GROUPS` mode, `0 PRECEDING` and `0 FOLLOWING` are equivalent to `CURRENT ROW`. This normally holds in `RANGE` mode as well, for an appropriate data-type-specific meaning of “zero”.
 
-The *`frame_exclusion`* option allows rows around the current row to be excluded from the frame, even if they would be included according to the frame start and frame end options. `EXCLUDE CURRENT ROW` excludes the current row from the frame. `EXCLUDE GROUP` excludes the current row and its ordering peers from the frame. `EXCLUDE TIES` excludes any peers of the current row from the frame, but not the current row itself. `EXCLUDE NO OTHERS` simply specifies explicitly the default behavior of not excluding the current row or its peers.
+The _`frame_exclusion`_ option allows rows around the current row to be excluded from the frame, even if they would be included according to the frame start and frame end options. `EXCLUDE CURRENT ROW` excludes the current row from the frame. `EXCLUDE GROUP` excludes the current row and its ordering peers from the frame. `EXCLUDE TIES` excludes any peers of the current row from the frame, but not the current row itself. `EXCLUDE NO OTHERS` simply specifies explicitly the default behavior of not excluding the current row or its peers.
 
 The default framing option is `RANGE UNBOUNDED PRECEDING`, which is the same as `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`. With `ORDER BY`, this sets the frame to be all rows from the partition start up through the current row's last `ORDER BY` peer. Without `ORDER BY`, this means all rows of the partition are included in the window frame, since all rows become peers of the current row.
 
-Restrictions are that *`frame_start`* cannot be `UNBOUNDED FOLLOWING`, *`frame_end`* cannot be `UNBOUNDED PRECEDING`, and the *`frame_end`* choice cannot appear earlier in the above list of *`frame_start`* and *`frame_end`* options than the *`frame_start`* choice does — for example `RANGE BETWEEN CURRENT ROW AND offset PRECEDING` is not allowed. But, for example, `ROWS BETWEEN 7 PRECEDING AND 8 PRECEDING` is allowed, even though it would never select any rows.
+Restrictions are that _`frame_start`_ cannot be `UNBOUNDED FOLLOWING`, _`frame_end`_ cannot be `UNBOUNDED PRECEDING`, and the _`frame_end`_ choice cannot appear earlier in the above list of _`frame_start`_ and _`frame_end`_ options than the _`frame_start`_ choice does — for example `RANGE BETWEEN CURRENT ROW AND offset PRECEDING` is not allowed. But, for example, `ROWS BETWEEN 7 PRECEDING AND 8 PRECEDING` is allowed, even though it would never select any rows.
 
-If `FILTER` is specified, then only the input rows for which the *`filter_clause`* evaluates to true are fed to the window function; other rows are discarded. Only window functions that are aggregates accept a `FILTER` clause.
+If `FILTER` is specified, then only the input rows for which the _`filter_clause`_ evaluates to true are fed to the window function; other rows are discarded. Only window functions that are aggregates accept a `FILTER` clause.
 
 The built-in window functions are described in [Table 9.64](functions-window#FUNCTIONS-WINDOW-TABLE). Other window functions can be added by the user. Also, any built-in or user-defined general-purpose or statistical aggregate can be used as a window function. (Ordered-set and hypothetical-set aggregates cannot presently be used as window functions.)
 
@@ -385,8 +367,6 @@ More information about window functions can be found in [Section 3.5](tutorial-
 [#id](#SQL-SYNTAX-TYPE-CASTS)
 
 ### 4.2.9. Type Casts [#](#SQL-SYNTAX-TYPE-CASTS)
-
-
 
 A type cast specifies a conversion from one data type to another. PostgreSQL accepts two equivalent syntaxes for type casts:
 
@@ -417,15 +397,13 @@ The function-like syntax is in fact just a function call. When one of the two st
 
 ### 4.2.10. Collation Expressions [#](#SQL-SYNTAX-COLLATE-EXPRS)
 
-
-
 The `COLLATE` clause overrides the collation of an expression. It is appended to the expression it applies to:
 
 ```
 expr COLLATE collation
 ```
 
-where *`collation`* is a possibly schema-qualified identifier. The `COLLATE` clause binds tighter than operators; parentheses can be used when necessary.
+where _`collation`_ is a possibly schema-qualified identifier. The `COLLATE` clause binds tighter than operators; parentheses can be used when necessary.
 
 If no collation is explicitly specified, the database system either derives a collation from the columns involved in the expression, or it defaults to the default collation of the database if no column is involved in the expression.
 
@@ -459,8 +437,6 @@ because it attempts to apply a collation to the result of the `>` operator, whic
 
 ### 4.2.11. Scalar Subqueries [#](#SQL-SYNTAX-SCALAR-SUBQUERIES)
 
-
-
 A scalar subquery is an ordinary `SELECT` query in parentheses that returns exactly one row with one column. (See [Chapter 7](queries) for information about writing queries.) The `SELECT` query is executed and the single returned value is used in the surrounding value expression. It is an error to use a query that returns more than one row or more than one column as a scalar subquery. (But if, during a particular execution, the subquery returns no rows, there is no error; the scalar result is taken to be null.) The subquery can refer to variables from the surrounding query, which will act as constants during any one evaluation of the subquery. See also [Section 9.23](functions-subquery) for other expressions involving subqueries.
 
 For example, the following finds the largest city population in each state:
@@ -473,8 +449,6 @@ SELECT name, (SELECT max(pop) FROM cities WHERE cities.state = states.name)
 [#id](#SQL-SYNTAX-ARRAY-CONSTRUCTORS)
 
 ### 4.2.12. Array Constructors [#](#SQL-SYNTAX-ARRAY-CONSTRUCTORS)
-
-
 
 An array constructor is an expression that builds an array value using values for its member elements. A simple array constructor consists of the key word `ARRAY`, a left square bracket `[`, a list of expressions (separated by commas) for the array element values, and finally a right square bracket `]`. For example:
 
@@ -564,8 +538,6 @@ The subscripts of an array value built with `ARRAY` always begin with one. For m
 
 ### 4.2.13. Row Constructors [#](#SQL-SYNTAX-ROW-CONSTRUCTORS)
 
-
-
 A row constructor is an expression that builds a row value (also called a composite value) using values for its member fields. A row constructor consists of the key word `ROW`, a left parenthesis, zero or more expressions (separated by commas) for the row field values, and finally a right parenthesis. For example:
 
 ```
@@ -574,7 +546,7 @@ SELECT ROW(1,2.5,'this is a test');
 
 The key word `ROW` is optional when there is more than one expression in the list.
 
-A row constructor can include the syntax *`rowvalue`*`.*`, which will be expanded to a list of the elements of the row value, just as occurs when the `.*` syntax is used at the top level of a `SELECT` list (see [Section 8.16.5](rowtypes#ROWTYPES-USAGE)). For example, if table `t` has columns `f1` and `f2`, these are the same:
+A row constructor can include the syntax _`rowvalue`_`.*`, which will be expanded to a list of the elements of the row value, just as occurs when the `.*` syntax is used at the top level of a `SELECT` list (see [Section 8.16.5](rowtypes#ROWTYPES-USAGE)). For example, if table `t` has columns `f1` and `f2`, these are the same:
 
 ```
 SELECT ROW(t.*, 42) FROM t;
@@ -633,8 +605,6 @@ For more detail see [Section 9.24](functions-comparisons). Row constructors can
 [#id](#SYNTAX-EXPRESS-EVAL)
 
 ### 4.2.14. Expression Evaluation Rules [#](#SYNTAX-EXPRESS-EVAL)
-
-
 
 The order of evaluation of subexpressions is not defined. In particular, the inputs of an operator or function are not necessarily evaluated left-to-right or in any other fixed order.
 

@@ -8,8 +8,8 @@ The catalog `pg_range` stores information about range types. This is in addition
 
 **Table 53.43. `pg_range` Columns**
 
-| Column TypeDescription                                                                                                                                                                    |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Column TypeDescription                                                                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `rngtypid` `oid` (references [`pg_type`](catalog-pg-type).`oid`)OID of the range type                                                                                                |
 | `rngsubtype` `oid` (references [`pg_type`](catalog-pg-type).`oid`)OID of the element type (subtype) of this range type                                                               |
 | `rngmultitypid` `oid` (references [`pg_type`](catalog-pg-type).`oid`)OID of the multirange type for this range type                                                                  |

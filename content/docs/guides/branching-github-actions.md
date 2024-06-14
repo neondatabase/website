@@ -2,7 +2,7 @@
 title: Automate branching with GitHub Actions
 subtitle: Create and delete branches with GitHub Actions
 enableTableOfContents: true
-updatedOn: '2024-02-19T18:57:12.555Z'
+updatedOn: '2024-06-14T07:55:54.385Z'
 ---
 
 Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:
@@ -23,10 +23,10 @@ The source code for this action is available on [GitHub](https://github.com/neon
 
 - Using the action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 - Add your Neon API key to your GitHub Secrets:
-    1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
-    2. Click **Actions** > **New Repository Secret**.
-    3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
-    4. Click **Add Secret**.
+  1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
+  2. Click **Actions** > **New Repository Secret**.
+  3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
+  4. Click **Add Secret**.
 
 ### Example
 
@@ -124,10 +124,10 @@ The source code for this action is available on [GitHub](https://github.com/neon
 
 - Using the action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 - Add your Neon API key to your GitHub Secrets:
-    1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
-    2. Click **Actions** > **New Repository Secret**.
-    3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
-    4. Click **Add Secret**.
+  1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
+  2. Click **Actions** > **New Repository Secret**.
+  3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
+  4. Click **Add Secret**.
 
 ### Example
 
@@ -143,7 +143,7 @@ jobs:
     with:
       project_id: rapid-haze-373089
       branch: br-long-forest-224191
-      api_key: {{ secrets.NEON_API_KEY }}
+      api_key: { { secrets.NEON_API_KEY } }
 ```
 
 ### Input variables
@@ -152,15 +152,15 @@ jobs:
 inputs:
   project_id:
     required: true
-    description: "The Neon project id"
+    description: 'The Neon project id'
   branch_id:
-    description: "The Neon branch id"
-    deprecationMessage: "The `branch_id` input is deprecated in favor of `branch`"
+    description: 'The Neon branch id'
+    deprecationMessage: 'The `branch_id` input is deprecated in favor of `branch`'
   api_key:
-    description: "The Neon API key, read more at https://neon.tech/docs/manage/api-keys"
+    description: 'The Neon API key, read more at https://neon.tech/docs/manage/api-keys'
     required: true
   branch:
-    description: "The Neon branch name or id"
+    description: 'The Neon branch name or id'
 ```
 
 ### Outputs
@@ -178,10 +178,10 @@ This GitHub Action resets a child branch with the latest data from its parent br
 
 - Using this action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 - Add your Neon API key to your GitHub Secrets:
-    1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
-    2. Click **Actions** > **New Repository Secret**.
-    3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field.
-    4. Click **Add Secret**.
+  1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
+  2. Click **Actions** > **New Repository Secret**.
+  3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field.
+  4. Click **Add Secret**.
 
 ### Example
 

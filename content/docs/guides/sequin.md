@@ -1,8 +1,9 @@
 ---
 title: Stream data to Neon with Sequin
-subtitle: Learn how to sync data from platforms like Stripe, Linear, and GitHub into your Neon database in real time.
+subtitle: Learn how to sync data from platforms like Stripe, Linear, and GitHub into
+  your Neon database in real time.
 enableTableOfContents: true
-updatedOn: '2024-04-22T15:20:54.279Z'
+updatedOn: '2024-06-14T07:55:54.408Z'
 ---
 
 Sequin streams data from platforms like Stripe, Linear, and GitHub into your Neon database in real time. The moment a new subscription is created, a ticket is closed, or a PR is merged, a row in your database will reflect the change.
@@ -30,26 +31,26 @@ As a first step, create a table in your Neon database for Sequin to sync API dat
 2. Navigate to the SQL Editor in the sidebar.
 3. Create a `sequin` schema by running the following statement:
 
-    ```sql
-    create schema sequin;
-    ```
+   ```sql
+   create schema sequin;
+   ```
 
 4. Run the following command to create a table for Sequin to sync API data to:
 
-    ```sql
-    create table sequin.records (
-    sequin_id uuid not null,
-    sync_id uuid not null,
-    collection_id text not null,
-    upstream_id text not null,
-    payload jsonb not null,
-    upstream_updated_at timestamp with time zone not null,
-    upstream_created_at timestamp with time zone,
-    inserted_at timestamp with time zone not null,
-    updated_at timestamp with time zone not null,
-    primary key (sequin_id)
-    );
-    ```
+   ```sql
+   create table sequin.records (
+   sequin_id uuid not null,
+   sync_id uuid not null,
+   collection_id text not null,
+   upstream_id text not null,
+   payload jsonb not null,
+   upstream_updated_at timestamp with time zone not null,
+   upstream_created_at timestamp with time zone,
+   inserted_at timestamp with time zone not null,
+   updated_at timestamp with time zone not null,
+   primary key (sequin_id)
+   );
+   ```
 
 You can use this table to store data from any API. API data is stored denormalized in the `payload` column. Later, you'll see how to create views on top of this table.
 

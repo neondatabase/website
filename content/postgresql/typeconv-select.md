@@ -2,8 +2,6 @@
 
 ## 10.6. `SELECT` Output Columns [#](#TYPECONV-SELECT)
 
-
-
 The rules given in the preceding sections will result in assignment of non-`unknown` data types to all expressions in an SQL query, except for unspecified-type literals that appear as simple output columns of a `SELECT` command. For example, in
 
 ```

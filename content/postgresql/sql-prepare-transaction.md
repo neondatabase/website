@@ -26,7 +26,7 @@ If the `PREPARE TRANSACTION` command fails for any reason, it becomes a `ROLLBAC
 
 ## Parameters
 
-* *`transaction_id`*
+- _`transaction_id`_
 
   An arbitrary identifier that later identifies this transaction for `COMMIT PREPARED` or `ROLLBACK PREPARED`. The identifier must be written as a string literal, and must be less than 200 bytes long. It must not be the same as the identifier used for any currently prepared transaction.
 
@@ -48,7 +48,7 @@ All currently available prepared transactions are listed in the [`pg_prepared_xa
 
 It is unwise to leave transactions in the prepared state for a long time. This will interfere with the ability of `VACUUM` to reclaim storage, and in extreme cases could cause the database to shut down to prevent transaction ID wraparound (see [Section 25.1.5](routine-vacuuming#VACUUM-FOR-WRAPAROUND)). Keep in mind also that the transaction continues to hold whatever locks it held. The intended usage of the feature is that a prepared transaction will normally be committed or rolled back as soon as an external transaction manager has verified that other databases are also prepared to commit.
 
-If you have not set up an external transaction manager to track prepared transactions and ensure they get closed out promptly, it is best to keep the prepared-transaction feature disabled by setting [max\_prepared\_transactions](runtime-config-resource#GUC-MAX-PREPARED-TRANSACTIONS) to zero. This will prevent accidental creation of prepared transactions that might then be forgotten and eventually cause problems.
+If you have not set up an external transaction manager to track prepared transactions and ensure they get closed out promptly, it is best to keep the prepared-transaction feature disabled by setting [max_prepared_transactions](runtime-config-resource#GUC-MAX-PREPARED-TRANSACTIONS) to zero. This will prevent accidental creation of prepared transactions that might then be forgotten and eventually cause problems.
 
 [#id](#SQL-PREPARE-TRANSACTION-EXAMPLES)
 

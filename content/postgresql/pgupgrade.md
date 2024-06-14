@@ -1,110 +1,110 @@
 [#id](#PGUPGRADE)
 
-## pg\_upgrade
+## pg_upgrade
 
-pg\_upgrade — upgrade a PostgreSQL server instance
+pg_upgrade — upgrade a PostgreSQL server instance
 
 ## Synopsis
 
-`pg_upgrade` `-b` *`oldbindir`* \[`-B` *`newbindir`*] `-d` *`oldconfigdir`* `-D` *`newconfigdir`* \[*`option`*...]
+`pg_upgrade` `-b` _`oldbindir`_ \[`-B` _`newbindir`_] `-d` _`oldconfigdir`_ `-D` _`newconfigdir`_ \[_`option`_...]
 
 [#id](#id-1.9.5.12.5)
 
 ## Description
 
-pg\_upgrade (formerly called pg\_migrator) allows data stored in PostgreSQL data files to be upgraded to a later PostgreSQL major version without the data dump/restore typically required for major version upgrades, e.g., from 9.5.8 to 9.6.4 or from 10.7 to 11.2. It is not required for minor version upgrades, e.g., from 9.6.2 to 9.6.3 or from 10.1 to 10.2.
+pg_upgrade (formerly called pg_migrator) allows data stored in PostgreSQL data files to be upgraded to a later PostgreSQL major version without the data dump/restore typically required for major version upgrades, e.g., from 9.5.8 to 9.6.4 or from 10.7 to 11.2. It is not required for minor version upgrades, e.g., from 9.6.2 to 9.6.3 or from 10.1 to 10.2.
 
-Major PostgreSQL releases regularly add new features that often change the layout of the system tables, but the internal data storage format rarely changes. pg\_upgrade uses this fact to perform rapid upgrades by creating new system tables and simply reusing the old user data files. If a future major release ever changes the data storage format in a way that makes the old data format unreadable, pg\_upgrade will not be usable for such upgrades. (The community will attempt to avoid such situations.)
+Major PostgreSQL releases regularly add new features that often change the layout of the system tables, but the internal data storage format rarely changes. pg_upgrade uses this fact to perform rapid upgrades by creating new system tables and simply reusing the old user data files. If a future major release ever changes the data storage format in a way that makes the old data format unreadable, pg_upgrade will not be usable for such upgrades. (The community will attempt to avoid such situations.)
 
-pg\_upgrade does its best to make sure the old and new clusters are binary-compatible, e.g., by checking for compatible compile-time settings, including 32/64-bit binaries. It is important that any external modules are also binary compatible, though this cannot be checked by pg\_upgrade.
+pg_upgrade does its best to make sure the old and new clusters are binary-compatible, e.g., by checking for compatible compile-time settings, including 32/64-bit binaries. It is important that any external modules are also binary compatible, though this cannot be checked by pg_upgrade.
 
-pg\_upgrade supports upgrades from 9.2.X and later to the current major release of PostgreSQL, including snapshot and beta releases.
+pg_upgrade supports upgrades from 9.2.X and later to the current major release of PostgreSQL, including snapshot and beta releases.
 
 [#id](#id-1.9.5.12.6)
 
 ## Options
 
-pg\_upgrade accepts the following command-line arguments:
+pg_upgrade accepts the following command-line arguments:
 
-* `-b` *`bindir`*`--old-bindir=`*`bindir`*
+- `-b` _`bindir`_`--old-bindir=`_`bindir`_
 
   the old PostgreSQL executable directory; environment variable `PGBINOLD`
 
-* `-B` *`bindir`*`--new-bindir=`*`bindir`*
+- `-B` _`bindir`_`--new-bindir=`_`bindir`_
 
-  the new PostgreSQL executable directory; default is the directory where pg\_upgrade resides; environment variable `PGBINNEW`
+  the new PostgreSQL executable directory; default is the directory where pg_upgrade resides; environment variable `PGBINNEW`
 
-* `-c``--check`
+- `-c``--check`
 
   check clusters only, don't change any data
 
-* `-d` *`configdir`*`--old-datadir=`*`configdir`*
+- `-d` _`configdir`_`--old-datadir=`_`configdir`_
 
   the old database cluster configuration directory; environment variable `PGDATAOLD`
 
-* `-D` *`configdir`*`--new-datadir=`*`configdir`*
+- `-D` _`configdir`_`--new-datadir=`_`configdir`_
 
   the new database cluster configuration directory; environment variable `PGDATANEW`
 
-* `-j njobs``--jobs=njobs`
+- `-j njobs``--jobs=njobs`
 
   number of simultaneous processes or threads to use
 
-* `-k``--link`
+- `-k``--link`
 
   use hard links instead of copying files to the new cluster
 
-* `-N``--no-sync`
+- `-N``--no-sync`
 
   By default, `pg_upgrade` will wait for all files of the upgraded cluster to be written safely to disk. This option causes `pg_upgrade` to return without waiting, which is faster, but means that a subsequent operating system crash can leave the data directory corrupt. Generally, this option is useful for testing but should not be used on a production installation.
 
-* `-o` *`options`*`--old-options` *`options`*
+- `-o` _`options`_`--old-options` _`options`_
 
   options to be passed directly to the old `postgres` command; multiple option invocations are appended
 
-* `-O` *`options`*`--new-options` *`options`*
+- `-O` _`options`_`--new-options` _`options`_
 
   options to be passed directly to the new `postgres` command; multiple option invocations are appended
 
-* `-p` *`port`*`--old-port=`*`port`*
+- `-p` _`port`_`--old-port=`_`port`_
 
   the old cluster port number; environment variable `PGPORTOLD`
 
-* `-P` *`port`*`--new-port=`*`port`*
+- `-P` _`port`_`--new-port=`_`port`_
 
   the new cluster port number; environment variable `PGPORTNEW`
 
-* `-r``--retain`
+- `-r``--retain`
 
   retain SQL and log files even after successful completion
 
-* `-s` *`dir`*`--socketdir=`*`dir`*
+- `-s` _`dir`_`--socketdir=`_`dir`_
 
   directory to use for postmaster sockets during upgrade; default is current working directory; environment variable `PGSOCKETDIR`
 
-* `-U` *`username`*`--username=`*`username`*
+- `-U` _`username`_`--username=`_`username`_
 
   cluster's install user name; environment variable `PGUSER`
 
-* `-v``--verbose`
+- `-v``--verbose`
 
   enable verbose internal logging
 
-* `-V``--version`
+- `-V``--version`
 
   display version information, then exit
 
-* `--clone`
+- `--clone`
 
   Use efficient file cloning (also known as “reflinks” on some systems) instead of copying files to the new cluster. This can result in near-instantaneous copying of the data files, giving the speed advantages of `-k`/`--link` while leaving the old cluster untouched.
 
-  File cloning is only supported on some operating systems and file systems. If it is selected but not supported, the pg\_upgrade run will error. At present, it is supported on Linux (kernel 4.5 or later) with Btrfs and XFS (on file systems created with reflink support), and on macOS with APFS.
+  File cloning is only supported on some operating systems and file systems. If it is selected but not supported, the pg_upgrade run will error. At present, it is supported on Linux (kernel 4.5 or later) with Btrfs and XFS (on file systems created with reflink support), and on macOS with APFS.
 
-* `--copy`
+- `--copy`
 
   Copy files to the new cluster. This is the default. (See also `--link` and `--clone`.)
 
-* `-?``--help`
+- `-?``--help`
 
   show help, then exit
 
@@ -112,7 +112,7 @@ pg\_upgrade accepts the following command-line arguments:
 
 ## Usage
 
-These are the steps to perform an upgrade with pg\_upgrade:
+These are the steps to perform an upgrade with pg_upgrade:
 
 1. **Optionally move the old cluster**
 
@@ -128,11 +128,11 @@ These are the steps to perform an upgrade with pg\_upgrade:
 
 2. **For source installs, build the new version**
 
-   Build the new PostgreSQL source with `configure` flags that are compatible with the old cluster. pg\_upgrade will check `pg_controldata` to make sure all settings are compatible before starting the upgrade.
+   Build the new PostgreSQL source with `configure` flags that are compatible with the old cluster. pg_upgrade will check `pg_controldata` to make sure all settings are compatible before starting the upgrade.
 
 3. **Install the new PostgreSQL binaries**
 
-   Install the new server's binaries and support files. pg\_upgrade is included in a default installation.
+   Install the new server's binaries and support files. pg_upgrade is included in a default installation.
 
    For source installs, if you wish to install the new server in a custom location, use the `prefix` variable:
 
@@ -146,7 +146,7 @@ These are the steps to perform an upgrade with pg\_upgrade:
 
 5. **Install extension shared object files**
 
-   Many extensions and custom modules, whether from `contrib` or another source, use shared object files (or DLLs), e.g., `pgcrypto.so`. If the old cluster used these, shared object files matching the new server binary must be installed in the new cluster, usually via operating system commands. Do not load the schema definitions, e.g., `CREATE EXTENSION pgcrypto`, because these will be duplicated from the old cluster. If extension updates are available, pg\_upgrade will report this and create a script that can be run later to update them.
+   Many extensions and custom modules, whether from `contrib` or another source, use shared object files (or DLLs), e.g., `pgcrypto.so`. If the old cluster used these, shared object files matching the new server binary must be installed in the new cluster, usually via operating system commands. Do not load the schema definitions, e.g., `CREATE EXTENSION pgcrypto`, because these will be duplicated from the old cluster. If extension updates are available, pg_upgrade will report this and create a script that can be run later to update them.
 
 6. **Copy custom full-text search files**
 
@@ -176,11 +176,11 @@ These are the steps to perform an upgrade with pg\_upgrade:
 
 9. **Prepare for standby server upgrades**
 
-   If you are upgrading standby servers using methods outlined in section [Step 11](pgupgrade#PGUPGRADE-STEP-REPLICAS), verify that the old standby servers are caught up by running pg\_controldata against the old primary and standby clusters. Verify that the “Latest checkpoint location” values match in all clusters. (There will be a mismatch if old standby servers were shut down before the old primary or if the old standby servers are still running.) Also, make sure `wal_level` is not set to `minimal` in the `postgresql.conf` file on the new primary cluster.
+   If you are upgrading standby servers using methods outlined in section [Step 11](pgupgrade#PGUPGRADE-STEP-REPLICAS), verify that the old standby servers are caught up by running pg_controldata against the old primary and standby clusters. Verify that the “Latest checkpoint location” values match in all clusters. (There will be a mismatch if old standby servers were shut down before the old primary or if the old standby servers are still running.) Also, make sure `wal_level` is not set to `minimal` in the `postgresql.conf` file on the new primary cluster.
 
-10. **Run pg\_upgrade**
+10. **Run pg_upgrade**
 
-    Always run the pg\_upgrade binary of the new server, not the old one. pg\_upgrade requires the specification of the old and new cluster's data and executable (`bin`) directories. You can also specify user and port values, and whether you want the data files linked or cloned instead of the default copy behavior.
+    Always run the pg_upgrade binary of the new server, not the old one. pg_upgrade requires the specification of the old and new cluster's data and executable (`bin`) directories. You can also specify user and port values, and whether you want the data files linked or cloned instead of the default copy behavior.
 
     If you use link mode, the upgrade will be much faster (no file copying) and use less disk space, but you will not be able to access your old cluster once you start the new cluster after the upgrade. Link mode also requires that the old and new cluster data directories be in the same file system. (Tablespaces and `pg_wal` can be on different file systems.) Clone mode provides the same speed and disk space advantages but does not cause the old cluster to be unusable once the new cluster is started. Clone mode also requires that the old and new data directories be in the same file system. This mode is only available on certain operating systems and file systems.
 
@@ -193,7 +193,7 @@ These are the steps to perform an upgrade with pg\_upgrade:
     SET PATH=%PATH%;C:\Program Files\PostgreSQL\16\bin;
     ```
 
-    and then run pg\_upgrade with quoted directories, e.g.:
+    and then run pg_upgrade with quoted directories, e.g.:
 
     ```
     pg_upgrade.exe
@@ -205,23 +205,23 @@ These are the steps to perform an upgrade with pg\_upgrade:
 
     Once started, `pg_upgrade` will verify the two clusters are compatible and then do the upgrade. You can use `pg_upgrade --check` to perform only the checks, even if the old server is still running. `pg_upgrade --check` will also outline any manual adjustments you will need to make after the upgrade. If you are going to be using link or clone mode, you should use the option `--link` or `--clone` with `--check` to enable mode-specific checks. `pg_upgrade` requires write permission in the current directory.
 
-    Obviously, no one should be accessing the clusters during the upgrade. pg\_upgrade defaults to running servers on port 50432 to avoid unintended client connections. You can use the same port number for both clusters when doing an upgrade because the old and new clusters will not be running at the same time. However, when checking an old running server, the old and new port numbers must be different.
+    Obviously, no one should be accessing the clusters during the upgrade. pg_upgrade defaults to running servers on port 50432 to avoid unintended client connections. You can use the same port number for both clusters when doing an upgrade because the old and new clusters will not be running at the same time. However, when checking an old running server, the old and new port numbers must be different.
 
-    If an error occurs while restoring the database schema, `pg_upgrade` will exit and you will have to revert to the old cluster as outlined in [Step 17](pgupgrade#PGUPGRADE-STEP-REVERT) below. To try `pg_upgrade` again, you will need to modify the old cluster so the pg\_upgrade schema restore succeeds. If the problem is a `contrib` module, you might need to uninstall the `contrib` module from the old cluster and install it in the new cluster after the upgrade, assuming the module is not being used to store user data.
+    If an error occurs while restoring the database schema, `pg_upgrade` will exit and you will have to revert to the old cluster as outlined in [Step 17](pgupgrade#PGUPGRADE-STEP-REVERT) below. To try `pg_upgrade` again, you will need to modify the old cluster so the pg_upgrade schema restore succeeds. If the problem is a `contrib` module, you might need to uninstall the `contrib` module from the old cluster and install it in the new cluster after the upgrade, assuming the module is not being used to store user data.
 
 11. **Upgrade streaming replication and log-shipping standby servers**
 
-    If you used link mode and have Streaming Replication (see [Section 27.2.5](warm-standby#STREAMING-REPLICATION)) or Log-Shipping (see [Section 27.2](warm-standby)) standby servers, you can follow these steps to quickly upgrade them. You will not be running pg\_upgrade on the standby servers, but rather rsync on the primary. Do not start any servers yet.
+    If you used link mode and have Streaming Replication (see [Section 27.2.5](warm-standby#STREAMING-REPLICATION)) or Log-Shipping (see [Section 27.2](warm-standby)) standby servers, you can follow these steps to quickly upgrade them. You will not be running pg_upgrade on the standby servers, but rather rsync on the primary. Do not start any servers yet.
 
-    If you did *not* use link mode, do not have or do not want to use rsync, or want an easier solution, skip the instructions in this section and simply recreate the standby servers once pg\_upgrade completes and the new primary is running.
+    If you did _not_ use link mode, do not have or do not want to use rsync, or want an easier solution, skip the instructions in this section and simply recreate the standby servers once pg_upgrade completes and the new primary is running.
 
     1. **Install the new PostgreSQL binaries on standby servers**
 
        Make sure the new binaries and support files are installed on all standby servers.
 
-    2. **Make sure the new standby data directories do *not* exist**
+    2. **Make sure the new standby data directories do _not_ exist**
 
-       Make sure the new standby data directories do *not* exist or are empty. If initdb was run, delete the standby servers' new data directories.
+       Make sure the new standby data directories do _not_ exist or are empty. If initdb was run, delete the standby servers' new data directories.
 
     3. **Install extension shared object files**
 
@@ -237,13 +237,13 @@ These are the steps to perform an upgrade with pg\_upgrade:
 
     6. **Run rsync**
 
-       When using link mode, standby servers can be quickly upgraded using rsync. To accomplish this, from a directory on the primary server that is above the old and new database cluster directories, run this on the *primary* for each standby server:
+       When using link mode, standby servers can be quickly upgraded using rsync. To accomplish this, from a directory on the primary server that is above the old and new database cluster directories, run this on the _primary_ for each standby server:
 
        ```
        rsync --archive --delete --hard-links --size-only --no-inc-recursive old_cluster new_cluster remote_dir
        ```
 
-       where `old_cluster` and `new_cluster` are relative to the current directory on the primary, and `remote_dir` is *above* the old and new cluster directories on the standby. The directory structure under the specified directories on the primary and standbys must match. Consult the rsync manual page for details on specifying the remote directory, e.g.,
+       where `old_cluster` and `new_cluster` are relative to the current directory on the primary, and `remote_dir` is _above_ the old and new cluster directories on the standby. The directory structure under the specified directories on the primary and standbys must match. Consult the rsync manual page for details on specifying the remote directory, e.g.,
 
        ```
        rsync --archive --delete --hard-links --size-only --no-inc-recursive /opt/PostgreSQL/9.5 \
@@ -252,7 +252,7 @@ These are the steps to perform an upgrade with pg\_upgrade:
 
        You can verify what the command will do using rsync's `--dry-run` option. While rsync must be run on the primary for at least one standby, it is possible to run rsync on an upgraded standby to upgrade other standbys, as long as the upgraded standby has not been started.
 
-       What this does is to record the links created by pg\_upgrade's link mode that connect files in the old and new clusters on the primary server. It then finds matching files in the standby's old cluster and creates links for them in the standby's new cluster. Files that were not linked on the primary are copied from the primary to the standby. (They are usually small.) This provides rapid standby upgrades. Unfortunately, rsync needlessly copies files associated with temporary and unlogged tables because these files don't normally exist on standby servers.
+       What this does is to record the links created by pg_upgrade's link mode that connect files in the old and new clusters on the primary server. It then finds matching files in the standby's old cluster and creates links for them in the standby's new cluster. Files that were not linked on the primary are copied from the primary to the standby. (They are usually small.) This provides rapid standby upgrades. Unfortunately, rsync needlessly copies files associated with temporary and unlogged tables because these files don't normally exist on standby servers.
 
        If you have tablespaces, you will need to run a similar rsync command for each tablespace directory, e.g.:
 
@@ -277,7 +277,7 @@ These are the steps to perform an upgrade with pg\_upgrade:
 
 14. **Post-upgrade processing**
 
-    If any post-upgrade processing is required, pg\_upgrade will issue warnings as it completes. It will also generate script files that must be run by the administrator. The script files will connect to each database that needs post-upgrade processing. Each script should be run using:
+    If any post-upgrade processing is required, pg_upgrade will issue warnings as it completes. It will also generate script files that must be run by the administrator. The script files will connect to each database that needs post-upgrade processing. Each script should be run using:
 
     ```
     psql --username=postgres --file=script.sql postgres
@@ -301,31 +301,31 @@ These are the steps to perform an upgrade with pg\_upgrade:
 
     If, after running `pg_upgrade`, you wish to revert to the old cluster, there are several options:
 
-    * If the `--check` option was used, the old cluster was unmodified; it can be restarted.
+    - If the `--check` option was used, the old cluster was unmodified; it can be restarted.
 
-    * If the `--link` option was *not* used, the old cluster was unmodified; it can be restarted.
+    - If the `--link` option was _not_ used, the old cluster was unmodified; it can be restarted.
 
-    * If the `--link` option was used, the data files might be shared between the old and new cluster:
+    - If the `--link` option was used, the data files might be shared between the old and new cluster:
 
-      * If `pg_upgrade` aborted before linking started, the old cluster was unmodified; it can be restarted.
+      - If `pg_upgrade` aborted before linking started, the old cluster was unmodified; it can be restarted.
 
-      * If you did *not* start the new cluster, the old cluster was unmodified except that, when linking started, a `.old` suffix was appended to `$PGDATA/global/pg_control`. To reuse the old cluster, remove the `.old` suffix from `$PGDATA/global/pg_control`; you can then restart the old cluster.
+      - If you did _not_ start the new cluster, the old cluster was unmodified except that, when linking started, a `.old` suffix was appended to `$PGDATA/global/pg_control`. To reuse the old cluster, remove the `.old` suffix from `$PGDATA/global/pg_control`; you can then restart the old cluster.
 
-      * If you did start the new cluster, it has written to shared files and it is unsafe to use the old cluster. The old cluster will need to be restored from backup in this case.
+      - If you did start the new cluster, it has written to shared files and it is unsafe to use the old cluster. The old cluster will need to be restored from backup in this case.
 
 [#id](#id-1.9.5.12.8)
 
 ## Notes
 
-pg\_upgrade creates various working files, such as schema dumps, stored within `pg_upgrade_output.d` in the directory of the new cluster. Each run creates a new subdirectory named with a timestamp formatted as per ISO 8601 (`%Y%m%dT%H%M%S`), where all its generated files are stored. `pg_upgrade_output.d` and its contained files will be removed automatically if pg\_upgrade completes successfully; but in the event of trouble, the files there may provide useful debugging information.
+pg_upgrade creates various working files, such as schema dumps, stored within `pg_upgrade_output.d` in the directory of the new cluster. Each run creates a new subdirectory named with a timestamp formatted as per ISO 8601 (`%Y%m%dT%H%M%S`), where all its generated files are stored. `pg_upgrade_output.d` and its contained files will be removed automatically if pg_upgrade completes successfully; but in the event of trouble, the files there may provide useful debugging information.
 
-pg\_upgrade launches short-lived postmasters in the old and new data directories. Temporary Unix socket files for communication with these postmasters are, by default, made in the current working directory. In some situations the path name for the current directory might be too long to be a valid socket name. In that case you can use the `-s` option to put the socket files in some directory with a shorter path name. For security, be sure that that directory is not readable or writable by any other users. (This is not supported on Windows.)
+pg_upgrade launches short-lived postmasters in the old and new data directories. Temporary Unix socket files for communication with these postmasters are, by default, made in the current working directory. In some situations the path name for the current directory might be too long to be a valid socket name. In that case you can use the `-s` option to put the socket files in some directory with a shorter path name. For security, be sure that that directory is not readable or writable by any other users. (This is not supported on Windows.)
 
-All failure, rebuild, and reindex cases will be reported by pg\_upgrade if they affect your installation; post-upgrade scripts to rebuild tables and indexes will be generated automatically. If you are trying to automate the upgrade of many clusters, you should find that clusters with identical database schemas require the same post-upgrade steps for all cluster upgrades; this is because the post-upgrade steps are based on the database schemas, and not user data.
+All failure, rebuild, and reindex cases will be reported by pg_upgrade if they affect your installation; post-upgrade scripts to rebuild tables and indexes will be generated automatically. If you are trying to automate the upgrade of many clusters, you should find that clusters with identical database schemas require the same post-upgrade steps for all cluster upgrades; this is because the post-upgrade steps are based on the database schemas, and not user data.
 
 For deployment testing, create a schema-only copy of the old cluster, insert dummy data, and upgrade that.
 
-pg\_upgrade does not support upgrading of databases containing table columns using these `reg*` OID-referencing system data types:
+pg_upgrade does not support upgrading of databases containing table columns using these `reg*` OID-referencing system data types:
 
 |                 |
 | --------------- |
@@ -346,4 +346,4 @@ If you want to use link mode and you do not want your old cluster to be modified
 
 ## See Also
 
-[initdb](app-initdb), [pg\_ctl](app-pg-ctl), [pg\_dump](app-pgdump), [postgres](app-postgres)
+[initdb](app-initdb), [pg_ctl](app-pg-ctl), [pg_dump](app-pgdump), [postgres](app-postgres)

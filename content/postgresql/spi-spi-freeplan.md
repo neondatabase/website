@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-FREEPLAN)
 
-## SPI\_freeplan
+## SPI_freeplan
 
-SPI\_freeplan — free a previously saved prepared statement
+SPI_freeplan — free a previously saved prepared statement
 
 ## Synopsis
 
@@ -20,7 +20,7 @@ int SPI_freeplan(SPIPlanPtr plan)
 
 ## Arguments
 
-* `SPIPlanPtr plan`
+- `SPIPlanPtr plan`
 
   pointer to statement to free
 
@@ -28,4 +28,4 @@ int SPI_freeplan(SPIPlanPtr plan)
 
 ## Return Value
 
-0 on success; `SPI_ERROR_ARGUMENT` if *`plan`* is `NULL` or invalid
+0 on success; `SPI_ERROR_ARGUMENT` if _`plan`_ is `NULL` or invalid

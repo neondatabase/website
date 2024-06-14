@@ -2,14 +2,14 @@
 title: The hstore extension
 subtitle: Manage key-value pairs in Postgres using hstore
 enableTableOfContents: true
-updatedOn: '2024-01-28T13:46:59.387Z'
+updatedOn: '2024-06-14T07:55:54.368Z'
 ---
 
-The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It is particularly useful for semi-structured data or data that does not have a rigid schema. 
+The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It is particularly useful for semi-structured data or data that does not have a rigid schema.
 
 <CTA />
 
-This guide covers the basics of the `hstore` extension - how to enable it, how to store and query key-value pairs, and perform operations on hstore data with examples. `hstore` is valuable in scenarios where schema-less data needs to be stored efficiently, such as in configurations, application settings, or any situation where the data structure may evolve over time. 
+This guide covers the basics of the `hstore` extension - how to enable it, how to store and query key-value pairs, and perform operations on hstore data with examples. `hstore` is valuable in scenarios where schema-less data needs to be stored efficiently, such as in configurations, application settings, or any situation where the data structure may evolve over time.
 
 <Admonition type="note">
     `hstore` is an open-source extension for Postgres that can be installed on any compatible Postgres instance. Detailed installation instructions and compatibility information can be found at [PostgreSQL Extensions](https://www.postgresql.org/docs/current/contrib.html).
@@ -17,7 +17,7 @@ This guide covers the basics of the `hstore` extension - how to enable it, how t
 
 **Version availability**
 
-Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date information. 
+Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date information.
 
 Currently, Neon uses version `1.8` of the `hstore` extension for all Postgres versions.
 
@@ -35,7 +35,7 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 **Creating a table with hstore column**
 
-Consider a table that stores the product catalog for an electronics shop. Each product has a name and a set of attributes that describe it. The attributes for each product are not fixed and may change over time. This makes `hstore` a good choice for storing this data. 
+Consider a table that stores the product catalog for an electronics shop. Each product has a name and a set of attributes that describe it. The attributes for each product are not fixed and may change over time. This makes `hstore` a good choice for storing this data.
 
 ```sql
 CREATE TABLE product (
@@ -47,7 +47,7 @@ CREATE TABLE product (
 
 **Inserting data**
 
-Inserting data into an `hstore` column is done by providing a string containing key-value pairs into the column. 
+Inserting data into an `hstore` column is done by providing a string containing key-value pairs into the column.
 
 ```sql
 INSERT INTO product (name, attributes)
@@ -65,7 +65,7 @@ VALUES
 
 **Querying `hstore` data**
 
-`hstore` columns can be referenced as regular columns in a query. To access the attributes in an `hstore` column, we use the `->` operator. 
+`hstore` columns can be referenced as regular columns in a query. To access the attributes in an `hstore` column, we use the `->` operator.
 
 For example, to retrieve the name and brand for all products with price less than 1000, we can run the following query:
 
@@ -96,7 +96,7 @@ Since the `price` attribute is stored as a string, we need to cast it to an inte
 The `?` operator is used to check if an `hstore` contains a specific key.
 
 ```sql
-SELECT id, name 
+SELECT id, name
 FROM product
 WHERE attributes ? 'os';
 ```
@@ -112,7 +112,7 @@ This query returns the following:
 
 **Check if an hstore contains another hstore**
 
-The `@>` operator is used to check if the `hstore` on the left contains the right operand. For example, the query below looks for products that have a `brand` attribute of `Apple`. 
+The `@>` operator is used to check if the `hstore` on the left contains the right operand. For example, the query below looks for products that have a `brand` attribute of `Apple`.
 
 ```sql
 SELECT id, name
@@ -130,7 +130,7 @@ This query returns the following:
 
 **Concatenating two hstore values**
 
-The `||` operator is used to concatenate two `hstore` values. For example, the query below updates the attributes for the product with name `Laptop`. 
+The `||` operator is used to concatenate two `hstore` values. For example, the query below updates the attributes for the product with name `Laptop`.
 
 ```sql
 UPDATE product
@@ -138,7 +138,8 @@ SET attributes = attributes || 'weight => 2.5'
 WHERE name = 'Laptop' AND attributes -> 'brand' = 'Dell';
 ```
 
-To verify, we can run the query below. 
+To verify, we can run the query below.
+
 ```sql
 SELECT id, name, attributes -> 'weight' AS weight
 FROM product
@@ -175,11 +176,11 @@ This query returns the following:
 
 ## `Hstore` functions
 
-The `hstore` extension also adds functions to manipulate the `hstore` data. We go over some examples below. 
+The `hstore` extension also adds functions to manipulate the `hstore` data. We go over some examples below.
 
 **Retrieve all keys**
 
-The `akeys` function returns an array of all the keys in an `hstore` value. For example, the query below returns all the keys for Dell laptop products. 
+The `akeys` function returns an array of all the keys in an `hstore` value. For example, the query below returns all the keys for Dell laptop products.
 
 ```sql
 SELECT id, name, akeys(attributes) AS keys
@@ -234,7 +235,7 @@ In constrast, `JSON` supports a variety of data types, and can also store nested
 
 ## Indexing and performance
 
-Indexing can improve the performance of queries involving `hstore` data, particularly for large datasets. 
+Indexing can improve the performance of queries involving `hstore` data, particularly for large datasets.
 
 `Hstore` supports the regular `btree` and `hash` indexes. However, this is only useful for equality comparisons of the entire `hstore` value, since these indexes have no knowledge of its substructure.
 

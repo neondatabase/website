@@ -2,10 +2,10 @@
 title: Postgres jsonb_to_record() function
 subtitle: Convert a JSONB object to a record
 enableTableOfContents: true
-updatedOn: '2024-02-06T23:28:28.691Z'
+updatedOn: '2024-06-14T07:55:54.377Z'
 ---
 
-You can use the `jsonb_to_record` function to convert a top-level `JSONB` object into a row, with the type specified by the `AS` clause. 
+You can use the `jsonb_to_record` function to convert a top-level `JSONB` object into a row, with the type specified by the `AS` clause.
 
 This function is useful when you need to parse `JSONB` data received from external sources, such as APIs or file uploads, and store it in a structured format. By using `jsonb_to_record`, you can easily extract values from `JSONB` and map them to the corresponding columns in your database table.
 
@@ -17,7 +17,7 @@ This function is useful when you need to parse `JSONB` data received from extern
 jsonb_to_record(json JSONB) AS (column_name column_type [, ...])
 ```
 
-The function's definition includes a column definition list, where you specify the name and data type of each column in the resulting record. 
+The function's definition includes a column definition list, where you specify the name and data type of each column in the resulting record.
 
 ## Example usage
 
@@ -51,7 +51,7 @@ SELECT *
 FROM jsonb_to_record('{"id": "123", "name": "John Doe", "department": "Engineering", "salary": "75000"}') AS x(id INT, name TEXT, department TEXT, salary NUMERIC);
 ```
 
-Note that the string representation of the JSON object didn't need to be explicitly cast to `JSONB`. Postgres automatically casts it to `JSONB` when the function is called. 
+Note that the string representation of the JSON object didn't need to be explicitly cast to `JSONB`. Postgres automatically casts it to `JSONB` when the function is called.
 
 To verify the data was inserted, you can run the following query:
 
@@ -60,6 +60,7 @@ SELECT * FROM employees;
 ```
 
 This query returns the following result:
+
 ```text
 | id | name     | department   | salary |
 |----|----------|--------------|--------|
@@ -94,9 +95,9 @@ This query returns the following result:
 
 ### Handling nested data with `jsonb_to_record`
 
-`jsonb_to_record` can also be used to handle nested `JSONB` input data (i.e., keys with values that are `JSONB` objects themselves). You need to first define a [custom Postgres type](https://www.postgresql.org/docs/current/sql-createtype.html). The newly created type can then be used in the column definition list along with the other columns. 
+`jsonb_to_record` can also be used to handle nested `JSONB` input data (i.e., keys with values that are `JSONB` objects themselves). You need to first define a [custom Postgres type](https://www.postgresql.org/docs/current/sql-createtype.html). The newly created type can then be used in the column definition list along with the other columns.
 
-In the following example, we handle the `address` field by creating an `ADDRESS_TYPE` type first. 
+In the following example, we handle the `address` field by creating an `ADDRESS_TYPE` type first.
 
 ```sql
 CREATE TYPE ADDRESS_TYPE AS (
@@ -118,6 +119,7 @@ FROM jsonb_to_record('{
 ```
 
 This query returns the following result:
+
 ```text
 | id | name        | department | salary | address                     |
 |----|-------------|------------|--------|-----------------------------|
@@ -126,24 +128,25 @@ This query returns the following result:
 
 ### Alternative functions
 
-- [jsonb_populate_record](/docs/functions/jsonb_populate_record): This function can also be used to create records using values from a `JSONB` object. The difference is that `jsonb_populate_record` requires the record type to be defined beforehand, while `jsonb_to_record` needs the type definition inline. 
-- [jsonb_to_recordset](https://www.postgresql.org/docs/current/functions-json.html): This function can be used similarly to parse `JSONB`, the difference being that it returns a set of records instead of a single record. For example, if you have an array of `JSONB` objects, you can use `jsonb_to_recordset` to convert each object into a new row. 
-- [json_to_record](/docs/functions/json_to_record): This function provides the same functionality as `json_to_record`, but accepts `JSON` input instead of `JSONB`. In cases where the input payload type isn't exactly specified, either of the two functions can be used. 
+- [jsonb_populate_record](/docs/functions/jsonb_populate_record): This function can also be used to create records using values from a `JSONB` object. The difference is that `jsonb_populate_record` requires the record type to be defined beforehand, while `jsonb_to_record` needs the type definition inline.
+- [jsonb_to_recordset](https://www.postgresql.org/docs/current/functions-json.html): This function can be used similarly to parse `JSONB`, the difference being that it returns a set of records instead of a single record. For example, if you have an array of `JSONB` objects, you can use `jsonb_to_recordset` to convert each object into a new row.
+- [json_to_record](/docs/functions/json_to_record): This function provides the same functionality as `json_to_record`, but accepts `JSON` input instead of `JSONB`. In cases where the input payload type isn't exactly specified, either of the two functions can be used.
 
-    For example, take this `json_to_record` query: 
+  For example, take this `json_to_record` query:
 
-    ```sql
-    SELECT *
-    FROM json_to_record('{"id": "123", "name": "John Doe", "department": "Engineering"}') 
-    AS x(id INT, name TEXT, department TEXT);
-    ```
-    It works just as well as this `JSONB` variant (below) since Postgres casts the literal `JSON` object to `JSON` or `JSONB` depending on the context.
+  ```sql
+  SELECT *
+  FROM json_to_record('{"id": "123", "name": "John Doe", "department": "Engineering"}')
+  AS x(id INT, name TEXT, department TEXT);
+  ```
 
-    ```sql
-    SELECT *
-    FROM jsonb_to_record('{"id": "123", "name": "Sally", "department": "Engineering"}')
-    AS x(id INT, name TEXT, department TEXT);
-    ```
+  It works just as well as this `JSONB` variant (below) since Postgres casts the literal `JSON` object to `JSON` or `JSONB` depending on the context.
+
+  ```sql
+  SELECT *
+  FROM jsonb_to_record('{"id": "123", "name": "Sally", "department": "Engineering"}')
+  AS x(id INT, name TEXT, department TEXT);
+  ```
 
 ## Resources
 

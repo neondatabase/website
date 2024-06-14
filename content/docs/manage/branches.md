@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-02-22T14:29:54.387Z'
+updatedOn: '2024-06-14T07:55:54.416Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [primary branch](#primary-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -29,7 +29,7 @@ Each Neon project has a primary branch. In the Neon Console, your primary branch
 
 Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
 
-- For Neon Free Tier users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier  _active hours_ limit of 20 hours per month.
+- For Neon Free Tier users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier _active hours_ limit of 20 hours per month.
 - For users on paid plans, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
 
 ## Protected branch
@@ -42,22 +42,23 @@ To create a branch:
 
 1. In the Neon Console, select a project.
 2. Select **Branches**.
-3. Click **New Branch** to open the branch creation dialog.
-![Create branch dialog](/docs/manage/create_branch.png)
+3. Click **Create branch** to open the branch creation dialog.
+   ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch.
 5. Select a parent branch. You can branch from your Neon project's [primary branch](#primary-branch) or a [non-primary branch](#non-primary-branch).
 6. Select an **Include data up to** option to specify the data to be included in your branch.
-    - **Current point in time**: Creates a branch with the latest available data from the parent (the default).
-    - **Specific date and time**: Creates a branch with data up to a specific date and time, allowing for point-in-time restore.
-    - **Specific Log Sequence Number**: Creates a branch with data up to a specific [Log Sequence Number (LSN)](/docs/reference/glossary#lsn) in the database log, allowing for precise point-in-time restore.
 
     <Admonition type="note">
-    The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occured after the specified date and time or LSN, which means the branch contains data as it existed previously, allowing for point-in-time restore. You can only specify a date and time or LSN value that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+    The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN, which means the branch contains data as it existed previously, allowing for point-in-time restore. You can only specify a date and time or LSN value that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
     </Admonition>
 
-8. Click **Create new branch** to create your branch.
+   <Admonition type="note">
+   The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occured after the specified date and time or LSN, which means the branch contains data as it existed previously, allowing for point-in-time restore. You can only specify a date and time or LSN value that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+   </Admonition>
 
-You are directed to the **Branches** page where you are shown the details for your new branch.
+7. Click **Create new branch** to create your branch.
+
+You are directed to the **Branch** overview page where you are shown the details for your new branch.
 
 ## View branches
 
@@ -70,27 +71,35 @@ To view the branches in a Neon project:
 
    Branch details in this table view include:
 
+   - **Branch**: The branch name, which is a generated name if no name was specified when created.
    - **Parent**: Indicates the parent from which this branch was created, helping you track your branch hierarchy.
    - **Active time**: Number of hours the branch's compute was active so far in the current billing period.
-   - **RW Compute**: Shows the current compute size and activity status for the branch's compute.
-   - **Data size**: Indicates the logical data size of each branch, helping you monitor your plan's storage limit. Does not include shared history.
+   - **RW Compute**: Shows the current compute size and status for the branch's compute.
+   - **Data size**: Indicates the logical data size of each branch, helping you monitor your plan's storage limit. Data size does not include history.
    - **Last active**: Shows when the branch's compute was last active.
 
 1. Select a branch from the table to view details about the branch.
 
-    ![View branch details](/docs/manage/branch_details.png)
+   ![View branch details](/docs/manage/branch_details.png)
 
-    Branch details shown on the branch page include:
+   Branch details shown on the branch page include:
 
-    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
-    - **Created**: The date and time the branch was created.
-    - **Active  Since**: The active hours used by the branch compute in the current billing period.
-    - **Compute Time**: The compute hours used by the branch in the current billing period.
-    - **Parent Branch**: The branch from which this branch was created (only applicable to child branches).
-    - **Branching Point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
-    - **Last Data Reset**: The last time the branch was reset from the parent branch (only applicable to child branches).
+   - **ID**: The branch ID. Branch IDs have a `br-` prefix.
+   - **Created**: The date and time the branch was created.
+   - **Compute hours**: The compute hours used by the branch in the current billing period.
+   - **Active hours since**: The active hours used by the branch compute in the current billing period.
+   - **Data size**: The logical data size of the branch. Data size does not include history.
+   - **Parent branch**: The branch from which this branch was created (only applicable to child branches).
+   - **Branching point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
+   - **Last data reset**: The last time the branch was reset from the parent branch (only applicable to child branches). For information about the **Reset from parent** option, see [Reset from parent](/docs/guides/reset-from-parent).
+   - **Compare to parent**: For information about the **Open schema diff** option, see [Schema diff](/docs/guides/schema-diff).
 
-The branch details page also includes details about the compute endpoint associated with the branch. For more information, see [View a compute endpoint](/docs/manage/endpoints#view-a-compute-endpoint).
+The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. In Neon, all of these objects are associated with a particular branch. For information about these objects, see:
+
+- [Manage computes](/docs/manage/endpoints#view-a-compute-endpoint).
+- [Manage roles](/docs/manage/roles)
+- [Manage databases](/docs/manage/databases)
+- [View branches](#view-branches)
 
 ## Rename a branch
 
@@ -99,7 +108,7 @@ Neon permits renaming a branch, including your project's primary branch. To rena
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch page, click the **More** drop-down menu and select **Rename**.
+4. On the branch overview page, click the **Actions** drop-down menu and select **Rename**.
 5. Specify a new name for the branch and click **Save**.
 
 ## Set a branch as primary
@@ -111,7 +120,7 @@ To set a branch as the primary branch:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch page, click the **More** drop-down menu and select **Set as primary**.
+4. On the branch overview page, click the **Actions** drop-down menu and select **Set as primary**.
 5. In the **Set as primary** confirmation dialog, click **Set as Primary** to confirm your selection.
 
 ## Set a branch as protected
@@ -130,7 +139,7 @@ To designate a branch as protected:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch page, click the **More** drop-down menu and select **Set as protected**.
+4. On the branch overview page, click the **Actions** drop-down menu and select **Set as protected**.
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
 
 For step-by-step instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
@@ -145,25 +154,25 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 
 1. In the Neon Console, select a project.
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
-![Connection details widget](/docs/connect/connection_details.png)
+   ![Connection details widget](/docs/connect/connection_details.png)
 3. Copy the connection string. A connection string includes your role name, the compute endpoint hostname, and database name.
 4. Connect with `psql` as shown below.
 
-  ```bash shouldWrap
-  psql postgres://[user]:[password]@[neon_hostname]/[dbname]
-  ```
+```bash shouldWrap
+psql postgres://[user]:[password]@[neon_hostname]/[dbname]
+```
 
 <Admonition type="tip">
 A compute endpoint hostname starts with an `ep-` prefix. You can also find a compute endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
 </Admonition>
 
-If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the [Guides](/docs/guides/guides-intro) section in the documentation provide connection examples for various languages and frameworks. For more information about connecting, see [Connect from any application](/docs/connect/connect-from-any-app).
+If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
 
 ## Reset a branch from parent
 
 Use Neon's **Reset from parent** feature to instantly update a branch with the latest schema and data from its parent. This feature can be an integral part of your CI/CD automation.
 
-You can use the Neon Console, CLI, or API. For more detail, see [Reset from parent](/docs/guides/reset-from-parent).
+You can use the Neon Console, CLI, or API. For more details, see [Reset from parent](/docs/guides/reset-from-parent).
 
 ## Restore a branch to its own or another branch's history
 
@@ -173,7 +182,7 @@ There are several restore operations available using Neon's Branch Restore featu
 - Restore a branch to the head of another branch
 - Restore a branch to the history of another branch
 
-You can use the Neon Console, CLI, or API. For more detail, see [Branch Restore](/docs/guides/branch-restore).
+You can use the Neon Console, CLI, or API. For more details, see [Branch Restore](/docs/guides/branch-restore).
 
 ## Delete a branch
 
@@ -184,8 +193,8 @@ To delete a branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Select a branch from the table.
-4. On the branch page, click the **More** drop-down menu and select **Delete**.
-4. On the confirmation dialog, click **Delete**.
+4. On the branch overview page, click the **Actions** drop-down menu and select **Delete**.
+5. On the confirmation dialog, click **Delete**.
 
 ## Check the data size
 
@@ -227,7 +236,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranch).
 
 ```http
-POST /projects/{project_id}/branches 
+POST /projects/{project_id}/branches
 ```
 
 The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without a compute endpoint. The `branch` attribute specifies the parent branch.
@@ -446,6 +455,5 @@ The response body shows information about the branch being deleted and the `susp
 </details>
 
 You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches-with-the-api). The deleted branch should no longer be listed.
-
 
 <NeedHelp/>

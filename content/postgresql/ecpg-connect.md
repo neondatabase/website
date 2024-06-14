@@ -2,9 +2,9 @@
 
 ## 36.2. Managing Database Connections [#](#ECPG-CONNECT)
 
-  * [36.2.1. Connecting to the Database Server](ecpg-connect#ECPG-CONNECTING)
-  * [36.2.2. Choosing a Connection](ecpg-connect#ECPG-SET-CONNECTION)
-  * [36.2.3. Closing a Connection](ecpg-connect#ECPG-DISCONNECT)
+- [36.2.1. Connecting to the Database Server](ecpg-connect#ECPG-CONNECTING)
+- [36.2.2. Choosing a Connection](ecpg-connect#ECPG-SET-CONNECTION)
+- [36.2.3. Closing a Connection](ecpg-connect#ECPG-DISCONNECT)
 
 This section describes how to open, close, and switch database connections.
 
@@ -19,33 +19,33 @@ One connects to a database using the following statement:
 EXEC SQL CONNECT TO target [AS connection-name] [USER user-name];
 ```
 
-The *`target`* can be specified in the following ways:
+The _`target`_ can be specified in the following ways:
 
-* `dbname[@hostname][:port]`
-* `tcp:postgresql://hostname[:port][/dbname][?options]`
-* `unix:postgresql://localhost[:port][/dbname][?options]`
-* an SQL string literal containing one of the above forms
-* a reference to a character variable containing one of the above forms (see examples)
-* `DEFAULT`
+- `dbname[@hostname][:port]`
+- `tcp:postgresql://hostname[:port][/dbname][?options]`
+- `unix:postgresql://localhost[:port][/dbname][?options]`
+- an SQL string literal containing one of the above forms
+- a reference to a character variable containing one of the above forms (see examples)
+- `DEFAULT`
 
 The connection target `DEFAULT` initiates a connection to the default database under the default user name. No separate user name or connection name can be specified in that case.
 
-If you specify the connection target directly (that is, not as a string literal or variable reference), then the components of the target are passed through normal SQL parsing; this means that, for example, the *`hostname`* must look like one or more SQL identifiers separated by dots, and those identifiers will be case-folded unless double-quoted. Values of any *`options`* must be SQL identifiers, integers, or variable references. Of course, you can put nearly anything into an SQL identifier by double-quoting it. In practice, it is probably less error-prone to use a (single-quoted) string literal or a variable reference than to write the connection target directly.
+If you specify the connection target directly (that is, not as a string literal or variable reference), then the components of the target are passed through normal SQL parsing; this means that, for example, the _`hostname`_ must look like one or more SQL identifiers separated by dots, and those identifiers will be case-folded unless double-quoted. Values of any _`options`_ must be SQL identifiers, integers, or variable references. Of course, you can put nearly anything into an SQL identifier by double-quoting it. In practice, it is probably less error-prone to use a (single-quoted) string literal or a variable reference than to write the connection target directly.
 
 There are also different ways to specify the user name:
 
-* `username`
-* `username/password`
-* `username IDENTIFIED BY password`
-* `username USING password`
+- `username`
+- `username/password`
+- `username IDENTIFIED BY password`
+- `username USING password`
 
-As above, the parameters *`username`* and *`password`* can be an SQL identifier, an SQL string literal, or a reference to a character variable.
+As above, the parameters _`username`_ and _`password`_ can be an SQL identifier, an SQL string literal, or a reference to a character variable.
 
-If the connection target includes any *`options`*, those consist of `keyword=value` specifications separated by ampersands (`&`). The allowed key words are the same ones recognized by libpq (see [Section 34.1.2](libpq-connect#LIBPQ-PARAMKEYWORDS)). Spaces are ignored before any *`keyword`* or *`value`*, though not within or after one. Note that there is no way to write `&` within a *`value`*.
+If the connection target includes any _`options`_, those consist of `keyword=value` specifications separated by ampersands (`&`). The allowed key words are the same ones recognized by libpq (see [Section 34.1.2](libpq-connect#LIBPQ-PARAMKEYWORDS)). Spaces are ignored before any _`keyword`_ or _`value`_, though not within or after one. Note that there is no way to write `&` within a _`value`_.
 
-Notice that when specifying a socket connection (with the `unix:` prefix), the host name must be exactly `localhost`. To select a non-default socket directory, write the directory's pathname as the value of a `host` option in the *`options`* part of the target.
+Notice that when specifying a socket connection (with the `unix:` prefix), the host name must be exactly `localhost`. To select a non-default socket directory, write the directory's pathname as the value of a `host` option in the _`options`_ part of the target.
 
-The *`connection-name`* is used to handle multiple connections in one program. It can be omitted if a program uses only one connection. The most recently opened connection becomes the current connection, which is used by default when an SQL statement is to be executed (see later in this chapter).
+The _`connection-name`_ is used to handle multiple connections in one program. It can be omitted if a program uses only one connection. The most recently opened connection becomes the current connection, which is used by default when an SQL statement is to be executed (see later in this chapter).
 
 Here are some examples of `CONNECT` statements:
 
@@ -197,12 +197,12 @@ To close a connection, use the following statement:
 EXEC SQL DISCONNECT [connection];
 ```
 
-The *`connection`* can be specified in the following ways:
+The _`connection`_ can be specified in the following ways:
 
-* `connection-name`
-* `DEFAULT`
-* `CURRENT`
-* `ALL`
+- `connection-name`
+- `DEFAULT`
+- `CURRENT`
+- `ALL`
 
 If no connection name is specified, the current connection is closed.
 

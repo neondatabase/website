@@ -1,8 +1,9 @@
 ---
 title: Protected branches
-subtitle: Learn how to use Neon's protected branches feature to secure access to critical data
+subtitle: Learn how to use Neon's protected branches feature to secure access to
+  critical data
 enableTableOfContents: true
-updatedOn: '2023-12-22T16:01:34.806Z'
+updatedOn: '2024-06-14T07:55:54.405Z'
 ---
 
 Neon's protected branches feature lets you apply IP restrictions to specific branches in your Neon project as an added layer of data protection. Protected branches is a Neon [Scale](/docs/introduction/plans#scale) plan feature.
@@ -26,10 +27,10 @@ To configure an allowlist:
 1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
-    ![IP Allow configuration](/docs/manage/ip_allow.png)
+   ![IP Allow configuration](/docs/manage/ip_allow.png)
 4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
 5. Optionally, select **Allow unrestricted access to non-primary branches** to allow full access to your [no primary branches](/docs/manage/branches#non-primary-branch).
-5. Click **Save changes**.
+6. Click **Save changes**.
 
 </TabItem>
 
@@ -86,6 +87,7 @@ curl -X PATCH \
 }
 ' | jq
 ```
+
 </TabItem>
 
 </Tabs>
@@ -111,28 +113,28 @@ To set a branch as protected:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 
-    ![Branch page](/docs/guides/ip_allow_branch_page.png)
+   ![Branch page](/docs/guides/ip_allow_branch_page.png)
 
 3. Select a branch from the table. In this example, we'll configure our primary branch `main` as a protected branch.
 4. On the branch page, click the **More** drop-down menu and select **Set as protected**.
 
-    ![Set as protected](/docs/guides/ip_allow_set_as_protected.png)
+   ![Set as protected](/docs/guides/ip_allow_set_as_protected.png)
 
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
 
-    ![Set as protected confirmation](/docs/guides/ip_allow_set_as_protected_confirmation.png)
+   ![Set as protected confirmation](/docs/guides/ip_allow_set_as_protected_confirmation.png)
 
-    Your branch is now designated as protected, as indicated by the protected branch shield icon, shown below. Only the trusted IP addresses on your IP allowlist will be able to connect to this branch.
+   Your branch is now designated as protected, as indicated by the protected branch shield icon, shown below. Only the trusted IP addresses on your IP allowlist will be able to connect to this branch.
 
-    <Admonition type="important">
-    With this configuration, there is no restriction on IP access to the other branches in your project.
-    </Admonition>
+   <Admonition type="important">
+   With this configuration, there is no restriction on IP access to the other branches in your project.
+   </Admonition>
 
-    ![Branch page badge](/docs/guides/ip_allow_branch_badge.png)
+   ![Branch page badge](/docs/guides/ip_allow_branch_badge.png)
 
-    The protected branch designation also appears on your **Branches** page.
+   The protected branch designation also appears on your **Branches** page.
 
-    ![Branches page badge](/docs/guides/ip_allow_branch_badge_2.png)
+   ![Branches page badge](/docs/guides/ip_allow_branch_badge_2.png)
 
 <Admonition type="note">
 Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **More** drop-down menu on the branch page.

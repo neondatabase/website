@@ -2,9 +2,9 @@
 
 ## 55.1. Overview [#](#PROTOCOL-OVERVIEW)
 
-  * [55.1.1. Messaging Overview](protocol-overview#PROTOCOL-MESSAGE-CONCEPTS)
-  * [55.1.2. Extended Query Overview](protocol-overview#PROTOCOL-QUERY-CONCEPTS)
-  * [55.1.3. Formats and Format Codes](protocol-overview#PROTOCOL-FORMAT-CODES)
+- [55.1.1. Messaging Overview](protocol-overview#PROTOCOL-MESSAGE-CONCEPTS)
+- [55.1.2. Extended Query Overview](protocol-overview#PROTOCOL-QUERY-CONCEPTS)
+- [55.1.3. Formats and Format Codes](protocol-overview#PROTOCOL-FORMAT-CODES)
 
 The protocol has separate phases for startup and normal operation. In the startup phase, the frontend opens a connection to the server and authenticates itself to the satisfaction of the server. (This might involve a single message, or multiple messages depending on the authentication method being used.) If all goes well, the server then sends status information to the frontend, and finally enters normal operation. Except for the initial startup-request message, this part of the protocol is driven by the server.
 
@@ -30,9 +30,9 @@ Conversely, both servers and clients must take care never to send an incomplete 
 
 ### 55.1.2. Extended Query Overview [#](#PROTOCOL-QUERY-CONCEPTS)
 
-In the extended-query protocol, execution of SQL commands is divided into multiple steps. The state retained between steps is represented by two types of objects: *prepared statements* and *portals*. A prepared statement represents the result of parsing and semantic analysis of a textual query string. A prepared statement is not in itself ready to execute, because it might lack specific values for *parameters*. A portal represents a ready-to-execute or already-partially-executed statement, with any missing parameter values filled in. (For `SELECT` statements, a portal is equivalent to an open cursor, but we choose to use a different term since cursors don't handle non-`SELECT` statements.)
+In the extended-query protocol, execution of SQL commands is divided into multiple steps. The state retained between steps is represented by two types of objects: _prepared statements_ and _portals_. A prepared statement represents the result of parsing and semantic analysis of a textual query string. A prepared statement is not in itself ready to execute, because it might lack specific values for _parameters_. A portal represents a ready-to-execute or already-partially-executed statement, with any missing parameter values filled in. (For `SELECT` statements, a portal is equivalent to an open cursor, but we choose to use a different term since cursors don't handle non-`SELECT` statements.)
 
-The overall execution cycle consists of a *parse* step, which creates a prepared statement from a textual query string; a *bind* step, which creates a portal given a prepared statement and values for any needed parameters; and an *execute* step that runs a portal's query. In the case of a query that returns rows (`SELECT`, `SHOW`, etc.), the execute step can be told to fetch only a limited number of rows, so that multiple execute steps might be needed to complete the operation.
+The overall execution cycle consists of a _parse_ step, which creates a prepared statement from a textual query string; a _bind_ step, which creates a portal given a prepared statement and values for any needed parameters; and an _execute_ step that runs a portal's query. In the case of a query that returns rows (`SELECT`, `SHOW`, etc.), the execute step can be told to fetch only a limited number of rows, so that multiple execute steps might be needed to complete the operation.
 
 The backend can keep track of multiple prepared statements and portals (but note that these exist only within a session, and are never shared across sessions). Existing prepared statements and portals are referenced by names assigned when they were created. In addition, an “unnamed” prepared statement and portal exist. Although these behave largely the same as named objects, operations on them are optimized for the case of executing a query only once and then discarding it, whereas operations on named objects are optimized on the expectation of multiple uses.
 
@@ -40,7 +40,7 @@ The backend can keep track of multiple prepared statements and portals (but note
 
 ### 55.1.3. Formats and Format Codes [#](#PROTOCOL-FORMAT-CODES)
 
-Data of a particular data type might be transmitted in any of several different *formats*. As of PostgreSQL 7.4 the only supported formats are “text” and “binary”, but the protocol makes provision for future extensions. The desired format for any value is specified by a *format code*. Clients can specify a format code for each transmitted parameter value and for each column of a query result. Text has format code zero, binary has format code one, and all other format codes are reserved for future definition.
+Data of a particular data type might be transmitted in any of several different _formats_. As of PostgreSQL 7.4 the only supported formats are “text” and “binary”, but the protocol makes provision for future extensions. The desired format for any value is specified by a _format code_. Clients can specify a format code for each transmitted parameter value and for each column of a query result. Text has format code zero, binary has format code one, and all other format codes are reserved for future definition.
 
 The text representation of values is whatever strings are produced and accepted by the input/output conversion functions for the particular data type. In the transmitted representation, there is no trailing null character; the frontend must add one to received values if it wants to process them as C strings. (The text format does not allow embedded nulls, by the way.)
 

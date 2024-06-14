@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-ROLLBACK)
 
-## SPI\_rollback
+## SPI_rollback
 
-SPI\_rollback, SPI\_rollback\_and\_chain — abort the current transaction
+SPI_rollback, SPI_rollback_and_chain — abort the current transaction
 
 ## Synopsis
 
