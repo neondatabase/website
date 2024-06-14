@@ -40,7 +40,7 @@ export default {
           icon: cliIcon,
           text: 'CLI',
           description: 'Neon in your terminal',
-          to: LINKS.cli,
+          to: LINKS.cliReference,
         },
         {
           icon: onDemandStorageIcon,
