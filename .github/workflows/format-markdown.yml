@@ -35,7 +35,7 @@ jobs:
         git config user.email "action@github.com"
         export HUSKY=0
         git add -A
-        # Check for meaningful changes before committing
+        # Check for meaningful changes before committing 
         if [ -n "$(git status --porcelain)" ]; then
           # Commit only modified markdown files, not all changes
           git commit -m "chore: format content markdown files with Prettier"
@@ -44,6 +44,9 @@ jobs:
           echo "No significant changes to commit"
           exit 0
         fi
+
+    - name: Pull latest changes
+      run: git pull --rebase
 
     - name: Push changes
       run: git push
