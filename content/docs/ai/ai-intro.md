@@ -17,11 +17,11 @@ The _Neon AI Starter Kit_ includes:
 - The `neon_vecs` Python and JavaScript SDKs for managing and querying vector embeddings in Postgres with the `pgvector` extension
 - The `neon_ai` utility for generating vector embeddings with your chosen LLM and storing them in Postgres
 - Starter apps to get you up and running in minutes:
-    - AI chatbot starter app
-    - RAG starter app
-    - Semantic search starter app
-    - Hybrid search starter app
-    - Image search starter app
+  - AI chatbot starter app
+  - RAG starter app
+  - Semantic search starter app
+  - Hybrid search starter app
+  - Image search starter app
 - The Neon AI scaling guide
 - The Neon AI go-live checklist
 
@@ -130,6 +130,5 @@ Learn about popular AI tools and how to use them with Neon Postgres.
 <a href="https://www.kaggle.com/kernels" description="Hosted Jupyter notebooks provided by Kaggle, enabling data analysis and machine learning model building using Kaggle datasets" icon="openai">Kaggle Kernels</a>
 
 <a href="https://aws.amazon.com/sagemaker/notebooks/" description="Managed Jupyter notebooks provided by AWS as part of the SageMaker suite, designed for building, training, and deploying machine learning models" icon="openai">Amazon SageMaker Notebooks</a>
-
 
 </DetailIconCards>
