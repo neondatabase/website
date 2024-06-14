@@ -32,10 +32,13 @@ const CardItem = ({
 
   if (isFeatured)
     return (
-      <Link className="group flex items-center gap-10 lg:gap-8 md:flex-col md:gap-4" {...linkProps}>
-        <div className="w-2/5 max-w-[496px] overflow-hidden rounded-lg md:w-full md:max-w-full">
+      <Link
+        className="group flex items-center gap-10 lg:gap-5 md:flex-col md:gap-6 sm:gap-3.5"
+        {...linkProps}
+      >
+        <div className="w-1/2 max-w-[496px] shrink-0 overflow-hidden rounded-xl xl:rounded-[10px] lg:rounded-lg md:w-full md:max-w-full">
           <Image
-            className="h-auto w-full transition-transform duration-300 group-hover:scale-105"
+            className="h-auto w-full "
             src={image.mediaItemUrl}
             alt={title}
             width={image.mediaDetails.width}
@@ -43,19 +46,19 @@ const CardItem = ({
             priority
           />
         </div>
-        <div className="w-3/5 max-w-[598px] md:w-full md:max-w-full">
+        <div className="w-1/2 max-w-[598px] md:w-full md:max-w-full">
           <p
             className="text-[26px] font-light leading-snug tracking-tighter text-white xl:text-2xl lg:text-lg"
             dangerouslySetInnerHTML={{ __html: quote }}
           />
           {author && author.name && (
-            <p className="mt-3 font-light leading-tight -tracking-extra-tight lg:mt-2 lg:text-xs">
+            <p className="mt-3 font-light leading-tight -tracking-extra-tight lg:text-[13px]">
               {author.name}{' '}
               {author?.post && <span className="text-gray-new-70">– {author?.post}</span>}
             </p>
           )}
           {!!linkProps && (
-            <div className="mt-9 inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA] lg:mt-5">
+            <div className="mt-9 inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA] lg:mt-7 lg:text-sm">
               Read case study
               <ArrowIcon className="ml-1" />
             </div>
@@ -66,21 +69,21 @@ const CardItem = ({
 
   return (
     <li>
-      <GradientCard className="p-8 md:p-7 md:pb-8" {...linkProps}>
+      <GradientCard className="p-8 lg:p-6 sm:p-5" {...linkProps}>
         <div className="flex h-full flex-col">
           <Image
-            className="h-10 w-fit"
+            className="h-10 w-fit lg:h-8"
             src={logo.mediaItemUrl}
             alt={title}
             width={logo.mediaDetails.width}
             height={logo.mediaDetails.height}
             priority={index < 6}
           />
-          <p className="mb-4 mt-[60px] line-clamp-3 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-8 md:mt-6">
+          <p className="mb-4 mt-[60px] line-clamp-3 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-10 md:mt-6">
             <span className="font-normal text-white">{title}</span>. {description}
           </p>
           {!!linkProps && (
-            <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA]">
+            <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA] lg:text-sm">
               Read case study
               <ArrowIcon className="ml-1" />
             </div>
@@ -136,18 +139,18 @@ const Hero = ({ items }) => {
           Discover the diverse and captivating stories of our valued partners, each a testament to
           unique experiences and successes.
         </p>
-        <div className="mt-20 w-full lg:mt-16 md:mt-12">
+        <div className="mt-20 w-full lg:mt-14 md:mt-10">
           {!!featuredItem && (
             <>
-              <div className="mb-16 lg:mb-12 md:mb-10">
+              <div className="mb-16 lg:mb-14">
                 <CardItem {...featuredItem.caseStudyPost} />
               </div>
-              <h2 className="mb-7 text-2xl leading-none tracking-tight lg:mb-6 lg:text-xl md:mb-5  md:text-lg">
+              <h2 className="mb-7 text-2xl leading-none tracking-tight lg:text-xl md:text-lg">
                 More customer stories
               </h2>
             </>
           )}
-          <ul className="дg:grid-cols-2 col-span-10 col-start-2 grid grid-cols-3 gap-x-8 gap-y-9 xl:col-span-full xl:col-start-1  md:gap-6 sm:grid-cols-1">
+          <ul className="col-span-10 col-start-2 grid grid-cols-3 gap-x-8 gap-y-9 xl:col-span-full xl:col-start-1 lg:grid-cols-2 md:gap-8 sm:grid-cols-1 sm:gap-y-5">
             {otherItems.map(({ title, caseStudyPost }, index) => (
               <CardItem {...caseStudyPost} title={title} key={index} index={index} />
             ))}
