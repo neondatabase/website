@@ -2,16 +2,16 @@
 
 ## 4.1. Lexical Structure [#](#SQL-SYNTAX-LEXICAL)
 
-* [4.1.1. Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
-* [4.1.2. Constants](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS)
-* [4.1.3. Operators](sql-syntax-lexical#SQL-SYNTAX-OPERATORS)
-* [4.1.4. Special Characters](sql-syntax-lexical#SQL-SYNTAX-SPECIAL-CHARS)
-* [4.1.5. Comments](sql-syntax-lexical#SQL-SYNTAX-COMMENTS)
-* [4.1.6. Operator Precedence](sql-syntax-lexical#SQL-PRECEDENCE)
+- [4.1.1. Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
+- [4.1.2. Constants](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS)
+- [4.1.3. Operators](sql-syntax-lexical#SQL-SYNTAX-OPERATORS)
+- [4.1.4. Special Characters](sql-syntax-lexical#SQL-SYNTAX-SPECIAL-CHARS)
+- [4.1.5. Comments](sql-syntax-lexical#SQL-SYNTAX-COMMENTS)
+- [4.1.6. Operator Precedence](sql-syntax-lexical#SQL-PRECEDENCE)
 
-SQL input consists of a sequence of *commands*. A command is composed of a sequence of *tokens*, terminated by a semicolon (“;”). The end of the input stream also terminates a command. Which tokens are valid depends on the syntax of the particular command.
+SQL input consists of a sequence of _commands_. A command is composed of a sequence of _tokens_, terminated by a semicolon (“;”). The end of the input stream also terminates a command. Which tokens are valid depends on the syntax of the particular command.
 
-A token can be a *key word*, an *identifier*, a *quoted identifier*, a *literal* (or constant), or a special character symbol. Tokens are normally separated by whitespace (space, tab, newline), but need not be if there is no ambiguity (which is generally only the case if a special character is adjacent to some other token type).
+A token can be a _key word_, an _identifier_, a _quoted identifier_, a _literal_ (or constant), or a special character symbol. Tokens are normally separated by whitespace (space, tab, newline), but need not be if there is no ambiguity (which is generally only the case if a special character is adjacent to some other token type).
 
 For example, the following is (syntactically) valid SQL input:
 
@@ -23,7 +23,7 @@ INSERT INTO MY_TABLE VALUES (3, 'hi there');
 
 This is a sequence of three commands, one per line (although this is not required; more than one command can be on a line, and commands can usefully be split across lines).
 
-Additionally, *comments* can occur in SQL input. They are not tokens, they are effectively equivalent to whitespace.
+Additionally, _comments_ can occur in SQL input. They are not tokens, they are effectively equivalent to whitespace.
 
 The SQL syntax is not very consistent regarding what tokens identify commands and which are operands or parameters. The first few tokens are generally the command name, so in the above example we would usually speak of a “SELECT”, an “UPDATE”, and an “INSERT” command. But for instance the `UPDATE` command always requires a `SET` token to appear in a certain position, and this particular variation of `INSERT` also requires a `VALUES` in order to be complete. The precise syntax rules for each command are described in [Part VI](reference).
 
@@ -31,7 +31,7 @@ The SQL syntax is not very consistent regarding what tokens identify commands an
 
 ### 4.1.1. Identifiers and Key Words [#](#SQL-SYNTAX-IDENTIFIERS)
 
-Tokens such as `SELECT`, `UPDATE`, or `VALUES` in the example above are examples of *key words*, that is, words that have a fixed meaning in the SQL language. The tokens `MY_TABLE` and `A` are examples of *identifiers*. They identify names of tables, columns, or other database objects, depending on the command they are used in. Therefore they are sometimes simply called “names”. Key words and identifiers have the same lexical structure, meaning that one cannot know whether a token is an identifier or a key word without knowing the language. A complete list of key words can be found in [Appendix C](sql-keywords-appendix).
+Tokens such as `SELECT`, `UPDATE`, or `VALUES` in the example above are examples of _key words_, that is, words that have a fixed meaning in the SQL language. The tokens `MY_TABLE` and `A` are examples of _identifiers_. They identify names of tables, columns, or other database objects, depending on the command they are used in. Therefore they are sometimes simply called “names”. Key words and identifiers have the same lexical structure, meaning that one cannot know whether a token is an identifier or a key word without knowing the language. A complete list of key words can be found in [Appendix C](sql-keywords-appendix).
 
 SQL identifiers and key words must begin with a letter (`a`-`z`, but also letters with diacritical marks and non-Latin letters) or an underscore (`_`). Subsequent characters in an identifier or key word can be letters, underscores, digits (`0`-`9`), or dollar signs (`$`). Note that dollar signs are not allowed in identifiers according to the letter of the SQL standard, so their use might render applications less portable. The SQL standard will not define a key word that contains digits or starts or ends with an underscore, so identifiers of this form are safe against possible conflict with future extensions of the standard.
 
@@ -55,7 +55,7 @@ A convention often used is to write key words in upper case and names in lower c
 UPDATE my_table SET a = 5;
 ```
 
-There is a second kind of identifier: the *delimited identifier* or *quoted identifier*. It is formed by enclosing an arbitrary sequence of characters in double-quotes (`"`). A delimited identifier is always an identifier, never a key word. So `"select"` could be used to refer to a column or table named “select”, whereas an unquoted `select` would be taken as a key word and would therefore provoke a parse error when used where a table or column name is expected. The example can be written with quoted identifiers like this:
+There is a second kind of identifier: the _delimited identifier_ or _quoted identifier_. It is formed by enclosing an arbitrary sequence of characters in double-quotes (`"`). A delimited identifier is always an identifier, never a key word. So `"select"` could be used to refer to a column or table named “select”, whereas an unquoted `select` would be taken as a key word and would therefore provoke a parse error when used where a table or column name is expected. The example can be written with quoted identifiers like this:
 
 ```
 UPDATE "my_table" SET "a" = 5;
@@ -95,15 +95,15 @@ If the server encoding is not UTF-8, the Unicode code point identified by one of
 
 ### 4.1.2. Constants [#](#SQL-SYNTAX-CONSTANTS)
 
-There are three kinds of *implicitly-typed constants* in PostgreSQL: strings, bit strings, and numbers. Constants can also be specified with explicit types, which can enable more accurate representation and more efficient handling by the system. These alternatives are discussed in the following subsections.
+There are three kinds of _implicitly-typed constants_ in PostgreSQL: strings, bit strings, and numbers. Constants can also be specified with explicit types, which can enable more accurate representation and more efficient handling by the system. These alternatives are discussed in the following subsections.
 
 [#id](#SQL-SYNTAX-STRINGS)
 
 #### 4.1.2.1. String Constants [#](#SQL-SYNTAX-STRINGS)
 
-A string constant in SQL is an arbitrary sequence of characters bounded by single quotes (`'`), for example `'This is a string'`. To include a single-quote character within a string constant, write two adjacent single quotes, e.g., `'Dianne''s horse'`. Note that this is *not* the same as a double-quote character (`"`).
+A string constant in SQL is an arbitrary sequence of characters bounded by single quotes (`'`), for example `'This is a string'`. To include a single-quote character within a string constant, write two adjacent single quotes, e.g., `'Dianne''s horse'`. Note that this is _not_ the same as a double-quote character (`"`).
 
-Two string constants that are only separated by whitespace *with at least one newline* are concatenated and effectively treated as if the string had been written as one constant. For example:
+Two string constants that are only separated by whitespace _with at least one newline_ are concatenated and effectively treated as if the string had been written as one constant. For example:
 
 ```
 SELECT 'foo'
@@ -128,7 +128,7 @@ is not valid syntax. (This slightly bizarre behavior is specified by SQL; Postgr
 
 #### 4.1.2.2. String Constants with C-Style Escapes [#](#SQL-SYNTAX-STRINGS-ESCAPE)
 
-PostgreSQL also accepts “escape” string constants, which are an extension to the SQL standard. An escape string constant is specified by writing the letter `E` (upper or lower case) just before the opening single quote, e.g., `E'foo'`. (When continuing an escape string constant across lines, write `E` only before the first opening quote.) Within an escape string, a backslash character (`\`) begins a C-like *backslash escape* sequence, in which the combination of backslash and following character(s) represent a special byte value, as shown in [Table 4.1](sql-syntax-lexical#SQL-BACKSLASH-TABLE).
+PostgreSQL also accepts “escape” string constants, which are an extension to the SQL standard. An escape string constant is specified by writing the letter `E` (upper or lower case) just before the opening single quote, e.g., `E'foo'`. (When continuing an escape string constant across lines, write `E` only before the first opening quote.) Within an escape string, a backslash character (`\`) begins a C-like _backslash escape_ sequence, in which the combination of backslash and following character(s) represent a special byte value, as shown in [Table 4.1](sql-syntax-lexical#SQL-BACKSLASH-TABLE).
 
 [#id](#SQL-BACKSLASH-TABLE)
 
@@ -141,9 +141,9 @@ PostgreSQL also accepts “escape” string constants, which are an extension to
 | `\n`                                      | newline                                          |
 | `\r`                                      | carriage return                                  |
 | `\t`                                      | tab                                              |
-| `\o`, `\oo`, `\ooo` (*`o`* = 0–7)         | octal byte value                                 |
-| `\xh`, `\xhh` (*`h`* = 0–9, A–F)          | hexadecimal byte value                           |
-| `\uxxxx`, `\Uxxxxxxxx` (*`x`* = 0–9, A–F) | 16 or 32-bit hexadecimal Unicode character value |
+| `\o`, `\oo`, `\ooo` (_`o`_ = 0–7)         | octal byte value                                 |
+| `\xh`, `\xhh` (_`h`_ = 0–9, A–F)          | hexadecimal byte value                           |
+| `\uxxxx`, `\Uxxxxxxxx` (_`x`_ = 0–9, A–F) | 16 or 32-bit hexadecimal Unicode character value |
 
 Any other character following a backslash is taken literally. Thus, to include a backslash character, write two backslashes (`\\`). Also, a single quote can be included in an escape string by writing `\'`, in addition to the normal way of `''`.
 
@@ -151,9 +151,9 @@ It is your responsibility that the byte sequences you create, especially when us
 
 ### Caution
 
-If the configuration parameter [standard\_conforming\_strings](runtime-config-compatible#GUC-STANDARD-CONFORMING-STRINGS) is `off`, then PostgreSQL recognizes backslash escapes in both regular and escape string constants. However, as of PostgreSQL 9.1, the default is `on`, meaning that backslash escapes are recognized only in escape string constants. This behavior is more standards-compliant, but might break applications which rely on the historical behavior, where backslash escapes were always recognized. As a workaround, you can set this parameter to `off`, but it is better to migrate away from using backslash escapes. If you need to use a backslash escape to represent a special character, write the string constant with an `E`.
+If the configuration parameter [standard_conforming_strings](runtime-config-compatible#GUC-STANDARD-CONFORMING-STRINGS) is `off`, then PostgreSQL recognizes backslash escapes in both regular and escape string constants. However, as of PostgreSQL 9.1, the default is `on`, meaning that backslash escapes are recognized only in escape string constants. This behavior is more standards-compliant, but might break applications which rely on the historical behavior, where backslash escapes were always recognized. As a workaround, you can set this parameter to `off`, but it is better to migrate away from using backslash escapes. If you need to use a backslash escape to represent a special character, write the string constant with an `E`.
 
-In addition to `standard_conforming_strings`, the configuration parameters [escape\_string\_warning](runtime-config-compatible#GUC-ESCAPE-STRING-WARNING) and [backslash\_quote](runtime-config-compatible#GUC-BACKSLASH-QUOTE) govern treatment of backslashes in string constants.
+In addition to `standard_conforming_strings`, the configuration parameters [escape_string_warning](runtime-config-compatible#GUC-ESCAPE-STRING-WARNING) and [backslash_quote](runtime-config-compatible#GUC-BACKSLASH-QUOTE) govern treatment of backslashes in string constants.
 
 The character with the code zero cannot be in a string constant.
 
@@ -187,7 +187,7 @@ Either the 4-digit or the 6-digit escape form can be used to specify UTF-16 surr
 
 If the server encoding is not UTF-8, the Unicode code point identified by one of these escape sequences is converted to the actual server encoding; an error is reported if that's not possible.
 
-Also, the Unicode escape syntax for string constants only works when the configuration parameter [standard\_conforming\_strings](runtime-config-compatible#GUC-STANDARD-CONFORMING-STRINGS) is turned on. This is because otherwise this syntax could confuse clients that parse the SQL statements to the point that it could lead to SQL injections and similar security issues. If the parameter is set to off, this syntax will be rejected with an error message.
+Also, the Unicode escape syntax for string constants only works when the configuration parameter [standard_conforming_strings](runtime-config-compatible#GUC-STANDARD-CONFORMING-STRINGS) is turned on. This is because otherwise this syntax could confuse clients that parse the SQL statements to the point that it could lead to SQL injections and similar security issues. If the parameter is set to off, this syntax will be rejected with an error message.
 
 [#id](#SQL-SYNTAX-DOLLAR-QUOTING)
 
@@ -243,7 +243,7 @@ digits.[digits][e[+-]digits]
 digitse[+-]digits
 ```
 
-where *`digits`* is one or more decimal digits (0 through 9). At least one digit must be before or after the decimal point, if one is used. At least one digit must follow the exponent marker (`e`), if one is present. There cannot be any spaces or other characters embedded in the constant, except for underscores, which can be used for visual grouping as described below. Note that any leading plus or minus sign is not actually considered part of the constant; it is an operator applied to the constant.
+where _`digits`_ is one or more decimal digits (0 through 9). At least one digit must be before or after the decimal point, if one is used. At least one digit must follow the exponent marker (`e`), if one is present. There cannot be any spaces or other characters embedded in the constant, except for underscores, which can be used for visual grouping as described below. Note that any leading plus or minus sign is not actually considered part of the constant; it is an operator applied to the constant.
 
 These are some examples of valid numeric constants:
 
@@ -262,7 +262,7 @@ Additionally, non-decimal integer constants are accepted in these forms:
 0bbindigits
 ```
 
-where *`hexdigits`* is one or more hexadecimal digits (0-9, A-F), *`octdigits`* is one or more octal digits (0-7), and *`bindigits`* is one or more binary digits (0 or 1). Hexadecimal digits and the radix prefixes can be in upper or lower case. Note that only integers can have non-decimal forms, not numbers with fractional parts.
+where _`hexdigits`_ is one or more hexadecimal digits (0-9, A-F), _`octdigits`_ is one or more octal digits (0-7), and _`bindigits`_ is one or more binary digits (0 or 1). Hexadecimal digits and the radix prefixes can be in upper or lower case. Note that only integers can have non-decimal forms, not numbers with fractional parts.
 
 These are some examples of valid non-decimal integer constants:
 
@@ -275,11 +275,11 @@ These are some examples of valid non-decimal integer constants:
 
 For visual grouping, underscores can be inserted between digits. These have no further effect on the value of the constant. For example:
 
-1\_500\_000\_000\
-0b10001000\_00000000\
-0o\_1\_755\
-0xFFFF\_FFFF\
-1.618\_034
+1_500_000_000\
+0b10001000_00000000\
+0o_1_755\
+0xFFFF_FFFF\
+1.618_034
 
 Underscores are not allowed at the start or end of a numeric constant or a group of digits (that is, immediately before or after the decimal point or the exponent marker), and more than one underscore in a row is not allowed.
 
@@ -298,7 +298,7 @@ These are actually just special cases of the general casting notations discussed
 
 #### 4.1.2.7. Constants of Other Types [#](#SQL-SYNTAX-CONSTANTS-GENERIC)
 
-A constant of an *arbitrary* type can be entered using any one of the following notations:
+A constant of an _arbitrary_ type can be entered using any one of the following notations:
 
 ```
 type 'string'
@@ -306,7 +306,7 @@ type 'string'
 CAST ( 'string' AS type )
 ```
 
-The string constant's text is passed to the input conversion routine for the type called *`type`*. The result is a constant of the indicated type. The explicit type cast can be omitted if there is no ambiguity as to the type the constant must be (for example, when it is assigned directly to a table column), in which case it is automatically coerced.
+The string constant's text is passed to the input conversion routine for the type called _`type`_. The result is a constant of the indicated type. The explicit type cast can be omitted if there is no ambiguity as to the type the constant must be (for example, when it is assigned directly to a table column), in which case it is automatically coerced.
 
 The string constant can be written using either regular SQL notation or dollar-quoting.
 
@@ -332,9 +332,9 @@ An operator name is a sequence of up to `NAMEDATALEN`-1 (63 by default) characte
 
 There are a few restrictions on operator names, however:
 
-* `--` and `/*` cannot appear anywhere in an operator name, since they will be taken as the start of a comment.
+- `--` and `/*` cannot appear anywhere in an operator name, since they will be taken as the start of a comment.
 
-* A multiple-character operator name cannot end in `+` or `-`, unless the name also contains at least one of these characters:
+- A multiple-character operator name cannot end in `+` or `-`, unless the name also contains at least one of these characters:
 
   ``\~ ! @ # % ^ & | \` ?``
 
@@ -348,21 +348,21 @@ When working with non-SQL-standard operator names, you will usually need to sepa
 
 Some characters that are not alphanumeric have a special meaning that is different from being an operator. Details on the usage can be found at the location where the respective syntax element is described. This section only exists to advise the existence and summarize the purposes of these characters.
 
-* A dollar sign (`$`) followed by digits is used to represent a positional parameter in the body of a function definition or a prepared statement. In other contexts the dollar sign can be part of an identifier or a dollar-quoted string constant.
+- A dollar sign (`$`) followed by digits is used to represent a positional parameter in the body of a function definition or a prepared statement. In other contexts the dollar sign can be part of an identifier or a dollar-quoted string constant.
 
-* Parentheses (`()`) have their usual meaning to group expressions and enforce precedence. In some cases parentheses are required as part of the fixed syntax of a particular SQL command.
+- Parentheses (`()`) have their usual meaning to group expressions and enforce precedence. In some cases parentheses are required as part of the fixed syntax of a particular SQL command.
 
-* Brackets (`[]`) are used to select the elements of an array. See [Section 8.15](arrays) for more information on arrays.
+- Brackets (`[]`) are used to select the elements of an array. See [Section 8.15](arrays) for more information on arrays.
 
-* Commas (`,`) are used in some syntactical constructs to separate the elements of a list.
+- Commas (`,`) are used in some syntactical constructs to separate the elements of a list.
 
-* The semicolon (`;`) terminates an SQL command. It cannot appear anywhere within a command, except within a string constant or quoted identifier.
+- The semicolon (`;`) terminates an SQL command. It cannot appear anywhere within a command, except within a string constant or quoted identifier.
 
-* The colon (`:`) is used to select “slices” from arrays. (See [Section 8.15](arrays).) In certain SQL dialects (such as Embedded SQL), the colon is used to prefix variable names.
+- The colon (`:`) is used to select “slices” from arrays. (See [Section 8.15](arrays).) In certain SQL dialects (such as Embedded SQL), the colon is used to prefix variable names.
 
-* The asterisk (`*`) is used in some contexts to denote all the fields of a table row or composite value. It also has a special meaning when used as the argument of an aggregate function, namely that the aggregate does not require any explicit parameter.
+- The asterisk (`*`) is used in some contexts to denote all the fields of a table row or composite value. It also has a special meaning when used as the argument of an aggregate function, namely that the aggregate does not require any explicit parameter.
 
-* The period (`.`) is used in numeric constants, and to separate schema, table, and column names.
+- The period (`.`) is used in numeric constants, and to separate schema, table, and column names.
 
 [#id](#SQL-SYNTAX-COMMENTS)
 

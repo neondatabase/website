@@ -2,16 +2,14 @@
 
 ## 24.1. Locale Support [#](#LOCALE)
 
-  * [24.1.1. Overview](locale#LOCALE-OVERVIEW)
-  * [24.1.2. Behavior](locale#LOCALE-BEHAVIOR)
-  * [24.1.3. Selecting Locales](locale#LOCALE-SELECTING-LOCALES)
-  * [24.1.4. Locale Providers](locale#LOCALE-PROVIDERS)
-  * [24.1.5. ICU Locales](locale#ICU-LOCALES)
-  * [24.1.6. Problems](locale#LOCALE-PROBLEMS)
+- [24.1.1. Overview](locale#LOCALE-OVERVIEW)
+- [24.1.2. Behavior](locale#LOCALE-BEHAVIOR)
+- [24.1.3. Selecting Locales](locale#LOCALE-SELECTING-LOCALES)
+- [24.1.4. Locale Providers](locale#LOCALE-PROVIDERS)
+- [24.1.5. ICU Locales](locale#ICU-LOCALES)
+- [24.1.6. Problems](locale#LOCALE-PROBLEMS)
 
-
-
-*Locale* support refers to an application respecting cultural preferences regarding alphabets, sorting, number formatting, etc. PostgreSQL uses the standard ISO C and POSIX locale facilities provided by the server operating system. For additional information refer to the documentation of your system.
+_Locale_ support refers to an application respecting cultural preferences regarding alphabets, sorting, number formatting, etc. PostgreSQL uses the standard ISO C and POSIX locale facilities provided by the server operating system. For additional information refer to the documentation of your system.
 
 [#id](#LOCALE-OVERVIEW)
 
@@ -23,7 +21,7 @@ Locale support is automatically initialized when a database cluster is created u
 initdb --locale=sv_SE
 ```
 
-This example for Unix systems sets the locale to Swedish (`sv`) as spoken in Sweden (`SE`). Other possibilities might include `en_US` (U.S. English) and `fr_CA` (French Canadian). If more than one character set can be used for a locale then the specifications can take the form *`language_territory.codeset`*. For example, `fr_BE.UTF-8` represents the French language (fr) as spoken in Belgium (BE), with a UTF-8 character set encoding.
+This example for Unix systems sets the locale to Swedish (`sv`) as spoken in Sweden (`SE`). Other possibilities might include `en_US` (U.S. English) and `fr_CA` (French Canadian). If more than one character set can be used for a locale then the specifications can take the form _`language_territory.codeset`_. For example, `fr_BE.UTF-8` represents the French language (fr) as spoken in Belgium (BE), with a UTF-8 character set encoding.
 
 What locales are available on your system under what names depends on what was provided by the operating system vendor and what was installed. On most Unix systems, the command `locale -a` will provide a list of available locales. Windows uses more verbose locale names, such as `German_Germany` or `Swedish_Sweden.1252`, but the principles are the same.
 
@@ -62,15 +60,15 @@ To enable messages to be translated to the user's preferred language, NLS must h
 
 The locale settings influence the following SQL features:
 
-* Sort order in queries using `ORDER BY` or the standard comparison operators on textual data
+- Sort order in queries using `ORDER BY` or the standard comparison operators on textual data
 
-* The `upper`, `lower`, and `initcap` functions
+- The `upper`, `lower`, and `initcap` functions
 
-* Pattern matching operators (`LIKE`, `SIMILAR TO`, and POSIX-style regular expressions); locales affect both case insensitive matching and the classification of characters by character-class regular expressions
+- Pattern matching operators (`LIKE`, `SIMILAR TO`, and POSIX-style regular expressions); locales affect both case insensitive matching and the classification of characters by character-class regular expressions
 
-* The `to_char` family of functions
+- The `to_char` family of functions
 
-* The ability to use indexes with `LIKE` clauses
+- The ability to use indexes with `LIKE` clauses
 
 The drawback of using locales other than `C` or `POSIX` in PostgreSQL is its performance impact. It slows character handling and prevents ordinary indexes from being used by `LIKE`. For this reason use locales only if you actually need them.
 
@@ -88,7 +86,7 @@ Locales can be selected in different scopes depending on requirements. The above
 
 3. A locale can be selected separately for each database. The SQL command `CREATE DATABASE` and its command-line equivalent `createdb` have options for that. Use this for example if a database cluster houses databases for multiple tenants with different requirements.
 
-4. Locale settings can be made for individual table columns. This uses an SQL object called *collation* and is explained in [Section 24.2](collation). Use this for example to sort data in different languages or customize the sort order of a particular table.
+4. Locale settings can be made for individual table columns. This uses an SQL object called _collation_ and is explained in [Section 24.2](collation). Use this for example to sort data in different languages or customize the sort order of a particular table.
 
 5. Finally, locales can be selected for an individual query. Again, this uses SQL collation objects. This could be used to change the sort order based on run-time choices or for ad-hoc experimentation.
 
@@ -96,7 +94,7 @@ Locales can be selected in different scopes depending on requirements. The above
 
 ### 24.1.4. Locale Providers [#](#LOCALE-PROVIDERS)
 
-PostgreSQL supports multiple *locale providers*. This specifies which library supplies the locale data. One standard provider name is `libc`, which uses the locales provided by the operating system C library. These are the locales used by most tools provided by the operating system. Another provider is `icu`, which uses the external ICU library. ICU locales can only be used if support for ICU was configured when PostgreSQL was built.
+PostgreSQL supports multiple _locale providers_. This specifies which library supplies the locale data. One standard provider name is `libc`, which uses the locales provided by the operating system C library. These are the locales used by most tools provided by the operating system. Another provider is `icu`, which uses the external ICU library. ICU locales can only be used if support for ICU was configured when PostgreSQL was built.
 
 The commands and tools that select the locale settings, as described above, each have an option to select the locale provider. The examples shown earlier all use the `libc` provider, which is the default. Here is an example to initialize a database cluster using the ICU provider:
 
@@ -151,7 +149,7 @@ HINT:  To disable ICU locale validation, set parameter icu_validation_level to D
 CREATE COLLATION
 ```
 
-[icu\_validation\_level](runtime-config-client#GUC-ICU-VALIDATION-LEVEL) controls how the message is reported. Unless set to `ERROR`, the collation will still be created, but the behavior may not be what the user intended.
+[icu_validation_level](runtime-config-client#GUC-ICU-VALIDATION-LEVEL) controls how the message is reported. Unless set to `ERROR`, the collation will still be created, but the behavior may not be what the user intended.
 
 [#id](#ICU-LANGUAGE-TAG)
 
@@ -159,11 +157,11 @@ CREATE COLLATION
 
 A language tag, defined in BCP 47, is a standardized identifier used to identify languages, regions, and other information about a locale.
 
-Basic language tags are simply *`language`*`-`*`region`*; or even just *`language`*. The *`language`* is a language code (e.g. `fr` for French), and *`region`* is a region code (e.g. `CA` for Canada). Examples: `ja-JP`, `de`, or `fr-CA`.
+Basic language tags are simply _`language`_`-`_`region`_; or even just _`language`_. The _`language`_ is a language code (e.g. `fr` for French), and _`region`_ is a region code (e.g. `CA` for Canada). Examples: `ja-JP`, `de`, or `fr-CA`.
 
 Collation settings may be included in the language tag to customize collation behavior. ICU allows extensive customization, such as sensitivity (or insensitivity) to accents, case, and punctuation; treatment of digits within text; and many other options to satisfy a variety of uses.
 
-To include this additional collation information in a language tag, append `-u`, which indicates there are additional collation settings, followed by one or more `-`*`key`*`-`*`value`* pairs. The *`key`* is the key for a [collation setting](collation#ICU-COLLATION-SETTINGS) and *`value`* is a valid value for that setting. For boolean settings, the `-`*`key`* may be specified without a corresponding `-`*`value`*, which implies a value of `true`.
+To include this additional collation information in a language tag, append `-u`, which indicates there are additional collation settings, followed by one or more `-`_`key`_`-`_`value`_ pairs. The _`key`_ is the key for a [collation setting](collation#ICU-COLLATION-SETTINGS) and _`value`_ is a valid value for that setting. For boolean settings, the `-`_`key`_ may be specified without a corresponding `-`_`value`_, which implies a value of `true`.
 
 For example, the language tag `en-US-u-kn-ks-level2` means the locale with the English language in the US region, with collation settings `kn` set to `true` and `ks` set to `level2`. Those settings mean the collation will be case-insensitive and treat a sequence of digits as a single number:
 

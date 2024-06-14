@@ -2,8 +2,6 @@
 
 ## 8.19. Object Identifier Types [#](#DATATYPE-OID)
 
-
-
 Object identifiers (OIDs) are used internally by PostgreSQL as primary keys for various system tables. Type `oid` represents an object identifier. There are also several alias types for `oid`, each named `regsomething`. [Table 8.26](datatype-oid#DATATYPE-OID-TABLE) shows an overview.
 
 The `oid` type is currently implemented as an unsigned four-byte integer. Therefore, it is not large enough to provide database-wide uniqueness in large databases, or even in large individual tables.
@@ -45,7 +43,6 @@ While that doesn't look all that bad by itself, it's still oversimplified. A far
 | `regprocedure`  | `pg_proc`      | function with argument types | `sum(int4)`                                 |
 | `regrole`       | `pg_authid`    | role name                    | `smithee`                                   |
 | `regtype`       | `pg_type`      | data type name               | `integer`                                   |
-
 
 All of the OID alias types for objects that are grouped by namespace accept schema-qualified names, and will display schema-qualified names on output if the object would not be found in the current search path without being qualified. For example, `myschema.mytable` is acceptable input for `regclass` (if there is such a table). That value might be output as `myschema.mytable`, or just `mytable`, depending on the current search path. The `regproc` and `regoper` alias types will only accept input names that are unique (not overloaded), so they are of limited use; for most uses `regprocedure` or `regoperator` are more appropriate. For `regoperator`, unary operators are identified by writing `NONE` for the unused operand.
 
@@ -94,7 +91,7 @@ FROM information_schema.tables
 WHERE ...
 ```
 
-is *not recommended*, because it will fail for tables that are outside your search path or have names that require quoting.
+is _not recommended_, because it will fail for tables that are outside your search path or have names that require quoting.
 
 An additional property of most of the OID alias types is the creation of dependencies. If a constant of one of these types appears in a stored expression (such as a column default expression or view), it creates a dependency on the referenced object. For example, if a column has a default expression `nextval('my_seq'::regclass)`, PostgreSQL understands that the default expression depends on the sequence `my_seq`, so the system will not let the sequence be dropped without first removing the default expression. The alternative of `nextval('my_seq'::text)` does not create a dependency. (`regrole` is an exception to this property. Constants of this type are not allowed in stored expressions.)
 

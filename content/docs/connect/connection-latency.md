@@ -69,13 +69,13 @@ Here are examples of how to increase connection timeout settings in a few common
 <CodeTabs labels={["Node.js", "Python", "Java", "Prisma" ]}>
 
 ```javascript
-const { Pool } = require('pg')
+const { Pool } = require('pg');
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    connectionTimeoutMillis: 10000, // connection timeout in milliseconds
-    idleTimeoutMillis: 10000 // idle timeout in milliseconds
-})
+  connectionString: process.env.DATABASE_URL,
+  connectionTimeoutMillis: 10000, // connection timeout in milliseconds
+  idleTimeoutMillis: 10000, // idle timeout in milliseconds
+});
 ```
 
 ```python
@@ -127,28 +127,29 @@ var connectionString = process.env.DATABASE_URL;
 
 function connectWithRetry() {
   var operation = retry.operation({
-    retries: 5,               // number of retries before giving up
-    minTimeout: 4000,         // minimum time between retries in milliseconds
-    randomize: true,          // adds randomness to timeouts to prevent retries from overwhelming the server
+    retries: 5, // number of retries before giving up
+    minTimeout: 4000, // minimum time between retries in milliseconds
+    randomize: true, // adds randomness to timeouts to prevent retries from overwhelming the server
   });
 
   operation.attempt(function (currentAttempt) {
     var client = new Client({ connectionString });
 
-    client.connect()
-      .then(function() {
+    client
+      .connect()
+      .then(function () {
         console.log('Connected to the database');
-        
+
         // Perform your operations with the client
         // For example, let's run a simple SELECT query
         return client.query('SELECT NOW()');
       })
-      .then(function(res) {
+      .then(function (res) {
         console.log(res.rows[0]);
-        
+
         return client.end();
       })
-      .catch(function(err) {
+      .catch(function (err) {
         if (operation.retry(err)) {
           console.warn(`Failed to connect on attempt ${currentAttempt}, retrying...`);
         } else {

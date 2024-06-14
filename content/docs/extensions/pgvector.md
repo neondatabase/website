@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-01-23T19:40:04.086Z'
 ---
 
-The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models. 
+The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models.
 
 `pgvector` supports:
 
@@ -108,9 +108,9 @@ SELECT * FROM items WHERE id != 1 ORDER BY embedding <-> (SELECT embedding FROM 
 
 Get rows within a certain distance:
 
-```sql
+````sql
 SELECT * FROM items WHERE embedding <-> '[3,1,2]' < 5;```
-```
+````
 
 <Admonition type="note">
 Combine with ORDER BY and LIMIT to use an index
@@ -171,10 +171,10 @@ The following examples show how to add an HNSW index for the supported distance 
 ```sql
 CREATE INDEX ON items USING hnsw (embedding vector_l2_ops);
 ```
+
 <Admonition type="note">
 Use `halfvec_l2_ops` for `halfvec` and `sparsevec_l2_ops` for `sparsevec` (and similar for the other distance functions).
 </Admonition>
-
 
 **Inner product**
 
@@ -213,7 +213,7 @@ CREATE INDEX ON items USING hnsw (embedding bit_jaccard_ops);
 
 This example demonstrates how to set the parameters:
 
-```sql 
+```sql
 CREATE INDEX ON items USING hnsw (embedding vector_l2_ops) WITH (m = 16, ef_construction = 64);
 ```
 
@@ -262,7 +262,7 @@ CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)
 
 <Admonition type="note">
 Use `halfvec_l2_ops` for halfvec (and similar with the other distance functions).
-</Admonition> 
+</Admonition>
 
 **Inner product**
 
@@ -312,20 +312,20 @@ To optimize index build time, consider configuring the following session variabl
 
 In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute):
 
-| Compute Units (CU) | vCPU | RAM   |  maintenance_work_mem    |
-|--------------|------|-------|--------------------------|
-| 0.25         | 0.25 | 1 GB  |   64 MB                  |
-| 0.50         | 0.50 | 2 GB  |   64 MB                  |
-| 1            | 1    | 4 GB  |   67 MB                  |
-| 2            | 2    | 8 GB  |   134 MB                 |
-| 3            | 3    | 12 GB |   201 MB                 |
-| 4            | 4    | 16 GB |   268 MB                 |
-| 5            | 5    | 20 GB |   335 MB                 |
-| 6            | 6    | 24 GB |   402 MB                 |
-| 7            | 7    | 28 GB |   470 MB                 |
-| 8            | 8    | 32 GB |   537 MB                 |
+| Compute Units (CU) | vCPU | RAM   | maintenance_work_mem |
+| ------------------ | ---- | ----- | -------------------- |
+| 0.25               | 0.25 | 1 GB  | 64 MB                |
+| 0.50               | 0.50 | 2 GB  | 64 MB                |
+| 1                  | 1    | 4 GB  | 67 MB                |
+| 2                  | 2    | 8 GB  | 134 MB               |
+| 3                  | 3    | 12 GB | 201 MB               |
+| 4                  | 4    | 16 GB | 268 MB               |
+| 5                  | 5    | 20 GB | 335 MB               |
+| 6                  | 6    | 24 GB | 402 MB               |
+| 7                  | 7    | 28 GB | 470 MB               |
+| 8                  | 8    | 32 GB | 537 MB               |
 
-To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:  
+To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
 ```sql
 SET maintenance_work_mem='10 GB';
@@ -335,9 +335,9 @@ The recommended setting is your working set size (the size of your tuples for ve
 
 **max_parallel_maintenance_workers**
 
-The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`). 
+The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
 
-You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:  
+You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
 ```sql
 SET max_parallel_maintenance_workers = 7
@@ -351,7 +351,7 @@ Differences in behavior in the following corner cases were found during our test
 
 ### Distance between a valid and NULL vector
 
-The distance between a valid and `NULL` vector (`NULL::vector`) with `pgvector` 0.7.0 differs from `pgvector` 0.5.1 when using an HNSW or IVFFLAT index, as shown in the following examples: 
+The distance between a valid and `NULL` vector (`NULL::vector`) with `pgvector` 0.7.0 differs from `pgvector` 0.5.1 when using an HNSW or IVFFLAT index, as shown in the following examples:
 
 **HNSW**
 
@@ -372,7 +372,7 @@ SELECT * FROM t ORDER BY val <-> (SELECT NULL::vector);
 `pgvector` 0.7.0 output:
 
 ```
-   val   
+   val
 ---------
  [1,1,1]
  [1,2,4]
@@ -382,9 +382,8 @@ SELECT * FROM t ORDER BY val <-> (SELECT NULL::vector);
 
 `pgvector` 0.5.1 output:
 
-
 ```
-   val   
+   val
 ---------
  [0,0,0]
  [1,1,1]
@@ -411,24 +410,24 @@ SELECT * FROM t ORDER BY val <-> (SELECT NULL::vector);
 `pgvector` 0.7.0 output:
 
 ```sql
-   val   
+   val
 ---------
  [0,0,0]
  [1,2,3]
  [1,1,1]
  [1,2,4]
- ```
+```
 
- `pgvector` 0.5.1 output:
+`pgvector` 0.5.1 output:
 
- ```sql
-    val   
+```sql
+   val
 ---------
- [0,0,0]
- [1,1,1]
- [1,2,3]
- [1,2,4]
- ```
+[0,0,0]
+[1,1,1]
+[1,2,3]
+[1,2,4]
+```
 
 ### Error messages improvement for invalid literals
 

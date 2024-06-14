@@ -78,7 +78,7 @@ This query returns the following values:
 
 ## Advanced examples
 
-This section shows advanced usage examples for the `dense_rank` function. 
+This section shows advanced usage examples for the `dense_rank` function.
 
 ### `dense_rank` with `PARTITION BY` and `ORDER BY` clause
 
@@ -184,13 +184,12 @@ This query returns the following values:
 
 ## Additional considerations
 
-This section covers additional considerations for the `dense_rank` function. 
+This section covers additional considerations for the `dense_rank` function.
 
 ### How is `dense_rank` different from the `rank` function?
 
 The `rank` function assigns a unique rank to each distinct row in the result set and leaves gaps in the ranking sequence when there are ties.
 If two or more rows have the same values and are assigned the same rank, the next rank will be skipped.
-
 
 ```sql
 SELECT

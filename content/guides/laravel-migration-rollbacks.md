@@ -22,16 +22,20 @@ Here's how to use it:
 ### Using `php artisan migrate:rollback`
 
 1. **Revert the last batch of migrations:**
+
    ```bash
    php artisan migrate:rollback
    ```
+
    This command will revert the last batch of migrations applied to your database.
 
 2. **Revert a specific number of steps:**
    If you need more control, use the `--step` option:
+
    ```bash
    php artisan migrate:rollback --step=1
    ```
+
    This command will only roll back the most recent migration file.
 
 3. **Rolling back to a specific point in time:**
@@ -46,6 +50,7 @@ Here's how to use it:
 If you encounter issues while rolling back migrations, follow these troubleshooting steps:
 
 - **Failed rollback command:** Check the Laravel logs for error messages. For instance, if you see an error about missing tables or columns:
+
   - Revisit the migration files and ensure they are consistent.
   - Adjust or fix the migrations as needed.
 
@@ -85,9 +90,11 @@ If you encounter issues while rolling back migrations, follow these troubleshoot
 After rolling back migrations, verify the database schema and data to ensure the rollback was successful.
 
 - **Check migration status:**
+
   ```bash
   php artisan migrate:status
   ```
+
   This command lists all migrations, showing which ones have been applied.
 
 - **Inspect database directly:**
@@ -142,12 +149,14 @@ Smaller, manageable migrations make rollbacks simpler.
 - **Example workflow:**
 
   1. Create multiple smaller migrations instead of one large one.
+
   ```bash
   php artisan make:migration add_status_to_users
   php artisan make:migration add_type_to_users
   ```
 
   2. Test each migration in isolation.
+
   ```bash
   php artisan migrate
   ```
@@ -169,7 +178,9 @@ Even with a solid recovery plan, preventing deployment issues in the first place
 Implement a CI/CD pipeline to streamline the deployment process and add safeguards.
 
 **Example CI/CD pipeline:**
+
 1. **Build Stage:** Install dependencies and compile assets.
+
    ```yaml
    - name: Install Dependencies
      run: composer install
@@ -178,6 +189,7 @@ Implement a CI/CD pipeline to streamline the deployment process and add safeguar
    ```
 
 2. **Test stage:** Run tests and validate coding standards.
+
    ```yaml
    - name: Run Unit Tests
      run: php artisan test
@@ -217,5 +229,5 @@ On the database monitoring side, you can use [Neon's built-in monitoring capabil
 
 By using Laravel's built-in `migrate:rollback` command and Neon's backup and restore capabilities, you can revert a failed deployment quickly and safely. Follow best practices like testing in staging environments, breaking down database changes, and automating deployments to minimize future issues and maintain a smooth deployment process.
 
-* [Laravel Migrations Documentation](https://laravel.com/docs/11.x/migrations)
-* [Neon documentation](/docs)
+- [Laravel Migrations Documentation](https://laravel.com/docs/11.x/migrations)
+- [Neon documentation](/docs)

@@ -5,7 +5,6 @@ enableTableOfContents: true
 updatedOn: '2024-02-08T15:20:54.290Z'
 ---
 
-
 Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request.
 
 To create a Neon project and access it from a Remix application:
@@ -29,21 +28,21 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+   <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-      ```shell
-      npm install pg
-      ```
+   ```shell
+   npm install pg
+   ```
 
-      ```shell
-      npm install postgres
-      ```
+   ```shell
+   npm install postgres
+   ```
 
-      ```shell
-      npm install @neondatabase/serverless
-      ```
+   ```shell
+   npm install @neondatabase/serverless
+   ```
 
-    </CodeTabs>
+   </CodeTabs>
 
 ## Store your Neon credentials
 
@@ -94,7 +93,7 @@ export { sql };
 
 ### route
 
-Create a new route in your `app/routes` directory and import the `db.server` file.  
+Create a new route in your `app/routes` directory and import the `db.server` file.
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
@@ -114,8 +113,8 @@ export const loader = async () => {
 };
 
 export default function Page() {
-    const data = useLoaderData();
-    return <>{data}</>;
+  const data = useLoaderData();
+  return <>{data}</>;
 }
 ```
 
@@ -130,8 +129,8 @@ export const loader = async () => {
 };
 
 export default function Page() {
-    const data = useLoaderData();
-    return <>{data}</>;
+  const data = useLoaderData();
+  return <>{data}</>;
 }
 ```
 
@@ -146,8 +145,8 @@ export const loader = async () => {
 };
 
 export default function Page() {
-    const data = useLoaderData();
-    return <>{data}</>;
+  const data = useLoaderData();
+  return <>{data}</>;
 }
 ```
 
@@ -167,7 +166,7 @@ You can find the source code for the application described in this guide on GitH
 
 <DetailIconCards>
 
-  <a href="https://github.com/neondatabase/examples/tree/main/with-remix" description="Get started with Remix and Neon" icon="github">Get started with Remix and Neon</a>
+<a href="https://github.com/neondatabase/examples/tree/main/with-remix" description="Get started with Remix and Neon" icon="github">Get started with Remix and Neon</a>
 
 </DetailIconCards>
 

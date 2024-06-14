@@ -11,7 +11,7 @@ Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling,
 
 ## How to use connection pooling
 
-To use connection pooling with Neon, use a pooled connection string instead of a regular connection string. A pooled connection string adds the `-pooler` option to your compute endpoint ID, as shown below: 
+To use connection pooling with Neon, use a pooled connection string instead of a regular connection string. A pooled connection string adds the `-pooler` option to your compute endpoint ID, as shown below:
 
 ```text shouldWrap
 postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -23,14 +23,14 @@ The **Connection Details** widget on the Neon **Dashboard** provides **Pooled co
 
 <Admonition type="info">
 The `-pooler` option routes the connection to a connection pooling port at the Neon Proxy.
-</Admonition>  
+</Admonition>
 
 ## Connection limits without connection pooling
 
 Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size &#8212; and if you are using Neon's Autoscaling feature, it is set according to your **minimum** compute size.
 
 | Compute Size (CU) | vCPU | RAM   | max_connections |
-|:------------------|:-----|:------|:----------------|
+| :---------------- | :--- | :---- | :-------------- |
 | 0.25              | 0.25 | 1 GB  | 112             |
 | 0.50              | 0.50 | 2 GB  | 225             |
 | 1                 | 1    | 4 GB  | 450             |
@@ -40,7 +40,7 @@ Each Postgres connection creates a new process in the operating system, which co
 | 5                 | 5    | 20 GB | 2253            |
 | 6                 | 6    | 24 GB | 2703            |
 | 7                 | 7    | 28 GB | 3154            |
-| 8                 | 8    | 32 GB | 3604           |
+| 8                 | 8    | 32 GB | 3604            |
 
 The formula used to calculate `max_connections` for Neon computes is `RAM in bytes / 9531392 bytes`. For a Neon Free Tier compute, which has 1 GB of RAM, this works out to approximately 112 connections. Larger computes offered with paid plans have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports up to 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
 
@@ -54,6 +54,7 @@ Four connections are reserved for the Neon-managed Postgres `superuser` account.
 ```sql
 SELECT usename FROM pg_stat_activity WHERE datname = '<database_name>';
 ```
+
 </Admonition>
 
 Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the [Neon Free Tier](/docs/introduction/plans#free-tier), support connection pooling.
@@ -72,7 +73,7 @@ Neon uses `PgBouncer` in `transaction mode`. For limitations associated with `tr
 
 ## Neon PgBouncer configuration settings
 
-Neon's PgBouncer configuration is shown below. The settings are not user-configurable, but if you are a paid plan user and require a different setting, please contact [Neon Support](/docs/introduction/support). 
+Neon's PgBouncer configuration is shown below. The settings are not user-configurable, but if you are a paid plan user and require a different setting, please contact [Neon Support](/docs/introduction/support).
 
 ```ini
 [pgbouncer]
@@ -127,12 +128,12 @@ Since pgBouncer supports protocol-level prepared statements only, you must rely 
 
 ```javascript
 const query = {
-   // give the query a unique name
-   name: 'fetch-plan',
-      text: 'SELECT * FROM users WHERE username = $1',
-      values: ['alice'],
-  };
-  client.query(query);
+  // give the query a unique name
+  name: 'fetch-plan',
+  text: 'SELECT * FROM users WHERE username = $1',
+  values: ['alice'],
+};
+client.query(query);
 ```
 
 ```python

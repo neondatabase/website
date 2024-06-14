@@ -21,11 +21,11 @@ PREPARE prepared_name FROM string
 
 ## Parameters
 
-* *`prepared_name`* [#](#ECPG-SQL-PREPARE-PREPARED-NAME)
+- _`prepared_name`_ [#](#ECPG-SQL-PREPARE-PREPARED-NAME)
 
   An identifier for the prepared query.
 
-* *`string`* [#](#ECPG-SQL-PREPARE-STRING)
+- _`string`_ [#](#ECPG-SQL-PREPARE-STRING)
 
   A literal string or a host variable containing a preparable SQL statement, one of SELECT, INSERT, UPDATE, or DELETE. Use question marks (`?`) for parameter values to be supplied at execution.
 
@@ -33,7 +33,7 @@ PREPARE prepared_name FROM string
 
 ## Notes
 
-In typical usage, the *`string`* is a host variable reference to a string containing a dynamically-constructed SQL statement. The case of a literal string is not very useful; you might as well just write a direct SQL `PREPARE` statement.
+In typical usage, the _`string`_ is a host variable reference to a string containing a dynamically-constructed SQL statement. The case of a literal string is not very useful; you might as well just write a direct SQL `PREPARE` statement.
 
 If you do use a literal string, keep in mind that any double quotes you might wish to include in the SQL statement must be written as octal escapes (`\042`) not the usual C idiom `\"`. This is because the string is inside an `EXEC SQL` section, so the ECPG lexer parses it according to SQL rules not C rules. Any embedded backslashes will later be handled according to C rules; but `\"` causes an immediate syntax error because it is seen as ending the literal.
 

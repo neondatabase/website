@@ -34,9 +34,9 @@ Refer to [SET TRANSACTION](sql-set-transaction) for information on the meaning o
 
 In the standard, it is not necessary to issue `START TRANSACTION` to start a transaction block: any SQL command implicitly begins a block. PostgreSQL's behavior can be seen as implicitly issuing a `COMMIT` after each command that does not follow `START TRANSACTION` (or `BEGIN`), and it is therefore often called “autocommit”. Other relational database systems might offer an autocommit feature as a convenience.
 
-The `DEFERRABLE` *`transaction_mode`* is a PostgreSQL language extension.
+The `DEFERRABLE` _`transaction_mode`_ is a PostgreSQL language extension.
 
-The SQL standard requires commas between successive *`transaction_modes`*, but for historical reasons PostgreSQL allows the commas to be omitted.
+The SQL standard requires commas between successive _`transaction_modes`_, but for historical reasons PostgreSQL allows the commas to be omitted.
 
 See also the compatibility section of [SET TRANSACTION](sql-set-transaction).
 

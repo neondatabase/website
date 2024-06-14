@@ -21,19 +21,19 @@ This guide steps you through installing the Flyway command-line tool, configurin
 
 2. Extract the Flyway files. For example:
 
-    ```bash
-    cd ~/Downloads
-    tar -xzvf flyway-commandline-x.y.z-linux-x64.tar.gz -C ~/
-    ```
+   ```bash
+   cd ~/Downloads
+   tar -xzvf flyway-commandline-x.y.z-linux-x64.tar.gz -C ~/
+   ```
 
 3. Open a command prompt to view the contents of your Flyway installation:
 
-    ```bash
-    cd ~/flyway-x.y.z
-    ls
-    assets  drivers  flyway.cmd  jre  licenses    rules
-    conf    flyway   jars        lib  README.txt  sql
-    ```
+   ```bash
+   cd ~/flyway-x.y.z
+   ls
+   assets  drivers  flyway.cmd  jre  licenses    rules
+   conf    flyway   jars        lib  README.txt  sql
+   ```
 
 ## Set your path variable
 

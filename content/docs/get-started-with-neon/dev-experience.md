@@ -20,9 +20,9 @@ You can build your database branching workflows using the Neon CLI, Neon API, or
 neonctl branches create --name dev/alex
 ```
 
-Neon's copy-on-write technique makes branching instantaneous and cost-efficient. Whether your database is 1 GiB or 1 TiB, [it only takes seconds to create a branch](https://neon.tech/blog/how-to-copy-large-postgres-databases-in-seconds), and Neon's branches are full database copies, not partial or schema-only.     
+Neon's copy-on-write technique makes branching instantaneous and cost-efficient. Whether your database is 1 GiB or 1 TiB, [it only takes seconds to create a branch](https://neon.tech/blog/how-to-copy-large-postgres-databases-in-seconds), and Neon's branches are full database copies, not partial or schema-only.
 
-Also, with Neon, you can easily keep your development branches up-to-date by resetting your schema and data to the latest from `main` with a simple command. 
+Also, with Neon, you can easily keep your development branches up-to-date by resetting your schema and data to the latest from `main` with a simple command.
 
 ```bash
 neonctl branches reset dev/alex --parent
@@ -87,37 +87,37 @@ Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension for s
 
 **Neon is built for DevOps. Use our CLI, API, or GitHub Actions to build your CI/CD pipelines.**
 
--  **Neon CLI**
+- **Neon CLI**
 
-    With the [Neon CLI](/docs/reference/neon-cli), you can integrate Neon with development tools and CI/CD pipelines to enhance your development workflows, reducing the friction associated with database-related operations like creating projects, databases, and branches. Once you have your connection string, you can manage your entire Neon database from the command line. This makes it possible to quickly set up deployment pipelines using GitHub Actions, GitLab CI/CD, or Vercel Preview Environments. These operations and pipelines can also be treated as code and live alongside your applications as they evolve and mature.
+  With the [Neon CLI](/docs/reference/neon-cli), you can integrate Neon with development tools and CI/CD pipelines to enhance your development workflows, reducing the friction associated with database-related operations like creating projects, databases, and branches. Once you have your connection string, you can manage your entire Neon database from the command line. This makes it possible to quickly set up deployment pipelines using GitHub Actions, GitLab CI/CD, or Vercel Preview Environments. These operations and pipelines can also be treated as code and live alongside your applications as they evolve and mature.
 
-    ```bash
-    neonctl branches create --name dev/alex
-    ```
+  ```bash
+  neonctl branches create --name dev/alex
+  ```
 
 - **Neon API**
 
-    The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) is a REST API that enables you to manage your Neon projects programmatically. It provides resource-oriented URLs, accepts request bodies, returns JSON responses, and uses standard HTTP response codes. This API allows for a wide range of operations, enabling automation management of various aspects of Neon, including projects, branches, computes, databases, and roles. Like the Neon CLI, you can use the Neon API for seamless integration of Neon's capabilities into automated workflows, CI/CD pipelines, and developer tools. Give it a try using our [interactive Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+  The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) is a REST API that enables you to manage your Neon projects programmatically. It provides resource-oriented URLs, accepts request bodies, returns JSON responses, and uses standard HTTP response codes. This API allows for a wide range of operations, enabling automation management of various aspects of Neon, including projects, branches, computes, databases, and roles. Like the Neon CLI, you can use the Neon API for seamless integration of Neon's capabilities into automated workflows, CI/CD pipelines, and developer tools. Give it a try using our [interactive Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
-    ```bash
-    curl --request POST \
-        --url https://console.neon.tech/api/v2/projects/ancient-rice-43775340/branches \
-        --header 'accept: application/json' \
-        --header 'authorization: Bearer $NEON_API_KEY' \
-        --header 'content-type: application/json' \
-        --data '
-    {
-      "branch": {
-        "name": "dev/alex"
-      },
-      "endpoints": [
-        {
-          "type": "read_write"
-        }
-      ]
-    }
-    '
-    ```
+  ```bash
+  curl --request POST \
+      --url https://console.neon.tech/api/v2/projects/ancient-rice-43775340/branches \
+      --header 'accept: application/json' \
+      --header 'authorization: Bearer $NEON_API_KEY' \
+      --header 'content-type: application/json' \
+      --data '
+  {
+    "branch": {
+      "name": "dev/alex"
+    },
+    "endpoints": [
+      {
+        "type": "read_write"
+      }
+    ]
+  }
+  '
+  ```
 
 -- **GitHub Actions**
 

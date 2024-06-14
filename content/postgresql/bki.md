@@ -4,19 +4,19 @@
 
 **Table of Contents**
 
-  * [75.1. System Catalog Declaration Rules](system-catalog-declarations)
-  * [75.2. System Catalog Initial Data](system-catalog-initial-data)
+- [75.1. System Catalog Declaration Rules](system-catalog-declarations)
+- [75.2. System Catalog Initial Data](system-catalog-initial-data)
 
-    - [75.2.1. Data File Format](system-catalog-initial-data#SYSTEM-CATALOG-INITIAL-DATA-FORMAT)
-    - [75.2.2. OID Assignment](system-catalog-initial-data#SYSTEM-CATALOG-OID-ASSIGNMENT)
-    - [75.2.3. OID Reference Lookup](system-catalog-initial-data#SYSTEM-CATALOG-OID-REFERENCES)
-    - [75.2.4. Automatic Creation of Array Types](system-catalog-initial-data#SYSTEM-CATALOG-AUTO-ARRAY-TYPES)
-    - [75.2.5. Recipes for Editing Data Files](system-catalog-initial-data#SYSTEM-CATALOG-RECIPES)
+  - [75.2.1. Data File Format](system-catalog-initial-data#SYSTEM-CATALOG-INITIAL-DATA-FORMAT)
+  - [75.2.2. OID Assignment](system-catalog-initial-data#SYSTEM-CATALOG-OID-ASSIGNMENT)
+  - [75.2.3. OID Reference Lookup](system-catalog-initial-data#SYSTEM-CATALOG-OID-REFERENCES)
+  - [75.2.4. Automatic Creation of Array Types](system-catalog-initial-data#SYSTEM-CATALOG-AUTO-ARRAY-TYPES)
+  - [75.2.5. Recipes for Editing Data Files](system-catalog-initial-data#SYSTEM-CATALOG-RECIPES)
 
-  * [75.3. BKI File Format](bki-format)
-  * [75.4. BKI Commands](bki-commands)
-  * [75.5. Structure of the Bootstrap BKI File](bki-structure)
-  * [75.6. BKI Example](bki-example)
+- [75.3. BKI File Format](bki-format)
+- [75.4. BKI Commands](bki-commands)
+- [75.5. Structure of the Bootstrap BKI File](bki-structure)
+- [75.6. BKI Example](bki-example)
 
 PostgreSQL uses many different system catalogs to keep track of the existence and properties of database objects, such as tables and functions. Physically there is no difference between a system catalog and a plain user table, but the backend C code knows the structure and properties of each catalog, and can manipulate it directly at a low level. Thus, for example, it is inadvisable to attempt to alter the structure of a catalog on-the-fly; that would break assumptions built into the C code about how rows of the catalog are laid out. But the structure of the catalogs can change between major versions.
 

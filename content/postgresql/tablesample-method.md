@@ -4,9 +4,7 @@
 
 **Table of Contents**
 
-* [60.1. Sampling Method Support Functions](tablesample-support-functions)
-
-
+- [60.1. Sampling Method Support Functions](tablesample-support-functions)
 
 PostgreSQL's implementation of the `TABLESAMPLE` clause supports custom table sampling methods, in addition to the `BERNOULLI` and `SYSTEM` methods that are required by the SQL standard. The sampling method determines which rows of the table will be selected when the `TABLESAMPLE` clause is used.
 
@@ -20,15 +18,15 @@ The name of the function is the same method name appearing in the `TABLESAMPLE` 
 
 In addition to function pointers, the `TsmRoutine` struct must provide these additional fields:
 
-* `List *parameterTypes`
+- `List *parameterTypes`
 
   This is an OID list containing the data type OIDs of the parameter(s) that will be accepted by the `TABLESAMPLE` clause when this sampling method is used. For example, for the built-in methods, this list contains a single item with value `FLOAT4OID`, which represents the sampling percentage. Custom sampling methods can have more or different parameters.
 
-* `bool repeatable_across_queries`
+- `bool repeatable_across_queries`
 
   If `true`, the sampling method can deliver identical samples across successive queries, if the same parameters and `REPEATABLE` seed value are supplied each time and the table contents have not changed. When this is `false`, the `REPEATABLE` clause is not accepted for use with the sampling method.
 
-* `bool repeatable_across_scans`
+- `bool repeatable_across_scans`
 
   If `true`, the sampling method can deliver identical samples across successive scans in the same query (assuming unchanging parameters, seed value, and snapshot). When this is `false`, the planner will not select plans that would require scanning the sampled table more than once, since that might result in inconsistent query output.
 

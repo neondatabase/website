@@ -2,10 +2,10 @@
 
 ## 12.4. Additional Features [#](#TEXTSEARCH-FEATURES)
 
-  * [12.4.1. Manipulating Documents](textsearch-features#TEXTSEARCH-MANIPULATE-TSVECTOR)
-  * [12.4.2. Manipulating Queries](textsearch-features#TEXTSEARCH-MANIPULATE-TSQUERY)
-  * [12.4.3. Triggers for Automatic Updates](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS)
-  * [12.4.4. Gathering Document Statistics](textsearch-features#TEXTSEARCH-STATISTICS)
+- [12.4.1. Manipulating Documents](textsearch-features#TEXTSEARCH-MANIPULATE-TSVECTOR)
+- [12.4.2. Manipulating Queries](textsearch-features#TEXTSEARCH-MANIPULATE-TSQUERY)
+- [12.4.3. Triggers for Automatic Updates](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS)
+- [12.4.4. Gathering Document Statistics](textsearch-features#TEXTSEARCH-STATISTICS)
 
 This section describes additional functions and operators that are useful in connection with text search.
 
@@ -15,23 +15,23 @@ This section describes additional functions and operators that are useful in con
 
 [Section 12.3.1](textsearch-controls#TEXTSEARCH-PARSING-DOCUMENTS) showed how raw textual documents can be converted into `tsvector` values. PostgreSQL also provides functions and operators that can be used to manipulate documents that are already in `tsvector` form.
 
-* `tsvector || tsvector`
+- `tsvector || tsvector`
 
   The `tsvector` concatenation operator returns a vector which combines the lexemes and positional information of the two vectors given as arguments. Positions and weight labels are retained during the concatenation. Positions appearing in the right-hand vector are offset by the largest position mentioned in the left-hand vector, so that the result is nearly equivalent to the result of performing `to_tsvector` on the concatenation of the two original document strings. (The equivalence is not exact, because any stop-words removed from the end of the left-hand argument will not affect the result, whereas they would have affected the positions of the lexemes in the right-hand argument if textual concatenation were used.)
 
   One advantage of using concatenation in the vector form, rather than concatenating text before applying `to_tsvector`, is that you can use different configurations to parse different sections of the document. Also, because the `setweight` function marks all lexemes of the given vector the same way, it is necessary to parse the text and do `setweight` before concatenating if you want to label different parts of the document with different weights.
 
-* `setweight(vector tsvector, weight "char") returns tsvector`
+- `setweight(vector tsvector, weight "char") returns tsvector`
 
-  `setweight` returns a copy of the input vector in which every position has been labeled with the given *`weight`*, either `A`, `B`, `C`, or `D`. (`D` is the default for new vectors and as such is not displayed on output.) These labels are retained when vectors are concatenated, allowing words from different parts of a document to be weighted differently by ranking functions.
+  `setweight` returns a copy of the input vector in which every position has been labeled with the given _`weight`_, either `A`, `B`, `C`, or `D`. (`D` is the default for new vectors and as such is not displayed on output.) These labels are retained when vectors are concatenated, allowing words from different parts of a document to be weighted differently by ranking functions.
 
-  Note that weight labels apply to *positions*, not *lexemes*. If the input vector has been stripped of positions then `setweight` does nothing.
+  Note that weight labels apply to _positions_, not _lexemes_. If the input vector has been stripped of positions then `setweight` does nothing.
 
-* `length(vector tsvector) returns integer`
+- `length(vector tsvector) returns integer`
 
   Returns the number of lexemes stored in the vector.
 
-* `strip(vector tsvector) returns tsvector`
+- `strip(vector tsvector) returns tsvector`
 
   Returns a vector that lists the same lexemes as the given vector, but lacks any position or weight information. The result is usually much smaller than an unstripped vector, but it is also less useful. Relevance ranking does not work as well on stripped vectors as unstripped ones. Also, the `<->` (FOLLOWED BY) `tsquery` operator will never match stripped input, since it cannot determine the distance between lexeme occurrences.
 
@@ -43,19 +43,19 @@ A full list of `tsvector`-related functions is available in [Table 9.43](functi
 
 [Section 12.3.2](textsearch-controls#TEXTSEARCH-PARSING-QUERIES) showed how raw textual queries can be converted into `tsquery` values. PostgreSQL also provides functions and operators that can be used to manipulate queries that are already in `tsquery` form.
 
-* `tsquery && tsquery`
+- `tsquery && tsquery`
 
   Returns the AND-combination of the two given queries.
 
-* `tsquery || tsquery`
+- `tsquery || tsquery`
 
   Returns the OR-combination of the two given queries.
 
-* `!! tsquery`
+- `!! tsquery`
 
   Returns the negation (NOT) of the given query.
 
-* `tsquery <-> tsquery`
+- `tsquery <-> tsquery`
 
   Returns a query that searches for a match to the first given query immediately followed by a match to the second given query, using the `<->` (FOLLOWED BY) `tsquery` operator. For example:
 
@@ -66,9 +66,9 @@ A full list of `tsvector`-related functions is available in [Table 9.43](functi
    'fat' <-> ( 'cat' | 'rat' )
   ```
 
-* `tsquery_phrase(query1 tsquery, query2 tsquery [, distance integer ]) returns tsquery`
+- `tsquery_phrase(query1 tsquery, query2 tsquery [, distance integer ]) returns tsquery`
 
-  Returns a query that searches for a match to the first given query followed by a match to the second given query at a distance of exactly *`distance`* lexemes, using the `<N>` `tsquery` operator. For example:
+  Returns a query that searches for a match to the first given query followed by a match to the second given query at a distance of exactly _`distance`_ lexemes, using the `<N>` `tsquery` operator. For example:
 
   ```
   SELECT tsquery_phrase(to_tsquery('fat'), to_tsquery('cat'), 10);
@@ -77,9 +77,9 @@ A full list of `tsvector`-related functions is available in [Table 9.43](functi
    'fat' <10> 'cat'
   ```
 
-* `numnode(query tsquery) returns integer`
+- `numnode(query tsquery) returns integer`
 
-  Returns the number of nodes (lexemes plus operators) in a `tsquery`. This function is useful to determine if the *`query`* is meaningful (returns > 0), or contains only stop words (returns 0). Examples:
+  Returns the number of nodes (lexemes plus operators) in a `tsquery`. This function is useful to determine if the _`query`_ is meaningful (returns > 0), or contains only stop words (returns 0). Examples:
 
   ```
   SELECT numnode(plainto_tsquery('the any'));
@@ -94,7 +94,7 @@ A full list of `tsvector`-related functions is available in [Table 9.43](functi
          3
   ```
 
-* `querytree(query tsquery) returns text`
+- `querytree(query tsquery) returns text`
 
   Returns the portion of a `tsquery` that can be used for searching an index. This function is useful for detecting unindexable queries, for example those containing only stop words or only negated terms. For example:
 
@@ -114,13 +114,11 @@ A full list of `tsvector`-related functions is available in [Table 9.43](functi
 
 #### 12.4.2.1. Query Rewriting [#](#TEXTSEARCH-QUERY-REWRITING)
 
+The `ts_rewrite` family of functions search a given `tsquery` for occurrences of a target subquery, and replace each occurrence with a substitute subquery. In essence this operation is a `tsquery`-specific version of substring replacement. A target and substitute combination can be thought of as a _query rewrite rule_. A collection of such rewrite rules can be a powerful search aid. For example, you can expand the search using synonyms (e.g., `new york`, `big apple`, `nyc`, `gotham`) or narrow the search to direct the user to some hot topic. There is some overlap in functionality between this feature and thesaurus dictionaries ([Section 12.6.4](textsearch-dictionaries#TEXTSEARCH-THESAURUS)). However, you can modify a set of rewrite rules on-the-fly without reindexing, whereas updating a thesaurus requires reindexing to be effective.
 
+- `ts_rewrite (query tsquery, target tsquery, substitute tsquery) returns tsquery`
 
-The `ts_rewrite` family of functions search a given `tsquery` for occurrences of a target subquery, and replace each occurrence with a substitute subquery. In essence this operation is a `tsquery`-specific version of substring replacement. A target and substitute combination can be thought of as a *query rewrite rule*. A collection of such rewrite rules can be a powerful search aid. For example, you can expand the search using synonyms (e.g., `new york`, `big apple`, `nyc`, `gotham`) or narrow the search to direct the user to some hot topic. There is some overlap in functionality between this feature and thesaurus dictionaries ([Section 12.6.4](textsearch-dictionaries#TEXTSEARCH-THESAURUS)). However, you can modify a set of rewrite rules on-the-fly without reindexing, whereas updating a thesaurus requires reindexing to be effective.
-
-* `ts_rewrite (query tsquery, target tsquery, substitute tsquery) returns tsquery`
-
-  This form of `ts_rewrite` simply applies a single rewrite rule: *`target`* is replaced by *`substitute`* wherever it appears in *`query`*. For example:
+  This form of `ts_rewrite` simply applies a single rewrite rule: _`target`_ is replaced by _`substitute`_ wherever it appears in _`query`_. For example:
 
   ```
   SELECT ts_rewrite('a & b'::tsquery, 'a'::tsquery, 'c'::tsquery);
@@ -129,9 +127,9 @@ The `ts_rewrite` family of functions search a given `tsquery` for occurrences of
    'b' & 'c'
   ```
 
-* `ts_rewrite (query tsquery, select text) returns tsquery`
+- `ts_rewrite (query tsquery, select text) returns tsquery`
 
-  This form of `ts_rewrite` accepts a starting *`query`* and an SQL *`select`* command, which is given as a text string. The *`select`* must yield two columns of `tsquery` type. For each row of the *`select`* result, occurrences of the first column value (the target) are replaced by the second column value (the substitute) within the current *`query`* value. For example:
+  This form of `ts_rewrite` accepts a starting _`query`_ and an SQL _`select`_ command, which is given as a text string. The _`select`_ must yield two columns of `tsquery` type. For each row of the _`select`_ result, occurrences of the first column value (the target) are replaced by the second column value (the substitute) within the current _`query`_ value. For example:
 
   ```
   CREATE TABLE aliases (t tsquery PRIMARY KEY, s tsquery);
@@ -183,8 +181,6 @@ SELECT ts_rewrite('a & b'::tsquery,
 [#id](#TEXTSEARCH-UPDATE-TRIGGERS)
 
 ### 12.4.3. Triggers for Automatic Updates [#](#TEXTSEARCH-UPDATE-TRIGGERS)
-
-
 
 ### Note
 
@@ -249,8 +245,6 @@ Keep in mind that it is important to specify the configuration name explicitly w
 
 ### 12.4.4. Gathering Document Statistics [#](#TEXTSEARCH-STATISTICS)
 
-
-
 The function `ts_stat` is useful for checking your configuration and for finding stop-word candidates.
 
 ```
@@ -259,15 +253,15 @@ ts_stat(sqlquery text, [ weights text, ]
         OUT nentry integer) returns setof record
 ```
 
-*`sqlquery`* is a text value containing an SQL query which must return a single `tsvector` column. `ts_stat` executes the query and returns statistics about each distinct lexeme (word) contained in the `tsvector` data. The columns returned are
+_`sqlquery`_ is a text value containing an SQL query which must return a single `tsvector` column. `ts_stat` executes the query and returns statistics about each distinct lexeme (word) contained in the `tsvector` data. The columns returned are
 
-* *`word`* `text` — the value of a lexeme
+- _`word`_ `text` — the value of a lexeme
 
-* *`ndoc`* `integer` — number of documents (`tsvector`s) the word occurred in
+- _`ndoc`_ `integer` — number of documents (`tsvector`s) the word occurred in
 
-* *`nentry`* `integer` — total number of occurrences of the word
+- _`nentry`_ `integer` — total number of occurrences of the word
 
-If *`weights`* is supplied, only occurrences having one of those weights are counted.
+If _`weights`_ is supplied, only occurrences having one of those weights are counted.
 
 For example, to find the ten most frequent words in a document collection:
 

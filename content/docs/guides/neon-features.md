@@ -135,8 +135,3 @@ Protect your production or sensitive data.
 <a href="/docs/guides/protected-branches" description="Learn how to use Neon's protected branches feature to secure access to critical data" icon="respond-arrow">Configure protected branches</a>
 
 </DetailIconCards>
-
-
-
-
-

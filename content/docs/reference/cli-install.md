@@ -37,53 +37,53 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 
 - **macOS**
 
-    Download the macOS binary:
+  Download the macOS binary:
 
-    ```bash shouldWrap
-    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
-    ```
+  ```bash shouldWrap
+  curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
+  ```
 
-    No installation is required. Run the Neon CLI as follows:
+  No installation is required. Run the Neon CLI as follows:
 
-    ```bash
-    neonctl <command> [options]
-    ```
+  ```bash
+  neonctl <command> [options]
+  ```
 
 - **Linux**
 
-    Download the Linux x64 or ARM64 binary:
+  Download the Linux x64 or ARM64 binary:
 
-    x64:
+  x64:
 
-    ```bash shouldWrap
-    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
-    ```
+  ```bash shouldWrap
+  curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
+  ```
 
-    ARM64:
+  ARM64:
 
-    ```bash shouldWrap
-    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
-    ```
+  ```bash shouldWrap
+  curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
+  ```
 
-    No installation is required. Run the Neon CLI as follows:
+  No installation is required. Run the Neon CLI as follows:
 
-    ```bash
-    neonctl <command> [options]
-    ```
+  ```bash
+  neonctl <command> [options]
+  ```
 
 - **Windows**
 
-    Download the Windows binary:
+  Download the Windows binary:
 
-    ```bash shouldWrap
-    curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
-    ```
+  ```bash shouldWrap
+  curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
+  ```
 
-    No installation is required. Run the Neon CLI as follows:
+  No installation is required. Run the Neon CLI as follows:
 
-    ```bash
-    neonctl-win.exe <command> [options]
-    ```
+  ```bash
+  neonctl-win.exe <command> [options]
+  ```
 
 </TabItem>
 

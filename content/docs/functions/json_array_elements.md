@@ -35,7 +35,7 @@ INSERT INTO developers (id, name, skills) VALUES
 ```
 
 ```text
-| id |  name   |          skills          
+| id |  name   |          skills
 |----|---------|---------------------------
 | 1  | Alice   | ["Java", "Python", "SQL"]
 | 2  | Bob     | ["C++", "JavaScript"]
@@ -91,9 +91,9 @@ INSERT INTO products (id, name, details) VALUES
 ```
 
 ```text
-| id |  name   |                                details                                 |                             
+| id |  name   |                                details                                 |
 |----|---------|------------------------------------------------------------------------|
-| 1  | T-Shirt | {"sizes": ["S", "M", "L", "XL"], "colors": ["Red", "Blue", "Green"]}   | 
+| 1  | T-Shirt | {"sizes": ["S", "M", "L", "XL"], "colors": ["Red", "Blue", "Green"]}   |
 | 2  | Hoodie  | {"sizes": ["XS", "S", "M", "L", "XL"], "colors": ["Black", "Gray"]}    |
 | 3  | Dress   | {"sizes": ["S", "M", "L"], "colors": ["Pink", "Purple", "Black"]}      |
 | 4  | Jeans   | {"sizes": ["28", "30", "32", "34"], "colors": ["Blue", "Black"]}       |

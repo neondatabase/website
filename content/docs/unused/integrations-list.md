@@ -2,7 +2,7 @@
 title: Integrations
 isDraft: true
 redirectFrom:
-- /docs/integrations/integrations-list
+  - /docs/integrations/integrations-list
 ---
 
 To see **Cloud deployments**,

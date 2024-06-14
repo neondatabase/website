@@ -12,11 +12,11 @@ In Neon, your storage is made up of the combined total of these two elements:
 
 - **Data Size**
 
-    This is the current amount of data stored in your databases. You can think of this as a _snapshot_ of your database's size at any given moment.
+  This is the current amount of data stored in your databases. You can think of this as a _snapshot_ of your database's size at any given moment.
 
 - **History**
 
-    Your history consists of Write-Ahead Log (WAL) records, which log all changes made to your database over time. This configurable history is what enables features like instant [branching](/docs/introduction/branching) and [point-in-time restore](/docs/introduction/point-in-time-restore). Initially, branches don’t add extra storage since they use shared data from existing snapshots.
+  Your history consists of Write-Ahead Log (WAL) records, which log all changes made to your database over time. This configurable history is what enables features like instant [branching](/docs/introduction/branching) and [point-in-time restore](/docs/introduction/point-in-time-restore). Initially, branches don’t add extra storage since they use shared data from existing snapshots.
 
 Your total storage size is calculated in gibibytes (GiB).
 
@@ -37,15 +37,15 @@ To help manage your storage size, here are some strategies to consider:
 
 - **Adjust history retention**
 
-    Minimizing your history retention period, which controls how much change history your project retains in the form of WAL records. On the other hand, decreasing your history retention period reduces the window available for point-in-time restore or time-travel connections. See [History retention](https://neon.tech/docs/introduction/point-in-time-restore#history-retention) for more information.
+  Minimizing your history retention period, which controls how much change history your project retains in the form of WAL records. On the other hand, decreasing your history retention period reduces the window available for point-in-time restore or time-travel connections. See [History retention](https://neon.tech/docs/introduction/point-in-time-restore#history-retention) for more information.
 
 - **Consider deletion impact**
 
-    It may seem counterintuitive, but deleting records from a table temporarily increases storage usage because these delete operations are logged as part of your change history. They remain until they age out of your history retention window. For mass deletions, using a `DELETE TABLE` operation is more storage-efficient since it logs only a single operation.
+  It may seem counterintuitive, but deleting records from a table temporarily increases storage usage because these delete operations are logged as part of your change history. They remain until they age out of your history retention window. For mass deletions, using a `DELETE TABLE` operation is more storage-efficient since it logs only a single operation.
 
 - **Proactive branch management**
 
-    Remove or reset branches before they diverge from the history retention window. Removing old branches that are no longer needed, or resetting them before they accumulate changes that are no longer shared, helps prevent unnecessary storage from building up.
+  Remove or reset branches before they diverge from the history retention window. Removing old branches that are no longer needed, or resetting them before they accumulate changes that are no longer shared, helps prevent unnecessary storage from building up.
 
 ### What happens when I reach my storage limit?
 
@@ -56,13 +56,13 @@ Your storage allowance varies depending on your Neon plan.
 
 ## Compute
 
-Compute hour usage is calculated by multiplying compute size by _active hours_. 
+Compute hour usage is calculated by multiplying compute size by _active hours_.
 
 <Admonition type="tip" title="Compute Hours Formula">
 
- ```
-  compute hours = compute size * active hours
-  ```
+```
+ compute hours = compute size * active hours
+```
 
 </Admonition>
 
@@ -70,18 +70,18 @@ Compute hour usage is calculated by multiplying compute size by _active hours_.
 - An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
 - **Compute size** is measured at regular intervals and averaged to calculate compute hour usage. Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 8 CUs, as outlined below:
 
-  | Compute Units | vCPU | RAM    |
-  |:--------------|:-----|:-------|
-  | .25           | .25  | 1 GB   |
-  | .5            | .5   | 2 GB   |
-  | 1             | 1    | 4 GB   |
-  | 2             | 2    | 8 GB   |
-  | 3             | 3    | 12 GB  |
-  | 4             | 4    | 16 GB  |
-  | 5             | 5    | 20 GB  |
-  | 6             | 6    | 24 GB  |
-  | 7             | 7    | 28 GB  |
-  | 8             | 8    | 32 GB  |
+  | Compute Units | vCPU | RAM   |
+  | :------------ | :--- | :---- |
+  | .25           | .25  | 1 GB  |
+  | .5            | .5   | 2 GB  |
+  | 1             | 1    | 4 GB  |
+  | 2             | 2    | 8 GB  |
+  | 3             | 3    | 12 GB |
+  | 4             | 4    | 16 GB |
+  | 5             | 5    | 20 GB |
+  | 6             | 6    | 24 GB |
+  | 7             | 7    | 28 GB |
+  | 8             | 8    | 32 GB |
 
 - A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an `Idle` state.
 
@@ -140,14 +140,14 @@ In Neon, everything starts with a project. A project is a container for your bra
 
 The following table outlines project allowances for each Neon plan.
 
-| Plan       | Projects |
-|------------|----------|
-| Free Tier  | 1        |
-| Launch     | 10       |
-| Scale      | 50       |
+| Plan       | Projects  |
+| ---------- | --------- |
+| Free Tier  | 1         |
+| Launch     | 10        |
+| Scale      | 50        |
 | Enterprise | Unlimited |
 
 - When you reach your limit on the [Free Tier](/docs/introduction/plans#free-tier) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch) or [Scale](/docs/introduction/plans#scale) plan, which offers allowances of 10 and 50 projects, respectively.
 - Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in units of 10 for $50 each.
 
-<NeedHelp/>   
+<NeedHelp/>

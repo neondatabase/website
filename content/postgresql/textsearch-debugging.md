@@ -2,9 +2,9 @@
 
 ## 12.8. Testing and Debugging Text Search [#](#TEXTSEARCH-DEBUGGING)
 
-  * [12.8.1. Configuration Testing](textsearch-debugging#TEXTSEARCH-CONFIGURATION-TESTING)
-  * [12.8.2. Parser Testing](textsearch-debugging#TEXTSEARCH-PARSER-TESTING)
-  * [12.8.3. Dictionary Testing](textsearch-debugging#TEXTSEARCH-DICTIONARY-TESTING)
+- [12.8.1. Configuration Testing](textsearch-debugging#TEXTSEARCH-CONFIGURATION-TESTING)
+- [12.8.2. Parser Testing](textsearch-debugging#TEXTSEARCH-PARSER-TESTING)
+- [12.8.3. Dictionary Testing](textsearch-debugging#TEXTSEARCH-DICTIONARY-TESTING)
 
 The behavior of a custom text search configuration can easily become confusing. The functions described in this section are useful for testing text search objects. You can test a complete configuration, or test parsers and dictionaries separately.
 
@@ -13,8 +13,6 @@ The behavior of a custom text search configuration can easily become confusing. 
 ### 12.8.1. Configuration Testing [#](#TEXTSEARCH-CONFIGURATION-TESTING)
 
 The function `ts_debug` allows easy testing of a text search configuration.
-
-
 
 ```
 ts_debug([ config regconfig, ] document text,
@@ -27,21 +25,21 @@ ts_debug([ config regconfig, ] document text,
          returns setof record
 ```
 
-`ts_debug` displays information about every token of *`document`* as produced by the parser and processed by the configured dictionaries. It uses the configuration specified by *`config`*, or `default_text_search_config` if that argument is omitted.
+`ts_debug` displays information about every token of _`document`_ as produced by the parser and processed by the configured dictionaries. It uses the configuration specified by _`config`_, or `default_text_search_config` if that argument is omitted.
 
 `ts_debug` returns one row for each token identified in the text by the parser. The columns returned are
 
-* *`alias`* `text` — short name of the token type
+- _`alias`_ `text` — short name of the token type
 
-* *`description`* `text` — description of the token type
+- _`description`_ `text` — description of the token type
 
-* *`token`* `text` — text of the token
+- _`token`_ `text` — text of the token
 
-* *`dictionaries`* `regdictionary[]` — the dictionaries selected by the configuration for this token type
+- _`dictionaries`_ `regdictionary[]` — the dictionaries selected by the configuration for this token type
 
-* *`dictionary`* `regdictionary` — the dictionary that recognized the token, or `NULL` if none did
+- _`dictionary`_ `regdictionary` — the dictionary that recognized the token, or `NULL` if none did
 
-* *`lexemes`* `text[]` — the lexeme(s) produced by the dictionary that recognized the token, or `NULL` if none did; an empty array (`{}`) means it was recognized as a stop word
+- _`lexemes`_ `text[]` — the lexeme(s) produced by the dictionary that recognized the token, or `NULL` if none did; an empty array (`{}`) means it was recognized as a stop word
 
 Here is a simple example:
 
@@ -126,8 +124,6 @@ FROM ts_debug('public.english', 'The Brightest supernovaes');
 
 The following functions allow direct testing of a text search parser.
 
-
-
 ```
 ts_parse(parser_name text, document text,
          OUT tokid integer, OUT token text) returns setof record
@@ -135,7 +131,7 @@ ts_parse(parser_oid oid, document text,
          OUT tokid integer, OUT token text) returns setof record
 ```
 
-`ts_parse` parses the given *`document`* and returns a series of records, one for each token produced by parsing. Each record includes a `tokid` showing the assigned token type and a `token` which is the text of the token. For example:
+`ts_parse` parses the given _`document`_ and returns a series of records, one for each token produced by parsing. Each record includes a `tokid` showing the assigned token type and a `token` which is the text of the token. For example:
 
 ```
 SELECT * FROM ts_parse('default', '123 - a number');
@@ -148,8 +144,6 @@ SELECT * FROM ts_parse('default', '123 - a number');
     12 |
      1 | number
 ```
-
-
 
 ```
 ts_token_type(parser_name text, OUT tokid integer,
@@ -195,13 +189,11 @@ SELECT * FROM ts_token_type('default');
 
 The `ts_lexize` function facilitates dictionary testing.
 
-
-
 ```
 ts_lexize(dict regdictionary, token text) returns text[]
 ```
 
-`ts_lexize` returns an array of lexemes if the input *`token`* is known to the dictionary, or an empty array if the token is known to the dictionary but it is a stop word, or `NULL` if it is an unknown word.
+`ts_lexize` returns an array of lexemes if the input _`token`_ is known to the dictionary, or an empty array if the token is known to the dictionary but it is a stop word, or `NULL` if it is an unknown word.
 
 Examples:
 
@@ -219,7 +211,7 @@ SELECT ts_lexize('english_stem', 'a');
 
 ### Note
 
-The `ts_lexize` function expects a single *token*, not text. Here is a case where this can be confusing:
+The `ts_lexize` function expects a single _token_, not text. Here is a case where this can be confusing:
 
 ```
 SELECT ts_lexize('thesaurus_astro', 'supernovae stars') is null;

@@ -22,10 +22,10 @@ postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full
 
 Neon supports the following `sslmode` settings, in order of least to most secure.
 
-| sslmode | Description |
-| --- | --- |
-| `require` | Encryption is required and the server's SSL/TLS certificate is verified. If verification fails, the connection is refused. |
-| `verify-ca` | Encryption is required and the server's SSL/TLS certificate is verified. In addition, the client verifies that the server's certificate has been signed by a trusted certificate authority (CA). |
+| sslmode       | Description                                                                                                                                                                                                                                                                       |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `require`     | Encryption is required and the server's SSL/TLS certificate is verified. If verification fails, the connection is refused.                                                                                                                                                        |
+| `verify-ca`   | Encryption is required and the server's SSL/TLS certificate is verified. In addition, the client verifies that the server's certificate has been signed by a trusted certificate authority (CA).                                                                                  |
 | `verify-full` | Encryption is required and the server's SSL/TLS certificate is fully verified, including hostname verification, expiration checks, and revocation checks. In addition, the client verifies that the server's certificate has been signed by a trusted certificate authority (CA). |
 
 The choice of which mode to use depends on the specific security requirements of the application and the level of risk that you are willing to tolerate. Neon recommends that you always use `verify-full` mode, which ensures the highest level of security and protects against a wide range of attacks including man-in-the-middle attacks. The following sections describe how to configure connections using `verify-full` mode.
@@ -85,7 +85,7 @@ The location of the root store varies by operating system or distribution. Here 
   ```bash
   /etc/ssl/ca-bundle.pem
   ```
-  
+
 - Alpine Linux
 
   ```bash

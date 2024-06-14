@@ -2,8 +2,8 @@
 
 ## 36.13. C++ Applications [#](#ECPG-CPP)
 
-  * [36.13.1. Scope for Host Variables](ecpg-cpp#ECPG-CPP-SCOPE)
-  * [36.13.2. C++ Application Development with External C Module](ecpg-cpp#ECPG-CPP-AND-C)
+- [36.13.1. Scope for Host Variables](ecpg-cpp#ECPG-CPP-SCOPE)
+- [36.13.2. C++ Application Development with External C Module](ecpg-cpp#ECPG-CPP-AND-C)
 
 ECPG has some limited support for C++ applications. This section describes some caveats.
 
@@ -86,7 +86,7 @@ If you understand these technical limitations of the `ecpg` preprocessor in C++,
 
 Three kinds of files have to be created: a C file (`*.pgc`), a header file, and a C++ file:
 
-* `test_mod.pgc` [#](#ECPG-CPP-AND-C-TEST-MOD-PGC)
+- `test_mod.pgc` [#](#ECPG-CPP-AND-C-TEST-MOD-PGC)
 
   A sub-routine module to execute SQL commands embedded in C. It is going to be converted into `test_mod.c` by the preprocessor.
 
@@ -120,7 +120,7 @@ Three kinds of files have to be created: a C file (`*.pgc`), a header file, and 
   }
   ```
 
-* `test_mod.h` [#](#ECPG-CPP-AND-C-TEST-MOD-H)
+- `test_mod.h` [#](#ECPG-CPP-AND-C-TEST-MOD-H)
 
   A header file with declarations of the functions in the C module (`test_mod.pgc`). It is included by `test_cpp.cpp`. This file has to have an `extern "C"` block around the declarations, because it will be linked from the C++ module.
 
@@ -139,7 +139,7 @@ Three kinds of files have to be created: a C file (`*.pgc`), a header file, and 
   #endif
   ```
 
-* `test_cpp.cpp` [#](#ECPG-CPP-AND-C-TEST-CPP-CPP)
+- `test_cpp.cpp` [#](#ECPG-CPP-AND-C-TEST-CPP-CPP)
 
   The main code for the application, including the `main` routine, and in this example a C++ class.
 

@@ -49,17 +49,17 @@ The project is created with a ready-to-use `neondb` database, which you will con
 
 4. Install the following dependencies in your project's root directory for synchronous and asynchronous code, respectively. You can install them using `pip`:
 
-<CodeTabs labels={["synchronous", "asynchronous"]}>
+   <CodeTabs labels={["synchronous", "asynchronous"]}>
 
-    ```bash
-    pip install psycopg2-binary python-dotenv
-    ```
+   ```bash
+   pip install psycopg2-binary python-dotenv
+   ```
 
-    ```bash
-    pip install asyncpg python-dotenv
-    ```
-    
-</CodeTabs>
+   ```bash
+   pip install asyncpg python-dotenv
+   ```
+
+   </CodeTabs>
 
 ## Store your Neon credentials
 
@@ -182,9 +182,9 @@ You can find the source code for the applications described in this guide on Git
 
 <DetailIconCards>
 
-  <a href="https://github.com/neondatabase/examples/tree/main/with-python-asyncpg" description="Get started with Python and Neon using asyncpg" icon="github">Get started with Python and Neon using asyncpg</a>
+<a href="https://github.com/neondatabase/examples/tree/main/with-python-asyncpg" description="Get started with Python and Neon using asyncpg" icon="github">Get started with Python and Neon using asyncpg</a>
 
-  <a href="https://github.com/neondatabase/examples/tree/main/with-python-psycopg2" description="Get started with Python and Neon using psycopg2" icon="github">Get started with Python and Neon using psycopg2</a>
+<a href="https://github.com/neondatabase/examples/tree/main/with-python-psycopg2" description="Get started with Python and Neon using psycopg2" icon="github">Get started with Python and Neon using psycopg2</a>
 
 </DetailIconCards>
 

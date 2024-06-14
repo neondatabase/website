@@ -4,6 +4,7 @@ subtitle: Learn how to connect to Neon from any application
 enableTableOfContents: true
 updatedOn: '2024-02-27T14:37:51.432Z'
 ---
+
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch.
 
 You can obtain the database connection details you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a compute, a database, and a role. A connection string is constructed for you.

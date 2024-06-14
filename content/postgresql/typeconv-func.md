@@ -2,8 +2,6 @@
 
 ## 10.3. Functions [#](#TYPECONV-FUNC)
 
-
-
 The specific function that is referenced by a function call is determined using the following procedure.
 
 [#id](#id-1.5.9.8.4)
@@ -69,7 +67,6 @@ Since numeric constants with decimal points are initially assigned the type `num
 SELECT round(4.0, 4);
 ```
 
-
 [#id](#id-1.5.9.8.7)
 
 **Example 10.7. Variadic Function Resolution**
@@ -113,7 +110,6 @@ SELECT public.variadic_example(0),
 ```
 
 Given the default configuration and only the first function existing, the first and second calls are insecure. Any user could intercept them by creating the second or third function. By matching the argument type exactly and using the `VARIADIC` keyword, the third call is secure.
-
 
 [#id](#id-1.5.9.8.8)
 

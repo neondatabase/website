@@ -2,8 +2,6 @@
 
 ## 2.3. Creating a New Table [#](#TUTORIAL-TABLE)
 
-
-
 You can create a new table by specifying the table name, along with all column names and their types:
 
 ```

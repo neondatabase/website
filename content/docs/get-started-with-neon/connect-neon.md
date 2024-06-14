@@ -29,10 +29,9 @@ PGPORT=5432
 
 ```javascript
 // Next.js example
-import postgres from "postgres";
+import postgres from 'postgres';
 
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
-
 
 const conn = postgres({
   host: PGHOST,
@@ -40,11 +39,11 @@ const conn = postgres({
   username: PGUSER,
   password: PGPASSWORD,
   port: 5432,
-  ssl: "require",
+  ssl: 'require',
 });
 
 function selectAll() {
-  return conn.query("SELECT * FROM hello_world");
+  return conn.query('SELECT * FROM hello_world');
 }
 ```
 
@@ -52,25 +51,25 @@ function selectAll() {
 // Drizzle example with the Neon serverless driver
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
-    
+
 const sql = neon(process.env.DATABASE_URL);
 
 const db = drizzle(sql);
-    
+
 const result = await db.select().from(...);
 ```
 
 ```javascript
-// Prisma example with the Neon serverless driver 
-import { neon } from '@neondatabase/serverless'
-import { PrismaNeonHTTP } from '@prisma/adapter-neon'
-import { PrismaClient } from '@prisma/client'
+// Prisma example with the Neon serverless driver
+import { neon } from '@neondatabase/serverless';
+import { PrismaNeonHTTP } from '@prisma/adapter-neon';
+import { PrismaClient } from '@prisma/client';
 
-const sql = neon(process.env.DATABASE_URL)
+const sql = neon(process.env.DATABASE_URL);
 
-const adapter = new PrismaNeonHTTP(sql)
+const adapter = new PrismaNeonHTTP(sql);
 
-const prisma = new PrismaClient({ adapter })
+const prisma = new PrismaClient({ adapter });
 ```
 
 ```python

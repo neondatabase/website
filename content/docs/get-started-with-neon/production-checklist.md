@@ -37,7 +37,7 @@ enableTableOfContents: true
 
 In a development environment, your application may function perfectly with a small compute size, but before your application goes live, make sure that your database has enough vCPU and memory to handle the expected load.
 
-In Neon, your compute size determines the amount of vCPU and memory your database has to work with. Neon supports computes up to 8 Compute Units (CUs) in size. Larger computes provide more memory. The compute sizes that are available to you depend on your [Neon plan](/docs/introduction/plans): 
+In Neon, your compute size determines the amount of vCPU and memory your database has to work with. Neon supports computes up to 8 Compute Units (CUs) in size. Larger computes provide more memory. The compute sizes that are available to you depend on your [Neon plan](/docs/introduction/plans):
 
 - **Free Tier**: 0.25 CUs (0.25 vCPU, 1 GB RAM)
 - **Launch**: Up to 4 CUs (4 vCPU, 16 GB RAM)
@@ -46,7 +46,7 @@ In Neon, your compute size determines the amount of vCPU and memory your databas
 
 You should start with a compute size that can hold your data or at least your most frequently accessed data (your [working set](/docs/reference/glossary#working-set)) in memory. If you are using Neon's _Autoscaling_ feature, we recommend the same for your **minimum compute size** setting (see [Configure Autoscaling](#configure-autoscaling)).
 
-For a table showing the vCPU and memory per compute size and how to select the right compute size, see [How to size your compute](docs/manage/endpoints#how-to-size-your-compute). 
+For a table showing the vCPU and memory per compute size and how to select the right compute size, see [How to size your compute](docs/manage/endpoints#how-to-size-your-compute).
 
 ## Configure Autoscaling
 
@@ -83,7 +83,7 @@ The `-pooler` flag directs connections to a connection pooling port at the Neon 
 
 Neon retains a history of changes for all branches. This history enables point-in-time restore and time travel queries among other development-focussed features. Keeping a history enables recovering lost data or viewing the past state of your database, which is helpful when trying to determine when an issue occurred or find a restore point. Neon's history can also function as a database backup strategy.
 
-The history retention limit is 24 hours for Neon Free Tier users, 7 days for Launch plan users, and 30 days for Scale plan users. Before going into production, select a history retention period that suits your operational requirements. 
+The history retention limit is 24 hours for Neon Free Tier users, 7 days for Launch plan users, and 30 days for Scale plan users. Before going into production, select a history retention period that suits your operational requirements.
 
 ![History retention setting](/docs/get-started-with-neon/history_retention_setting.png)
 
@@ -109,7 +109,7 @@ Monitoring is an important consideration as you prepare for production. Neon off
 
 ![Monitoring page connections graph](/docs/introduction/monitor_connections.jpg)
 
-For query performance and statistics in Postgres, we also recommend installing the [pg_stat_statements extension](/docs/extensions/pg_stat_statements). 
+For query performance and statistics in Postgres, we also recommend installing the [pg_stat_statements extension](/docs/extensions/pg_stat_statements).
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;

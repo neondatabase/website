@@ -40,10 +40,10 @@ And here are the key CLI actions you can use:
 ```bash
 # Create branch
 neonctl branches create [options]
-    
+
 # Get Connection string
 neonctl connection-string [branch] [options]
-    
+
 # Delete branch
 neonctl branches delete <id|name> [options]
 ```
@@ -83,6 +83,7 @@ jobs:
   - run: echo project_id ${{ steps.create-branch.outputs.project_id}}
   - run: echo branch_id ${{ steps.create-branch.outputs.branch_id}}
 ```
+
 </TabItem>
 
 <TabItem>
@@ -102,8 +103,9 @@ jobs:
     with:
       project_id: rapid-haze-373089
       branch: br-long-forest-224191
-      api_key: {{ secrets.NEON_API_KEY }}
+      api_key: { { secrets.NEON_API_KEY } }
 ```
+
 </TabItem>
 </Tabs>
 
@@ -132,9 +134,9 @@ To easily identify branches dedicated to development, we recommend prefixing the
 
 <br/>Examples:
 
- ```bash
- dev/alice             dev/new-onboarding
- ```
+```bash
+dev/alice             dev/new-onboarding
+```
 
 </Admonition>
 

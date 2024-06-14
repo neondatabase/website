@@ -6,9 +6,9 @@ clusterdb — cluster a PostgreSQL database
 
 ## Synopsis
 
-`clusterdb` \[*`connection-option`*...] \[ `--verbose` | `-v` ] \[ `--table` | `-t` *`table`* ] ... \[*`dbname`*]
+`clusterdb` \[_`connection-option`_...] \[ `--verbose` | `-v` ] \[ `--table` | `-t` _`table`_ ] ... \[_`dbname`_]
 
-`clusterdb` \[*`connection-option`*...] \[ `--verbose` | `-v` ] `--all` | `-a`
+`clusterdb` \[_`connection-option`_...] \[ `--verbose` | `-v` ] `--all` | `-a`
 
 [#id](#id-1.9.4.3.5)
 
@@ -24,63 +24,63 @@ clusterdb is a wrapper around the SQL command [CLUSTER](sql-cluster). There is n
 
 clusterdb accepts the following command-line arguments:
 
-* `-a``--all`
+- `-a``--all`
 
   Cluster all databases.
 
-* `[-d] dbname``[--dbname=]dbname`
+- `[-d] dbname``[--dbname=]dbname`
 
-  Specifies the name of the database to be clustered, when `-a`/`--all` is not used. If this is not specified, the database name is read from the environment variable `PGDATABASE`. If that is not set, the user name specified for the connection is used. The *`dbname`* can be a [connection string](libpq-connect#LIBPQ-CONNSTRING). If so, connection string parameters will override any conflicting command line options.
+  Specifies the name of the database to be clustered, when `-a`/`--all` is not used. If this is not specified, the database name is read from the environment variable `PGDATABASE`. If that is not set, the user name specified for the connection is used. The _`dbname`_ can be a [connection string](libpq-connect#LIBPQ-CONNSTRING). If so, connection string parameters will override any conflicting command line options.
 
-* `-e``--echo`
+- `-e``--echo`
 
   Echo the commands that clusterdb generates and sends to the server.
 
-* `-q``--quiet`
+- `-q``--quiet`
 
   Do not display progress messages.
 
-* `-t table``--table=table`
+- `-t table``--table=table`
 
-  Cluster *`table`* only. Multiple tables can be clustered by writing multiple `-t` switches.
+  Cluster _`table`_ only. Multiple tables can be clustered by writing multiple `-t` switches.
 
-* `-v``--verbose`
+- `-v``--verbose`
 
   Print detailed information during processing.
 
-* `-V``--version`
+- `-V``--version`
 
   Print the clusterdb version and exit.
 
-* `-?``--help`
+- `-?``--help`
 
   Show help about clusterdb command line arguments, and exit.
 
 clusterdb also accepts the following command-line arguments for connection parameters:
 
-* `-h host``--host=host`
+- `-h host``--host=host`
 
   Specifies the host name of the machine on which the server is running. If the value begins with a slash, it is used as the directory for the Unix domain socket.
 
-* `-p port``--port=port`
+- `-p port``--port=port`
 
   Specifies the TCP port or local Unix domain socket file extension on which the server is listening for connections.
 
-* `-U username``--username=username`
+- `-U username``--username=username`
 
   User name to connect as.
 
-* `-w``--no-password`
+- `-w``--no-password`
 
   Never issue a password prompt. If the server requires password authentication and a password is not available by other means such as a `.pgpass` file, the connection attempt will fail. This option can be useful in batch jobs and scripts where no user is present to enter a password.
 
-* `-W``--password`
+- `-W``--password`
 
   Force clusterdb to prompt for a password before connecting to a database.
 
   This option is never essential, since clusterdb will automatically prompt for a password if the server demands password authentication. However, clusterdb will waste a connection attempt finding out that the server wants a password. In some cases it is worth typing `-W` to avoid the extra connection attempt.
 
-* `--maintenance-db=dbname`
+- `--maintenance-db=dbname`
 
   Specifies the name of the database to connect to to discover which databases should be clustered, when `-a`/`--all` is used. If not specified, the `postgres` database will be used, or if that does not exist, `template1` will be used. This can be a [connection string](libpq-connect#LIBPQ-CONNSTRING). If so, connection string parameters will override any conflicting command line options. Also, connection string parameters other than the database name itself will be re-used when connecting to other databases.
 
@@ -88,11 +88,11 @@ clusterdb also accepts the following command-line arguments for connection param
 
 ## Environment
 
-* `PGDATABASE``PGHOST``PGPORT``PGUSER`
+- `PGDATABASE``PGHOST``PGPORT``PGUSER`
 
   Default connection parameters
 
-* `PG_COLOR`
+- `PG_COLOR`
 
   Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 

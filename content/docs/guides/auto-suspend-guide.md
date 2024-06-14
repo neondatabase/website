@@ -18,12 +18,12 @@ This guide demonstrates how to configure the autosuspend setting for a new proje
 
 The autosuspend limits differ by [Neon plan](/docs/introduction/plans). The limits for each plan are outlined below. The initial default setting for all plans is 5 minutes.
 
-| Plan       | Autosuspend delay                | Can be disabled? |
-|:-----------|:---------------------------------|:-----------------|
-| Free Tier  | 5 minutes                        |                  |
-| Launch     | 5 minutes to 7 days              | &check;          |
-| Scale      | 1 minute to 7 days               | &check;          |
-| Enterprise | 0 up to 7 days                   | &check;          |
+| Plan       | Autosuspend delay   | Can be disabled? |
+| :--------- | :------------------ | :--------------- |
+| Free Tier  | 5 minutes           |                  |
+| Launch     | 5 minutes to 7 days | &check;          |
+| Scale      | 1 minute to 7 days  | &check;          |
+| Enterprise | 0 up to 7 days      | &check;          |
 
 ### Configure the autosuspend setting for a new project
 
@@ -36,9 +36,9 @@ To configure the autosuspend default setting when you first create your project:
 1. Specify a name, a Postgres version, and a region.
 1. Under **Compute size**, select **Suspend compute after a period of inactivity** and specify your delay period. Deselecting **Suspend compute after a period of inactivity** disables autosuspend, meaning the compute is always active.
 
-    <Admonition type="note">
-    You can configure default **Compute size** settings at the same time.
-    </Admonition>
+<Admonition type="note">
+You can configure default **Compute size** settings at the same time.
+</Admonition>
 
 1. Click **Save**.
 1. Click **Create Project**. Your initial compute endpoint is created with the specified setting.
@@ -54,9 +54,9 @@ To configure the autosuspend default for an existing project:
 1. Select **Compute** and click **Change**.
 1. Select **Suspend compute after a period of inactivity** and specify your delay period. Deselecting **Suspend compute after a period of inactivity** disables autosuspend, meaning the compute is always active.
 
-    <Admonition type="note">
-    You can configure default **Compute size** settings at the same time.
-    </Admonition>
+<Admonition type="note">
+You can configure default **Compute size** settings at the same time.
+</Admonition>
 
 1. Click **Save**.
 
@@ -67,12 +67,12 @@ To configure the autosuspend setting for an individual compute endpoint:
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. Click the menu in the **Computes** table, and select **Edit**.
-![Edit compute endpoint menu](/docs/guides/autoscaling_edit.png)
+   ![Edit compute endpoint menu](/docs/guides/autoscaling_edit.png)
 1. Under **Compute size**, select **Suspend compute after a period of inactivity** and specify your delay period. The maximum setting is 7 days. Deselecting **Suspend compute after a period of inactivity** means the compute is always active.
 
-    <Admonition type="note">
-    You can configure **Compute size** settings for your compute endpoint at the same time.
-    </Admonition>
+<Admonition type="note">
+You can configure **Compute size** settings for your compute endpoint at the same time.
+</Admonition>
 
 1. Click **Save**.
 

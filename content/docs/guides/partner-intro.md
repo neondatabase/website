@@ -21,6 +21,7 @@ Apply for partnership with Neon.
 </DetailIconCards>
 
 ## Integrate with Neon
+
 Find details about the different ways you can integrate with Neon.
 
 <DetailIconCards>

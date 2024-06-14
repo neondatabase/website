@@ -20,27 +20,27 @@ DROP OPERATOR [ IF EXISTS ] name ( { left_type | NONE } , right_type ) [, ...] [
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the operator does not exist. A notice is issued in this case.
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of an existing operator.
 
-* *`left_type`*
+- _`left_type`_
 
   The data type of the operator's left operand; write `NONE` if the operator has no left operand.
 
-* *`right_type`*
+- _`right_type`_
 
   The data type of the operator's right operand.
 
-* `CASCADE`
+- `CASCADE`
 
   Automatically drop objects that depend on the operator (such as views using it), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend)).
 
-* `RESTRICT`
+- `RESTRICT`
 
   Refuse to drop the operator if any objects depend on it. This is the default.
 

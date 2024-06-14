@@ -1,52 +1,52 @@
 [#id](#APP-PG-CTL)
 
-## pg\_ctl
+## pg_ctl
 
-pg\_ctl — initialize, start, stop, or control a PostgreSQL server
+pg_ctl — initialize, start, stop, or control a PostgreSQL server
 
 ## Synopsis
 
-`pg_ctl` `init[db]` \[`-D` *`datadir`*] \[`-s`] \[`-o` *`initdb-options`*]
+`pg_ctl` `init[db]` \[`-D` _`datadir`_] \[`-s`] \[`-o` _`initdb-options`_]
 
-`pg_ctl` `start` \[`-D` *`datadir`*] \[`-l` *`filename`*] \[`-W`] \[`-t` *`seconds`*] \[`-s`] \[`-o` *`options`*] \[`-p` *`path`*] \[`-c`]
+`pg_ctl` `start` \[`-D` _`datadir`_] \[`-l` _`filename`_] \[`-W`] \[`-t` _`seconds`_] \[`-s`] \[`-o` _`options`_] \[`-p` _`path`_] \[`-c`]
 
-`pg_ctl` `stop` \[`-D` *`datadir`*] \[`-m` `s[mart]` | `f[ast]` | `i[mmediate]` ] \[`-W`] \[`-t` *`seconds`*] \[`-s`]
+`pg_ctl` `stop` \[`-D` _`datadir`_] \[`-m` `s[mart]` | `f[ast]` | `i[mmediate]` ] \[`-W`] \[`-t` _`seconds`_] \[`-s`]
 
-`pg_ctl` `restart` \[`-D` *`datadir`*] \[`-m` `s[mart]` | `f[ast]` | `i[mmediate]` ] \[`-W`] \[`-t` *`seconds`*] \[`-s`] \[`-o` *`options`*] \[`-c`]
+`pg_ctl` `restart` \[`-D` _`datadir`_] \[`-m` `s[mart]` | `f[ast]` | `i[mmediate]` ] \[`-W`] \[`-t` _`seconds`_] \[`-s`] \[`-o` _`options`_] \[`-c`]
 
-`pg_ctl` `reload` \[`-D` *`datadir`*] \[`-s`]
+`pg_ctl` `reload` \[`-D` _`datadir`_] \[`-s`]
 
-`pg_ctl` `status` \[`-D` *`datadir`*]
+`pg_ctl` `status` \[`-D` _`datadir`_]
 
-`pg_ctl` `promote` \[`-D` *`datadir`*] \[`-W`] \[`-t` *`seconds`*] \[`-s`]
+`pg_ctl` `promote` \[`-D` _`datadir`_] \[`-W`] \[`-t` _`seconds`_] \[`-s`]
 
-`pg_ctl` `logrotate` \[`-D` *`datadir`*] \[`-s`]
+`pg_ctl` `logrotate` \[`-D` _`datadir`_] \[`-s`]
 
-`pg_ctl` `kill` *`signal_name`* *`process_id`*
+`pg_ctl` `kill` _`signal_name`_ _`process_id`_
 
 On Microsoft Windows, also:
 
-`pg_ctl` `register` \[`-D` *`datadir`*] \[`-N` *`servicename`*] \[`-U` *`username`*] \[`-P` *`password`*] \[`-S` `a[uto]` | `d[emand]` ] \[`-e` *`source`*] \[`-W`] \[`-t` *`seconds`*] \[`-s`] \[`-o` *`options`*]
+`pg_ctl` `register` \[`-D` _`datadir`_] \[`-N` _`servicename`_] \[`-U` _`username`_] \[`-P` _`password`_] \[`-S` `a[uto]` | `d[emand]` ] \[`-e` _`source`_] \[`-W`] \[`-t` _`seconds`_] \[`-s`] \[`-o` _`options`_]
 
-`pg_ctl` `unregister` \[`-N` *`servicename`*]
+`pg_ctl` `unregister` \[`-N` _`servicename`_]
 
 [#id](#APP-PG-CTL-DESCRIPTION)
 
 ## Description
 
-pg\_ctl is a utility for initializing a PostgreSQL database cluster, starting, stopping, or restarting the PostgreSQL database server ([postgres](app-postgres)), or displaying the status of a running server. Although the server can be started manually, pg\_ctl encapsulates tasks such as redirecting log output and properly detaching from the terminal and process group. It also provides convenient options for controlled shutdown.
+pg_ctl is a utility for initializing a PostgreSQL database cluster, starting, stopping, or restarting the PostgreSQL database server ([postgres](app-postgres)), or displaying the status of a running server. Although the server can be started manually, pg_ctl encapsulates tasks such as redirecting log output and properly detaching from the terminal and process group. It also provides convenient options for controlled shutdown.
 
 The `init` or `initdb` mode creates a new PostgreSQL database cluster, that is, a collection of databases that will be managed by a single server instance. This mode invokes the `initdb` command. See [initdb](app-initdb) for details.
 
-`start` mode launches a new server. The server is started in the background, and its standard input is attached to `/dev/null` (or `nul` on Windows). On Unix-like systems, by default, the server's standard output and standard error are sent to pg\_ctl's standard output (not standard error). The standard output of pg\_ctl should then be redirected to a file or piped to another process such as a log rotating program like rotatelogs; otherwise `postgres` will write its output to the controlling terminal (from the background) and will not leave the shell's process group. On Windows, by default the server's standard output and standard error are sent to the terminal. These default behaviors can be changed by using `-l` to append the server's output to a log file. Use of either `-l` or output redirection is recommended.
+`start` mode launches a new server. The server is started in the background, and its standard input is attached to `/dev/null` (or `nul` on Windows). On Unix-like systems, by default, the server's standard output and standard error are sent to pg_ctl's standard output (not standard error). The standard output of pg_ctl should then be redirected to a file or piped to another process such as a log rotating program like rotatelogs; otherwise `postgres` will write its output to the controlling terminal (from the background) and will not leave the shell's process group. On Windows, by default the server's standard output and standard error are sent to the terminal. These default behaviors can be changed by using `-l` to append the server's output to a log file. Use of either `-l` or output redirection is recommended.
 
 `stop` mode shuts down the server that is running in the specified data directory. Three different shutdown methods can be selected with the `-m` option. “Smart” mode disallows new connections, then waits for all existing clients to disconnect. If the server is in hot standby, recovery and streaming replication will be terminated once all clients have disconnected. “Fast” mode (the default) does not wait for clients to disconnect. All active transactions are rolled back and clients are forcibly disconnected, then the server is shut down. “Immediate” mode will abort all server processes immediately, without a clean shutdown. This choice will lead to a crash-recovery cycle during the next server start.
 
-`restart` mode effectively executes a stop followed by a start. This allows changing the `postgres` command-line options, or changing configuration-file options that cannot be changed without restarting the server. If relative paths were used on the command line during server start, `restart` might fail unless pg\_ctl is executed in the same current directory as it was during server start.
+`restart` mode effectively executes a stop followed by a start. This allows changing the `postgres` command-line options, or changing configuration-file options that cannot be changed without restarting the server. If relative paths were used on the command line during server start, `restart` might fail unless pg_ctl is executed in the same current directory as it was during server start.
 
 `reload` mode simply sends the `postgres` server process a SIGHUP signal, causing it to reread its configuration files (`postgresql.conf`, `pg_hba.conf`, etc.). This allows changing configuration-file options that do not require a full server restart to take effect.
 
-`status` mode checks whether a server is running in the specified data directory. If it is, the server's PID and the command line options that were used to invoke it are displayed. If the server is not running, pg\_ctl returns an exit status of 3. If an accessible data directory is not specified, pg\_ctl returns an exit status of 4.
+`status` mode checks whether a server is running in the specified data directory. If it is, the server's PID and the command line options that were used to invoke it are displayed. If the server is not running, pg_ctl returns an exit status of 3. If an accessible data directory is not specified, pg_ctl returns an exit status of 4.
 
 `promote` mode commands the standby server that is running in the specified data directory to end standby mode and begin read-write operations.
 
@@ -62,53 +62,53 @@ The `init` or `initdb` mode creates a new PostgreSQL database cluster, that is, 
 
 ## Options
 
-* `-c``--core-files`
+- `-c``--core-files`
 
   Attempt to allow server crashes to produce core files, on platforms where this is possible, by lifting any soft resource limit placed on core files. This is useful in debugging or diagnosing problems by allowing a stack trace to be obtained from a failed server process.
 
-* `-D datadir``--pgdata=datadir`
+- `-D datadir``--pgdata=datadir`
 
   Specifies the file system location of the database configuration files. If this option is omitted, the environment variable `PGDATA` is used.
 
-* `-l filename``--log=filename`
+- `-l filename``--log=filename`
 
-  Append the server log output to *`filename`*. If the file does not exist, it is created. The umask is set to 077, so access to the log file is disallowed to other users by default.
+  Append the server log output to _`filename`_. If the file does not exist, it is created. The umask is set to 077, so access to the log file is disallowed to other users by default.
 
-* `-m mode``--mode=mode`
+- `-m mode``--mode=mode`
 
-  Specifies the shutdown mode. *`mode`* can be `smart`, `fast`, or `immediate`, or the first letter of one of these three. If this option is omitted, `fast` is the default.
+  Specifies the shutdown mode. _`mode`_ can be `smart`, `fast`, or `immediate`, or the first letter of one of these three. If this option is omitted, `fast` is the default.
 
-* `-o options``--options=options`
+- `-o options``--options=options`
 
   Specifies options to be passed directly to the `postgres` command. `-o` can be specified multiple times, with all the given options being passed through.
 
-  The *`options`* should usually be surrounded by single or double quotes to ensure that they are passed through as a group.
+  The _`options`_ should usually be surrounded by single or double quotes to ensure that they are passed through as a group.
 
-* `-o initdb-options``--options=initdb-options`
+- `-o initdb-options``--options=initdb-options`
 
   Specifies options to be passed directly to the `initdb` command. `-o` can be specified multiple times, with all the given options being passed through.
 
-  The *`initdb-options`* should usually be surrounded by single or double quotes to ensure that they are passed through as a group.
+  The _`initdb-options`_ should usually be surrounded by single or double quotes to ensure that they are passed through as a group.
 
-* `-p path`
+- `-p path`
 
   Specifies the location of the `postgres` executable. By default the `postgres` executable is taken from the same directory as `pg_ctl`, or failing that, the hard-wired installation directory. It is not necessary to use this option unless you are doing something unusual and get errors that the `postgres` executable was not found.
 
   In `init` mode, this option analogously specifies the location of the `initdb` executable.
 
-* `-s``--silent`
+- `-s``--silent`
 
   Print only errors, no informational messages.
 
-* `-t seconds``--timeout=seconds`
+- `-t seconds``--timeout=seconds`
 
   Specifies the maximum number of seconds to wait when waiting for an operation to complete (see option `-w`). Defaults to the value of the `PGCTLTIMEOUT` environment variable or, if not set, to 60 seconds.
 
-* `-V``--version`
+- `-V``--version`
 
-  Print the pg\_ctl version and exit.
+  Print the pg_ctl version and exit.
 
-* `-w``--wait`
+- `-w``--wait`
 
   Wait for the operation to complete. This is supported for the modes `start`, `stop`, `restart`, `promote`, and `register`, and is the default for those modes.
 
@@ -116,7 +116,7 @@ The `init` or `initdb` mode creates a new PostgreSQL database cluster, that is, 
 
   If the operation does not complete within the timeout (see option `-t`), then `pg_ctl` exits with a nonzero exit status. But note that the operation might continue in the background and eventually succeed.
 
-* `-W``--no-wait`
+- `-W``--no-wait`
 
   Do not wait for the operation to complete. This is the opposite of the option `-w`.
 
@@ -124,33 +124,33 @@ The `init` or `initdb` mode creates a new PostgreSQL database cluster, that is, 
 
   In prior releases of PostgreSQL, this was the default except for the `stop` mode.
 
-* `-?``--help`
+- `-?``--help`
 
-  Show help about pg\_ctl command line arguments, and exit.
+  Show help about pg_ctl command line arguments, and exit.
 
-If an option is specified that is valid, but not relevant to the selected operating mode, pg\_ctl ignores it.
+If an option is specified that is valid, but not relevant to the selected operating mode, pg_ctl ignores it.
 
 [#id](#APP-PG-CTL-WINDOWS-OPTIONS)
 
 ### Options for Windows
 
-* `-e source`
+- `-e source`
 
-  Name of the event source for pg\_ctl to use for logging to the event log when running as a Windows service. The default is `PostgreSQL`. Note that this only controls messages sent from pg\_ctl itself; once started, the server will use the event source specified by its [event\_source](runtime-config-logging#GUC-EVENT-SOURCE) parameter. Should the server fail very early in startup, before that parameter has been set, it might also log using the default event source name `PostgreSQL`.
+  Name of the event source for pg_ctl to use for logging to the event log when running as a Windows service. The default is `PostgreSQL`. Note that this only controls messages sent from pg_ctl itself; once started, the server will use the event source specified by its [event_source](runtime-config-logging#GUC-EVENT-SOURCE) parameter. Should the server fail very early in startup, before that parameter has been set, it might also log using the default event source name `PostgreSQL`.
 
-* `-N servicename`
+- `-N servicename`
 
   Name of the system service to register. This name will be used as both the service name and the display name. The default is `PostgreSQL`.
 
-* `-P password`
+- `-P password`
 
   Password for the user to run the service as.
 
-* `-S start-type`
+- `-S start-type`
 
-  Start type of the system service. *`start-type`* can be `auto`, or `demand`, or the first letter of one of these two. If this option is omitted, `auto` is the default.
+  Start type of the system service. _`start-type`_ can be `auto`, or `demand`, or the first letter of one of these two. If this option is omitted, `auto` is the default.
 
-* `-U username`
+- `-U username`
 
   User name for the user to run the service as. For domain users, use the format `DOMAIN\username`.
 
@@ -158,11 +158,11 @@ If an option is specified that is valid, but not relevant to the selected operat
 
 ## Environment
 
-* `PGCTLTIMEOUT`
+- `PGCTLTIMEOUT`
 
   Default limit on the number of seconds to wait when waiting for startup or shutdown to complete. If not set, the default is 60 seconds.
 
-* `PGDATA`
+- `PGDATA`
 
   Default data directory location.
 
@@ -176,13 +176,13 @@ For additional variables that affect the server, see [postgres](app-postgres).
 
 ## Files
 
-* `postmaster.pid`
+- `postmaster.pid`
 
-  pg\_ctl examines this file in the data directory to determine whether the server is currently running.
+  pg_ctl examines this file in the data directory to determine whether the server is currently running.
 
-* `postmaster.opts`
+- `postmaster.opts`
 
-  If this file exists in the data directory, pg\_ctl (in `restart` mode) will pass the contents of the file as options to postgres, unless overridden by the `-o` option. The contents of this file are also displayed in `status` mode.
+  If this file exists in the data directory, pg_ctl (in `restart` mode) will pass the contents of the file as options to postgres, unless overridden by the `-o` option. The contents of this file are also displayed in `status` mode.
 
 [#id](#R1-APP-PGCTL-2)
 
@@ -217,7 +217,7 @@ To stop the server, use:
 $ pg_ctl stop
 ```
 
-The `-m` option allows control over *how* the server shuts down:
+The `-m` option allows control over _how_ the server shuts down:
 
 ```
 
@@ -246,7 +246,7 @@ $ pg_ctl -o "-F -p 5433" restart
 
 ### Showing the Server Status
 
-Here is sample status output from pg\_ctl:
+Here is sample status output from pg_ctl:
 
 ```
 

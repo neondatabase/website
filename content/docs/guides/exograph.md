@@ -65,7 +65,7 @@ You can create a todo by running the following mutation:
 
 ```graphql
 mutation {
-  createTodo(data: {title: "Set up Exograph with Neon", completed: true}) {
+  createTodo(data: { title: "Set up Exograph with Neon", completed: true }) {
     id
   }
 }

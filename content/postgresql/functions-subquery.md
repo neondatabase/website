@@ -2,14 +2,12 @@
 
 ## 9.23. Subquery Expressions [#](#FUNCTIONS-SUBQUERY)
 
-  * [9.23.1. `EXISTS`](functions-subquery#FUNCTIONS-SUBQUERY-EXISTS)
-  * [9.23.2. `IN`](functions-subquery#FUNCTIONS-SUBQUERY-IN)
-  * [9.23.3. `NOT IN`](functions-subquery#FUNCTIONS-SUBQUERY-NOTIN)
-  * [9.23.4. `ANY`/`SOME`](functions-subquery#FUNCTIONS-SUBQUERY-ANY-SOME)
-  * [9.23.5. `ALL`](functions-subquery#FUNCTIONS-SUBQUERY-ALL)
-  * [9.23.6. Single-Row Comparison](functions-subquery#FUNCTIONS-SUBQUERY-SINGLE-ROW-COMP)
-
-
+- [9.23.1. `EXISTS`](functions-subquery#FUNCTIONS-SUBQUERY-EXISTS)
+- [9.23.2. `IN`](functions-subquery#FUNCTIONS-SUBQUERY-IN)
+- [9.23.3. `NOT IN`](functions-subquery#FUNCTIONS-SUBQUERY-NOTIN)
+- [9.23.4. `ANY`/`SOME`](functions-subquery#FUNCTIONS-SUBQUERY-ANY-SOME)
+- [9.23.5. `ALL`](functions-subquery#FUNCTIONS-SUBQUERY-ALL)
+- [9.23.6. Single-Row Comparison](functions-subquery#FUNCTIONS-SUBQUERY-SINGLE-ROW-COMP)
 
 This section describes the SQL-compliant subquery expressions available in PostgreSQL. All of the expression forms documented in this section return Boolean (true/false) results.
 
@@ -22,7 +20,7 @@ This section describes the SQL-compliant subquery expressions available in Postg
 EXISTS (subquery)
 ```
 
-The argument of `EXISTS` is an arbitrary `SELECT` statement, or *subquery*. The subquery is evaluated to determine whether it returns any rows. If it returns at least one row, the result of `EXISTS` is “true”; if the subquery returns no rows, the result of `EXISTS` is “false”.
+The argument of `EXISTS` is an arbitrary `SELECT` statement, or _subquery_. The subquery is evaluated to determine whether it returns any rows. If it returns at least one row, the result of `EXISTS` is “true”; if the subquery returns no rows, the result of `EXISTS` is “false”.
 
 The subquery can refer to variables from the surrounding query, which will act as constants during any one evaluation of the subquery.
 
@@ -97,7 +95,7 @@ expression operator ANY (subquery)
 expression operator SOME (subquery)
 ```
 
-The right-hand side is a parenthesized subquery, which must return exactly one column. The left-hand expression is evaluated and compared to each row of the subquery result using the given *`operator`*, which must yield a Boolean result. The result of `ANY` is “true” if any true result is obtained. The result is “false” if no true result is found (including the case where the subquery returns no rows).
+The right-hand side is a parenthesized subquery, which must return exactly one column. The left-hand expression is evaluated and compared to each row of the subquery result using the given _`operator`_, which must yield a Boolean result. The result of `ANY` is “true” if any true result is obtained. The result is “false” if no true result is found (including the case where the subquery returns no rows).
 
 `SOME` is a synonym for `ANY`. `IN` is equivalent to `= ANY`.
 
@@ -111,7 +109,7 @@ row_constructor operator ANY (subquery)
 row_constructor operator SOME (subquery)
 ```
 
-The left-hand side of this form of `ANY` is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. The left-hand expressions are evaluated and compared row-wise to each row of the subquery result, using the given *`operator`*. The result of `ANY` is “true” if the comparison returns true for any subquery row. The result is “false” if the comparison returns false for every subquery row (including the case where the subquery returns no rows). The result is NULL if no comparison with a subquery row returns true, and at least one comparison returns NULL.
+The left-hand side of this form of `ANY` is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. The left-hand expressions are evaluated and compared row-wise to each row of the subquery result, using the given _`operator`_. The result of `ANY` is “true” if the comparison returns true for any subquery row. The result is “false” if the comparison returns false for every subquery row (including the case where the subquery returns no rows). The result is NULL if no comparison with a subquery row returns true, and at least one comparison returns NULL.
 
 See [Section 9.24.5](functions-comparisons#ROW-WISE-COMPARISON) for details about the meaning of a row constructor comparison.
 
@@ -124,7 +122,7 @@ See [Section 9.24.5](functions-comparisons#ROW-WISE-COMPARISON) for details abo
 expression operator ALL (subquery)
 ```
 
-The right-hand side is a parenthesized subquery, which must return exactly one column. The left-hand expression is evaluated and compared to each row of the subquery result using the given *`operator`*, which must yield a Boolean result. The result of `ALL` is “true” if all rows yield true (including the case where the subquery returns no rows). The result is “false” if any false result is found. The result is NULL if no comparison with a subquery row returns false, and at least one comparison returns NULL.
+The right-hand side is a parenthesized subquery, which must return exactly one column. The left-hand expression is evaluated and compared to each row of the subquery result using the given _`operator`_, which must yield a Boolean result. The result of `ALL` is “true” if all rows yield true (including the case where the subquery returns no rows). The result is “false” if any false result is found. The result is NULL if no comparison with a subquery row returns false, and at least one comparison returns NULL.
 
 `NOT IN` is equivalent to `<> ALL`.
 
@@ -135,15 +133,13 @@ As with `EXISTS`, it's unwise to assume that the subquery will be evaluated comp
 row_constructor operator ALL (subquery)
 ```
 
-The left-hand side of this form of `ALL` is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. The left-hand expressions are evaluated and compared row-wise to each row of the subquery result, using the given *`operator`*. The result of `ALL` is “true” if the comparison returns true for all subquery rows (including the case where the subquery returns no rows). The result is “false” if the comparison returns false for any subquery row. The result is NULL if no comparison with a subquery row returns false, and at least one comparison returns NULL.
+The left-hand side of this form of `ALL` is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. The left-hand expressions are evaluated and compared row-wise to each row of the subquery result, using the given _`operator`_. The result of `ALL` is “true” if the comparison returns true for all subquery rows (including the case where the subquery returns no rows). The result is “false” if the comparison returns false for any subquery row. The result is NULL if no comparison with a subquery row returns false, and at least one comparison returns NULL.
 
 See [Section 9.24.5](functions-comparisons#ROW-WISE-COMPARISON) for details about the meaning of a row constructor comparison.
 
 [#id](#FUNCTIONS-SUBQUERY-SINGLE-ROW-COMP)
 
 ### 9.23.6. Single-Row Comparison [#](#FUNCTIONS-SUBQUERY-SINGLE-ROW-COMP)
-
-
 
 ```
 

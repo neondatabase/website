@@ -57,7 +57,7 @@ Then visit http://localhost:8080 in your browser to open the PgHero Dashboard.
 
 ## pgAdmin
 
-pgAdmin is a database management tool for Postgres designed to facilitate various database tasks, including monitoring performance metrics. 
+pgAdmin is a database management tool for Postgres designed to facilitate various database tasks, including monitoring performance metrics.
 
 ![PgAdmin monitoring dashboard](/docs/introduction/pgadmin_monitor.png)
 

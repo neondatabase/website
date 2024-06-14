@@ -24,15 +24,15 @@ The owner of a foreign server can alter user mappings for that server for any us
 
 ## Parameters
 
-* *`user_name`*
+- _`user_name`_
 
   User name of the mapping. `CURRENT_ROLE`, `CURRENT_USER`, and `USER` match the name of the current user. `PUBLIC` is used to match all present and future user names in the system.
 
-* *`server_name`*
+- _`server_name`_
 
   Server name of the user mapping.
 
-* `OPTIONS ( [ ADD | SET | DROP ] option ['value'] [, ... ] )`
+- `OPTIONS ( [ ADD | SET | DROP ] option ['value'] [, ... ] )`
 
   Change options for the user mapping. The new options override any previously specified options. `ADD`, `SET`, and `DROP` specify the action to be performed. `ADD` is assumed if no operation is explicitly specified. Option names must be unique; options are also validated by the server's foreign-data wrapper.
 

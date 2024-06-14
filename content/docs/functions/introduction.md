@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/postgres/functions-intro
 ---
 
-Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation. 
+Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
 
 ## JSON functions
 
@@ -66,5 +66,3 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 <a href="/docs/functions/window-lead" description="Access values from subsequent rows in a result set" icon="app-store">lead()</a>
 
 </DetailIconCards>
-
-

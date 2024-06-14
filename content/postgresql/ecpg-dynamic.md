@@ -2,9 +2,9 @@
 
 ## 36.5. Dynamic SQL [#](#ECPG-DYNAMIC)
 
-  * [36.5.1. Executing Statements without a Result Set](ecpg-dynamic#ECPG-DYNAMIC-WITHOUT-RESULT)
-  * [36.5.2. Executing a Statement with Input Parameters](ecpg-dynamic#ECPG-DYNAMIC-INPUT)
-  * [36.5.3. Executing a Statement with a Result Set](ecpg-dynamic#ECPG-DYNAMIC-WITH-RESULT)
+- [36.5.1. Executing Statements without a Result Set](ecpg-dynamic#ECPG-DYNAMIC-WITHOUT-RESULT)
+- [36.5.2. Executing a Statement with Input Parameters](ecpg-dynamic#ECPG-DYNAMIC-INPUT)
+- [36.5.3. Executing a Statement with a Result Set](ecpg-dynamic#ECPG-DYNAMIC-WITH-RESULT)
 
 In many cases, the particular SQL statements that an application has to execute are known at the time the application is written. In some cases, however, the SQL statements are composed at run time or provided by an external source. In these cases you cannot embed the SQL statements directly into the C source code, but there is a facility that allows you to call arbitrary SQL statements that you provide in a string variable.
 

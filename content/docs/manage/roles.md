@@ -36,8 +36,8 @@ Roles created in the Neon Console, CLI, or API, including the default role creat
 - `NOLOGIN`: The role cannot be used to log in to the Postgres server. Neon is a managed Postgres service, so you cannot access the host operating system directly.
 - `pg_read_all_data`: A predefined Postgres role provides the ability to read all data (tables, views, sequences), as if having `SELECT` rights on those objects, and `USAGE` rights on all schemas.
 - `pg_write_all_data`: A predefined Postgres role that provides the ability to write all data (tables, views, sequences), as if having `INSERT`, `UPDATE`, and `DELETE` rights on those objects, and `USAGE` rights on all schemas.
-- `REPLICATION`: Provides the ability to connect to a Postgres server in replication mode and create or drop replication slots. 
-- `pg_create_subscription`:	A predefined Postgres role that lets users with `CREATE` permission on the database issue `CREATE SUBSCRIPTION`. The `pg_create_subscription` role is only available as of Postgres 16. The `neon_superuser` role in Postgres 14 and 15 can issue `CREATE SUBSCRIPTION` with only `CREATE` permission on the database.
+- `REPLICATION`: Provides the ability to connect to a Postgres server in replication mode and create or drop replication slots.
+- `pg_create_subscription`: A predefined Postgres role that lets users with `CREATE` permission on the database issue `CREATE SUBSCRIPTION`. The `pg_create_subscription` role is only available as of Postgres 16. The `neon_superuser` role in Postgres 14 and 15 can issue `CREATE SUBSCRIPTION` with only `CREATE` permission on the database.
 - `pg_monitor`: A predefined Postgres role that provides read/execute privileges on various Postgres monitoring views and functions. The `neon_superuser` role also has `WITH ADMIN` on the `pg_monitor` role, which enables granting the `pg_monitor` to other Postgres roles.
 - `EXECUTE` privilege on the `pg_stat_statements_reset()` function that is part of the `pg_stat_statements` extension. This privilege was introduced with the January 12, 2024 release. If you installed the `pg_stat_statements` extension before this release, drop and recreate the `pg_stat_statements` extension to enable this privilege. See [Install an extension](/docs/extensions/pg-extensions#install-an-extension).
 - `GRANT ALL ON TABLES` and `WITH GRANT OPTION` on the `public` schema.
@@ -379,12 +379,12 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
       - Any words found in a dictionary
       - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.
 
-    Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
+  Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
 
-    Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
+  Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
 
-    The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
-    </Admonition>
+  The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
+  </Admonition>
 
 For role creation and access management examples, refer to the [Manage database access](/docs/manage/database-access) guide.
 
