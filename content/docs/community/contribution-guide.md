@@ -197,7 +197,7 @@ To comment out content in a markdown file use this construction:
 [comment]: <> (Single line comment.)
 
 [comment]: <> (
-Multiline comment.
+Multiline comment. 
 You can't use line breaks or () parentheses here.
 )
 ```
