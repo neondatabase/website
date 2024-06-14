@@ -69,7 +69,7 @@ const CardItem = ({
 
   return (
     <li>
-      <GradientCard className="p-8 lg:p-6 sm:p-5" {...linkProps}>
+      <GradientCard className="p-8 lg:rounded-lg lg:p-6 sm:p-5" {...linkProps}>
         <div className="flex h-full flex-col">
           <Image
             className="h-10 w-fit lg:h-8"
