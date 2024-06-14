@@ -203,12 +203,12 @@ reflex db migrate
 
 This command applies the migration to the database, updating the schema to match the model definition.
 
-## Create a Data Viewer Dashboard in Reflex with Neon
+## Create a Customer Data App in Reflex with Neon
 
-Learn how to use Reflex with Neon Postgres in the following project to create an interactive Data Viewer Dashboard application.
+Learn how to use Reflex with Neon Postgres in the following project to create an interactive Customer Data App.
 
 <DetailIconCards>
 
-<a href="https://github.com/reflex-dev/data-viewer" description="Reflex with Neon Postgres" icon="github">Reflex Data Viewer app</a>
+<a href="https://github.com/reflex-dev/templates/tree/main/customer_data_app" description="Reflex with Neon Postgres" icon="github">Customer Data App</a>
 
 </DetailIconCards>
