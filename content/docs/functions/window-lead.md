@@ -2,7 +2,7 @@
 title: Postgres lead() window function
 subtitle: Use lead() to access values from subsequent rows in a result set
 enableTableOfContents: true
-updatedOn: '2024-02-08T09:30:00.000Z'
+updatedOn: '2024-06-14T07:55:54.378Z'
 ---
 
 The `lead()` function in Postgres is a window function that allows you to access values from subsequent rows in a result set without the need for a self-join.

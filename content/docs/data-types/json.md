@@ -2,7 +2,7 @@
 title: Postgres JSON data types
 subtitle: Model JSON data in Postgres
 enableTableOfContents: true
-updatedOn: '2024-02-04T13:56:31.612Z'
+updatedOn: '2024-06-14T07:55:54.366Z'
 ---
 
 Postgres supports JSON (JavaScript Object Notation) data types, providing a flexible way to store and manipulate semi-structured data. The two types are `JSON` and `JSONB`. The functions work similarly, but there are trade-offs related to data ingestion and querying performance.

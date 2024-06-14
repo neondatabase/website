@@ -3,7 +3,7 @@ title: Replicate data with Fivetran
 subtitle: Learn how to replicate data from Neon with Fivetran
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-19T18:57:12.557Z'
+updatedOn: '2024-06-14T07:55:54.398Z'
 ---
 
 <LRNotice/>

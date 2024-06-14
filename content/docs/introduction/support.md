@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2024-02-20T01:33:01.123Z'
+updatedOn: '2024-06-14T07:55:54.415Z'
 ---
 
 Neon's Community, Standard, Priority, and Enterprise support plans are outlined below.

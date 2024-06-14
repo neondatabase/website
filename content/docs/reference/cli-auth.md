@@ -2,7 +2,7 @@
 title: Neon CLI commands — auth
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-01-10T17:27:58.298Z'
+updatedOn: '2024-06-14T07:55:54.421Z'
 ---
 
 ## Before you begin

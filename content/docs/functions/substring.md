@@ -2,7 +2,7 @@
 title: Postgres substring() function
 subtitle: Extract a substring from a string
 enableTableOfContents: true
-updatedOn: '2024-02-07T10:15:00.000Z'
+updatedOn: '2024-06-14T07:55:54.378Z'
 ---
 
 The `substring()` function in Postgres is used to extract a portion of a string based on specified start and end positions, or a regular expression pattern.

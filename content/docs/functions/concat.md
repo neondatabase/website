@@ -2,7 +2,7 @@
 title: Postgres concat() function
 subtitle: Concatenate strings in Postgres with the concat() function
 enableTableOfContents: true
-updatedOn: '2024-02-08T09:30:00.000Z'
+updatedOn: '2024-06-14T07:55:54.373Z'
 ---
 
 The `concat()` function in Postgres is used to concatenate two or more strings into a single string. It is a variadic function, meaning it can accept any number of arguments.

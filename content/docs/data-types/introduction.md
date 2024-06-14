@@ -3,6 +3,7 @@ title: Postgres data types
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/data-types-intro
+updatedOn: '2024-06-14T07:55:54.366Z'
 ---
 
 Get started with commonly-used Postgres data types with Neon's data type guides. For other data types that Postgres supports, visit the official Postgres [Data Types](https://www.postgresql.org/docs/current/datatype.html) documentation.

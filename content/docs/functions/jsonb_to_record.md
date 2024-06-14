@@ -2,7 +2,7 @@
 title: Postgres jsonb_to_record() function
 subtitle: Convert a JSONB object to a record
 enableTableOfContents: true
-updatedOn: '2024-02-06T23:28:28.691Z'
+updatedOn: '2024-06-14T07:55:54.377Z'
 ---
 
 You can use the `jsonb_to_record` function to convert a top-level `JSONB` object into a row, with the type specified by the `AS` clause.

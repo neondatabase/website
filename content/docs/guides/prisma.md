@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2024-02-23T20:32:29.800Z'
+updatedOn: '2024-06-14T07:55:54.404Z'
 ---
 
 Prisma is an open-source, next-generation ORM that lets you to manage and interact with your database. This guide covers the following topics:

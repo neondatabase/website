@@ -4,7 +4,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-02-08T20:07:48.873Z'
+updatedOn: '2024-06-14T07:55:54.415Z'
 ---
 
 Our developers are focused on making Neon the default choice for serverless Postgres. This roadmap describes committed features that are coming soon. We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion.

@@ -2,7 +2,7 @@
 title: Postgres Date and Time data types
 subtitle: Work with date and time values in Postgres
 enableTableOfContents: true
-updatedOn: '2024-02-04T17:39:41.493Z'
+updatedOn: '2024-06-14T07:55:54.366Z'
 ---
 
 Postgres offers a rich set of native data types for storing date and time values. Both moment-in-time and interval data can be stored, and Postgres provides a variety of functions to query and manipulate them.

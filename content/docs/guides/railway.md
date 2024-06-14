@@ -3,7 +3,7 @@ title: Use Neon Postgres with Railway
 subtitle: Connect a Neon Postgres database to your Node application deployed with
   Railway
 enableTableOfContents: true
-updatedOn: '2024-02-20T15:33:30.391Z'
+updatedOn: '2024-06-14T07:55:54.405Z'
 ---
 
 [Railway](https://railway.app) is an application deployment platform that allows users to develop web applications locally, provision infrastructure and then deploy to the cloud. Railway integrates with GitHub for continuous deployment and supports a variety of programming languages and frameworks.

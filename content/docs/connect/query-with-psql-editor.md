@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/quickstart/postgres
   - /docs/integrations/postgres
   - /docs/get-started-with-neon/query-with-psql-editor
-updatedOn: '2024-02-08T15:20:54.276Z'
+updatedOn: '2024-06-14T07:55:54.364Z'
 ---
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for Postgres. It provides an interactive session for sending commands to Postgres and running ad-hoc queries. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.

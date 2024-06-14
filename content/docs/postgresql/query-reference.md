@@ -1,9 +1,11 @@
 ---
 title: Postgres query reference
-subtitle: Find examples of commonly-used Postgres queries for basic to advanced operations
+subtitle: Find examples of commonly-used Postgres queries for basic to advanced
+  operations
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-reference
+updatedOn: '2024-06-14T07:55:54.420Z'
 ---
 
 <CTA />

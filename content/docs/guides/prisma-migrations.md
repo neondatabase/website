@@ -1,8 +1,9 @@
 ---
 title: Schema migration with Neon Postgres and Prisma ORM
-subtitle: Set up Neon Postgres and run migrations for your Javascript project using Prisma ORM
+subtitle: Set up Neon Postgres and run migrations for your Javascript project using
+  Prisma ORM
 enableTableOfContents: true
-updatedOn: '2024-03-06T10:15:00.000Z'
+updatedOn: '2024-06-14T07:55:54.404Z'
 ---
 
 [Prisma](https://www.prisma.io/) is an open-source ORM for Node.js and Typescript, known for its ease of use and focus on type safety. It supports many databases, including Postgres, and provides a robust system for managing database schemas and migrations.

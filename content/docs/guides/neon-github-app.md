@@ -2,6 +2,7 @@
 title: The Neon GitHub integration
 subtitle: Connect your GitHub application repository to your Neon project
 enableTableOfContents: true
+updatedOn: '2024-06-14T07:55:54.401Z'
 ---
 
 The Neon GitHub integration connects your GitHub application repository to your Neon project, making it easier to set up developer workflows using Neon's [GitHub Actions](/docs/guides/branching-github-actions) or other CI/CD tools.

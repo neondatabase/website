@@ -1,8 +1,9 @@
 ---
 title: Protected branches
-subtitle: Learn how to use Neon's protected branches feature to secure access to critical data
+subtitle: Learn how to use Neon's protected branches feature to secure access to
+  critical data
 enableTableOfContents: true
-updatedOn: '2023-12-22T16:01:34.806Z'
+updatedOn: '2024-06-14T07:55:54.405Z'
 ---
 
 Neon's protected branches feature lets you apply IP restrictions to specific branches in your Neon project as an added layer of data protection. Protected branches is a Neon [Scale](/docs/introduction/plans#scale) plan feature.

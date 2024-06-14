@@ -3,7 +3,7 @@ title: Replicate data with Kafka (Confluent) and Debezium
 subtitle: Learn how to replicate data from Neon with Kafka (Confluent) and Debezium
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-19T18:57:12.557Z'
+updatedOn: '2024-06-14T07:55:54.399Z'
 ---
 
 <LRNotice/>

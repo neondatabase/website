@@ -3,7 +3,7 @@ title: Enable Autoscaling in Neon
 subtitle: Learn how to enable Neon's Autoscaling feature to automatically scale compute
   resources on demand
 enableTableOfContents: true
-updatedOn: '2024-02-21T13:17:01.633Z'
+updatedOn: '2024-06-14T07:55:54.384Z'
 ---
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current workload, eliminating the need for manual intervention. This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.

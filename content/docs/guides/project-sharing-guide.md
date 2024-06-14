@@ -2,7 +2,7 @@
 title: Project sharing
 subtitle: Learn how to share your Neon project with others
 enableTableOfContents: true
-updatedOn: '2024-02-19T18:57:12.559Z'
+updatedOn: '2024-06-14T07:55:54.404Z'
 ---
 
 You can share a Neon project with other users, giving them access to your Neon project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.

@@ -2,7 +2,7 @@
 title: Connect an Express application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Express application
 enableTableOfContents: true
-updatedOn: '2024-06-01T15:20:54.286Z'
+updatedOn: '2024-06-14T07:55:54.390Z'
 tag: new
 ---
 

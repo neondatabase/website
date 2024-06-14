@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-02-22T14:29:54.387Z'
+updatedOn: '2024-06-14T07:55:54.416Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [primary branch](#primary-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.

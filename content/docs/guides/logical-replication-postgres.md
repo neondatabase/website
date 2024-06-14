@@ -3,7 +3,7 @@ title: Replicate data to an external Postgres instance
 subtitle: Learn how to replicate data from Neon to an external Postgres instance
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-19T18:57:12.559Z'
+updatedOn: '2024-06-14T07:55:54.401Z'
 ---
 
 <LRNotice/>

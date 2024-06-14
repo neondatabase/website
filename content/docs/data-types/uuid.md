@@ -2,7 +2,7 @@
 title: Postgres UUID data type
 subtitle: Work with UUIDs in Postgres
 enableTableOfContents: true
-updatedOn: '2024-01-28T13:46:59.385Z'
+updatedOn: '2024-06-14T07:55:54.367Z'
 ---
 
 `UUID` stands for `Universally Unique Identifier`. A `UUID` is a 128-bit value used to ensure global uniqueness across tables and databases.
