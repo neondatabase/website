@@ -2,21 +2,19 @@
 
 ## 8.14. JSON Types [#](#DATATYPE-JSON)
 
-  * [8.14.1. JSON Input and Output Syntax](datatype-json#JSON-KEYS-ELEMENTS)
-  * [8.14.2. Designing JSON Documents](datatype-json#JSON-DOC-DESIGN)
-  * [8.14.3. `jsonb` Containment and Existence](datatype-json#JSON-CONTAINMENT)
-  * [8.14.4. `jsonb` Indexing](datatype-json#JSON-INDEXING)
-  * [8.14.5. `jsonb` Subscripting](datatype-json#JSONB-SUBSCRIPTING)
-  * [8.14.6. Transforms](datatype-json#DATATYPE-JSON-TRANSFORMS)
-  * [8.14.7. jsonpath Type](datatype-json#DATATYPE-JSONPATH)
-
-
+- [8.14.1. JSON Input and Output Syntax](datatype-json#JSON-KEYS-ELEMENTS)
+- [8.14.2. Designing JSON Documents](datatype-json#JSON-DOC-DESIGN)
+- [8.14.3. `jsonb` Containment and Existence](datatype-json#JSON-CONTAINMENT)
+- [8.14.4. `jsonb` Indexing](datatype-json#JSON-INDEXING)
+- [8.14.5. `jsonb` Subscripting](datatype-json#JSONB-SUBSCRIPTING)
+- [8.14.6. Transforms](datatype-json#DATATYPE-JSON-TRANSFORMS)
+- [8.14.7. jsonpath Type](datatype-json#DATATYPE-JSONPATH)
 
 JSON data types are for storing JSON (JavaScript Object Notation) data, as specified in [RFC 7159](https://tools.ietf.org/html/rfc7159). Such data can also be stored as `text`, but the JSON data types have the advantage of enforcing that each stored value is valid according to the JSON rules. There are also assorted JSON-specific functions and operators available for data stored in these data types; see [Section 9.16](functions-json).
 
 PostgreSQL offers two types for storing JSON data: `json` and `jsonb`. To implement efficient query mechanisms for these data types, PostgreSQL also provides the `jsonpath` data type described in [Section 8.14.7](datatype-json#DATATYPE-JSONPATH).
 
-The `json` and `jsonb` data types accept *almost* identical sets of values as input. The major practical difference is one of efficiency. The `json` data type stores an exact copy of the input text, which processing functions must reparse on each execution; while `jsonb` data is stored in a decomposed binary format that makes it slightly slower to input due to added conversion overhead, but significantly faster to process, since no reparsing is needed. `jsonb` also supports indexing, which can be a significant advantage.
+The `json` and `jsonb` data types accept _almost_ identical sets of values as input. The major practical difference is one of efficiency. The `json` data type stores an exact copy of the input text, which processing functions must reparse on each execution; while `jsonb` data is stored in a decomposed binary format that makes it slightly slower to input due to added conversion overhead, but significantly faster to process, since no reparsing is needed. `jsonb` also supports indexing, which can be a significant advantage.
 
 Because the `json` type stores an exact copy of the input text, it will preserve semantically-insignificant white space between tokens, as well as the order of keys within JSON objects. Also, if a JSON object within the value contains the same key more than once, all the key/value pairs are kept. (The processing functions consider the last value as the operative one.) By contrast, `jsonb` does not preserve white space, does not preserve the order of object keys, and does not keep duplicate object keys. If duplicate keys are specified in the input, only the last value is kept.
 
@@ -44,7 +42,6 @@ Conversely, as noted in the table there are some minor restrictions on the input
 | `number`            | `numeric`       | `NaN` and `infinity` values are disallowed                                                                    |
 | `boolean`           | `boolean`       | Only lowercase `true` and `false` spellings are accepted                                                      |
 | `null`              | (none)          | SQL `NULL` is a different concept                                                                             |
-
 
 [#id](#JSON-KEYS-ELEMENTS)
 
@@ -115,9 +112,7 @@ JSON data is subject to the same concurrency-control considerations as any other
 
 ### 8.14.3. `jsonb` Containment and Existence [#](#JSON-CONTAINMENT)
 
-
-
-Testing *containment* is an important capability of `jsonb`. There is no parallel set of facilities for the `json` type. Containment tests whether one `jsonb` document has contained within it another one. These examples return true except as noted:
+Testing _containment_ is an important capability of `jsonb`. There is no parallel set of facilities for the `json` type. Containment tests whether one `jsonb` document has contained within it another one. These examples return true except as noted:
 
 ```
 
@@ -164,7 +159,7 @@ SELECT '["foo", "bar"]'::jsonb @> '"bar"'::jsonb;
 SELECT '"bar"'::jsonb @> '["bar"]'::jsonb;  -- yields false
 ```
 
-`jsonb` also has an *existence* operator, which is a variation on the theme of containment: it tests whether a string (given as a `text` value) appears as an object key or array element at the top level of the `jsonb` value. These examples return true except as noted:
+`jsonb` also has an _existence_ operator, which is a variation on the theme of containment: it tests whether a string (given as a `text` value) appears as an object key or array element at the top level of the `jsonb` value. These examples return true except as noted:
 
 ```
 
@@ -213,8 +208,6 @@ The various containment and existence operators, along with all other JSON opera
 [#id](#JSON-INDEXING)
 
 ### 8.14.4. `jsonb` Indexing [#](#JSON-INDEXING)
-
-
 
 GIN indexes can be used to efficiently search for keys or key/value pairs occurring within a large number of `jsonb` documents (datums). Two GIN “operator classes” are provided, offering different performance and flexibility trade-offs.
 
@@ -426,17 +419,15 @@ Of these extensions, `jsonb_plperl` is considered “trusted”, that is, it can
 
 ### 8.14.7. jsonpath Type [#](#DATATYPE-JSONPATH)
 
-
-
 The `jsonpath` type implements support for the SQL/JSON path language in PostgreSQL to efficiently query JSON data. It provides a binary representation of the parsed SQL/JSON path expression that specifies the items to be retrieved by the path engine from the JSON data for further processing with the SQL/JSON query functions.
 
 The semantics of SQL/JSON path predicates and operators generally follow SQL. At the same time, to provide a natural way of working with JSON data, SQL/JSON path syntax uses some JavaScript conventions:
 
-* Dot (`.`) is used for member access.
+- Dot (`.`) is used for member access.
 
-* Square brackets (`[]`) are used for array access.
+- Square brackets (`[]`) are used for array access.
 
-* SQL/JSON arrays are 0-relative, unlike regular SQL arrays that start from 1.
+- SQL/JSON arrays are 0-relative, unlike regular SQL arrays that start from 1.
 
 Numeric literals in SQL/JSON path expressions follow JavaScript rules, which are different from both SQL and JSON in some minor details. For example, SQL/JSON path allows `.1` and `1.`, which are invalid in JSON. Non-decimal integer literals and underscore separators are supported, for example, `1_000_000`, `0x1EEE_FFFF`, `0o273`, `0b100101`. In SQL/JSON path (and in JavaScript, but not in SQL proper), there must not be an underscore separator directly after the radix prefix.
 
@@ -444,15 +435,15 @@ An SQL/JSON path expression is typically written in an SQL query as an SQL chara
 
 A path expression consists of a sequence of path elements, which can be any of the following:
 
-* Path literals of JSON primitive types: Unicode text, numeric, true, false, or null.
+- Path literals of JSON primitive types: Unicode text, numeric, true, false, or null.
 
-* Path variables listed in [Table 8.24](datatype-json#TYPE-JSONPATH-VARIABLES).
+- Path variables listed in [Table 8.24](datatype-json#TYPE-JSONPATH-VARIABLES).
 
-* Accessor operators listed in [Table 8.25](datatype-json#TYPE-JSONPATH-ACCESSORS).
+- Accessor operators listed in [Table 8.25](datatype-json#TYPE-JSONPATH-ACCESSORS).
 
-* `jsonpath` operators and methods listed in [Section 9.16.2.2](functions-json#FUNCTIONS-SQLJSON-PATH-OPERATORS).
+- `jsonpath` operators and methods listed in [Section 9.16.2.2](functions-json#FUNCTIONS-SQLJSON-PATH-OPERATORS).
 
-* Parentheses, which can be used to provide filter expressions or define the order of path evaluation.
+- Parentheses, which can be used to provide filter expressions or define the order of path evaluation.
 
 For details on using `jsonpath` expressions with SQL/JSON query functions, see [Section 9.16.2](functions-json#FUNCTIONS-SQLJSON-PATH).
 
@@ -460,12 +451,11 @@ For details on using `jsonpath` expressions with SQL/JSON query functions, see [
 
 **Table 8.24. `jsonpath` Variables**
 
-| Variable   | Description                                                                                                                                                                               |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `$`        | A variable representing the JSON value being queried (the *context item*).                                                                                                                |
-| `$varname` | A named variable. Its value can be set by the parameter *`vars`* of several JSON processing functions; see [Table 9.49](functions-json#FUNCTIONS-JSON-PROCESSING-TABLE) for details. |
-| `@`        | A variable representing the result of path evaluation in filter expressions.                                                                                                              |
-
+| Variable   | Description                                                                                                                                                                          |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `$`        | A variable representing the JSON value being queried (the _context item_).                                                                                                           |
+| `$varname` | A named variable. Its value can be set by the parameter _`vars`_ of several JSON processing functions; see [Table 9.49](functions-json#FUNCTIONS-JSON-PROCESSING-TABLE) for details. |
+| `@`        | A variable representing the result of path evaluation in filter expressions.                                                                                                         |
 
 [#id](#TYPE-JSONPATH-ACCESSORS)
 
@@ -477,5 +467,5 @@ For details on using `jsonpath` expressions with SQL/JSON query functions, see [
 | `.*`                                        | Wildcard member accessor that returns the values of all members located at the top level of the current object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `.**`                                       | Recursive wildcard member accessor that processes all levels of the JSON hierarchy of the current object and returns all the member values, regardless of their nesting level. This is a PostgreSQL extension of the SQL/JSON standard.                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `.**{level}``.**{start_level to end_level}` | Like `.**`, but selects only the specified levels of the JSON hierarchy. Nesting levels are specified as integers. Level zero corresponds to the current object. To access the lowest nesting level, you can use the `last` keyword. This is a PostgreSQL extension of the SQL/JSON standard.                                                                                                                                                                                                                                                                                                                                                            |
-| `[subscript, ...]`                          | Array element accessor. `subscript` can be given in two forms: `index` or `start_index to end_index`. The first form returns a single array element by its index. The second form returns an array slice by the range of indexes, including the elements that correspond to the provided *`start_index`* and *`end_index`*.The specified *`index`* can be an integer, as well as an expression returning a single numeric value, which is automatically cast to integer. Index zero corresponds to the first array element. You can also use the `last` keyword to denote the last array element, which is useful for handling arrays of unknown length. |
+| `[subscript, ...]`                          | Array element accessor. `subscript` can be given in two forms: `index` or `start_index to end_index`. The first form returns a single array element by its index. The second form returns an array slice by the range of indexes, including the elements that correspond to the provided _`start_index`_ and _`end_index`_.The specified _`index`_ can be an integer, as well as an expression returning a single numeric value, which is automatically cast to integer. Index zero corresponds to the first array element. You can also use the `last` keyword to denote the last array element, which is useful for handling arrays of unknown length. |
 | `[*]`                                       | Wildcard array element accessor that returns all array elements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |

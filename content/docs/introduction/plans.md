@@ -11,12 +11,12 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2024-02-27T16:17:40.463Z'
+updatedOn: '2024-06-14T07:55:54.414Z'
 ---
 
-Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison. 
+Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
 
-Neon offers four plans: 
+Neon offers four plans:
 
 - [Free Tier](#free-tier)
 - [Launch](#launch)
@@ -35,15 +35,14 @@ Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon.
 
 The Free Tier includes the following usage allowances:
 
-| Usage type                              | Plan allowance                                                |
-|-----------------------------------------|---------------------------------------------------------------|
-| **Projects**                            | 1 Neon project                                                |
-| **Branches**                            | 10 branches                                                   |
-| **Databases**                           | Unlimited                                                     |
-| **Storage**                             | 0.5 GiB                                                       |
-| **Compute**                             | Always-available primary branch compute, 5 compute hours (20 _active hours_)/month on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM. |
-| **Data Transfer (Egress)**              | 5 GiB per month                                                          |
-
+| Usage type                 | Plan allowance                                                                                                                                         |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Projects**               | 1 Neon project                                                                                                                                         |
+| **Branches**               | 10 branches                                                                                                                                            |
+| **Databases**              | Unlimited                                                                                                                                              |
+| **Storage**                | 0.5 GiB                                                                                                                                                |
+| **Compute**                | Always-available primary branch compute, 5 compute hours (20 _active hours_)/month on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM. |
+| **Data Transfer (Egress)** | 5 GiB per month                                                                                                                                        |
 
 <Admonition type="tip" title="What are active hours and compute hours?">
 
@@ -74,28 +73,28 @@ On the Free Tier, your primary branch compute is always available — it will ne
 
 ## Launch
 
-The Launch plan provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses or applications. 
+The Launch plan provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses or applications.
 
 ### Launch plan allowances
 
 The Launch plan includes the following usage allowances:
 
-| Usage type                              | Plan allowance                                                |
-|-----------------------------------------|---------------------------------------------------------------|
-| **Projects**                            | 10 Neon projects                                              |
-| **Branches**                            | 500                                                  |
-| **Databases**                           | Unlimited                                                     |
-| **Storage**                             | 10 GiB of data storage                                  |
-| **Compute**                             | 300 compute hours (1,200 _active hours_)/month for all computes in all projects |
+| Usage type    | Plan allowance                                                                  |
+| ------------- | ------------------------------------------------------------------------------- |
+| **Projects**  | 10 Neon projects                                                                |
+| **Branches**  | 500                                                                             |
+| **Databases** | Unlimited                                                                       |
+| **Storage**   | 10 GiB of data storage                                                          |
+| **Compute**   | 300 compute hours (1,200 _active hours_)/month for all computes in all projects |
 
 ### Launch plan extra usage
 
 Launch plan users have access to [extra compute and storage](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
-|  Extra usage type                             | Cost                                                |
-|-----------------------------------------|---------------------------------------------------------------|
-| **Extra Storage**                             |  Billed for in units of 2 GiB at $3.50 per unit, prorated for the month    |
-| **Extra Compute**                             |  Billed by compute hour at $0.16 per hour                                 |
+| Extra usage type  | Cost                                                                   |
+| ----------------- | ---------------------------------------------------------------------- |
+| **Extra Storage** | Billed for in units of 2 GiB at $3.50 per unit, prorated for the month |
+| **Extra Compute** | Billed by compute hour at $0.16 per hour                               |
 
 ### Launch plan features
 
@@ -114,23 +113,23 @@ The Scale plan provides full platform and support access and is designed for sca
 
 The Scale plan includes the following usage allowances:
 
-| Usage type                              |  Plan allowance                                                             |
-|-----------------------------------------|---------------------------------------------------------------|
-| **Projects**                            | 50 Neon projects                                        |
-| **Branches**                            | 500                                                           |
-| **Databases**                           | Unlimited                                                     |
-| **Storage**                             | 50 GiB of data storage                                  |
-| **Compute**                             | 750 compute hours (3,000 _active hours_)/month for all computes in all projects |
+| Usage type    | Plan allowance                                                                  |
+| ------------- | ------------------------------------------------------------------------------- |
+| **Projects**  | 50 Neon projects                                                                |
+| **Branches**  | 500                                                                             |
+| **Databases** | Unlimited                                                                       |
+| **Storage**   | 50 GiB of data storage                                                          |
+| **Compute**   | 750 compute hours (3,000 _active hours_)/month for all computes in all projects |
 
 ### Scale plan extra usage
 
 Scale plan users have access to [extra compute, storage, and projects](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
-|  Extra usage type                                       | Clost                                                              |
-|-----------------------------------------|---------------------------------------------------------------|
-| **Extra Storage**                             |   Billed for in units of 10 GiB at $15 per unit, prorated for the month                               |
-| **Extra Compute**                             |   Billed by compute hour at $0.16 per hour                                |
-| **Extra Projects**                             |   Billed for in units of 10 at $50 per unit                                |
+| Extra usage type   | Clost                                                                 |
+| ------------------ | --------------------------------------------------------------------- |
+| **Extra Storage**  | Billed for in units of 10 GiB at $15 per unit, prorated for the month |
+| **Extra Compute**  | Billed by compute hour at $0.16 per hour                              |
+| **Extra Projects** | Billed for in units of 10 at $50 per unit                             |
 
 ### Scale plan features
 
@@ -147,13 +146,13 @@ The Enterprise plan is a custom plan intended for large teams, enterprises requi
 
 Enterprise plan usage is entirely customizable and can support large data sizes.
 
-| Usage type                              | Plan allowance                                                |
-|-----------------------------------------|---------------------------------------------------------------|
-| **Projects**                            | Unlimited                                        |
-| **Branches**                            | Custom                                                           |
-| **Databases**                           | Unlimited                                                     |
-| **Storage**                             | Large data sizes                                  |
-| **Compute**                             | Custom |
+| Usage type    | Plan allowance   |
+| ------------- | ---------------- |
+| **Projects**  | Unlimited        |
+| **Branches**  | Custom           |
+| **Databases** | Unlimited        |
+| **Storage**   | Large data sizes |
+| **Compute**   | Custom           |
 
 Additionally, the _Enterprise_ plan can be tailored to your specific requirements with:
 

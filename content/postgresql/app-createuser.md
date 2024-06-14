@@ -6,7 +6,7 @@ createuser — define a new PostgreSQL user account
 
 ## Synopsis
 
-`createuser` \[*`connection-option`*...] \[*`option`*...] \[*`username`*]
+`createuser` \[_`connection-option`_...] \[_`option`_...] \[_`username`_]
 
 [#id](#id-1.9.4.5.5)
 
@@ -24,129 +24,129 @@ createuser is a wrapper around the SQL command [`CREATE ROLE`](sql-createrole). 
 
 createuser accepts the following command-line arguments:
 
-* *`username`*
+- _`username`_
 
   Specifies the name of the PostgreSQL user to be created. This name must be different from all existing roles in this PostgreSQL installation.
 
-* `-a role``--with-admin=role`
+- `-a role``--with-admin=role`
 
   Specifies an existing role that will be automatically added as a member of the new role with admin option, giving it the right to grant membership in the new role to others. Multiple existing roles can be specified by writing multiple `-a` switches.
 
-* `-c number``--connection-limit=number`
+- `-c number``--connection-limit=number`
 
   Set a maximum number of connections for the new user. The default is to set no limit.
 
-* `-d``--createdb`
+- `-d``--createdb`
 
   The new user will be allowed to create databases.
 
-* `-D``--no-createdb`
+- `-D``--no-createdb`
 
   The new user will not be allowed to create databases. This is the default.
 
-* `-e``--echo`
+- `-e``--echo`
 
   Echo the commands that createuser generates and sends to the server.
 
-* `-E``--encrypted`
+- `-E``--encrypted`
 
   This option is obsolete but still accepted for backward compatibility.
 
-* `-g role``--member-of=role``--role=role` (deprecated)
+- `-g role``--member-of=role``--role=role` (deprecated)
 
   Specifies the new role should be automatically added as a member of the specified existing role. Multiple existing roles can be specified by writing multiple `-g` switches.
 
-* `-i``--inherit`
+- `-i``--inherit`
 
   The new role will automatically inherit privileges of roles it is a member of. This is the default.
 
-* `-I``--no-inherit`
+- `-I``--no-inherit`
 
   The new role will not automatically inherit privileges of roles it is a member of.
 
-* `--interactive`
+- `--interactive`
 
   Prompt for the user name if none is specified on the command line, and also prompt for whichever of the options `-d`/`-D`, `-r`/`-R`, `-s`/`-S` is not specified on the command line. (This was the default behavior up to PostgreSQL 9.1.)
 
-* `-l``--login`
+- `-l``--login`
 
   The new user will be allowed to log in (that is, the user name can be used as the initial session user identifier). This is the default.
 
-* `-L``--no-login`
+- `-L``--no-login`
 
   The new user will not be allowed to log in. (A role without login privilege is still useful as a means of managing database permissions.)
 
-* `-m role``--with-member=role`
+- `-m role``--with-member=role`
 
   Specifies an existing role that will be automatically added as a member of the new role. Multiple existing roles can be specified by writing multiple `-m` switches.
 
-* `-P``--pwprompt`
+- `-P``--pwprompt`
 
   If given, createuser will issue a prompt for the password of the new user. This is not necessary if you do not plan on using password authentication.
 
-* `-r``--createrole`
+- `-r``--createrole`
 
   The new user will be allowed to create, alter, drop, comment on, change the security label for other roles; that is, this user will have `CREATEROLE` privilege. See [role creation](role-attributes#ROLE-CREATION) for more details about what capabilities are conferred by this privilege.
 
-* `-R``--no-createrole`
+- `-R``--no-createrole`
 
   The new user will not be allowed to create new roles. This is the default.
 
-* `-s``--superuser`
+- `-s``--superuser`
 
   The new user will be a superuser.
 
-* `-S``--no-superuser`
+- `-S``--no-superuser`
 
   The new user will not be a superuser. This is the default.
 
-* `-v timestamp``--valid-until=timestamp`
+- `-v timestamp``--valid-until=timestamp`
 
   Set a date and time after which the role's password is no longer valid. The default is to set no password expiry date.
 
-* `-V``--version`
+- `-V``--version`
 
   Print the createuser version and exit.
 
-* `--bypassrls`
+- `--bypassrls`
 
   The new user will bypass every row-level security (RLS) policy.
 
-* `--no-bypassrls`
+- `--no-bypassrls`
 
   The new user will not bypass row-level security (RLS) policies. This is the default.
 
-* `--replication`
+- `--replication`
 
   The new user will have the `REPLICATION` privilege, which is described more fully in the documentation for [CREATE ROLE](sql-createrole).
 
-* `--no-replication`
+- `--no-replication`
 
   The new user will not have the `REPLICATION` privilege, which is described more fully in the documentation for [CREATE ROLE](sql-createrole). This is the default.
 
-* `-?``--help`
+- `-?``--help`
 
   Show help about createuser command line arguments, and exit.
 
 createuser also accepts the following command-line arguments for connection parameters:
 
-* `-h host``--host=host`
+- `-h host``--host=host`
 
   Specifies the host name of the machine on which the server is running. If the value begins with a slash, it is used as the directory for the Unix domain socket.
 
-* `-p port``--port=port`
+- `-p port``--port=port`
 
   Specifies the TCP port or local Unix domain socket file extension on which the server is listening for connections.
 
-* `-U username``--username=username`
+- `-U username``--username=username`
 
   User name to connect as (not the user name to create).
 
-* `-w``--no-password`
+- `-w``--no-password`
 
   Never issue a password prompt. If the server requires password authentication and a password is not available by other means such as a `.pgpass` file, the connection attempt will fail. This option can be useful in batch jobs and scripts where no user is present to enter a password.
 
-* `-W``--password`
+- `-W``--password`
 
   Force createuser to prompt for a password (for connecting to the server, not for the password of the new user).
 
@@ -156,11 +156,11 @@ createuser also accepts the following command-line arguments for connection para
 
 ## Environment
 
-* `PGHOST``PGPORT``PGUSER`
+- `PGHOST``PGPORT``PGUSER`
 
   Default connection parameters
 
-* `PG_COLOR`
+- `PG_COLOR`
 
   Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 
@@ -217,4 +217,4 @@ In the above example, the new password isn't actually echoed when typed, but we 
 
 ## See Also
 
-[dropuser](app-dropuser), [CREATE ROLE](sql-createrole), [createrole\_self\_grant](runtime-config-client#GUC-CREATEROLE-SELF-GRANT)
+[dropuser](app-dropuser), [CREATE ROLE](sql-createrole), [createrole_self_grant](runtime-config-client#GUC-CREATEROLE-SELF-GRANT)

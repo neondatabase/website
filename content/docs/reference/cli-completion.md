@@ -2,7 +2,7 @@
 title: Neon CLI commands — completion
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-12-01T22:29:21.618Z'
+updatedOn: '2024-06-14T07:55:54.421Z'
 ---
 
 ## Before you begin
@@ -56,7 +56,7 @@ complete -o bashdefault -o default -F _neonctl_yargs_completions neonctl
 ###-end-neonctl-completions-###
 ```
 
-Use the commands provided below to add the completion script to your shell configuration file, which is typically found in your `home` directory. Your shell configuration file may differ by platform. For example, on Ubuntu, you should have a `.bashrc` file, and on macOS, you might have `bash_profile` or `.zshrc` file. The `source` command causes the changes to take effect immediately in the current shell session. 
+Use the commands provided below to add the completion script to your shell configuration file, which is typically found in your `home` directory. Your shell configuration file may differ by platform. For example, on Ubuntu, you should have a `.bashrc` file, and on macOS, you might have `bash_profile` or `.zshrc` file. The `source` command causes the changes to take effect immediately in the current shell session.
 
 <Tabs labels={["bashrc", "bash_profile", "profile", "zshrc"]}>
 

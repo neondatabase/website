@@ -2,7 +2,7 @@
 
 ## 61.2. Creating Custom Scan Plans [#](#CUSTOM-SCAN-PLAN)
 
-* [61.2.1. Custom Scan Plan Callbacks](custom-scan-plan#CUSTOM-SCAN-PLAN-CALLBACKS)
+- [61.2.1. Custom Scan Plan Callbacks](custom-scan-plan#CUSTOM-SCAN-PLAN-CALLBACKS)
 
 A custom scan is represented in a finished plan tree using the following structure:
 

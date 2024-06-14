@@ -2,11 +2,11 @@
 
 ## 75.2. System Catalog Initial Data [#](#SYSTEM-CATALOG-INITIAL-DATA)
 
-  * [75.2.1. Data File Format](system-catalog-initial-data#SYSTEM-CATALOG-INITIAL-DATA-FORMAT)
-  * [75.2.2. OID Assignment](system-catalog-initial-data#SYSTEM-CATALOG-OID-ASSIGNMENT)
-  * [75.2.3. OID Reference Lookup](system-catalog-initial-data#SYSTEM-CATALOG-OID-REFERENCES)
-  * [75.2.4. Automatic Creation of Array Types](system-catalog-initial-data#SYSTEM-CATALOG-AUTO-ARRAY-TYPES)
-  * [75.2.5. Recipes for Editing Data Files](system-catalog-initial-data#SYSTEM-CATALOG-RECIPES)
+- [75.2.1. Data File Format](system-catalog-initial-data#SYSTEM-CATALOG-INITIAL-DATA-FORMAT)
+- [75.2.2. OID Assignment](system-catalog-initial-data#SYSTEM-CATALOG-OID-ASSIGNMENT)
+- [75.2.3. OID Reference Lookup](system-catalog-initial-data#SYSTEM-CATALOG-OID-REFERENCES)
+- [75.2.4. Automatic Creation of Array Types](system-catalog-initial-data#SYSTEM-CATALOG-AUTO-ARRAY-TYPES)
+- [75.2.5. Recipes for Editing Data Files](system-catalog-initial-data#SYSTEM-CATALOG-RECIPES)
 
 Each catalog that has any manually-created initial data (some do not) has a corresponding `.dat` file that contains its initial data in an editable format.
 
@@ -33,31 +33,31 @@ Each `.dat` file contains Perl data structure literals that are simply eval'd to
 
 Points to note:
 
-* The overall file layout is: open square bracket, one or more sets of curly braces each of which represents a catalog row, close square bracket. Write a comma after each closing curly brace.
+- The overall file layout is: open square bracket, one or more sets of curly braces each of which represents a catalog row, close square bracket. Write a comma after each closing curly brace.
 
-* Within each catalog row, write comma-separated *`key`* `=>` *`value`* pairs. The allowed *`key`*s are the names of the catalog's columns, plus the metadata keys `oid`, `oid_symbol`, `array_type_oid`, and `descr`. (The use of `oid` and `oid_symbol` is described in [Section 75.2.2](system-catalog-initial-data#SYSTEM-CATALOG-OID-ASSIGNMENT) below, while `array_type_oid` is described in [Section 75.2.4](system-catalog-initial-data#SYSTEM-CATALOG-AUTO-ARRAY-TYPES). `descr` supplies a description string for the object, which will be inserted into `pg_description` or `pg_shdescription` as appropriate.) While the metadata keys are optional, the catalog's defined columns must all be provided, except when the catalog's `.h` file specifies a default value for the column. (In the example above, the `datdba` field has been omitted because `pg_database.h` supplies a suitable default value for it.)
+- Within each catalog row, write comma-separated _`key`_ `=>` _`value`_ pairs. The allowed *`key`*s are the names of the catalog's columns, plus the metadata keys `oid`, `oid_symbol`, `array_type_oid`, and `descr`. (The use of `oid` and `oid_symbol` is described in [Section 75.2.2](system-catalog-initial-data#SYSTEM-CATALOG-OID-ASSIGNMENT) below, while `array_type_oid` is described in [Section 75.2.4](system-catalog-initial-data#SYSTEM-CATALOG-AUTO-ARRAY-TYPES). `descr` supplies a description string for the object, which will be inserted into `pg_description` or `pg_shdescription` as appropriate.) While the metadata keys are optional, the catalog's defined columns must all be provided, except when the catalog's `.h` file specifies a default value for the column. (In the example above, the `datdba` field has been omitted because `pg_database.h` supplies a suitable default value for it.)
 
-* All values must be single-quoted. Escape single quotes used within a value with a backslash. Backslashes meant as data can, but need not, be doubled; this follows Perl's rules for simple quoted literals. Note that backslashes appearing as data will be treated as escapes by the bootstrap scanner, according to the same rules as for escape string constants (see [Section 4.1.2.2](sql-syntax-lexical#SQL-SYNTAX-STRINGS-ESCAPE)); for example `\t` converts to a tab character. If you actually want a backslash in the final value, you will need to write four of them: Perl strips two, leaving `\\` for the bootstrap scanner to see.
+- All values must be single-quoted. Escape single quotes used within a value with a backslash. Backslashes meant as data can, but need not, be doubled; this follows Perl's rules for simple quoted literals. Note that backslashes appearing as data will be treated as escapes by the bootstrap scanner, according to the same rules as for escape string constants (see [Section 4.1.2.2](sql-syntax-lexical#SQL-SYNTAX-STRINGS-ESCAPE)); for example `\t` converts to a tab character. If you actually want a backslash in the final value, you will need to write four of them: Perl strips two, leaving `\\` for the bootstrap scanner to see.
 
-* Null values are represented by `_null_`. (Note that there is no way to create a value that is just that string.)
+- Null values are represented by `_null_`. (Note that there is no way to create a value that is just that string.)
 
-* Comments are preceded by `#`, and must be on their own lines.
+- Comments are preceded by `#`, and must be on their own lines.
 
-* Field values that are OIDs of other catalog entries should be represented by symbolic names rather than actual numeric OIDs. (In the example above, `dattablespace` contains such a reference.) This is described in [Section 75.2.3](system-catalog-initial-data#SYSTEM-CATALOG-OID-REFERENCES) below.
+- Field values that are OIDs of other catalog entries should be represented by symbolic names rather than actual numeric OIDs. (In the example above, `dattablespace` contains such a reference.) This is described in [Section 75.2.3](system-catalog-initial-data#SYSTEM-CATALOG-OID-REFERENCES) below.
 
-* Since hashes are unordered data structures, field order and line layout aren't semantically significant. However, to maintain a consistent appearance, we set a few rules that are applied by the formatting script `reformat_dat_file.pl`:
+- Since hashes are unordered data structures, field order and line layout aren't semantically significant. However, to maintain a consistent appearance, we set a few rules that are applied by the formatting script `reformat_dat_file.pl`:
 
-  * Within each pair of curly braces, the metadata fields `oid`, `oid_symbol`, `array_type_oid`, and `descr` (if present) come first, in that order, then the catalog's own fields appear in their defined order.
+  - Within each pair of curly braces, the metadata fields `oid`, `oid_symbol`, `array_type_oid`, and `descr` (if present) come first, in that order, then the catalog's own fields appear in their defined order.
 
-  * Newlines are inserted between fields as needed to limit line length to 80 characters, if possible. A newline is also inserted between the metadata fields and the regular fields.
+  - Newlines are inserted between fields as needed to limit line length to 80 characters, if possible. A newline is also inserted between the metadata fields and the regular fields.
 
-  * If the catalog's `.h` file specifies a default value for a column, and a data entry has that same value, `reformat_dat_file.pl` will omit it from the data file. This keeps the data representation compact.
+  - If the catalog's `.h` file specifies a default value for a column, and a data entry has that same value, `reformat_dat_file.pl` will omit it from the data file. This keeps the data representation compact.
 
-  * `reformat_dat_file.pl` preserves blank lines and comment lines as-is.
+  - `reformat_dat_file.pl` preserves blank lines and comment lines as-is.
 
   It's recommended to run `reformat_dat_file.pl` before submitting catalog data patches. For convenience, you can simply change to `src/include/catalog/` and run `make reformat-dat-files`.
 
-* If you want to add a new method of making the data representation smaller, you must implement it in `reformat_dat_file.pl` and also teach `Catalog::ParseData()` how to expand the data back into the full representation.
+- If you want to add a new method of making the data representation smaller, you must implement it in `reformat_dat_file.pl` and also teach `Catalog::ParseData()` how to expand the data back into the full representation.
 
 [#id](#SYSTEM-CATALOG-OID-ASSIGNMENT)
 
@@ -87,21 +87,21 @@ OIDs assigned during normal database operation are constrained to be 16384 or hi
 
 In principle, cross-references from one initial catalog row to another could be written just by writing the preassigned OID of the referenced row in the referencing field. However, that is against project policy, because it is error-prone, hard to read, and subject to breakage if a newly-assigned OID is renumbered. Therefore `genbki.pl` provides mechanisms to write symbolic references instead. The rules are as follows:
 
-* Use of symbolic references is enabled in a particular catalog column by attaching `BKI_LOOKUP(lookuprule)` to the column's definition, where *`lookuprule`* is the name of the referenced catalog, e.g., `pg_proc`. `BKI_LOOKUP` can be attached to columns of type `Oid`, `regproc`, `oidvector`, or `Oid[]`; in the latter two cases it implies performing a lookup on each element of the array.
+- Use of symbolic references is enabled in a particular catalog column by attaching `BKI_LOOKUP(lookuprule)` to the column's definition, where _`lookuprule`_ is the name of the referenced catalog, e.g., `pg_proc`. `BKI_LOOKUP` can be attached to columns of type `Oid`, `regproc`, `oidvector`, or `Oid[]`; in the latter two cases it implies performing a lookup on each element of the array.
 
-* It's also permissible to attach `BKI_LOOKUP(encoding)` to integer columns to reference character set encodings, which are not currently represented as catalog OIDs, but have a set of values known to `genbki.pl`.
+- It's also permissible to attach `BKI_LOOKUP(encoding)` to integer columns to reference character set encodings, which are not currently represented as catalog OIDs, but have a set of values known to `genbki.pl`.
 
-* In some catalog columns, it's allowed for entries to be zero instead of a valid reference. If this is allowed, write `BKI_LOOKUP_OPT` instead of `BKI_LOOKUP`. Then you can write `0` for an entry. (If the column is declared `regproc`, you can optionally write `-` instead of `0`.) Except for this special case, all entries in a `BKI_LOOKUP` column must be symbolic references. `genbki.pl` will warn about unrecognized names.
+- In some catalog columns, it's allowed for entries to be zero instead of a valid reference. If this is allowed, write `BKI_LOOKUP_OPT` instead of `BKI_LOOKUP`. Then you can write `0` for an entry. (If the column is declared `regproc`, you can optionally write `-` instead of `0`.) Except for this special case, all entries in a `BKI_LOOKUP` column must be symbolic references. `genbki.pl` will warn about unrecognized names.
 
-* Most kinds of catalog objects are simply referenced by their names. Note that type names must exactly match the referenced `pg_type` entry's `typname`; you do not get to use any aliases such as `integer` for `int4`.
+- Most kinds of catalog objects are simply referenced by their names. Note that type names must exactly match the referenced `pg_type` entry's `typname`; you do not get to use any aliases such as `integer` for `int4`.
 
-* A function can be represented by its `proname`, if that is unique among the `pg_proc.dat` entries (this works like regproc input). Otherwise, write it as *`proname(argtypename,argtypename,...)`*, like regprocedure. The argument type names must be spelled exactly as they are in the `pg_proc.dat` entry's `proargtypes` field. Do not insert any spaces.
+- A function can be represented by its `proname`, if that is unique among the `pg_proc.dat` entries (this works like regproc input). Otherwise, write it as _`proname(argtypename,argtypename,...)`_, like regprocedure. The argument type names must be spelled exactly as they are in the `pg_proc.dat` entry's `proargtypes` field. Do not insert any spaces.
 
-* Operators are represented by *`oprname(lefttype,righttype)`*, writing the type names exactly as they appear in the `pg_operator.dat` entry's `oprleft` and `oprright` fields. (Write `0` for the omitted operand of a unary operator.)
+- Operators are represented by _`oprname(lefttype,righttype)`_, writing the type names exactly as they appear in the `pg_operator.dat` entry's `oprleft` and `oprright` fields. (Write `0` for the omitted operand of a unary operator.)
 
-* The names of opclasses and opfamilies are only unique within an access method, so they are represented by *`access_method_name`*`/`*`object_name`*.
+- The names of opclasses and opfamilies are only unique within an access method, so they are represented by _`access_method_name`_`/`_`object_name`_.
 
-* In none of these cases is there any provision for schema-qualification; all objects created during bootstrap are expected to be in the `pg_catalog` schema.
+- In none of these cases is there any provision for schema-qualification; all objects created during bootstrap are expected to be in the `pg_catalog` schema.
 
 `genbki.pl` resolves all symbolic references while it runs, and puts simple numeric OIDs into the emitted BKI file. There is therefore no need for the bootstrap backend to deal with symbolic references.
 

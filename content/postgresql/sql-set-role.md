@@ -16,9 +16,9 @@ RESET ROLE
 
 ## Description
 
-This command sets the current user identifier of the current SQL session to be *`role_name`*. The role name can be written as either an identifier or a string literal. After `SET ROLE`, permissions checking for SQL commands is carried out as though the named role were the one that had logged in originally.
+This command sets the current user identifier of the current SQL session to be _`role_name`_. The role name can be written as either an identifier or a string literal. After `SET ROLE`, permissions checking for SQL commands is carried out as though the named role were the one that had logged in originally.
 
-The specified *`role_name`* must be a role that the current session user is a member of. (If the session user is a superuser, any role can be selected.)
+The specified _`role_name`_ must be a role that the current session user is a member of. (If the session user is a superuser, any role can be selected.)
 
 The `SESSION` and `LOCAL` modifiers act the same as for the regular [`SET`](sql-set) command.
 

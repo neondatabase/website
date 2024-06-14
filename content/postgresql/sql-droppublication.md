@@ -22,15 +22,15 @@ A publication can only be dropped by its owner or a superuser.
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the publication does not exist. A notice is issued in this case.
 
-* *`name`*
+- _`name`_
 
   The name of an existing publication.
 
-* `CASCADE``RESTRICT`
+- `CASCADE``RESTRICT`
 
   These key words do not have any effect, since there are no dependencies on publications.
 

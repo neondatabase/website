@@ -26,15 +26,15 @@ where option can be:
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the database does not exist. A notice is issued in this case.
 
-* *`name`*
+- _`name`_
 
   The name of the database to remove.
 
-* `FORCE`
+- `FORCE`
 
   Attempt to terminate all existing connections to the target database. It doesn't terminate if prepared transactions, active logical replication slots or subscriptions are present in the target database.
 

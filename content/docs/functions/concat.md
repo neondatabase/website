@@ -2,7 +2,7 @@
 title: Postgres concat() function
 subtitle: Concatenate strings in Postgres with the concat() function
 enableTableOfContents: true
-updatedOn: '2024-02-08T09:30:00.000Z'
+updatedOn: '2024-06-14T07:55:54.373Z'
 ---
 
 The `concat()` function in Postgres is used to concatenate two or more strings into a single string. It is a variadic function, meaning it can accept any number of arguments.
@@ -44,7 +44,7 @@ FROM customers;
 This query concatenates the `first_name`, a space character, and the `last_name` to generate the `full_name`.
 
 ```text
-  full_name  
+  full_name
 -------------
  John Doe
  Jane Smith
@@ -93,7 +93,7 @@ FROM data;
 This query concatenates the elements of the `fruits` array into a single string.
 
 ```text
-  fruit_string  
+  fruit_string
 ----------------
  applebananacherry
 (1 row)
@@ -139,7 +139,7 @@ This query generates a unique identifier for each page visit by concatenating th
 Any null arguments to `concat()` are treated as empty strings in the output. This is in contrast to the behavior of the `||` operator, which treats `NULL` values as `NULL`.
 
 ```sql
-SELECT 
+SELECT
     concat('Hello', NULL, 'World') AS join_concat,
     'Hello' || NULL || 'World' AS join_operator;
 ```

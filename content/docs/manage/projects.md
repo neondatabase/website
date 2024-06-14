@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2024-02-27T14:37:51.435Z'
+updatedOn: '2024-06-14T07:55:54.419Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [tier limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Tier limits you to one project per Neon account.
@@ -61,9 +61,9 @@ To create a Neon project:
 2. Click **New Project**.
 3. Specify values for **Name**, **Postgres version**, and **Region**. Project names are limited to 64 characters. If you are a paying user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
-    - Neon supports fixed size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
-    - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
-  
+   - Neon supports fixed size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+   - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
+
 4. Click **Create Project**.
 
 After creating a project, you are presented with a dialog that provides your connection details for a ready-to-use `neondb` database. The connection details include your password.
@@ -156,7 +156,7 @@ To configure the history retention period for a project:
 1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **Storage**.
-    ![History retention configuration](/docs/manage/history_retention.png)
+   ![History retention configuration](/docs/manage/history_retention.png)
 4. Use the slider to select the history retention period.
 5. Click **Save**.
 
@@ -179,16 +179,16 @@ You can verify that logical replication is enabled by running the following quer
 
 ```sql
 SHOW wal_level;
-wal_level 
+wal_level
 -----------
 logical
 ```
 
-After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. To get started, refer to our [logical replication guides](/docs/guides/logical-replication-guide). 
+After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. To get started, refer to our [logical replication guides](/docs/guides/logical-replication-guide).
 
 ### Configure IP Allow
 
-Available to [Scale](/docs/introduction/plans#scale) plan users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default. 
+Available to [Scale](/docs/introduction/plans#scale) plan users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default.
 
 Optionally, you can allow unrestricted access to your project's [non-primary branches](/docs/manage/branches#non-primary-branch). For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing unrestricted access to your development branches.
 
@@ -207,10 +207,10 @@ To configure an allowlist:
 1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
-    ![IP Allow configuration](/docs/manage/ip_allow.png)
+   ![IP Allow configuration](/docs/manage/ip_allow.png)
 4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
 5. Optionally, select **Allow unrestricted access to non-primary branches** to allow full access to your [no primary branches](/docs/manage/branches#non-primary-branch).
-5. Click **Save changes**.
+6. Click **Save changes**.
 
 </TabItem>
 
@@ -267,6 +267,7 @@ curl -X PATCH \
 }
 ' | jq
 ```
+
 </TabItem>
 
 </Tabs>
@@ -281,7 +282,7 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
   192.0.2.1
   ```
 
-- **Define IP ranges**: For broader access control, you can define IP ranges. This is useful for allowing access from a company network or a range of known IPs. This example range includes all IP addresses from `198.51.100.20` to `198.51.100.50`: 
+- **Define IP ranges**: For broader access control, you can define IP ranges. This is useful for allowing access from a company network or a range of known IPs. This example range includes all IP addresses from `198.51.100.20` to `198.51.100.50`:
 
   ```text
   198.51.100.20-198.51.100.50
@@ -289,7 +290,7 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
 
 - **Use CIDR notation**: For more advanced control, you can use [CIDR (Classless Inter-Domain Routing) notation](/docs/reference/glossary#cidr-notation). This is a compact way of defining a range of IPs and is useful for larger networks or subnets. Using CIDR notation can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network.
 
-  This CIDR notation example represents all 256 IP addresses from  `203.0.113.0` to `203.0.113.255`. 
+  This CIDR notation example represents all 256 IP addresses from `203.0.113.0` to `203.0.113.255`.
 
   ```text
   203.0.113.0/24
@@ -303,9 +304,9 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
 
 A combined example using all three options above, specified as a comma-separated list, would appear similar to the following:
 
-  ```text
-  192.0.2.1, 198.51.100.20-198.51.100.50, 203.0.113.0/24, 2001:DB8:5432::/48
-  ```
+```text
+192.0.2.1, 198.51.100.20-198.51.100.50, 203.0.113.0/24, 2001:DB8:5432::/48
+```
 
 This list combines individual IP addresses, a range of IP addresses, a CIDR block, and an IPv6 address. It illustrates how different types of IP specifications can be used together in a single allowlist configuration, offering a flexible approach to access control.
 
@@ -328,7 +329,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 3. Select **IP Allow**.
 4. Clear the **Allowed IP addresses and ranges** field.
 5. If applicable, clear the **Apply to primary branch only** checkbox.
-5. Click **Apply changes**.
+6. Click **Apply changes**.
 
 </TabItem>
 
@@ -344,10 +345,10 @@ neonctl ip-allow reset
 
 <TabItem>
 
-Specify the `ips` option with an empty string. If applicable, also include `"primary_branch_only": false`. 
+Specify the `ips` option with an empty string. If applicable, also include `"primary_branch_only": false`.
 
 ```bash
-curl -X PATCH \                                                            
+curl -X PATCH \
      https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
      -H 'accept: application/json' \
      -H 'authorization: Bearer $NEON_API_KEY' \
@@ -358,13 +359,14 @@ curl -X PATCH \
     "settings": {
       "allowed_ips": {
         "primary_branch_only": false,
-        "ips": []         
+        "ips": []
       }
     }
   }
 }
 '
 ```
+
 </TabItem>
 
 </Tabs>

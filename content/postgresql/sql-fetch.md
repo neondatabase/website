@@ -37,7 +37,7 @@ A cursor has an associated position, which is used by `FETCH`. The cursor positi
 
 The forms `NEXT`, `PRIOR`, `FIRST`, `LAST`, `ABSOLUTE`, `RELATIVE` fetch a single row after moving the cursor appropriately. If there is no such row, an empty result is returned, and the cursor is left positioned before the first row or after the last row as appropriate.
 
-The forms using `FORWARD` and `BACKWARD` retrieve the indicated number of rows moving in the forward or backward direction, leaving the cursor positioned on the last-returned row (or after/before all rows, if the *`count`* exceeds the number of rows available).
+The forms using `FORWARD` and `BACKWARD` retrieve the indicated number of rows moving in the forward or backward direction, leaving the cursor positioned on the last-returned row (or after/before all rows, if the _`count`_ exceeds the number of rows available).
 
 `RELATIVE 0`, `FORWARD 0`, and `BACKWARD 0` all request fetching the current row without moving the cursor, that is, re-fetching the most recently fetched row. This will succeed unless the cursor is positioned before the first row or after the last row; in which case, no row is returned.
 
@@ -49,71 +49,71 @@ This page describes usage of cursors at the SQL command level. If you are trying
 
 ## Parameters
 
-* *`direction`*
+- _`direction`_
 
-  *`direction`* defines the fetch direction and number of rows to fetch. It can be one of the following:
+  _`direction`_ defines the fetch direction and number of rows to fetch. It can be one of the following:
 
-  * `NEXT`
+  - `NEXT`
 
-    Fetch the next row. This is the default if *`direction`* is omitted.
+    Fetch the next row. This is the default if _`direction`_ is omitted.
 
-  * `PRIOR`
+  - `PRIOR`
 
     Fetch the prior row.
 
-  * `FIRST`
+  - `FIRST`
 
     Fetch the first row of the query (same as `ABSOLUTE 1`).
 
-  * `LAST`
+  - `LAST`
 
     Fetch the last row of the query (same as `ABSOLUTE -1`).
 
-  * `ABSOLUTE count`
+  - `ABSOLUTE count`
 
-    Fetch the *`count`*'th row of the query, or the `abs(count)`'th row from the end if *`count`* is negative. Position before first row or after last row if *`count`* is out of range; in particular, `ABSOLUTE 0` positions before the first row.
+    Fetch the _`count`_'th row of the query, or the `abs(count)`'th row from the end if _`count`_ is negative. Position before first row or after last row if _`count`_ is out of range; in particular, `ABSOLUTE 0` positions before the first row.
 
-  * `RELATIVE count`
+  - `RELATIVE count`
 
-    Fetch the *`count`*'th succeeding row, or the `abs(count)`'th prior row if *`count`* is negative. `RELATIVE 0` re-fetches the current row, if any.
+    Fetch the _`count`_'th succeeding row, or the `abs(count)`'th prior row if _`count`_ is negative. `RELATIVE 0` re-fetches the current row, if any.
 
-  * *`count`*
+  - _`count`_
 
-    Fetch the next *`count`* rows (same as `FORWARD count`).
+    Fetch the next _`count`_ rows (same as `FORWARD count`).
 
-  * `ALL`
+  - `ALL`
 
     Fetch all remaining rows (same as `FORWARD ALL`).
 
-  * `FORWARD`
+  - `FORWARD`
 
     Fetch the next row (same as `NEXT`).
 
-  * `FORWARD count`
+  - `FORWARD count`
 
-    Fetch the next *`count`* rows. `FORWARD 0` re-fetches the current row.
+    Fetch the next _`count`_ rows. `FORWARD 0` re-fetches the current row.
 
-  * `FORWARD ALL`
+  - `FORWARD ALL`
 
     Fetch all remaining rows.
 
-  * `BACKWARD`
+  - `BACKWARD`
 
     Fetch the prior row (same as `PRIOR`).
 
-  * `BACKWARD count`
+  - `BACKWARD count`
 
-    Fetch the prior *`count`* rows (scanning backwards). `BACKWARD 0` re-fetches the current row.
+    Fetch the prior _`count`_ rows (scanning backwards). `BACKWARD 0` re-fetches the current row.
 
-  * `BACKWARD ALL`
+  - `BACKWARD ALL`
 
     Fetch all prior rows (scanning backwards).
 
-* *`count`*
+- _`count`_
 
-  *`count`* is a possibly-signed integer constant, determining the location or number of rows to fetch. For `FORWARD` and `BACKWARD` cases, specifying a negative *`count`* is equivalent to changing the sense of `FORWARD` and `BACKWARD`.
+  _`count`_ is a possibly-signed integer constant, determining the location or number of rows to fetch. For `FORWARD` and `BACKWARD` cases, specifying a negative _`count`_ is equivalent to changing the sense of `FORWARD` and `BACKWARD`.
 
-* *`cursor_name`*
+- _`cursor_name`_
 
   An open cursor's name.
 
@@ -127,7 +127,7 @@ On successful completion, a `FETCH` command returns a command tag of the form
 FETCH count
 ```
 
-The *`count`* is the number of rows fetched (possibly zero). Note that in psql, the command tag will not actually be displayed, since psql displays the fetched rows instead.
+The _`count`_ is the number of rows fetched (possibly zero). Note that in psql, the command tag will not actually be displayed, since psql displays the fetched rows instead.
 
 [#id](#id-1.9.3.149.9)
 

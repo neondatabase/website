@@ -2,8 +2,6 @@
 
 ## 10.5. `UNION`, `CASE`, and Related Constructs [#](#TYPECONV-UNION-CASE)
 
-
-
 SQL `UNION` constructs must match up possibly dissimilar types to become a single result set. The resolution algorithm is applied separately to each output column of a union query. The `INTERSECT` and `EXCEPT` constructs resolve dissimilar types in the same way as `UNION`. Some other constructs, including `CASE`, `ARRAY`, `VALUES`, and the `GREATEST` and `LEAST` functions, use the identical algorithm to match up their component expressions and select a result data type.
 
 [#id](#id-1.5.9.10.9)
@@ -40,7 +38,6 @@ SELECT text 'a' AS "text" UNION SELECT 'b';
 
 Here, the unknown-type literal `'b'` will be resolved to type `text`.
 
-
 [#id](#id-1.5.9.10.12)
 
 **Example 10.11. Type Resolution in a Simple Union**
@@ -57,7 +54,6 @@ SELECT 1.2 AS "numeric" UNION SELECT 1;
 
 The literal `1.2` is of type `numeric`, and the `integer` value `1` can be cast implicitly to `numeric`, so that type is used.
 
-
 [#id](#id-1.5.9.10.13)
 
 **Example 10.12. Type Resolution in a Transposed Union**
@@ -73,7 +69,6 @@ SELECT 1 AS "real" UNION SELECT CAST('2.2' AS REAL);
 ```
 
 Here, since type `real` cannot be implicitly cast to `integer`, but `integer` can be implicitly cast to `real`, the union result type is resolved as `real`.
-
 
 [#id](#id-1.5.9.10.14)
 

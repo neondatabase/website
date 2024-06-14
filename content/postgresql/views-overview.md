@@ -8,8 +8,8 @@
 
 **Table 54.1. System Views**
 
-| View Name                                                                      | Purpose                                                               |
-| ------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| View Name                                                                 | Purpose                                                               |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | [`pg_available_extensions`](view-pg-available-extensions)                 | available extensions                                                  |
 | [`pg_available_extension_versions`](view-pg-available-extension-versions) | available versions of extensions                                      |
 | [`pg_backend_memory_contexts`](view-pg-backend-memory-contexts)           | backend memory contexts                                               |

@@ -22,19 +22,19 @@ You must own the extension to use `DROP EXTENSION`.
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the extension does not exist. A notice is issued in this case.
 
-* *`name`*
+- _`name`_
 
   The name of an installed extension.
 
-* `CASCADE`
+- `CASCADE`
 
   Automatically drop objects that depend on the extension, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend)).
 
-* `RESTRICT`
+- `RESTRICT`
 
   This option prevents the specified extensions from being dropped if other objects, besides these extensions, their members, and their explicitly dependent routines, depend on them.  This is the default.
 

@@ -2,8 +2,6 @@
 
 ## 13.5. Serialization Failure Handling [#](#MVCC-SERIALIZATION-FAILURE-HANDLING)
 
-
-
 Both Repeatable Read and Serializable isolation levels can produce errors that are designed to prevent serialization anomalies. As previously stated, applications using these levels must be prepared to retry transactions that fail due to serialization errors. Such an error's message text will vary according to the precise circumstances, but it will always have the SQLSTATE code `40001` (`serialization_failure`).
 
 It may also be advisable to retry deadlock failures. These have the SQLSTATE code `40P01` (`deadlock_detected`).

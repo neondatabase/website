@@ -1,8 +1,8 @@
 [#id](#CONTRIB-DBLINK-DISCONNECT)
 
-## dblink\_disconnect
+## dblink_disconnect
 
-dblink\_disconnect — closes a persistent connection to a remote database
+dblink_disconnect — closes a persistent connection to a remote database
 
 ## Synopsis
 
@@ -22,7 +22,7 @@ dblink_disconnect(text connname) returns text
 
 ## Arguments
 
-* *`connname`*
+- _`connname`_
 
   The name of a named connection to be closed.
 

@@ -2,11 +2,9 @@
 
 ## 34.20. Behavior in Threaded Programs [#](#LIBPQ-THREADING)
 
-
-
 libpq is reentrant and thread-safe by default. You might need to use special compiler command-line options when you compile your application code. Refer to your system's documentation for information about how to build thread-enabled applications, or look in `src/Makefile.global` for `PTHREAD_CFLAGS` and `PTHREAD_LIBS`. This function allows the querying of libpq's thread-safe status:
 
-* `PQisthreadsafe` [#](#LIBPQ-PQISTHREADSAFE)
+- `PQisthreadsafe` [#](#LIBPQ-PQISTHREADSAFE)
 
   Returns the thread safety status of the libpq library.
 

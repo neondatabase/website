@@ -2,39 +2,39 @@
 
 ## 12.1. Introduction [#](#TEXTSEARCH-INTRO)
 
-  * [12.1.1. What Is a Document?](textsearch-intro#TEXTSEARCH-DOCUMENT)
-  * [12.1.2. Basic Text Matching](textsearch-intro#TEXTSEARCH-MATCHING)
-  * [12.1.3. Configurations](textsearch-intro#TEXTSEARCH-INTRO-CONFIGURATIONS)
+- [12.1.1. What Is a Document?](textsearch-intro#TEXTSEARCH-DOCUMENT)
+- [12.1.2. Basic Text Matching](textsearch-intro#TEXTSEARCH-MATCHING)
+- [12.1.3. Configurations](textsearch-intro#TEXTSEARCH-INTRO-CONFIGURATIONS)
 
-Full Text Searching (or just *text search*) provides the capability to identify natural-language *documents* that satisfy a *query*, and optionally to sort them by relevance to the query. The most common type of search is to find all documents containing given *query terms* and return them in order of their *similarity* to the query. Notions of `query` and `similarity` are very flexible and depend on the specific application. The simplest search considers `query` as a set of words and `similarity` as the frequency of query words in the document.
+Full Text Searching (or just _text search_) provides the capability to identify natural-language _documents_ that satisfy a _query_, and optionally to sort them by relevance to the query. The most common type of search is to find all documents containing given _query terms_ and return them in order of their _similarity_ to the query. Notions of `query` and `similarity` are very flexible and depend on the specific application. The simplest search considers `query` as a set of words and `similarity` as the frequency of query words in the document.
 
 Textual search operators have existed in databases for years. PostgreSQL has `~`, `~*`, `LIKE`, and `ILIKE` operators for textual data types, but they lack many essential properties required by modern information systems:
 
-* There is no linguistic support, even for English. Regular expressions are not sufficient because they cannot easily handle derived words, e.g., `satisfies` and `satisfy`. You might miss documents that contain `satisfies`, although you probably would like to find them when searching for `satisfy`. It is possible to use `OR` to search for multiple derived forms, but this is tedious and error-prone (some words can have several thousand derivatives).
+- There is no linguistic support, even for English. Regular expressions are not sufficient because they cannot easily handle derived words, e.g., `satisfies` and `satisfy`. You might miss documents that contain `satisfies`, although you probably would like to find them when searching for `satisfy`. It is possible to use `OR` to search for multiple derived forms, but this is tedious and error-prone (some words can have several thousand derivatives).
 
-* They provide no ordering (ranking) of search results, which makes them ineffective when thousands of matching documents are found.
+- They provide no ordering (ranking) of search results, which makes them ineffective when thousands of matching documents are found.
 
-* They tend to be slow because there is no index support, so they must process all documents for every search.
+- They tend to be slow because there is no index support, so they must process all documents for every search.
 
-Full text indexing allows documents to be *preprocessed* and an index saved for later rapid searching. Preprocessing includes:
+Full text indexing allows documents to be _preprocessed_ and an index saved for later rapid searching. Preprocessing includes:
 
-* *Parsing documents into *tokens**. It is useful to identify various classes of tokens, e.g., numbers, words, complex words, email addresses, so that they can be processed differently. In principle token classes depend on the specific application, but for most purposes it is adequate to use a predefined set of classes. PostgreSQL uses a *parser* to perform this step. A standard parser is provided, and custom parsers can be created for specific needs.
+- *Parsing documents into *tokens\**. It is useful to identify various classes of tokens, e.g., numbers, words, complex words, email addresses, so that they can be processed differently. In principle token classes depend on the specific application, but for most purposes it is adequate to use a predefined set of classes. PostgreSQL uses a *parser\* to perform this step. A standard parser is provided, and custom parsers can be created for specific needs.
 
-* *Converting tokens into *lexemes**. A lexeme is a string, just like a token, but it has been *normalized* so that different forms of the same word are made alike. For example, normalization almost always includes folding upper-case letters to lower-case, and often involves removal of suffixes (such as `s` or `es` in English). This allows searches to find variant forms of the same word, without tediously entering all the possible variants. Also, this step typically eliminates *stop words*, which are words that are so common that they are useless for searching. (In short, then, tokens are raw fragments of the document text, while lexemes are words that are believed useful for indexing and searching.) PostgreSQL uses *dictionaries* to perform this step. Various standard dictionaries are provided, and custom ones can be created for specific needs.
+- *Converting tokens into *lexemes\**. A lexeme is a string, just like a token, but it has been *normalized* so that different forms of the same word are made alike. For example, normalization almost always includes folding upper-case letters to lower-case, and often involves removal of suffixes (such as `s` or `es` in English). This allows searches to find variant forms of the same word, without tediously entering all the possible variants. Also, this step typically eliminates *stop words*, which are words that are so common that they are useless for searching. (In short, then, tokens are raw fragments of the document text, while lexemes are words that are believed useful for indexing and searching.) PostgreSQL uses *dictionaries\* to perform this step. Various standard dictionaries are provided, and custom ones can be created for specific needs.
 
-* *Storing preprocessed documents optimized for searching*. For example, each document can be represented as a sorted array of normalized lexemes. Along with the lexemes it is often desirable to store positional information to use for *proximity ranking*, so that a document that contains a more “dense” region of query words is assigned a higher rank than one with scattered query words.
+- _Storing preprocessed documents optimized for searching_. For example, each document can be represented as a sorted array of normalized lexemes. Along with the lexemes it is often desirable to store positional information to use for _proximity ranking_, so that a document that contains a more “dense” region of query words is assigned a higher rank than one with scattered query words.
 
 Dictionaries allow fine-grained control over how tokens are normalized. With appropriate dictionaries, you can:
 
-* Define stop words that should not be indexed.
+- Define stop words that should not be indexed.
 
-* Map synonyms to a single word using Ispell.
+- Map synonyms to a single word using Ispell.
 
-* Map phrases to a single word using a thesaurus.
+- Map phrases to a single word using a thesaurus.
 
-* Map different variations of a word to a canonical form using an Ispell dictionary.
+- Map different variations of a word to a canonical form using an Ispell dictionary.
 
-* Map different variations of a word to a canonical form using Snowball stemmer rules.
+- Map different variations of a word to a canonical form using Snowball stemmer rules.
 
 A data type `tsvector` is provided for storing preprocessed documents, along with a type `tsquery` for representing processed queries ([Section 8.11](datatype-textsearch)). There are many functions and operators available for these data types ([Section 9.13](functions-textsearch)), the most important of which is the match operator `@@`, which we introduce in [Section 12.1.2](textsearch-intro#TEXTSEARCH-MATCHING). Full text searches can be accelerated using indexes ([Section 12.9](textsearch-indexes)).
 
@@ -42,9 +42,7 @@ A data type `tsvector` is provided for storing preprocessed documents, along wit
 
 ### 12.1.1. What Is a Document? [#](#TEXTSEARCH-DOCUMENT)
 
-
-
-A *document* is the unit of searching in a full text search system; for example, a magazine article or email message. The text search engine must be able to parse documents and store associations of lexemes (key words) with their parent document. Later, these associations are used to search for documents that contain query words.
+A _document_ is the unit of searching in a full text search system; for example, a magazine article or email message. The text search engine must be able to parse documents and store associations of lexemes (key words) with their parent document. Later, these associations are used to search for documents that contain query words.
 
 For searches within PostgreSQL, a document is normally a textual field within a row of a database table, or possibly a combination (concatenation) of such fields, perhaps stored in several tables or obtained dynamically. In other words, a document can be constructed from different parts for indexing and it might not be stored anywhere as a whole. For example:
 
@@ -115,7 +113,7 @@ text @@ text
 
 The first two of these we saw already. The form `text` `@@` `tsquery` is equivalent to `to_tsvector(x) @@ y`. The form `text` `@@` `text` is equivalent to `to_tsvector(x) @@ plainto_tsquery(y)`.
 
-Within a `tsquery`, the `&` (AND) operator specifies that both its arguments must appear in the document to have a match. Similarly, the `|` (OR) operator specifies that at least one of its arguments must appear, while the `!` (NOT) operator specifies that its argument must *not* appear in order to have a match. For example, the query `fat & ! rat` matches documents that contain `fat` but not `rat`.
+Within a `tsquery`, the `&` (AND) operator specifies that both its arguments must appear in the document to have a match. Similarly, the `|` (OR) operator specifies that at least one of its arguments must appear, while the `!` (NOT) operator specifies that its argument must _not_ appear in order to have a match. For example, the query `fat & ! rat` matches documents that contain `fat` but not `rat`.
 
 Searching for phrases is possible with the help of the `<->` (FOLLOWED BY) `tsquery` operator, which matches only if its arguments have matches that are adjacent and in the given order. For example:
 
@@ -131,7 +129,7 @@ SELECT to_tsvector('error is not fatal') @@ to_tsquery('fatal <-> error');
  f
 ```
 
-There is a more general version of the FOLLOWED BY operator having the form `<N>`, where *`N`* is an integer standing for the difference between the positions of the matching lexemes. `<1>` is the same as `<->`, while `<2>` allows exactly one other lexeme to appear between the matches, and so on. The `phraseto_tsquery` function makes use of this operator to construct a `tsquery` that can match a multi-word phrase when some of the words are stop words. For example:
+There is a more general version of the FOLLOWED BY operator having the form `<N>`, where _`N`_ is an integer standing for the difference between the positions of the matching lexemes. `<1>` is the same as `<->`, while `<2>` allows exactly one other lexeme to appear between the matches, and so on. The `phraseto_tsquery` function makes use of this operator to construct a `tsquery` that can match a multi-word phrase when some of the words are stop words. For example:
 
 ```
 SELECT phraseto_tsquery('cats ate rats');
@@ -155,20 +153,20 @@ It's worth noticing that the AND/OR/NOT operators mean something subtly differen
 
 ### 12.1.3. Configurations [#](#TEXTSEARCH-INTRO-CONFIGURATIONS)
 
-The above are all simple text search examples. As mentioned before, full text search functionality includes the ability to do many more things: skip indexing certain words (stop words), process synonyms, and use sophisticated parsing, e.g., parse based on more than just white space. This functionality is controlled by *text search configurations*. PostgreSQL comes with predefined configurations for many languages, and you can easily create your own configurations. (psql's `\dF` command shows all available configurations.)
+The above are all simple text search examples. As mentioned before, full text search functionality includes the ability to do many more things: skip indexing certain words (stop words), process synonyms, and use sophisticated parsing, e.g., parse based on more than just white space. This functionality is controlled by _text search configurations_. PostgreSQL comes with predefined configurations for many languages, and you can easily create your own configurations. (psql's `\dF` command shows all available configurations.)
 
-During installation an appropriate configuration is selected and [default\_text\_search\_config](runtime-config-client#GUC-DEFAULT-TEXT-SEARCH-CONFIG) is set accordingly in `postgresql.conf`. If you are using the same text search configuration for the entire cluster you can use the value in `postgresql.conf`. To use different configurations throughout the cluster but the same configuration within any one database, use `ALTER DATABASE ... SET`. Otherwise, you can set `default_text_search_config` in each session.
+During installation an appropriate configuration is selected and [default_text_search_config](runtime-config-client#GUC-DEFAULT-TEXT-SEARCH-CONFIG) is set accordingly in `postgresql.conf`. If you are using the same text search configuration for the entire cluster you can use the value in `postgresql.conf`. To use different configurations throughout the cluster but the same configuration within any one database, use `ALTER DATABASE ... SET`. Otherwise, you can set `default_text_search_config` in each session.
 
 Each text search function that depends on a configuration has an optional `regconfig` argument, so that the configuration to use can be specified explicitly. `default_text_search_config` is used only when this argument is omitted.
 
 To make it easier to build custom text search configurations, a configuration is built up from simpler database objects. PostgreSQL's text search facility provides four types of configuration-related database objects:
 
-* *Text search parsers* break documents into tokens and classify each token (for example, as words or numbers).
+- _Text search parsers_ break documents into tokens and classify each token (for example, as words or numbers).
 
-* *Text search dictionaries* convert tokens to normalized form and reject stop words.
+- _Text search dictionaries_ convert tokens to normalized form and reject stop words.
 
-* *Text search templates* provide the functions underlying dictionaries. (A dictionary simply specifies a template and a set of parameters for the template.)
+- _Text search templates_ provide the functions underlying dictionaries. (A dictionary simply specifies a template and a set of parameters for the template.)
 
-* *Text search configurations* select a parser and a set of dictionaries to use to normalize the tokens produced by the parser.
+- _Text search configurations_ select a parser and a set of dictionaries to use to normalize the tokens produced by the parser.
 
 Text search parsers and templates are built from low-level C functions; therefore it requires C programming ability to develop new ones, and superuser privileges to install one into a database. (There are examples of add-on parsers and templates in the `contrib/` area of the PostgreSQL distribution.) Since dictionaries and configurations just parameterize and connect together some underlying parsers and templates, no special privilege is needed to create a new dictionary or configuration. Examples of creating custom dictionaries and configurations appear later in this chapter.

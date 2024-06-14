@@ -2,8 +2,6 @@
 
 ## 54.23. `pg_sequences` [#](#VIEW-PG-SEQUENCES)
 
-
-
 The view `pg_sequences` provides access to useful information about each sequence in the database.
 
 [#id](#id-1.10.5.27.4)
@@ -12,10 +10,10 @@ The view `pg_sequences` provides access to useful information about each sequenc
 
 | Column TypeDescription                                                                                                                                                                                                                                                                                                 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `schemaname` `name` (references [`pg_namespace`](catalog-pg-namespace).`nspname`)Name of schema containing sequence                                                                                                                                                                                               |
-| `sequencename` `name` (references [`pg_class`](catalog-pg-class).`relname`)Name of sequence                                                                                                                                                                                                                       |
-| `sequenceowner` `name` (references [`pg_authid`](catalog-pg-authid).`rolname`)Name of sequence's owner                                                                                                                                                                                                            |
-| `data_type` `regtype` (references [`pg_type`](catalog-pg-type).`oid`)Data type of the sequence                                                                                                                                                                                                                    |
+| `schemaname` `name` (references [`pg_namespace`](catalog-pg-namespace).`nspname`)Name of schema containing sequence                                                                                                                                                                                                    |
+| `sequencename` `name` (references [`pg_class`](catalog-pg-class).`relname`)Name of sequence                                                                                                                                                                                                                            |
+| `sequenceowner` `name` (references [`pg_authid`](catalog-pg-authid).`rolname`)Name of sequence's owner                                                                                                                                                                                                                 |
+| `data_type` `regtype` (references [`pg_type`](catalog-pg-type).`oid`)Data type of the sequence                                                                                                                                                                                                                         |
 | `start_value` `int8`Start value of the sequence                                                                                                                                                                                                                                                                        |
 | `min_value` `int8`Minimum value of the sequence                                                                                                                                                                                                                                                                        |
 | `max_value` `int8`Maximum value of the sequence                                                                                                                                                                                                                                                                        |

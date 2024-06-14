@@ -2,8 +2,8 @@
 
 ## 31.10. Configuration Settings [#](#LOGICAL-REPLICATION-CONFIG)
 
-  * [31.10.1. Publishers](logical-replication-config#LOGICAL-REPLICATION-CONFIG-PUBLISHER)
-  * [31.10.2. Subscribers](logical-replication-config#LOGICAL-REPLICATION-CONFIG-SUBSCRIBER)
+- [31.10.1. Publishers](logical-replication-config#LOGICAL-REPLICATION-CONFIG-PUBLISHER)
+- [31.10.2. Subscribers](logical-replication-config#LOGICAL-REPLICATION-CONFIG-SUBSCRIBER)
 
 Logical replication requires several configuration options to be set. Most options are relevant only on one side of the replication. However, `max_replication_slots` is used on both the publisher and the subscriber, but it has a different meaning for each.
 

@@ -2,11 +2,11 @@
 
 ## 55.5. Logical Streaming Replication Protocol [#](#PROTOCOL-LOGICAL-REPLICATION)
 
-  * [55.5.1. Logical Streaming Replication Parameters](protocol-logical-replication#PROTOCOL-LOGICAL-REPLICATION-PARAMS)
-  * [55.5.2. Logical Replication Protocol Messages](protocol-logical-replication#PROTOCOL-LOGICAL-MESSAGES)
-  * [55.5.3. Logical Replication Protocol Message Flow](protocol-logical-replication#PROTOCOL-LOGICAL-MESSAGES-FLOW)
+- [55.5.1. Logical Streaming Replication Parameters](protocol-logical-replication#PROTOCOL-LOGICAL-REPLICATION-PARAMS)
+- [55.5.2. Logical Replication Protocol Messages](protocol-logical-replication#PROTOCOL-LOGICAL-MESSAGES)
+- [55.5.3. Logical Replication Protocol Message Flow](protocol-logical-replication#PROTOCOL-LOGICAL-MESSAGES-FLOW)
 
-This section describes the logical replication protocol, which is the message flow started by the `START_REPLICATION` `SLOT` *`slot_name`* `LOGICAL` replication command.
+This section describes the logical replication protocol, which is the message flow started by the `START_REPLICATION` `SLOT` _`slot_name`_ `LOGICAL` replication command.
 
 The logical streaming replication protocol builds on the primitives of the physical streaming replication protocol.
 
@@ -16,7 +16,7 @@ The logical streaming replication protocol builds on the primitives of the physi
 
 The logical replication `START_REPLICATION` command accepts following parameters:
 
-* proto\_version
+- proto_version
 
   Protocol version. Currently versions `1`, `2`, `3`, and `4` are supported.
 
@@ -26,7 +26,7 @@ The logical replication `START_REPLICATION` command accepts following parameters
 
   Version `4` is supported only for server version 16 and above, and it allows streams of large in-progress transactions to be applied in parallel.
 
-* publication\_names
+- publication_names
 
   Comma separated list of publication names for which to subscribe (receive changes). The individual publication names are treated as standard objects names and can be quoted the same as needed.
 

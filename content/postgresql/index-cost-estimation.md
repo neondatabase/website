@@ -21,37 +21,37 @@ amcostestimate (PlannerInfo *root,
 
 The first three parameters are inputs:
 
-* *`root`*
+- _`root`_
 
   The planner's information about the query being processed.
 
-* *`path`*
+- _`path`_
 
   The index access path being considered. All fields except cost and selectivity values are valid.
 
-* *`loop_count`*
+- _`loop_count`_
 
-  The number of repetitions of the index scan that should be factored into the cost estimates. This will typically be greater than one when considering a parameterized scan for use in the inside of a nestloop join. Note that the cost estimates should still be for just one scan; a larger *`loop_count`* means that it may be appropriate to allow for some caching effects across multiple scans.
+  The number of repetitions of the index scan that should be factored into the cost estimates. This will typically be greater than one when considering a parameterized scan for use in the inside of a nestloop join. Note that the cost estimates should still be for just one scan; a larger _`loop_count`_ means that it may be appropriate to allow for some caching effects across multiple scans.
 
 The last five parameters are pass-by-reference outputs:
 
-* *`*indexStartupCost`*
+- *`*indexStartupCost`\*
 
   Set to cost of index start-up processing
 
-* *`*indexTotalCost`*
+- *`*indexTotalCost`\*
 
   Set to total cost of index processing
 
-* *`*indexSelectivity`*
+- *`*indexSelectivity`\*
 
   Set to index selectivity
 
-* *`*indexCorrelation`*
+- *`*indexCorrelation`\*
 
   Set to correlation coefficient between index scan order and underlying table's order
 
-* *`*indexPages`*
+- *`*indexPages`\*
 
   Set to number of index leaf pages
 
@@ -59,17 +59,17 @@ Note that cost estimate functions must be written in C, not in SQL or any availa
 
 The index access costs should be computed using the parameters used by `src/backend/optimizer/path/costsize.c`: a sequential disk block fetch has cost `seq_page_cost`, a nonsequential fetch has cost `random_page_cost`, and the cost of processing one index row should usually be taken as `cpu_index_tuple_cost`. In addition, an appropriate multiple of `cpu_operator_cost` should be charged for any comparison operators invoked during index processing (especially evaluation of the indexquals themselves).
 
-The access costs should include all disk and CPU costs associated with scanning the index itself, but *not* the costs of retrieving or processing the parent-table rows that are identified by the index.
+The access costs should include all disk and CPU costs associated with scanning the index itself, but _not_ the costs of retrieving or processing the parent-table rows that are identified by the index.
 
 The “start-up cost” is the part of the total scan cost that must be expended before we can begin to fetch the first row. For most indexes this can be taken as zero, but an index type with a high start-up cost might want to set it nonzero.
 
-The *`indexSelectivity`* should be set to the estimated fraction of the parent table rows that will be retrieved during the index scan. In the case of a lossy query, this will typically be higher than the fraction of rows that actually pass the given qual conditions.
+The _`indexSelectivity`_ should be set to the estimated fraction of the parent table rows that will be retrieved during the index scan. In the case of a lossy query, this will typically be higher than the fraction of rows that actually pass the given qual conditions.
 
-The *`indexCorrelation`* should be set to the correlation (ranging between -1.0 and 1.0) between the index order and the table order. This is used to adjust the estimate for the cost of fetching rows from the parent table.
+The _`indexCorrelation`_ should be set to the correlation (ranging between -1.0 and 1.0) between the index order and the table order. This is used to adjust the estimate for the cost of fetching rows from the parent table.
 
-The *`indexPages`* should be set to the number of leaf pages. This is used to estimate the number of workers for parallel index scan.
+The _`indexPages`_ should be set to the number of leaf pages. This is used to estimate the number of workers for parallel index scan.
 
-When *`loop_count`* is greater than one, the returned numbers should be averages expected for any one scan of the index.
+When _`loop_count`_ is greater than one, the returned numbers should be averages expected for any one scan of the index.
 
 [#id](#id-1.10.15.12.13)
 
@@ -86,9 +86,9 @@ A typical cost estimator will proceed as follows:
                                               JOIN_INNER, NULL);
    ```
 
-2. Estimate the number of index rows that will be visited during the scan. For many index types this is the same as *`indexSelectivity`* times the number of rows in the index, but it might be more. (Note that the index's size in pages and rows is available from the `path->indexinfo` struct.)
+2. Estimate the number of index rows that will be visited during the scan. For many index types this is the same as _`indexSelectivity`_ times the number of rows in the index, but it might be more. (Note that the index's size in pages and rows is available from the `path->indexinfo` struct.)
 
-3. Estimate the number of index pages that will be retrieved during the scan. This might be just *`indexSelectivity`* times the index's size in pages.
+3. Estimate the number of index pages that will be retrieved during the scan. This might be just _`indexSelectivity`_ times the index's size in pages.
 
 4. Compute the index access cost. A generic estimator might do this:
 
@@ -108,6 +108,6 @@ A typical cost estimator will proceed as follows:
 
    However, the above does not account for amortization of index reads across repeated index scans.
 
-5. Estimate the index correlation. For a simple ordered index on a single field, this can be retrieved from pg\_statistic. If the correlation is not known, the conservative estimate is zero (no correlation).
+5. Estimate the index correlation. For a simple ordered index on a single field, this can be retrieved from pg_statistic. If the correlation is not known, the conservative estimate is zero (no correlation).
 
 Examples of cost estimator functions can be found in `src/backend/utils/adt/selfuncs.c`.

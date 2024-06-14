@@ -23,23 +23,23 @@ CREATE EVENT TRIGGER name
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name to give the new trigger. This name must be unique within the database.
 
-* *`event`*
+- _`event`_
 
   The name of the event that triggers a call to the given function. See [Section 40.1](event-trigger-definition) for more information on event names.
 
-* *`filter_variable`*
+- _`filter_variable`_
 
-  The name of a variable used to filter events. This makes it possible to restrict the firing of the trigger to a subset of the cases in which it is supported. Currently the only supported *`filter_variable`* is `TAG`.
+  The name of a variable used to filter events. This makes it possible to restrict the firing of the trigger to a subset of the cases in which it is supported. Currently the only supported _`filter_variable`_ is `TAG`.
 
-* *`filter_value`*
+- _`filter_value`_
 
-  A list of values for the associated *`filter_variable`* for which the trigger should fire. For `TAG`, this means a list of command tags (e.g., `'DROP FUNCTION'`).
+  A list of values for the associated _`filter_variable`_ for which the trigger should fire. For `TAG`, this means a list of command tags (e.g., `'DROP FUNCTION'`).
 
-* *`function_name`*
+- _`function_name`_
 
   A user-supplied function that is declared as taking no argument and returning type `event_trigger`.
 

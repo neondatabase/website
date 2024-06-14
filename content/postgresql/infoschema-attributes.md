@@ -42,5 +42,4 @@ The view `attributes` contains information about the attributes of composite dat
 | `dtd_identifier` `sql_identifier`An identifier of the data type descriptor of the column, unique among the data type descriptors pertaining to the table. This is mainly useful for joining with other instances of such identifiers. (The specific format of the identifier is not defined and not guaranteed to remain the same in future versions.)                                                                                  |
 | `is_derived_reference_attribute` `yes_or_no`Applies to a feature not available in PostgreSQL                                                                                                                                                                                                                                                                                                                                            |
 
-
 See also under [Section 37.17](infoschema-columns), a similarly structured view, for further information on some of the columns.

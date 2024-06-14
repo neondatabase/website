@@ -20,23 +20,23 @@ DROP TRIGGER [ IF EXISTS ] name ON table_name [ CASCADE | RESTRICT ]
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the trigger does not exist. A notice is issued in this case.
 
-* *`name`*
+- _`name`_
 
   The name of the trigger to remove.
 
-* *`table_name`*
+- _`table_name`_
 
   The name (optionally schema-qualified) of the table for which the trigger is defined.
 
-* `CASCADE`
+- `CASCADE`
 
   Automatically drop objects that depend on the trigger, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend)).
 
-* `RESTRICT`
+- `RESTRICT`
 
   Refuse to drop the trigger if any objects depend on it. This is the default.
 

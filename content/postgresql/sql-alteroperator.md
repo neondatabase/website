@@ -31,31 +31,31 @@ You must own the operator to use `ALTER OPERATOR`. To alter the owner, you must 
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of an existing operator.
 
-* *`left_type`*
+- _`left_type`_
 
   The data type of the operator's left operand; write `NONE` if the operator has no left operand.
 
-* *`right_type`*
+- _`right_type`_
 
   The data type of the operator's right operand.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The new owner of the operator.
 
-* *`new_schema`*
+- _`new_schema`_
 
   The new schema for the operator.
 
-* *`res_proc`*
+- _`res_proc`_
 
   The restriction selectivity estimator function for this operator; write NONE to remove existing selectivity estimator.
 
-* *`join_proc`*
+- _`join_proc`_
 
   The join selectivity estimator function for this operator; write NONE to remove existing selectivity estimator.
 

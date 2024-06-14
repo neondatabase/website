@@ -33,39 +33,39 @@ ALTER DOMAIN name
 
 `ALTER DOMAIN` changes the definition of an existing domain. There are several sub-forms:
 
-* `SET`/`DROP DEFAULT`
+- `SET`/`DROP DEFAULT`
 
   These forms set or remove the default value for a domain. Note that defaults only apply to subsequent `INSERT` commands; they do not affect rows already in a table using the domain.
 
-* `SET`/`DROP NOT NULL`
+- `SET`/`DROP NOT NULL`
 
   These forms change whether a domain is marked to allow NULL values or to reject NULL values. You can only `SET NOT NULL` when the columns using the domain contain no null values.
 
-* `ADD domain_constraint [ NOT VALID ]`
+- `ADD domain_constraint [ NOT VALID ]`
 
   This form adds a new constraint to a domain using the same syntax as [`CREATE DOMAIN`](sql-createdomain). When a new constraint is added to a domain, all columns using that domain will be checked against the newly added constraint. These checks can be suppressed by adding the new constraint using the `NOT VALID` option; the constraint can later be made valid using `ALTER DOMAIN ... VALIDATE CONSTRAINT`. Newly inserted or updated rows are always checked against all constraints, even those marked `NOT VALID`. `NOT VALID` is only accepted for `CHECK` constraints.
 
-* `DROP CONSTRAINT [ IF EXISTS ]`
+- `DROP CONSTRAINT [ IF EXISTS ]`
 
   This form drops constraints on a domain. If `IF EXISTS` is specified and the constraint does not exist, no error is thrown. In this case a notice is issued instead.
 
-* `RENAME CONSTRAINT`
+- `RENAME CONSTRAINT`
 
   This form changes the name of a constraint on a domain.
 
-* `VALIDATE CONSTRAINT`
+- `VALIDATE CONSTRAINT`
 
   This form validates a constraint previously added as `NOT VALID`, that is, it verifies that all values in table columns of the domain type satisfy the specified constraint.
 
-* `OWNER`
+- `OWNER`
 
   This form changes the owner of the domain to the specified user.
 
-* `RENAME`
+- `RENAME`
 
   This form changes the name of the domain.
 
-* `SET SCHEMA`
+- `SET SCHEMA`
 
   This form changes the schema of the domain. Any constraints associated with the domain are moved into the new schema as well.
 
@@ -75,43 +75,43 @@ You must own the domain to use `ALTER DOMAIN`. To change the schema of a domain,
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (possibly schema-qualified) of an existing domain to alter.
 
-* *`domain_constraint`*
+- _`domain_constraint`_
 
   New domain constraint for the domain.
 
-* *`constraint_name`*
+- _`constraint_name`_
 
   Name of an existing constraint to drop or rename.
 
-* `NOT VALID`
+- `NOT VALID`
 
   Do not verify existing stored data for constraint validity.
 
-* `CASCADE`
+- `CASCADE`
 
   Automatically drop objects that depend on the constraint, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend)).
 
-* `RESTRICT`
+- `RESTRICT`
 
   Refuse to drop the constraint if there are any dependent objects. This is the default behavior.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name for the domain.
 
-* *`new_constraint_name`*
+- _`new_constraint_name`_
 
   The new name for the constraint.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The user name of the new owner of the domain.
 
-* *`new_schema`*
+- _`new_schema`_
 
   The new schema for the domain.
 

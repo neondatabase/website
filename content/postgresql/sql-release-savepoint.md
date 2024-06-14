@@ -20,7 +20,7 @@ RELEASE [ SAVEPOINT ] savepoint_name
 
 ## Parameters
 
-* *`savepoint_name`*
+- _`savepoint_name`_
 
   The name of the savepoint to release.
 

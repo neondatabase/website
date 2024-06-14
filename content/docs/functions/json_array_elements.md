@@ -2,7 +2,7 @@
 title: Postgres json_array_elements() function
 subtitle: Expand a JSON array into a set of rows
 enableTableOfContents: true
-updatedOn: '2024-02-06T14:40:40.246Z'
+updatedOn: '2024-06-14T07:55:54.374Z'
 ---
 
 You can use `json_array_elements` function to expand a `JSON` array into a set of rows, each containing one element of the array. It is a simpler option compared to complex looping logic. It is also more efficient than executing the same operation on the application side by reducing data transfer and processing overhead.
@@ -35,7 +35,7 @@ INSERT INTO developers (id, name, skills) VALUES
 ```
 
 ```text
-| id |  name   |          skills          
+| id |  name   |          skills
 |----|---------|---------------------------
 | 1  | Alice   | ["Java", "Python", "SQL"]
 | 2  | Bob     | ["C++", "JavaScript"]
@@ -91,9 +91,9 @@ INSERT INTO products (id, name, details) VALUES
 ```
 
 ```text
-| id |  name   |                                details                                 |                             
+| id |  name   |                                details                                 |
 |----|---------|------------------------------------------------------------------------|
-| 1  | T-Shirt | {"sizes": ["S", "M", "L", "XL"], "colors": ["Red", "Blue", "Green"]}   | 
+| 1  | T-Shirt | {"sizes": ["S", "M", "L", "XL"], "colors": ["Red", "Blue", "Green"]}   |
 | 2  | Hoodie  | {"sizes": ["XS", "S", "M", "L", "XL"], "colors": ["Black", "Gray"]}    |
 | 3  | Dress   | {"sizes": ["S", "M", "L"], "colors": ["Pink", "Purple", "Black"]}      |
 | 4  | Jeans   | {"sizes": ["28", "30", "32", "34"], "colors": ["Blue", "Black"]}       |

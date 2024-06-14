@@ -24,35 +24,35 @@ The `CONNECT` command establishes a connection between the client and the Postgr
 
 ## Parameters
 
-* *`connection_target`* [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET)
+- _`connection_target`_ [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET)
 
-  *`connection_target`* specifies the target server of the connection on one of several forms.
+  _`connection_target`_ specifies the target server of the connection on one of several forms.
 
-  * \[ *`database_name`* ] \[ `@`*`host`* ] \[ `:`*`port`* ] [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-DATABASE-NAME)
+  - \[ _`database_name`_ ] \[ `@`_`host`_ ] \[ `:`_`port`_ ] [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-DATABASE-NAME)
 
     Connect over TCP/IP
 
-  * `unix:postgresql://`*`host`* \[ `:`*`port`* ] `/` \[ *`database_name`* ] \[ `?`*`connection_option`* ] [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-UNIX-DOMAIN-SOCKETS)
+  - `unix:postgresql://`_`host`_ \[ `:`_`port`_ ] `/` \[ _`database_name`_ ] \[ `?`_`connection_option`_ ] [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-UNIX-DOMAIN-SOCKETS)
 
     Connect over Unix-domain sockets
 
-  * `tcp:postgresql://`*`host`* \[ `:`*`port`* ] `/` \[ *`database_name`* ] \[ `?`*`connection_option`* ] [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-TCP-IP)
+  - `tcp:postgresql://`_`host`_ \[ `:`_`port`_ ] `/` \[ _`database_name`_ ] \[ `?`_`connection_option`_ ] [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-TCP-IP)
 
     Connect over TCP/IP
 
-  * SQL string constant [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-CONSTANT)
+  - SQL string constant [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-CONSTANT)
 
     containing a value in one of the above forms
 
-  * host variable [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-HOST-VARIABLE)
+  - host variable [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-HOST-VARIABLE)
 
     host variable of type `char[]` or `VARCHAR[]` containing a value in one of the above forms
 
-* *`connection_name`* [#](#ECPG-SQL-CONNECT-CONNECTION-NAME)
+- _`connection_name`_ [#](#ECPG-SQL-CONNECT-CONNECTION-NAME)
 
   An optional identifier for the connection, so that it can be referred to in other commands. This can be an SQL identifier or a host variable.
 
-* *`connection_user`* [#](#ECPG-SQL-CONNECT-CONNECTION-USER)
+- _`connection_user`_ [#](#ECPG-SQL-CONNECT-CONNECTION-USER)
 
   The user name for the database connection.
 
@@ -60,7 +60,7 @@ The `CONNECT` command establishes a connection between the client and the Postgr
 
   User name and password can be SQL identifiers, string constants, or host variables.
 
-* `DEFAULT` [#](#ECPG-SQL-CONNECT-DEFAULT)
+- `DEFAULT` [#](#ECPG-SQL-CONNECT-DEFAULT)
 
   Use all default connection parameters, as defined by libpq.
 

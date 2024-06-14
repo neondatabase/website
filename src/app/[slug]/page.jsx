@@ -130,7 +130,7 @@ export async function generateMetadata({ params }) {
     keywords: metaKeywords,
     robotsNoindex: metaRobotsNoindex,
     pathname: `/${params.slug}`,
-    imagePath: twitterImage.mediaItemUrl,
+    imagePath: twitterImage?.mediaItemUrl,
   });
 }
 

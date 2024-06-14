@@ -30,7 +30,7 @@ If the isolation level, read/write mode, or deferrable mode is specified, the ne
 
 ## Parameters
 
-* `WORK``TRANSACTION`
+- `WORK``TRANSACTION`
 
   Optional key words. They have no effect.
 
@@ -46,7 +46,7 @@ Use [`COMMIT`](sql-commit) or [`ROLLBACK`](sql-rollback) to terminate a transact
 
 Issuing `BEGIN` when already inside a transaction block will provoke a warning message. The state of the transaction is not affected. To nest transactions within a transaction block, use savepoints (see [SAVEPOINT](sql-savepoint)).
 
-For reasons of backwards compatibility, the commas between successive *`transaction_modes`* can be omitted.
+For reasons of backwards compatibility, the commas between successive _`transaction_modes`_ can be omitted.
 
 [#id](#id-1.9.3.47.8)
 
@@ -64,7 +64,7 @@ BEGIN;
 
 `BEGIN` is a PostgreSQL language extension. It is equivalent to the SQL-standard command [`START TRANSACTION`](sql-start-transaction), whose reference page contains additional compatibility information.
 
-The `DEFERRABLE` *`transaction_mode`* is a PostgreSQL language extension.
+The `DEFERRABLE` _`transaction_mode`_ is a PostgreSQL language extension.
 
 Incidentally, the `BEGIN` key word is used for a different purpose in embedded SQL. You are advised to be careful about the transaction semantics when porting database applications.
 
