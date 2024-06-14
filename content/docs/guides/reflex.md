@@ -2,7 +2,7 @@
 title: Build a Python App with Reflex and Neon
 subtitle: Learn how to build a Python Full Stack application with Reflex and Neon
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.406Z'
+updatedOn: '2024-06-14T11:25:54.205Z'
 tag: new
 ---
 
