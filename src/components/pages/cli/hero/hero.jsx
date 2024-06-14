@@ -8,7 +8,6 @@ import CodeTabs from './code-tabs';
 const Hero = () => (
   <section className="hero safe-paddings relative mb-20 overflow-hidden pt-[152px] xl:pt-[120px] lg:pt-11 md:mb-16 md:pt-8 sm:mb-10">
     <Container className="relative z-10 flex flex-col items-center" size="medium">
-      <div className="absolute left-1/2 top-0 -z-10 h-[270px] w-3/4 -translate-x-1/2 rounded-[1000px] bg-black-pure blur-[30px] lg:w-full" />
       <h1 className="xs:flat-breaks mx-auto text-center font-title text-[72px] font-medium leading-none tracking-tighter xl:text-[56px] lg:text-5xl md:text-4xl sm:text-[36px]">
         Your Neon workflow lives
         <br />
