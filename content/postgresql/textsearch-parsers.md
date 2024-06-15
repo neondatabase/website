@@ -2,7 +2,7 @@
 
 ## 12.5. Parsers [#](#TEXTSEARCH-PARSERS)
 
-Text search parsers are responsible for splitting raw document text into *tokens* and identifying each token's type, where the set of possible types is defined by the parser itself. Note that a parser does not modify the text at all — it simply identifies plausible word boundaries. Because of this limited scope, there is less need for application-specific custom parsers than there is for custom dictionaries. At present PostgreSQL provides just one built-in parser, which has been found to be useful for a wide range of applications.
+Text search parsers are responsible for splitting raw document text into _tokens_ and identifying each token's type, where the set of possible types is defined by the parser itself. Note that a parser does not modify the text at all — it simply identifies plausible word boundaries. Because of this limited scope, there is less need for application-specific custom parsers than there is for custom dictionaries. At present PostgreSQL provides just one built-in parser, which has been found to be useful for a wide range of applications.
 
 The built-in parser is named `pg_catalog.default`. It recognizes 23 token types, shown in [Table 12.1](textsearch-parsers#TEXTSEARCH-DEFAULT-PARSER).
 
@@ -35,7 +35,6 @@ The built-in parser is named `pg_catalog.default`. It recognizes 23 token types,
 | `tag`             | XML tag                                  | `<a href="dictionaries.html">`                              |
 | `entity`          | XML entity                               | `&amp;`                                                     |
 | `blank`           | Space symbols                            | (any whitespace or punctuation not otherwise recognized)    |
-
 
 ### Note
 

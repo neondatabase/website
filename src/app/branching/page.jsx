@@ -11,7 +11,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.branching);
 
 const BranchingPage = () => (
-  <Layout headerTheme="black" footerTheme="black" footerWithTopBorder>
+  <Layout>
     <Hero />
     <BranchData />
     <Workflows />

@@ -28,11 +28,11 @@ Refer to [Section 38.16](xindex) for further information.
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of the operator family to be created. The name can be schema-qualified.
 
-* *`index_method`*
+- _`index_method`_
 
   The name of the index method this operator family is for.
 

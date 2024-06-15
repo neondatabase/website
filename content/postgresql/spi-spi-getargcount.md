@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-GETARGCOUNT)
 
-## SPI\_getargcount
+## SPI_getargcount
 
-SPI\_getargcount — return the number of arguments needed by a statement prepared by `SPI_prepare`
+SPI_getargcount — return the number of arguments needed by a statement prepared by `SPI_prepare`
 
 ## Synopsis
 
@@ -20,7 +20,7 @@ int SPI_getargcount(SPIPlanPtr plan)
 
 ## Arguments
 
-* `SPIPlanPtr plan`
+- `SPIPlanPtr plan`
 
   prepared statement (returned by `SPI_prepare`)
 
@@ -28,4 +28,4 @@ int SPI_getargcount(SPIPlanPtr plan)
 
 ## Return Value
 
-The count of expected arguments for the *`plan`*. If the *`plan`* is `NULL` or invalid, `SPI_result` is set to `SPI_ERROR_ARGUMENT` and -1 is returned.
+The count of expected arguments for the _`plan`_. If the _`plan`_ is `NULL` or invalid, `SPI_result` is set to `SPI_ERROR_ARGUMENT` and -1 is returned.

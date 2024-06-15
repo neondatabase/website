@@ -2,7 +2,7 @@
 title: Use Neon with Cloudflare Pages
 subtitle: Connect a Neon Postgres database to your Cloudflare Pages web application
 enableTableOfContents: true
-updatedOn: '2024-02-21T23:59:47.047Z'
+updatedOn: '2024-06-14T07:55:54.388Z'
 ---
 
 `Cloudflare Pages` is a modern web application hosting platform that allows you to build, deploy, and scale your web applications. While it is typically used to host static websites, you can also use it to host interactive web applications by leveraging `functions` to run server-side code. Internally, Cloudflare functions are powered by `Cloudflare Workers`, a serverless platform that allows you to run JavaScript code on Cloudflare's edge network.
@@ -23,30 +23,30 @@ To follow along with this guide, you will need:
 
 ### Initialize a new project
 
-1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
+1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 
 2. Click the **New Project** button to create a new project.
 
 3. From your project dashboard, navigate to the **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
 
-    ```sql
-    CREATE TABLE books_to_read (
-        id SERIAL PRIMARY KEY,
-        title TEXT,
-        author TEXT
-    );
-    ```
+   ```sql
+   CREATE TABLE books_to_read (
+       id SERIAL PRIMARY KEY,
+       title TEXT,
+       author TEXT
+   );
+   ```
 
-    Next, we insert some sample data into the `books_to_read` table, so we can query it later:
+   Next, we insert some sample data into the `books_to_read` table, so we can query it later:
 
-    ```sql
-    INSERT INTO books_to_read (title, author)
-    VALUES
-        ('The Way of Kings', 'Brandon Sanderson'),
-        ('The Name of the Wind', 'Patrick Rothfuss'),
-        ('Coders at Work', 'Peter Seibel'),
-        ('1984', 'George Orwell');
-    ```
+   ```sql
+   INSERT INTO books_to_read (title, author)
+   VALUES
+       ('The Way of Kings', 'Brandon Sanderson'),
+       ('The Name of the Wind', 'Patrick Rothfuss'),
+       ('Coders at Work', 'Peter Seibel'),
+       ('1984', 'George Orwell');
+   ```
 
 ### Retrieve your Neon database connection string
 
@@ -93,21 +93,21 @@ Navigate to the `my-neon-page` directory and open the `src/App.jsx` file. Replac
 ```jsx
 // src/App.jsx
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 function App() {
   const [books, setBooks] = useState([]);
-  const [bookName, setBookName] = useState("");
-  const [authorName, setAuthorName] = useState("");
+  const [bookName, setBookName] = useState('');
+  const [authorName, setAuthorName] = useState('');
 
   // Function to fetch books
   const fetchBooks = async () => {
     try {
-      const response = await fetch("/books");
+      const response = await fetch('/books');
       const data = await response.json();
       setBooks(data);
     } catch (error) {
-      console.error("Error fetching books:", error);
+      console.error('Error fetching books:', error);
     }
   };
 
@@ -118,28 +118,28 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("/books/add", {
-        method: "POST",
+      const response = await fetch('/books/add', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ title: bookName, author: authorName }),
       });
       const data = await response.json();
 
       if (data.success) {
-        console.log("Success:", data);
+        console.log('Success:', data);
         setBooks([...books, { title: bookName, author: authorName }]);
       } else {
-        console.error("Error adding book:", data.error);
+        console.error('Error adding book:', data.error);
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
     }
 
     // Reset form fields
-    setBookName("");
-    setAuthorName("");
+    setBookName('');
+    setAuthorName('');
   };
 
   return (
@@ -157,19 +157,11 @@ function App() {
       <form onSubmit={handleSubmit}>
         <label>
           Book Name:
-          <input
-            type="text"
-            value={bookName}
-            onChange={(e) => setBookName(e.target.value)}
-          />
+          <input type="text" value={bookName} onChange={(e) => setBookName(e.target.value)} />
         </label>
         <label>
           Author Name:
-          <input
-            type="text"
-            value={authorName}
-            onChange={(e) => setAuthorName(e.target.value)}
-          />
+          <input type="text" value={authorName} onChange={(e) => setAuthorName(e.target.value)} />
         </label>
         <button type="submit">Add Book</button>
       </form>
@@ -216,7 +208,7 @@ This function fetches the list of books from the `books_to_read` table in the da
 Create another file named `functions/books/add.js` in the project directory with the following content:
 
 ```js
-import { Client } from "@neondatabase/serverless";
+import { Client } from '@neondatabase/serverless';
 
 export async function onRequestPost(context) {
   const client = new Client(context.env.DATABASE_URL);
@@ -226,30 +218,27 @@ export async function onRequestPost(context) {
   const book = await context.request.json();
 
   // Logic to insert a new book into your database
-  const resp = await client.query(
-    "INSERT INTO books_to_read (title, author) VALUES ($1, $2); ",
-    [data.title, data.author],
-  );
+  const resp = await client.query('INSERT INTO books_to_read (title, author) VALUES ($1, $2); ', [
+    book.title,
+    book.author,
+  ]);
 
   // Check if insert query was successful
   if (resp.rowCount === 1) {
-    return new Response(
-      JSON.stringify({ success: true, error: null, data: book }),
-      {
-        headers: { "Content-Type": "application/json" },
-      },
-    );
+    return new Response(JSON.stringify({ success: true, error: null, data: book }), {
+      headers: { 'Content-Type': 'application/json' },
+    });
   } else {
     return new Response(
       JSON.stringify({
         success: false,
-        error: "Failed to insert book",
+        error: 'Failed to insert book',
         data: book,
       }),
       {
-        headers: { "Content-Type": "application/json" },
+        headers: { 'Content-Type': 'application/json' },
         status: 500,
-      },
+      }
     );
   }
 }
@@ -328,7 +317,7 @@ Give a unique name to your `Cloudflare Pages` project above. The Wrangler CLI wi
 
 ### Add your Neon connection string as an environment variable
 
-The Cloudflare production deployment doesn't have access to the `DATABASE_URL` environment variable yet. Hence, we need to navigate to the Cloudflare dashboard and add it manually. 
+The Cloudflare production deployment doesn't have access to the `DATABASE_URL` environment variable yet. Hence, we need to navigate to the Cloudflare dashboard and add it manually.
 
 Navigate to the dashboard and select the `Settings` section in your project. Go to the **Environment Variables** tab and add a new environment variable named `DATABASE_URL` with the value of your Neon database connection string.
 

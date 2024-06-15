@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-02-27T14:37:51.437Z'
+updatedOn: '2024-06-14T07:55:54.423Z'
 ---
 
 ## Before you begin
@@ -22,17 +22,17 @@ The `projects` command allows you to list, create, update, delete, and retrieve 
 neonctl projects <subcommand> [options]
 ```
 
-| Subcommand  | Description      |
-|---------|------------------|
-| [list](#list)    | List projects    |
-| [create](#create)  | Create a project |
-| [update](#update)  | Update a project |
-| [delete](#delete)  | Delete a project |
-| [get](#get)     | Get a project    |
+| Subcommand        | Description      |
+| ----------------- | ---------------- |
+| [list](#list)     | List projects    |
+| [create](#create) | Create a project |
+| [update](#update) | Update a project |
+| [delete](#delete) | Delete a project |
+| [get](#get)       | Get a project    |
 
 ### list
 
-This subcommand allows you to list projects that belong to your Neon account.
+This subcommand allows you to list projects that belong to your Neon account, as well as any projects that were shared with you.
 
 #### Usage
 
@@ -44,23 +44,30 @@ neonctl projects list [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `projects` subcommand supports this option:
 
-| Option       | Description   | Type   | Required  |
-| ------------ | ------------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| Option           | Description                                                                                   | Type   | Required |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
 
 #### Example
 
 ```bash
 neonctl projects list
-┌────────────────────────┬────────────────────────┬───────────────┬──────────────────────┐
-│ Id                     │ Name                   │ Region Id     │ Created At           │
-├────────────────────────┼────────────────────────┼───────────────┼──────────────────────┤
-│ late-rain-471577       │ late-rain-471577       │ aws-us-west-2 │ 2023-05-17T17:26:07Z │
-├────────────────────────┼────────────────────────┼───────────────┼──────────────────────┤
-│ tight-wave-371442      │ tight-wave-371442      │ aws-us-east-2 │ 2023-05-15T12:33:39Z │
-├────────────────────────┼────────────────────────┼───────────────┼──────────────────────┤
-│ lingering-brook-802958 │ lingering-brook-802958 │ aws-us-east-2 │ 2023-05-11T12:25:22Z │
-└────────────────────────┴────────────────────────┴───────────────┴──────────────────────┘
+Projects
+┌────────────────────────┬────────────────────┬───────────────┬──────────────────────┐
+│ Id                     │ Name               │ Region Id     │ Created At           │
+├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
+│ crimson-voice-12345678 │ frontend           │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
+├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
+│ calm-thunder-12121212  │ backend            │ aws-us-east-2 │ 2024-04-10T15:21:01Z │
+├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
+│ nameless-hall-87654321 │ billing            │ aws-us-east-2 │ 2024-04-10T14:35:17Z │
+└────────────────────────┴────────────────────┴───────────────┴──────────────────────┘
+Shared with me
+┌───────────────────┬────────────────────┬──────────────────┬──────────────────────┐
+│ Id                │ Name               │ Region Id        │ Created At           │
+├───────────────────┼────────────────────┼──────────────────┼──────────────────────┤
+│ noisy-fire-212121 │ API                │ aws-eu-central-1 │ 2023-04-22T18:41:13Z │
+└───────────────────┴────────────────────┴──────────────────┴──────────────────────┘
 ```
 
 ### create
@@ -79,32 +86,32 @@ neonctl projects create [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `create` subcommand supports these options:
 
-| Option                                | Description                                                                                               | Type    | Required                               |
-| ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--name` | The project name. The project ID is used if a name is not specified.               | string  |                                       |
-| `--region-id` | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`. Defaults to `aws-us-east-2` if not specified. | string number  |                                       |
-| `--psql` | Connect to a database via `psql` using connection string. `psql` must be installed to use this option. |boolean||
-| `--set-context` | Set the current context to the new project. The default is `false`. |boolean||
+| Option           | Description                                                                                                                                                                | Type          | Required |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                              | string        |          |
+| `--name`         | The project name. The project ID is used if a name is not specified.                                                                                                       | string        |          |
+| `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`. Defaults to `aws-us-east-2` if not specified. | string number |          |
+| `--psql`         | Connect to a database via `psql` using connection string. `psql` must be installed to use this option.                                                                     | boolean       |          |
+| `--set-context`  | Set the current context to the new project. The default is `false`.                                                                                                        | boolean       |          |
 
 #### Examples
 
 - Create a project with a user-defined name in a specific region:
 
-    ```bash
-    neonctl projects create --name mynewproject --region-id aws-us-west-2
-    ┌───────────────────┬──────────────┬───────────────┬──────────────────────┐
-    │ Id                │ Name         │ Region Id     │ Created At           │
-    ├───────────────────┼──────────────┼───────────────┼──────────────────────┤
-    │ muddy-wood-859533 │ mynewproject │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
-    └───────────────────┴──────────────┴───────────────┴──────────────────────┘
+  ```bash
+  neonctl projects create --name mynewproject --region-id aws-us-west-2
+  ┌───────────────────┬──────────────┬───────────────┬──────────────────────┐
+  │ Id                │ Name         │ Region Id     │ Created At           │
+  ├───────────────────┼──────────────┼───────────────┼──────────────────────┤
+  │ muddy-wood-859533 │ mynewproject │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
+  └───────────────────┴──────────────┴───────────────┴──────────────────────┘
 
-    ┌──────────────────────────────────────────────────────────────────────────────────────┐
-    │ Connection Uri                                                                       │
-    ├──────────────────────────────────────────────────────────────────────────────────────┤
-    │ postgres://[user]:[password]@[neon_hostname]/[dbname]                                │
-    └──────────────────────────────────────────────────────────────────────────────────────┘
-    ```
+  ┌──────────────────────────────────────────────────────────────────────────────────────┐
+  │ Connection Uri                                                                       │
+  ├──────────────────────────────────────────────────────────────────────────────────────┤
+  │ postgres://[user]:[password]@[neon_hostname]/[dbname]                                │
+  └──────────────────────────────────────────────────────────────────────────────────────┘
+  ```
 
     <Admonition type="tip">
     The Neon CLI provides a `neonctl connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
@@ -112,9 +119,9 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 - Create a project with the `--output` format of the command set to `json`. This output format returns all of the project response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
 
-    ```bash
-    neonctl projects create --output json
-    ```
+  ```bash
+  neonctl projects create --output json
+  ```
 
     <details>
     <summary>Example output</summary>
@@ -168,27 +175,27 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 - Create a project and connect to it with `psql`.
 
-    ```bash
-    neonctl project create --psql
-    ```
+  ```bash
+  neonctl project create --psql
+  ```
 
 - Create a project, connect to it with `psql`, and run an `.sql` file.
 
-    ```bash
-    neonctl project create --psql -- -f dump.sql
-    ```
+  ```bash
+  neonctl project create --psql -- -f dump.sql
+  ```
 
 - Create a project, connect to it with `psql`, and run a query.
 
-    ```bash
-    neonctl project create --psql -- -c "SELECT version()"
-    ```
+  ```bash
+  neonctl project create --psql -- -c "SELECT version()"
+  ```
 
 - Create a project and set the Neon CLI project and branch context.
 
-    ```
-    neonctl project create --psql --set-context
-    ```
+  ```
+  neonctl project create --psql --set-context
+  ```
 
 ### update
 
@@ -200,18 +207,18 @@ This subcommand allows you to update a Neon project.
 neonctl projects update <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
 
 #### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `update` subcommand supports this option:
 
-| Option                                | Description                                                                                               | Type    | Required                               |
-| ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------- | :-----------------------------------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
-| `--name` | The project name. The value cannot be empty.               | string  |             &check;                          |
-| `--ip-allow` | A list of IP addresses that are allowed to connect to the endpoint               | string  |                                       |
-| `--ip-primary-only` | If true, the list will be applied only to the primary branch. The deafault value is `false`.  | boolean  |                                       |
+| Option              | Description                                                                                   | Type    | Required |
+| ------------------- | --------------------------------------------------------------------------------------------- | ------- | :------: |
+| `--context-file`    | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string  |          |
+| `--name`            | The project name. The value cannot be empty.                                                  | string  | &check;  |
+| `--ip-allow`        | A list of IP addresses that are allowed to connect to the endpoint                            | string  |          |
+| `--ip-primary-only` | If true, the list will be applied only to the primary branch. The deafault value is `false`.  | boolean |          |
 
 #### Examples
 
@@ -229,7 +236,7 @@ neonctl projects update muddy-wood-859533 --name dev_project_1
 Update the IP allowlist. Multiple values are specified as a list without a delimiter.
 
 ```bash
-neonctl projects update withered-dream-91802149 --ip-allow 192.0.2.1 192.0.2.2 
+neonctl projects update withered-dream-91802149 --ip-allow 192.0.2.1 192.0.2.2
 ┌─────────────────────────┬───────────┬───────────────┬──────────────────────┐
 │ Id                      │ Name      │ Region Id     │ Created At           │
 ├─────────────────────────┼───────────┼───────────────┼──────────────────────┤
@@ -240,7 +247,7 @@ neonctl projects update withered-dream-91802149 --ip-allow 192.0.2.1 192.0.2.2
 Apply the IP allowlist to the primary branch only:
 
 ```bash
-neonctl projects update withered-dream-91802149 --ip-only-primary                 
+neonctl projects update withered-dream-91802149 --ip-only-primary
 ┌─────────────────────────┬───────────┬───────────────┬──────────────────────┐
 │ Id                      │ Name      │ Region Id     │ Created At           │
 ├─────────────────────────┼───────────┼───────────────┼──────────────────────┤
@@ -256,7 +263,7 @@ This subcommand allows you to delete a Neon project.
 neonctl projects delete <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
 
 #### Options
 
@@ -285,15 +292,15 @@ This subcommand allows you to retrieve details about a Neon project.
 neonctl projects get <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
 
 #### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `delete` subcommand supports this option:
 
-| Option       | Description   | Type   | Required  |
-| ------------ | ------------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string | |
+| Option           | Description                                                                                   | Type   | Required |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
 
 #### Example
 

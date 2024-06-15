@@ -1,10 +1,8 @@
 [#id](#TSM-SYSTEM-ROWS)
 
-## F.46. tsm\_system\_rows — the `SYSTEM_ROWS` sampling method for `TABLESAMPLE` [#](#TSM-SYSTEM-ROWS)
+## F.46. tsm_system_rows — the `SYSTEM_ROWS` sampling method for `TABLESAMPLE` [#](#TSM-SYSTEM-ROWS)
 
-* [F.46.1. Examples](tsm-system-rows#TSM-SYSTEM-ROWS-EXAMPLES)
-
-
+- [F.46.1. Examples](tsm-system-rows#TSM-SYSTEM-ROWS-EXAMPLES)
 
 The `tsm_system_rows` module provides the table sampling method `SYSTEM_ROWS`, which can be used in the `TABLESAMPLE` clause of a [`SELECT`](sql-select) command.
 

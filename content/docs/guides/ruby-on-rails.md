@@ -49,7 +49,7 @@ You can find the connection string for your database in the **Connection Details
 </Admonition>
 
 <Admonition type="important">
-The role you specified in the `DATABASE_URL` must have **CREATEDB** privileges. Roles created in the Neon console, CLI, or API, including the default role created with a Neon project, are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the `CREATEDB` privilege. Alternatively, you can create roles with SQL to grant specific privileges. See [Manage database access](/docs/manage/database-access).
+The role you specified in the `DATABASE_URL` must have **CREATEDB** privileges. Roles created in the Neon Console, CLI, or API, including the default role created with a Neon project, are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the `CREATEDB` privilege. Alternatively, you can create roles with SQL to grant specific privileges. See [Manage database access](/docs/manage/database-access).
 </Admonition>
 
 Create the development database by issuing the following commands from the root of your project directory:
@@ -112,5 +112,15 @@ Visit [localhost:3000/](http://localhost:3000/) in your web browser. Your Neon d
 ```
 PostgreSQL 15.5 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
+
+## Schema migration with Ruby on Rails
+
+For schema migration with Ruby on Rails, see our guide:
+
+<DetailIconCards>
+
+<a href="/docs/guides/rails-migrations" description="Schema migration with Neon Postgres and Ruby on Rails" icon="app-store" icon="app-store">Ruby on Rails Migrations</a>
+
+</DetailIconCards>
 
 <NeedHelp/>

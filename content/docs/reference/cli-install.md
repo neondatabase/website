@@ -2,7 +2,7 @@
 title: Neon CLI — Install and connect
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.297Z'
+updatedOn: '2024-06-14T07:55:54.422Z'
 ---
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
@@ -37,45 +37,53 @@ To install a [binary](https://github.com/neondatabase/neonctl/releases):
 
 - **macOS**
 
-    Download the macOS binary:
+  Download the macOS binary:
 
-    ```bash shouldWrap
-    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
-    ```
+  ```bash shouldWrap
+  curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
+  ```
 
-    No installation is required. Run the Neon CLI as follows:
+  No installation is required. Run the Neon CLI as follows:
 
-    ```bash
-    neonctl <command> [options]
-    ```
+  ```bash
+  neonctl <command> [options]
+  ```
 
 - **Linux**
 
-    Download the Linux binary:
+  Download the Linux x64 or ARM64 binary:
 
-    ```bash shouldWrap
-    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux -o neonctl
-    ```
+  x64:
 
-    No installation is required. Run the Neon CLI as follows:
+  ```bash shouldWrap
+  curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
+  ```
 
-    ```bash
-    neonctl <command> [options]
-    ```
+  ARM64:
+
+  ```bash shouldWrap
+  curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
+  ```
+
+  No installation is required. Run the Neon CLI as follows:
+
+  ```bash
+  neonctl <command> [options]
+  ```
 
 - **Windows**
 
-    Download the Windows binary:
+  Download the Windows binary:
 
-    ```bash shouldWrap
-    curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
-    ```
+  ```bash shouldWrap
+  curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
+  ```
 
-    No installation is required. Run the Neon CLI as follows:
+  No installation is required. Run the Neon CLI as follows:
 
-    ```bash
-    neonctl-win.exe <command> [options]
-    ```
+  ```bash
+  neonctl-win.exe <command> [options]
+  ```
 
 </TabItem>
 

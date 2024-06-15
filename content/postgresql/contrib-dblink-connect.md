@@ -1,8 +1,8 @@
 [#id](#CONTRIB-DBLINK-CONNECT)
 
-## dblink\_connect
+## dblink_connect
 
-dblink\_connect — opens a persistent connection to a remote database
+dblink_connect — opens a persistent connection to a remote database
 
 ## Synopsis
 
@@ -24,11 +24,11 @@ The connection string may also be the name of an existing foreign server. It is 
 
 ## Arguments
 
-* *`connname`*
+- _`connname`_
 
   The name to use for this connection; if omitted, an unnamed connection is opened, replacing any existing unnamed connection.
 
-* *`connstr`*
+- _`connstr`_
 
   libpq-style connection info string, for example `hostaddr=127.0.0.1 port=5432 dbname=mydb user=postgres password=mypasswd options=-csearch_path=`. For details see [Section 34.1.1](libpq-connect#LIBPQ-CONNSTRING). Alternatively, the name of a foreign server.
 
@@ -42,7 +42,7 @@ Returns status, which is always `OK` (since any error causes the function to thr
 
 ## Notes
 
-If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas#DDL-SCHEMAS-PATTERNS), begin each session by removing publicly-writable schemas from `search_path`. One could, for example, add `options=-csearch_path=` to *`connstr`*. This consideration is not specific to `dblink`; it applies to every interface for executing arbitrary SQL commands.
+If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas#DDL-SCHEMAS-PATTERNS), begin each session by removing publicly-writable schemas from `search_path`. One could, for example, add `options=-csearch_path=` to _`connstr`_. This consideration is not specific to `dblink`; it applies to every interface for executing arbitrary SQL commands.
 
 Only superusers may use `dblink_connect` to create non-password-authenticated and non-GSSAPI-authenticated connections. If non-superusers need this capability, use `dblink_connect_u` instead.
 

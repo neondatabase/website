@@ -2,8 +2,9 @@
 title: Connect from any application
 subtitle: Learn how to connect to Neon from any application
 enableTableOfContents: true
-updatedOn: '2024-02-27T14:37:51.432Z'
+updatedOn: '2024-06-14T07:55:54.361Z'
 ---
+
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch.
 
 You can obtain the database connection details you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
@@ -15,7 +16,7 @@ Neon supports pooled and direct connections to the database. Use a pooled connec
 A Neon connection string includes the role, password, hostname, and database name.
 
 ```text
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
            ^    ^         ^                                               ^
      role -|    |         |- hostname                                     |- database
                 |
@@ -31,9 +32,9 @@ You can use the details from the connection string or the connection string itse
 `.env` file:
 
 ```text
-PGUSER=alex
 PGHOST=ep-cool-darkness-123456.us-east-2.aws.neon.tech
 PGDATABASE=dbname
+PGUSER=alex
 PGPASSWORD=AbC123dEf
 PGPORT=5432
 ```
@@ -41,17 +42,17 @@ PGPORT=5432
 Variable:
 
 ```text shouldWrap
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
 Command-line:
 
 ```bash shouldWrap
-psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 <Admonition type="note">
-Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
+Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending the `sslmode` parameter to your connection string. For more information, see [Connect to Neon securely](/docs/connect/connect-securely).
 </Admonition>
 
 ## Where do I obtain a password?

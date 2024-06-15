@@ -9,12 +9,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.demos);
 
 const DemoPage = () => (
-  <Layout
-    className="bg-black-new text-white"
-    headerTheme="black-new"
-    footerTheme="black-new"
-    footerWithTopBorder
-  >
+  <Layout>
     <Hero />
     <DemoList />
     <CTAWithElephant

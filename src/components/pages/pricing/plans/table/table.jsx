@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
+import InfoIcon from 'components/shared/info-icon';
 import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import checkIcon from 'icons/pricing/check.svg';
-import sendGtagEvent from 'utils/send-gtag-event';
 
 import tableData from '../data/plans.json';
 
@@ -62,16 +62,14 @@ const TableHeading = ({
         dangerouslySetInnerHTML={{ __html: price }}
       />
       <Button
-        className="mt-[18px] h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-4 xl:h-9 xl:max-w-[160px] lg:w-[140px] sm:max-w-none"
+        className={clsx(
+          'mt-[18px] h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-4 xl:h-9 xl:max-w-[160px] lg:w-[140px] sm:max-w-none',
+          !isFeaturedPlan && 'bg-opacity-80'
+        )}
         size="xs"
         theme={isFeaturedPlan ? 'primary' : 'gray-15'}
         to={buttonUrl}
-        onClick={() => {
-          sendGtagEvent('pricing_comparison_table', {
-            event_label: label,
-            event_position: 'top',
-          });
-        }}
+        tag_name={`Details Table Top > ${label}`}
       >
         {buttonText}
       </Button>
@@ -143,7 +141,7 @@ const Table = () => {
         className={clsx(
           'scrollbar-hidden relative flex w-full pt-5 lg:overflow-x-auto lg:pr-4',
           isHiddenItems &&
-            'after:absolute after:inset-x-0 after:bottom-0 after:h-1.5 after:bg-black-new'
+            'after:absolute after:inset-x-0 after:bottom-0 after:h-1.5 after:bg-black-pure'
         )}
       >
         {Object.keys(tableData.headings).map((key, i, arr) => {
@@ -157,7 +155,7 @@ const Table = () => {
                 isScaleColumn &&
                   'basis-[308px] before:absolute before:inset-x-7 before:inset-y-0 before:z-0 before:rounded-md before:border before:border-gray-new-15 before:bg-pricing-table-featured-column xl:basis-[236px] xl:before:inset-x-5',
                 isLabelsColumn &&
-                  'z-30 flex-1 bg-black-new lg:sticky  lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)]',
+                  'z-30 flex-1 bg-black-pure lg:sticky lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)]',
                 i === 1 && 'min-w-[180px] basis-[252px] xl:basis-[196px] lg:basis-[180px]',
                 !isScaleColumn &&
                   i !== 1 &&
@@ -223,6 +221,41 @@ const Table = () => {
                     );
                   }
 
+                  let cell;
+                  if (typeof item[key] === 'boolean') {
+                    cell = item[key] ? (
+                      <img src={checkIcon} width="24" height="24" alt="" loading="lazy" />
+                    ) : (
+                      <span className="inline-block h-[1.4px] w-4 rounded-full bg-gray-new-30" />
+                    );
+                  } else if (typeof item[key] === 'object') {
+                    const { title, info } = item[key];
+                    cell = (
+                      <div className="font-light leading-snug tracking-extra-tight">
+                        {title}
+                        {info && (
+                          <span className="whitespace-nowrap">
+                            &nbsp;
+                            <InfoIcon
+                              className="relative top-0.5 ml-0.5 inline-block"
+                              tooltip={info}
+                              tooltipId={`${key}_tooltip_${index}`}
+                            />
+                          </span>
+                        )}
+                      </div>
+                    );
+                  } else {
+                    cell = (
+                      <span
+                        className="flex flex-col gap-y-1 font-light leading-snug tracking-extra-tight [&_span]:text-sm [&_span]:text-gray-new-60"
+                        data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
+                        data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
+                        dangerouslySetInnerHTML={{ __html: item[key] }}
+                      />
+                    );
+                  }
+
                   return (
                     <li
                       className={clsx(
@@ -247,28 +280,9 @@ const Table = () => {
                       data-row-id={index}
                       key={index}
                     >
-                      {typeof item[key] === 'boolean' ? (
-                        <>
-                          {item[key] ? (
-                            <img src={checkIcon} width="24" height="24" alt="" loading="lazy" />
-                          ) : (
-                            <span className="inline-block h-[1.4px] w-4 rounded-full bg-gray-new-30" />
-                          )}
-                        </>
-                      ) : (
-                        <span
-                          className="flex flex-col gap-y-1 font-light leading-snug tracking-extra-tight [&_span]:text-sm [&_span]:text-gray-new-60"
-                          data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
-                          data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
-                          dangerouslySetInnerHTML={{ __html: item[key] }}
-                        />
-                      )}
+                      {cell}
                       {item[`${key}_tooltip`] && (
-                        <Tooltip
-                          className="w-sm z-20"
-                          id={`${key}_tooltip_${index}`}
-                          place="top-center"
-                        />
+                        <Tooltip className="w-sm z-20" id={`${key}_tooltip_${index}`} />
                       )}
                     </li>
                   );
@@ -279,17 +293,13 @@ const Table = () => {
                   className={clsx(
                     isScaleColumn && 'ml-[52px] xl:ml-[38px]',
                     i === 1 && 'lg:ml-5',
-                    'relative z-20 mt-8 h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-6 xl:h-9 xl:max-w-[160px] lg:w-[140px] sm:max-w-none'
+                    'relative z-20 mt-8 h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-6 xl:h-9 xl:max-w-[160px] lg:w-[140px] sm:max-w-none',
+                    !isScaleColumn && 'bg-opacity-80'
                   )}
                   size="xs"
                   theme={isScaleColumn ? 'primary' : 'gray-15'}
                   to={labelList[key].buttonUrl}
-                  onClick={() => {
-                    sendGtagEvent('pricing_comparison_table', {
-                      event_label: labelList[key].label,
-                      event_position: 'bottom',
-                    });
-                  }}
+                  tag_name={`Details Table Bottom > ${labelList[key].label}`}
                 >
                   {labelList[key].buttonText}
                 </Button>

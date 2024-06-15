@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { LazyMotion, m, domAnimation } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -22,8 +22,17 @@ const variantsAnimation = {
   },
 };
 
-const Item = ({ question, answer, linkText = null, linkUrl = null, linkLabel = null, index }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Item = ({
+  question,
+  answer,
+  id = null,
+  linkText = null,
+  linkUrl = null,
+  linkLabel = null,
+  initialState = 'closed',
+  index,
+}) => {
+  const [isOpen, setIsOpen] = useState(initialState === 'open');
 
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
@@ -36,7 +45,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, linkLabel = n
   };
 
   return (
-    <li className="border-b border-gray-new-20 py-3.5">
+    <li className="border-b border-gray-new-20 py-3.5" id={id}>
       <button
         className="relative flex w-full items-start gap-4 text-left after:absolute after:-inset-y-3.5 after:left-0 after:w-full"
         type="button"
@@ -57,7 +66,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, linkLabel = n
       </button>
       <LazyMotion features={domAnimation}>
         <m.div
-          initial="closed"
+          initial={initialState}
           animate={isOpen ? 'open' : 'closed'}
           variants={variantsAnimation}
           transition={{
@@ -67,7 +76,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, linkLabel = n
         >
           <p
             className={clsx(
-              'with-link-primary pl-[42px] pr-24 pt-2.5 text-base font-light leading-tight text-gray-new-94 xl:pr-12 lg:pr-0',
+              'with-link-primary pl-[42px] pr-24 pt-2.5 text-base font-light leading-tight text-gray-new-80 xl:pr-12 lg:pr-0',
               linkText && linkUrl ? 'pb-0' : 'pb-2.5'
             )}
             dangerouslySetInnerHTML={{ __html: answer }}
@@ -92,9 +101,11 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, linkLabel = n
 Item.propTypes = {
   question: PropTypes.string.isRequired,
   answer: PropTypes.string.isRequired,
+  id: PropTypes.string,
   linkText: PropTypes.string,
   linkUrl: PropTypes.string,
   linkLabel: PropTypes.string,
+  initialState: PropTypes.string,
   index: PropTypes.number.isRequired,
 };
 

@@ -2,8 +2,8 @@
 
 ## 46.6. Database Access [#](#PLPYTHON-DATABASE)
 
-  * [46.6.1. Database Access Functions](plpython-database#PLPYTHON-DATABASE-ACCESS-FUNCS)
-  * [46.6.2. Trapping Errors](plpython-database#PLPYTHON-TRAPPING)
+- [46.6.1. Database Access Functions](plpython-database#PLPYTHON-DATABASE-ACCESS-FUNCS)
+- [46.6.2. Trapping Errors](plpython-database#PLPYTHON-TRAPPING)
 
 The PL/Python language module automatically imports a Python module called `plpy`. The functions and constants in this module are available to you in the Python code as `plpy.foo`.
 
@@ -13,11 +13,11 @@ The PL/Python language module automatically imports a Python module called `plpy
 
 The `plpy` module provides several functions to execute database commands:
 
-* `plpy.execute(query [, limit])`
+- `plpy.execute(query [, limit])`
 
   Calling `plpy.execute` with a query string and an optional row limit argument causes that query to be run and the result to be returned in a result object.
 
-  If *`limit`* is specified and is greater than zero, then `plpy.execute` retrieves at most *`limit`* rows, much as if the query included a `LIMIT` clause. Omitting *`limit`* or specifying it as zero results in no row limit.
+  If _`limit`_ is specified and is greater than zero, then `plpy.execute` retrieves at most _`limit`_ rows, much as if the query included a `LIMIT` clause. Omitting _`limit`_ or specifying it as zero results in no row limit.
 
   The result object emulates a list or dictionary object. The result object can be accessed by row number and column name. For example:
 
@@ -35,21 +35,21 @@ The `plpy` module provides several functions to execute database commands:
 
   The result object has these additional methods:
 
-  * `nrows()`
+  - `nrows()`
 
     Returns the number of rows processed by the command. Note that this is not necessarily the same as the number of rows returned. For example, an `UPDATE` command will set this value but won't return any rows (unless `RETURNING` is used).
 
-  * `status()`
+  - `status()`
 
     The `SPI_execute()` return value.
 
-  * `colnames()``coltypes()``coltypmods()`
+  - `colnames()``coltypes()``coltypmods()`
 
     Return a list of column names, list of column type OIDs, and list of type-specific type modifiers for the columns, respectively.
 
     These methods raise an exception when called on a result object from a command that did not produce a result set, e.g., `UPDATE` without `RETURNING`, or `DROP TABLE`. But it is OK to use these methods on a result set containing zero rows.
 
-  * `__str__()`
+  - `__str__()`
 
     The standard `__str__` method is defined so that it is possible for example to debug query execution results using `plpy.debug(rv)`.
 
@@ -57,7 +57,7 @@ The `plpy` module provides several functions to execute database commands:
 
   Note that calling `plpy.execute` will cause the entire result set to be read into memory. Only use that function when you are sure that the result set will be relatively small. If you don't want to risk excessive memory usage when fetching large results, use `plpy.cursor` rather than `plpy.execute`.
 
-* `plpy.prepare(query [, argtypes])``plpy.execute(plan [, arguments [, limit]])`
+- `plpy.prepare(query [, argtypes])``plpy.execute(plan [, arguments [, limit]])`
 
   `plpy.prepare` prepares the execution plan for a query. It is called with a query string and a list of parameter types, if you have parameter references in the query. For example:
 
@@ -96,7 +96,7 @@ The `plpy` module provides several functions to execute database commands:
   $$ LANGUAGE plpython3u;
   ```
 
-* `plpy.cursor(query)``plpy.cursor(plan [, arguments])`
+- `plpy.cursor(query)``plpy.cursor(plan [, arguments])`
 
   The `plpy.cursor` function accepts the same arguments as `plpy.execute` (except for the row limit) and returns a cursor object, which allows you to process large result sets in smaller chunks. As with `plpy.execute`, either a query string or a plan object along with a list of arguments can be used, or the `cursor` function can be called as a method of the plan object.
 

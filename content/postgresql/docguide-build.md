@@ -2,11 +2,11 @@
 
 ## J.3. Building the Documentation with Make [#](#DOCGUIDE-BUILD)
 
-  * [J.3.1. HTML](docguide-build#DOCGUIDE-BUILD-HTML)
-  * [J.3.2. Manpages](docguide-build#DOCGUIDE-BUILD-MANPAGES)
-  * [J.3.3. PDF](docguide-build#DOCGUIDE-BUILD-PDF)
-  * [J.3.4. Plain Text Files](docguide-build#DOCGUIDE-BUILD-PLAIN-TEXT)
-  * [J.3.5. Syntax Check](docguide-build#DOCGUIDE-BUILD-SYNTAX-CHECK)
+- [J.3.1. HTML](docguide-build#DOCGUIDE-BUILD-HTML)
+- [J.3.2. Manpages](docguide-build#DOCGUIDE-BUILD-MANPAGES)
+- [J.3.3. PDF](docguide-build#DOCGUIDE-BUILD-PDF)
+- [J.3.4. Plain Text Files](docguide-build#DOCGUIDE-BUILD-PLAIN-TEXT)
+- [J.3.5. Syntax Check](docguide-build#DOCGUIDE-BUILD-SYNTAX-CHECK)
 
 Once you have everything set up, change to the directory `doc/src/sgml` and run one of the commands described in the following subsections to build the documentation. (Remember to use GNU make.)
 
@@ -49,14 +49,14 @@ doc/src/sgml$ make man
 
 To produce a PDF rendition of the documentation using FOP, you can use one of the following commands, depending on the preferred paper format:
 
-* For A4 format:
+- For A4 format:
 
   ```
 
   doc/src/sgml$ make postgres-A4.pdf
   ```
 
-* For U.S. letter format:
+- For U.S. letter format:
 
   ```
 

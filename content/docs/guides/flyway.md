@@ -2,7 +2,7 @@
 title: Get started with Flyway and Neon
 subtitle: Learn how to manage schema changes in Neon with Flyway
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.283Z'
+updatedOn: '2024-06-14T07:55:54.391Z'
 ---
 
 Flyway is a database migration tool that facilitates version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
@@ -21,19 +21,19 @@ This guide steps you through installing the Flyway command-line tool, configurin
 
 2. Extract the Flyway files. For example:
 
-    ```bash
-    cd ~/Downloads
-    tar -xzvf flyway-commandline-x.y.z-linux-x64.tar.gz -C ~/
-    ```
+   ```bash
+   cd ~/Downloads
+   tar -xzvf flyway-commandline-x.y.z-linux-x64.tar.gz -C ~/
+   ```
 
 3. Open a command prompt to view the contents of your Flyway installation:
 
-    ```bash
-    cd ~/flyway-x.y.z
-    ls
-    assets  drivers  flyway.cmd  jre  licenses    rules
-    conf    flyway   jars        lib  README.txt  sql
-    ```
+   ```bash
+   cd ~/flyway-x.y.z
+   ls
+   assets  drivers  flyway.cmd  jre  licenses    rules
+   conf    flyway   jars        lib  README.txt  sql
+   ```
 
 ## Set your path variable
 
@@ -107,7 +107,7 @@ Migrating schema "PUBLIC" to version 1 - Create person table
 Successfully applied 1 migration to schema "PUBLIC" (execution time 00:00.033s)
 ```
 
-To verify that the `person` table was created, you can view it on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+To verify that the `person` table was created, you can view it on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
 
 ## Add a second migration
 
@@ -136,7 +136,7 @@ Successfully applied 1 migration to schema "public", now at version v2 (executio
 A Flyway report has been generated here: /home/alex/flyway-x.y.z/sql/report.html
 ```
 
-You can verify that the data was added by viewing the table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+You can verify that the data was added by viewing the table on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
 
 ## View your schema migration history
 
@@ -155,7 +155,7 @@ Schema version: 2
 A Flyway report has been generated here: /home/alex/flyway-x.y.z/sql/report.html
 ```
 
-You can also view the table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+You can also view the table on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
 
 ## Next steps
 

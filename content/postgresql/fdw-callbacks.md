@@ -2,18 +2,18 @@
 
 ## 59.2. Foreign Data Wrapper Callback Routines [#](#FDW-CALLBACKS)
 
-  * [59.2.1. FDW Routines for Scanning Foreign Tables](fdw-callbacks#FDW-CALLBACKS-SCAN)
-  * [59.2.2. FDW Routines for Scanning Foreign Joins](fdw-callbacks#FDW-CALLBACKS-JOIN-SCAN)
-  * [59.2.3. FDW Routines for Planning Post-Scan/Join Processing](fdw-callbacks#FDW-CALLBACKS-UPPER-PLANNING)
-  * [59.2.4. FDW Routines for Updating Foreign Tables](fdw-callbacks#FDW-CALLBACKS-UPDATE)
-  * [59.2.5. FDW Routines for `TRUNCATE`](fdw-callbacks#FDW-CALLBACKS-TRUNCATE)
-  * [59.2.6. FDW Routines for Row Locking](fdw-callbacks#FDW-CALLBACKS-ROW-LOCKING)
-  * [59.2.7. FDW Routines for `EXPLAIN`](fdw-callbacks#FDW-CALLBACKS-EXPLAIN)
-  * [59.2.8. FDW Routines for `ANALYZE`](fdw-callbacks#FDW-CALLBACKS-ANALYZE)
-  * [59.2.9. FDW Routines for `IMPORT FOREIGN SCHEMA`](fdw-callbacks#FDW-CALLBACKS-IMPORT)
-  * [59.2.10. FDW Routines for Parallel Execution](fdw-callbacks#FDW-CALLBACKS-PARALLEL)
-  * [59.2.11. FDW Routines for Asynchronous Execution](fdw-callbacks#FDW-CALLBACKS-ASYNC)
-  * [59.2.12. FDW Routines for Reparameterization of Paths](fdw-callbacks#FDW-CALLBACKS-REPARAMETERIZE-PATHS)
+- [59.2.1. FDW Routines for Scanning Foreign Tables](fdw-callbacks#FDW-CALLBACKS-SCAN)
+- [59.2.2. FDW Routines for Scanning Foreign Joins](fdw-callbacks#FDW-CALLBACKS-JOIN-SCAN)
+- [59.2.3. FDW Routines for Planning Post-Scan/Join Processing](fdw-callbacks#FDW-CALLBACKS-UPPER-PLANNING)
+- [59.2.4. FDW Routines for Updating Foreign Tables](fdw-callbacks#FDW-CALLBACKS-UPDATE)
+- [59.2.5. FDW Routines for `TRUNCATE`](fdw-callbacks#FDW-CALLBACKS-TRUNCATE)
+- [59.2.6. FDW Routines for Row Locking](fdw-callbacks#FDW-CALLBACKS-ROW-LOCKING)
+- [59.2.7. FDW Routines for `EXPLAIN`](fdw-callbacks#FDW-CALLBACKS-EXPLAIN)
+- [59.2.8. FDW Routines for `ANALYZE`](fdw-callbacks#FDW-CALLBACKS-ANALYZE)
+- [59.2.9. FDW Routines for `IMPORT FOREIGN SCHEMA`](fdw-callbacks#FDW-CALLBACKS-IMPORT)
+- [59.2.10. FDW Routines for Parallel Execution](fdw-callbacks#FDW-CALLBACKS-PARALLEL)
+- [59.2.11. FDW Routines for Asynchronous Execution](fdw-callbacks#FDW-CALLBACKS-ASYNC)
+- [59.2.12. FDW Routines for Reparameterization of Paths](fdw-callbacks#FDW-CALLBACKS-REPARAMETERIZE-PATHS)
 
 The FDW handler function returns a palloc'd `FdwRoutine` struct containing pointers to the callback functions described below. The scan-related functions are required, the rest are optional.
 
@@ -153,7 +153,7 @@ GetForeignUpperPaths(PlannerInfo *root,
                      void *extra);
 ```
 
-Create possible access paths for *upper relation* processing, which is the planner's term for all post-scan/join query processing, such as aggregation, window functions, sorting, and table updates. This optional function is called during query planning. Currently, it is called only if all base relation(s) involved in the query belong to the same FDW. This function should generate `ForeignPath` path(s) for any post-scan/join processing that the FDW knows how to perform remotely (use `create_foreign_upper_path` to build them), and call `add_path` to add these paths to the indicated upper relation. As with `GetForeignJoinPaths`, it is not necessary that this function succeed in creating any paths, since paths involving local processing are always possible.
+Create possible access paths for _upper relation_ processing, which is the planner's term for all post-scan/join query processing, such as aggregation, window functions, sorting, and table updates. This optional function is called during query planning. Currently, it is called only if all base relation(s) involved in the query belong to the same FDW. This function should generate `ForeignPath` path(s) for any post-scan/join processing that the FDW knows how to perform remotely (use `create_foreign_upper_path` to build them), and call `add_path` to add these paths to the indicated upper relation. As with `GetForeignJoinPaths`, it is not necessary that this function succeed in creating any paths, since paths involving local processing are always possible.
 
 The `stage` parameter identifies which post-scan/join step is currently being considered. `output_rel` is the upper relation that should receive paths representing computation of this step, and `input_rel` is the relation representing the input to this step. The `extra` parameter provides additional details, currently, it is set only for `UPPERREL_PARTIAL_GROUP_AGG` or `UPPERREL_GROUP_AGG`, in which case it points to a `GroupPathExtraData` structure; or for `UPPERREL_FINAL`, in which case it points to a `FinalPathExtraData` structure. (Note that `ForeignPath` paths added to `output_rel` would typically not have any direct dependency on paths of the `input_rel`, since their processing is expected to be done externally. However, examining paths previously generated for the previous processing step can be useful to avoid redundant planning work.)
 
@@ -433,7 +433,7 @@ If the `ExecForeignTruncate` pointer is set to `NULL`, attempts to truncate fore
 
 ### 59.2.6. FDW Routines for Row Locking [#](#FDW-CALLBACKS-ROW-LOCKING)
 
-If an FDW wishes to support *late row locking* (as described in [Section 59.5](fdw-row-locking)), it must provide the following callback functions:
+If an FDW wishes to support _late row locking_ (as described in [Section 59.5](fdw-row-locking)), it must provide the following callback functions:
 
 ```
 
@@ -537,7 +537,7 @@ AnalyzeForeignTable(Relation relation,
                     BlockNumber *totalpages);
 ```
 
-This function is called when [ANALYZE](sql-analyze) is executed on a foreign table. If the FDW can collect statistics for this foreign table, it should return `true`, and provide a pointer to a function that will collect sample rows from the table in *`func`*, plus the estimated size of the table in pages in *`totalpages`*. Otherwise, return `false`.
+This function is called when [ANALYZE](sql-analyze) is executed on a foreign table. If the FDW can collect statistics for this foreign table, it should return `true`, and provide a pointer to a function that will collect sample rows from the table in _`func`_, plus the estimated size of the table in pages in _`totalpages`_. Otherwise, return `false`.
 
 If the FDW does not support collecting statistics for any tables, the `AnalyzeForeignTable` pointer can be set to `NULL`.
 
@@ -554,7 +554,7 @@ AcquireSampleRowsFunc(Relation relation,
                       double *totaldeadrows);
 ```
 
-A random sample of up to *`targrows`* rows should be collected from the table and stored into the caller-provided *`rows`* array. The actual number of rows collected must be returned. In addition, store estimates of the total numbers of live and dead rows in the table into the output parameters *`totalrows`* and *`totaldeadrows`*. (Set *`totaldeadrows`* to zero if the FDW does not have any concept of dead rows.)
+A random sample of up to _`targrows`_ rows should be collected from the table and stored into the caller-provided _`rows`_ array. The actual number of rows collected must be returned. In addition, store estimates of the total numbers of live and dead rows in the table into the output parameters _`totalrows`_ and _`totaldeadrows`_. (Set _`totaldeadrows`_ to zero if the FDW does not have any concept of dead rows.)
 
 [#id](#FDW-CALLBACKS-IMPORT)
 

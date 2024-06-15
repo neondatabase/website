@@ -10,13 +10,13 @@ import {
   getAllPosts,
   getAllChangelogPosts,
   getBreadcrumbs,
-  getDocPreviousAndNextLinks,
+  getNavigationLinks,
   getFlatSidebar,
   getPostBySlug,
   getSidebar,
-  getTableOfContents,
 } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
+import getTableOfContents from 'utils/get-table-of-contents';
 
 const isUnusedOrSharedContent = (slug) =>
   slug.includes('unused/') ||
@@ -49,21 +49,22 @@ export async function generateMetadata({ params }) {
 
   const isChangelog = currentSlug === 'changelog';
 
-  if (!post) return notFound();
+  if (!isChangelog && !post) return notFound();
 
-  const {
-    data: { title },
-    excerpt,
-  } = post;
-
+  const title = post?.data?.title || 'Changelog';
   const encodedTitle = Buffer.from(title).toString('base64');
+
+  const flatSidebar = await getFlatSidebar(getSidebar());
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
+  const category = breadcrumbs.length > 0 ? breadcrumbs[0].title : '';
+  const encodedCategory = category && Buffer.from(category).toString('base64');
 
   return getMetadata({
     title: `${title} - Neon Docs`,
-    description: isChangelog ? 'The latest product updates from Neon' : excerpt,
+    description: isChangelog ? 'The latest product updates from Neon' : post.excerpt,
     imagePath:
       title.length < MAX_TITLE_LENGTH
-        ? `${VERCEL_URL}/docs/og?title=${encodedTitle}`
+        ? `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`
         : DEFAULT_IMAGE_PATH,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
@@ -71,7 +72,7 @@ export async function generateMetadata({ params }) {
   });
 }
 
-export default async function DocPost({ params }) {
+const DocPost = async ({ params }) => {
   const { slug } = params;
   const currentSlug = slug.join('/');
 
@@ -83,14 +84,31 @@ export default async function DocPost({ params }) {
   const allChangelogPosts = await getAllChangelogPosts();
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
-  const navigationLinks = getDocPreviousAndNextLinks(currentSlug, flatSidebar);
+  const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
   const fileOriginPath = isChangelogIndex
     ? process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH
     : `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;
 
-  if (!getPostBySlug(currentSlug, DOCS_DIR_PATH)) return notFound();
+  const post = getPostBySlug(currentSlug, DOCS_DIR_PATH);
+  if (!isChangelogIndex && !post) return notFound();
 
-  const { data, content } = getPostBySlug(currentSlug, DOCS_DIR_PATH);
+  if (isChangelogIndex) {
+    return (
+      <Post
+        data={{}}
+        content={{}}
+        breadcrumbs={[]}
+        currentSlug={currentSlug}
+        fileOriginPath={fileOriginPath}
+        changelogPosts={allChangelogPosts}
+        navigationLinks={navigationLinks}
+        changelogActiveLabel="all"
+        isChangelog
+      />
+    );
+  }
+
+  const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
 
   const jsonLd = {
@@ -114,13 +132,12 @@ export default async function DocPost({ params }) {
         data={data}
         breadcrumbs={breadcrumbs}
         navigationLinks={navigationLinks}
-        isChangelog={isChangelogIndex}
-        changelogActiveLabel="all"
         currentSlug={currentSlug}
         fileOriginPath={fileOriginPath}
-        changelogPosts={allChangelogPosts}
         tableOfContents={tableOfContents}
       />
     </>
   );
-}
+};
+
+export default DocPost;

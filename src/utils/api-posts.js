@@ -1,5 +1,7 @@
+import { cache } from 'react';
+
 import { BLOG_POSTS_PER_PAGE } from 'constants/blog';
-import { gql, graphQLClient, graphQLClientAdmin } from 'lib/graphQLClient';
+import { gql, graphQLClientAdmin, fetchGraphQL, graphQLClient } from 'lib/graphQLClient';
 
 import getAuthToken from './api-auth';
 
@@ -17,7 +19,7 @@ const POST_SEO_FRAGMENT = gql`
   }
 `;
 
-const getAllWpBlogCategories = async () => {
+const getAllWpBlogCategories = cache(async () => {
   const categoriesQuery = gql`
     query Categories {
       categories {
@@ -33,13 +35,13 @@ const getAllWpBlogCategories = async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(categoriesQuery);
+  const data = await fetchGraphQL(graphQLClient).request(categoriesQuery);
   const filteredCategories = data?.categories?.nodes.filter(
     (category) => category.slug !== 'uncategorized' && category.posts.nodes.length > 0
   );
 
   return [...filteredCategories, { name: 'All posts', slug: 'all-posts' }];
-};
+});
 
 const fetchWpPostsByCategorySlug = async (slug, after) => {
   const postsQuery = gql`
@@ -129,7 +131,7 @@ const fetchWpPostsByCategorySlug = async (slug, after) => {
   `;
 
   if (slug === 'all-posts') {
-    const allPostsData = await graphQLClient.request(allPostsQuery, {
+    const allPostsData = await fetchGraphQL(graphQLClient).request(allPostsQuery, {
       first: BLOG_POSTS_PER_PAGE,
       after,
     });
@@ -138,7 +140,7 @@ const fetchWpPostsByCategorySlug = async (slug, after) => {
   }
   const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
 
-  const data = await graphQLClient.request(postsQuery, {
+  const data = await fetchGraphQL(graphQLClient).request(postsQuery, {
     first: BLOG_POSTS_PER_PAGE,
     after,
     categoryName,
@@ -147,7 +149,7 @@ const fetchWpPostsByCategorySlug = async (slug, after) => {
   return data?.posts;
 };
 
-const getWpPostsByCategorySlug = async (slug) => {
+const getWpPostsByCategorySlug = cache(async (slug) => {
   let allPosts = [];
   let afterCursor = null;
 
@@ -161,9 +163,9 @@ const getWpPostsByCategorySlug = async (slug) => {
   }
 
   return allPosts;
-};
+});
 
-const getWpBlogPage = async () => {
+const getWpBlogPage = cache(async () => {
   const blogPageQuery = gql`
     query BlogPage {
       page(idType: URI, id: "blog") {
@@ -405,10 +407,10 @@ const getWpBlogPage = async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(blogPageQuery);
+  const data = await fetchGraphQL(graphQLClient).request(blogPageQuery);
 
   return data?.page?.template?.pageBlog;
-};
+});
 
 const fetchAllWpPosts = async (after) => {
   const allPostsQuery = gql`
@@ -457,7 +459,7 @@ const fetchAllWpPosts = async (after) => {
       }
     }
   `;
-  const data = await graphQLClient.request(allPostsQuery, {
+  const data = await fetchGraphQL(graphQLClient).request(allPostsQuery, {
     first: BLOG_POSTS_PER_PAGE,
     after,
   });
@@ -465,7 +467,7 @@ const fetchAllWpPosts = async (after) => {
   return data?.posts;
 };
 
-const getAllWpPosts = async () => {
+const getAllWpPosts = cache(async () => {
   let allPosts = [];
   let afterCursor = null;
 
@@ -479,9 +481,9 @@ const getAllWpPosts = async () => {
   }
 
   return allPosts;
-};
+});
 
-const getWpPostBySlug = async (slug) => {
+const getWpPostBySlug = cache(async (slug) => {
   const postBySlugQuery = gql`
     query PostBySlug($id: ID!) {
       post(id: $id, idType: URI) {
@@ -522,7 +524,6 @@ const getWpPostBySlug = async (slug) => {
         }
         ...wpPostSeo
       }
-
       posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
         nodes {
           categories {
@@ -563,7 +564,7 @@ const getWpPostBySlug = async (slug) => {
     ${POST_SEO_FRAGMENT}
   `;
 
-  const data = await graphQLClient.request(postBySlugQuery, { id: slug });
+  const data = await fetchGraphQL(graphQLClient).request(postBySlugQuery, { id: slug });
 
   const sortedPosts = data?.posts?.nodes.filter((post) => post.slug !== slug).slice(0, 3);
 
@@ -571,7 +572,7 @@ const getWpPostBySlug = async (slug) => {
     post: data?.post,
     relatedPosts: sortedPosts,
   };
-};
+});
 
 // Query that executes when user requests a preview on a CMS,
 // the difference from a standard post query is that it uses Admin token to access unpublished posts and revisions of published posts
@@ -800,10 +801,12 @@ const getWpPreviewPost = async (id) => {
 const getAllWpCaseStudiesPosts = async () => {
   const caseStudiesQuery = gql`
     query CaseStudies {
-      caseStudies(where: { orderby: { field: DATE, order: ASC } }) {
+      caseStudies(where: { orderby: { field: DATE, order: ASC } }, first: 24) {
         nodes {
           caseStudyPost {
             description
+            isInternal
+            externalUrl
             post {
               ... on Post {
                 slug
@@ -822,19 +825,19 @@ const getAllWpCaseStudiesPosts = async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(caseStudiesQuery);
+  const data = await fetchGraphQL(graphQLClient).request(caseStudiesQuery);
 
   return data?.caseStudies?.nodes;
 };
 
 export {
   fetchAllWpPosts,
-  getAllWpPosts,
-  getWpPostBySlug,
-  getWpPreviewPostData,
-  getWpPreviewPost,
-  getWpBlogPage,
   getAllWpBlogCategories,
-  getWpPostsByCategorySlug,
   getAllWpCaseStudiesPosts,
+  getAllWpPosts,
+  getWpBlogPage,
+  getWpPostBySlug,
+  getWpPostsByCategorySlug,
+  getWpPreviewPost,
+  getWpPreviewPostData,
 };

@@ -3,7 +3,7 @@ title: Use Exograph with Neon
 subtitle: Build GraphQL backends in minutes with Exograph and Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-01-27T09:01:18.978Z'
+updatedOn: '2024-06-14T07:55:54.390Z'
 ---
 
 _This guide was contributed by the Exograph team_
@@ -65,7 +65,7 @@ You can create a todo by running the following mutation:
 
 ```graphql
 mutation {
-  createTodo(data: {title: "Set up Exograph with Neon", completed: true}) {
+  createTodo(data: { title: "Set up Exograph with Neon", completed: true }) {
     id
   }
 }

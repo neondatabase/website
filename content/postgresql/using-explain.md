@@ -2,13 +2,11 @@
 
 ## 14.1. Using `EXPLAIN` [#](#USING-EXPLAIN)
 
-  * [14.1.1. `EXPLAIN` Basics](using-explain#USING-EXPLAIN-BASICS)
-  * [14.1.2. `EXPLAIN ANALYZE`](using-explain#USING-EXPLAIN-ANALYZE)
-  * [14.1.3. Caveats](using-explain#USING-EXPLAIN-CAVEATS)
+- [14.1.1. `EXPLAIN` Basics](using-explain#USING-EXPLAIN-BASICS)
+- [14.1.2. `EXPLAIN ANALYZE`](using-explain#USING-EXPLAIN-ANALYZE)
+- [14.1.3. Caveats](using-explain#USING-EXPLAIN-CAVEATS)
 
-
-
-PostgreSQL devises a *query plan* for each query it receives. Choosing the right plan to match the query structure and the properties of the data is absolutely critical for good performance, so the system includes a complex *planner* that tries to choose good plans. You can use the [`EXPLAIN`](sql-explain) command to see what query plan the planner creates for any query. Plan-reading is an art that requires some experience to master, but this section attempts to cover the basics.
+PostgreSQL devises a _query plan_ for each query it receives. Choosing the right plan to match the query structure and the properties of the data is absolutely critical for good performance, so the system includes a complex _planner_ that tries to choose good plans. You can use the [`EXPLAIN`](sql-explain) command to see what query plan the planner creates for any query. Plan-reading is an art that requires some experience to master, but this section attempts to cover the basics.
 
 Examples in this section are drawn from the regression test database after doing a `VACUUM ANALYZE`, using 9.3 development sources. You should be able to get similar results if you try the examples yourself, but your estimated costs and row counts might vary slightly because `ANALYZE`'s statistics are random samples rather than exact, and because costs are inherently somewhat platform-dependent.
 
@@ -18,7 +16,7 @@ The examples use `EXPLAIN`'s default “text” output format, which is compact 
 
 ### 14.1.1. `EXPLAIN` Basics [#](#USING-EXPLAIN-BASICS)
 
-The structure of a query plan is a tree of *plan nodes*. Nodes at the bottom level of the tree are scan nodes: they return raw rows from a table. There are different types of scan nodes for different table access methods: sequential scans, index scans, and bitmap index scans. There are also non-table row sources, such as `VALUES` clauses and set-returning functions in `FROM`, which have their own scan node types. If the query requires joining, aggregation, sorting, or other operations on the raw rows, then there will be additional nodes above the scan nodes to perform these operations. Again, there is usually more than one possible way to do these operations, so different node types can appear here too. The output of `EXPLAIN` has one line for each node in the plan tree, showing the basic node type plus the cost estimates that the planner made for the execution of that plan node. Additional lines might appear, indented from the node's summary line, to show additional properties of the node. The very first line (the summary line for the topmost node) has the estimated total execution cost for the plan; it is this number that the planner seeks to minimize.
+The structure of a query plan is a tree of _plan nodes_. Nodes at the bottom level of the tree are scan nodes: they return raw rows from a table. There are different types of scan nodes for different table access methods: sequential scans, index scans, and bitmap index scans. There are also non-table row sources, such as `VALUES` clauses and set-returning functions in `FROM`, which have their own scan node types. If the query requires joining, aggregation, sorting, or other operations on the raw rows, then there will be additional nodes above the scan nodes to perform these operations. Again, there is usually more than one possible way to do these operations, so different node types can appear here too. The output of `EXPLAIN` has one line for each node in the plan tree, showing the basic node type plus the cost estimates that the planner made for the execution of that plan node. Additional lines might appear, indented from the node's summary line, to show additional properties of the node. The very first line (the summary line for the topmost node) has the estimated total execution cost for the plan; it is this number that the planner seeks to minimize.
 
 Here is a trivial example, just to show what the output looks like:
 
@@ -32,15 +30,15 @@ EXPLAIN SELECT * FROM tenk1;
 
 Since this query has no `WHERE` clause, it must scan all the rows of the table, so the planner has chosen to use a simple sequential scan plan. The numbers that are quoted in parentheses are (left to right):
 
-* Estimated start-up cost. This is the time expended before the output phase can begin, e.g., time to do the sorting in a sort node.
+- Estimated start-up cost. This is the time expended before the output phase can begin, e.g., time to do the sorting in a sort node.
 
-* Estimated total cost. This is stated on the assumption that the plan node is run to completion, i.e., all available rows are retrieved. In practice a node's parent node might stop short of reading all available rows (see the `LIMIT` example below).
+- Estimated total cost. This is stated on the assumption that the plan node is run to completion, i.e., all available rows are retrieved. In practice a node's parent node might stop short of reading all available rows (see the `LIMIT` example below).
 
-* Estimated number of rows output by this plan node. Again, the node is assumed to be run to completion.
+- Estimated number of rows output by this plan node. Again, the node is assumed to be run to completion.
 
-* Estimated average width of rows output by this plan node (in bytes).
+- Estimated average width of rows output by this plan node (in bytes).
 
-The costs are measured in arbitrary units determined by the planner's cost parameters (see [Section 20.7.2](runtime-config-query#RUNTIME-CONFIG-QUERY-CONSTANTS)). Traditional practice is to measure the costs in units of disk page fetches; that is, [seq\_page\_cost](runtime-config-query#GUC-SEQ-PAGE-COST) is conventionally set to `1.0` and the other cost parameters are set relative to that. The examples in this section are run with the default cost parameters.
+The costs are measured in arbitrary units determined by the planner's cost parameters (see [Section 20.7.2](runtime-config-query#RUNTIME-CONFIG-QUERY-CONSTANTS)). Traditional practice is to measure the costs in units of disk page fetches; that is, [seq_page_cost](runtime-config-query#GUC-SEQ-PAGE-COST) is conventionally set to `1.0` and the other cost parameters are set relative to that. The examples in this section are run with the default cost parameters.
 
 It's important to understand that the cost of an upper-level node includes the cost of all its child nodes. It's also important to realize that the cost only reflects things that the planner cares about. In particular, the cost does not consider the time spent transmitting result rows to the client, which could be an important factor in the real elapsed time; but the planner ignores it because it cannot change it by altering the plan. (Every correct plan will output the same row set, we trust.)
 
@@ -62,7 +60,7 @@ These numbers are derived very straightforwardly. If you do:
 SELECT relpages, reltuples FROM pg_class WHERE relname = 'tenk1';
 ```
 
-you will find that `tenk1` has 358 disk pages and 10000 rows. The estimated cost is computed as (disk pages read \* [seq\_page\_cost](runtime-config-query#GUC-SEQ-PAGE-COST)) + (rows scanned \* [cpu\_tuple\_cost](runtime-config-query#GUC-CPU-TUPLE-COST)). By default, `seq_page_cost` is 1.0 and `cpu_tuple_cost` is 0.01, so the estimated cost is (358 \* 1.0) + (10000 \* 0.01) = 458.
+you will find that `tenk1` has 358 disk pages and 10000 rows. The estimated cost is computed as (disk pages read \* [seq_page_cost](runtime-config-query#GUC-SEQ-PAGE-COST)) + (rows scanned \* [cpu_tuple_cost](runtime-config-query#GUC-CPU-TUPLE-COST)). By default, `seq_page_cost` is 1.0 and `cpu_tuple_cost` is 0.01, so the estimated cost is (358 \* 1.0) + (10000 \* 0.01) = 458.
 
 Now let's modify the query to add a `WHERE` condition:
 
@@ -75,7 +73,7 @@ EXPLAIN SELECT * FROM tenk1 WHERE unique1 < 7000;
    Filter: (unique1 < 7000)
 ```
 
-Notice that the `EXPLAIN` output shows the `WHERE` clause being applied as a “filter” condition attached to the Seq Scan plan node. This means that the plan node checks the condition for each row it scans, and outputs only the ones that pass the condition. The estimate of output rows has been reduced because of the `WHERE` clause. However, the scan will still have to visit all 10000 rows, so the cost hasn't decreased; in fact it has gone up a bit (by 10000 \* [cpu\_operator\_cost](runtime-config-query#GUC-CPU-OPERATOR-COST), to be exact) to reflect the extra CPU time spent checking the `WHERE` condition.
+Notice that the `EXPLAIN` output shows the `WHERE` clause being applied as a “filter” condition attached to the Seq Scan plan node. This means that the plan node checks the condition for each row it scans, and outputs only the ones that pass the condition. The estimate of output rows has been reduced because of the `WHERE` clause. However, the scan will still have to visit all 10000 rows, so the cost hasn't decreased; in fact it has gone up a bit (by 10000 \* [cpu_operator_cost](runtime-config-query#GUC-CPU-OPERATOR-COST), to be exact) to reflect the extra CPU time spent checking the `WHERE` condition.
 
 The actual number of rows this query would select is 7000, but the `rows` estimate is only approximate. If you try to duplicate this experiment, you will probably get a slightly different estimate; moreover, it can change after each `ANALYZE` command, because the statistics produced by `ANALYZE` are taken from a randomized sample of the table.
 
@@ -472,7 +470,7 @@ The `Execution time` shown by `EXPLAIN ANALYZE` includes executor start-up and s
 
 ### 14.1.3. Caveats [#](#USING-EXPLAIN-CAVEATS)
 
-There are two significant ways in which run times measured by `EXPLAIN ANALYZE` can deviate from normal execution of the same query. First, since no output rows are delivered to the client, network transmission costs and I/O conversion costs are not included. Second, the measurement overhead added by `EXPLAIN ANALYZE` can be significant, especially on machines with slow `gettimeofday()` operating-system calls. You can use the [pg\_test\_timing](pgtesttiming) tool to measure the overhead of timing on your system.
+There are two significant ways in which run times measured by `EXPLAIN ANALYZE` can deviate from normal execution of the same query. First, since no output rows are delivered to the client, network transmission costs and I/O conversion costs are not included. Second, the measurement overhead added by `EXPLAIN ANALYZE` can be significant, especially on machines with slow `gettimeofday()` operating-system calls. You can use the [pg_test_timing](pgtesttiming) tool to measure the overhead of timing on your system.
 
 `EXPLAIN` results should not be extrapolated to situations much different from the one you are actually testing; for example, results on a toy-sized table cannot be assumed to apply to large tables. The planner's cost estimates are not linear and so it might choose a different plan for a larger or smaller table. An extreme example is that on a table that only occupies one disk page, you'll nearly always get a sequential scan plan whether indexes are available or not. The planner realizes that it's going to take one disk page read to process the table in any case, so there's no value in expending additional page reads to look at an index. (We saw this happening in the `polygon_tbl` example above.)
 

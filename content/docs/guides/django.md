@@ -28,21 +28,31 @@ To create a Neon project:
 
 Connecting to Neon requires configuring database connection settings in your Django project's `settings.py` file.
 
+<Admonition type="note">
+To avoid the `endpiont ID is not specified` connection issue described [here](#connection-issues), be sure that you are using an up-to-date driver.
+</Admonition>
+
 In your Django project, navigate to the `DATABASES` section of your `settings.py` file and modify the connection details as shown:
 
 ```python
+# Add these at the top of your settings.py
+from os import getenv
+from dotenv import load_dotenv
+
+# Replace the DATABASES section of your settings.py with this
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '[dbname]',
-        'USER': '[user]',
-        'PASSWORD': '[password]',
-        'HOST': '[hostname]',
-        'PORT': '[port]',
-         'OPTIONS': {
-             'sslmode': 'require',
-        }
-    }
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': getenv('PGDATABASE'),
+    'USER': getenv('PGUSER'),
+    'PASSWORD': getenv('PGPASSWORD'),
+    'HOST': getenv('PGHOST'),
+    'PORT': getenv('PGPORT', 5432),
+    'OPTIONS': {
+      'sslmode': 'require',
+    },
+    'DISABLE_SERVER_SIDE_CURSORS': True,
+  }
 }
 ```
 
@@ -54,13 +64,9 @@ You can find all of the connection details listed above in the **Connection Deta
 
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings#databases), in the Django documentation.
 
-<Admonition type="note">
-Running Django tests is currently not supported. The Django test runner must be able to create a database for tests, which is not yet supported by Neon.
-</Admonition>
-
 ## Connection issues
 
-Django uses the `psycopg2` driver as the default adapter for Postgres. If you have an older version of that driver, you may encounter a `Endpoint ID is not specified` error when connecting to Neon. This error occurs if the client library used by your driver does not support the Server Name Indication (SNI) mechanism in TLS, which Neon uses to route incoming connections. The `psycopg2` driver uses the `libpq` client library, which supports SNI as of v14. You can check your `psycopg2` and `libpq` versions by starting a Django shell in your Django project and running the following commands:
+Django uses the `psycopg2` driver as the default adapter for Postgres. If you have an older version of that driver, you may encounter an `Endpoint ID is not specified` error when connecting to Neon. This error occurs if the client library used by your driver does not support the Server Name Indication (SNI) mechanism in TLS, which Neon uses to route incoming connections. The `psycopg2` driver uses the `libpq` client library, which supports SNI as of v14. You can check your `psycopg2` and `libpq` versions by starting a Django shell in your Django project and running the following commands:
 
 ```bash
 # Start a Django shell
@@ -74,10 +80,28 @@ print("libpq version:", psycopg2._psycopg.libpq_version())
 
 The version number for `libpq` is presented in a different format, for example, version 14.1 will be shown as 140001. If your `libpq` version is less than version 14, you can either upgrade your `psycopg2` driver to get a newer `libpq` version or use one of the workarounds described in our [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified) documentation. Upgrading your `psycopg2` driver may introduce compatibility issues with your Django or Python version, so you should test your application thoroughly.
 
-## Video course: Micro eCommerce with Django and Neon
+## Schema migration with Django
 
-Watch Justin Mitchel's video course, _Micro eCommerce with Python, Django, Neon Serverless Postgres, Stripe, TailwindCSS and more_, to learn how to connect a Django application to Neon.
+For schema migration with Django, see our guide:
 
-<YoutubeIframe embedId="qx9nshX9CQQ?start=1569" />
+<DetailIconCards>
+
+<a href="/docs/guides/django-migrations" description="Schema migration with Neon Postgres and Django" icon="app-store" icon="app-store">Django Migrations</a>
+
+</DetailIconCards>
+
+## Django application blog post and sample application
+
+Learn how to use Django with Neon Postgres with this blog post and the accompanying sample application.
+
+<DetailIconCards>
+<a href="https://neon.tech/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
+
+<a href="https://github.com/evanshortiss/django-neon-quickstart" description="Django with Neon Postgres" icon="github">Django sample application</a>
+</DetailIconCards>
+
+## Community resources
+
+- [Django Project: Build a Micro eCommerce with Python, Django, Neon Postgres, Stripe, & TailwindCSS](https://youtu.be/qx9nshX9CQQ?start=1569)
 
 <NeedHelp/>

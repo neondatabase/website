@@ -21,7 +21,7 @@ EXECUTE IMMEDIATE string
 
 ## Parameters
 
-* *`string`* [#](#ECPG-SQL-EXECUTE-IMMEDIATE-STRING)
+- _`string`_ [#](#ECPG-SQL-EXECUTE-IMMEDIATE-STRING)
 
   A literal string or a host variable containing the SQL statement to be executed.
 
@@ -29,7 +29,7 @@ EXECUTE IMMEDIATE string
 
 ## Notes
 
-In typical usage, the *`string`* is a host variable reference to a string containing a dynamically-constructed SQL statement. The case of a literal string is not very useful; you might as well just write the SQL statement directly, without the extra typing of `EXECUTE IMMEDIATE`.
+In typical usage, the _`string`_ is a host variable reference to a string containing a dynamically-constructed SQL statement. The case of a literal string is not very useful; you might as well just write the SQL statement directly, without the extra typing of `EXECUTE IMMEDIATE`.
 
 If you do use a literal string, keep in mind that any double quotes you might wish to include in the SQL statement must be written as octal escapes (`\042`) not the usual C idiom `\"`. This is because the string is inside an `EXEC SQL` section, so the ECPG lexer parses it according to SQL rules not C rules. Any embedded backslashes will later be handled according to C rules; but `\"` causes an immediate syntax error because it is seen as ending the literal.
 

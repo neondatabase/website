@@ -4,334 +4,334 @@
 
 This is a list of acronyms commonly used in the PostgreSQL documentation and in discussions about PostgreSQL.
 
-* ANSI
+- ANSI
 
   [American National Standards Institute](https://en.wikipedia.org/wiki/American_National_Standards_Institute)
 
-* API
+- API
 
   [Application Programming Interface](https://en.wikipedia.org/wiki/API)
 
-* ASCII
+- ASCII
 
   [American Standard Code for Information Interchange](https://en.wikipedia.org/wiki/Ascii)
 
-* BKI
+- BKI
 
   [Backend Interface](bki)
 
-* CA
+- CA
 
   [Certificate Authority](https://en.wikipedia.org/wiki/Certificate_authority)
 
-* CIDR
+- CIDR
 
   [Classless Inter-Domain Routing](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
 
-* CPAN
+- CPAN
 
   [Comprehensive Perl Archive Network](https://www.cpan.org/)
 
-* CRL
+- CRL
 
   [Certificate Revocation List](https://en.wikipedia.org/wiki/Certificate_revocation_list)
 
-* CSV
+- CSV
 
   [Comma Separated Values](https://en.wikipedia.org/wiki/Comma-separated_values)
 
-* CTE
+- CTE
 
   [Common Table Expression](queries-with)
 
-* CVE
+- CVE
 
   [Common Vulnerabilities and Exposures](https://cve.mitre.org/)
 
-* DBA
+- DBA
 
   [Database Administrator](https://en.wikipedia.org/wiki/Database_administrator)
 
-* DBI
+- DBI
 
   [Database Interface (Perl)](https://dbi.perl.org/)
 
-* DBMS
+- DBMS
 
   [Database Management System](https://en.wikipedia.org/wiki/Dbms)
 
-* DDL
+- DDL
 
   [Data Definition Language](https://en.wikipedia.org/wiki/Data_Definition_Language), SQL commands such as `CREATE TABLE`, `ALTER USER`
 
-* DML
+- DML
 
   [Data Manipulation Language](https://en.wikipedia.org/wiki/Data_Manipulation_Language), SQL commands such as `INSERT`, `UPDATE`, `DELETE`
 
-* DST
+- DST
 
   [Daylight Saving Time](https://en.wikipedia.org/wiki/Daylight_saving_time)
 
-* ECPG
+- ECPG
 
   [Embedded C for PostgreSQL](ecpg)
 
-* ESQL
+- ESQL
 
   [Embedded SQL](https://en.wikipedia.org/wiki/Embedded_SQL)
 
-* FAQ
+- FAQ
 
   [Frequently Asked Questions](https://en.wikipedia.org/wiki/FAQ)
 
-* FSM
+- FSM
 
   [Free Space Map](storage-fsm)
 
-* GEQO
+- GEQO
 
   [Genetic Query Optimizer](geqo)
 
-* GIN
+- GIN
 
   [Generalized Inverted Index](gin)
 
-* GiST
+- GiST
 
   [Generalized Search Tree](gist)
 
-* Git
+- Git
 
-  [Git](https://en.wikipedia.org/wiki/Git_\(software\))
+  [Git](<https://en.wikipedia.org/wiki/Git_(software)>)
 
-* GMT
+- GMT
 
   [Greenwich Mean Time](https://en.wikipedia.org/wiki/GMT)
 
-* GSSAPI
+- GSSAPI
 
   [Generic Security Services Application Programming Interface](https://en.wikipedia.org/wiki/Generic_Security_Services_Application_Program_Interface)
 
-* GUC
+- GUC
 
   [Grand Unified Configuration](config-setting), the PostgreSQL subsystem that handles server configuration
 
-* HBA
+- HBA
 
   [Host-Based Authentication](auth-pg-hba-conf)
 
-* HOT
+- HOT
 
   [Heap-Only Tuples](storage-hot)
 
-* IEC
+- IEC
 
   [International Electrotechnical Commission](https://en.wikipedia.org/wiki/International_Electrotechnical_Commission)
 
-* IEEE
+- IEEE
 
   [Institute of Electrical and Electronics Engineers](https://standards.ieee.org/)
 
-* IPC
+- IPC
 
   [Inter-Process Communication](https://en.wikipedia.org/wiki/Inter-process_communication)
 
-* ISO
+- ISO
 
   [International Organization for Standardization](https://www.iso.org/home.html)
 
-* ISSN
+- ISSN
 
   [International Standard Serial Number](https://en.wikipedia.org/wiki/Issn)
 
-* JDBC
+- JDBC
 
   [Java Database Connectivity](https://en.wikipedia.org/wiki/Java_Database_Connectivity)
 
-* JIT
+- JIT
 
   [Just-in-Time compilation](https://en.wikipedia.org/wiki/Just-in-time_compilation)
 
-* JSON
+- JSON
 
   [JavaScript Object Notation](https://www.json.org)
 
-* LDAP
+- LDAP
 
   [Lightweight Directory Access Protocol](https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol)
 
-* LSN
+- LSN
 
-  [**](glossary#GLOSSARY-LOG-SEQUENCE-NUMBER)*[Log Sequence Number](glossary#GLOSSARY-LOG-SEQUENCE-NUMBER)*
+  [\*\*](glossary#GLOSSARY-LOG-SEQUENCE-NUMBER)_[Log Sequence Number](glossary#GLOSSARY-LOG-SEQUENCE-NUMBER)_
 
-* MCF
+- MCF
 
   Most Common Frequency, that is the frequency associated with some Most Common Value
 
-* MCV
+- MCV
 
   Most Common Value, one of the values appearing most often within a particular table column
 
-* MITM
+- MITM
 
   [Man-in-the-middle attack](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)
 
-* MSVC
+- MSVC
 
   [Microsoft Visual C](https://en.wikipedia.org/wiki/Visual_C++)
 
-* MVCC
+- MVCC
 
   [Multi-Version Concurrency Control](mvcc)
 
-* NLS
+- NLS
 
   [National Language Support](https://en.wikipedia.org/wiki/Internationalization_and_localization)
 
-* ODBC
+- ODBC
 
   [Open Database Connectivity](https://en.wikipedia.org/wiki/Open_Database_Connectivity)
 
-* OID
+- OID
 
   [Object Identifier](datatype-oid)
 
-* OLAP
+- OLAP
 
   [Online Analytical Processing](https://en.wikipedia.org/wiki/Olap)
 
-* OLTP
+- OLTP
 
   [Online Transaction Processing](https://en.wikipedia.org/wiki/OLTP)
 
-* ORDBMS
+- ORDBMS
 
   [Object-Relational Database Management System](https://en.wikipedia.org/wiki/ORDBMS)
 
-* PAM
+- PAM
 
   [Pluggable Authentication Modules](https://en.wikipedia.org/wiki/Pluggable_Authentication_Modules)
 
-* PGSQL
+- PGSQL
 
   [PostgreSQL](index)
 
-* PGXS
+- PGXS
 
   [PostgreSQL Extension System](extend-pgxs)
 
-* PID
+- PID
 
   [Process Identifier](https://en.wikipedia.org/wiki/Process_identifier)
 
-* PITR
+- PITR
 
   [Point-In-Time Recovery](continuous-archiving) (Continuous Archiving)
 
-* PL
+- PL
 
   [Procedural Languages (server-side)](server-programming)
 
-* POSIX
+- POSIX
 
   [Portable Operating System Interface](https://en.wikipedia.org/wiki/POSIX)
 
-* RDBMS
+- RDBMS
 
   [Relational Database Management System](https://en.wikipedia.org/wiki/Relational_database_management_system)
 
-* RFC
+- RFC
 
   [Request For Comments](https://en.wikipedia.org/wiki/Request_for_Comments)
 
-* SGML
+- SGML
 
   [Standard Generalized Markup Language](https://en.wikipedia.org/wiki/SGML)
 
-* SNI
+- SNI
 
   [Server Name Indication](https://en.wikipedia.org/wiki/Server_Name_Indication), [RFC 6066](https://tools.ietf.org/html/rfc6066#section-3)
 
-* SPI
+- SPI
 
   [Server Programming Interface](spi)
 
-* SP-GiST
+- SP-GiST
 
   [Space-Partitioned Generalized Search Tree](spgist)
 
-* SQL
+- SQL
 
   [Structured Query Language](https://en.wikipedia.org/wiki/SQL)
 
-* SRF
+- SRF
 
   [Set-Returning Function](xfunc-c#XFUNC-C-RETURN-SET)
 
-* SSH
+- SSH
 
   [Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell)
 
-* SSL
+- SSL
 
   [Secure Sockets Layer](https://en.wikipedia.org/wiki/Secure_Sockets_Layer)
 
-* SSPI
+- SSPI
 
   [Security Support Provider Interface](https://msdn.microsoft.com/en-us/library/aa380493%28VS.85%29.aspx)
 
-* SYSV
+- SYSV
 
   [Unix System V](https://en.wikipedia.org/wiki/System_V)
 
-* TCP/IP
+- TCP/IP
 
   [Transmission Control Protocol (TCP) / Internet Protocol (IP)](https://en.wikipedia.org/wiki/Transmission_Control_Protocol)
 
-* TID
+- TID
 
   [Tuple Identifier](datatype-oid)
 
-* TLS
+- TLS
 
   [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security)
 
-* TOAST
+- TOAST
 
   [The Oversized-Attribute Storage Technique](storage-toast)
 
-* TPC
+- TPC
 
   [Transaction Processing Performance Council](http://www.tpc.org/)
 
-* URL
+- URL
 
   [Uniform Resource Locator](https://en.wikipedia.org/wiki/URL)
 
-* UTC
+- UTC
 
   [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
 
-* UTF
+- UTF
 
   [Unicode Transformation Format](https://www.unicode.org/)
 
-* UTF8
+- UTF8
 
   [Eight-Bit Unicode Transformation Format](https://en.wikipedia.org/wiki/Utf8)
 
-* UUID
+- UUID
 
   [Universally Unique Identifier](datatype-uuid)
 
-* WAL
+- WAL
 
   [Write-Ahead Log](wal)
 
-* XID
+- XID
 
   [Transaction Identifier](datatype-oid)
 
-* XML
+- XML
 
   [Extensible Markup Language](https://en.wikipedia.org/wiki/XML)

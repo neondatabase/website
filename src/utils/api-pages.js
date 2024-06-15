@@ -1,4 +1,4 @@
-import { gql, graphQLClient } from 'lib/graphQLClient';
+import { fetchGraphQL, gql, graphQLClient } from 'lib/graphQLClient';
 
 const PAGE_SEO_FRAGMENT = gql`
   fragment wpPageSeo on Page {
@@ -17,6 +17,24 @@ const PAGE_SEO_FRAGMENT = gql`
   }
 `;
 
+const getLandingPages = async () => {
+  const allLandingPagesQuery = gql`
+    {
+      pages {
+        nodes {
+          slug
+          template {
+            templateName
+          }
+        }
+      }
+    }
+  `;
+  const data = await fetchGraphQL(graphQLClient).request(allLandingPagesQuery);
+
+  return data?.pages.nodes.filter((node) => node.template.templateName === 'Landing');
+};
+
 const getStaticPages = async () => {
   const allStaticPagesQuery = gql`
     {
@@ -30,23 +48,26 @@ const getStaticPages = async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(allStaticPagesQuery);
+  const data = await fetchGraphQL(graphQLClient).request(allStaticPagesQuery);
 
   return data?.pages.nodes.filter((node) => node.template.templateName === 'Static');
 };
 
-const getStaticPageBySlug = async (slug) => {
-  const staticPageBySlugQuery = gql`
-    query staticPage($slug: ID!) {
+const getWpPageBySlug = async (slug) => {
+  const wpPageBySlugQuery = gql`
+    query wpPage($slug: ID!) {
       page(id: $slug, idType: URI) {
         content(format: RENDERED)
         title(format: RENDERED)
+        template {
+          templateName
+        }
         ...wpPageSeo
       }
     }
     ${PAGE_SEO_FRAGMENT}
   `;
-  const data = await graphQLClient.request(staticPageBySlugQuery, { slug });
+  const data = await fetchGraphQL(graphQLClient).request(wpPageBySlugQuery, { slug });
 
   return data?.page;
 };
@@ -61,9 +82,9 @@ const getAboutPage = async () => {
     }
     ${PAGE_SEO_FRAGMENT}
   `;
-  const data = await graphQLClient.request(aboutPageQuery);
+  const data = await fetchGraphQL(graphQLClient).request(aboutPageQuery);
 
   return data?.page;
 };
 
-export { getStaticPages, getStaticPageBySlug, getAboutPage };
+export { getLandingPages, getStaticPages, getWpPageBySlug, getAboutPage };

@@ -2,7 +2,7 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 enableTableOfContents: true
-updatedOn: '2023-12-01T19:05:09.469Z'
+updatedOn: '2024-06-14T07:55:54.386Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -50,19 +50,56 @@ connection_uris
 The Neon CLI provides a `neonctl connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
 </Admonition>
 
+## Create a branch from a non-primary parent
+
+Using the option `--parent`, you can specify any non-primary branch that you want to use as the parent for your new branch, depending on the needs of your development workflow.
+
+In this example, we're creating a branch for a hot fix called `alex/hotfix` using the long-lived development branch `dev/alex` as the parent:
+
+```bash shouldWrap
+neon branches create --name alex/hotfix --parent dev/alex --project-id crimson-voice-12345678
+branch
+┌───────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                    │ Name        │ Primary │ Created At           │ Updated At           │
+├───────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-misty-mud-a5poo34s │ alex/hotfix │ false   │ 2024-04-23T17:04:10Z │ 2024-04-23T17:04:10Z │
+└───────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
+endpoints
+┌──────────────────────────┬──────────────────────┐
+│ Id                       │ Created At           │
+├──────────────────────────┼──────────────────────┤
+│ ep-orange-heart-123456 │ 2024-04-23T17:04:10Z │
+└──────────────────────────┴──────────────────────┘
+connection_uris
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Connection Uri                                                                                               │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ postgres://neondb_owner:123456@ep-orange-heart-a54grm9j.us-east-2.aws.neon.tech/neondb?sslmode=require │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
 ## List branches with the CLI
 
-The following Neon CLI command lists branches in your Neon project. If your Neon account has more than one project, you will be required to specify a project ID using the `--project-id` option. To view the CLI documentation for this method, refer to the [Neon CLI reference](https://neon.tech/docs/reference/cli-branches#list).
+The following Neon CLI command lists all branches in your Neon project, as well as any branches shared with you. If your Neon account has more than one project, you will be required to specify a project ID using the `--project-id` option. To view the CLI documentation for this method, refer to the [Neon CLI reference](https://neon.tech/docs/reference/cli-branches#list).
 
 ```bash
-neonctl branches list
-┌────────────────────────────┬───────────────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                         │ Name                  │ Primary │ Created At           │ Updated At           │
-├────────────────────────────┼───────────────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-lucky-mud-08878834      │ br-lucky-mud-08878834 │ false   │ 2023-07-24T20:22:42Z │ 2023-07-24T20:38:34Z │
-├────────────────────────────┼───────────────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-wandering-king-30669552 │ main                  │ true    │ 2023-07-24T15:31:03Z │ 2023-07-24T16:13:48Z │
-└────────────────────────────┴───────────────────────┴─────────┴──────────────────────┴──────────────────────┘
+neonctl projects list
+Projects
+┌────────────────────────┬────────────────────┬───────────────┬──────────────────────┐
+│ Id                     │ Name               │ Region Id     │ Created At           │
+├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
+│ crimson-voice-12345678 │ frontend           │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
+├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
+│ calm-thunder-12121212  │ backend            │ aws-us-east-2 │ 2024-04-10T15:21:01Z │
+├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
+│ nameless-hall-87654321 │ billing            │ aws-us-east-2 │ 2024-04-10T14:35:17Z │
+└────────────────────────┴────────────────────┴───────────────┴──────────────────────┘
+Shared with me
+┌───────────────────┬────────────────────┬──────────────────┬──────────────────────┐
+│ Id                │ Name               │ Region Id        │ Created At           │
+├───────────────────┼────────────────────┼──────────────────┼──────────────────────┤
+│ noisy-fire-212121 │ API                │ aws-eu-central-1 │ 2023-04-22T18:41:13Z │
+└───────────────────┴────────────────────┴──────────────────┴──────────────────────┘
 ```
 
 ## Delete a branch with the CLI
@@ -94,12 +131,72 @@ You do not need to specify the variable name explicitly when using a Neon CLI co
 
 This API key configuration ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Remember, you should handle your API key with the same level of security as your other credentials.
 
+## Resetting a branch from its parent
+
+Depending on your development workflow, you might need to periodically reset a branch to match the latest state of its parent. This is useful, for example, when resetting a long-lived development branch back to the main branch before starting work on a new feature.
+
+Use the following command to reset a branch to the current state (HEAD) of its parent branch:
+
+```bash
+neonctl branches reset <id|name> --parent
+```
+
+Example:
+
+This example resets a developer's branch to match the latest state of its parent branch:
+
+```bash
+neonctl branches reset dev/alex --parent
+┌────────────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                         │ Name     │ Primary │ Created At           │ Last Reset At        │
+├────────────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-twilight-smoke-123456   │ dev/alex │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T17:57:35Z │
+```
+
+If the branch you want to reset has child branches, you need to include the `preserve-under-name` parameter. This will save the current state of your branch under a new name before performing the reset. The child branches will then show this newly named branch as their parent. This step ensures that your original branch can be reset cleanly, as all child branches will have been transferred to the new parent name.
+
+For example, here we are resetting `dev/alex` to its parent while preserving its latest state under the branch name `dev/alex_backup`:
+
+```bash
+neon branches reset dev/alex --parent --preserve-under-name dev/alex_backup
+┌────────────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                         │ Name     │ Primary │ Created At           │ Last Reset At        │
+├────────────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-twilight-smoke-a5ofkxry │ dev/alex │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T18:02:36Z │
+```
+
+For more details, see [Reset from parent](/docs/guides/reset-from-parent).
+
 ## Restoring a branch to its own or another branch's history
 
 Using the CLI, you can restore a branch to an earlier point in its history or another branch's history using the following command:
 
-``` bash shouldWrap
+```bash shouldWrap
 neonctl branches restore <target id|name> <source id|name @ timestamp|lsn>
+```
+
+This command restores the branch `main` to an earlier timestamp in it's own history, saving to a backup branch called `main_restore_backup_2024-02-20`
+
+```bash shouldWrap
+neonctl branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06
+```
+
+Results of the operation:
+
+```bash shouldWrap
+INFO: Restoring branch br-purple-dust-a5hok5mk to the branch br-purple-dust-a5hok5mk timestamp 2024-05-06T10:00:00.000Z
+Restored branch
+┌─────────────────────────┬──────┬──────────────────────┐
+│ Id                      │ Name │ Last Reset At        │
+├─────────────────────────┼──────┼──────────────────────┤
+│ br-purple-dust-a5hok5mk │ main │ 2024-05-07T09:45:21Z │
+└─────────────────────────┴──────┴──────────────────────┘
+Backup branch
+┌─────────────────────────┬────────────────────────────────┐
+│ Id                      │ Name                           │
+├─────────────────────────┼────────────────────────────────┤
+│ br-flat-forest-a5z016gm │ main_restore_backup_2024-05-06 │
+└─────────────────────────┴────────────────────────────────┘
 ```
 
 For full details about the different restore options available with this command, see [Restoring using the CLI](/docs/guides/branch-restore#how-to-use-branch-restore).

@@ -2,7 +2,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const { getAllPosts } = require('./src/utils/api-docs');
+const { getAllPosts, getAllChangelogPosts } = require('./src/utils/api-docs');
+const generateChangelogPath = require('./src/utils/generate-changelog-path');
 const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
 const defaultConfig = {
@@ -47,6 +48,15 @@ const defaultConfig = {
         ],
       },
       {
+        source: '/videos/:all*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
         source: '/docs/:all*(svg|jpg|png)',
         headers: [
           {
@@ -72,6 +82,7 @@ const defaultConfig = {
   },
   async redirects() {
     const docPosts = await getAllPosts();
+    const changelogPosts = await getAllChangelogPosts();
     const docsRedirects = docPosts.reduce((acc, post) => {
       const { slug, redirectFrom: postRedirects } = post;
       if (!postRedirects || !postRedirects.length) {
@@ -81,6 +92,20 @@ const defaultConfig = {
       const postRedirectsArray = postRedirects.map((redirect) => ({
         source: redirect,
         destination: generateDocPagePath(slug),
+        permanent: true,
+      }));
+
+      return [...acc, ...postRedirectsArray];
+    }, []);
+    const changelogRedirects = changelogPosts.reduce((acc, post) => {
+      const { slug, redirectFrom: postRedirects } = post;
+      if (!postRedirects || !postRedirects.length) {
+        return acc;
+      }
+
+      const postRedirectsArray = postRedirects.map((redirect) => ({
+        source: redirect,
+        destination: generateChangelogPath(slug),
         permanent: true,
       }));
 
@@ -165,6 +190,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/discord',
+        destination: 'https://discord.gg/92vNTzKDGp',
+        permanent: false,
+      },
+      {
         source: '/developer-days',
         destination: 'https://devdays.neon.tech',
         permanent: true,
@@ -180,7 +210,13 @@ const defaultConfig = {
         destination: '/docs/postgres/:path*',
         permanent: true,
       },
+      {
+        source: '/sign_in',
+        destination: 'https://console.neon.tech/signup',
+        permanent: true,
+      },
       ...docsRedirects,
+      ...changelogRedirects,
     ];
   },
   async rewrites() {
@@ -206,8 +242,24 @@ const defaultConfig = {
         destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
       },
       {
-        source: '/discord',
-        destination: 'https://discord.gg/92vNTzKDGp',
+        source: '/demos/instant-postgres',
+        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres',
+      },
+      {
+        source: '/demos/instant-postgres/:path*',
+        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres/:path*',
+      },
+      {
+        source: '/developer-days/:path*',
+        destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
+      },
+      {
+        source: '/demos/regional-latency',
+        destination: 'https://latencies-ui.vercel.app/demos/regional-latency',
+      },
+      {
+        source: '/demos/regional-latency/:asset*',
+        destination: 'https://latencies-ui.vercel.app/demos/regional-latency/:asset*',
       },
     ];
   },
@@ -264,6 +316,11 @@ const defaultConfig = {
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
+  },
+  env: {
+    INKEEP_INTEGRATION_API_KEY: process.env.INKEEP_INTEGRATION_API_KEY,
+    INKEEP_INTEGRATION_ID: process.env.INKEEP_INTEGRATION_ID,
+    INKEEP_ORGANIZATION_ID: process.env.INKEEP_ORGANIZATION_ID,
   },
 };
 

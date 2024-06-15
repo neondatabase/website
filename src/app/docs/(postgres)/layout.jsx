@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import MobileNav from 'components/pages/doc/mobile-nav';
 import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
@@ -9,15 +10,8 @@ const PostgresDocsLayout = async ({ children }) => {
   const sidebar = await getSidebar();
 
   return (
-    <Layout
-      headerTheme="white"
-      headerWithBottomBorder
-      footerWithTopBorder
-      burgerWithoutBorder
-      isDocPage
-      isHeaderSticky
-    >
-      <div className="safe-paddings flex flex-1 flex-col dark:bg-gray-new-8 dark:text-white lg:block">
+    <Layout burgerWithoutBorder isDocPage isHeaderSticky headerWithBorder>
+      <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
         <MobileNav
           className="hidden lg:block"
           sidebar={sidebar}
@@ -26,8 +20,8 @@ const PostgresDocsLayout = async ({ children }) => {
         />
 
         <Container
-          className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
-          size="medium"
+          className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-12 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
+          size="1344"
         >
           <Sidebar
             sidebar={sidebar}

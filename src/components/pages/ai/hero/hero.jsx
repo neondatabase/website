@@ -12,6 +12,8 @@ import Container from 'components/shared/container/container';
 import LINKS from 'constants/links';
 import useIsTouchDevice from 'hooks/use-is-touch-device';
 
+import sphereMobile from './images/sphere-mobile.png';
+
 const Spline = dynamic(() => import('@splinetool/react-spline'));
 
 const MOBILE_WIDTH = 768;
@@ -23,7 +25,6 @@ const Hero = () => {
 
   const [spline, setSpline] = useState(null);
   const [animationVisibilityRef, isInView] = useInView();
-  const [isAnimationStarted, setIsAnimationStarted] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -32,24 +33,12 @@ const Hero = () => {
   useEffect(() => {
     if (!spline) return;
 
-    // launching events that start playing the intro animation
-    if (!isAnimationStarted || spline.time < 10000) {
-      const { keyUp } = spline.getSplineEvents();
-
-      Object.keys(keyUp).forEach((key) => {
-        spline.emitEvent('keyUp', key);
-      });
-
-      setIsAnimationStarted(true);
-      return;
-    }
-
     if (isInView) {
       spline.play();
     } else {
       spline.stop();
     }
-  }, [isInView, spline, isAnimationStarted]);
+  }, [isInView, spline]);
 
   // During server-side rendering, isClient will be false, so the <Image> component will always be rendered
   // After hydration, isClient will be true, so the correct component will be rendered based on the window width
@@ -70,7 +59,7 @@ const Hero = () => {
     ) : (
       <Image
         className="absolute left-1/2 top-0 hidden -translate-x-1/2 md:block"
-        src="/images/pages/ai/hero-sphere-mobile.png"
+        src={sphereMobile}
         width={340}
         height={357}
         alt=""
@@ -83,10 +72,10 @@ const Hero = () => {
   return (
     <section className="hero safe-paddings relative pb-[390px] pt-36 xl:pt-[120px] lg:pt-11 md:pb-0 md:pt-8">
       <Container
-        className="container relative z-10 flex flex-col items-center text-center"
+        className="relative z-10 flex w-fit flex-col items-center text-center"
         size="medium"
       >
-        <h1 className="xs:flat-breaks text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl">
+        <h1 className="xs:flat-breaks font-title text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl">
           Powering next gen
           <br /> AI apps with Postgres
         </h1>

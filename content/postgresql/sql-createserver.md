@@ -28,27 +28,27 @@ Creating a server requires `USAGE` privilege on the foreign-data wrapper being u
 
 ## Parameters
 
-* `IF NOT EXISTS`
+- `IF NOT EXISTS`
 
   Do not throw an error if a server with the same name already exists. A notice is issued in this case. Note that there is no guarantee that the existing server is anything like the one that would have been created.
 
-* *`server_name`*
+- _`server_name`_
 
   The name of the foreign server to be created.
 
-* *`server_type`*
+- _`server_type`_
 
   Optional server type, potentially useful to foreign-data wrappers.
 
-* *`server_version`*
+- _`server_version`_
 
   Optional server version, potentially useful to foreign-data wrappers.
 
-* *`fdw_name`*
+- _`fdw_name`_
 
   The name of the foreign-data wrapper that manages the server.
 
-* `OPTIONS ( option 'value' [, ... ] )`
+- `OPTIONS ( option 'value' [, ... ] )`
 
   This clause specifies the options for the server. The options typically define the connection details of the server, but the actual names and values are dependent on the server's foreign-data wrapper.
 
@@ -56,7 +56,7 @@ Creating a server requires `USAGE` privilege on the foreign-data wrapper being u
 
 ## Notes
 
-When using the [dblink](dblink) module, a foreign server's name can be used as an argument of the [dblink\_connect](contrib-dblink-connect) function to indicate the connection parameters. It is necessary to have the `USAGE` privilege on the foreign server to be able to use it in this way.
+When using the [dblink](dblink) module, a foreign server's name can be used as an argument of the [dblink_connect](contrib-dblink-connect) function to indicate the connection parameters. It is necessary to have the `USAGE` privilege on the foreign server to be able to use it in this way.
 
 [#id](#id-1.9.3.82.8)
 
@@ -68,7 +68,7 @@ Create a server `myserver` that uses the foreign-data wrapper `postgres_fdw`:
 CREATE SERVER myserver FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host 'foo', dbname 'foodb', port '5432');
 ```
 
-See [postgres\_fdw](postgres-fdw) for more details.
+See [postgres_fdw](postgres-fdw) for more details.
 
 [#id](#id-1.9.3.82.9)
 

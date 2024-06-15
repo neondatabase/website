@@ -33,71 +33,71 @@ You must own the sequence to use `ALTER SEQUENCE`. To change a sequence's schema
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of a sequence to be altered.
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the sequence does not exist. A notice is issued in this case.
 
-* *`data_type`*
+- _`data_type`_
 
   The optional clause `AS data_type` changes the data type of the sequence. Valid types are `smallint`, `integer`, and `bigint`.
 
   Changing the data type automatically changes the minimum and maximum values of the sequence if and only if the previous minimum and maximum values were the minimum or maximum value of the old data type (in other words, if the sequence had been created using `NO MINVALUE` or `NO MAXVALUE`, implicitly or explicitly). Otherwise, the minimum and maximum values are preserved, unless new values are given as part of the same command. If the minimum and maximum values do not fit into the new data type, an error will be generated.
 
-* *`increment`*
+- _`increment`_
 
   The clause `INCREMENT BY increment` is optional. A positive value will make an ascending sequence, a negative one a descending sequence. If unspecified, the old increment value will be maintained.
 
-* *`minvalue`*`NO MINVALUE`
+- _`minvalue`_`NO MINVALUE`
 
   The optional clause `MINVALUE minvalue` determines the minimum value a sequence can generate. If `NO MINVALUE` is specified, the defaults of 1 and the minimum value of the data type for ascending and descending sequences, respectively, will be used. If neither option is specified, the current minimum value will be maintained.
 
-* *`maxvalue`*`NO MAXVALUE`
+- _`maxvalue`_`NO MAXVALUE`
 
   The optional clause `MAXVALUE maxvalue` determines the maximum value for the sequence. If `NO MAXVALUE` is specified, the defaults of the maximum value of the data type and -1 for ascending and descending sequences, respectively, will be used. If neither option is specified, the current maximum value will be maintained.
 
-* *`start`*
+- _`start`_
 
-  The optional clause `START WITH start` changes the recorded start value of the sequence. This has no effect on the *current* sequence value; it simply sets the value that future `ALTER SEQUENCE RESTART` commands will use.
+  The optional clause `START WITH start` changes the recorded start value of the sequence. This has no effect on the _current_ sequence value; it simply sets the value that future `ALTER SEQUENCE RESTART` commands will use.
 
-* *`restart`*
+- _`restart`_
 
-  The optional clause `RESTART [ WITH restart ]` changes the current value of the sequence. This is similar to calling the `setval` function with `is_called` = `false`: the specified value will be returned by the *next* call of `nextval`. Writing `RESTART` with no *`restart`* value is equivalent to supplying the start value that was recorded by `CREATE SEQUENCE` or last set by `ALTER SEQUENCE START WITH`.
+  The optional clause `RESTART [ WITH restart ]` changes the current value of the sequence. This is similar to calling the `setval` function with `is_called` = `false`: the specified value will be returned by the _next_ call of `nextval`. Writing `RESTART` with no _`restart`_ value is equivalent to supplying the start value that was recorded by `CREATE SEQUENCE` or last set by `ALTER SEQUENCE START WITH`.
 
   In contrast to a `setval` call, a `RESTART` operation on a sequence is transactional and blocks concurrent transactions from obtaining numbers from the same sequence. If that's not the desired mode of operation, `setval` should be used.
 
-* *`cache`*
+- _`cache`_
 
   The clause `CACHE cache` enables sequence numbers to be preallocated and stored in memory for faster access. The minimum value is 1 (only one value can be generated at a time, i.e., no cache). If unspecified, the old cache value will be maintained.
 
-* `CYCLE`
+- `CYCLE`
 
-  The optional `CYCLE` key word can be used to enable the sequence to wrap around when the *`maxvalue`* or *`minvalue`* has been reached by an ascending or descending sequence respectively. If the limit is reached, the next number generated will be the *`minvalue`* or *`maxvalue`*, respectively.
+  The optional `CYCLE` key word can be used to enable the sequence to wrap around when the _`maxvalue`_ or _`minvalue`_ has been reached by an ascending or descending sequence respectively. If the limit is reached, the next number generated will be the _`minvalue`_ or _`maxvalue`_, respectively.
 
-* `NO CYCLE`
+- `NO CYCLE`
 
   If the optional `NO CYCLE` key word is specified, any calls to `nextval` after the sequence has reached its maximum value will return an error. If neither `CYCLE` or `NO CYCLE` are specified, the old cycle behavior will be maintained.
 
-* `SET { LOGGED | UNLOGGED }`
+- `SET { LOGGED | UNLOGGED }`
 
   This form changes the sequence from unlogged to logged or vice-versa (see [CREATE SEQUENCE](sql-createsequence)). It cannot be applied to a temporary sequence.
 
-* `OWNED BY` *`table_name`*.*`column_name`*`OWNED BY NONE`
+- `OWNED BY` _`table_name`_._`column_name`_`OWNED BY NONE`
 
   The `OWNED BY` option causes the sequence to be associated with a specific table column, such that if that column (or its whole table) is dropped, the sequence will be automatically dropped as well. If specified, this association replaces any previously specified association for the sequence. The specified table must have the same owner and be in the same schema as the sequence. Specifying `OWNED BY NONE` removes any existing association, making the sequence “free-standing”.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The user name of the new owner of the sequence.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name for the sequence.
 
-* *`new_schema`*
+- _`new_schema`_
 
   The new schema for the sequence.
 

@@ -2,9 +2,8 @@
 title: Postgres json_build_object() function
 subtitle: Builds a JSON object out of a variadic argument list
 enableTableOfContents: true
-updatedOn: '2024-02-06T14:40:40.246Z'
+updatedOn: '2024-06-14T07:55:54.374Z'
 ---
-
 
 `json_build_object` is used to construct a JSON object from a set of key-value pairs, creating a JSON representation of a row or set of rows. This has potential performance benefits compared to converting query results to JSON on the application side.
 
@@ -18,13 +17,12 @@ json_build_object ( VARIADIC "any" ) → json
 
 ## `json_build_object` example
 
-
 Let's consider a scenario where we have a table storing information about users:
 
 **users**
 
 ```text
-| id |   name   | age |   city  
+| id |   name   | age |   city
 |----|----------|-----|----------
 | 1  | John Doe |  30 | New York |
 | 2  | Jane Doe |  25 | London   |
@@ -60,7 +58,7 @@ FROM users;
 This query returns the following results:
 
 ```text
-| id |                       user_data                       
+| id |                       user_data
 |----|--------------------------------------------------------
 | 1  | {"name" : "John Doe", "age" : 30, "city" : "New York"}
 | 2  | {"name" : "Jane Doe", "age" : 25, "city" : "London"}
@@ -75,7 +73,7 @@ Let’s say we have a table of products with an `attributes` column containing J
 **products**
 
 ```text
-| id |    name    | price |            description            | category |                     attributes                    
+| id |    name    | price |            description            | category |                     attributes
 |----|------------|-------|-----------------------------------|----------|----------------------------------------------------
 | 1  | T-Shirt    | 25.99 | A comfortable cotton T-Shirt      | Clothing | {"size": "Medium", "color": "Blue", "rating": 4.5}
 | 2  | Coffee Mug | 12.99 | A ceramic mug with a funny design | Kitchen  | {"size": "Small", "color": "White", "rating": 3.8}
@@ -134,7 +132,7 @@ FROM products;
 This query returns the following results:
 
 ```text
-| id |    name     | price |                                                               details                                                              
+| id |    name     | price |                                                               details
 |----|-------------|-------|-------------------------------------------------------------------------------------------------------------------------------------
 | 1  | T-Shirt     | 25.99 | {"category" : "Clothing", "description" : "A comfortable cotton T-Shirt", "attributes" : {"color" : "Blue", "size" : "Medium"}}
 | 2  | Coffee Mug  | 12.99 | {"category" : "Kitchen", "description" : "A ceramic mug with a funny design", "attributes" : {"color" : "White", "size" : "Large"}}
@@ -169,7 +167,7 @@ ORDER BY (attributes->>'rating')::NUMERIC DESC;
 This query returns the following results:
 
 ```text
-| id |    name    | price |                                                                        details                                                                       
+| id |    name    | price |                                                                        details
 |----|------------|-------|-------------------------------------------------------------------------------------------------------------------------------------------------------
 | 1  | T-Shirt    | 25.99 | {"category" : "Clothing", "description" : "A comfortable cotton T-Shirt", "attributes" : {"color" : "Blue", "size" : "Medium", "rating" : "4.5"}}
 | 3  | Sneakers   | 49.99 | {"category" : "Footwear", "description" : "Sporty sneakers for everyday use", "attributes" : {"color" : "Black", "size" : "10", "rating" : "4.2"}}
@@ -193,7 +191,7 @@ GROUP BY category;
 This query returns the following results:
 
 ```text
-| category |  category_total_price  
+| category |  category_total_price
 |----------|-------------------------
 | Kitchen  | {"total_price" : 12.99}
 | Clothing | {"total_price" : 25.99}
@@ -215,7 +213,6 @@ Depending on your requirements, you might want to consider similar functions:
 - `json_agg` - Aggregates values, as a JSON array.
 - `row_to_json` - Returns a row as a JSON object.
 - `json_object_agg` - Aggregates key-value pairs into a JSON object.
-
 
 ## Resources
 

@@ -2,10 +2,10 @@
 
 ## 36.3. Running SQL Commands [#](#ECPG-COMMANDS)
 
-  * [36.3.1. Executing SQL Statements](ecpg-commands#ECPG-EXECUTING)
-  * [36.3.2. Using Cursors](ecpg-commands#ECPG-CURSORS)
-  * [36.3.3. Managing Transactions](ecpg-commands#ECPG-TRANSACTIONS)
-  * [36.3.4. Prepared Statements](ecpg-commands#ECPG-PREPARED)
+- [36.3.1. Executing SQL Statements](ecpg-commands#ECPG-EXECUTING)
+- [36.3.2. Using Cursors](ecpg-commands#ECPG-CURSORS)
+- [36.3.3. Managing Transactions](ecpg-commands#ECPG-TRANSACTIONS)
+- [36.3.4. Prepared Statements](ecpg-commands#ECPG-PREPARED)
 
 Any SQL command can be run from within an embedded SQL application. Below are some examples of how to do that.
 
@@ -64,7 +64,7 @@ Also, a configuration parameter can be retrieved with the `SHOW` command:
 EXEC SQL SHOW search_path INTO :var;
 ```
 
-The tokens of the form `:something` are *host variables*, that is, they refer to variables in the C program. They are explained in [Section 36.4](ecpg-variables).
+The tokens of the form `:something` are _host variables_, that is, they refer to variables in the C program. They are explained in [Section 36.4](ecpg-variables).
 
 [#id](#ECPG-CURSORS)
 
@@ -100,31 +100,31 @@ In the default mode, statements are committed only when `EXEC SQL COMMIT` is iss
 
 The following transaction management commands are available:
 
-* `EXEC SQL COMMIT` [#](#ECPG-TRANSACTIONS-EXEC-SQL-COMMIT)
+- `EXEC SQL COMMIT` [#](#ECPG-TRANSACTIONS-EXEC-SQL-COMMIT)
 
   Commit an in-progress transaction.
 
-* `EXEC SQL ROLLBACK` [#](#ECPG-TRANSACTIONS-EXEC-SQL-ROLLBACK)
+- `EXEC SQL ROLLBACK` [#](#ECPG-TRANSACTIONS-EXEC-SQL-ROLLBACK)
 
   Roll back an in-progress transaction.
 
-* `EXEC SQL PREPARE TRANSACTION `*`transaction_id`* [#](#ECPG-TRANSACTIONS-EXEC-SQL-PREPARE-TRANSACTION)
+- `EXEC SQL PREPARE TRANSACTION `_`transaction_id`_ [#](#ECPG-TRANSACTIONS-EXEC-SQL-PREPARE-TRANSACTION)
 
   Prepare the current transaction for two-phase commit.
 
-* `EXEC SQL COMMIT PREPARED `*`transaction_id`* [#](#ECPG-TRANSACTIONS-EXEC-SQL-COMMIT-PREPARED)
+- `EXEC SQL COMMIT PREPARED `_`transaction_id`_ [#](#ECPG-TRANSACTIONS-EXEC-SQL-COMMIT-PREPARED)
 
   Commit a transaction that is in prepared state.
 
-* `EXEC SQL ROLLBACK PREPARED `*`transaction_id`* [#](#ECPG-TRANSACTIONS-EXEC-SQL-ROLLBACK-PREPARED)
+- `EXEC SQL ROLLBACK PREPARED `_`transaction_id`_ [#](#ECPG-TRANSACTIONS-EXEC-SQL-ROLLBACK-PREPARED)
 
   Roll back a transaction that is in prepared state.
 
-* `EXEC SQL SET AUTOCOMMIT TO ON` [#](#ECPG-TRANSACTIONS-EXEC-SQL-AUTOCOMMIT-ON)
+- `EXEC SQL SET AUTOCOMMIT TO ON` [#](#ECPG-TRANSACTIONS-EXEC-SQL-AUTOCOMMIT-ON)
 
   Enable autocommit mode.
 
-* `EXEC SQL SET AUTOCOMMIT TO OFF` [#](#ECPG-TRANSACTIONS-EXEC-SQL-AUTOCOMMIT-OFF)
+- `EXEC SQL SET AUTOCOMMIT TO OFF` [#](#ECPG-TRANSACTIONS-EXEC-SQL-AUTOCOMMIT-OFF)
 
   Disable autocommit mode. This is the default.
 

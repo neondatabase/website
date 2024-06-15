@@ -14,7 +14,7 @@ LISTEN channel
 
 ## Description
 
-`LISTEN` registers the current session as a listener on the notification channel named *`channel`*. If the current session is already registered as a listener for this notification channel, nothing is done.
+`LISTEN` registers the current session as a listener on the notification channel named _`channel`_. If the current session is already registered as a listener for this notification channel, nothing is done.
 
 Whenever the command `NOTIFY channel` is invoked, either by this session or another one connected to the same database, all the sessions currently listening on that notification channel are notified, and each will in turn notify its connected client application.
 
@@ -26,7 +26,7 @@ The method a client application must use to detect notification events depends o
 
 ## Parameters
 
-* *`channel`*
+- _`channel`_
 
   Name of a notification channel (any identifier).
 

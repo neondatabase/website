@@ -1,25 +1,25 @@
-import { ImageResponse } from 'next/server';
+import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
 export const preferredRegion = 'auto';
 
 export async function GET(request) {
-  const fontMedium = fetch(
-    new URL('../../../../../public/fonts/ibm-plex-sans/ibm-plex-sans-medium.ttf', import.meta.url)
+  const fontTitle = fetch(
+    new URL('../../../../fonts/esbuild/ESBuild-Medium.ttf', import.meta.url)
   ).then((res) => res.arrayBuffer());
-  const fontNormal = fetch(
-    new URL('../../../../../public/fonts/ibm-plex-sans/ibm-plex-sans-regular.ttf', import.meta.url)
+  const fontText = fetch(
+    new URL('../../../../fonts/inter/Inter-Regular.ttf', import.meta.url)
   ).then((res) => res.arrayBuffer());
   const logo = fetch(
     new URL('../../../../../public/images/og-image/logo.png', import.meta.url)
   ).then((res) => res.arrayBuffer());
   const background = fetch(
-    new URL('../../../../../public/images/og-image/background.png', import.meta.url)
+    new URL('../../../../../public/images/og-image/docs-background.jpg', import.meta.url)
   ).then((res) => res.arrayBuffer());
 
-  const [fontDataMedium, fontDataNormal, logoData, backgroundData] = await Promise.all([
-    fontMedium,
-    fontNormal,
+  const [fontDataTitle, fontDataText, logoData, backgroundData] = await Promise.all([
+    fontTitle,
+    fontText,
     logo,
     background,
   ]);
@@ -29,23 +29,24 @@ export async function GET(request) {
 
     const hasTitle = searchParams.has('title');
     const title = searchParams.get('title');
-
     const ogTitle = hasTitle && Buffer.from(title, 'base64').toString('utf-8');
+
+    const hasCategory = searchParams.has('category');
+    const category = searchParams.get('category');
+    const ogCategory = hasCategory && Buffer.from(category, 'base64').toString('utf-8');
+    const ogBreadcrumbs = `Docs${ogCategory ? ` / ${ogCategory}` : ''}`;
 
     return new ImageResponse(
       (
         <div
           style={{
-            fontFamily: '"IBM Plex Sans"',
-            fontStyle: 'normal',
             position: 'relative',
             backgroundColor: '#0A0B0D',
-            backgroundSize: '150px 150px',
             height: '100%',
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
-            padding: '44px 56px 56px',
+            padding: '44px 56px 84px',
           }}
         >
           <img
@@ -60,33 +61,37 @@ export async function GET(request) {
               display: 'flex',
               flexDirection: 'column',
               marginTop: 'auto',
+              maxWidth: '890px',
             }}
           >
             <div
               style={{
-                fontSize: 76,
-                fontWeight: 500,
-                color: 'white',
+                fontFamily: 'Inter',
+                fontStyle: 'normal',
+                fontSize: 28,
                 lineHeight: 1,
+                marginBottom: 18,
+                letterSpacing: '0.05em',
+                color: '#797D86',
+                whiteSpace: 'pre-wrap',
+              }}
+            >
+              {ogBreadcrumbs}
+            </div>
+            <div
+              style={{
+                fontFamily: 'ESBuild',
+                fontStyle: 'normal',
+                fontSize: 88,
+                fontWeight: 500,
+                lineHeight: 1,
+                color: 'white',
                 letterSpacing: '-0.04em',
                 whiteSpace: 'pre-wrap',
-                maxWidth: '90%',
                 marginTop: 10,
               }}
             >
               {ogTitle}
-            </div>
-            <div
-              style={{
-                fontSize: 30,
-                lineHeight: 1.25,
-                marginTop: 28,
-                letterSpacing: '-0.04em',
-                color: '#C9CBCF',
-                whiteSpace: 'pre-wrap',
-              }}
-            >
-              neon.tech
             </div>
           </div>
         </div>
@@ -96,14 +101,14 @@ export async function GET(request) {
         height: 630,
         fonts: [
           {
-            name: 'IBM Plex Sans',
-            data: fontDataMedium,
+            name: 'ESBuild',
+            data: fontDataTitle,
             style: 'normal',
             weight: 500,
           },
           {
-            name: 'IBM Plex Sans',
-            data: fontDataNormal,
+            name: 'Inter',
+            data: fontDataText,
             style: 'normal',
             weight: 400,
           },

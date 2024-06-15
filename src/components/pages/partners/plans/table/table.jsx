@@ -5,11 +5,10 @@ import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
+import InfoIcon from 'components/shared/info-icon';
 import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import checkIcon from 'icons/pricing/check.svg';
-import tooltipHoveredSvg from 'icons/tooltip-hovered.svg';
-import tooltipSvg from 'icons/tooltip.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import tableData from '../data/plans.json';
@@ -64,7 +63,10 @@ const TableHeading = ({
         dangerouslySetInnerHTML={{ __html: price }}
       />
       <Button
-        className="mt-[18px] h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-4 xl:h-9 xl:max-w-[200px] lg:w-[160px] sm:w-[150px] sm:max-w-none"
+        className={clsx(
+          'mt-[18px] h-10 w-full max-w-[204px] !font-medium tracking-tight 2xl:!text-base xl:mt-4 xl:h-9 xl:max-w-[200px] lg:w-[160px] sm:w-[150px] sm:max-w-none',
+          !isFeaturedPlan && 'bg-opacity-80'
+        )}
         size="xs"
         theme={isFeaturedPlan ? 'primary' : 'gray-15'}
         to={buttonUrl}
@@ -145,7 +147,7 @@ const Table = () => {
         className={clsx(
           'scrollbar-hidden relative flex w-full pt-3 lg:overflow-x-auto lg:pr-4',
           isHiddenItems &&
-            'after:absolute after:inset-x-0 after:bottom-0 after:h-1.5 after:bg-black-new'
+            'after:absolute after:inset-x-0 after:bottom-0 after:h-1.5 after:bg-black-pure'
         )}
       >
         {Object.keys(tableData.headings).map((key, i, arr) => {
@@ -157,7 +159,7 @@ const Table = () => {
               className={clsx(
                 'relative py-5 xl:py-4',
                 isLabelsColumn &&
-                  'z-30 flex-1 bg-black-new lg:sticky lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] sm:min-w-[160px]',
+                  'z-30 flex-1 bg-black-pure lg:sticky lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] sm:min-w-[160px]',
                 i === 1 && 'min-w-[200px] basis-[338px] xl:basis-[296px] lg:basis-[280px]',
                 i !== 1 && !isLabelsColumn && 'min-w-[220px] basis-[252px] xl:basis-[260px]'
               )}
@@ -184,6 +186,7 @@ const Table = () => {
                           isGroupTitle
                             ? 'pb-3 pt-11 lg:pt-10'
                             : ['py-3 lg:py-2.5', rowClass[item.rows]],
+                          index === 0 && isGroupTitle && '-mt-6',
                           !isGroupTitle &&
                             !rowsWithGroupTitles.includes(index - 1) &&
                             'border-t border-dashed border-gray-new-20/25',
@@ -229,9 +232,14 @@ const Table = () => {
                         isHiddenItems &&
                           'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-20/25',
                         i === 1 && 'pr-12 xl:pr-9 lg:pl-5',
-                        rowsWithGroupTitles.includes(index)
-                          ? 'h-[70px] lg:h-[66px]'
-                          : ['py-3 lg:py-2.5', rowClass[item.rows]],
+                        !rowsWithGroupTitles.includes(index) && [
+                          'py-3 lg:py-2.5',
+                          rowClass[item.rows],
+                        ],
+                        rowsWithGroupTitles.includes(index) && index > 0 && 'h-[70px] lg:h-[66px]',
+                        index === 0 &&
+                          rowsWithGroupTitles.includes(index) &&
+                          'h-[46px] lg:h-[42px]',
                         item[key] !== undefined &&
                           !rowsWithGroupTitles.includes(index - 1) &&
                           'border-t border-dashed border-gray-new-20/25',
@@ -272,39 +280,14 @@ const Table = () => {
                       )}
                       {typeof item[key] === 'object' && (
                         <div className="flex flex-col items-start justify-start">
-                          <div className="group relative inline-flex items-center justify-start">
+                          <div className="relative inline-flex items-center justify-start">
                             <span>{item[key].label}</span>
                             {item[key].tooltip && (
-                              <>
-                                <span
-                                  data-tooltip-id={`${key}_tooltip_${index}`}
-                                  data-tooltip-html={item[key]?.tooltip}
-                                >
-                                  <img
-                                    className="ml-1.5 transition-opacity duration-200 group-hover:opacity-0"
-                                    src={tooltipSvg}
-                                    width={14}
-                                    height={14}
-                                    alt=""
-                                    loading="lazy"
-                                  />
-                                  <img
-                                    className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                                    src={tooltipHoveredSvg}
-                                    width={14}
-                                    height={14}
-                                    alt=""
-                                    loading="lazy"
-                                  />
-                                </span>
-                                <Tooltip
-                                  className="z-30"
-                                  arrowColor="#303236"
-                                  id={`${key}_tooltip_${index}`}
-                                  place="right"
-                                  style={{ backgroundColor: '#303236', color: '#fff' }}
-                                />
-                              </>
+                              <InfoIcon
+                                className="ml-1.5"
+                                tooltip={item[key].tooltip}
+                                tooltipId={`${key}_tooltip_${index}`}
+                              />
                             )}
                           </div>
                           <span className="mt-1 text-sm tracking-extra-tight text-gray-new-60">

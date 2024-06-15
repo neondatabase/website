@@ -5,32 +5,35 @@ import PropTypes from 'prop-types';
 import logoBlack from 'images/logo-black.svg';
 import logoWhite from 'images/logo-white.svg';
 
-const Logo = ({ className = null, isThemeBlack }) =>
-  isThemeBlack ? (
+const Logo = ({ className = null, isDarkTheme, width, height, priority = undefined }) =>
+  isDarkTheme ? (
     <Image
-      className={clsx('h-9 w-auto 2xl:h-8', className)}
+      className={clsx(className)}
       src={logoWhite}
       alt=""
-      width={128}
-      height={36}
+      width={width}
+      height={height}
+      priority={priority}
       aria-hidden
     />
   ) : (
     <>
       <Image
-        className={clsx('h-9 w-auto dark:hidden 2xl:h-8', className)}
+        className={clsx('dark:hidden', className)}
         src={logoBlack}
         alt=""
-        width={128}
-        height={36}
+        width={width}
+        height={height}
+        priority={priority}
         aria-hidden
       />
       <Image
-        className={clsx('hidden h-9 w-auto dark:block 2xl:h-8', className)}
+        className={clsx('hidden dark:block', className)}
         src={logoWhite}
         alt=""
-        width={128}
-        height={36}
+        width={width}
+        height={height}
+        priority={priority}
         aria-hidden
       />
     </>
@@ -38,7 +41,10 @@ const Logo = ({ className = null, isThemeBlack }) =>
 
 Logo.propTypes = {
   className: PropTypes.string,
-  isThemeBlack: PropTypes.bool.isRequired,
+  isDarkTheme: PropTypes.bool.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  priority: PropTypes.bool,
 };
 
 export default Logo;

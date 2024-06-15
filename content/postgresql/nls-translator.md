@@ -2,10 +2,10 @@
 
 ## 57.1. For the Translator [#](#NLS-TRANSLATOR)
 
-  * [57.1.1. Requirements](nls-translator#NLS-TRANSLATOR-REQUIREMENTS)
-  * [57.1.2. Concepts](nls-translator#NLS-TRANSLATOR-CONCEPTS)
-  * [57.1.3. Creating and Maintaining Message Catalogs](nls-translator#NLS-TRANSLATOR-MESSAGE-CATALOGS)
-  * [57.1.4. Editing the PO Files](nls-translator#NLS-TRANSLATOR-EDITING-PO)
+- [57.1.1. Requirements](nls-translator#NLS-TRANSLATOR-REQUIREMENTS)
+- [57.1.2. Concepts](nls-translator#NLS-TRANSLATOR-CONCEPTS)
+- [57.1.3. Creating and Maintaining Message Catalogs](nls-translator#NLS-TRANSLATOR-MESSAGE-CATALOGS)
+- [57.1.4. Editing the PO Files](nls-translator#NLS-TRANSLATOR-EDITING-PO)
 
 PostgreSQL programs (server and client) can issue their messages in your favorite language — if the messages have been translated. Creating and maintaining translated message sets needs the help of people who speak their own language well and want to contribute to the PostgreSQL effort. You do not have to be a programmer at all to do this. This section explains how to help.
 
@@ -23,7 +23,7 @@ Your local gettext implementation should come with its own documentation. Some o
 
 ### 57.1.2. Concepts [#](#NLS-TRANSLATOR-CONCEPTS)
 
-The pairs of original (English) messages and their (possibly) translated equivalents are kept in *message catalogs*, one for each program (although related programs can share a message catalog) and for each target language. There are two file formats for message catalogs: The first is the “PO” file (for Portable Object), which is a plain text file with special syntax that translators edit. The second is the “MO” file (for Machine Object), which is a binary file generated from the respective PO file and is used while the internationalized program is run. Translators do not deal with MO files; in fact hardly anyone does.
+The pairs of original (English) messages and their (possibly) translated equivalents are kept in _message catalogs_, one for each program (although related programs can share a message catalog) and for each target language. There are two file formats for message catalogs: The first is the “PO” file (for Portable Object), which is a plain text file with special syntax that translators edit. The second is the “MO” file (for Machine Object), which is a binary file generated from the respective PO file and is used while the internationalized program is run. Translators do not deal with MO files; in fact hardly anyone does.
 
 The extension of the message catalog file is to no surprise either `.po` or `.mo`. The base name is either the name of the program it accompanies, or the language the file is for, depending on the situation. This is a bit confusing. Examples are `psql.po` (PO file for psql) or `fr.mo` (MO file in French).
 
@@ -60,7 +60,7 @@ The #. style comments are extracted from the source file where the message is us
 
 OK, so how does one create a “blank” message catalog? First, go into the directory that contains the program whose messages you want to translate. If there is a file `nls.mk`, then this program has been prepared for translation.
 
-If there are already some `.po` files, then someone has already done some translation work. The files are named `language.po`, where *`language`* is the [ISO 639-1 two-letter language code (in lower case)](https://www.loc.gov/standards/iso639-2/php/English_list.php), e.g., `fr.po` for French. If there is really a need for more than one translation effort per language then the files can also be named `language_region.po` where *`region`* is the [ISO 3166-1 two-letter country code (in upper case)](https://www.iso.org/iso-3166-country-codes.html), e.g., `pt_BR.po` for Portuguese in Brazil. If you find the language you wanted you can just start working on that file.
+If there are already some `.po` files, then someone has already done some translation work. The files are named `language.po`, where _`language`_ is the [ISO 639-1 two-letter language code (in lower case)](https://www.loc.gov/standards/iso639-2/php/English_list.php), e.g., `fr.po` for French. If there is really a need for more than one translation effort per language then the files can also be named `language_region.po` where _`region`_ is the [ISO 3166-1 two-letter country code (in upper case)](https://www.iso.org/iso-3166-country-codes.html), e.g., `pt_BR.po` for Portuguese in Brazil. If you find the language you wanted you can just start working on that file.
 
 If you need to start a new translation effort, then first run the command:
 
@@ -96,9 +96,9 @@ The PO files need not be completely filled in. The software will automatically f
 
 Here are some things to keep in mind while editing the translations:
 
-* Make sure that if the original ends with a newline, the translation does, too. Similarly for tabs, etc.
+- Make sure that if the original ends with a newline, the translation does, too. Similarly for tabs, etc.
 
-* If the original is a `printf` format string, the translation also needs to be. The translation also needs to have the same format specifiers in the same order. Sometimes the natural rules of the language make this impossible or at least awkward. In that case you can modify the format specifiers like this:
+- If the original is a `printf` format string, the translation also needs to be. The translation also needs to have the same format specifiers in the same order. Sometimes the natural rules of the language make this impossible or at least awkward. In that case you can modify the format specifiers like this:
 
   ```
   msgstr "Die Datei %2$s hat %1$u Zeichen."
@@ -106,8 +106,8 @@ Here are some things to keep in mind while editing the translations:
 
   Then the first placeholder will actually use the second argument from the list. The `digits$` needs to follow the % immediately, before any other format manipulators. (This feature really exists in the `printf` family of functions. You might not have heard of it before because there is little use for it outside of message internationalization.)
 
-* If the original string contains a linguistic mistake, report that (or fix it yourself in the program source) and translate normally. The corrected string can be merged in when the program sources have been updated. If the original string contains a factual mistake, report that (or fix it yourself) and do not translate it. Instead, you can mark the string with a comment in the PO file.
+- If the original string contains a linguistic mistake, report that (or fix it yourself in the program source) and translate normally. The corrected string can be merged in when the program sources have been updated. If the original string contains a factual mistake, report that (or fix it yourself) and do not translate it. Instead, you can mark the string with a comment in the PO file.
 
-* Maintain the style and tone of the original string. Specifically, messages that are not sentences (`cannot open file %s`) should probably not start with a capital letter (if your language distinguishes letter case) or end with a period (if your language uses punctuation marks). It might help to read [Section 56.3](error-style-guide).
+- Maintain the style and tone of the original string. Specifically, messages that are not sentences (`cannot open file %s`) should probably not start with a capital letter (if your language distinguishes letter case) or end with a period (if your language uses punctuation marks). It might help to read [Section 56.3](error-style-guide).
 
-* If you don't know what a message means, or if it is ambiguous, ask on the developers' mailing list. Chances are that English speaking end users might also not understand it or find it ambiguous, so it's best to improve the message.
+- If you don't know what a message means, or if it is ambiguous, ask on the developers' mailing list. Chances are that English speaking end users might also not understand it or find it ambiguous, so it's best to improve the message.

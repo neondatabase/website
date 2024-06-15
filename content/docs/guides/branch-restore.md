@@ -4,12 +4,12 @@ subtitle: Learn how to revert changes or recover lost data using Neon Branch Res
   with Time Travel Assist
 enableTableOfContents: true
 redirectFrom:
- - /docs/guides/brancing-pitr
- - /docs/guides/branch-refresh
-updatedOn: '2024-02-21T19:34:16.273Z'
+  - /docs/guides/branching-pitr
+  - /docs/guides/branch-refresh
+updatedOn: '2024-06-14T07:55:54.385Z'
 ---
 
-With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can also use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to.
+With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, Github-style visual comparison of your selected branches before restoring.
 
 ## How branch restore works
 
@@ -32,7 +32,7 @@ A few key points to keep in mind about the restore operation:
 
 In case you need to rollback a restore, Neon preserves the branch's final state before the restore operation in an automatically created backup branch, which takes the following format:
 
-```md
+```
 {branch_name}_old_{head_timestamp}
 ```
 
@@ -74,26 +74,9 @@ Similar to the manual restore operation using the Neon Console and API described
 
 ### Time Travel Assist
 
-To help troubleshoot your data's history, you can use Time Travel Assist to connect to any selected point in time within your history retention window and then run queries against that connection. It's a good idea to run this kind of query to make sure you've targeted the correct restore point before you restore a branch.
+Use Time Travel Assist to make sure you've targetted the correct restore point before you restore your branch.
 
-The restore operation and Time Travel Assist are meant to work together. When you select a branch and timestamp, you can either use that selection as your restore point or as the point in time connection to query against.
-
-![Time travel assist](/docs/guides/branch_time_travel.png)
-
-#### Ephemeral endpoints
-
-Time travel assist leverages Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which is automatically removed once you are done querying against this point-in-time connection. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
-
-However, you can see the history of operations related to the creation and deletion of the ephemeral branch on the **Operations** page:
-
-- start_compute
-- create_branch
-- delete_timeline
-- suspend_compute
-
-#### How long do ephemeral endpoints remain active
-
-The ephemeral endpoints are created according to your configured [default compute size](/docs/manage/projects#reset-the-default-compute-size). An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
+See [Time Travel Assist](/docs/guides/time-travel-assist) to learn more.
 
 ## How to use branch restore
 
@@ -113,24 +96,24 @@ First, select the **Branch to restore**. This is the target branch for the resto
 
 #### To restore a branch from its own history:
 
-1. Make sure the **From history** tab is selected. 
+1. Make sure the **From history** tab is selected.
 1. Choose your timestamp or switch to LSN.
- 1. Click **Next**.
+1. Click **Next**.
 
-    A confirmation window opens giving you details about the pending restore operation. Review these details to make sure you've made the correct selections.
+   A confirmation window opens giving you details about the pending restore operation. Review these details to make sure you've made the correct selections.
 
 1. Click **Restore** to complete the operation.
 
 #### To restore from another branch:
 
- 1. Switch to the **From another branch** tab.
- 1. Select the source branch that that you want to restore data from.
- 1. By default, the operation pulls the latest data from the source branch. If you want to pull from an earlier point in time, disable **Restore from latest data (head)**.
+1.  Switch to the **From another branch** tab.
+1.  Select the source branch that that you want to restore data from.
+1.  By default, the operation pulls the latest data from the source branch. If you want to pull from an earlier point in time, disable **Restore from latest data (head)**.
 
-     The timestamp selector will appear.
+    The timestamp selector will appear.
 
- 1. Choose your timestamp or switch to the LSN input.
- 1. Click **Next**, confirm the details of the operation, then click **Restore** to complete.
+1.  Choose your timestamp or switch to the LSN input.
+1.  Click **Next**, confirm the details of the operation, then click **Restore** to complete.
 
 All databases on the selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see a backup branch was created with the state of the branch at the restore point in time.
 
@@ -141,7 +124,7 @@ All databases on the selected branch are instantly updated with the data and sch
 <TabItem>
 Using the CLI, you can restore a branch to an earlier point in its history or another branch's history using the following command:
 
-``` bash shouldWrap
+```bash shouldWrap
 neonctl branches restore <target id|name> <source id|name @ timestamp|lsn>
 ```
 
@@ -155,13 +138,13 @@ If you want to restore a branch to an earlier point in time, use the syntax `^se
 neonctl branches restore dev/alex ^self@2024-01-01T00:00:00Z --preserve-under-name alex_old
 ```
 
-This command resets the target branch `dev/alex` to its state at the start of 2024, saving the latest data in a backup called `alex_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
+This command resets the target branch `dev/alex` to its state at the start of 2024. The command also preserves the original state of the branch in a backup file called `alex_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
 
 #### Restore from parent
 
 If you want to restore a target branch from its parent, you can use the special syntax `^parent` in the `<source id|name>` field. For example:
 
-``` bash
+```bash
 neonctl branches restore dev/alex ^parent
 ```
 
@@ -189,12 +172,12 @@ POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
 
 This endpoint lets you restore a branch using the following request parameters:
 
-| Parameter              | Type     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|------------------------|----------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **source_branch_id**   | `string` | Yes      | The ID of the branch you want to restore from.<br /><br />To restore to the latest data (head), omit `source_timestamp` and `source_lsn`.<br /><br />To restore a branch to its own history (`source_branch_id` equals branch's own Id), you must include:<br />- A time period: `source_timestamp` or `source_lsn`<br />- A backup branch: `preserve_under_name`                                                                                       |
-| **source_lsn**         | `string` | No       | A Log Sequence Number (LSN) on the source branch. The branch will be restored with data up to this LSN.                                                                                                                                                                                                                                                                                                                          |
-| **source_timestamp**   | `string` | No       | A timestamp indicating the point in time on the source branch to restore from. Use ISO 8601 format for the date-time string.                                                                                                                                                                                                                                                                                                     |
-| **preserve_under_name**| `string` | No       | If specified, a backup is created: the latest version of the branch's state is preserved under a new branch using the specified name.<br /><br />**Note:** This field is required if:<br />- The branch has children. All child branches will be moved to the newly created branch.<br />- You are restoring a branch to its own history (`source_branch_id` equals the branch's own ID).                                                               |
+| Parameter               | Type     | Required | Description                                                                                                                                                                                                                                                                                                                                                                               |
+| ----------------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **source_branch_id**    | `string` | Yes      | The ID of the branch you want to restore from.<br /><br />To restore to the latest data (head), omit `source_timestamp` and `source_lsn`.<br /><br />To restore a branch to its own history (`source_branch_id` equals branch's own Id), you must include:<br />- A time period: `source_timestamp` or `source_lsn`<br />- A backup branch: `preserve_under_name`                         |
+| **source_lsn**          | `string` | No       | A Log Sequence Number (LSN) on the source branch. The branch will be restored with data up to this LSN.                                                                                                                                                                                                                                                                                   |
+| **source_timestamp**    | `string` | No       | A timestamp indicating the point in time on the source branch to restore from. Use ISO 8601 format for the date-time string.                                                                                                                                                                                                                                                              |
+| **preserve_under_name** | `string` | No       | If specified, a backup is created: the latest version of the branch's state is preserved under a new branch using the specified name.<br /><br />**Note:** This field is required if:<br />- The branch has children. All child branches will be moved to the newly created branch.<br />- You are restoring a branch to its own history (`source_branch_id` equals the branch's own ID). |
 
 #### Restoring a branch to its own history
 
@@ -226,7 +209,7 @@ curl --request POST \ // [!code word:br-twilight-river-31791249]
      --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \ // [!code word:br-jolly-star-07007859]
      --data '
-{ 
+{
   "source_branch_id": "br-jolly-star-07007859"}
 ' | jq
 ```
@@ -240,10 +223,10 @@ curl --request POST \ // [!code word:br-damp-smoke-91135977]
      --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-damp-smoke-91135977/restore \
      --header 'Accept: application/json' \
      --header "Authorization: Bearer $NEON_API_KEY" \ //  [!code word:br-jolly-star-07007859]
-     --header 'Content-Type: application/json' \ 
+     --header 'Content-Type: application/json' \
      --data '
-{ 
-  "source_branch_id": "br-jolly-star-07007859", 
+{
+  "source_branch_id": "br-jolly-star-07007859",
   "source_timestamp": "2024-02-26T12:00:00Z"
 }
 ' | jq
@@ -252,52 +235,19 @@ curl --request POST \ // [!code word:br-damp-smoke-91135977]
 </TabItem>
 </Tabs>
 
-To make sure you choose the right restore point, we encourage you to use Time Travel Assist _before_ running a restore job, but the backup branch is there if you need it.
+To make sure you choose the right restore point, we encourage you to use [Time Travel Assist](/docs/guides//time-travel-assist) before running a restore job, but the backup branch is there if you need it.
 If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branch's relationship to the restore point backup.
-
-### Using Time Travel Assist
-
-Here is how to use the Time Travel Assist SQL editor:
-
-1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
-
-    This makes the selection for Time Travel Assist. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
-    ![Time travel assist](/docs/guides/time_travel_assist.png)
-  
-1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
-1. Write your read-only query in the editor, then click **Query at timestamp** to run the query. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
-
-If your query is successful, you will see a table of results under the editor.
-
-Depending on your query and the selected timestamp, instead of a table of results, you might see different error messages like:
-| Error                | Explanation             |
-|----------------------|-------------------------|
-| If you query a timestamp in the future         | Console request failed with 400 Bad Request: timestamp [timestamp] is in the future, try an older timestamp |
-| If you query a timestamp from before your project was created | Console request failed with 400 Bad Request: parent timestamp [timestamp] is earlier than the project creation timestamp [timestamp], try a more recent timestamp |
-| If you query from earlier than your history retention window | Console request failed with 400 Bad Request: timestamp [timestamp] recedes your project's history retention window of 168h0m0s, try a more recent timestamp |
-
-Adjust your selected timestamp accordingly.
 
 ## Billing considerations
 
-There are minimal impacts to billing from the branch restore and Time Travel Assist features.
+There are minimal impacts to billing from the branch restore and Time Travel Assist features:
 
-### Restore from history (billing)
-
-Restoring a branch to its own history adds to your number of branches &#8212; due to the restore_backup branch &#8212; but since they do not have any compute endpoint attached, they do not add to any consumption costs.
-
-### Time travel Assist (billing)
-
-The ephemeral endpoints used to run your Time Travel Assist queries do contribute to your consumption usage totals for the billing period, like any other active endpoint that consumes resources.
-
-A couple of details to note:
-
-- The endpoints are shortlived. They are suspended 10 seconds after you stop querying.
-- Since these endpoints are created according to your default compute size (which applies to all new branch computes you create),  you may want to reduce this default if you're performing a lot of time-travel queries for troubleshooting.
+- **Branch Restore** &#8212; The backups created when you restore a branch do add to your total number of branches, but since they do not have any compute endpoint attached they do not add to any consumption costs.
+- **Time Travel Assist** &#8212; Costs related to Time Travel queries are minimal. See [Billing considerations](/docs/guides/time-travel-assist#billing-considerations).
 
 ## Limitations
 
 - You cannot delete a backup branch without first removing the child branch.
 - Once you restore a branch, [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) restores from the restore backup branch, not the original parent.
 
-  For example, let's say you have a `main` branch with a child development branch `dev/alex`. You are working on `dev/alex` and decide to restore to an earlier point in time to fix something during development. At this point, `dev/alex`'s parent switches from `main` to the backup `dev/alex_old_timestamp`. A day later, you want to refresh `dev/alex` with the latest data from `main`. You can't use **Reset from parent**, since the backup is now the parent. Instead, use **Branch Restore** and select the original parent `main` as the source. 
+  For example, let's say you have a `main` branch with a child development branch `dev/alex`. You are working on `dev/alex` and decide to restore to an earlier point in time to fix something during development. At this point, `dev/alex`'s parent switches from `main` to the backup `dev/alex_old_timestamp`. A day later, you want to refresh `dev/alex` with the latest data from `main`. You can't use **Reset from parent**, since the backup is now the parent. Instead, use **Branch Restore** and select the original parent `main` as the source.

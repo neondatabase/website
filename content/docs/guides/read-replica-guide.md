@@ -2,7 +2,7 @@
 title: Working with Neon read replicas
 subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
-updatedOn: '2024-01-10T18:34:05.858Z'
+updatedOn: '2024-06-14T07:55:54.406Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with the Neon paid plans. This guide will lead you through the process of creating and managing read replicas.
@@ -35,9 +35,9 @@ To create a read replica from the Neon Console:
 3. Click **Add compute**.
 4. On the **Create Compute Endpoint** dialog, select **Read-only** as the **Compute type**.
 5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your read-only compute is automatically suspended. The default setting is 5 minutes.
-    <Admonition type="note">
-    The compute size configuration determines the processing power of your database.
-    </Admonition>
+   <Admonition type="note">
+   The compute size configuration determines the processing power of your database.
+   </Admonition>
 6. When you have finished making your selections, click **Create**.
 
 In a few moments, your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page. This is your read replica. The following section describes how to connect to your read replica.
@@ -45,8 +45,7 @@ In a few moments, your read-only compute is provisioned and appears in the **Com
 
 <TabItem>
 
-To create a read replica using the Neon CLI, use the [branches](/docs/reference/cli-branches) command, specifying the `add-compute` subcommand with `--type read_only`. If you have more than one Neon project, also include the `--project-id` option.  
-
+To create a read replica using the Neon CLI, use the [branches](/docs/reference/cli-branches) command, specifying the `add-compute` subcommand with `--type read_only`. If you have more than one Neon project, also include the `--project-id` option.
 
 ```bash
 neonctl branches add-compute mybranch --type read_only
@@ -56,7 +55,7 @@ neonctl branches add-compute mybranch --type read_only
 
 <TabItem>
 
-In Neon, a read replica is implemented as a read-only compute endpoint. To create a read-only compute endpoint using the Neon API,  use the [Create endpoint](https://api-docs.neon.tech/reference/createprojectendpoint) method. The `type` attribute in the following example specifies `read_only`, which creates a read-only compute endpoint. For information about obtaining the required `project_id` and `branch_id` parameters, refer to [Create an endpoint](https://api-docs.neon.tech/reference/createprojectendpoint), in the _Neon API reference_.
+In Neon, a read replica is implemented as a read-only compute endpoint. To create a read-only compute endpoint using the Neon API, use the [Create endpoint](https://api-docs.neon.tech/reference/createprojectendpoint) method. The `type` attribute in the following example specifies `read_only`, which creates a read-only compute endpoint. For information about obtaining the required `project_id` and `branch_id` parameters, refer to [Create an endpoint](https://api-docs.neon.tech/reference/createprojectendpoint), in the _Neon API reference_.
 
 ```bash
 curl --request POST \
@@ -86,15 +85,15 @@ Connecting to a read replica is the same as connecting to any branch, except you
 1. Under **Compute**, select a **Read-only** compute endpoint.
 1. Select a connection string or a code example from the drop-down menu and copy it. This is the information you need to connect to the read replica from you client or application.
 
-    A **psql** connection string appears similar to the following:
+   A **psql** connection string appears similar to the following:
 
-    ```bash
-    postgres://[user]:[password]@[neon_hostname]/[dbname]
-    ```
+   ```bash
+   postgres://[user]:[password]@[neon_hostname]/[dbname]
+   ```
 
-    If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string or example.
+   If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string or example.
 
-    When you use a read-only connection string, you are connecting to a read replica. No write operations are permitted on this connection.
+   When you use a read-only connection string, you are connecting to a read replica. No write operations are permitted on this connection.
 
 ## View read replicas
 
@@ -109,7 +108,7 @@ To view read replicas for a branch, select **Branches** in the Neon Console, and
 </TabItem>
 
 <TabItem>
-In Neon, a read replica is implemented as a read-only compute endpoint.  To view read-only compute endpoints with the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint), use the [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints) method. 
+In Neon, a read replica is implemented as a read-only compute endpoint.  To view read-only compute endpoints with the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint), use the [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints) method.
 
 ```bash
 curl -X 'GET' \
@@ -125,7 +124,6 @@ In the response body for this method, read replica compute endpoints are identif
 
 </Tabs>
 
-
 ## Edit a read replica
 
 You can edit a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to change the [Compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) or [Autosuspend](/docs/manage/endpoints#auto-suspend-configuration) configuration.
@@ -139,10 +137,11 @@ To edit a read-only compute endpoint using the Neon Console:
 1. Select a branch.
 1. Under **Computes**, identify the read-only compute endpoint you want to modify, click the compute endpoint menu, and select **Edit**.
 1. Specify your **Compute size** or **Suspend compute after a period of inactivity** changes and click **Save**.
+
 </TabItem>
 
 <TabItem>
-In Neon, a read replica is implemented as a read-only compute endpoint. To edit a read-only compute endpoint with the Neon API, use the [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) method. 
+In Neon, a read replica is implemented as a read-only compute endpoint. To edit a read-only compute endpoint with the Neon API, use the [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) method.
 
 ```bash
 curl --request PATCH \
@@ -168,7 +167,6 @@ Compute endpoints are identified by their `project_id` and `endpoint_id`. For in
 
 </Tabs>
 
-
 ## Delete a read replica
 
 You can delete a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Deleting a read replica is a permanent action, but you can quickly create a new read replica if you need one.
@@ -183,10 +181,11 @@ To delete a read replica using the Neon Console:
 1. Under **Computes**, find the read-only compute endpoint you want to delete. Read replicas have a `R/O` type.
 1. Click the compute endpoint kebab menu, and select **Delete**.
 1. On the confirmation dialog, click **Delete**.
+
 </TabItem>
 
 <TabItem>
-In Neon, a read replica is implemented as a read-only compute endpoint. To delete a read-only compute endpoint with the Neon API, use the [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint) method. 
+In Neon, a read replica is implemented as a read-only compute endpoint. To delete a read-only compute endpoint with the Neon API, use the [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint) method.
 
 ```bash
 curl --request DELETE \

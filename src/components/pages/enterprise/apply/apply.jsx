@@ -46,7 +46,7 @@ const Apply = () => {
             <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green-45">
               Apply now
             </span>
-            <h2 className="mt-3 text-5xl font-medium leading-none tracking-[-0.02em] xl:text-[44px] lg:text-4xl md:text-[32px]">
+            <h2 className="mt-3 font-title text-5xl font-medium leading-none tracking-[-0.02em] xl:text-[44px] lg:text-4xl md:text-[32px]">
               Request an Enterprise Trial
             </h2>
             <p className="md:flat-breaks sm:flat-none mt-3 text-lg font-light leading-snug xl:text-base">

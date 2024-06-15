@@ -2,10 +2,8 @@
 
 ## 14.2. Statistics Used by the Planner [#](#PLANNER-STATS)
 
-  * [14.2.1. Single-Column Statistics](planner-stats#PLANNER-STATS-SINGLE-COLUMN)
-  * [14.2.2. Extended Statistics](planner-stats#PLANNER-STATS-EXTENDED)
-
-
+- [14.2.1. Single-Column Statistics](planner-stats#PLANNER-STATS-SINGLE-COLUMN)
+- [14.2.2. Extended Statistics](planner-stats#PLANNER-STATS-EXTENDED)
 
 [#id](#PLANNER-STATS-SINGLE-COLUMN)
 
@@ -34,11 +32,7 @@ Here we can see that `tenk1` contains 10000 rows, as do its indexes, but the ind
 
 For efficiency reasons, `reltuples` and `relpages` are not updated on-the-fly, and so they usually contain somewhat out-of-date values. They are updated by `VACUUM`, `ANALYZE`, and a few DDL commands such as `CREATE INDEX`. A `VACUUM` or `ANALYZE` operation that does not scan the entire table (which is commonly the case) will incrementally update the `reltuples` count on the basis of the part of the table it did scan, resulting in an approximate value. In any case, the planner will scale the values it finds in `pg_class` to match the current physical table size, thus obtaining a closer approximation.
 
-
-
-Most queries retrieve only a fraction of the rows in a table, due to `WHERE` clauses that restrict the rows to be examined. The planner thus needs to make an estimate of the *selectivity* of `WHERE` clauses, that is, the fraction of rows that match each condition in the `WHERE` clause. The information used for this task is stored in the [`pg_statistic`](catalog-pg-statistic) system catalog. Entries in `pg_statistic` are updated by the `ANALYZE` and `VACUUM ANALYZE` commands, and are always approximate even when freshly updated.
-
-
+Most queries retrieve only a fraction of the rows in a table, due to `WHERE` clauses that restrict the rows to be examined. The planner thus needs to make an estimate of the _selectivity_ of `WHERE` clauses, that is, the fraction of rows that match each condition in the `WHERE` clause. The information used for this task is stored in the [`pg_statistic`](catalog-pg-statistic) system catalog. Entries in `pg_statistic` are updated by the `ANALYZE` and `VACUUM ANALYZE` commands, and are always approximate even when freshly updated.
 
 Rather than look at `pg_statistic` directly, it's better to look at its view [`pg_stats`](view-pg-stats) when examining the statistics manually. `pg_stats` is designed to be more easily readable. Furthermore, `pg_stats` is readable by all, whereas `pg_statistic` is only readable by a superuser. (This prevents unprivileged users from learning something about the contents of other people's tables from the statistics. The `pg_stats` view is restricted to show only rows about tables that the current user can read.) For example, we might do:
 
@@ -65,7 +59,7 @@ WHERE tablename = 'road';
 
 Note that two rows are displayed for the same column, one corresponding to the complete inheritance hierarchy starting at the `road` table (`inherited`=`t`), and another one including only the `road` table itself (`inherited`=`f`).
 
-The amount of information stored in `pg_statistic` by `ANALYZE`, in particular the maximum number of entries in the `most_common_vals` and `histogram_bounds` arrays for each column, can be set on a column-by-column basis using the `ALTER TABLE SET STATISTICS` command, or globally by setting the [default\_statistics\_target](runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET) configuration variable. The default limit is presently 100 entries. Raising the limit might allow more accurate planner estimates to be made, particularly for columns with irregular data distributions, at the price of consuming more space in `pg_statistic` and slightly more time to compute the estimates. Conversely, a lower limit might be sufficient for columns with simple data distributions.
+The amount of information stored in `pg_statistic` by `ANALYZE`, in particular the maximum number of entries in the `most_common_vals` and `histogram_bounds` arrays for each column, can be set on a column-by-column basis using the `ALTER TABLE SET STATISTICS` command, or globally by setting the [default_statistics_target](runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET) configuration variable. The default limit is presently 100 entries. Raising the limit might allow more accurate planner estimates to be made, particularly for columns with irregular data distributions, at the price of consuming more space in `pg_statistic` and slightly more time to compute the estimates. Conversely, a lower limit might be sufficient for columns with simple data distributions.
 
 Further details about the planner's use of statistics can be found in [Chapter 76](planner-stats-details).
 
@@ -73,11 +67,9 @@ Further details about the planner's use of statistics can be found in [Chapter 
 
 ### 14.2.2. Extended Statistics [#](#PLANNER-STATS-EXTENDED)
 
+It is common to see slow queries running bad execution plans because multiple columns used in the query clauses are correlated. The planner normally assumes that multiple conditions are independent of each other, an assumption that does not hold when column values are correlated. Regular statistics, because of their per-individual-column nature, cannot capture any knowledge about cross-column correlation. However, PostgreSQL has the ability to compute _multivariate statistics_, which can capture such information.
 
-
-It is common to see slow queries running bad execution plans because multiple columns used in the query clauses are correlated. The planner normally assumes that multiple conditions are independent of each other, an assumption that does not hold when column values are correlated. Regular statistics, because of their per-individual-column nature, cannot capture any knowledge about cross-column correlation. However, PostgreSQL has the ability to compute *multivariate statistics*, which can capture such information.
-
-Because the number of possible column combinations is very large, it's impractical to compute multivariate statistics automatically. Instead, *extended statistics objects*, more often called just *statistics objects*, can be created to instruct the server to obtain statistics across interesting sets of columns.
+Because the number of possible column combinations is very large, it's impractical to compute multivariate statistics automatically. Instead, _extended statistics objects_, more often called just _statistics objects_, can be created to instruct the server to obtain statistics across interesting sets of columns.
 
 Statistics objects are created using the [`CREATE STATISTICS`](sql-createstatistics) command. Creation of such an object merely creates a catalog entry expressing interest in the statistics. Actual data collection is performed by `ANALYZE` (either a manual command, or background auto-analyze). The collected values can be examined in the [`pg_statistic_ext_data`](catalog-pg-statistic-ext-data) catalog.
 
@@ -89,7 +81,7 @@ The following subsections describe the kinds of extended statistics that are cur
 
 #### 14.2.2.1. Functional Dependencies [#](#PLANNER-STATS-EXTENDED-FUNCTIONAL-DEPS)
 
-The simplest kind of extended statistics tracks *functional dependencies*, a concept used in definitions of database normal forms. We say that column `b` is functionally dependent on column `a` if knowledge of the value of `a` is sufficient to determine the value of `b`, that is there are no two rows having the same value of `a` but different values of `b`. In a fully normalized database, functional dependencies should exist only on primary keys and superkeys. However, in practice many data sets are not fully normalized for various reasons; intentional denormalization for performance reasons is a common example. Even in a fully normalized database, there may be partial correlation between some columns, which can be expressed as partial functional dependency.
+The simplest kind of extended statistics tracks _functional dependencies_, a concept used in definitions of database normal forms. We say that column `b` is functionally dependent on column `a` if knowledge of the value of `a` is sufficient to determine the value of `b`, that is there are no two rows having the same value of `a` but different values of `b`. In a fully normalized database, functional dependencies should exist only on primary keys and superkeys. However, in practice many data sets are not fully normalized for various reasons; intentional denormalization for performance reasons is a common example. Even in a fully normalized database, there may be partial correlation between some columns, which can be expressed as partial functional dependency.
 
 The existence of functional dependencies directly affects the accuracy of estimates in certain queries. If a query contains conditions on both the independent and the dependent column(s), the conditions on the dependent columns do not further reduce the result size; but without knowledge of the functional dependency, the query planner will assume that the conditions are independent, resulting in underestimating the result size.
 

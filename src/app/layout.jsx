@@ -2,41 +2,32 @@ import 'styles/globals.css';
 
 import Script from 'next/script';
 
-import TopBar from 'components/shared/topbar';
+import { ActiveLabelProvider } from '../components/pages/doc/code-tabs/CodeTabsContext';
 
+import { inter, esbuild } from './fonts';
 import ThemeProvider from './provider';
-
-const fontsBasePath = '/fonts';
-const fontsPaths = [
-  '/ibm-plex-sans/ibm-plex-sans-bold.woff2',
-  '/ibm-plex-sans/ibm-plex-sans-regular.woff2',
-];
 
 export const preferredRegion = 'edge';
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#000000',
+};
+
 // eslint-disable-next-line react/prop-types
 const RootLayout = ({ children }) => (
-  <html lang="en">
+  <html lang="en" className={`${inter.variable} ${esbuild.variable} dark`}>
     <head>
       {process.env.NODE_ENV === 'production' && (
         <Script strategy="afterInteractive" src="https://neonapi.io/cb.js" />
       )}
-      {fontsPaths.map((fontPath, index) => (
-        <link
-          rel="preload"
-          href={`${fontsBasePath}${fontPath}`}
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-          key={index}
-        />
-      ))}
       <link rel="preconnect" href="https://console.neon.tech" />
     </head>
     <body>
       <ThemeProvider>
-        <TopBar />
-        {children}
+        <ActiveLabelProvider>{children}</ActiveLabelProvider>
       </ThemeProvider>
     </body>
   </html>
