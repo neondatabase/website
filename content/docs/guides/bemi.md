@@ -7,9 +7,9 @@ isDraft: false
 
 <LRNotice/>
 
-[Bemi](https://bemi.io/) is an open-source solution that plugs into PostgreSQL and ORMs to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
+[Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
 
-Designed with simplicity and non-invasiveness in mind, Bemi doesn't require any alterations to your existing database structure. It operates in the background, empowering you with data change tracking features.
+Designed with simplicity and non-invasiveness in mind, Bemi doesn't require alterations to your existing database structure. It operates in the background, empowering you with data change tracking features.
 
 In this guide, we'll show you how to connect your Neon database to Bemi to create an automatic audit trail.
 
@@ -19,6 +19,8 @@ In this guide, we'll show you how to connect your Neon database to Bemi to creat
 - A [Neon account](https://console.neon.tech/)
 
 ## Enable logical replication in Neon
+
+Bemi tracks changes made in a Postgres database through Change Data Capture (CDC), which is a process of identifying and capturing changes made to your database tables in real-time. In Postgres, CDC is supported by the Postgres logical replication feature. In this step, we'll enable logical replication for your Neon Postgres project.
 
 <Admonition type="important">
 Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from replica to logical for all databases in your Neon project. Once the `wal_level` setting is changed to logical, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be dropped and have to reconnect.
@@ -42,33 +44,44 @@ logical
 
 ## Connect your Neon database to Bemi
 
-The following instructions assume that you are using a Postgres role created via the Neon Console, API, or CLI. These roles are automatically granted `neon_superuser` group automatically granted the required REPLICATION privilege.
+The following instructions assume you are connecting with a Postgres role created via the Neon Console, API, or CLI. These roles are automatically granted membership in a `neon_superuser` group, which has the Postgres `REPLICATION` privilege. The role you use to connect to Bemi requires this privilege. If you prefer to create a dedicated read-only role for use with Bemi, see [Use a read-only Postgres role for Bemi](#use-a-read-only-postgres-role-for-bemi).
 
-1. Create a [new database connection](https://dashboard.bemi.io/databases/source/new) by entering the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project. For example, given a connection string like this:
+To connect your database to Bemi:
 
-    ```sql
-    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+1. In Neon, retrieve your database connection string from the **Connection Details** widget on the **Project Dashboard**, which will look similar to this:
+
+      ```sql shouldWrap
+    postgres://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
     ```
 
-    Enter the details in the **Connect PostgreSQL Database** dialog as shown below. Your values will differ.
+2. In Bemi, select **Databases** > **Add Database** to open the **Connect PostgreSQL Database** dialog.
+3. Enter the Neon database connection details from your connection string. For example, given the connection string shown above, enter the details in the **Connect PostgreSQL Database** dialog as shown below. Your values will differ except for the port number. Neon uses the default Postgres port, `5432`.
 
     - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
     - **Port**: 5432
-    - **Database Name**: dbname
-    - **Username**: alex
+    - **Database Name**: neondb
+    - **Username**: neondb_owner
     - **Password**: AbC123dEf
+
+    You can also use the **Environment** field to specify whether the configuration is for a **Production**, **Staging**, or **Test** environment.
 
     ![Bemi Connect PostgreSQL Database](/docs/guides/bemi_connect_postgres.png)
 
-2. During the connection setup, or any time after, you can configure the tables you want to track changes for:
+3. After entering your connection details, click **Add Database**.
+
+3. Configure the tables you want to track changes for and choose whether to track new tables automatically. You can change this selection later, if necessary.
 
     ![Bemi Tracked Tables](/docs/guides/bemi_tracked_tables.png)
 
-3. Please wait a few minutes while Bemi provisions the infrastructure. Once this succeeds, you’ve successfully configured a Bemi Postgres source for your Neon database.
+    Click **Save** to continue.
+
+4. Wait a few minutes while Bemi provisions the infrastructure. When this operation completes, you’ve successfully configured a Bemi Postgres source for your Neon database. You'll be able to track data changes through the Bemi Browser UI page, where you can filter by **Operation** (`Create`, `Update`, `Delete`), **Table**, or **Primary Key**. You can also view data changes by environment if you have configured more than one.
+
+    ![Bemi browser UI](/docs/guides/bemi_browser_ui.png)
 
 ## Use a read-only Postgres role for Bemi
 
-Alternatively, you can manually create read-only PostgreSQL database credentials to connect to your Neon database. To do so requires running the following commands, which are safe to execute without any downtime or performance issues:
+If preferred, you can create a dedicated read-only Postgres role for connecting your Neon database to Bemi. To do so, run the commands below. The commands assume your database resides in the `public` schema in Postgres. If your database resides in a different schema, adjust the commands as necessary to specify the correct schema name.
 
 - `CREATE ROLE`: Creates a new read-only user for Bemi to read database changes.
 - `CREATE PUBLICATION`: creates a "channel" that we'll subscribe to and track changes in real-time.
@@ -97,14 +110,14 @@ CALL _bemi_set_replica_identity();
 ```
 
 <Admonition type="note">
-After creating a read-only role, you can find the connection details for this role in the **Connection Details** widget in the Neon console.
+After creating a read-only role, you can find the connection details for this role in the **Connection Details** widget in the Neon console. Use this role when connecting your Neon database to Bemi, as described [above](#connect-your-neon-database-to-bemi).
 </Admonition>
 
 ## Allow inbound traffic
 
-If you’re using Neon's IP Allow feature to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Bemi. [Contact Bemi](mailto:hi@bemi.io) to get the static IPs that need to be allowlisted. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+If you're using Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) plan, to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Bemi. [Contact Bemi](mailto:hi@bemi.io) to get the static IPs that need to be allowlisted. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
- ## **References**
+ ## References
 
 - [The ultimate guide to PostgreSQL data change tracking](https://blog.bemi.io/the-ultimate-guide-to-postgresql-data-change-tracking/)
 - [Logical replication - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html)
