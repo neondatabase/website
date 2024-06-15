@@ -15,9 +15,10 @@
     - title: 2 - Connect Neon to your stack
       slug: get-started-with-neon/connect-neon
     - title: 3 - Branching workflows
-      slug: get-started-with-neon/workflow-primer 
+      slug: get-started-with-neon/workflow-primer
     - title: 4 - Getting ready for production
       slug: get-started-with-neon/production-checklist
+      enableTableOfContents: true
     - title: Framework quickstarts
       slug: get-started-with-neon/frameworks
       items:
@@ -25,19 +26,26 @@
           slug: guides/astro
         - title: Django
           slug: guides/django
+        - title: Express
+          slug: guides/express
+          tag: new
         - title: Laravel
           slug: guides/laravel
         - title: Next.js
           slug: guides/nextjs
+
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
           slug: guides/quarkus-reactive
+        - title: Reflex
+          slug: guides/reflex
+          tag: new
         - title: Remix
           slug: guides/remix
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
-        - title: SQL Alchemy
+        - title: SQLAlchemy
           slug: guides/sqlalchemy
         - title: Symfony
           slug: guides/symfony
@@ -64,8 +72,10 @@
     - title: Import data
       slug: import/import-intro
       items:
-        - title: Import from Postgres
+        - title: Import from Postgres with pg_dump and pg_restore
           slug: import/import-from-postgres
+        - title: Import from Postgres with pg-import
+          slug: import/import-from-postgres-pg-import
         - title: Import from a Neon project
           slug: import/import-from-neon
         - title: Import from CSV
@@ -212,63 +222,23 @@
               slug: guides/reset-from-parent
             - title: Branch Restore
               slug: guides/branch-restore
-            - title: Branching with the CLI
-              slug: guides/branching-neon-cli
-            - title: Branching with the API
-              slug: guides/branching-neon-api
-            - title: Branching with GitHub Actions
-              slug: guides/branching-github-actions
-            - title: GitHub integration
-              slug: guides/neon-github-app
-            - title: Branching — Testing queries
-              slug: guides/branching-test-queries
-            - title: Promote a branch with the Neon API
-              slug: guides/branch-promote
-        - title: Logical replication
-          slug: guides/logical-replication-guide
-          items:
-            - title: Airbyte
-              slug: guides/logical-replication-airbyte
-            - title: Bemi
-              slug: guides/bemi
-            - title: ClickHouse (DoubleCloud)
-              slug: guides/logical-replication-clickhouse
-            - title: Fivetran
-              slug: guides/logical-replication-fivetran
-            - title: Kafka (Confluent)
-              slug: guides/logical-replication-kafka-confluent
-            - title: Materialize
-              slug: guides/logical-replication-materialize
-            - title: Postgres
-              slug: guides/logical-replication-postgres
-        - title: Project sharing
-          slug: guides/project-sharing-guide
-        - title: Read replicas
-          items:
-            - title: Working with read replicas
-              slug: guides/read-replica-guide
-            - title: Data analysis and reporting
-              slug: guides/read-replica-data-analysis
-            - title: Use read replicas with Prisma
-              slug: guides/read-replica-prisma
-        - title: Time Travel
-          slug: guides/time-travel-assist
-          items:
-            - title: Time Travel tutorial
-              slug: guides/time-travel-tutorial
-        - title: Schema diff
-          slug: guides/schema-diff
-          items:
-            - title: Schema diff tutorial
-              slug: guides/schema-diff-tutorial
-        - title: Protected branches
-          slug: guides/protected-branches
-    - title: Frameworks
+        - title: Branching with the CLI
+          slug: guides/branching-neon-cli
+        - title: Branching with the API
+          slug: guides/branching-neon-api
+        - title: Branching with GitHub Actions
+          slug: guides/branching-github-actions
+        - title: Branching — Testing queries
+          slug: guides/branching-test-queries
+        - title: Promote a branch with the Neon API
+          slug: guides/branch-promote
+    - title: Logical replication
+      slug: introduction/logical-replication
       items:
         - title: Concepts
           slug: guides/logical-replication-concepts
         - title: Manage
-          slug: guides/logical-replication-neon 
+          slug: guides/logical-replication-neon
     - title: Read replicas
       slug: introduction/read-replicas
       items:
@@ -296,7 +266,7 @@
 - title: Integration guides
   slug: guides/integrations
   items:
-    - title: Deployment
+    - title: Deploy
       items:
         - title: Vercel
           items:
@@ -332,7 +302,7 @@
           slug: serverless/serverless-driver
         - title: AWS Lambda
           slug: guides/aws-lambda
-    - title: Backend-as-a-service
+    - title: Query
       items:
         - title: Exograph
           slug: guides/exograph
@@ -342,37 +312,47 @@
           slug: guides/grafbase
         - title: Hasura
           slug: guides/hasura
-        - title: Sequin
-          slug: guides/sequin
+        - title: Cloudflare Hyperdrive
+          slug: guides/cloudflare-hyperdrive
+        - title: Outerbase
+          slug: guides/outerbase
         - title: StepZen
           slug: guides/stepzen
         - title: WunderGraph
           slug: guides/wundergraph
-    - title: Caching
-      items:
-        - title: Cloudflare Hyperdrive
-          slug: guides/cloudflare-hyperdrive
-        - title: PolyScale
-          slug: guides/polyscale
-    - title: CI/CD
+    - title: Develop
       items:
         - title: GitHub integration
           slug: guides/neon-github-app
-    - title: Replication
+        - title: Neosync
+          items:
+            - title: Generate synthetic data
+              slug: guides/neosync-generate
+              tag: new
+            - title: Anonymize data
+              slug: guides/neosync-anonymize
+              tag: new
+        - title: Prisma
+          slug: guides/prisma  
+    - title: Replicate
       items:
         - title: Airbyte
           slug: guides/logical-replication-airbyte
+        - title: Bemi
+          slug: guides/bemi
         - title: ClickHouse (DoubleCloud)
           slug: guides/logical-replication-clickhouse
-        - title: Fivetran
-          slug: guides/logical-replication-fivetran
         - title: Confluent
           slug: guides/logical-replication-kafka-confluent
+        - title: Fivetran
+          slug: guides/logical-replication-fivetran
         - title: Materialize
           slug: guides/logical-replication-materialize
         - title: Postgres
           slug: guides/logical-replication-postgres
-    - title: Migrations
+        - title: Sequin
+          slug: guides/sequin
+    - title: Schema Migration
       items:
         - title: Django
           slug: guides/django-migrations
@@ -402,12 +382,6 @@
           slug: guides/sequelize
         - title: SQLAlchemy
           slug: guides/sqlalchemy-migrations
-    - title: Tools
-      items:
-        - title: Outerbase
-          slug: guides/outerbase
-        - title: Prisma
-          slug: guides/prisma
     - title: Authentication
       items:
         - title: Auth0
@@ -416,12 +390,6 @@
           slug: guides/auth-clerk
         - title: Okta
           slug: guides/auth-okta
-    - title: Tools
-      items:
-        - title: Outerbase
-          slug: guides/outerbase
-        - title: Prisma
-          slug: guides/prisma
 - title: Postgres guides
   slug: postgresql/introduction
   items:
@@ -478,40 +446,52 @@
     - title: Functions
       slug: functions/introduction
       items:
-        - title: array_to_json
-          slug: functions/array_to_json
-        - title: dense_rank
-          slug: functions/dense_rank
-        - title: json_array_elements
-          slug: functions/json_array_elements
-        - title: jsonb_array_elements
-          slug: functions/jsonb_array_elements
-        - title: json_build_object
-          slug: functions/json_build_object
-        - title: json_each
-          slug: functions/json_each
-        - title: jsonb_each
-          slug: functions/jsonb_each
-        - title: json_extract_path
-          slug: functions/json_extract_path
-        - title: jsonb_extract_path
-          slug: functions/jsonb_extract_path
-        - title: json_extract_path_text
-          slug: functions/json_extract_path_text
-        - title: jsonb_extract_path_text
-          slug: functions/jsonb_extract_path_text
-        - title: json_object
-          slug: functions/json_object
-        - title: jsonb_object
-          slug: functions/jsonb_object
-        - title: json_populate_record
-          slug: functions/json_populate_record
-        - title: jsonb_populate_record
-          slug: functions/jsonb_populate_record
-        - title: json_to_record
-          slug: functions/json_to_record
-        - title: jsonb_to_record
-          slug: functions/jsonb_to_record
+        - title: JSON functions
+          items:
+            - title: array_to_json
+              slug: functions/array_to_json
+            - title: json_array_elements
+              slug: functions/json_array_elements
+            - title: jsonb_array_elements
+              slug: functions/jsonb_array_elements
+            - title: json_build_object
+              slug: functions/json_build_object
+            - title: json_each
+              slug: functions/json_each
+            - title: jsonb_each
+              slug: functions/jsonb_each
+            - title: json_extract_path
+              slug: functions/json_extract_path
+            - title: jsonb_extract_path
+              slug: functions/jsonb_extract_path
+            - title: json_extract_path_text
+              slug: functions/json_extract_path_text
+            - title: jsonb_extract_path_text
+              slug: functions/jsonb_extract_path_text
+            - title: json_object
+              slug: functions/json_object
+            - title: jsonb_object
+              slug: functions/jsonb_object
+            - title: json_populate_record
+              slug: functions/json_populate_record
+            - title: jsonb_populate_record
+              slug: functions/jsonb_populate_record
+            - title: json_to_record
+              slug: functions/json_to_record
+            - title: jsonb_to_record
+              slug: functions/jsonb_to_record
+        - title: Window functions
+          items:
+            - title: dense_rank
+              slug: functions/dense_rank
+            - title: lag
+              slug: functions/window-lag
+            - title: lead
+              slug: functions/window-lead
+        - title: String functions
+          items:
+            - title: concat
+              slug: functions/concat
     - title: Optimize queries
       slug: postgresql/query-performance
     - title: Query reference
@@ -574,4 +554,4 @@
     - title: Docs Contribution Guide
       slug: community/contribution-guide
 - title: Glossary
-  slug: /reference/glossary
+  slug: reference/glossary
