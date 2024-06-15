@@ -165,14 +165,13 @@ If the solution described above does not work, which was the case on an AWS EC2 
      into postgres://alex:endpoint=ep-cool-darkness-123456:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require;
    ```
 
-   You do not need to specify the `--no-ssl-cert-verification` option described in the previous section since your custom Docker image now includes the certs. 
+   You do not need to specify the `--no-ssl-cert-verification` option described in the previous section since your custom Docker image now includes the certs.
 
 6. Execute the following command to run your custom Docker container:
 
    ```sh
    docker run --rm -it -v /home/ubuntu/pgload:/mnt custom-pgloader-image pgloader /mnt/config.load
    ```
-
 
 ## References
 
