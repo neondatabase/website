@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-26T11:23:38.243Z'
+updatedOn: '2024-06-14T07:55:54.417Z'
 ---
 
 A single read-write compute endpoint is created for your project's [primary branch](/docs/reference/glossary#primary-branch), by default.
@@ -22,19 +22,18 @@ Project
 
 Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints.
 
-Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The  [Neon Free Tier](/docs/introduction/plans#free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint. Paid plans support larger compute sizes and autoscaling.
+Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The [Neon Free Tier](/docs/introduction/plans#free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint. Paid plans support larger compute sizes and autoscaling.
 
 ## View a compute endpoint
 
-A compute endpoint is associated with a branch. To view a compute endpoint, select **Branches** in the Neon Console, and select a branch. If the branch has a compute endpoint, it is shown on the branch page.
+A compute endpoint is associated with a branch. To view a compute endpoint, select **Branches** in the Neon Console, and select a branch. If the branch has a compute endpoint, it is shown on the **Computes** tab on the branch page.
 
 Compute endpoint details shown on the branch page include:
 
-- **Id**: The compute endpoint ID.
--- **Type**: The type of compute endpoint. `R/W` (Read-write) or `R/O` (Read-only).
-- **Status**: The compute endpoint status (`Active`, `Idle`, or `Stopped`).
-- **Compute size**: The size of the compute endpoint. Users on paid plans can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint. Shows autoscaling minimum and maximum vCPU values if autoscaling is enabled.
-- **Auto-suspend delay**: The number of seconds of inactivity after which a compute endpoint is automatically suspended. The default is 300 seconds (5 minutes). For more information, see [Autosuspend configuration](#auto-suspend-configuration).
+- The type of compute, which can be **RW Compute** (read-write) or **RO compute** (read-only).
+- The compute status, typically **Active** or **Idle**.
+- **Compute ID**: The compute endpoint ID, which always starts with an `ep-` prefix; for example: `ep-quiet-butterfly-w2qres1h`
+- - **Size**: The size of the compute endpoint. Users on paid plans can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint. Shows autoscaling minimum and maximum vCPU values if autoscaling is enabled.
 - **Last active**: The date and time the compute was last active.
 
 ## Create a compute endpoint
@@ -44,9 +43,9 @@ You can only create a read-write compute endpoint for a branch that does not hav
 To create an endpoint:
 
 1. In the Neon Console, select **Branches**.
-1. Select a branch that does not have an endpoint
-1. Click **Add compute**.
-1. On the **Create compute endpoint** dialog, specify your settings and click **Create**. Selecting **Read-only** creates a [Read replica](/docs/introduction/read-replicas).
+1. Select a branch.
+1. Click **Add a compute**.
+1. On the **Add compute endpoint** dialog, specify your compute settings, including compute type, size, autoscaling, and autosuspend settings, and click **Create**. Selecting the **RO replica** compute type creates a [Read replica](/docs/introduction/read-replicas).
 
 ## Edit a compute endpoint
 
@@ -56,23 +55,26 @@ To edit a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Click the kebab menu in the **Computes** table, and select **Edit**.
-   
-   The **Edit** window opens, letting you take a range of actions, depending on your tier.
+1. From the Compute tab, select **Edit** for the compute endpoint you wnat to edit.
+
+   The **Edit** window opens, letting you modify settings such as compute size, the autoscaling configuration (if applicable), and your autosuspend setting.
+
 1. Once you've made your changes, click **Save**. All changes take immediate effect.
 
-For information about selecting an appropriate compute size, see [How to size your compute](#how-to-size-your-compute).
+For information about selecting an appropriate compute size or autoscaling configuration, see [How to size your compute](#how-to-size-your-compute).
 
 ### What happens to the compute endpoint when making changes
 
 Some key points to understand about how your endpoint responds when you make changes to your compute settings:
 
-* Changing the size of your fixed compute restarts the endpoint and _temporarily disconnects all existing connections_. 
+- Changing the size of your fixed compute restarts the endpoint and _temporarily disconnects all existing connections_.
   <Admonition type="note">
-  When your compute resizes automatically as part of the autoscaling feature, there are no restarts or disconnects; it just scales. 
+  When your compute resizes automatically as part of the autoscaling feature, there are no restarts or disconnects; it just scales.
   </Admonition>
+
 * Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
 * Changes to autosuspend settings do not require an endpoint restart; existing connections are unaffected.
+* If you disable autosuspend entirely, you will need to restart your compute manually to get the latest compute-related release updates from Neon. See [Restart a compute endpoint](#restart-a-compute-endpoint).
 
 To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
 
@@ -82,18 +84,18 @@ Users on paid plans can change compute size settings when [editing a compute end
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the vCPUs, as shown in the table below.
 
-| Compute size (in CUs)  | vCPU | RAM    |
-|:--------------|:-----|:-------|
-| .25           | .25  | 1 GB   |
-| .5            | .5   | 2 GB   |
-| 1             | 1    | 4 GB   |
-| 2             | 2    | 8 GB   |
-| 3             | 3    | 12 GB  |
-| 4             | 4    | 16 GB  |
-| 5             | 5    | 20 GB  |
-| 6             | 6    | 24 GB  |
-| 7             | 7    | 28 GB  |
-| 8             | 8    | 32 GB  |
+| Compute size (in CUs) | vCPU | RAM   |
+| :-------------------- | :--- | :---- |
+| .25                   | .25  | 1 GB  |
+| .5                    | .5   | 2 GB  |
+| 1                     | 1    | 4 GB  |
+| 2                     | 2    | 8 GB  |
+| 3                     | 3    | 12 GB |
+| 4                     | 4    | 16 GB |
+| 5                     | 5    | 20 GB |
+| 6                     | 6    | 24 GB |
+| 7                     | 7    | 28 GB |
+| 8                     | 8    | 32 GB |
 
 Neon supports fixed-size and autoscaling compute configurations.
 
@@ -106,7 +108,7 @@ The `neon_utils` extension provides a `num_cpus()` function you can use to monit
 
 ### How to size your compute
 
-The size of your compute determines the amount of frequently accessed data you can cache in memory and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues. 
+The size of your compute determines the amount of frequently accessed data you can cache in memory and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues.
 
 In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The LFC can use up to 80% of your compute's RAM.
 
@@ -114,30 +116,30 @@ The Postgres `max_connections` setting defines your compute's maximum simultaneo
 
 The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_connections` limit for each compute size that Neon supports.
 
-| Compute Size (CU) | vCPU | RAM   | LFC size | max_connections | 
-|-------------------|------|-------|----------|-----------------|
-| 0.25              | 0.25 | 1 GB  | 0.8 GB   | 112             |
-| 0.50              | 0.50 | 2 GB  | 1.6 GB   | 225             |
-| 1                 | 1    | 4 GB  | 3.2 GB   | 450             |
-| 2                 | 2    | 8 GB  | 6.4 GB   | 901             |
-| 3                 | 3    | 12 GB | 9.6 GB   | 1351            |
-| 4                 | 4    | 16 GB | 12.8 GB  | 1802            |
-| 5                 | 5    | 20 GB | 16 GB    | 2253            |
-| 6                 | 6    | 24 GB | 19.2 GB  | 2703            |
-| 7                 | 7    | 28 GB | 22.4 GB  | 3154            |
-| 8                 | 8    | 32 GB | 25.6 GB  | 3,604           |
+| Min. Compute Size (CU) | vCPU | RAM   | LFC size | max_connections |
+| ---------------------- | ---- | ----- | -------- | --------------- |
+| 0.25                   | 0.25 | 1 GB  | 0.8 GB   | 112             |
+| 0.50                   | 0.50 | 2 GB  | 1.6 GB   | 225             |
+| 1                      | 1    | 4 GB  | 3.2 GB   | 450             |
+| 2                      | 2    | 8 GB  | 6.4 GB   | 901             |
+| 3                      | 3    | 12 GB | 9.6 GB   | 1351            |
+| 4                      | 4    | 16 GB | 12.8 GB  | 1802            |
+| 5                      | 5    | 20 GB | 16 GB    | 2253            |
+| 6                      | 6    | 24 GB | 19.2 GB  | 2703            |
+| 7                      | 7    | 28 GB | 22.4 GB  | 3154            |
+| 8                      | 8    | 32 GB | 25.6 GB  | 3604            |
 
 <Admonition type="note">
 Users on paid plans can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
-</Admonition> 
+</Admonition>
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
-Regarding connection limits, you'll want a compute size that can support your anticipated maximum number of concurrent connections. If you are using _Autoscaling_, it is important to remember that your `max_connections` setting is based on the _minimum compute size_ in your autoscaling configuration. The `max_connections` setting does not scale with your compute. To avoid the `max_connections` constraint, you can use a pooled connection with your application, which supports up to 10,000 concurrent user connections. See [Connection pooling](/docs/connect/connection-pooling).
+Regarding connection limits, you'll want a compute size that can support your anticipated maximum number of concurrent connections. If you are using **Autoscaling**, it is important to remember that your `max_connections` setting is based on the **minimum compute size** in your autoscaling configuration. The `max_connections` setting does not scale with your compute. To avoid the `max_connections` constraint, you can use a pooled connection with your application, which supports up to 10,000 concurrent user connections. See [Connection pooling](/docs/connect/connection-pooling).
 
 #### Sizing your compute based on the working set
 
-If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from Neon storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance. 
+If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from Neon storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance.
 
 As mentioned above, Neon computes use a Local File Cache (LFC) to extend Postgres shared buffers. To query the cache hit ratio for your compute's LFC, Neon provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view.
 
@@ -165,7 +167,7 @@ Issue the following query to view LFC usage data for your compute instance:
 
 ```sql
 SELECT * FROM neon_stat_file_cache;
- file_cache_misses | file_cache_hits | file_cache_used | file_cache_writes | file_cache_hit_ratio  
+ file_cache_misses | file_cache_hits | file_cache_used | file_cache_writes | file_cache_hit_ratio
 -------------------+-----------------+-----------------+-------------------+----------------------
            2133643 |       108999742 |             607 |          10767410 |                98.08
 (1 row)
@@ -201,9 +203,13 @@ Neon's _Autosuspend_ feature automatically transitions a compute endpoint into a
 
 The maximum **Suspend compute after a period of inactivity** setting is 7 days. To disable autosuspend, which results in an always-active compute, deselect **Suspend compute after a period of inactivity**. For more information, refer to [Configuring autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
 
+<Admonition type="important">
+If you disable autosuspension entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute endpoint](https://neon.tech/docs/manage/endpoints#restart-a-compute-endpoint). 
+</Admonition>
+
 ## Restart a compute endpoint
 
-It is sometimes necessary to restart a compute endpoint. For example, if you upgrade to a paid plan account, you may want to restart your compute endpoint to immediately apply your upgraded limits.
+It is sometimes necessary to restart a compute endpoint. For example, if you upgrade to a paid plan account, you may want to restart your compute endpoint to immediately apply your upgraded limits, or maybe you've disabled autosuspesion and want to restart your compute to pick up the latest compute-related updates, which Neon typically releases weekly.
 
 <Admonition type="important">
 Please be aware that restarting a compute endpoint interrupts any connections currently using the compute endpoint. To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
@@ -211,8 +217,14 @@ Please be aware that restarting a compute endpoint interrupts any connections cu
 
 You can restart a compute endpoint using one of the following methods:
 
-- Stop activity on your compute endpoint (stop running queries) and wait for your compute endpoint to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`. 
-- Issue a [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) using the **Try It!** feature. You'll need an [API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
+- Stop activity on your compute endpoint (stop running queries) and wait for your compute endpoint to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.
+- Issue a [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
+  ```bash
+  curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/cool-forest-86753099/endpoints/ep-calm-flower-a5b75h79/restart \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+  ```
 - Users on paid plans can temporarily set a compute's **Suspend compute after a period of inactivity** to a low value to initiate a suspension (the default setting is 5 minutes). See [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console. Look for `suspend_compute` action. Any activity on the compute endpoint will restart it, such as running a query. Watch for a `start_compute` action on the **Operations** page.
 
 ## Delete a compute endpoint
@@ -223,8 +235,8 @@ To delete a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Click the kebab menu in the **Computes** table, and select **Delete**.
-1. On the confirmation dialog, click **Delete**.
+1. From the **Compute** tab, click **Edit** for the compute you want to delete.
+1. At the bottom of the **Edit compute endpoint** drawer, click **Delete compute**.
 
 ## Manage compute endpoints with the Neon API
 
@@ -248,7 +260,7 @@ The following Neon API method creates a compute endpoint.
 POST /projects/{project_id}/endpoints
 ```
 
-The API method appears as follows when specified in a cURL command. The branch you specify cannot have an existing compute endpoint. A compute endpoint must be associated with a branch, and a branch can have only one compute endpoint. Neon  supports read-write and read-only compute endpoints. Read-only compute endpoints are for creating [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints.
+The API method appears as follows when specified in a cURL command. The branch you specify cannot have an existing compute endpoint. A compute endpoint must be associated with a branch, and a branch can have only one compute endpoint. Neon supports read-write and read-only compute endpoints. Read-only compute endpoints are for creating [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints.
 
 ```bash
 curl -X 'POST' \

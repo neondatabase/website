@@ -2,7 +2,7 @@
 title: Postgres array_to_json() function
 subtitle: Converts an SQL array to a JSON array
 enableTableOfContents: true
-updatedOn: '2024-02-06T14:40:40.244Z'
+updatedOn: '2024-06-14T07:55:54.372Z'
 ---
 
 You can use the `array_to_json` function to convert a Postgres array into its `JSON` representation, transforming an array of values into a `JSON` array. This helps facilitate integration with web services, APIs, and web frameworks that heavily rely on `JSON`.
@@ -38,7 +38,7 @@ VALUES ('Jane Doe', '{books, music, travel}');
 ```
 
 ```
- id  |   name   |      preferences       
+ id  |   name   |      preferences
 ----+----------+------------------------
   1 | John Doe | {clothing,electronics}
   2 | Jane Doe | {books,music,travel}
@@ -54,7 +54,7 @@ FROM customers;
 This query returns the following result:
 
 ```
- id  |   name   |      json_preferences      
+ id  |   name   |      json_preferences
 ----+----------+----------------------------
   1 | John Doe | ["clothing","electronics"]
   2 | Jane Doe | ["books","music","travel"]
@@ -87,7 +87,7 @@ VALUES (2, 123, 2), (2, 456, 3), (2, 789, 4);
 ```
 
 ```
- id  | user_id | product_id | quantity 
+ id  | user_id | product_id | quantity
 ----+---------+------------+----------
   1 |       1 |        123 |        1
   2 |       1 |        456 |        2
@@ -115,28 +115,27 @@ FROM (
 This query returns the following result:
 
 ```shell
-                                               items                                               
+                                               items
 ---------------------------------------------------------------------------------------------------
  [{"product_id":123,"quantity":1},{"product_id":456,"quantity":2},{"product_id":789,"quantity":3}]
 ```
 
 And this is the resulting `JSON` structure:
 
-
 ```json
 [
-   {
-       "product_id": 123,
-       "quantity": 1
-   },
-   {
-       "product_id": 456,
-       "quantity": 2
-   },
-   {
-       "product_id": 789,
-       "quantity": 3
-   }
+  {
+    "product_id": 123,
+    "quantity": 1
+  },
+  {
+    "product_id": 456,
+    "quantity": 2
+  },
+  {
+    "product_id": 789,
+    "quantity": 3
+  }
 ]
 ```
 
@@ -162,7 +161,7 @@ INSERT INTO survey_responses (participant_name, responses) VALUES
 ```
 
 ```
- participant_id  | participant_name |   responses    
+ participant_id  | participant_name |   responses
 ----------------+------------------+----------------
               1 | Participant A    | {Yes,No,Maybe}
               2 | Participant B    | {Yes,NULL,No}
@@ -184,7 +183,7 @@ FROM
 This query returns the following result:
 
 ```
-participant_id | participant_name | responses_json    
+participant_id | participant_name | responses_json
 ---------------+-----------------=+---------------------
              1 | Participant A    | ["Yes","No","Maybe"]
              2 | Participant B    | ["Yes",null,"No"]
@@ -218,7 +217,7 @@ FROM (
 This query returns the following result:
 
 ```
-               items               
+               items
 -----------------------------------
  [{"product_id":123,"quantity":1},+
   {"product_id":456,"quantity":2},+
@@ -227,10 +226,10 @@ This query returns the following result:
 
 <Admonition type="note">
 The output displayed in `psql` might be truncated or wrap long lines for visual clarity.
-</Admonition> 
+</Admonition>
 
 ## Resources
 
 - [PostgreSQL documentation: JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
 - [PostgreSQL documentation: JSON Types](https://www.postgresql.org/docs/current/datatype-json.html)
-ß
+  ß

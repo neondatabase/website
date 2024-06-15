@@ -2,7 +2,7 @@
 title: Postgres jsonb_array_elements() function
 subtitle: Expands a JSONB array into a set of rows
 enableTableOfContents: true
-updatedOn: '2024-02-06T14:40:40.249Z'
+updatedOn: '2024-06-14T07:55:54.376Z'
 ---
 
 You can use the `jsonb_array_elements` function to expand a `JSONB` array into a set of rows, each containing one element of the array. It is a simpler option compared to complex looping logic. It is also more efficient than executing the same operation on the application side by reducing data transfer and processing overhead.
@@ -35,7 +35,7 @@ INSERT INTO developers (id, name, skills) VALUES
 ```
 
 ```
-| id |  name   |          skills          
+| id |  name   |          skills
 |----|---------|---------------------------
 | 1  | Alice   | ["Java", "Python", "SQL"]
 | 2  | Bob     | ["C++", "JavaScript"]
@@ -53,7 +53,7 @@ FROM developers,
 This query returns the following values:
 
 ```text
-| id |  name   |    skill    
+| id |  name   |    skill
 |----|---------|--------------
 | 1  | Alice   | "Java"
 | 1  | Alice   | "Python"
@@ -212,7 +212,7 @@ INSERT INTO electronics_products (id, name, details) VALUES
 ```
 
 ```text
-| id |    name    |                                                                                   details                                                                                   
+| id |    name    |                                                                                   details
 |----|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 |  1 | Laptop     | {"variants": [{"model": "A", "sizes": ["13 inch", "15 inch"], "colors": ["Silver", "Black"]}, {"model": "B", "sizes": ["15 inch", "17 inch"], "colors": ["Gray", "White"]}]}
 |  2 | Smartphone | {"variants": [{"model": "X", "sizes": ["5.5 inch", "6 inch"], "colors": ["Black", "Gold"]}, {"model": "Y", "sizes": ["6.2 inch", "6.7 inch"], "colors": ["Blue", "Red"]}]}
@@ -361,7 +361,6 @@ This query returns the following values:
 ```
 
 Using `jsonb_array_elements` would result in an error because it returns `JSONB` values, which cannot be directly concatenated with the string operator.
-
 
 ```sql
 SELECT name, string_agg(skill, ',') AS skill_list

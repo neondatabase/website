@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-PREPARE-EXTENDED)
 
-## SPI\_prepare\_extended
+## SPI_prepare_extended
 
-SPI\_prepare\_extended — prepare a statement, without executing it yet
+SPI_prepare_extended — prepare a statement, without executing it yet
 
 ## Synopsis
 
@@ -21,29 +21,29 @@ SPIPlanPtr SPI_prepare_extended(const char * command,
 
 ## Arguments
 
-* `const char * command`
+- `const char * command`
 
   command string
 
-* `const SPIPrepareOptions * options`
+- `const SPIPrepareOptions * options`
 
   struct containing optional arguments
 
-Callers should always zero out the entire *`options`* struct, then fill whichever fields they want to set. This ensures forward compatibility of code, since any fields that are added to the struct in future will be defined to behave backwards-compatibly if they are zero. The currently available *`options`* fields are:
+Callers should always zero out the entire _`options`_ struct, then fill whichever fields they want to set. This ensures forward compatibility of code, since any fields that are added to the struct in future will be defined to behave backwards-compatibly if they are zero. The currently available _`options`_ fields are:
 
-* `ParserSetupHook parserSetup`
+- `ParserSetupHook parserSetup`
 
   Parser hook setup function
 
-* `void * parserSetupArg`
+- `void * parserSetupArg`
 
-  pass-through argument for *`parserSetup`*
+  pass-through argument for _`parserSetup`_
 
-* `RawParseMode parseMode`
+- `RawParseMode parseMode`
 
   mode for raw parsing; `RAW_PARSE_DEFAULT` (zero) produces default behavior
 
-* `int cursorOptions`
+- `int cursorOptions`
 
   integer bit mask of cursor options; zero produces default behavior
 

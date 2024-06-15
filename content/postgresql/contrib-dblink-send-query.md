@@ -1,8 +1,8 @@
 [#id](#CONTRIB-DBLINK-SEND-QUERY)
 
-## dblink\_send\_query
+## dblink_send_query
 
-dblink\_send\_query — sends an async query to a remote database
+dblink_send_query — sends an async query to a remote database
 
 ## Synopsis
 
@@ -23,11 +23,11 @@ After successfully dispatching an async query, completion status can be checked 
 
 ## Arguments
 
-* *`connname`*
+- _`connname`_
 
   Name of the connection to use.
 
-* *`sql`*
+- _`sql`_
 
   The SQL statement that you wish to execute in the remote database, for example `select * from pg_class`.
 

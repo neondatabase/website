@@ -10,7 +10,7 @@ Information about text search configuration objects can be obtained in psql usin
 
 An optional `+` produces more details.
 
-The optional parameter *`PATTERN`* can be the name of a text search object, optionally schema-qualified. If *`PATTERN`* is omitted then information about all visible objects will be displayed. *`PATTERN`* can be a regular expression and can provide *separate* patterns for the schema and object names. The following examples illustrate this:
+The optional parameter _`PATTERN`_ can be the name of a text search object, optionally schema-qualified. If _`PATTERN`_ is omitted then information about all visible objects will be displayed. _`PATTERN`_ can be a regular expression and can provide _separate_ patterns for the schema and object names. The following examples illustrate this:
 
 ```
 => \dF *fulltext*
@@ -31,7 +31,7 @@ The optional parameter *`PATTERN`* can be the name of a text search object, opti
 
 The available commands are:
 
-* `\dF[+] [PATTERN]`
+- `\dF[+] [PATTERN]`
 
   List text search configurations (add `+` for more detail).
 
@@ -68,7 +68,7 @@ The available commands are:
    word            | russian_stem
   ```
 
-* `\dFd[+] [PATTERN]`
+- `\dFd[+] [PATTERN]`
 
   List text search dictionaries (add `+` for more detail).
 
@@ -108,7 +108,7 @@ The available commands are:
    pg_catalog | yiddish_stem    | snowball stemmer for yiddish language
   ```
 
-* `\dFp[+] [PATTERN]`
+- `\dFp[+] [PATTERN]`
 
   List text search parsers (add `+` for more detail).
 
@@ -157,7 +157,7 @@ The available commands are:
   (23 rows)
   ```
 
-* `\dFt[+] [PATTERN]`
+- `\dFt[+] [PATTERN]`
 
   List text search templates (add `+` for more detail).
 

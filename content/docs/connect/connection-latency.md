@@ -3,7 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-01-19T14:14:18.722Z'
+updatedOn: '2024-06-14T07:55:54.363Z'
 ---
 
 Neon's _Autosuspend_ feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute instance transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state takes anywhere from 500 ms to a few seconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -44,6 +44,10 @@ Given the potential impact on application responsiveness, it's important to have
 
 Users on paid plans can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The **Suspend compute after a period of inactivity** setting is set to 5 minutes by default. You can disable autosuspend entirely or set a custom period up to a maximum of 7 days. Limiting or disabling autosuspend can eliminate or reduce startup times, but it also increases compute usage. For configuration instructions, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
+<Admonition type="important">
+If you disable autosuspension entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute endpoint](https://neon.tech/docs/manage/endpoints#restart-a-compute-endpoint). 
+</Admonition>
+
 Consider combining this strategy with Neon's _Autoscaling_ feature, which allows you to run a compute with minimal resources and scale up on demand. For example, with autoscaling, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the **Suspend compute after a period of inactivity** is set to 1 hour so that your compute only suspends after an hour of inactivity, and autoscaling is configured with the 1/4 minimum compute size to keep costs low during periods of inactivity or light usage.
 
 ![Connection warmup autosuspend and autoscaling configuration](/docs/connect/cold_start_compute_config.png)
@@ -65,13 +69,13 @@ Here are examples of how to increase connection timeout settings in a few common
 <CodeTabs labels={["Node.js", "Python", "Java", "Prisma" ]}>
 
 ```javascript
-const { Pool } = require('pg')
+const { Pool } = require('pg');
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    connectionTimeoutMillis: 10000, // connection timeout in milliseconds
-    idleTimeoutMillis: 10000 // idle timeout in milliseconds
-})
+  connectionString: process.env.DATABASE_URL,
+  connectionTimeoutMillis: 10000, // connection timeout in milliseconds
+  idleTimeoutMillis: 10000, // idle timeout in milliseconds
+});
 ```
 
 ```python
@@ -123,28 +127,29 @@ var connectionString = process.env.DATABASE_URL;
 
 function connectWithRetry() {
   var operation = retry.operation({
-    retries: 5,               // number of retries before giving up
-    minTimeout: 4000,         // minimum time between retries in milliseconds
-    randomize: true,          // adds randomness to timeouts to prevent retries from overwhelming the server
+    retries: 5, // number of retries before giving up
+    minTimeout: 4000, // minimum time between retries in milliseconds
+    randomize: true, // adds randomness to timeouts to prevent retries from overwhelming the server
   });
 
   operation.attempt(function (currentAttempt) {
     var client = new Client({ connectionString });
 
-    client.connect()
-      .then(function() {
+    client
+      .connect()
+      .then(function () {
         console.log('Connected to the database');
-        
+
         // Perform your operations with the client
         // For example, let's run a simple SELECT query
         return client.query('SELECT NOW()');
       })
-      .then(function(res) {
+      .then(function (res) {
         console.log(res.rows[0]);
-        
+
         return client.end();
       })
-      .catch(function(err) {
+      .catch(function (err) {
         if (operation.retry(err)) {
           console.warn(`Failed to connect on attempt ${currentAttempt}, retrying...`);
         } else {

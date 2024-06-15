@@ -3,7 +3,7 @@ title: Replicate data to a ClickHouse database on DoubleCloud
 subtitle: Learn how to replicate data from Neon to a ClickHouse database on DoubleCloud
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-04-16T00:00:00.000Z'
+updatedOn: '2024-06-14T07:55:54.397Z'
 ---
 
 <LRNotice/>
@@ -32,12 +32,12 @@ With Transfer, you can replicate your data to both managed ClickHouse clusters o
     <Admonition type="tip">
     If you don't have the ClickHouse client, you can install it with the following command:
 
-    ```bash
-    curl https://clickhouse.com/ | sh
-    ```
+  ```bash
+  curl https://clickhouse.com/ | sh
+  ```
 
-    It downloads the official binary for your operating system and installs both the ClickHouse client and ClickHouse itself.
-    </Admonition>
+  It downloads the official binary for your operating system and installs both the ClickHouse client and ClickHouse itself.
+  </Admonition>
 
 ## Enable logical replication in Neon
 
@@ -56,7 +56,7 @@ You can verify that logical replication is enabled by running the following quer
 
 ```sql
 SHOW wal_level;
- wal_level 
+ wal_level
 -----------
  logical
 ```
@@ -157,48 +157,49 @@ If you already have a ClickHouse instance — for example, an on-premise one —
 1. In the left menu, select **Clusters**, click **Create cluster**, and select **ClickHouse**.
 1. Select cluster parameters.
 
-    <Admonition type="note">
-    If you're just testing ClickHouse, you can proceed with default parameters that will create a fully functional cluster suitable for testing and development.
-    For production, make sure to select at least three replicas, 16 GB of RAM, and dedicated Keeper hosts to ensure high availability.
-    </Admonition>
+<Admonition type="note">
+If you're just testing ClickHouse, you can proceed with default parameters that will create a fully functional cluster suitable for testing and development.
+For production, make sure to select at least three replicas, 16 GB of RAM, and dedicated Keeper hosts to ensure high availability.
+</Admonition>
+
 1. Under **Basic settings**, enter the cluster name, for example `clickhouse-dev`.
 1. Click **Submit** at the bottom of the page. Creating a cluster takes around five minutes depending on the provider, region, and settings.
-1. After the cluster status changes from *Creating* to *Alive*, select it in the cluster list.
+1. After the cluster status changes from _Creating_ to _Alive_, select it in the cluster list.
 1. On the **Overview** tab, find the **Connection strings** section.
    Copy the **Native interface** connection string.
 1. Paste the connection string to ClickHouse client and connect to the cluster.
 
-    The output should look as follows:
+   The output should look as follows:
 
-    ```bash
-    Connected to ClickHouse server version 23.8.9.
-    ach-euc1-az2-s1-1.<cluster_name>.at.double.cloud :)
-    ```
+   ```bash
+   Connected to ClickHouse server version 23.8.9.
+   ach-euc1-az2-s1-1.<cluster_name>.at.double.cloud :)
+   ```
 
-    `:)` means that the cluster is ready to receive commands.
+   `:)` means that the cluster is ready to receive commands.
 
 1. Create a database:
 
-    ```sql
-    CREATE DATABASE IF NOT EXISTS <database_name>
-    ```
+   ```sql
+   CREATE DATABASE IF NOT EXISTS <database_name>
+   ```
 
 1. Make sure that the database has been created:
 
-    ```sql
-    SHOW DATABASES
-    ```
+   ```sql
+   SHOW DATABASES
+   ```
 
-    ```bash
-    ┌─name───────────────┐
-    │ INFORMATION_SCHEMA │
-    │ _system            │
-    │ default            │
-    │ <database_name>    │  // your database
-    │ information_schema │
-    │ system             │
-    └────────────────────┘
-    ```
+   ```bash
+   ┌─name───────────────┐
+   │ INFORMATION_SCHEMA │
+   │ _system            │
+   │ default            │
+   │ <database_name>    │  // your database
+   │ information_schema │
+   │ system             │
+   └────────────────────┘
+   ```
 
 ## Create endpoints in DoubleCloud
 
@@ -206,36 +207,37 @@ Before you create a transfer in DoubleCloud, you need to create a source endpoin
 
 To create a source endpoint:
 
-1. In the left menu in the console, select **Transfer** and navigate to the **Endpoints** tab.
-1. Click **Create endpoint** → **Source**.
+1. In the left menu in the console, select **Transfer**.
+1. Click **Create** → **Source endpoint**.
 1. Under **Basic settings**, select **PostgreSQL** as the source type.
 1. Enter a name for your source endpoint, for example `neon`.
 1. Under **Endpoint parameters**, enter connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project.
-    For example, let's say this is your connection string:
+   For example, let's say this is your connection string:
 
-    ```bash shouldWrap
-    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
-    ```
+   ```bash shouldWrap
+   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   ```
 
    From this string, the values would show as below. Your actual values will differ, with the exception of the port number.
 
-    - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
-    - **Port**: 5432
-    - **Username**: alex
-    - **Password**: AbC123dEf
-    - **Database Name**: dbname
+   - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
+   - **Port**: 5432
+   - **Username**: alex
+   - **Password**: AbC123dEf
+   - **Database Name**: dbname
 
 1. Click **Test connection** and if it's successful, click **Submit**.
 
-To create a target endpoint: 
+To create a target endpoint:
 
-1. In the left menu in the console, select **Transfer** and navigate to the **Endpoints** tab.
-1. Click **Create endpoint** → **Target**.
+1. In the left menu in the console, select **Transfer**.
+1. Click **Create** → **Target endpoint**.
 1. Under **Basic settings**, select **ClickHouse** as the target type.
 1. Enter a name for your source endpoint, for example `clickhouse`.
 1. If you created a managed ClickHouse cluster in DoubleCloud, select it as the target endpoint in **Connection settings** → **Managed cluster**.
 
-    If you want to transfer data to a ClickHouse instance elsewhere, select **On-premise** in **Connection settings** → **Connection type** and specify the connection details.
+   If you want to transfer data to a ClickHouse instance elsewhere, select **On-premise** in **Connection settings** → **Connection type** and specify the connection details.
+
 1. Enter the database name.
 1. Click **Test connection** and if it's successful, click **Submit**.
 
@@ -246,13 +248,14 @@ To create a target endpoint:
 1. Enter the transfer name, for example `neon-to-clickhouse`.
 1. Under **Transfer settings**, select **Snapshot and replication** as the transfer type and specify transfer parameters if needed.
 
-    <Admonition type="tip">
-    Even when logical replication isn't available on the Neon side, you can schedule Transfer to copy incremental data from Postgres to ClickHouse at a given interval. For that, enable **Periodic snapshot** and specify the time period.
-    </Admonition>
+<Admonition type="tip">
+Even when logical replication isn't available on the Neon side, you can schedule Transfer to copy incremental data from Postgres to ClickHouse at a given interval. For that, enable **Periodic snapshot** and specify the time period.
+</Admonition>
+
 1. Click **Submit** to create the transfer.
 1. On the transfer page, click **Activate**.
 
-    When the data has transferred, the transfer status changes to *Done*.
+   When the data has transferred, the transfer status changes to _Done_.
 
 ## References
 

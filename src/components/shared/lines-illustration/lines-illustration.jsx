@@ -12,7 +12,7 @@ const LinesIllustration = ({ className: additionalClassName, color, bgColor }) =
     <LazyMotion features={domAnimation}>
       <m.span
         className={clsx(
-          'pointer-events-none absolute left-1/2 -z-10 block h-[150px] w-[113%] -translate-x-1/2',
+          'pointer-events-none absolute -top-1/2 left-1/2 -z-10 block h-[130px] w-[113%] -translate-x-1/2',
           additionalClassName
         )}
         initial={{ opacity: 0 }}

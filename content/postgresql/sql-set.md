@@ -33,33 +33,33 @@ In PostgreSQL versions 8.0 through 8.2, the effects of a `SET LOCAL` would be ca
 
 ## Parameters
 
-* `SESSION`
+- `SESSION`
 
   Specifies that the command takes effect for the current session. (This is the default if neither `SESSION` nor `LOCAL` appears.)
 
-* `LOCAL`
+- `LOCAL`
 
   Specifies that the command takes effect for only the current transaction. After `COMMIT` or `ROLLBACK`, the session-level setting takes effect again. Issuing this outside of a transaction block emits a warning and otherwise has no effect.
 
-* *`configuration_parameter`*
+- _`configuration_parameter`_
 
   Name of a settable run-time parameter. Available parameters are documented in [Chapter 20](runtime-config) and below.
 
-* *`value`*
+- _`value`_
 
   New value of parameter. Values can be specified as string constants, identifiers, numbers, or comma-separated lists of these, as appropriate for the particular parameter. `DEFAULT` can be written to specify resetting the parameter to its default value (that is, whatever value it would have had if no `SET` had been executed in the current session).
 
 Besides the configuration parameters documented in [Chapter 20](runtime-config), there are a few that can only be adjusted using the `SET` command or that have a special syntax:
 
-* `SCHEMA`
+- `SCHEMA`
 
   `SET SCHEMA 'value'` is an alias for `SET search_path TO value`. Only one schema can be specified using this syntax.
 
-* `NAMES`
+- `NAMES`
 
   `SET NAMES value` is an alias for `SET client_encoding TO value`.
 
-* `SEED`
+- `SEED`
 
   Sets the internal seed for the random number generator (the function `random`). Allowed values are floating-point numbers between -1 and 1 inclusive.
 
@@ -69,27 +69,27 @@ Besides the configuration parameters documented in [Chapter 20](runtime-config)
   SELECT setseed(value);
   ```
 
-* `TIME ZONE`
+- `TIME ZONE`
 
   `SET TIME ZONE 'value'` is an alias for `SET timezone TO 'value'`. The syntax `SET TIME ZONE` allows special syntax for the time zone specification. Here are examples of valid values:
 
-  * `'PST8PDT'`
+  - `'PST8PDT'`
 
     The time zone for Berkeley, California.
 
-  * `'Europe/Rome'`
+  - `'Europe/Rome'`
 
     The time zone for Italy.
 
-  * `-7`
+  - `-7`
 
     The time zone 7 hours west from UTC (equivalent to PDT). Positive values are east from UTC.
 
-  * `INTERVAL '-08:00' HOUR TO MINUTE`
+  - `INTERVAL '-08:00' HOUR TO MINUTE`
 
     The time zone 8 hours west from UTC (equivalent to PST).
 
-  * `LOCAL``DEFAULT`
+  - `LOCAL``DEFAULT`
 
     Set the time zone to your local time zone (that is, the server's default value of `timezone`).
 

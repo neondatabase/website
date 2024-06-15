@@ -67,10 +67,7 @@ const DynamicPage = async ({ params }) => {
   );
 
   return (
-    <Layout
-      headerTheme={templateName === 'Landing' ? 'black-pure' : 'white'}
-      footerTheme={templateName === 'Landing' ? 'black-pure' : ''}
-    >
+    <Layout>
       {templateName === 'Landing' ? (
         contentWithLazyBlocks
       ) : (
@@ -133,7 +130,7 @@ export async function generateMetadata({ params }) {
     keywords: metaKeywords,
     robotsNoindex: metaRobotsNoindex,
     pathname: `/${params.slug}`,
-    imagePath: twitterImage.mediaItemUrl,
+    imagePath: twitterImage?.mediaItemUrl,
   });
 }
 

@@ -49,43 +49,43 @@ The remaining forms change the session default for a run-time configuration vari
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of the database whose attributes are to be altered.
 
-* *`allowconn`*
+- _`allowconn`_
 
   If false then no one can connect to this database.
 
-* *`connlimit`*
+- _`connlimit`_
 
   How many concurrent connections can be made to this database. -1 means no limit.
 
-* *`istemplate`*
+- _`istemplate`_
 
   If true, then this database can be cloned by any user with `CREATEDB` privileges; if false, then only superusers or the owner of the database can clone it.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name of the database.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The new owner of the database.
 
-* *`new_tablespace`*
+- _`new_tablespace`_
 
   The new default tablespace of the database.
 
   This form of the command cannot be executed inside a transaction block.
 
-* `REFRESH COLLATION VERSION`
+- `REFRESH COLLATION VERSION`
 
   Update the database collation version. See [Notes](sql-altercollation#SQL-ALTERCOLLATION-NOTES) for background.
 
-* *`configuration_parameter`**`value`*
+- _`configuration_parameter`\*\*`value`_
 
-  Set this database's session default for the specified configuration parameter to the given value. If *`value`* is `DEFAULT` or, equivalently, `RESET` is used, the database-specific setting is removed, so the system-wide default setting will be inherited in new sessions. Use `RESET ALL` to clear all database-specific settings. `SET FROM CURRENT` saves the session's current value of the parameter as the database-specific value.
+  Set this database's session default for the specified configuration parameter to the given value. If _`value`_ is `DEFAULT` or, equivalently, `RESET` is used, the database-specific setting is removed, so the system-wide default setting will be inherited in new sessions. Use `RESET ALL` to clear all database-specific settings. `SET FROM CURRENT` saves the session's current value of the parameter as the database-specific value.
 
   See [SET](sql-set) and [Chapter 20](runtime-config) for more information about allowed parameter names and values.
 

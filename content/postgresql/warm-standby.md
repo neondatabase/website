@@ -2,17 +2,17 @@
 
 ## 27.2. Log-Shipping Standby Servers [#](#WARM-STANDBY)
 
-  * [27.2.1. Planning](warm-standby#STANDBY-PLANNING)
-  * [27.2.2. Standby Server Operation](warm-standby#STANDBY-SERVER-OPERATION)
-  * [27.2.3. Preparing the Primary for Standby Servers](warm-standby#PREPARING-PRIMARY-FOR-STANDBY)
-  * [27.2.4. Setting Up a Standby Server](warm-standby#STANDBY-SERVER-SETUP)
-  * [27.2.5. Streaming Replication](warm-standby#STREAMING-REPLICATION)
-  * [27.2.6. Replication Slots](warm-standby#STREAMING-REPLICATION-SLOTS)
-  * [27.2.7. Cascading Replication](warm-standby#CASCADING-REPLICATION)
-  * [27.2.8. Synchronous Replication](warm-standby#SYNCHRONOUS-REPLICATION)
-  * [27.2.9. Continuous Archiving in Standby](warm-standby#CONTINUOUS-ARCHIVING-IN-STANDBY)
+- [27.2.1. Planning](warm-standby#STANDBY-PLANNING)
+- [27.2.2. Standby Server Operation](warm-standby#STANDBY-SERVER-OPERATION)
+- [27.2.3. Preparing the Primary for Standby Servers](warm-standby#PREPARING-PRIMARY-FOR-STANDBY)
+- [27.2.4. Setting Up a Standby Server](warm-standby#STANDBY-SERVER-SETUP)
+- [27.2.5. Streaming Replication](warm-standby#STREAMING-REPLICATION)
+- [27.2.6. Replication Slots](warm-standby#STREAMING-REPLICATION-SLOTS)
+- [27.2.7. Cascading Replication](warm-standby#CASCADING-REPLICATION)
+- [27.2.8. Synchronous Replication](warm-standby#SYNCHRONOUS-REPLICATION)
+- [27.2.9. Continuous Archiving in Standby](warm-standby#CONTINUOUS-ARCHIVING-IN-STANDBY)
 
-Continuous archiving can be used to create a *high availability* (HA) cluster configuration with one or more *standby servers* ready to take over operations if the primary server fails. This capability is widely referred to as *warm standby* or *log shipping*.
+Continuous archiving can be used to create a _high availability_ (HA) cluster configuration with one or more _standby servers_ ready to take over operations if the primary server fails. This capability is widely referred to as _warm standby_ or _log shipping_.
 
 The primary and standby server work together to provide this capability, though the servers are only loosely coupled. The primary server operates in continuous archiving mode, while each standby server operates in continuous recovery mode, reading the WAL files from the primary. No changes to the database tables are required to enable this capability, so it offers low administration overhead compared to some other replication solutions. This configuration also has relatively low performance impact on the primary server.
 
@@ -20,9 +20,7 @@ Directly moving WAL records from one database server to another is typically des
 
 It should be noted that log shipping is asynchronous, i.e., the WAL records are shipped after transaction commit. As a result, there is a window for data loss should the primary server suffer a catastrophic failure; transactions not yet shipped will be lost. The size of the data loss window in file-based log shipping can be limited by use of the `archive_timeout` parameter, which can be set as low as a few seconds. However such a low setting will substantially increase the bandwidth required for file shipping. Streaming replication (see [Section 27.2.5](warm-standby#STREAMING-REPLICATION)) allows a much smaller window of data loss.
 
-Recovery performance is sufficiently good that the standby will typically be only moments away from full availability once it has been activated. As a result, this is called a warm standby configuration which offers high availability. Restoring a server from an archived base backup and rollforward will take considerably longer, so that technique only offers a solution for disaster recovery, not high availability. A standby server can also be used for read-only queries, in which case it is called a *hot standby* server. See [Section 27.4](hot-standby) for more information.
-
-
+Recovery performance is sufficiently good that the standby will typically be only moments away from full availability once it has been activated. As a result, this is called a warm standby configuration which offers high availability. Restoring a server from an archived base backup and rollforward will take considerably longer, so that technique only offers a solution for disaster recovery, not high availability. A standby server can also be used for read-only queries, in which case it is called a _hot standby_ server. See [Section 27.4](hot-standby) for more information.
 
 [#id](#STANDBY-PLANNING)
 
@@ -38,7 +36,7 @@ In general, log shipping between servers running different major PostgreSQL rele
 
 A server enters standby mode if a `standby.signal` file exists in the data directory when the server is started.
 
-In standby mode, the server continuously applies WAL received from the primary server. The standby server can read WAL from a WAL archive (see [restore\_command](runtime-config-wal#GUC-RESTORE-COMMAND)) or directly from the primary over a TCP connection (streaming replication). The standby server will also attempt to restore any WAL found in the standby cluster's `pg_wal` directory. That typically happens after a server restart, when the standby replays again WAL that was streamed from the primary before the restart, but you can also manually copy files to `pg_wal` at any time to have them replayed.
+In standby mode, the server continuously applies WAL received from the primary server. The standby server can read WAL from a WAL archive (see [restore_command](runtime-config-wal#GUC-RESTORE-COMMAND)) or directly from the primary over a TCP connection (streaming replication). The standby server will also attempt to restore any WAL found in the standby cluster's `pg_wal` directory. That typically happens after a server restart, when the standby replays again WAL that was streamed from the primary before the restart, but you can also manually copy files to `pg_wal` at any time to have them replayed.
 
 At startup, the standby begins by restoring all WAL available in the archive location, calling `restore_command`. Once it reaches the end of WAL available there and `restore_command` fails, it tries to restore any WAL available in the `pg_wal` directory. If that fails, and streaming replication has been configured, the standby tries to connect to the primary server and start streaming WAL from the last valid record found in archive or `pg_wal`. If that fails or streaming replication is not configured, or if the connection is later disconnected, the standby goes back to step 1 and tries to restore the file from the archive again. This loop of retries from the archive, `pg_wal`, and via streaming replication goes on until the server is stopped or failover is triggered by a trigger file.
 
@@ -58,17 +56,17 @@ Take a base backup as described in [Section 26.3.2](continuous-archiving#BACKUP
 
 ### 27.2.4. Setting Up a Standby Server [#](#STANDBY-SERVER-SETUP)
 
-To set up the standby server, restore the base backup taken from primary server (see [Section 26.3.4](continuous-archiving#BACKUP-PITR-RECOVERY)). Create a file [`standby.signal`](warm-standby#FILE-STANDBY-SIGNAL) in the standby's cluster data directory. Set [restore\_command](runtime-config-wal#GUC-RESTORE-COMMAND) to a simple command to copy files from the WAL archive. If you plan to have multiple standby servers for high availability purposes, make sure that `recovery_target_timeline` is set to `latest` (the default), to make the standby server follow the timeline change that occurs at failover to another standby.
+To set up the standby server, restore the base backup taken from primary server (see [Section 26.3.4](continuous-archiving#BACKUP-PITR-RECOVERY)). Create a file [`standby.signal`](warm-standby#FILE-STANDBY-SIGNAL) in the standby's cluster data directory. Set [restore_command](runtime-config-wal#GUC-RESTORE-COMMAND) to a simple command to copy files from the WAL archive. If you plan to have multiple standby servers for high availability purposes, make sure that `recovery_target_timeline` is set to `latest` (the default), to make the standby server follow the timeline change that occurs at failover to another standby.
 
 ### Note
 
-[restore\_command](runtime-config-wal#GUC-RESTORE-COMMAND) should return immediately if the file does not exist; the server will retry the command again if necessary.
+[restore_command](runtime-config-wal#GUC-RESTORE-COMMAND) should return immediately if the file does not exist; the server will retry the command again if necessary.
 
-If you want to use streaming replication, fill in [primary\_conninfo](runtime-config-replication#GUC-PRIMARY-CONNINFO) with a libpq connection string, including the host name (or IP address) and any additional details needed to connect to the primary server. If the primary needs a password for authentication, the password needs to be specified in [primary\_conninfo](runtime-config-replication#GUC-PRIMARY-CONNINFO) as well.
+If you want to use streaming replication, fill in [primary_conninfo](runtime-config-replication#GUC-PRIMARY-CONNINFO) with a libpq connection string, including the host name (or IP address) and any additional details needed to connect to the primary server. If the primary needs a password for authentication, the password needs to be specified in [primary_conninfo](runtime-config-replication#GUC-PRIMARY-CONNINFO) as well.
 
 If you're setting up the standby server for high availability purposes, set up WAL archiving, connections and authentication like the primary server, because the standby server will work as a primary server after failover.
 
-If you're using a WAL archive, its size can be minimized using the [archive\_cleanup\_command](runtime-config-wal#GUC-ARCHIVE-CLEANUP-COMMAND) parameter to remove files that are no longer required by the standby server. The pg\_archivecleanup utility is designed specifically to be used with `archive_cleanup_command` in typical single-standby configurations, see [pg\_archivecleanup](pgarchivecleanup). Note however, that if you're using the archive for backup purposes, you need to retain files needed to recover from at least the latest base backup, even if they're no longer needed by the standby.
+If you're using a WAL archive, its size can be minimized using the [archive_cleanup_command](runtime-config-wal#GUC-ARCHIVE-CLEANUP-COMMAND) parameter to remove files that are no longer required by the standby server. The pg_archivecleanup utility is designed specifically to be used with `archive_cleanup_command` in typical single-standby configurations, see [pg_archivecleanup](pgarchivecleanup). Note however, that if you're using the archive for backup purposes, you need to retain files needed to recover from at least the latest base backup, even if they're no longer needed by the standby.
 
 A simple example of configuration is:
 
@@ -84,19 +82,17 @@ You can have any number of standby servers, but if you use streaming replication
 
 ### 27.2.5. Streaming Replication [#](#STREAMING-REPLICATION)
 
-
-
 Streaming replication allows a standby server to stay more up-to-date than is possible with file-based log shipping. The standby connects to the primary, which streams WAL records to the standby as they're generated, without waiting for the WAL file to be filled.
 
 Streaming replication is asynchronous by default (see [Section 27.2.8](warm-standby#SYNCHRONOUS-REPLICATION)), in which case there is a small delay between committing a transaction in the primary and the changes becoming visible in the standby. This delay is however much smaller than with file-based log shipping, typically under one second assuming the standby is powerful enough to keep up with the load. With streaming replication, `archive_timeout` is not required to reduce the data loss window.
 
 If you use streaming replication without file-based continuous archiving, the server might recycle old WAL segments before the standby has received them. If this occurs, the standby will need to be reinitialized from a new base backup. You can avoid this by setting `wal_keep_size` to a value large enough to ensure that WAL segments are not recycled too early, or by configuring a replication slot for the standby. If you set up a WAL archive that's accessible from the standby, these solutions are not required, since the standby can always use the archive to catch up provided it retains enough segments.
 
-To use streaming replication, set up a file-based log-shipping standby server as described in [Section 27.2](warm-standby). The step that turns a file-based log-shipping standby into streaming replication standby is setting the `primary_conninfo` setting to point to the primary server. Set [listen\_addresses](runtime-config-connection#GUC-LISTEN-ADDRESSES) and authentication options (see `pg_hba.conf`) on the primary so that the standby server can connect to the `replication` pseudo-database on the primary server (see [Section 27.2.5.1](warm-standby#STREAMING-REPLICATION-AUTHENTICATION)).
+To use streaming replication, set up a file-based log-shipping standby server as described in [Section 27.2](warm-standby). The step that turns a file-based log-shipping standby into streaming replication standby is setting the `primary_conninfo` setting to point to the primary server. Set [listen_addresses](runtime-config-connection#GUC-LISTEN-ADDRESSES) and authentication options (see `pg_hba.conf`) on the primary so that the standby server can connect to the `replication` pseudo-database on the primary server (see [Section 27.2.5.1](warm-standby#STREAMING-REPLICATION-AUTHENTICATION)).
 
-On systems that support the keepalive socket option, setting [tcp\_keepalives\_idle](runtime-config-connection#GUC-TCP-KEEPALIVES-IDLE), [tcp\_keepalives\_interval](runtime-config-connection#GUC-TCP-KEEPALIVES-INTERVAL) and [tcp\_keepalives\_count](runtime-config-connection#GUC-TCP-KEEPALIVES-COUNT) helps the primary promptly notice a broken connection.
+On systems that support the keepalive socket option, setting [tcp_keepalives_idle](runtime-config-connection#GUC-TCP-KEEPALIVES-IDLE), [tcp_keepalives_interval](runtime-config-connection#GUC-TCP-KEEPALIVES-INTERVAL) and [tcp_keepalives_count](runtime-config-connection#GUC-TCP-KEEPALIVES-COUNT) helps the primary promptly notice a broken connection.
 
-Set the maximum number of concurrent connections from the standby servers (see [max\_wal\_senders](runtime-config-replication#GUC-MAX-WAL-SENDERS) for details).
+Set the maximum number of concurrent connections from the standby servers (see [max_wal_senders](runtime-config-replication#GUC-MAX-WAL-SENDERS) for details).
 
 When the standby is started and `primary_conninfo` is set correctly, the standby will connect to the primary after replaying all WAL files available in the archive. If the connection is established successfully, you will see a `walreceiver` in the standby, and a corresponding `walsender` process in the primary.
 
@@ -106,7 +102,7 @@ When the standby is started and `primary_conninfo` is set correctly, the standby
 
 It is very important that the access privileges for replication be set up so that only trusted users can read the WAL stream, because it is easy to extract privileged information from it. Standby servers must authenticate to the primary as an account that has the `REPLICATION` privilege or a superuser. It is recommended to create a dedicated user account with `REPLICATION` and `LOGIN` privileges for replication. While `REPLICATION` privilege gives very high permissions, it does not allow the user to modify any data on the primary system, which the `SUPERUSER` privilege does.
 
-Client authentication for replication is controlled by a `pg_hba.conf` record specifying `replication` in the *`database`* field. For example, if the standby is running on host IP `192.168.1.100` and the account name for replication is `foo`, the administrator can add the following line to the `pg_hba.conf` file on the primary:
+Client authentication for replication is controlled by a `pg_hba.conf` record specifying `replication` in the _`database`_ field. For example, if the standby is running on host IP `192.168.1.100` and the account name for replication is `foo`, the administrator can add the following line to the `pg_hba.conf` file on the primary:
 
 ```
 # Allow the user "foo" from host 192.168.1.100 to connect to the primary
@@ -116,7 +112,7 @@ Client authentication for replication is controlled by a `pg_hba.conf` record sp
 host    replication     foo             192.168.1.100/32        md5
 ```
 
-The host name and port number of the primary, connection user name, and password are specified in the [primary\_conninfo](runtime-config-replication#GUC-PRIMARY-CONNINFO). The password can also be set in the `~/.pgpass` file on the standby (specify `replication` in the *`database`* field). For example, if the primary is running on host IP `192.168.1.50`, port `5432`, the account name for replication is `foo`, and the password is `foopass`, the administrator can add the following line to the `postgresql.conf` file on the standby:
+The host name and port number of the primary, connection user name, and password are specified in the [primary_conninfo](runtime-config-replication#GUC-PRIMARY-CONNINFO). The password can also be set in the `~/.pgpass` file on the standby (specify `replication` in the _`database`_ field). For example, if the primary is running on host IP `192.168.1.50`, port `5432`, the account name for replication is `foo`, and the password is `foopass`, the administrator can add the following line to the `postgresql.conf` file on the standby:
 
 ```
 # The standby connects to the primary that is running on host 192.168.1.50
@@ -138,13 +134,11 @@ On a hot standby, the status of the WAL receiver process can be retrieved via th
 
 ### 27.2.6. Replication Slots [#](#STREAMING-REPLICATION-SLOTS)
 
-
-
 Replication slots provide an automated way to ensure that the primary does not remove WAL segments until they have been received by all standbys, and that the primary does not remove rows which could cause a [recovery conflict](hot-standby#HOT-STANDBY-CONFLICT) even when the standby is disconnected.
 
-In lieu of using replication slots, it is possible to prevent the removal of old WAL segments using [wal\_keep\_size](runtime-config-replication#GUC-WAL-KEEP-SIZE), or by storing the segments in an archive using [archive\_command](runtime-config-wal#GUC-ARCHIVE-COMMAND) or [archive\_library](runtime-config-wal#GUC-ARCHIVE-LIBRARY). However, these methods often result in retaining more WAL segments than required, whereas replication slots retain only the number of segments known to be needed. On the other hand, replication slots can retain so many WAL segments that they fill up the space allocated for `pg_wal`; [max\_slot\_wal\_keep\_size](runtime-config-replication#GUC-MAX-SLOT-WAL-KEEP-SIZE) limits the size of WAL files retained by replication slots.
+In lieu of using replication slots, it is possible to prevent the removal of old WAL segments using [wal_keep_size](runtime-config-replication#GUC-WAL-KEEP-SIZE), or by storing the segments in an archive using [archive_command](runtime-config-wal#GUC-ARCHIVE-COMMAND) or [archive_library](runtime-config-wal#GUC-ARCHIVE-LIBRARY). However, these methods often result in retaining more WAL segments than required, whereas replication slots retain only the number of segments known to be needed. On the other hand, replication slots can retain so many WAL segments that they fill up the space allocated for `pg_wal`; [max_slot_wal_keep_size](runtime-config-replication#GUC-MAX-SLOT-WAL-KEEP-SIZE) limits the size of WAL files retained by replication slots.
 
-Similarly, [hot\_standby\_feedback](runtime-config-replication#GUC-HOT-STANDBY-FEEDBACK) on its own, without also using a replication slot, provides protection against relevant rows being removed by vacuum, but provides no protection during any time period when the standby is not connected. Replication slots overcome these disadvantages.
+Similarly, [hot_standby_feedback](runtime-config-replication#GUC-HOT-STANDBY-FEEDBACK) on its own, without also using a replication slot, provides protection against relevant rows being removed by vacuum, but provides no protection during any time period when the standby is not connected. Replication slots overcome these disadvantages.
 
 [#id](#STREAMING-REPLICATION-SLOTS-MANIPULATION)
 
@@ -186,8 +180,6 @@ primary_slot_name = 'node_a_slot'
 
 ### 27.2.7. Cascading Replication [#](#CASCADING-REPLICATION)
 
-
-
 The cascading replication feature allows a standby server to accept replication connections and stream WAL records to other standbys, acting as a relay. This can be used to reduce the number of direct connections to the primary and also to minimize inter-site bandwidth overheads.
 
 A standby acting as both a receiver and a sender is known as a cascading standby. Standbys that are more directly connected to the primary are known as upstream servers, while those standby servers further away are downstream servers. Cascading replication does not place limits on the number or arrangement of downstream servers, though each standby connects to only one upstream server which eventually links to a single primary server.
@@ -200,13 +192,11 @@ Hot standby feedback propagates upstream, whatever the cascaded arrangement.
 
 If an upstream standby server is promoted to become the new primary, downstream servers will continue to stream from the new primary if `recovery_target_timeline` is set to `'latest'` (the default).
 
-To use cascading replication, set up the cascading standby so that it can accept replication connections (that is, set [max\_wal\_senders](runtime-config-replication#GUC-MAX-WAL-SENDERS) and [hot\_standby](runtime-config-replication#GUC-HOT-STANDBY), and configure [host-based authentication](auth-pg-hba-conf)). You will also need to set `primary_conninfo` in the downstream standby to point to the cascading standby.
+To use cascading replication, set up the cascading standby so that it can accept replication connections (that is, set [max_wal_senders](runtime-config-replication#GUC-MAX-WAL-SENDERS) and [hot_standby](runtime-config-replication#GUC-HOT-STANDBY), and configure [host-based authentication](auth-pg-hba-conf)). You will also need to set `primary_conninfo` in the downstream standby to point to the cascading standby.
 
 [#id](#SYNCHRONOUS-REPLICATION)
 
 ### 27.2.8. Synchronous Replication [#](#SYNCHRONOUS-REPLICATION)
-
-
 
 PostgreSQL streaming replication is asynchronous by default. If the primary server crashes then some transactions that were committed may not have been replicated to the standby server, causing data loss. The amount of data loss is proportional to the replication delay at the time of failover.
 
@@ -222,7 +212,7 @@ A synchronous standby can be a physical replication standby or a logical replica
 
 #### 27.2.8.1. Basic Configuration [#](#SYNCHRONOUS-REPLICATION-CONFIG)
 
-Once streaming replication has been configured, configuring synchronous replication requires only one additional configuration step: [synchronous\_standby\_names](runtime-config-replication#GUC-SYNCHRONOUS-STANDBY-NAMES) must be set to a non-empty value. `synchronous_commit` must also be set to `on`, but since this is the default value, typically no change is required. (See [Section 20.5.1](runtime-config-wal#RUNTIME-CONFIG-WAL-SETTINGS) and [Section 20.6.2](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-PRIMARY).) This configuration will cause each commit to wait for confirmation that the standby has written the commit record to durable storage. `synchronous_commit` can be set by individual users, so it can be configured in the configuration file, for particular users or databases, or dynamically by applications, in order to control the durability guarantee on a per-transaction basis.
+Once streaming replication has been configured, configuring synchronous replication requires only one additional configuration step: [synchronous_standby_names](runtime-config-replication#GUC-SYNCHRONOUS-STANDBY-NAMES) must be set to a non-empty value. `synchronous_commit` must also be set to `on`, but since this is the default value, typically no change is required. (See [Section 20.5.1](runtime-config-wal#RUNTIME-CONFIG-WAL-SETTINGS) and [Section 20.6.2](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-PRIMARY).) This configuration will cause each commit to wait for confirmation that the standby has written the commit record to durable storage. `synchronous_commit` can be set by individual users, so it can be configured in the configuration file, for particular users or databases, or dynamically by applications, in order to control the durability guarantee on a per-transaction basis.
 
 After a commit record has been written to disk on the primary, the WAL record is then sent to the standby. The standby sends reply messages each time a new batch of WAL data is written to disk, unless `wal_receiver_status_interval` is set to zero on the standby. In the case that `synchronous_commit` is set to `remote_apply`, the standby sends reply messages when the commit record is replayed, making the transaction visible. If the standby is chosen as a synchronous standby, according to the setting of `synchronous_standby_names` on the primary, the reply messages from that standby will be considered along with those from other synchronous standbys to decide when to release transactions waiting for confirmation that the commit record has been received. These parameters allow the administrator to specify which standby servers should be synchronous standbys. Note that the configuration of synchronous replication is mainly on the primary. Named standbys must be directly connected to the primary; the primary knows nothing about downstream standby servers using cascaded replication.
 
@@ -248,7 +238,7 @@ synchronous_standby_names = 'FIRST 2 (s1, s2, s3)'
 
 In this example, if four standby servers `s1`, `s2`, `s3` and `s4` are running, the two standbys `s1` and `s2` will be chosen as synchronous standbys because their names appear early in the list of standby names. `s3` is a potential synchronous standby and will take over the role of synchronous standby when either of `s1` or `s2` fails. `s4` is an asynchronous standby since its name is not in the list.
 
-The method `ANY` specifies a quorum-based synchronous replication and makes transaction commits wait until their WAL records are replicated to *at least* the requested number of synchronous standbys in the list.
+The method `ANY` specifies a quorum-based synchronous replication and makes transaction commits wait until their WAL records are replicated to _at least_ the requested number of synchronous standbys in the list.
 
 An example of `synchronous_standby_names` for a quorum-based multiple synchronous standbys is:
 
@@ -294,13 +284,11 @@ If you really cannot keep as many synchronous standbys as requested then you sho
 
 If the primary is isolated from remaining standby servers you should fail over to the best candidate of those other remaining standby servers.
 
-If you need to re-create a standby server while transactions are waiting, make sure that the commands pg\_backup\_start() and pg\_backup\_stop() are run in a session with `synchronous_commit` = `off`, otherwise those requests will wait forever for the standby to appear.
+If you need to re-create a standby server while transactions are waiting, make sure that the commands pg_backup_start() and pg_backup_stop() are run in a session with `synchronous_commit` = `off`, otherwise those requests will wait forever for the standby to appear.
 
 [#id](#CONTINUOUS-ARCHIVING-IN-STANDBY)
 
 ### 27.2.9. Continuous Archiving in Standby [#](#CONTINUOUS-ARCHIVING-IN-STANDBY)
-
-
 
 When continuous WAL archiving is used in a standby, there are two different scenarios: the WAL archive can be shared between the primary and the standby, or the standby can have its own WAL archive. When the standby has its own WAL archive, set `archive_mode` to `always`, and the standby will call the archive command for every WAL segment it receives, whether it's by restoring from the archive or by streaming replication. The shared archive can be handled similarly, but the `archive_command` or `archive_library` must test if the file being archived exists already, and if the existing file has identical contents. This requires more care in the `archive_command` or `archive_library`, as it must be careful to not overwrite an existing file with different contents, but return success if the exactly same file is archived twice. And all that must be done free of race conditions, if two servers attempt to archive the same file at the same time.
 

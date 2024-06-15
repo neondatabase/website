@@ -3,7 +3,7 @@ title: Replicate data to an external Postgres instance
 subtitle: Learn how to replicate data from Neon to an external Postgres instance
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-19T18:57:12.559Z'
+updatedOn: '2024-06-14T07:55:54.401Z'
 ---
 
 <LRNotice/>
@@ -33,12 +33,12 @@ You can verify that logical replication is enabled by running the following quer
 
 ```sql
 SHOW wal_level;
- wal_level 
+ wal_level
 -----------
  logical
 ```
 
-After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. These processes are the same as those you would perform in a standalone Postgres environment. 
+After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. These processes are the same as those you would perform in a standalone Postgres environment.
 
 ## Create a publication
 
@@ -46,19 +46,19 @@ Publications are a fundamental part of logical replication in Postgres. They all
 
 1. Create the `users` table in your Neon database. You can do this via the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or by connecting to your Neon database from an SQL client such as [psql](/docs/connect/query-with-psql-editor).
 
-    ```sql
-    CREATE TABLE users (
-      id SERIAL PRIMARY KEY,
-      username VARCHAR(50) NOT NULL,
-      email VARCHAR(100) NOT NULL
-    );
-    ```
+   ```sql
+   CREATE TABLE users (
+     id SERIAL PRIMARY KEY,
+     username VARCHAR(50) NOT NULL,
+     email VARCHAR(100) NOT NULL
+   );
+   ```
 
 2. To create a publication for the `users` table:
 
-    ```sql
-    CREATE PUBLICATION users_publication FOR TABLE users;
-    ```
+   ```sql
+   CREATE PUBLICATION users_publication FOR TABLE users;
+   ```
 
 This command creates a publication named `users_publication`, which will include all changes to the `users` table in your replication stream.
 
@@ -78,9 +78,9 @@ To create a role in the Neon Console:
 2. Select a project.
 3. Select **Roles**.
 4. Select the branch where you want to create the role.
-4. Click **New Role**.
-5. In the role creation dialog, specify a role name.
-6. Click **Create**. The role is created, and you are provided with the password for the role.
+5. Click **New Role**.
+6. In the role creation dialog, specify a role name.
+7. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>
 
@@ -128,7 +128,7 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 
 ## Configure PostgreSQL as a subscriber
 
-A subscriber is a destination that receives data changes from your publications. 
+A subscriber is a destination that receives data changes from your publications.
 
 This section describes how to configure a subscription on a standalone Postgres instance to a publication defined on your Neon database. After the subscription is defined, the destination Postgres instance will be able to receive data changes from the publication defined on your Neon database.
 
@@ -139,23 +139,23 @@ It is assumed that you have a separate Postgres instance ready to act as the sub
 1. Use `psql` or another SQL client to connect to your subscriber Postgres database.
 2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement. This example creates a subscription for the `user` table publication (`users_publication`) that you created previously.
 
-    ```sql
-    CREATE SUBSCRIPTION users_subscription 
-    CONNECTION 'postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname' 
-    PUBLICATION users_publication;
-    ```
+   ```sql
+   CREATE SUBSCRIPTION users_subscription
+   CONNECTION 'postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname'
+   PUBLICATION users_publication;
+   ```
 
-    - `subscription_name`: A name you chose for the subscription.
-    - `connection_string`: The connection string for your Neon database, where you defined the publication.
-    - `publication_name`: The name of the publication you created on your Neon database.
+   - `subscription_name`: A name you chose for the subscription.
+   - `connection_string`: The connection string for your Neon database, where you defined the publication.
+   - `publication_name`: The name of the publication you created on your Neon database.
 
-3. Verify the subscription was created by running the following command: 
+3. Verify the subscription was created by running the following command:
 
-    ```sql
-    SELECT * FROM pg_stat_subscription;
-    ```
+   ```sql
+   SELECT * FROM pg_stat_subscription;
+   ```
 
-    The subscription (`users_subscription`) should be listed, confirming that your subscription has been successfully created.
+   The subscription (`users_subscription`) should be listed, confirming that your subscription has been successfully created.
 
 ## Test the replication
 
@@ -165,38 +165,38 @@ First, generate some changes in the `users` table on the publisher database to s
 
 1. Connect to your Neon database (the publisher) and perform an `INSERT` operation. For example:
 
-    ```sql
-    INSERT INTO users (username, email) VALUES ('new_user', 'new_user@example.com');
-    ```
+   ```sql
+   INSERT INTO users (username, email) VALUES ('new_user', 'new_user@example.com');
+   ```
 
 2. After making changes, query the `users` table on the publisher to confirm your `INSERT`:
 
-    ```sql
-    SELECT * FROM users;
-    ```
+   ```sql
+   SELECT * FROM users;
+   ```
 
-    Note the changes you made for comparison with the subscriber's data.
+   Note the changes you made for comparison with the subscriber's data.
 
 3. Now, connect to your subscriber database on your standalone Postgres instance:
 
-    ```bash
-    psql -h [server_IP_or_hostname] -U [username] -d [database] -W
-    ```
+   ```bash
+   psql -h [server_IP_or_hostname] -U [username] -d [database] -W
+   ```
 
 4. Query the `users` table:
 
-    ```sql
-    SELECT * FROM users;
-    ```
+   ```sql
+   SELECT * FROM users;
+   ```
 
-  Compare the results with what you observed on the publisher.
+Compare the results with what you observed on the publisher.
 
 4. On the subscriber, you can also check the status of the replication:
 
-    ```sql
-    SELECT * FROM pg_stat_subscription;
-    ```
+   ```sql
+   SELECT * FROM pg_stat_subscription;
+   ```
 
-    Look for the `last_msg_receive_time` to confirm that the subscription is active and receiving data.
+   Look for the `last_msg_receive_time` to confirm that the subscription is active and receiving data.
 
 <NeedHelp/>

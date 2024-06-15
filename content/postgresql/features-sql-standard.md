@@ -18,8 +18,8 @@
 | E021-01    | Core  | CHARACTER data type                                                                                                      |                                                             |
 | E021-02    | Core  | CHARACTER VARYING data type                                                                                              |                                                             |
 | E021-03    | Core  | Character literals                                                                                                       |                                                             |
-| E021-04    | Core  | CHARACTER\_LENGTH function                                                                                               | trims trailing spaces from CHARACTER values before counting |
-| E021-05    | Core  | OCTET\_LENGTH function                                                                                                   |                                                             |
+| E021-04    | Core  | CHARACTER_LENGTH function                                                                                                | trims trailing spaces from CHARACTER values before counting |
+| E021-05    | Core  | OCTET_LENGTH function                                                                                                    |                                                             |
 | E021-06    | Core  | SUBSTRING function                                                                                                       |                                                             |
 | E021-07    | Core  | Character concatenation                                                                                                  |                                                             |
 | E021-08    | Core  | UPPER and LOWER functions                                                                                                |                                                             |
@@ -118,9 +118,9 @@
 | F021-01    | Core  | COLUMNS view                                                                                                             |                                                             |
 | F021-02    | Core  | TABLES view                                                                                                              |                                                             |
 | F021-03    | Core  | VIEWS view                                                                                                               |                                                             |
-| F021-04    | Core  | TABLE\_CONSTRAINTS view                                                                                                  |                                                             |
-| F021-05    | Core  | REFERENTIAL\_CONSTRAINTS view                                                                                            |                                                             |
-| F021-06    | Core  | CHECK\_CONSTRAINTS view                                                                                                  |                                                             |
+| F021-04    | Core  | TABLE_CONSTRAINTS view                                                                                                   |                                                             |
+| F021-05    | Core  | REFERENTIAL_CONSTRAINTS view                                                                                             |                                                             |
+| F021-06    | Core  | CHECK_CONSTRAINTS view                                                                                                   |                                                             |
 | F031       | Core  | Basic schema manipulation                                                                                                |                                                             |
 | F031-01    | Core  | CREATE TABLE statement to create persistent base tables                                                                  |                                                             |
 | F031-02    | Core  | CREATE VIEW statement                                                                                                    |                                                             |
@@ -150,7 +150,7 @@
 | F051-03    | Core  | TIMESTAMP data type (including support of TIMESTAMP literal) with fractional seconds precision of at least 0 and 6       |                                                             |
 | F051-04    | Core  | Comparison predicate on DATE, TIME, and TIMESTAMP data types                                                             |                                                             |
 | F051-05    | Core  | Explicit CAST between datetime types and character string types                                                          |                                                             |
-| F051-06    | Core  | CURRENT\_DATE                                                                                                            |                                                             |
+| F051-06    | Core  | CURRENT_DATE                                                                                                             |                                                             |
 | F051-07    | Core  | LOCALTIME                                                                                                                |                                                             |
 | F051-08    | Core  | LOCALTIMESTAMP                                                                                                           |                                                             |
 | F052       |       | Intervals and datetime arithmetic                                                                                        |                                                             |
@@ -236,8 +236,8 @@
 | F481       | Core  | Expanded NULL predicate                                                                                                  |                                                             |
 | F491       |       | Constraint management                                                                                                    |                                                             |
 | F501       | Core  | Features and conformance views                                                                                           |                                                             |
-| F501-01    | Core  | SQL\_FEATURES view                                                                                                       |                                                             |
-| F501-02    | Core  | SQL\_SIZING view                                                                                                         |                                                             |
+| F501-01    | Core  | SQL_FEATURES view                                                                                                        |                                                             |
+| F501-02    | Core  | SQL_SIZING view                                                                                                          |                                                             |
 | F502       |       | Enhanced documentation tables                                                                                            |                                                             |
 | F531       |       | Temporary tables                                                                                                         |                                                             |
 | F555       |       | Enhanced seconds precision                                                                                               |                                                             |
@@ -256,8 +256,8 @@
 | F731       |       | INSERT column privileges                                                                                                 |                                                             |
 | F751       |       | View CHECK enhancements                                                                                                  |                                                             |
 | F761       |       | Session management                                                                                                       |                                                             |
-| F762       |       | CURRENT\_CATALOG                                                                                                         |                                                             |
-| F763       |       | CURRENT\_SCHEMA                                                                                                          |                                                             |
+| F762       |       | CURRENT_CATALOG                                                                                                          |                                                             |
+| F763       |       | CURRENT_SCHEMA                                                                                                           |                                                             |
 | F771       |       | Connection management                                                                                                    |                                                             |
 | F781       |       | Self-referencing operations                                                                                              |                                                             |
 | F791       |       | Insensitive cursors                                                                                                      |                                                             |
@@ -284,7 +284,7 @@
 | S092       |       | Arrays of user-defined types                                                                                             |                                                             |
 | S095       |       | Array constructors by query                                                                                              |                                                             |
 | S096       |       | Optional array bounds                                                                                                    |                                                             |
-| S098       |       | ARRAY\_AGG                                                                                                               |                                                             |
+| S098       |       | ARRAY_AGG                                                                                                                |                                                             |
 | S099       |       | Array expressions                                                                                                        |                                                             |
 | S111       |       | ONLY in query expressions                                                                                                |                                                             |
 | S201       |       | SQL-invoked routines on arrays                                                                                           |                                                             |
@@ -292,7 +292,7 @@
 | S204       |       | Array as result type of functions                                                                                        |                                                             |
 | S211       |       | User-defined cast functions                                                                                              |                                                             |
 | S301       |       | Enhanced UNNEST                                                                                                          |                                                             |
-| S404       |       | TRIM\_ARRAY                                                                                                              |                                                             |
+| S404       |       | TRIM_ARRAY                                                                                                               |                                                             |
 | T031       |       | BOOLEAN data type                                                                                                        |                                                             |
 | T054       |       | GREATEST and LEAST                                                                                                       | different null handling                                     |
 | T055       |       | String padding functions                                                                                                 |                                                             |
@@ -361,13 +361,13 @@
 | T613       |       | Sampling                                                                                                                 |                                                             |
 | T614       |       | NTILE function                                                                                                           |                                                             |
 | T615       |       | LEAD and LAG functions                                                                                                   |                                                             |
-| T617       |       | FIRST\_VALUE and LAST\_VALUE functions                                                                                   |                                                             |
+| T617       |       | FIRST_VALUE and LAST_VALUE functions                                                                                     |                                                             |
 | T620       |       | WINDOW clause: GROUPS option                                                                                             |                                                             |
 | T621       |       | Enhanced numeric functions                                                                                               |                                                             |
 | T622       |       | Trigonometric functions                                                                                                  |                                                             |
 | T623       |       | General logarithm functions                                                                                              |                                                             |
 | T624       |       | Common logarithm functions                                                                                               |                                                             |
-| T626       |       | ANY\_VALUE                                                                                                               |                                                             |
+| T626       |       | ANY_VALUE                                                                                                                |                                                             |
 | T627       |       | Window framed COUNT DISTINCT                                                                                             |                                                             |
 | T631       | Core  | IN predicate with one list element                                                                                       |                                                             |
 | T651       |       | SQL-schema statements in SQL routines                                                                                    |                                                             |
@@ -378,9 +378,9 @@
 | T670       |       | Schema and data statement mixing                                                                                         |                                                             |
 | T803       |       | String-based JSON                                                                                                        |                                                             |
 | T811       |       | Basic SQL/JSON constructor functions                                                                                     |                                                             |
-| T812       |       | SQL/JSON: JSON\_OBJECTAGG                                                                                                |                                                             |
-| T813       |       | SQL/JSON: JSON\_ARRAYAGG with ORDER BY                                                                                   |                                                             |
-| T814       |       | Colon in JSON\_OBJECT or JSON\_OBJECTAGG                                                                                 |                                                             |
+| T812       |       | SQL/JSON: JSON_OBJECTAGG                                                                                                 |                                                             |
+| T813       |       | SQL/JSON: JSON_ARRAYAGG with ORDER BY                                                                                    |                                                             |
+| T814       |       | Colon in JSON_OBJECT or JSON_OBJECTAGG                                                                                   |                                                             |
 | T822       |       | SQL/JSON: IS JSON WITH UNIQUE KEYS predicate                                                                             |                                                             |
 | T830       |       | Enforcing unique keys in SQL/JSON constructor functions                                                                  |                                                             |
 | T831       |       | SQL/JSON path language: strict mode                                                                                      |                                                             |
@@ -389,7 +389,7 @@
 | T834       |       | SQL/JSON path language: wildcard member accessor                                                                         |                                                             |
 | T835       |       | SQL/JSON path language: filter expressions                                                                               |                                                             |
 | T836       |       | SQL/JSON path language: starts with predicate                                                                            |                                                             |
-| T837       |       | SQL/JSON path language: regex\_like predicate                                                                            |                                                             |
+| T837       |       | SQL/JSON path language: regex_like predicate                                                                             |                                                             |
 | T840       |       | Hex integer literals in SQL/JSON path language                                                                           |                                                             |
 | T851       |       | SQL/JSON: optional keywords for default syntax                                                                           |                                                             |
 | T879       |       | JSON in equality operations                                                                                              | with jsonb                                                  |

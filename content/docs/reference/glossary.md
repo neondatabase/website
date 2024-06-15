@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-02-27T14:37:51.437Z'
+updatedOn: '2024-06-14T07:55:54.425Z'
 ---
 
 ## access token
@@ -61,7 +61,7 @@ An isolated copy of data, similar to a Git branch. Data includes databases, sche
 
 Each Neon project is created with a main line of data referred to as the [root branch](#root-branch). A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone.
 
-You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the data that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the data that existed in the past state. 
+You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the data that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the data that existed in the past state.
 
 Connecting to a database on a branch requires connecting via a compute endpoint attached to the branch. See [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
 
@@ -117,18 +117,18 @@ The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can 
 
 A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 8 CUs. The following table shows the vCPU and RAM for each CU:
 
-| Compute Unit (CU)  | vCPU | RAM    |
-|:--------------|:-----|:-------|
-| .25           | .25  | 1 GB   |
-| .5            | .5   | 2 GB   |
-| 1             | 1    | 4 GB   |
-| 2             | 2    | 8 GB   |
-| 3             | 3    | 12 GB  |
-| 4             | 4    | 16 GB  |
-| 5             | 5    | 20 GB  |
-| 6             | 6    | 24 GB  |
-| 7             | 7    | 28 GB  |
-| 8             | 8    | 32 GB  |
+| Compute Unit (CU) | vCPU | RAM   |
+| :---------------- | :--- | :---- |
+| .25               | .25  | 1 GB  |
+| .5                | .5   | 2 GB  |
+| 1                 | 1    | 4 GB  |
+| 2                 | 2    | 8 GB  |
+| 3                 | 3    | 12 GB |
+| 4                 | 4    | 16 GB |
+| 5                 | 5    | 20 GB |
+| 6                 | 6    | 24 GB |
+| 7                 | 7    | 28 GB |
+| 8                 | 8    | 32 GB |
 
 ## compute hours
 
@@ -195,6 +195,10 @@ Resources including compute and storage dedicated to a single Neon account.
 ## delete_tenant
 
 A Neon Control Plane operation that deletes stored data when a Neon project is deleted. See [Operations](/docs/manage/operations) for more information.
+
+## Endpoint ID
+
+A string that identifies a Neon compute endpoint. Neon Endpoint IDs are generated Heroku-like memorable random names, similar to `ep-calm-flower-a5b75h79`. These names are always prefixed by `ep` for "endpoint". You can find your Endpoint ID by navigating to your project in the Neon Console, selecting **Branches** from the sidebar, and clicking on a branch. The Endpoint ID is shown in the table under the **Computes** heading.
 
 ## Egress
 
@@ -302,7 +306,7 @@ An 8KB unit of data, which is the smallest unit that Postgres uses for storing r
 
 ## Paid plan
 
- A paid Neon service tier. See [Neon plans](/docs/introduction/plans).
+A paid Neon service tier. See [Neon plans](/docs/introduction/plans).
 
 ## Pageserver
 
@@ -328,7 +332,7 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech
 
 A pooled connection can support a high number of concurrent users and is recommended for use with serverless and edge functions. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
-You can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Select the **Pooled connection** option to add the `-pooler` option to the connection string. For further instructions, see [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling).
+You can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Select the **Pooled connection** option to add the `-pooler` option to the connection string. For further instructions, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
 
 ## PostgreSQL
 
@@ -354,6 +358,10 @@ For more information, see [Primary branch](/docs/manage/branches#primary-branch)
 
 A collection of branches, databases, roles, and other project resources and settings. A project contains a compute with a Postgres server and storage for the project data.
 
+## Project ID
+
+A string that identifies your Neon project. Neon Project IDs are generated Heroku-like memorable random names, similar to `cool-forest-86753099`. You can find your project ID by navigating to your project in the Neon Console and selecting **Settings** from the sidebar. The project ID is also visible in the Neon Console URL after navigating to a project: `https://console.neon.tech/app/projects/cool-forest-86753099`
+
 ## Project Sharing
 
 A feature that allows you to share Neon projects with other Neon users. See [Share a project](/docs/manage/projects#share-a-project) for more information.
@@ -376,7 +384,7 @@ A status assigned to a branch that limits access based on IP addresses. Only IPs
 
 ## Publisher
 
-In the context of logical replication, the publisher is the primary data source where changes occur. It's responsible for sending those changes to one or more subscribers. A Neon database can act as a publisher in a logical replication setup. See [Logical replication](/docs/guides/logical-replication-guide). 
+In the context of logical replication, the publisher is the primary data source where changes occur. It's responsible for sending those changes to one or more subscribers. A Neon database can act as a publisher in a logical replication setup. See [Logical replication](/docs/guides/logical-replication-guide).
 
 ## QEMU
 
@@ -446,7 +454,7 @@ Also, a usage metric that tracks the total volume of data and [history](#history
 
 ## subscriber
 
-The database or platform receiving changes from the publisher in a logical replication setup. It applies changes received from the publisher to its own data set. Currently, a Neon database can only act as a publisher in a logical replication setup. See [Logical replication](/docs/guides/logical-replication-guide). 
+The database or platform receiving changes from the publisher in a logical replication setup. It applies changes received from the publisher to its own data set. Currently, a Neon database can only act as a publisher in a logical replication setup. See [Logical replication](/docs/guides/logical-replication-guide).
 
 ## subscription
 

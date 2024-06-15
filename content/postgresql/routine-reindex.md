@@ -2,8 +2,6 @@
 
 ## 25.2. Routine Reindexing [#](#ROUTINE-REINDEX)
 
-
-
 In some situations it is worthwhile to rebuild indexes periodically with the [REINDEX](sql-reindex) command or a series of individual rebuilding steps.
 
 B-tree index pages that have become completely empty are reclaimed for re-use. However, there is still a possibility of inefficient use of space: if all but a few index keys on a page have been deleted, the page remains allocated. Therefore, a usage pattern in which most, but not all, keys in each range are eventually deleted will see poor use of space. For such usage patterns, periodic reindexing is recommended.

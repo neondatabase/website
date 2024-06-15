@@ -54,7 +54,7 @@ const items = [
 // ];
 
 const AIPage = () => (
-  <Layout className="bg-black-pure text-white" headerTheme="black-pure" footerTheme="black-pure">
+  <Layout>
     <link
       rel="preload"
       href="/animations/pages/ai/scene.splinecode"
@@ -84,11 +84,11 @@ const AIPage = () => (
       className="mt-[180px] 2xl:mt-40 xl:mt-[125px] lg:mt-16"
       buttonClassName="px-14 xl:px-10 lg:px-9 sm:px-14"
       title="Build your next AI app now with Neon"
-      description="Neon offers flexible usage and volume-based plans. Contact our Sales team to learn more."
-      buttonText="Contact Sales"
-      buttonUrl={LINKS.contactSales}
-      linkText="Learn more on GitHub"
-      linkUrl="https://github.com/neondatabase/pg_embedding"
+      description="Build your AI app on our Free Tier. Upgrade to a paid plan when you're ready to scale."
+      buttonText="Start for Free"
+      buttonUrl={LINKS.signup}
+      linkText="View the docs"
+      linkUrl="https://neon.tech/docs/ai/ai-intro"
       linkTarget="_blank"
     />
   </Layout>

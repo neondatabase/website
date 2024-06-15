@@ -20,7 +20,7 @@ COMMIT PREPARED transaction_id
 
 ## Parameters
 
-* *`transaction_id`*
+- _`transaction_id`_
 
   The transaction identifier of the transaction that is to be committed.
 

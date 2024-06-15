@@ -141,7 +141,7 @@ If a user holds a privilege with grant option and has granted it to other users 
 
 When revoking privileges on a table, the corresponding column privileges (if any) are automatically revoked on each column of the table, as well. On the other hand, if a role has been granted privileges on a table, then revoking the same privileges from individual columns will have no effect.
 
-When revoking membership in a role, `GRANT OPTION` is instead called `ADMIN OPTION`, but the behavior is similar. Note that, in releases prior to PostgreSQL 16, dependent privileges were not tracked for grants of role membership, and thus `CASCADE` had no effect for role membership. This is no longer the case. Note also that this form of the command does not allow the noise word `GROUP` in *`role_specification`*.
+When revoking membership in a role, `GRANT OPTION` is instead called `ADMIN OPTION`, but the behavior is similar. Note that, in releases prior to PostgreSQL 16, dependent privileges were not tracked for grants of role membership, and thus `CASCADE` had no effect for role membership. This is no longer the case. Note also that this form of the command does not allow the noise word `GROUP` in _`role_specification`_.
 
 Just as `ADMIN OPTION` can be removed from an existing role grant, it is also possible to revoke `INHERIT OPTION` or `SET OPTION`. This is equivalent to setting the value of the corresponding option to `FALSE`.
 

@@ -8,6 +8,8 @@ import { useState } from 'react';
 
 import Link from 'components/shared/link';
 
+import Tag from '../../tag';
+
 const isActiveItem = (items, currentSlug) =>
   items?.some(
     ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
@@ -17,6 +19,7 @@ const Item = ({
   basePath,
   title,
   slug = null,
+  tag = null,
   ariaLabel = null,
   isStandalone = false,
   items = null,
@@ -29,10 +32,6 @@ const Item = ({
   const hasActiveChild = isActiveItem(items, currentSlug);
   const [isOpen, setIsOpen] = useState(() => hasActiveChild);
 
-  if (!isOpen && isActiveItem(items, currentSlug)) {
-    setIsOpen(true);
-  }
-
   const handleClick = () => {
     if (closeMenu && slug) {
       closeMenu();
@@ -43,11 +42,11 @@ const Item = ({
   const externalSlug = slug && slug.startsWith('http') ? slug : null;
   const docSlug = isStandalone ? `/${slug}` : `${basePath}${slug}/`;
 
-  const Tag = slug ? Link : 'button';
+  const LinkTag = slug ? Link : 'button';
 
   return (
     <li className="group/item flex flex-col">
-      <Tag
+      <LinkTag
         className={clsx(
           'group flex w-full items-start justify-between py-2 text-left text-sm tracking-extra-tight transition-colors duration-200',
           { 'group-first/item:pt-0': !isChildren },
@@ -66,6 +65,7 @@ const Item = ({
           aria-hidden={!!ariaLabel}
           dangerouslySetInnerHTML={{ __html: title }}
         />
+        {tag && <Tag className="ml-2 mt-0.5" label={tag} size="sm" />}
         <span
           className={clsx(
             'arrow-mask block h-4 w-4 transition-[transform,background-color] duration-200',
@@ -76,7 +76,7 @@ const Item = ({
             isOpen ? 'rotate-90' : 'rotate-0'
           )}
         />
-      </Tag>
+      </LinkTag>
       {!!items?.length && (
         <LazyMotion features={domAnimation}>
           <AnimatePresence initial={false}>
@@ -114,11 +114,13 @@ Item.propTypes = {
   title: PropTypes.string.isRequired,
   isStandalone: PropTypes.bool,
   slug: PropTypes.string,
+  tag: PropTypes.string,
   ariaLabel: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.exact({
       title: PropTypes.string.isRequired,
       slug: PropTypes.string,
+      tag: PropTypes.string,
       items: PropTypes.arrayOf(PropTypes.any),
       ariaLabel: PropTypes.string,
     })

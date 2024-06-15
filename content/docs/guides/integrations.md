@@ -7,17 +7,9 @@ redirectFrom:
 updatedOn: '2024-02-27T20:16:54.558Z'
 ---
 
-## Audit
+## Deploy
 
-<TechnologyNavigation>
-
-<img src="/images/technology-logos/bemi-logo.svg" width="36" height="36" alt="Bemi" href="/docs/guides/bemi" title="Create an automatic audit trail with Bemi" />
-
-</TechnologyNavigation>
-
-## Deployment
-
-<TechnologyNavigation>
+<TechnologyNavigation open>
 
 <img src="/images/technology-logos/vercel-logo.svg" width="36" height="36" alt="Vercel" href="/docs/guides/vercel" title="Connect with the Neon Vercel Integration" />
 
@@ -41,7 +33,7 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 ## Serverless
 
-<TechnologyNavigation>
+<TechnologyNavigation open>
 
 <img src="/images/technology-logos/neon-logo.svg"  width="42" height="36" alt="Neon" href="/docs/serverless/serverless-driver" title="Connect with the Neon serverless driver" />
 
@@ -49,10 +41,9 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 </TechnologyNavigation>
 
+## Query
 
-## Backend-as-a-service
-
-<TechnologyNavigation>
+<TechnologyNavigation open>
 
 <img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Use Exograph with Neon" />
 
@@ -62,28 +53,33 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 <img src="/images/technology-logos/hasura-logo.svg" width="35" height="36" alt="Hasura" href="/docs/guides/hasura" title="Connect from Hasura Cloud to Neon" />
 
-<img src="/images/technology-logos/sequin-logo.svg" width="29" height="36" alt="Sequin" href="/docs/guides/sequin" title="Sync data from APIs to Neon in real time" />
+<img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Hyperdrive" href="/docs/guides/cloudflare-hyperdrive" title="Use Neon with Cloudflare Hyperdrive" />
 
 <img src="/images/technology-logos/stepzen-logo.svg" width="36" height="36" alt="StepZen" href="/docs/guides/stepzen" title="Use StepZen with Neon" />
 
 <img src="/images/technology-logos/wundergraph-logo.svg" width="36" height="36" alt="Wundergraph" href="/docs/guides/wundergraph" title="Use Wundergraph with Neon" />
 
-</TechnologyNavigation>
-
-## Caching
-
-<TechnologyNavigation>
-
-<img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Hyperdrive" href="/docs/guides/cloudflare-hyperdrive" title="Use Neon with Cloudflare Hyperdrive" />
-
-<img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale" title="Use PolyScale with Neon" />
+<img src="/images/technology-logos/outerbase-logo.svg" width="36" height="36" alt="Outerbase" href="/docs/guides/outerbase" title="Connect Outerbase to Neon" />
 
 </TechnologyNavigation>
 
-
-## Replication
+## Develop
 
 <TechnologyNavigation>
+
+<img src="/images/technology-logos/github-logo.svg" width="36" height="36" alt="GitHub integration" href="/docs/guides/github-integration" title="Use the Neon GitHub integrations" />
+
+<img src="/images/technology-logos/neosync-logo.svg" width="36" height="36" alt="Neosync" href="/docs/guides/neosync-anaonymize" title="Anonymize data with Neosync" />
+
+<img src="/images/technology-logos/neosync-logo.svg" width="36" height="36" alt="Neosync" href="/docs/guides/neosync-generate" title="Seed data with Neosync" />
+
+<img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
+
+</TechnologyNavigation>
+
+## Replicate
+
+<TechnologyNavigation open>
 
 <img src="/images/technology-logos/airbyte-logo.svg" width="36" height="36" alt="Airbyte" href="/docs/guides/logical-replication-airbyte" title="Replicate data from Neon with Airbyte" />
 
@@ -91,20 +87,21 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 <img src="/images/technology-logos/clickhouse-logo.svg" width="36" height="36" alt="ClickHouse" href="/docs/guides/logical-replication-clickhouse" title="Replicate data from Neon to ClickHouse (DoubleCloud)" />
 
-<img src="/images/technology-logos/fivetran-logo.svg" width="36" height="36" alt="Fivetran" href="/docs/guides/logical-replication-fivetran" title="Replicate data from Neon with Fivetran" />
-
 <img src="/images/technology-logos/kafka-logo.svg" width="36" height="36" alt="Kafka" href="/docs/guides/logical-replication-kafka-confluent" title="Replicate data from Neon with Kafka (Confluent)" />
+
+<img src="/images/technology-logos/fivetran-logo.svg" width="36" height="36" alt="Fivetran" href="/docs/guides/logical-replication-fivetran" title="Replicate data from Neon with Fivetran" />
 
 <img src="/images/technology-logos/materialize-logo.svg" width="36" height="36" alt="Materialize" href="/docs/guides/logical-replication-materialize" title="Replicate data from Neon to Materialize" />
 
 <img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
 
+<img src="/images/technology-logos/sequin-logo.svg" width="29" height="36" alt="Sequin" href="/docs/guides/sequin" title="Sync data from APIs to Neon in real time" />
+
 </TechnologyNavigation>
 
+## Schema Migration
 
-## Migrations
-
-<TechnologyNavigation>
+<TechnologyNavigation open>
 
 <img src="/images/technology-logos/django-logo.svg" width="29" height="36" alt="Django" href="/docs/guides/django-migrations" title="Connect a Django application to Neon" />
 
@@ -128,21 +125,9 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 </TechnologyNavigation>
 
+## Authenticate
 
-## Tools
-
-<TechnologyNavigation>
-
-<img src="/images/technology-logos/outerbase-logo.svg" width="36" height="36" alt="Outerbase" href="/docs/guides/outerbase" title="Connect Outerbase to Neon" />
-
-<img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
-
-</TechnologyNavigation>
-
-
-## Authentication
-
-<TechnologyNavigation>
+<TechnologyNavigation open>
 
 <img src="/images/technology-logos/auth0-logo.svg" width="36" height="36" alt="Auth0" href="/docs/guides/auth-auth0" title="Authenticate Neon Postgres application users with Auth0" />
 

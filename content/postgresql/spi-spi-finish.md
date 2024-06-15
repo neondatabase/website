@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-FINISH)
 
-## SPI\_finish
+## SPI_finish
 
-SPI\_finish — disconnect a C function from the SPI manager
+SPI_finish — disconnect a C function from the SPI manager
 
 ## Synopsis
 
@@ -20,10 +20,10 @@ int SPI_finish(void)
 
 ## Return Value
 
-* `SPI_OK_FINISH`
+- `SPI_OK_FINISH`
 
   if properly disconnected
 
-* `SPI_ERROR_UNCONNECTED`
+- `SPI_ERROR_UNCONNECTED`
 
   if called from an unconnected C function

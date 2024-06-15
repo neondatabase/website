@@ -2,8 +2,6 @@
 
 ## 11.3. Multicolumn Indexes [#](#INDEXES-MULTICOLUMN)
 
-
-
 An index can be defined on more than one column of a table. For example, if you have a table of this form:
 
 ```

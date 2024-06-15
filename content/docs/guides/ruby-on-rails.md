@@ -113,4 +113,14 @@ Visit [localhost:3000/](http://localhost:3000/) in your web browser. Your Neon d
 PostgreSQL 15.5 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
 
+## Schema migration with Ruby on Rails
+
+For schema migration with Ruby on Rails, see our guide:
+
+<DetailIconCards>
+
+<a href="/docs/guides/rails-migrations" description="Schema migration with Neon Postgres and Ruby on Rails" icon="app-store" icon="app-store">Ruby on Rails Migrations</a>
+
+</DetailIconCards>
+
 <NeedHelp/>

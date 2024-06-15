@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2024-02-16T18:37:19.449Z'
+updatedOn: '2024-06-14T07:55:54.419Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a default Postgres role that takes its name from your Neon account (the email, GitHub, Google, or partner account that you registered with). This role owns the ready-to-use database (`neondb`) that is created in your Neon project's primary branch.
@@ -36,8 +36,8 @@ Roles created in the Neon Console, CLI, or API, including the default role creat
 - `NOLOGIN`: The role cannot be used to log in to the Postgres server. Neon is a managed Postgres service, so you cannot access the host operating system directly.
 - `pg_read_all_data`: A predefined Postgres role provides the ability to read all data (tables, views, sequences), as if having `SELECT` rights on those objects, and `USAGE` rights on all schemas.
 - `pg_write_all_data`: A predefined Postgres role that provides the ability to write all data (tables, views, sequences), as if having `INSERT`, `UPDATE`, and `DELETE` rights on those objects, and `USAGE` rights on all schemas.
-- `REPLICATION`: Provides the ability to connect to a Postgres server in replication mode and create or drop replication slots. 
-- `pg_create_subscription`:	A predefined Postgres role that lets users with `CREATE` permission on the database issue `CREATE SUBSCRIPTION`. The `pg_create_subscription` role is only available as of Postgres 16. The `neon_superuser` role in Postgres 14 and 15 can issue `CREATE SUBSCRIPTION` with only `CREATE` permission on the database.
+- `REPLICATION`: Provides the ability to connect to a Postgres server in replication mode and create or drop replication slots.
+- `pg_create_subscription`: A predefined Postgres role that lets users with `CREATE` permission on the database issue `CREATE SUBSCRIPTION`. The `pg_create_subscription` role is only available as of Postgres 16. The `neon_superuser` role in Postgres 14 and 15 can issue `CREATE SUBSCRIPTION` with only `CREATE` permission on the database.
 - `pg_monitor`: A predefined Postgres role that provides read/execute privileges on various Postgres monitoring views and functions. The `neon_superuser` role also has `WITH ADMIN` on the `pg_monitor` role, which enables granting the `pg_monitor` to other Postgres roles.
 - `EXECUTE` privilege on the `pg_stat_statements_reset()` function that is part of the `pg_stat_statements` extension. This privilege was introduced with the January 12, 2024 release. If you installed the `pg_stat_statements` extension before this release, drop and recreate the `pg_stat_statements` extension to enable this privilege. See [Install an extension](/docs/extensions/pg-extensions#install-an-extension).
 - `GRANT ALL ON TABLES` and `WITH GRANT OPTION` on the `public` schema.
@@ -59,11 +59,11 @@ To create a role:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Roles**.
+3. Select **Branches**.
 4. Select the branch where you want to create the role.
-4. Click **New Role**.
-5. In the role creation dialog, specify a role name. The length of the role name is limited to 63 bytes.
-6. Click **Create**. The role is created and you are provided with the password for the role.
+5. On the **Roles & Databases** tab, click **Add role**.
+6. In the role creation modal, specify a role name. The branch is pre-selected.
+7. Click **Create**. The role is created and you are provided with the password for the role.
 
 <Admonition type="note">
 Role names cannot exceed 63 characters, and some names are not permitted. See [Protected role names](#protected-role-names).
@@ -71,16 +71,16 @@ Role names cannot exceed 63 characters, and some names are not permitted. See [P
 
 ### Delete a role
 
-Deleting a role is a permanent action that cannot be undone, and you cannot delete a role that owns a database. The database must be deleted before you can deleting the role that owns the database.
+Deleting a role is a permanent action that cannot be undone, and you cannot delete a role that owns a database. The database must be deleted before deleting the role that owns the database.
 
 To delete a role:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Roles**.
-4. Select a branch to view roles in the branch.
-5. Click the delete icon for the role you want to delete.
-6. On the delete role dialog, click **Delete**.
+3. Select **Branches**.
+4. Select the branch where you want to delete a role.
+5. On the **Roles & Databases** tab, select **Delete role** from the role menu.
+6. On the confirmation modal, click **Delete**.
 
 ### Reset a password
 
@@ -88,10 +88,10 @@ To reset a role's password:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Roles**.
-4. Select a branch to view roles in the branch.
-5. Select **Reset password**.
-6. On the confirmation dialog, click **Sure, reset**. A reset password dialog is displayed with your new password.
+3. Select **Branches**.
+4. Select the role's branch.
+5. On the **Roles & Databases** tab, select **Reset password** from the role menu.
+6. On the **Reset password** modal, click **Reset**. A reset password modal is displayed with your new password.
 
 <Admonition type="note">
 Resetting a password in the Neon Console resets the password to a generated value. To set your own password value, you can reset the password using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor) with the following syntax:
@@ -379,12 +379,12 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
       - Any words found in a dictionary
       - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.
 
-    Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
+  Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
 
-    Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
+  Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
 
-    The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
-    </Admonition>
+  The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
+  </Admonition>
 
 For role creation and access management examples, refer to the [Manage database access](/docs/manage/database-access) guide.
 

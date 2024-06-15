@@ -13,7 +13,6 @@ import InfoIcon from 'components/shared/info-icon';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import CrossIcon from 'icons/cross.inline.svg';
-import sendGtagEvent from 'utils/send-gtag-event';
 
 import AWSIcon from './images/aws.inline.svg';
 
@@ -27,14 +26,14 @@ const items = [
       { title: '24/7 for your main compute', info: 'Plus 20h of usage for branches' },
       { title: 'Community support' },
       { title: 'Fixed capacity at 0.25 vCPU' },
-      { title: 'Instant Read Replicas', disabled: true },
-      { title: 'IP Allow Rules', disabled: true },
+      { title: 'Point-in-time restore (24 h)' },
+      { title: 'Organization accounts', disabled: true },
     ],
     button: {
       url: LINKS.signup,
       text: 'Start for free',
       theme: 'white-outline',
-      event: 'pricing_hero_free_btn_click',
+      event: 'Hero Free Tier Panel',
     },
   },
   {
@@ -53,21 +52,21 @@ const items = [
       },
       { title: 'Standard support' },
       { title: 'Autoscaling up to 4 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
-      { title: 'Instant Read Replicas' },
-      { title: 'IP Allow Rules', disabled: true },
+      { title: 'Point-in-time restore (7 days)' },
+      { title: 'Organization accounts' },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=launch`,
       text: 'Get started',
       theme: 'primary',
-      event: 'pricing_hero_launch_btn_click',
+      event: 'Hero Launch Panel',
     },
   },
   {
     type: 'Scale',
     price:
       '<em class="absolute block xl:-top-1 -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:-mt-4 md:mt-0">From</em> $69 <span>/month</span>',
-    description: 'Full platform and support access, designed for scaling production workloads.',
+    description: 'Full platform access for scaling production workloads.',
     features: [
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
       {
@@ -76,14 +75,14 @@ const items = [
       },
       { title: 'Priority support' },
       { title: 'Autoscaling up to 8 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
-      { title: 'Instant Read Replicas' },
-      { title: 'IP Allow Rules' },
+      { title: 'Point-in-time restore (30 days)' },
+      { title: 'Organization accounts' },
     ],
     button: {
-      url: `${LINKS.console}/?upgrade=scale`,
-      text: 'Get started',
+      url: `${LINKS.scaleTrial}`,
+      text: 'Request trial',
       theme: 'white-outline',
-      event: 'pricing_hero_scale_btn_click',
+      event: 'Hero Scale Panel',
     },
   },
   {
@@ -91,18 +90,17 @@ const items = [
     price: 'Custom',
     description: 'Custom plans for large datasets and database fleets.',
     features: [
-      { title: 'Storage discounts' },
       { title: 'Higher resource limits' },
-      { title: 'Thousands of databases' },
-      { title: 'Enterprise support w/SLAs' },
-      { title: 'Audit logging' },
-      { title: 'SOC 2 compliance' },
+      { title: 'Thousands of projects' },
+      { title: '99.95% SLA' },
+      { title: '24x7 customer support' },
+      { title: 'Dedicated Slack channel' },
     ],
     button: {
       url: `${LINKS.enterprise}#request-trial`,
       text: 'Request trial',
       theme: 'white-outline',
-      event: 'pricing_hero_custom_btn_click',
+      event: 'Hero Enterprise Panel',
     },
   },
 ];
@@ -244,10 +242,8 @@ const Hero = () => {
                         theme="primary"
                         size="sm"
                         to={button.url}
+                        tag_name={button.event}
                         isAnimated
-                        onClick={() => {
-                          sendGtagEvent(button.event);
-                        }}
                       >
                         {button.text}
                       </AnimatedButton>
@@ -256,9 +252,7 @@ const Hero = () => {
                         className="mt-7 w-full bg-gray-new-15 bg-opacity-80 !py-4 !text-lg !font-medium tracking-tight transition-colors duration-500 hover:bg-gray-new-30 xl:mt-7 sm:max-w-none"
                         size="sm"
                         to={button.url}
-                        onClick={() => {
-                          sendGtagEvent(button.event);
-                        }}
+                        tag_name={button.event}
                       >
                         {button.text}
                       </Button>

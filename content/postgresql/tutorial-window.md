@@ -2,9 +2,7 @@
 
 ## 3.5. Window Functions [#](#TUTORIAL-WINDOW)
 
-
-
-A *window function* performs a calculation across a set of table rows that are somehow related to the current row. This is comparable to the type of calculation that can be done with an aggregate function. However, window functions do not cause rows to become grouped into a single output row like non-window aggregate calls would. Instead, the rows retain their separate identities. Behind the scenes, the window function is able to access more than just the current row of the query result.
+A _window function_ performs a calculation across a set of table rows that are somehow related to the current row. This is comparable to the type of calculation that can be done with an aggregate function. However, window functions do not cause rows to become grouped into a single output row like non-window aggregate calls would. Instead, the rows retain their separate identities. Behind the scenes, the window function is able to access more than just the current row of the query result.
 
 Here is an example that shows how to compare each employee's salary with the average salary in his or her department:
 
@@ -62,7 +60,7 @@ The rows considered by a window function are those of the “virtual table” pr
 
 We already saw that `ORDER BY` can be omitted if the ordering of rows is not important. It is also possible to omit `PARTITION BY`, in which case there is a single partition containing all rows.
 
-There is another important concept associated with window functions: for each row, there is a set of rows within its partition called its *window frame*. Some window functions act only on the rows of the window frame, rather than of the whole partition. By default, if `ORDER BY` is supplied then the frame consists of all rows from the start of the partition up through the current row, plus any following rows that are equal to the current row according to the `ORDER BY` clause. When `ORDER BY` is omitted the default frame consists of all rows in the partition. [\[5\]](#ftn.id-1.4.5.6.9.5) Here is an example using `sum`:
+There is another important concept associated with window functions: for each row, there is a set of rows within its partition called its _window frame_. Some window functions act only on the rows of the window frame, rather than of the whole partition. By default, if `ORDER BY` is supplied then the frame consists of all rows from the start of the partition up through the current row, plus any following rows that are equal to the current row according to the `ORDER BY` clause. When `ORDER BY` is omitted the default frame consists of all rows in the partition. [\[5\]](#ftn.id-1.4.5.6.9.5) Here is an example using `sum`:
 
 ```
 SELECT salary, sum(salary) OVER () FROM empsalary;

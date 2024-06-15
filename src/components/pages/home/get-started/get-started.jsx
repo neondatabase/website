@@ -37,6 +37,7 @@ const GetStarted = () => (
         theme="primary"
         to={LINKS.signup}
         target="_blank"
+        tag_name="Footer"
       >
         Get Started
       </Button>

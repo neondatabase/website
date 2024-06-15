@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-PREPARE-CURSOR)
 
-## SPI\_prepare\_cursor
+## SPI_prepare_cursor
 
-SPI\_prepare\_cursor — prepare a statement, without executing it yet
+SPI_prepare_cursor — prepare a statement, without executing it yet
 
 ## Synopsis
 
@@ -23,19 +23,19 @@ This function is now deprecated in favor of `SPI_prepare_extended`.
 
 ## Arguments
 
-* `const char * command`
+- `const char * command`
 
   command string
 
-* `int nargs`
+- `int nargs`
 
   number of input parameters (`$1`, `$2`, etc.)
 
-* `Oid * argtypes`
+- `Oid * argtypes`
 
   pointer to an array containing the OIDs of the data types of the parameters
 
-* `int cursorOptions`
+- `int cursorOptions`
 
   integer bit mask of cursor options; zero produces default behavior
 
@@ -49,4 +49,4 @@ This function is now deprecated in favor of `SPI_prepare_extended`.
 
 ## Notes
 
-Useful bits to set in *`cursorOptions`* include `CURSOR_OPT_SCROLL`, `CURSOR_OPT_NO_SCROLL`, `CURSOR_OPT_FAST_PLAN`, `CURSOR_OPT_GENERIC_PLAN`, and `CURSOR_OPT_CUSTOM_PLAN`. Note in particular that `CURSOR_OPT_HOLD` is ignored.
+Useful bits to set in _`cursorOptions`_ include `CURSOR_OPT_SCROLL`, `CURSOR_OPT_NO_SCROLL`, `CURSOR_OPT_FAST_PLAN`, `CURSOR_OPT_GENERIC_PLAN`, and `CURSOR_OPT_CUSTOM_PLAN`. Note in particular that `CURSOR_OPT_HOLD` is ignored.

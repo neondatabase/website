@@ -2,7 +2,7 @@
 
 ## 7.1. Overview [#](#QUERIES-OVERVIEW)
 
-The process of retrieving or the command to retrieve data from a database is called a *query*. In SQL the [`SELECT`](sql-select) command is used to specify queries. The general syntax of the `SELECT` command is
+The process of retrieving or the command to retrieve data from a database is called a _query_. In SQL the [`SELECT`](sql-select) command is used to specify queries. The general syntax of the `SELECT` command is
 
 ```
 [WITH with_queries] SELECT select_list FROM table_expression [sort_specification]

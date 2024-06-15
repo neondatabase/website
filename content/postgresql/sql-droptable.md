@@ -22,19 +22,19 @@ DROP TABLE [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the table does not exist. A notice is issued in this case.
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of the table to drop.
 
-* `CASCADE`
+- `CASCADE`
 
   Automatically drop objects that depend on the table (such as views), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend)).
 
-* `RESTRICT`
+- `RESTRICT`
 
   Refuse to drop the table if any objects depend on it. This is the default.
 

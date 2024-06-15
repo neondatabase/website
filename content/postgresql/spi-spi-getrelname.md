@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-GETRELNAME)
 
-## SPI\_getrelname
+## SPI_getrelname
 
-SPI\_getrelname — return the name of the specified relation
+SPI_getrelname — return the name of the specified relation
 
 ## Synopsis
 
@@ -20,7 +20,7 @@ char * SPI_getrelname(Relation rel)
 
 ## Arguments
 
-* `Relation rel`
+- `Relation rel`
 
   input relation
 

@@ -2,15 +2,13 @@
 
 ## F.25. pageinspect — low-level inspection of database pages [#](#PAGEINSPECT)
 
-  * [F.25.1. General Functions](pageinspect#PAGEINSPECT-GENERAL-FUNCS)
-  * [F.25.2. Heap Functions](pageinspect#PAGEINSPECT-HEAP-FUNCS)
-  * [F.25.3. B-Tree Functions](pageinspect#PAGEINSPECT-B-TREE-FUNCS)
-  * [F.25.4. BRIN Functions](pageinspect#PAGEINSPECT-BRIN-FUNCS)
-  * [F.25.5. GIN Functions](pageinspect#PAGEINSPECT-GIN-FUNCS)
-  * [F.25.6. GiST Functions](pageinspect#PAGEINSPECT-GIST-FUNCS)
-  * [F.25.7. Hash Functions](pageinspect#PAGEINSPECT-HASH-FUNCS)
-
-
+- [F.25.1. General Functions](pageinspect#PAGEINSPECT-GENERAL-FUNCS)
+- [F.25.2. Heap Functions](pageinspect#PAGEINSPECT-HEAP-FUNCS)
+- [F.25.3. B-Tree Functions](pageinspect#PAGEINSPECT-B-TREE-FUNCS)
+- [F.25.4. BRIN Functions](pageinspect#PAGEINSPECT-BRIN-FUNCS)
+- [F.25.5. GIN Functions](pageinspect#PAGEINSPECT-GIN-FUNCS)
+- [F.25.6. GiST Functions](pageinspect#PAGEINSPECT-GIST-FUNCS)
+- [F.25.7. Hash Functions](pageinspect#PAGEINSPECT-HASH-FUNCS)
 
 The `pageinspect` module provides functions that allow you to inspect the contents of database pages at a low level, which is useful for debugging purposes. All of these functions may be used only by superusers.
 
@@ -18,15 +16,15 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
 ### F.25.1. General Functions [#](#PAGEINSPECT-GENERAL-FUNCS)
 
-* `get_raw_page(relname text, fork text, blkno bigint) returns bytea`
+- `get_raw_page(relname text, fork text, blkno bigint) returns bytea`
 
-  `get_raw_page` reads the specified block of the named relation and returns a copy as a `bytea` value. This allows a single time-consistent copy of the block to be obtained. *`fork`* should be `'main'` for the main data fork, `'fsm'` for the [free space map](storage-fsm), `'vm'` for the [visibility map](storage-vm), or `'init'` for the initialization fork.
+  `get_raw_page` reads the specified block of the named relation and returns a copy as a `bytea` value. This allows a single time-consistent copy of the block to be obtained. _`fork`_ should be `'main'` for the main data fork, `'fsm'` for the [free space map](storage-fsm), `'vm'` for the [visibility map](storage-vm), or `'init'` for the initialization fork.
 
-* `get_raw_page(relname text, blkno bigint) returns bytea`
+- `get_raw_page(relname text, blkno bigint) returns bytea`
 
   A shorthand version of `get_raw_page`, for reading from the main fork. Equivalent to `get_raw_page(relname, 'main', blkno)`
 
-* `page_header(page bytea) returns record`
+- `page_header(page bytea) returns record`
 
   `page_header` shows fields that are common to all PostgreSQL heap and index pages.
 
@@ -43,7 +41,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
   The `checksum` field is the checksum stored in the page, which might be incorrect if the page is somehow corrupted. If data checksums are not enabled for this instance, then the value stored is meaningless.
 
-* `page_checksum(page bytea, blkno bigint) returns smallint`
+- `page_checksum(page bytea, blkno bigint) returns smallint`
 
   `page_checksum` computes the checksum for the page, as if it was located at the given block.
 
@@ -60,7 +58,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
   The checksum computed with this function can be compared with the `checksum` result field of the function `page_header`. If data checksums are enabled for this instance, then the two values should be equal.
 
-* `fsm_page_contents(page bytea) returns text`
+- `fsm_page_contents(page bytea) returns text`
 
   `fsm_page_contents` shows the internal node structure of an FSM page. For example:
 
@@ -76,7 +74,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
 ### F.25.2. Heap Functions [#](#PAGEINSPECT-HEAP-FUNCS)
 
-* `heap_page_items(page bytea) returns setof record`
+- `heap_page_items(page bytea) returns setof record`
 
   `heap_page_items` shows all line pointers on a heap page. For those line pointers that are in use, tuple headers as well as tuple raw data are also shown. All tuples are shown, whether or not the tuples were visible to an MVCC snapshot at the time the raw page was copied.
 
@@ -90,7 +88,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
   The `heap_tuple_infomask_flags` function can be used to unpack the flag bits of `t_infomask` and `t_infomask2` for heap tuples.
 
-* `tuple_data_split(rel_oid oid, t_data bytea, t_infomask integer, t_infomask2 integer, t_bits text [, do_detoast bool]) returns bytea[]`
+- `tuple_data_split(rel_oid oid, t_data bytea, t_infomask integer, t_infomask2 integer, t_bits text [, do_detoast bool]) returns bytea[]`
 
   `tuple_data_split` splits tuple data into attributes in the same way as backend internals.
 
@@ -100,11 +98,11 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
   This function should be called with the same arguments as the return attributes of `heap_page_items`.
 
-  If *`do_detoast`* is `true`, attributes will be detoasted as needed. Default value is `false`.
+  If _`do_detoast`_ is `true`, attributes will be detoasted as needed. Default value is `false`.
 
-* `heap_page_item_attrs(page bytea, rel_oid regclass [, do_detoast bool]) returns setof record`
+- `heap_page_item_attrs(page bytea, rel_oid regclass [, do_detoast bool]) returns setof record`
 
-  `heap_page_item_attrs` is equivalent to `heap_page_items` except that it returns tuple raw data as an array of attributes that can optionally be detoasted by *`do_detoast`* which is `false` by default.
+  `heap_page_item_attrs` is equivalent to `heap_page_items` except that it returns tuple raw data as an array of attributes that can optionally be detoasted by _`do_detoast`_ which is `false` by default.
 
   A heap page image obtained with `get_raw_page` should be passed as argument. For example:
 
@@ -112,7 +110,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
   test=# SELECT * FROM heap_page_item_attrs(get_raw_page('pg_class', 0), 'pg_class'::regclass);
   ```
 
-* `heap_tuple_infomask_flags(t_infomask integer, t_infomask2 integer) returns record`
+- `heap_tuple_infomask_flags(t_infomask integer, t_infomask2 integer) returns record`
 
   `heap_tuple_infomask_flags` decodes the `t_infomask` and `t_infomask2` returned by `heap_page_items` into a human-readable set of arrays made of flag names, with one column for all the flags and one column for combined flags. For example:
 
@@ -133,7 +131,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
 ### F.25.3. B-Tree Functions [#](#PAGEINSPECT-B-TREE-FUNCS)
 
-* `bt_metap(relname text) returns record`
+- `bt_metap(relname text) returns record`
 
   `bt_metap` returns information about a B-tree index's metapage. For example:
 
@@ -151,7 +149,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
   allequalimage             | f
   ```
 
-* `bt_page_stats(relname text, blkno bigint) returns record`
+- `bt_page_stats(relname text, blkno bigint) returns record`
 
   `bt_page_stats` returns summary information about a data page of a B-tree index. For example:
 
@@ -171,9 +169,9 @@ The `pageinspect` module provides functions that allow you to inspect the conten
   btpo_flags    | 3
   ```
 
-* `bt_multi_page_stats(relname text, blkno bigint, blk_count bigint) returns setof record`
+- `bt_multi_page_stats(relname text, blkno bigint, blk_count bigint) returns setof record`
 
-  `bt_multi_page_stats` returns the same information as `bt_page_stats`, but does so for each page of the range of pages beginning at *`blkno`* and extending for *`blk_count`* pages. If *`blk_count`* is negative, all pages from *`blkno`* to the end of the index are reported on. For example:
+  `bt_multi_page_stats` returns the same information as `bt_page_stats`, but does so for each page of the range of pages beginning at _`blkno`_ and extending for _`blk_count`_ pages. If _`blk_count`_ is negative, all pages from _`blkno`_ to the end of the index are reported on. For example:
 
   ```
   test=# SELECT * FROM bt_multi_page_stats('pg_proc_oid_index', 5, 2);
@@ -203,7 +201,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
   btpo_flags    | 1
   ```
 
-* `bt_page_items(relname text, blkno bigint) returns setof record`
+- `bt_page_items(relname text, blkno bigint) returns setof record`
 
   `bt_page_items` returns detailed information about all of the items on a B-tree index page. For example:
 
@@ -238,7 +236,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
   For more details about the structure of B-tree indexes, see [Section 67.4.1](btree-implementation#BTREE-STRUCTURE). For more details about deduplication and posting lists, see [Section 67.4.3](btree-implementation#BTREE-DEDUPLICATION).
 
-* `bt_page_items(page bytea) returns setof record`
+- `bt_page_items(page bytea) returns setof record`
 
   It is also possible to pass a page to `bt_page_items` as a `bytea` value. A page image obtained with `get_raw_page` should be passed as argument. So the last example could also be rewritten like this:
 
@@ -269,7 +267,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
 ### F.25.4. BRIN Functions [#](#PAGEINSPECT-BRIN-FUNCS)
 
-* `brin_page_type(page bytea) returns text`
+- `brin_page_type(page bytea) returns text`
 
   `brin_page_type` returns the page type of the given BRIN index page, or throws an error if the page is not a valid BRIN page. For example:
 
@@ -280,7 +278,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
    meta
   ```
 
-* `brin_metapage_info(page bytea) returns record`
+- `brin_metapage_info(page bytea) returns record`
 
   `brin_metapage_info` returns assorted information about a BRIN index metapage. For example:
 
@@ -291,7 +289,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
    0xA8109CFA |       1 |             4 |              2
   ```
 
-* `brin_revmap_data(page bytea) returns setof tid`
+- `brin_revmap_data(page bytea) returns setof tid`
 
   `brin_revmap_data` returns the list of tuple identifiers in a BRIN index range map page. For example:
 
@@ -306,7 +304,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
    (6,141)
   ```
 
-* `brin_page_items(page bytea, index oid) returns setof record`
+- `brin_page_items(page bytea, index oid) returns setof record`
 
   `brin_page_items` returns the data stored in the BRIN data page. For example:
 
@@ -330,7 +328,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
 ### F.25.5. GIN Functions [#](#PAGEINSPECT-GIN-FUNCS)
 
-* `gin_metapage_info(page bytea) returns record`
+- `gin_metapage_info(page bytea) returns record`
 
   `gin_metapage_info` returns information about a GIN index metapage. For example:
 
@@ -349,7 +347,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
   version          | 2
   ```
 
-* `gin_page_opaque_info(page bytea) returns record`
+- `gin_page_opaque_info(page bytea) returns record`
 
   `gin_page_opaque_info` returns information about a GIN index opaque area, like the page type. For example:
 
@@ -361,7 +359,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
   (1 row)
   ```
 
-* `gin_leafpage_items(page bytea) returns setof record`
+- `gin_leafpage_items(page bytea) returns setof record`
 
   `gin_leafpage_items` returns information about the data stored in a GIN leaf page. For example:
 
@@ -384,7 +382,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
 ### F.25.6. GiST Functions [#](#PAGEINSPECT-GIST-FUNCS)
 
-* `gist_page_opaque_info(page bytea) returns record`
+- `gist_page_opaque_info(page bytea) returns record`
 
   `gist_page_opaque_info` returns information from a GiST index page's opaque area, such as the NSN, rightlink and page type. For example:
 
@@ -396,7 +394,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
   (1 row)
   ```
 
-* `gist_page_items(page bytea, index_oid regclass) returns setof record`
+- `gist_page_items(page bytea, index_oid regclass) returns setof record`
 
   `gist_page_items` returns information about the data stored in a page of a GiST index. For example:
 
@@ -413,7 +411,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
   (6 rows)
   ```
 
-* `gist_page_items_bytea(page bytea) returns setof record`
+- `gist_page_items_bytea(page bytea) returns setof record`
 
   Same as `gist_page_items`, but returns the key data as a raw `bytea` blob. Since it does not attempt to decode the key, it does not need to know which index is involved. For example:
 
@@ -435,7 +433,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
 ### F.25.7. Hash Functions [#](#PAGEINSPECT-HASH-FUNCS)
 
-* `hash_page_type(page bytea) returns text`
+- `hash_page_type(page bytea) returns text`
 
   `hash_page_type` returns page type of the given HASH index page. For example:
 
@@ -446,7 +444,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
    metapage
   ```
 
-* `hash_page_stats(page bytea) returns setof record`
+- `hash_page_stats(page bytea) returns setof record`
 
   `hash_page_stats` returns information about a bucket or overflow page of a HASH index. For example:
 
@@ -464,7 +462,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
   hasho_page_id   | 65408
   ```
 
-* `hash_page_items(page bytea) returns setof record`
+- `hash_page_items(page bytea) returns setof record`
 
   `hash_page_items` returns information about the data stored in a bucket or overflow page of a HASH index page. For example:
 
@@ -479,7 +477,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
             5 | (890,111) | 1053474816
   ```
 
-* `hash_bitmap_info(index oid, blkno bigint) returns record`
+- `hash_bitmap_info(index oid, blkno bigint) returns record`
 
   `hash_bitmap_info` shows the status of a bit in the bitmap page for a particular overflow page of HASH index. For example:
 
@@ -490,7 +488,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
             65 |         3 | t
   ```
 
-* `hash_metapage_info(page bytea) returns record`
+- `hash_metapage_info(page bytea) returns record`
 
   `hash_metapage_info` returns information stored in the meta page of a HASH index. For example:
 

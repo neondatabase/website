@@ -12,7 +12,7 @@ LANGUAGE plpgsql;
 
 The function body is simply a string literal so far as `CREATE FUNCTION` is concerned. It is often helpful to use dollar quoting (see [Section 4.1.2.4](sql-syntax-lexical#SQL-SYNTAX-DOLLAR-QUOTING)) to write the function body, rather than the normal single quote syntax. Without dollar quoting, any single quotes or backslashes in the function body must be escaped by doubling them. Almost all the examples in this chapter use dollar-quoted literals for their function bodies.
 
-PL/pgSQL is a block-structured language. The complete text of a function body must be a *block*. A block is defined as:
+PL/pgSQL is a block-structured language. The complete text of a function body must be a _block_. A block is defined as:
 
 ```
 [ <<label>> ]
@@ -29,13 +29,13 @@ Each declaration and each statement within a block is terminated by a semicolon.
 
 A common mistake is to write a semicolon immediately after `BEGIN`. This is incorrect and will result in a syntax error.
 
-A *`label`* is only needed if you want to identify the block for use in an `EXIT` statement, or to qualify the names of the variables declared in the block. If a label is given after `END`, it must match the label at the block's beginning.
+A _`label`_ is only needed if you want to identify the block for use in an `EXIT` statement, or to qualify the names of the variables declared in the block. If a label is given after `END`, it must match the label at the block's beginning.
 
 All key words are case-insensitive. Identifiers are implicitly converted to lower case unless double-quoted, just as they are in ordinary SQL commands.
 
 Comments work the same way in PL/pgSQL code as in ordinary SQL. A double dash (`--`) starts a comment that extends to the end of the line. A `/*` starts a block comment that extends to the matching occurrence of `*/`. Block comments nest.
 
-Any statement in the statement section of a block can be a *subblock*. Subblocks can be used for logical grouping or to localize variables to a small group of statements. Variables declared in a subblock mask any similarly-named variables of outer blocks for the duration of the subblock; but you can access the outer variables anyway if you qualify their names with their block's label. For example:
+Any statement in the statement section of a block can be a _subblock_. Subblocks can be used for logical grouping or to localize variables to a small group of statements. Variables declared in a subblock mask any similarly-named variables of outer blocks for the duration of the subblock; but you can access the outer variables anyway if you qualify their names with their block's label. For example:
 
 ```
 CREATE FUNCTION somefunc() RETURNS integer AS $$

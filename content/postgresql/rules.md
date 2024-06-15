@@ -4,25 +4,23 @@
 
 **Table of Contents**
 
-  * [41.1. The Query Tree](querytree)
-  * [41.2. Views and the Rule System](rules-views)
+- [41.1. The Query Tree](querytree)
+- [41.2. Views and the Rule System](rules-views)
 
-    - [41.2.1. How `SELECT` Rules Work](rules-views#RULES-SELECT)
-    - [41.2.2. View Rules in Non-`SELECT` Statements](rules-views#RULES-VIEWS-NON-SELECT)
-    - [41.2.3. The Power of Views in PostgreSQL](rules-views#RULES-VIEWS-POWER)
-    - [41.2.4. Updating a View](rules-views#RULES-VIEWS-UPDATE)
+  - [41.2.1. How `SELECT` Rules Work](rules-views#RULES-SELECT)
+  - [41.2.2. View Rules in Non-`SELECT` Statements](rules-views#RULES-VIEWS-NON-SELECT)
+  - [41.2.3. The Power of Views in PostgreSQL](rules-views#RULES-VIEWS-POWER)
+  - [41.2.4. Updating a View](rules-views#RULES-VIEWS-UPDATE)
 
-  * [41.3. Materialized Views](rules-materializedviews)
-  * [41.4. Rules on `INSERT`, `UPDATE`, and `DELETE`](rules-update)
+- [41.3. Materialized Views](rules-materializedviews)
+- [41.4. Rules on `INSERT`, `UPDATE`, and `DELETE`](rules-update)
 
-    - [41.4.1. How Update Rules Work](rules-update#RULES-UPDATE-HOW)
-    - [41.4.2. Cooperation with Views](rules-update#RULES-UPDATE-VIEWS)
+  - [41.4.1. How Update Rules Work](rules-update#RULES-UPDATE-HOW)
+  - [41.4.2. Cooperation with Views](rules-update#RULES-UPDATE-VIEWS)
 
-  * [41.5. Rules and Privileges](rules-privileges)
-  * [41.6. Rules and Command Status](rules-status)
-  * [41.7. Rules Versus Triggers](rules-triggers)
-
-
+- [41.5. Rules and Privileges](rules-privileges)
+- [41.6. Rules and Command Status](rules-status)
+- [41.7. Rules Versus Triggers](rules-triggers)
 
 This chapter discusses the rule system in PostgreSQL. Production rule systems are conceptually simple, but there are many subtle points involved in actually using them.
 

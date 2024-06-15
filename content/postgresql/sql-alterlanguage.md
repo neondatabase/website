@@ -21,15 +21,15 @@ ALTER [ PROCEDURAL ] LANGUAGE name OWNER TO { new_owner | CURRENT_ROLE | CURRENT
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   Name of a language
 
-* *`new_name`*
+- _`new_name`_
 
   The new name of the language
 
-* *`new_owner`*
+- _`new_owner`_
 
   The new owner of the language
 

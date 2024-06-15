@@ -25,21 +25,21 @@ You must own the tablespace to change the definition of a tablespace. To alter t
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of an existing tablespace.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name of the tablespace. The new name cannot begin with `pg_`, as such names are reserved for system tablespaces.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The new owner of the tablespace.
 
-* *`tablespace_option`*
+- _`tablespace_option`_
 
-  A tablespace parameter to be set or reset. Currently, the only available parameters are `seq_page_cost`, `random_page_cost`, `effective_io_concurrency` and `maintenance_io_concurrency`. Setting these values for a particular tablespace will override the planner's usual estimate of the cost of reading pages from tables in that tablespace, and the executor's prefetching behavior, as established by the configuration parameters of the same name (see [seq\_page\_cost](runtime-config-query#GUC-SEQ-PAGE-COST), [random\_page\_cost](runtime-config-query#GUC-RANDOM-PAGE-COST), [effective\_io\_concurrency](runtime-config-resource#GUC-EFFECTIVE-IO-CONCURRENCY), [maintenance\_io\_concurrency](runtime-config-resource#GUC-MAINTENANCE-IO-CONCURRENCY)). This may be useful if one tablespace is located on a disk which is faster or slower than the remainder of the I/O subsystem.
+  A tablespace parameter to be set or reset. Currently, the only available parameters are `seq_page_cost`, `random_page_cost`, `effective_io_concurrency` and `maintenance_io_concurrency`. Setting these values for a particular tablespace will override the planner's usual estimate of the cost of reading pages from tables in that tablespace, and the executor's prefetching behavior, as established by the configuration parameters of the same name (see [seq_page_cost](runtime-config-query#GUC-SEQ-PAGE-COST), [random_page_cost](runtime-config-query#GUC-RANDOM-PAGE-COST), [effective_io_concurrency](runtime-config-resource#GUC-EFFECTIVE-IO-CONCURRENCY), [maintenance_io_concurrency](runtime-config-resource#GUC-MAINTENANCE-IO-CONCURRENCY)). This may be useful if one tablespace is located on a disk which is faster or slower than the remainder of the I/O subsystem.
 
 [#id](#id-1.9.3.36.7)
 
