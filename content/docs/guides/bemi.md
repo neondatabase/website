@@ -50,34 +50,34 @@ To connect your database to Bemi:
 
 1. In Neon, retrieve your database connection string from the **Connection Details** widget on the **Project Dashboard**, which will look similar to this:
 
-      ```sql shouldWrap
-    postgres://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
-    ```
+   ```sql shouldWrap
+   postgres://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
+   ```
 
 2. In Bemi, select **Databases** > **Add Database** to open the **Connect PostgreSQL Database** dialog.
 3. Enter the Neon database connection details from your connection string. For example, given the connection string shown above, enter the details in the **Connect PostgreSQL Database** dialog as shown below. Your values will differ except for the port number. Neon uses the default Postgres port, `5432`.
 
-    - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
-    - **Port**: 5432
-    - **Database Name**: neondb
-    - **Username**: neondb_owner
-    - **Password**: AbC123dEf
+   - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
+   - **Port**: 5432
+   - **Database Name**: neondb
+   - **Username**: neondb_owner
+   - **Password**: AbC123dEf
 
-    You can also use the **Environment** field to specify whether the configuration is for a **Production**, **Staging**, or **Test** environment.
+   You can also use the **Environment** field to specify whether the configuration is for a **Production**, **Staging**, or **Test** environment.
 
-    ![Bemi Connect PostgreSQL Database](/docs/guides/bemi_connect_postgres.png)
+   ![Bemi Connect PostgreSQL Database](/docs/guides/bemi_connect_postgres.png)
 
-3. After entering your connection details, click **Add Database**.
+4. After entering your connection details, click **Add Database**.
 
-3. Configure the tables you want to track changes for and choose whether to track new tables automatically. You can change this selection later, if necessary.
+5. Configure the tables you want to track changes for and choose whether to track new tables automatically. You can change this selection later, if necessary.
 
-    ![Bemi Tracked Tables](/docs/guides/bemi_tracked_tables.png)
+   ![Bemi Tracked Tables](/docs/guides/bemi_tracked_tables.png)
 
-    Click **Save** to continue.
+   Click **Save** to continue.
 
-4. Wait a few minutes while Bemi provisions the infrastructure. When this operation completes, you’ve successfully configured a Bemi Postgres source for your Neon database. You'll be able to track data changes through the Bemi Browser UI page, where you can filter by **Operation** (`Create`, `Update`, `Delete`), **Table**, or **Primary Key**. You can also view data changes by environment if you have configured more than one.
+6. Wait a few minutes while Bemi provisions the infrastructure. When this operation completes, you’ve successfully configured a Bemi Postgres source for your Neon database. You'll be able to track data changes through the Bemi Browser UI page, where you can filter by **Operation** (`Create`, `Update`, `Delete`), **Table**, or **Primary Key**. You can also view data changes by environment if you have configured more than one.
 
-    ![Bemi browser UI](/docs/guides/bemi_browser_ui.png)
+   ![Bemi browser UI](/docs/guides/bemi_browser_ui.png)
 
 ## Use a read-only Postgres role for Bemi
 
@@ -117,7 +117,7 @@ After creating a read-only role, you can find the connection details for this ro
 
 If you're using Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) plan, to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Bemi. [Contact Bemi](mailto:hi@bemi.io) to get the static IPs that need to be allowlisted. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
- ## References
+## References
 
 - [The ultimate guide to PostgreSQL data change tracking](https://blog.bemi.io/the-ultimate-guide-to-postgresql-data-change-tracking/)
 - [Logical replication - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html)
