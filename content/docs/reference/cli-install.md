@@ -7,11 +7,17 @@ updatedOn: '2024-06-14T07:55:54.422Z'
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
 
-<Tabs labels={["npm", "Homebrew", "Binary"]}>
+<Tabs labels={["macOS", "Windows", "Linux"]}>
 
 <TabItem>
 
-To install the Neon CLI via [npm](https://www.npmjs.com/package/neonctl):
+**Install with [Homebrew](https://formulae.brew.sh/formula/neonctl)**
+
+```bash
+brew install neonctl
+```
+
+**Install via [npm](https://www.npmjs.com/package/neonctl)**
 
 ```shell
 npm i -g neonctl
@@ -19,79 +25,115 @@ npm i -g neonctl
 
 Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
 
-</TabItem>
-
-<TabItem>
-
-To install the Neon CLI with [Homebrew](https://formulae.brew.sh/formula/neonctl):
+**Install with bun**
 
 ```bash
-brew install neonctl
+bun install -g neonctl
+```
+
+**macOS binary**
+
+Download the binary. No installation required.
+
+```bash shouldWrap
+curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
+```
+
+Run the CLI from the download directory:
+
+```bash
+neonctl <command> [options]
 ```
 
 </TabItem>
 
 <TabItem>
 
-To install a [binary](https://github.com/neondatabase/neonctl/releases):
+**Install via [npm](https://www.npmjs.com/package/neonctl)**
 
-- **macOS**
+```shell
+npm i -g neonctl
+```
 
-  Download the macOS binary:
+Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
 
-  ```bash shouldWrap
-  curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
-  ```
+**Install with bun**
 
-  No installation is required. Run the Neon CLI as follows:
+```bash
+bun install -g neonctl
+```
 
-  ```bash
-  neonctl <command> [options]
-  ```
+**Windows binary**
 
-- **Linux**
+Download the binary. No installation required.
 
-  Download the Linux x64 or ARM64 binary:
+```bash shouldWrap
+curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
+```
 
-  x64:
+Run the CLI from the download directory:
 
-  ```bash shouldWrap
-  curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
-  ```
+```bash
+neonctl-win.exe <command> [options]
+```
 
-  ARM64:
+</TabItem>
 
-  ```bash shouldWrap
-  curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
-  ```
+<TabItem>
 
-  No installation is required. Run the Neon CLI as follows:
+**Install via [npm](https://www.npmjs.com/package/neonctl)**
 
-  ```bash
-  neonctl <command> [options]
-  ```
+```shell
+npm i -g neonctl
+```
 
-- **Windows**
+**Install with bun**
 
-  Download the Windows binary:
+```bash
+bun install -g neonctl
+```
 
-  ```bash shouldWrap
-  curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
-  ```
+**Linux binary**
 
-  No installation is required. Run the Neon CLI as follows:
+Download the x64 or ARM64 binary, depending on your processor type. No installation required.
 
-  ```bash
-  neonctl-win.exe <command> [options]
-  ```
+x64:
+
+```bash shouldWrap
+curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
+```
+
+ARM64:
+
+```bash shouldWrap
+ curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
+```
+
+Run the CLI from the download directory:
+
+```bash
+neonctl <command> [options]
+```
 
 </TabItem>
 
 </Tabs>
 
+<Admonition title="Use the Neon CLI without installing" type="note">
+You can run the Neon CLI without installing it using **npx** (Node Package eXecute) or the `bun` equivalent, **bunx**. For example:
+
+```shell
+# npx
+npx neonctl <command>
+
+# bunx
+bunx neonctl <command>
+```
+</Admonition>
+
 ### Upgrade
 
-When a new version is released, you can update your Neon CLI using the methods described below. To check for the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed version of the Neon CLI, run the following command:
+When a new version is released, you can update your Neon CLI using the methods described below, depending on how you installed the CLI initially. To check for the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed version of the Neon CLI, run the following command:
 
 ```bash
 neonctl --version
