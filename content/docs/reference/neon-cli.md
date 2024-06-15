@@ -133,6 +133,7 @@ npx neonctl <command>
 # bunx
 bunx neonctl <command>
 ```
+
 </Admonition>
 
 ## Synopsis
@@ -193,7 +194,7 @@ Global options are supported with any Neon CLI command.
 | [-o, --output](#output)     | Set the Neon CLI output format (`json`, `yaml`, or `table`) | string  | table                               |
 | [--config-dir](#config-dir) | Path to the Neon CLI configuration directory                | string  | `/home/<user>/.config/neonctl`      |
 | [--api-key](#api-key)       | Neon API key                                                | string  | `NEON_API_KEY` environment variable |
-| [--color](#color        )   | Colorize the output. Example: `--no-color`, `--color false` | boolean | true                                |
+| [--color](#color)           | Colorize the output. Example: `--no-color`, `--color false` | boolean | true                                |
 | [--analytics](#analytics)   | Manage analytics                                            | boolean | true                                |
 | [-v, --version](#version)   | Show the Neon CLI version number                            | boolean | -                                   |
 | [-h, --help](#help)         | Show the Neon CLI help                                      | boolean | -                                   |
@@ -235,11 +236,11 @@ Global options are supported with any Neon CLI command.
   - If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable setting is used.
   - If there is no `--api-key` option or `NEON_API_KEY` environment variable setting, the CLI looks for the `credentials.json` file created by the `neonctl auth` command.
   - If the credentials file is not found, the Neon CLI initiates the `neonctl auth` web authentication process.
-  </Admonition>
+    </Admonition>
 
 - <a id="color"></a>`--color`
 
-  Colorize the output. This option is enabled by default, but you can disable it by specifying `--no-color` or `--color false`, which is useful when using Neon CLI commands in your automation pipelines. 
+  Colorize the output. This option is enabled by default, but you can disable it by specifying `--no-color` or `--color false`, which is useful when using Neon CLI commands in your automation pipelines.
 
 - <a id="analytics"></a>`--analytics`
 
