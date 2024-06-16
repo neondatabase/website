@@ -475,11 +475,11 @@ This setting is **optional**. If you leave it out, the operation uses either of 
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `schema-diff` subcommand supports these options:
 
-| Option                  | Description                                                                                   | Type    |                                 Required                                  |
-| ----------------------- | --------------------------------------------------------------------------------------------- | ------- | :-----------------------------------------------------------------------: |
-| `--context-file`        | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string  |                                                                           |
-| `--project-id`          | Project ID                                                                                    | string  | Only if your Neon account has more than one project or context is not set |
-| `--database`, `--db`    | Name of the database for which the schema comparison is performed                             | string  |                                                                           |
+| Option               | Description                                                                                   | Type   |                                 Required                                  |
+| -------------------- | --------------------------------------------------------------------------------------------- | ------ | :-----------------------------------------------------------------------: |
+| `--context-file`     | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                                           |
+| `--project-id`       | Project ID                                                                                    | string | Only if your Neon account has more than one project or context is not set |
+| `--database`, `--db` | Name of the database for which the schema comparison is performed                             | string |                                                                           |
 
 <Admonition type="note">
 The `--no-color` or `--color false` [global option](/docs/reference/neon-cli#global-options) can be used to decolorize the CLI command output when using CLI commands in CI/CD pipelines.

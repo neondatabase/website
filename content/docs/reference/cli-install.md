@@ -129,6 +129,7 @@ npx neonctl <command>
 # bunx
 bunx neonctl <command>
 ```
+
 </Admonition>
 
 ### Upgrade
