@@ -338,6 +338,8 @@
       items:
         - title: Airbyte
           slug: guides/logical-replication-airbyte
+        - title: Bemi
+          slug: guides/bemi
         - title: ClickHouse (DoubleCloud)
           slug: guides/logical-replication-clickhouse
         - title: Confluent
