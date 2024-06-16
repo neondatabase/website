@@ -473,7 +473,7 @@ This setting is **optional**. If you leave it out, the operation uses either of 
 
 #### Options
 
-In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `reset` subcommand supports these options:
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `schema-diff` subcommand supports these options:
 
 | Option                  | Description                                                                                   | Type    |                                 Required                                  |
 | ----------------------- | --------------------------------------------------------------------------------------------- | ------- | :-----------------------------------------------------------------------: |
