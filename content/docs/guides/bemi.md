@@ -1,8 +1,10 @@
 ---
 title: Create an automatic audit trail with Bemi
-subtitle: Learn how to create an automatic audit trail for your Postgres database with Bemi
+subtitle: Learn how to create an automatic audit trail for your Postgres database with
+  Bemi
 enableTableOfContents: true
 isDraft: false
+updatedOn: '2024-06-16T10:21:49.227Z'
 ---
 
 <LRNotice/>

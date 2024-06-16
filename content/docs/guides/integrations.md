@@ -1,10 +1,11 @@
 ---
 title: Neon integration guides
-subtitle: Find detailed instructions for integration across various platforms and services.
+subtitle: Find detailed instructions for integration across various platforms and
+  services.
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2024-02-27T20:16:54.558Z'
+updatedOn: '2024-06-16T10:21:49.230Z'
 ---
 
 ## Deploy
