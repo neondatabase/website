@@ -157,7 +157,7 @@ const Hero = ({ items }) => {
               </h2>
             </>
           )}
-          <ul className="col-span-10 col-start-2 grid grid-cols-3 gap-x-8 gap-y-9 xl:col-span-full xl:col-start-1 lg:grid-cols-2 md:gap-8 sm:grid-cols-1 sm:gap-y-5">
+          <ul className="col-span-10 col-start-2 grid grid-cols-3 gap-x-[34px] gap-y-9 xl:col-span-full xl:col-start-1 xl:gap-x-8 lg:grid-cols-2 md:gap-8 sm:grid-cols-1 sm:gap-y-5">
             {otherItems.map(({ title, caseStudyPost }, index) => (
               <CardItem {...caseStudyPost} title={title} key={index} index={index} />
             ))}
