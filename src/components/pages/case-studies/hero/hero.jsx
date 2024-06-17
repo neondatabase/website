@@ -41,8 +41,8 @@ const CardItem = ({
             className="h-auto w-full"
             src={image.mediaItemUrl}
             alt={title}
-            width="494"
-            height="258"
+            width="992"
+            height="520"
             priority
           />
         </Link>
