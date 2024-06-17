@@ -32,39 +32,46 @@ const CardItem = ({
 
   if (isFeatured)
     return (
-      <Link
-        className="group flex items-center gap-10 lg:gap-5 md:flex-col md:gap-6 sm:gap-3.5"
-        {...linkProps}
-      >
-        <div className="w-1/2 max-w-[496px] shrink-0 overflow-hidden rounded-xl xl:rounded-[10px] lg:rounded-lg md:w-full md:max-w-full">
+      <div className="flex items-center gap-10 lg:gap-5 md:flex-col md:gap-6 sm:gap-3.5">
+        <Link
+          className="w-1/2 max-w-[496px] shrink-0 overflow-hidden rounded-xl border border-transparent transition-colors duration-200 hover:border-green-45 xl:rounded-[10px] lg:rounded-lg md:w-full md:max-w-full"
+          {...linkProps}
+        >
           <Image
-            className="h-auto w-full "
+            className="h-auto w-full"
             src={image.mediaItemUrl}
             alt={title}
-            width={image.mediaDetails.width}
-            height={image.mediaDetails.height}
+            width="494"
+            height="258"
             priority
           />
-        </div>
-        <div className="w-1/2 max-w-[598px] md:w-full md:max-w-full">
-          <p
-            className="text-[26px] font-light leading-snug tracking-tighter text-white xl:text-2xl lg:text-lg"
-            dangerouslySetInnerHTML={{ __html: quote }}
-          />
+        </Link>
+        <figure className="w-1/2 max-w-[598px] md:w-full md:max-w-full">
+          <blockquote>
+            <p
+              className="text-[26px] font-light leading-snug tracking-tighter text-white xl:text-2xl lg:text-lg"
+              dangerouslySetInnerHTML={{ __html: quote }}
+            />
+          </blockquote>
           {author && author.name && (
-            <p className="mt-3 font-light leading-tight -tracking-extra-tight lg:text-[13px]">
+            <figcaption className="mt-3 font-light leading-tight -tracking-extra-tight lg:text-[13px]">
               {author.name}{' '}
-              {author?.post && <span className="text-gray-new-70">– {author?.post}</span>}
-            </p>
+              <cite>
+                {author?.post && <span className="text-gray-new-70">– {author?.post}</span>}
+              </cite>
+            </figcaption>
           )}
           {!!linkProps && (
-            <div className="mt-9 inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA] lg:mt-7 lg:text-sm">
+            <Link
+              className="mt-9 inline-flex items-baseline text-[15px] leading-none tracking-[-0.05em] text-green-45 transition-colors duration-200 hover:text-[#00FFAA] lg:mt-7 lg:text-sm"
+              {...linkProps}
+            >
               Read case study
               <ArrowIcon className="ml-1" />
-            </div>
+            </Link>
           )}
-        </div>
-      </Link>
+        </figure>
+      </div>
     );
 
   return (
@@ -127,7 +134,7 @@ CardItem.propTypes = {
 
 const Hero = ({ items }) => {
   const featuredItem = items.find((item) => item.caseStudyPost.isFeatured === true);
-  const otherItems = featuredItem ? items.filter((item) => item !== featuredItem) : items;
+  const otherItems = items.filter((item) => item !== featuredItem);
 
   return (
     <section className="hero safe-paddings pt-36 xl:pt-[120px] lg:pt-11 md:pt-8">
@@ -135,7 +142,7 @@ const Hero = ({ items }) => {
         <h1 className="text-center font-title text-[72px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px]">
           Explore <span className="text-green-45">success stories</span>
         </h1>
-        <p className="mx-auto mt-5 max-w-[635px] text-center text-xl font-light leading-snug lg:text-lg md:text-base">
+        <p className="mx-auto mt-5 max-w-[635px] text-center text-xl font-light leading-snug tracking-extra-tight lg:text-lg md:text-base">
           Discover the diverse and captivating stories of our valued partners, each a testament to
           unique experiences and successes.
         </p>
@@ -143,7 +150,7 @@ const Hero = ({ items }) => {
           {!!featuredItem && (
             <>
               <div className="mb-16 lg:mb-14">
-                <CardItem {...featuredItem.caseStudyPost} />
+                <CardItem {...featuredItem.caseStudyPost} title={featuredItem.title} />
               </div>
               <h2 className="mb-7 text-2xl leading-none tracking-tight lg:text-xl md:text-lg">
                 More customer stories
