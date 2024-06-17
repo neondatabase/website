@@ -82,8 +82,8 @@ const items = [
       { title: 'IP Allow rules' },
     ],
     button: {
-      url: `${LINKS.scaleTrial}`,
-      text: 'Request trial',
+      url: `${LINKS.console}/?upgrade=scale`,
+      text: 'Get started',
       theme: 'white-outline',
       event: 'Hero Scale Panel',
     },
