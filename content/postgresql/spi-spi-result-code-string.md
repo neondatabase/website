@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-RESULT-CODE-STRING)
 
-## SPI\_result\_code\_string
+## SPI_result_code_string
 
-SPI\_result\_code\_string — return error code as string
+SPI_result_code_string — return error code as string
 
 ## Synopsis
 
@@ -20,7 +20,7 @@ const char * SPI_result_code_string(int code);
 
 ## Arguments
 
-* `int code`
+- `int code`
 
   result code
 

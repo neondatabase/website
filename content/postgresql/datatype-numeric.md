@@ -2,12 +2,10 @@
 
 ## 8.1. Numeric Types [#](#DATATYPE-NUMERIC)
 
-  * [8.1.1. Integer Types](datatype-numeric#DATATYPE-INT)
-  * [8.1.2. Arbitrary Precision Numbers](datatype-numeric#DATATYPE-NUMERIC-DECIMAL)
-  * [8.1.3. Floating-Point Types](datatype-numeric#DATATYPE-FLOAT)
-  * [8.1.4. Serial Types](datatype-numeric#DATATYPE-SERIAL)
-
-
+- [8.1.1. Integer Types](datatype-numeric#DATATYPE-INT)
+- [8.1.2. Arbitrary Precision Numbers](datatype-numeric#DATATYPE-NUMERIC-DECIMAL)
+- [8.1.3. Floating-Point Types](datatype-numeric#DATATYPE-FLOAT)
+- [8.1.4. Serial Types](datatype-numeric#DATATYPE-SERIAL)
 
 Numeric types consist of two-, four-, and eight-byte integers, four- and eight-byte floating-point numbers, and selectable-precision decimals. [Table 8.2](datatype-numeric#DATATYPE-NUMERIC-TABLE) lists the available types.
 
@@ -28,14 +26,11 @@ Numeric types consist of two-, four-, and eight-byte integers, four- and eight-b
 | `serial`           | 4 bytes      | autoincrementing integer        | 1 to 2147483647                                                                          |
 | `bigserial`        | 8 bytes      | large autoincrementing integer  | 1 to 9223372036854775807                                                                 |
 
-
 The syntax of constants for the numeric types is described in [Section 4.1.2](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS). The numeric types have a full set of corresponding arithmetic operators and functions. Refer to [Chapter 9](functions) for more information. The following sections describe the types in detail.
 
 [#id](#DATATYPE-INT)
 
 ### 8.1.1. Integer Types [#](#DATATYPE-INT)
-
-
 
 The types `smallint`, `integer`, and `bigint` store whole numbers, that is, numbers without fractional components, of various ranges. Attempts to store values outside of the allowed range will result in an error.
 
@@ -47,11 +42,9 @@ SQL only specifies the integer types `integer` (or `int`), `smallint`, and `bigi
 
 ### 8.1.2. Arbitrary Precision Numbers [#](#DATATYPE-NUMERIC-DECIMAL)
 
-
-
 The type `numeric` can store numbers with a very large number of digits. It is especially recommended for storing monetary amounts and other quantities where exactness is required. Calculations with `numeric` values yield exact results where possible, e.g., addition, subtraction, multiplication. However, calculations on `numeric` values are very slow compared to the integer types, or to the floating-point types described in the next section.
 
-We use the following terms below: The *precision* of a `numeric` is the total count of significant digits in the whole number, that is, the number of digits to both sides of the decimal point. The *scale* of a `numeric` is the count of decimal digits in the fractional part, to the right of the decimal point. So the number 23.5141 has a precision of 6 and a scale of 4. Integers can be considered to have a scale of zero.
+We use the following terms below: The _precision_ of a `numeric` is the total count of significant digits in the whole number, that is, the number of digits to both sides of the decimal point. The _scale_ of a `numeric` is the count of decimal digits in the fractional part, to the right of the decimal point. So the number 23.5141 has a precision of 6 and a scale of 4. Integers can be considered to have a scale of zero.
 
 Both the maximum precision and the maximum scale of a `numeric` column can be configured. To declare a column of type `numeric` use the syntax:
 
@@ -107,11 +100,9 @@ will round values to 5 decimal places and can store values between -0.00999 and 
 
 ### Note
 
-PostgreSQL permits the scale in a `numeric` type declaration to be any value in the range -1000 to 1000. However, the SQL standard requires the scale to be in the range 0 to *`precision`*. Using scales outside that range may not be portable to other database systems.
+PostgreSQL permits the scale in a `numeric` type declaration to be any value in the range -1000 to 1000. However, the SQL standard requires the scale to be in the range 0 to _`precision`_. Using scales outside that range may not be portable to other database systems.
 
 Numeric values are physically stored without any extra leading or trailing zeroes. Thus, the declared precision and scale of a column are maximums, not fixed allocations. (In this sense the `numeric` type is more akin to `varchar(n)` than to `char(n)`.) The actual storage requirement is two bytes for each group of four decimal digits, plus three to eight bytes overhead.
-
-
 
 In addition to ordinary numeric values, the `numeric` type has several special values:
 
@@ -156,35 +147,31 @@ FROM generate_series(-3.5, 3.5, 1) as x;
 
 ### 8.1.3. Floating-Point Types [#](#DATATYPE-FLOAT)
 
-
-
 The data types `real` and `double precision` are inexact, variable-precision numeric types. On all currently supported platforms, these types are implementations of IEEE Standard 754 for Binary Floating-Point Arithmetic (single and double precision, respectively), to the extent that the underlying processor, operating system, and compiler support it.
 
 Inexact means that some values cannot be converted exactly to the internal format and are stored as approximations, so that storing and retrieving a value might show slight discrepancies. Managing these errors and how they propagate through calculations is the subject of an entire branch of mathematics and computer science and will not be discussed here, except for the following points:
 
-* If you require exact storage and calculations (such as for monetary amounts), use the `numeric` type instead.
+- If you require exact storage and calculations (such as for monetary amounts), use the `numeric` type instead.
 
-* If you want to do complicated calculations with these types for anything important, especially if you rely on certain behavior in boundary cases (infinity, underflow), you should evaluate the implementation carefully.
+- If you want to do complicated calculations with these types for anything important, especially if you rely on certain behavior in boundary cases (infinity, underflow), you should evaluate the implementation carefully.
 
-* Comparing two floating-point values for equality might not always work as expected.
+- Comparing two floating-point values for equality might not always work as expected.
 
 On all currently supported platforms, the `real` type has a range of around 1E-37 to 1E+37 with a precision of at least 6 decimal digits. The `double precision` type has a range of around 1E-307 to 1E+308 with a precision of at least 15 digits. Values that are too large or too small will cause an error. Rounding might take place if the precision of an input number is too high. Numbers too close to zero that are not representable as distinct from zero will cause an underflow error.
 
-By default, floating point values are output in text form in their shortest precise decimal representation; the decimal value produced is closer to the true stored binary value than to any other value representable in the same binary precision. (However, the output value is currently never *exactly* midway between two representable values, in order to avoid a widespread bug where input routines do not properly respect the round-to-nearest-even rule.) This value will use at most 17 significant decimal digits for `float8` values, and at most 9 digits for `float4` values.
+By default, floating point values are output in text form in their shortest precise decimal representation; the decimal value produced is closer to the true stored binary value than to any other value representable in the same binary precision. (However, the output value is currently never _exactly_ midway between two representable values, in order to avoid a widespread bug where input routines do not properly respect the round-to-nearest-even rule.) This value will use at most 17 significant decimal digits for `float8` values, and at most 9 digits for `float4` values.
 
 ### Note
 
 This shortest-precise output format is much faster to generate than the historical rounded format.
 
-For compatibility with output generated by older versions of PostgreSQL, and to allow the output precision to be reduced, the [extra\_float\_digits](runtime-config-client#GUC-EXTRA-FLOAT-DIGITS) parameter can be used to select rounded decimal output instead. Setting a value of 0 restores the previous default of rounding the value to 6 (for `float4`) or 15 (for `float8`) significant decimal digits. Setting a negative value reduces the number of digits further; for example -2 would round output to 4 or 13 digits respectively.
+For compatibility with output generated by older versions of PostgreSQL, and to allow the output precision to be reduced, the [extra_float_digits](runtime-config-client#GUC-EXTRA-FLOAT-DIGITS) parameter can be used to select rounded decimal output instead. Setting a value of 0 restores the previous default of rounding the value to 6 (for `float4`) or 15 (for `float8`) significant decimal digits. Setting a negative value reduces the number of digits further; for example -2 would round output to 4 or 13 digits respectively.
 
-Any value of [extra\_float\_digits](runtime-config-client#GUC-EXTRA-FLOAT-DIGITS) greater than 0 selects the shortest-precise format.
+Any value of [extra_float_digits](runtime-config-client#GUC-EXTRA-FLOAT-DIGITS) greater than 0 selects the shortest-precise format.
 
 ### Note
 
-Applications that wanted precise values have historically had to set [extra\_float\_digits](runtime-config-client#GUC-EXTRA-FLOAT-DIGITS) to 3 to obtain them. For maximum compatibility between versions, they should continue to do so.
-
-
+Applications that wanted precise values have historically had to set [extra_float_digits](runtime-config-client#GUC-EXTRA-FLOAT-DIGITS) to 3 to obtain them. For maximum compatibility between versions, they should continue to do so.
 
 In addition to ordinary numeric values, the floating-point types have several special values:
 
@@ -198,13 +185,11 @@ These represent the IEEE 754 special values “infinity”, “negative infinity
 
 IEEE 754 specifies that `NaN` should not compare equal to any other floating-point value (including `NaN`). In order to allow floating-point values to be sorted and used in tree-based indexes, PostgreSQL treats `NaN` values as equal, and greater than all non-`NaN` values.
 
-PostgreSQL also supports the SQL-standard notations `float` and `float(p)` for specifying inexact numeric types. Here, *`p`* specifies the minimum acceptable precision in *binary* digits. PostgreSQL accepts `float(1)` to `float(24)` as selecting the `real` type, while `float(25)` to `float(53)` select `double precision`. Values of *`p`* outside the allowed range draw an error. `float` with no precision specified is taken to mean `double precision`.
+PostgreSQL also supports the SQL-standard notations `float` and `float(p)` for specifying inexact numeric types. Here, _`p`_ specifies the minimum acceptable precision in _binary_ digits. PostgreSQL accepts `float(1)` to `float(24)` as selecting the `real` type, while `float(25)` to `float(53)` select `double precision`. Values of _`p`_ outside the allowed range draw an error. `float` with no precision specified is taken to mean `double precision`.
 
 [#id](#DATATYPE-SERIAL)
 
 ### 8.1.4. Serial Types [#](#DATATYPE-SERIAL)
-
-
 
 ### Note
 

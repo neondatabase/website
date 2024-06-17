@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-GETNSPNAME)
 
-## SPI\_getnspname
+## SPI_getnspname
 
-SPI\_getnspname — return the namespace of the specified relation
+SPI_getnspname — return the namespace of the specified relation
 
 ## Synopsis
 
@@ -20,7 +20,7 @@ char * SPI_getnspname(Relation rel)
 
 ## Arguments
 
-* `Relation rel`
+- `Relation rel`
 
   input relation
 

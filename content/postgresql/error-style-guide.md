@@ -210,15 +210,15 @@ BETTER: unrecognized node type: 42
 
 Spell out words in full. For instance, avoid:
 
-* spec
+- spec
 
-* stats
+- stats
 
-* parens
+- parens
 
-* auth
+- auth
 
-* xact
+- xact
 
 Rationale: This will improve consistency.
 

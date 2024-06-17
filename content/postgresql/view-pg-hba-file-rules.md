@@ -2,11 +2,9 @@
 
 ## 54.9. `pg_hba_file_rules` [#](#VIEW-PG-HBA-FILE-RULES)
 
-
-
 The view `pg_hba_file_rules` provides a summary of the contents of the client authentication configuration file, [`pg_hba.conf`](auth-pg-hba-conf). A row appears in this view for each non-empty, non-comment line in the file, with annotations indicating whether the rule could be applied successfully.
 
-This view can be helpful for checking whether planned changes in the authentication configuration file will work, or for diagnosing a previous failure. Note that this view reports on the *current* contents of the file, not on what was last loaded by the server.
+This view can be helpful for checking whether planned changes in the authentication configuration file will work, or for diagnosing a previous failure. Note that this view reports on the _current_ contents of the file, not on what was last loaded by the server.
 
 By default, the `pg_hba_file_rules` view can be read only by superusers.
 
@@ -27,7 +25,6 @@ By default, the `pg_hba_file_rules` view can be read only by superusers.
 | `auth_method` `text`Authentication method                                                                                                                                    |
 | `options` `text[]`Options specified for authentication method, if any                                                                                                        |
 | `error` `text`If not null, an error message indicating why this line could not be processed                                                                                  |
-
 
 Usually, a row reflecting an incorrect entry will have values for only the `line_number` and `error` fields.
 

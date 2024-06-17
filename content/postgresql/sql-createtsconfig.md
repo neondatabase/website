@@ -31,15 +31,15 @@ Refer to [Chapter 12](textsearch) for further information.
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of the text search configuration to be created. The name can be schema-qualified.
 
-* *`parser_name`*
+- _`parser_name`_
 
   The name of the text search parser to use for this configuration.
 
-* *`source_config`*
+- _`source_config`_
 
   The name of an existing text search configuration to copy.
 

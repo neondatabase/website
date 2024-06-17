@@ -2,22 +2,22 @@
 
 ## 43.1. Overview [#](#PLPGSQL-OVERVIEW)
 
-  * [43.1.1. Advantages of Using PL/pgSQL](plpgsql-overview#PLPGSQL-ADVANTAGES)
-  * [43.1.2. Supported Argument and Result Data Types](plpgsql-overview#PLPGSQL-ARGS-RESULTS)
+- [43.1.1. Advantages of Using PL/pgSQL](plpgsql-overview#PLPGSQL-ADVANTAGES)
+- [43.1.2. Supported Argument and Result Data Types](plpgsql-overview#PLPGSQL-ARGS-RESULTS)
 
 PL/pgSQL is a loadable procedural language for the PostgreSQL database system. The design goals of PL/pgSQL were to create a loadable procedural language that
 
-* can be used to create functions, procedures, and triggers,
+- can be used to create functions, procedures, and triggers,
 
-* adds control structures to the SQL language,
+- adds control structures to the SQL language,
 
-* can perform complex computations,
+- can perform complex computations,
 
-* inherits all user-defined types, functions, procedures, and operators,
+- inherits all user-defined types, functions, procedures, and operators,
 
-* can be defined to be trusted by the server,
+- can be defined to be trusted by the server,
 
-* is easy to use.
+- is easy to use.
 
 Functions created with PL/pgSQL can be used anywhere that built-in functions could be used. For example, it is possible to create complex conditional computation functions and later use them to define operators or use them in index expressions.
 
@@ -31,13 +31,13 @@ SQL is the language PostgreSQL and most other relational databases use as query 
 
 That means that your client application must send each query to the database server, wait for it to be processed, receive and process the results, do some computation, then send further queries to the server. All this incurs interprocess communication and will also incur network overhead if your client is on a different machine than the database server.
 
-With PL/pgSQL you can group a block of computation and a series of queries *inside* the database server, thus having the power of a procedural language and the ease of use of SQL, but with considerable savings of client/server communication overhead.
+With PL/pgSQL you can group a block of computation and a series of queries _inside_ the database server, thus having the power of a procedural language and the ease of use of SQL, but with considerable savings of client/server communication overhead.
 
-* Extra round trips between client and server are eliminated
+- Extra round trips between client and server are eliminated
 
-* Intermediate results that the client does not need do not have to be marshaled or transferred between server and client
+- Intermediate results that the client does not need do not have to be marshaled or transferred between server and client
 
-* Multiple rounds of query parsing can be avoided
+- Multiple rounds of query parsing can be avoided
 
 This can result in a considerable performance increase as compared to an application that does not use stored functions.
 

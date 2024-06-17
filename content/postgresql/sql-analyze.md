@@ -27,7 +27,7 @@ and table_and_columns is:
 
 `ANALYZE` collects statistics about the contents of tables in the database, and stores the results in the [`pg_statistic`](catalog-pg-statistic) system catalog. Subsequently, the query planner uses these statistics to help determine the most efficient execution plans for queries.
 
-Without a *`table_and_columns`* list, `ANALYZE` processes every table and materialized view in the current database that the current user has permission to analyze. With a list, `ANALYZE` processes only those table(s). It is further possible to give a list of column names for a table, in which case only the statistics for those columns are collected.
+Without a _`table_and_columns`_ list, `ANALYZE` processes every table and materialized view in the current database that the current user has permission to analyze. With a list, `ANALYZE` processes only those table(s). It is further possible to give a list of column names for a table, in which case only the statistics for those columns are collected.
 
 When the option list is surrounded by parentheses, the options can be written in any order. The parenthesized syntax was added in PostgreSQL 11; the unparenthesized syntax is deprecated.
 
@@ -35,31 +35,31 @@ When the option list is surrounded by parentheses, the options can be written in
 
 ## Parameters
 
-* `VERBOSE`
+- `VERBOSE`
 
   Enables display of progress messages.
 
-* `SKIP_LOCKED`
+- `SKIP_LOCKED`
 
   Specifies that `ANALYZE` should not wait for any conflicting locks to be released when beginning work on a relation: if a relation cannot be locked immediately without waiting, the relation is skipped. Note that even with this option, `ANALYZE` may still block when opening the relation's indexes or when acquiring sample rows from partitions, table inheritance children, and some types of foreign tables. Also, while `ANALYZE` ordinarily processes all partitions of specified partitioned tables, this option will cause `ANALYZE` to skip all partitions if there is a conflicting lock on the partitioned table.
 
-* `BUFFER_USAGE_LIMIT`
+- `BUFFER_USAGE_LIMIT`
 
-  Specifies the [**](glossary#GLOSSARY-BUFFER-ACCESS-STRATEGY)*[Buffer Access Strategy](glossary#GLOSSARY-BUFFER-ACCESS-STRATEGY)* ring buffer size for `ANALYZE`. This size is used to calculate the number of shared buffers which will be reused as part of this strategy. `0` disables use of a `Buffer Access Strategy`. When this option is not specified, `ANALYZE` uses the value from [vacuum\_buffer\_usage\_limit](runtime-config-resource#GUC-VACUUM-BUFFER-USAGE-LIMIT). Higher settings can allow `ANALYZE` to run more quickly, but having too large a setting may cause too many other useful pages to be evicted from shared buffers. The minimum value is `128 kB` and the maximum value is `16 GB`.
+  Specifies the [\*\*](glossary#GLOSSARY-BUFFER-ACCESS-STRATEGY)_[Buffer Access Strategy](glossary#GLOSSARY-BUFFER-ACCESS-STRATEGY)_ ring buffer size for `ANALYZE`. This size is used to calculate the number of shared buffers which will be reused as part of this strategy. `0` disables use of a `Buffer Access Strategy`. When this option is not specified, `ANALYZE` uses the value from [vacuum_buffer_usage_limit](runtime-config-resource#GUC-VACUUM-BUFFER-USAGE-LIMIT). Higher settings can allow `ANALYZE` to run more quickly, but having too large a setting may cause too many other useful pages to be evicted from shared buffers. The minimum value is `128 kB` and the maximum value is `16 GB`.
 
-* *`boolean`*
+- _`boolean`_
 
-  Specifies whether the selected option should be turned on or off. You can write `TRUE`, `ON`, or `1` to enable the option, and `FALSE`, `OFF`, or `0` to disable it. The *`boolean`* value can also be omitted, in which case `TRUE` is assumed.
+  Specifies whether the selected option should be turned on or off. You can write `TRUE`, `ON`, or `1` to enable the option, and `FALSE`, `OFF`, or `0` to disable it. The _`boolean`_ value can also be omitted, in which case `TRUE` is assumed.
 
-* *`size`*
+- _`size`_
 
   Specifies an amount of memory in kilobytes. Sizes may also be specified as a string containing the numerical size followed by any one of the following memory units: `kB` (kilobytes), `MB` (megabytes), `GB` (gigabytes), or `TB` (terabytes).
 
-* *`table_name`*
+- _`table_name`_
 
   The name (possibly schema-qualified) of a specific table to analyze. If omitted, all regular tables, partitioned tables, and materialized views in the current database are analyzed (but not foreign tables). If the specified table is a partitioned table, both the inheritance statistics of the partitioned table as a whole and statistics of the individual partitions are updated.
 
-* *`column_name`*
+- _`column_name`_
 
   The name of a specific column to analyze. Defaults to all columns.
 
@@ -85,7 +85,7 @@ The statistics collected by `ANALYZE` usually include a list of some of the most
 
 For large tables, `ANALYZE` takes a random sample of the table contents, rather than examining every row. This allows even very large tables to be analyzed in a small amount of time. Note, however, that the statistics are only approximate, and will change slightly each time `ANALYZE` is run, even if the actual table contents did not change. This might result in small changes in the planner's estimated costs shown by [`EXPLAIN`](sql-explain). In rare situations, this non-determinism will cause the planner's choices of query plans to change after `ANALYZE` is run. To avoid this, raise the amount of statistics collected by `ANALYZE`, as described below.
 
-The extent of analysis can be controlled by adjusting the [default\_statistics\_target](runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET) configuration variable, or on a column-by-column basis by setting the per-column statistics target with [`ALTER TABLE ... ALTER COLUMN ... SET STATISTICS`](sql-altertable). The target value sets the maximum number of entries in the most-common-value list and the maximum number of bins in the histogram. The default target value is 100, but this can be adjusted up or down to trade off accuracy of planner estimates against the time taken for `ANALYZE` and the amount of space occupied in `pg_statistic`. In particular, setting the statistics target to zero disables collection of statistics for that column. It might be useful to do that for columns that are never used as part of the `WHERE`, `GROUP BY`, or `ORDER BY` clauses of queries, since the planner will have no use for statistics on such columns.
+The extent of analysis can be controlled by adjusting the [default_statistics_target](runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET) configuration variable, or on a column-by-column basis by setting the per-column statistics target with [`ALTER TABLE ... ALTER COLUMN ... SET STATISTICS`](sql-altertable). The target value sets the maximum number of entries in the most-common-value list and the maximum number of bins in the histogram. The default target value is 100, but this can be adjusted up or down to trade off accuracy of planner estimates against the time taken for `ANALYZE` and the amount of space occupied in `pg_statistic`. In particular, setting the statistics target to zero disables collection of statistics for that column. It might be useful to do that for columns that are never used as part of the `WHERE`, `GROUP BY`, or `ORDER BY` clauses of queries, since the planner will have no use for statistics on such columns.
 
 The largest statistics target among the columns being analyzed determines the number of table rows sampled to prepare the statistics. Increasing the target causes a proportional increase in the time and space needed to do `ANALYZE`.
 

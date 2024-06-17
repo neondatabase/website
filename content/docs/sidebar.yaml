@@ -33,6 +33,7 @@
           slug: guides/laravel
         - title: Next.js
           slug: guides/nextjs
+
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
@@ -71,8 +72,10 @@
     - title: Import data
       slug: import/import-intro
       items:
-        - title: Import from Postgres
+        - title: Import from Postgres with pg_dump and pg_restore
           slug: import/import-from-postgres
+        - title: Import from Postgres with pg-import
+          slug: import/import-from-postgres-pg-import
         - title: Import from a Neon project
           slug: import/import-from-neon
         - title: Import from CSV
@@ -232,12 +235,12 @@
         - title: Promote a branch with the Neon API
           slug: guides/branch-promote
     - title: Logical replication
-      slug: introduction/logical-replication 
+      slug: introduction/logical-replication
       items:
         - title: Concepts
           slug: guides/logical-replication-concepts
         - title: Manage
-          slug: guides/logical-replication-neon 
+          slug: guides/logical-replication-neon
     - title: Read replicas
       slug: introduction/read-replicas
       items:
@@ -337,6 +340,8 @@
       items:
         - title: Airbyte
           slug: guides/logical-replication-airbyte
+        - title: Bemi
+          slug: guides/bemi
         - title: ClickHouse (DoubleCloud)
           slug: guides/logical-replication-clickhouse
         - title: Confluent

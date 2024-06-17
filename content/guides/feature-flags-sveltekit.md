@@ -14,7 +14,7 @@ This guide covers the step-by-step process of integrating feature flags in Svelt
 To follow the steps in this guide, you will need the following:
 
 - [Node.js 18](https://nodejs.org/en/blog/announcements/v18-release-announce) or later
-- A [Neon](https://console.neon.tech/signup) account – The feature flags will be defined (or mutated) in a  Postgres database
+- A [Neon](https://console.neon.tech/signup) account – The feature flags will be defined (or mutated) in a Postgres database
 
 ## Steps
 
@@ -90,8 +90,6 @@ npm install -D dotenv tsx @types/pg
 
 The commands install the required libraries and packages, with the `-D` flag specifying the libraries intended for development purposes only.
 
-
-
 The libraries installed include:
 
 <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
@@ -148,9 +146,9 @@ export default {
   content: [], // [!code --]
   content: ['./src/**/*.{html,js,svelte,ts}'], // [!code ++]
   theme: {
-    extend: {}
+    extend: {},
   },
-  plugins: []
+  plugins: [],
 };
 ```
 
@@ -178,32 +176,32 @@ To create a client that interacts with your serverless postgres, create a `postg
 // File: src/lib/postgres.server.ts
 
 // Load Environment Variables
-import 'dotenv/config'
+import 'dotenv/config';
 
 // Load the postgres module
-import { neon } from '@neondatabase/serverless'
+import { neon } from '@neondatabase/serverless';
 
 // Create a connection string to the Neon Postgres instance
-const connectionString: string = process.env.DATABASE_URL as string
+const connectionString: string = process.env.DATABASE_URL as string;
 
 // Create a in-memory query function
-export default neon(connectionString)
+export default neon(connectionString);
 ```
 
 ```tsx
 // File: src/lib/postgres.server.ts
 
 // Load Environment Variables
-import 'dotenv/config'
+import 'dotenv/config';
 
 // Load the postgres module
-import pg from 'pg'
+import pg from 'pg';
 
 // Create a connection string to the Neon Postgres instance
-const connectionString: string = process.env.DATABASE_URL as string
+const connectionString: string = process.env.DATABASE_URL as string;
 
 // Create a in-memory pool so that it's cached for multiple calls
-export default new pg.Pool({ connectionString })
+export default new pg.Pool({ connectionString });
 ```
 
 </CodeTabs>
@@ -225,34 +223,36 @@ In the `feature_flags` directory, create a file named `setup.server.ts` with the
 ```tsx
 // File: src/lib/feature_flags/setup.server.ts
 
-import sql from '../postgres.server'
+import sql from '../postgres.server';
 
 async function populateFeatureFlags() {
-  await sql`CREATE TABLE IF NOT EXISTS feature_flags (flagName text PRIMARY KEY, enabled boolean)`
-  console.log('✅ Setup database for feature flag')
-  await sql`INSERT INTO feature_flags (flagName, enabled) VALUES ('fast_payments', true)`
-  console.log('✅ Setup an enabled feature flag to accept fast payment methods.')
+  await sql`CREATE TABLE IF NOT EXISTS feature_flags (flagName text PRIMARY KEY, enabled boolean)`;
+  console.log('✅ Setup database for feature flag');
+  await sql`INSERT INTO feature_flags (flagName, enabled) VALUES ('fast_payments', true)`;
+  console.log('✅ Setup an enabled feature flag to accept fast payment methods.');
 }
 
-populateFeatureFlags()
+populateFeatureFlags();
 ```
 
 ```tsx
 // File: src/lib/feature_flags/setup.server.ts
 
-import pool from '../postgres.server'
+import pool from '../postgres.server';
 
 async function populateFeatureFlags() {
-  await pool.query('CREATE TABLE IF NOT EXISTS feature_flags (flagName text PRIMARY KEY, enabled boolean)')
-  console.log('✅ Setup database for feature flag')
+  await pool.query(
+    'CREATE TABLE IF NOT EXISTS feature_flags (flagName text PRIMARY KEY, enabled boolean)'
+  );
+  console.log('✅ Setup database for feature flag');
   await pool.query({
     text: 'INSERT INTO feature_flags (flagName, enabled) VALUES ($1, $2)',
     values: ['fast_payments', true],
-  })
-  console.log('✅ Setup an enabled feature flag to accept fast payment methods.')
+  });
+  console.log('✅ Setup an enabled feature flag to accept fast payment methods.');
 }
 
-populateFeatureFlags()
+populateFeatureFlags();
 ```
 
 </CodeTabs>
@@ -268,26 +268,26 @@ In the `feature_flags` directory, create a file named `get.server.ts` with the f
 ```tsx
 // File: src/lib/feature_flags/get.server.ts
 
-import sql from '../postgres.server'
+import sql from '../postgres.server';
 
 export const isEnabled = async (flagName: string): Promise<boolean> => {
-  const rows = await sql`SELECT enabled FROM feature_flags WHERE flagName = ${flagName}`
-  return rows[0].enabled
-}
+  const rows = await sql`SELECT enabled FROM feature_flags WHERE flagName = ${flagName}`;
+  return rows[0].enabled;
+};
 ```
 
 ```tsx
 // File: src/lib/feature_flags/get.server.ts
 
-import pool from '../postgres.server'
+import pool from '../postgres.server';
 
 export const isEnabled = async (flagName: string): Promise<boolean> => {
   const { rows } = await pool.query({
     text: 'SELECT enabled FROM feature_flags WHERE flagName = $1',
     values: [flagName],
-  })
-  return rows[0].enabled
-}
+  });
+  return rows[0].enabled;
+};
 ```
 
 </CodeTabs>
@@ -301,24 +301,24 @@ In the `feature_flags` directory, create a file named `set.server.ts` with the f
 ```tsx
 // File: src/lib/feature_flags/set.server.ts
 
-import sql from '../postgres.server'
+import sql from '../postgres.server';
 
 export const setEnabled = async (flagName: string, flagValue: boolean) => {
-  await sql`UPDATE feature_flags SET enabled = ${flagValue} WHERE flagName = ${flagName}`
-}
+  await sql`UPDATE feature_flags SET enabled = ${flagValue} WHERE flagName = ${flagName}`;
+};
 ```
 
 ```tsx
 // File: src/lib/feature_flags/set.server.ts
 
-import pool from '../postgres.server'
+import pool from '../postgres.server';
 
 export const setEnabled = async (flagName: string, flagValue: boolean) => {
   await pool.query({
     text: 'UPDATE feature_flags SET enabled = $2 WHERE flagName = $1',
     values: [flagName, flagValue],
-  })
-}
+  });
+};
 ```
 
 </CodeTabs>
@@ -338,22 +338,22 @@ In a SvelteKit route, the data from the server to the user interface is passed v
 ```tsx
 // File: src/routes/+page.server.ts
 
-import { isEnabled } from '$lib/feature_flags/get.server'
+import { isEnabled } from '$lib/feature_flags/get.server';
 
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({ cookies }) {
-  const bucket = cookies.get('destination_bucket')
+  const bucket = cookies.get('destination_bucket');
   if (!bucket) {
-    const tmp = await isEnabled('fast_payments')
+    const tmp = await isEnabled('fast_payments');
     // If the feature is enabled, try bucketing users randomly
-    if (tmp) cookies.set('destination_bucket', Math.random() > 0.5 ? '1' : '0', { path: '/' })
+    if (tmp) cookies.set('destination_bucket', Math.random() > 0.5 ? '1' : '0', { path: '/' });
     // If the feature is disabled, do not bucket and preserve the current experience
-    else cookies.set('destination_bucket', '0', { path: '/' })
+    else cookies.set('destination_bucket', '0', { path: '/' });
   }
-  const fast_payments = Boolean(Number(cookies.get('destination_bucket')))
+  const fast_payments = Boolean(Number(cookies.get('destination_bucket')));
   return {
     fast_payments,
-  }
+  };
 }
 ```
 

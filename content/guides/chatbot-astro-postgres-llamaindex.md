@@ -106,7 +106,7 @@ The app should be running on [localhost:4321](http://localhost:4321/). Let's clo
 Next, execute the command in your terminal window below to install the necessary libraries and packages for building the application:
 
 ```bash
-npm install dotenv ai llamaindex
+npm install dotenv ai llamaindex@0.3.4
 ```
 
 The command installs the following packages:
@@ -117,10 +117,10 @@ The command installs the following packages:
 
 Next, make the following additions in your `astro.config.mjs` file to populate the environment variables and make them accessible via `process.env` object:
 
-```diff
+```tsx
 // File: astro.config.mjs
 
-+ import 'dotenv/config';
+import 'dotenv/config'; // [!code ++]
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
@@ -129,15 +129,17 @@ export default defineConfig({});
 
 Then, add the following code to your `tsconfig.json` file to make relative imports within the project easier:
 
-```diff
+```json
 {
   "extends": "astro/tsconfigs/base",
-+  "compilerOptions": {
-+    "baseUrl": ".",
-+    "paths": {
-+      "@/*": ["src/*"]
-+    }
-+  }
+  "compilerOptions": {
+    // [!code ++]
+    "baseUrl": ".", // [!code ++]
+    "paths": {
+      // [!code ++]
+      "@/*": ["src/*"] // [!code ++]
+    } // [!code ++]
+  } // [!code ++]
 }
 ```
 
@@ -235,18 +237,13 @@ Inside the `src` directory, create a `Chat.jsx` file with the following code
 ```tsx
 // File: src/Chat.jsx
 
-import { useChat } from "ai/react";
+import { useChat } from 'ai/react';
 
 export default function () {
   const { messages, handleSubmit, input, handleInputChange } = useChat();
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex w-full max-w-[300px] flex-col"
-    >
-      <span className="text-2xl font-semibold">
-        Chat
-      </span>
+    <form onSubmit={handleSubmit} className="flex w-full max-w-[300px] flex-col">
+      <span className="text-2xl font-semibold">Chat</span>
       <input
         id="input"
         name="prompt"
@@ -286,7 +283,7 @@ Inside the `src` directory, create a `Learn.jsx` file with the following code
 ```jsx
 // File: src/Learn.jsx
 
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function () {
   const [message, setMessage] = useState();
@@ -296,10 +293,10 @@ export default function () {
       onSubmit={(e) => {
         e.preventDefault();
         if (message) {
-          fetch("/api/learn", {
-            method: "POST",
+          fetch('/api/learn', {
+            method: 'POST',
             body: JSON.stringify({ message }),
-            headers: { "Content-Type": "application/json" },
+            headers: { 'Content-Type': 'application/json' },
           });
         }
       }}
@@ -309,7 +306,7 @@ export default function () {
         value={message}
         placeholder="A text to learn."
         onChange={(e) => setMessage(e.target.value)}
-        className="mt-3 rounded border min-h-[100px] px-2 py-1 outline-none focus:border-black"
+        className="mt-3 min-h-[100px] rounded border px-2 py-1 outline-none focus:border-black"
       />
       <button
         type="submit"
@@ -335,8 +332,8 @@ Inside the `src` directory, create a `App.jsx` file with the following code:
 ```tsx
 // File: src/App.jsx
 
-import Chat from "./Chat";
-import Learn from "./Learn";
+import Chat from './Chat';
+import Learn from './Learn';
 
 export default function () {
   return (
@@ -350,11 +347,11 @@ export default function () {
 
 The code above imports and renders both the Chat and the Learn component created earlier. Finally, update the `index.astro` file to import the `App` component:
 
-```diff
+```astro
 ---
-+ // File: src/pages/index.astro
+// File: src/pages/index.astro // [!code ++]
 
-+ import App from "../App";
+import App from "../App"; // [!code ++]
 ---
 
 <html lang="en">
@@ -366,10 +363,10 @@ The code above imports and renders both the Chat and the Learn component created
     <title>Astro</title>
   </head>
   <body
-+   class="flex w-screen flex-col md:flex-row items-center md:items-start md:justify-center md:gap-x-3 md:mt-12"
+   class="flex w-screen flex-col md:flex-row items-center md:items-start md:justify-center md:gap-x-3 md:mt-12" // [!code ++]
   >
--    <h1>Astro</h1>
-+    <App client:load />
+    <h1>Astro</h1> // [!code --]
+    <App client:load /> // [!code ++]
   </body>
 </html>
 ```
@@ -385,8 +382,8 @@ To query and add documents to the Postgres vector store, you are going to use `P
 ```tsx
 // File: src/vectorStore.ts
 
-import "dotenv/config";
-import { PGVectorStore } from "llamaindex";
+import 'dotenv/config';
+import { PGVectorStore } from 'llamaindex';
 
 export default new PGVectorStore({
   connectionString: process.env.POSTGRES_URL,
@@ -404,16 +401,14 @@ The Vercel AI SDK uses `/api/chat` by default to obtain the chatbot responses. C
 ```tsx
 // File: src/pages/api/chat.ts
 
-import type { APIContext } from "astro";
+import type { APIContext } from 'astro';
 
-import vectorStore from "@/vectorStore";
-import { VectorStoreIndex } from "llamaindex";
+import vectorStore from '@/vectorStore';
+import { VectorStoreIndex } from 'llamaindex';
 
 export async function POST({ request }: APIContext) {
   const { messages = [] } = await request.json();
-  const userMessages = messages.filter(
-    (i: { role: string }) => i.role === "user"
-  );
+  const userMessages = messages.filter((i: { role: string }) => i.role === 'user');
   const encoder = new TextEncoder();
   const index = await VectorStoreIndex.fromVectorStore(vectorStore);
   const queryEngine = index.asQueryEngine();
@@ -429,10 +424,10 @@ export async function POST({ request }: APIContext) {
   });
   return new Response(customReadable, {
     headers: {
-      Connection: "keep-alive",
-      "Content-Encoding": "none",
-      "Cache-Control": "no-cache, no-transform",
-      "Content-Type": "text/event-stream; charset=utf-8",
+      Connection: 'keep-alive',
+      'Content-Encoding': 'none',
+      'Cache-Control': 'no-cache, no-transform',
+      'Content-Type': 'text/event-stream; charset=utf-8',
     },
   });
 }
@@ -457,7 +452,7 @@ As you saw earlier, with LlamaIndex you do not need to manually create context a
 ```tsx
 // File: src/pages/api/learn.ts
 
-import type { APIContext } from "astro";
+import type { APIContext } from 'astro';
 
 import {
   Document,
@@ -465,8 +460,8 @@ import {
   OpenAIEmbedding,
   VectorStoreIndex,
   storageContextFromDefaults,
-} from "llamaindex";
-import vectorStore from "@/vectorStore";
+} from 'llamaindex';
+import vectorStore from '@/vectorStore';
 
 export async function POST({ request }: APIContext) {
   Settings.embedModel = new OpenAIEmbedding();
@@ -576,53 +571,53 @@ Now, let's create a file that creates Amazon ECS Task definition during the depl
 ```tsx
 // File: env.mjs
 
-import 'dotenv/config'
-import { join } from 'node:path'
-import { writeFileSync } from 'node:fs'
+import 'dotenv/config';
+import { join } from 'node:path';
+import { writeFileSync } from 'node:fs';
 
 if (!process.env.AWS_ACCOUNT_ID || !process.env.POSTGRES_URL || !process.env.OPENAI_API_KEY) {
-    console.error(`AWS_ACCOUNT_ID, POSTGRES_URL or OPENAI_API_KEY environment variable not found.`)
-    process.exit()
+  console.error(`AWS_ACCOUNT_ID, POSTGRES_URL or OPENAI_API_KEY environment variable not found.`);
+  process.exit();
 }
 
 writeFileSync(
-    join(process.cwd(), 'task-definition.json'),
-    JSON.stringify({
-        "containerDefinitions": [
-            {
-                "cpu": 256,
-                "memory": 512,
-                "portMappings": [
-                    {
-                        "containerPort": 80,
-                        "hostPort": 80,
-                        "protocol": "tcp"
-                    }
-                ],
-                "essential": true,
-                "name": "astro-app",
-                "image": `${process.env.AWS_ACCOUNT_ID}.dkr.ecr.ap-south-1.amazonaws.com/${process.env.AWS_ECR_REPOSITORY_NAME}`,
-                "environment": [
-                    {
-                        "name": "POSTGRES_URL",
-                        "value": process.env.POSTGRES_URL
-                    },
-                    {
-                        "name": "OPENAI_API_KEY",
-                        "value": process.env.OPENAI_API_KEY
-                    }
-                ],
-            }
+  join(process.cwd(), 'task-definition.json'),
+  JSON.stringify({
+    containerDefinitions: [
+      {
+        cpu: 256,
+        memory: 512,
+        portMappings: [
+          {
+            containerPort: 80,
+            hostPort: 80,
+            protocol: 'tcp',
+          },
         ],
-        "cpu": "1024",
-        "memory": "3072",
-        "family": "astro-task-definitions",
-        "networkMode": "awsvpc",
-        "taskRoleArn": `arn:aws:iam::${process.env.AWS_ACCOUNT_ID}:role/ecsTaskRole`,
-        "executionRoleArn": `arn:aws:iam::${process.env.AWS_ACCOUNT_ID}:role/ecsTaskExecutionRole`
-    }),
-    'utf8'
-)
+        essential: true,
+        name: 'astro-app',
+        image: `${process.env.AWS_ACCOUNT_ID}.dkr.ecr.ap-south-1.amazonaws.com/${process.env.AWS_ECR_REPOSITORY_NAME}`,
+        environment: [
+          {
+            name: 'POSTGRES_URL',
+            value: process.env.POSTGRES_URL,
+          },
+          {
+            name: 'OPENAI_API_KEY',
+            value: process.env.OPENAI_API_KEY,
+          },
+        ],
+      },
+    ],
+    cpu: '1024',
+    memory: '3072',
+    family: 'astro-task-definitions',
+    networkMode: 'awsvpc',
+    taskRoleArn: `arn:aws:iam::${process.env.AWS_ACCOUNT_ID}:role/ecsTaskRole`,
+    executionRoleArn: `arn:aws:iam::${process.env.AWS_ACCOUNT_ID}:role/ecsTaskExecutionRole`,
+  }),
+  'utf8'
+);
 ```
 
 The code above does the following:
@@ -822,10 +817,10 @@ env:
   AWS_ECS_CLUSTER_NAME: astro-cluster
   AWS_ECS_SERVICE_NAME: astro-service
   AWS_ECS_TASK_DEFINITION: ./task-definition.json
-  
+
   # AWS ECR
   AWS_ECR_REPOSITORY_NAME: astro-repo
-  
+
   # AWS Account
   AWS_REGION: us-west-1
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}

@@ -2,9 +2,7 @@
 
 ## 2.7. Aggregate Functions [#](#TUTORIAL-AGG)
 
-
-
-Like most other relational database products, PostgreSQL supports *aggregate functions*. An aggregate function computes a single result from multiple input rows. For example, there are aggregates to compute the `count`, `sum`, `avg` (average), `max` (maximum) and `min` (minimum) over a set of rows.
+Like most other relational database products, PostgreSQL supports _aggregate functions_. An aggregate function computes a single result from multiple input rows. For example, there are aggregates to compute the `count`, `sum`, `avg` (average), `max` (maximum) and `min` (minimum) over a set of rows.
 
 As an example, we can find the highest low-temperature reading anywhere with:
 
@@ -25,7 +23,7 @@ If we wanted to know what city (or cities) that reading occurred in, we might tr
 SELECT city FROM weather WHERE temp_lo = max(temp_lo);     WRONG
 ```
 
-but this will not work since the aggregate `max` cannot be used in the `WHERE` clause. (This restriction exists because the `WHERE` clause determines which rows will be included in the aggregate calculation; so obviously it has to be evaluated before aggregate functions are computed.) However, as is often the case the query can be restated to accomplish the desired result, here by using a *subquery*:
+but this will not work since the aggregate `max` cannot be used in the `WHERE` clause. (This restriction exists because the `WHERE` clause determines which rows will be included in the aggregate calculation; so obviously it has to be evaluated before aggregate functions are computed.) However, as is often the case the query can be restated to accomplish the desired result, here by using a _subquery_:
 
 ```
 SELECT city FROM weather
@@ -89,8 +87,8 @@ SELECT city, count(*), max(temp_lo)
 (1 row)
 ```
 
-|                              |                                                                                                       |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------- |
+|                              |                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------ |
 | [(1)](#co.tutorial-agg-like) | The `LIKE` operator does pattern matching and is explained in [Section 9.7](functions-matching). |
 
 It is important to understand the interaction between aggregates and SQL's `WHERE` and `HAVING` clauses. The fundamental difference between `WHERE` and `HAVING` is this: `WHERE` selects input rows before groups and aggregates are computed (thus, it controls which rows go into the aggregate computation), whereas `HAVING` selects group rows after groups and aggregates are computed. Thus, the `WHERE` clause must not contain aggregate functions; it makes no sense to try to use an aggregate to determine which rows will be inputs to the aggregates. On the other hand, the `HAVING` clause always contains aggregate functions. (Strictly speaking, you are allowed to write a `HAVING` clause that doesn't use aggregates, but it's seldom useful. The same condition could be used more efficiently at the `WHERE` stage.)

@@ -10,10 +10,10 @@ If the output plugin callbacks for decoding two-phase commit commands are provid
 
 When a prepared transaction is rolled back using the `ROLLBACK PREPARED`, then the `rollback_prepared_cb` callback is invoked and when the prepared transaction is committed using `COMMIT PREPARED`, then the `commit_prepared_cb` callback is invoked.
 
-Optionally the output plugin can define filtering rules via `filter_prepare_cb` to decode only specific transaction in two phases. This can be achieved by pattern matching on the *`gid`* or via lookups using the *`xid`*.
+Optionally the output plugin can define filtering rules via `filter_prepare_cb` to decode only specific transaction in two phases. This can be achieved by pattern matching on the _`gid`_ or via lookups using the _`xid`_.
 
 The users that want to decode prepared transactions need to be careful about below mentioned points:
 
-* If the prepared transaction has locked \[user] catalog tables exclusively then decoding prepare can block till the main transaction is committed.
+- If the prepared transaction has locked \[user] catalog tables exclusively then decoding prepare can block till the main transaction is committed.
 
-* The logical replication solution that builds distributed two phase commit using this feature can deadlock if the prepared transaction has locked \[user] catalog tables exclusively. To avoid this users must refrain from having locks on catalog tables (e.g. explicit `LOCK` command) in such transactions. See [Section 49.8.2](logicaldecoding-synchronous#LOGICALDECODING-SYNCHRONOUS-CAVEATS) for the details.
+- The logical replication solution that builds distributed two phase commit using this feature can deadlock if the prepared transaction has locked \[user] catalog tables exclusively. To avoid this users must refrain from having locks on catalog tables (e.g. explicit `LOCK` command) in such transactions. See [Section 49.8.2](logicaldecoding-synchronous#LOGICALDECODING-SYNCHRONOUS-CAVEATS) for the details.

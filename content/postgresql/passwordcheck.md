@@ -2,11 +2,9 @@
 
 ## F.26. passwordcheck — verify password strength [#](#PASSWORDCHECK)
 
-
-
 The `passwordcheck` module checks users' passwords whenever they are set with [CREATE ROLE](sql-createrole) or [ALTER ROLE](sql-alterrole). If a password is considered too weak, it will be rejected and the command will terminate with an error.
 
-To enable this module, add `'$libdir/passwordcheck'` to [shared\_preload\_libraries](runtime-config-client#GUC-SHARED-PRELOAD-LIBRARIES) in `postgresql.conf`, then restart the server.
+To enable this module, add `'$libdir/passwordcheck'` to [shared_preload_libraries](runtime-config-client#GUC-SHARED-PRELOAD-LIBRARIES) in `postgresql.conf`, then restart the server.
 
 You can adapt this module to your needs by changing the source code. For example, you can use [CrackLib](https://github.com/cracklib/cracklib) to check passwords — this only requires uncommenting two lines in the `Makefile` and rebuilding the module. (We cannot include CrackLib by default for license reasons.) Without CrackLib, the module enforces a few simple rules for password strength, which you can modify or extend as you see fit.
 

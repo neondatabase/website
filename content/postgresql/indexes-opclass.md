@@ -2,9 +2,7 @@
 
 ## 11.10. Operator Classes and Operator Families [#](#INDEXES-OPCLASS)
 
-
-
-An index definition can specify an *operator class* for each column of an index.
+An index definition can specify an _operator class_ for each column of an index.
 
 ```
 CREATE INDEX name ON table (column opclass [ ( opclass_options ) ] [sort options] [, ...]);
@@ -14,7 +12,7 @@ The operator class identifies the operators to be used by the index for that col
 
 There are also some built-in operator classes besides the default ones:
 
-* The operator classes `text_pattern_ops`, `varchar_pattern_ops`, and `bpchar_pattern_ops` support B-tree indexes on the types `text`, `varchar`, and `char` respectively. The difference from the default operator classes is that the values are compared strictly character by character rather than according to the locale-specific collation rules. This makes these operator classes suitable for use by queries involving pattern matching expressions (`LIKE` or POSIX regular expressions) when the database does not use the standard “C” locale. As an example, you might index a `varchar` column like this:
+- The operator classes `text_pattern_ops`, `varchar_pattern_ops`, and `bpchar_pattern_ops` support B-tree indexes on the types `text`, `varchar`, and `char` respectively. The difference from the default operator classes is that the values are compared strictly character by character rather than according to the locale-specific collation rules. This makes these operator classes suitable for use by queries involving pattern matching expressions (`LIKE` or POSIX regular expressions) when the database does not use the standard “C” locale. As an example, you might index a `varchar` column like this:
 
   ```
   CREATE INDEX test_index ON test_table (col varchar_pattern_ops);
@@ -34,7 +32,7 @@ SELECT am.amname AS index_method,
     ORDER BY index_method, opclass_name;
 ```
 
-An operator class is actually just a subset of a larger structure called an *operator family*. In cases where several data types have similar behaviors, it is frequently useful to define cross-data-type operators and allow these to work with indexes. To do this, the operator classes for each of the types must be grouped into the same operator family. The cross-type operators are members of the family, but are not associated with any single class within the family.
+An operator class is actually just a subset of a larger structure called an _operator family_. In cases where several data types have similar behaviors, it is frequently useful to define cross-data-type operators and allow these to work with indexes. To do this, the operator classes for each of the types must be grouped into the same operator family. The cross-type operators are members of the family, but are not associated with any single class within the family.
 
 This expanded version of the previous query shows the operator family each operator class belongs to:
 

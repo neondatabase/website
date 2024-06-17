@@ -84,7 +84,7 @@ The app should be running on [localhost:4321](http://localhost:4321/). Let's clo
 Next, execute the command in your terminal window below to install the necessary libraries and packages for building the application:
 
 ```bash
-npm install dotenv llamaindex uuid
+npm install dotenv llamaindex@0.3.4 uuid
 ```
 
 The above command installs the following packages:
@@ -98,9 +98,11 @@ Then, make the following additions in your `tsconfig.json` file to make relative
 ```json
 {
   "extends": "astro/tsconfigs/base",
-  "compilerOptions": { // [!code ++]
+  "compilerOptions": {
+    // [!code ++]
     "baseUrl": ".", // [!code ++]
-    "paths": { // [!code ++]
+    "paths": {
+      // [!code ++]
       "@/*": ["src/*"] // [!code ++]
     } // [!code ++]
   } // [!code ++]
@@ -149,15 +151,15 @@ To index and query images (via their vector embeddings), you will use the Postgr
 ```tsx
 // File: src/neon.ts
 
-import 'dotenv/config'
-import { PGVectorStore } from 'llamaindex'
+import 'dotenv/config';
+import { PGVectorStore } from 'llamaindex';
 
 // Create and export a new instance of PGVectorStore
 // This instance represents the vector store using PostgreSQL as the backend
 export default new PGVectorStore({
   connectionString: process.env.POSTGRES_URL,
   dimensions: 512,
-})
+});
 ```
 
 The code above begins with importing the `dotenv/config`, loading all the environment variables into the scope. Further, it exports an instance of `PGVectorStore` initialized using the Postgres Pooled Connection URL obtained earlier.
@@ -173,17 +175,17 @@ To index images via an API endpoint, create a file `src/pages/api/upsert.ts` wit
 ```tsx
 // File: src/pages/api/upsert.ts
 
-import { v4 as uuidv4 } from 'uuid'
-import imageVectorStore from '@/neon'
-import type { APIContext } from 'astro'
-import { ClipEmbedding, ImageDocument, Settings, VectorStoreIndex } from 'llamaindex'
+import { v4 as uuidv4 } from 'uuid';
+import imageVectorStore from '@/neon';
+import type { APIContext } from 'astro';
+import { ClipEmbedding, ImageDocument, Settings, VectorStoreIndex } from 'llamaindex';
 
 // Set the embedding model to Clip for image embeddings
-Settings.embedModel = new ClipEmbedding()
+Settings.embedModel = new ClipEmbedding();
 
 export async function POST({ request }: APIContext) {
   // Parse the JSON body of the request to get the list of image URLs
-  const { images = [] }: { images: string[] } = await request.json()
+  const { images = [] }: { images: string[] } = await request.json();
   // Convert image URLs into ImageDocument objects
   const documents = images.map(
     (imageURL: string) =>
@@ -194,10 +196,10 @@ export async function POST({ request }: APIContext) {
         image: new URL(imageURL),
         // Attach metadata with the image URL
         metadata: { url: imageURL },
-      }),
-  )
+      })
+  );
   // Index the ImageDocument objects in the vector store
-  await VectorStoreIndex.fromDocuments(documents, { imageVectorStore })
+  await VectorStoreIndex.fromDocuments(documents, { imageVectorStore });
 }
 ```
 
@@ -211,30 +213,30 @@ With indexing complete, let's move on to building the reverse image search API e
 
 ## Build the Reverse Image Search API Endpoint
 
-First, let's walk through the process of reverse image search. A user would upload an image and then you'd need to find similar images. Greater the similarity, higher the priority in the image search results. The common ground for computing similarities between images is a numerical representation of their visual and semantic features. The computation of these features is done via CLIP model (by OpenAI) internally in the LlamaIndex library. LlamaIndex, upon querying would return a set of images along with the similarity score, i.e. how closely are the two images related. This allows you to  efficiently handles this similarity search of images based on their embeddings.
+First, let's walk through the process of reverse image search. A user would upload an image and then you'd need to find similar images. Greater the similarity, higher the priority in the image search results. The common ground for computing similarities between images is a numerical representation of their visual and semantic features. The computation of these features is done via CLIP model (by OpenAI) internally in the LlamaIndex library. LlamaIndex, upon querying would return a set of images along with the similarity score, i.e. how closely are the two images related. This allows you to efficiently handles this similarity search of images based on their embeddings.
 
 To reverse image search via an API endpoint, create a file `src/pages/api/query.ts` with the following code:
 
 ```tsx
 // File: src/pages/api/query.ts
 
-import type { APIContext } from 'astro'
+import type { APIContext } from 'astro';
 
 export async function POST({ request }: APIContext) {
   // Parse the form data from the request to get the file
-  const data = await request.formData()
-  const file = data.get('file') as File
+  const data = await request.formData();
+  const file = data.get('file') as File;
   // If no file is provided, return a 400 Bad Request response
-  if (!file) return new Response(null, { status: 400 })
+  if (!file) return new Response(null, { status: 400 });
   // Read the file contents into a buffer
-  const fileBuffer = await file.arrayBuffer()
+  const fileBuffer = await file.arrayBuffer();
   // Create a Blob from the buffer with the correct MIME type
-  const fileBlob = new Blob([fileBuffer], { type: file.type })
+  const fileBlob = new Blob([fileBuffer], { type: file.type });
   // ...
 }
 ```
 
-The code above implements a `POST` function, expecting a form data request with a file attached. It retrieves and validates the presence of file in the request. 
+The code above implements a `POST` function, expecting a form data request with a file attached. It retrieves and validates the presence of file in the request.
 
 Further, it reads its contents into a buffer using `arrayBuffer()`, and creates a Blob with the correct MIME type. This allows the API endpoint to accept images directly in the request, saving compute (on the server-side) for fetching remote image URL to search on.
 
@@ -245,33 +247,33 @@ Now with the following code you get to the final set of operations, i.e. creatin
 
 // ...
 
-import neonStore from '@/neon'
-import { ClipEmbedding, VectorStoreQueryMode } from 'llamaindex'
+import neonStore from '@/neon';
+import { ClipEmbedding, VectorStoreQueryMode } from 'llamaindex';
 
 export async function POST({ request }: APIContext) {
   // ...
   // Get the image embedding using ClipEmbedding
-  const image_embedding = await new ClipEmbedding().getImageEmbedding(fileBlob)
+  const image_embedding = await new ClipEmbedding().getImageEmbedding(fileBlob);
   // Query the Neon Postgres vector store for similar images
   const { similarities, nodes } = await neonStore.query({
     similarityTopK: 100,
     queryEmbedding: image_embedding,
     mode: VectorStoreQueryMode.DEFAULT,
-  })
+  });
   // Initialize an array to store relevant image URLs
-  const relevantImages: string[] = []
+  const relevantImages: string[] = [];
   if (nodes) {
     similarities.forEach((similarity: number, index: number) => {
       // Check if similarity is greater than 90% (i.e., similarity threshold)
       if (100 - similarity > 90) {
-        const document = nodes[index]
-        relevantImages.push(document.metadata.url)
+        const document = nodes[index];
+        relevantImages.push(document.metadata.url);
       }
-    })
+    });
   }
   return new Response(JSON.stringify(relevantImages), {
     headers: { 'Content-Type': 'application/json' },
-  })
+  });
 }
 ```
 
@@ -297,13 +299,21 @@ Update the `index.astro` file in your `src/pages` directory with the following c
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
+    <meta name="generator" content="{Astro.generator}" />
     <title>Astro</title>
   </head>
   <body class="flex flex-col items-center">
     <form class="flex flex-col" id="fileUploadForm" enctype="multipart/form-data">
-      <input class="rounded border px-4 py-3" type="file" id="fileInput" name="file" accept="image/*" />
-      <button id="query" class="mt-3 max-w-max rounded bg-black px-4 py-1 text-white" type="submit">Query &rarr;</button>
+      <input
+        class="rounded border px-4 py-3"
+        type="file"
+        id="fileInput"
+        name="file"
+        accept="image/*"
+      />
+      <button id="query" class="mt-3 max-w-max rounded bg-black px-4 py-1 text-white" type="submit">
+        Query &rarr;
+      </button>
     </form>
   </body>
 </html>

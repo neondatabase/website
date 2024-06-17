@@ -2,7 +2,7 @@
 
 ## 61.1. Creating Custom Scan Paths [#](#CUSTOM-SCAN-PATH)
 
-* [61.1.1. Custom Scan Path Callbacks](custom-scan-path#CUSTOM-SCAN-PATH-CALLBACKS)
+- [61.1.1. Custom Scan Path Callbacks](custom-scan-path#CUSTOM-SCAN-PATH-CALLBACKS)
 
 A custom scan provider will typically add paths for a base relation by setting the following hook, which is called after the core code has generated all the access paths it can for the relation (except for Gather paths, which are made after this call so that they can use partial paths added by the hook):
 

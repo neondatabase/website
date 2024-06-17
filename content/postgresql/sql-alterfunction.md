@@ -46,79 +46,79 @@ You must own the function to use `ALTER FUNCTION`. To change a function's schema
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of an existing function. If no argument list is specified, the name must be unique in its schema.
 
-* *`argmode`*
+- _`argmode`_
 
   The mode of an argument: `IN`, `OUT`, `INOUT`, or `VARIADIC`. If omitted, the default is `IN`. Note that `ALTER FUNCTION` does not actually pay any attention to `OUT` arguments, since only the input arguments are needed to determine the function's identity. So it is sufficient to list the `IN`, `INOUT`, and `VARIADIC` arguments.
 
-* *`argname`*
+- _`argname`_
 
   The name of an argument. Note that `ALTER FUNCTION` does not actually pay any attention to argument names, since only the argument data types are needed to determine the function's identity.
 
-* *`argtype`*
+- _`argtype`_
 
   The data type(s) of the function's arguments (optionally schema-qualified), if any.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name of the function.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The new owner of the function. Note that if the function is marked `SECURITY DEFINER`, it will subsequently execute as the new owner.
 
-* *`new_schema`*
+- _`new_schema`_
 
   The new schema for the function.
 
-* `DEPENDS ON EXTENSION extension_name``NO DEPENDS ON EXTENSION extension_name`
+- `DEPENDS ON EXTENSION extension_name``NO DEPENDS ON EXTENSION extension_name`
 
   This form marks the function as dependent on the extension, or no longer dependent on that extension if `NO` is specified. A function that's marked as dependent on an extension is dropped when the extension is dropped, even if `CASCADE` is not specified. A function can depend upon multiple extensions, and will be dropped when any one of those extensions is dropped.
 
-* `CALLED ON NULL INPUT``RETURNS NULL ON NULL INPUT``STRICT`
+- `CALLED ON NULL INPUT``RETURNS NULL ON NULL INPUT``STRICT`
 
   `CALLED ON NULL INPUT` changes the function so that it will be invoked when some or all of its arguments are null. `RETURNS NULL ON NULL INPUT` or `STRICT` changes the function so that it is not invoked if any of its arguments are null; instead, a null result is assumed automatically. See [CREATE FUNCTION](sql-createfunction) for more information.
 
-* `IMMUTABLE``STABLE``VOLATILE`
+- `IMMUTABLE``STABLE``VOLATILE`
 
   Change the volatility of the function to the specified setting. See [CREATE FUNCTION](sql-createfunction) for details.
 
-* `[ EXTERNAL ] SECURITY INVOKER``[ EXTERNAL ] SECURITY DEFINER`
+- `[ EXTERNAL ] SECURITY INVOKER``[ EXTERNAL ] SECURITY DEFINER`
 
   Change whether the function is a security definer or not. The key word `EXTERNAL` is ignored for SQL conformance. See [CREATE FUNCTION](sql-createfunction) for more information about this capability.
 
-* `PARALLEL`
+- `PARALLEL`
 
   Change whether the function is deemed safe for parallelism. See [CREATE FUNCTION](sql-createfunction) for details.
 
-* `LEAKPROOF`
+- `LEAKPROOF`
 
   Change whether the function is considered leakproof or not. See [CREATE FUNCTION](sql-createfunction) for more information about this capability.
 
-* `COST` *`execution_cost`*
+- `COST` _`execution_cost`_
 
   Change the estimated execution cost of the function. See [CREATE FUNCTION](sql-createfunction) for more information.
 
-* `ROWS` *`result_rows`*
+- `ROWS` _`result_rows`_
 
   Change the estimated number of rows returned by a set-returning function. See [CREATE FUNCTION](sql-createfunction) for more information.
 
-* `SUPPORT` *`support_function`*
+- `SUPPORT` _`support_function`_
 
   Set or change the planner support function to use for this function. See [Section 38.11](xfunc-optimization) for details. You must be superuser to use this option.
 
   This option cannot be used to remove the support function altogether, since it must name a new support function. Use `CREATE OR REPLACE FUNCTION` if you need to do that.
 
-* *`configuration_parameter`**`value`*
+- _`configuration_parameter`\*\*`value`_
 
-  Add or change the assignment to be made to a configuration parameter when the function is called. If *`value`* is `DEFAULT` or, equivalently, `RESET` is used, the function-local setting is removed, so that the function executes with the value present in its environment. Use `RESET ALL` to clear all function-local settings. `SET FROM CURRENT` saves the value of the parameter that is current when `ALTER FUNCTION` is executed as the value to be applied when the function is entered.
+  Add or change the assignment to be made to a configuration parameter when the function is called. If _`value`_ is `DEFAULT` or, equivalently, `RESET` is used, the function-local setting is removed, so that the function executes with the value present in its environment. Use `RESET ALL` to clear all function-local settings. `SET FROM CURRENT` saves the value of the parameter that is current when `ALTER FUNCTION` is executed as the value to be applied when the function is entered.
 
   See [SET](sql-set) and [Chapter 20](runtime-config) for more information about allowed parameter names and values.
 
-* `RESTRICT`
+- `RESTRICT`
 
   Ignored for conformance with the SQL standard.
 

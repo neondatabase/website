@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-SAVEPLAN)
 
-## SPI\_saveplan
+## SPI_saveplan
 
-SPI\_saveplan — save a prepared statement
+SPI_saveplan — save a prepared statement
 
 ## Synopsis
 
@@ -20,7 +20,7 @@ SPIPlanPtr SPI_saveplan(SPIPlanPtr plan)
 
 ## Arguments
 
-* `SPIPlanPtr plan`
+- `SPIPlanPtr plan`
 
   the prepared statement to be saved
 
@@ -30,11 +30,11 @@ SPIPlanPtr SPI_saveplan(SPIPlanPtr plan)
 
 Pointer to the copied statement; or `NULL` if unsuccessful. On error, `SPI_result` is set thus:
 
-* `SPI_ERROR_ARGUMENT`
+- `SPI_ERROR_ARGUMENT`
 
-  if *`plan`* is `NULL` or invalid
+  if _`plan`_ is `NULL` or invalid
 
-* `SPI_ERROR_UNCONNECTED`
+- `SPI_ERROR_UNCONNECTED`
 
   if called from an unconnected C function
 

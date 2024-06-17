@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2024-02-27T13:33:46.633Z'
+updatedOn: '2024-06-14T07:55:54.415Z'
 ---
 
 Neon supports project deployment in several regions. We recommended that you select the region closest to your application server to reduce latency between your Neon database and your application.
@@ -18,7 +18,7 @@ Neon currently supports the following AWS regions:
 - US West (Oregon) &mdash; `aws-us-west-2`
 - Europe (Frankfurt) &mdash; `aws-eu-central-1`
 - Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
-- Asia Pacific (Sydney)	&mdash; `aws-ap-southeast-2`
+- Asia Pacific (Sydney) &mdash; `aws-ap-southeast-2`
 
 ## Select a region for your Neon project
 

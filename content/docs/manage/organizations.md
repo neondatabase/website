@@ -2,6 +2,7 @@
 title: Organizations (private preview)
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
+updatedOn: '2024-06-14T07:55:54.418Z'
 ---
 
 Organizations let you work with your Neon projects as a team. By creating an organization, you can bring together Members and Guests, manage permissions, and organize all of your team's projects under a single umbrella.
@@ -70,7 +71,7 @@ Learn how to manage your organization's projects, invite Members and Guests, rev
 
 Easily switch between your personal account and any organization you are a Member of using the navigation breadcrumb.
 
-![Switch between personal and organization](/docs/manage/switch_to_org.png "no-border")
+![Switch between personal and organization](/docs/manage/switch_to_org.png 'no-border')
 
 ### Invite Members
 
@@ -92,7 +93,7 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 - You can demote any admin to a regular Member.
 - You cannot leave the organization if you are the only Admin. Promote a Member to Admin before you try to leave the org.
 
-    ![organization members](/docs/manage/orgs_members_kebab.png "no-border")
+  ![organization members](/docs/manage/orgs_members_kebab.png 'no-border')
 
 ### Invite Guests
 
@@ -113,7 +114,7 @@ Click the kebab menu next to the row in the **Guests** table to manage Guest acc
 - **Convert to member** — promote the Guest to a full Member, granting access to all projects in the organization.
 - **Remove from project** — revoke the Guest's access to the shared project.
 
-    ![guests kebab](/docs/manage/orgs_guests_kebab.png "no-border")
+  ![guests kebab](/docs/manage/orgs_guests_kebab.png 'no-border')
 
 ### Manage projects
 

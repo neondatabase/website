@@ -2,19 +2,17 @@
 
 ## 49.6. Logical Decoding Output Plugins [#](#LOGICALDECODING-OUTPUT-PLUGIN)
 
-  * [49.6.1. Initialization Function](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-INIT)
-  * [49.6.2. Capabilities](logicaldecoding-output-plugin#LOGICALDECODING-CAPABILITIES)
-  * [49.6.3. Output Modes](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-MODE)
-  * [49.6.4. Output Plugin Callbacks](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-PLUGIN-CALLBACKS)
-  * [49.6.5. Functions for Producing Output](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-PLUGIN-OUTPUT)
+- [49.6.1. Initialization Function](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-INIT)
+- [49.6.2. Capabilities](logicaldecoding-output-plugin#LOGICALDECODING-CAPABILITIES)
+- [49.6.3. Output Modes](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-MODE)
+- [49.6.4. Output Plugin Callbacks](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-PLUGIN-CALLBACKS)
+- [49.6.5. Functions for Producing Output](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-PLUGIN-OUTPUT)
 
 An example output plugin can be found in the [`contrib/test_decoding` ](test-decoding)subdirectory of the PostgreSQL source tree.
 
 [#id](#LOGICALDECODING-OUTPUT-INIT)
 
 ### 49.6.1. Initialization Function [#](#LOGICALDECODING-OUTPUT-INIT)
-
-
 
 An output plugin is loaded by dynamically loading a shared library with the output plugin's name as the library base name. The normal library search path is used to locate the library. To provide the required output plugin callbacks and to indicate that the library is actually an output plugin it needs to provide a function named `_PG_output_plugin_init`. This function is passed a struct that needs to be filled with the callback function pointers for individual actions.
 
@@ -96,7 +94,7 @@ typedef void (*LogicalDecodeStartupCB) (struct LogicalDecodingContext *ctx,
                                         bool is_init);
 ```
 
-The `is_init` parameter will be true when the replication slot is being created and false otherwise. *`options`* points to a struct of options that output plugins can set:
+The `is_init` parameter will be true when the replication slot is being created and false otherwise. _`options`_ points to a struct of options that output plugins can set:
 
 ```
 typedef struct OutputPluginOptions
@@ -131,7 +129,7 @@ typedef void (*LogicalDecodeBeginCB) (struct LogicalDecodingContext *ctx,
                                       ReorderBufferTXN *txn);
 ```
 
-The *`txn`* parameter contains meta information about the transaction, like the time stamp at which it has been committed and its XID.
+The _`txn`_ parameter contains meta information about the transaction, like the time stamp at which it has been committed and its XID.
 
 [#id](#LOGICALDECODING-OUTPUT-PLUGIN-COMMIT)
 
@@ -158,7 +156,7 @@ typedef void (*LogicalDecodeChangeCB) (struct LogicalDecodingContext *ctx,
                                        ReorderBufferChange *change);
 ```
 
-The *`ctx`* and *`txn`* parameters have the same contents as for the `begin_cb` and `commit_cb` callbacks, but additionally the relation descriptor *`relation`* points to the relation the row belongs to and a struct *`change`* describing the row modification are passed in.
+The _`ctx`_ and _`txn`_ parameters have the same contents as for the `begin_cb` and `commit_cb` callbacks, but additionally the relation descriptor _`relation`_ points to the relation the row belongs to and a struct _`change`_ describing the row modification are passed in.
 
 ### Note
 
@@ -184,14 +182,14 @@ The parameters are analogous to the `change_cb` callback. However, because `TRUN
 
 #### 49.6.4.7. Origin Filter Callback [#](#LOGICALDECODING-OUTPUT-PLUGIN-FILTER-ORIGIN)
 
-The optional `filter_by_origin_cb` callback is called to determine whether data that has been replayed from *`origin_id`* is of interest to the output plugin.
+The optional `filter_by_origin_cb` callback is called to determine whether data that has been replayed from _`origin_id`_ is of interest to the output plugin.
 
 ```
 typedef bool (*LogicalDecodeFilterByOriginCB) (struct LogicalDecodingContext *ctx,
                                                RepOriginId origin_id);
 ```
 
-The *`ctx`* parameter has the same contents as for the other callbacks. No information but the origin is available. To signal that changes originating on the passed in node are irrelevant, return true, causing them to be filtered away; false otherwise. The other callbacks will not be called for transactions and changes that have been filtered away.
+The _`ctx`_ parameter has the same contents as for the other callbacks. No information but the origin is available. To signal that changes originating on the passed in node are irrelevant, return true, causing them to be filtered away; false otherwise. The other callbacks will not be called for transactions and changes that have been filtered away.
 
 This is useful when implementing cascading or multidirectional replication solutions. Filtering by the origin allows to prevent replicating the same changes back and forth in such setups. While transactions and changes also carry information about the origin, filtering via this callback is noticeably more efficient.
 
@@ -211,7 +209,7 @@ typedef void (*LogicalDecodeMessageCB) (struct LogicalDecodingContext *ctx,
                                         const char *message);
 ```
 
-The *`txn`* parameter contains meta information about the transaction, like the time stamp at which it has been committed and its XID. Note however that it can be NULL when the message is non-transactional and the XID was not assigned yet in the transaction which logged the message. The *`lsn`* has WAL location of the message. The *`transactional`* says if the message was sent as transactional or not. Similar to the change callback, in case of decoding a prepared (but yet uncommitted) transaction or decoding of an uncommitted transaction, this message callback might also error out due to simultaneous rollback of this very same transaction. In that case, the logical decoding of this aborted transaction is stopped gracefully. The *`prefix`* is arbitrary null-terminated prefix which can be used for identifying interesting messages for the current plugin. And finally the *`message`* parameter holds the actual message of *`message_size`* size.
+The _`txn`_ parameter contains meta information about the transaction, like the time stamp at which it has been committed and its XID. Note however that it can be NULL when the message is non-transactional and the XID was not assigned yet in the transaction which logged the message. The _`lsn`_ has WAL location of the message. The _`transactional`_ says if the message was sent as transactional or not. Similar to the change callback, in case of decoding a prepared (but yet uncommitted) transaction or decoding of an uncommitted transaction, this message callback might also error out due to simultaneous rollback of this very same transaction. In that case, the logical decoding of this aborted transaction is stopped gracefully. The _`prefix`_ is arbitrary null-terminated prefix which can be used for identifying interesting messages for the current plugin. And finally the _`message`_ parameter holds the actual message of _`message_size`_ size.
 
 Extra care should be taken to ensure that the prefix the output plugin considers interesting is unique. Using name of the extension or the output plugin itself is often a good choice.
 
@@ -227,15 +225,15 @@ typedef bool (*LogicalDecodeFilterPrepareCB) (struct LogicalDecodingContext *ctx
                                               const char *gid);
 ```
 
-The *`ctx`* parameter has the same contents as for the other callbacks. The parameters *`xid`* and *`gid`* provide two different ways to identify the transaction. The later `COMMIT PREPARED` or `ROLLBACK PREPARED` carries both identifiers, providing an output plugin the choice of what to use.
+The _`ctx`_ parameter has the same contents as for the other callbacks. The parameters _`xid`_ and _`gid`_ provide two different ways to identify the transaction. The later `COMMIT PREPARED` or `ROLLBACK PREPARED` carries both identifiers, providing an output plugin the choice of what to use.
 
-The callback may be invoked multiple times per transaction to decode and must provide the same static answer for a given pair of *`xid`* and *`gid`* every time it is called.
+The callback may be invoked multiple times per transaction to decode and must provide the same static answer for a given pair of _`xid`_ and _`gid`_ every time it is called.
 
 [#id](#LOGICALDECODING-OUTPUT-PLUGIN-BEGIN-PREPARE)
 
 #### 49.6.4.10. Transaction Begin Prepare Callback [#](#LOGICALDECODING-OUTPUT-PLUGIN-BEGIN-PREPARE)
 
-The required `begin_prepare_cb` callback is called whenever the start of a prepared transaction has been decoded. The *`gid`* field, which is part of the *`txn`* parameter, can be used in this callback to check if the plugin has already received this `PREPARE` in which case it can either error out or skip the remaining changes of the transaction.
+The required `begin_prepare_cb` callback is called whenever the start of a prepared transaction has been decoded. The _`gid`_ field, which is part of the _`txn`_ parameter, can be used in this callback to check if the plugin has already received this `PREPARE` in which case it can either error out or skip the remaining changes of the transaction.
 
 ```
 typedef void (*LogicalDecodeBeginPrepareCB) (struct LogicalDecodingContext *ctx,
@@ -246,7 +244,7 @@ typedef void (*LogicalDecodeBeginPrepareCB) (struct LogicalDecodingContext *ctx,
 
 #### 49.6.4.11. Transaction Prepare Callback [#](#LOGICALDECODING-OUTPUT-PLUGIN-PREPARE)
 
-The required `prepare_cb` callback is called whenever a transaction which is prepared for two-phase commit has been decoded. The `change_cb` callback for all modified rows will have been called before this, if there have been any modified rows. The *`gid`* field, which is part of the *`txn`* parameter, can be used in this callback.
+The required `prepare_cb` callback is called whenever a transaction which is prepared for two-phase commit has been decoded. The `change_cb` callback for all modified rows will have been called before this, if there have been any modified rows. The _`gid`_ field, which is part of the _`txn`_ parameter, can be used in this callback.
 
 ```
 typedef void (*LogicalDecodePrepareCB) (struct LogicalDecodingContext *ctx,
@@ -258,7 +256,7 @@ typedef void (*LogicalDecodePrepareCB) (struct LogicalDecodingContext *ctx,
 
 #### 49.6.4.12. Transaction Commit Prepared Callback [#](#LOGICALDECODING-OUTPUT-PLUGIN-COMMIT-PREPARED)
 
-The required `commit_prepared_cb` callback is called whenever a transaction `COMMIT PREPARED` has been decoded. The *`gid`* field, which is part of the *`txn`* parameter, can be used in this callback.
+The required `commit_prepared_cb` callback is called whenever a transaction `COMMIT PREPARED` has been decoded. The _`gid`_ field, which is part of the _`txn`_ parameter, can be used in this callback.
 
 ```
 typedef void (*LogicalDecodeCommitPreparedCB) (struct LogicalDecodingContext *ctx,
@@ -270,7 +268,7 @@ typedef void (*LogicalDecodeCommitPreparedCB) (struct LogicalDecodingContext *ct
 
 #### 49.6.4.13. Transaction Rollback Prepared Callback [#](#LOGICALDECODING-OUTPUT-PLUGIN-ROLLBACK-PREPARED)
 
-The required `rollback_prepared_cb` callback is called whenever a transaction `ROLLBACK PREPARED` has been decoded. The *`gid`* field, which is part of the *`txn`* parameter, can be used in this callback. The parameters *`prepare_end_lsn`* and *`prepare_time`* can be used to check if the plugin has received this `PREPARE TRANSACTION` in which case it can apply the rollback, otherwise, it can skip the rollback operation. The *`gid`* alone is not sufficient because the downstream node can have a prepared transaction with same identifier.
+The required `rollback_prepared_cb` callback is called whenever a transaction `ROLLBACK PREPARED` has been decoded. The _`gid`_ field, which is part of the _`txn`_ parameter, can be used in this callback. The parameters _`prepare_end_lsn`_ and _`prepare_time`_ can be used to check if the plugin has received this `PREPARE TRANSACTION` in which case it can apply the rollback, otherwise, it can skip the rollback operation. The _`gid`_ alone is not sufficient because the downstream node can have a prepared transaction with same identifier.
 
 ```
 typedef void (*LogicalDecodeRollbackPreparedCB) (struct LogicalDecodingContext *ctx,
@@ -386,7 +384,7 @@ The parameters are analogous to the `stream_change_cb` callback. However, becaus
 
 ### 49.6.5. Functions for Producing Output [#](#LOGICALDECODING-OUTPUT-PLUGIN-OUTPUT)
 
-To actually produce output, output plugins can write data to the `StringInfo` output buffer in `ctx->out` when inside the `begin_cb`, `commit_cb`, or `change_cb` callbacks. Before writing to the output buffer, `OutputPluginPrepareWrite(ctx, last_write)` has to be called, and after finishing writing to the buffer, `OutputPluginWrite(ctx, last_write)` has to be called to perform the write. The *`last_write`* indicates whether a particular write was the callback's last write.
+To actually produce output, output plugins can write data to the `StringInfo` output buffer in `ctx->out` when inside the `begin_cb`, `commit_cb`, or `change_cb` callbacks. Before writing to the output buffer, `OutputPluginPrepareWrite(ctx, last_write)` has to be called, and after finishing writing to the buffer, `OutputPluginWrite(ctx, last_write)` has to be called to perform the write. The _`last_write`_ indicates whether a particular write was the callback's last write.
 
 The following example shows how to output data to the consumer of an output plugin:
 

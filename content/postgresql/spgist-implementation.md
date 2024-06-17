@@ -2,9 +2,9 @@
 
 ## 69.4. Implementation [#](#SPGIST-IMPLEMENTATION)
 
-  * [69.4.1. SP-GiST Limits](spgist-implementation#SPGIST-LIMITS)
-  * [69.4.2. SP-GiST Without Node Labels](spgist-implementation#SPGIST-NULL-LABELS)
-  * [69.4.3. “All-the-Same” Inner Tuples](spgist-implementation#SPGIST-ALL-THE-SAME)
+- [69.4.1. SP-GiST Limits](spgist-implementation#SPGIST-LIMITS)
+- [69.4.2. SP-GiST Without Node Labels](spgist-implementation#SPGIST-NULL-LABELS)
+- [69.4.3. “All-the-Same” Inner Tuples](spgist-implementation#SPGIST-ALL-THE-SAME)
 
 This section covers implementation details and other tricks that are useful for implementers of SP-GiST operator classes to know.
 
@@ -16,7 +16,7 @@ Individual leaf tuples and inner tuples must fit on a single index page (8kB by 
 
 Likewise, it is the operator class's responsibility that inner tuples do not grow too large to fit on an index page; this limits the number of child nodes that can be used in one inner tuple, as well as the maximum size of a prefix value.
 
-Another limitation is that when an inner tuple's node points to a set of leaf tuples, those tuples must all be in the same index page. (This is a design decision to reduce seeking and save space in the links that chain such tuples together.) If the set of leaf tuples grows too large for a page, a split is performed and an intermediate inner tuple is inserted. For this to fix the problem, the new inner tuple *must* divide the set of leaf values into more than one node group. If the operator class's `picksplit` function fails to do that, the SP-GiST core resorts to extraordinary measures described in [Section 69.4.3](spgist-implementation#SPGIST-ALL-THE-SAME).
+Another limitation is that when an inner tuple's node points to a set of leaf tuples, those tuples must all be in the same index page. (This is a design decision to reduce seeking and save space in the links that chain such tuples together.) If the set of leaf tuples grows too large for a page, a split is performed and an intermediate inner tuple is inserted. For this to fix the problem, the new inner tuple _must_ divide the set of leaf values into more than one node group. If the operator class's `picksplit` function fails to do that, the SP-GiST core resorts to extraordinary measures described in [Section 69.4.3](spgist-implementation#SPGIST-ALL-THE-SAME).
 
 When `longValuesOK` is true, it is expected that successive levels of the SP-GiST tree will absorb more and more information into the prefixes and node labels of the inner tuples, making the required leaf datum smaller and smaller, so that eventually it will fit on a page. To prevent bugs in operator classes from causing infinite insertion loops, the SP-GiST core will raise an error if the leaf datum does not become any smaller within ten cycles of `choose` method calls.
 

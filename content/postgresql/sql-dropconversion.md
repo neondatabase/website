@@ -20,15 +20,15 @@ DROP CONVERSION [ IF EXISTS ] name [ CASCADE | RESTRICT ]
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the conversion does not exist. A notice is issued in this case.
 
-* *`name`*
+- _`name`_
 
   The name of the conversion. The conversion name can be schema-qualified.
 
-* `CASCADE``RESTRICT`
+- `CASCADE``RESTRICT`
 
   These key words do not have any effect, since there are no dependencies on conversions.
 

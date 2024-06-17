@@ -1,10 +1,11 @@
 ---
 title: Neon integration guides
-subtitle: Find detailed instructions for integration across various platforms and services.
+subtitle: Find detailed instructions for integration across various platforms and
+  services.
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2024-02-27T20:16:54.558Z'
+updatedOn: '2024-06-16T10:21:49.230Z'
 ---
 
 ## Deploy
@@ -82,6 +83,8 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 <TechnologyNavigation open>
 
 <img src="/images/technology-logos/airbyte-logo.svg" width="36" height="36" alt="Airbyte" href="/docs/guides/logical-replication-airbyte" title="Replicate data from Neon with Airbyte" />
+
+<img src="/images/technology-logos/bemi-logo.svg" width="36" height="36" alt="Bemi" href="/docs/guides/bemi" title="Create an automatic audit trail with Bemi" />
 
 <img src="/images/technology-logos/clickhouse-logo.svg" width="36" height="36" alt="ClickHouse" href="/docs/guides/logical-replication-clickhouse" title="Replicate data from Neon to ClickHouse (DoubleCloud)" />
 

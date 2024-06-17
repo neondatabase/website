@@ -2,8 +2,8 @@
 
 ## 32.4. Extensibility [#](#JIT-EXTENSIBILITY)
 
-  * [32.4.1. Inlining Support for Extensions](jit-extensibility#JIT-EXTENSIBILITY-BITCODE)
-  * [32.4.2. Pluggable JIT Providers](jit-extensibility#JIT-PLUGGABLE)
+- [32.4.1. Inlining Support for Extensions](jit-extensibility#JIT-EXTENSIBILITY-BITCODE)
+- [32.4.2. Pluggable JIT Providers](jit-extensibility#JIT-PLUGGABLE)
 
 [#id](#JIT-EXTENSIBILITY-BITCODE)
 
@@ -21,7 +21,7 @@ For functions built into PostgreSQL itself, the bitcode is installed into `$pkgl
 
 ### 32.4.2. Pluggable JIT Providers [#](#JIT-PLUGGABLE)
 
-PostgreSQL provides a JIT implementation based on LLVM. The interface to the JIT provider is pluggable and the provider can be changed without recompiling (although currently, the build process only provides inlining support data for LLVM). The active provider is chosen via the setting [jit\_provider](runtime-config-client#GUC-JIT-PROVIDER).
+PostgreSQL provides a JIT implementation based on LLVM. The interface to the JIT provider is pluggable and the provider can be changed without recompiling (although currently, the build process only provides inlining support data for LLVM). The active provider is chosen via the setting [jit_provider](runtime-config-client#GUC-JIT-PROVIDER).
 
 [#id](#JIT-PLUGGABLE-PROVIDER-INTERFACE)
 

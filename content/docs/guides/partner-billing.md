@@ -3,7 +3,7 @@ title: Manage billing with consumption limits
 subtitle: Learn how to set usage quotas per project with the Neon API
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-22T14:29:54.382Z'
+updatedOn: '2024-06-14T07:55:54.403Z'
 ---
 
 When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free tier users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
@@ -41,10 +41,10 @@ The `quota` object includes an array of parameters used to set threshold limits.
 
 - `active_time_seconds` &#8212; Sets the maximum amount of time your project's total compute endpoints are allowed to be active during the current billing period. It excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#autosuspend).
 - `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's compute endpoints. This includes any endpoints deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes `compute_time_seconds`. For example, 1 second at .25 vCPU costs .25 compute seconds, while 1 second at 4 vCPU costs 4 compute seconds.
-   | vCPUs  | active_time_seconds | compute_time_seconds |
-   |--------|-----------------------|------------------------|
-   | 0.25   | 1                     | 0.25                   |
-   | 4      | 1                     | 4                      |
+  | vCPUs | active_time_seconds | compute_time_seconds |
+  |--------|-----------------------|------------------------|
+  | 0.25 | 1 | 0.25 |
+  | 4 | 1 | 4 |
 - `written_data_bytes` &#8212; Sets the maximum amount of data in total, measured in bytes, that can be written across all of a project's branches for the month.
 - `data_transfer_bytes` &#8212; Sets the maximum amount of egress data, measured in bytes, that can be transferred out of Neon from across all of a project's branches using the proxy.
 
@@ -54,12 +54,12 @@ There is one additional `quota` parameter, `logical_size_bytes`, which applies t
 
 Let's say you want to set limits for an application with two tiers, Trial and Pro, you might set limits like the following:
 
-| Parameter (project)  | Trial (.25 vCPU)                 | Pro (max 4 vCPU)                                 |
-| -------------------- | -------------------------------- | ------------------------------------------------ |
-| active_time_seconds  | 633,600 (business month 22 days) | 2,592,000 (30 days)                              |
+| Parameter (project)  | Trial (.25 vCPU)                 | Pro (max 4 vCPU)                                  |
+| -------------------- | -------------------------------- | ------------------------------------------------- |
+| active_time_seconds  | 633,600 (business month 22 days) | 2,592,000 (30 days)                               |
 | compute_time_seconds | 158,400 (approx 44 hours)        | 10,368,000 (4 times the active hours for 4 vCPUs) |
-| written_data_bytes   | 1,000,000,000 (approx. 1 GiB)    | 50,000,000,000 (approx. 50 GiB)                  |
-| data_transfer_bytes  | 500,000,000 (approx. 500 MiB)    | 10,000,000,000 (approx. 10 GiB)                  |
+| written_data_bytes   | 1,000,000,000 (approx. 1 GiB)    | 50,000,000,000 (approx. 50 GiB)                   |
+| data_transfer_bytes  | 500,000,000 (approx. 500 MiB)    | 10,000,000,000 (approx. 10 GiB)                   |
 
 | Parameter (branch) | Trial                         | Pro                             |
 | ------------------ | ----------------------------- | ------------------------------- |

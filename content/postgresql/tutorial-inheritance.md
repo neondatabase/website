@@ -2,8 +2,6 @@
 
 ## 3.6. Inheritance [#](#TUTORIAL-INHERITANCE)
 
-
-
 Inheritance is a concept from object-oriented databases. It opens up interesting new possibilities of database design.
 
 Let's create two tables: A table `cities` and a table `capitals`. Naturally, capitals are also cities, so you want some way to show the capitals implicitly when you list all cities. If you're really clever you might invent some scheme like this:
@@ -44,7 +42,7 @@ CREATE TABLE capitals (
 ) INHERITS (cities);
 ```
 
-In this case, a row of `capitals` *inherits* all columns (`name`, `population`, and `elevation`) from its *parent*, `cities`. The type of the column `name` is `text`, a native PostgreSQL type for variable length character strings. The `capitals` table has an additional column, `state`, which shows its state abbreviation. In PostgreSQL, a table can inherit from zero or more other tables.
+In this case, a row of `capitals` _inherits_ all columns (`name`, `population`, and `elevation`) from its _parent_, `cities`. The type of the column `name` is `text`, a native PostgreSQL type for variable length character strings. The `capitals` table has an additional column, `state`, which shows its state abbreviation. In PostgreSQL, a table can inherit from zero or more other tables.
 
 For example, the following query finds the names of all cities, including state capitals, that are located at an elevation over 500 feet:
 

@@ -133,25 +133,25 @@ referential_action in a FOREIGN KEY/REFERENCES constraint is:
 
 `ALTER TABLE` changes the definition of an existing table. There are several subforms described below. Note that the lock level required may differ for each subform. An `ACCESS EXCLUSIVE` lock is acquired unless explicitly noted. When multiple subcommands are given, the lock acquired will be the strictest one required by any subcommand.
 
-* `ADD COLUMN [ IF NOT EXISTS ]` [#](#SQL-ALTERTABLE-DESC-ADD-COLUMN)
+- `ADD COLUMN [ IF NOT EXISTS ]` [#](#SQL-ALTERTABLE-DESC-ADD-COLUMN)
 
   This form adds a new column to the table, using the same syntax as [`CREATE TABLE`](sql-createtable). If `IF NOT EXISTS` is specified and a column already exists with this name, no error is thrown.
 
-* `DROP COLUMN [ IF EXISTS ]` [#](#SQL-ALTERTABLE-DESC-DROP-COLUMN)
+- `DROP COLUMN [ IF EXISTS ]` [#](#SQL-ALTERTABLE-DESC-DROP-COLUMN)
 
   This form drops a column from a table. Indexes and table constraints involving the column will be automatically dropped as well. Multivariate statistics referencing the dropped column will also be removed if the removal of the column would cause the statistics to contain data for only a single column. You will need to say `CASCADE` if anything outside the table depends on the column, for example, foreign key references or views. If `IF EXISTS` is specified and the column does not exist, no error is thrown. In this case a notice is issued instead.
 
-* `SET DATA TYPE` [#](#SQL-ALTERTABLE-DESC-SET-DATA-TYPE)
+- `SET DATA TYPE` [#](#SQL-ALTERTABLE-DESC-SET-DATA-TYPE)
 
   This form changes the type of a column of a table. Indexes and simple table constraints involving the column will be automatically converted to use the new column type by reparsing the originally supplied expression. The optional `COLLATE` clause specifies a collation for the new column; if omitted, the collation is the default for the new column type. The optional `USING` clause specifies how to compute the new column value from the old; if omitted, the default conversion is the same as an assignment cast from old data type to new. A `USING` clause must be provided if there is no implicit or assignment cast from old to new type.
 
   When this form is used, the column's statistics are removed, so running [`ANALYZE`](sql-analyze) on the table afterwards is recommended.
 
-* `SET`/`DROP DEFAULT` [#](#SQL-ALTERTABLE-DESC-SET-DROP-DEFAULT)
+- `SET`/`DROP DEFAULT` [#](#SQL-ALTERTABLE-DESC-SET-DROP-DEFAULT)
 
   These forms set or remove the default value for a column (where removal is equivalent to setting the default value to NULL). The new default value will only apply in subsequent `INSERT` or `UPDATE` commands; it does not cause rows already in the table to change.
 
-* `SET`/`DROP NOT NULL` [#](#SQL-ALTERTABLE-DESC-SET-DROP-NOT-NULL)
+- `SET`/`DROP NOT NULL` [#](#SQL-ALTERTABLE-DESC-SET-DROP-NOT-NULL)
 
   These forms change whether a column is marked to allow null values or to reject null values.
 
@@ -159,43 +159,43 @@ referential_action in a FOREIGN KEY/REFERENCES constraint is:
 
   If this table is a partition, one cannot perform `DROP NOT NULL` on a column if it is marked `NOT NULL` in the parent table. To drop the `NOT NULL` constraint from all the partitions, perform `DROP NOT NULL` on the parent table. Even if there is no `NOT NULL` constraint on the parent, such a constraint can still be added to individual partitions, if desired; that is, the children can disallow nulls even if the parent allows them, but not the other way around.
 
-* `DROP EXPRESSION [ IF EXISTS ]` [#](#SQL-ALTERTABLE-DESC-DROP-EXPRESSION)
+- `DROP EXPRESSION [ IF EXISTS ]` [#](#SQL-ALTERTABLE-DESC-DROP-EXPRESSION)
 
   This form turns a stored generated column into a normal base column. Existing data in the columns is retained, but future changes will no longer apply the generation expression.
 
   If `DROP EXPRESSION IF EXISTS` is specified and the column is not a stored generated column, no error is thrown. In this case a notice is issued instead.
 
-* `ADD GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY``SET GENERATED { ALWAYS | BY DEFAULT }``DROP IDENTITY [ IF EXISTS ]` [#](#SQL-ALTERTABLE-DESC-GENERATED-IDENTITY)
+- `ADD GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY``SET GENERATED { ALWAYS | BY DEFAULT }``DROP IDENTITY [ IF EXISTS ]` [#](#SQL-ALTERTABLE-DESC-GENERATED-IDENTITY)
 
   These forms change whether a column is an identity column or change the generation attribute of an existing identity column. See [`CREATE TABLE`](sql-createtable) for details. Like `SET DEFAULT`, these forms only affect the behavior of subsequent `INSERT` and `UPDATE` commands; they do not cause rows already in the table to change.
 
   If `DROP IDENTITY IF EXISTS` is specified and the column is not an identity column, no error is thrown. In this case a notice is issued instead.
 
-* `SET sequence_option``RESTART` [#](#SQL-ALTERTABLE-DESC-SET-SEQUENCE-OPTION)
+- `SET sequence_option``RESTART` [#](#SQL-ALTERTABLE-DESC-SET-SEQUENCE-OPTION)
 
-  These forms alter the sequence that underlies an existing identity column. *`sequence_option`* is an option supported by [`ALTER SEQUENCE`](sql-altersequence) such as `INCREMENT BY`.
+  These forms alter the sequence that underlies an existing identity column. _`sequence_option`_ is an option supported by [`ALTER SEQUENCE`](sql-altersequence) such as `INCREMENT BY`.
 
-* `SET STATISTICS` [#](#SQL-ALTERTABLE-DESC-SET-STATISTICS)
+- `SET STATISTICS` [#](#SQL-ALTERTABLE-DESC-SET-STATISTICS)
 
-  This form sets the per-column statistics-gathering target for subsequent [`ANALYZE`](sql-analyze) operations. The target can be set in the range 0 to 10000; alternatively, set it to -1 to revert to using the system default statistics target ([default\_statistics\_target](runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET)). For more information on the use of statistics by the PostgreSQL query planner, refer to [Section 14.2](planner-stats).
+  This form sets the per-column statistics-gathering target for subsequent [`ANALYZE`](sql-analyze) operations. The target can be set in the range 0 to 10000; alternatively, set it to -1 to revert to using the system default statistics target ([default_statistics_target](runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET)). For more information on the use of statistics by the PostgreSQL query planner, refer to [Section 14.2](planner-stats).
 
   `SET STATISTICS` acquires a `SHARE UPDATE EXCLUSIVE` lock.
 
-* `SET ( attribute_option = value [, ... ] )``RESET ( attribute_option [, ... ] )` [#](#SQL-ALTERTABLE-DESC-SET-ATTRIBUTE-OPTION)
+- `SET ( attribute_option = value [, ... ] )``RESET ( attribute_option [, ... ] )` [#](#SQL-ALTERTABLE-DESC-SET-ATTRIBUTE-OPTION)
 
   This form sets or resets per-attribute options. Currently, the only defined per-attribute options are `n_distinct` and `n_distinct_inherited`, which override the number-of-distinct-values estimates made by subsequent [`ANALYZE`](sql-analyze) operations. `n_distinct` affects the statistics for the table itself, while `n_distinct_inherited` affects the statistics gathered for the table plus its inheritance children. When set to a positive value, `ANALYZE` will assume that the column contains exactly the specified number of distinct nonnull values. When set to a negative value, which must be greater than or equal to -1, `ANALYZE` will assume that the number of distinct nonnull values in the column is linear in the size of the table; the exact count is to be computed by multiplying the estimated table size by the absolute value of the given number. For example, a value of -1 implies that all values in the column are distinct, while a value of -0.5 implies that each value appears twice on the average. This can be useful when the size of the table changes over time, since the multiplication by the number of rows in the table is not performed until query planning time. Specify a value of 0 to revert to estimating the number of distinct values normally. For more information on the use of statistics by the PostgreSQL query planner, refer to [Section 14.2](planner-stats).
 
   Changing per-attribute options acquires a `SHARE UPDATE EXCLUSIVE` lock.
 
-* `SET STORAGE { PLAIN | EXTERNAL | EXTENDED | MAIN | DEFAULT }` [#](#SQL-ALTERTABLE-DESC-SET-STORAGE)
+- `SET STORAGE { PLAIN | EXTERNAL | EXTENDED | MAIN | DEFAULT }` [#](#SQL-ALTERTABLE-DESC-SET-STORAGE)
 
   This form sets the storage mode for a column. This controls whether this column is held inline or in a secondary TOAST table, and whether the data should be compressed or not. `PLAIN` must be used for fixed-length values such as `integer` and is inline, uncompressed. `MAIN` is for inline, compressible data. `EXTERNAL` is for external, uncompressed data, and `EXTENDED` is for external, compressed data. Writing `DEFAULT` sets the storage mode to the default mode for the column's data type. `EXTENDED` is the default for most data types that support non-`PLAIN` storage. Use of `EXTERNAL` will make substring operations on very large `text` and `bytea` values run faster, at the penalty of increased storage space. Note that `ALTER TABLE ... SET STORAGE` doesn't itself change anything in the table; it just sets the strategy to be pursued during future table updates. See [Section 73.2](storage-toast) for more information.
 
-* `SET COMPRESSION compression_method` [#](#SQL-ALTERTABLE-DESC-SET-COMPRESSION)
+- `SET COMPRESSION compression_method` [#](#SQL-ALTERTABLE-DESC-SET-COMPRESSION)
 
-  This form sets the compression method for a column, determining how values inserted in future will be compressed (if the storage mode permits compression at all). This does not cause the table to be rewritten, so existing data may still be compressed with other compression methods. If the table is restored with pg\_restore, then all values are rewritten with the configured compression method. However, when data is inserted from another relation (for example, by `INSERT ... SELECT`), values from the source table are not necessarily detoasted, so any previously compressed data may retain its existing compression method, rather than being recompressed with the compression method of the target column. The supported compression methods are `pglz` and `lz4`. (`lz4` is available only if `--with-lz4` was used when building PostgreSQL.) In addition, *`compression_method`* can be `default`, which selects the default behavior of consulting the [default\_toast\_compression](runtime-config-client#GUC-DEFAULT-TOAST-COMPRESSION) setting at the time of data insertion to determine the method to use.
+  This form sets the compression method for a column, determining how values inserted in future will be compressed (if the storage mode permits compression at all). This does not cause the table to be rewritten, so existing data may still be compressed with other compression methods. If the table is restored with pg_restore, then all values are rewritten with the configured compression method. However, when data is inserted from another relation (for example, by `INSERT ... SELECT`), values from the source table are not necessarily detoasted, so any previously compressed data may retain its existing compression method, rather than being recompressed with the compression method of the target column. The supported compression methods are `pglz` and `lz4`. (`lz4` is available only if `--with-lz4` was used when building PostgreSQL.) In addition, `compression_method` can be `default`, which selects the default behavior of consulting the [default_toast_compression](runtime-config-client#GUC-DEFAULT-TOAST-COMPRESSION) setting at the time of data insertion to determine the method to use.
 
-* `ADD table_constraint [ NOT VALID ]` [#](#SQL-ALTERTABLE-DESC-ADD-TABLE-CONSTRAINT)
+- `ADD table_constraint [ NOT VALID ]` [#](#SQL-ALTERTABLE-DESC-ADD-TABLE-CONSTRAINT)
 
   This form adds a new constraint to a table using the same constraint syntax as [`CREATE TABLE`](sql-createtable), plus the option `NOT VALID`, which is currently only allowed for foreign key and CHECK constraints.
 
@@ -205,7 +205,7 @@ referential_action in a FOREIGN KEY/REFERENCES constraint is:
 
   Additional restrictions apply when unique or primary key constraints are added to partitioned tables; see [`CREATE TABLE`](sql-createtable). Also, foreign key constraints on partitioned tables may not be declared `NOT VALID` at present.
 
-* `ADD table_constraint_using_index` [#](#SQL-ALTERTABLE-DESC-ADD-TABLE-CONSTRAINT-USING-INDEX)
+- `ADD table_constraint_using_index` [#](#SQL-ALTERTABLE-DESC-ADD-TABLE-CONSTRAINT-USING-INDEX)
 
   This form adds a new `PRIMARY KEY` or `UNIQUE` constraint to a table based on an existing unique index. All the columns of the index will be included in the constraint.
 
@@ -223,25 +223,25 @@ referential_action in a FOREIGN KEY/REFERENCES constraint is:
 
   Adding a constraint using an existing index can be helpful in situations where a new constraint needs to be added without blocking table updates for a long time. To do that, create the index using `CREATE INDEX CONCURRENTLY`, and then install it as an official constraint using this syntax. See the example below.
 
-* `ALTER CONSTRAINT` [#](#SQL-ALTERTABLE-DESC-ALTER-CONSTRAINT)
+- `ALTER CONSTRAINT` [#](#SQL-ALTERTABLE-DESC-ALTER-CONSTRAINT)
 
   This form alters the attributes of a constraint that was previously created. Currently only foreign key constraints may be altered.
 
-* `VALIDATE CONSTRAINT` [#](#SQL-ALTERTABLE-DESC-VALIDATE-CONSTRAINT)
+- `VALIDATE CONSTRAINT` [#](#SQL-ALTERTABLE-DESC-VALIDATE-CONSTRAINT)
 
   This form validates a foreign key or check constraint that was previously created as `NOT VALID`, by scanning the table to ensure there are no rows for which the constraint is not satisfied. Nothing happens if the constraint is already marked valid. (See [Notes](sql-altertable#SQL-ALTERTABLE-NOTES) below for an explanation of the usefulness of this command.)
 
   This command acquires a `SHARE UPDATE EXCLUSIVE` lock.
 
-* `DROP CONSTRAINT [ IF EXISTS ]` [#](#SQL-ALTERTABLE-DESC-DROP-CONSTRAINT)
+- `DROP CONSTRAINT [ IF EXISTS ]` [#](#SQL-ALTERTABLE-DESC-DROP-CONSTRAINT)
 
   This form drops the specified constraint on a table, along with any index underlying the constraint. If `IF EXISTS` is specified and the constraint does not exist, no error is thrown. In this case a notice is issued instead.
 
-* `DISABLE`/`ENABLE [ REPLICA | ALWAYS ] TRIGGER` [#](#SQL-ALTERTABLE-DESC-DISABLE-ENABLE-TRIGGER)
+- `DISABLE`/`ENABLE [ REPLICA | ALWAYS ] TRIGGER` [#](#SQL-ALTERTABLE-DESC-DISABLE-ENABLE-TRIGGER)
 
   These forms configure the firing of trigger(s) belonging to the table. A disabled trigger is still known to the system, but is not executed when its triggering event occurs. (For a deferred trigger, the enable status is checked when the event occurs, not when the trigger function is actually executed.) One can disable or enable a single trigger specified by name, or all triggers on the table, or only user triggers (this option excludes internally generated constraint triggers, such as those that are used to implement foreign key constraints or deferrable uniqueness and exclusion constraints). Disabling or enabling internally generated constraint triggers requires superuser privileges; it should be done with caution since of course the integrity of the constraint cannot be guaranteed if the triggers are not executed.
 
-  The trigger firing mechanism is also affected by the configuration variable [session\_replication\_role](runtime-config-client#GUC-SESSION-REPLICATION-ROLE). Simply enabled triggers (the default) will fire when the replication role is “origin” (the default) or “local”. Triggers configured as `ENABLE REPLICA` will only fire if the session is in “replica” mode, and triggers configured as `ENABLE ALWAYS` will fire regardless of the current replication role.
+  The trigger firing mechanism is also affected by the configuration variable [session_replication_role](runtime-config-client#GUC-SESSION-REPLICATION-ROLE). Simply enabled triggers (the default) will fire when the replication role is “origin” (the default) or “local”. Triggers configured as `ENABLE REPLICA` will only fire if the session is in “replica” mode, and triggers configured as `ENABLE ALWAYS` will fire regardless of the current replication role.
 
   The effect of this mechanism is that in the default configuration, triggers do not fire on replicas. This is useful because if a trigger is used on the origin to propagate data between tables, then the replication system will also replicate the propagated data; so the trigger should not fire a second time on the replica, because that would lead to duplication. However, if a trigger is used for another purpose such as creating external alerts, then it might be appropriate to set it to `ENABLE ALWAYS` so that it is also fired on replicas.
 
@@ -249,117 +249,117 @@ referential_action in a FOREIGN KEY/REFERENCES constraint is:
 
   This command acquires a `SHARE ROW EXCLUSIVE` lock.
 
-* `DISABLE`/`ENABLE [ REPLICA | ALWAYS ] RULE` [#](#SQL-ALTERTABLE-DESC-DISABLE-ENABLE-RULE)
+- `DISABLE`/`ENABLE [ REPLICA | ALWAYS ] RULE` [#](#SQL-ALTERTABLE-DESC-DISABLE-ENABLE-RULE)
 
   These forms configure the firing of rewrite rules belonging to the table. A disabled rule is still known to the system, but is not applied during query rewriting. The semantics are as for disabled/enabled triggers. This configuration is ignored for `ON SELECT` rules, which are always applied in order to keep views working even if the current session is in a non-default replication role.
 
-  The rule firing mechanism is also affected by the configuration variable [session\_replication\_role](runtime-config-client#GUC-SESSION-REPLICATION-ROLE), analogous to triggers as described above.
+  The rule firing mechanism is also affected by the configuration variable [session_replication_role](runtime-config-client#GUC-SESSION-REPLICATION-ROLE), analogous to triggers as described above.
 
-* `DISABLE`/`ENABLE ROW LEVEL SECURITY` [#](#SQL-ALTERTABLE-DESC-DISABLE-ENABLE-ROW-LEVEL-SECURITY)
+- `DISABLE`/`ENABLE ROW LEVEL SECURITY` [#](#SQL-ALTERTABLE-DESC-DISABLE-ENABLE-ROW-LEVEL-SECURITY)
 
-  These forms control the application of row security policies belonging to the table. If enabled and no policies exist for the table, then a default-deny policy is applied. Note that policies can exist for a table even if row-level security is disabled. In this case, the policies will *not* be applied and the policies will be ignored. See also [`CREATE POLICY`](sql-createpolicy).
+  These forms control the application of row security policies belonging to the table. If enabled and no policies exist for the table, then a default-deny policy is applied. Note that policies can exist for a table even if row-level security is disabled. In this case, the policies will _not_ be applied and the policies will be ignored. See also [`CREATE POLICY`](sql-createpolicy).
 
-* `NO FORCE`/`FORCE ROW LEVEL SECURITY` [#](#SQL-ALTERTABLE-DESC-FORCE-ROW-LEVEL-SECURITY)
+- `NO FORCE`/`FORCE ROW LEVEL SECURITY` [#](#SQL-ALTERTABLE-DESC-FORCE-ROW-LEVEL-SECURITY)
 
   These forms control the application of row security policies belonging to the table when the user is the table owner. If enabled, row-level security policies will be applied when the user is the table owner. If disabled (the default) then row-level security will not be applied when the user is the table owner. See also [`CREATE POLICY`](sql-createpolicy).
 
-* `CLUSTER ON` [#](#SQL-ALTERTABLE-DESC-CLUSTER-ON)
+- `CLUSTER ON` [#](#SQL-ALTERTABLE-DESC-CLUSTER-ON)
 
   This form selects the default index for future [`CLUSTER`](sql-cluster) operations. It does not actually re-cluster the table.
 
   Changing cluster options acquires a `SHARE UPDATE EXCLUSIVE` lock.
 
-* `SET WITHOUT CLUSTER` [#](#SQL-ALTERTABLE-DESC-SET-WITHOUT-CLUSTER)
+- `SET WITHOUT CLUSTER` [#](#SQL-ALTERTABLE-DESC-SET-WITHOUT-CLUSTER)
 
   This form removes the most recently used [`CLUSTER`](sql-cluster) index specification from the table. This affects future cluster operations that don't specify an index.
 
   Changing cluster options acquires a `SHARE UPDATE EXCLUSIVE` lock.
 
-* `SET WITHOUT OIDS` [#](#SQL-ALTERTABLE-DESC-SET-WITHOUT-OIDS)
+- `SET WITHOUT OIDS` [#](#SQL-ALTERTABLE-DESC-SET-WITHOUT-OIDS)
 
   Backward-compatible syntax for removing the `oid` system column. As `oid` system columns cannot be added anymore, this never has an effect.
 
-* `SET ACCESS METHOD` [#](#SQL-ALTERTABLE-DESC-SET-ACCESS-METHOD)
+- `SET ACCESS METHOD` [#](#SQL-ALTERTABLE-DESC-SET-ACCESS-METHOD)
 
   This form changes the access method of the table by rewriting it. See [Chapter 63](tableam) for more information.
 
-* `SET TABLESPACE` [#](#SQL-ALTERTABLE-DESC-SET-TABLESPACE)
+- `SET TABLESPACE` [#](#SQL-ALTERTABLE-DESC-SET-TABLESPACE)
 
   This form changes the table's tablespace to the specified tablespace and moves the data file(s) associated with the table to the new tablespace. Indexes on the table, if any, are not moved; but they can be moved separately with additional `SET TABLESPACE` commands. When applied to a partitioned table, nothing is moved, but any partitions created afterwards with `CREATE TABLE PARTITION OF` will use that tablespace, unless overridden by a `TABLESPACE` clause.
 
   All tables in the current database in a tablespace can be moved by using the `ALL IN TABLESPACE` form, which will lock all tables to be moved first and then move each one. This form also supports `OWNED BY`, which will only move tables owned by the roles specified. If the `NOWAIT` option is specified then the command will fail if it is unable to acquire all of the locks required immediately. Note that system catalogs are not moved by this command; use `ALTER DATABASE` or explicit `ALTER TABLE` invocations instead if desired. The `information_schema` relations are not considered part of the system catalogs and will be moved. See also [`CREATE TABLESPACE`](sql-createtablespace).
 
-* `SET { LOGGED | UNLOGGED }` [#](#SQL-ALTERTABLE-DESC-SET-LOGGED-UNLOGGED)
+- `SET { LOGGED | UNLOGGED }` [#](#SQL-ALTERTABLE-DESC-SET-LOGGED-UNLOGGED)
 
   This form changes the table from unlogged to logged or vice-versa (see [`UNLOGGED`](sql-createtable#SQL-CREATETABLE-UNLOGGED)). It cannot be applied to a temporary table.
 
   This also changes the persistence of any sequences linked to the table (for identity or serial columns). However, it is also possible to change the persistence of such sequences separately.
 
-* `SET ( storage_parameter [= value] [, ... ] )` [#](#SQL-ALTERTABLE-DESC-SET-STORAGE-PARAMETER)
+- `SET ( storage_parameter [= value] [, ... ] )` [#](#SQL-ALTERTABLE-DESC-SET-STORAGE-PARAMETER)
 
   This form changes one or more storage parameters for the table. See [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS) in the [`CREATE TABLE`](sql-createtable) documentation for details on the available parameters. Note that the table contents will not be modified immediately by this command; depending on the parameter you might need to rewrite the table to get the desired effects. That can be done with [`VACUUM FULL`](sql-vacuum), [`CLUSTER`](sql-cluster) or one of the forms of `ALTER TABLE` that forces a table rewrite. For planner related parameters, changes will take effect from the next time the table is locked so currently executing queries will not be affected.
 
   `SHARE UPDATE EXCLUSIVE` lock will be taken for fillfactor, toast and autovacuum storage parameters, as well as the planner parameter `parallel_workers`.
 
-* `RESET ( storage_parameter [, ... ] )` [#](#SQL-ALTERTABLE-DESC-RESET-STORAGE-PARAMETER)
+- `RESET ( storage_parameter [, ... ] )` [#](#SQL-ALTERTABLE-DESC-RESET-STORAGE-PARAMETER)
 
   This form resets one or more storage parameters to their defaults. As with `SET`, a table rewrite might be needed to update the table entirely.
 
-* `INHERIT parent_table` [#](#SQL-ALTERTABLE-DESC-INHERIT)
+- `INHERIT parent_table` [#](#SQL-ALTERTABLE-DESC-INHERIT)
 
   This form adds the target table as a new child of the specified parent table. Subsequently, queries against the parent will include records of the target table. To be added as a child, the target table must already contain all the same columns as the parent (it could have additional columns, too). The columns must have matching data types, and if they have `NOT NULL` constraints in the parent then they must also have `NOT NULL` constraints in the child.
 
   There must also be matching child-table constraints for all `CHECK` constraints of the parent, except those marked non-inheritable (that is, created with `ALTER TABLE ... ADD CONSTRAINT ... NO INHERIT`) in the parent, which are ignored; all child-table constraints matched must not be marked non-inheritable. Currently `UNIQUE`, `PRIMARY KEY`, and `FOREIGN KEY` constraints are not considered, but this might change in the future.
 
-* `NO INHERIT parent_table` [#](#SQL-ALTERTABLE-DESC-NO-INHERIT)
+- `NO INHERIT parent_table` [#](#SQL-ALTERTABLE-DESC-NO-INHERIT)
 
   This form removes the target table from the list of children of the specified parent table. Queries against the parent table will no longer include records drawn from the target table.
 
-* `OF type_name` [#](#SQL-ALTERTABLE-DESC-OF)
+- `OF type_name` [#](#SQL-ALTERTABLE-DESC-OF)
 
   This form links the table to a composite type as though `CREATE TABLE OF` had formed it. The table's list of column names and types must precisely match that of the composite type. The table must not inherit from any other table. These restrictions ensure that `CREATE TABLE OF` would permit an equivalent table definition.
 
-* `NOT OF` [#](#SQL-ALTERTABLE-DESC-NOT-OF)
+- `NOT OF` [#](#SQL-ALTERTABLE-DESC-NOT-OF)
 
   This form dissociates a typed table from its type.
 
-* `OWNER TO` [#](#SQL-ALTERTABLE-DESC-OWNER-TO)
+- `OWNER TO` [#](#SQL-ALTERTABLE-DESC-OWNER-TO)
 
   This form changes the owner of the table, sequence, view, materialized view, or foreign table to the specified user.
 
-* `REPLICA IDENTITY` [#](#SQL-ALTERTABLE-REPLICA-IDENTITY)
+- `REPLICA IDENTITY` [#](#SQL-ALTERTABLE-REPLICA-IDENTITY)
 
   This form changes the information which is written to the write-ahead log to identify rows which are updated or deleted. In most cases, the old value of each column is only logged if it differs from the new value; however, if the old value is stored externally, it is always logged regardless of whether it changed. This option has no effect except when logical replication is in use.
 
-  * `DEFAULT` [#](#SQL-ALTERTABLE-REPLICA-IDENTITY-DEFAULT)
+  - `DEFAULT` [#](#SQL-ALTERTABLE-REPLICA-IDENTITY-DEFAULT)
 
     Records the old values of the columns of the primary key, if any. This is the default for non-system tables.
 
-  * `USING INDEX index_name` [#](#SQL-ALTERTABLE-REPLICA-IDENTITY-USING-INDEX)
+  - `USING INDEX index_name` [#](#SQL-ALTERTABLE-REPLICA-IDENTITY-USING-INDEX)
 
     Records the old values of the columns covered by the named index, that must be unique, not partial, not deferrable, and include only columns marked `NOT NULL`. If this index is dropped, the behavior is the same as `NOTHING`.
 
-  * `FULL` [#](#SQL-ALTERTABLE-REPLICA-IDENTITY-FULL)
+  - `FULL` [#](#SQL-ALTERTABLE-REPLICA-IDENTITY-FULL)
 
     Records the old values of all columns in the row.
 
-  * `NOTHING` [#](#SQL-ALTERTABLE-REPLICA-IDENTITY-NOTHING)
+  - `NOTHING` [#](#SQL-ALTERTABLE-REPLICA-IDENTITY-NOTHING)
 
     Records no information about the old row. This is the default for system tables.
 
-* `RENAME` [#](#SQL-ALTERTABLE-DESC-RENAME)
+- `RENAME` [#](#SQL-ALTERTABLE-DESC-RENAME)
 
   The `RENAME` forms change the name of a table (or an index, sequence, view, materialized view, or foreign table), the name of an individual column in a table, or the name of a constraint of the table. When renaming a constraint that has an underlying index, the index is renamed as well. There is no effect on the stored data.
 
-* `SET SCHEMA` [#](#SQL-ALTERTABLE-DESC-SET-SCHEMA)
+- `SET SCHEMA` [#](#SQL-ALTERTABLE-DESC-SET-SCHEMA)
 
   This form moves the table into another schema. Associated indexes, constraints, and sequences owned by table columns are moved as well.
 
-* `ATTACH PARTITION partition_name { FOR VALUES partition_bound_spec | DEFAULT }` [#](#SQL-ALTERTABLE-ATTACH-PARTITION)
+- `ATTACH PARTITION partition_name { FOR VALUES partition_bound_spec | DEFAULT }` [#](#SQL-ALTERTABLE-ATTACH-PARTITION)
 
   This form attaches an existing table (which might itself be partitioned) as a partition of the target table. The table can be attached as a partition for specific values using `FOR VALUES` or as a default partition by using `DEFAULT`. For each index in the target table, a corresponding one will be created in the attached table; or, if an equivalent index already exists, it will be attached to the target table's index, as if `ALTER INDEX ATTACH PARTITION` had been executed. Note that if the existing table is a foreign table, it is currently not allowed to attach the table as a partition of the target table if there are `UNIQUE` indexes on the target table. (See also [CREATE FOREIGN TABLE](sql-createforeigntable).) For each user-defined row-level trigger that exists in the target table, a corresponding one is created in the attached table.
 
-  A partition using `FOR VALUES` uses same syntax for *`partition_bound_spec`* as [`CREATE TABLE`](sql-createtable). The partition bound specification must correspond to the partitioning strategy and partition key of the target table. The table to be attached must have all the same columns as the target table and no more; moreover, the column types must also match. Also, it must have all the `NOT NULL` and `CHECK` constraints of the target table. Currently `FOREIGN KEY` constraints are not considered. `UNIQUE` and `PRIMARY KEY` constraints from the parent table will be created in the partition, if they don't already exist. If any of the `CHECK` constraints of the table being attached are marked `NO INHERIT`, the command will fail; such constraints must be recreated without the `NO INHERIT` clause.
+  A partition using `FOR VALUES` uses same syntax for _`partition_bound_spec`_ as [`CREATE TABLE`](sql-createtable). The partition bound specification must correspond to the partitioning strategy and partition key of the target table. The table to be attached must have all the same columns as the target table and no more; moreover, the column types must also match. Also, it must have all the `NOT NULL` and `CHECK` constraints of the target table. Currently `FOREIGN KEY` constraints are not considered. `UNIQUE` and `PRIMARY KEY` constraints from the parent table will be created in the partition, if they don't already exist. If any of the `CHECK` constraints of the table being attached are marked `NO INHERIT`, the command will fail; such constraints must be recreated without the `NO INHERIT` clause.
 
   If the new partition is a regular table, a full table scan is performed to check that existing rows in the table do not violate the partition constraint. It is possible to avoid this scan by adding a valid `CHECK` constraint to the table that allows only rows satisfying the desired partition constraint before running this command. The `CHECK` constraint will be used to determine that the table need not be scanned to validate the partition constraint. This does not work, however, if any of the partition keys is an expression and the partition does not accept `NULL` values. If attaching a list partition that will not accept `NULL` values, also add a `NOT NULL` constraint to the partition key column, unless it's an expression.
 
@@ -371,7 +371,7 @@ referential_action in a FOREIGN KEY/REFERENCES constraint is:
 
   Further locks must also be held on all sub-partitions if the table being attached is itself a partitioned table. Likewise if the default partition is itself a partitioned table. The locking of the sub-partitions can be avoided by adding a `CHECK` constraint as described in [Section 5.11.2.2](ddl-partitioning#DDL-PARTITIONING-DECLARATIVE-MAINTENANCE).
 
-* `DETACH PARTITION partition_name [ CONCURRENTLY | FINALIZE ]` [#](#SQL-ALTERTABLE-DETACH-PARTITION)
+- `DETACH PARTITION partition_name [ CONCURRENTLY | FINALIZE ]` [#](#SQL-ALTERTABLE-DETACH-PARTITION)
 
   This form detaches the specified partition of the target table. The detached partition continues to exist as a standalone table, but no longer has any ties to the table from which it was detached. Any indexes that were attached to the target table's indexes are detached. Any triggers that were created as clones of those in the target table are removed. `SHARE` lock is obtained on any tables that reference this partitioned table in foreign key constraints.
 
@@ -387,95 +387,95 @@ You must own the table to use `ALTER TABLE`. To change the schema or tablespace 
 
 ## Parameters
 
-* `IF EXISTS` [#](#SQL-ALTERTABLE-PARMS-IF-EXISTS)
+- `IF EXISTS` [#](#SQL-ALTERTABLE-PARMS-IF-EXISTS)
 
   Do not throw an error if the table does not exist. A notice is issued in this case.
 
-* *`name`* [#](#SQL-ALTERTABLE-PARMS-NAME)
+- _`name`_ [#](#SQL-ALTERTABLE-PARMS-NAME)
 
   The name (optionally schema-qualified) of an existing table to alter. If `ONLY` is specified before the table name, only that table is altered. If `ONLY` is not specified, the table and all its descendant tables (if any) are altered. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included.
 
-* *`column_name`* [#](#SQL-ALTERTABLE-PARMS-COLUMN-NAME)
+- _`column_name`_ [#](#SQL-ALTERTABLE-PARMS-COLUMN-NAME)
 
   Name of a new or existing column.
 
-* *`new_column_name`* [#](#SQL-ALTERTABLE-PARMS-NEW-COLUMN-NAME)
+- _`new_column_name`_ [#](#SQL-ALTERTABLE-PARMS-NEW-COLUMN-NAME)
 
   New name for an existing column.
 
-* *`new_name`* [#](#SQL-ALTERTABLE-PARMS-NEW-NAME)
+- _`new_name`_ [#](#SQL-ALTERTABLE-PARMS-NEW-NAME)
 
   New name for the table.
 
-* *`data_type`* [#](#SQL-ALTERTABLE-PARMS-DATA-TYPE)
+- _`data_type`_ [#](#SQL-ALTERTABLE-PARMS-DATA-TYPE)
 
   Data type of the new column, or new data type for an existing column.
 
-* *`table_constraint`* [#](#SQL-ALTERTABLE-PARMS-TABLE-CONSTRAINT)
+- _`table_constraint`_ [#](#SQL-ALTERTABLE-PARMS-TABLE-CONSTRAINT)
 
   New table constraint for the table.
 
-* *`constraint_name`* [#](#SQL-ALTERTABLE-PARMS-CONSTRAINT-NAME)
+- _`constraint_name`_ [#](#SQL-ALTERTABLE-PARMS-CONSTRAINT-NAME)
 
   Name of a new or existing constraint.
 
-* `CASCADE` [#](#SQL-ALTERTABLE-PARMS-CASCADE)
+- `CASCADE` [#](#SQL-ALTERTABLE-PARMS-CASCADE)
 
   Automatically drop objects that depend on the dropped column or constraint (for example, views referencing the column), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend)).
 
-* `RESTRICT` [#](#SQL-ALTERTABLE-PARMS-RESTRICT)
+- `RESTRICT` [#](#SQL-ALTERTABLE-PARMS-RESTRICT)
 
   Refuse to drop the column or constraint if there are any dependent objects. This is the default behavior.
 
-* *`trigger_name`* [#](#SQL-ALTERTABLE-PARMS-TRIGGER-NAME)
+- _`trigger_name`_ [#](#SQL-ALTERTABLE-PARMS-TRIGGER-NAME)
 
   Name of a single trigger to disable or enable.
 
-* `ALL` [#](#SQL-ALTERTABLE-PARMS-ALL)
+- `ALL` [#](#SQL-ALTERTABLE-PARMS-ALL)
 
   Disable or enable all triggers belonging to the table. (This requires superuser privilege if any of the triggers are internally generated constraint triggers, such as those that are used to implement foreign key constraints or deferrable uniqueness and exclusion constraints.)
 
-* `USER` [#](#SQL-ALTERTABLE-PARMS-USER)
+- `USER` [#](#SQL-ALTERTABLE-PARMS-USER)
 
   Disable or enable all triggers belonging to the table except for internally generated constraint triggers, such as those that are used to implement foreign key constraints or deferrable uniqueness and exclusion constraints.
 
-* *`index_name`* [#](#SQL-ALTERTABLE-PARMS-INDEX-NAME)
+- _`index_name`_ [#](#SQL-ALTERTABLE-PARMS-INDEX-NAME)
 
   The name of an existing index.
 
-* *`storage_parameter`* [#](#SQL-ALTERTABLE-PARMS-STORAGE-PARAMETER)
+- _`storage_parameter`_ [#](#SQL-ALTERTABLE-PARMS-STORAGE-PARAMETER)
 
   The name of a table storage parameter.
 
-* *`value`* [#](#SQL-ALTERTABLE-PARMS-VALUE)
+- _`value`_ [#](#SQL-ALTERTABLE-PARMS-VALUE)
 
   The new value for a table storage parameter. This might be a number or a word depending on the parameter.
 
-* *`parent_table`* [#](#SQL-ALTERTABLE-PARMS-PARENT-TABLE)
+- _`parent_table`_ [#](#SQL-ALTERTABLE-PARMS-PARENT-TABLE)
 
   A parent table to associate or de-associate with this table.
 
-* *`new_owner`* [#](#SQL-ALTERTABLE-PARMS-NEW-OWNER)
+- _`new_owner`_ [#](#SQL-ALTERTABLE-PARMS-NEW-OWNER)
 
   The user name of the new owner of the table.
 
-* *`new_access_method`* [#](#SQL-ALTERTABLE-PARMS-NEW-ACCESS-METHOD)
+- _`new_access_method`_ [#](#SQL-ALTERTABLE-PARMS-NEW-ACCESS-METHOD)
 
   The name of the access method to which the table will be converted.
 
-* *`new_tablespace`* [#](#SQL-ALTERTABLE-PARMS-NEW-TABLESPACE)
+- _`new_tablespace`_ [#](#SQL-ALTERTABLE-PARMS-NEW-TABLESPACE)
 
   The name of the tablespace to which the table will be moved.
 
-* *`new_schema`* [#](#SQL-ALTERTABLE-PARMS-NEW-SCHEMA)
+- _`new_schema`_ [#](#SQL-ALTERTABLE-PARMS-NEW-SCHEMA)
 
   The name of the schema to which the table will be moved.
 
-* *`partition_name`* [#](#SQL-ALTERTABLE-PARMS-PARTITION-NAME)
+- _`partition_name`_ [#](#SQL-ALTERTABLE-PARMS-PARTITION-NAME)
 
   The name of the table to attach as a new partition or to detach from this table.
 
-* *`partition_bound_spec`* [#](#SQL-ALTERTABLE-PARMS-PARTITION-BOUND-SPEC)
+- _`partition_bound_spec`_ [#](#SQL-ALTERTABLE-PARMS-PARTITION-BOUND-SPEC)
 
   The partition bound specification for a new partition. Refer to [CREATE TABLE](sql-createtable) for more details on the syntax of the same.
 
