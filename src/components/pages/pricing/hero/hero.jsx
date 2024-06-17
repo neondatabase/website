@@ -23,7 +23,7 @@ const items = [
     description: 'Always-available free tier, no credit card required.',
     features: [
       { title: '0.5 GiB storage' },
-      { title: '24/7 for your main branch', info: 'Plus 20h of usage for additional branches' },
+      { title: '24/7 for your main database', info: 'Plus 20h of usage for additional branches' },
       { title: 'Community support' },
       { title: 'Fixed capacity at 0.25 vCPU' },
       { title: 'Point-in-time restore (24 h)' },
