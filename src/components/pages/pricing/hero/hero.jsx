@@ -20,7 +20,7 @@ const items = [
   {
     type: 'Free Tier',
     price: '$0 <span>/month</span>',
-    description: 'Run a free DB 24/7, no credit card required.',
+    description: 'Always-available free tier, no credit card required.',
     features: [
       { title: '0.5 GiB storage' },
       { title: '24/7 for your main branch', info: 'Plus 20h of usage for additional branches' },
