@@ -132,7 +132,7 @@ Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension for s
         uses: neondatabase/create-branch-action@v5
         with:
           project_id: rapid-haze-373089
-          # optional (defaults to your primary branch)
+          # optional (defaults to your default branch)
           parent: dev
           # optional (defaults to neondb)
           database: my-database

@@ -22,9 +22,9 @@ Learn more about projects and how to manage them in these sections:
 
 When you add a new project, Neon creates the following resources by default:
 
-- A primary branch called `main`. You can create child branches from the primary branch or from any previously created branch. For more information, see [Manage branches](/docs/manage/branches).
+- A default branch called `main`. You can create child branches from the default branch or from any previously created branch. For more information, see [Manage branches](/docs/manage/branches).
 - A single read-write compute endpoint. This is the compute instance associated with the branch. For more information, see [Manage computes](/docs/manage/endpoints).
-- A ready-to-use database, called `neondb`, which lives in the project's primary branch.
+- A ready-to-use database, called `neondb`, which lives in the project's default branch.
 - A default Postgres role that takes its name from your Neon account (the email, Google, GitHub, or partner account that you registered with).
 
 ## About the Settings page
@@ -194,7 +194,7 @@ After enabling logical replication, the next steps involve creating publications
 
 Available to [Scale](/docs/introduction/plans#scale) plan users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default.
 
-Optionally, you can allow unrestricted access to your project's [non-primary branches](/docs/manage/branches#non-primary-branch). For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing unrestricted access to your development branches.
+Optionally, you can allow unrestricted access to your project's [non-default branches](/docs/manage/branches#non-default-branch). For instance, you might want to restrict access to the default branch to a handful of trusted IPs while allowing unrestricted access to your development branches.
 
 By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
 
@@ -213,7 +213,7 @@ To configure an allowlist:
 3. Select **IP Allow**.
    ![IP Allow configuration](/docs/manage/ip_allow.png)
 4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
-5. Optionally, select **Allow unrestricted access to non-primary branches** to allow full access to your [no primary branches](/docs/manage/branches#non-primary-branch).
+5. Optionally, select **Allow unrestricted access to non-default branches** to allow full access to your [no default branches](/docs/manage/branches#non-default-branch).
 6. Click **Save changes**.
 
 </TabItem>
@@ -225,14 +225,14 @@ The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow 
 ```bash
 neonctl ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
-│ Id                  │ Name                │ IP Addresses │ Primary Branch Only │
+│ Id                  │ Name                │ IP Addresses │ default branch Only │
 ├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
 │ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
 │                     │                     │ 203.0.113.1  │                     │
 └─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
 ```
 
-To apply an IP allowlist to the primary branch only, use the you can `--primary-only` option:
+To apply an IP allowlist to the default branch only, use the you can `--primary-only` option:
 
 ```bash
 neonctl ip-allow add 203.0.113.1 --primary-only
@@ -248,7 +248,7 @@ neonctl ip-allow add 203.0.113.1 --primary-only false
 
 <TabItem>
 
-The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"primary_branch_only` option to `true` to apply the allowlist to your primary branch only, or `false` to apply it to all branches in your Neon project.
+The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"primary_branch_only` option to `true` to apply the allowlist to your default branch only, or `false` to apply it to all branches in your Neon project.
 
 ```bash
 curl -X PATCH \
@@ -332,7 +332,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 2. On the Neon **Dashboard**, select **Project settings**.
 3. Select **IP Allow**.
 4. Clear the **Allowed IP addresses and ranges** field.
-5. If applicable, clear the **Apply to primary branch only** checkbox.
+5. If applicable, clear the **Apply to default branch only** checkbox.
 6. Click **Apply changes**.
 
 </TabItem>
@@ -411,7 +411,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 }' | jq
 ```
 
-The response includes information about the roles, the ready-to-use database (`neondb`), the primary branch (`main`), and the read-write compute endpoint that is created with the project.
+The response includes information about the roles, the ready-to-use database (`neondb`), the default branch (`main`), and the read-write compute endpoint that is created with the project.
 
 <details>
 <summary>Response body</summary>

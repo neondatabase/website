@@ -104,7 +104,7 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
 
    On the **Branches** page, click **Create Branch**, making sure of the following:
 
-   - Select `main` as the primary branch.
+   - Select `main` as the default branch.
    - Name the branch `dev/jordan`.
 
 1. Verify the schema on your new branch

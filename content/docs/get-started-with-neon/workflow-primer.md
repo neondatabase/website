@@ -25,7 +25,7 @@ postgres://database_name_owner:AbC123dEf@ep-shiny-cell-a5y2zuu0.us-east-2.aws.ne
 postgres://database_name_owner:AbC123dEf@ep-hidden-hall-a5x58cuv.us-east-2.aws.neon.tech/dbname
 ```
 
-You can create all of your branches from the primary branch, or set up a dedicated branch that you use as a base. The first approach is simpler, while the second provides greater data isolation.
+You can create all of your branches from the default branch, or set up a dedicated branch that you use as a base. The first approach is simpler, while the second provides greater data isolation.
 
 ![database workflow A B](/docs/get-started-with-neon/database_workflow_AB.jpg)
 

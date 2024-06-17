@@ -75,11 +75,11 @@ Recover lost data or track down issues by restoring a branch to its history, or 
 
 ## Branching guides
 
-Learn how to promote a branch to become your primary branch.
+Learn how to promote a branch to become your default branch.
 
 <DetailIconCards>
 
-<a href="/docs/guides/branch-promote" description="Promote a branch to the primary branch of your Neon project using the Neon API" icon="trend-up">Promote a branch</a>
+<a href="/docs/guides/branch-promote" description="Promote a branch to the default branch of your Neon project using the Neon API" icon="trend-up">Promote a branch</a>
 
 </DetailIconCards>
 

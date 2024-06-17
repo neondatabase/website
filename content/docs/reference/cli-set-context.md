@@ -114,7 +114,7 @@ These two `branches list` commands demonstrate the use of different contexts in 
 
 ### Setting context when creating a new project
 
-Let's say you want to create a new project called `MyLatest`. You can automatically set the project ID and primary branch ID context at the same time as you create the project.
+Let's say you want to create a new project called `MyLatest`. You can automatically set the project ID and default branch ID context at the same time as you create the project.
 
 ```bash
 neonctl projects create --name MyLatest --set-context

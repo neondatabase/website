@@ -48,7 +48,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 | `--branch`       | Branch ID or name                                                                             | string |                                                     |
 
-If a branch ID or name is not provided, the command lists roles for the primary branch of the project.
+If a branch ID or name is not provided, the command lists roles for the default branch of the project.
 
 #### Examples
 
@@ -96,7 +96,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--branch`       | Branch ID or name                                                                             | string |                                                     |
 | `--name`         | The role name. Cannot exceed 63 bytes in length.                                              | string |                       &check;                       |
 
-If a branch ID or name is not provided, the command creates a role in the primary branch of the project.
+If a branch ID or name is not provided, the command creates a role in the default branch of the project.
 
 #### Example
 
@@ -129,7 +129,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 | `--branch`       | Branch ID or name                                                                             | string |                                                     |
 
-If a branch ID or name is not provided, the command assumes the role resides in the primary branch of the project.
+If a branch ID or name is not provided, the command assumes the role resides in the default branch of the project.
 
 #### Example
 

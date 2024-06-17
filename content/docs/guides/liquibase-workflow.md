@@ -418,7 +418,7 @@ When you are satisfied with the changes that will be applied, save your changelo
 
 ### Apply the changeset to your source database
 
-Apply the new changesets to the source database on your primary branch:
+Apply the new changesets to the source database on your default branch:
 
 ```bash shouldWrap
 liquibase --url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog update

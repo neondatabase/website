@@ -218,7 +218,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file`    | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string  |          |
 | `--name`            | The project name. The value cannot be empty.                                                  | string  | &check;  |
 | `--ip-allow`        | A list of IP addresses that are allowed to connect to the endpoint                            | string  |          |
-| `--ip-primary-only` | If true, the list will be applied only to the primary branch. The deafault value is `false`.  | boolean |          |
+| `--ip-primary-only` | If true, the list will be applied only to the default branch. The deafault value is `false`.  | boolean |          |
 
 #### Examples
 
@@ -244,7 +244,7 @@ neonctl projects update withered-dream-91802149 --ip-allow 192.0.2.1 192.0.2.2
 └─────────────────────────┴───────────┴───────────────┴──────────────────────┘
 ```
 
-Apply the IP allowlist to the primary branch only:
+Apply the IP allowlist to the default branch only:
 
 ```bash
 neonctl projects update withered-dream-91802149 --ip-only-primary

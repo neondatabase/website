@@ -50,11 +50,11 @@ connection_uris
 The Neon CLI provides a `neonctl connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
 </Admonition>
 
-## Create a branch from a non-primary parent
+## Create a branch from a non-default parent
 
-Using the option `--parent`, you can specify any non-primary branch that you want to use as the parent for your new branch, depending on the needs of your development workflow.
+Using the option `--parent`, you can specify any non-default branch that you want to use as the parent for your new branch, depending on the needs of your development workflow.
 
-In this example, we're creating a branch for a hot fix called `alex/hotfix` using the long-lived development branch `dev/alex` as the parent:
+In this example, we're creating a branch for a hotfix called `alex/hotfix` using the long-lived development branch `dev/alex` as the parent:
 
 ```bash shouldWrap
 neon branches create --name alex/hotfix --parent dev/alex --project-id crimson-voice-12345678
