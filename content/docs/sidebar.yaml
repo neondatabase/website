@@ -168,7 +168,7 @@
         - title: Databases
           slug: manage/databases
         - title: Tables
-          slug: manage/tables
+          slug: guides/tables
         - title: Integrations
           slug: manage/integrations
     - title: Monitoring
