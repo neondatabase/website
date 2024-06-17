@@ -14,7 +14,7 @@ Edit individual entries directly within the table interface. Click on a cell to 
 
 ## Add records
 
-Add new rows to your tables using the **Add record** button.
+Add new records to your tables using the **Add record** button.
 
 ![add record to table](/docs/manage/add_record_drizzle.png)
 
@@ -41,13 +41,13 @@ Each new filter is added as a **View** under your list of Tables.
 
 ## Delete records
 
-Use the checkboxes to mark any unwanted rows for deletion, or use the select-all checkbox for bulk deletion. Click `Delete x records` to complete the process.
+Use the checkboxes to mark any unwanted records for deletion, or use the select-all checkbox for bulk deletion. Click `Delete x records` to complete the process.
 
 ![delete record from table](/docs/manage/delete_record_drizzle.png)
 
 ## Export data
 
-You can also use the checkboxes to mark rows for export. Select the rows you want to include in your export, then choose `Export selected...` from the export dropdown.
+You can also use the checkboxes to mark records for export. Select the records you want to include in your export, then choose `Export selected...` from the export dropdown.
 
 Or just choose `Export all..` to download the entire contents of the table.
 
