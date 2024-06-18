@@ -110,8 +110,8 @@ export default {
         },
         {
           icon: partnersIcon,
-          text: 'Add Neon to your platform',
-          description: 'Become a partner',
+          text: 'Partners',
+          description: 'Add Neon to your platform',
           to: LINKS.partners,
         },
         {
