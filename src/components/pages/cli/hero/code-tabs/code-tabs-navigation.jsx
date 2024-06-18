@@ -64,7 +64,7 @@ const CodeTabsNavigation = ({ codeSnippets, highlightedCodeSnippets }) => {
           );
         })}
       </div>
-      <div className="h-[138px]">
+      <div className="h-[72px]">
         <LazyMotion features={domAnimation}>
           <AnimatePresence initial={false} mode="wait">
             {highlightedCodeSnippets.map(
@@ -77,7 +77,7 @@ const CodeTabsNavigation = ({ codeSnippets, highlightedCodeSnippets }) => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <CodeBlockWrapper className="highlighted-code h-[138px] [&_[data-line]]:text-[15px]">
+                    <CodeBlockWrapper className="highlighted-code h-[72px] [&_[data-line]]:text-[15px]">
                       {parse(code)}
                     </CodeBlockWrapper>
                   </m.div>
