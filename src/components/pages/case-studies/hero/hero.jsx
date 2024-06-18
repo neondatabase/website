@@ -7,72 +7,106 @@ import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
-const CardItem = ({
+function getLinkProps({ externalUrl, isInternal, post, isFeatured }) {
+  const linkUrl = isInternal && post?.slug ? `${LINKS.blog}/${post.slug}` : externalUrl;
+
+  if (!linkUrl) return {};
+
+  return {
+    to: linkUrl,
+    as: !isFeatured ? Link : undefined,
+    target: isInternal ? undefined : '_blank',
+    rel: isInternal ? undefined : 'noopener noreferrer',
+  };
+}
+
+const FeaturedCard = ({
   title,
-  isFeatured,
-  logo,
   image,
-  description,
   quote,
   author,
   externalUrl = '',
   isInternal,
   post = null,
+}) => {
+  const linkProps = getLinkProps({ externalUrl, isInternal, post, isFeatured: true });
+
+  return (
+    <div className="flex items-center gap-10 lg:gap-5 md:flex-col md:gap-6 sm:gap-3.5">
+      <Link
+        className="w-1/2 max-w-[496px] shrink-0 overflow-hidden rounded-xl border border-transparent transition-colors duration-200 hover:border-green-45 xl:rounded-[10px] lg:rounded-lg md:w-full md:max-w-full"
+        {...linkProps}
+      >
+        <Image
+          className="h-auto w-full"
+          src={image.mediaItemUrl}
+          alt={title}
+          width={image.mediaDetails.width / 2}
+          height={image.mediaDetails.height / 2}
+          priority
+        />
+      </Link>
+      <figure className="w-1/2 max-w-[598px] md:w-full md:max-w-full">
+        <blockquote>
+          <p
+            className="text-[26px] font-light leading-snug tracking-tighter text-white xl:text-2xl lg:text-lg"
+            dangerouslySetInnerHTML={{ __html: quote }}
+          />
+        </blockquote>
+        {author && author.name && (
+          <figcaption className="mt-3 font-light leading-tight -tracking-extra-tight lg:text-[13px]">
+            {author.name}{' '}
+            <cite>
+              {author?.post && <span className="text-gray-new-70">– {author?.post}</span>}
+            </cite>
+          </figcaption>
+        )}
+        {!!linkProps && (
+          <Link
+            className="mt-9 inline-flex items-baseline text-[15px] leading-none tracking-[-0.05em] text-green-45 transition-colors duration-200 hover:text-[#00FFAA] lg:mt-7 lg:text-sm"
+            {...linkProps}
+          >
+            Read case study
+            <ArrowIcon className="ml-1" />
+          </Link>
+        )}
+      </figure>
+    </div>
+  );
+};
+
+FeaturedCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  image: PropTypes.shape({
+    mediaItemUrl: PropTypes.string.isRequired,
+    mediaDetails: PropTypes.shape({
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+    }).isRequired,
+  }),
+  quote: PropTypes.string,
+  author: PropTypes.shape({
+    name: PropTypes.string,
+    post: PropTypes.string,
+  }),
+  isInternal: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf([null])]),
+  externalUrl: PropTypes.string,
+  post: PropTypes.shape({
+    slug: PropTypes.string.isRequired,
+  }),
+  index: PropTypes.number,
+};
+
+const CardItem = ({
+  title,
+  logo,
+  description,
+  externalUrl = '',
+  isInternal,
+  post = null,
   index,
 }) => {
-  const linkUrl = isInternal && post?.slug ? `${LINKS.blog}/${post.slug}` : externalUrl;
-  const linkProps = linkUrl
-    ? {
-        to: linkUrl,
-        as: !isFeatured ? Link : undefined,
-        target: isInternal ? undefined : '_blank',
-        rel: isInternal ? undefined : 'noopener noreferrer',
-      }
-    : {};
-
-  if (isFeatured)
-    return (
-      <div className="flex items-center gap-10 lg:gap-5 md:flex-col md:gap-6 sm:gap-3.5">
-        <Link
-          className="w-1/2 max-w-[496px] shrink-0 overflow-hidden rounded-xl border border-transparent transition-colors duration-200 hover:border-green-45 xl:rounded-[10px] lg:rounded-lg md:w-full md:max-w-full"
-          {...linkProps}
-        >
-          <Image
-            className="h-auto w-full"
-            src={image.mediaItemUrl}
-            alt={title}
-            width="992"
-            height="520"
-            priority
-          />
-        </Link>
-        <figure className="w-1/2 max-w-[598px] md:w-full md:max-w-full">
-          <blockquote>
-            <p
-              className="text-[26px] font-light leading-snug tracking-tighter text-white xl:text-2xl lg:text-lg"
-              dangerouslySetInnerHTML={{ __html: quote }}
-            />
-          </blockquote>
-          {author && author.name && (
-            <figcaption className="mt-3 font-light leading-tight -tracking-extra-tight lg:text-[13px]">
-              {author.name}{' '}
-              <cite>
-                {author?.post && <span className="text-gray-new-70">– {author?.post}</span>}
-              </cite>
-            </figcaption>
-          )}
-          {!!linkProps && (
-            <Link
-              className="mt-9 inline-flex items-baseline text-[15px] leading-none tracking-[-0.05em] text-green-45 transition-colors duration-200 hover:text-[#00FFAA] lg:mt-7 lg:text-sm"
-              {...linkProps}
-            >
-              Read case study
-              <ArrowIcon className="ml-1" />
-            </Link>
-          )}
-        </figure>
-      </div>
-    );
+  const linkProps = getLinkProps({ externalUrl, isInternal, post });
 
   return (
     <li>
@@ -103,7 +137,6 @@ const CardItem = ({
 
 CardItem.propTypes = {
   title: PropTypes.string.isRequired,
-  isFeatured: PropTypes.bool.isRequired,
   logo: PropTypes.shape({
     mediaItemUrl: PropTypes.string.isRequired,
     mediaDetails: PropTypes.shape({
@@ -111,19 +144,7 @@ CardItem.propTypes = {
       height: PropTypes.number.isRequired,
     }).isRequired,
   }),
-  image: PropTypes.shape({
-    mediaItemUrl: PropTypes.string.isRequired,
-    mediaDetails: PropTypes.shape({
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-    }).isRequired,
-  }),
   description: PropTypes.string,
-  quote: PropTypes.string,
-  author: PropTypes.shape({
-    name: PropTypes.string,
-    post: PropTypes.string,
-  }),
   isInternal: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf([null])]),
   externalUrl: PropTypes.string,
   post: PropTypes.shape({
@@ -150,7 +171,7 @@ const Hero = ({ items }) => {
           {!!featuredItem && (
             <>
               <div className="mb-16 lg:mb-14">
-                <CardItem {...featuredItem.caseStudyPost} title={featuredItem.title} />
+                <FeaturedCard {...featuredItem.caseStudyPost} title={featuredItem.title} />
               </div>
               <h2 className="mb-7 text-2xl leading-none tracking-tight lg:text-xl md:text-lg">
                 More customer stories
