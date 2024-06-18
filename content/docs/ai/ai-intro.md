@@ -22,6 +22,7 @@ The _Neon AI Starter Kit_ includes:
   - Semantic search starter app
   - Hybrid search starter app
   - Image search starter app
+  - Chat with PDF starter app
 - The Neon AI scaling guide
 - The Neon AI go-live checklist
 
