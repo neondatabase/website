@@ -92,15 +92,21 @@ Learn how to integrate Neon Postgres with various LLMs and AI platforms.
 
 </DetailIconCards>
 
-## Example apps
+## Examples
 
-Check out these AI applications built with Neon Postgres.
+Check out these AI applications pre-built with Neon Postgres.
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/yc-idea-matcher" description="Build an AI-powered semantic search application" icon="github">Semantic search app</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chatbot-nextjs" description="Build an AI-powered chatbot with pgvector" icon="github">AI Chatbot starter</a>
 
-<a href="https://github.com/neondatabase/ask-neon" description="Build an AI-powered chatbot with pgvector" icon="github">Chatbot app</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/rag-nextjs" description="Build an RAG chatbot with pgvector" icon="github">RAG Chatbot starter</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/semantic-search-nextjs" description="Build an AI-powered semantic search application" icon="github">Semantic search starter</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chat-with-pdf-nextjs" description="Build a Chat with PDF application" icon="github">Chat with PDF starter</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/reverse-image-search-nextjs" description="Build an AI-powered reverse image search application" icon="github">Reverse Image Search starter</a>
 
 <a href="https://vercel.com/templates/next.js/postgres-pgvector" description="Enable vector similarity search with Vercel Postgres" icon="github">Vercel Postgres pgvector Starter</a>
 
