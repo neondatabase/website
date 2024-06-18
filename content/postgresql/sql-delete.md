@@ -28,41 +28,41 @@ There are two ways to delete rows in a table using information contained in othe
 
 The optional `RETURNING` clause causes `DELETE` to compute and return value(s) based on each row actually deleted. Any expression using the table's columns, and/or columns of other tables mentioned in `USING`, can be computed. The syntax of the `RETURNING` list is identical to that of the output list of `SELECT`.
 
-You must have the `DELETE` privilege on the table to delete from it, as well as the `SELECT` privilege for any table in the `USING` clause or whose values are read in the *`condition`*.
+You must have the `DELETE` privilege on the table to delete from it, as well as the `SELECT` privilege for any table in the `USING` clause or whose values are read in the _`condition`_.
 
 [#id](#id-1.9.3.100.6)
 
 ## Parameters
 
-* *`with_query`*
+- _`with_query`_
 
   The `WITH` clause allows you to specify one or more subqueries that can be referenced by name in the `DELETE` query. See [Section 7.8](queries-with) and [SELECT](sql-select) for details.
 
-* *`table_name`*
+- _`table_name`_
 
   The name (optionally schema-qualified) of the table to delete rows from. If `ONLY` is specified before the table name, matching rows are deleted from the named table only. If `ONLY` is not specified, matching rows are also deleted from any tables inheriting from the named table. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included.
 
-* *`alias`*
+- _`alias`_
 
   A substitute name for the target table. When an alias is provided, it completely hides the actual name of the table. For example, given `DELETE FROM foo AS f`, the remainder of the `DELETE` statement must refer to this table as `f` not `foo`.
 
-* *`from_item`*
+- _`from_item`_
 
-  A table expression allowing columns from other tables to appear in the `WHERE` condition. This uses the same syntax as the [`FROM`](sql-select#SQL-FROM) clause of a `SELECT` statement; for example, an alias for the table name can be specified. Do not repeat the target table as a *`from_item`* unless you wish to set up a self-join (in which case it must appear with an alias in the *`from_item`*).
+  A table expression allowing columns from other tables to appear in the `WHERE` condition. This uses the same syntax as the [`FROM`](sql-select#SQL-FROM) clause of a `SELECT` statement; for example, an alias for the table name can be specified. Do not repeat the target table as a _`from_item`_ unless you wish to set up a self-join (in which case it must appear with an alias in the _`from_item`_).
 
-* *`condition`*
+- _`condition`_
 
   An expression that returns a value of type `boolean`. Only rows for which this expression returns `true` will be deleted.
 
-* *`cursor_name`*
+- _`cursor_name`_
 
   The name of the cursor to use in a `WHERE CURRENT OF` condition. The row to be deleted is the one most recently fetched from this cursor. The cursor must be a non-grouping query on the `DELETE`'s target table. Note that `WHERE CURRENT OF` cannot be specified together with a Boolean condition. See [DECLARE](sql-declare) for more information about using cursors with `WHERE CURRENT OF`.
 
-* *`output_expression`*
+- _`output_expression`_
 
-  An expression to be computed and returned by the `DELETE` command after each row is deleted. The expression can use any column names of the table named by *`table_name`* or table(s) listed in `USING`. Write `*` to return all columns.
+  An expression to be computed and returned by the `DELETE` command after each row is deleted. The expression can use any column names of the table named by _`table_name`_ or table(s) listed in `USING`. Write `*` to return all columns.
 
-* *`output_name`*
+- _`output_name`_
 
   A name to use for a returned column.
 
@@ -76,7 +76,7 @@ On successful completion, a `DELETE` command returns a command tag of the form
 DELETE count
 ```
 
-The *`count`* is the number of rows deleted. Note that the number may be less than the number of rows that matched the *`condition`* when deletes were suppressed by a `BEFORE DELETE` trigger. If *`count`* is 0, no rows were deleted by the query (this is not considered an error).
+The _`count`_ is the number of rows deleted. Note that the number may be less than the number of rows that matched the _`condition`_ when deletes were suppressed by a `BEFORE DELETE` trigger. If _`count`_ is 0, no rows were deleted by the query (this is not considered an error).
 
 If the `DELETE` command contains a `RETURNING` clause, the result will be similar to that of a `SELECT` statement containing the columns and values defined in the `RETURNING` list, computed over the row(s) deleted by the command.
 

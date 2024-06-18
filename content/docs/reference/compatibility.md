@@ -4,14 +4,14 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2024-02-16T12:00:44.905Z'
+updatedOn: '2024-06-14T07:55:54.424Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
 
 ## Postgres versions
 
-Neon supports Postgres 14, 15, and 16. You can select the Postgres version you want to use when creating a Neon project. Postgres 16 is selected by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.  
+Neon supports Postgres 14, 15, and 16. You can select the Postgres version you want to use when creating a Neon project. Postgres 16 is selected by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
 
 ## Postgres extensions
 
@@ -31,57 +31,57 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 
 ## Postgres parameter settings
 
-The following table shows parameter settings that are set explicitly for your Neon Postgres instance. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size. 
+The following table shows parameter settings that are set explicitly for your Neon Postgres instance. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size.
 
 <Admonition type="note">
 Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a session context, but if you are a paid plan user and require a different setting, you can contact [Neon Support](/docs/introduction/support) to see if a different setting can be supported.
-</Admonition> 
+</Admonition>
 
-| Parameter                          | Value    | Note                                                            |
-| ---------------------------------- | -------- | --------------------------------------------------------------- |
-| `client_connection_check_interval` | 60000    |                                                                 |
-| `dynamic_shared_memory_type`       | mmap     |                                                                 |
-| `fsync`                            | off      | Neon syncs data to the Neon Storage Engine to store your data safely and reliably |
-| `hot_standby`                      | off      |                                                                 |
-| `idle_in_transaction_session_timeout` | 300000 |                                                                 |
-| `listen_addresses`                 | '*'      |                                                                 |
-| `log_connections`                  | on       |                                                                 |
-| `log_disconnections`               | on       |                                                                 |
-| `log_temp_files`                   | 1048576  |                                                                 |
-| `maintenance_work_mem`             | 65536    | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).
-| `max_connections`                  | 112      | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size). |
-| `max_parallel_workers`             | 8        |                                                                 |
-| `max_replication_flush_lag`        | 10240    |                                                                 |
-| `max_replication_slots`            | 10       |                                                                 |
-| `max_replication_write_lag`        | 500      |                                                                 |
-| `max_wal_senders`                  | 10       |                                                                 |
-| `max_wal_size`                     | 1024     |                                                                 |
-| `max_worker_processes`             | 26       | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).
-| `password_encryption`              | scram-sha-256 |                                                           |
-| `restart_after_crash`              | off      |                                                                 |
-| `shared_buffers`                   | 128MB    | Neon uses a [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache) in addition to `shared_buffers` to extend cache memory to 80% of your compute's RAM.|
-| `superuser_reserved_connections`   | 4        |                                                                 |
-| `synchronous_standby_names`        | 'walproposer' |                                                           |
-| `wal_level`                        | replica  | Support for `wal_level=logical` is coming soon. See [logical replication](/docs/introduction/logical-replication).|
-| `wal_log_hints`                    | off      |                                                                 |
-| `wal_sender_timeout`               | 10000    |                                                                 |
+| Parameter                             | Value         | Note                                                                                                                                                                          |
+| ------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client_connection_check_interval`    | 60000         |                                                                                                                                                                               |
+| `dynamic_shared_memory_type`          | mmap          |                                                                                                                                                                               |
+| `fsync`                               | off           | Neon syncs data to the Neon Storage Engine to store your data safely and reliably                                                                                             |
+| `hot_standby`                         | off           |                                                                                                                                                                               |
+| `idle_in_transaction_session_timeout` | 300000        |                                                                                                                                                                               |
+| `listen_addresses`                    | '\*'          |                                                                                                                                                                               |
+| `log_connections`                     | on            |                                                                                                                                                                               |
+| `log_disconnections`                  | on            |                                                                                                                                                                               |
+| `log_temp_files`                      | 1048576       |                                                                                                                                                                               |
+| `maintenance_work_mem`                | 65536         | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                              |
+| `max_connections`                     | 112           | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                              |
+| `max_parallel_workers`                | 8             |                                                                                                                                                                               |
+| `max_replication_flush_lag`           | 10240         |                                                                                                                                                                               |
+| `max_replication_slots`               | 10            |                                                                                                                                                                               |
+| `max_replication_write_lag`           | 500           |                                                                                                                                                                               |
+| `max_wal_senders`                     | 10            |                                                                                                                                                                               |
+| `max_wal_size`                        | 1024          |                                                                                                                                                                               |
+| `max_worker_processes`                | 26            | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                              |
+| `password_encryption`                 | scram-sha-256 |                                                                                                                                                                               |
+| `restart_after_crash`                 | off           |                                                                                                                                                                               |
+| `shared_buffers`                      | 128MB         | Neon uses a [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache) in addition to `shared_buffers` to extend cache memory to 80% of your compute's RAM. |
+| `superuser_reserved_connections`      | 4             |                                                                                                                                                                               |
+| `synchronous_standby_names`           | 'walproposer' |                                                                                                                                                                               |
+| `wal_level`                           | replica       | Support for `wal_level=logical` is coming soon. See [logical replication](/docs/introduction/logical-replication).                                                            |
+| `wal_log_hints`                       | off           |                                                                                                                                                                               |
+| `wal_sender_timeout`                  | 10000         |                                                                                                                                                                               |
 
 ### Parameter settings that differ by compute size
 
 Of the parameter settings listed above, the `maintenance_work_mem`, `max_connections`, and `max_worker_processes` differ by compute size, which is defined in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu). The following table shows values for each compute size.
 
 | Compute Size (CU) | `max_connections` | `maintenance_work_mem` | `max_worker_processes` |
-|:-------------|:----------------|:---------------------|:---------------------|
-| 0.25         | 112             | 64 MB                | 10                   |
-| 0.50         | 225             | 64 MB                | 11                   |
-| 1            | 450             | 67 MB                | 12                   |
-| 2            | 901             | 134 MB               | 14                   |
-| 3            | 1351            | 201 MB               | 16                   |
-| 4            | 1802            | 268 MB               | 18                   |
-| 5            | 2253            | 335 MB               | 20                   |
-| 6            | 2703            | 402 MB               | 22                   |
-| 7            | 3154            | 470 MB               | 24                   |
-| 8            | 3604            | 537 MB               | 26                   |
+| :---------------- | :---------------- | :--------------------- | :--------------------- |
+| 0.25              | 112               | 64 MB                  | 10                     |
+| 0.50              | 225               | 64 MB                  | 11                     |
+| 1                 | 450               | 67 MB                  | 12                     |
+| 2                 | 901               | 134 MB                 | 14                     |
+| 3                 | 1351              | 201 MB                 | 16                     |
+| 4                 | 1802              | 268 MB                 | 18                     |
+| 5                 | 2253              | 335 MB                 | 20                     |
+| 6                 | 2703              | 402 MB                 | 22                     |
+| 7                 | 3154              | 470 MB                 | 24                     |
+| 8                 | 3604              | 537 MB                 | 26                     |
 
 <Admonition type="note">
 You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
@@ -97,7 +97,7 @@ FROM pg_settings
 WHERE context = 'user';
 ```
 
-For example, the `maintenance_work_mem` parameter supports a `user` context, which lets you set it for the current session with a `SET` command:  
+For example, the `maintenance_work_mem` parameter supports a `user` context, which lets you set it for the current session with a `SET` command:
 
 ```sql
 SET maintenance_work_mem='1 GB';
@@ -134,9 +134,9 @@ Neon does not currently support changing the database encoding. However, Neon do
 ```sql
 CREATE COLLATION german (provider = icu, locale = 'de');
 CREATE TABLE books (id int, title text COLLATE "german");
-``` 
+```
 
-or 
+or
 
 ```sql
 CREATE COLLATION arabic (provider = icu, locale = 'ar');

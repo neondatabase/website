@@ -2,12 +2,12 @@
 title: Postgres substring() function
 subtitle: Extract a substring from a string
 enableTableOfContents: true
-updatedOn: '2024-02-07T10:15:00.000Z'
+updatedOn: '2024-06-14T07:55:54.378Z'
 ---
 
 The `substring()` function in Postgres is used to extract a portion of a string based on specified start and end positions, or a regular expression pattern.
 
-It's useful for data cleaning and transformation where you might need to extract relevant parts of a string. For example, when working with semi-structured data like an address, where you want to extract the zip code. Or, to extract the timestamp of events when working with machine-generated data like logs. 
+It's useful for data cleaning and transformation where you might need to extract relevant parts of a string. For example, when working with semi-structured data like an address, where you want to extract the zip code. Or, to extract the timestamp of events when working with machine-generated data like logs.
 
 <CTA />
 
@@ -44,7 +44,7 @@ SELECT substring(user_id from 6) AS numeric_id
 FROM users;
 ```
 
-This query extracts the substring starting from the 6th character of `user_id` (1-based index) and returns it as `numeric_id`. 
+This query extracts the substring starting from the 6th character of `user_id` (1-based index) and returns it as `numeric_id`.
 
 ```text
  numeric_id
@@ -66,7 +66,7 @@ SELECT substring(address from '\d{5}') AS zip_code
 FROM addresses;
 ```
 
-This query extracts the 5-digit zip code from the `address` column using the regular expression pattern `\d{5}`, which matches exactly 5 consecutive digits. 
+This query extracts the 5-digit zip code from the `address` column using the regular expression pattern `\d{5}`, which matches exactly 5 consecutive digits.
 
 ```text
  zip_code
@@ -104,7 +104,7 @@ This query extracts the timestamp portion from the `log_entry` column. It assume
 
 ### Extract a substring matching a regex pattern with capture groups
 
-The `substring()` function extracts the first part of the string that matches the regular expression pattern. However, if the pattern contains capture groups (specified using parentheses), it returns the substring matched by the first parenthesized subexpression. 
+The `substring()` function extracts the first part of the string that matches the regular expression pattern. However, if the pattern contains capture groups (specified using parentheses), it returns the substring matched by the first parenthesized subexpression.
 
 ```sql
 WITH orders AS (
@@ -114,7 +114,7 @@ WITH orders AS (
   UNION ALL
   SELECT 'Order #9012 - $200.00' AS order_info
 )
-SELECT 
+SELECT
   substring(order_info from 'Order #(\d+)') AS order_number,
   substring(order_info from '\$(\d+\.\d+)') AS order_amount
 FROM orders;
@@ -123,7 +123,7 @@ FROM orders;
 This query extracts the order number and order amount from the `order_info` column using regular expressions with capture groups.
 
 - The pattern `Order #(\d+)` matches the string "Order #" followed by one or more digits. The parentheses around `\d+` create a capture group that extracts just the order number.
-- The pattern `\$(\d+\.\d+)` matches a dollar sign followed by a decimal number. The parentheses around `\d+\.\d+` create a capture group that extracts just the order amount. 
+- The pattern `\$(\d+\.\d+)` matches a dollar sign followed by a decimal number. The parentheses around `\d+\.\d+` create a capture group that extracts just the order amount.
 
 ```text
  order_number | order_amount
@@ -151,7 +151,7 @@ FROM users
 WHERE substring(email from '.*@(.*)\.') = 'example';
 ```
 
-This query selects all rows from the `users` table where the email address has the domain name `example`. The regular expression pattern `.*@(.*)\.` extracts the domain part of the email address. 
+This query selects all rows from the `users` table where the email address has the domain name `example`. The regular expression pattern `.*@(.*)\.` extracts the domain part of the email address.
 
 ```text
          email
@@ -165,7 +165,7 @@ This query selects all rows from the `users` table where the email address has t
 
 ### Performance implications
 
-When working with large datasets, using `substring()` in a `WHERE` clause may impact query performance since it requires scanning the entire string column to extract substrings and compare them. 
+When working with large datasets, using `substring()` in a `WHERE` clause may impact query performance since it requires scanning the entire string column to extract substrings and compare them.
 
 If you frequently filter based on substrings, consider creating a _functional index_ on the relevant column using the substring expression, to improve query performance.
 

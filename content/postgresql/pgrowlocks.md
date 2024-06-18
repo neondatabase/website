@@ -2,11 +2,9 @@
 
 ## F.31. pgrowlocks — show a table's row locking information [#](#PGROWLOCKS)
 
-  * [F.31.1. Overview](pgrowlocks#PGROWLOCKS-OVERVIEW)
-  * [F.31.2. Sample Output](pgrowlocks#PGROWLOCKS-SAMPLE-OUTPUT)
-  * [F.31.3. Author](pgrowlocks#PGROWLOCKS-AUTHOR)
-
-
+- [F.31.1. Overview](pgrowlocks#PGROWLOCKS-OVERVIEW)
+- [F.31.2. Sample Output](pgrowlocks#PGROWLOCKS-SAMPLE-OUTPUT)
+- [F.31.3. Author](pgrowlocks#PGROWLOCKS-AUTHOR)
 
 The `pgrowlocks` module provides a function to show row locking information for a specified table.
 
@@ -15,8 +13,6 @@ By default use is restricted to superusers, roles with privileges of the `pg_sta
 [#id](#PGROWLOCKS-OVERVIEW)
 
 ### F.31.1. Overview [#](#PGROWLOCKS-OVERVIEW)
-
-
 
 ```
 pgrowlocks(text) returns setof record
@@ -31,12 +27,11 @@ The parameter is the name of a table. The result is a set of records, with one r
 | Name         | Type        | Description                                                                                                                                               |
 | ------------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `locked_row` | `tid`       | Tuple ID (TID) of locked row                                                                                                                              |
-| `locker`     | `xid`       | Transaction ID of locker, or multixact ID if multitransaction; see [Section 74.1](transaction-id)                                                    |
+| `locker`     | `xid`       | Transaction ID of locker, or multixact ID if multitransaction; see [Section 74.1](transaction-id)                                                         |
 | `multi`      | `boolean`   | True if locker is a multitransaction                                                                                                                      |
 | `xids`       | `xid[]`     | Transaction IDs of lockers (more than one if multitransaction)                                                                                            |
 | `modes`      | `text[]`    | Lock mode of lockers (more than one if multitransaction), an array of `Key Share`, `Share`, `For No Key Update`, `No Key Update`, `For Update`, `Update`. |
 | `pids`       | `integer[]` | Process IDs of locking backends (more than one if multitransaction)                                                                                       |
-
 
 `pgrowlocks` takes `AccessShareLock` for the target table and reads each row one by one to collect the row locking information. This is not very speedy for a large table. Note that:
 

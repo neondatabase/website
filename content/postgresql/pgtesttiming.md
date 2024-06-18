@@ -1,36 +1,36 @@
 [#id](#PGTESTTIMING)
 
-## pg\_test\_timing
+## pg_test_timing
 
-pg\_test\_timing — measure timing overhead
+pg_test_timing — measure timing overhead
 
 ## Synopsis
 
-`pg_test_timing` \[*`option`*...]
+`pg_test_timing` \[_`option`_...]
 
 [#id](#id-1.9.5.11.5)
 
 ## Description
 
-pg\_test\_timing is a tool to measure the timing overhead on your system and confirm that the system time never moves backwards. Systems that are slow to collect timing data can give less accurate `EXPLAIN ANALYZE` results.
+pg_test_timing is a tool to measure the timing overhead on your system and confirm that the system time never moves backwards. Systems that are slow to collect timing data can give less accurate `EXPLAIN ANALYZE` results.
 
 [#id](#id-1.9.5.11.6)
 
 ## Options
 
-pg\_test\_timing accepts the following command-line options:
+pg_test_timing accepts the following command-line options:
 
-* `-d duration``--duration=duration`
+- `-d duration``--duration=duration`
 
   Specifies the test duration, in seconds. Longer durations give slightly better accuracy, and are more likely to discover problems with the system clock moving backwards. The default test duration is 3 seconds.
 
-* `-V``--version`
+- `-V``--version`
 
-  Print the pg\_test\_timing version and exit.
+  Print the pg_test_timing version and exit.
 
-* `-?``--help`
+- `-?``--help`
 
-  Show help about pg\_test\_timing command line arguments, and exit.
+  Show help about pg_test_timing command line arguments, and exit.
 
 [#id](#id-1.9.5.11.7)
 
@@ -69,13 +69,13 @@ SELECT COUNT(*) FROM t;
 EXPLAIN ANALYZE SELECT COUNT(*) FROM t;
 ```
 
-The i7-860 system measured runs the count query in 9.8 ms while the `EXPLAIN ANALYZE` version takes 16.6 ms, each processing just over 100,000 rows. That 6.8 ms difference means the timing overhead per row is 68 ns, about twice what pg\_test\_timing estimated it would be. Even that relatively small amount of overhead is making the fully timed count statement take almost 70% longer. On more substantial queries, the timing overhead would be less problematic.
+The i7-860 system measured runs the count query in 9.8 ms while the `EXPLAIN ANALYZE` version takes 16.6 ms, each processing just over 100,000 rows. That 6.8 ms difference means the timing overhead per row is 68 ns, about twice what pg_test_timing estimated it would be. Even that relatively small amount of overhead is making the fully timed count statement take almost 70% longer. On more substantial queries, the timing overhead would be less problematic.
 
 [#id](#id-1.9.5.11.7.4)
 
 ### Changing Time Sources
 
-On some newer Linux systems, it's possible to change the clock source used to collect timing data at any time. A second example shows the slowdown possible from switching to the slower acpi\_pm time source, on the same system used for the fast results above:
+On some newer Linux systems, it's possible to change the clock source used to collect timing data at any time. A second example shows the slowdown possible from switching to the slower acpi_pm time source, on the same system used for the fast results above:
 
 ```
 # cat /sys/devices/system/clocksource/clocksource0/available_clocksource
@@ -141,7 +141,7 @@ Newer operating systems may check for the known TSC problems and switch to a slo
 
 The High Precision Event Timer (HPET) is the preferred timer on systems where it's available and TSC is not accurate. The timer chip itself is programmable to allow up to 100 nanosecond resolution, but you may not see that much accuracy in your system clock.
 
-Advanced Configuration and Power Interface (ACPI) provides a Power Management (PM) Timer, which Linux refers to as the acpi\_pm. The clock derived from acpi\_pm will at best provide 300 nanosecond resolution.
+Advanced Configuration and Power Interface (ACPI) provides a Power Management (PM) Timer, which Linux refers to as the acpi_pm. The clock derived from acpi_pm will at best provide 300 nanosecond resolution.
 
 Timers used on older PC hardware include the 8254 Programmable Interval Timer (PIT), the real-time clock (RTC), the Advanced Programmable Interrupt Controller (APIC) timer, and the Cyclone timer. These timers aim for millisecond resolution.
 

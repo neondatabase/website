@@ -120,15 +120,15 @@ The right to drop an object, or to alter its definition in any way, is not treat
 
 The possible privileges are:
 
-* `SELECT``INSERT``UPDATE``DELETE``TRUNCATE``REFERENCES``TRIGGER``CREATE``CONNECT``TEMPORARY``EXECUTE``USAGE``SET``ALTER SYSTEM`
+- `SELECT``INSERT``UPDATE``DELETE``TRUNCATE``REFERENCES``TRIGGER``CREATE``CONNECT``TEMPORARY``EXECUTE``USAGE``SET``ALTER SYSTEM`
 
   Specific types of privileges, as defined in [Section 5.7](ddl-priv).
 
-* `TEMP`
+- `TEMP`
 
   Alternative spelling for `TEMPORARY`.
 
-* `ALL PRIVILEGES`
+- `ALL PRIVILEGES`
 
   Grant all of the privileges available for the object's type. The `PRIVILEGES` key word is optional in PostgreSQL, though it is required by strict SQL.
 
@@ -154,7 +154,7 @@ To create an object owned by another role or give ownership of an existing objec
 
 If `GRANTED BY` is specified, the grant is recorded as having been done by the specified role. A user can only attribute a grant to another role if they possess the privileges of that role. The role recorded as the grantor must have `ADMIN OPTION` on the target role, unless it is the bootstrap superuser. When a grant is recorded as having a grantor other than the bootstrap superuser, it depends on the grantor continuing to possess `ADMIN OPTION` on the role; so, if `ADMIN OPTION` is revoked, dependent grants must be revoked as well.
 
-Unlike the case with privileges, membership in a role cannot be granted to `PUBLIC`. Note also that this form of the command does not allow the noise word `GROUP` in *`role_specification`*.
+Unlike the case with privileges, membership in a role cannot be granted to `PUBLIC`. Note also that this form of the command does not allow the noise word `GROUP` in _`role_specification`_.
 
 [#id](#SQL-GRANT-NOTES)
 

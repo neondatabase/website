@@ -28,7 +28,7 @@ If you do not have one already, create a Neon project.
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
-4. Copy the database connection string to add to your Next.js app later. The connection string looks like `postgres://[user]:[password]@[neon_hostname]/[dbname]` and can be found in the **Connection Details** widget on the Neon **Dashboard**. 
+4. Copy the database connection string to add to your Next.js app later. The connection string looks like `postgres://[user]:[password]@[neon_hostname]/[dbname]` and can be found in the **Connection Details** widget on the Neon **Dashboard**.
 
 ## Create an Amazon S3 Bucket
 
@@ -48,19 +48,16 @@ In the **Policy** section, use the following json to define the actions allowed 
 
 ```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "PublicReadGetObject",
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": [
-                "s3:PutObject",
-                "s3:GetObject"
-            ],
-            "Resource": "arn:aws:s3:::launchfast-bucket-0/*"
-        }
-    ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": ["s3:PutObject", "s3:GetObject"],
+      "Resource": "arn:aws:s3:::launchfast-bucket-0/*"
+    }
+  ]
 }
 ```
 
@@ -68,20 +65,13 @@ In the **CORS** section, use the following json to define the actions allowed wi
 
 ```json
 [
-    {
-        "AllowedHeaders": [
-            "*"
-        ],
-        "AllowedMethods": [
-            "GET",
-            "PUT"
-        ],
-        "AllowedOrigins": [
-            "*"
-        ],
-        "ExposeHeaders": [],
-        "MaxAgeSeconds": 9000
-    }
+  {
+    "AllowedHeaders": ["*"],
+    "AllowedMethods": ["GET", "PUT"],
+    "AllowedOrigins": ["*"],
+    "ExposeHeaders": [],
+    "MaxAgeSeconds": 9000
+  }
 ]
 ```
 
@@ -176,7 +166,7 @@ You will create an API endpoint that accepts the file name and it's content type
 ```tsx
 // File: app/api/presigned/route.ts
 
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
   const accessKeyId = process.env.AWS_KEY_ID;
@@ -186,8 +176,8 @@ export async function GET(request: NextRequest) {
     return new Response(null, { status: 500 });
   }
   const searchParams = request.nextUrl.searchParams;
-  const fileName = searchParams.get("fileName");
-  const contentType = searchParams.get("contentType");
+  const fileName = searchParams.get('fileName');
+  const contentType = searchParams.get('contentType');
   if (!fileName || !contentType) {
     return new Response(null, { status: 500 });
   }
@@ -201,9 +191,9 @@ Next, append the following code to return a JSON from the endpoint containing th
 ```tsx {4,5,20-34}
 // File: app/api/presigned/route.ts
 
-import { NextResponse, type NextRequest } from "next/server";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { NextResponse, type NextRequest } from 'next/server';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 export async function GET(request: NextRequest) {
   const accessKeyId = process.env.AWS_KEY_ID;
@@ -213,13 +203,13 @@ export async function GET(request: NextRequest) {
     return new Response(null, { status: 500 });
   }
   const searchParams = request.nextUrl.searchParams;
-  const fileName = searchParams.get("fileName");
-  const contentType = searchParams.get("contentType");
+  const fileName = searchParams.get('fileName');
+  const contentType = searchParams.get('contentType');
   if (!fileName || !contentType) {
     return new Response(null, { status: 500 });
   }
   const client = new S3Client({
-    region: "eu-north-1",
+    region: 'eu-north-1',
     credentials: {
       accessKeyId,
       secretAccessKey,
@@ -246,95 +236,90 @@ You will create an API endpoint that accepts the URL to the publicly accessible 
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-  ```tsx {3,10-11,14,16,18-21}
-  // File: app/api/user/image/route.ts
+```tsx {3,10-11,14,16,18-21}
+// File: app/api/user/image/route.ts
 
-  import { Client } from "pg";
-  import { NextResponse, type NextRequest } from "next/server";
+import { Client } from 'pg';
+import { NextResponse, type NextRequest } from 'next/server';
 
-  export async function POST(request: NextRequest) {
-    const { objectUrl } = await request.json();
-    if (!process.env.DATABASE_URL) return new Response(null, { status: 500 });
-    // Create a client instance using `node-postgres`
-    const client = new Client(process.env.DATABASE_URL);
-    await client.connect();
-    try {
-      // Create the user table if it does not exist
-      await client.query('CREATE TABLE IF NOT EXISTS "user" (name TEXT, image TEXT)');
-      // Mock call to get the user
-      const user = "rishi"; // getUser();
-      // Insert the user name and the reference to the image into the user table
-      await client.query('INSERT INTO "user" (name, image) VALUES ($1, $2)', [
-        user,
-        objectUrl,
-      ]);
-      return NextResponse.json({ code: 1 });
-    } catch (e) {
-      return NextResponse.json({
-        code: 0,
-        message: e instanceof Error ? e.message : e?.toString(),
-      });
-    }
+export async function POST(request: NextRequest) {
+  const { objectUrl } = await request.json();
+  if (!process.env.DATABASE_URL) return new Response(null, { status: 500 });
+  // Create a client instance using `node-postgres`
+  const client = new Client(process.env.DATABASE_URL);
+  await client.connect();
+  try {
+    // Create the user table if it does not exist
+    await client.query('CREATE TABLE IF NOT EXISTS "user" (name TEXT, image TEXT)');
+    // Mock call to get the user
+    const user = 'rishi'; // getUser();
+    // Insert the user name and the reference to the image into the user table
+    await client.query('INSERT INTO "user" (name, image) VALUES ($1, $2)', [user, objectUrl]);
+    return NextResponse.json({ code: 1 });
+  } catch (e) {
+    return NextResponse.json({
+      code: 0,
+      message: e instanceof Error ? e.message : e?.toString(),
+    });
   }
-  ```
+}
+```
 
-  ```tsx {3,10-11,14,16,18-21}
-  // File: app/api/user/image/route.ts
+```tsx {3,10-11,14,16,18-21}
+// File: app/api/user/image/route.ts
 
-  import postgres from 'postgres';
-  import { NextResponse, type NextRequest } from "next/server";
+import postgres from 'postgres';
+import { NextResponse, type NextRequest } from 'next/server';
 
-  export async function POST(request: NextRequest) {
-    const { objectUrl } = await request.json();
-    if (!process.env.DATABASE_URL) return new Response(null, { status: 500 });
-    // Create a client instance
-    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
-    try {
-      // Create the user table if it does not exist
-      await sql`CREATE TABLE IF NOT EXISTS "user" (name TEXT, image TEXT)`;
-      // Mock call to get the user
-      const user = "rishi"; // getUser();
-      // Insert the user name and the reference to the image into the user table
-      await sql`INSERT INTO "user" (name, image) VALUES (${user}, ${objectUrl})`;
-      return NextResponse.json({ code: 1 });
-    } catch (e) {
-      return NextResponse.json({
-        code: 0,
-        message: e instanceof Error ? e.message : e?.toString(),
-      });
-    }
+export async function POST(request: NextRequest) {
+  const { objectUrl } = await request.json();
+  if (!process.env.DATABASE_URL) return new Response(null, { status: 500 });
+  // Create a client instance
+  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+  try {
+    // Create the user table if it does not exist
+    await sql`CREATE TABLE IF NOT EXISTS "user" (name TEXT, image TEXT)`;
+    // Mock call to get the user
+    const user = 'rishi'; // getUser();
+    // Insert the user name and the reference to the image into the user table
+    await sql`INSERT INTO "user" (name, image) VALUES (${user}, ${objectUrl})`;
+    return NextResponse.json({ code: 1 });
+  } catch (e) {
+    return NextResponse.json({
+      code: 0,
+      message: e instanceof Error ? e.message : e?.toString(),
+    });
   }
-  ```
+}
+```
 
-  ```tsx {3,12,14,16-19}
-  // File: app/api/user/image/route.ts
+```tsx {3,12,14,16-19}
+// File: app/api/user/image/route.ts
 
-  import { neon } from "@neondatabase/serverless";
-  import { NextResponse, type NextRequest } from "next/server";
+import { neon } from '@neondatabase/serverless';
+import { NextResponse, type NextRequest } from 'next/server';
 
-  export async function POST(request: NextRequest) {
-    const { objectUrl } = await request.json();
-    if (!process.env.DATABASE_URL) return new Response(null, { status: 500 });
-    const sql = neon(process.env.DATABASE_URL);
-    try {
-      // Create the user table if it does not exist
-      await sql('CREATE TABLE IF NOT EXISTS "user" (name TEXT, image TEXT)');
-      // Mock call to get the user
-      const user = "rishi"; // getUser();
-      // Insert the user name and the reference to the image into the user table
-      await sql('INSERT INTO "user" (name, image) VALUES ($1, $2)', [
-        user,
-        objectUrl,
-      ]);
-      return NextResponse.json({ code: 1 });
-    } catch (e) {
-      return NextResponse.json({
-        code: 0,
-        message: e instanceof Error ? e.message : e?.toString(),
-      });
-    }
+export async function POST(request: NextRequest) {
+  const { objectUrl } = await request.json();
+  if (!process.env.DATABASE_URL) return new Response(null, { status: 500 });
+  const sql = neon(process.env.DATABASE_URL);
+  try {
+    // Create the user table if it does not exist
+    await sql('CREATE TABLE IF NOT EXISTS "user" (name TEXT, image TEXT)');
+    // Mock call to get the user
+    const user = 'rishi'; // getUser();
+    // Insert the user name and the reference to the image into the user table
+    await sql('INSERT INTO "user" (name, image) VALUES ($1, $2)', [user, objectUrl]);
+    return NextResponse.json({ code: 1 });
+  } catch (e) {
+    return NextResponse.json({
+      code: 0,
+      message: e instanceof Error ? e.message : e?.toString(),
+    });
   }
-  ```
+}
+```
+
 </CodeTabs>
 
 The code above defines a POST endpoint, which first validates the presence of `DATABASE_URL` environment variable. Further, it creates a table named `user` if it does not exist, and inserts the record for a user named `rishi` with the object URL.
@@ -352,9 +337,9 @@ Using the HTML `<input />` element, accept a file from the user to be uploaded t
 ```tsx
 // File: app/page.tsx
 
-"use client";
+'use client';
 
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react';
 
 export default function Home() {
   const uploadFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -380,9 +365,9 @@ Perform a GET call to `/api/presigned` API route with the file name and type as 
 ```tsx {15-28}
 // File: app/page.tsx
 
-"use client";
+'use client';
 
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react';
 
 export default function Home() {
   const uploadFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -392,16 +377,16 @@ export default function Home() {
     reader.onload = async (event) => {
       const fileData = event.target?.result;
       if (fileData) {
-        const presignedURL = new URL("/api/presigned", window.location.href);
-        presignedURL.searchParams.set("fileName", file.name);
-        presignedURL.searchParams.set("contentType", file.type);
+        const presignedURL = new URL('/api/presigned', window.location.href);
+        presignedURL.searchParams.set('fileName', file.name);
+        presignedURL.searchParams.set('contentType', file.type);
         fetch(presignedURL.toString())
           .then((res) => res.json())
           .then((res) => {
             const body = new Blob([fileData], { type: file.type });
             fetch(res.signedUrl, {
               body,
-              method: "PUT",
+              method: 'PUT',
             }).then(() => {
               // Save reference to the object in Postgres (powered by Neon)
             });
@@ -421,9 +406,9 @@ Perform a `POST` to the `/api/user/image` route, with the presigned URL configur
 ```tsx {26-32}
 // File: app/page.tsx
 
-"use client";
+'use client';
 
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react';
 
 export default function Home() {
   const uploadFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -433,22 +418,22 @@ export default function Home() {
     reader.onload = async (event) => {
       const fileData = event.target?.result;
       if (fileData) {
-        const presignedURL = new URL("/api/presigned", window.location.href);
-        presignedURL.searchParams.set("fileName", file.name);
-        presignedURL.searchParams.set("contentType", file.type);
+        const presignedURL = new URL('/api/presigned', window.location.href);
+        presignedURL.searchParams.set('fileName', file.name);
+        presignedURL.searchParams.set('contentType', file.type);
         fetch(presignedURL.toString())
           .then((res) => res.json())
           .then((res) => {
             const body = new Blob([fileData], { type: file.type });
             fetch(res.signedUrl, {
               body,
-              method: "PUT",
+              method: 'PUT',
             }).then(() => {
-              fetch("/api/user/image", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+              fetch('/api/user/image', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                  objectUrl: res.signedUrl.split("?")[0],
+                  objectUrl: res.signedUrl.split('?')[0],
                 }),
               });
             });

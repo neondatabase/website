@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-REGISTER-RELATION)
 
-## SPI\_register\_relation
+## SPI_register_relation
 
-SPI\_register\_relation — make an ephemeral named relation available by name in SPI queries
+SPI_register_relation — make an ephemeral named relation available by name in SPI queries
 
 ## Synopsis
 
@@ -20,7 +20,7 @@ int SPI_register_relation(EphemeralNamedRelation enr)
 
 ## Arguments
 
-* `EphemeralNamedRelation enr`
+- `EphemeralNamedRelation enr`
 
   the ephemeral named relation registry entry
 
@@ -30,20 +30,20 @@ int SPI_register_relation(EphemeralNamedRelation enr)
 
 If the execution of the command was successful then the following (nonnegative) value will be returned:
 
-* `SPI_OK_REL_REGISTER`
+- `SPI_OK_REL_REGISTER`
 
   if the relation has been successfully registered by name
 
 On error, one of the following negative values is returned:
 
-* `SPI_ERROR_ARGUMENT`
+- `SPI_ERROR_ARGUMENT`
 
-  if *`enr`* is `NULL` or its `name` field is `NULL`
+  if _`enr`_ is `NULL` or its `name` field is `NULL`
 
-* `SPI_ERROR_UNCONNECTED`
+- `SPI_ERROR_UNCONNECTED`
 
   if called from an unconnected C function
 
-* `SPI_ERROR_REL_DUPLICATE`
+- `SPI_ERROR_REL_DUPLICATE`
 
-  if the name specified in the `name` field of *`enr`* is already registered for this connection
+  if the name specified in the `name` field of _`enr`_ is already registered for this connection

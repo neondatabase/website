@@ -24,11 +24,11 @@ To execute this command the user must be the owner of the subscription.
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of a subscription to be dropped.
 
-* `CASCADE``RESTRICT`
+- `CASCADE``RESTRICT`
 
   These key words do not have any effect, since there are no dependencies on subscriptions.
 

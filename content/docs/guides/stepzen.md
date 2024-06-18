@@ -3,7 +3,7 @@ title: Use StepZen with Neon
 subtitle: Learn how to use StepZen to build a GraphQL API for your Neon database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-19T18:57:12.560Z'
+updatedOn: '2024-06-14T07:55:54.408Z'
 ---
 
 _This guide was contributed by Roy Derks from StepZen_
@@ -213,10 +213,7 @@ type Order {
   carrier: String
   createdat: Date!
   customer: Customer
-    @materializer(
-      query: "getCustomer"
-      arguments: [{ name: "id", field: "customerid" }]
-    )
+    @materializer(query: "getCustomer", arguments: [{ name: "id", field: "customerid" }])
   customerid: Int!
   id: Int!
   lineitemList: [Lineitem] @materializer(query: "getLineitemUsingOrderid")

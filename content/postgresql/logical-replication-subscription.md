@@ -2,11 +2,11 @@
 
 ## 31.2. Subscription [#](#LOGICAL-REPLICATION-SUBSCRIPTION)
 
-  * [31.2.1. Replication Slot Management](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
-  * [31.2.2. Examples: Set Up Logical Replication](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
-  * [31.2.3. Examples: Deferred Replication Slot Creation](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT)
+- [31.2.1. Replication Slot Management](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
+- [31.2.2. Examples: Set Up Logical Replication](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
+- [31.2.3. Examples: Deferred Replication Slot Creation](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT)
 
-A *subscription* is the downstream side of logical replication. The node where a subscription is defined is referred to as the *subscriber*. A subscription defines the connection to another database and set of publications (one or more) to which it wants to subscribe.
+A _subscription_ is the downstream side of logical replication. The node where a subscription is defined is referred to as the _subscriber_. A subscription defines the connection to another database and set of publications (one or more) to which it wants to subscribe.
 
 The subscriber database behaves in the same way as any other PostgreSQL instance and can be used as a publisher for other databases by defining its own publications.
 
@@ -34,17 +34,17 @@ Columns of a table are also matched by name. The order of columns in the subscri
 
 As mentioned earlier, each (active) subscription receives changes from a replication slot on the remote (publishing) side.
 
-Additional table synchronization slots are normally transient, created internally to perform initial table synchronization and dropped automatically when they are no longer needed. These table synchronization slots have generated names: “`pg_%u_sync_%u_%llu`” (parameters: Subscription *`oid`*, Table *`relid`*, system identifier *`sysid`*)
+Additional table synchronization slots are normally transient, created internally to perform initial table synchronization and dropped automatically when they are no longer needed. These table synchronization slots have generated names: “`pg_%u_sync_%u_%llu`” (parameters: Subscription _`oid`_, Table _`relid`_, system identifier _`sysid`_)
 
 Normally, the remote replication slot is created automatically when the subscription is created using `CREATE SUBSCRIPTION` and it is dropped automatically when the subscription is dropped using `DROP SUBSCRIPTION`. In some situations, however, it can be useful or necessary to manipulate the subscription and the underlying replication slot separately. Here are some scenarios:
 
-* When creating a subscription, the replication slot already exists. In that case, the subscription can be created using the `create_slot = false` option to associate with the existing slot.
+- When creating a subscription, the replication slot already exists. In that case, the subscription can be created using the `create_slot = false` option to associate with the existing slot.
 
-* When creating a subscription, the remote host is not reachable or in an unclear state. In that case, the subscription can be created using the `connect = false` option. The remote host will then not be contacted at all. This is what pg\_dump uses. The remote replication slot will then have to be created manually before the subscription can be activated.
+- When creating a subscription, the remote host is not reachable or in an unclear state. In that case, the subscription can be created using the `connect = false` option. The remote host will then not be contacted at all. This is what pg_dump uses. The remote replication slot will then have to be created manually before the subscription can be activated.
 
-* When dropping a subscription, the replication slot should be kept. This could be useful when the subscriber database is being moved to a different host and will be activated from there. In that case, disassociate the slot from the subscription using `ALTER SUBSCRIPTION` before attempting to drop the subscription.
+- When dropping a subscription, the replication slot should be kept. This could be useful when the subscriber database is being moved to a different host and will be activated from there. In that case, disassociate the slot from the subscription using `ALTER SUBSCRIPTION` before attempting to drop the subscription.
 
-* When dropping a subscription, the remote host is not reachable. In that case, disassociate the slot from the subscription using `ALTER SUBSCRIPTION` before attempting to drop the subscription. If the remote database instance no longer exists, no further action is then necessary. If, however, the remote database instance is just unreachable, the replication slot (and any still remaining table synchronization slots) should then be dropped manually; otherwise it/they would continue to reserve WAL and might eventually cause the disk to fill up. Such cases should be carefully investigated.
+- When dropping a subscription, the remote host is not reachable. In that case, disassociate the slot from the subscription using `ALTER SUBSCRIPTION` before attempting to drop the subscription. If the remote database instance no longer exists, no further action is then necessary. If, however, the remote database instance is just unreachable, the replication slot (and any still remaining table synchronization slots) should then be dropped manually; otherwise it/they would continue to reserve WAL and might eventually cause the disk to fill up. Such cases should be carefully investigated.
 
 [#id](#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
 
@@ -240,7 +240,7 @@ CREATE PUBLICATION
 
 Example 1: Where the subscription says `connect = false`
 
-* Create the subscription.
+- Create the subscription.
 
   ```
   test_sub=# CREATE SUBSCRIPTION sub1
@@ -252,7 +252,7 @@ Example 1: Where the subscription says `connect = false`
   CREATE SUBSCRIPTION
   ```
 
-* On the publisher, manually create a slot. Because the name was not specified during `CREATE SUBSCRIPTION`, the name of the slot to create is same as the subscription name, e.g. "sub1".
+- On the publisher, manually create a slot. Because the name was not specified during `CREATE SUBSCRIPTION`, the name of the slot to create is same as the subscription name, e.g. "sub1".
 
   ```
   test_pub=# SELECT * FROM pg_create_logical_replication_slot('sub1', 'pgoutput');
@@ -262,7 +262,7 @@ Example 1: Where the subscription says `connect = false`
   (1 row)
   ```
 
-* On the subscriber, complete the activation of the subscription. After this the tables of `pub1` will start replicating.
+- On the subscriber, complete the activation of the subscription. After this the tables of `pub1` will start replicating.
 
   ```
   test_sub=# ALTER SUBSCRIPTION sub1 ENABLE;
@@ -273,7 +273,7 @@ Example 1: Where the subscription says `connect = false`
 
 Example 2: Where the subscription says `connect = false`, but also specifies the [`slot_name`](sql-createsubscription#SQL-CREATESUBSCRIPTION-WITH-SLOT-NAME) option.
 
-* Create the subscription.
+- Create the subscription.
 
   ```
   test_sub=# CREATE SUBSCRIPTION sub1
@@ -285,7 +285,7 @@ Example 2: Where the subscription says `connect = false`, but also specifies the
   CREATE SUBSCRIPTION
   ```
 
-* On the publisher, manually create a slot using the same name that was specified during `CREATE SUBSCRIPTION`, e.g. "myslot".
+- On the publisher, manually create a slot using the same name that was specified during `CREATE SUBSCRIPTION`, e.g. "myslot".
 
   ```
   test_pub=# SELECT * FROM pg_create_logical_replication_slot('myslot', 'pgoutput');
@@ -295,7 +295,7 @@ Example 2: Where the subscription says `connect = false`, but also specifies the
   (1 row)
   ```
 
-* On the subscriber, the remaining subscription activation steps are the same as before.
+- On the subscriber, the remaining subscription activation steps are the same as before.
 
   ```
   test_sub=# ALTER SUBSCRIPTION sub1 ENABLE;
@@ -306,7 +306,7 @@ Example 2: Where the subscription says `connect = false`, but also specifies the
 
 Example 3: Where the subscription specifies `slot_name = NONE`
 
-* Create the subscription. When `slot_name = NONE` then `enabled = false`, and `create_slot = false` are also needed.
+- Create the subscription. When `slot_name = NONE` then `enabled = false`, and `create_slot = false` are also needed.
 
   ```
   test_sub=# CREATE SUBSCRIPTION sub1
@@ -316,7 +316,7 @@ Example 3: Where the subscription specifies `slot_name = NONE`
   CREATE SUBSCRIPTION
   ```
 
-* On the publisher, manually create a slot using any name, e.g. "myslot".
+- On the publisher, manually create a slot using any name, e.g. "myslot".
 
   ```
   test_pub=# SELECT * FROM pg_create_logical_replication_slot('myslot', 'pgoutput');
@@ -326,14 +326,14 @@ Example 3: Where the subscription specifies `slot_name = NONE`
   (1 row)
   ```
 
-* On the subscriber, associate the subscription with the slot name just created.
+- On the subscriber, associate the subscription with the slot name just created.
 
   ```
   test_sub=# ALTER SUBSCRIPTION sub1 SET (slot_name='myslot');
   ALTER SUBSCRIPTION
   ```
 
-* The remaining subscription activation steps are same as before.
+- The remaining subscription activation steps are same as before.
 
   ```
   test_sub=# ALTER SUBSCRIPTION sub1 ENABLE;

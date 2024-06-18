@@ -32,27 +32,27 @@ Refer to [Chapter 12](textsearch) for further information.
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of the text search parser to be created. The name can be schema-qualified.
 
-* *`start_function`*
+- _`start_function`_
 
   The name of the start function for the parser.
 
-* *`gettoken_function`*
+- _`gettoken_function`_
 
   The name of the get-next-token function for the parser.
 
-* *`end_function`*
+- _`end_function`_
 
   The name of the end function for the parser.
 
-* *`lextypes_function`*
+- _`lextypes_function`_
 
   The name of the lextypes function for the parser (a function that returns information about the set of token types it produces).
 
-* *`headline_function`*
+- _`headline_function`_
 
   The name of the headline function for the parser (a function that summarizes a set of tokens).
 

@@ -12,9 +12,9 @@ All it takes to get a GiST access method up and running is to implement several 
 
 There are five methods that an index operator class for GiST must provide, and six that are optional. Correctness of the index is ensured by proper implementation of the `same`, `consistent` and `union` methods, while efficiency (size and speed) of the index will depend on the `penalty` and `picksplit` methods. Two optional methods are `compress` and `decompress`, which allow an index to have internal tree data of a different type than the data it indexes. The leaves are to be of the indexed data type, while the other tree nodes can be of any C struct (but you still have to follow PostgreSQL data type rules here, see about `varlena` for variable sized data). If the tree's internal data type exists at the SQL level, the `STORAGE` option of the `CREATE OPERATOR CLASS` command can be used. The optional eighth method is `distance`, which is needed if the operator class wishes to support ordered scans (nearest-neighbor searches). The optional ninth method `fetch` is needed if the operator class wishes to support index-only scans, except when the `compress` method is omitted. The optional tenth method `options` is needed if the operator class has user-specified parameters. The optional eleventh method `sortsupport` is used to speed up building a GiST index.
 
-* `consistent`
+- `consistent`
 
-  Given an index entry `p` and a query value `q`, this function determines whether the index entry is “consistent” with the query; that is, could the predicate “*`indexed_column`* *`indexable_operator`* `q`” be true for any row represented by the index entry? For a leaf index entry this is equivalent to testing the indexable condition, while for an internal tree node this determines whether it is necessary to scan the subtree of the index represented by the tree node. When the result is `true`, a `recheck` flag must also be returned. This indicates whether the predicate is certainly true or only possibly true. If `recheck` = `false` then the index has tested the predicate condition exactly, whereas if `recheck` = `true` the row is only a candidate match. In that case the system will automatically evaluate the *`indexable_operator`* against the actual row value to see if it is really a match. This convention allows GiST to support both lossless and lossy index structures.
+  Given an index entry `p` and a query value `q`, this function determines whether the index entry is “consistent” with the query; that is, could the predicate “_`indexed_column`_ _`indexable_operator`_ `q`” be true for any row represented by the index entry? For a leaf index entry this is equivalent to testing the indexable condition, while for an internal tree node this determines whether it is necessary to scan the subtree of the index represented by the tree node. When the result is `true`, a `recheck` flag must also be returned. This indicates whether the predicate is certainly true or only possibly true. If `recheck` = `false` then the index has tested the predicate condition exactly, whereas if `recheck` = `true` the row is only a candidate match. In that case the system will automatically evaluate the _`indexable_operator`_ against the actual row value to see if it is really a match. This convention allows GiST to support both lossless and lossy index structures.
 
   The SQL declaration of the function must look like this:
 
@@ -62,7 +62,7 @@ There are five methods that an index operator class for GiST must provide, and s
 
   Depending on which operators you have included in the class, the data type of `query` could vary with the operator, since it will be whatever type is on the right-hand side of the operator, which might be different from the indexed data type appearing on the left-hand side. (The above code skeleton assumes that only one type is possible; if not, fetching the `query` argument value would have to depend on the operator.) It is recommended that the SQL declaration of the `consistent` function use the opclass's indexed data type for the `query` argument, even though the actual type might be something else depending on the operator.
 
-* `union`
+- `union`
 
   This method consolidates information in the tree. Given a set of entries, this function generates a new index entry that represents all the given entries.
 
@@ -121,7 +121,7 @@ There are five methods that an index operator class for GiST must provide, and s
 
   As shown above, the `union` function's first `internal` argument is actually a `GistEntryVector` pointer. The second argument is a pointer to an integer variable, which can be ignored. (It used to be required that the `union` function store the size of its result value into that variable, but this is no longer necessary.)
 
-* `compress`
+- `compress`
 
   Converts a data item into a format suitable for physical storage in an index page. If the `compress` method is omitted, data items are stored in the index without modification.
 
@@ -168,9 +168,9 @@ There are five methods that an index operator class for GiST must provide, and s
   }
   ```
 
-  You have to adapt *`compressed_data_type`* to the specific type you're converting to in order to compress your leaf nodes, of course.
+  You have to adapt _`compressed_data_type`_ to the specific type you're converting to in order to compress your leaf nodes, of course.
 
-* `decompress`
+- `decompress`
 
   Converts the stored representation of a data item into a format that can be manipulated by the other GiST methods in the operator class. If the `decompress` method is omitted, it is assumed that the other GiST methods can work directly on the stored data format. (`decompress` is not necessarily the reverse of the `compress` method; in particular, if `compress` is lossy then it's impossible for `decompress` to exactly reconstruct the original data. `decompress` is not necessarily equivalent to `fetch`, either, since the other GiST methods might not require full reconstruction of the data.)
 
@@ -199,7 +199,7 @@ There are five methods that an index operator class for GiST must provide, and s
 
   The above skeleton is suitable for the case where no decompression is needed. (But, of course, omitting the method altogether is even easier, and is recommended in such cases.)
 
-* `penalty`
+- `penalty`
 
   Returns a value indicating the “cost” of inserting the new entry into a particular branch of the tree. Items will be inserted down the path of least `penalty` in the tree. Values returned by `penalty` should be non-negative. If a negative value is returned, it will be treated as zero.
 
@@ -237,7 +237,7 @@ There are five methods that an index operator class for GiST must provide, and s
 
   The `penalty` function is crucial to good performance of the index. It'll get used at insertion time to determine which branch to follow when choosing where to add the new entry in the tree. At query time, the more balanced the index, the quicker the lookup.
 
-* `picksplit`
+- `picksplit`
 
   When an index page split is necessary, this function decides which entries on the page are to stay on the old page, and which are to move to the new page.
 
@@ -334,7 +334,7 @@ There are five methods that an index operator class for GiST must provide, and s
 
   Like `penalty`, the `picksplit` function is crucial to good performance of the index. Designing suitable `penalty` and `picksplit` implementations is where the challenge of implementing well-performing GiST indexes lies.
 
-* `same`
+- `same`
 
   Returns true if two index entries are identical, false otherwise. (An “index entry” is a value of the index's storage type, not necessarily the original indexed column's type.)
 
@@ -368,7 +368,7 @@ There are five methods that an index operator class for GiST must provide, and s
 
   For historical reasons, the `same` function doesn't just return a Boolean result; instead it has to store the flag at the location indicated by the third argument. The return value per se is ignored, though it's conventional to pass back the address of that argument.
 
-* `distance`
+- `distance`
 
   Given an index entry `p` and a query value `q`, this function determines the index entry's “distance” from the query value. This function must be supplied if the operator class contains any ordering operators. A query using the ordering operator will be implemented by returning index entries with the smallest “distance” values first, so the results must be consistent with the operator's semantics. For a leaf index entry the result just represents the distance to the index entry; for an internal tree node, the result must be the smallest distance that any child entry could have.
 
@@ -413,7 +413,7 @@ There are five methods that an index operator class for GiST must provide, and s
 
   If the distance function returns `*recheck = true` for any leaf node, the original ordering operator's return type must be `float8` or `float4`, and the distance function's result values must be comparable to those of the original ordering operator, since the executor will sort using both distance function results and recalculated ordering-operator results. Otherwise, the distance function's result values can be any finite `float8` values, so long as the relative order of the result values matches the order returned by the ordering operator. (Infinity and minus infinity are used internally to handle cases such as nulls, so it is not recommended that `distance` functions return these values.)
 
-* `fetch`
+- `fetch`
 
   Converts the compressed index representation of a data item into the original data type, for index-only scans. The returned data must be an exact, non-lossy copy of the originally indexed value.
 
@@ -460,7 +460,7 @@ There are five methods that an index operator class for GiST must provide, and s
 
   If the compress method is lossy for leaf entries, the operator class cannot support index-only scans, and must not define a `fetch` function.
 
-* `options`
+- `options`
 
   Allows definition of user-visible parameters that control operator class behavior.
 
@@ -476,7 +476,7 @@ There are five methods that an index operator class for GiST must provide, and s
 
   The function is passed a pointer to a `local_relopts` struct, which needs to be filled with a set of operator class specific options. The options can be accessed from other support functions using the `PG_HAS_OPCLASS_OPTIONS()` and `PG_GET_OPCLASS_OPTIONS()` macros.
 
-  An example implementation of my\_options() and parameters use from other support functions are given below:
+  An example implementation of my_options() and parameters use from other support functions are given below:
 
   ```
 
@@ -594,7 +594,7 @@ There are five methods that an index operator class for GiST must provide, and s
 
   Since the representation of the key in GiST is flexible, it may depend on user-specified parameters. For instance, the length of key signature may be specified. See `gtsvector_options()` for example.
 
-* `sortsupport`
+- `sortsupport`
 
   Returns a comparator function to sort data in a way that preserves locality. It is used by `CREATE INDEX` and `REINDEX` commands. The quality of the created index depends on how well the sort order determined by the comparator function preserves locality of the inputs.
 

@@ -2,15 +2,15 @@
 
 ## 43.6. Control Structures [#](#PLPGSQL-CONTROL-STRUCTURES)
 
-  * [43.6.1. Returning from a Function](plpgsql-control-structures#PLPGSQL-STATEMENTS-RETURNING)
-  * [43.6.2. Returning from a Procedure](plpgsql-control-structures#PLPGSQL-STATEMENTS-RETURNING-PROCEDURE)
-  * [43.6.3. Calling a Procedure](plpgsql-control-structures#PLPGSQL-STATEMENTS-CALLING-PROCEDURE)
-  * [43.6.4. Conditionals](plpgsql-control-structures#PLPGSQL-CONDITIONALS)
-  * [43.6.5. Simple Loops](plpgsql-control-structures#PLPGSQL-CONTROL-STRUCTURES-LOOPS)
-  * [43.6.6. Looping through Query Results](plpgsql-control-structures#PLPGSQL-RECORDS-ITERATING)
-  * [43.6.7. Looping through Arrays](plpgsql-control-structures#PLPGSQL-FOREACH-ARRAY)
-  * [43.6.8. Trapping Errors](plpgsql-control-structures#PLPGSQL-ERROR-TRAPPING)
-  * [43.6.9. Obtaining Execution Location Information](plpgsql-control-structures#PLPGSQL-CALL-STACK)
+- [43.6.1. Returning from a Function](plpgsql-control-structures#PLPGSQL-STATEMENTS-RETURNING)
+- [43.6.2. Returning from a Procedure](plpgsql-control-structures#PLPGSQL-STATEMENTS-RETURNING-PROCEDURE)
+- [43.6.3. Calling a Procedure](plpgsql-control-structures#PLPGSQL-STATEMENTS-CALLING-PROCEDURE)
+- [43.6.4. Conditionals](plpgsql-control-structures#PLPGSQL-CONDITIONALS)
+- [43.6.5. Simple Loops](plpgsql-control-structures#PLPGSQL-CONTROL-STRUCTURES-LOOPS)
+- [43.6.6. Looping through Query Results](plpgsql-control-structures#PLPGSQL-RECORDS-ITERATING)
+- [43.6.7. Looping through Arrays](plpgsql-control-structures#PLPGSQL-FOREACH-ARRAY)
+- [43.6.8. Trapping Errors](plpgsql-control-structures#PLPGSQL-ERROR-TRAPPING)
+- [43.6.9. Obtaining Execution Location Information](plpgsql-control-structures#PLPGSQL-CALL-STACK)
 
 Control structures are probably the most useful (and important) part of PL/pgSQL. With PL/pgSQL's control structures, you can manipulate PostgreSQL data in a very flexible and powerful way.
 
@@ -28,7 +28,7 @@ There are two commands available that allow you to return data from a function: 
 RETURN expression;
 ```
 
-`RETURN` with an expression terminates the function and returns the value of *`expression`* to the caller. This form is used for PL/pgSQL functions that do not return a set.
+`RETURN` with an expression terminates the function and returns the value of _`expression`_ to the caller. This form is used for PL/pgSQL functions that do not return a set.
 
 In a function that returns a scalar type, the expression's result will automatically be cast into the function's return type as described for assignments. But to return a composite (row) value, you must write an expression delivering exactly the requested column set. This may require use of explicit casting.
 
@@ -54,8 +54,6 @@ RETURN (1, 2, 'three'::text);  -- must cast columns to correct types
 
 #### 43.6.1.2. `RETURN NEXT` and `RETURN QUERY` [#](#PLPGSQL-STATEMENTS-RETURNING-RETURN-NEXT)
 
-
-
 ```
 RETURN NEXT expression;
 RETURN QUERY query;
@@ -68,7 +66,7 @@ When a PL/pgSQL function is declared to return `SETOF sometype`, the procedure t
 
 `RETURN QUERY` has a variant `RETURN QUERY EXECUTE`, which specifies the query to be executed dynamically. Parameter expressions can be inserted into the computed query string via `USING`, in just the same way as in the `EXECUTE` command.
 
-If you declared the function with output parameters, write just `RETURN NEXT` with no expression. On each execution, the current values of the output parameter variable(s) will be saved for eventual return as a row of the result. Note that you must declare the function as returning `SETOF record` when there are multiple output parameters, or `SETOF sometype` when there is just one output parameter of type *`sometype`*, in order to create a set-returning function with output parameters.
+If you declared the function with output parameters, write just `RETURN NEXT` with no expression. On each execution, the current values of the output parameter variable(s) will be saved for eventual return as a row of the result. Note that you must declare the function as returning `SETOF record` when there are multiple output parameters, or `SETOF sometype` when there is just one output parameter of type _`sometype`_, in order to create a set-returning function with output parameters.
 
 Here is an example of a function using `RETURN NEXT`:
 
@@ -125,7 +123,7 @@ SELECT * FROM get_available_flightid(CURRENT_DATE);
 
 ### Note
 
-The current implementation of `RETURN NEXT` and `RETURN QUERY` stores the entire result set before returning from the function, as discussed above. That means that if a PL/pgSQL function produces a very large result set, performance might be poor: data will be written to disk to avoid memory exhaustion, but the function itself will not return until the entire result set has been generated. A future version of PL/pgSQL might allow users to define set-returning functions that do not have this limitation. Currently, the point at which data begins being written to disk is controlled by the [work\_mem](runtime-config-resource#GUC-WORK-MEM) configuration variable. Administrators who have sufficient memory to store larger result sets in memory should consider increasing this parameter.
+The current implementation of `RETURN NEXT` and `RETURN QUERY` stores the entire result set before returning from the function, as discussed above. That means that if a PL/pgSQL function produces a very large result set, performance might be poor: data will be written to disk to avoid memory exhaustion, but the function itself will not return until the entire result set has been generated. A future version of PL/pgSQL might allow users to define set-returning functions that do not have this limitation. Currently, the point at which data begins being written to disk is controlled by the [work_mem](runtime-config-resource#GUC-WORK-MEM) configuration variable. Administrators who have sufficient memory to store larger result sets in memory should consider increasing this parameter.
 
 [#id](#PLPGSQL-STATEMENTS-RETURNING-PROCEDURE)
 
@@ -167,17 +165,17 @@ The variable corresponding to an output parameter can be a simple variable or a 
 
 `IF` and `CASE` statements let you execute alternative commands based on certain conditions. PL/pgSQL has three forms of `IF`:
 
-* `IF ... THEN ... END IF`
+- `IF ... THEN ... END IF`
 
-* `IF ... THEN ... ELSE ... END IF`
+- `IF ... THEN ... ELSE ... END IF`
 
-* `IF ... THEN ... ELSIF ... THEN ... ELSE ... END IF`
+- `IF ... THEN ... ELSIF ... THEN ... ELSE ... END IF`
 
 and two forms of `CASE`:
 
-* `CASE ... WHEN ... THEN ... ELSE ... END CASE`
+- `CASE ... WHEN ... THEN ... ELSE ... END CASE`
 
-* `CASE WHEN ... THEN ... ELSE ... END CASE`
+- `CASE WHEN ... THEN ... ELSE ... END CASE`
 
 [#id](#PLPGSQL-CONDITIONALS-IF-THEN)
 
@@ -252,7 +250,7 @@ IF boolean-expression THEN
 END IF;
 ```
 
-Sometimes there are more than just two alternatives. `IF-THEN-ELSIF` provides a convenient method of checking several alternatives in turn. The `IF` conditions are tested successively until the first one that is true is found. Then the associated statement(s) are executed, after which control passes to the next statement after `END IF`. (Any subsequent `IF` conditions are *not* tested.) If none of the `IF` conditions is true, then the `ELSE` block (if any) is executed.
+Sometimes there are more than just two alternatives. `IF-THEN-ELSIF` provides a convenient method of checking several alternatives in turn. The `IF` conditions are tested successively until the first one that is true is found. Then the associated statement(s) are executed, after which control passes to the next statement after `END IF`. (Any subsequent `IF` conditions are _not_ tested.) If none of the `IF` conditions is true, then the `ELSE` block (if any) is executed.
 
 Here is an example:
 
@@ -301,7 +299,7 @@ CASE search-expression
 END CASE;
 ```
 
-The simple form of `CASE` provides conditional execution based on equality of operands. The *`search-expression`* is evaluated (once) and successively compared to each *`expression`* in the `WHEN` clauses. If a match is found, then the corresponding *`statements`* are executed, and then control passes to the next statement after `END CASE`. (Subsequent `WHEN` expressions are not evaluated.) If no match is found, the `ELSE` *`statements`* are executed; but if `ELSE` is not present, then a `CASE_NOT_FOUND` exception is raised.
+The simple form of `CASE` provides conditional execution based on equality of operands. The _`search-expression`_ is evaluated (once) and successively compared to each _`expression`_ in the `WHEN` clauses. If a match is found, then the corresponding _`statements`_ are executed, and then control passes to the next statement after `END CASE`. (Subsequent `WHEN` expressions are not evaluated.) If no match is found, the `ELSE` _`statements`_ are executed; but if `ELSE` is not present, then a `CASE_NOT_FOUND` exception is raised.
 
 Here is a simple example:
 
@@ -330,7 +328,7 @@ CASE
 END CASE;
 ```
 
-The searched form of `CASE` provides conditional execution based on truth of Boolean expressions. Each `WHEN` clause's *`boolean-expression`* is evaluated in turn, until one is found that yields `true`. Then the corresponding *`statements`* are executed, and then control passes to the next statement after `END CASE`. (Subsequent `WHEN` expressions are not evaluated.) If no true result is found, the `ELSE` *`statements`* are executed; but if `ELSE` is not present, then a `CASE_NOT_FOUND` exception is raised.
+The searched form of `CASE` provides conditional execution based on truth of Boolean expressions. Each `WHEN` clause's _`boolean-expression`_ is evaluated in turn, until one is found that yields `true`. Then the corresponding _`statements`_ are executed, and then control passes to the next statement after `END CASE`. (Subsequent `WHEN` expressions are not evaluated.) If no true result is found, the `ELSE` _`statements`_ are executed; but if `ELSE` is not present, then a `CASE_NOT_FOUND` exception is raised.
 
 Here is an example:
 
@@ -349,8 +347,6 @@ This form of `CASE` is entirely equivalent to `IF-THEN-ELSIF`, except for the ru
 
 ### 43.6.5. Simple Loops [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS)
 
-
-
 With the `LOOP`, `EXIT`, `CONTINUE`, `WHILE`, `FOR`, and `FOREACH` statements, you can arrange for your PL/pgSQL function to repeat a series of commands.
 
 [#id](#PLPGSQL-CONTROL-STRUCTURES-LOOPS-LOOP)
@@ -364,21 +360,19 @@ LOOP
 END LOOP [ label ];
 ```
 
-`LOOP` defines an unconditional loop that is repeated indefinitely until terminated by an `EXIT` or `RETURN` statement. The optional *`label`* can be used by `EXIT` and `CONTINUE` statements within nested loops to specify which loop those statements refer to.
+`LOOP` defines an unconditional loop that is repeated indefinitely until terminated by an `EXIT` or `RETURN` statement. The optional _`label`_ can be used by `EXIT` and `CONTINUE` statements within nested loops to specify which loop those statements refer to.
 
 [#id](#PLPGSQL-CONTROL-STRUCTURES-LOOPS-EXIT)
 
 #### 43.6.5.2. `EXIT` [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS-EXIT)
 
-
-
 ```
 EXIT [ label ] [ WHEN boolean-expression ];
 ```
 
-If no *`label`* is given, the innermost loop is terminated and the statement following `END LOOP` is executed next. If *`label`* is given, it must be the label of the current or some outer level of nested loop or block. Then the named loop or block is terminated and control continues with the statement after the loop's/block's corresponding `END`.
+If no _`label`_ is given, the innermost loop is terminated and the statement following `END LOOP` is executed next. If _`label`_ is given, it must be the label of the current or some outer level of nested loop or block. Then the named loop or block is terminated and control continues with the statement after the loop's/block's corresponding `END`.
 
-If `WHEN` is specified, the loop exit occurs only if *`boolean-expression`* is true. Otherwise, control passes to the statement after `EXIT`.
+If `WHEN` is specified, the loop exit occurs only if _`boolean-expression`_ is true. Otherwise, control passes to the statement after `EXIT`.
 
 `EXIT` can be used with all types of loops; it is not limited to use with unconditional loops.
 
@@ -413,15 +407,13 @@ END;
 
 #### 43.6.5.3. `CONTINUE` [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS-CONTINUE)
 
-
-
 ```
 CONTINUE [ label ] [ WHEN boolean-expression ];
 ```
 
-If no *`label`* is given, the next iteration of the innermost loop is begun. That is, all statements remaining in the loop body are skipped, and control returns to the loop control expression (if any) to determine whether another loop iteration is needed. If *`label`* is present, it specifies the label of the loop whose execution will be continued.
+If no _`label`_ is given, the next iteration of the innermost loop is begun. That is, all statements remaining in the loop body are skipped, and control returns to the loop control expression (if any) to determine whether another loop iteration is needed. If _`label`_ is present, it specifies the label of the loop whose execution will be continued.
 
-If `WHEN` is specified, the next iteration of the loop is begun only if *`boolean-expression`* is true. Otherwise, control passes to the statement after `CONTINUE`.
+If `WHEN` is specified, the next iteration of the loop is begun only if _`boolean-expression`_ is true. Otherwise, control passes to the statement after `CONTINUE`.
 
 `CONTINUE` can be used with all types of loops; it is not limited to use with unconditional loops.
 
@@ -440,8 +432,6 @@ END LOOP;
 
 #### 43.6.5.4. `WHILE` [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS-WHILE)
 
-
-
 ```
 [ <<label>> ]
 WHILE boolean-expression LOOP
@@ -449,7 +439,7 @@ WHILE boolean-expression LOOP
 END LOOP [ label ];
 ```
 
-The `WHILE` statement repeats a sequence of statements so long as the *`boolean-expression`* evaluates to true. The expression is checked just before each entry to the loop body.
+The `WHILE` statement repeats a sequence of statements so long as the _`boolean-expression`_ evaluates to true. The expression is checked just before each entry to the loop body.
 
 For example:
 
@@ -474,7 +464,7 @@ FOR name IN [ REVERSE ] expression .. expression [ BY expression ] LOOP
 END LOOP [ label ];
 ```
 
-This form of `FOR` creates a loop that iterates over a range of integer values. The variable *`name`* is automatically defined as type `integer` and exists only inside the loop (any existing definition of the variable name is ignored within the loop). The two expressions giving the lower and upper bound of the range are evaluated once when entering the loop. If the `BY` clause isn't specified the iteration step is 1, otherwise it's the value specified in the `BY` clause, which again is evaluated once on loop entry. If `REVERSE` is specified then the step value is subtracted, rather than added, after each iteration.
+This form of `FOR` creates a loop that iterates over a range of integer values. The variable _`name`_ is automatically defined as type `integer` and exists only inside the loop (any existing definition of the variable name is ignored within the loop). The two expressions giving the lower and upper bound of the range are evaluated once when entering the loop. If the `BY` clause isn't specified the iteration step is 1, otherwise it's the value specified in the `BY` clause, which again is evaluated once on loop entry. If `REVERSE` is specified then the step value is subtracted, rather than added, after each iteration.
 
 Some examples of integer `FOR` loops:
 
@@ -494,7 +484,7 @@ END LOOP;
 
 If the lower bound is greater than the upper bound (or less than, in the `REVERSE` case), the loop body is not executed at all. No error is raised.
 
-If a *`label`* is attached to the `FOR` loop then the integer loop variable can be referenced with a qualified name, using that *`label`*.
+If a _`label`_ is attached to the `FOR` loop then the integer loop variable can be referenced with a qualified name, using that _`label`_.
 
 [#id](#PLPGSQL-RECORDS-ITERATING)
 
@@ -509,7 +499,7 @@ FOR target IN query LOOP
 END LOOP [ label ];
 ```
 
-The *`target`* is a record variable, row variable, or comma-separated list of scalar variables. The *`target`* is successively assigned each row resulting from the *`query`* and the loop body is executed for each row. Here is an example:
+The _`target`_ is a record variable, row variable, or comma-separated list of scalar variables. The _`target`_ is successively assigned each row resulting from the _`query`_ and the loop body is executed for each row. Here is an example:
 
 ```
 CREATE FUNCTION refresh_mviews() RETURNS integer AS $$
@@ -545,7 +535,7 @@ $$ LANGUAGE plpgsql;
 
 If the loop is terminated by an `EXIT` statement, the last assigned row value is still accessible after the loop.
 
-The *`query`* used in this type of `FOR` statement can be any SQL command that returns rows to the caller: `SELECT` is the most common case, but you can also use `INSERT`, `UPDATE`, or `DELETE` with a `RETURNING` clause. Some utility commands such as `EXPLAIN` will work too.
+The _`query`_ used in this type of `FOR` statement can be any SQL command that returns rows to the caller: `SELECT` is the most common case, but you can also use `INSERT`, `UPDATE`, or `DELETE` with a `RETURNING` clause. Some utility commands such as `EXPLAIN` will work too.
 
 PL/pgSQL variables are replaced by query parameters, and the query plan is cached for possible re-use, as discussed in detail in [Section 43.11.1](plpgsql-implementation#PLPGSQL-VAR-SUBST) and [Section 43.11.2](plpgsql-implementation#PLPGSQL-PLAN-CACHING).
 
@@ -575,7 +565,7 @@ FOREACH target [ SLICE number ] IN ARRAY expression LOOP
 END LOOP [ label ];
 ```
 
-Without `SLICE`, or if `SLICE 0` is specified, the loop iterates through individual elements of the array produced by evaluating the *`expression`*. The *`target`* variable is assigned each element value in sequence, and the loop body is executed for each element. Here is an example of looping through the elements of an integer array:
+Without `SLICE`, or if `SLICE 0` is specified, the loop iterates through individual elements of the array produced by evaluating the _`expression`_. The _`target`_ variable is assigned each element value in sequence, and the loop body is executed for each element. Here is an example of looping through the elements of an integer array:
 
 ```
 CREATE FUNCTION sum(int[]) RETURNS int8 AS $$
@@ -592,9 +582,9 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-The elements are visited in storage order, regardless of the number of array dimensions. Although the *`target`* is usually just a single variable, it can be a list of variables when looping through an array of composite values (records). In that case, for each array element, the variables are assigned from successive columns of the composite value.
+The elements are visited in storage order, regardless of the number of array dimensions. Although the _`target`_ is usually just a single variable, it can be a list of variables when looping through an array of composite values (records). In that case, for each array element, the variables are assigned from successive columns of the composite value.
 
-With a positive `SLICE` value, `FOREACH` iterates through slices of the array rather than single elements. The `SLICE` value must be an integer constant not larger than the number of dimensions of the array. The *`target`* variable must be an array, and it receives successive slices of the array value, where each slice is of the number of dimensions specified by `SLICE`. Here is an example of iterating through one-dimensional slices:
+With a positive `SLICE` value, `FOREACH` iterates through slices of the array rather than single elements. The `SLICE` value must be an integer constant not larger than the number of dimensions of the array. The _`target`_ variable must be an array, and it receives successive slices of the array value, where each slice is of the number of dimensions specified by `SLICE`. Here is an example of iterating through one-dimensional slices:
 
 ```
 CREATE FUNCTION scan_rows(int[]) RETURNS void AS $$
@@ -620,8 +610,6 @@ NOTICE:  row = {10,11,12}
 
 ### 43.6.8. Trapping Errors [#](#PLPGSQL-ERROR-TRAPPING)
 
-
-
 By default, any error occurring in a PL/pgSQL function aborts execution of the function and the surrounding transaction. You can trap errors and recover from them by using a `BEGIN` block with an `EXCEPTION` clause. The syntax is an extension of the normal syntax for a `BEGIN` block:
 
 ```
@@ -639,16 +627,16 @@ EXCEPTION
 END;
 ```
 
-If no error occurs, this form of block simply executes all the *`statements`*, and then control passes to the next statement after `END`. But if an error occurs within the *`statements`*, further processing of the *`statements`* is abandoned, and control passes to the `EXCEPTION` list. The list is searched for the first *`condition`* matching the error that occurred. If a match is found, the corresponding *`handler_statements`* are executed, and then control passes to the next statement after `END`. If no match is found, the error propagates out as though the `EXCEPTION` clause were not there at all: the error can be caught by an enclosing block with `EXCEPTION`, or if there is none it aborts processing of the function.
+If no error occurs, this form of block simply executes all the _`statements`_, and then control passes to the next statement after `END`. But if an error occurs within the _`statements`_, further processing of the _`statements`_ is abandoned, and control passes to the `EXCEPTION` list. The list is searched for the first _`condition`_ matching the error that occurred. If a match is found, the corresponding _`handler_statements`_ are executed, and then control passes to the next statement after `END`. If no match is found, the error propagates out as though the `EXCEPTION` clause were not there at all: the error can be caught by an enclosing block with `EXCEPTION`, or if there is none it aborts processing of the function.
 
-The *`condition`* names can be any of those shown in [Appendix A](errcodes-appendix). A category name matches any error within its category. The special condition name `OTHERS` matches every error type except `QUERY_CANCELED` and `ASSERT_FAILURE`. (It is possible, but often unwise, to trap those two error types by name.) Condition names are not case-sensitive. Also, an error condition can be specified by `SQLSTATE` code; for example these are equivalent:
+The _`condition`_ names can be any of those shown in [Appendix A](errcodes-appendix). A category name matches any error within its category. The special condition name `OTHERS` matches every error type except `QUERY_CANCELED` and `ASSERT_FAILURE`. (It is possible, but often unwise, to trap those two error types by name.) Condition names are not case-sensitive. Also, an error condition can be specified by `SQLSTATE` code; for example these are equivalent:
 
 ```
 WHEN division_by_zero THEN ...
 WHEN SQLSTATE '22012' THEN ...
 ```
 
-If a new error occurs within the selected *`handler_statements`*, it cannot be caught by this `EXCEPTION` clause, but is propagated out. A surrounding `EXCEPTION` clause could catch it.
+If a new error occurs within the selected _`handler_statements`_, it cannot be caught by this `EXCEPTION` clause, but is propagated out. A surrounding `EXCEPTION` clause could catch it.
 
 When an error is caught by an `EXCEPTION` clause, the local variables of the PL/pgSQL function remain as they were when the error occurred, but all changes to persistent database state within the block are rolled back. As an example, consider this fragment:
 
@@ -709,7 +697,6 @@ SELECT merge_db(1, 'dennis');
 
 This coding assumes the `unique_violation` error is caused by the `INSERT`, and not by, say, an `INSERT` in a trigger function on the table. It might also misbehave if there is more than one unique index on the table, since it will retry the operation regardless of which index caused the error. More safety could be had by using the features discussed next to check that the trapped error was the one expected.
 
-
 [#id](#PLPGSQL-EXCEPTION-DIAGNOSTICS)
 
 #### 43.6.8.1. Obtaining Information about an Error [#](#PLPGSQL-EXCEPTION-DIAGNOSTICS)
@@ -724,25 +711,24 @@ Within an exception handler, one may also retrieve information about the current
 GET STACKED DIAGNOSTICS variable { = | := } item [ , ... ];
 ```
 
-Each *`item`* is a key word identifying a status value to be assigned to the specified *`variable`* (which should be of the right data type to receive it). The currently available status items are shown in [Table 43.2](plpgsql-control-structures#PLPGSQL-EXCEPTION-DIAGNOSTICS-VALUES).
+Each _`item`_ is a key word identifying a status value to be assigned to the specified _`variable`_ (which should be of the right data type to receive it). The currently available status items are shown in [Table 43.2](plpgsql-control-structures#PLPGSQL-EXCEPTION-DIAGNOSTICS-VALUES).
 
 [#id](#PLPGSQL-EXCEPTION-DIAGNOSTICS-VALUES)
 
 **Table 43.2. Error Diagnostics Items**
 
-| Name                   | Type   | Description                                                                                                                                       |
-| ---------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `RETURNED_SQLSTATE`    | `text` | the SQLSTATE error code of the exception                                                                                                          |
-| `COLUMN_NAME`          | `text` | the name of the column related to exception                                                                                                       |
-| `CONSTRAINT_NAME`      | `text` | the name of the constraint related to exception                                                                                                   |
-| `PG_DATATYPE_NAME`     | `text` | the name of the data type related to exception                                                                                                    |
-| `MESSAGE_TEXT`         | `text` | the text of the exception's primary message                                                                                                       |
-| `TABLE_NAME`           | `text` | the name of the table related to exception                                                                                                        |
-| `SCHEMA_NAME`          | `text` | the name of the schema related to exception                                                                                                       |
-| `PG_EXCEPTION_DETAIL`  | `text` | the text of the exception's detail message, if any                                                                                                |
-| `PG_EXCEPTION_HINT`    | `text` | the text of the exception's hint message, if any                                                                                                  |
+| Name                   | Type   | Description                                                                                                                                  |
+| ---------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RETURNED_SQLSTATE`    | `text` | the SQLSTATE error code of the exception                                                                                                     |
+| `COLUMN_NAME`          | `text` | the name of the column related to exception                                                                                                  |
+| `CONSTRAINT_NAME`      | `text` | the name of the constraint related to exception                                                                                              |
+| `PG_DATATYPE_NAME`     | `text` | the name of the data type related to exception                                                                                               |
+| `MESSAGE_TEXT`         | `text` | the text of the exception's primary message                                                                                                  |
+| `TABLE_NAME`           | `text` | the name of the table related to exception                                                                                                   |
+| `SCHEMA_NAME`          | `text` | the name of the schema related to exception                                                                                                  |
+| `PG_EXCEPTION_DETAIL`  | `text` | the text of the exception's detail message, if any                                                                                           |
+| `PG_EXCEPTION_HINT`    | `text` | the text of the exception's hint message, if any                                                                                             |
 | `PG_EXCEPTION_CONTEXT` | `text` | line(s) of text describing the call stack at the time of the exception (see [Section 43.6.9](plpgsql-control-structures#PLPGSQL-CALL-STACK)) |
-
 
 If the exception did not set a value for an item, an empty string will be returned.
 

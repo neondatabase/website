@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-CURSOR-OPEN-WITH-PARAMLIST)
 
-## SPI\_cursor\_open\_with\_paramlist
+## SPI_cursor_open_with_paramlist
 
-SPI\_cursor\_open\_with\_paramlist — set up a cursor using parameters
+SPI_cursor_open_with_paramlist — set up a cursor using parameters
 
 ## Synopsis
 
@@ -25,19 +25,19 @@ The passed-in parameter data will be copied into the cursor's portal, so it can 
 
 ## Arguments
 
-* `const char * name`
+- `const char * name`
 
   name for portal, or `NULL` to let the system select a name
 
-* `SPIPlanPtr plan`
+- `SPIPlanPtr plan`
 
   prepared statement (returned by `SPI_prepare`)
 
-* `ParamListInfo params`
+- `ParamListInfo params`
 
   data structure containing parameter types and values; NULL if none
 
-* `bool read_only`
+- `bool read_only`
 
   `true` for read-only execution
 

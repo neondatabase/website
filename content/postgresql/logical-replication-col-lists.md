@@ -2,7 +2,7 @@
 
 ## 31.4. Column Lists [#](#LOGICAL-REPLICATION-COL-LISTS)
 
-* [31.4.1. Examples](logical-replication-col-lists#LOGICAL-REPLICATION-COL-LIST-EXAMPLES)
+- [31.4.1. Examples](logical-replication-col-lists#LOGICAL-REPLICATION-COL-LIST-EXAMPLES)
 
 Each publication can optionally specify which columns of each table are replicated to subscribers. The table on the subscriber side must have at least all the columns that are published. If no column list is specified, then all columns on the publisher are replicated. See [CREATE PUBLICATION](sql-createpublication) for details on the syntax.
 

@@ -2,11 +2,11 @@
 
 ## 46.2. Data Values [#](#PLPYTHON-DATA)
 
-  * [46.2.1. Data Type Mapping](plpython-data#PLPYTHON-DATA-TYPE-MAPPING)
-  * [46.2.2. Null, None](plpython-data#PLPYTHON-DATA-NULL)
-  * [46.2.3. Arrays, Lists](plpython-data#PLPYTHON-ARRAYS)
-  * [46.2.4. Composite Types](plpython-data#PLPYTHON-DATA-COMPOSITE-TYPES)
-  * [46.2.5. Set-Returning Functions](plpython-data#PLPYTHON-DATA-SET-RETURNING-FUNCS)
+- [46.2.1. Data Type Mapping](plpython-data#PLPYTHON-DATA-TYPE-MAPPING)
+- [46.2.2. Null, None](plpython-data#PLPYTHON-DATA-NULL)
+- [46.2.3. Arrays, Lists](plpython-data#PLPYTHON-ARRAYS)
+- [46.2.4. Composite Types](plpython-data#PLPYTHON-DATA-COMPOSITE-TYPES)
+- [46.2.5. Set-Returning Functions](plpython-data#PLPYTHON-DATA-SET-RETURNING-FUNCS)
 
 Generally speaking, the aim of PL/Python is to provide a “natural” mapping between the PostgreSQL and the Python worlds. This informs the data mapping rules described below.
 
@@ -16,31 +16,31 @@ Generally speaking, the aim of PL/Python is to provide a “natural” mapping b
 
 When a PL/Python function is called, its arguments are converted from their PostgreSQL data type to a corresponding Python type:
 
-* PostgreSQL `boolean` is converted to Python `bool`.
+- PostgreSQL `boolean` is converted to Python `bool`.
 
-* PostgreSQL `smallint`, `int`, `bigint` and `oid` are converted to Python `int`.
+- PostgreSQL `smallint`, `int`, `bigint` and `oid` are converted to Python `int`.
 
-* PostgreSQL `real` and `double` are converted to Python `float`.
+- PostgreSQL `real` and `double` are converted to Python `float`.
 
-* PostgreSQL `numeric` is converted to Python `Decimal`. This type is imported from the `cdecimal` package if that is available. Otherwise, `decimal.Decimal` from the standard library will be used. `cdecimal` is significantly faster than `decimal`. In Python 3.3 and up, however, `cdecimal` has been integrated into the standard library under the name `decimal`, so there is no longer any difference.
+- PostgreSQL `numeric` is converted to Python `Decimal`. This type is imported from the `cdecimal` package if that is available. Otherwise, `decimal.Decimal` from the standard library will be used. `cdecimal` is significantly faster than `decimal`. In Python 3.3 and up, however, `cdecimal` has been integrated into the standard library under the name `decimal`, so there is no longer any difference.
 
-* PostgreSQL `bytea` is converted to Python `bytes`.
+- PostgreSQL `bytea` is converted to Python `bytes`.
 
-* All other data types, including the PostgreSQL character string types, are converted to a Python `str` (in Unicode like all Python strings).
+- All other data types, including the PostgreSQL character string types, are converted to a Python `str` (in Unicode like all Python strings).
 
-* For nonscalar data types, see below.
+- For nonscalar data types, see below.
 
 When a PL/Python function returns, its return value is converted to the function's declared PostgreSQL return data type as follows:
 
-* When the PostgreSQL return type is `boolean`, the return value will be evaluated for truth according to the *Python* rules. That is, 0 and empty string are false, but notably `'f'` is true.
+- When the PostgreSQL return type is `boolean`, the return value will be evaluated for truth according to the _Python_ rules. That is, 0 and empty string are false, but notably `'f'` is true.
 
-* When the PostgreSQL return type is `bytea`, the return value will be converted to Python `bytes` using the respective Python built-ins, with the result being converted to `bytea`.
+- When the PostgreSQL return type is `bytea`, the return value will be converted to Python `bytes` using the respective Python built-ins, with the result being converted to `bytea`.
 
-* For all other PostgreSQL return types, the return value is converted to a string using the Python built-in `str`, and the result is passed to the input function of the PostgreSQL data type. (If the Python value is a `float`, it is converted using the `repr` built-in instead of `str`, to avoid loss of precision.)
+- For all other PostgreSQL return types, the return value is converted to a string using the Python built-in `str`, and the result is passed to the input function of the PostgreSQL data type. (If the Python value is a `float`, it is converted using the `repr` built-in instead of `str`, to avoid loss of precision.)
 
   Strings are automatically converted to the PostgreSQL server encoding when they are passed to PostgreSQL.
 
-* For nonscalar data types, see below.
+- For nonscalar data types, see below.
 
 Note that logical mismatches between the declared PostgreSQL return type and the Python data type of the actual return object are not flagged; the value will be converted in any case.
 
@@ -153,7 +153,7 @@ CREATE TYPE named_value AS (
 
 A composite result can be returned as a:
 
-* Sequence type (a tuple or list, but not a set because it is not indexable)
+- Sequence type (a tuple or list, but not a set because it is not indexable)
 
   Returned sequence objects must have the same number of items as the composite result type has fields. The item with index 0 is assigned to the first field of the composite type, 1 to the second and so on. For example:
 
@@ -170,7 +170,7 @@ A composite result can be returned as a:
 
   When an array of composite types is returned, it cannot be returned as a list, because it is ambiguous whether the Python list represents a composite type, or another array dimension.
 
-* Mapping (dictionary)
+- Mapping (dictionary)
 
   The value for each result type column is retrieved from the mapping with the column name as key. Example:
 
@@ -184,7 +184,7 @@ A composite result can be returned as a:
 
   Any extra dictionary key/value pairs are ignored. Missing keys are treated as errors. To return an SQL null value for any column, insert `None` with the corresponding column name as the key.
 
-* Object (any object providing method `__getattr__`)
+- Object (any object providing method `__getattr__`)
 
   This works the same as a mapping. Example:
 
@@ -241,7 +241,7 @@ CREATE TYPE greeting AS (
 
 A set result can be returned from a:
 
-* Sequence type (tuple, list, set)
+- Sequence type (tuple, list, set)
 
   ```
   CREATE FUNCTION greet (how text)
@@ -253,7 +253,7 @@ A set result can be returned from a:
   $$ LANGUAGE plpython3u;
   ```
 
-* Iterator (any object providing `__iter__` and `next` methods)
+- Iterator (any object providing `__iter__` and `next` methods)
 
   ```
   CREATE FUNCTION greet (how text)
@@ -278,7 +278,7 @@ A set result can be returned from a:
   $$ LANGUAGE plpython3u;
   ```
 
-* Generator (`yield`)
+- Generator (`yield`)
 
   ```
   CREATE FUNCTION greet (how text)

@@ -3,7 +3,7 @@ title: Promote a branch
 subtitle: Learn how to promote a branch to the primary branch of your Neon project using
   the Neon API
 enableTableOfContents: true
-updatedOn: '2024-02-19T18:57:12.554Z'
+updatedOn: '2024-06-14T07:55:54.384Z'
 ---
 
 This guide describes how to create a new branch and promote it to the primary branch of your Neon project in the context of a data recovery scenario. It also describes how to move the compute endpoint from your existing primary branch to the new branch to avoid having to reconfigure your application's database connection details.
@@ -40,7 +40,7 @@ The following information is required to perform the procedure:
 
 The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) request shown below creates a point-in-time branch without a compute endpoint. The `project_id` is a required parameter. To create a point-in-time branch, specify a `parent_timestamp` value in the `branch` object. The `parent_timestamp` value must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
 
-The `project_id` value used in the example below is `young-silence-08999984`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key. The branch is given the  name `recovery_branch`. You will change the name in a later step.
+The `project_id` value used in the example below is `young-silence-08999984`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key. The branch is given the name `recovery_branch`. You will change the name in a later step.
 
 ```bash
 curl --request POST \

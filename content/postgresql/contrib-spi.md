@@ -2,12 +2,10 @@
 
 ## F.41. spi — Server Programming Interface features/examples [#](#CONTRIB-SPI)
 
-  * [F.41.1. refint — Functions for Implementing Referential Integrity](contrib-spi#CONTRIB-SPI-REFINT)
-  * [F.41.2. autoinc — Functions for Autoincrementing Fields](contrib-spi#CONTRIB-SPI-AUTOINC)
-  * [F.41.3. insert\_username — Functions for Tracking Who Changed a Table](contrib-spi#CONTRIB-SPI-INSERT-USERNAME)
-  * [F.41.4. moddatetime — Functions for Tracking Last Modification Time](contrib-spi#CONTRIB-SPI-MODDATETIME)
-
-
+- [F.41.1. refint — Functions for Implementing Referential Integrity](contrib-spi#CONTRIB-SPI-REFINT)
+- [F.41.2. autoinc — Functions for Autoincrementing Fields](contrib-spi#CONTRIB-SPI-AUTOINC)
+- [F.41.3. insert_username — Functions for Tracking Who Changed a Table](contrib-spi#CONTRIB-SPI-INSERT-USERNAME)
+- [F.41.4. moddatetime — Functions for Tracking Last Modification Time](contrib-spi#CONTRIB-SPI-MODDATETIME)
 
 The spi module provides several workable examples of using the [Server Programming Interface](spi) (SPI) and triggers. While these functions are of some value in their own right, they are even more useful as examples to modify for your own purposes. The functions are general enough to be used with any table, but you have to specify table and field names (as described below) while creating a trigger.
 
@@ -37,7 +35,7 @@ There is an example in `autoinc.example`.
 
 [#id](#CONTRIB-SPI-INSERT-USERNAME)
 
-### F.41.3. insert\_username — Functions for Tracking Who Changed a Table [#](#CONTRIB-SPI-INSERT-USERNAME)
+### F.41.3. insert_username — Functions for Tracking Who Changed a Table [#](#CONTRIB-SPI-INSERT-USERNAME)
 
 `insert_username()` is a trigger that stores the current user's name into a text field. This can be useful for tracking who last modified a particular row within a table.
 

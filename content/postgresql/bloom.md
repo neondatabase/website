@@ -2,13 +2,11 @@
 
 ## F.7. bloom — bloom filter index access method [#](#BLOOM)
 
-  * [F.7.1. Parameters](bloom#BLOOM-PARAMETERS)
-  * [F.7.2. Examples](bloom#BLOOM-EXAMPLES)
-  * [F.7.3. Operator Class Interface](bloom#BLOOM-OPERATOR-CLASS-INTERFACE)
-  * [F.7.4. Limitations](bloom#BLOOM-LIMITATIONS)
-  * [F.7.5. Authors](bloom#BLOOM-AUTHORS)
-
-
+- [F.7.1. Parameters](bloom#BLOOM-PARAMETERS)
+- [F.7.2. Examples](bloom#BLOOM-EXAMPLES)
+- [F.7.3. Operator Class Interface](bloom#BLOOM-OPERATOR-CLASS-INTERFACE)
+- [F.7.4. Limitations](bloom#BLOOM-LIMITATIONS)
+- [F.7.5. Authors](bloom#BLOOM-AUTHORS)
 
 `bloom` provides an index access method based on [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter).
 
@@ -24,11 +22,11 @@ This type of index is most useful when a table has many attributes and queries t
 
 A `bloom` index accepts the following parameters in its `WITH` clause:
 
-* `length`
+- `length`
 
   Length of each signature (index entry) in bits. It is rounded up to the nearest multiple of `16`. The default is `80` bits and the maximum is `4096`.
 
-- `col1 — col32`
+* `col1 — col32`
 
   Number of bits generated for each index column. Each parameter's name refers to the number of the index column that it controls. The default is `2` bits and the maximum is `4095`. Parameters for index columns not actually used are ignored.
 
@@ -176,13 +174,13 @@ DEFAULT FOR TYPE text USING bloom AS
 
 ### F.7.4. Limitations [#](#BLOOM-LIMITATIONS)
 
-* Only operator classes for `int4` and `text` are included with the module.
+- Only operator classes for `int4` and `text` are included with the module.
 
-* Only the `=` operator is supported for search. But it is possible to add support for arrays with union and intersection operations in the future.
+- Only the `=` operator is supported for search. But it is possible to add support for arrays with union and intersection operations in the future.
 
-* `bloom` access method doesn't support `UNIQUE` indexes.
+- `bloom` access method doesn't support `UNIQUE` indexes.
 
-* `bloom` access method doesn't support searching for `NULL` values.
+- `bloom` access method doesn't support searching for `NULL` values.
 
 [#id](#BLOOM-AUTHORS)
 

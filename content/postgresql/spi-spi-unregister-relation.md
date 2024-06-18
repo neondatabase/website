@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-UNREGISTER-RELATION)
 
-## SPI\_unregister\_relation
+## SPI_unregister_relation
 
-SPI\_unregister\_relation — remove an ephemeral named relation from the registry
+SPI_unregister_relation — remove an ephemeral named relation from the registry
 
 ## Synopsis
 
@@ -20,7 +20,7 @@ int SPI_unregister_relation(const char * name)
 
 ## Arguments
 
-* `const char * name`
+- `const char * name`
 
   the relation registry entry name
 
@@ -30,20 +30,20 @@ int SPI_unregister_relation(const char * name)
 
 If the execution of the command was successful then the following (nonnegative) value will be returned:
 
-* `SPI_OK_REL_UNREGISTER`
+- `SPI_OK_REL_UNREGISTER`
 
   if the tuplestore has been successfully removed from the registry
 
 On error, one of the following negative values is returned:
 
-* `SPI_ERROR_ARGUMENT`
+- `SPI_ERROR_ARGUMENT`
 
-  if *`name`* is `NULL`
+  if _`name`_ is `NULL`
 
-* `SPI_ERROR_UNCONNECTED`
+- `SPI_ERROR_UNCONNECTED`
 
   if called from an unconnected C function
 
-* `SPI_ERROR_REL_NOT_FOUND`
+- `SPI_ERROR_REL_NOT_FOUND`
 
-  if *`name`* is not found in the registry for the current connection
+  if _`name`_ is not found in the registry for the current connection

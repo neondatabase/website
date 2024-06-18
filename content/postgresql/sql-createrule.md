@@ -28,7 +28,7 @@ Presently, `ON SELECT` rules must be unconditional `INSTEAD` rules and must have
 
 You can create the illusion of an updatable view by defining `ON INSERT`, `ON UPDATE`, and `ON DELETE` rules (or any subset of those that's sufficient for your purposes) to replace update actions on the view with appropriate updates on other tables. If you want to support `INSERT RETURNING` and so on, then be sure to put a suitable `RETURNING` clause into each of these rules.
 
-There is a catch if you try to use conditional rules for complex view updates: there *must* be an unconditional `INSTEAD` rule for each action you wish to allow on the view. If the rule is conditional, or is not `INSTEAD`, then the system will still reject attempts to perform the update action, because it thinks it might end up trying to perform the action on the dummy table of the view in some cases. If you want to handle all the useful cases in conditional rules, add an unconditional `DO INSTEAD NOTHING` rule to ensure that the system understands it will never be called on to update the dummy table. Then make the conditional rules non-`INSTEAD`; in the cases where they are applied, they add to the default `INSTEAD NOTHING` action. (This method does not currently work to support `RETURNING` queries, however.)
+There is a catch if you try to use conditional rules for complex view updates: there _must_ be an unconditional `INSTEAD` rule for each action you wish to allow on the view. If the rule is conditional, or is not `INSTEAD`, then the system will still reject attempts to perform the update action, because it thinks it might end up trying to perform the action on the dummy table of the view in some cases. If you want to handle all the useful cases in conditional rules, add an unconditional `DO INSTEAD NOTHING` rule to ensure that the system understands it will never be called on to update the dummy table. Then make the conditional rules non-`INSTEAD`; in the cases where they are applied, they add to the default `INSTEAD NOTHING` action. (This method does not currently work to support `RETURNING` queries, however.)
 
 ### Note
 
@@ -40,37 +40,37 @@ Another alternative worth considering is to use `INSTEAD OF` triggers (see [CREA
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of a rule to create. This must be distinct from the name of any other rule for the same table. Multiple rules on the same table and same event type are applied in alphabetical name order.
 
-* *`event`*
+- _`event`_
 
   The event is one of `SELECT`, `INSERT`, `UPDATE`, or `DELETE`. Note that an `INSERT` containing an `ON CONFLICT` clause cannot be used on tables that have either `INSERT` or `UPDATE` rules. Consider using an updatable view instead.
 
-* *`table_name`*
+- _`table_name`_
 
   The name (optionally schema-qualified) of the table or view the rule applies to.
 
-* *`condition`*
+- _`condition`_
 
   Any SQL conditional expression (returning `boolean`). The condition expression cannot refer to any tables except `NEW` and `OLD`, and cannot contain aggregate functions.
 
-* `INSTEAD`
+- `INSTEAD`
 
-  `INSTEAD` indicates that the commands should be executed *instead of* the original command.
+  `INSTEAD` indicates that the commands should be executed _instead of_ the original command.
 
-* `ALSO`
+- `ALSO`
 
-  `ALSO` indicates that the commands should be executed *in addition to* the original command.
+  `ALSO` indicates that the commands should be executed _in addition to_ the original command.
 
   If neither `ALSO` nor `INSTEAD` is specified, `ALSO` is the default.
 
-* *`command`*
+- _`command`_
 
   The command or commands that make up the rule action. Valid commands are `SELECT`, `INSERT`, `UPDATE`, `DELETE`, or `NOTIFY`.
 
-Within *`condition`* and *`command`*, the special table names `NEW` and `OLD` can be used to refer to values in the referenced table. `NEW` is valid in `ON INSERT` and `ON UPDATE` rules to refer to the new row being inserted or updated. `OLD` is valid in `ON UPDATE` and `ON DELETE` rules to refer to the existing row being updated or deleted.
+Within _`condition`_ and _`command`_, the special table names `NEW` and `OLD` can be used to refer to values in the referenced table. `NEW` is valid in `ON INSERT` and `ON UPDATE` rules to refer to the new row being inserted or updated. `OLD` is valid in `ON UPDATE` and `ON DELETE` rules to refer to the existing row being updated or deleted.
 
 [#id](#id-1.9.3.79.7)
 

@@ -26,23 +26,23 @@ You must own the collation to use `ALTER COLLATION`. To alter the owner, you mus
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of an existing collation.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name of the collation.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The new owner of the collation.
 
-* *`new_schema`*
+- _`new_schema`_
 
   The new schema for the collation.
 
-* `REFRESH VERSION`
+- `REFRESH VERSION`
 
   Update the collation's version. See [Notes](sql-altercollation#SQL-ALTERCOLLATION-NOTES) below.
 

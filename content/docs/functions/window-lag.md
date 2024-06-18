@@ -2,7 +2,7 @@
 title: Postgres lag() window function
 subtitle: Use lag() to access values from previous rows in a result set
 enableTableOfContents: true
-updatedOn: '2024-02-07T10:15:00.000Z'
+updatedOn: '2024-06-14T07:55:54.378Z'
 ---
 
 The `lag()` function in Postgres is a window function that allows you to access values from previous rows in a result set without the need for a self-join. It's useful for comparing values between the current row and a previous row, for example, when calculating running differences, plotting trends, or doing time series analysis.
@@ -60,7 +60,7 @@ You can also use `lag()` to access values from rows further back by specifying a
 
 ```sql
 WITH sales AS (
-  SELECT 
+  SELECT
     sale_date,
     floor(random() * 1000 + 1)::int AS amount
   FROM generate_series(date '2023-01-01', date '2023-01-31', interval '1 day') AS sale_date
@@ -75,7 +75,7 @@ ORDER BY sale_date DESC
 LIMIT 5;
 ```
 
-This query generates random sales data for each day in January 2023 and compares each day's sales to the sales from the same day of the previous week. The `lag()` function with an offset of 7 retrieves the sales amount from 7 days ago. 
+This query generates random sales data for each day in January 2023 and compares each day's sales to the sales from the same day of the previous week. The `lag()` function with an offset of 7 retrieves the sales amount from 7 days ago.
 
 ```text
        sale_date        | amount | prev_week_amount | diff
@@ -167,16 +167,17 @@ This query calculates the number of days since each customer's previous order. T
 
 ### Correctness
 
-The `lag()` function relates each row in the result set to a previous row in the same window frame. If the window frame is not explicitly defined, the default frame is the entire result set. Make sure to specify the correct `ORDER BY` and `PARTITION BY` clauses to ensure the desired behavior. 
+The `lag()` function relates each row in the result set to a previous row in the same window frame. If the window frame is not explicitly defined, the default frame is the entire result set. Make sure to specify the correct `ORDER BY` and `PARTITION BY` clauses to ensure the desired behavior.
 
 ### Performance implications
 
 Window functions like `lag()` perform calculations across a set of rows defined by the `OVER` clause. This can be computationally expensive for large datasets or complex window definitions.
 
 To optimize performance, make sure to:
+
 - Include an `ORDER BY` clause in the `OVER` clause to avoid sorting the entire dataset.
 - Use partitioning (`PARTITION BY`) to divide the data into smaller chunks when possible.
-- Create appropriate indexes on the columns used in the `OVER` clause. 
+- Create appropriate indexes on the columns used in the `OVER` clause.
 
 ### Alternative functions
 

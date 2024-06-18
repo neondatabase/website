@@ -4,7 +4,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-02-08T20:07:48.873Z'
+updatedOn: '2024-06-14T07:55:54.415Z'
 ---
 
 Our developers are focused on making Neon the default choice for serverless Postgres. This roadmap describes committed features that are coming soon. We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion.
@@ -31,42 +31,42 @@ Benefits of joining:
 
 Here's a snapshot of what we're working on now:
 
-* [Observability](#observability)
-* [Developer workflows](#developer-workflows)
-* [Account management](#account-management)
-* [More regions](#more-regions)
+- [Observability](#observability)
+- [Developer workflows](#developer-workflows)
+- [Account management](#account-management)
+- [More regions](#more-regions)
 
 ### Observability
 
-* **More metrics for the Monitoring page**
+- **More metrics for the Monitoring page**
 
-   We are also working on adding more metrics to the Monitoring page in the Neon Console to provide the key Postgres and resource usage metrics you require to effectively manage your projects and databases.
+  We are also working on adding more metrics to the Monitoring page in the Neon Console to provide the key Postgres and resource usage metrics you require to effectively manage your projects and databases.
 
 ### Developer workflows
 
-* **GitHub App**
+- **GitHub App**
 
   We're working on a GitHub App for Neon that will create and delete Neon branches in synchronization with git branch actions.
 
-* **Outerbase integration**
+- **Outerbase integration**
 
   We are adding Outerbase as one of our available integrations. You will soon be able to use [Outerbase](https://www.outerbase.com/) to view, query, visualize, and edit your Neon data with the power of AI.
 
-* **Support for anonymizing data**
+- **Support for anonymizing data**
 
-   To help with workflows that require protecting personal information, we're adding support for anonymizing data. For example, if you derive your staging branch directly from production, you might want to anonymize the data on staging, which you can then use as the source for all of your development and testing branches.
+  To help with workflows that require protecting personal information, we're adding support for anonymizing data. For example, if you derive your staging branch directly from production, you might want to anonymize the data on staging, which you can then use as the source for all of your development and testing branches.
 
 If there are any new branching features that you think could help your development team's workflow, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042).
 
 ### Account management
 
-* **Organization support**
+- **Organization support**
 
-    We are adding features to support using Neon in your organization. Later, we'll add support for managing individual teams within the organization as well.
+  We are adding features to support using Neon in your organization. Later, we'll add support for managing individual teams within the organization as well.
 
 ### More regions
 
-* We are currently evaluating new regions. Please reach out on Discord to let us know which region you would like to see next.
+- We are currently evaluating new regions. Please reach out on Discord to let us know which region you would like to see next.
 
 ## A brief history of Neon
 

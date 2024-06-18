@@ -2,11 +2,9 @@
 
 ## 24.2. Collation Support [#](#COLLATION)
 
-  * [24.2.1. Concepts](collation#COLLATION-CONCEPTS)
-  * [24.2.2. Managing Collations](collation#COLLATION-MANAGING)
-  * [24.2.3. ICU Custom Collations](collation#ICU-CUSTOM-COLLATIONS)
-
-
+- [24.2.1. Concepts](collation#COLLATION-CONCEPTS)
+- [24.2.2. Managing Collations](collation#COLLATION-MANAGING)
+- [24.2.3. ICU Custom Collations](collation#ICU-CUSTOM-COLLATIONS)
 
 The collation feature allows specifying the sort order and character classification behavior of data per-column, or even per-operation. This alleviates the restriction that the `LC_COLLATE` and `LC_CTYPE` settings of a database cannot be changed after its creation.
 
@@ -14,7 +12,7 @@ The collation feature allows specifying the sort order and character classificat
 
 ### 24.2.1. Concepts [#](#COLLATION-CONCEPTS)
 
-Conceptually, every expression of a collatable data type has a collation. (The built-in collatable data types are `text`, `varchar`, and `char`. User-defined base types can also be marked collatable, and of course a [**](glossary#GLOSSARY-DOMAIN)*[domain](glossary#GLOSSARY-DOMAIN)* over a collatable data type is collatable.) If the expression is a column reference, the collation of the expression is the defined collation of the column. If the expression is a constant, the collation is the default collation of the data type of the constant. The collation of a more complex expression is derived from the collations of its inputs, as described below.
+Conceptually, every expression of a collatable data type has a collation. (The built-in collatable data types are `text`, `varchar`, and `char`. User-defined base types can also be marked collatable, and of course a [\*\*](glossary#GLOSSARY-DOMAIN)_[domain](glossary#GLOSSARY-DOMAIN)_ over a collatable data type is collatable.) If the expression is a column reference, the collation of the expression is the defined collation of the column. If the expression is a constant, the collation is the default collation of the data type of the constant. The collation of a more complex expression is derived from the collations of its inputs, as described below.
 
 The collation of an expression can be the “default” collation, which means the locale settings defined for the database. It is also possible for an expression's collation to be indeterminate. In such cases, ordering operations and other operations that need to know the collation will fail.
 
@@ -22,7 +20,7 @@ When the database system has to perform an ordering or a character classificatio
 
 For a function or operator call, the collation that is derived by examining the argument collations is used at run time for performing the specified operation. If the result of the function or operator call is of a collatable data type, the collation is also used at parse time as the defined collation of the function or operator expression, in case there is a surrounding expression that requires knowledge of its collation.
 
-The *collation derivation* of an expression can be implicit or explicit. This distinction affects how collations are combined when multiple different collations appear in an expression. An explicit collation derivation occurs when a `COLLATE` clause is used; all other collation derivations are implicit. When multiple collations need to be combined, for example in a function call, the following rules are used:
+The _collation derivation_ of an expression can be implicit or explicit. This distinction affects how collations are combined when multiple different collations appear in an expression. An explicit collation derivation occurs when a `COLLATE` clause is used; all other collation derivations are implicit. When multiple collations need to be combined, for example in a function call, the following rules are used:
 
 1. If any input expression has an explicit collation derivation, then all explicitly derived collations among the input expressions must be the same, otherwise an error is raised. If any explicitly derived collation is present, that is the result of the collation combination.
 
@@ -110,7 +108,7 @@ SELECT * FROM test1 ORDER BY a || b COLLATE "fr_FR";
 
 ### 24.2.2. Managing Collations [#](#COLLATION-MANAGING)
 
-A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation definition has a *provider* that specifies which library supplies the locale data. One standard provider name is `libc`, which uses the locales provided by the operating system C library. These are the locales used by most tools provided by the operating system. Another provider is `icu`, which uses the external ICU library. ICU locales can only be used if support for ICU was configured when PostgreSQL was built.
+A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation definition has a _provider_ that specifies which library supplies the locale data. One standard provider name is `libc`, which uses the locales provided by the operating system C library. These are the locales used by most tools provided by the operating system. Another provider is `icu`, which uses the external ICU library. ICU locales can only be used if support for ICU was configured when PostgreSQL was built.
 
 A collation object provided by `libc` maps to a combination of `LC_COLLATE` and `LC_CTYPE` settings, as accepted by the `setlocale()` system library call. (As the name would suggest, the main purpose of a collation is to set `LC_COLLATE`, which controls the sort order. But it is rarely necessary in practice to have an `LC_CTYPE` setting that is different from `LC_COLLATE`, so it is more convenient to collect these under one concept than to create another infrastructure for setting `LC_CTYPE` per expression.) Also, a `libc` collation is tied to a character set encoding (see [Section 24.3](multibyte)). The same collation name may exist for different encodings.
 
@@ -128,11 +126,11 @@ The `C` and `POSIX` locales may behave differently depending on the database enc
 
 Additionally, two SQL standard collation names are available:
 
-* `unicode`
+- `unicode`
 
   This collation sorts using the Unicode Collation Algorithm with the Default Unicode Collation Element Table. It is available in all encodings. ICU support is required to use this collation. (This collation has the same behavior as the ICU root locale; see [`und-x-icu` (for “undefined”)](collation#COLLATION-MANAGING-PREDEFINED-ICU-UND-X-ICU).)
 
-* `ucs_basic`
+- `ucs_basic`
 
   This collation sorts by Unicode code point. It is only available for encoding `UTF8`. (This collation has the same behavior as the libc locale specification `C` in `UTF8` encoding.)
 
@@ -171,17 +169,17 @@ With ICU, it is not sensible to enumerate all possible locale names. ICU uses a 
 
 Here are some example collations that might be created:
 
-* `de-x-icu` [#](#COLLATION-MANAGING-PREDEFINED-ICU-DE-X-ICU)
+- `de-x-icu` [#](#COLLATION-MANAGING-PREDEFINED-ICU-DE-X-ICU)
 
   German collation, default variant
 
-* `de-AT-x-icu` [#](#COLLATION-MANAGING-PREDEFINED-ICU-DE-AT-X-ICU)
+- `de-AT-x-icu` [#](#COLLATION-MANAGING-PREDEFINED-ICU-DE-AT-X-ICU)
 
   German collation for Austria, default variant
 
   (There are also, say, `de-DE-x-icu` or `de-CH-x-icu`, but as of this writing, they are equivalent to `de-x-icu`.)
 
-* `und-x-icu` (for “undefined”) [#](#COLLATION-MANAGING-PREDEFINED-ICU-UND-X-ICU)
+- `und-x-icu` (for “undefined”) [#](#COLLATION-MANAGING-PREDEFINED-ICU-UND-X-ICU)
 
   ICU “root” collation. Use this to get a reasonable language-agnostic sort order.
 
@@ -241,7 +239,7 @@ CREATE COLLATION french FROM "fr-x-icu";
 
 #### 24.2.2.4. Nondeterministic Collations [#](#COLLATION-NONDETERMINISTIC)
 
-A collation is either *deterministic* or *nondeterministic*. A deterministic collation uses deterministic comparisons, which means that it considers strings to be equal only if they consist of the same byte sequence. Nondeterministic comparison may determine strings to be equal even if they consist of different bytes. Typical situations include case-insensitive comparison, accent-insensitive comparison, as well as comparison of strings in different Unicode normal forms. It is up to the collation provider to actually implement such insensitive comparisons; the deterministic flag only determines whether ties are to be broken using bytewise comparison. See also [Unicode Technical Standard 10](https://www.unicode.org/reports/tr10) for more information on the terminology.
+A collation is either _deterministic_ or _nondeterministic_. A deterministic collation uses deterministic comparisons, which means that it considers strings to be equal only if they consist of the same byte sequence. Nondeterministic comparison may determine strings to be equal even if they consist of different bytes. Typical situations include case-insensitive comparison, accent-insensitive comparison, as well as comparison of strings in different Unicode normal forms. It is up to the collation provider to actually implement such insensitive comparisons; the deterministic flag only determines whether ties are to be broken using bytewise comparison. See also [Unicode Technical Standard 10](https://www.unicode.org/reports/tr10) for more information on the terminology.
 
 To create a nondeterministic collation, specify the property `deterministic = false` to `CREATE COLLATION`, for example:
 
@@ -309,7 +307,6 @@ Comparison of two strings (collation) in ICU is determined by a multi-level proc
 | level4  | Punctuation    | `true`      | `true`               | `false`         | `false`     | `false`     | `false`     |
 | identic | All            | `true`      | `false`              | `false`         | `false`     | `false`     | `false`     |
 
-
 At every level, even with full normalization off, basic normalization is performed. For example, `'á'` may be composed of the code points `U&'\0061\0301'` or the single code point `U&'\00E1'`, and those sequences will be considered equal even at the `identic` level. To treat any difference in code point representation as distinct, use a collation created with `deterministic` set to `true`.
 
 [#id](#ICU-COLLATION-LEVEL-EXAMPLES)
@@ -343,17 +340,16 @@ SELECT 'x-y' = 'x_y' COLLATE level4; -- false
 
 | Key  | Values                                                         | Default    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ---- | -------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `co` | `emoji`, `phonebk`, `standard`, *`...`*                        | `standard` | Collation type. See [Section 24.2.3.5](collation#ICU-EXTERNAL-REFERENCES) for additional options and details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `co` | `emoji`, `phonebk`, `standard`, _`...`_                        | `standard` | Collation type. See [Section 24.2.3.5](collation#ICU-EXTERNAL-REFERENCES) for additional options and details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `ka` | `noignore`, `shifted`                                          | `noignore` | If set to `shifted`, causes some characters (e.g. punctuation or space) to be ignored in comparison. Key `ks` must be set to `level3` or lower to take effect. Set key `kv` to control which character classes are ignored.                                                                                                                                                                                                                                                                                                                                                                           |
 | `kb` | `true`, `false`                                                | `false`    | Backwards comparison for the level 2 differences. For example, locale `und-u-kb` sorts `'àe'` before `'aé'`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `kc` | `true`, `false`                                                | `false`    | Separates case into a "level 2.5" that falls between accents and other level 3 features.If set to `true` and `ks` is set to `level1`, will ignore accents but take case into account.                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `kf` | `upper`, `lower`, `false`                                      | `false`    | If set to `upper`, upper case sorts before lower case. If set to `lower`, lower case sorts before upper case. If set to `false`, the sort depends on the rules of the locale.                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `kn` | `true`, `false`                                                | `false`    | If set to `true`, numbers within a string are treated as a single numeric value rather than a sequence of digits. For example, `'id-45'` sorts before `'id-123'`.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `kk` | `true`, `false`                                                | `false`    | Enable full normalization; may affect performance. Basic normalization is performed even when set to `false`. Locales for languages that require full normalization typically enable it by default.Full normalization is important in some cases, such as when multiple accents are applied to a single character. For example, the code point sequences `U&'\0065\0323\0302'` and `U&'\0065\0302\0323'` represent an `e` with circumflex and dot-below accents applied in different orders. With full normalization on, these code point sequences are treated as equal; otherwise they are unequal. |
-| `kr` | `space`, `punct`, `symbol`, `currency`, `digit`, *`script-id`* |            | Set to one or more of the valid values, or any BCP 47 *`script-id`*, e.g. `latn` ("Latin") or `grek` ("Greek"). Multiple values are separated by "`-`".Redefines the ordering of classes of characters; those characters belonging to a class earlier in the list sort before characters belonging to a class later in the list. For instance, the value `digit-currency-space` (as part of a language tag like `und-u-kr-digit-currency-space`) sorts punctuation before digits and spaces.                                                                                                          |
-| `ks` | `level1`, `level2`, `level3`, `level4`, `identic`              | `level3`   | Sensitivity (or "strength") when determining equality, with `level1` the least sensitive to differences and `identic` the most sensitive to differences. See [Table 24.1](collation#ICU-COLLATION-LEVELS) for details.                                                                                                                                                                                                                                                                                                                                                                           |
+| `kr` | `space`, `punct`, `symbol`, `currency`, `digit`, _`script-id`_ |            | Set to one or more of the valid values, or any BCP 47 _`script-id`_, e.g. `latn` ("Latin") or `grek` ("Greek"). Multiple values are separated by "`-`".Redefines the ordering of classes of characters; those characters belonging to a class earlier in the list sort before characters belonging to a class later in the list. For instance, the value `digit-currency-space` (as part of a language tag like `und-u-kr-digit-currency-space`) sorts punctuation before digits and spaces.                                                                                                          |
+| `ks` | `level1`, `level2`, `level3`, `level4`, `identic`              | `level3`   | Sensitivity (or "strength") when determining equality, with `level1` the least sensitive to differences and `identic` the most sensitive to differences. See [Table 24.1](collation#ICU-COLLATION-LEVELS) for details.                                                                                                                                                                                                                                                                                                                                                                                |
 | `kv` | `space`, `punct`, `symbol`, `currency`                         | `punct`    | Classes of characters ignored during comparison at level 3. Setting to a later value includes earlier values; e.g. `symbol` also includes `punct` and `space` in the characters to be ignored. Key `ka` must be set to `shifted` and key `ks` must be set to `level3` or lower to take effect.                                                                                                                                                                                                                                                                                                        |
-
 
 Defaults may depend on locale. The above table is not meant to be complete. See [Section 24.2.3.5](collation#ICU-EXTERNAL-REFERENCES) for additional options and details.
 
@@ -365,23 +361,23 @@ For many collation settings, you must create the collation with `deterministic` 
 
 #### 24.2.3.3. Collation Settings Examples [#](#ICU-LOCALE-EXAMPLES)
 
-* `CREATE COLLATION "de-u-co-phonebk-x-icu" (provider = icu, locale = 'de-u-co-phonebk');` [#](#COLLATION-MANAGING-CREATE-ICU-DE-U-CO-PHONEBK-X-ICU)
+- `CREATE COLLATION "de-u-co-phonebk-x-icu" (provider = icu, locale = 'de-u-co-phonebk');` [#](#COLLATION-MANAGING-CREATE-ICU-DE-U-CO-PHONEBK-X-ICU)
 
   German collation with phone book collation type
 
-* `CREATE COLLATION "und-u-co-emoji-x-icu" (provider = icu, locale = 'und-u-co-emoji');` [#](#COLLATION-MANAGING-CREATE-ICU-UND-U-CO-EMOJI-X-ICU)
+- `CREATE COLLATION "und-u-co-emoji-x-icu" (provider = icu, locale = 'und-u-co-emoji');` [#](#COLLATION-MANAGING-CREATE-ICU-UND-U-CO-EMOJI-X-ICU)
 
   Root collation with Emoji collation type, per Unicode Technical Standard #51
 
-* `CREATE COLLATION latinlast (provider = icu, locale = 'en-u-kr-grek-latn');` [#](#COLLATION-MANAGING-CREATE-ICU-EN-U-KR-GREK-LATN)
+- `CREATE COLLATION latinlast (provider = icu, locale = 'en-u-kr-grek-latn');` [#](#COLLATION-MANAGING-CREATE-ICU-EN-U-KR-GREK-LATN)
 
   Sort Greek letters before Latin ones. (The default is Latin before Greek.)
 
-* `CREATE COLLATION upperfirst (provider = icu, locale = 'en-u-kf-upper');` [#](#COLLATION-MANAGING-CREATE-ICU-EN-U-KF-UPPER)
+- `CREATE COLLATION upperfirst (provider = icu, locale = 'en-u-kf-upper');` [#](#COLLATION-MANAGING-CREATE-ICU-EN-U-KF-UPPER)
 
   Sort upper-case letters before lower-case letters. (The default is lower-case letters first.)
 
-* `CREATE COLLATION special (provider = icu, locale = 'en-u-kf-upper-kr-grek-latn');` [#](#COLLATION-MANAGING-CREATE-ICU-EN-U-KF-UPPER-KR-GREK-LATN)
+- `CREATE COLLATION special (provider = icu, locale = 'en-u-kf-upper-kr-grek-latn');` [#](#COLLATION-MANAGING-CREATE-ICU-EN-U-KF-UPPER-KR-GREK-LATN)
 
   Combines both of the above options.
 
@@ -435,12 +431,12 @@ ORDER BY c COLLATE ebcdic;
 
 This section ([Section 24.2.3](collation#ICU-CUSTOM-COLLATIONS)) is only a brief overview of ICU behavior and language tags. Refer to the following documents for technical details, additional options, and new behavior:
 
-* [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-collation.html)
+- [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-collation.html)
 
-* [BCP 47](https://tools.ietf.org/html/bcp47)
+- [BCP 47](https://tools.ietf.org/html/bcp47)
 
-* [CLDR repository](https://github.com/unicode-org/cldr/blob/master/common/bcp47/collation.xml)
+- [CLDR repository](https://github.com/unicode-org/cldr/blob/master/common/bcp47/collation.xml)
 
-* [https://unicode-org.github.io/icu/userguide/locale/](https://unicode-org.github.io/icu/userguide/locale/)
+- [https://unicode-org.github.io/icu/userguide/locale/](https://unicode-org.github.io/icu/userguide/locale/)
 
-* [https://unicode-org.github.io/icu/userguide/collation/](https://unicode-org.github.io/icu/userguide/collation/)
+- [https://unicode-org.github.io/icu/userguide/collation/](https://unicode-org.github.io/icu/userguide/collation/)

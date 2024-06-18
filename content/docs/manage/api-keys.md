@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/using-api-keys
   - /docs/get-started-with-neon/api-keys
-updatedOn: '2024-02-13T22:15:15.987Z'
+updatedOn: '2024-06-14T07:55:54.416Z'
 ---
 
 Most actions performed in the Neon Console can be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Using the Neon API requires an API key. This topic describes how to generate, revoke, and use API keys.
@@ -95,7 +95,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 The following Neon API method creates an API key. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createapikey).
 
 ```http
-POST /api_keys 
+POST /api_keys
 ```
 
 The API method appears as follows when specified in a cURL command. You must specify the `key_name` attribute and a name for the API key.
@@ -187,7 +187,6 @@ curl -X DELETE \
 
 <details>
 <summary>Response body</summary>
-
 
 ```json
 {

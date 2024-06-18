@@ -68,7 +68,7 @@ ForeignDataWrapper *
 GetForeignDataWrapperByName(const char *name, bool missing_ok);
 ```
 
-This function returns a `ForeignDataWrapper` object for the foreign-data wrapper with the given name. If the wrapper is not found, return NULL if missing\_ok is true, otherwise raise an error.
+This function returns a `ForeignDataWrapper` object for the foreign-data wrapper with the given name. If the wrapper is not found, return NULL if missing_ok is true, otherwise raise an error.
 
 ```
 
@@ -76,4 +76,4 @@ ForeignServer *
 GetForeignServerByName(const char *name, bool missing_ok);
 ```
 
-This function returns a `ForeignServer` object for the foreign server with the given name. If the server is not found, return NULL if missing\_ok is true, otherwise raise an error.
+This function returns a `ForeignServer` object for the foreign server with the given name. If the server is not found, return NULL if missing_ok is true, otherwise raise an error.

@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-PREPARE-PARAMS)
 
-## SPI\_prepare\_params
+## SPI_prepare_params
 
-SPI\_prepare\_params — prepare a statement, without executing it yet
+SPI_prepare_params — prepare a statement, without executing it yet
 
 ## Synopsis
 
@@ -25,19 +25,19 @@ This function is now deprecated in favor of `SPI_prepare_extended`.
 
 ## Arguments
 
-* `const char * command`
+- `const char * command`
 
   command string
 
-* `ParserSetupHook parserSetup`
+- `ParserSetupHook parserSetup`
 
   Parser hook setup function
 
-* `void * parserSetupArg`
+- `void * parserSetupArg`
 
-  pass-through argument for *`parserSetup`*
+  pass-through argument for _`parserSetup`_
 
-* `int cursorOptions`
+- `int cursorOptions`
 
   integer bit mask of cursor options; zero produces default behavior
 

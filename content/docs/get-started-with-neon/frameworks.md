@@ -2,6 +2,7 @@
 title: Neon framework guides
 subtitle: Find detailed instructions for connecting to Neon from various frameworks
 enableTableOfContents: true
+updatedOn: '2024-06-14T07:55:54.379Z'
 ---
 
 <TechnologyNavigation open>
@@ -29,6 +30,5 @@ enableTableOfContents: true
 <img src="/images/technology-logos/sqlalchemy-logo.svg" width="36" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect an SQLAlchemy application to Neon" />
 
 <img src="/images/technology-logos/symfony-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Symfony with Doctrine to Neon" />
-
 
 </TechnologyNavigation>

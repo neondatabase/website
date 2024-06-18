@@ -70,7 +70,8 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      In Neon, you can provision Postgres databases in &lt; 1s. Don't believe us? Check out this demo
+      In Neon, you can provision Postgres databases in &lt; 1s. Don't believe us? Check out this
+      demo
     </span>
     <ChevronIcon
       className={clsx(
