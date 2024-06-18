@@ -218,7 +218,7 @@ The history of data changes for all branches in your Neon project. A history is 
 
 ## IP allowlist
 
-An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a Scale plan feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [default branch](#primary-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
+An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a Scale plan feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [default branch](#default-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
 
 ## Kubernetes
 
@@ -298,7 +298,7 @@ A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes clus
 
 ## non-default branch
 
-Any branch in a Neon project that is not designated as the [default branch](#primary-branch). For more information, see [Non-default branch](/docs/manage/branches#non-default-branch).
+Any branch in a Neon project that is not designated as the [default branch](#default-branch). For more information, see [Non-default branch](/docs/manage/branches#non-default-branch).
 
 ## Page
 
@@ -352,7 +352,7 @@ The compute endpoint associated with a default branch remains available if you e
 
 You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
 
-For more information, see [default branch](/docs/manage/branches#primary-branch).
+For more information, see [default branch](/docs/manage/branches#default-branch).
 
 ## Project
 
@@ -408,7 +408,7 @@ Selling the Neon service as part of another service offering. Neon's Platform Pa
 
 ## root branch
 
-The primary line of data for every Neon project, initially named `main`. The root branch cannot be deleted and is set as the [default branch](#primary-branch) of your Neon project by default. You can change your project's default branch, but you cannot change the root branch.
+The primary line of data for every Neon project, initially named `main`. The root branch cannot be deleted and is set as the [default branch](#default-branch) of your Neon project by default. You can change your project's default branch, but you cannot change the root branch.
 
 ## Safekeeper
 

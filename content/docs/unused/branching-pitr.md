@@ -84,14 +84,14 @@ SELECT * FROM orders LIMIT 10;
 
 You now have a production branch with lost data and a recovery branch with the data in the desired state. You could dump data from the recovery branch and load it into the production branch using dump and restore utilities like `pg_dump` and `pg_restore`, or you can make the recovery branch your new default branch and use it for production.
 
-To make the recovery branch your new primary:
+To make the recovery branch your new default:
 
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select your `recovery_branch` from the table.
-4. On the branch details page, select **Set as Primary**.
+4. On the branch details page, select **Set as Default**.
 
-Making a branch your default branch ensures that access to data on the branch is never interrupted, even when you exceed project limits. For more information, see [default branch](/docs/manage/branches#primary-branch).
+Making a branch your default branch ensures that access to data on the branch is never interrupted, even when you exceed project limits. For more information, see [default branch](/docs/manage/branches#default-branch).
 
 <Admonition type="note">
 If your previous default branch was your project's root branch (the initial branch created with your project), it cannot be deleted. Deleting a root branch is not yet supported. In the meantime, you can rename a root branch (perhaps adding an `OLD` or `DO_NOT_USE` prefix to its name) and remove data from it to ensure that it's not used accidentally or consuming storage space.
@@ -117,7 +117,7 @@ To avoid changing connection details in your application, you can reassign the c
 
 ## Examples
 
-- [Using Neon branching for instant point-in-time restore](https://neon.tech/blog/point-in-time-recovery). The blog post describes point-in-time restore and provides a script for creating a recovery branch, reassigning a compute endpoint, and setting the new branch as the primary.
+- [Using Neon branching for instant point-in-time restore](https://neon.tech/blog/point-in-time-recovery). The blog post describes point-in-time restore and provides a script for creating a recovery branch, reassigning a compute endpoint, and setting the new branch as the default.
 - [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This blog post (with video) describes a data recovery example that uses Neon's branching feature, the Neon API, and a bisect script to recover lost data.
 
 The following GitHub repositories are available for these examples:

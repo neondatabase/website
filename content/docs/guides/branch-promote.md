@@ -10,14 +10,14 @@ This guide describes how to create a new branch and promote it to the default br
 
 ## What is a default branch?
 
-Each Neon project has a default branch. In the Neon Console, your default branch is identified on the **Branches** page by a `PRIMARY` tag. You can designate any branch as the default branch. The advantage of the default branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
+Each Neon project has a default branch. In the Neon Console, your default branch is identified on the **Branches** page by a `DEFAULT` tag. You can designate any branch as the default branch. The advantage of the default branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
 
 - For [Neon Free Tier](/docs/introduction/plans#free-tier) users, the compute endpoint associated with the default branch is always available.
 - For users on paid plans, the compute endpoint associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
 
-## Why promote a branch to primary?
+## Why promote a branch to default?
 
-A common usage scenario involving promoting a branch to primary is data recovery. For example, a data loss occurs on the current default branch. To recover the lost data, you create a point-in-time branch with data that existed before the data loss occurred. To avoid modifying your application's database connection configuration, you move the compute endpoint from the current default branch to the new branch and make that branch your primary.
+A common usage scenario involving promoting a branch to default is data recovery. For example, a data loss occurs on the current default branch. To recover the lost data, you create a point-in-time branch with data that existed before the data loss occurred. To avoid modifying your application's database connection configuration, you move the compute endpoint from the current default branch to the new branch and make that branch your default branch.
 
 The procedure described below creates a new branch and promotes it to the default branch of your project by performing the following steps:
 
@@ -25,7 +25,7 @@ The procedure described below creates a new branch and promotes it to the defaul
 2. [Moving the compute endpoint from your current default branch to the new branch](#move-the-compute-endpoint-from-your-current-default-branch-to-the-new-branch)
 3. [Renaming the old default branch](#rename-the-old-default-branch)
 4. [Renaming the new branch to the name of the old default branch](#rename-the-new-branch-to-the-name-of-the-old-default-branch)
-5. [Promoting the new branch to primary](#promote-the-new-branch-to-default)
+5. [Promoting the new branch to default](#promote-the-new-branch-to-default)
 
 ## Prerequisites
 
@@ -74,7 +74,7 @@ The response body includes the `id` of your new branch. You will need this value
     "current_state": "init",
     "pending_state": "ready",
     "creation_source": "console",
-    "primary": false,
+    "default": false,
     "cpu_used_sec": 0,
     "compute_time_seconds": 0,
     "active_time_seconds": 0,
@@ -209,7 +209,7 @@ curl --request PATCH \
     "current_state": "ready",
     "logical_size": 29589504,
     "creation_source": "console",
-    "primary": true,
+    "default": true,
     "cpu_used_sec": 969,
     "compute_time_seconds": 969,
     "active_time_seconds": 3816,
@@ -260,7 +260,7 @@ curl --request PATCH \
     "current_state": "ready",
     "logical_size": 29605888,
     "creation_source": "console",
-    "primary": false,
+    "default": false,
     "cpu_used_sec": 0,
     "compute_time_seconds": 0,
     "active_time_seconds": 0,
@@ -281,11 +281,11 @@ Renaming a branch can also be performed using the Neon Console or CLI. See [Rena
 
 ## Promote the new branch to default
 
-The [Set default branch](https://api-docs.neon.tech/reference/setprimaryprojectbranch) API request sets the new branch as the default branch for the project.
+The [Set default branch](https://api-docs.neon.tech/reference/setdefaultprojectbranch) API request sets the new branch as the default branch for the project.
 
 ```bash shouldWrap
 curl --request POST \
-     --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851/set_as_primary \
+     --url https://console.neon.tech/api/v2/projects/young-silence-08999984/branches/br-solitary-hat-85369851/set_as_default \
      --header 'Accept: application/json' \
      --header "Authorization: Bearer $NEON_API_KEY"
 ```
@@ -304,7 +304,7 @@ curl --request POST \
     "current_state": "ready",
     "logical_size": 29605888,
     "creation_source": "console",
-    "primary": true,
+    "default": true,
     "cpu_used_sec": 0,
     "compute_time_seconds": 0,
     "active_time_seconds": 0,
@@ -320,7 +320,7 @@ curl --request POST \
 </details>
 
 <Admonition type="note">
-Promoting a branch to primary can also be performed using the Neon Console or CLI. See [Set a branch as primary](/docs/manage/branches#set-a-branch-as-default) for Neon Console instructions. See [Neon CLI commands — branches](/docs/reference/cli-branches#set-primary) for CLI instructions.
+Promoting a branch to default can also be performed using the Neon Console or CLI. See [Set a branch as primary](/docs/manage/branches#set-a-branch-as-default) for Neon Console instructions. See [Neon CLI commands — branches](/docs/reference/cli-branches#set-primary) for CLI instructions.
 </Admonition>
 
 You should now have a new default branch, and because you moved the compute endpoint from your old default branch to the new one, you do not need to change the connection details in your applications. Once you have validated the change, consider deleting your old default branch to save storage space. See [Delete a branch with the API](/docs/manage/branches#delete-a-branch-with-the-api).

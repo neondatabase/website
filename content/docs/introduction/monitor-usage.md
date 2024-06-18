@@ -115,7 +115,7 @@ curl --request GET \
     "current_state": "ready",
     "logical_size": 427474944,
     "creation_source": "console",
-    "primary": true,
+    "default": true,
     "protected": false,
     "cpu_used_sec": 2505,
     "compute_time_seconds": 2505,

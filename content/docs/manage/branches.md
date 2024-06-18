@@ -20,7 +20,7 @@ When working with branches, it is important to remove old and unused branches. B
 
 ## Default branch
 
-Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `PRIMARY` tag. You can designate any branch as the default branch for your project. The advantage of the default branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
+Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project. The advantage of the default branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
 
 - For Neon Free Tier users, the compute endpoint associated with the default branch is always available.
 - For users on paid plans, the compute endpoint associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
@@ -45,7 +45,7 @@ To create a branch:
 3. Click **Create branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch.
-5. Select a parent branch. You can branch from your Neon project's [default branch](#primary-branch) or a [non-default branch](#non-default-branch).
+5. Select a parent branch. You can branch from your Neon project's [default branch](#default-branch) or a [non-default branch](#non-default-branch).
 6. Select an **Include data up to** option to specify the data to be included in your branch.
 
     <Admonition type="note">
@@ -120,8 +120,8 @@ To set a branch as the default branch:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **Actions** drop-down menu and select **Set as primary**.
-5. In the **Set as primary** confirmation dialog, click **Set as Primary** to confirm your selection.
+4. On the branch overview page, click the **Actions** drop-down menu and select **Set as default**.
+5. In the **Set as default** confirmation dialog, click **Set as default** to confirm your selection.
 
 ## Set a branch as protected
 
