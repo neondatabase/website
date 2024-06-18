@@ -105,12 +105,12 @@ export default {
         {
           icon: careersIcon,
           text: 'Careers',
-          description: 'Become a member',
+          description: 'Join Neon',
           to: LINKS.careers,
         },
         {
           icon: partnersIcon,
-          text: 'Partners',
+          text: 'Add Neon to your platform',
           description: 'Become a partner',
           to: LINKS.partners,
         },
