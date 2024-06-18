@@ -40,7 +40,7 @@ jobs:
     uses: neondatabase/create-branch-action@v5
     with:
       project_id: rapid-haze-373089
-      # optional (defaults to your default branch)
+      # optional (defaults to your project's default branch)
       parent: dev
       # optional (defaults to neondb)
       database: my-database
