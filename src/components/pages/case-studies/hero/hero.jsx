@@ -43,6 +43,7 @@ const FeaturedCard = ({
           alt={title}
           width={image.mediaDetails.width / 2}
           height={image.mediaDetails.height / 2}
+          quality={95}
           priority
         />
       </Link>
