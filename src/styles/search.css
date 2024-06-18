@@ -28,7 +28,7 @@
 }
 
 .DocSearch-Container {
-  @apply fixed left-0 top-0 z-[200] flex h-screen w-screen min-w-[320px] items-center justify-center bg-[rgba(12,13,13,0.2)] dark:bg-[rgba(12,13,13,0.8)] lg:p-4;
+  @apply fixed left-0 top-0 z-[200] flex h-screen w-screen min-w-[320px] cursor-default items-center justify-center bg-[rgba(12,13,13,0.2)] dark:bg-[rgba(12,13,13,0.8)] lg:p-4;
 
   .DocSearch-Modal {
     @apply relative w-full max-w-[564px] rounded-[10px] border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-8;
