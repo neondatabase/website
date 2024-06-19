@@ -7,24 +7,23 @@ updatedOn: '2023-10-07T10:43:33.361Z'
 
 Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs) such as OpenAI.
 
-Neon supports the `pgvector` open-source extension, which enables Postgres as a vector database for storing and querying vector embeddings. By enabling Postgres as a vector database, you can keep your data in the open-source database that you know and trust. There's no need for data migration or a proprietary vector storage solution.
+Neon supports the `pgvector` open-source extension, which enables Postgres as a vector database for storing and querying vector embeddings. By enabling Postgres as a vector database, you can keep your data in the open-source database that you know and trust. There's no need for data migration or a 3rd-party vector storage solution.
 
 <CTA title="Neon AI Starter Kit" description="Get a headstart on your AI app with the Neon AI Starter Kit. Tools, starter apps, and step-by-step instructions to get you up and running in minutes." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
-The _Neon AI Starter Kit_ includes:
+The **Neon AI Starter Kit** includes:
 
-- Neon Postgres with the latest version of `pgvector` for storing vector embeddings
-- The `neon_vecs` Python and JavaScript SDKs for managing and querying vector embeddings in Postgres with the `pgvector` extension
-- The `neon_ai` utility for generating vector embeddings with your chosen LLM and storing them in Postgres
-- Starter apps to get you up and running in minutes:
-  - AI chatbot starter app
-  - RAG starter app
-  - Semantic search starter app
+- Neon Postgres with the latest version of the Postgres [pgvector](https://neon.tech/docs/extensions/pgvector) extension for storing vector embeddings
+- Hackable, fully-featured [starter apps](#ai-starter-apps) to get you up and running:
+  - Chatbot starter apps
+  - RAG chatbot starter apps
+  - Semantic search starter apps
   - Hybrid search starter app
-  - Image search starter app
-  - Chat with PDF starter app
-- The Neon AI scaling guide
-- The Neon AI go-live checklist
+  - Reverse image search starter apps
+  - Chat with PDF starter apps
+- The [Neon AI scaling guide](/docs/ai/ai-scale-with-neon) &#8212; scale your app with Neon's Autoscaling, Read Replica, and serverless driver features
+- The Neon AI go-live checklist &#8212; make sure you are ready for production with our go-live checklist
+- A collection of [AI apps built with Neon](#ai-apps-built-with-neon) for your reference
 
 ## AI basics
 
@@ -38,21 +37,31 @@ The _Neon AI Starter Kit_ includes:
 
 ## AI starter apps
 
-Each starter app includes a step-by-step guide and starter app repo to get you up and running in just a few minutes.
+Hackable, fully-featured, pre-built [starter apps](#ai-starter-apps) to get you up and running.
 
 <DetailIconCards>
 
-<a href="/docs/ai/tbd" description="Learn how to build an AI chatbot for your documentation" icon="openai">Build an AI chatbot</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chatbot-nextjs" description="A fully-featured, hackable Netx.js AI chatbot built with OpenAI and LlamaIndex" icon="openai">AI chatbot (OpenAI + LllamIndex)</a>
 
-<a href="/docs/ai/tbd" description="Learn how to build a Retrival Augmented Generative (RAG) application" icon="openai">Build a RAG application</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs" description="A fully-featured, hackable Netx.js AI chatbot built with OpenAI and LangChain" icon="openai">AI chatbot (OpenAI + LangChain)</a>
 
-<a href="/docs/ai/tbd" description="Learn how to build a semantic search application" icon="openai">Build a semantic search application</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/rag-nextjs" description="A fully-featured, hackable Next.js RAG chatbot built with OpenAI and LlamaIndex" icon="openai">RAG chatbot (OpenAI + LlamaIndex)</a>
 
-<a href="/docs/ai/tbd" description="Learn how to build a hybrid search application" icon="openai">Build a hybrid search application</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/rag-nextjs" description="A fully-featured, hackable Next.js RAG chatbot built with OpenAI and LangChain" icon="openai">RAG chatbot (OpenAI + LangChain)</a>
 
-<a href="/docs/ai/tbd" description="Learn how to build an image search application" icon="openai">Build an image search application</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/semantic-search-nextjs" description="A fully-featured, hackable Next.js Semantic Search chatbot built with OpenAI and LlamaIndex" icon="openai">Semantic search chatbot (OpenAI + LlamaIndex)</a>
 
-<a href="/docs/ai/tbd" description="Learn how to build a ChatGPT plugin using Neon Postgres as your vector store" icon="openai">Build a ChatGPT plugin</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/semantic-search-nextjs" description="A fully-featured, hackable Next.js Semantic Search chatbot built with OpenAI and LangChain" icon="openai">Semantic search chatbot (OpenAI + LangChain)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/hybrid-search-nextjs" description="A full-featured, hackable Next.js Hybrid Search built with OpenAI" icon="openai">Hybrid search (OpenAI)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/reverse-image-search-nextjs" description="A fully-featured, hackable Next.js Reverse Image Search Engine built with OpenAI and LlamaIndex" icon="openai">Reverse image search (OpenAI + LlamaIndex)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/reverse-image-search-nextjs" description="A full-featured, hackable Next.js Reverse Image Search Engine built with OpenAI and LangChain" icon="openai">Reverse image search (OpenAI + LangChain)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chat-with-pdf-nextjs" description="A fully-featured, hackable Next.js Chat with PDF chatbot built with OpenAI and LlamaIndex" icon="openai">Chat with PDF (OpenAI + LlamaIndex)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/chat-with-pdf-nextjs" description="A fully-featured, hackable Next.js Chat with PDF chatbot built with OpenAI and LangChain" icon="openai">Chat with PDF (OpenAI + LangChain)</a>
 
 </DetailIconCards>
 
@@ -92,27 +101,35 @@ Learn how to integrate Neon Postgres with various LLMs and AI platforms.
 
 </DetailIconCards>
 
-## Examples
+## AI apps built with Neon
 
-Check out these AI applications pre-built with Neon Postgres.
+Check out these AI applications built with Neon Postgres.
+
+<Admonition type="note" title="Feature your app here">
+To have your AI app built with Neon Postgres featured here, post it to our **#showcase** channel on [Discord](https://discord.gg/92vNTzKDGp) for consideration.
+</Admonition>
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chatbot-nextjs" description="Build an AI-powered chatbot with pgvector" icon="github">AI Chatbot starter</a>
+<a href="https://neon.tech/guides/chatbot-astro-postgres-llamaindex" description="Build a RAG chatbot in an Astro application with LlamaIndex and Postgres" icon="openai">Build a RAG chatbot</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/rag-nextjs" description="Build an RAG chatbot with pgvector" icon="github">RAG Chatbot starter</a>
+<a href="https://neon.tech/guides/llamaindex-postgres-search-images" description="Using LlamaIndex with Postgres to Build your own Reverse Image Search Engine" icon="openai">Build a Reverse Image Search Engine</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/semantic-search-nextjs" description="Build an AI-powered semantic search application" icon="github">Semantic search starter</a>
+<a href="https://github.com/neondatabase/ask-neon" description="An Ask Neon AI-powered chatbot built with pgvector" icon="github">Ask Neon Chatbot</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chat-with-pdf-nextjs" description="Build a Chat with PDF application" icon="github">Chat with PDF starter</a>
+<a href="https://vercel.com/templates/next.js/postgres-pgvector" description="Enable vector similarity search with Vercel Postgres powered by Neon" icon="github">Vercel Postgres pgvector Starter</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/reverse-image-search-nextjs" description="Build an AI-powered reverse image search application" icon="github">Reverse Image Search starter</a>
+<a href="https://github.com/neondatabase/yc-idea-matcher" description="YCombinator semantic search application" icon="github">YCombinator Semantic Search App</a>
 
-<a href="https://vercel.com/templates/next.js/postgres-pgvector" description="Enable vector similarity search with Vercel Postgres" icon="github">Vercel Postgres pgvector Starter</a>
-
-<a href="https://github.com/neondatabase/postgres-ai-playground" description="Build an AI-enabled SQL playground for natural language queries" icon="github">Web-based AI SQL Playground</a>
+<a href="https://github.com/neondatabase/postgres-ai-playground" description="An AI-enabled SQL playground application for natural language queries" icon="github">Web-based AI SQL Playground</a>
 
 <a href="https://github.com/neondatabase/neon-vector-search-openai-notebooks" description="Jupyter Notebook for vector search with Neon, pgvector, and OpenAI" icon="github">Jupyter Notebook for vector search with Neon</a>
+
+<a href="https://github.com/ItzCrazyKns/Neon-Image-Search" description="An image serch app built with Neon and Vertex AI" icon="github">Image search with Neon and Vertex AI</a>
+
+<a href="https://github.com/mistralai/cookbook/blob/main/third_party/Neon/neon_text_to_sql.ipynb" description="A Text-to-SQL conversion app built with Mistral AI, Neon, and LangChain" icon="github">Text-to-SQL conversion with Mistral + LangChain</a>
+
+<a href="https://github.com/neondatabase/neon-postgresql-expert" description="Create and publish a custom Postgres GPT Expert using OpenAI's GPT" icon="github">Postgres GPT Expert</a>
 
 </DetailIconCards>
 
@@ -124,7 +141,7 @@ Learn about popular AI tools and how to use them with Neon Postgres.
 
 <a href="https://docs.chainlit.io/get-started/overview" description="An open-source Python package to build production ready Conversational AI" icon="openai">Chainlit</a>
 
-<a href="https://colab.research.google.com/" description="A cloud-based environment to write and execute Python code, perfect for machine learning and data science tasks" icon="openai">Google Colab</a>
+<a href="/docs/ai/ai-google-colab" description="A cloud-based environment to write and execute Python code, perfect for machine learning and data science tasks" icon="openai">Google Colab</a>
 
 <a href="https://jupyter.org/" description="An open-source web application for creating and sharing documents that contain live code, equations, visualizations, and narrative text" icon="openai">Jupyter Notebook</a>
 
