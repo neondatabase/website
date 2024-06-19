@@ -21,8 +21,8 @@ The **Neon AI Starter Kit** includes:
   - Hybrid search starter app
   - Reverse image search starter apps
   - Chat with PDF starter apps
+- The [Neon vector search optimization guide](/docs/ai/ai-vector-search-optimization) &#8212; learn how to optimize vector search for better application performance
 - The [Neon AI scaling guide](/docs/ai/ai-scale-with-neon) &#8212; scale your app with Neon's Autoscaling, Read Replica, and serverless driver features
-- The Neon AI go-live checklist &#8212; make sure you are ready for production with our go-live checklist
 - A collection of [AI apps built with Neon](#ai-apps-built-with-neon) for your reference
 
 ## AI basics
@@ -33,6 +33,17 @@ The **Neon AI Starter Kit** includes:
 <a href="/docs/extensions/pgvector" description="Learn about the pgvector Postgres extension" icon="openai">The pgvector extension</a>
 
 <a href="/docs/ai/rag" description="What's Retrieval Augemented Generation (RAG) and how does it work?" icon="openai">RAG applications explained</a>
+
+</DetailIconCards>
+
+## Preparing your AI app for production
+
+<DetailIconCards>
+
+<a href="/docs/extensions/pgvector" description="Optimize vector search for better application performance" icon="openai">Vector search optimization</a>
+
+<a href="/docs/ai/ai-scale-with-neon" description="Scale your app with Neon's Autoscaling, Read Replica, and serverless driver features" icon="openai">Neon AI scaling guide</a>
+
 </DetailIconCards>
 
 ## AI starter apps
@@ -71,33 +82,13 @@ Learn how to integrate Neon Postgres with various LLMs and AI platforms.
 
 <DetailIconCards>
 
-<a href="/docs/ai/tbd" description="Learn how to use Neon Postgres as a knowledge base for Amazon Bedrock" icon="openai">Amazon Bedrock</a>
-
-<a href="/docs/ai/amazon-titan" description="Explore Amazon Titan's high-performing foundation models for various applications" icon="openai">Amazon Titan</a>
-
-<a href="/docs/ai/tbd" description="Discover how to integrate Claude models for advanced language processing" icon="openai">Claude</a>
-
-<a href="/docs/ai/tbd" description="Explore Cohere's versatile language models and their applications" icon="openai">Cohere</a>
-
-<a href="/docs/ai/tbd" description="Learn about Fireworks.ai's innovative AI models for natural language and more" icon="openai">Fireworks.ai</a>
-
-<a href="/docs/ai/tbd" description="Dive into Hugging Face's extensive collection of open-source models" icon="openai">Hugging Face</a>
-
-<a href="/docs/ai/tbd" description="Understand how to leverage Jurassic models for large-scale NLP tasks" icon="openai">Jurassic</a>
+<a href="/docs/ai/tbd" description="Discover OpenAI's models and their wide-ranging applications" icon="openai">OpenAI</a>
 
 <a href="/docs/ai/tbd" description="Utilize LlamaIndex models for efficient text processing and analysis" icon="openai">LlamaIndex</a>
 
-<a href="/docs/ai/tbd" description="Implement MemGPT models to enhance memory and context in AI applications" icon="openai">MemGPT</a>
+<a href="/docs/ai/tbd" description="Utilize LlamaIndex models for efficient text processing and analysis" icon="openai">LangChain</a>
 
-<a href="/docs/ai/tbd" description="Learn how Mistral models deliver top-notch performance in language tasks" icon="openai">Mistral</a>
-
-<a href="/docs/ai/tbd" description="Discover OpenAI's models and their wide-ranging applications" icon="openai">OpenAI</a>
-
-<a href="/docs/ai/tbd" description="Explore how Portkey AI simplifies AI integration across various applications" icon="openai">Portkey AI</a>
-
-<a href="/docs/ai/tbd" description="Utilize Stable Diffusion models for generating realistic images from text" icon="openai">Stable Diffusion</a>
-
-<a href="/docs/ai/tbd" description="Learn about Vertex AI's comprehensive tools for managing machine learning projects" icon="openai">Vertex AI</a>
+<a href="/docs/ai/ollama" description="Learn how to run open-source large language models, such as Llama 2, locally" icon="openai">Ollama</a>
 
 </DetailIconCards>
 
