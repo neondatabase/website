@@ -17,7 +17,7 @@ You can add pgvector extension to your Neon project using the following query:
 CREATE EXTENSION vector;
 ```
 
-By default, `pgvector` performs a sequential scan on the database and calculates the distance between the query vector and all vectors in the table. This approach does an exact search and guarantees 100% recall, but it can become costly with large datasets. 
+By default, `pgvector` performs a sequential scan on the database and calculates the distance between the query vector and all vectors in the table. This approach does an exact search and guarantees 100% recall, but it can become costly with large datasets.
 
 The query below uses `EXPLAIN ANALYZE` to generate the execution plan and displays the performance of the similarity search query.
 
@@ -45,7 +45,7 @@ The sequential scan search performs reasonably well for tables with 10k rows (~3
 
 ## Indexing with IVFFlat
 
-`pgvector` uses the Inverted File Index (`ivfflat`) for approximate nearest neighbor (ANN) search. `ivfflat` creates k-means centroids and partitions the dataset into clusters (also called lists) to optimize for vector search. 
+`pgvector` uses the Inverted File Index (`ivfflat`) for approximate nearest neighbor (ANN) search. `ivfflat` creates k-means centroids and partitions the dataset into clusters (also called lists) to optimize for vector search.
 
 ANNs are faster than sequential table scans because they perform the search on a subset of the table, which is usually about the square root of the number of vectors in size. For example, for 1M rows, the `ivfflat` will analyze 10,000 vectors. This makes the index error-prone, which can affect recall.
 
@@ -82,7 +82,7 @@ Execution Time: 5.867 ms
 
 Note that we are now using Index Scan, and execution time is ~6ms which is faster than the 39ms we obtained using sequential scan.
 
-We experimented with lists equal to 1000, 2000, and 4000, and probes equal to 1, 2, 10, 50, 100, 200. 
+We experimented with lists equal to 1000, 2000, and 4000, and probes equal to 1, 2, 10, 50, 100, 200.
 
 Although there is a substantial gain in recall for increasing the number of probes, we reach a point of diminishing returns when recall plateaus and execution time increases.
 
@@ -96,8 +96,8 @@ For probes, start with a value equal to lists / 10 for tables up to 1 million ro
 
 ## Conclusion
 
-In conclusion, pgvector is a powerful tool for vector similarity searches in Postgres. The sequential scan approach of pgvector performs well for small datasets but can be costly for larger ones. 
+In conclusion, pgvector is a powerful tool for vector similarity searches in Postgres. The sequential scan approach of pgvector performs well for small datasets but can be costly for larger ones.
 
-We explored how you can optimize your searches by utilizing the Inverted File Index (`ivfflat`) for approximate nearest neighbor (ANN) searches. By creating an index with ivfflat, and tuning the parameters for lists and probes, you can strike a balance between search speed and recall. 
+We explored how you can optimize your searches by utilizing the Inverted File Index (`ivfflat`) for approximate nearest neighbor (ANN) searches. By creating an index with ivfflat, and tuning the parameters for lists and probes, you can strike a balance between search speed and recall.
 
 It is important to experiment with these parameters to find the sweet spot that provides the best performance for your specific use case and dataset. Through informed experimentation and optimization, pgvector can empower AI-powered applications with efficient and reliable vector similarity searches.
