@@ -9,7 +9,9 @@ Vector databases enable efficient storage and retrieval of vector data, which is
 
 Neon supports the `pgvector` open-source extension, which enables Postgres as a vector database for storing and querying vector embeddings. By enabling Postgres as a vector database, you can keep your data in the open-source database that you know and trust. There's no need for data migration or a 3rd-party vector storage solution.
 
-<CTA title="Neon AI Starter Kit" description="Get a headstart on your AI app with the Neon AI Starter Kit. Tools, starter apps, and step-by-step instructions to get you up and running in minutes." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+Neon's AI Starter Kit provides resources, starter apps, and examples to help get you started.
+
+<CTA title="Neon AI Starter Kit" description="Sign up for Neon Postgres and get a headstart on your AI app with the Neon AI Starter Kit. Starter apps and resources to help you get up and running in minutes." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
 The **Neon AI Starter Kit** includes:
 
@@ -21,9 +23,9 @@ The **Neon AI Starter Kit** includes:
   - Hybrid search starter app
   - Reverse image search starter apps
   - Chat with PDF starter apps
-- The [Neon vector search optimization guide](/docs/ai/ai-vector-search-optimization) &#8212; learn how to optimize vector search for better application performance
-- The [Neon AI scaling guide](/docs/ai/ai-scale-with-neon) &#8212; scale your app with Neon's Autoscaling, Read Replica, and serverless driver features
-- A collection of [AI apps built with Neon](#ai-apps-built-with-neon) for your reference
+- The [Neon vector search optimization guide](/docs/ai/ai-vector-search-optimization) to help you optimize vector search for better application performance
+- The [Neon AI scaling guide](/docs/ai/ai-scale-with-neon) showing how to scale your app with Neon's Autoscaling, Read Replica, and serverless driver features
+- A collection of [AI apps built with Neon](#ai-apps-built-with-neon) that you can reference while building your own app
 
 ## AI basics
 
@@ -32,15 +34,13 @@ The **Neon AI Starter Kit** includes:
 
 <a href="/docs/extensions/pgvector" description="Learn about the pgvector Postgres extension" icon="openai">The pgvector extension</a>
 
-<a href="/docs/ai/rag" description="What's Retrieval Augemented Generation (RAG) and how does it work?" icon="openai">RAG applications explained</a>
-
 </DetailIconCards>
 
 ## Preparing your AI app for production
 
 <DetailIconCards>
 
-<a href="/docs/extensions/pgvector" description="Optimize vector search for better application performance" icon="openai">Vector search optimization</a>
+<a href="ai-vector-search-optimization" description="Optimize vector search for better application performance" icon="openai">Vector search optimization</a>
 
 <a href="/docs/ai/ai-scale-with-neon" description="Scale your app with Neon's Autoscaling, Read Replica, and serverless driver features" icon="openai">Neon AI scaling guide</a>
 
@@ -84,9 +84,9 @@ Learn how to integrate Neon Postgres with various LLMs and AI platforms.
 
 <a href="/docs/ai/tbd" description="Discover OpenAI's models and their wide-ranging applications" icon="openai">OpenAI</a>
 
-<a href="/docs/ai/tbd" description="Utilize LlamaIndex models for efficient text processing and analysis" icon="openai">LlamaIndex</a>
-
 <a href="/docs/ai/tbd" description="Utilize LlamaIndex models for efficient text processing and analysis" icon="openai">LangChain</a>
+
+<a href="/docs/ai/tbd" description="Utilize LlamaIndex models for efficient text processing and analysis" icon="openai">LlamaIndex</a>
 
 <a href="/docs/ai/ollama" description="Learn how to run open-source large language models, such as Llama 2, locally" icon="openai">Ollama</a>
 
@@ -94,17 +94,17 @@ Learn how to integrate Neon Postgres with various LLMs and AI platforms.
 
 ## AI apps built with Neon
 
-Check out these AI applications built with Neon Postgres.
+Check out these applications built with Neon Postgres.
 
 <Admonition type="note" title="Feature your app here">
-To have your AI app built with Neon Postgres featured here, post it to our **#showcase** channel on [Discord](https://discord.gg/92vNTzKDGp) for consideration.
+To have your AI app featured here, post it to our **#showcase** channel on [Discord](https://discord.gg/92vNTzKDGp) for consideration.
 </Admonition>
 
 <DetailIconCards>
 
-<a href="https://neon.tech/guides/chatbot-astro-postgres-llamaindex" description="Build a RAG chatbot in an Astro application with LlamaIndex and Postgres" icon="openai">Build a RAG chatbot</a>
+<a href="https://neon.tech/guides/chatbot-astro-postgres-llamaindex" description="Build a RAG chatbot in an Astro application with LlamaIndex and Postgres" icon="openai">Guide: Build a RAG chatbot</a>
 
-<a href="https://neon.tech/guides/llamaindex-postgres-search-images" description="Using LlamaIndex with Postgres to Build your own Reverse Image Search Engine" icon="openai">Build a Reverse Image Search Engine</a>
+<a href="https://neon.tech/guides/llamaindex-postgres-search-images" description="Using LlamaIndex with Postgres to Build your own Reverse Image Search Engine" icon="openai">Guide: Build a Reverse Image Search Engine</a>
 
 <a href="https://github.com/neondatabase/ask-neon" description="An Ask Neon AI-powered chatbot built with pgvector" icon="github">Ask Neon Chatbot</a>
 
@@ -120,29 +120,21 @@ To have your AI app built with Neon Postgres featured here, post it to our **#sh
 
 <a href="https://github.com/mistralai/cookbook/blob/main/third_party/Neon/neon_text_to_sql.ipynb" description="A Text-to-SQL conversion app built with Mistral AI, Neon, and LangChain" icon="github">Text-to-SQL conversion with Mistral + LangChain</a>
 
-<a href="https://github.com/neondatabase/neon-postgresql-expert" description="Create and publish a custom Postgres GPT Expert using OpenAI's GPT" icon="github">Postgres GPT Expert</a>
+<a href="https://neon.tech/blog/openais-gpt-store-is-live-create-and-publish-a-custom-postgres-gpt-expert" description="Blog + repo: Create and publish a custom Postgres GPT Expert using OpenAI's GPT" icon="openai">Postgres GPT Expert</a>
 
 </DetailIconCards>
 
-## AI tools and platforms
+## AI tools
 
 Learn about popular AI tools and how to use them with Neon Postgres.
 
 <DetailIconCards>
-
-<a href="https://docs.chainlit.io/get-started/overview" description="An open-source Python package to build production ready Conversational AI" icon="openai">Chainlit</a>
 
 <a href="/docs/ai/ai-google-colab" description="A cloud-based environment to write and execute Python code, perfect for machine learning and data science tasks" icon="openai">Google Colab</a>
 
 <a href="https://jupyter.org/" description="An open-source web application for creating and sharing documents that contain live code, equations, visualizations, and narrative text" icon="openai">Jupyter Notebook</a>
 
 <a href="https://notebooks.azure.com/" description="A cloud-based Jupyter notebook service integrated with Azure machine learning services for creating, running, and sharing notebooks" icon="openai">Microsoft Azure Notebooks</a>
-
-<a href="https://modal.com/" description="A serverless platform for running generative AI models, large-scale batch jobs, job queues, and much more" icon="openai">Modal</a>
-
-<a href="https://www.gradio.app/" description="Build & share machine learning apps with anyone" icon="openai">Gradio</a>
-
-<a href="https://www.kaggle.com/kernels" description="Hosted Jupyter notebooks provided by Kaggle, enabling data analysis and machine learning model building using Kaggle datasets" icon="openai">Kaggle Kernels</a>
 
 <a href="https://aws.amazon.com/sagemaker/notebooks/" description="Managed Jupyter notebooks provided by AWS as part of the SageMaker suite, designed for building, training, and deploying machine learning models" icon="openai">Amazon SageMaker Notebooks</a>
 

@@ -501,54 +501,24 @@
   items:
     - title: AI concepts
       slug: ai/ai-concepts
-    - title: AI quickstarts
+    - title: The pgvector extension
+      slug: extensions/pgvector
+    - title: Prepare your AI app for production
       items:
-        - title: Build an AI chatbot
-          slug: tbd
-        - title: Build a RAG application
-          slug: tbd
-        - title: Build a sematic search application
-          slug: tbd
-        - title: Build a hybrid search application
-          slug: tbd
-        - title: Build an image search application
-          slug: tbd
-        - title: Build a ChatGPT plugin
-          slug: tbd
+        - title: Vector search optimizaton
+          slug: ai/ai-vector-search-optimization
+        - title: AI scaling guide
+          slug: ai/ai-scale-with-neon
     - title: AI integrations
       items: 
-        - title: Amazon Bedrock
-          slug: ai/amazon-bedrock
-        - title: Amazon Titan
-          slug: ai/amazon-titan
-        - title: Claude
-          slug: ai/claude
-        - title: Cohere
-          slug: ai/cohere
-        - title: Fireworks.ai
-          slug: ai/fireworks-ai
-        - title: Hugging Face
-          slug: ai/hugging-face
-        - title: Jurassic
-          slug: ai/jurassic
+        - title: OpenAI
+          slug: ai/openai
         - title: LangChain
           slug: ai/langchain
         - title: LlamaIndex
           slug: ai/llamaindex
-        - title: MemGPT
-          slug: ai/memgpt
-        - title: Mistral
-          slug: ai/mistral
-        - title: OpenAI
-          slug: ai/openai
-        - title: Portkey AI
-          slug: ai/portkey-ai
-        - title: Roboflow
-          slug: ai/roboflow
-        - title: Stable Diffusion
-          slug: ai/stable-diffusion
-        - title: Vertex AI
-          slug: ai/vertex-ai
+        - title: Ollama
+          slug: ai/ollama
     - title: AI tools
       items:
         - title: Google Colab
@@ -557,16 +527,8 @@
           slug: ai/jupyter-notebook
         - title: Microsoft Azure Notebooks
           slug: ai/azure-notebooks
-        - title: Kaggle Kernels
-          slug: ai/kaggle-kernels
         - title: Amazon SageMaker Notebooks
           slug: ai/amazon-sagemake-notebooks
-    - title: Prepare your AI app for production
-      items:
-        - title: AI scaling guide
-          slug: ai/ai-scale-with-neon
-        - title: AI production checklist
-          slug: ai/ai-production-checklist
     - title: AI example apps
       items:
         - title: Ask Postgres chatbot
