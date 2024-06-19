@@ -39,7 +39,7 @@ Prerequisites:
 
 - A [Vercel account](https://vercel.com).
 - A Vercel project. If you do not have one, see [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project), in the _Vercel documentation_.
-- The integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED`environment variables for your Vercel **Production** and **Development** environments. When you create a preview deployment, the integration will also set these variables for your **Preview** environment. Variables of the same name will be overwritten. To use different Postgres variables with the Neon integration, see [Manage Vercel environment variables](#manage-vercel-environment-variables).
+- The integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED`environment variables for your Vercel **Production** and **Development** environments. When you create a preview deployment, the integration will also set these variables for your **Preview** environment. Variables of the same name will be overwritten. To use different Postgres variables with the Neon integration, see [Configure Vercel environment variables](#configure-environment-variables).
 
 To add the integration:
 
