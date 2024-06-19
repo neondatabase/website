@@ -492,6 +492,8 @@
           items:
             - title: concat
               slug: functions/concat
+            - title: substring
+              slug: functions/substring
     - title: Optimize queries
       slug: postgresql/query-performance
     - title: Query reference
