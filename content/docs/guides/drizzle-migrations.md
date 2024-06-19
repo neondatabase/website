@@ -107,7 +107,7 @@ To generate a migration to create these tables in the database, we'll use the `d
 ```json
 {
   "scripts": {
-    "db:generate": "drizzle-kit generate:pg --schema src/schema.ts --out ./drizzle"
+    "db:generate": "drizzle-kit generate --dialect=postgresql --schema=src/schema.ts --out=./drizzle"
   }
 }
 ```
