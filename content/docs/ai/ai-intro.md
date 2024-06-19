@@ -94,7 +94,7 @@ Learn how to integrate Neon Postgres with various LLMs and AI platforms.
 
 ## AI apps built with Neon
 
-Check out these applications built with Neon Postgres.
+AI applications built with Neon Postgres that you can reference as code examples or inspiration.
 
 <Admonition type="note" title="Feature your app here">
 To have your AI app featured here, post it to our **#showcase** channel on [Discord](https://discord.gg/92vNTzKDGp) for consideration.
