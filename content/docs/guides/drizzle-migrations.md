@@ -48,10 +48,10 @@ This initiates an interactive CLI prompt to set up a new project. To follow alon
 
 ```bash
 Need to install the following packages:
-create-hono@0.5.0
+create-hono@0.9.0
 Ok to proceed? (y) y
 
-create-hono version 0.5.0
+create-hono version 0.9.0
 ✔ Using target directory … neon-drizzle-guide
 ✔ Which template do you want to use? › nodejs
 cloned honojs/starter#main to ./repos/javascript/neon-drizzle-guide
@@ -107,7 +107,7 @@ To generate a migration to create these tables in the database, we'll use the `d
 ```json
 {
   "scripts": {
-    "db:generate": "drizzle-kit generate:pg --schema src/schema.ts --out ./drizzle"
+    "db:generate": "drizzle-kit generate --dialect=postgresql --schema=src/schema.ts --out=./drizzle"
   }
 }
 ```
