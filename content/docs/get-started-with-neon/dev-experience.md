@@ -2,7 +2,7 @@
 title: Developer experience with Neon
 subtitle: Enhancing development workflows with Neon
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.379Z'
+updatedOn: '2024-06-20T17:29:55.101Z'
 ---
 
 Discover how Neon's features can streamline your development process, reduce risks, and enhance productivity, helping you to ship faster with confidence.
@@ -132,7 +132,7 @@ Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension for s
         uses: neondatabase/create-branch-action@v5
         with:
           project_id: rapid-haze-373089
-          # optional (defaults to your primary branch)
+          # optional (defaults to your project's default branch)
           parent: dev
           # optional (defaults to neondb)
           database: my-database

@@ -2,7 +2,7 @@
 title: Neon CLI commands — set-context
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.424Z'
+updatedOn: '2024-06-20T17:29:55.116Z'
 ---
 
 ## Before you begin
@@ -114,7 +114,7 @@ These two `branches list` commands demonstrate the use of different contexts in 
 
 ### Setting context when creating a new project
 
-Let's say you want to create a new project called `MyLatest`. You can automatically set the project ID and primary branch ID context at the same time as you create the project.
+Let's say you want to create a new project called `MyLatest`. You can automatically set the project ID and default branch ID context at the same time as you create the project.
 
 ```bash
 neonctl projects create --name MyLatest --set-context

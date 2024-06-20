@@ -2,7 +2,7 @@
 title: Neon CLI commands — ip-allow
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.423Z'
+updatedOn: '2024-06-20T17:29:55.114Z'
 ---
 
 ## Before you begin
@@ -78,7 +78,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | ------------------ | ------------------------------------------------------------------------------------------------------------------ | ------ | :-------------------------------------------------: |
 | `--context-file`   | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                      | string |                                                     |
 | `--project-id`     | Project ID                                                                                                         | string | Only if your Neon account has more than one project |
-| `--primary-branch` | If true, the list will be applied only to the primary branch. Use `--primary-branch false` to remove this setting. | string |                                                     |
+| `--primary-branch` | If true, the list will be applied only to the default branch. Use `--primary-branch false` to remove this setting. | string |                                                     |
 
 #### Example
 
