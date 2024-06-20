@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2024-06-14T07:55:54.419Z'
 ---
 
-In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database with `_owner` as a suffix. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`. This role owns the database that is created in your Neon project's primary branch.
+In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`. This role owns the database that is created in your Neon project's primary branch.
 
 Your Postgres role and roles created in the Neon Console, API, and CLI are granted membership in the [neon_superuser](#the-neonsuperuser-role) role. Roles created with SQL from clients like [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) are only granted the basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-access).
 

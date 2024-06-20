@@ -8,4 +8,4 @@ isDraft: true
 updatedOn: '2023-10-23T17:55:15.632Z'
 ---
 
-Each Neon project is created with a Postgres role that is named for your database with `_owner` as a suffix. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
+Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.

@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2024-06-14T07:55:54.416Z'
 ---
 
-Each Neon project is created with a Postgres role that is named for your database with `_owner` as a suffix. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
+Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
 
 This Postgres role is automatically assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, and sequences. Any user created with the Neon Console, Neon API, or Neon CLI is also assigned the `neon_superuser` role.
 
