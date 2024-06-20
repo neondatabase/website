@@ -3,7 +3,7 @@ title: Schema diff tutorial
 subtitle: Step-by-step guide showing you how to compare two development branches using
   Schema Diff
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.407Z'
+updatedOn: '2024-06-20T17:29:55.107Z'
 ---
 
 In this guide we will create an initial schema on a new database called `people` on our `main` branch. We'll then create a development branch called `dev/jordan`, following our recommended convention for naming development branches. After making schema changes on `dev/jordan`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, Github-style visual comparison between the `dev/jordan` development branch and `main`.

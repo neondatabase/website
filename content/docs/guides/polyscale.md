@@ -4,7 +4,7 @@ subtitle: Connect Neon to PolyScale to distribute and cache your data globally
 redirectFrom:
   - /docs/guides/polyscale-integration
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.404Z'
+updatedOn: '2024-06-20T17:29:55.106Z'
 ---
 
 <Admonition type="important" title="Important Update Regarding PolyScale Support">
