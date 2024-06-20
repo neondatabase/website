@@ -98,6 +98,8 @@ Now that you have some data to play with, let's take a look at it on the **Table
 
 ![Tables page Drizzle integration](/docs/relnotes/tables_page_drizzle.png)
 
+For a detailed guide on how to interact with your data using the **Tables** page, visit [Managing your data with interactive tables](/docs/guides/tables).
+
 ## Step 5 - Create a dedicated development branch
 
 In this step, you'll create a dedicated development branch using the Neon CLI. This branch will be an exact, isolated copy of `main`.
