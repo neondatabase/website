@@ -44,7 +44,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 | `--branch`       | Branch ID or name                                                                             | string |                                                     |
 
-If a branch ID or name is not provided, the command lists databases for the primary branch of the project.
+If a branch ID or name is not provided, the command lists databases for the default branch of the project.
 
 #### Example
 
@@ -79,7 +79,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--name`         | The name of the database                                                                      | string |                       &check;                       |
 | `--owner-name`   | The name of the role that owns the database                                                   | string |                                                     |
 
-- If a branch ID or name is not provided, the command creates the database in the primary branch of the project.
+- If a branch ID or name is not provided, the command creates the database in the default branch of the project.
 - If the `--owner-name` option is not specified, the current user becomes the database owner.
 
 #### Example
@@ -115,7 +115,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 | `--branch`       | Branch ID or name                                                                             | string |                                                     |
 
-If a branch ID or name is not provided, it is assumed the database resides in the primary branch of the project.
+If a branch ID or name is not provided, it is assumed the database resides in the default branch of the project.
 
 #### Example
 

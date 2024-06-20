@@ -91,7 +91,7 @@ A service that provides virtualized computing resources (CPU, memory, and storag
 
 ## compute endpoint
 
-A Neon compute instance. Neon creates a single read-write compute endpoint for the project's primary branch. Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints. You can choose whether or not to create a compute endpoint when creating child branches. The compute endpoint hostname is required to connect to a Neon database from a client or application. A compute endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. A compute endpoint hostname starts with an `ep-` prefix, as in this example: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`. A compute endpoint hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app). For more information about compute endpoints, see [Manage computes](/docs/manage/endpoints/).
+A Neon compute instance. Neon creates a single read-write compute endpoint for the project's default branch. Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints. You can choose whether or not to create a compute endpoint when creating child branches. The compute endpoint hostname is required to connect to a Neon database from a client or application. A compute endpoint hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. A compute endpoint hostname starts with an `ep-` prefix, as in this example: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`. A compute endpoint hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app). For more information about compute endpoints, see [Manage computes](/docs/manage/endpoints/).
 
 ## connection pooling
 
@@ -218,7 +218,7 @@ The history of data changes for all branches in your Neon project. A history is 
 
 ## IP allowlist
 
-An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a Scale plan feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [primary branch](#primary-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
+An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a Scale plan feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [default branch](#default-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
 
 ## Kubernetes
 
@@ -296,9 +296,9 @@ The user account that registers and authenticates with Neon using an email, GitH
 
 A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes cluster, allowing for the allocation and deallocation of vCPU and RAM. For more information, refer to the NeonVM source in the [neondatabase/autoscaling](https://github.com/neondatabase/autoscaling/tree/main/neonvm) repository.
 
-## non-primary branch
+## non-default branch
 
-Any branch in a Neon project that is not designated as the [primary branch](#primary-branch). For more information, see [Non-primary branch](/docs/manage/branches#non-primary-branch).
+Any branch in a Neon project that is not designated as the [default branch](#default-branch). For more information, see [Non-default branch](/docs/manage/branches#non-default-branch).
 
 ## Page
 
@@ -344,15 +344,15 @@ A Postgres role named for the registered Neon account is created with each Neon 
 
 Older projects may have a `web-access` system role, used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth). The `web-access` role is system-managed. It cannot be modified, removed, or used in other authentication scenarios.
 
-## primary branch
+## default branch
 
-A designation that is given to a single [branch](#branch) in a Neon project. Each Neon project is created with a [root branch](#root-branch) called `main`, which carries the _primary branch_ designation by default.
+A designation that is given to a single [branch](#branch) in a Neon project. Each Neon project is created with a [root branch](#root-branch) called `main`, which carries the _default branch_ designation by default.
 
-The compute endpoint associated with a primary branch remains available if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch.
+The compute endpoint associated with a default branch remains available if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch.
 
-You can change your primary branch, but a branch carrying the primary branch designation cannot be deleted.
+You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
 
-For more information, see [Primary branch](/docs/manage/branches#primary-branch).
+For more information, see [default branch](/docs/manage/branches#default-branch).
 
 ## Project
 
@@ -408,7 +408,7 @@ Selling the Neon service as part of another service offering. Neon's Platform Pa
 
 ## root branch
 
-The primary line of data for every Neon project, initially named `main`. The root branch cannot be deleted and is set as the [primary branch](#primary-branch) of your Neon project by default. You can change your project's primary branch, but you cannot change the root branch.
+The primary line of data for every Neon project, initially named `main`. The root branch cannot be deleted and is set as the [default branch](#default-branch) of your Neon project by default. You can change your project's default branch, but you cannot change the root branch.
 
 ## Safekeeper
 

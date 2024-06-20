@@ -55,12 +55,12 @@ To add the integration:
     1.  Select the Neon project that you want to connect to your Vercel project by selecting the Neon project, database, and role that Vercel will use to connect.
         ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
-            The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's primary branch (`main`) that you can modify without affecting data on your primary branch.
+            The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's default branch (`main`) that you can modify without affecting data on your default branch.
 
             With **Automatically delete obsolete Neon branches** enabled, Neon preview branches will be deleted whenever the git branch that triggered its creation is merged or deleted.
 
            <Admonition type="note">
-           Branches created for preview deployments are created from the [primary branch](/docs/reference/glossary#primary-branch) of your Neon project. Earlier versions of the integration created branches from the initial [root branch](/docs/reference/glossary#root-branch) of your Neon project, which is designated as the primary branch by default. Neon lets you [change the primary branch](/docs/manage/branches#set-a-branch-as-primary). If you have an older version of the integration that creates branches from your project's root branch, and you want branches created from your primary branch instead, you can upgrade your integration by reinstalling it from the [Vercel Marketplace](https://vercel.com/integrations/neon).
+           Branches created for preview deployments are created from the [default branch](/docs/reference/glossary#default-branch) of your Neon project. Earlier versions of the integration created branches from the initial [root branch](/docs/reference/glossary#root-branch) of your Neon project, which is designated as the default branch by default. Neon lets you [change the default branch](/docs/manage/branches#set-a-branch-as-default). If you have an older version of the integration that creates branches from your project's root branch, and you want branches created from your default branch instead, you can upgrade your integration by reinstalling it from the [Vercel Marketplace](https://vercel.com/integrations/neon).
            </Admonition>
 
             When you finish making selections, click **Continue**.
@@ -81,7 +81,7 @@ To add the integration:
     1. Navigate to the [Neon Console](https://console.neon.tech/).
     1. Select the project you are connected to.
     1. Select **Branches**.
-       You will see the primary branch of your project (`main`). If you created a development branch, you will also see a `vercel-dev` branch.
+       You will see the default branch of your project (`main`). If you created a development branch, you will also see a `vercel-dev` branch.
        ![Neon branches](/docs/guides/vercel_neon_branches.png)
 1.  To view the results of the integration in Vercel:
 
@@ -123,7 +123,7 @@ After you add the integration to a Vercel project, Neon creates a database branc
 
    - The commit triggers a preview deployment in Vercel, as would occur without the Neon integration.
      ![Neon preview deployment branch](/docs/guides/vercel_deployments.png)
-   - The integration creates a branch in Neon. This branch is an isolated copy-on-write clone of your primary branch, with its own dedicated compute endpoint. The branch is created with the same name as your `git` branch but includes a `/preview` prefix.
+   - The integration creates a branch in Neon. This branch is an isolated copy-on-write clone of your default branch, with its own dedicated compute endpoint. The branch is created with the same name as your `git` branch but includes a `/preview` prefix.
      ![Neon preview deployment branch](/docs/guides/vercel_neon_app_update.png)
    - The integration sets Vercel preview environment variables to connect the preview deployment to the new branch.
      ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)

@@ -12,7 +12,7 @@ updatedOn: '2024-06-16T10:25:41.778Z'
 
 ## The `branches` command
 
-The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the primary branch and adding a compute endpoint to a branch. You can create a [read replica](/docs/introduction/read-replicas) by adding a read-only compute endpoint.
+The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the default branch and adding a compute endpoint to a branch. You can create a [read replica](/docs/introduction/read-replicas) by adding a read-only compute endpoint.
 
 ## Usage
 
@@ -28,7 +28,7 @@ neonctl branches <subcommand> [options]
 | [restore](#restore)         | Restore a branch to a selected point in time |
 | [rename](#rename)           | Rename a branch                              |
 | [schema-diff](#schema-diff) | Compare schemas                              |
-| [set-primary](#set-primary) | Set a primary branch                         |
+| [set-primary](#set-primary) | Set a default branch                         |
 | [add-compute](#add-compute) | Add replica to a branch                      |
 | [delete](#delete)           | Delete a branch                              |
 | [get](#get)                 | Get a branch                                 |
@@ -79,7 +79,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
       "current_state": "ready",
       "logical_size": 29515776,
       "creation_source": "console",
-      "primary": true,
+      "default": true,
       "cpu_used_sec": 78,
       "compute_time_seconds": 78,
       "active_time_seconds": 312,
@@ -96,7 +96,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
       "name": "mybranch",
       "current_state": "ready",
       "creation_source": "console",
-      "primary": false,
+      "default": false,
       "cpu_used_sec": 0,
       "compute_time_seconds": 0,
       "active_time_seconds": 0,
@@ -127,7 +127,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file`    | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                                                                                                                                  | string  |                                                     |
 | `--project-id`      | Project ID                                                                                                                                                                                                                                                                     | string  | Only if your Neon account has more than one project |
 | `--name`            | The branch name                                                                                                                                                                                                                                                                | string  |                                                     |
-| `--parent`          | Parent branch name, id, timestamp, or LSN. Defaults to the primary branch                                                                                                                                                                                                      | string  |                                                     |
+| `--parent`          | Parent branch name, id, timestamp, or LSN. Defaults to the default branch                                                                                                                                                                                                      | string  |                                                     |
 | `--compute`         | Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute`                                                                                 | boolean |                                                     |
 | `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas).                                                                                         | string  |                                                     |
 | `--suspend-timeout` | Duration of inactivity in seconds after which the compute endpoint is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number  |                                                     |
@@ -181,7 +181,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
         "current_state": "init",
         "pending_state": "ready",
         "creation_source": "neonctl",
-        "primary": false,
+        "default": false,
         "cpu_used_sec": 0,
         "compute_time_seconds": 0,
         "active_time_seconds": 0,
@@ -463,7 +463,7 @@ neonctl branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
 This setting is **optional**. If you leave it out, the operation uses either of the following as the base:
 
 - The branch identified in the `set-context` file
-- If no context is configured, it uses your project's primary branch
+- If no context is configured, it uses your project's default branch
 
 `[compare-source]` specifies the branch or state to compare against. Options are:
 
@@ -555,7 +555,7 @@ neonctl branches schema-diff main dev/jordan@2024-06-01T00:00:00.000Z
 
 ## set-primary
 
-This subcommand allows you to set a branch as the primary branch in your Neon project.
+This subcommand allows you to set a branch as the default branch in your Neon project.
 
 #### Usage
 
@@ -693,7 +693,7 @@ neonctl branches get main --output json
   "current_state": "ready",
   "logical_size": 29769728,
   "creation_source": "console",
-  "primary": false,
+  "default": false,
   "cpu_used_sec": 522,
   "compute_time_seconds": 522,
   "active_time_seconds": 2088,

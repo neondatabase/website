@@ -40,7 +40,7 @@ jobs:
     uses: neondatabase/create-branch-action@v5
     with:
       project_id: rapid-haze-373089
-      # optional (defaults to your primary branch)
+      # optional (defaults to your project's default branch)
       parent: dev
       # optional (defaults to neondb)
       database: my-database
@@ -76,7 +76,7 @@ inputs:
     description: 'Use prisma or not'
     default: 'false'
   parent:
-    description: 'The parent branch name or id or LSN or timestamp. By default the primary branch is used'
+    description: 'The parent branch name or id or LSN or timestamp. By default the default branch is used'
   suspend_timeout:
     description: >
       Duration of inactivity in seconds after which the compute endpoint is
