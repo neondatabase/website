@@ -28,7 +28,7 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="info">
-Each Neon project is created with a Postgres role that is named for your database with `_owner` as a suffix. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`. This guide uses a `neondb` database as the primary database.
+Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`. This guide uses a `neondb` database as the primary database.
 </Admonition>
 
 ## Create a shadow database for Prisma Migrate
