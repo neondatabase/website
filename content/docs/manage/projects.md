@@ -24,8 +24,8 @@ When you add a new project, Neon creates the following resources by default:
 
 - A default branch called `main`. You can create child branches from the default branch or from any previously created branch. For more information, see [Manage branches](/docs/manage/branches).
 - A single read-write compute endpoint. This is the compute instance associated with the branch. For more information, see [Manage computes](/docs/manage/endpoints).
-- A ready-to-use database, called `neondb`, which lives in the project's default branch.
-- A default Postgres role that takes its name from your Neon account (the email, Google, GitHub, or partner account that you registered with).
+- A Postgres database that resides on the project's default branch. If you ddid not specify your own database name when creating the project, the database created is named `neondb`.
+- A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
 
 ## About the Settings page
 
@@ -411,7 +411,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 }' | jq
 ```
 
-The response includes information about the roles, the ready-to-use database (`neondb`), the default branch (`main`), and the read-write compute endpoint that is created with the project.
+The response includes information about the role, the database, the default branch, and the read-write compute endpoint that is created with the project.
 
 <details>
 <summary>Response body</summary>
