@@ -65,6 +65,7 @@ Learn how to manage your organization's projects, invite Members and Guests, rev
 - [Invite Guests](#invite-guests)
 - [Set permissions](#set-permissions)
 - [Manage projects](#manage-projects)
+- [Passwordless authentication](#passwordless-authentication)
 - [Billing](#billing)
 
 ### Switch to your Organization account
