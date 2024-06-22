@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-06-15T08:30:00.000Z'
 ---
 
-The `trim()` function in Postgres is used to remove the specified characters from the beginning and/or end of a string. 
+The `trim()` function in Postgres is used to remove the specified characters from the beginning and/or end of a string.
 
 This function is commonly used in data preprocessing tasks, such as cleaning user input before storing it in a database, or standardizing data for comparison or analysis. For example, you might use it to remove extra spaces from product names or to standardize phone numbers by removing surrounding parentheses.
 
@@ -23,14 +23,12 @@ trim([leading | trailing | both] [characters] from string) -> text
 - `characters` (optional): The set of characters to remove. If omitted, it defaults to spaces.
 - `string`: The input string to trim.
 
-
 ```sql
 trim(string text [, characters text]) -> text
 ```
 
 - `string`: The input string to trim.
 - `characters` (optional): The characters to remove from both ends. If omitted, it defaults to spaces.
-
 
 ## Example usage
 
@@ -97,7 +95,7 @@ WITH user_inputs(input) AS (
     ('***Admin Access***'),
     ('***Guest User***')
 )
-SELECT 
+SELECT
   trim(leading '*' from input) AS leading_trimmed,
   trim(trailing '*' from input) AS trailing_trimmed,
   trim(both '*' from input) AS both_trimmed
@@ -154,7 +152,7 @@ WITH user_emails(email) AS (
     (' jane.smith@example.org '),
     ('  admin@gmail.com  ')
 )
-SELECT 
+SELECT
   trim(email) AS trimmed_email,
   upper(split_part(trim(email), '@', 1)) AS username
 FROM user_emails;
@@ -175,7 +173,7 @@ This query trims spaces from the email addresses and then extracts and uppercase
 
 ### Performance implications
 
-While `trim()` is generally efficient, using it extensively on large datasets, especially in `WHERE` clauses, may impact query performance. If you frequently filter or join based on trimmed values, consider creating a functional index on the trimmed column. 
+While `trim()` is generally efficient, using it extensively on large datasets, especially in `WHERE` clauses, may impact query performance. If you frequently filter or join based on trimmed values, consider creating a functional index on the trimmed column.
 
 ### Handling NULL values
 
