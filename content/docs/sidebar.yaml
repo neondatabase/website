@@ -335,7 +335,7 @@
               slug: guides/neosync-anonymize
               tag: new
         - title: Prisma
-          slug: guides/prisma  
+          slug: guides/prisma
     - title: Replicate
       items:
         - title: Airbyte
@@ -494,6 +494,8 @@
           items:
             - title: concat
               slug: functions/concat
+            - title: lower
+              slug: functions/lower
             - title: substring
               slug: functions/substring
     - title: Optimize queries
