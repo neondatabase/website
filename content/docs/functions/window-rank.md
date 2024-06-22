@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-02-08T09:30:00.000Z'
 ---
 
-The `rank()` function in Postgres is a window function to compute rankings, for each row within a partition of the result set. The rank is determined by the order of rows specified in the `ORDER BY` clause of the `OVER` clause. Rows with equal values for the ranking criteria receive the same rank, with the next rank(s) skipped. 
+The `rank()` function in Postgres is a window function to compute rankings, for each row within a partition of the result set. The rank is determined by the order of rows specified in the `ORDER BY` clause of the `OVER` clause. Rows with equal values for the ranking criteria receive the same rank, with the next rank(s) skipped.
 
 This is useful for scenarios such as finding the top N rows per group, calculating percentiles, or generating leaderboards.
 
@@ -19,8 +19,9 @@ The `rank()` function has the following form:
 rank() OVER ([PARTITION BY partition_expression] ORDER BY order_expression)
 ```
 
-The `OVER` clause defines the window frame for the function. 
-- The `ORDER BY` clause specifies the order in which ranks are assigned to rows. 
+The `OVER` clause defines the window frame for the function.
+
+- The `ORDER BY` clause specifies the order in which ranks are assigned to rows.
 - The `PARTITION BY` clause is optional - if specified, it divides the result set into partitions and ranks are assigned within each partition. Else, ranks are computed for each row over the entire result set.
 
 ## Example usage
@@ -40,7 +41,7 @@ WITH sample_data AS (
             ('Frank', 'IT', 62000)
     ) AS t(employee_name, department, salary)
 )
-SELECT 
+SELECT
     employee_name,
     department,
     salary,
@@ -63,7 +64,6 @@ This query ranks employees within each department based on their salary in desce
 (6 rows)
 ```
 
-
 ## Advanced examples
 
 ### Top N per group
@@ -72,7 +72,7 @@ You can use `rank()` in a subquery to find the top N rows per group.
 
 ```sql
 WITH products AS (
-    SELECT * 
+    SELECT *
     FROM (
         VALUES
             (1, 'A', 100),
@@ -153,7 +153,7 @@ The `dense_rank()` function is similar to `rank()`, but it does not skip ranks w
 
 ```sql
 WITH scores AS (
-    SELECT * 
+    SELECT *
     FROM (
         VALUES
             ('Player 1', 100),
@@ -226,6 +226,7 @@ The `rank()` and `dense_rank()` functions handle ties differently. `rank()` assi
 Like other window functions, `rank()` performs calculations across a set of rows defined by the `OVER` clause. This can be computationally expensive, especially for large datasets or complex window definitions.
 
 To optimize performance:
+
 - Include an `ORDER BY` clause in the `OVER` clause to avoid sorting the entire dataset.
 - Use partitioning (`PARTITION BY`) to divide the data into smaller chunks when possible.
 - Create appropriate indexes on the columns used in the `OVER` clause.
