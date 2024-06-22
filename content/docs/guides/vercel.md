@@ -92,7 +92,7 @@ To add the integration:
        ![Vercel environment variables](/docs/guides/vercel_env_variables.png)
 
     <Admonition type="note">
-    The `DATABASE_URL` variable set by the integration is set to a pooled Neon database connection string. The `DATABASE_URL_UNPOOLED` variable is set to an unpooled connection string for tools or applications that require a direct connection to the database. For more information, see [Manage Vercel environment variables](#manage-vercel-environment-variables).
+    The `DATABASE_URL` variable set by the integration is set to a pooled Neon database connection string. The `DATABASE_URL_UNPOOLED` variable is set to an unpooled connection string for tools or applications that require a direct connection to the database. For more information, see [Manage Vercel environment variables](#manage-integration-settings).
     </Admonition>
 
 ## Use the Neon Vercel Integration
