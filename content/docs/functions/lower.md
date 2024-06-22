@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:30:00.000Z'
 ---
 
-The `lower()` function in Postgres is used to convert a string to lowercase. 
+The `lower()` function in Postgres is used to convert a string to lowercase.
 
 It's commonly used for search functionality where you want case-insensitivity, or when standardizing user input for storage or comparison purposes. For example, it can be used to normalize email addresses or usernames in a user management system.
 
@@ -27,7 +27,7 @@ Consider a table `products` with a `product_name` column that contains product n
 
 ```sql
 WITH products AS (
-    SELECT * 
+    SELECT *
     FROM (
         VALUES
             ('LAPTOP Pro X'),
@@ -90,7 +90,7 @@ WITH user_data AS (
   UNION ALL
   SELECT 'BOB_JOHNSON_789' AS username
 )
-SELECT 
+SELECT
   lower(split_part(username, '_', 1)) AS first_name,
   lower(split_part(username, '_', 2)) AS last_name,
   split_part(username, '_', 3) AS user_id
@@ -116,7 +116,7 @@ This index will improve the performance of queries that use `lower(name)` to fil
 
 ### Normalizing data for uniqueness constraints
 
-When you want to enforce uniqueness regardless of case, you can use `lower()` to create a unique index on the column. 
+When you want to enforce uniqueness regardless of case, you can use `lower()` to create a unique index on the column.
 
 ```sql
 CREATE TABLE organizations (
@@ -133,7 +133,7 @@ INSERT INTO organizations (name) VALUES ('Bailey Inc.');
 Trying to insert a duplicate organization name with different capitalization will raise an error:
 
 ```sql
-INSERT INTO organizations (name) VALUES ('ACME CORP'); 
+INSERT INTO organizations (name) VALUES ('ACME CORP');
 -- ERROR:  duplicate key value violates unique constraint "idx_organizations_name_lower"
 -- DETAIL:  Key (lower(name))=(acme corp) already exists.
 ```
