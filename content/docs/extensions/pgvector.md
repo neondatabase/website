@@ -13,7 +13,7 @@ The `pgvector` extension enables you to store vector embeddings and perform vect
 - Single-precision, half-precision, binary, and sparse vectors
 - L2 distance, inner product, cosine distance, L1 distance, Hamming distance, and Jaccard distance
 - Any language with a Postgres client
-- ACID compliance, point-in-time recovery, JOINs, and all other features of Postgres
+- ACID compliance, point-in-time recovery, JOINs, and all other Postgres features
 
 This topic describes how to enable the `pgvector` extension in Neon and how to create, store, and query vectors.
 
@@ -40,11 +40,11 @@ CREATE TABLE items (
 );
 ```
 
-The command generates a table named `items` with an `embedding` column capable of storing vectors with 3 dimensions. OpenAI's `text-embedding-ada-002` model supports 1536 dimensions for each piece of text, which creates more accurate embeddings for natural language processing tasks. For more information about embeddings, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
+This command generates a table named `items` with an `embedding` column capable of storing vectors with 3 dimensions. OpenAI's `text-embedding-ada-002` model supports 1536 dimensions for each piece of text, which creates more accurate embeddings for natural language processing tasks. However, using larger embeddings generally costs more and consumes more compute, memory and storage than using smaller embeddings. To learn more about embeddings and the cost-performance tradeoff, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
 
-## Storing vectors and embeddings
+## Storing embeddings
 
-After you have generated an embedding using a service like the OpenAI API, you can store the resulting vector in your database. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings.
+After generating embeddings using a service like the OpenAI API, you can store them in your database. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings.
 
 This command inserts two new rows into the `items` table with the provided embeddings.
 
@@ -60,7 +60,7 @@ COPY items (embedding) FROM STDIN WITH (FORMAT BINARY);
 
 For a Python script example, see [bulk_loading.py](https://github.com/pgvector/pgvector-python/blob/master/examples/bulk_loading.py).
 
-This command how how to upserts vectors:
+This command shows how to upserts vectors:
 
 ```sql
 INSERT INTO items (id, embedding) VALUES (1, '[1,2,3]'), (2, '[4,5,6]')
@@ -81,13 +81,23 @@ DELETE FROM items WHERE id = 1;
 
 ## Querying vectors
 
-To retrieve vectors and calculate similarity, use `SELECT` statements and the built-in vector operators. For instance, you can find the top 5 most similar items to a given embedding using the following query:
+To retrieve vectors and calculate similarity, use `SELECT` statements and the built-in vector operators. For instance, you can find the top 5 most similar items to a given embedding within a certain distance using the following query:
 
 ```sql
 SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
 ```
 
 This query computes the Euclidean distance (L2 distance) between the given vector and the vectors stored in the items table, sorts the results by the calculated distance, and returns the top 5 most similar items.
+
+This query retrieves the nearest neighbors to a row:
+
+```sql shouldWrap
+SELECT * FROM items WHERE id != 1 ORDER BY embedding <-> (SELECT embedding FROM items WHERE id = 1) LIMIT 5;
+```
+
+<Admonition type="note">
+To use an index, use `ORDER BY` and `LIMIT`, as shown in the example above.
+</Admonition>
 
 Supported distance functions include:
 
@@ -100,23 +110,9 @@ Supported distance functions include:
 The inner product operator (`<#>`) returns the negative inner product since Postgres only supports `ASC` order index scans on operators.
 </Admonition>
 
-Get the nearest neighbors to a row:
+### Distance queries
 
-```sql
-SELECT * FROM items WHERE id != 1 ORDER BY embedding <-> (SELECT embedding FROM items WHERE id = 1) LIMIT 5;
-```
-
-Get rows within a certain distance:
-
-````sql
-SELECT * FROM items WHERE embedding <-> '[3,1,2]' < 5;```
-````
-
-<Admonition type="note">
-Combine with ORDER BY and LIMIT to use an index
-</Admonition>
-
-Get the distance:
+Get the distances:
 
 ```sql
 SELECT embedding <-> '[3,1,2]' AS distance FROM items;
@@ -134,6 +130,8 @@ For cosine similarity, use 1 - cosine distance:
 SELECT 1 - (embedding <=> '[3,1,2]') AS cosine_similarity FROM items;
 ```
 
+## Aggregate queries
+
 To average vectors:
 
 ```sql
@@ -148,7 +146,7 @@ SELECT category_id, AVG(embedding) FROM items GROUP BY category_id;
 
 ## Indexing vectors
 
-By default, `pgvector` performs exact nearest neighbor search, providing perfect recall. Adding an index on the vector column can improve query performance with a minor cost in recall.
+By default, `pgvector` performs exact nearest neighbor search, providing perfect recall. Adding an index on the vector column can improve query performance with a minor cost in recall. Unlike typical indexes, you will see different results for queries after adding an approximate index.
 
 Supported index types include:
 
@@ -162,9 +160,9 @@ An HNSW index creates a multilayer graph. It has better query performance than I
 The following examples show how to add an HNSW index for the supported distance functions. The supported types include:
 
 - `vector` - up to 2,000 dimensions
-- `halfvec` - up to 4,000 dimensions (added in 0.7.0)
-- `bit` - up to 64,000 dimensions (added in 0.7.0)
-- `sparsevec` - up to 1,000 non-zero elements (added in 0.7.0)
+- `halfvec` - up to 4,000 dimensions
+- `bit` - up to 64,000 dimensions
+- `sparsevec` - up to 1,000 non-zero elements
 
 **L2 distance**
 
@@ -188,19 +186,19 @@ CREATE INDEX ON items USING hnsw (embedding vector_ip_ops);
 CREATE INDEX ON items USING hnsw (embedding vector_cosine_ops);
 ```
 
-**L1 distance - added in 0.7.0**
+**L1 distance**
 
 ```sql
 CREATE INDEX ON items USING hnsw (embedding vector_l1_ops);
 ```
 
-**Hamming distance - added in 0.7.0**
+**Hamming distance**
 
 ```sql
 CREATE INDEX ON items USING hnsw (embedding bit_hamming_ops);
 ```
 
-**Jaccard distance - added in 0.7.0**
+**Jaccard distance**
 
 ```sql
 CREATE INDEX ON items USING hnsw (embedding bit_jaccard_ops);
@@ -209,7 +207,7 @@ CREATE INDEX ON items USING hnsw (embedding bit_jaccard_ops);
 #### HNSW index options
 
 - `m` - the max number of connections per layer (16 by default)
-- `ef_construction` - the size of the dynamic candidate list for constructing the graph (64 by default)
+- `ef_construction` - the size of the dynamic candidate list for constructing the graph (`64` by default)
 
 This example demonstrates how to set the parameters:
 
@@ -221,7 +219,7 @@ A higher value of `ef_construction` provides better recall at the cost of index 
 
 #### HNSW query options
 
-You can specify the size of the dynamic candidate list for search. The size is 40 by default.
+You can specify the size of the dynamic candidate list for search. The size is `40` by default.
 
 ```sql
 SET hnsw.ef_search = 100;
