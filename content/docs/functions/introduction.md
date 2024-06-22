@@ -46,6 +46,14 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 </DetailIconCards>
 
+## Mathematical functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/abs" description="Calculate the absolute value of a number" icon="app-store">abs()</a>
+
+</DetailIconCards>
+
 ## String functions
 
 <DetailIconCards>
