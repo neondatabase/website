@@ -65,7 +65,7 @@ updatedOn: '2024-02-27T20:16:54.558Z'
 
 ## Develop
 
-<TechnologyNavigation>
+<TechnologyNavigation  open>
 
 <img src="/images/technology-logos/github-logo.svg" width="36" height="36" alt="GitHub integration" href="/docs/guides/github-integration" title="Use the Neon GitHub integrations" />
 
