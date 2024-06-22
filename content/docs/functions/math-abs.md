@@ -23,7 +23,7 @@ abs(number) -> number
 
 ## Example usage
 
-Consider a table `transactions` with a `amount` column that contains both positive (deposits) and negative (withdrawals) values. We can use `abs()` to order the transactions by their magnitude. 
+Consider a table `transactions` with a `amount` column that contains both positive (deposits) and negative (withdrawals) values. We can use `abs()` to order the transactions by their magnitude.
 
 ```sql
 WITH transactions(id, amount) AS (
@@ -38,7 +38,7 @@ FROM transactions
 ORDER BY abs(amount) DESC;
 ```
 
-This query retrieves the transaction IDs and amounts, ordering them by the absolute value of the amount, in descending order. 
+This query retrieves the transaction IDs and amounts, ordering them by the absolute value of the amount, in descending order.
 
 ```text
  id | amount
@@ -54,7 +54,7 @@ This query retrieves the transaction IDs and amounts, ordering them by the absol
 
 ### Using abs() for distance calculations
 
-The `abs()` function is also frequently used for distance calculations, where the direction is not relevant. Suppose we have a table of geographical coordinates and we want to find points within a certain range of a reference point. 
+The `abs()` function is also frequently used for distance calculations, where the direction is not relevant. Suppose we have a table of geographical coordinates and we want to find points within a certain range of a reference point.
 
 ```sql
 WITH locations(name, latitude, longitude) AS (
@@ -64,12 +64,12 @@ WITH locations(name, latitude, longitude) AS (
     ('Point C', 41.6892, -74.0445),
     ('Reference', 40.7300, -73.9950)
 )
-SELECT 
+SELECT
   name,
   abs(latitude - 40.7300) AS lat_diff,
   abs(longitude - (-73.9950)) AS long_diff
 FROM locations
-WHERE 
+WHERE
   abs(latitude - 40.7300) <= 0.05 AND
   abs(longitude - (-73.9950)) <= 0.05;
 ```
@@ -97,7 +97,7 @@ WITH sales_data(product, forecast, actual) AS (
     ('Product C', 750, 725),
     ('Product D', 300, 400)
 )
-SELECT 
+SELECT
   product,
   forecast,
   actual,
