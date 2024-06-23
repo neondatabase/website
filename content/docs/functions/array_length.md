@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `array_length()` function in PostgreSQL is used to determine the length of an array along a specified dimension. 
+The `array_length()` function in PostgreSQL is used to determine the length of an array along a specified dimension.
 
 It's particularly useful when working with multi-dimensional arrays or when you need to perform operations based on the size of an array. Examples include data analysis where you might need to filter rows based on the number of elements in an array column. Another use case might be application development where you need to validate the size of array inputs since Postgres doesn't natively have a fixed-size array data type.
 
@@ -28,12 +28,12 @@ Consider a table `products` with an `categories` column that contains arrays of 
 
 ```sql
 WITH products(product_name, categories) AS (
-  VALUES 
+  VALUES
     ('Laptop', ARRAY['Electronics', 'Computers']),
     ('Coffee Maker', ARRAY['Appliances', 'Kitchen', 'Electronics']),
     ('Book', ARRAY['Books'])
 )
-SELECT 
+SELECT
   product_name,
   categories,
   array_length(categories, 1) AS category_count
@@ -59,7 +59,7 @@ You can use `array_length()` in a `WHERE` clause to filter rows based on the siz
 
 ```sql
 WITH orders(order_id, items) AS (
-  VALUES 
+  VALUES
     (1, ARRAY['Shirt', 'Pants', 'Shoes']),
     (2, ARRAY['Book']),
     (3, ARRAY['Laptop', 'Mouse', 'Keyboard', 'Monitor'])
@@ -87,7 +87,7 @@ This query selects all orders that contain more than two items.
 WITH matrix AS (
   SELECT ARRAY[[1, 2, 3], [4, 5, 6]] AS data
 )
-SELECT 
+SELECT
   array_length(data, 1) AS rows,
   array_length(data, 2) AS columns,
   array_length(data, 3) AS depth
