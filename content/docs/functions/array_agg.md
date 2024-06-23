@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `array_agg()` function in PostgreSQL is an aggregate function used to collect values from multiple rows into a single array. 
+The `array_agg()` function in PostgreSQL is an aggregate function used to collect values from multiple rows into a single array.
 
 It's particularly useful for denormalizing data, creating comma-separated lists, or preparing data for JSON output. For example, when you want to list all products in a category from a products catalog table, or all orders for a customer from an orders table.
 
@@ -43,7 +43,7 @@ WITH orders AS (
   UNION ALL SELECT 2, 104, 1
   UNION ALL SELECT 3, 101, 1
 )
-SELECT 
+SELECT
   order_id,
   array_agg(product_id) AS products
 FROM orders
@@ -76,7 +76,7 @@ WITH employees AS (
   UNION ALL SELECT 2, 'Jane', 'C++'
   UNION ALL SELECT 2, 'Jane', 'Ruby'
 )
-SELECT 
+SELECT
   emp_id,
   name,
   array_agg(skill ORDER BY skill) AS skills
@@ -101,7 +101,7 @@ This query aggregates the listed skills for each employee into an alphabetically
 
 ```sql
 WITH sales(category, product, price, sale_date) AS (
-  VALUES 
+  VALUES
     ('Electronics', 'Laptop', 1200, '2023-01-15'::date),
     ('Electronics', 'Smartphone', 800, '2023-01-20'::date),
     ('Electronics', 'Tablet', 500, '2023-02-10'::date),
@@ -109,7 +109,7 @@ WITH sales(category, product, price, sale_date) AS (
     ('Books', 'Textbook', 100, '2023-02-15'::date),
     ('Books', 'Cookbook', 30, '2023-03-01'::date)
 )
-SELECT 
+SELECT
   category,
   array_agg(
     (SELECT product || ': ' || SUM(price)::text
@@ -143,7 +143,7 @@ WITH user_logins AS (
   UNION ALL SELECT 2, 'Safari'
   UNION ALL SELECT 2, 'Chrome'
 )
-SELECT 
+SELECT
   user_id,
   array_agg(DISTINCT browser ORDER BY browser) AS browsers_used
 FROM user_logins
@@ -164,7 +164,7 @@ This query creates an array of the browsers used by each user, without duplicate
 
 ### Performance implications
 
-While `array_agg()` is powerful, it can be memory-intensive for large datasets. The function needs to hold all the aggregated values in memory before creating the final array. For very large result sets, consider using pagination or limiting the number of rows before aggregating. 
+While `array_agg()` is powerful, it can be memory-intensive for large datasets. The function needs to hold all the aggregated values in memory before creating the final array. For very large result sets, consider using pagination or limiting the number of rows before aggregating.
 
 ### NULL handling
 
