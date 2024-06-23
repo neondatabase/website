@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `json_agg()` function in PostgreSQL is an aggregate function that collects values from multiple rows and returns them as a single JSON array. 
+The `json_agg()` function in PostgreSQL is an aggregate function that collects values from multiple rows and returns them as a single JSON array.
 
 It's particularly useful when you need to denormalize data for performance reasons, or to prepare data for front-end applications and APIs. For example, you might use it to aggregate product reviews for an e-commerce application or to collect all posts by a user in a social media platform.
 
@@ -19,9 +19,9 @@ The `json_agg()` function has the simple form:
 json_agg(expression) -> json
 ```
 
-- `expression`: The value to be aggregated into a JSON array. This can be a column, a complex expression, or even a subquery. 
+- `expression`: The value to be aggregated into a JSON array. This can be a column, a complex expression, or even a subquery.
 
-When used in this manner, the order of the values in the resulting JSON array is not guaranteed. Postgres supports an extended syntax for aggregating values in a specific order. 
+When used in this manner, the order of the values in the resulting JSON array is not guaranteed. Postgres supports an extended syntax for aggregating values in a specific order.
 
 ```sql
 json_agg(expression ORDER BY sort_expression [ASC | DESC] [NULLS { FIRST | LAST }]) -> json
@@ -39,16 +39,16 @@ Consider a table `orders` with columns `order_id`, `product_name`, and `quantity
 
 ```sql
 WITH orders AS (
-    SELECT * 
+    SELECT *
     FROM (
-        VALUES 
+        VALUES
             (1, 'Widget A', 2),
             (1, 'Widget B', 1),
             (2, 'Widget C', 3),
             (2, 'Widget D', 2)
     ) AS t(order_id, product_name, quantity)
 )
-SELECT 
+SELECT
   order_id,
   json_agg(json_build_object('product', product_name, 'quantity', quantity)) AS products
 FROM orders
@@ -78,7 +78,7 @@ WITH reviews AS (
   UNION ALL SELECT 1, 'Awesome!', 5, '2023-01-20'::date
   UNION ALL SELECT 2, 'Not bad', 4, '2023-01-10'::date
 )
-SELECT 
+SELECT
   product_id,
   json_agg(
     comment || ' (' || rating || ' stars)'
@@ -109,7 +109,7 @@ WITH sales AS (
   UNION ALL SELECT 'South', 'Q1', 80000
   UNION ALL SELECT 'South', 'Q2', 90000
 )
-SELECT 
+SELECT
     region,
     json_agg(
         (SELECT json_build_object('quarter', quarter, 'amount', amount))
@@ -119,7 +119,7 @@ FROM sales
 GROUP BY region;
 ```
 
-This query uses `json_build_object()` in combination with `json_agg()` to create an array of quarterly sales data, for each region. 
+This query uses `json_build_object()` in combination with `json_agg()` to create an array of quarterly sales data, for each region.
 
 ```text
  region |                                quarterly_sales
