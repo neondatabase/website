@@ -7,7 +7,7 @@ updatedOn: '2024-03-04T11:00:00.000Z'
 
 The `random()` function in PostgreSQL is used to generate random floating point values between 0.0 and 1.0.
 
-It's particularly useful for creating some sample data, usage in simulations, or introducing randomness in queries for applications like statistical sampling and testing algorithms. 
+It's particularly useful for creating some sample data, usage in simulations, or introducing randomness in queries for applications like statistical sampling and testing algorithms.
 
 <CTA />
 
@@ -56,7 +56,7 @@ The `generate_series()` function is used to generate a series of integers from 1
   3 | Sensor-3    |       30.62 |    49.94 | 2024-06-23 10:34:03.627556
   4 | Sensor-4    |       23.32 |    79.20 | 2024-06-23 10:34:03.627556
   5 | Sensor-5    |       34.33 |    50.39 | 2024-06-23 10:34:03.627556
-(5 rows)  
+(5 rows)
 ```
 
 ### Random integer within a range
