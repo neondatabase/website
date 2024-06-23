@@ -46,6 +46,14 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 </DetailIconCards>
 
+## Mathematical functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/math-random" description="Generate a random number between 0 and 1" icon="app-store">random()</a>
+
+</DetailIconCards>
+
 ## String functions
 
 <DetailIconCards>
