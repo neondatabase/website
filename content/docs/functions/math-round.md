@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T11:00:00.000Z'
 ---
 
-The `round()` function in PostgreSQL is used to round numeric values to a specified number of decimal places or to the nearest integer. 
+The `round()` function in PostgreSQL is used to round numeric values to a specified number of decimal places or to the nearest integer.
 
 It can help maintain consistency in numerical data, simplify complex decimal numbers, and adjust the precision of calculations to meet specific requirements. It's particularly useful in financial calculations, data analysis, and when presenting numerical data in a more readable format.
 
@@ -34,7 +34,7 @@ WITH product_sales(product_id, sales_amount) AS (
     (3, 3456.7890),
     (4, 4567.8901)
 )
-SELECT 
+SELECT
   product_id,
   sales_amount,
   round(sales_amount) AS rounded_to_integer,
@@ -42,7 +42,7 @@ SELECT
 FROM product_sales;
 ```
 
-This query demonstrates using the `round()` function to round sales amounts to the nearest integer and to two decimal places (cents). 
+This query demonstrates using the `round()` function to round sales amounts to the nearest integer and to two decimal places (cents).
 
 ```text
  product_id | sales_amount | rounded_to_integer | rounded_to_cents
@@ -58,7 +58,7 @@ This query demonstrates using the `round()` function to round sales amounts to t
 
 ### Using round() to calculate accurate percentages
 
-The `round()` function is often used when calculating and displaying percentages. For example, consider a table of with sales data for different products. Let's calculate the percentage of total sales contributed by each product. 
+The `round()` function is often used when calculating and displaying percentages. For example, consider a table of with sales data for different products. Let's calculate the percentage of total sales contributed by each product.
 
 ```sql
 WITH product_sales(product_id, sales_amount) AS (
@@ -68,7 +68,7 @@ WITH product_sales(product_id, sales_amount) AS (
     (3, 3456.78),
     (4, 4567.89)
 )
-SELECT 
+SELECT
   product_id,
   sales_amount,
   round(
@@ -104,7 +104,7 @@ WITH orders(order_id, total_amount) AS (
     (4, 456.78),
     (5, 567.89)
 )
-SELECT 
+SELECT
   round(AVG(total_amount)) AS avg_order_value_rounded,
   round(AVG(total_amount), 2) AS avg_order_value_cents
 FROM orders;
