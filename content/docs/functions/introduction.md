@@ -46,6 +46,14 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 </DetailIconCards>
 
+## Mathematical functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/round" description="Round numbers to a specified precision" icon="app-store">round()</a>
+
+</DetailIconCards>
+
 ## String functions
 
 <DetailIconCards>
