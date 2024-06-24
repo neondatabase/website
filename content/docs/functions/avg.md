@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `avg()` function in Postgres is an aggregate function used to calculate the arithmetic mean of a set of numeric values. 
+The `avg()` function in Postgres is an aggregate function used to calculate the arithmetic mean of a set of numeric values.
 
 This function is particularly useful when you need to understand the central tendency of a dataset, compare different groups, or identify trends over time. For example, you might use it to calculate the average order value for an e-commerce platform, the average response time for a web service, or the mean of sensor readings over time.
 
@@ -25,7 +25,7 @@ The `avg()` function returns an output of the type `numeric` when applied to int
 
 ## Example usage
 
-Consider a table `weather_data` tracking the temperature readings for different cities. It has the columns `date`, `city` and `temperature`. We will use the `avg()` function to analyze this data. 
+Consider a table `weather_data` tracking the temperature readings for different cities. It has the columns `date`, `city` and `temperature`. We will use the `avg()` function to analyze this data.
 
 ```sql
 CREATE TABLE weather_data (
@@ -55,7 +55,7 @@ SELECT avg(temperature) AS avg_temperature
 FROM weather_data;
 ```
 
-This query computes the average of all values in the `temperature` column. 
+This query computes the average of all values in the `temperature` column.
 
 ```text
    avg_temperature
@@ -93,7 +93,7 @@ This query returns the average temperature recorded for each city, ordered by th
 Postgres allows you to use a `FILTER` clause with aggregate functions to selectively include rows in the calculation:
 
 ```sql
-SELECT 
+SELECT
   city,
   avg(temperature) as avg_temperature,
   avg(temperature) FILTER (WHERE date >= '2024-03-03') AS avg_temperature_since_3rd
@@ -101,7 +101,7 @@ FROM weather_data
 GROUP BY city;
 ```
 
-This query calculates the average temperature for each city and the average temperature since March 3rd, 2024. 
+This query calculates the average temperature for each city and the average temperature since March 3rd, 2024.
 
 ```text
     city     |   avg_temperature   | avg_temperature_since_3rd
@@ -146,16 +146,16 @@ This query calculates the difference between each temperature reading and the ov
 
 ### Calculating a moving average
 
-We can use `avg()` as a window function to calculate a moving average over the specified window of rows. 
+We can use `avg()` as a window function to calculate a moving average over the specified window of rows.
 
 ```sql
-SELECT 
+SELECT
   date,
   city,
   temperature,
   avg(temperature) OVER (
-    PARTITION BY city 
-    ORDER BY date 
+    PARTITION BY city
+    ORDER BY date
     ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
   ) AS moving_avg_temp
 FROM weather_data
@@ -196,12 +196,12 @@ FROM weather_data;
 
 ### Performance implications
 
-When working with large datasets, calculating averages can be resource-intensive, especially when combined with complex `GROUP BY` clauses or subqueries. Consider using materialized views or pre-aggregating data for frequently used averages for analytics applications. 
+When working with large datasets, calculating averages can be resource-intensive, especially when combined with complex `GROUP BY` clauses or subqueries. Consider using materialized views or pre-aggregating data for frequently used averages for analytics applications.
 
 ## Alternative functions
 
 - `percentile_cont()`: Calculates a continuous percentile value. It can be used to compute the median or other percentiles. Note that it is an ordered-set aggregate function and requires a `WITHIN GROUP` clause.
-- `mode()`: Returns the most frequent value in a set. It is also an ordered-set aggregate function. 
+- `mode()`: Returns the most frequent value in a set. It is also an ordered-set aggregate function.
 
 ## Resources
 
