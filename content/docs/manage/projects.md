@@ -223,7 +223,7 @@ To configure an allowlist:
 The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
 
 ```bash
-neonctl ip-allow add 203.0.113.0 203.0.113.1
+neon ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
 │ Id                  │ Name                │ IP Addresses │ default branch Only │
 ├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
@@ -235,13 +235,13 @@ neonctl ip-allow add 203.0.113.0 203.0.113.1
 To apply an IP allowlist to the default branch only, use the you can `--primary-only` option:
 
 ```bash
-neonctl ip-allow add 203.0.113.1 --primary-only
+neon ip-allow add 203.0.113.1 --primary-only
 ```
 
 To reverse that setting, use `--primary-only false`.
 
 ```bash
-neonctl ip-allow add 203.0.113.1 --primary-only false
+neon ip-allow add 203.0.113.1 --primary-only false
 ```
 
 </TabItem>
@@ -342,7 +342,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports removing an IP Allow configuration. To do so, specify `--ip-allow reset` without specifying any IP address values:
 
 ```bash
-neonctl ip-allow reset
+neon ip-allow reset
 ```
 
 </TabItem>

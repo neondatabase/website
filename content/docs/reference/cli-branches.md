@@ -8,7 +8,7 @@ updatedOn: '2024-06-20T17:29:55.113Z'
 ## Before you begin
 
 - Before running the `branches` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
-- If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
+- If you have not authenticated with the [neon auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 ## The `branches` command
 
@@ -17,7 +17,7 @@ The `branches` command allows you to list, create, rename, delete, and retrieve 
 ## Usage
 
 ```bash
-neonctl branches <subcommand> [options]
+neon branches <subcommand> [options]
 ```
 
 | Subcommand                  | Description                                  |
@@ -40,7 +40,7 @@ This subcommand allows you to list branches in a Neon project.
 #### Usage
 
 ```bash
-neonctl branches list [options]
+neon branches list [options]
 ```
 
 #### Options
@@ -57,7 +57,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 - List branches with the default `table` output format. The information provided with this output format is limited compared to other formats, such as `json`.
 
   ```bash
-  neonctl branches list --project-id solitary-leaf-288182
+  neon branches list --project-id solitary-leaf-288182
   ┌────────────────────────┬──────────┬──────────────────────┬──────────────────────┐
   │ Id                     │ Name     │ Created At           │ Updated At           │
   ├────────────────────────┼──────────┼──────────────────────┼──────────────────────┤
@@ -70,7 +70,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 - List branches with the `json` output format. This format provides more information than the default `table` output format.
 
   ```bash
-  neonctl branches list --project-id solitary-leaf-288182 --output json
+  neon branches list --project-id solitary-leaf-288182 --output json
   [
   {
       "id": "br-wild-boat-648259",
@@ -115,7 +115,7 @@ This subcommand allows you to create a branch in a Neon project.
 #### Usage
 
 ```bash
-neonctl branches create [options]
+neon branches create [options]
 ```
 
 #### Options
@@ -138,7 +138,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 - Create a branch:
 
   ```bash
-  neonctl branches create
+  neon branches create
   ┌─────────────────────────┬─────────────────────────┬─────────┬──────────────────────┬──────────────────────┐
   │ Id                      │ Name                    │ Primary │ Created At           │ Updated At           │
   ├─────────────────────────┼─────────────────────────┼─────────┼──────────────────────┼──────────────────────┤
@@ -159,13 +159,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   ```
 
     <Admonition type="tip">
-    The Neon CLI provides a `neonctl connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+    The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
     </Admonition>
 
 - Create a branch with the `--output` format of the command set to `json`. This output format returns all of the branch response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
 
   ```bash
-  neonctl branches create --output json
+  neon branches create --output json
   ```
 
     <details>
@@ -234,25 +234,25 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 - Create a branch with a user-defined name:
 
   ```bash
-  neonctl branches create --name mybranch
+  neon branches create --name mybranch
   ```
 
 - Create a branch with a read-only compute endpoint (a [read replica](/docs/introduction/read-replicas))
 
   ```bash
-  neonctl branches create --name my_read_replica_branch --type read_only
+  neon branches create --name my_read_replica_branch --type read_only
   ```
 
 - Create a branch from a parent branch other than your `main` branch
 
   ```bash
-  neonctl branches create --name my_child_branch --parent mybranch
+  neon branches create --name my_child_branch --parent mybranch
   ```
 
 - Create a point-in-time restore branch by specifying the `--parent` option with a timestamp:
 
   ```bash
-  neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
+  neon branches create --name data_recovery --parent 2023-07-11T10:00:00Z
   ```
 
   The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
@@ -260,19 +260,19 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 - Create a branch and connect to it with `psql`.
 
   ```bash
-  neonctl branch create --psql
+  neon branch create --psql
   ```
 
 - Create a branch, connect to it with `psql`, and run an `.sql` file.
 
   ```bash
-  neonctl branch create --psql -- -f dump.sql
+  neon branch create --psql -- -f dump.sql
   ```
 
 - Create a branch, connect to it with `psql`, and run a query.
 
   ```bash
-  neonctl branch create --psql -- -c "SELECT version()"
+  neon branch create --psql -- -c "SELECT version()"
   ```
 
 ## reset
@@ -282,7 +282,7 @@ This command resets a child branch to the latest data from its parent.
 #### Usage
 
 ```bash
-neonctl branches reset <id|name> --parent
+neon branches reset <id|name> --parent
 ```
 
 `<id|name>` refers to the branch ID or branch name. You can use either one for this operation.
@@ -303,7 +303,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash
-neonctl branches reset dev/alex --parent
+neon branches reset dev/alex --parent
 ┌──────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                   │ Name     │ Primary │ Created At           │ Last Reset At        │
 ├──────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
@@ -318,7 +318,7 @@ This command restores a branch to a specified point in time in its own or anothe
 #### Usage
 
 ```bash
-neonctl branches restore <target-id|name> <source>[@(timestamp|lsn)]
+neon branches restore <target-id|name> <source>[@(timestamp|lsn)]
 ```
 
 `<target-id|name>` specifies the ID or name of the branch that you want to restore.
@@ -352,7 +352,7 @@ Examples of the different kinds of restore operations you can do:
 This command restores the branch `main` to an earlier timestamp, saving to a backup branch called `main_restore_backup_2024-02-20`
 
 ```bash shouldWrap
-neonctl branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06
+neon branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06
 ```
 
 Results of the operation:
@@ -378,7 +378,7 @@ Backup branch
 This command restores the target branch `dev/alex` to latest data (head) from the source branch `main`.
 
 ```bash shouldWrap
-neonctl branches restore dev/alex main
+neon branches restore dev/alex main
 ```
 
 Results of the operation:
@@ -398,7 +398,7 @@ Restored branch
 This command restores the branch `dev/alex` to a selected point in time from its parent branch.
 
 ```bash shouldWrap
-neonctl branches restore dev/alex ^parent@2024-02-21T10:30:00.000Z
+neon branches restore dev/alex ^parent@2024-02-21T10:30:00.000Z
 ```
 
 Results of the operation:
@@ -420,7 +420,7 @@ This subcommand allows you to update a branch in a Neon project.
 #### Usage
 
 ```bash
-neonctl branches rename <id|name> <new-name> [options]
+neon branches rename <id|name> <new-name> [options]
 ```
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
@@ -437,7 +437,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash
-neonctl branches rename mybranch teambranch
+neon branches rename mybranch teambranch
 ┌───────────────────────┬────────────┬──────────────────────┬──────────────────────┐
 │ Id                    │ Name       │ Created At           │ Updated At           │
 ├───────────────────────┼────────────┼──────────────────────┼──────────────────────┤
@@ -455,7 +455,7 @@ This command:
 #### Usage
 
 ```
-neonctl branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
+neon branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
 ```
 
 `[base-branch]` specifies the branch you want to compare against. For example, if you want to compare a development branch against the production branch `main`, select `main` as your base.
@@ -499,7 +499,7 @@ Examples of different kinds of schema diff operations you can do:
 This command compares the schema of the `main` branch to the head of the branch `dev/alex`.
 
 ```
-neonctl branches schema-diff main dev/alex
+neon branches schema-diff main dev/alex
 ```
 
 The output indicates that in the table `public.playing_with_neon`, a new column `description character varying(255)` has been added in the `dev/alex` branch that is not present in the `main` branch.
@@ -531,7 +531,7 @@ This command compares the schema of `dev-alex` to a previous state in its histor
 
 ```
 
-neonctl branches schema-diff dev-alex ^self@0/123456
+neon branches schema-diff dev-alex ^self@0/123456
 
 ```
 
@@ -541,7 +541,7 @@ This command compares the schema of `dev/alex` to the head of its parent branch.
 
 ```
 
-neonctl branches schema-diff dev/alex ^parent
+neon branches schema-diff dev/alex ^parent
 
 ````
 
@@ -550,7 +550,7 @@ neonctl branches schema-diff dev/alex ^parent
 This command compares the schema of the `main` branch to the state of the `dev/jordan` branch at timestamp 2024-06-01T00:00:00.000Z
 
 ```bash
-neonctl branches schema-diff main dev/jordan@2024-06-01T00:00:00.000Z
+neon branches schema-diff main dev/jordan@2024-06-01T00:00:00.000Z
 ````
 
 ## set-primary
@@ -560,7 +560,7 @@ This subcommand allows you to set a branch as the default branch in your Neon pr
 #### Usage
 
 ```bash
-neonctl branches set-primary <id|name> [options]
+neon branches set-primary <id|name> [options]
 ```
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
@@ -577,7 +577,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash
-neonctl branches set-primary mybranch
+neon branches set-primary mybranch
 ┌────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                 │ Name     │ Primary │ Created At           │ Updated At           │
 ├────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
@@ -592,7 +592,7 @@ This subcommand allows you to add a compute endpoint to an existing branch in yo
 #### Usage
 
 ```bash
-neonctl branches add-compute <id|name>
+neon branches add-compute <id|name>
 ```
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
@@ -610,7 +610,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash
-neonctl branches add-compute mybranch --type read_only
+neon branches add-compute mybranch --type read_only
 ┌─────────────────────┬──────────────────────────────────────────────────┐
 │ Id                  │ Host                                             │
 ├─────────────────────┼──────────────────────────────────────────────────┤
@@ -625,7 +625,7 @@ This subcommand allows you to delete a branch in a Neon project.
 #### Usage
 
 ```bash
-neonctl branches delete <id|name> [options]
+neon branches delete <id|name> [options]
 ```
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
@@ -642,7 +642,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash
-neonctl branches delete br-rough-sky-158193
+neon branches delete br-rough-sky-158193
 ┌─────────────────────┬─────────────────┬──────────────────────┬──────────────────────┐
 │ Id                  │ Name            │ Created At           │ Updated At           │
 ├─────────────────────┼─────────────────┼──────────────────────┼──────────────────────┤
@@ -657,7 +657,7 @@ This subcommand allows you to retrieve details about a branch.
 #### Usage
 
 ```bash
-neonctl branches get <id|name> [options]
+neon branches get <id|name> [options]
 ```
 
 #### Options
@@ -674,7 +674,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Examples
 
 ```bash
-neonctl branches get main
+neon branches get main
 ┌────────────────────────┬──────┬──────────────────────┬──────────────────────┐
 │ Id                     │ Name │ Created At           │ Updated At           │
 ├────────────────────────┼──────┼──────────────────────┼──────────────────────┤
@@ -685,7 +685,7 @@ neonctl branches get main
 A `get` example with the `--output` format option set to `json`:
 
 ```bash
-neonctl branches get main --output json
+neon branches get main --output json
 {
   "id": "br-lingering-bread-896475",
   "project_id": "noisy-rain-039137",

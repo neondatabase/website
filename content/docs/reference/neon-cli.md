@@ -114,7 +114,7 @@ ARM64:
 Run the CLI from the download directory:
 
 ```bash
-neonctl <command> [options]
+neon <command> [options]
 ```
 
 </TabItem>
@@ -204,12 +204,12 @@ Global options are supported with any Neon CLI command.
   Sets the output format. Supported options are `json`, `yaml`, and `table`. The default is `table`. Table output may be limited. The `json` and `yaml` output formats show all data.
 
   ```bash
-  neonctl me --output json
+  neon me --output json
   ```
 
 - <a id="config-dir"></a>`--config-dir`
 
-  Specifies the path to the `neonctl` configuration directory. To view the default configuration directory containing you `credentials.json` file, run `neonctl --help`. The credentials file is created when you authenticate using the `neonctl auth` command. This option is only necessary if you move your `neonctl` configuration file to a location other than the default.
+  Specifies the path to the `neonctl` configuration directory. To view the default configuration directory containing you `credentials.json` file, run `neon --help`. The credentials file is created when you authenticate using the `neon auth` command. This option is only necessary if you move your `neonctl` configuration file to a location other than the default.
 
   ```bash
   neonctl projects list --config-dir /home/<user>/.config/neonctl
@@ -220,7 +220,7 @@ Global options are supported with any Neon CLI command.
   Specifies your Neon API key. You can authenticate using a Neon API key when running a Neon CLI command instead of using `neonctl auth`. For information about obtaining an Neon API key, see [Create an API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
 
   ```bash
-  neonctl <command> --api-key <neon_api_key>
+  neon <command> --api-key <neon_api_key>
   ```
 
   To avoid including the `--api-key` option with each CLI command, you can export your API key to the `NEON_API_KEY` environment variable.
@@ -235,8 +235,8 @@ Global options are supported with any Neon CLI command.
 
   - If the `--api-key` option is provided, it is used for authentication.
   - If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable setting is used.
-  - If there is no `--api-key` option or `NEON_API_KEY` environment variable setting, the CLI looks for the `credentials.json` file created by the `neonctl auth` command.
-  - If the credentials file is not found, the Neon CLI initiates the `neonctl auth` web authentication process.
+  - If there is no `--api-key` option or `NEON_API_KEY` environment variable setting, the CLI looks for the `credentials.json` file created by the `neon auth` command.
+  - If the credentials file is not found, the Neon CLI initiates the `neon auth` web authentication process.
 
   </Admonition>
 
@@ -253,7 +253,7 @@ Global options are supported with any Neon CLI command.
   Shows the Neon CLI version number.
 
   ```bash
-  $ neonctl --version
+  $ neon --version
   1.15.0
   ```
 
@@ -262,11 +262,11 @@ Global options are supported with any Neon CLI command.
   Shows the `neonctl` command-line help. You can view help for `neonctl`, a `neonctl` command, or a `neonctl` subcommand, as shown in the following examples:
 
   ```bash
-  neonctl --help
+  neon --help
 
-  neonctl branches --help
+  neon branches --help
 
-  neonctl branches create --help
+  neon branches create --help
   ```
 
 ## Options
@@ -280,7 +280,7 @@ Global options are supported with any Neon CLI command.
   Sets a background context for your CLI sessions, letting you perform project or branch-specific actions without having to specify the project or branch id in every command. For example, this command lists all branches using the `branches list` command. No need to specify the project since the context file provides it.
 
   ```bash
-  neonctl branches list --context-file path/to/context_file_name
+  neon branches list --context-file path/to/context_file_name
   ```
 
   To define a context file, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).

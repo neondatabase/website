@@ -41,13 +41,13 @@ And here are the key CLI actions you can use:
 
 ```bash
 # Create branch
-neonctl branches create [options]
+neon branches create [options]
 
 # Get Connection string
-neonctl connection-string [branch] [options]
+neon connection-string [branch] [options]
 
 # Delete branch
-neonctl branches delete <id|name> [options]
+neon branches delete <id|name> [options]
 ```
 
 For more information, see:

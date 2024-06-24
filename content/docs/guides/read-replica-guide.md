@@ -48,7 +48,7 @@ In a few moments, your read-only compute is provisioned and appears in the **Com
 To create a read replica using the Neon CLI, use the [branches](/docs/reference/cli-branches) command, specifying the `add-compute` subcommand with `--type read_only`. If you have more than one Neon project, also include the `--project-id` option.
 
 ```bash
-neonctl branches add-compute mybranch --type read_only
+neon branches add-compute mybranch --type read_only
 ```
 
 </TabItem>

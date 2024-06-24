@@ -48,7 +48,7 @@ Possible **Status** values are `OK`, `Scheduling`, `In progress`, and `Error`.
 To view operation using the Neon CLI:
 
 ```bash
-neonctl operations list --project-id <project_id>
+neon operations list --project-id <project_id>
 ```
 
 See [Neon CLI commands — operations](/docs/reference/cli-operations).

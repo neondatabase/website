@@ -16,7 +16,7 @@ Authenticates the user or caller to Neon.
 ### Usage
 
 ```bash
-neonctl auth
+neon auth
 ```
 
 The command launches a browser window where you can authorize the Neon CLI to access your Neon account. After granting permissions to the Neon CLI, your credentials are saved locally to a configuration file named `credentials.json`, enabling you manage your account's projects from the command line.
@@ -33,8 +33,8 @@ The authentication flow for the Neon CLI follows this order:
 
 - If the `--api-key` option is provided, it is used for authentication.
 - If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable setting is used.
-- If there is no `--api-key` option or `NEON_API_KEY` environment variable setting, the CLI looks for the `credentials.json` file created by the `neonctl auth` command.
-- If the credentials file is not found, the Neon CLI initiates the `neonctl auth` web authentication process.
+- If there is no `--api-key` option or `NEON_API_KEY` environment variable setting, the CLI looks for the `credentials.json` file created by the `neon auth` command.
+- If the credentials file is not found, the Neon CLI initiates the `neon auth` web authentication process.
 
 </Admonition>
 

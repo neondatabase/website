@@ -125,7 +125,7 @@ All databases on the selected branch are instantly updated with the data and sch
 Using the CLI, you can restore a branch to an earlier point in its history or another branch's history using the following command:
 
 ```bash shouldWrap
-neonctl branches restore <target id|name> <source id|name @ timestamp|lsn>
+neon branches restore <target id|name> <source id|name @ timestamp|lsn>
 ```
 
 In the `target id|name` field, specify the ID or name of the branch you want to restore. In the `source id|name timestamp|lsn` field, specify the source branch you want to restore from (mandatory), along with the point-in-time identifier (optional), which can be either an ISO 8601-formatted timestamp or the LSN. If you omit the point-in-time identifier, the operation defaults to the latest data (HEAD) for the source branch. Concatenate the source identifier and time identifier with `@`: for example, `dev/jordan@2023-12-12T12:00:00Z`.
@@ -135,7 +135,7 @@ In the `target id|name` field, specify the ID or name of the branch you want to 
 If you want to restore a branch to an earlier point in time, use the syntax `^self` in the `<source id|name>` field. For example:
 
 ```bash shouldWrap
-neonctl branches restore dev/alex ^self@2024-01-01T00:00:00Z --preserve-under-name alex_old
+neon branches restore dev/alex ^self@2024-01-01T00:00:00Z --preserve-under-name alex_old
 ```
 
 This command resets the target branch `dev/alex` to its state at the start of 2024. The command also preserves the original state of the branch in a backup file called `alex_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
@@ -145,7 +145,7 @@ This command resets the target branch `dev/alex` to its state at the start of 20
 If you want to restore a target branch from its parent, you can use the special syntax `^parent` in the `<source id|name>` field. For example:
 
 ```bash
-neonctl branches restore dev/alex ^parent
+neon branches restore dev/alex ^parent
 ```
 
 This command will restore the target branch `dev/alex` to the latest data (HEAD) of its parent branch.
@@ -155,7 +155,7 @@ This command will restore the target branch `dev/alex` to the latest data (HEAD)
 Here is an example of a command that restores a target branch to an earlier point in time of another branch's history:
 
 ```bash shouldWrap
-neonctl branches restore dev/alex dev/jordan@0/12345
+neon branches restore dev/alex dev/jordan@0/12345
 ```
 
 This command will restore the target branch `dev/alex` to an earlier point in time from the source branch `dev/jordan`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `dev/jordan`.
