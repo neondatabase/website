@@ -12,6 +12,7 @@ The Neon GitHub integration is currently in **private preview**. To start using 
 </Admonition>
 
 A database branch is an isolated copy of your data, allowing you to:
+
 - Create production-like preview environments to accelerate review and collaboration
 - Display application and database changes together in the same preview
 - Eliminate the need for manual setup of development databases
@@ -22,7 +23,7 @@ When you connect your GitHub application repository to your Neon project, the in
 2. Generates a new Neon API key for your Neon account.
 3. Creates a GitHub secret containing the Neon API key.
 
-After adding the integration, you can copy the preconfigured “create branch” action to your application repository to create a database branch with each pull request. 
+After adding the integration, you can copy the preconfigured “create branch” action to your application repository to create a database branch with each pull request.
 
 Additionally, the GitHub repository variables set by the integration let you easily extend your workflow with other actions, such as resetting and deleting branches. For details, refer to the Neon GitHub integration guide.  Adding the integration performs the following actions:
 
