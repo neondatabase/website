@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `sum()` function in Postgres is an aggregate function used to calculate the total of a set of numeric values. 
+The `sum()` function in Postgres is an aggregate function used to calculate the total of a set of numeric values.
 
 It's used in data analysis and reporting to compute totals across rows in a table or grouped data. This function is particularly useful in financial applications for calculating total revenue or expenses, in inventory management for summing up quantities, or in analytics for aggregating metrics across various dimensions.
 
@@ -13,7 +13,7 @@ It's used in data analysis and reporting to compute totals across rows in a tabl
 
 ## Function signature
 
-The `sum()` function has the simple form. 
+The `sum()` function has the simple form.
 
 ```sql
 sum([DISTINCT] expression) -> numeric type
@@ -26,7 +26,7 @@ The output of the `sum()` function has the same data type as the input if it a f
 
 ## Example usage
 
-Consider a table `sales` that tracks product sales, with columns `product_id`, `quantity`, and `price`. We can use `sum()` to calculate the total revenue from each product. 
+Consider a table `sales` that tracks product sales, with columns `product_id`, `quantity`, and `price`. We can use `sum()` to calculate the total revenue from each product.
 
 ```sql
 WITH sales(product_id, quantity, price) AS (
@@ -41,7 +41,7 @@ SELECT sum(quantity * price) AS total_revenue
 FROM sales;
 ```
 
-This query calculates the total revenue by multiplying the quantity and price for each sale. 
+This query calculates the total revenue by multiplying the quantity and price for each sale.
 
 ```text
  total_revenue
@@ -116,7 +116,7 @@ You can use `sum()` as a window function to calculate running totals:
 
 ```sql
 WITH monthly_sales AS (
-  SELECT 
+  SELECT
     '2023-01-01'::date AS month,
     10000 AS sales
   UNION ALL
