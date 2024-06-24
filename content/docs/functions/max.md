@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `max()` function in Postgres is an aggregate function used to find the maximum value in a set of values. 
+The `max()` function in Postgres is an aggregate function used to find the maximum value in a set of values.
 
 It's particularly useful for data analysis, reporting, and finding extreme values within datasets. You might use `max()` to find the product with highest price in the catalog, the most recent timestamp in a log table, or the largest transaction amount in a financial system.
 
@@ -151,7 +151,7 @@ This query returns the full details of the order(s) with the maximum `order_amou
 `max()` can be used as a window function to calculate the running maximum over a set of rows:
 
 ```sql
-SELECT 
+SELECT
     order_id,
     order_date,
     max(order_amount) OVER (
