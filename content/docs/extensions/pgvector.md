@@ -157,7 +157,7 @@ Supported index types include:
 
 An HNSW index creates a multilayer graph. It has better query performance than IVFFlat (in terms of speed-recall tradeoff), but has slower build times and uses more memory. Also, an index can be created without any data in the table since there isn’t a training step like IVFFlat.
 
-The following examples show how to add an HNSW index for the supported distance functions. The supported types include:
+The following examples show how to add an HNSW index for the supported distance functions, which include:
 
 - `vector` - up to 2,000 dimensions
 - `halfvec` - up to 4,000 dimensions
@@ -244,7 +244,7 @@ Keys to achieving good recall include:
 
 - Creating the index after the table has some data
 - Choosing an appropriate number of lists. A good starting point is rows/1000 for up to 1M rows and `sqrt(rows)` for over 1M rows.
-- Specify an appropriate number of probes when querying. A higher number is better for recall, and a lower is better for speed. A good starting point is `sqrt(lists)`.
+- Specifying an appropriate number of [probes](#hnsw-query-options) when querying. A higher number is better for recall, and a lower is better for speed. A good starting point is `sqrt(lists)`.
 
 Supported types include:
 
@@ -274,7 +274,7 @@ CREATE INDEX ON items USING ivfflat (embedding vector_ip_ops) WITH (lists = 100)
 CREATE INDEX ON items USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
 ```
 
-**Hamming distance - added in 0.7.0**
+**Hamming distance**
 
 ```sql
 CREATE INDEX ON items USING ivfflat (embedding bit_hamming_ops) WITH (lists = 100);
@@ -282,7 +282,7 @@ CREATE INDEX ON items USING ivfflat (embedding bit_hamming_ops) WITH (lists = 10
 
 #### IVFFlat query options
 
-You can specify the number of probes, which is 1 by default.
+You can specify the number of probes, which is `1` by default.
 
 ```sql
 SET ivfflat.probes = 10;
