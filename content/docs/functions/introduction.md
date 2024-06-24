@@ -8,6 +8,14 @@ updatedOn: '2024-06-14T07:55:54.373Z'
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
 
+## Aggregate functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/sum" description="Calculate the sum of a set of values" icon="app-store">sum()</a>
+
+</DetailIconCards>
+
 ## JSON functions
 
 <DetailIconCards>
