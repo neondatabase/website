@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `current_timestamp()` function in PostgreSQL returns the current date and time with time zone. 
+The `current_timestamp()` function in PostgreSQL returns the current date and time with time zone.
 
 This function is particularly useful for timestamping database entries, calculating time differences, or implementing time-based business logic. For example, you can use it to record the time a user logs in, or when the status of a purchase order changes. Fetching the current time information can also be used to calculate time-based metrics and schedule periodic tasks.
 
@@ -38,7 +38,7 @@ CREATE TABLE user_logins (
 );
 ```
 
-This `INSERT` query adds a new login record with the current timestamp. 
+This `INSERT` query adds a new login record with the current timestamp.
 
 ```sql
 INSERT INTO user_logins (user_id, login_time)
@@ -104,9 +104,9 @@ WITH user_logins(user_id, login_time) AS (
     (2, current_timestamp - INTERVAL '18 hours'),
     (6, current_timestamp - INTERVAL '5 minutes')
 )
-SELECT 
-  user_id, 
-  login_time, 
+SELECT
+  user_id,
+  login_time,
   current_timestamp - login_time AS time_since_login
 FROM user_logins
 WHERE login_time > current_timestamp - INTERVAL '6 hours';
@@ -129,7 +129,7 @@ This query retrieves all logins from the past 6 hours and calculates how long ag
 You can specify the precision of the timestamp when needed:
 
 ```sql
-SELECT 
+SELECT
     current_timestamp(3) AS ts_with_milliseconds,
     current_timestamp(6) AS ts_with_microseconds,
     current_timestamp(0) AS ts_without_fraction;
