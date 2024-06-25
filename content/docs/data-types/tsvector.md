@@ -22,17 +22,19 @@ The general syntax for a `tsvector` is:
 ```
 
 Where:
+
 - `word1`, `word2`, etc., are the lexemes
 - `1`, `3`, etc. are integers indicating the position of the word in the document
 - positions can sometimes be followed by a letter to indicate a weight ('A', 'B', 'C' or 'D'), like `2A`. The default weight is 'D'.
 
 For example:
+
 - `'a':1A 'cat':2 'sat':3 'on':4 'the':5 'mat':6`
 
 When a document is cast to the `tsvector`, it doesn't perform any normalization and just splits the text into lexemes. To normalize the text, you can use the `to_tsvector` function with a specific text search configuration. For example:
-    
+
 ```sql
-SELECT 
+SELECT
     'The quick brown fox jumps over the lazy dog.'::tsvector as colA,
     to_tsvector('english', 'The quick brown fox jumps over the lazy dog.') as colB;
 ```
@@ -72,7 +74,7 @@ SET search_vector = to_tsvector('english', title || ' ' || content);
 CREATE INDEX idx_search_vector ON blog_posts USING GIN (search_vector);
 ```
 
-To search for blog posts containing specific words, we can use the match operator `@@`, with a `tsquery` search expression: 
+To search for blog posts containing specific words, we can use the match operator `@@`, with a `tsquery` search expression:
 
 ```sql
 SELECT title
@@ -105,8 +107,8 @@ CREATE TABLE product_reviews (
 
 INSERT INTO product_reviews (product_name, review)
 VALUES
-    ('Laptop XYZ', 'Este laptop es muy rápido y tiene una excelente batería.'), 
-    ('Smartphone ABC', 'La cámara del teléfono es increíble, pero la batería no dura mucho.'), 
+    ('Laptop XYZ', 'Este laptop es muy rápido y tiene una excelente batería.'),
+    ('Smartphone ABC', 'La cámara del teléfono es increíble, pero la batería no dura mucho.'),
     ('Tablet 123', 'La tablet es ligera y fácil de usar, perfecta para leer libros.');
 
 UPDATE product_reviews
@@ -141,8 +143,8 @@ CREATE TABLE news_articles (
 
 INSERT INTO news_articles (headline, body)
 VALUES
-    ('Climate Change Summit Concludes', 'World leaders agreed on new measures to combat global warming at the climate summit.'), 
-    ('New Study on Climate Change', 'Scientists publish groundbreaking research on the effects of climate change on biodiversity.'), 
+    ('Climate Change Summit Concludes', 'World leaders agreed on new measures to combat global warming at the climate summit.'),
+    ('New Study on Climate Change', 'Scientists publish groundbreaking research on the effects of climate change on biodiversity.'),
     ('Tech Giant Announces Green Initiative', 'Major tech company pledges to be carbon neutral by 2030 in fight against climate change.');
 
 UPDATE news_articles
