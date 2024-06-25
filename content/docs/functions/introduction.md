@@ -8,6 +8,14 @@ updatedOn: '2024-06-14T07:55:54.373Z'
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
 
+## Date and time functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/current_timestamp" description="Get the current date and time" icon="app-store">current_timestamp</a>
+
+</DetailIconCards>
+
 ## JSON functions
 
 <DetailIconCards>
