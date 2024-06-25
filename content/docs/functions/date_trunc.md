@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T11:00:00.000Z'
 ---
 
-The `date_trunc()` function in PostgreSQL truncates a timestamp or interval to a specified precision. 
+The `date_trunc()` function in PostgreSQL truncates a timestamp or interval to a specified precision.
 
 This function is particularly useful for grouping time-series data and performing time-based calculations. For example, it can be used to generate monthly reports, analyze hourly trends, or group events by time periods.
 
@@ -134,7 +134,7 @@ SELECT
   date_trunc('day', '2024-03-15 23:30:00+00'::TIMESTAMP WITH TIME ZONE, 'Asia/Tokyo') AS tokyo_trunc;
 ```
 
-This query shows how `date_trunc` behaves differently when truncating to the day in different time zones. 
+This query shows how `date_trunc` behaves differently when truncating to the day in different time zones.
 
 ```text
        utc_trunc        |        ny_trunc        |      tokyo_trunc
@@ -176,7 +176,7 @@ GROUP BY date_trunc('day', activity_time), activity_type
 ORDER BY day, activity_type;
 ```
 
-This query uses `date_trunc` to group user activities by each day. 
+This query uses `date_trunc` to group user activities by each day.
 
 ```text
           day           | activity_type | activity_count
@@ -198,7 +198,7 @@ The `date_trunc` function can also be used with interval data:
 
 ```sql
 SELECT
-  date_trunc('hour', INTERVAL '2 days 3 hours 40 minutes') AS truncated_interval, 
+  date_trunc('hour', INTERVAL '2 days 3 hours 40 minutes') AS truncated_interval,
   date_trunc('day', '2024-03-15 23:30:00+00'::TIMESTAMPTZ - '2023-09-14 11:20:00+00'::TIMESTAMPTZ) AS truncated_day;
 ```
 
@@ -215,17 +215,17 @@ This query truncates the first interval to the nearest hour, while the second co
 
 ### Time zone awareness
 
-When using `date_trunc` with timestamps, the function uses the default time zone of the session, or that specified in the input. As shown in the previous section, the truncation result can vary depending on the time zone. 
+When using `date_trunc` with timestamps, the function uses the default time zone of the session, or that specified in the input. As shown in the previous section, the truncation result can vary depending on the time zone.
 
 ### Truncating intervals
 
-When truncating intervals, the `date_trunc` function rounds the interval to the nearest value based on the specified precision. However, note that the output might not be intuitive and depends on how the interval is defined. 
+When truncating intervals, the `date_trunc` function rounds the interval to the nearest value based on the specified precision. However, note that the output might not be intuitive and depends on how the interval is defined.
 
-For example, the query below attempts to truncate a month from an interval specified as some number of days. 
+For example, the query below attempts to truncate a month from an interval specified as some number of days.
 
 ```sql
-SELECT 
-    date_trunc('month', '183 days'::INTERVAL) AS colA, 
+SELECT
+    date_trunc('month', '183 days'::INTERVAL) AS colA,
     date_trunc('month', '2 years 3 months'::INTERVAL) AS colB;
 ```
 
