@@ -335,7 +335,7 @@
               slug: guides/neosync-anonymize
               tag: new
         - title: Prisma
-          slug: guides/prisma  
+          slug: guides/prisma
     - title: Replicate
       items:
         - title: Airbyte
@@ -448,6 +448,10 @@
     - title: Functions
       slug: functions/introduction
       items:
+        - title: Date/Time functions
+          items:
+            - title: extract
+              slug: functions/extract
         - title: JSON functions
           items:
             - title: array_to_json
