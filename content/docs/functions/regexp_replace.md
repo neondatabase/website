@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `regexp_replace()` function in PostgreSQL is used to replace substrings that match a regular expression pattern with the specified replacement string. 
+The `regexp_replace()` function in PostgreSQL is used to replace substrings that match a regular expression pattern with the specified replacement string.
 
 This function is particularly useful for complex string manipulations, and data cleaning/formatting tasks. Consider scenarios where you'd want to remove or replace specific patterns in text, or transform data to meet certain requirements. For instance, you might use it to format phone numbers consistently, remove HTML tags from text, or anonymize sensitive information in logs.
 
@@ -22,7 +22,7 @@ regexp_replace(source text, pattern text, replacement text [, flags text]) -> te
 - `source`: The input string to perform replacements on.
 - `pattern`: The regular expression pattern to match.
 - `replacement`: The string to replace matched substrings with.
-- `flags` (optional): A string of one or more single-letter flags that modify how the regex is interpreted. 
+- `flags` (optional): A string of one or more single-letter flags that modify how the regex is interpreted.
 
 It returns the input string with occurrence(s) of the pattern replaced by the replacement string.
 
@@ -34,7 +34,6 @@ regexp_replace(source text, pattern text, replacement text [, start int, [, N in
 
 - start: The position in the source string to start searching for matches (default is 1).
 - N: If specified, only the Nth occurrence of the pattern is replaced. If N is 0, or the `g` flag is used, all occurrences are replaced.
-
 
 ## Example usage
 
@@ -48,7 +47,7 @@ WITH customer_data AS (
   UNION ALL
   SELECT '555-321-7890' AS phone_number
 )
-SELECT 
+SELECT
   phone_number AS original_number,
   regexp_replace(phone_number, '[^\d]', '', 'g') AS cleaned_number
 FROM customer_data;
@@ -77,7 +76,7 @@ WITH log_data AS (
   UNION ALL
   SELECT '2023-05-15 11:45:30 - User jane.smith@example.org logged out' AS log_entry
 )
-SELECT 
+SELECT
   log_entry AS original_log,
   regexp_replace(log_entry, '(.*) - User (.+@.+) (.+)$', '\1 - User [REDACTED] \3') AS anonymized_log
 FROM log_data;
@@ -96,6 +95,7 @@ This query anonymizes email addresses in log entries by replacing them with [RED
 ### Modify the behavior of `regexp_replace()` using flags
 
 The `flags` parameter allows you to modify how the function operates. Common flags include:
+
 - `g`: Global replacement (replace all occurrences)
 - `i`: Case-insensitive matching
 - `n`: Newline-sensitive matching
@@ -108,7 +108,7 @@ WITH product_descriptions AS (
   UNION ALL
   SELECT 'Yellow Apple: mild and sweet' AS description
 )
-SELECT 
+SELECT
   description AS original_description,
   regexp_replace(description, 'apple', 'pear', 'gi') AS modified_description
 FROM product_descriptions;
@@ -135,7 +135,7 @@ WITH html_content AS (
   UNION ALL
   SELECT '<div>Another <span style="color: red;">example</span> here.</div>' AS content
 )
-SELECT 
+SELECT
   content AS original_html,
   regexp_replace(content, '<[^>]+>', '', 'g') AS plain_text
 FROM html_content;
