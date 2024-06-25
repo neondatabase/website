@@ -38,7 +38,7 @@ regexp_replace(source text, pattern text, replacement text [, start int, [, N in
 
 ## Example usage
 
-Consider a table `customer_data` with a `phone_number` column containing various formats of phone numbers. We can use `regexp_replace()` to standardize these numbers to a consistent format.
+Consider a table `customer_data` with a `phone_number` column containing phone numbers in different formats. We can use `regexp_replace()` to standardize these numbers to a consistent format.
 
 ```sql
 WITH customer_data AS (
