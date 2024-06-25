@@ -37,12 +37,13 @@ WITH log_entries AS (
   UNION ALL
   SELECT '[2024-03-04 10:25:55] INFO: User admin logged out' AS log_text
 )
-SELECT 
+SELECT
   regexp_match(log_text, '\[(.*?)\] (\w+): (.*)$') AS parsed_log
 FROM log_entries;
 ```
 
 This query extracts the timestamp, log level, and message from each log entry. The regular expression pattern `\[(.*?)\] (\w+): (.*)$` captures three groups:
+
 1. The timestamp between square brackets
 2. The log level (INFO, ERROR, etc.), which is alphabetical and terminated with a colon
 3. The rest of the message
@@ -70,7 +71,7 @@ WITH user_agents AS (
   UNION ALL
   SELECT 'CHROME/91.0.4472.124' AS user_agent
 )
-SELECT 
+SELECT
   regexp_match(user_agent, '(chrome|safari|firefox|msie|opera)\/[\d\.]+', 'i') AS browser
 FROM user_agents;
 ```
