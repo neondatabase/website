@@ -160,7 +160,7 @@ The `age()` function can return negative intervals if the end timestamp is earli
 ### Alternative functions
 
 - `-` operator - Can be used to subtract two dates or timestamps, returning an interval. This is equivalent to using the `age()` function with two timestamps.
-- `current_date` - Returns the current date (without the time component). Can be used with the `-` operator to calculate an age or duration. 
+- `current_date` - Returns the current date (without the time component). Can be used with the `-` operator to calculate an age or duration.
 
 ## Resources
 
