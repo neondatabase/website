@@ -73,12 +73,12 @@ CREATE TABLE projects (
 );
 
 INSERT INTO projects (project_name, deadline)
-VALUES 
+VALUES
   ('Website Redesign', now() + INTERVAL '30 days'),
   ('Mobile App Development', now() + INTERVAL '60 days'),
   ('Database Migration', now() + INTERVAL '15 days');
 
-SELECT 
+SELECT
   project_name,
   deadline - now() AS time_remaining
 FROM projects
@@ -98,7 +98,7 @@ This query calculates and displays the remaining time for each project, ordered 
 
 ### Use `now()` with triggers
 
-We can use `now()` in combination with an update trigger to automatically maintain modification timestamps for records. 
+We can use `now()` in combination with an update trigger to automatically maintain modification timestamps for records.
 
 Here's an example using a table for tracking customer orders. It has columns for both the creation and last update timestamps, with a trigger that updates the `last_updated` column whenever an order is modified:
 
@@ -124,7 +124,7 @@ BEFORE UPDATE ON customer_orders
 FOR EACH ROW
 EXECUTE FUNCTION update_last_updated_column();
 
-INSERT INTO customer_orders (customer_id, order_status) 
+INSERT INTO customer_orders (customer_id, order_status)
 VALUES (1001, 'Pending'), (1002, 'Processing');
 ```
 
@@ -138,7 +138,7 @@ UPDATE customer_orders SET order_status = 'Shipped' WHERE order_id = 1;
 SELECT * FROM customer_orders;
 ```
 
-This query returns the following output, showing the updated status and the new `last_updated` timestamp, for the modified order. 
+This query returns the following output, showing the updated status and the new `last_updated` timestamp, for the modified order.
 
 ```text
  order_id | customer_id | order_status |          created_at          |         last_updated
@@ -150,7 +150,7 @@ This query returns the following output, showing the updated status and the new 
 
 ### Use `now()` in a function for date/time calculations
 
-We can wrap `now()` in a user-defined function to perform more complex date/time calculations. For example, here is a function that calculates the current age of a user. 
+We can wrap `now()` in a user-defined function to perform more complex date/time calculations. For example, here is a function that calculates the current age of a user.
 
 ```sql
 CREATE OR REPLACE FUNCTION calculate_age(birth_date DATE)
@@ -160,7 +160,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT 
+SELECT
   calculate_age('1990-05-15') AS age_1,
   calculate_age('2000-12-31') AS age_2,
   calculate_age('1985-03-20') AS age_3;
@@ -183,7 +183,7 @@ Like `current_timestamp`, `now()` returns a value in the time zone of the curren
 
 ### Difference between `now()` and the keyword `now`
 
-The `now()` function is a built-in function that returns the current timestamp with time zone. In contrast, the keyword `now` (without parentheses) is a reserved word that is converted to the current timestamp value when first parsed. 
+The `now()` function is a built-in function that returns the current timestamp with time zone. In contrast, the keyword `now` (without parentheses) is a reserved word that is converted to the current timestamp value when first parsed.
 
 It is recommended to use `now()` for clarity and consistency. For example, if the default value for a column is set to `now`, it will be evaluated once when the table is created and reused for all successive records. Whereasm `now()` will be evaluated each time a new row is inserted, which is the typically desired behavior.
 
