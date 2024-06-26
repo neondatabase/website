@@ -71,7 +71,7 @@ Similarly, even if the user `john` has 64 concurrently active transactions throu
 For further information, see [PgBouncer](#pgbouncer).
 
 <Admonition type="important">
-You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume some connections on the main endpoint: PgBouncer forwards operations from the user's connections through its own pool of connnections to Postgres, and adaptively adds more connections to PostgreSQL as and when needed by more concurrently active user connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections, but infrequent and/or short transactions.  
+You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume some connections on the main endpoint: PgBouncer forwards operations from the user's connections through its own pool of connnections to Postgres, and adaptively adds more connections to PostgreSQL as and when needed by more concurrently active user connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections, but infrequent and/or short [transactions](https://neon.tech/docs/postgresql/query-reference#transactions).
 </Admonition>
 
 ## PgBouncer
