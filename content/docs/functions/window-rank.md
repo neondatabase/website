@@ -5,9 +5,9 @@ enableTableOfContents: true
 updatedOn: '2024-02-08T09:30:00.000Z'
 ---
 
-The `rank()` function in Postgres is a window function to compute rankings, for each row within a partition of the result set. The rank is determined by the order of rows specified in the `ORDER BY` clause of the `OVER` clause. Rows with equal values for the ranking criteria receive the same rank, with the next rank(s) skipped.
+The `rank()` window function computes a ranking for each row within a partition of the result set. The rank is determined by the order of rows specified in the `ORDER BY` clause of the `OVER` clause. Rows with equal values for the ranking criteria receive the same rank, with the next rank(s) skipped.
 
-This is useful for scenarios such as finding the top N rows per group, calculating percentiles, or generating leaderboards.
+This function is useful in scenarios such as finding the top N rows per group, calculating percentiles, or generating leaderboards.
 
 <CTA />
 
@@ -22,7 +22,7 @@ rank() OVER ([PARTITION BY partition_expression] ORDER BY order_expression)
 The `OVER` clause defines the window frame for the function.
 
 - The `ORDER BY` clause specifies the order in which ranks are assigned to rows.
-- The `PARTITION BY` clause is optional - if specified, it divides the result set into partitions and ranks are assigned within each partition. Else, ranks are computed for each row over the entire result set.
+- The `PARTITION BY` clause is optional - if specified, it divides the result set into partitions and ranks are assigned within each partition. Otherwise, ranks are computed for each row over the entire result set.
 
 ## Example usage
 
@@ -110,7 +110,7 @@ This query finds the top 2 most expensive products in each category. The subquer
 
 ### Percentile calculation
 
-You can calculate percentiles using the `rank()` function and some arithmetic.
+You can calculate percentiles using the `rank()` function with some arithmetic.
 
 ```sql
 WITH scores AS (
