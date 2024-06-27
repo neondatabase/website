@@ -94,7 +94,7 @@ const Search = ({ className = null, isBlog = false, indexName }) => {
     const otherItems = [];
 
     items.forEach((item) => {
-      if (item.category === 'Neon') {
+      if (item.hierarchy?.lvl0 === 'Neon') {
         neonItems.push(item);
       } else {
         otherItems.push(item);
