@@ -88,6 +88,22 @@ const Search = ({ className = null, isBlog = false, indexName }) => {
     }
   }, []);
 
+  // @NOTE: sort items by category, Neon first
+  const sortedItems = (items) => {
+    const neonItems = [];
+    const otherItems = [];
+
+    items.forEach((item) => {
+      if (item.category === 'Neon') {
+        neonItems.push(item);
+      } else {
+        otherItems.push(item);
+      }
+    });
+
+    return [...neonItems, ...otherItems];
+  };
+
   return (
     <div className={clsx('relative flex items-center justify-between', className)}>
       <DocSearchButton
@@ -117,34 +133,36 @@ const Search = ({ className = null, isBlog = false, indexName }) => {
               })}
               hitComponent={Hit}
               transformItems={(items) =>
-                items.map((item, index) => {
-                  // We transform the absolute URL into a relative URL to leverage next/link prefetch.
-                  const a = document.createElement('a');
-                  a.href = item.url;
+                sortedItems(
+                  items.map((item, index) => {
+                    // We transform the absolute URL into a relative URL to leverage next/link prefetch.
+                    const a = document.createElement('a');
+                    a.href = item.url;
 
-                  if (item.hierarchy?.lvl0) {
-                    item.hierarchy.lvl0 = item.hierarchy.lvl0.replace(/&amp;/g, '&');
-                  }
+                    if (item.hierarchy?.lvl0) {
+                      item.hierarchy.lvl0 = item.hierarchy.lvl0.replace(/&amp;/g, '&');
+                    }
 
-                  if (item._highlightResult?.hierarchy?.lvl0?.value) {
-                    item._highlightResult.hierarchy.lvl0.value =
-                      item._highlightResult.hierarchy.lvl0.value.replace(/&amp;/g, '&');
-                  }
+                    if (item._highlightResult?.hierarchy?.lvl0?.value) {
+                      item._highlightResult.hierarchy.lvl0.value =
+                        item._highlightResult.hierarchy.lvl0.value.replace(/&amp;/g, '&');
+                    }
 
-                  return {
-                    ...item,
-                    url: `${a.pathname}${a.hash}`,
-                    __is_result: () => true,
-                    __is_parent: () => item.type === 'lvl1' && items.length > 1 && index === 0,
-                    __is_child: () =>
-                      item.type !== 'lvl1' &&
-                      items.length > 1 &&
-                      items[0].type === 'lvl1' &&
-                      index !== 0,
-                    __is_first: () => index === 1,
-                    __is_last: () => index === items.length - 1 && index !== 0,
-                  };
-                })
+                    return {
+                      ...item,
+                      url: `${a.pathname}${a.hash}`,
+                      __is_result: () => true,
+                      __is_parent: () => item.type === 'lvl1' && items.length > 1 && index === 0,
+                      __is_child: () =>
+                        item.type !== 'lvl1' &&
+                        items.length > 1 &&
+                        items[0].type === 'lvl1' &&
+                        index !== 0,
+                      __is_first: () => index === 1,
+                      __is_last: () => index === items.length - 1 && index !== 0,
+                    };
+                  })
+                )
               }
               insights
               onClose={onClose}
