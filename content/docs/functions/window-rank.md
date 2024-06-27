@@ -2,7 +2,7 @@
 title: Postgres rank() window function
 subtitle: Use rank() to assign ranks to rows within a result set
 enableTableOfContents: true
-updatedOn: '2024-02-08T09:30:00.000Z'
+updatedOn: '2024-06-27T14:57:35.907Z'
 ---
 
 The `rank()` window function computes a ranking for each row within a partition of the result set. The rank is determined by the order of rows specified in the `ORDER BY` clause of the `OVER` clause. Rows with equal values for the ranking criteria receive the same rank, with the next rank(s) skipped.
