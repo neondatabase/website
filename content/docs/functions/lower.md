@@ -2,7 +2,7 @@
 title: Postgres lower() function
 subtitle: Convert strings to lowercase
 enableTableOfContents: true
-updatedOn: '2024-03-04T10:30:00.000Z'
+updatedOn: '2024-06-27T15:05:08.274Z'
 ---
 
 The `lower()` function in Postgres is used to convert a string to lowercase.
