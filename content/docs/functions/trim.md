@@ -2,7 +2,7 @@
 title: Postgres trim() function
 subtitle: Remove leading and trailing characters from a string
 enableTableOfContents: true
-updatedOn: '2024-06-15T08:30:00.000Z'
+updatedOn: '2024-06-27T15:30:35.233Z'
 ---
 
 The Postgres `trim()` function removes the specified characters from the beginning and/or end of a string.
