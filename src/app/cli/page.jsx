@@ -8,7 +8,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.cli);
 
 const CliPage = () => (
-  <Layout headerWithBorder>
+  <Layout>
     <Hero />
     <Features />
     <Try />
