@@ -66,4 +66,6 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/window-lead" description="Access values from subsequent rows in a result set" icon="app-store">lead()</a>
 
+<a href="/docs/functions/window-rank" description="Assign ranks to rows within a result set" icon="app-store">rank()</a>
+
 </DetailIconCards>
