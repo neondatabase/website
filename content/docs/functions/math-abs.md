@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `abs()` function in Postgres is used to compute the absolute value of a number. The absolute value is the non-negative value of a number without regard to its sign.
+The Postgres `abs()` function is used to compute the absolute value of a number. The absolute value is the non-negative value of a number without regard to its sign.
 
 It's useful in multiple scenarios when working with numbers, such as calculating distances, comparing magnitudes regardless of direction, or ensuring non-negative values in financial calculations.
 
@@ -23,7 +23,7 @@ abs(number) -> number
 
 ## Example usage
 
-Consider a table `transactions` with a `amount` column that contains both positive (deposits) and negative (withdrawals) values. We can use `abs()` to order the transactions by their magnitude.
+Consider a table `transactions` with an `amount` column that contains both positive (deposits) and negative (withdrawals) values. We can use `abs()` to order the transactions by their magnitude.
 
 ```sql
 WITH transactions(id, amount) AS (
@@ -87,7 +87,7 @@ This query finds all points within 0.05 degrees (approximately 5.5 km) of the re
 
 ### Combining abs() with other functions
 
-We can combine `abs()` with other functions for more complex calculations. For example, to measure percentage discrepancy between forecasted and actual sales, we can use `abs()` to calculate the size of the difference and then divide it by the forecasted value.
+We can combine `abs()` with other functions for more complex calculations. For example, to measure the percentage discrepancy between forecasted and actual sales, we can use `abs()` to calculate the size of the difference and then divide it by the forecasted value.
 
 ```sql
 WITH sales_data(product, forecast, actual) AS (
@@ -126,7 +126,7 @@ The `abs()` function is pretty quick, as it's a simple mathematical operation. H
 
 ### Alternative functions and operators
 
-- The `@` operator: PostgreSQL provides the `@` operator as an alternative to the `abs()` function. It performs the same operation (calculating the absolute value) and can be used interchangeably with `abs()`. For example, `@ -5` is equivalent to `abs(-5)`.
+- The `@` operator: Postgres provides the `@` operator as an alternative to the `abs()` function. It performs the same operation (calculating the absolute value) and can be used interchangeably with `abs()`. For example, `@ -5` is equivalent to `abs(-5)`.
 
 ## Resources
 
