@@ -496,6 +496,8 @@
           items:
             - title: concat
               slug: functions/concat
+            - title: lower
+              slug: functions/lower
             - title: substring
               slug: functions/substring
     - title: Optimize queries
