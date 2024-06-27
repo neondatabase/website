@@ -5,9 +5,9 @@ enableTableOfContents: true
 updatedOn: '2024-06-15T08:30:00.000Z'
 ---
 
-The `trim()` function in Postgres is used to remove the specified characters from the beginning and/or end of a string.
+The Postgres `trim()` function removes the specified characters from the beginning and/or end of a string.
 
-This function is commonly used in data preprocessing tasks, such as cleaning user input before storing it in a database, or standardizing data for comparison or analysis. For example, you might use it to remove extra spaces from product names or to standardize phone numbers by removing surrounding parentheses.
+This function is commonly used in data preprocessing tasks, such as cleaning user input before storing it in a database or standardizing data for comparison or analysis. For example, you might use it to remove extra spaces from product names or to standardize phone numbers by removing surrounding parentheses.
 
 <CTA />
 
@@ -102,7 +102,7 @@ SELECT
 FROM user_inputs;
 ```
 
-This query demonstrates trimming asterisks from the beginning, end, and both sides of the `input` column.
+The query above demonstrates trimming asterisks from the beginning, end, and both sides of the `input` column, as shown in the following table.
 
 ```text
   leading_trimmed   |  trailing_trimmed  |  both_trimmed
@@ -131,7 +131,7 @@ FROM product_codes
 WHERE trim(code) LIKE 'ABC%';
 ```
 
-This query filters for rows where the trimmed `code` column starts with 'ABC'.
+The query above filters for rows where the trimmed `code` column starts with 'ABC', as shown in the following table:
 
 ```text
  original_code | trimmed_code
@@ -158,7 +158,7 @@ SELECT
 FROM user_emails;
 ```
 
-This query trims spaces from the email addresses and then extracts and uppercases the username part (before the '@' symbol).
+The query above trims spaces from the email addresses and then extracts and uppercases the username part (before the '@' symbol).
 
 ```text
      trimmed_email      |  username
