@@ -7,7 +7,7 @@ updatedOn: '2024-03-04T10:30:00.000Z'
 
 The `lower()` function in Postgres is used to convert a string to lowercase.
 
-It's commonly used for search functionality where you want case-insensitivity, or when standardizing user input for storage or comparison purposes. For example, it can be used to normalize email addresses or usernames in a user management system.
+It's commonly used for search functionality where you want case-insensitivity or when you need to standardize user input for storage or comparison purposes. For example, `lower()` can be used to normalize email addresses or usernames in a user management system.
 
 <CTA />
 
@@ -69,7 +69,7 @@ FROM customers
 WHERE lower(email) LIKE lower('%John.%');
 ```
 
-This query will find the customer regardless of how the email address was capitalized in the database or in the search term.
+This query will find the customer regardless of how the email address was capitalized in the database or search term.
 
 ```text
    name   |        email
@@ -101,7 +101,7 @@ This query splits the username into parts, converts the name parts to lowercase,
 
 ### Using `lower()` to create indexes
 
-Postgres supports creating a _functional index_, based on the result of a function applied to a column. To optimize case-insensitive searches, we can create an index using the `lower()` function:
+Postgres supports creating a _functional index_ based on the result of a function applied to a column. To optimize case-insensitive searches, we can create an index using the `lower()` function:
 
 ```sql
 CREATE TABLE users (
@@ -146,7 +146,7 @@ While `lower()` is generally fast, using it in `WHERE` clauses or `JOIN` conditi
 
 ### Locale considerations
 
-The `lower()` function uses the database's locale setting for its case conversion rules. If your application needs to handle multiple languages, you may need to consider using the `lower()` function with specific collations or implement custom case-folding logic.
+The `lower()` function uses the database's locale setting for its case conversion rules. If your application needs to handle multiple languages, you may need to consider using the `lower()` function with specific collations or implementing custom case-folding logic.
 
 ### Alternative functions
 
