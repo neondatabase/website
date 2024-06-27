@@ -500,6 +500,8 @@
               slug: functions/lower
             - title: substring
               slug: functions/substring
+            - title: trim
+              slug: functions/trim
     - title: Optimize queries
       slug: postgresql/query-performance
     - title: Query reference
