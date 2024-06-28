@@ -2,7 +2,7 @@
 title: Postgres avg() function
 subtitle: Calculate the average value of a set of numbers
 enableTableOfContents: true
-updatedOn: '2024-03-04T10:00:00.000Z'
+updatedOn: '2024-06-28T21:51:40.608Z'
 ---
 
 The Postgres `avg()` function calculates the arithmetic mean of a set of numeric values.
