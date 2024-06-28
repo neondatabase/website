@@ -506,6 +506,8 @@
           items:
             - title: abs
               slug: functions/math-abs
+            - title: random
+              slug: functions/math-random
             - title: round
               slug: functions/math-round
     - title: Optimize queries
