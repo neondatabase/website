@@ -31,7 +31,6 @@ DB_PORT=5432
 DB_DATABASE=[dbname]
 DB_USERNAME=[user]
 DB_PASSWORD=[password]
-DB_SSLMODE=require
 ```
 
 You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
