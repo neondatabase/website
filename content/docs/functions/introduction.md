@@ -12,6 +12,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <DetailIconCards>
 
+<a href="/docs/functions/array_agg" description="Aggregate elements into an array" icon="app-store">array_agg()</a>
+
 <a href="/docs/functions/avg" description="Calculate the average of a set of values" icon="app-store">avg()</a>
 
 </DetailIconCards>
