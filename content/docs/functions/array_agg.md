@@ -2,7 +2,7 @@
 title: Postgres array_agg() function
 subtitle: Aggregate values into an array
 enableTableOfContents: true
-updatedOn: '2024-03-04T10:00:00.000Z'
+updatedOn: '2024-06-28T22:54:53.164Z'
 ---
 
 The Postges `array_agg()` function collects values from multiple rows into a single array.
