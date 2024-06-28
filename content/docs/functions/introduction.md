@@ -3,10 +3,18 @@ title: Postgres functions
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/functions-intro
-updatedOn: '2024-06-14T07:55:54.373Z'
+updatedOn: '2024-06-28T21:32:11.564Z'
 ---
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
+
+## Aggregate functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/avg" description="Calculate the average of a set of values" icon="app-store">avg()</a>
+
+</DetailIconCards>
 
 ## JSON functions
 
@@ -48,13 +56,29 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 </DetailIconCards>
 
+## Mathematical functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/math-abs" description="Calculate the absolute value of a number" icon="app-store">abs()</a>
+
+<a href="/docs/functions/math-random" description="Generate a random number between 0 and 1" icon="app-store">random()</a>
+
+<a href="/docs/functions/math-round" description="Round numbers to a specified precision" icon="app-store">round()</a>
+
+</DetailIconCards>
+
 ## String functions
 
 <DetailIconCards>
 
 <a href="/docs/functions/concat" description="Concatenate strings" icon="app-store">concat()</a>
 
+<a href="/docs/functions/lower" description="Convert a string to lowercase" icon="app-store">lower()</a>
+
 <a href="/docs/functions/substring" description="Extract a substring from a string" icon="app-store">substring()</a>
+
+<a href="/docs/functions/trim" description="Remove leading and trailing characters from a string" icon="app-store">trim()</a>
 
 </DetailIconCards>
 
@@ -67,5 +91,7 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 <a href="/docs/functions/window-lag" description="Access values from previous rows in a result set" icon="app-store">lag()</a>
 
 <a href="/docs/functions/window-lead" description="Access values from subsequent rows in a result set" icon="app-store">lead()</a>
+
+<a href="/docs/functions/window-rank" description="Assign ranks to rows within a result set" icon="app-store">rank()</a>
 
 </DetailIconCards>

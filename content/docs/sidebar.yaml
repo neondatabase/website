@@ -448,6 +448,10 @@
     - title: Functions
       slug: functions/introduction
       items:
+        - title: Aggregate functions
+          items:
+            - title: avg
+              slug: functions/avg
         - title: JSON functions
           items:
             - title: array_to_json
@@ -492,12 +496,26 @@
               slug: functions/window-lag
             - title: lead
               slug: functions/window-lead
+            - title: rank
+              slug: functions/window-rank
         - title: String functions
           items:
             - title: concat
               slug: functions/concat
+            - title: lower
+              slug: functions/lower
             - title: substring
               slug: functions/substring
+            - title: trim
+              slug: functions/trim
+        - title: Math functions
+          items:
+            - title: abs
+              slug: functions/math-abs
+            - title: random
+              slug: functions/math-random
+            - title: round
+              slug: functions/math-round
     - title: Optimize queries
       slug: postgresql/query-performance
     - title: Query reference
