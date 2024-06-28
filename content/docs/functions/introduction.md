@@ -7,7 +7,6 @@ updatedOn: '2024-06-28T21:51:40.610Z'
 ---
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
-ß
 
 ## Aggregate functions
 
