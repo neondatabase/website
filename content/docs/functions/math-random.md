@@ -2,7 +2,7 @@
 title: Postgres random() function
 subtitle: Generate random values between 0 and 1
 enableTableOfContents: true
-updatedOn: '2024-03-04T11:00:00.000Z'
+updatedOn: '2024-06-28T21:32:11.566Z'
 ---
 
 The Postgres `random()` function generates random floating point values between 0.0 and 1.0.
