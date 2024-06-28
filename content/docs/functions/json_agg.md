@@ -5,15 +5,15 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `json_agg()` function in PostgreSQL is an aggregate function that collects values from multiple rows and returns them as a single JSON array.
+The Postgres `json_agg()` function is an aggregate function that collects values from multiple rows and returns them as a single JSON array.
 
-It's particularly useful when you need to denormalize data for performance reasons, or to prepare data for front-end applications and APIs. For example, you might use it to aggregate product reviews for an e-commerce application or to collect all posts by a user in a social media platform.
+It's particularly useful when you need to denormalize data for performance reasons or prepare data for front-end applications and APIs. For example, you might use it to aggregate product reviews for an e-commerce application or collect all posts by a user on a social media platform.
 
 <CTA />
 
 ## Function signature
 
-The `json_agg()` function has the simple form:
+The `json_agg()` function has this simple form:
 
 ```sql
 json_agg(expression) -> json
@@ -31,11 +31,11 @@ json_agg(expression ORDER BY sort_expression [ASC | DESC] [NULLS { FIRST | LAST 
 - `ORDER BY`: Specifies the order in which the values should be aggregated.
 - `sort_expression`: The expression to sort by.
 - `ASC | DESC`: Specifies ascending or descending order (default is ASC).
-- `NULLS { FIRST | LAST }`: Specifies whether nulls should be first or last in the ordering (default depends on ASC or DESC).
+- `NULLS { FIRST | LAST }`: Specifies whether nulls should be first or last in the ordering (default depends on `ASC` or `DESC`).
 
 ## Example usage
 
-Consider a table `orders` with columns `order_id`, `product_name`, and `quantity`. We can use `json_agg()` to create a JSON array of all products in each order.
+Consider an `orders` table with columns `order_id`, `product_name`, and `quantity`. We can use `json_agg()` to create a JSON array of all products in each order.
 
 ```sql
 WITH orders AS (
@@ -137,7 +137,7 @@ While `json_agg()` is powerful for creating JSON structures, it can be memory-in
 
 ### Alternative functions
 
-- `array_agg()`: Aggregates values into a PostgreSQL array instead of a JSON array.
+- `array_agg()`: Aggregates values into a Postgres array instead of a JSON array.
 - `jsonb_agg()`: Similar to `json_agg()`, but returns a `jsonb` type, which is more efficient for storage and processing.
 - `json_agg_strict()`: Aggregates values into a JSON array, skipping over the NULL values.
 
