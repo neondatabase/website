@@ -2,7 +2,7 @@
 title: Postgres round() function
 subtitle: Round numbers to a specified precision
 enableTableOfContents: true
-updatedOn: '2024-03-04T11:00:00.000Z'
+updatedOn: '2024-06-28T21:11:50.387Z'
 ---
 
 The Postgres `round()` function rounds numeric values to a specified number of decimal places or the nearest integer.
