@@ -448,6 +448,10 @@
     - title: Functions
       slug: functions/introduction
       items:
+        - title: Aggregate functions
+          items:
+            - title: avg
+              slug: functions/avg
         - title: JSON functions
           items:
             - title: array_to_json

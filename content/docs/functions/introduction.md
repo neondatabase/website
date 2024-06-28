@@ -8,6 +8,14 @@ updatedOn: '2024-06-28T21:32:11.564Z'
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
 
+## Aggregate functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/avg" description="Calculate the average of a set of values" icon="app-store">avg()</a>
+
+</DetailIconCards>
+
 ## JSON functions
 
 <DetailIconCards>
