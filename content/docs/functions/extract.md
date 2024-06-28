@@ -19,7 +19,7 @@ The `extract()` function has the following form:
 extract(field FROM source) -> numeric
 ```
 
-- `field`: A string literal specifying the component to extract. Valid values include 'century', 'day', 'decade', 'dow', 'doy', 'epoch', 'hour', 'isodow', 'isoyear', 'microseconds', 'millennium', 'milliseconds', 'minute', 'month', 'quarter', 'second', 'timezone', 'timezone_hour', 'timezone_minute', 'week', and 'year'.
+- `field`: A string literal specifying the component to extract. Valid values include `century`, `day`, `decade`, `dow`, `doy`, `epoch`, `hour`, `isodow`, `isoyear`, `microseconds`, `millennium`, `milliseconds`, `minute`, `month`, `quarter`, `second`, `timezone`, `timezone_hour`, `timezone_minute`, `week`, and `year`.
 - `source`: The date, time, timestamp, or interval value from which to extract the component.
 
 The function returns a numeric value representing the extracted component.
