@@ -22,6 +22,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/array_to_json" description="Convert an SQL array to a JSON array" icon="app-store">array_to_json()</a>
 
+<a href="/docs/functions/json_agg" description="Aggregate values into a JSON array" icon="app-store">json_agg()</a>
+
 <a href="/docs/functions/json_array_elements" description="Expand a JSON array into a set of rows" icon="app-store">json_array_elements()</a>
 
 <a href="/docs/functions/jsonb_array_elements" description="Expand a JSONB array into a set of rows" icon="app-store">jsonb_array_elements()</a>
