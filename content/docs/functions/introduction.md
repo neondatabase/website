@@ -13,6 +13,7 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 <DetailIconCards>
 
 <a href="/docs/functions/array_agg" description="Aggregate elements into an array" icon="app-store">array_agg()</a>
+
 ## Aggregate functions
 
 <DetailIconCards>
