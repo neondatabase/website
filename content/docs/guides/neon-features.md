@@ -2,7 +2,7 @@
 title: Neon feature guides
 subtitle: Explore Neon's capabilities with our feature guides
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.401Z'
+updatedOn: '2024-06-20T17:29:55.106Z'
 ---
 
 ### Autoscaling
@@ -49,7 +49,7 @@ Branch data the same way you branch your code.
 
 <a href="/docs/guides/branch-refresh" description="Refresh a development branch with the Neon API" icon="split-branch">Refresh a branch</a>
 
-<a href="/docs/guides/branch-promote" description="Promote a branch to primary with the the Neon API" icon="split-branch">Promote a branch to primary</a>
+<a href="/docs/guides/branch-promote" description="Promote a branch to default with the the Neon API" icon="split-branch">Promote a branch to default</a>
 
 </DetailIconCards>
 

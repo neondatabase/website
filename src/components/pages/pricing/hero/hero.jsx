@@ -20,14 +20,15 @@ const items = [
   {
     type: 'Free Tier',
     price: '$0 <span>/month</span>',
-    description: 'Generous always-available free tier, no credit card required.',
+    description: 'Always-available free tier, no credit card required.',
     features: [
       { title: '0.5 GiB storage' },
-      { title: '24/7 for your main compute', info: 'Plus 20h of usage for branches' },
+      { title: '24/7 for your main database', info: 'Plus 20h of usage for additional branches' },
       { title: 'Community support' },
       { title: 'Fixed capacity at 0.25 vCPU' },
       { title: 'Point-in-time restore (24 h)' },
       { title: 'Organization accounts', disabled: true },
+      { title: 'IP Allow rules', disabled: true },
     ],
     button: {
       url: LINKS.signup,
@@ -54,6 +55,7 @@ const items = [
       { title: 'Autoscaling up to 4 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
       { title: 'Point-in-time restore (7 days)' },
       { title: 'Organization accounts' },
+      { title: 'IP Allow rules', disabled: true },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=launch`,
@@ -77,10 +79,11 @@ const items = [
       { title: 'Autoscaling up to 8 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
       { title: 'Point-in-time restore (30 days)' },
       { title: 'Organization accounts' },
+      { title: 'IP Allow rules' },
     ],
     button: {
-      url: `${LINKS.scaleTrial}`,
-      text: 'Request trial',
+      url: `${LINKS.console}/?upgrade=scale`,
+      text: 'Get started',
       theme: 'white-outline',
       event: 'Hero Scale Panel',
     },

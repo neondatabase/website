@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2024-06-14T07:55:54.381Z'
+updatedOn: '2024-06-20T18:17:05.280Z'
 ---
 
 This tutorial guides you through your first steps using Neon as your Postgres database. You'll get familiar with the following concepts:
@@ -97,6 +97,8 @@ Your default branch `main` now has a table with some data.
 Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, add or remove columns, drop or truncate tables, and export data in `.json` and `.csv` formats.
 
 ![Tables page Drizzle integration](/docs/relnotes/tables_page_drizzle.png)
+
+For a detailed guide on how to interact with your data using the **Tables** page, visit [Managing your data with interactive tables](/docs/guides/tables).
 
 ## Step 5 - Create a dedicated development branch
 

@@ -103,7 +103,7 @@ jobs:
         with:
           project_id: ${{ env.NEON_PROJECT_ID }}
           username: 'neondb_owner' # Change this to the role you use to connect to your database
-          # parent: dev # optional (defaults to your primary branch)
+          # parent: dev # optional (defaults to your project's default branch)
           branch_name: preview/${{ steps.branch-name.outputs.current_branch }}
           api_key: ${{ secrets.NEON_API_KEY }} # Generate a an API key in your Neon account settings
 

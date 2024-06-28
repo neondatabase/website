@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/prisma-tutorial
-updatedOn: '2024-02-08T15:20:54.298Z'
+updatedOn: '2024-06-21T14:17:23.479Z'
 ---
 
 Prisma is an open source next-generation ORM that consists of the following parts:
@@ -28,7 +28,7 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="info">
-A Neon project is created with a default Postgres role named for your account, and a ready-to-use database named `neondb`. This guide uses the `neondb` database as the primary database.
+Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`. This guide uses a `neondb` database as the primary database.
 </Admonition>
 
 ## Create a shadow database for Prisma Migrate

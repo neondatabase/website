@@ -2,7 +2,7 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.386Z'
+updatedOn: '2024-06-20T17:29:55.104Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -50,11 +50,11 @@ connection_uris
 The Neon CLI provides a `neonctl connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
 </Admonition>
 
-## Create a branch from a non-primary parent
+## Create a branch from a non-default parent
 
-Using the option `--parent`, you can specify any non-primary branch that you want to use as the parent for your new branch, depending on the needs of your development workflow.
+Using the option `--parent`, you can specify any non-default branch that you want to use as the parent for your new branch, depending on the needs of your development workflow.
 
-In this example, we're creating a branch for a hot fix called `alex/hotfix` using the long-lived development branch `dev/alex` as the parent:
+In this example, we're creating a branch for a hotfix called `alex/hotfix` using the long-lived development branch `dev/alex` as the parent:
 
 ```bash shouldWrap
 neon branches create --name alex/hotfix --parent dev/alex --project-id crimson-voice-12345678

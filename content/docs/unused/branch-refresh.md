@@ -2,7 +2,7 @@
 title: Refresh a branch
 subtitle: Learn how to refresh a Neon branch using the Neon API
 enableTableOfContents: true
-updatedOn: '2024-02-19T18:57:12.555Z'
+updatedOn: '2024-06-20T17:29:55.117Z'
 ---
 
 When you create a branch in Neon, you create a copy-on-write clone that reflects the current state of the parent branch, but what do you do if your branch becomes stale? For example, changes are made to the data or schema on the parent branch that you would like reflected in your development branch, or your branch has aged out of the point-in-time restore window (the history shared with the parent branch) and is now taking up storage space. Ideally, you want to refresh your branch but keep the same compute endpoint, whose connection details may already be configured in your application or toolchain.
@@ -61,7 +61,7 @@ The response body includes the `id` of your new branch. You will need this value
     "current_state": "init",
     "pending_state": "ready",
     "creation_source": "console",
-    "primary": false,
+    "default": false,
     "cpu_used_sec": 0,
     "compute_time_seconds": 0,
     "active_time_seconds": 0,
@@ -182,7 +182,7 @@ curl --request DELETE \
     "current_state": "ready",
     "logical_size": 29679616,
     "creation_source": "console",
-    "primary": false,
+    "default": false,
     "cpu_used_sec": 0,
     "compute_time_seconds": 0,
     "active_time_seconds": 0,
@@ -239,7 +239,7 @@ curl --request PATCH \
     "name": "dev_branch_1",
     "current_state": "ready",
     "creation_source": "console",
-    "primary": false,
+    "default": false,
     "cpu_used_sec": 0,
     "compute_time_seconds": 0,
     "active_time_seconds": 0,

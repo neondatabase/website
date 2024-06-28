@@ -2,7 +2,7 @@
 title: Get started with branching
 subtitle: Everything you need to get started with Neon's branching feature
 enableTableOfContents: true
-updatedOn: '2024-01-26T18:19:19.803Z'
+updatedOn: '2024-06-20T17:29:55.103Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -75,11 +75,11 @@ Recover lost data or track down issues by restoring a branch to its history, or 
 
 ## Branching guides
 
-Learn how to promote a branch to become your primary branch.
+Learn how to promote a branch to become your default branch.
 
 <DetailIconCards>
 
-<a href="/docs/guides/branch-promote" description="Promote a branch to the primary branch of your Neon project using the Neon API" icon="trend-up">Promote a branch</a>
+<a href="/docs/guides/branch-promote" description="Promote a branch to the default branch of your Neon project using the Neon API" icon="trend-up">Promote a branch</a>
 
 </DetailIconCards>
 

@@ -2,7 +2,7 @@
 title: Neon CLI commands — connection-string
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.422Z'
+updatedOn: '2024-06-20T17:29:55.114Z'
 ---
 
 ## Before you begin
@@ -22,7 +22,7 @@ This command gets a Postgres connection string for connecting to a database in y
 neonctl connection-string [branch[@timestamp|@LSN]] [options]
 ```
 
-`branch` specifies the branch name or ID. If a branch name or ID is omitted, the primary branch is used. `@timestamp|@LSN` is used to specify a specific point in the branch's history for time travel connections. If omitted, the current state (HEAD) is used.
+`branch` specifies the branch name or ID. If a branch name or ID is omitted, the default branch is used. `@timestamp|@LSN` is used to specify a specific point in the branch's history for time travel connections. If omitted, the current state (HEAD) is used.
 
 ### Options
 
