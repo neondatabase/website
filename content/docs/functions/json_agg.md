@@ -2,7 +2,7 @@
 title: Postgres json_agg() function
 subtitle: Aggregate values into a JSON array
 enableTableOfContents: true
-updatedOn: '2024-03-04T10:00:00.000Z'
+updatedOn: '2024-06-28T22:29:50.742Z'
 ---
 
 The Postgres `json_agg()` function is an aggregate function that collects values from multiple rows and returns them as a single JSON array.
