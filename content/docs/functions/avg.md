@@ -5,9 +5,9 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `avg()` function in Postgres is an aggregate function used to calculate the arithmetic mean of a set of numeric values.
+The Postgres `avg()` function calculates the arithmetic mean of a set of numeric values.
 
-This function is particularly useful when you need to understand the central tendency of a dataset, compare different groups, or identify trends over time. For example, you might use it to calculate the average order value for an e-commerce platform, the average response time for a web service, or the mean of sensor readings over time.
+This function is particularly useful when you need to understand typical values in a dataset, compare different groups, or identify trends over time. For example, you might use it to calculate the average order value for an e-commerce platform, the average response time for a web service, or the mean of sensor readings over time.
 
 <CTA />
 
@@ -21,7 +21,7 @@ avg(expression) -> numeric type
 
 - `expression`: Any numeric expression or column name whose average you want to calculate.
 
-The `avg()` function returns an output of the type `numeric` when applied to integer/numeric values. When used with floating-point values, the output type is `double precision`.
+The `avg()` function returns an output of the type `numeric` when applied to integer or numeric values. When used with floating-point values, the output type is `double precision`.
 
 ## Example usage
 
@@ -66,7 +66,7 @@ This query computes the average of all values in the `temperature` column.
 
 ### Calculating the average temperature by city
 
-We can use `avg()` with a `GROUP BY` clause to calculate averages for different cities:
+You can use `avg()` with a `GROUP BY` clause to calculate averages for different cities:
 
 ```sql
 SELECT city, avg(temperature) AS avg_temperature
