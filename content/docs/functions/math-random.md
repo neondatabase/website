@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T11:00:00.000Z'
 ---
 
-The `random()` function in PostgreSQL is used to generate random floating point values between 0.0 and 1.0.
+The POstgres `random()` function generates random floating point values between 0.0 and 1.0.
 
 It's particularly useful for creating some sample data, usage in simulations, or introducing randomness in queries for applications like statistical sampling and testing algorithms.
 
@@ -125,7 +125,7 @@ FROM customers
 WHERE random() < 0.01;
 ```
 
-This query selects approximately 1% of the customers randomly, by filtering for rows where `random()` is less than 0.01.
+This query selects approximately 1% of the customers randomly by filtering for rows where `random()` is less than 0.01.
 
 ```text
  id  |     name     |          email
@@ -144,7 +144,7 @@ This query selects approximately 1% of the customers randomly, by filtering for 
 
 ### Combining random() with other functions
 
-We can use `random()` in combination with other functions to generate more complex random data. For example, let's create a table of random events with timestamps within the last 24 hours:
+You can use `random()` in combination with other functions to generate more complex random data. For example, let's create a table of random events with timestamps within the last 24 hours:
 
 ```sql
 CREATE TABLE random_events (
@@ -182,7 +182,7 @@ This creates 100 random events with different types, severities, and timestamps 
 
 ### Seed for reproducibility
 
-PostgreSQL's `random()` function uses a seed that is initialized at the start of each database session. If you need reproducible random numbers across sessions, you can set the seed manually using the `setseed()` function:
+The Postgres `random()` function uses a seed that is initialized at the start of each database session. If you need reproducible random numbers across sessions, you can set the seed manually using the `setseed()` function:
 
 ```sql
 SELECT setseed(0.3);
