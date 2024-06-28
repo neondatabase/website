@@ -111,7 +111,7 @@ FROM orders;
 ```
 
 ```text
- avg_order_value_rounded | avg_order_value_cents 
+ avg_order_value_rounded | avg_order_value_cents
 -------------------------+-----------------------
                      346 |                345.67
 ```
