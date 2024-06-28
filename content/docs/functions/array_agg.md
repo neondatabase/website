@@ -5,15 +5,15 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `array_agg()` function in PostgreSQL is an aggregate function used to collect values from multiple rows into a single array.
+The Postges `array_agg()` function collects values from multiple rows into a single array.
 
-It's particularly useful for denormalizing data, creating comma-separated lists, or preparing data for JSON output. For example, when you want to list all products in a category from a products catalog table, or all orders for a customer from an orders table.
+It's particularly useful for denormalizing data, creating comma-separated lists, or preparing data for JSON output. For example, you can use it to list all products in a category from a products catalog table or all orders for a customer from an orders table.
 
 <CTA />
 
 ## Function signature
 
-The `array_agg()` function has the simple form:
+The `array_agg()` function has this simple form:
 
 ```sql
 array_agg(expression) -> anyarray
@@ -33,7 +33,7 @@ array_agg(expression ORDER BY sort_expression [ASC | DESC] [NULLS { FIRST | LAST
 
 ## Example usage
 
-Consider a table `orders` with columns `order_id`, `product_id`, and `quantity`. We can use `array_agg()` to list all the product IDs for each order.
+Consider an `orders` table with columns `order_id`, `product_id`, and `quantity`. You can use `array_agg()` to list all the product IDs for each order.
 
 ```sql
 WITH orders AS (
@@ -150,7 +150,7 @@ FROM user_logins
 GROUP BY user_id;
 ```
 
-This query creates an array of the browsers used by each user, without duplicates, and ordered alphabetically.
+This query creates an array of the browsers used by each user, without duplicates and in alphabetical order.
 
 ```text
  user_id |  browsers_used
