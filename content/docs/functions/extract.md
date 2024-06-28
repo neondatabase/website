@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T12:00:00.000Z'
 ---
 
-The `extract()` function in PostgreSQL retrieves specific components (such as year, month, or day) from date/time values (of the type timestamp, date, time or interval).
+The Postgres `extract()` function retrieves specific components (such as year, month, or day) from date/time values (of the type timestamp, date, time or interval).
 
 This function is particularly useful for data analysis, reporting, and manipulating date and time data. For example, it can be used to group data by year, filter records for specific months, or calculate age based on birth dates.
 
@@ -64,7 +64,7 @@ This query extracts the year and month from each event's timestamp.
 (5 rows)
 ```
 
-We can use the extracted components for further analysis, filtering, or grouping. For example, we can count number of events by quarter:
+You can use the extracted components for further analysis, filtering, or grouping. For example, we can count the number of events by quarter:
 
 ```sql
 -- Count events by quarter
@@ -94,7 +94,7 @@ This query groups events by year and quarter, providing a count of events for ea
 
 ### Use `extract()` with different fields
 
-We can use `extract()` with various fields to analyze different components of timestamps:
+You can use `extract()` with various fields to analyze different components of timestamps:
 
 ```sql
 WITH sample_data(event_time) AS (
@@ -142,7 +142,7 @@ SELECT
   EXTRACT(MINUTES FROM INTERVAL '2 hours 45 minutes 30 seconds') AS minutes;
 ```
 
-This query extracts the specified components from the interval. Note that it _extracts_ only the value for that field in the interval - `2 years 3 months 15 days` will return `15` for days, not the total number of days in the interval.
+This query extracts the specified components from the interval. Note that it _extracts_ only the value for that field in the interval &#8212; `2 years 3 months 15 days` will return `15` for days, not the total number of days in the interval.
 
 ```text
  days | hours | minutes
