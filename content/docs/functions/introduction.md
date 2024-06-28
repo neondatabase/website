@@ -52,6 +52,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/math-abs" description="Calculate the absolute value of a number" icon="app-store">abs()</a>
 
+<a href="/docs/functions/math-round" description="Round numbers to a specified precision" icon="app-store">round()</a>
+
 </DetailIconCards>
 
 ## String functions
