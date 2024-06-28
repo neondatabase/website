@@ -110,8 +110,8 @@ export default {
         },
         {
           icon: partnersIcon,
-          text: 'Partners',
-          description: 'Add Neon to your platform',
+          text: 'Neon for platforms',
+          description: 'Postgres for your users',
           to: LINKS.partners,
         },
         {
