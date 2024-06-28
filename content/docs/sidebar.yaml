@@ -500,12 +500,12 @@
               slug: functions/lower
             - title: substring
               slug: functions/substring
+            - title: trim
+              slug: functions/trim
         - title: Math functions
           items:
             - title: abs
               slug: functions/math-abs
-            - title: trim
-              slug: functions/trim
             - title: round
               slug: functions/math-round
     - title: Optimize queries
