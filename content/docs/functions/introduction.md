@@ -8,16 +8,16 @@ updatedOn: '2024-06-28T21:51:40.610Z'
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
 
-## Array functions
 
-<DetailIconCards>
-
-<a href="/docs/functions/array_agg" description="Aggregate elements into an array" icon="app-store">array_agg()</a>
 ## Aggregate functions
 
 <DetailIconCards>
 
+<a href="/docs/functions/array_agg" description="Aggregate elements into an array" icon="app-store">array_agg()</a>
+
 <a href="/docs/functions/avg" description="Calculate the average of a set of values" icon="app-store">avg()</a>
+
+
 
 </DetailIconCards>
 
