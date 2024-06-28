@@ -490,14 +490,20 @@
               slug: functions/window-lag
             - title: lead
               slug: functions/window-lead
+            - title: rank
+              slug: functions/window-rank
         - title: String functions
           items:
             - title: concat
               slug: functions/concat
+            - title: lower
+              slug: functions/lower
             - title: substring
               slug: functions/substring
         - title: Math functions
           items:
+            - title: abs
+              slug: functions/math-abs
             - title: random
               slug: functions/math-random
     - title: Optimize queries
