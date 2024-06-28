@@ -5,9 +5,9 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T11:00:00.000Z'
 ---
 
-The `round()` function in PostgreSQL is used to round numeric values to a specified number of decimal places or to the nearest integer.
+The Postgres `round()` function rounds numeric values to a specified number of decimal places or the nearest integer.
 
-It can help maintain consistency in numerical data, simplify complex decimal numbers, and adjust the precision of calculations to meet specific requirements. It's particularly useful in financial calculations, data analysis, and when presenting numerical data in a more readable format.
+It can help maintain consistency in numerical data, simplify complex decimal numbers, and adjust the precision of calculations to meet specific requirements. It's particularly useful in financial calculations, data analysis, and for presenting numerical data in a more readable format.
 
 <CTA />
 
@@ -19,7 +19,7 @@ The `round()` function has a simple form:
 round(number [, decimal_places]) -> number
 ```
 
-- `number`: The input value to be rounded. It can be of any numeric data type - integer, floating-point, or decimal.
+- `number`: The input value to be rounded. It can be of any numeric data type &#8212; integer, floating-point, or decimal.
 - `decimal_places`: An optional integer that specifies the number of decimal places to round to. If omitted, the input number is rounded to the nearest integer.
 
 ## Example usage
@@ -58,7 +58,7 @@ This query demonstrates using the `round()` function to round sales amounts to t
 
 ### Using round() to calculate accurate percentages
 
-The `round()` function is often used when calculating and displaying percentages. For example, consider a table of with sales data for different products. Let's calculate the percentage of total sales contributed by each product.
+The `round()` function is often used when calculating and displaying percentages. For example, consider a table with sales data for different products. Let's calculate the percentage of total sales contributed by each product.
 
 ```sql
 WITH product_sales(product_id, sales_amount) AS (
@@ -93,7 +93,7 @@ This query calculates each product's contribution to total sales and rounds the 
 
 ### Combining round() with other functions
 
-We can combine `round()` with other functions for more complex calculations. For example, let's calculate the average order value and round it to the nearest dollar:
+We can combine `round()` with other functions for more complex calculations. For example, let's calculate the average order value and round it to the nearest dollar and the nearest cents:
 
 ```sql
 WITH orders(order_id, total_amount) AS (
@@ -110,7 +110,11 @@ SELECT
 FROM orders;
 ```
 
-This query calculates the average order value and presents it rounded to the nearest dollar and to cents.
+```text
+ avg_order_value_rounded | avg_order_value_cents 
+-------------------------+-----------------------
+                     346 |                345.67
+```
 
 ## Additional considerations
 
