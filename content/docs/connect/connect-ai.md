@@ -7,9 +7,11 @@ updatedOn: '2024-06-29T14:19:59.862Z'
 
 You can integrate your Neon Postgres database with various AI tools like [AskYourDatabase](https://www.askyourdatabase.com/), [Outerbase](https://www.outerbase.com/), and [LangChain](https://www.langchain.com/) to help with various tasks including querying data, data analysis, business intelligence, and more.
 
+In this guide, we'll step through connecting to Neon with AskYourDatabase as an example. 
+
 ## Connect to Neon
 
-We will step through connecting to Neon with AskYourDatabase as an example. To get started, download the [AskYourDatabase Desktop App](https://www.askyourdatabase.com/download).
+To get started, download the [AskYourDatabase Desktop App](https://www.askyourdatabase.com/download).
 
 To connect, grab your Neon database connection string from the **Connection Details** widget on the **Neon Dashboard**.
 
@@ -19,7 +21,7 @@ Paste the connection string into the **Database Configuration** dialog and click
 
 ![Connect to AskYourDatabase](/docs/guides/askyourdatabase_connect_neon_2.png)
 
-Once the process completes, you can start querying data and making data visualizations by asking your database questions in natural langauge.
+Once the process completes, you can start querying data and making data visualizations by asking your database questions in natural language.
 
 For example, let's suppose we have a `user` table with a column named `dbType` that indicates what type of database they are using.
 
