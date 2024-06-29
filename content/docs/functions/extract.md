@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T12:00:00.000Z'
 ---
 
-The Postgres `extract()` function retrieves specific components (such as year, month, or day) from date/time values (of the type timestamp, date, time or interval).
+The Postgres `extract()` function retrieves specific components (such as year, month, or day) from date/time values where the source is of the type `timestamp`, `date`, `time` or `interval`.
 
 This function is particularly useful for data analysis, reporting, and manipulating date and time data. For example, it can be used to group data by year, filter records for specific months, or calculate age based on birth dates.
 

@@ -18,11 +18,11 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 </DetailIconCards>
 
-## Date and time functions
+## Date / Time functions
 
 <DetailIconCards>
 
-<a href="/docs/functions/extract" description="Get the current date" icon="app-store">extract()</a>
+<a href="/docs/functions/extract" description="Extract date and time components from timestamps and intervals" icon="app-store">extract()</a>
 
 </DetailIconCards>
 
