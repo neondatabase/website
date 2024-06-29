@@ -142,7 +142,7 @@ SELECT
   EXTRACT(MINUTES FROM INTERVAL '2 hours 45 minutes 30 seconds') AS minutes;
 ```
 
-This query extracts the specified parts from the interval. Note that the `extract` function extracts only the value for the specified part in the interval &#8212; `2 years 3 months 15 days` returns `15` for days, not the total number of days in the interval.
+This query extracts the specified parts from the interval. Note that the `extract` function extracts only the value for the specified part in the interval. For example, `EXTRACT(DAYS FROM INTERVAL '2 years 3 months 15 days')` returns `15` for days, not the total number of days in the interval.
 
 ```text
  days | hours | minutes
