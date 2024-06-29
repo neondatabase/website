@@ -36,4 +36,4 @@ Now we want to know what the four most popular databases are and try to visualiz
 
 ## What's more
 
-AskYourDatabase also supports a customer-facing chatbot that can connect to Neon DB and serve as a chatbot embedded in your existing website, enabling your customers to explore the analytic data by asking questions. To learn more, please go to [AI Chatbot that connects to database](https://www.askyourdatabase.com/docs/chatbot).
+AskYourDatabase also supports a customer-facing chatbot that can connect to Neon DB and serve as a chatbot embedded in your existing website, enabling your customers to explore the analytic data by asking questions. To learn more, please go to [AI Chatbot that connects to database](/docs/connect/connect-ai).
