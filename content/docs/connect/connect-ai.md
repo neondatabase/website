@@ -19,7 +19,7 @@ Paste the connection string into the **Database Configuration** dialog and click
 
 ![Connect to AskYourDatabase](/docs/guides/askyourdatabase_connect_neon_2.png)
 
-After the connection is established, you can query your data and even make data visualizations by asking your database questions in natural language.
+Once the process completes, you can start querying data and making data visualizations by asking your database questions in natural langauge.
 
 For example, let's suppose we have a `user` table with a column named `dbType` that indicates what type of database they are using.
 
