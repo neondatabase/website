@@ -19,7 +19,7 @@ And paste the connection string and click connect:
 
 ![Connect to AskYourDatabase](/docs/guides/askyourdatabase_connect_neon_2.png)
 
-After you are done, you can start to query data and even make data visualizations by asking questions against your data.
+Once the process completes, you can start to query data and make data visualizations by asking questions against your data.
 
 For example, let's suppose we have a `user` table with a column named `dbType` that indicates what type of database they are using.
 
