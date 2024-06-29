@@ -14,15 +14,15 @@ AskYourDatabase is the ChatGPT for SQL databases, enabling you to interact with 
 
 ## Connect to Neon in AskYourDatabase
 
-Get the Neon URL by navigating to Neon console and copying the connection string. The URL should look like this: `postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname`.
+1. Get the Neon URL by navigating to Neon console and copying the connection string. The URL should look like this: `postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname`.
 
-Go to AskYourDatabase and click **Connect to your database**: ![Connect to new db](/docs/guides/askyourdatabase_connect_neon_1.png)
+2. Go to AskYourDatabase and click **Connect to your database**: ![Connect to new db](/docs/guides/askyourdatabase_connect_neon_1.png)
 
-And then select PostgreSQL as your database type, and paste your connection string:
+3. Select PostgreSQL as your database type, and paste your connection string:
 
 ![Paste connection string](/docs/guides/askyourdatabase_connect_neon_2.png)
 
-It will open a new chat session if connected successfully:
+4. It will open a new chat session if connected successfully:
 
 ![New chat session](/docs/guides/askyourdatabase_connect_neon_3.png)
 
