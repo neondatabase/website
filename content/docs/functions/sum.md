@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `sum()` function in Postgres is an aggregate function used to calculate the total of a set of numeric values.
+The Postgres `sum()` function calculates the total of a set of numeric values.
 
 It's used in data analysis and reporting to compute totals across rows in a table or grouped data. This function is particularly useful in financial applications for calculating total revenue or expenses, in inventory management for summing up quantities, or in analytics for aggregating metrics across various dimensions.
 
@@ -13,7 +13,7 @@ It's used in data analysis and reporting to compute totals across rows in a tabl
 
 ## Function signature
 
-The `sum()` function has the simple form.
+The `sum()` function has this simple form:
 
 ```sql
 sum([DISTINCT] expression) -> numeric type
@@ -22,11 +22,11 @@ sum([DISTINCT] expression) -> numeric type
 - `expression`: Any numeric expression or column name. The function returns a value of the same data type as the input.
 - `DISTINCT`: Optional keyword that causes `sum()` to consider only unique values in the calculation.
 
-The output of the `sum()` function has the same data type as the input if it a floating-point (real / double-precision) type. To avoid overflow, the output for smallint/integer inputs is a bigint, and for bigint/numeric inputs, it is numeric type.
+The output of the `sum()` function has the same data type as the input if it's a floating-point (real / double-precision) type. To avoid overflow, the output for smallint/integer inputs is a bigint, and for bigint/numeric inputs, it is numeric type.
 
 ## Example usage
 
-Consider a table `sales` that tracks product sales, with columns `product_id`, `quantity`, and `price`. We can use `sum()` to calculate the total revenue from each product.
+Consider a `sales` table that tracks product sales, with columns `product_id`, `quantity`, and `price`. We can use `sum()` to calculate the total revenue from each product.
 
 ```sql
 WITH sales(product_id, quantity, price) AS (
