@@ -120,7 +120,7 @@ SELECT
 FROM sample_data;
 ```
 
-This query demonstrates how `extract()` works with different fields, from century down to microseconds.
+This query demonstrates how `extract()` works with different fields, ranging from `century` to `microseconds`.
 
 ```text
           event_time           | century | decade | year | quarter | month | week | day | hour | minute |  second   | milliseconds | microseconds
@@ -133,7 +133,7 @@ This query demonstrates how `extract()` works with different fields, from centur
 
 ### Use `extract()` with interval data
 
-The `extract()` function can also be used with interval data:
+When working with the `INTERVAL` type, the `extract()` function allows you to pull out specific parts of the interval, such as the number of years, months, days, hours, minutes, seconds, and so on.
 
 ```sql
 SELECT
@@ -142,7 +142,7 @@ SELECT
   EXTRACT(MINUTES FROM INTERVAL '2 hours 45 minutes 30 seconds') AS minutes;
 ```
 
-This query extracts the specified components from the interval. Note that it _extracts_ only the value for that field in the interval &#8212; `2 years 3 months 15 days` will return `15` for days, not the total number of days in the interval.
+This query extracts the specified parts from the interval. Note that the `extract` function extracts only the value for the specified part in the interval &#8212; `2 years 3 months 15 days` returns `15` for days, not the total number of days in the interval.
 
 ```text
  days | hours | minutes
@@ -151,7 +151,15 @@ This query extracts the specified components from the interval. Note that it _ex
 (1 row)
 ```
 
-Further, for non-normalized intervals, the extracted values may not be as expected. For example:
+Additionally, it should be noted that for non-normalized intervals, the extracted values may not be as expected.
+
+A **normalized interval** automatically converts large units into their equivalent higher units. For example, an interval of `14 months` is normalized to `1 year 2 months` because 12 months make a year.
+
+A **non-normalized interval** keeps the units as specified, without converting to higher units. This is useful when you want to keep intervals in the same unit (like months or minutes) for easier manipulation or calculation.
+
+When extracting values from non-normalized intervals, Postgres returns the remainder after converting to the next higher unit. This can lead to results that might seem counter-intuitive if you expect direct conversion without accounting for normalization.
+
+For example, consider this query and its output:
 
 ```sql
 SELECT
@@ -159,14 +167,24 @@ SELECT
     EXTRACT(MINUTE FROM INTERVAL '80 minutes') AS minutes;
 ```
 
-This query returns the following output, which might be counter-intuitive. There is a whole number of months/minutes in a year/hour, respectively, so the extracted values are the remainder after dividing by the next higher unit.
-
 ```text
  months | minutes
 --------+---------
       8 |      20
 (1 row)
 ```
+
+**Interval '32 months'**:
+
+- A year is composed of 12 months.
+- 32 months can be broken down into 2 years and 8 months (since 32 ÷ 12 = 2 years with a remainder of 8 months).
+- When you `EXTRACT(MONTH FROM INTERVAL '32 months')`, it returns 8 because that’s the remaining months after accounting for the full years.
+
+**Interval '80 minutes'**:
+
+- An hour is composed of 60 minutes.
+- 80 minutes can be broken down into 1 hour and 20 minutes (since 80 ÷ 60 = 1 hour with a remainder of 20 minutes).
+- When you `EXTRACT(MINUTE FROM INTERVAL '80 minutes')`, it returns 20 because that’s the remaining minutes after accounting for the full hour.
 
 ### Use `extract()` for time-based analysis
 
