@@ -458,6 +458,16 @@
               slug: functions/array_agg
             - title: avg
               slug: functions/avg
+            - title: count
+              slug: functions/count
+            - title: sum
+              slug: functions/sum
+        - title: Date / Time functions
+          items:
+            - title: age
+              slug: functions/age
+            - title: extract
+              slug: functions/extract
         - title: JSON functions
           items:
             - title: array_to_json

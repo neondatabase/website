@@ -2,7 +2,7 @@
 title: Chat with Neon in AskYourDatabase
 subtitle: Chat with your Neon Postgres database without writing SQL
 enableTableOfContents: true
-updatedOn: '2024-06-29T07:55:54.403Z'
+updatedOn: '2024-06-29T14:19:59.865Z'
 ---
 
 AskYourDatabase is the ChatGPT for SQL databases, enabling you to interact with your SQL databases using natural language. You can use it for data management, business intelligence, schema design & migration, data visualization, and more. To learn more, see [AskYourDatabase](https://www.askyourdatabase.com/).

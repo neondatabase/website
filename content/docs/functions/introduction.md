@@ -3,7 +3,7 @@ title: Postgres functions
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/functions-intro
-updatedOn: '2024-06-28T22:54:53.166Z'
+updatedOn: '2024-06-29T12:27:47.895Z'
 ---
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
@@ -15,6 +15,20 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 <a href="/docs/functions/array_agg" description="Aggregate elements into an array" icon="app-store">array_agg()</a>
 
 <a href="/docs/functions/avg" description="Calculate the average of a set of values" icon="app-store">avg()</a>
+
+<a href="/docs/functions/count" description="Count rows or non-null values in a result set" icon="app-store">count()</a>
+
+<a href="/docs/functions/sum" description="Calculate the sum of a set of values" icon="app-store">sum()</a>
+
+</DetailIconCards>
+
+## Date / Time functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/extract" description="Extract date and time components from timestamps and intervals" icon="app-store">extract()</a>
+
+<a href="/docs/functions/age" description="Calculate the difference between timestamps or between a timestamp and the current date/time" icon="app-store">age()</a>
 
 </DetailIconCards>
 
