@@ -16,6 +16,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/avg" description="Calculate the average of a set of values" icon="app-store">avg()</a>
 
+<a href="/docs/functions/sum" description="Calculate the sum of a set of values" icon="app-store">sum()</a>
+
 </DetailIconCards>
 
 ## Date / Time functions
