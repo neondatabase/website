@@ -2,7 +2,7 @@
 title: Connect with AI
 subtitle: Learn how to integrate AI capabilities into Neon
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.362Z'
+updatedOn: '2024-06-29T14:19:59.862Z'
 ---
 
 You can integrate various AI tools like [AskYourDatabase](https://www.askyourdatabase.com/), [Outerbase](https://www.outerbase.com/), [LangChain](https://www.langchain.com/) with Neon DB to help you with various tasks including querying data, data analysis, business intelligence, and more.
