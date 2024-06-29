@@ -454,6 +454,8 @@
               slug: functions/array_agg
             - title: avg
               slug: functions/avg
+            - title: count
+              slug: functions/count
             - title: sum
               slug: functions/sum
         - title: Date / Time functions
