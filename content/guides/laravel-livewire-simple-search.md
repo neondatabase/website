@@ -9,7 +9,7 @@ updatedOn: '2024-06-29T00:00:00.000Z'
 
 Laravel is a powerful PHP framework known for its elegant syntax and feature-rich ecosystem. Livewire, a full-stack framework for Laravel, allows us to build dynamic interfaces with minimal JavaScript. Together, they provide a robust foundation for creating interactive web applications.
 
-In this guide, we'll walk through building a simple real-time search feature using Laravel, Livewire, and Neon. We'll set up a Laravel project, create a database schema, implement the search functionality with Livewire, and optimize performance with Neon. By the end of this tutorial, you'll have a working real-time search feature that leverages the strengths of Laravel, Livewire, and Neon.
+In this guide, we'll build a simple real-time search feature using Laravel, Livewire, and Neon. We'll set up a Laravel project, create a database schema, implement the search functionality with Livewire, and optimize performance with Neon. By the end of this tutorial, you'll have a working real-time search feature that leverages the strengths of Laravel, Livewire, and Neon.
 
 ## Prerequisites
 
