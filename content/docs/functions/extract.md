@@ -2,7 +2,7 @@
 title: Postgres extract() function
 subtitle: Extract date and time components from timestamps and intervals
 enableTableOfContents: true
-updatedOn: '2024-03-04T12:00:00.000Z'
+updatedOn: '2024-06-29T11:15:52.370Z'
 ---
 
 The Postgres `extract()` function retrieves specific components (such as year, month, or day) from date/time values where the source is of the type `timestamp`, `date`, `time` or `interval`.
