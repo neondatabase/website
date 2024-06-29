@@ -23,9 +23,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 <DetailIconCards>
 
 <a href="/docs/functions/extract" description="Get the current date" icon="app-store">extract()</a>
-  
-</DetailIconCards>
 
+</DetailIconCards>
 
 ## JSON functions
 
