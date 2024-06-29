@@ -5,11 +5,11 @@ enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.362Z'
 ---
 
-You can integrate your Neon Postgres database with various AI-enabled tools like [AskYourDatabase](https://www.askyourdatabase.com/), [Outerbase](https://www.outerbase.com/), and [LangChain](https://www.langchain.com/) to help with various tasks including querying data, data analysis, business intelligence, and more.
+You can integrate your Neon Postgres database with various AI tools like [AskYourDatabase](https://www.askyourdatabase.com/), [Outerbase](https://www.outerbase.com/), and [LangChain](https://www.langchain.com/) to help with various tasks including querying data, data analysis, business intelligence, and more.
 
 ## Connect to Neon
 
-We will step through connecting to Neon with AskYourDatabase as an example. To download the Desktop App, see [Downlaod AskYourDatabase](https://www.askyourdatabase.com/download).
+We will step through connecting to Neon with AskYourDatabase as an example. To get started, download the [AskYourDatabase Desktop App](https://www.askyourdatabase.com/download).
 
 To connect, grab your Neon database connection string from the **Connection Details** widget on the **Neon Dashboard**.
 

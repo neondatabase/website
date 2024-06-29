@@ -7,7 +7,7 @@ updatedOn: '2024-06-29T07:55:54.403Z'
 
 AskYourDatabase is the ChatGPT for SQL databases, enabling you to interact with your SQL databases using natural language. You can use it for data management, business intelligence, schema design & migration, data visualization, and more. To learn more, see [AskYourDatabase](https://www.askyourdatabase.com/).
 
-This guide shows how to connect from AskYourDatabase to Neon Postgres and chat with your database using natural language.
+This guide shows how to connect from AskYourDatabase to Neon Postgres.
 
 ## Prerequisites
 
@@ -35,9 +35,11 @@ This guide shows how to connect from AskYourDatabase to Neon Postgres and chat w
 
 ## Chat with your data
 
-Within the chat session, you can start to ask your data any questions. For example, let's suppose we have a `user` table with a column named `dbType` that indicates the type of database.
+Within the chat session, you can start asking your database questions. 
 
-Now, we want to know what the four most popular databases are and visualize the distribution in a pie chart:
+For example, suppose you have a `user` table with a column named `dbType` that indicates the type of database. 
+
+If you want to know what the four most popular databases are and visualize the distribution in a pie chart, you can quickly and easily do so with a natural language question, as shown below:
 
 ![Chat with Neon](/docs/guides/askyourdatabase_ask_neon.png)
 
