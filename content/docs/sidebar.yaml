@@ -450,12 +450,22 @@
       items:
         - title: Aggregate functions
           items:
+            - title: array_agg
+              slug: functions/array_agg
+            - title: avg
+              slug: functions/avg
             - title: sum
               slug: functions/sum
+        - title: Date / Time functions
+          items:
+            - title: extract
+              slug: functions/extract
         - title: JSON functions
           items:
             - title: array_to_json
               slug: functions/array_to_json
+            - title: json_agg
+              slug: functions/json_agg
             - title: json_array_elements
               slug: functions/json_array_elements
             - title: jsonb_array_elements
@@ -494,12 +504,26 @@
               slug: functions/window-lag
             - title: lead
               slug: functions/window-lead
+            - title: rank
+              slug: functions/window-rank
         - title: String functions
           items:
             - title: concat
               slug: functions/concat
+            - title: lower
+              slug: functions/lower
             - title: substring
               slug: functions/substring
+            - title: trim
+              slug: functions/trim
+        - title: Math functions
+          items:
+            - title: abs
+              slug: functions/math-abs
+            - title: random
+              slug: functions/math-random
+            - title: round
+              slug: functions/math-round
     - title: Optimize queries
       slug: postgresql/query-performance
     - title: Query reference
