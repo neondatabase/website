@@ -2,7 +2,7 @@
 title: Postgres COUNT() function
 subtitle: Count rows or non-null values in a result set
 enableTableOfContents: true
-updatedOn: '2024-03-04T10:00:00.000Z'
+updatedOn: '2024-06-29T11:59:33.290Z'
 ---
 
 The Postgres `COUNT()` function counts the number of rows in a result set or the number of non-null values in a specific column.
