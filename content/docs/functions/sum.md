@@ -2,7 +2,7 @@
 title: Postgres sum() function
 subtitle: Calculate the sum of a set of values
 enableTableOfContents: true
-updatedOn: '2024-03-04T10:00:00.000Z'
+updatedOn: '2024-06-29T11:31:24.999Z'
 ---
 
 The Postgres `sum()` function calculates the total of a set of numeric values.
