@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `COUNT()` function in Postgres is an aggregate function used to count the number of rows in a result set or the number of non-null values in a specific column.
+The Postgres `COUNT()` function counts the number of rows in a result set or the number of non-null values in a specific column.
 
 It's useful for data analysis, reporting, and understanding the size and composition of your datasets. Some common use-cases include calculating the total number of records in a table, finding the number of distinct values in a column, or determining how many rows meet certain conditions.
 
