@@ -16,28 +16,28 @@ This guide shows how to connect from AskYourDatabase to Neon Postgres.
 
 ## Connect to Neon from AskYourDatabase
 
-1. Get the Neon URL by navigating to the Neon Console and copying the connection string. The URL will look something like this: 
+1. Get the Neon URL by navigating to the Neon Console and copying the connection string. The URL will look something like this:
 
-    ```text shouldWrap
-    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
-    ```
+   ```text shouldWrap
+   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+   ```
 
-2. Go to AskYourDatabase and click **Connect to your database**: 
-    ![Connect to new db](/docs/guides/askyourdatabase_connect_neon_1.png)
+2. Go to AskYourDatabase and click **Connect to your database**:
+   ![Connect to new db](/docs/guides/askyourdatabase_connect_neon_1.png)
 
 3. Select PostgreSQL as your database type, and paste your connection string:
 
-    ![Paste connection string](/docs/guides/askyourdatabase_connect_neon_2.png)
+   ![Paste connection string](/docs/guides/askyourdatabase_connect_neon_2.png)
 
 4. A new chat session opens if the connection is successful:
 
-    ![New chat session](/docs/guides/askyourdatabase_connect_neon_3.png)
+   ![New chat session](/docs/guides/askyourdatabase_connect_neon_3.png)
 
 ## Chat with your data
 
-Within the chat session, you can start asking your database questions. 
+Within the chat session, you can start asking your database questions.
 
-For example, suppose you have a `user` table with a column named `dbType` that indicates the type of database. 
+For example, suppose you have a `user` table with a column named `dbType` that indicates the type of database.
 
 If you want to know what the four most popular databases are and visualize the distribution in a pie chart, you can quickly and easily do so with a natural language question, as shown below:
 
