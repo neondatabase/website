@@ -1,11 +1,11 @@
 ---
 title: Postgres age() function
-subtitle: Calculate the difference between timestamps
+subtitle: Calculate the difference between timestamps or between a timestamp and the current date/time
 enableTableOfContents: true
 updatedOn: '2024-03-04T11:00:00.000Z'
 ---
 
-The `age()` function in PostgreSQL calculates the difference between two timestamps or the difference between a timestamp and the current date and time.
+The Postgres `age()` function calculates the difference between two timestamps or the difference between a timestamp and the current date and time.
 
 This function is particularly useful for calculating ages, durations, or time intervals in various applications. For example, you can use it to determine a person's age, calculate the time elapsed since an event, or find the duration of a process or subscription.
 
@@ -19,7 +19,7 @@ The `age()` function has two forms:
 age(timestamp, timestamp) -> interval
 ```
 
-This form produces an interval, by substracting the second timestamp from the first.
+This form produces an interval by subtracting the second timestamp from the first.
 
 - First argument: The end timestamp
 - Second argument: The start timestamp
@@ -90,7 +90,7 @@ This query calculates how long each employee has been with the company.
 
 ### Use `age()` for time-based calculations
 
-The `age()` function can be useful for various time-based calculations. For example, consider a table `projects` that tracks the start date and deadline for projects. We can use `age()` to calculate project durations and remaining time:
+The `age()` function can be useful for various time-based calculations. For example, consider a `projects` table that tracks the start date and deadline for projects. We can use `age()` to calculate project durations and remaining time:
 
 ```sql
 WITH projects(name, start_date, deadline) AS (
@@ -159,8 +159,8 @@ The `age()` function can return negative intervals if the end timestamp is earli
 
 ### Alternative functions
 
-- `-` operator - Can be used to subtract two dates or timestamps, returning an interval. This is equivalent to using the `age()` function with two timestamps.
-- `current_date` - Returns the current date (without the time component). Can be used with the `-` operator to calculate an age or duration.
+- `-` operator &#8212; Can be used to subtract two dates or timestamps, returning an interval. This is equivalent to using the `age()` function with two timestamps.
+- `current_date` &#8212; Returns the current date (without the time component). Can be used with the `-` operator to calculate an age or duration.
 
 ## Resources
 
