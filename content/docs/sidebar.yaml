@@ -113,6 +113,8 @@
       slug: connect/query-with-psql-editor
     - title: Connect with pgcli
       slug: connect/connect-pgcli
+    - title: Connect with AI
+      slug: connect/connect-ai
     - title: Connection pooling
       slug: connect/connection-pooling
     - title: Connection issues
