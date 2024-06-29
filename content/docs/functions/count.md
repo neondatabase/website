@@ -2,12 +2,12 @@
 title: Postgres COUNT() function
 subtitle: Count rows or non-null values in a result set
 enableTableOfContents: true
-updatedOn: '2024-06-29T11:59:33.290Z'
+updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
 The Postgres `COUNT()` function counts the number of rows in a result set or the number of non-null values in a specific column.
 
-It's useful for data analysis, reporting, and understanding the size and composition of your datasets. Some common use-cases include calculating the total number of records in a table, finding the number of distinct values in a column, or determining how many rows meet certain conditions.
+It's useful for data analysis, reporting, and understanding the size and composition of your datasets. Some common use cases include calculating the total number of records in a table, finding the number of distinct values in a column, or determining how many rows meet certain conditions.
 
 <CTA />
 
@@ -26,11 +26,11 @@ COUNT([DISTINCT] expression) -> bigint
 ```
 
 - Counts the number of rows where the input expression is not NULL.
-- DISTINCT is an optional keyword, that removes duplicate values before counting.
+- `DISTINCT` is an optional keyword, that removes duplicate values before counting.
 
 ## Example usage
 
-Consider a table `orders` that tracks orders placed by customers of an online store. It has columns `order_id`, `customer_id`, `product_id`, and `order_date`. We will use the `COUNT()` function to analyze this data.
+Consider an `orders` table that tracks orders placed by customers of an online store. It has columns `order_id`, `customer_id`, `product_id`, and `order_date`. We'll use the `COUNT()` function to analyze this data.
 
 ```sql
 CREATE TABLE orders (
@@ -111,7 +111,7 @@ This query will return the number of distinct `customer_id` values in the `order
 
 ## Advanced examples
 
-We use the `orders` table created in the previous section to demonstrate more use-cases of the `COUNT()` function.
+We use the `orders` table created in the previous section to demonstrate more use cases of the `COUNT()` function.
 
 ### Combine COUNT() with GROUP BY
 
@@ -169,7 +169,7 @@ This query finds customers who have placed more orders than the average number o
 
 ### Combine COUNT() with CASE
 
-You can use `COUNT()` with `CASE` statements to only count rows that meet a specific conditions:
+You can use `COUNT()` with `CASE` statements to only count rows that meet specific conditions:
 
 ```sql
 SELECT

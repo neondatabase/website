@@ -28,6 +28,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/extract" description="Extract date and time components from timestamps and intervals" icon="app-store">extract()</a>
 
+<a href="/docs/functions/age" description="Calculate the difference between timestamps or between a timestamp and the current date/time" icon="app-store">age()</a>
+
 </DetailIconCards>
 
 ## JSON functions
