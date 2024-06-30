@@ -470,6 +470,8 @@
               slug: functions/age
             - title: extract
               slug: functions/extract
+            - title: now
+              slug: functions/now
         - title: JSON functions
           items:
             - title: array_to_json
