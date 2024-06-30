@@ -3,7 +3,7 @@ title: Protected branches
 subtitle: Learn how to use Neon's protected branches feature to secure access to
   critical data
 enableTableOfContents: true
-updatedOn: '2024-06-20T17:29:55.106Z'
+updatedOn: '2024-06-30T14:35:12.887Z'
 ---
 
 Neon's protected branches feature lets you apply IP restrictions to specific branches in your Neon project as an added layer of data protection. Protected branches is a Neon [Scale](/docs/introduction/plans#scale) plan feature.
@@ -39,7 +39,7 @@ To configure an allowlist:
 The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
 
 ```bash
-neonctl ip-allow add 203.0.113.0 203.0.113.1
+neon ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
 │ Id                  │ Name                │ IP Addresses │ Default Branch Only │
 ├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
@@ -51,13 +51,13 @@ neonctl ip-allow add 203.0.113.0 203.0.113.1
 To apply an IP allowlist to the default branch only, use the you can `--primary-only` option:
 
 ```bash
-neonctl ip-allow add 203.0.113.1 --primary-only
+neon ip-allow add 203.0.113.1 --primary-only
 ```
 
 To reverse that setting, use `--primary-only false`.
 
 ```bash
-neonctl ip-allow add 203.0.113.1 --primary-only false
+neon ip-allow add 203.0.113.1 --primary-only false
 ```
 
 </TabItem>
