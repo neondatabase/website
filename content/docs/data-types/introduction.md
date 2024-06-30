@@ -26,7 +26,7 @@ Get started with commonly-used Postgres data types with Neon's data type guides.
 
 <a href="/docs/data-types/integer" description="Work with integers in Postgres" icon="app-store" icon="app-store">Integer</a>
 
-<a href="/docs/data-types/tsvector" description="Optimize full-text search in Postgres" icon="app-store" icon="app-store">TSVector</a>
+<a href="/docs/data-types/tsvector" description="Optimize full-text search in Postgres with the tsvector data type" icon="app-store" icon="app-store">Tsvector</a>
 
 <a href="/docs/data-types/uuid" description="Work with UUIDs in Postgres" icon="app-store" icon="app-store">UUID</a>
 

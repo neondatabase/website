@@ -1,13 +1,13 @@
 ---
 title: Postgres tsvector data type
-subtitle: Optimize full-text search in Postgres
+subtitle: Optimize full-text search in Postgres with the tsvector data type
 enableTableOfContents: true
 updatedOn: '2024-06-15T08:30:00.000Z'
 ---
 
-`tsvector` is a specialized data type in PostgreSQL designed for full-text search operations. It represents a document in a form optimized for text search, where each word is reduced to its root form (lexeme) and stored with information about its position and importance.
+`tsvector` is a specialized Postgres data type designed for full-text search operations. It represents a document in a form optimized for text search, where each word is reduced to its root form (lexeme) and stored with information about its position and importance.
 
-In Postgres, the tsvector data type is useful for implementing efficient full-text search capabilities, allowing for fast and flexible searching across large volumes of text data.
+In Postgres, the `tsvector` data type is useful for implementing efficient full-text search capabilities, allowing for fast and flexible searching across large volumes of text data.
 
 <CTA />
 
@@ -31,7 +31,7 @@ For example:
 
 - `'a':1A 'cat':2 'sat':3 'on':4 'the':5 'mat':6`
 
-When a document is cast to the `tsvector`, it doesn't perform any normalization and just splits the text into lexemes. To normalize the text, you can use the `to_tsvector` function with a specific text search configuration. For example:
+When a document is cast to `tsvector`, it doesn't perform any normalization and just splits the text into lexemes. To normalize the text, you can use the `to_tsvector` function with a specific text search configuration. For example:
 
 ```sql
 SELECT
@@ -39,7 +39,7 @@ SELECT
     to_tsvector('english', 'The quick brown fox jumps over the lazy dog.') as colB;
 ```
 
-This query produces the following output. The function `to_tsvector()` tokenizes the input document, and computes the normalized lexemes based on the specified text search configuration (in this case, 'english'). The output is a `tsvector` with the normalized lexemes and their positions.
+This query produces the following output. The function `to_tsvector()` tokenizes the input document and computes the normalized lexemes based on the specified text search configuration (in this case, 'english'). The output is a `tsvector` with the normalized lexemes and their positions.
 
 ```text
                               cola                              |                         colb
@@ -95,7 +95,7 @@ This query returns the following output:
 
 ### Use different text search configurations with `tsvector`
 
-PostgreSQL supports text search configurations for multiple languages. Here's an example using the 'spanish' configuration:
+Postgres supports text search configurations for multiple languages. Here's an example using the 'spanish' configuration:
 
 ```sql
 CREATE TABLE product_reviews (
@@ -156,7 +156,7 @@ WHERE search_vector @@ query
 ORDER BY rank DESC;
 ```
 
-This query returns the following output. All the articles were related to climate change, but the first article was ranked higher due to the higher relevance for the search terms:
+This query returns the following output:
 
 ```text
                headline                |    rank
@@ -166,6 +166,8 @@ This query returns the following output. All the articles were related to climat
  Tech Giant Announces Green Initiative | 0.09910322
 (3 rows)
 ```
+
+All the articles were related to climate change, but the first article was ranked higher due to the higher relevance for the search terms.
 
 ## Additional considerations
 
