@@ -466,6 +466,10 @@
               slug: functions/max
             - title: sum
               slug: functions/sum
+        - title: Array functions
+          items:
+            - title: array_length
+              slug: functions/array_length
         - title: Date / Time functions
           items:
             - title: age
