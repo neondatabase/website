@@ -5,9 +5,9 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `max()` function in Postgres is an aggregate function used to find the maximum value in a set of values.
+The Postgres `max()` function finds the maximum value in a set of values.
 
-It's particularly useful for data analysis, reporting, and finding extreme values within datasets. You might use `max()` to find the product with highest price in the catalog, the most recent timestamp in a log table, or the largest transaction amount in a financial system.
+It's particularly useful for data analysis, reporting, and finding extreme values within datasets. You might use `max()` to find the product with the highest price in the catalog, the most recent timestamp in a log table, or the largest transaction amount in a financial system.
 
 <CTA />
 
@@ -19,11 +19,11 @@ The `max()` function has a simple form:
 max(expression) -> same as expression
 ```
 
-- `expression`: Any valid expression that can be evaluated across a set of rows. This can be a column name, or a function that returns a value.
+- `expression`: Any valid expression that can be evaluated across a set of rows. This can be a column name or a function that returns a value.
 
 ## Example usage
 
-Consider a table `orders` that tracks orders placed by customers of an online store. It has columns `order_id`, `customer_id`, `product_id`, and `order_date`. We will use this table for examples throughout this guide.
+Consider an `orders` table that tracks orders placed by customers of an online store. It has columns `order_id`, `customer_id`, `product_id`, and `order_date`. We will use this table for examples throughout this guide.
 
 ```sql
 CREATE TABLE orders (
@@ -84,7 +84,7 @@ This query returns the following output:
 
 ### Using max() with GROUP BY
 
-You can use `max()` with `GROUP BY` to find the maximum values within each group:
+You can use `max()` with `GROUP BY` to find the maximum values in each group:
 
 ```sql
 SELECT customer_id, max(order_amount) AS largest_order
@@ -94,7 +94,7 @@ ORDER BY largest_order DESC
 LIMIT 5;
 ```
 
-This query finds the largest order amount for each customer and returns the top 5 customers, sorted by their largest order.
+This query finds the largest order amount for each customer and returns the top 5 customers, sorted in order of the largest order amount.
 
 ```text
  customer_id | largest_order
@@ -137,7 +137,7 @@ FROM orders
 WHERE order_amount = (SELECT max(order_amount) FROM orders);
 ```
 
-This query returns the full details of the order(s) with the maximum `order_amount`.
+This query returns the full details of the order with the maximum `order_amount`.
 
 ```text
  order_id | customer_id | product_id | order_amount |     order_date

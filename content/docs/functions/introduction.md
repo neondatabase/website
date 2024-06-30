@@ -12,7 +12,7 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <DetailIconCards>
 
-<a href="/docs/functions/max" description="Calculate the maximum from a set of values" icon="app-store">max()</a>
+<a href="/docs/functions/max" description="Find the maximum value in a set of values" icon="app-store">max()</a>
 
 </DetailIconCards>
 
