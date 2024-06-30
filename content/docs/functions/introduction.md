@@ -3,7 +3,7 @@ title: Postgres functions
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/functions-intro
-updatedOn: '2024-06-30T11:39:13.121Z'
+updatedOn: '2024-06-30T14:16:15.747Z'
 ---
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
