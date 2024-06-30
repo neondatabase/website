@@ -4,7 +4,7 @@ enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.415Z'
 ---
 
-Neon's Community, Standard, Priority, and Enterprise support plans are outlined below.
+Neon's Community, Standard, Priority, and Enterprise support plans are outlined below. Support plans are mapped to Neon's pricing plans. See [Upgrading your support plan](#upgrading-your-support-plan).
 
 | Support channels                | Community | Standard | Priority | Enterprise |
 | :------------------------------ | :-------: | :------: | :------: | :--------: |
@@ -15,20 +15,15 @@ Neon's Community, Standard, Priority, and Enterprise support plans are outlined 
 | Dedicated Customer Success Team |     -     |    -     |          |  &check;   |
 | SLAs                            |     -     |    -     |          |  &check;   |
 
-The table below maps our support plans to the corresponding pricing plans, ensuring you choose the right level of support for your needs.
-
-| Support Plan       | Neon Pricing Plan                                                                                  |
-|--------------------|---------------------------------------------------------------------------------------------------|
-| Community          | [Free Tier](/docs/introductions/plans#free-tier)                                                  |
-| Standard           | [Launch Plan](/docs/introductions/plans#launch)                                                   |
-| Priority           | [Scale Plan](/docs/introductions/plans#scale)                                                     |
-| Enterprise         | [Enterprise Plan](/docs/introductions/plans#enterprise)                                           |
-
 ## Community support
+
+Neon's [Free Tier](/docs/introduction/plans#free-tier) includes Community support.
 
 Community support is provided through the [Neon Discord Server](https://discord.gg/92vNTzKDGp), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged in our Discord Server.
 
 ## Standard support
+
+Neon's [Launch plan](/docs/introduction/plans#launch) includes Standard support.
 
 Standard support includes access to the Neon Support team via support tickets.
 
@@ -40,12 +35,27 @@ You can expect an initial response time of 2 business days, from 6am to 6pm Paci
 
 ## Priority support
 
-With priority support, your support tickets are given priority by the Neon Support team and you can request a video chat. Requests for video chat should be submitted via a support ticket.
+Neon's [Scale plan](/docs/introduction/plans#scale) includes Priority support.
+
+With Priority support, your support tickets are given priority by the Neon Support team and you can request a video chat. Requests for video chat should be submitted via a support ticket.
 
 ## Enterprise support
 
-With Enterprise Support, you have everything offered with the Priority plan plus dedicated Customer Success Team support, and SLAs.
+Neon's [Enterprise plan](/docs/introduction/plans#launch) includes Enterprise support.
+
+With Enterprise support, you have everything offered with the Priority plan plus dedicated Customer Success Team support, and SLAs.
 
 <Admonition type="note">
 If you are a Launch, Scale, or Enterprise user and are unable to access the support ticket form in the Neon Console, you can use the following email address as a fallback: `support@neon.tech`
 </Admonition>
+
+## Upgrading your support plan
+
+Neon's support plans are mapped to our [pricing plans](/docs/introduction/plans), as outlined in the following table. Upgrading your support plan requires upgrading your pricing plan.
+
+| Support plan       | Pricing plan                                                                                  |
+|:-------------------|:--------------------------------------------------------------------------------------------------|
+| Community          | [Free Tier](/docs/introductions/plans#free-tier)                                                  |
+| Standard           | [Launch plan](/docs/introductions/plans#launch)                                                   |
+| Priority           | [Scale plan](/docs/introductions/plans#scale)                                                     |
+| Enterprise         | [Enterprise plan](/docs/introductions/plans#enterprise)                                           |
