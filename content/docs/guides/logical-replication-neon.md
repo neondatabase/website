@@ -3,7 +3,7 @@ title: Manage logical replication in Neon
 subtitle: Learn how to manage logical replication in Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-14T07:55:54.400Z'
+updatedOn: '2024-06-30T14:35:12.886Z'
 ---
 
 <LRNotice/>

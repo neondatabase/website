@@ -3,7 +3,7 @@ title: Replicate data with Airbyte
 subtitle: Learn how to replicate data from Neon with Airbyte
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-14T07:55:54.396Z'
+updatedOn: '2024-06-30T14:35:12.883Z'
 ---
 
 <LRNotice/>
