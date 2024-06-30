@@ -468,6 +468,8 @@
           items:
             - title: age
               slug: functions/age
+            - title: current_timestamp
+              slug: functions/current_timestamp
             - title: extract
               slug: functions/extract
             - title: now

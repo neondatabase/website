@@ -30,6 +30,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/age" description="Calculate the difference between timestamps or between a timestamp and the current date/time" icon="app-store">age()</a>
 
+<a href="/docs/functions/current_timestamp" description="Get the current date and time" icon="app-store">current_timestamp</a>
+
 <a href="/docs/functions/extract" description="Extract date and time components from timestamps and intervals" icon="app-store">extract()</a>
 
 <a href="/docs/functions/now" description="Get the current date and time" icon="app-store">now()</a>
