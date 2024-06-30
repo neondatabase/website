@@ -3,7 +3,7 @@ title: Database branching workflow primer
 subtitle: An introduction to integrating Postgres branching into your development
   workflow
 enableTableOfContents: true
-updatedOn: '2024-06-20T17:29:55.101Z'
+updatedOn: '2024-06-30T14:35:12.881Z'
 ---
 
 With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow, as many branches as you need.
@@ -41,13 +41,13 @@ And here are the key CLI actions you can use:
 
 ```bash
 # Create branch
-neonctl branches create [options]
+neon branches create [options]
 
 # Get Connection string
-neonctl connection-string [branch] [options]
+neon connection-string [branch] [options]
 
 # Delete branch
-neonctl branches delete <id|name> [options]
+neon branches delete <id|name> [options]
 ```
 
 For more information, see:

@@ -2,7 +2,7 @@
 title: Neon CLI commands — completion
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.421Z'
+updatedOn: '2024-06-30T14:35:12.893Z'
 ---
 
 ## Before you begin
@@ -11,12 +11,12 @@ Before running the `completion` command, ensure that you have [installed the Neo
 
 ## The `completion` command
 
-This command generates a completion script for the `neonctl` command-line interface (CLI). The completion script, when installed, helps you type `neonctl` commands faster and more accurately. It does this by presenting the possible commands and options when you press the **tab** key after typing or partially typing a command or option.
+This command generates a completion script for the `neonctl` command-line interface (CLI). The completion script, when installed, helps you type `neon` commands faster and more accurately. It does this by presenting the possible commands and options when you press the **tab** key after typing or partially typing a command or option.
 
 ### Usage
 
 ```bash
-neonctl completion
+neon completion
 ```
 
 The command outputs a completion script similar to the one shown below.
@@ -63,7 +63,7 @@ Use the commands provided below to add the completion script to your shell confi
 <TabItem>
 
 ```bash
-neonctl completion >> ~/.bashrc
+neon completion >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -72,7 +72,7 @@ source ~/.bashrc
 <TabItem>
 
 ```bash
-neonctl completion >> ~/.bash_profile
+neon completion >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
@@ -81,7 +81,7 @@ source ~/.bash_profile
 <TabItem>
 
 ```bash
-neonctl completion >> ~/.profile
+neon completion >> ~/.profile
 source ~/.profile
 ```
 
@@ -90,7 +90,7 @@ source ~/.profile
 <TabItem>
 
 ```bash
-neonctl completion >> ~/.zshrc
+neon completion >> ~/.zshrc
 source ~/.zshrc
 ```
 
