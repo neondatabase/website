@@ -24,6 +24,14 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 </DetailIconCards>
 
+## Array functions
+
+<DetailIconCards>
+
+<a href="/docs/functions/array_length" description="Determine the length of an array" icon="app-store">array_length()</a>
+
+</DetailIconCards>
+
 ## Date / Time functions
 
 <DetailIconCards>

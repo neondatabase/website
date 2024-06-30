@@ -42,7 +42,7 @@ Time Travel only allows non-destructive read-only queries. You cannot alter hist
 
 ![time travel error message](/docs/guides/time_travel_error.png 'no-border')
 
-### Time Travel with the SQL editor
+### Time Travel with the SQL Editor
 
 Time Travel in the SQL Editor offers a non-destructive way to explore your database's historical data through read-only queries. By toggling Time Travel in the editor, you switch from querying your current data to querying against a selected point within your history retention window.
 
@@ -92,11 +92,11 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 
    ![time travel selection](/docs/guides/time_travel_restore_select.png 'no-border')
 
-   This makes the selection for Time Travel Assist. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
+   This makes the selection for Time Travel Assist. Notice the updated fields above the SQL Editor show the **branch** and **timestamp** you just selected.
 
    ![Time travel assist](/docs/guides/time_travel_show_selected.png)
 
-1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
+1. Check that you have the right database selected to run your query against. Use the database selector under the SQL Editor to switch to a different database for querying against.
 
    ![time travel select db](/docs/guides/time_travel_db_select.png)
 
