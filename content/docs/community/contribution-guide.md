@@ -435,7 +435,7 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 
 Commands, parameters, values, filenames, error messages, connection strings, and other similar items should be enclosed in backticks. For example:
 
-- "Run the `neonctl projects list` command."
+- "Run the `neon projects list` command."
 
 - "Execute `git clone` to clone a Git repository..."
 

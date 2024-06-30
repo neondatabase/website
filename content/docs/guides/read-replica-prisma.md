@@ -55,7 +55,7 @@ curl --request POST \
 ```
 
 ```bash
-neonctl branches add-compute mybranch --type read_only
+neon branches add-compute mybranch --type read_only
 ```
 
 </CodeTabs>

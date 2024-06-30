@@ -92,7 +92,7 @@ To create a role in the Neon Console:
 The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
 
 ```bash
-neonctl roles create --name <role>
+neon roles create --name <role>
 ```
 
 </TabItem>

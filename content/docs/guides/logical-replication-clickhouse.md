@@ -88,7 +88,7 @@ The role is now created and you are provided with the password for the role, whi
 The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole).
 
 ```bash
-neonctl roles create --name <role>
+neon roles create --name <role>
 ```
 
 </TabItem>

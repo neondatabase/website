@@ -50,7 +50,7 @@ Perform these steps twice, once for your _development_ branch and once for your 
 <TabItem>
 
 ```bash showLineNumbers
-neonctl branches create --name development
+neon branches create --name development
 ```
 
 </TabItem>

@@ -65,13 +65,13 @@ You can use the Neon CLI to:
 Use the `schema-diff` subcommand from the `branches` command:
 
 ```bash
-neonctl branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
+neon branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
 ```
 
 The operation will compare a selected branch (`[compare-source]`) against the latest (head) of your base branch (`[base-branch]`). For example, if you want to compare recent changes you made to your development branch `dev/alex` against your production branch `main`, identify `main` as your base branch and `dev/alex` as your compare-source.
 
 ```bash
-neonctl branches schema-diff main dev/alex
+neon branches schema-diff main dev/alex
 ```
 
 You have a few options here:

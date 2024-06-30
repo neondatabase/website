@@ -129,10 +129,10 @@ You can create and manage branches from the Neon Console, but here we'll use the
    Launches a browser window where you can authorize the Neon CLI to access your Neon account.
 
    ```bash
-   neonctl auth
+   neon auth
    ```
 
-   ![neonctl auth](/docs/get-started-with-neon/neonctl_auth.png 'no-border')
+   ![neon auth](/docs/get-started-with-neon/neonctl_auth.png 'no-border')
 
 1. **Create your development branch**
 
@@ -141,7 +141,7 @@ You can create and manage branches from the Neon Console, but here we'll use the
    Example:
 
    ```branch
-   neonctl branches create --name dev/alex
+   neon branches create --name dev/alex
    ```
 
    The command output provides details about your new branch, including the branch ID, compute endpoint ID, and the connection URI that you can use to connect to this branch's database.
@@ -190,7 +190,7 @@ With `psql` available, let's work from the terminal to connect to your `dev/deve
    Get the connection string to your branch and connect to it directly via `psql`:
 
    ```bash shouldWrap
-   neonctl connection-string dev/developer_name --database-name neondb --psql
+   neon connection-string dev/developer_name --database-name neondb --psql
    ```
 
    This command establishes the psql terminal connection to the `neondb` database on your dev branch.
@@ -273,7 +273,7 @@ Use the following command to reset your `dev/development_name` branch to the sta
 
     Example:
     ```bash
-    neonctl branches reset dev/alex --parent
+    neon branches reset dev/alex --parent
     ```
 
 If you go back to your **Schema Diff** and compare branches again, you'll see they are now identical:

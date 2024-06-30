@@ -8,7 +8,7 @@ updatedOn: '2024-06-20T17:29:55.116Z'
 ## Before you begin
 
 - Before running the `set-context` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
-- If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
+- If you have not authenticated with the [neon auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 ## The `set-context` command
 
@@ -21,13 +21,13 @@ The context remains in place until you reset to a new context or remove the `con
 #### set-context (hidden file)
 
 ```bash
-neonctl set-context [option]
+neon set-context [option]
 ```
 
 #### set-context to context-file
 
 ```bash
-neonctl set-context [option] --context-file <your_context_file>
+neon set-context [option] --context-file <your_context_file>
 ```
 
 #### set-context during project creation
@@ -35,7 +35,7 @@ neonctl set-context [option] --context-file <your_context_file>
 You can also set context for a new project during project creation.
 
 ```bash
-neonctl projects create --name <project_name> --set-context <your_context_file>
+neon projects create --name <project_name> --set-context <your_context_file>
 ```
 
 ### Options
@@ -59,13 +59,13 @@ Here are some examples of setting contexts to specific projects, then using them
 Set the context to the default `.neon` file:
 
 ```bash
-neonctl set-context --project-id patient-frost-50125040
+neon set-context --project-id patient-frost-50125040
 ```
 
 List all branches for this project using `branches list`. You do not need to include `--project-id` even though multiple projects exist for this account:
 
 ```bash
-neonctl branches list
+neon branches list
 ```
 
 The results show details for all branches in the `patient-frost-50125040` project:
@@ -85,13 +85,13 @@ The results show details for all branches in the `patient-frost-50125040` projec
 Set the context to the `context-file` of your choice:
 
 ```bash
-neonctl set-context --project-id plain-waterfall-84865553 --context-file Documents/MyContext
+neon set-context --project-id plain-waterfall-84865553 --context-file Documents/MyContext
 ```
 
 List all branches using the `branches list` command. No need to specify the project since the context file provides it.
 
 ```bash
-neonctl branches list --context-file Documents/MyContext
+neon branches list --context-file Documents/MyContext
 ```
 
 The results show details for all branches in the `plain-waterfall-84865553` project:
@@ -117,7 +117,7 @@ These two `branches list` commands demonstrate the use of different contexts in 
 Let's say you want to create a new project called `MyLatest`. You can automatically set the project ID and default branch ID context at the same time as you create the project.
 
 ```bash
-neonctl projects create --name MyLatest --set-context
+neon projects create --name MyLatest --set-context
 ```
 
 This creates a hidden file with the following context details:

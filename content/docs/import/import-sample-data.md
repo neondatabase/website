@@ -535,19 +535,19 @@ To load sample data:
    - Create a new Neon project, connect to it with `psql`, and run the `.sql` file.
 
      ```bash
-     neonctl projects create --psql -- -f periodic_table.sql
+     neon projects create --psql -- -f periodic_table.sql
      ```
 
    - Create a branch, connect to it with `psql`, and run the an `.sql` file.
 
      ```bash
-     neonctl branches create --psql -- -f periodic_table.sql
+     neon branches create --psql -- -f periodic_table.sql
      ```
 
    - Get a connection string, connect with `psql`, and run the `.sql` file.
 
      ```bash
-     neonctl connection-string --psql -- -f periodic_table.sql
+     neon connection-string --psql -- -f periodic_table.sql
      ```
 
 <NeedHelp/>

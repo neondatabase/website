@@ -45,7 +45,7 @@ You are directed to the **Branches** page where you are shown the details for yo
 You can also create point-in-time branches using the [Neon CLI](/docs/reference/neon-cli). For example, you can perform the same action described above with the following CLI command:
 
 ```bash
-neonctl branches create --name recovery_branch --parent 2023-07-11T10:00:00Z
+neon branches create --name recovery_branch --parent 2023-07-11T10:00:00Z
 ```
 
 The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).

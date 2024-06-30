@@ -55,7 +55,7 @@ You can also create a test branch using the [Neon CLI](/docs/reference/cli-branc
 <CodeTabs labels={["CLI", "API"]}>
 
 ```bash
-neonctl branches create --project-id <project-id> --name my_test_branch
+neon branches create --project-id <project-id> --name my_test_branch
 ```
 
 ```bash
@@ -106,7 +106,7 @@ You can also delete a branch using the [Neon CLI](/docs/reference/cli-branches#d
 <CodeTabs labels={["CLI", "API"]}>
 
 ```bash
-neonctl branches delete my_test_branch
+neon branches delete my_test_branch
 ```
 
 ```bash

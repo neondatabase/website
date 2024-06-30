@@ -60,7 +60,7 @@ Neon supports read replicas that let you instantly scale your application by off
 Create a read replica with the Neon CLI:
 
 ```bash
-neonctl branches create --name my_read_replica_branch --type read_only
+neon branches create --name my_read_replica_branch --type read_only
 ```
 
 To learn more, see [Read replicas](/docs/introduction/read-replicas).

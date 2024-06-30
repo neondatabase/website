@@ -18,7 +18,7 @@ Neon's branching feature lets you branch your data like you branch code. Neon br
 You can build your database branching workflows using the Neon CLI, Neon API, or GitHub Actions. For example, this example shows how to create a development branch from `main` with a simple CLI command:
 
 ```bash
-neonctl branches create --name dev/alex
+neon branches create --name dev/alex
 ```
 
 Neon's copy-on-write technique makes branching instantaneous and cost-efficient. Whether your database is 1 GiB or 1 TiB, [it only takes seconds to create a branch](https://neon.tech/blog/how-to-copy-large-postgres-databases-in-seconds), and Neon's branches are full database copies, not partial or schema-only.
@@ -26,7 +26,7 @@ Neon's copy-on-write technique makes branching instantaneous and cost-efficient.
 Also, with Neon, you can easily keep your development branches up-to-date by resetting your schema and data to the latest from `main` with a simple command.
 
 ```bash
-neonctl branches reset dev/alex --parent
+neon branches reset dev/alex --parent
 ```
 
 No more time-consuming restore operations when you need a fresh database copy.
@@ -93,7 +93,7 @@ Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension for s
   With the [Neon CLI](/docs/reference/neon-cli), you can integrate Neon with development tools and CI/CD pipelines to enhance your development workflows, reducing the friction associated with database-related operations like creating projects, databases, and branches. Once you have your connection string, you can manage your entire Neon database from the command line. This makes it possible to quickly set up deployment pipelines using GitHub Actions, GitLab CI/CD, or Vercel Preview Environments. These operations and pipelines can also be treated as code and live alongside your applications as they evolve and mature.
 
   ```bash
-  neonctl branches create --name dev/alex
+  neon branches create --name dev/alex
   ```
 
 - **Neon API**
