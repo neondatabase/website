@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T11:00:00.000Z'
 ---
 
-The Postgres `now()` function returns the current date and time with time zone. It is an alias for `current_timestamp`.
+The Postgres `now()` function returns the current date and time with timezone. It's an alias for the `current_timestamp()` function.
 
 This function is commonly used for timestamping database entries, calculating time differences, or implementing time-based logic in applications. For instance, you might use it to record when a user creates an account, when an order is placed, or to calculate intervals - like how long ago an event occurred.
 
@@ -16,10 +16,10 @@ This function is commonly used for timestamping database entries, calculating ti
 The `now()` function has a single form:
 
 ```sql
-now() -> timestamp with time zone
+now() -> timestamp with timezone
 ```
 
-This form returns the current timestamp with the time zone at the start of the current transaction.
+This form returns the current timestamp with the timezone at the start of the current transaction.
 
 ## Example usage
 
@@ -179,20 +179,20 @@ This query calculates the age of three users based on their date of birth:
 
 ### Time zone awareness
 
-Like `current_timestamp`, `now()` returns a value in the time zone of the current session. This defaults to the server's time zone unless explicitly set in the session. It's important to keep this in mind when working with timestamps across different time zones.
+Like `current_timestamp`, `now()` returns a value in the timezone of the current session. This defaults to the server's timezone unless explicitly set in the session. It's important to keep this in mind when working with timestamps across different timezones.
 
 ### Difference between `now()` and the keyword `now`
 
-The `now()` function is a built-in function that returns the current timestamp with the time zone. In contrast, the keyword `now` (without parentheses) is a reserved word that is converted to the current timestamp value when first parsed.
+The `now()` function is a built-in function that returns the current timestamp with the timezone. In contrast, the keyword `now` (without parentheses) is a reserved word that is converted to the current timestamp value when first parsed.
 
 It is recommended to use `now()` for clarity and consistency. For example, if the default value for a column is set to `now`, it will be evaluated once when the table is created and reused for all successive records. Whereas, `now()` will be evaluated each time a new row is inserted, which is the typically desired behavior.
 
 ### Alternative functions
 
-- `current_timestamp` - Functionally identical to `now()`.
+- `current_timestamp()` - Functionally identical to `now()`.
 - `transaction_timestamp()` - Returns the current timestamp at the start of the current transaction, also equivalent to `now()`.
 - `statement_timestamp()` - Returns the current timestamp at the start of the current statement.
-- `clock_timestamp()` - Returns the actual current timestamp with time zone, which can change even during a single SQL statement.
+- `clock_timestamp()` - Returns the actual current timestamp with timezone, which can change even during a single SQL statement.
 
 ## Resources
 
