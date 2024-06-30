@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-06-25T10:00:00.000Z'
 ---
 
-The `regexp_match()` function in PostgreSQL is used to extract substrings that match a regular expression pattern from a given string. It returns an array of matching substrings, including capture groups if specified in the pattern.
+The Postgres `regexp_match()` function is used to extract substrings that match a regular expression pattern from a given string. It returns an array of matching substrings, including capture groups if specified in the pattern.
 
 This function is particularly useful for complex string parsing tasks, such as extracting structured information from semi-structured text data. For example, it can be used to parse log files, extract specific components from URLs, or analyze text data for specific patterns.
 
@@ -104,7 +104,7 @@ FROM emails
 WHERE regexp_match(email, '^[^@]+@[^@]+\.(com|org|io)$') IS NOT NULL;
 ```
 
-This query selects all rows from the `emails` table where the email address ends with .com, .org, or .io.
+This query selects all rows from the `emails` table where the email address ends with `.com`, ``.org`, or `.io`.
 
 ```text
         email
@@ -126,7 +126,7 @@ Using `regexp_match()` can be computationally expensive, especially on large dat
 
 ### NULL handling
 
-`regexp_match()` returns NULL if there's no match or if the input string is NULL. This behavior can be useful in WHERE clauses but may require careful handling in SELECT lists.
+`regexp_match()` returns NULL if there's no match or if the input string is NULL. This behavior can be useful in `WHERE` clauses but may require careful handling in  `SELECT` lists.
 
 ### Alternative functions
 
