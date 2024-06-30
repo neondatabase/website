@@ -23,7 +23,7 @@ Community support is provided through the [Neon Discord Server](https://discord.
 
 ## Standard support
 
-Neon's [Launch plan](/docs/introduction/plans#launch) includes Standard support.
+Neon's [Launch plan](/docs/introduction/plans#launch) includes **Standard** support.
 
 Standard support includes access to the Neon Support team via support tickets.
 
