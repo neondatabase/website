@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `current_timestamp()` function in PostgreSQL returns the current date and time with time zone.
+The Postgres `current_timestamp()` function returns the current date and time with timezone. The `now()` function is an alias.
 
 This function is particularly useful for timestamping database entries, calculating time differences, or implementing time-based business logic. For example, you can use it to record the time a user logs in, or when the status of a purchase order changes. Fetching the current time information can also be used to calculate time-based metrics and schedule periodic tasks.
 
@@ -16,13 +16,13 @@ This function is particularly useful for timestamping database entries, calculat
 The `current_timestamp()` function has two forms:
 
 ```sql
-current_timestamp -> timestamp with time zone
+current_timestamp -> timestamp with timezone
 ```
 
-This form returns the current timestamp with time zone at the start of the current transaction. Note that there are no parentheses in this form.
+This form returns the current timestamp with timezone at the start of the current transaction. Note that there are no parentheses in this form.
 
 ```sql
-current_timestamp(precision) -> timestamp with time zone
+current_timestamp(precision) -> timestamp with timezone
 ```
 
 - `precision` (optional): An integer specifying the number of fractional digits in the seconds field. It can range from 0 to 6. If omitted, the result has the full available precision.
@@ -56,7 +56,7 @@ The `SELECT` query retrieves the login record, showing the user ID and the times
 (1 row)
 ```
 
-We can also specify `current_timestamp` as the default value for a timestamp column, when creating the table. For example, consider the query below, where we set up a table to track purchase_orders, and add some records:
+We can also specify `current_timestamp` as the default value for a timestamp column when creating the table. For example, consider the query below, where we set up a table to track purchase orders and add some records:
 
 ```sql
 CREATE TABLE purchase_orders (
@@ -90,7 +90,7 @@ This query retrieves all purchase orders, showing the order ID and the timestamp
 
 ### Use `current_timestamp` to query recent data
 
-We can use `current_timestamp` in a SELECT statement to compare with stored timestamps, and fetch recent records. For example, to retrieve all login records from the past 6 hours, you can use `current_timestamp` in the `WHERE` clause:
+We can use `current_timestamp` in a `SELECT` statement to compare with stored timestamps and fetch recent records. For example, to retrieve all login records from the past 6 hours, you can use `current_timestamp` in the `WHERE` clause:
 
 ```sql
 WITH user_logins(user_id, login_time) AS (
@@ -195,9 +195,9 @@ This query returns the following output, showing the updated content and the upd
 
 ## Additional considerations
 
-### Time zone awareness
+### Timezone awareness
 
-`current_timestamp` returns a value in the time zone of the current session, which defaults to the server's time zone unless explicitly set in the session. This is important to note when working with timestamps across different time zones.
+`current_timestamp` returns a value in the timezone of the current session, which defaults to the server's timezone unless explicitly set in the session. This is important to note when working with timestamps across different timezones.
 
 ### Alternative functions
 
