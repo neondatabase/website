@@ -1,13 +1,13 @@
 ---
 title: Postgres date_trunc() function
-subtitle: Truncate date and time values to specified precision
+subtitle: Truncate date and time values to a specified precision
 enableTableOfContents: true
 updatedOn: '2024-03-04T11:00:00.000Z'
 ---
 
-The `date_trunc()` function in PostgreSQL truncates a timestamp or interval to a specified precision.
+The Postgres `date_trunc()` function truncates a timestamp or interval to a specified precision.
 
-This function is particularly useful for grouping time-series data and performing time-based calculations. For example, it can be used to generate monthly reports, analyze hourly trends, or group events by time periods.
+This function is particularly useful for grouping time-series data and performing time-based calculations. For example, it can be used to generate monthly reports, analyze hourly trends, or group events by time period.
 
 <CTA />
 
@@ -19,11 +19,11 @@ The `date_trunc()` function has the following form:
 date_trunc(field, source [, time_zone ]) -> timestamp / interval
 ```
 
-- `field`: A string literal specifying the precision to which to truncate the input value. Valid values include 'microseconds', 'milliseconds', 'second', 'minute', 'hour', 'day', 'week', 'month', 'quarter', 'year', 'decade', 'century', and 'millennium'.
+- `field`: A string literal specifying the precision to which to truncate the input value. Valid values include `microseconds`, `milliseconds`, `second`, `minute`, `hour`, `day`, `week`, `month`, `quarter`, `year`, `decade`, `century`, and `millennium`.
 - `source`: The timestamp or interval value to be truncated.
-- `time_zone` (optional): The time zone in which to perform the truncation. Otherwise, the default time zone is used.
+- `time_zone` (optional): The timezone in which to perform the truncation. Otherwise, the default timezone is used.
 
-The function returns a timestamp or interval value truncated to the specified precision, i.e. fields less significant than the specified precision are set to zero.
+The function returns a timestamp or interval value truncated to the specified precision, i.e., fields less significant than the specified precision are set to zero.
 
 ## Example usage
 
@@ -123,9 +123,9 @@ This query demonstrates how `date_trunc` works with different precision levels, 
 (3 rows)
 ```
 
-### Use `date_trunc` with time zones
+### Use `date_trunc` with timezones
 
-The `date_trunc` function can be used with specific time zones:
+The `date_trunc` function can be used with specific timezones:
 
 ```sql
 SELECT
@@ -134,7 +134,7 @@ SELECT
   date_trunc('day', '2024-03-15 23:30:00+00'::TIMESTAMP WITH TIME ZONE, 'Asia/Tokyo') AS tokyo_trunc;
 ```
 
-This query shows how `date_trunc` behaves differently when truncating to the day in different time zones.
+This query shows how `date_trunc` behaves differently when truncating to the day in different timezones.
 
 ```text
        utc_trunc        |        ny_trunc        |      tokyo_trunc
@@ -213,9 +213,9 @@ This query truncates the first interval to the nearest hour, while the second co
 
 ## Additional considerations
 
-### Time zone awareness
+### Timezone awareness
 
-When using `date_trunc` with timestamps, the function uses the default time zone of the session, or that specified in the input. As shown in the previous section, the truncation result can vary depending on the time zone.
+When using `date_trunc` with timestamps, the function uses the default timezone of the session, or that specified in the input. As shown in the previous section, the truncation result can vary depending on the timezone.
 
 ### Truncating intervals
 
@@ -238,7 +238,7 @@ This query outputs the following:
 (1 row)
 ```
 
-The first input interval didn't have a month component, so even with number of days being bigger than a month, the output is zero. The second input interval has a month component, so the output is the input interval truncated to the month.
+The first input interval didn't have a month component, so even with the number of days being bigger than a month, the output is zero. The second input interval has a month component, so the output is the input interval truncated to the month.
 
 ### Performance considerations
 

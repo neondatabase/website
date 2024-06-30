@@ -32,7 +32,7 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/current_timestamp" description="Get the current date and time" icon="app-store">current_timestamp</a>
 
-<a href="/docs/functions/date_trunc" description="Truncate date/time values to specified precision" icon="app-store">date_trunc()</a>
+<a href="/docs/functions/date_trunc" description="Truncate date/time values to a specified precision" icon="app-store">date_trunc()</a>
 
 <a href="/docs/functions/extract" description="Extract date and time components from timestamps and intervals" icon="app-store">extract()</a>
 
