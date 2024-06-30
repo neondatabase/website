@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T11:00:00.000Z'
 ---
 
-The `now()` function in PostgreSQL returns the current date and time with time zone. It is an alias for `current_timestamp`.
+The Postgres `now()` function returns the current date and time with time zone. It is an alias for `current_timestamp`.
 
 This function is commonly used for timestamping database entries, calculating time differences, or implementing time-based logic in applications. For instance, you might use it to record when a user creates an account, when an order is placed, or to calculate intervals - like how long ago an event occurred.
 
@@ -19,11 +19,11 @@ The `now()` function has a single form:
 now() -> timestamp with time zone
 ```
 
-This form returns the current timestamp with time zone at the start of the current transaction.
+This form returns the current timestamp with the time zone at the start of the current transaction.
 
 ## Example usage
 
-Let's consider a table called `user_accounts` that tracks user registration information. We can use `now()` to record the exact time a user creates their account.
+Let's consider a `user_accounts` table that tracks user registration information. We can use `now()` to record the exact time a user creates their account.
 
 ```sql
 CREATE TABLE user_accounts (
@@ -85,7 +85,7 @@ FROM projects
 ORDER BY time_remaining;
 ```
 
-This query calculates and displays the remaining time for each project, ordered from the most urgent to the least.
+This query calculates and displays the remaining time for each project, ordered from the most to the least urgent.
 
 ```text
       project_name      |     time_remaining
@@ -150,7 +150,7 @@ This query returns the following output, showing the updated status and the new 
 
 ### Use `now()` in a function for date/time calculations
 
-We can wrap `now()` in a user-defined function to perform more complex date/time calculations. For example, here is a function that calculates the current age of a user.
+We can wrap `now()` in a user-defined function to perform more complex date/time calculations. For example, here's a function that calculates the current age of a user.
 
 ```sql
 CREATE OR REPLACE FUNCTION calculate_age(birth_date DATE)
@@ -183,9 +183,9 @@ Like `current_timestamp`, `now()` returns a value in the time zone of the curren
 
 ### Difference between `now()` and the keyword `now`
 
-The `now()` function is a built-in function that returns the current timestamp with time zone. In contrast, the keyword `now` (without parentheses) is a reserved word that is converted to the current timestamp value when first parsed.
+The `now()` function is a built-in function that returns the current timestamp with the time zone. In contrast, the keyword `now` (without parentheses) is a reserved word that is converted to the current timestamp value when first parsed.
 
-It is recommended to use `now()` for clarity and consistency. For example, if the default value for a column is set to `now`, it will be evaluated once when the table is created and reused for all successive records. Whereasm `now()` will be evaluated each time a new row is inserted, which is the typically desired behavior.
+It is recommended to use `now()` for clarity and consistency. For example, if the default value for a column is set to `now`, it will be evaluated once when the table is created and reused for all successive records. Whereas, `now()` will be evaluated each time a new row is inserted, which is the typically desired behavior.
 
 ### Alternative functions
 
