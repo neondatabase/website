@@ -18,6 +18,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/count" description="Count rows or non-null values in a result set" icon="app-store">count()</a>
 
+<a href="/docs/functions/max" description="Find the maximum value in a set of values" icon="app-store">max()</a>
+
 <a href="/docs/functions/sum" description="Calculate the sum of a set of values" icon="app-store">sum()</a>
 
 </DetailIconCards>

@@ -460,6 +460,8 @@
               slug: functions/avg
             - title: count
               slug: functions/count
+            - title: max
+              slug: functions/max
             - title: sum
               slug: functions/sum
         - title: Date / Time functions
