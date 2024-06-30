@@ -2,7 +2,7 @@
 title: Postgres date_trunc() function
 subtitle: Truncate date and time values to a specified precision
 enableTableOfContents: true
-updatedOn: '2024-03-04T11:00:00.000Z'
+updatedOn: '2024-06-30T15:28:50.890Z'
 ---
 
 The Postgres `date_trunc()` function truncates a timestamp or interval to a specified precision.
