@@ -2,7 +2,7 @@
 title: Postgres max() function
 subtitle: Find the maximum value in a set of values
 enableTableOfContents: true
-updatedOn: '2024-03-04T10:00:00.000Z'
+updatedOn: '2024-06-30T11:39:13.123Z'
 ---
 
 You can use the Postgres `max()` function to find the maximum value in a set of values.
