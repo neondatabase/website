@@ -22,9 +22,11 @@ Get started with commonly-used Postgres data types with Neon's data type guides.
 
 <a href="/docs/data-types/decimal" description="Work with exact numerical values in Postgres" icon="app-store" icon="app-store">Decimal</a>
 
-<a href="/docs/data-types/floating-point" description="Work with float values in PostgreSQL" icon="app-store" icon="app-store">Floating point</a>
+<a href="/docs/data-types/floating-point" description="Work with float values in Postgres" icon="app-store" icon="app-store">Floating point</a>
 
 <a href="/docs/data-types/integer" description="Work with integers in Postgres" icon="app-store" icon="app-store">Integer</a>
+
+<a href="/docs/data-types/tsvector" description="Optimize full-text search in Postgres with the tsvector data type" icon="app-store" icon="app-store">Tsvector</a>
 
 <a href="/docs/data-types/uuid" description="Work with UUIDs in Postgres" icon="app-store" icon="app-store">UUID</a>
 

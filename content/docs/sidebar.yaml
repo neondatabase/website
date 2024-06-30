@@ -418,6 +418,8 @@
           slug: data-types/floating-point
         - title: Integer
           slug: data-types/integer
+        - title: Tsvector
+          slug: data-types/tsvector
         - title: UUID
           slug: data-types/uuid
     - title: Extensions
