@@ -17,12 +17,12 @@ Neon's Community, Standard, Priority, and Enterprise support plans are outlined 
 
 The table below maps our support plans to the corresponding pricing plans, ensuring you choose the right level of support for your needs.
 
-| Support Plan       | Neon Pricing Plan                                                                                  |
-|--------------------|---------------------------------------------------------------------------------------------------|
-| Community          | [Free Tier](/docs/introductions/plans#free-tier)                                                  |
-| Standard           | [Launch Plan](/docs/introductions/plans#launch)                                                   |
-| Priority           | [Scale Plan](/docs/introductions/plans#scale)                                                     |
-| Enterprise         | [Enterprise Plan](/docs/introductions/plans#enterprise)                                           |
+| Support Plan | Neon Pricing Plan                                       |
+| ------------ | ------------------------------------------------------- |
+| Community    | [Free Tier](/docs/introductions/plans#free-tier)        |
+| Standard     | [Launch Plan](/docs/introductions/plans#launch)         |
+| Priority     | [Scale Plan](/docs/introductions/plans#scale)           |
+| Enterprise   | [Enterprise Plan](/docs/introductions/plans#enterprise) |
 
 ## Community support
 
