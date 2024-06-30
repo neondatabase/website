@@ -51,7 +51,7 @@ If you are a Launch, Scale, or Enterprise user and are unable to access the supp
 
 ## Upgrading your support plan
 
-Neon's support plans are mapped to our [pricing plans](/docs/introduction/plans), as outlined in the following table. Upgrading your support plan requires upgrading your pricing plan.
+Neon's support plans are mapped to our [pricing plans](/docs/introduction/plans), as outlined in the following table. Upgrading your support plan requires [upgrading your pricing plan](/docs/introduction/manage-billing#change-your-plan).
 
 | Support plan | Pricing plan                                            |
 | :----------- | :------------------------------------------------------ |

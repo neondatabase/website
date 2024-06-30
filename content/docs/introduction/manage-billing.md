@@ -67,7 +67,7 @@ To download an invoice:
 
 ## Change your plan
 
-To change your plan:
+To upgrade or downgrade your plan:
 
 1. Navigate to the Neon Console.
 1. Select your Profile.
