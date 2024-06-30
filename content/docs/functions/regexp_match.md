@@ -126,7 +126,7 @@ Using `regexp_match()` can be computationally expensive, especially on large dat
 
 ### NULL handling
 
-`regexp_match()` returns NULL if there's no match or if the input string is NULL. This behavior can be useful in `WHERE` clauses but may require careful handling in  `SELECT` lists.
+`regexp_match()` returns NULL if there's no match or if the input string is NULL. This behavior can be useful in `WHERE` clauses but may require careful handling in `SELECT` lists.
 
 ### Alternative functions
 
