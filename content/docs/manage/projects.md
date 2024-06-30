@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2024-06-21T14:17:23.477Z'
+updatedOn: '2024-06-30T14:35:12.891Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [tier limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Tier limits you to one project per Neon account.
@@ -223,7 +223,7 @@ To configure an allowlist:
 The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
 
 ```bash
-neonctl ip-allow add 203.0.113.0 203.0.113.1
+neon ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
 │ Id                  │ Name                │ IP Addresses │ default branch Only │
 ├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
@@ -235,13 +235,13 @@ neonctl ip-allow add 203.0.113.0 203.0.113.1
 To apply an IP allowlist to the default branch only, use the you can `--primary-only` option:
 
 ```bash
-neonctl ip-allow add 203.0.113.1 --primary-only
+neon ip-allow add 203.0.113.1 --primary-only
 ```
 
 To reverse that setting, use `--primary-only false`.
 
 ```bash
-neonctl ip-allow add 203.0.113.1 --primary-only false
+neon ip-allow add 203.0.113.1 --primary-only false
 ```
 
 </TabItem>
@@ -342,7 +342,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports removing an IP Allow configuration. To do so, specify `--ip-allow reset` without specifying any IP address values:
 
 ```bash
-neonctl ip-allow reset
+neon ip-allow reset
 ```
 
 </TabItem>

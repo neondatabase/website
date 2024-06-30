@@ -3,7 +3,7 @@ title: Schema diff tutorial
 subtitle: Step-by-step guide showing you how to compare two development branches using
   Schema Diff
 enableTableOfContents: true
-updatedOn: '2024-06-20T17:29:55.107Z'
+updatedOn: '2024-06-30T14:35:12.888Z'
 ---
 
 In this guide we will create an initial schema on a new database called `people` on our `main` branch. We'll then create a development branch called `dev/jordan`, following our recommended convention for naming development branches. After making schema changes on `dev/jordan`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, Github-style visual comparison between the `dev/jordan` development branch and `main`.
@@ -51,14 +51,14 @@ First, create a new database called `people` on the `main` branch and add some s
    Use the following CLI command to create the `people` database.
 
    ```bash
-   neonctl databases create --name people
+   neon databases create --name people
    ```
 
    <Admonition type="note">
    If you have multiple projects, include `--project-id`. Or set the project context so you don't have to specify project id in every command. Example:
 
    ```bash
-   neonctl set-context --project-id empty-glade-66712572
+   neon set-context --project-id empty-glade-66712572
    ```
 
    You can find your project ID on the **Project settings** page in the Neon Console.
@@ -68,7 +68,7 @@ First, create a new database called `people` on the `main` branch and add some s
 1. Copy your connection string:
 
    ```bash
-   neonctl connection-string --database-name people
+   neon connection-string --database-name people
    ```
 
 1. Connect to the `people` database with psql:
@@ -124,7 +124,7 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
    Using the Neon CLI, create the development branch. Include `--project-id` if you have multiple projects.
 
    ```bash
-   neonctl branches create --name dev/jordan --parent main
+   neon branches create --name dev/jordan --parent main
    ```
 
 1. Verify the schema
@@ -134,7 +134,7 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
    1. Get the connection string for the `people` database on branch `dev/jordan` using the CLI.
 
       ```bash
-      neonctl connection-string dev/jordan --database-name people
+      neon connection-string dev/jordan --database-name people
       ```
 
       This gives you the connection string which you can then copy.
@@ -206,7 +206,7 @@ CREATE TABLE address (
    By adding `--psql` to the CLI command, you can start the `psql` connection without having to enter the connection string directly:
 
    ```bash
-   neonctl connection-string dev/jordan --database-name people --psql
+   neon connection-string dev/jordan --database-name people --psql
    ```
 
    Response:
@@ -264,7 +264,7 @@ You can also launch Schema Diff from the **Restore** page, usually as part of ve
 Compare the schema of `dev/jordan` to its parent branch using the `schema-diff` command.
 
 ```bash
-neonctl branches schema-diff main dev/jordan --database people
+neon branches schema-diff main dev/jordan --database people
 ```
 
 The result shows a comparison between the `dev/jordan` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added in the `dev/jordan` branch but are not present in its parent branch `main`.
