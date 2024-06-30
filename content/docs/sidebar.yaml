@@ -532,6 +532,8 @@
               slug: functions/substring
             - title: regexp_match
               slug: functions/regexp_match
+            - title: regexp_replace
+              slug: functions/regexp_replace
             - title: trim
               slug: functions/trim
         - title: Math functions
