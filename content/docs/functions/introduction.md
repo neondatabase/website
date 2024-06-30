@@ -28,7 +28,7 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <DetailIconCards>
 
-<a href="/docs/functions/array_length" description="Calculate the length of an array" icon="app-store">array_length()</a>
+<a href="/docs/functions/array_length" description="Determine the length of an array" icon="app-store">array_length()</a>
 
 </DetailIconCards>
 
