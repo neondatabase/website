@@ -453,30 +453,37 @@ Now, update the view in `resources/views/livewire/post-list.blade.php` to displa
 
 ```html
 <div>
-    <div class="mb-4">
-        <input wire:model.live.debounce.300ms="search" type="text" placeholder="Search posts..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-    </div>
+  <div class="mb-4">
+    <input
+      wire:model.live.debounce.300ms="search"
+      type="text"
+      placeholder="Search posts..."
+      class="focus:ring-blue-500 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2"
+    />
+  </div>
 
-    <div class="space-y-4">
-        @foreach($posts as $post)
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-bold mb-2">
-                    <a href="{{ route('posts.show', $post) }}" class="text-blue-600 hover:text-blue-800">{{ $post->title }}</a>
-                </h2>
-                <p class="text-gray-600 mb-2">By {{ $post->user->name }} on {{ $post->published_at }}</p>
-                <p class="text-gray-700 mb-4">{{ Str::limit($post->content, 200) }}</p>
-                <div class="flex flex-wrap gap-2">
-                    @foreach($post->tags as $tag)
-                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $tag->name }}</span>
-                    @endforeach
-                </div>
-            </div>
+  <div class="space-y-4">
+    @foreach($posts as $post)
+    <div class="rounded-lg bg-white p-6 shadow-md">
+      <h2 class="mb-2 text-2xl font-bold">
+        <a href="{{ route('posts.show', $post) }}" class="text-blue-600 hover:text-blue-800"
+          >{{ $post->title }}</a
+        >
+      </h2>
+      <p class="text-gray-600 mb-2">By {{ $post->user->name }} on {{ $post->published_at }}</p>
+      <p class="text-gray-700 mb-4">{{ Str::limit($post->content, 200) }}</p>
+      <div class="flex flex-wrap gap-2">
+        @foreach($post->tags as $tag)
+        <span class="bg-blue-100 text-blue-800 rounded px-2.5 py-0.5 text-xs font-semibold"
+          >{{ $tag->name }}</span
+        >
         @endforeach
+      </div>
     </div>
+    @endforeach
+  </div>
 
-    <div class="mt-4">
-        {{ $posts->links() }}
-    </div>
+  <div class="mt-4">{{ $posts->links() }}</div>
 </div>
 ```
 
@@ -562,6 +569,7 @@ class PostForm extends Component
 ```
 
 Rundown of the methods in the `PostForm` component:
+
 - The `mount` method is used to set the initial values for the form fields when editing a post. The post data is passed to the component as a parameter.
 - The `save` method is called when the form is submitted. It validates the form fields, creates a new post or updates an existing one, and redirects to the post detail page.
 - The `render` method fetches all tags from the database and passes them to the view.
@@ -571,37 +579,57 @@ After that, update the `resources/views/livewire/post-form.blade.php` view to di
 
 ```html
 <div>
-    <form wire:submit.prevent="save">
-        <div class="mb-4">
-            <label for="title" class="block text-gray-700 font-bold mb-2">Title</label>
-            <input wire:model="title" type="text" id="title" class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" required>
-            @error('title') <span class="text-red-500">{{ $message }}</span> @enderror
-        </div>
+  <form wire:submit.prevent="save">
+    <div class="mb-4">
+      <label for="title" class="text-gray-700 mb-2 block font-bold">Title</label>
+      <input
+        wire:model="title"
+        type="text"
+        id="title"
+        class="text-gray-700 w-full rounded-lg border px-3 py-2 focus:outline-none"
+        required
+      />
+      @error('title') <span class="text-red-500">{{ $message }}</span> @enderror
+    </div>
 
-        <div class="mb-4">
-            <label for="content" class="block text-gray-700 font-bold mb-2">Content</label>
-            <textarea wire:model="content" id="content" rows="6" class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" required></textarea>
-            @error('content') <span class="text-red-500">{{ $message }}</span> @enderror
-        </div>
+    <div class="mb-4">
+      <label for="content" class="text-gray-700 mb-2 block font-bold">Content</label>
+      <textarea
+        wire:model="content"
+        id="content"
+        rows="6"
+        class="text-gray-700 w-full rounded-lg border px-3 py-2 focus:outline-none"
+        required
+      ></textarea>
+      @error('content') <span class="text-red-500">{{ $message }}</span> @enderror
+    </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Tags</label>
-            <div class="flex flex-wrap gap-2">
-                @foreach($allTags as $tag)
-                    <label class="inline-flex items-center">
-                        <input type="checkbox" wire:model="selectedTags" value="{{ $tag->id }}" class="form-checkbox h-5 w-5 text-blue-600">
-                        <span class="ml-2 text-gray-700">{{ $tag->name }}</span>
-                    </label>
-                @endforeach
-            </div>
-        </div>
+    <div class="mb-4">
+      <label class="text-gray-700 mb-2 block font-bold">Tags</label>
+      <div class="flex flex-wrap gap-2">
+        @foreach($allTags as $tag)
+        <label class="inline-flex items-center">
+          <input
+            type="checkbox"
+            wire:model="selectedTags"
+            value="{{ $tag->id }}"
+            class="form-checkbox text-blue-600 h-5 w-5"
+          />
+          <span class="text-gray-700 ml-2">{{ $tag->name }}</span>
+        </label>
+        @endforeach
+      </div>
+    </div>
 
-        <div>
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                {{ $post ? 'Update Post' : 'Create Post' }}
-            </button>
-        </div>
-    </form>
+    <div>
+      <button
+        type="submit"
+        class="bg-blue-500 hover:bg-blue-700 rounded px-4 py-2 font-bold text-white"
+      >
+        {{ $post ? 'Update Post' : 'Create Post' }}
+      </button>
+    </div>
+  </form>
 </div>
 ```
 
@@ -687,21 +715,17 @@ Let's start by creating a `resources/views/posts/index.blade.php` view to displa
 
 ```html
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Blog Posts') }}
-        </h2>
-    </x-slot>
+  <x-slot name="header">
+    <h2 class="text-gray-800 text-xl font-semibold leading-tight">{{ __('Blog Posts') }}</h2>
+  </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    @livewire('post-list')
-                </div>
-            </div>
-        </div>
+  <div class="py-12">
+    <div class="mx-auto max-w-7xl lg:px-8 sm:px-6">
+      <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+        <div class="border-gray-200 border-b bg-white p-6">@livewire('post-list')</div>
+      </div>
     </div>
+  </div>
 </x-app-layout>
 ```
 
@@ -711,33 +735,35 @@ Next, create the `resources/views/posts/show.blade.php` view to display a single
 
 ```html
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $post->title }}
-        </h2>
-    </x-slot>
+  <x-slot name="header">
+    <h2 class="text-gray-800 text-xl font-semibold leading-tight">{{ $post->title }}</h2>
+  </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <h1 class="text-3xl font-bold mb-4">{{ $post->title }}</h1>
-                    <p class="text-gray-600 mb-4">By {{ $post->user->name }} on {{ $post->published_at }}</p>
-                    <div class="prose max-w-none mb-6">
-                        {!! nl2br(e($post->content)) !!}
-                    </div>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        @foreach($post->tags as $tag)
-                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $tag->name }}</span>
-                        @endforeach
-                    </div>
-                    @can('update', $post)
-                        <a href="{{ route('posts.edit', $post) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit Post</a>
-                    @endcan
-                </div>
-            </div>
+  <div class="py-12">
+    <div class="mx-auto max-w-7xl lg:px-8 sm:px-6">
+      <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+        <div class="border-gray-200 border-b bg-white p-6">
+          <h1 class="mb-4 text-3xl font-bold">{{ $post->title }}</h1>
+          <p class="text-gray-600 mb-4">By {{ $post->user->name }} on {{ $post->published_at }}</p>
+          <div class="prose mb-6 max-w-none">{!! nl2br(e($post->content)) !!}</div>
+          <div class="mb-6 flex flex-wrap gap-2">
+            @foreach($post->tags as $tag)
+            <span class="bg-blue-100 text-blue-800 rounded px-2.5 py-0.5 text-xs font-semibold"
+              >{{ $tag->name }}</span
+            >
+            @endforeach
+          </div>
+          @can('update', $post)
+          <a
+            href="{{ route('posts.edit', $post) }}"
+            class="bg-blue-500 hover:bg-blue-700 rounded px-4 py-2 font-bold text-white"
+            >Edit Post</a
+          >
+          @endcan
         </div>
+      </div>
     </div>
+  </div>
 </x-app-layout>
 ```
 
@@ -749,21 +775,17 @@ Create the `resources/views/posts/create.blade.php` view with the following cont
 
 ```html
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create New Post') }}
-        </h2>
-    </x-slot>
+  <x-slot name="header">
+    <h2 class="text-gray-800 text-xl font-semibold leading-tight">{{ __('Create New Post') }}</h2>
+  </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    @livewire('post-form')
-                </div>
-            </div>
-        </div>
+  <div class="py-12">
+    <div class="mx-auto max-w-7xl lg:px-8 sm:px-6">
+      <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+        <div class="border-gray-200 border-b bg-white p-6">@livewire('post-form')</div>
+      </div>
     </div>
+  </div>
 </x-app-layout>
 ```
 
@@ -773,21 +795,19 @@ With the same structure, create the `resources/views/posts/edit.blade.php` view:
 
 ```html
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Post') }}
-        </h2>
-    </x-slot>
+  <x-slot name="header">
+    <h2 class="text-gray-800 text-xl font-semibold leading-tight">{{ __('Edit Post') }}</h2>
+  </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    @livewire('post-form', ['post' => $post])
-                </div>
-            </div>
+  <div class="py-12">
+    <div class="mx-auto max-w-7xl lg:px-8 sm:px-6">
+      <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+        <div class="border-gray-200 border-b bg-white p-6">
+          @livewire('post-form', ['post' => $post])
         </div>
+      </div>
     </div>
+  </div>
 </x-app-layout>
 ```
 
@@ -904,33 +924,46 @@ Next, update the view in `resources/views/livewire/comment-section.blade.php` to
 
 ```html
 <div>
-    <h3 class="text-2xl font-bold mb-4">Comments</h3>
+  <h3 class="mb-4 text-2xl font-bold">Comments</h3>
 
-    @foreach($post->comments as $comment)
-        <div class="bg-gray-100 p-4 rounded-lg mb-4">
-            <p class="text-gray-800">{{ $comment->content }}</p>
-            <p class="text-gray-600 text-sm mt-2">
-                By {{ $comment->user->name }} on {{ $comment->created_at }}
-                @if($comment->user_id === auth()->id())
-                    | <button wire:click="deleteComment({{ $comment->id }})" class="text-red-500 hover:underline">Delete</button>
-                @endif
-        </div>
-    @endforeach
-
-    @auth
-        <form wire:submit.prevent="addComment" class="mt-6">
-            <div class="mb-4">
-                <label for="newComment" class="block text-gray-700 font-bold mb-2">Add a comment</label>
-                <textarea wire:model="newComment" id="newComment" rows="3" class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" required></textarea>
-                @error('newComment') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Post Comment
-            </button>
-        </form>
-    @else
-        <p class="mt-6 text-gray-600">Please <a href="{{ route('login') }}" class="text-blue-500 hover:underline">log in</a> to leave a comment.</p>
-    @endauth
+  @foreach($post->comments as $comment)
+  <div class="bg-gray-100 mb-4 rounded-lg p-4">
+    <p class="text-gray-800">{{ $comment->content }}</p>
+    <p class="text-gray-600 mt-2 text-sm">
+      By {{ $comment->user->name }} on {{ $comment->created_at }} @if($comment->user_id ===
+      auth()->id()) |
+      <button wire:click="deleteComment({{ $comment->id }})" class="text-red-500 hover:underline">
+        Delete
+      </button>
+      @endif
+    </p>
+  </div>
+  @endforeach @auth
+  <form wire:submit.prevent="addComment" class="mt-6">
+    <div class="mb-4">
+      <label for="newComment" class="text-gray-700 mb-2 block font-bold">Add a comment</label>
+      <textarea
+        wire:model="newComment"
+        id="newComment"
+        rows="3"
+        class="text-gray-700 w-full rounded-lg border px-3 py-2 focus:outline-none"
+        required
+      ></textarea>
+      @error('newComment') <span class="text-red-500">{{ $message }}</span> @enderror
+    </div>
+    <button
+      type="submit"
+      class="bg-blue-500 hover:bg-blue-700 rounded px-4 py-2 font-bold text-white"
+    >
+      Post Comment
+    </button>
+  </form>
+  @else
+  <p class="text-gray-600 mt-6">
+    Please <a href="{{ route('login') }}" class="text-blue-500 hover:underline">log in</a> to leave
+    a comment.
+  </p>
+  @endauth
 </div>
 ```
 
@@ -938,9 +971,7 @@ After that, go back to the `resources/views/posts/show.blade.php` view and updat
 
 ```html
 <!-- Add this after the post content -->
-<div class="mt-8">
-    @livewire('comment-section', ['post' => $post])
-</div>
+<div class="mt-8">@livewire('comment-section', ['post' => $post])</div>
 ```
 
 ### Adding Navigation Links
@@ -952,10 +983,10 @@ Update the existing `resources/views/layouts/navigation.blade.php` view to inclu
 ```html
 <!-- Add this inside the navigation menu -->
 <x-nav-link :href="route('posts.create')" :active="request()->routeIs('posts.create')">
-    {{ __('Create Post') }}
+  {{ __('Create Post') }}
 </x-nav-link>
 <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
-    {{ __('Blog') }}
+  {{ __('Blog') }}
 </x-nav-link>
 ```
 

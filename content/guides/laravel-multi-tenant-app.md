@@ -262,6 +262,7 @@ class TenantController extends Controller
 This controller handles tenant registration, creates a new tenant in the database, and sets up the tenant's domain. The `TenancyServiceProvider` will automatically map the tenancy events to the listener, which will create the tenant's database and run the tenant-specific migrations inside the `database/migrations/tenant` directory for the new tenant.
 
 In a nutshell, the controller has three methods:
+
 - `showRegistrationForm()`: Displays the tenant registration form
 - `register()`: Registers a new tenant, which creates a new tenant record and domain
 - `registered()`: Displays a success message after registration
@@ -282,22 +283,27 @@ Create the corresponding views for tenant registration starting by creating the 
 
 ```html
 <x-guest-layout>
-    <form method="POST" action="{{ route('tenant.register') }}">
-        @csrf
-        <div class="mt-4">
-            <x-input-label for="domain" :value="__('Subdomain')" />
-            <div class="flex">
-                <x-text-input id="domain" class="block mt-1 w-full" type="text" name="domain" :value="old('domain')" required />
-                <span class="mt-1 ml-2 text-gray-600">.example.com</span>
-            </div>
-        </div>
+  <form method="POST" action="{{ route('tenant.register') }}">
+    @csrf
+    <div class="mt-4">
+      <x-input-label for="domain" :value="__('Subdomain')" />
+      <div class="flex">
+        <x-text-input
+          id="domain"
+          class="mt-1 block w-full"
+          type="text"
+          name="domain"
+          :value="old('domain')"
+          required
+        />
+        <span class="text-gray-600 ml-2 mt-1">.example.com</span>
+      </div>
+    </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button class="ml-4">
-                {{ __('Register Tenant') }}
-            </x-primary-button>
-        </div>
-    </form>
+    <div class="mt-4 flex items-center justify-end">
+      <x-primary-button class="ml-4"> {{ __('Register Tenant') }} </x-primary-button>
+    </div>
+  </form>
 </x-guest-layout>
 ```
 
@@ -305,15 +311,21 @@ Then create the `resources/views/tenant/registered.blade.php` file to display th
 
 ```html
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Your tenant has been registered successfully!') }}
-    </div>
+  <div class="text-gray-600 mb-4 text-sm">
+    {{ __('Your tenant has been registered successfully!') }}
+  </div>
 
-    <div class="mt-4 flex items-center justify-between">
-        <div>
-            Your tenant URL: <a href="https://{{ $domain }}.example.com" class="underline text-sm text-gray-600 hover:text-gray-900" target="_blank">https://{{ $domain }}.example.com</a>
-        </div>
+  <div class="mt-4 flex items-center justify-between">
+    <div>
+      Your tenant URL:
+      <a
+        href="https://{{ $domain }}.example.com"
+        class="text-gray-600 hover:text-gray-900 text-sm underline"
+        target="_blank"
+        >https://{{ $domain }}.example.com</a
+      >
     </div>
+  </div>
 </x-guest-layout>
 ```
 
@@ -426,35 +438,64 @@ Create the onboarding view in `resources/views/tenant/onboarding.blade.php`:
 
 ```html
 <x-guest-layout>
-    <form method="POST" action="{{ route('tenant.onboarding.store') }}">
-        @csrf
+  <form method="POST" action="{{ route('tenant.onboarding.store') }}">
+    @csrf
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-        </div>
+    <div>
+      <x-input-label for="name" :value="__('Name')" />
+      <x-text-input
+        id="name"
+        class="mt-1 block w-full"
+        type="text"
+        name="name"
+        :value="old('name')"
+        required
+        autofocus
+        autocomplete="name"
+      />
+    </div>
 
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-        </div>
+    <div class="mt-4">
+      <x-input-label for="email" :value="__('Email')" />
+      <x-text-input
+        id="email"
+        class="mt-1 block w-full"
+        type="email"
+        name="email"
+        :value="old('email')"
+        required
+        autocomplete="username"
+      />
+    </div>
 
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-        </div>
+    <div class="mt-4">
+      <x-input-label for="password" :value="__('Password')" />
+      <x-text-input
+        id="password"
+        class="mt-1 block w-full"
+        type="password"
+        name="password"
+        required
+        autocomplete="new-password"
+      />
+    </div>
 
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-        </div>
+    <div class="mt-4">
+      <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+      <x-text-input
+        id="password_confirmation"
+        class="mt-1 block w-full"
+        type="password"
+        name="password_confirmation"
+        required
+        autocomplete="new-password"
+      />
+    </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button class="ml-4">
-                {{ __('Complete Setup') }}
-            </x-primary-button>
-        </div>
-    </form>
+    <div class="mt-4 flex items-center justify-end">
+      <x-primary-button class="ml-4"> {{ __('Complete Setup') }} </x-primary-button>
+    </div>
+  </form>
 </x-guest-layout>
 ```
 
@@ -493,21 +534,17 @@ Create the dashboard view in `resources/views/tenant/dashboard.blade.php`:
 
 ```html
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+  <x-slot name="header">
+    <h2 class="text-gray-800 text-xl font-semibold leading-tight">{{ __('Dashboard') }}</h2>
+  </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
+  <div class="py-12">
+    <div class="mx-auto max-w-7xl lg:px-8 sm:px-6">
+      <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+        <div class="text-gray-900 p-6">{{ __("You're logged in!") }}</div>
+      </div>
     </div>
+  </div>
 </x-app-layout>
 ```
 

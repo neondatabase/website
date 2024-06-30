@@ -213,6 +213,7 @@ class AuthController extends Controller
 ```
 
 Rundown of the methods in the `AuthController`:
+
 - `register`: Handles user registration. Validates the request data, creates a new user, and returns an access token.
 - `login`: Handles user login. Validates the request data, checks the user credentials, and returns an access token.
 - `logout`: Logs out the authenticated user by deleting the current access token.
@@ -299,8 +300,8 @@ The response should include an access token like this:
 
 ```json
 {
-    "access_token": "1|eyJ...your_access_token_here",
-    "token_type": "Bearer"
+  "access_token": "1|eyJ...your_access_token_here",
+  "token_type": "Bearer"
 }
 ```
 
@@ -319,8 +320,8 @@ This will return another access token:
 
 ```json
 {
-    "access_token": "1|eyJ...your_new_access_token_here",
-    "token_type": "Bearer"
+  "access_token": "1|eyJ...your_new_access_token_here",
+  "token_type": "Bearer"
 }
 ```
 
@@ -335,7 +336,7 @@ Replace `<your_access_token_here>` with the access token you received during log
 
 ```json
 {
-    "message": "Logged out successfully"
+  "message": "Logged out successfully"
 }
 ```
 
@@ -419,6 +420,7 @@ class TaskController extends Controller
 > Note: We'll create the `TaskResource` class later to transform the task model into a JSON response.
 
 Rundown of the methods in the `TaskController`:
+
 - `index`: Fetches all tasks. Returns a JSON response with all tasks. We'll update this method to use API Resources later.
 - `store`: Creates a new task. Validates the request data, creates a new task, and returns the task as JSON.
 - `show`: Fetches a single task. Returns a JSON response with the specified task.
@@ -575,14 +577,14 @@ As a response, you should see the newly created task:
 
 ```json
 {
-    "id": 1,
-    "title": "New Task",
-    "description": "Task description",
-    "status": "pending",
-    "due_date": "2024-12-31",
-    "priority": 2,
-    "created_at": "2024-07-01T00:00:00.000000Z",
-    "updated_at": "2024-07-01T00:00:00.000000Z"
+  "id": 1,
+  "title": "New Task",
+  "description": "Task description",
+  "status": "pending",
+  "due_date": "2024-12-31",
+  "priority": 2,
+  "created_at": "2024-07-01T00:00:00.000000Z",
+  "updated_at": "2024-07-01T00:00:00.000000Z"
 }
 ```
 

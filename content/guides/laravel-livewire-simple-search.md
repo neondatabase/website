@@ -60,16 +60,12 @@ Update your `tailwind.config.js` file to include Laravel and Livewire specific p
 ```javascript
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./resources/**/*.vue",
-  ],
+  content: ['./resources/**/*.blade.php', './resources/**/*.js', './resources/**/*.vue'],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
 ```
 
 The above configuration tells Tailwind to scan the specified files in the `resources` directory for classes to include in the compiled CSS.
@@ -226,6 +222,7 @@ php artisan make:livewire ProductSearch
 ```
 
 This command creates two files:
+
 - `app/Livewire/ProductSearch.php`: The Livewire component class, which contains the search logic.
 - `resources/views/livewire/product-search.blade.php`: The view file for the Livewire component.
 
@@ -257,6 +254,7 @@ class ProductSearch extends Component
 ```
 
 Rundown of the code above:
+
 - We start by defining a `$search` property that will be bound to the search input, and a `render` method that fetches products based on the search query.
 - The `render` method queries the `products` table for records that match the search query in the `name` or `description` columns.
 - We're using a simple `ILIKE` query to perform a case-insensitive search. You can customize the search logic based on your requirements.
@@ -267,24 +265,28 @@ Once you've updated the component class, let's create the view for this componen
 
 ```html
 <div>
-    <div class="mb-4">
-        <input wire:model.live.debounce.300ms="search" type="text" placeholder="Search products..."
-               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-    </div>
+  <div class="mb-4">
+    <input
+      wire:model.live.debounce.300ms="search"
+      type="text"
+      placeholder="Search products..."
+      class="focus:ring-blue-500 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2"
+    />
+  </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        @forelse($products as $product)
-            <div class="bg-white p-4 rounded-lg shadow transition duration-300 ease-in-out transform hover:scale-105">
-                <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
-                <p class="text-gray-600">{{ $product->description }}</p>
-                <p class="text-blue-600 font-bold mt-2">${{ number_format($product->price, 2) }}</p>
-            </div>
-        @empty
-            <div class="bg-white p-4 rounded-lg shadow text-center">
-                No products found.
-            </div>
-        @endforelse
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 md:grid-cols-2">
+    @forelse($products as $product)
+    <div
+      class="transform rounded-lg bg-white p-4 shadow transition duration-300 ease-in-out hover:scale-105"
+    >
+      <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
+      <p class="text-gray-600">{{ $product->description }}</p>
+      <p class="text-blue-600 mt-2 font-bold">${{ number_format($product->price, 2) }}</p>
     </div>
+    @empty
+    <div class="rounded-lg bg-white p-4 text-center shadow">No products found.</div>
+    @endforelse
+  </div>
 </div>
 ```
 
@@ -299,24 +301,22 @@ Using the `@forelse` directive, we loop through the `$products` collection and d
 To use our new component, let's update the main layout. Open `resources/views/welcome.blade.php` and replace its content with:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Real-Time Search</title>
-    @vite('resources/css/app.css')
-    @livewireStyles
-</head>
-<body class="bg-gray-100">
+    @vite('resources/css/app.css') @livewireStyles
+  </head>
+  <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-8 text-center">Real-Time Product Search</h1>
-        @livewire('product-search')
+      <h1 class="mb-8 text-center text-3xl font-bold">Real-Time Product Search</h1>
+      @livewire('product-search')
     </div>
 
-    @livewireScripts
-    @vite('resources/js/app.js')
-</body>
+    @livewireScripts @vite('resources/js/app.js')
+  </body>
 </html>
 ```
 
