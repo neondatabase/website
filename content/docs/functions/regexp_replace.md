@@ -2,7 +2,7 @@
 title: Postgres regexp_replace() function
 subtitle: Replace substrings matching a regular expression pattern
 enableTableOfContents: true
-updatedOn: '2024-03-04T10:00:00.000Z'
+updatedOn: '2024-06-30T16:56:43.860Z'
 ---
 
 The Postgres `regexp_replace()` function replaces substrings that match a regular expression pattern with the specified replacement string.
