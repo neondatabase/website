@@ -3,7 +3,7 @@ title: Replicate data to a ClickHouse database on DoubleCloud
 subtitle: Learn how to replicate data from Neon to a ClickHouse database on DoubleCloud
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-14T07:55:54.397Z'
+updatedOn: '2024-06-30T14:35:12.884Z'
 ---
 
 <LRNotice/>
@@ -88,7 +88,7 @@ The role is now created and you are provided with the password for the role, whi
 The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole).
 
 ```bash
-neonctl roles create --name <role>
+neon roles create --name <role>
 ```
 
 </TabItem>
