@@ -104,7 +104,7 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/regexp_match" description="Extract substrings matching a regular expression pattern" icon="app-store">regexp_match()</a>
 
-<a href="/docs/functions/regexp_replace" description="Replace substrings using regular expressions" icon="app-store">regexp_replace()</a>
+<a href="/docs/functions/regexp_replace" description="Replace substrings matching a regular expression pattern" icon="app-store">regexp_replace()</a>
 
 <a href="/docs/functions/trim" description="Remove leading and trailing characters from a string" icon="app-store">trim()</a>
 

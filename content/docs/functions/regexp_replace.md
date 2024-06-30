@@ -1,6 +1,6 @@
 ---
 title: Postgres regexp_replace() function
-subtitle: Replace substrings using regular expressions
+subtitle: Replace substrings matching a regular expression pattern
 enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
