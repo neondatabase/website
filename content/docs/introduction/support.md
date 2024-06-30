@@ -15,6 +15,15 @@ Neon's Community, Standard, Priority, and Enterprise support plans are outlined 
 | Dedicated Customer Success Team |     -     |    -     |          |  &check;   |
 | SLAs                            |     -     |    -     |          |  &check;   |
 
+The table below maps our support plans to the corresponding pricing plans, ensuring you choose the right level of support for your needs.
+
+| Support Plan       | Neon Pricing Plan                                                                                  |
+|--------------------|---------------------------------------------------------------------------------------------------|
+| Community          | [Free Tier](/docs/introductions/plans#free-tier)                                                  |
+| Standard           | [Launch Plan](/docs/introductions/plans#launch)                                                   |
+| Priority           | [Scale Plan](/docs/introductions/plans#scale)                                                     |
+| Enterprise         | [Enterprise Plan](/docs/introductions/plans#enterprise)                                           |
+
 ## Community support
 
 Community support is provided through the [Neon Discord Server](https://discord.gg/92vNTzKDGp), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged in our Discord Server.
