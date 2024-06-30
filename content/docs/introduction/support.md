@@ -17,7 +17,7 @@ Neon's Community, Standard, Priority, and Enterprise support plans are outlined 
 
 ## Community support
 
-Neon's [Free Tier](/docs/introduction/plans#free-tier) includes Community support.
+Neon's [Free Tier](/docs/introduction/plans#free-tier) includes **Community** support.
 
 Community support is provided through the [Neon Discord Server](https://discord.gg/92vNTzKDGp), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged in our Discord Server.
 
@@ -35,13 +35,13 @@ You can expect an initial response time of 2 business days, from 6am to 6pm Paci
 
 ## Priority support
 
-Neon's [Scale plan](/docs/introduction/plans#scale) includes Priority support.
+Neon's [Scale plan](/docs/introduction/plans#scale) includes **Priority** support.
 
 With Priority support, your support tickets are given priority by the Neon Support team and you can request a video chat. Requests for video chat should be submitted via a support ticket.
 
 ## Enterprise support
 
-Neon's [Enterprise plan](/docs/introduction/plans#launch) includes Enterprise support.
+Neon's [Enterprise plan](/docs/introduction/plans#launch) includes **Enterprise** support.
 
 With Enterprise support, you have everything offered with the Priority plan plus dedicated Customer Success Team support, and SLAs.
 
