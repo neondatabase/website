@@ -470,6 +470,8 @@
               slug: functions/age
             - title: current_timestamp
               slug: functions/current_timestamp
+            - title: date_trunc
+              slug: functions/date_trunc
             - title: extract
               slug: functions/extract
             - title: now
