@@ -5,9 +5,9 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `regexp_replace()` function in PostgreSQL is used to replace substrings that match a regular expression pattern with the specified replacement string.
+The Postgres `regexp_replace()` function replaces substrings that match a regular expression pattern with the specified replacement string.
 
-This function is particularly useful for complex string manipulations, and data cleaning/formatting tasks. Consider scenarios where you'd want to remove or replace specific patterns in text, or transform data to meet certain requirements. For instance, you might use it to format phone numbers consistently, remove HTML tags from text, or anonymize sensitive information in logs.
+This function is particularly useful for complex string manipulations, and data cleaning/formatting tasks. Consider scenarios where you'd want to remove or replace specific patterns in text or transform data to meet certain requirements. For instance, you might use it to format phone numbers consistently, remove HTML tags from text, or anonymize sensitive information in logs.
 
 <CTA />
 
@@ -26,7 +26,7 @@ regexp_replace(source text, pattern text, replacement text [, flags text]) -> te
 
 It returns the input string with occurrence(s) of the pattern replaced by the replacement string.
 
-More recent versions of PostgreSQL (starting v16) also support additional parameters to further control the replacement operation:
+More recent versions of Postgres (starting with Postgres 16) also support additional parameters to further control the replacement operation:
 
 ```sql
 regexp_replace(source text, pattern text, replacement text [, start int, [, N int]] [, flags text]) -> text
@@ -37,7 +37,7 @@ regexp_replace(source text, pattern text, replacement text [, start int, [, N in
 
 ## Example usage
 
-Consider a table `customer_data` with a `phone_number` column containing phone numbers in different formats. We can use `regexp_replace()` to standardize these numbers to a consistent format.
+Consider a `customer_data` table with a `phone_number` column containing phone numbers in different formats. We can use `regexp_replace()` to standardize these numbers to a consistent format.
 
 ```sql
 WITH customer_data AS (
