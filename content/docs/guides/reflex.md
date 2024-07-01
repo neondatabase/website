@@ -211,4 +211,6 @@ Learn how to use Reflex with Neon Postgres in the following project to create an
 
 <a href="https://github.com/reflex-dev/templates/tree/main/customer_data_app" description="Reflex with Neon Postgres" icon="github">Customer Data App</a>
 
+![Reflex Customer Data App](/docs/guides/reflex_customer_data_app.png)
+
 </DetailIconCards>
