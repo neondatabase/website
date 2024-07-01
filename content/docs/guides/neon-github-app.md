@@ -53,12 +53,12 @@ To add the GitHub integration to your Neon project:
    ![GitHub integration card](/docs/guides/github_card.png)
 3. On the **GitHub integration** drawer, click **Add GitHub integration**.
 4. If you have more than one GitHub account, select the one you want to install the integration.
-4. Select whether to install and authorize the GitHub app for **All repositories** or **Only select repositories**.
+5. Select whether to install and authorize the GitHub app for **All repositories** or **Only select repositories**.
    - Selecting **All repositories** directs you back to the GitHub integration drawer in the Neon Console to select a GitHub repository.
    - Selecting **Only select repositories** lets you choose a repository immediately.
-5. Since Neon's GitHub app is currently designed to work with a single repository, select **Only select repositories** and choose a GitHub repository from the **Select repositories** drop-down list.
-6. Click **Save** to complete the installation. You are directed back to the GitHub integration drawer in the Neon Console.
-7. Select a GitHub repository to connect to your Neon project and click **Connect**.
+6. Since Neon's GitHub app is currently designed to work with a single repository, select **Only select repositories** and choose a GitHub repository from the **Select repositories** drop-down list.
+7. Click **Save** to complete the installation. You are directed back to the GitHub integration drawer in the Neon Console.
+8. Select a GitHub repository to connect to your Neon project and click **Connect**.
 
 ### Changes made by the integration
 
