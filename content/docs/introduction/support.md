@@ -53,9 +53,9 @@ If you are a Launch, Scale, or Enterprise user and are unable to access the supp
 
 Neon's support plans are mapped to our [pricing plans](/docs/introduction/plans), as outlined in the following table. Upgrading your support plan requires [upgrading your pricing plan](/docs/introduction/manage-billing#change-your-plan).
 
-| Support plan | Pricing plan                                            |
-| :----------- | :------------------------------------------------------ |
-| Community    | [Free Tier](/docs/introductions/plans#free-tier)        |
-| Standard     | [Launch plan](/docs/introductions/plans#launch)         |
-| Priority     | [Scale plan](/docs/introductions/plans#scale)           |
-| Enterprise   | [Enterprise plan](/docs/introductions/plans#enterprise) |
+| Support plan | Pricing plan                                           |
+| :----------- | :----------------------------------------------------- |
+| Community    | [Free Tier](/docs/introduction/plans#free-tier)        |
+| Standard     | [Launch plan](/docs/introduction/plans#launch)         |
+| Priority     | [Scale plan](/docs/introduction/plans#scale)           |
+| Enterprise   | [Enterprise plan](/docs/introduction/plans#enterprise) |
