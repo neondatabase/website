@@ -2,7 +2,7 @@
 title: Organizations (private preview)
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.418Z'
+updatedOn: '2024-06-21T21:25:51.531Z'
 ---
 
 Organizations let you work with your Neon projects as a team. By creating an organization, you can bring together Members and Guests, manage permissions, and organize all of your team's projects under a single umbrella.
@@ -65,6 +65,7 @@ Learn how to manage your organization's projects, invite Members and Guests, rev
 - [Invite Guests](#invite-guests)
 - [Set permissions](#set-permissions)
 - [Manage projects](#manage-projects)
+- [Passwordless authentication](#passwordless-authentication)
 - [Billing](#billing)
 
 ### Switch to your Organization account
@@ -125,6 +126,32 @@ Members have different capabilities based on their roles:
 - Any Member can create a project under the organization's ownership.
 - Members cannot delete projects owned by the organization. They can only delete personal projects from their personal account (switch to personal account via breadcrumb).
 - Admins can delete any project within the organization.
+
+### Passwordless authentication
+
+If you want the simplest way to connect to your database from the command line, passwordless authentication using `pg.neon.tech` lets you directly start a `psql` connection with any of your organization's databases. This saves you time versus logging in to the Console and copying your connection string manually.
+
+```bash
+   psql -h pg.neon.tech
+```
+
+In the output, you'll get a URL you can paste into your browser. Log in if you need to. Or if you're already logged in, you'll be asked to select from your personal or organization account, select your project, and then your compute. After that, go back to your terminal and you'll be connected to your selected database.
+
+For example:
+
+```bash
+alexlopez@alex-machine ~ % psql -h pg.neon.tech
+NOTICE:  Welcome to Neon!
+Authenticate by visiting:
+    https://console.neon.tech/psql_session/secure_token
+
+NOTICE:  Connecting to database.
+psql (16.1, server 16.3)
+SSL connection (secure connection details hidden)
+Type "help" for help.
+
+alexlopez=>
+```
 
 ### Billing
 

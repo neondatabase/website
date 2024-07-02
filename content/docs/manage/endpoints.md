@@ -2,16 +2,16 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-14T07:55:54.417Z'
+updatedOn: '2024-06-20T17:29:55.111Z'
 ---
 
-A single read-write compute endpoint is created for your project's [primary branch](/docs/reference/glossary#primary-branch), by default.
+A single read-write compute endpoint is created for your project's [default branch](/docs/reference/glossary#default-branch).
 
-To connect to a database that resides in a branch, you must connect via a compute endpoint associated with the branch. The following diagram shows the project's primary branch (`main`) and a child branch, both of which have an associated compute endpoint.
+To connect to a database that resides in a branch, you must connect via a compute endpoint associated with the branch. The following diagram shows the project's default branch (`main`) and a child branch, both of which have an associated compute endpoint.
 
 ```text
 Project
-    |----primary branch (main) ---- compute endpoint <--- application/client
+    |----default branch (main) ---- compute endpoint <--- application/client
              |    |
              |    |---- database (neondb)
              |

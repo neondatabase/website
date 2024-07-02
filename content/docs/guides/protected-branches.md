@@ -3,7 +3,7 @@ title: Protected branches
 subtitle: Learn how to use Neon's protected branches feature to secure access to
   critical data
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.405Z'
+updatedOn: '2024-06-30T14:35:12.887Z'
 ---
 
 Neon's protected branches feature lets you apply IP restrictions to specific branches in your Neon project as an added layer of data protection. Protected branches is a Neon [Scale](/docs/introduction/plans#scale) plan feature.
@@ -29,7 +29,7 @@ To configure an allowlist:
 3. Select **IP Allow**.
    ![IP Allow configuration](/docs/manage/ip_allow.png)
 4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
-5. Optionally, select **Allow unrestricted access to non-primary branches** to allow full access to your [no primary branches](/docs/manage/branches#non-primary-branch).
+5. Optionally, select **Allow unrestricted access to non-default branches** to allow full access to your [non-default branches](/docs/manage/branches#non-default-branch).
 6. Click **Save changes**.
 
 </TabItem>
@@ -39,32 +39,32 @@ To configure an allowlist:
 The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
 
 ```bash
-neonctl ip-allow add 203.0.113.0 203.0.113.1
+neon ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
-│ Id                  │ Name                │ IP Addresses │ Primary Branch Only │
+│ Id                  │ Name                │ IP Addresses │ Default Branch Only │
 ├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
 │ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
 │                     │                     │ 203.0.113.1  │                     │
 └─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
 ```
 
-To apply an IP allowlist to the primary branch only, use the you can `--primary-only` option:
+To apply an IP allowlist to the default branch only, use the you can `--primary-only` option:
 
 ```bash
-neonctl ip-allow add 203.0.113.1 --primary-only
+neon ip-allow add 203.0.113.1 --primary-only
 ```
 
 To reverse that setting, use `--primary-only false`.
 
 ```bash
-neonctl ip-allow add 203.0.113.1 --primary-only false
+neon ip-allow add 203.0.113.1 --primary-only false
 ```
 
 </TabItem>
 
 <TabItem>
 
-The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"primary_branch_only` option to `true` to apply the allowlist to your primary branch only, or `false` to apply it to all branches in your Neon project.
+The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"primary_branch_only` option to `true` to apply the allowlist to your default branch only, or `false` to apply it to all branches in your Neon project.
 
 ```bash
 curl -X PATCH \
@@ -115,7 +115,7 @@ To set a branch as protected:
 
    ![Branch page](/docs/guides/ip_allow_branch_page.png)
 
-3. Select a branch from the table. In this example, we'll configure our primary branch `main` as a protected branch.
+3. Select a branch from the table. In this example, we'll configure our default branch `main` as a protected branch.
 4. On the branch page, click the **More** drop-down menu and select **Set as protected**.
 
    ![Set as protected](/docs/guides/ip_allow_set_as_protected.png)

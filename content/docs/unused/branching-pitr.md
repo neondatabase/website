@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2024-06-14T07:55:54.427Z'
+updatedOn: '2024-06-30T14:35:12.898Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
@@ -45,7 +45,7 @@ You are directed to the **Branches** page where you are shown the details for yo
 You can also create point-in-time branches using the [Neon CLI](/docs/reference/neon-cli). For example, you can perform the same action described above with the following CLI command:
 
 ```bash
-neonctl branches create --name recovery_branch --parent 2023-07-11T10:00:00Z
+neon branches create --name recovery_branch --parent 2023-07-11T10:00:00Z
 ```
 
 The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
@@ -80,44 +80,44 @@ Check to see if the lost data is now present. For instance, if you lost an `orde
 SELECT * FROM orders LIMIT 10;
 ```
 
-## Change your primary branch
+## Change your default branch
 
-You now have a production branch with lost data and a recovery branch with the data in the desired state. You could dump data from the recovery branch and load it into the production branch using dump and restore utilities like `pg_dump` and `pg_restore`, or you can make the recovery branch your new primary branch and use it for production.
+You now have a production branch with lost data and a recovery branch with the data in the desired state. You could dump data from the recovery branch and load it into the production branch using dump and restore utilities like `pg_dump` and `pg_restore`, or you can make the recovery branch your new default branch and use it for production.
 
-To make the recovery branch your new primary:
+To make the recovery branch your new default:
 
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select your `recovery_branch` from the table.
-4. On the branch details page, select **Set as Primary**.
+4. On the branch details page, select **Set as Default**.
 
-Making a branch your primary branch ensures that access to data on the branch is never interrupted, even when you exceed project limits. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
+Making a branch your default branch ensures that access to data on the branch is never interrupted, even when you exceed project limits. For more information, see [default branch](/docs/manage/branches#default-branch).
 
 <Admonition type="note">
-If your previous primary branch was your project's root branch (the initial branch created with your project), it cannot be deleted. Deleting a root branch is not yet supported. In the meantime, you can rename a root branch (perhaps adding an `OLD` or `DO_NOT_USE` prefix to its name) and remove data from it to ensure that it's not used accidentally or consuming storage space.
+If your previous default branch was your project's root branch (the initial branch created with your project), it cannot be deleted. Deleting a root branch is not yet supported. In the meantime, you can rename a root branch (perhaps adding an `OLD` or `DO_NOT_USE` prefix to its name) and remove data from it to ensure that it's not used accidentally or consuming storage space.
 </Admonition>
 
 ## Update your connections
 
-To use your new primary branch with your applications, update your application connection details. To do so, replace your current connection details with the connection details for your new primary branch, which you retrieved earlier when connecting to your branch.
+To use your new default branch with your applications, update your application connection details. To do so, replace your current connection details with the connection details for your new default branch, which you retrieved earlier when connecting to your branch.
 
-Alternatively, if you do not want change connection details, you can move the compute endpoint from your old primary branch to the new branch. See [Reassign the compute endpoint](#reassign-the-compute-endpoint) for instructions.
+Alternatively, if you do not want change connection details, you can move the compute endpoint from your old default branch to the new branch. See [Reassign the compute endpoint](#reassign-the-compute-endpoint) for instructions.
 
 ## Reassign the compute endpoint
 
-To avoid changing connection details in your application, you can reassign the compute endpoint from your old primary branch to your new branch. If you followed the steps above, you created a branch with a compute endpoint. In this case, you have to:
+To avoid changing connection details in your application, you can reassign the compute endpoint from your old default branch to your new branch. If you followed the steps above, you created a branch with a compute endpoint. In this case, you have to:
 
 1. **Remove the compute endpoint from the new branch**
 
    For instructions, see [Delete a compute endpoint](/docs/manage/endpoints#delete-a-compute-endpoint).
 
-2. **Move the compute endpoint from the old primary branch to the new branch**
+2. **Move the compute endpoint from the old default branch to the new branch**
 
    This action is currently only supported in the Neon API. See [Update a compute endpoint with the CLI](/docs/manage/endpoints#update-a-compute-endpoint-with-the-api) for instructions.
 
 ## Examples
 
-- [Using Neon branching for instant point-in-time restore](https://neon.tech/blog/point-in-time-recovery). The blog post describes point-in-time restore and provides a script for creating a recovery branch, reassigning a compute endpoint, and setting the new branch as the primary.
+- [Using Neon branching for instant point-in-time restore](https://neon.tech/blog/point-in-time-recovery). The blog post describes point-in-time restore and provides a script for creating a recovery branch, reassigning a compute endpoint, and setting the new branch as the default.
 - [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This blog post (with video) describes a data recovery example that uses Neon's branching feature, the Neon API, and a bisect script to recover lost data.
 
 The following GitHub repositories are available for these examples:

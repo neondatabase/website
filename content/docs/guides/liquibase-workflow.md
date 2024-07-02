@@ -2,7 +2,7 @@
 title: Liquibase developer workflow with Neon
 subtitle: Implement a developer workflow with Liquibase and Neon branching
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.395Z'
+updatedOn: '2024-06-20T17:29:55.105Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -418,7 +418,7 @@ When you are satisfied with the changes that will be applied, save your changelo
 
 ### Apply the changeset to your source database
 
-Apply the new changesets to the source database on your primary branch:
+Apply the new changesets to the source database on your default branch:
 
 ```bash shouldWrap
 liquibase --url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog update

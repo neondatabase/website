@@ -2,13 +2,13 @@
 title: Neon CLI commands — databases
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.422Z'
+updatedOn: '2024-06-30T14:35:12.894Z'
 ---
 
 ## Before you begin
 
 - Before running the `databases` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
-- If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
+- If you have not authenticated with the [neon auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 For information about databases in Neon, see [Manage databases](/docs/manage/databases).
 
@@ -31,7 +31,7 @@ This subcommand allows you to list databases.
 #### Usage
 
 ```bash
-neonctl databases list [options]
+neon databases list [options]
 ```
 
 #### Options
@@ -44,12 +44,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 | `--branch`       | Branch ID or name                                                                             | string |                                                     |
 
-If a branch ID or name is not provided, the command lists databases for the primary branch of the project.
+If a branch ID or name is not provided, the command lists databases for the default branch of the project.
 
 #### Example
 
 ```bash shouldWrap
-neonctl databases list --branch br-autumn-dust-190886
+neon databases list --branch br-autumn-dust-190886
 ┌────────┬────────────┬──────────────────────┐
 │ Name   │ Owner Name │ Created At           │
 ├────────┼────────────┼──────────────────────┤
@@ -64,7 +64,7 @@ This subcommand allows you to create a database.
 #### Usage
 
 ```bash
-neonctl databases create [options]
+neon databases create [options]
 ```
 
 #### Options
@@ -79,13 +79,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--name`         | The name of the database                                                                      | string |                       &check;                       |
 | `--owner-name`   | The name of the role that owns the database                                                   | string |                                                     |
 
-- If a branch ID or name is not provided, the command creates the database in the primary branch of the project.
+- If a branch ID or name is not provided, the command creates the database in the default branch of the project.
 - If the `--owner-name` option is not specified, the current user becomes the database owner.
 
 #### Example
 
 ```bash shouldWrap
-neonctl databases create --name mynewdb --owner-name john
+neon databases create --name mynewdb --owner-name john
 ┌─────────┬────────────┬──────────────────────┐
 │ Name    │ Owner Name │ Created At           │
 ├─────────┼────────────┼──────────────────────┤
@@ -100,7 +100,7 @@ This subcommand allows you to delete a database.
 #### Usage
 
 ```bash
-neonctl databases delete <database> [options]
+neon databases delete <database> [options]
 ```
 
 `<database>` is the database name.
@@ -115,12 +115,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 | `--branch`       | Branch ID or name                                                                             | string |                                                     |
 
-If a branch ID or name is not provided, it is assumed the database resides in the primary branch of the project.
+If a branch ID or name is not provided, it is assumed the database resides in the default branch of the project.
 
 #### Example
 
 ```bash shouldWrap
-neonctl databases delete mydb
+neon databases delete mydb
 ┌─────────┬────────────┬──────────────────────┐
 │ Name    │ Owner Name │ Created At           │
 ├─────────┼────────────┼──────────────────────┤

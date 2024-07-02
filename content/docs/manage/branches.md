@@ -4,10 +4,10 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-06-14T07:55:54.416Z'
+updatedOn: '2024-06-20T17:29:55.111Z'
 ---
 
-Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [primary branch](#primary-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
+Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
 
 A child branch is a copy-on-write clone of the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
@@ -18,19 +18,19 @@ You can create and manage branches using the Neon Console, [Neon CLI](/docs/refe
 When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated. Neon retains a data history by default. You can configure the retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). To keep data storage to a minimum, remove branches before they age out of the history retention window.
 </Admonition>
 
-## Primary branch
+## Default branch
 
-Each Neon project has a primary branch. In the Neon Console, your primary branch is identified by a `PRIMARY` tag. You can designate any branch as the primary branch for your project. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch, which is typically the branch used in production.
+Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project. The advantage of the default branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
 
-- For Neon Free Tier users, the compute endpoint associated with the primary branch is always available.
-- For users on paid plans, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
+- For Neon Free Tier users, the compute endpoint associated with the default branch is always available.
+- For users on paid plans, the compute endpoint associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
 
-## Non-primary branch
+## Non-default branch
 
-Any branch not designated as the primary branch is considered a non-primary branch. You can rename or delete non-primary branches.
+Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
 
-- For Neon Free Tier users, compute endpoints associated with non-primary branches are suspended if you exceed the Neon Free Tier _active hours_ limit of 20 hours per month.
-- For users on paid plans, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-primary branch remains suspended.
+- For Neon Free Tier users, compute endpoints associated with non-default branches are suspended if you exceed the Neon Free Tier _active hours_ limit of 20 hours per month.
+- For users on paid plans, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-default branch remains suspended.
 
 ## Protected branch
 
@@ -45,7 +45,7 @@ To create a branch:
 3. Click **Create branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch.
-5. Select a parent branch. You can branch from your Neon project's [primary branch](#primary-branch) or a [non-primary branch](#non-primary-branch).
+5. Select a parent branch. You can branch from your Neon project's [default branch](#default-branch) or a [non-default branch](#non-default-branch).
 6. Select an **Include data up to** option to specify the data to be included in your branch.
 
     <Admonition type="note">
@@ -103,7 +103,7 @@ The branch details page also includes details about the **Computes**, **Roles & 
 
 ## Rename a branch
 
-Neon permits renaming a branch, including your project's primary branch. To rename a branch:
+Neon permits renaming a branch, including your project's default branch. To rename a branch:
 
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
@@ -111,17 +111,17 @@ Neon permits renaming a branch, including your project's primary branch. To rena
 4. On the branch overview page, click the **Actions** drop-down menu and select **Rename**.
 5. Specify a new name for the branch and click **Save**.
 
-## Set a branch as primary
+## Set a branch as default
 
-Each Neon project is created with a primary branch called `main`, but you can designate any branch as your project's primary branch. The benefit of the primary branch is that the compute endpoint associated with the primary branch remains accessible if you exceed project limits, ensuring uninterrupted access to data on the primary branch. For more information, see [Primary branch](#primary-branch).
+Each Neon project is created with a default branch called `main`, but you can designate any branch as your project's default branch. The benefit of the default branch is that the compute endpoint associated with the default branch remains accessible if you exceed project limits, ensuring uninterrupted access to data on the default branch. For more information, see [Default branch](#default-branch).
 
-To set a branch as the primary branch:
+To set a branch as the default branch:
 
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **Actions** drop-down menu and select **Set as primary**.
-5. In the **Set as primary** confirmation dialog, click **Set as Primary** to confirm your selection.
+4. On the branch overview page, click the **Actions** drop-down menu and select **Set as default**.
+5. In the **Set as default** confirmation dialog, click **Set as default** to confirm your selection.
 
 ## Set a branch as protected
 
@@ -242,7 +242,7 @@ POST /projects/{project_id}/branches
 The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without a compute endpoint. The `branch` attribute specifies the parent branch.
 
 <Admonition type="note">
-This method does not require a request body. Without a request body, the method creates a branch from the project's primary branch, and a compute endpoint is not created.
+This method does not require a request body. Without a request body, the method creates a branch from the project's default branch, and a compute endpoint is not created.
 </Admonition>
 
 ```bash
@@ -263,7 +263,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
 ```
 
 - The `project_id` for a Neon project is found on the **Project settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
-- The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's primary branch or a previously created branch.
+- The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's default branch or a previously created branch.
 
 The response body includes information about the branch, the branch's compute endpoint, and the `create_branch` and `start_compute` operations that were initiated.
 
@@ -354,7 +354,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
 
 The `project_id` for a Neon project is found on the **Project settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
 
-The response body lists the project's primary branch and any child branches. The name of the primary branch in this example is `main`.
+The response body lists the project's default branch and any child branches. The name of the default branch in this example is `main`.
 
 <details>
 <summary>Response body</summary>

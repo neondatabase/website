@@ -2,13 +2,13 @@
 title: Neon CLI commands — roles
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.424Z'
+updatedOn: '2024-06-30T14:35:12.897Z'
 ---
 
 ## Before you begin
 
 - Before running the `roles` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
-- If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
+- If you have not authenticated with the [neon auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 For information about roles in Neon, see [Manage roles](/docs/manage/roles).
 
@@ -19,7 +19,7 @@ The `roles` command allows you to list, create, and delete roles in a Neon proje
 ### Usage
 
 ```bash
-neonctl roles <subcommand> [options]
+neon roles <subcommand> [options]
 ```
 
 | Subcommand        | Description   |
@@ -35,7 +35,7 @@ This subcommand allows you to list roles.
 #### Usage
 
 ```bash
-neonctl roles list [options]
+neon roles list [options]
 ```
 
 #### Options
@@ -48,12 +48,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 | `--branch`       | Branch ID or name                                                                             | string |                                                     |
 
-If a branch ID or name is not provided, the command lists roles for the primary branch of the project.
+If a branch ID or name is not provided, the command lists roles for the default branch of the project.
 
 #### Examples
 
 ```bash
-neonctl roles list
+neon roles list
 ┌────────┬──────────────────────┐
 │ Name   │ Created At           │
 ├────────┼──────────────────────┤
@@ -64,7 +64,7 @@ neonctl roles list
 List roles with the `--output` format set to `json`:
 
 ```bash
-neonctl roles list --output json
+neon roles list --output json
 [
   {
     "branch_id": "br-odd-frog-703504",
@@ -82,7 +82,7 @@ This subcommand allows you to create a role.
 #### Usage
 
 ```bash
-neonctl roles create [options]
+neon roles create [options]
 ```
 
 #### Options
@@ -96,12 +96,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--branch`       | Branch ID or name                                                                             | string |                                                     |
 | `--name`         | The role name. Cannot exceed 63 bytes in length.                                              | string |                       &check;                       |
 
-If a branch ID or name is not provided, the command creates a role in the primary branch of the project.
+If a branch ID or name is not provided, the command creates a role in the default branch of the project.
 
 #### Example
 
 ```bash shouldWrap
-neonctl roles create --name sally
+neon roles create --name sally
 ┌───────┬──────────────────────┐
 │ Name  │ Created At           │
 ├───────┼──────────────────────┤
@@ -116,7 +116,7 @@ This subcommand allows you to delete a role.
 #### Usage
 
 ```bash
-neonctl roles delete <role> [options]
+neon roles delete <role> [options]
 ```
 
 #### Options
@@ -129,12 +129,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 | `--branch`       | Branch ID or name                                                                             | string |                                                     |
 
-If a branch ID or name is not provided, the command assumes the role resides in the primary branch of the project.
+If a branch ID or name is not provided, the command assumes the role resides in the default branch of the project.
 
 #### Example
 
 ```bash shouldWrap
-neonctl roles delete sally
+neon roles delete sally
 ┌───────┬──────────────────────┐
 │ Name  │ Created At           │
 ├───────┼──────────────────────┤

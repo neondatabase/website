@@ -2,7 +2,7 @@
 title: Postgres sample data
 subtitle: 'Download sample data for learning, testing, and exploring Neon'
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.411Z'
+updatedOn: '2024-06-30T14:35:12.889Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.
@@ -535,19 +535,19 @@ To load sample data:
    - Create a new Neon project, connect to it with `psql`, and run the `.sql` file.
 
      ```bash
-     neonctl projects create --psql -- -f periodic_table.sql
+     neon projects create --psql -- -f periodic_table.sql
      ```
 
    - Create a branch, connect to it with `psql`, and run the an `.sql` file.
 
      ```bash
-     neonctl branches create --psql -- -f periodic_table.sql
+     neon branches create --psql -- -f periodic_table.sql
      ```
 
    - Get a connection string, connect with `psql`, and run the `.sql` file.
 
      ```bash
-     neonctl connection-string --psql -- -f periodic_table.sql
+     neon connection-string --psql -- -f periodic_table.sql
      ```
 
 <NeedHelp/>

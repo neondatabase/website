@@ -54,7 +54,7 @@
         "subtitle": "Compute hrs = CPU size x active hrs"
       },
       "free": {
-        "title": "24/7 for main compute",
+        "title": "24/7 for primary compute",
         "info": "+20h of usage for branches"
       },
       "launch": {
