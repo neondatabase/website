@@ -11,20 +11,20 @@ Neon supports the `pgvector` open-source extension, which enables Postgres as a 
 
 Neon's AI Starter Kit provides resources, starter apps, and examples to help get you started.
 
-<CTA title="Ship faster with Neon's AI Starter Kit" description="Sign up for Neon Postgres and get a headstart on your AI app.  Our starter apps and resources will have you up and running in minutes." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Ship faster with Neon's AI Starter Kit" description="Sign up for Neon Postgres and get a headstart on your AI app.  Our starter apps and resources will help you get up and running qucikly." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
 The **Neon AI Starter Kit** includes:
 
 - Neon Postgres with the latest version of the Postgres [pgvector](https://neon.tech/docs/extensions/pgvector) extension for storing vector embeddings
-- Hackable, fully-featured [starter apps](#ai-starter-apps) to get you up and running:
-  - Chatbot starter apps
-  - RAG chatbot starter apps
-  - Semantic search starter apps
-  - Hybrid search starter app
-  - Reverse image search starter apps
-  - Chat with PDF starter apps
-- The [Neon vector search optimization guide](/docs/ai/ai-vector-search-optimization) to help you optimize vector search for better application performance
-- The [Neon AI scaling guide](/docs/ai/ai-scale-with-neon) showing how to scale your app with Neon's Autoscaling, Read Replica, and serverless driver features
+- A variety of hackable, fully-featured [AI starter apps](#ai-starter-apps) to get you started:
+  - AI Chatbot
+  - RAG chatbot
+  - Semantic search
+  - Hybrid search
+  - Reverse image search
+  - Chat with PDF
+- A [vector search optimization guide](/docs/ai/ai-vector-search-optimization) for better AI application performance
+- A [scaling guide](/docs/ai/ai-scale-with-neon) for scaling your app with Neon's Autoscaling and Read Replica features
 - A collection of [AI apps built with Neon](#ai-apps-built-with-neon) that you can reference while building your own app
 
 ## AI basics

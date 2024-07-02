@@ -1,15 +1,15 @@
 ---
 title: AI Concepts
-subtitle: Learn about embeddings and how they are used to build AI and LLM applications
+subtitle: Learn how embeddings are used to build AI applications
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.359Z'
 ---
 
-Embeddings are an essential component in building AI applications. Ths topic describes embeddings and how they are used in building AI and LLM applications.
+Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used to build AI applications.
 
 ## What are embeddings?
 
-When working with unstructured data, a common objective is to transform it into a more structured format that is easier to analyze and retrieve. This transformation can be achieved through the use of 'embeddings', which are vectors containing an array of floating-point numbers that represent the features or dimensions of the data. For example, a sentence like "The cow jumped over the moon" could be represented by an embedding that looks like this: [0.5, 0.3, 0.1].
+When working with unstructured data, a common objective is to transform it into a more structured format that is easier to analyze and retrieve. This transformation can be achieved through the use of 'embeddings', which are vectors containing an array of floating-point numbers that represent the features or dimensions of your data. For example, a sentence like "The cow jumped over the moon" could be represented by an embedding that looks like this: [0.5, 0.3, 0.1].
 
 The advantage of embeddings is that they allow us to measure the similarity between different pieces of text. By calculating the distance between two embeddings, we can assess their relatedness - the smaller the distance, the greater the similarity, and vice versa. This quality is particularly useful as it enables embeddings to capture the underlying meaning of the text.
 
@@ -102,7 +102,7 @@ To learn more about OpenAI's embeddings, see [Embeddings](https://platform.opena
 
 ## Storing vector embeddings in Postgres
 
-Neon supports the [pgvector](/docs/extensions/pgvector) and [pg_embedding](/docs/extensions/pg_embedding) Postgres extensions, which enable storing and retrieving vector embeddings directly within your Postgres database. When building AI and LLM applications, installing either of these extensions eliminates the need to build out your architecture to include a separate vector store.
+Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension, which enable storing and retrieving vector embeddings directly within your Postgres database. When building AI and LLM applications, installing either of these extensions eliminates the need to build out your architecture to include a separate vector store.
 
 After installing an extension, you can create a table to store your embeddings. For example, if you install the `pgvector` extension, you might define a table similar to the following to store your embeddings:
 
