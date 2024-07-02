@@ -116,10 +116,10 @@ Learn about popular AI tools and how to use them with Neon Postgres.
 
 <a href="/docs/ai/ai-google-colab" description="A cloud-based environment to write and execute Python code, perfect for machine learning and data science tasks" icon="openai">Google Colab</a>
 
-<a href="https://jupyter.org/" description="An open-source web application for creating and sharing documents that contain live code, equations, visualizations, and narrative text" icon="openai">Jupyter Notebook</a>
-
 <a href="https://notebooks.azure.com/" description="A cloud-based Jupyter notebook service integrated with Azure machine learning services for creating, running, and sharing notebooks" icon="openai">Microsoft Azure Notebooks</a>
 
-<a href="https://aws.amazon.com/sagemaker/notebooks/" description="Managed Jupyter notebooks provided by AWS as part of the SageMaker suite, designed for building, training, and deploying machine learning models" icon="openai">Amazon SageMaker Notebooks</a>
+<a href="/docs/guides/askyourdatabase" description="Chat with your Neon Postgres database without writing SQL" icon="openai">Chat with Neon Postgres with AskYourDatabase</a>
+
+<a href="/docs/guides/outerbase" description="Connect the AI-poweredd Outerbase client to your Neon project with the Neon Outerbase integration" icon="openai">Connect Outerbase to Neon</a>
 
 </DetailIconCards>
