@@ -918,7 +918,7 @@ class CommentSection extends Component
 }
 ```
 
-Here we have the `CommentSection` Livewire component with methods to add and delete comments. The `addComment` method creates a new comment for the post, while the `deleteComment` method deletes a comment if the current user is the author of the comment. You can also see the `rules` property defining the validation rules for the comment content and create a policy for the `Comment` model to handle authorization instead of checking it in the component itself.
+Here, we have the `CommentSection` Livewire component with methods to add and delete comments. The `addComment` method creates a new comment for the post, while the `deleteComment` method deletes a comment if the current user is the author of the comment. You can also see the `rules` property defining the validation rules for the comment content and create a policy for the `Comment` model to handle authorization instead of checking it in the component itself.
 
 Next, update the view in `resources/views/livewire/comment-section.blade.php` to display comments and allow users to add new comments:
 
