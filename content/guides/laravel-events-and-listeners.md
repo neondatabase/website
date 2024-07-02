@@ -195,7 +195,7 @@ Here our listener implements the `ShouldQueue` interface, meaning it will be han
 
 If we didn't implement the `ShouldQueue` interface, the listener would be executed synchronously, which could slow down the response time of your application but could be useful for certain use cases where you need to perform actions synchronously rather than asynchronously.
 
-Here, we're simply logging a message to the Laravel log file, but in a real application, you would send an email along with other actions related to order confirmation which could be time-consuming.
+Here, we're simply logging a message to the Laravel log file, but in a real application, you would send an email along with other actions related to order confirmation, which could be time-consuming.
 
 ## Registering the Event and Listener
 
