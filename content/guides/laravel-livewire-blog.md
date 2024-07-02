@@ -769,7 +769,7 @@ Next, create the `resources/views/posts/show.blade.php` view to display a single
 
 This view displays the post title, author, publication date, content, and tags. It also includes a link to edit the post if the current user is authorized to do so.
 
-After that, create the `resources/views/posts/create.blade.php` and `resources/views/posts/edit.blade.php` views for creating and editing posts, respectively. These views will include the `PostForm` Livewire component which we created earlier and handle the form submission.
+After that, create the `resources/views/posts/create.blade.php` and `resources/views/posts/edit.blade.php` views for creating and editing posts, respectively. These views will include the `PostForm` Livewire component, which we created earlier, and handle the form submission.
 
 Create the `resources/views/posts/create.blade.php` view with the following content:
 
