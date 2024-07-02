@@ -76,22 +76,6 @@ Hackable, fully-featured, pre-built [starter apps](#ai-starter-apps) to get you 
 
 </DetailIconCards>
 
-## AI integrations
-
-Learn how to integrate Neon Postgres with various LLMs and AI platforms.
-
-<DetailIconCards>
-
-<a href="/docs/ai/tbd" description="Discover OpenAI's models and their wide-ranging applications" icon="openai">OpenAI</a>
-
-<a href="/docs/ai/tbd" description="Utilize LlamaIndex models for efficient text processing and analysis" icon="openai">LangChain</a>
-
-<a href="/docs/ai/tbd" description="Utilize LlamaIndex models for efficient text processing and analysis" icon="openai">LlamaIndex</a>
-
-<a href="/docs/ai/ollama" description="Learn how to run open-source large language models, such as Llama 2, locally" icon="openai">Ollama</a>
-
-</DetailIconCards>
-
 ## AI apps built with Neon
 
 AI applications built with Neon Postgres that you can reference as code examples or inspiration.
