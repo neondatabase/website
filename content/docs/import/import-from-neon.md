@@ -31,15 +31,15 @@ To import your data from another Neon project:
    postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
-4. Prepare your import command to pipe data from one Neon project to the other. For the `pg_dump` command, specify the connection details for the source database. For the `pg_restore` command, specify the connection details for the destination database. The command should be defined as shown here:
+4. Prepare your import command to pipe data from one Neon project to the other. For the `pg_dump` command, specify connection details for the source database. For the `pg_restore` command, specify connection details for the destination database. The command should have this format:
 
    ```bash shouldWrap
    pg_dump -Fc -v -d postgres://[user]:[password]@[source_neon_hostname]/[dbname] | pg_restore -v -d postgres://[user]:[password]@[destination_neon_hostname]/[dbname]
    ```
 
-   With actual source and destination connection details, the command will appear similar to this:
+   With actual source and destination connection details, your command will appear similar to this:
 
-   ```bash
+   ```bash shouldWrap
    pg_dump -Fc -v -d postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/my_source_db | pg_restore -v -d postgres://alex:AbC123dEf@square-shadow-654321.us-east-2.aws.neon.tech/my_destination_db     
    ```
 
