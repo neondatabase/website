@@ -76,9 +76,9 @@ To set up event triggers for a specific table (say `my_table`), you will define 
 // File: setup.js
 
 // Load all the environment variables
-require("dotenv").config();
+require('dotenv').config();
 
-const { Client } = require("pg");
+const { Client } = require('pg');
 
 const connectionString = process.env.DATABASE_URL;
 
@@ -89,9 +89,7 @@ async function setupTrigger() {
     // Connect to Postgres
     await client.connect();
     // Create a my_table if it does not already exist
-    await client.query(
-      `CREATE TABLE IF NOT EXISTS my_table (id SERIAL PRIMARY KEY, message TEXT)`
-    );
+    await client.query(`CREATE TABLE IF NOT EXISTS my_table (id SERIAL PRIMARY KEY, message TEXT)`);
     // Define the my_trigger_function function to send notifications
     await client.query(`
     CREATE OR REPLACE FUNCTION my_trigger_function() RETURNS trigger AS $$
@@ -106,7 +104,7 @@ async function setupTrigger() {
     AFTER INSERT ON my_table
     FOR EACH ROW
     EXECUTE FUNCTION my_trigger_function();`);
-    console.log("Event triggers setup complete.");
+    console.log('Event triggers setup complete.');
     await client.end();
   } catch (e) {
     console.log(e);
@@ -134,9 +132,9 @@ To listen for notifications in Node.js intended for the channel named `my_channe
 // File: listen.js
 
 // Load all the environment variables
-require("dotenv").config();
+require('dotenv').config();
 
-const { Client } = require("pg");
+const { Client } = require('pg');
 
 const connectionString = process.env.DATABASE_URL;
 
@@ -148,11 +146,11 @@ async function listenToNotifications() {
     await client.connect();
     // Listen to specific channel in Postgres
     // Attach a listener to notifications received
-    client.on("notification", (msg) => {
-      console.log("Notification received", msg.payload);
+    client.on('notification', (msg) => {
+      console.log('Notification received', msg.payload);
     });
-    await client.query("LISTEN channel_name");
-    console.log("Listening for notifications on my_channel");
+    await client.query('LISTEN channel_name');
+    console.log('Listening for notifications on my_channel');
   } catch (e) {
     console.log(e);
   }
@@ -179,9 +177,9 @@ To notify the listeners, you will use Postgres Event Triggers. To programtically
 // File: send.js
 
 // Load all the environment variables
-require("dotenv").config();
+require('dotenv').config();
 
-const { Client } = require("pg");
+const { Client } = require('pg');
 
 const connectionString = process.env.DATABASE_URL;
 
@@ -192,7 +190,7 @@ async function insertRow(message) {
     // Connect to Postgres
     await client.connect();
     // Insert a row into Postgres table
-    await client.query("INSERT INTO my_table (message) VALUES ($1)", [message]);
+    await client.query('INSERT INTO my_table (message) VALUES ($1)', [message]);
     console.log("Inserted a row in the 'my_table' table.");
     await client.end();
   } catch (e) {
@@ -200,10 +198,10 @@ async function insertRow(message) {
   }
 }
 
-insertRow("Hello, world!").catch(console.log);
+insertRow('Hello, world!').catch(console.log);
 ```
 
-The code above begins with importing `pg` and loading all the enviroment variables into scope. Further, it initializes a client connection to your Postgres. In the `insertRow` function, it simply inserts a row into the table named `my_table`. 
+The code above begins with importing `pg` and loading all the enviroment variables into scope. Further, it initializes a client connection to your Postgres. In the `insertRow` function, it simply inserts a row into the table named `my_table`.
 
 To execute the script as above, run the following command:
 
