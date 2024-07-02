@@ -56,7 +56,7 @@ updatedOn: '2024-06-29T14:19:59.866Z'
 
 <img src="/images/technology-logos/cloudflare-logo.svg" width="36" height="36" alt="Cloudflare Hyperdrive" href="/docs/guides/cloudflare-hyperdrive" title="Use Neon with Cloudflare Hyperdrive" />
 
-<img src="/images/technology-logos/askyourdatabase-logo.svg" width="36" height="36" alt="Ask Your Database" href="/docs/guides/askyourdatabase" title="Chat with Neon in AskYourDatabase" />
+<img src="/images/technology-logos/askyourdatabase-logo.svg" width="36" height="36" alt="Ask Your Database" href="/docs/guides/askyourdatabase" title="Chat with your Neon Postgres database with AskYourDatabase" />
 
 <img src="/images/technology-logos/stepzen-logo.svg" width="36" height="36" alt="StepZen" href="/docs/guides/stepzen" title="Use StepZen with Neon" />
 
