@@ -1,7 +1,7 @@
 ---
 title: Import data from another Neon project
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.292Z'
+updatedOn: '2024-07-02T14:14:46.554Z'
 ---
 
 This guide describes how to migrate a database from one Neon project to another by piping data from `pg_dump` to `pg_restore`. Use these instructions to:
