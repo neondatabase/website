@@ -2,7 +2,7 @@
 title: Use Neon with Cloudflare Workers
 subtitle: Connect a Neon Postgres database to your Cloudflare Workers application
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.388Z'
+updatedOn: '2024-07-02T18:38:56.215Z'
 ---
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a serverless platform allowing you to deploy your applications globally across Cloudflare's network. It supports running JavaScript, TypeScript, and WebAssembly, making it a great choice for high-performance, low-latency web applications.
