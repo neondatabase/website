@@ -335,6 +335,14 @@ To delete your `Cloudflare Pages` application, you can use the Cloudflare dashbo
 
 To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](/docs/manage/projects#delete-a-project).
 
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-cloudflare-pages" description="Connect a Neon Postgres database to your Cloudflare Pages web application" icon="github">Use Neon with Cloudflare Pages</a>
+</DetailIconCards>
+
 ## Resources
 
 - [Cloudflare Pages](https://pages.cloudflare.com/)

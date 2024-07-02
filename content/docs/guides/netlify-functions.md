@@ -220,6 +220,14 @@ For cleanup, delete your Netlify site and functions via the Netlify dashboard or
 
 To remove your Neon project, follow the deletion steps in Neon's documentation under [Manage Projects](https://neon.tech/docs/manage/projects#delete-a-project).
 
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-netlify-functions" description="Connect a Neon Postgres database to your Netlify Functions application" icon="github">Use Neon with Netlify Functions</a>
+</DetailIconCards>
+
 ## Resources
 
 - [Netlify Functions](https://www.netlify.com/products/functions/)
