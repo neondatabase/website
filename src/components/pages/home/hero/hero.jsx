@@ -34,6 +34,7 @@ const ITEMS = [
       title: 'Scaling',
       mp4: '/videos/pages/home/hero/scaling.mp4?updated=20240514120633',
       m3u8: '/videos/pages/home/hero/scaling.m3u8?updated=20240514120633',
+      bgImage: '/videos/pages/home/hero/scaling.jpg',
     },
     title: 'Scaling',
     description:
@@ -47,6 +48,7 @@ const ITEMS = [
       title: 'Branching',
       mp4: '/videos/pages/home/hero/branching.mp4?updated=20240508184252',
       m3u8: '/videos/pages/home/hero/branching.m3u8?updated=20240508184252',
+      bgImage: '/videos/pages/home/hero/branching.jpg',
     },
     title: 'Branching',
     description:
@@ -104,7 +106,7 @@ const Hero = () => {
   return (
     <section className="hero safe-paddings relative pt-[136px] xl:pt-[120px] lg:pt-24">
       <Image
-        className="absolute left-1/2 top-0 min-w-[1760px] -translate-x-1/2 xl:min-w-[1588px] lg:top-[-22px] lg:min-w-[1420px] md:top-[46px] md:min-w-[1058px]"
+        className="pointer-events-none absolute left-1/2 top-0 min-w-[1760px] -translate-x-1/2 xl:min-w-[1588px] lg:top-[-22px] lg:min-w-[1420px] md:top-[46px] md:min-w-[1058px]"
         src={bg}
         sizes="(max-width: 639px) 1058px"
         width={1760}
