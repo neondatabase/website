@@ -57,7 +57,7 @@ After you've set up Azure Data Studio and have created a notebook, you can use t
 
 psycopg2 is a popular Postgres database adapter for the Python programming language. It allows Python applications to connect to and interact with Postgres databases.
 
-Install the `psycopg2` adpater by adding and executing the following code cell: 
+Install the `psycopg2` adpater by adding and executing the following code cell:
 
 ```python
 !pip install psycopg2
