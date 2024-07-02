@@ -54,7 +54,7 @@ Make sure to replace `your-neon-hostname`, `your_database_name`, `your_username`
 
 ### Installing Laravel Sanctum
 
-Laravel Sanctum provides a featherweight authentication system for SPAs and simple APIs. To install it all that you need to do is use the following command:
+Laravel Sanctum provides a featherweight authentication system for SPAs and simple APIs. To install it, all you need to do is use the following command:
 
 ```bash
 php artisan install:api
