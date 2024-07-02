@@ -121,21 +121,3 @@ INSERT INTO items(embedding) VALUES ('[
     -0.024047505110502243
 ]');
 ```
-
-## Building AI apps with embeddings
-
-The concepts described above provide an introduction to the basic building blocks for developing an AI application with embeddings. You can see how they fit with the general process, which involves these steps:
-
-1. Generate embeddings from your data
-2. Store the embeddings in your database
-3. Build an interface that prompts for user for input
-4. Generate an embedding for the provided user input
-5. Perform a similarity search that compares the embedding generated for the provided input against the embeddings stored in your database
-6. Return the most similar data to the user
-
-For example applications built based on this general process, see the following:
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/yc-idea-matcher" description="Build an AI-powered semantic search application" icon="github">Semantic search app</a>
-<a href="https://github.com/neondatabase/ask-neon" description="Build an AI-powered chatbot with pgvector" icon="github">Chatbot app</a>
-</DetailIconCards>

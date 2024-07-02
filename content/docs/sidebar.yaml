@@ -568,36 +568,10 @@
       slug: extensions/pgvector
     - title: Prepare your AI app for production
       items:
-        - title: Vector search optimizaton
+        - title: Optimize vector search
           slug: ai/ai-vector-search-optimization
-        - title: AI scaling guide
+        - title: Scale AI apps with Neon
           slug: ai/ai-scale-with-neon
-    - title: AI apps built with Neon
-      items:
-        - title: Build a RAG chatbot
-          slug: https://neon.tech/guides/chatbot-astro-postgres-llamaindex
-          tag: community
-        - title: Build a reverse image search engine
-          slug: https://neon.tech/guides/llamaindex-postgres-search-images
-          tag: community
-        - title: Ask Neon chatbot
-          slug: https://github.com/neondatabase/ask-neon
-        - title: Vercel Postgres pgvector starter
-          slug: https://vercel.com/templates/next.js/postgres-pgvector
-        - title: YCombinator Semantic search
-          slug: https://github.com/neondatabase/yc-idea-matcher
-        - title: Web-based AI SQL Playground
-          slug: https://neon.tech/blog/postgres-ai-playground
-        - title: Jupyter Notebook for vector search with Neon and OpenAI
-          slug: https://github.com/neondatabase/neon-vector-search-openai-notebooks
-        - title: Image search with Neon and Vector AI
-          slug: https://github.com/ItzCrazyKns/Neon-Image-Search
-          tag: community
-        - title: Text-to-SQL with Mistral and LangChain  
-          slug: https://github.com/mistralai/cookbook/blob/main/third_party/Neon/neon_text_to_sql.ipynb
-          tag: community
-        - title: Create a custom ChatGPT plugin
-          slug: https://neon.tech/blog/openais-gpt-store-is-live-create-and-publish-a-custom-postgres-gpt-expert
     - title: AI tools
       items:
         - title: Google Colab
