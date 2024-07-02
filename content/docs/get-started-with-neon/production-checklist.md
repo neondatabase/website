@@ -47,7 +47,7 @@ In Neon, your compute size determines the amount of vCPU and memory your databas
 
 You should start with a compute size that can hold your data or at least your most frequently accessed data (your [working set](/docs/reference/glossary#working-set)) in memory. If you are using Neon's _Autoscaling_ feature, we recommend the same for your **minimum compute size** setting (see [Configure Autoscaling](#configure-autoscaling)).
 
-For a table showing the vCPU and memory per compute size and how to select the right compute size, see [How to size your compute](docs/manage/endpoints#how-to-size-your-compute).
+For a table showing the vCPU and memory per compute size and how to select the right compute size, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 ## Configure Autoscaling
 
