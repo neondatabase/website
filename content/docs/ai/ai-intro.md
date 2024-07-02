@@ -116,7 +116,7 @@ Learn about popular AI tools and how to use them with Neon Postgres.
 
 <a href="/docs/ai/ai-google-colab" description="A cloud-based environment to write and execute Python code, perfect for machine learning and data science tasks" icon="openai">Google Colab</a>
 
-<a href="https://notebooks.azure.com/" description="A cloud-based Jupyter notebook service integrated with Azure machine learning services for creating, running, and sharing notebooks" icon="openai">Microsoft Azure Notebooks</a>
+<a href="/docs/ai/ai-azure-notebooks" description="A cloud-based Jupyter notebook service integrated with Azure Data Studio for creating, running, and sharing notebooks" icon="openai">Azure Data Studio Notebooks</a>
 
 <a href="/docs/guides/askyourdatabase" description="Chat with your Neon Postgres database without writing SQL" icon="openai">Chat with Neon Postgres with AskYourDatabase</a>
 

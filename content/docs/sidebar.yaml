@@ -509,16 +509,6 @@
           slug: ai/ai-vector-search-optimization
         - title: AI scaling guide
           slug: ai/ai-scale-with-neon
-    - title: AI integrations
-      items: 
-        - title: OpenAI
-          slug: ai/openai
-        - title: LangChain
-          slug: ai/langchain
-        - title: LlamaIndex
-          slug: ai/llamaindex
-        - title: Ollama
-          slug: ai/ollama
     - title: AI apps built with Neon
       items:
         - title: Build a RAG chatbot
@@ -549,12 +539,12 @@
       items:
         - title: Google Colab
           slug: ai/ai-google-colab
-        - title: Jupyter Notebook
-          slug: ai/jupyter-notebook
-        - title: Microsoft Azure Notebooks
-          slug: ai/azure-notebooks
-        - title: Amazon SageMaker Notebooks
-          slug: ai/amazon-sagemake-notebooks
+        - title: Azure Data Studio Notebooks
+          slug: ai/ai-azure-notebooks
+        - title: AskYourDatabase
+          slug: guides/askyourdatabase
+        - title: Outerbase
+          slug: guides/outerbase
 - title: Command line & SDKs
   items:
     - title: CLI Reference
