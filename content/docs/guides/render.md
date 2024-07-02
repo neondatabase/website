@@ -155,6 +155,14 @@ To remove your application from Render, navigate to the dashboard, select `Setti
 
 To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](/docs/manage/projects#delete-a-project).
 
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-render" description="Connect a Neon Postgres database to your Node application deployed with Render" icon="github">Use Neon Postgres with Render</a>
+</DetailIconCards>
+
 ## Resources
 
 - [Render platform](https://render.com/)
