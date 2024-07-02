@@ -5,7 +5,7 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2024-06-29T14:19:59.866Z'
+updatedOn: '2024-07-02T09:02:30.705Z'
 ---
 
 ## Deploy
