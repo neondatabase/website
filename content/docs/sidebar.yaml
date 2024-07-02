@@ -38,6 +38,9 @@
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
           slug: guides/quarkus-reactive
+        - title: React
+          slug: guides/react
+          tag: new
         - title: Reflex
           slug: guides/reflex
           tag: new
