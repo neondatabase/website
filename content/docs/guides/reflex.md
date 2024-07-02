@@ -207,10 +207,12 @@ This command applies the migration to the database, updating the schema to match
 
 Learn how to use Reflex with Neon Postgres to create an interactive Customer Data App. The app demonstrates how to edit tabular data from a live application connected to a Postgres database. You can find a live version of the application [here](https://customer-data-app.reflex.run/).
 
+
+![Reflex Customer Data App](/docs/guides/reflex_customer_data_app.png)
+
 <DetailIconCards>
 
 <a href="https://github.com/reflex-dev/templates/tree/main/customer_data_app" description="GitHub repository for the Reflex Customer Data App built with Neon Postgres" icon="github">Customer Data App</a>
 
 </DetailIconCards>
 
-![Reflex Customer Data App](/docs/guides/reflex_customer_data_app.png)
