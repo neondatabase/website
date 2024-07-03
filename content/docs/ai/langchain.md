@@ -50,6 +50,8 @@ LangChain handles embedding generation internally while adding vectors to the Po
 
 LangChain can find similar documents to the user's latest query and invoke the OpenAI API to power [chat completion](https://platform.openai.com/docs/guides/text-generation/chat-completions-api) responses, providing a seamless integration for creating dynamic interactions.
 
+Here's how you can power chat completions in an API route:
+
 <CodeTabs labels={['JavaScript', 'Python']}>
 
 ```tsx
