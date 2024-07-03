@@ -9,7 +9,7 @@ LangChain is a popular framework for working with AI, Vectors, and embeddings. L
 
 ## Initialize Postgres Vector Store
 
-TODO - talk about how LangChain takes out the complexity of managing documents insertion and embeddings generation using vector stores
+LangChain simplifies the complexity of managing document insertion and embeddings generation using vector stores by providing a streamlined methods for these tasks.
 
 <CodeTabs labels={['JavaScript', 'Python']}>
 
@@ -39,11 +39,11 @@ export async function loadVectorStore() {
 
 ## Generate Embeddings with OpenAI
 
-TODO - talk about how langchain takes care of embedding generation internally while adding the vectors to Postgres database, else the user can refer to https://js.langchain.com/v0.2/docs/integrations/text_embedding/openai#specifying-dimensions (in JS) and https://python.langchain.com/v0.2/docs/how_to/embed_text/#embed_query (in Python) for handling the embeddings on their own.
+LangChain handles embedding generation internally while adding vectors to the Postgres database, simplifying the process for users. For more detailed control over embeddings, refer to the respective [JavaScript](https://js.langchain.com/v0.2/docs/integrations/text_embedding/openai#specifying-dimensions) and [Python](https://python.langchain.com/v0.2/docs/how_to/embed_text/#embed_query) documentation.
 
 ## Stream Chat Completions with OpenAI
 
-TODO - talk about how LangChain can be used to find similar documents to the user latest query and then invoke the OpenAI API internally to power chat completion responses
+LangChain can find similar documents to the user's latest query and invoke the OpenAI API to power chat completion responses, providing a seamless integration for dynamic interactions.
 
 <CodeTabs labels={['JavaScript', 'Python']}>
 
