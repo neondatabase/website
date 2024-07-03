@@ -49,7 +49,7 @@ HNSW is a graph-based approach to indexing multi-dimensional data. It constructs
 
 <Admonition type="note">
 An HNSW index has better query performance than IVFFlat (in terms of speed-recall tradeoff), but has slower build times and uses more memory. Also, an HNSW index can be created without any data in the table since there isn’t a training step like there is for an IVFFlat index.
-</Admonition> 
+</Admonition>
 
 ![HNSW graph](/docs/extensions/hnsw_graph.png)
 
@@ -90,13 +90,13 @@ IVFFlat in `pgvector` has two parameters:
 
 1. `lists` (number of [k-means clusters](https://en.wikipedia.org/wiki/K-means_clustering)):
 
-    - This parameter specifies the number of clusters (or "lists") to divide the dataset into
-    - Each cluster contains a subset of the data, and each data point belongs to the closest cluster centroid.
+   - This parameter specifies the number of clusters (or "lists") to divide the dataset into
+   - Each cluster contains a subset of the data, and each data point belongs to the closest cluster centroid.
 
 2. `probes` (number of lists to explore during the search):
 
-    - This parameter determines how many clusters are considered during the search for the nearest neighbors.
-    - By probing multiple clusters, the search algorithm can find the closest points more accurately, balancing between speed and accuracy.
+   - This parameter determines how many clusters are considered during the search for the nearest neighbors.
+   - By probing multiple clusters, the search algorithm can find the closest points more accurately, balancing between speed and accuracy.
 
 By default, the `probes` parameter is set to `1`. This means that during a search, only one cluster is explored. This approach is fine if your query vector is close to the centroid. However, if the query vector is located near the edge of the cluster, closer neighbors in adjacent clusters will not be included in the search, which can result in a lower recall.
 
@@ -135,6 +135,6 @@ Therefore, we encourage experimenting with different values for `probes` and `li
 
 In conclusion, `pgvector` is a powerful tool for vector similarity searches in Postgres. The sequential scan approach of `pgvector` performs well for small datasets but can be costly for larger ones.
 
-We explored how you can optimize your searches using HNSW or IVFFlat indexes for approximate nearest neighbor (ANN) search, noting that HNSW indexes have better query performance than IVFFlat but with tradeoffs in build time and memory usage. 
+We explored how you can optimize your searches using HNSW or IVFFlat indexes for approximate nearest neighbor (ANN) search, noting that HNSW indexes have better query performance than IVFFlat but with tradeoffs in build time and memory usage.
 
 By creating an index and testing different parameters, you can find the right balance that provides the best performance for your specific use case and dataset.

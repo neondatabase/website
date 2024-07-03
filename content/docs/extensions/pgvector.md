@@ -52,38 +52,38 @@ After generating embeddings using a service like [OpenAI’s Embeddings API](htt
 
 - Insert two new rows into the `items` table with the provided embeddings.
 
-   ```sql
-   INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]');
-   ```
+  ```sql
+  INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]');
+  ```
 
 - Load vectors in bulk using the `COPY` command:
 
-   ```sql
-   COPY items (embedding) FROM STDIN WITH (FORMAT BINARY);
-   ```
+  ```sql
+  COPY items (embedding) FROM STDIN WITH (FORMAT BINARY);
+  ```
 
    <Admonition type="tip">
    For a Python script example, see [bulk_loading.py](https://github.com/pgvector/pgvector-python/blob/master/examples/bulk_loading.py).
-   </Admonition> 
+   </Admonition>
 
 - Upsert vectors:
 
-   ```sql
-   INSERT INTO items (id, embedding) VALUES (1, '[1,2,3]'), (2, '[4,5,6]')
-      ON CONFLICT (id) DO UPDATE SET embedding = EXCLUDED.embedding;
-   ```
+  ```sql
+  INSERT INTO items (id, embedding) VALUES (1, '[1,2,3]'), (2, '[4,5,6]')
+     ON CONFLICT (id) DO UPDATE SET embedding = EXCLUDED.embedding;
+  ```
 
 - Update vectors:
 
-   ```sql
-   UPDATE items SET embedding = '[1,2,3]' WHERE id = 1;
-   ```
+  ```sql
+  UPDATE items SET embedding = '[1,2,3]' WHERE id = 1;
+  ```
 
 - Delete vectors:
 
-   ```sql
-   DELETE FROM items WHERE id = 1;
-   ```
+  ```sql
+  DELETE FROM items WHERE id = 1;
+  ```
 
 ## Querying vectors
 
@@ -91,21 +91,21 @@ To retrieve vectors and calculate similarity, use `SELECT` statements and the bu
 
 - Get the nearest neighbor to a vector by L2 distance:
 
-   ```sql
-   SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
-   ```
+  ```sql
+  SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
+  ```
 
 - Get the nearest neighbor to a row by L2 distance:
 
-   ```sql
-   SELECT * FROM items WHERE id != 1 ORDER BY embedding <-> (SELECT embedding FROM items WHERE id = 1) LIMIT 5;
-   ```
+  ```sql
+  SELECT * FROM items WHERE id != 1 ORDER BY embedding <-> (SELECT embedding FROM items WHERE id = 1) LIMIT 5;
+  ```
 
 - Get rows within a certain distance by L2 distance:
 
-   ```sql
-   SELECT * FROM items WHERE embedding <-> '[3,1,2]' < 5;
-   ```
+  ```sql
+  SELECT * FROM items WHERE embedding <-> '[3,1,2]' < 5;
+  ```
 
    <Admonition type="note">
    To use an index with a query, include `ORDER BY` and `LIMIT` clauses, as shown in the second query example above.
@@ -126,35 +126,35 @@ The inner product operator (`<#>`) returns the negative inner product since Post
 
 - Get the distances:
 
-   ```sql
-   SELECT embedding <-> '[3,1,2]' AS distance FROM items;
-   ```
+  ```sql
+  SELECT embedding <-> '[3,1,2]' AS distance FROM items;
+  ```
 
 - For inner product, multiply by `-1` (since `<#>` returns the negative inner product):
 
-   ```sql
-   SELECT (embedding <#> '[3,1,2]') * -1 AS inner_product FROM items;
-   ```
+  ```sql
+  SELECT (embedding <#> '[3,1,2]') * -1 AS inner_product FROM items;
+  ```
 
 - For cosine similarity, use `1 -` cosine distance:
 
-   ```sql
-   SELECT 1 - (embedding <=> '[3,1,2]') AS cosine_similarity FROM items;
-   ```
+  ```sql
+  SELECT 1 - (embedding <=> '[3,1,2]') AS cosine_similarity FROM items;
+  ```
 
 ### Aggregate queries
 
 - To average vectors:
 
-   ```sql
-   SELECT AVG(embedding) FROM items;
-   ```
+  ```sql
+  SELECT AVG(embedding) FROM items;
+  ```
 
 - To average groups of vectors:
 
-   ```sql
-   SELECT category_id, AVG(embedding) FROM items GROUP BY category_id;
-   ```
+  ```sql
+  SELECT category_id, AVG(embedding) FROM items GROUP BY category_id;
+  ```
 
 ## Indexing vectors
 
@@ -184,39 +184,39 @@ Notice how indexes are defined differently depending on the distance function be
 
 - L2 distance:
 
-   ```sql
-   CREATE INDEX ON items USING hnsw (embedding vector_l2_ops);
-   ```
+  ```sql
+  CREATE INDEX ON items USING hnsw (embedding vector_l2_ops);
+  ```
 
 - Inner product:
 
-   ```sql
-   CREATE INDEX ON items USING hnsw (embedding vector_ip_ops);
-   ```
+  ```sql
+  CREATE INDEX ON items USING hnsw (embedding vector_ip_ops);
+  ```
 
 - Cosine distance:
 
-   ```sql
-   CREATE INDEX ON items USING hnsw (embedding vector_cosine_ops);
-   ```
+  ```sql
+  CREATE INDEX ON items USING hnsw (embedding vector_cosine_ops);
+  ```
 
 - L1 distance:
 
-   ```sql
-   CREATE INDEX ON items USING hnsw (embedding vector_l1_ops);
-   ```
+  ```sql
+  CREATE INDEX ON items USING hnsw (embedding vector_l1_ops);
+  ```
 
 - Hamming distance:
 
-   ```sql
-   CREATE INDEX ON items USING hnsw (embedding bit_hamming_ops);
-   ```
+  ```sql
+  CREATE INDEX ON items USING hnsw (embedding bit_hamming_ops);
+  ```
 
 - Jaccard distance:
 
-   ```sql
-   CREATE INDEX ON items USING hnsw (embedding bit_jaccard_ops);
-   ```
+  ```sql
+  CREATE INDEX ON items USING hnsw (embedding bit_jaccard_ops);
+  ```
 
 #### HNSW index options
 
@@ -263,54 +263,54 @@ Like other index types, it’s faster to create an index after loading your init
 
 - `maintenance_work_mem`
 
-   Indexes build significantly faster when the graph fits into Postgres `maintenance_work_mem`.
+  Indexes build significantly faster when the graph fits into Postgres `maintenance_work_mem`.
 
-   A notice is shown when the graph no longer fits:
+  A notice is shown when the graph no longer fits:
 
-   ```text
-   NOTICE:  hnsw graph no longer fits into maintenance_work_mem after 100000 tuples
-   DETAIL:  Building will take significantly more time.
-   HINT:  Increase maintenance_work_mem to speed up builds.
-   ```
+  ```text
+  NOTICE:  hnsw graph no longer fits into maintenance_work_mem after 100000 tuples
+  DETAIL:  Building will take significantly more time.
+  HINT:  Increase maintenance_work_mem to speed up builds.
+  ```
 
-   In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute):
+  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute):
 
-   | Compute Units (CU) | vCPU | RAM   | maintenance_work_mem |
-   | ------------------ | ---- | ----- | -------------------- |
-   | 0.25               | 0.25 | 1 GB  | 64 MB                |
-   | 0.50               | 0.50 | 2 GB  | 64 MB                |
-   | 1                  | 1    | 4 GB  | 67 MB                |
-   | 2                  | 2    | 8 GB  | 134 MB               |
-   | 3                  | 3    | 12 GB | 201 MB               |
-   | 4                  | 4    | 16 GB | 268 MB               |
-   | 5                  | 5    | 20 GB | 335 MB               |
-   | 6                  | 6    | 24 GB | 402 MB               |
-   | 7                  | 7    | 28 GB | 470 MB               |
-   | 8                  | 8    | 32 GB | 537 MB               |
+  | Compute Units (CU) | vCPU | RAM   | maintenance_work_mem |
+  | ------------------ | ---- | ----- | -------------------- |
+  | 0.25               | 0.25 | 1 GB  | 64 MB                |
+  | 0.50               | 0.50 | 2 GB  | 64 MB                |
+  | 1                  | 1    | 4 GB  | 67 MB                |
+  | 2                  | 2    | 8 GB  | 134 MB               |
+  | 3                  | 3    | 12 GB | 201 MB               |
+  | 4                  | 4    | 16 GB | 268 MB               |
+  | 5                  | 5    | 20 GB | 335 MB               |
+  | 6                  | 6    | 24 GB | 402 MB               |
+  | 7                  | 7    | 28 GB | 470 MB               |
+  | 8                  | 8    | 32 GB | 537 MB               |
 
-   To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
+  To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
-   ```sql
-   SET maintenance_work_mem='10 GB';
-   ```
+  ```sql
+  SET maintenance_work_mem='10 GB';
+  ```
 
-   The recommended setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GiB is less than 50% of the RAM available for that compute size.
+  The recommended setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GiB is less than 50% of the RAM available for that compute size.
 
 - `max_parallel_maintenance_workers`
 
-   You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
+  You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
 
-   The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
+  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
 
-   You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
+  You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
-   ```sql
-   SET max_parallel_maintenance_workers = 7
-   ```
+  ```sql
+  SET max_parallel_maintenance_workers = 7
+  ```
 
-   For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
 
-   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
+  For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 
 #### Check indexing progress
 
@@ -355,9 +355,9 @@ The following examples show how to add an index for each distance function:
 
 - L2 distance
 
-   ```sql
-   CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
-   ```
+  ```sql
+  CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
+  ```
 
    <Admonition type="note">
    Use `halfvec_l2_ops` for halfvec (and similar with the other distance functions).
@@ -365,21 +365,21 @@ The following examples show how to add an index for each distance function:
 
 - Inner product
 
-   ```sql
-   CREATE INDEX ON items USING ivfflat (embedding vector_ip_ops) WITH (lists = 100);
-   ```
+  ```sql
+  CREATE INDEX ON items USING ivfflat (embedding vector_ip_ops) WITH (lists = 100);
+  ```
 
 - Cosine distance
 
-   ```sql
-   CREATE INDEX ON items USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
-   ```
+  ```sql
+  CREATE INDEX ON items USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+  ```
 
 - Hamming distance
 
-   ```sql
-   CREATE INDEX ON items USING ivfflat (embedding bit_hamming_ops) WITH (lists = 100);
-   ```
+  ```sql
+  CREATE INDEX ON items USING ivfflat (embedding bit_hamming_ops) WITH (lists = 100);
+  ```
 
 #### IVFFlat query options
 
@@ -480,7 +480,7 @@ Create an index on one or more of the `WHERE` columns for exact search"
 
 ```sql
 CREATE INDEX ON items (category_id);
-````
+```
 
 Create a [partial index](https://www.postgresql.org/docs/current/indexes-partial.html) on the vector column for approximate search:
 
@@ -541,7 +541,7 @@ Jaccard distance (`<%>`) is also supported with binary vector embeddings.
 
 Support for binary quantization was added in `pgvector` 0.7.0.
 
-Binary quantization is a process that transforms dense or sparse embeddings into binary representations by thresholding vector dimensions to either 0 or 1.  
+Binary quantization is a process that transforms dense or sparse embeddings into binary representations by thresholding vector dimensions to either 0 or 1.
 
 Use expression indexing for binary quantization:
 
