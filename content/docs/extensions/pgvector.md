@@ -553,7 +553,7 @@ LINE 1: SELECT '[4e38,1]'::vector;
 
 There are a few ways to index nearest neighbor queries with a `WHERE` clause:
 
-```sql```
+```sql
 SELECT * FROM items WHERE category_id = 123 ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
 ```
 
