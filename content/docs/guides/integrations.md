@@ -70,9 +70,9 @@ updatedOn: '2024-07-02T09:02:30.705Z'
 
 <TechnologyNavigation>
 
-<img src="/images/technology-logos/github-logo.svg" width="36" height="36" alt="GitHub integration" href="/docs/guides/github-integration" title="Use the Neon GitHub integrations" />
+<img src="/images/technology-logos/github-logo.svg" width="36" height="36" alt="GitHub integration" href="/docs/guides/neon-github-app" title="Use the Neon GitHub integration" />
 
-<img src="/images/technology-logos/neosync-logo.svg" width="36" height="36" alt="Neosync" href="/docs/guides/neosync-anaonymize" title="Anonymize data with Neosync" />
+<img src="/images/technology-logos/neosync-logo.svg" width="36" height="36" alt="Neosync" href="/docs/guides/neosync-anonymize" title="Anonymize data with Neosync" />
 
 <img src="/images/technology-logos/neosync-logo.svg" width="36" height="36" alt="Neosync" href="/docs/guides/neosync-generate" title="Seed data with Neosync" />
 
