@@ -13,7 +13,7 @@ LangChain simplifies the complexity of managing document insertion and embedding
 
 Here's how you can initialize Postgres Vector with LangChain:
 
-<CodeTabs labels={['JavaScript', 'Python']}>
+<CodeTabs labels={['JavaScript']}>
 
 ```tsx
 // File: vectorStore.ts
@@ -36,10 +36,6 @@ export async function loadVectorStore() {
 const vectorStore = await loadVectorStore();
 ```
 
-```python
-# TODO
-```
-
 </CodeTabs>
 
 ## Generate Embeddings with OpenAI
@@ -52,7 +48,7 @@ LangChain can find similar documents to the user's latest query and invoke the O
 
 Here's how you can power chat completions in an API route:
 
-<CodeTabs labels={['JavaScript', 'Python']}>
+<CodeTabs labels={['JavaScript']}>
 
 ```tsx
 import { loadVectorStore } from './vectorStore';
@@ -106,10 +102,6 @@ export async function POST(request: Request) {
     },
   });
 }
-```
-
-```python
-# TODO
 ```
 
 </CodeTabs>
