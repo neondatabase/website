@@ -16,23 +16,23 @@ Here's how you can initialize Postgres Vector with LlamaIndex:
 ```tsx
 // File: vectorStore.ts
 
-import { OpenAIEmbedding, Settings } from 'llamaindex'
-import { PGVectorStore } from 'llamaindex/storage/vectorStore/PGVectorStore'
+import { OpenAIEmbedding, Settings } from 'llamaindex';
+import { PGVectorStore } from 'llamaindex/storage/vectorStore/PGVectorStore';
 
 Settings.embedModel = new OpenAIEmbedding({
   dimensions: 512,
   model: 'text-embedding-3-small',
-})
+});
 
 const vectorStore = new PGVectorStore({
   dimensions: 512,
   connectionString: process.env.POSTGRES_URL,
-})
+});
 
-export default vectorStore
+export default vectorStore;
 
 // Use in your code (say, in API routes)
-const index = await VectorStoreIndex.fromVectorStore(vectorStore)
+const index = await VectorStoreIndex.fromVectorStore(vectorStore);
 ```
 
 ## Generate Embeddings with OpenAI
@@ -48,27 +48,30 @@ Here's how you can power chat completions in an API route:
 ```tsx
 import vectorStore from './vectorStore';
 
-import { ContextChatEngine, VectorStoreIndex } from 'llamaindex'
+import { ContextChatEngine, VectorStoreIndex } from 'llamaindex';
 
-interface Message { role: 'user' | 'assistant' | 'system' | 'memory'; content: string }
+interface Message {
+  role: 'user' | 'assistant' | 'system' | 'memory';
+  content: string;
+}
 
 export async function POST(request: Request) {
-  const encoder = new TextEncoder()
-  const { messages = [] } = (await request.json()) as { messages: Message[] }
-  const userMessages = messages.filter((i) => i.role === 'user')
-  const query = userMessages[userMessages.length - 1].content
-  const index = await VectorStoreIndex.fromVectorStore(vectorStore)
-  const retriever = index.asRetriever()
-  const chatEngine = new ContextChatEngine({ retriever })
+  const encoder = new TextEncoder();
+  const { messages = [] } = (await request.json()) as { messages: Message[] };
+  const userMessages = messages.filter((i) => i.role === 'user');
+  const query = userMessages[userMessages.length - 1].content;
+  const index = await VectorStoreIndex.fromVectorStore(vectorStore);
+  const retriever = index.asRetriever();
+  const chatEngine = new ContextChatEngine({ retriever });
   const customReadable = new ReadableStream({
     async start(controller) {
-      const stream = await chatEngine.chat({ message: query, chatHistory: messages, stream: true })
+      const stream = await chatEngine.chat({ message: query, chatHistory: messages, stream: true });
       for await (const chunk of stream) {
-        controller.enqueue(encoder.encode(chunk.response))
+        controller.enqueue(encoder.encode(chunk.response));
       }
-      controller.close()
+      controller.close();
     },
-  })
+  });
   return new Response(customReadable, {
     headers: {
       Connection: 'keep-alive',
@@ -76,6 +79,6 @@ export async function POST(request: Request) {
       'Cache-Control': 'no-cache, no-transform',
       'Content-Type': 'text/plain; charset=utf-8',
     },
-  })
+  });
 }
 ```
