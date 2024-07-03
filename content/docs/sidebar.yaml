@@ -33,7 +33,8 @@
           slug: guides/laravel
         - title: Next.js
           slug: guides/nextjs
-
+        - title: Node.js
+          slug: guides/node
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
@@ -63,9 +64,7 @@
         - title: Java
           slug: guides/java
         - title: Javascript
-          items:
-            - title: Node.js
-              slug: guides/node
+          slug: guides/javascript
         - title: Python
           items:
             - title: Psycopg
