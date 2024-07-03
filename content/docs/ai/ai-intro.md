@@ -1,6 +1,6 @@
 ---
 title: AI & Embeddings
-subtitle: Build AI applications with Neon serverless Postgres as your vector database
+subtitle: Build AI applications with Neon Postgres as your vector database
 enableTableOfContents: true
 updatedOn: '2024-07-03T07:55:54.360Z'
 ---
