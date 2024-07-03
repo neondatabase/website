@@ -7,16 +7,16 @@ updatedOn: '2023-10-07T10:43:33.361Z'
 
 Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs) such as OpenAI.
 
-Neon supports the `pgvector` open-source extension, which enables Postgres as a vector database for storing and querying vector embeddings. By enabling Postgres as a vector database, you can keep your data in the open-source database that you know and trust. There's no need for data migration or a 3rd-party vector storage solution.
+Neon supports the `pgvector` open-source extension, which enables Postgres as a vector database for storing and querying embeddings. This means you can leverage the trusted open-source database that you trust without the hassle of data migration or relying on third-party vector storage solutions.
 
 Neon's AI Starter Kit provides resources, starter apps, and examples to help get you started.
 
-<CTA title="Ship faster with Neon's AI Starter Kit" description="Sign up for Neon Postgres and get a headstart on your AI app.  Our starter apps and resources will help you get up and running qucikly." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Ship faster with Neon's AI Starter Kit" description="Sign up for Neon Postgres and jumpstart your AI application.  Our starter apps and resources are designed to help you get up and running quickly." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
 The **Neon AI Starter Kit** includes:
 
 - Neon Postgres with the latest version of the Postgres [pgvector](https://neon.tech/docs/extensions/pgvector) extension for storing vector embeddings
-- A variety of hackable, fully-featured [AI starter apps](#ai-starter-apps) to get you started:
+- A variety of hackable, fully-featured [AI starter apps](#ai-starter-apps) to get you up and running:
   - AI Chatbot
   - RAG chatbot
   - Semantic search
@@ -30,7 +30,7 @@ The **Neon AI Starter Kit** includes:
 ## AI basics
 
 <DetailIconCards>
-<a href="/docs/ai/ai-concepts" description="The basics of building AI applications with Postgres" icon="openai">AI concepts</a>
+<a href="/docs/ai/ai-concepts" description="Learn how embeddings are used to build AI applications" icon="openai">AI concepts</a>
 
 <a href="/docs/extensions/pgvector" description="Learn about the pgvector Postgres extension" icon="openai">The pgvector extension</a>
 
