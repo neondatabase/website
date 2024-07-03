@@ -21,7 +21,7 @@ This topic describes how to enable the `pgvector` extension in Neon and how to c
 
 ## Enable the pgvector extension
 
-You can enable the `pgvector` extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
+You can enable the `pgvector` extension by running the following `CREATE EXTENSION` statement in the **Neon SQL Editor** or from a client such as `psql` that is connected to Neon.
 
 ```sql
 CREATE EXTENSION vector;
@@ -40,11 +40,11 @@ CREATE TABLE items (
 );
 ```
 
-This command generates a table named `items` with an `embedding` column capable of storing vectors with 3 dimensions. OpenAI's `text-embedding-ada-002` model supports 1536 dimensions for each piece of text, which creates more accurate embeddings for natural language processing tasks. However, using larger embeddings generally costs more and consumes more compute, memory and storage than using smaller embeddings. To learn more about embeddings and the cost-performance tradeoff, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
+This command generates a table named `items` with an `embedding` column capable of storing vectors with 3 dimensions. OpenAI's `text-embedding-3-small` model supports 1536 dimensions by default for each piece of text, which creates more accurate embeddings for natural language processing tasks. However, using larger embeddings generally costs more and consumes more compute, memory and storage than using smaller embeddings. To learn more about embeddings and the cost-performance tradeoff, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
 
 ## Storing embeddings
 
-After generating embeddings using a service like the OpenAI API, you can store them in your database. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings.
+After generating embeddings using a service like the [OpenAI’s Embeddings API](https://platform.openai.com/docs/api-reference/embeddings), you can store them in your database. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings.
 
 This command inserts two new rows into the `items` table with the provided embeddings.
 
@@ -81,25 +81,32 @@ DELETE FROM items WHERE id = 1;
 
 ## Querying vectors
 
-To retrieve vectors and calculate similarity, use `SELECT` statements and the built-in vector operators. For instance, you can find the top 5 most similar items to a given embedding within a certain distance using the following query:
+To retrieve vectors and calculate similarity, use `SELECT` statements and the built-in distance function operators.
+
+For example, this query gets the nearest neighbor to a vector by L2 distance:
 
 ```sql
 SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
 ```
 
-This query computes the Euclidean distance (L2 distance) between the given vector and the vectors stored in the items table, sorts the results by the calculated distance, and returns the top 5 most similar items.
+This query gets the nearest neighbor to a row by L2 distance:
 
-This query retrieves the nearest neighbors to a row:
-
-```sql shouldWrap
+```sql
 SELECT * FROM items WHERE id != 1 ORDER BY embedding <-> (SELECT embedding FROM items WHERE id = 1) LIMIT 5;
 ```
 
+This query returns rows within a certain distance by L2 distance:
+
+```sql
+SELECT * FROM items WHERE embedding <-> '[3,1,2]' < 5;
+```
+
+
 <Admonition type="note">
-To use an index, use `ORDER BY` and `LIMIT`, as shown in the example above.
+To use an index with a query, include `ORDER BY` and `LIMIT` clauses, as shown in the second query example above.
 </Admonition>
 
-Supported distance functions include:
+Supported distance function operators include:
 
 - `<->` - L2 distance
 - `<#>` - (negative) inner product
@@ -124,13 +131,13 @@ For inner product, multiply by `-1` (since `<#>` returns the negative inner prod
 SELECT (embedding <#> '[3,1,2]') * -1 AS inner_product FROM items;
 ```
 
-For cosine similarity, use 1 - cosine distance:
+For cosine similarity, use `1 -` cosine distance:
 
 ```sql
 SELECT 1 - (embedding <=> '[3,1,2]') AS cosine_similarity FROM items;
 ```
 
-## Aggregate queries
+### Aggregate queries
 
 To average vectors:
 
@@ -155,24 +162,24 @@ Supported index types include:
 
 ### HNSW
 
-An HNSW index creates a multilayer graph. It has better query performance than IVFFlat (in terms of speed-recall tradeoff), but has slower build times and uses more memory. Also, an index can be created without any data in the table since there isn’t a training step like IVFFlat.
+An HNSW index creates a multilayer graph. It has better query performance than IVFFlat (in terms of speed-recall tradeoff), but has slower build times and uses more memory. Also, an index can be created without any data in the table since there isn’t a training step like there is for an IVFFlat index.
 
-The following examples show how to add an HNSW index for the supported distance functions, which include:
+HNSW indexes support the following vector types types:
 
 - `vector` - up to 2,000 dimensions
 - `halfvec` - up to 4,000 dimensions
 - `bit` - up to 64,000 dimensions
 - `sparsevec` - up to 1,000 non-zero elements
 
+<Admonition type="note">
+Notice how indexes are defined differently depending on the distance function being used. For example `vector_l2_ops` is specified for L2 distance, `vector_ip_ops` for inner product, and so on. 
+</Admonition>
+
 **L2 distance**
 
 ```sql
 CREATE INDEX ON items USING hnsw (embedding vector_l2_ops);
 ```
-
-<Admonition type="note">
-Use `halfvec_l2_ops` for `halfvec` and `sparsevec_l2_ops` for `sparsevec` (and similar for the other distance functions).
-</Admonition>
 
 **Inner product**
 

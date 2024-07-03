@@ -58,7 +58,7 @@ Different distance metrics can be more appropriate for different tasks, dependin
 
 A common approach to generating embeddings is to use an LLM API, such as [OpenAI’s Embeddings API](https://platform.openai.com/docs/api-reference/embeddings). This API allows you to input a text string into an API endpoint, which then returns the corresponding embedding. The "cow jumped over the moon" example above is a simplistic example with 3 dimensions. Most embedding models generate embeddings with a much larger number of dimensions. OpenAI's newest and most performant embedding models, `text-embedding-3-small` and `text-embedding-3-large`, generate embeddings with 1536 and 3072 dimensions by default.
 
-Here's an example of how to use OpenAI's `text-embedding-ada-002` model to generate an embedding:
+Here's an example of how to use OpenAI's `text-embedding-3-small` model to generate an embedding:
 
 ```bash
 curl https://api.openai.com/v1/embeddings \
