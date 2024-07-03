@@ -560,7 +560,7 @@ Create an index on one or more of the `WHERE` columns for exact search"
 
 ```sql
 CREATE INDEX ON items (category_id);
-````
+```
 
 Create a [partial index](https://www.postgresql.org/docs/current/indexes-partial.html) on the vector column for approximate search:
 
@@ -621,7 +621,7 @@ Jaccard distance (`<%>`) is also supported with binary vector embeddings.
 
 Support for binary quantization was Added in `pgvector` 0.7.0.
 
-Binary quantization is a process that transforms dense or sparse embeddings into binary representations by thresholding vector dimensions to either 0 or 1.  
+Binary quantization is a process that transforms dense or sparse embeddings into binary representations by thresholding vector dimensions to either 0 or 1.
 
 Use expression indexing for binary quantization:
 
@@ -674,7 +674,7 @@ SELECT * FROM items ORDER BY embedding <-> '{1:3,3:1,5:2}/5' LIMIT 5;
 Use together with Postgres full-text search for hybrid search.
 
 SELECT id, content FROM items, plainto_tsquery('hello search') query
-    WHERE textsearch @@ query ORDER BY ts_rank_cd(textsearch, query) DESC LIMIT 5;
+WHERE textsearch @@ query ORDER BY ts_rank_cd(textsearch, query) DESC LIMIT 5;
 You can use Reciprocal Rank Fusion or a cross-encoder to combine results.
 
 ## Resources
