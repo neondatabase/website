@@ -48,7 +48,7 @@ LangChain handles embedding generation internally while adding vectors to the Po
 
 ## Stream Chat Completions with OpenAI
 
-LangChain can find similar documents to the user's latest query and invoke the OpenAI API to power chat completion responses, providing a seamless integration for dynamic interactions.
+LangChain can find similar documents to the user's latest query and invoke the OpenAI API to power [chat completion](https://platform.openai.com/docs/guides/text-generation/chat-completions-api) responses, providing a seamless integration for dynamic interactions.
 
 <CodeTabs labels={['JavaScript', 'Python']}>
 
