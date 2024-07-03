@@ -11,6 +11,8 @@ LangChain is a popular framework for working with AI, Vectors, and embeddings. L
 
 LangChain simplifies the complexity of managing document insertion and embeddings generation using vector stores by providing a streamlined methods for these tasks.
 
+Here's how you can initialize Postgres Vector with LangChain:
+
 <CodeTabs labels={['JavaScript', 'Python']}>
 
 ```tsx
@@ -29,6 +31,9 @@ export async function loadVectorStore() {
     connectionString: process.env.POSTGRES_URL as string,
   });
 }
+
+// Use in your code (say, in API routes)
+const vectorStore = await loadVectorStore()
 ```
 
 ```python
