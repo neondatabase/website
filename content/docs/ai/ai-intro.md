@@ -1,8 +1,8 @@
 ---
-title: AI & embeddings
+title: AI & Embeddings
 subtitle: Build AI applications with Neon serverless Postgres as your vector database
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.361Z'
+updatedOn: '2024-07-03T07:55:54.360Z'
 ---
 
 Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs) such as OpenAI.
@@ -82,7 +82,9 @@ Learn how to integrate Neon Postgres with various LLMs and AI platforms.
 
 <DetailIconCards>
 
-<a href="/docs/ai/langchain" description="Learn how to use LangChain with OpenAI to create AI applications faster" icon="langchain">LangChain</a>
+<a href="/docs/ai/langchain" description="Learn how to use LangChain with OpenAI to create AI applications faster" icon="langchain">LangChain (with OpenAI)</a>
+
+<a href="/docs/ai/llamaindex" description="Learn how to use LlamaIndex with OpenAI to create AI applications faster" icon="llamaindex">LlamaIndex (with OpenAI)</a>
 
 </DetailIconCards>
 

@@ -13,8 +13,6 @@ LangChain simplifies the complexity of managing document insertion and embedding
 
 Here's how you can initialize Postgres Vector with LangChain:
 
-<CodeTabs labels={['JavaScript']}>
-
 ```tsx
 // File: vectorStore.ts
 
@@ -36,8 +34,6 @@ export async function loadVectorStore() {
 const vectorStore = await loadVectorStore();
 ```
 
-</CodeTabs>
-
 ## Generate Embeddings with OpenAI
 
 LangChain handles embedding generation internally while adding vectors to the Postgres database, simplifying the process for users. For more detailed control over embeddings, refer to the respective [JavaScript](https://js.langchain.com/v0.2/docs/integrations/text_embedding/openai#specifying-dimensions) and [Python](https://python.langchain.com/v0.2/docs/how_to/embed_text/#embed_query) documentation.
@@ -47,8 +43,6 @@ LangChain handles embedding generation internally while adding vectors to the Po
 LangChain can find similar documents to the user's latest query and invoke the OpenAI API to power [chat completion](https://platform.openai.com/docs/guides/text-generation/chat-completions-api) responses, providing a seamless integration for creating dynamic interactions.
 
 Here's how you can power chat completions in an API route:
-
-<CodeTabs labels={['JavaScript']}>
 
 ```tsx
 import { loadVectorStore } from './vectorStore';
@@ -104,4 +98,20 @@ export async function POST(request: Request) {
 }
 ```
 
-</CodeTabs>
+## Starter apps
+
+Hackable, fully-featured, pre-built [starter apps](https://github.com/neondatabase/examples/tree/main/ai/llamaindex) to get you up and running with LlamaIndex and Postgres.
+
+<DetailIconCards>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs" description="A fully-featured, hackable Netx.js AI chatbot built with OpenAI and LangChain" icon="github">AI chatbot (OpenAI + LangChain)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/rag-nextjs" description="A fully-featured, hackable Next.js RAG chatbot built with OpenAI and LangChain" icon="github">RAG chatbot (OpenAI + LangChain)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/semantic-search-nextjs" description="A fully-featured, hackable Next.js Semantic Search chatbot built with OpenAI and LangChain" icon="github">Semantic search chatbot (OpenAI + LangChain)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/reverse-image-search-nextjs" description="A full-featured, hackable Next.js Reverse Image Search Engine built with OpenAI and LangChain" icon="github">Reverse image search (OpenAI + LangChain)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/chat-with-pdf-nextjs" description="A fully-featured, hackable Next.js Chat with PDF chatbot built with OpenAI and LangChain" icon="github">Chat with PDF (OpenAI + LangChain)</a>
+
+</DetailIconCards>
