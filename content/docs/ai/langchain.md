@@ -97,3 +97,21 @@ export async function POST(request: Request) {
   });
 }
 ```
+
+## Starter apps
+
+Hackable, fully-featured, pre-built [starter apps](https://github.com/neondatabase/examples/tree/main/ai/llamaindex) to get you up and running with LlamaIndex and Postgres.
+
+<DetailIconCards>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs" description="A fully-featured, hackable Netx.js AI chatbot built with OpenAI and LangChain" icon="github">AI chatbot (OpenAI + LangChain)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/rag-nextjs" description="A fully-featured, hackable Next.js RAG chatbot built with OpenAI and LangChain" icon="github">RAG chatbot (OpenAI + LangChain)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/semantic-search-nextjs" description="A fully-featured, hackable Next.js Semantic Search chatbot built with OpenAI and LangChain" icon="github">Semantic search chatbot (OpenAI + LangChain)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/reverse-image-search-nextjs" description="A full-featured, hackable Next.js Reverse Image Search Engine built with OpenAI and LangChain" icon="github">Reverse image search (OpenAI + LangChain)</a>
+
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/chat-with-pdf-nextjs" description="A fully-featured, hackable Next.js Chat with PDF chatbot built with OpenAI and LangChain" icon="github">Chat with PDF (OpenAI + LangChain)</a>
+
+</DetailIconCards>
