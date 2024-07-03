@@ -84,7 +84,7 @@ Learn how to integrate Neon Postgres with various LLMs and AI platforms.
 
 <a href="/docs/ai/tbd" description="Discover OpenAI's models and their wide-ranging applications" icon="openai">OpenAI</a>
 
-<a href="/docs/ai/tbd" description="Utilize LlamaIndex models for efficient text processing and analysis" icon="openai">LangChain</a>
+<a href="/docs/ai/langchain" description="Learn how to use LangChain with OpenAI to create AI applications faster" icon="langchain">LangChain</a>
 
 <a href="/docs/ai/tbd" description="Utilize LlamaIndex models for efficient text processing and analysis" icon="openai">LlamaIndex</a>
 
