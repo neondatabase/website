@@ -572,16 +572,18 @@
           slug: ai/ai-vector-search-optimization
         - title: Scale AI apps with Neon
           slug: ai/ai-scale-with-neon
+    - title: AI integrations
+      items: 
+        - title: LangChain
+          slug: ai/langchain
+        - title: LlamaIndex
+          slug: ai/llamaindex
     - title: AI tools
       items:
         - title: Google Colab
           slug: ai/ai-google-colab
         - title: Azure Data Studio Notebooks
           slug: ai/ai-azure-notebooks
-        - title: AskYourDatabase
-          slug: guides/askyourdatabase
-        - title: Outerbase
-          slug: guides/outerbase
 - title: Command line & SDKs
   items:
     - title: CLI Reference
