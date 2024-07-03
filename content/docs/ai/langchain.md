@@ -33,7 +33,7 @@ export async function loadVectorStore() {
 }
 
 // Use in your code (say, in API routes)
-const vectorStore = await loadVectorStore()
+const vectorStore = await loadVectorStore();
 ```
 
 ```python
