@@ -9,22 +9,22 @@ With Neon and `pgvector`, you scale your AL application in the same way that you
 
 ## Verticle scaling
 
-You can scale vertically by increasing memory, CPU, and storage. 
+You can scale vertically by increasing memory, CPU, and storage.
 
 Neon supports compute sizes ranging from .025 vCPU with 1 GB RAM up to 8 vCPU with 32 GB RAM:
 
-   | Compute Units (CU) | vCPU | RAM   | maintenance_work_mem |
-   | ------------------ | ---- | ----- | -------------------- |
-   | 0.25               | 0.25 | 1 GB  | 64 MB                |
-   | 0.50               | 0.50 | 2 GB  | 64 MB                |
-   | 1                  | 1    | 4 GB  | 67 MB                |
-   | 2                  | 2    | 8 GB  | 134 MB               |
-   | 3                  | 3    | 12 GB | 201 MB               |
-   | 4                  | 4    | 16 GB | 268 MB               |
-   | 5                  | 5    | 20 GB | 335 MB               |
-   | 6                  | 6    | 24 GB | 402 MB               |
-   | 7                  | 7    | 28 GB | 470 MB               |
-   | 8                  | 8    | 32 GB | 537 MB               |
+| Compute Units (CU) | vCPU | RAM   | maintenance_work_mem |
+| ------------------ | ---- | ----- | -------------------- |
+| 0.25               | 0.25 | 1 GB  | 64 MB                |
+| 0.50               | 0.50 | 2 GB  | 64 MB                |
+| 1                  | 1    | 4 GB  | 67 MB                |
+| 2                  | 2    | 8 GB  | 134 MB               |
+| 3                  | 3    | 12 GB | 201 MB               |
+| 4                  | 4    | 16 GB | 268 MB               |
+| 5                  | 5    | 20 GB | 335 MB               |
+| 6                  | 6    | 24 GB | 402 MB               |
+| 7                  | 7    | 28 GB | 470 MB               |
+| 8                  | 8    | 32 GB | 537 MB               |
 
 In Neon, scaling vertically is a matter of selecting the desired compute size. See [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint) for instructions. Available compute sizes differ according to your Neon plan. The Neon Free Tier supports computes with 0.25 vCPU and 1 GB RAM. The Launch plan offers compute sizes up to 4 vCPU with 16 GB RAM. Larger computes are available on the Scale plan. See [Neon plans](/docs/introduction/plans).
 
@@ -63,5 +63,3 @@ Since vector similarity search is a read-only workload, you can leverage read re
 Neon's Read replicas support the same compute sizes outlined above. You can also enable autoscaling for read replica computes.
 
 To learn more about the Neon read replica feature, see [Read replicas](/docs/introduction/read-replicas) and refer to our [Working with Neon read replicas](/docs/guides/read-replica-guide) guide.
-
-
