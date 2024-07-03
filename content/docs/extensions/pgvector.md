@@ -164,7 +164,7 @@ Supported index types include:
 
 An HNSW index creates a multilayer graph. It has better query performance than IVFFlat (in terms of speed-recall tradeoff), but has slower build times and uses more memory. Also, an index can be created without any data in the table since there isn’t a training step like there is for an IVFFlat index.
 
-HNSW indexes support the following vector types types:
+Supported vector types include:
 
 - `vector` - up to 2,000 dimensions
 - `halfvec` - up to 4,000 dimensions
@@ -226,7 +226,7 @@ A higher value of `ef_construction` provides better recall at the cost of index 
 
 #### HNSW query options
 
-You can specify the size of the dynamic candidate list for search. The size is `40` by default.
+You can specify the size of the candidate list for search. The size is `40` by default.
 
 ```sql
 SET hnsw.ef_search = 100;
@@ -243,6 +243,83 @@ SELECT ...
 COMMIT;
 ```
 
+#### HNSW index build time
+
+To optimize index build time, consider configuring the following session variables before building an index:
+
+- [maintenance_work_mem](#maintenance_work_mem)
+- [max_parallel_maintenance_workers](#max_parallel_maintenance_workers)
+
+<Admonition type="note">
+Like other index types, it’s faster to create an index after loading your initial data.
+</Admonition>  
+
+**maintenance_work_mem**
+
+Indexes build significantly faster when the graph fits into Postgres `maintenance_work_mem`.
+
+A notice is shown when the graph no longer fits:
+
+```text
+NOTICE:  hnsw graph no longer fits into maintenance_work_mem after 100000 tuples
+DETAIL:  Building will take significantly more time.
+HINT:  Increase maintenance_work_mem to speed up builds.
+```
+
+In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute):
+
+| Compute Units (CU) | vCPU | RAM   | maintenance_work_mem |
+| ------------------ | ---- | ----- | -------------------- |
+| 0.25               | 0.25 | 1 GB  | 64 MB                |
+| 0.50               | 0.50 | 2 GB  | 64 MB                |
+| 1                  | 1    | 4 GB  | 67 MB                |
+| 2                  | 2    | 8 GB  | 134 MB               |
+| 3                  | 3    | 12 GB | 201 MB               |
+| 4                  | 4    | 16 GB | 268 MB               |
+| 5                  | 5    | 20 GB | 335 MB               |
+| 6                  | 6    | 24 GB | 402 MB               |
+| 7                  | 7    | 28 GB | 470 MB               |
+| 8                  | 8    | 32 GB | 537 MB               |
+
+To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
+
+```sql
+SET maintenance_work_mem='10 GB';
+```
+
+The recommended setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GiB is less than 50% of the RAM available for that compute size.
+
+**max_parallel_maintenance_workers**
+
+You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
+
+The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
+
+You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
+
+```sql
+SET max_parallel_maintenance_workers = 7
+```
+
+For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+
+For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
+
+#### Check indexing progress
+
+You can check indexing progress with the following query:
+
+```
+SELECT phase, round(100.0 * blocks_done / nullif(blocks_total, 0), 1) AS "%" FROM pg_stat_progress_create_index;
+```
+
+The phases for HNSW are:
+
+1. initializing
+2. loading tuples
+
+For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the PostgreSQL documentation.
+
 ### IVFFlat
 
 An IVFFlat index divides vectors into lists and searches a subset of those lists that are closest to the query vector. It has faster build times and uses less memory than HNSW, but has lower query performance with respect to the speed-recall tradeoff.
@@ -253,13 +330,17 @@ Keys to achieving good recall include:
 - Choosing an appropriate number of lists. A good starting point is rows/1000 for up to 1M rows and `sqrt(rows)` for over 1M rows.
 - Specifying an appropriate number of [probes](#hnsw-query-options) when querying. A higher number is better for recall, and a lower is better for speed. A good starting point is `sqrt(lists)`.
 
-Supported types include:
+Supported vector types include:
 
 - `vector` - up to 2,000 dimensions
 - `halfvec` - up to 4,000 dimensions (added in 0.7.0)
 - `bit` - up to 64,000 dimensions (added in 0.7.0)
 
 The following examples show how to add an index for each distance function:
+
+<Admonition type="note">
+Notice how indexes are defined differently depending on the distance function being used. For example `vector_l2_ops` is specified for L2 distance, `vector_cosine_ops` for cosine distance, and so on. 
+</Admonition>
 
 **L2 distance**
 
@@ -306,12 +387,16 @@ SELECT ...
 COMMIT;
 ```
 
-## Optimizing index build time
+#### IVFFlat index build time
 
-To optimize index build time, consider configuring the following session variables prior to building an index:
+To optimize index build time, consider configuring the following session variables before building an index:
 
 - [maintenance_work_mem](#maintenance_work_mem)
 - [max_parallel_maintenance_workers](#max_parallel_maintenance_workers)
+
+<Admonition type="note">
+Like other index types, it’s faster to create an index after loading your initial data.
+</Admonition>  
 
 **maintenance_work_mem**
 
@@ -340,6 +425,8 @@ The recommended setting is your working set size (the size of your tuples for ve
 
 **max_parallel_maintenance_workers**
 
+You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
+
 The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
 
 You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
@@ -349,6 +436,24 @@ SET max_parallel_maintenance_workers = 7
 ```
 
 For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+
+For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
+
+#### Check indexing progress
+
+You can check indexing progress with the following query:
+
+```
+SELECT phase, round(100.0 * blocks_done / nullif(blocks_total, 0), 1) AS "%" FROM pg_stat_progress_create_index;
+```
+
+The phases for HNSW are:
+
+1. initializing
+2. loading tuples
+
+For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the PostgreSQL documentation.
+**max_parallel_maintenance_workers**
 
 ## Differences in behaviour between pgvector 0.5.1 and 0.7.0
 
@@ -442,6 +547,46 @@ If you use an invalid literal value for the `vector` data type, you will now see
 SELECT '[4e38,1]'::vector;
 ERROR:  "4e38" is out of range for type vector
 LINE 1: SELECT '[4e38,1]'::vector;
+```
+
+## Filtering
+
+There are a few ways to index nearest neighbor queries with a `WHERE` clause:
+
+```sql```
+SELECT * FROM items WHERE category_id = 123 ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
+```
+
+Create an index on one or more of the `WHERE` columns for exact search"
+
+```sql
+CREATE INDEX ON items (category_id);
+```
+
+Create a [partial index](https://www.postgresql.org/docs/current/indexes-partial.html) on the vector column for approximate search:
+
+```sql
+CREATE INDEX ON items USING hnsw (embedding vector_l2_ops) WHERE (category_id = 123);
+```
+
+Use [partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html) for approximate search on many different values of the `WHERE` columns:
+
+```sql
+CREATE TABLE items (embedding vector(3), category_id int) PARTITION BY LIST(category_id);
+```
+
+## Half-precision vectors
+
+Support for half-precision vectors was added in `pgvector` 0.7.0.
+
+Half-precision vectors enable the storage of vector embeddings using 16-bit floating-point numbers, or half-precision, which reduces both storage size and memory usage by nearly in half compared 32-bit floats. This efficiency comes with minimal loss in precision, making half-precision vectors beneficial for applications dealing with large datasets or facing memory constraints.
+
+When integrating OpenAI's embeddings, you can take advantage of half-precision vectors by storing embeddings in a compressed format. For instance, OpenAI’s high-dimensional embeddings can be effectively stored with as half-precision vectors, achieving high levels of accuracy, such as a 98% rate. This approach optimizes memory usage while maintaining performance.
+
+Use the `halfvec` type to store half-precision vectors, as shown here:
+
+```sql
+CREATE TABLE items (id bigserial PRIMARY KEY, embedding halfvec(3));
 ```
 
 ## Resources
