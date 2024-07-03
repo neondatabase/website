@@ -579,15 +579,104 @@ CREATE TABLE items (embedding vector(3), category_id int) PARTITION BY LIST(cate
 
 Support for half-precision vectors was added in `pgvector` 0.7.0.
 
-Half-precision vectors enable the storage of vector embeddings using 16-bit floating-point numbers, or half-precision, which reduces both storage size and memory usage by nearly in half compared 32-bit floats. This efficiency comes with minimal loss in precision, making half-precision vectors beneficial for applications dealing with large datasets or facing memory constraints.
+Half-precision vectors enable the storage of vector embeddings using 16-bit floating-point numbers, or half-precision, which reduces both storage size and memory usage by nearly half compared 32-bit floats. This efficiency comes with minimal loss in precision, making half-precision vectors beneficial for applications dealing with large datasets or facing memory constraints.
 
-When integrating OpenAI's embeddings, you can take advantage of half-precision vectors by storing embeddings in a compressed format. For instance, OpenAI’s high-dimensional embeddings can be effectively stored with as half-precision vectors, achieving high levels of accuracy, such as a 98% rate. This approach optimizes memory usage while maintaining performance.
+When integrating OpenAI's embeddings, you can take advantage of half-precision vectors by storing embeddings in a compressed format. For instance, OpenAI’s high-dimensional embeddings can be effectively stored with half-precision vectors, achieving high levels of accuracy, such as a 98% rate. This approach optimizes memory usage while maintaining performance.
 
-Use the `halfvec` type to store half-precision vectors, as shown here:
+You can use the `halfvec` type to store half-precision vectors, as shown here:
 
 ```sql
 CREATE TABLE items (id bigserial PRIMARY KEY, embedding halfvec(3));
 ```
+
+## Binary vectors
+
+Binary vector embeddings are a form of vector representation where each component is encoded as a binary digit, typically 0 or 1. For example, the word "cat" might be represented as [0, 1, 0, 1, 1, 0, 0, 1, ...], with each position in the vector being binary.
+
+These embeddings are advantageous for their efficiency in both storage and computation. Because they use only one bit per dimension, binary embeddings require less memory compared to traditional embeddings that use floating-point numbers. This makes them useful when there is limited memory or when dealing with large datasets. Additionally, operations with binary values are generally quicker than those involving real numbers, leading to faster computations.
+
+However, the trade-off with binary vector embeddings is a potential loss in accuracy. Unlike denser embeddings, which have real-valued entries and can represent subtleties in the data, binary embeddings simplify the representation. This can result in a loss of information and may not fully capture the intricacies of the data they represent.
+
+Use the `bit` type to store binary vector embeddings:
+
+```sql
+CREATE TABLE items (id bigserial PRIMARY KEY, embedding bit(3));
+INSERT INTO items (embedding) VALUES ('000'), ('111');
+```
+
+Get the nearest neighbors by Hamming distance (added in 0.7.0)
+
+```sql
+SELECT * FROM items ORDER BY embedding <~> '101' LIMIT 5;
+```
+
+Or (before 0.7.0)
+
+```sql
+SELECT * FROM items ORDER BY bit_count(embedding # '101') LIMIT 5;
+```
+
+Jaccard distance (`<%>`) is also supported with binary vector embeddings.
+
+## Binary quantization
+
+Support for binary quantization was Added in `pgvector` 0.7.0.
+
+Binary quantization is a process that transforms dense or sparse embeddings into binary representations by thresholding vector dimensions to either 0 or 1.  
+
+Use expression indexing for binary quantization:
+
+```sql
+CREATE INDEX ON items USING hnsw ((binary_quantize(embedding)::bit(3)) bit_hamming_ops);
+```
+
+Get the nearest neighbors by Hamming distance:
+
+```sql
+SELECT * FROM items ORDER BY binary_quantize(embedding)::bit(3) <~> binary_quantize('[1,-2,3]') LIMIT 5;
+```
+
+Re-rank by the original vectors for better recall:
+
+```sql
+SELECT * FROM (
+    SELECT * FROM items ORDER BY binary_quantize(embedding)::bit(3) <~> binary_quantize('[1,-2,3]') LIMIT 20
+) ORDER BY embedding <=> '[1,-2,3]' LIMIT 5;
+```
+
+## Sparse vectors
+
+Sparse vectors have a large number of dimensions, where only a small proportion are non-zero.
+
+Support for sparse vectors was added in `pgvector` 0.7.0.
+
+Use the `sparsevec` type to store sparse vectors:
+
+```sql
+CREATE TABLE items (id bigserial PRIMARY KEY, embedding sparsevec(5));
+```
+
+Insert vectors:
+
+```sql
+INSERT INTO items (embedding) VALUES ('{1:1,3:2,5:3}/5'), ('{1:4,3:5,5:6}/5');
+```
+
+The format is {index1:value1,index2:value2}/dimensions and indices start at 1 like SQL arrays.
+
+Get the nearest neighbors by L2 distance:
+
+```sql
+SELECT * FROM items ORDER BY embedding <-> '{1:3,3:1,5:2}/5' LIMIT 5;
+```
+
+## Hybrid search
+
+Use together with Postgres full-text search for hybrid search.
+
+SELECT id, content FROM items, plainto_tsquery('hello search') query
+    WHERE textsearch @@ query ORDER BY ts_rank_cd(textsearch, query) DESC LIMIT 5;
+You can use Reciprocal Rank Fusion or a cross-encoder to combine results.
 
 ## Resources
 
