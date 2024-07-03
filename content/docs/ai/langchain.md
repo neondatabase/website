@@ -16,18 +16,18 @@ TODO - talk about how LangChain takes out the complexity of managing documents i
 ```tsx
 // File: vectorStore.ts
 
-import { NeonPostgres } from '@langchain/community/vectorstores/neon'
-import { OpenAIEmbeddings } from '@langchain/openai'
+import { NeonPostgres } from '@langchain/community/vectorstores/neon';
+import { OpenAIEmbeddings } from '@langchain/openai';
 
 const embeddings = new OpenAIEmbeddings({
   dimensions: 512,
-  model: "text-embedding-3-small"
-})
+  model: 'text-embedding-3-small',
+});
 
 export async function loadVectorStore() {
   return await NeonPostgres.initialize(embeddings, {
     connectionString: process.env.POSTGRES_URL as string,
-  })
+  });
 }
 ```
 
@@ -48,54 +48,56 @@ TODO - talk about how LangChain can be used to find similar documents to the use
 <CodeTabs labels={['JavaScript', 'Python']}>
 
 ```tsx
-import { loadVectorStore } from './vectorStore'
+import { loadVectorStore } from './vectorStore';
 
-import { pull } from 'langchain/hub'
-import { ChatOpenAI } from '@langchain/openai'
-import { createRetrievalChain } from 'langchain/chains/retrieval'
-import type { ChatPromptTemplate } from '@langchain/core/prompts'
-import { AIMessage, HumanMessage } from '@langchain/core/messages'
-import { createStuffDocumentsChain } from 'langchain/chains/combine_documents'
+import { pull } from 'langchain/hub';
+import { ChatOpenAI } from '@langchain/openai';
+import { createRetrievalChain } from 'langchain/chains/retrieval';
+import type { ChatPromptTemplate } from '@langchain/core/prompts';
+import { AIMessage, HumanMessage } from '@langchain/core/messages';
+import { createStuffDocumentsChain } from 'langchain/chains/combine_documents';
 
-const topK = 3
+const topK = 3;
 
 export async function POST(request: Request) {
-    const llm = new ChatOpenAI()
-    const encoder = new TextEncoder()
-    const vectorStore = await loadVectorStore()
-    const { messages = [] } = await request.json()
-    const userMessages = messages.filter((i) => i.role === 'user')
-    const input = userMessages[userMessages.length - 1].content
-    const retrievalQAChatPrompt = await pull<ChatPromptTemplate>('langchain-ai/retrieval-qa-chat')
-    const retriever = vectorStore.asRetriever({ k: topK, searchType: 'similarity' })
-    const combineDocsChain = await createStuffDocumentsChain({
-        llm,
-        prompt: retrievalQAChatPrompt,
-    })
-    const retrievalChain = await createRetrievalChain({
-        retriever,
-        combineDocsChain,
-    })
-    const customReadable = new ReadableStream({
-        async start(controller) {
-            const stream = await retrievalChain.stream({
-                input,
-                chat_history: messages.map((i) => (i.role === 'user' ? new HumanMessage(i.content) : new AIMessage(i.content)))
-            })
-            for await (const chunk of stream) {
-                controller.enqueue(encoder.encode(chunk.answer))
-            }
-            controller.close()
-        },
-    })
-    return new Response(customReadable, {
-        headers: {
-            Connection: 'keep-alive',
-            'Content-Encoding': 'none',
-            'Cache-Control': 'no-cache, no-transform',
-            'Content-Type': 'text/plain; charset=utf-8',
-        },
-    })
+  const llm = new ChatOpenAI();
+  const encoder = new TextEncoder();
+  const vectorStore = await loadVectorStore();
+  const { messages = [] } = await request.json();
+  const userMessages = messages.filter((i) => i.role === 'user');
+  const input = userMessages[userMessages.length - 1].content;
+  const retrievalQAChatPrompt = await pull<ChatPromptTemplate>('langchain-ai/retrieval-qa-chat');
+  const retriever = vectorStore.asRetriever({ k: topK, searchType: 'similarity' });
+  const combineDocsChain = await createStuffDocumentsChain({
+    llm,
+    prompt: retrievalQAChatPrompt,
+  });
+  const retrievalChain = await createRetrievalChain({
+    retriever,
+    combineDocsChain,
+  });
+  const customReadable = new ReadableStream({
+    async start(controller) {
+      const stream = await retrievalChain.stream({
+        input,
+        chat_history: messages.map((i) =>
+          i.role === 'user' ? new HumanMessage(i.content) : new AIMessage(i.content)
+        ),
+      });
+      for await (const chunk of stream) {
+        controller.enqueue(encoder.encode(chunk.answer));
+      }
+      controller.close();
+    },
+  });
+  return new Response(customReadable, {
+    headers: {
+      Connection: 'keep-alive',
+      'Content-Encoding': 'none',
+      'Cache-Control': 'no-cache, no-transform',
+      'Content-Type': 'text/plain; charset=utf-8',
+    },
+  });
 }
 ```
 
