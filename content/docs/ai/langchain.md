@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-07-04T10:43:33.361Z'
 ---
 
-LangChain is a popular framework for working with AI, Vectors, and embeddings. LangChain supports using Supabase as a vector store, using the pgvector extension.
+LangChain is a popular framework for working with AI, Vectors, and embeddings. LangChain supports using Neon as a vector store, using the `pgvector` extension.
 
 ## Initialize Postgres Vector Store
 
