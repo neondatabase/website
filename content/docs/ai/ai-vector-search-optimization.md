@@ -88,12 +88,12 @@ CREATE INDEX documents_embedding_cosine_idx ON documents USING ivfflat (embeddin
 
 IVFFlat in `pgvector` has two parameters:
 
-1. Lists (number of [k-means clusters](https://en.wikipedia.org/wiki/K-means_clustering)):
+1. `lists` (number of [k-means clusters](https://en.wikipedia.org/wiki/K-means_clustering)):
 
     - This parameter specifies the number of clusters (or "lists") to divide the dataset into
     - Each cluster contains a subset of the data, and each data point belongs to the closest cluster centroid.
 
-2. Probes (number of lists to explore during the search):
+2. `probes` (number of lists to explore during the search):
 
     - This parameter determines how many clusters are considered during the search for the nearest neighbors.
     - By probing multiple clusters, the search algorithm can find the closest points more accurately, balancing between speed and accuracy.
@@ -122,14 +122,14 @@ Planning Time: 0.295 ms
 Execution Time: 5.867 ms
 ```
 
-We've experimented with lists equal to 1000, 2000, and 4000, and probes equal to 1, 2, 10, 50, 100, 200.
+We've experimented with `lists` equal to 1000, 2000, and 4000, and `probes` equal to 1, 2, 10, 50, 100, 200.
 
-Although there is a substantial gain in recall for increasing the number of probes, you will reach a point of diminishing returns when recall plateaus and execution time increases.
+Although there is a substantial gain in recall for increasing the number of `probes`, you will reach a point of diminishing returns when recall plateaus and execution time increases.
 
-Therefore, we encourage experimenting with different values for the number of probes and list sizes to achieve optimal search performance for your queries. Good places to start are:
+Therefore, we encourage experimenting with different values for `probes` and `lists` to achieve optimal search performance for your queries. Good places to start are:
 
-- Using a `list` size equal to rows / 1000 for tables with up to 1 million rows and `sqrt(rows)` for larger datasets.
-- Start with a `probe` value equal to lists / 10 for tables up to 1 million rows and `sqrt(lists)` for larger datasets.
+- Using a `lists` size equal to rows / 1000 for tables with up to 1 million rows and `sqrt(rows)` for larger datasets.
+- Start with a `probes` value equal to lists / 10 for tables up to 1 million rows and `sqrt(lists)` for larger datasets.
 
 ## Conclusion
 
