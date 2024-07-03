@@ -82,13 +82,9 @@ Learn how to integrate Neon Postgres with various LLMs and AI platforms.
 
 <DetailIconCards>
 
-<a href="/docs/ai/openai" description="Learn how to use LlamaIndex with OpenAI to create AI applications faster" icon="openai">OpenAI</a>
+<a href="/docs/ai/langchain" description="Learn how to use LangChain with OpenAI to create AI applications faster" icon="langchain">LangChain (with OpenAI)</a>
 
-<a href="/docs/ai/ollama" description="Learn how to use LlamaIndex with OpenAI to create AI applications faster" icon="ollama">Ollama</a>
-
-<a href="/docs/ai/langchain" description="Learn how to use LangChain with OpenAI to create AI applications faster" icon="langchain">LangChain</a>
-
-<a href="/docs/ai/llamaindex" description="Learn how to use LlamaIndex with OpenAI to create AI applications faster" icon="llamaindex">LlamaIndex</a>
+<a href="/docs/ai/llamaindex" description="Learn how to use LlamaIndex with OpenAI to create AI applications faster" icon="llamaindex">LlamaIndex (with OpenAI)</a>
 
 </DetailIconCards>
 
