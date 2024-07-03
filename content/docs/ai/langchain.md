@@ -1,6 +1,6 @@
 ---
 title: LangChain
-subtitle: Build AI applications faster with LangChain and Neon serverless Postgres
+subtitle: Build AI applications faster with LangChain and Postgres
 enableTableOfContents: true
 updatedOn: '2024-07-04T10:43:33.361Z'
 ---
