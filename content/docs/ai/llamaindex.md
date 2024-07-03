@@ -83,7 +83,6 @@ export async function POST(request: Request) {
 }
 ```
 
-
 ## Starter apps
 
 Hackable, fully-featured, pre-built [starter apps](https://github.com/neondatabase/examples/tree/main/ai/llamaindex) to get you up and running with LlamaIndex and Postgres.
