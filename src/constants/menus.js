@@ -152,7 +152,7 @@ export default {
             dark: careersDarkIcon,
           },
           text: 'Careers',
-          description: 'Become a member',
+          description: 'Join Neon',
           to: LINKS.careers,
         },
         {
@@ -160,8 +160,8 @@ export default {
             light: partnersIcon,
             dark: partnersDarkIcon,
           },
-          text: 'Partners',
-          description: 'Become a partner',
+          text: 'Neon for platforms',
+          description: 'Postgres for your users',
           to: LINKS.partners,
         },
         {
