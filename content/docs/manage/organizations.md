@@ -189,7 +189,7 @@ Currently, while still in private preview, you can’t generate organization-spe
 
 ### Creating a new project
 
-To create a new project and ensure it gets associated with your organization, include `org_id` in your `POST` request. Here we'll create a new project using default Postgres 16 for the organization `org-ocean-art-12345678`.
+To create a new project and ensure it gets associated with your organization, include `org_id` in your `POST` request. Here we'll create a new project for the organization `org-ocean-art-12345678`.
 
 ```bash shouldWrap
 curl --request POST \
