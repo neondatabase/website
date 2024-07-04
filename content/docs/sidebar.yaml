@@ -33,11 +33,15 @@
           slug: guides/laravel
         - title: Next.js
           slug: guides/nextjs
-
+        - title: Node.js
+          slug: guides/node
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
           slug: guides/quarkus-reactive
+        - title: React
+          slug: guides/react
+          tag: new
         - title: Reflex
           slug: guides/reflex
           tag: new
@@ -60,9 +64,7 @@
         - title: Java
           slug: guides/java
         - title: Javascript
-          items:
-            - title: Node.js
-              slug: guides/node
+          slug: guides/javascript
         - title: Python
           items:
             - title: Psycopg
@@ -340,6 +342,8 @@
               tag: new
         - title: Prisma
           slug: guides/prisma
+        - title: TypeORM
+          slug: guides/typeorm
     - title: Replicate
       items:
         - title: Airbyte
@@ -532,6 +536,8 @@
           items:
             - title: concat
               slug: functions/concat
+            - title: substring
+              slug: functions/substring
             - title: lower
               slug: functions/lower
             - title: substring

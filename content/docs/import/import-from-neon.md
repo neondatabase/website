@@ -1,7 +1,7 @@
 ---
 title: Import data from another Neon project
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.292Z'
+updatedOn: '2024-07-02T14:14:46.554Z'
 ---
 
 This guide describes how to migrate a database from one Neon project to another by piping data from `pg_dump` to `pg_restore`. Use these instructions to:
@@ -31,11 +31,21 @@ To import your data from another Neon project:
    postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
-4. Prepare your import command to pipe data to from one Neon project to the other. The command will look similar to this:
+4. Prepare your import command to pipe data from one Neon project to the other. For the `pg_dump` command, specify connection details for the source database. For the `pg_restore` command, specify connection details for the destination database. The command should have the following format:
 
    ```bash shouldWrap
-   pg_dump -Fc -v -d postgres://[user]:[password]@[neon_hostname]/[dbname] | pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/[dbname]
+   pg_dump -Fc -v -d postgres://[user]:[password]@[source_neon_hostname]/[dbname] | pg_restore -v -d postgres://[user]:[password]@[destination_neon_hostname]/[dbname]
    ```
+
+   With actual source and destination connection details, your command will appear similar to this:
+
+   ```bash shouldWrap
+   pg_dump -Fc -v -d postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/my_source_db | pg_restore -v -d postgres://alex:AbC123dEf@square-shadow-654321.us-east-2.aws.neon.tech/my_destination_db
+   ```
+
+   <Admonition type="note">
+   While your source and destination databases might have the same name, the hostnames will differ, as illustrated in the example above.
+   </Admonition>
 
    The command includes these arguments:
 

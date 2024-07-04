@@ -2,10 +2,12 @@
 title: Neon framework guides
 subtitle: Find detailed instructions for connecting to Neon from various frameworks
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.379Z'
+updatedOn: '2024-07-03T10:49:43.701Z'
 ---
 
 <TechnologyNavigation open>
+
+<img src="/images/technology-logos/nodejs-logo.svg" width="33" height="36" alt="Node.js" href="/docs/guides/node" title="Connect a Node.js application to Neon" />
 
 <img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/nextjs" title="Connect a Next.js application to Neon" />
 
