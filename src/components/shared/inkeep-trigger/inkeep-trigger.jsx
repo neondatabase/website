@@ -75,7 +75,7 @@ const InkeepTrigger = ({ className, isSidebar }) => {
         className={clsx(
           'chat-widget group flex text-sm focus:outline-none',
           isSidebar
-            ? 'absolute right-2 top-1.5 items-center space-x-1 text-secondary-8 dark:text-green-45 lg:right-4 lg:top-3'
+            ? 'sm:absolute sm:right-2 sm:top-1.5 sm:items-center sm:space-x-1 sm:text-secondary-8 sm:dark:text-green-45'
             : 'w-full flex-col xl:flex-row xl:items-center xl:space-x-1.5',
           className
         )}

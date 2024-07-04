@@ -1,15 +1,10 @@
 import clsx from 'clsx';
-import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
 import MENUS from 'constants/menus';
 
-import InkeepTrigger from '../inkeep-trigger';
-
 import Item from './item';
-
-const Search = dynamic(() => import('components/shared/search/search'));
 
 const NavWithIcon = ({ className, items }) => (
   <ul className={className}>
@@ -39,7 +34,7 @@ NavWithIcon.propTypes = {
   ).isRequired,
 };
 
-const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = false }) => (
+const Sidebar = ({ className = null, sidebar, basePath, isPostgres = false }) => (
   <aside
     className={clsx(
       'relative col-start-1 col-end-4 max-w-[254px] pt-0.5 before:absolute before:-bottom-20 before:-right-5 before:-top-[104px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-black-new lg:hidden',
@@ -47,16 +42,11 @@ const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = 
     )}
   >
     <div className="sticky top-[104px] z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-16 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-black-new dark:after:to-black-new">
-      <Search className="z-30" indexName={indexName} />
       <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-9">
-        {isPostgres ? (
-          <NavWithIcon className="mb-8" items={MENUS.postgresSidebar} />
-        ) : (
-          <>
-            <InkeepTrigger isSidebar />
-            <NavWithIcon className="mb-11" items={MENUS.docSidebar} />
-          </>
-        )}
+        <NavWithIcon
+          className={clsx(isPostgres ? 'mb-8' : 'mb-11')}
+          items={MENUS.postgresSidebar}
+        />
         <ul className={clsx({ 'mt-14': !isPostgres })}>
           {sidebar.map((item, index) => (
             <Item {...item} key={index} basePath={basePath} isChildren={false} />

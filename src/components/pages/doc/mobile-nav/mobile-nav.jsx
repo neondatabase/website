@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
 import Item from 'components/pages/doc/sidebar/item';
+import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link/link';
 import MENUS from 'constants/menus';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
@@ -13,7 +14,6 @@ import useClickOutside from 'hooks/use-click-outside';
 import useWindowSize from 'hooks/use-window-size';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
-import InkeepTrigger from '../inkeep-trigger';
 import { sidebarPropTypes } from '../sidebar/sidebar';
 
 const ANIMATION_DURATION = 0.2;
