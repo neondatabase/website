@@ -5,9 +5,9 @@ enableTableOfContents: true
 updatedOn: '2024-07-03T07:55:54.360Z'
 ---
 
-Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs) such as OpenAI.
+Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs).
 
-Neon supports the `pgvector` open-source extension, which enables Postgres as a vector database for storing and querying embeddings. This means you can leverage the trusted open-source database that you trust without the hassle of data migration or relying on third-party vector storage solutions.
+Neon supports the `pgvector` open-source extension, which enables Postgres as a vector database for storing and querying embeddings. This means you can leverage the open-source database that you trust without the hassle of migrating data or adding a third-party vector storage solution.
 
 Neon's AI Starter Kit provides resources, starter apps, and examples to help get you started.
 
@@ -16,7 +16,7 @@ Neon's AI Starter Kit provides resources, starter apps, and examples to help get
 The **Neon AI Starter Kit** includes:
 
 - Neon Postgres with the latest version of the Postgres [pgvector](https://neon.tech/docs/extensions/pgvector) extension for storing vector embeddings
-- A variety of hackable, fully-featured [AI starter apps](#ai-starter-apps) to get you up and running:
+- A variety of hackable, pre-built [AI starter apps](#ai-starter-apps) to get you up and running:
   - AI Chatbot
   - RAG chatbot
   - Semantic search
@@ -40,7 +40,7 @@ The **Neon AI Starter Kit** includes:
 
 <DetailIconCards>
 
-<a href="ai-vector-search-optimization" description="Optimize vector search for better application performance" icon="openai">Vector search optimization</a>
+<a href="ai-vector-search-optimization" description="Optimize pgvector search for better application performance" icon="openai">Optimize pgvector search</a>
 
 <a href="/docs/ai/ai-scale-with-neon" description="Scale your app with Neon's Autoscaling, Read Replica, and serverless driver features" icon="openai">Neon AI scaling guide</a>
 

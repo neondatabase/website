@@ -36,7 +36,6 @@ Execution Time: 39.527 ms
 ```
 
 You can see in the plan that the query performs a sequential scan (`Seq Scan`), which means that the query compares the query vector against all vectors in the `documents` table. In other words, the query does not use an index.
-</Admonition>
 
 To understand how queries perform at scale, we ran sequential scan vector searches with `pgvector` on subsets of the [GIST-960 dataset](http://corpus-texmex.irisa.fr/) with 10k, 50k, 100k, 500k, and 1M rows using a Neon database instance with 4 vCPUs and 16 GB of RAM.
 

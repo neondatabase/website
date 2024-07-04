@@ -16,7 +16,7 @@ The advantage of embeddings is that they allow us to measure the similarity betw
 Take the following three sentences, for example:
 
 - Sentence 1: "The cow jumped over the moon."
-- Sentence 2: "The bovine leapt above the celestial body."
+- Sentence 2: "The bovine leaped above the celestial body."
 - Sentence 3: "I enjoy eating pancakes."
 
 You can determine the most similar sentences by following these steps:
@@ -39,7 +39,7 @@ The method of transforming data into embeddings and computing similarities betwe
 
 - **Information retrieval:** By representing user queries as vectors, we can perform more accurate searches based on the meaning behind the queries, allowing us to retrieve more relevant information.
 - **Natural language processing:** Embeddings capture the essence of the text, making them excellent tools for tasks such as text classification and sentiment analysis.
-- **Recommendation systems:** Using vector similarity, we can recommend items that are similar to a given item, whether they be movies, products, books, or otherwise. This technique allows us to create more personalized and relevant recommendations.
+- **Recommendation systems:** Using vector similarity, we can recommend items similar to a given item, whether they be movies, products, books, or otherwise. This technique allows us to create more personalized and relevant recommendations.
 - **Anomaly detection:** By determining the similarity between items within a dataset, we can identify outliers or anomalies—items that don't quite fit the pattern. This can be crucial in many fields, from cybersecurity to quality control.
 
 ### Distance metrics
@@ -56,7 +56,7 @@ Different distance metrics can be more appropriate for different tasks, dependin
 
 ## Generating embeddings
 
-A common approach to generating embeddings is to use an LLM API, such as [OpenAI’s Embeddings API](https://platform.openai.com/docs/api-reference/embeddings). This API allows you to input a text string into an API endpoint, which then returns the corresponding embedding. The "cow jumped over the moon" example above is a simplistic example with 3 dimensions. Most embedding models generate embeddings with a much larger number of dimensions. OpenAI's newest and most performant embedding models, `text-embedding-3-small` and `text-embedding-3-large`, generate embeddings with 1536 and 3072 dimensions by default.
+A common approach to generating embeddings is to use an LLM API, such as [OpenAI’s Embeddings API](https://platform.openai.com/docs/api-reference/embeddings). This API allows you to input a text string into an API endpoint, which then returns the corresponding embedding. The "cow jumped over the moon" is a simplistic example with 3 dimensions. Most embedding models generate embeddings with a much larger number of dimensions. OpenAI's newest and most performant embedding models, `text-embedding-3-small` and `text-embedding-3-large`, generate embeddings with 1536 and 3072 dimensions by default.
 
 Here's an example of how to use OpenAI's `text-embedding-3-small` model to generate an embedding:
 
@@ -106,7 +106,7 @@ There are many embedding models you can use, such as those provided by Mistral A
 
 ## Storing vector embeddings in Postgres
 
-Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension, which enables storing and retrieving vector embeddings directly within your Postgres database. When building AI applications, installing this extension eliminates the need to extend your architecture to include a separate vector store. Installing the `pgvector` extension simply requires running the following `CREATE EXTENSION` statement from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connected to your Neon Postgres database.
+Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension, which enables the storage and retrieval of vector embeddings directly within your Postgres database. When building AI applications, installing this extension eliminates the need to extend your architecture to include a separate vector store. Installing the `pgvector` extension simply requires running the following `CREATE EXTENSION` statement from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connected to your Neon Postgres database.
 
 ```sql
 CREATE EXTENSION vector;

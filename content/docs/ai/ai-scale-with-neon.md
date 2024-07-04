@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-01-10T18:34:05.849Z'
 ---
 
-You can scale your AI application in the same way that would scale any Postgres app: Vertically with added CPU, RAM, and storage, or horizontally with read replicas.
+You can scale your AI application built on Postgres with `pgvector` in the same way you would any Postgres app: Vertically with added CPU, RAM, and storage, or horizontally with read replicas.
 
 ## Verticle scaling
 

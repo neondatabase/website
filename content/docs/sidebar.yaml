@@ -568,7 +568,7 @@
       slug: extensions/pgvector
     - title: Prepare your AI app for production
       items:
-        - title: Optimize vector search
+        - title: Optimize pgvector search
           slug: ai/ai-vector-search-optimization
         - title: Scale AI apps with Neon
           slug: ai/ai-scale-with-neon
