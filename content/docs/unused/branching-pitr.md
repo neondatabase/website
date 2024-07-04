@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2024-06-20T17:29:55.117Z'
+updatedOn: '2024-06-30T14:35:12.898Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
@@ -45,7 +45,7 @@ You are directed to the **Branches** page where you are shown the details for yo
 You can also create point-in-time branches using the [Neon CLI](/docs/reference/neon-cli). For example, you can perform the same action described above with the following CLI command:
 
 ```bash
-neonctl branches create --name recovery_branch --parent 2023-07-11T10:00:00Z
+neon branches create --name recovery_branch --parent 2023-07-11T10:00:00Z
 ```
 
 The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).

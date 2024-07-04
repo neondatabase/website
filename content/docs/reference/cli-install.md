@@ -2,7 +2,7 @@
 title: Neon CLI — Install and connect
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-16T10:25:41.779Z'
+updatedOn: '2024-06-30T14:35:12.894Z'
 ---
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
@@ -137,7 +137,7 @@ bunx neonctl <command>
 When a new version is released, you can update your Neon CLI using the methods described below, depending on how you installed the CLI initially. To check for the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed version of the Neon CLI, run the following command:
 
 ```bash
-neonctl --version
+neon --version
 ```
 
 <Tabs labels={["npm", "Homebrew", "Binary"]}>
@@ -186,10 +186,10 @@ The [neonctl auth](/docs/reference/cli-auth) command launches a browser window w
 
 ### API key
 
-To authenticate with a Neon API key, you can specify the `--api-key` option when running a Neon CLI command. For example, the following `neonctl projects list` command authenticates to Neon using the `--api-key` option:
+To authenticate with a Neon API key, you can specify the `--api-key` option when running a Neon CLI command. For example, the following `neon projects list` command authenticates to Neon using the `--api-key` option:
 
 ```bash
-neonctl projects list --api-key <neon_api_key>
+neon projects list --api-key <neon_api_key>
 ```
 
 To avoid including the `--api-key` option with each CLI command, you can export your API key to the `NEON_API_KEY` environment variable.

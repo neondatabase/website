@@ -2,7 +2,7 @@
 title: Manage multiple database environments
 subtitle: Learn how to manage schemas for multiple database environments with Flyway
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.391Z'
+updatedOn: '2024-06-30T14:35:12.883Z'
 ---
 
 With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
@@ -50,7 +50,7 @@ Perform these steps twice, once for your _development_ branch and once for your 
 <TabItem>
 
 ```bash showLineNumbers
-neonctl branches create --name development
+neon branches create --name development
 ```
 
 </TabItem>

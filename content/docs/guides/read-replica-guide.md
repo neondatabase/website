@@ -2,7 +2,7 @@
 title: Working with Neon read replicas
 subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.406Z'
+updatedOn: '2024-06-30T14:35:12.887Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with the Neon paid plans. This guide will lead you through the process of creating and managing read replicas.
@@ -48,7 +48,7 @@ In a few moments, your read-only compute is provisioned and appears in the **Com
 To create a read replica using the Neon CLI, use the [branches](/docs/reference/cli-branches) command, specifying the `add-compute` subcommand with `--type read_only`. If you have more than one Neon project, also include the `--project-id` option.
 
 ```bash
-neonctl branches add-compute mybranch --type read_only
+neon branches add-compute mybranch --type read_only
 ```
 
 </TabItem>

@@ -33,11 +33,15 @@
           slug: guides/laravel
         - title: Next.js
           slug: guides/nextjs
-
+        - title: Node.js
+          slug: guides/node
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
           slug: guides/quarkus-reactive
+        - title: React
+          slug: guides/react
+          tag: new
         - title: Reflex
           slug: guides/reflex
           tag: new
@@ -60,9 +64,7 @@
         - title: Java
           slug: guides/java
         - title: Javascript
-          items:
-            - title: Node.js
-              slug: guides/node
+          slug: guides/javascript
         - title: Python
           items:
             - title: Psycopg
@@ -113,6 +115,8 @@
       slug: connect/query-with-psql-editor
     - title: Connect with pgcli
       slug: connect/connect-pgcli
+    - title: Connect with AI
+      slug: connect/connect-ai
     - title: Connection pooling
       slug: connect/connection-pooling
     - title: Connection issues
@@ -314,6 +318,8 @@
           slug: guides/grafbase
         - title: Hasura
           slug: guides/hasura
+        - title: AskYourDatabase
+          slug: guides/askyourdatabase
         - title: Cloudflare Hyperdrive
           slug: guides/cloudflare-hyperdrive
         - title: Outerbase
@@ -414,6 +420,8 @@
           slug: data-types/floating-point
         - title: Integer
           slug: data-types/integer
+        - title: Tsvector
+          slug: data-types/tsvector
         - title: UUID
           slug: data-types/uuid
     - title: Extensions
@@ -448,10 +456,40 @@
     - title: Functions
       slug: functions/introduction
       items:
+        - title: Aggregate functions
+          items:
+            - title: array_agg
+              slug: functions/array_agg
+            - title: avg
+              slug: functions/avg
+            - title: count
+              slug: functions/count
+            - title: max
+              slug: functions/max
+            - title: sum
+              slug: functions/sum
+        - title: Array functions
+          items:
+            - title: array_length
+              slug: functions/array_length
+        - title: Date / Time functions
+          items:
+            - title: age
+              slug: functions/age
+            - title: current_timestamp
+              slug: functions/current_timestamp
+            - title: date_trunc
+              slug: functions/date_trunc
+            - title: extract
+              slug: functions/extract
+            - title: now
+              slug: functions/now
         - title: JSON functions
           items:
             - title: array_to_json
               slug: functions/array_to_json
+            - title: json_agg
+              slug: functions/json_agg
             - title: json_array_elements
               slug: functions/json_array_elements
             - title: jsonb_array_elements
@@ -502,12 +540,20 @@
               slug: functions/lower
             - title: substring
               slug: functions/substring
+            - title: regexp_match
+              slug: functions/regexp_match
+            - title: regexp_replace
+              slug: functions/regexp_replace
+            - title: trim
+              slug: functions/trim
         - title: Math functions
           items:
             - title: abs
               slug: functions/math-abs
-            - title: trim
-              slug: functions/trim
+            - title: random
+              slug: functions/math-random
+            - title: round
+              slug: functions/math-round
     - title: Optimize queries
       slug: postgresql/query-performance
     - title: Query reference
