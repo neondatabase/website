@@ -72,7 +72,7 @@ The following options allow you to tune the HNSW algorithm when creating an inde
 - `m`: Defines the maximum number of links created for each node during graph construction. A higher value increases accuracy (recall), but it also increases the size of the index in memory and index construction time. Higher values are typically used with high-dimensionality datasets or when a high degree of accuracy is required. The default value is 16. Acceptable values for m typically fall between 2 and 100. For many applications, beginning with a range of 12 to 48 is advisable.
 - `ef_construction`: Defines the size of the list for the nearest neighbors. This value influences the tradeoff between index quality and construction speed. A high `ef_construction` value creates a higher quality graph, enabling more accurate search results but also means that index construction takes longer. The value should be set to at least twice the value of `m`. The default setting is 64. There comes a point where increasing `ef_construction` no longer improves index quality. To evaluate accuracy, you can set `ef_search` equal to `ef_construction`. From this point, there is room for improvement if accuracy is lower than 0.9.
 
-This example demonstrates how to set the parameters: 
+This example demonstrates how to set the parameters:
 
 ```sql
 CREATE INDEX ON items USING hnsw (embedding vector_l2_ops) WITH (m = 16, ef_construction = 64);
