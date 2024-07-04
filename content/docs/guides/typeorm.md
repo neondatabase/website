@@ -21,10 +21,11 @@ To establish a basic connection from TypeORM to Neon, perform the following step
 
 2. Update the TypeORM's DataSource initialization in your application to the following:
 
-  ```typescript {2,3}
+  ```typescript {2,3,4}
   export const AppDataSource = new DataSource({
     type: "postgres",
     url: process.env.DATABASE_URL,
+    ssl: true,
     entities: [/*list of entities*/],
   });
   ```
