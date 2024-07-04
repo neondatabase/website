@@ -210,6 +210,10 @@ To execute the script as above, run the following command:
 node send.js
 ```
 
+<Admonition type="note" title="Note">
+As by default, [Neon's Autosuspend](/docs/introduction/auto-suspend) scales to zero after 5 minutes of inactivity, the NOTIFY/LISTEN command(s) only exist for the duration of the current session, and are lost when the session ends.
+</Admonition>
+
 ## Summary
 
 In this guide, you learned how to receive and send real-time notifications using `pg_notify` in Serverless Postgres. Using Postgres triggers, you can selectively listen to changes happening in specific database table(s), and perform a function that invokes `pg_notify` to send out the notifications to the connected listeners.
