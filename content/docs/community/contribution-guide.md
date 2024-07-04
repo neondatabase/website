@@ -2,7 +2,7 @@
 title: Documentation Contribution Guide
 subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
-updatedOn: '2024-06-14T13:53:28.219Z'
+updatedOn: '2024-06-30T14:35:12.876Z'
 ---
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
@@ -435,7 +435,7 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 
 Commands, parameters, values, filenames, error messages, connection strings, and other similar items should be enclosed in backticks. For example:
 
-- "Run the `neonctl projects list` command."
+- "Run the `neon projects list` command."
 
 - "Execute `git clone` to clone a Git repository..."
 

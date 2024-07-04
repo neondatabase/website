@@ -1,5 +1,5 @@
 ---
-updatedOn: '2024-06-14T07:55:54.356Z'
+updatedOn: '2024-06-30T18:09:08.264Z'
 ---
 
 # Docs
@@ -406,7 +406,7 @@ Check the example for default data of CTA block
 To change text in CTA block, you can pass to the component props `title`, `description`, `buttonText`, `buttonUrl`:
 
 ```md
-<CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL editor. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL Editor. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 ```
 
 ## Images

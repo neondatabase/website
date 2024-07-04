@@ -2,7 +2,7 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
-updatedOn: '2024-06-20T17:29:55.108Z'
+updatedOn: '2024-06-30T18:09:08.269Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your history retention window and then run queries against that connection.
@@ -42,7 +42,7 @@ Time Travel only allows non-destructive read-only queries. You cannot alter hist
 
 ![time travel error message](/docs/guides/time_travel_error.png 'no-border')
 
-### Time Travel with the SQL editor
+### Time Travel with the SQL Editor
 
 Time Travel in the SQL Editor offers a non-destructive way to explore your database's historical data through read-only queries. By toggling Time Travel in the editor, you switch from querying your current data to querying against a selected point within your history retention window.
 
@@ -92,11 +92,11 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 
    ![time travel selection](/docs/guides/time_travel_restore_select.png 'no-border')
 
-   This makes the selection for Time Travel Assist. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
+   This makes the selection for Time Travel Assist. Notice the updated fields above the SQL Editor show the **branch** and **timestamp** you just selected.
 
    ![Time travel assist](/docs/guides/time_travel_show_selected.png)
 
-1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
+1. Check that you have the right database selected to run your query against. Use the database selector under the SQL Editor to switch to a different database for querying against.
 
    ![time travel select db](/docs/guides/time_travel_db_select.png)
 
@@ -113,7 +113,7 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 Using the Neon CLI, you can establish a connection to a specific point in your branch's history. To get the connection string, use the following command:
 
 ```bash
-neonctl connection-string <branch>@<timestamp|LSN>
+neon connection-string <branch>@<timestamp|LSN>
 ```
 
 In the `branch` field, specify the name of the branch you want to connect to. Omit the `branch` field to connect to your default branch. Replace the `timestamp|LSN` field with the specific timestamp (in ISO 8601 format) or Log Sequence Number for the point in time you want to access.
@@ -121,7 +121,7 @@ In the `branch` field, specify the name of the branch you want to connect to. Om
 Example:
 
 ```bash
-neonctl connetion-string main@2024-04-21T00:00:00Z
+neon connetion-string main@2024-04-21T00:00:00Z
 postgres://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
 ```
 
@@ -130,7 +130,7 @@ postgres://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?s
 Appending `--psql` to the command for a one-step psql connection. For example, to connect to `main` at its state on Jan 1st, 2024:
 
 ```bash
-neonctl connection-string main@2024-01-01T00:00:00Z --psql
+neon connection-string main@2024-01-01T00:00:00Z --psql
 ```
 
 Here is the same command using aliases:
@@ -156,7 +156,7 @@ This retrieves the connection string for querying the 'main' branch at a specifi
 If you are working with multiple Neon projects, specify the project ID to target the correct project:
 
 ```bash
-neonctl connection-string <branch>@<timestamp|LSN> --project-id <project id>
+neon connection-string <branch>@<timestamp|LSN> --project-id <project id>
 ```
 
 Example:

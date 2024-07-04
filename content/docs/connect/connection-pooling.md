@@ -4,7 +4,7 @@ subtitle: Learn how to enable connection pooling in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2024-06-26T20:50:29.753Z'
+updatedOn: '2024-06-30T18:09:08.267Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -112,7 +112,7 @@ Protocol-level prepared statements are supported with Neon and PgBouncer as of t
 
 ### Understanding prepared statements
 
-A prepared statement in Postgres allows for the optimization of an SQL query by defining its structure once and executing it multiple times with varied parameters. Here's an SQL-level example to illustrate. Note that direct SQL-level `PREPARE` and `EXECUTE` are not supported with PgBouncer (see [below](#use-prepared-statements-with-pgbouncer)), so you can't use this query from the SQL editor. It is meant to give you a clear idea of how a prepared statement works. Refer to the protocol-level samples below to see how this SQL-level example translates to different protocol-level examples.
+A prepared statement in Postgres allows for the optimization of an SQL query by defining its structure once and executing it multiple times with varied parameters. Here's an SQL-level example to illustrate. Note that direct SQL-level `PREPARE` and `EXECUTE` are not supported with PgBouncer (see [below](#use-prepared-statements-with-pgbouncer)), so you can't use this query from the SQL Editor. It is meant to give you a clear idea of how a prepared statement works. Refer to the protocol-level samples below to see how this SQL-level example translates to different protocol-level examples.
 
 ```sql
 PREPARE fetch_plan (TEXT) AS

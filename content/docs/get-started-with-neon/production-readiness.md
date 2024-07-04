@@ -2,7 +2,7 @@
 title: Production readiness with Neon
 subtitle: Neon features for real-world workloads
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.380Z'
+updatedOn: '2024-06-30T14:35:12.879Z'
 ---
 
 Learn how autoscaling, scale-to-zero, Neon's storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.
@@ -60,7 +60,7 @@ Neon supports read replicas that let you instantly scale your application by off
 Create a read replica with the Neon CLI:
 
 ```bash
-neonctl branches create --name my_read_replica_branch --type read_only
+neon branches create --name my_read_replica_branch --type read_only
 ```
 
 To learn more, see [Read replicas](/docs/introduction/read-replicas).

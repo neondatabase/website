@@ -2,7 +2,7 @@
 title: Use Neon with Cloudflare Workers
 subtitle: Connect a Neon Postgres database to your Cloudflare Workers application
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.388Z'
+updatedOn: '2024-07-02T18:38:56.215Z'
 ---
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a serverless platform allowing you to deploy your applications globally across Cloudflare's network. It supports running JavaScript, TypeScript, and WebAssembly, making it a great choice for high-performance, low-latency web applications.
@@ -192,6 +192,14 @@ Current Deployment ID: de8841dd-46e4-436d-b2c4-569e91f54c72
 To delete your Worker, you can use the Cloudflare dashboard or run `wrangler delete` from your project directory, specifying your project name. Refer to the [Wrangler documentation](https://developers.cloudflare.com/workers/wrangler/commands/#delete-3) for more details.
 
 To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](/docs/manage/projects#delete-a-project).
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-cloudflare-workers" description="Connect a Neon Postgres database to your Cloudflare Workers application" icon="github">Use Neon with Cloudflare Workers</a>
+</DetailIconCards>
 
 ## Resources
 

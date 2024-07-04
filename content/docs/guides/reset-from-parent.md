@@ -2,7 +2,7 @@
 title: Reset from parent
 subtitle: Learn how to reset a branch from its parent
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.407Z'
+updatedOn: '2024-06-30T14:35:12.888Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -50,7 +50,7 @@ If this branch has children of its own, resetting is blocked. The resulting erro
 Using the CLI, you can reset a branch from parent using the following command:
 
 ```bash
-neonctl branches reset <id|name> --parent
+neon branches reset <id|name> --parent
 ```
 
 In the `id|name` field, specify the branch ID or name of the child branch whose data you want to reset. The `--parent` parameter specifies the kind of reset action that Neon will perform.
@@ -58,19 +58,19 @@ In the `id|name` field, specify the branch ID or name of the child branch whose 
 If you have multiple projects in your account, you'll also have to include the `project-id` in the command along with the branch.
 
 ```bash
-neonctl branches reset <id|name> --parent --project-id <project id>
+neon branches reset <id|name> --parent --project-id <project id>
 ```
 
 Example:
 
 ```bash
-neonctl branches reset development --parent --project-id noisy-pond-12345678
+neon branches reset development --parent --project-id noisy-pond-12345678
 ```
 
 Alternatively, you can set the `project-id` as a background context for your CLI session, letting you perform other actions against that project without having to include the `project-id` in every command. The setting is saved in a `context-file` and remains in place until you set a new context, or you remove the `context-file`.
 
 ```bash
-neonctl set-context --project-id <project id>
+neon set-context --project-id <project id>
 ```
 
 Read more about performing branching actions from the CLI in [CLI - branches](/docs/reference/cli-branches), and more about setting contexts in [CLI - set-context](/docs/reference/cli-set-context).
@@ -99,7 +99,7 @@ You can include resetting database branches as part of your CI/CD workflow. For 
 Initiate feature development by resetting your development branch to align with staging or production, ensuring a fresh starting point. Use the command:
 
 ```bash
-neonctl branches reset --name dev-branch --parent staging
+neon branches reset --name dev-branch --parent staging
 ```
 
 This strategy preserves a stable connection string for your development environment, while still giving your team a clean slate for each new feature.
@@ -109,7 +109,7 @@ This strategy preserves a stable connection string for your development environm
 Keep **staging** in sync with **production** to minimize discrepancies. Automate staging updates with:
 
 ```bash
-neonctl branches reset --name staging --parent main
+neon branches reset --name staging --parent main
 ```
 
 This ensures staging accurately reflects the current production state for reliable testing.
