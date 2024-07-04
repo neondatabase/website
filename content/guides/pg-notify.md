@@ -1,13 +1,13 @@
 ---
 title: Real-Time Notifications using pg_notify with Neon Postgres
-subtitle: A step-by-step guide to implementing real-time notifications using pg_notify in Postgres
+subtitle: A step-by-step guide describing how to implement real-time notifications using pg_notify in Postgres
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-07-02T13:24:36.612Z'
 updatedOn: '2024-07-02T13:24:36.612Z'
 ---
 
-This guide covers the step-by-step process of implementing real-time notifications in Postgres (powered by Neon). Real-time notifications provide a way to instantly notify users in an application. With pg_notify and event triggers, you can use such a webhook-like system to invoke external services on specific database events.
+This step-by-step guide shows how you can implement real-time notifications in Postgres (powered by Neon). Real-time notifications provide a way to instantly notify users in an application. With [pg_notify](https://www.postgresql.org/docs/current/sql-notify.html) and [Postgres triggers](https://www.postgresql.org/docs/current/triggers.html), you can create a webhook-like system to invoke external services on specific database operations.
 
 ## Prerequisites
 
@@ -20,9 +20,9 @@ To follow the steps in this guide, you will need the following:
 
 - [Provisioning a Postgres database powered by Neon](#provisioning-a-postgres-database-powered-by-neon)
 - [Creating a new Node.js application](#creating-a-new-nodejs-application)
-- [Set up Event Triggers](#set-up-event-triggers)
+- [Set up triggers](#set-up-triggers)
 - [Set up a Notifications Listener](#set-up-a-notifications-listener)
-- [Notify using Event Triggers](#notify-using-event-triggers)
+- [Notify using triggers](#notify-using-triggers)
 
 ## Provisioning a Postgres database powered by Neon
 
@@ -68,7 +68,7 @@ The libraries installed include:
 
 Now, let's move on to setting up event triggers that will send notifications upon insertion of a row in a specific table.
 
-## Set up Event Triggers
+## Set up triggers
 
 To set up event triggers for a specific table (say `my_table`), you will define a trigger function called `my_trigger_function`. Create a file named `setup.js` with the following code:
 
@@ -167,11 +167,11 @@ To keep listening to the notifications, you would want to keep running the follo
 node listen.js
 ```
 
-Now, let's insert a row to invoke the event triggers that will notify the listeners.
+Now, let's insert a row to invoke the triggers that will notify the listeners.
 
-## Notify using Event Triggers
+## Notify using triggers
 
-To notify the listeners, you will use Postgres Event Triggers. To programtically trigger an event that will be created upon insertion into the table named `my_table`, create a file `send.js` with the following code:
+To notify the listeners, you will use Postgres triggers. To programtically trigger an event that will be created upon insertion into the table named `my_table`, create a file `send.js` with the following code:
 
 ```js
 // File: send.js
@@ -211,7 +211,7 @@ node send.js
 
 ## Summary
 
-In this guide, you learned how to receive and send real-time notifications using `pg_notify` in Serverless Postgres. Using Postgres Event Triggers, you can selectively listen to changes happening in specific database table(s), and perform a function that invokes `pg_notify` to send out the notifications to the connected listeners.
+In this guide, you learned how to receive and send real-time notifications using `pg_notify` in Serverless Postgres. Using Postgres triggers, you can selectively listen to changes happening in specific database table(s), and perform a function that invokes `pg_notify` to send out the notifications to the connected listeners.
 
 ## Source code
 
