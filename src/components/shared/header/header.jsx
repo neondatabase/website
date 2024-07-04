@@ -107,11 +107,17 @@ const Navigation = async ({ isDarkTheme }) => (
                           )}
                         >
                           <img
-                            className={clsx(
-                              'h-5 w-5 dark:opacity-100 dark:invert-0',
-                              !isDarkTheme && 'opacity-90 invert'
-                            )}
-                            src={icon}
+                            className="h-5 w-5 dark:hidden"
+                            src={icon.light}
+                            width={20}
+                            height={20}
+                            loading="lazy"
+                            alt=""
+                            aria-hidden
+                          />
+                          <img
+                            className="hidden h-5 w-5 dark:block"
+                            src={icon.dark}
                             width={20}
                             height={20}
                             loading="lazy"
