@@ -89,7 +89,8 @@ async function setupTrigger() {
     // Connect to Postgres
     await client.connect();
     // Create a my_table if it does not already exist
-    await client.query(`CREATE TABLE IF NOT EXISTS my_table (id SERIAL PRIMARY KEY, message TEXT)`);
+    await client.query(`CREATE TABLE IF NOT EXISTS
+    my_table (id SERIAL PRIMARY KEY, message TEXT)`);
     // Define the my_trigger_function function to send notifications
     await client.query(`
     CREATE OR REPLACE FUNCTION my_trigger_function() RETURNS trigger AS $$
