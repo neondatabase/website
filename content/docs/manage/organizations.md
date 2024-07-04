@@ -169,7 +169,9 @@ For detailed information on pricing and plans, refer to [Neon plans](/docs/intro
 
 In the Neon API, the `org_id` represents the unique identifier for your organization. Use this ID to manage and interact with your organization's projects, making sure that your API requests are scoped to the right organization.
 
-You can use the `org_id` parameter in `GET` requests to:
+When creating a new project, include `org_id` in your `POST` request to ensure the project gets associated with your organization. Otherwise, the project will be created under your personal account.
+
+You can also use the `org_id` parameter in `GET` requests to:
 
 - List all projects that belong to your organization
 - Get consumption metrics for your organization
@@ -185,14 +187,33 @@ While you can't get your `org_id` directly in the Neon Console (it's not yet ava
 
 Currently, while still in private preview, you can’t generate organization-specific API keys. Instead, use your personal account API key. If you’re a member of the specified `org_id`, these API requests will work.
 
+### Creating a new project
+
+To create a new project and ensure it gets associated with your organization, include `org_id` in your `POST` request. Here we'll create a new project using default Postgres 16 for the organization `org-ocean-art-12345678`.
+
+```bash shouldWrap
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "project": {
+    "pg_version": 16,
+    "org_id": "org-ocean-art-12345678"
+  }
+}
+'
+```
+
 ### Listing projects
 
 Include `org_id` in the `GET /projects` request. For example, let's get a list of all projects for the organization `org-ocean-art-12345678`, with the default limit of 10 projects per return:
 
 ```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/projects?limit=10&org_id=org-ocean-art-12345678'  
-     // [!code word:org_id=org-ocean-art-12345678]
+     --url 'https://console.neon.tech/api/v2/projects?limit=10&org_id=org-ocean-art-12345678' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
@@ -295,8 +316,6 @@ curl --request GET \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
-
-In this case, the response will provide hour metrics for all projects in the organization between June 30 and July 2.
 
 <details>
 <summary>Response</summary>
