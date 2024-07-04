@@ -11,19 +11,19 @@ In this guide, we explore the questions above to determine how you should use `p
 
 ## Sequential scans with pgvector
 
-By default, `pgvector` performs a sequential scan on the database and calculates the distance between the query vector and all vectors in the table. This approach does an exact search and guarantees 100% recall, but it can become costly with large datasets.
+Without indexes, `pgvector` performs a sequential scan on the database and calculates the distance between the query vector and all vectors in the table. This approach does an exact search and guarantees 100% recall, but it can be costly with large datasets.
 
 <Admonition type="info">
 **Recall** is a metric used to evaluate the performance of a search algorithm. It measures how effectively the search retrieves relevant items from a dataset. It is defined as the ratio of the number of relevant items retrieved by the search to the total number of relevant items in the dataset.
 </Admonition>
 
-The query below uses `EXPLAIN ANALYZE` to generate the execution plan and displays the performance of the similarity search query.
+The query below uses `EXPLAIN ANALYZE` to generate an execution plan and display the performance of the similarity search query.
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM documents ORDER BY embedding <-> '[0.011699999682605267,..., 0.008700000122189522]' LIMIT 100;
 ```
 
-This is what the result looks like:
+This is what the query plan looks like:
 
 ```sql
 Limit  (cost=748.19..748.44 rows=100 width=173) (actual time=39.475..39.487 rows=100 loops=1)
@@ -35,20 +35,25 @@ Planning Time: 0.213 ms
 Execution Time: 39.527 ms
 ```
 
-<Admonition type="note">
-`Seq Scan` means that the query compares the query vector against all vectors in the `documents` table.
+You can see in the plan that the query performs a sequential scan (`Seq Scan`), which means that the query compares the query vector against all vectors in the `documents` table. In other words, the query does not use an index.
 </Admonition>
 
 To understand how queries perform at scale, we ran sequential scan vector searches with `pgvector` on subsets of the [GIST-960 dataset](http://corpus-texmex.irisa.fr/) with 10k, 50k, 100k, 500k, and 1M rows using a Neon database instance with 4 vCPUs and 16 GB of RAM.
 
 The sequential scan search performs reasonably well for tables with 10k rows (~36ms). However, sequential scans start to become costly at 50k rows. For tables of this size and larger, you might consider adding an index for better performance.
 
+So, when you should you use sequential scans rather than defining an index?
+
+- When your dataset is small and you do not intend to scale it
+- When you need 100% recall (accuracy). Adding indexes trades recall for performance.
+- When you do not expect a high volume of queries per second, which would require indexes for performance
+
 ## Indexing with HNSW
 
 HNSW is a graph-based approach to indexing multi-dimensional data. It constructs a multi-layered graph, where each layer is a subset of the previous one. During a search, the algorithm navigates through the graph from the top layer to the bottom to quickly find the nearest neighbor. An HNSW graph is known for its superior performance in terms of speed and accuracy.
 
 <Admonition type="note">
-An HNSW index has better query performance than IVFFlat (in terms of speed-recall tradeoff), but has slower build times and uses more memory. Also, an HNSW index can be created without any data in the table since there isn’t a training step like there is for an IVFFlat index.
+An HNSW index performs better than IVFFlat (in terms of speed-recall tradeoff) and can be created without any data in the table since there isn’t a training step like there is for an IVFFlat index. However, HNSW indexes have slower build times and use more memory.
 </Admonition>
 
 ![HNSW graph](/docs/extensions/hnsw_graph.png)
@@ -65,20 +70,39 @@ The key idea behind HNSW is that by starting the search at the top layer and mov
 
 The following options allow you to tune the HNSW algorithm when creating an index:
 
-- `m`: Defines the maximum number of links created for each node during graph construction. A higher value increases accuracy (recall) but also increases the size of the index in memory and index construction time.
-- `ef_construction`: Influences the trade-off between index quality and construction speed. A high `ef_construction` value creates a higher quality graph, enabling more accurate search results, but a higher value also means that index construction and inserts take longer.
+- `m`: Defines the maximum number of links created for each node during graph construction. A higher value increases accuracy (recall), but it also increases the size of the index in memory and index construction time. Higher values are typically used with high-dimensionality datasets or when a high degree of accuracy is required. The default value is 16. Acceptable values for m typically fall between 2 and 100. For many applications, beginning with a range of 12 to 48 is advisable.
+- `ef_construction`: Defines the size of the list for the nearest neighbors. This value influences the tradeoff between index quality and construction speed. A high `ef_construction` value creates a higher quality graph, enabling more accurate search results but also means that index construction takes longer. The value should be set to at least twice the value of `m`. The default setting is 64. There comes a point where increasing `ef_construction` no longer improves index quality. To evaluate accuracy, you can set `ef_search` equal to `ef_construction`. From this point, there is room for improvement if accuracy is lower than 0.9.
 
-This example demonstrates how to set the parameters:
+This example demonstrates how to set the parameters: 
 
 ```sql
 CREATE INDEX ON items USING hnsw (embedding vector_l2_ops) WITH (m = 16, ef_construction = 64);
 ```
 
-In summary, to prioritize search speed over accuracy, use lower values for `m`. Conversely, to prioritize accuracy over search speed, use a higher value for `m`. A higher `ef_construction` value enables more accurate search results at the cost of index build time, which is also affected by the size of your dataset.
+Search parameters:
+
+- `ef_search`: Defines the size of the dynamic candidate list for search. The default value is 40. This value influences the trade-off between query accuracy (recall) and speed. A higher `ef_search` value increases accuracy at the cost of speed. The value should be equal to or larger than `k`, which is the number of nearest neighbors you want your search to return (defined by the `LIMIT` clause in your `SELECT` query).
+
+To configure this value, do so using a `SET` statement before executing queries:
+
+```sql
+SET hnsw.ef_search = 100;
+```
+
+You can also use `SET LOCAL` inside a transaction to set it for a single query:
+
+```sql
+BEGIN;
+SET LOCAL hnsw.ef_search = 100;
+SELECT ...
+COMMIT;
+```
+
+In summary, to prioritize search speed over accuracy, use lower values for `m` and `ef_search`. Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `ef_search`. A higher `ef_construction` value builds an index more accurate search results at the cost of index build time.
 
 ## Indexing with IVFFlat
 
-IVFFlat indexes partition the dataset into clusters (also called "lists") to optimize for vector search.
+IVFFlat indexes partition the dataset into clusters ("lists") to optimize for vector search.
 
 You can create an IVFFlat index using the query below:
 
@@ -133,8 +157,8 @@ Therefore, we encourage experimenting with different values for `probes` and `li
 
 ## Conclusion
 
-In conclusion, `pgvector` is a powerful tool for vector similarity searches in Postgres. The sequential scan approach of `pgvector` performs well for small datasets but can be costly for larger ones.
+The sequential scan approach of `pgvector` can perform well for small datasets but can be costly for larger ones. Use this approach if you require 100% accuracy, but expect performance issues with higher volumes of queries per second.
 
-We explored how you can optimize your searches using HNSW or IVFFlat indexes for approximate nearest neighbor (ANN) search, noting that HNSW indexes have better query performance than IVFFlat but with tradeoffs in build time and memory usage.
+We explored how you can optimize your searches using HNSW or IVFFlat indexes for approximate nearest neighbor (ANN) search, noting that HNSW indexes have better query performance than IVFFlat but with build time and memory usage tradeoffs.
 
-By creating an index and testing different parameters, you can find the right balance that provides the best performance for your specific use case and dataset.
+Try different index tuning parameters to find the right balance between speed and accuracy for your specific use case and dataset.
