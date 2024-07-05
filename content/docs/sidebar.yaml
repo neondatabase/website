@@ -354,6 +354,8 @@
           slug: guides/logical-replication-clickhouse
         - title: Confluent
           slug: guides/logical-replication-kafka-confluent
+        - title: Decodable
+          slug: guides/logical-replication-decodable
         - title: Fivetran
           slug: guides/logical-replication-fivetran
         - title: Materialize
