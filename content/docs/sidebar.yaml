@@ -585,6 +585,8 @@
           slug: reference/cli-auth
         - title: me
           slug: reference/cli-me
+        - title: orgs
+          slug: reference/cli-orgs
         - title: projects
           slug: reference/cli-projects
         - title: ip-allow
