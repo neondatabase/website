@@ -183,6 +183,10 @@ While you can't get your `org_id` directly in the Neon Console (it's not yet ava
 
 ![org ID in console URL](/docs/manage/org_id_URL.png)
 
+<Admonition type="tip">
+To help you recognize organization IDs, note that they all start with the prefix `org`.
+</Admonition>
+
 ### API key
 
 Currently, while still in private preview, you can’t generate organization-specific API keys. Instead, use your personal account API key. If you’re a member of the specified `org_id`, these API requests will work.
@@ -413,6 +417,24 @@ The response will include details about each organization, including the `org_id
   ]
 }
 ```
+
+## Managing organizations using the Neon CLI
+
+During private preview, we'll be continuing to add options for managing your organization using the Neon CLI. For now, we've added the main command `neonctl orgs` with a single subcommands `list`, which outputs a list of all organizations that the CLI user currently belongs to.
+
+Example:
+
+```bash
+neon orgs list
+Organizations
+┌────────────────────────┬──────────────────┐
+│ Id                     │ Name             │
+├────────────────────────┼──────────────────┤
+│ org-ocean-art-12345678 │ Example Org      │
+└────────────────────────┴──────────────────┘
+```
+
+For more detail, see [Neon CLI commands - orgs](/docs/reference/cli-orgs). We'll update this page as new management options become available.
 
 ## Feature limitations
 
