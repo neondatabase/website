@@ -184,7 +184,7 @@ While you can't get your `org_id` directly in the Neon Console (it's not yet ava
 ![org ID in console URL](/docs/manage/org_id_URL.png)
 
 <Admonition type="tip">
-To help you recognize organization IDs, note that they all start with the prefix `org`.
+To help you identify organization IDs more easily, notice that they all start with the prefix `org`.
 </Admonition>
 
 ### API key
