@@ -18,7 +18,7 @@ optionally processing the data with SQL or custom Flink jobs.
 
 ## Prerequisites
 
-- A [Decodable account](https://www.decodable.co/)
+- A [Decodable account](https://www.decodable.co/) ([start free](https://app.decodable.co/-/accounts/create), no credit card required)
 - A [Neon account](https://console.neon.tech/)
 
 ## Enable logical replication in Neon
