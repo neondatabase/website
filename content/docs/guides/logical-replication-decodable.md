@@ -3,7 +3,7 @@ title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-05T15:15:00.000Z'
+updatedOn: '2024-07-05T23:02:06.221Z'
 ---
 
 <LRNotice/>
