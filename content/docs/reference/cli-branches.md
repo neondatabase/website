@@ -581,10 +581,6 @@ neon branches set-primary mybranch
 
 ## set-default
 
-<Admonition type="warning">
-The `set-default` subcommand is deprecated. It will be removed in a future release. Use `set-default` instead.
-</Admonition>
-
 This subcommand allows you to set a branch as the default branch in your Neon project.
 
 #### Usage
