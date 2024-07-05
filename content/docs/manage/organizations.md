@@ -420,7 +420,7 @@ The response will include details about each organization, including the `org_id
 
 ## Managing organizations using the Neon CLI
 
-During private preview, we'll be continuing to add options for managing your organization using the Neon CLI. For now, we've added the main command `neonctl orgs` with a single subcommands `list`, which outputs a list of all organizations that the CLI user currently belongs to.
+During private preview, we'll be continuing to add options for managing your organization using the Neon CLI. For now, we've added the main command `neonctl orgs` with a single subcommand `list`, which outputs a list of all organizations that the CLI user currently belongs to.
 
 Example:
 
