@@ -2,6 +2,7 @@
 title: Neon CLI commands — orgs
 subtitle: Use the Neon CLI to manage Neon organizations directly from the terminal
 enableTableOfContents: true
+updatedOn: '2024-07-05T19:12:26.343Z'
 ---
 
 ## Before you begin
