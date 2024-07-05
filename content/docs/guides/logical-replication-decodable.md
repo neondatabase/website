@@ -138,8 +138,8 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
 
 ## Create a Postgres source connector in Decodable
 
-1. In the Decodable web UI, select **Connections** from the left navigation bar and click "New Connection".
-2. In the connector catalog, choose "Postgres CDC" and click "Connect".
+1. In the Decodable web UI, select **Connections** from the left navigation bar and click **New Connection**.
+2. In the connector catalog, choose **Postgres CDC** and click **Connect**.
 3. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project.
    Your connection string will look like this:
 
@@ -154,33 +154,33 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
    - **Port**: 5432
    - **Database**: dbname
    - **Username**: alex
-   - **Password**: Click "Add a new secret...", then specify a name for that secret and AbC123dEf as its value
+   - **Password**: Click **Add a new secret...**, then specify a name for that secret and `AbC123dEf` as its value
    - **Decoding Plugin Name**: pgoutput (the default)
 
    ![Creating a source connector in Decodable](/docs/guides/decodable_create_source_connector.png)
 
-3. Click "Next". Decodable will now scan the source database for all the tables which can be replicated. Select one or more table(s) by checking the "Sync" box next to their name. Optionally, you can change the name of the destination stream for each table, which by default will be in the form of `<database name>__<schema name>__<table_name>`. You can also take a look a the schema of each stream by clicking "View Schema".
+3. Click **Next**. Decodable will now scan the source database for all the tables that can be replicated. Select one or more table(s) by checking the **Sync** box next to their name. Optionally, you can change the name of the destination stream for each table, which by default will be in the form of `<database name>__<schema name>__<table_name>`. You can also take a look a the schema of each stream by clicking **View Schema**.
 
    ![Selecting source tables in Decodable](/docs/guides/decodable_select_source_tables.png)
 
-4. Click "Next" and specify a name for your connection, for instance "neon-source".
+4. Click **Next** and specify a name for your connection, for instance: `neon-source`.
 
-5. Click "Create and start". The default start options in the following dialog don't require any changes, so click "Start" to launch the connector.
+5. Click **Create and start**. The default start options in the following dialog don't require any changes, so click **Start** to launch the connector.
 
 ## Previewing the data
 
-Once the connector is in "Running" state, navigate to the connected Decodable stream, via "Outbound to..." on the connector's overview tab.
-By clicking "Run Preview", you can examine the change events ingested by the connector.
+Once the connector is in **Running** state, navigate to the connected Decodable stream, via **Outbound to...** on the connector's overview tab.
+By clicking **Run Preview**, you can examine the change events ingested by the connector.
 
    ![Preview of ingested data in Decodable](/docs/guides/decodable_preview_ingested_data.png)
 
 ## Next steps
 
-At this point, you have a running connector which continuously ingests changes from a Neon database into Decodable with a low latency.
+At this point, you have a running connector, which continuously ingests changes from a Neon database into Decodable with low latency.
 Next, you could set up one of the supported Decodable **sink connectors** which will propagate the data to a wide range of data stores and systems, such as Snowflake, Elasticsearch, Apache Kafka, Apache Iceberg, S3, any many more.
 
 If needed, you also can add a **processing step**, either using SQL or by deploying your own Apache Flink job,
-for instance to filter and transform the data before propagating it to an external system.
+for instance, to filter and transform the data before propagating it to an external system.
 Of course, you also can take your processed data back to another Neon database, using the Decodable sink connector for Postgres.
 
 ## References
