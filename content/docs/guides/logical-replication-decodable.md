@@ -132,7 +132,7 @@ To prevent storage bloat, **Neon automatically removes _inactive_ replication sl
 
 ## Allow inbound traffic
 
-If you are using Neon's **IP Allow** feature to limit the IP addresses that can connect to Neon, you will need to allow inbound traffic from Decodable's IP addresses. 
+If you are using Neon's **IP Allow** feature to limit the IP addresses that can connect to Neon, you will need to allow inbound traffic from Decodable's IP addresses.
 Refer to the [Decodable documentation](https://docs.decodable.co/reference/regions-and-ip-addresses.html#ip-addresses) for the list of IPs that need to be allowlisted for the Decodable region of your account.
 For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
@@ -159,20 +159,20 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
 
    ![Creating a source connector in Decodable](/docs/guides/decodable_create_source_connector.png)
 
-3. Click **Next**. Decodable will now scan the source database for all the tables that can be replicated. Select one or more table(s) by checking the **Sync** box next to their name. Optionally, you can change the name of the destination stream for each table, which by default will be in the form of `<database name>__<schema name>__<table_name>`. You can also take a look a the schema of each stream by clicking **View Schema**.
+4. Click **Next**. Decodable will now scan the source database for all the tables that can be replicated. Select one or more table(s) by checking the **Sync** box next to their name. Optionally, you can change the name of the destination stream for each table, which by default will be in the form of `<database name>__<schema name>__<table_name>`. You can also take a look a the schema of each stream by clicking **View Schema**.
 
    ![Selecting source tables in Decodable](/docs/guides/decodable_select_source_tables.png)
 
-4. Click **Next** and specify a name for your connection, for instance: `neon-source`.
+5. Click **Next** and specify a name for your connection, for instance: `neon-source`.
 
-5. Click **Create and start**. The default start options in the following dialog don't require any changes, so click **Start** to launch the connector.
+6. Click **Create and start**. The default start options in the following dialog don't require any changes, so click **Start** to launch the connector.
 
 ## Previewing the data
 
 Once the connector is in **Running** state, navigate to the connected Decodable stream, via **Outbound to...** on the connector's overview tab.
 By clicking **Run Preview**, you can examine the change events ingested by the connector.
 
-   ![Preview of ingested data in Decodable](/docs/guides/decodable_preview_ingested_data.png)
+![Preview of ingested data in Decodable](/docs/guides/decodable_preview_ingested_data.png)
 
 ## Next steps
 
