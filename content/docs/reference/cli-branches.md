@@ -29,7 +29,7 @@ neon branches <subcommand> [options]
 | [rename](#rename)           | Rename a branch                              |
 | [schema-diff](#schema-diff) | Compare schemas                              |
 | [set-primary](#set-primary) | Set a default branch (Deprecated)            |
-| [set-default](#set-primary) | Set a default branch                         |
+| [set-default](#set-default) | Set a default branch                         |
 | [add-compute](#add-compute) | Add replica to a branch                      |
 | [delete](#delete)           | Delete a branch                              |
 | [get](#get)                 | Get a branch                                 |
