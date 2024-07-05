@@ -191,7 +191,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   neon project create --psql -- -c "SELECT version()"
   ```
 
-- Create a project and set the Neon CLI project and branch context.
+- Create a project and set the Neon CLI project context.
 
   ```
   neon project create --psql --set-context
