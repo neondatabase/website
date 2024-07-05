@@ -60,7 +60,7 @@ neon orgs list -o json
     "created_at": "2024-04-22T16:50:41Z",
     "updated_at": "2024-06-28T15:38:26Z"
   }
-]   
+]
 ```
 
 <NeedHelp/>
