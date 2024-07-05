@@ -120,7 +120,7 @@ Let's say you want to create a new project called `MyLatest`. You can automatica
 neon projects create --name MyLatest --set-context
 ```
 
-This creates a hidden file with the following context details:
+This creates a hidden `.neon` file by default with the following context details:
 
 ```json
 {
