@@ -81,6 +81,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [unaccent](https://www.postgresql.org/docs/16/unaccent.html)                                     |    1.1 |    1.1 |    1.1 |                                                                                                                                            |
 | [unit](https://github.com/df7cb/postgresql-unit)                                                 |      7 |      7 |      7 |                                                                                                                                            |
 | [uuid-ossp](https://www.postgresql.org/docs/16/uuid-ossp.html)                                   |    1.1 |    1.1 |    1.1 | Double-quote the extension name when installing: `CREATE EXTENSION "uuid-ossp"`                                                            |
+| [wal2json](https://github.com/eulerto/wal2json)                                                  |      - |      - |      - |                                                                                                                                            |
 | [xml2](https://www.postgresql.org/docs/current/xml2.html)                                        |    1.1 |    1.1 |    1.1 |                                                                                                                                            |
 
 ## Install an extension
