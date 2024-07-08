@@ -54,9 +54,79 @@ DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/
 
 ## Configure the Postgres client
 
-There a multiple ways to make server side requests with NestJS. See below for the different implementations.
+1. Create a **DatabaseModule** to manage the connection:
 
-TODO
+```typescript
+import { config } from 'dotenv';
+import { Module } from '@nestjs/common';
+import { neon } from '@neondatabase/serverless';
+
+// Load Environment Variables
+config({
+  path: ['.env', '.env.production', '.env.local'],
+});
+
+const sql = neon(process.env.POSTGRES_URL);
+
+const dbProvider = {
+  provide: 'POSTGRES_POOL',
+  useValue: sql,
+};
+
+@Module({
+  providers: [dbProvider],
+  exports: [dbProvider],
+})
+export class DatabaseModule {}
+```
+
+2. Create a service to interact with Postgres:
+
+```typescript
+import { Injectable, Inject } from '@nestjs/common';
+
+@Injectable()
+export class AppService {
+  constructor(@Inject('POSTGRES_POOL') private readonly sql: any) {}
+
+  async getTable(name: string): Promise<any[]> {
+    return await this.sql(`SELECT * FROM ${name}`);
+  }
+}
+```
+
+3. Import and inject the service in your **AppModule**:
+
+```typescript
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { DatabaseModule } from './database/database.module';
+
+@Module({
+  imports: [DatabaseModule],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}
+```
+
+4. Define a GET endpoint with data loading from Postgres:
+
+```typescript
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
+
+@Controller('/')
+export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  @Get()
+  async getTable() {
+    return this.appService.getTable('playing_with_neon');
+  }
+}
+```
 
 ## Run the app
 
