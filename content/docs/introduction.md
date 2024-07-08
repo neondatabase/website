@@ -53,6 +53,8 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 <img src="/images/technology-logos/rails-logo.svg" width="36" height="36" alt="Rails" href="/docs/guides/ruby-on-rails" title="Connect a Rails application to Neon" />
 
+<img src="/images/technology-logos/react-logo.svg" width="36" height="36" alt="React" href="/docs/guides/react" title="Connect a React application to Neon" />
+
 <img src="/images/technology-logos/remix-logo.svg" width="36" height="36" alt="Remix" href="/docs/guides/remix" title="Connect a Remix application to Neon" />
 
 <img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
