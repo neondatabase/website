@@ -138,10 +138,10 @@ export class AppController {
 
 ## Run the app
 
-When you run `npm run dev` you can expect to see the following on [localhost:3000](localhost:3000):
+When you run `npm run start` you can expect to see similar to following on [localhost:3000](localhost:3000):
 
 ```shell shouldWrap
-PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+[{"id":1,"name":"c4ca4238a0","value":0.39330545},{"id":2,"name":"c81e728d9d","value":0.14468245}]
 ```
 
 ## Source code
