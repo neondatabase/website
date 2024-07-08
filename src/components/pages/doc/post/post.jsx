@@ -56,7 +56,7 @@ const Post = ({
         'flex flex-col lg:ml-0 lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
         isFlowPage
           ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-9 2xl:col-start-2 2xl:mx-5 xl:col-span-8 xl:col-start-3'
-          : 'col-span-6 -mr-12 ml-[-33px] 2xl:-ml-4 xl:col-span-9 xl:ml-10 xl:mr-0 xl:max-w-[750px] lg:max-w-none'
+          : 'col-span-8 col-start-2 -mr-12 ml-[-33px] 2xl:-ml-4 xl:col-span-9 xl:ml-10 xl:mr-0 xl:max-w-[750px] lg:max-w-none'
       )}
     >
       {breadcrumbs.length > 0 && <Breadcrumbs breadcrumbs={breadcrumbs} />}

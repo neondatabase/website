@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
+import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus';
 
 import Item from './item';
@@ -37,12 +38,16 @@ NavWithIcon.propTypes = {
 const Sidebar = ({ className = null, sidebar, basePath, isPostgres = false }) => (
   <aside
     className={clsx(
-      'relative col-start-1 col-end-4 max-w-[254px] pt-0.5 before:absolute before:-bottom-20 before:-right-5 before:-top-[104px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-black-new lg:hidden',
+      'relative left-0 z-50 border-r border-gray-new-10 bg-white dark:bg-black-pure dark:text-white',
       className
     )}
   >
-    <div className="sticky top-[104px] z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-16 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-black-new dark:after:to-black-new">
-      <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-9">
+    <div className="sticky top-0 px-14 pt-[18px]">
+      <Link to="/">
+        <span className="sr-only">Neon</span>
+        <Logo className="h-7" width={102} height={28} priority />
+      </Link>
+      <nav className="no-scrollbars relative z-10 mt-16 h-full overflow-y-scroll pb-36">
         <NavWithIcon
           className={clsx(isPostgres ? 'mb-8' : 'mb-11')}
           items={MENUS.postgresSidebar}

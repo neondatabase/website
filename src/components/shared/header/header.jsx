@@ -211,24 +211,30 @@ const Header = async ({
       >
         {isDocPage ? (
           <div className="flex">
-            <div className="w-[350px] px-[52px]">
-              <LogoLink isDarkTheme={isDarkTheme} />
-            </div>
-            <div className="flex items-center gap-24 pl-32">
-              <div className="flex w-[832px] items-center gap-3.5">
+            <span className="w-[350px]" />
+            <Container
+              className="z-10 grid grid-cols-12 items-center gap-x-10 xl:gap-x-7 lg:gap-x-5"
+              size="1344"
+            >
+              <div className="col-span-8 col-start-2 flex gap-3.5">
                 <Search
-                  className="z-30 w-[274px]"
+                  className="w-[274px]"
                   indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
                 />
                 <InkeepTrigger isSidebar />
               </div>
-              <Sidebar />
-            </div>
+              <div className="col-start-10 col-end-13 xl:hidden">
+                <Sidebar />
+              </div>
+            </Container>
           </div>
         ) : (
           <Container className="z-10 flex items-center justify-between md:!px-5" size="1344">
             <div className="flex items-center gap-x-[90px] xl:gap-x-16">
-              <LogoLink isDarkTheme={isDarkTheme} />
+              <Link to="/">
+                <span className="sr-only">Neon</span>
+                <Logo className="h-7" isDarkTheme={isDarkTheme} width={102} height={28} priority />
+              </Link>
               <Navigation />
             </div>
             <Sidebar />
