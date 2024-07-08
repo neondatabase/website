@@ -94,7 +94,7 @@ config({
   path: ['.env', '.env.production', '.env.local'],
 });
 
-const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' })
+const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
 
 const dbProvider = {
   provide: 'POSTGRES_POOL',
@@ -149,8 +149,8 @@ export class AppService {
 
   async getTable(name: string): Promise<any[]> {
     const client = await this.sql.connect();
-    const { rows } = await client.query(`SELECT * FROM ${name}`);  
-    return rows
+    const { rows } = await client.query(`SELECT * FROM ${name}`);
+    return rows;
   }
 }
 ```
