@@ -11,6 +11,8 @@ updatedOn: '2024-07-08T12:06:52.938Z'
 
 <img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/nextjs" title="Connect a Next.js application to Neon" />
 
+<img src="/images/technology-logos/nestjs-logo.svg" width="36" height="36" alt="NestJS" href="/docs/guides/nestjs" title="Connect a NestJS application to Neon" />
+
 <img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Astro" href="/docs/guides/astro" title="Connect an Astro site or app to Neon" />
 
 <img src="/images/technology-logos/django-logo.svg" width="33" height="36" alt="Django" href="/docs/guides/django" title="Connect a Django application to Neon" />
