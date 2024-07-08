@@ -58,17 +58,19 @@ DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/
 
 To manage the connection to your Neon database, start by creating a **DatabaseModule** in your NestJS application. This module will handle the configuration and provision of the Postgres client.
 
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+
 ```typescript
 import { config } from 'dotenv';
 import { Module } from '@nestjs/common';
-import { neon } from '@neondatabase/serverless';
+import pg from 'pg';
 
 // Load Environment Variables
 config({
   path: ['.env', '.env.production', '.env.local'],
 });
 
-const sql = neon(process.env.POSTGRES_URL);
+const sql = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
 const dbProvider = {
   provide: 'POSTGRES_POOL',
@@ -82,9 +84,76 @@ const dbProvider = {
 export class DatabaseModule {}
 ```
 
+```typescript
+import { config } from 'dotenv';
+import { Module } from '@nestjs/common';
+import postgres from 'postgres';
+
+// Load Environment Variables
+config({
+  path: ['.env', '.env.production', '.env.local'],
+});
+
+const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' })
+
+const dbProvider = {
+  provide: 'POSTGRES_POOL',
+  useValue: sql,
+};
+
+@Module({
+  providers: [dbProvider],
+  exports: [dbProvider],
+})
+export class DatabaseModule {}
+```
+
+```typescript
+import { config } from 'dotenv';
+import { Module } from '@nestjs/common';
+import { neon } from '@neondatabase/serverless';
+
+// Load Environment Variables
+config({
+  path: ['.env', '.env.production', '.env.local'],
+});
+
+const sql = neon(process.env.DATABASE_URL);
+
+const dbProvider = {
+  provide: 'POSTGRES_POOL',
+  useValue: sql,
+};
+
+@Module({
+  providers: [dbProvider],
+  exports: [dbProvider],
+})
+export class DatabaseModule {}
+```
+
+</CodeTabs>
+
 ### 2. Create a Service for Database Interaction
 
 Next, implement a service to facilitate interaction with your Postgres database. This service will utilize the database connection defined in the DatabaseModule.
+
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+
+```typescript
+import { Injectable, Inject } from '@nestjs/common';
+
+@Injectable()
+export class AppService {
+  constructor(@Inject('POSTGRES_POOL') private readonly sql: any) {}
+
+  async getTable(name: string): Promise<any[]> {
+    const client = await this.sql.connect();
+    const { rows } = await client.query(`SELECT * FROM ${name}`);  
+    return rows
+  }
+}
+```
 
 ```typescript
 import { Injectable, Inject } from '@nestjs/common';
@@ -98,6 +167,21 @@ export class AppService {
   }
 }
 ```
+
+```typescript
+import { Injectable, Inject } from '@nestjs/common';
+
+@Injectable()
+export class AppService {
+  constructor(@Inject('POSTGRES_POOL') private readonly sql: any) {}
+
+  async getTable(name: string): Promise<any[]> {
+    return await this.sql(`SELECT * FROM ${name}`);
+  }
+}
+```
+
+</CodeTabs>
 
 ### 3. Integrate the Database Module and Service
 
