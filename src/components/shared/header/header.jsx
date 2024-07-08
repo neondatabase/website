@@ -211,22 +211,22 @@ const Header = async ({
       >
         {isDocPage ? (
           <div className="flex">
-            <span className="hidden w-[350px] shrink-0 3xl:block lg:hidden" />
+            <span className="hidden w-[350px] shrink-0 3xl:block xl:w-[302px] lg:hidden" />
             <Container
-              className="z-10 grid w-full grid-cols-12 items-center gap-x-8 xl:flex xl:justify-between xl:gap-x-5"
+              className="z-10 grid w-full grid-cols-12 items-center gap-x-8 2xl:flex 2xl:justify-between 2xl:gap-x-5"
               size="1408"
             >
               <div className="hidden lg:block">
                 <LogoLink />
               </div>
-              <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-1 3xl:ml-0 xl:max-w-none lg:hidden">
+              <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 xl:max-w-none lg:hidden">
                 <Search
                   className="w-[274px]"
                   indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
                 />
                 <InkeepTrigger />
               </div>
-              <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-0 xl:hidden">
+              <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-11 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-0 lg:hidden">
                 <Sidebar />
               </div>
             </Container>

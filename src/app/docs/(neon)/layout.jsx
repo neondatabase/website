@@ -18,12 +18,12 @@ const NeonDocsLayout = async ({ children }) => {
           sidebar={sidebar}
           basePath={DOCS_BASE_PATH}
           indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
-          className="-mt-[69px] w-[350px] shrink-0 lg:hidden"
+          className="-mt-[69px] w-[350px] shrink-0 xl:w-[302px] lg:hidden"
         />
 
         <div className="-ml-[350px] w-full 3xl:ml-0">
           <Container
-            className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:block xl:gap-x-7"
+            className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 2xl:block xl:gap-x-7"
             size="1408"
           >
             {children}

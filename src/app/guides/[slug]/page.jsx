@@ -65,7 +65,7 @@ const GuidePost = async ({ params }) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <Layout headerWithBorder burgerWithoutBorder isDocPage isHeaderSticky>
+      <Layout headerWithBorder burgerWithoutBorder isHeaderSticky>
         <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
           <Container
             className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-12 xl:gap-x-7 lg:block lg:gap-x-5 md:pt-10 sm:pt-8"

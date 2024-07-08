@@ -72,23 +72,27 @@ const InkeepTrigger = ({ className }) => {
     <>
       <button
         className={clsx(
-          'chat-widget group flex text-sm focus:outline-none',
-          'sm:absolute sm:right-2 sm:top-1.5 sm:items-center sm:space-x-1 sm:text-secondary-8 sm:dark:text-green-45',
+          'chat-widget group flex items-center justify-center rounded border border-gray-new-90 bg-gradient-to-b from-white to-gray-new-98 pl-2 pr-3 hover:border-gray-new-70 focus:outline-none',
+          'dark:border-gray-new-10 dark:from-[#1A1C1E] dark:to-[#0F1010] dark:hover:border-gray-new-20',
+          'lg:absolute lg:right-4 lg:top-3 lg:items-center lg:space-x-1 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:text-secondary-8 lg:dark:text-green-45',
           className
         )}
         type="button"
         aria-label="Open Neon AI"
         onClick={handleClick}
       >
-        <SparksIcon className="relative z-10 h-3.5 w-3.5" />
-        <div>
-          <span className="block border-b border-secondary-8/50 text-[11px] font-medium leading-tight transition-colors duration-200 group-hover:border-transparent dark:border-green-45/50 lg:text-[13px]">
-            <span className="block">Ask Neon AI</span>
-            <span className="hidden text-gray-new-20 dark:text-gray-new-90 " aria-hidden>
-              Ask Neon AI instead
-            </span>
+        <SparksIcon className="relative z-10 h-3 w-3" />
+        <span
+          className={clsx(
+            'block text-[13px] font-medium leading-tight',
+            'lg:border-b lg:border-secondary-8/50 lg:transition-colors lg:duration-200 lg:group-hover:border-transparent lg:dark:border-green-45/50'
+          )}
+        >
+          <span className="block">Ask Neon AI</span>
+          <span className="hidden text-gray-new-20 dark:text-gray-new-90 " aria-hidden>
+            Ask Neon AI instead
           </span>
-        </div>
+        </span>
       </button>
       <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
     </>
