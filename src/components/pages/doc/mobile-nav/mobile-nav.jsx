@@ -119,7 +119,7 @@ const MobileNav = ({ className = null, sidebar, basePath, isPostgres = false }) 
         >
           {!isPostgres && (
             <>
-              <InkeepTrigger isSidebar />
+              <InkeepTrigger />
               <ul className="mb-7">
                 {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
                   <li className="py-[7px] first:pt-0 last:pb-0" key={index}>

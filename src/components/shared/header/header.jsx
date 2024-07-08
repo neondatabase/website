@@ -211,19 +211,22 @@ const Header = async ({
       >
         {isDocPage ? (
           <div className="flex">
-            <span className="w-[350px]" />
+            <span className="hidden w-[350px] shrink-0 3xl:block lg:hidden" />
             <Container
-              className="z-10 grid grid-cols-12 items-center gap-x-10 xl:gap-x-7 lg:gap-x-5"
-              size="1344"
+              className="z-10 grid w-full grid-cols-12 items-center gap-x-8 xl:flex xl:justify-between xl:gap-x-5"
+              size="1408"
             >
-              <div className="col-span-8 col-start-2 flex gap-3.5">
+              <div className="hidden lg:block">
+                <LogoLink />
+              </div>
+              <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-1 3xl:ml-0 xl:max-w-none lg:hidden">
                 <Search
                   className="w-[274px]"
                   indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
                 />
-                <InkeepTrigger isSidebar />
+                <InkeepTrigger />
               </div>
-              <div className="col-start-10 col-end-13 xl:hidden">
+              <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-0 xl:hidden">
                 <Sidebar />
               </div>
             </Container>
@@ -231,10 +234,7 @@ const Header = async ({
         ) : (
           <Container className="z-10 flex items-center justify-between md:!px-5" size="1344">
             <div className="flex items-center gap-x-[90px] xl:gap-x-16">
-              <Link to="/">
-                <span className="sr-only">Neon</span>
-                <Logo className="h-7" isDarkTheme={isDarkTheme} width={102} height={28} priority />
-              </Link>
+              <LogoLink />
               <Navigation />
             </div>
             <Sidebar />
