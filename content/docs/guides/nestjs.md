@@ -54,7 +54,9 @@ DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/
 
 ## Configure the Postgres client
 
-1. Create a **DatabaseModule** to manage the connection:
+### 1. Create a Database Module
+
+To manage the connection to your Neon database, start by creating a **DatabaseModule** in your NestJS application. This module will handle the configuration and provision of the Postgres client.
 
 ```typescript
 import { config } from 'dotenv';
@@ -80,7 +82,9 @@ const dbProvider = {
 export class DatabaseModule {}
 ```
 
-2. Create a service to interact with Postgres:
+### 2. Create a Service for Database Interaction
+
+Next, implement a service to facilitate interaction with your Postgres database. This service will utilize the database connection defined in the DatabaseModule.
 
 ```typescript
 import { Injectable, Inject } from '@nestjs/common';
@@ -95,7 +99,9 @@ export class AppService {
 }
 ```
 
-3. Import and inject the service in your **AppModule**:
+### 3. Integrate the Database Module and Service
+
+Import and inject the DatabaseModule and AppService into your AppModule. This ensures that the database connection and services are available throughout your application.
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -111,7 +117,9 @@ import { DatabaseModule } from './database/database.module';
 export class AppModule {}
 ```
 
-4. Define a GET endpoint with data loading from Postgres:
+### 4. Define a Controller Endpoint
+
+Finally, define a GET endpoint in your AppController to fetch data from Postgres database. This endpoint will use the AppService to query the database.
 
 ```typescript
 import { Controller, Get } from '@nestjs/common';
