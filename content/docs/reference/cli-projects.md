@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.896Z'
+updatedOn: '2024-07-05T18:43:27.662Z'
 ---
 
 ## Before you begin
@@ -191,7 +191,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   neon project create --psql -- -c "SELECT version()"
   ```
 
-- Create a project and set the Neon CLI project and branch context.
+- Create a project and set the Neon CLI project context.
 
   ```
   neon project create --psql --set-context

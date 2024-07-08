@@ -2,7 +2,7 @@
 title: Neon framework guides
 subtitle: Find detailed instructions for connecting to Neon from various frameworks
 enableTableOfContents: true
-updatedOn: '2024-07-03T10:49:43.701Z'
+updatedOn: '2024-07-08T12:06:52.938Z'
 ---
 
 <TechnologyNavigation open>
@@ -24,6 +24,8 @@ updatedOn: '2024-07-03T10:49:43.701Z'
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-reactive" title="Connect Quarkus (Reactive) to Neon" />
 
 <img src="/images/technology-logos/rails-logo.svg" width="36" height="36" alt="Rails" href="/docs/guides/ruby-on-rails" title="Connect a Rails application to Neon" />
+
+<img src="/images/technology-logos/react-logo.svg" width="36" height="36" alt="React" href="/docs/guides/react" title="Connect a React application to Neon" />
 
 <img src="/images/technology-logos/reflex-logo.svg" width="100" height="36" alt="Reflex" href="/docs/guides/reflex" title="Build Python Apps with Reflex and Neon" />
 
