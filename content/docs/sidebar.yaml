@@ -49,6 +49,8 @@
           slug: guides/remix
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
+        - title: SolidStart
+          slug: guides/solid-start
         - title: SQLAlchemy
           slug: guides/sqlalchemy
         - title: Symfony
