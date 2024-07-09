@@ -41,11 +41,11 @@ To add the GitHub app:
       - Creating a `NEON_API_KEY` secret in your GitHub repository.
       - Adding a `NEON_PROJECT_ID` variable to your GitHub repository.
 
-## Connect other Neon projects to GitHub repositories
+## Connect more Neon projects to GitHub repositories
 
+If you've previously installed the GitHub App, it's available to use with all of your Neon projects.
 
-
-## 
+To connect another Neon project tio a GitHub repository.
 
 ### Changes made by the integration
 
