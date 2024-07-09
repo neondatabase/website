@@ -28,7 +28,6 @@
           slug: guides/django
         - title: Express
           slug: guides/express
-          tag: new
         - title: Laravel
           slug: guides/laravel
         - title: Next.js
@@ -49,6 +48,9 @@
           slug: guides/remix
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
+        - title: SolidStart
+          slug: guides/solid-start
+          tag: new
         - title: SQLAlchemy
           slug: guides/sqlalchemy
         - title: Symfony
@@ -336,10 +338,8 @@
           items:
             - title: Generate synthetic data
               slug: guides/neosync-generate
-              tag: new
             - title: Anonymize data
               slug: guides/neosync-anonymize
-              tag: new
         - title: Prisma
           slug: guides/prisma
         - title: TypeORM

@@ -35,4 +35,6 @@ updatedOn: '2024-07-08T12:06:52.938Z'
 
 <img src="/images/technology-logos/symfony-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Symfony with Doctrine to Neon" />
 
+<img src="/images/technology-logos/solid-logo.svg" width="36" height="36" alt="SolidStart" href="/docs/guides/solid-start" title="Connect an SolidStart site or app to Neon" />
+
 </TechnologyNavigation>
