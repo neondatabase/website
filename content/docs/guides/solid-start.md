@@ -3,9 +3,10 @@ title: Connect a SolidStart application to Neon
 subtitle: Set up a Neon project in seconds and connect from a SolidStart application
 enableTableOfContents: true
 updatedOn: '2024-07-08T07:55:54.406Z'
+tag: new
 ---
 
-SolidStart is an open source, meta-framework that provides the platform to put components that comprise a web application together<sup><a target="_blank" href="https://docs.solidjs.com/solid-start#overview">1</a></sup>. This guide explains how to connect SolidStart with Neon using a secure server-side request.
+SolidStart is an open-source meta-framework designed to integrate the components that make up a web application.<sup><a target="_blank" href="https://docs.solidjs.com/solid-start#overview">1</a></sup>. This guide explains how to connect SolidStart with Neon using a secure server-side request.
 
 To create a Neon project and access it from a SolidStart application:
 
@@ -54,7 +55,7 @@ DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/
 
 ## Configure the Postgres client
 
-There a multiple ways to make server side requests with SolidStart. See below for the different implementations.
+There a multiple ways to make server-side requests with SolidStart. See below for the different implementations.
 
 ### Server-Side Data Loading
 
@@ -133,7 +134,7 @@ export default function Page() {
 
 ### Server Endpoints (API Routes)
 
-In your server endpoints (API Routes) in SolidStart application, use the following code snippet to connect to your Neon database:
+In your server endpoints (API Routes) in your SolidStart application, use the following code snippet to connect to your Neon database:
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
