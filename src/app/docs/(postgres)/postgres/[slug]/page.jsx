@@ -58,7 +58,7 @@ const PostgresPage = async ({ params }) => {
   const { previousLink, nextLink } = getNavigationLinks(currentSlug);
 
   return (
-    <div className="col-span-6 -mx-10 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
+    <div className="col-span-7 col-start-3 -ml-6 max-w-[832px] 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 lg:max-w-none">
       <article className="-mt-5 lg:mt-0">
         {!hasH1 && <h1 className="sr-only">{title}</h1>}
         <Admonition type="note">

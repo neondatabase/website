@@ -15,10 +15,10 @@ const NeonDocsLayout = async ({ children }) => {
         <MobileNav className="hidden lg:block" sidebar={sidebar} basePath={DOCS_BASE_PATH} />
 
         <Sidebar
+          className="-mt-[69px] w-[350px] shrink-0 xl:w-[302px] lg:hidden"
           sidebar={sidebar}
           basePath={DOCS_BASE_PATH}
           indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
-          className="-mt-[69px] w-[350px] shrink-0 xl:w-[302px] lg:hidden"
         />
 
         <div className="-ml-[350px] w-full 3xl:ml-0">
