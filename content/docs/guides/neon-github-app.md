@@ -1,73 +1,61 @@
 ---
-title: The Neon GitHub integration
-subtitle: Connect your GitHub application repository to your Neon project
+title: The Neon GitHub App
+subtitle: Connect a Neon project to a GitHub repo for a database branching workflow
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.401Z'
 ---
 
-The Neon GitHub integration connects your Neon project to a GitHub repository and generates a preconfigured GitHub Action that automatically creates a database branch with each pull request.
+The Neon GitHub App lets you connect a Neon project to a GitHub application repository and set up a workflow that creates a database branch with each pull request. 
 
 <Admonition type="comingSoon" title="Feature Coming Soon">
 The Neon GitHub integration is currently in **private preview**. To start using it, request access by contacting our [Customer Success](mailto:customer-success@neon.tech) team and asking to join the private preview.
 </Admonition>
 
-A database branch is an isolated copy of your data, allowing you to:
+A database branch is an isolated copy of your data, allowing you to create production-like application previews to accelerate review and collaboration.
 
-- Create production-like preview environments to accelerate review and collaboration
-- Display application and database changes together in the same preview
-- Eliminate the need for manual setup of development databases
-
-When you connect your GitHub application repository to your Neon project, the integration performs the following actions:
-
-1. Creates a GitHub variable containing your Neon project ID.
-2. Generates a new Neon API key for your Neon account.
-3. Creates a GitHub secret containing the Neon API key.
-
-After adding the integration, you can copy the preconfigured “create branch” action to your application repository to create a database branch with each pull request.
-
-Additionally, the GitHub repository variables set by the integration let you easily extend your workflow with other actions, such as resetting and deleting branches. For details, refer to the Neon GitHub integration guide. Adding the integration performs the following actions:
-
-<Admonition type="info">
-Neon's GitHub Actions require setting a `NEON_PROJECT_ID` variable and a `NEON_API_KEY` secret in GitHub. The Neon GitHub app does this for you automatically.
-</Admonition>
-
-The following section describes how to install the GitHub integration.
+When you connect a Neon project to a GitHub repository, the GitHub app sets variables in your GitHub repository and provides you with a sample GitHub Action that uses those variables to create a database branch with each pull request.
 
 ## Prerequisites
 
-This installation described below assumes the following:
+The steps described below assume the following:
 
-- You already have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
+- You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
 - You have a GitHub account and a repository that you want to connect to your Neon project.
 
-## Install the GitHub integration
+## Add the GitHub App and connect your Neon project 
 
-<Admonition type="note">
-If you previously installed the integration for a different Neon project, remove the previous integration before installing. For instructions, see [Remove the GitHub integration](/docs/guides/neon-github-app#remove-the-github-integration).
-</Admonition>
+To add the GitHub app:
 
-To add the GitHub integration to your Neon project:
-
-1. In the Neon Console, navigate to the **Integrations** page for your project.
+1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
 2. Locate the **GitHub** integration card and click **Add**.
    ![GitHub integration card](/docs/guides/github_card.png)
-3. On the **GitHub integration** drawer, click **Add GitHub integration**.
-4. If you have more than one GitHub account, select the one you want to install the integration.
-5. Select whether to install and authorize the GitHub app for **All repositories** or **Only select repositories**.
-   - Selecting **All repositories** directs you back to the GitHub integration drawer in the Neon Console to select a GitHub repository.
-   - Selecting **Only select repositories** lets you choose a repository immediately.
-6. Since Neon's GitHub app is currently designed to work with a single repository, select **Only select repositories** and choose a GitHub repository from the **Select repositories** drop-down list.
-7. Click **Save** to complete the installation. You are directed back to the GitHub integration drawer in the Neon Console.
-8. Select a GitHub repository to connect to your Neon project and click **Connect**.
+3. On the **GitHub** drawer, click **Add GitHub App**.
+4. If you have more than one GitHub account, select the one where you want to install the app.
+5. Select whether to install and authorize the GitHub app for **All repositories** in your GitHub account or **Only select repositories**.
+   - Selecting **All repositories** authorizes the app on all repositories in your GitHub account, meaning that you will be able to connect a Neon project to any of them. 
+   - Selecting **Only select repositories** authorizes the app on one or more repositories, meaning that you will only be able to connect a Neon project to those repositories.
+6. Next, if you authorized the app on **All repositories** or multiple repositories, select a GitHub repository to connect to your Neon project, and click **Connect**. If you authorized the GitHub app on a single GitHub repository, this step is already done.
+  
+    You are advanced to the **Actions** tab on the final page of the setup, which outlines the actions performed to connect your Neon project to the selected GitHub repository, which includes:
+      - Generating a Neon API key for your Neon account.
+      - Creating a `NEON_API_KEY` secret in your GitHub repository.
+      - Adding a `NEON_PROJECT_ID` variable to your GitHub repository.
+
+## Connect other Neon projects to GitHub repositories
+
+
+
+## 
 
 ### Changes made by the integration
 
 After connecting your Neon project to a GitHub repository, the GitHub integration performs the following actions:
 
-- Adds a `NEON_PROJECT_ID` variable to your GitHub repository
+
 - Generates a Neon API key for your Neon account
-- Creates a `NEON_API_KEY` variable in your GitHub repository
-- Generates a GitHub Action that creates a database branch with each pull request
+- Creates a `NEON_API_KEY` secret in your GitHub repository
+- Adds a `NEON_PROJECT_ID` variable to your GitHub repository
+
 
 - **Installed and Authorized GitHub Apps**
 
@@ -146,3 +134,29 @@ To remove the integration:
 ## Feedback and future improvements
 
 If you've got feature requests or feedback about what you'd like to see from the Neon GitHub integration, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
+
+
+
+
+
+
+
+
+When you connect your GitHub application repository to your Neon project, the integration performs the following actions:
+
+1. Creates a GitHub variable containing your Neon project ID.
+2. Generates a new Neon API key for your Neon account.
+3. Creates a GitHub secret containing the Neon API key.
+
+After adding the integration, you can copy the preconfigured “create branch” action to your application repository to create a database branch with each pull request.
+
+Additionally, the GitHub repository variables set by the integration let you easily extend your workflow with other actions, such as resetting and deleting branches. For details, refer to the Neon GitHub integration guide. Adding the integration performs the following actions:
+
+<Admonition type="info">
+Neon's GitHub Actions require setting a `NEON_PROJECT_ID` variable and a `NEON_API_KEY` secret in GitHub. The Neon GitHub app does this for you automatically.
+</Admonition>
+
+The following section describes how to install the GitHub integration.
+
+
+https://www.figma.com/design/kMExsRvzATGgzuADjfkB0A/Integrations-Page?node-id=2760-965&t=dtF8d1VYH56EWNqp-0
