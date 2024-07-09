@@ -2,7 +2,6 @@
 title: Anonymize data with Neosync
 subtitle: Learn how to anonymize sensitive data in Neon with Neosync
 enableTableOfContents: true
-tag: new
 updatedOn: '2024-06-14T07:55:54.401Z'
 ---
 

@@ -33,6 +33,7 @@
           slug: guides/laravel
         - title: NestJS
           slug: guides/nestjs
+          tag: new
         - title: Next.js
           slug: guides/nextjs
         - title: Node.js

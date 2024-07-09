@@ -2,6 +2,7 @@
 title: Connect a NestJS application to Neon
 subtitle: Set up a Neon project in seconds and connect from a NestJS application
 enableTableOfContents: true
+tag: new
 updatedOn: '2024-07-08T07:55:54.406Z'
 ---
 
@@ -56,7 +57,7 @@ DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/
 
 ### 1. Create a Database Module
 
-To manage the connection to your Neon database, start by creating a **DatabaseModule** in your NestJS application. This module will handle the configuration and provision of the Postgres client.
+To manage the connection to your Neon database, start by creating a **DatabaseModule** in your NestJS application. This module will handle the configuration and provisioning of the Postgres client.
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
@@ -136,7 +137,7 @@ export class DatabaseModule {}
 
 ### 2. Create a Service for Database Interaction
 
-Next, implement a service to facilitate interaction with your Postgres database. This service will utilize the database connection defined in the DatabaseModule.
+Next, implement a service to facilitate interaction with your Postgres database. This service will use the database connection defined in the DatabaseModule.
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
@@ -203,7 +204,7 @@ export class AppModule {}
 
 ### 4. Define a Controller Endpoint
 
-Finally, define a GET endpoint in your AppController to fetch data from Postgres database. This endpoint will use the AppService to query the database.
+Finally, define a `GET` endpoint in your AppController to fetch data from your Postgres database. This endpoint will use the AppService to query the database.
 
 ```typescript
 import { Controller, Get } from '@nestjs/common';
@@ -222,7 +223,7 @@ export class AppController {
 
 ## Run the app
 
-When you run `npm run start` you can expect to see similar to following on [localhost:3000](localhost:3000):
+When you run `npm run start` you can expect to see output similar to the following at [localhost:3000](localhost:3000):
 
 ```shell shouldWrap
 [{"id":1,"name":"c4ca4238a0","value":0.39330545},{"id":2,"name":"c81e728d9d","value":0.14468245}]
