@@ -163,10 +163,112 @@ curl --request PATCH \
 
 ## Querying metrics and quotas
 
-You can get metrics and quota details for a single project or a list of metrics for all projects at once:
+You can use the Neon API to retrieve consumption metrics for your organization and projects through various endpoints:
 
-- [Per project](#retrieving-details-about-a-project)
-- [All projects](#retrieving-metrics-for-all-projects)
+| Endpoint                                                                                         | Description                                                                              | Plan Availability |
+| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------- |
+| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                                     | Scale plan only   |
+| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity        | Scale plan only   |
+| [Project-level](https://api-docs.neon.tech/reference/listprojectsconsumption) (billing period)   | Consumption metrics for each project in your organization for the current billing period | All plans         |
+| [Per project](https://api-docs.neon.tech/reference/getproject)                                   | Detailed metrics and quota details for a single project                                  | All plans         |
+
+### Retrieving account-level consumption metrics
+
+Using a `GET` request from the Neon API (see [Get account-level consumption history](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)), you can find total usage across all projects in your organization. This provides a comprehensive view of consumption metrics accumulated for the billing period.
+
+Here is the URL in the Neon API where you can get account-level metrics:
+
+```bash
+https://console.neon.tech/api/v2/consumption_history/account
+```
+
+This API endpoint accepts the following query parameters: `from`, `to`, `granularity`, `org_id`, and `include_v1_metrics`.
+
+#### Getting metrics for different accounts.
+
+Include the unique `org_id` for your organization to retrieve account metrics for that specific organization. If not specified, metrics for your personal account will be returned.
+
+<Admonition type="note">
+Organizations are currently in private preview. For more information about this upcoming feature, see [Organizations](/docs/manage/organizations).
+</Admonition>
+
+#### Set a date range across multiple billing periods
+
+You can set `from` and `to` query parameters to define a time range that can span across multiple billing periods.
+
+- `from` — Sets the start date and time of the time period for which you are seeking metrics.
+- `to` — Sets the end date and time for the interval for which you desire metrics.
+- `granularity` — Sets the level of granularity for the metrics, such as `hourly`, `daily`, or `monthly`.
+
+The response is organized by periods and consumption data within the specified time range.
+
+Here is an example query that returns metrics from June 30th to July 2nd, 2024. Time values must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
+
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/consumption_history/account?from=2024-06-30T15%3A30%3A00Z&to=2024-07-02T15%3A30%3A00Z&granularity=hourly&org_id=org-ocean-art-12345678' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+And here is a sample response (with key lines highlighted):
+
+<details>
+<summary>Response body</summary>
+
+```json {5,10,11,13,15,18-20,24,29,30,32,33,35-37,40,42}
+{
+  "periods": [
+    {
+      "period_id": "random-period-abcdef",
+      "consumption": [
+        {
+          "timeframe_start": "2024-06-30T15:00:00Z",
+          "timeframe_end": "2024-06-30T16:00:00Z",
+          "active_time_seconds": 147452,
+          "compute_time_seconds": 43215,
+          "written_data_bytes": 111777920,
+          "synthetic_storage_size_bytes": 41371988928
+        },
+        {
+          "timeframe_start": "2024-06-30T16:00:00Z",
+          "timeframe_end": "2024-06-30T17:00:00Z",
+          "active_time_seconds": 147468,
+          "compute_time_seconds": 43223,
+          "written_data_bytes": 110483584,
+          "synthetic_storage_size_bytes": 41467955616
+        }
+        // ... More consumption data
+      ]
+    },
+    {
+      "period_id": "random-period-ghijkl",
+      "consumption": [
+        {
+          "timeframe_start": "2024-07-01T00:00:00Z",
+          "timeframe_end": "2024-07-01T01:00:00Z",
+          "active_time_seconds": 145672,
+          "compute_time_seconds": 42691,
+          "written_data_bytes": 115110912,
+          "synthetic_storage_size_bytes": 42194712672
+        },
+        {
+          "timeframe_start": "2024-07-01T01:00:00Z",
+          "timeframe_end": "2024-07-01T02:00:00Z",
+          "active_time_seconds": 147464,
+          "compute_time_seconds": 43193,
+          "written_data_bytes": 110078200,
+          "synthetic_storage_size_bytes": 42291858520
+        }
+        // ... More consumption data
+      ]
+    }
+    // ... More periods
+  ]
+}
+```
+
+</details>
 
 ### Retrieving details about a project
 
