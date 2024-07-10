@@ -1,7 +1,6 @@
 'use client';
 
 import clsx from 'clsx';
-import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -32,6 +31,7 @@ import Support from 'icons/docs/sidebar/support.inline.svg';
 import WhyNeon from 'icons/docs/sidebar/why-neon.inline.svg';
 
 import Tag from '../../tag';
+import Menu from '../menu';
 
 const icons = {
   ai: AiIcon,
@@ -66,40 +66,73 @@ const isActiveItem = (items, currentSlug) =>
 const Item = ({
   basePath,
   title,
+  section = null,
   slug = null,
   icon = null,
   tag = null,
   ariaLabel = null,
   isStandalone = false,
   items = null,
-  closeMenu = null,
-  isChildren = false,
+  onToggleSubmenu = null,
+  onToggleParentMenu = null,
 }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
   const Icon = icons[icon];
-
   const hasActiveChild = isActiveItem(items, currentSlug);
-  const [isOpen, setIsOpen] = useState(() => hasActiveChild);
-
-  const handleClick = () => {
-    if (closeMenu && slug) {
-      closeMenu();
-    }
-    setIsOpen((prev) => !prev);
-  };
+  const [isOpenMenu, setIsOpenMenu] = useState(() => hasActiveChild);
 
   const externalSlug = slug && slug.startsWith('http') ? slug : null;
   const docSlug = isStandalone ? `/${slug}` : `${basePath}${slug}/`;
 
   const LinkTag = slug ? Link : 'button';
 
+  const handleCloseMenu = () => {
+    setIsOpenMenu(false);
+    onToggleSubmenu();
+    if (onToggleParentMenu) {
+      onToggleParentMenu();
+    }
+  };
+
+  const handleOpenMenu = () => {
+    setIsOpenMenu(true);
+    onToggleSubmenu();
+    if (onToggleParentMenu) {
+      onToggleParentMenu();
+    }
+  };
+
+  if (section)
+    return (
+      <li className="border-b border-gray-new-94 py-2.5 first:pt-0 last:border-0 dark:border-gray-new-10">
+        {section !== 'noname' && (
+          <span className="block block py-1.5 text-[10px] font-medium uppercase leading-tight text-gray-new-50">
+            {section}
+          </span>
+        )}
+        {items && (
+          <ul>
+            {items.map((item, index) => (
+              <Item
+                {...item}
+                key={index}
+                basePath={basePath}
+                isSubMenu
+                onToggleSubmenu={onToggleSubmenu}
+                onToggleParentMenu={onToggleParentMenu}
+              />
+            ))}
+          </ul>
+        )}
+      </li>
+    );
+
   return (
     <li className="group/item flex flex-col">
       <LinkTag
         className={clsx(
-          'group flex w-full items-center gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
-          { 'group-first/item:pt-0': !isChildren },
+          'group flex w-full items-center gap-2 py-1.5 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
           currentSlug === slug
             ? 'font-medium text-black-new dark:text-white'
             : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
@@ -107,7 +140,7 @@ const Item = ({
         type={slug ? undefined : 'button'}
         to={slug ? externalSlug || docSlug : undefined}
         target={externalSlug ? '_blank' : '_self'}
-        onClick={handleClick}
+        onClick={items?.length && handleOpenMenu}
       >
         {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
         {icon && Icon && <Icon className="size-4.5" />}
@@ -120,45 +153,17 @@ const Item = ({
         {externalSlug && (
           <ArrowExternalIcon className="text-gray-new-90 dark:text-gray-new-15 lg:hidden" />
         )}
-        {items?.length && (
-          <span
-            className={clsx(
-              'arrow-mask hidden h-4 w-4 transition-[transform,background-color] duration-200 lg:block',
-              currentSlug === slug
-                ? 'bg-black-new dark:bg-white'
-                : 'bg-gray-new-40 group-hover:bg-black-new dark:bg-gray-new-90 dark:group-hover:bg-white',
-              isOpen ? 'rotate-90' : 'rotate-0'
-            )}
-          />
-        )}
       </LinkTag>
-      {!!items?.length && (
-        <LazyMotion features={domAnimation}>
-          <AnimatePresence initial={false}>
-            {isOpen ? (
-              <m.ul
-                className="relative overflow-hidden pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-new-90 dark:before:bg-gray-new-20"
-                initial="from"
-                animate="to"
-                exit="from"
-                variants={{
-                  from: { opacity: 0, height: 0 },
-                  to: { opacity: 1, height: 'auto' },
-                }}
-              >
-                {items.map((item, index) => (
-                  <Item
-                    {...item}
-                    key={index}
-                    closeMenu={closeMenu}
-                    basePath={basePath}
-                    isChildren
-                  />
-                ))}
-              </m.ul>
-            ) : null}
-          </AnimatePresence>
-        </LazyMotion>
+      {items?.length && (
+        <Menu
+          basePath={basePath}
+          items={items}
+          isOpen={isOpenMenu}
+          isSubMenu
+          onClose={handleCloseMenu}
+          onToggleSubmenu={handleOpenMenu}
+          onToggleParentMenu={onToggleParentMenu}
+        />
       )}
     </li>
   );
@@ -167,6 +172,7 @@ const Item = ({
 Item.propTypes = {
   basePath: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  section: PropTypes.string,
   isStandalone: PropTypes.bool,
   slug: PropTypes.string,
   icon: PropTypes.string,
@@ -181,8 +187,8 @@ Item.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
-  closeMenu: PropTypes.func,
-  isChildren: PropTypes.bool,
+  onToggleSubmenu: PropTypes.func,
+  onToggleParentMenu: PropTypes.func,
 };
 
 export default Item;
