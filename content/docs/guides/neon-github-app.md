@@ -1,6 +1,6 @@
 ---
 title: The Neon GitHub App
-subtitle: Connect a Neon project to a GitHub repo for a database branching workflow
+subtitle: Connect your Postgres database to a GitHub repository and build GitHub Actions workflows
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.401Z'
 ---
@@ -44,14 +44,14 @@ To add the GitHub app:
 
 ## Sample GitHub workflow
 
-After you install the Neon GitHub App and connect your Neon project to a GitHub repository, the GitHub App provides a sample GitHub Action workflow that you can add to your repo. The workflow includes:
+After installing the Neon GitHub App and connecting your Neon project to a GitHub repository, the GitHub App provides a sample GitHub Actions workflow that you can add to your repo. The workflow includes the following:
 
 - A `Create Neon Branch` action that creates a new Neon branch in your Neon project when you open or reopen a pull request in the connected GitHub repository.
 - A `Delete Neon Branch` action that deletes the Neon branch from your Neon project when you close the pull request.
-- Commented out code showing how you might add a step for running database migration.
+- Commented out code showing how you to add database migrations to your workflow.
 
 <Admonition type="note">
-The provided workflow is intended as a start example, showing how you can build a database branching workflows with GitHub and Neon. For mroe workflow examples, refer to the [GitHub workflow examples](#github-workflow-examples) toward the end of this guide.
+The provided workflow is a basic example, showing how you can build workflows with Neon and GitHub Actions. For more workflow examples, refer to the [GitHub workflow examples](#github-workflow-examples).
 </Admonition>
 
 ```yaml
@@ -137,19 +137,21 @@ For GitHub to discover any GitHub Actions workflows, you must save the workflow 
 2. Copy the workflow example above into your `neon-workflow.yml` file.
 3. Commit your changes.
 
-### Using the GitHub workflow
+### Using the GitHub Actions workflow
 
-To see the GitHub workflow in action, create a pull request in your GitHub application repository. This will trigger the `Create Neon Branch`. You can verify that the branch was created on the **Branches** page in the Neon Console. You should see a new branch with a `preview/pr-` name prefix.
+To see the workflow in action, create a pull request in your GitHub application repository. This triggers the `Create Neon Branch` action. You can verify that the branch was created on the **Branches** page in the Neon Console. You should see a new branch with a `preview/pr-` name prefix.
 
-Closing the pull request will remove the Neon branch from the Neon project, which you can also verify on the **Branches** page in the Neon Console.
+Closing the pull request removes the Neon branch from the Neon project, which you can also verify on the **Branches** page in the Neon Console.
 
-To see your workflow results in GitHub, you can follow the instructions in [Viewing your workflow results](https://docs.github.com/en/actions/quickstart#viewing-your-workflow-results), in the GitHub documentation.
+To see your workflow results in GitHub, follow the instructions in [Viewing your workflow results](https://docs.github.com/en/actions/quickstart#viewing-your-workflow-results), in the GitHub documentation.
 
-## Connect more Neon projects to GitHub repositories
+## Connect more Neon projects with the GitHub App
 
-If you've previously installed the GitHub App, it's available to use with all of your Neon projects.
+If you've installed the GitHub app previously, it's available to use with any project in your Neon account. 
 
-To connect another Neon project to a GitHub repository.
+To connect another Neon project to a GitHub repository:
+
+-
 
 ### Changes made by the app
 
