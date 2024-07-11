@@ -1,11 +1,11 @@
 ---
 title: Neon documentation
-updatedOn: '2024-06-14T07:55:54.411Z'
+updatedOn: '2024-07-08T12:06:52.940Z'
 ---
 
 Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. Get started today with our [generous free tier](https://console.neon.tech).
 
-<CTA title="Branch your data just like code" description="Learn how Neon's database branching can help you integrate Postgres into your development workflow." buttonText="Read our primer" buttonUrl="/docs/get-started-with-neon/workflow-primer" />
+<CTA title="Branch your data like code" description="Learn how Neon's database branching can help you integrate Postgres into your development workflow." buttonText="Read our primer" buttonUrl="/docs/get-started-with-neon/workflow-primer" />
 
 ## Get started
 
@@ -53,6 +53,8 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 <img src="/images/technology-logos/rails-logo.svg" width="36" height="36" alt="Rails" href="/docs/guides/ruby-on-rails" title="Connect a Rails application to Neon" />
 
+<img src="/images/technology-logos/react-logo.svg" width="36" height="36" alt="React" href="/docs/guides/react" title="Connect a React application to Neon" />
+
 <img src="/images/technology-logos/remix-logo.svg" width="36" height="36" alt="Remix" href="/docs/guides/remix" title="Connect a Remix application to Neon" />
 
 <img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
@@ -67,17 +69,17 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 <DetailIconCards>
 
-<a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a  Serverless Postgres database from any application" icon="audio-jack">Connect</a>
+<a href="/docs/connect/connect-intro" description="Learn how to connect to a  Serverless Postgres database from any application" icon="audio-jack">Connect</a>
 
-<a href="/docs/import/import-from-postgres" description="Load your data into a Postgres database hosted by Neon" icon="import">Import data</a>
+<a href="/docs/import/import-intro" description="Load your data into a Postgres database hosted by Neon" icon="import">Import data</a>
 
 <a href="/docs/ai/ai-intro" description="Build and scale transformative LLM applications with vector storage and similarity search." icon="openai">AI & embeddings</a>
 
-<a href="/docs/introduction/branching" description="Learn to optimize development workflows with database branching" icon="split-branch">Branching</a>
+<a href="/docs/guides/branching-intro" description="Learn to optimize development workflows with database branching" icon="split-branch">Branching</a>
 
-<a href="/docs/extensions/pg-extensions" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
+<a href="/docs/extensions/extensions-intro" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
 
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Manage Neon programmatically using the Neon API" icon="transactions">Neon API Reference</a>
+<a href="/docs/reference/neon-cli" description="Manage Neon directly from the terminal with the Neon CLI" icon="transactions">Neon CLI Reference</a>
 
 </DetailIconCards>
 

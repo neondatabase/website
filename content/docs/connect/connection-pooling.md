@@ -4,7 +4,7 @@ subtitle: Learn how to enable connection pooling in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2024-06-14T07:55:54.364Z'
+updatedOn: '2024-06-30T18:09:08.267Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -61,11 +61,21 @@ Even with the largest compute size, the `max_connections` limit may not be suffi
 
 ## Connection pooling
 
-Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations, running many instances of an application, or applications with serverless functions. With regular Postgres, new connections are rejected when reaching the `max_connections` limit. To overcome this limitation, Neon supports connection pooling using [PgBouncer](https://www.pgbouncer.org/), which allows Neon to support up to 10,000 concurrent connections.
+Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations, running many instances of an application, or applications with serverless functions. With regular Postgres, new connections are rejected when reaching the `max_connections` limit. To overcome this limitation, Neon supports connection pooling using [PgBouncer](https://www.pgbouncer.org/), which allows Neon to support up to 10,000 concurrent connections through the -pooler endpoint.
+
+The use of connection pooling, however, is not a magic bullet: As the name implies, connections to the pooler endpoint together share a pool of connections to the normal PostgreSQL endpoint, so they still consume some connections to the main Postgres instance.
+
+To ensure that direct access to Postgres is still possible for e.g. administrative tasks, the pooler is configured to only open up to [64 connections](#neon-pgbouncer-configuration-settings) to Postgres for each user to each database. I.e., there can be only 64 active connections by `john` to the `neondb` database through the pooler. All other connections by `john` to the `neondb` database will have to wait for one of those 64 active connections to complete their transactions before the next connection's work is started.  
+At the same time, a user `mike` will also be able to connect to the `neondb` database through the pooler and have up to 64 concurrent active transactions across 64 connections, assuming the endpoint started with a high enough `minCU` setting to be configured with a high enough `max_connections` setting to support those 128 concurrent connections from those two users.  
+Similarly, even if the user `john` has 64 concurrently active transactions through the pooler to the `neondb` database, that user can still start up to 64 concurrent transactions in the `john_db` database when connected through the pooler; but again, only if Postgres' `max_connections` limit has the capacity for the connections that are managed by the pooler.
+
+For further information, see [PgBouncer](#pgbouncer).
 
 <Admonition type="important">
-Connection pooling supports up to 10,000 concurrent connections when multiple Postgres users are connecting to multiple Postgres databases. For a single user connecting to a single database, the maximum number of concurrent connections is 64. This limit is controlled by the PgBouncer `default_pool_size` parameter, which defines the default number of server connections per user/database pair. See [Neon PgBouncer configuration settings](#neon-pgbouncer-configuration-settings). If your application connects to your database using a single Postgres role, expect to encounter this limit when exceeding the 64 concurrent connection limit. For information about creating additional Postgres roles, see [Manage roles](/docs/manage/roles#manage-roles-with-sql). Roles can created via the Neon Console, CLI, API, and SQL.
+You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume some connections on the main endpoint: PgBouncer forwards operations from the user's connections through its own pool of connnections to Postgres, and adaptively adds more connections to PostgreSQL as and when needed by more concurrently active user connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections, but infrequent and/or short [transactions](https://neon.tech/docs/postgresql/query-reference#transactions).
 </Admonition>
+
+## PgBouncer
 
 PgBouncer is an open-source connection pooler for Postgres. When an application needs to connect to a database, PgBouncer provides a connection from the pool. Connections in the pool are routed to a smaller number of actual Postgres connections. When a connection is no longer required, it is returned to the pool and is available to be used again. Maintaining a pool of available connections improves performance by reducing the number of connections that need to be created and torn down to service incoming requests. Connection pooling also helps avoid rejected connections. When all connections in the pool are being used, PgBouncer queues a new request until a connection from the pool becomes available.
 
@@ -102,7 +112,7 @@ Protocol-level prepared statements are supported with Neon and PgBouncer as of t
 
 ### Understanding prepared statements
 
-A prepared statement in Postgres allows for the optimization of an SQL query by defining its structure once and executing it multiple times with varied parameters. Here's an SQL-level example to illustrate. Note that direct SQL-level `PREPARE` and `EXECUTE` are not supported with PgBouncer (see [below](#use-prepared-statements-with-pgbouncer)), so you can't use this query from the SQL editor. It is meant to give you a clear idea of how a prepared statement works. Refer to the protocol-level samples below to see how this SQL-level example translates to different protocol-level examples.
+A prepared statement in Postgres allows for the optimization of an SQL query by defining its structure once and executing it multiple times with varied parameters. Here's an SQL-level example to illustrate. Note that direct SQL-level `PREPARE` and `EXECUTE` are not supported with PgBouncer (see [below](#use-prepared-statements-with-pgbouncer)), so you can't use this query from the SQL Editor. It is meant to give you a clear idea of how a prepared statement works. Refer to the protocol-level samples below to see how this SQL-level example translates to different protocol-level examples.
 
 ```sql
 PREPARE fetch_plan (TEXT) AS

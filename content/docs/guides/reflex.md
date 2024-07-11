@@ -2,13 +2,13 @@
 title: Build a Python App with Reflex and Neon
 subtitle: Learn how to build a Python Full Stack application with Reflex and Neon
 enableTableOfContents: true
-updatedOn: '2024-06-14T11:25:54.205Z'
+updatedOn: '2024-07-02T09:17:55.465Z'
 tag: new
 ---
 
 [Reflex](https://reflex.dev/) is a Python web framework that allows you to build full-stack applications with Python.
 
-Using Reflex, you can build frontend and backend applications using Python to manage the interaction between a the frontend UI and state with the server-side logic. To make the application data-driven, you can connect to Neon.
+Using Reflex, you can build frontend and backend applications using Python to manage the interaction between the frontend UI and the state with the server-side logic. To make the application data-driven, you can connect to a Neon Postgres database.
 
 To connect to Neon from a Reflex application:
 
@@ -205,10 +205,12 @@ This command applies the migration to the database, updating the schema to match
 
 ## Create a Customer Data App in Reflex with Neon
 
-Learn how to use Reflex with Neon Postgres in the following project to create an interactive Customer Data App.
+Learn how to use Reflex with Neon Postgres to create an interactive Customer Data App. The app demonstrates how to edit tabular data from a live application connected to a Postgres database. You can find a live version of the application [here](https://customer-data-app.reflex.run/).
+
+![Reflex Customer Data App](/docs/guides/reflex_customer_data_app.png)
 
 <DetailIconCards>
 
-<a href="https://github.com/reflex-dev/templates/tree/main/customer_data_app" description="Reflex with Neon Postgres" icon="github">Customer Data App</a>
+<a href="https://github.com/reflex-dev/templates/tree/main/customer_data_app" description="GitHub repository for the Reflex Customer Data App built with Neon Postgres" icon="github">Customer Data App</a>
 
 </DetailIconCards>
