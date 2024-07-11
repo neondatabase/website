@@ -102,7 +102,7 @@ jobs:
   #   - name: Run Migrations
   #    run: npm run db:migrate
   #    env:
-  #     DATABASE_URL: "${{ steps.create_neon_branch.outputs.db_url_with_pooler }}" (edited) 
+  #     DATABASE_URL: "${{ steps.create_neon_branch.outputs.db_url_with_pooler }}" (edited)
 
   delete_neon_branch:
     name: Delete Neon Branch
@@ -121,14 +121,15 @@ jobs:
 To add the workflow to your repository:
 
 1. In your repository, create a workflow file in the `.github/workflows` directory; for example, create a file named `neon_workflow.yml`.
-    - If the `.github/workflows` directory already exists, add the file.
-    - If your repository doesn't have a `.github/workflows` directory, add the file `.github/workflows/neon-workflow.yml`. This creates both the `.github` and `workflows` directories, and the `neon-workflow.yml` file.
 
-    If you get stuck here, see [Creating your first workflow](https://docs.github.com/en/actions/quickstart#creating-your-first-workflow), in the _GitHub documentation_.
+   - If the `.github/workflows` directory already exists, add the file.
+   - If your repository doesn't have a `.github/workflows` directory, add the file `.github/workflows/neon-workflow.yml`. This creates both the `.github` and `workflows` directories, and the `neon-workflow.yml` file.
 
-    <Admonition type="note">
-    For GitHub to discover any GitHub Actions workflows, you must save the workflow files in a directory called `.github/workflows` in your repository. Additionally, you can name the workflow file as you like, but you must use `.yml` or ``.yaml` as the file name extension.
-    </Admonition>
+   If you get stuck here, see [Creating your first workflow](https://docs.github.com/en/actions/quickstart#creating-your-first-workflow), in the _GitHub documentation_.
+
+   <Admonition type="note">
+   For GitHub to discover any GitHub Actions workflows, you must save the workflow files in a directory called `.github/workflows` in your repository. Additionally, you can name the workflow file as you like, but you must use `.yml` or ``.yaml` as the file name extension.
+   </Admonition>
 
 2. Copy the workflow code into your `neon-workflow.yml` file.
 3. Commit your changes.
@@ -176,7 +177,7 @@ reset_neon_branch:
         api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
-The possibilities are numerous. You can use Neon's GitHub Actions in your workflow or create your own. The `NEON_API_KEY` set by the Neon GitHub app allows you to run any [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) method or [Neon CLI](https://neon.tech/docs/reference/neon-cli) command, which lets you work with various objects in Neon like projects, branches, databases, roles, computes, and so on. 
+The possibilities are numerous. You can use Neon's GitHub Actions in your workflow or create your own. The `NEON_API_KEY` set by the Neon GitHub app allows you to run any [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) method or [Neon CLI](https://neon.tech/docs/reference/neon-cli) command, which lets you work with various objects in Neon like projects, branches, databases, roles, computes, and so on.
 
 For example applications that use GitHub Actions workflow with Neon, see [Example applications](/docs/guides/branching-github-actions#example-applications).
 
@@ -188,7 +189,7 @@ For more GitHub Action and workflow-related resources, see:
 
 ## Connect more Neon projects with the GitHub App
 
-If you've installed the GitHub app previously, it's available to use with any project in your Neon account. 
+If you've installed the GitHub app previously, it's available to use with any project in your Neon account.
 
 To connect another Neon project to a GitHub repository:
 
@@ -221,25 +222,25 @@ The sample GitHub Actions workflow provided by the Neon GitHub app uses these va
 
 ### Neon API key
 
-  To view the Neon API key created by the integration:
+To view the Neon API key created by the integration:
 
-  1. In the [Neon Console](https://console.neon.tech), click your profile at the top right corner of the page.
-  2. Select **Account settings**.
-  3. Select **API keys**.
+1. In the [Neon Console](https://console.neon.tech), click your profile at the top right corner of the page.
+2. Select **Account settings**.
+3. Select **API keys**.
 
-  The API key created by the integration should be listed with a name similar to the following: **API key for GitHub (cool-darkness-12345678)**. You cannot view the key itself, only the name it was given, the time it was created, and when the key was last used.
+The API key created by the integration should be listed with a name similar to the following: **API key for GitHub (cool-darkness-12345678)**. You cannot view the key itself, only the name it was given, the time it was created, and when the key was last used.
 
 ### Neon project ID variable and Neon API key secret
 
-  To view the variable containing your Neon project ID:
+To view the variable containing your Neon project ID:
 
-  1. Navigate to your GitHub account page.
-  2. From your GitHub profile menu, select **Your repositories**.
-  3. Select the repository that you chose when installing the Neon GitHub app.
-  4. On the repository page, select the **Settings** tab.
-  5. Select **Secrets and variables** > **Actions** from the sidebar.
+1. Navigate to your GitHub account page.
+2. From your GitHub profile menu, select **Your repositories**.
+3. Select the repository that you chose when installing the Neon GitHub app.
+4. On the repository page, select the **Settings** tab.
+5. Select **Secrets and variables** > **Actions** from the sidebar.
 
-  Your `NEON_API_KEY` secret is listed on the **Secrets** tab, and the `NEON_PROJECT_ID` variable is listed on the **Variables** tab.
+Your `NEON_API_KEY` secret is listed on the **Secrets** tab, and the `NEON_PROJECT_ID` variable is listed on the **Variables** tab.
 
 ## Disconnect a Neon projects from a GitHub repository
 
