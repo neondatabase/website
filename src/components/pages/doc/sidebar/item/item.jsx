@@ -71,43 +71,37 @@ const Item = ({
   icon = null,
   tag = null,
   ariaLabel = null,
-  isStandalone = false,
   items = null,
+  parentMenu = null,
   onToggleSubmenu = null,
-  onToggleParentMenu = null,
 }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
-  const Icon = icons[icon];
   const hasActiveChild = isActiveItem(items, currentSlug);
-  const [isOpenMenu, setIsOpenMenu] = useState(() => hasActiveChild);
+  const Icon = icons[icon];
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(() => hasActiveChild);
 
   const externalSlug = slug && slug.startsWith('http') ? slug : null;
-  const docSlug = isStandalone ? `/${slug}` : `${basePath}${slug}/`;
+  const docSlug = `${basePath}${slug}/`;
 
   const LinkTag = slug ? Link : 'button';
 
-  const handleCloseMenu = () => {
-    setIsOpenMenu(false);
+  const handleOpenSubmenu = () => {
+    console.log(parentMenu);
+    setIsSubmenuOpen(true);
     onToggleSubmenu();
-    if (onToggleParentMenu) {
-      onToggleParentMenu();
-    }
   };
 
-  const handleOpenMenu = () => {
-    setIsOpenMenu(true);
+  const handleCloseSubmenu = () => {
+    setIsSubmenuOpen(false);
     onToggleSubmenu();
-    if (onToggleParentMenu) {
-      onToggleParentMenu();
-    }
   };
 
   if (section)
     return (
       <li className="border-b border-gray-new-94 py-2.5 first:pt-0 last:border-0 dark:border-gray-new-10">
         {section !== 'noname' && (
-          <span className="block block py-1.5 text-[10px] font-medium uppercase leading-tight text-gray-new-50">
+          <span className="block py-1.5 text-[10px] font-medium uppercase leading-tight text-gray-new-50">
             {section}
           </span>
         )}
@@ -118,9 +112,8 @@ const Item = ({
                 {...item}
                 key={index}
                 basePath={basePath}
-                isSubMenu
+                parentMenu={parentMenu}
                 onToggleSubmenu={onToggleSubmenu}
-                onToggleParentMenu={onToggleParentMenu}
               />
             ))}
           </ul>
@@ -140,7 +133,7 @@ const Item = ({
         type={slug ? undefined : 'button'}
         to={slug ? externalSlug || docSlug : undefined}
         target={externalSlug ? '_blank' : '_self'}
-        onClick={items?.length && handleOpenMenu}
+        onClick={items?.length && handleOpenSubmenu}
       >
         {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
         {icon && Icon && <Icon className="size-4.5" />}
@@ -156,13 +149,15 @@ const Item = ({
       </LinkTag>
       {items?.length && (
         <Menu
+          title={title}
+          slug={slug}
+          Icon={Icon}
+          parentMenu={parentMenu}
           basePath={basePath}
           items={items}
-          isOpen={isOpenMenu}
+          isOpen={isSubmenuOpen}
           isSubMenu
-          onClose={handleCloseMenu}
-          onToggleSubmenu={handleOpenMenu}
-          onToggleParentMenu={onToggleParentMenu}
+          onClose={handleCloseSubmenu}
         />
       )}
     </li>
@@ -173,7 +168,6 @@ Item.propTypes = {
   basePath: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   section: PropTypes.string,
-  isStandalone: PropTypes.bool,
   slug: PropTypes.string,
   icon: PropTypes.string,
   tag: PropTypes.string,
@@ -187,8 +181,11 @@ Item.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
+  parentMenu: PropTypes.exact({
+    title: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+  }).isRequired,
   onToggleSubmenu: PropTypes.func,
-  onToggleParentMenu: PropTypes.func,
 };
 
 export default Item;
