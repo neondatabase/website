@@ -9,7 +9,7 @@ updatedOn: '2024-06-14T07:55:54.401Z'
 The Neon GitHub App is currently in **private preview**. To start using it, request access by contacting our [Customer Success](mailto:customer-success@neon.tech) team and asking to join the private preview.
 </Admonition>
 
-The Neon GitHub App is designed to integrate your Neon project with a GitHub application and provide a basic GitHub Actions workflow that creates a database Neon branch with each pull request. This guide will walk you through the following steps:
+The Neon GitHub App is designed to integrate your Neon project with a GitHub application and provide a basic GitHub Actions workflow that creates a database branch with each pull request. This guide will walk you through the following steps:
 
 - Adding the Neon GitHub App
 - Connecting a Neon project to a GitHub repository
@@ -233,27 +233,29 @@ To connect another Neon project to a GitHub repository:
 
 Disconnecting Neon project from a GitHub repository performs the following actions for the Neon project:
 
-- Removes the GitHub variable containing your Neon project ID.
-- Removes the Neon API key for your Neon account.
-- Removes the GitHub secret containing the Neon API key.
+- Removes the Neon API key created for this integration from your Neon account.
+- Removes the GitHub secret containing the Neon API key from the associated GitHub reporistory.
+- Removes the GitHub variable containing your Neon project ID from the associated GitHub reporistory.
 
-To remove the integration:
+Any GitHub Actions workflows that you've added to the GitHub repository that are dependant on these secrets and variables will no longer work.
+
+To disconnect your Neon project:
 
 1. In the Neon Console, navigate to the **Integrations** page for your project.
 2. Locate the GitHub app and click **Manage** to open the **GitHub app** drawer.
 3. Click **Disconnect**.
-4. Click **Remove integration** to confirm your choice.
-
 
 ## Remove the GitHub app
 
-Removing the GitHub performs the following actions for all Neon projects connected to a GitHub repositiory using the GitHub app:
+Removing the GitHub performs the following actions for all Neon projects that you connected to a GitHub repositiory using the GitHub app:
 
-- Removes the GitHub variables containing your Neon project IDs.
-- Removes the Neon API keys for your Neon account created by the GitHub app.
-- Removes GitHub secrets containing Neon API keys.
+- Removes the Neon API keys created for your Neon-GitHub integrations from your Neon account.
+- Removes GitHub secrets containing the Neon API keys from the associated GitHub reporistories.
+- Removes the GitHub variables containing your Neon project IDs from the associated GitHub reporistories.
 
-To remove the integration:
+Any GitHub Actions workflows that you've added to GitHub repositories that are dependant on these secrets and variables will no longer work.
+
+To remove the GitHub app:
 
 1. In the Neon Console, navigate your account Profile.
 2. Select Account settings.
