@@ -20,5 +20,6 @@ Neon offers a convenient way to manage your subscription and billing through the
 1. Click on **Create contract**.
 1. Once you subscribe, go to the **Your Marketplace Software** tab, where you'll find Neon listed as one of your subscriptions. Click **Set Up Product** and it will redirect you to the ordering page.
 1. Register a Neon account if you are new to Neon, or log in to your current Neon account using the `Click here to set up your account` link to complete the setup process.
+    ![AWS setup account link](/docs/introduction/aws_marketplace_setup_link.png)
 
 If you have questions or need further guidance on purchasing Neon through AWS Marketplace, please don't hesitate to [reach out to us](https://neon.tech/contact-sales).
