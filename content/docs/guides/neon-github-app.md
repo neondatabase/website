@@ -1,6 +1,6 @@
 ---
 title: The Neon GitHub App
-subtitle: Connect your Postgres database to a GitHub repository and build GitHub Actions workflows
+subtitle: Connect Neon Postgres to a GitHub repository and build a GitHub Actions workflow
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.401Z'
 ---
@@ -9,9 +9,13 @@ updatedOn: '2024-06-14T07:55:54.401Z'
 The Neon GitHub App is currently in **private preview**. To start using it, request access by contacting our [Customer Success](mailto:customer-success@neon.tech) team and asking to join the private preview.
 </Admonition>
 
-The Neon GitHub App lets you connect a Neon project to a GitHub application repository and set up a workflow that creates a database branch with each pull request.
+The Neon GitHub App is designed to integrate your Neon project with a GitHub application and provide a basic GitHub Actions workflow that creates a database Neon branch with each pull request. This guide will walk you through the following steps:
 
-A database branch is an isolated copy of your data, allowing you to create production-like application previews to accelerate review and collaboration.
+- Adding the Neon GitHub App
+- Connecting a Neon project to a GitHub repository
+- Adding a GitHub Actions workflow
+
+The provided sample workflow, which creates a database branch for each pull request, serves as a basic template, which you can expand upon to develop more sophisticated workflows. Potential enhancements include adding actions that deploy production-like preview environments, run database migrations, run validation tests, and more.
 
 ## Prerequisites
 
@@ -30,29 +34,19 @@ To add the GitHub app:
 3. On the **GitHub** drawer, click **Add GitHub App**.
 4. If you have more than one GitHub account, select the one where you want to install the app.
 5. Select whether to install and authorize the GitHub app for **All repositories** in your GitHub account or **Only select repositories**.
-   - Selecting **All repositories** authorizes the app on all repositories in your GitHub account, meaning that you will be able to connect a Neon project to any of them.
-   - Selecting **Only select repositories** authorizes the app on one or more repositories, meaning that you will only be able to connect a Neon project to those repositories.
-6. Next, if you authorized the app on **All repositories** or multiple repositories, select a GitHub repository to connect to your Neon project, and click **Connect**. If you authorized the GitHub app on a single GitHub repository, this step is already done.
+   - Selecting **All repositories** authorizes the app on all repositories in your GitHub account, meaning that you will be able to connect your Neon project to any of them.
+   - Selecting **Only select repositories** authorizes the app on one or more repositories, meaning that you will only be able to connect your Neon project to those repositories, but you can authorize additional repositories later.
+6. If you authorized the app on **All repositories** or multiple repositories, select a GitHub repository to connect to your Neon project, and click **Connect**. If you authorized the GitHub app on a single GitHub repository, this step is already completed.
 
-   You are advanced to the **Actions** tab on the final page of the setup, which outlines the actions performed to connect your Neon project to the selected GitHub repository, which includes:
+   You are advanced to the **Actions** tab on the final page of the setup, where you are provided with a sample GitHub Actions workflow that you can copy to your GitHub repository to set up a basic database branching workflow. For instructions, see [Add the GitHub Actions workflow to your repository](#add-the-github-actions-workflow-to-your-repository).
 
-   - Generating a Neon API key for your Neon account.
-   - Creating a `NEON_API_KEY` secret in your GitHub repository.
-   - Adding a `NEON_PROJECT_ID` variable to your GitHub repository.
+## Add the GitHub Actions workflow to your repository
 
-   You are also provided with GitHub Action code to add to your GitHub repository to set up your branching workflow. For instructions, see [Add the GitHub Action code to your repo](#add-the-github-workflow-to-your-repo).
-
-## Sample GitHub workflow
-
-After installing the Neon GitHub App and connecting your Neon project to a GitHub repository, the GitHub App provides a sample GitHub Actions workflow that you can add to your repo. The workflow includes the following:
+The sample GitHub Actions workflow provided by the GitHub app includes:
 
 - A `Create Neon Branch` action that creates a new Neon branch in your Neon project when you open or reopen a pull request in the connected GitHub repository.
 - A `Delete Neon Branch` action that deletes the Neon branch from your Neon project when you close the pull request.
 - Commented out code showing how you to add database migrations to your workflow.
-
-<Admonition type="note">
-The provided workflow is a basic example, showing how you can build workflows with Neon and GitHub Actions. For more workflow examples, refer to the [GitHub workflow examples](#github-workflow-examples).
-</Admonition>
 
 ```yaml
 name: Create/Delete Branch for Pull Request
@@ -121,39 +115,30 @@ jobs:
           api_key: \${{ secrets.NEON_API_KEY }}
 ```
 
-### Add the GitHub workflow to your repo
+To add the workflow to your repository:
 
 1. In your repository, create a workflow file in the `.github/workflows` directory; for example, create a file named `neon_workflow.yml`.
+    - If the `.github/workflows` directory already exists, add the file.
+    - If your repository doesn't have a `.github/workflows` directory, add the file `.github/workflows/neon-workflow.yml`. This creates both the `.github` and `workflows` directories, and the `neon-workflow.yml` file.
 
-- If the `.github/workflows` directory already exists, add the file.
-- If your repository doesn't have a ``.github/workflows` directory, add the file `.github/workflows/neon-workflow.yml`. This creates the `.github` and `workflows` directories and the `neon-workflow.yml` file.
+    If you get stuck here, see [Creating your first workflow](https://docs.github.com/en/actions/quickstart#creating-your-first-workflow), in the _GitHub documentation_.
 
-If you get stuck here, see [Creating your first workflow](https://docs.github.com/en/actions/quickstart#creating-your-first-workflow), in the GitHub documentation.
+    <Admonition type="note">
+    For GitHub to discover any GitHub Actions workflows, you must save the workflow files in a directory called `.github/workflows` in your repository. Additionally, you can name the workflow file as you like, but you must use `.yml` or ``.yaml` as the file name extension.
+    </Admonition>
 
-<Admonition type="note">
-For GitHub to discover any GitHub Actions workflows, you must save the workflow files in a directory called `.github/workflows` in your repository. Additionally, you can name the workflow file as you like, but you must use `.yml` or ``.yaml` as the file name extension.
-</Admonition>
-
-2. Copy the workflow example above into your `neon-workflow.yml` file.
+2. Copy the workflow code into your `neon-workflow.yml` file.
 3. Commit your changes.
 
 ### Using the GitHub Actions workflow
 
-To see the workflow in action, create a pull request in your GitHub application repository. This triggers the `Create Neon Branch` action. You can verify that the branch was created on the **Branches** page in the Neon Console. You should see a new branch with a `preview/pr-` name prefix.
+To see the workflow in action, create a pull request in your GitHub application repository. This will trigger the `Create Neon Branch` action. You can verify that the branch was created on the **Branches** page in the Neon Console. You should see a new branch with a `preview/pr-` name prefix.
 
 Closing the pull request removes the Neon branch from the Neon project, which you can also verify on the **Branches** page in the Neon Console.
 
-To see your workflow results in GitHub, follow the instructions in [Viewing your workflow results](https://docs.github.com/en/actions/quickstart#viewing-your-workflow-results), in the GitHub documentation.
+To see your workflow results in GitHub, follow the instructions in [Viewing your workflow results](https://docs.github.com/en/actions/quickstart#viewing-your-workflow-results), in the _GitHub documentation_.
 
-## Connect more Neon projects with the GitHub App
-
-If you've installed the GitHub app previously, it's available to use with any project in your Neon account. 
-
-To connect another Neon project to a GitHub repository:
-
--
-
-### Changes made by the app
+## Changes made by the app
 
 After connecting your Neon project to a GitHub repository, the GitHub app performs the following actions:
 
@@ -161,17 +146,21 @@ After connecting your Neon project to a GitHub repository, the GitHub app perfor
 - Creates a `NEON_API_KEY` secret in your GitHub repository
 - Adds a `NEON_PROJECT_ID` variable to your GitHub repository
 
-- **Installed and Authorized GitHub Apps**
+    <Admonition type="note">
+    These items are removed if you diconnect a Neon project from the associated GitHub repository. The items are removed for all Neo projects is you remove the Neon GitHub app from your Neon account. See [Remove the GitHub app](#remove-the-github-app).
+    </Admonition>
 
-  To view the installed and authorized Neon GitHub application:
+### Neon API key
 
-  1. Navigate to your GitHub account page.
-  2. From your GitHub profile menu, select **Settings**.
-  3. Select **Applications** from the sidebar.
+  To view the Neon API key created by the integration:
 
-  The Neon GitHub app should be listed on the **Installed GitHub Apps** and **Authorized GitHub Apps** tabs.
+  1. In the [Neon Console](https://console.neon.tech), click your profile at the top right corner of the page.
+  2. Select **Account settings**.
+  3. Select **API keys**.
 
-- **Neon project ID variable and Neon API key secret**
+  The API key created by the integration should be listed with a name similar to the following: **API key for GitHub (cool-darkness-12345678)**. You cannot view the key itself, only the name it was given, the time it was created, and when the key was last used.
+
+### Neon project ID variable and Neon API key secret
 
   To view the variable containing your Neon project ID:
 
@@ -183,29 +172,7 @@ After connecting your Neon project to a GitHub repository, the GitHub app perfor
 
   Your `NEON_API_KEY` secret is listed on the **Secrets** tab, and the `NEON_PROJECT_ID` variable is listed on the **Variables** tab.
 
-- **Neon API key**
-
-  To view the Neon API key created by the integration:
-
-  1. In the [Neon Console](https://console.neon.tech), click your profile at the top right corner of the page.
-  2. Select **Account settings**.
-  3. Select **API keys**.
-
-  The API key created by the integration should be listed with a name similar to the following: **API key for GitHub (cool-darkness-12345678)**. You cannot view the key itself, only the name it was given, the time it was created, and when the key was last used.
-
-    <Admonition type="note">
-    The items listed above are removed if you uninstall the Neon GitHub app. See [Remove the GitHub app](#remove-the-github-app).
-    </Admonition>
-
-## Using the GitHub app
-
-The GitHub app is intended to simplify setting up developer workflows using Neon's [GitHub Actions](/docs/guides/branching-github-actions) or other CI/CD tools. Neon's GitHub Actions require the configuration steps performed by the Neon GitHub app to be performed manually, namely:
-
-1. Creating a GitHub variable containing your Neon project ID.
-2. Generating a new Neon API key for your Neon account.
-3. Creating a GitHub secret containing the Neon API key.
-
-After installing the Neon GitHub app, you can proceed with setting up your GitHub Action workflow knowing that these steps are already completed.
+## GitHub workflow examples
 
 For example applications that use Neon's GitHub Actions, see [Example applications](/docs/guides/branching-github-actions#example-applications).
 
@@ -219,59 +186,7 @@ For more GitHub Action and workflow-related resources, please see:
 - [Database Branching Workflows](https://neon.tech/flow)
 - [Database branching workflow guide for developers](https://neon.tech/blog/database-branching-workflows-a-guide-for-developers).
 
-## Remove the GitHub app
-
-Removing the integration performs the following actions:
-
-- Terminates connections dependent on the configured variable and secret.
-- Removes the GitHub variable containing your Neon project ID.
-- Removes the Neon API key for your Neon account.
-- Removes the GitHub secret containing the Neon API key.
-
-To remove the integration:
-
-1. In the Neon Console, navigate to the **Integrations** page for your project.
-2. Locate the GitHub app and click **Manage** to open the **GitHub app** drawer.
-3. Click **Disconnect**.
-4. Click **Remove integration** to confirm your choice.
-
-## Feedback and future improvements
-
-If you've got feature requests or feedback about what you'd like to see from the Neon GitHub app, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
-
-## GitHub workflow examples
-
-tbd
-
-When you connect your GitHub application repository to your Neon project, the integration performs the following actions:
-
-1. Creates a GitHub variable containing your Neon project ID.
-2. Generates a new Neon API key for your Neon account.
-3. Creates a GitHub secret containing the Neon API key.
-
-After adding the integration, you can copy the preconfigured “create branch” action to your application repository to create a database branch with each pull request.
-
-Additionally, the GitHub repository variables set by the integration let you easily extend your workflow with other actions, such as resetting and deleting branches. For details, refer to the Neon GitHub app guide. Adding the integration performs the following actions:
-
-<Admonition type="info">
-Neon's GitHub Actions require setting a `NEON_PROJECT_ID` variable and a `NEON_API_KEY` secret in GitHub. The Neon GitHub app does this for you automatically.
-</Admonition>
-
-The following section describes how to install the GitHub app.
-
-https://www.figma.com/design/kMExsRvzATGgzuADjfkB0A/Integrations-Page?node-id=2760-965&t=dtF8d1VYH56EWNqp-0
-
-- When you add the GitHub App for the first time to a Neon project, it's added globally to your Neon account, which means that it's added to all of your Neon projects. This lets you use the app from any Neon project to connect a GitHub repository.
-- During the installation, you will authorize the app on or selected repositories in your GitHub account. You'll be able to connect Neon projects to the GitHub repositories where the app is authorized.
-- Also during the installation, you will select the Git repository you want to connect to the current Neon project.
-- Connecting a Neon project to a GitHub repository does the following:
-  - Creates a Neon API key in your Neon account for the selected repository.
-  - Sets a `NEON_API_KEY` secret in the connected repository.
-  - Sets a `PROJECT_ID` variable in the connected repository.
-
-When you connect a Neon project to a GitHub repository, the GitHub app sets variables in your GitHub repository and provides you with a sample GitHub Action that uses those variables to create a database branch with each pull request. The also deletes the branch when the pull request is closed.
-
-## Building out your workflow
+## Building out your GitHub Actions workflow
 
 ```yaml
 reset_neon_branch:
@@ -294,3 +209,57 @@ reset_neon_branch:
         branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
         api_key: ${{ secrets.NEON_API_KEY }}
 ```
+
+## Connect more Neon projects with the GitHub App
+
+If you've installed the GitHub app previously, it's available to use with any project in your Neon account. 
+
+To connect another Neon project to a GitHub repository:
+
+1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
+2. Locate the **GitHub** app, which should appeare as **Added**, and click **Manage**.
+   ![GitHub App card](/docs/guides/github_card.png)
+3. Select a GitHub repository to connect to your Neon project, and click **Connect**.
+
+   You are advanced to the **Actions** tab on the final page of the setup, which outlines the actions performed to connect your Neon project to the selected GitHub repository, which includes:
+
+   - Generating a Neon API key for your Neon account.
+   - Creating a `NEON_API_KEY` secret in your GitHub repository.
+   - Adding a `NEON_PROJECT_ID` variable to your GitHub repository.
+
+   You are also provided with GitHub Actions workflow that you can copy to your GitHub repository to set up a basic branching workflow. For instructions, see [GitHub Actions workflow](#github-actions-workflow).
+
+## Disconnect a Neon projects from a GitHub repository
+
+Disconnecting Neon project from a GitHub repository performs the following actions for the Neon project:
+
+- Removes the GitHub variable containing your Neon project ID.
+- Removes the Neon API key for your Neon account.
+- Removes the GitHub secret containing the Neon API key.
+
+To remove the integration:
+
+1. In the Neon Console, navigate to the **Integrations** page for your project.
+2. Locate the GitHub app and click **Manage** to open the **GitHub app** drawer.
+3. Click **Disconnect**.
+4. Click **Remove integration** to confirm your choice.
+
+
+## Remove the GitHub app
+
+Removing the GitHub performs the following actions for all Neon projects connected to a GitHub repositiory using the GitHub app:
+
+- Removes the GitHub variables containing your Neon project IDs.
+- Removes the Neon API keys for your Neon account created by the GitHub app.
+- Removes GitHub secrets containing Neon API keys.
+
+To remove the integration:
+
+1. In the Neon Console, navigate your account Profile.
+2. Select Account settings.
+3. Click **Disconnect**.
+4. Click **Remove integration** to confirm your choice.
+
+## Feedback and future improvements
+
+If you've got feature requests or feedback about what you'd like to see from the Neon GitHub app, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
