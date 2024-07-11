@@ -347,6 +347,7 @@
           slug: guides/prisma
         - title: TypeORM
           slug: guides/typeorm
+          tag: new
     - title: Replicate
       items:
         - title: Airbyte
