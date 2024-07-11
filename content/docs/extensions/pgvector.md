@@ -303,7 +303,7 @@ COMMIT;
 
 ## Optimizing index build time
 
-To optimize index build time, consider configuring the following session variables prior to building an index:
+To optimize index build time, consider configuring the following session variables before building an index:
 
 - [maintenance_work_mem](#maintenance_work_mem)
 - [max_parallel_maintenance_workers](#max_parallel_maintenance_workers)
@@ -324,6 +324,8 @@ In Postgres, the `maintenance_work_mem` setting determines the maximum memory al
 | 6                  | 6    | 24 GB | 402 MB               |
 | 7                  | 7    | 28 GB | 470 MB               |
 | 8                  | 8    | 32 GB | 537 MB               |
+| 9                  | 9    | 36 GB | 603 MB               |
+| 10                 | 10   | 40 GB | 670 MB               |
 
 To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 

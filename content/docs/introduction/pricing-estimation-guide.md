@@ -36,7 +36,7 @@ For the Enterprise plan, please contact our [Sales](/contact-sales) team for an 
 Estimate your monthly usage to see if any "extra usage" is required beyond the storage, compute, or project allowances included in your plan.
 
 - **Storage (GiB)**: How much storage do you expect to use? Storage includes the size of your data and change history. For more information, see [Storage](/docs/introduction/usage-metrics#storage).
-- **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Neon supports compute sizes ranging from .25 vCPU to 8 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute usage.
+- **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Neon supports compute sizes ranging from .25 vCPU to 10 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute usage.
 - **Projects**: How many projects do you need? Neon recommends a project per application.
 
 ## Step 3: Calculate extra usage fees

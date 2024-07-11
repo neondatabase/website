@@ -133,7 +133,7 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 
 ### Scale plan features
 
-- Compute up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
+- Compute up to 10 vCPUs and 40 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
 - Advanced Postgres features, including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions
 - Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
 - [Priority support](/docs/introduction/support)
