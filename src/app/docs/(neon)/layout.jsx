@@ -17,6 +17,7 @@ const NeonDocsLayout = async ({ children }) => {
         <Sidebar
           className="-mt-[69px] w-[350px] shrink-0 xl:w-[302px] lg:hidden"
           sidebar={sidebar}
+          slug="introduction"
           basePath={DOCS_BASE_PATH}
           indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
         />
