@@ -632,8 +632,11 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                                                                                                                                        | string |                                                     |
 | `--project-id`   | Project ID                                                                                                                                                                                                                                                                           | string | Only if your Neon account has more than one project |
 | `--type`         | Type of compute to add. Choices are `read_only` (the default) or `read_write`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas). A branch can have a single read-write and multiple read-only compute endpoints. | string |                                                     |
+| `--cu`           | The number of Compute Units. Could be a fixed size (e.g. "2") or a range delimited by a dash (e.g. "0.5-3").                                                                                                                                                                         | string |                                                     |
 
-#### Example
+#### Examples
+
+Add a read-only compute (a read replica) to a branch:
 
 ```bash
 neon branches add-compute mybranch --type read_only
@@ -642,6 +645,18 @@ neon branches add-compute mybranch --type read_only
 ├─────────────────────┼──────────────────────────────────────────────────┤
 │ ep-rough-lab-865061 │ ep-rough-lab-865061.ap-southeast-1.aws.neon.tech │
 └─────────────────────┴──────────────────────────────────────────────────┘
+```
+
+Set the compute size when creating a branch. For a fixed compute size, use a single number (e.g., `--cu 2`).
+
+```bash
+neon branches add-compute main --cu 2
+```
+
+Set the compute's autoscaling range when creating a branch. Specify a range with a dash (e.g., `--cu 0.5-3`).
+
+```bash
+neon branches add-compute main --cu 0.5-3
 ```
 
 ## delete
