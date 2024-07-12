@@ -164,7 +164,7 @@ curl --request GET \
       "allowed_ips": {
         "ips": [],
         "protected_branches_only": false,
-        "primary_branch_only": false
+        "protected_branches_only": false
       },
       "enable_logical_replication": false
     },
