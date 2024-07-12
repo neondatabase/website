@@ -59,7 +59,7 @@ Connection URIs
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 Need to install the following packages:
 create-next-app@14.2.4
-Ok to proceed? (y) 
+Ok to proceed? (y)
 
 Creating a new Next.js app in /Users/dprice/my-app.
 
@@ -138,7 +138,7 @@ Database schema generated and applied.
 ✔ Where would you like to deploy? › Vercel
 Need to install the following packages:
 vercel@34.3.1
-Ok to proceed? (y) 
+Ok to proceed? (y)
 
 > > No existing credentials found. Please log in:
 ? Log in to Vercel (Use arrow keys)
