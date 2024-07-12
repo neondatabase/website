@@ -143,17 +143,18 @@ neonctl --help
 usage: neonctl <command> [options]                               [aliases: neon]
 
 Commands:
-  neonctl auth                        Authenticate              [aliases: login]
+  neonctl auth                        Authenticate                      [aliases: login]
   neonctl me                          Show current user
-  neonctl orgs                        Manage organizations    [aliases: org]
-  neonctl projects                    Manage projects         [aliases: project]
+  neonctl orgs                        Manage organizations                [aliases: org]
+  neonctl projects                    Manage projects                 [aliases: project]
   neonctl ip-allow                    Manage IP Allow
-  neonctl branches                    Manage branches          [aliases: branch]
-  neonctl databases                   Manage databases   [aliases: database, db]
-  neonctl roles                       Manage roles               [aliases: role]
-  neonctl operations                  Manage operations     [aliases: operation]
-  neonctl connection-string [branch]  Get connection string        [aliases: cs]
+  neonctl branches                    Manage branches                   [aliases: branch]
+  neonctl databases                   Manage databases            [aliases: database, db]
+  neonctl roles                       Manage roles                        [aliases: role]
+  neonctl operations                  Manage operations               [aliases: operation]
+  neonctl connection-string [branch]  Get connection string                  [aliases: cs]
   neonctl set-context                 Set the current context
+  neonctl create-app                  Initialize a new Neon project   [aliases: bootstrap]
   neonctl completion                  generate completion script
 
 Global options:
@@ -185,6 +186,7 @@ Options:
 | [operations](/docs/reference/cli-operations)               | `list`                                                                                                       | Manage operations            |
 | [connection-string](/docs/reference/cli-connection-string) |                                                                                                              | Get connection string        |
 | [set-context](/docs/reference/cli-set-context)             |                                                                                                              | Set context for session      |
+| [create-app](/docs/reference/cli-create-app)               |                                                                                                              | Initialize a new Neon project|
 | [completion](/docs/reference/cli-completion)               |                                                                                                              | Generate a completion script |
 
 ## Global options
