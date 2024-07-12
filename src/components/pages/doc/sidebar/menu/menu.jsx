@@ -24,6 +24,7 @@ const Menu = ({
   closeMobileMenu = null,
 }) => {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  const LinkTag = parentMenu?.slug ? Link : 'button';
 
   const handleToggleSubmenu = () => {
     setIsSubmenuOpen((isSubmenuOpen) => !isSubmenuOpen);
@@ -31,9 +32,8 @@ const Menu = ({
 
   const handleClose = () => {
     onClose();
+    if (parentMenu?.slug && closeMobileMenu) closeMobileMenu();
   };
-
-  const LinkTag = parentMenu?.slug ? Link : 'button';
 
   return (
     <LazyMotion features={domAnimation}>

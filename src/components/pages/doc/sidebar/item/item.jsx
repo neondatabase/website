@@ -88,7 +88,6 @@ const Item = ({
   const LinkTag = slug ? Link : 'button';
 
   const handleOpenSubmenu = () => {
-    console.log(parentMenu);
     setIsSubmenuOpen(true);
     onToggleSubmenu();
   };
@@ -100,7 +99,7 @@ const Item = ({
 
   const handleClick = () => {
     if (items?.length) handleOpenSubmenu();
-    if (slug) closeMobileMenu();
+    if (slug && closeMobileMenu) closeMobileMenu();
   };
 
   if (section)
@@ -119,6 +118,7 @@ const Item = ({
                 key={index}
                 basePath={basePath}
                 parentMenu={parentMenu}
+                closeMobileMenu={closeMobileMenu}
                 onToggleSubmenu={onToggleSubmenu}
               />
             ))}
@@ -162,6 +162,7 @@ const Item = ({
           basePath={basePath}
           items={items}
           isOpen={isSubmenuOpen}
+          closeMobileMenu={closeMobileMenu}
           isSubMenu
           onClose={handleCloseSubmenu}
         />
