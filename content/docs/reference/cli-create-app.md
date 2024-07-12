@@ -12,7 +12,17 @@ updatedOn: '2024-07-12T11:16:39.827Z'
 
 ## The `create-app` command
 
-This command initializes a new Neon project.
+The `create-app` command initializes a new Neon project and bootstraps a full-stack application using your preferred package manager. The command supports the following stack components:
+
+- **Package Manager**: Choose from `npm`, `pnpm`, and `bun`
+- **Frameworks**: `Next.js` (`SvelteKit` and `Nuxt.js` coming soon)
+- **ORM**: `Drizzle` (`Prisma` coming soon)
+- **Authentication Framework**: `Auth.js`
+- **Deployment Platform**: Choose from `Vercel` and `Cloudflare`
+
+Once deployed, the starter app is ready for you to begin building.
+
+![neonctl create-app page-tsx](/docs/reference/neon-create-app.png)
 
 ### Usage
 
@@ -24,33 +34,24 @@ neon create-app
 
 Only [global options](/docs/reference/neon-cli#global-options) apply.
 
-### Examples
+### Example
+
+This example shows how the `neon create-app` command bootstraps a full-stack application including a Neon project.
 
 ```bash
-✔ What is your project named? … my-app
-? Which package manager would you like to use? › - Use arrow-keys. Return to submit.
-❯   npm
-    pnpm
-    bun
-    ? What framework would you like to use? › - Use arrow-keys. Return to submit.
-❯   Next.js
-    SvelteKit
-    Nuxt.js
-    ? What ORM would you like to use? › - Use arrow-keys. Return to submit.
-❯   Drizzle
-    Prisma
-    No ORM
-    ? What authentication framework do you want to use? › - Use arrow-keys. Return to submit.
-❯   Auth.js
-    No Authentication
-    ? What Neon project would you like to use? › - Use arrow-keys. Return to submit.
-❯   Create a new Neon project
+neon create-app
+✔ What is your project named? … my-new-app
+✔ Which package manager would you like to use? › npm
+✔ What framework would you like to use? › Next.js
+✔ What ORM would you like to use? › Drizzle
+✔ What authentication framework do you want to use? › Auth.js
+✔ What Neon project would you like to use? › Create a new Neon project
 Project
-┌─────────────────────────┬───────────┬───────────────┬──────────────────────┐
-│ Id                      │ Name      │ Region Id     │ Created At           │
-├─────────────────────────┼───────────┼───────────────┼──────────────────────┤
-│ winter-thunder-11258242 │ my-app-db │ aws-us-east-2 │ 2024-07-11T21:23:16Z │
-└─────────────────────────┴───────────┴───────────────┴──────────────────────┘
+┌──────────────────────┬───────────────┬───────────────┬──────────────────────┐
+│ Id                   │ Name          │ Region Id     │ Created At           │
+├──────────────────────┼───────────────┼───────────────┼──────────────────────┤
+│ sunny-river-12536349 │ my-new-app-db │ aws-us-east-2 │ 2024-07-12T16:20:07Z │
+└──────────────────────┴───────────────┴───────────────┴──────────────────────┘
 Connection URIs
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │ Connection Uri                                                                                              │
@@ -67,9 +68,7 @@ Downloading files from repo https://github.com/neondatabase/neonctl-create-app-t
 
 Installing packages. This might take a couple of minutes.
 
-⠴
-
-added 400 packages, and audited 401 packages in 42s
+added 400 packages, and audited 401 packages in 34s
 
 144 packages are looking for funding
   run `npm fund` for details
@@ -78,7 +77,7 @@ found 0 vulnerabilities
 
 Initialized a git repository.
 
-Success! Created my-app at /Users/dprice/my-app
+Success! Created my-new-app at /Users/user_name/my-new-app
 Inside that directory, you can run several commands:
 
   npm run dev
@@ -92,15 +91,15 @@ Inside that directory, you can run several commands:
 
 We suggest that you begin by typing:
 
-  cd my-app
+  cd my-new-app
   npm run dev
 
 A new version of `create-next-app` is available!
 You can update by running: npm i -g create-next-app
 
-Created a Next.js project in my-app.
+Created a Next.js project in my-new-app.
 
-You can now run cd my-app && npm run dev
+You can now run cd my-new-app && npm run dev
 > barebones-app@0.1.0 db:generate
 > drizzle-kit generate --name init_db
 
@@ -108,7 +107,7 @@ drizzle-kit: v0.22.8
 drizzle-orm: v0.31.4
 
 No config path provided, using default 'drizzle.config.ts'
-Reading config file '/Users/dprice/my-app/drizzle.config.ts'
+Reading config file '/Users/user_name/my-new-app/drizzle.config.ts'
 6 tables
 accounts 11 columns 0 indexes 1 fks
 authenticators 8 columns 0 indexes 1 fks
@@ -126,40 +125,21 @@ drizzle-kit: v0.22.8
 drizzle-orm: v0.31.4
 
 No config path provided, using default path
-Reading config file '/Users/dprice/my-app/drizzle.config.ts'
+Reading config file '/Users/user_name/my-new-app/drizzle.config.ts'
 Using '@neondatabase/serverless' driver for database querying
  Warning  '@neondatabase/serverless' can only connect to remote Neon/Vercel Postgres/Supabase instances through a websocket
 Database schema generated and applied.
-? Where would you like to deploy? › - Use arrow-keys. Return to submit.
-❯   Vercel
-    We will install the Vercel CLI globally.
-    Cloudflare
-    Nowhere
 ✔ Where would you like to deploy? › Vercel
-Need to install the following packages:
-vercel@34.3.1
-Ok to proceed? (y)
+Vercel CLI 34.3.1
+? Set up and deploy “~/my-new-app”? yes
+? Which scope do you want to deploy to? My projects
+? Link to existing project? yes
+? What’s the name of your existing project? my-proj
+🔗  Linked to my-projects-5ef6f56t/my-proj (created .vercel)
+🔍  Inspect: https://vercel.com/my-projects-5ef6f37e/my-proj/DuieAiHmn8WN5jjN7dEz7uokouhc [3s]
+✅  Preview: https://my-proj-oibcdro23-my-projects-5ef6f37e.vercel.app [3s]
+📝  To deploy to production (my-proj-ashen.vercel.app), run `vercel --prod`
 
-> > No existing credentials found. Please log in:
-? Log in to Vercel (Use arrow keys)
-❯ Continue with GitHub
-  Continue with GitLab
-  Continue with Bitbucket
-  Continue with Email
-  Continue with SAML Single Sign-On
- ─────────────────────────────────
-  Cancel
-
-? Set up and deploy “~/my-app”? yes
-? Which scope do you want to deploy to? Daniel's projects
-? Link to existing project? (y/N) y
-? What’s the name of your existing project? elements
-🔗  Linked to daniels-projects-5ef6f37e/elements (created .vercel)
-🔍  Inspect: https://vercel.com/daniels-projects-5ef6f37e/elements/38exhFjVacQgEY3rXMWJmochHM3P [3s]
-✅  Preview: https://elements-hk7vy2u34-daniels-projects-5ef6f37e.vercel.app [3s]
-📝  To deploy to production (elements-ashen.vercel.app), run `vercel --prod`
 ```
-
-![neonctl create-app page-tsx](/docs/reference/neon-create-app.png)
 
 <NeedHelp/>
