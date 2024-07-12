@@ -12,7 +12,7 @@ updatedOn: '2024-06-30T14:35:12.895Z'
 
 ## The `create-app` command
 
-The `create-app` command initializes a new Neon project with a full-stack starter app, deployed using your preferred package manager. The command supports the following stack components:
+The `create-app` command initializes a new Neon project and bootstraps a full-stack application using your preferred package manager. The command supports the following stack components:
 
 - **Package Manager**: Choose from `npm`, `pnpm`, and `bun`
 - **Frameworks**: Choose from `Next.js`, `SvelteKit`, and `Nuxt.js`
@@ -36,7 +36,7 @@ Only [global options](/docs/reference/neon-cli#global-options) apply.
 
 ### Example
 
-This example shows a new project deployment using the `neon create-app` command.
+This example shows how the `neon create-app` command bootstraps a full-stack application including a Neon project.
 
 ```bash
 neon create-app
