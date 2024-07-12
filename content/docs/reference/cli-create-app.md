@@ -2,7 +2,7 @@
 title: Neon CLI commands — create-app
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.895Z'
+updatedOn: '2024-07-12T11:16:39.827Z'
 ---
 
 ## Before you begin
@@ -139,6 +139,7 @@ Vercel CLI 34.3.1
 🔍  Inspect: https://vercel.com/my-projects-5ef6f37e/my-proj/DuieAiHmn8WN5jjN7dEz7uokouhc [3s]
 ✅  Preview: https://my-proj-oibcdro23-my-projects-5ef6f37e.vercel.app [3s]
 📝  To deploy to production (my-proj-ashen.vercel.app), run `vercel --prod`
+
 ```
 
 <NeedHelp/>
