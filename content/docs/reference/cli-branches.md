@@ -636,28 +636,28 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 #### Examples
 
-Add a read-only compute (a read replica) to a branch:
+- Add a read-only compute (a read replica) to a branch:
 
-```bash
-neon branches add-compute mybranch --type read_only
-┌─────────────────────┬──────────────────────────────────────────────────┐
-│ Id                  │ Host                                             │
-├─────────────────────┼──────────────────────────────────────────────────┤
-│ ep-rough-lab-865061 │ ep-rough-lab-865061.ap-southeast-1.aws.neon.tech │
-└─────────────────────┴──────────────────────────────────────────────────┘
-```
+    ```bash
+    neon branches add-compute mybranch --type read_only
+    ┌─────────────────────┬──────────────────────────────────────────────────┐
+    │ Id                  │ Host                                             │
+    ├─────────────────────┼──────────────────────────────────────────────────┤
+    │ ep-rough-lab-865061 │ ep-rough-lab-865061.ap-southeast-1.aws.neon.tech │
+    └─────────────────────┴──────────────────────────────────────────────────┘
+    ```
 
-Set the compute size when creating a branch. For a fixed compute size, use a single number (e.g., `--cu 2`).
+- Set the compute size when creating a branch:
 
-```bash
-neon branches add-compute main --cu 2
-```
+    ```bash
+    neon branches add-compute main --cu 2
+    ```
 
-Set the compute's autoscaling range when creating a branch. Specify a range with a dash (e.g., `--cu 0.5-3`).
+- Set the compute's autoscaling range when creating a branch:
 
-```bash
-neon branches add-compute main --cu 0.5-3
-```
+    ```bash
+    neon branches add-compute main --cu 0.5-3
+    ```
 
 ## delete
 
