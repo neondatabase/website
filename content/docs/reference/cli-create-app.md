@@ -15,8 +15,8 @@ updatedOn: '2024-07-12T11:16:39.827Z'
 The `create-app` command initializes a new Neon project and bootstraps a full-stack application using your preferred package manager. The command supports the following stack components:
 
 - **Package Manager**: Choose from `npm`, `pnpm`, and `bun`
-- **Frameworks**: Choose from `Next.js`, `SvelteKit`, and `Nuxt.js`
-- **ORM**: Choose from `Drizzle` and `Prisma`
+- **Frameworks**: `Next.js` (`SvelteKit` and `Nuxt.js` coming soon)
+- **ORM**: `Drizzle` (`Prisma` coming soon)
 - **Authentication Framework**: `Auth.js`
 - **Deployment Platform**: Choose from `Vercel` and `Cloudflare`
 
