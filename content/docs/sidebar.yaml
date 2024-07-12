@@ -335,7 +335,7 @@
           slug: guides/wundergraph
     - title: Develop
       items:
-        - title: GitHub App
+        - title: GitHub integration
           slug: guides/neon-github-app
         - title: Neosync
           items:

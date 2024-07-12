@@ -1,17 +1,19 @@
 ---
-title: The Neon GitHub App
+title: The Neon GitHub integration
 subtitle: Connect Neon Postgres to a GitHub repository and build a GitHub Actions workflow
 enableTableOfContents: true
+redirectFrom:
+  - /docs/guides/neon-github-app
 updatedOn: '2024-06-14T07:55:54.401Z'
 ---
 
 <Admonition type="comingSoon" title="Feature Coming Soon">
-The Neon GitHub App is currently in **private preview**. To start using it, request access by contacting our [Customer Success](mailto:customer-success@neon.tech) team and asking to join the private preview.
+The Neon GitHub integration is currently in **private preview**. To start using it, request access by contacting our [Customer Success](mailto:customer-success@neon.tech) team and asking to join the private preview.
 </Admonition>
 
-The Neon GitHub App is designed to integrate your Neon project with a GitHub application and provide a basic GitHub Actions workflow that creates a database branch with each pull request. This guide will walk you through the following steps:
+The Neon GitHub integration is designed to integrate your Neon project with a GitHub application and provide a basic GitHub Actions workflow that creates a database branch with each pull request. This guide will walk you through the following steps:
 
-- Adding the Neon GitHub App
+- Installing the GitHub App
 - Connecting a Neon project to a GitHub repository
 - Adding a GitHub Actions workflow
 
@@ -24,14 +26,14 @@ The steps described below assume the following:
 - You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
 - You have a GitHub account and a repository that you want to connect to your Neon project.
 
-## Add the GitHub App and connect your Neon project
+## Install the GitHub App and connect your Neon project
 
-To add the GitHub app:
+To add the GitHub integration:
 
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
 2. Locate the **GitHub** card and click **Add**.
    ![GitHub App card](/docs/guides/github_card.png)
-3. On the **GitHub** drawer, click **Add GitHub App**.
+3. On the **GitHub** drawer, click **Install GitHub App**.
 4. If you have more than one GitHub account, select the one where you want to install the app.
 5. Select whether to install and authorize the GitHub app for **All repositories** in your GitHub account or **Only select repositories**.
    - Selecting **All repositories** authorizes the app on all repositories in your GitHub account, meaning that you will be able to connect your Neon project to any of them.
@@ -42,7 +44,7 @@ To add the GitHub app:
 
 ## Add the GitHub Actions workflow to your repository
 
-The sample GitHub Actions workflow provided by the GitHub app includes:
+The sample GitHub Actions workflow provided by the Neon GitHub integration includes:
 
 - A `Create Neon Branch` action that creates a new Neon branch in your Neon project when you open or reopen a pull request in the connected GitHub repository.
 - A `Delete Neon Branch` action that deletes the Neon branch from your Neon project when you close the pull request.
@@ -144,7 +146,7 @@ To see your workflow results in GitHub, follow the instructions in [Viewing your
 
 ## Building your own GitHub Actions workflow
 
-The sample workflow provided by the GitHub app serves as a basic template, which you can expand upon to develop your own workflows. That workflow uses Neon's create and delete branch GitHub Actions, which you can find here:
+The sample workflow provided by the GitHub integration serves as a basic template, which you can expand upon to develop your own workflows. That workflow uses Neon's create and delete branch GitHub Actions, which you can find here:
 
 - [Create a Neon Branch](https://github.com/neondatabase/create-branch-action)
 - [Delete a Neon Branch](https://github.com/neondatabase/delete-branch-action)
@@ -194,7 +196,7 @@ If you've installed the GitHub app previously, it's available to use with any pr
 To connect another Neon project to a GitHub repository:
 
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
-2. Locate the **GitHub** app, which should appeare as **Added**, and click **Manage**.
+2. Locate the **GitHub** integration, which should appear as **Added**, and click **Manage**.
    ![GitHub App card](/docs/guides/github_card.png)
 3. Select a GitHub repository to connect to your Neon project, and click **Connect**.
 
@@ -206,18 +208,18 @@ To connect another Neon project to a GitHub repository:
 
    You are also provided with GitHub Actions workflow that you can copy to your GitHub repository to set up a basic branching workflow. For instructions, see [GitHub Actions workflow](#github-actions-workflow).
 
-## Secrets and variable set by the GitHub app
+## Secrets and variable set by the GitHub integration
 
-After connecting your Neon project to a GitHub repository, the GitHub app performs the following actions:
+After connecting your Neon project to a GitHub repository, the GitHub integration performs the following actions:
 
 - Generates a Neon API key for your Neon account
 - Creates a `NEON_API_KEY` secret in your GitHub repository
 - Adds a `NEON_PROJECT_ID` variable to your GitHub repository
 
-The sample GitHub Actions workflow provided by the Neon GitHub app uses these variabels and secrets to perfom actions in Neon.
+The sample GitHub Actions workflow provided by the Neon GitHub integration uses these variabels and secrets to perfom actions in Neon.
 
     <Admonition type="note">
-    These items are removed if you diconnect a Neon project from the associated GitHub repository. The items are removed for all Neo projects is you remove the Neon GitHub app from your Neon account. See [Remove the GitHub app](#remove-the-github-app).
+    These items are removed if you diconnect a Neon project from the associated GitHub repository. The items are removed for all Neo projects is you remove the Neon GitHub integration from your Neon account. See [Remove the GitHub integration](#remove-the-github-integration).
     </Admonition>
 
 ### Neon API key
@@ -236,7 +238,7 @@ To view the variable containing your Neon project ID:
 
 1. Navigate to your GitHub account page.
 2. From your GitHub profile menu, select **Your repositories**.
-3. Select the repository that you chose when installing the Neon GitHub app.
+3. Select the repository that you chose when installing the Neon GitHub integration.
 4. On the repository page, select the **Settings** tab.
 5. Select **Secrets and variables** > **Actions** from the sidebar.
 
@@ -255,12 +257,12 @@ Any GitHub Actions workflows that you've added to the GitHub repository that are
 To disconnect your Neon project:
 
 1. In the Neon Console, navigate to the **Integrations** page for your project.
-2. Locate the GitHub app and click **Manage** to open the **GitHub app** drawer.
+2. Locate the GitHub integration and click **Manage** to open the **GitHub integration** drawer.
 3. Click **Disconnect**.
 
-## Remove the GitHub app
+## Remove the GitHub integration
 
-Removing the GitHub performs the following actions for all Neon projects that you connected to a GitHub repositiory using the GitHub app:
+Removing the GitHub performs the following actions for all Neon projects that you connected to a GitHub repositiory using the GitHub integration:
 
 - Removes the Neon API keys created for your Neon-GitHub integrations from your Neon account.
 - Removes GitHub secrets containing the Neon API keys from the associated GitHub reporistories.
@@ -268,7 +270,7 @@ Removing the GitHub performs the following actions for all Neon projects that yo
 
 Any GitHub Actions workflows that you've added to GitHub repositories that are dependant on these secrets and variables will no longer work.
 
-To remove the GitHub app:
+To remove the GitHub integration:
 
 1. In the Neon Console, navigate your account Profile.
 2. Select Account settings.
@@ -277,4 +279,4 @@ To remove the GitHub app:
 
 ## Feedback and future improvements
 
-If you've got feature requests or feedback about what you'd like to see from the Neon GitHub app, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
+If you've got feature requests or feedback about what you'd like to see from the Neon GitHub integration, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
