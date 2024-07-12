@@ -21,6 +21,7 @@ const Menu = ({
   isSubMenu = false,
   isOpen = false,
   onClose = null,
+  closeMobileMenu = null,
 }) => {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
 
@@ -75,6 +76,7 @@ const Menu = ({
               key={index}
               basePath={basePath}
               parentMenu={{ title, slug }}
+              closeMobileMenu={closeMobileMenu}
               onToggleSubmenu={handleToggleSubmenu}
             />
           ))}
@@ -119,6 +121,7 @@ Menu.propTypes = {
   isOpen: PropTypes.bool,
   isSubMenu: PropTypes.bool,
   onClose: PropTypes.func,
+  closeMobileMenu: PropTypes.func,
 };
 
 export default Menu;

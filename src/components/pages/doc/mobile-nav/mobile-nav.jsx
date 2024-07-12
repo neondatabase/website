@@ -38,7 +38,7 @@ const variants = {
   },
 };
 
-const MobileNav = ({ className = null, sidebar, basePath }) => {
+const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [containerHeight, setContainerHeight] = useState(null);
   const [buttonTop, setButtonTop] = useState(null);
@@ -49,6 +49,7 @@ const MobileNav = ({ className = null, sidebar, basePath }) => {
   const controls = useAnimation();
 
   const toggleMenu = () => setIsOpen((isOpen) => !isOpen);
+  const closeMenu = () => setIsOpen(false);
   useBodyLockScroll(isOpen);
 
   const onOutsideClick = () => {
@@ -116,7 +117,14 @@ const MobileNav = ({ className = null, sidebar, basePath }) => {
           style={{ height: containerHeight }}
         >
           <InkeepTrigger />
-          <Menu title="Home" basePath={basePath} slug="introduction" items={sidebar} isOpen />
+          <Menu
+            title="Home"
+            basePath={basePath}
+            slug={slug}
+            items={sidebar}
+            closeMobileMenu={closeMenu}
+            isOpen
+          />
         </m.div>
       </LazyMotion>
     </nav>
@@ -126,6 +134,7 @@ const MobileNav = ({ className = null, sidebar, basePath }) => {
 MobileNav.propTypes = {
   className: PropTypes.string,
   sidebar: sidebarPropTypes,
+  slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
 };
 

@@ -12,7 +12,12 @@ const NeonDocsLayout = async ({ children }) => {
   return (
     <Layout burgerWithoutBorder isDocPage isHeaderSticky headerWithBorder>
       <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:block">
-        <MobileNav className="hidden lg:block" sidebar={sidebar} basePath={DOCS_BASE_PATH} />
+        <MobileNav
+          className="hidden lg:block"
+          sidebar={sidebar}
+          slug="introduction"
+          basePath={DOCS_BASE_PATH}
+        />
 
         <Sidebar
           className="-mt-[69px] w-[350px] shrink-0 xl:w-[302px] lg:hidden"
@@ -24,7 +29,7 @@ const NeonDocsLayout = async ({ children }) => {
 
         <div className="-ml-[350px] w-full 3xl:ml-0">
           <Container
-            className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 2xl:block xl:gap-x-7"
+            className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 2xl:block xl:gap-x-7 lg:pt-4"
             size="1408"
           >
             {children}

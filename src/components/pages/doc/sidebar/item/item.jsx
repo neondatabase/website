@@ -74,6 +74,7 @@ const Item = ({
   items = null,
   parentMenu = null,
   onToggleSubmenu = null,
+  closeMobileMenu = null,
 }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
@@ -95,6 +96,11 @@ const Item = ({
   const handleCloseSubmenu = () => {
     setIsSubmenuOpen(false);
     onToggleSubmenu();
+  };
+
+  const handleClick = () => {
+    if (items?.length) handleOpenSubmenu();
+    if (slug) closeMobileMenu();
   };
 
   if (section)
@@ -133,7 +139,7 @@ const Item = ({
         type={slug ? undefined : 'button'}
         to={slug ? externalSlug || docSlug : undefined}
         target={externalSlug ? '_blank' : '_self'}
-        onClick={items?.length && handleOpenSubmenu}
+        onClick={handleClick}
       >
         {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
         {icon && Icon && <Icon className="size-4.5" />}
@@ -186,6 +192,7 @@ Item.propTypes = {
     slug: PropTypes.string.isRequired,
   }).isRequired,
   onToggleSubmenu: PropTypes.func,
+  closeMobileMenu: PropTypes.func,
 };
 
 export default Item;
