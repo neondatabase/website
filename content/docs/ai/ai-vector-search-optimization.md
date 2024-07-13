@@ -11,7 +11,7 @@ This guide explores how to effectively use `pgvector` for vector similarity sear
 2. When to use indexes and tradeoffs between the available options?
 3. Which parameters to tune for best performance?
 
-We'll examine sequential scans, HNSW indexing, and IVFFlat indexing, providing benchmarks and practical recommendations for various dataset sizes. This will help you optimize `pgvector` queries in your Neon database for both accuracy and speed. 
+We'll examine sequential scans, HNSW indexing, and IVFFlat indexing, providing benchmarks and practical recommendations for various dataset sizes. This will help you optimize `pgvector` queries in your Neon database for both accuracy and speed.
 
 ## Using pgvector without indexes
 
@@ -39,7 +39,7 @@ Planning Time: 0.213 ms
 Execution Time: 39.527 ms
 ```
 
-You can see in the plan that the query performs a sequential scan (`Seq Scan`), which means that the query compares the query vector against all vectors in the `documents` table. 
+You can see in the plan that the query performs a sequential scan (`Seq Scan`), which means that the query compares the query vector against all vectors in the `documents` table.
 
 To understand how this query performs at scale, we ran sequential scan vector searches with `pgvector` on subsets of the [GIST-960 dataset](http://corpus-texmex.irisa.fr/) with 10k, 50k, 100k, 500k, and 1M rows using a Neon database instance with 4 vCPUs and 16 GB of RAM.
 
@@ -101,11 +101,11 @@ SELECT ...
 COMMIT;
 ```
 
-In summary, 
+In summary,
 
-- To prioritize search speed over accuracy, use lower values for `m` and `ef_search`. 
-- Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `ef_search`. 
-- Using a higher value for `ef_construction` yields more accurate search results at the cost of index build time.  
+- To prioritize search speed over accuracy, use lower values for `m` and `ef_search`.
+- Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `ef_search`.
+- Using a higher value for `ef_construction` yields more accurate search results at the cost of index build time.
 
 ## Indexing with IVFFlat
 

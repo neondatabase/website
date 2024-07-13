@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.360Z'
 ---
 
-A Jupyter Notebook is an open-source web application that allows you to create and share documents containing live code, equations, visualizations, and narrative text. Azure Data Studio supports Jupyter Notebooks, enabling users to combine SQL queries, Python code, and markdown text in a single interactive document.  
+A Jupyter Notebook is an open-source web application that allows you to create and share documents containing live code, equations, visualizations, and narrative text. Azure Data Studio supports Jupyter Notebooks, enabling users to combine SQL queries, Python code, and markdown text in a single interactive document.
 
 This guide describes how to create a new python notebook in Azure Data Studio, connect to a Neon database, install the `pgvector` extension to enable Neon as a vector store, and run a vector search query.
 
