@@ -5,13 +5,17 @@ enableTableOfContents: true
 updatedOn: '2024-01-10T18:34:05.849Z'
 ---
 
-How do you properly use `pgvector`? Should you use an index and what type? What parameters yield the best performance?
+This guide explores how to effectively use `pgvector` for vector similarity searches in your AI applications. We'll address the following key questions:
 
-In this guide, we explore the questions above to determine how you should use `pgvector` in your applications.
+1. How to profile your vector search queries, when using `pgvector`?
+2. When to use indexes and tradeoffs between the available options?
+3. Which parameters to tune for best performance?
 
-## Sequential scans with pgvector
+We'll examine sequential scans, HNSW indexing, and IVFFlat indexing, providing benchmarks and practical recommendations for various dataset sizes. This will help you optimize `pgvector` queries in your Neon database for both accuracy and speed. 
 
-Without indexes, `pgvector` performs a sequential scan on the database and calculates the distance between the query vector and all vectors in the table. This approach does an exact search and guarantees 100% recall, but it can be costly with large datasets.
+## Using pgvector without indexes
+
+When no indexing is specified for a vector column, `pgvector` performs a **sequential scan** on the database and calculates the distance between the query vector and all the vectors in that table column. This approach does an exact search and guarantees 100% recall, but it can be costly with large datasets.
 
 <Admonition type="info">
 **Recall** is a metric used to evaluate the performance of a search algorithm. It measures how effectively the search retrieves relevant items from a dataset. It is defined as the ratio of the number of relevant items retrieved by the search to the total number of relevant items in the dataset.
@@ -35,21 +39,21 @@ Planning Time: 0.213 ms
 Execution Time: 39.527 ms
 ```
 
-You can see in the plan that the query performs a sequential scan (`Seq Scan`), which means that the query compares the query vector against all vectors in the `documents` table. In other words, the query does not use an index.
+You can see in the plan that the query performs a sequential scan (`Seq Scan`), which means that the query compares the query vector against all vectors in the `documents` table. 
 
-To understand how queries perform at scale, we ran sequential scan vector searches with `pgvector` on subsets of the [GIST-960 dataset](http://corpus-texmex.irisa.fr/) with 10k, 50k, 100k, 500k, and 1M rows using a Neon database instance with 4 vCPUs and 16 GB of RAM.
+To understand how this query performs at scale, we ran sequential scan vector searches with `pgvector` on subsets of the [GIST-960 dataset](http://corpus-texmex.irisa.fr/) with 10k, 50k, 100k, 500k, and 1M rows using a Neon database instance with 4 vCPUs and 16 GB of RAM.
 
 The sequential scan search performs reasonably well for tables with 10k rows (~36ms). However, sequential scans start to become costly at 50k rows. For tables of this size and larger, you might consider adding an index for better performance.
 
-So, when you should you use sequential scans rather than defining an index?
+So, when should you use sequential scans rather than defining an index?
 
 - When your dataset is small and you do not intend to scale it
 - When you need 100% recall (accuracy). Adding indexes trades recall for performance.
-- When you do not expect a high volume of queries per second, which would require indexes for performance
+- When you do not expect a high volume of queries per second. Adding indexes trades some setup time for runtime performance.
 
 ## Indexing with HNSW
 
-HNSW is a graph-based approach to indexing multi-dimensional data. It constructs a multi-layered graph, where each layer is a subset of the previous one. During a search, the algorithm navigates through the graph from the top layer to the bottom to quickly find the nearest neighbor. An HNSW graph is known for its superior performance in terms of speed and accuracy.
+HNSW is a graph-based approach to indexing multi-dimensional data. It constructs a multi-layered graph, where each layer is a subset of the previous one. During a vector similarity search, the algorithm navigates through the graph from the top layer to the bottom to quickly find the nearest neighbor. An HNSW graph is known for its superior performance in terms of speed and accuracy.
 
 <Admonition type="note">
 An HNSW index performs better than IVFFlat (in terms of speed-recall tradeoff) and can be created without any data in the table since there isn’t a training step like there is for an IVFFlat index. However, HNSW indexes have slower build times and use more memory.
@@ -97,7 +101,11 @@ SELECT ...
 COMMIT;
 ```
 
-In summary, to prioritize search speed over accuracy, use lower values for `m` and `ef_search`. Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `ef_search`. A higher `ef_construction` value builds an index more accurate search results at the cost of index build time.
+In summary, 
+
+- To prioritize search speed over accuracy, use lower values for `m` and `ef_search`. 
+- Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `ef_search`. 
+- Using a higher value for `ef_construction` yields more accurate search results at the cost of index build time.  
 
 ## Indexing with IVFFlat
 
@@ -160,4 +168,4 @@ The sequential scan approach of `pgvector` can perform well for small datasets b
 
 We explored how you can optimize your searches using HNSW or IVFFlat indexes for approximate nearest neighbor (ANN) search, noting that HNSW indexes have better query performance than IVFFlat but with build time and memory usage tradeoffs.
 
-Try different index tuning parameters to find the right balance between speed and accuracy for your specific use case and dataset.
+You should experiment with different index tuning parameters to find the right balance between speed and accuracy, for your specific use case and dataset.
