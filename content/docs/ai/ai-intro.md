@@ -68,8 +68,6 @@ Hackable, fully-featured, pre-built [starter apps](#ai-starter-apps) to get you 
 
 <a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/reverse-image-search-nextjs" description="A fully-featured, hackable Next.js Reverse Image Search Engine built with OpenAI and LlamaIndex" icon="github">Reverse image search (OpenAI + LlamaIndex)</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/reverse-image-search-nextjs" description="A full-featured, hackable Next.js Reverse Image Search Engine built with OpenAI and LangChain" icon="github">Reverse image search (OpenAI + LangChain)</a>
-
 <a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chat-with-pdf-nextjs" description="A fully-featured, hackable Next.js Chat with PDF chatbot built with OpenAI and LlamaIndex" icon="github">Chat with PDF (OpenAI + LlamaIndex)</a>
 
 <a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/chat-with-pdf-nextjs" description="A fully-featured, hackable Next.js Chat with PDF chatbot built with OpenAI and LangChain" icon="github">Chat with PDF (OpenAI + LangChain)</a>
