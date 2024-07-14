@@ -7,8 +7,6 @@ updatedOn: '2024-01-10T18:34:05.849Z'
 
 You can scale your AI application built on Postgres with `pgvector` in the same way you would any Postgres app: Vertically with added CPU, RAM, and storage, or horizontally with read replicas.
 
-## Verticle scaling
-
 Neon supports compute sizes ranging from .025 vCPU with 1 GB RAM up to 8 vCPU with 32 GB RAM.
 
 | Compute Units (CU) | vCPU | RAM   | maintenance_work_mem |
@@ -34,7 +32,7 @@ SET maintenance_work_mem='10 GB';
 
 The recommended `maintenance_work_mem` setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GiB is less than 50% of the RAM available for that compute size.
 
-### Autoscaling
+## Autoscaling
 
 You can also enable Neon's autoscaling feature for automatic scaling of compute resources (vCPU and RAM). Neon's _Autoscaling_ feature automatically scales up compute on demand in response to application workload and down to zero on inactivity.
 
@@ -44,11 +42,11 @@ Enabling autoscaling is also recommended for initial data loads and memory-inten
 
 To learn more about Neon's autoscaling feature and how to enable it, refer to our [Autoscaling guide](/docs/introduction/autoscaling).
 
-### Storage
+## Storage
 
 Neon's data storage allowances differ by plan. See [Neon plans](/docs/introduction/plans).
 
-## Horizontal scaling with read replicas
+## Read replicas
 
 Neon supports read replicas, which are independent read-only compute instances designed to perform read operations on the same data as your read-write computes. Read replicas do not replicate data across database instances. Instead, read requests are directed to a single source. This architecture enables read replicas to be created instantly, and because data is read from a single source, there are no additional storage costs.
 

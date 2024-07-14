@@ -11,7 +11,7 @@ Neon supports the `pgvector` open-source extension, which enables Postgres as a 
 
 Neon's AI Starter Kit provides resources, starter apps, and examples to help get you started.
 
-<CTA title="Ship faster with Neon's AI Starter Kit" description="Sign up for Neon Postgres and jumpstart your AI application.  Our starter apps and resources are designed to help you get up and running quickly." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Ship faster with Neon's AI Starter Kit" description="Sign up for Neon Postgres and jumpstart your AI application. Our starter apps and resources are designed to help you get up and running quickly." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
 The **Neon AI Starter Kit** includes:
 
