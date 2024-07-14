@@ -28,12 +28,15 @@
           slug: guides/django
         - title: Express
           slug: guides/express
-          tag: new
         - title: Laravel
           slug: guides/laravel
+        - title: NestJS
+          slug: guides/nestjs
+          tag: new
         - title: Next.js
           slug: guides/nextjs
-
+        - title: Node.js
+          slug: guides/node
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
@@ -48,6 +51,9 @@
           slug: guides/remix
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
+        - title: SolidStart
+          slug: guides/solid-start
+          tag: new
         - title: SQLAlchemy
           slug: guides/sqlalchemy
         - title: Symfony
@@ -63,9 +69,7 @@
         - title: Java
           slug: guides/java
         - title: Javascript
-          items:
-            - title: Node.js
-              slug: guides/node
+          slug: guides/javascript
         - title: Python
           items:
             - title: Psycopg
@@ -337,12 +341,13 @@
           items:
             - title: Generate synthetic data
               slug: guides/neosync-generate
-              tag: new
             - title: Anonymize data
               slug: guides/neosync-anonymize
-              tag: new
         - title: Prisma
           slug: guides/prisma
+        - title: TypeORM
+          slug: guides/typeorm
+          tag: new
     - title: Replicate
       items:
         - title: Airbyte
@@ -353,6 +358,8 @@
           slug: guides/logical-replication-clickhouse
         - title: Confluent
           slug: guides/logical-replication-kafka-confluent
+        - title: Decodable
+          slug: guides/logical-replication-decodable
         - title: Fivetran
           slug: guides/logical-replication-fivetran
         - title: Materialize
@@ -535,6 +542,8 @@
           items:
             - title: concat
               slug: functions/concat
+            - title: substring
+              slug: functions/substring
             - title: lower
               slug: functions/lower
             - title: substring
@@ -595,6 +604,8 @@
           slug: reference/cli-auth
         - title: me
           slug: reference/cli-me
+        - title: orgs
+          slug: reference/cli-orgs
         - title: projects
           slug: reference/cli-projects
         - title: ip-allow
@@ -611,6 +622,8 @@
           slug: reference/cli-connection-string
         - title: set-context
           slug: reference/cli-set-context
+        - title: create-app
+          slug: reference/cli-create-app
         - title: completion
           slug: reference/cli-completion
     - title: SDKs

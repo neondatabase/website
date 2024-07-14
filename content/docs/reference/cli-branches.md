@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.892Z'
+updatedOn: '2024-07-12T19:30:23.608Z'
 ---
 
 ## Before you begin
@@ -28,7 +28,8 @@ neon branches <subcommand> [options]
 | [restore](#restore)         | Restore a branch to a selected point in time |
 | [rename](#rename)           | Rename a branch                              |
 | [schema-diff](#schema-diff) | Compare schemas                              |
-| [set-primary](#set-primary) | Set a default branch                         |
+| [set-primary](#set-primary) | Set a default branch (Deprecated)            |
+| [set-default](#set-default) | Set a default branch                         |
 | [add-compute](#add-compute) | Add replica to a branch                      |
 | [delete](#delete)           | Delete a branch                              |
 | [get](#get)                 | Get a branch                                 |
@@ -516,44 +517,37 @@ The output indicates that in the table `public.playing_with_neon`, a new column 
 +    value real, // [!code ++]
 +    description character varying(255) // [!code ++]
  );
-
-
- ALTER TABLE public.playing_with_neon OWNER TO neondb_owner;
-```
-
-ALTER TABLE public.playing_with_neon OWNER TO neondb_owner;
-
 ```
 
 #### Comparing a branch to an earlier point in its history
 
 This command compares the schema of `dev-alex` to a previous state in its history at LSN 0/123456.
 
-```
-
+```bash
 neon branches schema-diff dev-alex ^self@0/123456
-
 ```
 
 #### Comparing a branch to its parent
 
 This command compares the schema of `dev/alex` to the head of its parent branch.
 
-```
-
+```bash
 neon branches schema-diff dev/alex ^parent
-
-````
+```
 
 #### Comparing a branch to an earlier point in another branch's history
 
-This command compares the schema of the `main` branch to the state of the `dev/jordan` branch at timestamp 2024-06-01T00:00:00.000Z
+This command compares the schema of the `main` branch to the state of the `dev/jordan` branch at timestamp `2024-06-01T00:00:00.000Z`.
 
 ```bash
 neon branches schema-diff main dev/jordan@2024-06-01T00:00:00.000Z
-````
+```
 
 ## set-primary
+
+<Admonition type="warning">
+The `set-primary` subcommand is deprecated. It will be removed in a future release. Use [set-default](#set-default) instead.
+</Admonition>
 
 This subcommand allows you to set a branch as the default branch in your Neon project.
 
@@ -585,6 +579,38 @@ neon branches set-primary mybranch
 └────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
 
+## set-default
+
+This subcommand allows you to set a branch as the default branch in your Neon project.
+
+#### Usage
+
+```bash
+neon branches set-default <id|name> [options]
+```
+
+`<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
+
+#### Options
+
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `set-default` subcommand supports this option:
+
+| Option           | Description                                                                                   | Type   |                      Required                       |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
+| `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
+
+#### Example
+
+```bash
+neon branches set-default mybranch
+┌────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                 │ Name     │ Default │ Created At           │ Updated At           │
+├────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-odd-frog-703504 │ mybranch │ true    │ 2023-07-11T12:22:12Z │ 2023-07-11T12:22:59Z │
+└────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
+```
+
 ## add-compute
 
 This subcommand allows you to add a compute endpoint to an existing branch in your Neon project.
@@ -606,17 +632,32 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                                                                                                                                        | string |                                                     |
 | `--project-id`   | Project ID                                                                                                                                                                                                                                                                           | string | Only if your Neon account has more than one project |
 | `--type`         | Type of compute to add. Choices are `read_only` (the default) or `read_write`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas). A branch can have a single read-write and multiple read-only compute endpoints. | string |                                                     |
+| `--cu`           | Sets the compute size in Compute Units. For a fixed size, enter a single number (e.g., "2"). For autoscaling, enter a range with a dash (e.g., "0.5-3").                                                                                                                             | string |                                                     |
 
-#### Example
+#### Examples
 
-```bash
-neon branches add-compute mybranch --type read_only
-┌─────────────────────┬──────────────────────────────────────────────────┐
-│ Id                  │ Host                                             │
-├─────────────────────┼──────────────────────────────────────────────────┤
-│ ep-rough-lab-865061 │ ep-rough-lab-865061.ap-southeast-1.aws.neon.tech │
-└─────────────────────┴──────────────────────────────────────────────────┘
-```
+- Add a read-only compute (a read replica) to a branch:
+
+  ```bash
+  neon branches add-compute mybranch --type read_only
+  ┌─────────────────────┬──────────────────────────────────────────────────┐
+  │ Id                  │ Host                                             │
+  ├─────────────────────┼──────────────────────────────────────────────────┤
+  │ ep-rough-lab-865061 │ ep-rough-lab-865061.ap-southeast-1.aws.neon.tech │
+  └─────────────────────┴──────────────────────────────────────────────────┘
+  ```
+
+- Set the compute size when creating a branch:
+
+  ```bash
+  neon branches add-compute main --cu 2
+  ```
+
+- Set the compute's autoscaling range when creating a branch:
+
+  ```bash
+  neon branches add-compute main --cu 0.5-3
+  ```
 
 ## delete
 

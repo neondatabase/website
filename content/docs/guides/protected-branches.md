@@ -3,7 +3,7 @@ title: Protected branches
 subtitle: Learn how to use Neon's protected branches feature to secure access to
   critical data
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.887Z'
+updatedOn: '2024-07-12T11:14:29.365Z'
 ---
 
 Neon's protected branches feature lets you apply IP restrictions to specific branches in your Neon project as an added layer of data protection. Protected branches is a Neon [Scale](/docs/introduction/plans#scale) plan feature.
@@ -48,23 +48,23 @@ neon ip-allow add 203.0.113.0 203.0.113.1
 └─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
 ```
 
-To apply an IP allowlist to the default branch only, use the you can `--primary-only` option:
+To apply an IP allowlist to the default branch only, use the you can `--protected-only` option:
 
 ```bash
-neon ip-allow add 203.0.113.1 --primary-only
+neon ip-allow add 203.0.113.1 --protected-only
 ```
 
-To reverse that setting, use `--primary-only false`.
+To reverse that setting, use `--protected-only false`.
 
 ```bash
-neon ip-allow add 203.0.113.1 --primary-only false
+neon ip-allow add 203.0.113.1 --protected-only false
 ```
 
 </TabItem>
 
 <TabItem>
 
-The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"primary_branch_only` option to `true` to apply the allowlist to your default branch only, or `false` to apply it to all branches in your Neon project.
+The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to your default branch only, or `false` to apply it to all branches in your Neon project.
 
 ```bash
 curl -X PATCH \
@@ -77,7 +77,7 @@ curl -X PATCH \
   "project": {
     "settings": {
       "allowed_ips": {
-        "primary_branch_only": true,
+        "protected_branches_only": true,
         "ips": [
           "203.0.113.0", "203.0.113.1"
         ]
