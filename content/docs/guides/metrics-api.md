@@ -10,12 +10,12 @@ To learn more about which metrics you can get reports on, see [Available metrics
 
 Here are the different ways to retrieve these metrics, depending on how you want them aggregated or broken down:
 
-| Endpoint                                                                                         | Description                                                                              | Plan Availability |
-| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------- |
-| [Account-level cumulative metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                                     | Scale plan only   |
-| [Granular project-level metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly)        | Scale plan only   |
-| [Billing period project-level metrics](https://api-docs.neon.tech/reference/listprojectsconsumption)   | Offers consumption metrics for each project in an account for the current billing period | All plans         |
-| [Single project metrics](https://api-docs.neon.tech/reference/getproject)                                   | Retrieves detailed metrics and quota information for a specific project                                  | All plans         |
+| Endpoint                                                                                                 | Description                                                                                                              | Plan Availability |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------- |
+| [Account-level cumulative metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                   | Scale plan only   |
+| [Granular project-level metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject)   | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale plan only   |
+| [Billing period project-level metrics](https://api-docs.neon.tech/reference/listprojectsconsumption)     | Offers consumption metrics for each project in an account for the current billing period                                 | All plans         |
+| [Single project metrics](https://api-docs.neon.tech/reference/getproject)                                | Retrieves detailed metrics and quota information for a specific project                                                  | All plans         |
 
 ## Get account-level aggregated metrics
 
@@ -55,7 +55,7 @@ You can also get similar daily, hourly, or monthly metrics across a selected tim
 
 Using the endpoint `GET /consumption_history/projects`, let's use the same start date, end date, and level of granularity as our account-level request: hourly metrics between June 30th and July 2nd, 2024.
 
-``` shouldWrap
+```shouldWrap
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/consumption_history/projects?limit=10&from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=hourly&org_id=org-ocean-art-12345678' \
      --header 'accept: application/json' \
@@ -65,7 +65,7 @@ curl --request GET \
 <details>
 <summary>Response body</summary>
 
-``` shouldWrap
+```shouldWrap
 {
   "projects": [
     {
