@@ -2,14 +2,14 @@
 title: LlamaIndex
 subtitle: Build AI applications faster with LlamaIndex and Postgres
 enableTableOfContents: true
-updatedOn: '2024-07-04T10:43:33.361Z'
+updatedOn: '2024-07-15T14:10:09.616Z'
 ---
 
 LlamaIndex is a popular framework for working with AI, Vectors, and embeddings. LlamaIndex supports using Neon as a vector store, using the `pgvector` extension.
 
 ## Initialize Postgres Vector Store
 
-LlamaIndex simplifies the complexity of managing document insertion and embeddings generation using vector stores by providing a streamlined methods for these tasks.
+LlamaIndex simplifies the complexity of managing document insertion and embeddings generation using vector stores by providing streamlined methods for these tasks.
 
 Here's how you can initialize Postgres Vector with LlamaIndex:
 
@@ -89,14 +89,14 @@ Hackable, fully-featured, pre-built [starter apps](https://github.com/neondataba
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chatbot-nextjs" description="A fully-featured, hackable Netx.js AI chatbot built with OpenAI and LlamaIndex" icon="github">AI chatbot (OpenAI + LllamIndex)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chatbot-nextjs" description="A Netx.js AI chatbot starter app built with OpenAI and LlamaIndex" icon="github">AI chatbot (OpenAI + LllamIndex)</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/rag-nextjs" description="A fully-featured, hackable Next.js RAG chatbot built with OpenAI and LlamaIndex" icon="github">RAG chatbot (OpenAI + LlamaIndex)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/rag-nextjs" description="A Next.js RAG chatbot starter app built with OpenAI and LlamaIndex" icon="github">RAG chatbot (OpenAI + LlamaIndex)</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/semantic-search-nextjs" description="A fully-featured, hackable Next.js Semantic Search chatbot built with OpenAI and LlamaIndex" icon="github">Semantic search chatbot (OpenAI + LlamaIndex)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/semantic-search-nextjs" description="A Next.js Semantic Search chatbot starter app built with OpenAI and LlamaIndex" icon="github">Semantic search chatbot (OpenAI + LlamaIndex)</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/reverse-image-search-nextjs" description="A fully-featured, hackable Next.js Reverse Image Search Engine built with OpenAI and LlamaIndex" icon="github">Reverse image search (OpenAI + LlamaIndex)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/reverse-image-search-nextjs" description="A Next.js Reverse Image Search Engine starter app built with OpenAI and LlamaIndex" icon="github">Reverse image search (OpenAI + LlamaIndex)</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chat-with-pdf-nextjs" description="A fully-featured, hackable Next.js Chat with PDF chatbot built with OpenAI and LlamaIndex" icon="github">Chat with PDF (OpenAI + LlamaIndex)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chat-with-pdf-nextjs" description="A Next.js Chat with PDF chatbot starter app built with OpenAI and LlamaIndex" icon="github">Chat with PDF (OpenAI + LlamaIndex)</a>
 
 </DetailIconCards>

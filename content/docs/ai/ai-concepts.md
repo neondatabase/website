@@ -2,14 +2,14 @@
 title: AI Concepts
 subtitle: Learn how embeddings are used to build AI applications
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.359Z'
+updatedOn: '2024-07-15T14:10:09.613Z'
 ---
 
-Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used to build AI applications.
+Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used, generated, and stored in POstgres.
 
 ## What are embeddings?
 
-When working with unstructured data, a common objective is to transform it into a more structured format that is easier to analyze and retrieve. This transformation can be achieved through the use of 'embeddings', which are vectors containing an array of floating-point numbers that represent the features or dimensions of your data. For example, a sentence like "The cow jumped over the moon" can be represented by an embedding that looks like this: [0.5, 0.3, 0.1].
+When working with unstructured data, a common objective is to transform it into a more structured format that is easier to analyze and retrieve. This transformation can be achieved through the use of 'embeddings', which are vectors containing an array of floating-point numbers that represent the features or dimensions of your data. For example, a sentence like "The cow jumped over the moon" might be represented by an embedding that looks like this: [0.5, 0.3, 0.1].
 
 The advantage of embeddings is that they allow us to measure the similarity between different pieces of text. By calculating the distance between two embeddings, we can assess their relatedness - the smaller the distance, the greater the similarity, and vice versa. This quality is particularly useful as it enables embeddings to capture the underlying meaning of the text.
 
@@ -35,7 +35,7 @@ When we apply this process, it is likely that sentences 1 and 2, both of which i
 
 ## Vector similarity search
 
-The method of transforming data into embeddings and computing similarities between one or more items is referred to as vector search or similarity search. This process has a wide range of applications, including but not limited to:
+Transforming data into embeddings and computing similarities between one or more items is referred to as vector search or similarity search. This process has a wide range of applications, including:
 
 - **Information retrieval:** By representing user queries as vectors, we can perform more accurate searches based on the meaning behind the queries, allowing us to retrieve more relevant information.
 - **Natural language processing:** Embeddings capture the essence of the text, making them excellent tools for tasks such as text classification and sentiment analysis.
@@ -50,13 +50,13 @@ Vector similarity search computes similarities (the distance) between data point
 - Manhattan (L1): Also known as "taxicab" or "city block" distance.
 - Cosine: This calculates the cosine of the angle between two vectors.
 
-Other distance metrics supported by the `pgvector` extension include Hamming distance and Jaccard distance.
+Other distance metrics supported by the `pgvector` extension include [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) and [Jaccard distance]https://en.wikipedia.org/wiki/Jaccard_index).
 
 Different distance metrics can be more appropriate for different tasks, depending on the nature of the data and the specific relationships you're interested in. For instance, cosine similarity is often used in text analysis.
 
 ## Generating embeddings
 
-A common approach to generating embeddings is to use an LLM API, such as [OpenAI’s Embeddings API](https://platform.openai.com/docs/api-reference/embeddings). This API allows you to input a text string into an API endpoint, which then returns the corresponding embedding. The "cow jumped over the moon" is a simplistic example with 3 dimensions. Most embedding models generate embeddings with a much larger number of dimensions. OpenAI's newest and most performant embedding models, `text-embedding-3-small` and `text-embedding-3-large`, generate embeddings with 1536 and 3072 dimensions by default.
+A common approach to generating embeddings is to use an LLM API, such as [OpenAI’s Embeddings API](https://platform.openai.com/docs/api-reference/embeddings). This API allows you to input a text string into an API endpoint, which then returns the corresponding embedding. The "cow jumped over the moon" is a simplistic example with 3 dimensions. Most embedding models generate embeddings with a much larger number of dimensions. OpenAI's newest and most performant embedding models, `text-embedding-3-small` and `text-embedding-3-large`, generate embeddings with 1536 and 3072 dimensions by default, respectively.
 
 Here's an example of how to use OpenAI's `text-embedding-3-small` model to generate an embedding:
 

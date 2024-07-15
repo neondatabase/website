@@ -1,8 +1,8 @@
 ---
 title: The pgvector extension
-subtitle: Use the pgvector for vector similarity search in Postgres
+subtitle: Enable Postgres as a vector store with the pgvector extension
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.371Z'
+updatedOn: '2024-07-15T14:10:09.617Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models.
@@ -31,7 +31,7 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 ## Create a table to store vectors
 
-To create a table for storing vectors, use the following SQL command, adjusting the dimensions as needed.
+To create a table for storing vectors, you would use an SQL command similar to the following. Embeddings are stored in the `VECTOR` type column. You can adjust the number of dimensions as needed.
 
 ```sql
 CREATE TABLE items (
@@ -41,10 +41,10 @@ CREATE TABLE items (
 ```
 
 <Admonition type="note">
-Types other than VECTOR are supported. See [HNSW vector types](#hnsw-vector-types), and [IVFFlat vector types](#ivfflat-vector-types).
+The `pgvector` extension supports some specialized types other than `VECTOR` for storing embeddings. See [HNSW vector types](#hnsw-vector-types), and [IVFFlat vector types](#ivfflat-vector-types).
 </Admonition>
 
-This command generates a table named `items` with an `embedding` column capable of storing vectors with 3 dimensions. OpenAI's `text-embedding-3-small` model supports 1536 dimensions by default for each piece of text, which creates more accurate embeddings for natural language processing tasks. However, using larger embeddings generally costs more and consumes more compute, memory and storage than using smaller embeddings. To learn more about embeddings and the cost-performance tradeoff, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
+This command generates a table named `items` with an `embedding` column capable of storing vectors with 3 dimensions. OpenAI's `text-embedding-3-small` model supports 1536 dimensions by default for each piece of text, which creates more accurate embeddings for natural language processing tasks. However, using larger embeddings generally costs more and consumes more compute, memory, and storage than using smaller embeddings. To learn more about embeddings and the cost-performance tradeoff, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
 
 ## Storing embeddings
 
@@ -63,7 +63,7 @@ After generating embeddings using a service like [OpenAI’s Embeddings API](htt
   ```
 
    <Admonition type="tip">
-   For a Python script example, see [bulk_loading.py](https://github.com/pgvector/pgvector-python/blob/master/examples/bulk_loading.py).
+   For a Python script that loads embeddings in bulk, see [bulk_loading.py](https://github.com/pgvector/pgvector-python/blob/master/examples/bulk_loading.py).
    </Admonition>
 
 - Upsert vectors:
@@ -87,7 +87,7 @@ After generating embeddings using a service like [OpenAI’s Embeddings API](htt
 
 ## Querying vectors
 
-To retrieve vectors and calculate similarity, use `SELECT` statements and the built-in distance function operators.
+To retrieve vectors and calculate similarity, use `SELECT` statements and the distance function operators supported by `pgvector`.
 
 - Get the nearest neighbor to a vector by L2 distance:
 
@@ -116,7 +116,7 @@ To retrieve vectors and calculate similarity, use `SELECT` statements and the bu
 - `<->` - L2 distance
 - `<#>` - (negative) inner product
 - `<=>` - cosine distance
-- `<+>` - L1 distance (added in 0.7.0)
+- `<+>` - L1 distance
 
 <Admonition type="note">
 The inner product operator (`<#>`) returns the negative inner product since Postgres only supports `ASC` order index scans on operators.
@@ -167,7 +167,7 @@ Supported index types include:
 
 ### HNSW
 
-An HNSW index creates a multilayer graph. It has better query performance than IVFFlat (in terms of speed-recall tradeoff), but has slower build times and uses more memory. Also, an index can be created without any data in the table since there isn’t a training step like there is for an IVFFlat index.
+An HNSW index creates a multilayer graph. It has better query performance than an IVFFlat index (in terms of speed-recall tradeoff), but has slower build times and uses more memory. Also, an HNSW index can be created without any data in the table since there isn’t a training step like there is for an IVFFlat index.
 
 #### HNSW vector types
 
@@ -179,7 +179,7 @@ HNSW indexes are supported with the following vector types:
 - `sparsevec` - up to 1,000 non-zero elements
 
 <Admonition type="note">
-Notice how indexes are defined differently depending on the distance function being used. For example `vector_l2_ops` is specified for L2 distance, `vector_ip_ops` for inner product, and so on. 
+Notice how indexes are defined differently depending on the distance function being used. For example `vector_l2_ops` is specified for L2 distance, `vector_ip_ops` for inner product, and so on. Make sure you define your index according to the distance function you intend to use.
 </Admonition>
 
 - L2 distance:
@@ -218,7 +218,7 @@ Notice how indexes are defined differently depending on the distance function be
   CREATE INDEX ON items USING hnsw (embedding bit_jaccard_ops);
   ```
 
-#### HNSW index options
+#### HNSW index build options
 
 - `m` - the max number of connections per layer (16 by default)
 - `ef_construction` - the size of the dynamic candidate list for constructing the graph (`64` by default)
@@ -231,7 +231,7 @@ CREATE INDEX ON items USING hnsw (embedding vector_l2_ops) WITH (m = 16, ef_cons
 
 A higher value of `ef_construction` provides better recall at the cost of index build time and insert speed.
 
-#### HNSW query options
+#### HNSW index query options
 
 You can specify the size of the candidate list for search. The size is `40` by default.
 
@@ -252,10 +252,7 @@ COMMIT;
 
 #### HNSW index build time
 
-To optimize index build time, consider configuring the following session variables before building an index:
-
-- [maintenance_work_mem](#maintenance_work_mem)
-- [max_parallel_maintenance_workers](#max_parallel_maintenance_workers)
+To optimize index build time, consider configuring the `maintenance_work_mem` and `max_parallel_maintenance_workers` session variables before building an index:
 
 <Admonition type="note">
 Like other index types, it’s faster to create an index after loading your initial data.
@@ -316,7 +313,7 @@ Like other index types, it’s faster to create an index after loading your init
 
 You can check indexing progress with the following query:
 
-```sql
+```sql shouldWrap
 SELECT phase, round(100.0 * blocks_done / nullif(blocks_total, 0), 1) AS "%" FROM pg_stat_progress_create_index;
 ```
 
@@ -325,7 +322,7 @@ The phases for HNSW are:
 1. initializing
 2. loading tuples
 
-For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the PostgreSQL documentation.
+For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the _PostgreSQL documentation_.
 
 ### IVFFlat
 
@@ -402,61 +399,62 @@ COMMIT;
 
 #### IVFFlat index build time
 
-To optimize index build time, consider configuring the following session variables before building an index:
-
-- [maintenance_work_mem](#maintenance_work_mem)
-- [max_parallel_maintenance_workers](#max_parallel_maintenance_workers)
+To optimize index build time, consider configuring the `maintenance_work_mem` and `max_parallel_maintenance_workers` session variables before building an index:
 
 <Admonition type="note">
 Like other index types, it’s faster to create an index after loading your initial data.
 </Admonition>
 
-**maintenance_work_mem**
+<Admonition type="note">
+Like other index types, it’s faster to create an index after loading your initial data.
+</Admonition>
 
-In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute):
+- `maintenance_work_mem`
 
-| Compute Units (CU) | vCPU | RAM   | maintenance_work_mem |
-| ------------------ | ---- | ----- | -------------------- |
-| 0.25               | 0.25 | 1 GB  | 64 MB                |
-| 0.50               | 0.50 | 2 GB  | 64 MB                |
-| 1                  | 1    | 4 GB  | 67 MB                |
-| 2                  | 2    | 8 GB  | 134 MB               |
-| 3                  | 3    | 12 GB | 201 MB               |
-| 4                  | 4    | 16 GB | 268 MB               |
-| 5                  | 5    | 20 GB | 335 MB               |
-| 6                  | 6    | 24 GB | 402 MB               |
-| 7                  | 7    | 28 GB | 470 MB               |
-| 8                  | 8    | 32 GB | 537 MB               |
+  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute):
 
-To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
+  | Compute Units (CU) | vCPU | RAM   | maintenance_work_mem |
+  | ------------------ | ---- | ----- | -------------------- |
+  | 0.25               | 0.25 | 1 GB  | 64 MB                |
+  | 0.50               | 0.50 | 2 GB  | 64 MB                |
+  | 1                  | 1    | 4 GB  | 67 MB                |
+  | 2                  | 2    | 8 GB  | 134 MB               |
+  | 3                  | 3    | 12 GB | 201 MB               |
+  | 4                  | 4    | 16 GB | 268 MB               |
+  | 5                  | 5    | 20 GB | 335 MB               |
+  | 6                  | 6    | 24 GB | 402 MB               |
+  | 7                  | 7    | 28 GB | 470 MB               |
+  | 8                  | 8    | 32 GB | 537 MB               |
 
-```sql
-SET maintenance_work_mem='10 GB';
-```
+  To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
-The recommended setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GiB is less than 50% of the RAM available for that compute size.
+  ```sql
+  SET maintenance_work_mem='10 GB';
+  ```
 
-**max_parallel_maintenance_workers**
+  The recommended setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GiB is less than 50% of the RAM available for that compute size.
 
-You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
+- `max_parallel_maintenance_workers`
 
-The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
+  You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
 
-You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
+  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
 
-```sql
-SET max_parallel_maintenance_workers = 7
-```
+  You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
-For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+  ```sql
+  SET max_parallel_maintenance_workers = 7
+  ```
 
-For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
+  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+
+  For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 
 #### Check indexing progress
 
 You can check indexing progress with the following query:
 
-```
+```sql shouldWrap
 SELECT phase, round(100.0 * blocks_done / nullif(blocks_total, 0), 1) AS "%" FROM pg_stat_progress_create_index;
 ```
 
@@ -465,8 +463,7 @@ The phases for HNSW are:
 1. initializing
 2. loading tuples
 
-For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the PostgreSQL documentation.
-**max_parallel_maintenance_workers**
+For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the _PostgreSQL documentation_.
 
 ## Filtering
 
@@ -495,8 +492,6 @@ CREATE TABLE items (embedding vector(3), category_id int) PARTITION BY LIST(cate
 ```
 
 ## Half-precision vectors
-
-Support for half-precision vectors was added in `pgvector` 0.7.0.
 
 Half-precision vectors enable the storage of vector embeddings using 16-bit floating-point numbers, or half-precision, which reduces both storage size and memory usage by nearly half compared 32-bit floats. This efficiency comes with minimal loss in precision, making half-precision vectors beneficial for applications dealing with large datasets or facing memory constraints.
 
@@ -539,8 +534,6 @@ Jaccard distance (`<%>`) is also supported with binary vector embeddings.
 
 ## Binary quantization
 
-Support for binary quantization was added in `pgvector` 0.7.0.
-
 Binary quantization is a process that transforms dense or sparse embeddings into binary representations by thresholding vector dimensions to either 0 or 1.
 
 Use expression indexing for binary quantization:
@@ -566,8 +559,6 @@ SELECT * FROM (
 ## Sparse vectors
 
 Sparse vectors have a large number of dimensions, where only a small proportion are non-zero.
-
-Support for sparse vectors was added in `pgvector` 0.7.0.
 
 Use the `sparsevec` type to store sparse vectors:
 

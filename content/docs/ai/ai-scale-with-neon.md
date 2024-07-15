@@ -1,15 +1,13 @@
 ---
 title: Scale your AI application with Neon
-subtitle: Learn how to scale your AI application with Neon
+subtitle: Scale your AI application with Neon's Autoscaling and Read Replica features
 enableTableOfContents: true
-updatedOn: '2024-01-10T18:34:05.849Z'
+updatedOn: '2024-07-15T14:10:09.615Z'
 ---
 
 You can scale your AI application built on Postgres with `pgvector` in the same way you would any Postgres app: Vertically with added CPU, RAM, and storage, or horizontally with read replicas.
 
-## Verticle scaling
-
-Neon supports compute sizes ranging from .025 vCPU with 1 GB RAM up to 8 vCPU with 32 GB RAM.
+In Neon, scaling vertically is a matter of selecting the desired compute size. Neon supports compute sizes ranging from .025 vCPU with 1 GB RAM up to 10 vCPU with 40 GB RAM.
 
 | Compute Units (CU) | vCPU | RAM   | maintenance_work_mem |
 | :----------------- | :--- | :---- | :------------------- |
@@ -23,10 +21,12 @@ Neon supports compute sizes ranging from .025 vCPU with 1 GB RAM up to 8 vCPU wi
 | 6                  | 6    | 24 GB | 402 MB               |
 | 7                  | 7    | 28 GB | 470 MB               |
 | 8                  | 8    | 32 GB | 537 MB               |
+| 9                  | 9    | 36 GB | 604 MB               |
+| 10                 | 10   | 40 GB | 671 MB               |
 
-In Neon, scaling vertically is a matter of selecting the desired compute size. See [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint) for instructions. Available compute sizes differ according to your Neon plan. The Neon Free Tier supports computes with 0.25 vCPU and 1 GB RAM. The Launch plan offers compute sizes up to 4 vCPU with 16 GB RAM. Larger computes are available on the Scale plan. See [Neon plans](/docs/introduction/plans).
+See [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint) to learn how to configure your compute size. Available compute sizes differ according to your Neon plan. The Neon Free Tier supports computes with 0.25 vCPU and 1 GB RAM. The Launch plan offers compute sizes up to 4 vCPU with 16 GB RAM. Larger computes are available on the Scale plan. See [Neon plans](/docs/introduction/plans).
 
-To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session beyond the preconfigured default shown in the table above with a command similar to the following:
+To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session beyond the preconfigured default shown in the table above with a command similar to this:
 
 ```sql
 SET maintenance_work_mem='10 GB';
@@ -34,7 +34,7 @@ SET maintenance_work_mem='10 GB';
 
 The recommended `maintenance_work_mem` setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GiB is less than 50% of the RAM available for that compute size.
 
-### Autoscaling
+## Autoscaling
 
 You can also enable Neon's autoscaling feature for automatic scaling of compute resources (vCPU and RAM). Neon's _Autoscaling_ feature automatically scales up compute on demand in response to application workload and down to zero on inactivity.
 
@@ -44,16 +44,16 @@ Enabling autoscaling is also recommended for initial data loads and memory-inten
 
 To learn more about Neon's autoscaling feature and how to enable it, refer to our [Autoscaling guide](/docs/introduction/autoscaling).
 
-### Storage
+## Storage
 
-Neon's data storage allowances differ by plan. See [Neon plans](/docs/introduction/plans).
+Neon's data storage allowances differ by plan. The Free plan offers 512 MB of storage. The Launch and Scale plans support larger data sizes and purchasing additional units of storage. See [Neon plans](/docs/introduction/plans).
 
-## Horizontal scaling with read replicas
+## Read replicas
 
-Neon supports read replicas, which are independent read-only compute instances designed to perform read operations on the same data as your read-write computes. Read replicas do not replicate data across database instances. Instead, read requests are directed to a single source. This architecture enables read replicas to be created instantly, and because data is read from a single source, there are no additional storage costs.
+Neon supports read replicas, which are independent read-only compute instances designed to perform read operations on the same data as your read-write computes. Read replicas do not replicate data across database instances. Instead, read requests are directed to the same data source. This architecture enables read replicas to be created instantly, enabling you to scale out CPU and RAM, but because data is read from a single source, there are no additional storage costs.
 
 Since vector similarity search is a read-only workload, you can leverage read replicas to offload reads from your read-write compute instance to a dedicated compute when deploying AI applications. After you create a read replica, you can simply swap out your current Neon connecting string for the read replica connection string, which makes deploying a read replica for your AI application very simple.
 
-Neon's read replicas support the same compute sizes outlined above and autoscaling.
+Neon's read replicas support the same compute sizes outlined above. Read replicas also support autoscaling.
 
 To learn more about the Neon read replicas, see [read replicas](/docs/introduction/read-replicas) and refer to our [Working with Neon read replicas](/docs/guides/read-replica-guide) guide.

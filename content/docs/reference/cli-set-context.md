@@ -2,7 +2,7 @@
 title: Neon CLI commands — set-context
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.897Z'
+updatedOn: '2024-07-05T18:43:27.663Z'
 ---
 
 ## Before you begin
@@ -12,7 +12,7 @@ updatedOn: '2024-06-30T14:35:12.897Z'
 
 ## The `set-context` command
 
-This command sets a background context for your CLI sessions, letting you perform project or branch-specific actions without having to specify the project or branch id in every command. Using the `context-file` parameter, you can save the context to a file of your choice. If you don't specify a file, a default `.neon` file is saved to the current directory. You can switch contexts by providing different files.
+This command sets a background context for your CLI sessions, letting you perform project or branch-specific actions without having to specify the project id in every command. Using the `context-file` parameter, you can save the context to a file of your choice. If you don't specify a file, a default `.neon` file is saved to the current directory. You can switch contexts by providing different files.
 
 The context remains in place until you reset to a new context or remove the `context-file`.
 
@@ -45,7 +45,6 @@ The `set-context` command requires you set at least one of these options:
 | Option           | Description        | Type   |                                     Required                                      |
 | ---------------- | ------------------ | ------ | :-------------------------------------------------------------------------------: |
 | `--project-id`   | Project ID         | string | Sets the identified project as the context until you reset or remove context-file |
-| `--branch`       | Branch ID or name  | string | Sets the identified branch as the context until you reset or remove context-file  |
 | `--context-file` | path and file name | string |              Creates a file that holds project-id and branch context              |
 
 [Global options](/docs/reference/neon-cli#global-options) are also supported.
@@ -114,22 +113,21 @@ These two `branches list` commands demonstrate the use of different contexts in 
 
 ### Setting context when creating a new project
 
-Let's say you want to create a new project called `MyLatest`. You can automatically set the project ID and default branch ID context at the same time as you create the project.
+Let's say you want to create a new project called `MyLatest`. You can automatically set the project ID at the same time as you create the project.
 
 ```bash
 neon projects create --name MyLatest --set-context
 ```
 
-This creates a hidden file with the following context details:
+This creates a hidden `.neon` file by default with the following context:
 
 ```json
 {
-  "projectId": "quiet-water-76237589",
-  "branchId": "br-still-wind-46531853"
+  "projectId": "quiet-water-76237589"
 }
 ```
 
-You can now use any command that would normally require an additional `--project-id` or `branch` parameter and the command will default to this context.
+You can now use any command that would normally require an additional `--project-id` parameter and the command will default to this context.
 
 <Admonition type="note">
 Neon does not save any confidential information to the context file (for example, auth tokens). You can safely commit this file to your repository or share with others.
