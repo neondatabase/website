@@ -86,7 +86,6 @@ Learn how to integrate Neon Postgres with LLMs and AI platforms.
 
 </DetailIconCards>
 
-
 ## AI apps built with Neon
 
 AI applications built with Neon Postgres that you can reference as code examples or inspiration.

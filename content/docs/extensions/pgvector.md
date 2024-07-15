@@ -1,6 +1,6 @@
 ---
 title: The pgvector extension
-subtitle: Enable Postgres as a vector store with the pgvector extension 
+subtitle: Enable Postgres as a vector store with the pgvector extension
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.371Z'
 ---
