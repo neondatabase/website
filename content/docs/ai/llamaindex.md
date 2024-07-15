@@ -9,7 +9,7 @@ LlamaIndex is a popular framework for working with AI, Vectors, and embeddings. 
 
 ## Initialize Postgres Vector Store
 
-LlamaIndex simplifies the complexity of managing document insertion and embeddings generation using vector stores by providing a streamlined methods for these tasks.
+LlamaIndex simplifies the complexity of managing document insertion and embeddings generation using vector stores by providing streamlined methods for these tasks.
 
 Here's how you can initialize Postgres Vector with LlamaIndex:
 
