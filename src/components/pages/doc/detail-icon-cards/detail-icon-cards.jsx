@@ -42,11 +42,14 @@ import Hourglass from './images/hourglass.inline.svg';
 import Import from './images/import.inline.svg';
 import Invert from './images/invert.inline.svg';
 import Ladder from './images/ladder.inline.svg';
+import LangChain from './images/langchain.inline.svg';
 import Laptop from './images/laptop.inline.svg';
+import LlamaIndex from './images/llamaindex.inline.svg';
 import LockLandscape from './images/lock-landscape.inline.svg';
 import Metrics from './images/metrics.inline.svg';
 import Neon from './images/neon.inline.svg';
 import Network from './images/network.inline.svg';
+import Ollama from './images/ollama.inline.svg';
 import OpenAI from './images/openai.inline.svg';
 import Perfomance from './images/perfomance.inline.svg';
 import Postgres from './images/postgres.inline.svg';
@@ -116,10 +119,13 @@ const icons = {
   invert: Invert,
   ladder: Ladder,
   laptop: Laptop,
+  langchain: LangChain,
+  llamaindex: LlamaIndex,
   'lock-landscape': LockLandscape,
   metrics: Metrics,
   neon: Neon,
   network: Network,
+  ollama: Ollama,
   openai: OpenAI,
   perfomance: Perfomance,
   postgres: Postgres,
