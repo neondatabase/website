@@ -17,8 +17,8 @@ The **Neon AI Starter Kit** includes:
 
 - Neon Postgres with the latest version of the Postgres [pgvector](https://neon.tech/docs/extensions/pgvector) extension for storing vector embeddings
 - A variety of hackable, pre-built [AI starter apps](#ai-starter-apps):
-  - AI Chatbot
-  - RAG chatbot
+  - AI chat
+  - RAG chat
   - Semantic search
   - Hybrid search
   - Reverse image search
