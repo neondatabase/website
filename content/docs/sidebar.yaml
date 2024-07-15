@@ -579,7 +579,7 @@
       items:
         - title: Optimize pgvector search
           slug: ai/ai-vector-search-optimization
-        - title: Scale AI apps with Neon
+        - title: Scale with Neon
           slug: ai/ai-scale-with-neon
     - title: AI integrations
       items: 
