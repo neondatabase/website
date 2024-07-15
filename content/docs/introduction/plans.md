@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2024-06-20T17:29:55.110Z'
+updatedOn: '2024-07-05T18:43:27.658Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
@@ -125,7 +125,7 @@ The Scale plan includes the following usage allowances:
 
 Scale plan users have access to [extra compute, storage, and projects](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
-| Extra usage type   | Clost                                                                 |
+| Extra usage type   | Cost                                                                  |
 | ------------------ | --------------------------------------------------------------------- |
 | **Extra Storage**  | Billed for in units of 10 GiB at $15 per unit, prorated for the month |
 | **Extra Compute**  | Billed by compute hour at $0.16 per hour                              |
