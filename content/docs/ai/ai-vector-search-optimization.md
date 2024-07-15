@@ -6,11 +6,13 @@ enableTableOfContents: true
 updatedOn: '2024-07-15T14:10:09.615Z'
 ---
 
-How do you properly use `pgvector`? Should you use an index and what type? What parameters yield the best performance?
+This guide explores how to effectively use `pgvector` for vector similarity searches in your AI applications. We'll address the following key questions:
 
-In this guide, we explore the questions above to determine how you should use `pgvector` in your applications.
+1. How to profile your vector search queries, when using `pgvector`?
+2. When to use indexes and tradeoffs between the available options?
+3. Which parameters to tune for best performance?
 
-## Sequential scans with pgvector
+We'll examine sequential scans, HNSW indexing, and IVFFlat indexing, providing benchmarks and practical recommendations for various dataset sizes. This will help you optimize `pgvector` queries in your Neon database for both accuracy and speed.
 
 Without indexes, `pgvector` performs a sequential scan on the database and calculates the distance between the query vector and all vectors in the table. This approach does an exact search and guarantees 100% **recall**, but it can be costly with large datasets.
 
@@ -52,7 +54,7 @@ Otherwise, consider adding an index for better performance.
 
 ## Indexing with HNSW
 
-HNSW is a graph-based approach to indexing multi-dimensional data. It constructs a multi-layered graph, where each layer is a subset of the previous one. During a search, the algorithm navigates through the graph from the top layer to the bottom to quickly find the nearest neighbor. An HNSW graph is known for its superior performance in terms of speed and accuracy.
+HNSW is a graph-based approach to indexing multi-dimensional data. It constructs a multi-layered graph, where each layer is a subset of the previous one. During a vector similarity search, the algorithm navigates through the graph from the top layer to the bottom to quickly find the nearest neighbor. An HNSW graph is known for its superior performance in terms of speed and accuracy.
 
 <Admonition type="note">
 An HNSW index performs better than IVFFlat (in terms of speed-recall tradeoff) and can be created without any data in the table since there isn’t a training step like there is for an IVFFlat index. However, HNSW indexes have slower build times and use more memory.
@@ -100,7 +102,11 @@ SELECT ...
 COMMIT;
 ```
 
-In summary, to prioritize search speed over accuracy, use lower values for `m` and `ef_search`. Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `ef_search`. A higher `ef_construction` value builds an index capable of more accurate search results at the cost of index build time.
+In summary:
+
+- To prioritize search speed over accuracy, use lower values for `m` and `ef_search`.
+- Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `ef_search`.
+- Using a higher value for `ef_construction` yields more accurate search results at the cost of index build time.
 
 ## Indexing with IVFFlat
 

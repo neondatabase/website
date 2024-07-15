@@ -5,16 +5,17 @@ enableTableOfContents: true
 updatedOn: '2024-07-15T14:10:09.610Z'
 ---
 
-A Jupyter Notebook is an open-source web application that allows you to create and share documents containing live code, equations, visualizations, and narrative text.
+A Jupyter Notebook is an open-source web application that allows you to create and share documents containing live code, equations, visualizations, and narrative text. Azure Data Studio supports Jupyter Notebooks, enabling users to combine SQL queries, Python code, and markdown text in a single interactive document.
 
-This guide describes how to create a new notebook in Azure Data Studio, connect to a Neon database, install the `pgvector` extension to enable Neon as a vector store, and run a vector search query.
+This guide describes how to create a new python notebook in Azure Data Studio, connect to a Neon database, install the `pgvector` extension to enable Neon as a vector store, and run a vector search query.
 
 ## Prerequisites
 
-To perform the steps in this guide, you require:
+To perform the steps in this guide, you will require:
 
-- [Azure Data Studio](https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio?tabs=win-install%2Cwin-user-install%2Credhat-install%2Cwindows-uninstall%2Credhat-uninstall)
-- a Neon database for storing vectors. You can use the ready-to-use `neondb` database or create your own. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
+- Azure Data Studio - Download the latest version of Azure Data Studio for your operating system [here](https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio).
+
+- A Neon account - If you do not have one, sign up at [Neon](https://console.neon.tech/signup). Your Neon project comes with a ready-to-use Postgres database named `neondb`. You can use it, or create your own by following the instructions [here](/docs/manage/databases#create-a-database).
 
 ## Retrieve your Neon database connection string
 
@@ -53,14 +54,14 @@ You can create cells containing Python code that you can run in place by clickin
 
 After you've set up Azure Data Studio and have created a notebook, you can use the following basic example to get started with Neon and `pgvector`.
 
-### Install the psycopg2 driver
+### Install the psycopg driver
 
-psycopg2 is a popular Postgres database adapter for the Python programming language. It allows Python applications to connect to and interact with Postgres databases.
+psycopg is a popular Postgres database adapter for the Python programming language. It allows Python applications to connect to and interact with Postgres databases.
 
-Install the `psycopg2` adapter by adding and executing the following code cell:
+Install the `psycopg` adapter by adding and executing the following code cell:
 
 ```python
-!pip install psycopg2
+!pip install psycopg
 ```
 
 ### Connect to your database
@@ -69,13 +70,13 @@ Install the `psycopg2` adapter by adding and executing the following code cell:
 
    ```python shouldWrap
    import os
-   import psycopg2
+   import psycopg
 
    # Provide your Neon connection string
    connection_string = "postgres://[user]:[password]@[neon_hostname]/[dbname]"
 
    # Connect using the connection string
-   connection = psycopg2.connect(connection_string)
+   connection = psycopg.connect(connection_string)
 
    # Create a new cursor object
    cursor = connection.cursor()
@@ -142,7 +143,7 @@ Install the `psycopg2` adapter by adding and executing the following code cell:
 1. Add a codeblock to perform a vector similarity search.
 
    ```python shouldWrap
-   cursor.execute("SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 3;")
+   cursor.execute("SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 1;")
    all_data = cursor.fetchall()
    print(all_data)
    ```
