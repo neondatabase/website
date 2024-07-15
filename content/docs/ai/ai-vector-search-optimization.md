@@ -39,7 +39,7 @@ You can see in the plan that the query performs a sequential scan (`Seq Scan`) o
 
 To understand how queries perform at scale, we tested sequential scan vector searches with `pgvector` on subsets of the [GIST-960 dataset](http://corpus-texmex.irisa.fr/) with 10k, 50k, 100k, 500k, and 1M rows using a Neon database instance with 4 vCPUs and 16 GB of RAM.
 
-The sequential scan search performed reasonably well for tables with 10k rows (~36ms). However, sequential scans start to become costly at 50k rows. 
+The sequential scan search performed reasonably well for tables with 10k rows (~36ms). However, sequential scans start to become costly at 50k rows.
 
 So, when should you use sequential scans rather than defining an index?
 
