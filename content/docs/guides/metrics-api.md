@@ -17,9 +17,9 @@ Here are the different ways to retrieve these metrics, depending on how you want
 | [Billing period project-level metrics](https://api-docs.neon.tech/reference/listprojectsconsumption)   | Offers consumption metrics for each project in an account for the current billing period | All plans         |
 | [Single project metrics](https://api-docs.neon.tech/reference/getproject)                                   | Retrieves detailed metrics and quota information for a specific project                                  | All plans         |
 
-## Get cumulative account metrics
+## Get account-level aggregated metrics
 
-Using a `GET` request from the [Get account consumption metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)), you can find total usage across all projects in your organization. This provides a comprehensive view of consumption metrics accumulated for the billing period.
+Using the [Get account consumption metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)), you can find total usage across all projects in your organization. This provides a comprehensive view of consumption metrics accumulated for the billing period.
 
 Here is the URL in the Neon API where you can get account-level metrics:
 
@@ -37,9 +37,9 @@ Include the unique `org_id` for your organization to retrieve account metrics fo
 Organizations are currently in private preview. For more information about this upcoming feature, see [Organizations](/docs/manage/organizations).
 </Admonition>
 
-### Set a date range across multiple billing periods
+### Set a date range for granular results
 
-You can set `from` and `to` query parameters, plus a level of  to define a time range that can span across multiple billing periods.
+You can set `from` and `to` query parameters, plus a level of granularity to define a time range that can span across multiple billing periods.
 
 - `from` — Sets the start date and time of the time period for which you are seeking metrics.
 - `to` — Sets the end date and time for the interval for which you desire metrics.
@@ -47,77 +47,9 @@ You can set `from` and `to` query parameters, plus a level of  to define a time 
 
 The response is organized by periods and consumption data within the specified time range.
 
-Here is an example query that returns metrics from June 30th to July 2nd, 2024. Time values must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
+[Details on setting a date range](#details-on-setting-a-date-range)
 
-```bash shouldWrap
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/account?from=2024-06-30T15%3A30%3A00Z&to=2024-07-02T15%3A30%3A00Z&granularity=hourly&org_id=org-ocean-art-12345678' \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
-```
-
-And here is a sample response:
-
-<details>
-<summary>Response body</summary>
-
-```json
-{
-  "periods": [
-    {
-      "period_id": "random-period-abcdef",
-      "consumption": [
-        {
-          "timeframe_start": "2024-06-30T15:00:00Z",
-          "timeframe_end": "2024-06-30T16:00:00Z",
-          "active_time_seconds": 147452,
-          "compute_time_seconds": 43215,
-          "written_data_bytes": 111777920,
-          "synthetic_storage_size_bytes": 41371988928
-        },
-        {
-          "timeframe_start": "2024-06-30T16:00:00Z",
-          "timeframe_end": "2024-06-30T17:00:00Z",
-          "active_time_seconds": 147468,
-          "compute_time_seconds": 43223,
-          "written_data_bytes": 110483584,
-          "synthetic_storage_size_bytes": 41467955616
-        }
-        // ... More consumption data
-      ]
-    },
-    {
-      "period_id": "random-period-ghijkl",
-      "consumption": [
-        {
-          "timeframe_start": "2024-07-01T00:00:00Z",
-          "timeframe_end": "2024-07-01T01:00:00Z",
-          "active_time_seconds": 145672,
-          "compute_time_seconds": 42691,
-          "written_data_bytes": 115110912,
-          "synthetic_storage_size_bytes": 42194712672
-        },
-        {
-          "timeframe_start": "2024-07-01T01:00:00Z",
-          "timeframe_end": "2024-07-01T02:00:00Z",
-          "active_time_seconds": 147464,
-          "compute_time_seconds": 43193,
-          "written_data_bytes": 110078200,
-          "synthetic_storage_size_bytes": 42291858520
-        }
-        // ... More consumption data
-      ]
-    }
-    // ... More periods
-  ]
-}
-```
-</details>
-
-### Including deprecated metrics in your results
-tbd
-
-## Get granular project-level metrics
+## Get granular project-level metrics for your account
 
 You can also get similar daily, hourly, or monthly metrics across a selected time period, but broken out for each individual project that belongs to your organization.
 
@@ -185,13 +117,22 @@ curl --request GET \
 
 </details>
 
-## Get project-level metrics for the current billing period
+The response is organized by periods and consumption data within the specified time range.
+
+[Details on setting a date range](#details-on-setting-a-date-range)
+
+### Pagination
+
+To control pagination (number of results per response), you can include these query parameters:
+
+- `limit` — sets the number of project objects to be included in the response.
+- `cursor` — by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
+
+[Details on pagination](#details-on-pagination)
+
+## Get project-level metrics for your account by billing period
 
 Use the [Consumption API](https://api-docs.neon.tech/reference/listprojectsconsumption) to get a full list of key consumption metrics for all the projects in your Neon account in one request. You can specify a date range to get metrics from across multiple billing periods and control pagination for large result sets.
-
-<Admonition type="warning" title="Preview API">
-This functionality is part of the preview API and is subject to change in the future.
-</Admonition>
 
 Here is the URL in the Neon API where you can get details for all projects in your account:
 
@@ -199,9 +140,9 @@ Here is the URL in the Neon API where you can get details for all projects in yo
 https://console.neon.tech/api/v2/consumption/projects
 ```
 
-This API endpoint accepts the following query parameters: `from`,`to`, `limit`, and `cursor`.
+This API endpoint accepts the following query parameters: `from`, `to`, `limit`, and `cursor`.
 
-## Set a date range across multiple billing periods
+### Set a date range across multiple billing periods
 
 You can set `from` and `to` query parameters to define a time range that can span across multiple billing periods.
 
@@ -279,29 +220,9 @@ Key details:
 
 - The `period_id` key and `previous_period_id` are unique values used to identify and connect periods across the time range.
 - The `period_start` and `period_end` keys show the dates for that particular billing period. A `null` value indicates that the object is for the current billing period.
-- The `cursor` object under `pagination` shows the last project Id in the response. See more about pagination in the next section.
+- The `cursor` object under `pagination` shows the last project Id in the response. See [Details on pagination](#details-on-pagination) for more.
 
-## Control pagination for large result sets
-
-To control pagination (number of results per response), you can include these query parameters:
-
-- `limit` &#8212; sets the number of project objects to be included in the response
-- `cursor` &#8212; by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
-
-Here is an example `GET` request asking for the next 100 projects, starting with project id `divine-tree-77657175`:
-
-```bash shouldWrap
-curl --request GET \
-     --url https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100\
-     --header 'Accept: application/json' \
-     --header "Authorization: Bearer $NEON_API_KEY" | jq
-```
-
-<Admonition type="note">
-To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
-</Admonition>
-
-## Get metrics for a single project
+## Get metrics for a single specified project
 
 Using a `GET` request from the Neon API (see [Get project details](https://api-docs.neon.tech/reference/getproject)), you can find the following consumption details for a given project:
 
@@ -383,3 +304,105 @@ Looking at this response, here are some conclusions we can draw:
 - **This project is _1 day away_ from a quota refresh.**
 
   If today's date is _October 31st, 2023_, and the `consumption_period_end` parameter is _2023-11-01T00:00:00Z_ (November 1st, 2023), then the project has _1 day_ left before all quota parameters (except for `logical_byte_size`) are refreshed.
+
+## Details on setting a date range
+
+This section applies to the following metrics output types: [Account-level aggregated metrics](#get-account-level-aggregated-metrics), and [Granular project-level metrics for your account](#get-granular-project-level-metrics-for-your-account).
+
+You can set `from` and `to` query parameters, plus a level of granularity to define a time range that can span across multiple billing periods.
+
+- `from` — Sets the start date and time of the time period for which you are seeking metrics.
+- `to` — Sets the end date and time for the interval for which you desire metrics.
+- `granularity` — Sets the level of granularity for the metrics, such as `hourly`, `daily`, or `monthly`.
+
+The response is organized by periods and consumption data within the specified time range.
+
+Here is an example query that returns metrics from June 30th to July 2nd, 2024. Time values must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
+
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/consumption_history/account?from=2024-06-30T15%3A30%3A00Z&to=2024-07-02T15%3A30%3A00Z&granularity=hourly&org_id=org-ocean-art-12345678' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+And here is a sample response:
+
+<details>
+<summary>Response body</summary>
+
+```json
+{
+  "periods": [
+    {
+      "period_id": "random-period-abcdef",
+      "consumption": [
+        {
+          "timeframe_start": "2024-06-30T15:00:00Z",
+          "timeframe_end": "2024-06-30T16:00:00Z",
+          "active_time_seconds": 147452,
+          "compute_time_seconds": 43215,
+          "written_data_bytes": 111777920,
+          "synthetic_storage_size_bytes": 41371988928
+        },
+        {
+          "timeframe_start": "2024-06-30T16:00:00Z",
+          "timeframe_end": "2024-06-30T17:00:00Z",
+          "active_time_seconds": 147468,
+          "compute_time_seconds": 43223,
+          "written_data_bytes": 110483584,
+          "synthetic_storage_size_bytes": 41467955616
+        }
+        // ... More consumption data
+      ]
+    },
+    {
+      "period_id": "random-period-ghijkl",
+      "consumption": [
+        {
+          "timeframe_start": "2024-07-01T00:00:00Z",
+          "timeframe_end": "2024-07-01T01:00:00Z",
+          "active_time_seconds": 145672,
+          "compute_time_seconds": 42691,
+          "written_data_bytes": 115110912,
+          "synthetic_storage_size_bytes": 42194712672
+        },
+        {
+          "timeframe_start": "2024-07-01T01:00:00Z",
+          "timeframe_end": "2024-07-01T02:00:00Z",
+          "active_time_seconds": 147464,
+          "compute_time_seconds": 43193,
+          "written_data_bytes": 110078200,
+          "synthetic_storage_size_bytes": 42291858520
+        }
+        // ... More consumption data
+      ]
+    }
+    // ... More periods
+  ]
+}
+```
+
+</details>
+
+## Details on pagination
+
+This section applies to the following metrics output types: [Granular project-level metrics for your account](#get-granular-project-level-metrics-for-your-account), and [Billing period project-level metrics for your account](#get-project-level-metrics-for-your-account-by-billing-period).
+
+To control pagination (number of results per response), you can include these query parameters:
+
+- `limit` &#8212; sets the number of project objects to be included in the response
+- `cursor` &#8212; by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
+
+Here is an example `GET` request asking for the next 100 projects, starting with project id `divine-tree-77657175`:
+
+```bash shouldWrap
+curl --request GET \
+     --url https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100\
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" | jq
+```
+
+<Admonition type="note">
+To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
+</Admonition>
