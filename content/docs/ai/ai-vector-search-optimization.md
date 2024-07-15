@@ -103,12 +103,12 @@ SET LOCAL hnsw.ef_search = 100;
 SELECT ...
 COMMIT;
 ```
+
 In summary,
 
 - To prioritize search speed over accuracy, use lower values for `m` and `ef_search`.
 - Conversely, to prioritize accuracy over search speed, use a higher value for `m` and `ef_search`.
 - Using a higher value for `ef_construction` yields more accurate search results at the cost of index build time.
-
 
 ## Indexing with IVFFlat
 
@@ -172,4 +172,3 @@ The sequential scan approach of `pgvector` performs well for small datasets but 
 You can optimize searches using HNSW or IVFFlat indexes for approximate nearest neighbor (ANN) search, but HNSW indexes have better query performance than IVFFlat with build time and memory usage tradeoffs.
 
 Be sure to test different index tuning parameter settings to find the right balance between speed and accuracy for your specific use case and dataset.
-
