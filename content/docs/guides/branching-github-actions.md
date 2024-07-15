@@ -231,7 +231,7 @@ outputs:
 
 ## Example applications
 
-The following example applications use GitHub Actions to create and delete branches in Neon.
+The following example applications use GitHub Actions workflows to create and delete branches in Neon.
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/neon_twitter" description="A micro-blogging application that uses GitHub Actions to create and delete a branch with each pull request" icon="github">Neon Twitter app</a>
