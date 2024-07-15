@@ -1,29 +1,50 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import { useState, useRef } from 'react';
 
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 
 import Menu from './menu';
 
-const Sidebar = ({ className = null, sidebar, slug, basePath }) => (
-  <aside
-    className={clsx(
-      'relative left-0 z-50 border-r border-gray-new-94 bg-white dark:border-gray-new-10 dark:bg-black-pure',
-      className
-    )}
-  >
-    <div className="sticky top-0 px-[52px] pt-[18px] xl:px-8">
-      <Link to="/">
-        <span className="sr-only">Neon</span>
-        <Logo className="h-7" width={102} height={28} priority />
-      </Link>
-      <nav className="no-scrollbars relative z-10 mt-8 flex h-[calc(100vh-100px)] overflow-x-hidden overflow-y-scroll pb-16 pt-8">
-        <Menu title="Home" basePath={basePath} slug={slug} items={sidebar} isOpen />
-      </nav>
-    </div>
-  </aside>
-);
+const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
+  const [menuHeight, setMenuHeight] = useState(0);
+  const sidebarRef = useRef(null);
+
+  return (
+    <aside
+      className={clsx(
+        'relative left-0 z-50 border-r border-gray-new-94 bg-white dark:border-gray-new-10 dark:bg-black-pure',
+        className
+      )}
+    >
+      <div className="sticky top-0 px-[52px] pt-[18px] xl:px-8">
+        <Link to="/">
+          <span className="sr-only">Neon</span>
+          <Logo className="h-7" width={102} height={28} priority />
+        </Link>
+        <nav
+          className="no-scrollbars z-10 mt-16 h-[calc(100vh-120px)] overflow-x-hidden overflow-y-scroll"
+          ref={sidebarRef}
+        >
+          <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
+            <Menu
+              title="Home"
+              basePath={basePath}
+              slug={slug}
+              items={sidebar}
+              setMenuHeight={setMenuHeight}
+              sidebarRef={sidebarRef}
+              isOpen
+            />
+          </div>
+        </nav>
+      </div>
+    </aside>
+  );
+};
 
 export const sidebarPropTypes = PropTypes.arrayOf(
   PropTypes.shape({

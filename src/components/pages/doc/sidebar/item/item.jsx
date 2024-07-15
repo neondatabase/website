@@ -75,6 +75,8 @@ const Item = ({
   parentMenu = null,
   onToggleSubmenu = null,
   closeMobileMenu = null,
+  setMenuHeight,
+  sidebarRef,
 }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
@@ -119,6 +121,8 @@ const Item = ({
                 basePath={basePath}
                 parentMenu={parentMenu}
                 closeMobileMenu={closeMobileMenu}
+                setMenuHeight={setMenuHeight}
+                sidebarRef={sidebarRef}
                 onToggleSubmenu={onToggleSubmenu}
               />
             ))}
@@ -163,6 +167,8 @@ const Item = ({
           items={items}
           isOpen={isSubmenuOpen}
           closeMobileMenu={closeMobileMenu}
+          setMenuHeight={setMenuHeight}
+          sidebarRef={sidebarRef}
           isSubMenu
           onClose={handleCloseSubmenu}
         />
@@ -194,6 +200,8 @@ Item.propTypes = {
   }).isRequired,
   onToggleSubmenu: PropTypes.func,
   closeMobileMenu: PropTypes.func,
+  setMenuHeight: PropTypes.func.isRequired,
+  sidebarRef: PropTypes.any.isRequired,
 };
 
 export default Item;

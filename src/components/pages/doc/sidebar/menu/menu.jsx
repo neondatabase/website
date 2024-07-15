@@ -1,9 +1,7 @@
-'use client';
-
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
@@ -22,9 +20,27 @@ const Menu = ({
   isOpen = false,
   onClose = null,
   closeMobileMenu = null,
+  setMenuHeight,
+  sidebarRef,
 }) => {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const LinkTag = parentMenu?.slug ? Link : 'button';
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    let timeout;
+
+    if (isOpen && !isSubmenuOpen && menuRef.current && setMenuHeight) {
+      setMenuHeight(menuRef.current.scrollHeight);
+      timeout = setTimeout(() => {
+        sidebarRef.current?.scrollTo(0, 0);
+      }, 200);
+    }
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isOpen, isSubmenuOpen, setMenuHeight, sidebarRef]);
 
   const handleToggleSubmenu = () => {
     setIsSubmenuOpen((isSubmenuOpen) => !isSubmenuOpen);
@@ -39,7 +55,7 @@ const Menu = ({
     <LazyMotion features={domAnimation}>
       <m.div
         className={clsx(
-          'absolute left-0 top-0 w-full transition-opacity duration-300',
+          'absolute left-0 top-0 w-full pb-16 transition-opacity duration-300',
           isSubMenu && !isOpen && 'pointer-events-none',
           'lg:px-8 lg:pb-8 lg:pt-10 md:px-4'
         )}
@@ -51,6 +67,7 @@ const Menu = ({
           close: { opacity: 0, x: isSubMenu ? '100%' : 0 },
           openSubmenu: { opacity: 1, x: isSubMenu ? 0 : '-100%' },
         }}
+        ref={menuRef}
       >
         {isSubMenu && parentMenu && (
           <div className="mb-2.5 border-b border-gray-new-94 pb-4 dark:border-gray-new-10">
@@ -77,6 +94,8 @@ const Menu = ({
               basePath={basePath}
               parentMenu={{ title, slug }}
               closeMobileMenu={closeMobileMenu}
+              setMenuHeight={setMenuHeight}
+              sidebarRef={sidebarRef}
               onToggleSubmenu={handleToggleSubmenu}
             />
           ))}
@@ -121,7 +140,10 @@ Menu.propTypes = {
   isOpen: PropTypes.bool,
   isSubMenu: PropTypes.bool,
   onClose: PropTypes.func,
+  updateMenuHeight: PropTypes.func,
   closeMobileMenu: PropTypes.func,
+  setMenuHeight: PropTypes.func.isRequired,
+  sidebarRef: PropTypes.any.isRequired,
 };
 
 export default Menu;
