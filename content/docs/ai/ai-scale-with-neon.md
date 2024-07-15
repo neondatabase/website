@@ -54,6 +54,6 @@ Neon supports read replicas, which are independent read-only compute instances d
 
 Since vector similarity search is a read-only workload, you can leverage read replicas to offload reads from your read-write compute instance to a dedicated compute when deploying AI applications. After you create a read replica, you can simply swap out your current Neon connecting string for the read replica connection string, which makes deploying a read replica for your AI application very simple.
 
-Neon's read replicas support the same compute sizes outlined above and also support autoscaling.
+Neon's read replicas support the same compute sizes outlined above. Read replicas also support autoscaling. 
 
 To learn more about the Neon read replicas, see [read replicas](/docs/introduction/read-replicas) and refer to our [Working with Neon read replicas](/docs/guides/read-replica-guide) guide.

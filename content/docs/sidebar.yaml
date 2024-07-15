@@ -575,18 +575,18 @@
       slug: ai/ai-concepts
     - title: The pgvector extension
       slug: extensions/pgvector
-    - title: Prepare your AI app for production
-      items:
-        - title: Optimize pgvector search
-          slug: ai/ai-vector-search-optimization
-        - title: Scale with Neon
-          slug: ai/ai-scale-with-neon
     - title: AI integrations
       items: 
         - title: LangChain
           slug: ai/langchain
         - title: LlamaIndex
           slug: ai/llamaindex
+    - title: Prepare your AI app for production
+      items:
+        - title: Optimize pgvector search
+          slug: ai/ai-vector-search-optimization
+        - title: Scale with Neon
+          slug: ai/ai-scale-with-neon
     - title: AI tools
       items:
         - title: Google Colab

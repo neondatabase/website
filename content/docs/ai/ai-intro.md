@@ -7,16 +7,16 @@ updatedOn: '2024-07-03T07:55:54.360Z'
 
 Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs).
 
-Neon supports the `pgvector` open-source extension, which enables Postgres as a vector database for storing and querying embeddings. This means you can leverage the open-source database that you trust without the hassle of migrating data or adding a third-party vector storage solution.
+Neon supports the `pgvector` open-source extension, which enables Postgres as a vector database for storing and querying embeddings. This means you can leverage the open-source database that you trust as your vector store and forget about migrating data or adding a third-party vector storage solution.
 
 Neon's AI Starter Kit provides resources, starter apps, and examples to help get you started.
 
-<CTA title="Ship faster with Neon's AI Starter Kit" description="Sign up for Neon Postgres and jumpstart your AI application. Our starter apps and resources are designed to help you get up and running quickly." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Ship faster with Neon's AI Starter Kit" description="Sign up for Neon Postgres and jumpstart your AI application. Our starter apps and resources will help you get up and running." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
 The **Neon AI Starter Kit** includes:
 
 - Neon Postgres with the latest version of the Postgres [pgvector](https://neon.tech/docs/extensions/pgvector) extension for storing vector embeddings
-- A variety of hackable, pre-built [AI starter apps](#ai-starter-apps) to get you up and running:
+- A variety of hackable, pre-built [AI starter apps](#ai-starter-apps):
   - AI Chatbot
   - RAG chatbot
   - Semantic search
@@ -33,16 +33,6 @@ The **Neon AI Starter Kit** includes:
 <a href="/docs/ai/ai-concepts" description="Learn how embeddings are used to build AI applications" icon="openai">AI concepts</a>
 
 <a href="/docs/extensions/pgvector" description="Learn about the pgvector Postgres extension" icon="openai">The pgvector extension</a>
-
-</DetailIconCards>
-
-## Preparing your AI app for production
-
-<DetailIconCards>
-
-<a href="ai-vector-search-optimization" description="Optimize pgvector search for better application performance" icon="openai">Optimize pgvector search</a>
-
-<a href="/docs/ai/ai-scale-with-neon" description="Scale your AI app with Neon's Autoscaling and Read Replica features" icon="openai">Scale with Neon</a>
 
 </DetailIconCards>
 
@@ -86,12 +76,23 @@ Learn how to integrate Neon Postgres with LLMs and AI platforms.
 
 </DetailIconCards>
 
+## Preparing your AI app for production
+
+<DetailIconCards>
+
+<a href="ai-vector-search-optimization" description="Optimize pgvector search for better application performance" icon="openai">Optimize pgvector search</a>
+
+<a href="/docs/ai/ai-scale-with-neon" description="Scale your AI app with Neon's Autoscaling and Read Replica features" icon="openai">Scale with Neon</a>
+
+</DetailIconCards>
+
+
 ## AI apps built with Neon
 
 AI applications built with Neon Postgres that you can reference as code examples or inspiration.
 
-<Admonition type="note" title="Feature your app here">
-Share your AI app here. Post it to our **#showcase** channel on [Discord](https://discord.gg/92vNTzKDGp) for consideration.
+<Admonition type="tip" title="Feature your app here">
+Share your AI app on our **#showcase** channel on [Discord](https://discord.gg/92vNTzKDGp) for consideration.
 </Admonition>
 
 <DetailIconCards>
