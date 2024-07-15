@@ -1,8 +1,9 @@
 ---
 title: Optimize pgvector search
-subtitle: Fine-tune parameters for efficient and accurate similarity searches in Postgres
+subtitle: Fine-tune parameters for efficient and accurate similarity searches in
+  Postgres
 enableTableOfContents: true
-updatedOn: '2024-01-10T18:34:05.849Z'
+updatedOn: '2024-07-15T14:10:09.615Z'
 ---
 
 How do you properly use `pgvector`? Should you use an index and what type? What parameters yield the best performance?

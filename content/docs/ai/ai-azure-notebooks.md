@@ -2,7 +2,7 @@
 title: Azure Data Studio Notebooks
 subtitle: Use Azure Data Studio Notebooks with Neon for vector similarity search
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.360Z'
+updatedOn: '2024-07-15T14:10:09.610Z'
 ---
 
 A Jupyter Notebook is an open-source web application that allows you to create and share documents containing live code, equations, visualizations, and narrative text.
