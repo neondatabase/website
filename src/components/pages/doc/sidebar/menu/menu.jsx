@@ -31,8 +31,8 @@ const Menu = ({
     let timeout;
 
     if (isOpen && !isSubmenuOpen && menuRef.current && setMenuHeight) {
-      setMenuHeight(menuRef.current.scrollHeight);
       timeout = setTimeout(() => {
+        setMenuHeight(menuRef.current.scrollHeight);
         sidebarRef.current?.scrollTo(0, 0);
       }, 200);
     }

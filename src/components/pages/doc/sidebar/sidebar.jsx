@@ -16,7 +16,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
   return (
     <aside
       className={clsx(
-        'relative left-0 z-50 border-r border-gray-new-94 bg-white dark:border-gray-new-10 dark:bg-black-pure',
+        'relative left-0 z-40 border-r border-gray-new-94 bg-white dark:border-gray-new-10 dark:bg-black-pure',
         className
       )}
     >
@@ -29,7 +29,10 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
           className="no-scrollbars z-10 mt-16 h-[calc(100vh-120px)] overflow-x-hidden overflow-y-scroll"
           ref={sidebarRef}
         >
-          <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
+          <div
+            className="relative w-full overflow-hidden transition-[height] duration-300"
+            style={{ height: menuHeight }}
+          >
             <Menu
               title="Home"
               basePath={basePath}

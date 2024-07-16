@@ -73,7 +73,7 @@ const InkeepTrigger = ({ className }) => {
       <button
         className={clsx(
           'chat-widget group flex items-center justify-center rounded border border-gray-new-90 bg-gradient-to-b from-white to-gray-new-98 pl-2 pr-3 hover:border-gray-new-70 focus:outline-none',
-          'dark:border-gray-new-10 dark:from-[#1A1C1E] dark:to-[#0F1010] dark:hover:border-gray-new-20',
+          'dark:border-[#272727] dark:from-[#1A1C1E] dark:to-[#0F1010] dark:hover:border-gray-new-20',
           'lg:absolute lg:right-4 lg:top-3 lg:items-center lg:space-x-1 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:text-secondary-8 lg:dark:text-green-45',
           className
         )}

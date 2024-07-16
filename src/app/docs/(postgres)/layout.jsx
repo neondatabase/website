@@ -20,7 +20,7 @@ const PostgresDocsLayout = async ({ children }) => {
         />
 
         <Sidebar
-          className="-mt-[69px] w-[350px] shrink-0 xl:w-[302px] lg:hidden"
+          className="-mt-[65px] w-[350px] shrink-0 xl:w-[302px] lg:hidden"
           sidebar={sidebar}
           slug="index"
           basePath={POSTGRES_DOCS_BASE_PATH}
