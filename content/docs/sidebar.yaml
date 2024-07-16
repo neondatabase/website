@@ -635,6 +635,8 @@
       slug: guides/oauth-integration
     - title: Manage billing with quotas
       slug: guides/partner-billing
+    - title: Getting metrics via API
+      slug: guides/metrics-api
 - title: Community
   slug: community/community-intro
   items:
