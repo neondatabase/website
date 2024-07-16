@@ -11,7 +11,7 @@ updatedOn: '2024-06-14T07:55:54.401Z'
 The Neon GitHub integration is currently in **private preview**. To start using it, request access by contacting our [Customer Success](mailto:customer-success@neon.tech) team and asking to join the private preview.
 </Admonition>
 
-The Neon GitHub integration connects your Neon projects to corresponding GitHub repositories, helping you incorporate your database into your developer workflow. For example, create a database branch for each pull request using GitHub Actions. We’ll provide you with a sample GitHub Actions workflow to help you get started with that.
+The Neon GitHub integration connects your Neon projects to corresponding GitHub repositories, helping you incorporate your database into your developer workflow. For example, create a database branch for each pull request using GitHub Actions. We’ll provide you with a sample GitHub Actions workflow to help you get started.
 
 ## How it works
 
@@ -261,7 +261,7 @@ To disconnect your Neon project:
 
 ## Remove the GitHub integration
 
-Removing the GitHub Integration performs the following actions for all Neon projects that you connected to a GitHub repository using the GitHub integration:
+Removing the GitHub integration performs the following actions for all Neon projects that you connected to a GitHub repository using the GitHub integration:
 
 - Removes the Neon API keys created for Neon-GitHub integrations from your Neon account.
 - Removes GitHub secrets containing the Neon API keys from the associated GitHub repositories.
