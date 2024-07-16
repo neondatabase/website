@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-07-05T18:43:27.662Z'
+updatedOn: '2024-07-12T19:30:23.608Z'
 ---
 
 ## Before you begin
@@ -632,17 +632,32 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                                                                                                                                        | string |                                                     |
 | `--project-id`   | Project ID                                                                                                                                                                                                                                                                           | string | Only if your Neon account has more than one project |
 | `--type`         | Type of compute to add. Choices are `read_only` (the default) or `read_write`. A branch with a read-only compute endpoint is also referred to as a [read replica](/docs/introduction/read-replicas). A branch can have a single read-write and multiple read-only compute endpoints. | string |                                                     |
+| `--cu`           | Sets the compute size in Compute Units. For a fixed size, enter a single number (e.g., "2"). For autoscaling, enter a range with a dash (e.g., "0.5-3").                                                                                                                             | string |                                                     |
 
-#### Example
+#### Examples
 
-```bash
-neon branches add-compute mybranch --type read_only
-┌─────────────────────┬──────────────────────────────────────────────────┐
-│ Id                  │ Host                                             │
-├─────────────────────┼──────────────────────────────────────────────────┤
-│ ep-rough-lab-865061 │ ep-rough-lab-865061.ap-southeast-1.aws.neon.tech │
-└─────────────────────┴──────────────────────────────────────────────────┘
-```
+- Add a read-only compute (a read replica) to a branch:
+
+  ```bash
+  neon branches add-compute mybranch --type read_only
+  ┌─────────────────────┬──────────────────────────────────────────────────┐
+  │ Id                  │ Host                                             │
+  ├─────────────────────┼──────────────────────────────────────────────────┤
+  │ ep-rough-lab-865061 │ ep-rough-lab-865061.ap-southeast-1.aws.neon.tech │
+  └─────────────────────┴──────────────────────────────────────────────────┘
+  ```
+
+- Set the compute size when creating a branch:
+
+  ```bash
+  neon branches add-compute main --cu 2
+  ```
+
+- Set the compute's autoscaling range when creating a branch:
+
+  ```bash
+  neon branches add-compute main --cu 0.5-3
+  ```
 
 ## delete
 

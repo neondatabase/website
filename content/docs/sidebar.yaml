@@ -569,17 +569,30 @@
     - title: Compatibility
       slug: reference/compatibility
 - title: AI & embeddings
+  slug: ai/ai-intro
   items:
-    - title: Introduction
-      slug: ai/ai-intro
     - title: AI concepts
       slug: ai/ai-concepts
-    - title: Scale with Neon
-      slug: ai/ai-scale-with-neon
+    - title: The pgvector extension
+      slug: extensions/pgvector
+    - title: AI integrations
+      items: 
+        - title: LangChain
+          slug: ai/langchain
+        - title: LlamaIndex
+          slug: ai/llamaindex
+    - title: Prepare your AI app for production
+      items:
+        - title: Optimize pgvector search
+          slug: ai/ai-vector-search-optimization
+        - title: Scale with Neon
+          slug: ai/ai-scale-with-neon
     - title: AI tools
       items:
         - title: Google Colab
           slug: ai/ai-google-colab
+        - title: Azure Data Studio Notebooks
+          slug: ai/ai-azure-notebooks
 - title: Command line & SDKs
   items:
     - title: CLI Reference
@@ -609,6 +622,8 @@
           slug: reference/cli-connection-string
         - title: set-context
           slug: reference/cli-set-context
+        - title: create-app
+          slug: reference/cli-create-app
         - title: completion
           slug: reference/cli-completion
     - title: SDKs
