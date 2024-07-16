@@ -19,7 +19,7 @@ Here are the different ways to retrieve these metrics, depending on how you want
 
 ## Get account-level aggregated metrics
 
-Using the [Get account consumption metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)), you can find total usage across all projects in your organization. This provides a comprehensive view of consumption metrics accumulated for the billing period.
+Using the [Get account consumption metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount), you can find total usage across all projects in your organization. This provides a comprehensive view of consumption metrics accumulated for the billing period.
 
 Here is the URL in the Neon API where you can get account-level metrics:
 
