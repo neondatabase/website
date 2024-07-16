@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-07-15T14:10:09.613Z'
 ---
 
-Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used, generated, and stored in POstgres.
+Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used, generated, and stored in Postgres.
 
 ## What are embeddings?
 
