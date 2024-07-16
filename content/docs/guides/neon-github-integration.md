@@ -132,7 +132,7 @@ To add the workflow to your repository:
    - If the `.github/workflows` directory already exists, add the file.
    - If your repository doesn't have a `.github/workflows` directory, add the file `.github/workflows/neon-workflow.yml`. This creates the `.github` and `workflows` directories and the `neon-workflow.yml` file.
 
-   If you need more help with this step, see [Creating your first workflow](https://docs.github.com/en/actions/quickstart#creating-your-first-workflow), in the _GitHub documentation_, for an example.
+   If you need more help with this step, see [Creating your first workflow](https://docs.github.com/en/actions/quickstart#creating-your-first-workflow), in the _GitHub documentation_.
 
    <Admonition type="note">
    For GitHub to discover GitHub Actions workflows, you must save the workflow files in a directory called `.github/workflows` in your repository. You can name the workflow file whatever you like, but you must use `.yml` or `.yaml` as the file name extension.
