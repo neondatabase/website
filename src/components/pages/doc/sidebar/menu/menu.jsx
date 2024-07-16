@@ -20,27 +20,36 @@ const Menu = ({
   isOpen = false,
   onClose = null,
   closeMobileMenu = null,
+  setMenuTitle = null,
   setMenuHeight,
-  sidebarRef,
+  menuWrapperRef,
 }) => {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const LinkTag = parentMenu?.slug ? Link : 'button';
   const menuRef = useRef(null);
 
+  // update title for toggler button
+  useEffect(() => {
+    if (isOpen && !isSubmenuOpen && title && setMenuTitle) {
+      setMenuTitle(title);
+    }
+  }, [isOpen, isSubmenuOpen, setMenuTitle, title]);
+
+  // update menu height and scroll menu to top
   useEffect(() => {
     let timeout;
 
     if (isOpen && !isSubmenuOpen && menuRef.current && setMenuHeight) {
       timeout = setTimeout(() => {
         setMenuHeight(menuRef.current.scrollHeight);
-        sidebarRef.current?.scrollTo(0, 0);
+        menuWrapperRef.current?.scrollTo(0, 0);
       }, 200);
     }
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [isOpen, isSubmenuOpen, setMenuHeight, sidebarRef]);
+  }, [isOpen, isSubmenuOpen, setMenuHeight, menuWrapperRef]);
 
   const handleToggleSubmenu = () => {
     setIsSubmenuOpen((isSubmenuOpen) => !isSubmenuOpen);
@@ -57,7 +66,7 @@ const Menu = ({
         className={clsx(
           'absolute left-0 top-0 w-full pb-16 transition-opacity duration-300',
           isSubMenu && !isOpen && 'pointer-events-none',
-          'lg:px-8 lg:pb-8 lg:pt-10 md:px-4'
+          'lg:px-8 lg:pb-8 lg:pt-4 md:px-5'
         )}
         initial={false}
         animate={isSubmenuOpen ? 'openSubmenu' : isOpen ? 'open' : 'close'}
@@ -70,7 +79,7 @@ const Menu = ({
         ref={menuRef}
       >
         {isSubMenu && parentMenu && (
-          <div className="mb-2.5 border-b border-gray-new-94 pb-4 dark:border-gray-new-10">
+          <div className="mb-2.5 border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
             <LinkTag
               className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
               type={parentMenu.slug ? undefined : 'button'}
@@ -94,8 +103,9 @@ const Menu = ({
               basePath={basePath}
               parentMenu={{ title, slug }}
               closeMobileMenu={closeMobileMenu}
+              setMenuTitle={setMenuTitle}
               setMenuHeight={setMenuHeight}
-              sidebarRef={sidebarRef}
+              menuWrapperRef={menuWrapperRef}
               onToggleSubmenu={handleToggleSubmenu}
             />
           ))}
@@ -142,8 +152,9 @@ Menu.propTypes = {
   onClose: PropTypes.func,
   updateMenuHeight: PropTypes.func,
   closeMobileMenu: PropTypes.func,
+  setMenuTitle: PropTypes.func,
   setMenuHeight: PropTypes.func.isRequired,
-  sidebarRef: PropTypes.any.isRequired,
+  menuWrapperRef: PropTypes.any.isRequired,
 };
 
 export default Menu;

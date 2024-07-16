@@ -75,8 +75,9 @@ const Item = ({
   parentMenu = null,
   onToggleSubmenu = null,
   closeMobileMenu = null,
+  setMenuTitle = null,
   setMenuHeight,
-  sidebarRef,
+  menuWrapperRef,
 }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
@@ -106,9 +107,9 @@ const Item = ({
 
   if (section)
     return (
-      <li className="border-b border-gray-new-94 py-2.5 first:pt-0 last:border-0 dark:border-gray-new-10">
+      <li className="border-b border-gray-new-94 py-2.5 first:pt-0 last:border-0 dark:border-gray-new-10 md:py-[11px] md:dark:border-gray-new-15">
         {section !== 'noname' && (
-          <span className="block py-1.5 text-[10px] font-medium uppercase leading-tight text-gray-new-50">
+          <span className="block py-1.5 text-[10px] font-medium uppercase leading-tight text-gray-new-50 md:py-[7px]">
             {section}
           </span>
         )}
@@ -121,8 +122,9 @@ const Item = ({
                 basePath={basePath}
                 parentMenu={parentMenu}
                 closeMobileMenu={closeMobileMenu}
+                setMenuTitle={setMenuTitle}
                 setMenuHeight={setMenuHeight}
-                sidebarRef={sidebarRef}
+                menuWrapperRef={menuWrapperRef}
                 onToggleSubmenu={onToggleSubmenu}
               />
             ))}
@@ -135,7 +137,7 @@ const Item = ({
     <li className="group/item flex flex-col">
       <LinkTag
         className={clsx(
-          'group flex w-full items-center gap-2 py-1.5 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
+          'group flex w-full items-center gap-2 py-1.5 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200 md:py-[7px]',
           currentSlug === slug
             ? 'font-medium text-black-new dark:text-white'
             : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
@@ -167,8 +169,9 @@ const Item = ({
           items={items}
           isOpen={isSubmenuOpen}
           closeMobileMenu={closeMobileMenu}
+          setMenuTitle={setMenuTitle}
           setMenuHeight={setMenuHeight}
-          sidebarRef={sidebarRef}
+          menuWrapperRef={menuWrapperRef}
           isSubMenu
           onClose={handleCloseSubmenu}
         />
@@ -200,8 +203,9 @@ Item.propTypes = {
   }).isRequired,
   onToggleSubmenu: PropTypes.func,
   closeMobileMenu: PropTypes.func,
+  setMenuTitle: PropTypes.func,
   setMenuHeight: PropTypes.func.isRequired,
-  sidebarRef: PropTypes.any.isRequired,
+  menuWrapperRef: PropTypes.any.isRequired,
 };
 
 export default Item;

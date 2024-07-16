@@ -40,7 +40,9 @@ const variants = {
 
 const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [containerHeight, setContainerHeight] = useState(null);
+  const [menuTitle, setMenuTitle] = useState('Home');
+  const [wrapperHeight, setWrapperHeight] = useState(null);
+  const [menuHeight, setMenuHeight] = useState(null);
   const [buttonTop, setButtonTop] = useState(null);
 
   const { height } = useWindowSize();
@@ -75,7 +77,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
   useEffect(() => {
     if (isOpen) {
       setButtonTop(buttonRef.current.getBoundingClientRect().top);
-      setContainerHeight(height - buttonTop - MOBILE_NAV_HEIGHT);
+      setWrapperHeight(height - buttonTop - MOBILE_NAV_HEIGHT);
     }
   }, [height, isOpen, buttonTop]);
 
@@ -95,14 +97,19 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
       ref={wrapperRef}
     >
       <button
-        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-new-98 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-new-94 active:bg-gray-new-94 dark:bg-gray-new-8 lg:px-8 md:px-4"
+        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start bg-gray-new-98 py-2.5 outline-none transition-colors dark:bg-gray-new-8 lg:px-8 md:px-4"
         type="button"
         ref={buttonRef}
         onClick={toggleMenu}
       >
-        <span>Documentation menu</span>
+        <span className="text-ellipsis">
+          {menuTitle === 'Home' ? 'Documentation menu' : menuTitle}
+        </span>
         <ChevronRight
-          className="absolute right-[37px] top-1/2 -translate-y-1/2 rotate-90 md:right-5"
+          className={clsx(
+            'absolute right-[37px] top-1/2 -translate-y-1/2 rotate-90 transition-transform duration-200 md:right-5',
+            isOpen && 'rotate-[270deg]'
+          )}
           aria-hidden
         />
       </button>
@@ -114,17 +121,25 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
           initial="from"
           animate={controls}
           variants={variants}
-          style={{ height: containerHeight }}
+          style={{ height: wrapperHeight }}
         >
-          <InkeepTrigger />
-          <Menu
-            title="Home"
-            basePath={basePath}
-            slug={slug}
-            items={sidebar}
-            closeMobileMenu={closeMenu}
-            isOpen
-          />
+          <div
+            className="relative w-full overflow-hidden transition-[height] duration-300"
+            style={{ height: menuHeight }}
+          >
+            <InkeepTrigger />
+            <Menu
+              title="Home"
+              basePath={basePath}
+              slug={slug}
+              items={sidebar}
+              closeMobileMenu={closeMenu}
+              setMenuTitle={setMenuTitle}
+              setMenuHeight={setMenuHeight}
+              menuWrapperRef={wrapperRef}
+              isOpen
+            />
+          </div>
         </m.div>
       </LazyMotion>
     </nav>

@@ -11,7 +11,7 @@ import Menu from './menu';
 
 const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
   const [menuHeight, setMenuHeight] = useState(0);
-  const sidebarRef = useRef(null);
+  const menuWrapperRef = useRef(null);
 
   return (
     <aside
@@ -27,7 +27,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
         </Link>
         <nav
           className="no-scrollbars z-10 mt-16 h-[calc(100vh-120px)] overflow-x-hidden overflow-y-scroll"
-          ref={sidebarRef}
+          ref={menuWrapperRef}
         >
           <div
             className="relative w-full overflow-hidden transition-[height] duration-300"
@@ -39,7 +39,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
               slug={slug}
               items={sidebar}
               setMenuHeight={setMenuHeight}
-              sidebarRef={sidebarRef}
+              menuWrapperRef={menuWrapperRef}
               isOpen
             />
           </div>
