@@ -114,6 +114,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/blog/the-non-obviousness-of-postgres-roles',
+        destination: '/blog/postgres-roles',
+        permanent: true,
+      },
+      {
         source: '/2024-plan-updates',
         destination: '/pricing',
         permanent: true,
