@@ -11,9 +11,9 @@ updatedOn: '2024-06-14T07:55:54.401Z'
 The Neon GitHub integration is currently in **private preview**. To start using it, request access by contacting our [Customer Success](mailto:customer-success@neon.tech) team and asking to join the private preview.
 </Admonition>
 
-The Neon GitHub integration installs a GitHub App that connects your Neon project to a GitHub repository by setting a Neon API key secret and Neon project ID variable in your GitHub repository. The integration also provides a sample GitHub Actions workflow that uses the configured secret and variable to create a database branch for each pull request. 
+The Neon GitHub integration installs a GitHub App that connects your Neon project to a GitHub repository by setting a Neon API key secret and Neon project ID variable in your GitHub repository. The integration also provides a sample GitHub Actions workflow that uses the configured secret and variable to create a database branch for each pull request.
 
-The sample workflow is intended as a basic template you can expand on or customize to build your own workflows. 
+The sample workflow is intended as a basic template you can expand on or customize to build your own workflows.
 
 This guide walks you through the following steps:
 
