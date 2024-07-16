@@ -47,7 +47,7 @@ You can set `from` and `to` query parameters, plus a level of granularity to def
 
 The response is organized by periods and consumption data within the specified time range.
 
-[Details on setting a date range](#details-on-setting-a-date-range)
+See [Details on setting a date range](#details-on-setting-a-date-range) for more info.
 
 ## Get granular project-level metrics for your account
 
