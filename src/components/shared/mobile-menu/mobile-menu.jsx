@@ -178,7 +178,7 @@ const MobileMenu = ({ isDarkTheme, isBlogPage = false, isDocPage = false }) => {
 
   return (
     <>
-      <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex md:right-4">
+      <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex lg:gap-x-4 md:right-4">
         {searchIndexName && (
           <Search className="mobile-search" indexName={searchIndexName} isBlog={isBlogPage} />
         )}

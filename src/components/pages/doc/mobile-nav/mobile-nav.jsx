@@ -95,7 +95,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
       ref={wrapperRef}
     >
       <button
-        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-new-98 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-new-94 active:bg-gray-new-94 dark:bg-gray-new-15 lg:px-8 md:px-4"
+        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-new-98 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-new-94 active:bg-gray-new-94 dark:bg-gray-new-8 lg:px-8 md:px-4"
         type="button"
         ref={buttonRef}
         onClick={toggleMenu}
@@ -109,7 +109,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
       <LazyMotion features={domAnimation}>
         <m.div
           className={clsx(
-            'absolute inset-x-0 top-[calc(100%+1px)] z-20 overflow-x-hidden overflow-y-scroll bg-white dark:bg-gray-new-10'
+            'absolute inset-x-0 top-[calc(100%+1px)] z-20 overflow-x-hidden overflow-y-scroll bg-white dark:bg-gray-new-8'
           )}
           initial="from"
           animate={controls}

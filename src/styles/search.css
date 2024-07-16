@@ -7,7 +7,8 @@
   @apply border border-gray-new-90 bg-white bg-[url('/images/search-light.svg')] bg-[left_0.625rem_center] bg-no-repeat;
   @apply transition-colors duration-200 hover:cursor-pointer hover:border-gray-new-70 hover:shadow-none;
   @apply dark:border-[#1D1E20] dark:bg-[#0F1010] dark:bg-[url('/images/search-dark.svg')] dark:text-gray-new-50 dark:hover:border-gray-new-20;
-  @apply lg:mr-6 lg:h-5 lg:w-5 lg:items-start lg:border-0 lg:bg-transparent lg:bg-[top] lg:p-0 dark:lg:bg-transparent md:m-0;
+  @apply lg:mr-6 lg:h-6 lg:w-6 lg:items-start lg:border-0 lg:bg-transparent lg:bg-[url('/images/search-black.svg')] lg:bg-contain lg:bg-[top] lg:p-0 md:m-0 md:-mt-0.5;
+  @apply lg:dark:bg-transparent lg:dark:bg-[url('/images/search-white.svg')];
 
   .DocSearch-Search-Icon {
     @apply hidden;

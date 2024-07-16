@@ -80,7 +80,7 @@ const Menu = ({
               <ChevronBackIcon className="size-4.5" />
               Back to {parentMenu.title}
             </LinkTag>
-            <p className="mt-7 flex w-full items-start gap-2 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white">
+            <p className="mt-7 flex w-full items-start gap-2 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden">
               {Icon && <Icon className="size-5" />}
               {title}
             </p>
