@@ -128,7 +128,7 @@ To control pagination (number of results per response), you can include these qu
 - `limit` — sets the number of project objects to be included in the response.
 - `cursor` — by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
 
-[Details on pagination](#details-on-pagination)
+See [Details on pagination](#details-on-pagination) for more info.
 
 ## Get project-level metrics for your account by billing period
 
