@@ -155,7 +155,7 @@ To view workflow results in GitHub, follow the instructions in [Viewing your wor
 
 ## Building your own GitHub Actions workflow
 
-The sample workflow provided by the GitHub integration serves as a template, which you can expand upon or customize. The workflow uses Neon's create and delete branch GitHub Actions, which you can find here:
+The sample workflow provided by the GitHub integration serves as a template, which you can expand on or customize. The workflow uses Neon's create and delete branch GitHub Actions, which you can find here:
 
 - [Create a Neon Branch](https://github.com/neondatabase/create-branch-action)
 - [Delete a Neon Branch](https://github.com/neondatabase/delete-branch-action)
