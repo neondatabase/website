@@ -257,7 +257,7 @@ To disconnect your Neon project:
 
 ## Remove the GitHub integration
 
-Removing the GitHub performs the following actions for all Neon projects that you connected to a GitHub repository using the GitHub integration:
+Removing the GitHub Integration performs the following actions for all Neon projects that you connected to a GitHub repository using the GitHub integration:
 
 - Removes the Neon API keys created for Neon-GitHub integrations from your Neon account.
 - Removes GitHub secrets containing the Neon API keys from the associated GitHub repositories.
