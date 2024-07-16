@@ -13,7 +13,7 @@ The Neon GitHub integration is currently in **private preview**. To start using 
 
 The Neon GitHub integration installs a GitHub App that connects your Neon project to a GitHub repository by setting a Neon API key secret and Neon project ID variable in your GitHub repository. The integration also provides a sample GitHub Actions workflow that uses the configured secret and variable to create a database branch for each pull request. 
 
-The sample workflow is intended as a basic template you can expand on or customize to suit your specific workflow requirements. 
+The sample workflow is intended as a basic template you can expand on or customize to build your own workflows. 
 
 This guide walks you through the following steps:
 
@@ -98,18 +98,18 @@ jobs:
           branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
           api_key: ${{ secrets.NEON_API_KEY }}
 
-# The step above creates a new Neon branch.
-# You may want to do something with the new branch, such as run migrations, run tests
-# on it, or send the connection details to a hosting platform environment.
-# The branch DATABASE_URL is available to you via:
-# "${{ steps.create_neon_branch.outputs.db_url_with_pooler }}".
-# It's important you don't log the DATABASE_URL as output as it contains a username and
-# password for your database.
-# For example, you can uncomment the lines below to run a database migration command:
-#      - name: Run Migrations
-#        run: npm run db:migrate
-#        env:
-#          DATABASE_URL: "${{ steps.create_neon_branch.outputs.db_url_with_pooler }}"
+  # The step above creates a new Neon branch.
+  # You may want to do something with the new branch, such as run migrations, run tests
+  # on it, or send the connection details to a hosting platform environment.
+  # The branch DATABASE_URL is available to you via:
+  # "${{ steps.create_neon_branch.outputs.db_url_with_pooler }}".
+  # It's important you don't log the DATABASE_URL as output as it contains a username and
+  # password for your database.
+  # For example, you can uncomment the lines below to run a database migration command:
+  #      - name: Run Migrations
+  #        run: npm run db:migrate
+  #        env:
+  #          DATABASE_URL: "${{ steps.create_neon_branch.outputs.db_url_with_pooler }}"
 
   delete_neon_branch:
     name: Delete Neon Branch
