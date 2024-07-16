@@ -2,7 +2,8 @@ import 'styles/globals.css';
 
 import Script from 'next/script';
 
-import { ActiveLabelProvider } from '../components/pages/doc/code-tabs/CodeTabsContext';
+import { ActiveLabelProvider } from 'components/pages/doc/code-tabs/CodeTabsContext';
+import RiveWasm from 'components/shared/rive-wasm';
 
 import { inter, esbuild } from './fonts';
 import ThemeProvider from './provider';
@@ -24,6 +25,8 @@ const RootLayout = ({ children }) => (
         <Script strategy="afterInteractive" src="https://neonapi.io/cb.js" />
       )}
       <link rel="preconnect" href="https://console.neon.tech" />
+      {/* Preload rive wasm, moved to a separate component, because it should be client component to make wasm accessible from client side */}
+      <RiveWasm />
     </head>
     <body>
       <ThemeProvider>
