@@ -10,7 +10,7 @@ import Logo from 'components/shared/logo';
 import Menu from './menu';
 
 const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
-  const [menuHeight, setMenuHeight] = useState(0);
+  const [menuHeight, setMenuHeight] = useState(1000);
   const menuWrapperRef = useRef(null);
 
   return (

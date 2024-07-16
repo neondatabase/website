@@ -42,7 +42,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [menuTitle, setMenuTitle] = useState('Home');
   const [wrapperHeight, setWrapperHeight] = useState(null);
-  const [menuHeight, setMenuHeight] = useState(null);
+  const [menuHeight, setMenuHeight] = useState(1000);
   const [buttonTop, setButtonTop] = useState(null);
 
   const { height } = useWindowSize();
