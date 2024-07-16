@@ -156,9 +156,9 @@ The sample workflow provided by the GitHub integration serves as a template, whi
 - [Create a Neon Branch](https://github.com/neondatabase/create-branch-action)
 - [Delete a Neon Branch](https://github.com/neondatabase/delete-branch-action)
 
-Neon also provides a [Reset a Neon Branch](https://github.com/neondatabase/reset-branch-action) action that resets a database branch to the current state of its parent branch. You might use this action in a feature-development workflow, where you reset a development branch to the current state of your production branch before starting work on a new feature.
+Neon also offers a [Reset a Neon Branch](https://github.com/neondatabase/reset-branch-action) action that allows you to reset a database branch to match the current state of its parent branch. This action is useful in a feature-development workflow, where you may need to reset a development branch to the current state of your production branch before beginning work on a new feature.
 
-To add the reset action to your workflow, you might use code like this, depending on your requirements:
+To incorporate the reset action into your workflow, you can use code like this, tailored to your specific requirements:
 
 ```yaml
 reset_neon_branch:
@@ -182,7 +182,7 @@ reset_neon_branch:
         api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
-The possibilities are numerous. You can use Neon's GitHub Actions in your workflow, create your own actions, or combine Neon's actions with actions of different platforms or services.
+The possibilities are endless. You can integrate Neon's GitHub Actions into your workflow, develop custom actions, or combine Neon's actions with those from other platforms or services.
 
 If you're new to GitHub Actions and workflows, GitHub's [Quickstart for GitHub Actions](https://docs.github.com/en/actions/quickstart) is a good place to start.
 
