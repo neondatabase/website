@@ -96,6 +96,8 @@ _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute e
 | 6                     | 6    | 24 GB |
 | 7                     | 7    | 28 GB |
 | 8                     | 8    | 32 GB |
+| 9                     | 9    | 36 GB |
+| 10                    | 10   | 40 GB |
 
 Neon supports fixed-size and autoscaling compute configurations.
 
@@ -128,6 +130,8 @@ The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_
 | 6                      | 6    | 24 GB | 19.2 GB  | 2703            |
 | 7                      | 7    | 28 GB | 22.4 GB  | 3154            |
 | 8                      | 8    | 32 GB | 25.6 GB  | 3604            |
+| 9                      | 9    | 36 GB | 28.8 GB  | 4000            |
+| 10                     | 10   | 40 GB | 32 GB    | 4000            |
 
 <Admonition type="note">
 Users on paid plans can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
