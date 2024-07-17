@@ -40,7 +40,7 @@ const variants = {
 
 const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [menuTitle, setMenuTitle] = useState('Home');
+  const [activeMenuList, setActiveMenuList] = useState(['Home']);
   const [wrapperHeight, setWrapperHeight] = useState(null);
   const [menuHeight, setMenuHeight] = useState(1000);
   const [buttonTop, setButtonTop] = useState(null);
@@ -103,7 +103,9 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
         onClick={toggleMenu}
       >
         <span className="text-ellipsis">
-          {menuTitle === 'Home' ? 'Documentation menu' : menuTitle}
+          {activeMenuList[activeMenuList.length - 1] === 'Home'
+            ? 'Documentation menu'
+            : activeMenuList[activeMenuList.length - 1]}
         </span>
         <ChevronRight
           className={clsx(
@@ -129,15 +131,16 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
           >
             <InkeepTrigger />
             <Menu
+              depth={0}
               title="Home"
               basePath={basePath}
               slug={slug}
               items={sidebar}
               closeMobileMenu={closeMenu}
-              setMenuTitle={setMenuTitle}
               setMenuHeight={setMenuHeight}
               menuWrapperRef={wrapperRef}
-              isOpen
+              activeMenuList={activeMenuList}
+              setActiveMenuList={setActiveMenuList}
             />
           </div>
         </m.div>

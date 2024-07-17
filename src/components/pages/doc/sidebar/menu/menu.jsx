@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
@@ -10,16 +10,96 @@ import ChevronBackIcon from 'icons/docs/sidebar/chevron-back.inline.svg';
 import Item from '../item';
 import icons from '../item/item';
 
+const Section = ({
+  title,
+  slug,
+  depth,
+  section,
+  items,
+  basePath,
+  setMenuHeight,
+  menuWrapperRef,
+  activeMenuList,
+  setActiveMenuList,
+  closeMobileMenu,
+}) => (
+  <li className="border-b border-gray-new-94 py-2.5 first:pt-0 last:border-0 dark:border-gray-new-10 md:py-[11px] md:dark:border-gray-new-15">
+    {section !== 'noname' && (
+      <span className="block py-1.5 text-[10px] font-medium uppercase leading-tight text-gray-new-50 md:py-[7px]">
+        {section}
+      </span>
+    )}
+    {items && (
+      <ul>
+        {items.map((item, index) => (
+          <Item
+            {...item}
+            key={index}
+            basePath={basePath}
+            closeMobileMenu={closeMobileMenu}
+            setActiveMenuList={setActiveMenuList}
+          >
+            {item.items && (
+              <Menu
+                depth={depth + 1}
+                title={item.title}
+                slug={item.slug}
+                icon={item.icon}
+                items={item.items}
+                basePath={basePath}
+                parentMenu={{ title, slug }}
+                closeMobileMenu={closeMobileMenu}
+                setMenuHeight={setMenuHeight}
+                menuWrapperRef={menuWrapperRef}
+                activeMenuList={activeMenuList}
+                setActiveMenuList={setActiveMenuList}
+              />
+            )}
+          </Item>
+        ))}
+      </ul>
+    )}
+  </li>
+);
+
+Section.propTypes = {
+  depth: PropTypes.number.isRequired,
+  basePath: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  section: PropTypes.string,
+  slug: PropTypes.string,
+  icon: PropTypes.string,
+  tag: PropTypes.string,
+  ariaLabel: PropTypes.string,
+  items: PropTypes.arrayOf(
+    PropTypes.exact({
+      title: PropTypes.string.isRequired,
+      slug: PropTypes.string,
+      tag: PropTypes.string,
+      items: PropTypes.arrayOf(PropTypes.any),
+      ariaLabel: PropTypes.string,
+    })
+  ),
+  parentMenu: PropTypes.exact({
+    title: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+  }).isRequired,
+  closeMobileMenu: PropTypes.func,
+  setMenuHeight: PropTypes.func.isRequired,
+  menuWrapperRef: PropTypes.any.isRequired,
+  activeMenuList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  setActiveMenuList: PropTypes.func.isRequired,
+};
+
 const Menu = ({
   depth,
   title,
   slug,
-  Icon = null,
+  icon = null,
   parentMenu = null,
   basePath,
   items = null,
   closeMobileMenu = null,
-  setMenuTitle = null,
   setMenuHeight,
   menuWrapperRef,
   activeMenuList,
@@ -29,23 +109,13 @@ const Menu = ({
   const LinkTag = parentMenu?.slug ? Link : 'button';
   const menuRef = useRef(null);
   const currentDepth = activeMenuList.length - 1;
+  const Icon = icons[icon];
 
-  const [isActive, setIsActive] = useState(false);
-
-  useEffect(() => {
-    if (activeMenuList.includes(title)) setIsActive(true);
-  }, [title, activeMenuList]);
+  const isActive = activeMenuList.includes(title);
 
   useEffect(() => {
     console.log(title, isActive);
   }, [title, isActive]);
-
-  // update title for toggler button
-  useEffect(() => {
-    if (isActive && title && setMenuTitle) {
-      setMenuTitle(title);
-    }
-  }, [isActive, setMenuTitle, title]);
 
   // update menu height and scroll menu to top
   useEffect(() => {
@@ -105,37 +175,39 @@ const Menu = ({
           </div>
         )}
         <ul className="w-full">
-          {items.map((item, index) => (
-            <Item
-              {...item}
-              key={index}
-              basePath={basePath}
-              parentMenu={{ title, slug }}
-              closeMobileMenu={closeMobileMenu}
-              setMenuTitle={setMenuTitle}
-              setMenuHeight={setMenuHeight}
-              menuWrapperRef={menuWrapperRef}
-              setActiveMenuList={setActiveMenuList}
-            >
-              {item.items && (
-                <Menu
-                  depth={depth + 1}
-                  title={item.title}
-                  slug={item.slug}
-                  Icon={icons[item.icon]}
-                  items={item.items}
-                  basePath={basePath}
-                  parentMenu={{ title, slug }}
-                  closeMobileMenu={closeMobileMenu}
-                  setMenuTitle={setMenuTitle}
-                  setMenuHeight={setMenuHeight}
-                  menuWrapperRef={menuWrapperRef}
-                  activeMenuList={activeMenuList}
-                  setActiveMenuList={setActiveMenuList}
-                />
-              )}
-            </Item>
-          ))}
+          {items.map((item, index) =>
+            item.section ? (
+              <Section
+                key={index}
+                {...item}
+                basePath={basePath}
+                closeMobileMenu={closeMobileMenu}
+                setMenuHeight={setMenuHeight}
+                menuWrapperRef={menuWrapperRef}
+                activeMenuList={activeMenuList}
+                setActiveMenuList={setActiveMenuList}
+              />
+            ) : (
+              <Item key={index} {...item} basePath={basePath} setActiveMenuList={setActiveMenuList}>
+                {item.items && (
+                  <Menu
+                    depth={depth + 1}
+                    title={item.title}
+                    slug={item.slug}
+                    Icon={icons[item.icon]}
+                    items={item.items}
+                    basePath={basePath}
+                    parentMenu={{ title, slug }}
+                    closeMobileMenu={closeMobileMenu}
+                    setMenuHeight={setMenuHeight}
+                    menuWrapperRef={menuWrapperRef}
+                    activeMenuList={activeMenuList}
+                    setActiveMenuList={setActiveMenuList}
+                  />
+                )}
+              </Item>
+            )
+          )}
         </ul>
         {isRootMenu && (
           <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
@@ -160,7 +232,7 @@ Menu.propTypes = {
   depth: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
-  Icon: PropTypes.any,
+  icon: PropTypes.string,
   parentMenu: PropTypes.exact({
     title: PropTypes.string.isRequired,
     slug: PropTypes.string,
@@ -177,7 +249,6 @@ Menu.propTypes = {
   ),
   updateMenuHeight: PropTypes.func,
   closeMobileMenu: PropTypes.func,
-  setMenuTitle: PropTypes.func,
   setMenuHeight: PropTypes.func.isRequired,
   menuWrapperRef: PropTypes.any.isRequired,
   activeMenuList: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -64,17 +64,12 @@ export const icons = {
 const Item = ({
   basePath,
   title,
-  section = null,
   slug = null,
   icon = null,
   tag = null,
   ariaLabel = null,
   items = null,
-  parentMenu = null,
   closeMobileMenu = null,
-  setMenuTitle = null,
-  setMenuHeight,
-  menuWrapperRef,
   setActiveMenuList,
   children,
 }) => {
@@ -94,36 +89,6 @@ const Item = ({
     }
     if (slug && closeMobileMenu) closeMobileMenu();
   };
-
-  if (section)
-    return (
-      <li className="border-b border-gray-new-94 py-2.5 first:pt-0 last:border-0 dark:border-gray-new-10 md:py-[11px] md:dark:border-gray-new-15">
-        {section !== 'noname' && (
-          <span className="block py-1.5 text-[10px] font-medium uppercase leading-tight text-gray-new-50 md:py-[7px]">
-            {section}
-          </span>
-        )}
-        {items && (
-          <ul>
-            {items.map((item, index) => (
-              <Item
-                {...item}
-                key={index}
-                basePath={basePath}
-                parentMenu={parentMenu}
-                closeMobileMenu={closeMobileMenu}
-                setMenuTitle={setMenuTitle}
-                setMenuHeight={setMenuHeight}
-                menuWrapperRef={menuWrapperRef}
-                setActiveMenuList={setActiveMenuList}
-              >
-                {children}
-              </Item>
-            ))}
-          </ul>
-        )}
-      </li>
-    );
 
   return (
     <li className="group/item flex flex-col">
@@ -159,7 +124,6 @@ const Item = ({
 Item.propTypes = {
   basePath: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  section: PropTypes.string,
   slug: PropTypes.string,
   icon: PropTypes.string,
   tag: PropTypes.string,
@@ -173,14 +137,7 @@ Item.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
-  parentMenu: PropTypes.exact({
-    title: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-  }).isRequired,
   closeMobileMenu: PropTypes.func,
-  setMenuTitle: PropTypes.func,
-  setMenuHeight: PropTypes.func.isRequired,
-  menuWrapperRef: PropTypes.any.isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
   children: PropTypes.node,
 };
