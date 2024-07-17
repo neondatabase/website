@@ -1,45 +1,57 @@
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 import Link from 'components/shared/link';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 import ChevronBackIcon from 'icons/docs/sidebar/chevron-back.inline.svg';
 
 import Item from '../item';
+import icons from '../item/item';
 
 const Menu = ({
+  depth,
   title,
   slug,
   Icon = null,
   parentMenu = null,
   basePath,
   items = null,
-  isSubMenu = false,
-  isOpen = false,
-  onClose = null,
   closeMobileMenu = null,
   setMenuTitle = null,
   setMenuHeight,
   menuWrapperRef,
+  activeMenuList,
+  setActiveMenuList,
 }) => {
-  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  const isRootMenu = depth === 0;
   const LinkTag = parentMenu?.slug ? Link : 'button';
   const menuRef = useRef(null);
+  const currentDepth = activeMenuList.length - 1;
+
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    if (activeMenuList.includes(title)) setIsActive(true);
+  }, [title, activeMenuList]);
+
+  useEffect(() => {
+    console.log(title, isActive);
+  }, [title, isActive]);
 
   // update title for toggler button
   useEffect(() => {
-    if (isOpen && !isSubmenuOpen && title && setMenuTitle) {
+    if (isActive && title && setMenuTitle) {
       setMenuTitle(title);
     }
-  }, [isOpen, isSubmenuOpen, setMenuTitle, title]);
+  }, [isActive, setMenuTitle, title]);
 
   // update menu height and scroll menu to top
   useEffect(() => {
     let timeout;
 
-    if (isOpen && !isSubmenuOpen && menuRef.current && setMenuHeight) {
+    if (isActive && menuRef.current && setMenuHeight) {
       timeout = setTimeout(() => {
         setMenuHeight(menuRef.current.scrollHeight);
         menuWrapperRef.current?.scrollTo(0, 0);
@@ -49,14 +61,10 @@ const Menu = ({
     return () => {
       clearTimeout(timeout);
     };
-  }, [isOpen, isSubmenuOpen, setMenuHeight, menuWrapperRef]);
-
-  const handleToggleSubmenu = () => {
-    setIsSubmenuOpen((isSubmenuOpen) => !isSubmenuOpen);
-  };
+  }, [isActive, setMenuHeight, menuWrapperRef]);
 
   const handleClose = () => {
-    onClose();
+    setActiveMenuList((prevList) => prevList.slice(0, -1));
     if (parentMenu?.slug && closeMobileMenu) closeMobileMenu();
   };
 
@@ -64,21 +72,22 @@ const Menu = ({
     <LazyMotion features={domAnimation}>
       <m.div
         className={clsx(
-          'absolute left-0 top-0 w-full pb-16 transition-opacity duration-300',
-          isSubMenu && !isOpen && 'pointer-events-none',
+          'absolute left-0 top-0 w-full pb-16',
+          !isActive && 'pointer-events-none',
+          !isRootMenu && 'translate-x-full',
           'lg:px-8 lg:pb-8 lg:pt-4 md:px-5'
         )}
         initial={false}
-        animate={isSubmenuOpen ? 'openSubmenu' : isOpen ? 'open' : 'close'}
+        animate={isRootMenu ? 'moveMenu' : isActive ? 'open' : 'close'}
         transition={{ ease: 'easeIn' }}
         variants={{
-          open: { opacity: 1, x: isSubMenu ? '100%' : 0 },
-          close: { opacity: 0, x: isSubMenu ? '100%' : 0 },
-          openSubmenu: { opacity: 1, x: isSubMenu ? 0 : '-100%' },
+          open: { opacity: 1 },
+          close: { opacity: 0 },
+          moveMenu: { x: `${currentDepth * -100}%` },
         }}
         ref={menuRef}
       >
-        {isSubMenu && parentMenu && (
+        {!isRootMenu && parentMenu && (
           <div className="mb-2.5 border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
             <LinkTag
               className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
@@ -106,11 +115,29 @@ const Menu = ({
               setMenuTitle={setMenuTitle}
               setMenuHeight={setMenuHeight}
               menuWrapperRef={menuWrapperRef}
-              onToggleSubmenu={handleToggleSubmenu}
-            />
+              setActiveMenuList={setActiveMenuList}
+            >
+              {item.items && (
+                <Menu
+                  depth={depth + 1}
+                  title={item.title}
+                  slug={item.slug}
+                  Icon={icons[item.icon]}
+                  items={item.items}
+                  basePath={basePath}
+                  parentMenu={{ title, slug }}
+                  closeMobileMenu={closeMobileMenu}
+                  setMenuTitle={setMenuTitle}
+                  setMenuHeight={setMenuHeight}
+                  menuWrapperRef={menuWrapperRef}
+                  activeMenuList={activeMenuList}
+                  setActiveMenuList={setActiveMenuList}
+                />
+              )}
+            </Item>
           ))}
         </ul>
-        {!isSubMenu && (
+        {isRootMenu && (
           <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
             <Link
               className={clsx(
@@ -130,6 +157,7 @@ const Menu = ({
 };
 
 Menu.propTypes = {
+  depth: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   Icon: PropTypes.any,
@@ -147,14 +175,13 @@ Menu.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
-  isOpen: PropTypes.bool,
-  isSubMenu: PropTypes.bool,
-  onClose: PropTypes.func,
   updateMenuHeight: PropTypes.func,
   closeMobileMenu: PropTypes.func,
   setMenuTitle: PropTypes.func,
   setMenuHeight: PropTypes.func.isRequired,
   menuWrapperRef: PropTypes.any.isRequired,
+  activeMenuList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  setActiveMenuList: PropTypes.func.isRequired,
 };
 
 export default Menu;

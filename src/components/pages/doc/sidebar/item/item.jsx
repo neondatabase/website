@@ -3,7 +3,6 @@
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 
 import Link from 'components/shared/link';
 import AiIcon from 'icons/docs/sidebar/ai.inline.svg';
@@ -31,9 +30,8 @@ import Support from 'icons/docs/sidebar/support.inline.svg';
 import WhyNeon from 'icons/docs/sidebar/why-neon.inline.svg';
 
 import Tag from '../../tag';
-import Menu from '../menu';
 
-const icons = {
+export const icons = {
   ai: AiIcon,
   api: ApiIcon,
   architecture: ArchitectureIcon,
@@ -58,10 +56,10 @@ const icons = {
   'why-neon': WhyNeon,
 };
 
-const isActiveItem = (items, currentSlug) =>
-  items?.some(
-    ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
-  );
+// const isActiveItem = (items, currentSlug) =>
+//   items?.some(
+//     ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
+//   );
 
 const Item = ({
   basePath,
@@ -73,35 +71,27 @@ const Item = ({
   ariaLabel = null,
   items = null,
   parentMenu = null,
-  onToggleSubmenu = null,
   closeMobileMenu = null,
   setMenuTitle = null,
   setMenuHeight,
   menuWrapperRef,
+  setActiveMenuList,
+  children,
 }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
-  const hasActiveChild = isActiveItem(items, currentSlug);
+  // const hasActiveChild = isActiveItem(items, currentSlug);
   const Icon = icons[icon];
-  const [isSubmenuOpen, setIsSubmenuOpen] = useState(() => hasActiveChild);
 
   const externalSlug = slug && slug.startsWith('http') ? slug : null;
   const docSlug = `${basePath}${slug}/`;
 
   const LinkTag = slug ? Link : 'button';
 
-  const handleOpenSubmenu = () => {
-    setIsSubmenuOpen(true);
-    onToggleSubmenu();
-  };
-
-  const handleCloseSubmenu = () => {
-    setIsSubmenuOpen(false);
-    onToggleSubmenu();
-  };
-
   const handleClick = () => {
-    if (items?.length) handleOpenSubmenu();
+    if (items?.length) {
+      setActiveMenuList((prevList) => [...prevList, title]);
+    }
     if (slug && closeMobileMenu) closeMobileMenu();
   };
 
@@ -125,8 +115,10 @@ const Item = ({
                 setMenuTitle={setMenuTitle}
                 setMenuHeight={setMenuHeight}
                 menuWrapperRef={menuWrapperRef}
-                onToggleSubmenu={onToggleSubmenu}
-              />
+                setActiveMenuList={setActiveMenuList}
+              >
+                {children}
+              </Item>
             ))}
           </ul>
         )}
@@ -159,23 +151,7 @@ const Item = ({
           <ArrowExternalIcon className="text-gray-new-90 dark:text-gray-new-15 lg:hidden" />
         )}
       </LinkTag>
-      {items?.length && (
-        <Menu
-          title={title}
-          slug={slug}
-          Icon={Icon}
-          parentMenu={parentMenu}
-          basePath={basePath}
-          items={items}
-          isOpen={isSubmenuOpen}
-          closeMobileMenu={closeMobileMenu}
-          setMenuTitle={setMenuTitle}
-          setMenuHeight={setMenuHeight}
-          menuWrapperRef={menuWrapperRef}
-          isSubMenu
-          onClose={handleCloseSubmenu}
-        />
-      )}
+      {children}
     </li>
   );
 };
@@ -201,11 +177,12 @@ Item.propTypes = {
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
-  onToggleSubmenu: PropTypes.func,
   closeMobileMenu: PropTypes.func,
   setMenuTitle: PropTypes.func,
   setMenuHeight: PropTypes.func.isRequired,
   menuWrapperRef: PropTypes.any.isRequired,
+  setActiveMenuList: PropTypes.func.isRequired,
+  children: PropTypes.node,
 };
 
 export default Item;
