@@ -1,11 +1,12 @@
 ---
 title: The Neon GitHub integration
-subtitle: Connect Neon Postgres to a GitHub repository and build GitHub Actions workflows
+subtitle: Connect Neon Postgres to a GitHub repository and build GitHub Actions
+  workflows
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-github-app
 tag: coming soon
-updatedOn: '2024-06-14T07:55:54.401Z'
+updatedOn: '2024-07-17T11:46:05.556Z'
 ---
 
 <Admonition type="comingSoon" title="Feature Coming Soon">
