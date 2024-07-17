@@ -949,7 +949,7 @@ SELECT pg_size_pretty(sum(pg_database_size(datname)))
 FROM pg_database;
 ```
 
-Alternatively, you can check the `Data size` value on the **Branches** widget in the Neon Console.
+Alternatively, you can check the **Data size** value on the **Branches** page in the Neon Console, which gives you the data size for the databases on that branch.
 
 <Admonition type="note">
 Data size does not include the [history](/docs/reference/glossary#history) that is maintained in Neon to support features like point-in-time restore.

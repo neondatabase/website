@@ -8,11 +8,11 @@ This topic describes [Storage](#storage), [Compute](#compute), and [Project](#pr
 
 ## Storage
 
-In Neon, your storage is made up of the combined total of these two elements:
+Storage is the total data size and history stored in Neon. It includes the size of all databases in your Neon projects and a history of changes across all of your database branches, which supports point-in-time restore.
 
-- **Data Size**
+- **Data size**
 
-  This is the current amount of data stored in your databases. You can think of this as a _snapshot_ of your database's size at any given moment.
+  This is the current amount of data stored in your databases. You can think of this as a _snapshot_ of your data at any given moment.
 
 - **History**
 

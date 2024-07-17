@@ -198,9 +198,7 @@ To delete a branch:
 
 ## Check the data size
 
-Plan limits define the amount of data you can store.
-
-You can check the logical data size of each branch by viewing the `Data size` value on the **Branches** widget or page in the Neon Console. Alternatively, you can run the following query:
+You can check the logical data size for the databases on a branch by viewing the **Data size** value on the **Branches** page or page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connected to your database:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))
@@ -208,10 +206,6 @@ FROM pg_database;
 ```
 
 Data size does not include [history](/docs/reference/glossary#history).
-
-<Admonition type="info">
-Neon stores data in its own internal format.
-</Admonition>
 
 ## Branching with the Neon CLI
 
