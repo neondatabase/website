@@ -27,6 +27,10 @@ The version of `pg_stat_statements` available on Neon depends on the version of 
 - Postgres 15 - `pg_stat_statements` 1.10
 - Postgres 16 - `pg_stat_statements` 1.10
 
+### Data persistence
+
+In Neon, statistics collected by the `pg_stat_statements` extension are not retained when your Neon compute instance (where Postgres runs) is suspended or restarted. For example, if your compute instance scales down to zero due to inactivity, any existing statistics are lost. New statistics will be gathered once your compute instance restarts. For more details about the lifecycle of a Neon compute instance, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). For information about configuring Neon's autosuspend behavior, see [Autosuspend](/docs/introduction/auto-suspend).
+ 
 ## Enable the `pg_stat_statements` extension
 
 You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
