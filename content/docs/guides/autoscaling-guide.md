@@ -3,7 +3,7 @@ title: Enable Autoscaling in Neon
 subtitle: Learn how to enable Neon's Autoscaling feature to automatically scale compute
   resources on demand
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.384Z'
+updatedOn: '2024-07-16T16:42:29.766Z'
 ---
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current workload, eliminating the need for manual intervention. This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
@@ -59,7 +59,7 @@ To edit a compute endpoint:
 1. Under **Compute size**, use the slider to specify a minimum and maximum compute size.
    ![Autoscaling edit settings](/docs/guides/autoscaling_edit_settings.png)
 
-   Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 8 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs.
+   Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 10 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs.
 
    <Admonition type="note">
    You can configure the autosuspend setting for your compute endpoint at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".

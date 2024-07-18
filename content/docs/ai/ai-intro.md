@@ -2,7 +2,7 @@
 title: AI & Embeddings
 subtitle: Build AI applications with Neon Postgres as your vector database
 enableTableOfContents: true
-updatedOn: '2024-07-15T14:10:09.614Z'
+updatedOn: '2024-07-15T16:00:39.125Z'
 ---
 
 Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs).
@@ -17,8 +17,8 @@ The **Neon AI Starter Kit** includes:
 
 - Neon Postgres with the latest version of the Postgres [pgvector](https://neon.tech/docs/extensions/pgvector) extension for storing vector embeddings
 - A variety of hackable, pre-built [AI starter apps](#ai-starter-apps):
-  - AI Chatbot
-  - RAG chatbot
+  - AI chat
+  - RAG chat
   - Semantic search
   - Hybrid search
   - Reverse image search

@@ -116,11 +116,11 @@
         "title": "Up to 4 vCPU, 16 GB RAM"
       },
       "scale": {
-        "title": "Up to 8 vCPU, 32 GB RAM"
+        "title": "Up to 10 vCPU, 40 GB RAM"
       },
       "enterprise": {
         "title": "Larger sizes",
-        "info": "8+ vCPU, 32+ GB RAM"
+        "info": "10+ vCPU, 40+ GB RAM"
       }
     },
     {

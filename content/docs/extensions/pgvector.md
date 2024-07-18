@@ -2,7 +2,7 @@
 title: The pgvector extension
 subtitle: Enable Postgres as a vector store with the pgvector extension
 enableTableOfContents: true
-updatedOn: '2024-07-15T14:10:09.617Z'
+updatedOn: '2024-07-16T16:42:29.765Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models.
@@ -425,6 +425,8 @@ Like other index types, it’s faster to create an index after loading your init
   | 6                  | 6    | 24 GB | 402 MB               |
   | 7                  | 7    | 28 GB | 470 MB               |
   | 8                  | 8    | 32 GB | 537 MB               |
+  | 9                  | 9    | 36 GB | 604 MB               |
+  | 10                 | 10   | 40 GB | 671 MB               |
 
   To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 

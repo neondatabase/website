@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2024-07-05T18:43:27.658Z'
+updatedOn: '2024-07-16T16:42:29.767Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
@@ -133,7 +133,7 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 
 ### Scale plan features
 
-- Compute up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
+- Compute up to 10 vCPUs and 40 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
 - Advanced Postgres features, including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions
 - Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
 - [Priority support](/docs/introduction/support)

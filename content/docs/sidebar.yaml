@@ -336,7 +336,8 @@
     - title: Develop
       items:
         - title: GitHub integration
-          slug: guides/neon-github-app
+          slug: guides/neon-github-integration
+          tag: coming soon
         - title: Neosync
           items:
             - title: Generate synthetic data
@@ -635,6 +636,8 @@
       slug: guides/oauth-integration
     - title: Manage billing with quotas
       slug: guides/partner-billing
+    - title: Getting metrics via API
+      slug: guides/metrics-api
 - title: Community
   slug: community/community-intro
   items:

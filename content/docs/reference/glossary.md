@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-06-21T14:17:23.478Z'
+updatedOn: '2024-07-16T16:42:29.770Z'
 ---
 
 ## access token
@@ -111,11 +111,11 @@ Connection strings for a Neon databases can be obtained from the **Connection De
 
 ## compute size
 
-The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can have anywhere from .25 to 8 CU. The number of units determines the processing capacity of the compute.
+The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can have anywhere from .25 to 10 CU. The number of units determines the processing capacity of the compute.
 
 ## Compute Unit (CU)
 
-A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 8 CUs. The following table shows the vCPU and RAM for each CU:
+A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 10 CUs. The following table shows the vCPU and RAM for each CU:
 
 | Compute Unit (CU) | vCPU | RAM   |
 | :---------------- | :--- | :---- |
@@ -129,6 +129,8 @@ A unit that measures the processing power or "size" of a Neon compute. A Compute
 | 6                 | 6    | 24 GB |
 | 7                 | 7    | 28 GB |
 | 8                 | 8    | 32 GB |
+| 9                 | 9    | 36 GB |
+| 10                | 10   | 40 GB |
 
 ## compute hours
 
