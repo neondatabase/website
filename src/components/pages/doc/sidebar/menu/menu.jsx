@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
 
 import Link from 'components/shared/link';
+import { DOCS_BASE_PATH } from 'constants/docs';
+import LINKS from 'constants/links';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 import ChevronBackIcon from 'icons/docs/sidebar/chevron-back.inline.svg';
 
-import Item from '../item';
-import icons from '../item/item';
+import { Item, icons } from '../item';
 
 const Section = ({
   title,
@@ -36,8 +37,8 @@ const Section = ({
             {...item}
             key={index}
             basePath={basePath}
-            closeMobileMenu={closeMobileMenu}
             setActiveMenuList={setActiveMenuList}
+            closeMobileMenu={closeMobileMenu}
           >
             {item.items && (
               <Menu
@@ -48,11 +49,11 @@ const Section = ({
                 items={item.items}
                 basePath={basePath}
                 parentMenu={{ title, slug }}
-                closeMobileMenu={closeMobileMenu}
                 setMenuHeight={setMenuHeight}
                 menuWrapperRef={menuWrapperRef}
                 activeMenuList={activeMenuList}
                 setActiveMenuList={setActiveMenuList}
+                closeMobileMenu={closeMobileMenu}
               />
             )}
           </Item>
@@ -84,11 +85,11 @@ Section.propTypes = {
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
-  closeMobileMenu: PropTypes.func,
   setMenuHeight: PropTypes.func.isRequired,
   menuWrapperRef: PropTypes.any.isRequired,
   activeMenuList: PropTypes.arrayOf(PropTypes.string).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
+  closeMobileMenu: PropTypes.func,
 };
 
 const Menu = ({
@@ -112,16 +113,13 @@ const Menu = ({
   const Icon = icons[icon];
 
   const isActive = activeMenuList.includes(title);
-
-  useEffect(() => {
-    console.log(title, isActive);
-  }, [title, isActive]);
+  const isLastActive = activeMenuList[currentDepth] === title;
 
   // update menu height and scroll menu to top
   useEffect(() => {
     let timeout;
 
-    if (isActive && menuRef.current && setMenuHeight) {
+    if (isLastActive && menuRef.current && setMenuHeight) {
       timeout = setTimeout(() => {
         setMenuHeight(menuRef.current.scrollHeight);
         menuWrapperRef.current?.scrollTo(0, 0);
@@ -131,7 +129,7 @@ const Menu = ({
     return () => {
       clearTimeout(timeout);
     };
-  }, [isActive, setMenuHeight, menuWrapperRef]);
+  }, [isLastActive, currentDepth, setMenuHeight, menuWrapperRef]);
 
   const handleClose = () => {
     setActiveMenuList((prevList) => prevList.slice(0, -1));
@@ -180,6 +178,8 @@ const Menu = ({
               <Section
                 key={index}
                 {...item}
+                title={title}
+                slug={slug}
                 basePath={basePath}
                 closeMobileMenu={closeMobileMenu}
                 setMenuHeight={setMenuHeight}
@@ -188,21 +188,27 @@ const Menu = ({
                 setActiveMenuList={setActiveMenuList}
               />
             ) : (
-              <Item key={index} {...item} basePath={basePath} setActiveMenuList={setActiveMenuList}>
+              <Item
+                key={index}
+                {...item}
+                basePath={basePath}
+                setActiveMenuList={setActiveMenuList}
+                closeMobileMenu={closeMobileMenu}
+              >
                 {item.items && (
                   <Menu
                     depth={depth + 1}
                     title={item.title}
                     slug={item.slug}
-                    Icon={icons[item.icon]}
+                    icon={item.icon}
                     items={item.items}
                     basePath={basePath}
                     parentMenu={{ title, slug }}
-                    closeMobileMenu={closeMobileMenu}
                     setMenuHeight={setMenuHeight}
                     menuWrapperRef={menuWrapperRef}
                     activeMenuList={activeMenuList}
                     setActiveMenuList={setActiveMenuList}
+                    closeMobileMenu={closeMobileMenu}
                   />
                 )}
               </Item>
@@ -216,10 +222,10 @@ const Menu = ({
                 'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
                 'text-gray-new-60 hover:text-black-new dark:hover:text-white'
               )}
-              to="/"
+              to={basePath === DOCS_BASE_PATH ? '/' : LINKS.docs}
             >
               <ArrowBackIcon className="size-4.5" />
-              Back to site
+              Back to {basePath === DOCS_BASE_PATH ? 'site' : 'docs'}
             </Link>
           </div>
         )}
@@ -247,12 +253,11 @@ Menu.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
-  updateMenuHeight: PropTypes.func,
-  closeMobileMenu: PropTypes.func,
   setMenuHeight: PropTypes.func.isRequired,
   menuWrapperRef: PropTypes.any.isRequired,
   activeMenuList: PropTypes.arrayOf(PropTypes.string).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
+  closeMobileMenu: PropTypes.func,
 };
 
 export default Menu;

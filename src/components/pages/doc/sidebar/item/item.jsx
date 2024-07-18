@@ -13,6 +13,7 @@ import BillingIcon from 'icons/docs/sidebar/billing.inline.svg';
 import ChangelogIcon from 'icons/docs/sidebar/changelog.inline.svg';
 import CliIcon from 'icons/docs/sidebar/cli.inline.svg';
 import CommunityIcon from 'icons/docs/sidebar/community.inline.svg';
+import Docs from 'icons/docs/sidebar/docs.inline.svg';
 import FeaturesIcon from 'icons/docs/sidebar/features.inline.svg';
 import FrameworksIcon from 'icons/docs/sidebar/frameworks.inline.svg';
 import GetStartedIcon from 'icons/docs/sidebar/get-started.inline.svg';
@@ -21,7 +22,6 @@ import HomeIcon from 'icons/docs/sidebar/home.inline.svg';
 import IntegrationsIcon from 'icons/docs/sidebar/integrations.inline.svg';
 import ManagementIcon from 'icons/docs/sidebar/management.inline.svg';
 import PartnerGuide from 'icons/docs/sidebar/partner-guide.inline.svg';
-import PostgresDocs from 'icons/docs/sidebar/postgres-docs.inline.svg';
 import PostgresGuides from 'icons/docs/sidebar/postgres-guides.inline.svg';
 import Regions from 'icons/docs/sidebar/regions.inline.svg';
 import Sdk from 'icons/docs/sidebar/sdk.inline.svg';
@@ -31,7 +31,7 @@ import WhyNeon from 'icons/docs/sidebar/why-neon.inline.svg';
 
 import Tag from '../../tag';
 
-export const icons = {
+const icons = {
   ai: AiIcon,
   api: ApiIcon,
   architecture: ArchitectureIcon,
@@ -39,6 +39,7 @@ export const icons = {
   changelog: ChangelogIcon,
   cli: CliIcon,
   community: CommunityIcon,
+  docs: Docs,
   features: FeaturesIcon,
   frameworks: FrameworksIcon,
   'get-started': GetStartedIcon,
@@ -47,7 +48,6 @@ export const icons = {
   integrations: IntegrationsIcon,
   management: ManagementIcon,
   'partner-guide': PartnerGuide,
-  'postgres-docs': PostgresDocs,
   'postgres-guides': PostgresGuides,
   regions: Regions,
   sdk: Sdk,
@@ -55,11 +55,6 @@ export const icons = {
   support: Support,
   'why-neon': WhyNeon,
 };
-
-// const isActiveItem = (items, currentSlug) =>
-//   items?.some(
-//     ({ slug, items }) => slug === currentSlug || (items && isActiveItem(items, currentSlug))
-//   );
 
 const Item = ({
   basePath,
@@ -69,13 +64,12 @@ const Item = ({
   tag = null,
   ariaLabel = null,
   items = null,
-  closeMobileMenu = null,
   setActiveMenuList,
+  closeMobileMenu = null,
   children,
 }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
-  // const hasActiveChild = isActiveItem(items, currentSlug);
   const Icon = icons[icon];
 
   const externalSlug = slug && slug.startsWith('http') ? slug : null;
@@ -87,6 +81,7 @@ const Item = ({
     if (items?.length) {
       setActiveMenuList((prevList) => [...prevList, title]);
     }
+    console.log(slug, closeMobileMenu);
     if (slug && closeMobileMenu) closeMobileMenu();
   };
 
@@ -137,9 +132,10 @@ Item.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
-  closeMobileMenu: PropTypes.func,
   setActiveMenuList: PropTypes.func.isRequired,
+  closeMobileMenu: PropTypes.func,
   children: PropTypes.node,
 };
 
+export { icons };
 export default Item;

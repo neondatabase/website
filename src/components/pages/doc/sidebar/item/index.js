@@ -1,3 +1,1 @@
-import Item from './item';
-
-export default Item;
+export { default as Item, icons } from './item';

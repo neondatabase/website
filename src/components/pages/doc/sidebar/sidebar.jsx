@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
@@ -13,10 +13,6 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
   const [activeMenuList, setActiveMenuList] = useState(['Home']);
   const [menuHeight, setMenuHeight] = useState(1000);
   const menuWrapperRef = useRef(null);
-
-  useEffect(() => {
-    console.log(activeMenuList);
-  }, [activeMenuList]);
 
   return (
     <aside

@@ -475,7 +475,7 @@
   items:
     - title: PostgreSQL docs
       slug: postgres
-      icon: postgres-docs
+      icon: docs
     - title: Postgres guides
       slug: postgresql/introduction
       icon: postgres-guides
