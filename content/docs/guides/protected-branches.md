@@ -145,10 +145,8 @@ To set a branch as protected:
 
    ![Branches page badge](/docs/guides/ip_allow_branch_badge_2.png)
 
-
 ## Remove branch protection
 
 Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **More** drop-down menu on the branch page.
-
 
 <NeedHelp/>
