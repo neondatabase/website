@@ -16,17 +16,17 @@ Storage is the total **data size** and **history** stored in Neon across all of 
 
 - **History**
 
-  This is a log of changes (inserts, updates, and deletes) made to your databases over time in the form of Write-Ahead Log (WAL) records. History enables Neon features such as [point-in-time restore](/docs/introduction/point-in-time-restore) and [time travel](/docs/guides/time-travel-assist). The size of your history depends on a couple of factors: 
-  
-  - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes retained. A heavy write workload will generates more history than a heavy read workload. 
-  - **Your [history retention window](/docs/introduction/point-in-time-restore#history-retention)** &#8212; it can be an hour, a day, a week, or longer. It's configurable for each Neon project. As you can imagine, retaining 1 day of history requires less storage than retaining 30 days of history,  but a shorter history retention window also limits features like point-in-time restore and time travel that depend on it.
-  
+  This is a log of changes (inserts, updates, and deletes) made to your databases over time in the form of Write-Ahead Log (WAL) records. History enables Neon features such as [point-in-time restore](/docs/introduction/point-in-time-restore) and [time travel](/docs/guides/time-travel-assist). The size of your history depends on a couple of factors:
+
+  - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes retained. A heavy write workload will generates more history than a heavy read workload.
+  - **Your [history retention window](/docs/introduction/point-in-time-restore#history-retention)** &#8212; it can be an hour, a day, a week, or longer. It's configurable for each Neon project. As you can imagine, retaining 1 day of history requires less storage than retaining 30 days of history, but a shorter history retention window also limits features like point-in-time restore and time travel that depend on it.
+
     Neon's branching feature can also affect storage. Here are some rules of thumb:
-  
+
   - **Creating a branch does not add to storage immediately**. At creation time, a branch is a clone of its parent branch; it shares data with its parent. Shared data is not counted toward storage.
-  - **A branch shares data with its parent while it remains within its parent's history retention window**. For example, if a parent branch has 7 days of history, a child branch shares data with its parent branch for that period. However, as soon as the branch ages past that period, data is no longer shared &#8212; the child branch's data stands on its own and is counted toward storage.   
+  - **A branch shares data with its parent while it remains within its parent's history retention window**. For example, if a parent branch has 7 days of history, a child branch shares data with its parent branch for that period. However, as soon as the branch ages past that period, data is no longer shared &#8212; the child branch's data stands on its own and is counted toward storage.
   - **When you make changes to a branch, you generate data unique to the branch, adding to storage**. The branch may still share data with the parent while it exists within the parent's history retention window, but changes specific to the branch are counted toward storage.
-  
+
 The storage amount you see under **Usage** on the **Billing** page in the Neon Console takes all of these factors into account: The size of your databases across all of your Neon projects and branches, the size of your retained history, and the data shared between branches.
 
 <Admonition type="note">
@@ -49,7 +49,6 @@ Like any database, inserting data increases data size, while deleting data decre
 
 </details>
 
-
 <details>
 <summary>**What happens when I reach my storage limit?**</summary>
 
@@ -59,7 +58,6 @@ Your storage allowance varies depending on your Neon plan.
 - **Launch and Scale Plans**: For users on Launch and Scale plans, exceeding your storage limit will result in [additional charges](/docs/introduction/extra-usage). Charges are added based on the maximum size your storage reaches and are prorated based on when in the month your storage size increased.
 
 </details>
-
 
 ### How your storage size fluctuates
 
@@ -87,8 +85,6 @@ To help manage your storage size, here are some strategies to consider:
 - **Proactive branch management**
 
   Remove or reset branches before they diverge from the history retention window. Removing old branches that are no longer needed, or resetting them before they accumulate changes that are no longer shared, helps prevent unnecessary storage from building up.
-
-
 
 ## Compute
 
