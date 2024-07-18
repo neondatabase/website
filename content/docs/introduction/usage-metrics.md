@@ -36,18 +36,30 @@ Remember that each Neon plan comes with an allowance of storage that's already i
 ### Storage FAQs
 
 <details>
-<summary>**Does a delete operation add to storage?**</summary>
+<summary>**Do branches add to storage?**</summary>
 
-Like any database, inserting data increases data size, while deleting data decreases it. However, since each operation generates a WAL record, even deletions temporarily increase your history size until those records age out of your history retention window.
+When branches are created, they initially do not add to storage since they use shared data. However, as soon as changes are made within a branch, new WAL records are created, adding to your history. Also, if your branch ages out of its parent's history retention window, the branch's' data is no longer shared and is counted toward storage. To avoid branches using up storage, reset them or delete them before they age out of their parent's history retention window.
 
 </details>
 
 <details>
 <summary>**Does a delete operation add to storage?**</summary>
 
-Like any database, inserting data increases data size, while deleting data decreases it. However, since each operation generates a WAL record, even deletions temporarily increase your history size until those records age out.
+Like any database, inserting data increases data size, while deleting data decreases it. However, since each operation generates a WAL record, even deletions temporarily increase your history size until those records age out of your history retention window.
 
 </details>
+
+
+<details>
+<summary>**What happens when I reach my storage limit?**</summary>
+
+Your storage allowance varies depending on your Neon plan.
+
+- **Free Tier**: If you reach your storage limit on the Free Tier (0.5 GiB), any further database operations that would increase storage (INSERTs or UPDATEs for example) will fail, and you will receive an error message.
+- **Launch and Scale Plans**: For users on Launch and Scale plans, exceeding your storage limit will result in [additional charges](/docs/introduction/extra-usage). Charges are added based on the maximum size your storage reaches and are prorated based on when in the month your storage size increased.
+
+</details>
+
 
 ### How your storage size fluctuates
 
@@ -76,12 +88,7 @@ To help manage your storage size, here are some strategies to consider:
 
   Remove or reset branches before they diverge from the history retention window. Removing old branches that are no longer needed, or resetting them before they accumulate changes that are no longer shared, helps prevent unnecessary storage from building up.
 
-### What happens when I reach my storage limit?
 
-Your storage allowance varies depending on your Neon plan.
-
-- **Free Tier**: If you reach your storage limit on the Free Tier (0.5 GiB), any further database operations that would increase storage (INSERTs or UPDATEs for example) will fail, and you will receive an error message.
-- **Launch and Scale Plans**: For users on Launch and Scale plans, exceeding your storage limit will result in [additional charges](/docs/introduction/extra-usage). Charges are added based on the maximum size your storage reaches and are prorated based on when in the month your storage size increased.
 
 ## Compute
 
