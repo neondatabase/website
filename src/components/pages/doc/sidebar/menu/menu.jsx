@@ -9,7 +9,8 @@ import LINKS from 'constants/links';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 import ChevronBackIcon from 'icons/docs/sidebar/chevron-back.inline.svg';
 
-import { Item, icons } from '../item';
+import Icon from './icon';
+import Item from './item';
 
 const Section = ({
   title,
@@ -110,7 +111,6 @@ const Menu = ({
   const isRootMenu = depth === 0;
   const menuRef = useRef(null);
   const currentDepth = activeMenuList.length - 1;
-  const Icon = icons[icon];
 
   const isActive = activeMenuList.includes(title);
   const isLastActive = activeMenuList[currentDepth] === title;
@@ -173,7 +173,7 @@ const Menu = ({
               className="mt-7 flex w-full items-start gap-2 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
               to={slug ? `${basePath}${slug}` : undefined}
             >
-              {Icon && <Icon className="size-5" />}
+              {icon && <Icon title={icon} className="size-5" />}
               {title}
             </LinkTag>
           </div>
