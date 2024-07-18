@@ -228,6 +228,9 @@
     - title: Support
       slug: introduction/support
       icon: support
+      items: 
+        - title: Support
+          slug: introduction/support
     - title: Status
       slug: introduction/status
       icon: status
