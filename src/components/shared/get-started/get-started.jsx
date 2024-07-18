@@ -32,9 +32,13 @@ const GetStarted = ({ className = null, title, description = null, button = null
         )}
         dangerouslySetInnerHTML={{ __html: title }}
       />
-      {description && <p className="mt-3.5 text-center text-lg text-gray-new-70">{description}</p>}
+      {description && (
+        <p className="mt-3.5 text-center text-lg text-gray-new-70 md:max-w-[290px] md:text-base">
+          {description}
+        </p>
+      )}
       <Button
-        className="pointer-events-auto relative mt-[38px] h-11 w-[144px] text-[15px] !font-semibold tracking-tighter xl:mt-8 lg:mt-7 sm:mt-5 sm:h-10"
+        className="pointer-events-auto relative mt-[38px] h-11 min-w-[144px] px-7 text-[15px] !font-semibold tracking-tighter xl:mt-8 lg:mt-7 sm:mt-5 sm:h-10"
         theme="primary"
         to={button?.url || LINKS.signup}
         target="_blank"

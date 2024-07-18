@@ -108,6 +108,11 @@ export default {
     description: 'Thank you for subscribing to the Neon newsletter',
     pathname: LINKS.thankYou,
   },
+  variable: {
+    title: 'Variables — Neon',
+    description: 'Dynamically scale your Postgres database',
+    pathname: LINKS.variable,
+  },
   404: {
     title: 'Page Not Found — Neon',
   },
