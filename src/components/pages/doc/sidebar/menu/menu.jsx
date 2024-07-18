@@ -37,6 +37,7 @@ const Section = ({
             {...item}
             key={index}
             basePath={basePath}
+            activeMenuList={activeMenuList}
             setActiveMenuList={setActiveMenuList}
             closeMobileMenu={closeMobileMenu}
           >
@@ -197,6 +198,7 @@ const Menu = ({
                 key={index}
                 {...item}
                 basePath={basePath}
+                activeMenuList={activeMenuList}
                 setActiveMenuList={setActiveMenuList}
                 closeMobileMenu={closeMobileMenu}
               >

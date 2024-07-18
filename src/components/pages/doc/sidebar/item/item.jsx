@@ -64,6 +64,7 @@ const Item = ({
   tag = null,
   ariaLabel = null,
   items = null,
+  activeMenuList,
   setActiveMenuList,
   closeMobileMenu = null,
   children,
@@ -78,10 +79,9 @@ const Item = ({
   const LinkTag = slug ? Link : 'button';
 
   const handleClick = () => {
-    if (items?.length) {
+    if (items?.length && !activeMenuList.includes(title)) {
       setActiveMenuList((prevList) => [...prevList, title]);
     }
-    console.log(slug, closeMobileMenu);
     if (slug && closeMobileMenu) closeMobileMenu();
   };
 
@@ -132,6 +132,7 @@ Item.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
+  activeMenuList: PropTypes.arrayOf(PropTypes.string).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
   closeMobileMenu: PropTypes.func,
   children: PropTypes.node,
