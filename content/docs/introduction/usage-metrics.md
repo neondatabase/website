@@ -8,17 +8,46 @@ This topic describes [Storage](#storage), [Compute](#compute), and [Project](#pr
 
 ## Storage
 
-Storage is the total data size and history stored in Neon. It includes the size of all databases in your Neon projects and a history of changes across all of your database branches, which supports point-in-time restore.
+Storage is the total **data size** and **history** stored in Neon across all of your projects, branches, and databases.
 
 - **Data size**
 
-  This is the current amount of data stored in your databases. You can think of this as a _snapshot_ of your data at any given moment.
+  This is the size of the data you store in databases across all of your Neon projects and branches. You can think of this as a snapshot of your logical data at any given moment.
 
 - **History**
 
-  Your history consists of Write-Ahead Log (WAL) records, which log all changes made to your database over time. This configurable history is what enables features like instant [branching](/docs/introduction/branching) and [point-in-time restore](/docs/introduction/point-in-time-restore). Initially, branches don’t add extra storage since they use shared data from existing snapshots.
+  This is a log of changes (inserts, updates, and deletes) made to your databases over time in the form of Write-Ahead Log (WAL) records. History enables Neon features such as [point-in-time restore](/docs/introduction/point-in-time-restore) and [time travel](/docs/guides/time-travel-assist). The size of your history depends on a couple of factors: 
+  
+  - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes retained. A heavy write workload will generates more history than a heavy read workload. 
+  - **Your [history retention window](/docs/introduction/point-in-time-restore#history-retention)** &#8212; it can be an hour, a day, a week, or longer. It's configurable for each Neon project. As you can imagine, retaining 1 day of history requires less storage than retaining 30 days of history,  but a shorter history retention window also limits features like point-in-time restore and time travel that depend on it.
+  
+    Neon's branching feature can also affect storage. Here are some rules of thumb:
+  
+  - **Creating a branch does not add to storage immediately**. At creation time, a branch is a clone of its parent branch; it shares data with its parent. Shared data is not counted toward storage.
+  - **A branch shares data with its parent while it remains within its parent's history retention window**. For example, if a parent branch has 7 days of history, a child branch shares data with its parent branch for that period. However, as soon as the branch ages past that period, data is no longer shared &#8212; the child branch's data stands on its own and is counted toward storage.   
+  - **When you make changes to a branch, you generate data unique to the branch, adding to storage**. The branch may still share data with the parent while it exists within the parent's history retention window, but changes specific to the branch are counted toward storage.
+  
+The storage amount you see under **Usage** on the **Billing** page in the Neon Console takes all of these factors into account: The size of your databases across all of your Neon projects and branches, the size of your retained history, and the data shared between branches.
 
-Your total storage size is calculated in gibibytes (GiB).
+<Admonition type="note">
+Remember that each Neon plan comes with an allowance of storage that's already included in your plan's monthly fee. The Launch plan includes 10 GiBs of storage. The Scale plan has an allowance of 50 GiB. You are only billed for extra storage if you go over your plan allowance. To learn how extra storage is allocated and billed for, see [Extra usage](/docs/introduction/extra-usage).
+</Admonition>
+
+### Storage FAQs
+
+<details>
+<summary>**Does a delete operation add to storage?**</summary>
+
+Like any database, inserting data increases data size, while deleting data decreases it. However, since each operation generates a WAL record, even deletions temporarily increase your history size until those records age out of your history retention window.
+
+</details>
+
+<details>
+<summary>**Does a delete operation add to storage?**</summary>
+
+Like any database, inserting data increases data size, while deleting data decreases it. However, since each operation generates a WAL record, even deletions temporarily increase your history size until those records age out.
+
+</details>
 
 ### How your storage size fluctuates
 
