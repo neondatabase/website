@@ -6,7 +6,16 @@ enableTableOfContents: true
 updatedOn: '2024-07-12T11:14:29.365Z'
 ---
 
-Neon's protected branches feature lets you apply IP restrictions to specific branches in your Neon project as an added layer of data protection. Protected branches is a Neon [Scale](/docs/introduction/plans#scale) plan feature.
+Neon's protected branches feature lets you apply IP restrictions to specific branches in your Neon project as an added layer of data protection. The following retsrictions also apply to protected branches:
+
+- Protected branches cannot be deleted.
+- Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
+- Projects with protected branches cannot be deleted.
+- TComputes associated with a protected branch cannot be deleted.
+
+You have to remove branch protection before you can perfom these actions. See [Remove branch protection](#remove-branch-protection).
+
+The protected branches feature is available with the Neon [Scale](/docs/introduction/plans#scale) plan.
 
 ## How to set up protected branches
 
@@ -136,8 +145,10 @@ To set a branch as protected:
 
    ![Branches page badge](/docs/guides/ip_allow_branch_badge_2.png)
 
-<Admonition type="note">
+
+## Remove branch protection
+
 Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **More** drop-down menu on the branch page.
-</Admonition>
+
 
 <NeedHelp/>
