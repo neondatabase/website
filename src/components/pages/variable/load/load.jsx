@@ -6,7 +6,6 @@ import gamingIcon from 'icons/variable/gaming.svg';
 import productivityIcon from 'icons/variable/productivity.svg';
 import shopsIcon from 'icons/variable/shops.svg';
 
-
 import List from '../list';
 
 import loadGraphicAWS from './images/load-graphic-aws.jpg';
@@ -64,7 +63,7 @@ const Load = () => (
     <Container size="960" className="mt-10 xl:mt-9 lg:mt-8 sm:mt-6">
       <div className="flex items-center gap-5 lg:flex-col md:gap-3.5">
         <Image
-          className="w-full max-w-xl rounded-lg md:rounded"
+          className="rounded-lg lg:w-full lg:max-w-xl md:rounded"
           src={loadGraphicAWS}
           width={470}
           height={338}
@@ -74,7 +73,7 @@ const Load = () => (
           priority
         />
         <Image
-          className="w-full max-w-xl rounded-lg md:rounded"
+          className="rounded-lg lg:w-full lg:max-w-xl md:rounded"
           src={loadGraphicNeon}
           width={470}
           height={338}

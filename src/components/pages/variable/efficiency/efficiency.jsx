@@ -7,6 +7,7 @@ import performanceIcon from 'icons/variable/performance.svg';
 import resizeIcon from 'icons/variable/resize.svg';
 
 import List from '../list';
+import Review from '../review';
 
 const items = [
   {
@@ -50,6 +51,11 @@ const Efficiency = () => (
         </p>
         <List items={items} />
       </div>
+      <Review
+        text="When we were using MySQL in Azure, we had to manually upgrade the database during the days of peak traffic and downgrade later in the day, which caused a couple of minutes of downtime and a huge waste of time for the team."
+        author="Pieralberto Colombo"
+        company="Recrowd"
+      />
     </Container>
   </section>
 );

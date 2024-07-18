@@ -1,6 +1,7 @@
 import Container from 'components/shared/container/container';
 
 import List from '../list';
+import Review from '../review';
 
 const items = [
   {
@@ -36,6 +37,11 @@ const Unique = () => (
         <p>The Neon architecture is inspired in Amazon Aurora, but with some key differences:</p>
         <List items={items} />
       </div>
+      <Review
+        text="Before choosing Neon, we also considered Aurora, but the opacity of the pricing model did not convince us and costs seemed to rise quickly."
+        author="Andrea Levinge"
+        company="White Widget"
+      />
     </Container>
   </section>
 );
