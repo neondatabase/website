@@ -107,13 +107,15 @@ const Menu = ({
   setActiveMenuList,
 }) => {
   const isRootMenu = depth === 0;
-  const LinkTag = parentMenu?.slug ? Link : 'button';
   const menuRef = useRef(null);
   const currentDepth = activeMenuList.length - 1;
   const Icon = icons[icon];
 
   const isActive = activeMenuList.includes(title);
   const isLastActive = activeMenuList[currentDepth] === title;
+
+  const BackLinkTag = parentMenu?.slug ? Link : 'button';
+  const LinkTag = slug ? Link : 'div';
 
   // update menu height and scroll menu to top
   useEffect(() => {
@@ -157,7 +159,7 @@ const Menu = ({
       >
         {!isRootMenu && parentMenu && (
           <div className="mb-2.5 border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
-            <LinkTag
+            <BackLinkTag
               className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
               type={parentMenu.slug ? undefined : 'button'}
               to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : undefined}
@@ -165,11 +167,14 @@ const Menu = ({
             >
               <ChevronBackIcon className="size-4.5" />
               Back to {parentMenu.title}
-            </LinkTag>
-            <p className="mt-7 flex w-full items-start gap-2 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden">
+            </BackLinkTag>
+            <LinkTag
+              className="mt-7 flex w-full items-start gap-2 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
+              to={slug ? `${basePath}${slug}` : undefined}
+            >
               {Icon && <Icon className="size-5" />}
               {title}
-            </p>
+            </LinkTag>
           </div>
         )}
         <ul className="w-full">
