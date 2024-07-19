@@ -4,7 +4,7 @@ enableTableOfContents: true
 updatedOn: '2024-07-16T16:42:29.768Z'
 ---
 
-This topic describes [Storage](#storage), [Compute](#compute), and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
+This topic describes [Storage](#storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
 
 ## Storage
 
@@ -25,7 +25,7 @@ In Neon, storage consists of your total **data size** and **history**.
     - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes. For example, a heavy write workload will generate more history than a heavy read workload.
     - **How much history you keep** &#8212; referred to as [history retention](/docs/introduction/point-in-time-restore#history-retention). It can be an hour, a day, a week, or even a month. History retention is configurable for each Neon project. As you can imagine, retaining 1 day of history requires much less storage than retaining 30 days, but less history limits the features that depend on it. For example, 1 day of history means that your maximum restore point is 1 day in the past. 
 
-### How Branching Affects Storage
+### How branching affects storage
 
 If you use Neon's branching feature, you should know that it can also affect storage. Here are some rules of thumb when it comes to branching:
 
