@@ -90,7 +90,7 @@ To minimize your storage, here are some strategies to consider:
 
 - **Remove or reset branches before they age out of your retention window**
 
-  Remove or reset branches before they diverge from the history retention window. Removing old branches that are no longer needed, or resetting them before they accumulate changes that are no longer shared, helps prevent unnecessary storage from building up.
+  Remove old branches or reset branches before they diverge from the history retention window. Removing old branches that are no longer needed, or resetting them before they accumulate changes that are no longer shared, helps prevent unnecessary storage from building up.
 
 </details>
 
