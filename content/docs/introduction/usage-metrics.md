@@ -22,8 +22,8 @@ In Neon, storage consists of your total **data size** and **history**.
 
   The size of your history depends on a couple of factors:
 
-    - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes. For example, a heavy write workload will generate more history than a heavy read workload.
-    - **How much history you keep** &#8212; referred to as [history retention](/docs/introduction/point-in-time-restore#history-retention). It can be an hour, a day, a week, or even a month. History retention is configurable for each Neon project. As you can imagine, retaining 1 day of history requires much less storage than retaining 30 days, but less history limits the features that depend on it. For example, 1 day of history means that your maximum restore point is 1 day in the past. 
+  - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes. For example, a heavy write workload will generate more history than a heavy read workload.
+  - **How much history you keep** &#8212; referred to as [history retention](/docs/introduction/point-in-time-restore#history-retention). It can be an hour, a day, a week, or even a month. History retention is configurable for each Neon project. As you can imagine, retaining 1 day of history requires much less storage than retaining 30 days, but less history limits the features that depend on it. For example, 1 day of history means that your maximum restore point is 1 day in the past.
 
 ### How Branching Affects Storage
 
@@ -103,12 +103,11 @@ Your storage allowance varies depending on your Neon plan.
 Several factors could be contributing to your high storage consumption:
 
 - **Frequent data modifications:** If you are performing a lot of writes (inserts, updates, deletes), each operation generates WAL records, which are added to your history. For instance, rewriting your entire database daily can lead to a storage amount that is a multiple of your database size, depending on the number of days of history your Neon project retains.
-  
 - **History retention:** The length of your history retention window plays a significant role. If you perform many data modifications daily and your history retention window is set to 7 days, you will accumulate a 7-day history of those changes, which can quickly increase storage usage.
 
 To mitigate this issue, assuming your write workload is necessary, consider adjusting your [history retention](https://neon.tech/docs/introduction/point-in-time-restore#history-retention) setting. Perhaps you can do with a shorter window for point-in-time recovery or time travel. Retaining less history will reduce storage consumption.
-</details>
 
+</details>
 
 ## Compute
 
