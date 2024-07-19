@@ -8,18 +8,22 @@ This topic describes [Storage](#storage), [Compute](#compute), and [Project](#pr
 
 ## Storage
 
-Storage is the total **data size** and **history** stored in Neon.
+Neon's storage engine is custom-built to support its serverless architecture and features like [point-in-time restore](/docs/introduction/point-in-time-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/guides/branching-intro). As a result, storage in Neon works a little differently than other database services.
+
+In Neon, storage is comprised of your total **data size** and **history**.
 
 - **Data size**
 
-  This is the size of the data stored in databases across all of your Neon projects and branches. You can think of this as a snapshot of your logical data at any given moment.
+  This part of Neon storage is what you might expect from most database services &#8212; it's just the size of your data across all of your Neon projects and branches. You can think of it as a snapshot of your data.
 
 - **History**
 
-  This is a log of changes (inserts, updates, and deletes) made to your databases over time in the form of Write-Ahead Log (WAL) records. History enables Neon features such as [point-in-time restore](/docs/introduction/point-in-time-restore) and [time travel](/docs/guides/time-travel-assist). The size of your history depends on a couple of factors:
+  This is the part of Neon storage that's different: "History" is a log of changes (inserts, updates, and deletes) to your data over time in the form of Write-Ahead Log (WAL) records. This history of changes is what enables features like [point-in-time restore](/docs/introduction/point-in-time-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/guides/branching-intro). 
+  
+  The size of your history depends on a couple of factors:
 
   - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes retained. A heavy write workload will generates more history than a heavy read workload.
-  - **Your [history retention window](/docs/introduction/point-in-time-restore#history-retention)** &#8212; it can be an hour, a day, a week, or longer. It's configurable for each Neon project. As you can imagine, retaining 1 day of history requires less storage than retaining 30 days of history, but a shorter history retention window also limits features like point-in-time restore and time travel that depend on it.
+  - **How much history you keep** &#8212; referred to as your [history retention window](/docs/introduction/point-in-time-restore#history-retention). Tt can be an hour, a day, a week, or even a month. History retention is configurable for each Neon project. As you can imagine, retaining 1 day of history requires much less storage than retaining 30 days, but less history also limits the fetaures that depend on it. For example, 1 day of history means that your maximum restore point is 1 day in the past. 
 
 ### How branching affects storage
 
