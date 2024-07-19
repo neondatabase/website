@@ -3,8 +3,9 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
-import lineMobile from 'images/pages/about/timeline/line-mobile.svg';
-import lineTablet from 'images/pages/about/timeline/line-tablet.svg';
+import lineLg from 'images/pages/about/timeline/line-lg.svg';
+import lineMd from 'images/pages/about/timeline/line-md.svg';
+import lineXl from 'images/pages/about/timeline/line-xl.svg';
 import line from 'images/pages/about/timeline/line.svg';
 import pointerLineLg from 'images/pages/about/timeline/pointer-line-lg.svg';
 
@@ -88,7 +89,7 @@ const Timeline = () => (
     <Container className="relative 2xl:max-w-5xl" size="1344">
       <span className="pointer-events-none absolute -top-9 left-1/2 h-[230px] w-[365px] translate-x-1/2 bg-[radial-gradient(50%_50%_at_50%_50%,#09212A_0%,#071119_48%,rgba(7,17,25,0)_100%)] 2xl:h-[218px] 2xl:w-[352px] 2xl:translate-x-[27%] lg:-top-5 lg:h-[170px] lg:w-[272px] lg:translate-x-[10%] md:-bottom-2 md:-left-14 md:top-auto md:h-[170px] md:w-[270px] md:translate-x-0" />
       <Image
-        className="pointer-events-none absolute left-1/2 top-[104px] -translate-x-1/2 2xl:w-[960px] lg:hidden"
+        className="pointer-events-none absolute left-1/2 top-[104px] -translate-x-1/2 2xl:hidden"
         src={line}
         width={1344}
         height={2}
@@ -96,8 +97,16 @@ const Timeline = () => (
         priority
       />
       <Image
-        className="pointer-events-none absolute left-1/2 top-[93px] hidden w-[704px] -translate-x-1/2 lg:block md:hidden"
-        src={lineTablet}
+        className="pointer-events-none absolute left-1/2 top-[104px] hidden -translate-x-1/2 2xl:block lg:hidden"
+        src={lineXl}
+        width={960}
+        height={2}
+        alt=""
+        priority
+      />
+      <Image
+        className="pointer-events-none absolute left-1/2 top-[93px] hidden -translate-x-1/2 lg:block md:hidden"
+        src={lineLg}
         width={704}
         height={2}
         alt=""
@@ -105,13 +114,13 @@ const Timeline = () => (
       />
       <Image
         className="pointer-events-none absolute left-[52px] top-1/2 hidden w-0.5 -translate-y-1/2 md:block"
-        src={lineMobile}
+        src={lineMd}
         width={2}
         height={440}
         alt=""
         priority
       />
-      <ul className="relative z-10 mx-auto flex h-[178px] justify-between px-[92px] pt-8 2xl:pl-16 2xl:pr-0 lg:h-[161px] lg:max-w-[704px] lg:pl-[51px] lg:pt-7 md:h-auto md:flex-col md:gap-y-10 md:pb-11 md:pt-[49px]">
+      <ul className="relative z-10 mx-auto flex h-[178px] justify-between px-[92px] pt-8 2xl:pl-16 2xl:pr-0 lg:h-[161px] lg:max-w-[704px] lg:pl-[51px] lg:pt-7 md:h-auto md:max-w-none md:flex-col md:gap-y-10 md:pb-11 md:pt-[49px]">
         {ITEMS.map(({ date, title, className }, index) => (
           <li
             className={clsx(

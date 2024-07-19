@@ -104,7 +104,7 @@ const invesors = {
 };
 
 const Investors = () => (
-  <section className="Investors safe-paddings z-10 -mb-40 mt-[200px] xl:-mb-4 xl:mt-[136px] lg:mb-14 lg:mt-[104px] md:mt-20 sm:-mb-4">
+  <section className="Investors safe-paddings z-10 -mb-40 mt-[200px] xl:-mb-6 xl:mt-[136px] lg:mb-12 lg:mt-[104px] md:mt-20 sm:-mb-4">
     <Container className="flex flex-col items-center" size="1152">
       <Heading
         className="text-[68px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-[36px]"

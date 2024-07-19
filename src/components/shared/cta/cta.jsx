@@ -41,7 +41,7 @@ const Cta = ({
           dangerouslySetInnerHTML={{ __html: title }}
         />
         {description && (
-          <p className="mt-3.5 text-center text-lg tracking-extra-tight text-gray-new-70 xl:mt-3 lg:text-base md:mt-2 md:max-w-[289px]">
+          <p className="mt-3.5 text-center text-lg tracking-extra-tight text-gray-new-70 xl:mt-3 xl:max-w-[414px] lg:max-w-[338px] lg:text-base md:mt-2 md:max-w-[289px] md:text-sm">
             {description}
           </p>
         )}

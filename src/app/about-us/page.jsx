@@ -25,7 +25,7 @@ const AboutUsPage = () => (
       description="We're looking for people who care deeply about quality to build it with us."
       buttonText="View Open Roles"
       buttonUrl={LINKS.careers}
-      buttonClassName="mt-9 h-12 w-[174px] lg:h-11 lg:mt-8 lg:w-[166px] md:mt-3.5 md:h-10 md:w-[151px] md:text-sm"
+      buttonClassName="mt-9 h-12 w-[174px] xl:mt-[18px] lg:h-11 lg:mt-4 lg:w-[166px] md:mt-5 md:h-10 md:w-[151px] md:text-sm"
     />
   </Layout>
 );
