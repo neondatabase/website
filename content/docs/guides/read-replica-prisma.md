@@ -20,7 +20,9 @@ In this guide, we'll show you how you can leverage Neon read replicas to efficie
 
 ## Create a read replica
 
-You can create one or more read replicas for any branch in your Neon project. Creating a read replica involves adding a read-only compute endpoint to the Neon branch. You can add a read-only compute endpoint by following these steps:
+You can create one or more read replicas for any branch in your Neon project. Creating a read replica involves adding a read-only compute endpoint to the Neon branch.
+
+You can add a read-only compute endpoint by following these steps:
 
 1. In the Neon Console, select **Branches**.
 2. Select the branch where your database resides.

@@ -24,7 +24,7 @@ To use the SQL Editor:
 You can use the following query to try the SQL Editor. The query creates a table, adds data, and retrieves the data from the table.
 
 ```sql
-CREATE TABLE playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
 INSERT INTO playing_with_neon(name, value)
 SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
 SELECT * FROM playing_with_neon;
