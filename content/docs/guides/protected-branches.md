@@ -3,7 +3,7 @@ title: Protected branches
 subtitle: Learn how to use Neon's protected branches feature to secure access to
   critical data
 enableTableOfContents: true
-updatedOn: '2024-07-12T11:14:29.365Z'
+updatedOn: '2024-07-19T15:46:08.351Z'
 ---
 
 Neon's protected branches feature lets you apply IP restrictions to specific branches in your Neon project as an added layer of data protection. The following retsrictions also apply to protected branches:
