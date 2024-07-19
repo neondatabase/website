@@ -25,10 +25,6 @@ Regardless of the application, the steps for creating, configuring, and connecti
 
 Creating a read replica involves adding a read-only compute endpoint to a branch. You can add a read-only compute endpoint to any branch in your Neon project using the Neon Console, [Neon CLI](/docs/reference/cli-branches#create), or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
 
-<Admonition type="note">
-Ideally, a branch's read replica compute should be the same size or larger than the associated default read-write compute. For more information, see [Default and read replica compute setting synchronization](#default-and-read-replica-compute-setting-synchronization).
-</Admonition>
-
 <Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
@@ -206,18 +202,12 @@ Compute endpoints are identified by their `project_id` and `endpoint_id`. For in
 
 ## Default and read replica compute setting synchronization
 
-In a Postgres primary-standby configuration, certain settings must be no smaller on a standby than on the primary in order to ensure that the standby does not run out of shared memory during recovery, as described in the [PostgreSQL hot standby documentation](https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-ADMIN). For Neon [read replicas](/docs/introduction/read-replicas), it's no different. The same settings must be no smaller on a read replica compute (the "standby") than on the default read-write compute (the "primary"). For this reason, the following settings on read replica computes are synchronized with the settings on the default read-write compute when the read replica compute is started:
+In a Postgres primary-standby configuration, certain settings should be no smaller on a standby than on the primary in order to ensure that the standby does not run out of shared memory during recovery, as described in the [PostgreSQL hot standby documentation](https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-ADMIN). For Neon [read replicas](/docs/introduction/read-replicas), it's no different. The same settings should be no smaller on a read replica compute (the "standby") than on the default read-write compute (the "primary"). For this reason, the following settings on read replica computes are synchronized with the settings on the default read-write compute when the read replica compute is started:
 
 - `max_connections`
 - `max_prepared_transactions`
 - `max_locks_per_transaction`
 - `max_wal_senders`
 - `max_worker_processes`
-
-Ideally, a branch's read replica compute should be the same size or larger than the associated default read-write compute.
-
-<Admonition type="warning">
-Changing size of your default read-write compute can cause these settings to diverge. If you modify your default read-write compute size, please ensure that the settings on the  read replica compute are no smaller than the settings on the default read-write compute. If you require assistance, please reach out to [Support](/docs/introduction/support).  
-</Admonition>
 
 <NeedHelp/>

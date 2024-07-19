@@ -36,10 +36,6 @@ This guide walks you through creating a read replica, connecting to it, running 
 
 Creating a read replica involves adding a read-only compute endpoint to a branch.
 
-<Admonition type="note">
-Ideally, a branch's read replica compute should be the same size or larger than the associated default read-write compute. For more information, see [Default and read replica compute setting synchronization](/docs/guides/read-replica-guide#default-and-read-replica-compute-setting-synchronization).
-</Admonition>
-
 You can add a read-only compute endpoint to any branch in your Neon project by following these steps:
 
 1. In the Neon Console, select **Branches**.
