@@ -192,16 +192,7 @@ The possibilities are endless. You can integrate Neon's GitHub Actions into your
 
 If you're new to GitHub Actions and workflows, GitHub's [Quickstart for GitHub Actions](https://docs.github.com/en/actions/quickstart) is a good place to start.
 
-## Example applications with GitHub Actions workflows
-
-The following example applications utilize GitHub Actions workflows to create and delete branches in Neon. These examples can serve as references when building your own workflows.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Demonstrates using GitHub Actions workflows to create a Neon branch for each preview deployment on Vercel" icon="github">Preview branches app</a>
-
-<a href="https://github.com/neondatabase/neon_twitter" description="Demonstrates using GitHub Actions workflows to create a Neon branch for schema validation and perform migrations" icon="github">Neon Twitter app</a>
-</DetailIconCards>
+For applications that use GitHub Actions workflows with Neon, see [Example applications](/docs/guides/branching-github-actions#example-applications).
 
 ## Connect more Neon projects with the GitHub App
 

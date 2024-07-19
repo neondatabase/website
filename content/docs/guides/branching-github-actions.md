@@ -233,9 +233,9 @@ outputs:
 
 The following example applications use GitHub Actions workflows to create and delete branches in Neon.
 
-<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Demonstrates using GitHub Actions workflows to create a Neon branch for each preview deployment on Vercel" icon="github">Preview branches app</a>
-
-<a href="https://github.com/neondatabase/neon_twitter" description="Demonstrates using GitHub Actions workflows to create a Neon branch for schema validation and perform migrations" icon="github">Neon Twitter app</a>
+<DetailIconCards>
+<a href="https://github.com/neondatabase/neon_twitter" description="A micro-blogging application that uses GitHub Actions to create and delete a branch with each pull request" icon="github">Neon Twitter app</a>
+<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with preview deployments in Vercel" icon="github">Preview branches app</a>
 </DetailIconCards>
 
 <NeedHelp/>
