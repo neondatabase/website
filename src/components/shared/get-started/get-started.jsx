@@ -6,12 +6,17 @@ import Container from 'components/shared/container';
 import RiveAnimation from 'components/shared/rive-animation';
 import LINKS from 'constants/links';
 
-const GetStarted = ({ className = null, title, description = null, button = null }) => (
+const sizes = {
+  lg: 'pb-[307px] pt-[445px]',
+  sm: 'pb-[290px] pt-[285px]',
+};
+
+const GetStarted = ({ title, description = null, button = null, size = 'lg' }) => (
   <section
     className={clsx(
       'get-started relative overflow-hidden',
-      'xl:py-[230px] lg:pb-[156px] lg:pt-[179px] sm:pb-[110px] sm:pt-[116px]',
-      className
+      sizes[size],
+      'xl:py-[230px] lg:pb-[156px] lg:pt-[179px] sm:pb-[110px] sm:pt-[116px]'
     )}
   >
     <RiveAnimation
@@ -51,13 +56,13 @@ const GetStarted = ({ className = null, title, description = null, button = null
 );
 
 GetStarted.propTypes = {
-  className: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   button: PropTypes.shape({
     url: PropTypes.string,
     title: PropTypes.string,
   }),
+  size: PropTypes.oneOf(Object.keys(sizes)),
 };
 
 export default GetStarted;

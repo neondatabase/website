@@ -27,10 +27,7 @@ const EducationPage = () => (
     <Multitenancy />
     <Industry />
     <Trusted />
-    <GetStarted
-      title="Features of tomorrow.<br /> Available today."
-      className="pb-[307px] pt-[445px]"
-    />
+    <GetStarted title="Features of tomorrow.<br /> Available today." />
   </>
 );
 
