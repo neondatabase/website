@@ -2,7 +2,7 @@
 title: Automate branching with GitHub Actions
 subtitle: Create and delete branches with GitHub Actions
 enableTableOfContents: true
-updatedOn: '2024-06-20T17:29:55.103Z'
+updatedOn: '2024-07-19T10:46:54.791Z'
 ---
 
 Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:
@@ -231,7 +231,7 @@ outputs:
 
 ## Example applications
 
-The following example applications use GitHub Actions to create and delete branches in Neon.
+The following example applications use GitHub Actions workflows to create and delete branches in Neon.
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/neon_twitter" description="A micro-blogging application that uses GitHub Actions to create and delete a branch with each pull request" icon="github">Neon Twitter app</a>

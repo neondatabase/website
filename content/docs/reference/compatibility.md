@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2024-06-14T07:55:54.424Z'
+updatedOn: '2024-07-16T16:42:29.769Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -82,6 +82,8 @@ Of the parameter settings listed above, the `maintenance_work_mem`, `max_connect
 | 6                 | 2703              | 402 MB                 | 22                     |
 | 7                 | 3154              | 470 MB                 | 24                     |
 | 8                 | 3604              | 537 MB                 | 26                     |
+| 9                 | 4000              | 604 MB                 | 28                     |
+| 10                | 4000              | 671 MB                 | 30                     |
 
 <Admonition type="note">
 You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
