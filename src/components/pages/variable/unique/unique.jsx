@@ -1,8 +1,8 @@
-import Container from 'components/shared/container/container';
 import LINKS from 'constants/links';
 import andreaLevingeAvatar from 'images/pages/variable/testimonials/andrea-levinge.jpg';
 
 import List from '../shared/list';
+import Section from '../shared/section';
 import Testimonial from '../shared/testimonial';
 
 const items = [
@@ -30,26 +30,19 @@ const items = [
 ];
 
 const Unique = () => (
-  <section className="hero safe-paddings relative overflow-hidden pt-[72px] xl:pt-16 lg:pt-14 md:pt-11">
-    <Container size="xxs">
-      <h2 className="mb-7 text-[36px] font-medium leading-tight tracking-tighter xl:mb-6 xl:text-[32px] lg:mb-5 lg:text-[28px] md:mb-4 md:text-2xl">
-        What makes Neon unique vs others?
-      </h2>
-      <div className="space-y-7 text-lg tracking-extra-tight text-gray-new-70 xl:space-y-6 lg:space-y-5 sm:space-y-4 sm:text-base [&_span]:text-green-45 [&_strong]:font-medium [&_strong]:text-white">
-        <p>The Neon architecture is inspired in Amazon Aurora, but with some key differences:</p>
-        <List items={items} />
-      </div>
-      <Testimonial
-        text="Before choosing Neon, we also considered Aurora, but the opacity of the pricing model did not convince us and costs seemed to rise quickly."
-        author={{
-          name: 'Andrea Levinge',
-          company: 'White Widget',
-          avatar: andreaLevingeAvatar,
-        }}
-        url={`${LINKS.blog}/white-widgets-secret-to-scalable-postgres-neon`}
-      />
-    </Container>
-  </section>
+  <Section title="What makes Neon unique vs others?">
+    <p>The Neon architecture is inspired in Amazon Aurora, but with some key differences:</p>
+    <List items={items} />
+    <Testimonial
+      text="Before choosing Neon, we also considered Aurora, but the opacity of the pricing model did not convince us and costs seemed to rise quickly."
+      author={{
+        name: 'Andrea Levinge',
+        company: 'White Widget',
+        avatar: andreaLevingeAvatar,
+      }}
+      url={`${LINKS.blog}/white-widgets-secret-to-scalable-postgres-neon`}
+    />
+  </Section>
 );
 
 export default Unique;

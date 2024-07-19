@@ -13,7 +13,7 @@ import greenGlow from './images/green-glow.png';
 const Cta = ({ text, button }) => (
   <div className="relative mt-3 w-full overflow-hidden rounded-lg bg-gray-new-8 px-7 py-6 sm:mt-2 sm:p-6">
     <div className="relative z-10 flex items-center justify-between sm:flex-col sm:gap-[18px]">
-      <h3 className="mb-1 max-w-sm text-2xl font-medium leading-dense tracking-tighter text-white sm:mb-1 sm:text-center sm:text-xl">
+      <h3 className="mb-1 max-w-sm text-2xl font-medium leading-dense tracking-tighter sm:mb-1 sm:text-center sm:text-xl">
         {text}
       </h3>
       <Button
