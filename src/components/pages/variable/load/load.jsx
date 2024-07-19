@@ -6,7 +6,7 @@ import gamingIcon from 'icons/variable/gaming.svg';
 import productivityIcon from 'icons/variable/productivity.svg';
 import shopsIcon from 'icons/variable/shops.svg';
 
-import List from '../list';
+import List from '../shared/list';
 
 import loadGraphicAWS from './images/load-graphic-aws.jpg';
 import loadGraphicNeon from './images/load-graphic-neon.jpg';

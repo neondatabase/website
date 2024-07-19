@@ -2,8 +2,8 @@ import Container from 'components/shared/container/container';
 import LINKS from 'constants/links';
 import andreaLevingeAvatar from 'images/pages/variable/testimonials/andrea-levinge.jpg';
 
-import List from '../list';
-import Testimonial from '../testimonial';
+import List from '../shared/list';
+import Testimonial from '../shared/testimonial';
 
 const items = [
   {

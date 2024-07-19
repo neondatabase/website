@@ -8,8 +8,8 @@ import performanceIcon from 'icons/variable/performance.svg';
 import resizeIcon from 'icons/variable/resize.svg';
 import pieralbertoColonboAvatar from 'images/pages/variable/testimonials/pieralberto-colonbo.jpg';
 
-import List from '../list';
-import Testimonial from '../testimonial';
+import List from '../shared/list';
+import Testimonial from '../shared/testimonial';
 
 const items = [
   {

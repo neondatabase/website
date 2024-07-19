@@ -1,6 +1,7 @@
 import Container from 'components/shared/container/container';
 
-import List from '../list';
+import Cta from '../shared/cta';
+import List from '../shared/list';
 
 const items = [
   {
@@ -40,6 +41,10 @@ const Budget = () => (
           takes time from your engineers but in many cases, it also causes downtime for your
           end-users.
         </p>
+        <Cta
+          text="Want a price estimation for your particular use case?"
+          button={{ title: 'Reach out to us', url: '#' }}
+        />
       </div>
     </Container>
   </section>
