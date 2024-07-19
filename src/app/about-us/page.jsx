@@ -1,12 +1,13 @@
 import { notFound } from 'next/navigation';
 
+import Hero from 'components/pages/about/hero';
 import Layout from 'components/shared/layout';
 import { getAboutPage } from 'utils/api-pages';
 import getMetadata from 'utils/get-metadata';
 
 const AboutUsPage = () => (
   <Layout>
-    <h1>About Us</h1>
+    <Hero />
   </Layout>
 );
 
