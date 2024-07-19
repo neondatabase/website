@@ -58,6 +58,7 @@ const Point = ({ align, size = 'md' }) => (
         width={4}
         height={29}
         alt=""
+        priority
       />
     )}
     <span
@@ -92,6 +93,7 @@ const Timeline = () => (
         width={1344}
         height={2}
         alt=""
+        priority
       />
       <Image
         className="pointer-events-none absolute left-1/2 top-[93px] hidden w-[704px] -translate-x-1/2 lg:block md:hidden"
@@ -99,6 +101,7 @@ const Timeline = () => (
         width={704}
         height={2}
         alt=""
+        priority
       />
       <Image
         className="pointer-events-none absolute left-[52px] top-1/2 hidden w-0.5 -translate-y-1/2 md:block"
@@ -106,6 +109,7 @@ const Timeline = () => (
         width={2}
         height={440}
         alt=""
+        priority
       />
       <ul className="relative z-10 mx-auto flex h-[178px] justify-between px-[92px] pt-8 2xl:pl-16 2xl:pr-0 lg:h-[161px] lg:max-w-[704px] lg:pl-[51px] lg:pt-7 md:h-auto md:flex-col md:gap-y-10 md:pb-11 md:pt-[49px]">
         {ITEMS.map(({ date, title, className }, index) => (

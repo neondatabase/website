@@ -1,6 +1,7 @@
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import LINKS from 'constants/links';
 
 const Hero = () => (
   <section className="hero safe-paddings pt-48 xl:pt-36 lg:pt-11 md:pt-7">
@@ -19,6 +20,7 @@ const Hero = () => (
         <Button
           className="mt-7 h-11 px-[22px] !font-semibold tracking-tighter lg:mt-6 lg:h-9 lg:px-5 lg:text-sm md:mt-5 md:h-8"
           theme="primary"
+          to={LINKS.careers}
         >
           View Open Roles
         </Button>
@@ -37,7 +39,5 @@ const Hero = () => (
     </Container>
   </section>
 );
-
-Hero.propTypes = {};
 
 export default Hero;
