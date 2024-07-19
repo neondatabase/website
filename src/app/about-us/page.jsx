@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import Hero from 'components/pages/about/hero';
+import Timeline from 'components/pages/about/timeline';
 import Layout from 'components/shared/layout';
 import { getAboutPage } from 'utils/api-pages';
 import getMetadata from 'utils/get-metadata';
@@ -8,6 +9,7 @@ import getMetadata from 'utils/get-metadata';
 const AboutUsPage = () => (
   <Layout>
     <Hero />
+    <Timeline />
   </Layout>
 );
 
