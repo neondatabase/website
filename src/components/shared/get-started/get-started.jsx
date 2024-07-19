@@ -9,7 +9,7 @@ import LINKS from 'constants/links';
 const GetStarted = ({ className = null, title, description = null, button = null }) => (
   <section
     className={clsx(
-      'get-started relative overflow-hidden pb-[307px] pt-[445px]',
+      'get-started relative overflow-hidden',
       'xl:py-[230px] lg:pb-[156px] lg:pt-[179px] sm:pb-[110px] sm:pt-[116px]',
       className
     )}

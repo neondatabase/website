@@ -42,7 +42,10 @@ const HomePage = async () => {
       <Multitenancy />
       <Industry />
       <Trusted />
-      <GetStarted title="Features of tomorrow.<br /> Available today." />
+      <GetStarted
+        title="Features of tomorrow.<br /> Available today."
+        className="pb-[307px] pt-[445px]"
+      />
     </>
   );
 };
