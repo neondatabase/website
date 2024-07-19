@@ -15,7 +15,7 @@ const GetStarted = ({ className = null, title, description = null, button = null
     )}
   >
     <RiveAnimation
-      className="absolute left-1/2 top-[152px] aspect-[1.87365] w-[1703px] -translate-x-1/2 xl:-top-4 xl:w-[1432px] lg:w-[1126px] sm:-top-6 sm:w-[818px]"
+      className="absolute left-1/2 top-[60%] aspect-[1.87365] w-[1703px] -translate-x-1/2 -translate-y-1/2 xl:w-[1432px] lg:w-[1126px] sm:w-[818px]"
       src="/animations/shared/get-started.riv"
       artboard="footer"
       intersectionRootMargin="0px 0px 600px 0px"

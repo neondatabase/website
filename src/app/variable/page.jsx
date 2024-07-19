@@ -19,6 +19,7 @@ const VariablePage = () => (
     <Budget />
     <Unique />
     <GetStarted
+      className="pb-[290px] pt-[285px]"
       title="Try it yourself"
       description="You can experiment with autoscaling for free during 14 days"
       button={{
