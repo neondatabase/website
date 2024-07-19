@@ -18,20 +18,20 @@ In Neon, storage is comprised of your total **data size** and **history**.
 
 - **History**
 
-  This is the part of Neon storage that's different: "History" is a log of changes (inserts, updates, and deletes) to your data over time in the form of Write-Ahead Log (WAL) records. This history of changes is what enables features like [point-in-time restore](/docs/introduction/point-in-time-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/guides/branching-intro). 
+  This is the part of Neon storage that's different: "History" is a log of changes (inserts, updates, and deletes) to your data over time in the form of Write-Ahead Log (WAL) records. History is what enables features like [point-in-time restore](/docs/introduction/point-in-time-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/guides/branching-intro). 
   
   The size of your history depends on a couple of factors:
 
-  - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes retained. A heavy write workload will generates more history than a heavy read workload.
-  - **How much history you keep** &#8212; referred to as your [history retention window](/docs/introduction/point-in-time-restore#history-retention). Tt can be an hour, a day, a week, or even a month. History retention is configurable for each Neon project. As you can imagine, retaining 1 day of history requires much less storage than retaining 30 days, but less history also limits the fetaures that depend on it. For example, 1 day of history means that your maximum restore point is 1 day in the past. 
+  - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes. For example, a heavy write workload will generate more history than a heavy read workload.
+  - **How much history you keep** &#8212; referred to as [history retention](/docs/introduction/point-in-time-restore#history-retention). It can be an hour, a day, a week, or even a month. History retention is configurable for each Neon project. As you can imagine, retaining 1 day of history requires much less storage than retaining 30 days, but less history limits the fetaures that depend on it. For example, 1 day of history means that your maximum restore point is 1 day in the past. 
 
 ### How branching affects storage
 
-If you use Neon's branching feature, you should be aware that it can affect the amount of storage you consume. Here are some rules of thumb when it comes to branching:
+If you use Neon's branching feature, you should know that it can affect storage. Here are some rules of thumb when it comes to branching:
 
-  - **Creating a branch does not add to storage immediately**. At creation time, a branch is a clone of its parent branch; it shares data with its parent. Shared data is not counted toward storage.
-  - **A branch shares data with its parent while it remains within its parent's history retention window**. For example, if a parent branch has a 7-day history retention window, a child branch shares data with its parent branch for 7 days. However, as soon as the child branch ages out of that period, data is no longer shared &#8212; the child branch's data stands on its own and is counted toward storage.
-  - **Making changes to a branch adds to storage**. The branch may still share data with the parent while it exists within the parent's history retention window, but changes specific to the branch are unique to that branch and counted toward storage.
+  - **Creating a branch does not add to storage immediately**. At creation time, a branch is a copy-on-write clone of its parent branch and shares its parent's data. Shared data is not counted toward storage.
+  - **A branch shares data with its parent while it remains within its parent's history retention window**. For example, if a parent branch has a 7-day history retention window, a child branch shares data with its parent branch for 7 days. However, as soon as the child branch ages out of that window, data is no longer shared &#8212; the child branch's data stands on its own and is counted toward storage.
+  - **Making changes to a branch adds to storage**. A child branch may still share data with its parent while it exists within the parent's history retention window, but changes specific to the branch are unique to that branch and counted toward storage. Changing data on the child branch causes a "copy-on-write", adding a record to the branch's history.
 
 The storage amount you see under **Usage** on the **Billing** page in the Neon Console takes all of these factors into account.
 
@@ -44,7 +44,9 @@ Remember that each Neon plan comes with an allowance of storage that's already i
 <details>
 <summary>**Do branches add to storage?**</summary>
 
-When branches are created, they initially do not add to storage since they use shared data. However, as soon as changes are made within a branch, new WAL records are created, adding to your history. Also, if your branch ages out of its parent's history retention window, the branch's data is no longer shared and is counted toward storage. To avoid branches unnecessarily consuming storage, [reset](/docs/guides/reset-from-parent) branches or [delete](/docs/manage/branches) them before they age out of their parent's history retention window.
+When branches are created, they initially do not add to storage since they use shared data. However, as soon as changes are made within a branch, new WAL records are created, adding to your history. Over time, as branches age out of the retention window, their data is no longer shared with its parent and is counted independently, thus adding to the storage.
+
+To avoid branches unnecessarily consuming storage, [reset](/docs/guides/reset-from-parent) branches or [delete](/docs/manage/branches) them before they age out of their parent's history retention window.
 
 </details>
 
@@ -65,20 +67,18 @@ Your storage allowance varies depending on your Neon plan.
 
 </details>
 
-### How your storage size fluctuates
+<details>
+<summary>**What increases the size of history?**</summary>
 
-Storage size changes in Neon are influenced by typical database operations as well as the dynamic behavior of WAL records:
+Any data modifying operation increases the size of your history. As WAL records age out of your configured [retention window](/docs/introduction/point-in-time-restore#history-retention), they are removed, reducing your history and potentially decreasing your total storage size.
 
-- **Standard database operations**: Like any database, inserting data increases data size, while deleting data decreases it. However, since each operation generates a WAL record, even deletions temporarily increase your history size until those records age out.
-- **WAL records and aging**: Every database operation temporarily increases the size of your history. As WAL records age out of your configured [retention window](/docs/introduction/point-in-time-restore#history-retention), they are removed, reducing your history and potentially decreasing your total storage size.
-- **Branching**: When branches are created, they initially do not add to storage since they use shared data. However, as soon as changes are made within a branch, new WAL records are created, adding to your history.
-- **Aged-out branches**: Over time, as branches age out of the retention window, their data is no longer shared with its parent and is counted independently, thus adding to the storage.
+</details>
 
-All this is to say, your storage size is a moving target. We recommend you regularly [monitor your usage](/docs/introduction/monitor-usage) and adjust settings to effectively manage your storage costs.
 
-### Tips for minimizing storage
+<details>
+<summary>**What can I do to minimize my storage?**</summary>
 
-To help manage your storage size, here are some strategies to consider:
+To minimize your storage, here are some strategies to consider:
 
 - **Adjust history retention**
 
@@ -88,9 +88,11 @@ To help manage your storage size, here are some strategies to consider:
 
   It may seem counterintuitive, but deleting records from a table temporarily increases storage usage because these delete operations are logged as part of your change history. They remain until they age out of your history retention window. For mass deletions, using a `DELETE TABLE` operation is more storage-efficient since it logs only a single operation.
 
-- **Proactive branch management**
+- **Remove or reset branches before they age out of your retention window**
 
   Remove or reset branches before they diverge from the history retention window. Removing old branches that are no longer needed, or resetting them before they accumulate changes that are no longer shared, helps prevent unnecessary storage from building up.
+
+</details>
 
 ## Compute
 
