@@ -8,11 +8,11 @@ This topic describes [Storage](#storage), [Compute](#compute), and [Project](#pr
 
 ## Storage
 
-Storage is the total **data size** and **history** stored in Neon across all of your projects, branches, and databases.
+Storage is the total **data size** and **history** stored in Neon.
 
 - **Data size**
 
-  This is the size of the data you store in databases across all of your Neon projects and branches. You can think of this as a snapshot of your logical data at any given moment.
+  This is the size of the data stored in databases across all of your Neon projects and branches. You can think of this as a snapshot of your logical data at any given moment.
 
 - **History**
 
@@ -21,16 +21,18 @@ Storage is the total **data size** and **history** stored in Neon across all of 
   - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes retained. A heavy write workload will generates more history than a heavy read workload.
   - **Your [history retention window](/docs/introduction/point-in-time-restore#history-retention)** &#8212; it can be an hour, a day, a week, or longer. It's configurable for each Neon project. As you can imagine, retaining 1 day of history requires less storage than retaining 30 days of history, but a shorter history retention window also limits features like point-in-time restore and time travel that depend on it.
 
-    Neon's branching feature can also affect storage. Here are some rules of thumb:
+### How branching affects storage
+
+If you use Neon's branching feature, you should be aware that it can affect the amount of storage you consume. Here are some rules of thumb when it comes to branching:
 
   - **Creating a branch does not add to storage immediately**. At creation time, a branch is a clone of its parent branch; it shares data with its parent. Shared data is not counted toward storage.
-  - **A branch shares data with its parent while it remains within its parent's history retention window**. For example, if a parent branch has 7 days of history, a child branch shares data with its parent branch for that period. However, as soon as the branch ages past that period, data is no longer shared &#8212; the child branch's data stands on its own and is counted toward storage.
-  - **When you make changes to a branch, you generate data unique to the branch, adding to storage**. The branch may still share data with the parent while it exists within the parent's history retention window, but changes specific to the branch are counted toward storage.
+  - **A branch shares data with its parent while it remains within its parent's history retention window**. For example, if a parent branch has a 7-day history retention window, a child branch shares data with its parent branch for 7 days. However, as soon as the child branch ages out of that period, data is no longer shared &#8212; the child branch's data stands on its own and is counted toward storage.
+  - **Making changes to a branch adds to storage**. The branch may still share data with the parent while it exists within the parent's history retention window, but changes specific to the branch are unique to that branch and counted toward storage.
 
-The storage amount you see under **Usage** on the **Billing** page in the Neon Console takes all of these factors into account: The size of your databases across all of your Neon projects and branches, the size of your retained history, and the data shared between branches.
+The storage amount you see under **Usage** on the **Billing** page in the Neon Console takes all of these factors into account.
 
 <Admonition type="note">
-Remember that each Neon plan comes with an allowance of storage that's already included in your plan's monthly fee. The Launch plan includes 10 GiBs of storage. The Scale plan has an allowance of 50 GiB. You are only billed for extra storage if you go over your plan allowance. To learn how extra storage is allocated and billed for, see [Extra usage](/docs/introduction/extra-usage).
+Remember that each Neon plan comes with an allowance of storage that's already included in your plan's monthly fee. The Launch plan includes 10 GiB of storage. The Scale plan has an allowance of 50 GiB. You are only billed for extra storage if you go over your plan allowance. To learn how extra storage is allocated and billed, see [Extra usage](/docs/introduction/extra-usage).
 </Admonition>
 
 ### Storage FAQs
@@ -38,14 +40,14 @@ Remember that each Neon plan comes with an allowance of storage that's already i
 <details>
 <summary>**Do branches add to storage?**</summary>
 
-When branches are created, they initially do not add to storage since they use shared data. However, as soon as changes are made within a branch, new WAL records are created, adding to your history. Also, if your branch ages out of its parent's history retention window, the branch's' data is no longer shared and is counted toward storage. To avoid branches using up storage, reset them or delete them before they age out of their parent's history retention window.
+When branches are created, they initially do not add to storage since they use shared data. However, as soon as changes are made within a branch, new WAL records are created, adding to your history. Also, if your branch ages out of its parent's history retention window, the branch's data is no longer shared and is counted toward storage. To avoid branches unnecessarily consuming storage, [reset](/docs/guides/reset-from-parent) branches or [delete](/docs/manage/branches) them before they age out of their parent's history retention window.
 
 </details>
 
 <details>
 <summary>**Does a delete operation add to storage?**</summary>
 
-Like any database, inserting data increases data size, while deleting data decreases it. However, since each operation generates a WAL record, even deletions temporarily increase your history size until those records age out of your history retention window.
+Yes. Any data modifying operation generates a WAL record, so even deletions temporarily increase your history size until those records age out of your history retention window.
 
 </details>
 
@@ -54,7 +56,7 @@ Like any database, inserting data increases data size, while deleting data decre
 
 Your storage allowance varies depending on your Neon plan.
 
-- **Free Tier**: If you reach your storage limit on the Free Tier (0.5 GiB), any further database operations that would increase storage (INSERTs or UPDATEs for example) will fail, and you will receive an error message.
+- **Free Tier**: If you reach your storage limit on the Free Tier (0.5 GiB), any further database operations that would increase storage (inserts, updates, and deletes) will fail, and you will receive an error message.
 - **Launch and Scale Plans**: For users on Launch and Scale plans, exceeding your storage limit will result in [additional charges](/docs/introduction/extra-usage). Charges are added based on the maximum size your storage reaches and are prorated based on when in the month your storage size increased.
 
 </details>
