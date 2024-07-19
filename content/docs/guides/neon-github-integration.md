@@ -197,7 +197,7 @@ If you're new to GitHub Actions and workflows, GitHub's [Quickstart for GitHub A
 The following example applications utilize GitHub Actions workflows to create and delete branches in Neon. These examples can serve as references when building your own workflows.
 
 <Admonition type="note">
-The Neon GitHub integration sets a `NEON_API_KEY` secret and `PROJECT_ID` variable in your GitHub repository when you connect the repository to a Neon project. These example apps may use different variables and secrets. As you build your workflows, you may find that you require additional variables and secrets.
+The Neon GitHub integration sets a `NEON_API_KEY` secret and a `PROJECT_ID` variable in your GitHub repository. These example apps may use additional or different variables and secrets. As you build your workflows, you may also require additional or different variables and secrets.
 </Admonition>
 
 <DetailIconCards>
