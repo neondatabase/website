@@ -26,7 +26,7 @@ const OpenSource = () => (
       className="flex gap-x-[116px] gap-y-12 xl:max-w-[896px] xl:gap-x-16 lg:gap-x-[62px] md:gap-x-10 md:!px-5 sm:flex-col"
       size="960"
     >
-      <header className="ml-24 xl:max-w-[352px] lg:ml-16 lg:max-w-[290px] md:ml-0 sm:max-w-none">
+      <header className="sticky top-8 ml-24 h-fit xl:top-6 xl:max-w-[352px] lg:ml-16 lg:max-w-[290px] md:ml-0 sm:static sm:top-auto sm:max-w-none">
         <Heading
           className="max-w-[800px] text-[68px] font-medium leading-[0.9] tracking-extra-tight xl:max-w-[663px] xl:text-[56px] lg:max-w-[564px] lg:text-5xl md:text-[36px]"
           tag="h2"
