@@ -11,7 +11,7 @@ Neon's protected branches feature lets you apply IP restrictions to specific bra
 - Protected branches cannot be deleted.
 - Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
 - Projects with protected branches cannot be deleted.
-- TComputes associated with a protected branch cannot be deleted.
+- Computes associated with a protected branch cannot be deleted.
 
 You have to remove branch protection before you can perfom these actions. See [Remove branch protection](#remove-branch-protection).
 
