@@ -156,3 +156,9 @@ This example illustrates a prorated charge for extra storage that was allocated 
 | Plan Fee      | 1 month = $69                                                                              |
 | Extra Storage | 10 GiB extra storage unit at $15/month prorated for 3 days (June 28th – June 30th) = $1.50 |
 | **Total**     | $70.50                                                                                     |
+
+## Feedback
+
+We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. If you have feedback for us, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We read and consider every submission.
+
+<NeedHelp/>
