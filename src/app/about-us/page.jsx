@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 
 import ForDevelopers from 'components/pages/about/for-developers';
 import Hero from 'components/pages/about/hero';
+import Leadership from 'components/pages/about/leadership';
 import OpenSource from 'components/pages/about/open-source';
 import Timeline from 'components/pages/about/timeline';
 import Layout from 'components/shared/layout';
@@ -14,6 +15,7 @@ const AboutUsPage = () => (
     <Timeline />
     <ForDevelopers />
     <OpenSource />
+    <Leadership />
   </Layout>
 );
 
