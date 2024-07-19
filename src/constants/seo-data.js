@@ -109,8 +109,9 @@ export default {
     pathname: LINKS.thankYou,
   },
   variable: {
-    title: 'Variables — Neon',
-    description: 'Dynamically scale your Postgres database',
+    title: 'Dynamically scale your Postgres database — Neon',
+    description: 'Achieve optimal performance during traffic peaks without overprovisioning.',
+    imagePath: '/images/social-previews/variable.jpg',
     pathname: LINKS.variable,
   },
   404: {

@@ -1,13 +1,15 @@
 import Container from 'components/shared/container/container';
+import LINKS from 'constants/links';
 import autoscaleIcon from 'icons/variable/autoscale.svg';
 import costIcon from 'icons/variable/cost.svg';
 import databaseIcon from 'icons/variable/database.svg';
 import openSourceIcon from 'icons/variable/open-source.svg';
 import performanceIcon from 'icons/variable/performance.svg';
 import resizeIcon from 'icons/variable/resize.svg';
+import pieralbertoColonboAvatar from 'images/pages/variable/testimonials/pieralberto-colonbo.jpg';
 
 import List from '../list';
-import Review from '../review';
+import Testimonial from '../testimonial';
 
 const items = [
   {
@@ -32,7 +34,7 @@ const items = [
   },
   {
     icon: openSourceIcon,
-    text: '<strong>Transparency with open-source architecture.</strong> <span>Explore our code in Github</span>.',
+    text: '<strong>Transparency with open-source architecture.</strong> <span>Explore our code in&nbsp;Github</span>.',
   },
 ];
 
@@ -51,10 +53,14 @@ const Efficiency = () => (
         </p>
         <List items={items} />
       </div>
-      <Review
+      <Testimonial
         text="When we were using MySQL in Azure, we had to manually upgrade the database during the days of peak traffic and downgrade later in the day, which caused a couple of minutes of downtime and a huge waste of time for the team."
-        author="Pieralberto Colombo"
-        company="Recrowd"
+        author={{
+          name: 'Pieralberto Colombo',
+          company: 'Recrowd',
+          avatar: pieralbertoColonboAvatar,
+        }}
+        url={`${LINKS.blog}/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand`}
       />
     </Container>
   </section>

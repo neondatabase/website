@@ -1,7 +1,9 @@
 import Container from 'components/shared/container/container';
+import LINKS from 'constants/links';
+import andreaLevingeAvatar from 'images/pages/variable/testimonials/andrea-levinge.jpg';
 
 import List from '../list';
-import Review from '../review';
+import Testimonial from '../testimonial';
 
 const items = [
   {
@@ -37,10 +39,14 @@ const Unique = () => (
         <p>The Neon architecture is inspired in Amazon Aurora, but with some key differences:</p>
         <List items={items} />
       </div>
-      <Review
+      <Testimonial
         text="Before choosing Neon, we also considered Aurora, but the opacity of the pricing model did not convince us and costs seemed to rise quickly."
-        author="Andrea Levinge"
-        company="White Widget"
+        author={{
+          name: 'Andrea Levinge',
+          company: 'White Widget',
+          avatar: andreaLevingeAvatar,
+        }}
+        url={`${LINKS.blog}/white-widgets-secret-to-scalable-postgres-neon`}
       />
     </Container>
   </section>
