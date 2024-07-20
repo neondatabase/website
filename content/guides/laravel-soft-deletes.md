@@ -63,6 +63,7 @@ php artisan make:model Post -m
 ```
 
 This command creates two files:
+
 1. `app/Models/Post.php`: The `Post` model file.
 2. `database/migrations/xxxx_xx_xx_xxxxxx_create_posts_table.php`: A migration file to create the `posts` table.
 
@@ -387,6 +388,7 @@ Regarding indexing the `deleted_at` column, there's debate in the community. Som
 - An index on `deleted_at` could potentially slow down write operations.
 
 Instead, consider your specific use case:
+
 - If you frequently query for soft-deleted records or restore them, an index might be beneficial.
 - If your primary operations are on non-deleted records, you might not need an index on `deleted_at`.
 
@@ -421,6 +423,7 @@ public function it_soft_deletes_a_post()
 ```
 
 This test:
+
 1. Creates a post using a factory.
 2. Soft deletes the post.
 3. Asserts that the post is soft deleted using Laravel's `assertSoftDeleted` method.
@@ -448,6 +451,7 @@ public function it_restores_a_soft_deleted_post()
 ```
 
 This test:
+
 1. Creates and soft deletes a post.
 2. Restores the post.
 3. Checks that the post exists in the database with a null `deleted_at`.
@@ -484,6 +488,7 @@ public function it_includes_soft_deleted_posts_when_using_with_trashed()
 ```
 
 These two tests ensure that:
+
 1. Regular queries exclude soft deleted records and only return active posts.
 2. Queries using `withTrashed()` include soft deleted records.
 
