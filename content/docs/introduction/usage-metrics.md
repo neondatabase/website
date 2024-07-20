@@ -189,9 +189,15 @@ To estimate what your compute hour usage might be per month:
 
 ## Data Transfer
 
-Data transfer usage refers to the total volume of data transferred out of Neon (known as "egress") during a given billing period. Neon does not charge for egress data, but we do limit the amount of egress available on Free Tier projects to 5 GiB per month. The project's compute endpoint is suspended if the data transfer allowance is exceeded. Data transfer is tracked per Neon user account.
+Data transfer usage refers to the total volume of data transferred out of Neon (known as "egress") during a given billing period. Neon does not charge for egress data, but we do limit the amount of egress available on Free Tier projects to 5 GiB per month. The project's compute endpoint is suspended if the data transfer allowance is exceeded, and the following error message will be reported:
 
-For all other plans, Neon maintains a reasonable usage policy. This means there is no set limit on data transfers, but usage is expected to stay within a range typical for standard operations. If your usage significantly exceeds this expected range, Neon may reach out to discuss your pattern and possible plan adjustments.
+```text shouldWrap
+Your project has exceeded the data transfer quota. Upgrade your plan to increase limits.
+```
+
+Data transfer is tracked per Neon user account.
+
+For all other plans, Neon maintains a reasonable usage policy. This means there is no set limit on data transfer, but usage is expected to stay within a range typical for standard operations. If your usage significantly exceeds this expected range, Neon may reach out to discuss your usage and possible plan adjustments.
 
 ## Projects
 
