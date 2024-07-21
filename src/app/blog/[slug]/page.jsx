@@ -10,6 +10,7 @@ import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
+import SaveViewedPost from 'components/pages/blog-post/save-viewed-post';
 import SocialShare from 'components/pages/blog-post/social-share';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import Admonition from 'components/shared/admonition';
@@ -109,6 +110,7 @@ const BlogPage = async ({ params, searchParams }) => {
         </article>
       </div>
       {isDraftModeEnabled && <PreviewWarning />}
+      <SaveViewedPost post={post} />
     </>
   );
 };

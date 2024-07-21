@@ -5,6 +5,7 @@ import Load from 'components/pages/variable/load';
 import Unique from 'components/pages/variable/unique';
 import GetStarted from 'components/shared/get-started';
 import Layout from 'components/shared/layout';
+import ViewedArticles from 'components/shared/viewed-articles';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
@@ -18,6 +19,7 @@ const VariablePage = () => (
     <Efficiency />
     <Budget />
     <Unique />
+    <ViewedArticles />
     <GetStarted
       title="Try it yourself"
       description="You can experiment with autoscaling for free during 14 days"
