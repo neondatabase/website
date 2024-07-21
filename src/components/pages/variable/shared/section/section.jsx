@@ -6,7 +6,7 @@ import Container from 'components/shared/container/container';
 const Section = ({ className = null, title, children }) => (
   <section
     className={clsx(
-      'hero safe-paddings relative overflow-hidden pt-[72px] xl:pt-16 lg:pt-14 md:pt-11',
+      'safe-paddings relative overflow-hidden pt-[72px] xl:pt-16 lg:pt-14 md:pt-11',
       className
     )}
   >
@@ -17,7 +17,7 @@ const Section = ({ className = null, title, children }) => (
       />
       <div
         className={clsx(
-          'space-y-7 xl:space-y-6 lg:space-y-5 sm:space-y-4',
+          'flex flex-col gap-7 xl:gap-6 lg:gap-5 sm:gap-4',
           '[&>p]:text-lg [&>p]:tracking-extra-tight [&>p]:text-gray-new-70 sm:[&>p]:text-base',
           '[&>p_span]:text-green-45 [&>p_strong]:font-medium [&>p_strong]:text-white',
           '[&>ul]:text-lg [&>ul]:tracking-extra-tight [&>ul]:text-gray-new-70 sm:[&>ul]:text-base',

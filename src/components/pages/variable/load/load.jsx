@@ -31,7 +31,7 @@ const items = [
 ];
 
 const Load = () => (
-  <Section title="Variable resources for variable load">
+  <Section className="load" title="Variable resources for variable load">
     <p>
       No real-world database has constant demand. To some extent, all modern applications experience
       variable traffic patterns; for some applications, demand is clearly variable. For example:
@@ -52,7 +52,7 @@ const Load = () => (
       <strong>This means you only pay for what you use.</strong>
     </p>
 
-    <div className="mt-10 flex items-center justify-center gap-5 xl:mt-9 lg:mt-8 lg:flex-col md:gap-3.5 sm:mt-6">
+    <div className="mt-3 flex items-center justify-center gap-5 lg:flex-col md:gap-3.5 sm:mt-2">
       <Image
         className="rounded-lg lg:w-full lg:max-w-xl md:rounded"
         src={loadGraphicAWS}

@@ -39,7 +39,10 @@ const items = [
 ];
 
 const Efficiency = () => (
-  <Section title="Maximize efficiency and cut costs with Serverless Postgres">
+  <Section
+    className="efficiency"
+    title="Maximize efficiency and cut costs with Serverless Postgres"
+  >
     <p>
       Neon solves this inefficiency via a serverless architecture. By{' '}
       <span>natively separating storage and compute</span>, Neon implements two features that allows

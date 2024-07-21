@@ -30,11 +30,11 @@ const items = [
 ];
 
 const Unique = () => (
-  <Section title="What makes Neon unique vs others?">
+  <Section className="unique" title="What makes Neon unique vs others?">
     <p>The Neon architecture is inspired in Amazon Aurora, but with some key differences:</p>
     <List items={items} />
     <Testimonial
-      text="Before choosing Neon, we also considered Aurora, but the opacity of the pricing model did not convince us and costs seemed to rise quickly."
+      text="Before choosing Neon, we also considered Aurora, but the opacity of&nbsp;the pricing model did not convince us and costs seemed to&nbsp;rise&nbsp;quickly."
       author={{
         name: 'Andrea Levinge',
         company: 'White Widget',

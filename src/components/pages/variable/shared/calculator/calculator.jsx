@@ -1,4 +1,7 @@
+import clsx from 'clsx';
 import Image from 'next/image';
+
+import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 import BgDecor from '../bg-decor';
 
@@ -34,21 +37,29 @@ const values = [
   {
     title: 'Dollars overpaid',
     value: '$1,167',
+    valueClassName: 'bg-variable-value-1',
     period: 'month',
   },
   {
     title: 'Bill that could be saved ',
     value: '60%',
     period: 'month',
+    valueClassName: 'bg-variable-value-2',
     text: 'With scale to zero and autoscaling',
   },
 ];
 
-const DottedBorder = () => (
-  <span
-    className="pointer-events-none relative z-10 block w-full border-b border-dashed border-white mix-blend-overlay"
-    aria-hidden
-  />
+const DashedBorder = () => (
+  <>
+    <span
+      className="pointer-events-none relative z-20 block h-px w-full bg-[url('/images/pages/variable/dashed-border.png')] bg-[8px,1px] bg-repeat-x mix-blend-overlay"
+      aria-hidden
+    />
+    <span
+      className="pointer-events-none relative z-10 -mt-px block h-px w-full bg-[url('/images/pages/variable/dashed-border.png')] bg-[8px,1px] bg-repeat-x opacity-50 mix-blend-overlay"
+      aria-hidden
+    />
+  </>
 );
 
 const Calculator = () => (
@@ -60,33 +71,41 @@ const Calculator = () => (
       <ul className="space-y-2 text-lg tracking-extra-tight">
         {databases.map(({ type, instance, usage }) => (
           <li key={type} className="flex items-center gap-2 sm:flex-col sm:items-start">
-            <span className="font-medium text-gray-new-90">{type}</span>
-            <span className="text-gray-new-70">({instance})</span>
+            <span>
+              <span className="font-medium text-gray-new-90">{type}</span>{' '}
+              <span className="text-gray-new-70">({instance})</span>
+            </span>
             <span className="block size-[3px] rounded-full bg-gray-new-30" aria-hidden />
             <span className="text-gray-new-50">{usage}</span>
           </li>
         ))}
       </ul>
     </div>
-    <DottedBorder />
+    <DashedBorder />
     <div className="relative z-10 py-[18px]">
       <h3 className="text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:text-lg">
         Input parameters
+        <ChevronIcon className="ml-2.5 inline-block h-auto w-3" />
       </h3>
     </div>
-    <DottedBorder />
+    <DashedBorder />
     <div className="relative z-10 flex justify-between pt-6 sm:flex-col sm:gap-6">
-      {values.map(({ title, value, period, text }) => (
-        <div key={title} className="min-w-[248px]">
+      {values.map(({ title, value, valueClassName, period, text }) => (
+        <div key={title} className="min-w-[239px]">
           <p className="mb-2.5 leading-dense tracking-extra-tight">{title}</p>
           <div className="flex items-end gap-1.5">
-            <span className="font-title text-6xl font-medium leading-none tracking-tighter sm:text-4xl">
+            <span
+              className={clsx(
+                'bg-clip-text pr-1 font-title text-6xl font-medium leading-none tracking-tighter text-transparent sm:text-4xl',
+                valueClassName
+              )}
+            >
               {value}
             </span>
             <span className="mb-1 text-xl text-[#7485A9]">/{period}</span>
           </div>
           {text && (
-            <p className="mt-0.5 text-sm leading-none tracking-extra-tight text-[#7485A9]">
+            <p className="bg-variable-value-text bg-clip-text text-sm font-light leading-dense tracking-extra-tight text-transparent">
               {text}
             </p>
           )}

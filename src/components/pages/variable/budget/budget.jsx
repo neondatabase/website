@@ -19,7 +19,7 @@ const items = [
 ];
 
 const Budget = () => (
-  <Section title="How much budget are you wasting on unused compute?">
+  <Section className="budget" title="How much budget are you wasting on&nbsp;unused compute?">
     <p>
       <strong>Provisioning for peak load is highly inefficient cost-wise,</strong> especially taking
       into consideration that you will most likely be running not only one database instance but
