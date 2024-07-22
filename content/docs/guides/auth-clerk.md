@@ -43,11 +43,13 @@ npm install @clerk/nextjs
 
 We use the `@neondatabase/serverless` package as the Postgres client, and `drizzle-orm`, a lightweight typescript ORM, to interact with the database. `@clerk/nextjs` is the Clerk SDK for Next.js applications. We also use `dotenv` to manage environment variables and the `drizzle-kit` CLI tool for generating database migrations.
 
-Also, add a `.env.local` file to the root of your project, which we'll use to store Neon/Clerk connection parameters:
+Also, add a `.env` file to the root of your project, which we'll use to store Neon/Clerk connection parameters:
 
 ```bash
-touch .env.local
+touch .env
 ```
+
+Make sure to add an entry for `.env` to your `.gitignore` file, so that it's not committed to your repository.
 
 ## Setting up your Neon database
 
@@ -65,10 +67,10 @@ Navigate to the **Connection Details** section to find your database connection 
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-Add this connection string to the `.env.local` file in your Next.js project.
+Add this connection string to the `.env` file in your Next.js project.
 
 ```bash
-# .env.local
+# .env
 DATABASE_URL=NEON_DB_CONNECTION_STRING
 ```
 
@@ -88,7 +90,7 @@ NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=**************
 CLERK_SECRET_KEY=**************
 ```
 
-Add these variables to the `.env.local` file in your Next.js project.
+Add these variables to the `.env` file in your Next.js project.
 
 ## Implementing the application
 
@@ -141,9 +143,7 @@ We'll use the `drizzle-kit` CLI tool to generate migrations for the schema we de
 /// drizzle.config.ts
 
 import type { Config } from 'drizzle-kit';
-import * as dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
+import "dotenv/config";
 
 if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL not found in environment');
 
