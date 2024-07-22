@@ -66,7 +66,7 @@ To configure Laravel to use Postgres as the queue driver, update the `QUEUE_CONN
 QUEUE_CONNECTION=database
 ```
 
-This tells Laravel to use the database driver for the queue system, some of the other available drivers are `sync`, `redis`, `beanstalkd`, `sqs`, and `null`.
+This tells Laravel to use the database driver for the queue system. Some of the other available drivers are `sync`, `redis`, `beanstalkd`, `sqs`, and `null`.
 
 ### Creating the Jobs Table
 
