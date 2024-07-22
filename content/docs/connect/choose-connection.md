@@ -48,9 +48,9 @@ For more information on these choices, see:
 ## Common Pitfalls
 
 Here are some key points to help you navigate potential issues.
-| Issue                | Description                                                                                                                                                                                                                                                     |
+| Issue | Description |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Double Pooling       | Avoid using client-side pooling if you're using PgBouncer on the Neon side. Just let Neon handle the pooling to prevent retaining unused connections on the client side. If you must use client-side pooling, make sure it releases connections back to the pool early enough to avoid conflicts with PgBouncer. |
+| Double Pooling | Avoid using client-side pooling if you're using PgBouncer on the Neon side. Just let Neon handle the pooling to prevent retaining unused connections on the client side. If you must use client-side pooling, make sure it releases connections back to the pool early enough to avoid conflicts with PgBouncer. |
 | Understanding Limits | Don't confuse `max_connections` with `default_pool_size`.<br /><br />`max_connections` is the maximum number of concurrent connections allowed by PostgreSQL and is determined by your compute size.<br /><br />`default_pool_size` is the maximum number of connections PgBouncer will pool per user/database pair, which is set to 64 by default.<br /><br />Simply increasing your compute to get more `max_connections` may not improve performance if the bottleneck is actually on your `default_pool_size`. To increase your `default_pool_size`, contact support. |
 
 ## Connection types for typical applications
@@ -67,85 +67,85 @@ Here are some key points to help you navigate potential issues.
 
 1. Install the Postgres client library (e.g., pg for Node.js).
 
-    ```bash
-    npm install pg dotenv
-    ```
+   ```bash
+   npm install pg dotenv
+   ```
 
 1. Set up the connection string in your application configuration.
 
-    ```javascript
-    const { Client } = require('pg');
-    const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    });
-    client.connect();
-    ```
+   ```javascript
+   const { Client } = require('pg');
+   const client = new Client({
+     connectionString: process.env.DATABASE_URL,
+   });
+   client.connect();
+   ```
 
-1.  Use the client for database operations.
+1. Use the client for database operations.
 
-    ```javascript
-    client.query('SELECT * FROM users', (err, res) => {
-    if (err) throw err;
-    console.log(res.rows);
-    client.end();
-    });
-    ```
+   ```javascript
+   client.query('SELECT * FROM users', (err, res) => {
+     if (err) throw err;
+     console.log(res.rows);
+     client.end();
+   });
+   ```
 
 **Pooled Connections**:
 
 1. You don't need install PgBouncer; just use the `-pooler` suffix with your connection string.
 1. Modify the connection string to use this pooled endpoint.
 
-    ```javascript
-    const { Pool } = require('pg');
-    const pool = new Pool({
-    connectionString: process.env.DATABASE_URL_POOLER,
-    });
-    ```
+   ```javascript
+   const { Pool } = require('pg');
+   const pool = new Pool({
+     connectionString: process.env.DATABASE_URL_POOLER,
+   });
+   ```
 
 1. Use the pool for database operations.
 
-    ``` javascript
-    pool.query('SELECT * FROM users', (err, res) => {
-    if (err) throw err;
-    console.log(res.rows);
-    pool.end();
-    });
-    ```
+   ```javascript
+   pool.query('SELECT * FROM users', (err, res) => {
+     if (err) throw err;
+     console.log(res.rows);
+     pool.end();
+   });
+   ```
 
 **Serverless Driver**:
 
 1. Install the serverless driver.
 
-    ```bash
-    npm install @neondatabase/serverless
-    ```
+   ```bash
+   npm install @neondatabase/serverless
+   ```
 
 1. Configure the connection for HTTP or WebSocket.
 
-    ```javascript
-    const { Client } = require('@neondatabase/serverless');
-    const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    });
-    client.connect();
-    ```
+   ```javascript
+   const { Client } = require('@neondatabase/serverless');
+   const client = new Client({
+     connectionString: process.env.DATABASE_URL,
+   });
+   client.connect();
+   ```
 
 1. Use the client for database operations.
 
-    ```javascript
-    client.query('SELECT * FROM users', (err, res) => {
-    if (err) throw err;
-    console.log(res.rows);
-    client.end();
-    });
-    ```
+   ```javascript
+   client.query('SELECT * FROM users', (err, res) => {
+     if (err) throw err;
+     console.log(res.rows);
+     client.end();
+   });
+   ```
 
 ## Monitoring
 
 - **Use pg_stat_statements**: Use the `pg_stat_statements` extension to track information like execution counts and slow queries to help understand your query performance.
 
-    See [pg_stats_statements](docs/extensions/pg_stat_statement) for more information, in particular the [Monitor slow queries](/docs/extensions/pg_stat_statements#monitor-slow-queries) section.
+  See [pg_stats_statements](docs/extensions/pg_stat_statement) for more information, in particular the [Monitor slow queries](/docs/extensions/pg_stat_statements#monitor-slow-queries) section.
 
 - **Monitoring Dashboard**: Use the [Monitoring Dashboard](docs/introduction/monitoring-page) in the Neon Console to monitor connection metrics, compute usage, and database health.
 
@@ -155,9 +155,9 @@ Here are some key points to help you navigate potential issues.
 
 Here is a table summarizing the options we've walked through on this page:
 
-| Feature                    | Direct Connections                             | Pooled Connections                            | Serverless Driver (HTTP)                   | Serverless Driver (WebSocket)              |
-|----------------------------|------------------------------------------------|-----------------------------------------------|--------------------------------------------|--------------------------------------------|
-| **Use Case**               | Migrations, admin tasks requiring stable connections | High number of concurrent connections, efficient resource management | One-shot queries, short-lived operations   | Transactions requiring persistent connections |
-| **Connection Management**  | Persistent connections                         | Pooled per transaction                        | Rapid open/close connections               | Rapid open/close connections               |
-| **Scalability**            | Limited by `max_connections` tied to [compute size](/docs/manage/endpoints#how-to-size-your-compute)                 | Default pool size of 64 connections per user/database, can be increased with support | Automatically scales                       | Automatically scales                       |                      |
-| **Performance**            | Low overhead                                   | Efficient for stable, high-concurrency workloads | Optimized for serverless                   | Optimized for serverless                   |
+| Feature                   | Direct Connections                                                                                   | Pooled Connections                                                                   | Serverless Driver (HTTP)                 | Serverless Driver (WebSocket)                 |
+| ------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------- | --------------------------------------------- | --- |
+| **Use Case**              | Migrations, admin tasks requiring stable connections                                                 | High number of concurrent connections, efficient resource management                 | One-shot queries, short-lived operations | Transactions requiring persistent connections |
+| **Connection Management** | Persistent connections                                                                               | Pooled per transaction                                                               | Rapid open/close connections             | Rapid open/close connections                  |
+| **Scalability**           | Limited by `max_connections` tied to [compute size](/docs/manage/endpoints#how-to-size-your-compute) | Default pool size of 64 connections per user/database, can be increased with support | Automatically scales                     | Automatically scales                          |     |
+| **Performance**           | Low overhead                                                                                         | Efficient for stable, high-concurrency workloads                                     | Optimized for serverless                 | Optimized for serverless                      |
