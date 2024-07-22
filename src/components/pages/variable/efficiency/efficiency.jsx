@@ -1,4 +1,3 @@
-import LINKS from 'constants/links';
 import autoscaleIcon from 'icons/variable/autoscale.svg';
 import costIcon from 'icons/variable/cost.svg';
 import databaseIcon from 'icons/variable/database.svg';
@@ -18,11 +17,11 @@ const items = [
   },
   {
     icon: costIcon,
-    text: '<strong>Costs are controlled</strong> by setting a <span>max autoscaling limit</span>, avoiding unexpected charges.',
+    text: '<strong>Costs are controlled</strong> by setting a <a href="/docs/introduction/autoscaling">max autoscaling limit</a>, avoiding unexpected charges.',
   },
   {
     icon: performanceIcon,
-    text: '<strong>Fast performance in production without overpaying.</strong> In a typical compute bill, <span>60% of costs go towards unused resources</span>. ',
+    text: '<strong>Fast performance in production without overpaying.</strong> In a typical compute bill, <a href="https://medium.com/@carlotasotos/database-economics-an-amazon-rds-reflection-5d7a35638b20" target="_blank" rel="noopener noreferrer">60% of costs go towards unused resources</a>. ',
   },
   {
     icon: resizeIcon,
@@ -34,7 +33,7 @@ const items = [
   },
   {
     icon: openSourceIcon,
-    text: '<strong>Transparency with open-source architecture.</strong> <span>Explore our code in&nbsp;Github</span>.',
+    text: '<strong>Transparency with open-source architecture.</strong> <a href="https://github.com/neondatabase/neon" target="_blank" rel="noopener noreferrer">Explore our code in&nbsp;Github</a>.',
   },
 ];
 
@@ -43,13 +42,16 @@ const Efficiency = () => (
     className="efficiency"
     title="Maximize efficiency and cut costs with Serverless&nbsp;Postgres"
   >
-    <p>
-      Neon solves this inefficiency via a serverless architecture. By{' '}
-      <span>natively separating storage and compute</span>, Neon implements two features that allows
-      you to pay only for the compute you use without investing any manual work:{' '}
-      <span>autoscaling</span> and <span>scale to zero</span>.
-    </p>
-    <List items={items} />
+    <div className="prose-variable">
+      <p>
+        Neon solves this inefficiency via a serverless architecture. By{' '}
+        <a href="/blog/architecture-decisions-in-neon">natively separating storage and compute</a>,
+        Neon implements two features that allows you to pay only for the compute you use without
+        investing any manual work: <a href="/blog/scaling-serverless-postgres">autoscaling</a> and{' '}
+        <a href="/docs/introduction/auto-suspend">scale to zero</a>.
+      </p>
+      <List items={items} />
+    </div>
     <Testimonial
       text="When we were using MySQL in&nbsp;Azure, we had to manually upgrade the database during the&nbsp;days of peak traffic and downgrade later in the day, which&nbsp;caused a couple of minutes of downtime and a huge waste of&nbsp;time for the team."
       author={{
@@ -57,7 +59,7 @@ const Efficiency = () => (
         company: 'Recrowd',
         avatar: pieralbertoColonboAvatar,
       }}
-      url={`${LINKS.blog}/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand`}
+      url="/blog/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand"
     />
   </Section>
 );

@@ -32,27 +32,30 @@ const items = [
 
 const Load = () => (
   <Section className="load" title="Variable resources for variable&nbsp;load">
-    <p>
-      No real-world database has constant demand. To some extent, all modern applications experience
-      variable traffic patterns; for some applications, demand is clearly variable. For example:
-    </p>
-    <List items={items} />
-    <p>
-      Variable load patterns are common, but <strong>traditional managed databases</strong> require
-      provisioning a fixed amount of CPU and memory. To avoid degraded performance or even outages,
-      it is standard practice to provision for peak traffic, which means{' '}
-      <strong>
-        paying for peak capacity 24/7 — even though it&apos;s needed only a fraction of the time.
-      </strong>
-    </p>
-    <p>
-      <strong>Neon&apos;s serverless architecture</strong> eliminates the need for provisioning a
-      fixed amount of CPU and memory. Instead of overpaying for peak capacity that is rarely needed,
-      Neon dynamically adjusts compute resources to match actual workload demands.{' '}
-      <strong>This means you only pay for what you use.</strong>
-    </p>
+    <div className="prose-variable">
+      <p>
+        No real-world database has constant demand. To some extent, all modern applications
+        experience variable traffic patterns; for some applications, demand is clearly variable. For
+        example:
+      </p>
+      <List items={items} />
+      <p>
+        Variable load patterns are common, but <strong>traditional managed databases</strong>{' '}
+        require provisioning a fixed amount of CPU and memory. To avoid degraded performance or even
+        outages, it is standard practice to provision for peak traffic, which means{' '}
+        <strong>
+          paying for peak capacity 24/7 — even though it&apos;s needed only a fraction of the time.
+        </strong>
+      </p>
+      <p>
+        <strong>Neon&apos;s serverless architecture</strong> eliminates the need for provisioning a
+        fixed amount of CPU and memory. Instead of overpaying for peak capacity that is rarely
+        needed, Neon dynamically adjusts compute resources to match actual workload demands.{' '}
+        <strong>This means you only pay for what you use.</strong>
+      </p>
+    </div>
 
-    <div className="mt-3 flex items-center justify-center gap-5 lg:flex-col md:gap-3.5 sm:mt-2">
+    <div className="mt-10 flex items-center justify-center gap-5 xl:mt-9 lg:mt-8 lg:flex-col md:gap-3.5 sm:mt-6">
       <Image
         className="w-[470px] shrink-0 rounded-lg lg:w-full lg:max-w-xl md:rounded"
         src={loadGraphicAWS}

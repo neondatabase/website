@@ -2,24 +2,24 @@ import Budget from 'components/pages/variable/budget';
 import Efficiency from 'components/pages/variable/efficiency';
 import Hero from 'components/pages/variable/hero';
 import Load from 'components/pages/variable/load';
+import RelevantArticles from 'components/pages/variable/relevant-articles';
 import Unique from 'components/pages/variable/unique';
 import Cta from 'components/shared/get-started';
 import Layout from 'components/shared/layout';
-import ViewedArticles from 'components/shared/viewed-articles';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.variable);
 
-const VariablePage = () => (
+const VariableLoadPage = () => (
   <Layout>
     <Hero />
     <Load />
     <Efficiency />
     <Budget />
     <Unique />
-    <ViewedArticles />
+    <RelevantArticles />
     <Cta
       title="Try it yourself"
       description="You can experiment with autoscaling for free during 14 days"
@@ -32,4 +32,4 @@ const VariablePage = () => (
   </Layout>
 );
 
-export default VariablePage;
+export default VariableLoadPage;

@@ -1,3 +1,5 @@
+import LINKS from 'constants/links';
+
 import Cta from '../cta';
 import Example from '../example';
 import List from '../list';
@@ -20,25 +22,29 @@ const items = [
 
 const Budget = () => (
   <Section className="budget" title="How much budget are you wasting on&nbsp;unused compute?">
-    <p>
-      <strong>Provisioning for peak load is highly inefficient cost-wise,</strong> especially taking
-      into consideration that you will most likely be running not only one database instance but
-      many.
-    </p>
-    <List items={items} />
-    <p>
-      To grasp how much money is typically wasted on unused compute resources,{' '}
-      <strong>play with the calculator below using Amazon RDS prices.</strong>
-    </p>
+    <div className="prose-variable">
+      <p>
+        <strong>Provisioning for peak load is highly inefficient cost-wise,</strong> especially
+        taking into consideration that you will most likely be running not only one database
+        instance but many.
+      </p>
+      <List items={items} />
+      <p>
+        To grasp how much money is typically wasted on unused compute resources,{' '}
+        <strong>play with the calculator below using Amazon RDS prices.</strong>
+      </p>
+    </div>
     <Example />
-    <p>
-      If you wanted to <strong>avoid this wasted budget</strong>, you would have to regularly resize
-      and restart your instances. In practice, this is a manual process that not only takes time
-      from your engineers but in many cases, it also causes downtime for your end-users.
-    </p>
+    <div className="prose-variable">
+      <p>
+        If you wanted to <strong>avoid this wasted budget</strong>, you would have to regularly
+        resize and restart your instances. In practice, this is a manual process that not only takes
+        time from your engineers but in many cases, it also causes downtime for your end-users.
+      </p>
+    </div>
     <Cta
       text="Want a price estimation for your particular use case?"
-      button={{ title: 'Reach out to us', url: '#' }}
+      button={{ title: 'Reach out to us', url: LINKS.contactSales }}
     />
   </Section>
 );

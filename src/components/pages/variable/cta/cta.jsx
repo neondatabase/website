@@ -11,7 +11,7 @@ import greenGlowMobile from './images/green-glow-mobile.png';
 import greenGlow from './images/green-glow.png';
 
 const Cta = ({ text, button }) => (
-  <div className="relative mt-3 w-full overflow-hidden rounded-lg bg-gray-new-8 px-7 py-6 lg:pr-10 sm:mt-2 sm:p-6">
+  <div className="relative mt-10 w-full overflow-hidden rounded-lg bg-gray-new-8 px-7 py-6 xl:mt-9 lg:mt-8 lg:pr-10 sm:mt-6 sm:p-6">
     <div className="relative z-10 flex items-center justify-between sm:flex-col sm:gap-[18px]">
       <h3 className="mb-1 max-w-sm text-2xl font-medium leading-dense tracking-tighter sm:mb-1 sm:text-center sm:text-xl">
         {text}

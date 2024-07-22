@@ -32,7 +32,7 @@ const databases = [
 ];
 
 const Example = () => (
-  <div className="relative my-3 w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 sm:my-2 sm:p-6">
+  <div className="relative my-10 w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 xl:my-9 lg:my-8 sm:my-6 sm:p-6">
     <div className="relative z-10 pb-[18px]">
       <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:mb-4 sm:text-lg">
         Example deployment in RDS

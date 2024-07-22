@@ -7,7 +7,7 @@ import Testimonial from '../testimonial';
 
 const items = [
   {
-    text: 'Neon compute costs are <span>up to 75% cheaper</span> vs Aurora Serverless v2.',
+    text: 'Neon compute costs are <a href="https://www.outerbase.com/blog/the-evolution-of-serverless-postgres/" target="_blank" rel="noopener noreferrer">up to 75% cheaper</a> vs Aurora Serverless v2.',
   },
   {
     text: 'Neon <strong>scales to zero</strong>, Aurora Serverless does not.',
@@ -19,7 +19,7 @@ const items = [
     text: 'Neon uses <strong>transparent compute units</strong>, vs the ACU abstraction in&nbsp;Aurora&nbsp;Serverless.',
   },
   {
-    text: 'Neon supports <strong>database branching with data and schema via copy-on-write,</strong> <span>improving development workflows.</span>',
+    text: 'Neon supports <strong>database branching with data and schema via copy-on-write,</strong> <a href="/flow">improving development workflows.</a>',
   },
   {
     text: 'Neon&apos;s <strong>read replicas don&apos;t require storage redundancy</strong>, differently than Aurora&apos;s.',
@@ -31,8 +31,10 @@ const items = [
 
 const Unique = () => (
   <Section className="unique" title="What makes Neon unique vs&nbsp;others?">
-    <p>The Neon architecture is inspired in Amazon&nbsp;Aurora, but with some key differences:</p>
-    <List items={items} />
+    <div className="prose-variable">
+      <p>The Neon architecture is inspired in Amazon&nbsp;Aurora, but with some key differences:</p>
+      <List items={items} />
+    </div>
     <Testimonial
       text="Before choosing Neon, we also considered Aurora, but the opacity of&nbsp;the pricing model did not convince us and costs seemed to&nbsp;rise&nbsp;quickly."
       author={{
