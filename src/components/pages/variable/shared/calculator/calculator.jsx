@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import Field from 'components/shared/field';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
@@ -38,16 +38,23 @@ const databases = [
   },
 ];
 
+const instancePrices = {
+  prod: 2.25,
+  staging: 1.125,
+  testing: 0.0376,
+  dev: 0.016,
+};
+
 const values = [
   {
+    name: 'wasted_money',
     title: 'Dollars overpaid',
-    value: '$1,167',
     valueClassName: 'bg-variable-value-1',
     period: 'month',
   },
   {
+    name: 'saved_money',
     title: 'Bill that could be saved ',
-    value: '60%',
     period: 'month',
     valueClassName: 'bg-variable-value-2',
     text: 'With scale to zero and autoscaling',
@@ -67,16 +74,18 @@ const variantsAnimation = {
   },
 };
 
-const inputParams = [
+const inputParamsBlock = [
   {
     title: 'Deployment',
     items: [
       {
+        name: 'test_databases_num',
         title: 'Number of test databases',
         values: [1, 3, 5, 10],
         defaultValue: 1,
       },
       {
+        name: 'dev_databases_num',
         title: 'Number of dev databases',
         values: [1, 3, 5, 10],
         defaultValue: 5,
@@ -87,24 +96,24 @@ const inputParams = [
     title: 'Usage',
     items: [
       {
+        name: 'test_databases_daily_hrs',
         title: 'How many hrs/day are test databases&nbsp;running? ',
         values: [1, 2, 3, 5, 8],
-        defaultValue: 2,
       },
       {
+        name: 'dev_databases_daily_hrs',
         title: 'How many hrs/day are dev databases&nbsp;running? ',
         values: [1, 2, 3, 5, 8],
-        defaultValue: 8,
       },
       {
+        name: 'staging_databases_daily_hrs',
         title: 'How many hrs/day is staging running? ',
         values: [2, 5, 8],
-        defaultValue: 5,
       },
       {
+        name: 'peak_traffic_hrs',
         title: 'How many hrs/ day do you hit&nbsp;peak&nbsp;traffic? ',
         values: [0.5, 1, 3, 5],
-        defaultValue: 1,
       },
     ],
   },
@@ -129,6 +138,82 @@ const Calculator = () => {
   const handleToggler = () => {
     setIsOpen((isOpen) => !isOpen);
   };
+
+  const [inputParams, setInputParams] = useState({
+    test_databases_num: 1,
+    dev_databases_num: 5,
+    test_databases_daily_hrs: 2,
+    dev_databases_daily_hrs: 8,
+    staging_databases_daily_hrs: 5,
+    peak_traffic_hrs: 1,
+  });
+
+  const handleSelect = (e, name) => {
+    setInputParams({ ...inputParams, [name]: e.target.value });
+  };
+
+  const instanceCost = useMemo(
+    () => ({
+      production: instancePrices.prod * 730,
+      staging: instancePrices.staging * 730,
+      testing: instancePrices.testing * 730 * inputParams.test_databases_num,
+      development: instancePrices.dev * 730 * inputParams.dev_databases_num,
+    }),
+    [inputParams]
+  );
+
+  const totalCost = useMemo(
+    () => Object.values(instanceCost).reduce((acc, cost) => acc + cost, 0),
+    [instanceCost]
+  );
+
+  const userCost = useMemo(
+    () => ({
+      // TO-DO: fix calc bug here for production
+      production:
+        (instancePrices.prod * inputParams.peak_traffic_hrs +
+          (24 - instancePrices.prod) * 0.3 * inputParams.peak_traffic_hrs) *
+        30.4166,
+      testing:
+        instancePrices.testing *
+        inputParams.test_databases_daily_hrs *
+        inputParams.test_databases_num *
+        30.4166,
+      development:
+        instancePrices.dev *
+        inputParams.dev_databases_daily_hrs *
+        inputParams.dev_databases_num *
+        30.4166,
+    }),
+    [inputParams]
+  );
+
+  const wastedMoney = useMemo(
+    () => ({
+      production: instanceCost.production - userCost.production,
+      testing: instanceCost.testing - userCost.testing,
+      development: instanceCost.development - userCost.development,
+    }),
+    [instanceCost, userCost]
+  );
+
+  const totalWastedMoney = useMemo(
+    () => Object.values(wastedMoney).reduce((acc, cost) => acc + cost, 0),
+    [wastedMoney]
+  );
+
+  const totalSavedMoney = useMemo(
+    () => (totalWastedMoney / totalCost) * 100,
+    [totalCost, totalWastedMoney]
+  );
+
+  const totals = useMemo(
+    () => ({
+      wasted_money: `$${totalWastedMoney.toFixed(0)}`,
+      saved_money: `${totalSavedMoney.toFixed(0)}%`,
+    }),
+    [totalWastedMoney, totalSavedMoney]
+  );
 
   return (
     <div className="relative my-3 w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 sm:my-2 sm:p-6">
@@ -177,13 +262,13 @@ const Calculator = () => {
             }}
           >
             <div className="space-y-6 pt-6">
-              {inputParams.map(({ title, items }) => (
+              {inputParamsBlock.map(({ title, items }) => (
                 <div key={title}>
                   <p className="mb-3.5 font-medium uppercase leading-none tracking-extra-tight text-gray-new-40 sm:text-sm">
                     {title}
                   </p>
                   <ul className="space-y-1.5 sm:space-y-4">
-                    {items.map(({ title, values, defaultValue }) => (
+                    {items.map(({ name, title, values }) => (
                       <li
                         className="flex items-center justify-between gap-2 sm:flex-col sm:items-start"
                         key={title}
@@ -198,10 +283,14 @@ const Calculator = () => {
                           labelClassName="hidden"
                           inputClassName="remove-autocomplete-styles !m-0 !h-8 !px-3 !border-[1px] !border-gray-new-15 !bg-[#0D0E10] !text-base text-white placeholder:tracking-extra-tight focus:outline-none !focus:border-white sm:placeholder:text-sm !bg-[center_right_12px]"
                           tag="select"
-                          defaultValue={defaultValue}
+                          onChange={(e) => handleSelect(e, name)}
                         >
                           {values?.map((option, index) => (
-                            <option value={option} key={index}>
+                            <option
+                              value={option}
+                              key={index}
+                              selected={name === inputParams[name]}
+                            >
                               {option}
                             </option>
                           ))}
@@ -217,7 +306,7 @@ const Calculator = () => {
       </div>
       <DashedBorder />
       <div className="relative z-10 flex justify-between pt-6 sm:flex-col sm:gap-6">
-        {values.map(({ title, value, valueClassName, period, text }) => (
+        {values.map(({ name, title, valueClassName, period, text }) => (
           <div key={title} className="min-w-[239px]">
             <p className="mb-2.5 leading-dense tracking-extra-tight lg:mb-2">{title}</p>
             <div className="flex items-end gap-1.5">
@@ -227,7 +316,7 @@ const Calculator = () => {
                   valueClassName
                 )}
               >
-                {value}
+                {totals[name]}
               </span>
               <span className="mb-1 text-xl text-[#7485A9] xl:mb-0 sm:text-lg">/{period}</span>
             </div>
