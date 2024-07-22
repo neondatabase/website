@@ -34,7 +34,7 @@ const Hero = () => (
         <p className="mt-6 text-lg leading-snug tracking-extra-tight text-gray-new-50 xl:mt-5 lg:mt-4 lg:text-base md:mt-[18px]">
           Neon provides streamlined workflows across the entire Software Development Lifecycle —
           {` `}
-          <span className="text-white">from development to preview to production.</span>
+          <span className="text-white">from development to preview to&nbsp;production.</span>
         </p>
       </div>
     </Container>
