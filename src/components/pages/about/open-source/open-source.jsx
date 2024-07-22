@@ -1,26 +1,11 @@
+import PropTypes from 'prop-types';
+
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
-const ITEMS = [
-  {
-    number: 13,
-    isThousands: true,
-    label: 'Stars on GitHub',
-  },
-  {
-    number: 105,
-    label: 'Contributors',
-  },
-  {
-    number: '750',
-    isThousands: true,
-    label: 'Databases',
-  },
-];
-
-const OpenSource = () => (
+const OpenSource = ({ items }) => (
   <section className="open-source safe-paddings mt-[200px] xl:mt-[136px] lg:mt-[104px] md:mt-20">
     <Container
       className="flex gap-x-[116px] gap-y-12 xl:max-w-[896px] xl:gap-x-16 lg:gap-x-[62px] md:gap-x-10 md:!px-5 sm:flex-col"
@@ -54,7 +39,7 @@ const OpenSource = () => (
         </Link>
       </header>
       <ul className="flex flex-col gap-y-20 xl:gap-y-16 lg:gap-y-14 md:gap-y-10">
-        {ITEMS.map(({ label, number, isThousands }, index) => (
+        {items.map(({ label, number, isThousands }, index) => (
           <li className="flex flex-col" key={index}>
             <p>
               <span className="bg-[linear-gradient(73deg,#7F95EB_1%,#89E0EA_33%,#EFEFEF_81%)] bg-clip-text pr-3 font-title text-[216px] font-medium leading-[.8] tracking-[-0.06em] text-transparent xl:text-[192px] lg:pr-2 lg:text-[144px] md:text-[128px]">
@@ -75,5 +60,14 @@ const OpenSource = () => (
     </Container>
   </section>
 );
+
+OpenSource.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
 
 export default OpenSource;
