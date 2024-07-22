@@ -2,7 +2,7 @@
 title: Read replicas — Data analysis and reporting
 subtitle: Leverage read replicas for running data-intensive queries
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.887Z'
+updatedOn: '2024-07-19T15:46:08.351Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read-only compute instance for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
@@ -34,7 +34,9 @@ This guide walks you through creating a read replica, connecting to it, running 
 
 ## Create a read replica
 
-Creating a read replica involves adding a read-only compute endpoint to a branch. You can add a read-only compute endpoint to any branch in your Neon project by following these steps:
+Creating a read replica involves adding a read-only compute endpoint to a branch.
+
+You can add a read-only compute endpoint to any branch in your Neon project by following these steps:
 
 1. In the Neon Console, select **Branches**.
 2. Select the branch where your database resides.

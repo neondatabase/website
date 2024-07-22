@@ -3,7 +3,7 @@ title: Promote a branch
 subtitle: Learn how to promote a branch to the default branch of your Neon project using
   the Neon API
 enableTableOfContents: true
-updatedOn: '2024-06-20T17:29:55.102Z'
+updatedOn: '2024-07-19T15:46:08.350Z'
 ---
 
 This guide describes how to create a new branch and promote it to the default branch of your Neon project in the context of a data recovery scenario. It also describes how to move the compute endpoint from your existing default branch to the new branch to avoid having to reconfigure your application's database connection details.
@@ -13,7 +13,7 @@ This guide describes how to create a new branch and promote it to the default br
 Each Neon project has a default branch. In the Neon Console, your default branch is identified on the **Branches** page by a `DEFAULT` tag. You can designate any branch as the default branch. The advantage of the default branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
 
 - For [Neon Free Tier](/docs/introduction/plans#free-tier) users, the compute endpoint associated with the default branch is always available.
-- For users on paid plans, the compute endpoint associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
+- For users on paid plans, the compute endpoint associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage.
 
 ## Why promote a branch to default?
 

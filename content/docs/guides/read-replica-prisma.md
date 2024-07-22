@@ -2,7 +2,7 @@
 title: Use Neon read replicas with Prisma
 subtitle: Learn how to scale Prisma applications with Neon read replicas
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.888Z'
+updatedOn: '2024-07-19T15:46:08.352Z'
 ---
 
 A Neon read replica is an independent read-only compute instance that performs read operations on the same data as your read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -20,7 +20,9 @@ In this guide, we'll show you how you can leverage Neon read replicas to efficie
 
 ## Create a read replica
 
-You can create one or more read replicas for any branch in your Neon project. Creating a read replica involves adding a read-only compute endpoint to the Neon branch. You can add a read-only compute endpoint by following these steps:
+You can create one or more read replicas for any branch in your Neon project. Creating a read replica involves adding a read-only compute endpoint to the Neon branch.
+
+You can add a read-only compute endpoint by following these steps:
 
 1. In the Neon Console, select **Branches**.
 2. Select the branch where your database resides.

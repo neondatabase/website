@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-06-20T17:29:55.111Z'
+updatedOn: '2024-07-19T21:48:31.742Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -23,18 +23,27 @@ When working with branches, it is important to remove old and unused branches. B
 Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project. The advantage of the default branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
 
 - For Neon Free Tier users, the compute endpoint associated with the default branch is always available.
-- For users on paid plans, the compute endpoint associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
+- For users on paid plans, the compute endpoint associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage.
 
 ## Non-default branch
 
 Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
 
 - For Neon Free Tier users, compute endpoints associated with non-default branches are suspended if you exceed the Neon Free Tier _active hours_ limit of 20 hours per month.
-- For users on paid plans, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-default branch remains suspended.
+- For users on paid plans, default limits prevent more than 20 concurrently active compute endpoints. Beyond that limit, a compute endpoint associated with a non-default branch remains suspended.
 
 ## Protected branch
 
-"Protected" is a status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan, where you can designate up to 5 protected branches. For information about how to configure a protected branch, see [Set a branch as protected](#set-a-branch-as-protected).
+"Protected" is a status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. The following retsrictions also apply to protected branches:
+
+- Protected branches cannot be deleted.
+- Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
+- Projects with protected branches cannot be deleted.
+- Computes associated with a protected branch cannot be deleted.
+
+You have to remove branch protection before you can perfom these actions. See [Remove branch protection](#remove-branch-protection).
+
+Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan, where you can designate up to 5 protected branches. For information about how to configure a protected branch, see [Set a branch as protected](#set-a-branch-as-protected).
 
 ## Create a branch
 
@@ -198,9 +207,7 @@ To delete a branch:
 
 ## Check the data size
 
-Plan limits define the amount of data you can store.
-
-You can check the logical data size of each branch by viewing the `Data size` value on the **Branches** widget or page in the Neon Console. Alternatively, you can run the following query:
+You can check the logical data size for the databases on a branch by viewing the **Data size** value on the **Branches** page or page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connected to your database:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))
@@ -208,10 +215,6 @@ FROM pg_database;
 ```
 
 Data size does not include [history](/docs/reference/glossary#history).
-
-<Admonition type="info">
-Neon stores data in its own internal format.
-</Admonition>
 
 ## Branching with the Neon CLI
 
