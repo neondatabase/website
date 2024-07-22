@@ -3,7 +3,7 @@ import Efficiency from 'components/pages/variable/efficiency';
 import Hero from 'components/pages/variable/hero';
 import Load from 'components/pages/variable/load';
 import Unique from 'components/pages/variable/unique';
-import GetStarted from 'components/shared/get-started';
+import Cta from 'components/shared/get-started';
 import Layout from 'components/shared/layout';
 import ViewedArticles from 'components/shared/viewed-articles';
 import LINKS from 'constants/links';
@@ -20,7 +20,7 @@ const VariablePage = () => (
     <Budget />
     <Unique />
     <ViewedArticles />
-    <GetStarted
+    <Cta
       title="Try it yourself"
       description="You can experiment with autoscaling for free during 14 days"
       button={{

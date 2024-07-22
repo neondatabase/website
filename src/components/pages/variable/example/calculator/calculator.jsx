@@ -2,41 +2,10 @@
 
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
-import Image from 'next/image';
 import { useState, useMemo } from 'react';
 
 import Field from 'components/shared/field';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
-
-import BgDecor from '../bg-decor';
-
-import leftGlowMobile from './images/left-glow-mobile.png';
-import leftGlow from './images/left-glow.png';
-import rightGlowMobile from './images/right-glow-mobile.png';
-import rightGlow from './images/right-glow.png';
-
-const databases = [
-  {
-    type: '1 production database',
-    instance: 'db.r6g.8xlarge',
-    usage: 'Runs 24/7',
-  },
-  {
-    type: '1 staging database',
-    instance: 'db.r6g.4xlarge',
-    usage: 'Used interminently',
-  },
-  {
-    type: 'Dev database',
-    instance: '10 db.t4g.micro',
-    usage: 'Used interminently',
-  },
-  {
-    type: 'Test database ',
-    instance: 'db.t3.medium',
-    usage: 'Used interminently',
-  },
-];
 
 const instancePrices = {
   prod: 2.25,
@@ -54,7 +23,7 @@ const values = [
   },
   {
     name: 'saved_money',
-    title: 'Bill that could be saved ',
+    title: 'Bill that could be saved',
     period: 'month',
     valueClassName: 'bg-variable-value-2',
     text: 'With scale to zero and autoscaling',
@@ -95,22 +64,22 @@ const inputParamsBlock = [
     items: [
       {
         name: 'test_databases_daily_hrs',
-        title: 'How many hrs/day are test databases&nbsp;running? ',
+        title: 'How many hrs/day are test databases&nbsp;running?',
         values: [1, 2, 3, 5, 8],
       },
       {
         name: 'dev_databases_daily_hrs',
-        title: 'How many hrs/day are dev databases&nbsp;running? ',
+        title: 'How many hrs/day are dev databases&nbsp;running?',
         values: [1, 2, 3, 5, 8],
       },
       {
         name: 'staging_databases_daily_hrs',
-        title: 'How many hrs/day is staging running? ',
+        title: 'How many hrs/day is staging running?',
         values: [2, 5, 8],
       },
       {
         name: 'peak_traffic_hrs',
-        title: 'How many hrs/ day do you hit&nbsp;peak&nbsp;traffic? ',
+        title: 'How many hrs/ day do you hit&nbsp;peak&nbsp;traffic?',
         values: [0.5, 1, 3, 5],
       },
     ],
@@ -167,7 +136,6 @@ const Calculator = () => {
 
   const userCost = useMemo(
     () => ({
-      // TO-DO: fix calc bug here for production
       production:
         (inputParams.peak_traffic_hrs * instancePrices.prod +
           (24 - inputParams.peak_traffic_hrs) * 0.3 * instancePrices.prod) *
@@ -207,34 +175,14 @@ const Calculator = () => {
 
   const totals = useMemo(
     () => ({
-      wasted_money: `$${totalWastedMoney.toFixed(0)}`,
+      wasted_money: `$${totalWastedMoney.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`,
       saved_money: `${totalSavedMoney.toFixed(0)}%`,
     }),
     [totalWastedMoney, totalSavedMoney]
   );
 
   return (
-    <div className="relative my-3 w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 sm:my-2 sm:p-6">
-      <div className="relative z-10 pb-[18px]">
-        <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:mb-4 sm:text-lg">
-          Example deployment in RDS
-        </h3>
-        <ul className="space-y-2 text-lg tracking-extra-tight sm:text-sm sm:leading-snug">
-          {databases.map(({ type, instance, usage }) => (
-            <li key={type} className="flex items-center gap-2 sm:flex-col sm:items-start sm:gap-0">
-              <span>
-                <span className="font-medium text-gray-new-90">{type}</span>{' '}
-                <span className="text-gray-new-70">({instance})</span>
-              </span>
-              <span
-                className="block size-[3px] rounded-full bg-gray-new-30 sm:hidden"
-                aria-hidden
-              />
-              <span className="text-gray-new-50">{usage}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <>
       <DashedBorder />
       <div className="relative z-10 py-[18px] sm:py-4">
         <button
@@ -329,37 +277,7 @@ const Calculator = () => {
           </div>
         ))}
       </div>
-      <BgDecor hasBorder hasNoise hasPattern>
-        <Image
-          className="absolute right-0 top-0 h-[776px] w-[617px] sm:hidden"
-          src={rightGlow}
-          width={617}
-          height={776}
-          alt=""
-        />
-        <Image
-          className="absolute right-0 top-0 hidden h-[536px] w-[320px] sm:block"
-          src={rightGlowMobile}
-          width={320}
-          height={536}
-          alt=""
-        />
-        <Image
-          className="absolute bottom-0 left-0 h-[339px] w-[389px] sm:hidden"
-          src={leftGlow}
-          width={389}
-          height={339}
-          alt=""
-        />
-        <Image
-          className="absolute bottom-0 left-0 hidden h-[273px] w-[320px] sm:block"
-          src={leftGlowMobile}
-          width={320}
-          height={273}
-          alt=""
-        />
-      </BgDecor>
-    </div>
+    </>
   );
 };
 

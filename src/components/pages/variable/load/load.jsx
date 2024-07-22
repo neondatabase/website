@@ -5,8 +5,8 @@ import gamingIcon from 'icons/variable/gaming.svg';
 import productivityIcon from 'icons/variable/productivity.svg';
 import shopsIcon from 'icons/variable/shops.svg';
 
-import List from '../shared/list';
-import Section from '../shared/section';
+import List from '../list';
+import Section from '../section';
 
 import loadGraphicAWS from './images/load-graphic-aws.jpg';
 import loadGraphicNeon from './images/load-graphic-neon.jpg';
@@ -54,7 +54,7 @@ const Load = () => (
 
     <div className="mt-3 flex items-center justify-center gap-5 lg:flex-col md:gap-3.5 sm:mt-2">
       <Image
-        className="rounded-lg lg:w-full lg:max-w-xl md:rounded"
+        className="w-[470px] shrink-0 rounded-lg lg:w-full lg:max-w-xl md:rounded"
         src={loadGraphicAWS}
         width={470}
         height={338}
@@ -64,7 +64,7 @@ const Load = () => (
         priority
       />
       <Image
-        className="rounded-lg lg:w-full lg:max-w-xl md:rounded"
+        className="w-[470px] shrink-0 rounded-lg lg:w-full lg:max-w-xl md:rounded"
         src={loadGraphicNeon}
         width={470}
         height={338}

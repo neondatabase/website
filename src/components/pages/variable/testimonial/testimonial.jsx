@@ -30,7 +30,7 @@ const Testimonial = ({ text, author, url }) => (
               />
             )}
             {author.name && (
-              <figcaption className="text-lg text-gray-new-60 lg:text-[15px] sm:text-sm">
+              <figcaption className="text-lg text-gray-new-60 lg:text-base sm:text-sm">
                 {author.name}
                 {author.company && (
                   <cite className="font-light not-italic text-gray-new-40">
@@ -44,7 +44,7 @@ const Testimonial = ({ text, author, url }) => (
         )}
         {url && (
           <Link
-            className="flex w-fit items-center text-sm font-medium leading-none tracking-tighter"
+            className="flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em]"
             to={url}
             theme="white"
             withArrow

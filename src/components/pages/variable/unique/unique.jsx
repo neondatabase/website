@@ -1,9 +1,9 @@
 import LINKS from 'constants/links';
 import andreaLevingeAvatar from 'images/pages/variable/testimonials/andrea-levinge.jpg';
 
-import List from '../shared/list';
-import Section from '../shared/section';
-import Testimonial from '../shared/testimonial';
+import List from '../list';
+import Section from '../section';
+import Testimonial from '../testimonial';
 
 const items = [
   {

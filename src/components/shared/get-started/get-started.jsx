@@ -11,7 +11,7 @@ const sizes = {
   sm: 'pb-[290px] pt-[285px]',
 };
 
-const GetStarted = ({ title, description = null, button = null, size = 'lg' }) => (
+const Cta = ({ title, description = null, button = null, size = 'lg' }) => (
   <section
     className={clsx(
       'get-started relative overflow-hidden',
@@ -55,7 +55,7 @@ const GetStarted = ({ title, description = null, button = null, size = 'lg' }) =
   </section>
 );
 
-GetStarted.propTypes = {
+Cta.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   button: PropTypes.shape({
@@ -65,4 +65,4 @@ GetStarted.propTypes = {
   size: PropTypes.oneOf(Object.keys(sizes)),
 };
 
-export default GetStarted;
+export default Cta;

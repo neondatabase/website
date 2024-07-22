@@ -1,7 +1,7 @@
-import Calculator from '../shared/calculator';
-import Cta from '../shared/cta';
-import List from '../shared/list';
-import Section from '../shared/section';
+import Cta from '../cta';
+import Example from '../example';
+import List from '../list';
+import Section from '../section';
 
 const items = [
   {
@@ -30,7 +30,7 @@ const Budget = () => (
       To grasp how much money is typically wasted on unused compute resources,{' '}
       <strong>play with the calculator below using Amazon RDS prices.</strong>
     </p>
-    <Calculator />
+    <Example />
     <p>
       If you wanted to <strong>avoid this wasted budget</strong>, you would have to regularly resize
       and restart your instances. In practice, this is a manual process that not only takes time

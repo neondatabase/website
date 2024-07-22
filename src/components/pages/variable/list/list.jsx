@@ -6,15 +6,10 @@ const List = ({ items }) => (
     {items.map(({ icon, text }, index) => (
       <li className="flex items-start" key={index}>
         {icon && (
-          <img
-            className="mr-3.5 mt-0.5 shrink-0"
-            src={icon}
-            alt=""
-            loading="lazy"
-            width={24}
-            height={24}
-            aria-hidden
-          />
+          <div className="relative mr-3.5 mt-0.5 flex size-6 shrink-0 items-center justify-center rounded bg-variable-list-icon-bg sm:mr-3 sm:mt-0">
+            <img className="relative" src={icon} alt="" loading="lazy" width={16} height={16} />
+            <div className="absolute inset-0 rounded-[inherit] mix-blend-overlay border-image-variable-list-icon-border" />
+          </div>
         )}
         <div
           className={clsx(

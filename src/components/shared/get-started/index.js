@@ -1,3 +1,3 @@
-import GetStarted from './get-started';
+import Cta from './get-started';
 
-export default GetStarted;
+export default Cta;

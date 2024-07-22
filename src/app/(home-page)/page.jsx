@@ -10,7 +10,7 @@ import Lightning from 'components/pages/home/lightning';
 import Logos from 'components/pages/home/logos';
 import Multitenancy from 'components/pages/home/multitenancy';
 import Trusted from 'components/pages/home/trusted';
-import GetStarted from 'components/shared/get-started';
+import Cta from 'components/shared/get-started';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
@@ -42,7 +42,7 @@ const HomePage = async () => {
       <Multitenancy />
       <Industry />
       <Trusted />
-      <GetStarted title="Features of tomorrow.<br /> Available today." />
+      <Cta title="Features of tomorrow.<br /> Available today." />
     </>
   );
 };

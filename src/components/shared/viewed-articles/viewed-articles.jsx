@@ -76,9 +76,15 @@ const ViewedArticles = () => {
           <h2 className="font-title text-[36px] font-medium leading-none tracking-extra-tight text-white xl:text-[32px] lg:text-[28px] md:text-2xl">
             Keep reading
           </h2>
-          <div className="flex gap-3">
-            <Button handleClick={handlePrevClick} disabled={isBeginning} prev />
-            <Button handleClick={handleNextClick} disabled={isEnd} />
+          <div
+            className={clsx(
+              viewedPosts.length < 2 ? 'hidden' : viewedPosts.length < 4 && 'hidden md:block'
+            )}
+          >
+            <div className="flex gap-3">
+              <Button handleClick={handlePrevClick} disabled={isBeginning} prev />
+              <Button handleClick={handleNextClick} disabled={isEnd} />
+            </div>
           </div>
         </div>
 

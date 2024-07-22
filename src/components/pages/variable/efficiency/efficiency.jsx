@@ -7,9 +7,9 @@ import performanceIcon from 'icons/variable/performance.svg';
 import resizeIcon from 'icons/variable/resize.svg';
 import pieralbertoColonboAvatar from 'images/pages/variable/testimonials/pieralberto-colonbo.jpg';
 
-import List from '../shared/list';
-import Section from '../shared/section';
-import Testimonial from '../shared/testimonial';
+import List from '../list';
+import Section from '../section';
+import Testimonial from '../testimonial';
 
 const items = [
   {
