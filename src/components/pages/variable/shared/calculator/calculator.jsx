@@ -82,13 +82,11 @@ const inputParamsBlock = [
         name: 'test_databases_num',
         title: 'Number of test databases',
         values: [1, 3, 5, 10],
-        defaultValue: 1,
       },
       {
         name: 'dev_databases_num',
         title: 'Number of dev databases',
         values: [1, 3, 5, 10],
-        defaultValue: 5,
       },
     ],
   },
@@ -140,12 +138,12 @@ const Calculator = () => {
   };
 
   const [inputParams, setInputParams] = useState({
-    test_databases_num: 1,
-    dev_databases_num: 5,
-    test_databases_daily_hrs: 2,
-    dev_databases_daily_hrs: 8,
-    staging_databases_daily_hrs: 5,
-    peak_traffic_hrs: 1,
+    test_databases_num: 10,
+    dev_databases_num: 10,
+    test_databases_daily_hrs: 1,
+    dev_databases_daily_hrs: 1,
+    staging_databases_daily_hrs: 2,
+    peak_traffic_hrs: 0.5,
   });
 
   const handleSelect = (e, name) => {
@@ -171,8 +169,8 @@ const Calculator = () => {
     () => ({
       // TO-DO: fix calc bug here for production
       production:
-        (instancePrices.prod * inputParams.peak_traffic_hrs +
-          (24 - instancePrices.prod) * 0.3 * inputParams.peak_traffic_hrs) *
+        (inputParams.peak_traffic_hrs * instancePrices.prod +
+          (24 - inputParams.peak_traffic_hrs) * 0.3 * instancePrices.prod) *
         30.4166,
       testing:
         instancePrices.testing *
@@ -258,6 +256,7 @@ const Calculator = () => {
 
         <LazyMotion features={domAnimation}>
           <m.div
+            className="overflow-hidden"
             initial="closed"
             animate={isOpen ? 'open' : 'closed'}
             variants={variantsAnimation}
@@ -288,14 +287,11 @@ const Calculator = () => {
                           labelClassName="hidden"
                           inputClassName="remove-autocomplete-styles !m-0 !h-8 !px-3 !border-[1px] !border-gray-new-15 !bg-[#0D0E10] !text-base text-white placeholder:tracking-extra-tight focus:outline-none !focus:border-white sm:placeholder:text-sm !bg-[center_right_12px]"
                           tag="select"
+                          defaultValue={inputParams[name]}
                           onChange={(e) => handleSelect(e, name)}
                         >
                           {values?.map((option, index) => (
-                            <option
-                              value={option}
-                              key={index}
-                              selected={name === inputParams[name]}
-                            >
+                            <option value={option} key={index}>
                               {option}
                             </option>
                           ))}
