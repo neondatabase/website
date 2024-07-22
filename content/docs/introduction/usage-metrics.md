@@ -197,9 +197,7 @@ Your project has exceeded the data transfer quota. Upgrade your plan to increase
 
 If you hit this limit and need to upgrade your plan, you can do so from your Neon account's **Billing** page. For instructions, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free Tier users can monitor **Data transfer** usage from the **Resources remaining** widget on the **Project Dashboard**.
 
-For all other plans, Neon maintains a reasonable usage policy. This means there is no set limit on data transfer, but usage is expected to stay within a range typical for standard operations. If your usage significantly exceeds this expected range, Neon may reach out to discuss your usage and possible plan adjustments. Paying users can monitor **Data transfer** usage from the **Usage** widget on the **Project Dashboard**.
-
-Data transfer is tracked per Neon user account.
+For all other plans, Neon maintains a reasonable usage policy. This means there is no set limit on data transfer, but usage is expected to stay within a range typical for standard operations. If your usage significantly exceeds this expected range, Neon may reach out to discuss your usage and possible plan adjustments. Paying users can monitor per-project **Data transfer** usage from the **Usage** widget on the **Project Dashboard**.
 
 ## Projects
 
