@@ -247,7 +247,12 @@ const Calculator = () => {
         >
           <h3 className="text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:text-lg">
             Input parameters
-            <ChevronIcon className="ml-2.5 inline-block h-auto w-3" />
+            <ChevronIcon
+              className={clsx(
+                'ml-2.5 inline-block h-auto w-3 transition-transform duration-300',
+                isOpen && 'rotate-180'
+              )}
+            />
           </h3>
         </button>
 
