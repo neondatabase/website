@@ -17,7 +17,7 @@ These extensions offer specialized functionality for routing, hierarchical geosp
 
 **Version availability:**
 
-For up-to-date information on supported versions for each extension, refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon. 
+For up-to-date information on supported versions for each extension, refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon.
 
 ## Enable the PostGIS extension
 
@@ -109,7 +109,7 @@ This query returns the sequence of edges that form the shortest path from node 2
 For navigation applications, we might need to find multiple alternative routes. We can use the `pgr_ksp` function to find the K-shortest paths between two nodes:
 
 ```sql
-SELECT 
+SELECT
     route.path_id,
     route.path_seq,
     route.node,
@@ -143,7 +143,7 @@ This query returns two sequence of edges, that can be used to go from node 1 to 
 
 ## H3 and H3_PostGIS
 
-H3 is a hierarchical geospatial indexing system. It divides the earth's surface into hexagonal cells at multiple resolutions, and provides a unique addressing system for location data. It is used for applications like optimizing delivery zones and service areas,geospatial aggregation and analytics. 
+H3 is a hierarchical geospatial indexing system. It divides the earth's surface into hexagonal cells at multiple resolutions, and provides a unique addressing system for location data. It is used for applications like optimizing delivery zones and service areas,geospatial aggregation and analytics.
 
 The H3 functionality is split into two extensions: `h3` and `h3_postgis`.
 
@@ -158,7 +158,7 @@ CREATE EXTENSION IF NOT EXISTS h3_postgis CASCADE;
 
 ### Example usage
 
-We will show how to use H3 to analyze ride-sharing data in a large city, focusing on the distribution of pickup locations. 
+We will show how to use H3 to analyze ride-sharing data in a large city, focusing on the distribution of pickup locations.
 
 **Create a table with pickup location data**
 
@@ -191,14 +191,14 @@ This dataset represents the pickup locations for a ride-sharing service in a lar
 We can use the `h3_lat_lng_to_cell` function to convert lat/long coordinates to H3 indexes:
 
 ```sql
-SELECT 
+SELECT
     h3_lat_lng_to_cell(pickup_location, 9) AS h3_index
 FROM ride_pickups
 ORDER BY RANDOM()
 LIMIT 5;
 ```
 
-This query converts each pickup location to an H3 index at resolution 9. 
+This query converts each pickup location to an H3 index at resolution 9.
 
 ```text
     h3_index
@@ -216,7 +216,7 @@ This query converts each pickup location to an H3 index at resolution 9.
 Let's aggregate the pickup data into H3 cells at resolution 8 (average hexagon edge length of ~461 meters) to identify hotspots:
 
 ```sql
-SELECT 
+SELECT
     h3_lat_lng_to_cell(pickup_location, 8) AS h3_index,
     COUNT(*) AS pickup_count,
     MIN(pickup_time) AS earliest_pickup,
@@ -226,7 +226,7 @@ GROUP BY 1
 ORDER BY pickup_count DESC;
 ```
 
-This query groups the dataset by the H3 index, and then provides a count of pickups, as well as the earliest and latest pickup times for each cell. 
+This query groups the dataset by the H3 index, and then provides a count of pickups, as well as the earliest and latest pickup times for each cell.
 
 ```text
     h3_index     | pickup_count |   earliest_pickup   |    latest_pickup
@@ -246,7 +246,7 @@ For cells with high demand, you might want to identify neighboring cells to reco
 
 ```sql
 WITH top_cell AS (
-    SELECT 
+    SELECT
         h3_lat_lng_to_cell(pickup_location, 9) AS h3_index,
         COUNT(*) AS pickup_count
     FROM ride_pickups
@@ -254,7 +254,7 @@ WITH top_cell AS (
     ORDER BY pickup_count DESC
     LIMIT 1
 )
-SELECT 
+SELECT
     h3_cell_to_lat_lng(neighbor) AS neighbor_centroid
 FROM top_cell, h3_grid_disk(h3_index, 1) AS neighbor
 WHERE neighbor != h3_index;
@@ -307,14 +307,14 @@ INSERT INTO buildings (name, height, footprint) VALUES
     ('Residential Block', 45, ST_GeomFromText('POLYGON((200 0, 200 40, 240 40, 240 0, 200 0))', 4326));
 ```
 
-This query creates a table to store building footprints and heights. 
+This query creates a table to store building footprints and heights.
 
 **Use SFCGAL to calculate volumes**
 
 We can use SFCGAL to calculate the volume of buildings by extruding their footprints:
 
 ```sql
-SELECT 
+SELECT
     name,
     height,
     ST_Area(footprint) AS base_area,
@@ -335,20 +335,20 @@ This query calculates the volume of each building by extruding its 2D footprint 
 
 **Use SFCGAL to perform 3D intersection**
 
-SFCGAL can be used to perform 3D intersections. For example, an important urban planning task is to examine how buildings might obstruct views from one another. 
+SFCGAL can be used to perform 3D intersections. For example, an important urban planning task is to examine how buildings might obstruct views from one another.
 
-We can use SFCGAL to create 3D models of our buildings and then check for intersections between these models and sight lines. 
+We can use SFCGAL to create 3D models of our buildings and then check for intersections between these models and sight lines.
 
 ```sql
 WITH building_centroids AS (
-    SELECT 
+    SELECT
         id,
         name,
         ST_Centroid(footprint) AS centroid
     FROM buildings
 ),
 sight_lines AS (
-    SELECT 
+    SELECT
         a.id AS id_a,
         a.name AS name_a,
         b.id AS id_b,
@@ -358,10 +358,10 @@ sight_lines AS (
     CROSS JOIN building_centroids b
     WHERE a.id < b.id
 )
-SELECT 
+SELECT
     s.name_a,
     s.name_b,
-    CASE 
+    CASE
         WHEN EXISTS (
             SELECT 1
             FROM buildings c
@@ -397,11 +397,11 @@ It returns the following output:
 (3 rows)
 ```
 
-This example demonstrates how SFCGAL's 3D capabilities can be used to analyze spatial relationships between buildings in three dimensions, which is useful for urban planning and architectural design. 
+This example demonstrates how SFCGAL's 3D capabilities can be used to analyze spatial relationships between buildings in three dimensions, which is useful for urban planning and architectural design.
 
 ## PostGIS Tiger Geocoder
 
-PostGIS Tiger Geocoder provides address normalization and geocoding functionality using TIGER (Topologically Integrated Geographic Encoding and Referencing) data. This extension is useful for address validation, normalization, and conversion of addresses to geographic coordinates. 
+PostGIS Tiger Geocoder provides address normalization and geocoding functionality using TIGER (Topologically Integrated Geographic Encoding and Referencing) data. This extension is useful for address validation, normalization, and conversion of addresses to geographic coordinates.
 
 ### Enable the PostGIS Tiger Geocoder extension
 
@@ -415,7 +415,7 @@ CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder CASCADE;
 
 **Use Tiger Geocoder to normalize an address**
 
-Address normalization is crucial for ensuring consistency in address data. We can use the `normalize_address` function to standardize address formats. 
+Address normalization is crucial for ensuring consistency in address data. We can use the `normalize_address` function to standardize address formats.
 
 ```sql
 WITH addresses AS (
@@ -425,12 +425,12 @@ WITH addresses AS (
   UNION ALL
   SELECT '100 Universal City Plaza, Universal City, CA 91608'
 )
-SELECT 
+SELECT
     (normalize_address(address)).*
 FROM addresses;
 ```
 
-This query returns a normalized version of the input addresses. 
+This query returns a normalized version of the input addresses.
 
 ```text
  address | predirabbrev |   streetname   | streettypeabbrev | postdirabbrev | internal |    location    | stateabbrev |  zip  | parsed | zip4 | address_alphanumeric
@@ -443,7 +443,7 @@ This query returns a normalized version of the input addresses.
 
 ## Conclusion
 
-These examples provide a quick introduction to using other extensions in the PostGIS ecosystem. They can significantly expand the geospatial capabilities of your Neon Postgres database. 
+These examples provide a quick introduction to using other extensions in the PostGIS ecosystem. They can significantly expand the geospatial capabilities of your Neon Postgres database.
 
 For further information, refer to the official documentation for each extension.
 
