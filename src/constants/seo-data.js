@@ -110,7 +110,8 @@ export default {
   },
   variable: {
     title: 'Dynamically scale your Postgres database — Neon',
-    description: 'Achieve optimal performance during traffic peaks without overprovisioning.',
+    description:
+      'Discover how Neon dynamically scales Postgres compute resources for optimal performance during peak traffic without overpaying.',
     imagePath: '/images/social-previews/variable.jpg',
     pathname: LINKS.variable,
   },
