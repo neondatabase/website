@@ -31,7 +31,7 @@ const items = [
 ];
 
 const Load = () => (
-  <Section className="load" title="Variable resources for variable load">
+  <Section className="load" title="Variable resources for variable&nbsp;load">
     <p>
       No real-world database has constant demand. To some extent, all modern applications experience
       variable traffic patterns; for some applications, demand is clearly variable. For example:

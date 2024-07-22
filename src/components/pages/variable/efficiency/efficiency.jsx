@@ -41,7 +41,7 @@ const items = [
 const Efficiency = () => (
   <Section
     className="efficiency"
-    title="Maximize efficiency and cut costs with Serverless Postgres"
+    title="Maximize efficiency and cut costs with Serverless&nbsp;Postgres"
   >
     <p>
       Neon solves this inefficiency via a serverless architecture. By{' '}
@@ -51,7 +51,7 @@ const Efficiency = () => (
     </p>
     <List items={items} />
     <Testimonial
-      text="When we were using MySQL in Azure, we had to manually upgrade the database during the days of peak traffic and downgrade later in the day, which caused a couple of minutes of downtime and a huge waste of time for the team."
+      text="When we were using MySQL in&nbsp;Azure, we had to manually upgrade the database during the&nbsp;days of peak traffic and downgrade later in the day, which&nbsp;caused a couple of minutes of downtime and a huge waste of&nbsp;time for the team."
       author={{
         name: 'Pieralberto Colombo',
         company: 'Recrowd',

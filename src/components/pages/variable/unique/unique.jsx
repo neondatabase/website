@@ -13,10 +13,10 @@ const items = [
     text: 'Neon <strong>scales to zero</strong>, Aurora Serverless does not.',
   },
   {
-    text: 'Neon <strong>provisions instances in < 1 s</strong>, compared to Aurora&apos;s up to 20 min.',
+    text: 'Neon <strong>provisions instances in < 1 s</strong>, compared to Aurora&apos;s up to&nbsp;20&nbsp;min.',
   },
   {
-    text: 'Neon uses <strong>transparent compute units</strong>, vs the ACU abstraction in Aurora Serverless.',
+    text: 'Neon uses <strong>transparent compute units</strong>, vs the ACU abstraction in&nbsp;Aurora&nbsp;Serverless.',
   },
   {
     text: 'Neon supports <strong>database branching with data and schema via copy-on-write,</strong> <span>improving development workflows.</span>',
@@ -30,8 +30,8 @@ const items = [
 ];
 
 const Unique = () => (
-  <Section className="unique" title="What makes Neon unique vs others?">
-    <p>The Neon architecture is inspired in Amazon Aurora, but with some key differences:</p>
+  <Section className="unique" title="What makes Neon unique vs&nbsp;others?">
+    <p>The Neon architecture is inspired in Amazon&nbsp;Aurora, but with some key differences:</p>
     <List items={items} />
     <Testimonial
       text="Before choosing Neon, we also considered Aurora, but the opacity of&nbsp;the pricing model did not convince us and costs seemed to&nbsp;rise&nbsp;quickly."

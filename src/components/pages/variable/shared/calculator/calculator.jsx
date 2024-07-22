@@ -65,24 +65,24 @@ const DashedBorder = () => (
 const Calculator = () => (
   <div className="relative my-3 w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 sm:my-2 sm:p-6">
     <div className="relative z-10 pb-[18px]">
-      <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:text-lg">
+      <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:mb-4 sm:text-lg">
         Example deployment in RDS
       </h3>
-      <ul className="space-y-2 text-lg tracking-extra-tight">
+      <ul className="space-y-2 text-lg tracking-extra-tight sm:text-sm sm:leading-snug">
         {databases.map(({ type, instance, usage }) => (
-          <li key={type} className="flex items-center gap-2 sm:flex-col sm:items-start">
+          <li key={type} className="flex items-center gap-2 sm:flex-col sm:items-start sm:gap-0">
             <span>
               <span className="font-medium text-gray-new-90">{type}</span>{' '}
               <span className="text-gray-new-70">({instance})</span>
             </span>
-            <span className="block size-[3px] rounded-full bg-gray-new-30" aria-hidden />
+            <span className="block size-[3px] rounded-full bg-gray-new-30 sm:hidden" aria-hidden />
             <span className="text-gray-new-50">{usage}</span>
           </li>
         ))}
       </ul>
     </div>
     <DashedBorder />
-    <div className="relative z-10 py-[18px]">
+    <div className="relative z-10 py-[18px] sm:py-4">
       <h3 className="text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:text-lg">
         Input parameters
         <ChevronIcon className="ml-2.5 inline-block h-auto w-3" />
@@ -92,17 +92,17 @@ const Calculator = () => (
     <div className="relative z-10 flex justify-between pt-6 sm:flex-col sm:gap-6">
       {values.map(({ title, value, valueClassName, period, text }) => (
         <div key={title} className="min-w-[239px]">
-          <p className="mb-2.5 leading-dense tracking-extra-tight">{title}</p>
+          <p className="mb-2.5 leading-dense tracking-extra-tight lg:mb-2">{title}</p>
           <div className="flex items-end gap-1.5">
             <span
               className={clsx(
-                'bg-clip-text pr-1 font-title text-6xl font-medium leading-none tracking-tighter text-transparent sm:text-4xl',
+                'bg-clip-text pr-1 font-title text-6xl font-medium leading-none tracking-tighter text-transparent xl:text-[56px] lg:pr-0.5 lg:text-5xl sm:text-4xl',
                 valueClassName
               )}
             >
               {value}
             </span>
-            <span className="mb-1 text-xl text-[#7485A9]">/{period}</span>
+            <span className="mb-1 text-xl text-[#7485A9] lg:mb-0 sm:text-lg">/{period}</span>
           </div>
           {text && (
             <p className="bg-variable-value-text bg-clip-text text-sm font-light leading-dense tracking-extra-tight text-transparent">
