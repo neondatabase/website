@@ -53,9 +53,9 @@ Neon's Logical Replication feature enables replicating data from your Neon datab
 
 ## Scale with read replicas
 
-**Add read-only computes to achieve instant scale.**
+**Add read replicas to achieve instant scale.**
 
-Neon supports read replicas that let you instantly scale your application by offloading read-only workloads to independent read-only compute instances that access the same data as your read-write compute.
+Neon supports read replicas that let you instantly scale your application by offloading read-only workloads from your primary read-write compute.
 
 Create a read replica with the Neon CLI:
 

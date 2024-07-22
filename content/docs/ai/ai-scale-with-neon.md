@@ -50,9 +50,9 @@ Neon's data storage allowances differ by plan. The Free plan offers 512 MB of st
 
 ## Read replicas
 
-Neon supports read replicas, which are independent read-only compute instances designed to perform read operations on the same data as your read-write computes. Read replicas do not replicate data across database instances. Instead, read requests are directed to the same data source. This architecture enables read replicas to be created instantly, enabling you to scale out CPU and RAM, but because data is read from a single source, there are no additional storage costs.
+Neon supports read replicas, which are independent read-only computes designed to perform read operations on the same data as your primary read-write compute. Read replicas do not replicate data across database instances. Instead, read requests are directed to the same data source. This architecture enables read replicas to be created instantly, enabling you to scale out CPU and RAM, but because data is read from a single source, there are no additional storage costs.
 
-Since vector similarity search is a read-only workload, you can leverage read replicas to offload reads from your read-write compute instance to a dedicated compute when deploying AI applications. After you create a read replica, you can simply swap out your current Neon connecting string for the read replica connection string, which makes deploying a read replica for your AI application very simple.
+Since vector similarity search is a read-only workload, you can leverage read replicas to offload reads from your primary read-write compute to a dedicated compute when deploying AI applications. After you create a read replica, you can simply swap out your current Neon connecting string for the read replica connection string, which makes deploying a read replica for your AI application very simple.
 
 Neon's read replicas support the same compute sizes outlined above. Read replicas also support autoscaling.
 

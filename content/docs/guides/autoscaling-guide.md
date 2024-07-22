@@ -8,7 +8,7 @@ updatedOn: '2024-07-16T16:42:29.766Z'
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current workload, eliminating the need for manual intervention. This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
 
-_Autoscaling_ is a paid plan feature. Users on paid plans can enable autoscaling for a new project, for an existing project, or for an individual compute endpoint. Autoscaling is supported with both read-write and read-only compute endpoints. Read-only compute endpoints enable Neon's [Read replica](/docs/introduction/read-replicas) feature.
+_Autoscaling_ is a paid plan feature. Users on paid plans can enable autoscaling for a new project, for an existing project, or for an individual compute. Autoscaling is supported with primary read-write computes and read replica computes.
 
 ## Enable autoscaling for a new project
 
