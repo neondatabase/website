@@ -21,7 +21,7 @@ const AboutUsPage = () => (
     <Leadership />
     <Investors />
     <Cta
-      title="Become a part of our team"
+      title="Become a part of our&nbsp;team"
       description="We're looking for people who care deeply about quality to build it with us."
       buttonText="View Open Roles"
       buttonUrl={LINKS.careers}

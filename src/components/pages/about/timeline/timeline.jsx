@@ -47,7 +47,7 @@ const Point = ({ align, size = 'md' }) => (
     <span
       className={clsx(
         'absolute left-1/2 top-[3px] flex h-3.5 w-3.5  -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#00D7E5]',
-        size === 'md' ? 'opacity-40 blur-[9px]' : 'opacity-90 blur-[2px]'
+        size === 'md' ? 'opacity-40 blur-[9px]' : 'opacity-90 blur-[2px] md:left-1 md:top-1'
       )}
     />
     {size === 'md' ? (
@@ -68,7 +68,7 @@ const Point = ({ align, size = 'md' }) => (
         {
           'left-0 top-0 h-2 w-2 bg-[radial-gradient(69%_69%_at_31%_38%,_#9FEEFF_31%,_#1A5A5E_86%)]':
             size === 'md',
-          '-left-[3px] -top-[3px] h-3 w-3 bg-[radial-gradient(81%_81%_at_40%_58%,_#9FEEFF_31%,_#1A5A5E_86%)]':
+          '-left-[3px] -top-[3px] h-3 w-3 bg-[radial-gradient(81%_81%_at_40%_58%,_#9FEEFF_31%,_#1A5A5E_86%)] md:-left-0.5 md:-top-0.5':
             size === 'lg',
         }
       )}

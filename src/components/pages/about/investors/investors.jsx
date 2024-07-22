@@ -18,7 +18,7 @@ import snowflake from 'images/pages/about/investors/snowflake.svg';
 import sorenBrammerSchmidt from 'images/pages/about/investors/soren-brammer-schmidt.jpg';
 import wesMcKinney from 'images/pages/about/investors/wes-mckinney.jpg';
 
-const invesors = {
+const investors = {
   companies: [
     {
       logo: notable,
@@ -31,27 +31,31 @@ const invesors = {
       label: 'General Catalyst',
     },
     {
+      className: 'md:order-1',
       logo: menloVentures,
       width: 92,
       label: 'Menlo Ventures',
     },
     {
+      className: 'md:order-2',
       logo: snowflake,
       width: 180,
       label: 'Snowflake',
     },
     {
+      className: 'md:order-0',
       logo: khoslaVentures,
       width: 256,
       label: 'Khosla Ventures',
     },
     {
-      className: 'lg:order-1',
+      className: 'lg:order-3',
       logo: foundersFund,
       width: 304,
       label: 'Founders Fund',
     },
     {
+      className: 'md:order-2',
       logo: databricks,
       width: 200,
       label: 'Databricks',
@@ -104,7 +108,7 @@ const invesors = {
 };
 
 const Investors = () => (
-  <section className="Investors safe-paddings z-10 -mb-40 mt-[200px] xl:-mb-6 xl:mt-[136px] lg:mb-12 lg:mt-[104px] md:mt-20 sm:-mb-4">
+  <section className="investors safe-paddings z-10 -mb-40 mt-[200px] xl:-mb-6 xl:mt-[136px] lg:mb-12 lg:mt-[104px] md:mt-20 sm:-mb-4">
     <Container className="flex flex-col items-center" size="1152">
       <Heading
         className="text-[68px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-[36px]"
@@ -118,7 +122,7 @@ const Investors = () => (
         some of the world&apos;s leading investors.
       </p>
       <ul className="mt-16 flex max-w-[1070px] flex-wrap items-center justify-center gap-x-[120px] gap-y-10 xl:mt-14 xl:gap-x-20 xl:gap-y-9 lg:mt-12 lg:max-w-[618px] lg:gap-x-12 sm:mt-8 sm:gap-x-9 sm:gap-y-7">
-        {invesors.companies.map(({ logo, width, label, className }, index) => (
+        {investors.companies.map(({ logo, width, label, className }, index) => (
           <li
             className={clsx('flex flex-col', index > 3 && 'xl:-mx-1 lg:mx-0', className)}
             key={index}
@@ -141,21 +145,23 @@ const Investors = () => (
         Individual investors
       </Heading>
       <ul className="mt-14 flex max-w-[852px] flex-wrap items-center justify-center gap-x-12 gap-y-9 xl:mt-12 xl:max-w-[828px] xl:gap-x-10 xl:gap-y-8 lg:mt-10 lg:max-w-[702px] lg:gap-x-[26px] lg:gap-y-7 sm:mt-9 sm:gap-x-11 sm:gap-y-10">
-        {invesors.individuals.map(({ image, name, role, company }, index) => (
+        {investors.individuals.map(({ image, name, role, company }, index) => (
           <li
             className={clsx(
               'flex w-[177px] flex-col items-center lg:w-[156px] sm:w-[113px]',
-              index === invesors.individuals.length - 1 && 'sm:w-[177px]',
+              index === investors.individuals.length - 1 && 'sm:w-[177px]',
               index > 3 && 'lg:mx-1 md:mx-0'
             )}
             key={index}
           >
             <Image className="rounded-full" src={image} alt={name} width={64} height={64} />
-            <h4 className="mt-5 whitespace-nowrap text-center text-[15px] font-medium leading-tight tracking-extra-tight lg:mt-[18px] sm:whitespace-normal">
-              {name}
-            </h4>
-            <p className="mt-1.5 whitespace-nowrap text-center text-sm leading-tight tracking-extra-tight text-gray-new-50 sm:whitespace-normal">
-              {role} <span className="text-gray-new-80 sm:block">{company}</span>
+            <p className="mt-5 flex flex-col gap-y-1.5 lg:mt-[18px]">
+              <span className="whitespace-nowrap text-center text-[15px] font-medium leading-tight tracking-extra-tight sm:whitespace-normal">
+                {name}
+              </span>
+              <span className="whitespace-nowrap text-center text-sm leading-tight tracking-extra-tight text-gray-new-50 sm:whitespace-normal">
+                {role} <span className="text-gray-new-80 sm:block">{company}</span>
+              </span>
             </p>
           </li>
         ))}

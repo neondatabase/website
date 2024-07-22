@@ -11,25 +11,25 @@ const ITEMS = [
   {
     icon: dollarIcon,
     title: 'Cost Efficient',
-    description: 'Aim to deliver the best price-performance Postgres service in the world.',
+    description: 'Aim to deliver the best price-performance Postgres service in the&nbsp;world.',
   },
   {
     icon: reliableIcon,
     title: 'Reliable',
     description:
-      'Use modern replication techniques to provide high availability and high durability to Postgres.',
+      'Use modern replication techniques to provide high availability and high durability to&nbsp;Postgres.',
   },
   {
     icon: checkIcon,
     title: 'Easy',
     description:
-      'Simplify the life of developers by bringing the serverless consumption model to Postgres.',
+      'Simplify the life of developers by bringing the serverless consumption model to&nbsp;Postgres.',
   },
   {
     icon: storageIcon,
     title: 'Just Be Postgres',
     description:
-      'Achieve this by leveraging the pluggable storage layer, preserving the core of Postgres.',
+      'Achieve this by leveraging the pluggable storage layer, preserving the core of&nbsp;Postgres.',
   },
 ];
 
@@ -50,9 +50,10 @@ const ForDevelopers = () => (
             <h3 className="mt-4 text-xl font-semibold leading-dense tracking-tighter lg:mt-3.5 lg:text-lg sm:mt-2.5">
               {title}
             </h3>
-            <p className="mt-2 font-light tracking-extra-tight text-gray-new-70 lg:mt-1.5 lg:max-w-[260px] sm:w-3/4 sm:min-w-[260px] sm:max-w-none">
-              {description}
-            </p>
+            <p
+              className="mt-2 font-light tracking-extra-tight text-gray-new-70 lg:mt-1.5 lg:max-w-[260px] sm:w-3/4 sm:min-w-[260px] sm:max-w-none"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
           </li>
         ))}
       </ul>
