@@ -38,7 +38,7 @@ We are working on automatic switching between HTTP and WebSocket to as needed. C
 
 You then need to decide whether to use direct connections or pooled connections using PgBouncer:
 
-- **In general, use pooled connections whenever you can**: Pooled connections can efficiently manage high numbers of concurrent connections, supporting up to 10,000 connection. This 10,000 connection limit is most useful for serverless applications and application-side connection pools that have many open connections, but infrequent and/or short transactions.
+- **In general, use pooled connections whenever you can**: Pooled connections can efficiently manage high numbers of concurrent connections, supporting up to 10,000 concurrent connections. This 10,000 connection limit is most useful for serverless applications and application-side connection pools that have many open connections, but infrequent and/or short transactions.
 - **Use direct (unpooled) connections if you need persistent connections**: If your application is focused mainly on tasks like migrations or administrative operations that require stable and long-lived connections, use an unpooled connection.
 
 <Admonition type="note">
