@@ -5,7 +5,12 @@ enableTableOfContents: true
 updatedOn: '2024-06-15T08:30:00.000Z'
 ---
 
-PostGIS adds support for geospatial data in PostgreSQL, providing both data types and functions to store and analyze it effectively. The Postgres ecosystem includes multiple extensions built on top of PostGIS, to further enhance its capabilities. This guide introduces you to some of these extensions supported by Neon - `pgrouting`, `H3_PostGIS`, `PostGIS SFCGAL` and others.
+PostGIS adds support for geospatial data in PostgreSQL, providing both data types and functions to store and analyze it effectively. The Postgres ecosystem includes multiple extensions built on top of PostGIS, to further enhance its capabilities. This guide introduces you to some of these extensions supported by Neon:
+
+- [pgrouting](#pgrouting)
+- [H3_PostGIS](#h3-and-h3-postgis)
+- [PostGIS SFCGAL](#postgis-sfcgal)
+- [PostGIS Tiger Geocoder](#postgis-tiger-geocoder)
 
 <CTA />
 
@@ -141,7 +146,7 @@ This query returns two sequence of edges, that can be used to go from node 1 to 
        2 |        3 |    4 |   -1 |    0 |      1.6 |
 ```
 
-## H3 and H3_PostGIS
+## H3 and H3 PostGIS
 
 H3 is a hierarchical geospatial indexing system. It divides the earth's surface into hexagonal cells at multiple resolutions, and provides a unique addressing system for location data. It is used for applications like optimizing delivery zones and service areas, geospatial aggregation, and analytics.
 

@@ -126,9 +126,9 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://postgis.net/docs/RT_reference.html" description="Adds support for raster data to PostGIS, enabling advanced geospatial analysis on raster images" icon="globe">postgis_raster</a>
 
-<a href="https://postgis.net/docs/reference.html#reference_sfcgal" description="Provides support for advanced 3D geometries in PostGIS, based on the SFCGAL library" icon="globe">postgis_sfcgal</a>
+<a href="/docs/extensions/postgis-related-extensions" description="Provides support for advanced 3D geometries in PostGIS, based on the SFCGAL library" icon="globe">postgis_sfcgal</a>
 
-<a href="https://postgis.net/docs/Extras.html#Tiger_Geocoder" description="Enables geocoding and reverse geocoding capabilities in PostGIS using TIGER/Line data" icon="globe">postgis_tiger_geocoder</a>
+<a href="/docs/extensions/postgis-related-extensions" description="Enables geocoding and reverse geocoding capabilities in PostGIS using TIGER/Line data" icon="globe">postgis_tiger_geocoder</a>
 
 <a href="https://www.postgis.net/docs/Topology.html" description="Extends PostGIS with support for topological data types and functions, facilitating the analysis of spatial relationships" icon="globe">postgis_topology</a>
 
