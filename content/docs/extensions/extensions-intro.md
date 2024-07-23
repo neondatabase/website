@@ -116,11 +116,11 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://www.postgresql.org/docs/16/earthdistance.html" description="Provides cube-based and point-based approaches to calculating great circle distances on the surface of the Earth" icon="globe">earthdistance</a>
 
-<a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="Integrates Uber's H3 geospatial indexing system that combines the benefits of a hexagonal grid with S2's hierarchical subdivisions" icon="globe">h3</a>
+<a href="/docs/extensions/postgis-related-extensions" description="Integrates Uber's H3 geospatial indexing system that combines the benefits of a hexagonal grid with S2's hierarchical subdivisions" icon="globe">h3</a>
 
-<a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="A PostGIS extension for H3, enabling advanced spatial analysis and indexing" icon="globe">h3_postgis</a>
+<a href="/docs/extensions/postgis-related-extensions" description="A PostGIS extension for H3, enabling advanced spatial analysis and indexing" icon="globe">h3_postgis</a>
 
-<a href="https://docs.pgrouting.org/" description="Extends PostGIS/Postgres databases, providing geospatial routing and other network analysis functionality" icon="globe">pgrouting</a>
+<a href="/docs/extensions/postgis-related-extensions" description="Extends PostGIS/Postgres databases, providing geospatial routing and other network analysis functionality" icon="globe">pgrouting</a>
 
 <a href="/docs/extensions/postgis" description="Extends Postgres to allow GIS (Geographic Information Systems) objects to be stored in the database, enabling spatial queries directly in SQL" icon="globe">postgis</a>
 

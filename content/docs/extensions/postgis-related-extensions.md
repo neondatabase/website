@@ -143,7 +143,7 @@ This query returns two sequence of edges, that can be used to go from node 1 to 
 
 ## H3 and H3_PostGIS
 
-H3 is a hierarchical geospatial indexing system. It divides the earth's surface into hexagonal cells at multiple resolutions, and provides a unique addressing system for location data. It is used for applications like optimizing delivery zones and service areas,geospatial aggregation and analytics.
+H3 is a hierarchical geospatial indexing system. It divides the earth's surface into hexagonal cells at multiple resolutions, and provides a unique addressing system for location data. It is used for applications like optimizing delivery zones and service areas, geospatial aggregation, and analytics.
 
 The H3 functionality is split into two extensions: `h3` and `h3_postgis`.
 
