@@ -19,7 +19,7 @@ This flowchart will guide you through these selections.
 
 ### Step 1: Choose your Postgres driver
 
-Your first choice is which driver to use. If working in a serverless environment and connecting from a JavaScript and TypeScript application, consider using the [Neon Serverless Driver](/docs/serverless/serverless-driver).  This is a low-latency Postgres driver that allows you to query data from serverless and edge environments over HTTP or WebSockets instead of TCP. It's built to handle dynamic workloads with high variability in traffic &#8212; for example, Vercel Edge Functions or Cloudflare Workers.
+Your first choice is which driver to use. If working in a serverless environment and connecting from a JavaScript and TypeScript application, consider using the [Neon Serverless Driver](/docs/serverless/serverless-driver). This is a low-latency Postgres driver that allows you to query data from serverless and edge environments over HTTP or WebSockets instead of TCP. It's built to handle dynamic workloads with high variability in traffic &#8212; for example, Vercel Edge Functions or Cloudflare Workers.
 
 If you're not connecting from a JavaScript or TypeScript application or you are not developing a serverless application, use a traditional TCP-based Postgres driver. For example, if you’re using Node.js with a framework like Next.js, you can add the `pg` client to your dependencies, which serves as the Postgres driver for TCP connections.
 
