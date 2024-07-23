@@ -129,7 +129,7 @@ const Menu = ({
   useEffect(() => {
     let timeout;
 
-    if (isLastActive && menuRef.current && setMenuHeight) {
+    if (isLastActive && menuRef.current && menuRef.current.scrollHeight > 0 && setMenuHeight) {
       timeout = setTimeout(() => {
         setMenuHeight(menuRef.current.scrollHeight);
         menuWrapperRef.current?.scrollTo(0, 0);
