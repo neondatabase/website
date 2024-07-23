@@ -102,6 +102,16 @@
       "enterprise": "Unlimited"
     },
     {
+      "rows": "2",
+      "feature": {
+        "title": "Data transfer"
+      },
+      "free": "5 GB /month",
+      "launch": "Unlimited",
+      "scale": "Unlimited",
+      "enterprise": "Unlimited"
+    },
+    {
       "feature": "Compute Features"
     },
     {
