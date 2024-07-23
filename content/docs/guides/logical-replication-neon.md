@@ -6,8 +6,6 @@ isDraft: false
 updatedOn: '2024-06-30T14:35:12.886Z'
 ---
 
-<LRNotice/>
-
 This topic provides commands for managing publications, subscriptions, and replication slots. It also includes information about logical replication specific to Neon, including [known limitations](#known-limitations).
 
 For step-by-step setup instructions, refer to our [logical replication guides](/docs/guides/logical-replication-guide).
