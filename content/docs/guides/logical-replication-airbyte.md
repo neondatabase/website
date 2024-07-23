@@ -6,8 +6,6 @@ isDraft: false
 updatedOn: '2024-06-30T14:35:12.883Z'
 ---
 
-<LRNotice/>
-
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 [Airbyte](https://airbyte.com/) is an open-source data integration platform that moves data from a source to a destination system. Airbyte offers a large library of connectors for various data sources and destinations.

@@ -6,8 +6,6 @@ isDraft: false
 updatedOn: '2024-06-30T14:35:12.884Z'
 ---
 
-<LRNotice/>
-
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 Confluent Cloud is a fully managed, cloud-native real-time data streaming service, built on Apache Kafka. It allows you to stream data from various sources, including Postgres, and build apps that consume messages from an Apache Kafka cluster.
