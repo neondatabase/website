@@ -4,7 +4,7 @@ subtitle: Rules of thumb for choosing one connection type over another
 enableTableOfContents: true
 ---
 
-When setting up your application’s connection to your Neon Postgres database, you need to make two main choices: 
+When setting up your application’s connection to your Neon Postgres database, you need to make two main choices:
 
 - **Postgres driver type**: Serverless driver vs. TCP-based driver
 - **Connection type**: pooled vs. unpooled
