@@ -4,7 +4,12 @@ subtitle: Rules of thumb for choosing one connection type over another
 enableTableOfContents: true
 ---
 
-When setting up your application’s connection to your Neon Postgres database, you need to make two main choices: the type of driver and the type of connection. This flowchart will guide you through these options.
+When setting up your application’s connection to your Neon Postgres database, you need to make two main choices:
+
+- **Postgres driver type**: Serverless driver vs. TCP-based driver
+- **Connection type**: pooled vs. unpooled
+
+This flowchart will guide you through these selections.
 
 ## Choosing your connection type: flowchart
 
@@ -14,9 +19,9 @@ When setting up your application’s connection to your Neon Postgres database, 
 
 ### Step 1: Choose your Postgres driver
 
-Your first choice is which driver to use. If working in a serverless environment, use the [Neon Serverless Driver](/docs/serverless/serverless-driver). It's built to handle dynamic workloads with high variability in traffic &#8212; for example, Vercel Edge Functions or Cloudflare Workers.
+Your first choice is which driver to use. If working in a serverless environment and connecting from a JavaScript and TypeScript application, consider using the [Neon Serverless Driver](/docs/serverless/serverless-driver). This is a low-latency Postgres driver that allows you to query data from serverless and edge environments over HTTP or WebSockets instead of TCP. It's built to handle dynamic workloads with high variability in traffic &#8212; for example, Vercel Edge Functions or Cloudflare Workers.
 
-If you don't need serverless, use a traditional TCP-based Postgres driver. For example, if you’re using Node.js with a framework like Next.js, you can add the `pg` client to your dependencies, which acts as the TCP-based Postgres driver.
+If you're not connecting from a JavaScript or TypeScript application or you are not developing a serverless application, use a traditional TCP-based Postgres driver. For example, if you’re using Node.js with a framework like Next.js, you can add the `pg` client to your dependencies, which serves as the Postgres driver for TCP connections.
 
 ### Step 2: If serverless, choose HTTP or WebSocket connections
 
@@ -33,7 +38,7 @@ We are working on automatic switching between HTTP and WebSocket to as needed. C
 
 You then need to decide whether to use direct connections or pooled connections using PgBouncer:
 
-- **In general, use pooled connections whenever you can**: Pooled connections can efficiently manage high numbers of concurrent connections, supporting up to 10,000 connection. This 10,000 connection limit is most useful for serverless applications and application-side connection pools that have many open connections, but infrequent and/or short transactions.
+- **In general, use pooled connections whenever you can**: Pooled connections can efficiently manage high numbers of concurrent connections, supporting up to 10,000 concurrent connections. This 10,000 connection limit is most useful for serverless applications and application-side connection pools that have many open connections, but infrequent and/or short transactions.
 - **Use direct (unpooled) connections if you need persistent connections**: If your application is focused mainly on tasks like migrations or administrative operations that require stable and long-lived connections, use an unpooled connection.
 
 <Admonition type="note">
