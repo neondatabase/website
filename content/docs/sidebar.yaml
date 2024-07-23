@@ -93,6 +93,9 @@
     - title: Changelog
       slug: changelog
       icon: changelog
+      items: 
+        - title: Neon Changelog
+          slug: changelog
 - section: Platform
   items:
     - title: Architecture
@@ -225,6 +228,9 @@
     - title: Regions
       slug: introduction/regions
       icon: regions
+      items: 
+        - title: Neon Regions
+          slug: introduction/regions
     - title: Support
       slug: introduction/support
       icon: support
@@ -234,6 +240,9 @@
     - title: Status
       slug: introduction/status
       icon: status
+      items: 
+        - title: Neon Status
+          slug: introduction/status
     - title: Plans and billing
       slug: introduction/about-billing
       icon: billing
@@ -474,6 +483,9 @@
     - title: SDKs
       slug: reference/sdk
       icon: sdk
+      items: 
+        - title: Neon SDKs
+          slug: reference/sdk
 - section: Postgres
   items:
     - title: PostgreSQL docs
@@ -655,6 +667,9 @@
     - title: Glossary
       slug: reference/glossary
       icon: glossary
+      items: 
+        - title: Neon Glossary
+          slug: reference/glossary
 - section: noname
   items:
     - title: Community
