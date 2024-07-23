@@ -7,10 +7,10 @@ import { useState, useRef } from 'react';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 
-import Menu from './menu';
+import Menu from '../menu';
 
 const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
-  const [activeMenuList, setActiveMenuList] = useState(['Home']);
+  const [activeMenuList, setActiveMenuList] = useState(new Set(['Home']));
   const [menuHeight, setMenuHeight] = useState(1000);
   const menuWrapperRef = useRef(null);
 
@@ -52,25 +52,9 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
   );
 };
 
-export const sidebarPropTypes = PropTypes.arrayOf(
-  PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    slug: PropTypes.string,
-    ariaLabel: PropTypes.string,
-    items: PropTypes.arrayOf(
-      PropTypes.exact({
-        title: PropTypes.string.isRequired,
-        slug: PropTypes.string,
-        items: PropTypes.arrayOf(PropTypes.any),
-        ariaLabel: PropTypes.string,
-      })
-    ),
-  })
-).isRequired;
-
 Sidebar.propTypes = {
   className: PropTypes.string,
-  sidebar: sidebarPropTypes,
+  sidebar: PropTypes.arrayOf(PropTypes.shape()),
   slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
 };

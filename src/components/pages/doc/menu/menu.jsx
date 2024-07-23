@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
 
@@ -13,12 +14,13 @@ import Icon from './icon';
 import Item from './item';
 
 const Section = ({
+  depth,
   title,
   slug,
-  depth,
   section,
   items,
   basePath,
+  parentMenu,
   setMenuHeight,
   menuWrapperRef,
   activeMenuList,
@@ -38,6 +40,7 @@ const Section = ({
             {...item}
             key={index}
             basePath={basePath}
+            parentMenu={{ title, slug, parentMenu }}
             activeMenuList={activeMenuList}
             setActiveMenuList={setActiveMenuList}
             closeMobileMenu={closeMobileMenu}
@@ -47,9 +50,9 @@ const Section = ({
                 depth={depth + 1}
                 title={item.title}
                 slug={item.slug}
+                basePath={basePath}
                 icon={item.icon}
                 items={item.items}
-                basePath={basePath}
                 parentMenu={{ title, slug }}
                 setMenuHeight={setMenuHeight}
                 menuWrapperRef={menuWrapperRef}
@@ -67,29 +70,20 @@ const Section = ({
 
 Section.propTypes = {
   depth: PropTypes.number.isRequired,
-  basePath: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  section: PropTypes.string,
   slug: PropTypes.string,
+  basePath: PropTypes.string.isRequired,
+  section: PropTypes.string,
   icon: PropTypes.string,
   tag: PropTypes.string,
-  ariaLabel: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.exact({
-      title: PropTypes.string.isRequired,
-      slug: PropTypes.string,
-      tag: PropTypes.string,
-      items: PropTypes.arrayOf(PropTypes.any),
-      ariaLabel: PropTypes.string,
-    })
-  ),
+  items: PropTypes.arrayOf(PropTypes.shape()),
   parentMenu: PropTypes.exact({
     title: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
+    slug: PropTypes.string,
   }).isRequired,
   setMenuHeight: PropTypes.func.isRequired,
   menuWrapperRef: PropTypes.any.isRequired,
-  activeMenuList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  activeMenuList: PropTypes.instanceOf(Set).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
   closeMobileMenu: PropTypes.func,
 };
@@ -98,9 +92,9 @@ const Menu = ({
   depth,
   title,
   slug,
+  basePath,
   icon = null,
   parentMenu = null,
-  basePath,
   items = null,
   closeMobileMenu = null,
   setMenuHeight,
@@ -110,13 +104,26 @@ const Menu = ({
 }) => {
   const isRootMenu = depth === 0;
   const menuRef = useRef(null);
-  const currentDepth = activeMenuList.length - 1;
+  const currentDepth = Array.from(activeMenuList).length - 1;
 
-  const isActive = activeMenuList.includes(title);
-  const isLastActive = activeMenuList[currentDepth] === title;
+  const isActive = activeMenuList.has(title);
+  const isLastActive = Array.from(activeMenuList)[currentDepth] === title;
 
   const BackLinkTag = parentMenu?.slug ? Link : 'button';
   const LinkTag = slug ? Link : 'div';
+
+  const pathname = usePathname();
+  const currentSlug = pathname.replace(basePath, '');
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      if (currentSlug.includes(slug) && !activeMenuList.has(title)) {
+        setActiveMenuList((prevList) => new Set(prevList).add(title));
+      }
+    }
+  }, [activeMenuList, currentSlug, setActiveMenuList, slug, title]);
 
   // update menu height and scroll menu to top
   useEffect(() => {
@@ -135,7 +142,11 @@ const Menu = ({
   }, [isLastActive, currentDepth, setMenuHeight, menuWrapperRef]);
 
   const handleClose = () => {
-    setActiveMenuList((prevList) => prevList.slice(0, -1));
+    setActiveMenuList((prevList) => {
+      const newList = new Set(prevList);
+      newList.delete(title);
+      return newList;
+    });
     if (parentMenu?.slug && closeMobileMenu) closeMobileMenu();
   };
 
@@ -187,6 +198,7 @@ const Menu = ({
                 title={title}
                 slug={slug}
                 basePath={basePath}
+                parentMenu={{ title, slug, parentMenu }}
                 closeMobileMenu={closeMobileMenu}
                 setMenuHeight={setMenuHeight}
                 menuWrapperRef={menuWrapperRef}
@@ -198,6 +210,7 @@ const Menu = ({
                 key={index}
                 {...item}
                 basePath={basePath}
+                parentMenu={{ title, slug, parentMenu }}
                 activeMenuList={activeMenuList}
                 setActiveMenuList={setActiveMenuList}
                 closeMobileMenu={closeMobileMenu}
@@ -245,12 +258,12 @@ Menu.propTypes = {
   depth: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
+  basePath: PropTypes.string.isRequired,
   icon: PropTypes.string,
   parentMenu: PropTypes.exact({
     title: PropTypes.string.isRequired,
     slug: PropTypes.string,
   }),
-  basePath: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.exact({
       title: PropTypes.string.isRequired,
@@ -262,7 +275,7 @@ Menu.propTypes = {
   ),
   setMenuHeight: PropTypes.func.isRequired,
   menuWrapperRef: PropTypes.any.isRequired,
-  activeMenuList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  activeMenuList: PropTypes.instanceOf(Set).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
   closeMobileMenu: PropTypes.func,
 };

@@ -11,8 +11,7 @@ import useClickOutside from 'hooks/use-click-outside';
 import useWindowSize from 'hooks/use-window-size';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
-import Menu from '../sidebar/menu';
-import { sidebarPropTypes } from '../sidebar/sidebar';
+import Menu from '../menu';
 
 const ANIMATION_DURATION = 0.2;
 const MOBILE_NAV_HEIGHT = 44;
@@ -40,7 +39,7 @@ const variants = {
 
 const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeMenuList, setActiveMenuList] = useState(['Home']);
+  const [activeMenuList, setActiveMenuList] = useState(new Set(['Home']));
   const [wrapperHeight, setWrapperHeight] = useState(null);
   const [menuHeight, setMenuHeight] = useState(1000);
   const [buttonTop, setButtonTop] = useState(null);
@@ -103,9 +102,9 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
         onClick={toggleMenu}
       >
         <span className="text-ellipsis">
-          {activeMenuList[activeMenuList.length - 1] === 'Home'
+          {Array.from(activeMenuList).pop() === 'Home'
             ? 'Documentation menu'
-            : activeMenuList[activeMenuList.length - 1]}
+            : Array.from(activeMenuList).pop()}
         </span>
         <ChevronRight
           className={clsx(
@@ -151,7 +150,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
 
 MobileNav.propTypes = {
   className: PropTypes.string,
-  sidebar: sidebarPropTypes,
+  sidebar: PropTypes.arrayOf(PropTypes.shape()),
   slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
 };
