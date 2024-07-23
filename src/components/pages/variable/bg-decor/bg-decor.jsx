@@ -4,10 +4,10 @@ const BgDecor = ({ hasBorder = null, hasNoise = null, hasPattern = null, childre
   <div className="pointer-events-none absolute inset-0 rounded-[inherit]" aria-hidden>
     {children}
     {hasPattern && (
-      <div className="absolute inset-px rounded-[inherit] bg-[url('/images/pages/variable/bg-pattern.png')] bg-[6px,3.45px]" />
+      <div className="absolute inset-px rounded-[inherit] bg-[url('/images/pages/variable-load/bg-pattern.png')] bg-[6px,3.45px]" />
     )}
     {hasNoise && (
-      <div className="absolute inset-px rounded-[inherit] bg-[url('/images/pages/variable/bg-noise.png')] bg-[50px,50px]" />
+      <div className="absolute inset-px rounded-[inherit] bg-[url('/images/pages/variable-load/bg-noise.png')] bg-[50px,50px]" />
     )}
     {hasBorder && (
       <div className="absolute inset-0 rounded-[inherit] border border-white mix-blend-overlay" />

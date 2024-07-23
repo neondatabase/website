@@ -101,46 +101,48 @@ const Slider = ({ articles }) => {
         onReachBeginning={() => setIsBeginning(true)}
         onReachEnd={() => setIsEnd(true)}
       >
-        {articles.map(({ url, slug, title, image, date }, index) => (
-          <SwiperSlide tag="li" key={index}>
-            <article className="w-full">
-              <Link
-                className="group block w-full overflow-hidden rounded-md"
-                to={slug || url}
-                target={url ? '_blank' : undefined}
-                rel={url ? 'noopener noreferrer' : undefined}
-              >
-                <Image
-                  className="aspect-[1.9] w-[380px] object-cover transition-transform duration-200 group-hover:scale-110 md:w-full"
-                  width={380}
-                  height={200}
-                  src={image}
-                  alt={title}
-                />
-              </Link>
-              <Link
-                className="group mt-4 block max-w-[360px]"
-                to={slug || url}
-                target={url ? '_blank' : undefined}
-                rel={url ? 'noopener noreferrer' : undefined}
-              >
-                <h3
-                  className={clsx(
-                    'text-lg font-medium leading-tight tracking-extra-tight text-white',
-                    'transition-colors duration-200 group-hover:text-green-45'
-                  )}
+        {articles
+          .sort((a, b) => a.order - b.order)
+          .map(({ url, slug, title, image, date }, index) => (
+            <SwiperSlide tag="li" key={index}>
+              <article className="w-full">
+                <Link
+                  className="group block w-full overflow-hidden rounded-md"
+                  to={slug || url}
+                  target={url ? '_blank' : undefined}
+                  rel={url ? 'noopener noreferrer' : undefined}
                 >
-                  {title}
-                </h3>
-              </Link>
-              {date && (
-                <p className="mt-2.5 text-[15px] font-light tracking-extra-tight text-gray-new-80">
-                  {date}
-                </p>
-              )}
-            </article>
-          </SwiperSlide>
-        ))}
+                  <Image
+                    className="aspect-[1.9] w-[380px] object-cover transition-transform duration-200 group-hover:scale-105 md:w-full"
+                    width={380}
+                    height={200}
+                    src={image}
+                    alt={title}
+                  />
+                </Link>
+                <Link
+                  className="group mt-4 block max-w-[360px]"
+                  to={slug || url}
+                  target={url ? '_blank' : undefined}
+                  rel={url ? 'noopener noreferrer' : undefined}
+                >
+                  <h3
+                    className={clsx(
+                      'text-lg font-medium leading-tight tracking-extra-tight text-white',
+                      'transition-colors duration-200 group-hover:text-green-45'
+                    )}
+                  >
+                    {title}
+                  </h3>
+                </Link>
+                {date && (
+                  <p className="mt-2.5 text-[15px] font-light tracking-extra-tight text-gray-new-80">
+                    {date}
+                  </p>
+                )}
+              </article>
+            </SwiperSlide>
+          ))}
       </Swiper>
     </>
   );

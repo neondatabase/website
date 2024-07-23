@@ -4,7 +4,7 @@ import databaseIcon from 'icons/variable/database.svg';
 import openSourceIcon from 'icons/variable/open-source.svg';
 import performanceIcon from 'icons/variable/performance.svg';
 import resizeIcon from 'icons/variable/resize.svg';
-import pieralbertoColonboAvatar from 'images/pages/variable/testimonials/pieralberto-colonbo.jpg';
+import pieralbertoColonboAvatar from 'images/pages/variable-load/testimonials/pieralberto-colonbo.jpg';
 
 import List from '../list';
 import Section from '../section';

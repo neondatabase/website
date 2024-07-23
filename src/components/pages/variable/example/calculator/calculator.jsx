@@ -89,11 +89,11 @@ const inputParamsBlock = [
 const DashedBorder = () => (
   <>
     <span
-      className="pointer-events-none relative z-20 block h-px w-full bg-[url('/images/pages/variable/dashed-border.png')] bg-[8px,1px] bg-repeat-x mix-blend-overlay"
+      className="pointer-events-none relative z-20 block h-px w-full bg-[url('/images/pages/variable-load/dashed-border.png')] bg-[8px,1px] bg-repeat-x mix-blend-overlay"
       aria-hidden
     />
     <span
-      className="pointer-events-none relative z-10 -mt-px block h-px w-full bg-[url('/images/pages/variable/dashed-border.png')] bg-[8px,1px] bg-repeat-x opacity-50 mix-blend-overlay"
+      className="pointer-events-none relative z-10 -mt-px block h-px w-full bg-[url('/images/pages/variable-load/dashed-border.png')] bg-[8px,1px] bg-repeat-x opacity-50 mix-blend-overlay"
       aria-hidden
     />
   </>

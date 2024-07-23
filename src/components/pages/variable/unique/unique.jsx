@@ -1,5 +1,5 @@
 import LINKS from 'constants/links';
-import andreaLevingeAvatar from 'images/pages/variable/testimonials/andrea-levinge.jpg';
+import andreaLevingeAvatar from 'images/pages/variable-load/testimonials/andrea-levinge.jpg';
 
 import List from '../list';
 import Section from '../section';
