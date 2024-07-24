@@ -87,11 +87,13 @@ Control groups, a Linux kernel feature that allows the organization, prioritizat
 
 ## Compute
 
-A service that provides virtualized computing resources (CPU, memory, and storage) for running applications. A Neon compute runs Postgres. The amount of compute resources available to a Neon project is defined by tier. Neon supports free and paid tiers.
+A service that provides virtualized computing resources, including CPU, memory, and storage, for running applications. In the context of Neon, a compute runs Postgres.
+
+Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute but supports multiple read replica computes. The compute hostname is required to connect to a Neon Postgres database from a client or application. A [compute endpoint](#compute-endpoint) is the access point through which users connect to a Neon compute. 
 
 ## compute endpoint
 
-A Neon compute. Neon creates a single primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary read-write compute but supports multiple read replica computes. You can choose whether or not to create a compute when creating child branches. The compute hostname is required to connect to a Neon database from a client or application. A compute hostname can be found in the **Connection Details** widget on the Neon **Dashboard** or by selecting the branch on the **Branches** page in the Neon Console. A compute hostname starts with an `ep-` prefix, as in this example: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`. A compute hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app). For more information about computes, see [Manage computes](/docs/manage/endpoints/).
+The access point through which users connect to a Neon compute. In the context of Neon, the compute endpoint is represented by a connection string, which includes necessary credentials and connection parameters. This connection string enables clients, such as applications or users, to securely connect to a Postgres database running on a Neon compute. See [connection string](#connection-string).
 
 ## connection pooling
 
@@ -99,7 +101,7 @@ A method of creating a pool of connections and caching those connections for reu
 
 ## connection string
 
-A string containing details for connecting to a Neon database. The details include a user name (role), compute hostname, and database name; for example:
+A string containing details for connecting to a Neon Postgres database. The details include a user name (role), compute hostname, and database name; for example:
 
 ```bash shouldWrap
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
