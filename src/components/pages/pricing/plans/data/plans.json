@@ -102,16 +102,6 @@
       "enterprise": "Unlimited"
     },
     {
-      "rows": "2",
-      "feature": {
-        "title": "Data transfer"
-      },
-      "free": "5 GB /month",
-      "launch": "Unlimited",
-      "scale": "Unlimited",
-      "enterprise": "Unlimited"
-    },
-    {
       "feature": "Compute Features"
     },
     {
@@ -364,6 +354,15 @@
       "launch": "Standard Support",
       "scale": "Priority Support",
       "enterprise": "Enterprise Support with SLAs"
-    }
-  ]
-}
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Data transfer"
+      },
+      "free": "5 GB /month",
+      "launch": "Higher limits",
+      "scale": "Higher limits",
+      "enterprise": "Custom"
+    },
+    {
