@@ -35,7 +35,7 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 ## Autosuspend
 
-A feature that suspends a compute  after a specified period of inactivity (5 minutes, by default) to minimize compute usage. This feature is also referred to as "scale to zero". When suspended, a compute is placed into an `Idle` state. Otherwise, the compute is in an `Active` state. Users on paid plans can configure the _Autosuspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable autosuspend to maintain an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+A feature that suspends a compute after a specified period of inactivity (5 minutes, by default) to minimize compute usage. This feature is also referred to as "scale to zero". When suspended, a compute is placed into an `Idle` state. Otherwise, the compute is in an `Active` state. Users on paid plans can configure the _Autosuspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable autosuspend to maintain an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 ## autoscaler-agent
 
