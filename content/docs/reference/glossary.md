@@ -89,7 +89,7 @@ Control groups, a Linux kernel feature that allows the organization, prioritizat
 
 A service that provides virtualized computing resources, including CPU, memory, and storage, for running applications. In the context of Neon, a compute runs Postgres.
 
-Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute but supports multiple read replica computes. The compute hostname is required to connect to a Neon Postgres database from a client or application. A [compute endpoint](#compute-endpoint) is the access point through which users connect to a Neon compute. 
+Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute but supports multiple read replica computes. The compute hostname is required to connect to a Neon Postgres database from a client or application. A [compute endpoint](#compute-endpoint) is the access point through which users connect to a Neon compute.
 
 ## compute endpoint
 
