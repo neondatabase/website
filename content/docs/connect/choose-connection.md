@@ -55,7 +55,7 @@ For more information on these choices, see:
 Here are some key points to help you navigate potential issues.
 | Issue | Description |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Double Pooling | Avoid using client-side pooling if you're using PgBouncer on the Neon side. Just let Neon handle the pooling to prevent retaining unused connections on the client side. If you must use client-side pooling, make sure it releases connections back to the pool early enough to avoid conflicts with PgBouncer. |
+| Double pooling | Avoid using client-side pooling if you're using a pooled Neon connection (supported by PgBouncer). Just let Neon handle the pooling to prevent retaining unused connections on the client side. If you must use client-side pooling, make sure connections are released back to the client-side pool early enough to avoid conflicts with PgBouncer. |
 | Understanding Limits | Don't confuse `max_connections` with `default_pool_size`.<br /><br />`max_connections` is the maximum number of concurrent connections allowed by PostgreSQL and is determined by your compute size.<br /><br />`default_pool_size` is the maximum number of connections PgBouncer will pool per user/database pair, which is set to 64 by default.<br /><br />Simply increasing your compute to get more `max_connections` may not improve performance if the bottleneck is actually on your `default_pool_size`. To increase your `default_pool_size`, contact support. |
 
 ## Connection types for typical applications
