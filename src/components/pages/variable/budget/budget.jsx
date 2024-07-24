@@ -1,3 +1,5 @@
+import { PropTypes } from 'prop-types';
+
 import LINKS from 'constants/links';
 
 import Cta from '../cta';
@@ -20,14 +22,8 @@ const items = [
   },
 ];
 
-const Budget = () => (
-  <Section
-    className="budget"
-    title={{
-      text: 'How much budget are you wasting on&nbsp;unused compute?',
-      id: 'how-much-budget-are-you-wasting-on-unused-compute',
-    }}
-  >
+const Budget = ({ title }) => (
+  <Section className="budget" title={title}>
     <div className="prose-variable">
       <p>
         <strong>Provisioning for peak load is highly inefficient cost-wise,</strong> especially
@@ -54,5 +50,9 @@ const Budget = () => (
     />
   </Section>
 );
+
+Budget.propTypes = {
+  title: PropTypes.shape({}),
+};
 
 export default Budget;

@@ -1,3 +1,5 @@
+import { PropTypes } from 'prop-types';
+
 import LINKS from 'constants/links';
 import andreaLevingeAvatar from 'images/pages/variable-load/testimonials/andrea-levinge.jpg';
 
@@ -29,14 +31,8 @@ const items = [
   },
 ];
 
-const Unique = () => (
-  <Section
-    className="unique"
-    title={{
-      text: 'What makes Neon unique vs&nbsp;others?',
-      id: 'what-makes-neon-unique-vs-others',
-    }}
-  >
+const Unique = ({ title }) => (
+  <Section className="unique" title={title}>
     <div className="prose-variable">
       <p>The Neon architecture is inspired in Amazon&nbsp;Aurora, but with some key differences:</p>
       <List items={items} />
@@ -52,5 +48,9 @@ const Unique = () => (
     />
   </Section>
 );
+
+Unique.propTypes = {
+  title: PropTypes.shape({}),
+};
 
 export default Unique;

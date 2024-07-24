@@ -1,3 +1,5 @@
+import { PropTypes } from 'prop-types';
+
 import autoscaleIcon from 'icons/variable/autoscale.svg';
 import costIcon from 'icons/variable/cost.svg';
 import databaseIcon from 'icons/variable/database.svg';
@@ -37,14 +39,8 @@ const items = [
   },
 ];
 
-const Efficiency = () => (
-  <Section
-    className="efficiency"
-    title={{
-      text: 'Maximize efficiency and cut costs with Serverless&nbsp;Postgres',
-      id: 'maximize-efficiency-and-cut-costs-with-serverless-postgres',
-    }}
-  >
+const Efficiency = ({ title }) => (
+  <Section className="efficiency" title={title}>
     <div className="prose-variable">
       <p>
         Neon solves this inefficiency via a serverless architecture. By{' '}
@@ -66,5 +62,9 @@ const Efficiency = () => (
     />
   </Section>
 );
+
+Efficiency.propTypes = {
+  title: PropTypes.shape({}),
+};
 
 export default Efficiency;

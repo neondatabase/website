@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { PropTypes } from 'prop-types';
 
 import aiIcon from 'icons/variable/ai.svg';
 import gamingIcon from 'icons/variable/gaming.svg';
@@ -30,14 +31,8 @@ const items = [
   },
 ];
 
-const Load = () => (
-  <Section
-    className="load"
-    title={{
-      text: 'Variable resources for variable&nbsp;load',
-      id: 'variable-resources-for-variable-load',
-    }}
-  >
+const Load = ({ title }) => (
+  <Section className="load" title={title}>
     <div className="prose-variable">
       <p>
         No real-world database has constant demand. To some extent, all modern applications
@@ -85,5 +80,9 @@ const Load = () => (
     </div>
   </Section>
 );
+
+Load.propTypes = {
+  title: PropTypes.shape({}),
+};
 
 export default Load;

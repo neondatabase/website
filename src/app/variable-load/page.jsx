@@ -1,3 +1,5 @@
+import slugify from 'slugify';
+
 import Budget from 'components/pages/variable/budget';
 import Efficiency from 'components/pages/variable/efficiency';
 import Hero from 'components/pages/variable/hero';
@@ -109,23 +111,11 @@ const articlesWithImages = (articles) =>
     };
   });
 
-const tableOfContents = [
-  {
-    title: 'Variable resources for variable load',
-    id: 'variable-resources-for-variable-load',
-  },
-  {
-    title: 'Maximize efficiency and cut costs with Serverless Postgres',
-    id: 'maximize-efficiency-and-cut-costs-with-serverless-postgres',
-  },
-  {
-    title: 'How much budget are you wasting on unused compute?',
-    id: 'how-much-budget-are-you-wasting-on-unused-compute',
-  },
-  {
-    title: 'What makes Neon unique vs others?',
-    id: 'what-makes-neon-unique-vs-others',
-  },
+const titles = [
+  'Variable resources for variable&nbsp;load',
+  'Maximize efficiency and cut costs with Serverless Postgres',
+  'How much budget are you wasting on&nbsp;unused compute?',
+  'What makes Neon unique vs&nbsp;others?',
 ];
 
 const VariableLoadPage = async () => {
@@ -134,25 +124,34 @@ const VariableLoadPage = async () => {
   const externalArticles = articlesWithImages(externalArticlesData);
   const allArticles = [...blogArticles, ...docsArticles, ...externalArticles];
 
+  const tableOfContents = titles.map((title) => ({
+    title,
+    id: slugify(title.replace(/&nbsp;/g, ' '), {
+      lower: true,
+      strict: true,
+      remove: /[*+~.()'"!:@]/g,
+    }),
+  }));
+
   return (
     <Layout headerWithBorder burgerWithoutBorder isDocPage isHeaderSticky>
       <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
         <Container
-          className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-11 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
+          className="grid w-full flex-1 grid-cols-12 gap-x-10 pt-[88px] xl:gap-x-7 xl:pt-14 lg:block lg:gap-x-5 lg:pt-11 md:pt-8"
           size="1344"
         >
-          <div className="col-span-6 col-start-4 -mx-10 flex flex-col 2xl:col-span-9 2xl:col-start-2 2xl:mx-5 xl:col-span-8 xl:col-start-3 lg:ml-0 md:mx-auto md:pb-[70px] sm:pb-8">
+          <div className="col-span-6 col-start-4 -mx-[26px] flex flex-col 2xl:col-span-9 2xl:col-start-2 2xl:mx-5 xl:col-span-8 xl:col-start-3 lg:ml-0 md:mx-auto">
             <article>
               <Hero />
-              <Load />
-              <Efficiency />
-              <Budget />
-              <Unique />
+              <Load title={tableOfContents[0]} />
+              <Efficiency title={tableOfContents[1]} />
+              <Budget title={tableOfContents[2]} />
+              <Unique title={tableOfContents[3]} />
             </article>
           </div>
 
-          <div className="col-start-10 col-end-13 ml-[50px] h-full xl:ml-0 xl:hidden">
-            <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
+          <div className="col-start-10 col-end-13 ml-[50px] h-full xl:hidden">
+            <nav className="no-scrollbars sticky bottom-10 top-[104px] -mt-2 max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
               <TableOfContents items={tableOfContents} />
             </nav>
           </div>
