@@ -18,7 +18,7 @@ import AWSIcon from './images/aws.inline.svg';
 
 const items = [
   {
-    type: 'Free Tier',
+    type: 'Free Plan',
     price: '$0 <span>/month</span>',
     description: 'Always-available free tier, no credit card required.',
     features: [
