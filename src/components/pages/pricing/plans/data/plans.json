@@ -67,7 +67,6 @@
       },
       "enterprise": "Custom"
     },
-
     {
       "rows": "2",
       "feature": {
@@ -275,7 +274,7 @@
       "scale": "Up to 30 days",
       "enterprise": "Unlimited"
     },
-        {
+    {
       "rows": "1",
       "feature": {
         "title": "Monitoring"
@@ -295,7 +294,7 @@
       "scale": true,
       "enterprise": true
     },
-        {
+    {
       "rows": "1",
       "feature": {
         "title": "Schema Diff"
@@ -364,5 +363,6 @@
       "launch": "Higher limits",
       "scale": "Higher limits",
       "enterprise": "Custom"
-    },
-    {
+    }
+  ]
+}
