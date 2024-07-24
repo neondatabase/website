@@ -20,7 +20,7 @@ Project
                             |---- database (mydb)
 ```
 
-Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints.
+Neon supports both read-write and [read replica](/docs/introduction/read-replicas) compute endpoints. A branch can have a single read-write compute endpoint but supports multiple read replica compute endpoints.
 
 Tier limits define resources (vCPUs and RAM) available to a compute endpoint. The [Neon Free Tier](/docs/introduction/plans#free-tier) provides a shared vCPU and up to 1 GB of RAM per compute endpoint. Paid plans support larger compute sizes and autoscaling.
 
@@ -30,22 +30,22 @@ A compute endpoint is associated with a branch. To view a compute endpoint, sele
 
 Compute endpoint details shown on the branch page include:
 
-- The type of compute, which can be **RW Compute** (read-write) or **RO compute** (read-only).
+- The type of compute, which can be **Primary** (read-write) or **Read Replica** (read-only).
 - The compute status, typically **Active** or **Idle**.
 - **Compute ID**: The compute endpoint ID, which always starts with an `ep-` prefix; for example: `ep-quiet-butterfly-w2qres1h`
-- - **Size**: The size of the compute endpoint. Users on paid plans can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint. Shows autoscaling minimum and maximum vCPU values if autoscaling is enabled.
+- **Size**: The size of the compute endpoint. Users on paid plans can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint. Shows autoscaling minimum and maximum vCPU values if autoscaling is enabled.
 - **Last active**: The date and time the compute was last active.
 
 ## Create a compute endpoint
 
-You can only create a read-write compute endpoint for a branch that does not have one, but a branch can have multiple read-only compute endpoints (referred to as "read replicas"). [Read replicas](/docs/guides/read-replica-guide) are a paid plan feature.
+You can only create a read-write compute endpoint for a branch that does not have one, but a branch can have multiple read replica compute endpoints. [Read replicas](/docs/guides/read-replica-guide) are a paid plan feature.
 
 To create an endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Click **Add a compute**.
-1. On the **Add compute endpoint** dialog, specify your compute settings, including compute type, size, autoscaling, and autosuspend settings, and click **Create**. Selecting the **RO replica** compute type creates a [Read replica](/docs/introduction/read-replicas).
+1. Click **Add a compute** or **Add Read Replica** if you already have a primary read-write compute.
+1. On the **Add new compute** dialog, specify your compute settings, including compute type, size, autoscaling, and autosuspend settings, and click **Create**. Selecting the **Read replica** compute type creates a [read replica](/docs/introduction/read-replicas).
 
 ## Edit a compute endpoint
 
@@ -55,7 +55,7 @@ To edit a compute endpoint:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. From the Compute tab, select **Edit** for the compute endpoint you wnat to edit.
+1. From the **Compute** tab, select **Edit** for the compute endpoint you wnat to edit.
 
    The **Edit** window opens, letting you modify settings such as compute size, the autoscaling configuration (if applicable), and your autosuspend setting.
 
@@ -264,7 +264,7 @@ The following Neon API method creates a compute endpoint.
 POST /projects/{project_id}/endpoints
 ```
 
-The API method appears as follows when specified in a cURL command. The branch you specify cannot have an existing compute endpoint. A compute endpoint must be associated with a branch, and a branch can have only one compute endpoint. Neon supports read-write and read-only compute endpoints. Read-only compute endpoints are for creating [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints.
+The API method appears as follows when specified in a cURL command. The branch you specify cannot have an existing compute endpoint. A compute endpoint must be associated with a branch. Neon supports read-write and read replica compute endpoints. A branch can have a single read-write compute endpoint but supports multiple read replica compute endpoints.
 
 ```bash
 curl -X 'POST' \
