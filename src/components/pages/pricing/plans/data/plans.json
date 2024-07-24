@@ -360,9 +360,9 @@
         "title": "Data transfer"
       },
       "free": "5 GB /month",
-      "launch": "Higher limits",
-      "scale": "Higher limits",
-      "enterprise": "Custom"
+      "launch": true,
+      "scale": true,
+      "enterprise": true
     }
   ]
 }
