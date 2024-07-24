@@ -58,7 +58,7 @@ You then need to decide whether to use direct connections or pooled connections 
   If your application is focused mainly on tasks like migrations or administrative operations that require stable and long-lived connections, use an unpooled connection.
 
 <Admonition type="note">
-The use of connection pooling is not a magic bullet. PgBouncer has a `default_pool_size` of 64, meaning it can handle only 64 direct connections to the database at any one time. When your application connects to PgBouncer, it joins a large pool, but only 64 connections are processed at a time. Long operations can cause these connections to time out or close before tasks are completed.
+Connection pooling is not a magic bullet. PgBouncer can manage 10,000 concurrent connections from your application to PgBouncer, but PgBouncer's default_pool_size setting is set to 64 by default, which means connections from PgBouncer to Postgres are limited to 64 for each user-database pair. For example, Postgres user `alex` can hold up to 64 connections to a single database at one time.
 </Admonition>
 
 For more information on these choices, see:
@@ -116,7 +116,7 @@ npm install @neondatabase/serverless
 ```javascript
 const { Client } = require('@neondatabase/serverless');
 const client = new Client({
-   connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
 });
 client.connect();
 ```
@@ -136,7 +136,7 @@ npm install pg dotenv
 ```javascript
 const { Client } = require('pg');
 const client = new Client({
-   connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
 });
 client.connect();
 ```
@@ -183,13 +183,13 @@ const { Pool } = require('pg');
 
 // Use Pool for Pooled Connection
 const pool = new Pool({
-   connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
 });
 
 pool.query('SELECT * FROM users', (err, res) => {
-   if (err) throw err;
-   console.log(res.rows);
-   pool.end();
+  if (err) throw err;
+  console.log(res.rows);
+  pool.end();
 });
 ```
 
@@ -211,14 +211,14 @@ const { Client } = require('pg');
 
 // Use Client for Direct Connection
 const client = new Client({
-   connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
 });
 client.connect();
 
 client.query('SELECT * FROM users', (err, res) => {
-   if (err) throw err;
-   console.log(res.rows);
-   client.end();
+  if (err) throw err;
+  console.log(res.rows);
+  client.end();
 });
 ```
 
