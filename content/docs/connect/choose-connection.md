@@ -1,13 +1,13 @@
 ---
-title: Choosing your connection type
-subtitle: Rules of thumb for choosing one connection type over another
+title: Choosing your driver connection type
+subtitle: Rules of thumb for choosing the right driver and connection type for your application
 enableTableOfContents: true
 ---
 
 When setting up your application’s connection to your Neon Postgres database, you need to make two main choices:
 
 - **Postgres driver type**: Serverless driver vs. TCP-based driver
-- **Connection type**: pooled vs. unpooled
+- **Connection type**: pooled vs. direct
 
 This flowchart will guide you through these selections.
 
@@ -19,27 +19,42 @@ This flowchart will guide you through these selections.
 
 ### Step 1: Choose your Postgres driver
 
-Your first choice is which driver to use. If working in a serverless environment and connecting from a JavaScript and TypeScript application, consider using the [Neon Serverless Driver](/docs/serverless/serverless-driver). This is a low-latency Postgres driver that allows you to query data from serverless and edge environments over HTTP or WebSockets instead of TCP. It's built to handle dynamic workloads with high variability in traffic &#8212; for example, Vercel Edge Functions or Cloudflare Workers.
+Your first choice is which driver to use:
 
-If you're not connecting from a JavaScript or TypeScript application or you are not developing a serverless application, use a traditional TCP-based Postgres driver. For example, if you’re using Node.js with a framework like Next.js, you can add the `pg` client to your dependencies, which serves as the Postgres driver for TCP connections.
+- **Serverless**
 
-### Step 2: If serverless, choose HTTP or WebSocket connections
+   If working in a serverless environment and connecting from a JavaScript and TypeScript application, we recommend using the [Neon Serverless Driver](/docs/serverless/serverless-driver). It handles dynamic workloads with high variability in traffic &#8212; for example, Vercel Edge Functions or Cloudflare Workers.
+- **TCP-based driver**
 
-Neon offers two types of serverless connections: HTTP and WebSocket.
+   If you're not connecting from a JavaScript or TypeScript application or you are not developing a serverless application, use a traditional TCP-based Postgres driver. For example, if you’re using Node.js with a framework like Next.js, you can add the `pg` client to your dependencies, which serves as the Postgres driver for TCP connections.
 
-- **Use HTTP for**: One-shot queries and short-lived operations where connection setup and teardown costs are minimal.
-- **Use WebSocket for**: [Transactions](/docs/postgresql/query-reference#transactions) and operations requiring persistent connections over a session. WebSocket connections provide lower latency for multiple queries in the same session.
+#### HTTP or WebSockets
+
+If you are using the serverless driver, you also need to choose whether to query over HTTP or WebSockets:
+
+- **HTTP**
+
+   Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single, non-interactive transactions, also referred to as "one-shot queries". Issuing [multiple queries](/docs/serverless/serverless-driver#issue-multiple-queries-with-the-transaction-function) via a single, non-interactive transaction is also supported. See [Use the driver over HTTP](/docs/serverless/serverless-driver#use-the-driver-over-http).
+
+- **WebSockets**
+
+   If you require session or interactive transaction support or compatibility with [node-postgres](https://node-postgres.com/) (the popular **npm** `pg` package), use WebSockets. See [Use the driver over WebSockets](/docs/serverless/serverless-driver#use-the-driver-over-websockets).
 
 <Admonition type="note">
 We are working on automatic switching between HTTP and WebSocket to as needed. Check our [roadmap](/docs/introduction/roadmap) to see what's coming soon and our Friday [Changelog](/docs/changelog) for the features-of-the-week.
 </Admonition>
 
-### Step 3: Next, choose your connection type: direct or pooled
+### Step 2: Next, choose your connection type: direct or pooled
 
 You then need to decide whether to use direct connections or pooled connections using PgBouncer:
 
-- **In general, use pooled connections whenever you can**: Pooled connections can efficiently manage high numbers of concurrent connections, supporting up to 10,000 concurrent connections. This 10,000 connection limit is most useful for serverless applications and application-side connection pools that have many open connections, but infrequent and/or short transactions.
-- **Use direct (unpooled) connections if you need persistent connections**: If your application is focused mainly on tasks like migrations or administrative operations that require stable and long-lived connections, use an unpooled connection.
+- **In general, use pooled connections whenever you can**
+
+   Pooled connections can efficiently manage high numbers of concurrent connections, supporting up to 10,000 concurrent connections. This 10,000 connection limit is most useful for serverless applications and application-side connection pools that have many open connections, but infrequent and/or short transactions.
+
+- **Use direct (unpooled) connections if you need persistent connections**
+
+   If your application is focused mainly on tasks like migrations or administrative operations that require stable and long-lived connections, use an unpooled connection.
 
 <Admonition type="note">
 The use of connection pooling is not a magic bullet. PgBouncer has a `default_pool_size` of 64, meaning it can handle only 64 direct connections to the database at any one time. When your application connects to PgBouncer, it joins a large pool, but only 64 connections are processed at a time. Long operations can cause these connections to time out or close before tasks are completed.
@@ -57,6 +72,8 @@ Here are some key points to help you navigate potential issues.
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Double Pooling | Avoid using client-side pooling if you're using PgBouncer on the Neon side. Just let Neon handle the pooling to prevent retaining unused connections on the client side. If you must use client-side pooling, make sure it releases connections back to the pool early enough to avoid conflicts with PgBouncer. |
 | Understanding Limits | Don't confuse `max_connections` with `default_pool_size`.<br /><br />`max_connections` is the maximum number of concurrent connections allowed by PostgreSQL and is determined by your compute size.<br /><br />`default_pool_size` is the maximum number of connections PgBouncer will pool per user/database pair, which is set to 64 by default.<br /><br />Simply increasing your compute to get more `max_connections` may not improve performance if the bottleneck is actually on your `default_pool_size`. To increase your `default_pool_size`, contact support. |
+| Use request handlers | In serverless environments such as Vercel Edge Functions or Cloudflare Workers, WebSocket connections can't outlive a single request. That means Pool or Client objects must be connected, used and closed within a single request handler. Don't create them outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them. See [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client) for details.|
+
 
 ## Connection types for typical applications
 
@@ -161,7 +178,7 @@ Here are some key points to help you navigate potential issues.
 Here is a table summarizing the options we've walked through on this page:
 
 | Feature                   | Direct Connections                                                                                   | Pooled Connections                                                                   | Serverless Driver (HTTP)                 | Serverless Driver (WebSocket)                 |
-| ------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------- | --------------------------------------------- | --- |
+| ------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------- | --------------------------------------------- |
 | **Use Case**              | Migrations, admin tasks requiring stable connections                                                 | High number of concurrent connections, efficient resource management                 | One-shot queries, short-lived operations | Transactions requiring persistent connections |
 | **Connection Management** | Persistent connections                                                                               | Pooled per transaction                                                               | Rapid open/close connections             | Rapid open/close connections                  |
 | **Scalability**           | Limited by `max_connections` tied to [compute size](/docs/manage/endpoints#how-to-size-your-compute) | Default pool size of 64 connections per user/database, can be increased with support | Automatically scales                     | Automatically scales                          |     |
