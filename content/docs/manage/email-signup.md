@@ -2,7 +2,7 @@
 title: E-mail signup
 subtitle: 'How to change to an email-based account, or simply change your email'
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.417Z'
+updatedOn: '2024-07-24T13:12:44.740Z'
 ---
 
 As you get more familiar with Neon, you may decide to bring Neon into your organization, or change the type of account you want to associate with Neon. This page covers the kinds of email-related changes that you might encounter as you mature your usage with Neon.
