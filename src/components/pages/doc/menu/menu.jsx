@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
@@ -114,16 +114,18 @@ const Menu = ({
 
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
-  const isFirstRender = useRef(true);
+  const [initialRender, setInitialRender] = useState(true);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
+    if (initialRender) {
       if (currentSlug.includes(slug) && !activeMenuList.has(title)) {
         setActiveMenuList((prevList) => new Set(prevList).add(title));
       }
+      setTimeout(() => {
+        setInitialRender(false);
+      }, 100);
     }
-  }, [activeMenuList, currentSlug, setActiveMenuList, slug, title]);
+  }, [initialRender, activeMenuList, currentSlug, setActiveMenuList, slug, title]);
 
   // update menu height and scroll menu to top
   useEffect(() => {
@@ -150,6 +152,12 @@ const Menu = ({
     if (parentMenu?.slug && closeMobileMenu) closeMobileMenu();
   };
 
+  const animateState = () => {
+    if (isRootMenu) return initialRender ? 'initialMoveMenu' : 'moveMenu';
+    if (initialRender) return 'close';
+    return isActive ? 'open' : 'close';
+  };
+
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -159,13 +167,14 @@ const Menu = ({
           !isRootMenu && 'translate-x-full',
           'lg:px-8 lg:pb-8 lg:pt-4 md:px-5'
         )}
-        initial={false}
-        animate={isRootMenu ? 'moveMenu' : isActive ? 'open' : 'close'}
-        transition={{ ease: 'easeIn' }}
+        initial="close"
+        animate={animateState}
+        transition={{ ease: 'easeIn', duration: initialRender ? 0 : 0.3 }}
         variants={{
-          open: { opacity: 1 },
           close: { opacity: 0 },
-          moveMenu: { x: `${currentDepth * -100}%` },
+          open: { opacity: 1 },
+          initialMoveMenu: { opacity: 0, x: `${currentDepth * -100}%` },
+          moveMenu: { opacity: 1, x: `${currentDepth * -100}%` },
         }}
         ref={menuRef}
       >
