@@ -116,7 +116,7 @@ npm install @neondatabase/serverless
 ```javascript
 const { Client } = require('@neondatabase/serverless');
 const client = new Client({
-   connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
 });
 client.connect();
 ```
@@ -136,7 +136,7 @@ npm install pg dotenv
 ```javascript
 const { Client } = require('pg');
 const client = new Client({
-   connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
 });
 client.connect();
 ```
@@ -183,13 +183,13 @@ const { Pool } = require('pg');
 
 // Use Pool for Pooled Connection
 const pool = new Pool({
-   connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
 });
 
 pool.query('SELECT * FROM users', (err, res) => {
-   if (err) throw err;
-   console.log(res.rows);
-   pool.end();
+  if (err) throw err;
+  console.log(res.rows);
+  pool.end();
 });
 ```
 
@@ -211,14 +211,14 @@ const { Client } = require('pg');
 
 // Use Client for Direct Connection
 const client = new Client({
-   connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
 });
 client.connect();
 
 client.query('SELECT * FROM users', (err, res) => {
-   if (err) throw err;
-   console.log(res.rows);
-   client.end();
+  if (err) throw err;
+  console.log(res.rows);
+  client.end();
 });
 ```
 
