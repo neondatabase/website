@@ -64,7 +64,7 @@ To get started with Autoscaling, read:
 
 ## Configure Autosuspend
 
-Neon's Autosuspend feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted on Neon's paid plans.
+Neon's Autosuspend feature automatically transitions a compute into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted on Neon's paid plans.
 
 ![Autosuspend control](/docs/get-started-with-neon/autosuspend_control.png)
 

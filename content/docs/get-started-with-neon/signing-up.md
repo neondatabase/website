@@ -62,7 +62,7 @@ The steps should be self-explanatory, but it's important to understand a few key
 
 - **We create your default branch `main` for you**
 
-  `main` is the default (primary) branch and hosts your database, role, and a compute endpoint that you can connect your application to.
+  `main` is the default (primary) branch and hosts your database, role, and a compute that you can connect your application to.
 
 - **Use the project _Quickstart_ or this tutorial**
 
@@ -144,7 +144,7 @@ You can create and manage branches from the Neon Console, but here we'll use the
    neon branches create --name dev/alex
    ```
 
-   The command output provides details about your new branch, including the branch ID, compute endpoint ID, and the connection URI that you can use to connect to this branch's database.
+   The command output provides details about your new branch, including the branch ID, compute ID, and the connection URI that you can use to connect to this branch's database.
 
 There are other branch creation options available when using the CLI. See [Create a branch with the CLI](/docs/guides/branching-neon-cli#create-a-branch-with-the-cli) for more.
 

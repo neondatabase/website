@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-01-10T18:34:05.859Z'
 ---
 
-Neon's _Autoscaling_ feature, available to paying users, dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current load, eliminating the need for manual intervention.
+Neon's _Autoscaling_ feature, available to paying users, dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current load, eliminating the need for manual intervention.
 
 ## Autoscaling benefits
 
@@ -21,7 +21,7 @@ Neon's Autoscaling feature offers the following benefits:
 You can enable autoscaling when creating a Neon project or afterward using a simple compute configuration dialog. For instructions, see:
 
 - [Create a project](/docs/manage/projects#create-a-project)
-- [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint)
+- [Edit a compute](/docs/manage/endpoints#edit-a-compute)
 
 ## How autoscaling works
 

@@ -28,7 +28,7 @@ POST /projects/{project_id}/branches
 The API method appears as follows when specified in a cURL command:
 
 <Admonition type="note">
-This method does not require a request body. Without a request body, the method creates a branch from the project's default branch, and a compute endpoint is not created.
+This method does not require a request body. Without a request body, the method creates a branch from the project's default branch, and a compute is not created.
 </Admonition>
 
 ```bash
@@ -49,11 +49,11 @@ curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches' \
 ```
 
 - The `project_id` for a Neon project is found on the **Project settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API. It is a generated value that looks something like this: `autumn-disk-484331`.
-- The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. Neon supports `read_write` and `read_only` endpoint types. A branch can be created with or without a compute endpoint. You can specify `read_only` to create a [read replica](/docs/guides/read-replica-guide).
+- The `endpoints` attribute creates a compute, which is required to connect to the branch. Neon supports `read_write` and `read_only` compute types. A branch can be created with or without a compute. You can specify `read_only` to create a [read replica](/docs/guides/read-replica-guide).
 - The `branch` attribute specifies the parent branch.
 - The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `parent_id` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's default branch or a non-default branch.
 
-The response includes information about the branch, the branch's compute endpoint, and the `create_branch` and `start_compute` operations that were initiated.
+The response includes information about the branch, the branch's compute, and the `create_branch` and `start_compute` operations that were initiated.
 
 ```json
 {

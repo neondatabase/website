@@ -119,7 +119,7 @@ curl -X 'GET' \
 
 For information about obtaining the required `project_id` parameter for this command, refer to [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
-In the response body for this method, read replica compute endpoints are identified by the `type` value, which is `read_only`.
+In the response body for this method, read replica computes are identified by the `type` value, which is `read_only`.
 </TabItem>
 
 </Tabs>
@@ -201,7 +201,7 @@ Computes are identified by their `project_id` and `endpoint_id`. For information
 
 ## Default and read replica compute setting synchronization
 
-In a Postgres primary-standby configuration, certain settings should be no smaller on a standby than on the primary in order to ensure that the standby does not run out of shared memory during recovery, as described in the [PostgreSQL hot standby documentation](https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-ADMIN). For Neon [read replicas](/docs/introduction/read-replicas), it's no different. The same settings should be no smaller on a read replica compute (the "standby") than on the default read-write compute (the "primary"). For this reason, the following settings on read replica computes are synchronized with the settings on the default read-write compute when the read replica compute is started:
+In a Postgres primary-standby configuration, certain settings should be no smaller on a standby than on the primary in order to ensure that the standby does not run out of shared memory during recovery, as described in the [PostgreSQL hot standby documentation](https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-ADMIN). For Neon [read replicas](/docs/introduction/read-replicas), it's no different. The same settings should be no smaller on a read replica compute (the "standby") than on your primary read-write compute (the "primary"). For this reason, the following settings on read replica computes are synchronized with the settings on the primary read-write compute when the read replica compute is started:
 
 - `max_connections`
 - `max_prepared_transactions`

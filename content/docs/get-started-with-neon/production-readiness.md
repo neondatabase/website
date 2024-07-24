@@ -23,7 +23,7 @@ To learn more, see our [Autoscaling](/docs/introduction/autoscaling-guide) guide
 
 **Stop paying for idle databases.**
 
-Neon's _Autosuspend_ feature automatically transitions a Neon compute instance (where Postgres runs) to an idle state when it is not being used, effectively scaling it to zero to minimize compute usage and costs.
+Neon's _Autosuspend_ feature automatically transitions a Neon compute (where Postgres runs) to an idle state when it is not being used, effectively scaling it to zero to minimize compute usage and costs.
 
 **Why do you need a database that scales to zero?** Combined with Neon's branching capability, scale to zero allows you to instantly spin up databases for development, experimentation, or testing without the typical costs associated with "always-running" databases with relatively little usage. This approach is ideal for various scenarios:
 

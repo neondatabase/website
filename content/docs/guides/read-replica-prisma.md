@@ -126,9 +126,9 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
 
    When your application runs, read operations are sent to the read replica. If you specify multiple read replicas, a read replica is selected randomly.
 
-   All write and `$transaction` queries are sent to the primary compute endpoint defined by `DATABASE_URL`, which is your read/write compute endpoint.
+   All write and `$transaction` queries are sent to the primary compute defined by `DATABASE_URL`, which is your read/write compute.
 
-   If you want to read from the primary compute endpoint and bypass read replicas, you can use the `$primary()` method in your extended Prisma Client instance:
+   If you want to read from the primary compute and bypass read replicas, you can use the `$primary()` method in your extended Prisma Client instance:
 
    ```bash
    const posts = await prisma.$primary().post.findMany()

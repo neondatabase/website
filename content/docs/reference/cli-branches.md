@@ -12,7 +12,7 @@ updatedOn: '2024-07-12T19:30:23.608Z'
 
 ## The `branches` command
 
-The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the default branch and adding a compute endpoint to a branch. You can create a [read replica](/docs/introduction/read-replicas) by adding a read-only compute endpoint.
+The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the default branch, adding a compute to a branch,  adding a [read replica](/docs/introduction/read-replicas), or perforning a [schema diff](/docs/guides/schema-diff) between different branches.
 
 ## Usage
 
@@ -130,8 +130,8 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--name`            | The branch name                                                                                                                                                                                                                                                                | string  |                                                     |
 | `--parent`          | Parent branch name, id, timestamp, or LSN. Defaults to the default branch                                                                                                                                                                                                      | string  |                                                     |
 | `--compute`         | Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute`                                                                                 | boolean |                                                     |
-| `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute endpoint is a [read replica](/docs/introduction/read-replicas).                                                                                         | string  |                                                     |
-| `--suspend-timeout` | Duration of inactivity in seconds after which the compute endpoint is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number  |                                                     |
+| `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute is a [read replica](/docs/introduction/read-replicas).                                                                                         | string  |                                                     |
+| `--suspend-timeout` | Duration of inactivity in seconds after which the compute is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number  |                                                     |
 | `--psql`            | Connect to a new branch via `psql`. `psql` must be installed to use this option.                                                                                                                                                                                               | boolean |                                                     |
 
 #### Examples
@@ -613,7 +613,7 @@ neon branches set-default mybranch
 
 ## add-compute
 
-This subcommand allows you to add a compute endpoint to an existing branch in your Neon project.
+This subcommand allows you to add a compute to an existing branch in your Neon project.
 
 #### Usage
 
@@ -631,7 +631,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ | :-------------------------------------------------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                                                                                                                                        | string |                                                     |
 | `--project-id`   | Project ID                                                                                                                                                                                                                                                                           | string | Only if your Neon account has more than one project |
-| `--type`         | Type of compute to add. Choices are `read_only` (the default) or `read_write`. A branch with a read-only compute is a [read replica](/docs/introduction/read-replicas). A branch can have a single read-write and multiple read replica computes. | string |                                                     |
+| `--type`         | Type of compute to add. Choices are `read_only` (the default) or `read_write`. A read-only compute is a [read replica](/docs/introduction/read-replicas). A branch can have a single primary read-write compute and multiple read replica computes. | string |                                                     |
 | `--cu`           | Sets the compute size in Compute Units. For a fixed size, enter a single number (e.g., "2"). For autoscaling, enter a range with a dash (e.g., "0.5-3").                                                                                                                             | string |                                                     |
 
 #### Examples

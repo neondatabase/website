@@ -67,7 +67,7 @@ To create a branch:
 2. Click **New Branch** to open the branch creation dialog.
 3. Enter a name for the branch. Let's call it `dev1`.
 4. Leave `main` selected as the parent branch. This is where you created the `blog` database.
-5. Leave the remaining default settings. Creating a branch from **Head** creates a branch with the latest data, and a compute endpoint is required to connect to the database on the branch.
+5. Leave the remaining default settings. Creating a branch from **Head** creates a branch with the latest data, and a compute is required to connect to the database on the branch.
 6. Click **Create Branch** to create your branch.
 
 ## Retrieve your Neon database connection strings
