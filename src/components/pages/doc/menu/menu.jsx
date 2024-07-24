@@ -153,8 +153,7 @@ const Menu = ({
   };
 
   const animateState = () => {
-    if (isRootMenu) return initialRender ? 'initialMoveMenu' : 'moveMenu';
-    if (initialRender) return 'close';
+    if (isRootMenu) return 'moveMenu';
     return isActive ? 'open' : 'close';
   };
 
@@ -167,14 +166,13 @@ const Menu = ({
           !isRootMenu && 'translate-x-full',
           'lg:px-8 lg:pb-8 lg:pt-4 md:px-5'
         )}
-        initial="close"
+        initial={false}
         animate={animateState}
         transition={{ ease: 'easeIn', duration: initialRender ? 0 : 0.3 }}
         variants={{
           close: { opacity: 0 },
           open: { opacity: 1 },
-          initialMoveMenu: { opacity: 0, x: `${currentDepth * -100}%` },
-          moveMenu: { opacity: 1, x: `${currentDepth * -100}%` },
+          moveMenu: { x: `${currentDepth * -100}%` },
         }}
         ref={menuRef}
       >
