@@ -74,76 +74,23 @@ Here are some key points to help you navigate potential issues.
 | Understanding limits | Don't confuse `max_connections` with `default_pool_size`.<br /><br />`max_connections` is the maximum number of concurrent connections allowed by Postgres and is determined by your [Neon compute size](/docs/connect/connection-pooling#connection-limits-without-connection-pooling).<br /><br />`default_pool_size` is the maximum number of connections PgBouncer supports per user/database pair, which is set to 64 by default.<br /><br />Simply increasing your compute to get more `max_connections` may not improve performance if the bottleneck is actually on your `default_pool_size`. To increase your `default_pool_size`, contact [Support](/docs/introduction/support). |
 | Use request handlers | In serverless environments such as Vercel Edge Functions or Cloudflare Workers, WebSocket connections can't outlive a single request. That means Pool or Client objects must be connected, used and closed within a single request handler. Don't create them outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them. See [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client) for details.|
 
-
-## Connection types for typical applications
-
-- **E-commerce Platforms:** High concurrency and rapid read/write operations. Use pooled connections for handling high traffic and direct connections for inventory updates.
-- **Content Management Systems (CMS):** Frequent read operations and moderate write operations. Use direct connections for content updates and pooled connections for concurrent reads.
-- **Financial Applications:** High concurrency and secure transactions. Use direct connections for stability and security, and pooled connections for high-frequency reads.
-- **Analytics and Reporting Tools:** Long-running queries and high data throughput. Use direct connections for report generation and pooled connections for frequent data access.
-- **Serverless Applications:** Rapid scaling and short-lived connections. Use the serverless driver with HTTP for one-shot queries and WebSocket for persistent transactions.
-
 ## Configuration Examples
 
-**Direct connections**:
+Let's say you're working on a Next.js application. We'll walk you through how you might configure your app using the drivers and connection types detailed on this page.
 
-1. Install the Postgres client library (e.g., pg for Node.js).
+### Setting Up Your Driver
 
-   ```bash
-   npm install pg dotenv
-   ```
+<Tabs labels={["Serverless HTTP", "Serverless WebSocket", "TCP"]}>
 
-1. Set up the connection string in your application configuration.
+<TabItem>
 
-   ```javascript
-   const { Client } = require('pg');
-   const client = new Client({
-     connectionString: process.env.DATABASE_URL,
-   });
-   client.connect();
-   ```
-
-1. Use the client for database operations.
-
-   ```javascript
-   client.query('SELECT * FROM users', (err, res) => {
-     if (err) throw err;
-     console.log(res.rows);
-     client.end();
-   });
-   ```
-
-**Pooled Connections**:
-
-1. You don't need install PgBouncer; just use the `-pooler` suffix with your connection string.
-1. Modify the connection string to use this pooled endpoint.
-
-   ```javascript
-   const { Pool } = require('pg');
-   const pool = new Pool({
-     connectionString: process.env.DATABASE_URL_POOLER,
-   });
-   ```
-
-1. Use the pool for database operations.
-
-   ```javascript
-   pool.query('SELECT * FROM users', (err, res) => {
-     if (err) throw err;
-     console.log(res.rows);
-     pool.end();
-   });
-   ```
-
-**Serverless Driver**:
-
-1. Install the serverless driver.
+1. **Install the serverless driver:**
 
    ```bash
    npm install @neondatabase/serverless
    ```
 
-1. Configure the connection for HTTP or WebSocket.
+2. **Configure the connection for HTTP:**
 
    ```javascript
    const { Client } = require('@neondatabase/serverless');
@@ -153,25 +100,130 @@ Here are some key points to help you navigate potential issues.
    client.connect();
    ```
 
-1. Use the client for database operations.
+</TabItem>
 
-   ```javascript
-   client.query('SELECT * FROM users', (err, res) => {
-     if (err) throw err;
-     console.log(res.rows);
-     client.end();
-   });
-   ```
+<TabItem>
 
-## Monitoring
+**Install the serverless driver:**
 
-- **Use pg_stat_statements**: Use the `pg_stat_statements` extension to track information like execution counts and slow queries to help understand your query performance.
+```bash
+npm install @neondatabase/serverless
+```
 
-  See [pg_stats_statements](docs/extensions/pg_stat_statement) for more information, in particular the [Monitor slow queries](/docs/extensions/pg_stat_statements#monitor-slow-queries) section.
+**Configure the connection for WebSocket:**
 
-- **Monitoring Dashboard**: Use the [Monitoring Dashboard](docs/introduction/monitoring-page) in the Neon Console to monitor connection metrics, compute usage, and database health.
+```javascript
+const { Client } = require('@neondatabase/serverless');
+const client = new Client({
+   connectionString: process.env.DATABASE_URL,
+});
+client.connect();
+```
 
-- **External tools**: Use external tools like PgHero and pgAdmin to monitor your database. See [Monitoring Neon with external tools](docs/introduction/monitor-external-tools) for information about setting up and using these tools.
+</TabItem>
+
+<TabItem>
+
+**Install the Postgres client library:**
+
+```bash
+npm install pg dotenv
+```
+
+**Set up the connection string in your application configuration:**
+
+```javascript
+const { Client } = require('pg');
+const client = new Client({
+   connectionString: process.env.DATABASE_URL,
+});
+client.connect();
+```
+
+</TabItem>
+
+</Tabs>
+
+## Setting Up Direct or Pooled Connections
+
+Now, let's set up your connection. With Next.js, you are likely to use pooled connections, but we'll explain how you can configure either one. The key difference is in the connection string you use in your `.env` file.
+
+### Connection string
+
+You can get your connection string from the Neon console or via CLI. For example, to get a pooled connection string via CLI:
+
+```bash shouldWrap
+neonctl connection-string --pooled true [branch_name]
+
+postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+```
+
+### Environment variables
+
+If using environment variables, create an `.env` file in the root of your project, defining your `DATATABASE_URL` to use either your direct or pooled connection string. And then use the variable in your application.
+
+<Tabs labels={["Pooled Connection", "Direct Connection"]}>
+
+<TabItem label="Pooled Connection">
+
+**.env file**
+
+Create an `.env` file in the root of your project with the following content for a pooled connection:
+
+```bash
+DATABASE_URL=your_pooled_connection_string
+```
+
+**Using the variable**
+
+```javascript
+require('dotenv').config();
+const { Pool } = require('pg');
+
+// Use Pool for Pooled Connection
+const pool = new Pool({
+   connectionString: process.env.DATABASE_URL,
+});
+
+pool.query('SELECT * FROM users', (err, res) => {
+   if (err) throw err;
+   console.log(res.rows);
+   pool.end();
+});
+```
+
+</TabItem>
+
+<TabItem label="Direct Connection">
+
+**.env file**
+
+```bash
+DATABASE_URL=your_direct_connection_string
+```
+
+**Using the variable**
+
+```javascript
+require('dotenv').config();
+const { Client } = require('pg');
+
+// Use Client for Direct Connection
+const client = new Client({
+   connectionString: process.env.DATABASE_URL,
+});
+client.connect();
+
+client.query('SELECT * FROM users', (err, res) => {
+   if (err) throw err;
+   console.log(res.rows);
+   client.end();
+});
+```
+
+</TabItem>
+
+</Tabs>
 
 ## Table summarizing your options
 
