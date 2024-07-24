@@ -21,7 +21,13 @@ const items = [
 ];
 
 const Budget = () => (
-  <Section className="budget" title="How much budget are you wasting on&nbsp;unused compute?">
+  <Section
+    className="budget"
+    title={{
+      text: 'How much budget are you wasting on&nbsp;unused compute?',
+      id: 'how-much-budget-are-you-wasting-on-unused-compute',
+    }}
+  >
     <div className="prose-variable">
       <p>
         <strong>Provisioning for peak load is highly inefficient cost-wise,</strong> especially

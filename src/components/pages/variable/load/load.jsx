@@ -31,7 +31,13 @@ const items = [
 ];
 
 const Load = () => (
-  <Section className="load" title="Variable resources for variable&nbsp;load">
+  <Section
+    className="load"
+    title={{
+      text: 'Variable resources for variable&nbsp;load',
+      id: 'variable-resources-for-variable-load',
+    }}
+  >
     <div className="prose-variable">
       <p>
         No real-world database has constant demand. To some extent, all modern applications

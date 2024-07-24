@@ -1,28 +1,23 @@
 import clsx from 'clsx';
 import { PropTypes } from 'prop-types';
 
-import Container from 'components/shared/container/container';
-
 const Section = ({ className = null, title, children }) => (
-  <section
-    className={clsx(
-      'safe-paddings relative mt-[72px] overflow-hidden xl:mt-16 lg:mt-14 md:mt-11',
-      className
-    )}
-  >
-    <Container size="xxs">
-      <h2
-        className="mb-7 text-[36px] font-medium leading-tight tracking-tighter xl:mb-6 xl:text-[32px] lg:mb-5 lg:text-[28px] md:mb-4 md:text-2xl"
-        dangerouslySetInnerHTML={{ __html: title }}
-      />
-      {children}
-    </Container>
-  </section>
+  <div className={clsx('relative  overflow-hidden', className)}>
+    <h2
+      className="mb-7 pt-[72px] text-[36px] font-medium leading-tight tracking-tighter xl:mb-6 xl:pt-16 xl:text-[32px] lg:mb-5 lg:pt-14 lg:text-[28px] md:mb-4 md:pt-11 md:text-2xl"
+      id={title.id}
+      dangerouslySetInnerHTML={{ __html: title.text }}
+    />
+    {children}
+  </div>
 );
 
 Section.propTypes = {
   className: PropTypes.string,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  }).isRequired,
   children: PropTypes.node,
 };
 

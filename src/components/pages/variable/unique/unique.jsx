@@ -30,7 +30,13 @@ const items = [
 ];
 
 const Unique = () => (
-  <Section className="unique" title="What makes Neon unique vs&nbsp;others?">
+  <Section
+    className="unique"
+    title={{
+      text: 'What makes Neon unique vs&nbsp;others?',
+      id: 'what-makes-neon-unique-vs-others',
+    }}
+  >
     <div className="prose-variable">
       <p>The Neon architecture is inspired in Amazon&nbsp;Aurora, but with some key differences:</p>
       <List items={items} />

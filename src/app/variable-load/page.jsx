@@ -4,8 +4,10 @@ import Hero from 'components/pages/variable/hero';
 import Load from 'components/pages/variable/load';
 import RelevantArticles from 'components/pages/variable/relevant-articles';
 import Unique from 'components/pages/variable/unique';
+import Container from 'components/shared/container';
 import Cta from 'components/shared/get-started';
 import Layout from 'components/shared/layout';
+import TableOfContents from 'components/shared/table-of-contents';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import evolutionOfPostgres from 'images/pages/variable-load/relevant-articles/evolution-of-postgres.jpg';
@@ -107,6 +109,25 @@ const articlesWithImages = (articles) =>
     };
   });
 
+const tableOfContents = [
+  {
+    title: 'Variable resources for variable load',
+    id: 'variable-resources-for-variable-load',
+  },
+  {
+    title: 'Maximize efficiency and cut costs with Serverless Postgres',
+    id: 'maximize-efficiency-and-cut-costs-with-serverless-postgres',
+  },
+  {
+    title: 'How much budget are you wasting on unused compute?',
+    id: 'how-much-budget-are-you-wasting-on-unused-compute',
+  },
+  {
+    title: 'What makes Neon unique vs others?',
+    id: 'what-makes-neon-unique-vs-others',
+  },
+];
+
 const VariableLoadPage = async () => {
   const blogArticles = await fetchBlogArticles(blogArticlesData);
   const docsArticles = articlesWithImages(docsArticlesData);
@@ -114,22 +135,40 @@ const VariableLoadPage = async () => {
   const allArticles = [...blogArticles, ...docsArticles, ...externalArticles];
 
   return (
-    <Layout>
-      <Hero />
-      <Load />
-      <Efficiency />
-      <Budget />
-      <Unique />
-      <RelevantArticles articles={allArticles} />
-      <Cta
-        title="Try it yourself"
-        description="You can experiment with autoscaling for free during 14 days"
-        button={{
-          title: 'Request a Scale trial',
-          url: LINKS.scaleTrial,
-        }}
-        size="sm"
-      />
+    <Layout headerWithBorder burgerWithoutBorder isDocPage isHeaderSticky>
+      <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
+        <Container
+          className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-11 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
+          size="1344"
+        >
+          <div className="col-span-6 col-start-4 -mx-10 flex flex-col 2xl:col-span-9 2xl:col-start-2 2xl:mx-5 xl:col-span-8 xl:col-start-3 lg:ml-0 md:mx-auto md:pb-[70px] sm:pb-8">
+            <article>
+              <Hero />
+              <Load />
+              <Efficiency />
+              <Budget />
+              <Unique />
+            </article>
+          </div>
+
+          <div className="col-start-10 col-end-13 ml-[50px] h-full xl:ml-0 xl:hidden">
+            <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
+              <TableOfContents items={tableOfContents} />
+            </nav>
+          </div>
+        </Container>
+
+        <RelevantArticles articles={allArticles} />
+        <Cta
+          title="Try it yourself"
+          description="You can experiment with autoscaling for free during 14 days"
+          button={{
+            title: 'Request a Scale trial',
+            url: LINKS.scaleTrial,
+          }}
+          size="sm"
+        />
+      </div>
     </Layout>
   );
 };

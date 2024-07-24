@@ -40,7 +40,10 @@ const items = [
 const Efficiency = () => (
   <Section
     className="efficiency"
-    title="Maximize efficiency and cut costs with Serverless&nbsp;Postgres"
+    title={{
+      text: 'Maximize efficiency and cut costs with Serverless&nbsp;Postgres',
+      id: 'maximize-efficiency-and-cut-costs-with-serverless-postgres',
+    }}
   >
     <div className="prose-variable">
       <p>
