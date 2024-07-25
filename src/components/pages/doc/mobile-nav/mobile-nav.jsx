@@ -2,9 +2,11 @@
 
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
+import { getActiveItems } from 'components/pages/doc/sidebar/sidebar';
 import InkeepTrigger from 'components/shared/inkeep-trigger';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
@@ -39,7 +41,7 @@ const variants = {
 
 const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeMenuList, setActiveMenuList] = useState(new Set(['Home']));
+
   const [wrapperHeight, setWrapperHeight] = useState(null);
   const [menuHeight, setMenuHeight] = useState(1000);
   const [buttonTop, setButtonTop] = useState(null);
@@ -48,6 +50,12 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
   const wrapperRef = useRef(null);
   const buttonRef = useRef(null);
   const controls = useAnimation();
+
+  const pathname = usePathname();
+  const currentSlug = pathname.replace(basePath, '');
+  const [activeMenuList, setActiveMenuList] = useState(
+    new Set(['Home', ...getActiveItems(sidebar, currentSlug)])
+  );
 
   const toggleMenu = () => setIsOpen((isOpen) => !isOpen);
   const closeMenu = () => setIsOpen(false);
