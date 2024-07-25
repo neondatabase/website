@@ -369,6 +369,8 @@
           slug: guides/logical-replication-postgres
         - title: Sequin
           slug: guides/sequin
+        - title: Snowflake
+          slug: guides/logical-replication-airbyte-snowflake
     - title: Schema Migration
       items:
         - title: Django
