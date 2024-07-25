@@ -101,7 +101,7 @@ You can use standard Postgres client libraries or drivers. Neon is fully compati
 
 Setting up a direct or pooled connection is usually a matter of choosing the appropriate connection string and adding it to your application's `.env` file.
 
-You can get your connection string from the Neon console or via CLI.
+You can get your connection string from the [Neon Console](/docs/connect/connect-from-any-app) or via CLI.
 
 For example, to get a pooled connection string via CLI:
 
