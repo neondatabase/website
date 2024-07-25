@@ -29,7 +29,6 @@ const parseItems = (items, currentSlug) =>
 const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
-
   const initialMenuList = new Set(['Home', ...parseItems(sidebar, currentSlug)]);
 
   const [activeMenuList, setActiveMenuList] = useState(initialMenuList);
