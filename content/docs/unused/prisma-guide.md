@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/prisma-tutorial
-updatedOn: '2024-06-21T14:17:23.479Z'
+updatedOn: '2024-07-25T12:53:42.439Z'
 ---
 
 Prisma is an open source next-generation ORM that consists of the following parts:
@@ -101,7 +101,7 @@ SHADOW_DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.
 ```
 
 <Admonition type="note">
-A `?connect_timeout=10` parameter is added to the connection strings above to avoid database connection timeouts. The default `connect_timeout` setting is 5 seconds, which is usually enough time for a database connection to be established. However, network latency combined with the short amount of time required to start an idle Neon compute instance can sometimes result in a connection failure. Setting `connect_timeout=10` helps avoid this issue.
+A `?connect_timeout=10` parameter is added to the connection strings above to avoid database connection timeouts. The default `connect_timeout` setting is 5 seconds, which is usually enough time for a database connection to be established. However, network latency combined with the short amount of time required to start an idle Neon compute can sometimes result in a connection failure. Setting `connect_timeout=10` helps avoid this issue.
 </Admonition>
 
 ## Add a model to your schema.prisma file

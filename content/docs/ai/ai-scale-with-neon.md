@@ -2,7 +2,7 @@
 title: Scale your AI application with Neon
 subtitle: Scale your AI application with Neon's Autoscaling and Read Replica features
 enableTableOfContents: true
-updatedOn: '2024-07-15T14:10:09.615Z'
+updatedOn: '2024-07-25T12:53:42.413Z'
 ---
 
 You can scale your AI application built on Postgres with `pgvector` in the same way you would any Postgres app: Vertically with added CPU, RAM, and storage, or horizontally with read replicas.
@@ -24,7 +24,7 @@ In Neon, scaling vertically is a matter of selecting the desired compute size. N
 | 9                  | 9    | 36 GB | 604 MB               |
 | 10                 | 10   | 40 GB | 671 MB               |
 
-See [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint) to learn how to configure your compute size. Available compute sizes differ according to your Neon plan. The Neon Free Tier supports computes with 0.25 vCPU and 1 GB RAM. The Launch plan offers compute sizes up to 4 vCPU with 16 GB RAM. Larger computes are available on the Scale plan. See [Neon plans](/docs/introduction/plans).
+See [Edit a compute](/docs/manage/endpoints#edit-a-compute) to learn how to configure your compute size. Available compute sizes differ according to your Neon plan. The Neon Free Tier supports computes with 0.25 vCPU and 1 GB RAM. The Launch plan offers compute sizes up to 4 vCPU with 16 GB RAM. Larger computes are available on the Scale plan. See [Neon plans](/docs/introduction/plans).
 
 To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session beyond the preconfigured default shown in the table above with a command similar to this:
 
@@ -50,9 +50,9 @@ Neon's data storage allowances differ by plan. The Free plan offers 512 MB of st
 
 ## Read replicas
 
-Neon supports read replicas, which are independent read-only compute instances designed to perform read operations on the same data as your read-write computes. Read replicas do not replicate data across database instances. Instead, read requests are directed to the same data source. This architecture enables read replicas to be created instantly, enabling you to scale out CPU and RAM, but because data is read from a single source, there are no additional storage costs.
+Neon supports read replicas, which are independent read-only computes designed to perform read operations on the same data as your primary read-write compute. Read replicas do not replicate data across database instances. Instead, read requests are directed to the same data source. This architecture enables read replicas to be created instantly, enabling you to scale out CPU and RAM, but because data is read from a single source, there are no additional storage costs.
 
-Since vector similarity search is a read-only workload, you can leverage read replicas to offload reads from your read-write compute instance to a dedicated compute when deploying AI applications. After you create a read replica, you can simply swap out your current Neon connecting string for the read replica connection string, which makes deploying a read replica for your AI application very simple.
+Since vector similarity search is a read-only workload, you can leverage read replicas to offload reads from your primary read-write compute to a dedicated compute when deploying AI applications. After you create a read replica, you can simply swap out your current Neon connecting string for the read replica connection string, which makes deploying a read replica for your AI application very simple.
 
 Neon's read replicas support the same compute sizes outlined above. Read replicas also support autoscaling.
 

@@ -1,7 +1,7 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-updatedOn: '2024-07-20T09:00:33.039Z'
+updatedOn: '2024-07-25T12:53:42.431Z'
 ---
 
 This topic describes [Storage](#storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
@@ -189,15 +189,15 @@ To estimate what your compute hour usage might be per month:
 
 ## Data Transfer
 
-Data transfer usage refers to the total volume of data transferred out of Neon (known as "egress") during a given billing period. Neon does not charge for egress data, but we do limit the amount of egress available on Free Tier projects to 5 GiB per month. The project's compute endpoint is suspended if the data transfer allowance is exceeded, and the following error message will be reported:
+Data transfer usage refers to the total volume of data transferred out of Neon (known as "egress") during a given billing period. Neon does not charge for egress data, but we do limit the amount of egress available on Free Tier projects to 5 GiB per month. The project's compute is suspended if the data transfer allowance is exceeded, and the following error message will be reported:
 
 ```text shouldWrap
 Your project has exceeded the data transfer quota. Upgrade your plan to increase limits.
 ```
 
-Data transfer is tracked per Neon user account.
+If you hit this limit and need to upgrade your plan, you can do so from your Neon account's **Billing** page. For instructions, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free Tier users can monitor **Data transfer** usage from the **Resources remaining** widget on the **Project Dashboard**.
 
-For all other plans, Neon maintains a reasonable usage policy. This means there is no set limit on data transfer, but usage is expected to stay within a range typical for standard operations. If your usage significantly exceeds this expected range, Neon may reach out to discuss your usage and possible plan adjustments.
+For all other plans, Neon maintains a reasonable usage policy. This means there is no set limit on data transfer, but usage is expected to stay within a range typical for standard operations. If your usage significantly exceeds this expected range, Neon may reach out to discuss your usage and possible plan adjustments. Paying users can monitor per-project **Data transfer** usage from the **Usage** widget on the **Project Dashboard**.
 
 ## Projects
 

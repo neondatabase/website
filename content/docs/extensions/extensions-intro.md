@@ -1,6 +1,7 @@
 ---
 title: Postgres extensions
 enableTableOfContents: true
+updatedOn: '2024-07-23T13:01:46.231Z'
 ---
 
 Explore supported Postgres extensions by category. Also see:
@@ -116,19 +117,19 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://www.postgresql.org/docs/16/earthdistance.html" description="Provides cube-based and point-based approaches to calculating great circle distances on the surface of the Earth" icon="globe">earthdistance</a>
 
-<a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="Integrates Uber's H3 geospatial indexing system that combines the benefits of a hexagonal grid with S2's hierarchical subdivisions" icon="globe">h3</a>
+<a href="/docs/extensions/postgis-related-extensions#h3-and-h3-postgis" description="Integrates Uber's H3 geospatial indexing system that combines the benefits of a hexagonal grid with S2's hierarchical subdivisions" icon="globe">h3</a>
 
-<a href="https://github.com/zachasme/h3-pg/blob/main/docs/api.md" description="A PostGIS extension for H3, enabling advanced spatial analysis and indexing" icon="globe">h3_postgis</a>
+<a href="/docs/extensions/postgis-related-extensions#h3-and-h3-postgis" description="A PostGIS extension for H3, enabling advanced spatial analysis and indexing" icon="globe">h3_postgis</a>
 
-<a href="https://docs.pgrouting.org/" description="Extends PostGIS/Postgres databases, providing geospatial routing and other network analysis functionality" icon="globe">pgrouting</a>
+<a href="/docs/extensions/postgis-related-extensions#pgrouting" description="Extends PostGIS/Postgres databases, providing geospatial routing and other network analysis functionality" icon="globe">pgrouting</a>
 
 <a href="/docs/extensions/postgis" description="Extends Postgres to allow GIS (Geographic Information Systems) objects to be stored in the database, enabling spatial queries directly in SQL" icon="globe">postgis</a>
 
 <a href="https://postgis.net/docs/RT_reference.html" description="Adds support for raster data to PostGIS, enabling advanced geospatial analysis on raster images" icon="globe">postgis_raster</a>
 
-<a href="https://postgis.net/docs/reference.html#reference_sfcgal" description="Provides support for advanced 3D geometries in PostGIS, based on the SFCGAL library" icon="globe">postgis_sfcgal</a>
+<a href="/docs/extensions/postgis-related-extensions#postgis-sfcgal" description="Provides support for advanced 3D geometries in PostGIS, based on the SFCGAL library" icon="globe">postgis_sfcgal</a>
 
-<a href="https://postgis.net/docs/Extras.html#Tiger_Geocoder" description="Enables geocoding and reverse geocoding capabilities in PostGIS using TIGER/Line data" icon="globe">postgis_tiger_geocoder</a>
+<a href="/docs/extensions/postgis-related-extensions#postgis-tiger-geocoder" description="Enables geocoding and reverse geocoding capabilities in PostGIS using TIGER/Line data" icon="globe">postgis_tiger_geocoder</a>
 
 <a href="https://www.postgis.net/docs/Topology.html" description="Extends PostGIS with support for topological data types and functions, facilitating the analysis of spatial relationships" icon="globe">postgis_topology</a>
 

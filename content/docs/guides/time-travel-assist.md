@@ -2,7 +2,7 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
-updatedOn: '2024-06-30T18:09:08.269Z'
+updatedOn: '2024-07-25T12:53:42.429Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your history retention window and then run queries against that connection.
@@ -15,9 +15,9 @@ You can use Time Travel from two places in the Neon Console, and from the Neon C
 
 ## How Time Travel works
 
-Time Travel leverages Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which are automatically removed once you are done querying against this point-in-time connection. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+Time Travel leverages Neon's instant branching capability to create a temporary branch and compute at the selected point in time, which are automatically removed once you are done querying against this point-in-time connection. The computes are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
 
-However, you can see the history of operations related to the creation and deletion of branches and ephemeral compute endpoints on the **Operations** page:
+However, you can see the history of operations related to the creation and deletion of branches and ephemeral computes on the **Operations** page:
 
 - start_compute
 - create_branch
@@ -26,7 +26,7 @@ However, you can see the history of operations related to the creation and delet
 
 ### How long do ephemeral endpoints remain active
 
-The ephemeral endpoints are created according to your configured [default compute size](/docs/manage/projects#reset-the-default-compute-size). An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
+The ephemeral endpoints are created according to your configured [default compute size](/docs/manage/projects#reset-the-default-compute-size). An ephemeral compute remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
 ### History retention
 
