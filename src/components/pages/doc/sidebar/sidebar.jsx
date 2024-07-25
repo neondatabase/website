@@ -16,12 +16,12 @@ const hasActiveItem = (items, currentSlug) =>
   );
 
 export const getActiveItems = (items, currentSlug) =>
-  items.reduce((titles, { title, items }) => {
+  items.reduce((titles, { title, items, slug }) => {
     if (items) {
-      titles.push(...getActiveItems(items, currentSlug));
-      if (title && hasActiveItem(items, currentSlug)) {
+      if (title && (slug === currentSlug || hasActiveItem(items, currentSlug))) {
         titles.push(title);
       }
+      titles.push(...getActiveItems(items, currentSlug));
     }
     return titles;
   }, []);
