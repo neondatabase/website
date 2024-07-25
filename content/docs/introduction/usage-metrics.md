@@ -1,7 +1,7 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-updatedOn: '2024-07-25T12:53:42.431Z'
+updatedOn: '2024-07-25T20:36:51.932Z'
 ---
 
 This topic describes [Storage](#storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
@@ -189,7 +189,7 @@ To estimate what your compute hour usage might be per month:
 
 ## Data Transfer
 
-Data transfer usage refers to the total volume of data transferred out of Neon (known as "egress") during a given billing period. Neon does not charge for egress data, but we do limit the amount of egress available on Free Tier projects to 5 GiB per month. The project's compute is suspended if the data transfer allowance is exceeded, and the following error message will be reported:
+Data transfer usage refers to the total volume of data transferred out of Neon (known as "egress") during a given billing period. Neon does not charge for egress data, but we do limit the amount of egress available on Free Tier projects to 5 GB per month. The project's compute is suspended if the data transfer allowance is exceeded, and the following error message will be reported:
 
 ```text shouldWrap
 Your project has exceeded the data transfer quota. Upgrade your plan to increase limits.
