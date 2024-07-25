@@ -49,7 +49,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
           <Logo className="h-7" width={102} height={28} priority />
         </Link>
         <nav
-          className="no-scrollbars z-10 mt-16 h-[calc(100vh-120px)] overflow-x-hidden overflow-y-scroll"
+          className="no-scrollbars z-10 mt-[58px] h-[calc(100vh-120px)] overflow-x-hidden overflow-y-scroll"
           ref={menuWrapperRef}
         >
           <div
