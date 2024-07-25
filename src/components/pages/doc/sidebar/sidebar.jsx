@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useState, useRef } from 'react';
 
@@ -9,8 +10,29 @@ import Logo from 'components/shared/logo';
 
 import Menu from '../menu';
 
+const hasActiveItem = (items, currentSlug) =>
+  items?.some(
+    ({ slug, items }) => slug === currentSlug || (items && hasActiveItem(items, currentSlug))
+  );
+
+const parseItems = (items, currentSlug) =>
+  items.reduce((titles, { title, items }) => {
+    if (items) {
+      titles.push(...parseItems(items, currentSlug));
+      if (title && hasActiveItem(items, currentSlug)) {
+        titles.push(title);
+      }
+    }
+    return titles;
+  }, []);
+
 const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
-  const [activeMenuList, setActiveMenuList] = useState(new Set(['Home']));
+  const pathname = usePathname();
+  const currentSlug = pathname.replace(basePath, '');
+
+  const initialMenuList = new Set(['Home', ...parseItems(sidebar, currentSlug)]);
+
+  const [activeMenuList, setActiveMenuList] = useState(initialMenuList);
   const [menuHeight, setMenuHeight] = useState(1000);
   const menuWrapperRef = useRef(null);
 

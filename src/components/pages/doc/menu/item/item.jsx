@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useEffect, useRef } from 'react';
 
 import Link from 'components/shared/link';
 import ArrowExternalIcon from 'icons/docs/sidebar/arrow-external.inline.svg';
@@ -17,7 +16,6 @@ const Item = ({
   tag = null,
   ariaLabel = null,
   items = null,
-  parentMenu,
   activeMenuList,
   setActiveMenuList,
   closeMobileMenu = null,
@@ -30,24 +28,6 @@ const Item = ({
   const docSlug = `${basePath}${slug}/`;
 
   const LinkTag = slug ? Link : 'button';
-
-  const isFirstRender = useRef(true);
-
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      if (currentSlug === slug) {
-        const addParentMenusToActiveList = (menu) => {
-          if (menu && !activeMenuList.has(menu.title)) {
-            setActiveMenuList((prevList) => new Set(prevList).add(menu.title));
-            addParentMenusToActiveList(menu.parentMenu);
-          }
-        };
-
-        addParentMenusToActiveList(parentMenu);
-      }
-    }
-  }, [activeMenuList, currentSlug, parentMenu, pathname, setActiveMenuList, slug]);
 
   const handleClick = () => {
     if (items?.length && !activeMenuList.has(title)) {
@@ -103,10 +83,6 @@ Item.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
-  parentMenu: PropTypes.exact({
-    title: PropTypes.string.isRequired,
-    slug: PropTypes.string,
-  }).isRequired,
   activeMenuList: PropTypes.instanceOf(Set).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
   closeMobileMenu: PropTypes.func,

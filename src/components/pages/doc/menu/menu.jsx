@@ -1,8 +1,7 @@
 import clsx from 'clsx';
-import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { usePathname } from 'next/navigation';
+import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
@@ -20,7 +19,6 @@ const Section = ({
   section,
   items,
   basePath,
-  parentMenu,
   setMenuHeight,
   menuWrapperRef,
   activeMenuList,
@@ -40,7 +38,6 @@ const Section = ({
             {...item}
             key={index}
             basePath={basePath}
-            parentMenu={{ title, slug, parentMenu }}
             activeMenuList={activeMenuList}
             setActiveMenuList={setActiveMenuList}
             closeMobileMenu={closeMobileMenu}
@@ -77,10 +74,6 @@ Section.propTypes = {
   icon: PropTypes.string,
   tag: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.shape()),
-  parentMenu: PropTypes.exact({
-    title: PropTypes.string.isRequired,
-    slug: PropTypes.string,
-  }).isRequired,
   setMenuHeight: PropTypes.func.isRequired,
   menuWrapperRef: PropTypes.any.isRequired,
   activeMenuList: PropTypes.instanceOf(Set).isRequired,
@@ -106,26 +99,11 @@ const Menu = ({
   const menuRef = useRef(null);
   const currentDepth = Array.from(activeMenuList).length - 1;
 
-  const isActive = activeMenuList.has(title);
+  const isActive = isRootMenu || activeMenuList.has(title);
   const isLastActive = Array.from(activeMenuList)[currentDepth] === title;
 
   const BackLinkTag = parentMenu?.slug ? Link : 'button';
   const LinkTag = slug ? Link : 'div';
-
-  const pathname = usePathname();
-  const currentSlug = pathname.replace(basePath, '');
-  const [initialRender, setInitialRender] = useState(true);
-
-  useEffect(() => {
-    if (initialRender) {
-      if (currentSlug.includes(slug) && !activeMenuList.has(title)) {
-        setActiveMenuList((prevList) => new Set(prevList).add(title));
-      }
-      setTimeout(() => {
-        setInitialRender(false);
-      }, 100);
-    }
-  }, [initialRender, activeMenuList, currentSlug, setActiveMenuList, slug, title]);
 
   // update menu height and scroll menu to top
   useEffect(() => {
@@ -159,104 +137,107 @@ const Menu = ({
 
   return (
     <LazyMotion features={domAnimation}>
-      <m.div
-        className={clsx(
-          'absolute left-0 top-0 w-full pb-16',
-          !isActive && 'pointer-events-none',
-          !isRootMenu && 'translate-x-full',
-          'lg:px-8 lg:pb-8 lg:pt-4 md:px-5'
-        )}
-        initial={false}
-        animate={animateState}
-        transition={{ ease: 'easeIn', duration: initialRender ? 0 : 0.3 }}
-        variants={{
-          close: { opacity: 0 },
-          open: { opacity: 1 },
-          moveMenu: { x: `${currentDepth * -100}%` },
-        }}
-        ref={menuRef}
-      >
-        {!isRootMenu && parentMenu && (
-          <div className="mb-2.5 border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
-            <BackLinkTag
-              className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
-              type={parentMenu.slug ? undefined : 'button'}
-              to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : undefined}
-              onClick={handleClose}
-            >
-              <ChevronBackIcon className="size-4.5" />
-              Back to {parentMenu.title}
-            </BackLinkTag>
-            <LinkTag
-              className="mt-7 flex w-full items-start gap-2 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
-              to={slug ? `${basePath}${slug}` : undefined}
-            >
-              {icon && <Icon title={icon} className="size-5" />}
-              {title}
-            </LinkTag>
-          </div>
-        )}
-        <ul className="w-full">
-          {items.map((item, index) =>
-            item.section ? (
-              <Section
-                key={index}
-                {...item}
-                title={title}
-                slug={slug}
-                basePath={basePath}
-                parentMenu={{ title, slug, parentMenu }}
-                closeMobileMenu={closeMobileMenu}
-                setMenuHeight={setMenuHeight}
-                menuWrapperRef={menuWrapperRef}
-                activeMenuList={activeMenuList}
-                setActiveMenuList={setActiveMenuList}
-              />
-            ) : (
-              <Item
-                key={index}
-                {...item}
-                basePath={basePath}
-                parentMenu={{ title, slug, parentMenu }}
-                activeMenuList={activeMenuList}
-                setActiveMenuList={setActiveMenuList}
-                closeMobileMenu={closeMobileMenu}
-              >
-                {item.items && (
-                  <Menu
-                    depth={depth + 1}
-                    title={item.title}
-                    slug={item.slug}
-                    icon={item.icon}
-                    items={item.items}
+      <AnimatePresence initial={false}>
+        {(isRootMenu || isActive) && (
+          <m.div
+            className={clsx(
+              'absolute left-0 top-0 w-full pb-16',
+              !isActive && 'pointer-events-none',
+              !isRootMenu && 'translate-x-full',
+              'lg:px-8 lg:pb-8 lg:pt-4 md:px-5'
+            )}
+            initial={false}
+            animate={animateState}
+            exit="close"
+            transition={{ ease: 'easeIn', duration: 0.3 }}
+            variants={{
+              close: { opacity: 0 },
+              open: { opacity: 1 },
+              moveMenu: { opacity: 1, x: `${currentDepth * -100}%` },
+            }}
+            ref={menuRef}
+          >
+            {!isRootMenu && parentMenu && (
+              <div className="mb-2.5 border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
+                <BackLinkTag
+                  className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
+                  type={parentMenu.slug ? undefined : 'button'}
+                  to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : undefined}
+                  onClick={handleClose}
+                >
+                  <ChevronBackIcon className="size-4.5" />
+                  Back to {parentMenu.title}
+                </BackLinkTag>
+                <LinkTag
+                  className="mt-7 flex w-full items-start gap-2 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
+                  to={slug ? `${basePath}${slug}` : undefined}
+                >
+                  {icon && <Icon title={icon} className="size-5" />}
+                  {title}
+                </LinkTag>
+              </div>
+            )}
+            <ul className="w-full">
+              {items.map((item, index) =>
+                item.section ? (
+                  <Section
+                    key={index}
+                    {...item}
+                    title={title}
+                    slug={slug}
                     basePath={basePath}
-                    parentMenu={{ title, slug }}
+                    closeMobileMenu={closeMobileMenu}
                     setMenuHeight={setMenuHeight}
                     menuWrapperRef={menuWrapperRef}
                     activeMenuList={activeMenuList}
                     setActiveMenuList={setActiveMenuList}
-                    closeMobileMenu={closeMobileMenu}
                   />
-                )}
-              </Item>
-            )
-          )}
-        </ul>
-        {isRootMenu && (
-          <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
-            <Link
-              className={clsx(
-                'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
-                'text-gray-new-60 hover:text-black-new dark:hover:text-white'
+                ) : (
+                  <Item
+                    key={index}
+                    {...item}
+                    basePath={basePath}
+                    activeMenuList={activeMenuList}
+                    setActiveMenuList={setActiveMenuList}
+                    closeMobileMenu={closeMobileMenu}
+                  >
+                    {item.items && (
+                      <Menu
+                        depth={depth + 1}
+                        title={item.title}
+                        slug={item.slug}
+                        icon={item.icon}
+                        items={item.items}
+                        basePath={basePath}
+                        parentMenu={{ title, slug }}
+                        setMenuHeight={setMenuHeight}
+                        menuWrapperRef={menuWrapperRef}
+                        activeMenuList={activeMenuList}
+                        setActiveMenuList={setActiveMenuList}
+                        closeMobileMenu={closeMobileMenu}
+                      />
+                    )}
+                  </Item>
+                )
               )}
-              to={basePath === DOCS_BASE_PATH ? '/' : LINKS.docs}
-            >
-              <ArrowBackIcon className="size-4.5" />
-              Back to {basePath === DOCS_BASE_PATH ? 'site' : 'docs'}
-            </Link>
-          </div>
+            </ul>
+            {isRootMenu && (
+              <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
+                <Link
+                  className={clsx(
+                    'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
+                    'text-gray-new-60 hover:text-black-new dark:hover:text-white'
+                  )}
+                  to={basePath === DOCS_BASE_PATH ? '/' : LINKS.docs}
+                >
+                  <ArrowBackIcon className="size-4.5" />
+                  Back to {basePath === DOCS_BASE_PATH ? 'site' : 'docs'}
+                </Link>
+              </div>
+            )}
+          </m.div>
         )}
-      </m.div>
+      </AnimatePresence>
     </LazyMotion>
   );
 };
