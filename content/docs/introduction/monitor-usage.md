@@ -64,7 +64,7 @@ The **Usage** widget on the Neon Dashboard shows a snapshot of project usage.
 Usage metrics include:
 
 - **Storage**: The total volume of data and history for your project, measured in gibibytes (GiB). Data refers to the logical data size. History consists of Write-Ahead Logging (WAL) records capturing the data’s change history that is used to enable branching-related features.
-- **Data transfer**: The total volume of data transferred out of Neon (known as "egress") during the current billing period. The [Free Tier](/docs/introduction/plans#free-tier) has a data transfer limit of 5 GiB per month.
+- **Data transfer**: The total volume of data transferred out of Neon (known as "egress") during the current billing period. The [Free Tier](/docs/introduction/plans#free-tier) has a data transfer limit of 5 GB per month.
 - **Written data**: The total volume of data written from compute to storage during the current billing period, measured in gigibytes (GiB).
 - **Compute**: The total number of [compute hours](/docs/reference/glossary#compute-hours) used during the current billing period.
 - **Active computes**: The current number of active computes in your project.
