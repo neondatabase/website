@@ -43,13 +43,18 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
         className
       )}
     >
-      <div className="sticky top-0 px-[52px] pt-[18px] xl:px-8">
+      <div
+        className={clsx(
+          'sticky top-0 px-[52px] pt-[18px] xl:px-8',
+          'after:pointer-events-none after:absolute after:inset-x-0 after:top-14 after:h-10 after:bg-gradient-to-b after:from-white after:to-transparent after:dark:from-black-pure after:dark:to-transparent'
+        )}
+      >
         <Link to="/">
           <span className="sr-only">Neon</span>
           <Logo className="h-7" width={102} height={28} priority />
         </Link>
         <nav
-          className="no-scrollbars z-10 mt-[58px] h-[calc(100vh-120px)] overflow-x-hidden overflow-y-scroll"
+          className="no-scrollbars z-10 mt-5 h-[calc(100vh-70px)] overflow-x-hidden overflow-y-scroll pt-[46px]"
           ref={menuWrapperRef}
         >
           <div
