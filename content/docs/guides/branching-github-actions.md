@@ -2,7 +2,7 @@
 title: Automate branching with GitHub Actions
 subtitle: Create and delete branches with GitHub Actions
 enableTableOfContents: true
-updatedOn: '2024-07-19T13:21:01.306Z'
+updatedOn: '2024-07-25T12:53:42.425Z'
 ---
 
 Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:
@@ -79,7 +79,7 @@ inputs:
     description: 'The parent branch name or id or LSN or timestamp. By default the default branch is used'
   suspend_timeout:
     description: >
-      Duration of inactivity in seconds after which the compute endpoint is
+      Duration of inactivity in seconds after which the compute is
       For more information, see [Auto-suspend configuration](https://neon.tech/docs/manage/endpoints#auto-suspend-configuration).
     default: '0'
   ssl:
