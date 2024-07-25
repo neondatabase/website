@@ -27,7 +27,7 @@ Data resides in a branch. Each Neon project is created with a default branch cal
 
 ## Computes
 
-A compute is a virtualized computing resource that includes CPU, memory, and storage for running applications. In the context of Neon, a compute runs Postgres. When you create a project in Neon, a primary read-write compute is created for a project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary read-write compute but supports multiple read replicas. To connect to a database that resides in a branch, you must connect via a compute that is associated with the branch. Your Neon plan defines the resources (vCPU and RAM) available to a compute. For more information, see [Manage computes](/docs/manage/endpoints). Compute size, autoscaling, and autosuspend (scale-to-zero) are all settings that are configured for a compute.
+A compute is a virtualized computing resource that includes vCPU and memory for running applications. In the context of Neon, a compute runs Postgres. When you create a project in Neon, a primary read-write compute is created for a project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary read-write compute but supports multiple read replicas. To connect to a database that resides on a branch, you must connect via a compute associated with the branch. Your Neon plan defines the resources (vCPU and RAM) available to a compute. For more information, see [Manage computes](/docs/manage/endpoints). Compute size, autoscaling, and autosuspend (scale-to-zero) are all settings that are configured for a compute.
 
 ## Roles
 
