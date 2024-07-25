@@ -19,7 +19,7 @@ API keys are global and belong to the Neon account. API keys are used with the [
 
 ## Projects
 
-A project is the top-level object in the Neon object hierarchy. It is a container for all objects except for API keys, which are global and work with any project owned by your Neon account. Branches, compute endpoints, roles, and databases belong to a project. A Neon project also defines the region where project resources reside. A Neon account can have multiple projects, but tier limits define the number of projects per Neon account. For more information, see [Manage projects](/docs/manage/projects).
+A project is the top-level object in the Neon object hierarchy. It is a container for all objects except for API keys, which are global and work with any project owned by your Neon account. Branches, computes, roles, and databases belong to a project. A Neon project also defines the region where project resources reside. A Neon account can have multiple projects, but tier limits define the number of projects per Neon account. For more information, see [Manage projects](/docs/manage/projects).
 
 ## Default branch
 
@@ -27,7 +27,7 @@ Data resides in a branch. Each Neon project is created with a default branch cal
 
 ## Compute endpoint
 
-A compute endpoint is a compute resource associated with a branch. A read-write compute endpoint is created for a project's default branch by default. Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints. To connect to a database that resides in a branch, you must connect via a compute endpoint that is associated with the branch. Tier limits define the resources (vCPUs and RAM) available to a compute endpoint. For more information, see [Manage computes](/docs/manage/endpoints). Compute size, autoscaling, and autosuspend (scale-to-zero) are all settings that are configured for a compute endpoint.
+A compute endpoint is a compute resource associated with a branch. A primary read-write compute is created for a project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary read-write compute but supports multiple read replicas. To connect to a database that resides in a branch, you must connect via a compute that is associated with the branch. Tier limits define the resources (vCPUs and RAM) available to a compute. For more information, see [Manage computes](/docs/manage/endpoints). Compute size, autoscaling, and autosuspend (scale-to-zero) are all settings that are configured for a compute.
 
 ## Roles
 

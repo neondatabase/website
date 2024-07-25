@@ -87,7 +87,7 @@ When you are finished, you should have a _development_ branch and a _staging_ br
 
 From the Neon **Dashboard**, retrieve the connection string for each branch (`main`, `development`, and `staging`) from the **Connection Details** widget. Use the **Branch** drop-down menu to select each branch before copying the connection string.
 
-Your connection strings should look something like the ones shown below. Note that the hostname differs for each (the part starting with `ep-` and ending with `aws.neon.tech`). That's because each branch is hosted on its own compute instance.
+Your connection strings should look something like the ones shown below. Note that the hostname differs for each (the part starting with `ep-` and ending with `aws.neon.tech`). That's because each branch is hosted on its own compute.
 
 - **main**
 

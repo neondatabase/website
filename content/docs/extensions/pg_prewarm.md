@@ -184,7 +184,7 @@ This example shows how preloading data can improve query performance. We'll crea
    FROM generate_series('2010-01-01 00:00:00'::timestamptz, '2018-02-01 00:00:00'::timestamptz, '1 minutes'::interval) a(x);
    ```
 
-2. Restart your Postgres instance to clear the cache. On Neon, you can do this by [restarting your compute](/docs/manage/endpoints#restart-a-compute-endpoint).
+2. Restart your Postgres instance to clear the cache. On Neon, you can do this by [restarting your compute](/docs/manage/endpoints#restart-a-compute).
 
 3. Prewarm the first sample table:
 

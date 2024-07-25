@@ -54,7 +54,7 @@ Some Java-based tools that use the pgJDBC driver for connecting to Postgres, suc
 Connections from the GUI applications and IDEs in the table below have been tested with Neon.
 
 <Admonition type="note">
-Some applications require an Server Name Indication (SNI) workaround. Neon uses compute endpoint domain names to route incoming connections. However, the Postgres wire protocol does not transfer the server domain name, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this. Not all application clients support SNI. In these cases, a workaround is required. For more information, see [Connection errors](/docs/connect/connection-errors).
+Some applications require an Server Name Indication (SNI) workaround. Neon uses compute domain names to route incoming connections. However, the Postgres wire protocol does not transfer the server domain name, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this. Not all application clients support SNI. In these cases, a workaround is required. For more information, see [Connection errors](/docs/connect/connection-errors).
 </Admonition>
 
 | Application or IDE                                                                                                            | Notes                                                                                                                                                                                                                                                                                                                                                                   |

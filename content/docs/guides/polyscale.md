@@ -18,7 +18,7 @@ For support and guidance through this transition, please feel free to reach out 
 [PolyScale](https://docs.polyscale.ai/) is a serverless database cache service. With PolyScale, you can distribute and cache your data globally, allowing you to scale your database without altering transactional semantics. No coding or infrastructure changes are required. You can connect Neon to PolyScale in minutes, providing your database-backed applications with speedy access to your Neon data from anywhere in the world.
 
 <Admonition type="note">
-Neon also provides a [PolyScale integration](/docs/guides/polyscale-integration), which allows you to set up a PolyScale cache in just a few clicks. The PolyScale integration creates a cache for the read-write compute endpoint associated with your project's [default branch](/docs/manage/branches#default-branch). If you do not want to use the integration or you want to set up a cache for a read-only compute endpoint ([read replica](/docs/introduction/read-replicas)) or a [non-default branch](/docs/manage/branches#non-default-branch), use these manual setup instructions.
+Neon also provides a [PolyScale integration](/docs/guides/polyscale-integration), which allows you to set up a PolyScale cache in just a few clicks. The PolyScale integration creates a cache for the primary read-write compute associated with your project's [default branch](/docs/manage/branches#default-branch). If you do not want to use the integration or you want to set up a cache for a [read replica](/docs/introduction/read-replicas) or a [non-default branch](/docs/manage/branches#non-default-branch), use these manual setup instructions.
 </Admonition>
 
 Follow the steps below to connect your Neon database to PolyScale manually.

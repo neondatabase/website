@@ -79,7 +79,7 @@ inputs:
     description: 'The parent branch name or id or LSN or timestamp. By default the default branch is used'
   suspend_timeout:
     description: >
-      Duration of inactivity in seconds after which the compute endpoint is
+      Duration of inactivity in seconds after which the compute is
       For more information, see [Auto-suspend configuration](https://neon.tech/docs/manage/endpoints#auto-suspend-configuration).
     default: '0'
   ssl:

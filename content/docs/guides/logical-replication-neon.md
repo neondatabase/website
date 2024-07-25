@@ -238,7 +238,7 @@ logical
 
 ### Logical replication and autosuspend
 
-By default, Neon's [Autosuspend](/docs/introduction/auto-suspend) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not autosuspend a compute instance that has an active connection from a logical replication subscriber. In other words, a compute instance with an active subscriber remains active at all times.
+By default, Neon's [Autosuspend](/docs/introduction/auto-suspend) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a compute with an active subscriber remains active at all times.
 
 ### Replication roles
 
