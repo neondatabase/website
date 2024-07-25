@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2024-07-19T15:46:08.349Z'
+updatedOn: '2024-07-25T12:53:42.422Z'
 ---
 
 This tutorial guides you through your first steps using Neon as your Postgres database. You'll get familiar with the following concepts:

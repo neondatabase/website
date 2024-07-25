@@ -2,7 +2,7 @@
 title: Read replicas
 subtitle: Maximize scalability and more with read replicas
 enableTableOfContents: true
-updatedOn: '2024-01-10T18:34:05.861Z'
+updatedOn: '2024-07-25T12:53:42.431Z'
 ---
 
 Neon read replicas are independent computes designed to perform read operations on the same data as your primary read-write compute. Neon's read replicas do not replicate data across database instances. Instead, read requests are directed to a single source &#8212; a capability made possible by Neon's architecture, which separates storage and compute. The following diagram shows how your primary compute and read replicas send read requests to the same Neon [Pageserver](/docs/reference/glossary#pageserver).
