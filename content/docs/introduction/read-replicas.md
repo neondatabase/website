@@ -7,7 +7,7 @@ updatedOn: '2024-01-10T18:34:05.861Z'
 
 Neon read replicas are independent computes designed to perform read operations on the same data as your primary read-write compute. Neon's read replicas do not replicate data across database instances. Instead, read requests are directed to a single source &#8212; a capability made possible by Neon's architecture, which separates storage and compute. The following diagram shows how your primary compute and read replicas send read requests to the same Neon [Pageserver](/docs/reference/glossary#pageserver).
 
-![read replica computes](/docs/introduction/read_replicas.png)
+![read replica computes](/docs/introduction/read_replicas.jpg)
 
 In data replication terms, Neon read replicas are asynchronous, which means they are _eventually consistent_. As updates are made by your primary compute, Safekeepers store the data changes durably until they are processed by Pageservers. At the same time, Safekeepers keep read replica computes up to date with the latest changes to maintain data consistency.
 
