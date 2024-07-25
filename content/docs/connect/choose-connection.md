@@ -127,7 +127,7 @@ For more detail, see [How to use connection pooling](/docs/connect/connection-po
 
 Here is a table summarizing the options we've walked through on this page:
 
-| Feature                   | Direct Connections                                                                                   | Pooled Connections                                                                   | Serverless Driver (HTTP)                 | Serverless Driver (WebSocket)                 |
+|                    | Direct Connections                                                                                   | Pooled Connections                                                                   | Serverless Driver (HTTP)                 | Serverless Driver (WebSocket)                 |
 | ------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------- | --------------------------------------------- |
 | **Use Case**              | Migrations, admin tasks requiring stable connections                                                 | High number of concurrent connections, efficient resource management                 | One-shot queries, short-lived operations | Transactions requiring persistent connections |
 | **Connection Management** | Persistent connections                                                                               | Pooled per transaction                                                               | Rapid open/close connections             | Rapid open/close connections                  |
