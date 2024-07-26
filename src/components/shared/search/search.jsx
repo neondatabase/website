@@ -9,8 +9,6 @@ import { useCallback, useState } from 'react';
 
 import sendGtagEvent from 'utils/send-gtag-event';
 
-import closeIcon from './images/close.svg';
-
 const InkeepCustomTrigger = dynamic(
   () => import('@inkeep/widgets').then((mod) => mod.InkeepCustomTrigger),
   { ssr: false }
@@ -22,9 +20,6 @@ const baseSettings = {
   organizationId: process.env.INKEEP_ORGANIZATION_ID,
   primaryBrandColor: '#00E599',
   organizationDisplayName: 'Neon',
-  customIcons: {
-    close: { custom: closeIcon },
-  },
 };
 
 const Search = ({ className = null, isBlog = false }) => {
