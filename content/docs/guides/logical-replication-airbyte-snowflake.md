@@ -6,16 +6,17 @@ isDraft: false
 updatedOn: '2024-07-23T20:03:37.191Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to Snowflake.
 
 [Airbyte](https://airbyte.com/) is an open-source data integration platform that moves data from a source to a destination system. Airbyte offers a large library of connectors for various data sources and destinations.
 
-In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to one or more of Airbyte's supported destinations.
+[Snowflake](https://www.snowflake.com/) is a cloud-based data warehousing and analytics platform designed to handle large volumes of data. Snowflake allows businesses to store, process, and analyze data from various sources.
 
 ## Prerequisites
 
-- An [Airbyte account](https://airbyte.com/)
 - A [Neon account](https://console.neon.tech/)
+- An [Airbyte account](https://airbyte.com/)
+- A [Snowflake account](https://www.snowflake.com/)
 
 ## Enable logical replication in Neon
 
@@ -194,5 +195,6 @@ To complete your data integration setup, you can now add one of Airbyte's many s
 - [What is an ELT data pipeline?](https://airbyte.com/blog/elt-pipeline)
 - [Logical replication - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html)
 - [Publications - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-publication.html)
+- [Airbyte: How to load data from Postgres to Snowflake destination](https://airbyte.com/how-to-sync/postgresql-to-snowflake-data-cloud)
 
 <NeedHelp/>
