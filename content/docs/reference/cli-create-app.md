@@ -173,15 +173,15 @@ If you selected `Create a new Neon project` when prompted with `What Neon projec
 
 ### Neon project branches
 
-Regardless of whether you created a new Neon project or used an existing Neon project, the `create-app` command creates a development branch, which you can see on your project's **Branches** page in the Neon Console.
+Whether you created a new Neon project or selected an existing one, the `create-app` command creates a development branch in your Neon project, which you can see on the **Branches** page.
 
 ![Neon project branches page](/docs/reference/create_app_neon_project_branches.png)
 
-To get acquainted with Neon's branching feature and how you can use branching in your development workflow, see [Database Branching Workflows](https://neon.tech/flow).
+To get acquainted with Neon's database branching feature and how you can use branching in your development workflow, see [Database Branching Workflows](https://neon.tech/flow).
 
 ## Your local app directory
 
-After running the `create-app` command, you can explore your new bootstrapped app in your local app directory. It will appear similar the the following, depending on your selections:
+After running the `create-app` command, you can explore your new bootstrapped app in your local app directory. It will appear similar to the following, depending on your selections:
 
 ![local app directory](/docs/reference/create_app_local_dir.png)
 
