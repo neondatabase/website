@@ -181,7 +181,7 @@ To get acquainted with Neon's branching feature and how you can use branching in
 
 ## Your local app directory
 
-After running the `create-app` command, you can explore your new bootstrapped app on your local machine. Your app directory will appear similar the the following, depending on the selections you made:
+After running the `create-app` command, you can explore your new bootstrapped app in your local app directory. It will appear similar the the following, depending on your selections:
 
 ![local app directory](/docs/reference/create_app_local_dir.png)
 
