@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-github-app
 tag: coming soon
-updatedOn: '2024-07-17T11:46:05.556Z'
+updatedOn: '2024-07-19T13:21:01.309Z'
 ---
 
 <Admonition type="comingSoon" title="Feature Coming Soon">
@@ -192,7 +192,23 @@ The possibilities are endless. You can integrate Neon's GitHub Actions into your
 
 If you're new to GitHub Actions and workflows, GitHub's [Quickstart for GitHub Actions](https://docs.github.com/en/actions/quickstart) is a good place to start.
 
-For applications that use GitHub Actions workflows with Neon, see [Example applications](/docs/guides/branching-github-actions#example-applications).
+## Example applications with GitHub Actions workflows
+
+The following example applications utilize GitHub Actions workflows to create and delete branches in Neon. These examples can serve as references when building your own workflows.
+
+<Admonition type="note">
+The Neon GitHub integration configures a `NEON_API_KEY` secret and a `PROJECT_ID` variable in your GitHub repository. Depending on the specific example application, additional or different variables and secrets may have been used. As you develop your workflows, you might also need to incorporate various other variables and secrets.
+</Admonition>
+
+<DetailIconCards>
+
+<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Vercel preview deployment" icon="github">Preview branches with Vercel</a>
+
+<a href="https://github.com/neondatabase/preview-branches-with-fly" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Fly.io preview deployment" icon="github">Preview branches with Fly.io</a>
+
+<a href="https://github.com/neondatabase/neon_twitter" description="Demonstrates using GitHub Actions workflows to create a Neon branch for schema validation and perform migrations" icon="github">Neon Twitter app</a>
+
+</DetailIconCards>
 
 ## Connect more Neon projects with the GitHub App
 

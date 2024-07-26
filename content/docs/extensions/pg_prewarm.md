@@ -2,7 +2,7 @@
 title: The pg_prewarm extension
 subtitle: Load data into your Postgres buffer cache with the pg_prewarm extension
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.370Z'
+updatedOn: '2024-07-25T12:53:42.420Z'
 ---
 
 You can use the `pg_prewarm` extension to preload data into the Postgres buffer cache after a restart. Doing so improves query response times by ensuring that your data is readily available in memory. Otherwise, data must be loaded into the buffer cache from disk on-demand, which can result in slower query response times.
@@ -184,7 +184,7 @@ This example shows how preloading data can improve query performance. We'll crea
    FROM generate_series('2010-01-01 00:00:00'::timestamptz, '2018-02-01 00:00:00'::timestamptz, '1 minutes'::interval) a(x);
    ```
 
-2. Restart your Postgres instance to clear the cache. On Neon, you can do this by [restarting your compute](/docs/manage/endpoints#restart-a-compute-endpoint).
+2. Restart your Postgres instance to clear the cache. On Neon, you can do this by [restarting your compute](/docs/manage/endpoints#restart-a-compute).
 
 3. Prewarm the first sample table:
 

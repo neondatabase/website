@@ -3,10 +3,8 @@ title: Replicate data to a ClickHouse database on DoubleCloud
 subtitle: Learn how to replicate data from Neon to a ClickHouse database on DoubleCloud
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-30T14:35:12.884Z'
+updatedOn: '2024-07-23T20:03:37.192Z'
 ---
-
-<LRNotice/>
 
 <Admonition type="tip">
 Even when logical replication isn't available on the Neon side, you can schedule DoubleCloud Transfer to copy incremental data from Postgres to ClickHouse at a given interval by enabling periodic snapshots.

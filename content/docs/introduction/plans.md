@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2024-07-16T16:42:29.767Z'
+updatedOn: '2024-07-25T20:35:44.881Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
@@ -42,7 +42,7 @@ The Free Tier includes the following usage allowances:
 | **Databases**              | Unlimited                                                                                                                                              |
 | **Storage**                | 0.5 GiB                                                                                                                                                |
 | **Compute**                | Always-available default branch compute, 5 compute hours (20 _active hours_)/month on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM. |
-| **Data Transfer (Egress)** | 5 GiB per month                                                                                                                                        |
+| **Data transfer (Egress)** | 5 GB per month                                                                                                                                         |
 
 <Admonition type="tip" title="What are active hours and compute hours?">
 
@@ -164,3 +164,9 @@ Additionally, the _Enterprise_ plan can be tailored to your specific requirement
 Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus retail customer support, Customer Success Team support, and SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
 
 If you are interested in exploring an _Enterprise_ plan with Neon, you can [request an enterprise trial](/enterprise#request-trial) or [get in touch with our sales team](/contact-sales).
+
+## Feedback
+
+We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. If you have feedback for us, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We read and consider every submission.
+
+<NeedHelp/>
