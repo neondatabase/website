@@ -156,7 +156,7 @@ Vercel CLI 34.3.1
 🔍  Inspect: https://vercel.com/daniels-projects-5ef6f37f/elements/9beMr7sXfTt9EchymWGzjRp7XQvZ [3s]
 ✅  Preview: https://myproj-cj3z2k49s-daniels-projects-5ef6f37f.vercel.app [3s]
 📝  To deploy to production (myproj-ashen.vercel.app), run `vercel --prod`
-INFO: 
+INFO:
 
 You can now run:
 
@@ -173,7 +173,7 @@ If you selected `Create a new Neon project` when prompted with `What Neon projec
 
 ### Neon project branches
 
-Regardless of whether you created a new Neon project or used an existing Neon project, the `create-app` command creates a development branch, which you can see on your project's **Branches** page in the Neon Console. 
+Regardless of whether you created a new Neon project or used an existing Neon project, the `create-app` command creates a development branch, which you can see on your project's **Branches** page in the Neon Console.
 
 ![Neon project branches page](/docs/reference/create_app_neon_project_branches.png)
 
