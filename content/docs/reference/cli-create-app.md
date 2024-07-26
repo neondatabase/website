@@ -167,7 +167,7 @@ to start the app locally.
 
 ## Your Neon project
 
-If you selected `Create a new Neon project` when prompted with `What Neon project would you like to use?`, you'll find your newly created Neon project on the [Projects](https://console.neon.tech/app/projects) page in the Neon Console. Your new Neon project will be named for the project name you specified. In the `neon create-app` example above, the project name given was `my-app`. In Neon, you'll see a Neon project named: `my-app-project`:
+If you selected `Create a new Neon project` when prompted with `What Neon project would you like to use?`, you'll find your newly created Neon project on the [Projects](https://console.neon.tech/app/projects) page in the Neon Console. Your new Neon project will be named for the app project name you specified. For example, in the `create-app` example above, the app project name given was `my-app`. For a project with this name, you would see a Neon project named: `my-app-project`:
 
 ![Neon project page](/docs/reference/create_app_neon_project.png)
 
