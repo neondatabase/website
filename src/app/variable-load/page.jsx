@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import slugify from 'slugify';
 
 import Budget from 'components/pages/variable/budget';
@@ -49,7 +50,7 @@ const docsArticlesData = [
     order: 6,
   },
   {
-    slug: '/docs/introduction/neon-utils',
+    slug: '/docs/extensions/neon-utils',
     title: 'The neon_utils extension',
     order: 7,
   },
@@ -134,7 +135,7 @@ const VariableLoadPage = async () => {
   }));
 
   return (
-    <Layout headerWithBorder burgerWithoutBorder isDocPage isHeaderSticky>
+    <Layout headerWithBorder burgerWithoutBorder isHeaderSticky>
       <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
         <Container
           className="grid w-full flex-1 grid-cols-12 gap-x-10 pt-[88px] xl:gap-x-7 xl:pt-14 lg:block lg:gap-x-5 lg:pt-11 md:pt-8"
@@ -151,7 +152,12 @@ const VariableLoadPage = async () => {
           </div>
 
           <div className="col-start-10 col-end-13 ml-[50px] h-full xl:hidden">
-            <nav className="no-scrollbars sticky bottom-10 top-[104px] -mt-2 max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
+            <nav
+              className={clsx(
+                'no-scrollbars sticky bottom-10 top-[104px] -mt-2 max-h-[calc(100vh-80px)]',
+                'before:absolute before:-inset-5 before:-z-10 before:bg-black-pure before:bg-gradient-to-b before:blur'
+              )}
+            >
               <TableOfContents items={tableOfContents} />
             </nav>
           </div>
