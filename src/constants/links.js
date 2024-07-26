@@ -52,6 +52,7 @@ export default {
   termsOfService: '/terms-of-service',
   thankYou: '/thank-you',
   trust: '/trust',
+  variable: '/variable',
   twitter: 'https://twitter.com/neondatabase/',
   youtube: 'https://www.youtube.com/channel/UCoMzQTJSIr7-RU1QbomQI2w',
 };
