@@ -49,7 +49,7 @@ const Search = ({ className = null, isBlog = false }) => {
     },
     modalSettings: {
       defaultView: 'SEARCH',
-      isModeSwitchingEnabled: false,
+      // isModeSwitchingEnabled: false,
     },
     searchSettings: {
       searchMode: 'KEYWORD',
