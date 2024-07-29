@@ -25,13 +25,17 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 <TechnologyNavigation>
 
+<img src="/images/technology-logos/prisma-logo.svg" data-src="/images/technology-logos/prisma-logo-dark.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Easily add secure, beautiful, and fast authentication to Prisma with Neon." />
+
+<img src="/images/technology-logos/react-logo.svg" width="36" height="36" alt="React" href="/docs/guides/react" title="Easily add secure, beautiful, and fast authentication to Prisma with Neon." />
+
+<img src="/images/technology-logos/nodejs-logo.svg" width="33" height="36" alt="Node.js" href="/docs/guides/node" title="Quickly add authentication and user management to your Node.js application." />
+
+[comment]: <> (Update titles for other items)
+
 <img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/nextjs" title="Connect a Next.js application to Neon" />
 
-<img src="/images/technology-logos/nodejs-logo.svg" width="33" height="36" alt="Node.js" href="/docs/guides/node" title="Connect a Node.js application to Neon" />
-
 <img src="/images/technology-logos/neon-logo.svg"  width="42" height="36" alt="Neon" href="/docs/serverless/serverless-driver" title="Connect with the Neon serverless driver" />
-
-<img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
 
 <img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Astro" href="/docs/guides/astro" title="Connect an Astro site or app to Neon" />
 
@@ -52,8 +56,6 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-reactive" title="Connect Quarkus (Reactive) to Neon" />
 
 <img src="/images/technology-logos/rails-logo.svg" width="36" height="36" alt="Rails" href="/docs/guides/ruby-on-rails" title="Connect a Rails application to Neon" />
-
-<img src="/images/technology-logos/react-logo.svg" width="36" height="36" alt="React" href="/docs/guides/react" title="Connect a React application to Neon" />
 
 <img src="/images/technology-logos/remix-logo.svg" width="36" height="36" alt="Remix" href="/docs/guides/remix" title="Connect a Remix application to Neon" />
 
