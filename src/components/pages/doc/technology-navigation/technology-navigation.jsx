@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 
+const IMAGE_PATH = '/images/technology-logos';
+
 const TechnologyNavigation = ({ children = null, open = false }) => {
   const [isOpen, setIsOpen] = useState(open);
 
@@ -20,7 +22,7 @@ const TechnologyNavigation = ({ children = null, open = false }) => {
         {React.Children.map(children, (child, index) => {
           if (!child) return null;
 
-          const { href, src, 'data-src': srcDark, alt, title, width, height } = child.props;
+          const { href, title, description, icon } = child.props;
 
           const isHiddenItem = index > 2 && !isOpen;
 
@@ -37,27 +39,30 @@ const TechnologyNavigation = ({ children = null, open = false }) => {
                 href={href}
               >
                 <div className="relative z-10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    className={clsx('h-9 w-auto shrink-0', srcDark && 'dark:hidden')}
-                    src={src}
-                    width={width}
-                    height={height}
-                    alt={`${alt} logo`}
+                    className="h-9 w-auto shrink-0 dark:hidden"
+                    src={`${IMAGE_PATH}/${icon}.svg`}
+                    width={36}
+                    height={36}
+                    alt={`${icon} logo`}
                     loading={index > 3 ? 'lazy' : 'eager'}
                   />
-                  {srcDark && (
-                    <img
-                      className="hidden dark:block"
-                      src={srcDark}
-                      width={width}
-                      height={height}
-                      alt={`${alt} logo`}
-                    />
-                  )}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className="hidden dark:block"
+                    src={`${IMAGE_PATH}/${icon}-dark.svg`}
+                    width={36}
+                    height={36}
+                    alt={`${icon} logo`}
+                    loading={index > 3 ? 'lazy' : 'eager'}
+                  />
                   <h3 className="mt-[18px] text-xl font-semibold leading-tight text-black-new dark:text-white">
-                    {alt}
+                    {title}
                   </h3>
-                  <p className="mt-2 text-sm text-gray-new-50 dark:text-gray-new-80">{title}</p>
+                  <p className="mt-2 text-sm text-gray-new-50 dark:text-gray-new-80">
+                    {description}
+                  </p>
                 </div>
               </NextLink>
             </li>
