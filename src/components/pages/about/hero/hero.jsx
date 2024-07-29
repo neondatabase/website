@@ -1,6 +1,7 @@
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
 const Hero = () => (
@@ -15,26 +16,33 @@ const Hero = () => (
           tag="h1"
           theme="black"
         >
-          We help developers build reliable and scalable applications on Postgres.
+          A better way to build with Postgres
         </Heading>
-        <Button
-          className="mt-7 h-11 px-[22px] !font-semibold tracking-tighter lg:mt-6 lg:h-9 lg:px-5 lg:text-sm md:mt-5 md:h-8"
-          theme="primary"
-          to={LINKS.careers}
-        >
-          View Open Roles
-        </Button>
+        <div className="mt-7 flex items-center gap-8 lg:mt-6 md:mt-5">
+          <Button
+            className="h-11 px-[22px] !font-semibold tracking-tighter  lg:h-9 lg:px-5 lg:text-sm  md:h-8"
+            theme="primary"
+            to={LINKS.signup}
+          >
+            Create an Account
+          </Button>
+          <Link to={LINKS.careers} theme="white">
+            View Open Positions
+          </Link>
+        </div>
       </div>
       <div className="max-w-sm pt-1.5 xl:pt-1 lg:max-w-[352px] lg:pt-0.5 md:mt-9 md:max-w-none md:pt-0">
         <p className="text-lg leading-snug tracking-extra-tight text-gray-new-50 lg:text-base">
-          Neon is Postgres redesigned from the ground up to enable developers to{' '}
-          <span className="text-white">confidently ship reliable and scalable applications</span>.
-          It simplifies database infrastructure management.
+          Neon is an open-source database company.
         </p>
         <p className="mt-6 text-lg leading-snug tracking-extra-tight text-gray-new-50 xl:mt-5 lg:mt-4 lg:text-base md:mt-[18px]">
-          Neon provides streamlined workflows across the entire Software Development Lifecycle —
-          {` `}
-          <span className="text-white">from development to preview to&nbsp;production.</span>
+          <span className="text-white">Our mission:</span> Take everything that developers love
+          about Postgres — reliability, performance, extensibility — and deliver it as a serverless
+          product that helps teams {` `}
+          <span className="text-white">
+            confidently ship reliable and scalable applications
+          </span>{' '}
+          faster than ever before.
         </p>
       </div>
     </Container>

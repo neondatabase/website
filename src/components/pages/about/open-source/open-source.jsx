@@ -39,15 +39,15 @@ const OpenSource = ({ items }) => (
         </Link>
       </header>
       <ul className="flex flex-col gap-y-20 xl:gap-y-16 lg:gap-y-14 md:gap-y-10">
-        {items.map(({ label, number, isThousands }, index) => (
+        {items.map(({ label, number, isThousands, hasPlus }, index) => (
           <li className="flex flex-col" key={index}>
             <p>
               <span className="bg-[linear-gradient(73deg,#7F95EB_1%,#89E0EA_33%,#EFEFEF_81%)] bg-clip-text pr-3 font-title text-[216px] font-medium leading-[.8] tracking-[-0.06em] text-transparent xl:text-[192px] lg:pr-2 lg:text-[144px] md:text-[128px]">
                 {number}
               </span>
-              {isThousands && (
+              {(isThousands || hasPlus) && (
                 <span className="bg-[linear-gradient(164deg,#FFF_53%,rgba(255,255,255,.4)_72.79%,transparent_89.16%)] bg-clip-text pr-1.5 font-title text-[112px] font-medium leading-[.96] tracking-[-0.06em] text-transparent xl:text-[96px] lg:text-[72px] md:text-6xl">
-                  k
+                  {hasPlus ? '+' : 'k'}
                 </span>
               )}
               <span className="mt-[9px] block text-xl leading-snug tracking-extra-tight text-gray-new-50 lg:mt-2 lg:text-base sm:mt-1.5">

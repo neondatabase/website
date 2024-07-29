@@ -9,15 +9,10 @@ import storageIcon from 'images/pages/about/for-developers/storage.svg';
 
 const ITEMS = [
   {
-    icon: dollarIcon,
-    title: 'Cost Efficient',
-    description: 'Aim to deliver the best price-performance Postgres service in the&nbsp;world.',
-  },
-  {
-    icon: reliableIcon,
-    title: 'Reliable',
+    icon: storageIcon,
+    title: 'Just Be Postgres',
     description:
-      'Use modern replication techniques to provide high availability and high durability to&nbsp;Postgres.',
+      'Achieve this by leveraging the pluggable storage layer, preserving the core of&nbsp;Postgres.',
   },
   {
     icon: checkIcon,
@@ -26,10 +21,15 @@ const ITEMS = [
       'Simplify the life of developers by bringing the serverless consumption model to&nbsp;Postgres.',
   },
   {
-    icon: storageIcon,
-    title: 'Just Be Postgres',
+    icon: reliableIcon,
+    title: 'Reliable',
     description:
-      'Achieve this by leveraging the pluggable storage layer, preserving the core of&nbsp;Postgres.',
+      'Use modern replication techniques to provide high availability and high durability&nbsp;guarantees.',
+  },
+  {
+    icon: dollarIcon,
+    title: 'Cost Efficient',
+    description: 'Aim to deliver the best price-performance Postgres service in the&nbsp;world.',
   },
 ];
 

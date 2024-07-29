@@ -2,11 +2,11 @@ import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import annaStepanyan from 'images/pages/about/leadership/anna-stepanyan.jpg';
-import atliCervantes from 'images/pages/about/leadership/atli-cervantes.jpg';
+import arjunanRajeswaran from 'images/pages/about/leadership/arjunan-rajeswaran.jpg';
+import bryanClark from 'images/pages/about/leadership/bryan-clark.jpg';
 import heikkiLinnakangas from 'images/pages/about/leadership/heikki-linnakangas.jpg';
-import joeDrumgoole from 'images/pages/about/leadership/joe-drumgoole.jpg';
-import mahmoudAbdelwahab from 'images/pages/about/leadership/mahmoud-abdelwahab.jpg';
+import jamesBroadhead from 'images/pages/about/leadership/james-broadhead.jpg';
+import lukeFlanagan from 'images/pages/about/leadership/luke-flanagan.jpg';
 import nikitaShamgunov from 'images/pages/about/leadership/nikita-shamgunov.jpg';
 import stasKelvich from 'images/pages/about/leadership/stas-kelvich.jpg';
 
@@ -27,24 +27,24 @@ const ITEMS = [
     role: 'Co-Founder',
   },
   {
-    image: atliCervantes,
-    name: 'Atli Cervantes',
-    role: 'Head of Sales',
+    image: jamesBroadhead,
+    name: 'James Broadhead',
+    role: 'VP Engineering',
   },
   {
-    image: mahmoudAbdelwahab,
-    name: 'Mahmoud Abdelwahab',
-    role: 'Dev Advocate',
+    image: bryanClark,
+    name: 'Bryan Clark',
+    role: 'VP Product',
   },
   {
-    image: annaStepanyan,
-    name: 'Anna Stepanyan',
-    role: 'Head of Product',
+    image: arjunanRajeswaran,
+    name: 'Arjunan Rajeswaran',
+    role: 'Head of Revenue',
   },
   {
-    image: joeDrumgoole,
-    name: 'Joe Drumgoole',
-    role: 'Head of DevRel',
+    image: lukeFlanagan,
+    name: 'Luke Flanagan',
+    role: 'VP Finance',
   },
 ];
 
@@ -58,16 +58,15 @@ const Leadership = () => (
       >
         Leadership
       </Heading>
-      <p className="mt-7 max-w-[640px] text-xl leading-snug tracking-extra-tight text-gray-new-50 xl:mt-5 xl:max-w-xl lg:mt-[18px] lg:max-w-lg lg:text-lg md:mt-3.5 md:text-base">
-        It&apos;s all about the people. We are a team of{' '}
-        <span className="text-white">Postgres hackers, systems and cloud engineers</span>. We
-        believe that in the ever-changing technology stack Postgres is here to stay.
+      <p className="mt-7 max-w-[740px] text-xl leading-snug tracking-extra-tight text-gray-new-50 xl:mt-5 xl:max-w-xl lg:mt-[18px] lg:max-w-lg lg:text-lg md:mt-3.5 md:text-base">
+        Neon was founded by a team of{' '}
+        <span className="text-white">Postgres hackers, systems and cloud engineers</span>.
       </p>
       <ul className="mt-16 grid grid-cols-7 gap-x-[42px] gap-y-10 xl:mt-14 xl:gap-x-[38px] lg:mt-12 lg:grid-cols-5 lg:pr-8 md:grid-cols-3 md:pr-7 sm:mt-8 sm:grid-cols-2 sm:gap-x-9">
         {ITEMS.map(({ image, name, role }, index) => (
           <li className="flex flex-col" key={index}>
             <Image
-              className="w-full rounded-sm"
+              className="w-full rounded-sm grayscale"
               src={image}
               alt={name}
               width={128}

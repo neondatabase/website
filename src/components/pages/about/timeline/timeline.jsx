@@ -3,6 +3,7 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
+import Link from 'components/shared/link';
 import lineLg from 'images/pages/about/timeline/line-lg.svg';
 import lineMd from 'images/pages/about/timeline/line-md.svg';
 import lineXl from 'images/pages/about/timeline/line-xl.svg';
@@ -11,28 +12,38 @@ import pointerLineLg from 'images/pages/about/timeline/pointer-line-lg.svg';
 
 const ITEMS = [
   {
-    date: 'February, 2022',
-    title: 'Limited Preview',
+    date: 'March, 2021',
+    title: 'First Commits on Neon Repo',
   },
   {
     className: 'translate-x-2 lg:-translate-x-1',
     date: 'June 15th, 2022',
     title: 'Technical Preview',
-  },
-  {
-    className: 'lg:-translate-x-5',
-    date: 'December 6th, 2022',
-    title: "Neon's Free Tier",
+    link: 'https://neon.tech/blog/hello-world',
   },
   {
     className: 'translate-x-1 lg:-translate-x-11',
-    date: 'Q1 of 2023',
-    title: 'Paid plans launch',
+    date: 'July, 2022',
+    title: '$54MM Raised',
+    link: 'https://neon.tech/blog/funding-a1',
+  },
+  {
+    className: 'translate-x-1 lg:-translate-x-11',
+    date: 'December, 2022',
+    title: 'Open Access',
+    link: 'https://neon.tech/blog/neon-serverless-postgres-is-live',
+  },
+  {
+    className: 'translate-x-1 lg:-translate-x-11',
+    date: 'August, 2023',
+    title: '$46MM Raised',
+    link: 'https://neon.tech/blog/series-b-funding',
   },
   {
     className: '2xl:-translate-x-1 lg:translate-x-[-60px]',
     date: 'April 15th, 2024',
     title: 'Neon is Generally Available',
+    link: 'https://neon.tech/blog/neon-ga',
   },
 ];
 
@@ -121,7 +132,7 @@ const Timeline = () => (
         priority
       />
       <ul className="relative z-10 mx-auto flex h-[178px] justify-between px-[92px] pt-8 2xl:pl-16 2xl:pr-0 lg:h-[161px] lg:max-w-[704px] lg:pl-[51px] lg:pt-7 md:h-auto md:max-w-none md:flex-col md:gap-y-10 md:pb-11 md:pt-[49px]">
-        {ITEMS.map(({ date, title, className }, index) => (
+        {ITEMS.map(({ date, title, className, link }, index) => (
           <li
             className={clsx(
               'relative flex h-fit flex-col gap-y-2 lg:gap-y-1 md:translate-x-0 md:pl-3.5',
@@ -138,9 +149,20 @@ const Timeline = () => (
             >
               {date}
             </span>
-            <span className="whitespace-nowrap text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 lg:text-base">
-              {title}
-            </span>
+            {typeof link === 'undefined' ? (
+              <span className="whitespace-nowrap text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 lg:text-base">
+                {title}
+              </span>
+            ) : (
+              <Link
+                to={link}
+                theme="white"
+                className="hover: whitespace-nowrap border-b text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 lg:text-base"
+              >
+                {title}
+              </Link>
+            )}
+
             <Point
               align={index % 2 === 0 ? 'bottom' : 'top'}
               size={index === ITEMS.length - 1 ? 'lg' : 'md'}
