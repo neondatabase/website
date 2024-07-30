@@ -27,7 +27,7 @@ const computeItems = [
   {
     icon: compatibilityIcon,
     title: 'Serverless compute',
-    text: 'Compute size is measured in <span class="font-medium text-white underline decoration-dotted underline-offset-4" data-tooltip-id="cu-icon" data-tooltip-html="1 CU = 1 vCPU, 4 GB RAM">CUs</span>. Database branches autoscale from 0.25 to 8 CU based on load and down to zero when inactive.',
+    text: 'Compute size is measured in <span class="font-medium text-white underline decoration-dotted underline-offset-4" data-tooltip-id="cu-icon" data-tooltip-html="1 CU = 1 vCPU, 4 GB RAM">CUs</span>. Database branches autoscale from 0.25 to 10 CU based on load and down to zero when inactive.',
   },
   {
     icon: timerIcon,

@@ -4,7 +4,7 @@ enableTableOfContents: true
 subtitle: Estimate your monthly bill with Neon
 redirectFrom:
   - /docs/introduction/how-billing-works#neon-pricing-estimation-guide
-updatedOn: '2024-06-20T17:29:55.110Z'
+updatedOn: '2024-07-19T21:48:31.741Z'
 ---
 
 You can use this guide to estimate your monthly bill with Neon based on your selected plan and estimated usage.
@@ -36,7 +36,7 @@ For the Enterprise plan, please contact our [Sales](/contact-sales) team for an 
 Estimate your monthly usage to see if any "extra usage" is required beyond the storage, compute, or project allowances included in your plan.
 
 - **Storage (GiB)**: How much storage do you expect to use? Storage includes the size of your data and change history. For more information, see [Storage](/docs/introduction/usage-metrics#storage).
-- **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Neon supports compute sizes ranging from .25 vCPU to 8 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute usage.
+- **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Neon supports compute sizes ranging from .25 vCPU to 10 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute usage.
 - **Projects**: How many projects do you need? Neon recommends a project per application.
 
 ## Step 3: Calculate extra usage fees
@@ -103,3 +103,9 @@ Total Estimate = Plan Fee + Extra Storage Fee + Extra Compute Fee + Extra Projec
 | **Total Estimate** | $142 per month                      |
 
 For examples illustrating extra usage incurred mid-month, usage fluctuations during the billing period, and prorated charges, see [Extra usage](/docs/introduction/extra-usage).
+
+## Feedback
+
+We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. If you have feedback for us, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We read and consider every submission.
+
+<NeedHelp/>

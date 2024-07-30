@@ -2,7 +2,7 @@
 title: Neon CLI commands — connection-string
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.893Z'
+updatedOn: '2024-07-25T12:53:42.436Z'
 ---
 
 ## Before you begin
@@ -36,7 +36,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--database-name` | Database name                                                                                        | string  |   Only if your branch has more than one database    |
 | `--pooled`        | Construct a pooled connection. The default is `false`.                                               | boolean |                                                     |
 | `--prisma`        | Construct a connection string for use with Prisma. The default is `false`.                           | boolean |                                                     |
-| `--endpoint-type` | The compute endpoint type. The default is `read-write`. The choise are `read_only` and `read_write`` | string  |                                                     |
+| `--endpoint-type` | The compute type. The default is `read-write`. The choices are `read_only` and `read_write`          | string  |                                                     |
 | `--extended`      | Show extended information. The default is `false`.                                                   | boolean |                                                     |
 | `--psql`          | Connect to a database via psql using connection string. `psql` must be installed to use this option. | boolean |                                                     |
 

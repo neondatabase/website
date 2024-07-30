@@ -8,23 +8,19 @@ import LINKS from 'constants/links';
 
 const Cta = ({
   title = 'Features of tomorrow.<br /> Available today.',
+  className = 'pb-[307px] pt-[445px] xl:py-[230px] lg:pb-[156px] lg:pt-[179px] sm:pb-[110px] sm:pt-[116px]',
   description = null,
   buttonText = 'Get Started',
   buttonUrl = LINKS.signup,
-  buttonClassName = 'mt-[38px] h-11 w-[144px] text-[15px]  xl:mt-8 lg:mt-7 sm:mt-5 sm:h-10',
+  buttonClassName = 'mt-[38px] h-11 w-[144px] text-[15px] xl:mt-8 lg:mt-7 sm:mt-5 sm:h-10',
 }) => {
   const isExternal = buttonUrl.startsWith('http');
 
   return (
-    <section
-      className={clsx(
-        'get-started relative overflow-hidden pb-[307px] pt-[445px]',
-        'xl:py-[230px] lg:pb-[156px] lg:pt-[179px] sm:pb-[110px] sm:pt-[116px]'
-      )}
-    >
+    <section className={clsx('get-started relative overflow-hidden', className)}>
       <RiveAnimation
-        className="absolute left-1/2 top-[152px] aspect-[1.87365] w-[1703px] -translate-x-1/2 xl:-top-4 xl:w-[1432px] lg:w-[1126px] sm:-top-6 sm:w-[818px]"
-        src="/animations/pages/home/get-started.riv"
+        className="absolute left-1/2 top-[60%] aspect-[1.87365] w-[1703px] -translate-x-1/2 -translate-y-1/2 xl:w-[1432px] lg:w-[1126px] sm:w-[818px]"
+        src="/animations/shared/cta.riv"
         artboard="footer"
         intersectionRootMargin="0px 0px 600px 0px"
         animationRootMargin="0px 0px 300px 0px"
@@ -65,6 +61,7 @@ const Cta = ({
 
 Cta.propTypes = {
   title: PropTypes.string,
+  className: PropTypes.string,
   buttonText: PropTypes.string,
   buttonUrl: PropTypes.string,
   description: PropTypes.string,

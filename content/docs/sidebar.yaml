@@ -336,7 +336,8 @@
     - title: Develop
       items:
         - title: GitHub integration
-          slug: guides/neon-github-app
+          slug: guides/neon-github-integration
+          tag: coming soon
         - title: Neosync
           items:
             - title: Generate synthetic data
@@ -368,6 +369,8 @@
           slug: guides/logical-replication-postgres
         - title: Sequin
           slug: guides/sequin
+        - title: Snowflake
+          slug: guides/logical-replication-airbyte-snowflake
     - title: Schema Migration
       items:
         - title: Django
@@ -459,6 +462,8 @@
           slug: extensions/pg_trgm
         - title: postgis
           slug: extensions/postgis
+        - title: postgis-related
+          slug: extensions/postgis-related-extensions
         - title: timescaledb
           slug: extensions/timescaledb
     - title: Functions
@@ -635,6 +640,8 @@
       slug: guides/oauth-integration
     - title: Manage billing with quotas
       slug: guides/partner-billing
+    - title: Getting metrics via API
+      slug: guides/metrics-api
 - title: Community
   slug: community/community-intro
   items:

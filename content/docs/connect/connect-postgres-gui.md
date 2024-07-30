@@ -2,7 +2,7 @@
 title: Connect a GUI application
 subtitle: Learn how to connect a GUI application to Neon
 enableTableOfContents: true
-updatedOn: '2024-07-15T20:56:16.359Z'
+updatedOn: '2024-07-25T12:53:42.416Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.
@@ -54,7 +54,7 @@ Some Java-based tools that use the pgJDBC driver for connecting to Postgres, suc
 Connections from the GUI applications and IDEs in the table below have been tested with Neon.
 
 <Admonition type="note">
-Some applications require an Server Name Indication (SNI) workaround. Neon uses compute endpoint domain names to route incoming connections. However, the Postgres wire protocol does not transfer the server domain name, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this. Not all application clients support SNI. In these cases, a workaround is required. For more information, see [Connection errors](/docs/connect/connection-errors).
+Some applications require an Server Name Indication (SNI) workaround. Neon uses compute domain names to route incoming connections. However, the Postgres wire protocol does not transfer the server domain name, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this. Not all application clients support SNI. In these cases, a workaround is required. For more information, see [Connection errors](/docs/connect/connection-errors).
 </Admonition>
 
 | Application or IDE                                                                                                            | Notes                                                                                                                                                                                                                                                                                                                                                                   |

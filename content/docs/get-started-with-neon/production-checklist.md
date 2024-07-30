@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
-updatedOn: '2024-07-03T11:29:20.506Z'
+updatedOn: '2024-07-25T12:53:42.422Z'
 ---
 
 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -38,11 +38,11 @@ updatedOn: '2024-07-03T11:29:20.506Z'
 
 In a development environment, your application may function perfectly with a small compute size, but before your application goes live, make sure that your database has enough vCPU and memory to handle the expected load.
 
-In Neon, your compute size determines the amount of vCPU and memory your database has to work with. Neon supports computes up to 8 Compute Units (CUs) in size. Larger computes provide more memory. The compute sizes that are available to you depend on your [Neon plan](/docs/introduction/plans):
+In Neon, your compute size determines the amount of vCPU and memory your database has to work with. Neon supports computes up to 10 Compute Units (CUs) in size. Larger computes provide more memory. The compute sizes that are available to you depend on your [Neon plan](/docs/introduction/plans):
 
 - **Free Tier**: 0.25 CUs (0.25 vCPU, 1 GB RAM)
 - **Launch**: Up to 4 CUs (4 vCPU, 16 GB RAM)
-- **Scale**: Up to 8 CUs (8 vCPU, 32 GB RAM)
+- **Scale**: Up to 10 CUs (10 vCPU, 40 GB RAM)
 - **Enterprise**: Larger sizes
 
 You should start with a compute size that can hold your data or at least your most frequently accessed data (your [working set](/docs/reference/glossary#working-set)) in memory. If you are using Neon's _Autoscaling_ feature, we recommend the same for your **minimum compute size** setting (see [Configure Autoscaling](#configure-autoscaling)).
@@ -64,7 +64,7 @@ To get started with Autoscaling, read:
 
 ## Configure Autosuspend
 
-Neon's Autosuspend feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted on Neon's paid plans.
+Neon's Autosuspend feature automatically transitions a compute into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted on Neon's paid plans.
 
 ![Autosuspend control](/docs/get-started-with-neon/autosuspend_control.png)
 
