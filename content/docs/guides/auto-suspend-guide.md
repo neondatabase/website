@@ -20,7 +20,7 @@ The autosuspend limits differ by [Neon plan](/docs/introduction/plans). The limi
 
 | Plan       | Autosuspend delay   | Can be disabled? |
 | :--------- | :------------------ | :--------------- |
-| Free Tier  | 5 minutes           |                  |
+| Free Plan  | 5 minutes           |                  |
 | Launch     | 5 minutes to 7 days | &check;          |
 | Scale      | 1 minute to 7 days  | &check;          |
 | Enterprise | 0 up to 7 days      | &check;          |

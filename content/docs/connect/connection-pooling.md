@@ -44,7 +44,7 @@ Each Postgres connection creates a new process in the operating system, which co
 | 9                 | 9    | 36 GB | 4000            |
 | 10                | 10   | 40 GB | 4000            |
 
-The formula used to calculate `max_connections` for Neon computes is `RAM in bytes / 9531392 bytes`. For a Neon Free Tier compute, which has 1 GB of RAM, this works out to approximately 112 connections. Larger computes offered with paid plans have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports up to 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
+The formula used to calculate `max_connections` for Neon computes is `RAM in bytes / 9531392 bytes`. For a Neon Free Plan compute, which has 1 GB of RAM, this works out to approximately 112 connections. Larger computes offered with paid plans have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports up to 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
 
 ```sql
 SHOW max_connections;
@@ -59,7 +59,7 @@ SELECT usename FROM pg_stat_activity WHERE datname = '<database_name>';
 
 </Admonition>
 
-Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the [Neon Free Tier](/docs/introduction/plans#free-tier), support connection pooling.
+Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the [Neon Free Plan](/docs/introduction/plans#free-plan), support connection pooling.
 
 ## Connection pooling
 

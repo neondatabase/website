@@ -22,7 +22,7 @@ You can also load sample data using the Neon CLI. See [Load sample data with the
 
 ## Sample data
 
-Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Tier has a storage limit of 3 GB per branch. Datasets larger than 3 GB cannot be loaded on the Free Tier.
+Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Plan has a storage limit of 3 GB per branch. Datasets larger than 3 GB cannot be loaded on the Free Plan.
 
 | Name                                                        | Tables | Records  | Source file size | Installed size |
 | ----------------------------------------------------------- | ------ | -------- | ---------------- | -------------- |

@@ -22,14 +22,14 @@ When working with branches, it is important to remove old and unused branches. B
 
 Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project. The advantage of the default branch is that its compute remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
 
-- For Neon Free Tier users, the compute associated with the default branch is always available.
+- For Neon Free Plan users, the compute associated with the default branch is always available.
 - For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage.
 
 ## Non-default branch
 
 Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
 
-- For Neon Free Tier users, computes associated with non-default branches are suspended if you exceed the Neon Free Tier _active hours_ limit of 20 hours per month.
+- For Neon Free Plan users, computes associated with non-default branches are suspended if you exceed the Neon Free Plan _active hours_ limit of 20 hours per month.
 - For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, a computes associated with a non-default branch remains suspended.
 
 ## Protected branch

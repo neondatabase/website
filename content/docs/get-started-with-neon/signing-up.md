@@ -32,7 +32,7 @@ After signing up, you'll start with a `main` branch and the empty database `neon
     Sign up with your email, Github, Google, or other partner account.
 
     For information about what's included with the free plan, see
-    [Neon Free Tier](/docs/introduction/plans#free-tier). For information about Neon's paid options, see
+    [Neon Free Plan](/docs/introduction/plans#free-plan). For information about Neon's paid options, see
     [Neon Plans](/docs/introduction/plans).
 
   </div>

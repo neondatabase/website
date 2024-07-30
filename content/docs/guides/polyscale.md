@@ -45,7 +45,7 @@ A PolyScale account can have one or more caches. A cache identifies a database b
 
 To create the database cache:
 
-1.  Log into [PolyScale](https://app.polyscale.ai/signup/). If you do not have an account, you can create one by logging in with your GitHub or Google account. PolyScale has a free tier and does not require a credit card to sign up.
+1.  Log into [PolyScale](https://app.polyscale.ai/signup/). If you do not have an account, you can create one by logging in with your GitHub or Google account. PolyScale has a free plan and does not require a credit card to sign up.
 2.  If you have just signed up for PolyScale, select **Create new cache** from the **Welcome to PolyScale** dialog.
     ![Connection details widget](/docs/guides/welcome_to_polyscale.png)
     If you already have a PolyScale account, click the **New Cache** button in the upper right corner of the PolyScale dashboard.

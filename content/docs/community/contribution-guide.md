@@ -404,7 +404,7 @@ Generally, feature names should be lowercase.
 
 Capitalize names of:
 
-- Neon tiers and plans. For example, "Neon Free Tier".
+- Neon plans. For example, "Neon Free Plan".
 - Third-party organizations, software, and products. Kubernetes, Git, and Vercel.
 - Methods or methodologies. Continuous Integration, Continuous Deployment, etc.
 

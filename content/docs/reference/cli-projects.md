@@ -74,7 +74,7 @@ Shared with me
 
 This subcommand allows you to create a Neon project.
 
-The [Neon Free Tier](../introduction/free-tier) supports creating a single project. Paid plans allow multiple projects.
+The [Neon Free Plan](/docs/introduction/plans#free-plan) supports creating a single project. Paid plans allow multiple projects.
 
 #### Usage
 
