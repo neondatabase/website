@@ -187,9 +187,9 @@ First, generate some changes in the `users` table on the publisher database to s
    SELECT * FROM users;
    ```
 
-Compare the results with what you observed on the publisher.
+   Compare the results with what you observed on the publisher.
 
-4. On the subscriber, you can also check the status of the replication:
+5. On the subscriber, you can also check the status of the replication:
 
    ```sql
    SELECT * FROM pg_stat_subscription;
