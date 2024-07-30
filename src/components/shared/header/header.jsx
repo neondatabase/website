@@ -221,7 +221,7 @@ const Header = async ({
               </div>
               <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 xl:max-w-none lg:hidden">
                 <Search
-                  className="w-[274px]"
+                  className="w-[272px]"
                   indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
                 />
                 <InkeepTrigger />
