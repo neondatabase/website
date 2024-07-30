@@ -135,13 +135,13 @@ It is assumed that you have a separate Postgres instance ready to act as the sub
 - This must be a Postgres instance other than Neon, such as a local PostgreSQL installation. Currently, a Neon database cannot be defined as a subscriber. The PostgreSQL version of the subscriber should be compatible with the publisher. The primary (publishing) server must be of the same or a higher version than the replica (subscribing) server. For example, you can replicate from PostgreSQL 14 to 16, but not from 16 to 14. Neon supports Postgres 14, 15, and 16. The Postgres version is defined when you create a Neon project.
 - A corresponding `users` table must exist in the subscriber database. This table should have the same schema as the table on the publisher. You can use the same `CREATE TABLE` statement used previously:
 
-   ```sql
-   CREATE TABLE users (
-     id SERIAL PRIMARY KEY,
-     username VARCHAR(50) NOT NULL,
-     email VARCHAR(100) NOT NULL
-   );
-   ```
+  ```sql
+  CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL
+  );
+  ```
 
 ### Create a subscription
 
