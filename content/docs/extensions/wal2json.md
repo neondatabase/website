@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-03-04T10:00:00.000Z'
 ---
 
-The `wal2json` plugin is a logical decoding output plugin for PostgreSQL. It allows you to convert Write-Ahead Log (WAL) entries into JSON format, making it easier to consume and process database changes in various applications, such as data replication, auditing,  event-driven services, and real-time analytics.
+The `wal2json` plugin is a logical decoding output plugin for PostgreSQL. It allows you to convert Write-Ahead Log (WAL) entries into JSON format, making it easier to consume and process database changes in various applications, such as data replication, auditing, event-driven services, and real-time analytics.
 
 <CTA />
 
@@ -21,7 +21,7 @@ The `wal2json` plugin is available in all PostgreSQL versions supported by Neon.
 
 ## Enable logical replication
 
-Before using the `wal2json` plugin, you need to enable logical replication for your Neon project. Navigate to the `Settings` section in your Neon project dashabord, and select `Beta` from the list of options. Click `Enable` to enable logical replication. 
+Before using the `wal2json` plugin, you need to enable logical replication for your Neon project. Navigate to the `Settings` section in your Neon project dashabord, and select `Beta` from the list of options. Click `Enable` to enable logical replication.
 
 **Note:** Once enabled for a project, logical replication cannot be reverted. This action triggers a restart of all active compute endpoints in your Neon project. Any active connections will be dropped and have to reconnect.
 
@@ -128,7 +128,7 @@ We can now query the `test_slot` replication slot again to see the new informati
 SELECT * FROM pg_logical_slot_get_changes('test_slot', NULL, NULL, 'pretty-print', 'on');
 ```
 
-This query returns a single row in JSON format, corresponding to the row updated. 
+This query returns a single row in JSON format, corresponding to the row updated.
 
 ```plaintext
     lsn    | xid  |                                                          data
@@ -155,7 +155,7 @@ This query returns a single row in JSON format, corresponding to the row updated
 
 ## Format versions: 1 vs 2
 
-The `wal2json` plugin supports two different output format versions. 
+The `wal2json` plugin supports two different output format versions.
 
 The default format version is 1, which produces a JSON object per transaction. All new and old tuples are available within this single JSON object. This format is useful when you need to process entire transactions as atomic units.
 
@@ -170,7 +170,7 @@ SELECT * FROM pg_logical_slot_get_changes('test_slot', NULL, NULL, 'format-versi
 To illustrate, we add a couple more product entries to the `inventory` table:
 
 ```sql
-INSERT INTO inventory (product_name, quantity) VALUES 
+INSERT INTO inventory (product_name, quantity) VALUES
     ('Widget D', 200),
     ('Gizmo E', 75);
 ```
@@ -181,7 +181,7 @@ Now, we can query the `test_slot` replication slot again to see the new informat
 SELECT * FROM pg_logical_slot_get_changes('test_slot', NULL, NULL, 'pretty-print', 'on', 'format-version', '2');
 ```
 
-The output of this query appears as follows. You can see that there is a separate JSON object for each row inserted. 
+The output of this query appears as follows. You can see that there is a separate JSON object for each row inserted.
 
 ```plaintext
     lsn    | xid  |                                                                                                                                                                  data
@@ -217,7 +217,7 @@ INSERT INTO products_no_pk (product_name, quantity, price) VALUES ('Widget', 100
 UPDATE products_no_pk SET quantity = 90 WHERE product_name = 'Widget';
 ```
 
-The `wal2json` output for this update operation will not contain any information about the updated row due to the lack of a primary key and the DEFAULT REPLICA IDENTITY setting. 
+The `wal2json` output for this update operation will not contain any information about the updated row due to the lack of a primary key and the DEFAULT REPLICA IDENTITY setting.
 
 ```plaintext
 WARNING:  table "products_no_pk" without primary key or replica identity is nothing
