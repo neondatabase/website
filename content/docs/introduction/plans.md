@@ -41,7 +41,7 @@ The Free Tier includes the following usage allowances:
 | **Branches**               | 10 branches                                                                                                                                                                                     |
 | **Databases**              | Unlimited                                                                                                                                                                                       |
 | **Storage**                | 0.5 GiB                                                                                                                                                                                         |
-| **Compute**                | 24/7 database at 0.25 CU. Autoscaling up to 2 vCPU with 8 GB RAM available. Your account includes 191.9 compute hours per month, with up to 5 of those hours available to non-default branches. |
+| **Compute**                | 24/7 availability at 0.25 vCPU with 1 GB RAM on your default branch. Autoscaling up to 2 vCPU with 8 GB RAM available. Your account includes 191.9 compute hours per month, with up to 5 of those hours available to non-default branches. |
 | **Data transfer (Egress)** | 5 GB per month                                                                                                                                                                                  |
 
 <Admonition type="tip" title="What are active hours and compute hours?">
@@ -68,7 +68,7 @@ The Free Tier includes the following usage allowances:
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
 <Admonition type="tip" title="Free Tier Compute Allowances">
-On the Free Tier, your default branch compute can run 24/7 at 0.25 CU. If you enable autoscaling, your compute can scale up to 2 CU, providing additional resources to meet peak demand. Note that enabling autoscaling may affect 24/7 availability depending on your usage patterns. The Free Tier includes 191.9 compute hours per month, with up to 5 of those compute hours per month available to non-default branches. If you go over the 5 compute hours allowance, non-default branch computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month. For example, if you signed up for the Free Tier in January, your compute allowance resets on February 1st.
+On the Free Tier, your default branch compute can run 24/7 at 0.25 vCPU with 1 GB of RAM. If you enable autoscaling, your compute can scale up to 2 vCPU with 8 GB of RAM, providing additional resources to meet peak demand. Note that enabling autoscaling may affect 24/7 availability depending on your usage patterns. The Free Tier includes 191.9 compute hours per month, with up to 5 of those compute hours per month available to non-default branches. If you go over the 5 compute hours allowance, non-default branch computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month. For example, if you signed up for the Free Tier in January, your compute allowance resets on February 1st.
 </Admonition>
 
 ## Launch
