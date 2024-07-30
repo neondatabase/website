@@ -1,7 +1,7 @@
 ---
 title: Postgres extensions
 enableTableOfContents: true
-updatedOn: '2024-07-23T13:01:46.231Z'
+updatedOn: '2024-07-30T20:25:11.763Z'
 ---
 
 Explore supported Postgres extensions by category. Also see:

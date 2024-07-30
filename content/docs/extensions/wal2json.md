@@ -2,7 +2,7 @@
 title: The wal2json plugin
 subtitle: Convert Postgres Write-Ahead Log (WAL) changes to JSON format
 enableTableOfContents: true
-updatedOn: '2024-03-04T10:00:00.000Z'
+updatedOn: '2024-07-30T20:25:11.767Z'
 ---
 
 The `wal2json` plugin is a logical replication decoding output plugin for Postgres. It lets you to convert Write-Ahead Log (WAL) changes into JSON format, making it easier to consume and process database changes in various applications, such as data replication, auditing, event-driven services, and real-time analytics.
