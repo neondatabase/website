@@ -35,14 +35,14 @@ Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon.
 
 The Free Tier includes the following usage allowances:
 
-| Usage type                 | Plan allowance                                                                                                                                                                                         |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Projects**               | 1 Neon project                                                                                                                                                                                         |
-| **Branches**               | 10 branches                                                                                                                                                                                            |
-| **Databases**              | Unlimited                                                                                                                                                                                              |
-| **Storage**                | 0.5 GiB                                                                                                                                                                                                |
+| Usage type                 | Plan allowance                                                                                                                                                                                 |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Projects**               | 1 Neon project                                                                                                                                                                                 |
+| **Branches**               | 10 branches                                                                                                                                                                                    |
+| **Databases**              | Unlimited                                                                                                                                                                                      |
+| **Storage**                | 0.5 GiB                                                                                                                                                                                        |
 | **Compute**                | 24/7 database at 0.25 CU. Autoscaling up to 2 vCPU with 8 GB RAM available. Your account includes 191.9 compute hours per month, with 5 compute hours/month allocated to non-default branches. |
-| **Data transfer (Egress)** | 5 GB per month                                                                                                                                                                                         |
+| **Data transfer (Egress)** | 5 GB per month                                                                                                                                                                                 |
 
 <Admonition type="tip" title="What are active hours and compute hours?">
 
