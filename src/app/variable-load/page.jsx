@@ -113,8 +113,8 @@ const articlesWithImages = (articles) =>
   });
 
 const titles = [
-  'Variable resources for variable&nbsp;load',
-  'Maximize efficiency and cut costs with Serverless Postgres',
+  'Variable traffic, fixed costs?',
+  'Pay for what you use with serverless Postgres',
   'How much budget are you wasting on&nbsp;unused compute?',
   'What makes Neon unique vs&nbsp;others?',
 ];
