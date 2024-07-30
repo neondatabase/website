@@ -143,6 +143,10 @@ It is assumed that you have a separate Postgres instance ready to act as the sub
    );
    ```
 
+   <Admonition type="note">
+   When configuring logical replication in Postgres, the tables included in a publication on the publisher must also exist on the subscriber with the same name and table schema.
+   </Admonition>
+
 ### Create a subscription
 
 1. Use `psql` or another SQL client to connect to your subscriber Postgres database.
