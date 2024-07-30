@@ -114,9 +114,9 @@ const articlesWithImages = (articles) =>
 
 const titles = [
   'Variable traffic, fixed costs?',
-  'Pay for what you use with serverless Postgres',
-  'How much budget are you wasting on&nbsp;unused compute?',
-  'What makes Neon unique vs&nbsp;others?',
+  'Pay only for what you use with Neon',
+  'How much money are you wasting on&nbsp;unused compute?',
+  'Why Neon vs Aurora Serverless',
 ];
 
 const VariableLoadPage = async () => {
