@@ -48,10 +48,6 @@ Here's a snapshot of what we're working on now:
 
   We're working on a GitHub App for Neon that will create and delete Neon branches in synchronization with git branch actions.
 
-- **Outerbase integration**
-
-  We are adding Outerbase as one of our available integrations. You will soon be able to use [Outerbase](https://www.outerbase.com/) to view, query, visualize, and edit your Neon data with the power of AI.
-
 - **Support for anonymizing data**
 
   To help with workflows that require protecting personal information, we're adding support for anonymizing data. For example, if you derive your staging branch directly from production, you might want to anonymize the data on staging, which you can then use as the source for all of your development and testing branches.
