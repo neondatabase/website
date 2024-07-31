@@ -115,6 +115,13 @@ export default {
     imagePath: '/images/social-previews/variable.jpg',
     pathname: LINKS.variable,
   },
+  costFleets: {
+    title: 'Cost-Fleets: A serverless Postgres solution for enterprises',
+    description:
+      'Neon is the only Postgres solution that allows you to scale your Postgres fleet at scale.',
+    imagePath: '/images/social-previews/cost-fleets.jpg',
+    pathname: LINKS.costFleets,
+  },
   404: {
     title: 'Page Not Found — Neon',
   },
