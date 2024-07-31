@@ -157,7 +157,7 @@ const Timeline = () => (
               <Link
                 to={link}
                 theme="white"
-                className="hover: whitespace-nowrap border-b text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 lg:text-base"
+                className="w-fit whitespace-nowrap border-b text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 lg:text-base"
               >
                 {title}
               </Link>
