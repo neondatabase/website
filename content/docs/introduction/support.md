@@ -15,6 +15,10 @@ Neon's Community, Standard, Priority, and Enterprise support plans are outlined 
 | Dedicated Customer Success Team |     -     |    -     |          |  &check;   |
 | SLAs                            |     -     |    -     |          |  &check;   |
 
+<Admonition type="important">
+The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is available to all Neon users but is not an official Neon Support channel. If you are a paying user and require assistance from the Neon Support team, please open a support ticket, as described in [Standard support](#standard-support).
+</Admonition>
+
 ## Community support
 
 Neon's [Free Tier](/docs/introduction/plans#free-tier) includes **Community** support.
