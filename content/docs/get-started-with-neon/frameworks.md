@@ -2,7 +2,7 @@
 title: Neon framework guides
 subtitle: Find detailed instructions for connecting to Neon from various frameworks
 enableTableOfContents: true
-updatedOn: '2024-07-08T12:06:52.938Z'
+updatedOn: '2024-07-09T20:55:06.489Z'
 ---
 
 <TechnologyNavigation open>
@@ -10,6 +10,8 @@ updatedOn: '2024-07-08T12:06:52.938Z'
 <img src="/images/technology-logos/nodejs-logo.svg" width="33" height="36" alt="Node.js" href="/docs/guides/node" title="Connect a Node.js application to Neon" />
 
 <img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/nextjs" title="Connect a Next.js application to Neon" />
+
+<img src="/images/technology-logos/nestjs-logo.svg" width="36" height="36" alt="NestJS" href="/docs/guides/nestjs" title="Connect a NestJS application to Neon" />
 
 <img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Astro" href="/docs/guides/astro" title="Connect an Astro site or app to Neon" />
 
@@ -34,5 +36,7 @@ updatedOn: '2024-07-08T12:06:52.938Z'
 <img src="/images/technology-logos/sqlalchemy-logo.svg" width="36" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect an SQLAlchemy application to Neon" />
 
 <img src="/images/technology-logos/symfony-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Symfony with Doctrine to Neon" />
+
+<img src="/images/technology-logos/solid-logo.svg" width="36" height="36" alt="SolidStart" href="/docs/guides/solid-start" title="Connect an SolidStart site or app to Neon" />
 
 </TechnologyNavigation>

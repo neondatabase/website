@@ -9,6 +9,7 @@ const styles = {
     medium: 'max-w-[1472px] 2xl:px-10',
     sm: 'max-w-[1460px] 2xl:max-w-[1216px] xl:max-w-[936px]',
     xs: 'max-w-[860px]',
+    xxs: 'max-w-[704px] md:px-5',
     1408: 'max-w-[1472px] px-8',
     1344: 'max-w-[1408px] px-8',
     1220: 'max-w-[1220px] xl:px-8',

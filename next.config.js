@@ -114,6 +114,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/blog/the-non-obviousness-of-postgres-roles',
+        destination: '/blog/postgres-roles',
+        permanent: true,
+      },
+      {
         source: '/2024-plan-updates',
         destination: '/pricing',
         permanent: true,
@@ -215,6 +220,11 @@ const defaultConfig = {
         destination: 'https://console.neon.tech/signup',
         permanent: true,
       },
+      {
+        source: '/ai',
+        destination: '/docs/ai/ai-intro',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
@@ -224,6 +234,14 @@ const defaultConfig = {
       {
         source: '/api_spec/release/v2.json',
         destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
+      },
+      {
+        source: '/demos/twin-thing',
+        destination: 'https://twin-thing.vercel.app/demos/twin-thing',
+      },
+      {
+        source: '/demos/twin-thing/:path*',
+        destination: 'https://twin-thing.vercel.app/demos/twin-thing/:path*',
       },
       {
         source: '/demos/ping-thing',
