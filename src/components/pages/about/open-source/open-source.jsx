@@ -12,7 +12,7 @@ const OpenSource = ({ items }) => (
       className="flex gap-x-[116px] gap-y-12 pl-48 xl:gap-x-16 xl:pl-40 lg:gap-x-[62px] lg:pl-24 md:gap-x-10 md:!px-5 sm:flex-col"
       size="1152"
     >
-      <header className="sticky top-8 h-fit grow xl:top-6 xl:max-w-[352px] lg:max-w-[290px] sm:static sm:top-auto sm:max-w-none">
+      <header className="sticky top-8 h-fit max-w-[364px] grow xl:top-6 xl:max-w-[352px] lg:max-w-[290px] sm:static sm:top-auto sm:max-w-none">
         <Heading
           className="text-[68px] font-medium leading-[0.9] tracking-extra-tight xl:text-[56px] lg:max-w-[564px] lg:text-5xl md:text-[36px]"
           tag="h2"
@@ -48,12 +48,22 @@ const OpenSource = ({ items }) => (
                   {number}
                 </span>
                 {(isThousands || hasPlus) && (
-                  <span className="bg-[linear-gradient(164deg,#FFF_53%,rgba(255,255,255,.4)_72.79%,transparent_89.16%)] bg-clip-text pr-1.5 font-title text-[96px] font-medium leading-[.96] tracking-[-0.06em] text-transparent xl:text-[88px] lg:text-6xl">
+                  <span
+                    className={clsx(
+                      'bg-[linear-gradient(164deg,#FFF_53%,rgba(255,255,255,.4)_72.79%,transparent_89.16%)] bg-clip-text pr-1.5 font-title text-[100px] font-medium leading-[.96] tracking-[-0.06em] text-transparent xl:text-[88px] lg:text-6xl',
+                      isThousands && '-mb-0.5'
+                    )}
+                  >
                     {hasPlus ? '+' : 'k'}
                   </span>
                 )}
               </span>
-              <span className="mt-[9px] block text-xl leading-snug tracking-extra-tight text-gray-new-50 xl:text-lg lg:mt-2 lg:text-base">
+              <span
+                className={clsx(
+                  'block text-xl leading-snug tracking-extra-tight text-gray-new-50 xl:text-lg lg:mt-2.5 lg:text-base',
+                  isThousands ? 'mt-[11px]' : 'mt-[9px]'
+                )}
+              >
                 {label}
               </span>
             </p>

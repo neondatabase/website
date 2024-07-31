@@ -26,7 +26,7 @@ const AboutUsPage = async () => {
       label: 'Stars on GitHub',
     },
     {
-      number: !gitHubContributors ? 106 : gitHubContributors,
+      number: !gitHubContributors ? 111 : gitHubContributors,
       label: 'Contributors',
     },
     {

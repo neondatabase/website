@@ -24,6 +24,7 @@ const getGithubContributors = async () => {
   if (!match) {
     throw new Error('Unable to parse contributors count from Link header');
   }
+
   return parseInt(match[1], 10);
 };
 
