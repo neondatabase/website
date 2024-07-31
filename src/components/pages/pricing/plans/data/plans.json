@@ -51,19 +51,19 @@
       "rows": "2",
       "feature": {
         "title": "Compute (monthly)",
-        "subtitle": "Compute hrs = CPU size x active hrs"
+        "subtitle": "Compute hours = CU x active hours"
       },
       "free": {
-        "title": "24/7 for primary compute",
-        "info": "+20h of usage for branches"
+        "title": "190 compute hours",
+        "info": "Additional branches limited to 5 compute hours"
       },
       "launch": {
         "title": "300 compute hours",
-        "info": "Extra at $0.16 per compute hour"
+        "info": "Extra usage at $0.16 per compute hour"
       },
       "scale": {
         "title": "750 compute hours",
-        "info": "Extra at $0.16 per compute hour"
+        "info": "Extra usage at $0.16 per compute hour"
       },
       "enterprise": "Custom"
     },
@@ -109,7 +109,7 @@
         "title": "Compute size"
       },
       "free": {
-        "title": "0.25 vCPU, 1 GB RAM"
+        "title": "Up to 2 vCPU, 8 GB RAM"
       },
       "launch": {
         "title": "Up to 4 vCPU, 16 GB RAM"
@@ -137,10 +137,10 @@
       "feature": {
         "title": "Autoscaling"
       },
-      "free": false,
-      "launch": true,
-      "scale": true,
-      "enterprise": true
+      "free": "Up to 2 CU",
+      "launch": "Up to 4 CU",
+      "scale": "Up to 10 CU",
+      "enterprise": "Up to +10 CU"
     },
     {
       "rows": "2",
@@ -244,7 +244,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Protected Branch"
+        "title": "Branch Protection"
       },
       "free": false,
       "launch": false,
