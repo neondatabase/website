@@ -22,7 +22,7 @@ const items = [
     price: '$0 <span>/month</span>',
     description: 'Always-available free tier, no credit card required.',
     features: [
-      { title: '0.5 GiB storage' },
+      { title: '0.5 GiB storage included' },
       { title: '24/7 database at 0.25 CU', info: 'Plus 20h of usage for additional branches. 0.25 CU = 0.25 vCPU, 1 GB RAM' },
       { title: 'Community support' },
       { title: 'Autoscaling up to 2 CU', info: '2 CU = 2 vCPU, 8 GB RAM'  },
