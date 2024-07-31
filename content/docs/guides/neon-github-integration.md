@@ -9,10 +9,6 @@ tag: coming soon
 updatedOn: '2024-07-19T13:21:01.309Z'
 ---
 
-<Admonition type="comingSoon" title="Feature Coming Soon">
-This integration is currently available for **Early Access** users. To start using it right away, become an Early Access member [here](https://neon.tech/early-access-program). It will be released publicly soon.
-</Admonition>
-
 The Neon GitHub integration connects your Neon projects to corresponding GitHub repositories, helping you incorporate your database into your developer workflow. For example, create a database branch for each pull request using GitHub Actions. We’ll provide you with a sample GitHub Actions workflow to help you get started.
 
 ## How it works
