@@ -66,7 +66,7 @@ const Leadership = () => (
         {ITEMS.map(({ image, name, role }, index) => (
           <li className="flex flex-col" key={index}>
             <Image
-              className="w-full rounded-sm grayscale"
+              className="w-full rounded-sm"
               src={image}
               alt={name}
               width={128}
