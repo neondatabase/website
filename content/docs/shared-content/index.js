@@ -4,6 +4,7 @@ const sharedMdxComponents = {
   NewPricing: 'shared-content/NewPricing',
   LRNotice: 'shared-content/lr-notice',
   ComingSoon: 'shared-content/coming-soon',
+  PgHint: 'shared-content/pg-hint'
 };
 
 module.exports = sharedMdxComponents;
