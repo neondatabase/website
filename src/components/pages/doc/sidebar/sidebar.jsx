@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
@@ -32,6 +32,10 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
   const [activeMenuList, setActiveMenuList] = useState(
     new Set(['Home', ...getActiveItems(sidebar, currentSlug)])
   );
+
+  useEffect(() => {
+    setActiveMenuList(new Set(['Home', ...getActiveItems(sidebar, currentSlug)]));
+  }, [currentSlug, sidebar]);
 
   const [menuHeight, setMenuHeight] = useState(1000);
   const menuWrapperRef = useRef(null);
