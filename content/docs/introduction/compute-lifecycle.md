@@ -12,7 +12,7 @@ An `Idle` compute is one that has been suspended by Neon's _Autosuspend_ feature
 
 ## Autosuspend
 
-If there are no active queries for 5 minutes, which is the default autosuspend setting in Neon, your compute is automatically placed into an `Idle` state to save on energy and resources. Users on paid plans can disable this autosuspension behavior so that a compute always remains active, or they can increase or decrease the amount of time after which a compute is placed into an `Idle` state. Autosuspension behavior is controlled by your compute's **Autosuspend** setting. 
+If there are no active queries for 5 minutes, which is the default autosuspend setting in Neon, your compute is automatically placed into an `Idle` state to save on energy and resources. Users on paid plans can disable this autosuspension behavior so that a compute always remains active, or they can increase or decrease the amount of time after which a compute is placed into an `Idle` state. Autosuspension behavior is controlled by your compute's **Autosuspend** setting.
 
 ![Autosuspend configuration dialog](/docs/introduction/autosuspend_config.png)
 
@@ -20,11 +20,11 @@ For information about configuring this setting, see [Edit a compute](/docs/manag
 
 <Admonition type="note">
 Neon's _Autosuspend_ feature is conservative. It treats an "idle-in-transaction" connection as active to avoid breaking application logic that involves long-running transactions. Only the truly inactive connections are closed after the defined period of inactivity.
-</Admonition> 
+</Admonition>
 
 ## Compute activation
 
-When you connect to an idle compute, Neon automatically activates it. Activation generally takes a few hundred milliseconds. 
+When you connect to an idle compute, Neon automatically activates it. Activation generally takes a few hundred milliseconds.
 
 Considering this activation time, your first connection may have a slightly higher latency than subsequent connections, which would be connecting to an already-active compute. Also, Postgres memory buffers are cold after a compute wakes up from the `Idle` state, which means that initial queries may take longer until the memory buffers are warmed.
 
