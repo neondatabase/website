@@ -14,6 +14,7 @@
           slug: get-started-with-neon/production-readiness
     - title: Getting Started
       icon: get-started
+      slug: get-started-with-neon/signing-up
       items:
         - section: Tutorial
           items:
@@ -26,48 +27,68 @@
             - title: 4 - Getting ready for production
               slug: get-started-with-neon/production-checklist
               enableTableOfContents: true
-            - title: Language quickstarts
-              slug: get-started-with-neon/languages
-              items:
-                - title: Elixir
-                  slug: guides/elixir-ecto
-                - title: Go
-                  slug: guides/go
-                  ariaLabel: Connect a Go application to Neon
-                - title: Java
-                  slug: guides/java
-                - title: Javascript
-                  slug: guides/javascript
-                - title: Python
-                  items:
-                    - title: Psycopg
-                      slug: guides/python
-                - title: Rust
-                  slug: guides/rust
-            - title: Neon roadmap
-              slug: introduction/roadmap
-        - section: Import data
-          slug: import/import-intro
+        - section: Language quickstarts
           items:
-            - title: Import from Postgres with pg_dump and pg_restore
-              slug: import/import-from-postgres
-            - title: Import from Postgres with pg-import
-              slug: import/import-from-postgres-pg-import
-            - title: Import from a Neon project
-              slug: import/import-from-neon
-            - title: Import from CSV
-              slug: import/import-from-csv
-            - title: Import from Heroku
-              slug: import/import-from-heroku
-            - title: Migrate data with AWS DMS
-              slug: import/migrate-aws-dms
-            - title: Migrate from MySQL to Postgres
-              slug: import/migrate-mysql
-            - title: Sample data
-              slug: import/import-sample-data
+            - title: Quick list
+              slug: get-started-with-neon/languages
+            - title: Elixir
+              slug: guides/elixir-ecto
+            - title: Go
+              slug: guides/go
+              ariaLabel: Connect a Go application to Neon
+            - title: Java
+              slug: guides/java
+            - title: Javascript
+              slug: guides/javascript
+            - title: Python
+              items:
+                - title: Psycopg
+                  slug: guides/python
+            - title: Rust
+              slug: guides/rust
+        - section: Framework quickstarts
+          items: 
+            - title: Quick list
+              slug: get-started-with-neon/frameworks
+            - title: Astro
+              slug: guides/astro
+            - title: Django
+              slug: guides/django
+            - title: Express
+              slug: guides/express
+            - title: Laravel
+              slug: guides/laravel
+            - title: NestJS
+              slug: guides/nestjs
+              tag: new
+            - title: Next.js
+              slug: guides/nextjs
+            - title: Node.js
+              slug: guides/node
+            - title: Quarkus (JDBC)
+              slug: guides/quarkus-jdbc
+            - title: Quarkus (Reactive)
+              slug: guides/quarkus-reactive
+            - title: React
+              slug: guides/react
+              tag: new
+            - title: Reflex
+              slug: guides/reflex
+              tag: new
+            - title: Remix
+              slug: guides/remix
+            - title: Ruby on Rails
+              slug: guides/ruby-on-rails
+            - title: SolidStart
+              slug: guides/solid-start
+              tag: new
+            - title: SQLAlchemy
+              slug: guides/sqlalchemy
+            - title: Symfony
+              slug: guides/symfony
     - title: Connect
       slug: connect/connect-intro
-      icon: connect
+      icon: integrations
       items:
         - title: Neon SQL Editor
           slug: get-started-with-neon/query-with-neon-sql-editor
@@ -95,6 +116,7 @@
   items:
     - title: Architecture
       icon: architecture
+      slug: introduction/architecture-overview
       items:
         - title: Overview
           slug: introduction/architecture-overview
@@ -104,72 +126,91 @@
       slug: guides/neon-features
       icon: features
       items:
-      - title: Autoscaling
-        slug: introduction/autoscaling
-        items:
-          - title: Autoscaling guide
-            slug: guides/autoscaling-guide
-      - title: Autosuspend
-        slug: introduction/auto-suspend
-        items:
-          - title: Autosuspend guide
-            slug: guides/auto-suspend-guide
-      - title: Branching
-        slug: guides/branching-intro
-        items:
-          - title: About branching
-            slug: introduction/branching
-          - title: Branch reset and restore
-            slug: introduction/point-in-time-restore
-            items:
-              - title: Reset from parent
-                slug: guides/reset-from-parent
-              - title: Branch Restore
-                slug: guides/branch-restore
-          - title: Branching with the CLI
-            slug: guides/branching-neon-cli
-          - title: Branching with the API
-            slug: guides/branching-neon-api
-          - title: Branching with GitHub Actions
-            slug: guides/branching-github-actions
-          - title: Branching — Testing queries
-            slug: guides/branching-test-queries
-          - title: Promote a branch with the Neon API
-            slug: guides/branch-promote
-      - title: Logical replication
-        slug: introduction/logical-replication
-        items:
-          - title: Concepts
-            slug: guides/logical-replication-concepts
-          - title: Manage
-            slug: guides/logical-replication-neon
-      - title: Read replicas
-        slug: introduction/read-replicas
-        items:
-          - title: Working with read replicas
-            slug: guides/read-replica-guide
-          - title: Data analysis and reporting
-            slug: guides/read-replica-data-analysis
-          - title: Use read replicas with Prisma
-            slug: guides/read-replica-prisma
-      - title: Time Travel
-        slug: guides/time-travel-assist
-        items:
-          - title: Time Travel tutorial
-            slug: guides/time-travel-tutorial
-      - title: Schema diff
-        slug: guides/schema-diff
-        items:
-          - title: Schema diff tutorial
-            slug: guides/schema-diff-tutorial
-      - title: IP Allow
-        slug: introduction/ip-allow
-      - title: Protected branches
-        slug: guides/protected-branches
-    - title: Management
+        - title: Autoscaling
+          slug: introduction/autoscaling
+          items:
+            - title: Autoscaling guide
+              slug: guides/autoscaling-guide
+        - title: Autosuspend
+          slug: introduction/auto-suspend
+          items:
+            - title: Autosuspend guide
+              slug: guides/auto-suspend-guide
+        - title: Branching
+          slug: guides/branching-intro
+          items:
+            - title: About branching
+              slug: introduction/branching
+            - title: Branch reset and restore
+              slug: introduction/point-in-time-restore
+              items:
+                - title: Reset from parent
+                  slug: guides/reset-from-parent
+                - title: Branch Restore
+                  slug: guides/branch-restore
+            - title: Branching with the CLI
+              slug: guides/branching-neon-cli
+            - title: Branching with the API
+              slug: guides/branching-neon-api
+            - title: Branching with GitHub Actions
+              slug: guides/branching-github-actions
+            - title: Branching — Testing queries
+              slug: guides/branching-test-queries
+            - title: Promote a branch with the Neon API
+              slug: guides/branch-promote
+        - title: Import data
+          slug: import/import-intro
+          items:
+            - title: Import from Postgres with pg_dump and pg_restore
+              slug: import/import-from-postgres
+            - title: Import from Postgres with pg-import
+              slug: import/import-from-postgres-pg-import
+            - title: Import from a Neon project
+              slug: import/import-from-neon
+            - title: Import from CSV
+              slug: import/import-from-csv
+            - title: Import from Heroku
+              slug: import/import-from-heroku
+            - title: Migrate data with AWS DMS
+              slug: import/migrate-aws-dms
+            - title: Migrate from MySQL to Postgres
+              slug: import/migrate-mysql
+            - title: Sample data
+              slug: import/import-sample-data
+        - title: Logical replication
+          slug: introduction/logical-replication
+          items:
+            - title: Concepts
+              slug: guides/logical-replication-concepts
+            - title: Manage
+              slug: guides/logical-replication-neon
+        - title: Read replicas
+          slug: introduction/read-replicas
+          items:
+            - title: Working with read replicas
+              slug: guides/read-replica-guide
+            - title: Data analysis and reporting
+              slug: guides/read-replica-data-analysis
+            - title: Use read replicas with Prisma
+              slug: guides/read-replica-prisma
+        - title: Time Travel
+          slug: guides/time-travel-assist
+          items:
+            - title: Time Travel tutorial
+              slug: guides/time-travel-tutorial
+        - title: Schema diff
+          slug: guides/schema-diff
+          items:
+            - title: Schema diff tutorial
+              slug: guides/schema-diff-tutorial
+        - title: IP Allow
+          slug: introduction/ip-allow
+        - title: Protected branches
+          slug: guides/protected-branches
+    - title: Platform
       icon: management
       items:
-        - title: Access control
+        - section: Access control
           items:
             - title: E-mail signup
               slug: manage/email-signup
@@ -183,7 +224,7 @@
               slug: manage/database-access
             - title: API keys
               slug: manage/api-keys
-        - title: Project management
+        - section: Projects
           items:
             - title: Object hierarchy
               slug: manage/overview
@@ -201,7 +242,7 @@
               slug: guides/tables
             - title: Integrations
               slug: manage/integrations
-        - title: Monitoring
+        - section: Monitoring
           slug: introduction/monitoring
           items:
             - title: Monitoring dashboard
@@ -210,7 +251,7 @@
               slug: manage/operations
             - title: External tools
               slug: introduction/monitor-external-tools
-        - title: Security
+        - section: Security
           items:
             - title: Overview
               slug: security/security-overview
@@ -220,8 +261,10 @@
               slug: security/soc2-compliance
             - title: Acceptable Use Policy
               slug: security/acceptable-use-policy
-        - title: Backups
-          slug: manage/backups
+        - section:
+          items:
+            - title: Backups
+              slug: manage/backups
     - title: Regions
       slug: introduction/regions
       icon: regions
@@ -265,6 +308,7 @@
     - title: Frameworks
       slug: get-started-with-neon/frameworks
       icon: frameworks
+      enableTableOfContents: true
       items:
         - title: Astro
           slug: guides/astro
@@ -306,7 +350,7 @@
       icon: integrations
       slug: guides/integrations
       items:
-        - title: Deploy
+        - section: Deploy
           items:
             - title: Vercel
               items:
@@ -336,13 +380,13 @@
               slug: guides/railway
             - title: Render
               slug: guides/render
-        - title: Serverless
+        - section: Serverless
           items:
             - title: Neon serverless driver
               slug: serverless/serverless-driver
             - title: AWS Lambda
               slug: guides/aws-lambda
-        - title: Query
+        - section: Query
           items:
             - title: Exograph
               slug: guides/exograph
@@ -362,7 +406,7 @@
               slug: guides/stepzen
             - title: WunderGraph
               slug: guides/wundergraph
-        - title: Develop
+        - section: Develop
           items:
             - title: GitHub integration
               slug: guides/neon-github-integration
@@ -380,7 +424,7 @@
             - title: Knex
               slug: guides/knex
               tag: new
-        - title: Replicate
+        - section: Replicate
           items:
             - title: Airbyte
               slug: guides/logical-replication-airbyte
@@ -402,7 +446,7 @@
               slug: guides/sequin
             - title: Snowflake
               slug: guides/logical-replication-airbyte-snowflake
-        - title: Schema Migration
+        - section: Schema Migration
           items:
             - title: Django
               slug: guides/django-migrations
@@ -432,7 +476,7 @@
               slug: guides/sequelize
             - title: SQLAlchemy
               slug: guides/sqlalchemy-migrations
-        - title: Authentication
+        - section: Authentication
           items:
             - title: Auth0
               slug: guides/auth-auth0
@@ -681,7 +725,7 @@
           slug: reference/compatibility
 - section: Resources
   items:
-    - title: Partner Guide
+    - title: Partner guide
       slug: guides/partner-intro
       icon: partner-guide
       items:
@@ -694,9 +738,15 @@
     - title: Glossary
       slug: reference/glossary
       icon: glossary
-      items: 
+      items:
         - title: Neon Glossary
           slug: reference/glossary
+    - title: Neon roadmap
+      icon: docs
+      slug: introduction/roadmap
+      items:
+        - title: Neon roadmap
+          slug: introduction/roadmap
 - section: noname
   items:
     - title: Community
@@ -704,10 +754,7 @@
       icon: community
       items:
         - title: Docs Contribution Guide
-          slug: community/contribution-guide
+          slug: community/contribution-guide 
     - title: Changelog
       slug: changelog
       icon: changelog
-      items: 
-        - title: Neon Changelog
-          slug: changelog
