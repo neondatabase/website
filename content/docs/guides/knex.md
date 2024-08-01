@@ -66,10 +66,10 @@ You may be able to achieve better performance with Knex by replacing any paramet
 function replaceQueryParams(query, values) {
   let replacedQuery = query;
   values.forEach((tmpParameter) => {
-    if (typeof tmpParameter === "string") {
-      replacedQuery = replacedQuery.replace("?", `'${tmpParameter}'`);
+    if (typeof tmpParameter === 'string') {
+      replacedQuery = replacedQuery.replace('?', `'${tmpParameter}'`);
     } else {
-      replacedQuery = replacedQuery.replace("?", tmpParameter);
+      replacedQuery = replacedQuery.replace('?', tmpParameter);
     }
   });
   return replacedQuery;
