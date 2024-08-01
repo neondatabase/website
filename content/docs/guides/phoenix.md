@@ -72,7 +72,6 @@ When prompted to, choose to not install the dependencies.
       socket_options: maybe_ipv6
    ```
 
-
 4. Update`config/test.exs` file's configuration with your Neon database connection details. Use the connection details from the Neon connection string you copied in the first part of the guide.
 
    ```elixir {2,3,4,8}
