@@ -119,7 +119,7 @@ Per deployment, a secret key is required for encrypting and signing data. Run th
 mix phx.gen.secret
 ```
 
-When you run the following command, you can expect to see the following on [localhost:4001](localhost:4001):
+When you run the following command, you can expect to see the Phoenix application on [localhost:4001](localhost:4001):
 
 ```bash shouldWrap
 PORT=4001 \
