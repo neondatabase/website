@@ -9,7 +9,6 @@ Knex is an open-source SQL query builder for Postgres. This guide covers the fol
 
 - [Connect to Neon from Knex](#connect-to-neon-from-knex)
 - [Use connection pooling with Knex](#use-connection-pooling-with-knex)
-- [Connection timeouts](#connection-timeouts)
 
 ## Connect to Neon from Knex
 
