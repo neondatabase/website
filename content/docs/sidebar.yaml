@@ -88,7 +88,7 @@
               slug: guides/symfony
     - title: Connect
       slug: connect/connect-intro
-      icon: integrations
+      icon: connect
       items:
         - title: Neon SQL Editor
           slug: get-started-with-neon/query-with-neon-sql-editor
