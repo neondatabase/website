@@ -51,7 +51,7 @@ A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells N
 
 ## Performance tips
 
-This section outlines performance optimizations you can try when using Knex with Neon. 
+This section outlines performance optimizations you can try when using Knex with Neon.
 
 ### Enabling NODE_PG_FORCE_NATIVE
 
@@ -90,7 +90,7 @@ You can try this optimization yourself by downloading our [Get started with Knex
 
 <Admonition type="note">
 This optimization is not compatible with the [NODE_PG_FORCE_NATIVE optimization](#enabling-node_pg_force_native) described above. If you've enabled that variable, remove or disable it first.
-</Admonition> 
+</Admonition>
 
 ## Examples
 
