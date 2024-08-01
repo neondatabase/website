@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2024-07-01T10:49:07.567Z'
+updatedOn: '2024-07-31T20:11:09.713Z'
 ---
 
 Neon's Community, Standard, Priority, and Enterprise support plans are outlined below. Support plans are mapped to Neon's pricing plans. See [Upgrading your support plan](#upgrading-your-support-plan).
@@ -14,6 +14,10 @@ Neon's Community, Standard, Priority, and Enterprise support plans are outlined 
 | Video chat                      |     -     |    -     | &check;  |  &check;   |
 | Dedicated Customer Success Team |     -     |    -     |          |  &check;   |
 | SLAs                            |     -     |    -     |          |  &check;   |
+
+<Admonition type="important">
+The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is available to all Neon users but is not an official Neon Support channel. If you are a paid plan user and require assistance from the Neon Support team, please open a support ticket, as described in [Standard support](#standard-support).
+</Admonition>
 
 ## Community support
 

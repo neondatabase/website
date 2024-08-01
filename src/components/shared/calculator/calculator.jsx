@@ -9,7 +9,7 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 const instancePrices = {
   prod: 2.25,
-  staging: 1.125,
+  // staging: 1.125,
   testing: 0.0376,
   dev: 0.016,
 };
@@ -72,11 +72,11 @@ const inputParamsBlock = [
         title: 'How many hrs/day are dev databases&nbsp;running?',
         values: [1, 2, 3, 5, 8],
       },
-      {
-        name: 'staging_databases_daily_hrs',
-        title: 'How many hrs/day is staging running?',
-        values: [2, 5, 8],
-      },
+      // {
+      //   name: 'staging_databases_daily_hrs',
+      //   title: 'How many hrs/day is staging running?',
+      //   values: [2, 5, 8],
+      // },
       {
         name: 'peak_traffic_hrs',
         title: 'How many hrs/ day do you hit&nbsp;peak&nbsp;traffic?',
@@ -111,7 +111,7 @@ const Calculator = () => {
     dev_databases_num: 10,
     test_databases_daily_hrs: 1,
     dev_databases_daily_hrs: 1,
-    staging_databases_daily_hrs: 2,
+    // staging_databases_daily_hrs: 2,
     peak_traffic_hrs: 0.5,
   });
 
@@ -122,7 +122,7 @@ const Calculator = () => {
   const instanceCost = useMemo(
     () => ({
       production: instancePrices.prod * 730,
-      staging: instancePrices.staging * 730,
+      // staging: instancePrices.staging * 730,
       testing: instancePrices.testing * 730 * inputParams.test_databases_num,
       development: instancePrices.dev * 730 * inputParams.dev_databases_num,
     }),
