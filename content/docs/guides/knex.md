@@ -63,7 +63,7 @@ This optimization cannot be used in combination with the [Replacing query parame
 
 ### Replacing query parameters
 
-You may be able to acheive better performance with Knex by replacing any parameters you've defined in your queries, as performed by the following function, for example:
+You may be able to achieve better performance with Knex by replacing any parameters you've defined in your queries, as performed by the following function, for example:
 
 ```sql
 // Function to replace query parameters in a query
