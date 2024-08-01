@@ -113,10 +113,10 @@ const articlesWithImages = (articles) =>
   });
 
 const titles = [
-  'Variable resources for variable&nbsp;load',
-  'Maximize efficiency and cut costs with Serverless Postgres',
-  'How much budget are you wasting on&nbsp;unused compute?',
-  'What makes Neon unique vs&nbsp;others?',
+  'Variable traffic, fixed costs?',
+  'Pay only for what you use with Neon',
+  'How much money are you wasting on&nbsp;unused compute?',
+  'Why Neon vs Aurora Serverless',
 ];
 
 const VariableLoadPage = async () => {
