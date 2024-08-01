@@ -3,8 +3,7 @@ const sharedMdxComponents = {
   NeedHelp: 'shared-content/need-help',
   NewPricing: 'shared-content/NewPricing',
   LRNotice: 'shared-content/lr-notice',
-  ComingSoon: 'shared-content/coming-soon',
-  PgHint: 'shared-content/pg-hint'
+  ComingSoon: 'shared-content/coming-soon'
 };
 
 module.exports = sharedMdxComponents;
