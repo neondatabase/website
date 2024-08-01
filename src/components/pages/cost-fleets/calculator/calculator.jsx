@@ -197,14 +197,14 @@ const Calculator = () => {
         <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:text-lg">
           Monthly cost: AWS RDS vs Neon
         </h3>
-        <div className="flex justify-between sm:flex-col sm:gap-6">
+        <div className="flex justify-between pr-8 sm:flex-col sm:gap-6">
           {totalsBlock.map(({ name, title, valueClassName }) => (
-            <div key={title} className="min-w-[239px]">
+            <div key={title}>
               <p className="mb-2.5 leading-dense tracking-extra-tight lg:mb-2">{title}</p>
               <div className="flex items-end gap-1.5">
                 <span
                   className={clsx(
-                    'bg-clip-text pr-1 font-title text-6xl font-medium leading-none tracking-tighter text-transparent xl:text-[56px] lg:pr-0.5 lg:text-5xl sm:text-4xl',
+                    'bg-clip-text font-title text-6xl font-medium leading-none tracking-extra-tight text-transparent xl:text-[56px] lg:pr-0.5 lg:text-5xl sm:text-4xl',
                     valueClassName
                   )}
                 >
