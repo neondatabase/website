@@ -52,4 +52,12 @@ DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2
 
 A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connection Details** widget on the Neon **Dashboard**. Use the **Pooled connection** checkbox to add the `-pooler` suffix.
 
+## Examples
+
+<DetailIconCards>
+
+<a href="https://github.com/neondatabase/examples/tree/main/with-knex" description="Get started with Knex and Neon" icon="github">Get started with Knex and Neon</a>
+
+</DetailIconCards>
+
 <NeedHelp/>
