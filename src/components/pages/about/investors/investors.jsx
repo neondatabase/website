@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import ajeetSingh from 'images/pages/about/investors/ajeet-singh.jpg';
+import andyPavlo from 'images/pages/about/investors/andy-pavlo.jpg';
 import databricks from 'images/pages/about/investors/databricks.svg';
 import eladGil from 'images/pages/about/investors/elad-gil.jpg';
 import foundersFund from 'images/pages/about/investors/founders-fund.svg';
@@ -14,6 +15,7 @@ import menloVentures from 'images/pages/about/investors/menlo-ventures.svg';
 import mikeOvitz from 'images/pages/about/investors/mike-ovitz.jpg';
 import natFriedman from 'images/pages/about/investors/nat-friedman.jpg';
 import notable from 'images/pages/about/investors/notable.svg';
+import ramtinNaimi from 'images/pages/about/investors/ramtin-naimi.jpg';
 import snowflake from 'images/pages/about/investors/snowflake.svg';
 import sorenBrammerSchmidt from 'images/pages/about/investors/soren-brammer-schmidt.jpg';
 import wesMcKinney from 'images/pages/about/investors/wes-mckinney.jpg';
@@ -103,6 +105,18 @@ const investors = {
       name: 'Søren Brammer Schmidt',
       role: 'CEO at',
       company: 'Prisma',
+    },
+    {
+      image: ramtinNaimi,
+      name: 'Ramtin Naimi',
+      role: 'Founder at',
+      company: 'Abstract',
+    },
+    {
+      image: andyPavlo,
+      name: 'Andy Pavlo',
+      role: 'Professor at',
+      company: 'CMU',
     },
   ],
 };
