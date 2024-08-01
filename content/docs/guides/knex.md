@@ -57,10 +57,6 @@ This section outlines performance optimizations you can try when using Knex with
 
 Knex leverages a [node-postgres](https://node-postgres.com) Pool instance to connect to your Postgres database. Installing [pg-native](https://npmjs.com/package/pg-native) and setting the `NODE_PG_FORCE_NATIVE` environment variable to `true` [switches the `pg` driver to `pg-native`](https://github.com/brianc/node-postgres/blob/master/packages/pg/lib/index.js#L31-L34), which can produce noticeably faster response times according to some users.
 
-<Admonition type="note">
-This optimization cannot be used in combination with the [Replacing query parameters](#replacing-query-parameters) optimization.
-</Admonition>
-
 ### Replacing query parameters
 
 You may be able to achieve better performance with Knex by replacing any parameters you've defined in your queries, as performed by the following function, for example:
@@ -87,10 +83,6 @@ await client.raw(replaceQueryParams(text, values));
 ```
 
 You can try this optimization yourself by downloading our [Get started with Knex example](#examples) and running `npm run test`.
-
-<Admonition type="note">
-This optimization is not compatible with the [NODE_PG_FORCE_NATIVE optimization](#enabling-node_pg_force_native) described above. If you've enabled that variable, remove or disable it first.
-</Admonition>
 
 ## Examples
 
