@@ -9,6 +9,7 @@ Knex is an open-source SQL query builder for Postgres. This guide covers the fol
 
 - [Connect to Neon from Knex](#connect-to-neon-from-knex)
 - [Use connection pooling with Knex](#use-connection-pooling-with-knex)
+- [Performance tips](#performance-tips)
 
 ## Connect to Neon from Knex
 
@@ -29,10 +30,6 @@ To establish a basic connection from Knex to Neon, perform the following steps:
    });
    ```
 
-   <Admonition type="tip">
-   Knex leverages a [node-postgres](https://node-postgres.com) Pool instance to connect to your Postgres database. Installing [pg-native](https://npmjs.com/package/pg-native) and setting the `NODE_PG_FORCE_NATIVE` environment variable to `true` [switches the `pg` driver to `pg-native`](https://github.com/brianc/node-postgres/blob/master/packages/pg/lib/index.js#L31-L34), which, according to some users, produces noticeably faster response times.
-   </Admonition>
-
 3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
 
    Your setting will appear similar to the following:
@@ -51,5 +48,48 @@ DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2
 ```
 
 A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connection Details** widget on the Neon **Dashboard**. Use the **Pooled connection** checkbox to add the `-pooler` suffix.
+
+## Performance tips
+
+This section outlines performance optimizations you can try when using Knex with Neon. 
+
+### Enabling NODE_PG_FORCE_NATIVE
+
+Knex leverages a [node-postgres](https://node-postgres.com) Pool instance to connect to your Postgres database. Installing [pg-native](https://npmjs.com/package/pg-native) and setting the `NODE_PG_FORCE_NATIVE` environment variable to `true` [switches the `pg` driver to `pg-native`](https://github.com/brianc/node-postgres/blob/master/packages/pg/lib/index.js#L31-L34), which can produce noticeably faster response times according to some users.
+
+<Admonition type="note">
+This optimization cannot be used in combination with the [Replacing query parameters](#replacing-query-parameters) optimization.
+</Admonition>
+
+### Replacing query parameters
+
+You may be able to acheive better performance with Knex by replacing any parameters you've defined in your queries, as performed by the following function, for example:
+
+```sql
+// Function to replace query parameters in a query
+function replaceQueryParams(query, values) {
+  let replacedQuery = query;
+  values.forEach((tmpParameter) => {
+    if (typeof tmpParameter === "string") {
+      replacedQuery = replacedQuery.replace("?", `'${tmpParameter}'`);
+    } else {
+      replacedQuery = replacedQuery.replace("?", tmpParameter);
+    }
+  });
+  return replacedQuery;
+}
+
+// So instead of this
+await client.raw(text, values);
+
+// Do this to get better performance
+await client.raw(replaceQueryParams(text, values));
+```
+
+You can try this optimization yourself by downloading this Knex example and running `npm run test`: https://github.com/neondatabase/examples/tree/main/with-knex. 
+
+<Admonition type="note">
+This optimization is not compatible with the [NODE_PG_FORCE_NATIVE optimization](#enabling-node_pg_force_native) described above. If you've enabled that variable, remove or disable it first.
+</Admonition> 
 
 <NeedHelp/>
