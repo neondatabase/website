@@ -29,7 +29,7 @@ const NeonDocsLayout = async ({ children }) => {
 
         <div className="-ml-[350px] w-full 3xl:ml-0">
           <Container
-            className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 2xl:block xl:gap-x-7 lg:pt-4"
+            className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:block lg:pt-4"
             size="1408"
           >
             {children}
