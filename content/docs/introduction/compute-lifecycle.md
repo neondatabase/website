@@ -8,11 +8,11 @@ updatedOn: '2024-07-25T12:53:42.430Z'
 
 A compute in Neon is a stateless Postgres process due to the separation of storage and compute. It has two main states: `Idle` and `Active`.
 
-An `Idle` compute is one that has been suspended by Neon's _Autosuspend_ feature due to inactivity. An `Active` compute is one that has been activated by a connection, and it means that Postgres is currently running.
+Generally, an `Idle` compute has been suspended by Neon's Autosuspend feature due to inactivity, while an `Active` compute has been activated by a connection, indicating that Postgres is currently running.
 
 ## Autosuspend
 
-If there are no active queries for 5 minutes, which is the default autosuspend setting in Neon, your compute is automatically placed into an `Idle` state to save on energy and resources. Users on paid plans can disable this autosuspension behavior so that a compute always remains active, or they can increase or decrease the amount of time after which a compute is placed into an `Idle` state. Autosuspension behavior is controlled by your compute's **Autosuspend** setting. 
+If there are no active queries for 5 minutes, which is the default autosuspend setting in Neon, your compute is automatically placed into an `Idle` state. Users on paid plans can disable this autosuspension behavior so that a compute always remains active, or they can increase or decrease the amount of time after which a compute is placed into an `Idle` state. Autosuspension behavior is controlled by your compute's **Autosuspend** setting. 
 
 ![Autosuspend configuration dialog](/docs/introduction/autosuspend_config.png)
 
@@ -26,11 +26,11 @@ Neon's _Autosuspend_ feature is conservative. It treats an "idle-in-transaction"
 
 When you connect to an idle compute, Neon automatically activates it. Activation generally takes a few hundred milliseconds. 
 
-Considering this activation time, your first connection may have a slightly higher latency than subsequent connections, which would be connecting to an already-active compute. Also, Postgres memory buffers are cold after a compute wakes up from the `Idle` state, which means that initial queries may take longer until the memory buffers are warmed.
+Considering this activation time, your first connection may have a slightly higher latency than subsequent connections to an already-active compute. Also, Postgres memory buffers are cold after a compute wakes up from the `Idle` state, which means that initial queries may take longer until the memory buffers are warmed.
 
-After a period of time in the `Idle` state, Neon occasionally activates your compute to check for data availability. The time between checks gradually increases if the compute does not receive any client connections over an extended period of time.
+After a period of time in the `Idle` state, Neon occasionally activates your compute to check for data availability. The time between checks gradually increases if the compute does not receive any client connections over an extended period.
 
-You can check if a compute is `Active` or `Idle` and watch as a compute transitions from one state to another in the **Branches** widget on the Neon **Dashboard** or on the **Branches** page.
+In the **Branches** widget on your **Project Dashboard**, you can check if a compute is active or idle and watch as it transitions from one state to another.
 
 ![Compute state](/docs/introduction/compute_state.png)
 
