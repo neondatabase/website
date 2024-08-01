@@ -468,6 +468,8 @@
           slug: extensions/postgis-related-extensions
         - title: timescaledb
           slug: extensions/timescaledb
+        - title: wal2json
+          slug: extensions/wal2json
     - title: Functions
       slug: functions/introduction
       items:
