@@ -86,10 +86,18 @@ await client.raw(text, values);
 await client.raw(replaceQueryParams(text, values));
 ```
 
-You can try this optimization yourself by downloading this Knex example and running `npm run test`: https://github.com/neondatabase/examples/tree/main/with-knex. 
+You can try this optimization yourself by downloading our [Get started with Knex example](#examples) and running `npm run test`.
 
 <Admonition type="note">
 This optimization is not compatible with the [NODE_PG_FORCE_NATIVE optimization](#enabling-node_pg_force_native) described above. If you've enabled that variable, remove or disable it first.
 </Admonition> 
+
+## Examples
+
+<DetailIconCards>
+
+<a href="https://github.com/neondatabase/examples/tree/main/with-knex" description="Get started with Knex and Neon" icon="github">Get started with Knex and Neon</a>
+
+</DetailIconCards>
 
 <NeedHelp/>
