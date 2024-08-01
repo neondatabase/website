@@ -8,6 +8,7 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 import LINKS from 'constants/links';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 import ChevronBackIcon from 'icons/docs/sidebar/chevron-back.inline.svg';
+import HomeIcon from 'icons/docs/sidebar/home.inline.svg';
 
 import Icon from './icon';
 import Item from './item';
@@ -105,6 +106,11 @@ const Menu = ({
   const BackLinkTag = parentMenu?.slug ? Link : 'button';
   const LinkTag = slug ? Link : 'div';
 
+  const backLinkPath = basePath === DOCS_BASE_PATH ? '/' : LINKS.docs;
+  const docsHomePath = LINKS.docsHome;
+  const postgresHomePath = LINKS.postgres;
+  const homePath = basePath === DOCS_BASE_PATH ? docsHomePath : postgresHomePath;
+
   // update menu height and scroll menu to top
   useEffect(() => {
     let timeout;
@@ -158,7 +164,7 @@ const Menu = ({
             ref={menuRef}
           >
             {!isRootMenu && parentMenu && (
-              <div className="mb-2.5 border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
+              <div className="border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
                 <BackLinkTag
                   className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
                   type={parentMenu.slug ? undefined : 'button'}
@@ -177,7 +183,7 @@ const Menu = ({
                 </LinkTag>
               </div>
             )}
-            <ul className="w-full">
+            <ul className={clsx('w-full', !isRootMenu && 'py-2.5')}>
               {items.map((item, index) =>
                 item.section ? (
                   <Section
@@ -221,20 +227,28 @@ const Menu = ({
                 )
               )}
             </ul>
-            {isRootMenu && (
-              <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
-                <Link
-                  className={clsx(
-                    'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
-                    'text-gray-new-60 hover:text-black-new dark:hover:text-white'
-                  )}
-                  to={basePath === DOCS_BASE_PATH ? '/' : LINKS.docs}
-                >
-                  <ArrowBackIcon className="size-4.5" />
-                  Back to {basePath === DOCS_BASE_PATH ? 'site' : 'docs'}
-                </Link>
-              </div>
-            )}
+            <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
+              <Link
+                className={clsx(
+                  'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
+                  'text-gray-new-60 hover:text-black-new dark:hover:text-white'
+                )}
+                to={isRootMenu ? backLinkPath : homePath}
+                onClick={handleClose}
+              >
+                {isRootMenu ? (
+                  <>
+                    <ArrowBackIcon className="size-4.5" />
+                    Back to {basePath === DOCS_BASE_PATH ? 'site' : 'docs'}
+                  </>
+                ) : (
+                  <>
+                    <HomeIcon className="size-4.5" />
+                    Home
+                  </>
+                )}
+              </Link>
+            </div>
           </m.div>
         )}
       </AnimatePresence>
