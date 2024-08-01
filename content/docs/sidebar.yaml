@@ -37,6 +37,9 @@
           slug: guides/nextjs
         - title: Node.js
           slug: guides/node
+        - title: Phoenix
+          slug: guides/phoenix
+          tag: new
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
