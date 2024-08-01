@@ -21,7 +21,7 @@ To establish a basic connection from Knex to Neon, perform the following steps:
 
 2. Update the Knex's initialization in your application to the following:
 
-   ```typescript {2,3,4}
+   ```typescript {2-5}
    export const client = knex({
      client: 'pg',
      connection: {
@@ -30,7 +30,7 @@ To establish a basic connection from Knex to Neon, perform the following steps:
    });
    ```
 
-<PgHint />
+<PgHint name="Knex" />
 
 3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
 
