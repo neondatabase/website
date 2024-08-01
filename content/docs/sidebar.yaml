@@ -377,6 +377,8 @@
               slug: guides/prisma
             - title: TypeORM
               slug: guides/typeorm
+            - title: Knex
+              slug: guides/knex
               tag: new
         - title: Replicate
           items:

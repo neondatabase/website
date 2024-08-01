@@ -8,7 +8,7 @@ import Load from 'components/pages/variable/load';
 import RelevantArticles from 'components/pages/variable/relevant-articles';
 import Unique from 'components/pages/variable/unique';
 import Container from 'components/shared/container';
-import Cta from 'components/shared/get-started';
+import Cta from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import TableOfContents from 'components/shared/table-of-contents';
 import LINKS from 'constants/links';
@@ -165,13 +165,12 @@ const VariableLoadPage = async () => {
 
         <RelevantArticles articles={allArticles} />
         <Cta
+          className="pb-[290px] pt-[285px] xl:py-[230px] lg:pb-[156px] lg:pt-[179px] sm:pb-[110px] sm:pt-[116px]"
           title="Try it yourself"
           description="You can experiment with autoscaling for free during 14 days"
-          button={{
-            title: 'Request a Scale trial',
-            url: LINKS.scaleTrial,
-          }}
-          size="sm"
+          buttonClassName="mt-9 h-12 w-[201px] lg:mt-7 lg:h-11 lg:w-[186px] lg:text-sm md:mt-4.5 md:h-10 md:w-[183px]"
+          buttonText="Request a Scale trial"
+          buttonUrl={LINKS.scaleTrial}
         />
       </div>
     </Layout>

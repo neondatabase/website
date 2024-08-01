@@ -14,19 +14,9 @@ import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import ArrowIcon from 'icons/header/arrow-right.inline.svg';
+import { getGithubStars } from 'utils/get-github-data';
 
 import HeaderWrapper from './header-wrapper';
-
-const API_URL = 'https://api.github.com/repos/neondatabase/neon';
-
-const getGithubStars = async () => {
-  const response = await fetch(API_URL, { next: { revalidate: 60 * 60 * 12 } });
-  const json = await response.json();
-  if (response.status >= 400) {
-    throw new Error('Error fetching GitHub stars');
-  }
-  return json.stargazers_count;
-};
 
 const themePropTypes = {
   isDarkTheme: PropTypes.bool,
