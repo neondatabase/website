@@ -12,7 +12,7 @@ Generally, an `Idle` compute has been suspended by Neon's Autosuspend feature du
 
 ## Autosuspend
 
-If there are no active queries for 5 minutes, which is the default autosuspend setting in Neon, your compute is automatically placed into an `Idle` state. If you are on a paid plan, you can disable this autosuspension behavior so that a compute always remains active, or you can increase or decrease the amount of time after which a compute is placed into an `Idle` state. Autosuspension behavior is controlled by your compute's **Autosuspend** setting. 
+If there are no active queries for 5 minutes, which is the default autosuspend setting in Neon, your compute is automatically placed into an `Idle` state. If you are on a paid plan, you can disable this autosuspension behavior so that a compute always remains active, or you can increase or decrease the amount of time after which a compute is placed into an `Idle` state. Autosuspension behavior is controlled by your compute's **Autosuspend** setting.
 
 ![Autosuspend configuration dialog](/docs/introduction/autosuspend_config.png)
 
