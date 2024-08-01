@@ -348,6 +348,8 @@
           slug: guides/prisma
         - title: TypeORM
           slug: guides/typeorm
+        - title: Knex
+          slug: guides/knex
           tag: new
     - title: Replicate
       items:
@@ -466,8 +468,6 @@
           slug: extensions/postgis-related-extensions
         - title: timescaledb
           slug: extensions/timescaledb
-        - title: wal2json
-          slug: extensions/wal2json
     - title: Functions
       slug: functions/introduction
       items:
