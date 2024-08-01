@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Use Neon as your dev environment for AWS RDS: accelerate your workflow while reducing costs 
+      Use Neon as your dev environment for AWS RDS: accelerate your workflow while reducing costs
     </span>
     <ChevronIcon
       className={clsx(
