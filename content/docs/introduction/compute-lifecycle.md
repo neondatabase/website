@@ -20,11 +20,11 @@ For information about configuring this setting, see [Edit a compute](/docs/manag
 
 <Admonition type="note">
 Neon's _Autosuspend_ feature is conservative. It treats an "idle-in-transaction" connection as active to avoid breaking application logic that involves long-running transactions. Only the truly inactive connections are closed after the defined period of inactivity.
-</Admonition> 
+</Admonition>
 
 ## Compute activation
 
-When you connect to an idle compute, Neon automatically activates it. Activation generally takes a few hundred milliseconds. 
+When you connect to an idle compute, Neon automatically activates it. Activation generally takes a few hundred milliseconds.
 
 Considering this activation time, your first connection may have a slightly higher latency than subsequent connections to an already-active compute. Also, Postgres memory buffers are cold after a compute wakes up from the `Idle` state, which means that initial queries may take longer until the memory buffers are warmed.
 
