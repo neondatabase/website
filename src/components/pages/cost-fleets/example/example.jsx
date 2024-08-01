@@ -3,53 +3,31 @@ import Image from 'next/image';
 import BgDecor from '../bg-decor';
 import Calculator from '../calculator';
 
-
 import leftGlowMobile from './images/left-glow-mobile.png';
 import leftGlow from './images/left-glow.png';
 import rightGlowMobile from './images/right-glow-mobile.png';
 import rightGlow from './images/right-glow.png';
 
-const databases = [
-  {
-    type: '1 production database',
-    instance: 'db.r6g.8xlarge',
-    usage: 'Runs 24/7',
-  },
-  {
-    type: '1 staging database',
-    instance: 'db.r6g.4xlarge',
-    usage: 'Used interminently',
-  },
-  {
-    type: 'Dev database',
-    instance: '10 db.t4g.micro',
-    usage: 'Used interminently',
-  },
-  {
-    type: 'Test database ',
-    instance: 'db.t3.medium',
-    usage: 'Used interminently',
-  },
-];
-
 const Example = () => (
-  <div className="relative w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 sm:p-6">
+  <div className="relative mb-10 mt-11 w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 xl:mb-9 xl:mt-10 lg:mb-9 lg:mt-9 md:mb-6 md:mt-7 sm:p-6">
     <div className="relative z-10 pb-[18px]">
       <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:mb-4 sm:text-lg">
-        Example deployment in RDS
+        Use case description: dev platform
       </h3>
-      <ul className="space-y-2 text-lg tracking-extra-tight sm:text-sm sm:leading-snug">
-        {databases.map(({ type, instance, usage }) => (
-          <li key={type} className="flex items-center gap-2 sm:flex-col sm:items-start sm:gap-0">
-            <span>
-              <span className="font-medium text-gray-new-90">{type}</span>{' '}
-              <span className="text-gray-new-70">({instance})</span>
-            </span>
-            <span className="block size-[3px] rounded-full bg-gray-new-30 sm:hidden" aria-hidden />
-            <span className="text-gray-new-50">{usage}</span>
-          </li>
-        ))}
-      </ul>
+      <div className="space-y-4 tracking-extra-tight text-gray-new-70">
+        <p>
+          Pied Piper, a rapidly growing developer platform, is enhancing its user experience by soon
+          allowing end users to create Postgres databases directly within the platform.
+          Their&nbsp;goal is to provide every customer with their own isolated instance.
+        </p>
+        <p>
+          Pied Piper.&apos;s users fall into two categories:{' '}
+          <strong className="font-normal text-white">companies with Pro accounts</strong>, storing
+          an average of 20 GB, and{' '}
+          <strong className="font-normal text-white">hobbyists on the free tier</strong>, storing an
+          average of 0.5 GB.
+        </p>
+      </div>
     </div>
     <Calculator />
     <BgDecor hasBorder hasNoise hasPattern>

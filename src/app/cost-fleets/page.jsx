@@ -1,5 +1,5 @@
 import Hero from 'components/pages/cost-fleets/hero';
-import Cta from 'components/shared/get-started';
+import Cta from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
