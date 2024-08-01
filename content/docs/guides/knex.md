@@ -65,7 +65,7 @@ This optimization cannot be used in combination with the [Replacing query parame
 
 You may be able to achieve better performance with Knex by replacing any parameters you've defined in your queries, as performed by the following function, for example:
 
-```sql
+```tsx
 // Function to replace query parameters in a query
 function replaceQueryParams(query, values) {
   let replacedQuery = query;
