@@ -40,7 +40,7 @@ To establish a basic connection from Knex to Neon, perform the following steps:
    DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
    ```
 
-## Use connection pooling with TypeORM
+## Use connection pooling with Knex
 
 Serverless functions can require a large number of database connections as demand increases. If you use serverless functions in your application, we recommend that you use a pooled Neon connection string, as shown:
 
