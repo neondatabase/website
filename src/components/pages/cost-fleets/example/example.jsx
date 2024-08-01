@@ -3,8 +3,6 @@ import Image from 'next/image';
 import BgDecor from '../bg-decor';
 import Calculator from '../calculator';
 
-import leftGlowMobile from './images/left-glow-mobile.png';
-import leftGlow from './images/left-glow.png';
 import rightGlowMobile from './images/right-glow-mobile.png';
 import rightGlow from './images/right-glow.png';
 
@@ -43,20 +41,6 @@ const Example = () => (
         src={rightGlowMobile}
         width={320}
         height={536}
-        alt=""
-      />
-      <Image
-        className="absolute bottom-0 left-0 h-[339px] w-[389px] sm:hidden"
-        src={leftGlow}
-        width={389}
-        height={339}
-        alt=""
-      />
-      <Image
-        className="absolute bottom-0 left-0 hidden h-[273px] w-[320px] sm:block"
-        src={leftGlowMobile}
-        width={320}
-        height={273}
         alt=""
       />
     </BgDecor>
