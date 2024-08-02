@@ -223,9 +223,9 @@ Once you enable logical replication in Neon, the setting cannot be reverted. Ena
 In Neon, logical replication is enabled from the console, by following these steps:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Replication**.
-4. Click **Enable**.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Logical Replication**.
+4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query:
 
