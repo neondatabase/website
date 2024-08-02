@@ -39,8 +39,8 @@ const Example = () => (
       <Image
         className="absolute right-0 top-0 hidden h-[536px] w-[320px] sm:block"
         src={rightGlowMobile}
-        width={320}
-        height={536}
+        width={430}
+        height={650}
         alt=""
       />
     </BgDecor>
