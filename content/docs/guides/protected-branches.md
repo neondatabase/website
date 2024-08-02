@@ -53,7 +53,7 @@ This password reset behavior is designed to prevent the exposure of passwords th
 
 <Admonition type="important">
 Resetting a child branch from a protected parent branch currently restores Postgres role passwords on the child branch to those used on the protected parent branch. This issue will be addressed in an upcoming release. See [reset from parent](/docs/manage/branches#reset-a-branch-from-parent) to understand how Neon's branch reset feature works.
-</Admonition> 
+</Admonition>
 
 ## How to apply IP restrictions to protected branches
 

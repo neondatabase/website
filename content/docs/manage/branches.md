@@ -41,7 +41,7 @@ Neon's protected branches feature implements a series of protections:
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
 - Role passwords are automatically reset on child branches created from protected branches.
-- With additional configuration steps, you can apply IP restrictions to protected branches only. 
+- With additional configuration steps, you can apply IP restrictions to protected branches only.
 
 Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan, where you can designate up to 5 protected branches. See [Set a branch as protected](#set-a-branch-as-protected).
 
