@@ -45,7 +45,7 @@ To set a branch as protected:
 
    ![Branches page badge](/docs/guides/ip_allow_branch_badge_2.png)
 
-## New passwords generated for Postgres roles on child branches 
+## New passwords generated for Postgres roles on child branches
 
 When you create a branch in Neon, it includes all Postgres databases and roles from the parent branch. By default, Postgres roles on the child branch will have the same passwords as on the parent branch. However, this does not apply to protected branches. When you create a child branch from a protected branch, new passwords are generated for the Postgres roles on the child branch.
 
