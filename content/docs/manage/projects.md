@@ -241,7 +241,7 @@ neon ip-allow add 203.0.113.1 --protected-only
 To reverse that setting, use `--protected-only false`.
 
 ```bash
-neon ip-allow add 203.0.113.1 --proteceted-only false
+neon ip-allow add 203.0.113.1 --protected-only false
 ```
 
 </TabItem>
