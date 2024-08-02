@@ -27,6 +27,7 @@ Here's a snapshot of what we're working on now:
 - **Better deletes**: We're adding support for deleting obsolete branches, especially after [restore]() operations.
 
   If you have other branch management ideas, [let us know](#share-your-thoughts).
+
 - **Migrations (Beta)**: We're also soon adding inbound replication to support different migration scenarios and Neon-as-dev-platform environment configurations.
 
 ### Backend-as-a-Service
