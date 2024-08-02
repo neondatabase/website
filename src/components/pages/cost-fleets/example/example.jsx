@@ -35,6 +35,7 @@ const Example = () => (
         width={617}
         height={776}
         alt=""
+        priority
       />
       <Image
         className="absolute right-0 top-0 hidden h-[536px] w-[320px] sm:block"
@@ -42,6 +43,7 @@ const Example = () => (
         width={430}
         height={650}
         alt=""
+        priority
       />
     </BgDecor>
   </div>

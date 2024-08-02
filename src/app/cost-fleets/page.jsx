@@ -11,13 +11,10 @@ const CostFleetsPage = async () => (
   <Layout headerWithBorder burgerWithoutBorder isHeaderSticky>
     <Hero />
     <Cta
+      className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
       title="Try it yourself"
-      description="You can experiment with autoscaling for free during 14 days"
-      button={{
-        title: 'Request a Scale trial',
-        url: LINKS.scaleTrial,
-      }}
-      size="sm"
+      buttonText="Request a free trial"
+      buttonUrl={LINKS.scaleTrial}
     />
   </Layout>
 );
