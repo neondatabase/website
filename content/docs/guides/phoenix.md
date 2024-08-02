@@ -38,13 +38,13 @@ You will need the connection string details later in the setup.
 
 1. [Create a Phoenix project](https://hexdocs.pm/phoenix/installation.html#phoenix) if you do not have one, with the following command:
 
-```bash
-mix phx.new hello
-```
+   ```bash
+   mix phx.new hello
+   ```
 
-When prompted to, choose to not install the dependencies.
+   When prompted to, choose to not install the dependencies.
 
-2. Update `config/dev.exs` file's configuration with your Neon database connection details. Use the connection details from the Neon connection string you copied in the first part of the guide.
+2. Update `config/dev.exs` file's configuration with your Neon database connection details. Use the connection details from the Neon connection string you copied previously.
 
    ```elixir {2-5,9}
    config :hello, Hello.Repo,
@@ -58,11 +58,11 @@ When prompted to, choose to not install the dependencies.
       ssl: [cacerts: :public_key.cacerts_get()]
    ```
 
-<Admonition type="note">
-   The `:ssl` option is required to connect to Neon. Postgrex, since v0.18, verifies the server SSL certificate and you need to select CA trust store using `:cacerts` or `:cacertfile` options. You can use the OS-provided CA store by setting `cacerts: :public_key.cacerts_get()`. While not recommended, you can disable certificate verification by setting `ssl: [verify: :verify_none]`.
-</Admonition>
+      <Admonition type="note">
+         The `:ssl` option is required to connect to Neon. Postgrex, since v0.18, verifies the server SSL certificate and you need to select CA trust store using `:cacerts` or `:cacertfile` options. You can use the OS-provided CA store by setting `cacerts: :public_key.cacerts_get()`. While not recommended, you can disable certificate verification by setting `ssl: [verify: :verify_none]`.
+      </Admonition>
 
-3. Update`config/runtime.exs` file's configuration with your Neon database connection details. Use the connection details from the Neon connection string you copied in the first part of the guide.
+3. Update`config/runtime.exs` file's configuration with your Neon database connection details. Use the connection details from the Neon connection string you copied previously.
 
    ```elixir {2}
    config :hello, Hello.Repo,
@@ -87,15 +87,15 @@ When prompted to, choose to not install the dependencies.
 
 5. Now, install the dependencies used in your Phoenix application using the following command:
 
-```bash
-mix deps.get
-```
+   ```bash
+   mix deps.get
+   ```
 
 6. Seed the Neon database with the following command:
 
-```bash
-mix ecto.create
-```
+   ```bash
+   mix ecto.create
+   ```
 
 Once that's done, move on to building and running the application in production mode.
 
@@ -107,13 +107,13 @@ To compile the app in production mode, run the following command:
 MIX_ENV=prod mix compile
 ```
 
-Further, to compile assets for the production mode, run the following command:
+To compile assets for the production mode, run the following command:
 
 ```bash
 MIX_ENV=prod mix assets.deploy
 ```
 
-Per deployment, a secret key is required for encrypting and signing data. Run the following command to generate such a key:
+For each deployment, a secret key is required for encrypting and signing data. Run the following command to generate the key:
 
 ```bash
 mix phx.gen.secret
