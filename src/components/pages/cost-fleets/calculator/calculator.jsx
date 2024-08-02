@@ -156,6 +156,15 @@ const Calculator = () => {
     };
   }, [rsdCost, neonCost]);
 
+  const longestTotal = Object.keys(totals).reduce(
+    (widest, key) => (totals[key].length > widest.length ? totals[key] : widest),
+    ''
+  );
+  const totalsFontSize =
+    longestTotal.length < 8
+      ? 'text-6xl md:text-5xl sm:text-[44px]'
+      : 'text-5xl md:text-4xl sm:text-[44px]';
+
   return (
     <>
       <DashedBorder />
@@ -170,7 +179,7 @@ const Calculator = () => {
               key={title}
             >
               <p
-                className="text-lg leading-none tracking-extra-tight text-gray-new-90 sm:text-base sm:leading-tight [&_span]:text-gray-new-50"
+                className="text-lg leading-none tracking-extra-tight text-gray-new-90 md:text-base md:leading-tight [&_span]:text-gray-new-50"
                 dangerouslySetInnerHTML={{ __html: title }}
               />
               <Field
@@ -205,9 +214,8 @@ const Calculator = () => {
                 <span
                   className={clsx(
                     'bg-clip-text font-title  font-medium leading-none tracking-extra-tight text-transparent',
-                    totals[name].length < 8
-                      ? 'text-6xl xl:text-5xl sm:text-[44px]'
-                      : 'text-5xl xl:text-4xl sm:text-[44px]',
+                    totalsFontSize,
+                    'sm:text-[44px]',
                     valueClassName
                   )}
                 >
