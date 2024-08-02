@@ -1,9 +1,9 @@
 ---
 title: Protected branches
-subtitle: Learn how to use Neon's protected branches feature to secure your
-  critical data
+subtitle: Learn how to use Neon's protected branches feature to secure your critical
+  data
 enableTableOfContents: true
-updatedOn: '2024-07-19T15:46:08.351Z'
+updatedOn: '2024-08-02T13:56:37.922Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
