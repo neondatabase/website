@@ -37,7 +37,7 @@ Here's a snapshot of what we're working on now:
 We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. You can expect to see development in this area, including:
 
 - A new plan offering
-- Storage-related optimizations  
+- Storage-related optimizations
 
 ### Backend-as-a-Service
 
@@ -48,8 +48,6 @@ We’re always looking for ways to improve our pricing model to make it as devel
 ## What's on the horizon
 
 And here's a quick list of what we'll be taking on in the near future:
-
-
 
 ### Database-as-a-service
 
