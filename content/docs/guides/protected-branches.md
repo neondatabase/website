@@ -12,7 +12,7 @@ Neon's protected branches feature implements a series of protections:
 - Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
-- Role passwords are automatically reset on child branches created from protected branches. [See below](#automatic-password-reset-on-child-branches).
+- New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
 - With additional configuration steps, you can apply IP restrictions to protected branches only. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
 
 The protected branches feature is available with the Neon [Scale](/docs/introduction/plans#scale) plan.
@@ -45,11 +45,11 @@ To set a branch as protected:
 
    ![Branches page badge](/docs/guides/ip_allow_branch_badge_2.png)
 
-## Automatic password reset on child branches
+## New passwords generated for Postgres roles on child branches
 
-When you create a branch in Neon, it includes all Postgres databases and roles from the parent branch. By default, Postgres roles on the child branch will have the same passwords as on the parent branch. However, this does not apply to protected branches. When you create a child branch from a protected branch, passwords on the child branch are automatically reset.
+When you create a branch in Neon, it includes all Postgres databases and roles from the parent branch. By default, Postgres roles on the child branch will have the same passwords as on the parent branch. However, this does not apply to protected branches. When you create a child branch from a protected branch, new passwords are generated for the Postgres roles on the child branch.
 
-This password reset behavior is designed to prevent the exposure of passwords that could be used to access your protected branch. For example, if you have designated a production branch as protected, the automatic password reset for child branches ensures that you can create child branches for development or testing without risking access to data on your protected production branch.
+This behavior is designed to prevent the exposure of passwords that could be used to access your protected branch. For example, if you have designated a production branch as protected, the automatic password change for child branches ensures that you can create child branches for development or testing without risking access to data on your production branch.
 
 <Admonition type="important">
 Resetting a child branch from a protected parent branch currently restores Postgres role passwords on the child branch to those used on the protected parent branch. This issue will be addressed in an upcoming release. See [reset from parent](/docs/manage/branches#reset-a-branch-from-parent) to understand how Neon's branch reset feature works.
