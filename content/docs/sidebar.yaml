@@ -337,7 +337,7 @@
       items:
         - title: GitHub integration
           slug: guides/neon-github-integration
-          tag: coming soon
+          tag: new
         - title: Neosync
           items:
             - title: Generate synthetic data

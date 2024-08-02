@@ -16,17 +16,12 @@ const databases = [
     usage: 'Runs 24/7',
   },
   {
-    type: '1 staging database',
-    instance: 'db.r6g.4xlarge',
+    type: 'Dev databases',
+    instance: 'db.t4g.micro',
     usage: 'Used interminently',
   },
   {
-    type: 'Dev database',
-    instance: '10 db.t4g.micro',
-    usage: 'Used interminently',
-  },
-  {
-    type: 'Test database ',
+    type: 'Test databases',
     instance: 'db.t3.medium',
     usage: 'Used interminently',
   },
@@ -63,8 +58,8 @@ const Example = () => (
       <Image
         className="absolute right-0 top-0 hidden h-[536px] w-[320px] sm:block"
         src={rightGlowMobile}
-        width={320}
-        height={536}
+        width={430}
+        height={650}
         alt=""
       />
       <Image
