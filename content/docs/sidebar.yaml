@@ -742,8 +742,8 @@
         - title: Neon Glossary
           slug: reference/glossary
     - title: Neon roadmap
-      icon: docs
       slug: introduction/roadmap
+      icon: roadmap
       items:
         - title: Neon roadmap
           slug: introduction/roadmap

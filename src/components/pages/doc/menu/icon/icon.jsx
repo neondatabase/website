@@ -19,6 +19,7 @@ import ManagementIcon from 'icons/docs/sidebar/management.inline.svg';
 import PartnerGuideIcon from 'icons/docs/sidebar/partner-guide.inline.svg';
 import PostgresGuidesIcon from 'icons/docs/sidebar/postgres-guides.inline.svg';
 import RegionsIcon from 'icons/docs/sidebar/regions.inline.svg';
+import RoadmapIcon from 'icons/docs/sidebar/roadmap.inline.svg';
 import SdkIcon from 'icons/docs/sidebar/sdk.inline.svg';
 import StatusIcon from 'icons/docs/sidebar/status.inline.svg';
 import SupportIcon from 'icons/docs/sidebar/support.inline.svg';
@@ -44,6 +45,7 @@ const icons = {
   'partner-guide': PartnerGuideIcon,
   'postgres-guides': PostgresGuidesIcon,
   regions: RegionsIcon,
+  roadmap: RoadmapIcon,
   sdk: SdkIcon,
   status: StatusIcon,
   support: SupportIcon,
