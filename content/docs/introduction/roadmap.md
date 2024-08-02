@@ -21,30 +21,44 @@ Here's a snapshot of what we're working on now:
 ### Database-as-a-Service
 
 - **Autoscaling GA**: One of our defining features, Autoscaling is soon going GA. Look for an announcement with details coming out soon!
+- **Autoscaling on the Free Tier**: Users on the Free Tier will soon be able to try Neon's Autoscaling feature.
 - **Read Replicas**: We're refining our read replica functionality to make it dead-on suitable for various use cases.
 - **Database Deploy Previews**: Our GitHub App is available now for all users, with more refinements to come. Including better integration with GitHub Actions to make it easy to include your database in your development workflow.
 - **Data Lake Export**: We're committed to full CDC export using Logical Replication.
-- **Better deletes**: We're adding support for deleting obsolete branches, especially after [restore]() operations.
+- **Better deletes**: We're adding support for deleting obsolete branches, especially after [restore](/docs/guides/branch-restore) operations.
 
   If you have other branch management ideas, [let us know](#share-your-thoughts).
 
 - **Migrations (Beta)**: We're also soon adding inbound replication to support different migration scenarios and Neon-as-dev-platform environment configurations.
+- **SQL Editor improvements**: Stay tuned for interesting updates we have planned for our SQL Editor.
+
+### Plans & Billing
+
+We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. You can expect to see development in this area, including:
+
+- A new plan offering
+- Storage-related optimizations  
 
 ### Backend-as-a-Service
 
-- **Neon CLI**: We've recently added a `create-app` feature that lets you bootstrap your application with common dev stacks. `create-app` is maturing fast, with new frameworks, ORMs, and features coming out regularly.
+- **Neon CLI**: We've recently added a [create-app](/docs/reference/cli-create-app) command that lets you bootstrap your application with common dev stacks. `create-app` is maturing fast, with new frameworks, ORMs, and features coming out regularly.
 - **Neon Authentication**: Look for the ability to run SQL directly from the front end of your application. We're building an API with all the necessary security measures needed to safely include database operations on the client side. This feature will extend Neon’s robust authentication framework to ensure secure access directly from your application's front end.
+- **An email app service**: This service will provide support for email verification and password recovery workflows
 
 ## What's on the horizon
 
 And here's a quick list of what we'll be taking on in the near future:
+
+
 
 ### Database-as-a-service
 
 - **Staging Environments**: Anonymizing PII Data
 - **AWS Integrated Platform**: VPC, Backups, Export Metrics + Logs
 - **Neon for Teams**: We're exploring adding a new business-level plan, with key features like Organizations, Integrated Platform, and Staging solutions. This plan will also offer usage allowances that fit the needs of business-focused development teams and more complex workflows.
-- **Postgres 17**: We plan to support Postgres 17 the day it's released. Postgres 17 will support direct SSL connections, which can eliminate one round-trip from establishing a connection.
+- **Postgres 17**: We've been at work on this for a while now. We plan to support Postgres 17 the day it's released. Postgres 17 will support direct SSL connections, which can eliminate one round-trip from establishing a connection.
+- **Support for exporting logs and metrics**: We'd like to enable users to integrate Neon into their monitoring platforms and services with exportable logs and metrics.
+- **Support for soft deletions**: Work is underway to build a deletion workflow for Neon projects. As part of this workflow, we'll support a recovery grace period for unintended deletions, and we'll also add a little friction to the deletion process to avoid accidental deletions &#8212; something similar to the steps required to delete a repository in GitHub.
 
 ### Backend-as-a-service
 
