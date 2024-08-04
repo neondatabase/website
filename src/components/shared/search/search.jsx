@@ -1,48 +1,30 @@
 'use client';
 
-import { DocSearchButton, DocSearchModal, useDocSearchKeyboardEvents } from '@docsearch/react';
+import { DocSearchButton } from '@docsearch/react';
 import clsx from 'clsx';
-import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { useCallback, useState } from 'react';
 
-import Link from 'components/shared/link';
-import debounce from 'utils/debounce';
 import sendGtagEvent from 'utils/send-gtag-event';
 
-const Hit = ({ hit, children }) => (
-  <Link
-    className={clsx({
-      'DocSearch-Hit--Result': hit.__is_result?.(),
-      'DocSearch-Hit--Parent': hit.__is_parent?.(),
-      'DocSearch-Hit--FirstChild': hit.__is_first?.(),
-      'DocSearch-Hit--LastChild': hit.__is_last?.(),
-      'DocSearch-Hit--Child': hit.__is_child?.(),
-    })}
-    to={hit.url}
-  >
-    {children}
-  </Link>
+const InkeepCustomTrigger = dynamic(
+  () => import('@inkeep/widgets').then((mod) => mod.InkeepCustomTrigger),
+  { ssr: false }
 );
 
-Hit.propTypes = {
-  hit: PropTypes.shape({
-    __is_result: PropTypes.func,
-    __is_parent: PropTypes.func,
-    __is_first: PropTypes.func,
-    __is_last: PropTypes.func,
-    __is_child: PropTypes.func,
-    url: PropTypes.string,
-  }).isRequired,
-  children: PropTypes.node.isRequired,
+const baseSettings = {
+  apiKey: process.env.INKEEP_INTEGRATION_API_KEY,
+  integrationId: process.env.INKEEP_INTEGRATION_ID,
+  organizationId: process.env.INKEEP_ORGANIZATION_ID,
+  primaryBrandColor: '#00E599',
+  organizationDisplayName: 'Neon',
 };
 
-const Search = ({ className = null, isBlog = false, indexName }) => {
-  const router = useRouter();
-  const searchButtonRef = useRef(null);
+const Search = ({ className = null, isBlog = false }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [initialQuery, setInitialQuery] = useState(null);
+  const { theme, systemTheme } = useTheme();
 
   const onOpen = useCallback(() => {
     setIsOpen(true);
@@ -55,103 +37,29 @@ const Search = ({ className = null, isBlog = false, indexName }) => {
     setIsOpen(false);
   }, [setIsOpen]);
 
-  const onInput = useCallback(
-    (event) => {
-      setIsOpen(true);
-      if (!isBlog) {
-        sendGtagEvent('open_docs_search');
-      }
-      setInitialQuery(event.key);
-    },
-    [setIsOpen, setInitialQuery, isBlog]
-  );
-
-  useDocSearchKeyboardEvents({
+  const inkeepCustomTriggerProps = {
     isOpen,
-    onOpen,
     onClose,
-    onInput,
-    searchButtonRef,
-  });
-
-  // @NOTE: this is a workaround to prevent scroll to the page bottom when closing search modal in Safari
-  // https://github.com/algolia/docsearch/issues/1260#issuecomment-1011939736
-  useEffect(() => {
-    let div = document.querySelector('.fixed[data-docsearch-fixed]');
-
-    if (!div) {
-      div = document.createElement('div');
-      div.classList.add('fixed');
-      div.setAttribute('data-docsearch-fixed', '');
-      div.innerHTML = '<input type="text" aria-label="hidden">';
-      document.body.appendChild(div);
-    }
-  }, []);
+    stylesheetUrls: ['/inkeep/css/inkeep-chat.css'],
+    baseSettings: {
+      ...baseSettings,
+      colorMode: {
+        forcedColorMode: theme === 'system' ? systemTheme : theme,
+      },
+    },
+    modalSettings: {
+      defaultView: 'SEARCH',
+      // isModeSwitchingEnabled: false,
+    },
+    searchSettings: {
+      searchMode: 'KEYWORD',
+    },
+  };
 
   return (
     <div className={clsx('relative flex items-center justify-between', className)}>
-      <DocSearchButton
-        ref={searchButtonRef}
-        aria-label="Open search with CTRL+K or Command+K"
-        onClick={onOpen}
-      />
-      {isOpen &&
-        createPortal(
-          <div className={clsx({ dark: isBlog })}>
-            <DocSearchModal
-              initialQuery={initialQuery}
-              initialScrollY={window.scrollY}
-              navigator={{
-                navigate({ itemUrl }) {
-                  setIsOpen(false);
-                  router.push(itemUrl);
-                },
-              }}
-              appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}
-              apiKey={process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY}
-              indexName={indexName}
-              placeholder="Search..."
-              transformSearchClient={(searchClient) => ({
-                ...searchClient,
-                search: debounce(searchClient.search, 500),
-              })}
-              hitComponent={Hit}
-              transformItems={(items) =>
-                items.map((item, index) => {
-                  // We transform the absolute URL into a relative URL to leverage next/link prefetch.
-                  const a = document.createElement('a');
-                  a.href = item.url;
-
-                  if (item.hierarchy?.lvl0) {
-                    item.hierarchy.lvl0 = item.hierarchy.lvl0.replace(/&amp;/g, '&');
-                  }
-
-                  if (item._highlightResult?.hierarchy?.lvl0?.value) {
-                    item._highlightResult.hierarchy.lvl0.value =
-                      item._highlightResult.hierarchy.lvl0.value.replace(/&amp;/g, '&');
-                  }
-
-                  return {
-                    ...item,
-                    url: `${a.pathname}${a.hash}`,
-                    __is_result: () => true,
-                    __is_parent: () => item.type === 'lvl1' && items.length > 1 && index === 0,
-                    __is_child: () =>
-                      item.type !== 'lvl1' &&
-                      items.length > 1 &&
-                      items[0].type === 'lvl1' &&
-                      index !== 0,
-                    __is_first: () => index === 1,
-                    __is_last: () => index === items.length - 1 && index !== 0,
-                  };
-                })
-              }
-              insights
-              onClose={onClose}
-            />
-          </div>,
-          document.body
-        )}
+      <DocSearchButton aria-label="Open search with CTRL+K or Command+K" onClick={onOpen} />
+      <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
     </div>
   );
 };
@@ -159,7 +67,6 @@ const Search = ({ className = null, isBlog = false, indexName }) => {
 Search.propTypes = {
   className: PropTypes.string,
   isBlog: PropTypes.bool,
-  indexName: PropTypes.string.isRequired,
 };
 
 export default Search;
