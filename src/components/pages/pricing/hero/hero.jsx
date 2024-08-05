@@ -13,6 +13,7 @@ import InfoIcon from 'components/shared/info-icon';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import CrossIcon from 'icons/cross.inline.svg';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 import AWSIcon from './images/aws.inline.svg';
 
@@ -48,7 +49,8 @@ const items = [
         info: 'Additional storage: $3.5 per 2 GiB',
       },
       {
-        title: '300 <a href="#compute-hour">compute hours</a> included',
+        title:
+          '300 <a href="#compute-hour" id="pricing_compute_hours_click">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Standard support' },
@@ -72,7 +74,8 @@ const items = [
     features: [
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
       {
-        title: '750 <a href="#compute-hour">compute hours</a> included',
+        title:
+          '750 <a href="#compute-hour" id="pricing_compute_hours_click">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Priority support' },
@@ -124,41 +127,51 @@ const scaleCardBorderVariants = {
   },
 };
 
-const Feature = ({ title, info, disabled, type, index }) => (
-  <li
-    className={clsx(
-      type === 'Scale' && 'text-white',
-      disabled ? 'text-gray-new-30 opacity-80' : 'text-gray-new-70',
-      'relative pl-6 leading-tight tracking-tight'
-    )}
-  >
-    {disabled ? (
-      <CrossIcon
-        className={clsx('absolute left-0 top-[2px] h-4 w-4 text-gray-new-30')}
-        aria-hidden
-      />
-    ) : (
-      <CheckIcon
-        className={clsx(
-          type === 'Scale' ? 'text-green-45' : 'text-gray-new-70',
-          'absolute left-0 top-[2px] h-4 w-4'
-        )}
-        aria-hidden
-      />
-    )}
-    <span className="with-link-primary" dangerouslySetInnerHTML={{ __html: title }} />
-    {info && (
-      <span className="whitespace-nowrap">
-        &nbsp;
-        <InfoIcon
-          className="relative top-0.5 ml-0.5 inline-block"
-          tooltip={info}
-          tooltipId={`${type}_tooltip_${index}`}
+const Feature = ({ title, info, disabled, type, index, trackClick }) => {
+  const handleLinkClick = (event) => {
+    if (trackClick && event.target.tagName === 'A') {
+      sendGtagEvent(event.target.id);
+    }
+  };
+
+  return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
+    <li
+      className={clsx(
+        type === 'Scale' && 'text-white',
+        disabled ? 'text-gray-new-30 opacity-80' : 'text-gray-new-70',
+        'relative pl-6 leading-tight tracking-tight'
+      )}
+      onClick={handleLinkClick}
+    >
+      {disabled ? (
+        <CrossIcon
+          className={clsx('absolute left-0 top-[2px] h-4 w-4 text-gray-new-30')}
+          aria-hidden
         />
-      </span>
-    )}
-  </li>
-);
+      ) : (
+        <CheckIcon
+          className={clsx(
+            type === 'Scale' ? 'text-green-45' : 'text-gray-new-70',
+            'absolute left-0 top-[2px] h-4 w-4'
+          )}
+          aria-hidden
+        />
+      )}
+      <span className="with-link-primary" dangerouslySetInnerHTML={{ __html: title }} />
+      {info && (
+        <span className="whitespace-nowrap">
+          &nbsp;
+          <InfoIcon
+            className="relative top-0.5 ml-0.5 inline-block"
+            tooltip={info}
+            tooltipId={`${type}_tooltip_${index}`}
+          />
+        </span>
+      )}
+    </li>
+  );
+};
 
 Feature.propTypes = {
   title: PropTypes.string.isRequired,
@@ -166,6 +179,7 @@ Feature.propTypes = {
   disabled: PropTypes.bool,
   type: PropTypes.string,
   index: PropTypes.number,
+  trackClick: PropTypes.bool,
 };
 
 const Hero = () => {
@@ -218,6 +232,9 @@ const Hero = () => {
                       href="https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa"
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => {
+                        sendGtagEvent('pricing_pay_via_marketplace_click');
+                      }}
                     >
                       <span className="border-b border-gray-new-40 pb-0.5 text-sm font-light leading-none tracking-extra-tight text-gray-new-70 opacity-90 transition-colors duration-200 group-hover/aws:border-transparent group-hover/aws:text-gray-new-80">
                         Pay via marketplace
@@ -282,7 +299,13 @@ const Hero = () => {
                   <div className="mt-auto flex grow flex-col">
                     <ul className="flex flex-col flex-wrap gap-y-4">
                       {features.map((feature, index) => (
-                        <Feature {...feature} type={type} index={index} key={index} />
+                        <Feature
+                          {...feature}
+                          type={type}
+                          index={index}
+                          trackClick={type === 'Launch' || type === 'Scale'}
+                          key={index}
+                        />
                       ))}
                     </ul>
                   </div>
