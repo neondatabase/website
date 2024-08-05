@@ -17,7 +17,7 @@ This guide explores the most common index types in Postgres, including B-tree, H
 
 ## B-tree Indexes
 
-B-tree (Balanced Tree) is the default index type in Postgres and is suitable for most common scenarios. B-tree indexes organize data in a tree structure, allowing for efficient searching, insertion, and deletion. The tree is kept balanced, so all reads need to traverse a similar number of rows, providing consistent performance. 
+B-tree (Balanced Tree) is the default index type in Postgres and is suitable for most common scenarios. B-tree indexes organize data in a tree structure, allowing for efficient searching, insertion, and deletion. The tree is kept balanced, so all reads need to traverse a similar number of rows, providing consistent performance.
 
 ### Create a B-tree Index in Postgres
 
@@ -51,7 +51,7 @@ B-tree indexes are efficient for both equality and range queries on sortable dat
 
 ```sql
 -- Equality search
-SELECT * FROM users WHERE username = 'john_doe'; 
+SELECT * FROM users WHERE username = 'john_doe';
 
 -- Range query
 SELECT * FROM users WHERE username > 'j' AND username < 'k';
@@ -63,11 +63,11 @@ SELECT * FROM users WHERE username LIKE 'john%';
 SELECT * FROM users ORDER BY username;
 ```
 
-For columns with a large number of distinct values, and where queries typically filter for a small set of values, hash indexes can be more efficient than B-tree indexes. Additionally, for tables with a small number of rows, the Postgres query planner may choose to do a sequential scan instead of using the index. 
+For columns with a large number of distinct values, and where queries typically filter for a small set of values, hash indexes can be more efficient than B-tree indexes. Additionally, for tables with a small number of rows, the Postgres query planner may choose to do a sequential scan instead of using the index.
 
 ## Hash Indexes
 
-Hash indexes compute a hash value for each row value in the indexed column, and store the hash along with the value in a hash table. This provides constant-time lookup for equality comparisons. 
+Hash indexes compute a hash value for each row value in the indexed column, and store the hash along with the value in a hash table. This provides constant-time lookup for equality comparisons.
 
 ### Create a Hash Index in Postgres
 
@@ -85,13 +85,13 @@ Hash indexes are most effective for exact match queries on columns with a large 
 SELECT * FROM users WHERE email = 'john@example.com';
 ```
 
-This is specifically useful for columns that store attributes like a username or email address. However, hash indexes don't support range queries or sorting like B-tree indexes. 
+This is specifically useful for columns that store attributes like a username or email address. However, hash indexes don't support range queries or sorting like B-tree indexes.
 
 ## GiST Indexes
 
 GiST (Generalized Search Tree) indexes provide a flexible framework for implementing various indexing strategies. They work by recursively dividing data into nested subsets. While a B-tree index divides data based on comparison semantics (equal-to, less-than, greater-than), the nodes of a GiST tree each define a general boolean predicate, that all entries in its subtree must satisfy.
 
-This makes it useful for complex data types and queries, such as geometric data or full-text search where the regular comparison operators might not make sense. For example, a GiST index can be used to find all locations within a certain distance of a point, or to do a word proximity search over full-text documents. 
+This makes it useful for complex data types and queries, such as geometric data or full-text search where the regular comparison operators might not make sense. For example, a GiST index can be used to find all locations within a certain distance of a point, or to do a word proximity search over full-text documents.
 
 ### Create a GiST Index in Postgres
 
@@ -129,7 +129,7 @@ While highly versatile, especially for spatial and full-text search data, GiST i
 
 ## GIN Indexes
 
-Generalized Inverted Indexes (GIN) are useful for indexing composite values, such as arrays or full-text search documents. GIN  indexes store a separate entry for each component value (e.g., each array element or each word in a text document). This is similar to an `inverted index` typically used in text search engines, except that it can be extended to handle data types other than text.
+Generalized Inverted Indexes (GIN) are useful for indexing composite values, such as arrays or full-text search documents. GIN indexes store a separate entry for each component value (e.g., each array element or each word in a text document). This is similar to an `inverted index` typically used in text search engines, except that it can be extended to handle data types other than text.
 
 ### Create a GIN Index in Postgres
 
@@ -201,7 +201,7 @@ FROM temperature_readings
 WHERE timestamp BETWEEN '2024-03-01' AND '2024-03-31';
 ```
 
-While a BRIN index offers significant space savings and fast index creation, it provides less precise results and may require more disk access during queries compared to other index types. 
+While a BRIN index offers significant space savings and fast index creation, it provides less precise results and may require more disk access during queries compared to other index types.
 
 ## Advanced Indexing Strategies
 
@@ -229,13 +229,13 @@ ORDER BY timestamp;
 Note that a multicolumn index is also helpful for queries that filter on a subset of the indexed columns, as long as it is in the same order as the index. For example, the multicolumn index we created above accelerates both queries that filter on `sensor_id` alone, and those that filter on `sensor_id` and `timestamp` together:
 
 ```sql
--- Find maximum temperature readings from sensor 42 
+-- Find maximum temperature readings from sensor 42
 SELECT MAX(temperature)
 FROM temperature_readings
 WHERE sensor_id = 42;
 ```
 
-However, a query that only filters on the `timestamp` column will not benefit from the index. Separate indexes on each column might be more efficient, depending on which queries are more frequent. 
+However, a query that only filters on the `timestamp` column will not benefit from the index. Separate indexes on each column might be more efficient, depending on which queries are more frequent.
 
 ### Partial Indexes
 
@@ -254,7 +254,7 @@ FROM temperature_readings
 WHERE temperature > 35;
 ```
 
-This can be useful when creating an index on the full column is too expensive due to the size of the data, and most queries only need to access a subset of it. 
+This can be useful when creating an index on the full column is too expensive due to the size of the data, and most queries only need to access a subset of it.
 
 ### Indexes on Expressions
 
