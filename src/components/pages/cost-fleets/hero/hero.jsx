@@ -18,9 +18,9 @@ const Hero = () => (
 
       <div className="prose-variable px-8 sm:px-0">
         <p>
-          <strong>Neon is a cost-effective option for managing fleets of Postgres instances</strong>
-          . Why? Because of its usage-based pricing and scale-to-zero. Via its developer-friendly
-          API, you can run thousands of Postgres databases without a DBA.{' '}
+          Neon is a cost-effective option for managing fleets of Postgres instances. Why? Because of
+          its usage-based pricing and scale-to-zero. Via its developer-friendly API, you can{' '}
+          <strong>run thousands of Postgres databases without a DBA</strong>.
         </p>
         <p>
           Companies like{' '}
