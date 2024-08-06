@@ -37,6 +37,9 @@
           slug: guides/nextjs
         - title: Node.js
           slug: guides/node
+        - title: Phoenix
+          slug: guides/phoenix
+          tag: new
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
@@ -337,7 +340,7 @@
       items:
         - title: GitHub integration
           slug: guides/neon-github-integration
-          tag: coming soon
+          tag: new
         - title: Neosync
           items:
             - title: Generate synthetic data
@@ -348,6 +351,8 @@
           slug: guides/prisma
         - title: TypeORM
           slug: guides/typeorm
+        - title: Knex
+          slug: guides/knex
           tag: new
     - title: Replicate
       items:
@@ -466,6 +471,8 @@
           slug: extensions/postgis-related-extensions
         - title: timescaledb
           slug: extensions/timescaledb
+        - title: wal2json
+          slug: extensions/wal2json
     - title: Functions
       slug: functions/introduction
       items:

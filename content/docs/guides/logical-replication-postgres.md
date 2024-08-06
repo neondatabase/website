@@ -3,7 +3,7 @@ title: Replicate data to an external Postgres instance
 subtitle: Learn how to replicate data from Neon to an external Postgres instance
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-30T17:43:42.529Z'
+updatedOn: '2024-08-02T17:25:18.435Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from Neon to external subscribers. This guide shows you how to stream data from a Neon Postgres database to an external Postgres database.
@@ -23,9 +23,9 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Beta**.
-4. Click **Enable**.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Logical Replication**.
+4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query:
 
@@ -133,7 +133,7 @@ This section describes how to configure a subscription on a standalone Postgres 
 It is assumed that you have a separate Postgres instance ready to act as the subscriber:
 
 - This must be a Postgres instance other than Neon, such as a local PostgreSQL installation. Currently, a Neon database cannot be defined as a subscriber. The PostgreSQL version of the subscriber should be compatible with the publisher. The primary (publishing) server must be of the same or a higher version than the replica (subscribing) server. For example, you can replicate from PostgreSQL 14 to 16, but not from 16 to 14. Neon supports Postgres 14, 15, and 16. The Postgres version is defined when you create a Neon project.
-- A corresponding `users` table must exist in the subscriber database. This table should have the same schema as the table on the publisher. You can use the same `CREATE TABLE` statement used previously:
+- A corresponding `users` table must exist in the subscriber database. This table should have the same name and table schema as the table on the publisher. You can use the same `CREATE TABLE` statement used previously:
 
   ```sql
   CREATE TABLE users (
@@ -144,7 +144,7 @@ It is assumed that you have a separate Postgres instance ready to act as the sub
   ```
 
    <Admonition type="note">
-   When configuring logical replication in Postgres, the tables included in a publication on the publisher must also exist on the subscriber with the same name and table schema.
+   When configuring logical replication in Postgres, the tables defined in the publication on the publisher must also exist on the subscriber with the same name and table schema.
    </Admonition>
 
 ### Create a subscription

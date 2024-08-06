@@ -3,7 +3,7 @@ title: Supported Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2024-07-25T12:53:42.420Z'
+updatedOn: '2024-07-30T20:25:11.766Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
@@ -81,7 +81,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [unaccent](https://www.postgresql.org/docs/16/unaccent.html)                                     |    1.1 |    1.1 |    1.1 |                                                                                                                                                                           |
 | [unit](https://github.com/df7cb/postgresql-unit)                                                 |      7 |      7 |      7 |                                                                                                                                                                           |
 | [uuid-ossp](https://www.postgresql.org/docs/16/uuid-ossp.html)                                   |    1.1 |    1.1 |    1.1 | Double-quote the extension name when installing: `CREATE EXTENSION "uuid-ossp"`                                                                                           |
-| [wal2json](https://github.com/eulerto/wal2json)                                                  |    2.5 |    2.5 |    2.5 | `CREATE EXTENSION` not required. This decoder plugin is available by default but requires enabling [logical replication](/docs/guides/logical-replication-guide) in Neon. |
+| [wal2json](/docs/extensions/wal2json)                                                            |    2.5 |    2.5 |    2.5 | `CREATE EXTENSION` not required. This decoder plugin is available by default but requires enabling [logical replication](/docs/guides/logical-replication-guide) in Neon. |
 | [xml2](https://www.postgresql.org/docs/current/xml2.html)                                        |    1.1 |    1.1 |    1.1 |                                                                                                                                                                           |
 
 ## Install an extension

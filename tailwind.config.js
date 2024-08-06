@@ -203,6 +203,8 @@ module.exports = {
           'linear-gradient(224deg, #FFF 2.43%, rgba(255, 255, 255, 0.00))',
         'variable-value-1': 'linear-gradient(220deg, #FFFFFF 22%, #41BAB9 142%)',
         'variable-value-2': 'linear-gradient(73deg, #EFEFEF 13%, #89E0EA 61%, #7F95EB 93%)',
+        'variable-value-3':
+          'linear-gradient(90deg, rgba(255, 255, 255, 0.60), rgba(255, 255, 255, 0.50))',
         'variable-value-text': 'linear-gradient(90deg, #797D86 0%, #A4B7E2 100%)',
       }),
       keyframes: (theme) => ({

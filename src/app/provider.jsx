@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 const whiteThemePages = [
   '/careers',
   '/thank-you',
-  '/about-us',
   '/privacy-policy',
   '/terms-of-service',
   '/dpa',

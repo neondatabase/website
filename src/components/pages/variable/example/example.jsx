@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
 import BgDecor from '../bg-decor';
+import Calculator from '../calculator';
 
-import Calculator from './calculator';
 import leftGlowMobile from './images/left-glow-mobile.png';
 import leftGlow from './images/left-glow.png';
 import rightGlowMobile from './images/right-glow-mobile.png';
@@ -15,24 +15,19 @@ const databases = [
     usage: 'Runs 24/7',
   },
   {
-    type: '1 staging database',
-    instance: 'db.r6g.4xlarge',
+    type: 'Dev databases',
+    instance: 'db.t4g.micro',
     usage: 'Used interminently',
   },
   {
-    type: 'Dev database',
-    instance: '10 db.t4g.micro',
-    usage: 'Used interminently',
-  },
-  {
-    type: 'Test database ',
+    type: 'Test databases',
     instance: 'db.t3.medium',
     usage: 'Used interminently',
   },
 ];
 
 const Example = () => (
-  <div className="relative my-10 w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 xl:my-9 lg:my-8 sm:my-6 sm:p-6">
+  <div className="relative w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 sm:p-6">
     <div className="relative z-10 pb-[18px]">
       <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:mb-4 sm:text-lg">
         Example deployment in RDS
@@ -62,8 +57,8 @@ const Example = () => (
       <Image
         className="absolute right-0 top-0 hidden h-[536px] w-[320px] sm:block"
         src={rightGlowMobile}
-        width={320}
-        height={536}
+        width={430}
+        height={650}
         alt=""
       />
       <Image

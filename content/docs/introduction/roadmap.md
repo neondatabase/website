@@ -4,7 +4,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-06-14T07:55:54.415Z'
+updatedOn: '2024-07-30T18:51:45.480Z'
 ---
 
 Our developers are focused on making Neon the default choice for serverless Postgres. This roadmap describes committed features that are coming soon. We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion.
@@ -47,10 +47,6 @@ Here's a snapshot of what we're working on now:
 - **GitHub App**
 
   We're working on a GitHub App for Neon that will create and delete Neon branches in synchronization with git branch actions.
-
-- **Outerbase integration**
-
-  We are adding Outerbase as one of our available integrations. You will soon be able to use [Outerbase](https://www.outerbase.com/) to view, query, visualize, and edit your Neon data with the power of AI.
 
 - **Support for anonymizing data**
 
