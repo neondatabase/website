@@ -24,8 +24,8 @@ const Hero = () => (
         <p>
           Thanks to scaling and usage-based pricing,{' '}
           <strong>Neon is a cost-effective option for managing fleets of Postgres instances</strong>
-          . Its developer-friendly API makes it possible to scale the fleet up to hundreds of
-          thousands without a DBA.{' '}
+          . Its developer-friendly API makes it possible to orchestrate hundreds of
+          thousands of managed Postgres databases without a DBA.{' '}
         </p>
         <p>
           Companies like{' '}
@@ -41,8 +41,8 @@ const Hero = () => (
           >
             Koyeb
           </Link>{' '}
-          are already using Neon to offer Postgres to their end-users. Discover more on our{' '}
-          <Link to={LINKS.caseStudies}>case studies page</Link>.
+          are already using Neon to offer Postgres to their end-users. To get an estimate for your platform, {' '}
+          <Link to={LINKS.caseStudies}>reach out to us</Link>.
         </p>
       </div>
     </Container>
