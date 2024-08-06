@@ -50,19 +50,19 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Compute (monthly)",
-        "subtitle": "Compute hours = CU x active hours"
+        "title": "Compute hours",
+        "subtitle": "Compute hours = CU size x active hrs"
       },
       "free": {
-        "title": "190 compute hours",
+        "title": "190 /month",
         "info": "Additional branches limited to 5 compute hours"
       },
       "launch": {
-        "title": "300 compute hours",
+        "title": "300 /month",
         "info": "Extra usage at $0.16 per compute hour"
       },
       "scale": {
-        "title": "750 compute hours",
+        "title": "750 /month",
         "info": "Extra usage at $0.16 per compute hour"
       },
       "enterprise": "Custom"
