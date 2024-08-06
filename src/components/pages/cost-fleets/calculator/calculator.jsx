@@ -22,7 +22,7 @@ const neonCostParams = {
 const inputParamsBlock = [
   {
     name: 'usersNum',
-    title: 'Number of tenants',
+    title: 'Number of users',
     values: [500, 1000, 20000],
   },
   {
