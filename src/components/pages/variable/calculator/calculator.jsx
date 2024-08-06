@@ -1,11 +1,9 @@
 'use client';
 
 import clsx from 'clsx';
-import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useState, useMemo } from 'react';
 
 import Field from 'components/shared/field';
-import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 const instancePrices = {
   prod: 2.25,
@@ -28,19 +26,6 @@ const values = [
     text: 'With scale to zero and autoscaling',
   },
 ];
-
-const variantsAnimation = {
-  open: {
-    opacity: 1,
-    height: 'auto',
-    pointerEvents: 'auto',
-  },
-  closed: {
-    opacity: 0,
-    height: 0,
-    pointerEvents: 'none',
-  },
-};
 
 const inputParamsBlock = [
   {
@@ -94,12 +79,6 @@ const DashedBorder = () => (
 );
 
 const Calculator = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleToggler = () => {
-    setIsOpen((isOpen) => !isOpen);
-  };
-
   const [inputParams, setInputParams] = useState({
     test_databases_num: 10,
     dev_databases_num: 10,
@@ -177,73 +156,47 @@ const Calculator = () => {
     <>
       <DashedBorder />
       <div className="relative z-10 py-[18px] sm:py-4">
-        <button
-          className="flex items-center justify-between"
-          type="button"
-          aria-expanded={isOpen}
-          onClick={handleToggler}
-        >
-          <h3 className="text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:text-lg">
-            Input parameters
-            <ChevronIcon
-              className={clsx(
-                'ml-2.5 inline-block h-auto w-3 transition-transform duration-300',
-                isOpen && 'rotate-180'
-              )}
-            />
-          </h3>
-        </button>
+        <h3 className="text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:text-lg">
+          Input parameters
+        </h3>
 
-        <LazyMotion features={domAnimation}>
-          <m.div
-            className="overflow-hidden"
-            initial="closed"
-            animate={isOpen ? 'open' : 'closed'}
-            variants={variantsAnimation}
-            transition={{
-              opacity: { duration: 0.2 },
-              height: { duration: 0.3 },
-            }}
-          >
-            <div className="space-y-6 pt-6">
-              {inputParamsBlock.map(({ title, items }) => (
-                <div key={title}>
-                  <p className="mb-3.5 font-medium uppercase leading-none tracking-extra-tight text-gray-new-40 sm:text-sm">
-                    {title}
-                  </p>
-                  <ul className="space-y-1.5 sm:space-y-4">
-                    {items.map(({ name, title, values }) => (
-                      <li
-                        className="flex items-center justify-between gap-2 sm:flex-col sm:items-start"
-                        key={title}
-                      >
-                        <p
-                          className="text-lg leading-none tracking-extra-tight text-gray-new-90 sm:text-base sm:leading-tight"
-                          dangerouslySetInnerHTML={{ __html: title }}
-                        />
-                        <Field
-                          className="w-[98px] sm:w-full"
-                          name={title}
-                          labelClassName="hidden"
-                          inputClassName="remove-autocomplete-styles !m-0 !h-8 !px-3 !border-[1px] !border-gray-new-15 !bg-[#0D0E10] !text-base text-white placeholder:tracking-extra-tight focus:outline-none !focus:border-white sm:placeholder:text-sm !bg-[center_right_12px]"
-                          tag="select"
-                          defaultValue={inputParams[name]}
-                          onChange={(e) => handleSelect(e, name)}
-                        >
-                          {values?.map((option, index) => (
-                            <option value={option} key={index}>
-                              {option}
-                            </option>
-                          ))}
-                        </Field>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+        <div className="space-y-6 pt-6">
+          {inputParamsBlock.map(({ title, items }) => (
+            <div key={title}>
+              <p className="mb-3.5 font-medium uppercase leading-none tracking-extra-tight text-gray-new-40 sm:text-sm">
+                {title}
+              </p>
+              <ul className="space-y-1.5 sm:space-y-4">
+                {items.map(({ name, title, values }) => (
+                  <li
+                    className="flex items-center justify-between gap-2 sm:flex-col sm:items-start"
+                    key={title}
+                  >
+                    <p
+                      className="text-lg leading-none tracking-extra-tight text-gray-new-90 sm:text-base sm:leading-tight"
+                      dangerouslySetInnerHTML={{ __html: title }}
+                    />
+                    <Field
+                      className="w-[98px] sm:w-full"
+                      name={title}
+                      labelClassName="hidden"
+                      inputClassName="remove-autocomplete-styles !m-0 !h-8 !px-3 !border-[1px] !border-gray-new-15 !bg-[#0D0E10] !text-base text-white placeholder:tracking-extra-tight focus:outline-none !focus:border-white sm:placeholder:text-sm !bg-[center_right_12px]"
+                      tag="select"
+                      defaultValue={inputParams[name]}
+                      onChange={(e) => handleSelect(e, name)}
+                    >
+                      {values?.map((option, index) => (
+                        <option value={option} key={index}>
+                          {option}
+                        </option>
+                      ))}
+                    </Field>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </m.div>
-        </LazyMotion>
+          ))}
+        </div>
       </div>
       <DashedBorder />
       <div className="relative z-10 flex justify-between pt-6 sm:flex-col sm:gap-6">

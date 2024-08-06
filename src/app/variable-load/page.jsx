@@ -54,7 +54,7 @@ const VariableLoadPage = async () => {
             <nav
               className={clsx(
                 'no-scrollbars sticky bottom-10 top-[104px] -mt-2 max-h-[calc(100vh-80px)]',
-                'before:absolute before:-inset-5 before:-z-10 before:bg-black-pure before:bg-gradient-to-b before:blur'
+                'before:absolute before:-inset-5 before:-z-10 before:rounded-xl before:bg-black-pure/50 before:backdrop-blur'
               )}
             >
               <TableOfContents items={tableOfContents} />
