@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
-updatedOn: '2024-07-25T12:53:42.422Z'
+updatedOn: '2024-08-06T15:23:10.945Z'
 ---
 
 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -40,7 +40,7 @@ In a development environment, your application may function perfectly with a sma
 
 In Neon, your compute size determines the amount of vCPU and memory your database has to work with. Neon supports computes up to 10 Compute Units (CUs) in size. Larger computes provide more memory. The compute sizes that are available to you depend on your [Neon plan](/docs/introduction/plans):
 
-- **Free Tier**: 0.25 CUs (0.25 vCPU, 1 GB RAM)
+- **Free Plan**: 0.25 CUs (0.25 vCPU, 1 GB RAM)
 - **Launch**: Up to 4 CUs (4 vCPU, 16 GB RAM)
 - **Scale**: Up to 10 CUs (10 vCPU, 40 GB RAM)
 - **Enterprise**: Larger sizes
@@ -84,7 +84,7 @@ The `-pooler` flag directs connections to a connection pooling port at the Neon 
 
 Neon retains a history of changes for all branches. This history enables point-in-time restore and time travel queries among other development-focussed features. Keeping a history enables recovering lost data or viewing the past state of your database, which is helpful when trying to determine when an issue occurred or find a restore point. Neon's history can also function as a database backup strategy.
 
-The history retention limit is 24 hours for Neon Free Tier users, 7 days for Launch plan users, and 30 days for Scale plan users. Before going into production, select a history retention period that suits your operational requirements.
+The history retention limit is 24 hours for Neon Free Plan users, 7 days for Launch plan users, and 30 days for Scale plan users. Before going into production, select a history retention period that suits your operational requirements.
 
 ![History retention setting](/docs/get-started-with-neon/history_retention_setting.png)
 

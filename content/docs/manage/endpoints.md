@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-25T12:53:42.432Z'
+updatedOn: '2024-08-06T15:23:10.956Z'
 ---
 
 A primary read-write compute is created for your project's [default branch](/docs/reference/glossary#default-branch).
@@ -22,7 +22,7 @@ Project
 
 Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary read-write compute but supports multiple read replica computes.
 
-Plan limits define resources (vCPUs and RAM) available to a compute. The [Neon Free Tier](/docs/introduction/plans#free-tier) provides a shared vCPU and up to 1 GB of RAM per compute. Paid plans support larger compute sizes and autoscaling.
+Plan limits define resources (vCPUs and RAM) available to a compute. The [Neon Free Plan](/docs/introduction/plans#free-plan) provides a shared vCPU and up to 1 GB of RAM per compute. Paid plans support larger compute sizes and autoscaling.
 
 ## View a compute
 
@@ -134,7 +134,7 @@ The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_
 | 10                     | 10   | 40 GB | 32 GB    | 4000            |
 
 <Admonition type="note">
-Users on paid plans can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
+Users on paid plans can configure the size of their computes. The compute size for Free Plan users is set at .25 CU (.25 vCPU and 1 GB RAM).
 </Admonition>
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).

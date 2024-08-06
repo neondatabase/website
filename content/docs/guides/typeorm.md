@@ -2,7 +2,7 @@
 title: Connect from TypeORM to Neon
 subtitle: Learn how to connect to Neon from TypeORM
 enableTableOfContents: true
-updatedOn: '2024-07-04T12:29:37.214Z'
+updatedOn: '2024-07-31T18:11:25.210Z'
 ---
 
 TypeORM is an open-source ORM that lets you to manage and interact with your database. This guide covers the following topics:
@@ -21,7 +21,9 @@ To establish a basic connection from TypeORM to Neon, perform the following step
 
 2. Update the TypeORM's DataSource initialization in your application to the following:
 
-   ```typescript {2,3,4}
+   ```typescript {4,5,6}
+   import { DataSource } from 'typeorm';
+
    export const AppDataSource = new DataSource({
      type: 'postgres',
      url: process.env.DATABASE_URL,
@@ -39,6 +41,10 @@ To establish a basic connection from TypeORM to Neon, perform the following step
    ```text shouldWrap
    DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
    ```
+
+<Admonition type="tip">
+TypeORM leverages a [node-postgres](https://node-postgres.com) Pool instance to connect to your Postgres database. Installing [pg-native](https://npmjs.com/package/pg-native) and setting the `NODE_PG_FORCE_NATIVE` environment variable to `true` [switches the `pg` driver to `pg-native`](https://github.com/brianc/node-postgres/blob/master/packages/pg/lib/index.js#L31-L34), which, according to some users, produces noticeably faster response times.
+</Admonition>
 
 ## Use connection pooling with TypeORM
 

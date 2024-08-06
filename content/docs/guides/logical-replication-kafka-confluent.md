@@ -3,7 +3,7 @@ title: Replicate data with Kafka (Confluent) and Debezium
 subtitle: Learn how to replicate data from Neon with Kafka (Confluent) and Debezium
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-23T20:03:37.195Z'
+updatedOn: '2024-08-02T17:25:18.434Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -29,9 +29,9 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 
 To enable logical replication in Neon:
 
-1. Select your project in the [Neon Console](https://console.neon.tech/app/projects).
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Beta**.
+1. Select your project in the Neon Console.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query from the the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):

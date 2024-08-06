@@ -198,6 +198,14 @@ module.exports = {
           'radial-gradient(18.96% 17.96% at 13% -1%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
           'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
           'linear-gradient(0deg, #141416, #141416)',
+        'variable-list-icon-bg': 'linear-gradient(220deg, #272A35 8%, #16181D 70%)',
+        'variable-list-icon-border':
+          'linear-gradient(224deg, #FFF 2.43%, rgba(255, 255, 255, 0.00))',
+        'variable-value-1': 'linear-gradient(220deg, #FFFFFF 22%, #41BAB9 142%)',
+        'variable-value-2': 'linear-gradient(73deg, #EFEFEF 13%, #89E0EA 61%, #7F95EB 93%)',
+        'variable-value-3':
+          'linear-gradient(90deg, rgba(255, 255, 255, 0.60), rgba(255, 255, 255, 0.50))',
+        'variable-value-text': 'linear-gradient(90deg, #797D86 0%, #A4B7E2 100%)',
       }),
       keyframes: (theme) => ({
         'text-blink': {

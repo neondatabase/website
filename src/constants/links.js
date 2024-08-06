@@ -1,6 +1,6 @@
 export default {
   aboutUs: '/about-us',
-  ai: '/ai',
+  ai: '/docs/ai/ai-intro',
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   autoscaling: '/docs/introduction/autoscaling',
   awsIsrael: '/partners/aws-israel',
@@ -52,6 +52,7 @@ export default {
   termsOfService: '/terms-of-service',
   thankYou: '/thank-you',
   trust: '/trust',
+  variable: '/variable',
   twitter: 'https://twitter.com/neondatabase/',
   youtube: 'https://www.youtube.com/channel/UCoMzQTJSIr7-RU1QbomQI2w',
 };

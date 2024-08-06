@@ -80,6 +80,8 @@ updatedOn: '2024-07-11T12:52:17.602Z'
 
 <img src="/images/technology-logos/typeorm-logo.svg" width="30" height="36" alt="TypeORM" href="/docs/guides/typeorm" title="Connect from TypeORM to Neon" />
 
+<img src="/images/technology-logos/knex-logo.svg" width="30" height="36" alt="Knex" href="/docs/guides/knex" title="Connect from Knex to Neon" />
+
 </TechnologyNavigation>
 
 ## Replicate

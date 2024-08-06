@@ -108,6 +108,20 @@ export default {
     description: 'Thank you for subscribing to the Neon newsletter',
     pathname: LINKS.thankYou,
   },
+  variable: {
+    title: 'Dynamically scale your Postgres database — Neon',
+    description:
+      'Discover how Neon dynamically scales Postgres compute resources for optimal performance during peak traffic without overpaying.',
+    imagePath: '/images/social-previews/variable.jpg',
+    pathname: LINKS.variable,
+  },
+  costFleets: {
+    title: 'Neon for platforms: Cost estimator',
+    description:
+      'Run thousands of Postgres databases for a fraction of the cost with Neon. Great for building your free tier.',
+    imagePath: '/images/social-previews/cost-fleets.jpg',
+    pathname: LINKS.costFleets,
+  },
   404: {
     title: 'Page Not Found — Neon',
   },

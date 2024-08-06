@@ -2,7 +2,7 @@
 title: Postgres sample data
 subtitle: 'Download sample data for learning, testing, and exploring Neon'
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.889Z'
+updatedOn: '2024-08-06T15:23:10.951Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.
@@ -22,7 +22,7 @@ You can also load sample data using the Neon CLI. See [Load sample data with the
 
 ## Sample data
 
-Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Tier has a storage limit of 3 GB per branch. Datasets larger than 3 GB cannot be loaded on the Free Tier.
+Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Plan has a storage limit of 3 GB per branch. Datasets larger than 3 GB cannot be loaded on the Free Plan.
 
 | Name                                                        | Tables | Records  | Source file size | Installed size |
 | ----------------------------------------------------------- | ------ | -------- | ---------------- | -------------- |

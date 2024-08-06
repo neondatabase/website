@@ -2,7 +2,7 @@
 title: Migrate your MySQL database to Neon Postgres
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-14T07:55:54.411Z'
+updatedOn: '2024-08-06T15:23:10.952Z'
 ---
 
 This topic describes how to migrate your MySQL database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -15,7 +15,7 @@ Before you begin, make sure that you have the following:
 
 - A Neon account and a project. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A properly named database. For example, if you are migrating a database named `sakila`, you might want to create a database of the same name in Neon. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
-- Neon's Free Tier supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
+- Neon's Free Plan supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
 Also, a close review of the [Pgloader MySQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mysql.html) guide is recommended before you start. This guide will provide you with a good understanding of `pgloader` capabilities and how to configure your `pgloader` configuration file, if necessary.
 

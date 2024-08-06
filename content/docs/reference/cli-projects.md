@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-07-05T18:43:27.662Z'
+updatedOn: '2024-08-06T15:23:10.958Z'
 ---
 
 ## Before you begin
@@ -74,7 +74,7 @@ Shared with me
 
 This subcommand allows you to create a Neon project.
 
-The [Neon Free Tier](../introduction/free-tier) supports creating a single project. Paid plans allow multiple projects.
+The [Neon Free Plan](/docs/introduction/plans#free-plan) supports creating a single project. Paid plans allow multiple projects.
 
 #### Usage
 

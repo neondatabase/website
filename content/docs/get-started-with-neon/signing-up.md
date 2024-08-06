@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2024-07-25T12:53:42.422Z'
+updatedOn: '2024-08-06T15:23:10.945Z'
 ---
 
 This tutorial guides you through your first steps using Neon as your Postgres database. You'll get familiar with the following concepts:
@@ -32,7 +32,7 @@ After signing up, you'll start with a `main` branch and the empty database `neon
     Sign up with your email, Github, Google, or other partner account.
 
     For information about what's included with the free plan, see
-    [Neon Free Tier](/docs/introduction/plans#free-tier). For information about Neon's paid options, see
+    [Neon Free Plan](/docs/introduction/plans#free-plan). For information about Neon's paid options, see
     [Neon Plans](/docs/introduction/plans).
 
   </div>

@@ -3,7 +3,7 @@ title: Replicate data to an external Postgres instance
 subtitle: Learn how to replicate data from Neon to an external Postgres instance
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-23T20:03:37.196Z'
+updatedOn: '2024-08-02T17:25:18.435Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from Neon to external subscribers. This guide shows you how to stream data from a Neon Postgres database to an external Postgres database.
@@ -23,9 +23,9 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Beta**.
-4. Click **Enable**.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Logical Replication**.
+4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query:
 
@@ -130,7 +130,22 @@ A subscriber is a destination that receives data changes from your publications.
 
 This section describes how to configure a subscription on a standalone Postgres instance to a publication defined on your Neon database. After the subscription is defined, the destination Postgres instance will be able to receive data changes from the publication defined on your Neon database.
 
-It is assumed that you have a separate Postgres instance ready to act as the subscriber. This must be a Postgres instance other than Neon, such as a local PostgreSQL installation. Currently, a Neon database cannot be defined as a subscriber. The PostgreSQL version of the subscriber should be compatible with the publisher. The primary (publishing) server must be of the same or a higher version than the replica (subscribing) server. For example, you can replicate from PostgreSQL 14 to 16, but not from 16 to 14. Neon supports Postgres 14, 15, and 16. The Postgres version is defined when you create a Neon project.
+It is assumed that you have a separate Postgres instance ready to act as the subscriber:
+
+- This must be a Postgres instance other than Neon, such as a local PostgreSQL installation. Currently, a Neon database cannot be defined as a subscriber. The PostgreSQL version of the subscriber should be compatible with the publisher. The primary (publishing) server must be of the same or a higher version than the replica (subscribing) server. For example, you can replicate from PostgreSQL 14 to 16, but not from 16 to 14. Neon supports Postgres 14, 15, and 16. The Postgres version is defined when you create a Neon project.
+- A corresponding `users` table must exist in the subscriber database. This table should have the same name and table schema as the table on the publisher. You can use the same `CREATE TABLE` statement used previously:
+
+  ```sql
+  CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL
+  );
+  ```
+
+   <Admonition type="note">
+   When configuring logical replication in Postgres, the tables defined in the publication on the publisher must also exist on the subscriber with the same name and table schema.
+   </Admonition>
 
 ### Create a subscription
 
@@ -181,15 +196,15 @@ First, generate some changes in the `users` table on the publisher database to s
    psql -h [server_IP_or_hostname] -U [username] -d [database] -W
    ```
 
-4. Query the `users` table:
+4. Query the `users` table in the subscriber database:
 
    ```sql
    SELECT * FROM users;
    ```
 
-Compare the results with what you observed on the publisher.
+   Compare the results with what you observed on the publisher.
 
-4. On the subscriber, you can also check the status of the replication:
+5. On the subscriber, you can also check the status of the replication:
 
    ```sql
    SELECT * FROM pg_stat_subscription;

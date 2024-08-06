@@ -2,7 +2,7 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
-updatedOn: '2024-07-25T12:53:42.429Z'
+updatedOn: '2024-08-06T15:23:10.950Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your history retention window and then run queries against that connection.
@@ -30,7 +30,7 @@ The ephemeral endpoints are created according to your configured [default comput
 
 ### History retention
 
-You are only able to run Time Travel queries that fall within your history retention window, which starts at 24 hours for Free Tier users, up to 7 days for Launch plan users, and up to 30 days for Scale plan users.
+You are only able to run Time Travel queries that fall within your history retention window, which starts at 24 hours for Free Plan users, up to 7 days for Launch plan users, and up to 30 days for Scale plan users.
 
 You cannot select a time outside your current retention window.
 

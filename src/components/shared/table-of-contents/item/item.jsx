@@ -19,7 +19,7 @@ const Item = ({ title, level, id, items, currentAnchor, isUserScrolling, setIsUs
       setIsUserScrolling(false);
     }
 
-    document.querySelector(anchor).scrollIntoView({
+    document.querySelector(anchor)?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });

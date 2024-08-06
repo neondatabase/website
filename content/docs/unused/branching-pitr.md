@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2024-07-25T12:53:42.438Z'
+updatedOn: '2024-08-06T15:23:10.959Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
@@ -15,7 +15,7 @@ A simpler one-click branch restore operation is now available. Read more about i
 
 Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined history retention period. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
 
-The history retention period is configurable. The supported limits are 24 hours for [Neon Free Tier](/docs/introduction/plans#free-tier) users, 7 days for [Launch](/docs/introduction/plans#launch) plan users, and 30 days for [Scale](/docs/introduction/plans#scale) plan users. For configuration instructions, see [Configure history retention](/docs/manage/projects#configure-history-retention).
+The history retention period is configurable. The supported limits are 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch) plan users, and 30 days for [Scale](/docs/introduction/plans#scale) plan users. For configuration instructions, see [Configure history retention](/docs/manage/projects#configure-history-retention).
 
 This guide shows how to recover your data to a point in time before a data loss occurred using Neon's branching feature.
 

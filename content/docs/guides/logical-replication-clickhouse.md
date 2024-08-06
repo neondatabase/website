@@ -3,7 +3,7 @@ title: Replicate data to a ClickHouse database on DoubleCloud
 subtitle: Learn how to replicate data from Neon to a ClickHouse database on DoubleCloud
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-23T20:03:37.192Z'
+updatedOn: '2024-08-02T17:25:18.433Z'
 ---
 
 <Admonition type="tip">
@@ -25,17 +25,6 @@ With Transfer, you can replicate your data to both managed ClickHouse clusters o
 
 - A [DoubleCloud account](https://console.double.cloud/)
 - A [Neon account](https://console.neon.tech/)
-- The ClickHouse client installed on your local machine.
-
-    <Admonition type="tip">
-    If you don't have the ClickHouse client, you can install it with the following command:
-
-  ```bash
-  curl https://clickhouse.com/ | sh
-  ```
-
-  It downloads the official binary for your operating system and installs both the ClickHouse client and ClickHouse itself.
-  </Admonition>
 
 ## Enable logical replication in Neon
 
@@ -46,8 +35,8 @@ Enabling logical replication modifies the Postgres `wal_level` configuration par
 To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Beta**.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
@@ -163,23 +152,17 @@ For production, make sure to select at least three replicas, 16 GB of RAM, and d
 1. Under **Basic settings**, enter the cluster name, for example `clickhouse-dev`.
 1. Click **Submit** at the bottom of the page. Creating a cluster takes around five minutes depending on the provider, region, and settings.
 1. After the cluster status changes from _Creating_ to _Alive_, select it in the cluster list.
-1. On the **Overview** tab, find the **Connection strings** section.
-   Copy the **Native interface** connection string.
-1. Paste the connection string to ClickHouse client and connect to the cluster.
+1. On the **Overview** tab, click **WebSQL** at the top right.
 
-   The output should look as follows:
+   WebSQL is a DoubleCloud service that allows you to connect to your managed ClickHouse clusters from your browser tab.
+   It provides a full-fledged SQL editor that you can use to view databases and execute SQL queries.
 
-   ```bash
-   Connected to ClickHouse server version 23.8.9.
-   ach-euc1-az2-s1-1.<cluster_name>.at.double.cloud :)
-   ```
-
-   `:)` means that the cluster is ready to receive commands.
+1. Select a database in the connection manager on the left to open the query editor.
 
 1. Create a database:
 
    ```sql
-   CREATE DATABASE IF NOT EXISTS <database_name>
+   CREATE DATABASE IF NOT EXISTS <database_name> ON CLUSTER default
    ```
 
 1. Make sure that the database has been created:
@@ -255,9 +238,27 @@ Even when logical replication isn't available on the Neon side, you can schedule
 
    When the data has transferred, the transfer status changes to _Done_.
 
+## Query the transferred data with WebSQL
+
+<Admonition type="note">
+You can use WebSQL only to connect to managed ClickHouse clusters on DoubleCloud.
+If you've transferred data to an on-premise ClickHouse cluster,
+use the ClickHouse client or a similar tool to connect to it.
+</Admonition>
+
+1. In the left menu, select **Clusters** and select your cluster from the list.
+
+1. On the **Overview** tab, click **WebSQL** at the top right.
+
+1. Select the database you created earlier in the connection manager on the left.
+
+1. In the query editor, enter and execute your query.
+
+   The query output will be displayed under the editor.
+
 ## References
 
 - [DoubleCloud get started with ClickHouse guide](https://double.cloud/docs/en/managed-clickhouse/get-started)
-- [DoubleCloud get started with Transfer guide](https://double.cloud/docs/en/transfers/quickstart)
+- [DoubleCloud get started with Transfer guide](https://double.cloud/docs/en/transfers/get-started)
 
 <NeedHelp/>

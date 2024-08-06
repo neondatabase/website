@@ -1,7 +1,7 @@
 ---
 title: Acceptable Use Policy
 enableTableOfContents: true
-updatedOn: '2024-01-29T09:55:23.882Z'
+updatedOn: '2024-08-06T15:23:10.959Z'
 ---
 
 **Last Updated:** 23 January 2024
@@ -32,7 +32,7 @@ The following activities are strictly prohibited:
 - **Violations of Privacy:** Users must respect the privacy of others and should not engage in activities that violate the privacy of Neon's users or any third parties.
 - **Network Interference:** Users are not allowed to interfere with the normal operation of Neon's network infrastructure, including attempting to bypass security measures or manipulating network protocols.
 - **Insecure Development Practices:** Users are expected to follow secure development practices when utilizing Neon's services, and any insecure coding practices that could compromise the integrity of the service are prohibited.
-- **Creating Multiple Accounts:** Avoid creating multiple accounts, as this can result in an account block due to misuse of free-tier resources.
+- **Creating Multiple Accounts:** Avoid creating multiple accounts, as this can result in an account block due to misuse of free-plan resources.
 
 ## Enforcement
 

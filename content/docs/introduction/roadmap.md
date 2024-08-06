@@ -4,7 +4,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-06-14T07:55:54.415Z'
+updatedOn: '2024-08-06T15:23:10.955Z'
 ---
 
 Our developers are focused on making Neon the default choice for serverless Postgres. This roadmap describes committed features that are coming soon. We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion.
@@ -48,10 +48,6 @@ Here's a snapshot of what we're working on now:
 
   We're working on a GitHub App for Neon that will create and delete Neon branches in synchronization with git branch actions.
 
-- **Outerbase integration**
-
-  We are adding Outerbase as one of our available integrations. You will soon be able to use [Outerbase](https://www.outerbase.com/) to view, query, visualize, and edit your Neon data with the power of AI.
-
 - **Support for anonymizing data**
 
   To help with workflows that require protecting personal information, we're adding support for anonymizing data. For example, if you derive your staging branch directly from production, you might want to anonymize the data on staging, which you can then use as the source for all of your development and testing branches.
@@ -72,9 +68,9 @@ If there are any new branching features that you think could help your developme
 
 The Neon **Limited Preview** started in February 2022 and was made available to a small number of select users and friends.
 
-On June 15th, 2022, the Neon team announced a [Technical Preview](#technical-preview), making Neon available to a wider audience. Thousands of users were able to try Neon's [Free Tier](/docs/introduction/free-tier).
+On June 15th, 2022, the Neon team announced a [Technical Preview](#technical-preview), making Neon available to a wider audience. Thousands of users were able to try Neon's [Free Plan](/docs/introduction/#free-plan).
 
-On December 6th, 2022, Neon released its branching feature and dropped the invite gate, welcoming everyone to try Neon's Free Tier.
+On December 6th, 2022, Neon released its branching feature and dropped the invite gate, welcoming everyone to try Neon's Free Plan.
 
 In the first quarter of 2023, Neon launched [paid plans](https://neon.tech/pricing) with new features like Project Sharing, [Autoscaling](/docs/introduction/autoscaling), and [Autosuspend](/docs/introduction/auto-suspend). We also added support for US East (N. Virginia)
 
