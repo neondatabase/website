@@ -22,7 +22,7 @@ const Hero = () => (
           its usage-based pricing and scale-to-zero. Via its developer-friendly API, you can{' '}
           <strong>run thousands of Postgres databases without a DBA</strong>.
         </p>
-        <p>
+        <p className="!mt-4">
           Companies like{' '}
           <Link to="/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases">
             Retool
