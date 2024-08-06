@@ -27,17 +27,17 @@ const inputParamsBlock = [
   },
   {
     name: 'proUsersPercentage',
-    title: '% of Pro accounts vs Free tier. <span>If this doesn&apos;t apply, select 0.</span>',
+    title: '% of Pro accounts vs Free. <span>If this doesn&apos;t apply, select 0.</span>',
     values: [0, 20, 30, 100],
   },
   {
     name: 'freeUsersDbHours',
-    title: 'How many hours/week do the Free tier users run the DB?',
+    title: 'How many hours/week do the Free Plan users run the DB?',
     values: [1, 3, 15],
   },
   {
     name: 'proUsersDbHours',
-    title: 'How many hours/week do the Pro tier users run the DB?',
+    title: 'How many hours/week do the Pro users run the DB?',
     values: [5, 15, 40],
   },
 ];
@@ -170,7 +170,7 @@ const Calculator = () => {
       <DashedBorder />
       <div className="relative z-10 py-[18px] sm:py-4">
         <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:text-lg">
-          Input parameters
+          Use case
         </h3>
         <ul className="space-y-1.5 sm:space-y-4">
           {inputParamsBlock.map(({ name, title, values }) => (
