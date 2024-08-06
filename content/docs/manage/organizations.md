@@ -2,7 +2,7 @@
 title: Organizations (private preview)
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2024-07-05T19:12:26.341Z'
+updatedOn: '2024-08-06T15:23:10.957Z'
 ---
 
 Organizations let you work with your Neon projects as a team. By creating an organization, you can bring together Members and Guests, manage permissions, and organize all of your team's projects under a single umbrella.

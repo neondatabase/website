@@ -3,7 +3,7 @@ title: Use StepZen with Neon
 subtitle: Learn how to use StepZen to build a GraphQL API for your Neon database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-14T07:55:54.408Z'
+updatedOn: '2024-08-06T15:23:10.950Z'
 ---
 
 _This guide was contributed by Roy Derks from StepZen_

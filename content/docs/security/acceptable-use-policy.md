@@ -1,7 +1,7 @@
 ---
 title: Acceptable Use Policy
 enableTableOfContents: true
-updatedOn: '2024-01-29T09:55:23.882Z'
+updatedOn: '2024-08-06T15:23:10.959Z'
 ---
 
 **Last Updated:** 23 January 2024
