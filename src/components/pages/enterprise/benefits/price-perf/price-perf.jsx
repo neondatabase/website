@@ -12,8 +12,7 @@ const PricePerf = () => (
         Scale performance, not costs
       </h3>
       <p className="mt-2.5 max-w-[590px] text-lg font-light leading-snug xl:text-base lg:mx-auto lg:max-w-[584px] md:mt-2">
-        Neon is serverless Postgres: you never pay for compute that's not being actively
-        used.{' '}
+        Neon is serverless Postgres: you never pay for compute that's not being actively used.{' '}
         <Link
           className="border-b border-transparent text-green-45 no-underline transition-[border-color] duration-200 ease-in-out hover:border-green-45 sm:break-words"
           to="/docs/introduction/auto-suspend"

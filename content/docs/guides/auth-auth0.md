@@ -22,7 +22,7 @@ In this guide, we'll walk through setting up a simple Next.js application using 
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- An [Auth0](https://auth0.com/) account for user authentication. Auth0 provides a free tier to get started.
+- An [Auth0](https://auth0.com/) account for user authentication. Auth0 provides a free plan to get started.
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and test the application locally.
 
 ## Initialize your Next.js project

@@ -33,8 +33,7 @@ const items = [
   {
     icon: s3Icon,
     title: 'For dev and prod',
-    description:
-      'Reduce the costs of your entire deployment via scale-to-zero and autoscaling .',
+    description: 'Reduce the costs of your entire deployment via scale-to-zero and autoscaling .',
   },
 ];
 

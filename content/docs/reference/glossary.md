@@ -136,7 +136,7 @@ A unit that measures the processing power or "size" of a Neon compute. A Compute
 
 ## compute hours
 
-A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Tier, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
 
 To calculate compute hour usage, you would use the following formula:
 
@@ -174,7 +174,7 @@ A method of storing inactive data that converts plaintext data into a coded form
 
 ## Data transfer
 
-A usage metric that measures the total volume of data transferred out of Neon (known as "egress") during a given billing period. Neon does not charge for egress data, but we limit the amount of egress available on Free Tier projects to 5 GB per month. See [Data transfer](/docs/introduction/usage-metrics#data-transfer).
+A usage metric that measures the total volume of data transferred out of Neon (known as "egress") during a given billing period. Neon does not charge for egress data, but we limit the amount of egress available on Free Plan projects to 5 GB per month. See [Data tranfser](/docs/introduction/usage-metrics#data-transfer).
 
 ## Database
 
@@ -212,9 +212,9 @@ The data transferred out of the Neon service to an external destination. See [Da
 
 A custom volume-based paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
 
-## Free Tier
+## Free Plan
 
-See [Neon Free Tier](#neon-free-tier).
+See [Neon Free Plan](#neon-free-plan).
 
 ## History
 
@@ -288,9 +288,9 @@ The Neon RESTful Application Programming Interface. Any operation performed in t
 
 A browser-based graphical interface for managing Neon projects and resources.
 
-## Neon Free Tier
+## Neon Free Plan
 
-A Neon service tier for which there are no usage charges. For information about the Neon Free Tier and associated limits, see [Neon Free Tier](/docs/introduction/plans#free-tier).
+A Neon service plan for which there are no usage charges. For information about the Neon Free Plan and associated limits, see [Neon Free Plan](/docs/introduction/plans#free-plan).
 
 ## Neon user
 
@@ -310,7 +310,7 @@ An 8KB unit of data, which is the smallest unit that Postgres uses for storing r
 
 ## Paid plan
 
-A paid Neon service tier. See [Neon plans](/docs/introduction/plans).
+A paid Neon service plan. See [Neon plans](/docs/introduction/plans).
 
 ## Pageserver
 
@@ -324,7 +324,7 @@ The ability to authenticate without providing a password. Neon’s [Passwordless
 
 ## point-in-time restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. By default, Neon retains a history of changes for all branches in a project. The supported limits are 24 hours for [Neon Free Tier](/docs/introduction/plans#free-tier) users, 7 days for [Launch](/docs/introduction/plans#launch) plan users, and 30 days for [Scale](/docs/introduction/plans#scale) plan users. For more information about this feature, see [Branching — Point-in-time restore](https://neon.tech/docs/guides/branching-pitr).
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. By default, Neon retains a history of changes for all branches in a project. The supported limits are 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch) plan users, and 30 days for [Scale](/docs/introduction/plans#scale) plan users. For more information about this feature, see [Branching — Point-in-time restore](https://neon.tech/docs/guides/branching-pitr).
 
 ## pooled connection string
 

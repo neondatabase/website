@@ -22,7 +22,7 @@ This table provides an overview of plan fees with allowances for storage, comput
 
 | Plan       | Monthly Fee | Storage Allowance | Compute Allowance                                                            | Project Allowance |
 | ---------- | ----------- | ----------------- | ---------------------------------------------------------------------------- | ----------------- |
-| Free Tier  | $0          | 0.5 GiB           | Always-available default branch compute, 5 compute hours for branch computes | 1 project         |
+| Free Plan  | $0          | 0.5 GiB           | Always-available default branch compute, 5 compute hours for branch computes | 1 project         |
 | Launch     | $19         | 10 GiB            | 300 compute hours                                                            | 10 projects       |
 | Scale      | $69         | 50 GiB            | 750 compute hours                                                            | 50 projects       |
 | Enterprise | Custom      | Custom            | Custom                                                                       | Custom            |

@@ -13,7 +13,8 @@ const Fleets = () => (
         Scale your Postgres fleet
       </h3>
       <p className="mt-2.5 max-w-[590px] text-lg font-light leading-snug xl:text-base lg:mx-auto lg:max-w-[584px] md:mt-2">
-        Use Neon as a single pane for managing up to thousands of Postgres databases for a fraction of the cost.{' '}
+        Use Neon as a single pane for managing up to thousands of Postgres databases for a fraction
+        of the cost.{' '}
         <Link
           className="border-b border-transparent text-green-45 no-underline transition-[border-color] duration-200 ease-in-out hover:border-green-45 sm:break-words"
           to="https://neon-experimental.vercel.app/"

@@ -17,7 +17,7 @@ Your Neon plan defines the range of data you can view.
 
 | Neon Plan                                       | Data Access              |
 | ----------------------------------------------- | ------------------------ |
-| [Free Tier](/docs/introduction/plans#free-tier) | Last day (24 hours)      |
+| [Free Plan](/docs/introduction/plans#free-plan) | Last day (24 hours)      |
 | [Launch](/docs/introduction/plans#launch)       | Last 7 days (168 hours)  |
 | [Scale](/docs/introduction/plans#scale)         | Last 14 days (336 hours) |
 

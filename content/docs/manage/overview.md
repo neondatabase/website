@@ -19,7 +19,7 @@ API keys are global and belong to the Neon account. API keys are used with the [
 
 ## Projects
 
-A project is the top-level object in the Neon object hierarchy. It is a container for all objects except for API keys, which are global and work with any project owned by your Neon account. Branches, computes, roles, and databases belong to a project. A Neon project also defines the region where project resources reside. A Neon account can have multiple projects, but tier limits define the number of projects per Neon account. For more information, see [Manage projects](/docs/manage/projects).
+A project is the top-level object in the Neon object hierarchy. It is a container for all objects except for API keys, which are global and work with any project owned by your Neon account. Branches, computes, roles, and databases belong to a project. A Neon project also defines the region where project resources reside. A Neon account can have multiple projects, but plan limits define the number of projects per Neon account. For more information, see [Manage projects](/docs/manage/projects).
 
 ## Default branch
 

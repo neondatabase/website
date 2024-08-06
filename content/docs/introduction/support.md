@@ -21,7 +21,7 @@ The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is available to all Neo
 
 ## Community support
 
-Neon's [Free Tier](/docs/introduction/plans#free-tier) includes **Community** support.
+Neon's [Free Plan](/docs/introduction/plans#free-plan) includes **Community** support.
 
 Community support is provided through the [Neon Discord Server](https://discord.gg/92vNTzKDGp), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged in our Discord Server.
 
@@ -59,7 +59,7 @@ Neon's support plans are mapped to our [pricing plans](/docs/introduction/plans)
 
 | Support plan | Pricing plan                                           |
 | :----------- | :----------------------------------------------------- |
-| Community    | [Free Tier](/docs/introduction/plans#free-tier)        |
+| Community    | [Free Plan](/docs/introduction/plans#free-plan)        |
 | Standard     | [Launch plan](/docs/introduction/plans#launch)         |
 | Priority     | [Scale plan](/docs/introduction/plans#scale)           |
 | Enterprise   | [Enterprise plan](/docs/introduction/plans#enterprise) |

@@ -9,7 +9,7 @@ You can share a Neon project with other users, giving them access to your Neon p
 
 ## Set up Neon accounts
 
-You can share your Neon project with anyone. The only requirement is that the user has a Neon account. The account can be a Neon Free Tier account or a paid plan account.
+You can share your Neon project with anyone. The only requirement is that the user has a Neon account. The account can be a Neon Free Plan account or a paid plan account.
 
 1. If the user does not have a Neon account, ask them to sign up. You can provide your users with the following instructions: [Sign up](/docs/get-started-with-neon/signing-up).
 2. Request the email address the user signed up with. If the user signed up with a Google or GitHub account, ask for the email address associated with that account.
@@ -37,7 +37,7 @@ To share your project:
 
 ## Shared project limits
 
-The users you share a project with operate within your project allowances rather than their Neon Free Tier project allowances when using your project. For example, a Neon Free Tier user is limited to 10 branches in their own project. When using your project, there is no such restriction. For an overview of plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
+The users you share a project with operate within your project allowances rather than their Neon Free Plan project allowances when using your project. For example, a Neon Free Plan user is limited to 10 branches in their own project. When using your project, there is no such restriction. For an overview of plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
 
 ## Access to a shared project via the Neon API or CLI
 
