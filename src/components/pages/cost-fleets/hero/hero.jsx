@@ -16,14 +16,11 @@ const Hero = () => (
         </p>
       </div>
 
-      <h2 className="sr-only">Use case</h2>
-
-      <Example />
-
       <div className="prose-variable px-8 sm:px-0">
         <p>
           <strong>Neon is a cost-effective option for managing fleets of Postgres instances</strong>
-          . Why? Because of its usage-based pricing and scale-to-zero. Via its developer-friendly API, you can run thousands of Postgres databases without a DBA.{' '}
+          . Why? Because of its usage-based pricing and scale-to-zero. Via its developer-friendly
+          API, you can run thousands of Postgres databases without a DBA.{' '}
         </p>
         <p>
           Companies like{' '}
@@ -39,10 +36,12 @@ const Hero = () => (
           >
             Koyeb
           </Link>{' '}
-          are already using Neon to offer Postgres to their end-users. To get an estimate for your platform, {' '}
-          <Link to={LINKS.caseStudies}>reach out to us</Link>.
+          are already using Neon to offer Postgres to their end-users. To get an estimate for your
+          platform, <Link to={LINKS.contactSales}>reach out to us</Link>.
         </p>
       </div>
+
+      <Example />
     </Container>
   </section>
 );

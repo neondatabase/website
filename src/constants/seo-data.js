@@ -116,9 +116,9 @@ export default {
     pathname: LINKS.variable,
   },
   costFleets: {
-    title: 'Cost-Fleets: A serverless Postgres solution for enterprises',
+    title: 'Neon for platforms: Cost estimator',
     description:
-      'Neon is the only Postgres solution that allows you to scale your Postgres fleet at scale.',
+      'Run thousands of Postgres databases for a fraction of the cost with Neon. Great for building your free tier.',
     imagePath: '/images/social-previews/cost-fleets.jpg',
     pathname: LINKS.costFleets,
   },
