@@ -66,7 +66,17 @@ With your publication created, you're now ready to configure a subscriber that w
 
 It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
-<Tabs labels={["Neon Console", "CLI", "API"]}>
+<Tabs labels={["Neon CLI", "Neon Console", "Neon API"]}>
+
+<TabItem>
+
+The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
+
+```bash
+neon roles create --name alex
+```
+
+</TabItem>
 
 <TabItem>
 
@@ -79,16 +89,6 @@ To create a role in the Neon Console:
 5. Click **New Role**.
 6. In the role creation dialog, specify a role name.
 7. Click **Create**. The role is created, and you are provided with the password for the role.
-
-</TabItem>
-
-<TabItem>
-
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
-
-```bash
-neon roles create --name <role>
-```
 
 </TabItem>
 
@@ -114,12 +114,12 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 ## Grant schema access to your Postgres role
 
-If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. Run these commands for each schema:
+If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `alex`:  
 
 ```sql
-GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
-GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <role_name>;
-ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <role_name>;
+GRANT USAGE ON SCHEMA public TO alex;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO alex;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO alex;
 ```
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
@@ -132,7 +132,7 @@ This section describes how to configure a subscription on a standalone Postgres 
 
 It is assumed that you have a separate Postgres instance ready to act as the subscriber:
 
-- This must be a Postgres instance other than Neon, such as a local PostgreSQL installation. Currently, a Neon database cannot be defined as a subscriber. The PostgreSQL version of the subscriber should be compatible with the publisher. The primary (publishing) server must be of the same or a higher version than the replica (subscribing) server. For example, you can replicate from PostgreSQL 14 to 16, but not from 16 to 14. Neon supports Postgres 14, 15, and 16. The Postgres version is defined when you create a Neon project.
+- The subscriber must be a Postgres instance other than Neon, such as a local Postgres installation. Currently, a Neon database cannot be defined as a subscriber.
 - A corresponding `users` table must exist in the subscriber database. This table should have the same name and table schema as the table on the publisher. You can use the same `CREATE TABLE` statement used previously:
 
   ```sql
@@ -146,6 +146,11 @@ It is assumed that you have a separate Postgres instance ready to act as the sub
    <Admonition type="note">
    When configuring logical replication in Postgres, the tables defined in the publication on the publisher must also exist on the subscriber with the same name and table schema.
    </Admonition>
+
+   <Admonition type="important">
+   By default, Neon's [Autosuspend](/docs/introduction/auto-suspend) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a compute with an active subscriber remains active at all times.
+   </Admonition>
+
 
 ### Create a subscription
 
