@@ -214,16 +214,16 @@ const Form = ({
           </div>
           {isAzurePage && (
             <span
-              className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[inherit]"
+              className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[inherit] bg-azure-form-bg"
               aria-hidden
             >
               <span className="absolute inset-0 bg-[url('/images/noise.png')] bg-cover" />
               <span className="absolute inset-0 rounded-[inherit] border-image-azure-form-border" />
-              <span className="absolute -left-10 -top-12 size-[85px] rounded-full bg-white opacity-30 mix-blend-overlay blur-[30px]" />
+              <span className="absolute -left-10 -top-12 z-10 size-[85px] rounded-full bg-white mix-blend-overlay blur-[30px]" />
               <span className="absolute -left-24 -top-24 h-[220px] w-[410px] -rotate-[17deg] rounded-[100%] bg-azure-form-bg-top opacity-40 blur-[65px]" />
               <span className="absolute -right-9 bottom-9 h-36 w-[120px] translate-x-full rounded-[100%] bg-[#CF9FFF] blur-[52px]" />
-              <span className="absolute -bottom-6 -right-10 size-[85px] rounded-full bg-white opacity-30 mix-blend-overlay blur-[30px]" />
-              <span className="absolute -bottom-20 -right-32 h-[170px] w-[316px] -rotate-[163deg] rounded-[100%] bg-azure-form-bg-bottom opacity-40 blur-[65px]" />
+              <span className="absolute -bottom-6 -right-10 z-10 size-[85px] rounded-full bg-white mix-blend-overlay blur-[30px]" />
+              <span className="absolute -bottom-20 -right-32 h-[170px] w-[316px] rotate-[163deg] rounded-[100%] bg-azure-form-bg-bottom opacity-40 blur-[65px]" />
             </span>
           )}
           {errorMessage && <ErrorMessage text={errorMessage} />}

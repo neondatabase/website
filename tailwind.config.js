@@ -203,6 +203,7 @@ module.exports = {
         'variable-value-1': 'linear-gradient(220deg, #FFFFFF 22%, #41BAB9 142%)',
         'variable-value-2': 'linear-gradient(73deg, #EFEFEF 13%, #89E0EA 61%, #7F95EB 93%)',
         'variable-value-text': 'linear-gradient(90deg, #797D86 0%, #A4B7E2 100%)',
+        'azure-form-bg': 'linear-gradient(127deg, #0F0F10 0%, #070708 81.66%)',
         'azure-form-bg-top':
           'linear-gradient(152deg, #3FDFFF 28.7%, #2B49E3 41.01%, rgba(78, 97, 198, 0) 77.16%)',
         'azure-form-bg-bottom':
