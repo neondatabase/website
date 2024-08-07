@@ -2,7 +2,7 @@
 title: Connect a SolidStart application to Neon
 subtitle: Set up a Neon project in seconds and connect from a SolidStart application
 enableTableOfContents: true
-updatedOn: '2024-07-09T20:48:36.559Z'
+updatedOn: '2024-08-07T21:36:52.665Z'
 tag: new
 ---
 

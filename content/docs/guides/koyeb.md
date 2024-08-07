@@ -3,7 +3,7 @@ title: Use Neon with Koyeb
 subtitle: Learn how to connect a Neon Postgres database to an application deployed with
   Koyeb
 enableTableOfContents: true
-updatedOn: '2024-06-21T14:17:23.471Z'
+updatedOn: '2024-08-07T21:36:52.654Z'
 ---
 
 [Koyeb](https://www.koyeb.com/) is a developer-friendly, serverless platform designed to easily deploy reliable and scalable applications globally. Koyeb offers native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across their edge network with zero configuration.

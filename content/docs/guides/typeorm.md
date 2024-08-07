@@ -2,7 +2,7 @@
 title: Connect from TypeORM to Neon
 subtitle: Learn how to connect to Neon from TypeORM
 enableTableOfContents: true
-updatedOn: '2024-07-31T18:11:25.210Z'
+updatedOn: '2024-08-07T21:36:52.667Z'
 ---
 
 TypeORM is an open-source ORM that lets you to manage and interact with your database. This guide covers the following topics:

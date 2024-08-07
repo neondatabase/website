@@ -4,7 +4,7 @@ subtitle: Learn about strategies for optimizing Postgres query performance
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-performance
-updatedOn: '2024-07-25T12:53:42.434Z'
+updatedOn: '2024-08-07T21:36:52.673Z'
 ---
 
 Many factors can impact query performance in Postgres, ranging from insufficient indexing and database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, it can be difficult to know where to start. In this topic, we'll look at several strategies you can use to optimize query performance in Postgres.

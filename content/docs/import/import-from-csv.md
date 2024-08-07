@@ -1,7 +1,7 @@
 ---
 title: Import data from CSV
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.292Z'
+updatedOn: '2024-08-07T21:36:52.667Z'
 ---
 
 This topic describes how to import data into a Neon database table from a CSV file.
