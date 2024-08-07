@@ -13,8 +13,8 @@ const CostFleetsPage = async () => (
     <Cta
       className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
       title="Try it yourself"
-      buttonText="Request a free trial"
-      buttonUrl={LINKS.scaleTrial}
+      buttonText="Create an account"
+      buttonUrl={LINKS.signup}
     />
   </Layout>
 );
