@@ -33,7 +33,7 @@ const Azure = ({ title, description, hubspotFormId, formData, ...restProps }) =>
             dangerouslySetInnerHTML={{ __html: description }}
           />
         </div>
-        <div className="w-[464px] pt-6 xl:w-[456px] xl:pt-5 lg:pt-2 md:w-full">
+        <div className="w-[464px] pt-6 xl:w-[456px] xl:pt-5 lg:pt-2 md:w-full md:pt-0">
           {formData && (
             <Form
               hubspotFormId={hubspotFormId}
