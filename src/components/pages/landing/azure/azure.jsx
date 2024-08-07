@@ -27,7 +27,7 @@ const Azure = ({ title, description, hubspotFormId, formData, ...restProps }) =>
             quality={100}
             priority
           />
-          <h1 className="font-title text-[56px] font-medium leading-[90%] tracking-extra-tight lg:text-[44px]">
+          <h1 className="font-title text-[56px] font-medium leading-[90%] tracking-extra-tight lg:text-[44px] sm:max-w-xs">
             {title}
           </h1>
           <p
