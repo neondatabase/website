@@ -53,7 +53,7 @@ Log in to the Neon Console and navigate to the **Connection Details** section to
 Your pooled connection string should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Keep your connection string handy for later use.

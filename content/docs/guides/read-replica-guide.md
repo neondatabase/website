@@ -88,7 +88,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
    A **psql** connection string appears similar to the following:
 
    ```bash
-   postgres://[user]:[password]@[neon_hostname]/[dbname]
+   postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string or example.

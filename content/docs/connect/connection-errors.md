@@ -44,7 +44,7 @@ If a library or application upgrade does not help, there are several workarounds
 Neon supports a connection option named `endpoint`, which you can use to identify the compute you are connecting to. Specifically, you can add `options=endpoint%3D[endpoint_id]` as a parameter to your connection string, as shown in the example below. The `%3D` is a URL-encoded `=` sign. Replace `[endpoint_id]` with your compute's ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
 ```txt shouldWrap
-postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
+postgresql://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
 ```
 
 <Admonition type="note">
@@ -82,7 +82,7 @@ endpoint=<endpoint_id>$<password>
 Example:
 
 ```txt
-postgres://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 <Admonition type="note">
@@ -124,7 +124,7 @@ ERROR:  password authentication failed for user '<user_name>' connection to serv
 Check your connection to see if it is defined correctly. Your Neon connection string can be obtained from the **Connection Details** widget on the Neon **Dashboard**. It appears similar to this:
 
 ```text shouldWrap
-postgres://[user]:[password]@[neon_hostname]/[dbname]
+postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 For clients or applications that require specifying connection parameters such as user, password, and hostname separately, the values in a Neon connection string correspond to the following:

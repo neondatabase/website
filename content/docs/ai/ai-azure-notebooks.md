@@ -66,14 +66,14 @@ Install the `psycopg` adapter by adding and executing the following code cell:
 
 ### Connect to your database
 
-1. In your notebook, create a code block to define your Neon database connection and create a cursor object. Replace `postgres://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved previously.
+1. In your notebook, create a code block to define your Neon database connection and create a cursor object. Replace `postgresql://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved previously.
 
    ```python shouldWrap
    import os
    import psycopg
 
    # Provide your Neon connection string
-   connection_string = "postgres://[user]:[password]@[neon_hostname]/[dbname]"
+   connection_string = "postgresql://[user]:[password]@[neon_hostname]/[dbname]"
 
    # Connect using the connection string
    connection = psycopg.connect(connection_string)

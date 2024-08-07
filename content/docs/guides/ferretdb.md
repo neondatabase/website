@@ -48,7 +48,7 @@ From the Neon **Dashboard**, retrieve the connection string for your `ferretdb` 
 Your database connection string will look something like this:
 
 ```bash shouldWrap
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/ferretdb
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/ferretdb
 ```
 
 ## Run FerretDB with Neon via Docker

@@ -96,7 +96,7 @@ In summary, Neon is built for anyone who requires a Postgres database and wants 
 Neon's architecture allows us to spin up a Postgres database almost instantly and provide you with a database URL, which you can plug into your application or database client.
 
 ```sql
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
 
 Additionally, after signing up, we land you on your project dashboard, where you'll find connection snippets for various frameworks, languages, and platforms.

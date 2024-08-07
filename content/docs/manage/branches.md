@@ -160,7 +160,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 4. Connect with `psql` as shown below.
 
 ```bash shouldWrap
-psql postgres://[user]:[password]@[neon_hostname]/[dbname]
+psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 <Admonition type="tip">

@@ -44,7 +44,7 @@ import (
 )
 
 func main() {
-    connStr := "postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
     db, err := sql.Open("postgres", connStr)
     if err != nil {
         panic(err)

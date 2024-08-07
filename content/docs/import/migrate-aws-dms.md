@@ -29,7 +29,7 @@ Complete the following steps before you begin:
 4. Select **Target endpoint** as the **Endpoint type**.
 5. Provide an **Endpoint identifier** label for your new target endpoint. In this guide, we use `neon` as the identifier.
 6. In the **Target engine** drop-down menu, select `PostgreSQL`.
-7. Under **Access to endpoint database**, select **Provide access information manually** and enter the information outlined below. You can obtain the connection details from your Neon connection string, which you can find in the **Connection Details** widget on the Neon **Dashboard**. Your connection string will look similar to this: `postgres://daniel:AbC123dEf@ep-curly-term-54009904.us-east-2.aws.neon.tech/neondb"`.
+7. Under **Access to endpoint database**, select **Provide access information manually** and enter the information outlined below. You can obtain the connection details from your Neon connection string, which you can find in the **Connection Details** widget on the Neon **Dashboard**. Your connection string will look similar to this: `postgresql://daniel:AbC123dEf@ep-curly-term-54009904.us-east-2.aws.neon.tech/neondb"`.
 
    - **Server name**: Specify your Neon hostname, which is this portion of your connection string: `ep-curly-term-54009904.us-east-2.aws.neon.tech`
    - **Port**: `5432`

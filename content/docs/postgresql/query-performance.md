@@ -393,7 +393,7 @@ Connection pooling improves performance by minimizing the overhead associated wi
 Enabling connection pooling in Neon requires adding a `-pooler` option to your Neon connection string (to the Neon hostname), as shown here:
 
 ```plaintext
-postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
 ```
 
 Alternatively, you can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard.

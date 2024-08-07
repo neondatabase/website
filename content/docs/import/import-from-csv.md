@@ -13,7 +13,7 @@ The following example uses the ready-to-use `neondb` database that is created wi
 1. Connect to the `neondb` database using `psql`. For example:
 
    ```bash shouldWrap
-   psql postgres://[user]:[password]@[neon_hostname]/[dbname]
+   psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    <Admonition type="note">

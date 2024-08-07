@@ -81,13 +81,13 @@ The target database is the database on your `dev1` branch where you will will do
 1. Select the `dev1` branch, the `blog` database, and copy the connection string.
 
    ```bash
-   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
    ```
 
 2. Select the `main` branch, the `blog` database, and copy the connection string.
 
    ```bash
-   postgres://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
+   postgresql://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
    ```
 
 Be careful not to mix up your connection strings. You'll see that the hostname (the part starting with `-ep` and ending in `neon.tech`) differs. This is because the `dev1` branch is a separate instance of Postgres, hosted on its own compute.

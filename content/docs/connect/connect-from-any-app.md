@@ -16,11 +16,11 @@ Neon supports pooled and direct connections to the database. Use a pooled connec
 A Neon connection string includes the role, password, hostname, and database name.
 
 ```text
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
-           ^    ^         ^                                               ^
-     role -|    |         |- hostname                                     |- database
-                |
-                |- password
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+             ^    ^         ^                                               ^
+       role -|    |         |- hostname                                     |- database
+                  |
+                  |- password
 ```
 
 <Admonition type="note">
@@ -42,13 +42,13 @@ PGPORT=5432
 Variable:
 
 ```text shouldWrap
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
 Command-line:
 
 ```bash shouldWrap
-psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 <Admonition type="note">

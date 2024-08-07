@@ -153,7 +153,7 @@ The Airbyte UI currently allows selecting any tables for Change Data Capture (CD
    For example, given a connection string like this:
 
    ```bash shouldWrap
-   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
    ```
 
    Enter the details in the Airbyte **Create a source** dialog as shown below. Your values will differ.

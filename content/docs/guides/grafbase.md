@@ -92,13 +92,13 @@ A database connection string is required to forward queries to your Neon databas
 2. Copy the connection string for your database from the **Connection Details** widget. The connection string should appear similar to the following:
 
    ```text shouldWrap
-   postgres://[user]:[password]@[neon_hostname]/[dbname]
+   postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
 3. Add a `DATABASE_URL` environment variable to your `grafbase/.env` file and set the value to your connection string. For example:
 
    ```text shouldWrap
-   DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
+   DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
 ## Add code to the resolvers

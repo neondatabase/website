@@ -50,7 +50,7 @@ CREATE EXTENSION neon;
 To connect to the Neon-managed `postgres` database instead:
 
 ```bash shouldWrap
-psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require
 ```
 
 If you are already connected via `psql`, you can simply switch to the `postgres` database using the `\c` command:

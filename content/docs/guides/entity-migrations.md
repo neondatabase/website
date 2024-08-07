@@ -28,7 +28,7 @@ To follow along with this guide, you will need:
 On the Neon project dashboard, navigate to the **Connection Details** section in your project dashboard to find your database connection URI. It should be in the format below:
 
 ```
-postgres://username:password@hostname/dbname?sslmode=require
+postgresql://username:password@hostname/dbname?sslmode=require
 ```
 
 The Postgres client library we use in this guide requires the connection string to be in the following format:

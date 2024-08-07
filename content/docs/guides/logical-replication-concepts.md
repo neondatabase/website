@@ -64,7 +64,7 @@ You can create a subscription on a "susbcriber" database or platform using [CREA
 
 ```sql
 CREATE SUBSCRIPTION users_subscription
-CONNECTION 'postgres://username:password@host:port/dbname'
+CONNECTION 'postgresql://username:password@host:port/dbname'
 PUBLICATION users_publication;
 ```
 
