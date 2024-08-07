@@ -24,7 +24,7 @@ To learn more about Postgres logical replication, see [Learn about logical repli
 
 ## Logical replication guides
 
-<TechnologyNavigation>
+<TechnologyNavigation open>
 
 <img src="/images/technology-logos/airbyte-logo.svg" width="36" height="36" alt="Airbyte" href="/docs/guides/logical-replication-airbyte" title="Replicate data from Neon with Airbyte" />
 
