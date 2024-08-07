@@ -49,7 +49,6 @@ We're thankful to our private preview customers for the feedback they've given u
 ### Backend-as-a-Service
 
 - **Neon CLI**: We've recently added a [create-app](/docs/reference/cli-create-app) command that lets you bootstrap your application with common dev stacks. `create-app` is maturing fast, with new frameworks, ORMs, and features coming out regularly.
-- **Neon Authentication**: Look for the ability to run SQL directly from the front end of your application. We're investigating ways to let your application run direct SQL queries over HTTP, safely. This will be an opt-in only feature, with special handling for production versus development branches &#8212; and that's all we'll say about it for now.
 - **An email app service**: This service will provide support for email verification and password recovery workflows.
 
 ## What's on the horizon
@@ -66,7 +65,7 @@ And here's a quick list of what we'll be taking on in the near future:
 
 ### Backend-as-a-service
 
-- **Neon Authorization:** We're looking at accepting third-party signed JWTs (JSON Web tokens) for authentication via HTTP proxy, intended for Row Level Security (RLS).
+- **Neon Auth:** We're looking at accepting third-party signed JWTs (JSON Web tokens) for authentication via HTTP proxy, intended for Row Level Security (RLS).
 
 ## Join the Neon Early Access Program
 
