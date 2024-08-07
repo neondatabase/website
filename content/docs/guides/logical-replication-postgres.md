@@ -132,13 +132,13 @@ This section describes how to configure a subscription on a standalone Postgres 
 
 When configuring logical replication in Postgres, the tables defined in the publication on the publisher must also exist on the subscriber, and they must have the same name and table schema. For the example setup described in this guide, a corresponding `users` table should exist in the subscriber database. You can use the `CREATE TABLE` statement used previously to create the `users` table:
 
-  ```sql
-  CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL
-  );
-  ```
+```sql
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(50) NOT NULL,
+  email VARCHAR(100) NOT NULL
+);
+```
 
    <Admonition type="important">
    By default, Neon's [Autosuspend](/docs/introduction/auto-suspend) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a compute with a Postgres instance that is acting as a publisher and has active subscriber remains active at all times. Neon determines if there are active connections from a subscriber by checking for `walsender` processes on the publishing Postgres instance. For more, see [Logical replication and autosuspend](/docs/guides/logical-replication-neon#logical-replication-and-autosuspend).
