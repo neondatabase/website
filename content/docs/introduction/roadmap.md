@@ -31,7 +31,7 @@ If you didn't catch the post, Neon is coming to Azure. [Read more](https://neon.
 
   If you have other branch management ideas, [let us know](#share-your-thoughts).
 
-- **Migrations (Beta)**: We’re adding inbound logical replication as a first step towards offering seamless, low-downtime migrations from your current database provider to Neon. This feature also helps you use Neon as your staging environment, letting you take advantage of developer-friendly features like branching and our GitHub Integration, even if you decide to keep production with your current provider.
+- **Migrations (Beta)**: We’re adding inbound logical replication as a first step towards offering seamless, low-downtime migrations from your current database provider to Neon. Inbound replication can also help you use Neon as your staging environment, letting you take advantage of developer-friendly features like branching and our GitHub Integration, even if you decide to keep production with your current provider.
 - **Snapshots**: Create regularly scheduled snapshots as a way to archive your database &#8212; a cost-effective alternative to long-lived branches.
 - **SQL Editor improvements**: Stay tuned for interesting updates we have planned for our SQL Editor.
 
@@ -44,12 +44,12 @@ We’re always looking for ways to improve our pricing model to make it as devel
 
 ### Organizations Beta
 
-We're thankful to our private preview customers for the feedback they've given us so far &#8212; and happy to say that Organization Accounts are on track for Early Access users soon.
+We're thankful to our private preview customers for the feedback they've given us so far &#8212; and happy to say that **Organization Accounts** are on track for Early Access users soon.
 
 ### Backend-as-a-Service
 
 - **Neon CLI**: We've recently added a [create-app](/docs/reference/cli-create-app) command that lets you bootstrap your application with common dev stacks. `create-app` is maturing fast, with new frameworks, ORMs, and features coming out regularly.
-- **Neon Authentication**: Look for the ability to run SQL directly from the front end of your application. We're investigating ways to let your application run direct SQL queries over HTTP, safely. This will be an optional feature, with special handling for production versus development branches &#8212; and that's all we'll say about it for now.
+- **Neon Authentication**: Look for the ability to run SQL directly from the front end of your application. We're investigating ways to let your application run direct SQL queries over HTTP, safely. This will be an opt-in only feature, with special handling for production versus development branches &#8212; and that's all we'll say about it for now.
 - **An email app service**: This service will provide support for email verification and password recovery workflows.
 
 ## What's on the horizon
