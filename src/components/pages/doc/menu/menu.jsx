@@ -26,7 +26,7 @@ const Section = ({
   setActiveMenuList,
   closeMobileMenu,
 }) => (
-  <li className="border-b border-gray-new-94 py-2.5 first:pt-0 last:border-0 dark:border-gray-new-10 md:py-[11px] md:dark:border-gray-new-15">
+  <li className="border-b border-gray-new-94 py-2.5 first:pt-0 last:border-0 dark:border-gray-new-10 lg:dark:border-gray-new-15/70 md:py-[11px]">
     {section !== 'noname' && (
       <span className="block py-1.5 text-[10px] font-medium uppercase leading-tight text-gray-new-50 md:py-[7px]">
         {section}

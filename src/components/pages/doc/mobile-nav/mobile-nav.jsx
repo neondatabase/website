@@ -98,13 +98,13 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
   return (
     <nav
       className={clsx(
-        'safe-paddings relative border-b border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8',
+        'safe-paddings relative border-y border-gray-new-90 bg-gray-new-98 dark:border-gray-new-15/70 dark:bg-gray-new-8',
         className
       )}
       ref={wrapperRef}
     >
       <button
-        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start bg-gray-new-98 py-2.5 outline-none transition-colors dark:bg-gray-new-8 lg:px-8 md:px-4"
+        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start bg-gray-new-98 py-[9px] outline-none transition-colors dark:bg-gray-new-8 lg:px-8 md:px-4"
         type="button"
         ref={buttonRef}
         onClick={toggleMenu}

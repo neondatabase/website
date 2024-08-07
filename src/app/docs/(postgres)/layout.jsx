@@ -10,7 +10,13 @@ const PostgresDocsLayout = async ({ children }) => {
   const sidebar = await getSidebar();
 
   return (
-    <Layout burgerWithoutBorder isDocPage isHeaderSticky headerWithBorder>
+    <Layout
+      headerClassName="lg:border-none"
+      burgerWithoutBorder
+      isDocPage
+      isHeaderSticky
+      headerWithBorder
+    >
       <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:block">
         <MobileNav
           className="hidden lg:block"
