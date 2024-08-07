@@ -1,12 +1,13 @@
 ---
 title: Replicate data from one Neon project to another
-subtitle: Use logical replication to migrate data to a different Neon project, account, Postgres version, or region  
+subtitle: Use logical replication to migrate data to a different Neon project, account, Postgres version, or region
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-08-02T17:25:18.435Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different replication scenarios, including:
+
 - **Postgres version migration**: Moving data from one Postgres version to another; for example, from a Neon project that runs Postgres 15 to a Neon project that runs Postgres 16
 - **Region migration**: Moving data from one region to another; for example, from a Neon project in one region to a Neon project in a different region
 - **Neon account migration**: Moving data from a Neon project owned by one account to a project owned by a different account; for example, from a personal Neon account to a business-owned Neon account
@@ -17,11 +18,12 @@ These are some common Neon-to-Neon replication scenarios. There may be others. Y
 
 - A source Neon project with a database containing the data you want to replicate. Alternatively, if you need some data to play with, you can use the following statements to create a table with sample data:
 
-    ```sql shouldWrap
-    CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
-    INSERT INTO playing_with_neon(name, value)
-    SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
-    ```
+  ```sql shouldWrap
+  CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+  INSERT INTO playing_with_neon(name, value)
+  SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
+  ```
+
 - A destination Neon project.
 
 For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
@@ -109,7 +111,6 @@ CREATE PUBLICATION playing_with_neon_publication FOR TABLE playing_with_neon;
 For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 </Admonition>
 
-
 ### Create a subscription
 
 After defining a publication on the source database, you need to define a subscription on the destination database.
@@ -134,7 +135,6 @@ After defining a publication on the source database, you need to define a subscr
    ```
 
    The subscription (`my_subscription`) should be listed, confirming that your subscription has been successfully created.
-
 
 ## Test the replication
 

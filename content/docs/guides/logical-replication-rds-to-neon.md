@@ -1,6 +1,6 @@
 ---
 title: Replicate data from Amazon RDS Postgres
-subtitle: Use logical replication to perform a near-zero downtime database migration from Amazon RDS PostgreSQL to Neon  
+subtitle: Use logical replication to perform a near-zero downtime database migration from Amazon RDS PostgreSQL to Neon
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-08-02T17:25:18.435Z'
@@ -19,7 +19,7 @@ Enabling logical replication in Postgres requires changing the `wal_level` confi
 
 ```bash
 rdsdb_owner@publisher=> show wal_level;
- wal_level 
+ wal_level
 -----------
  replica
 (1 row)
@@ -33,26 +33,26 @@ If your current setting is `replica`, follow these steps to enable logical repli
 4. Click **Modify** on your RDS instance page, select new parameter group, then click **Continue and Apply**. After this step, reboot your instance.
 5. Check to maker sure that the `wal_level` parameter is set to `logical`.
 
-    ```sql
-    rdsdb_owner@publisher=> show wal_level;
-    wal_level 
-    -----------
-    logical
-    (1 row)
-    ```
+   ```sql
+   rdsdb_owner@publisher=> show wal_level;
+   wal_level
+   -----------
+   logical
+   (1 row)
+   ```
 
 ## Check network connectivity between Amazon RDS and your Neon project
 
 You need to allow connections to your Amazon RDS Postgres instance from Neon. To do this in AWS, you need to edit the VPC security group for your RDS instance, which you can find a link to from your RDS instance page. The most relaxed rule for source connections is to allow `0.0.0.0/0`, which opens your instance for connections from the public internet without restriction. For better security, we recommend creating a rule specifically for connections from the region where your Neon project resides. Neon uses 3 to 6 IP addresses per region for outbound communication (1 per availability zone + region). Create a rule to allow access to all of the IPs for your Neon project's region, as per the following table:
 
-| Region                | NAT Gateway IP Addresses                             |
-|-----------------------|------------------------------------------------------|
-| US East (N. Virginia) — aws-us-east-1 | 23.23.0.232, 3.222.32.110, 35.168.244.148, 54.160.39.37, 54.205.208.153, 54.88.155.118 |
-| US East (Ohio) — aws-us-east-2       | 18.217.181.229, 3.129.145.179, 3.139.195.115                       |
-| US West (Oregon) — aws-us-west-2     | 44.235.241.217, 52.32.22.241, 52.37.48.254, 54.213.57.47             |
-| Europe (Frankfurt) — aws-eu-central-1| 18.158.63.175, 3.125.234.79, 3.125.57.42                            |
-| Asia Pacific (Singapore) — aws-ap-southeast-1 | 54.254.50.26, 54.254.92.70, 54.255.161.23                 |
-| Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.237.134.148, 13.55.152.144, 54.153.185.87             |
+| Region                                        | NAT Gateway IP Addresses                                                               |
+| --------------------------------------------- | -------------------------------------------------------------------------------------- |
+| US East (N. Virginia) — aws-us-east-1         | 23.23.0.232, 3.222.32.110, 35.168.244.148, 54.160.39.37, 54.205.208.153, 54.88.155.118 |
+| US East (Ohio) — aws-us-east-2                | 18.217.181.229, 3.129.145.179, 3.139.195.115                                           |
+| US West (Oregon) — aws-us-west-2              | 44.235.241.217, 52.32.22.241, 52.37.48.254, 54.213.57.47                               |
+| Europe (Frankfurt) — aws-eu-central-1         | 18.158.63.175, 3.125.234.79, 3.125.57.42                                               |
+| Asia Pacific (Singapore) — aws-ap-southeast-1 | 54.254.50.26, 54.254.92.70, 54.255.161.23                                              |
+| Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.237.134.148, 13.55.152.144, 54.153.185.87                                           |
 
 If you do not know the region of your Neon project, you can find it in the **Project settings** widget on the **Project Dashboard**.
 
@@ -98,7 +98,6 @@ You can verify that the schema was loaded by running the following command on th
 
 If you've dumped and loaded the database schema as described above, this command should display the same schema that exists in your source database.
 
-
 ## Create a publication on the source database
 
 This step is performed on your source RDS instance.
@@ -120,7 +119,6 @@ CREATE PUBLICATION playing_with_neon_publication FOR TABLE playing_with_neon;
 
 For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 </Admonition>
-
 
 ### Create a subscription
 
@@ -147,7 +145,6 @@ After defining a publication on the source database, you need to define a subscr
 
    The subscription (`my_subscription`) should be listed, confirming that your subscription has been successfully created.
 
-
 ## Test the replication
 
 Testing your logical replication setup ensures that data is being replicated correctly from the publisher to the subscriber database. You can do this in three steps:
@@ -155,30 +152,30 @@ Testing your logical replication setup ensures that data is being replicated cor
 1. Run some data modifying queries on the source database (inserts, updates, or deletes).
 2. On the source database in Amazon RDS, check the current Write-Ahead Log (WAL) LSN:
 
-    ```bash
-    rdsdb_owner@publisher=> SELECT pg_current_wal_lsn();
-    pg_current_wal_lsn 
-    --------------------
-    0/7D213250
-    (1 row)
-    ```
+   ```bash
+   rdsdb_owner@publisher=> SELECT pg_current_wal_lsn();
+   pg_current_wal_lsn
+   --------------------
+   0/7D213250
+   (1 row)
+   ```
 
-3. Connect to your destination database in Neon and run the following query  to view the received_lsn, latest_end_lsn, last_msg_receipt_time. The LSN values should match the `pg_current_wal_lsn` value on the source database and the the `last_msg_receipt_time` should be very recent.
+3. Connect to your destination database in Neon and run the following query to view the received_lsn, latest_end_lsn, last_msg_receipt_time. The LSN values should match the `pg_current_wal_lsn` value on the source database and the the `last_msg_receipt_time` should be very recent.
 
 ```bash
 neondb_owner@subscriber=> SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time from pg_catalog.pg_stat_subscription;
- subname | received_lsn | latest_end_lsn |     last_msg_receipt_time     
+ subname | received_lsn | latest_end_lsn |     last_msg_receipt_time
 ---------+--------------+----------------+-------------------------------
  pgbench | 0/7D213250   | 0/7D213250     | 2024-08-02 18:37:16.70939+00
 (1 rows)
 ```
 
-As an extra check, you can also do a row count on the source and destination. 
+As an extra check, you can also do a row count on the source and destination.
 
 ```sql
 select count(*) from my_db;
 
- count 
+ count
 -------
   7585
 (1 row)
@@ -186,4 +183,4 @@ select count(*) from my_db;
 
 ## Switch your application to the destination Neon project
 
-After the replication operation is complete, you can switch your application over to the destination database by swapping out the source database connection details for your Neon destination database connection details. 
+After the replication operation is complete, you can switch your application over to the destination database by swapping out the source database connection details for your Neon destination database connection details.
