@@ -56,7 +56,7 @@ You then need to decide whether to use direct connections or pooled connections 
   If your application is focused mainly on tasks like migrations or administrative operations that require stable and long-lived connections, use an unpooled connection.
 
 <Admonition type="note">
-Connection pooling is not a magic bullet. PgBouncer can keep many client connections open (up to 10,000) concurrently, but only a limited number of these can be actively querying the PostgreSQL server at any given time: 64 active backend transactions per user-database pair, as set by the PgBouncer's `default_pool_size` setting. For example, the Postgres user `alex` can hold up to 64 backend connections to a single database at one time.
+Connection pooling is not a magic bullet. PgBouncer can keep many client connections open (up to 10,000) concurrently, but only a limited number of these can be actively querying the Postgres server at any given time: 64 active backend transactions per user-database pair, as set by the PgBouncer's `default_pool_size` setting. For example, the Postgres user `alex` can hold up to 64 connections to a single database at one time.
 </Admonition>
 
 For more information on these choices, see:
