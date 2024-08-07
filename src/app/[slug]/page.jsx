@@ -71,11 +71,12 @@ const DynamicPage = async ({ params }) => {
       },
       landingcta: ({ ...props }) => {
         if (isAzurePage) {
-          return;
-          <SharedCTA
-            className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
-            {...props}
-          />;
+          return (
+            <SharedCTA
+              className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
+              {...props}
+            />
+          );
         }
         return <PricingCTA {...props} />;
       },
