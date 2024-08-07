@@ -102,6 +102,8 @@ updatedOn: '2024-07-11T12:52:17.602Z'
 
 <img src="/images/technology-logos/materialize-logo.svg" width="36" height="36" alt="Materialize" href="/docs/guides/logical-replication-materialize" title="Replicate data from Neon to Materialize" />
 
+<img src="/images/technology-logos/neon-logo.svg"  width="42" height="36" alt="Neon to Neon" href="/docs/guides/logical-replication-neon-to-neon" title="Replicate data from one Neon project to another" />
+
 <img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
 
 <img src="/images/technology-logos/sequin-logo.svg" width="29" height="36" alt="Sequin" href="/docs/guides/sequin" title="Sync data from APIs to Neon in real time" />
