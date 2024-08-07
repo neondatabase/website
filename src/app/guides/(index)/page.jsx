@@ -29,7 +29,7 @@ const GuidesPage = async () => {
           size="1344"
         >
           <Sidebar />
-          <div className="col-span-7 col-start-4 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto">
+          <div className="col-span-7 col-start-4 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:mx-auto lg:pt-0">
             <ul>
               {posts.map(({ title, subtitle, author, createdAt, updatedOn, slug }) => (
                 <li
