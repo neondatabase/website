@@ -64,9 +64,9 @@ With your publication created, you're now ready to configure a subscriber that w
 
 ## Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
-<Tabs labels={["Neon CLI", "Neon Console", "Neon API"]}>
+<Tabs labels={["CLI", "Console", "API"]}>
 
 <TabItem>
 
@@ -128,12 +128,9 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 
 A subscriber is a destination that receives data changes from your publications.
 
-This section describes how to configure a subscription on a standalone Postgres instance to a publication defined on your Neon database. After the subscription is defined, the destination Postgres instance will be able to receive data changes from the publication defined on your Neon database.
+This section describes how to configure a subscription on a standalone Postgres instance to a publication defined on your Neon database. After the subscription is defined, the destination Postgres instance will be able to receive data changes from the publication defined on your Neon database. It is assumed that you have a separate Postgres instance ready to act as the subscriber.
 
-It is assumed that you have a separate Postgres instance ready to act as the subscriber:
-
-- The subscriber must be a Postgres instance other than Neon, such as a local Postgres installation. Currently, a Neon database cannot be defined as a subscriber.
-- A corresponding `users` table must exist in the subscriber database. This table should have the same name and table schema as the table on the publisher. You can use the same `CREATE TABLE` statement used previously:
+When configuring logical replication in Postgres, the tables defined in the publication on the publisher must also exist on the subscriber, and they must have the same name and table schema. For the example setup described in this guide, a corresponding `users` table should exist in the subscriber database. You can use the `CREATE TABLE` statement used previously to create the `users` table:
 
   ```sql
   CREATE TABLE users (
@@ -143,12 +140,8 @@ It is assumed that you have a separate Postgres instance ready to act as the sub
   );
   ```
 
-   <Admonition type="note">
-   When configuring logical replication in Postgres, the tables defined in the publication on the publisher must also exist on the subscriber with the same name and table schema.
-   </Admonition>
-
    <Admonition type="important">
-   By default, Neon's [Autosuspend](/docs/introduction/auto-suspend) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a compute with an active subscriber remains active at all times. Neon determines if there are active connections from a logical replication subscriber by checking for `walsender` processes on the Neon Postgres instance.
+   By default, Neon's [Autosuspend](/docs/introduction/auto-suspend) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a compute with a Postgres instance that is acting as a publisher and has active subscriber remains active at all times. Neon determines if there are active connections from a subscriber by checking for `walsender` processes on the publishing Postgres instance. For more, see [Logical replication and autosuspend](/docs/guides/logical-replication-neon#logical-replication-and-autosuspend).
    </Admonition>
 
 ### Create a subscription
