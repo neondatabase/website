@@ -31,7 +31,7 @@ If you didn't catch the post, Neon is coming to Azure. [Read more](https://neon.
 
   If you have other branch management ideas, [let us know](#share-your-thoughts).
 
-- **Migrations (Beta)**: We’re adding inbound logical replication as a first step towards offering seamless, low-downtime migrations from your current database provider to Neon. This feature also helps you use Neon as your staging environment, letting you take advantage of developer-friendly features like branching and GitHub Integration, even if you decide to keep production with your current provider.
+- **Migrations (Beta)**: We’re adding inbound logical replication as a first step towards offering seamless, low-downtime migrations from your current database provider to Neon. This feature also helps you use Neon as your staging environment, letting you take advantage of developer-friendly features like branching and our GitHub Integration, even if you decide to keep production with your current provider.
 - **Snapshots**: Create regularly scheduled snapshots as a way to archive your database &#8212; a cost-effective alternative to long-lived branches.
 - **SQL Editor improvements**: Stay tuned for interesting updates we have planned for our SQL Editor.
 
