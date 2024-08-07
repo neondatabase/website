@@ -155,7 +155,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   ┌──────────────────────────────────────────────────────────────────────────────────────────┐
   │ Connection Uri                                                                           │
   ├──────────────────────────────────────────────────────────────────────────────────────────┤
-  │ postgresql://[user]:[password]@[neon_hostname]/[dbname]                                    │
+  │ postgresql://[user]:[password]@[neon_hostname]/[dbname]                                  │
   └──────────────────────────────────────────────────────────────────────────────────────────┘
   ```
 
