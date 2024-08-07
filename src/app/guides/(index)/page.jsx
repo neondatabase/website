@@ -34,7 +34,7 @@ const GuidesPage = async () => {
               {posts.map(({ title, subtitle, author, createdAt, updatedOn, slug }) => (
                 <li
                   key={slug}
-                  className="border-b border-gray-new-15/20 py-6 first:pt-0 last:border-none last:pb-0 dark:border-gray-new-15/80"
+                  className="border-b border-gray-new-15/20 pb-5 pt-6 first:pt-0 last:border-none last:pb-0 dark:border-gray-new-15/80"
                 >
                   <GuideCard
                     title={title}

@@ -13,7 +13,7 @@ const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
 
   return (
     <Link className="group" to={`${LINKS.guides}/${slug}`}>
-      <article className="flex items-end justify-between sm:block">
+      <article className="flex flex-col gap-y-[18px] sm:gap-y-4">
         <div className="max-w-[640px]">
           <h1 className="line-clamp-2 text-[20px] font-semibold leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
             {title}
@@ -46,8 +46,10 @@ const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
             </time>
           </div>
         </div>
-        <div className="flex w-fit items-center gap-1 border-b border-transparent text-secondary-8 transition-colors duration-200 group-hover:border-secondary-8 dark:text-green-45 dark:group-hover:border-green-45 sm:mt-4">
-          <span className="text-[15px] leading-tight md:text-sm">Read guide</span>
+        <div className="flex w-fit items-center gap-1 border-b border-transparent text-secondary-8 transition-colors duration-200 group-hover:border-secondary-8 dark:text-green-45 dark:group-hover:border-green-45">
+          <span className="text-[15px] leading-tight tracking-extra-tight md:text-sm">
+            Read guide
+          </span>
           <ArrowIcon className="shrink-0" />
         </div>
       </article>
