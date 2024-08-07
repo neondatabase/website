@@ -12,9 +12,9 @@ const Azure = ({ title, description, hubspotFormId, formData, ...restProps }) =>
   const submitText = formData?.submitText;
 
   return (
-    <section className="safe-paddings mb-12 overflow-hidden pt-[112px] xl:mb-10 xl:pt-[92px] lg:mb-8 lg:pt-1.5 md:mb-5">
+    <section className="safe-paddings overflow-hidden pb-12 pt-[112px] xl:pb-10 xl:pt-[92px] lg:pt-1.5">
       <Container
-        className="flex justify-between px-8 xl:px-11 lg:gap-10 lg:px-8 md:flex-col md:gap-8 md:px-4"
+        className="flex justify-between px-8 xl:px-11 lg:!max-w-3xl lg:gap-10 lg:px-8 md:flex-col md:gap-8 md:px-4"
         size="1100"
       >
         <div className="w-[420px] shrink-0 pl-10 xl:w-[370px] xl:pl-0 lg:w-80 md:w-full">
@@ -24,6 +24,8 @@ const Azure = ({ title, description, hubspotFormId, formData, ...restProps }) =>
             height={154}
             src={azureLogo}
             alt=""
+            quality={100}
+            priority
           />
           <h1 className="font-title text-[56px] font-medium leading-[90%] tracking-extra-tight lg:text-[44px]">
             {title}
@@ -33,7 +35,7 @@ const Azure = ({ title, description, hubspotFormId, formData, ...restProps }) =>
             dangerouslySetInnerHTML={{ __html: description }}
           />
         </div>
-        <div className="w-[464px] pt-6 xl:w-[456px] xl:pt-5 lg:pt-2 md:w-full md:pt-0">
+        <div className="relative w-[464px] pt-6 xl:w-[456px] xl:pt-5 lg:pt-2 md:w-full md:pt-0">
           {formData && (
             <Form
               hubspotFormId={hubspotFormId}

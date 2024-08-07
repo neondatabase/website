@@ -196,13 +196,15 @@ const Form = ({
                       fieldGroup.fields.length > 1 && 'flex gap-[30px] sm:flex-col sm:gap-6'
                     )}
                   >
-                    {fieldGroup.fields.map((field, index) => (
+                    {fieldGroup.fields.map((field, fieldIndex) => (
                       <FormField
-                        key={index}
-                        {...field}
+                        key={fieldIndex}
+                        index={index}
                         formState={state}
                         errors={errors}
                         register={register}
+                        isAzurePage={isAzurePage}
+                        {...field}
                       />
                     ))}
                   </fieldset>
@@ -239,6 +241,7 @@ const Form = ({
         successMessage={successMessage}
         items={items}
         greenMode={greenMode}
+        isAzurePage={isAzurePage}
       />
     </>
   );

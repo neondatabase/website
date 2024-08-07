@@ -212,6 +212,12 @@ module.exports = {
           'radial-gradient(60.96% 60.55% at 0% 0%, rgba(100, 144, 185, 0.50) 0%, rgba(90, 109, 141, 0.50) 46%, rgba(90, 109, 141, 0) 80%),' +
           'radial-gradient(64.38% 53.06% at 100% 100%, rgba(100, 158, 185, 0.50) 0%, rgba(90, 109, 141, 0.50) 46%, rgba(90, 109, 141, 0) 80%),' +
           'linear-gradient(0deg, #242628, #242628)',
+        'azure-form-input-1':
+          'linear-gradient(93deg, rgba(47, 66, 96, 0.80) -2.17%, rgba(30, 34, 52, 0.80) 18.83%, rgba(24, 25, 27, 0.80) 57.17%)',
+        'azure-form-input-2':
+          'linear-gradient(100deg, rgba(33, 39, 58, 0.80) -6.09%, rgba(24, 25, 27, 0.80) 27.66%)',
+        'azure-form-input-3':
+          'linear-gradient(276deg, rgba(32, 48, 55, 0.80) 2.61%, rgba(24, 25, 27, 0.80) 32.96%)',
       }),
       keyframes: (theme) => ({
         'text-blink': {
