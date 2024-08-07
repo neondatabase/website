@@ -42,7 +42,7 @@ Create a `.env` file in the root of your Quarkus project directory. Configure a 
 
 ```shell shouldWrap
 # Note that "?sslmode=require" is appended to the Neon connection string
-QUARKUS_DATASOURCE_REACTIVE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
 ```
 
 <Admonition type="note">

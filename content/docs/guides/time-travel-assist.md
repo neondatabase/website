@@ -122,7 +122,7 @@ Example:
 
 ```bash
 neon connetion-string main@2024-04-21T00:00:00Z
-postgres://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
+postgresql://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
 ```
 
 ### Connect directly with psql

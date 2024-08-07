@@ -69,7 +69,7 @@ To connect to your branch:
 4. Connect with `psql`.
 
    ```bash shouldWrap
-   psql postgres://[user]:[password]@[neon_hostname]/[dbname]
+   psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
 ## Verify the data

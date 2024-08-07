@@ -15,7 +15,7 @@ This section provides connection string samples for various frameworks and langu
 
 ```bash
 # psql example connection string
-psql postgres://username:password@hostname:5432/database?sslmode=require
+psql postgresql://username:password@hostname:5432/database?sslmode=require
 ```
 
 ```ini
@@ -194,11 +194,11 @@ Neon supports pooled and direct connections to the database. Use a pooled connec
 A Neon connection string includes the role, password, hostname, and database name.
 
 ```text
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
-           ^    ^         ^                                               ^
-     role -|    |         |- hostname                                     |- database
-                |
-                |- password
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+             ^    ^         ^                                               ^
+       role -|    |         |- hostname                                     |- database
+                  |
+                  |- password
 ```
 
 <Admonition type="note">
@@ -222,13 +222,13 @@ PGPORT=5432
 ### Variable
 
 ```text shouldWrap
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
 ```
 
 ### Command-line
 
 ```bash shouldWrap
-psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
 
 <Admonition type="note">

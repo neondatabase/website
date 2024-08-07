@@ -151,7 +151,7 @@ CREATE TABLE users (
 
    ```sql
    CREATE SUBSCRIPTION users_subscription
-   CONNECTION 'postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname'
+   CONNECTION 'postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname'
    PUBLICATION users_publication;
    ```
 

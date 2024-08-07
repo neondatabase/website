@@ -87,7 +87,7 @@ Building on the `my_publication` example in the preceding section, here’s how 
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-CONNECTION 'postgres://username:password@host:port/dbname'
+CONNECTION 'postgresql://username:password@host:port/dbname'
 PUBLICATION my_publication;
 ```
 
@@ -101,7 +101,7 @@ This command creates a subscription that receives data from two publications:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-CONNECTION 'postgres://username:password@host:port/dbname'
+CONNECTION 'postgresql://username:password@host:port/dbname'
 PUBLICATION my_publication, sales_publication;
 ```
 
@@ -113,7 +113,7 @@ This command creates a subscription with `enabled = false` so that you can enabl
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-CONNECTION 'postgres://username:password@host:port/dbname'
+CONNECTION 'postgresql://username:password@host:port/dbname'
 PUBLICATION my_publication
 WITH (enabled = false);
 ```

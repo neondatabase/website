@@ -41,7 +41,7 @@ Use the following instructions to connect to an existing Neon database from Hasu
 - A connection string for a branch in your Neon project:
 
   ```text
-  postgres://[user]:[password]@[neon_hostname]/[dbname]
+  postgresql://[user]:[password]@[neon_hostname]/[dbname]
   ```
 
   Your project's connection string can be found on the Neon **Dashboard**, under **Connection Details**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).

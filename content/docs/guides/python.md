@@ -70,7 +70,7 @@ You can find all of the connection details listed above in the **Connection Deta
 Your connection string will look something like this:
 
 ```shell shouldWrap
-DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
 ```
 
 ## Configure your python script

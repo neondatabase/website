@@ -68,7 +68,7 @@ Make sure you select the correct database (`neosync`) from the **Database** drop
 Your connection string should look something like this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neosync?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neosync?sslmode=require
 ```
 
 ## Neosync setup

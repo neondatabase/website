@@ -25,7 +25,7 @@ The example application connects to your Neon Postgres database using [Prisma](h
 A dialog pops up with your Neon connection string, which appears similar to the following:
 
 ```bash
-postgres://[user]:[password]@[neon_hostname]/[dbname]
+postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 Store this value in a safe place. It is required later. The connection string specifies `neondb` as the database. This is the database created with your Neon project if you did not specify a different database name. You will use this database with the example application.

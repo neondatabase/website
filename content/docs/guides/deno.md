@@ -28,7 +28,7 @@ Retrieve your database connection string from the **Connection Details** widget 
 Your connection string should look something like this:
 
 ```bash shouldWrap
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
 ```
 
 You'll need the connection string a little later in the setup.

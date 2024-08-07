@@ -21,7 +21,7 @@ The`@neondatabase/pg-import` utility supports all Neon Postgres versions.
 - Retrieve the connection string for your Neon database. You can find it in the **Connection Details** widget on the Neon **Dashboard**. If you created a role to perform the restore operation, make sure to select that role. Your connection string will look something like this:
 
   ```bash shouldWrap
-  postgres://[user]:[password]@[neon_hostname]/[dbname]
+  postgresql://[user]:[password]@[neon_hostname]/[dbname]
   ```
 
   Avoid using a [pooled Neon connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
@@ -70,12 +70,12 @@ The following example shows how data from a `pagila` source database is dumped a
 
 ```bash shouldWrap
 ~$ cd mydump
-~/mydump$ npx @neondatabase/pg-import --source postgres://[user]:[password]@[neon_hostname]/pagila --backup-file-path ./mydumpfile.bak
+~/mydump$ npx @neondatabase/pg-import --source postgresql://[user]:[password]@[neon_hostname]/pagila --backup-file-path ./mydumpfile.bak
 
 ~/mydump$ ls
 mydumpfile.bak
 
-~/mydump$ npx @neondatabase/pg-import --destination postgres://[user]:[password]@[neon_hostname]/pagila --backup-file-path ./mydumpfile.bak
+~/mydump$ npx @neondatabase/pg-import --destination postgresql://[user]:[password]@[neon_hostname]/pagila --backup-file-path ./mydumpfile.bak
 ```
 
 ## Piped import with @neondatabase/pg-import

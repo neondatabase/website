@@ -32,7 +32,7 @@ Next, let's set up the Neon database.
 
 ## Create the schema in Neon
 
-1. Navigate to the Neon Console, select your project, and copy the connection string, which will look something like this: `postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname`.
+1. Navigate to the Neon Console, select your project, and copy the connection string, which will look something like this: `postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname`.
 2. Create schema in Neon using Exograph CLI:
 
 ```bash

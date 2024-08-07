@@ -109,7 +109,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   ┌──────────────────────────────────────────────────────────────────────────────────────┐
   │ Connection Uri                                                                       │
   ├──────────────────────────────────────────────────────────────────────────────────────┤
-  │ postgres://[user]:[password]@[neon_hostname]/[dbname]                                │
+  │ postgresql://[user]:[password]@[neon_hostname]/[dbname]                              │
   └──────────────────────────────────────────────────────────────────────────────────────┘
   ```
 
@@ -159,7 +159,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     },
     "connection_uris": [
         {
-        "connection_uri": "postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname",
+        "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname",
         "connection_parameters": {
             "database": "dbname",
             "password": "AbC123dEf",

@@ -19,7 +19,7 @@ This guide shows how to connect from AskYourDatabase to Neon Postgres.
 1. Get the Neon URL by navigating to the Neon Console and copying the connection string. The URL will look something like this:
 
    ```text shouldWrap
-   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
    ```
 
 2. Go to AskYourDatabase and click **Connect to your database**:
