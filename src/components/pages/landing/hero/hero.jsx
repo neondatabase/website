@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 
+import Form from '../form';
+
 import Details from './details';
-import Form from './form';
 
 const Hero = ({
   title,
@@ -14,6 +15,7 @@ const Hero = ({
   detailsLabel,
   detailsTitle,
   detailsDescription,
+  isAzurePage,
   ...restProps
 }) => {
   const fieldGroups = formData?.formFieldGroups;
@@ -103,14 +105,10 @@ Hero.propTypes = {
     }),
     submitText: PropTypes.string,
   }).isRequired,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-    })
-  ),
   detailsLabel: PropTypes.string,
   detailsTitle: PropTypes.string,
   detailsDescription: PropTypes.string,
+  isAzurePage: PropTypes.bool,
 };
 
 export default Hero;

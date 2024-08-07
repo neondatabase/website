@@ -204,6 +204,12 @@ module.exports = {
         'variable-value-1': 'linear-gradient(220deg, #FFFFFF 22%, #41BAB9 142%)',
         'variable-value-2': 'linear-gradient(73deg, #EFEFEF 13%, #89E0EA 61%, #7F95EB 93%)',
         'variable-value-text': 'linear-gradient(90deg, #797D86 0%, #A4B7E2 100%)',
+        'azure-form-bg':
+          'linear-gradient(152deg, #3FDFFF 28.7%, #2B49E3 41.01%, rgba(78, 97, 198, 0) 77.16%)',
+        'azure-form-border':
+          'radial-gradient(60.96% 60.55% at 0% 0%, rgba(100, 144, 185, 0.50) 0%, rgba(90, 109, 141, 0.50) 46%, rgba(90, 109, 141, 0.00) 80%),' +
+          'radial-gradient(64.38% 53.06% at 100% 100%, rgba(100, 158, 185, 0.50)0%, rgba(90, 109, 141, 0.50)46%, rgba(90, 109, 141, 0.00)80%),' +
+          'linear-gradient(0deg, #242628, #242628)',
       }),
       keyframes: (theme) => ({
         'text-blink': {
@@ -277,6 +283,14 @@ module.exports = {
             transform: 'translateY(-2%) scale(.96)',
           },
         },
+        logoMove: {
+          '0%': {
+            transform: 'translateY(0)',
+          },
+          '100%': {
+            transform: 'translateY(-3%)',
+          },
+        },
       }),
       animation: {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -284,6 +298,7 @@ module.exports = {
         'fade-out-overlay': 'fadeOutOverlay 0.2s',
         'dialog-show': 'dialogShow 0.3s cubic-bezier(.16,1,.3,1)',
         'dialog-hide': 'dialogHide 0.3s cubic-bezier(.16,1,.3,1)',
+        'logo-move': 'logoMove 1s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate',
         loading: 'loading 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       typography: () => ({
