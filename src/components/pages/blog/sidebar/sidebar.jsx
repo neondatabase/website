@@ -26,7 +26,7 @@ const Sidebar = ({ categories }) => {
             />
             <ul className="mt-8 flex flex-col gap-y-3.5 lt:mt-0 lt:flex-row lt:gap-x-7 md:after:shrink-0 md:after:grow-0 md:after:basis-px md:after:content-['']">
               {allCategories.map(({ name, slug }, index) => (
-                <li key={index}>
+                <li className="inline-flex" key={index}>
                   <BlogNavLink name={name} slug={slug} />
                 </li>
               ))}
