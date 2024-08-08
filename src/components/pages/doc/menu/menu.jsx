@@ -163,26 +163,45 @@ const Menu = ({
             }}
             ref={menuRef}
           >
-            {!isRootMenu && parentMenu && (
-              <div className="border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
-                <BackLinkTag
-                  className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
-                  type={parentMenu.slug ? undefined : 'button'}
-                  to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : undefined}
-                  onClick={handleClose}
-                >
-                  <ChevronBackIcon className="size-4.5" />
-                  Back to {parentMenu.title}
-                </BackLinkTag>
+            {/* breadcrumbs, menu title and home link */}
+            {!isRootMenu && (
+              <>
+                <div className="flex flex-col gap-7 border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
+                  {parentMenu && (
+                    <BackLinkTag
+                      className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
+                      type={parentMenu.slug ? undefined : 'button'}
+                      to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : undefined}
+                      onClick={handleClose}
+                    >
+                      <ChevronBackIcon className="size-4.5" />
+                      Back to {parentMenu.title}
+                    </BackLinkTag>
+                  )}
+                  <Link
+                    className={clsx(
+                      'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
+                      'text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
+                    )}
+                    to={homePath}
+                    onClick={handleClose}
+                  >
+                    <HomeIcon className="size-4.5" />
+                    Home
+                  </Link>
+                </div>
+
                 <LinkTag
-                  className="mt-7 flex w-full items-start gap-2 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
+                  className="mt-4 flex w-full items-start gap-1.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
                   to={slug ? `${basePath}${slug}` : undefined}
                 >
                   {icon && <Icon title={icon} className="size-5" />}
                   {title}
                 </LinkTag>
-              </div>
+              </>
             )}
+
+            {/* menu sections and items */}
             <ul className={clsx('w-full', !isRootMenu && 'py-2.5')}>
               {items.map((item, index) =>
                 item.section ? (
@@ -227,28 +246,23 @@ const Menu = ({
                 )
               )}
             </ul>
-            <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
-              <Link
-                className={clsx(
-                  'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
-                  'text-gray-new-60 hover:text-black-new dark:hover:text-white'
-                )}
-                to={isRootMenu ? backLinkPath : homePath}
-                onClick={handleClose}
-              >
-                {isRootMenu ? (
-                  <>
-                    <ArrowBackIcon className="size-4.5" />
-                    Back to {basePath === DOCS_BASE_PATH ? 'site' : 'docs'}
-                  </>
-                ) : (
-                  <>
-                    <HomeIcon className="size-4.5" />
-                    Home
-                  </>
-                )}
-              </Link>
-            </div>
+
+            {/* back to docs link */}
+            {isRootMenu && basePath !== DOCS_BASE_PATH && (
+              <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
+                <Link
+                  className={clsx(
+                    'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
+                    'text-gray-new-60 hover:text-black-new dark:hover:text-white'
+                  )}
+                  to={isRootMenu ? backLinkPath : homePath}
+                  onClick={handleClose}
+                >
+                  <ArrowBackIcon className="size-4.5" />
+                  Back to docs
+                </Link>
+              </div>
+            )}
           </m.div>
         )}
       </AnimatePresence>
