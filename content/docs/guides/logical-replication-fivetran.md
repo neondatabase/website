@@ -3,7 +3,7 @@ title: Replicate data with Fivetran
 subtitle: Learn how to replicate data from Neon with Fivetran
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T11:38:14.263Z'
+updatedOn: '2024-08-07T21:36:52.657Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -136,7 +136,7 @@ To prevent storage bloat, **Neon automatically removes _inactive_ replication sl
    For example, let's say this is your connection string:
 
    ```bash shouldWrap
-   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
    ```
 
    From this string, the values in the Fivetran **Create a source** dialog would show as below. Your actual values will differ, with the exception of the port number.

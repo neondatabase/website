@@ -2,7 +2,7 @@
 title: Documentation Contribution Guide
 subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
-updatedOn: '2024-08-06T15:23:10.943Z'
+updatedOn: '2024-08-07T21:36:52.638Z'
 ---
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
@@ -422,13 +422,13 @@ When including user information in connection details, API calls, or UI instruct
 Connection strings should be defined as follows:
 
 ```text
-postgres://[user]:[password]@[neon_hostname]/[dbname]
+postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 If you need to provide a connection string with realistic values, use one of the user names mentioned above, `AbC123dEf` for the password, and `dbname` for the database name:
 
 ```text
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
 
 ### Commands, parameters, values, filenames
@@ -441,6 +441,6 @@ Commands, parameters, values, filenames, error messages, connection strings, and
 
 - `git clone` is a command that should be in lowercase, whereas Git is the product and should have a capital G.
 
-- "A connection string has this format: `postgres://[user]:[password]@[neon_hostname]/[dbname]`"
+- "A connection string has this format: `postgresql://[user]:[password]@[neon_hostname]/[dbname]`"
 
 <NeedHelp/>

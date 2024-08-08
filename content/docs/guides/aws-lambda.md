@@ -2,7 +2,7 @@
 title: Connect from AWS Lambda
 subtitle: Learn how to set up a Neon database and connect from an AWS Lambda function
 enableTableOfContents: true
-updatedOn: '2024-08-06T15:23:10.948Z'
+updatedOn: '2024-08-07T21:36:52.647Z'
 ---
 
 AWS Lambda is a serverless, event-driven compute service that allows you to run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.
@@ -180,7 +180,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
      name: aws
      runtime: nodejs14.x
      environment:
-       DATABASE_URL: postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+       DATABASE_URL: postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
 
    functions:
      getAllUsers:
