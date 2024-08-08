@@ -52,7 +52,7 @@ In the Google Cloud console, go to the Cloud SQL Instances page.
 
    <Admonition type="note">
    Google Cloud SQL requires that addresses are specified in CIDR notation. You can do so by appending `/32` to the NAT Gateway IP address; for example: `18.217.181.229/32`
-   </Admonition>   
+   </Admonition>
 
    ![Cloud SQL network configuration](/docs/guides/cloud_sql_network_config.png)
 
