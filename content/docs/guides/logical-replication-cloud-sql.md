@@ -15,15 +15,24 @@ Neon's logical replication feature allows you to replicate data from Google Clou
 
 ## Enable logical replication in the source Google Cloud SQL PostgreSQL instance
 
-Enabling logical replication in Postgres requires changing the `wal_level` configuration parameter from `replica` to `logical`. Before you begin, you can check your current setting with the following command:
+In Cloud SQL, you enable logical replication for your Postgres instance by setting the `cloudsql.logical_decoding` flag to on. This setting is different from the setting used in standard Postgres where you enable this feature by setting the `wal_level` configuration parameter to `logical`.
 
-```bash
-rdsdb_owner@publisher=> show wal_level;
- wal_level
------------
- replica
-(1 row)
-```
+To enable this flag:
+
+1. In the Google Cloud console, select the project that contains the Cloud SQL instance for which you want to set a database flag.
+2. Open the instance and click **Edit**.
+3. Scroll down to the **Flags** section.
+4. To set a flag that has not been set on the instance before, click **Add item**, choose the flag from the drop-down menu, and set its value.
+5. Click **Save** to save your changes.
+6. Confirm your changes under **Flags** on the **Overview** page.
+
+The change will require a restart:
+
+![]()
+
+Afterward, you can verify that logical replication is enable by running `SHOW wal_level;` from Cloud SQL Studio. 
+
+![show wal_level](/docs/guides/cloud_sql_show_wal_level.png)
 
 If your current setting is `replica`, follow these steps to enable logical replication:
 
@@ -43,7 +52,25 @@ If your current setting is `replica`, follow these steps to enable logical repli
 
 ## Check network connectivity between Google Cloud SQL and your Neon project
 
-You need to allow connections to your Google Cloud SQL Postgres instance from Neon. To do this in AWS, you need to edit the VPC security group for your RDS instance, which you can find a link to from your RDS instance page. The most relaxed rule for source connections is to allow `0.0.0.0/0`, which opens your instance for connections from the public internet without restriction. For better security, we recommend creating a rule specifically for connections from the region where your Neon project resides. Neon uses 3 to 6 IP addresses per region for outbound communication (1 per availability zone + region). Create a rule to allow access to all of the IPs for your Neon project's region, as per the following table:
+You need to allow connections to your Google Cloud SQL Postgres instance from Neon. To do this in Google Cloud:
+
+In the Google Cloud console, go to the Cloud SQL Instances page.
+
+Go to Cloud SQL Instances
+
+To open the Overview page of an instance, click the instance name.
+From the SQL navigation menu, select Connections.
+Click the Networking tab.
+Select the Public IP checkbox.
+Click Add network.
+Optionally, in the Name field, enter a name for this network.
+In the Network field, enter the IP address or address range from which you want to allow connections.
+Use CIDR notation.
+
+Click Done.
+Click Save.
+
+ The most relaxed rule for source connections is to allow `0.0.0.0/0`, which opens your instance for connections from the public internet without restriction. For better security, we recommend creating a rule specifically for connections from the region where your Neon project resides. Neon uses 3 to 6 IP addresses per region for outbound communication (1 per availability zone + region). Create a rule to allow access to all of the IPs for your Neon project's region, as per the following table:
 
 | Region                                        | NAT Gateway IP Addresses                                                               |
 | --------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -53,6 +80,10 @@ You need to allow connections to your Google Cloud SQL Postgres instance from Ne
 | Europe (Frankfurt) — aws-eu-central-1         | 18.158.63.175, 3.125.234.79, 3.125.57.42                                               |
 | Asia Pacific (Singapore) — aws-ap-southeast-1 | 54.254.50.26, 54.254.92.70, 54.255.161.23                                              |
 | Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.237.134.148, 13.55.152.144, 54.153.185.87                                           |
+
+<Admonition type="note">
+Google Cloud SQL requires that addresses are specified in CIDR notation. You can do so by appending `/32` to eaqch address; for example: `18.217.181.229/32`
+</Admonition>
 
 If you do not know the region of your Neon project, you can find it in the **Project settings** widget on the **Project Dashboard**.
 
