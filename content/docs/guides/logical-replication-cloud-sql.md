@@ -48,22 +48,11 @@ In the Google Cloud console, go to the Cloud SQL Instances page.
 4. Select the **Public IP** checkbox.
 5. Click **Add network**.
 6. Optionally, in the **Name** field, enter a name for this network.
-7. In the **Network** field, enter the IP address or address range from which you want to allow connections. Do this for each of your Neon project's NAT Gateway IP addresses.
+7. In the **Network** field, enter the IP address or address range from which you want to allow connections. Do this for each of your Neon project's NAT Gateway IP addresses. See [NAT Gateway IP addresses](/docs/introduction/regions/nat-gateway-ip-addresses).
 
    <Admonition type="note">
-   Google Cloud SQL requires that addresses are specified in CIDR notation. You can do so by appending `/32` to each address; for example: `18.217.181.229/32`
-   </Admonition>
-
-   Neon uses 3 to 6 IP addresses per region for outbound communication (1 per availability zone + region). Create a rule to allow access to all of the IPs for your Neon project's region, as per the following table. If you do not know the region of your Neon project, you can find it in the **Project settings** widget on the **Project Dashboard**.
-
-   | Region                                        | NAT Gateway IP Addresses                                                               |
-   | --------------------------------------------- | -------------------------------------------------------------------------------------- |
-   | US East (N. Virginia) — aws-us-east-1         | 23.23.0.232, 3.222.32.110, 35.168.244.148, 54.160.39.37, 54.205.208.153, 54.88.155.118 |
-   | US East (Ohio) — aws-us-east-2                | 18.217.181.229, 3.129.145.179, 3.139.195.115                                           |
-   | US West (Oregon) — aws-us-west-2              | 44.235.241.217, 52.32.22.241, 52.37.48.254, 54.213.57.47                               |
-   | Europe (Frankfurt) — aws-eu-central-1         | 18.158.63.175, 3.125.234.79, 3.125.57.42                                               |
-   | Asia Pacific (Singapore) — aws-ap-southeast-1 | 54.254.50.26, 54.254.92.70, 54.255.161.23                                              |
-   | Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.237.134.148, 13.55.152.144, 54.153.185.87                                           |
+   Google Cloud SQL requires that addresses are specified in CIDR notation. You can do so by appending `/32` to the NAT Gateway IP address; for example: `18.217.181.229/32`
+   </Admonition>   
 
    ![Cloud SQL network configuration](/docs/guides/cloud_sql_network_config.png)
 
