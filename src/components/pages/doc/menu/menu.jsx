@@ -83,7 +83,7 @@ Section.propTypes = {
 };
 
 const Menu = ({
-  depth,
+  depth = 0,
   title,
   slug,
   basePath,
@@ -98,10 +98,10 @@ const Menu = ({
 }) => {
   const isRootMenu = depth === 0;
   const menuRef = useRef(null);
-  const currentDepth = Array.from(activeMenuList).length - 1;
+  const lastDepth = Array.from(activeMenuList).length - 1;
 
   const isActive = isRootMenu || activeMenuList.has(title);
-  const isLastActive = Array.from(activeMenuList)[currentDepth] === title;
+  const isLastActive = Array.from(activeMenuList)[lastDepth] === title;
 
   const BackLinkTag = parentMenu?.slug ? Link : 'button';
   const LinkTag = slug ? Link : 'div';
@@ -125,7 +125,7 @@ const Menu = ({
     return () => {
       clearTimeout(timeout);
     };
-  }, [isLastActive, currentDepth, setMenuHeight, menuWrapperRef]);
+  }, [isLastActive, setMenuHeight, menuWrapperRef]);
 
   const handleClose = () => {
     setActiveMenuList((prevList) => {
@@ -134,6 +134,10 @@ const Menu = ({
       return newList;
     });
     if (parentMenu?.slug && closeMobileMenu) closeMobileMenu();
+  };
+
+  const handleClickHome = () => {
+    setActiveMenuList(new Set(['Home']));
   };
 
   const animateState = () => {
@@ -159,7 +163,7 @@ const Menu = ({
             variants={{
               close: { opacity: 0 },
               open: { opacity: 1 },
-              moveMenu: { opacity: 1, x: `${currentDepth * -100}%` },
+              moveMenu: { opacity: 1, x: `${lastDepth * -100}%` },
             }}
             ref={menuRef}
           >
@@ -167,7 +171,7 @@ const Menu = ({
             {!isRootMenu && (
               <>
                 <div className="flex flex-col gap-7 border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
-                  {parentMenu && (
+                  {parentMenu && depth > 1 && (
                     <BackLinkTag
                       className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
                       type={parentMenu.slug ? undefined : 'button'}
@@ -184,7 +188,7 @@ const Menu = ({
                       'text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
                     )}
                     to={homePath}
-                    onClick={handleClose}
+                    onClick={handleClickHome}
                   >
                     <HomeIcon className="size-4.5" />
                     Home
@@ -207,6 +211,7 @@ const Menu = ({
                 item.section ? (
                   <Section
                     key={index}
+                    depth={depth}
                     {...item}
                     title={title}
                     slug={slug}
@@ -256,7 +261,6 @@ const Menu = ({
                     'text-gray-new-60 hover:text-black-new dark:hover:text-white'
                   )}
                   to={isRootMenu ? backLinkPath : homePath}
-                  onClick={handleClose}
                 >
                   <ArrowBackIcon className="size-4.5" />
                   Back to docs

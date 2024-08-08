@@ -35,7 +35,8 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
 
   useEffect(() => {
     setActiveMenuList(new Set(['Home', ...getActiveItems(sidebar, currentSlug)]));
-  }, [currentSlug, sidebar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [menuHeight, setMenuHeight] = useState(1000);
   const menuWrapperRef = useRef(null);
