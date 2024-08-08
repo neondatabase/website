@@ -2,7 +2,7 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2024-06-14T07:55:54.426Z'
+updatedOn: '2024-08-07T21:36:52.677Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
@@ -35,7 +35,7 @@ The Neon serverless driver is also available as a [JavaScript Registry (JSR)](ht
 You can obtain a connection string for your database from the **Connection Details** widget on the Neon **Dashboard**. Your Neon connection string will look something like this:
 
 ```shell
-DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
+DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 The examples that follow assume that your database connection string is assigned to a `DATABASE_URL` variable in your application's environment file.

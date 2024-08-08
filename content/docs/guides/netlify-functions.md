@@ -2,7 +2,7 @@
 title: Use Neon with Netlify Functions
 subtitle: Connect a Neon Postgres database to your Netlify Functions application
 enableTableOfContents: true
-updatedOn: '2024-07-02T18:38:56.217Z'
+updatedOn: '2024-08-07T21:36:52.660Z'
 ---
 
 [Netlify Functions](https://www.netlify.com/products/functions/) provide a serverless execution environment for building and deploying backend functionality without managing server infrastructure. It's integrated with Netlify's ecosystem, making it ideal for augmenting web applications with server-side logic, API integrations, and data processing tasks in a scalable way.
@@ -51,7 +51,7 @@ After logging into the Neon Console, proceed to the [Projects](https://console.n
 Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Keep your connection string handy for later use.
