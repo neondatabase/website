@@ -44,11 +44,10 @@ const DynamicPage = async ({ params }) => {
     {
       landinghero: async ({ hubspotFormId, ...restProps }) => {
         const formData = await getHubspotFormData(hubspotFormId);
-        return isAzurePage ? (
-          <Azure formData={formData} hubspotFormId={hubspotFormId} {...restProps} />
-        ) : (
-          <Hero formData={formData} hubspotFormId={hubspotFormId} {...restProps} />
-        );
+        if (isAzurePage) {
+          return <Azure formData={formData} hubspotFormId={hubspotFormId} {...restProps} />;
+        }
+        return <Hero formData={formData} hubspotFormId={hubspotFormId} {...restProps} />;
       },
       landingfeatures: ({ features, ...restProps }) => {
         const items = features.map((feature) => {

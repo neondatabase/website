@@ -14,7 +14,7 @@ const Azure = ({ title, description, hubspotFormId, formData, ...restProps }) =>
   return (
     <section className="safe-paddings overflow-hidden pb-12 pt-[112px] xl:pb-10 xl:pt-[92px] lg:pt-1.5">
       <Container
-        className="flex justify-between px-8 xl:px-11 lg:!max-w-3xl lg:gap-10 lg:px-8 md:flex-col md:gap-8 md:px-4"
+        className="flex justify-between px-[26px] 2xl:px-[76px] xl:max-w-5xl xl:px-11 lg:!max-w-3xl lg:gap-10 lg:px-8 md:flex-col md:gap-8 md:px-4"
         size="1100"
       >
         <div className="w-[420px] shrink-0 pl-10 xl:w-[370px] xl:pl-0 lg:w-80 md:w-full">

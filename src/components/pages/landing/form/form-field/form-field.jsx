@@ -50,7 +50,7 @@ const Input = ({
       errors[name]?.type === 'domain-not-blacklisted' && 'sm:mb-8'
     )}
     wrapperClassName={clsx(
-      'mt-2.5',
+      'mt-2',
       isAzurePage && index === 0 && 'bg-azure-form-input-1',
       isAzurePage && index === 1 && 'bg-azure-form-input-2',
       isAzurePage && index === 2 && 'bg-azure-form-input-3'
