@@ -70,7 +70,7 @@ In the Google Cloud console, go to the Cloud SQL Instances page.
 8. Click **Done** after adding each Network entry. 
 9. Click **Save** when you are finished adding entries all of your Neon project's NAT Gateway IP addresses.
 
-### Record the public IP address and public outgoing IP address of the primarty instance
+### Record the public IP address and public outgoing IP address of the primary instance
 
 Record the public IP address of your Google Cloud SQL Postgres instance. You can this value on the instance's **Overview** page.
 
@@ -98,71 +98,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO REPLICATION_
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
 
-## Prepare the destination database in your Neon project
-
-This section describes how to prepare your destination database.
-
-<Admonition type="note">
-You do not need to set `wal_level=logical` at the subscriber. This is only required at the publisher Postgres instance, which you already done.
-</Admonition>
-
-When configuring logical replication in Postgres, the tables in the source database that you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use a utility like `pg_dump` to dump the schema from your source database. For example, the following `pg_dump` command dumps the database schema from a database named `neondb`. The command uses a database connection URL. You can obtain a connection URL for your database from **Connection Details** widget on the Neon Dashboard. For instructions, see [Connect from any application](/docs/connect/connect-from-any-app).
-
-```bash
-pg_dump --schema-only \
-	--no-privileges \
-	--no-owner \
-	"postgresql://rdsdb_owner:XXX@neon-replication-test.XXX.eu-west-1.rds.amazonaws.com/publisher" \
-	> schema_dump.sql
-```
-
-<Admonition type="note">
-The `--no-privileges` and `--no-owner` options prevent `pg_dump` from dumping privileges and `ALTER OWNER` statements that may not be supported in Neon. When you load the schema into Neon, objects will be owned by the Neon user performing that loads the schema. Privileges and ownership can be defined in Neon later according to what is supported in Neon.
-</Admonition>
-
-To load the schema into your destination database in Neon, you can run the following [psql](/docs/connect/query-with-psql-editor) command, specifying the database connection URL for your destination database:
-
-```bash
- psql \
-	"postgresql://neondb_owner:<password>@ep-mute-recipe-123456.us-east-2.aws.neon.tech/neondb?sslmode=require" \
-	< schema_dump.sql
-```
-
-<Admonition type="note">
-Notice that the database URLs for the source and destination databases differ. This is because they are different Postgres instances. Your source and destination database URLs will also differ.
-</Admonition>
-
-You can verify that the schema was loaded by running the following command on the destination database via [psql](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
-
-```bash
-\dt
-```
-
-If you've dumped and loaded the database schema as described above, this command should display the same schema that exists in your source database.
-
-## Create a publication on the source database
-
-This step is performed on your source Google Cloud SQL Postgres instance.
-
-Publications are a fundamental part of logical replication in Postgres. They allow you to define the database changes to be replicated to subscribers.
-
-To create a publication for all tables in your source database:
-
-```sql
-CREATE PUBLICATION my_publication FOR ALL TABLES;
-```
-
-<Admonition type="note">
-It's also possible to create a publication for specific tables; for example, to create a publication for the `playing_with_neon` table, you can use the following syntax:
-
-```sql
-CREATE PUBLICATION playing_with_neon_publication FOR TABLE playing_with_neon;
-```
-
-For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
-</Admonition>
-
-### Create a subscription
+## Create a subscription
 
 After defining a publication on the source database, you need to define a subscription on your Neon destination database.
 
