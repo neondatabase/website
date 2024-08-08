@@ -2,7 +2,7 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.648Z'
+updatedOn: '2024-07-25T12:53:42.426Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -42,7 +42,7 @@ connection_uris
 ┌───────────────────────────────────────────────────────────────────────────────────────┐
 │ Connection Uri                                                                        │
 ├───────────────────────────────────────────────────────────────────────────────────────┤
-│ postgresql://[user]:[password]@[neon_hostname]/[dbname]                               │
+│ postgres://[user]:[password]@[neon_hostname]/[dbname]                                 │
 └───────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -74,7 +74,7 @@ connection_uris
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │ Connection Uri                                                                                               │
 ├──────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ postgresql://neondb_owner:123456@ep-orange-heart-a54grm9j.us-east-2.aws.neon.tech/neondb?sslmode=require     │
+│ postgres://neondb_owner:123456@ep-orange-heart-a54grm9j.us-east-2.aws.neon.tech/neondb?sslmode=require │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 

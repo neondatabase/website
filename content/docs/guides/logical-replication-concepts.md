@@ -3,7 +3,7 @@ title: Postgres logical replication concepts
 subtitle: Learn about PostgreSQL logical replication concepts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.656Z'
+updatedOn: '2024-07-23T20:03:37.193Z'
 ---
 
 Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or data platform.
@@ -64,7 +64,7 @@ You can create a subscription on a "susbcriber" database or platform using [CREA
 
 ```sql
 CREATE SUBSCRIPTION users_subscription
-CONNECTION 'postgresql://username:password@host:port/dbname'
+CONNECTION 'postgres://username:password@host:port/dbname'
 PUBLICATION users_publication;
 ```
 

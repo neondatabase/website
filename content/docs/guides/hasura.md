@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura
   - /docs/integrations/hasura
-updatedOn: '2024-08-07T21:36:52.653Z'
+updatedOn: '2024-07-25T12:53:42.426Z'
 ---
 
 Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
@@ -41,7 +41,7 @@ Use the following instructions to connect to an existing Neon database from Hasu
 - A connection string for a branch in your Neon project:
 
   ```text
-  postgresql://[user]:[password]@[neon_hostname]/[dbname]
+  postgres://[user]:[password]@[neon_hostname]/[dbname]
   ```
 
   Your project's connection string can be found on the Neon **Dashboard**, under **Connection Details**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).

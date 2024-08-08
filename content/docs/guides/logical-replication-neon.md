@@ -3,7 +3,7 @@ title: Manage logical replication in Neon
 subtitle: Learn how to manage logical replication in Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.658Z'
+updatedOn: '2024-08-07T11:38:14.265Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots. It also includes information about logical replication specific to Neon, including [known limitations](#known-limitations).
@@ -87,7 +87,7 @@ Building on the `my_publication` example in the preceding section, here’s how 
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-CONNECTION 'postgresql://username:password@host:port/dbname'
+CONNECTION 'postgres://username:password@host:port/dbname'
 PUBLICATION my_publication;
 ```
 
@@ -101,7 +101,7 @@ This command creates a subscription that receives data from two publications:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-CONNECTION 'postgresql://username:password@host:port/dbname'
+CONNECTION 'postgres://username:password@host:port/dbname'
 PUBLICATION my_publication, sales_publication;
 ```
 
@@ -113,7 +113,7 @@ This command creates a subscription with `enabled = false` so that you can enabl
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-CONNECTION 'postgresql://username:password@host:port/dbname'
+CONNECTION 'postgres://username:password@host:port/dbname'
 PUBLICATION my_publication
 WITH (enabled = false);
 ```

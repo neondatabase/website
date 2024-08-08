@@ -24,36 +24,17 @@ const fieldPropTypes = {
   formState: PropTypes.string.isRequired,
   errors: PropTypes.array.isRequired,
   register: PropTypes.func.isRequired,
-  index: PropTypes.number,
-  isAzurePage: PropTypes.bool,
 };
 
-const Input = ({
-  name,
-  label,
-  placeholder,
-  required,
-  formState,
-  errors,
-  register,
-  index,
-  isAzurePage = false,
-}) => (
+const Input = ({ name, label, placeholder, required, formState, errors, register }) => (
   <Field
     className="w-full"
     name={name}
     label={`${label}${required ? ' *' : ''}`}
     labelClassName={labelClassName}
     inputClassName={clsx(
-      '!mt-0',
       inputClassName,
       errors[name]?.type === 'domain-not-blacklisted' && 'sm:mb-8'
-    )}
-    wrapperClassName={clsx(
-      'mt-2',
-      isAzurePage && index === 0 && 'bg-azure-form-input-1',
-      isAzurePage && index === 1 && 'bg-azure-form-input-2',
-      isAzurePage && index === 2 && 'bg-azure-form-input-3'
     )}
     type="text"
     tag="input"
@@ -61,7 +42,10 @@ const Input = ({
     placeholder={placeholder}
     isDisabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
     error={errors[name]?.message}
-    errorClassName={clsx(errorClassName, 'relative right-0 ml-auto mt-2 -mb-3')}
+    errorClassName={clsx(
+      errorClassName,
+      errors[name]?.type === 'domain-not-blacklisted' && 'sm:top-[72px]'
+    )}
     {...register(name)}
   />
 );

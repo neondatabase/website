@@ -3,7 +3,7 @@ title: Replicate data to a ClickHouse database on DoubleCloud
 subtitle: Learn how to replicate data from Neon to a ClickHouse database on DoubleCloud
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.656Z'
+updatedOn: '2024-08-07T11:38:14.262Z'
 ---
 
 <Admonition type="tip">
@@ -194,7 +194,7 @@ To create a source endpoint:
    For example, let's say this is your connection string:
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
    ```
 
    From this string, the values would show as below. Your actual values will differ, with the exception of the port number.

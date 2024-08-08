@@ -2,7 +2,7 @@
 title: Connect a GUI application
 subtitle: Learn how to connect a GUI application to Neon
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.639Z'
+updatedOn: '2024-07-25T12:53:42.416Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.
@@ -28,9 +28,9 @@ Neon supports pooled and direct connections to the database. Use a pooled connec
 The connection string includes the role, password, hostname, and database name.
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
-             ^              ^                                               ^
-             |- <role>      |- <hostname>                                   |- <database>
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+           ^              ^                                               ^
+           |- <role>      |- <hostname>                                   |- <database>
 ```
 
 - role name: `alex`

@@ -2,7 +2,7 @@
 title: Azure Data Studio Notebooks
 subtitle: Use Azure Data Studio Notebooks with Neon for vector similarity search
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.634Z'
+updatedOn: '2024-07-15T14:47:00.992Z'
 ---
 
 A Jupyter Notebook is an open-source web application that allows you to create and share documents containing live code, equations, visualizations, and narrative text. Azure Data Studio supports Jupyter Notebooks, enabling users to combine SQL queries, Python code, and markdown text in a single interactive document.
@@ -66,14 +66,14 @@ Install the `psycopg` adapter by adding and executing the following code cell:
 
 ### Connect to your database
 
-1. In your notebook, create a code block to define your Neon database connection and create a cursor object. Replace `postgresql://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved previously.
+1. In your notebook, create a code block to define your Neon database connection and create a cursor object. Replace `postgres://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved previously.
 
    ```python shouldWrap
    import os
    import psycopg
 
    # Provide your Neon connection string
-   connection_string = "postgresql://[user]:[password]@[neon_hostname]/[dbname]"
+   connection_string = "postgres://[user]:[password]@[neon_hostname]/[dbname]"
 
    # Connect using the connection string
    connection = psycopg.connect(connection_string)

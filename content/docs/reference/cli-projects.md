@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.675Z'
+updatedOn: '2024-08-06T15:23:10.958Z'
 ---
 
 ## Before you begin
@@ -109,7 +109,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   ┌──────────────────────────────────────────────────────────────────────────────────────┐
   │ Connection Uri                                                                       │
   ├──────────────────────────────────────────────────────────────────────────────────────┤
-  │ postgresql://[user]:[password]@[neon_hostname]/[dbname]                              │
+  │ postgres://[user]:[password]@[neon_hostname]/[dbname]                                │
   └──────────────────────────────────────────────────────────────────────────────────────┘
   ```
 
@@ -159,7 +159,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     },
     "connection_uris": [
         {
-        "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname",
+        "connection_uri": "postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname",
         "connection_parameters": {
             "database": "dbname",
             "password": "AbC123dEf",

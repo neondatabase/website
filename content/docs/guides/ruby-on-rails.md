@@ -2,7 +2,7 @@
 title: Connect a Ruby on Rails application to Neon Postgres
 subtitle: Set up a Neon project in seconds and connect from a Ruby on Rails application
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.664Z'
+updatedOn: '2024-02-08T15:20:54.290Z'
 ---
 
 [Ruby on Rails](https://rubyonrails.org/), also known simply as Rails, is an open-source web application framework written in Ruby. It uses a model-view-controller architecture, making it a good choice for developing database-backed web applications. This guide shows how to connect to a Ruby on Rails application to a Neon Postgres database.
@@ -41,7 +41,7 @@ You now have a Rails project in a folder named `neon-with-rails`.
 Create a `.env` file in the root of your Rails project, and add the connection string for your Neon compute. Do not specify a database name after the forward slash in the connection string. Rails will choose the correct database depending on the environment.
 
 ```shell shouldWrap
-DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/
 ```
 
 <Admonition type="note">

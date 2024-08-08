@@ -31,7 +31,6 @@ const Field = forwardRef(
       children = null,
       tag: Tag = 'input',
       inputClassName,
-      wrapperClassName,
       error,
       errorClassName,
       isDisabled,
@@ -51,29 +50,27 @@ const Field = forwardRef(
       >
         {label}
       </label>
-      <div className={clsx('w-full rounded', wrapperClassName)}>
-        <Tag
-          className={clsx(
-            baseStyles,
-            themes[theme],
-            Tag === FIELD_TAGS.TEXTAREA && 'min-h-[112px] py-3.5',
-            Tag === FIELD_TAGS.SELECT &&
-              'cursor-pointer truncate bg-[url(/images/chevron-down.svg)] bg-[length:12px] bg-[center_right_1rem] bg-no-repeat pr-8',
-            error ? '!border-secondary-1' : 'border-transparent focus:border-primary-1',
-            isDisabled && '!cursor-default',
-            inputClassName
-          )}
-          ref={ref}
-          id={theme === 'checkbox' ? value : name}
-          name={name}
-          value={theme === 'checkbox' ? value : null}
-          type={type}
-          disabled={isDisabled}
-          {...otherProps}
-        >
-          {children}
-        </Tag>
-      </div>
+      <Tag
+        className={clsx(
+          baseStyles,
+          themes[theme],
+          Tag === FIELD_TAGS.TEXTAREA && 'min-h-[112px] py-3.5',
+          Tag === FIELD_TAGS.SELECT &&
+            'cursor-pointer truncate bg-[url(/images/chevron-down.svg)] bg-[length:12px] bg-[center_right_1rem] bg-no-repeat pr-8',
+          error ? '!border-secondary-1' : 'border-transparent focus:border-primary-1',
+          isDisabled && '!cursor-default',
+          inputClassName
+        )}
+        ref={ref}
+        id={theme === 'checkbox' ? value : name}
+        name={name}
+        value={theme === 'checkbox' ? value : null}
+        type={type}
+        disabled={isDisabled}
+        {...otherProps}
+      >
+        {children}
+      </Tag>
 
       {error && (
         <p
@@ -99,7 +96,6 @@ Field.propTypes = {
   type: PropTypes.string,
   tag: PropTypes.oneOf(Object.values(FIELD_TAGS)),
   inputClassName: PropTypes.string,
-  wrapperClassName: PropTypes.string,
   error: PropTypes.string,
   errorClassName: PropTypes.string,
   children: PropTypes.node,

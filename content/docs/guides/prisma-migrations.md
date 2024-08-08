@@ -3,7 +3,7 @@ title: Schema migration with Neon Postgres and Prisma ORM
 subtitle: Set up Neon Postgres and run migrations for your Javascript project using
   Prisma ORM
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.661Z'
+updatedOn: '2024-06-14T07:55:54.404Z'
 ---
 
 [Prisma](https://www.prisma.io/) is an open-source ORM for Node.js and Typescript, known for its ease of use and focus on type safety. It supports many databases, including Postgres, and provides a robust system for managing database schemas and migrations.
@@ -29,7 +29,7 @@ To follow along with this guide, you will need:
 Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Keep your connection string handy for later use.

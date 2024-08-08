@@ -1,7 +1,7 @@
 ---
 title: Import data from CSV
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.667Z'
+updatedOn: '2024-02-08T15:20:54.292Z'
 ---
 
 This topic describes how to import data into a Neon database table from a CSV file.
@@ -13,7 +13,7 @@ The following example uses the ready-to-use `neondb` database that is created wi
 1. Connect to the `neondb` database using `psql`. For example:
 
    ```bash shouldWrap
-   psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
+   psql postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    <Admonition type="note">

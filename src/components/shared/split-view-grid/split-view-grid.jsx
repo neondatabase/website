@@ -27,7 +27,7 @@ const SplitViewGrid = ({
       >
         <div
           className={clsx(
-            'col-span-4 col-start-1 flex min-w-[440px] flex-col items-start 2xl:min-w-0 xl:max-w-[300px] xl:self-start xl:justify-self-start xl:pl-8 lg:col-span-full lg:max-w-none lg:px-7 md:pl-6 md:pr-3.5',
+            'col-span-4 col-start-1 flex flex-col items-start xl:max-w-[300px] xl:self-start xl:justify-self-start xl:pl-8 lg:col-span-full lg:max-w-none lg:px-7 md:pl-6 md:pr-3.5',
             {
               'pl-12': size === 'md',
               'pl-11': size === 'sm',

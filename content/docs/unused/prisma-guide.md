@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/prisma-tutorial
-updatedOn: '2024-08-07T21:36:52.679Z'
+updatedOn: '2024-07-25T12:53:42.439Z'
 ---
 
 Prisma is an open source next-generation ORM that consists of the following parts:
@@ -24,7 +24,7 @@ This guide steps you through how to connect from Prisma to Neon, how to use Pris
 The project is created and you are presented with a dialog that provides connection details. Copy the connection string, which looks similar to the following:
 
 ```text shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="info">
@@ -44,7 +44,7 @@ For cloud-hosted databases like Neon, you must create the shadow database manual
 The connection string for this database should be the same as the connection string for your `neondb` database except for the database name:
 
 ```text shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow
 ```
 
 ## Set up your Prisma project
@@ -96,8 +96,8 @@ In this step, you will update your project's `.env` file with the connection str
 When you are finished, your `.env` file should have entries similar to the following:
 
 ```text shouldWrap
-DATABASE_URL=postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?connect_timeout=10
-SHADOW_DATABASE_URL=postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow?connect_timeout=10
+DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?connect_timeout=10
+SHADOW_DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow?connect_timeout=10
 ```
 
 <Admonition type="note">

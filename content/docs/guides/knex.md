@@ -2,7 +2,7 @@
 title: Connect from Knex to Neon
 subtitle: Learn how to connect to Neon from Knex
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.653Z'
+updatedOn: '2024-08-01T12:29:37.214Z'
 ---
 
 Knex is an open-source SQL query builder for Postgres. This guide covers the following topics:
@@ -35,7 +35,7 @@ To establish a basic connection from Knex to Neon, perform the following steps:
    Your setting will appear similar to the following:
 
    ```text shouldWrap
-   DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+   DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
    ```
 
 ## Use connection pooling with Knex
@@ -44,7 +44,7 @@ Serverless functions can require a large number of database connections as deman
 
 ```ini shouldWrap
 # Pooled Neon connection string
-DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
 A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connection Details** widget on the Neon **Dashboard**. Use the **Pooled connection** checkbox to add the `-pooler` suffix.

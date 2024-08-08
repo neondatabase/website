@@ -3,7 +3,7 @@ title: Use Neon with Koyeb
 subtitle: Learn how to connect a Neon Postgres database to an application deployed with
   Koyeb
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.654Z'
+updatedOn: '2024-06-21T14:17:23.471Z'
 ---
 
 [Koyeb](https://www.koyeb.com/) is a developer-friendly, serverless platform designed to easily deploy reliable and scalable applications globally. Koyeb offers native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across their edge network with zero configuration.
@@ -25,7 +25,7 @@ The example application connects to your Neon Postgres database using [Prisma](h
 A dialog pops up with your Neon connection string, which appears similar to the following:
 
 ```bash
-postgresql://[user]:[password]@[neon_hostname]/[dbname]
+postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 Store this value in a safe place. It is required later. The connection string specifies `neondb` as the database. This is the database created with your Neon project if you did not specify a different database name. You will use this database with the example application.

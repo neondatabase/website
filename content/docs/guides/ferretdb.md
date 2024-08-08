@@ -3,7 +3,7 @@ title: Use FerretDB with Neon
 subtitle: Add MongoDB compatibility to your Neon database with FerretDB
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.652Z'
+updatedOn: '2024-06-14T07:55:54.390Z'
 ---
 
 FerretDB is an open source document database that adds MongoDB compatibility to other databases, including Postgres. By using FerretDB, developers can access familiar MongoDB features and tools using the same syntax and commands for many of their use cases.
@@ -48,7 +48,7 @@ From the Neon **Dashboard**, retrieve the connection string for your `ferretdb` 
 Your database connection string will look something like this:
 
 ```bash shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/ferretdb
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/ferretdb
 ```
 
 ## Run FerretDB with Neon via Docker
