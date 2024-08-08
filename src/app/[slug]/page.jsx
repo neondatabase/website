@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
+import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
 import Azure from 'components/pages/landing/azure';
@@ -60,7 +61,11 @@ const DynamicPage = async ({ params }) => {
 
         return (
           <SplitViewGrid
-            className="mx-auto mb-14 mt-16 max-w-[1265px] lg:my-14"
+            className={clsx(
+              'mx-auto mt-16 max-w-[1265px]',
+              isAzurePage ? 'mb-14' : 'mb-32',
+              'lg:my-14'
+            )}
             {...restProps}
             items={items}
             size="sm"
