@@ -14,7 +14,7 @@ Our development teams are focused on helping you ship faster with Postgres. This
 
 For the latest features and fixes, check our [Changelog](/docs/changelog), updated every Friday. Or watch for our Changelog email, also sent regularly on Fridays. You can also subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
-## What's around the corner
+## What we're working on now
 
 Here's a snapshot of what we're working on now:
 
