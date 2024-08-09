@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
 
 import Link from 'components/shared/link';
-import { DOCS_BASE_PATH } from 'constants/docs';
+import { DOCS_BASE_PATH, HOME_MENU_ITEM } from 'constants/docs';
 import LINKS from 'constants/links';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 import ChevronBackIcon from 'icons/docs/sidebar/chevron-back.inline.svg';
@@ -77,7 +77,12 @@ Section.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape()),
   setMenuHeight: PropTypes.func.isRequired,
   menuWrapperRef: PropTypes.any.isRequired,
-  activeMenuList: PropTypes.instanceOf(Set).isRequired,
+  activeMenuList: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      slug: PropTypes.string,
+    })
+  ).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
   closeMobileMenu: PropTypes.func,
 };
@@ -98,10 +103,10 @@ const Menu = ({
 }) => {
   const isRootMenu = depth === 0;
   const menuRef = useRef(null);
-  const lastDepth = Array.from(activeMenuList).length - 1;
+  const lastDepth = activeMenuList.length - 1;
 
-  const isActive = isRootMenu || activeMenuList.has(title);
-  const isLastActive = Array.from(activeMenuList)[lastDepth] === title;
+  const isActive = isRootMenu || activeMenuList.some((item) => item.title === title);
+  const isLastActive = activeMenuList[lastDepth]?.title === title;
 
   const BackLinkTag = parentMenu?.slug ? Link : 'button';
   const LinkTag = slug ? Link : 'div';
@@ -128,16 +133,12 @@ const Menu = ({
   }, [isLastActive, setMenuHeight, menuWrapperRef]);
 
   const handleClose = () => {
-    setActiveMenuList((prevList) => {
-      const newList = new Set(prevList);
-      newList.delete(title);
-      return newList;
-    });
+    setActiveMenuList((prevList) => prevList.filter((item) => item.title !== title));
     if (parentMenu?.slug && closeMobileMenu) closeMobileMenu();
   };
 
   const handleClickHome = () => {
-    setActiveMenuList(new Set(['Home']));
+    setActiveMenuList([HOME_MENU_ITEM]);
   };
 
   const animateState = () => {
@@ -295,7 +296,12 @@ Menu.propTypes = {
   ),
   setMenuHeight: PropTypes.func.isRequired,
   menuWrapperRef: PropTypes.any.isRequired,
-  activeMenuList: PropTypes.instanceOf(Set).isRequired,
+  activeMenuList: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      slug: PropTypes.string,
+    })
+  ).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
   closeMobileMenu: PropTypes.func,
 };

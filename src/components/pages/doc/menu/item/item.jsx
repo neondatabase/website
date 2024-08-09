@@ -30,8 +30,8 @@ const Item = ({
   const LinkTag = slug ? Link : 'button';
 
   const handleClick = () => {
-    if (items?.length && !activeMenuList.has(title)) {
-      setActiveMenuList((prevList) => new Set(prevList).add(title));
+    if (items?.length && !activeMenuList.some((item) => item.title === title)) {
+      setActiveMenuList((prevList) => [...prevList, { title, slug }]);
     }
     if (slug && closeMobileMenu) closeMobileMenu();
   };
@@ -58,7 +58,7 @@ const Item = ({
           dangerouslySetInnerHTML={{ __html: title }}
         />
         {tag && <Tag className="ml-2 mt-0.5" label={tag} size="sm" />}
-        {(externalSlug || slug === 'postgres') && (
+        {externalSlug && (
           <ArrowExternalIcon className="text-gray-new-90 dark:text-gray-new-15 lg:hidden" />
         )}
       </LinkTag>
@@ -83,7 +83,12 @@ Item.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
-  activeMenuList: PropTypes.instanceOf(Set).isRequired,
+  activeMenuList: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      slug: PropTypes.string,
+    })
+  ).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
   closeMobileMenu: PropTypes.func,
   children: PropTypes.node,

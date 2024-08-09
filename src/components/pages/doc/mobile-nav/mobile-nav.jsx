@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { getActiveItems } from 'components/pages/doc/sidebar/sidebar';
 import InkeepTrigger from 'components/shared/inkeep-trigger';
+import { HOME_MENU_ITEM } from 'constants/docs';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
 import useWindowSize from 'hooks/use-window-size';
@@ -53,9 +54,10 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
 
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
-  const [activeMenuList, setActiveMenuList] = useState(
-    new Set(['Home', ...getActiveItems(sidebar, currentSlug)])
-  );
+  const [activeMenuList, setActiveMenuList] = useState([
+    HOME_MENU_ITEM,
+    ...getActiveItems(sidebar, currentSlug),
+  ]);
 
   const toggleMenu = () => setIsOpen((isOpen) => !isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -110,9 +112,9 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
         onClick={toggleMenu}
       >
         <span className="text-ellipsis">
-          {Array.from(activeMenuList).pop() === 'Home'
+          {activeMenuList[activeMenuList.length - 1].title === 'Home'
             ? 'Documentation menu'
-            : Array.from(activeMenuList).pop()}
+            : activeMenuList[activeMenuList.length - 1].title}
         </span>
         <ChevronRight
           className={clsx(

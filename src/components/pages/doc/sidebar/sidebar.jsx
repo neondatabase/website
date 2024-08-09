@@ -7,36 +7,50 @@ import { useState, useRef, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
+import { HOME_MENU_ITEM } from 'constants/docs';
 
 import Menu from '../menu';
 
-const hasActiveItem = (items, currentSlug) =>
-  items?.some(
-    ({ slug, items }) => slug === currentSlug || (items && hasActiveItem(items, currentSlug))
-  );
-
-export const getActiveItems = (items, currentSlug) =>
-  items.reduce((titles, { title, items, slug }) => {
-    if (items) {
-      if (title && (slug === currentSlug || hasActiveItem(items, currentSlug))) {
-        titles.push(title);
-      }
-      titles.push(...getActiveItems(items, currentSlug));
+export const getActiveItems = (items, currentSlug, result = [], parents = []) => {
+  const activeItem = items.find((item) => item.slug === currentSlug);
+  if (activeItem) {
+    if (activeItem.items && !activeItem.section) {
+      result.push(activeItem);
     }
-    return titles;
-  }, []);
+    result.push(...parents.filter((parent) => !parent.section));
+    return result;
+  }
+
+  return items.reduce((acc, item) => {
+    if (acc.length) return acc;
+    if (item.items) {
+      return getActiveItems(item.items, currentSlug, result, [...parents, item]);
+    }
+    return acc;
+  }, result);
+};
 
 const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
-  const [activeMenuList, setActiveMenuList] = useState(
-    new Set(['Home', ...getActiveItems(sidebar, currentSlug)])
-  );
+  const [activeMenuList, setActiveMenuList] = useState([
+    HOME_MENU_ITEM,
+    ...getActiveItems(sidebar, currentSlug),
+  ]);
 
   useEffect(() => {
-    setActiveMenuList(new Set(['Home', ...getActiveItems(sidebar, currentSlug)]));
+    if (
+      activeMenuList.length === 0 ||
+      activeMenuList[activeMenuList.length - 1].slug !== currentSlug
+    ) {
+      setActiveMenuList([HOME_MENU_ITEM, ...getActiveItems(sidebar, currentSlug)]);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentSlug, sidebar]);
+
+  useEffect(() => {
+    console.log(activeMenuList);
+  }, [activeMenuList]);
 
   const [menuHeight, setMenuHeight] = useState(1000);
   const menuWrapperRef = useRef(null);
