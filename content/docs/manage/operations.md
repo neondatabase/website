@@ -2,7 +2,7 @@
 title: System operations
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-25T12:53:42.432Z'
+updatedOn: '2024-08-09T20:21:45.351Z'
 ---
 
 An operation is an action performed by the Neon Control Plane on a Neon object or resource. Operations are typically initiated by user actions, such as creating a branch or deleting a database. Other operations may be initiated by the Neon Control Plane, such as suspending a [compute](/docs/reference/glossary#compute) after a period of inactivity or checking its availability. You can monitor operations to keep an eye on the overall health of your Neon project or to check the status of specific operations. When working with the Neon API, you can poll the status of operations to ensure that an API request is completed before issuing the next API request. For more information, see [Poll operation status](#poll-operation-status).
