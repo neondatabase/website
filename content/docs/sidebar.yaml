@@ -3,6 +3,8 @@
     - title: Home
       slug: introduction
       icon: home
+- section: noname
+  items:
     - title: Why Neon?
       icon: why-neon
       items:
@@ -26,7 +28,6 @@
               slug: get-started-with-neon/workflow-primer
             - title: 4 - Getting ready for production
               slug: get-started-with-neon/production-checklist
-              enableTableOfContents: true
         - section: Language quickstarts
           items:
             - title: Quick list
@@ -112,6 +113,26 @@
               slug: connect/connection-errors
             - title: Latency and timeouts
               slug: connect/connection-latency
+    - title: Import data
+      slug: import/import-intro
+      icon: roadmap
+      items:
+        - title: Import from Postgres with pg_dump and pg_restore
+          slug: import/import-from-postgres
+        - title: Import from Postgres with pg-import
+          slug: import/import-from-postgres-pg-import
+        - title: Import from a Neon project
+          slug: import/import-from-neon
+        - title: Import from CSV
+          slug: import/import-from-csv
+        - title: Import from Heroku
+          slug: import/import-from-heroku
+        - title: Migrate data with AWS DMS
+          slug: import/migrate-aws-dms
+        - title: Migrate from MySQL to Postgres
+          slug: import/migrate-mysql
+        - title: Sample data
+          slug: import/import-sample-data
 - section: Platform
   items:
     - title: Architecture
@@ -158,25 +179,6 @@
               slug: guides/branching-test-queries
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
-        - title: Import data
-          slug: import/import-intro
-          items:
-            - title: Import from Postgres with pg_dump and pg_restore
-              slug: import/import-from-postgres
-            - title: Import from Postgres with pg-import
-              slug: import/import-from-postgres-pg-import
-            - title: Import from a Neon project
-              slug: import/import-from-neon
-            - title: Import from CSV
-              slug: import/import-from-csv
-            - title: Import from Heroku
-              slug: import/import-from-heroku
-            - title: Migrate data with AWS DMS
-              slug: import/migrate-aws-dms
-            - title: Migrate from MySQL to Postgres
-              slug: import/migrate-mysql
-            - title: Sample data
-              slug: import/import-sample-data
         - title: Logical replication
           slug: introduction/logical-replication
           items:
@@ -353,6 +355,7 @@
         - section: Deploy
           items:
             - title: Vercel
+              slug: guides/vercel-overview
               items:
                 - title: Overview
                   slug: guides/vercel-overview
@@ -363,6 +366,7 @@
                 - title: Connect manually
                   slug: guides/vercel-manual
             - title: Cloudflare
+              slug: guides/cloudflare-pages
               items:
                 - title: Cloudflare Pages
                   slug: guides/cloudflare-pages
@@ -455,6 +459,7 @@
             - title: Entity Framework
               slug: guides/entity-migrations
             - title: Flyway
+              slug: guides/flyway
               items:
                 - title: Get started
                   slug: guides/flyway
@@ -463,6 +468,7 @@
             - title: Laravel
               slug: guides/laravel-migrations
             - title: Liquibase
+              slug: guides/liquibase
               items:
                 - title: Get started
                   slug: guides/liquibase
