@@ -728,6 +728,8 @@
                   slug: functions/math-random
                 - title: round
                   slug: functions/math-round
+        - title: Indexes
+          slug: postgresql/index-types
         - title: Optimize queries
           slug: postgresql/query-performance
         - title: Query reference
