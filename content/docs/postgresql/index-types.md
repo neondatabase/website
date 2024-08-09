@@ -47,7 +47,7 @@ CREATE INDEX idx_users_timestamp ON users (created_at);
 
 ### Use B-tree Indexes in Postgres
 
-B-tree indexes are efficient for both equality and range queries on sortable data. They are particularly useful for columns frequently used in WHERE clauses, JOIN conditions, and ORDER BY clauses.
+B-tree indexes are efficient for both equality and range queries on sortable data. They are particularly useful for columns frequently used in `WHERE` clauses, `JOIN` conditions, and `ORDER BY` clauses.
 
 ```sql
 -- Equality search
