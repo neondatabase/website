@@ -159,24 +159,24 @@ Testing your logical replication setup ensures that data is being replicated cor
 
 3. Connect to your destination database in Neon and run the following query to view the received_lsn, latest_end_lsn, last_msg_receipt_time. The LSN values should match the `pg_current_wal_lsn` value on the source database and the the `last_msg_receipt_time` should be very recent.
 
-    ```bash
-    SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time from pg_catalog.pg_stat_subscription;
-    subname | received_lsn | latest_end_lsn |     last_msg_receipt_time
-    ---------+--------------+----------------+-------------------------------
-    mysubscription | 0/7D213250   | 0/7D213250     | 2024-08-02 18:37:16.70939+00
-    (1 rows)
-    ```
+   ```bash
+   SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time from pg_catalog.pg_stat_subscription;
+   subname | received_lsn | latest_end_lsn |     last_msg_receipt_time
+   ---------+--------------+----------------+-------------------------------
+   mysubscription | 0/7D213250   | 0/7D213250     | 2024-08-02 18:37:16.70939+00
+   (1 rows)
+   ```
 
 4. As an extra check, you can also do a row count on the source and destination.
 
-    ```sql
-    select count(*) from my_db;
+   ```sql
+   select count(*) from my_db;
 
-    count
-    -------
-    7585
-    (1 row)
-    ```
+   count
+   -------
+   7585
+   (1 row)
+   ```
 
 ## Switch over your application
 
