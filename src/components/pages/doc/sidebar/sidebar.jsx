@@ -60,10 +60,6 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlug]);
 
-  useEffect(() => {
-    console.log(activeMenuList);
-  }, [activeMenuList]);
-
   const [menuHeight, setMenuHeight] = useState(1000);
   const menuWrapperRef = useRef(null);
 
