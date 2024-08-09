@@ -55,8 +55,8 @@ const Post = ({
       className={clsx(
         'flex flex-col lg:ml-0 lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
         isFlowPage
-          ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-9 2xl:col-start-2 2xl:mx-5 xl:col-span-8 xl:col-start-3'
-          : 'col-span-6 -mr-12 ml-[-33px] 2xl:-ml-4 xl:col-span-9 xl:ml-10 xl:mr-0 xl:max-w-[750px] lg:max-w-none'
+          ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 xl:col-span-9 xl:col-start-3'
+          : 'col-span-7 col-start-3 -ml-6 max-w-[832px] 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none'
       )}
     >
       {breadcrumbs.length > 0 && <Breadcrumbs breadcrumbs={breadcrumbs} />}
@@ -93,7 +93,14 @@ const Post = ({
       <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
     </div>
 
-    <div className="col-start-10 col-end-13 ml-[50px] h-full xl:ml-0 xl:hidden">
+    <div
+      className={clsx(
+        'col-span-2 col-start-11 -ml-12 h-full max-w-64 xl:hidden',
+        isFlowPage
+          ? '2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
+          : '3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
+      )}
+    >
       <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
         {enableTableOfContents && <TableOfContents items={tableOfContents} />}
       </nav>
