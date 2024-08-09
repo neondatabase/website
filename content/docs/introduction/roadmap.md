@@ -14,12 +14,12 @@ Our development teams are focused on helping you ship faster with Postgres. This
 
 For the latest features and fixes, check our [Changelog](/docs/changelog), updated every Friday. Or watch for our Changelog email, also sent regularly on Fridays. You can also subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
-## What's around the corner
+## What we're working on now
 
 Here's a snapshot of what we're working on now:
 
 - **Neon on Azure**: If you didn't catch the post, Neon is coming to Azure. [Read more](https://neon.tech/blog/neon-is-coming-to-azure) about this big news.
-- **Autoscaling GA**: One of our defining features, Autoscaling is soon going GA. Look for an announcement with details coming out soon!
+- **Autoscaling GA**: One of our defining features, Autoscaling, is soon going GA. Look for an announcement with details coming out soon!
 - **Autoscaling on the Free Plan**: Users on the Free Plan will soon be able to try Neon's Autoscaling feature, within reasonable Free Plan limits.
 - **Staging Environments**: A critical part of making it easy for you to use Neon as the staging environment for your team's app development &#8212; simple, robust anonymization of PII data. We're working on it.
 - **Postgres 17**: We've been at work on this for a while now. We plan to support Postgres 17 the day it's released. Postgres 17 will support direct SSL connections, which can eliminate one round-trip from establishing a connection.
