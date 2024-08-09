@@ -13,7 +13,9 @@ Neon's logical replication feature allows you to replicate data from Amazon RDS 
 - A source database in Amazon RDS for PostgreSQL containing the data you want to replicate.
 - A destination Neon project. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
-## Enable logical replication in the source Amazon RDS PostgreSQL instance
+## Prepare your source database
+
+### Enable logical replication in the source Amazon RDS PostgreSQL instance
 
 Enabling logical replication in Postgres requires changing the `wal_level` configuration parameter from `replica` to `logical`. Before you begin, you can check your current setting with the following command:
 
@@ -41,64 +43,20 @@ If your current setting is `replica`, follow these steps to enable logical repli
    (1 row)
    ```
 
-## Check network connectivity between Amazon RDS and your Neon project
+### Allow connections from Neon
 
-You need to allow connections to your Amazon RDS Postgres instance from Neon. To do this in AWS, you need to edit the VPC security group for your RDS instance, which you can find a link to from your RDS instance page. The most relaxed rule for source connections is to allow `0.0.0.0/0`, which opens your instance for connections from the public internet without restriction. For better security, we recommend creating a rule specifically for connections from the region where your Neon project resides. Neon uses 3 to 6 IP addresses per region for outbound communication (1 per availability zone + region). Create a rule to allow access to all of the IPs for your Neon project's region, as per the following table:
+You need to allow connections to your AWS RDS Postgres instance from Neon. You can do this by editing your instance's security group, which you can find a link to from your AWS RDS Postgres instance page.
 
-| Region                                        | NAT Gateway IP Addresses                                                               |
-| --------------------------------------------- | -------------------------------------------------------------------------------------- |
-| US East (N. Virginia) — aws-us-east-1         | 23.23.0.232, 3.222.32.110, 35.168.244.148, 54.160.39.37, 54.205.208.153, 54.88.155.118 |
-| US East (Ohio) — aws-us-east-2                | 18.217.181.229, 3.129.145.179, 3.139.195.115                                           |
-| US West (Oregon) — aws-us-west-2              | 44.235.241.217, 52.32.22.241, 52.37.48.254, 54.213.57.47                               |
-| Europe (Frankfurt) — aws-eu-central-1         | 18.158.63.175, 3.125.234.79, 3.125.57.42                                               |
-| Asia Pacific (Singapore) — aws-ap-southeast-1 | 54.254.50.26, 54.254.92.70, 54.255.161.23                                              |
-| Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.237.134.148, 13.55.152.144, 54.153.185.87                                           |
+Add a rule that allows traffic from all of the IP addresses for your Neon project's region.
 
-If you do not know the region of your Neon project, you can find it in the **Project settings** widget on the **Project Dashboard**.
+Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses by region.
 
-## Prepare the destination database in your Neon project
-
-This section describes how to prepare your destination database.
 
 <Admonition type="note">
-You do not need to set `wal_level=logical` at the subscriber. This is only required at the publisher Postgres instance, which you already done.
+You could specify a rule for `0.0.0.0/0` to allow traffic from any IP address. However, this configuration is not considered secure.
 </Admonition>
 
-When configuring logical replication in Postgres, the tables in the source database that you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use a utility like `pg_dump` to dump the schema from your source database. For example, the following `pg_dump` command dumps the database schema from a database named `neondb`. The command uses a database connection URL. You can obtain a connection URL for your database from **Connection Details** widget on the Neon Dashboard. For instructions, see [Connect from any application](/docs/connect/connect-from-any-app).
-
-```bash
-pg_dump --schema-only \
-	--no-privileges \
-	--no-owner \
-	"postgresql://rdsdb_owner:XXX@neon-replication-test.XXX.eu-west-1.rds.amazonaws.com/publisher" \
-	> schema_dump.sql
-```
-
-<Admonition type="note">
-The `--no-privileges` and `--no-owner` options prevent `pg_dump` from dumping privileges and `ALTER OWNER` statements that may not be supported in Neon. When you load the schema into Neon, objects will be owned by the Neon user performing that loads the schema. Privileges and ownership can be defined in Neon later according to what is supported in Neon.
-</Admonition>
-
-To load the schema into your destination database in Neon, you can run the following [psql](/docs/connect/query-with-psql-editor) command, specifying the database connection URL for your destination database:
-
-```bash
- psql \
-	"postgresql://neondb_owner:<password>@ep-mute-recipe-123456.us-east-2.aws.neon.tech/neondb?sslmode=require" \
-	< schema_dump.sql
-```
-
-<Admonition type="note">
-Notice that the database URLs for the source and destination databases differ. This is because they are different Postgres instances. Your source and destination database URLs will also differ.
-</Admonition>
-
-You can verify that the schema was loaded by running the following command on the destination database via [psql](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
-
-```bash
-\dt
-```
-
-If you've dumped and loaded the database schema as described above, this command should display the same schema that exists in your source database.
-
-## Create a publication on the source database
+### Create a publication on the source database
 
 This step is performed on your source RDS instance.
 
@@ -119,6 +77,20 @@ CREATE PUBLICATION playing_with_neon_publication FOR TABLE playing_with_neon;
 
 For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 </Admonition>
+
+## Prepare your destination database
+
+This section describes how to prepare your source Neon Postgres database (the subscriber) to receive replicated data from your AWS RDS Postgres instance.
+
+### Prepare your database schema
+
+When configuring logical replication in Postgres, the tables in the source database that you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use a utility like `pg_dump` to dump the schema from your source database.
+
+If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
+
+```sql shouldWrap
+CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+```
 
 ### Create a subscription
 
@@ -181,6 +153,8 @@ select count(*) from my_db;
 (1 row)
 ```
 
-## Switch your application to the destination Neon project
+## Switch over your application
 
-After the replication operation is complete, you can switch your application over to the destination database by swapping out the source database connection details for your Neon destination database connection details.
+After the replication operation is complete, you can switch your application over to the destination database by swapping out your AWS RDS source database connection details for your Neon destination database connection details.
+
+You can find your Neon connection details on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).

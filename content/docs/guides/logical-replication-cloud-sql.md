@@ -106,7 +106,7 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your source Neon Postgres database (the subscriber) to receive replicated datan from your Cloud SQL Postgres instance.
+This section describes how to prepare your source Neon Postgres database (the subscriber) to receive replicated data from your Cloud SQL Postgres instance.
 
 ### Prepare your database schema
 
