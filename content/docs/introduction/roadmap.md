@@ -1,5 +1,6 @@
 ---
 title: Roadmap
+enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
@@ -7,15 +8,47 @@ redirectFrom:
 updatedOn: '2024-08-06T15:23:10.955Z'
 ---
 
-Our developers are focused on making Neon the default choice for serverless Postgres. This roadmap describes committed features that are coming soon. We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion.
+Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features that we're working on right now, plus a peak at some of the upcoming features we'll be taking on next.
 
-As always, we are listening. If you see something you like, something you disagree with, or something you'd love for us to add, let us know in our Discord feedback channel.
+## What we've just launched
 
-<CommunityBanner buttonText="Leave feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Share your ideas in&nbsp;Discord</CommunityBanner>
+For the latest features and fixes, check our [Changelog](/docs/changelog), updated every Friday. Or watch for our Changelog email, also sent regularly on Fridays. You can also subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
-For the latest features and fixes, check our [Changelog](/docs/changelog), updated every Friday. You can subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
+## What we're working on now
 
-## Neon Early Access Program
+Here's a snapshot of what we're working on now:
+
+- **Neon on Azure**: If you didn't catch the post, Neon is coming to Azure. [Read more](https://neon.tech/blog/neon-is-coming-to-azure) about this big news.
+- **Autoscaling GA**: One of our defining features, Autoscaling, is soon going GA. Look for an announcement with details coming out soon!
+- **Autoscaling on the Free Plan**: Users on the Free Plan will soon be able to try Neon's Autoscaling feature, within reasonable Free Plan limits.
+- **Postgres 17**: We've been at work on this for a while now. We plan to support Postgres 17 the day it's released. Postgres 17 will support direct SSL connections, which can eliminate one round-trip from establishing a connection.
+- **Database deploy previews**: Our GitHub App is available now for all users, with more refinements to come &#8212; including better integration with GitHub Actions, making it easier to incorporate your database into your development workflow.
+- **Better deletes**: We're adding support for deleting obsolete branches, especially after [restore](/docs/guides/branch-restore) operations.
+- **Migrations (Beta)**: We’re adding inbound logical replication as a first step towards offering seamless, low-downtime migrations from your current database provider to Neon. Inbound replication can also help you use Neon as your staging environment, letting you take advantage of developer-friendly features like branching and our GitHub Integration, even if you decide to keep production with your current provider.
+- **Snapshots**: Create regularly scheduled snapshots as a way to archive your database &#8212; a cost-effective alternative to long-lived branches.
+- **SQL Editor improvements**: Stay tuned for interesting updates we have planned for our SQL Editor.
+- **Plans & Billing**: We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. You can expect to see changes in this area, including:
+
+  - A new plan tailored to business needs, with key features and usage allowances that better fit business-focused development teams.
+  - Storage-related billing optimizations.
+
+- **Organizations Beta**: We're thankful to our private preview customers for the feedback they've given us so far &#8212; and happy to say that **Organization Accounts** are on track for Early Access users soon.
+- **Neon CLI**: We've recently added a [create-app](/docs/reference/cli-create-app) command that lets you bootstrap your application with common dev stacks. `create-app` is maturing fast, with new frameworks, ORMs, and features coming out regularly.
+- **An email app service**: This service will provide support for email verification and password recovery workflows.
+
+If you have other feature ideas, [let us know](#share-your-thoughts).
+
+## What's on the horizon
+
+And here's a quick list of what we'll be taking on in the near future:
+
+- **Staging Environments**: A critical part of making it easy for you to use Neon as the staging environment for your team's app development &#8212; simple, robust anonymization of PII data. We're working on it.
+- **Support for exporting logs and metrics**: We'd like to help users integrate Neon into their monitoring platforms and services with exportable logs and metrics.
+- **Support for soft deletions**: Work is underway to build a deletion workflow for Neon projects. As part of this workflow, we'll support a recovery grace period for unintended deletions, and we'll also add a little friction to the deletion process to avoid accidental deletions &#8212; something similar to the steps required to delete a repository in GitHub.
+- **Larger computes**: We are working on adding support for ever-larger compute sizes.
+- **New authentication method:** We're working on a new authentication method for Postgres that will enable simplified application -> database connections, as well as allow for Neon to be integrated into various marketplaces.
+
+## Join the Neon Early Access Program
 
 If you would like to get a little more involved, consider signing up for the **Neon Early Access Program**.
 
@@ -27,42 +60,15 @@ Benefits of joining:
 
 [Sign Up Now](https://neon.tech/early-access-program) and start influencing the future of Neon!
 
-## Coming soon
+## A note about timing
 
-Here's a snapshot of what we're working on now:
+We are as excited as you are to see new features in Neon, but their development, release, and timing are at our discretion.
 
-- [Observability](#observability)
-- [Developer workflows](#developer-workflows)
-- [Account management](#account-management)
-- [More regions](#more-regions)
+## Share your thoughts
 
-### Observability
+As always, we are listening. If you see something you like, something you disagree with, or something you'd love for us to add, let us know in our Discord feedback channel.
 
-- **More metrics for the Monitoring page**
-
-  We are also working on adding more metrics to the Monitoring page in the Neon Console to provide the key Postgres and resource usage metrics you require to effectively manage your projects and databases.
-
-### Developer workflows
-
-- **GitHub App**
-
-  We're working on a GitHub App for Neon that will create and delete Neon branches in synchronization with git branch actions.
-
-- **Support for anonymizing data**
-
-  To help with workflows that require protecting personal information, we're adding support for anonymizing data. For example, if you derive your staging branch directly from production, you might want to anonymize the data on staging, which you can then use as the source for all of your development and testing branches.
-
-If there are any new branching features that you think could help your development team's workflow, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042).
-
-### Account management
-
-- **Organization support**
-
-  We are adding features to support using Neon in your organization. Later, we'll add support for managing individual teams within the organization as well.
-
-### More regions
-
-- We are currently evaluating new regions. Please reach out on Discord to let us know which region you would like to see next.
+<CommunityBanner buttonText="Leave feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Share your ideas in&nbsp;Discord</CommunityBanner>
 
 ## A brief history of Neon
 
