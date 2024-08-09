@@ -156,7 +156,6 @@ Testing your logical replication setup ensures that data is being replicated cor
 
    Look for the `last_msg_receive_time` to confirm that the subscription is active and receiving data.
 
-
 ## Switch over your application
 
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
