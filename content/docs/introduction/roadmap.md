@@ -19,7 +19,7 @@ For the latest features and fixes, check our [Changelog](/docs/changelog), updat
 Here's a snapshot of what we're working on now:
 
 - **Neon on Azure**: If you didn't catch the post, Neon is coming to Azure. [Read more](https://neon.tech/blog/neon-is-coming-to-azure) about this big news.
-- **Autoscaling GA**: One of our defining features, Autoscaling is soon going GA. Look for an announcement with details coming out soon!
+- **Autoscaling GA**: One of our defining features, Autoscaling, is soon going GA. Look for an announcement with details coming out soon!
 - **Autoscaling on the Free Plan**: Users on the Free Plan will soon be able to try Neon's Autoscaling feature, within reasonable Free Plan limits.
 - **Database deploy previews**: Our GitHub App is available now for all users, with more refinements to come &#8212; including better integration with GitHub Actions, making it easier to incorporate your database into your development workflow.
 - **Better deletes**: We're adding support for deleting obsolete branches, especially after [restore](/docs/guides/branch-restore) operations.
