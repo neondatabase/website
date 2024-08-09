@@ -2,7 +2,7 @@
 title: Working with Neon read replicas
 subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
-updatedOn: '2024-07-25T12:53:42.428Z'
+updatedOn: '2024-08-07T21:36:52.663Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with the Neon paid plans. This guide will lead you through the process of creating and managing read replicas.
@@ -88,7 +88,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
    A **psql** connection string appears similar to the following:
 
    ```bash
-   postgres://[user]:[password]@[neon_hostname]/[dbname]
+   postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string or example.

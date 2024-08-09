@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2024-07-25T12:53:42.416Z'
+updatedOn: '2024-08-07T21:36:52.640Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -44,7 +44,7 @@ If a library or application upgrade does not help, there are several workarounds
 Neon supports a connection option named `endpoint`, which you can use to identify the compute you are connecting to. Specifically, you can add `options=endpoint%3D[endpoint_id]` as a parameter to your connection string, as shown in the example below. The `%3D` is a URL-encoded `=` sign. Replace `[endpoint_id]` with your compute's ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
 ```txt shouldWrap
-postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
+postgresql://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
 ```
 
 <Admonition type="note">
@@ -82,7 +82,7 @@ endpoint=<endpoint_id>$<password>
 Example:
 
 ```txt
-postgres://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 <Admonition type="note">
@@ -124,7 +124,7 @@ ERROR:  password authentication failed for user '<user_name>' connection to serv
 Check your connection to see if it is defined correctly. Your Neon connection string can be obtained from the **Connection Details** widget on the Neon **Dashboard**. It appears similar to this:
 
 ```text shouldWrap
-postgres://[user]:[password]@[neon_hostname]/[dbname]
+postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 For clients or applications that require specifying connection parameters such as user, password, and hostname separately, the values in a Neon connection string correspond to the following:
@@ -179,7 +179,7 @@ Prisma Migrate requires a direct connection to the database. It does not support
 
 The `terminating connection due to administrator command` error is typically encountered when running a query from a connection that has sat idle long enough for the compute to suspend due to inactivity. Neon automatically suspends a compute after 5 minutes of inactivity, by default. You can reproduce this error by connecting to your database from an application or client such as `psql`, letting the connection remain idle until the compute suspends, and then running a query from the same connection.
 
-If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a paying user, you can disable autosuspend or configure a different suspension period. For instructions, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide). [Neon Free Tier](/docs/introduction/plans#free-tier) users cannot modify the default 5 minute autosuspend setting.
+If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a paying user, you can disable autosuspend or configure a different suspension period. For instructions, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide). [Neon Free Plan](/docs/introduction/plans#free-plan) users cannot modify the default 5 minute autosuspend setting.
 
 ## Unsupported startup parameter
 

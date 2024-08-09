@@ -115,6 +115,13 @@ export default {
     imagePath: '/images/social-previews/variable.jpg',
     pathname: LINKS.variable,
   },
+  costFleets: {
+    title: 'Neon for platforms: Cost estimator',
+    description:
+      'Run thousands of Postgres databases for a fraction of the cost with Neon. Great for building your free tier.',
+    imagePath: '/images/social-previews/cost-fleets.jpg',
+    pathname: LINKS.costFleets,
+  },
   404: {
     title: 'Page Not Found — Neon',
   },

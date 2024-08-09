@@ -1,7 +1,7 @@
 ---
 title: Monitoring dashboard
 enableTableOfContents: true
-updatedOn: '2024-07-25T12:53:42.431Z'
+updatedOn: '2024-08-06T15:23:10.953Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
@@ -17,7 +17,7 @@ Your Neon plan defines the range of data you can view.
 
 | Neon Plan                                       | Data Access              |
 | ----------------------------------------------- | ------------------------ |
-| [Free Tier](/docs/introduction/plans#free-tier) | Last day (24 hours)      |
+| [Free Plan](/docs/introduction/plans#free-plan) | Last day (24 hours)      |
 | [Launch](/docs/introduction/plans#launch)       | Last 7 days (168 hours)  |
 | [Scale](/docs/introduction/plans#scale)         | Last 14 days (336 hours) |
 

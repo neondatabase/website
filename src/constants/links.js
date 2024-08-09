@@ -25,6 +25,7 @@ export default {
   discourse: 'https://community.neon.tech',
   discussions: 'https://github.com/neondatabase/neon/discussions',
   docs: '/docs',
+  docsHome: '/docs/introduction',
   docsBranching: '/docs/introduction/branching',
   dpa: '/dpa',
   earlyAccess: '/early-access-program',
