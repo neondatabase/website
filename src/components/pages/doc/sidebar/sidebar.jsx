@@ -11,10 +11,12 @@ import { HOME_MENU_ITEM } from 'constants/docs';
 
 import Menu from '../menu';
 
+// NOTE: checkSlugInActiveMenu checks if we have current page in last activeMenu item
 const checkSlugInActiveMenu = (currentSlug, activeMenuList, items) => {
   const activeMenu = activeMenuList[activeMenuList.length - 1];
   const isSlugActiveMenu = activeMenu.slug === currentSlug;
 
+  // NOTE: check if current page is in active menu
   const isSlugInActiveMenu = (items) =>
     items.some(
       (item) =>
@@ -26,6 +28,9 @@ const checkSlugInActiveMenu = (currentSlug, activeMenuList, items) => {
   return isSlugActiveMenu || isSlugInActiveMenu(items);
 };
 
+// NOTE: getActiveItems builds activeMenuList
+// supports duplicates section in sidebar,
+// but only the first one will be active
 export const getActiveItems = (items, currentSlug, result = [], parents = []) => {
   const activeItem = items.find((item) => item.slug === currentSlug);
   if (activeItem) {
@@ -48,11 +53,18 @@ export const getActiveItems = (items, currentSlug, result = [], parents = []) =>
 const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
+
+  // NOTE: build initial activeMenuList on page load
+  // getActiveItems returns active menu items tree for active submenus
   const [activeMenuList, setActiveMenuList] = useState([
     HOME_MENU_ITEM,
     ...getActiveItems(sidebar, currentSlug),
   ]);
 
+  // NOTE: useEffect for updating activeMenuList on slug change with broswer back/forth button
+  // supports duplicates section in sidebar,
+  // if we surf through menu with clicks on items, it will not update activeMenuList
+  // we check it with checkSlugInActiveMenu function
   useEffect(() => {
     if (!checkSlugInActiveMenu(currentSlug, activeMenuList, sidebar)) {
       setActiveMenuList([HOME_MENU_ITEM, ...getActiveItems(sidebar, currentSlug)]);
