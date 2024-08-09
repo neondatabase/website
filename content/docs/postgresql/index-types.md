@@ -12,7 +12,7 @@ Indexes are a powerful tool to optimize query performance in relational database
 This guide explores the most common index types in Postgres, including B-tree, Hash, GiST, GIN, and BRIN indexes. You'll learn how to create these indexes, understand the trade-offs involved with each, and how to use them effectively.
 
 <Admonition type="note">
-    While indexes can dramatically improve query performance, they consume additional storage and also add overhead to write operations (since Postgres need to keep them synchronized with the table). It's important to use indexes judiciously and monitor their impact on your database's overall performance.
+While indexes can dramatically improve query performance, they consume additional storage and also add overhead to write operations (since Postgres needs to keep them synchronized with the table). It's important to use indexes judiciously and monitor their impact on your database's overall performance.
 </Admonition>
 
 ## B-tree Indexes
