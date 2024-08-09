@@ -21,7 +21,7 @@ This flowchart will guide you through these selections.
 
 - **Serverless**
 
-  If working in a serverless environment and connecting from a JavaScript and TypeScript application, we recommend using the [Neon Serverless Driver](/docs/serverless/serverless-driver). It handles dynamic workloads with high variability in traffic &#8212; for example, Vercel Edge Functions or Cloudflare Workers.
+  If working in a serverless environment and connecting from a JavaScript or TypeScript application, we recommend using the [Neon Serverless Driver](/docs/serverless/serverless-driver). It handles dynamic workloads with high variability in traffic &#8212; for example, Vercel Edge Functions or Cloudflare Workers.
 
 - **TCP-based driver**
 
