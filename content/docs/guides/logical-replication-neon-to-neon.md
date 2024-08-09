@@ -16,7 +16,7 @@ These are some common Neon-to-Neon replication scenarios. There may be others. Y
 
 ## Prerequisites
 
-- A source Neon project with a database containing the data you want to replicate. Alternatively, if you need some data to play with, you can use the following statements to create a table with sample data:
+- A source Neon project with a database containing the data you want to replicate. If you need some data to play with, you can use the following statements to create a table with sample data:
 
   ```sql shouldWrap
   CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
@@ -28,7 +28,11 @@ These are some common Neon-to-Neon replication scenarios. There may be others. Y
 
 For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
-## Enable logical replication in the source Neon project
+## Prepare your source Neon database
+
+This section describes how to prepare your source Neon database (the publisher) for replicating data to your destination Neon database (the subscriber).
+
+### Enable logical replication in the source Neon project
 
 In the Neon project containing your source database, enable logical replication. You only need to perform this step on the source Neon project.
 
@@ -52,46 +56,7 @@ SHOW wal_level;
  logical
 ```
 
-## Prepare the destination database
-
-This section describes how to prepare your destination database.
-
-When configuring logical replication in Postgres, the tables in the source database that you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use a utility like `pg_dump` to dump the schema from your source database. For example, the following `pg_dump` command dumps the database schema from a database named `neondb`. The command uses a database connection URL. You can obtain a connection URL for your database from **Connection Details** widget on the Neon Dashboard. For instructions, see [Connect from any application](/docs/connect/connect-from-any-app).
-
-```bash
-pg_dump --schema-only \
-	--no-privileges \
-	"postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require" \
-	> schema_dump.sql
-```
-
-To load the schema into your destination database, you can run the following [psql](/docs/connect/query-with-psql-editor) command, specifying the database connection URL for your destination database:
-
-```bash
- psql \
-	"postgresql://neondb_owner:<password>@ep-mute-recipe-123456.us-east-2.aws.neon.tech/neondb?sslmode=require" \
-	< schema_dump.sql
-```
-
-<Admonition type="note">
-Notice that the database URLs for the source and destination databases differ. This is because they are different Postgres instances. Your source and destination database URLs will also differ.
-</Admonition>
-
-You can verify that the schema was loaded by running the following command on the destination database via [psql](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
-
-```bash
-\dt
-```
-
-If you've dumped and loaded the database schema as described above, this command should display the same schema that exists in your source database.
-
-If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
-
-```sql shouldWrap
-CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
-```
-
-## Create a publication on the source database
+### Create a publication on the source database
 
 Publications are a fundamental part of logical replication in Postgres. They allow you to define the database changes to be replicated to subscribers.
 
@@ -110,6 +75,20 @@ CREATE PUBLICATION playing_with_neon_publication FOR TABLE playing_with_neon;
 
 For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 </Admonition>
+
+## Prepare your Neon destination database
+
+This section describes how to prepare your destination Neon Postgres database (the subscriber) to receive replicated data.
+
+### Prepare your database schema
+
+When configuring logical replication in Postgres, the tables in the source database that you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use a utility like `pg_dump` to dump the schema from your source database.
+
+If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
+
+```sql shouldWrap
+CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+```
 
 ### Create a subscription
 
@@ -176,3 +155,10 @@ Testing your logical replication setup ensures that data is being replicated cor
    ```
 
    Look for the `last_msg_receive_time` to confirm that the subscription is active and receiving data.
+
+
+## Switch over your application
+
+After the replication operation is complete, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
+
+You can find the connection details for a Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).

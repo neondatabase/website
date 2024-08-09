@@ -364,6 +364,8 @@
           slug: guides/bemi
         - title: ClickHouse (DoubleCloud)
           slug: guides/logical-replication-clickhouse
+        - title: Cloud SQL
+          slug: guides/logical-replication-cloud-sql
         - title: Confluent
           slug: guides/logical-replication-kafka-confluent
         - title: Decodable

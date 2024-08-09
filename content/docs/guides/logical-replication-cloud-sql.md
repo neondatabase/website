@@ -1,34 +1,47 @@
 ---
 title: Replicate data from Cloud SQL Postgres
-subtitle: Use logical replication to perform a near-zero downtime database migration from Cloud SQL to Neon
+subtitle: Learn how to replicate data from Google Cloud SQL Postgres to Neon
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-08-02T17:25:18.435Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from Cloud SQL to Neon. The steps described can be used for a near-zero downtime migration.
-
-The setup described here follows the procedure outlined in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the Googl Cloud SQL documentation.
+The guide describes how to replicate data using native Postgres logical replication, as described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the Google Cloud SQL documentation.
 
 ## Prerequisites
 
-- A source Cloud SQL POstgres instance containing the data you want to replicate.
-- A destination Neon project. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+- A Cloud SQL Postgres instance containing the data you want to replicate. If you need some data to play with, you can use the following statements to create a table with sample data. Your database and schema may differ.
 
-## Enable logical replication in the source Cloud SQL PostgreSQL instance
+  ```sql shouldWrap
+  CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+  INSERT INTO playing_with_neon(name, value)
+  SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
+  ```
 
-In Cloud SQL, you enable logical replication for your Postgres instance by setting the `cloudsql.logical_decoding` flag to `on`. This setting is different from the setting used in standard Postgres where you enable this feature by setting the `wal_level` configuration parameter to `logical`.
+  <Admonition type="note">
+  This guide uses the default `postgres` data and `public` schema in the Cloud SQL Postgres instance. Your database and schema may differ, but the same steps should apply.
+  </Admonition>
+
+- A Neon project with a Postgres database to receive the replicated data. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+
+## Prepare your Cloud SQL source database
+
+This section describes how to prepare your source Cloud SQL Postgres instance (the publisher) for replicating data to Neon.
+
+### Enable logical replication
+
+The first step is to enable logical replication at the source Postgres instance. In Cloud SQL, you can enable logical replication for your Postgres instance by setting the `cloudsql.logical_decoding` flag to `on`. This action will set the Postgres `wal_level` parameter to `on`.
 
 To enable this flag:
 
 1. In the Google Cloud console, select the project that contains the Cloud SQL instance for which you want to set a database flag.
 2. Open the instance and click **Edit**.
 3. Scroll down to the **Flags** section.
-4. To set a flag that has not been set on the instance before, click **Add item**, choose the flag from the drop-down menu, and set its value.
+4. If this flag has not been set on the instance before, click **Add item**, choose the flag from the drop-down menu, and set its value to `On`.
 5. Click **Save** to save your changes.
 6. Confirm your changes under **Flags** on the **Overview** page.
 
-The change will require a restart:
+The change requires restarting the instance:
 
 ![Clod SQL instance restart](/docs/guides/cloud_sql_restart.png)
 
@@ -36,7 +49,7 @@ Afterward, you can verify that logical replication is enable by running `SHOW wa
 
 ![show wal_level](/docs/guides/cloud_sql_show_wal_level.png)
 
-## Allow connection from your Neon project
+### Allow connections from Neon
 
 You need to allow connections to your Cloud SQL Postgres instance from Neon. To do this in Google Cloud:
 
@@ -48,36 +61,40 @@ In the Google Cloud console, go to the Cloud SQL Instances page.
 4. Select the **Public IP** checkbox.
 5. Click **Add network**.
 6. Optionally, in the **Name** field, enter a name for this network.
-7. In the **Network** field, enter the IP address or address range from which you want to allow connections. Do this for each of your Neon project's NAT Gateway IP addresses. See [NAT Gateway IP addresses](/docs/introduction/regions/nat-gateway-ip-addresses).
+7. In the **Network** field, enter the IP address from which you want to allow connections. You will need to perform this step for each of NAT gateway IP addresses associated with your Neon project's region. Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses by region.
 
    <Admonition type="note">
    Cloud SQL requires that addresses are specified in CIDR notation. You can do so by appending `/32` to the NAT Gateway IP address; for example: `18.217.181.229/32`
-   </Admonition>   
+   </Admonition>
+
+   In the example shown below, you can see that three addresses were added, named `Neon1`, `Neon2`, and `Neon3`. You can name them whatever you like. The addresses were added in CIDR format by appending adding `/32`.
 
    ![Cloud SQL network configuration](/docs/guides/cloud_sql_network_config.png)
 
-8. Click **Done** after adding each Network entry.
-9. Click **Save** when you are finished adding entries all of your Neon project's NAT Gateway IP addresses.
+8. Click **Done** after adding a Network entry.
+9. Click **Save** when you are finished adding Network entries for all of your Neon project's NAT Gateway IP addresses.
 
-### Note the public IP address of your Cloud SQL Postgres instance
+<Admonition type="note">
+You may specify a single Network entry using `0.0.0.0/0` to allow traffic from any IP address. However, this configuration is not considered secure and will trigger a warning.
+</Admonition>
 
-Record the public IP address of your Cloud SQL Postgres instance. You can this value on the instance's **Overview** page.
+### Note your public IP address
 
-![Clould SQL public IP adrress](/docs/guides/cloud_sql_public_ip.png)
+Record the public IP address of your Cloud SQL Postgres instance. You'll nee this value later when you set up a subscription from your Neon database. You can find the public IP address on your Cloud SQL instance's **Overview** page.
 
-You'll nee this value later when you set up a subscription from your Neon database.
+![Clould SQL public IP address](/docs/guides/cloud_sql_public_ip.png)
 
-## Create a Postgres role for replication
+### Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data from your Cloud SQL Postgres instance. The role must have the `REPLICATION` privilege. On your loud SQL Postgres instance, run the following command to create your replication role:
+It is recommended that you create a dedicated Postgres role for replicating data from your Cloud SQL Postgres instance. The role must have the `REPLICATION` privilege. On your Cloud SQL Postgres instance, login in as your `postgres` user or an administrative user you use to create roles and run the following command to create a replication role. You can replace the name `REPLICATION_USER` with whatever role name you want to use.
 
-```sql
+```sql shouldWrap
 CREATE USER REPLICATION_USER WITH REPLICATION IN ROLE cloudsqlsuperuser LOGIN PASSWORD 'REPLICATION_USER_PASSWORD';
 ```
 
-## Grant schema access to your Postgres role
+### Grant schema access to your Postgres role
 
-If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `REPLICATION_USER`:
+If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to a Postgres role named `REPLICATION_USER`:
 
 ```sql
 GRANT USAGE ON SCHEMA public TO REPLICATION_USER;
@@ -87,7 +104,21 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO REPLICATION_
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
 
-## Create a subscription
+## Prepare your Neon destination database
+
+This section describes how to prepare your source Neon Postgres database (the subscriber) to receive replicated datan from your Cloud SQL Postgres instance.
+
+### Prepare your database schema
+
+When configuring logical replication in Postgres, the tables in the source database that you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use a utility like `pg_dump` to dump the schema from your source database.
+
+If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
+
+```sql shouldWrap
+CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+```
+
+### Create a subscription
 
 After defining a publication on the source database, you need to define a subscription on your Neon destination database.
 
@@ -100,7 +131,7 @@ After defining a publication on the source database, you need to define a subscr
    ```
 
    - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source Neon database, where you defined the publication. For the primary_ip, use the public IP address of your Cloud SQL Postgres instance, and specify the name and password of the replication role you created earlier.
+   - `connection_string`: The connection string for the source Cloud SQL database, where you defined the publication. For the `<primary_ip>`, use the public IP address of your Cloud SQL Postgres instance that you noted earlier, and specify the name and password of the replication role you created earlier. If you're replicating from a database other than `postgres`, be sure to specify that database name.
    - `publication_name`: The name of the publication you created on the source Neon database.
 
 2. Verify the subscription was created by running the following command:
@@ -128,25 +159,27 @@ Testing your logical replication setup ensures that data is being replicated cor
 
 3. Connect to your destination database in Neon and run the following query to view the received_lsn, latest_end_lsn, last_msg_receipt_time. The LSN values should match the `pg_current_wal_lsn` value on the source database and the the `last_msg_receipt_time` should be very recent.
 
-```bash
-SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time from pg_catalog.pg_stat_subscription;
- subname | received_lsn | latest_end_lsn |     last_msg_receipt_time
----------+--------------+----------------+-------------------------------
- mysubscription | 0/7D213250   | 0/7D213250     | 2024-08-02 18:37:16.70939+00
-(1 rows)
-```
+    ```bash
+    SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time from pg_catalog.pg_stat_subscription;
+    subname | received_lsn | latest_end_lsn |     last_msg_receipt_time
+    ---------+--------------+----------------+-------------------------------
+    mysubscription | 0/7D213250   | 0/7D213250     | 2024-08-02 18:37:16.70939+00
+    (1 rows)
+    ```
 
-As an extra check, you can also do a row count on the source and destination.
+4. As an extra check, you can also do a row count on the source and destination.
 
-```sql
-select count(*) from my_db;
+    ```sql
+    select count(*) from my_db;
 
- count
--------
-  7585
-(1 row)
-```
+    count
+    -------
+    7585
+    (1 row)
+    ```
 
-## Switch your application to the destination Neon project
+## Switch over your application
 
-After the replication operation is complete, you can switch your application over to the destination database by swapping out the source database connection details for your Neon destination database connection details.
+After the replication operation is complete, you can switch your application over to the destination database by swapping out your Cloud SQL source database connection details for your Neon destination database connection details.
+
+You can find your Neon connection details on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
