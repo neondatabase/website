@@ -111,6 +111,8 @@
 - title: Connect
   slug: connect/connect-intro
   items:
+    - title: Choosing connections
+      slug: connect/choose-connection
     - title: Neon SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
     - title: Passwordless auth
