@@ -4,7 +4,7 @@ subtitle: Set up a Neon project in seconds and connect from a Rust application
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2024-02-23T00:24:06.826Z'
+updatedOn: '2024-08-07T21:36:52.664Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Rust application.
@@ -40,7 +40,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
     let builder = SslConnector::builder(SslMethod::tls())?;
     let connector = MakeTlsConnector::new(builder.build());
 
-    let mut client = Client::connect("postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require", connector)?;
+    let mut client = Client::connect("postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require", connector)?;
 
     for row in client.query("SELECT 42", &[])? {
         let ret : i32 = row.get(0);
