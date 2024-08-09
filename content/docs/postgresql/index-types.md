@@ -1,5 +1,5 @@
 ---
-title: Postgres Indexes
+title: Postgres indexes
 subtitle: Optimize query performance with indexes in Postgres
 enableTableOfContents: true
 updatedOn: '2024-06-15T09:30:00.000Z'
