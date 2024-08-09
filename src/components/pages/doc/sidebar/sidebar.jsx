@@ -11,6 +11,21 @@ import { HOME_MENU_ITEM } from 'constants/docs';
 
 import Menu from '../menu';
 
+const checkSlugInActiveMenu = (currentSlug, activeMenuList, items) => {
+  const activeMenu = activeMenuList[activeMenuList.length - 1];
+  const isSlugActiveMenu = activeMenu.slug === currentSlug;
+
+  const isSlugInActiveMenu = (items) =>
+    items.some(
+      (item) =>
+        (item.title === activeMenu.title &&
+          item.items?.some((subItem) => subItem.slug === currentSlug)) ||
+        (item.items && isSlugInActiveMenu(item.items))
+    );
+
+  return isSlugActiveMenu || isSlugInActiveMenu(items);
+};
+
 export const getActiveItems = (items, currentSlug, result = [], parents = []) => {
   const activeItem = items.find((item) => item.slug === currentSlug);
   if (activeItem) {
@@ -39,14 +54,11 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
   ]);
 
   useEffect(() => {
-    if (
-      activeMenuList.length === 0 ||
-      activeMenuList[activeMenuList.length - 1].slug !== currentSlug
-    ) {
+    if (!checkSlugInActiveMenu(currentSlug, activeMenuList, sidebar)) {
       setActiveMenuList([HOME_MENU_ITEM, ...getActiveItems(sidebar, currentSlug)]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSlug, sidebar]);
+  }, [currentSlug]);
 
   useEffect(() => {
     console.log(activeMenuList);
