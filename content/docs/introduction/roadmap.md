@@ -21,29 +21,28 @@ Here's a snapshot of what we're working on now:
 - **Neon on Azure**: If you didn't catch the post, Neon is coming to Azure. [Read more](https://neon.tech/blog/neon-is-coming-to-azure) about this big news.
 - **Autoscaling GA**: One of our defining features, Autoscaling is soon going GA. Look for an announcement with details coming out soon!
 - **Autoscaling on the Free Plan**: Users on the Free Plan will soon be able to try Neon's Autoscaling feature, within reasonable Free Plan limits.
+- **Staging Environments**: A critical part of making it easy for you to use Neon as the staging environment for your team's app development &#8212; simple, robust anonymization of PII data. We're working on it.
+- **Postgres 17**: We've been at work on this for a while now. We plan to support Postgres 17 the day it's released. Postgres 17 will support direct SSL connections, which can eliminate one round-trip from establishing a connection.
 - **Database deploy previews**: Our GitHub App is available now for all users, with more refinements to come &#8212; including better integration with GitHub Actions, making it easier to incorporate your database into your development workflow.
 - **Better deletes**: We're adding support for deleting obsolete branches, especially after [restore](/docs/guides/branch-restore) operations.
-
-  If you have other branch management ideas, [let us know](#share-your-thoughts).
-
 - **Migrations (Beta)**: We’re adding inbound logical replication as a first step towards offering seamless, low-downtime migrations from your current database provider to Neon. Inbound replication can also help you use Neon as your staging environment, letting you take advantage of developer-friendly features like branching and our GitHub Integration, even if you decide to keep production with your current provider.
 - **Snapshots**: Create regularly scheduled snapshots as a way to archive your database &#8212; a cost-effective alternative to long-lived branches.
 - **SQL Editor improvements**: Stay tuned for interesting updates we have planned for our SQL Editor.
 - **Plans & Billing**: We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. You can expect to see changes in this area, including:
 
-  - Introducing a new plan tailored to business needs, with key features and usage allowances that better fit business-focused development teams.
+  - A new plan tailored to business needs, with key features and usage allowances that better fit business-focused development teams.
   - Storage-related billing optimizations.
 
 - **Organizations Beta**: We're thankful to our private preview customers for the feedback they've given us so far &#8212; and happy to say that **Organization Accounts** are on track for Early Access users soon.
 - **Neon CLI**: We've recently added a [create-app](/docs/reference/cli-create-app) command that lets you bootstrap your application with common dev stacks. `create-app` is maturing fast, with new frameworks, ORMs, and features coming out regularly.
 - **An email app service**: This service will provide support for email verification and password recovery workflows.
 
+If you have other feature ideas, [let us know](#share-your-thoughts).
+
 ## What's on the horizon
 
 And here's a quick list of what we'll be taking on in the near future:
 
-- **Staging Environments**: A critical part of making it easy for you to use Neon as the staging environment for your team's app development &#8212; simple, robust anonymization of PII data. We're working on it.
-- **Postgres 17**: We've been at work on this for a while now. We plan to support Postgres 17 the day it's released. Postgres 17 will support direct SSL connections, which can eliminate one round-trip from establishing a connection.
 - **Support for exporting logs and metrics**: We'd like to help users integrate Neon into their monitoring platforms and services with exportable logs and metrics.
 - **Support for soft deletions**: Work is underway to build a deletion workflow for Neon projects. As part of this workflow, we'll support a recovery grace period for unintended deletions, and we'll also add a little friction to the deletion process to avoid accidental deletions &#8212; something similar to the steps required to delete a repository in GitHub.
 - **Larger computes**: We are working on adding support for ever-larger compute sizes.
