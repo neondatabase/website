@@ -37,7 +37,7 @@ Neon's logical replication feature allows you to replicate data from Aurora Post
 
    <Admonition type="note">
    Parameter values can be modified within a custom-created DB parameter group, but cannot be changed in a default DB parameter group.
-   </Admonition> 
+   </Admonition>
 
 7. Click **Save changes**.
 
@@ -50,6 +50,7 @@ Neon's logical replication feature allows you to replicate data from Aurora Post
    ```bash
    psql --host=your-db-cluster-instance-1.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=labdb
    ```
+
    - Verify that logical replication is enabled by running the following command:
 
    ```bash
@@ -63,8 +64,8 @@ Neon's logical replication feature allows you to replicate data from Aurora Post
    - Also, confirm that the wal_level is set to logical:
 
    ```bash
-  SHOW wal_level;
-  wal_level
+   SHOW wal_level;
+   wal_level
    -----------
     logical
    (1 row)
@@ -77,7 +78,6 @@ You need to allow connections to your Aurora Postgres instance from Neon. You ca
 Add a rule that allows traffic from all of the IP addresses for your Neon project's region.
 
 Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses by region.
-
 
 <Admonition type="note">
 You could specify a rule for `0.0.0.0/0` to allow traffic from any IP address. However, this configuration is not considered secure.
@@ -134,9 +134,9 @@ After defining a publication on the source database, you need to define a subscr
 
    - Subscription name: A name you chose for the subscription.
    - Connection: The connection string for the source database cluster, where you defined the publication.
-      - `host` – The publisher Aurora PostgreSQL DB cluster's writer DB instance.
-      - `port` – The port on which the writer DB instance is listening. The default for PostgreSQL is 5432.
-      - `dbname` – The name of the database.
+     - `host` – The publisher Aurora PostgreSQL DB cluster's writer DB instance.
+     - `port` – The port on which the writer DB instance is listening. The default for PostgreSQL is 5432.
+     - `dbname` – The name of the database.
    - Publication name: The name of the publication you created on the source Aurora Postgres cluster.
 
 3. Verify the subscription was created by running the following command:
