@@ -2,7 +2,7 @@
 title: Connecting Neon to your stack
 subtitle: Learn how to integrate Neon into your application
 enableTableOfContents: true
-updatedOn: '2024-07-25T12:53:42.421Z'
+updatedOn: '2024-08-07T21:36:52.643Z'
 ---
 
 Using Neon as the serverless database in your tech stack means configuring connections. Whether it’s a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs like Prisma, or configuring deployment settings for CI/CD workflows, it starts with the connection.
@@ -15,7 +15,7 @@ This section provides connection string samples for various frameworks and langu
 
 ```bash
 # psql example connection string
-psql postgres://username:password@hostname:5432/database?sslmode=require
+psql postgresql://username:password@hostname:5432/database?sslmode=require
 ```
 
 ```ini
@@ -194,11 +194,11 @@ Neon supports pooled and direct connections to the database. Use a pooled connec
 A Neon connection string includes the role, password, hostname, and database name.
 
 ```text
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
-           ^    ^         ^                                               ^
-     role -|    |         |- hostname                                     |- database
-                |
-                |- password
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+             ^    ^         ^                                               ^
+       role -|    |         |- hostname                                     |- database
+                  |
+                  |- password
 ```
 
 <Admonition type="note">
@@ -222,13 +222,13 @@ PGPORT=5432
 ### Variable
 
 ```text shouldWrap
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
 ```
 
 ### Command-line
 
 ```bash shouldWrap
-psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
 
 <Admonition type="note">

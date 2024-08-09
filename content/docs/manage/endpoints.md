@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-06T15:23:10.956Z'
+updatedOn: '2024-08-09T09:32:01.733Z'
 ---
 
 A primary read-write compute is created for your project's [default branch](/docs/reference/glossary#default-branch).
@@ -158,7 +158,7 @@ CREATE EXTENSION neon;
 To connect to the Neon-managed `postgres` database instead:
 
 ```bash shouldWrap
-psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require
 ```
 
 If you are already connected via `psql`, you can simply switch to the `postgres` database using the `\c` command:
@@ -187,7 +187,7 @@ file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses))
 You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view data for LFC hits and misses. See [View LFC metrics with EXPLAIN ANALYZE](/docs/extensions/neon#view-lfc-metrics-with-explain-analyze).
 </Admonition>
 
-For OLTP workloads, you should aim for a `file_cache_hit_ratio` above 99%. If you hit ration is below that, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
+For OLTP workloads, you should aim for a `file_cache_hit_ratio` above 99%. If your hit ratio is below that, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
 
 <Admonition type="note">
 The cache hit ratio query is based on statistics that represent the lifetime of your compute, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you increased your compute size after seeing a cache hit ratio below 99%. Changing the compute size restarts your compute, so you lose all of your current usage statistics. In this case, you should run your workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the `pg_prewarm` extension to pre-load data into memory after a compute restart. See [The pg_prewarm extension](/docs/extensions/pg_prewarm).

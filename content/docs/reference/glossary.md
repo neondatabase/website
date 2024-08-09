@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-08-06T15:23:10.959Z'
+updatedOn: '2024-08-07T21:36:52.676Z'
 ---
 
 ## access token
@@ -104,7 +104,7 @@ A method of creating a pool of connections and caching those connections for reu
 A string containing details for connecting to a Neon Postgres database. The details include a user name (role), compute hostname, and database name; for example:
 
 ```bash shouldWrap
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
 
 The compute hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
@@ -331,7 +331,7 @@ Restoration of data to a state that existed at an earlier time. Neon retains a h
 A pooled connection string in Neon includes a `-pooler` option, which directs your connection to a pooled connection port at the Neon Proxy. This is an example of a pooled connection:
 
 ```text
-postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
 ```
 
 A pooled connection can support a high number of concurrent users and is recommended for use with serverless and edge functions. For more information, see [Connection pooling](/docs/connect/connection-pooling).
@@ -490,7 +490,7 @@ An encrypted access token that enables you to authenticate with Neon using the N
 An unpooled connection string connects to your Neon database directly. It does not use [connection pooling](#connection-pooling), and it looks similar to this:
 
 ```text
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
 
 You can obtain an unpooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Ensure that the **Pooled connection** option is **not** selected. A direct connection is subject to the `max_connections` limit for your compute. For more information, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
