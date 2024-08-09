@@ -15,6 +15,8 @@ const VERCEL_URL =
 // @NOTE: the maximum length of the title to look fine on the og image
 const MAX_TITLE_LENGTH = 52;
 
+const HOME_MENU_ITEM = { title: 'Home', slug: 'introduction' };
+
 // We are using ES modules here in order to be able to import variables from this file in gatsby-node.js
 module.exports = {
   DOCS_BASE_PATH,
@@ -26,4 +28,5 @@ module.exports = {
   POSTGRES_DOCS_BASE_PATH,
   VERCEL_URL,
   MAX_TITLE_LENGTH,
+  HOME_MENU_ITEM,
 };

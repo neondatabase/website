@@ -1,94 +1,128 @@
+'use client';
+
 import clsx from 'clsx';
-import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
+import { useState, useRef, useEffect } from 'react';
 
 import Link from 'components/shared/link';
-import MENUS from 'constants/menus';
+import Logo from 'components/shared/logo';
+import { HOME_MENU_ITEM } from 'constants/docs';
 
-import InkeepTrigger from '../inkeep-trigger';
+import Menu from '../menu';
 
-import Item from './item';
+// NOTE: checkSlugInActiveMenu checks if we have current page in last activeMenu item
+const checkSlugInActiveMenu = (currentSlug, activeMenuList, items) => {
+  const activeMenu = activeMenuList[activeMenuList.length - 1];
+  const isSlugActiveMenu = activeMenu.slug === currentSlug;
 
-const Search = dynamic(() => import('components/shared/search/search'));
+  // NOTE: check if current page is in active menu
+  const isSlugInActiveMenu = (items) =>
+    items.some(
+      (item) =>
+        (item.title === activeMenu.title &&
+          item.items?.some((subItem) => subItem.slug === currentSlug)) ||
+        (item.items && isSlugInActiveMenu(item.items))
+    );
 
-const NavWithIcon = ({ className, items }) => (
-  <ul className={className}>
-    {items.map(({ icon: Icon, title, slug }, index) => (
-      <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
-        <Link className="group flex items-center space-x-3" to={slug}>
-          <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
-            <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
-          </span>
-          <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
-            {title}
-          </span>
-        </Link>
-      </li>
-    ))}
-  </ul>
-);
-
-NavWithIcon.propTypes = {
-  className: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.exact({
-      icon: PropTypes.elementType.isRequired,
-      title: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  return isSlugActiveMenu || isSlugInActiveMenu(items);
 };
 
-const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = false }) => (
-  <aside
-    className={clsx(
-      'relative col-start-1 col-end-4 max-w-[254px] pt-0.5 before:absolute before:-bottom-20 before:-right-5 before:-top-[104px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-black-new lg:hidden',
-      className
-    )}
-  >
-    <div className="sticky top-[104px] z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-16 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-black-new dark:after:to-black-new">
-      <Search className="z-30" indexName={indexName} />
-      <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-9">
-        {isPostgres ? (
-          <NavWithIcon className="mb-8" items={MENUS.postgresSidebar} />
-        ) : (
-          <>
-            <InkeepTrigger isSidebar />
-            <NavWithIcon className="mb-11" items={MENUS.docSidebar} />
-          </>
-        )}
-        <ul className={clsx({ 'mt-14': !isPostgres })}>
-          {sidebar.map((item, index) => (
-            <Item {...item} key={index} basePath={basePath} isChildren={false} />
-          ))}
-        </ul>
-      </nav>
-    </div>
-  </aside>
-);
+// NOTE: getActiveItems builds activeMenuList
+// supports duplicates section in sidebar,
+// but only the first one will be active
+export const getActiveItems = (items, currentSlug, result = [], parents = []) => {
+  const activeItem = items.find((item) => item.slug === currentSlug);
+  if (activeItem) {
+    if (activeItem.items && !activeItem.section) {
+      result.push(activeItem);
+    }
+    result.push(...parents.filter((parent) => !parent.section));
+    return result;
+  }
 
-export const sidebarPropTypes = PropTypes.arrayOf(
-  PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    slug: PropTypes.string,
-    ariaLabel: PropTypes.string,
-    items: PropTypes.arrayOf(
-      PropTypes.exact({
-        title: PropTypes.string.isRequired,
-        slug: PropTypes.string,
-        items: PropTypes.arrayOf(PropTypes.any),
-        ariaLabel: PropTypes.string,
-      })
-    ),
-  })
-).isRequired;
+  return items.reduce((acc, item) => {
+    if (acc.length) return acc;
+    if (item.items) {
+      return getActiveItems(item.items, currentSlug, result, [...parents, item]);
+    }
+    return acc;
+  }, result);
+};
+
+const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
+  const pathname = usePathname();
+  const currentSlug = pathname.replace(basePath, '');
+
+  // NOTE: build initial activeMenuList on page load
+  // getActiveItems returns active menu items tree for active submenus
+  const [activeMenuList, setActiveMenuList] = useState([
+    HOME_MENU_ITEM,
+    ...getActiveItems(sidebar, currentSlug),
+  ]);
+
+  // NOTE: useEffect for updating activeMenuList on slug change with broswer back/forth button
+  // supports duplicates section in sidebar,
+  // if we surf through menu with clicks on items, it will not update activeMenuList
+  // we check it with checkSlugInActiveMenu function
+  useEffect(() => {
+    if (!checkSlugInActiveMenu(currentSlug, activeMenuList, sidebar)) {
+      setActiveMenuList([HOME_MENU_ITEM, ...getActiveItems(sidebar, currentSlug)]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentSlug]);
+
+  const [menuHeight, setMenuHeight] = useState(1000);
+  const menuWrapperRef = useRef(null);
+
+  return (
+    <aside
+      className={clsx(
+        'relative left-0 z-40 border-r border-gray-new-94 bg-white dark:border-gray-new-10 dark:bg-black-pure',
+        className
+      )}
+    >
+      <div
+        className={clsx(
+          'sticky top-0 px-[52px] pt-[18px] xl:px-8',
+          'after:pointer-events-none after:absolute after:inset-x-0 after:top-14 after:h-10 after:bg-gradient-to-b after:from-white after:to-transparent after:dark:from-black-pure after:dark:to-transparent'
+        )}
+      >
+        <Link to="/">
+          <span className="sr-only">Neon</span>
+          <Logo className="h-7" width={102} height={28} priority />
+        </Link>
+        <nav
+          className="no-scrollbars z-10 mt-5 h-[calc(100vh-70px)] overflow-x-hidden overflow-y-scroll pt-[46px]"
+          ref={menuWrapperRef}
+        >
+          <div
+            className="relative w-full overflow-hidden transition-[height] duration-300"
+            style={{ height: menuHeight }}
+          >
+            <Menu
+              depth={0}
+              title="Home"
+              basePath={basePath}
+              slug={slug}
+              items={sidebar}
+              setMenuHeight={setMenuHeight}
+              menuWrapperRef={menuWrapperRef}
+              activeMenuList={activeMenuList}
+              setActiveMenuList={setActiveMenuList}
+            />
+          </div>
+        </nav>
+      </div>
+    </aside>
+  );
+};
 
 Sidebar.propTypes = {
   className: PropTypes.string,
-  sidebar: sidebarPropTypes,
+  sidebar: PropTypes.arrayOf(PropTypes.shape()),
+  slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
-  indexName: PropTypes.string.isRequired,
-  isPostgres: PropTypes.bool,
 };
 
 export default Sidebar;
