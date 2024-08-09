@@ -1,6 +1,6 @@
 ---
 title: Replicate data from Amazon RDS Postgres
-subtitle: Use logical replication to perform a near-zero downtime database migration from Amazon RDS PostgreSQL to Neon
+subtitle: Learn how to replicate data from Amazon RDS Postgres to Neon
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-08-02T17:25:18.435Z'

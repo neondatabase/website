@@ -358,6 +358,8 @@
       items:
         - title: Airbyte
           slug: guides/logical-replication-airbyte
+        - title: AWS Aurora
+          slug: guides/logical-replication-rds-to-neon
         - title: AWS RDS
           slug: guides/logical-replication-rds-to-neon
         - title: Bemi

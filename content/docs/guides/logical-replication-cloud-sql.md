@@ -104,6 +104,28 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO REPLICATION_
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
 
+### Create a publication on the source database
+
+This step is performed on your Cloud SQL instance.
+
+Publications are a fundamental part of logical replication in Postgres. They allow you to define the database changes to be replicated to subscribers.
+
+To create a publication for all tables in your source database:
+
+```sql
+CREATE PUBLICATION my_publication FOR ALL TABLES;
+```
+
+<Admonition type="note">
+It's also possible to create a publication for specific tables; for example, to create a publication for the `playing_with_neon` table, you can use the following syntax:
+
+```sql
+CREATE PUBLICATION playing_with_neon_publication FOR TABLE playing_with_neon;
+```
+
+For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+</Admonition>
+
 ## Prepare your Neon destination database
 
 This section describes how to prepare your source Neon Postgres database (the subscriber) to receive replicated data from your Cloud SQL Postgres instance.
