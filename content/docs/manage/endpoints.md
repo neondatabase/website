@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.672Z'
+updatedOn: '2024-08-09T09:32:01.733Z'
 ---
 
 A primary read-write compute is created for your project's [default branch](/docs/reference/glossary#default-branch).
