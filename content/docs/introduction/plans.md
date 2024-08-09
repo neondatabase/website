@@ -11,14 +11,14 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2024-07-25T20:35:44.881Z'
+updatedOn: '2024-08-06T15:23:10.954Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
 
 Neon offers four plans:
 
-- [Free Tier](#free-tier)
+- [Free Plan](#free-plan)
 - [Launch](#launch)
 - [Scale](#scale)
 - [Enterprise](#enterprise)
@@ -27,13 +27,13 @@ Neon offers four plans:
 Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, you can purchase [extra usage](/docs/introduction/extra-usage) in set increments for when you need to go over your allowance.
 </Admonition>
 
-## Free Tier
+## Free Plan
 
-Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon.
+Neon's Free Plan plan is best for hobby projects, prototypes, and learning Neon.
 
-### Free Tier allowances
+### Free Plan allowances
 
-The Free Tier includes the following usage allowances:
+The Free Plan includes the following usage allowances:
 
 | Usage type                 | Plan allowance                                                                                                                                         |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -41,7 +41,7 @@ The Free Tier includes the following usage allowances:
 | **Branches**               | 10 branches                                                                                                                                            |
 | **Databases**              | Unlimited                                                                                                                                              |
 | **Storage**                | 0.5 GiB                                                                                                                                                |
-| **Compute**                | Always-available default branch compute, 5 compute hours (20 _active hours_)/month on branch computes. Free Tier computes have 0.25 vCPU with 1GB RAM. |
+| **Compute**                | Always-available default branch compute, 5 compute hours (20 _active hours_)/month on branch computes. Free Plan computes have 0.25 vCPU with 1GB RAM. |
 | **Data transfer (Egress)** | 5 GB per month                                                                                                                                         |
 
 <Admonition type="tip" title="What are active hours and compute hours?">
@@ -56,7 +56,7 @@ The Free Tier includes the following usage allowances:
 
 </Admonition>
 
-### Free Tier features
+### Free Plan features
 
 - Autosuspend (after 5 minutes of inactivity)
 - All supported regions
@@ -67,8 +67,8 @@ The Free Tier includes the following usage allowances:
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
-<Admonition type="tip" title="Free Tier Compute Allowances">
-On the Free Tier, your default branch compute is always available — it will never be suspended, which means you can always access the data on the default branch in your Neon project. Branch computes have 20 [active hours](/docs/reference/glossary#active-time) (5 [compute hours](/docs/reference/glossary#compute-hour)) per month. If your branch computes exceed this allowance, they are suspended until the allowance resets at the beginning of the month. You can monitor branch compute hours on the [Billing page](/docs/introduction/manage-billing#view-the-billing-page) in the Neon Console. The compute hour allowance for branch computes resets at the beginning of each month. For instance, if you enrolled in the Neon Free Tier in January, the allowance for branch computes resets on February 1st.
+<Admonition type="tip" title="Free Plan Compute Allowances">
+On the Free Plan, your default branch compute is always available — it will never be suspended, which means you can always access the data on the default branch in your Neon project. Branch computes have 20 [active hours](/docs/reference/glossary#active-time) (5 [compute hours](/docs/reference/glossary#compute-hour)) per month. If your branch computes exceed this allowance, they are suspended until the allowance resets at the beginning of the month. You can monitor branch compute hours on the [Billing page](/docs/introduction/manage-billing#view-the-billing-page) in the Neon Console. The compute hour allowance for branch computes resets at the beginning of each month. For instance, if you enrolled in the Neon Free Plan in January, the allowance for branch computes resets on February 1st.
 </Admonition>
 
 ## Launch

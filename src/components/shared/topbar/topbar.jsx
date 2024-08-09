@@ -15,10 +15,10 @@ import patternImage from './images/pattern.svg';
 const TopBar = ({ isDarkTheme }) => (
   <Link
     className={clsx(
-      'safe-paddings relative z-40 flex h-9 w-full items-center justify-center gap-x-2.5 overflow-hidden px-4 py-2.5 leading-none transition-colors duration-200 dark:bg-[#0B0C0F] dark:hover:bg-gray-new-8',
+      'safe-paddings relative z-50 flex h-9 w-full items-center justify-center gap-x-2.5 overflow-hidden px-4 py-2.5 leading-none transition-colors duration-200 dark:bg-[#0B0C0F] dark:hover:bg-gray-new-8',
       isDarkTheme ? 'bg-[#0B0C0F] hover:bg-gray-new-8' : 'bg-[#F5FBFD] hover:bg-[#f1fcff]'
     )}
-    to="https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres"
+    to="https://neon.tech/blog/neon-is-coming-to-azure"
     onClick={() => {
       sendGtagEvent('click_announcement_banner');
     }}
@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Use Neon as your dev environment for AWS RDS: accelerate your workflow while reducing costs
+      Neon is coming to Azure. Join the waitlist
     </span>
     <ChevronIcon
       className={clsx(

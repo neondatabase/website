@@ -1,7 +1,7 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-updatedOn: '2024-07-25T20:36:51.932Z'
+updatedOn: '2024-08-06T15:23:10.955Z'
 ---
 
 This topic describes [Storage](#storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
@@ -92,7 +92,7 @@ Here are some strategies to consider:
 
 Your storage limit varies depending on your Neon plan.
 
-- **Free Tier**: If you reach your storage limit on the Free Tier (0.5 GiB), any further database operations that would increase storage (inserts, updates, and deletes) will fail, and you will receive an error message.
+- **Free Plan**: If you reach your storage limit on the Free Plan (0.5 GiB), any further database operations that would increase storage (inserts, updates, and deletes) will fail, and you will receive an error message.
 - **Launch and Scale Plans**: For users on Launch and Scale plans, exceeding your storage limit will result in [extra usage](/docs/introduction/extra-usage). The amount of extra usage is based on the maximum size your storage reaches. Charges are prorated based on when in the month your storage size increased.
 
 </details>
@@ -189,13 +189,13 @@ To estimate what your compute hour usage might be per month:
 
 ## Data Transfer
 
-Data transfer usage refers to the total volume of data transferred out of Neon (known as "egress") during a given billing period. Neon does not charge for egress data, but we do limit the amount of egress available on Free Tier projects to 5 GB per month. The project's compute is suspended if the data transfer allowance is exceeded, and the following error message will be reported:
+Data transfer usage refers to the total volume of data transferred out of Neon (known as "egress") during a given billing period. Neon does not charge for egress data, but we do limit the amount of egress available on Free Plan projects to 5 GB per month. The project's compute is suspended if the data transfer allowance is exceeded, and the following error message will be reported:
 
 ```text shouldWrap
 Your project has exceeded the data transfer quota. Upgrade your plan to increase limits.
 ```
 
-If you hit this limit and need to upgrade your plan, you can do so from your Neon account's **Billing** page. For instructions, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free Tier users can monitor **Data transfer** usage from the **Resources remaining** widget on the **Project Dashboard**.
+If you hit this limit and need to upgrade your plan, you can do so from your Neon account's **Billing** page. For instructions, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free Plan users can monitor **Data transfer** usage from the **Resources remaining** widget on the **Project Dashboard**.
 
 For all other plans, Neon maintains a reasonable usage policy. This means there is no set limit on data transfer, but usage is expected to stay within a range typical for standard operations. If your usage significantly exceeds this expected range, Neon may reach out to discuss your usage and possible plan adjustments. Paying users can monitor per-project **Data transfer** usage from the **Usage** widget on the **Project Dashboard**.
 
@@ -207,12 +207,12 @@ The following table outlines project allowances for each Neon plan.
 
 | Plan       | Projects  |
 | ---------- | --------- |
-| Free Tier  | 1         |
+| Free Plan  | 1         |
 | Launch     | 10        |
 | Scale      | 50        |
 | Enterprise | Unlimited |
 
-- When you reach your limit on the [Free Tier](/docs/introduction/plans#free-tier) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch) or [Scale](/docs/introduction/plans#scale) plan, which offers allowances of 10 and 50 projects, respectively.
+- When you reach your limit on the [Free Plan](/docs/introduction/plans#free-plan) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch) or [Scale](/docs/introduction/plans#scale) plan, which offers allowances of 10 and 50 projects, respectively.
 - Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in units of 10 for $50 each.
 
 ## Feedback
