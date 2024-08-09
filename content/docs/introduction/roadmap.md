@@ -46,7 +46,7 @@ And here's a quick list of what we'll be taking on in the near future:
 - **Support for exporting logs and metrics**: We'd like to help users integrate Neon into their monitoring platforms and services with exportable logs and metrics.
 - **Support for soft deletions**: Work is underway to build a deletion workflow for Neon projects. As part of this workflow, we'll support a recovery grace period for unintended deletions, and we'll also add a little friction to the deletion process to avoid accidental deletions &#8212; something similar to the steps required to delete a repository in GitHub.
 - **Larger computes**: We are working on adding support for ever-larger compute sizes.
-- **Neon Auth:** We're looking at accepting third-party signed JWTs (JSON Web tokens) for authentication via HTTP proxy, intended for Row Level Security (RLS).
+- **New authentication method:** We're working on a new authentication method for Postgres that will enable simplified application -> database connections, as well as allow for Neon to be integrated into various marketplaces.
 
 ## Join the Neon Early Access Program
 
