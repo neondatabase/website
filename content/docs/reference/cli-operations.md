@@ -10,7 +10,7 @@ updatedOn: '2024-06-30T14:35:12.895Z'
 - Before running the `operations` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
 - If you have not authenticated with the [neon auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
-For information about operations in Neon, see [Operations](/docs/manage/operations).
+For information about operations in Neon, see [System operations](/docs/manage/operations).
 
 ## The `operations` command
 
