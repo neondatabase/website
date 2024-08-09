@@ -10,7 +10,7 @@ updatedOn: '2024-08-07T11:38:14.263Z'
 Logical replication in Neon is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://t.co/kORvEuCUpJ).
 </Admonition>
 
-Logical replication enables replicating data to and from your Neon database. You can perform live migrations to Neon from external sources such as AWS RDS, Aurora, and Google Cloud SQL, for example. You can also replicate data to external destinations, allowing for Change Data Capture (CDC) and real-time analytics. 
+Logical replication enables replicating data to and from your Neon database. You can perform live migrations to Neon from external sources such as AWS RDS, Aurora, and Google Cloud SQL, for example. You can also replicate data to external destinations, allowing for Change Data Capture (CDC) and real-time analytics.
 
 Logical replication in Neon works like it does on any standard Postgres installation. It uses a publisher-subscriber model to replicate data from the source database to the destination database.
 
