@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-25T12:53:42.432Z'
+updatedOn: '2024-08-09T09:32:01.733Z'
 ---
 
 A primary read-write compute is created for your project's [default branch](/docs/reference/glossary#default-branch).
@@ -22,7 +22,7 @@ Project
 
 Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary read-write compute but supports multiple read replica computes.
 
-Plan limits define resources (vCPUs and RAM) available to a compute. The [Neon Free Tier](/docs/introduction/plans#free-tier) provides a shared vCPU and up to 1 GB of RAM per compute. Paid plans support larger compute sizes and autoscaling.
+Plan limits define resources (vCPUs and RAM) available to a compute. The [Neon Free Plan](/docs/introduction/plans#free-plan) provides a shared vCPU and up to 1 GB of RAM per compute. Paid plans support larger compute sizes and autoscaling.
 
 ## View a compute
 
@@ -134,7 +134,7 @@ The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_
 | 10                     | 10   | 40 GB | 32 GB    | 4000            |
 
 <Admonition type="note">
-Users on paid plans can configure the size of their computes. The compute size for Free Tier users is set at .25 CU (.25 vCPU and 1 GB RAM).
+Users on paid plans can configure the size of their computes. The compute size for Free Plan users is set at .25 CU (.25 vCPU and 1 GB RAM).
 </Admonition>
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
@@ -158,7 +158,7 @@ CREATE EXTENSION neon;
 To connect to the Neon-managed `postgres` database instead:
 
 ```bash shouldWrap
-psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require
 ```
 
 If you are already connected via `psql`, you can simply switch to the `postgres` database using the `\c` command:
@@ -187,7 +187,7 @@ file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses))
 You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view data for LFC hits and misses. See [View LFC metrics with EXPLAIN ANALYZE](/docs/extensions/neon#view-lfc-metrics-with-explain-analyze).
 </Admonition>
 
-For OLTP workloads, you should aim for a `file_cache_hit_ratio` above 99%. If you hit ration is below that, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
+For OLTP workloads, you should aim for a `file_cache_hit_ratio` above 99%. If your hit ratio is below that, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
 
 <Admonition type="note">
 The cache hit ratio query is based on statistics that represent the lifetime of your compute, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you increased your compute size after seeing a cache hit ratio below 99%. Changing the compute size restarts your compute, so you lose all of your current usage statistics. In this case, you should run your workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the `pg_prewarm` extension to pre-load data into memory after a compute restart. See [The pg_prewarm extension](/docs/extensions/pg_prewarm).

@@ -2,7 +2,7 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
-updatedOn: '2024-07-25T12:53:42.429Z'
+updatedOn: '2024-08-07T21:36:52.666Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your history retention window and then run queries against that connection.
@@ -30,7 +30,7 @@ The ephemeral endpoints are created according to your configured [default comput
 
 ### History retention
 
-You are only able to run Time Travel queries that fall within your history retention window, which starts at 24 hours for Free Tier users, up to 7 days for Launch plan users, and up to 30 days for Scale plan users.
+You are only able to run Time Travel queries that fall within your history retention window, which starts at 24 hours for Free Plan users, up to 7 days for Launch plan users, and up to 30 days for Scale plan users.
 
 You cannot select a time outside your current retention window.
 
@@ -122,7 +122,7 @@ Example:
 
 ```bash
 neon connetion-string main@2024-04-21T00:00:00Z
-postgres://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
+postgresql://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
 ```
 
 ### Connect directly with psql

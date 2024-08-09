@@ -3,10 +3,10 @@ title: Manage billing with consumption limits
 subtitle: Learn how to set usage quotas per project with the Neon API
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-25T12:53:42.427Z'
+updatedOn: '2024-08-06T15:23:10.949Z'
 ---
 
-When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free tier users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
+When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
 
 ## Metrics and quotas
 
@@ -76,9 +76,9 @@ In addition to the configurable limits that you can set, Neon also sets certain 
 - `branch_logical_size_limit` (MiB)
 - `branch_logical_size_limit_bytes`(Bytes)
 
-These limits are not directly configurable. The Free Tier branch size limit is 512 MiB (0.5 GiB). The Launch and Scale plans support any data size but have a "failsafe" logical data size limit of 200 GiB to prevent runaway branch size growth due to possible issues with your application. If you require larger limits, you can [request large database support](https://console.neon.tech/app/projects?modal=request_large_db).
+These limits are not directly configurable. The Free Plan branch size limit is 512 MiB (0.5 GiB). The Launch and Scale plans support any data size but have a "failsafe" logical data size limit of 200 GiB to prevent runaway branch size growth due to possible issues with your application. If you require larger limits, you can [request large database support](https://console.neon.tech/app/projects?modal=request_large_db).
 
-The Neon Free Tier logical data size limit is approximately 512 MiB:
+The Neon Free Plan logical data size limit is approximately 512 MiB:
 
 - `branch_logical_size_limit`: 512
 - `branch_logical_size_limit_bytes`: 536870912

@@ -12,7 +12,7 @@ const Cta = ({
   description = null,
   buttonText = 'Get Started',
   buttonUrl = LINKS.signup,
-  buttonClassName = 'mt-[38px] h-11 w-[144px] text-[15px] xl:mt-8 lg:mt-7 sm:mt-5 sm:h-10',
+  buttonClassName = 'mt-[38px] h-11 px-7 min-w-[144px] text-[15px] xl:mt-8 lg:mt-7 sm:mt-5 sm:h-10',
 }) => {
   const isExternal = buttonUrl.startsWith('http');
 

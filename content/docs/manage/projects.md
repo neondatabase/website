@@ -5,10 +5,10 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2024-07-25T12:53:42.433Z'
+updatedOn: '2024-08-07T21:36:52.672Z'
 ---
 
-With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [tier limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Tier limits you to one project per Neon account.
+With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [plan limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Plan limits you to one project per Neon account.
 
 Learn more about projects and how to manage them in these sections:
 
@@ -53,7 +53,7 @@ Here are some basic actions you can take to add or manage projects:
 
 ### Create a project
 
-The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Sign up](/docs/get-started-with-neon/signing-up). Neon Free Tier users are limited to a single Neon project. Support for multiple projects is only available to users on paid plans.
+The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Sign up](/docs/get-started-with-neon/signing-up). Neon Free Plan users are limited to a single Neon project. Support for multiple projects is only available to users on paid plans.
 
 To create a Neon project:
 
@@ -136,7 +136,7 @@ From the **Project settings** page, you can also set defaults or apply bulk chan
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute can have anywhere from .25 CUs to 10 CUs. Larger compute sizes will be supported in a future release.
 
-For [Neon Free Tier](/docs/introduction/plans#free-tier) users, Neon sets your compute size to a static shared .25 vCPU, with 1 GB of RAM for each branch (max 10 branches).
+For [Neon Free Plan](/docs/introduction/plans#free-plan) users, Neon sets your compute size to a static shared .25 vCPU, with 1 GB of RAM for each branch (max 10 branches).
 
 Users on paid plans have the flexibility to choose a compute size for each branch's compute individually. By default, new branches inherit the compute size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create read replica computes, where each replica requires less compute per branch.
 
@@ -153,7 +153,7 @@ _Example: default minimum and maximum autoscale settings_
 
 ### Configure history retention
 
-By default, Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported limits are 24 hours for [Neon Free Tier](/docs/introduction/plans#free-tier) users, 7 days for [Launch](/docs/introduction/plans#launch) plan users, and 30 days for [Scale](/docs/introduction/plans#scale) plan users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/usage-metrics#storage).
+By default, Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported limits are 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch) plan users, and 30 days for [Scale](/docs/introduction/plans#scale) plan users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/usage-metrics#storage).
 
 To configure the history retention period for a project:
 
@@ -172,12 +172,12 @@ Logical replication enables replicating data from your Neon databases to a varie
 Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
 </Admonition>
 
-To enable logical replication for your project:
+To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Beta**.
-4. Click **Enable**.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Logical Replication**.
+4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query:
 
@@ -241,7 +241,7 @@ neon ip-allow add 203.0.113.1 --protected-only
 To reverse that setting, use `--protected-only false`.
 
 ```bash
-neon ip-allow add 203.0.113.1 --proteceted-only false
+neon ip-allow add 203.0.113.1 --protected-only false
 ```
 
 </TabItem>
@@ -391,7 +391,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a project with the API
 
-The following Neon API method creates a project. The [Neon Free Tier](/docs/introduction/plans#free-tier) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
+The following Neon API method creates a project. The [Neon Free Plan](/docs/introduction/plans#free-plan) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
 
 ```http
 POST /projects
@@ -434,7 +434,7 @@ The response includes information about the role, the database, the default bran
   },
   "connection_uris": [
     {
-      "connection_uri": "postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
     }
   ],
   "roles": [

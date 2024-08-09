@@ -3,7 +3,7 @@ title: Get started with logical replication
 subtitle: Learn how to stream data from Neon to external data platforms and services
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-23T20:03:37.194Z'
+updatedOn: '2024-08-07T11:38:14.263Z'
 ---
 
 <Admonition type="note">
@@ -24,7 +24,7 @@ To learn more about Postgres logical replication, see [Learn about logical repli
 
 ## Logical replication guides
 
-<TechnologyNavigation>
+<TechnologyNavigation open>
 
 <img src="/images/technology-logos/airbyte-logo.svg" width="36" height="36" alt="Airbyte" href="/docs/guides/logical-replication-airbyte" title="Replicate data from Neon with Airbyte" />
 

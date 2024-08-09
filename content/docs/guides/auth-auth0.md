@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Auth0
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Auth0
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.382Z'
+updatedOn: '2024-08-07T21:36:52.646Z'
 ---
 
 User authentication is an essential part of most web applications. Modern apps often require features like social login, multi-factor authentication, and secure user data management that complies with privacy regulations.
@@ -22,7 +22,7 @@ In this guide, we'll walk through setting up a simple Next.js application using 
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- An [Auth0](https://auth0.com/) account for user authentication. Auth0 provides a free tier to get started.
+- An [Auth0](https://auth0.com/) account for user authentication. Auth0 provides a free plan to get started.
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and test the application locally.
 
 ## Initialize your Next.js project
@@ -78,7 +78,7 @@ Now, we can start building the application.
 Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Add this connection string to the `.env.local` file in your Next.js project.
