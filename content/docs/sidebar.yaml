@@ -143,6 +143,32 @@
           slug: introduction/architecture-overview
         - title: Compute lifecycle
           slug: introduction/compute-lifecycle
+    - title: Regions
+      slug: introduction/regions
+    - title: Neon roadmap
+      slug: introduction/roadmap
+- title: Connect
+  slug: connect/connect-intro
+  items:
+    - title: Choosing connections
+      slug: connect/choose-connection
+    - title: Neon SQL Editor
+      slug: get-started-with-neon/query-with-neon-sql-editor
+    - title: Passwordless auth
+      slug: connect/passwordless-connect
+    - title: Connect securely
+      slug: connect/connect-securely
+    - title: Connect a GUI application
+      slug: connect/connect-postgres-gui
+    - title: Connect with psql
+      slug: connect/query-with-psql-editor
+    - title: Connect with pgcli
+      slug: connect/connect-pgcli
+    - title: Connect with AI
+      slug: connect/connect-ai
+    - title: Connection pooling
+      slug: connect/connection-pooling
+    - title: Connection issues
     - title: Features
       slug: guides/neon-features
       icon: features
