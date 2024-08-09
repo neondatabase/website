@@ -51,7 +51,6 @@ Add a rule that allows traffic from all of the IP addresses for your Neon projec
 
 Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses by region.
 
-
 <Admonition type="note">
 You could specify a rule for `0.0.0.0/0` to allow traffic from any IP address. However, this configuration is not considered secure.
 </Admonition>

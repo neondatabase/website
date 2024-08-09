@@ -30,7 +30,7 @@ This section describes how to prepare your source Cloud SQL Postgres instance (t
 
 ### Enable logical replication
 
-The first step is to enable logical replication at the source Postgres instance. In Cloud SQL, you can enable logical replication for your Postgres instance by setting the `cloudsql.logical_decoding` flag to `on`. This action will set the Postgres `wal_level` parameter to `on`.
+The first step is to enable logical replication at the source Postgres instance. In Cloud SQL, you can enable logical replication for your Postgres instance by setting the `cloudsql.logical_decoding` flag to `on`. This action will set the Postgres `wal_level` parameter to `logical`.
 
 To enable this flag:
 
