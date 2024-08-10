@@ -27,7 +27,6 @@ Learn how to establish a connection to Neon from any application.
 
 <a href="/docs/connect/passwordless-connect" description="Connect without a password using Neon's psql passwordless auth feature" icon="unlock">Passwordless auth</a>
 
-
 </DetailIconCards>
 
 ## Connect from frameworks and languages
