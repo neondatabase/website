@@ -93,6 +93,10 @@
       items:
         - title: Choosing connections
           slug: connect/choose-connection
+        - title: Connect from any app
+          slug: connect/connect-from-any-app
+        - title: Neon serverless driver
+          slug: serverless/serverless-driver
         - title: Neon SQL Editor
           slug: get-started-with-neon/query-with-neon-sql-editor
         - title: Passwordless auth
