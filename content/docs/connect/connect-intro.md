@@ -15,7 +15,11 @@ Learn how to establish a connection to Neon from any application.
 
 <DetailIconCards>
 
+<a href="/docs/connect/choose-connection" description="How to select the right driver and connection type for your application" icon="network">Choose a driver and connection type</a>
+
 <a href="/docs/connect/connect-from-any-app" description="Learn about connection strings and how to connect to Neon from any application" icon="gamepad">Connect from any app</a>
+
+<a href="/docs/serverless/serverless-driver" description="Connect to Neon from serverless environments over HTTP or WebSockets" icon="audio-jack">Neon serverless driver</a>
 
 <a href="/docs/connect/connect-postgres-gui" description="Learn how to connect to a Neon database from a GUI application" icon="gui">Connect a GUI application</a>
 
