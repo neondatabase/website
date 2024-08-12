@@ -181,14 +181,14 @@ The Airbyte UI currently allows selecting any tables for Change Data Capture (CD
 4. Select an SSL mode. You will most frequently choose `require` or `verify-ca`. Both of these options always require encryption. The `verify-ca` mode requires a certificate. Refer to [Connect securely](/docs/connect/connect-securely) for information about the location of certificate files you can use with Neon.
 5. Under **Advanced**:
 
-   - Select **Logical Replication (CDC)** from available replication methods.
+   - Select **Read Changes using Write-Ahead Log (CDC)** from available replication methods.
    - In the **Replication Slot** field, enter the name of the replication slot you created previously: `airbyte_slot`.
    - In the **Publication** field, enter the name of the publication you created previously: `airbyte_publication`.
      ![Airbyte advanced fields](/docs/guides/airbyte_cdc_advanced_fields.png)
 
 ## Allow inbound traffic
 
-If you are on Airbyte Cloud, and you are using Neon's **IP Allow** feature to limit IP address that can connect to Neon, you will need to allow inbound traffic from Airbyte's IP addresses. You can find a list of IPs that need to be allowlisted in the [Airbyte Security docs](https://docs.airbyte.com/operating-airbyte/security). For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+If you are on Airbyte Cloud, and you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Airbyte's IP addresses. You can find a list of IPs that need to be allowlisted in the [Airbyte Security docs](https://docs.airbyte.com/operating-airbyte/security). For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
 ## Complete the source setup
 

@@ -170,31 +170,135 @@ The Airbyte UI currently allows selecting any tables for Change Data Capture (CD
 4. Select an SSL mode. You will most frequently choose `require` or `verify-ca`. Both of these options always require encryption. The `verify-ca` mode requires a certificate. Refer to [Connect securely](/docs/connect/connect-securely) for information about the location of certificate files you can use with Neon.
 5. Under **Advanced**:
 
-   - Select **Logical Replication (CDC)** from available replication methods.
+   - Select **Read Changes using Write-Ahead Log (CDC)** from available replication methods.
    - In the **Replication Slot** field, enter the name of the replication slot you created previously: `airbyte_slot`.
    - In the **Publication** field, enter the name of the publication you created previously: `airbyte_publication`.
      ![Airbyte advanced fields](/docs/guides/airbyte_cdc_advanced_fields.png)
 
 ## Allow inbound traffic
 
-If you are on Airbyte Cloud, and you are using Neon's **IP Allow** feature to limit IP address that can connect to Neon, you will need to allow inbound traffic from Airbyte's IP addresses. You can find a list of IPs that need to be allowlisted in the [Airbyte Security docs](https://docs.airbyte.com/operating-airbyte/security). For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+If you are on Airbyte Cloud, and you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Airbyte's IP addresses. You can find a list of IPs that need to be allowlisted in the [Airbyte Security docs](https://docs.airbyte.com/operating-airbyte/security). For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
 ## Complete the source setup
 
 To complete your source setup, click **Set up source** in the Airbyte UI. Airbyte will test the connection to your database. Once this succeeds, you've successfully configured an Airbyte Postgres source for your Neon database.
 
-## Configure a destination
+## Configure Snowflake as a destination
 
-To complete your data integration setup, you can now add Snowflake as your destination. Refer to the Airbyte documentation for instructions:
+To complete your data integration setup, you can now add Snowflake as your destination. 
 
-- [Add a destination](https://docs.airbyte.com/using-airbyte/getting-started/add-a-destination)
-- [Set up a connection](https://docs.airbyte.com/using-airbyte/getting-started/set-up-a-connection)
+### Prerequisites
+
+- A Snowflake account with the `ACCOUNTADMIN` role. If you're using a company account, you may need to contact your Snowflake administrator to set one up for you.
+
+
+### Set up Airbyte entities in Snowflake
+
+To set up the Snowflake destination connector, you first need to create Airbyte entities in Snowflake (a warehouse, database, schema, user, and role) with the `OWNERSHIP` permission to write data into Snowflake.
+
+You can use the following script in a new [Snowflake worksheet](https://docs.snowflake.com/en/user-guide/ui-worksheet) to create the entities. 
+
+If you want to, you can edit the script to change the password to a more secure password and to change the names of other resources. If you do rename entities, make sure to follow [Sbowflake identifier requirements](https://docs.snowflake.com/en/sql-reference/identifiers-syntax).
+
+
+```sql
+-- set variables (these need to be uppercase)
+set airbyte_role = 'AIRBYTE_ROLE';
+set airbyte_username = 'AIRBYTE_USER';
+set airbyte_warehouse = 'AIRBYTE_WAREHOUSE';
+set airbyte_database = 'AIRBYTE_DATABASE';
+set airbyte_schema = 'AIRBYTE_SCHEMA';
+
+-- set user password
+set airbyte_password = 'password';
+
+begin;
+
+-- create Airbyte role
+use role securityadmin;
+create role if not exists identifier($airbyte_role);
+grant role identifier($airbyte_role) to role SYSADMIN;
+
+-- create Airbyte user
+create user if not exists identifier($airbyte_username)
+password = $airbyte_password
+default_role = $airbyte_role
+default_warehouse = $airbyte_warehouse;
+
+grant role identifier($airbyte_role) to user identifier($airbyte_username);
+
+-- change role to sysadmin for warehouse / database steps
+use role sysadmin;
+
+-- create Airbyte warehouse
+create warehouse if not exists identifier($airbyte_warehouse)
+warehouse_size = xsmall
+warehouse_type = standard
+auto_suspend = 60
+auto_resume = true
+initially_suspended = true;
+
+-- create Airbyte database
+create database if not exists identifier($airbyte_database);
+
+-- grant Airbyte warehouse access
+grant USAGE
+on warehouse identifier($airbyte_warehouse)
+to role identifier($airbyte_role);
+
+-- grant Airbyte database access
+grant OWNERSHIP
+on database identifier($airbyte_database)
+to role identifier($airbyte_role);
+
+commit;
+
+begin;
+
+USE DATABASE identifier($airbyte_database);
+
+-- create schema for Airbyte data
+CREATE SCHEMA IF NOT EXISTS identifier($airbyte_schema);
+
+commit;
+
+begin;
+
+-- grant Airbyte schema access
+grant OWNERSHIP
+on schema identifier($airbyte_schema)
+to role identifier($airbyte_role);
+
+commit;
+```
+
+
+### Set up Snowflake as a destination in Airbyte
+
+Navigate to Airbyte and set up Snowflake as a destination. You can authenticate using username/password or key pair authentication. We'll authenticate via user name and password in this example.
+
+| Field      | Description                                                                                                                                       | Example                                         |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| **Host**   | The host domain of the Snowflake instance (must include the account, region, cloud environment, and end with snowflakecomputing.com).             | `accountname.us-east-2.aws.snowflakecomputing.com` |
+| **Role**   | The role you created in Step 1 for Airbyte to access Snowflake.                                                                                   | `AIRBYTE_ROLE`                                  |
+| **Warehouse** | The warehouse you created in Step 1 for Airbyte to sync data into.                                                                              | `AIRBYTE_WAREHOUSE`                             |
+| **Database**  | The database you created in Step 1 for Airbyte to sync data into.                                                                               | `AIRBYTE_DATABASE`                              |
+| **Schema** | The default schema used as the target schema for all statements issued from the connection that do not explicitly specify a schema name.           | -                                               |
+| **Username** | The username you created in Step 1 to allow Airbyte to access the database.                                                                      | `AIRBYTE_USER`                                  |
+| **Password** | The password associated with the username.                                                                                                       | -                                               |
+
+
+## Set up a connection
 
 ## References
 
+- [Setting up the Airbyte destination connector](https://docs.airbyte.com/integrations/destinations/snowflake)
+- [Airbyte: Add a destination](https://docs.airbyte.com/using-airbyte/getting-started/add-a-destination)
+- [Airbyte: Set up a connection](https://docs.airbyte.com/using-airbyte/getting-started/set-up-a-connection)
+- [Airbyte: How to load data from Postgres to Snowflake destination](https://airbyte.com/how-to-sync/postgresql-to-snowflake-data-cloud)
 - [What is an ELT data pipeline?](https://airbyte.com/blog/elt-pipeline)
 - [Logical replication - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html)
 - [Publications - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-publication.html)
-- [Airbyte: How to load data from Postgres to Snowflake destination](https://airbyte.com/how-to-sync/postgresql-to-snowflake-data-cloud)
+
 
 <NeedHelp/>
