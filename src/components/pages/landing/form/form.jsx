@@ -28,6 +28,7 @@ const Form = ({
   hubspotFormId,
   items,
   greenMode = false,
+  isAzurePage = false,
 }) => {
   const [state, setState] = useState(FORM_STATES.DEFAULT);
   const [errorMessage, setErrorMessage] = useState('');
@@ -180,7 +181,12 @@ const Form = ({
             greenMode && 'bg-[linear-gradient(155deg,#00E59980,#00E5990D_50%,#00E59980_100%)] p-px'
           )}
         >
-          <div className={clsx(!simpleField && 'rounded-[10px] bg-black-new p-9 sm:px-5 sm:py-6')}>
+          <div
+            className={clsx(
+              isAzurePage ? 'p-8 lg:p-6' : 'bg-black-new p-9 sm:px-5 sm:py-6',
+              'rounded-[10px]'
+            )}
+          >
             <div className="space-y-6">
               {fieldGroups &&
                 fieldGroups.map((fieldGroup, index) => (
@@ -190,20 +196,36 @@ const Form = ({
                       fieldGroup.fields.length > 1 && 'flex gap-[30px] sm:flex-col sm:gap-6'
                     )}
                   >
-                    {fieldGroup.fields.map((field, index) => (
+                    {fieldGroup.fields.map((field, fieldIndex) => (
                       <FormField
-                        key={index}
-                        {...field}
+                        key={fieldIndex}
+                        index={index}
                         formState={state}
                         errors={errors}
                         register={register}
+                        isAzurePage={isAzurePage}
+                        {...field}
                       />
                     ))}
                   </fieldset>
                 ))}
             </div>
-            <SubmitButton formState={state} text={submitText} />
+            <SubmitButton formState={state} text={submitText} isAzurePage={isAzurePage} />
           </div>
+          {isAzurePage && (
+            <span
+              className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[inherit] bg-azure-form-bg"
+              aria-hidden
+            >
+              <span className="absolute inset-0 bg-[url('/images/noise.png')] bg-cover" />
+              <span className="absolute inset-0 rounded-[inherit] border-image-azure-form-border" />
+              <span className="absolute -left-10 -top-12 z-10 size-[85px] rounded-full bg-white mix-blend-overlay blur-[30px]" />
+              <span className="absolute -left-24 -top-24 h-[220px] w-[410px] -rotate-[17deg] rounded-[100%] bg-azure-form-bg-top opacity-40 blur-[65px]" />
+              <span className="absolute -right-9 bottom-9 h-36 w-[120px] translate-x-full rounded-[100%] bg-[#CF9FFF] blur-[52px]" />
+              <span className="absolute -bottom-6 -right-10 z-10 size-[85px] rounded-full bg-white mix-blend-overlay blur-[30px]" />
+              <span className="absolute -bottom-20 -right-32 h-[170px] w-[316px] rotate-[163deg] rounded-[100%] bg-azure-form-bg-bottom opacity-40 blur-[65px]" />
+            </span>
+          )}
           {errorMessage && <ErrorMessage text={errorMessage} />}
         </div>
         {greenMode && (
@@ -219,6 +241,7 @@ const Form = ({
         successMessage={successMessage}
         items={items}
         greenMode={greenMode}
+        isAzurePage={isAzurePage}
       />
     </>
   );
@@ -239,7 +262,6 @@ const fieldPropTypes = {
 };
 
 Form.propTypes = {
-  greenMode: PropTypes.bool,
   simpleField: PropTypes.shape(fieldPropTypes),
   fieldGroups: PropTypes.arrayOf({
     fieldGroup: PropTypes.shape({
@@ -254,6 +276,8 @@ Form.propTypes = {
       text: PropTypes.string.isRequired,
     })
   ),
+  greenMode: PropTypes.bool,
+  isAzurePage: PropTypes.bool,
 };
 
 export default Form;

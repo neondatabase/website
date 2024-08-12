@@ -7,7 +7,7 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     screens: {
-      '3xl': { max: '1920px' },
+      '3xl': { max: '1919px' },
       '2xl': { max: '1599px' },
       xl: { max: '1279px' },
       lt: { max: '1127px' },
@@ -147,9 +147,9 @@ module.exports = {
         'community-dark':
           'radial-gradient(100% 2244.95% at 100% 100%, #262626 0%, rgba(38, 38, 38, 0.1) 63.96%);',
         'subscribe-sm':
-          'linear-gradient(160deg, rgba(173, 224, 235, 0.00) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0.00) 77%);',
+          'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
         'pricing-table-featured-column':
-          'linear-gradient(180deg, rgba(19, 20, 21, 0.40) 92.77%, rgba(19, 20, 21, 0.00) 100%);',
+          'linear-gradient(180deg, rgba(19, 20, 21, 0.40) 92.77%, rgba(19, 20, 21, 0) 100%);',
         'home-lightning-title':
           'radial-gradient(30.52% 57.36% at 67.98% 84.29%, #070707 8.6%, #525252 44.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
         'home-lightning-title-xl':
@@ -199,13 +199,28 @@ module.exports = {
           'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
           'linear-gradient(0deg, #141416, #141416)',
         'variable-list-icon-bg': 'linear-gradient(220deg, #272A35 8%, #16181D 70%)',
-        'variable-list-icon-border':
-          'linear-gradient(224deg, #FFF 2.43%, rgba(255, 255, 255, 0.00))',
+        'variable-list-icon-border': 'linear-gradient(224deg, #FFF 2.43%, rgba(255, 255, 255, 0))',
         'variable-value-1': 'linear-gradient(220deg, #FFFFFF 22%, #41BAB9 142%)',
         'variable-value-2': 'linear-gradient(73deg, #EFEFEF 13%, #89E0EA 61%, #7F95EB 93%)',
         'variable-value-3':
           'linear-gradient(90deg, rgba(255, 255, 255, 0.60), rgba(255, 255, 255, 0.50))',
         'variable-value-text': 'linear-gradient(90deg, #797D86 0%, #A4B7E2 100%)',
+        'azure-form-bg': 'linear-gradient(127deg, #0F0F10 0%, #070708 81.66%)',
+        'azure-form-bg-top':
+          'linear-gradient(152deg, #3FDFFF 28.7%, #2B49E3 41.01%, rgba(78, 97, 198, 0) 77.16%)',
+        'azure-form-bg-bottom':
+          'radial-gradient(49.98% 51.52% at 52.26% -7.36%, #3DFFFF 12.54%, rgba(51, 147, 147, 0) 94.44%),' +
+          'linear-gradient(143deg, #42B2F2 -8.71%, #29DEDE 0.6%, rgba(69, 127, 239, 0) 95.22%)',
+        'azure-form-border':
+          'radial-gradient(60.96% 60.55% at 0% 0%, rgba(100, 144, 185, 0.50) 0%, rgba(90, 109, 141, 0.50) 46%, rgba(90, 109, 141, 0) 80%),' +
+          'radial-gradient(64.38% 53.06% at 100% 100%, rgba(100, 158, 185, 0.50) 0%, rgba(90, 109, 141, 0.50) 46%, rgba(90, 109, 141, 0) 80%),' +
+          'linear-gradient(0deg, #242628, #242628)',
+        'azure-form-input-1':
+          'linear-gradient(93deg, rgba(47, 66, 96, 0.80) -2.17%, rgba(30, 34, 52, 0.80) 18.83%, rgba(24, 25, 27, 0.80) 57.17%)',
+        'azure-form-input-2':
+          'linear-gradient(100deg, rgba(33, 39, 58, 0.80) -6.09%, rgba(24, 25, 27, 0.80) 27.66%)',
+        'azure-form-input-3':
+          'linear-gradient(276deg, rgba(32, 48, 55, 0.80) 2.61%, rgba(24, 25, 27, 0.80) 32.96%)',
       }),
       keyframes: (theme) => ({
         'text-blink': {
@@ -279,6 +294,14 @@ module.exports = {
             transform: 'translateY(-2%) scale(.96)',
           },
         },
+        logoMove: {
+          '0%': {
+            transform: 'translateY(0)',
+          },
+          '100%': {
+            transform: 'translateY(-3%)',
+          },
+        },
       }),
       animation: {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -286,6 +309,7 @@ module.exports = {
         'fade-out-overlay': 'fadeOutOverlay 0.2s',
         'dialog-show': 'dialogShow 0.3s cubic-bezier(.16,1,.3,1)',
         'dialog-hide': 'dialogHide 0.3s cubic-bezier(.16,1,.3,1)',
+        'logo-move': 'logoMove 1s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate',
         loading: 'loading 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       typography: () => ({
