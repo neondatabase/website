@@ -25,11 +25,11 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 <TechnologyNavigation>
 
-<a href="/docs/guides/prisma" title="Prisma" description="Connect from Prisma to Neon" icon="prisma"></a>
+<a href="/docs/guides/prisma" title="Prisma" description="Easily add secure, beautiful, and fast authentication to Prisma with Neon." icon="prisma"></a>
 
-<a href="/docs/guides/react" title="React" description="Connect a React application to Neon" icon="react"></a>
+<a href="/docs/guides/react" title="React" description="Build powerful and interactive user interfaces with React using Neon as your database." icon="react"></a>
 
-<a href="/docs/guides/node" title="Node.js" description="Connect a Node.js application to Neon" icon="node-js"></a>
+<a href="/docs/guides/node" title="Node.js" description="Quickly add authentication and user management to your Node.js application." icon="node-js"></a>
 
 <a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
 
