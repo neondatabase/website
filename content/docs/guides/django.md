@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2024-01-04T14:34:43.419Z'
+updatedOn: '2024-08-12T16:22:43.605Z'
 ---
 
 To connect to Neon from a Django application:
