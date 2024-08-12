@@ -29,7 +29,7 @@ To create a Neon project:
 Connecting to Neon requires configuring database connection settings in your Django project's `settings.py` file.
 
 <Admonition type="note">
-To avoid the `endpiont ID is not specified` connection issue described [here](#connection-issues), be sure that you are using an up-to-date driver.
+To avoid the `endpoint ID is not specified` connection issue described [here](#connection-issues), be sure that you are using an up-to-date driver.
 </Admonition>
 
 In your Django project, navigate to the `DATABASES` section of your `settings.py` file and modify the connection details as shown:
