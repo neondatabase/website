@@ -9,15 +9,15 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 ## Get started
 
-<DetailIconCards withBorderWrapper>
+<DetailIconCards withNumbers>
 
-<a href="/docs/get-started-with-neon/signing-up" description="Sign up for free and learn the basics of database branching with Neon" icon="user"><span>1 </span>- Playing with Neon</a>
+<a href="/docs/get-started-with-neon/signing-up" description="Sign up for free and learn the basics of database branching with Neon">Playing with Neon</a>
 
-<a href="/docs/get-started-with-neon/connect-neon" description="Connect Neon to the platform, language, ORM and other tools in your tech stack" icon="audio-jack"><span>2 </span>- Connect Neon to your stack</a>
+<a href="/docs/get-started-with-neon/connect-neon" description="Connect Neon to the platform, language, ORM and other tools in your tech stack">Connect Neon to your stack</a>
 
-<a href="/docs/get-started-with-neon/workflow-primer" description="Add branching to your CI/CD automation" icon="split-branch"><span>3 </span>- Branching workflows</a>
+<a href="/docs/get-started-with-neon/workflow-primer" description="Add branching to your CI/CD automation">Branching workflows</a>
 
-<a href="/docs/get-started-with-neon/production-checklist" description="Key features to get you production ready" icon="laptop"><span>4 </span>- Get ready for production</a>
+<a href="/docs/get-started-with-neon/production-checklist" description="Key features to get you production ready">Get ready for production</a>
 
 </DetailIconCards>
 
