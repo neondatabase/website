@@ -2,8 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container/container';
-
-import QuoteIcon from './images/quote.inline.svg';
+import QuoteIcon from 'icons/quote.inline.svg';
 
 const Testimonial = ({
   className = '',

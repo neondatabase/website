@@ -8,9 +8,8 @@ import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
 import SliderItem from 'components/shared/testimonials/slider-item';
-
-import quoteIcon from './images/quote.svg';
-import twitterIcon from './images/twitter.svg';
+import QuoteIcon from 'icons/quote.inline.svg';
+import TwitterIcon from 'icons/twitter.inline.svg';
 
 const SLIDER_DURATION_IN_MS = 9000;
 
@@ -32,10 +31,10 @@ const sliderItemsAnimationProps = {
 
 const themes = {
   default: {
-    icon: quoteIcon,
+    icon: QuoteIcon,
   },
   twitter: {
-    icon: twitterIcon,
+    icon: TwitterIcon,
   },
 };
 
@@ -43,6 +42,8 @@ const Testimonials = ({ className, itemClassName, items, theme = 'default' }) =>
   const [sliderRef, isSliderInView] = useInView();
   const [activeSliderItemIndex, setActiveSliderItemIndex] = useState(0);
   const [direction, setDirection] = useState('right');
+
+  const Icon = themes[theme].icon;
 
   useEffect(() => {
     let timeout = null;
@@ -67,10 +68,8 @@ const Testimonials = ({ className, itemClassName, items, theme = 'default' }) =>
       ref={sliderRef}
     >
       <Container className="flex flex-col items-center text-center" size="xs">
-        <img
+        <Icon
           className="h-[72px] w-[72px] xl:h-16 xl:w-16 md:h-[52px] md:w-[52px]"
-          src={themes[theme].icon}
-          alt=""
           width={72}
           height={72}
           aria-hidden
