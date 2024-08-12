@@ -1,9 +1,9 @@
 ---
 title: Neon documentation
-updatedOn: '2024-07-08T12:06:52.940Z'
+updatedOn: '2024-08-06T15:23:10.952Z'
 ---
 
-Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. Get started today with our [generous free tier](https://console.neon.tech).
+Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. Get started today with our [generous free plan](https://console.neon.tech).
 
 <CTA title="Branch your data like code" description="Learn how Neon's database branching can help you integrate Postgres into your development workflow." buttonText="Read our primer" buttonUrl="/docs/get-started-with-neon/workflow-primer"></CTA>
 

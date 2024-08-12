@@ -2,12 +2,12 @@
 title: Use Neon read replicas with Prisma
 subtitle: Learn how to scale Prisma applications with Neon read replicas
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.888Z'
+updatedOn: '2024-08-07T21:36:52.663Z'
 ---
 
-A Neon read replica is an independent read-only compute instance that performs read operations on the same data as your read-write compute, which means adding a read replica to a Neon project requires no additional storage.
+A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
 
-A key benefit of read replicas is that you can distribute read requests to one or more read replica compute instances, enabling you to easily scale your applications and achieve higher throughput for both read-write and read-only workloads.
+A key benefit of read replicas is that you can distribute read requests to one or more read replicas, enabling you to easily scale your applications and achieve higher throughput for both read-write and read-only workloads.
 
 For more information about Neon's read replica feature, see [Read replicas](/docs/introduction/read-replicas).
 
@@ -20,19 +20,21 @@ In this guide, we'll show you how you can leverage Neon read replicas to efficie
 
 ## Create a read replica
 
-You can create one or more read replicas for any branch in your Neon project. Creating a read replica involves adding a read-only compute endpoint to the Neon branch. You can add a read-only compute endpoint by following these steps:
+You can create one or more read replicas for any branch in your Neon project.
+
+You can add a read replica by following these steps:
 
 1. In the Neon Console, select **Branches**.
 2. Select the branch where your database resides.
-3. Click **Add compute**.
-4. On the **Create Compute Endpoint** dialog, select **Read-only** as the **Compute type**.
-5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your read-only compute is automatically suspended. The default setting is 5 minutes.
+3. Click **Add Read Replica**.
+4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
+5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your read replica compute is automatically suspended. The default setting is 5 minutes.
    <Admonition type="note">
    The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
    </Admonition>
 6. When you finish making selections, click **Create**.
 
-   Your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page.
+   Your read replica compute is provisioned and appears on the **Computes** tab of the **Branches** page.
 
 Alternatively, you can create read replicas using the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint) or [Neon CLI](/docs/reference/cli-branches#create).
 
@@ -62,14 +64,14 @@ neon branches add-compute mybranch --type read_only
 
 ## Retrieve the connection string for your read replica
 
-Connecting to a read replica is the same as connecting to any branch in a Neon project, except you connect via a read-only compute endpoint instead of a read-write compute endpoint. The following steps describe how to retrieve the connection string (the URL) for a read replica from the Neon Console.
+Connecting to a read replica is the same as connecting to any branch in a Neon project, except you connect via a read replica compute instead of your primary read-write compute. The following steps describe how to retrieve the connection string (the URL) for a read replica from the Neon Console.
 
 1. On the Neon **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
-1. Under **Compute**, select your **Read-only** compute endpoint.
+1. Under **Compute**, select a **Replica** compute.
 1. Select the connection string and copy it. This is the information you need to connect to the read replica from your Prisma Client. The connection string appears similar to the following:
 
    ```bash shouldWrap
-   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
    ```
 
    If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string, but remember to append `?pgbouncer=true` to the connection string when using a pooled connection. Prisma requires this flag when using Prisma Client with PgBouncer. See [Use connection pooling with Prisma](/docs/guides/prisma#use-connection-pooling-with-prisma) for more information.
@@ -79,11 +81,11 @@ Connecting to a read replica is the same as connecting to any branch in a Neon p
 In your `.env` file, set a `DATABASE_REPLICA_URL` environment variable to the connection string of your read replica. Your `.env` file should look something like this, with your regular `DATABASE_URL` and the newly added `DATABASE_REPLICA_URL`.
 
 ```text
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
-DATABASE_REPLICA_URL="postgres://alex:AbC123dEf@ep-damp-cell-123456.us-east-2.aws.neon.tech/dbname"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+DATABASE_REPLICA_URL="postgresql://alex:AbC123dEf@ep-damp-cell-123456.us-east-2.aws.neon.tech/dbname"
 ```
 
-Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compute differs. The read replica is a different compute instance and therefore has a different `endpoint_id`.
+Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compute differs. The read replica is a different compute and therefore has a different `endpoint_id`.
 
 ## Configure Prisma Client to use a read replica
 
@@ -124,9 +126,9 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
 
    When your application runs, read operations are sent to the read replica. If you specify multiple read replicas, a read replica is selected randomly.
 
-   All write and `$transaction` queries are sent to the primary compute endpoint defined by `DATABASE_URL`, which is your read/write compute endpoint.
+   All write and `$transaction` queries are sent to the primary compute defined by `DATABASE_URL`, which is your read/write compute.
 
-   If you want to read from the primary compute endpoint and bypass read replicas, you can use the `$primary()` method in your extended Prisma Client instance:
+   If you want to read from the primary compute and bypass read replicas, you can use the `$primary()` method in your extended Prisma Client instance:
 
    ```bash
    const posts = await prisma.$primary().post.findMany()

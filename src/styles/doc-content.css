@@ -279,4 +279,21 @@
       @apply md:-mx-4 md:overflow-x-auto md:px-4;
     }
   }
+
+  .prose-variable {
+    @apply text-lg tracking-extra-tight text-gray-new-70 sm:text-base;
+
+    p,
+    ul {
+      @apply mt-7 xl:mt-6 lg:mt-5 sm:mt-4;
+    }
+
+    strong {
+      @apply font-medium text-white;
+    }
+
+    a {
+      @apply text-green-45 transition-colors duration-200 hover:text-[#47ffc2];
+    }
+  }
 }

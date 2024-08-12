@@ -6,13 +6,13 @@ redirectFrom:
   - /docs/quickstart/postgres
   - /docs/integrations/postgres
   - /docs/get-started-with-neon/query-with-psql-editor
-updatedOn: '2024-06-14T07:55:54.364Z'
+updatedOn: '2024-08-07T21:36:52.641Z'
 ---
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for Postgres. It provides an interactive session for sending commands to Postgres and running ad-hoc queries. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
 
 <Admonition type="note">
-A Neon compute instance runs Postgres, which means that any Postgres application or standard utility such as `psql` is compatible with Neon. You can also use Postgres client libraries and drivers to connect. However, please be aware that some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](/docs/connect/connection-errors).
+A Neon compute runs Postgres, which means that any Postgres application or standard utility such as `psql` is compatible with Neon. You can also use Postgres client libraries and drivers to connect. However, please be aware that some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](/docs/connect/connection-errors).
 
 Neon also provides a passwordless auth feature that uses `psql`. For more information, see [Passwordless auth](/docs/connect/passwordless-connect).
 </Admonition>
@@ -26,7 +26,7 @@ You can obtain a connection string from the **Connection Details** widget on the
 From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**.
 
 ```bash shouldWrap
-psql postgres://[user]:[password]@[neon_hostname]/[dbname]
+psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 <Admonition type="note">
@@ -42,7 +42,7 @@ You can obtain a Neon connection string with your password from the Neon **Dashb
 Neon uses the default Postgres port, `5432`. If you need to specify the port in your connection string, you can do so as follows:
 
 ```bash shouldWrap
-psql postgres://[user]:[password]@[neon_hostname][:port]/[dbname]
+psql postgresql://[user]:[password]@[neon_hostname][:port]/[dbname]
 ```
 
 ## Running queries

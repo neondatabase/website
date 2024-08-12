@@ -2,7 +2,7 @@
 title: Liquibase developer workflow with Neon
 subtitle: Implement a developer workflow with Liquibase and Neon branching
 enableTableOfContents: true
-updatedOn: '2024-06-20T17:29:55.105Z'
+updatedOn: '2024-08-07T21:36:52.654Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -67,7 +67,7 @@ To create a branch:
 2. Click **New Branch** to open the branch creation dialog.
 3. Enter a name for the branch. Let's call it `dev1`.
 4. Leave `main` selected as the parent branch. This is where you created the `blog` database.
-5. Leave the remaining default settings. Creating a branch from **Head** creates a branch with the latest data, and a compute endpoint is required to connect to the database on the branch.
+5. Leave the remaining default settings. Creating a branch from **Head** creates a branch with the latest data, and a compute is required to connect to the database on the branch.
 6. Click **Create Branch** to create your branch.
 
 ## Retrieve your Neon database connection strings
@@ -81,13 +81,13 @@ The target database is the database on your `dev1` branch where you will will do
 1. Select the `dev1` branch, the `blog` database, and copy the connection string.
 
    ```bash
-   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
    ```
 
 2. Select the `main` branch, the `blog` database, and copy the connection string.
 
    ```bash
-   postgres://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
+   postgresql://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
    ```
 
 Be careful not to mix up your connection strings. You'll see that the hostname (the part starting with `-ep` and ending in `neon.tech`) differs. This is because the `dev1` branch is a separate instance of Postgres, hosted on its own compute.

@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2024-06-30T14:35:12.898Z'
+updatedOn: '2024-08-07T21:36:52.677Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
@@ -15,7 +15,7 @@ A simpler one-click branch restore operation is now available. Read more about i
 
 Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined history retention period. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
 
-The history retention period is configurable. The supported limits are 24 hours for [Neon Free Tier](/docs/introduction/plans#free-tier) users, 7 days for [Launch](/docs/introduction/plans#launch) plan users, and 30 days for [Scale](/docs/introduction/plans#scale) plan users. For configuration instructions, see [Configure history retention](/docs/manage/projects#configure-history-retention).
+The history retention period is configurable. The supported limits are 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch) plan users, and 30 days for [Scale](/docs/introduction/plans#scale) plan users. For configuration instructions, see [Configure history retention](/docs/manage/projects#configure-history-retention).
 
 This guide shows how to recover your data to a point in time before a data loss occurred using Neon's branching feature.
 
@@ -54,7 +54,7 @@ The timestamp must be provided in ISO 8601 format. You can use this [timestamp c
 
 ## Connect to your branch
 
-Connecting to your newly created branch requires connecting via the branch's compute endpoint. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
+Connecting to your newly created branch requires connecting via the branch's compute. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="note">
 You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
@@ -65,11 +65,11 @@ To connect to your branch:
 1. In the Neon Console, select your project.
 2. On the project **Dashboard**, under **Connection Details**, select your `recovery_branch`, the database, and the role you want to connect with.
    ![Connection details widget recovery branch](/docs/guides/data_recovery_connection_details.png)
-3. Copy the connection string. A connection string includes your role name, password, compute endpoint hostname, and database name.
+3. Copy the connection string. A connection string includes your role name, password, compute hostname, and database name.
 4. Connect with `psql`.
 
    ```bash shouldWrap
-   psql postgres://[user]:[password]@[neon_hostname]/[dbname]
+   psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
 ## Verify the data
@@ -101,23 +101,23 @@ If your previous default branch was your project's root branch (the initial bran
 
 To use your new default branch with your applications, update your application connection details. To do so, replace your current connection details with the connection details for your new default branch, which you retrieved earlier when connecting to your branch.
 
-Alternatively, if you do not want change connection details, you can move the compute endpoint from your old default branch to the new branch. See [Reassign the compute endpoint](#reassign-the-compute-endpoint) for instructions.
+Alternatively, if you do not want change connection details, you can move the compute from your old default branch to the new branch. See [Reassign the compute](#reassign-the-compute) for instructions.
 
-## Reassign the compute endpoint
+## Reassign the compute
 
-To avoid changing connection details in your application, you can reassign the compute endpoint from your old default branch to your new branch. If you followed the steps above, you created a branch with a compute endpoint. In this case, you have to:
+To avoid changing connection details in your application, you can reassign the compute from your old default branch to your new branch. If you followed the steps above, you created a branch with a compute. In this case, you have to:
 
-1. **Remove the compute endpoint from the new branch**
+1. **Remove the compute from the new branch**
 
-   For instructions, see [Delete a compute endpoint](/docs/manage/endpoints#delete-a-compute-endpoint).
+   For instructions, see [Delete a compute](/docs/manage/endpoints#delete-a-compute).
 
-2. **Move the compute endpoint from the old default branch to the new branch**
+2. **Move the compute from the old default branch to the new branch**
 
-   This action is currently only supported in the Neon API. See [Update a compute endpoint with the CLI](/docs/manage/endpoints#update-a-compute-endpoint-with-the-api) for instructions.
+   This action is currently only supported in the Neon API. See [Update a compute with the CLI](/docs/manage/endpoints#update-a-compute-with-the-api) for instructions.
 
 ## Examples
 
-- [Using Neon branching for instant point-in-time restore](https://neon.tech/blog/point-in-time-recovery). The blog post describes point-in-time restore and provides a script for creating a recovery branch, reassigning a compute endpoint, and setting the new branch as the default.
+- [Using Neon branching for instant point-in-time restore](https://neon.tech/blog/point-in-time-recovery). The blog post describes point-in-time restore and provides a script for creating a recovery branch, reassigning a compute, and setting the new branch as the default.
 - [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This blog post (with video) describes a data recovery example that uses Neon's branching feature, the Neon API, and a bisect script to recover lost data.
 
 The following GitHub repositories are available for these examples:

@@ -2,7 +2,7 @@
 title: The postgis extension
 subtitle: Work with geospatial data in Postgres using PostGIS
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.372Z'
+updatedOn: '2024-07-23T13:01:46.234Z'
 ---
 
 The `postgis` extension provides support for spatial data - coordinates, maps and polygons, encompassing geographical and location-based information. It introduces new data types, functions, and operators to manage and analyze spatial data effectively.
@@ -12,7 +12,9 @@ The `postgis` extension provides support for spatial data - coordinates, maps an
 This guide introduces you to the `postgis` extension - how to enable it, store and query spatial data, and perform geospatial analysis with real-world examples. Geospatial data is crucial in fields like urban planning, environmental science, and logistics.
 
 <Admonition type="note">
-    PostGIS is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below. Detailed installation instructions and compatibility information can be found at [PostGIS Documentation](https://postgis.net/documentation/).
+    PostGIS is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below. Detailed installation instructions and compatibility information can be found at [PostGIS Documentation](https://postgis.net/documentation/). 
+    
+    For information about PostGIS-related extensions, including `pgrouting`, H3_PostGIS, PostGIS SFCGAL, and PostGIS Tiger Geocoder, see [PostGIG-related extensions](/docs/extensions/postgis-related-extensions).
 </Admonition>
 
 **Version availability:**

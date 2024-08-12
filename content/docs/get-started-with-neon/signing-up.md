@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2024-06-30T14:35:12.880Z'
+updatedOn: '2024-08-06T15:23:10.945Z'
 ---
 
 This tutorial guides you through your first steps using Neon as your Postgres database. You'll get familiar with the following concepts:
@@ -32,7 +32,7 @@ After signing up, you'll start with a `main` branch and the empty database `neon
     Sign up with your email, Github, Google, or other partner account.
 
     For information about what's included with the free plan, see
-    [Neon Free Tier](/docs/introduction/plans#free-tier). For information about Neon's paid options, see
+    [Neon Free Plan](/docs/introduction/plans#free-plan). For information about Neon's paid options, see
     [Neon Plans](/docs/introduction/plans).
 
   </div>
@@ -62,7 +62,7 @@ The steps should be self-explanatory, but it's important to understand a few key
 
 - **We create your default branch `main` for you**
 
-  `main` is the default (primary) branch and hosts your database, role, and a compute endpoint that you can connect your application to.
+  `main` is the default (primary) branch and hosts your database, role, and a compute that you can connect your application to.
 
 - **Use the project _Quickstart_ or this tutorial**
 
@@ -85,7 +85,7 @@ For this tutorial, go ahead and create this sample table: click **Run**.
 Or if you want to add the table from the command line and you already have `psql` installed:
 
 ```sql shouldWrap
-CREATE TABLE playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
 INSERT INTO playing_with_neon(name, value)
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
 ```
@@ -144,7 +144,7 @@ You can create and manage branches from the Neon Console, but here we'll use the
    neon branches create --name dev/alex
    ```
 
-   The command output provides details about your new branch, including the branch ID, compute endpoint ID, and the connection URI that you can use to connect to this branch's database.
+   The command output provides details about your new branch, including the branch ID, compute ID, and the connection URI that you can use to connect to this branch's database.
 
 There are other branch creation options available when using the CLI. See [Create a branch with the CLI](/docs/guides/branching-neon-cli#create-a-branch-with-the-cli) for more.
 

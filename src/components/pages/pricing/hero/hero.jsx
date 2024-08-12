@@ -18,7 +18,7 @@ import AWSIcon from './images/aws.inline.svg';
 
 const items = [
   {
-    type: 'Free Tier',
+    type: 'Free Plan',
     price: '$0 <span>/month</span>',
     description: 'Always-available free tier, no credit card required.',
     features: [
@@ -76,7 +76,7 @@ const items = [
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Priority support' },
-      { title: 'Autoscaling up to 8 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
+      { title: 'Autoscaling up to 10 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
       { title: 'Point-in-time restore (30 days)' },
       { title: 'Organization accounts' },
       { title: 'IP Allow rules' },

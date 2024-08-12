@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { getActiveItems } from 'components/pages/doc/sidebar/sidebar';
 import InkeepTrigger from 'components/shared/inkeep-trigger';
+import { HOME_MENU_ITEM } from 'constants/docs';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
 import useWindowSize from 'hooks/use-window-size';
@@ -53,9 +54,10 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
 
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
-  const [activeMenuList, setActiveMenuList] = useState(
-    new Set(['Home', ...getActiveItems(sidebar, currentSlug)])
-  );
+  const [activeMenuList, setActiveMenuList] = useState([
+    HOME_MENU_ITEM,
+    ...getActiveItems(sidebar, currentSlug),
+  ]);
 
   const toggleMenu = () => setIsOpen((isOpen) => !isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -98,21 +100,21 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
   return (
     <nav
       className={clsx(
-        'safe-paddings relative border-b border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8',
+        'safe-paddings relative border-y border-gray-new-90 bg-gray-new-98 dark:border-gray-new-15/70 dark:bg-gray-new-8',
         className
       )}
       ref={wrapperRef}
     >
       <button
-        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start bg-gray-new-98 py-2.5 outline-none transition-colors dark:bg-gray-new-8 lg:px-8 md:px-4"
+        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start bg-gray-new-98 py-[9px] outline-none transition-colors dark:bg-gray-new-8 lg:px-8 md:px-4"
         type="button"
         ref={buttonRef}
         onClick={toggleMenu}
       >
         <span className="text-ellipsis">
-          {Array.from(activeMenuList).pop() === 'Home'
+          {activeMenuList[activeMenuList.length - 1].title === 'Home'
             ? 'Documentation menu'
-            : Array.from(activeMenuList).pop()}
+            : activeMenuList[activeMenuList.length - 1].title}
         </span>
         <ChevronRight
           className={clsx(

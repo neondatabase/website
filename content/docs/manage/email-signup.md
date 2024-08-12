@@ -2,7 +2,7 @@
 title: E-mail signup
 subtitle: 'How to change to an email-based account, or simply change your email'
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.417Z'
+updatedOn: '2024-07-24T13:12:44.740Z'
 ---
 
 As you get more familiar with Neon, you may decide to bring Neon into your organization, or change the type of account you want to associate with Neon. This page covers the kinds of email-related changes that you might encounter as you mature your usage with Neon.
@@ -28,3 +28,7 @@ Or follow this direct link:
 [change email](https://console.neon.tech/app/settings/profile?modal=change_email)
 
 After you make the change, you'll receive a notification at this new email address asking you to confirm. Once confirmed, you'll be logged out of Neon. Log back in with your new email, and use this email going forward.
+
+## Removing email as a login method
+
+Removing an email account as a login method is currently not supported via the Neon Console. If you need to remove this login method in favor of a Google or GitHub social account login, please contact [Support](/docs/introduction/support) for assistance. If you are looking to remove your Neon account entirely, see [Delete your account](/docs/introduction/manage-billing#delete-your-account) for instructions.

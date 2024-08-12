@@ -3,6 +3,8 @@
     - title: Home
       slug: introduction
       icon: home
+- section: noname
+  items:
     - title: Why Neon?
       icon: why-neon
       items:
@@ -12,8 +14,9 @@
           slug: get-started-with-neon/dev-experience
         - title: Production readiness with Neon
           slug: get-started-with-neon/production-readiness
-    - title: Get Started
+    - title: Getting Started
       icon: get-started
+      slug: get-started-with-neon/signing-up
       items:
         - section: Tutorial
           items:
@@ -25,81 +28,122 @@
               slug: get-started-with-neon/workflow-primer
             - title: 4 - Getting ready for production
               slug: get-started-with-neon/production-checklist
-              enableTableOfContents: true
-            - title: Language quickstarts
+        - section: Language quickstarts
+          items:
+            - title: Quick list
               slug: get-started-with-neon/languages
+            - title: Elixir
+              slug: guides/elixir-ecto
+            - title: Go
+              slug: guides/go
+              ariaLabel: Connect a Go application to Neon
+            - title: Java
+              slug: guides/java
+            - title: Javascript
+              slug: guides/javascript
+            - title: Python
               items:
-                - title: Elixir
-                  slug: guides/elixir-ecto
-                - title: Go
-                  slug: guides/go
-                  ariaLabel: Connect a Go application to Neon
-                - title: Java
-                  slug: guides/java
-                - title: Javascript
-                  slug: guides/javascript
-                - title: Python
-                  items:
-                    - title: Psycopg
-                      slug: guides/python
-                - title: Rust
-                  slug: guides/rust
-            - title: Neon roadmap
-              slug: introduction/roadmap
-        - section: Connect
-          slug: connect/connect-intro
+                - title: Psycopg
+                  slug: guides/python
+            - title: Rust
+              slug: guides/rust
+        - section: Framework quickstarts
+          items: 
+            - title: Quick list
+              slug: get-started-with-neon/frameworks
+            - title: Astro
+              slug: guides/astro
+            - title: Django
+              slug: guides/django
+            - title: Express
+              slug: guides/express
+            - title: Laravel
+              slug: guides/laravel
+            - title: NestJS
+              slug: guides/nestjs
+              tag: new
+            - title: Next.js
+              slug: guides/nextjs
+            - title: Node.js
+              slug: guides/node
+            - title: Quarkus (JDBC)
+              slug: guides/quarkus-jdbc
+            - title: Quarkus (Reactive)
+              slug: guides/quarkus-reactive
+            - title: React
+              slug: guides/react
+              tag: new
+            - title: Reflex
+              slug: guides/reflex
+              tag: new
+            - title: Remix
+              slug: guides/remix
+            - title: Ruby on Rails
+              slug: guides/ruby-on-rails
+            - title: SolidStart
+              slug: guides/solid-start
+              tag: new
+            - title: SQLAlchemy
+              slug: guides/sqlalchemy
+            - title: Symfony
+              slug: guides/symfony
+    - title: Connect
+      slug: connect/connect-intro
+      icon: connect
+      items:
+        - title: Choosing connections
+          slug: connect/choose-connection
+        - title: Connect from any app
+          slug: connect/connect-from-any-app
+        - title: Neon serverless driver
+          slug: serverless/serverless-driver
+        - title: Neon SQL Editor
+          slug: get-started-with-neon/query-with-neon-sql-editor
+        - title: Passwordless auth
+          slug: connect/passwordless-connect
+        - title: Connect securely
+          slug: connect/connect-securely
+        - title: Connect a GUI application
+          slug: connect/connect-postgres-gui
+        - title: Connect with psql
+          slug: connect/query-with-psql-editor
+        - title: Connect with pgcli
+          slug: connect/connect-pgcli
+        - title: Connect with AI
+          slug: connect/connect-ai
+        - title: Connection pooling
+          slug: connect/connection-pooling
+        - title: Connection issues
           items:
-            - title: Neon SQL Editor
-              slug: get-started-with-neon/query-with-neon-sql-editor
-            - title: Passwordless auth
-              slug: connect/passwordless-connect
-            - title: Connect securely
-              slug: connect/connect-securely
-            - title: Connect a GUI application
-              slug: connect/connect-postgres-gui
-            - title: Connect with psql
-              slug: connect/query-with-psql-editor
-            - title: Connect with pgcli
-              slug: connect/connect-pgcli
-            - title: Connect with AI
-              slug: connect/connect-ai
-            - title: Connection pooling
-              slug: connect/connection-pooling
-            - title: Connection issues
-              items:
-                - title: Connection errors
-                  slug: connect/connection-errors
-                - title: Latency and timeouts
-                  slug: connect/connection-latency
-        - section: Import data
-          slug: import/import-intro
-          items:
-            - title: Import from Postgres with pg_dump and pg_restore
-              slug: import/import-from-postgres
-            - title: Import from Postgres with pg-import
-              slug: import/import-from-postgres-pg-import
-            - title: Import from a Neon project
-              slug: import/import-from-neon
-            - title: Import from CSV
-              slug: import/import-from-csv
-            - title: Import from Heroku
-              slug: import/import-from-heroku
-            - title: Migrate data with AWS DMS
-              slug: import/migrate-aws-dms
-            - title: Migrate from MySQL to Postgres
-              slug: import/migrate-mysql
-            - title: Sample data
-              slug: import/import-sample-data
-    - title: Changelog
-      slug: changelog
-      icon: changelog
-      items: 
-        - title: Neon Changelog
-          slug: changelog
+            - title: Connection errors
+              slug: connect/connection-errors
+            - title: Latency and timeouts
+              slug: connect/connection-latency
+    - title: Import data
+      slug: import/import-intro
+      icon: roadmap
+      items:
+        - title: Import from Postgres with pg_dump and pg_restore
+          slug: import/import-from-postgres
+        - title: Import from Postgres with pg-import
+          slug: import/import-from-postgres-pg-import
+        - title: Import from a Neon project
+          slug: import/import-from-neon
+        - title: Import from CSV
+          slug: import/import-from-csv
+        - title: Import from Heroku
+          slug: import/import-from-heroku
+        - title: Migrate data with AWS DMS
+          slug: import/migrate-aws-dms
+        - title: Migrate from MySQL to Postgres
+          slug: import/migrate-mysql
+        - title: Sample data
+          slug: import/import-sample-data
 - section: Platform
   items:
     - title: Architecture
       icon: architecture
+      slug: introduction/architecture-overview
       items:
         - title: Overview
           slug: introduction/architecture-overview
@@ -171,10 +215,10 @@
           slug: introduction/ip-allow
         - title: Protected branches
           slug: guides/protected-branches
-    - title: Management
+    - title: Platform
       icon: management
       items:
-        - title: Access control
+        - section: Access control
           items:
             - title: E-mail signup
               slug: manage/email-signup
@@ -188,7 +232,7 @@
               slug: manage/database-access
             - title: API keys
               slug: manage/api-keys
-        - title: Project management
+        - section: Projects
           items:
             - title: Object hierarchy
               slug: manage/overview
@@ -204,7 +248,9 @@
               slug: manage/databases
             - title: Tables
               slug: guides/tables
-        - title: Monitoring
+            - title: Integrations
+              slug: manage/integrations
+        - section: Monitoring
           slug: introduction/monitoring
           items:
             - title: Monitoring dashboard
@@ -213,7 +259,7 @@
               slug: manage/operations
             - title: External tools
               slug: introduction/monitor-external-tools
-        - title: Security
+        - section: Security
           items:
             - title: Overview
               slug: security/security-overview
@@ -223,8 +269,10 @@
               slug: security/soc2-compliance
             - title: Acceptable Use Policy
               slug: security/acceptable-use-policy
-        - title: Backups
-          slug: manage/backups
+        - section:
+          items:
+            - title: Backups
+              slug: manage/backups
     - title: Regions
       slug: introduction/regions
       icon: regions
@@ -268,6 +316,7 @@
     - title: Frameworks
       slug: get-started-with-neon/frameworks
       icon: frameworks
+      enableTableOfContents: true
       items:
         - title: Astro
           slug: guides/astro
@@ -275,13 +324,18 @@
           slug: guides/django
         - title: Express
           slug: guides/express
-          tag: new
         - title: Laravel
           slug: guides/laravel
+        - title: NestJS
+          slug: guides/nestjs
+          tag: new
         - title: Next.js
           slug: guides/nextjs
         - title: Node.js
           slug: guides/node
+        - title: Phoenix
+          slug: guides/phoenix
+          tag: new
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
@@ -296,6 +350,9 @@
           slug: guides/remix
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
+        - title: SolidStart
+          slug: guides/solid-start
+          tag: new
         - title: SQLAlchemy
           slug: guides/sqlalchemy
         - title: Symfony
@@ -304,9 +361,10 @@
       icon: integrations
       slug: guides/integrations
       items:
-        - title: Deploy
+        - section: Deploy
           items:
             - title: Vercel
+              slug: guides/vercel-overview
               items:
                 - title: Overview
                   slug: guides/vercel-overview
@@ -317,6 +375,7 @@
                 - title: Connect manually
                   slug: guides/vercel-manual
             - title: Cloudflare
+              slug: guides/cloudflare-pages
               items:
                 - title: Cloudflare Pages
                   slug: guides/cloudflare-pages
@@ -334,13 +393,13 @@
               slug: guides/railway
             - title: Render
               slug: guides/render
-        - title: Serverless
+        - section: Serverless
           items:
             - title: Neon serverless driver
               slug: serverless/serverless-driver
             - title: AWS Lambda
               slug: guides/aws-lambda
-        - title: Query
+        - section: Query
           items:
             - title: Exograph
               slug: guides/exograph
@@ -360,23 +419,25 @@
               slug: guides/stepzen
             - title: WunderGraph
               slug: guides/wundergraph
-        - title: Develop
+        - section: Develop
           items:
             - title: GitHub integration
-              slug: guides/neon-github-app
+              slug: guides/neon-github-integration
+              tag: coming soon
             - title: Neosync
               items:
                 - title: Generate synthetic data
                   slug: guides/neosync-generate
-                  tag: new
                 - title: Anonymize data
                   slug: guides/neosync-anonymize
-                  tag: new
             - title: Prisma
               slug: guides/prisma
             - title: TypeORM
               slug: guides/typeorm
-        - title: Replicate
+            - title: Knex
+              slug: guides/knex
+              tag: new
+        - section: Replicate
           items:
             - title: Airbyte
               slug: guides/logical-replication-airbyte
@@ -396,7 +457,9 @@
               slug: guides/logical-replication-postgres
             - title: Sequin
               slug: guides/sequin
-        - title: Schema Migration
+            - title: Snowflake
+              slug: guides/logical-replication-airbyte-snowflake
+        - section: Schema Migration
           items:
             - title: Django
               slug: guides/django-migrations
@@ -405,6 +468,7 @@
             - title: Entity Framework
               slug: guides/entity-migrations
             - title: Flyway
+              slug: guides/flyway
               items:
                 - title: Get started
                   slug: guides/flyway
@@ -413,6 +477,7 @@
             - title: Laravel
               slug: guides/laravel-migrations
             - title: Liquibase
+              slug: guides/liquibase
               items:
                 - title: Get started
                   slug: guides/liquibase
@@ -426,7 +491,7 @@
               slug: guides/sequelize
             - title: SQLAlchemy
               slug: guides/sqlalchemy-migrations
-        - title: Authentication
+        - section: Authentication
           items:
             - title: Auth0
               slug: guides/auth-auth0
@@ -436,23 +501,36 @@
               slug: guides/auth-okta
     - title: AI & Embeddings
       icon: ai
+      slug: ai/ai-intro
       items:
-        - title: Introduction
-          slug: ai/ai-intro
         - title: AI concepts
           slug: ai/ai-concepts
-        - title: Scale with Neon
-          slug: ai/ai-scale-with-neon
+        - title: The pgvector extension
+          slug: extensions/pgvector
+        - title: AI integrations
+          items: 
+            - title: LangChain
+              slug: ai/langchain
+            - title: LlamaIndex
+              slug: ai/llamaindex
+        - title: Prepare your AI app for production
+          items:
+            - title: Optimize pgvector search
+              slug: ai/ai-vector-search-optimization
+            - title: Scale with Neon
+              slug: ai/ai-scale-with-neon
         - title: AI tools
           items:
             - title: Google Colab
               slug: ai/ai-google-colab
+            - title: Azure Data Studio Notebooks
+              slug: ai/ai-azure-notebooks
     - title: API Reference
       slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
       icon: api
     - title: CLI Reference
-      slug: reference/neon-cli
       icon: cli
+      slug: reference/neon-cli
       items:
         - title: Install and connect
           slug: reference/cli-install
@@ -478,6 +556,8 @@
           slug: reference/cli-connection-string
         - title: set-context
           slug: reference/cli-set-context
+        - title: create-app
+          slug: reference/cli-create-app
         - title: completion
           slug: reference/cli-completion
     - title: SDKs
@@ -545,8 +625,12 @@
               slug: extensions/pg_trgm
             - title: postgis
               slug: extensions/postgis
+            - title: postgis-related
+              slug: extensions/postgis-related-extensions
             - title: timescaledb
               slug: extensions/timescaledb
+            - title: wal2json
+              slug: extensions/wal2json
         - title: Functions
           slug: functions/introduction
           items:
@@ -648,6 +732,8 @@
                   slug: functions/math-random
                 - title: round
                   slug: functions/math-round
+        - title: Indexes
+          slug: postgresql/index-types
         - title: Optimize queries
           slug: postgresql/query-performance
         - title: Query reference
@@ -656,7 +742,7 @@
           slug: reference/compatibility
 - section: Resources
   items:
-    - title: Partner Guide
+    - title: Partner guide
       slug: guides/partner-intro
       icon: partner-guide
       items:
@@ -664,12 +750,20 @@
           slug: guides/oauth-integration
         - title: Manage billing with quotas
           slug: guides/partner-billing
+        - title: Getting metrics via API
+          slug: guides/metrics-api
     - title: Glossary
       slug: reference/glossary
       icon: glossary
-      items: 
+      items:
         - title: Neon Glossary
           slug: reference/glossary
+    - title: Neon roadmap
+      slug: introduction/roadmap
+      icon: roadmap
+      items:
+        - title: Neon roadmap
+          slug: introduction/roadmap
 - section: noname
   items:
     - title: Community
@@ -677,4 +771,7 @@
       icon: community
       items:
         - title: Docs Contribution Guide
-          slug: community/contribution-guide
+          slug: community/contribution-guide 
+    - title: Changelog
+      slug: changelog
+      icon: changelog

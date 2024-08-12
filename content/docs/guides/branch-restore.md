@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/branching-pitr
   - /docs/guides/branch-refresh
-updatedOn: '2024-06-30T14:35:12.881Z'
+updatedOn: '2024-07-25T12:53:42.425Z'
 ---
 
 With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, Github-style visual comparison of your selected branches before restoring.
@@ -66,7 +66,7 @@ Neon is open source and built in public, so if you are interested in understandi
 Similar to the manual restore operation using the Neon Console and API described [here](/docs/guides/branching-pitr), the Restore operation performs a similar set of actions, but automatically:
 
 1. On initiating a restore action, Neon builds a new point-in-time branch by matching your selected timestamp to the corresponding LSN of the relevant entries in the shared WAL record.
-1. The compute endpoint for your initial branch is moved to this new branch so that your connection string remains stable.
+1. The compute for your initial branch is moved to this new branch so that your connection string remains stable.
 1. We rename your new branch to the exact name as your initial branch, so the effect is seamless; it looks and acts like the same branch.
 1. Your initial branch, which now has no compute attached to it, is renamed to _branch_name_old_head_timestamp_ to keep the pre-restore branch available should you need to roll back. Note that the initial branch was the parent for your new branch, and this is reflected when you look at your branch details.
 
@@ -242,7 +242,7 @@ If you do need to revert your changes, you can [Reset from parent](/docs/manage/
 
 There are minimal impacts to billing from the branch restore and Time Travel Assist features:
 
-- **Branch Restore** &#8212; The backups created when you restore a branch do add to your total number of branches, but since they do not have any compute endpoint attached they do not add to any consumption costs.
+- **Branch Restore** &#8212; The backups created when you restore a branch do add to your total number of branches, but since they do not have a compute attached they do not add to consumption costs.
 - **Time Travel Assist** &#8212; Costs related to Time Travel queries are minimal. See [Billing considerations](/docs/guides/time-travel-assist#billing-considerations).
 
 ## Limitations

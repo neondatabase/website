@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/security/secure-connections
-updatedOn: '2024-06-14T07:55:54.362Z'
+updatedOn: '2024-08-07T21:36:52.640Z'
 ---
 
 Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Neon rejects connections that do not use SSL/TLS, behaving in the same way as standalone Postgres with only `hostssl` records in a `pg_hba.conf` configuration file.
@@ -17,7 +17,7 @@ However, there are different levels of protection when using SSL/TLS encryption,
 When connecting to Neon or any Postgres database, the `sslmode` parameter setting determines the security of the connection. You can append the `sslmode` parameter to your Neon connection string as shown:
 
 ```text shouldWrap
-postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full
+postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full
 ```
 
 Neon supports the following `sslmode` settings, in order of least to most secure.
@@ -64,7 +64,7 @@ However, if your client application uses a non-standard Postgres client, SSL/TLS
 
 ### Location of system root certificates
 
-Neon uses public root certificates issued by [Let’s Encrypt](https://letsencrypt.org/). These certificates are usually available in a root store on your operating system. A root store is a collection of pre-downloaded root certificates from various Certificate Authorities (CAs). These are highly trusted CAs, and their certificates are typically shipped with operating systems and some applications.
+Neon uses the public ISRG Root X1 certificate issued by [Let’s Encrypt](https://letsencrypt.org/). You can find the PEM-encoded certificate here: [isrgrootx1.pem](https://letsencrypt.org/certs/isrgrootx1.pem). Typically, you do not need to download this file directly, as it is usually available in a root store on your operating system. A root store is a collection of pre-downloaded root certificates from various Certificate Authorities (CAs). These are highly trusted CAs, and their certificates are typically shipped with operating systems and some applications.
 
 The location of the root store varies by operating system or distribution. Here are some locations where you might find the required root certificates on popular operating systems:
 

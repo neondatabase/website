@@ -14,19 +14,9 @@ import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import ArrowIcon from 'icons/header/arrow-right.inline.svg';
+import { getGithubStars } from 'utils/get-github-data';
 
 import HeaderWrapper from './header-wrapper';
-
-const API_URL = 'https://api.github.com/repos/neondatabase/neon';
-
-const getGithubStars = async () => {
-  const response = await fetch(API_URL, { next: { revalidate: 60 * 60 * 12 } });
-  const json = await response.json();
-  if (response.status >= 400) {
-    throw new Error('Error fetching GitHub stars');
-  }
-  return json.stargazers_count;
-};
 
 const themePropTypes = {
   isDarkTheme: PropTypes.bool,
@@ -213,20 +203,20 @@ const Header = async ({
           <div className="flex">
             <span className="hidden w-[350px] shrink-0 3xl:block xl:w-[302px] lg:hidden" />
             <Container
-              className="z-10 grid w-full grid-cols-12 items-center gap-x-8 2xl:flex 2xl:justify-between 2xl:gap-x-5"
+              className="z-10 grid w-full grid-cols-12 items-center gap-x-8 xl:flex xl:justify-between xl:gap-x-5"
               size="1408"
             >
               <div className="hidden lg:block">
                 <LogoLink />
               </div>
-              <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 xl:max-w-none lg:hidden">
+              <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
                 <Search
                   className="w-[272px]"
                   indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
                 />
                 <InkeepTrigger />
               </div>
-              <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-11 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-0 lg:hidden">
+              <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-11 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
                 <Sidebar />
               </div>
             </Container>

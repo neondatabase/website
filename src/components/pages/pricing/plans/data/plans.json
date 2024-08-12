@@ -2,7 +2,7 @@
   "headings": {
     "feature": "",
     "free": {
-      "label": "Free Tier",
+      "label": "Free Plan",
       "price": "<span>$0/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Start for free"
@@ -67,7 +67,6 @@
       },
       "enterprise": "Custom"
     },
-
     {
       "rows": "2",
       "feature": {
@@ -116,11 +115,11 @@
         "title": "Up to 4 vCPU, 16 GB RAM"
       },
       "scale": {
-        "title": "Up to 8 vCPU, 32 GB RAM"
+        "title": "Up to 10 vCPU, 40 GB RAM"
       },
       "enterprise": {
         "title": "Larger sizes",
-        "info": "8+ vCPU, 32+ GB RAM"
+        "info": "10+ vCPU, 40+ GB RAM"
       }
     },
     {
@@ -275,7 +274,7 @@
       "scale": "Up to 30 days",
       "enterprise": "Unlimited"
     },
-        {
+    {
       "rows": "1",
       "feature": {
         "title": "Monitoring"
@@ -295,7 +294,7 @@
       "scale": true,
       "enterprise": true
     },
-        {
+    {
       "rows": "1",
       "feature": {
         "title": "Schema Diff"
@@ -354,6 +353,16 @@
       "launch": "Standard Support",
       "scale": "Priority Support",
       "enterprise": "Enterprise Support with SLAs"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Data transfer"
+      },
+      "free": "5 GB /month",
+      "launch": true,
+      "scale": true,
+      "enterprise": true
     }
   ]
 }

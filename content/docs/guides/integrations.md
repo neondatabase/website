@@ -5,7 +5,7 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2024-07-05T23:02:06.217Z'
+updatedOn: '2024-07-11T12:52:17.602Z'
 ---
 
 ## Deploy
@@ -68,7 +68,7 @@ updatedOn: '2024-07-05T23:02:06.217Z'
 
 ## Develop
 
-<TechnologyNavigation>
+<TechnologyNavigation open>
 
 <img src="/images/technology-logos/github-logo.svg" width="36" height="36" alt="GitHub integration" href="/docs/guides/neon-github-app" title="Use the Neon GitHub integration" />
 
@@ -77,6 +77,10 @@ updatedOn: '2024-07-05T23:02:06.217Z'
 <img src="/images/technology-logos/neosync-logo.svg" width="36" height="36" alt="Neosync" href="/docs/guides/neosync-generate" title="Seed data with Neosync" />
 
 <img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
+
+<img src="/images/technology-logos/typeorm-logo.svg" width="30" height="36" alt="TypeORM" href="/docs/guides/typeorm" title="Connect from TypeORM to Neon" />
+
+<img src="/images/technology-logos/knex-logo.svg" width="30" height="36" alt="Knex" href="/docs/guides/knex" title="Connect from Knex to Neon" />
 
 </TechnologyNavigation>
 

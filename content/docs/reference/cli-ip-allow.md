@@ -2,7 +2,7 @@
 title: Neon CLI commands — ip-allow
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-07-05T22:49:44.610Z'
+updatedOn: '2024-07-12T11:16:39.830Z'
 ---
 
 ## Before you begin
@@ -74,11 +74,11 @@ neon ip-allow add [ips ...] [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `add` subcommand supports these options:
 
-| Option           | Description                                                                                                      | Type   |                      Required                       |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                    | string |                                                     |
-| `--project-id`   | Project ID                                                                                                       | string | Only if your Neon account has more than one project |
-| `--primary-only` | If true, the list will be applied only to the default branch. Use `--primary-only false` to remove this setting. | string |                                                     |
+| Option             | Description                                                                                                        | Type   |                      Required                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------ | ------ | :-------------------------------------------------: |
+| `--context-file`   | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                      | string |                                                     |
+| `--project-id`     | Project ID                                                                                                         | string | Only if your Neon account has more than one project |
+| `--protected-only` | If true, the list will be applied only to the default branch. Use `--protected-only false` to remove this setting. | string |                                                     |
 
 #### Example
 

@@ -4,7 +4,7 @@ enableTableOfContents: true
 subtitle: Learn how extra usage works in Neon's pricing plans
 redirectFrom:
   - /docs/introduction/billing-overview
-updatedOn: '2024-06-20T17:29:55.109Z'
+updatedOn: '2024-08-06T15:23:10.952Z'
 ---
 
 Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, you can purchase extra usage in set increments for when you need to go over your allowance.
@@ -15,7 +15,7 @@ This table provides an overview of plan fees with allowances for storage, comput
 
 | Plan       | Monthly Fee | Storage Allowance | Compute Allowance                                                                                     | Project Allowance |
 | ---------- | ----------- | ----------------- | ----------------------------------------------------------------------------------------------------- | ----------------- |
-| Free Tier  | $0          | 0.5 GiB           | Always-available default branch compute, 5 compute hours (20 _active hours_)/month on branch computes | 1 project         |
+| Free Plan  | $0          | 0.5 GiB           | Always-available default branch compute, 5 compute hours (20 _active hours_)/month on branch computes | 1 project         |
 | Launch     | $19         | 10 GiB            | 300 compute hours (1,200 _active hours_)/month                                                        | 10 projects       |
 | Scale      | $69         | 50 GiB            | 750 compute hours (3,000 _active hours_)/month                                                        | 50 projects       |
 | Enterprise | Custom      | Custom            | Custom                                                                                                | Custom            |
@@ -156,3 +156,9 @@ This example illustrates a prorated charge for extra storage that was allocated 
 | Plan Fee      | 1 month = $69                                                                              |
 | Extra Storage | 10 GiB extra storage unit at $15/month prorated for 3 days (June 28th – June 30th) = $1.50 |
 | **Total**     | $70.50                                                                                     |
+
+## Feedback
+
+We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. If you have feedback for us, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We read and consider every submission.
+
+<NeedHelp/>

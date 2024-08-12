@@ -2,8 +2,7 @@
 title: Generate synthetic data with Neosync
 subtitle: Learn how to generate synthetic data in your Neon database with Neosync
 enableTableOfContents: true
-tag: new
-updatedOn: '2024-06-14T07:55:54.402Z'
+updatedOn: '2024-08-07T21:36:52.659Z'
 ---
 
 [Neosync](https://www.neosync.dev/) is an open-source synthetic data orchestration platform that can create synthetic data and sync it across all of your Neon database environments.
@@ -69,7 +68,7 @@ Make sure you select the correct database (`neosync`) from the **Database** drop
 Your connection string should look something like this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neosync?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neosync?sslmode=require
 ```
 
 ## Neosync setup

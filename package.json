@@ -78,6 +78,7 @@
     "remark-gfm": "^3.0.1",
     "rss": "^1.2.2",
     "slugify": "^1.6.6",
+    "swiper": "^11.1.5",
     "tailwindcss-safe-area": "^0.5.1",
     "unist-util-visit": "^5.0.0",
     "yup": "^1.4.0"

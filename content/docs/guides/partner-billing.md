@@ -3,10 +3,10 @@ title: Manage billing with consumption limits
 subtitle: Learn how to set usage quotas per project with the Neon API
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-14T07:55:54.403Z'
+updatedOn: '2024-08-06T15:23:10.949Z'
 ---
 
-When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free tier users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
+When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
 
 ## Metrics and quotas
 
@@ -39,8 +39,8 @@ You can set quotas for these consumption metrics per project using the `quote` o
 
 The `quota` object includes an array of parameters used to set threshold limits. Their names generally match their corresponding metric:
 
-- `active_time_seconds` &#8212; Sets the maximum amount of time your project's total compute endpoints are allowed to be active during the current billing period. It excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#autosuspend).
-- `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's compute endpoints. This includes any endpoints deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes `compute_time_seconds`. For example, 1 second at .25 vCPU costs .25 compute seconds, while 1 second at 4 vCPU costs 4 compute seconds.
+- `active_time_seconds` &#8212; Sets the maximum amount of time your project's computes are allowed to be active during the current billing period. It excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#autosuspend).
+- `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's computes. This includes any computes deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes `compute_time_seconds`. For example, 1 second at .25 vCPU costs .25 compute seconds, while 1 second at 4 vCPU costs 4 compute seconds.
   | vCPUs | active_time_seconds | compute_time_seconds |
   |--------|-----------------------|------------------------|
   | 0.25 | 1 | 0.25 |
@@ -76,9 +76,9 @@ In addition to the configurable limits that you can set, Neon also sets certain 
 - `branch_logical_size_limit` (MiB)
 - `branch_logical_size_limit_bytes`(Bytes)
 
-These limits are not directly configurable. The Free Tier branch size limit is 512 MiB (0.5 GiB). The Launch and Scale plans support any data size but have a "failsafe" logical data size limit of 200 GiB to prevent runaway branch size growth due to possible issues with your application. If you require larger limits, you can [request large database support](https://console.neon.tech/app/projects?modal=request_large_db).
+These limits are not directly configurable. The Free Plan branch size limit is 512 MiB (0.5 GiB). The Launch and Scale plans support any data size but have a "failsafe" logical data size limit of 200 GiB to prevent runaway branch size growth due to possible issues with your application. If you require larger limits, you can [request large database support](https://console.neon.tech/app/projects?modal=request_large_db).
 
-The Neon Free Tier logical data size limit is approximately 512 MiB:
+The Neon Free Plan logical data size limit is approximately 512 MiB:
 
 - `branch_logical_size_limit`: 512
 - `branch_logical_size_limit_bytes`: 536870912
@@ -163,209 +163,14 @@ curl --request PATCH \
 
 ## Querying metrics and quotas
 
-You can get metrics and quota details for a single project or a list of metrics for all projects at once:
+You can use the Neon API to retrieve consumption metrics for your organization and projects through various endpoints:
 
-- [Per project](#retrieving-details-about-a-project)
-- [All projects](#retrieving-metrics-for-all-projects)
-
-### Retrieving details about a project
-
-Using a `GET` request from the Neon API (see [Get project details](https://api-docs.neon.tech/reference/getproject)), you can find the following consumption details for a given project:
-
-- Current consumption metrics accumulated for the billing period
-- Start and end dates for the billing period
-- Current usage quotas (max limits) configured for the project
-
-Using these details, you can set up the logic for when to send notification warnings, when to reset a quota, and other possible actions related to the pending or current suspension of a project's active computes.
-
-Here is an example a `GET` request for an individual project.
-
-```bash
-curl --request GET \
-     --url https://console.neon.tech/api/v2/projects/[project_ID] \
-     --header 'Accept: application/json' \
-     --header "Authorization: Bearer $NEON_API_KEY" | jq
-```
-
-And here is what the response might look like. The key fields are highlighted.
-
-<details>
-<summary>Response body</summary>
-
-```json {3-7,21-22,35-36}
-{
-  "project": {
-    "data_storage_bytes_hour": 1040,
-    "data_transfer_bytes": 680000000,
-    "written_data_bytes": 68544000,
-    "compute_time_seconds": 68400,
-    "active_time_seconds": 75000,
-    "cpu_used_sec": 7200,
-    "id": "[project_ID]",
-    "platform_id": "aws",
-    "region_id": "aws-us-east-2",
-    "name": "UserProject",
-    "provisioner": "k8s-pod",
-    "default_endpoint_settings": {
-      "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 1,
-      "suspend_timeout_seconds": 0
-    },
-    "settings": {
-      "quota": {
-        "active_time_seconds": 108000,
-        "compute_time_seconds": 72000
-      }
-    },
-    "pg_version": 15,
-    "proxy_host": "us-east-2.aws.neon.tech",
-    "branch_logical_size_limit": 204800,
-    "branch_logical_size_limit_bytes": 214748364800,
-    "store_passwords": true,
-    "creation_source": "console",
-    "history_retention_seconds": 604800,
-    "created_at": "2023-10-29T16:48:31Z",
-    "updated_at": "2023-10-29T16:48:31Z",
-    "synthetic_storage_size": 0,
-    "consumption_period_start": "2023-10-01T00:00:00Z",
-    "consumption_period_end": "2023-11-01T00:00:00Z",
-    "owner_id": "1232111",
-    "owner": {
-      "email": "some@email.com",
-      "branches_limit": -1,
-      "subscription_type": "free"
-    }
-  }
-}
-```
-
-</details>
-
-Looking at this response, here are some conclusions we can draw:
-
-- **This project is _1 hour away_ from being suspended.**
-
-  With current `compute_time_seconds` at _68,400_ (19 hours) and the quota for that metric set at _72,000_ (20 hours), the project is only _1 hour_ of compute time away from being suspended.
-
-- **This project is _1 day away_ from a quota refresh.**
-
-  If today's date is _October 31st, 2023_, and the `consumption_period_end` parameter is _2023-11-01T00:00:00Z_ (November 1st, 2023), then the project has _1 day_ left before all quota parameters (except for `logical_byte_size`) are refreshed.
-
-### Retrieving metrics for all projects
-
-Instead of retrieving metrics for a single project per request, you can use the [Consumption API](https://api-docs.neon.tech/reference/listprojectsconsumption) to get a full list of key consumption metrics for all the projects in your Neon account in a single API request. You can specify a date range to get metrics from across multiple billing periods and control pagination for large result sets.
-
-<Admonition type="warning" title="Preview API">
-This functionality is part of the preview API and is subject to change in the future.
-</Admonition>
-
-Here is the URL in the Neon API where you can get details for all projects in your account:
-
-```bash
-https://console.neon.tech/api/v2/consumption/projects
-```
-
-This API endpoint accepts the following query parameters: `from`,`to`, `limit`, and `cursor`.
-
-#### Set a date range across multiple billing periods
-
-You can set `from` and `to` query parameters to define a time range that can span across multiple billing periods.
-
-- `from` — Sets the start date and time of the time period for which you are seeking metrics.
-- `to` — Sets the end date and time for the the interval for which you desire metrics.
-
-The response is organized by project and billing period: one object per project, per active billing period within the range. For example, if you choose a 6-month time range you will get up to 6 objects for every project active within those months. The response includes any projects deleted within that time range.
-
-If you do not include these parameters, the query defaults to the current consumption period.
-
-Here is an example query that returns metrics from September 1st and December 1st, 2023. Time values must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
-
-```bash shouldWrap
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption/projects?limit=10&from=2023-09-01T00%3A00%3A00Z&to=2023-12-01T00%3A00%3A00Z' \
-     --header 'Accept: application/json' \
-     --header "Authorization: Bearer $NEON_API_KEY" | jq
-```
-
-And here is a sample response (with key lines highlighted):
-
-<details>
-<summary>Response body</summary>
-
-```json {5,10,11,13,15,18-20,24,29,30,32,33,35-37,40,42}
-{
-  "projects": [
-    {
-      "project_id": "wispy-wind-94231251",
-      "period_id": "6fa781c3-fe37-45fa-9987-26a0d06edbd9",
-      "data_storage_bytes_hour": 6097554392,
-      "data_storage_bytes_hour_updated_at": "2023-11-08T19:07:53Z",
-      "synthetic_storage_size": 32616552,
-      "synthetic_storage_size_updated_at": "2023-11-08T13:37:53Z",
-      "data_transfer_bytes": 0,
-      "written_data_bytes": 6296,
-      "written_data_bytes_updated_at": "2023-11-08T13:37:53Z",
-      "compute_time_seconds": 708,
-      "compute_time_seconds_updated_at": "2023-11-07T19:43:17Z",
-      "active_time_seconds": 672,
-      "active_time_seconds_updated_at": "2023-11-07T19:43:17Z",
-      "updated_at": "2023-11-08T19:08:56Z",
-      "period_start": "2023-11-01T00:00:00Z",
-      "period_end": null,
-      "previous_period_id": "4abcae52-490c-4144-a657-ed93139e2b4e"
-    },
-    {
-      "project_id": "divine-tree-77657175",
-      "period_id": "f8f50267-69d2-4891-8359-847c138dbf80",
-      "data_storage_bytes_hour": 6109745400,
-      "data_storage_bytes_hour_updated_at": "2023-11-08T19:07:53Z",
-      "synthetic_storage_size": 32673288,
-      "synthetic_storage_size_updated_at": "2023-11-06T22:58:17Z",
-      "data_transfer_bytes": 0,
-      "written_data_bytes": 2256,
-      "written_data_bytes_updated_at": "2023-11-06T22:43:17Z",
-      "compute_time_seconds": 0,
-      "active_time_seconds": 0,
-      "updated_at": "2023-11-08T19:08:56Z",
-      "period_start": "2023-11-01T00:00:00Z",
-      "period_end": null,
-      "previous_period_id": "385be9ab-5d6c-493e-b77f-d8f28a5191ca"
-    }
-  ],
-  "periods_in_response": 2,
-  "pagination": {
-    "cursor": "divine-tree-77657175"
-  }
-}
-```
-
-</details>
-
-Key details:
-
-- The `period_id` key and `previous_period_id` are unique values used to identify and connect periods across the time range.
-- The `period_start` and `period_end` keys show the dates for that particular billing period. A `null` value indicates that the object is for the current billing period.
-- The `cursor` object under `pagination` shows the last project Id in the response. See more about pagination in the next section.
-
-#### Control pagination for large result sets
-
-To control pagination (number of results per response), you can include these query parameters:
-
-- `limit` &#8212; sets the number of project objects to be included in the response
-- `cursor` &#8212; by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
-
-Here is an example `GET` request asking for the next 100 projects, starting with project id `divine-tree-77657175`:
-
-```bash shouldWrap
-curl --request GET \
-     --url https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100\
-     --header 'Accept: application/json' \
-     --header "Authorization: Bearer $NEON_API_KEY" | jq
-```
-
-<Admonition type="note">
-To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
-</Admonition>
+| Endpoint                                                                                             | Description                                                                                                              | Plan Availability | Docs                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                   | Scale plan only   | [Get account-level aggregated metrics](metrics-api#get-account-level-aggregated-metrics)                                                |
+| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale plan only   | [Get granular project-level metrics for the account](metrics-api#get-granular-project-level-metrics-for-your-account)                   |
+| [Billing period metrics per project](https://api-docs.neon.tech/reference/listprojectsconsumption)   | Offers consumption metrics for each project in an account for the current billing period                                 | All plans         | [Get project-level metrics for the account by billing period](metrics-api#get-project-level-metrics-for-your-account-by-billing-period) |
+| [Single project metrics](https://api-docs.neon.tech/reference/getproject)                            | Retrieves detailed metrics and quota information for a specific project                                                  | All plans         | [Get metrics for a single specified project](metrics-api#get-metrics-for-a-single-specified-project)                                    |
 
 ## Resetting a project after suspend
 

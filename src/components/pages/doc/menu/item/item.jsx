@@ -30,8 +30,8 @@ const Item = ({
   const LinkTag = slug ? Link : 'button';
 
   const handleClick = () => {
-    if (items?.length && !activeMenuList.has(title)) {
-      setActiveMenuList((prevList) => new Set(prevList).add(title));
+    if (items?.length && !activeMenuList.some((item) => item.title === title)) {
+      setActiveMenuList((prevList) => [...prevList, { title, slug }]);
     }
     if (slug && closeMobileMenu) closeMobileMenu();
   };
@@ -83,7 +83,12 @@ Item.propTypes = {
       ariaLabel: PropTypes.string,
     })
   ),
-  activeMenuList: PropTypes.instanceOf(Set).isRequired,
+  activeMenuList: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      slug: PropTypes.string,
+    })
+  ).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
   closeMobileMenu: PropTypes.func,
   children: PropTypes.node,

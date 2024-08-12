@@ -2,15 +2,15 @@
 title: Refresh a branch
 subtitle: Learn how to refresh a Neon branch using the Neon API
 enableTableOfContents: true
-updatedOn: '2024-06-20T17:29:55.117Z'
+updatedOn: '2024-07-25T12:53:42.438Z'
 ---
 
-When you create a branch in Neon, you create a copy-on-write clone that reflects the current state of the parent branch, but what do you do if your branch becomes stale? For example, changes are made to the data or schema on the parent branch that you would like reflected in your development branch, or your branch has aged out of the point-in-time restore window (the history shared with the parent branch) and is now taking up storage space. Ideally, you want to refresh your branch but keep the same compute endpoint, whose connection details may already be configured in your application or toolchain.
+When you create a branch in Neon, you create a copy-on-write clone that reflects the current state of the parent branch, but what do you do if your branch becomes stale? For example, changes are made to the data or schema on the parent branch that you would like reflected in your development branch, or your branch has aged out of the point-in-time restore window (the history shared with the parent branch) and is now taking up storage space. Ideally, you want to refresh your branch but keep the same compute, whose connection details may already be configured in your application or toolchain.
 
 There isn't a single command that refreshes a branch, but you can do so using a combination of Neon API calls. The procedure described below refreshes a branch by performing the following steps:
 
-1. [Creating a new up-to-date branch without a compute endpoint](#create-a-new-up-to-date-branch-without-a-compute-endpoint)
-2. [Moving the compute endpoint from your current branch to the new branch](#move-the-compute-endpoint-from-your-current-branch-to-the-new-branch)
+1. [Creating a new up-to-date branch without a compute](#create-a-new-up-to-date-branch-without-a-compute)
+2. [Moving the compute from your current branch to the new branch](#move-the-compute-from-your-current-branch-to-the-new-branch)
 3. [Deleting the old branch](#delete-the-old-branch)
 4. [Renaming the new branch to the name of the old branch](#rename-the-new-branch-to-the-name-of-the-old-branch)
 
@@ -25,11 +25,11 @@ The following information is required to perform the procedure:
 - A Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 - The `project_id` for your Neon project. You can obtain a `project_id` using the [List projects](https://api-docs.neon.tech/reference/listprojects) method, or you can find it on your project's **Project settings** page in the Neon Console.
 - The `branch_id` of the current branch. You can obtain a `branch_id` using the [List branches](https://api-docs.neon.tech/reference/listprojectbranches) method, or you can find it on your project's **Branches** page in the Neon Console. A `branch_id` has a `br-` prefix.
-- The `endpoint_id` of the compute endpoint associated with the current branch. You can obtain an `endpoint_id` using the [List endpoints](https://api-docs.neon.tech/reference/listprojectendpoints) method, or you can find it on the **Branches** page in the Neon Console. An `endpoint_id` has an `ep-` prefix.
+- The `endpoint_id` of the compute associated with the current branch. You can obtain an `endpoint_id` using the [List endpoints](https://api-docs.neon.tech/reference/listprojectendpoints) method, or you can find it on the **Branches** page in the Neon Console. An `endpoint_id` has an `ep-` prefix.
 
-## Create a new up-to-date branch without a compute endpoint
+## Create a new up-to-date branch without a compute
 
-The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) request shown below creates a branch without a compute endpoint. The only required parameter is your Neon `project_id`. The `project_id` value used in the example below is `dark-cell-12604300`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
+The [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) request shown below creates a branch without a compute. The only required parameter is your Neon `project_id`. The `project_id` value used in the example below is `dark-cell-12604300`. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
 ```bash
 curl --request POST \
@@ -46,7 +46,7 @@ curl --request POST \
 '
 ```
 
-The response body includes the `id` of your new branch. You will need this value (`br-falling-flower-15986510`) to move the compute endpoint in the next step.
+The response body includes the `id` of your new branch. You will need this value (`br-falling-flower-15986510`) to move the compute in the next step.
 
 <details>
 <summary>Response body</summary>
@@ -107,9 +107,9 @@ The response body includes the `id` of your new branch. You will need this value
 ```
 </details>
 
-## Move the compute endpoint from your current branch to the new branch
+## Move the compute from your current branch to the new branch
 
-The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) API request shown below moves the compute endpoint from your current branch to the new branch. The required parameters are the `project_id` and `endpoint_id` of your current branch, and the `branch_id` of your new branch. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
+The [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) API request shown below moves the compute from your current branch to the new branch. The required parameters are the `project_id` and `endpoint_id` of your current branch, and the `branch_id` of your new branch. You must also set the `$NEON_API_KEY` variable or replace `$NEON_API_KEY` with an actual API key.
 
 ```bash shouldWrap
 curl --request PATCH \

@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-06-20T17:29:55.111Z'
+updatedOn: '2024-08-07T21:36:52.671Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -20,21 +20,30 @@ When working with branches, it is important to remove old and unused branches. B
 
 ## Default branch
 
-Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project. The advantage of the default branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
+Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project. The advantage of the default branch is that its compute remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
 
-- For Neon Free Tier users, the compute endpoint associated with the default branch is always available.
-- For users on paid plans, the compute endpoint associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
+- For Neon Free Plan users, the compute associated with the default branch is always available.
+- For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage.
 
 ## Non-default branch
 
 Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
 
-- For Neon Free Tier users, compute endpoints associated with non-default branches are suspended if you exceed the Neon Free Tier _active hours_ limit of 20 hours per month.
-- For users on paid plans, default limits prevent more than 20 simultaneously active compute endpoints. Beyond that limit, a compute endpoint associated with a non-default branch remains suspended.
+- For Neon Free Plan users, computes associated with non-default branches are suspended if you exceed the Neon Free Plan _active hours_ limit of 20 hours per month.
+- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, a computes associated with a non-default branch remains suspended.
 
 ## Protected branch
 
-"Protected" is a status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan, where you can designate up to 5 protected branches. For information about how to configure a protected branch, see [Set a branch as protected](#set-a-branch-as-protected).
+Neon's protected branches feature implements a series of protections:
+
+- Protected branches cannot be deleted.
+- Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
+- Projects with protected branches cannot be deleted.
+- Computes associated with a protected branch cannot be deleted.
+- New passwords are automatically generated for Postgres roles on branches created from protected branches.
+- With additional configuration steps, you can apply IP restrictions to protected branches only.
+
+Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan, where you can designate up to 5 protected branches. See [Set a branch as protected](#set-a-branch-as-protected).
 
 ## Create a branch
 
@@ -73,8 +82,8 @@ To view the branches in a Neon project:
 
    - **Branch**: The branch name, which is a generated name if no name was specified when created.
    - **Parent**: Indicates the parent from which this branch was created, helping you track your branch hierarchy.
-   - **Active time**: Number of hours the branch's compute was active so far in the current billing period.
-   - **RW Compute**: Shows the current compute size and status for the branch's compute.
+   - **Compute hours**: Number of hours the branch's compute was active so far in the current billing period.
+   - **Primary compute**: Shows the current compute size and status for the branch's compute.
    - **Data size**: Indicates the logical data size of each branch, helping you monitor your plan's storage limit. Data size does not include history.
    - **Last active**: Shows when the branch's compute was last active.
 
@@ -87,7 +96,6 @@ To view the branches in a Neon project:
    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
    - **Created**: The date and time the branch was created.
    - **Compute hours**: The compute hours used by the branch in the current billing period.
-   - **Active hours since**: The active hours used by the branch compute in the current billing period.
    - **Data size**: The logical data size of the branch. Data size does not include history.
    - **Parent branch**: The branch from which this branch was created (only applicable to child branches).
    - **Branching point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
@@ -96,7 +104,7 @@ To view the branches in a Neon project:
 
 The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. In Neon, all of these objects are associated with a particular branch. For information about these objects, see:
 
-- [Manage computes](/docs/manage/endpoints#view-a-compute-endpoint).
+- [Manage computes](/docs/manage/endpoints#view-a-compute).
 - [Manage roles](/docs/manage/roles)
 - [Manage databases](/docs/manage/databases)
 - [View branches](#view-branches)
@@ -113,7 +121,7 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 ## Set a branch as default
 
-Each Neon project is created with a default branch called `main`, but you can designate any branch as your project's default branch. The benefit of the default branch is that the compute endpoint associated with the default branch remains accessible if you exceed project limits, ensuring uninterrupted access to data on the default branch. For more information, see [Default branch](#default-branch).
+Each Neon project is created with a default branch called `main`, but you can designate any branch as your project's default branch. The benefit of the default branch is that the compute associated with the default branch remains accessible if you exceed project limits, ensuring uninterrupted access to data on the default branch. For more information, see [Default branch](#default-branch).
 
 To set a branch as the default branch:
 
@@ -125,16 +133,9 @@ To set a branch as the default branch:
 
 ## Set a branch as protected
 
-"Protected" is a status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. This feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan, which supports up to five protected branches.
+This feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan, which supports up to five protected branches.
 
-For the protected status to have any effect, you must:
-
-1. Define an IP allowlist.
-2. Select the **Restrict IP access to protected branches only** option.
-
-For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
-
-To designate a branch as protected:
+To set a branch as protected:
 
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
@@ -142,11 +143,11 @@ To designate a branch as protected:
 4. On the branch overview page, click the **Actions** drop-down menu and select **Set as protected**.
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
 
-For step-by-step instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
+For details and configuration instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
 
 ## Connect to a branch
 
-Connecting to a database in a branch requires connecting via a compute endpoint associated with the branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
+Connecting to a database in a branch requires connecting via a compute associated with the branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="tip">
 You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
@@ -155,15 +156,15 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 1. In the Neon Console, select a project.
 2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
    ![Connection details widget](/docs/connect/connection_details.png)
-3. Copy the connection string. A connection string includes your role name, the compute endpoint hostname, and database name.
+3. Copy the connection string. A connection string includes your role name, the compute hostname, and database name.
 4. Connect with `psql` as shown below.
 
 ```bash shouldWrap
-psql postgres://[user]:[password]@[neon_hostname]/[dbname]
+psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 <Admonition type="tip">
-A compute endpoint hostname starts with an `ep-` prefix. You can also find a compute endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
+A compute hostname starts with an `ep-` prefix. You can also find a compute hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
 </Admonition>
 
 If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
@@ -186,7 +187,7 @@ You can use the Neon Console, CLI, or API. For more details, see [Branch Restore
 
 ## Delete a branch
 
-Deleting a branch is a permanent action. Deleting a branch also deletes the databases and roles that belong to the branch as well as the compute endpoint associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
+Deleting a branch is a permanent action. Deleting a branch also deletes the databases and roles that belong to the branch as well as the compute associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
 
 To delete a branch:
 
@@ -198,9 +199,7 @@ To delete a branch:
 
 ## Check the data size
 
-Plan limits define the amount of data you can store.
-
-You can check the logical data size of each branch by viewing the `Data size` value on the **Branches** widget or page in the Neon Console. Alternatively, you can run the following query:
+You can check the logical data size for the databases on a branch by viewing the **Data size** value on the **Branches** page or page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connected to your database:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))
@@ -208,10 +207,6 @@ FROM pg_database;
 ```
 
 Data size does not include [history](/docs/reference/glossary#history).
-
-<Admonition type="info">
-Neon stores data in its own internal format.
-</Admonition>
 
 ## Branching with the Neon CLI
 
@@ -239,10 +234,10 @@ The following Neon API method creates a branch. To view the API documentation fo
 POST /projects/{project_id}/branches
 ```
 
-The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. A branch can be created with or without a compute endpoint. The `branch` attribute specifies the parent branch.
+The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute, which is required to connect to the branch. A branch can be created with or without a compute. The `branch` attribute specifies the parent branch.
 
 <Admonition type="note">
-This method does not require a request body. Without a request body, the method creates a branch from the project's default branch, and a compute endpoint is not created.
+This method does not require a request body. Without a request body, the method creates a branch from the project's default branch, and a compute is not created.
 </Admonition>
 
 ```bash
@@ -265,7 +260,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
 - The `project_id` for a Neon project is found on the **Project settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
 - The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's default branch or a previously created branch.
 
-The response body includes information about the branch, the branch's compute endpoint, and the `create_branch` and `start_compute` operations that were initiated.
+The response body includes information about the branch, the branch's compute, and the `create_branch` and `start_compute` operations that were initiated.
 
 <details>
 <summary>Response body</summary>

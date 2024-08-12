@@ -2,7 +2,7 @@
 title: Production readiness with Neon
 subtitle: Neon features for real-world workloads
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.879Z'
+updatedOn: '2024-08-07T21:36:52.644Z'
 ---
 
 Learn how autoscaling, scale-to-zero, Neon's storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.
@@ -23,7 +23,7 @@ To learn more, see our [Autoscaling](/docs/introduction/autoscaling-guide) guide
 
 **Stop paying for idle databases.**
 
-Neon's _Autosuspend_ feature automatically transitions a Neon compute instance (where Postgres runs) to an idle state when it is not being used, effectively scaling it to zero to minimize compute usage and costs.
+Neon's _Autosuspend_ feature automatically transitions a Neon compute (where Postgres runs) to an idle state when it is not being used, effectively scaling it to zero to minimize compute usage and costs.
 
 **Why do you need a database that scales to zero?** Combined with Neon's branching capability, scale to zero allows you to instantly spin up databases for development, experimentation, or testing without the typical costs associated with "always-running" databases with relatively little usage. This approach is ideal for various scenarios:
 
@@ -53,9 +53,9 @@ Neon's Logical Replication feature enables replicating data from your Neon datab
 
 ## Scale with read replicas
 
-**Add read-only computes to achieve instant scale.**
+**Add read replicas to achieve instant scale.**
 
-Neon supports read replicas that let you instantly scale your application by offloading read-only workloads to independent read-only compute instances that access the same data as your read-write compute.
+Neon supports read replicas that let you instantly scale your application by offloading read-only workloads from your primary read-write compute.
 
 Create a read replica with the Neon CLI:
 
@@ -72,7 +72,7 @@ To learn more, see [Read replicas](/docs/introduction/read-replicas).
 Neon's [connection pooling](/docs/connect/connection-pooling) feature supports up to 10,000 concurrent connections. Connection pooling works by caching and reusing database connections, which helps to significantly optimize resource usage and enhance performance. It reduces the overhead associated with establishing new connections and closing old ones, allowing applications to handle a higher volume of requests more efficiently. Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling. Enabling connection pooling is easy. Just grab a pooled connection string from the console:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
 ```
 
 ## More Neon features

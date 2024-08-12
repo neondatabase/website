@@ -27,6 +27,8 @@ export async function GET(request) {
   try {
     const { searchParams } = request.nextUrl;
 
+    const hasLogo = searchParams.get('show-logo') !== 'false';
+
     const hasTitle = searchParams.has('title');
     const title = searchParams.get('title');
     const ogTitle = hasTitle && Buffer.from(title, 'base64').toString('utf-8');
@@ -38,7 +40,7 @@ export async function GET(request) {
     const ogCategory = hasCategory && Buffer.from(category, 'base64').toString('utf-8');
     const ogBreadcrumbs = hasBreadcrumb
       ? Buffer.from(breadcrumb, 'base64').toString('utf-8')
-      : `Docs${ogCategory ? ` / ${ogCategory}` : ''}`;
+      : hasCategory && `Docs${ogCategory ? ` / ${ogCategory}` : ''}`;
 
     return new ImageResponse(
       (
@@ -59,7 +61,7 @@ export async function GET(request) {
             src={backgroundData}
             style={{ position: 'absolute', top: 0, left: 0 }}
           />
-          <img width="229" height="64" src={logoData} />
+          {hasLogo && <img width="229" height="64" src={logoData} />}
           <div
             style={{
               display: 'flex',

@@ -1,7 +1,7 @@
 ---
 title: Monitoring dashboard
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.413Z'
+updatedOn: '2024-08-06T15:23:10.953Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
@@ -17,23 +17,23 @@ Your Neon plan defines the range of data you can view.
 
 | Neon Plan                                       | Data Access              |
 | ----------------------------------------------- | ------------------------ |
-| [Free Tier](/docs/introduction/plans#free-tier) | Last day (24 hours)      |
+| [Free Plan](/docs/introduction/plans#free-plan) | Last day (24 hours)      |
 | [Launch](/docs/introduction/plans#launch)       | Last 7 days (168 hours)  |
 | [Scale](/docs/introduction/plans#scale)         | Last 14 days (336 hours) |
 
 A shorter or custom period can be selected within the permitted range by selecting the desired option from the **Other** menu on the dashboard.
 
-The dashboard displays metrics for the selected **Branch** and **Compute endpoint**. Use the drop-down menus to view metrics for a different branch or compute endpoint. Use the **Refresh** button to update the displayed metrics.
+The dashboard displays metrics for the selected **Branch** and **Compute endpoint**. Use the drop-down menus to view metrics for a different branch or compute. Use the **Refresh** button to update the displayed metrics.
 
 If your compute was idle or there has not been much activity, charts may display this message: `There is not enough metrics data for this compute`. In this case, try again later after more usage data has been collected.
 
 <Admonition type="note">
-The values and plotted lines in your graphs may go to `0` during periods when your compute endpoint is not active. For example, **RAM**, **CPU**, and **Database size** values lines go to `0` when a compute transitions to an idle state due to being suspended after a period of inactivity.
+The values and plotted lines in your graphs may go to `0` during periods when your compute is not active. For example, **RAM**, **CPU**, and **Database size** values lines go to `0` when a compute transitions to an idle state due to being suspended after a period of inactivity.
 </Admonition>
 
 ### RAM
 
-This graph shows allocated RAM and usage over time for the selected compute endpoint.
+This graph shows allocated RAM and usage over time for the selected compute.
 
 **ALLOCATED**: The amount of allocated RAM.
 
@@ -47,7 +47,7 @@ The chart plots a line showing the amount of RAM used. If the line regularly rea
 
 ### CPU
 
-This graph shows the amount of allocated CPU and usage over time for the selected compute endpoint.
+This graph shows the amount of allocated CPU and usage over time for the selected compute.
 
 **ALLOCATED**: The amount of allocated CPU.
 
@@ -61,17 +61,17 @@ If the plotted line regularly reaches the maximum amount of allocated CPU, consi
 
 ### Connections count
 
-The **Connections count** graph shows the number of idle connections, active connections, and the total number of connections over time for the selected compute endpoint.
+The **Connections count** graph shows the number of idle connections, active connections, and the total number of connections over time for the selected compute.
 
-**ACTIVE**: The number of active connections for the selected compute endpoint.
+**ACTIVE**: The number of active connections for the selected compute.
 
 Monitoring active connections can help you understand your database workload at any given time. If the number of active connections is consistently high, it might indicate that your database is under heavy load, which could lead to performance issues such as slow query response times. See [Connections](/docs/postgresql/query-reference#connections) for related SQL queries.
 
-**IDLE**: The number of idle connections for the selected compute endpoint.
+**IDLE**: The number of idle connections for the selected compute.
 
 Idle connections are those that are open but not currently being used. While a few idle connections are generally harmless, a large number of idle connections can consume unnecessary resources, leaving less room for active connections and potentially affecting performance. Identifying and closing unnecessary idle connections can help free up resources. See [Find long-running or idle connections](/docs/postgresql/query-reference#find-long-running-or-idle-connections).
 
-**TOTAL**: The sum of active and idle connections for the selected compute endpoint.
+**TOTAL**: The sum of active and idle connections for the selected compute.
 
 The limit on the maximum number of simultaneous connections (defined by the Postgres `max_connections` setting) is set according to your Neon compute size. Monitoring the total number of connections helps ensure you don't hit your connection limit, as reaching it can prevent new connections from being established, leading to connection errors. For the connection limit for each Neon compute size, see [How to size your compute](https://neon.tech/docs/manage/endpoints#how-to-size-your-compute). Increasing your compute size is one way to increase your connection limit. Another option is to use connection pooling, which supports up to 10,000 simultaneous connections. To learn more, see [Connection pooling](/docs/connect/connection-pooling).
 
