@@ -3,7 +3,7 @@ title: Replicate data to a ClickHouse database on DoubleCloud
 subtitle: Learn how to replicate data from Neon to a ClickHouse database on DoubleCloud
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-23T20:03:37.192Z'
+updatedOn: '2024-08-07T21:36:52.656Z'
 ---
 
 <Admonition type="tip">
@@ -25,17 +25,6 @@ With Transfer, you can replicate your data to both managed ClickHouse clusters o
 
 - A [DoubleCloud account](https://console.double.cloud/)
 - A [Neon account](https://console.neon.tech/)
-- The ClickHouse client installed on your local machine.
-
-    <Admonition type="tip">
-    If you don't have the ClickHouse client, you can install it with the following command:
-
-  ```bash
-  curl https://clickhouse.com/ | sh
-  ```
-
-  It downloads the official binary for your operating system and installs both the ClickHouse client and ClickHouse itself.
-  </Admonition>
 
 ## Enable logical replication in Neon
 
@@ -46,8 +35,8 @@ Enabling logical replication modifies the Postgres `wal_level` configuration par
 To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Beta**.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
@@ -61,33 +50,31 @@ SHOW wal_level;
 
 ## Create a Postgres role for replication
 
-We recommend using a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
-<Tabs labels={["Neon Console", "CLI", "API"]}>
+<Tabs labels={["CLI", "Console", "API"]}>
+
+<TabItem>
+
+The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
+
+```bash
+neon roles create --name alex
+```
+
+</TabItem>
 
 <TabItem>
 
 To create a role in the Neon Console:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-1. Select a project.
-1. Select **Roles**.
-1. Select the branch where you want to create the role.
-1. Click **New Role**.
-1. In the role creation dialog, specify a role name.
-1. Click **Create**.
-
-The role is now created and you are provided with the password for the role, which you can show, copy, or download.
-
-</TabItem>
-
-<TabItem>
-
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole).
-
-```bash
-neon roles create --name <role>
-```
+2. Select a project.
+3. Select **Roles**.
+4. Select the branch where you want to create the role.
+5. Click **New Role**.
+6. In the role creation dialog, specify a role name.
+7. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>
 
@@ -98,7 +85,7 @@ The following Neon API method creates a role. To view the API documentation for 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "role": {
@@ -113,12 +100,12 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 ## Grant schema access to your Postgres role
 
-If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. Run these commands for each schema:
+If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `alex`:
 
 ```sql
-GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
-GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <role_name>;
-ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <role_name>;
+GRANT USAGE ON SCHEMA public TO alex;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO alex;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO alex;
 ```
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
@@ -163,23 +150,17 @@ For production, make sure to select at least three replicas, 16 GB of RAM, and d
 1. Under **Basic settings**, enter the cluster name, for example `clickhouse-dev`.
 1. Click **Submit** at the bottom of the page. Creating a cluster takes around five minutes depending on the provider, region, and settings.
 1. After the cluster status changes from _Creating_ to _Alive_, select it in the cluster list.
-1. On the **Overview** tab, find the **Connection strings** section.
-   Copy the **Native interface** connection string.
-1. Paste the connection string to ClickHouse client and connect to the cluster.
+1. On the **Overview** tab, click **WebSQL** at the top right.
 
-   The output should look as follows:
+   WebSQL is a DoubleCloud service that allows you to connect to your managed ClickHouse clusters from your browser tab.
+   It provides a full-fledged SQL editor that you can use to view databases and execute SQL queries.
 
-   ```bash
-   Connected to ClickHouse server version 23.8.9.
-   ach-euc1-az2-s1-1.<cluster_name>.at.double.cloud :)
-   ```
-
-   `:)` means that the cluster is ready to receive commands.
+1. Select a database in the connection manager on the left to open the query editor.
 
 1. Create a database:
 
    ```sql
-   CREATE DATABASE IF NOT EXISTS <database_name>
+   CREATE DATABASE IF NOT EXISTS <database_name> ON CLUSTER default
    ```
 
 1. Make sure that the database has been created:
@@ -213,7 +194,7 @@ To create a source endpoint:
    For example, let's say this is your connection string:
 
    ```bash shouldWrap
-   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
    ```
 
    From this string, the values would show as below. Your actual values will differ, with the exception of the port number.
@@ -255,9 +236,27 @@ Even when logical replication isn't available on the Neon side, you can schedule
 
    When the data has transferred, the transfer status changes to _Done_.
 
+## Query the transferred data with WebSQL
+
+<Admonition type="note">
+You can use WebSQL only to connect to managed ClickHouse clusters on DoubleCloud.
+If you've transferred data to an on-premise ClickHouse cluster,
+use the ClickHouse client or a similar tool to connect to it.
+</Admonition>
+
+1. In the left menu, select **Clusters** and select your cluster from the list.
+
+1. On the **Overview** tab, click **WebSQL** at the top right.
+
+1. Select the database you created earlier in the connection manager on the left.
+
+1. In the query editor, enter and execute your query.
+
+   The query output will be displayed under the editor.
+
 ## References
 
 - [DoubleCloud get started with ClickHouse guide](https://double.cloud/docs/en/managed-clickhouse/get-started)
-- [DoubleCloud get started with Transfer guide](https://double.cloud/docs/en/transfers/quickstart)
+- [DoubleCloud get started with Transfer guide](https://double.cloud/docs/en/transfers/get-started)
 
 <NeedHelp/>

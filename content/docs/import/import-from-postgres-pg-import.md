@@ -1,7 +1,7 @@
 ---
 title: Import data from Postgres with the @neondatabase/pg-import CLI
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.410Z'
+updatedOn: '2024-08-07T21:36:52.669Z'
 ---
 
 This topic describes migrating data from another Postgres database to Neon using the `@neondatabase/pg-import` CLI. This tool is built on top of the Postgres `pg_dump` and `pg_restore` client utilities. It is intended to simplify data migrations for smaller, less complex databases compared to using the `pg_dump` and `pg_restore` client utilities directly, as described in [Import data from Postgres](/docs/import/import-from-postgres).
@@ -14,14 +14,14 @@ The`@neondatabase/pg-import` utility supports all Neon Postgres versions.
 
 ## Before you begin
 
-- Make sure your Neon plan supports your database size. The Neon Free Tier offers 0.5 GiB of storage. For larger data sizes, upgrade to the Launch or Scale plan. See Neon plans. If you are on the Neon Launch or Scale plan, you can optimize for the migration by configuring a larger compute size or enabling [autoscaling](/docs/guides/autoscaling-guide) for additional CPU and RAM. See [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+- Make sure your Neon plan supports your database size. The Neon Free Plan offers 0.5 GiB of storage. For larger data sizes, upgrade to the Launch or Scale plan. See Neon plans. If you are on the Neon Launch or Scale plan, you can optimize for the migration by configuring a larger compute size or enabling [autoscaling](/docs/guides/autoscaling-guide) for additional CPU and RAM. See [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 - Retrieve the [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING) for your source Postgres database.
 - Optionally, [create a role in Neon](/docs/manage/roles#manage-roles-in-the-neon-console) to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. For example, if you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
 - Create the target database in Neon. For example, if you are migrating a database named `pagila`, create a database named `pagila` in Neon. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 - Retrieve the connection string for your Neon database. You can find it in the **Connection Details** widget on the Neon **Dashboard**. If you created a role to perform the restore operation, make sure to select that role. Your connection string will look something like this:
 
   ```bash shouldWrap
-  postgres://[user]:[password]@[neon_hostname]/[dbname]
+  postgresql://[user]:[password]@[neon_hostname]/[dbname]
   ```
 
   Avoid using a [pooled Neon connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
@@ -70,12 +70,12 @@ The following example shows how data from a `pagila` source database is dumped a
 
 ```bash shouldWrap
 ~$ cd mydump
-~/mydump$ npx @neondatabase/pg-import --source postgres://[user]:[password]@[neon_hostname]/pagila --backup-file-path ./mydumpfile.bak
+~/mydump$ npx @neondatabase/pg-import --source postgresql://[user]:[password]@[neon_hostname]/pagila --backup-file-path ./mydumpfile.bak
 
 ~/mydump$ ls
 mydumpfile.bak
 
-~/mydump$ npx @neondatabase/pg-import --destination postgres://[user]:[password]@[neon_hostname]/pagila --backup-file-path ./mydumpfile.bak
+~/mydump$ npx @neondatabase/pg-import --destination postgresql://[user]:[password]@[neon_hostname]/pagila --backup-file-path ./mydumpfile.bak
 ```
 
 ## Piped import with @neondatabase/pg-import

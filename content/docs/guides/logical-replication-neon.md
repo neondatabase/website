@@ -3,7 +3,7 @@ title: Manage logical replication in Neon
 subtitle: Learn how to manage logical replication in Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-25T12:53:42.427Z'
+updatedOn: '2024-08-07T21:36:52.658Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots. It also includes information about logical replication specific to Neon, including [known limitations](#known-limitations).
@@ -87,7 +87,7 @@ Building on the `my_publication` example in the preceding section, here’s how 
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-CONNECTION 'postgres://username:password@host:port/dbname'
+CONNECTION 'postgresql://username:password@host:port/dbname'
 PUBLICATION my_publication;
 ```
 
@@ -101,7 +101,7 @@ This command creates a subscription that receives data from two publications:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-CONNECTION 'postgres://username:password@host:port/dbname'
+CONNECTION 'postgresql://username:password@host:port/dbname'
 PUBLICATION my_publication, sales_publication;
 ```
 
@@ -113,7 +113,7 @@ This command creates a subscription with `enabled = false` so that you can enabl
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-CONNECTION 'postgres://username:password@host:port/dbname'
+CONNECTION 'postgresql://username:password@host:port/dbname'
 PUBLICATION my_publication
 WITH (enabled = false);
 ```
@@ -223,9 +223,9 @@ Once you enable logical replication in Neon, the setting cannot be reverted. Ena
 In Neon, logical replication is enabled from the console, by following these steps:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Replication**.
-4. Click **Enable**.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Logical Replication**.
+4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query:
 
@@ -238,7 +238,15 @@ logical
 
 ### Logical replication and autosuspend
 
-By default, Neon's [Autosuspend](/docs/introduction/auto-suspend) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a compute with an active subscriber remains active at all times.
+By default, Neon's [Autosuspend](/docs/introduction/auto-suspend) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a compute with an active subscriber remains active at all times. Neon determines if there are active connections from a logical replication subscriber by checking for `walsender` processes on the Neon Postgres instance using the following query:
+
+```sql
+SELECT *
+FROM pg_stat_replication
+WHERE application_name != 'walproposer';
+```
+
+If the count is greater than 0, a Neon compute where the publishing Postgres instance runs will not ber suspended.
 
 ### Replication roles
 
@@ -312,7 +320,7 @@ If you use Neon's **IP Allow** feature:
 Neon supports both `pgoutput` and `wal2json` replication output decoder plugins.
 
 - `pgoutput`: This is the default logical replication output plugin for Postgres. Specifically, it's part of the Postgres built-in logical replication system, designed to read changes from the database's write-ahead log (WAL) and output them in a format suitable for logical replication.
-- `wal2json`: This is also a logical replication output plugin for Postgres, but it differs from `pgoutput` in that it converts WAL data into `JSON` format. This makes it useful for integrating Postgres with systems and applications that work with `JSON` data. For usage information, see [wal2json](https://github.com/eulerto/wal2json).
+- `wal2json`: This is also a logical replication output plugin for Postgres, but it differs from `pgoutput` in that it converts WAL data into `JSON` format. This makes it useful for integrating Postgres with systems and applications that work with `JSON` data. For usage information, see [The wal2json plugin](/docs/extensions/wal2json).
 
 ### Dedicated replication slots
 

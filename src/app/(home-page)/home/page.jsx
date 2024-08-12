@@ -3,14 +3,14 @@ import { redirect } from 'next/navigation';
 import { checkCookie } from 'app/actions';
 import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
-import Hero from 'components/pages/home/hero/hero';
+import Hero from 'components/pages/home/hero';
 import Industry from 'components/pages/home/industry';
 import InstantProvisioning from 'components/pages/home/instant-provisioning';
 import Lightning from 'components/pages/home/lightning';
 import Logos from 'components/pages/home/logos';
 import Multitenancy from 'components/pages/home/multitenancy';
 import Trusted from 'components/pages/home/trusted';
-import Cta from 'components/shared/get-started';
+import Cta from 'components/shared/cta';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
@@ -36,7 +36,7 @@ const HomePage = async () => {
       <Multitenancy />
       <Industry />
       <Trusted />
-      <Cta title="Features of tomorrow.<br /> Available today." className="pb-[307px] pt-[445px]" />
+      <Cta />
     </>
   );
 };

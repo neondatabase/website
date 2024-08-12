@@ -2,7 +2,7 @@
 title: Sample project billing
 enableTableOfContents: true
 subtitle: Practical example of how Neon pricing is calculated
-updatedOn: '2024-06-14T07:55:54.412Z'
+updatedOn: '2024-08-12T11:07:15.292Z'
 ---
 
 ## Generative AI example
@@ -60,11 +60,11 @@ Project storage grew 4.4 GiB over the month, from 23.6 GiB to 28 GiB.
 Here are the monthly totals for compute and storage usage.
 
 | Metric  | Daily Average      | Monthly Total       |
-| ------- | ------------------ | ------------------- |
+| :------ | :----------------- | :------------------ |
 | Compute | 23.94 active hours | 718.35 active hours |
 
 | Metric  | Start of the month | End of the month |
-| ------- | ------------------ | ---------------- |
+| :------ | :----------------- | :--------------- |
 | Storage | 23.6 GiB           | 28 GiB           |
 
 ### Which Neon pricing plan fits best?

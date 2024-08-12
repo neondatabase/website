@@ -3,7 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-07-25T12:53:42.417Z'
+updatedOn: '2024-08-07T21:36:52.640Z'
 ---
 
 Neon's _Autosuspend_ feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state takes anywhere from 500 ms to a few seconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -102,7 +102,7 @@ Connection conn = DriverManager.getConnection(dbUrl, properties);
 ```
 
 ```prisma
-DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?connect_timeout=15&pool_timeout=15`
+DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?connect_timeout=15&pool_timeout=15`
 ```
 
 </CodeTabs>
@@ -171,7 +171,7 @@ However, this example is a simplification. In a production application, you migh
 
 ### Use application-level caching
 
-Implement a caching system like [Redis](https://redis.io/) or [PolyScale](https://www.polyscale.ai/) to store frequently accessed data, which can be rapidly served to users. This approach can help reduce occurrences of latency, but only if the data requested is available in the cache. Challenges with this strategy include cache invalidation due to frequently changing data, and cache misses when queries request uncached data. This strategy will not avoid latency entirely, but you may be able to combine it with other strategies to improve application responsiveness overall.
+Implement a caching system like [Redis](https://redis.io/) to store frequently accessed data, which can be rapidly served to users. This approach can help reduce occurrences of latency, but only if the data requested is available in the cache. Challenges with this strategy include cache invalidation due to frequently changing data, and cache misses when queries request uncached data. This strategy will not avoid latency entirely, but you may be able to combine it with other strategies to improve application responsiveness overall.
 
 ## Conclusion
 

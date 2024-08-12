@@ -9,9 +9,9 @@ import BgDecor from '../bg-decor';
 const Testimonial = ({ text, author, url }) => (
   <figure
     className={clsx(
-      'relative mt-14 w-full rounded-lg bg-[#0D0E10] p-14 pb-8 pr-11',
+      'relative mt-7 w-full rounded-lg bg-[#0D0E10] p-14 pb-8 pr-11',
       'before:absolute before:left-6 before:top-6 before:size-16 before:bg-[url("/images/pages/variable-load/blockquote.svg")] before:bg-contain before:bg-no-repeat',
-      'xl:mt-12 lg:mt-11 lg:p-12 lg:pb-7 lg:pr-10 sm:mt-8 sm:p-6 sm:pb-7',
+      'xl:mt-6 lg:mt-5 lg:p-12 lg:pb-7 lg:pr-10 sm:mt-4 sm:p-6 sm:pb-7',
       'lg:before:left-[22px] lg:before:top-[22px] lg:before:size-14 sm:before:hidden'
     )}
   >
