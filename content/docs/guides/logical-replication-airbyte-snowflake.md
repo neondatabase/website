@@ -185,21 +185,19 @@ To complete your source setup, click **Set up source** in the Airbyte UI. Airbyt
 
 ## Configure Snowflake as a destination
 
-To complete your data integration setup, you can now add Snowflake as your destination. 
+To complete your data integration setup, you can now add Snowflake as your destination.
 
 ### Prerequisites
 
 - A Snowflake account with the `ACCOUNTADMIN` role. If you're using a company account, you may need to contact your Snowflake administrator to set one up for you.
 
-
 ### Set up Airbyte entities in Snowflake
 
 To set up the Snowflake destination connector, you first need to create Airbyte entities in Snowflake (a warehouse, database, schema, user, and role) with the `OWNERSHIP` permission to write data into Snowflake.
 
-You can use the following script in a new [Snowflake worksheet](https://docs.snowflake.com/en/user-guide/ui-worksheet) to create the entities. 
+You can use the following script in a new [Snowflake worksheet](https://docs.snowflake.com/en/user-guide/ui-worksheet) to create the entities.
 
 If you want to, you can edit the script to change the password to a more secure password and to change the names of other resources. If you do rename entities, make sure to follow [Sbowflake identifier requirements](https://docs.snowflake.com/en/sql-reference/identifiers-syntax).
-
 
 ```sql
 -- set variables (these need to be uppercase)
@@ -272,21 +270,19 @@ to role identifier($airbyte_role);
 commit;
 ```
 
-
 ### Set up Snowflake as a destination in Airbyte
 
 Navigate to Airbyte and set up Snowflake as a destination. You can authenticate using username/password or key pair authentication. We'll authenticate via user name and password in this example.
 
-| Field      | Description                                                                                                                                       | Example                                         |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
-| **Host**   | The host domain of the Snowflake instance (must include the account, region, cloud environment, and end with snowflakecomputing.com).             | `accountname.us-east-2.aws.snowflakecomputing.com` |
-| **Role**   | The role you created in Step 1 for Airbyte to access Snowflake.                                                                                   | `AIRBYTE_ROLE`                                  |
-| **Warehouse** | The warehouse you created in Step 1 for Airbyte to sync data into.                                                                              | `AIRBYTE_WAREHOUSE`                             |
-| **Database**  | The database you created in Step 1 for Airbyte to sync data into.                                                                               | `AIRBYTE_DATABASE`                              |
-| **Schema** | The default schema used as the target schema for all statements issued from the connection that do not explicitly specify a schema name.           | -                                               |
-| **Username** | The username you created in Step 1 to allow Airbyte to access the database.                                                                      | `AIRBYTE_USER`                                  |
-| **Password** | The password associated with the username.                                                                                                       | -                                               |
-
+| Field         | Description                                                                                                                              | Example                                            |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| **Host**      | The host domain of the Snowflake instance (must include the account, region, cloud environment, and end with snowflakecomputing.com).    | `accountname.us-east-2.aws.snowflakecomputing.com` |
+| **Role**      | The role you created in Step 1 for Airbyte to access Snowflake.                                                                          | `AIRBYTE_ROLE`                                     |
+| **Warehouse** | The warehouse you created in Step 1 for Airbyte to sync data into.                                                                       | `AIRBYTE_WAREHOUSE`                                |
+| **Database**  | The database you created in Step 1 for Airbyte to sync data into.                                                                        | `AIRBYTE_DATABASE`                                 |
+| **Schema**    | The default schema used as the target schema for all statements issued from the connection that do not explicitly specify a schema name. | -                                                  |
+| **Username**  | The username you created in Step 1 to allow Airbyte to access the database.                                                              | `AIRBYTE_USER`                                     |
+| **Password**  | The password associated with the username.                                                                                               | -                                                  |
 
 ## Set up a connection
 
@@ -299,6 +295,5 @@ Navigate to Airbyte and set up Snowflake as a destination. You can authenticate 
 - [What is an ELT data pipeline?](https://airbyte.com/blog/elt-pipeline)
 - [Logical replication - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html)
 - [Publications - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-publication.html)
-
 
 <NeedHelp/>
