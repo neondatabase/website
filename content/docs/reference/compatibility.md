@@ -129,7 +129,6 @@ The Neon cloud service automatically closes idle connections after a period of i
 
 Statistics collected by the Postgres [cumulative statistics system](https://www.postgresql.org/docs/current/monitoring-stats.html) are not saved when a Neon compute (where Postgres runs) is suspended due to inactivity or restarted. For information about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). For information about configuring Neon's autosuspend behavior, see [Autosuspend](/docs/introduction/auto-suspend).
 
-
 ## Database encoding
 
 Neon supports UTF8 encoding (Unicode, 8-bit variable-width encoding). This is the most widely used and recommended encoding for Postgres.
@@ -150,7 +149,6 @@ template template0;
 ```
 
 To specify the locale for individual columns, you can use this syntax:
-
 
 ```sql
 CREATE TABLE my_ru_table (
