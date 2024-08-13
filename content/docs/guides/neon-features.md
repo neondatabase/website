@@ -1,7 +1,7 @@
 ---
 title: Neon feature guides
 subtitle: Explore Neon's capabilities with our feature guides
-enableTableOfContents: true
+enableTableOfContents: false
 updatedOn: '2024-06-20T17:29:55.106Z'
 ---
 

@@ -5,6 +5,26 @@ enableTableOfContents: true
 updatedOn: '2024-07-25T12:53:42.430Z'
 ---
 
+<HeadBlock>
+<DocsList title="What you will learn:">
+<p>Enable autoscaling for new projects</p>
+<p>Configure for individual compute endpoints</p>
+<p>Monitor resource usage and performance</p>
+<p>Optimize for performance and cost efficiency</p>
+<p>Utilize the Neon console for management</p>
+</DocsList>
+
+<DocsList title="Before you start" theme="docs">
+<a href="/docs/introduction/connect-neon">Connect Neon to your stack</a>
+<a href="/docs/introduction/getting-ready-for-production">Getting ready for production</a>
+</DocsList>
+
+<DocsList title="Example repository" theme="repo">
+<a href="https://github.com/neondatabase/examples" target="_blank" rel="noopener noreferrer">Neon Autoscaling repo</a>
+</DocsList>
+
+</HeadBlock>
+
 Neon's _Autoscaling_ feature, available to paying users, dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current load, eliminating the need for manual intervention.
 
 ## Autoscaling benefits

@@ -316,7 +316,6 @@
     - title: Frameworks
       slug: get-started-with-neon/frameworks
       icon: frameworks
-      enableTableOfContents: true
       items:
         - title: Astro
           slug: guides/astro

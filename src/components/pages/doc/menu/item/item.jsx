@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import ArrowExternalIcon from 'icons/docs/sidebar/arrow-external.inline.svg';
+import ArrowExternalIcon from 'icons/docs/arrow-external.inline.svg';
 
 import Tag from '../../tag';
 import Icon from '../icon';
