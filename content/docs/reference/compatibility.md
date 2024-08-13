@@ -135,7 +135,7 @@ Neon supports UTF8 encoding (Unicode, 8-bit variable-width encoding). This is th
 
 ## Collation support
 
-A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. A common standard provider, `libc`, uses locales provided by the operating system C library. Another provider is `icu`, which uses the external ICU library. In Neon, support for standard `libc` locales is limited. Instead, Neon provides predefined `icu` locales that you can use. 
+A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. A common standard provider, `libc`, uses locales provided by the operating system C library. Another provider is `icu`, which uses the external ICU library. In Neon, support for standard `libc` locales is limited. Instead, Neon provides predefined `icu` locales that you can use.
 
 To view available locales, use the query `SELECT * FROM pg_collation`, or the command `\dOS+` from the [Neon SQL Editor](/docs/connect/query-with-psql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
 
