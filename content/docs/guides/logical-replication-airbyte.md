@@ -153,7 +153,7 @@ Perform the following steps for each table you want to replicate data from:
 
    Alternatively, you can create a publication for all tables:
 
-      ```sql
+   ```sql
    CREATE PUBLICATION airbyte_publication FOR ALL TABLES;
    ```
 
