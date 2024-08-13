@@ -35,10 +35,10 @@ To enable logical replication:
 2. Under the **Configuration** heading, click on the **DB instance parameter group** link.
 3. Click **Edit**, and in the **Filter parameters** search field, search for `rds.logical_replication`.
 4. Set the value to `1`, and click **Save Changes**.
-4. If you created a new parameter group, navigate back to your RDS instance page, click **Modify**, and scroll down to select your new parameter group
-5. Click **Continue**, and select **Apply immediately** to make the change now, then click **Modify DB instance**. 
-6. After this step, reboot your instance. From the **Actions** menu for your database, select **Reboot**.
-5. Make sure that the `wal_level` parameter is set to `logical`.
+5. If you created a new parameter group, navigate back to your RDS instance page, click **Modify**, and scroll down to select your new parameter group
+6. Click **Continue**, and select **Apply immediately** to make the change now, then click **Modify DB instance**.
+7. After this step, reboot your instance. From the **Actions** menu for your database, select **Reboot**.
+8. Make sure that the `wal_level` parameter is set to `logical`.
 
    ```sql
    rdsdb_owner@publisher=> show wal_level;
@@ -60,6 +60,7 @@ You need to allow inbound connections to your AWS RDS Postgres instance from Neo
 4. Add rules that allow traffic from each of the IP addresses for your Neon project's region.
 
    Neon uses 3 to 6 IP addresses per region for outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses by region.
+
 5. When you're finished, click **Save rules**.
 
 <Admonition type="note">
@@ -122,7 +123,7 @@ After defining a publication on the source database, you need to define a subscr
    ```sql
    SELECT * FROM pg_stat_subscription;
 
-   subid |     subname     | pid  | leader_pid | relid | received_lsn |      last_msg_send_time       |     last_msg_receipt_time     | latest_end_lsn |        latest_end_time        
+   subid |     subname     | pid  | leader_pid | relid | received_lsn |      last_msg_send_time       |     last_msg_receipt_time     | latest_end_lsn |        latest_end_time
    ------+-----------------+------+------------+-------+--------------+-------------------------------+-------------------------------+----------------+-------------------------------
    16471 | my_subscription | 1080 |            |       | 0/300003A0   | 2024-08-13 20:25:08.011501+00 | 2024-08-13 20:25:08.013521+00 | 0/300003A0     | 2024-08-13 20:25:08.011501+00
    ```
@@ -138,7 +139,7 @@ Testing your logical replication setup ensures that data is being replicated cor
 
    ```bash
    SELECT pg_current_wal_lsn();
-   pg_current_wal_lsn 
+   pg_current_wal_lsn
    --------------------
    0/340010F0
    (1 row)
@@ -148,7 +149,7 @@ Testing your logical replication setup ensures that data is being replicated cor
 
    ```bash
    SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time from pg_catalog.pg_stat_subscription;
-      subname     | received_lsn | latest_end_lsn |     last_msg_receipt_time     
+      subname     | received_lsn | latest_end_lsn |     last_msg_receipt_time
    -----------------+--------------+----------------+-------------------------------
    my_subscription | 0/340010F0   | 0/340010F0     | 2024-08-13 20:29:37.783165+00
    (1 row)
