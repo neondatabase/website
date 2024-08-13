@@ -9,7 +9,7 @@ updatedOn: '2024-06-14T07:55:54.416Z'
 
 Most actions performed in the Neon Console can be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Using the Neon API requires an API key. This topic describes how to generate, revoke, and use API keys.
 
-API keys are global and belong to your Neon account. They can be used with any project that belongs to your Neon account. A Neon account can create unlimited API keys.
+API keys are global and belong to your Neon account. They can be used with any project that belongs to your Neon account. While there is no strict limit on the number of API keys you can create, we recommend keeping it under 10,000 per Neon account.
 
 ## Create an API key
 
