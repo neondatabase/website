@@ -131,18 +131,33 @@ Statistics collected by the Postgres [cumulative statistics system](https://www.
 
 ## Database encoding
 
-Neon does not currently support changing the database encoding. However, Neon does support [ICU Custom Collations](https://www.postgresql.org/docs/current/collation.html#ICU-CUSTOM-COLLATIONS), which lets you define collation objects using ICU as the collation provider. For example:
+Neon supports UTF8 encoding (Unicode, 8-bit variable-width encoding). This is the most widely used and recommended encoding for Postgres.
+
+## Collation support
+
+A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. A common standard provider, `libc`, uses locales provided by the operating system C library. By default, Neon uses the `C` collation provided by `libc`, which offers a simple binary sorting order based on the byte values of characters, without considering any locale-specific rules.
+
+Another provider is `icu`, which uses the external [ICU](https://icu.unicode.org/) library. In Neon, support for standard `libc` locales is limited. Instead, Neon provides predefined `icu` locales that you can use.
+
+To view available locales, use the query `SELECT * FROM pg_collation`, or the command `\dOS+` from the [Neon SQL Editor](/docs/connect/query-with-psql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
+
+To create a database with a predefined `icu` locale, you can issue a query similar to this one with your preferred locale:
 
 ```sql
-CREATE COLLATION german (provider = icu, locale = 'de');
-CREATE TABLE books (id int, title text COLLATE "german");
+CREATE DATABASE my_arabic_db
+LOCALE_PROVIDER icu
+icu_locale 'ar-x-icu'
+template template0;
 ```
 
-or
+To specify the locale for individual columns, you can use this syntax:
 
 ```sql
-CREATE COLLATION arabic (provider = icu, locale = 'ar');
-CREATE TABLE books (id int, title text COLLATE "arabic");
+CREATE TABLE my_ru_table (
+    id serial PRIMARY KEY,
+    russian_text_column text COLLATE "ru-x-icu",
+    description text
+);
 ```
 
 ## Event triggers
