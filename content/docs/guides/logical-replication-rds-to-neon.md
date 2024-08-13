@@ -17,6 +17,7 @@ Neon's logical replication feature allows you to replicate data from Amazon RDS 
   INSERT INTO playing_with_neon(name, value)
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
   ```
+
 - A destination Neon project. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
 ## Prepare your source database
@@ -46,8 +47,8 @@ To enable logical replication:
 3. Click **Edit**. In the **Filter parameters** search field, search for `rds.logical_replication`.
 4. Set the value to `1`, and click **Save Changes**.
 5. If you created a new parameter group, navigate back to your RDS instance page, click **Modify**, and scroll down to select your new parameter group. Click **Continue**, and select **Apply immediately** to make the change now, then click **Modify DB instance**.
-7. Reboot your instance to apply the new setting. From the **Actions** menu for your database, select **Reboot**.
-8. Make sure that the `wal_level` parameter is now set to `logical`:
+6. Reboot your instance to apply the new setting. From the **Actions** menu for your database, select **Reboot**.
+7. Make sure that the `wal_level` parameter is now set to `logical`:
 
    ```sql
    SHOW wal_level;
