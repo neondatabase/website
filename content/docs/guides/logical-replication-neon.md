@@ -289,7 +289,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   -H 'Content-Type: application/json' \
   -d '{
   "role": {
-    "name": "alex"
+    "name": "replication_user"
   }
 }' | jq
 ```
@@ -298,7 +298,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 </Tabs>
 
-You can verify that your role has the `REPLICATION` privilege by running the follow query:
+You can verify that your role has the `REPLICATION` privilege by running the following query:
 
 ```sql
 SELECT rolname, rolreplication

@@ -14,7 +14,14 @@ Neon's logical replication feature allows you to replicate data from your Neon P
 
 ## Prerequisites
 
-- A [Neon account](https://console.neon.tech/)
+- A source [Neon project](/docs/manage/projects#create-a-project) with a database containing the data you want to replicate. If you need some data to play with, you run the following statements from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client such as [psql](/docs/connect/query-with-psql-editor) to create a table with sample data:
+
+  ```sql shouldWrap
+  CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+  INSERT INTO playing_with_neon(name, value)
+  SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
+  ```
+
 - An [Airbyte account](https://airbyte.com/)
 - A [Snowflake account](https://www.snowflake.com/)
 
@@ -31,7 +38,7 @@ To enable logical replication in Neon:
 3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 
-You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client such as [psql](/docs/connect/query-with-psql-editor):
 
 ```sql
 SHOW wal_level;
@@ -42,7 +49,7 @@ SHOW wal_level;
 
 ## Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+It's recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
 <Tabs labels={["CLI", "Console", "API"]}>
 
@@ -51,7 +58,7 @@ It is recommended that you create a dedicated Postgres role for replicating data
 The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
 
 ```bash
-neon roles create --name alex
+neon roles create --name replication_user
 ```
 
 </TabItem>
@@ -81,7 +88,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   -H 'Content-Type: application/json' \
   -d '{
   "role": {
-    "name": "alex"
+    "name": "replication_user"
   }
 }' | jq
 ```
@@ -92,12 +99,12 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 ## Grant schema access to your Postgres role
 
-If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `alex`:
+If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `replication_user`:
 
 ```sql
-GRANT USAGE ON SCHEMA public TO alex;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO alex;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO alex;
+GRANT USAGE ON SCHEMA public TO replication_user;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO replication_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO replication_user;
 ```
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
@@ -125,25 +132,31 @@ Perform the following steps for each table you want to replicate data from:
 1. Add the replication identity (the method of distinguishing between rows) for each table you want to replicate:
 
    ```sql
-   ALTER TABLE tbl1 REPLICA IDENTITY DEFAULT;
+   ALTER TABLE <table_name> REPLICA IDENTITY DEFAULT;
    ```
 
    In rare cases, if your tables use data types that support [TOAST](https://www.postgresql.org/docs/current/storage-toast.html) or have very large field values, consider using `REPLICA IDENTITY FULL` instead:
 
    ```sql
-   ALTER TABLE tbl1 REPLICA IDENTITY FULL;
+   ALTER TABLE <table_name> REPLICA IDENTITY FULL;
    ```
 
 2. Create the Postgres publication. Include all tables you want to replicate as part of the publication:
 
    ```sql
-   CREATE PUBLICATION airbyte_publication FOR TABLE <tbl1, tbl2, tbl3>;
+   CREATE PUBLICATION airbyte_publication FOR TABLE <table_name, table_name, table_name>;
+   ```
+
+   Alternatively, you can create a publication for all tables:
+
+      ```sql
+   CREATE PUBLICATION airbyte_publication FOR ALL TABLES;
    ```
 
    The publication name is customizable. Refer to the [Postgres docs](https://www.postgresql.org/docs/current/logical-replication-publication.html) if you need to add or remove tables from your publication.
 
 <Admonition type="note">
-The Airbyte UI currently allows selecting any tables for Change Data Capture (CDC). If a table is selected that is not part of the publication, it will not be replicated even though it is selected. If a table is part of the publication but does not have a replication identity, the replication identity will be created automatically on the first run if the Postgres role you use with Airbyte has the necessary permissions.
+The Airbyte UI currently allows selecting any table for Change Data Capture (CDC). If a table is selected that is not part of the publication, it will not be replicated even though it is selected. If a table is part of the publication but does not have a replication identity, the replication identity will be created automatically on the first run if the Postgres role you use with Airbyte has the necessary permissions.
 </Admonition>
 
 ## Create a Postgres source in Airbyte
@@ -161,7 +174,7 @@ The Airbyte UI currently allows selecting any tables for Change Data Capture (CD
    - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
    - **Port**: 5432
    - **Database Name**: dbname
-   - **Username**: alex
+   - **Username**: replication_user
    - **Password**: AbC123dEf
 
    ![Airbyte Create a source](/docs/guides/airbyte_create_source.png)
@@ -175,11 +188,11 @@ The Airbyte UI currently allows selecting any tables for Change Data Capture (CD
    - In the **Publication** field, enter the name of the publication you created previously: `airbyte_publication`.
      ![Airbyte advanced fields](/docs/guides/airbyte_cdc_advanced_fields.png)
 
-## Allow inbound traffic
+### Allow inbound traffic
 
 If you are on Airbyte Cloud, and you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Airbyte's IP addresses. You can find a list of IPs that need to be allowlisted in the [Airbyte Security docs](https://docs.airbyte.com/operating-airbyte/security). For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
-## Complete the source setup
+### Complete the source setup
 
 To complete your source setup, click **Set up source** in the Airbyte UI. Airbyte will test the connection to your database. Once this succeeds, you've successfully configured an Airbyte Postgres source for your Neon database.
 
@@ -193,11 +206,13 @@ To complete your data integration setup, you can now add Snowflake as your desti
 
 ### Set up Airbyte entities in Snowflake
 
-To set up the Snowflake destination connector, you first need to create Airbyte entities in Snowflake (a warehouse, database, schema, user, and role) with the `OWNERSHIP` permission to write data into Snowflake.
+To set up the Snowflake destination connector, you first need to create Airbyte entities in Snowflake (a warehouse, database, schema, user, and role) with the `OWNERSHIP` permission to write data to Snowflake.
 
 You can use the following script in a new [Snowflake worksheet](https://docs.snowflake.com/en/user-guide/ui-worksheet) to create the entities.
 
-If you want to, you can edit the script to change the password to a more secure password and to change the names of other resources. If you do rename entities, make sure to follow [Sbowflake identifier requirements](https://docs.snowflake.com/en/sql-reference/identifiers-syntax).
+<Admonition type="note">
+If you want, you can edit the script to change the password to a more secure password and to change the names of other resources. If you do rename entities, make sure to follow [Sbowflake identifier requirements](https://docs.snowflake.com/en/sql-reference/identifiers-syntax).
+</Admonition>
 
 ```sql
 -- set variables (these need to be uppercase)
@@ -270,21 +285,51 @@ to role identifier($airbyte_role);
 commit;
 ```
 
-### Set up Snowflake as a destination in Airbyte
+### Set up Snowflake as a destination
 
-Navigate to Airbyte and set up Snowflake as a destination. You can authenticate using username/password or key pair authentication. We'll authenticate via user name and password in this example.
+To set up a new destination:
+
+1. Navigate to Airbyte.
+2. Select **New destination**.
+3. Select the Snowflake connector.
+4. Create the destination by filling in the required fields. You can authenticate using username/password or key pair authentication. We'll authenticate via username/password.
 
 | Field         | Description                                                                                                                              | Example                                            |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| **Host**      | The host domain of the Snowflake instance (must include the account, region, cloud environment, and end with snowflakecomputing.com).    | `accountname.us-east-2.aws.snowflakecomputing.com` |
-| **Role**      | The role you created in Step 1 for Airbyte to access Snowflake.                                                                          | `AIRBYTE_ROLE`                                     |
-| **Warehouse** | The warehouse you created in Step 1 for Airbyte to sync data into.                                                                       | `AIRBYTE_WAREHOUSE`                                |
-| **Database**  | The database you created in Step 1 for Airbyte to sync data into.                                                                        | `AIRBYTE_DATABASE`                                 |
+| **Host**      | The host domain of the Snowflake instance (must include the account, region, cloud environment, and end with `snowflakecomputing.com`).    | `<accountname>.us-east-2.aws.snowflakecomputing.com` |
+| **Role**      | The role you created for Airbyte to access Snowflake.                                                                          | `AIRBYTE_ROLE`                                     |
+| **Warehouse** | The warehouse you created for Airbyte to sync data into.                                                                       | `AIRBYTE_WAREHOUSE`                                |
+| **Database**  | The database you created for Airbyte to sync data into.                                                                        | `AIRBYTE_DATABASE`                                 |
 | **Schema**    | The default schema used as the target schema for all statements issued from the connection that do not explicitly specify a schema name. | -                                                  |
-| **Username**  | The username you created in Step 1 to allow Airbyte to access the database.                                                              | `AIRBYTE_USER`                                     |
+| **Username**  | The username you created to allow Airbyte to access the database.                                                              | `AIRBYTE_USER`                                     |
 | **Password**  | The password associated with the username.                                                                                               | -                                                  |
 
+When you're finished filling in the required fields, click **Set up destination**.
+
+![Airbyte Snowflake destination](/docs/guides/airbyte_snowflake_destination.png)
+
 ## Set up a connection
+
+In this step, you'll set up a connection between your Neon Postgres source and your Snowflake destination.
+
+To set up a new destination:
+
+1. Navigate to Airbyte.
+2. Select **New connection**.
+3. Select the existing Postgres source you created earlier.
+4. Select the existing Snowflake destination you created earlier.
+5. Select **Replicate source** as the sync mode.
+6. Click **Next**.
+7. On the **Configure connection** dialog, you can accept the defaults or modify the settings according to your requirements.
+8. Click **Finish & sync** to complete the setup.
+
+Your first sync may take a few moments. 
+
+## Verify the replication
+
+After the sync operation is complete, you can verify the replication by navigating to Snowflake, opening your Snowflake project, navigating to a worksheet, and querying your database to view the replicated data. For example, if you've replicated the `playing_with_neon` example table, you can run a `SELECT * FROM PLAYING_WITH_NEON;` query to view the replicated data.
+
+![Airbyte Snowflake verify replication](/docs/guides/airbyte_snowflake_verify.png)
 
 ## References
 
