@@ -149,7 +149,7 @@ Perform the following steps for each table you want to replicate data from:
 
    Alternatively, you can create a publication for all tables:
 
-      ```sql
+   ```sql
    CREATE PUBLICATION airbyte_publication FOR ALL TABLES;
    ```
 
@@ -294,15 +294,15 @@ To set up a new destination:
 3. Select the Snowflake connector.
 4. Create the destination by filling in the required fields. You can authenticate using username/password or key pair authentication. We'll authenticate via username/password.
 
-| Field         | Description                                                                                                                              | Example                                            |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| **Host**      | The host domain of the Snowflake instance (must include the account, region, cloud environment, and end with `snowflakecomputing.com`).    | `<accountname>.us-east-2.aws.snowflakecomputing.com` |
-| **Role**      | The role you created for Airbyte to access Snowflake.                                                                          | `AIRBYTE_ROLE`                                     |
-| **Warehouse** | The warehouse you created for Airbyte to sync data into.                                                                       | `AIRBYTE_WAREHOUSE`                                |
-| **Database**  | The database you created for Airbyte to sync data into.                                                                        | `AIRBYTE_DATABASE`                                 |
-| **Schema**    | The default schema used as the target schema for all statements issued from the connection that do not explicitly specify a schema name. | -                                                  |
-| **Username**  | The username you created to allow Airbyte to access the database.                                                              | `AIRBYTE_USER`                                     |
-| **Password**  | The password associated with the username.                                                                                               | -                                                  |
+| Field         | Description                                                                                                                              | Example                                              |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| **Host**      | The host domain of the Snowflake instance (must include the account, region, cloud environment, and end with `snowflakecomputing.com`).  | `<accountname>.us-east-2.aws.snowflakecomputing.com` |
+| **Role**      | The role you created for Airbyte to access Snowflake.                                                                                    | `AIRBYTE_ROLE`                                       |
+| **Warehouse** | The warehouse you created for Airbyte to sync data into.                                                                                 | `AIRBYTE_WAREHOUSE`                                  |
+| **Database**  | The database you created for Airbyte to sync data into.                                                                                  | `AIRBYTE_DATABASE`                                   |
+| **Schema**    | The default schema used as the target schema for all statements issued from the connection that do not explicitly specify a schema name. | -                                                    |
+| **Username**  | The username you created to allow Airbyte to access the database.                                                                        | `AIRBYTE_USER`                                       |
+| **Password**  | The password associated with the username.                                                                                               | -                                                    |
 
 When you're finished filling in the required fields, click **Set up destination**.
 
@@ -323,7 +323,7 @@ To set up a new destination:
 7. On the **Configure connection** dialog, you can accept the defaults or modify the settings according to your requirements.
 8. Click **Finish & sync** to complete the setup.
 
-Your first sync may take a few moments. 
+Your first sync may take a few moments.
 
 ## Verify the replication
 
