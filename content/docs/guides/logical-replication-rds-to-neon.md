@@ -27,13 +27,18 @@ rdsdb_owner@publisher=> show wal_level;
 (1 row)
 ```
 
-If your current setting is `replica`, follow these steps to enable logical replication:
+If your current setting is `replica`, follow these steps to enable logical replication. If you just created your database instance, you will need to create a new parameter group to set the value. You can do so by selecting **Parameter groups** from the sidebar and filling in the required fields.
+
+To enable logical replication:
 
 1. Navigate to the **Configuration** tab of your RDS instance.
-2. Click on the DB instance parameter group.
-3. Search for `rds.logical_replication` and set it to `1`. If you have the default parameter group, you will need to create a new parameter group to set the value.
-4. Click **Modify** on your RDS instance page, select new parameter group, then click **Continue and Apply**. After this step, reboot your instance.
-5. Check to maker sure that the `wal_level` parameter is set to `logical`.
+2. Under the **Configuration** heading, click on the **DB instance parameter group** link.
+3. Click **Edit**, and in the **Filter parameters** search field, search for `rds.logical_replication`.
+4. Set the value to `1`, and click **Save Changes**.
+4. If you created a new parameter group, navigate back to your RDS instance page, click **Modify**, and scroll down to select your new parameter group
+5. Click **Continue**, and select **Apply immediately** to make the change now, then click **Modify DB instance**. 
+6. After this step, reboot your instance. From the **Actions** menu for your database, select **Reboot**.
+5. Make sure that the `wal_level` parameter is set to `logical`.
 
    ```sql
    rdsdb_owner@publisher=> show wal_level;
@@ -43,16 +48,22 @@ If your current setting is `replica`, follow these steps to enable logical repli
    (1 row)
    ```
 
+For information about connecting to RDS from `psql`, see [Connect to a PostgreSQL DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html#CHAP_GettingStarted.Connecting.PostgreSQL).
+
 ### Allow connections from Neon
 
-You need to allow connections to your AWS RDS Postgres instance from Neon. You can do this by editing your instance's security group, which you can find a link to from your AWS RDS Postgres instance page.
+You need to allow inbound connections to your AWS RDS Postgres instance from Neon. You can do this by editing your instance's CIDR/IP - Inbound security group, which you can find a link to from your AWS RDS Postgres instance page.
 
-Add a rule that allows traffic from all of the IP addresses for your Neon project's region.
+1. Click on the security group name.
+2. Click on the security group ID.
+3. From the **Actions** menu, select **Edit inbound rules**.
+4. Add rules that allow traffic from each of the IP addresses for your Neon project's region.
 
-Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses by region.
+   Neon uses 3 to 6 IP addresses per region for outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses by region.
+5. When you're finished, click **Save rules**.
 
 <Admonition type="note">
-You could specify a rule for `0.0.0.0/0` to allow traffic from any IP address. However, this configuration is not considered secure.
+You can specify a rule for `0.0.0.0/0` to allow traffic from any IP address. However, this configuration is not considered secure.
 </Admonition>
 
 ### Create a publication on the source database
@@ -93,25 +104,27 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 
 ### Create a subscription
 
-After defining a publication on the source database, you need to define a subscription on the destination database.
+After defining a publication on the source database, you need to define a subscription on your Neon destination database.
 
 1. Use `psql` or another SQL client to connect to your destination database.
 2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement.
 
-   ```sql
-   CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb'
-   PUBLICATION my_publication;
+   ```sql shouldWarp
+   CREATE SUBSCRIPTION my_subscription CONNECTION 'postgresql://postgres:password@database-1.czmwaio8k05k.us-east-2.rds.amazonaws.com/postgres' PUBLICATION my_publication;
    ```
 
    - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source Neon database, where you defined the publication.
-   - `publication_name`: The name of the publication you created on the source Neon database.
+   - `connection_string`: The connection string for the source AWS RDS Postgres database, where you defined the publication.
+   - `publication_name`: The name of the publication you created on the source AWS RDS Postgres database.
 
 3. Verify the subscription was created by running the following command:
 
    ```sql
    SELECT * FROM pg_stat_subscription;
+
+   subid |     subname     | pid  | leader_pid | relid | received_lsn |      last_msg_send_time       |     last_msg_receipt_time     | latest_end_lsn |        latest_end_time        
+   ------+-----------------+------+------------+-------+--------------+-------------------------------+-------------------------------+----------------+-------------------------------
+   16471 | my_subscription | 1080 |            |       | 0/300003A0   | 2024-08-13 20:25:08.011501+00 | 2024-08-13 20:25:08.013521+00 | 0/300003A0     | 2024-08-13 20:25:08.011501+00
    ```
 
    The subscription (`my_subscription`) should be listed, confirming that your subscription has been successfully created.
@@ -124,33 +137,33 @@ Testing your logical replication setup ensures that data is being replicated cor
 2. On the source database in Amazon RDS, check the current Write-Ahead Log (WAL) LSN:
 
    ```bash
-   rdsdb_owner@publisher=> SELECT pg_current_wal_lsn();
-   pg_current_wal_lsn
+   SELECT pg_current_wal_lsn();
+   pg_current_wal_lsn 
    --------------------
-   0/7D213250
+   0/340010F0
    (1 row)
    ```
 
 3. Connect to your destination database in Neon and run the following query to view the received_lsn, latest_end_lsn, last_msg_receipt_time. The LSN values should match the `pg_current_wal_lsn` value on the source database and the the `last_msg_receipt_time` should be very recent.
 
-```bash
-neondb_owner@subscriber=> SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time from pg_catalog.pg_stat_subscription;
- subname | received_lsn | latest_end_lsn |     last_msg_receipt_time
----------+--------------+----------------+-------------------------------
- pgbench | 0/7D213250   | 0/7D213250     | 2024-08-02 18:37:16.70939+00
-(1 rows)
-```
+   ```bash
+   SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time from pg_catalog.pg_stat_subscription;
+      subname     | received_lsn | latest_end_lsn |     last_msg_receipt_time     
+   -----------------+--------------+----------------+-------------------------------
+   my_subscription | 0/340010F0   | 0/340010F0     | 2024-08-13 20:29:37.783165+00
+   (1 row)
+   ```
 
-As an extra check, you can also do a row count on the source and destination.
+4. As an extra check, you can also do a row count on the source and destination.
 
-```sql
-select count(*) from my_db;
+   ```sql
+   select count(*) from playing_with_neon;
 
- count
--------
-  7585
-(1 row)
-```
+   count
+   -------
+   30
+   (1 row)
+   ```
 
 ## Switch over your application
 
