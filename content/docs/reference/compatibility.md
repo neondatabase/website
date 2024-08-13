@@ -129,20 +129,35 @@ The Neon cloud service automatically closes idle connections after a period of i
 
 Statistics collected by the Postgres [cumulative statistics system](https://www.postgresql.org/docs/current/monitoring-stats.html) are not saved when a Neon compute (where Postgres runs) is suspended due to inactivity or restarted. For information about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). For information about configuring Neon's autosuspend behavior, see [Autosuspend](/docs/introduction/auto-suspend).
 
+
 ## Database encoding
 
-Neon does not currently support changing the database encoding. However, Neon does support [ICU Custom Collations](https://www.postgresql.org/docs/current/collation.html#ICU-CUSTOM-COLLATIONS), which lets you define collation objects using ICU as the collation provider. For example:
+Neon supports UTF8 encoding (Unicode, 8-bit variable-width encoding). This is the most widely used and recommended encoding for Postgres.
+
+## Collation support
+
+A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. A common standard provider name is `libc`, which uses the locales provided by the operating system C library. Another provider is `icu`, which uses the external ICU library. In Neon, support for standard `libc` locales is limited. Instead, Neon provides a large number of predefined `icu` locales that you can use. 
+
+To view available locales, use the query `SELECT * FROM pg_collation`, or the command `\dOS+` from the [Neon SQL Editor](/docs/connect/query-with-psql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
+
+To create a database with a predefined `icu` local, you can issue a query similar to this one with your preferred locale:
 
 ```sql
-CREATE COLLATION german (provider = icu, locale = 'de');
-CREATE TABLE books (id int, title text COLLATE "german");
+CREATE DATABASE arabic_db
+LOCALE_PROVIDER icu
+icu_locale 'ar-x-icu'
+template template0;
 ```
 
-or
+To specify the locale for individual columns that store text data types (such as `text`` or `varchar`), you can use this syntax:
+
 
 ```sql
-CREATE COLLATION arabic (provider = icu, locale = 'ar');
-CREATE TABLE books (id int, title text COLLATE "arabic");
+CREATE TABLE example_table (
+    id serial PRIMARY KEY,
+    russian_text_column text COLLATE "ru-x-icu",
+    description text
+);
 ```
 
 ## Event triggers
