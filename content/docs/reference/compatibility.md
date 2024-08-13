@@ -136,24 +136,24 @@ Neon supports UTF8 encoding (Unicode, 8-bit variable-width encoding). This is th
 
 ## Collation support
 
-A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. A common standard provider name is `libc`, which uses the locales provided by the operating system C library. Another provider is `icu`, which uses the external ICU library. In Neon, support for standard `libc` locales is limited. Instead, Neon provides a large number of predefined `icu` locales that you can use. 
+A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. A common standard provider, `libc`, uses locales provided by the operating system C library. Another provider is `icu`, which uses the external ICU library. In Neon, support for standard `libc` locales is limited. Instead, Neon provides predefined `icu` locales that you can use. 
 
 To view available locales, use the query `SELECT * FROM pg_collation`, or the command `\dOS+` from the [Neon SQL Editor](/docs/connect/query-with-psql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
 
-To create a database with a predefined `icu` local, you can issue a query similar to this one with your preferred locale:
+To create a database with a predefined `icu` locale, you can issue a query similar to this one with your preferred locale:
 
 ```sql
-CREATE DATABASE arabic_db
+CREATE DATABASE my_arabic_db
 LOCALE_PROVIDER icu
 icu_locale 'ar-x-icu'
 template template0;
 ```
 
-To specify the locale for individual columns that store text data types (such as `text`` or `varchar`), you can use this syntax:
+To specify the locale for individual columns, you can use this syntax:
 
 
 ```sql
-CREATE TABLE example_table (
+CREATE TABLE my_ru_table (
     id serial PRIMARY KEY,
     russian_text_column text COLLATE "ru-x-icu",
     description text
