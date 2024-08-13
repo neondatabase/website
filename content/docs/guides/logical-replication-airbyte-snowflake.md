@@ -208,7 +208,7 @@ To complete your data integration setup, you can now add Snowflake as your desti
 
 To set up the Snowflake destination connector, you first need to create Airbyte entities in Snowflake (a warehouse, database, schema, user, and role) with the `OWNERSHIP` permission to write data to Snowflake.
 
-You can use the following script in a new [Snowflake worksheet](https://docs.snowflake.com/en/user-guide/ui-worksheet) to create the entities.
+You can use the following script in a new [Snowflake worksheet](https://docs.snowflake.com/en/user-guide/ui-worksheet) to create the entities. This script is provided as part of [Airbyte's Snowflake connector setup guide](https://docs.airbyte.com/integrations/destinations/snowflake#setup-guide).
 
 <Admonition type="note">
 If you want, you can edit the script to change the password to a more secure password and to change the names of other resources. If you do rename entities, make sure to follow [Sbowflake identifier requirements](https://docs.snowflake.com/en/sql-reference/identifiers-syntax).
