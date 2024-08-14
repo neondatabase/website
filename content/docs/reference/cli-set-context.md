@@ -42,11 +42,11 @@ neon projects create --name <project_name> --set-context <your_context_file>
 
 The `set-context` command requires you set at least one of these options:
 
-| Option           | Description        | Type   | Required                                                                                         |
-| ---------------- | ------------------ | ------ | :----------------------------------------------------------------------------------------------: |
-| `--project-id`   | Project ID         | string | Sets the identified project as the context until you reset or remove context-file                |
+| Option           | Description        | Type   |                                               Required                                               |
+| ---------------- | ------------------ | ------ | :--------------------------------------------------------------------------------------------------: |
+| `--project-id`   | Project ID         | string |          Sets the identified project as the context until you reset or remove context-file           |
 | `--org-id`       | Organization ID    | string | Sets the organization context, which allows you to perform actions in the context of an organization |
-| `--context-file` | Path and file name | string | Creates a file that holds organization-id, project-id, and branch context                                          |
+| `--context-file` | Path and file name | string |              Creates a file that holds organization-id, project-id, and branch context               |
 
 [Global options](/docs/reference/neon-cli#global-options) are also supported.
 
