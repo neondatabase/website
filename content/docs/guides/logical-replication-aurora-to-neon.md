@@ -17,6 +17,7 @@ Neon's logical replication feature allows you to replicate data from Aurora Post
    INSERT INTO playing_with_neon(name, value)
    SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
   ```
+
 - A destination Neon project. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
 ## Prepare your source database
@@ -27,7 +28,7 @@ Neon's logical replication feature allows you to replicate data from Aurora Post
 
 2. From the navigation pane, select your Aurora PostgreSQL DB cluster.
 
-3. Go to the **Configuration** tab. Locate the **DB cluster parameter group** link. 
+3. Go to the **Configuration** tab. Locate the **DB cluster parameter group** link.
 
    <Admonition type="note">
    If you are using the default parameter group, you will need to create a custom parameter group to set the value. You can do so by selecting **Parameter groups** > **Create parameter group** from the sidebar, selecting **Aurora PostgreSQL** as the engine type, and filling in the required fields. When you're finished, navigate back to your RDS instance page, click **Modify**, and scroll down to select your new parameter group. Click **Continue**, and select **Apply immediately** to make the change now, then click **Modify DB instance**.
@@ -142,7 +143,7 @@ After defining a publication on the source database, you need to define a subscr
    ```sql
    SELECT * FROM pg_stat_subscription;
 
-   subid |     subname     | pid | leader_pid | relid | received_lsn |      last_msg_send_time       |     last_msg_receipt_time     | latest_end_lsn |        latest_end_time        
+   subid |     subname     | pid | leader_pid | relid | received_lsn |      last_msg_send_time       |     last_msg_receipt_time     | latest_end_lsn |        latest_end_time
    ------+-----------------+-----+------------+-------+--------------+-------------------------------+-------------------------------+----------------+-------------------------------
    16471 | my_subscription | 932 |            |       | 0/401CB10    | 2024-08-14 11:57:34.148184+00 | 2024-08-14 11:57:34.148388+00 | 0/401CB10      | 2024-08-14 11:57:34.148184+00
    (1 row)
