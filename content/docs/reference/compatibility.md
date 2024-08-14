@@ -34,7 +34,7 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 The following table shows parameter settings that are set explicitly for your Neon Postgres instance. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size.
 
 <Admonition type="note">
-Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a session context, but if you are a paid plan user and require a different setting, you can contact [Neon Support](/docs/introduction/support) to see if a different setting can be supported.
+Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role), but if you are a paid plan user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the setting can be supported.
 </Admonition>
 
 | Parameter                             | Value         | Note                                                                                                                                                                          |
@@ -89,9 +89,9 @@ Of the parameter settings listed above, the `maintenance_work_mem`, `max_connect
 You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
-### Configuring Postgres parameters in a session context
+### Configuring Postgres parameters for a session, database, or role
 
-Neon permits configuring parameters that have a `user` context, meaning that the parameter can be set by a connected user within a specific session using a [SET](https://www.postgresql.org/docs/current/sql-set.html) command. These parameters are also referred to as "run-time parameters". You can identify Postgres parameters with a `user` context by running the following command:
+Neon permits configuring parameters that have a `user` context, meaning that the parameter can be set for a session, database, or role. You can identify Postgres parameters with a `user` context by running the following command:
 
 ```sql
 SELECT name
@@ -99,10 +99,22 @@ FROM pg_settings
 WHERE context = 'user';
 ```
 
+To set a parameter for a specific session, use a [SET](https://www.postgresql.org/docs/current/sql-set.html) command.
+
 For example, the `maintenance_work_mem` parameter supports a `user` context, which lets you set it for the current session with a `SET` command:
 
 ```sql
 SET maintenance_work_mem='1 GB';
+```
+
+To set parameters for a database or role:
+
+```sql
+ALTER DATABASE neondb SET maintenance_work_mem='1 GB';
+```
+
+```sql
+ALTER USER neondb_owner SET maintenance_work_mem='1 GB';
 ```
 
 ## Postgres server logs
