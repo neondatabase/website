@@ -441,10 +441,14 @@
           items:
             - title: Airbyte
               slug: guides/logical-replication-airbyte
+            - title: Aurora
+              slug: guides/logical-replication-aurora-to-neon
             - title: Bemi
               slug: guides/bemi
             - title: ClickHouse (DoubleCloud)
               slug: guides/logical-replication-clickhouse
+            - title: Cloud SQL
+              slug: guides/logical-replication-cloud-sql
             - title: Confluent
               slug: guides/logical-replication-kafka-confluent
             - title: Decodable
@@ -453,10 +457,14 @@
               slug: guides/logical-replication-fivetran
             - title: Materialize
               slug: guides/logical-replication-materialize
+            - title: Neon to Neon
+              slug: guides/logical-replication-neon-to-neon
             - title: Postgres
               slug: guides/logical-replication-postgres
             - title: Sequin
               slug: guides/sequin
+            - title: AWS RDS
+              slug: guides/logical-replication-rds-to-neon
             - title: Snowflake
               slug: guides/logical-replication-airbyte-snowflake
         - section: Schema Migration

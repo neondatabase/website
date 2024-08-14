@@ -38,7 +38,7 @@ SHOW wal_level;
 For information about connecting to RDS from `psql`, see [Connect to a PostgreSQL DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html#CHAP_GettingStarted.Connecting.PostgreSQL).
 </Admonition>
 
-If your current setting is `replica`, follow these steps to enable logical replication. If you just created your database instance, you will need to create a new parameter group to set the value. You can do so by selecting **Parameter groups** > **Create parameter group** from the sidebar and filling in the required fields.
+If your current setting is `replica`, follow these steps to enable logical replication. If you are using the default parameter group, you will need to create a new parameter group to set the value. You can do so by selecting **Parameter groups** > **Create parameter group** from the sidebar and filling in the required fields.
 
 To enable logical replication:
 
@@ -151,6 +151,7 @@ Testing your logical replication setup ensures that data is being replicated cor
 
    ```sql
    SELECT pg_current_wal_lsn();
+
    pg_current_wal_lsn
    --------------------
    0/340010F0
@@ -170,7 +171,7 @@ Testing your logical replication setup ensures that data is being replicated cor
 4. As an extra check, you can also perform a row count on the source and destination to make sure the result matches.
 
    ```sql
-   select count(*) from playing_with_neon;
+   SELECT COUNT(*) FROM playing_with_neon;
 
    count
    -------
