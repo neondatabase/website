@@ -47,55 +47,47 @@ Afterward, you can verify that logical replication is enabled by running `SHOW w
 
 ### Allow connections from Neon
 
-You need to allow connections to your AlloyDB Postgres instance from Neon. To do this in Google Cloud:
+You need to allow connections to your AlloyDB Postgres instance from Neon. To do this in your AlloyDB instance:
 
-In the Google Cloud console, go to the AlloyDB Instances page.
-
-1. To open the **Overview** page of your instance, click the instance name.
-2. From the SQL navigation menu, select **Connections**.
-3. Click the **Networking** tab.
-4. Select the **Public IP** checkbox.
-5. Click **Add network**.
-6. Optionally, in the **Name** field, enter a name for this network.
-7. In the **Network** field, enter the IP address from which you want to allow connections. You will need to perform this step for each of NAT gateway IP addresses associated with your Neon project's region. Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses by region.
+1. In the Google Cloud console, navigate to your [AlloyDB Clusters](https://console.cloud.google.com/alloydb/clusters) page and select your **Primary instance** to open the **Overview** page.
+2. Scroll down to the **Instances in your cluster** section.
+3. Click **Edit Primary**.
+4. Select the **Enable public IP** checkbox to allow connections over the public internet.
+5. Under **Authorized external networks**, enter the Neon IP addresses from which you want to allow connections. Add an entry for each of NAT gateway IP addresses associated with your Neon project's region. Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses by region.
 
    <Admonition type="note">
    AlloyDB requires that addresses are specified in CIDR notation. You can do so by appending `/32` to the NAT Gateway IP address; for example: `18.217.181.229/32`
    </Admonition>
 
-   In the example shown below, you can see that three addresses were added, named `Neon1`, `Neon2`, and `Neon3`. You can name them whatever you like. The addresses were added in CIDR format by appending adding `/32`.
+   In the example shown below, you can see that three addresses were added in CIDR format by appending adding `/32`.
 
-   ![AlloyDB network configuration](/docs/guides/cloud_sql_network_config.png)
+   ![AlloyDB network configuration](/docs/guides/alloydb_network_config.png)
 
-8. Click **Done** after adding a Network entry.
-9. Click **Save** when you are finished adding Network entries for all of your Neon project's NAT Gateway IP addresses.
-
-<Admonition type="note">
-You may specify a single Network entry using `0.0.0.0/0` to allow traffic from any IP address. However, this configuration is not considered secure and will trigger a warning.
-</Admonition>
+8. Under **Network Security**, select **Require SSL Encryption (default)** if it's not already selected.
+9. Click **Update Instance** when you are finished.
 
 ### Note your public IP address
 
-Record the public IP address of your AlloyDB Postgres instance. You'll need this value later when you set up a subscription from your Neon database. You can find the public IP address on your AlloyDB instance's **Overview** page.
+Record the public IP address of your AlloyDB Postgres instance. You'll need this value later when you set up a subscription from your Neon database. You can find the public IP address on your AlloyDB instance's **Overview** page, under **Instances in your cluster** > **Connectivity**.
 
-![Clould SQL public IP address](/docs/guides/cloud_sql_public_ip.png)
+![AlloyDB public IP address](/docs/guides/alloydb_public_ip.png)
 
 ### Create a Postgres role for replication
 
 It is recommended that you create a dedicated Postgres role for replicating data from your AlloyDB Postgres instance. The role must have the `REPLICATION` privilege. On your AlloyDB Postgres instance, login in as your `postgres` user or an administrative user you use to create roles and run the following command to create a replication role. You can replace the name `REPLICATION_USER` with whatever role name you want to use.
 
 ```sql shouldWrap
-CREATE USER REPLICATION_USER WITH REPLICATION IN ROLE cloudsqlsuperuser LOGIN PASSWORD 'REPLICATION_USER_PASSWORD';
+CREATE USER replication_user WITH REPLICATION IN ROLE alloydbsuperuser LOGIN PASSWORD 'replication_user_password';
 ```
 
 ### Grant schema access to your Postgres role
 
-If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to a Postgres role named `REPLICATION_USER`:
+If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to a Postgres role named `replication_user`:
 
 ```sql
-GRANT USAGE ON SCHEMA public TO REPLICATION_USER;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO REPLICATION_USER;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO REPLICATION_USER;
+GRANT USAGE ON SCHEMA public TO replication_user;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO replication_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO replication_user;
 ```
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
@@ -144,12 +136,12 @@ After defining a publication on the source database, you need to define a subscr
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'host=<primary-ip> port=5432 dbname=postgres user=replication_user password=replicapassword'
+   CONNECTION 'host=<primary-ip> port=5432 dbname=postgres user=replication_user password=replication_user_password'
    PUBLICATION my_publication;
    ```
 
    - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source AlloyDB database, where you defined the publication. For the `<primary_ip>`, use the public IP address of your AlloyDB Postgres instance that you noted earlier, and specify the name and password of the replication role you created earlier. If you're replicating from a database other than `postgres`, be sure to specify that database name.
+   - `connection_string`: The connection string for the source AlloyDB database, where you defined the publication. For the `<primary_ip>`, use the public IP address of your AlloyDB Postgres instance that you noted earlier, and specify the name and password of your replication role. If you're replicating from a database other than `postgres`, be sure to specify that database name.
    - `publication_name`: The name of the publication you created on the source Neon database.
 
 2. Verify the subscription was created by running the following command:
@@ -162,37 +154,23 @@ After defining a publication on the source database, you need to define a subscr
 
 ## Test the replication
 
-Testing your logical replication setup ensures that data is being replicated correctly from the publisher to the subscriber database. You can do this in three steps:
+Testing your logical replication setup ensures that data is being replicated correctly from the publisher to the subscriber database.
 
-1. Run some data modifying queries on the source database (inserts, updates, or deletes).
-2. On the source Postgres database in AlloyDB, check the current Write-Ahead Log (WAL) LSN:
-
-   ```bash
-   SELECT pg_current_wal_lsn();
-   pg_current_wal_lsn
-   --------------------
-   0/7D213250
-   (1 row)
-   ```
-
-3. Connect to your destination database in Neon and run the following query to view the received_lsn, latest_end_lsn, last_msg_receipt_time. The LSN values should match the `pg_current_wal_lsn` value on the source database and the the `last_msg_receipt_time` should be very recent.
-
-   ```bash
-   SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time from pg_catalog.pg_stat_subscription;
-   subname | received_lsn | latest_end_lsn |     last_msg_receipt_time
-   ---------+--------------+----------------+-------------------------------
-   mysubscription | 0/7D213250   | 0/7D213250     | 2024-08-02 18:37:16.70939+00
-   (1 rows)
-   ```
-
-4. As an extra check, you can also do a row count on the source and destination.
+1. Run some data modifying queries on the source database (inserts, updates, or deletes). If you're using the `playing_with_neon` database, you can use this statement to insert 10 rows:
 
    ```sql
-   select count(*) from my_db;
+   INSERT INTO playing_with_neon(name, value)
+   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
+   ```
+
+2. Perform a row count on the source and destination databases to make sure the result matches.
+
+   ```sql
+   SELECT COUNT(*) FROM playing_with_neon;
 
    count
    -------
-   7585
+   30
    (1 row)
    ```
 
