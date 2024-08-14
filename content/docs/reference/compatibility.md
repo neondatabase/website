@@ -133,13 +133,47 @@ Statistics collected by the Postgres [cumulative statistics system](https://www.
 
 Neon supports UTF8 encoding (Unicode, 8-bit variable-width encoding). This is the most widely used and recommended encoding for Postgres.
 
+To view the encoding and collation for your database, you can run the following query:
+
+```sql
+SELECT
+    pg_database.datname AS database_name,
+    pg_encoding_to_char(pg_database.encoding) AS encoding,
+    pg_database.datcollate AS collation,
+    pg_database.datctype AS ctype
+FROM
+    pg_database
+WHERE
+    pg_database.datname = 'your_database_name';
+```
+
+You can also issue this command from [psql](/docs/connect/query-with-psql-editor) or the Neon SQL Editor:
+
+```bash
+\l
+```
+
+<Admonition type="note">
+In Postgres, you cannot change a database's encoding or collation after it has been created.
+</Admonition>
+
 ## Collation support
 
-A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. A common standard provider, `libc`, uses locales provided by the operating system C library. By default, Neon uses the `C` collation provided by `libc`, which offers a simple binary sorting order based on the byte values of characters, without considering any locale-specific rules.
+A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. A common standard provider, `libc`, uses locales provided by the operating system C library. By default, Neon uses the `C` collation provided by `libc`, which offers a simple binary sorting order based on the byte values of characters.
 
-Another provider is `icu`, which uses the external [ICU](https://icu.unicode.org/) library. In Neon, support for standard `libc` locales is limited. Instead, Neon provides predefined `icu` locales that you can use.
+The `C.UTF-8` collation is also available. While the `C` collation is strictly binary and limited to ASCII characters, `C.UTF-8` supports the full range of UTF-8 encoded characters. To create a database with that collation, you can use the following syntax:
 
-To view available locales, use the query `SELECT * FROM pg_collation`, or the command `\dOS+` from the [Neon SQL Editor](/docs/connect/query-with-psql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
+```sql
+CREATE DATABASE my_database
+ENCODING 'UTF8'
+LC_COLLATE 'C.UTF-8'
+LC_CTYPE 'C.UTF-8'
+template template0;
+```
+
+Another provider supported by Neon is `icu`, which uses the external [ICU](https://icu.unicode.org/) library. In Neon, support for standard `libc` locales is limited compared to what you might find in a locally installed Postgres instance where there's typically a wider range of locales provided by libraries installed on your operating system. For this reason, Neon provides a full series of [predefined icu locales](https://www.postgresql.org/docs/current/collation.html#COLLATION-MANAGING-PREDEFINED-ICU) in case you require locale-specific sorting or case conversions.
+
+To view all of the predefined locales available to you, use the query `SELECT * FROM pg_collation`, or the command `\dOS+` from the [Neon SQL Editor](/docs/connect/query-with-psql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
 
 To create a database with a predefined `icu` locale, you can issue a query similar to this one with your preferred locale:
 
@@ -159,6 +193,10 @@ CREATE TABLE my_ru_table (
     description text
 );
 ```
+
+ICU also supports creating custom collations. For more information, see [ICU Custom Collations](https://www.postgresql.org/docs/current/collation.html#ICU-CUSTOM-COLLATIONS).
+
+For more about collations in Postgres, see [Collation Support](https://www.postgresql.org/docs/current/collation.html#COLLATION).
 
 ## Event triggers
 
