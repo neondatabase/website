@@ -136,14 +136,14 @@ Neon supports UTF8 encoding (Unicode, 8-bit variable-width encoding). This is th
 To view the encoding and collation for your database, you can run the following query:
 
 ```sql
-SELECT 
+SELECT
     pg_database.datname AS database_name,
     pg_encoding_to_char(pg_database.encoding) AS encoding,
     pg_database.datcollate AS collation,
     pg_database.datctype AS ctype
-FROM 
+FROM
     pg_database
-WHERE 
+WHERE
     pg_database.datname = 'your_database_name';
 ```
 
