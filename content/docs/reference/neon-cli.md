@@ -281,7 +281,7 @@ Global options are supported with any Neon CLI command.
 
 - <a id="context-file"></a>`--context-file`
 
-  Sets a background context for your CLI sessions, letting you perform project or branch-specific actions without having to specify the project or branch id in every command. For example, this command lists all branches using the `branches list` command. No need to specify the project since the context file provides it.
+  Sets a background context for your CLI sessions, letting you perform organization, project, or branch-specific actions without having to specify the relevant id in every command. For example, this command lists all branches using the `branches list` command. No need to specify the project since the context file provides it.
 
   ```bash
   neon branches list --context-file path/to/context_file_name

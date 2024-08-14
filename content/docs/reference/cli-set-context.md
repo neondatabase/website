@@ -42,10 +42,11 @@ neon projects create --name <project_name> --set-context <your_context_file>
 
 The `set-context` command requires you set at least one of these options:
 
-| Option           | Description        | Type   |                                     Required                                      |
-| ---------------- | ------------------ | ------ | :-------------------------------------------------------------------------------: |
-| `--project-id`   | Project ID         | string | Sets the identified project as the context until you reset or remove context-file |
-| `--context-file` | path and file name | string |              Creates a file that holds project-id and branch context              |
+| Option           | Description        | Type   | Required                                                                                         |
+| ---------------- | ------------------ | ------ | :----------------------------------------------------------------------------------------------: |
+| `--project-id`   | Project ID         | string | Sets the identified project as the context until you reset or remove context-file                |
+| `--org-id`       | Organization ID    | string | Sets the organization context, which allows you to perform actions in the context of an organization |
+| `--context-file` | Path and file name | string | Creates a file that holds organization-id, project-id, and branch context                                          |
 
 [Global options](/docs/reference/neon-cli#global-options) are also supported.
 
@@ -58,16 +59,16 @@ Here are some examples of setting contexts to specific projects, then using them
 Set the context to the default `.neon` file:
 
 ```bash
-neon set-context --project-id patient-frost-50125040
+neon set-context --project-id patient-frost-50125040 --org-id org-bright-sky-12345678
 ```
 
-List all branches for this project using `branches list`. You do not need to include `--project-id` even though multiple projects exist for this account:
+List all branches for this project using `branches list`. You do not need to include `--project-id` or `--org-id` even though multiple projects exist for this account:
 
 ```bash
 neon branches list
 ```
 
-The results show details for all branches in the `patient-frost-50125040` project:
+The results show details for all branches in the `patient-frost-50125040` project within the `org-bright-sky-12345678` organization:
 
 ```bash
 ┌──────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
