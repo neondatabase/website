@@ -156,65 +156,69 @@ const icons = {
   x: X,
 };
 
-const DetailIconCards = ({ children = null, withNumbers = false }) => (
-  <ul className="not-prose !my-10 grid grid-cols-2 gap-5 !p-0 sm:grid-cols-1">
-    {React.Children.map(children, (child, index) => {
-      const { children, href, description, icon } = child.props ?? {};
-      const Icon = icons[icon];
+const DetailIconCards = ({ children = null, withNumbers = false }) => {
+  const ListComponent = withNumbers ? 'ol' : 'ul';
 
-      return (
-        <li className="!m-0 flex before:hidden" key={index}>
-          <Link
-            className={clsx(
-              'relative flex w-full items-start rounded-[10px] border border-gray-new-94 py-5 transition-colors duration-200',
-              withNumbers ? 'min-h-[109px] gap-x-0.5 px-5' : 'gap-x-3.5 px-6',
-              'before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200',
-              'hover:border-gray-new-80 hover:before:opacity-100',
-              'dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30 sm:p-3'
-            )}
-            to={href}
-          >
-            <div
+  return (
+    <ListComponent className="not-prose !my-10 grid auto-rows-fr grid-cols-2 gap-5 !p-0 sm:grid-cols-1">
+      {React.Children.map(children, (child, index) => {
+        const { children, href, description, icon } = child.props ?? {};
+        const Icon = icons[icon];
+
+        return (
+          <li className="!m-0 flex before:hidden" key={index}>
+            <Link
               className={clsx(
-                'relative z-10 shrink-0',
-                withNumbers
-                  ? 'w-6 text-lg font-medium leading-tight tracking-extra-tight text-green-45'
-                  : 'mt-0.5 h-4 w-4 text-secondary-8 dark:text-green-45'
+                'relative flex w-full items-start rounded-[10px] border border-gray-new-94 py-5 transition-colors duration-200',
+                withNumbers ? 'gap-x-0.5 px-5' : 'gap-x-3.5 px-6',
+                'before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200',
+                'hover:border-gray-new-80 hover:before:opacity-100',
+                'dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30 sm:p-3'
               )}
+              to={href}
             >
-              {withNumbers ? (
-                <span>{index + 1}.</span>
-              ) : (
-                <div
-                  className={clsx(
-                    'h-full w-full',
-                    withNumbers &&
-                      'dark:rounded dark:bg-gradient-to-b dark:from-gray-new-15 dark:from-30% dark:to-[#1D1E20] dark:p-[5px]'
-                  )}
-                >
-                  <Icon className="h-full w-full" />
-                </div>
-              )}
-            </div>
-            <div className="relative z-10 flex flex-col gap-x-2.5">
-              <h3 className="text-lg font-semibold leading-tight text-black-new dark:text-white">
-                {children}
-              </h3>
-              <p
+              <div
                 className={clsx(
-                  'text-sm leading-normal text-gray-new-50 dark:text-gray-new-80',
-                  withNumbers ? 'mt-1' : 'mt-2.5'
+                  'relative z-10 shrink-0 text-secondary-8 dark:text-green-45',
+                  withNumbers
+                    ? 'w-6 text-lg font-medium leading-tight tracking-extra-tight'
+                    : 'mt-0.5 h-4 w-4'
                 )}
               >
-                {description}
-              </p>
-            </div>
-          </Link>
-        </li>
-      );
-    })}
-  </ul>
-);
+                {withNumbers ? (
+                  <span>{index + 1}.</span>
+                ) : (
+                  <div
+                    className={clsx(
+                      'h-full w-full',
+                      withNumbers &&
+                        'dark:rounded dark:bg-gradient-to-b dark:from-gray-new-15 dark:from-30% dark:to-[#1D1E20] dark:p-[5px]'
+                    )}
+                  >
+                    <Icon className="h-full w-full" />
+                  </div>
+                )}
+              </div>
+              <div className="relative z-10 flex flex-col gap-x-2.5">
+                <h3 className="text-lg font-semibold leading-tight text-black-new dark:text-white">
+                  {children}
+                </h3>
+                <p
+                  className={clsx(
+                    'text-sm leading-normal text-gray-new-50 dark:text-gray-new-80',
+                    withNumbers ? 'mt-1' : 'mt-2.5'
+                  )}
+                >
+                  {description}
+                </p>
+              </div>
+            </Link>
+          </li>
+        );
+      })}
+    </ListComponent>
+  );
+};
 
 DetailIconCards.propTypes = {
   children: PropTypes.node,

@@ -11,8 +11,8 @@ import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsList from 'components/pages/doc/docs-list';
-import HeadBlock from 'components/pages/doc/head-block';
 import IncludeBlock from 'components/pages/doc/include-block';
+import InfoBlock from 'components/pages/doc/info-block';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
@@ -127,7 +127,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   CommunityBanner,
   Tabs,
   TabItem,
-  HeadBlock,
+  InfoBlock,
   DocsList,
   CTA: DocCta,
   ...sharedComponents,

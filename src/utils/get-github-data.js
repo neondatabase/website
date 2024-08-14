@@ -4,7 +4,7 @@ const getGithubStars = async () => {
   const response = await fetch(API_URL, { next: { revalidate: 60 * 60 * 12 } });
   const json = await response.json();
   if (response.status >= 400) {
-    // throw new Error('Error fetching GitHub stars');
+    throw new Error('Error fetching GitHub stars');
   }
   return json.stargazers_count;
 };
