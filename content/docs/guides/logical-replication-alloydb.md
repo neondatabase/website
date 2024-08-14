@@ -1,16 +1,16 @@
 ---
-title: Replicate data from Cloud SQL Postgres
-subtitle: Learn how to replicate data from Google Cloud SQL Postgres to Neon
+title: Replicate data from AlloyDB
+subtitle: Learn how to replicate data from AlloyDB to Neon
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-08-02T17:25:18.435Z'
 ---
 
-The guide describes how to replicate data from Cloud SQL Postgres using native Postgres logical replication, as described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the Google Cloud SQL documentation.
+The guide describes how to replicate data from AlloyDB Postgres using native Postgres logical replication, as described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the Google AlloyDB documentation.
 
 ## Prerequisites
 
-- A Cloud SQL Postgres instance containing the data you want to replicate. If you need some data to play with, you can use the following statements to create a table with sample data. Your database and schema may differ.
+- An AlloyDB Postgres instance containing the data you want to replicate. If you need some data to play with, you can use the following statements to create a table with sample data. Your database and schema may differ.
 
   ```sql shouldWrap
   CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
@@ -19,41 +19,37 @@ The guide describes how to replicate data from Cloud SQL Postgres using native P
   ```
 
   <Admonition type="note">
-  This guide uses the default `postgres` data and `public` schema in the Cloud SQL Postgres instance. Your database and schema may differ, but the same steps should apply.
+  This guide uses the default `postgres` data and `public` schema in the AlloyDB Postgres instance. Your database and schema may differ, but the same steps should apply.
   </Admonition>
 
 - A Neon project with a Postgres database to receive the replicated data. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
-## Prepare your Cloud SQL source database
+## Prepare your AlloyDB source database
 
-This section describes how to prepare your source Cloud SQL Postgres instance (the publisher) for replicating data to Neon.
+This section describes how to prepare your source AlloyDB Postgres instance (the publisher) for replicating data to Neon.
 
 ### Enable logical replication
 
-The first step is to enable logical replication at the source Postgres instance. In Cloud SQL, you can enable logical replication for your Postgres instance by setting the `cloudsql.logical_decoding` flag to `on`. This action will set the Postgres `wal_level` parameter to `logical`.
+The first step is to enable logical replication at the source Postgres instance. In AlloyDB, you can enable logical replication for your Postgres instance by setting the `alloydb.enable_pglogical` and `alloydb.logical_decoding` flags to `on`. This action will set the Postgres `wal_level` parameter to `logical`.
 
-To enable this flag:
+To enable these flags:
 
-1. In the Google Cloud console, select the project that contains the Cloud SQL instance for which you want to set a database flag.
-2. Open the instance and click **Edit**.
-3. Scroll down to the **Flags** section.
-4. If this flag has not been set on the instance before, click **Add item**, choose the flag from the drop-down menu, and set its value to `On`.
-5. Click **Save** to save your changes.
-6. Confirm your changes under **Flags** on the **Overview** page.
+1. In the Google Cloud console, navigate to your [AlloyDB Clusters](https://console.cloud.google.com/alloydb/clusters) page.
+2. From the **Actions** menu for your Primary instance, select **Edit**.
+3. Scroll down to the **Advanced Configurations Options** > **Flags** section.
+4. If these flags have not been set on the instance before, click **Add a Database Flag**, and set the value to `on` for the `alloydb.enable_pglogical` and `alloydb.logical_decoding` flags.
+5. Click **Update instance** to save your changes.
+6. Confirm your selections.
 
-The change requires restarting the instance:
+Afterward, you can verify that logical replication is enabled by running `SHOW wal_level;` from **AlloyDB Studio** or your terminal.
 
-![Clod SQL instance restart](/docs/guides/cloud_sql_restart.png)
-
-Afterward, you can verify that logical replication is enabled by running `SHOW wal_level;` from **Cloud SQL Studio** or your terminal.
-
-![show wal_level](/docs/guides/cloud_sql_show_wal_level.png)
+![show wal_level](/docs/guides/alloydb_show_wal_level.png)
 
 ### Allow connections from Neon
 
-You need to allow connections to your Cloud SQL Postgres instance from Neon. To do this in Google Cloud:
+You need to allow connections to your AlloyDB Postgres instance from Neon. To do this in Google Cloud:
 
-In the Google Cloud console, go to the Cloud SQL Instances page.
+In the Google Cloud console, go to the AlloyDB Instances page.
 
 1. To open the **Overview** page of your instance, click the instance name.
 2. From the SQL navigation menu, select **Connections**.
@@ -64,12 +60,12 @@ In the Google Cloud console, go to the Cloud SQL Instances page.
 7. In the **Network** field, enter the IP address from which you want to allow connections. You will need to perform this step for each of NAT gateway IP addresses associated with your Neon project's region. Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses by region.
 
    <Admonition type="note">
-   Cloud SQL requires that addresses are specified in CIDR notation. You can do so by appending `/32` to the NAT Gateway IP address; for example: `18.217.181.229/32`
+   AlloyDB requires that addresses are specified in CIDR notation. You can do so by appending `/32` to the NAT Gateway IP address; for example: `18.217.181.229/32`
    </Admonition>
 
    In the example shown below, you can see that three addresses were added, named `Neon1`, `Neon2`, and `Neon3`. You can name them whatever you like. The addresses were added in CIDR format by appending adding `/32`.
 
-   ![Cloud SQL network configuration](/docs/guides/cloud_sql_network_config.png)
+   ![AlloyDB network configuration](/docs/guides/cloud_sql_network_config.png)
 
 8. Click **Done** after adding a Network entry.
 9. Click **Save** when you are finished adding Network entries for all of your Neon project's NAT Gateway IP addresses.
@@ -80,13 +76,13 @@ You may specify a single Network entry using `0.0.0.0/0` to allow traffic from a
 
 ### Note your public IP address
 
-Record the public IP address of your Cloud SQL Postgres instance. You'll need this value later when you set up a subscription from your Neon database. You can find the public IP address on your Cloud SQL instance's **Overview** page.
+Record the public IP address of your AlloyDB Postgres instance. You'll need this value later when you set up a subscription from your Neon database. You can find the public IP address on your AlloyDB instance's **Overview** page.
 
 ![Clould SQL public IP address](/docs/guides/cloud_sql_public_ip.png)
 
 ### Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data from your Cloud SQL Postgres instance. The role must have the `REPLICATION` privilege. On your Cloud SQL Postgres instance, login in as your `postgres` user or an administrative user you use to create roles and run the following command to create a replication role. You can replace the name `REPLICATION_USER` with whatever role name you want to use.
+It is recommended that you create a dedicated Postgres role for replicating data from your AlloyDB Postgres instance. The role must have the `REPLICATION` privilege. On your AlloyDB Postgres instance, login in as your `postgres` user or an administrative user you use to create roles and run the following command to create a replication role. You can replace the name `REPLICATION_USER` with whatever role name you want to use.
 
 ```sql shouldWrap
 CREATE USER REPLICATION_USER WITH REPLICATION IN ROLE cloudsqlsuperuser LOGIN PASSWORD 'REPLICATION_USER_PASSWORD';
@@ -106,7 +102,7 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 
 ### Create a publication on the source database
 
-This step is performed on your Cloud SQL instance.
+This step is performed on your AlloyDB instance.
 
 Publications are a fundamental part of logical replication in Postgres. They allow you to define the database changes to be replicated to subscribers.
 
@@ -128,7 +124,7 @@ For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sq
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your source Neon Postgres database (the subscriber) to receive replicated data from your Cloud SQL Postgres instance.
+This section describes how to prepare your source Neon Postgres database (the subscriber) to receive replicated data from your AlloyDB Postgres instance.
 
 ### Prepare your database schema
 
@@ -153,7 +149,7 @@ After defining a publication on the source database, you need to define a subscr
    ```
 
    - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source Cloud SQL database, where you defined the publication. For the `<primary_ip>`, use the public IP address of your Cloud SQL Postgres instance that you noted earlier, and specify the name and password of the replication role you created earlier. If you're replicating from a database other than `postgres`, be sure to specify that database name.
+   - `connection_string`: The connection string for the source AlloyDB database, where you defined the publication. For the `<primary_ip>`, use the public IP address of your AlloyDB Postgres instance that you noted earlier, and specify the name and password of the replication role you created earlier. If you're replicating from a database other than `postgres`, be sure to specify that database name.
    - `publication_name`: The name of the publication you created on the source Neon database.
 
 2. Verify the subscription was created by running the following command:
@@ -169,7 +165,7 @@ After defining a publication on the source database, you need to define a subscr
 Testing your logical replication setup ensures that data is being replicated correctly from the publisher to the subscriber database. You can do this in three steps:
 
 1. Run some data modifying queries on the source database (inserts, updates, or deletes).
-2. On the source Postgres database in Cloud SQL, check the current Write-Ahead Log (WAL) LSN:
+2. On the source Postgres database in AlloyDB, check the current Write-Ahead Log (WAL) LSN:
 
    ```bash
    SELECT pg_current_wal_lsn();
@@ -202,6 +198,6 @@ Testing your logical replication setup ensures that data is being replicated cor
 
 ## Switch over your application
 
-After the replication operation is complete, you can switch your application over to the destination database by swapping out your Cloud SQL source database connection details for your Neon destination database connection details.
+After the replication operation is complete, you can switch your application over to the destination database by swapping out your AlloyDB source database connection details for your Neon destination database connection details.
 
 You can find your Neon connection details on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
