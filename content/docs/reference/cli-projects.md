@@ -72,7 +72,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   │ noisy-fire-212121 │ API                │ aws-eu-central-1 │ 2023-04-22T18:41:13Z │
   └───────────────────┴────────────────────┴──────────────────┴──────────────────────┘
   ```
-- List all projects belong to the specified organization.
+- List all projects belonging to the specified organization.
 
   ```bash
   neon projects list --org-id org-xxxx-xxxx

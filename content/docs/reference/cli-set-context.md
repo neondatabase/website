@@ -62,7 +62,7 @@ Set the context to the default `.neon` file:
 neon set-context --project-id patient-frost-50125040 --org-id org-bright-sky-12345678
 ```
 
-List all branches for this project using `branches list`. You do not need to include `--project-id` or `--org-id` even though multiple projects exist for this account:
+List all branches for this project using `branches list`. There's no need to include `--project-id` or `--org-id`, even if you belong to multiple organizations or have multiple projects:
 
 ```bash
 neon branches list
