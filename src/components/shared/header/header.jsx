@@ -96,24 +96,38 @@ const Navigation = async ({ isDarkTheme }) => (
                               : 'border-gray-new-90 bg-[#F5F5F5]'
                           )}
                         >
-                          <img
-                            className="h-5 w-5 dark:hidden"
-                            src={icon.light}
-                            width={20}
-                            height={20}
-                            loading="lazy"
-                            alt=""
-                            aria-hidden
-                          />
-                          <img
-                            className="hidden h-5 w-5 dark:block"
-                            src={icon.dark}
-                            width={20}
-                            height={20}
-                            loading="lazy"
-                            alt=""
-                            aria-hidden
-                          />
+                          {isDarkTheme ? (
+                            <img
+                              className="h-5 w-5"
+                              src={icon.dark}
+                              width={20}
+                              height={20}
+                              loading="lazy"
+                              alt=""
+                              aria-hidden
+                            />
+                          ) : (
+                            <>
+                              <img
+                                className="h-5 w-5 dark:hidden"
+                                src={icon.light}
+                                width={20}
+                                height={20}
+                                loading="lazy"
+                                alt=""
+                                aria-hidden
+                              />
+                              <img
+                                className="hidden h-5 w-5 dark:block"
+                                src={icon.dark}
+                                width={20}
+                                height={20}
+                                loading="lazy"
+                                alt=""
+                                aria-hidden
+                              />
+                            </>
+                          )}
                         </div>
                         <span className="relative z-10 ml-2.5">
                           <span className="block text-sm leading-dense tracking-[-0.01em] transition-colors duration-200">
@@ -207,7 +221,7 @@ const Header = async ({
               size="1408"
             >
               <div className="hidden lg:block">
-                <LogoLink />
+                <LogoLink isDarkTheme={isDarkTheme} />
               </div>
               <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
                 <Search
@@ -224,10 +238,10 @@ const Header = async ({
         ) : (
           <Container className="z-10 flex items-center justify-between md:!px-5" size="1344">
             <div className="flex items-center gap-x-[90px] xl:gap-x-16">
-              <LogoLink />
-              <Navigation />
+              <LogoLink isDarkTheme={isDarkTheme} />
+              <Navigation isDarkTheme={isDarkTheme} />
             </div>
-            <Sidebar />
+            <Sidebar isDarkTheme={isDarkTheme} />
           </Container>
         )}
       </HeaderWrapper>
