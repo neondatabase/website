@@ -91,7 +91,7 @@ You can use connection pooling in Neon to increase the number of supported conne
 
 ### Configuring Postgres parameters for a session, database, or role
 
-Neon permits configuring parameters that have a `user` context, meaning that these parameters can be set for a session, database, or role. You can identify Postgres parameters with a `user` context by running the following command:
+Neon permits configuring parameters that have a `user` context, meaning that these parameters can be set for a session, database, or role. You can identify Postgres parameters with a `user` context by running the following query:
 
 ```sql
 SELECT name
