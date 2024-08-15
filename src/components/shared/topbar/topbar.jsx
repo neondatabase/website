@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Neon Twin: Develop/preview/test on Neon and ship to prod on RDS - Read how here
+      Neon Twin: Dev/preview/test on Neon, ship to prod on RDS - Read how here
     </span>
     <ChevronIcon
       className={clsx(
