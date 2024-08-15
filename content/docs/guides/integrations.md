@@ -84,7 +84,7 @@ updatedOn: '2024-07-11T12:52:17.602Z'
 
 </TechnologyNavigation>
 
-## Replicate
+## Replicate from Neon
 
 <TechnologyNavigation open>
 
@@ -96,17 +96,33 @@ updatedOn: '2024-07-11T12:52:17.602Z'
 
 <img src="/images/technology-logos/decodable-logo.svg" width="36" height="36" alt="Decodable" href="/docs/guides/logical-replication-decodable" title="Replicate data from Neon with Decodable" />
 
-<img src="/images/technology-logos/kafka-logo.svg" width="36" height="36" alt="Kafka" href="/docs/guides/logical-replication-kafka-confluent" title="Replicate data from Neon with Kafka (Confluent)" />
-
 <img src="/images/technology-logos/fivetran-logo.svg" width="36" height="36" alt="Fivetran" href="/docs/guides/logical-replication-fivetran" title="Replicate data from Neon with Fivetran" />
+
+<img src="/images/technology-logos/kafka-logo.svg" width="36" height="36" alt="Kafka" href="/docs/guides/logical-replication-kafka-confluent" title="Replicate data from Neon with Kafka (Confluent)" />
 
 <img src="/images/technology-logos/materialize-logo.svg" width="36" height="36" alt="Materialize" href="/docs/guides/logical-replication-materialize" title="Replicate data from Neon to Materialize" />
 
-<img src="/images/technology-logos/neon-logo.svg"  width="42" height="36" alt="Neon to Neon" href="/docs/guides/logical-replication-neon-to-neon" title="Replicate data from one Neon project to another" />
+<img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="PostgreSQL" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
 
-<img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
+</TechnologyNavigation>
 
-<img src="/images/technology-logos/sequin-logo.svg" width="29" height="36" alt="Sequin" href="/docs/guides/sequin" title="Sync data from APIs to Neon in real time" />
+## Replicate to Neon
+
+<TechnologyNavigation open>
+
+<img src="/images/technology-logos/alloydb-logo.svg" width="36" height="36" alt="AlloyDB" href="/docs/guides/logical-replication-alloydb" title="Replicate data from AlloyDB to Neon" />
+
+<img src="/images/technology-logos/aws-rds-logo.svg" width="36" height="36" alt="Aurora" href="/docs/guides/logical-replication-aurora-to-neon" title="Replicate data from Aurora to Neon" />
+
+<img src="/images/technology-logos/google-cloud-sql-logo.svg" width="36" height="36" alt="Cloud SQL" href="/docs/guides/logical-replication-cloud-sql" title="Replicate data from Cloud SQL to Neon" />
+
+<img src="/images/technology-logos/neon-logo.svg" width="36" height="36" alt="Neon to Neon" href="/docs/guides/logical-replication-neon-to-neon" title="Replicate data from Neon to Neon" />
+
+<img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from PostgreSQL to Neon" />
+
+<img src="/images/technology-logos/sequin-logo.svg" width="36" height="36" alt="Sequin" href="/docs/guides/sequin" title="Stream data from platforms like Stripe, Linear, and GitHub to Neon" />
+
+<img src="/images/technology-logos/aws-rds-logo.svg" width="36" height="36" alt="AWS RDS" href="/docs/guides/logical-replication-rds-to-neon" title="Replicate data from AWS RDS PostgreSQL to Neon" />
 
 </TechnologyNavigation>
 

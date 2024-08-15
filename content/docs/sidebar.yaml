@@ -186,7 +186,7 @@
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
         - title: Logical replication
-          slug: introduction/logical-replication
+          slug: guides/logical-replication-guide
           items:
             - title: Concepts
               slug: guides/logical-replication-concepts
@@ -437,20 +437,14 @@
             - title: Knex
               slug: guides/knex
               tag: new
-        - section: Replicate
+        - section: Replicate from Neon
           items:
             - title: Airbyte
               slug: guides/logical-replication-airbyte
-            - title: AlloyDB
-              slug: guides/logical-replication-alloydb
-            - title: Aurora
-              slug: guides/logical-replication-aurora-to-neon
             - title: Bemi
               slug: guides/bemi
             - title: ClickHouse (DoubleCloud)
               slug: guides/logical-replication-clickhouse
-            - title: Cloud SQL
-              slug: guides/logical-replication-cloud-sql
             - title: Confluent
               slug: guides/logical-replication-kafka-confluent
             - title: Decodable
@@ -463,12 +457,24 @@
               slug: guides/logical-replication-neon-to-neon
             - title: Postgres
               slug: guides/logical-replication-postgres
+            - title: Snowflake
+              slug: guides/logical-replication-airbyte-snowflake
+        - section: Replicate to Neon
+          items:
+            - title: AlloyDB
+              slug: guides/logical-replication-alloydb
+            - title: Aurora
+              slug: guides/logical-replication-aurora-to-neon
+            - title: Cloud SQL
+              slug: guides/logical-replication-cloud-sql
+            - title: Neon to Neon
+              slug: guides/logical-replication-neon-to-neon
+            - title: Postgres
+              slug: guides/logical-replication-postgres
             - title: Sequin
               slug: guides/sequin
             - title: AWS RDS
               slug: guides/logical-replication-rds-to-neon
-            - title: Snowflake
-              slug: guides/logical-replication-airbyte-snowflake
         - section: Schema Migration
           items:
             - title: Django
