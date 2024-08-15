@@ -156,8 +156,12 @@
         - title: Autoscaling
           slug: introduction/autoscaling
           items:
-            - title: Autoscaling guide
+            - title: What is autoscaling?
+              slug: introduction/autoscaling
+            - title: Enable autoscaling
               slug: guides/autoscaling-guide
+            - title: How the algorithm works
+              slug: guides/autoscaling-algorithm
         - title: Autosuspend
           slug: introduction/auto-suspend
           items:
