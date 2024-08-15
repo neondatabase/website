@@ -7,6 +7,7 @@
   items:
     - title: Why Neon?
       icon: why-neon
+      slug: get-started-with-neon/why-neon
       items:
         - title: Our mission
           slug: get-started-with-neon/why-neon
@@ -251,8 +252,9 @@
             - title: Integrations
               slug: manage/integrations
         - section: Monitoring
-          slug: introduction/monitoring
           items:
+            - title: Overview
+              slug: introduction/monitoring
             - title: Monitoring dashboard
               slug: introduction/monitoring-page
             - title: System operations
