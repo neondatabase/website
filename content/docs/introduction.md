@@ -1,23 +1,23 @@
 ---
 title: Neon documentation
-updatedOn: '2024-08-06T15:23:10.952Z'
+updatedOn: '2024-08-15T17:23:10.558Z'
 ---
 
 Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. Get started today with our [generous free plan](https://console.neon.tech).
 
-<CTA title="Branch your data like code" description="Learn how Neon's database branching can help you integrate Postgres into your development workflow." buttonText="Read our primer" buttonUrl="/docs/get-started-with-neon/workflow-primer" />
+<CTA title="Branch your data like code" description="Learn how Neon's database branching can help you integrate Postgres into your development workflow." buttonText="Read our primer" buttonUrl="/docs/get-started-with-neon/workflow-primer"></CTA>
 
 ## Get started
 
-<DetailIconCards withBorderWrapper>
+<DetailIconCards withNumbers>
 
-<a href="/docs/get-started-with-neon/signing-up" description="Sign up for free and learn the basics of database branching with Neon" icon="user"><span>1 </span>- Playing with Neon</a>
+<a href="/docs/get-started-with-neon/signing-up" description="Sign up for free and learn the basics of database branching with Neon">Playing with Neon</a>
 
-<a href="/docs/get-started-with-neon/connect-neon" description="Connect Neon to the platform, language, ORM and other tools in your tech stack" icon="audio-jack"><span>2 </span>- Connect Neon to your stack</a>
+<a href="/docs/get-started-with-neon/connect-neon" description="Connect Neon to the platform, language, ORM and other tools in your tech stack">Connect Neon to your stack</a>
 
-<a href="/docs/get-started-with-neon/workflow-primer" description="Add branching to your CI/CD automation" icon="split-branch"><span>3 </span>- Branching workflows</a>
+<a href="/docs/get-started-with-neon/workflow-primer" description="Add branching to your CI/CD automation">Branching workflows</a>
 
-<a href="/docs/get-started-with-neon/production-checklist" description="Key features to get you production ready" icon="laptop"><span>4 </span>- Get ready for production</a>
+<a href="/docs/get-started-with-neon/production-checklist" description="Key features to get you production ready">Get ready for production</a>
 
 </DetailIconCards>
 
@@ -25,43 +25,43 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 <TechnologyNavigation>
 
-<img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/nextjs" title="Connect a Next.js application to Neon" />
+<a href="/docs/guides/prisma" title="Prisma" description="Easily add secure, beautiful, and fast authentication to Prisma with Neon." icon="prisma"></a>
 
-<img src="/images/technology-logos/nodejs-logo.svg" width="33" height="36" alt="Node.js" href="/docs/guides/node" title="Connect a Node.js application to Neon" />
+<a href="/docs/guides/react" title="React" description="Build powerful and interactive user interfaces with React using Neon as your database." icon="react"></a>
 
-<img src="/images/technology-logos/neon-logo.svg"  width="42" height="36" alt="Neon" href="/docs/serverless/serverless-driver" title="Connect with the Neon serverless driver" />
+<a href="/docs/guides/node" title="Node.js" description="Quickly add authentication and user management to your Node.js application." icon="node-js"></a>
 
-<img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
+<a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
 
-<img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Astro" href="/docs/guides/astro" title="Connect an Astro site or app to Neon" />
+<a href="/docs/serverless/serverless-driver" title="Neon" description="Connect with the Neon serverless driver" icon="neon"></a>
 
-<img src="/images/technology-logos/django-logo.svg" width="29" height="36" alt="Django" href="/docs/guides/django" title="Connect a Django application to Neon" />
+<a href="/docs/guides/astro" title="Astro" description="Connect an Astro site or app to Neon" icon="astro"></a>
 
-<img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir-ecto" title="Connect from Elixir with Ecto to Neon" />
+<a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 
-<img src="/images/technology-logos/go-logo.svg" width="80" height="36" alt="Go" href="/docs/guides/go" title="Connect a Go application to Neon" />
+<a href="/docs/guides/elixir-ecto" title="Elixir" description="Connect from Elixir with Ecto to Neon" icon="elixir"></a>
 
-<img src="/images/technology-logos/java-logo.svg" width="27" height="36" alt="Java" href="/docs/guides/java" title="Connect a Java application to Neon" />
+<a href="/docs/guides/go" title="Go" description="Connect a Go application to Neon" icon="go"></a>
 
-<img src="/images/technology-logos/laravel-logo.svg" width="35" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect from Laravel to Neon" />
+<a href="/docs/guides/java" title="Java" description="Connect a Java application to Neon" icon="java"></a>
 
-<img src="/images/technology-logos/python-logo.svg" width="33" height="36" alt="Python" href="/docs/guides/python" title="Connect a Python application to Neon" />
+<a href="/docs/guides/laravel" title="Laravel" description="Connect from Laravel to Neon" icon="laravel"></a>
 
-<img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-jdbc" title="Connect Quarkus (JDBC) to Neon" />
+<a href="/docs/guides/python" title="Python" description="Connect a Python application to Neon" icon="python"></a>
 
-<img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-reactive" title="Connect Quarkus (Reactive) to Neon" />
+<a href="/docs/guides/quarkus-jdbc" title="Quarkus" description="Connect Quarkus (JDBC) to Neon" icon="quarkus"></a>
 
-<img src="/images/technology-logos/rails-logo.svg" width="36" height="36" alt="Rails" href="/docs/guides/ruby-on-rails" title="Connect a Rails application to Neon" />
+<a href="/docs/guides/quarkus-reactive" title="Quarkus" description="Connect Quarkus (Reactive) to Neon" icon="quarkus"></a>
 
-<img src="/images/technology-logos/react-logo.svg" width="36" height="36" alt="React" href="/docs/guides/react" title="Connect a React application to Neon" />
+<a href="/docs/guides/ruby-on-rails" title="Rails" description="Connect a Rails application to Neon" icon="rails"></a>
 
-<img src="/images/technology-logos/remix-logo.svg" width="36" height="36" alt="Remix" href="/docs/guides/remix" title="Connect a Remix application to Neon" />
+<a href="/docs/guides/remix" title="Remix" description="Connect a Remix application to Neon" icon="remix"></a>
 
-<img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
+<a href="/docs/guides/rust" title="Rust" description="Connect a Rust application to Neon" icon="rust"></a>
 
-<img src="/images/technology-logos/sqlalchemy-logo.svg" width="102" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect an SQLAlchemy application to Neon" />
+<a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect an SQLAlchemy application to Neon" icon="sqlalchemy"></a>
 
-<img src="/images/technology-logos/symfony-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Symfony with Doctrine to Neon" />
+<a href="/docs/guides/symfony" title="Symfony" description="Connect from Symfony with Doctrine to Neon" icon="symfony"></a>
 
 </TechnologyNavigation>
 

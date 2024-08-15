@@ -172,7 +172,7 @@ const Menu = ({
             {!isRootMenu && (
               <>
                 <div className="flex flex-col gap-7 border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
-                  {parentMenu && depth > 1 && (
+                  {depth > 0 && (
                     <BackLinkTag
                       className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
                       type={parentMenu.slug ? undefined : 'button'}
@@ -183,17 +183,19 @@ const Menu = ({
                       Back to {parentMenu.title}
                     </BackLinkTag>
                   )}
-                  <Link
-                    className={clsx(
-                      'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
-                      'text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
-                    )}
-                    to={homePath}
-                    onClick={handleClickHome}
-                  >
-                    <HomeIcon className="size-4.5" />
-                    Home
-                  </Link>
+                  {depth !== 1 && (
+                    <Link
+                      className={clsx(
+                        'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
+                        'text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
+                      )}
+                      to={homePath}
+                      onClick={handleClickHome}
+                    >
+                      <HomeIcon className="size-4.5" />
+                      Home
+                    </Link>
+                  )}
                 </div>
 
                 <LinkTag
