@@ -2,7 +2,7 @@
 title: Connect a React application to Neon
 subtitle: Set up a Neon project in seconds and connect from a React application
 enableTableOfContents: true
-updatedOn: '2024-07-02T18:04:04.917Z'
+updatedOn: '2024-08-15T17:23:10.558Z'
 ---
 
 React by Facebook is an open-source front-end JavaScript library for building user interfaces based on components.
