@@ -63,8 +63,8 @@ You need to allow connections to your AlloyDB Postgres instance from Neon. To do
 
    ![AlloyDB network configuration](/docs/guides/alloydb_network_config.png)
 
-8. Under **Network Security**, select **Require SSL Encryption (default)** if it's not already selected.
-9. Click **Update Instance** when you are finished.
+6. Under **Network Security**, select **Require SSL Encryption (default)** if it's not already selected.
+7. Click **Update Instance** when you are finished.
 
 ### Note your public IP address
 
