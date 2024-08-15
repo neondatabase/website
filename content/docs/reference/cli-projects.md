@@ -44,31 +44,50 @@ neon projects list [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `projects` subcommand supports this option:
 
-| Option           | Description                                                                                   | Type   | Required |
-| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
+| Option           | Description                                                                                                              | Type   | Required |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------ | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                            | string |          |
+| `--org-id`       | List all projects belonging to the specified organization. If unspecified, personal account projects are listed instead. | string |          |
 
-#### Example
+#### Examples
 
-```bash
-neon projects list
-Projects
-┌────────────────────────┬────────────────────┬───────────────┬──────────────────────┐
-│ Id                     │ Name               │ Region Id     │ Created At           │
-├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
-│ crimson-voice-12345678 │ frontend           │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
-├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
-│ calm-thunder-12121212  │ backend            │ aws-us-east-2 │ 2024-04-10T15:21:01Z │
-├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
-│ nameless-hall-87654321 │ billing            │ aws-us-east-2 │ 2024-04-10T14:35:17Z │
-└────────────────────────┴────────────────────┴───────────────┴──────────────────────┘
-Shared with me
-┌───────────────────┬────────────────────┬──────────────────┬──────────────────────┐
-│ Id                │ Name               │ Region Id        │ Created At           │
-├───────────────────┼────────────────────┼──────────────────┼──────────────────────┤
-│ noisy-fire-212121 │ API                │ aws-eu-central-1 │ 2023-04-22T18:41:13Z │
-└───────────────────┴────────────────────┴──────────────────┴──────────────────────┘
-```
+- List all projects belonging to your personal acccount
+
+  ```bash
+  neon projects list
+  Projects
+  ┌────────────────────────┬────────────────────┬───────────────┬──────────────────────┐
+  │ Id                     │ Name               │ Region Id     │ Created At           │
+  ├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
+  │ crimson-voice-12345678 │ frontend           │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
+  ├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
+  │ calm-thunder-12121212  │ backend            │ aws-us-east-2 │ 2024-04-10T15:21:01Z │
+  ├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
+  │ nameless-hall-87654321 │ billing            │ aws-us-east-2 │ 2024-04-10T14:35:17Z │
+  └────────────────────────┴────────────────────┴───────────────┴──────────────────────┘
+  Shared with me
+  ┌───────────────────┬────────────────────┬──────────────────┬──────────────────────┐
+  │ Id                │ Name               │ Region Id        │ Created At           │
+  ├───────────────────┼────────────────────┼──────────────────┼──────────────────────┤
+  │ noisy-fire-212121 │ API                │ aws-eu-central-1 │ 2023-04-22T18:41:13Z │
+  └───────────────────┴────────────────────┴──────────────────┴──────────────────────┘
+  ```
+
+- List all projects belonging to the specified organization.
+
+  ```bash
+  neon projects list --org-id org-xxxx-xxxx
+  Projects
+  ┌───────────────────────────┬───────────────────────────┬────────────────────┬──────────────────────┐
+  │ Id                        │ Name                      │ Region Id          │ Created At           │
+  ├───────────────────────────┼───────────────────────────┼────────────────────┼──────────────────────┤
+  │ bright-moon-12345678      │ dev-backend-api           │ aws-us-east-2      │ 2024-07-26T11:43:37Z │
+  ├───────────────────────────┼───────────────────────────┼────────────────────┼──────────────────────┤
+  │ silent-forest-87654321    │ test-integration-service  │ aws-eu-central-1   │ 2024-05-30T22:14:49Z │
+  ├───────────────────────────┼───────────────────────────┼────────────────────┼──────────────────────┤
+  │ crystal-stream-23456789   │ staging-web-app           │ aws-us-east-2      │ 2024-05-17T13:47:35Z │
+  └───────────────────────────┴───────────────────────────┴────────────────────┴──────────────────────┘
+  ```
 
 ### create
 
@@ -86,13 +105,17 @@ neon projects create [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `create` subcommand supports these options:
 
-| Option           | Description                                                                                                                                                                | Type          | Required |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                              | string        |          |
-| `--name`         | The project name. The project ID is used if a name is not specified.                                                                                                       | string        |          |
-| `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`. Defaults to `aws-us-east-2` if not specified. | string number |          |
-| `--psql`         | Connect to a database via `psql` using connection string. `psql` must be installed to use this option.                                                                     | boolean       |          |
-| `--set-context`  | Set the current context to the new project. The default is `false`.                                                                                                        | boolean       |          |
+| Option           | Description                                                                                                                                                                | Type    | Required |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name.                                                                             | string  |          |
+| `--name`         | The project name. The project ID is used if a name is not specified.                                                                                                       | string  |          |
+| `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`. Defaults to `aws-us-east-2` if not specified. | string  |          |
+| `--org-id`       | The organization ID where you want this project to be created. If unspecified, the project is created in your personal account.                                            | string  |          |
+| `--psql`         | Connect to your new project's database via `psql` immediately on project creation.                                                                                         | boolean |          |
+| `--database`     | The database name. If not specified, the default database name will be used.                                                                                               | string  |          |
+| `--role`         | The role name. If not specified, the default role name will be used.                                                                                                       | string  |          |
+| `--set-context`  | Set the current context to the new project.                                                                                                                                | boolean |          |
+| `--cu`           | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                               | string  |          |
 
 #### Examples
 
@@ -298,9 +321,9 @@ The `id` is the project ID, which you can obtain by listing your projects or fro
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `delete` subcommand supports this option:
 
-| Option           | Description                                                                                   | Type   | Required |
-| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
+| Option           | Description                                                                                    | Type   | Required |
+| ---------------- | ---------------------------------------------------------------------------------------------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name. | string |          |
 
 #### Example
 
