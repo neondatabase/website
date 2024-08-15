@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import ReleaseNoteList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
+import EditOnGithub from 'components/pages/doc/edit-on-github';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
-import LastUpdatedDate from 'components/shared/last-updated-date';
 import NavigationLinks from 'components/shared/navigation-links';
 import TableOfContents from 'components/shared/table-of-contents';
 // import Pagination from 'components/pages/changelog/pagination';
@@ -79,7 +79,6 @@ const Post = ({
             </p>
           )}
           <Content className="mt-5" content={content} />
-          {updatedOn && <LastUpdatedDate updatedOn={updatedOn} />}
         </article>
       )}
 
@@ -90,7 +89,7 @@ const Post = ({
           basePath={DOCS_BASE_PATH}
         />
       )}
-      <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
+      <DocFooter updatedOn={updatedOn} slug={currentSlug} />
     </div>
 
     <div
@@ -103,6 +102,14 @@ const Post = ({
     >
       <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
         {enableTableOfContents && <TableOfContents items={tableOfContents} />}
+        <div
+          className={clsx(
+            enableTableOfContents &&
+              'mt-2.5 w-56 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
+          )}
+        >
+          <EditOnGithub fileOriginPath={fileOriginPath} />
+        </div>
       </nav>
     </div>
   </>
