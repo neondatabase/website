@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
 import { getActiveItems } from 'components/pages/doc/sidebar/sidebar';
-import InkeepTrigger from 'components/shared/inkeep-trigger';
 import { HOME_MENU_ITEM } from 'constants/docs';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
@@ -106,7 +105,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
       ref={wrapperRef}
     >
       <button
-        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start bg-gray-new-98 py-[9px] outline-none transition-colors dark:bg-gray-new-8 lg:px-8 md:px-4"
+        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start bg-gray-new-98 py-[9px] outline-none transition-colors dark:bg-[#0F0F10] lg:px-8 md:px-4"
         type="button"
         ref={buttonRef}
         onClick={toggleMenu}
@@ -127,7 +126,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
       <LazyMotion features={domAnimation}>
         <m.div
           className={clsx(
-            'absolute inset-x-0 top-[calc(100%+1px)] z-20 overflow-x-hidden overflow-y-scroll bg-white dark:bg-gray-new-8'
+            'absolute inset-x-0 top-[calc(100%+1px)] z-20 overflow-x-hidden overflow-y-scroll bg-white dark:bg-[#0F0F10]'
           )}
           initial="from"
           animate={controls}
@@ -138,7 +137,6 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
             className="relative w-full overflow-hidden transition-[height] duration-300"
             style={{ height: menuHeight }}
           >
-            <InkeepTrigger />
             <Menu
               depth={0}
               title="Home"

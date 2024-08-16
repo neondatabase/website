@@ -3,6 +3,7 @@ import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
 
+import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH, HOME_MENU_ITEM } from 'constants/docs';
 import LINKS from 'constants/links';
@@ -168,11 +169,16 @@ const Menu = ({
             }}
             ref={menuRef}
           >
-            {/* breadcrumbs, menu title and home link */}
-            {!isRootMenu && (
+            {isRootMenu ? (
+              <div className="mb-4 hidden lg:block">
+                {/* AI chat button */}
+                <InkeepTrigger />
+              </div>
+            ) : (
               <>
                 <div className="flex flex-col gap-7 border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
                   {depth > 0 && (
+                    // breadcrumbs
                     <BackLinkTag
                       className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
                       type={parentMenu.slug ? undefined : 'button'}
@@ -183,7 +189,8 @@ const Menu = ({
                       Back to {parentMenu.title}
                     </BackLinkTag>
                   )}
-                  {depth !== 1 && (
+                  {depth > 1 && (
+                    // home link
                     <Link
                       className={clsx(
                         'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
@@ -196,8 +203,12 @@ const Menu = ({
                       Home
                     </Link>
                   )}
+                  <div className="hidden lg:block">
+                    {/* AI chat button */}
+                    <InkeepTrigger />
+                  </div>
                 </div>
-
+                {/* menu title */}
                 <LinkTag
                   className="mt-4 flex w-full items-start gap-1.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
                   to={slug ? `${basePath}${slug}` : undefined}
