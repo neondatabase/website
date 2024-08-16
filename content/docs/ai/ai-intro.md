@@ -96,7 +96,7 @@ Share your AI app on our **#showcase** channel on [Discord](https://discord.gg/9
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/ai-vector-db-per-tenant" description="Deploy an AI vector database per-tenant architecture with Neon" icon="openai">AI vector database per tenant</a>
+<a href="https://github.com/neondatabase/ai-vector-db-per-tenant" description="Deploy an AI vector database per-tenant architecture with Neon" icon="github">AI vector database per tenant</a>
 
 <a href="https://neon.tech/guides/chatbot-astro-postgres-llamaindex" description="Build a RAG chatbot in an Astro application with LlamaIndex and Postgres" icon="openai">Guide: Build a RAG chatbot</a>
 
