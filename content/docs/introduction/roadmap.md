@@ -32,6 +32,7 @@ Here's a snapshot of what we're working on now:
 
 - **Organizations**: We're thankful to our private preview customers for the feedback they've given us so far &#8212; and happy to say that **Organization Accounts** are on track for Early Access users soon.
 - **Neon CLI**: We've recently added a [create-app](/docs/reference/cli-create-app) command that lets you bootstrap your application with common dev stacks. `create-app` is maturing fast, with new frameworks, ORMs, and features coming out regularly.
+- **Archive branches**: A mechanism to allow offloading branches (snapshots of your data) to cost-efficient object storage for retention periods longer than a Neon project's history retention window.
 
 If you have other feature ideas, [let us know](#share-your-thoughts).
 
