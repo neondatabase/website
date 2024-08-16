@@ -18,9 +18,11 @@ Neon's logical replication feature allows you to replicate data from Aurora Post
    SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
   ```
 
-- A destination Neon project. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+- A Neon project with a Postgres database to receive the replicated data. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
 ## Prepare your source database
+
+This section describes how to prepare your source Aurora POstgres instance (the publisher) for replicating data to Neon.
 
 ### Enable logical replication in the source Aurora PostgreSQL instance
 
@@ -31,12 +33,12 @@ Neon's logical replication feature allows you to replicate data from Aurora Post
 3. Go to the **Configuration** tab. Locate the **DB cluster parameter group** link.
 
    <Admonition type="note">
-   If you are using the default parameter group, you will need to create a custom parameter group to set the value. You can do so by selecting **Parameter groups** > **Create parameter group** from the sidebar, selecting **Aurora PostgreSQL** as the engine type, and filling in the required fields. When you're finished, navigate back to your RDS instance page, click **Modify**, and scroll down to select your new parameter group. Click **Continue**, and select **Apply immediately** to make the change now, then click **Modify DB instance**.
+   If you are using the default parameter group, you will need to create a custom parameter group to set the value. You can do so by selecting **Parameter groups** > **Create parameter group** from the sidebar, selecting **Aurora PostgreSQL** as the engine type, and filling in the required fields. When you're finished, navigate back to your RDS instance page, click **Modify**, and scroll down to select your new parameter group. Click **Continue**, and select **Apply immediately** to make the change, then click **Modify DB instance**.
    </Admonition>
 
 4. Click on the link to view the custom parameters for your Aurora PostgreSQL DB cluster.
 
-5. In the Parameters search bar, type `rds` to locate the `rds.logical_replication` parameter. This parameter is set to `0` by default, meaning it is turned off.
+5. In the parameters search bar, type `rds` to locate the `rds.logical_replication` parameter. This parameter is set to `0` by default, meaning it is turned off.
 
 6. To enable this feature, click on **Edit**, and select `1` from the dropdown.
 
@@ -48,29 +50,29 @@ Neon's logical replication feature allows you to replicate data from Aurora Post
 
    - Use `psql` to connect to the writer instance of your Aurora PostreSQL DB cluster.
 
-   ```bash
-   psql --host=your-db-cluster-instance-1.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=postgres
-   ```
+      ```bash
+      psql --host=your-db-cluster-instance-1.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=postgres
+      ```
 
    - Verify that logical replication is enabled by running the following command:
 
-   ```bash
-   SHOW rds.logical_replication;
-   rds.logical_replication
-   -------------------------
-   on
-   (1 row)
-   ```
+      ```bash
+      SHOW rds.logical_replication;
+      rds.logical_replication
+      -------------------------
+      on
+      (1 row)
+      ```
 
-   - Also, confirm that the wal_level is set to logical:
+   - Also, confirm that the `wal_level` is set to logical:
 
-   ```bash
-   SHOW wal_level;
-   wal_level
-   -----------
-    logical
-   (1 row)
-   ```
+      ```bash
+      SHOW wal_level;
+      wal_level
+      -----------
+      logical
+      (1 row)
+      ```
 
 ### Allow connections from Neon
 
@@ -102,7 +104,7 @@ CREATE PUBLICATION my_publication FOR ALL TABLES;
 <Admonition type="note">
 It's also possible to create a publication for specific tables; for example, to create a publication for the `playing_with_neon` table, you can use the following syntax:
 
-```sql
+```sql shouldWrap
 CREATE PUBLICATION playing_with_neon_publication FOR TABLE playing_with_neon;
 ```
 
@@ -111,11 +113,11 @@ For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sq
 
 ## Prepare your destination database
 
-This section describes how to prepare your source Neon Postgres database (the subscriber) to receive replicated data from your AWS Aurora Postgres instance.
+This section describes how to prepare your source Neon Postgres database (the subscriber) to receive replicated data from your Aurora Postgres instance.
 
 ### Prepare your database schema
 
-When configuring logical replication in Postgres, the tables in the source database that you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use a utility like `pg_dump` to dump the schema from your source database.
+When configuring logical replication in Postgres, the tables defined in your publication on the source database that you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and reload it on your destination database.
 
 If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
 
