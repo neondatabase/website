@@ -56,6 +56,10 @@ You can rename or delete a saved query by selecting **Rename** or **Delete** fro
 
 The SQL Editor maintains a query history for the project. To view your query history, select **History** in the left pane of the SQL Editor. You can click an item in the **History** list to view the query that was run.
 
+<Admonition type="note">
+Queries saved to **History** are limited to 9 KB in length. While you can execute longer queries from the SQL Editor, any query exceeding 9 KB will be truncated when saved. A `-- QUERY TRUNCATED` comment is added at the beginning of these queries to indicate truncation. Additionally, if you input a query longer than 9 KB in the Neon SQL Editor, a warning similar to the following will appear: `This query will still run, but the last 1234 characters will be truncated from query history`.
+</Admonition>
+
 ## Explain and Analyze
 
 The Neon SQL Editor provides **Explain** and **Analyze** features.
