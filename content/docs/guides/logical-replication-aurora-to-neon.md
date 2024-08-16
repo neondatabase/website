@@ -50,29 +50,29 @@ This section describes how to prepare your source Aurora POstgres instance (the 
 
    - Use `psql` to connect to the writer instance of your Aurora PostreSQL DB cluster.
 
-      ```bash
-      psql --host=your-db-cluster-instance-1.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=postgres
-      ```
+     ```bash
+     psql --host=your-db-cluster-instance-1.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=postgres
+     ```
 
    - Verify that logical replication is enabled by running the following command:
 
-      ```bash
-      SHOW rds.logical_replication;
-      rds.logical_replication
-      -------------------------
-      on
-      (1 row)
-      ```
+     ```bash
+     SHOW rds.logical_replication;
+     rds.logical_replication
+     -------------------------
+     on
+     (1 row)
+     ```
 
    - Also, confirm that the `wal_level` is set to logical:
 
-      ```bash
-      SHOW wal_level;
-      wal_level
-      -----------
-      logical
-      (1 row)
-      ```
+     ```bash
+     SHOW wal_level;
+     wal_level
+     -----------
+     logical
+     (1 row)
+     ```
 
 ### Allow connections from Neon
 

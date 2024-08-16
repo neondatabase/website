@@ -67,7 +67,7 @@ Record the public IP address of your AlloyDB Postgres instance. You'll need this
 
 <Admonition type="note">
 If you do not use a public IP address, you'll need to configure allow Neon access via private IP. See [Private IP overview](https://cloud.google.com/alloydb/docs/private-ip), in the AlloyDB documentation.
-</Admonition> 
+</Admonition>
 
 ![AlloyDB public IP address](/docs/guides/alloydb_public_ip.png)
 
